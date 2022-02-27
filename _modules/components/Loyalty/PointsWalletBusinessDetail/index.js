@@ -11,19 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _reactHookForm = require("react-hook-form");
 
 var _styles = require("../../../styles");
-
-var _IosRadioButtonOff = _interopRequireDefault(require("@meronex/icons/ios/IosRadioButtonOff"));
-
-var _RiRadioButtonFill = _interopRequireDefault(require("@meronex/icons/ri/RiRadioButtonFill"));
 
 var _Shared = require("../../Shared");
 
 var _styles2 = require("./styles");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -48,13 +42,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) {
-  var _ref, _formState$changes$re, _formState$changes, _ref3, _formState$changes$ac, _formState$changes2, _ref4, _formState$changes$ma, _formState$changes3;
+  var _formState$changes3, _formState$changes4, _walletData$redemptio, _formState$changes5, _formState$changes6, _walletData$accumulat;
 
   var walletData = props.walletData,
       formState = props.formState,
       handleChangeInput = props.handleChangeInput,
-      handleSubmit = props.handleSubmit,
-      setFormState = props.setFormState,
+      handleClickSubmit = props.handleClickSubmit,
       isBusiness = props.isBusiness;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -65,29 +58,22 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
-  var _useState = (0, _react.useState)('maximum_redemption_type'),
-      _useState2 = _slicedToArray(_useState, 2),
-      paymentRules = _useState2[0],
-      setPaymentRules = _useState2[1];
+  var _useForm = (0, _reactHookForm.useForm)(),
+      handleSubmit = _useForm.handleSubmit; // const [paymentRules, setPaymentRules] = useState('maximum_redemption_type')
 
-  var _useState3 = (0, _react.useState)({
+
+  var _useState = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1]; // const ruleList = [
+  //   { key: 'no_limit', description: t('NO_LIMIT', 'No limit') },
+  //   { key: 'maximum_redemption_type', description: `${t('MAXIMUM_POINTS_REDEEMED_PER_ORDER', 'Maximum amount of points that can be redeemed per order')} (${t('FIXED', 'fixed')})` },
+  //   { key: 'maximum_redemption_rate', description: `${t('MAXIMUM_POINTS_REDEEMED_PER_ORDER', 'Maximum amount of points that can be redeemed per order')} (%)` }
+  // ]
 
-  var ruleList = [{
-    key: 'no_limit',
-    description: t('NO_LIMIT', 'No limit')
-  }, {
-    key: 'maximum_redemption_type',
-    description: "".concat(t('MAXIMUM_POINTS_REDEEMED_PER_ORDER', 'Maximum amount of points that can be redeemed per order'), " (").concat(t('FIXED', 'fixed'), ")")
-  }, {
-    key: 'maximum_redemption_rate',
-    description: "".concat(t('MAXIMUM_POINTS_REDEEMED_PER_ORDER', 'Maximum amount of points that can be redeemed per order'), " (%)")
-  }];
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -96,67 +82,63 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     });
   };
 
-  (0, _react.useEffect)(function () {
-    if (paymentRules === 'no_limit') {
-      var changes = _objectSpread(_objectSpread({}, formState.changes), {}, {
-        maximum_redemption_type: null
-      });
+  var onSubmit = function onSubmit() {
+    if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0) {
+      var _formState$changes, _formState$changes2;
 
-      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-        changes: changes
-      }));
+      if ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.redemption_rate) === '') {
+        setAlertState({
+          open: true,
+          content: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', 'redemption_rate')
+        });
+        return;
+      }
+
+      if ((formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accumulation_rate) === '') {
+        setAlertState({
+          open: true,
+          content: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', 'accumulation_rate')
+        });
+        return;
+      }
+
+      handleClickSubmit && handleClickSubmit();
     }
-  }, [paymentRules]);
+  }; // useEffect(() => {
+  //   if (paymentRules === 'no_limit') {
+  //     const changes = { ...formState.changes, maximum_redemption_type: null }
+  //     setFormState({ ...formState, changes: changes })
+  //   }
+  // }, [paymentRules])
+
+
   (0, _react.useEffect)(function () {
     if (!formState.error) return;
     setAlertState({
       open: true,
       content: formState.error
     });
-  }, [formState.error]);
+  }, [formState === null || formState === void 0 ? void 0 : formState.error]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
-    isBusiness: isBusiness
-  }, (walletData === null || walletData === void 0 ? void 0 : walletData.business_name) && /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, walletData === null || walletData === void 0 ? void 0 : walletData.business_name), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    color: "black"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowClockwise, null))), /*#__PURE__*/_react.default.createElement(_styles2.DetailContent, null, /*#__PURE__*/_react.default.createElement(_styles2.PointsRedemptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('POINTS_REDEMPTION', 'Points redemption ')), /*#__PURE__*/_react.default.createElement("p", null, t('VALUE', 'Value')), /*#__PURE__*/_react.default.createElement(_styles2.PointsInputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    isBusiness: isBusiness,
+    onSubmit: handleSubmit(onSubmit)
+  }, (walletData === null || walletData === void 0 ? void 0 : walletData.name) && /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, walletData === null || walletData === void 0 ? void 0 : walletData.name)), /*#__PURE__*/_react.default.createElement(_styles2.DetailContent, null, /*#__PURE__*/_react.default.createElement(_styles2.PointsRedemptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('POINTS_REDEMPTION', 'Points redemption')), /*#__PURE__*/_react.default.createElement("p", null, t('VALUE', 'Value')), /*#__PURE__*/_react.default.createElement(_styles2.PointsInputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "number",
     placeholder: "00 points",
     name: "redemption_rate",
-    value: (_ref = (_formState$changes$re = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.redemption_rate) !== null && _formState$changes$re !== void 0 ? _formState$changes$re : walletData === null || walletData === void 0 ? void 0 : walletData.redemption_rate) !== null && _ref !== void 0 ? _ref : '',
+    value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.redemption_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.redemption_rate : (_walletData$redemptio = walletData === null || walletData === void 0 ? void 0 : walletData.redemption_rate) !== null && _walletData$redemptio !== void 0 ? _walletData$redemptio : '',
     onChange: handleChangeInput
-  }), /*#__PURE__*/_react.default.createElement("span", null, "="), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)))), /*#__PURE__*/_react.default.createElement(_styles2.PaymentRulesWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PAYMENT_RULES', 'Payment rules')), /*#__PURE__*/_react.default.createElement("p", null, t('MAXIMUM_REDEEM_PER_ORDER', 'Maximum to redeem per order limit'))), /*#__PURE__*/_react.default.createElement(_styles2.PaymentOptionListWrapper, null, ruleList.map(function (rule) {
-    var _ref2, _formState$changes$ru;
-
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: rule.key
-    }, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
-      onClick: function onClick() {
-        return setPaymentRules(rule.key);
-      }
-    }, paymentRules === rule.key ? /*#__PURE__*/_react.default.createElement(_RiRadioButtonFill.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null), /*#__PURE__*/_react.default.createElement("p", null, rule.description)), rule.key !== 'no_limit' && rule.key === paymentRules && /*#__PURE__*/_react.default.createElement(_styles2.OptionInputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-      type: "number",
-      placeholder: "00 points",
-      name: rule.key,
-      value: (_ref2 = (_formState$changes$ru = formState === null || formState === void 0 ? void 0 : formState.changes[rule.key]) !== null && _formState$changes$ru !== void 0 ? _formState$changes$ru : walletData[rule.key]) !== null && _ref2 !== void 0 ? _ref2 : '',
-      onChange: handleChangeInput
-    })));
-  })), /*#__PURE__*/_react.default.createElement(_styles2.PointsAccumulationContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('POINTS_ACCUMULATION', 'Points accumulation')), /*#__PURE__*/_react.default.createElement("p", null, t('AMOUNT_POINTS_ASSIGN', 'Amount of points to assign')), /*#__PURE__*/_react.default.createElement("span", null, t('VALUE', 'Value')), /*#__PURE__*/_react.default.createElement(_styles2.AccumulationInputWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)), /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react.default.createElement("span", null, "="), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)))), /*#__PURE__*/_react.default.createElement(_styles2.PointsAccumulationContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('POINTS_ACCUMULATION', 'Points accumulation')), /*#__PURE__*/_react.default.createElement("p", null, t('AMOUNT_POINTS_ASSIGN', 'Amount of points to assign')), /*#__PURE__*/_react.default.createElement("span", null, t('VALUE', 'Value')), /*#__PURE__*/_react.default.createElement(_styles2.AccumulationInputWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)), /*#__PURE__*/_react.default.createElement("span", {
     className: "equal"
   }, "="), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "number",
     placeholder: "00 points",
-    name: "accomulation_rate",
-    value: (_ref3 = (_formState$changes$ac = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accomulation_rate) !== null && _formState$changes$ac !== void 0 ? _formState$changes$ac : walletData === null || walletData === void 0 ? void 0 : walletData.accomulation_rate) !== null && _ref3 !== void 0 ? _ref3 : '',
+    name: "accumulation_rate",
+    value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.accumulation_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.accumulation_rate : (_walletData$accumulat = walletData === null || walletData === void 0 ? void 0 : walletData.accumulation_rate) !== null && _walletData$accumulat !== void 0 ? _walletData$accumulat : '',
     onChange: handleChangeInput
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ToggleWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('MAXIMUM_OF_POINTS', 'Maximum of points'))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "number",
-    placeholder: "00 points",
-    name: "maximum_accomulation",
-    value: (_ref4 = (_formState$changes$ma = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.maximum_accomulation) !== null && _formState$changes$ma !== void 0 ? _formState$changes$ma : walletData === null || walletData === void 0 ? void 0 : walletData.maximum_accomulation) !== null && _ref4 !== void 0 ? _ref4 : '',
-    onChange: handleChangeInput
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
-    onClick: handleSubmit,
+    type: "submit",
     disabled: Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0
   }, t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('POINTS_WALLET', 'Points wallet'),

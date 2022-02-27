@@ -21,7 +21,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #707070;\n  border: 1px solid #707070;\n  border-radius: 30px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n\n  &:focus {\n    border-color: ", ";\n  }\n\n  ", "\n\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #959595;\n  }\n  &:-ms-input-placeholder {\n    color: #959595;\n  }\n"])), function () {
+var Input = _styledComponents.default.input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  background: ", ";\n  color: #707070;\n  border: 1px solid #707070;\n  border-radius: 30px;\n  font-size: 16px;\n  padding: 7px 15px;\n  outline: none;\n\n  &:focus {\n    border-color: ", ";\n  }\n\n  ", "\n\n  &::placeholder,\n  &::-webkit-input-placeholder {\n    color: #959595;\n  }\n  &:-ms-input-placeholder {\n    color: #959595;\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (_ref) {
   var w = _ref.w;
@@ -55,7 +59,11 @@ var InputGroupRight = (0, _styledComponents.default)(InputGroupLeft)(_templateOb
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        margin-left: -7px;\n        margin-right: 0\n    "])));
 });
 exports.InputGroupRight = InputGroupRight;
-var InputPrimary = (0, _styledComponents.default)(Input)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border-color: ", ";\n\n  &:focus {\n    border-color: ", ";\n  }\n"])), function (props) {
+var InputPrimary = (0, _styledComponents.default)(Input)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  border-color: ", ";\n\n  &:focus {\n    border-color: ", ";\n  }\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+}, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primary;
@@ -63,7 +71,11 @@ var InputPrimary = (0, _styledComponents.default)(Input)(_templateObject10 || (_
   return (0, _polished.darken)(0.1, props.theme.colors.primary);
 });
 exports.InputPrimary = InputPrimary;
-var InputSecundary = (0, _styledComponents.default)(Input)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: ", ";\n  border-color: ", ";\n\n  &:focus {\n    border-color: ", ";\n  }\n"])), function (props) {
+var InputSecundary = (0, _styledComponents.default)(Input)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  border-color: ", ";\n\n  &:focus {\n    border-color: ", ";\n  }\n"])), function (props) {
+  var _props$theme$colors3;
+
+  return ((_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.backgroundPage) || '#FFF';
+}, function (props) {
   return props.theme.colors.secundary;
 }, function (props) {
   return props.theme.colors.secundary;

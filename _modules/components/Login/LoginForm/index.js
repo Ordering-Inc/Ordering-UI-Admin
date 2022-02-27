@@ -21,15 +21,17 @@ var _BsArrowRightShort = _interopRequireDefault(require("@meronex/icons/bs/BsArr
 
 var _MdExitToApp = _interopRequireDefault(require("@meronex/icons/md/MdExitToApp"));
 
-var _styles = require("./styles");
-
-var _styles2 = require("../../../styles");
+var _styles = require("../../../styles");
 
 var _styledComponents = require("styled-components");
 
 var _HiOutlineMail = _interopRequireDefault(require("@meronex/icons/hi/HiOutlineMail"));
 
 var _RiLockPasswordLine = _interopRequireDefault(require("@meronex/icons/ri/RiLockPasswordLine"));
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -77,10 +79,17 @@ var LoginFormUI = function LoginFormUI(props) {
       _useApi2 = _slicedToArray(_useApi, 1),
       ordering = _useApi2[0];
 
+  var theme = (0, _styledComponents.useTheme)();
+
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
       register = _useForm.register,
       errors = _useForm.errors;
+
+  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
+      _useContext2 = _slicedToArray(_useContext, 2),
+      configFile = _useContext2[0],
+      setConfigFile = _useContext2[1];
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -100,12 +109,10 @@ var LoginFormUI = function LoginFormUI(props) {
       projectName = _useState6[0],
       setProjectName = _useState6[1];
 
-  var theme = (0, _styledComponents.useTheme)();
-
-  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
-      _useContext2 = _slicedToArray(_useContext, 2),
-      configFile = _useContext2[0],
-      setConfigFile = _useContext2[1];
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      passwordSee = _useState8[0],
+      setPasswordSee = _useState8[1];
 
   var onSubmit = function onSubmit() {
     var _configFile = configFile;
@@ -155,34 +162,34 @@ var LoginFormUI = function LoginFormUI(props) {
     });
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles.LoginContainer, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.LoginContainer, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.LoginHeroContainer, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LoginHeroContainer, {
     bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.loginHero
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotypeInvert,
     alt: "Logo login"
-  })), /*#__PURE__*/_react.default.createElement(_styles.FormSide, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles.TitleFormSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WELCOME', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_ADMIN_LOGIN', 'Let’s start to admin your business now'))), useLoginByEmail && useLoginByCellphone && /*#__PURE__*/_react.default.createElement(_styles.LoginWith, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.TitleFormSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WELCOME', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_ADMIN_LOGIN', 'Let’s start to admin your business now'))), useLoginByEmail && useLoginByCellphone && /*#__PURE__*/_react.default.createElement(_styles2.LoginWith, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Tabs, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.Tabs, {
     variant: "primary"
-  }, useLoginByEmail && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, useLoginByEmail && /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     onClick: function onClick() {
       return hanldeChangeTab('email');
     },
     active: loginTab === 'email'
-  }, t('LOGIN_WITH_EMAIL', 'Login with Email')), useLoginByCellphone && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, t('LOGIN_WITH_EMAIL', 'Login with Email')), useLoginByCellphone && /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     onClick: function onClick() {
       return hanldeChangeTab('cellphone');
     },
     active: loginTab === 'cellphone'
-  }, t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles.FormInput, {
+  }, t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')))), (useLoginByCellphone || useLoginByEmail) && /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles2.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     name: "project",
     "aria-label": "project",
@@ -195,7 +202,7 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     autoComplete: "off",
     autoCapitalize: "off"
-  }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles2.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), useLoginByEmail && loginTab === 'email' && /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "email",
     name: "email",
     "aria-label": "email",
@@ -212,7 +219,7 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     autoComplete: "off",
     autoCapitalize: "off"
-  }), /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null)), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_styles2.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null)), useLoginByCellphone && loginTab === 'cellphone' && /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "tel",
     name: "cellphone",
     "aria-label": "cellphone",
@@ -224,8 +231,8 @@ var LoginFormUI = function LoginFormUI(props) {
       return handleChangeInput(e);
     },
     autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles2.Input, {
-    type: "password",
+  }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: !passwordSee ? 'password' : 'text',
     name: "password",
     "aria-label": "password",
     placeholder: t('PASSWORD'),
@@ -241,14 +248,18 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     autoComplete: "off",
     autoCapitalize: "off"
-  }), /*#__PURE__*/_react.default.createElement(_RiLockPasswordLine.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_RiLockPasswordLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.TogglePassword, {
+    onClick: function onClick() {
+      return setPasswordSee(!passwordSee);
+    }
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     type: "submit",
     disabled: formState.loading
-  }, formState.loading ? t('LOADING') + '...' : t('LOGIN'), /*#__PURE__*/_react.default.createElement(_BsArrowRightShort.default, null)), /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }, formState.loading ? t('LOADING') + '...' : t('LOGIN'), /*#__PURE__*/_react.default.createElement(_BsArrowRightShort.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword)), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles.RedirectLink, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword)), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', 'New on Ordering?')), elementLinkToSignup)), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {

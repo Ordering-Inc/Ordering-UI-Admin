@@ -93,7 +93,7 @@ var LanguageTransSpreadUI = function LanguageTransSpreadUI(props) {
     });
   };
 
-  (0, _react.useEffect)(function () {
+  var handleHotTableData = (0, _react.useCallback)(function () {
     if (translationList !== null && translationList !== void 0 && translationList.loading) return;
     var translations = [];
 
@@ -111,6 +111,9 @@ var LanguageTransSpreadUI = function LanguageTransSpreadUI(props) {
 
     setHotTableData(translations);
   }, [translationList, searchValue]);
+  (0, _react.useEffect)(function () {
+    handleHotTableData();
+  }, [handleHotTableData]);
   (0, _react.useEffect)(function () {
     var _creationFormState$re;
 

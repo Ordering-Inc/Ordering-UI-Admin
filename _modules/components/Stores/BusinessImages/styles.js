@@ -56,7 +56,11 @@ var UploadImageIconContainer = _styledComponents.default.div(_templateObject8 ||
 
 exports.UploadImageIconContainer = UploadImageIconContainer;
 
-var CameraWrapper = _styledComponents.default.span(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  background-color: #FFF;\n  border-radius: 8px;\n  padding: 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: fit-content;\n  position: absolute;\n  ", "\n  svg {\n    font-size: 18px;\n    color: ", ";\n  }\n"])), function (props) {
+var CameraWrapper = _styledComponents.default.span(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  background: ", ";\n  border-radius: 8px;\n  padding: 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: fit-content;\n  position: absolute;\n  ", "\n  svg {\n    font-size: 18px;\n    color: ", ";\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    left: 8px;\n  "]))) : (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    right: 8px;\n  "])));

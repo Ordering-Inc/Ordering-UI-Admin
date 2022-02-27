@@ -390,7 +390,11 @@ var WrapAllCategories = _styledComponents.default.div(_templateObject77 || (_tem
 
 exports.WrapAllCategories = WrapAllCategories;
 
-var BusinessCartContent = _styledComponents.default.div(_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["\n  background: white;\n  padding: 15px;\n  position: relative;\n  margin-bottom: 20px;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  ", "\n\n  @media (min-width: 768px) {\n    padding: 25px 20px;\n    position: sticky;\n    top: 0;\n  }\n"])), function (_ref20) {
+var BusinessCartContent = _styledComponents.default.div(_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["\n  background: ", ";\n  padding: 15px;\n  position: relative;\n  margin-bottom: 20px;\n\n  .product.accordion {\n    margin: 0;\n  }\n\n  ", "\n\n  @media (min-width: 768px) {\n    padding: 25px 20px;\n    position: sticky;\n    top: 0;\n  }\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+}, function (_ref20) {
   var isModal = _ref20.isModal;
   return !isModal && (0, _styledComponents.css)(_templateObject82 || (_templateObject82 = _taggedTemplateLiteral(["\n    border: 1px solid #E9ECEF;\n    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    border-radius: 7.6px;\n  "])));
 });

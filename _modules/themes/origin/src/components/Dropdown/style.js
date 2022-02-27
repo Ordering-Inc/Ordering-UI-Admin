@@ -19,7 +19,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var DropdownStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  background-color: #FFF;\n  padding: 5px;\n  border-radius: 1000px;\n  color: #333;\n  z-index: 1001;\n"])));
+var DropdownStyled = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  background: ", ";\n  padding: 5px;\n  border-radius: 1000px;\n  color: #333;\n  z-index: 1001;\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.DropdownStyled = DropdownStyled;
 
@@ -27,7 +31,11 @@ var DropdownToggleStyled = _styledComponents.default.div(_templateObject2 || (_t
 
 exports.DropdownToggleStyled = DropdownToggleStyled;
 
-var DropdownMenuStyled = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  background-color: #FFF;\n  /* padding: 15px; */\n  flex-direction: column;\n  color: #333;\n  z-index: 2;\n  border-radius: 10px;\n  /* overflow: hidden; */\n"])));
+var DropdownMenuStyled = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  background: ", ";\n  /* padding: 15px; */\n  flex-direction: column;\n  color: #333;\n  z-index: 2;\n  border-radius: 10px;\n  /* overflow: hidden; */\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+});
 
 exports.DropdownMenuStyled = DropdownMenuStyled;
 

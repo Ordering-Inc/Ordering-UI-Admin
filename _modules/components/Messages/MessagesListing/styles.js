@@ -31,7 +31,11 @@ var OrdersContainer = _styledComponents.default.div(_templateObject3 || (_templa
 
 exports.OrdersContainer = OrdersContainer;
 
-var FilterContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: #FFF;\n  padding: 0 12px;\n  z-index: 100;\n"])));
+var FilterContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: ", ";\n  padding: 0 12px;\n  z-index: 100;\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.FilterContainer = FilterContainer;
 
@@ -46,9 +50,9 @@ var Tab = _styledComponents.default.div(_templateObject6 || (_templateObject6 = 
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "])));
 }, function (props) {
-  var _props$theme$colors;
+  var _props$theme$colors2;
 
-  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
+  return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
 }, function (_ref) {
   var active = _ref.active;
   return active && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    border-bottom: 3px solid;\n    font-weight: 500;\n  "])));

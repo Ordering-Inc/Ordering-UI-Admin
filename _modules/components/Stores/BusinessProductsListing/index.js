@@ -76,7 +76,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
-  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _businessState$busine5;
+  var _businessState$busine5, _businessState$busine6, _businessState$busine7, _businessState$busine8, _businessState$busine9, _businessState$busine10;
 
   var categorySelected = props.categorySelected,
       searchValue = props.searchValue,
@@ -88,6 +88,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       handleStoresRedirect = props.handleStoresRedirect,
       slug = props.slug,
       categoryId = props.categoryId,
+      productId = props.productId,
+      isInitialRender = props.isInitialRender,
+      handleUpdateInitialRender = props.handleUpdateInitialRender,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       setCategorySelected = props.setCategorySelected,
       setBusinessSlug = props.setBusinessSlug,
@@ -174,13 +177,26 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   var handleOpenProductDetails = function handleOpenProductDetails(product) {
+    var _businessState$busine;
+
     setSelectedProduct(product);
     setOpenSidebar('product_details');
+    onProductRedirect({
+      slug: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.slug,
+      product: product.id,
+      category: product.category_id
+    });
   };
 
   var handleCloseProductDetails = function handleCloseProductDetails() {
+    var _businessState$busine2;
+
     setOpenSidebar(null);
     setSelectedProduct(null);
+    handleUpdateInitialRender(false);
+    onProductRedirect({
+      slug: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.slug
+    });
   };
 
   var handleProductAdd = function handleProductAdd(status) {
@@ -212,10 +228,21 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (categoryId) {
-      setOpenSidebar('category_details');
+    if (categoryId && productId) {
+      handleUpdateInitialRender(true);
     }
-  }, [categoryId]);
+  }, []);
+  (0, _react.useEffect)(function () {
+    var _businessState$busine3, _businessState$busine4;
+
+    if (!isInitialRender || !(businessState !== null && businessState !== void 0 && (_businessState$busine3 = businessState.business) !== null && _businessState$busine3 !== void 0 && _businessState$busine3.slug)) return;
+    setOpenSidebar('product_details');
+    onProductRedirect({
+      slug: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.slug,
+      product: productId,
+      category: categoryId
+    });
+  }, [(_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.slug, isInitialRender]);
 
   var openBatchImageUploader = function openBatchImageUploader() {
     setBatchImageFormOpen(true);
@@ -233,7 +260,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return handleSelectHeader();
     }
-  }, /*#__PURE__*/_react.default.createElement("h1", null, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.name), " \xA0 ", /*#__PURE__*/_react.default.createElement(_BisDownArrow.default, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.name), " \xA0 ", /*#__PURE__*/_react.default.createElement(_BisDownArrow.default, {
     className: showSelectHeader ? 'rotate-arrow' : ''
   }))), showSelectHeader && /*#__PURE__*/_react.default.createElement(_BusinessSelectHeader.BusinessSelectHeader, {
     close: handleClose,
@@ -244,7 +271,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return setOpenSidebar('business_details');
     }
-  }, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", {
+  }, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", {
     className: "active"
   }, categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
@@ -258,7 +285,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return handleProductAdd(true);
     },
-    disabled: (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : (_businessState$busine4 = _businessState$busine3.categories) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.length) === 0
+    disabled: (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine8 = businessState.business) === null || _businessState$busine8 === void 0 ? void 0 : (_businessState$busine9 = _businessState$busine8.categories) === null || _businessState$busine9 === void 0 ? void 0 : _businessState$busine9.length) === 0
   }, t('ADD_PRODUCT', 'Add product')), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     isCustomLayout: true,
     lazyLoad: true,
@@ -324,6 +351,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     open: openSidebar === 'product_details',
     onClose: handleCloseProductDetails,
     product: selectedProduct,
+    productId: productId,
+    categoryId: categoryId,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleUpdateBusinessState: handleUpdateBusinessState,
     setFormTaxState: setFormTaxState,
@@ -334,7 +363,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setFees: setFees
   }), openSidebar === 'business_details' && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openSidebar === 'business_details',
-    businessId: (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.id) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.id),
+    businessId: (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.id) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine10 = businessState.business) === null || _businessState$busine10 === void 0 ? void 0 : _businessState$busine10.id),
     handleSucessRemoveBusiness: function handleSucessRemoveBusiness() {
       return handleStoresRedirect();
     } // handleSucessUpdateBusiness={handleSucessUpdateBusiness}

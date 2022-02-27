@@ -66,7 +66,8 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       handleChangeInput = props.handleChangeInput,
       levelList = props.levelList,
       handleUpdateDeleteClick = props.handleUpdateDeleteClick,
-      handleUpdateLevel = props.handleUpdateLevel;
+      handleUpdateLevel = props.handleUpdateLevel,
+      handleUpdateBtnClick = props.handleUpdateBtnClick;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -150,12 +151,12 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       height: 25
     })));
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, levelList === null || levelList === void 0 ? void 0 : (_levelList$levels = levelList.levels) === null || _levelList$levels === void 0 ? void 0 : _levelList$levels.map(function (level, i) {
-    var _editFormState$change, _editFormState$change2, _editFormState$change3, _level$name, _editFormState$change4, _editFormState$change5, _editFormState$change6, _level$accomulation_r, _editFormState$change7, _editFormState$change8, _editFormState$change9, _level$minimum_points;
+    var _editFormState$change, _editFormState$change2, _editFormState$change3, _level$name, _editFormState$change4, _editFormState$change5, _editFormState$change6, _level$accumulation_r, _editFormState$change7, _editFormState$change8, _editFormState$change9, _level$minimum_points, _editFormState$change10;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.LevelWrapper, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles2.LevelNameWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-      value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change = editFormState.changes) === null || _editFormState$change === void 0 ? void 0 : _editFormState$change.id) === level.id && editFormState !== null && editFormState !== void 0 && (_editFormState$change2 = editFormState.changes) !== null && _editFormState$change2 !== void 0 && _editFormState$change2.name ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change3 = editFormState.changes) === null || _editFormState$change3 === void 0 ? void 0 : _editFormState$change3.name : (_level$name = level.name) !== null && _level$name !== void 0 ? _level$name : '',
+      value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change = editFormState.changes) === null || _editFormState$change === void 0 ? void 0 : _editFormState$change.id) === level.id && typeof (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change2 = editFormState.changes) === null || _editFormState$change2 === void 0 ? void 0 : _editFormState$change2.name) !== 'undefined' ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change3 = editFormState.changes) === null || _editFormState$change3 === void 0 ? void 0 : _editFormState$change3.name : (_level$name = level.name) !== null && _level$name !== void 0 ? _level$name : '',
       name: "name",
       autoComplete: "off",
       placeholder: t('NAME', 'name'),
@@ -163,22 +164,28 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
         return handleUpdateLevel(e, level === null || level === void 0 ? void 0 : level.id);
       }
     })), /*#__PURE__*/_react.default.createElement(_styles2.LastWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-      value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change4 = editFormState.changes) === null || _editFormState$change4 === void 0 ? void 0 : _editFormState$change4.id) === level.id && editFormState !== null && editFormState !== void 0 && (_editFormState$change5 = editFormState.changes) !== null && _editFormState$change5 !== void 0 && _editFormState$change5.accomulation_rate ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change6 = editFormState.changes) === null || _editFormState$change6 === void 0 ? void 0 : _editFormState$change6.accomulation_rate : (_level$accomulation_r = level.accomulation_rate) !== null && _level$accomulation_r !== void 0 ? _level$accomulation_r : '',
+      value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change4 = editFormState.changes) === null || _editFormState$change4 === void 0 ? void 0 : _editFormState$change4.id) === level.id && typeof (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change5 = editFormState.changes) === null || _editFormState$change5 === void 0 ? void 0 : _editFormState$change5.accumulation_rate) !== 'undefined' ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change6 = editFormState.changes) === null || _editFormState$change6 === void 0 ? void 0 : _editFormState$change6.accumulation_rate : (_level$accumulation_r = level.accumulation_rate) !== null && _level$accumulation_r !== void 0 ? _level$accumulation_r : '',
       placeholder: "0 days",
-      name: "accomulation_rate",
+      name: "accumulation_rate",
       autoComplete: "off",
       onChange: function onChange(e) {
         return handleUpdateLevel(e, level === null || level === void 0 ? void 0 : level.id);
       }
     })), /*#__PURE__*/_react.default.createElement(_styles2.PointsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-      value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change7 = editFormState.changes) === null || _editFormState$change7 === void 0 ? void 0 : _editFormState$change7.id) === level.id && editFormState !== null && editFormState !== void 0 && (_editFormState$change8 = editFormState.changes) !== null && _editFormState$change8 !== void 0 && _editFormState$change8.minimum_points ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change9 = editFormState.changes) === null || _editFormState$change9 === void 0 ? void 0 : _editFormState$change9.minimum_points : (_level$minimum_points = level.minimum_points) !== null && _level$minimum_points !== void 0 ? _level$minimum_points : '',
+      value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change7 = editFormState.changes) === null || _editFormState$change7 === void 0 ? void 0 : _editFormState$change7.id) === level.id && typeof (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change8 = editFormState.changes) === null || _editFormState$change8 === void 0 ? void 0 : _editFormState$change8.minimum_points) !== 'undefined' ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change9 = editFormState.changes) === null || _editFormState$change9 === void 0 ? void 0 : _editFormState$change9.minimum_points : (_level$minimum_points = level.minimum_points) !== null && _level$minimum_points !== void 0 ? _level$minimum_points : '',
       placeholder: "0 points",
       name: "minimum_points",
       autoComplete: "off",
       onChange: function onChange(e) {
         return handleUpdateLevel(e, level === null || level === void 0 ? void 0 : level.id);
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change10 = editFormState.changes) === null || _editFormState$change10 === void 0 ? void 0 : _editFormState$change10.id) === level.id ? /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+      color: "primary",
+      type: "button",
+      onClick: function onClick() {
+        return handleUpdateBtnClick();
+      }
+    }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)) : /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
       color: "black",
       type: "button",
       onClick: function onClick() {
@@ -198,9 +205,9 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.LastWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "number",
-    name: "accomulation_rate",
+    name: "accumulation_rate",
     autoComplete: "off",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accomulation_rate) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accumulation_rate) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },

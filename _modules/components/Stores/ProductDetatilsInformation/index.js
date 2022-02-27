@@ -50,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
-  var _formState$changes, _formState$result, _formState$changes2, _formState$changes3, _formState$result2, _formState$result3, _formState$result3$re, _formState$changes$na, _formState$changes4, _formState$result4, _formState$result5, _formState$result5$re, _formState$changes$pr, _formState$changes5, _formState$result6, _formState$result7, _formState$result7$re, _formState$changes$in, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result8, _formState$result8$re, _formState$result9, _formState$result9$re, _formState$changes$of, _formState$changes9, _formState$result10, _formState$result11, _formState$result11$r, _formState$changes$de, _formState$changes10, _formState$changes11, _formState$changes12, _formState$result12, _formState$result13, _formState$result14, _formState$result14$r, _formState$changes$in2, _formState$changes13, _formState$changes14, _formState$changes15, _formState$result15, _formState$result16, _formState$result16$r, _formState$changes$qu, _formState$changes16;
+  var _formState$changes, _formState$result, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5, _formState$changes$pr, _formState$changes6, _formState$changes7, _formState$changes8;
 
   var product = props.product,
       formState = props.formState,
@@ -157,7 +157,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
-        return error.message;
+        if (error.type === 'min') return t('REGULAR_PRICE_MUST_BIGGER_PRICE', 'This regular price must be bigger than price');else return error.message;
       });
       setAlertState({
         open: true,
@@ -214,7 +214,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('Name_V2', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     placeholder: t('Name', 'name'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result2 = formState.result) !== null && _formState$result2 !== void 0 && _formState$result2.result ? formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.name : (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : product === null || product === void 0 ? void 0 : product.name,
+    defaultValue: product === null || product === void 0 ? void 0 : product.name,
     onChange: handleChangeInput,
     ref: formMethods.register({
       required: t('NAME_REQUIRED', 'The name is required')
@@ -226,7 +226,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
   }, /*#__PURE__*/_react.default.createElement("span", null, t('PRICE', 'Price'))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "price",
     placeholder: parsePrice(0),
-    value: formState !== null && formState !== void 0 && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.result ? formState === null || formState === void 0 ? void 0 : (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : (_formState$result5$re = _formState$result5.result) === null || _formState$result5$re === void 0 ? void 0 : _formState$result5$re.price : (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.price) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : product === null || product === void 0 ? void 0 : product.price,
+    defaultValue: product === null || product === void 0 ? void 0 : product.price,
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -238,22 +238,23 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
       }
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.RegularWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('REGULAR_PRICE', 'Regular Price')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: formState !== null && formState !== void 0 && (_formState$result6 = formState.result) !== null && _formState$result6 !== void 0 && _formState$result6.result ? formState === null || formState === void 0 ? void 0 : (_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : (_formState$result7$re = _formState$result7.result) === null || _formState$result7$re === void 0 ? void 0 : _formState$result7$re.in_offer : (_formState$changes$in = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.in_offer) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : product === null || product === void 0 ? void 0 : product.in_offer,
+    defaultChecked: product === null || product === void 0 ? void 0 : product.in_offer,
     onChange: function onChange(val) {
       return handleChangeFormState({
         in_offer: val
       });
     }
-  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.in_offer) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.in_offer : product === null || product === void 0 ? void 0 : product.in_offer) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.in_offer) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.in_offer : product === null || product === void 0 ? void 0 : product.in_offer) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     style: {
       marginTop: '10px'
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "offer_price",
     placeholder: parsePrice(0),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result8 = formState.result) !== null && _formState$result8 !== void 0 && (_formState$result8$re = _formState$result8.result) !== null && _formState$result8$re !== void 0 && _formState$result8$re.offer_price ? formState === null || formState === void 0 ? void 0 : (_formState$result9 = formState.result) === null || _formState$result9 === void 0 ? void 0 : (_formState$result9$re = _formState$result9.result) === null || _formState$result9$re === void 0 ? void 0 : _formState$result9$re.offer_price : (_formState$changes$of = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.offer_price) !== null && _formState$changes$of !== void 0 ? _formState$changes$of : product === null || product === void 0 ? void 0 : product.offer_price,
+    defaultValue: product === null || product === void 0 ? void 0 : product.offer_price,
     ref: formMethods.register({
-      required: t('VALIDATION_ERROR_REQUIRED', 'The Regular Price field is required').replace('_attribute_', t('REGULAR_PRICE', 'Regular Price'))
+      required: t('VALIDATION_ERROR_REQUIRED', 'The Regular Price field is required').replace('_attribute_', t('REGULAR_PRICE', 'Regular Price')),
+      min: (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.price) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : product === null || product === void 0 ? void 0 : product.price
     }),
     onChange: function onChange(e) {
       return handleChangeInput(e);
@@ -269,7 +270,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     rows: 4,
     name: "description",
     placeholder: t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result10 = formState.result) !== null && _formState$result10 !== void 0 && _formState$result10.result ? formState === null || formState === void 0 ? void 0 : (_formState$result11 = formState.result) === null || _formState$result11 === void 0 ? void 0 : (_formState$result11$r = _formState$result11.result) === null || _formState$result11$r === void 0 ? void 0 : _formState$result11$r.description : (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : product === null || product === void 0 ? void 0 : product.description,
+    defaultValue: product === null || product === void 0 ? void 0 : product.description,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -279,13 +280,13 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.slug) === '' ? '' : (formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.slug) || (formState === null || formState === void 0 ? void 0 : (_formState$result12 = formState.result) === null || _formState$result12 === void 0 ? void 0 : _formState$result12.slug) || (product === null || product === void 0 ? void 0 : product.slug) || ''
+    defaultValue: product === null || product === void 0 ? void 0 : product.slug
   }), /*#__PURE__*/_react.default.createElement(_styles2.Wrapper, {
     style: {
       paddingTop: 10
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "primary",
+    color: "lightPrimary",
     borderRadius: "7.6px",
     disabled: formState.loading,
     onClick: function onClick() {
@@ -294,16 +295,16 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
       }));
     }
   }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')))), /*#__PURE__*/_react.default.createElement(_styles2.InventoryWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('INVENTORY', 'Inventory')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: formState !== null && formState !== void 0 && (_formState$result13 = formState.result) !== null && _formState$result13 !== void 0 && _formState$result13.result ? formState === null || formState === void 0 ? void 0 : (_formState$result14 = formState.result) === null || _formState$result14 === void 0 ? void 0 : (_formState$result14$r = _formState$result14.result) === null || _formState$result14$r === void 0 ? void 0 : _formState$result14$r.inventoried : (_formState$changes$in2 = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.inventoried) !== null && _formState$changes$in2 !== void 0 ? _formState$changes$in2 : product === null || product === void 0 ? void 0 : product.inventoried,
+    defaultChecked: product === null || product === void 0 ? void 0 : product.inventoried,
     onChange: function onChange(val) {
       return handleChangeFormState({
         inventoried: val
       });
     }
-  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.inventoried) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.inventoried : product === null || product === void 0 ? void 0 : product.inventoried) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('QUANTITY', 'Quantity')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.inventoried) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.inventoried : product === null || product === void 0 ? void 0 : product.inventoried) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('QUANTITY', 'Quantity')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "quantity",
     placeholder: t('QUANTITY', 'Quantity'),
-    value: formState !== null && formState !== void 0 && (_formState$result15 = formState.result) !== null && _formState$result15 !== void 0 && _formState$result15.result ? formState === null || formState === void 0 ? void 0 : (_formState$result16 = formState.result) === null || _formState$result16 === void 0 ? void 0 : (_formState$result16$r = _formState$result16.result) === null || _formState$result16$r === void 0 ? void 0 : _formState$result16$r.quantity : (_formState$changes$qu = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.quantity) !== null && _formState$changes$qu !== void 0 ? _formState$changes$qu : product === null || product === void 0 ? void 0 : product.quantity,
+    defaultValue: product === null || product === void 0 ? void 0 : product.quantity,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
@@ -326,6 +327,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     borderRadius: "7.6px",
     disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0
   }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

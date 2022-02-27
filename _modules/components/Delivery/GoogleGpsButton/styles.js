@@ -17,7 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var GpsButtonStyle = _styledComponents.default.button(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: #FFF;\n  padding: 0;\n  width: 43px;\n  height: 43px;\n  line-height: 34px;\n  text-align: center;\n  border-radius: 50%;\n  border-style: solid;\n  border-width: 1px;\n  border-color: ", ";\n  outline: none;\n  cursor: pointer;\n  ", "\n  svg {\n    color: ", ";\n    font-size: 25px;\n  }\n"])), function (props) {
+var GpsButtonStyle = _styledComponents.default.button(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background: ", ";\n  padding: 0;\n  width: 43px;\n  height: 43px;\n  line-height: 34px;\n  text-align: center;\n  border-radius: 50%;\n  border-style: solid;\n  border-width: 1px;\n  border-color: ", ";\n  outline: none;\n  cursor: pointer;\n  ", "\n  svg {\n    color: ", ";\n    font-size: 25px;\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme;

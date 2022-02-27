@@ -72,7 +72,11 @@ var DistanceTable = _styledComponents.default.table(_templateObject12 || (_templ
 
 exports.DistanceTable = DistanceTable;
 
-var Thead = _styledComponents.default.thead(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: white;\n\n  tr {\n    th {\n      font-weight: 500;\n      font-size: 12px;\n      padding: 8px 5px;\n\n      &:not(:first-child) {\n        text-align: center;\n      }\n    }\n\n    &:nth-child(2) {\n      th:nth-child(2) {\n        text-align: left;\n      }\n    }\n  }\n"])));
+var Thead = _styledComponents.default.thead(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: ", ";\n\n  tr {\n    th {\n      font-weight: 500;\n      font-size: 12px;\n      padding: 8px 5px;\n\n      &:not(:first-child) {\n        text-align: center;\n      }\n    }\n\n    &:nth-child(2) {\n      th:nth-child(2) {\n        text-align: left;\n      }\n    }\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.Thead = Thead;
 

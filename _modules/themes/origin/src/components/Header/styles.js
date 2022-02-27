@@ -13,7 +13,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var HeaderContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 0px;\n  z-index: 1000;\n  background-color: #fff;\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  box-shadow: 0px 2px 2px #00000029;\n\n  @media print {\n    display: none;\n  }\n"])));
+var HeaderContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 0px;\n  z-index: 1000;\n  background: ", ";\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  box-shadow: 0px 2px 2px #00000029;\n\n  @media print {\n    display: none;\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.HeaderContainer = HeaderContainer;
 

@@ -61,14 +61,15 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
 
   var containerRef = (0, _react.useRef)();
   var listRef = (0, _react.useRef)();
+  var addButtonRef = (0, _react.useRef)();
   (0, _react.useEffect)(function () {
     var listener;
 
     if (containerRef !== null && containerRef !== void 0 && containerRef.current && categoryListRef) {
       listener = window.addEventListener('click', function (e) {
-        var _containerRef$current;
+        var _containerRef$current, _addButtonRef$current;
 
-        if (!(containerRef !== null && containerRef !== void 0 && (_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target)) && categoryListRef !== null && categoryListRef !== void 0 && categoryListRef.contains(e.target)) {
+        if (!(containerRef !== null && containerRef !== void 0 && (_containerRef$current = containerRef.current) !== null && _containerRef$current !== void 0 && _containerRef$current.contains(e.target)) && !(addButtonRef !== null && addButtonRef !== void 0 && (_addButtonRef$current = addButtonRef.current) !== null && _addButtonRef$current !== void 0 && _addButtonRef$current.contains(e.target)) && categoryListRef !== null && categoryListRef !== void 0 && categoryListRef.contains(e.target)) {
           handleChangeCategory(null, null);
         }
       });
@@ -101,6 +102,7 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       onDataSelected: setDataSelected
     }));
   })))), /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
+    ref: addButtonRef,
     onClick: function onClick() {
       return handleOpenCategoryDetails();
     }

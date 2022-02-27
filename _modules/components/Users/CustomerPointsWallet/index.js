@@ -9,8 +9,6 @@ var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _styledComponents = require("styled-components");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _styles = require("./styles");
@@ -48,7 +46,6 @@ var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       parsePrice = _useUtils2[0].parsePrice;
 
-  var theme = (0, _styledComponents.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('POINTS_WALLET', 'Points wallet')), WalletState !== null && WalletState !== void 0 && WalletState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWalletContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70,
     height: 20
@@ -64,23 +61,11 @@ var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
   })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 30,
     height: 15
-  })))), /*#__PURE__*/_react.default.createElement(_styles.LevelWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70,
-    height: 20
-  })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 200,
-    height: 130
-  }), /*#__PURE__*/_react.default.createElement(_styles.LevelTxt, null, /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 90,
-    height: 20
   }))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWalletContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, ((_WalletState$wallets = WalletState.wallets) === null || _WalletState$wallets === void 0 ? void 0 : (_WalletState$wallets$ = _WalletState$wallets.find(function (wallet) {
     return wallet.type === 'credit_point';
-  })) === null || _WalletState$wallets$ === void 0 ? void 0 : _WalletState$wallets$.balance) || 0), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS', 'Points'))), /*#__PURE__*/_react.default.createElement(_styles.EqualWrapper, null, "="), /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(((_WalletState$wallets2 = WalletState.wallets) === null || _WalletState$wallets2 === void 0 ? void 0 : (_WalletState$wallets3 = _WalletState$wallets2.find(function (wallet) {
+  })) === null || _WalletState$wallets$ === void 0 ? void 0 : _WalletState$wallets$.balance) || 0), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS', 'Points'))), /*#__PURE__*/_react.default.createElement(_styles.EqualWrapper, null, ","), /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(((_WalletState$wallets2 = WalletState.wallets) === null || _WalletState$wallets2 === void 0 ? void 0 : (_WalletState$wallets3 = _WalletState$wallets2.find(function (wallet) {
     return wallet.type === 'cash';
-  })) === null || _WalletState$wallets3 === void 0 ? void 0 : _WalletState$wallets3.balance) || 0)), /*#__PURE__*/_react.default.createElement("p", null, t('CASH', 'Cash')))), /*#__PURE__*/_react.default.createElement(_styles.LevelWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, t('LEVEL', 'Level')), /*#__PURE__*/_react.default.createElement("img", {
-    src: theme.images.general.level,
-    alt: ""
-  }), /*#__PURE__*/_react.default.createElement(_styles.LevelTxt, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SUPER_FAN', 'Super fan'))))));
+  })) === null || _WalletState$wallets3 === void 0 ? void 0 : _WalletState$wallets3.balance) || 0)), /*#__PURE__*/_react.default.createElement("p", null, t('CASH', 'Cash'))))));
 };
 
 var CustomerPointsWallet = function CustomerPointsWallet(props) {

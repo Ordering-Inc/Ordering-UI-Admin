@@ -57,7 +57,11 @@ var InputWrapper = _styledComponents.default.div(_templateObject10 || (_template
 
 exports.InputWrapper = InputWrapper;
 
-var StripeConnectButton = _styledComponents.default.button(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  border: none;\n  outline: none;\n  cursor: pointer;\n  background: #D4F2FF;\n  border-radius: 7.6px;\n  color: #27BCFD;\n  width: fit-content;\n  padding: 7px 15px;\n  display: flex;\n  align-items: center;\n\n  &:active {\n    background: #258cb9;\n    color: #FFF;\n    span {\n      &:first-child {\n        background: #FFF;\n        svg {\n          color: #27BCFD;\n        }\n      }\n    }\n  }\n\n  span {\n    &:first-child {\n      background: #27BCFD;\n      padding: 2px;\n      border-radius: 5px;\n      svg {\n        font-size: 20px;\n        color: #FFF;\n      }\n    }\n    &:last-child {\n      ", "\n    }\n  }\n"])), function (props) {
+var StripeConnectButton = _styledComponents.default.button(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  border: none;\n  outline: none;\n  cursor: pointer;\n  background: #D4F2FF;\n  border-radius: 7.6px;\n  color: #27BCFD;\n  width: fit-content;\n  padding: 7px 15px;\n  display: flex;\n  align-items: center;\n\n  &:active {\n    background: #258cb9;\n    color: #FFF;\n    span {\n      &:first-child {\n        background: ", ";\n        svg {\n          color: #27BCFD;\n        }\n      }\n    }\n  }\n\n  span {\n    &:first-child {\n      background: #27BCFD;\n      padding: 2px;\n      border-radius: 5px;\n      svg {\n        font-size: 20px;\n        color: #FFF;\n      }\n    }\n    &:last-child {\n      ", "\n    }\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        margin-right: 15px;\n      "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n        margin-left: 15px;\n      "])));

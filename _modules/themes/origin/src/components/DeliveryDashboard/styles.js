@@ -33,7 +33,11 @@ var OrdersCloseButton = _styledComponents.default.button(_templateObject3 || (_t
 
 exports.OrdersCloseButton = OrdersCloseButton;
 
-var WrapperOrdersAndDriver = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 350px;\n  box-shadow: 0px 3px 6px #00000029;\n  border-radius: 12px;\n  position: absolute;\n  background: #fff;\n  right: 10px;\n  top: 15px;\n  height: calc(100% - 30px);\n  overflow: hidden;\n\n  @media (max-width: 576px) {\n    position: fixed;\n    z-index: 100;\n    top: 75px;\n    height: calc(100vh - 80px);\n  }\n"])));
+var WrapperOrdersAndDriver = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 350px;\n  box-shadow: 0px 3px 6px #00000029;\n  border-radius: 12px;\n  position: absolute;\n  background: ", ";\n  right: 10px;\n  top: 15px;\n  height: calc(100% - 30px);\n  overflow: hidden;\n\n  @media (max-width: 576px) {\n    position: fixed;\n    z-index: 100;\n    top: 75px;\n    height: calc(100vh - 80px);\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.WrapperOrdersAndDriver = WrapperOrdersAndDriver;
 

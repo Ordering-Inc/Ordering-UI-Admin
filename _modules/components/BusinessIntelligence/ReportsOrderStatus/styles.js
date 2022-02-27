@@ -72,7 +72,11 @@ var DistanceTable = _styledComponents.default.table(_templateObject12 || (_templ
 
 exports.DistanceTable = DistanceTable;
 
-var Thead = _styledComponents.default.thead(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: white;\n  border-bottom: 1px solid ", ";\n\n  tr {\n    th {\n      padding: 12px 5px;\n      font-weight: 500;\n      font-size: 12px;\n      text-align: center;\n\n      &:first-child {\n        text-align: left;\n      }\n    }\n    &:last-child {\n      th {\n        &:nth-child(4n-1) {\n          border-left: 1px solid ", ";\n        }\n      }\n    }\n  }\n"])), function (props) {
+var Thead = _styledComponents.default.thead(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: ", ";\n  border-bottom: 1px solid ", ";\n\n  tr {\n    th {\n      padding: 12px 5px;\n      font-weight: 500;\n      font-size: 12px;\n      text-align: center;\n\n      &:first-child {\n        text-align: left;\n      }\n    }\n    &:last-child {\n      th {\n        &:nth-child(4n-1) {\n          border-left: 1px solid ", ";\n        }\n      }\n    }\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (props) {
   var _props$theme6;
 
   return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.colors.secundaryDarkContrast;

@@ -29,10 +29,14 @@ var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObje
 
 exports.HeaderItem = HeaderItem;
 
-var PopoverBody = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #FFF;\n  padding: 15px;\n  border-radius: 7.6px;\n  max-width: 250px;\n  z-index: 1001;\n  border: 1px solid ", ";\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n\n  ", "\n"])), function (props) {
+var PopoverBody = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: absolute;\n  background: ", ";\n  padding: 15px;\n  border-radius: 7.6px;\n  max-width: 250px;\n  z-index: 1001;\n  border: 1px solid ", ";\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n\n  ", "\n"])), function (props) {
   var _props$theme$colors2;
 
-  return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.borderColor;
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+}, function (props) {
+  var _props$theme$colors3;
+
+  return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.borderColor;
 }, function (props) {
   var _props$theme2;
 
@@ -46,9 +50,9 @@ var PopoverList = _styledComponents.default.div(_templateObject7 || (_templateOb
 exports.PopoverList = PopoverList;
 
 var AllowItem = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  color: ", ";\n  padding: 7px;\n  cursor: pointer;\n  svg {\n    font-size: 24px;\n  }\n  span {\n    white-space: nowrap;\n    font-size: 12px;\n    font-weight: 400;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
-  var _props$theme$colors3;
+  var _props$theme$colors4;
 
-  return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.headingColor;
+  return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.headingColor;
 }, function (props) {
   var _props$theme3;
 
@@ -56,9 +60,9 @@ var AllowItem = _styledComponents.default.div(_templateObject8 || (_templateObje
 }, function (_ref) {
   var isChecked = _ref.isChecked;
   return isChecked && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
-    var _props$theme$colors4;
+    var _props$theme$colors5;
 
-    return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.primary;
+    return (_props$theme$colors5 = props.theme.colors) === null || _props$theme$colors5 === void 0 ? void 0 : _props$theme$colors5.primary;
   });
 });
 

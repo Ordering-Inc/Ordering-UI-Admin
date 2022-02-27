@@ -44,7 +44,11 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
 
 exports.Option = Option;
 
-var Options = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  position: absolute;\n  min-width: 100%;\n  background-color: #fff;\n  margin-top: 7px;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #1C202E;\n  border-radius: 10px;\n  overflow: hidden;\n\n  ", "\n  ", "\n"])), function (_ref6) {
+var Options = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  position: absolute;\n  min-width: 100%;\n  background: ", ";\n  margin-top: 7px;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #1C202E;\n  border-radius: 10px;\n  overflow: hidden;\n\n  ", "\n  ", "\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (_ref6) {
   var position = _ref6.position;
   return (position === null || position === void 0 ? void 0 : position.toLowerCase()) === 'left' && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    left: 0;\n    margin-left: -1px;\n    ", "\n  "])), function (props) {
     var _props$theme2;

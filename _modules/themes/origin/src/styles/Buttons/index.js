@@ -76,14 +76,22 @@ var Button = _styledComponents.default.button(_templateObject || (_templateObjec
   });
 }, function (_ref8) {
   var outline = _ref8.outline;
-  return outline && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background: #FFF;\n    color: #151824;\n    border-color: #CCC;\n\n    &:active {\n      background: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#FFF'));
+  return outline && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    background: ", ";\n    color: #151824;\n    border-color: #CCC;\n\n    &:active {\n      background: ", ";\n    }\n  "])), function (props) {
+    var _props$theme$colors;
+
+    return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+  }, (0, _polished.darken)(0.07, '#FFF'));
 }, function (_ref9) {
   var circle = _ref9.circle;
   return circle && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background: #CCC;\n  color: #FFF;\n  border-color: #CCC;\n  padding: 0;\n  width: 34px;\n  height: 34px;\n  line-height: 34px;\n  text-align: center;\n  border-radius: 50%;\n\n  &:active {\n    color: #FFF;\n    background: ", ";\n  }\n"])), (0, _polished.darken)(0.07, '#CCC'));
 }, function (_ref10) {
   var circle = _ref10.circle,
       outline = _ref10.outline;
-  return circle && outline && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  background: #FFF;\n  color: #CCC;\n  border-color: #CCC;\n  padding: 0;\n  width: 34px;\n  height: 34px;\n  line-height: 34px;\n  text-align: center;\n  border-radius: 50%;\n\n  ", "\n\n  &:active {\n    color: #FFF;\n    background: ", ";\n  }\n"])), function (_ref11) {
+  return circle && outline && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: #CCC;\n  border-color: #CCC;\n  padding: 0;\n  width: 34px;\n  height: 34px;\n  line-height: 34px;\n  text-align: center;\n  border-radius: 50%;\n\n  ", "\n\n  &:active {\n    color: #FFF;\n    background: ", ";\n  }\n"])), function (props) {
+    var _props$theme$colors2;
+
+    return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+  }, function (_ref11) {
     var active = _ref11.active;
     return active && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    background-color: #000;\n  "])));
   }, (0, _polished.darken)(0.07, '#CCC'));

@@ -17,7 +17,11 @@ var WrapperExportButton = _styledComponents.default.div(_templateObject || (_tem
 
 exports.WrapperExportButton = WrapperExportButton;
 
-var PopoverContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 0px;\n  margin-top: 5px;\n  padding: 5px 0;\n  background-color: #fff;\n  box-shadow: 0 6px 12px rgba(0,0,0,.175);\n"])));
+var PopoverContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 0px;\n  margin-top: 5px;\n  padding: 5px 0;\n  background: ", ";\n  box-shadow: 0 6px 12px rgba(0,0,0,.175);\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.PopoverContainer = PopoverContainer;
 

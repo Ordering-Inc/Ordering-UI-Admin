@@ -39,8 +39,12 @@ var WrapperTimezone = _styledComponents.default.div(_templateObject5 || (_templa
 
 exports.WrapperTimezone = WrapperTimezone;
 
-var WrapperGoogleAutoCompleteInput = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  label {\n    color: ", ";\n    margin-bottom: 5px;\n    font-size: 14px;\n  }\n  .input-autocomplete {\n    width: 100%;\n    background: #FFF;\n    border: 1px solid #DEE2E6;\n    border-radius: 8px;\n    font-size: 14px;\n    padding: 10px 15px;\n    outline: none;\n    ::placeholder {\n      color: #B1BCCC;\n    }\n\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      color: #B1BCCC;\n    }\n    &:focus {\n      border-color: ", ";\n    }\n\n    color: ", ";\n  }\n"])), function (props) {
+var WrapperGoogleAutoCompleteInput = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  label {\n    color: ", ";\n    margin-bottom: 5px;\n    font-size: 14px;\n  }\n  .input-autocomplete {\n    width: 100%;\n    background: ", ";\n    border: 1px solid #DEE2E6;\n    border-radius: 8px;\n    font-size: 14px;\n    padding: 10px 15px;\n    outline: none;\n    ::placeholder {\n      color: #B1BCCC;\n    }\n\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      color: #B1BCCC;\n    }\n    &:focus {\n      border-color: ", ";\n    }\n\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
+}, function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');
 }, function (props) {

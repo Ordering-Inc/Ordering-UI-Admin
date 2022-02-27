@@ -33,7 +33,11 @@ var OrdersCloseButton = _styledComponents.default.button(_templateObject3 || (_t
 
 exports.OrdersCloseButton = OrdersCloseButton;
 
-var WrapperOrdersAndUser = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 350px;\n  background: #fff;\n  left: 10px;\n  top: 15px;\n  height: 100%;\n  overflow: hidden;\n  box-shadow: 0px 3px 6px #00000029;\n  border-radius: 12px;\n\n  @media (max-width: 992px) {\n    position: absolute;\n    z-index: 10;\n    height: calc(100% - 30px);\n  }\n"])));
+var WrapperOrdersAndUser = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 350px;\n  background: ", ";\n  left: 10px;\n  top: 15px;\n  height: 100%;\n  overflow: hidden;\n  box-shadow: 0px 3px 6px #00000029;\n  border-radius: 12px;\n\n  @media (max-width: 992px) {\n    position: absolute;\n    z-index: 10;\n    height: calc(100% - 30px);\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.WrapperOrdersAndUser = WrapperOrdersAndUser;
 
@@ -60,6 +64,10 @@ var WrapperMessage = _styledComponents.default.div(_templateObject10 || (_templa
 
 exports.WrapperMessage = WrapperMessage;
 
-var MessageOrderDetailContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 420px;\n  border-left: 1px solid #D8D8D8;\n  overflow: auto;\n\n  @media(max-width: 1300px) {\n    display: block;\n    position: absolute;\n    right: 0px;\n    background: #fff;\n    height: calc(100% - 30px);\n    border: 1px solid #D8D8D8;\n    box-shadow: -3px 3px 6px #00000029;\n    z-index: 100;\n  }\n"])));
+var MessageOrderDetailContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: 420px;\n  border-left: 1px solid #D8D8D8;\n  overflow: auto;\n\n  @media(max-width: 1300px) {\n    display: block;\n    position: absolute;\n    right: 0px;\n    background: ", ";\n    height: calc(100% - 30px);\n    border: 1px solid #D8D8D8;\n    box-shadow: -3px 3px 6px #00000029;\n    z-index: 100;\n  }\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+});
 
 exports.MessageOrderDetailContainer = MessageOrderDetailContainer;

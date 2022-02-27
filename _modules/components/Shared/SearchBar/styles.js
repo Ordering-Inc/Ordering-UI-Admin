@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SearchContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n\n  svg {\n    position: absolute;\n    top: 10px;\n    ", "\n    font-size: 20px;\n    color: ", ";\n  }\n\n  input {\n    width: 250px;\n    border: 1px solid ", ";\n    border-radius: 22px;\n    outline: none;\n    padding: 10px 8px;\n    ", "\n    font-size: 14px;\n    color: ", ";\n\n    &::placeholder {\n      color: #909BA9;\n    }\n  }\n\n  ", "\n\n  @media (max-width: 1200px) {\n    flex: 1;\n\n    input {\n      width: 100%;\n      box-sizing: border-box;\n    }\n  }\n"])), function (props) {
+var SearchContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n\n  svg {\n    position: absolute;\n    top: 10px;\n    ", "\n    font-size: 20px;\n    color: ", ";\n  }\n\n  > input {\n    width: 250px;\n    border: 1px solid ", " !important;\n    background: ", ";\n    border-radius: 22px;\n    outline: none;\n    padding: 10px 8px;\n    ", "\n    font-size: 14px;\n    color: ", ";\n\n    &::placeholder {\n      color: #909BA9;\n    }\n  }\n\n  ", "\n\n  @media (max-width: 1200px) {\n    flex: 1;\n\n    input {\n      width: 100%;\n      box-sizing: border-box;\n    }\n  }\n"])), function (props) {
   var _props$theme;
 
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      right: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      left: 15px;\n    "])));
@@ -25,6 +25,10 @@ var SearchContainer = _styledComponents.default.div(_templateObject || (_templat
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.borderColor;
+}, function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 }, function (props) {
   var _props$theme2;
 

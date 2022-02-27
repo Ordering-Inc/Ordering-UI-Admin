@@ -30,7 +30,11 @@ var PopupWrap = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.PopupWrap = PopupWrap;
 
-var PopupDialog = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  background-color: #FFF;\n  padding: 20px;\n  width: 70%;\n  border-radius: 10px;\n"])));
+var PopupDialog = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  background: ", ";\n  padding: 20px;\n  width: 70%;\n  border-radius: 10px;\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.PopupDialog = PopupDialog;
 

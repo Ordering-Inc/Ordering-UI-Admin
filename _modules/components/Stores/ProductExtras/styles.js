@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProductExtrasContainer = exports.MoreContainer = exports.MainContainer = exports.Header = exports.ExtraOption = exports.ExtraAddContainer = exports.Details = exports.CheckboxContainer = exports.AddButton = void 0;
+exports.ProductExtrasContainer = exports.MoreContainer = exports.MainContainer = exports.Header = exports.ExtraOption = exports.ExtraAddForm = exports.Details = exports.CheckboxContainer = exports.AddButton = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -78,6 +78,6 @@ var AddButton = _styledComponents.default.div(_templateObject11 || (_templateObj
 
 exports.AddButton = AddButton;
 
-var ExtraAddContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  input {\n    width: 100%;\n    border: none;\n    outline: none;\n    border-bottom: 1px solid #E9ECEF;\n    padding: 12px 0;\n\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #B1BCCC;\n    }\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n  }\n"])));
+var ExtraAddForm = _styledComponents.default.form(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  input {\n    width: 100%;\n    border: none;\n    outline: none;\n    border-bottom: 1px solid #E9ECEF;\n    padding: 12px 0;\n\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #B1BCCC;\n    }\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n  }\n"])));
 
-exports.ExtraAddContainer = ExtraAddContainer;
+exports.ExtraAddForm = ExtraAddForm;

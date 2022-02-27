@@ -65,7 +65,8 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
       pointWallet = props.pointWallet,
       handleCheckBox = props.handleCheckBox,
       handleUpdateWalletBusiness = props.handleUpdateWalletBusiness,
-      handleUpdateBusinessList = props.handleUpdateBusinessList;
+      handleUpdateBusinessList = props.handleUpdateBusinessList,
+      handleChangeSwitch = props.handleChangeSwitch;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -78,44 +79,59 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
   var theme = (0, _styledComponents.useTheme)();
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width; // Change page
+      width = _useWindowSize.width;
 
-
-  var _useState = (0, _react.useState)(1),
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
       _useState2 = _slicedToArray(_useState, 2),
-      currentPage = _useState2[0],
-      setCurrentPage = _useState2[1];
+      alertState = _useState2[0],
+      setAlertState = _useState2[1]; // Change page
 
-  var _useState3 = (0, _react.useState)(10),
+
+  var _useState3 = (0, _react.useState)(1),
       _useState4 = _slicedToArray(_useState3, 2),
-      pagesPerPage = _useState4[0],
-      setPagesPerPage = _useState4[1]; // Get current products
+      currentPage = _useState4[0],
+      setCurrentPage = _useState4[1];
 
-
-  var _useState5 = (0, _react.useState)([]),
+  var _useState5 = (0, _react.useState)(10),
       _useState6 = _slicedToArray(_useState5, 2),
-      currentPages = _useState6[0],
-      setCurrentPages = _useState6[1];
+      pagesPerPage = _useState6[0],
+      setPagesPerPage = _useState6[1]; // Get current products
 
-  var _useState7 = (0, _react.useState)(null),
+
+  var _useState7 = (0, _react.useState)([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      totalPages = _useState8[0],
-      setTotalPages = _useState8[1];
+      currentPages = _useState8[0],
+      setCurrentPages = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(false),
+  var _useState9 = (0, _react.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      extraOpen = _useState10[0],
-      setExtraOpen = _useState10[1];
+      totalPages = _useState10[0],
+      setTotalPages = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(null),
+  var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      selectedBusiness = _useState12[0],
-      setSelectedBusiness = _useState12[1];
+      extraOpen = _useState12[0],
+      setExtraOpen = _useState12[1];
 
-  var _useState13 = (0, _react.useState)(''),
+  var _useState13 = (0, _react.useState)(null),
       _useState14 = _slicedToArray(_useState13, 2),
-      searchVal = _useState14[0],
-      setSearchVal = _useState14[1];
+      selectedBusiness = _useState14[0],
+      setSelectedBusiness = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      searchVal = _useState16[0],
+      setSearchVal = _useState16[1];
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
 
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);
@@ -128,7 +144,16 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
   };
 
   var handleClickBusiness = function handleClickBusiness(business, e) {
-    if (e.target.closest('#accumulates') || e.target.closest('#redeems')) return;
+    if (e.target.closest('.accumulates') || e.target.closest('.redeems') || e.target.closest('.wallet_enabled')) return;
+
+    if (!(business !== null && business !== void 0 && business.wallet_enabled)) {
+      setAlertState({
+        open: true,
+        content: t('DISABLED_BUSINESS', 'Disabled business')
+      });
+      return;
+    }
+
     setSelectedBusiness(business);
     setExtraOpen(true);
 
@@ -143,9 +168,16 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     handleParentSidebarMove(0);
   };
 
-  var updateBusinessList = function updateBusinessList(business) {
-    setSelectedBusiness(_objectSpread(_objectSpread({}, selectedBusiness), business));
-    handleUpdateBusinessList(business);
+  var updateBusinessList = function updateBusinessList(changes) {
+    var updatedBusiness = _objectSpread(_objectSpread({}, selectedBusiness), changes);
+
+    setSelectedBusiness(updatedBusiness);
+    handleUpdateBusinessList(selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.id, changes);
+  };
+
+  var handleUpdateStatus = function handleUpdateStatus(businessId, enabled) {
+    if (!enabled) handleCloseBusinessDetail();
+    handleChangeSwitch && handleChangeSwitch(businessId, enabled);
   };
 
   (0, _react.useEffect)(function () {
@@ -162,7 +194,7 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     if ((businessList === null || businessList === void 0 ? void 0 : businessList.businesses.length) > 0) {
       if (searchVal) {
         filteredBusinessList = businessList.businesses.filter(function (business) {
-          return business === null || business === void 0 ? void 0 : business.business_name.toLowerCase().includes(searchVal.toLowerCase());
+          return business === null || business === void 0 ? void 0 : business.name.toLowerCase().includes(searchVal.toLowerCase());
         });
       } else {
         filteredBusinessList = _toConsumableArray(businessList.businesses);
@@ -200,10 +232,13 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     width: 100,
     height: 17
   })), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 60,
+    height: 17
+  })), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80,
     height: 17
   })), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 100,
+    width: 90,
     height: 17
   })), /*#__PURE__*/_react.default.createElement("th", null))), _toConsumableArray(Array(7).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.TBoday, {
@@ -216,6 +251,9 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 80,
       height: 15
+    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 40,
+      height: 20
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 20,
       height: 20
@@ -233,7 +271,7 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     })))));
   })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
     className: "business-info"
-  }, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement("th", null, t('Redeeem', 'Redeeem')), /*#__PURE__*/_react.default.createElement("th", null, t('ACCUMULATION', 'Accumulation')), /*#__PURE__*/_react.default.createElement("th", null))), currentPages.map(function (business, i) {
+  }, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement("th", null, t('STATUS', 'Status')), /*#__PURE__*/_react.default.createElement("th", null, t('Redeeem', 'Redeeem')), /*#__PURE__*/_react.default.createElement("th", null, t('ACCUMULATION', 'Accumulation')), /*#__PURE__*/_react.default.createElement("th", null))), currentPages.map(function (business, i) {
     var _theme$images, _theme$images$dummies;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.TBoday, {
@@ -243,20 +281,30 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
         return handleClickBusiness(business, e);
       }
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.business_logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_120,c_limit')
-    })), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : business.business_name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      defaultChecked: business === null || business === void 0 ? void 0 : business.redeems,
-      id: "redeems",
-      onClick: function onClick(e) {
-        return handleCheckBox(business.business_id, 'redeems', e.target.checked);
+      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_120,c_limit')
+    })), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : business.name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+      className: "wallet_enabled",
+      defaultChecked: business === null || business === void 0 ? void 0 : business.wallet_enabled,
+      onChange: function onChange(val) {
+        return handleUpdateStatus(business.id, val);
       }
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      defaultChecked: business === null || business === void 0 ? void 0 : business.accumulates,
-      id: "accumulates",
+    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxInnerWrapper, {
       onClick: function onClick(e) {
-        return handleCheckBox(business.business_id, 'accumulates', e.target.checked);
-      }
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ModifiedWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), business.name === 'Grilled' && /*#__PURE__*/_react.default.createElement("span", null, t('MODIFIED', 'Modified'))))));
+        return handleCheckBox(business.id, 'redeems', !(business !== null && business !== void 0 && business.redeems));
+      },
+      className: "redeems",
+      noClick: !(business !== null && business !== void 0 && business.wallet_enabled)
+    }, business !== null && business !== void 0 && business.redeems ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
+      className: "fill"
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxInnerWrapper, {
+      onClick: function onClick(e) {
+        return handleCheckBox(business.id, 'accumulates', !(business !== null && business !== void 0 && business.accumulates));
+      },
+      className: "accumulates",
+      noClick: !(business !== null && business !== void 0 && business.wallet_enabled)
+    }, business !== null && business !== void 0 && business.accumulates ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
+      className: "fill"
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ModifiedWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)))));
   }))), (currentPages === null || currentPages === void 0 ? void 0 : currentPages.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
@@ -285,7 +333,19 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     handleUpdateWalletBusiness: handleUpdateWalletBusiness,
     handleUpdateBusinessList: updateBusinessList,
     isBusiness: true
-  }))));
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('POINTS_WALLET', 'Points wallet'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 var PointsWalletBusinessList = function PointsWalletBusinessList(props) {

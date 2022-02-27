@@ -47,13 +47,6 @@ var UserTypeSelector = function UserTypeSelector(props) {
     }, t('ADMINISTRATOR', 'Administrator')),
     disabled: !isPrimary && defaultUserType === 0
   }, {
-    value: 1,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('CITY_MANAGER', 'City manager')),
-    showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, {
-      padding: true
-    }, t('CITY_MANAGER', 'City manager')),
-    disabled: !isPrimary && defaultUserType === 1
-  }, {
     value: 2,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('BUSINESS_OWNER', 'Business owner')),
     showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, {

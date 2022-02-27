@@ -37,7 +37,11 @@ var TypeSelectWrapper = _styledComponents.default.div(_templateObject3 || (_temp
 
 exports.TypeSelectWrapper = TypeSelectWrapper;
 
-var WrapperMap = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 300px;\n  display: flex;\n  justify-content: center;\n  box-sizing: border-box;\n  margin: 20px 0;\n  position: relative;\n  > div {\n    position: relative !important; \n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 8px;\n  }\n\n  > button {\n    position: absolute;\n    font-size: 14px;\n    padding: 0 5px;\n    background: #FFF;\n    top: 10px;\n    z-index: 10;\n    border: none;\n    box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px;\n    color: ", ";\n    ", "\n    &:hover {\n      background: #eee;\n    }\n  }\n"])), function (props) {
+var WrapperMap = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 300px;\n  display: flex;\n  justify-content: center;\n  box-sizing: border-box;\n  margin: 20px 0;\n  position: relative;\n  > div {\n    position: relative !important; \n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 8px;\n  }\n\n  > button {\n    position: absolute;\n    font-size: 14px;\n    padding: 0 5px;\n    background: ", ";\n    top: 10px;\n    z-index: 10;\n    border: none;\n    box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px;\n    color: ", ";\n    ", "\n    &:hover {\n      background: #eee;\n    }\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme;

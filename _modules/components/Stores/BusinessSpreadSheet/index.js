@@ -120,6 +120,7 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
     handleoutsideClickDeselects: handleoutsideClickDeselects,
     isRemove: true
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    width: "700px",
     title: t('PRODUCT EDIT', 'Product Edit'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

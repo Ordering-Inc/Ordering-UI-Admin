@@ -32,7 +32,11 @@ var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObje
 
 exports.HeaderItem = HeaderItem;
 
-var PopoverBody = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background-color: #FFF;\n  padding: 15px 0px;\n  border-radius: 10px;\n  max-width: 250px;\n  z-index: 1001;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 6px;\n\n  ", "\n\n  > button {\n    width: calc(100% - 20px);\n    margin: 5px 10px 0 10px;\n  }\n"])), function (props) {
+var PopoverBody = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background: ", ";\n  padding: 15px 0px;\n  border-radius: 10px;\n  max-width: 250px;\n  z-index: 1001;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 6px;\n\n  ", "\n\n  > button {\n    width: calc(100% - 20px);\n    margin: 5px 10px 0 10px;\n  }\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+}, function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    left: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    right: 0px;\n  "])));
@@ -51,13 +55,13 @@ var PopoverList = _styledComponents.default.div(_templateObject9 || (_templateOb
 exports.PopoverList = PopoverList;
 
 var CopyItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 7px 10px;\n  cursor: pointer;\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n  }\n  span {\n    color: ", ";\n    white-space: nowrap;\n    font-size: 14px;\n    font-weight: 400;\n    ", "\n  }\n\n  ", "\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n"])), function (props) {
-  var _props$theme$colors2;
-
-  return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
-}, function (props) {
   var _props$theme$colors3;
 
-  return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.lightGray;
+  return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.headingColor;
+}, function (props) {
+  var _props$theme$colors4;
+
+  return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.lightGray;
 }, function (props) {
   var _props$theme3;
 
@@ -65,18 +69,18 @@ var CopyItem = _styledComponents.default.div(_templateObject10 || (_templateObje
 }, function (_ref2) {
   var isChecked = _ref2.isChecked;
   return isChecked && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
-    var _props$theme$colors4;
+    var _props$theme$colors5;
 
-    return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.primary;
+    return (_props$theme$colors5 = props.theme.colors) === null || _props$theme$colors5 === void 0 ? void 0 : _props$theme$colors5.primary;
   });
 }, function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref3) {
   var disabled = _ref3.disabled;
   return disabled && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    svg {\n      opacity: 0.5;\n      color: ", ";\n    }\n  "])), function (props) {
-    var _props$theme$colors5;
+    var _props$theme$colors6;
 
-    return (_props$theme$colors5 = props.theme.colors) === null || _props$theme$colors5 === void 0 ? void 0 : _props$theme$colors5.primary;
+    return (_props$theme$colors6 = props.theme.colors) === null || _props$theme$colors6 === void 0 ? void 0 : _props$theme$colors6.primary;
   });
 });
 

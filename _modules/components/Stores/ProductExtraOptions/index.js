@@ -271,7 +271,7 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     isHeader: true
   }, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles2.MinimumPurchase, {
     isHeader: true
-  }, t('MIN', 'Min')), /*#__PURE__*/_react.default.createElement(_styles2.MaxPurchase, {
+  }, t('MINIMUM', 'Min')), /*#__PURE__*/_react.default.createElement(_styles2.MaxPurchase, {
     isHeader: true
   }, t('MAX', 'Max'))), ((_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options) && ((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles2.OptionItem, {

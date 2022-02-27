@@ -165,7 +165,7 @@ var Send = _styledComponents.default.form(_templateObject40 || (_templateObject4
 
 exports.Send = Send;
 
-var WrapperSendInput = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  box-sizing: border-box;\n\n  > input {\n    background-color: ", ";\n    border: none;\n  }\n"])), function (props) {
+var WrapperSendInput = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  box-sizing: border-box;\n\n  > input {\n    background-color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 });
 
@@ -175,7 +175,11 @@ var SendImage = _styledComponents.default.label(_templateObject42 || (_templateO
 
 exports.SendImage = SendImage;
 
-var WrapperDeleteImage = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 5px;\n  right: 10px;\n\n  img {\n    width: 30px;\n    height: 30px;\n    &:disabled {\n    cursor: not-allowed;\n    }\n    border-radius: 8px;\n  }\n\n  svg {\n    color: black;\n  }\n\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: white;\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n  }\n"])));
+var WrapperDeleteImage = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 5px;\n  right: 10px;\n\n  img {\n    width: 30px;\n    height: 30px;\n    &:disabled {\n    cursor: not-allowed;\n    }\n    border-radius: 8px;\n  }\n\n  svg {\n    color: black;\n  }\n\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: ", ";\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.WrapperDeleteImage = WrapperDeleteImage;
 
@@ -194,13 +198,13 @@ exports.WrapperHitoryHeader = WrapperHitoryHeader;
 var TabItem = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  padding: 5px 10px;\n  cursor: pointer;\n  text-align: center;\n  color: #909BA9;\n  \n  ", "\n\n  @media (max-width: 576px) {\n    padding: 5px 10px;\n    font-size: 14px;\n  }\n"])), function (_ref5) {
   var active = _ref5.active;
   return active && (0, _styledComponents.css)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n    border-bottom: 1px solid ", ";\n    color: ", ";\n    font-weight: 600;\n  "])), function (props) {
-    var _props$theme$colors;
-
-    return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
-  }, function (props) {
     var _props$theme$colors2;
 
     return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
+  }, function (props) {
+    var _props$theme$colors3;
+
+    return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.headingColor;
   });
 });
 

@@ -42,7 +42,7 @@ var PointsWallet = function PointsWallet(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)('business'),
+  var _useState = (0, _react.useState)('general'),
       _useState2 = _slicedToArray(_useState, 2),
       selectedOption = _useState2[0],
       setSelectedOption = _useState2[1];

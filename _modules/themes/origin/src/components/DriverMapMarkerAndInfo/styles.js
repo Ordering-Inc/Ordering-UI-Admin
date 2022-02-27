@@ -23,7 +23,11 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var WrapperMapMarker = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 40px;\n  height: 40px;\n  background: #fff;\n  border: 5px solid #F79B16;\n  box-shadow: 0px 3px 6px #00000029;\n  border-radius: 6px;\n  position: absolute;\n  transform: translate(-50%, -50%);\n  z-index: 1;\n\n  ", "\n"])), function (_ref) {
+var WrapperMapMarker = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 40px;\n  height: 40px;\n  background: ", ";\n  border: 5px solid #F79B16;\n  box-shadow: 0px 3px 6px #00000029;\n  border-radius: 6px;\n  position: absolute;\n  transform: translate(-50%, -50%);\n  z-index: 1;\n\n  ", "\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (_ref) {
   var offline = _ref.offline;
   return offline && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    border: 5px solid #9D9B9B;\n  "])));
 });
@@ -42,7 +46,11 @@ var MapMarkerImg = function MapMarkerImg(props) {
 
 exports.MapMarkerImg = MapMarkerImg;
 
-var DriverInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  background: #fff;\n  position: absolute;\n  border-radius: 5px;\n  padding: 10px;\n  row-gap: 5px;\n  z-index: 2;\n  box-shadow: 0px 2px 2px #00000029;\n  display: flex;\n  flex-direction: column;\n  row-gap: 5px;\n"])));
+var DriverInfo = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  background: ", ";\n  position: absolute;\n  border-radius: 5px;\n  padding: 10px;\n  row-gap: 5px;\n  z-index: 2;\n  box-shadow: 0px 2px 2px #00000029;\n  display: flex;\n  flex-direction: column;\n  row-gap: 5px;\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+});
 
 exports.DriverInfo = DriverInfo;
 

@@ -47,7 +47,11 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
 
 exports.Option = Option;
 
-var Options = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  min-width: 100%;\n  background-color: #fff;\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #E9ECEF;\n  border-radius: 7.6px;\n  overflow: hidden;\n\n  ", "\n  ", "\n\n  ", "\n"])), function (_ref7) {
+var Options = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  min-width: 100%;\n  background: ", ";\n  z-index: 10000;\n  border-width: 1px;\n  border-style: solid;\n  border-color: #E9ECEF;\n  border-radius: 7.6px;\n  overflow: hidden;\n\n  ", "\n  ", "\n\n  ", "\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (_ref7) {
   var position = _ref7.position;
   return (position === null || position === void 0 ? void 0 : position.toLowerCase()) === 'left' && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    left: 0;\n    margin-left: -1px;\n    ", "\n  "])), function (props) {
     var _props$theme2;
@@ -117,7 +121,11 @@ var SelectImage = _styledComponents.default.div(_templateObject23 || (_templateO
 
 exports.SelectImage = SelectImage;
 
-var MultiSelectOption = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  position: relative;\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: white;\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n    top: 11px;\n    right: 15px;\n  }\n"])));
+var MultiSelectOption = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  position: relative;\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: ", ";\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n    top: 11px;\n    right: 15px;\n  }\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+});
 
 exports.MultiSelectOption = MultiSelectOption;
 

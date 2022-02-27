@@ -21,7 +21,11 @@ var DriversDashboardContainer = _styledComponents.default.div(_templateObject ||
 
 exports.DriversDashboardContainer = DriversDashboardContainer;
 
-var FilterContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: #FFF;\n  z-index: 100;\n"])));
+var FilterContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 0px;\n  background: ", ";\n  z-index: 100;\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.FilterContainer = FilterContainer;
 

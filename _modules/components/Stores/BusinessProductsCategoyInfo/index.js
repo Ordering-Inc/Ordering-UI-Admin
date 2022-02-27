@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
-  var _configState$configs, _configState$configs$, _formState$changes, _formState$changes2, _formState$changes3, _formState$result3, _formState$result3$re, _formState$changes4, _formState$changes5;
+  var _configState$configs, _configState$configs$, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result3, _formState$result3$re, _formState$changes6, _formState$changes7;
 
   var formState = props.formState,
       handlechangeImage = props.handlechangeImage,
@@ -185,10 +185,12 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   }, [parentCategories]);
   (0, _react.useEffect)(function () {
     if (autoGenerateCode.isAutoGenerate) {
+      var _formState$changes;
+
       var generateCode = {
         target: {
           name: 'slug',
-          value: formState.changes.name ? stringToSlug(formState.changes.name) : stringToSlug(categorySelected.name)
+          value: (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.name ? stringToSlug(formState.changes.name) : stringToSlug(categorySelected.name)
         }
       };
       setAutoGenerate(_objectSpread(_objectSpread({}, autoGenerateCode), {}, {
@@ -220,14 +222,14 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState === null || formState === void 0 ? void 0 : formState.loading
-  }, formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.image,
+  }, formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.image ? /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.image,
     alt: "business type image",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CATEGORY_NAME', 'Category name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('ENTER_CATEGORY_NAME', 'Enter a category name'),
     name: "name",
-    defaultValue: formState === null || formState === void 0 ? void 0 : formState.changes.name,
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -236,11 +238,11 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.slug) || (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.slug) || ''
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.slug) || (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.slug) || ''
   }), /*#__PURE__*/_react.default.createElement(_styles2.GenerateButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "primary",
+    color: "lightPrimary",
     borderRadius: "7.6px",
-    disabled: formState.loading || !((_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.name),
+    disabled: formState.loading || !((_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.name),
     onClick: function onClick() {
       return setAutoGenerate(_objectSpread(_objectSpread({}, autoGenerateCode), {}, {
         isAutoGenerate: true
@@ -256,7 +258,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     style: {
       fontSize: 15
     }
-  }, t('ENABLE_PARENT_CATEGORY', 'Allow parent category')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  }, t('ADD_AS_SUBCATEGORY', 'Add as subcategory')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: false,
     onChange: function onChange(val) {
       return handleChangeCheckBox({
@@ -266,7 +268,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   })), !isAddMode && categorySelected && parentCategories.length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ParentCategorySelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PARENT_CATEGORY', 'Parent category')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_PARENT_CATEGORY', 'Select a parent category'),
     options: parentCategoriesOptions,
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.parent_category_id,
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.parent_category_id,
     onChange: function onChange(val) {
       return handleChangeItem({
         parent_category_id: val

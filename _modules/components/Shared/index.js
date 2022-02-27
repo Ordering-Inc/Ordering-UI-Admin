@@ -150,7 +150,7 @@ Object.defineProperty(exports, "SpinnerLoader", {
 Object.defineProperty(exports, "SpreadSheetEditor", {
   enumerable: true,
   get: function get() {
-    return _SpreadSheetEditor.SpreadSheetEditor;
+    return _SpreadSheetEditor.default;
   }
 });
 
@@ -198,6 +198,8 @@ var _SideBar = require("./SideBar");
 
 var _SpinnerLoader = require("./SpinnerLoader");
 
-var _SpreadSheetEditor = require("./SpreadSheetEditor");
+var _SpreadSheetEditor = _interopRequireDefault(require("./SpreadSheetEditor"));
 
 var _ProgressRing = require("./ProgressRing");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

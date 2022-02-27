@@ -47,8 +47,12 @@ var ActionButtons = _styledComponents.default.div(_templateObject5 || (_template
 
 exports.ActionButtons = ActionButtons;
 
-var NewImporterWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: fixed;\n  width: 100vw;\n  top: 0;\n  height: 100%;\n  overflow-y: scroll;\n  padding: 35px 20px 20px;\n  box-sizing: border-box;\n  right: 0;\n  border-left: 1px solid ", ";\n  background-color: #fff;\n  ", "\n  @media (min-width: 768px) {\n    width: 500px;\n  }\n"])), function (props) {
+var NewImporterWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: fixed;\n  width: 100vw;\n  top: 0;\n  height: 100%;\n  overflow-y: scroll;\n  padding: 35px 20px 20px;\n  box-sizing: border-box;\n  right: 0;\n  border-left: 1px solid ", ";\n  background: ", ";\n  ", "\n  @media (min-width: 768px) {\n    width: 500px;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
+}, function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 }, function (props) {
   var _props$theme4;
 
@@ -73,6 +77,10 @@ var ButtonAddNewImporter = _styledComponents.default.div(_templateObject14 || (_
 
 exports.ButtonAddNewImporter = ButtonAddNewImporter;
 
-var ImportCSVForm = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 500px;\n    height: 100%;\n    right: 0;\n    top: 0;\n    background: #fff;\n"])));
+var ImportCSVForm = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 500px;\n    height: 100%;\n    right: 0;\n    top: 0;\n    background: ", ";\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+});
 
 exports.ImportCSVForm = ImportCSVForm;

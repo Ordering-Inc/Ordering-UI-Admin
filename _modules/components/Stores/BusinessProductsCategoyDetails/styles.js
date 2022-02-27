@@ -84,20 +84,12 @@ var RightHeader = _styledComponents.default.div(_templateObject15 || (_templateO
 
 exports.RightHeader = RightHeader;
 
-var ActionSelectorWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  button {\n    display: flex;\n    background: ", ";\n    border: none;\n    padding: 5px;\n    border-radius: 8px;\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: ", ";\n      font-size: 20px;\n    }\n    &:after {\n      display: none;\n    }\n    &:hover {\n      background: ", " !important;\n    }\n    &:active {\n      background: ", " !important;\n    }\n  }\n  .show {\n    button {\n      background: ", " !important;\n    }\n    >div {\n      border: 1px solid ", ";\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n  > div {\n    > div {\n      border-radius: 8px;\n      .dropdown-item {\n        font-size: 12px;\n        color: ", ";\n      }\n      .dropdown-item:last-child {\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.secundary;
-}, function (props) {
-  return props.theme.colors.headingColor;
-}, function (props) {
-  return (0, _polished.darken)(0.04, props.theme.colors.secundary);
-}, function (props) {
-  return (0, _polished.darken)(0.1, props.theme.colors.secundary);
-}, function (props) {
-  return props.theme.colors.secundary;
-}, function (props) {
+var ActionSelectorWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  button {\n    display: flex;\n    background: transparent !important;\n    border: none;\n    padding: 5px;\n    border-radius: 8px;\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: #B1BCCC;\n      font-size: 20px;\n    }\n    &:after {\n      display: none;\n    }\n    &:hover {\n      background: #1507260a !important;\n      > svg {\n        color:  #151b26;\n      }\n    }\n    &:active {\n      background: #1507261a !important;\n    }\n  }\n  .show {\n    >div {\n      border: 1px solid ", ";\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n  > div {\n    > div {\n      border-radius: 8px;\n      .dropdown-item {\n        font-size: 12px;\n        color: ", ";\n        &:active {\n          background: ", " !important;\n        }\n      }\n      .dropdown-item:last-child {\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.headingColor;
+}, function (props) {
+  return (0, _polished.darken)(0.1, props.theme.colors.secundary);
 }, function (props) {
   return props.theme.colors.danger;
 });

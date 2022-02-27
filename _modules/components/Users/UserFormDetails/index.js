@@ -25,6 +25,8 @@ var _utils = require("../../../utils");
 
 var _styles = require("../../../styles");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -108,6 +110,11 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       user = _useState8[0],
       setUser = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      passwordSee = _useState10[0],
+      setPasswordSee = _useState10[1];
 
   (0, _react.useEffect)(function () {
     setUser(userData);
@@ -365,8 +372,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber
-  }), !isCheckout && /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "password",
+  }), !isCheckout && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: !passwordSee ? 'password' : 'text',
     name: "password",
     className: "form",
     placeholder: t('FRONT_VISUALS_PASSWORD', 'Password'),
@@ -378,7 +385,11 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
     })
-  }), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.TogglePassword, {
+    onClick: function onClick() {
+      return setPasswordSee(!passwordSee);
+    }
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, MidElement);

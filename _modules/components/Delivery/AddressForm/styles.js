@@ -23,7 +23,11 @@ var FormActions = _styledComponents.default.div(_templateObject || (_templateObj
 
 exports.FormActions = FormActions;
 
-var FormControl = _styledComponents.default.form(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n\n  input {\n    box-sizing: border-box;\n    height: 43px;\n    width: 100%;\n    &::placeholder{\n      color: #B1BCCC;\n    }\n  }\n\n  textarea {\n    width: 100%;\n  }\n\n  .input-autocomplete {\n    width: 100%;\n    background: #FFF;\n    border: 1px solid #DEE2E6;\n    border-radius: 8px;\n    font-size: 14px;\n    padding: 7px 15px;\n    outline: none;\n    color: ", ";\n    ::placeholder {\n      color: #B1BCCC;\n    }\n\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      color: #B1BCCC;\n    }\n    &:focus {\n      border-color: ", ";\n    }\n  }\n\n  @media (min-width: 481px) {\n    padding: 10px 0;\n  }\n"])), function (props) {
+var FormControl = _styledComponents.default.form(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n\n  input {\n    box-sizing: border-box;\n    height: 43px;\n    width: 100%;\n    &::placeholder{\n      color: #B1BCCC;\n    }\n  }\n\n  textarea {\n    width: 100%;\n  }\n\n  .input-autocomplete {\n    width: 100%;\n    background: ", ";\n    border: 1px solid #DEE2E6;\n    border-radius: 8px;\n    font-size: 14px;\n    padding: 7px 15px;\n    outline: none;\n    color: ", ";\n    ::placeholder {\n      color: #B1BCCC;\n    }\n\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      color: #B1BCCC;\n    }\n    &:focus {\n      border-color: ", ";\n    }\n  }\n\n  @media (min-width: 481px) {\n    padding: 10px 0;\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (props) {
   return props.theme.colors.headingColor;
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');

@@ -175,14 +175,19 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
         return handleOpenExtraDetails(extra);
       }
     }, t('DETAILS', 'Details'))));
-  })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ExtraAddContainer, {
-    ref: conatinerRef
+  })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ExtraAddForm, {
+    ref: conatinerRef,
+    onSubmit: function onSubmit(e) {
+      e.preventDefault();
+      handleAddExtra();
+    }
   }, /*#__PURE__*/_react.default.createElement("input", {
     name: "name",
     placeholder: t('WRITE_A_NAME', 'Write a name'),
     onChange: function onChange(e) {
       return handleChangeAddExtraInput(e);
-    }
+    },
+    autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.AddButton, {
     onClick: function onClick() {
       return handleOpenAddForm();

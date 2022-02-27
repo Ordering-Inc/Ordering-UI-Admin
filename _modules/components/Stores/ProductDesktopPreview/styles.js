@@ -121,8 +121,12 @@ var ProductEdition = _styledComponents.default.div(_templateObject19 || (_templa
 
 exports.ProductEdition = ProductEdition;
 
-var ProductTabContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  position: sticky;\n  top: 50px;\n  background: white;\n  z-index: 900;\n\n  @media (min-width: 769px) {\n    top: -20px;\n  }\n"])), function (props) {
+var ProductTabContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  position: sticky;\n  top: 50px;\n  background: ", ";\n  z-index: 900;\n\n  @media (min-width: 769px) {\n    top: -20px;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
+}, function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 });
 
 exports.ProductTabContainer = ProductTabContainer;
@@ -175,7 +179,11 @@ var OptionContainer = _styledComponents.default.div(_templateObject34 || (_templ
 
 exports.OptionContainer = OptionContainer;
 
-var OptionWrapHeader = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  padding: 15px 0px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background-color: #FFF;\n"])));
+var OptionWrapHeader = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  padding: 15px 0px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background: ", ";\n"])), function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
+});
 
 exports.OptionWrapHeader = OptionWrapHeader;
 
@@ -271,11 +279,15 @@ var SuboptionPrice = _styledComponents.default.div(_templateObject53 || (_templa
 
 exports.SuboptionPrice = SuboptionPrice;
 
-var ProductActions = _styledComponents.default.div(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  ", "\n  width: 100%;\n  z-index: 999;\n  border-top: 1px solid ", ";\n  border-radius: 0 0 8px 8px;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background-color: #FFF;\n\n  div.price {\n    font-weight: 600;\n    font-size: 14px;\n  }\n\n  div.incdec-control {\n    width: 50%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    svg {\n      width: 22px;\n      height: 22px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    width: 90%;\n    margin-top: 10px;\n    position: relative;\n    font-size: 12px;\n\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 577px) {\n    position: sticky;\n  }\n\n  @media (min-width: 1200px) {\n    ", "\n    flex-direction: row;\n    justify-content: space-between;\n\n    div.price {\n      width: 25%;\n    }\n\n    button.add {\n      width: 40%;\n      margin-top: 0;\n    }\n\n    div.incdec-control {\n      width: 30%;\n    }\n  }\n"])), function (_ref13) {
+var ProductActions = _styledComponents.default.div(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  ", "\n  width: 100%;\n  z-index: 999;\n  border-top: 1px solid ", ";\n  border-radius: 0 0 8px 8px;\n  position: fixed;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  background: ", ";\n\n  div.price {\n    font-weight: 600;\n    font-size: 14px;\n  }\n\n  div.incdec-control {\n    width: 50%;\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n\n    svg {\n      width: 22px;\n      height: 22px;\n      cursor: pointer;\n    }\n  }\n  div:last-child {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  button:disabled,\n  button.disabled,\n  svg.disabled {\n    opacity: 0.5;\n  }\n\n  svg.disabled {\n    pointer-events: none;\n  }\n\n  button.add {\n    width: 90%;\n    margin-top: 10px;\n    position: relative;\n    font-size: 12px;\n\n    &.soldout {\n      width: 100%;\n      pointer-events: none;\n    }\n  }\n\n  @media (min-width: 577px) {\n    position: sticky;\n  }\n\n  @media (min-width: 1200px) {\n    ", "\n    flex-direction: row;\n    justify-content: space-between;\n\n    div.price {\n      width: 25%;\n    }\n\n    button.add {\n      width: 40%;\n      margin-top: 0;\n    }\n\n    div.incdec-control {\n      width: 30%;\n    }\n  }\n"])), function (_ref13) {
   var isMobileView = _ref13.isMobileView;
   return isMobileView ? (0, _styledComponents.css)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["\n    padding: 15px;\n    button.add {\n      padding: 0px 5px;\n    }\n  "]))) : (0, _styledComponents.css)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["\n    padding: 10px 15px;\n    button.add {\n      padding: 5px 10px;\n    }\n  "])));
 }, function (props) {
   return props.theme.colors.borderColor;
+}, function (props) {
+  var _props$theme$colors3;
+
+  return ((_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.backgroundPage) || '#FFF';
 }, function (_ref14) {
   var isMobileView = _ref14.isMobileView;
   return isMobileView ? (0, _styledComponents.css)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["\n      bottom: 0;\n    "]))) : (0, _styledComponents.css)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["\n      bottom: -21px;\n    "])));

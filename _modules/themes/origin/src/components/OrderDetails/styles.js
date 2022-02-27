@@ -227,7 +227,11 @@ var PrintButtonContainer = _styledComponents.default.div(_templateObject42 || (_
 
 exports.PrintButtonContainer = PrintButtonContainer;
 
-var ChatContainer = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0px;\n  width: 100%;\n  background: #fff;\n  height: 100%;\n  z-index: 1000;\n  box-sizing: border-box;\n  border: 1px solid #ccc;\n  overflow: hidden;\n  border-radius: 7px;\n"])));
+var ChatContainer = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0px;\n  width: 100%;\n  background: ", ";\n  height: 100%;\n  z-index: 1000;\n  box-sizing: border-box;\n  border: 1px solid #ccc;\n  overflow: hidden;\n  border-radius: 7px;\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.ChatContainer = ChatContainer;
 

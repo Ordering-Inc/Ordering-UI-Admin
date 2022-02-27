@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperImage = exports.TableWrapper = exports.TBoday = exports.SearchWrapper = exports.ModifiedWrapper = exports.Image = exports.Container = exports.CheckBoxWrapper = exports.BusinessTable = exports.BusinessSelectOption = exports.BusinessInfoWrapper = void 0;
+exports.WrapperImage = exports.TableWrapper = exports.TBoday = exports.SearchWrapper = exports.ModifiedWrapper = exports.Image = exports.Container = exports.CheckBoxWrapper = exports.CheckBoxInnerWrapper = exports.BusinessTable = exports.BusinessSelectOption = exports.BusinessInfoWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -91,7 +91,11 @@ var Image = function Image(props) {
 
 exports.Image = Image;
 
-var CheckBoxWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"])));
+var CheckBoxWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  svg {\n    color: ", ";\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (props) {
+  return props.theme.colors.primary;
+});
 
 exports.CheckBoxWrapper = CheckBoxWrapper;
 
@@ -105,3 +109,10 @@ var ModifiedWrapper = _styledComponents.default.div(_templateObject16 || (_templ
 });
 
 exports.ModifiedWrapper = ModifiedWrapper;
+
+var CheckBoxInnerWrapper = _styledComponents.default.span(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref4) {
+  var noClick = _ref4.noClick;
+  return noClick && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
+});
+
+exports.CheckBoxInnerWrapper = CheckBoxInnerWrapper;

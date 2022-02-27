@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SpreadSheetEditor = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -62,7 +62,7 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
 
   var hotTableRef = (0, _react.useRef)(null);
   var settings = {
-    data: hotTableData,
+    // data: hotTableData,
     licenseKey: 'non-commercial-and-evaluation',
     autoRowSize: false,
     autoColumnSize: false,
@@ -144,10 +144,20 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
 
       if (celltype === 'numeric') {
         var evt = e || window.event;
-        var key = evt.charCode || evt.keyCode || 0;
+        var key = evt.charCode || evt.keyCode || 0; // check for cut and paste
+
+        var isClipboard = false;
+        var ctrlDown = evt.ctrlKey || evt.metaKey; // Mac support
+        // Check for Alt+Gr (http://en.wikipedia.org/wiki/AltGr_key)
+
+        if (ctrlDown && evt.altKey) isClipboard = false; // Check for ctrl+c, v and x
+        else if (ctrlDown && key === 67) isClipboard = true; // c
+        else if (ctrlDown && key === 86) isClipboard = true; // v
+        else if (ctrlDown && key === 88) isClipboard = true; // x
+
         var isNumeric = key === 8 || key === 9 || key === 13 || key === 46 || key === 110 || key === 116 || key === 123 || key === 189 || key === 190 || key >= 35 && key <= 40 || key >= 48 && key <= 57 || key >= 96 && key <= 105;
 
-        if (!isNumeric) {
+        if (!isNumeric && !isClipboard) {
           e.stopImmediatePropagation();
           e.preventDefault();
         }
@@ -194,30 +204,24 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
     if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current12 = hotTableRef.current) !== null && _hotTableRef$current12 !== void 0 && _hotTableRef$current12.hotInstance) {
       handleoutsideClickDeselects && handleoutsideClickDeselects(event);
     }
-  };
+  }; // useEffect(() => {
+  //   if (hotTableRef?.current?.hotInstance) {
+  //     const hotTableObj = hotTableRef?.current?.hotInstance
+  //     hotTableObj.loadData(hotTableData)
+  //     hotTableObj.updateSettings({
+  //       cells (row, col) {
+  //         const cellProperties = {}
+  //         if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
+  //           cellProperties.readOnly = false
+  //         }
+  //         return cellProperties
+  //       }
+  //     })
+  //   }
+  // }, [hotTableData])
 
-  (0, _react.useEffect)(function () {
-    var _hotTableRef$current13;
 
-    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current13 = hotTableRef.current) !== null && _hotTableRef$current13 !== void 0 && _hotTableRef$current13.hotInstance) {
-      var _hotTableRef$current14;
-
-      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current14 = hotTableRef.current) === null || _hotTableRef$current14 === void 0 ? void 0 : _hotTableRef$current14.hotInstance;
-      hotTableObj.loadData(hotTableData);
-      hotTableObj.updateSettings({
-        cells: function cells(row, col) {
-          var cellProperties = {};
-
-          if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
-            cellProperties.readOnly = false;
-          }
-
-          return cellProperties;
-        }
-      });
-    }
-  }, [hotTableData]);
-  (0, _react.useEffect)(function () {
+  var handleCache = (0, _react.useCallback)(function () {
     var interVal = setInterval(function () {
       if (navigator.clipboard) {
         navigator.clipboard.readText().then(function (clipboardData) {
@@ -229,14 +233,18 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
       return clearInterval(interVal);
     };
   }, [cache]);
+  (0, _react.useEffect)(function () {
+    handleCache(); // return () => clearInterval(interVal)
+  }, [handleCache]);
   return /*#__PURE__*/_react.default.createElement(_styles.SpreadSheetContainer, null, /*#__PURE__*/_react.default.createElement(_react2.HotTable, {
+    data: hotTableData,
     settings: settings,
-    afterChange: function afterChange(changes, accionHanson) {
-      return handleAfterChange(changes, accionHanson);
-    },
     ref: hotTableRef,
     beforeRemoveRow: function beforeRemoveRow(index, amount, physicalRows) {
       return handleBeforeRemoveRow(index, amount, physicalRows);
+    },
+    afterChange: function afterChange(changes, accionHanson) {
+      return handleAfterChange(changes, accionHanson);
     },
     afterSelectionEnd: function afterSelectionEnd(row, col, row1, col1) {
       return _afterSelectionEnd(row, col, row1, col1);
@@ -255,4 +263,6 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
   })));
 };
 
-exports.SpreadSheetEditor = SpreadSheetEditor;
+var _default = /*#__PURE__*/(0, _react.memo)(SpreadSheetEditor);
+
+exports.default = _default;

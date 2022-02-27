@@ -59,7 +59,11 @@ var BatchUploadForm = _styledComponents.default.form(_templateObject7 || (_templ
 
 exports.BatchUploadForm = BatchUploadForm;
 
-var ImageIssue = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  p {\n    margin: 0;\n    margin-bottom: 9px;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 21px;\n  }\n  ul {\n    padding-left: 0px;\n    margin-bottom: 0;\n    list-style-type: circle;\n    li {\n      display: block;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      font-size: 14px;\n      line-height: 24px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    width: 50%;\n    padding: 0 20px;\n    border-left: 1px solid #E9ECEF;\n    margin-left: 25px;\n    &:after {\n      content:'';\n      position: absolute;\n      left: -1px;\n      bottom: 0;\n      background-color: #fff;\n      width: 2px;\n      height: 55px;\n    }\n  }\n  \n"])));
+var ImageIssue = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  p {\n    margin: 0;\n    margin-bottom: 9px;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 21px;\n  }\n  ul {\n    padding-left: 0px;\n    margin-bottom: 0;\n    list-style-type: circle;\n    li {\n      display: block;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      font-size: 14px;\n      line-height: 24px;\n    }\n  }\n\n  @media (min-width: 768px) {\n    width: 50%;\n    padding: 0 20px;\n    border-left: 1px solid #E9ECEF;\n    margin-left: 25px;\n    &:after {\n      content:'';\n      position: absolute;\n      left: -1px;\n      bottom: 0;\n      background: ", ";\n      width: 2px;\n      height: 55px;\n    }\n  }\n  \n"])), function (props) {
+  var _props$theme$colors4;
+
+  return ((_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.backgroundPage) || '#FFF';
+});
 
 exports.ImageIssue = ImageIssue;
 

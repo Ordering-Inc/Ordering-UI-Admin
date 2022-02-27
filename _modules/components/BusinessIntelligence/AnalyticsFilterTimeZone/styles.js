@@ -21,7 +21,11 @@ var AnalyticsTimeZoneContainer = _styledComponents.default.div(_templateObject |
 
 exports.AnalyticsTimeZoneContainer = AnalyticsTimeZoneContainer;
 
-var TimeZoneSelectWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 300px;\n  top: 100%;\n  right: -60px;\n  padding: 25px;\n  background: #FFFFFF;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  z-index: 100;\n  margin-top: 18px;\n\n  @media (min-width: 576px) {\n    right: 0;\n  }\n"])));
+var TimeZoneSelectWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 300px;\n  top: 100%;\n  right: -60px;\n  padding: 25px;\n  background: ", ";\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  z-index: 100;\n  margin-top: 18px;\n\n  @media (min-width: 576px) {\n    right: 0;\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.TimeZoneSelectWrapper = TimeZoneSelectWrapper;
 
