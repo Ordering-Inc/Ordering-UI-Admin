@@ -6,7 +6,7 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-import { useSession, useOrder, useLanguage } from 'ordering-components-admin'
+import { useSession, useOrder, useLanguage, useConfig, GoogleTagManager } from 'ordering-components-admin'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 
@@ -55,6 +55,7 @@ import { RewardsPrograms } from './pages/RewardsPrograms'
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
   const [orderStatus] = useOrder()
+  const [{ configs }] = useConfig()
   const [loaded, setLoaded] = useState(false)
   const [, t] = useLanguage()
   const onlineStatus = useOnlineStatus()
@@ -83,6 +84,9 @@ export const App = () => {
         loaded && (
           <>
             <NotNetworkConnectivity />
+            {configs?.google_tag_manager?.value && (
+              <GoogleTagManager tagId={configs?.google_tag_manager?.value} />
+            )}
             <Layout>
               {auth && (
                 <SidebarMenu />
