@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
-import { PointsWalletBusinessDetail as PointsWalletBusinessDetailController } from './naked'
+import { useLanguage, useUtils, PointsWalletBusinessDetail as PointsWalletBusinessDetailController } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
 import { Button, Input } from '../../../styles'
 // import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
@@ -34,7 +33,7 @@ const PointsWalletBusinessDetailUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const { handleSubmit, register, errors } = useForm()
+  const { handleSubmit } = useForm()
   // const [paymentRules, setPaymentRules] = useState('maximum_redemption_type')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -53,6 +52,26 @@ const PointsWalletBusinessDetailUI = (props) => {
 
   const onSubmit = () => {
     if (Object.keys(formState?.changes).length > 0) {
+      if (formState?.changes?.redemption_rate === '') {
+        setAlertState({
+          open: true,
+          content: t(
+            'VALIDATION_ERROR_REQUIRED',
+            'Value is required'
+          ).replace('_attribute_', 'redemption_rate')
+        })
+        return
+      }
+      if (formState?.changes?.accumulation_rate === '') {
+        setAlertState({
+          open: true,
+          content: t(
+            'VALIDATION_ERROR_REQUIRED',
+            'Value is required'
+          ).replace('_attribute_', 'accumulation_rate')
+        })
+        return
+      }
       handleClickSubmit && handleClickSubmit()
     }
   }
@@ -72,20 +91,11 @@ const PointsWalletBusinessDetailUI = (props) => {
     })
   }, [formState?.error])
 
-  useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      setAlertState({
-        open: true,
-        content: Object.values(errors).map((error) => error.message)
-      })
-    }
-  }, [errors])
-
   return (
     <Container isBusiness={isBusiness} onSubmit={handleSubmit(onSubmit)}>
-      {walletData?.business_name && (
+      {walletData?.name && (
         <HeaderContainer>
-          <h1>{walletData?.business_name}</h1>
+          <h1>{walletData?.name}</h1>
         </HeaderContainer>
       )}
 
@@ -102,12 +112,6 @@ const PointsWalletBusinessDetailUI = (props) => {
                 ? formState?.changes?.redemption_rate
                 : walletData?.redemption_rate ?? ''}
               onChange={handleChangeInput}
-              ref={register({
-                required: t(
-                  'VALIDATION_ERROR_REQUIRED',
-                  'Value is required'
-                ).replace('_attribute_', 'redemption_rate')
-              })}
             />
             <span>=</span>
             <span>{parsePrice(1)}</span>
@@ -148,17 +152,11 @@ const PointsWalletBusinessDetailUI = (props) => {
             <Input
               type='number'
               placeholder='00 points'
-              name='accomulation_rate'
-              value={(typeof formState?.changes?.accomulation_rate !== 'undefined')
-                ? formState?.changes?.accomulation_rate
-                : walletData?.accomulation_rate ?? ''}
+              name='accumulation_rate'
+              value={(typeof formState?.changes?.accumulation_rate !== 'undefined')
+                ? formState?.changes?.accumulation_rate
+                : walletData?.accumulation_rate ?? ''}
               onChange={handleChangeInput}
-              ref={register({
-                required: t(
-                  'VALIDATION_ERROR_REQUIRED',
-                  'Value is required'
-                ).replace('_attribute_', 'accomulation_rate')
-              })}
             />
           </AccumulationInputWrapper>
           {/* <ToggleWrapper>

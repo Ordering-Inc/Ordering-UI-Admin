@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { PointsWalletLevels as PointsWalletLevelsController } from './naked'
+import { useLanguage, PointsWalletLevels as PointsWalletLevelsController } from 'ordering-components-admin'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import { Trash } from 'react-bootstrap-icons'
 import { IconButton, Input } from '../../../styles'
@@ -134,11 +133,11 @@ const PointsWalletLevelsUI = (props) => {
               </LevelNameWrapper>
               <LastWrapper>
                 <Input
-                  value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.accomulation_rate !== 'undefined'))
-                    ? editFormState?.changes?.accomulation_rate
-                    : level.accomulation_rate ?? ''}
+                  value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.accumulation_rate !== 'undefined'))
+                    ? editFormState?.changes?.accumulation_rate
+                    : level.accumulation_rate ?? ''}
                   placeholder='0 days'
-                  name='accomulation_rate'
+                  name='accumulation_rate'
                   autoComplete='off'
                   onChange={(e) => handleUpdateLevel(e, level?.id)}
                 />
@@ -192,9 +191,9 @@ const PointsWalletLevelsUI = (props) => {
           <LastWrapper>
             <Input
               type='number'
-              name='accomulation_rate'
+              name='accumulation_rate'
               autoComplete='off'
-              defaultValue={formState?.changes?.accomulation_rate || ''}
+              defaultValue={formState?.changes?.accumulation_rate || ''}
               onChange={(e) => handleChangeInput(e)}
               placeholder='0 days'
             />
