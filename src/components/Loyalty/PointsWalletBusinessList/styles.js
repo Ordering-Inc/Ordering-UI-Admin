@@ -126,6 +126,13 @@ export const CheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  svg {
+    color: ${props => props.theme.colors.secundaryLight};
+    &.fill {
+      color: ${props => props.theme.colors.primary};
+    }
+  }
 `
 
 export const ModifiedWrapper = styled.div`
@@ -147,5 +154,11 @@ export const ModifiedWrapper = styled.div`
       border-radius: 50px;
       color: ${props => props.theme.colors.primary};
     }
+  `}
+`
+
+export const CheckBoxInnerWrapper = styled.span`
+  ${({ noClick }) => noClick && css`
+    pointer-events: none;
   `}
 `

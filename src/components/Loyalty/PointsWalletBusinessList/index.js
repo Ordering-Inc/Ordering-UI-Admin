@@ -3,9 +3,9 @@ import { useLanguage, useUtils, PointsWalletBusinessList as PointsWalletBusiness
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { SearchBar, Pagination, Modal, SideBar } from '../../Shared'
-import { Button, Checkbox } from '../../../styles'
-import { ChevronRight } from 'react-bootstrap-icons'
+import { SearchBar, Pagination, Modal, SideBar, Alert } from '../../Shared'
+import { Button, Switch } from '../../../styles'
+import { ChevronRight, Square, CheckSquareFill } from 'react-bootstrap-icons'
 import {
   Container,
   SearchWrapper,
@@ -17,7 +17,8 @@ import {
   WrapperImage,
   Image,
   CheckBoxWrapper,
-  ModifiedWrapper
+  ModifiedWrapper,
+  CheckBoxInnerWrapper
 } from './styles'
 import { PointsWalletBusinessDetail } from '../PointsWalletBusinessDetail'
 
@@ -28,13 +29,15 @@ const PointsWalletBusinessListUI = (props) => {
     pointWallet,
     handleCheckBox,
     handleUpdateWalletBusiness,
-    handleUpdateBusinessList
+    handleUpdateBusinessList,
+    handleChangeSwitch
   } = props
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
   const { width } = useWindowSize()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
@@ -47,6 +50,13 @@ const PointsWalletBusinessListUI = (props) => {
   const [selectedBusiness, setSelectedBusiness] = useState(null)
   const [searchVal, setSearchVal] = useState('')
 
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
   const handleChangePage = (page) => {
     setCurrentPage(page)
   }
@@ -58,7 +68,11 @@ const PointsWalletBusinessListUI = (props) => {
   }
 
   const handleClickBusiness = (business, e) => {
-    if (e.target.closest('#accumulates') || e.target.closest('#redeems')) return
+    if (e.target.closest('.accumulates') || e.target.closest('.redeems') || e.target.closest('.wallet_enabled')) return
+    if (!business?.wallet_enabled) {
+      setAlertState({ open: true, content: t('DISABLED_BUSINESS', 'Disabled business') })
+      return
+    }
     setSelectedBusiness(business)
     setExtraOpen(true)
     if (width >= 1100) {
@@ -72,9 +86,15 @@ const PointsWalletBusinessListUI = (props) => {
     handleParentSidebarMove(0)
   }
 
-  const updateBusinessList = (business) => {
-    setSelectedBusiness({ ...selectedBusiness, ...business })
-    handleUpdateBusinessList(business)
+  const updateBusinessList = (changes) => {
+    const updatedBusiness = { ...selectedBusiness, ...changes }
+    setSelectedBusiness(updatedBusiness)
+    handleUpdateBusinessList(selectedBusiness?.id, changes)
+  }
+
+  const handleUpdateStatus = (businessId, enabled) => {
+    if (!enabled) handleCloseBusinessDetail()
+    handleChangeSwitch && handleChangeSwitch(businessId, enabled)
   }
 
   useEffect(() => {
@@ -90,7 +110,7 @@ const PointsWalletBusinessListUI = (props) => {
     let filteredBusinessList = []
     if (businessList?.businesses.length > 0) {
       if (searchVal) {
-        filteredBusinessList = businessList.businesses.filter(business => business?.business_name.toLowerCase().includes(searchVal.toLowerCase()))
+        filteredBusinessList = businessList.businesses.filter(business => business?.name.toLowerCase().includes(searchVal.toLowerCase()))
       } else {
         filteredBusinessList = [...businessList.businesses]
       }
@@ -134,8 +154,9 @@ const PointsWalletBusinessListUI = (props) => {
                 <th className='business-info'>
                   <Skeleton width={100} height={17} />
                 </th>
+                <th><Skeleton width={60} height={17} /></th>
                 <th><Skeleton width={80} height={17} /></th>
-                <th><Skeleton width={100} height={17} /></th>
+                <th><Skeleton width={90} height={17} /></th>
                 <th />
               </tr>
             </thead>
@@ -149,6 +170,11 @@ const PointsWalletBusinessListUI = (props) => {
                       </WrapperImage>
                       <Skeleton width={80} height={15} />
                     </BusinessInfoWrapper>
+                  </td>
+                  <td>
+                    <CheckBoxWrapper>
+                      <Skeleton width={40} height={20} />
+                    </CheckBoxWrapper>
                   </td>
                   <td>
                     <CheckBoxWrapper>
@@ -175,6 +201,7 @@ const PointsWalletBusinessListUI = (props) => {
             <thead>
               <tr>
                 <th className='business-info'>{t('BUSINESSES', 'Businesses')}</th>
+                <th>{t('STATUS', 'Status')}</th>
                 <th>{t('Redeeem', 'Redeeem')}</th>
                 <th>{t('ACCUMULATION', 'Accumulation')}</th>
                 <th />
@@ -190,35 +217,48 @@ const PointsWalletBusinessListUI = (props) => {
                   <td>
                     <BusinessInfoWrapper>
                       <WrapperImage>
-                        <Image bgimage={optimizeImage(business?.business_logo || theme.images?.dummies?.businessLogo, 'h_120,c_limit')} />
+                        <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_120,c_limit')} />
                       </WrapperImage>
-                      <span>{business?.business_name}</span>
+                      <span>{business?.name}</span>
                     </BusinessInfoWrapper>
                   </td>
                   <td>
                     <CheckBoxWrapper>
-                      <Checkbox
-                        defaultChecked={business?.redeems}
-                        id='redeems'
-                        onClick={(e) => handleCheckBox(business.business_id, 'redeems', e.target.checked)}
+                      <Switch
+                        className='wallet_enabled'
+                        defaultChecked={business?.wallet_enabled}
+                        onChange={val => handleUpdateStatus(business.id, val)}
                       />
                     </CheckBoxWrapper>
                   </td>
                   <td>
                     <CheckBoxWrapper>
-                      <Checkbox
-                        defaultChecked={business?.accumulates}
-                        id='accumulates'
-                        onClick={(e) => handleCheckBox(business.business_id, 'accumulates', e.target.checked)}
-                      />
+                      <CheckBoxInnerWrapper
+                        onClick={(e) => handleCheckBox(business.id, 'redeems', !business?.redeems)}
+                        className='redeems'
+                        noClick={!business?.wallet_enabled}
+                      >
+                        {business?.redeems ? <CheckSquareFill className='fill' /> : <Square />}
+                      </CheckBoxInnerWrapper>
+                    </CheckBoxWrapper>
+                  </td>
+                  <td>
+                    <CheckBoxWrapper>
+                      <CheckBoxInnerWrapper
+                        onClick={(e) => handleCheckBox(business.id, 'accumulates', !business?.accumulates)}
+                        className='accumulates'
+                        noClick={!business?.wallet_enabled}
+                      >
+                        {business?.accumulates ? <CheckSquareFill className='fill' /> : <Square />}
+                      </CheckBoxInnerWrapper>
                     </CheckBoxWrapper>
                   </td>
                   <td>
                     <ModifiedWrapper>
                       <ChevronRight />
-                      {business.name === 'Grilled' && (
+                      {/* {business.name === 'Grilled' && (
                         <span>{t('MODIFIED', 'Modified')}</span>
-                      )}
+                      )} */}
                     </ModifiedWrapper>
                   </td>
                 </tr>
@@ -272,6 +312,15 @@ const PointsWalletBusinessListUI = (props) => {
           )}
         </>
       )}
+      <Alert
+        title={t('POINTS_WALLET', 'Points wallet')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }

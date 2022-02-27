@@ -11,10 +11,14 @@ import {
 } from './styles'
 
 export const PointsWallet = (props) => {
-  const { handleParentSidebarMove, pointWallet, handleUpdatePointsWallet } = props
+  const {
+    handleParentSidebarMove,
+    pointWallet,
+    handleUpdatePointsWallet
+  } = props
 
   const [, t] = useLanguage()
-  const [selectedOption, setSelectedOption] = useState('business')
+  const [selectedOption, setSelectedOption] = useState('general')
 
   const walletOptionList = [
     { key: 'general', name: t('GENERAL', 'General') },
