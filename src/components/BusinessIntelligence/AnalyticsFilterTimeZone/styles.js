@@ -19,7 +19,7 @@ export const TimeZoneSelectWrapper = styled.div`
   top: 100%;
   right: -60px;
   padding: 25px;
-  background: #FFFFFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);

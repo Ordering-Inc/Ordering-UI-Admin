@@ -77,7 +77,7 @@ export const Button = styled.button`
 
 
   ${({ outline }) => outline && css`
-    background: #FFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     color: #151824;
     border-color: #CCC;
 
@@ -104,7 +104,7 @@ export const Button = styled.button`
 `}
 
 ${({ circle, outline }) => circle && outline && css`
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   color: #CCC;
   border-color: #CCC;
   padding: 0;

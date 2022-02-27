@@ -55,7 +55,7 @@ export const WrapperMap = styled.div`
     position: absolute;
     font-size: 14px;
     padding: 0 5px;
-    background: #FFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     top: 10px;
     z-index: 10;
     border: none;

@@ -89,7 +89,7 @@ export const UploadImageIcon = styled.div`
   }
 `
 export const CameraWrapper = styled.span`
-  background-color: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border-radius: 8px;
   padding: 5px;
   display: flex;

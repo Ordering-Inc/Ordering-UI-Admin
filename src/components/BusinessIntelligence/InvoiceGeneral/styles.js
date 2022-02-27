@@ -8,7 +8,7 @@ export const FormControl = styled.div`
   margin-bottom: 30px;
 
   input, textarea {
-    background: #FFFFFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     border: 1px solid #DEE2E6;
     box-sizing: border-box;
     border-radius: 7.6px;

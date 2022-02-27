@@ -132,7 +132,7 @@ export const InputWrapper = styled.div`
 
   .input-autocomplete {
     width: 100%;
-    background: #FFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     border: 1px solid ${props => props.theme.colors.borderColor};
     border-radius: 8px;
     font-size: 14px;

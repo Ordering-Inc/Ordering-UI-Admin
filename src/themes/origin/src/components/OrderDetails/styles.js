@@ -593,7 +593,7 @@ export const ChatContainer = styled.div`
   position: absolute;
   top: 0px;
   width: 100%;
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   height: 100%;
   z-index: 1000;
   box-sizing: border-box;

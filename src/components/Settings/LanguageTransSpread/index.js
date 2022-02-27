@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useLanguage, LanguageTransSpread as LanguageTransSpreadController } from 'ordering-components-admin'
 import {
   TransSpreadContainer
@@ -32,7 +32,7 @@ const LanguageTransSpreadUI = (props) => {
     })
   }
 
-  useEffect(() => {
+  const handleHotTableData = useCallback(() => {
     if (translationList?.loading) return
     let translations = []
     if (searchValue) {
@@ -42,6 +42,10 @@ const LanguageTransSpreadUI = (props) => {
     }
     setHotTableData(translations)
   }, [translationList, searchValue])
+
+  useEffect(() => {
+    handleHotTableData()
+  }, [handleHotTableData])
 
   useEffect(() => {
     if (creationFormState?.result?.error) {

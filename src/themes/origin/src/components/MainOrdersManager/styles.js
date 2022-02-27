@@ -72,7 +72,7 @@ export const WrapperIndicator = styled.div`
 `
 export const OrderNotification = styled.div`
   width: 100%;
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   display: flex;
   flex-direction: column;
   row-gap: 15px;

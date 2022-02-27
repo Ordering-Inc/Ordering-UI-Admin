@@ -9,6 +9,12 @@ import {
 import { Alert } from '../../Shared'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
 import MdExitToApp from '@meronex/icons/md/MdExitToApp'
+import { Button, Input, Tabs, Tab } from '../../../styles'
+import { useTheme } from 'styled-components'
+import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
+import RiLockPasswordLine from '@meronex/icons/ri/RiLockPasswordLine'
+import { Eye, EyeSlash } from 'react-bootstrap-icons'
+
 import {
   LoginContainer,
   LoginHeroContainer,
@@ -17,13 +23,10 @@ import {
   RedirectLink,
   LoginWith,
   TitleFormSide,
-  InputWithIcon
+  InputWithIcon,
+  WrapperPassword,
+  TogglePassword
 } from './styles'
-
-import { Button, Input, Tabs, Tab } from '../../../styles'
-import { useTheme } from 'styled-components'
-import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
-import RiLockPasswordLine from '@meronex/icons/ri/RiLockPasswordLine'
 
 const LoginFormUI = (props) => {
   const {
@@ -40,13 +43,14 @@ const LoginFormUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [ordering] = useApi()
+  const theme = useTheme()
   const { handleSubmit, register, errors } = useForm()
+  const [configFile, setConfigFile] = useContext(ConfigFileContext)
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [submitted, setSubmitted] = useState(false)
   const [projectName, setProjectName] = useState(null)
-  const theme = useTheme()
-
-  const [configFile, setConfigFile] = useContext(ConfigFileContext)
+  const [passwordSee, setPasswordSee] = useState(false)
 
   const onSubmit = () => {
     const _configFile = configFile
@@ -201,9 +205,9 @@ const LoginFormUI = (props) => {
               />
             )}
 
-            <InputWithIcon>
+            <WrapperPassword>
               <Input
-                type='password'
+                type={!passwordSee ? 'password' : 'text'}
                 name='password'
                 aria-label='password'
                 placeholder={t('PASSWORD')}
@@ -227,7 +231,10 @@ const LoginFormUI = (props) => {
                 autoCapitalize='off'
               />
               <RiLockPasswordLine />
-            </InputWithIcon>
+              <TogglePassword onClick={() => setPasswordSee(!passwordSee)}>
+                {!passwordSee ? <Eye /> : <EyeSlash />}
+              </TogglePassword>
+            </WrapperPassword>
             <Button
               borderRadius='8px'
               color='primary'

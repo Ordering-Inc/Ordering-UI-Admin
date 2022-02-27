@@ -17,6 +17,7 @@ import { Alert, Confirm, Modal } from '../../Shared'
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 import { ProductExtraSubOptionMetaFields } from '../ProductExtraSubOptionMetaFields'
 import { PlusCircle, ThreeDots, Circle, RecordCircle } from 'react-bootstrap-icons'
+import { useForm } from 'react-hook-form'
 
 import {
   MainContainer,
@@ -42,7 +43,8 @@ import {
   SubOptionImage,
   LeftSubOptionContent,
   RightSubOptionContent,
-  SelectboxGroup
+  SelectboxGroup,
+  AdddSubOptionForm
 } from './styles'
 
 const ProductExtraOptionDetailsUI = (props) => {
@@ -85,6 +87,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openModal, setOpenModal] = useState({})
   const [selectedSubOptionId, setSelectedSubOptionId] = useState(null)
+  const { handleSubmit, register, errors } = useForm()
 
   const handleClickImage = () => {
     optionImageInputRef.current.click()
@@ -151,6 +154,15 @@ const ProductExtraOptionDetailsUI = (props) => {
       }
     }
   }, [editErrors])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map((error) => error.message)
+      })
+    }
+  }, [errors])
 
   return (
     <MainContainer>
@@ -220,7 +232,7 @@ const ProductExtraOptionDetailsUI = (props) => {
             </InputWrapper>
             <RightOptionContent>
               <InputWrapper primary>
-                <label>{t('MIN', 'Min')}</label>
+                <label>{t('MINIMUM', 'Minimum')}</label>
                 <Input
                   name='min'
                   defaultValue={optionState?.option?.min}
@@ -371,11 +383,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 <label>{t('PRICE', 'Price')}</label>
                 <Input
                   name='price'
-                  value={
-                    (editSubOptionId === subOption.id)
-                      ? changesState?.changes?.price ?? subOption?.price
-                      : subOption?.price
-                  }
+                  defaultValue={subOption?.price}
                   onChange={(e) => handleChangeInput(e, subOption.id)}
                   onKeyPress={(e) => {
                     if (!/^[0-9.]$/.test(e.key)) {
@@ -389,11 +397,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   <label>{t('HALF_PRICE', 'Half price')}</label>
                   <Input
                     name='half_price'
-                    value={
-                      (editSubOptionId === subOption.id)
-                        ? changesState?.changes?.half_price ?? subOption?.half_price
-                        : subOption?.half_price ?? ''
-                    }
+                    defaultValue={subOption?.half_price}
                     onChange={(e) => handleChangeInput(e, subOption.id)}
                     onKeyPress={(e) => {
                       if (!/^[0-9.]$/.test(e.key)) {
@@ -408,11 +412,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   <label>{t('MAX', 'Max')}</label>
                   <Input
                     name='max'
-                    value={
-                      (editSubOptionId === subOption.id)
-                        ? changesState?.changes?.max ?? subOption?.max
-                        : subOption?.max
-                    }
+                    defaultValue={subOption?.max}
                     onChange={(e) => handleChangeInput(e, subOption.id)}
                     onKeyPress={(e) => {
                       if (!/^[0-9.]$/.test(e.key)) {
@@ -462,7 +462,7 @@ const ProductExtraOptionDetailsUI = (props) => {
           </SubOptionContainer>
         ))}
 
-        <SubOptionContainer className='add-product-option'>
+        <AdddSubOptionForm onSubmit={handleSubmit(handleAddOption)} className='add-product-option'>
           <LeftSubOptionContent>
             <SubOptionImage
               onClick={() => handleClickSubOptionImage('add_suboption_image')}
@@ -496,10 +496,14 @@ const ProductExtraOptionDetailsUI = (props) => {
               <Input
                 name='name'
                 autoComplete='off'
+                placeholder={t('NAME', 'Name')}
                 value={
                   ((editSubOptionId === null) && changesState?.changes?.name) || ''
                 }
                 onChange={(e) => handleChangeInput(e, null)}
+                ref={register({
+                  required: t('NAME_REQUIRED', 'The name is required.')
+                })}
               />
             </InputWrapper>
           </LeftSubOptionContent>
@@ -508,6 +512,7 @@ const ProductExtraOptionDetailsUI = (props) => {
               <label>{t('PRICE', 'Price')}</label>
               <Input
                 name='price'
+                placeholder={t('PRICE', 'Price')}
                 value={
                   ((editSubOptionId === null) && changesState?.changes?.price) || ''
                 }
@@ -524,6 +529,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 <label>{t('HALF_PRICE', 'Half price')}</label>
                 <Input
                   name='half_price'
+                  placeholder={t('HALF_PRICE', 'Half price')}
                   value={
                     ((editSubOptionId === null) && changesState?.changes?.half_price) || ''
                   }
@@ -541,6 +547,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 <label>{t('MAX', 'Max')}</label>
                 <Input
                   name='max'
+                  placeholder={t('MAX', 'Max')}
                   value={
                     ((editSubOptionId === null) && changesState?.changes?.max) || ''
                   }
@@ -556,15 +563,16 @@ const ProductExtraOptionDetailsUI = (props) => {
             <ActionsContainer>
               <IconButton
                 color='primary'
-                onClick={() => handleAddOption()}
+                type='submit'
               >
                 <PlusCircle />
               </IconButton>
             </ActionsContainer>
           </RightSubOptionContent>
-        </SubOptionContainer>
+        </AdddSubOptionForm>
       </ModifierOptionsContainer>
       <Alert
+        width='700px'
         title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}

@@ -9,7 +9,7 @@ export const WrapperOnlineDrivers = styled.div`
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background: white;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 3px 6px #00000029;
@@ -36,7 +36,7 @@ export const WrapDriverInfo = styled.div`
 export const WrapperDriverImage = styled.div`
   width: 50px;
   height: 50px;
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 6px;
 

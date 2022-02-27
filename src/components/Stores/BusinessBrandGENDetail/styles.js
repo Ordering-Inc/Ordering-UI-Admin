@@ -89,7 +89,7 @@ export const FormControl = styled.div`
   margin-top: 45px;
 
   input {
-    background: #FFFFFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     border: 1px solid #DEE2E6;
     box-sizing: border-box;
     border-radius: 7.6px;

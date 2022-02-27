@@ -88,7 +88,7 @@ export const Spinner = styled.div`
     height: 200px;
     display: inline-block;
     overflow: hidden;
-    background: #ffffff;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   }
 
   .spinner-content {

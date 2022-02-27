@@ -5,7 +5,7 @@ export const AccordionSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   cursor: pointer;
 `
 export const OrderItemAccordionContainer = styled.div`

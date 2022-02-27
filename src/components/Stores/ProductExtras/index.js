@@ -13,7 +13,7 @@ import {
   CheckboxContainer,
   MoreContainer,
   Details,
-  ExtraAddContainer,
+  ExtraAddForm,
   AddButton
 } from './styles'
 
@@ -121,15 +121,20 @@ const ProductExtrasUI = (props) => {
           </ExtraOption>
         ))}
         {isAddMode && (
-          <ExtraAddContainer
+          <ExtraAddForm
             ref={conatinerRef}
+            onSubmit={(e) => {
+              e.preventDefault()
+              handleAddExtra()
+            }}
           >
             <input
               name='name'
               placeholder={t('WRITE_A_NAME', 'Write a name')}
               onChange={(e) => handleChangeAddExtraInput(e)}
+              autoComplete='off'
             />
-          </ExtraAddContainer>
+          </ExtraAddForm>
         )}
         <AddButton
           onClick={() => handleOpenAddForm()}

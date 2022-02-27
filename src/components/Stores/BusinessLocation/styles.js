@@ -68,7 +68,7 @@ export const WrapperGoogleAutoCompleteInput = styled.div`
   }
   .input-autocomplete {
     width: 100%;
-    background: #FFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     border: 1px solid #DEE2E6;
     border-radius: 8px;
     font-size: 14px;

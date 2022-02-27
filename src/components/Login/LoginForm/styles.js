@@ -258,3 +258,42 @@ export const InputWithIcon = styled.div`
     margin: 0 20px;
   }
 `
+
+export const WrapperPassword = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  input {
+    width: 100%;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  > svg {
+    position: absolute;
+    font-size: 24px;
+    color: #707070;
+    padding: 0px;
+    margin: 0 20px;
+  }
+`
+export const TogglePassword = styled.span`
+  position: absolute;
+  font-weight: 300;
+  color: #333;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+
+  svg {
+    padding: 0;
+    color: #707070;
+  }
+  ${props => props.theme?.rtl ? css`
+    left: 15px;
+  ` : css`
+    right: 15px;
+  `}
+`
