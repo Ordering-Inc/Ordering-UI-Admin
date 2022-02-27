@@ -58,6 +58,7 @@ const BusinessSpreadSheetUI = (props) => {
         />
       </BusinessSpreadSheetContainer>
       <Alert
+        width='700px'
         title={t('PRODUCT EDIT', 'Product Edit')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}

@@ -47,6 +47,7 @@ export const ProductSummary = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage, parsePrice }] = useUtils()
+
   const [isEditMode, setIsEditMode] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isProductPreview, setIsProductPreview] = useState(false)
@@ -89,9 +90,15 @@ export const ProductSummary = (props) => {
       }
     })
   }
+
+  // const handleCopyLink = () => {
+  //   navigator.clipboard.writeText(window.location.href)
+  //   showToast(ToastType.Success, t('PRODUCT_LINK_COPIED_TO_CLIPBOARD', 'The product link was copied to your clipboard.'))
+  // }
+
   return (
     <>
-      <ProductDetailsContainer>
+      <ProductDetailsContainer disabled={productState.loading}>
         <DetailsHeader>
           <LeftHeader>
             <ProductName>
@@ -103,6 +110,11 @@ export const ProductSummary = (props) => {
             />
           </LeftHeader>
           <RightHeader>
+            {/* <IconButton
+              onClick={() => handleCopyLink()}
+            >
+              <Link45deg />
+            </IconButton> */}
             <ActionSelectorWrapper>
               <DropdownButton
                 className='product_actions'

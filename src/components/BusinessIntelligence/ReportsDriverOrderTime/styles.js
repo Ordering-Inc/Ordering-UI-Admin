@@ -110,7 +110,7 @@ export const DistanceTable = styled.table`
 export const Thead = styled.thead`
   position: sticky;
   top: 0px;
-  background: white;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
 
   tr {
     th {

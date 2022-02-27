@@ -7,8 +7,17 @@ import { UserTypeSelector } from '../UserTypeSelector'
 import { Alert, InputPhoneNumber } from '../../Shared'
 import { sortInputFields } from '../../../utils'
 import { Switch, Input, Button } from '../../../styles'
+import { Eye, EyeSlash } from 'react-bootstrap-icons'
 
-import { FormInput, ActionsForm, SkeletonForm, WrapperUserTypeSelector, DriverZoneRestrictionWrapper } from './styles'
+import {
+  FormInput,
+  ActionsForm,
+  SkeletonForm,
+  WrapperUserTypeSelector,
+  DriverZoneRestrictionWrapper,
+  WrapperPassword,
+  TogglePassword
+} from './styles'
 
 export const UserFormDetailsUI = (props) => {
   const {
@@ -40,6 +49,7 @@ export const UserFormDetailsUI = (props) => {
   const emailInput = useRef(null)
 
   const [user, setUser] = useState(userData)
+  const [passwordSee, setPasswordSee] = useState(false)
 
   useEffect(() => {
     setUser(userData)
@@ -285,22 +295,27 @@ export const UserFormDetailsUI = (props) => {
               />
             )}
             {!isCheckout && (
-              <Input
-                type='password'
-                name='password'
-                className='form'
-                placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
-                onChange={handleChangeInput}
-                ref={formMethods.register({
-                  required: isRequiredField('password')
-                    ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                    : null,
-                  minLength: {
-                    value: 8,
-                    message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                  }
-                })}
-              />
+              <WrapperPassword>
+                <Input
+                  type={!passwordSee ? 'password' : 'text'}
+                  name='password'
+                  className='form'
+                  placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
+                  onChange={handleChangeInput}
+                  ref={formMethods.register({
+                    required: isRequiredField('password')
+                      ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                      : null,
+                    minLength: {
+                      value: 8,
+                      message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                    }
+                  })}
+                />
+                <TogglePassword onClick={() => setPasswordSee(!passwordSee)}>
+                  {!passwordSee ? <Eye /> : <EyeSlash />}
+                </TogglePassword>
+              </WrapperPassword>
             )}
             {
             props.afterMidElements?.map((MidElement, i) => (

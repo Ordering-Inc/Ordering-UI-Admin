@@ -101,7 +101,7 @@ export const Button = styled.button`
     }
   `}
   ${({ outline }) => outline && css`
-    background: #FFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     color: #CCC;
     border-color: #CCC;
     &:active {
@@ -129,7 +129,7 @@ export const Button = styled.button`
     }
   `}
   ${({ circle, outline }) => circle && outline && css`
-    background: #FFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     color: #CCC;
     border-color: #CCC;
     padding: 0;
@@ -154,7 +154,7 @@ export const Button = styled.button`
       background: ${props => darken(0.1, props.theme.colors.primary)};
     }
     ${({ outline }) => outline && css`
-      background: #FFF;
+      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
       color: ${props => props.theme.colors.primary};
       border-color: ${props => props.theme.colors.primary};
       &:active {
@@ -182,7 +182,7 @@ export const Button = styled.button`
       }
     `}
     ${({ circle, outline }) => circle && outline && css`
-      background: #FFF;
+      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
       color: ${props => props.theme.colors.primary};
       border-color: ${props => props.theme.colors.primary};
       padding: 0;
@@ -231,7 +231,7 @@ export const Button = styled.button`
       background: ${props => darken(0.1, props.theme.colors.secundary)};
     }
     ${({ outline }) => outline && css`
-      background: #FFF;
+      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
       color: ${props => props.theme.colors.secundary};
       border-color: ${props => props.theme.colors.secundary};
       &:active {
@@ -260,7 +260,7 @@ export const Button = styled.button`
       }
     `}
     ${({ circle, outline }) => circle && outline && css`
-      background: #FFF;
+      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
       color: ${props => props.theme.colors.secundary};
       border-color: ${props => props.theme.colors.secundary};
       padding: 0;

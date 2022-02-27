@@ -59,7 +59,7 @@ export const WrapperOrdersAndDriver = styled.div`
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 12px;
   position: absolute;
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   right: 10px;
   top: 15px;
   height: calc(100% - 30px);

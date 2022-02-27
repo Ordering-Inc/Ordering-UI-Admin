@@ -8,6 +8,10 @@ export const ProductDetailsContainer = styled.div`
   padding: 20px;
   position: relative;
   overflow-x: hidden;
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
 `
 
 export const DetailsHeader = styled.div`

@@ -26,7 +26,8 @@ const PointsWalletLevelsUI = (props) => {
     handleChangeInput,
     levelList,
     handleUpdateDeleteClick,
-    handleUpdateLevel
+    handleUpdateLevel,
+    handleUpdateBtnClick
   } = props
 
   const [, t] = useLanguage()
@@ -121,7 +122,7 @@ const PointsWalletLevelsUI = (props) => {
             <LevelWrapper key={i}>
               <LevelNameWrapper>
                 <Input
-                  value={(editFormState?.changes?.id === level.id && editFormState?.changes?.name)
+                  value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.name !== 'undefined'))
                     ? editFormState?.changes?.name
                     : level.name ?? ''}
                   name='name'
@@ -132,18 +133,18 @@ const PointsWalletLevelsUI = (props) => {
               </LevelNameWrapper>
               <LastWrapper>
                 <Input
-                  value={(editFormState?.changes?.id === level.id && editFormState?.changes?.accomulation_rate)
-                    ? editFormState?.changes?.accomulation_rate
-                    : level.accomulation_rate ?? ''}
+                  value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.accumulation_rate !== 'undefined'))
+                    ? editFormState?.changes?.accumulation_rate
+                    : level.accumulation_rate ?? ''}
                   placeholder='0 days'
-                  name='accomulation_rate'
+                  name='accumulation_rate'
                   autoComplete='off'
                   onChange={(e) => handleUpdateLevel(e, level?.id)}
                 />
               </LastWrapper>
               <PointsWrapper>
                 <Input
-                  value={(editFormState?.changes?.id === level.id && editFormState?.changes?.minimum_points)
+                  value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.minimum_points !== 'undefined'))
                     ? editFormState?.changes?.minimum_points
                     : level.minimum_points ?? ''}
                   placeholder='0 points'
@@ -153,13 +154,23 @@ const PointsWalletLevelsUI = (props) => {
                 />
               </PointsWrapper>
               <ButtonWrapper>
-                <IconButton
-                  color='black'
-                  type='button'
-                  onClick={() => handleUpdateDeleteClick(level.id)}
-                >
-                  <Trash />
-                </IconButton>
+                {editFormState?.changes?.id === level.id ? (
+                  <IconButton
+                    color='primary'
+                    type='button'
+                    onClick={() => handleUpdateBtnClick()}
+                  >
+                    <BsPlusSquare />
+                  </IconButton>
+                ) : (
+                  <IconButton
+                    color='black'
+                    type='button'
+                    onClick={() => handleUpdateDeleteClick(level.id)}
+                  >
+                    <Trash />
+                  </IconButton>
+                )}
               </ButtonWrapper>
             </LevelWrapper>
           ))}
@@ -180,9 +191,9 @@ const PointsWalletLevelsUI = (props) => {
           <LastWrapper>
             <Input
               type='number'
-              name='accomulation_rate'
+              name='accumulation_rate'
               autoComplete='off'
-              defaultValue={formState?.changes?.accomulation_rate || ''}
+              defaultValue={formState?.changes?.accumulation_rate || ''}
               onChange={(e) => handleChangeInput(e)}
               placeholder='0 days'
             />

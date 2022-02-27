@@ -134,3 +134,33 @@ export const DriverZoneRestrictionWrapper = styled.div`
     font-size: 14px;
   }
 `
+export const WrapperPassword = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  input{
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 0 !important;
+    ${props => props.theme?.rtl ? css`
+      padding-left: 40px !important;
+    ` : css`
+      padding-right: 40px !important;
+    `}
+  }
+`
+export const TogglePassword = styled.span`
+  position: absolute;
+  font-weight: 300;
+  color: #333;
+  font-size: 24px;
+  cursor: pointer;
+  ${props => props.theme?.rtl ? css`
+    left: 10px;
+  ` : css`
+    right: 10px;
+  `}
+`

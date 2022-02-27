@@ -5,7 +5,7 @@ export const LateralBarContainer = styled.div`
   position: fixed;
   z-index: 1005;
   top: 0;
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   overflow-x: hidden;
   transition: 0.3s;
   height: 100vh;

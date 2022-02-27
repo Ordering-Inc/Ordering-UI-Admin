@@ -136,7 +136,7 @@ export const RightHeader = styled.div`
 export const ActionSelectorWrapper = styled.div`
   button {
     display: flex;
-    background: ${props => props.theme.colors.secundary};
+    background: transparent !important;
     border: none;
     padding: 5px;
     border-radius: 8px;
@@ -146,23 +146,23 @@ export const ActionSelectorWrapper = styled.div`
       box-shadow: none !important;
     }
     svg {
-      color: ${props => props.theme.colors.headingColor};
+      color: #B1BCCC;
       font-size: 20px;
     }
     &:after {
       display: none;
     }
     &:hover {
-      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+      background: #1507260a !important;
+      > svg {
+        color:  #151b26;
+      }
     }
     &:active {
-      background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+      background: #1507261a !important;
     }
   }
   .show {
-    button {
-      background: ${props => props.theme.colors.secundary} !important;
-    }
     >div {
       border: 1px solid ${props => props.theme.colors.borderColor};
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
@@ -174,6 +174,9 @@ export const ActionSelectorWrapper = styled.div`
       .dropdown-item {
         font-size: 12px;
         color: ${props => props.theme.colors.headingColor};
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
       }
       .dropdown-item:last-child {
         color: ${props => props.theme.colors.danger};

@@ -62,7 +62,7 @@ const BusinessProductsCategoyDetailsUI = (props) => {
   const handleDeleteClick = () => {
     setConfirm({
       open: true,
-      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete this product?'),
+      content: t('QUESTION_DELETE_CATEGORY', 'Are you sure that you want to delete this category?'),
       handleOnAccept: () => {
         handleDeleteCategory()
         setConfirm({ ...confirm, open: false })

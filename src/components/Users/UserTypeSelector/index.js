@@ -23,12 +23,6 @@ export const UserTypeSelector = (props) => {
       disabled: !isPrimary && defaultUserType === 0
     },
     {
-      value: 1,
-      content: <Option>{t('CITY_MANAGER', 'City manager')}</Option>,
-      showOnSelected: <Option padding>{t('CITY_MANAGER', 'City manager')}</Option>,
-      disabled: !isPrimary && defaultUserType === 1
-    },
-    {
       value: 2,
       content: <Option>{t('BUSINESS_OWNER', 'Business owner')}</Option>,
       showOnSelected: <Option padding>{t('BUSINESS_OWNER', 'Business owner')}</Option>,

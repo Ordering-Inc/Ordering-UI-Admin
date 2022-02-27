@@ -15,9 +15,7 @@ export const Container = styled.div`
 export const PointsWalletContainer = styled.div`
   display: flex;
   align-items: center;
-  max-width: 300px;
   width: 100%;
-  justify-content: space-between;
 `
 
 export const PointsWrapper = styled.div`
@@ -40,7 +38,7 @@ export const EqualWrapper = styled.div`
   font-weight: 500;
   font-size: 24px;
   line-height: 36px;
-  margin: 0px 20px;
+  margin: 0px 30px;
 `
 
 export const LevelWrapper = styled.div`
@@ -56,20 +54,5 @@ export const LevelWrapper = styled.div`
     object-fit: cover;
     max-width: 350px;
     width: 100%;
-  }
-`
-
-export const LevelTxt = styled.div`
-  max-width: 350px;
-  width: 100%;
-
-  > h1 {
-    margin: 0px;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 28px;
-    line-height: 42px;
-    color: ${props => props.theme.colors.primary};
-    text-align: center;
   }
 `

@@ -83,7 +83,7 @@ export const StepItem = styled.div`
     justify-content: center;
     font-size: 14px;
     z-index: 10;
-    background: #FFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   }
 
   span {

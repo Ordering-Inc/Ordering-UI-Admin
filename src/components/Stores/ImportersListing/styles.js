@@ -59,7 +59,7 @@ export const NewImporterWrapper = styled.div`
   box-sizing: border-box;
   right: 0;
   border-left: 1px solid ${props => props.theme.colors.borderColor};
-  background-color: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   ${props => props.theme?.rtl && css`
     right: unset;
     left: 0;
@@ -106,5 +106,5 @@ export const ImportCSVForm = styled.div`
     height: 100%;
     right: 0;
     top: 0;
-    background: #fff;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
 `

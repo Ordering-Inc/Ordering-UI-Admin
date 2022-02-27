@@ -745,7 +745,7 @@ export const WrapAllCategories = styled.div`
 `
 
 export const BusinessCartContent = styled.div`
-  background: white;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   padding: 15px;
   position: relative;
   margin-bottom: 20px;

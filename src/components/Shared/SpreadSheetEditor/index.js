@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState, memo } from 'react'
 import { HotTable, HotColumn } from '@handsontable/react'
 import 'handsontable/dist/handsontable.full.css'
 import { useLanguage } from 'ordering-components-admin'
@@ -6,7 +6,7 @@ import {
   SpreadSheetContainer
 } from './styles'
 
-export const SpreadSheetEditor = (props) => {
+const SpreadSheetEditor = (props) => {
   const {
     headerItems,
     hotTableData,
@@ -25,7 +25,7 @@ export const SpreadSheetEditor = (props) => {
   const hotTableRef = useRef(null)
 
   const settings = {
-    data: hotTableData,
+    // data: hotTableData,
     licenseKey: 'non-commercial-and-evaluation',
     autoRowSize: false,
     autoColumnSize: false,
@@ -83,11 +83,23 @@ export const SpreadSheetEditor = (props) => {
       if (celltype === 'numeric') {
         const evt = e || window.event
         const key = evt.charCode || evt.keyCode || 0
+
+        // check for cut and paste
+        let isClipboard = false
+        const ctrlDown = evt.ctrlKey || evt.metaKey // Mac support
+
+        // Check for Alt+Gr (http://en.wikipedia.org/wiki/AltGr_key)
+        if (ctrlDown && evt.altKey) isClipboard = false
+        // Check for ctrl+c, v and x
+        else if (ctrlDown && key === 67) isClipboard = true // c
+        else if (ctrlDown && key === 86) isClipboard = true // v
+        else if (ctrlDown && key === 88) isClipboard = true // x
+
         const isNumeric = ((key === 8) || (key === 9) || (key === 13) || (key === 46) || (key === 110) ||
           (key === 116) || (key === 123) || (key === 189) || (key === 190) || ((key >= 35) && (key <= 40)) ||
           ((key >= 48) && (key <= 57)) || ((key >= 96) && (key <= 105)))
 
-        if (!isNumeric) {
+        if (!isNumeric && !isClipboard) {
           e.stopImmediatePropagation()
           e.preventDefault()
         }
@@ -122,23 +134,23 @@ export const SpreadSheetEditor = (props) => {
     }
   }
 
-  useEffect(() => {
-    if (hotTableRef?.current?.hotInstance) {
-      const hotTableObj = hotTableRef?.current?.hotInstance
-      hotTableObj.loadData(hotTableData)
-      hotTableObj.updateSettings({
-        cells (row, col) {
-          const cellProperties = {}
-          if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
-            cellProperties.readOnly = false
-          }
-          return cellProperties
-        }
-      })
-    }
-  }, [hotTableData])
+  // useEffect(() => {
+  //   if (hotTableRef?.current?.hotInstance) {
+  //     const hotTableObj = hotTableRef?.current?.hotInstance
+  //     hotTableObj.loadData(hotTableData)
+  //     hotTableObj.updateSettings({
+  //       cells (row, col) {
+  //         const cellProperties = {}
+  //         if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
+  //           cellProperties.readOnly = false
+  //         }
+  //         return cellProperties
+  //       }
+  //     })
+  //   }
+  // }, [hotTableData])
 
-  useEffect(() => {
+  const handleCache = useCallback(() => {
     const interVal = setInterval(() => {
       if (navigator.clipboard) {
         navigator.clipboard.readText().then(function (clipboardData) {
@@ -149,13 +161,19 @@ export const SpreadSheetEditor = (props) => {
     return () => clearInterval(interVal)
   }, [cache])
 
+  useEffect(() => {
+    handleCache()
+    // return () => clearInterval(interVal)
+  }, [handleCache])
+
   return (
     <SpreadSheetContainer>
       <HotTable
+        data={hotTableData}
         settings={settings}
-        afterChange={(changes, accionHanson) => handleAfterChange(changes, accionHanson)}
         ref={hotTableRef}
         beforeRemoveRow={(index, amount, physicalRows) => handleBeforeRemoveRow(index, amount, physicalRows)}
+        afterChange={(changes, accionHanson) => handleAfterChange(changes, accionHanson)}
         afterSelectionEnd={(row, col, row1, col1) => afterSelectionEnd(row, col, row1, col1)}
         outsideClickDeselects={(event) => outsideClickDeselects(event)}
       >
@@ -174,3 +192,5 @@ export const SpreadSheetEditor = (props) => {
     </SpreadSheetContainer>
   )
 }
+
+export default memo(SpreadSheetEditor)

@@ -16,7 +16,7 @@ export const Container = styled.div`
       border-left: 1px solid #CCC;
     `}
   `}
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   height: 100vh;
   top: 0px;
   z-index: 1001;
