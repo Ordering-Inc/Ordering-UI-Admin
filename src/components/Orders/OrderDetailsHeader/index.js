@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useLanguage, useSession } from 'ordering-components-admin'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import {
@@ -24,22 +24,17 @@ export const OrderDetailsHeader = (props) => {
     actionSidebar,
     setIsTourOpen,
     isTourOpen,
-    currentTourStep
+    currentTourStep,
+    showOption,
+    openMessage
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const [activedButton, setActivedButton] = useState(null)
 
   const closeSideBar = () => {
     actionSidebar(false)
-    setActivedButton(null)
     if (isTourOpen && currentTourStep === 1) setIsTourOpen(false)
-  }
-
-  const handleClickButton = (option) => {
-    setActivedButton(option)
-    handleOpenMessages(option)
   }
 
   return (
@@ -86,8 +81,8 @@ export const OrderDetailsHeader = (props) => {
         {user?.level !== 5 && (
           <ButtonLink
             color='black'
-            active={activedButton === 'chat'}
-            onClick={() => handleClickButton('chat')}
+            active={openMessage?.chat}
+            onClick={() => handleOpenMessages('chat')}
             isDisabled={isTourOpen && currentTourStep === 1}
           >
             <ChatIcon />
@@ -103,19 +98,16 @@ export const OrderDetailsHeader = (props) => {
         </ButtonLink> */}
         <ButtonLink
           color='black'
-          active={activedButton === 'history'}
-          onClick={() => handleClickButton('history')}
+          active={openMessage?.history}
+          onClick={() => handleOpenMessages('history')}
           isDisabled={isTourOpen && currentTourStep === 1}
         >
           <Diagram3 />
         </ButtonLink>
         <ButtonLink
           color='black'
-          active={activedButton === 'metafields'}
-          onClick={() => {
-            setActivedButton('metafields')
-            handleShowOption('metafields')
-          }}
+          active={showOption === 'metafields'}
+          onClick={() => handleShowOption('metafields')}
           isDisabled={isTourOpen && currentTourStep === 1}
         >
           <ThreeDotsVertical />

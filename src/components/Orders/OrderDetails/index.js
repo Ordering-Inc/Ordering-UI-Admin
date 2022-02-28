@@ -257,6 +257,12 @@ const OrderDetailsUI = (props) => {
     }
   }
 
+  const handleCloseMoreDetails = () => {
+    setExtraOpen(false)
+    setOpenMessages({ chat: false, history: false })
+    setShowOption(null)
+  }
+
   useEffect(() => {
     if (!open) return
     document.addEventListener('keydown', onCloseSidebar)
@@ -290,6 +296,8 @@ const OrderDetailsUI = (props) => {
             order={order}
             extraOpen={extraOpen}
             actionSidebar={actionSidebar}
+            showOption={showOption}
+            openMessage={openMessages}
             handleShowOption={handleShowOption}
             handleOpenMessages={handleOpenMessages}
             isTourOpen={isTourOpen}
@@ -361,7 +369,7 @@ const OrderDetailsUI = (props) => {
           {width >= 1000 ? (
             <OrderDetailsExtraContent>
               <CloseButtonWrapper>
-                <IconButton color='black' onClick={() => setExtraOpen(false)}>
+                <IconButton color='black' onClick={() => handleCloseMoreDetails()}>
                   <XLg />
                 </IconButton>
               </CloseButtonWrapper>
@@ -406,7 +414,7 @@ const OrderDetailsUI = (props) => {
                 width='70%'
                 height='90vh'
                 open={openMessages?.chat}
-                onClose={() => setExtraOpen(false)}
+                onClose={() => handleCloseMessages()}
               >
                 {openMessages?.chat && (
                   <ChatContainer>
