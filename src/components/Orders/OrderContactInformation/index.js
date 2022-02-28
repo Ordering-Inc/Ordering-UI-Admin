@@ -172,7 +172,7 @@ export const OrderContactInformation = (props) => {
                     </td>
                   </tr>
                 )}
-                {order?.customer?.address && (
+                {!!order?.customer?.address && (
                   <tr>
                     <td>{t('CHECKOUT_FULL_ADDRESS', 'Full address')}</td>
                     <td>
@@ -180,19 +180,19 @@ export const OrderContactInformation = (props) => {
                     </td>
                   </tr>
                 )}
-                {order?.customer?.internal_number && (
+                {!!order?.customer?.internal_number && (
                   <tr>
                     <td>{t('INTERNAL_NUMBER', 'Internal number')}</td>
                     <td>{order?.customer?.internal_number}</td>
                   </tr>
                 )}
-                {order?.customer?.address_notes && (
+                {!!order?.customer?.address_notes && (
                   <tr>
                     <td>{t('NOTES', 'Notes')}</td>
                     <td>{order?.customer?.address_notes}</td>
                   </tr>
                 )}
-                {order?.customer?.zipcode && (
+                {!!order?.customer?.zipcode && (
                   <tr>
                     <td>{t('ZIPCODE', 'Zipcode')}</td>
                     <td>{order?.customer?.zipcode}</td>

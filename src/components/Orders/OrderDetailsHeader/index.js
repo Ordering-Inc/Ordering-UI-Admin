@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLanguage, useSession } from 'ordering-components-admin'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import {
@@ -29,10 +29,17 @@ export const OrderDetailsHeader = (props) => {
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [activedButton, setActivedButton] = useState(null)
 
   const closeSideBar = () => {
     actionSidebar(false)
+    setActivedButton(null)
     if (isTourOpen && currentTourStep === 1) setIsTourOpen(false)
+  }
+
+  const handleClickButton = (option) => {
+    setActivedButton(option)
+    handleOpenMessages(option)
   }
 
   return (
@@ -78,7 +85,9 @@ export const OrderDetailsHeader = (props) => {
         </ButtonLink> */}
         {user?.level !== 5 && (
           <ButtonLink
-            onClick={() => handleOpenMessages('chat')}
+            color='black'
+            active={activedButton === 'chat'}
+            onClick={() => handleClickButton('chat')}
             isDisabled={isTourOpen && currentTourStep === 1}
           >
             <ChatIcon />
@@ -93,13 +102,20 @@ export const OrderDetailsHeader = (props) => {
           <Printer />
         </ButtonLink> */}
         <ButtonLink
-          onClick={() => handleOpenMessages('history')}
+          color='black'
+          active={activedButton === 'history'}
+          onClick={() => handleClickButton('history')}
           isDisabled={isTourOpen && currentTourStep === 1}
         >
           <Diagram3 />
         </ButtonLink>
         <ButtonLink
-          onClick={() => handleShowOption('metafields')}
+          color='black'
+          active={activedButton === 'metafields'}
+          onClick={() => {
+            setActivedButton('metafields')
+            handleShowOption('metafields')
+          }}
           isDisabled={isTourOpen && currentTourStep === 1}
         >
           <ThreeDotsVertical />
