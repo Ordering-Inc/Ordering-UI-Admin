@@ -22,7 +22,8 @@ import {
   CondtionItem,
   Option,
   SelectWrapper,
-  DiscountContainer
+  DiscountContainer,
+  AutomaticDiscountEnableWrapper
 } from './styles'
 
 export const EnterprisePromotionRules = (props) => {
@@ -176,16 +177,31 @@ export const EnterprisePromotionRules = (props) => {
             )}
 
           </CouponContainer>
-          <DiscountOption
-            active={(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1))}
-            onClick={() => handleChangeItem({ type: 1 })}
-          >
-            {(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1)) ? (
-              <RecordCircleFill />
-            ) : (
-              <Circle />
+          <DiscountOption>
+            <CouponHeader
+              active={(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1))}
+              onClick={() => handleChangeItem({ type: 1 })}
+            >
+              {(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1)) ? (
+                <RecordCircleFill />
+              ) : (
+                <Circle />
+              )}
+              <span>{t('DISCOUNT', 'discount')}</span>
+            </CouponHeader>
+            {(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1)) && (
+              <AutomaticDiscountEnableWrapper>
+                <Checkbox
+                  checked={
+                    typeof formState.changes?.auto !== 'undefined'
+                      ? formState.changes?.auto
+                      : promotionState.promotion?.auto
+                  }
+                  onChange={e => handleChangeItem({ auto: e.target.checked })}
+                />
+                <span>{t('AUTOMATIC_DISCOUNT', 'Automatic discount')}</span>
+              </AutomaticDiscountEnableWrapper>
             )}
-            <span>{t('AUTOMATIC_DISCOUNT', 'Automatic discount')}</span>
           </DiscountOption>
 
           <SectionTitle>{t('CONDITIONS', 'Conditions')}</SectionTitle>
