@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 export const CheckBox = styled.div`
   color: ${props => props.theme.colors.primary};
+  display: flex;
   svg {
-    width: 25px;
-    height: 25px;
+    font-size: 16px;
   }
 `
