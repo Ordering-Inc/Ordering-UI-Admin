@@ -84,7 +84,7 @@ export const App = () => {
         loaded && (
           <>
             <NotNetworkConnectivity />
-            {configs?.google_tag_manager?.value && (
+            {GoogleTagManager && (
               <GoogleTagManager tagId={configs?.google_tag_manager?.value} />
             )}
             <Layout>
