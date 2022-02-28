@@ -132,6 +132,11 @@ export const InventoryWrapper = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
+
+  button {
+    height: 44px;
+    margin-top: 10px;
+  }
   
   > span {
     font-size: 16px;

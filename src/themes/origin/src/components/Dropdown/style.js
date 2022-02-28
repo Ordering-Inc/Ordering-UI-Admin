@@ -3,7 +3,7 @@ import { Image } from '../Image'
 
 export const DropdownStyled = styled.div`
   display: flex;
-  background-color: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   padding: 5px;
   border-radius: 1000px;
   color: #333;
@@ -29,7 +29,7 @@ export const DropdownToggleStyled = styled.div`
 
 export const DropdownMenuStyled = styled.div`
   display: flex;
-  background-color: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   /* padding: 15px; */
   flex-direction: column;
   color: #333;

@@ -50,7 +50,7 @@ export const Image = styled.div`
 
 export const Camera = styled.div`
   position: absolute;
-  background-color: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border-radius: 8px;
   width: 22px;
   height: 22px;
@@ -128,7 +128,7 @@ export const CalendarContainer = styled.div`
 `
 
 export const CalendarWrapper = styled.div`
-  background: #FFFFFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border: 1px solid ${props => props.theme.colors.borderColor};
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);

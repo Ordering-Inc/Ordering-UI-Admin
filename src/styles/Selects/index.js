@@ -60,7 +60,7 @@ export const Option = styled.div`
 
 export const Options = styled.div`
   min-width: 100%;
-  background-color: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   z-index: 10000;
   border-width: 1px;
   border-style: solid;
@@ -196,7 +196,7 @@ export const MultiSelectOption = styled.div`
     align-items: center;
     justify-content: center;
     position: absolute;
-    background: white;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     width: 20px;
     height: 20px;
     transform: translate(100%, -50%);

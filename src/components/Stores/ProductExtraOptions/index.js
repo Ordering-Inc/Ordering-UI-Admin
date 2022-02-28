@@ -227,7 +227,7 @@ const ProductExtraOptionsUI = (props) => {
         <OptionsList>
           <OptionItem>
             <OptionNameContainer isHeader>{t('NAME', 'Name')}</OptionNameContainer>
-            <MinimumPurchase isHeader>{t('MIN', 'Min')}</MinimumPurchase>
+            <MinimumPurchase isHeader>{t('MINIMUM', 'Min')}</MinimumPurchase>
             <MaxPurchase isHeader>{t('MAX', 'Max')}</MaxPurchase>
           </OptionItem>
           {extraState.extra?.options && extraState.extra?.options.map(option => (

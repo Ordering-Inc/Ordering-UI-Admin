@@ -50,6 +50,9 @@ const BusinessProductsListingUI = (props) => {
     handleStoresRedirect,
     slug,
     categoryId,
+    productId,
+    isInitialRender,
+    handleUpdateInitialRender,
     handleUpdateBusinessState,
     setCategorySelected,
     setBusinessSlug,
@@ -101,11 +104,20 @@ const BusinessProductsListingUI = (props) => {
   const handleOpenProductDetails = (product) => {
     setSelectedProduct(product)
     setOpenSidebar('product_details')
+    onProductRedirect({
+      slug: businessState?.business?.slug,
+      product: product.id,
+      category: product.category_id
+    })
   }
 
   const handleCloseProductDetails = () => {
     setOpenSidebar(null)
     setSelectedProduct(null)
+    handleUpdateInitialRender(false)
+    onProductRedirect({
+      slug: businessState?.business?.slug
+    })
   }
 
   const handleProductAdd = (status) => {
@@ -134,10 +146,19 @@ const BusinessProductsListingUI = (props) => {
   }
 
   useEffect(() => {
-    if (categoryId) {
-      setOpenSidebar('category_details')
+    if (categoryId && productId) {
+      handleUpdateInitialRender(true)
     }
-  }, [categoryId])
+  }, [])
+  useEffect(() => {
+    if (!isInitialRender || !businessState?.business?.slug) return
+    setOpenSidebar('product_details')
+    onProductRedirect({
+      slug: businessState?.business?.slug,
+      product: productId,
+      category: categoryId
+    })
+  }, [businessState.business?.slug, isInitialRender])
 
   const openBatchImageUploader = () => {
     setBatchImageFormOpen(true)
@@ -165,7 +186,11 @@ const BusinessProductsListingUI = (props) => {
                     <h1>{selectedBusiness?.name || businessState?.business?.name} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
                   </BusinessNameWrapper>
                   {showSelectHeader && (
-                    <BusinessSelectHeader close={handleClose} isOpen={showSelectHeader} changeBusinessState={changeBusinessState} />
+                    <BusinessSelectHeader
+                      close={handleClose}
+                      isOpen={showSelectHeader}
+                      changeBusinessState={changeBusinessState}
+                    />
                   )}
                 </BusinessSelector>
                 <Breadcrumb>
@@ -299,6 +324,8 @@ const BusinessProductsListingUI = (props) => {
           open={openSidebar === 'product_details'}
           onClose={handleCloseProductDetails}
           product={selectedProduct}
+          productId={productId}
+          categoryId={categoryId}
           business={businessState?.business}
           handleUpdateBusinessState={handleUpdateBusinessState}
           setFormTaxState={setFormTaxState}

@@ -3,7 +3,7 @@ import { darken } from 'polished'
 import { Button } from '../Buttons'
 
 export const Input = styled.input`
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   color: ${props => props.theme.colors.headingColor};
   border: 1px solid #DEE2E6;
   border-radius: 8px;
@@ -99,7 +99,7 @@ export const InputGroupRight = styled(InputGroupLeft)`
 `
 
 export const InputPrimary = styled(Input)`
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   color: ${props => props.theme.colors.primary};
   border-color: ${props => props.theme.colors.primary};
 
@@ -109,7 +109,7 @@ export const InputPrimary = styled(Input)`
 `
 
 export const InputSecundary = styled(Input)`
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   color: ${props => props.theme.colors.secundary};
   border-color: ${props => props.theme.colors.secundary};
 
@@ -125,7 +125,7 @@ export const InputGroupPrimary = styled(InputGroup)`
 `
 
 export const TextArea = styled.textarea`
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   color: ${props => props.theme.colors.headingColor};
   border: 1px solid #DEE2E6;
   border-radius: 8px;

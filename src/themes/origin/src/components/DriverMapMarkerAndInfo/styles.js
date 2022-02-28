@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const WrapperMapMarker = styled.div`
   width: 40px;
   height: 40px;
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border: 5px solid #F79B16;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 6px;
@@ -39,7 +39,7 @@ export const MapMarkerImg = (props) => {
 }
 
 export const DriverInfo = styled.div`
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   position: absolute;
   border-radius: 5px;
   padding: 10px;

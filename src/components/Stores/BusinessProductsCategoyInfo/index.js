@@ -131,7 +131,7 @@ export const BusinessProductsCategoyInfo = (props) => {
       const generateCode = {
         target: {
           name: 'slug',
-          value: formState.changes.name ? stringToSlug(formState.changes.name) : stringToSlug(categorySelected.name)
+          value: formState.changes?.name ? stringToSlug(formState.changes.name) : stringToSlug(categorySelected.name)
         }
       }
       setAutoGenerate({
@@ -181,7 +181,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         <Input
           placeholder={t('ENTER_CATEGORY_NAME', 'Enter a category name')}
           name='name'
-          defaultValue={formState?.changes.name}
+          defaultValue={formState?.changes?.name || ''}
           onChange={handleChangeInput}
           autoComplete='off'
         />
@@ -200,7 +200,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         />
         <GenerateButtonWrapper>
           <Button
-            color='primary'
+            color='lightPrimary'
             borderRadius='7.6px'
             disabled={formState.loading || !formState.changes?.name}
             onClick={() => setAutoGenerate({
@@ -216,7 +216,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         <>
           {categorySelected && isAddMode && (
             <BusinessEnableWrapper style={{ paddingTop: 20, display: 'flex', alignItems: 'center' }}>
-              <span style={{ fontSize: 15 }}>{t('ENABLE_PARENT_CATEGORY', 'Allow parent category')}</span>
+              <span style={{ fontSize: 15 }}>{t('ADD_AS_SUBCATEGORY', 'Add as subcategory')}</span>
               <Switch
                 defaultChecked={false}
                 onChange={(val) => handleChangeCheckBox({ enabledParent: val })}

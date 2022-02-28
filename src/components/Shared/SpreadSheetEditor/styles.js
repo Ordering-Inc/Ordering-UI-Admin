@@ -6,7 +6,6 @@ export const SpreadSheetContainer = styled.div`
   }
   .wtHider {
     width: 100% !important;
-    margin-bottom: 20px;
     .wtSpreader {
       width: 100% !important;
     }
@@ -36,7 +35,7 @@ export const SpreadSheetContainer = styled.div`
     }
     th {
       text-align: left;
-      background: #FFF;
+      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
       border: none !important;
       border-bottom: 1px solid #B1BCCC !important;
       > div {

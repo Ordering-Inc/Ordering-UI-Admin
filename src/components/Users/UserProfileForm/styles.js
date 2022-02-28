@@ -95,7 +95,7 @@ export const SideForm = styled.div`
 
 export const Camera = styled.div`
   position: absolute;
-  background-color: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border-radius: 8px;
   width: 24px;
   height: 24px;

@@ -4,7 +4,7 @@ export const HeaderContainer = styled.div`
   position: fixed;
   top: 0px;
   z-index: 1000;
-  background-color: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   display: flex;
   justify-content: space-between;
   width: 100%;

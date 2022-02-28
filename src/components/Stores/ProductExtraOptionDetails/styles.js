@@ -388,6 +388,11 @@ export const RightSubOptionContent = styled.div`
     `}
   }
 `
+export const AdddSubOptionForm = styled.form`
+  display: flex;
+  width: 100%;
+  margin-top: 15px;
+`
 
 export const SelectboxGroup = styled.div`
   display: flex;

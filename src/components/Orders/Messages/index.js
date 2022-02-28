@@ -541,7 +541,7 @@ export const MessagesUI = (props) => {
                                 <div style={{ whiteSpace: 'pre' }}>
                                   {t('TO', 'to')} {' '}
                                   <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
-                                  <strong>{message?.change?.comment ? (`\n${t('COMMENT','Comment:')}`) : ''}</strong>
+                                  <strong>{message?.change?.comment ? (`\n${t('COMMENT', 'Comment:')}`) : ''}</strong>
                                   {message?.change?.comment ? ` ${message?.change?.comment}` : ''}
                                 </div>
                                 <OverlayTrigger

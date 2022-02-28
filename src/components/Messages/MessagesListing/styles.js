@@ -49,7 +49,7 @@ export const OrdersContainer = styled.div`
 export const FilterContainer = styled.div`
   position: sticky;
   top: 0px;
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   padding: 0 12px;
   z-index: 100;
 `

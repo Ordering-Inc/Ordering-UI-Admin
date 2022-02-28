@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 export const WrapperMapMarker = styled.div`
   width: 50px;
   height: 50px;
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border: 3px solid ${props => props.theme.colors.primary};
   border-radius: 100%;
   position: absolute;
@@ -16,7 +16,7 @@ export const WrapperMapMarker = styled.div`
     border-radius: 100%;
     padding: 3px;
     box-sizing: border-box;
-    background: #FFF;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     z-index: 1;
   }
 
@@ -35,7 +35,7 @@ export const WrapperMapMarker = styled.div`
   }
 `
 const MapMarkerImgStyled = styled.div`
-  background-color: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   display: flex;
   width: 100%;
   height: 100%;
@@ -60,7 +60,7 @@ export const MapMarkerImg = (props) => {
 }
 
 export const InfoContainer = styled.div`
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   position: absolute;
   border-radius: 5px;
   padding: 10px;

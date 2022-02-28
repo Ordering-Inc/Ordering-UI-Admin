@@ -6,7 +6,7 @@ export const GpsButtonStyle = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   padding: 0;
   width: 43px;
   height: 43px;

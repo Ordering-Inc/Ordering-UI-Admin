@@ -16,7 +16,7 @@ export const RoundMarker = styled.div`
 export const WrapperMapMarker = styled.div`
   width: 40px;
   height: 40px;
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border: 5px solid #0E9B55;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 6px;
@@ -54,7 +54,7 @@ export const MapMarkerImg = (props) => {
 }
 
 export const InfoContainer = styled.div`
-  background: #fff;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   position: absolute;
   border-radius: 5px;
   padding: 10px;

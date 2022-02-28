@@ -96,7 +96,7 @@ export const AddButton = styled.div`
   }
 `
 
-export const ExtraAddContainer = styled.div`
+export const ExtraAddForm = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -91,7 +91,7 @@ export const StripeConnectButton = styled.button`
     color: #FFF;
     span {
       &:first-child {
-        background: #FFF;
+        background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
         svg {
           color: #27BCFD;
         }

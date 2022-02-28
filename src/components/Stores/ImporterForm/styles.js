@@ -111,7 +111,7 @@ export const FieldRow = styled.div`
   }
 `
 export const FieldName = styled.div`
-  background: #FFF;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   color: ${props => props.theme.colors?.headingColor};
   border: 1px solid #DEE2E6;
   border-radius: 8px;
