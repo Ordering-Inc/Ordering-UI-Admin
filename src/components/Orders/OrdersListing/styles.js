@@ -6,10 +6,20 @@ export const WrapperNoneOrders = styled.div`
   `
 export const InnerNoneOrdersContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 10px 0;
   img {
     width: 250px;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 0px 0 40px 0;
+  }
+
+  button {
+    height: 44px;
   }
 
   ${({ small }) => small && css`

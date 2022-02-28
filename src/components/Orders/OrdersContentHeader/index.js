@@ -34,13 +34,15 @@ export const OrdersContentHeader = (props) => {
     handleChangeFilterValues,
     handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus,
-    handleOpenTour
+    handleOpenTour,
+
+    filterModalOpen,
+    setFilterModalOpen
   } = props
 
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
-  const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [filterApplied, setFilterApplied] = useState(false)
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export const OrdersContentHeader = (props) => {
     if (Object.keys(filterValues).length === 0) {
       _filterApplied = false
     } else {
-      _filterApplied = filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
+      _filterApplied = filterValues?.groupTypes?.length || filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
        filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
        filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0
     }

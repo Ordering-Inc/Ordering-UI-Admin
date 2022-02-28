@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { OrdersTable } from '../OrdersTable'
 import { OrdersCards } from '../OrdersCards'
 import { getStorageItem, setStorageItem } from '../../../utils'
+import { Button } from '../../../styles'
+
 import {
   WrapperNoneOrders,
   WrapperOrderListContent,
@@ -32,6 +35,8 @@ export const OrdersListing = (props) => {
     ordersStatusGroup,
     groupStatus,
     orderDetailId,
+    filterValues,
+    setFilterModalOpen,
 
     isMessagesView,
     setSelectedOrderIds,
@@ -42,6 +47,8 @@ export const OrdersListing = (props) => {
   } = props
 
   const theme = useTheme()
+  const [, t] = useLanguage()
+  const [filterApplied, setFilterApplied] = useState(false)
 
   const handleSetStorage = async () => {
     const preVisited = await getStorageItem('visited', true)
@@ -73,6 +80,18 @@ export const OrdersListing = (props) => {
     handleOpenTour && handleSetStorage()
   }, [orderList.loading])
 
+  useEffect(() => {
+    let _filterApplied = false
+    if (Object.keys(filterValues).length === 0) {
+      _filterApplied = false
+    } else {
+      _filterApplied = filterValues?.groupTypes?.length || filterValues?.businessIds?.length > 0 || filterValues?.cityIds?.length > 0 ||
+       filterValues?.deliveryEndDatetime !== null || filterValues?.deliveryFromDatetime !== null || filterValues?.deliveryTypes?.length > 0 ||
+       filterValues?.driverIds?.length > 0 || filterValues?.paymethodIds?.length > 0 || filterValues?.statuses?.length > 0
+    }
+    setFilterApplied(_filterApplied)
+  }, [filterValues])
+
   return (
     <>
       {((ordersStatusGroup === groupStatus) || isMessagesView) && (
@@ -81,6 +100,21 @@ export const OrdersListing = (props) => {
             <WrapperNoneOrders>
               <InnerNoneOrdersContainer small={orderListView === 'small'}>
                 <img src={theme?.images?.dummies?.noOrders} alt='none' />
+                {filterApplied ? (
+                  <>
+                    <p>{t('NOT_FOUND_FILTERED_ORDERS', 'No orders with the current filters applied.')}</p>
+                    <Button
+                      outline
+                      borderRadius='8px'
+                      color='primary'
+                      onClick={() => setFilterModalOpen(true)}
+                    >
+                      {t('FILTERS', 'Filters')}
+                    </Button>
+                  </>
+                ) : (
+                  <p>{t('MOBILE_NO_ORDERS', 'No Orders yet.')}</p>
+                )}
               </InnerNoneOrdersContainer>
             </WrapperNoneOrders>
           ) : (
