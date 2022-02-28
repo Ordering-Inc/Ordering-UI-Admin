@@ -163,7 +163,7 @@ export const ProductSummary = (props) => {
               transitionDuration={200}
             />
             <RolWrapper>
-              <h4>{parsePrice(productState?.product?.price)}</h4>
+              <h4>{parsePrice(productState?.product?.price - productState?.product?.cost_price)}</h4>
               <p>{t('PRODUCT_SALES_ROI', 'Product sales ROI')}</p>
             </RolWrapper>
           </ProductSales>
