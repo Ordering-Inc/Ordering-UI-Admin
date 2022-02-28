@@ -93,6 +93,10 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       register = _useForm.register,
       errors = _useForm.errors;
 
+  var _useToast = (0, _orderingComponentsAdmin.useToast)(),
+      _useToast2 = _slicedToArray(_useToast, 2),
+      showToast = _useToast2[1].showToast;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       isMenuOpen = _useState2[0],
@@ -115,6 +119,11 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       confirm = _useState6[0],
       setConfirm = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isMaxError = _useState8[0],
+      setIsMaxError = _useState8[1];
+
   var closeAlert = function closeAlert() {
     cleanEditErrors();
     setAlertState({
@@ -133,7 +142,17 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
         var max = changesState !== null && changesState !== void 0 && (_changesState$changes = changesState.changes) !== null && _changesState$changes !== void 0 && _changesState$changes.max ? changesState === null || changesState === void 0 ? void 0 : (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.max : option === null || option === void 0 ? void 0 : option.max;
         if (parseInt(e.target.value) > parseInt(max)) return;
       } else {
-        var _changesState$changes3, _changesState$changes4;
+        var _option$suboptions, _option$suboptions$fi, _e$target, _changesState$changes3, _changesState$changes4;
+
+        if ((option === null || option === void 0 ? void 0 : (_option$suboptions = option.suboptions) === null || _option$suboptions === void 0 ? void 0 : (_option$suboptions$fi = _option$suboptions.filter(function (suboption) {
+          return suboption === null || suboption === void 0 ? void 0 : suboption.preselected;
+        })) === null || _option$suboptions$fi === void 0 ? void 0 : _option$suboptions$fi.length) > parseInt(e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value)) {
+          setIsMaxError(true);
+          showToast(_orderingComponentsAdmin.ToastType.Error, t('ERROR_MATCH_MAX_DEFAULT_SUBOPTIONS', 'Max default suboptions length is less than preselected suboptions'));
+          return;
+        }
+
+        setIsMaxError(false);
 
         var _min = changesState !== null && changesState !== void 0 && (_changesState$changes3 = changesState.changes) !== null && _changesState$changes3 !== void 0 && _changesState$changes3.min ? changesState === null || changesState === void 0 ? void 0 : (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.min : option === null || option === void 0 ? void 0 : option.min;
 
@@ -362,9 +381,10 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     width: "70%",
     open: openModal === null || openModal === void 0 ? void 0 : openModal.edit,
     onClose: function onClose() {
-      return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+      setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         edit: false
       }));
+      setIsMaxError(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_ProductExtraOptionDetails.ProductExtraOptionDetails, {
     business: business,
@@ -381,7 +401,8 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       }));
     },
     handleUpdateBusinessState: handleUpdateBusinessState,
-    handleSucccessDeleteOption: handleSucccessDeleteOption
+    handleSucccessDeleteOption: handleSucccessDeleteOption,
+    isMaxError: isMaxError
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
     open: openModal === null || openModal === void 0 ? void 0 : openModal.metaField,
