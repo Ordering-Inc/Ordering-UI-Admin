@@ -17,7 +17,8 @@ import {
   ActionsForm,
   InventoryWrapper,
   Wrapper,
-  RegularWrapper
+  RegularWrapper,
+  FieldRow
 } from './styles'
 
 export const ProductDetatilsInformation = (props) => {
@@ -102,6 +103,10 @@ export const ProductDetatilsInformation = (props) => {
     }
   }
 
+  const handleRegularPriceSwitch = (val) => {
+    handleChangeFormState({ in_offer: val })
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => {
@@ -134,6 +139,12 @@ export const ProductDetatilsInformation = (props) => {
       })
     }
   }, [autoGenerateCode])
+
+  useEffect(() => {
+    if (formState.changes?.offer_price === null) {
+      handleChangeFormState({ in_offer: false })
+    }
+  }, [formState.changes?.offer_price])
 
   return (
     <>
@@ -182,35 +193,38 @@ export const ProductDetatilsInformation = (props) => {
             autoComplete='off'
           />
         </InputWrapper>
-        <InputWrapper>
-          <label className='space-between'>
-            <span>{t('PRICE', 'Price')}</span>
-          </label>
-          <Input
-            name='price'
-            placeholder={parsePrice(0)}
-            defaultValue={product?.price}
-            onChange={(e) => handleChangeInput(e)}
-            disabled={formState.loading}
-            autoComplete='off'
-            onKeyPress={(e) => {
-              if (!/^[0-9.]$/.test(e.key)) {
-                e.preventDefault()
-              }
-            }}
-          />
-        </InputWrapper>
-        <RegularWrapper>
-          <span>{t('REGULAR_PRICE', 'Regular Price')}</span>
-          <Switch
-            defaultChecked={product?.in_offer}
-            onChange={val => handleChangeFormState({ in_offer: val })}
-          />
-        </RegularWrapper>
-        {
-          (typeof (formState?.changes?.in_offer) !== 'undefined' ? formState?.changes?.in_offer : product?.in_offer) && (
-            <InputWrapper style={{ marginTop: '10px' }}>
-              <Input
+        <FieldRow>
+          <InputWrapper>
+            <label className='space-between'>
+              <span>{t('PRICE', 'Price')}</span>
+            </label>
+            <Input
+              name='price'
+              placeholder={parsePrice(0)}
+              defaultValue={product?.price}
+              onChange={(e) => handleChangeInput(e)}
+              disabled={formState.loading}
+              autoComplete='off'
+              onKeyPress={(e) => {
+                if (!/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <RegularWrapper>
+              <span>{t('REGULAR_PRICE', 'Regular Price')}</span>
+              <Switch
+                defaultChecked={
+                  formState?.result?.result
+                    ? formState?.result?.result?.in_offer
+                    : formState?.changes?.in_offer ?? (product?.in_offer && product?.offer_price)
+                }
+                onChange={val => handleRegularPriceSwitch(val)}
+              />
+            </RegularWrapper>
+            <Input
                 name='offer_price'
                 placeholder={parsePrice(0)}
                 defaultValue={product?.offer_price}
@@ -222,7 +236,7 @@ export const ProductDetatilsInformation = (props) => {
                   min: formState?.changes?.price ?? product?.price
                 })}
                 onChange={(e) => handleChangeInput(e)}
-                disabled={formState.loading}
+                disabled={formState.loading || !(typeof (formState?.changes?.in_offer) !== 'undefined' ? formState?.changes?.in_offer : product?.in_offer)}
                 autoComplete='off'
                 onKeyPress={(e) => {
                   if (!/^[0-9.]$/.test(e.key)) {
@@ -230,9 +244,8 @@ export const ProductDetatilsInformation = (props) => {
                   }
                 }}
               />
-            </InputWrapper>
-          )
-        }
+          </InputWrapper>
+        </FieldRow>
         <InputWrapper>
           <label>{t('DESCRIPTION', 'Description')}</label>
           <TextArea
