@@ -44,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionRules = function EnterprisePromotionRules(props) {
-  var _formState$changes, _formState$changes2, _promotionState$promo, _formState$changes$ra, _formState$changes3, _promotionState$promo2, _ref, _formState$changes$ra2, _formState$changes4, _promotionState$promo3, _formState$changes5, _promotionState$promo4, _formState$changes6, _promotionState$promo5, _formState$changes7, _promotionState$promo6, _formState$changes8, _formState$changes9, _promotionState$promo7, _ref2, _formState$changes$co, _formState$changes10, _promotionState$promo8, _formState$changes11, _promotionState$promo9, _formState$changes12, _promotionState$promo10;
+  var _formState$changes, _formState$changes2, _promotionState$promo, _formState$changes$ra, _formState$changes3, _promotionState$promo2, _ref, _formState$changes$ra2, _formState$changes4, _promotionState$promo3, _formState$changes5, _promotionState$promo4, _formState$changes6, _promotionState$promo5, _formState$changes7, _promotionState$promo6, _formState$changes8, _formState$changes9, _promotionState$promo7, _ref2, _formState$changes$co, _formState$changes10, _promotionState$promo8, _formState$changes11, _promotionState$promo9, _formState$changes12, _promotionState$promo10, _formState$changes13, _promotionState$promo11, _formState$changes14, _formState$changes15, _promotionState$promo12;
 
   var isAddMode = props.isAddMode,
       promotionState = props.promotionState,
@@ -184,14 +184,21 @@ var EnterprisePromotionRules = function EnterprisePromotionRules(props) {
         coupon: e.target.value.replace(/\s+/g, '')
       });
     }
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.DiscountOption, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.DiscountOption, null, /*#__PURE__*/_react.default.createElement(_styles2.CouponHeader, {
     active: ((_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.type) === 1 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo9 = promotionState.promotion) === null || _promotionState$promo9 === void 0 ? void 0 : _promotionState$promo9.type) === 1,
     onClick: function onClick() {
       return handleChangeItem({
         type: 1
       });
     }
-  }, ((_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.type) === 1 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo10 = promotionState.promotion) === null || _promotionState$promo10 === void 0 ? void 0 : _promotionState$promo10.type) === 1 ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('AUTOMATIC_DISCOUNT', 'Automatic discount'))), /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('CONDITIONS', 'Conditions')), /*#__PURE__*/_react.default.createElement(_styles2.CondtionItem, {
+  }, ((_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.type) === 1 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo10 = promotionState.promotion) === null || _promotionState$promo10 === void 0 ? void 0 : _promotionState$promo10.type) === 1 ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DISCOUNT', 'discount'))), (((_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.type) === 1 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo11 = promotionState.promotion) === null || _promotionState$promo11 === void 0 ? void 0 : _promotionState$promo11.type) === 1) && /*#__PURE__*/_react.default.createElement(_styles2.AutomaticDiscountEnableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    checked: typeof ((_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.auto) !== 'undefined' ? (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.auto : (_promotionState$promo12 = promotionState.promotion) === null || _promotionState$promo12 === void 0 ? void 0 : _promotionState$promo12.auto,
+    onChange: function onChange(e) {
+      return handleChangeItem({
+        auto: e.target.checked
+      });
+    }
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('AUTOMATIC_DISCOUNT', 'Automatic discount')))), /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('CONDITIONS', 'Conditions')), /*#__PURE__*/_react.default.createElement(_styles2.CondtionItem, {
     active: isShowConditions,
     onClick: function onClick() {
       return hanndleClickApply();
