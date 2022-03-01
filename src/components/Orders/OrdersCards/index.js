@@ -173,7 +173,8 @@ export const OrdersCards = (props) => {
                   >
                     <DriverSelector
                       orderView
-                      padding='5px 0'
+                      small
+                      padding='0px'
                       defaultValue={order?.driver_id ? order.driver_id : 'default'}
                       drivers={driversList.drivers}
                       order={order}

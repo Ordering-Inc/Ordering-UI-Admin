@@ -172,7 +172,7 @@ export const OrderContactInformation = (props) => {
                     </td>
                   </tr>
                 )}
-                {order?.customer?.address && (
+                {!!order?.customer?.address && (
                   <tr>
                     <td>{t('CHECKOUT_FULL_ADDRESS', 'Full address')}</td>
                     <td>
@@ -180,19 +180,19 @@ export const OrderContactInformation = (props) => {
                     </td>
                   </tr>
                 )}
-                {order?.customer?.internal_number && (
+                {!!order?.customer?.internal_number && (
                   <tr>
                     <td>{t('INTERNAL_NUMBER', 'Internal number')}</td>
                     <td>{order?.customer?.internal_number}</td>
                   </tr>
                 )}
-                {order?.customer?.address_notes && (
+                {!!order?.customer?.address_notes && (
                   <tr>
                     <td>{t('NOTES', 'Notes')}</td>
                     <td>{order?.customer?.address_notes}</td>
                   </tr>
                 )}
-                {order?.customer?.zipcode && (
+                {!!order?.customer?.zipcode && (
                   <tr>
                     <td>{t('ZIPCODE', 'Zipcode')}</td>
                     <td>{order?.customer?.zipcode}</td>
@@ -204,40 +204,12 @@ export const OrderContactInformation = (props) => {
         </Accordion.Collapse>
       </Accordion>
       {order?.delivery_type === 1 && (
-        <DriverInfoContainer>
-          <DriverInfo>
-            <PhotoWrapper>
-              {order?.driver?.photo ? (
-                <Photo bgimage={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} />
-              ) : (
-                <FaUserAlt />
-              )}
-            </PhotoWrapper>
-            {order.driver_id ? (
-              <InfoContent>
-                <div>
-                  <p>{order?.driver?.name} {order?.driver?.middle_name} {order?.driver?.lastname} {order?.driver?.second_lastname}</p>
-                  {order?.driver?.cellphone && (
-                    <IconButton
-                      onClick={() => window.open(`tel:${order?.driver?.cellphone}`)}
-                    >
-                      <Telephone />
-                    </IconButton>
-                  )}
-                </div>
-                <p>{t('DRIVER', 'Driver')}</p>
-              </InfoContent>
-            ) : (
-              <InfoContent>
-                <div>
-                  <p>{t('NO_DRIVER', 'No driver')}</p>
-                </div>
-              </InfoContent>
-            )}
-          </DriverInfo>
+        <>
           <DriverSelectorContainer>
+            <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
             <DriverSelector
               isFirstSelect
+              small
               drivers={driversList.drivers}
               isPhoneView
               defaultValue={order?.driver?.id ? order.driver.id : 'default'}
@@ -247,7 +219,39 @@ export const OrderContactInformation = (props) => {
               handleOpenMessages={handleOpenMessages}
             />
           </DriverSelectorContainer>
-        </DriverInfoContainer>
+          <DriverInfoContainer>
+            <DriverInfo>
+              <PhotoWrapper>
+                {order?.driver?.photo ? (
+                  <Photo bgimage={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} />
+                ) : (
+                  <FaUserAlt />
+                )}
+              </PhotoWrapper>
+              {order.driver_id ? (
+                <InfoContent>
+                  <div>
+                    <p>{order?.driver?.name} {order?.driver?.middle_name} {order?.driver?.lastname} {order?.driver?.second_lastname}</p>
+                    {order?.driver?.cellphone && (
+                      <IconButton
+                        onClick={() => window.open(`tel:${order?.driver?.cellphone}`)}
+                      >
+                        <Telephone />
+                      </IconButton>
+                    )}
+                  </div>
+                  <p>{t('DRIVER', 'Driver')}</p>
+                </InfoContent>
+              ) : (
+                <InfoContent>
+                  <div>
+                    <p>{t('NO_DRIVER', 'No driver')}</p>
+                  </div>
+                </InfoContent>
+              )}
+            </DriverInfo>
+          </DriverInfoContainer>
+        </>
       )}
 
       <Modal

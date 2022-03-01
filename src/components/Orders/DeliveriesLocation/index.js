@@ -3,8 +3,8 @@ import { useConfig, useLanguage } from 'ordering-components-admin'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 import { InterActOrderMarker } from '../InterActOrderMarker'
-import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { AutoScroll } from '../../Shared'
+import { useTheme } from 'styled-components'
 
 import {
   WrapperMap,
@@ -22,13 +22,14 @@ export const DeliveriesLocation = (props) => {
     interActionMapOrder
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
   const [mapCenter, setMapCenter] = useState({ lat: 19.4326, lng: -99.1332 })
   const [mapZoom, setMapZoom] = useState(10)
-  const [onlineDrivers, setOnlineDrivers] = useState([])
+  const [activeDrivers, setActiveDrivers] = useState([])
   const [mapLoaded, setMapLoaded] = useState(true)
   const [mapFitted, setMapFitted] = useState(false)
 
@@ -42,7 +43,7 @@ export const DeliveriesLocation = (props) => {
     const _onlineDrivers = driversList.drivers.filter(
       (driver) => driver.enabled && driver.available && !driver.busy
     )
-    setOnlineDrivers(_onlineDrivers)
+    setActiveDrivers(_onlineDrivers)
 
     const bounds = new window.google.maps.LatLngBounds()
 
@@ -73,6 +74,12 @@ export const DeliveriesLocation = (props) => {
         marker = (interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object') ? interActionOrderDriverLocation : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
+      } else {
+        for (const activeDriver of activeDrivers) {
+          const marker = (activeDriver.location !== null && typeof activeDriver.location === 'object') ? activeDriver.location : defaultCenter
+          const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+          bounds.extend(newPoint)
+        }
       }
     }
 
@@ -173,24 +180,31 @@ export const DeliveriesLocation = (props) => {
               image={interActionMapOrder?.driver?.photo}
             />
           )}
+          {interActionMapOrder !== null && interActionMapOrder?.driver === null && activeDrivers.length > 0 && (
+            activeDrivers.map((driver) => (
+              <InterActOrderMarker
+                key={driver.id}
+                driver={driver}
+                lat={driver?.location?.lat ? driver?.location?.lat : defaultCenter.lat}
+                lng={driver?.location?.lng ? driver?.location?.lng : defaultCenter.lng}
+                image={driver?.photo}
+              />
+            ))
+          )}
         </GoogleMapReact>
       )}
 
-      {interActionMapOrder !== null && interActionMapOrder?.driver === null && onlineDrivers.length > 0 && (
+      {interActionMapOrder !== null && interActionMapOrder?.driver === null && activeDrivers.length > 0 && (
         <WrapperOnlineDrivers>
           <p>{t('ACTIVE_DRIVERS', 'Drivers online')}</p>
           <OnlineDrivers>
             <AutoScroll innerScroll>
-              {onlineDrivers.length > 0 && (
+              {activeDrivers.length > 0 && (
                 <>
-                  {onlineDrivers.map(driver => (
+                  {activeDrivers.map(driver => (
                     <WrapDriverInfo key={driver.id}>
                       <WrapperDriverImage>
-                        {driver?.photo ? (
-                          <DriverImage bgimage={driver?.photo} />
-                        ) : (
-                          <FaUserAlt />
-                        )}
+                        <DriverImage bgimage={driver?.photo || theme?.images?.icons?.noDriver} />
                       </WrapperDriverImage>
                       <DriverInfo>
                         <p>{driver.name} {driver.lastname}</p>

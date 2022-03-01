@@ -24,7 +24,9 @@ export const OrderDetailsHeader = (props) => {
     actionSidebar,
     setIsTourOpen,
     isTourOpen,
-    currentTourStep
+    currentTourStep,
+    showOption,
+    openMessage
   } = props
 
   const [, t] = useLanguage()
@@ -78,6 +80,8 @@ export const OrderDetailsHeader = (props) => {
         </ButtonLink> */}
         {user?.level !== 5 && (
           <ButtonLink
+            color='black'
+            active={openMessage?.chat}
             onClick={() => handleOpenMessages('chat')}
             isDisabled={isTourOpen && currentTourStep === 1}
           >
@@ -93,12 +97,16 @@ export const OrderDetailsHeader = (props) => {
           <Printer />
         </ButtonLink> */}
         <ButtonLink
+          color='black'
+          active={openMessage?.history}
           onClick={() => handleOpenMessages('history')}
           isDisabled={isTourOpen && currentTourStep === 1}
         >
           <Diagram3 />
         </ButtonLink>
         <ButtonLink
+          color='black'
+          active={showOption === 'metafields'}
           onClick={() => handleShowOption('metafields')}
           isDisabled={isTourOpen && currentTourStep === 1}
         >

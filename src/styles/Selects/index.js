@@ -25,14 +25,14 @@ export const Option = styled.div`
   `}
 
   &:hover {
-    background-color: ${darken(0.03, '#fafafa')};
+    background-color: #F8F9FA;
   }
 
   ${props => props.selected && css`
-    background-color: ${darken(0.07, '#fafafa')};
+    background-color: #E9ECEF;
   
     &:hover {
-      background-color: ${darken(0.07, '#fafafa')};
+      background-color: ${darken(0.07, '#E9ECEF')};
     }
   `}
 

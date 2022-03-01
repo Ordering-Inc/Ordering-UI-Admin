@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import EnChevronDown from '@meronex/icons/en/EnChevronDown'
-import CheckboxBlankCircle from '@meronex/icons/ri/RiCheckboxBlankCircleLine'
-import CheckboxMarkedCircle from '@meronex/icons/ri/RiCheckboxCircleLine'
+import { CheckSquareFill, Square } from 'react-bootstrap-icons'
 import MdClose from '@meronex/icons/md/MdClose'
 import { Button } from '../Buttons'
 
@@ -133,8 +132,8 @@ export const MultiSelect = (props) => {
                 {option.value !== 'default' && (
                   <CheckBox>
                     {values.includes(option.value)
-                      ? <CheckboxMarkedCircle />
-                      : <CheckboxBlankCircle />}
+                      ? <CheckSquareFill />
+                      : <Square />}
                   </CheckBox>
                 )}
                 {option.content}

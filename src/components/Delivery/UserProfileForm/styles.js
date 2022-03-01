@@ -53,10 +53,6 @@ export const Image = styled.div`
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
   border: 1px solid ${props => props.theme.colors.borderColor};
 
-  ${({ isEdit }) => !isEdit && css`
-    pointer-events: none;
-  `}
-
   img,
   div:first-child {
     width: 100%;
@@ -74,22 +70,6 @@ export const Image = styled.div`
 
   img{
     object-fit: cover;
-  }
-`
-
-export const SideForm = styled.div`
-  width: 100%;
-
-  @media (min-width: 768px) {
-    width: 70%;
-    display: flex;
-    align-items: center;
-
-    ${props => props.theme?.rtl ? css`
-      margin-right: 20px;
-    ` : css`
-      margin-left: 20px;
-    `}
   }
 `
 
@@ -111,34 +91,6 @@ export const Camera = styled.div`
   svg {
     font-size: 16px;
     color: ${props => props.theme.colors.secundaryContrast};
-  }
-`
-
-export const UserData = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  color: ${props => props.theme.colors.headingColor};
-
-  h1 {
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  > * {
-    margin: 5px 0;
-    width: 75%;
-    font-size: 14px;
-  }
-
-  @media (min-width: 768px){
-    align-items: flex-start;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-     text-align: right;
-    `}
   }
 `
 

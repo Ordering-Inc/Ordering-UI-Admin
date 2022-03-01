@@ -24,7 +24,8 @@ import {
   StatusBar,
   AdvancedLogistic,
   OrderProducts,
-  CloseButtonWrapper
+  CloseButtonWrapper,
+  OrderStatusSelectorWrapper
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -257,6 +258,12 @@ const OrderDetailsUI = (props) => {
     }
   }
 
+  const handleCloseMoreDetails = () => {
+    setExtraOpen(false)
+    setOpenMessages({ chat: false, history: false })
+    setShowOption(null)
+  }
+
   useEffect(() => {
     if (!open) return
     document.addEventListener('keydown', onCloseSidebar)
@@ -290,6 +297,8 @@ const OrderDetailsUI = (props) => {
             order={order}
             extraOpen={extraOpen}
             actionSidebar={actionSidebar}
+            showOption={showOption}
+            openMessage={openMessages}
             handleShowOption={handleShowOption}
             handleOpenMessages={handleOpenMessages}
             isTourOpen={isTourOpen}
@@ -305,13 +314,16 @@ const OrderDetailsUI = (props) => {
                   : parseDate(order?.delivery_datetime, { utc: false })}
               </p>
             </div>
-            <OrderStatusTypeSelector
-              isFirstSelect
-              orderId={order.id}
-              deliveryType={order?.delivery_type}
-              defaultValue={parseInt(order.status)}
-              handleUpdateOrderStatus={handleUpdateOrderStatus}
-            />
+            <OrderStatusSelectorWrapper>
+              <OrderStatusTypeSelector
+                isFirstSelect
+                noPadding
+                orderId={order.id}
+                deliveryType={order?.delivery_type}
+                defaultValue={parseInt(order.status)}
+                handleUpdateOrderStatus={handleUpdateOrderStatus}
+              />
+            </OrderStatusSelectorWrapper>
           </OrderStatus>
           <StatusBarContainer>
             <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
@@ -361,7 +373,7 @@ const OrderDetailsUI = (props) => {
           {width >= 1000 ? (
             <OrderDetailsExtraContent>
               <CloseButtonWrapper>
-                <IconButton color='black' onClick={() => setExtraOpen(false)}>
+                <IconButton color='black' onClick={() => handleCloseMoreDetails()}>
                   <XLg />
                 </IconButton>
               </CloseButtonWrapper>
@@ -406,7 +418,7 @@ const OrderDetailsUI = (props) => {
                 width='70%'
                 height='90vh'
                 open={openMessages?.chat}
-                onClose={() => setExtraOpen(false)}
+                onClose={() => handleCloseMessages()}
               >
                 {openMessages?.chat && (
                   <ChatContainer>
