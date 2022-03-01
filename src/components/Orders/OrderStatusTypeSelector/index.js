@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../../styles/Select'
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
-import { useTheme } from 'styled-components'
 import { MultiSelect } from '../../../styles/MultiSelect'
 import { Option, PlaceholderTitle, OrderStatusTypeSelectWrapper } from './styles'
 
@@ -25,7 +24,6 @@ export const OrderStatusTypeSelector = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const theme = useTheme()
   const [defaultOptionValue, setDefaultOptionValue] = useState('default')
   const [filteredOrderStatuses, setFilteredOrderStatuses] = useState([])
 
@@ -36,14 +34,14 @@ export const OrderStatusTypeSelector = (props) => {
       value: 'default',
       name: t('CHANGE_STATUS', 'Change Status'),
       content: <Option noPadding={noPadding}><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>,
-      disabled: true
+      disabled: true,
+      showDisable: true
     },
     {
       value: 'pending',
       name: t('PENDING', 'Pending'),
       content: (
-        <Option noPadding={noPadding}>
-          <img src={theme?.images?.orderStatus?.pending} alt='pending' />
+        <Option noPadding={noPadding} isSubTitle>
           <p>{t('PENDING', 'Pending')}</p>
         </Option>
       ),
@@ -74,8 +72,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: 'inProgress',
       name: t('IN_PROGRESS', 'In Progress'),
       content: (
-        <Option noPadding={noPadding}>
-          <img src={theme?.images?.orderStatus?.inProgress} alt='progress' />
+        <Option noPadding={noPadding} isSubTitle>
           <p>{t('IN_PROGRESS', 'In Progress')}</p>
         </Option>
       ),
@@ -185,8 +182,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: null,
       name: t('COMPLETED', 'Completed'),
       content: (
-        <Option noPadding={noPadding}>
-          <img src={theme?.images?.orderStatus?.completed} alt='completed' />
+        <Option noPadding={noPadding} isSubTitle>
           <p>{t('COMPLETED', 'Completed')}</p>
         </Option>
       ),
@@ -226,8 +222,7 @@ export const OrderStatusTypeSelector = (props) => {
       value: null,
       name: t('CANCELLED', 'Cancelled'),
       content: (
-        <Option noPadding={noPadding}>
-          <img src={theme?.images?.orderStatus?.cancelled} alt='cancelled' />
+        <Option noPadding={noPadding} isSubTitle>
           <p>{t('CANCELLED', 'Cancelled')}</p>
         </Option>
       ),
@@ -408,7 +403,10 @@ export const OrderStatusTypeSelector = (props) => {
       <OrderStatusTypeSelectWrapper>
         {isFirstSelect ? (
           <FirstSelect
+            searchBarIsCustomLayout
+            searchBarPlaceholder={t('SEARCH', 'Search')}
             type={type}
+            placeholder={<Option noPadding={noPadding} isSubTitle>{t('CHANGE_STATUS', 'Change Status')}</Option>}
             optionInnerMaxHeight='50vh'
             noSelected={noSelected}
             defaultValue={defaultOptionValue}
@@ -420,7 +418,10 @@ export const OrderStatusTypeSelector = (props) => {
           />
         ) : (
           <Select
+            searchBarIsCustomLayout
+            searchBarPlaceholder={t('SEARCH', 'Search')}
             type={type}
+            placeholder={<Option noPadding={noPadding} isSubTitle>{t('CHANGE_STATUS', 'Change Status')}</Option>}
             optionInnerMaxHeight='50vh'
             noSelected={noSelected}
             defaultValue={defaultOptionValue}

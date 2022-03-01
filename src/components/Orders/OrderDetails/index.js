@@ -24,7 +24,8 @@ import {
   StatusBar,
   AdvancedLogistic,
   OrderProducts,
-  CloseButtonWrapper
+  CloseButtonWrapper,
+  OrderStatusSelectorWrapper
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -313,13 +314,16 @@ const OrderDetailsUI = (props) => {
                   : parseDate(order?.delivery_datetime, { utc: false })}
               </p>
             </div>
-            <OrderStatusTypeSelector
-              isFirstSelect
-              orderId={order.id}
-              deliveryType={order?.delivery_type}
-              defaultValue={parseInt(order.status)}
-              handleUpdateOrderStatus={handleUpdateOrderStatus}
-            />
+            <OrderStatusSelectorWrapper>
+              <OrderStatusTypeSelector
+                isFirstSelect
+                noPadding
+                orderId={order.id}
+                deliveryType={order?.delivery_type}
+                defaultValue={parseInt(order.status)}
+                handleUpdateOrderStatus={handleUpdateOrderStatus}
+              />
+            </OrderStatusSelectorWrapper>
           </OrderStatus>
           <StatusBarContainer>
             <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
