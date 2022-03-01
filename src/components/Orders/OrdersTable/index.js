@@ -26,7 +26,8 @@ import {
   WrapperPagination,
   StatusInfo,
   LogisticStatusDot,
-  PriorityDot
+  PriorityDot,
+  Timestatus
 } from './styles'
 
 export const OrdersTable = (props) => {
@@ -51,7 +52,6 @@ export const OrdersTable = (props) => {
   const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
 
   const [isAllChecked, setIsAllChecked] = useState(false)
-
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }
@@ -218,6 +218,10 @@ export const OrdersTable = (props) => {
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
 
+  // useEffect(() => {
+  //   setTimeState
+  // }, [])
+
   return (
     <>
       <OrdersContainer
@@ -231,6 +235,9 @@ export const OrdersTable = (props) => {
         >
           <thead>
             <tr>
+              <th>
+                <Timestatus />
+              </th>
               <th
                 className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
               >
@@ -395,6 +402,11 @@ export const OrdersTable = (props) => {
                 data-tour={i === 0 ? 'tour_start' : ''}
               >
                 <tr>
+                  <td>
+                    <Timestatus
+                      timeState={order?.time_status}
+                    />
+                  </td>
                   <td
                     className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'small' : ''}
                   >

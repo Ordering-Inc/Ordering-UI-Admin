@@ -356,3 +356,17 @@ export const PriorityDot = styled.span`
     background-color: ${props => props.theme.colors.danger};
   `}
 `
+export const Timestatus = styled.div`
+  width: 4px;
+  height: 37px;
+  border-radius: 20px 20px 20px 20px;
+  ${({ timeState }) => timeState === 'in_time' && css`
+    background-color: #00D27A;
+  `}
+  ${({ timeState }) => timeState ===  'at_risk' && css`
+    background-color: #FFC700;
+  `}
+  ${({ timeState }) => timeState === 'delayed' && css`
+    background-color: #E63757;
+  `}
+`
