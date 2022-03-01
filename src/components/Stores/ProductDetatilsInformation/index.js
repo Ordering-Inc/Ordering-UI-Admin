@@ -223,7 +223,9 @@ export const ProductDetatilsInformation = (props) => {
               placeholder={parsePrice(0)}
               defaultValue={product?.offer_price}
               ref={formMethods.register({
-                min: formState?.changes?.price ?? product?.price,
+                min: ((typeof formState?.changes?.in_offer === 'undefined' && product?.in_offer) || formState?.changes?.in_offer)
+                  ? formState?.changes?.price ?? product?.price
+                  : null,
                 required:
                   ((typeof formState?.changes?.in_offer === 'undefined' && product?.in_offer) || formState?.changes?.in_offer)
                     ? t(
