@@ -66,8 +66,9 @@ export const DriverName = styled.p`
 `
 export const DriverText = styled.span`
   font-size: 12px;
+  color: ${props => props.theme.colors.lightGray};
   ${({ small }) => small && css`
-    font-size: 8px;
+    display: none;
   `}
 `
 
@@ -126,4 +127,9 @@ export const DriverImage = (props) => {
 
 export const PlaceholderTitle = styled(Option)`
   padding: 10px;
+
+  ${({ isSingle }) => isSingle && css`
+    padding: 0px;
+    font-size: 14px;
+  `}
 `

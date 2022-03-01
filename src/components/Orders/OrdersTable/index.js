@@ -471,7 +471,8 @@ export const OrdersTable = (props) => {
                         <DriversInfo className='driverInfo' noClick={isTourOpen && (currentTourStep === 0 || currentTourStep === 4)}>
                           <DriverSelector
                             orderView
-                            padding='5px 0'
+                            small
+                            padding='0px'
                             defaultValue={order?.driver_id ? order.driver_id : 'default'}
                             drivers={driversList.drivers}
                             order={order}

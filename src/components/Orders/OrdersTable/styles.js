@@ -198,15 +198,20 @@ export const DriversInfo = styled.div`
   > div {
     > div {
       border: none;
-      padding: 0px;
-      > div:first-child {
-        padding: 0px;
-        p {
-          color: ${props => props.theme.colors?.headingColor};
-          font-size: 14px;
+      &:first-child {
+        .driver-photo {
+          width: 45px;
+          height: 45px;
         }
-        > div:first-child {
-          padding: 0px
+        .driver-info {
+          p {
+            color: ${props => props.theme.colors?.headingColor};
+            font-size: 14px;
+            font-weight: 600;
+          }
+          span {
+            display: initial;
+          }
         }
       }
     }

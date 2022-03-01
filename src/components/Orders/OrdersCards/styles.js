@@ -157,11 +157,23 @@ export const DriverSelectorWrapper = styled.div`
   box-sizing: border-box;
   margin-top: 10px;
   > div {
-    > div:first-child {
+    > div {
       border: none;
-      padding: 0px;
-      > div:first-child {
-        padding: 0px
+      &:first-child {
+        .driver-photo {
+          width: 45px;
+          height: 45px;
+        }
+        .driver-info {
+          p {
+            color: ${props => props.theme.colors?.headingColor};
+            font-size: 14px;
+            font-weight: 600;
+          }
+          span {
+            display: initial;
+          }
+        }
       }
     }
   }

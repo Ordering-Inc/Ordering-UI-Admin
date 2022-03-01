@@ -3,7 +3,6 @@ import { useLanguage, DriversList as DriversController } from 'ordering-componen
 import { useTheme } from 'styled-components'
 import { Select } from '../../../styles/Select'
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
-import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { MultiSelect } from '../../../styles/MultiSelect'
 
 import {
@@ -48,14 +47,14 @@ const DriverSelectorUI = (props) => {
       {
         value: 'default',
         content: (
-          <Option padding={padding}>
+          <Option padding={orderView ? padding : '0px'}>
             {orderView ? (
               <>
-                <WrapperDriverImage small={small}>
+                <WrapperDriverImage small={small} className='driver-photo'>
                   <DriverImage bgimage={theme?.images?.icons?.noDriver} small={small} />
                 </WrapperDriverImage>
                 <OptionContent>
-                  <DriverNameContainer>
+                  <DriverNameContainer className='driver-info'>
                     <DriverName small={small}>{t('NO_DRIVER', 'No Driver')}</DriverName>
                   </DriverNameContainer>
                 </OptionContent>
@@ -92,17 +91,13 @@ const DriverSelectorUI = (props) => {
           showDisable: isFilterView ? true : !(isFilterView || (driver?.enabled && driver?.available && !driver?.busy)),
           content: (
             <Option small={small} isPhoneView={isPhoneView} padding={padding}>
-              <WrapperDriverImage small={small}>
-                {driver.photo ? (
-                  <DriverImage bgimage={driver.photo} small={small} />
-                ) : (
-                  <FaUserAlt />
-                )}
+              <WrapperDriverImage small={small} className='driver-photo'>
+                <DriverImage bgimage={driver.photo || theme.images.icons?.noDriver} small={small} />
               </WrapperDriverImage>
               <OptionContent>
-                <DriverNameContainer>
+                <DriverNameContainer className='driver-info'>
                   <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
-                  {!small && <DriverText>{t('DRIVER', 'Driver')}</DriverText>}
+                  <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
                 </DriverNameContainer>
               </OptionContent>
             </Option>
@@ -180,7 +175,6 @@ const DriverSelectorUI = (props) => {
           <>
             {isFirstSelect ? (
               <FirstSelect
-                placeholder={t('SELECT_DRIVER', 'Select driver')}
                 defaultValue={defaultOption || 'default'}
                 options={driversOptionList}
                 optionInnerMaxHeight='200px'
@@ -192,11 +186,14 @@ const DriverSelectorUI = (props) => {
               />
             ) : (
               <Select
-                placeholder={t('SELECT_DRIVER', 'Select driver')}
                 defaultValue={defaultOption || 'default'}
                 options={driversOptionList}
                 optionInnerMaxHeight='200px'
                 onChange={(driverId) => changeDriver(driverId)}
+                isShowSearchBar
+                searchBarPlaceholder={t('SEARCH', 'Search')}
+                searchBarIsCustomLayout
+                handleChangeSearch={handleSearch}
               />
             )}
           </>
