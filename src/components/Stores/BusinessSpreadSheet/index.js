@@ -22,7 +22,7 @@ const BusinessSpreadSheetUI = (props) => {
     { title: t('NAME', 'Name'), code: 'name', readOnly: false, type: 'text', editor: false },
     { title: t('DESCRIPTION', 'Description'), code: 'description', readOnly: false, type: 'text' },
     { title: t('PRICE', 'Price'), code: 'price', readOnly: false, type: 'numeric' },
-    // { title: t('REGULAR_PRICE', 'Regular Price'), code: 'offer_price', readOnly: false, type: 'numeric' },
+    { title: t('INVENTORY', 'Inventory'), code: 'inventoried', readOnly: false, type: 'checkbox' },
     { title: t('QUANTITY', 'Quantity'), code: 'quantity', readOnly: false, type: 'numeric' }
   ]
 
