@@ -31,6 +31,7 @@
     "lightGreen": "#E3FEF3",
     "black": "#000",
     "white": "#FFF",
+    "orange": "#FF9922",
 
     "offline": "#9D9B9B",
 
@@ -47,6 +48,9 @@
     
     "deadlineOk": "#0E9B55",
     "deadlineDelayed": "#DA4A54",
-    "deadlineRisk": "#FFBF12"
+    "deadlineRisk": "#FFBF12",
+    "info": "#27BCFD",
+    "warning": "#FFC700",
+    "success": "#00D27A"
   }
 }

@@ -67,6 +67,20 @@ export const MultiSelectContainer = styled.div`
 
     > div:first-child {
       height: 54px;
+      > div:first-child {
+        padding: 5px;
+        border: none;
+      }
+    }
+
+    > div:not(:first-child) {
+      > div {
+        > div {
+          > div {
+            border: none;
+          }
+        }
+      }
     }
   }
 `

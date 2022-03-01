@@ -7,6 +7,7 @@ import { Personalization } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { UserMetaFields } from '../../Users'
+import { DriverGroupSetting } from '../DriverGroupSetting'
 
 import {
   UserName,
@@ -39,7 +40,7 @@ export const UserDetailsUI = (props) => {
         )}
       </UserName>
       <UserDetailsMenu
-        isDelivery={isDriversPage || isDriversManagersPage}
+        isDriverMenu={isDriversPage}
         currentMenuSelected={currentMenuSelected}
         handleChangeMenu={setCurrentMenuSelected}
       />
@@ -51,6 +52,11 @@ export const UserDetailsUI = (props) => {
               isDriversManagersPage={isDriversManagersPage}
               user={userState.user}
               handleSuccessUpdate={handleSuccessUserUpdate}
+            />
+          )}
+          {currentMenuSelected === 'driver_group' && (
+            <DriverGroupSetting
+              userId={userState?.user?.id}
             />
           )}
           {currentMenuSelected === 'saved_places' && (

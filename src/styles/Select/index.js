@@ -3,6 +3,7 @@ import { useSession } from 'ordering-components-admin'
 import { usePopper } from 'react-popper'
 import { CaretDownFill } from 'react-bootstrap-icons'
 import FiChevronDown from '@meronex/icons/fi/FiChevronDown'
+import { SearchBar } from '../../components/Shared'
 
 import {
   Selected,
@@ -10,7 +11,8 @@ import {
   OptionsInner,
   Option,
   Chevron,
-  Header
+  Header,
+  SearchBarWrapper
 } from '../Selects'
 
 import {
@@ -19,7 +21,21 @@ import {
 } from './styles'
 
 export const Select = (props) => {
-  const { placeholder, options, defaultValue, onChange, notAsync, noSelected, minWidth, isSecondIcon } = props
+  const {
+    placeholder,
+    options,
+    defaultValue,
+    onChange,
+    notAsync,
+    noSelected,
+    minWidth,
+    isSecondIcon,
+    isShowSearchBar,
+    searchValue,
+    handleChangeSearch,
+    searchBarIsCustomLayout,
+    searchBarPlaceholder
+  } = props
   const defaultOption = options?.find(
     (option) => option.value === defaultValue
   )
@@ -127,6 +143,19 @@ export const Select = (props) => {
       </HeaderItem>
       <PopoverBody className='list' ref={popperElement} style={popStyle} {...attributes.popper}>
         <Options className='options'>
+          {isShowSearchBar && (
+            <SearchBarWrapper
+              className='search-bar-container'
+            >
+              <SearchBar
+                lazyLoad
+                isCustomLayout={searchBarIsCustomLayout}
+                search={searchValue}
+                onSearch={handleChangeSearch}
+                placeholder={searchBarPlaceholder || ''}
+              />
+            </SearchBarWrapper>
+          )}
           <OptionsInner
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}

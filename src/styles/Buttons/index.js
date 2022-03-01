@@ -35,8 +35,18 @@ export const IconButton = styled.button`
 
   ${({ color }) => color === 'black' && css`
     > svg {
-      color: #344050;
+      color: ${props => props.theme.colors.headingColor};
     }
+    &:hover {
+      background-color: ${props => props.theme.colors.secundary};
+    }
+    &:active {
+      background-color: ${props => props.theme.colors.secundaryDarkContrast};
+    }
+
+    ${({ active }) => active && css`
+      background-color: ${props => props.theme.colors.secundaryDarkContrast};
+    `}
   `}
 
   ${({ color }) => color === 'primary' && css`
