@@ -34,6 +34,8 @@ export const OrdersDashboardControls = (props) => {
               <WrapOrderStatusTypeSelector>
                 <OrderStatusTypeSelector
                   orderControl
+                  isFirstSelect
+                  noPadding
                   mutiOrdersChange
                   noSelected
                   defaultValue='default'

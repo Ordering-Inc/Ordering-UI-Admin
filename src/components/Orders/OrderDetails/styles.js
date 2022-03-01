@@ -112,21 +112,39 @@ export const OrderStatus = styled.div`
     margin: 0px;
   }
 
-  > div:not(:first-child) {
-    min-width: 40%;
-    border-color: ${props => props.theme.colors?.secundary};
-    border-radius: 8px;
-    > div:first-child {
-      background-color: ${props => props.theme.colors?.secundary};
-      p {
-        color: ${props => props.theme.colors.secundaryContrast};
-      }
-    }
-  }
 
   ${({ isDisabled }) => isDisabled && css`
     pointer-events: none;
   `}
+`
+export const OrderStatusSelectorWrapper = styled.div`
+  min-width: 50%;
+  > div {
+    > div:first-child {
+      border-color: ${props => props.theme.colors?.secundary};
+      border-radius: 8px;
+      background-color: ${props => props.theme.colors?.secundary};
+      > div:first-child {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        > div:first-child {
+          > div {
+            border: none !important;
+            p {
+              color: ${props => props.theme.colors.headingColor} !important;
+              padding: 0 !important;
+            }
+          }
+        }
+      }
+    }
+
+    .list-wrapper {
+      > div {
+        padding: 0 10px;
+      }
+    }
+  }
 `
 
 export const StatusBarContainer = styled.div`

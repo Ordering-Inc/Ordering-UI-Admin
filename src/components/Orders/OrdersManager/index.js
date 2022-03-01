@@ -51,6 +51,7 @@ const OrdersManagerUI = (props) => {
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [detailsOrder, setDetailsOrder] = useState(null)
+  const [filterModalOpen, setFilterModalOpen] = useState(false)
 
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(0)
@@ -155,6 +156,8 @@ const OrdersManagerUI = (props) => {
           handleDeleteMultiOrders={handleDeleteMultiOrders}
           handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
           handleOpenTour={() => handleOpenTour()}
+          filterModalOpen={filterModalOpen}
+          setFilterModalOpen={setFilterModalOpen}
         />
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
@@ -188,6 +191,7 @@ const OrdersManagerUI = (props) => {
                 handleOpenTour={handleOpenTour}
                 isTourOpen={isTourOpen}
                 setIsTourOpen={setIsTourOpen}
+                setFilterModalOpen={setFilterModalOpen}
               />
             </WrapItemView>
           </OrdersInnerContent>

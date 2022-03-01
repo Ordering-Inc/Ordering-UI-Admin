@@ -3,7 +3,6 @@ import { useLanguage, DriversList as DriversController } from 'ordering-componen
 import { useTheme } from 'styled-components'
 import { Select } from '../../../styles/Select'
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
-import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { MultiSelect } from '../../../styles/MultiSelect'
 
 import {
@@ -48,14 +47,14 @@ const DriverSelectorUI = (props) => {
       {
         value: 'default',
         content: (
-          <Option padding={padding}>
+          <Option padding={orderView ? padding : '0px'}>
             {orderView ? (
               <>
-                <WrapperDriverImage small={small}>
+                <WrapperDriverImage small={small} className='driver-photo'>
                   <DriverImage bgimage={theme?.images?.icons?.noDriver} small={small} />
                 </WrapperDriverImage>
                 <OptionContent>
-                  <DriverNameContainer>
+                  <DriverNameContainer className='driver-info'>
                     <DriverName small={small}>{t('NO_DRIVER', 'No Driver')}</DriverName>
                   </DriverNameContainer>
                 </OptionContent>
@@ -66,14 +65,15 @@ const DriverSelectorUI = (props) => {
           </Option>
         ),
         color: 'primary',
-        disabled: !isFilterView
+        disabled: !isFilterView,
+        showDisable: true
       }
     ]
     if (!isFilterView) {
       _driversOptionList.push({
         value: 'remove',
         content: (
-          <Option padding='3px'>{t('REMOVE_DRIVER', 'Remove assigned driver')}</Option>
+          <Option isRemove>{t('REMOVE_DRIVER', 'Remove assigned driver')}</Option>
         ),
         disabled: defaultValue === 'default'
       })
@@ -91,15 +91,11 @@ const DriverSelectorUI = (props) => {
           showDisable: isFilterView ? true : !(isFilterView || (driver?.enabled && driver?.available && !driver?.busy)),
           content: (
             <Option small={small} isPhoneView={isPhoneView} padding={padding}>
-              <WrapperDriverImage small={small}>
-                {driver.photo ? (
-                  <DriverImage bgimage={driver.photo} small={small} />
-                ) : (
-                  <FaUserAlt />
-                )}
+              <WrapperDriverImage small={small} className='driver-photo'>
+                <DriverImage bgimage={driver.photo || theme.images.icons?.noDriver} small={small} />
               </WrapperDriverImage>
               <OptionContent>
-                <DriverNameContainer small={small}>
+                <DriverNameContainer className='driver-info'>
                   <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
                   <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
                 </DriverNameContainer>
@@ -160,7 +156,6 @@ const DriverSelectorUI = (props) => {
             options={driversMultiOptionList}
             optionInnerMargin='10px'
             optionInnerMaxHeight='150px'
-            optionBottomBorder
             onChange={(driver) => handleChangeDriver(driver)}
           />
         ) : (
@@ -169,7 +164,6 @@ const DriverSelectorUI = (props) => {
             options={driversLoading}
             optionInnerMargin='10px'
             optionInnerMaxHeight='150px'
-            optionBottomBorder
           />
         )}
       </>
@@ -183,11 +177,10 @@ const DriverSelectorUI = (props) => {
               <FirstSelect
                 defaultValue={defaultOption || 'default'}
                 options={driversOptionList}
-                optionInnerMargin='10px'
                 optionInnerMaxHeight='200px'
-                optionBottomBorder
                 onChange={(driverId) => changeDriver(driverId)}
                 isShowSearchBar
+                searchBarPlaceholder={t('SEARCH', 'Search')}
                 searchBarIsCustomLayout
                 handleChangeSearch={handleSearch}
               />
@@ -195,21 +188,23 @@ const DriverSelectorUI = (props) => {
               <Select
                 defaultValue={defaultOption || 'default'}
                 options={driversOptionList}
-                optionInnerMargin='10px'
                 optionInnerMaxHeight='200px'
-                optionBottomBorder
                 onChange={(driverId) => changeDriver(driverId)}
+                isShowSearchBar
+                searchBarPlaceholder={t('SEARCH', 'Search')}
+                searchBarIsCustomLayout
+                handleChangeSearch={handleSearch}
               />
             )}
           </>
         ) : (
           <>
             <Select
+              placeholder={t('SELECT_DRIVER', 'Select driver')}
               defaultValue='default'
               options={driversLoading}
               optionInnerMargin='10px'
               optionInnerMaxHeight='200px'
-              optionBottomBorder
             />
           </>
         )}

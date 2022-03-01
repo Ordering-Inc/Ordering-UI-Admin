@@ -198,18 +198,19 @@ export const DriversInfo = styled.div`
   > div {
     > div {
       border: none;
-      padding: 0px;
-      > div:first-child {
-        padding: 0px 10px;
-        p {
-          color: ${props => props.theme.colors?.headingColor};
-          font-size: 14px;
+      &:first-child {
+        .driver-photo {
+          width: 45px;
+          height: 45px;
         }
-      }
-      > div {
-        > div {
-          > div {
-            padding: 0px;
+        .driver-info {
+          p {
+            color: ${props => props.theme.colors?.headingColor};
+            font-size: 14px;
+            font-weight: 600;
+          }
+          span {
+            display: initial;
           }
         }
       }
@@ -278,7 +279,7 @@ export const OrderType = styled.div`
     color: ${props => props.theme.colors.headingColor};
     font-size: 14px;
     ${props => props.theme?.rtl ? css`
-      marign-right: 5px;
+      margin-right: 5px;
     ` : css`
       margin-left: 5px;
     `}
@@ -301,4 +302,57 @@ export const WrapOrderStatusSelector = styled.div`
 
 export const WrapperPagination = styled.div`
   padding-top: 5px;
+`
+export const LogisticStatusDot = styled.span`
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+
+  ${props => props.theme?.rtl ? css`
+    margin-right: 6px;
+  ` : css`
+    margin-left: 6px;
+  `}
+
+  ${({ status }) => status === 0 && css`
+    background-color: ${props => props.theme.colors.orange};
+  `}
+  ${({ status }) => status === 1 && css`
+    background-color: ${props => props.theme.colors.warning};
+  `}
+  ${({ status }) => status === 2 && css`
+    background-color: ${props => props.theme.colors.info};
+  `}
+  ${({ status }) => status === 3 && css`
+    background-color: ${props => props.theme.colors.danger};
+  `}
+  ${({ status }) => status === 4 && css`
+    background-color: ${props => props.theme.colors.success};
+  `}
+`
+export const PriorityDot = styled.span`
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+
+  ${props => props.theme?.rtl ? css`
+    margin-right: 6px;
+  ` : css`
+    margin-left: 6px;
+  `}
+
+  ${({ priority }) => priority === -1 && css`
+    background-color: ${props => props.theme.colors.secundaryLight};
+  `}
+  ${({ priority }) => priority === 0 && css`
+    background-color: ${props => props.theme.colors.primary};
+  `}
+  ${({ priority }) => priority === 1 && css`
+    background-color: ${props => props.theme.colors.warning};
+  `}
+  ${({ priority }) => priority === 2 && css`
+    background-color: ${props => props.theme.colors.danger};
+  `}
 `

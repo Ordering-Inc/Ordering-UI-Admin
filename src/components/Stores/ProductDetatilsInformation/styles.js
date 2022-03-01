@@ -152,7 +152,11 @@ export const Wrapper = styled.div`
 export const RegularWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 24px;
+  margin-bottom: 10px;
+  
+  label {
+    margin-bottom: 0;
+  }
   > span {
     font-size: 14px;
     ${props => props.theme?.rtl ? css`
@@ -161,4 +165,8 @@ export const RegularWrapper = styled.div`
       margin-right: 20px;
     `}
   }
+`
+export const FieldRow = styled.div`
+  display: flex;
+  justify-content: space-between;
 `

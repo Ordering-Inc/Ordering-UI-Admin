@@ -3,7 +3,6 @@ import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useCustomer } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
-import { UserTypeSelector } from '../../Users'
 import { Input, Button, Switch } from '../../../styles'
 import { Alert, InputPhoneNumber } from '../../Shared'
 import { sortInputFields } from '../../../utils'
@@ -13,7 +12,6 @@ import {
   FormInput,
   ActionsForm,
   SkeletonForm,
-  WrapperUserTypeSelector,
   DriverZoneRestrictionWrapper,
   WrapperPassword,
   TogglePassword
@@ -21,21 +19,16 @@ import {
 
 export const UserFormDetailsUI = (props) => {
   const {
-    isEdit,
     formState,
-    onCancel,
     showField,
     cleanFormState,
     isRequiredField,
     validationFields,
     handleChangeInput,
     handleButtonUpdateClick,
-    isCheckout,
     userData,
     isCustomerMode,
-    handleChangeUserType,
     isDriversPage,
-    isDriversManagersPage,
     handleChangeSwtich
   } = props
 
@@ -66,10 +59,10 @@ export const UserFormDetailsUI = (props) => {
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   const setUserCellPhone = (isEdit = false) => {
-    if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
-      setUserPhoneNumber(userPhoneNumber)
-      return
-    }
+    // if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
+    //   setUserPhoneNumber(userPhoneNumber)
+    //   return
+    // }
     if (user?.cellphone) {
       let phone = null
       if (formState.result.error && formState.changes?.cellphone && formState.changes?.country_phone_code) {
@@ -190,14 +183,10 @@ export const UserFormDetailsUI = (props) => {
   }, [formState?.loading])
 
   useEffect(() => {
-    if ((user || !isEdit) && !formState?.loading) {
+    if (user && !formState?.loading) {
       setUserCellPhone()
-      if (!isEdit && !formState?.loading) {
-        cleanFormState && cleanFormState({ changes: {} })
-        setUserCellPhone(true)
-      }
     }
-  }, [user, isEdit])
+  }, [user])
 
   useEffect(() => {
     if (!validationFields.loading && emailInput.current) {
@@ -221,25 +210,9 @@ export const UserFormDetailsUI = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
-      <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} isCheckout={isCheckout}>
+      <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
         {!validationFields?.loading ? (
           <>
-            {
-            props.beforeMidElements?.map((BeforeMidElements, i) => (
-              <React.Fragment key={i}>
-                {BeforeMidElements}
-              </React.Fragment>))
-            }
-            {
-            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-              <BeforeMidComponents key={i} {...props} />))
-            }
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
               showField && showField(field.code) && (
                 <React.Fragment key={field.id}>
@@ -251,9 +224,9 @@ export const UserFormDetailsUI = (props) => {
                       className='form'
                       placeholder={t(field.code.toUpperCase(), field?.name)}
                       defaultValue={
-                      formState?.result?.result
-                        ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                        formState?.result?.result
+                          ? formState?.result?.result[field.code]
+                          : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
                       }
                       onChange={handleChangeInputEmail}
                       ref={(e) => {
@@ -269,9 +242,9 @@ export const UserFormDetailsUI = (props) => {
                       className='form'
                       placeholder={t(field.code.toUpperCase(), field?.name)}
                       defaultValue={
-                      formState?.result?.result
-                        ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
+                        formState?.result?.result
+                          ? formState?.result?.result[field.code]
+                          : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
                       }
                       onChange={handleChangeInput}
                       ref={formMethods.register({
@@ -294,72 +267,38 @@ export const UserFormDetailsUI = (props) => {
                 handleIsValid={setIsValidPhoneNumber}
               />
             )}
-            {!isCheckout && (
-              <WrapperPassword>
-                <Input
-                  type={!passwordSee ? 'password' : 'text'}
-                  name='password'
-                  className='form'
-                  placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
-                  onChange={handleChangeInput}
-                  ref={formMethods.register({
-                    required: isRequiredField('password')
-                      ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                      : null,
-                    minLength: {
-                      value: 8,
-                      message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                    }
-                  })}
-                />
-                <TogglePassword onClick={() => setPasswordSee(!passwordSee)}>
-                  {!passwordSee ? <Eye /> : <EyeSlash />}
-                </TogglePassword>
-              </WrapperPassword>
-            )}
-            {
-            props.afterMidElements?.map((MidElement, i) => (
-              <React.Fragment key={i}>
-                {MidElement}
-              </React.Fragment>))
-            }
-            {
-             props.afterMidComponents?.map((MidComponent, i) => (
-               <MidComponent key={i} {...props} />))
-            }
-            {!(isDriversManagersPage || isDriversPage) && (
-              <WrapperUserTypeSelector>
-                <UserTypeSelector
-                  isPrimary
-                  userId={user.id}
-                  defaultUserType={formState?.changes?.level ?? user?.level}
-                  handleChangeUserType={handleChangeUserType}
-                />
-              </WrapperUserTypeSelector>
-            )}
+            <WrapperPassword>
+              <Input
+                type={!passwordSee ? 'password' : 'text'}
+                name='password'
+                className='form'
+                placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
+                onChange={handleChangeInput}
+                ref={formMethods.register({
+                  required: isRequiredField('password')
+                    ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                    : null,
+                  minLength: {
+                    value: 8,
+                    message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                  }
+                })}
+              />
+              <TogglePassword onClick={() => setPasswordSee(!passwordSee)}>
+                {!passwordSee ? <Eye /> : <EyeSlash />}
+              </TogglePassword>
+            </WrapperPassword>
             {isDriversPage && (
               <DriverZoneRestrictionWrapper>
                 <span>{('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')}</span>
                 <Switch
-                  defaultChecked={formState?.changes?.driver_zone_restriction ?? user?.driver_zone_restriction}
+                  defaultChecked={formState?.changes?.driver_zone_restriction ?? user?.driver_zone_restriction ?? false}
                   onChange={(val) => handleChangeSwtich('driver_zone_restriction', val)}
                 />
               </DriverZoneRestrictionWrapper>
             )}
             <ActionsForm>
-              {onCancel && (
-                <Button
-                  outline
-                  borderRadius='5px'
-                  type='button'
-                  onClick={() => onCancel(false)}
-                  disabled={formState.loading}
-                >
-                  {t('CANCEL', 'Cancel')}
-                </Button>
-              )}
-
-              {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
+              {((formState && Object.keys(formState?.changes).length > 0) || formState?.loading) && (
                 <Button
                   id='form-btn'
                   color='primary'
@@ -389,12 +328,6 @@ export const UserFormDetailsUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }

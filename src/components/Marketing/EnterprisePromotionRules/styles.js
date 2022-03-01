@@ -26,7 +26,7 @@ export const CouponContainer = styled.div`
 export const CouponHeader = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 15px 0;
   cursor: pointer;
 
   ${({ active }) => active && css`
@@ -92,23 +92,6 @@ export const CouponCodeContainer = styled.div`
 `
 export const DiscountOption = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  padding: 12px 0;
-  cursor: pointer;
-
-  ${({ active }) => active && css`
-    svg {
-      color: ${props => props.theme.colors.primary};
-    }
-  `}
-
-  > span {
-    font-size: 14px;
-    ${props => props.theme?.rtl ? css`
-      margin-right: 13px;
-    ` : css`
-      margin-left: 13px;
-    `}
-  }
 `
 export const CondtionItem = styled.div`
   display: flex;
@@ -194,5 +177,24 @@ export const DiscountContainer = styled.div`
         }
       }
     }
+  }
+`
+export const AutomaticDiscountEnableWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  ${props => props.theme?.rtl ? css`
+    margin-right: 30px;
+  ` : css`
+    margin-left: 30px;
+  `}
+
+  span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
   }
 `

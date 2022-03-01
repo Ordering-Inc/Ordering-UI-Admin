@@ -24,7 +24,9 @@ import {
   OrderType,
   WrapOrderStatusSelector,
   WrapperPagination,
-  StatusInfo
+  StatusInfo,
+  LogisticStatusDot,
+  PriorityDot
 } from './styles'
 
 export const OrdersTable = (props) => {
@@ -469,7 +471,8 @@ export const OrdersTable = (props) => {
                         <DriversInfo className='driverInfo' noClick={isTourOpen && (currentTourStep === 0 || currentTourStep === 4)}>
                           <DriverSelector
                             orderView
-                            padding='5px 0'
+                            small
+                            padding='0px'
                             defaultValue={order?.driver_id ? order.driver_id : 'default'}
                             drivers={driversList.drivers}
                             order={order}
@@ -482,7 +485,12 @@ export const OrdersTable = (props) => {
                     <td className='logistic'>
                       <div className='info'>
                         <p className='bold'>{t('LOGISTIC', 'Logistic')}</p>
-                        <p>{getLogisticTag(order?.logistic_status)}</p>
+                        <p>
+                          {getLogisticTag(order?.logistic_status)}
+                          <LogisticStatusDot
+                            status={order?.logistic_status}
+                          />
+                        </p>
                       </div>
                     </td>
                   )}
@@ -498,7 +506,10 @@ export const OrdersTable = (props) => {
                     <td className='priority'>
                       <div className='info'>
                         <p className='bold'>{t('PRIORITY', 'Priority')}</p>
-                        <p>{getPriorityTag(order?.priority)}</p>
+                        <p>
+                          {getPriorityTag(order?.priority)}
+                          <PriorityDot priority={order?.priority} />
+                        </p>
                       </div>
                     </td>
                   )}

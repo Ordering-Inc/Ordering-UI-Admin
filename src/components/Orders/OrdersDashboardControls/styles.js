@@ -33,23 +33,30 @@ export const InnerContnet = styled.div`
 
 export const WrapOrderStatusTypeSelector = styled.div`
   margin: 0 7px;
-  div.orderStatus {
+  > div {
     > div:first-child {
-      background-color: ${props => props.theme.colors.secundary};
-  
-      p {
-        color: ${props => props.theme.colors.secundaryContrast};
+      border-color: ${props => props.theme.colors?.secundary};
+      border-radius: 8px;
+      background-color: ${props => props.theme.colors?.secundary};
+      > div:first-child {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        > div:first-child {
+          > div {
+            border: none !important;
+            p {
+              color: ${props => props.theme.colors.secundaryContrast} !important;
+              padding: 0 !important;
+            }
+          }
+        }
       }
     }
-  }
 
-  div.select {
-    background-color: ${props => props.theme.colors.secundary};
-    border: none;
-    padding: 5px 0;
-    p {
-      font-size: 14px;
-      color: ${props => props.theme.colors.secundaryContrast};
+    .list-wrapper {
+      > div {
+        padding: 0 10px;
+      }
     }
   }
 `

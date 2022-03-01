@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { Camera as CameraIcon } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import { DriverGroupSetting } from '../DriverGroupSetting'
-import AiOutlineCheckCircle from '@meronex/icons/ai/AiOutlineCheckCircle'
 
 import {
   UserFormDetails as UserProfileController,
@@ -14,7 +12,6 @@ import {
 
 import { UserFormDetailsUI } from '../UserFormDetails'
 import { Alert } from '../../Shared'
-import { Button } from '../../../styles'
 import { bytesConverter } from '../../../utils'
 
 import {
@@ -22,9 +19,7 @@ import {
   UserProfileContainer,
   UserImage,
   Image,
-  SideForm,
   Camera,
-  UserData,
   UploadImageIcon,
   SkeletonWrapper,
   WrapperForm
@@ -32,19 +27,14 @@ import {
 
 const UserProfileFormUI = (props) => {
   const {
-    userData,
     handleButtonUpdateClick,
     handlechangeImage,
     formState,
-    cleanFormState,
-    toggleIsEdit,
     isHiddenAddress,
-    userState,
-    isDriversPage
+    userState
   } = props
 
   const [, t] = useLanguage()
-  const [edit, setEdit] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const inputRef = useRef(null)
 
@@ -70,14 +60,6 @@ const UserProfileFormUI = (props) => {
     }
   }
 
-  const toggleEditState = (val) => {
-    setEdit(val)
-    toggleIsEdit()
-    if (!val) {
-      cleanFormState({ changes: {} })
-    }
-  }
-
   const handleClickImage = () => {
     inputRef.current.click()
   }
@@ -96,10 +78,6 @@ const UserProfileFormUI = (props) => {
     }
   }, [formState.changes?.photo])
 
-  useEffect(() => {
-    setEdit(false)
-  }, [userState?.result?.result?.id])
-
   return (
     <>
       {props.beforeElements?.map((BeforeElement, i) => (
@@ -111,7 +89,7 @@ const UserProfileFormUI = (props) => {
       <Container>
         <UserProfileContainer mbottom={isHiddenAddress && 25}>
           <UserImage className='user-image'>
-            <Image isEdit={edit} onClick={() => handleClickImage()} isImage={userState?.result?.result?.photo || (formState?.changes?.photo && !formState.result.error)}>
+            <Image onClick={() => handleClickImage()} isImage={userState?.result?.result?.photo || (formState?.changes?.photo && !formState.result.error)}>
               <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
                 <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
                   {formState.loading
@@ -129,70 +107,17 @@ const UserProfileFormUI = (props) => {
                     )}
                 </DragAndDrop>
               </ExamineClick>
-              {edit && (
-                <Camera><CameraIcon /></Camera>
-              )}
+              <Camera><CameraIcon /></Camera>
             </Image>
           </UserImage>
-
-          {!edit && (
-            <SideForm className='user-form'>
-              {formState.loading ? (
-                <UserData>
-                  <Skeleton width={250} height={25} />
-                  <Skeleton width={180} height={25} />
-                  <Skeleton width={210} height={25} />
-                  <Skeleton width={100} height={40} />
-                </UserData>
-              ) : (
-                <UserData>
-                  <h1>{userData?.name || userState?.result?.result?.name} {userData?.lastname || userState?.result?.result?.lastname}</h1>
-                  <p>
-                    {userData?.email || userState?.result?.result?.email}
-                    {!!userState?.result?.result?.email_verified && (<AiOutlineCheckCircle style={{ fontSize: 18, marginLeft: 5, color: '#00D27A' }} />)}
-                  </p>
-                  {(userData?.cellphone || userState?.result?.result?.cellphone) && (
-                    <p>
-                      {(userData?.country_phone_code || userState?.result?.result?.country_phone_code) && `+${(userData?.country_phone_code || userState?.result?.result?.country_phone_code)} `}{(userData?.cellphone || userState?.result?.result?.cellphone)}
-                      {!!userState?.result?.result?.phone_verified && (<AiOutlineCheckCircle style={{ fontSize: 18, marginLeft: 5, color: '#00D27A' }} />)}
-                    </p>
-                  )}
-                  {(userData?.birthdate || userState?.result?.result?.birthdate) && (
-                    <p>
-                      <span>{t('BIRTHDATE', 'Birthdate')}</span>
-                      <span>: </span>
-                      <span>{userData?.birthdate || userState?.result?.result?.birthdate}</span>
-                    </p>
-                  )}
-                </UserData>
-              )}
-            </SideForm>
-          )}
         </UserProfileContainer>
-        {edit && (
-          <WrapperForm>
-            <UserFormDetailsUI
-              {...props}
-              userData={userState?.result?.result}
-              onCancel={toggleEditState}
-              onCloseProfile={() => setEdit(false)}
-              isHiddenAddress={isHiddenAddress}
-            />
-          </WrapperForm>
-        )}
-        {!edit && (
-          <Button
-            color='secundaryDark'
-            borderRadius='8px'
-            onClick={() => toggleEditState(true)}
-          >
-            {t('EDIT', 'Edit')}
-          </Button>
-        )}
-
-        {isDriversPage && !edit && (
-          <DriverGroupSetting userId={userData?.id || userState?.result?.result?.id} />
-        )}
+        <WrapperForm>
+          <UserFormDetailsUI
+            {...props}
+            userData={userState?.result?.result}
+            isHiddenAddress={isHiddenAddress}
+          />
+        </WrapperForm>
       </Container>
       <Alert
         title={t('PROFILE', 'Profile')}
