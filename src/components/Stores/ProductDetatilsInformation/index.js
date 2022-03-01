@@ -103,6 +103,14 @@ export const ProductDetatilsInformation = (props) => {
     }
   }
 
+  const handleChangeRegularPrice = (e) => {
+    if (e.target.value === '') {
+      handleChangeInput({ target: { name: 'offer_price', value: null } })
+    } else {
+      handleChangeInput(e)
+    }
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => {
@@ -224,7 +232,7 @@ export const ProductDetatilsInformation = (props) => {
                     ).replace('_attribute_', t('REGULAR_PRICE', 'Regular Price'))
                     : false
               })}
-              onChange={handleChangeInput}
+              onChange={handleChangeRegularPrice}
               disabled={formState.loading || !(formState?.changes?.in_offer ?? product?.in_offer)}
               autoComplete='off'
               onKeyPress={(e) => {
