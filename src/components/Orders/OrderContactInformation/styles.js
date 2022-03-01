@@ -73,7 +73,7 @@ export const InfoContent = styled.div`
       color: ${props => props.theme.colors?.headingColor};
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 1;
       overflow: hidden;
 
       &.name {
@@ -113,13 +113,25 @@ export const DriverInfoContainer = styled.div`
 export const DriverInfo = styled(BusinessInfo)``
 
 export const DriverSelectorContainer = styled.div`
-  min-width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 23px;
+  margin-bottom: 13px;
+  > p {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
   > div {
-    width: 100%;
+    width: 50%;
     border-radius: 8px;
     border-color: ${props => props.theme.colors?.secundary};
+    background-color: ${props => props.theme.colors?.secundary};
     > div {
-      background-color: ${props => props.theme.colors?.secundary};
+      &:first-child {
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
       > div:first-child {
         color: ${props => props.theme.colors?.headingColor};
       }

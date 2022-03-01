@@ -200,17 +200,13 @@ export const DriversInfo = styled.div`
       border: none;
       padding: 0px;
       > div:first-child {
-        padding: 0px 10px;
+        padding: 0px;
         p {
           color: ${props => props.theme.colors?.headingColor};
           font-size: 14px;
         }
-      }
-      > div {
-        > div {
-          > div {
-            padding: 0px;
-          }
+        > div:first-child {
+          padding: 0px
         }
       }
     }

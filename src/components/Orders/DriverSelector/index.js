@@ -66,14 +66,15 @@ const DriverSelectorUI = (props) => {
           </Option>
         ),
         color: 'primary',
-        disabled: !isFilterView
+        disabled: !isFilterView,
+        showDisable: true
       }
     ]
     if (!isFilterView) {
       _driversOptionList.push({
         value: 'remove',
         content: (
-          <Option padding='3px'>{t('REMOVE_DRIVER', 'Remove assigned driver')}</Option>
+          <Option isRemove>{t('REMOVE_DRIVER', 'Remove assigned driver')}</Option>
         ),
         disabled: defaultValue === 'default'
       })
@@ -99,9 +100,9 @@ const DriverSelectorUI = (props) => {
                 )}
               </WrapperDriverImage>
               <OptionContent>
-                <DriverNameContainer small={small}>
+                <DriverNameContainer>
                   <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
-                  <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
+                  {!small && <DriverText>{t('DRIVER', 'Driver')}</DriverText>}
                 </DriverNameContainer>
               </OptionContent>
             </Option>
@@ -160,7 +161,6 @@ const DriverSelectorUI = (props) => {
             options={driversMultiOptionList}
             optionInnerMargin='10px'
             optionInnerMaxHeight='150px'
-            optionBottomBorder
             onChange={(driver) => handleChangeDriver(driver)}
           />
         ) : (
@@ -169,7 +169,6 @@ const DriverSelectorUI = (props) => {
             options={driversLoading}
             optionInnerMargin='10px'
             optionInnerMaxHeight='150px'
-            optionBottomBorder
           />
         )}
       </>
@@ -181,23 +180,22 @@ const DriverSelectorUI = (props) => {
           <>
             {isFirstSelect ? (
               <FirstSelect
+                placeholder={t('SELECT_DRIVER', 'Select driver')}
                 defaultValue={defaultOption || 'default'}
                 options={driversOptionList}
-                optionInnerMargin='10px'
                 optionInnerMaxHeight='200px'
-                optionBottomBorder
                 onChange={(driverId) => changeDriver(driverId)}
                 isShowSearchBar
+                searchBarPlaceholder={t('SEARCH', 'Search')}
                 searchBarIsCustomLayout
                 handleChangeSearch={handleSearch}
               />
             ) : (
               <Select
+                placeholder={t('SELECT_DRIVER', 'Select driver')}
                 defaultValue={defaultOption || 'default'}
                 options={driversOptionList}
-                optionInnerMargin='10px'
                 optionInnerMaxHeight='200px'
-                optionBottomBorder
                 onChange={(driverId) => changeDriver(driverId)}
               />
             )}
@@ -205,11 +203,11 @@ const DriverSelectorUI = (props) => {
         ) : (
           <>
             <Select
+              placeholder={t('SELECT_DRIVER', 'Select driver')}
               defaultValue='default'
               options={driversLoading}
               optionInnerMargin='10px'
               optionInnerMaxHeight='200px'
-              optionBottomBorder
             />
           </>
         )}
