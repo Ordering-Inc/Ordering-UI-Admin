@@ -8,7 +8,7 @@ export const InnerNoneOrdersContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 0;
+  padding: 10px 15px;
   img {
     width: 250px;
   }
