@@ -1,11 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  h1 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 18px;
-  }
+  margin-top: 26px;
 `
 
 export const DriverGroupListContainer = styled.div`

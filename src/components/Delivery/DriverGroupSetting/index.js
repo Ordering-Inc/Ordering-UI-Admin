@@ -46,7 +46,6 @@ const DriverGroupSettingUI = (props) => {
 
   return (
     <Container>
-      <h1>{t('DRIVER_GROUP', 'Driver group')}</h1>
       <SearchBar
         lazyLoad
         isCustomLayout
