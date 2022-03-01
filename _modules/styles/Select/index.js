@@ -17,6 +17,8 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _FiChevronDown = _interopRequireDefault(require("@meronex/icons/fi/FiChevronDown"));
 
+var _Shared = require("../../components/Shared");
+
 var _Selects = require("../Selects");
 
 var _styles = require("./styles");
@@ -55,7 +57,12 @@ var Select = function Select(props) {
       notAsync = props.notAsync,
       noSelected = props.noSelected,
       minWidth = props.minWidth,
-      isSecondIcon = props.isSecondIcon;
+      isSecondIcon = props.isSecondIcon,
+      isShowSearchBar = props.isShowSearchBar,
+      searchValue = props.searchValue,
+      handleChangeSearch = props.handleChangeSearch,
+      searchBarIsCustomLayout = props.searchBarIsCustomLayout,
+      searchBarPlaceholder = props.searchBarPlaceholder;
   var defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
     return option.value === defaultValue;
   });
@@ -177,7 +184,15 @@ var Select = function Select(props) {
     style: popStyle
   }, attributes.popper), /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     className: "options"
-  }, /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
+  }, isShowSearchBar && /*#__PURE__*/_react.default.createElement(_Selects.SearchBarWrapper, {
+    className: "search-bar-container"
+  }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+    lazyLoad: true,
+    isCustomLayout: searchBarIsCustomLayout,
+    search: searchValue,
+    onSearch: handleChangeSearch,
+    placeholder: searchBarPlaceholder || ''
+  })), /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
     optionInnerMargin: props.optionInnerMargin,
     optionInnerMaxHeight: props.optionInnerMaxHeight
   }, options.map(function (option, i) {

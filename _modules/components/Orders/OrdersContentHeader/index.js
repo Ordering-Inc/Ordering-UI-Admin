@@ -63,7 +63,9 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
       handleChangeFilterValues = props.handleChangeFilterValues,
       handleDeleteMultiOrders = props.handleDeleteMultiOrders,
       handleChangeMultiOrdersStatus = props.handleChangeMultiOrdersStatus,
-      handleOpenTour = props.handleOpenTour;
+      handleOpenTour = props.handleOpenTour,
+      filterModalOpen = props.filterModalOpen,
+      setFilterModalOpen = props.setFilterModalOpen;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -76,13 +78,8 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      filterModalOpen = _useState2[0],
-      setFilterModalOpen = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      filterApplied = _useState4[0],
-      setFilterApplied = _useState4[1];
+      filterApplied = _useState2[0],
+      setFilterApplied = _useState2[1];
 
   (0, _react.useEffect)(function () {
     var _filterApplied = false;
@@ -90,7 +87,9 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     if (Object.keys(filterValues).length === 0) {
       _filterApplied = false;
     } else {
-      _filterApplied = filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 || filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 || filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0;
+      var _filterValues$groupTy;
+
+      _filterApplied = (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$groupTy = filterValues.groupTypes) === null || _filterValues$groupTy === void 0 ? void 0 : _filterValues$groupTy.length) || filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 || filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 || filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0;
     }
 
     setFilterApplied(_filterApplied);

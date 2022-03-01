@@ -27,7 +27,7 @@ var WrapperRow = _styledComponents.default.div(_templateObject2 || (_templateObj
 
 exports.WrapperRow = WrapperRow;
 
-var MultiSelectContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  > div {\n    width: 100%;\n    border: none;\n\n    > div:first-child {\n      height: 54px;\n    }\n  }\n"])));
+var MultiSelectContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  > div {\n    width: 100%;\n    border: none;\n\n    > div:first-child {\n      height: 54px;\n      > div:first-child {\n        padding: 5px;\n        border: none;\n      }\n    }\n\n    > div:not(:first-child) {\n      > div {\n        > div {\n          > div {\n            border: none;\n          }\n        }\n      }\n    }\n  }\n"])));
 
 exports.MultiSelectContainer = MultiSelectContainer;
 

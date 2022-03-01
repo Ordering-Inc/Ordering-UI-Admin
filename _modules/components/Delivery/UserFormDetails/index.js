@@ -17,8 +17,6 @@ var _reactHookForm = require("react-hook-form");
 
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 
-var _Users = require("../../Users");
-
 var _styles = require("../../../styles");
 
 var _Shared = require("../../Shared");
@@ -43,8 +41,6 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -58,23 +54,18 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _props$beforeElements, _props$beforeComponen, _props$beforeMidEleme, _props$beforeMidCompo, _validationFields$fie11, _props$afterMidElemen, _props$afterMidCompon, _formState$changes$le, _formState$changes6, _formState$changes$dr, _formState$changes7, _props$afterComponent, _props$afterElements;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _ref4, _formState$changes$dr, _formState$changes6;
 
-  var isEdit = props.isEdit,
-      formState = props.formState,
-      onCancel = props.onCancel,
+  var formState = props.formState,
       showField = props.showField,
       cleanFormState = props.cleanFormState,
       isRequiredField = props.isRequiredField,
       validationFields = props.validationFields,
       handleChangeInput = props.handleChangeInput,
       handleButtonUpdateClick = props.handleButtonUpdateClick,
-      isCheckout = props.isCheckout,
       userData = props.userData,
       isCustomerMode = props.isCustomerMode,
-      handleChangeUserType = props.handleChangeUserType,
       isDriversPage = props.isDriversPage,
-      isDriversManagersPage = props.isDriversManagersPage,
       handleChangeSwtich = props.handleChangeSwtich;
   var formMethods = (0, _reactHookForm.useForm)();
 
@@ -137,11 +128,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   var setUserCellPhone = function setUserCellPhone() {
     var isEdit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
-    if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
-      setUserPhoneNumber(userPhoneNumber);
-      return;
-    }
-
+    // if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
+    //   setUserPhoneNumber(userPhoneNumber)
+    //   return
+    // }
     if (user !== null && user !== void 0 && user.cellphone) {
       var _formState$changes, _formState$changes2;
 
@@ -289,17 +279,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.loading]);
   (0, _react.useEffect)(function () {
-    if ((user || !isEdit) && !(formState !== null && formState !== void 0 && formState.loading)) {
+    if (user && !(formState !== null && formState !== void 0 && formState.loading)) {
       setUserCellPhone();
-
-      if (!isEdit && !(formState !== null && formState !== void 0 && formState.loading)) {
-        cleanFormState && cleanFormState({
-          changes: {}
-        });
-        setUserCellPhone(true);
-      }
     }
-  }, [user, isEdit]);
+  }, [user]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading && emailInput.current) {
       var _formState$result3, _formState$result4, _formState$result4$re, _ref, _formState$changes$em, _formState$changes5;
@@ -316,26 +299,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }
     });
   }, [formMethods]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
-    onSubmit: formMethods.handleSubmit(onSubmit),
-    isCheckout: isCheckout
-  }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeMidEleme = props.beforeMidElements) === null || _props$beforeMidEleme === void 0 ? void 0 : _props$beforeMidEleme.map(function (BeforeMidElements, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeMidElements);
-  }), (_props$beforeMidCompo = props.beforeMidComponents) === null || _props$beforeMidCompo === void 0 ? void 0 : _props$beforeMidCompo.map(function (BeforeMidComponents, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeMidComponents, _extends({
-      key: i
-    }, props));
-  }), (0, _utils.sortInputFields)({
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
+    onSubmit: formMethods.handleSubmit(onSubmit)
+  }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
     values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout
   }).map(function (field) {
     var _formState$result5, _formState$result6, _ref2, _formState$changes$fi, _formState$result7, _formState$result8, _ref3, _formState$changes$fi2;
@@ -372,7 +338,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber
-  }), !isCheckout && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: !passwordSee ? 'password' : 'text',
     name: "password",
     className: "form",
@@ -389,33 +355,12 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     onClick: function onClick() {
       return setPasswordSee(!passwordSee);
     }
-  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), (_props$afterMidElemen = props.afterMidElements) === null || _props$afterMidElemen === void 0 ? void 0 : _props$afterMidElemen.map(function (MidElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, MidElement);
-  }), (_props$afterMidCompon = props.afterMidComponents) === null || _props$afterMidCompon === void 0 ? void 0 : _props$afterMidCompon.map(function (MidComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
-      key: i
-    }, props));
-  }), !(isDriversManagersPage || isDriversPage) && /*#__PURE__*/_react.default.createElement(_styles2.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_Users.UserTypeSelector, {
-    isPrimary: true,
-    userId: user.id,
-    defaultUserType: (_formState$changes$le = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.level) !== null && _formState$changes$le !== void 0 ? _formState$changes$le : user === null || user === void 0 ? void 0 : user.level,
-    handleChangeUserType: handleChangeUserType
-  })), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_formState$changes$dr = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction,
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (_ref4 = (_formState$changes$dr = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction) !== null && _ref4 !== void 0 ? _ref4 : false,
     onChange: function onChange(val) {
       return handleChangeSwtich('driver_zone_restriction', val);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, onCancel && /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    outline: true,
-    borderRadius: "5px",
-    type: "button",
-    onClick: function onClick() {
-      return onCancel(false);
-    },
-    disabled: formState.loading
-  }, t('CANCEL', 'Cancel')), (formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 && isEdit || (formState === null || formState === void 0 ? void 0 : formState.loading)) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, (formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 || (formState === null || formState === void 0 ? void 0 : formState.loading)) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     id: "form-btn",
     color: "primary",
     borderRadius: "5px",
@@ -437,14 +382,6 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 

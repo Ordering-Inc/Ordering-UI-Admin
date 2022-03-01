@@ -525,7 +525,8 @@ var OrdersTable = function OrdersTable(props) {
       noClick: isTourOpen && (currentTourStep === 0 || currentTourStep === 4)
     }, /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
       orderView: true,
-      padding: "5px 0",
+      small: true,
+      padding: "0px",
       defaultValue: order !== null && order !== void 0 && order.driver_id ? order.driver_id : 'default',
       drivers: driversList.drivers,
       order: order
@@ -535,7 +536,9 @@ var OrdersTable = function OrdersTable(props) {
       className: "info"
     }, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("td", {
+    }, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status), /*#__PURE__*/_react.default.createElement(_styles.LogisticStatusDot, {
+      status: order === null || order === void 0 ? void 0 : order.logistic_status
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("td", {
       className: "attempts"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -547,7 +550,9 @@ var OrdersTable = function OrdersTable(props) {
       className: "info"
     }, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority)))), /*#__PURE__*/_react.default.createElement("td", {
+    }, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority), /*#__PURE__*/_react.default.createElement(_styles.PriorityDot, {
+      priority: order === null || order === void 0 ? void 0 : order.priority
+    })))), /*#__PURE__*/_react.default.createElement("td", {
       className: "orderPrice"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"

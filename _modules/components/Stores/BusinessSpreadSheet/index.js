@@ -80,10 +80,10 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
     readOnly: false,
     type: 'numeric'
   }, {
-    title: t('REGULAR_PRICE', 'Regular Price'),
-    code: 'offer_price',
+    title: t('INVENTORY', 'Inventory'),
+    code: 'inventoried',
     readOnly: false,
-    type: 'numeric'
+    type: 'checkbox'
   }, {
     title: t('QUANTITY', 'Quantity'),
     code: 'quantity',

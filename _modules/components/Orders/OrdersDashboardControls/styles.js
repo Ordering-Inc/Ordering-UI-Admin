@@ -33,12 +33,14 @@ var InnerContnet = _styledComponents.default.div(_templateObject6 || (_templateO
 
 exports.InnerContnet = InnerContnet;
 
-var WrapOrderStatusTypeSelector = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin: 0 7px;\n  div.orderStatus {\n    > div:first-child {\n      background-color: ", ";\n  \n      p {\n        color: ", ";\n      }\n    }\n  }\n\n  div.select {\n    background-color: ", ";\n    border: none;\n    padding: 5px 0;\n    p {\n      font-size: 14px;\n      color: ", ";\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.secundary;
+var WrapOrderStatusTypeSelector = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin: 0 7px;\n  > div {\n    > div:first-child {\n      border-color: ", ";\n      border-radius: 8px;\n      background-color: ", ";\n      > div:first-child {\n        padding-top: 4px;\n        padding-bottom: 4px;\n        > div:first-child {\n          > div {\n            border: none !important;\n            p {\n              color: ", " !important;\n              padding: 0 !important;\n            }\n          }\n        }\n      }\n    }\n\n    .list-wrapper {\n      > div {\n        padding: 0 10px;\n      }\n    }\n  }\n"])), function (props) {
+  var _props$theme$colors;
+
+  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.secundary;
 }, function (props) {
-  return props.theme.colors.secundaryContrast;
-}, function (props) {
-  return props.theme.colors.secundary;
+  var _props$theme$colors2;
+
+  return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.secundary;
 }, function (props) {
   return props.theme.colors.secundaryContrast;
 });

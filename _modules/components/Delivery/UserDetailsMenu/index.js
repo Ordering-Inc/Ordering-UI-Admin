@@ -30,15 +30,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsMenu = function UserDetailsMenu(props) {
   var currentMenuSelected = props.currentMenuSelected,
       handleChangeMenu = props.handleChangeMenu,
-      isDelivery = props.isDelivery;
+      isDriverMenu = props.isDriverMenu;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var menuItems = isDelivery ? [{
+  var menuItems = isDriverMenu ? [{
     key: 'profile',
     content: t('PROFILE', 'Profile')
+  }, {
+    key: 'driver_group',
+    content: t('DRIVER_GROUP', 'Driver group')
   }, {
     key: 'saved_places',
     content: t('SAVED_PLACES', 'Saved places')
@@ -54,9 +57,6 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
   }, {
     key: 'saved_places',
     content: t('SAVED_PLACES', 'Saved places')
-  }, {
-    key: 'orders',
-    content: t('ORDERS', 'Orders')
   }, {
     key: 'metafields',
     content: t('METAFIELDS', 'Metafields')

@@ -104,23 +104,28 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
 
   var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      isTourOpen = _useState8[0],
-      setIsTourOpen = _useState8[1];
+      filterModalOpen = _useState8[0],
+      setFilterModalOpen = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(0),
+  var _useState9 = (0, _react.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      currentTourStep = _useState10[0],
-      setCurrentTourStep = _useState10[1];
+      isTourOpen = _useState10[0],
+      setIsTourOpen = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(false),
+  var _useState11 = (0, _react.useState)(0),
       _useState12 = _slicedToArray(_useState11, 2),
-      isTourFlag = _useState12[0],
-      setIsTourFlag = _useState12[1];
+      currentTourStep = _useState12[0],
+      setCurrentTourStep = _useState12[1];
 
-  var _useState13 = (0, _react.useState)(0),
+  var _useState13 = (0, _react.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      totalSelectedOrder = _useState14[0],
-      setTotalSelectedOrder = _useState14[1];
+      isTourFlag = _useState14[0],
+      setIsTourFlag = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(0),
+      _useState16 = _slicedToArray(_useState15, 2),
+      totalSelectedOrder = _useState16[0],
+      setTotalSelectedOrder = _useState16[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
@@ -220,7 +225,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,
     handleOpenTour: function handleOpenTour() {
       return _handleOpenTour();
-    }
+    },
+    filterModalOpen: filterModalOpen,
+    setFilterModalOpen: setFilterModalOpen
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter
@@ -249,7 +256,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     currentTourStep: currentTourStep,
     handleOpenTour: _handleOpenTour,
     isTourOpen: isTourOpen,
-    setIsTourOpen: setIsTourOpen
+    setIsTourOpen: setIsTourOpen,
+    setFilterModalOpen: setFilterModalOpen
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,

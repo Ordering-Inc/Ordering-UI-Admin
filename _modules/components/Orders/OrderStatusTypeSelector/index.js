@@ -15,8 +15,6 @@ var _Select = require("../../../styles/Select");
 
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
 
-var _styledComponents = require("styled-components");
-
 var _MultiSelect = require("../../../styles/MultiSelect");
 
 var _styles = require("./styles");
@@ -46,8 +44,6 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
-  var _theme$images, _theme$images$orderSt, _theme$images2, _theme$images2$orderS, _theme$images3, _theme$images3$orderS, _theme$images4, _theme$images4$orderS;
-
   var isFirstSelect = props.isFirstSelect,
       defaultValue = props.defaultValue,
       deliveryType = props.deliveryType,
@@ -67,8 +63,6 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var theme = (0, _styledComponents.useTheme)();
-
   var _useState = (0, _react.useState)('default'),
       _useState2 = _slicedToArray(_useState, 2),
       defaultOptionValue = _useState2[0],
@@ -87,16 +81,15 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
     }, /*#__PURE__*/_react.default.createElement("p", null, t('CHANGE_STATUS', 'Change Status'))),
-    disabled: true
+    disabled: true,
+    showDisable: true
   }, {
     value: 'pending',
     name: t('PENDING', 'Pending'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
-      noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$orderSt = _theme$images.orderStatus) === null || _theme$images$orderSt === void 0 ? void 0 : _theme$images$orderSt.pending,
-      alt: "pending"
-    }), /*#__PURE__*/_react.default.createElement("p", null, t('PENDING', 'Pending'))),
+      noPadding: noPadding,
+      isSubTitle: true
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('PENDING', 'Pending'))),
     disabled: true
   }, {
     value: 0,
@@ -117,11 +110,9 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     value: 'inProgress',
     name: t('IN_PROGRESS', 'In Progress'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
-      noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$orderS = _theme$images2.orderStatus) === null || _theme$images2$orderS === void 0 ? void 0 : _theme$images2$orderS.inProgress,
-      alt: "progress"
-    }), /*#__PURE__*/_react.default.createElement("p", null, t('IN_PROGRESS', 'In Progress'))),
+      noPadding: noPadding,
+      isSubTitle: true
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('IN_PROGRESS', 'In Progress'))),
     disabled: true
   }, {
     value: 7,
@@ -197,11 +188,9 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     value: null,
     name: t('COMPLETED', 'Completed'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
-      noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$orderS = _theme$images3.orderStatus) === null || _theme$images3$orderS === void 0 ? void 0 : _theme$images3$orderS.completed,
-      alt: "completed"
-    }), /*#__PURE__*/_react.default.createElement("p", null, t('COMPLETED', 'Completed'))),
+      noPadding: noPadding,
+      isSubTitle: true
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('COMPLETED', 'Completed'))),
     disabled: true
   }, {
     value: 1,
@@ -228,11 +217,9 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     value: null,
     name: t('CANCELLED', 'Cancelled'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
-      noPadding: noPadding
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$orderS = _theme$images4.orderStatus) === null || _theme$images4$orderS === void 0 ? void 0 : _theme$images4$orderS.cancelled,
-      alt: "cancelled"
-    }), /*#__PURE__*/_react.default.createElement("p", null, t('CANCELLED', 'Cancelled'))),
+      noPadding: noPadding,
+      isSubTitle: true
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('CANCELLED', 'Cancelled'))),
     disabled: true
   }, {
     value: 2,
@@ -382,7 +369,13 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     });
   } else {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderStatusTypeSelectWrapper, null, isFirstSelect ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+      searchBarIsCustomLayout: true,
+      searchBarPlaceholder: t('SEARCH', 'Search'),
       type: type,
+      placeholder: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+        noPadding: noPadding,
+        isSubTitle: true
+      }, t('CHANGE_STATUS', 'Change Status')),
       optionInnerMaxHeight: "50vh",
       noSelected: noSelected,
       defaultValue: defaultOptionValue,
@@ -394,7 +387,13 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
       isShowSearchBar: true,
       handleChangeSearch: handleChangeSearch
     }) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
+      searchBarIsCustomLayout: true,
+      searchBarPlaceholder: t('SEARCH', 'Search'),
       type: type,
+      placeholder: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+        noPadding: noPadding,
+        isSubTitle: true
+      }, t('CHANGE_STATUS', 'Change Status')),
       optionInnerMaxHeight: "50vh",
       noSelected: noSelected,
       defaultValue: defaultOptionValue,

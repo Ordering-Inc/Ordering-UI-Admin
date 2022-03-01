@@ -19,7 +19,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  box-sizing: border-box;\n  min-width: ", ";\n  color: #333;\n  cursor: pointer;\n  justify-content: space-between;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n\n  svg {\n    vertical-align: text-top;\n  }\n\n  ", "\n\n  ", "\n"])), function (_ref) {
+var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  box-sizing: border-box;\n  min-width: ", ";\n  color: #333;\n  cursor: pointer;\n  justify-content: space-between;\n\n  ", "\n\n  ", "\n\n  ", "\n\n  &:hover {\n    background-color: #F8F9FA;\n  }\n\n  ", "\n\n  svg {\n    vertical-align: text-top;\n  }\n\n  ", "\n\n  ", "\n"])), function (_ref) {
   var minWidth = _ref.minWidth;
   return minWidth || '100px';
 }, function (_ref2) {
@@ -31,8 +31,8 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
 }, function (_ref4) {
   var optionBottomBorder = _ref4.optionBottomBorder;
   return optionBottomBorder && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      border-bottom: 1px solid #D8D8D8;\n  "])));
-}, (0, _polished.darken)(0.03, '#fafafa'), function (props) {
-  return props.selected && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  \n    &:hover {\n      background-color: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#fafafa'), (0, _polished.darken)(0.07, '#fafafa'));
+}, function (props) {
+  return props.selected && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background-color: #E9ECEF;\n  \n    &:hover {\n      background-color: ", ";\n    }\n  "])), (0, _polished.darken)(0.07, '#E9ECEF'));
 }, function (_ref5) {
   var withIcons = _ref5.withIcons;
   return withIcons && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      display: flex;\n      align-items: center;\n      justify-content: flex-start;\n      svg {\n        margin-right: 3px;\n        ", "\n      }\n  "])), function (props) {

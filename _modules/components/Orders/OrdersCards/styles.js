@@ -97,17 +97,21 @@ var CardContent = _styledComponents.default.div(_templateObject13 || (_templateO
 
 exports.CardContent = CardContent;
 
-var DriverSelectorWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  margin-top: 10px;\n  > div {\n    > div:first-child {\n      border: none;\n      padding: 0px;\n      > div:first-child {\n        padding: 0px\n      }\n    }\n  }\n\n  @media (min-width: 1300px) {\n    width: 55%;\n    margin-top: 0px;\n    ", "\n  }\n"])), function (props) {
+var DriverSelectorWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  box-sizing: border-box;\n  margin-top: 10px;\n  > div {\n    > div {\n      border: none;\n      &:first-child {\n        .driver-photo {\n          width: 45px;\n          height: 45px;\n        }\n        .driver-info {\n          p {\n            color: ", ";\n            font-size: 14px;\n            font-weight: 600;\n          }\n          span {\n            display: initial;\n          }\n        }\n      }\n    }\n  }\n\n  @media (min-width: 1300px) {\n    width: 55%;\n    margin-top: 0px;\n    ", "\n  }\n"])), function (props) {
+  var _props$theme$colors3;
+
+  return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.headingColor;
+}, function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n      padding-right: 15px;\n    "])), function (props) {
-    var _props$theme$colors3;
-
-    return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.secundary;
-  }) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n      padding-left: 15px;\n    "])), function (props) {
     var _props$theme$colors4;
 
     return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.secundary;
+  }) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n      padding-left: 15px;\n    "])), function (props) {
+    var _props$theme$colors5;
+
+    return (_props$theme$colors5 = props.theme.colors) === null || _props$theme$colors5 === void 0 ? void 0 : _props$theme$colors5.secundary;
   });
 });
 

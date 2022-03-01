@@ -462,6 +462,15 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
   };
 
+  var handleCloseMoreDetails = function handleCloseMoreDetails() {
+    setExtraOpen(false);
+    setOpenMessages({
+      chat: false,
+      history: false
+    });
+    setShowOption(null);
+  };
+
   (0, _react.useEffect)(function () {
     if (!open) return;
     document.addEventListener('keydown', onCloseSidebar);
@@ -515,6 +524,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     order: order,
     extraOpen: extraOpen,
     actionSidebar: actionSidebar,
+    showOption: showOption,
+    openMessage: openMessages,
     handleShowOption: handleShowOption,
     handleOpenMessages: handleOpenMessages,
     isTourOpen: isTourOpen,
@@ -524,13 +535,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     isDisabled: isTourOpen && currentTourStep === 1
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
-  }))), /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     isFirstSelect: true,
+    noPadding: true,
     orderId: order.id,
     deliveryType: order === null || order === void 0 ? void 0 : order.delivery_type,
     defaultValue: parseInt(order.status),
     handleUpdateOrderStatus: handleUpdateOrderStatus
-  })), /*#__PURE__*/_react.default.createElement(_styles2.StatusBarContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.StatusBar, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.StatusBarContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
   })), /*#__PURE__*/_react.default.createElement(_styles2.AdvancedLogistic, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('ATTEMPTS', 'Attempts')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.logistic_attemps)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority)))), /*#__PURE__*/_react.default.createElement("div", {
     "data-tour": "tour_driver"
@@ -552,7 +564,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }))), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
-      return setExtraOpen(false);
+      return handleCloseMoreDetails();
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), (openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat) && /*#__PURE__*/_react.default.createElement(_styles2.ChatContainer, {
     "data-tour": "tour_message"
@@ -584,7 +596,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     height: "90vh",
     open: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,
     onClose: function onClose() {
-      return setExtraOpen(false);
+      return handleCloseMessages();
     }
   }, (openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat) && /*#__PURE__*/_react.default.createElement(_styles2.ChatContainer, null, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,

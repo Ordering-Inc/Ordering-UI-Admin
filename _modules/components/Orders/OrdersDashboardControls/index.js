@@ -47,6 +47,8 @@ var OrdersDashboardControls = function OrdersDashboardControls(props) {
     handleDeleteMultiOrders: handleDeleteMultiOrders
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusTypeSelector, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     orderControl: true,
+    isFirstSelect: true,
+    noPadding: true,
     mutiOrdersChange: true,
     noSelected: true,
     defaultValue: "default",

@@ -9,7 +9,7 @@ exports.PlaceholderTitle = exports.OrderStatusTypeSelectWrapper = exports.Option
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,11 +21,26 @@ var OrderStatusTypeSelectWrapper = _styledComponents.default.div(_templateObject
 
 exports.OrderStatusTypeSelectWrapper = OrderStatusTypeSelectWrapper;
 
-var Option = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  column-gap: 5px;  \n\n  ", "\n\n  img {\n    width: 15px;\n  }\n\n  p {\n    margin: 0px;\n    white-space: nowrap;\n  }\n"])), function (_ref) {
-  var noPadding = _ref.noPadding;
-  return noPadding && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 0px;\n  "])));
+var Option = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 5px 10px;\n  column-gap: 5px;\n\n  p {\n    margin: 0px;\n    white-space: nowrap;\n    font-size: 14px;\n  }\n\n  ", "\n\n  ", "\n"])), function (_ref) {
+  var isSubTitle = _ref.isSubTitle;
+  return !isSubTitle ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    ", "\n\n    p {\n      padding: 0 10px;\n      color: ", " !important;\n    }\n  "])), function (props) {
+    var _props$theme;
+
+    return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n      margin-right: 5px;\n    "])), function (props) {
+      return props.theme.colors.borderColor;
+    }) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n      margin-left: 5px;\n    "])), function (props) {
+      return props.theme.colors.borderColor;
+    });
+  }, function (props) {
+    return props.theme.colors.secundaryContrast;
+  }) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    p {\n      color: ", ";\n    }\n  "])), function (props) {
+    return props.theme.colors.secundaryLight;
+  });
+}, function (_ref2) {
+  var noPadding = _ref2.noPadding;
+  return noPadding && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    padding: 0px;\n  "])));
 });
 
 exports.Option = Option;
-var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  padding: 10px;\n"])));
+var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding: 10px;\n"])));
 exports.PlaceholderTitle = PlaceholderTitle;

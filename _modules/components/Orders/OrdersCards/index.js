@@ -233,7 +233,8 @@ var OrdersCards = function OrdersCards(props) {
       className: "driver-selector"
     }, /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
       orderView: true,
-      padding: "5px 0",
+      small: true,
+      padding: "0px",
       defaultValue: order !== null && order !== void 0 && order.driver_id ? order.driver_id : 'default',
       drivers: driversList.drivers,
       order: order

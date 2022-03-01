@@ -15,13 +15,11 @@ var _DriverMapMarkerAndInfo = require("../DriverMapMarkerAndInfo");
 
 var _InterActOrderMarker = require("../InterActOrderMarker");
 
-var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
-
 var _Shared = require("../../Shared");
 
-var _styles = require("./styles");
+var _styledComponents = require("styled-components");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -48,6 +46,7 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
 
   var driversList = props.driversList,
       interActionMapOrder = props.interActionMapOrder;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -74,8 +73,8 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
 
   var _useState5 = (0, _react.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      onlineDrivers = _useState6[0],
-      setOnlineDrivers = _useState6[1];
+      activeDrivers = _useState6[0],
+      setActiveDrivers = _useState6[1];
 
   var _useState7 = (0, _react.useState)(true),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -104,7 +103,7 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
       return driver.enabled && driver.available && !driver.busy;
     });
 
-    setOnlineDrivers(_onlineDrivers);
+    setActiveDrivers(_onlineDrivers);
     var bounds = new window.google.maps.LatLngBounds();
 
     if (interActionMapOrder === null) {
@@ -147,6 +146,25 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
         _marker = interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' ? interActionOrderDriverLocation : defaultCenter;
         _newPoint = new window.google.maps.LatLng(_marker.lat, _marker.lng);
         bounds.extend(_newPoint);
+      } else {
+        var _iterator2 = _createForOfIteratorHelper(activeDrivers),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var activeDriver = _step2.value;
+
+            var _marker2 = activeDriver.location !== null && _typeof(activeDriver.location) === 'object' ? activeDriver.location : defaultCenter;
+
+            var _newPoint2 = new window.google.maps.LatLng(_marker2.lat, _marker2.lng);
+
+            bounds.extend(_newPoint2);
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
       }
     }
 
@@ -179,23 +197,23 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
     if (driversList.loading || driversList.drivers.length === 0 || mapLoaded) return;
 
     if (interActionMapOrder !== null) {
-      var _iterator2 = _createForOfIteratorHelper(driversList.drivers),
-          _step2;
+      var _iterator3 = _createForOfIteratorHelper(driversList.drivers),
+          _step3;
 
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
           var _interActionMapOrder$6;
 
-          var driver = _step2.value;
+          var driver = _step3.value;
 
           if (driver.id === (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$6 = interActionMapOrder.driver) === null || _interActionMapOrder$6 === void 0 ? void 0 : _interActionMapOrder$6.id)) {
             setInterActionOrderDriverLocation(driver.location);
           }
         }
       } catch (err) {
-        _iterator2.e(err);
+        _iterator3.e(err);
       } finally {
-        _iterator2.f();
+        _iterator3.f();
       }
     }
 
@@ -257,14 +275,26 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
     lat: interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' ? interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.lat : defaultCenter.lat,
     lng: interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' ? interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.lng : defaultCenter.lng,
     image: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$21 = interActionMapOrder.driver) === null || _interActionMapOrder$21 === void 0 ? void 0 : _interActionMapOrder$21.photo
-  })), interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && onlineDrivers.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperOnlineDrivers, null, /*#__PURE__*/_react.default.createElement("p", null, t('ACTIVE_DRIVERS', 'Drivers online')), /*#__PURE__*/_react.default.createElement(_styles.OnlineDrivers, null, /*#__PURE__*/_react.default.createElement(_Shared.AutoScroll, {
+  }), interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && activeDrivers.length > 0 && activeDrivers.map(function (driver) {
+    var _driver$location, _driver$location2, _driver$location3, _driver$location4;
+
+    return /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
+      key: driver.id,
+      driver: driver,
+      lat: driver !== null && driver !== void 0 && (_driver$location = driver.location) !== null && _driver$location !== void 0 && _driver$location.lat ? driver === null || driver === void 0 ? void 0 : (_driver$location2 = driver.location) === null || _driver$location2 === void 0 ? void 0 : _driver$location2.lat : defaultCenter.lat,
+      lng: driver !== null && driver !== void 0 && (_driver$location3 = driver.location) !== null && _driver$location3 !== void 0 && _driver$location3.lng ? driver === null || driver === void 0 ? void 0 : (_driver$location4 = driver.location) === null || _driver$location4 === void 0 ? void 0 : _driver$location4.lng : defaultCenter.lng,
+      image: driver === null || driver === void 0 ? void 0 : driver.photo
+    });
+  })), interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && activeDrivers.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperOnlineDrivers, null, /*#__PURE__*/_react.default.createElement("p", null, t('ACTIVE_DRIVERS', 'Drivers online')), /*#__PURE__*/_react.default.createElement(_styles.OnlineDrivers, null, /*#__PURE__*/_react.default.createElement(_Shared.AutoScroll, {
     innerScroll: true
-  }, onlineDrivers.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, onlineDrivers.map(function (driver) {
+  }, activeDrivers.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, activeDrivers.map(function (driver) {
+    var _theme$images, _theme$images$icons;
+
     return /*#__PURE__*/_react.default.createElement(_styles.WrapDriverInfo, {
       key: driver.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverImage, null, driver !== null && driver !== void 0 && driver.photo ? /*#__PURE__*/_react.default.createElement(_styles.DriverImage, {
-      bgimage: driver === null || driver === void 0 ? void 0 : driver.photo
-    }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.DriverInfo, null, /*#__PURE__*/_react.default.createElement("p", null, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))));
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverImage, null, /*#__PURE__*/_react.default.createElement(_styles.DriverImage, {
+      bgimage: (driver === null || driver === void 0 ? void 0 : driver.photo) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver)
+    })), /*#__PURE__*/_react.default.createElement(_styles.DriverInfo, null, /*#__PURE__*/_react.default.createElement("p", null, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))));
   }))))));
 };
 

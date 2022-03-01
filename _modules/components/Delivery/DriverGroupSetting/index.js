@@ -102,7 +102,7 @@ var DriverGroupSettingUI = function DriverGroupSettingUI(props) {
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVER_GROUP', 'Driver group')), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
     isCustomLayout: true,
     placeholder: t('SEARCH', 'Search'),

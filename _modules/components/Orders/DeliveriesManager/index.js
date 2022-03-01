@@ -83,6 +83,11 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
       detailsOrder = _useState6[0],
       setDetailsOrder = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      filterModalOpen = _useState8[0],
+      setFilterModalOpen = _useState8[1];
+
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     onOrderRedirect();
@@ -113,7 +118,9 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     businessesList: businessesList,
     filterValues: filterValues,
     handleChangeSearch: handleChangeSearch,
-    handleChangeFilterValues: handleChangeFilterValues
+    handleChangeFilterValues: handleChangeFilterValues,
+    filterModalOpen: filterModalOpen,
+    setFilterModalOpen: setFilterModalOpen
   }), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapItemView, null, /*#__PURE__*/_react.default.createElement(_DeliveryDashboard.DeliveryDashboard, {
     searchValue: searchValue,
     filterValues: filterValues,
@@ -125,7 +132,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     handleOpenOrderDetail: handleOpenOrderDetail,
     handleOrdersStatusGroupFilter: handleOrdersStatusGroupFilter,
     handleSelectedSubOrderStatus: handleSelectedSubOrderStatus,
-    isOnlyDelivery: true
+    isOnlyDelivery: true,
+    setFilterModalOpen: setFilterModalOpen
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     open: isOpenOrderDetail,
     order: detailsOrder,

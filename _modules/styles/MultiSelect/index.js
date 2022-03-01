@@ -11,9 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _EnChevronDown = _interopRequireDefault(require("@meronex/icons/en/EnChevronDown"));
 
-var _RiCheckboxBlankCircleLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankCircleLine"));
-
-var _RiCheckboxCircleLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxCircleLine"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 
@@ -170,7 +168,7 @@ var MultiSelect = function MultiSelect(props) {
         return handleSelectOption(option);
       },
       optionBottomBorder: props.optionBottomBorder
-    }, option.value !== 'default' && /*#__PURE__*/_react.default.createElement(_styles.CheckBox, null, values.includes(option.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxCircleLine.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankCircleLine.default, null)), option.content);
+    }, option.value !== 'default' && /*#__PURE__*/_react.default.createElement(_styles.CheckBox, null, values.includes(option.value) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), option.content);
   }))));
 };
 
