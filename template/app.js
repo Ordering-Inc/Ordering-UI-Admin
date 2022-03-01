@@ -51,6 +51,7 @@ import { ListenPageChanges } from './components/ListenPageChanges'
 import { SpinnerLoader } from '../src/components/Shared'
 import { HelmetTags } from './components/HelmetTags'
 import { RewardsPrograms } from './pages/RewardsPrograms'
+import { OpenCarts } from './pages/OpenCarts'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -331,6 +332,13 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route> */}
+                    <Route exact path='/cart-recovery/open-carts'>
+                      {
+                        auth
+                          ? <OpenCarts />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
                     <Route exact path='/loyalty/rewards-programs'>
                       {
                         auth

@@ -59,3 +59,10 @@ export const AllowItem = styled.div`
     }
   `}
 `
+
+export const Title = styled.div`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0px 7px;
+`

@@ -6,7 +6,8 @@ import {
   HeaderItem,
   PopoverBody,
   PopoverList,
-  AllowItem
+  AllowItem,
+  Title
 } from './styles'
 
 export const ColumnAllowSettingPopover = (props) => {
@@ -14,7 +15,8 @@ export const ColumnAllowSettingPopover = (props) => {
     open,
     optionsDefault,
     allowColumns,
-    handleChangeAllowColumns
+    handleChangeAllowColumns,
+    title
   } = props
   const referenceElement = useRef()
   const popperElement = useRef()
@@ -53,6 +55,7 @@ export const ColumnAllowSettingPopover = (props) => {
       </HeaderItem>
       {open && (
         <PopoverBody ref={popperElement}>
+          {title && <Title>{title}</Title>}
           <PopoverList>
             {optionsDefault.map(option => (
               <AllowItem
