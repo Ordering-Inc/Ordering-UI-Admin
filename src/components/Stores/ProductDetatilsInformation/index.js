@@ -103,10 +103,6 @@ export const ProductDetatilsInformation = (props) => {
     }
   }
 
-  const handleRegularPriceSwitch = (val) => {
-    handleChangeFormState({ in_offer: val })
-  }
-
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => {
@@ -139,12 +135,6 @@ export const ProductDetatilsInformation = (props) => {
       })
     }
   }, [autoGenerateCode])
-
-  useEffect(() => {
-    if (formState.changes?.offer_price === null) {
-      handleChangeFormState({ in_offer: false })
-    }
-  }, [formState.changes?.offer_price])
 
   return (
     <>
@@ -216,34 +206,33 @@ export const ProductDetatilsInformation = (props) => {
             <RegularWrapper>
               <span>{t('REGULAR_PRICE', 'Regular Price')}</span>
               <Switch
-                defaultChecked={
-                  formState?.result?.result
-                    ? formState?.result?.result?.in_offer
-                    : formState?.changes?.in_offer ?? (product?.in_offer && product?.offer_price)
-                }
-                onChange={val => handleRegularPriceSwitch(val)}
+                defaultChecked={(product?.in_offer && product?.offer_price) || false}
+                onChange={val => handleChangeFormState({ in_offer: val })}
               />
             </RegularWrapper>
             <Input
-                name='offer_price'
-                placeholder={parsePrice(0)}
-                defaultValue={product?.offer_price}
-                ref={formMethods.register({
-                  required: t(
-                    'VALIDATION_ERROR_REQUIRED',
-                    'The Regular Price field is required'
-                  ).replace('_attribute_', t('REGULAR_PRICE', 'Regular Price')),
-                  min: formState?.changes?.price ?? product?.price
-                })}
-                onChange={(e) => handleChangeInput(e)}
-                disabled={formState.loading || !(typeof (formState?.changes?.in_offer) !== 'undefined' ? formState?.changes?.in_offer : product?.in_offer)}
-                autoComplete='off'
-                onKeyPress={(e) => {
-                  if (!/^[0-9.]$/.test(e.key)) {
-                    e.preventDefault()
-                  }
-                }}
-              />
+              name='offer_price'
+              placeholder={parsePrice(0)}
+              defaultValue={product?.offer_price}
+              ref={formMethods.register({
+                min: formState?.changes?.price ?? product?.price,
+                required:
+                  ((typeof formState?.changes?.in_offer === 'undefined' && product?.in_offer) || formState?.changes?.in_offer)
+                    ? t(
+                      'VALIDATION_ERROR_REQUIRED',
+                      'The Regular Price field is required'
+                    ).replace('_attribute_', t('REGULAR_PRICE', 'Regular Price'))
+                    : false
+              })}
+              onChange={handleChangeInput}
+              disabled={formState.loading || !(formState?.changes?.in_offer ?? product?.in_offer)}
+              autoComplete='off'
+              onKeyPress={(e) => {
+                if (!/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
+            />
           </InputWrapper>
         </FieldRow>
         <InputWrapper>
