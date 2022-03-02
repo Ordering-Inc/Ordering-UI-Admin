@@ -41,8 +41,6 @@ const OpenCartsFilterGroupUI = (props) => {
     handleChangeFilterValues({})
   }
 
-  console.log(filterValues)
-
   return (
     <Modal
       title={t('FILTER', 'Filter')}
