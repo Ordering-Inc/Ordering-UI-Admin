@@ -6,6 +6,7 @@ import {
 import { Download } from 'react-bootstrap-icons'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
+import { convertHMS } from '../../../utils'
 
 import {
   ReportsTopDriversContainer,
@@ -142,6 +143,15 @@ const ReportsTopDriversUI = (props) => {
               })
             }
             return label
+          },
+          beforeFooter: (tooltipItem) => {
+            let time = ''
+            if (reportData?.content?.dataset?.dataset?.data?.length > 0) {
+              reportData?.content?.dataset?.dataset?.data && reportData.content.dataset.dataset.data.forEach(item => {
+                if (item.x === tooltipItem[0]?.parsed?.x) time = convertHMS(item?.info[0]?.value ?? 0)
+              })
+            }
+            return `${t('AVERAGE_DELIVERY_TIME', 'Average delivery time')}: ${time}`
           }
         }
       }
