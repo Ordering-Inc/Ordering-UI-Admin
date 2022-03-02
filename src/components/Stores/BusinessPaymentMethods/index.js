@@ -7,6 +7,7 @@ import {
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
+import { ChevronRight } from 'react-bootstrap-icons'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -121,7 +122,11 @@ const BusinessPaymentMethodsUI = (props) => {
         ) : (
           <PaymethodListWrapper>
             {paymethodsList.paymethods.map(paymethod => (
-              <PaymethodOptionContainer key={paymethod.id}>
+              <PaymethodOptionContainer
+                key={paymethod.id}
+                disabled={isTutorialMode || !(isCheckFoundBusinessPaymethod(paymethod.id))}
+                onClick={() => handleOpenEdit(paymethod.id, paymethod.gateway)}
+              >
                 <PaymethodOption
                   onClick={() => handleClickPayment(paymethod.id)}
                 >
@@ -133,24 +138,20 @@ const BusinessPaymentMethodsUI = (props) => {
                   <PaymethodName>{paymethod?.name}</PaymethodName>
                 </PaymethodOption>
                 {!isTutorialMode && isCheckFoundBusinessPaymethod(paymethod.id) && (
-                  <DropDownWrapper>
-                    <DropdownButton
-                      menuAlign={theme?.rtl ? 'left' : 'right'}
-                      title={ActionIcon}
-                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                    >
-                      <Dropdown.Item
-                        onClick={() => handleOpenEdit(paymethod.id, paymethod.gateway)}
-                      >
-                        {t('EDIT', 'Edit')}
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => handleDeleteBusinessPaymethodOption(paymethod.id)}
-                      >
-                        {t('DELETE', 'Delete')}
-                      </Dropdown.Item>
-                    </DropdownButton>
-                  </DropDownWrapper>
+                  <ChevronRight />
+                  // <DropDownWrapper>
+                  //   <DropdownButton
+                  //     menuAlign={theme?.rtl ? 'left' : 'right'}
+                  //     title={ActionIcon}
+                  //     id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                  //   >
+                  //     <Dropdown.Item
+                  //       onClick={() => handleDeleteBusinessPaymethodOption(paymethod.id)}
+                  //     >
+                  //       {t('DELETE', 'Delete')}
+                  //     </Dropdown.Item>
+                  //   </DropdownButton>
+                  // </DropDownWrapper>
                 )}
               </PaymethodOptionContainer>
             ))}

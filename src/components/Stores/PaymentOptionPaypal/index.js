@@ -43,18 +43,13 @@ export const PaymentOptionPaypal = (props) => {
       props.onClose()
     }
     setIsMenuOpen(value)
-    document.getElementById('paypal').style.width = value
-      ? width > 1000 ? '500px' : '100%'
-      : '0'
   }
 
   const setPaymethodInfo = (values) => {
     const data = {}
-    let array = changesState?.[values.key]
-      ?? (values.key === 'allowed_order_types'
-        ? businessPaymethod?.[values.key]
-        : businessPaymethod?.[values.key]?.map(i => i.id))
-      ?? []
+    let array = changesState?.[values.key] ?? (values.key === 'allowed_order_types'
+      ? businessPaymethod?.[values.key]
+      : businessPaymethod?.[values.key]?.map(i => i.id)) ?? []
 
     array = [...new Set(
       array.includes(values.value)

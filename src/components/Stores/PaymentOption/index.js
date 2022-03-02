@@ -6,6 +6,7 @@ import MdcClose from '@meronex/icons/mdc/MdcClose'
 
 import { Button } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { Tab, TabsContainer } from '../BusinessMenu/styles'
 
 import {
   Container,
@@ -14,7 +15,6 @@ import {
   TabOption,
   TabOptionName
 } from './styles'
-import { Tab, TabsContainer } from '../BusinessMenu/styles'
 
 export const PaymentOption = (props) => {
   const {
@@ -36,11 +36,9 @@ export const PaymentOption = (props) => {
 
   const setPaymethodInfo = (values) => {
     const data = {}
-    let array = changesState?.[values.key]
-      ?? (values.key === 'allowed_order_types'
-        ? businessPaymethod?.[values.key]
-        : businessPaymethod?.[values.key]?.map(i => i.id))
-      ?? []
+    let array = changesState?.[values.key] ?? (values.key === 'allowed_order_types'
+      ? businessPaymethod?.[values.key]
+      : businessPaymethod?.[values.key]?.map(i => i.id)) ?? []
 
     array = [...new Set(
       array.includes(values.value)
@@ -58,9 +56,6 @@ export const PaymentOption = (props) => {
       props.onClose()
     }
     setIsMenuOpen(value)
-    document.getElementById('payment_method_option').style.width = value
-      ? width > 1000 ? '500px' : '100%'
-      : '0'
   }
 
   useEffect(() => {

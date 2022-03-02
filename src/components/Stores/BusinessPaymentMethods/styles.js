@@ -33,13 +33,18 @@ export const PaymethodOptionContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  cursor: pointer;
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none; 
+    cursor: initial;
+  `}
 `
 
 export const PaymethodOption = styled.div`
   display: flex;
   align-items: center;
   padding: 16px 0;
-  cursor: pointer;
   color: ${props => props.theme.colors.headingColor};
   
   > svg {

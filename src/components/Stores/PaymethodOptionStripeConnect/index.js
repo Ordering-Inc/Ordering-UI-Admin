@@ -43,11 +43,9 @@ export const PaymethodOptionStripeConnect = (props) => {
 
   const setPaymethodInfo = (values) => {
     const data = {}
-    let array = changesState?.[values.key]
-      ?? (values.key === 'allowed_order_types'
-        ? businessPaymethod?.[values.key]
-        : businessPaymethod?.[values.key]?.map(i => i.id))
-      ?? []
+    let array = changesState?.[values.key] ?? (values.key === 'allowed_order_types'
+      ? businessPaymethod?.[values.key]
+      : businessPaymethod?.[values.key]?.map(i => i.id)) ?? []
 
     array = [...new Set(
       array.includes(values.value)
@@ -65,9 +63,6 @@ export const PaymethodOptionStripeConnect = (props) => {
       props.onClose()
     }
     setIsMenuOpen(value)
-    document.getElementById('stripe_connect').style.width = value
-      ? width > 1000 ? '500px' : '100%'
-      : '0'
   }
 
   useEffect(() => {
