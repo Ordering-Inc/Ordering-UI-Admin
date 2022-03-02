@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _polished = require("polished");
-
 require("chartjs-adapter-moment");
 
 var _reactChartjs = require("react-chartjs-2");
@@ -38,6 +36,14 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
@@ -80,9 +86,25 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
       isAppIdFilter = _useState4[0],
       setIsAppIdFilter = _useState4[1];
 
-  var generateColor = function generateColor() {
-    var colorList = ['#2C7BE5', '#52C9FD', '#FFD233', '#EB5F79', '#2ED690'];
-    return colorList[Math.round(Math.random() * (colorList.length - 1))];
+  var getRgb = function getRgb() {
+    return Math.floor(Math.random() * 256);
+  };
+
+  var rgbToHex = function rgbToHex(r, g, b) {
+    var color = '#' + [r, g, b].map(function (x) {
+      var hex = x.toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    }).join('');
+    return color;
+  };
+
+  var handleGenerate = function handleGenerate() {
+    var color = {
+      r: getRgb(),
+      g: getRgb(),
+      b: getRgb()
+    };
+    return rgbToHex(color.r, color.g, color.b);
   };
 
   var generateData = function generateData() {
@@ -94,26 +116,29 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
       var _reportData$content2, _reportData$content2$, _reportData$content2$2;
 
       values = reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.dataset) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.dataset) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.map(function (item, index) {
-        var _item$data;
-
         var list = [];
+        reportData.content.dataset.x.labels.forEach(function (label) {
+          var _item$data;
 
-        if (item !== null && item !== void 0 && (_item$data = item.data) !== null && _item$data !== void 0 && _item$data.isArray) {
-          (item === null || item === void 0 ? void 0 : item.data) && item.data.forEach(function (value) {
-            list.push(value.y);
-          });
-        } else {
-          Object.keys(item.data).forEach(function (key) {
-            list.push(item.data[key].y);
-          });
-        }
+          var count = 0;
 
-        var bgColor = index === 0 ? '#2C7BE5' : generateColor();
+          if (item !== null && item !== void 0 && (_item$data = item.data) !== null && _item$data !== void 0 && _item$data.isArray) {
+            (item === null || item === void 0 ? void 0 : item.data) && item.data.forEach(function (value) {
+              if (label === value.x) count = value.y;
+            });
+          } else {
+            Object.keys(item.data).forEach(function (key) {
+              if (label === item.data[key].x) count = item.data[key].y;
+            });
+          }
+
+          list.push(count);
+        });
+        var bgColor = index === 0 ? '#2C7BE5' : handleGenerate();
         return {
           label: item.label,
-          data: [].concat(list),
-          fill: true,
-          backgroundColor: (0, _polished.transparentize)(0.9, bgColor),
+          data: [0].concat(list),
+          fill: false,
           borderColor: bgColor,
           tension: 0.4,
           borderWidth: 3
@@ -141,7 +166,7 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
     },
     plugins: {
       legend: {
-        display: false
+        display: true
       }
     },
     pointRadius: 0
@@ -197,7 +222,7 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
       var _reportData$content6, _reportData$content6$, _reportData$content6$2;
 
       var defaultData = {
-        labels: reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.dataset) === null || _reportData$content6$ === void 0 ? void 0 : (_reportData$content6$2 = _reportData$content6$.x) === null || _reportData$content6$2 === void 0 ? void 0 : _reportData$content6$2.labels,
+        labels: [''].concat(_toConsumableArray(reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.dataset) === null || _reportData$content6$ === void 0 ? void 0 : (_reportData$content6$2 = _reportData$content6$.x) === null || _reportData$content6$2 === void 0 ? void 0 : _reportData$content6$2.labels)),
         datasets: generateData()
       };
       setDataOptions(defaultData);

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.setStorageItem = exports.scrollTo = exports.removeStorageItem = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.setStorageItem = exports.scrollTo = exports.removeStorageItem = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -381,5 +381,37 @@ var removeStorageItem = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
+/**
+ * Fuctions to convert formatted time from seconds
+ */
+
 
 exports.removeStorageItem = removeStorageItem;
+
+var convertHMS = function convertHMS(value) {
+  var sec = parseInt(value, 10); // convert value to number if it's string
+
+  var absSec = Math.abs(sec);
+  var hours = Math.floor(absSec / 3600); // get hours
+
+  var minutes = Math.floor((absSec - hours * 3600) / 60); // get minutes
+
+  var seconds = absSec - hours * 3600 - minutes * 60; //  get seconds
+  // add 0 if value < 10; Example: 2 => 02
+
+  if (hours < 10) {
+    hours = '0' + hours;
+  }
+
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+
+  if (seconds < 10) {
+    seconds = '0' + seconds;
+  }
+
+  return sec < 0 ? '-' : '' + hours + ':' + minutes + ':' + seconds; // Return is HH : MM : SS
+};
+
+exports.convertHMS = convertHMS;

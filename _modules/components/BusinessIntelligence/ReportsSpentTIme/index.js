@@ -25,6 +25,8 @@ var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
 
 var _ReportsDriverFilter = require("../ReportsDriverFilter");
 
+var _utils = require("../../../utils");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -149,31 +151,6 @@ var ReportsSpentTimeUI = function ReportsSpentTimeUI(props) {
     document.body.removeChild(downloadLink);
   };
 
-  var convertHMS = function convertHMS(value) {
-    var sec = parseInt(value, 10); // convert value to number if it's string
-
-    var hours = Math.floor(sec / 3600); // get hours
-
-    var minutes = Math.floor((sec - hours * 3600) / 60); // get minutes
-
-    var seconds = sec - hours * 3600 - minutes * 60; //  get seconds
-    // add 0 if value < 10; Example: 2 => 02
-
-    if (hours < 10) {
-      hours = '0' + hours;
-    }
-
-    if (minutes < 10) {
-      minutes = '0' + minutes;
-    }
-
-    if (seconds < 10) {
-      seconds = '0' + seconds;
-    }
-
-    return hours + ':' + minutes + ':' + seconds; // Return is HH : MM : SS
-  };
-
   return /*#__PURE__*/_react.default.createElement(_styles2.ReportsBusinessSpendContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('DRIVER_TIME', 'Driver Time')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setIsDriverGroupFilter(true);
@@ -216,7 +193,7 @@ var ReportsSpentTimeUI = function ReportsSpentTimeUI(props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
         colSpan: td.colspan
-      }, td.value_unit === 'seconds' && td.value ? convertHMS(td.value) : td.value_unit === 'currency' ? parsePrice(td.value) : td.value);
+      }, td.value_unit === 'seconds' && td.value ? (0, _utils.convertHMS)(td.value) : td.value_unit === 'currency' ? parsePrice(td.value) : td.value);
     })));
   }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.footer) === null || _reportData$content7$ === void 0 ? void 0 : _reportData$content7$.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.footer) === null || _reportData$content8$ === void 0 ? void 0 : _reportData$content8$.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
