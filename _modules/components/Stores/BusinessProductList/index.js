@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductList = function BusinessProductList(props) {
-  var _businessState$busine, _businessState$busine2, _categoryState$produc, _businessState$busine3, _businessState$busine4;
+  var _businessState$busine, _businessState$busine2, _categoryState$produc, _categoryState$pagina, _businessState$busine3, _businessState$busine4;
 
   var productDetailsId = props.productDetailsId,
       categoryState = props.categoryState,
@@ -145,11 +145,6 @@ var BusinessProductList = function BusinessProductList(props) {
       currentProducts = _useState14[0],
       setCurrentProducts = _useState14[1];
 
-  var _useState15 = (0, _react.useState)(null),
-      _useState16 = _slicedToArray(_useState15, 2),
-      totalPages = _useState16[0],
-      setTotalPages = _useState16[1];
-
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);
   };
@@ -162,19 +157,11 @@ var BusinessProductList = function BusinessProductList(props) {
 
   (0, _react.useEffect)(function () {
     if (categoryState.loading) return;
-
-    var _totalPages;
-
-    if (categoryState.products.length > 0) {
-      _totalPages = Math.ceil(categoryState.products.length / productsPerPage);
-    }
-
     var indexOfLastPost = currentPage * productsPerPage;
     var indexOfFirstPost = indexOfLastPost - productsPerPage;
 
     var _currentProducts = categoryState.products.slice(indexOfFirstPost, indexOfLastPost);
 
-    setTotalPages(_totalPages);
     setCurrentProducts(_currentProducts);
   }, [categoryState, currentPage, productsPerPage]);
   return /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.products) && /*#__PURE__*/_react.default.createElement("th", null, t('PRODUCTS', 'Products')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", {
@@ -220,7 +207,9 @@ var BusinessProductList = function BusinessProductList(props) {
       business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
       handleOpenProductDetails: handleOpenProductDetails,
       dataSelected: dataSelected,
-      setDataSelected: setDataSelected
+      setDataSelected: setDataSelected,
+      category: categoryState,
+      isLastProduct: currentProducts.length - 1 === i
     }));
   })))), /*#__PURE__*/_react.default.createElement(_styles.ProductListBottom, null, !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
     onClick: function onClick() {
@@ -228,7 +217,7 @@ var BusinessProductList = function BusinessProductList(props) {
     }
   }, t('ADD_NEW_PRODUCT', 'Add new product')), !businessState.loading && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
-    totalPages: totalPages,
+    totalPages: Math.ceil((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$pagina = categoryState.pagination) === null || _categoryState$pagina === void 0 ? void 0 : _categoryState$pagina.totalItems) / productsPerPage),
     handleChangePage: handleChangePage,
     defaultPageSize: productsPerPage,
     handleChangePageSize: handleChangePageSize

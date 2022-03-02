@@ -68,7 +68,9 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       handleDragStart = props.handleDragStart,
       handleDragOver = props.handleDragOver,
       handleDrop = props.handleDrop,
-      handleDragEnd = props.handleDragEnd;
+      handleDragEnd = props.handleDragEnd,
+      isLastProduct = props.isLastProduct,
+      isProductsBottom = props.isProductsBottom;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -197,7 +199,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
       return handleProductClick(e);
     },
     onDragOver: function onDragOver(e) {
-      return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e);
+      return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e, isLastProduct);
     },
     onDrop: function onDrop(e) {
       return handleDrop(e);
@@ -207,7 +209,8 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     },
     className: "draggable-product",
     "data-index": product.id,
-    isAccept: dataSelected && dataSelected === (product === null || product === void 0 ? void 0 : (_product$id = product.id) === null || _product$id === void 0 ? void 0 : _product$id.toString())
+    isAccept: dataSelected && dataSelected === (product === null || product === void 0 ? void 0 : (_product$id = product.id) === null || _product$id === void 0 ? void 0 : _product$id.toString()),
+    isBorderBottom: isProductsBottom && isLastProduct
   }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.products) && /*#__PURE__*/_react.default.createElement("td", {
     className: "products"
   }, /*#__PURE__*/_react.default.createElement(_styles.DragableContainer, {
