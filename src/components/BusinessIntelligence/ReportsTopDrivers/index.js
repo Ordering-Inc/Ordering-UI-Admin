@@ -139,16 +139,17 @@ const ReportsTopDriversUI = (props) => {
             let label = ''
             if (reportData?.content?.dataset?.dataset?.data?.length > 0) {
               reportData?.content?.dataset?.dataset?.data && reportData.content.dataset.dataset.data.forEach(item => {
-                if (item.x === tooltipItem[0]?.parsed?.x) label = item?.info[0]?.label
+                if (item.y === tooltipItem[0]?.label) label = item?.info[0]?.label
               })
             }
             return label
           },
           beforeFooter: (tooltipItem) => {
+            console.log(tooltipItem[0])
             let time = ''
             if (reportData?.content?.dataset?.dataset?.data?.length > 0) {
               reportData?.content?.dataset?.dataset?.data && reportData.content.dataset.dataset.data.forEach(item => {
-                if (item.x === tooltipItem[0]?.parsed?.x) time = convertHMS(item?.info[0]?.value ?? 0)
+                if (item.y === tooltipItem[0]?.label) time = convertHMS(item?.info[0]?.value ?? 0)
               })
             }
             return `${t('AVERAGE_DELIVERY_TIME', 'Average delivery time')}: ${time}`
