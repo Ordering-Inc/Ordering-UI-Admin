@@ -18,6 +18,10 @@ export const ProductItem = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
 
+  ${({ isBorderTop }) => isBorderTop && css`
+    border-top: 1px solid ${props => props.theme.colors.borderColor};
+  `}
+
   ${props => props.theme?.rtl ? css`
     input {
       margin-left: 20px;
@@ -30,5 +34,18 @@ export const ProductItem = styled.div`
 
   span {
     font-size: 14px;
+    flex: 1;
   }
+
+  > svg {
+    color: ${props => props.theme.colors.secundaryLight};
+    font-size: 13px;
+    margin: 0 3px;
+  }
+
+  ${({ active }) => active && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+    background-color: ${props => props.theme.colors.lightPrimary};
+  `}
 `
