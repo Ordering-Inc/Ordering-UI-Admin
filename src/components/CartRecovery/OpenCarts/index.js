@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useSession } from 'ordering-components-admin'
+import { useSession } from 'ordering-components-admin'
 import { OpenCartsHeader } from '../OpenCartsHeader'
 import { OpenCarts as OpenCartsController } from './naked'
 import { OpenCartsDashboard } from '../OpenCartsDashboard'
@@ -8,7 +8,8 @@ import {
   OpenCartsContainer,
   OpenCartsContent,
   OpenCartsInnerContent,
-  WrapItemView
+  WrapItemView,
+  WrapperIndicator
 } from './styles'
 import { OpenCartsDetail } from '../OpenCartsDetail'
 
@@ -28,18 +29,15 @@ const OpenCartsUI = (props) => {
     startMulitOrderDelete,
     handleChangeSearch,
     handleChangeFilterValues,
-    handleOrdersStatusGroupFilter,
     handleChangeMultiOrdersStatus,
     handleDeleteMultiOrders,
     handleSelectedOrderIds,
     selectedOrderIds,
     onOrderRedirect,
     selectedSubOrderStatus,
-    handleSelectedSubOrderStatus,
     handleCustomOrderDetail,
     setSelectedOrderIds
   } = props
-  const [, t] = useLanguage()
   const [{ user }] = useSession()
 
   const query = new URLSearchParams(useLocation().search)
@@ -48,6 +46,7 @@ const OpenCartsUI = (props) => {
   const [detailsOrder, setDetailsOrder] = useState(null)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
+
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
     setDetailsOrder(null)
@@ -102,7 +101,22 @@ const OpenCartsUI = (props) => {
   return (
     <>
       <OpenCartsContainer>
-        <OpenCartsHeader />
+        <OpenCartsHeader
+          isDisableTitle={isSelectedOrders}
+          isDisableControl={isSelectedOrders}
+          searchValue={searchValue}
+          driverGroupList={driverGroupList}
+          driversList={driversList}
+          citiesList={citiesList}
+          paymethodsList={paymethodsList}
+          businessesList={businessesList}
+          filterValues={filterValues}
+          handleChangeSearch={handleChangeSearch}
+          handleChangeFilterValues={handleChangeFilterValues}
+          selectedOrderIds={selectedOrderIds}
+          handleDeleteMultiOrders={handleDeleteMultiOrders}
+          handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+        />
         <OpenCartsContent>
           <OpenCartsInnerContent className='order-content'>
             <WrapItemView>
@@ -136,6 +150,12 @@ const OpenCartsUI = (props) => {
           driversList={driversList}
           onClose={() => handleBackRedirect()}
         />
+      )}
+
+      {totalSelectedOrder > 0 && (
+        <WrapperIndicator>
+          {selectedOrderIds.length}/{totalSelectedOrder}
+        </WrapperIndicator>
       )}
     </>
 

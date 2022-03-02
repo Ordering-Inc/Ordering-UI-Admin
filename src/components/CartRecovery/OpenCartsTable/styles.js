@@ -167,7 +167,7 @@ export const CheckBox = styled.span`
     margin-right: 20px;
   `}
   svg {
-    font-size: 20px;
+    font-size: 18px;
     color: #B1BCCC;
 
     ${({ isChecked }) => isChecked && css`

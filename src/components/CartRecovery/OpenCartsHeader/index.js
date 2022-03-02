@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SearchBar } from '../../Shared'
-// import { OrdersFilterGroup } from '../OrdersFilterGroup'
+import { OpenCartsFilterGroup } from '../OpenCartsFilterGroup'
 import { Funnel, List as MenuIcon } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import { OpenCartsControls } from '../OpenCartsControls'
@@ -21,14 +21,14 @@ export const OpenCartsHeader = (props) => {
     isDisableControl,
     handleChangeSearch,
     searchValue,
-    // driverGroupList,
-    // driversList,
-    // citiesList,
-    // paymethodsList,
-    // businessesList,
+    driverGroupList,
+    driversList,
+    citiesList,
+    paymethodsList,
+    businessesList,
     filterValues,
     // selectedOrderIds,
-    // handleChangeFilterValues,
+    handleChangeFilterValues
     // handleDeleteMultiOrders,
     // handleChangeMultiOrdersStatus
   } = props
@@ -39,17 +39,18 @@ export const OpenCartsHeader = (props) => {
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [filterApplied, setFilterApplied] = useState(false)
 
-  // useEffect(() => {
-  //   let _filterApplied = false
-  //   if (Object.keys(filterValues).length === 0) {
-  //     _filterApplied = false
-  //   } else {
-  //     _filterApplied = filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
-  //      filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
-  //      filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0
-  //   }
-  //   setFilterApplied(_filterApplied)
-  // }, [filterValues])
+  useEffect(() => {
+    let _filterApplied = false
+    if (Object.keys(filterValues).length === 0) {
+      _filterApplied = false
+    } else {
+      _filterApplied = filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
+       filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
+       filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0
+    }
+    setFilterApplied(_filterApplied)
+  }, [filterValues])
+
   return (
     <>
       <OrderContentHeaderContainer
@@ -92,7 +93,7 @@ export const OpenCartsHeader = (props) => {
         </TopRightSection>
       </OrderContentHeaderContainer>
 
-      {/* <OrdersFilterGroup
+      <OpenCartsFilterGroup
         open={filterModalOpen}
         handleCloseFilterModal={() => setFilterModalOpen(false)}
         driverGroupList={driverGroupList}
@@ -101,7 +102,7 @@ export const OpenCartsHeader = (props) => {
         businessesList={businessesList}
         citiesList={citiesList}
         handleChangeFilterValues={handleChangeFilterValues}
-      /> */}
+      />
     </>
   )
 }
