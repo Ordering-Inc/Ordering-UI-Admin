@@ -3,7 +3,6 @@ import {
   useLanguage,
   AdvancedReports as AdvancedReportsController
 } from 'ordering-components-admin'
-import { transparentize } from 'polished'
 import 'chartjs-adapter-moment'
 import { Line } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
@@ -35,9 +34,23 @@ const ReportsUsersUI = (props) => {
   const [dataOptions, setDataOptions] = useState(null)
   const [isAppIdFilter, setIsAppIdFilter] = useState(false)
 
-  const generateColor = () => {
-    const colorList = ['#2C7BE5', '#52C9FD', '#FFD233', '#EB5F79', '#2ED690']
-    return colorList[Math.round(Math.random() * (colorList.length - 1))]
+  const getRgb = () => Math.floor(Math.random() * 256)
+
+  const rgbToHex = (r, g, b) => {
+    const color = '#' + [r, g, b].map(x => {
+      const hex = x.toString(16)
+      return hex.length === 1 ? '0' + hex : hex
+    }).join('')
+    return color
+  }
+
+  const handleGenerate = () => {
+    const color = {
+      r: getRgb(),
+      g: getRgb(),
+      b: getRgb()
+    }
+    return rgbToHex(color.r, color.g, color.b)
   }
 
   const generateData = () => {
@@ -45,21 +58,25 @@ const ReportsUsersUI = (props) => {
     if (reportData?.content?.dataset?.dataset?.length > 0) {
       values = reportData?.content?.dataset?.dataset?.map((item, index) => {
         const list = []
-        if (item?.data?.isArray) {
-          item?.data && item.data.forEach(value => {
-            list.push(value.y)
-          })
-        } else {
-          Object.keys(item.data).forEach(key => {
-            list.push(item.data[key].y)
-          })
-        }
-        const bgColor = index === 0 ? '#2C7BE5' : generateColor()
+        reportData.content.dataset.x.labels.forEach(label => {
+          let count = 0
+          if (item?.data?.isArray) {
+            item?.data && item.data.forEach(value => {
+              if (label === value.x) count = value.y
+            })
+          } else {
+            Object.keys(item.data).forEach(key => {
+              if (label === item.data[key].x) count = item.data[key].y
+            })
+          }
+          list.push(count)
+        })
+        const bgColor = index === 0 ? '#2C7BE5' : handleGenerate()
+
         return {
           label: item.label,
-          data: [...list],
-          fill: true,
-          backgroundColor: transparentize(0.9, bgColor),
+          data: [0, ...list],
+          fill: false,
           borderColor: bgColor,
           tension: 0.4,
           borderWidth: 3
@@ -86,7 +103,7 @@ const ReportsUsersUI = (props) => {
     },
     plugins: {
       legend: {
-        display: false
+        display: true
       }
     },
     pointRadius: 0
@@ -119,7 +136,7 @@ const ReportsUsersUI = (props) => {
   useEffect(() => {
     if (reportData?.content?.dataset?.x?.labels.length > 0) {
       const defaultData = {
-        labels: reportData?.content?.dataset?.x?.labels,
+        labels: ['', ...reportData?.content?.dataset?.x?.labels],
         datasets: generateData()
       }
       setDataOptions(defaultData)
