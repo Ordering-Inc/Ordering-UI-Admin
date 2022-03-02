@@ -19,7 +19,8 @@ import {
   ChartBlockWrapper,
   ChartTitleBlock,
   ChartWrapper,
-  EmptyContent
+  EmptyContent,
+  ChartFooterContainer
 } from './styles'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
@@ -113,6 +114,14 @@ const ReportsOrdersUI = (props) => {
     }
   }
 
+  const TotalOrders = () => {
+    let orders = 0
+    reportData?.content?.dataset?.dataset?.data && reportData.content.dataset.dataset.data.forEach(data => {
+      orders += data.y
+    })
+    return orders
+  }
+
   useEffect(() => {
     if (reportData?.content?.dataset?.dataset?.data && reportData?.content?.dataset?.dataset?.data?.length > 0) {
       const defaultData = {
@@ -162,6 +171,14 @@ const ReportsOrdersUI = (props) => {
             )
           )}
         </ChartWrapper>
+        <ChartFooterContainer>
+          <h2>{reportData?.loading ? <Skeleton width={30} /> : <TotalOrders />}</h2>
+          {reportData?.loading ? (
+            <Skeleton width={80} />
+          ) : (
+            <p>{t('ORDERS', 'Orders')} {t('TOTALS', 'totals')}</p>
+          )}
+        </ChartFooterContainer>
       </ChartBlockWrapper>
       <Modal
         width='50%'

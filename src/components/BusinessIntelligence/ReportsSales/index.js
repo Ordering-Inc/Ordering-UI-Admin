@@ -4,6 +4,7 @@ import 'chartjs-adapter-moment'
 import { Line } from 'react-chartjs-2'
 import {
   useLanguage,
+  useUtils,
   AdvancedReports as AdvancedReportsController
 } from 'ordering-components-admin'
 import { Button } from '../../../styles'
@@ -19,7 +20,8 @@ import {
   ChartBlockWrapper,
   ChartTitleBlock,
   ChartWrapper,
-  EmptyContent
+  EmptyContent,
+  ChartFooterContainer
 } from './styles'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
@@ -33,6 +35,7 @@ const ReportsSalesUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ parsePrice }] = useUtils()
   const [dataOptions, setDataOptions] = useState(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
@@ -113,6 +116,14 @@ const ReportsSalesUI = (props) => {
     }
   }
 
+  const TotalSales = () => {
+    let sales = 0
+    reportData?.content?.dataset?.dataset?.data && reportData.content.dataset.dataset.data.forEach(data => {
+      sales += data.y
+    })
+    return parsePrice(sales.toFixed(2), { separator: '.' })
+  }
+
   useEffect(() => {
     if (reportData?.content?.dataset?.dataset?.data && reportData?.content?.dataset?.dataset?.data?.length > 0) {
       const defaultData = {
@@ -162,6 +173,14 @@ const ReportsSalesUI = (props) => {
             )
           )}
         </ChartWrapper>
+        <ChartFooterContainer>
+          <h2>{reportData?.loading ? <Skeleton width={30} /> : <TotalSales />}</h2>
+          {reportData?.loading ? (
+            <Skeleton width={80} />
+          ) : (
+            <p>{t('SALES', 'Sales')} {t('TOTALS', 'totals')}</p>
+          )}
+        </ChartFooterContainer>
       </ChartBlockWrapper>
       <Modal
         width='50%'
