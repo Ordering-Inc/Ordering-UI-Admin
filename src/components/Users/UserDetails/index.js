@@ -13,7 +13,8 @@ import {
   VerifiedItem,
   UserName,
   SavedPlaces,
-  PersonalizationWrapper
+  PersonalizationWrapper,
+  OrdersWrapper
 } from './styles'
 import { Personalization } from '../../Shared/Personalization'
 import { UserMetaFields } from '../UserMetaFields'
@@ -91,11 +92,13 @@ export const UserDetailsUI = (props) => {
             />
           )}
           {currentMenuSelected === 'orders' && (
-            <OrdersManager
-              isSelectedOrders
-              customerId={userState.user?.id}
-              handleCustomOrderDetail={setExtraOpen}
-            />
+            <OrdersWrapper>
+              <OrdersManager
+                isSelectedOrders
+                customerId={userState.user?.id}
+                handleCustomOrderDetail={setExtraOpen}
+              />
+            </OrdersWrapper>
           )}
           {currentMenuSelected === 'metafields' && (
             <UserMetaFields

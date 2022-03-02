@@ -7,14 +7,14 @@ export const Container = styled.div`
   position: fixed;
   box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);
 
-  ${({ isDriverOrders }) => isDriverOrders && css`
+  ${({ isSelectedOrders }) => isSelectedOrders && css`
     position: absolute;
     box-shadow: none;
 
     ${props => props.theme?.rtl ? css`
-      border-right: 1px solid #CCC;
+      border-right: 1px solid ${props => props.theme.colors.borderColor};
     ` : css`
-      border-left: 1px solid #CCC;
+      border-left: 1px solid ${props => props.theme.colors.borderColor};
     `}
   `}
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
