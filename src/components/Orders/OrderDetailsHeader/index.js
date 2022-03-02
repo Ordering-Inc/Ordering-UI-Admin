@@ -4,7 +4,7 @@ import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import {
   // Wallet2,
   Diagram3,
-  ThreeDotsVertical,
+  ThreeDots,
   XLg as CloseIcon,
   Chat as ChatIcon,
   Dot
@@ -110,7 +110,7 @@ export const OrderDetailsHeader = (props) => {
           onClick={() => handleShowOption('metafields')}
           isDisabled={isTourOpen && currentTourStep === 1}
         >
-          <ThreeDotsVertical />
+          <ThreeDots />
         </ButtonLink>
         <ButtonLink
           color='black'
