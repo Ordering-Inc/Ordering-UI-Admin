@@ -43,7 +43,9 @@ const SingleBusinessProductUI = (props) => {
     handleDragStart,
     handleDragOver,
     handleDrop,
-    handleDragEnd
+    handleDragEnd,
+    isLastProduct,
+    isProductsBottom
   } = props
 
   const theme = useTheme()
@@ -170,12 +172,13 @@ const SingleBusinessProductUI = (props) => {
               ref={containerRef}
               active={product.id === productDetailsId}
               onClick={(e) => handleProductClick(e)}
-              onDragOver={e => handleDragOver?.(e)}
+              onDragOver={e => handleDragOver?.(e, isLastProduct)}
               onDrop={e => handleDrop(e)}
               onDragEnd={e => handleDragEnd(e)}
               className='draggable-product'
               data-index={product.id}
               isAccept={dataSelected && dataSelected === product?.id?.toString()}
+              isBorderBottom={isProductsBottom && isLastProduct}
             >
               <tr>
                 {allowColumns?.products && (
