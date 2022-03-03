@@ -61,10 +61,11 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   h1 {
-    font-size: 24px;
+    font-size: 20px;
     color: ${props => props.theme.colors.headingColor};
-    font-weight: 600;
+    font-weight: 700;
     flex: 1;
+    margin: 0;
   }
 `
 
@@ -73,11 +74,6 @@ export const CloseButton = styled.div`
   @media (min-width: 1000px) {
     display: flex;
     align-items: center;
-    > svg {
-      cursor: pointer;
-      font-size: 24px;
-      color: ${props => props.theme.colors.headingColor};
-    }
   }
 `
 export const TabOption = styled.div`

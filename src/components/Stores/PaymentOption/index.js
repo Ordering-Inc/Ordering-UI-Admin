@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
-import { Button } from '../../../styles'
+import { Button, IconButton } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Tab, TabsContainer } from '../BusinessMenu/styles'
 import { useTheme } from 'styled-components'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ThreeDots, XLg } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { Confirm } from '../../Shared'
 
@@ -122,9 +121,12 @@ export const PaymentOption = (props) => {
             </DropdownButton>
           </ActionSelectorWrapper>
           <CloseButton>
-            <MdcClose
+            <IconButton
+              color='black'
               onClick={() => onClose()}
-            />
+            >
+              <XLg />
+            </IconButton>
           </CloseButton>
         </Header>
 

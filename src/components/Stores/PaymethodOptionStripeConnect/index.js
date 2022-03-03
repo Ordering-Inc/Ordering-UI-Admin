@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import MdcClose from '@meronex/icons/mdc/MdcClose'
 import BilStripe from '@meronex/icons/bi/BilStripe'
-import { Button, Input } from '../../../styles'
+import { Button, Input, IconButton } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { useTheme } from 'styled-components'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ThreeDots, XLg } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { Confirm } from '../../Shared'
 
@@ -122,9 +121,12 @@ export const PaymethodOptionStripeConnect = (props) => {
             </DropdownButton>
           </ActionSelectorWrapper>
           <CloseButton>
-            <MdcClose
+            <IconButton
+              color='black'
               onClick={() => onClose()}
-            />
+            >
+              <XLg />
+            </IconButton>
           </CloseButton>
         </Header>
 
