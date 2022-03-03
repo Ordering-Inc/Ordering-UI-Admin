@@ -75,9 +75,6 @@ export const PaymethodOption = styled.div`
 export const PaymethodName = styled.span`
   color: ${props => props.theme.colors.headingColor};
   font-size: 14px;
-  ${props => props.theme?.rtl ? css`
-    margin-right: 10px;
-  ` : css`
-    margin-left: 10px;
-  `}
+  flex: 1;
+  margin: 0 10px;
 `

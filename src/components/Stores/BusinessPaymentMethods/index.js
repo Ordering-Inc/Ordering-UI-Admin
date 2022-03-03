@@ -81,7 +81,9 @@ const BusinessPaymentMethodsUI = (props) => {
     return found
   }
 
-  const handleOpenEdit = (paymethodId, paymethodGateway) => {
+  const handleOpenEdit = (e, paymethodId, paymethodGateway) => {
+    const inValid = e.target.closest('.paymethod-checkbox')
+    if (inValid) return true
     if (!isTutorialMode && isCheckFoundBusinessPaymethod(paymethodId)) {
       setSelectedPaymethodGateway(paymethodGateway)
       const businessPaymethod = businessPaymethodsState.paymethods.find(paymethod => paymethod.paymethod_id === paymethodId)
@@ -129,11 +131,12 @@ const BusinessPaymentMethodsUI = (props) => {
             {paymethodsList.paymethods.map(paymethod => (
               <PaymethodOptionContainer
                 key={paymethod.id}
-                onClick={() => handleOpenEdit(paymethod.id, paymethod.gateway)}
+                onClick={e => handleOpenEdit(e, paymethod.id, paymethod.gateway)}
                 active={paymethod.id === selectedBusinessPaymethod?.paymethod_id}
                 disabled={isTutorialMode || !(isCheckFoundBusinessPaymethod(paymethod.id))}
               >
                 <PaymethodOption
+                  className='paymethod-checkbox'
                   onClick={() => handleClickPayment(paymethod.id)}
                 >
                   {isCheckEnableSate(paymethod.id) ? (
@@ -141,8 +144,8 @@ const BusinessPaymentMethodsUI = (props) => {
                   ) : (
                     <RiCheckboxBlankLine />
                   )}
-                  <PaymethodName>{paymethod?.name}</PaymethodName>
                 </PaymethodOption>
+                <PaymethodName>{paymethod?.name}</PaymethodName>
                 {!isTutorialMode && isCheckFoundBusinessPaymethod(paymethod.id) && (
                   <ChevronRight />
                 )}
