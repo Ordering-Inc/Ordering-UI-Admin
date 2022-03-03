@@ -4,12 +4,15 @@ import { useLanguage, useSession, OrdersManage as OrdersManageController } from 
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
+import { OrdersDashboardControls } from '../OrdersDashboardControls'
 import {
   OrdersListContainer,
   OrdersContent,
   OrdersInnerContent,
   WrapItemView,
-  WrapperIndicator
+  WrapperIndicator,
+  OrderSubFilterControls,
+  OrderStatusSubFilterWrapper
 } from './styles'
 import { OrdersDashboard } from '../OrdersDashboard'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
@@ -134,6 +137,11 @@ const OrdersManagerUI = (props) => {
     setIsTourFlag(false)
   }, [isTourOpen])
 
+  useEffect(() => {
+    console.log('filterValues')
+    console.log(filterValues)
+  }, [filterValues])
+
   return (
     <>
       <OrdersListContainer
@@ -163,11 +171,23 @@ const OrdersManagerUI = (props) => {
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
         />
-        <OrderStatusSubFilter
-          ordersStatusGroup={ordersStatusGroup}
-          selectedSubOrderStatus={selectedSubOrderStatus}
-          handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
-        />
+        <OrderSubFilterControls>
+          <OrderStatusSubFilterWrapper>
+            <OrderStatusSubFilter
+              ordersStatusGroup={ordersStatusGroup}
+              selectedSubOrderStatus={selectedSubOrderStatus}
+              handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
+            />
+          </OrderStatusSubFilterWrapper>
+          {!isSelectedOrders && (
+            <OrdersDashboardControls
+              selectedOrderNumber={selectedOrderIds?.length}
+              filterValues={filterValues}
+              handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+              handleDeleteMultiOrders={handleDeleteMultiOrders}
+            />
+          )}
+        </OrderSubFilterControls>
         <OrdersContent>
           <OrdersInnerContent className='order-content'>
             <WrapItemView>

@@ -4,7 +4,8 @@ import { SearchBar } from '../../Shared'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
 import { Funnel, List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
-import { OrdersDashboardControls } from '../OrdersDashboardControls'
+// import { OrdersDashboardControls } from '../OrdersDashboardControls'
+import { OrdersDashboardSLAControls } from '../OrdersDashboardSLAControls'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
@@ -32,8 +33,8 @@ export const OrdersContentHeader = (props) => {
     filterValues,
     selectedOrderIds,
     handleChangeFilterValues,
-    handleDeleteMultiOrders,
-    handleChangeMultiOrdersStatus,
+    // handleDeleteMultiOrders,
+    // handleChangeMultiOrdersStatus,
     handleOpenTour,
 
     filterModalOpen,
@@ -51,11 +52,12 @@ export const OrdersContentHeader = (props) => {
       _filterApplied = false
     } else {
       _filterApplied = filterValues?.groupTypes?.length || filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
-       filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
-       filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0
+        filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
+        filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
+
   return (
     <>
       <OrderContentHeaderContainer
@@ -97,11 +99,8 @@ export const OrdersContentHeader = (props) => {
         )}
         <TopRightSection>
           {!isDisableControl && (
-            <OrdersDashboardControls
-              selectedOrderNumber={selectedOrderIds?.length}
+            <OrdersDashboardSLAControls
               filterValues={filterValues}
-              handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-              handleDeleteMultiOrders={handleDeleteMultiOrders}
             />
           )}
           <WrapperSearchAndFilter

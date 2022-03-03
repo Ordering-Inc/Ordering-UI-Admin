@@ -363,7 +363,7 @@ export const Timestatus = styled.div`
   ${({ timeState }) => timeState === 'in_time' && css`
     background-color: #00D27A;
   `}
-  ${({ timeState }) => timeState ===  'at_risk' && css`
+  ${({ timeState }) => timeState === 'at_risk' && css`
     background-color: #FFC700;
   `}
   ${({ timeState }) => timeState === 'delayed' && css`

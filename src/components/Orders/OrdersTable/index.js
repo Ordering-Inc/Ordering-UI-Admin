@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import moment from 'moment'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -55,6 +56,7 @@ export const OrdersTable = (props) => {
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }
+  const [currentTime, setCurrentTime] = useState()
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(pagination.from / pageSize)
@@ -63,13 +65,14 @@ export const OrdersTable = (props) => {
 
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
-    status: true,
+    status: false,
     orderNumber: true,
     dateTime: true,
     business: true,
     customer: true,
-    driver: true,
-    advanced: true,
+    driver: false,
+    advanced: false,
+    timer: true,
     total: true
   })
 
@@ -103,10 +106,38 @@ export const OrdersTable = (props) => {
       content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
     },
     {
+      value: 'timer',
+      content: t('SLA_TIMER', 'SLA’s timer')
+    },
+    {
       value: 'total',
       content: t('EXPORT_TOTAL', 'Total')
     }
   ]
+
+  const getDelayTime = (order) => {
+    // targetMin = delivery_datetime  + eta_time - now()
+    const _delivery = order?.delivery_datetime_utc
+    const _eta = order?.eta_time
+    const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
+
+    const day = Math.floor(tagetedMin / 1440)
+    const restMinOfTargetedMin = tagetedMin - 1440 * day
+    const restHours = Math.floor(restMinOfTargetedMin / 60)
+    const restMins = restMinOfTargetedMin - 60 * restHours
+    const finalTaget = day + 'day  ' + restHours + ':' + restMins
+
+    return finalTaget
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('This will be called every 1 minutes')
+      setCurrentTime(Date.now())
+    }, 60000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   const getLogisticTag = (status) => {
     switch (parseInt(status)) {
@@ -268,6 +299,9 @@ export const OrdersTable = (props) => {
               )}
               {allowColumns?.advanced && (
                 <th colSpan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
+              )}
+              {allowColumns?.timer && (
+                <th colSpan={3} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
               )}
               <th className='orderPrice'>
                 <ColumnAllowSettingPopover
@@ -522,6 +556,14 @@ export const OrdersTable = (props) => {
                           {getPriorityTag(order?.priority)}
                           <PriorityDot priority={order?.priority} />
                         </p>
+                      </div>
+                    </td>
+                  )}
+                  {allowColumns?.timer && (
+                    <td className='timer'>
+                      <div className='info'>
+                        <p className='bold'>{t('TIMER', 'Timer')}</p>
+                        <p>{getDelayTime(order)}</p>
                       </div>
                     </td>
                   )}
