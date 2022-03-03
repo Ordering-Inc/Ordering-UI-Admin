@@ -35,9 +35,21 @@ export const PaymethodOptionContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
 
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
   ${({ disabled }) => disabled && css`
-    pointer-events: none; 
     cursor: initial;
+    svg {
+      cursor: pointer;
+    }
+  `}
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
   `}
 `
 
@@ -63,37 +75,4 @@ export const PaymethodName = styled.span`
   ` : css`
     margin-left: 10px;
   `}
-`
-
-export const DropDownWrapper = styled.div`
-  button {
-    background: transparent !important;
-    border: none;
-    padding: 0px;
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-    }
-
-    &:after {
-      display: none;
-    }
-    &:hover {
-      background: ${props => props.theme.colors.secundary} !important;
-    }
-  }
-
-  > div {
-    > div {
-      border: 1px solid ${props => props.theme.colors.borderColor};
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
-
-      a.dropdown-item {
-        font-size: 14px;
-        &:last-child {
-          color: #E63757;
-        }
-      }
-    }
-  }
 `
