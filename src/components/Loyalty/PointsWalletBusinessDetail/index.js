@@ -105,13 +105,18 @@ const PointsWalletBusinessDetailUI = (props) => {
           <p>{t('VALUE', 'Value')}</p>
           <PointsInputWrapper>
             <Input
-              type='number'
+              type='text'
               placeholder='00 points'
               name='redemption_rate'
               value={(typeof formState?.changes?.redemption_rate !== 'undefined')
                 ? formState?.changes?.redemption_rate
                 : walletData?.redemption_rate ?? ''}
               onChange={handleChangeInput}
+              onKeyPress={(e) => {
+                if (!/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
             />
             <span>=</span>
             <span>{parsePrice(1)}</span>
@@ -150,13 +155,18 @@ const PointsWalletBusinessDetailUI = (props) => {
             <span>{parsePrice(1)}</span>
             <span className='equal'>=</span>
             <Input
-              type='number'
+              type='text'
               placeholder='00 points'
               name='accumulation_rate'
               value={(typeof formState?.changes?.accumulation_rate !== 'undefined')
                 ? formState?.changes?.accumulation_rate
                 : walletData?.accumulation_rate ?? ''}
               onChange={handleChangeInput}
+              onKeyPress={(e) => {
+                if (!/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
             />
           </AccumulationInputWrapper>
           {/* <ToggleWrapper>
