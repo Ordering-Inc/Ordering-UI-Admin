@@ -98,9 +98,10 @@ export const PaymentOption = (props) => {
 
   useEffect(() => {
     cleanChangesState({
-      sandbox: businessPaymethod?.sandbox
+      sandbox: businessPaymethod?.sandbox,
+      allowed_order_types: businessPaymethod?.allowed_order_types || [1, 2, 3, 4, 5]
     })
-  }, [businessPaymethod?.sandbox])
+  }, [businessPaymethod?.id, businessPaymethod?.sandbox, businessPaymethod?.allowed_order_types])
 
   return (
     <>
@@ -166,13 +167,11 @@ export const PaymentOption = (props) => {
               key={type.value}
               onClick={() => setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
             >
-              {
-                ((typeof changesState?.allowed_order_types !== 'undefined' && changesState?.allowed_order_types.includes(type.value)) ||
-                (typeof changesState?.allowed_order_types === 'undefined' && businessPaymethod?.allowed_order_types?.includes(type.value)) ||
-                (typeof changesState?.allowed_order_types === 'undefined' && businessPaymethod?.allowed_order_types === null))
-                  ? <RiCheckboxFill className='fill' />
-                  : <RiCheckboxBlankLine />
-              }
+              {(changesState?.allowed_order_types ?? businessPaymethod?.allowed_order_types)?.includes(type.value) ? (
+                <RiCheckboxFill className='fill' />
+              ) : (
+                <RiCheckboxBlankLine />
+              )}
               <TabOptionName>{type.text}</TabOptionName>
             </TabOption>
           ))

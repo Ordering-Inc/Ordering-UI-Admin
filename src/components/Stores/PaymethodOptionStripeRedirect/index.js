@@ -97,9 +97,11 @@ export const PaymethodOptionStripeRedirect = (props) => {
 
   useEffect(() => {
     cleanChangesState({
-      sandbox: businessPaymethod?.sandbox
+      sandbox: businessPaymethod?.sandbox,
+      allowed_order_types: businessPaymethod?.allowed_order_types || [1, 2, 3, 4, 5]
     })
-  }, [businessPaymethod?.sandbox])
+  }, [businessPaymethod?.sanbox, businessPaymethod?.allowed_order_types])
+
   return (
     <>
       <Container id='stripe_redirect'>

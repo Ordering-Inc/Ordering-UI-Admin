@@ -268,7 +268,6 @@ const BusinessPaymentMethodsUI = (props) => {
                   changesState={stripeConnectData}
                   orderTypes={orderTypes}
                   handleChangeBusinessPaymentState={handleChangeStripeConnectData}
-                  cleanChangesState={cleanChangesState}
                   actionState={actionState}
                   handleStripeConnect={handleStripeConnect}
                   handleChangeStripeInput={handleChangeStripeInput}

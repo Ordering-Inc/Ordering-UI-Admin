@@ -31,7 +31,6 @@ export const PaymethodOptionStripeConnect = (props) => {
     open,
     onClose,
     changesState,
-    cleanChangesState,
     actionState,
     sitesState,
     handleStripeConnect,
@@ -99,8 +98,11 @@ export const PaymethodOptionStripeConnect = (props) => {
   }, [open])
 
   useEffect(() => {
-    cleanChangesState({})
-  }, [])
+    handleChangeBusinessPaymentState({
+      allowed_order_types: businessPaymethod?.allowed_order_types || [1, 2, 3, 4, 5]
+    })
+  }, [businessPaymethod?.allowed_order_types])
+
   return (
     <>
       <Container id='stripe_connect'>
