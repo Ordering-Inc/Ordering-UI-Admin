@@ -60,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsOrdersUI = function ReportsOrdersUI(props) {
-  var _filterList$franchise, _reportData$content10, _reportData$content11, _reportData$content12, _reportData$content13, _reportData$content14, _reportData$content15, _reportData$content16, _reportData$content17;
+  var _filterList$franchise, _reportData$content14, _reportData$content15, _reportData$content16, _reportData$content17, _reportData$content18, _reportData$content19, _reportData$content20, _reportData$content21;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -198,10 +198,20 @@ var ReportsOrdersUI = function ReportsOrdersUI(props) {
     }
   };
 
-  (0, _react.useEffect)(function () {
-    var _reportData$content8, _reportData$content8$, _reportData$content8$2, _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content9$3;
+  var TotalOrders = function TotalOrders() {
+    var _reportData$content8, _reportData$content8$, _reportData$content8$2;
 
-    if (reportData !== null && reportData !== void 0 && (_reportData$content8 = reportData.content) !== null && _reportData$content8 !== void 0 && (_reportData$content8$ = _reportData$content8.dataset) !== null && _reportData$content8$ !== void 0 && (_reportData$content8$2 = _reportData$content8$.dataset) !== null && _reportData$content8$2 !== void 0 && _reportData$content8$2.data && (reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.dataset) === null || _reportData$content9$ === void 0 ? void 0 : (_reportData$content9$2 = _reportData$content9$.dataset) === null || _reportData$content9$2 === void 0 ? void 0 : (_reportData$content9$3 = _reportData$content9$2.data) === null || _reportData$content9$3 === void 0 ? void 0 : _reportData$content9$3.length) > 0) {
+    var orders = 0;
+    (reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.dataset) === null || _reportData$content8$ === void 0 ? void 0 : (_reportData$content8$2 = _reportData$content8$.dataset) === null || _reportData$content8$2 === void 0 ? void 0 : _reportData$content8$2.data) && reportData.content.dataset.dataset.data.forEach(function (data) {
+      orders += data.y;
+    });
+    return orders;
+  };
+
+  (0, _react.useEffect)(function () {
+    var _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content10, _reportData$content11, _reportData$content12, _reportData$content13;
+
+    if (reportData !== null && reportData !== void 0 && (_reportData$content9 = reportData.content) !== null && _reportData$content9 !== void 0 && (_reportData$content9$ = _reportData$content9.dataset) !== null && _reportData$content9$ !== void 0 && (_reportData$content9$2 = _reportData$content9$.dataset) !== null && _reportData$content9$2 !== void 0 && _reportData$content9$2.data && (reportData === null || reportData === void 0 ? void 0 : (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 ? void 0 : (_reportData$content11 = _reportData$content10.dataset) === null || _reportData$content11 === void 0 ? void 0 : (_reportData$content12 = _reportData$content11.dataset) === null || _reportData$content12 === void 0 ? void 0 : (_reportData$content13 = _reportData$content12.data) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.length) > 0) {
       var defaultData = {
         labels: generateLabel(),
         datasets: generateData()
@@ -221,17 +231,21 @@ var ReportsOrdersUI = function ReportsOrdersUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ChartTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 ? void 0 : (_reportData$content11 = _reportData$content10.dataset) === null || _reportData$content11 === void 0 ? void 0 : (_reportData$content12 = _reportData$content11.dataset) === null || _reportData$content12 === void 0 ? void 0 : (_reportData$content13 = _reportData$content12.data) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content14 = reportData.content) === null || _reportData$content14 === void 0 ? void 0 : (_reportData$content15 = _reportData$content14.dataset) === null || _reportData$content15 === void 0 ? void 0 : (_reportData$content16 = _reportData$content15.dataset) === null || _reportData$content16 === void 0 ? void 0 : (_reportData$content17 = _reportData$content16.data) === null || _reportData$content17 === void 0 ? void 0 : _reportData$content17.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDERS', 'Orders')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadCSV();
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ChartWrapper, null, reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 350
-  }) : (reportData === null || reportData === void 0 ? void 0 : (_reportData$content14 = reportData.content) === null || _reportData$content14 === void 0 ? void 0 : (_reportData$content15 = _reportData$content14.dataset) === null || _reportData$content15 === void 0 ? void 0 : (_reportData$content16 = _reportData$content15.dataset) === null || _reportData$content16 === void 0 ? void 0 : (_reportData$content17 = _reportData$content16.data) === null || _reportData$content17 === void 0 ? void 0 : _reportData$content17.length) > 0 && dataOptions ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
+  }) : (reportData === null || reportData === void 0 ? void 0 : (_reportData$content18 = reportData.content) === null || _reportData$content18 === void 0 ? void 0 : (_reportData$content19 = _reportData$content18.dataset) === null || _reportData$content19 === void 0 ? void 0 : (_reportData$content20 = _reportData$content19.dataset) === null || _reportData$content20 === void 0 ? void 0 : (_reportData$content21 = _reportData$content20.data) === null || _reportData$content21 === void 0 ? void 0 : _reportData$content21.length) > 0 && dataOptions ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
     data: dataOptions,
     options: options
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.EmptyContent, null, t('NO_DATA', 'No Data'))), /*#__PURE__*/_react.default.createElement(_styles2.ChartFooterContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 30
+  }) : /*#__PURE__*/_react.default.createElement(TotalOrders, null)), reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 80
+  }) : /*#__PURE__*/_react.default.createElement("p", null, t('ORDERS', 'Orders'), " ", t('TOTALS', 'totals')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "50%",
     height: "80vh",
     padding: "30px",

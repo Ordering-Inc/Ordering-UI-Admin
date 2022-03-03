@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.ReportsOrdersContainer = exports.EmptyContent = exports.ChartWrapper = exports.ChartTitleBlock = exports.ChartBlockWrapper = exports.CalendarWrapper = exports.ButtonActionList = exports.BrandBusinessWrapper = void 0;
+exports.Title = exports.ReportsOrdersContainer = exports.EmptyContent = exports.ChartWrapper = exports.ChartTitleBlock = exports.ChartFooterContainer = exports.ChartBlockWrapper = exports.CalendarWrapper = exports.ButtonActionList = exports.BrandBusinessWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -75,3 +75,9 @@ exports.ChartWrapper = ChartWrapper;
 var EmptyContent = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 10px;\n"])));
 
 exports.EmptyContent = EmptyContent;
+
+var ChartFooterContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n\n  h2 {\n    font-weight: 500;\n    font-size: 20px;\n    color: ", ";\n    margin: 0;\n  }\n\n  p {\n    font-size: 14px;\n    color: #909BA9;\n    margin: 0;\n  }\n"])), function (props) {
+  return props.theme.colors.headingColor;
+});
+
+exports.ChartFooterContainer = ChartFooterContainer;
