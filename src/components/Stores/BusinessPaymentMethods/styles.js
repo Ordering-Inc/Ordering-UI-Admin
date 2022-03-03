@@ -51,6 +51,11 @@ export const PaymethodOptionContainer = styled.div`
     border-top: 1px solid ${props => props.theme.colors.primary};
     border-bottom: 1px solid ${props => props.theme.colors.primary};
   `}
+
+  > svg {
+    font-size: 13px;
+    color: ${props => props.theme.colors.secundaryLight};
+  }
 `
 
 export const PaymethodOption = styled.div`
