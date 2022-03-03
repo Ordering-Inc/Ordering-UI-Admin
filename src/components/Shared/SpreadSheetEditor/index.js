@@ -25,7 +25,9 @@ const SpreadSheetEditor = (props) => {
   const hotTableRef = useRef(null)
 
   const productIdColumnRenderer = (instance, td, row, col, prop, value, cellProperties) => {
-    td.innerHTML = '<span class="product-id">' + value + '</span>'
+    if (value !== null) {
+      td.innerHTML = '<span class="product-id">' + value + '</span>'
+    }
   }
 
   const settings = {
