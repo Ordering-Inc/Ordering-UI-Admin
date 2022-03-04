@@ -1,12 +1,24 @@
 import React from 'react'
+import { RecoveryActionHeader } from '../RecoveryActionHeader'
+import { RecoveryActions as RecoveryActionsController } from './naked'
 import {
   RecoveryActionsContainer
 } from './styles'
 
-export const RecoveryActions = () => {
+const RecoveryActionsUI = (props) => {
   return (
     <RecoveryActionsContainer>
-      Recoveryactions
+      <RecoveryActionHeader
+        {...props}
+      />
     </RecoveryActionsContainer>
   )
+}
+
+export const RecoveryActions = (props) => {
+  const recoveryActionsProps = {
+    ...props,
+    UIComponent: RecoveryActionsUI
+  }
+  return <RecoveryActionsController {...recoveryActionsProps} />
 }
