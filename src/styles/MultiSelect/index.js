@@ -20,7 +20,7 @@ import {
 } from './styles'
 
 export const MultiSelect = (props) => {
-  const { placeholder, options, onChange, defaultValue } = props
+  const { placeholder, options, onChange, defaultValue, className } = props
 
   const [open, setOpen] = useState(false)
   const [values, setValues] = useState([])
@@ -78,7 +78,7 @@ export const MultiSelect = (props) => {
   }
 
   return (
-    <SelectInput>
+    <SelectInput className={className || 'multi-select'}>
       {selectedOptions.length === 0 ? (
         <Selected onClick={(e) => handleSelectClick(e)}>
           {placeholder || ''}
