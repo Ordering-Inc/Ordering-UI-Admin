@@ -8,7 +8,7 @@ import {
 import { useForm } from 'react-hook-form'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
-import { PlusCircle, XLg, ThreeDots, Image as ImageIcon } from 'react-bootstrap-icons'
+import { PlusCircle, XLg, ThreeDots, Image as ImageIcon, ChevronRight } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { bytesConverter } from '../../../utils'
 import { Alert, Confirm, Modal } from '../../Shared'
@@ -27,7 +27,8 @@ import {
   OptionsList,
   OptionItem,
   MinimumPurchase,
-  MaxPurchase
+  MaxPurchase,
+  ArrowWrpper
 } from './styles'
 
 const ProductExtraOptionsUI = (props) => {
@@ -131,9 +132,6 @@ const ProductExtraOptionsUI = (props) => {
       onClose()
     }
     setIsMenuOpen(value)
-    document.getElementById('extra_options').style.width = value
-      ? width > 1000 ? '500px' : '100%'
-      : '0'
   }
 
   const onSubmit = () => {
@@ -229,6 +227,7 @@ const ProductExtraOptionsUI = (props) => {
             <OptionNameContainer isHeader>{t('NAME', 'Name')}</OptionNameContainer>
             <MinimumPurchase isHeader>{t('MINIMUM', 'Min')}</MinimumPurchase>
             <MaxPurchase isHeader>{t('MAX', 'Max')}</MaxPurchase>
+            <ArrowWrpper />
           </OptionItem>
           {extraState.extra?.options && extraState.extra?.options.map(option => (
             <OptionItem
@@ -247,6 +246,9 @@ const ProductExtraOptionsUI = (props) => {
               </OptionNameContainer>
               <MinimumPurchase>{option?.min}</MinimumPurchase>
               <MaxPurchase>{option?.max}</MaxPurchase>
+              <ArrowWrpper>
+                <ChevronRight />
+              </ArrowWrpper>
             </OptionItem>
           ))}
         </OptionsList>

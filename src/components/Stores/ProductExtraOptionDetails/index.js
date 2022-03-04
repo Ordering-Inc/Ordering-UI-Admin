@@ -605,6 +605,8 @@ const ProductExtraOptionDetailsUI = (props) => {
       {openModal?.option && (
         <Modal
           width='70%'
+          overflow='initial'
+          padding='0px'
           open={openModal?.option}
           onClose={() => setOpenModal({ ...openModal, option: false })}
         >

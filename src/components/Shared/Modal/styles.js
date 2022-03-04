@@ -19,7 +19,7 @@ export const ModalDialog = styled.div`
   margin-top: auto;
   margin-bottom: auto;
   max-height: 90vh;
-  overflow: auto;
+  overflow: ${({ overflow }) => overflow || 'auto'};
   @media (max-width: 860px) {
     width: 80%;
   }

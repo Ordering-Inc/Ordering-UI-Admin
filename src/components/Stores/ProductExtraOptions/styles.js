@@ -215,12 +215,6 @@ export const OptionItem = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-
-  ${props => props.theme?.rtl ? css`
-    padding-left: 40px;
-  ` : css`
-    padding-right: 40px;
-  `}
 `
 export const MinimumPurchase = styled.div`
   min-width: 80px;
@@ -239,4 +233,15 @@ export const MaxPurchase = styled.div`
   ` : css`
     font-size: 14px;
   `}
+`
+export const ArrowWrpper = styled.div`
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  svg {
+    font-size: 13px;
+    color: ${props => props.theme.colors.secundaryLight};
+    margin: 0 5px;
+  }
 `

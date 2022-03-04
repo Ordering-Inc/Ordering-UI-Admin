@@ -45,7 +45,13 @@ export const MetaContainer = styled.div`
       cursor: pointer;
     }
   }
-
+`
+export const MetakeysListContainer = styled.div`
+  @media (min-width: 768px) {
+    max-height: calc(90vh - 170px);
+    overflow: auto;
+    margin-bottom: 20px;
+  }
 `
 export const MetaAddContainer = styled(MetaContainer)`
   input {
