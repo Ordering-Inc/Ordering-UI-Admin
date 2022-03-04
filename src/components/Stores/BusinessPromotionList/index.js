@@ -1,24 +1,26 @@
-import React, { useState } from 'react'
-import { useLanguage, useUtils, BusinessPromotionList as BusinessPromotionListController } from 'ordering-components-admin'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import { XLg } from 'react-bootstrap-icons'
+import React, { useEffect, useState } from 'react'
+import {
+  useLanguage,
+  useUtils,
+  BusinessPromotionList as BusinessPromotionListController
+} from 'ordering-components-admin'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { Button, IconButton, Switch } from '../../../styles'
+import { Button, Checkbox, IconButton } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { AutoScroll, Confirm, Modal } from '../../Shared'
 import { BusinessPromotionGeneralForm } from '../BusinessPromotionGeneralForm'
 import { BusinessPromotionCustomFields } from '../BusinessPromotionCustomFields'
+import { ChevronRight, ThreeDots, XLg } from 'react-bootstrap-icons'
 
 import {
   MainContainer,
   BusinessPromotionsContainer,
   Header,
   PromotionsTable,
-  ActionsWrapper,
-  DropdownWrapper,
-  EnableWrapper,
-  PromotionItem,
+  PromotionTbody,
+  ActionSelectorWrapper,
+  PromotionTypeItem,
   AddNewPromotionText,
   PromotionEditFormContainer,
   EditHeader,
@@ -26,7 +28,9 @@ import {
   EditTitleHeaderContainer,
   OptionTabsContainer,
   InnerTabsContainer,
-  Tab
+  Tab,
+  PromotionNameContainer,
+  PromotionDateItem
 } from './styles'
 
 const BusinessPromotionListUI = (props) => {
@@ -36,7 +40,9 @@ const BusinessPromotionListUI = (props) => {
     promotionListState,
     handleChangePromotionActiveState,
     handleDeletePromotion,
-    handleSuccessUpdate
+    handleSuccessUpdate,
+    isSuccessDeleted,
+    setIsSuccessDeleted
   } = props
 
   const [, t] = useLanguage()
@@ -45,11 +51,12 @@ const BusinessPromotionListUI = (props) => {
   const { width } = useWindowSize()
 
   const [isShowForm, setIsShowForm] = useState(false)
-  const [curPromotion, setCurPromotion] = useState(false)
+  const [curPromotion, setCurPromotion] = useState(null)
   const [selectedTab, setSelectedTab] = useState('general')
-  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
-  const handleOpenForm = (promotion) => {
+  const handleOpenForm = (e, promotion) => {
+    const inValid = e.target.closest('.promotion-checkbox')
+    if (inValid) return
     setCurPromotion(promotion)
     setSelectedTab('general')
     setIsShowForm(true)
@@ -60,18 +67,13 @@ const BusinessPromotionListUI = (props) => {
     setIsShowForm(false)
     setCurPromotion(null)
     setIsExtendExtraOpen(false)
+    setIsSuccessDeleted(false)
   }
 
-  const handleDeleteClick = (id) => {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_COUPON', 'Are you sure that you want to delete this coupon?'),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeletePromotion(id)
-      }
-    })
-  }
+  useEffect(() => {
+    if (!isSuccessDeleted) return
+    handleCloseForm()
+  }, [isSuccessDeleted])
 
   return (
     <MainContainer>
@@ -81,7 +83,7 @@ const BusinessPromotionListUI = (props) => {
           <Button
             borderRadius='8px'
             color='lightPrimary'
-            onClick={() => handleOpenForm({})}
+            onClick={e => handleOpenForm(e, {})}
           >
             {t('ADD_PROMOTION', 'Add promotion')}
           </Button>
@@ -92,65 +94,45 @@ const BusinessPromotionListUI = (props) => {
               <th>{t('PROMOTIONS', 'Promotions')}</th>
               <th>{t('TYPE', 'Type')}</th>
               <th>{t('DATES_RANGE', 'Date range')}</th>
-              <th>
-                <ActionsWrapper>
-                  <span>{t('ACTIONS', 'Actions')}</span>
-                </ActionsWrapper>
-              </th>
             </tr>
           </thead>
           {promotionListState.promotions.map(promotion => (
-            <tbody key={promotion.id}>
+            <PromotionTbody
+              key={promotion.id}
+              active={promotion.id === curPromotion?.id}
+              onClick={(e) => handleOpenForm(e, promotion)}
+            >
               <tr>
                 <td>
-                  <PromotionItem>
-                    {/* <img src={promotion.image || theme.images.dummies?.promotionDummy} alt='promotion' /> */}
+                  <PromotionNameContainer>
+                    <Checkbox
+                      className='promotion-checkbox'
+                      defaultChecked={promotion?.enabled}
+                      onChange={e => handleChangePromotionActiveState(e.target.checked, promotion?.id)}
+                    />
+                    <img src={promotion.image || theme.images.dummies?.promotionDummy} alt='promotion' />
                     <span>{promotion?.name}</span>
-                  </PromotionItem>
+                  </PromotionNameContainer>
                 </td>
                 <td>
-                  <PromotionItem>{promotion?.type === 1 ? t('DISCOUNT', 'Discount') : t('COUPON', 'Coupon')}</PromotionItem>
+                  <PromotionTypeItem>
+                    {promotion?.type === 1 ? t('DISCOUNT', 'Discount') : t('COUPON', 'Coupon')}
+                  </PromotionTypeItem>
                 </td>
                 <td>
-                  <PromotionItem>
+                  <PromotionDateItem>
                     <div>
                       <p>{parseDate(promotion?.start, { utc: false, outputFormat: 'YYYY-MM-DD' })}</p>
                       <p>{parseDate(promotion?.end, { utc: false, outputFormat: 'YYYY-MM-DD' })}</p>
                     </div>
-                  </PromotionItem>
-                </td>
-                <td>
-                  <ActionsWrapper>
-                    <EnableWrapper className='business_enable_control'>
-                      <span>{t('ENABLE', 'Enable')}</span>
-                      <Switch
-                        defaultChecked={promotion?.enabled}
-                        onChange={enabled => handleChangePromotionActiveState(enabled, promotion?.id)}
-                      />
-                    </EnableWrapper>
-                    <DropdownWrapper>
-                      <DropdownButton
-                        menuAlign={theme?.rtl ? 'left' : 'right'}
-                        title={<FiMoreVertical />}
-                        id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                      >
-                        <Dropdown.Item
-                          onClick={() => handleOpenForm(promotion)}
-                        >
-                          {t('EDIT', 'Edit')}
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleDeleteClick(promotion?.id)}>
-                          {t('DELETE', 'Delete')}
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    </DropdownWrapper>
-                  </ActionsWrapper>
+                    <ChevronRight />
+                  </PromotionDateItem>
                 </td>
               </tr>
-            </tbody>
+            </PromotionTbody>
           ))}
         </PromotionsTable>
-        <AddNewPromotionText onClick={() => handleOpenForm({})}>
+        <AddNewPromotionText onClick={(e) => handleOpenForm(e, {})}>
           {t('ADD_NEW_PROMOTION', 'Add new promotion')}
         </AddNewPromotionText>
       </BusinessPromotionsContainer>
@@ -163,7 +145,7 @@ const BusinessPromotionListUI = (props) => {
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
               handleCloseForm={handleCloseForm}
-              handleChangePromotionActiveState={handleChangePromotionActiveState}
+              handleDeletePromotion={handleDeletePromotion}
             >
               {selectedTab === 'general' && (
                 <BusinessPromotionGeneralForm
@@ -191,7 +173,7 @@ const BusinessPromotionListUI = (props) => {
                 selectedTab={selectedTab}
                 setSelectedTab={setSelectedTab}
                 handleCloseForm={handleCloseForm}
-                handleChangePromotionActiveState={handleChangePromotionActiveState}
+                handleDeletePromotion={handleDeletePromotion}
               >
                 {selectedTab === 'general' && (
                   <BusinessPromotionGeneralForm
@@ -212,17 +194,6 @@ const BusinessPromotionListUI = (props) => {
           )}
         </>
       )}
-
-      <Confirm
-        title={t('WEB_APPNAME', 'Ordering')}
-        content={confirm.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={confirm.open}
-        onClose={() => setConfirm({ ...confirm, open: false })}
-        onCancel={() => setConfirm({ ...confirm, open: false })}
-        onAccept={confirm.handleOnAccept}
-        closeOnBackdrop={false}
-      />
     </MainContainer>
   )
 }
@@ -234,57 +205,92 @@ const BusinessPromotion = (props) => {
     selectedTab,
     setSelectedTab,
     handleCloseForm,
-    handleChangePromotionActiveState
+    handleDeletePromotion
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+
+  const handleDeleteClick = (id) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_COUPON', 'Are you sure that you want to delete this coupon?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeletePromotion(curPromotion?.id)
+      }
+    })
+  }
 
   return (
-    <PromotionEditFormContainer>
-      {isCloseButtonShow && (
-        <CloseButtonWrapper>
-          <IconButton
-            color='black'
-            onClick={() => handleCloseForm()}
-          >
-            <XLg />
-          </IconButton>
-        </CloseButtonWrapper>
-      )}
-      {Object.keys(curPromotion).length > 0 && (
-        <>
-          <EditHeader>
-            <EditTitleHeaderContainer>
-              <h1>{curPromotion?.name}</h1>
-              <Switch
-                defaultChecked={curPromotion?.enabled}
-                onChange={enabled => handleChangePromotionActiveState(enabled, curPromotion?.id)}
-              />
-            </EditTitleHeaderContainer>
-          </EditHeader>
-          <OptionTabsContainer>
-            <InnerTabsContainer>
-              <AutoScroll innerScroll scrollId='promotion_edit'>
-                <Tab
-                  active={selectedTab === 'general'}
-                  onClick={() => setSelectedTab('general')}
+    <>
+      <PromotionEditFormContainer>
+        {isCloseButtonShow && (
+          <CloseButtonWrapper>
+            <IconButton
+              color='black'
+              onClick={() => handleCloseForm()}
+            >
+              <XLg />
+            </IconButton>
+          </CloseButtonWrapper>
+        )}
+        {Object.keys(curPromotion).length > 0 && (
+          <>
+            <EditHeader>
+              <EditTitleHeaderContainer>
+                <h1>{curPromotion?.name}</h1>
+              </EditTitleHeaderContainer>
+              <ActionSelectorWrapper>
+                <DropdownButton
+                  menuAlign={theme?.rtl ? 'left' : 'right'}
+                  title={<ThreeDots />}
+                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                 >
-                  {t('GENERAL')}
-                </Tab>
-                <Tab
-                  active={selectedTab === 'custom'}
-                  onClick={() => setSelectedTab('custom')}
-                >
-                  {t('CUSTOM_FIELDS', 'Custom fields')}
-                </Tab>
-              </AutoScroll>
-            </InnerTabsContainer>
-          </OptionTabsContainer>
-        </>
-      )}
+                  <Dropdown.Item
+                    onClick={() => handleDeleteClick()}
+                  >
+                    {t('DELETE', 'Delete')}
+                  </Dropdown.Item>
+                </DropdownButton>
+              </ActionSelectorWrapper>
+            </EditHeader>
+            <OptionTabsContainer>
+              <InnerTabsContainer>
+                <AutoScroll innerScroll scrollId='promotion_edit'>
+                  <Tab
+                    active={selectedTab === 'general'}
+                    onClick={() => setSelectedTab('general')}
+                  >
+                    {t('GENERAL')}
+                  </Tab>
+                  <Tab
+                    active={selectedTab === 'custom'}
+                    onClick={() => setSelectedTab('custom')}
+                  >
+                    {t('CUSTOM_FIELDS', 'Custom fields')}
+                  </Tab>
+                </AutoScroll>
+              </InnerTabsContainer>
+            </OptionTabsContainer>
+          </>
+        )}
 
-      {props.children}
-    </PromotionEditFormContainer>
+        {props.children}
+      </PromotionEditFormContainer>
+      <Confirm
+        width='700px'
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
+    </>
   )
 }
 

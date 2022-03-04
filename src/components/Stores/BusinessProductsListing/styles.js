@@ -170,10 +170,8 @@ export const Breadcrumb = styled.div`
   color: ${props => props.theme.colors.lightGray};
 
   span {
-    &.active {
-      color: ${props => props.theme.colors.primary};
-    }
     &.business {
+      color: ${props => props.theme.colors.primary};
       cursor: pointer;
     }
   }

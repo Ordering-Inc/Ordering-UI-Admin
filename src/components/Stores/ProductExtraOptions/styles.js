@@ -131,7 +131,7 @@ export const OptionImage = styled.div`
 export const ActionSelectorWrapper = styled.div`
   button {
     display: flex;
-    background: ${props => props.theme.colors.secundary} !important;
+    background: transparent !important;
     border: none;
     padding: 5px;
     border-radius: 8px;
@@ -151,10 +151,10 @@ export const ActionSelectorWrapper = styled.div`
     }
 
     &:hover {
-      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+      background: ${props => props.theme.colors.secundary} !important;
     }
     &:active {
-      background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+      background: ${props => props.theme.colors.secundaryDarkContrast} !important;
     }
   }
 

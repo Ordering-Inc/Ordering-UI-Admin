@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const MainContainer = styled.div`
   display: flex;
@@ -47,45 +48,31 @@ export const PromotionsTable = styled.table`
   thead {
     border-bottom: 1px solid ${props => props.theme.colors.secundaryLight};
   }
-
-  tbody {
-    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  }
 `
+export const PromotionTbody = styled.tbody`
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  cursor: pointer;
 
-export const PromotionItem = styled.div`
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    td {
+      border-top: 1px solid ${props => props.theme.colors.primary};
+      border-bottom: 1px solid ${props => props.theme.colors.primary};
+    }
+  `}
+`
+export const PromotionNameContainer = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
   font-size: 12px;
-  max-width: 150px;
 
   img {
     width: 38px;
     height: 38px;
     border-radius: 8px;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
-    ${props => props.theme?.rtl ? css`
-      margin-left: 5px;
-    ` : css`
-      margin-right: 5px;
-    `}
-  }
-  ${props => props.theme?.rtl ? css`
-    padding-left: 8px;
-    margin-left: 8px;
-    border-left: 1px solid ${props => props.theme.colors.borderColor};
-  ` : css`
-    padding-right: 8px;
-    margin-right: 8px;
-    border-right: 1px solid ${props => props.theme.colors.borderColor};
-  `}
-
-  > div {
-    p {
-      margin: 0px;
-      white-space: nowrap;
-    }
+    margin: 0 15px;
   }
 
   > span {
@@ -93,66 +80,55 @@ export const PromotionItem = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    flex: 1;
   }
-  
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid ${props => props.theme.colors.borderColor};
+  ` : css`
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px solid ${props => props.theme.colors.borderColor};
+  `}
 `
 
-export const ActionsWrapper = styled.div`
+export const PromotionTypeItem = styled.div`
+  font-size: 12px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid ${props => props.theme.colors.borderColor};
+  ` : css`
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px solid ${props => props.theme.colors.borderColor};
+  `}
+`
+export const PromotionDateItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`
-
-export const EnableWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: fit-content;
-
-  span {
-    font-size: 12px;
-    color: ${props => props.theme.colors.headingColor};
-
+  font-size: 12px;
+  > div {
+    p {
+      margin: 0px;
+      white-space: nowrap;
+    }
     ${props => props.theme?.rtl ? css`
-      padding-left: 10px;
+      margin-left: 10px;
     ` : css`
-      padding-right: 10px;
+      margin-right: 10px;
     `}
   }
-`
 
-export const DropdownWrapper = styled.div`
-  ${props => props.theme?.rtl ? css`
-    margin-right: 20px;
-  ` : css`
-    margin-left: 20px;
-  `}
-  button {
-    background: ${props => props.theme.colors.secundary} !important;
-    border: none;
-    padding: 0px;
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-      font-size: 14px;
-    }
-
-    &:after {
-      display: none;
-    }
-  }
-
-  > div {
-    border: 1px solid ${props => props.theme.colors.borderColor};
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-    border-radius: 8px;
-    > div {
-      a:last-child {
-        color: #E63757;
-      }
-    }
-
-    .dropdown-item {
-      font-size: 12px;
-    }
+  > svg {
+    font-size: 13px;
+    color: ${props => props.theme.colors.secundaryLight};
   }
 `
 
@@ -171,7 +147,7 @@ export const PromotionEditFormContainer = styled.div`
   overflow: auto;
 
   @media (min-width: 576px) {
-    padding: 20px;
+    padding: 25px 20px;
   }
 
   @media (min-width: 1000px) {
@@ -186,13 +162,14 @@ export const PromotionEditFormContainer = styled.div`
 export const EditHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  margin-bottom: 15px;
+  margin-top: 3px;
 `
 
 export const EditTitleHeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  flex: 1;
 
   h1 {
     font-size: 20px;
@@ -253,4 +230,63 @@ export const Tab = styled.div`
   ${({ active }) => !active && css`
     color: ${props => props.theme.colors.lightGray};
   `}
+`
+
+export const ActionSelectorWrapper = styled.div`
+  ${props => props.theme?.rtl ? css`
+    margin-left: 35px;
+  ` : css`
+    margin-right: 35px;
+  `}
+  button {
+    background: transparent !important;
+    border: none;
+    padding: 0px 5px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+      font-size: 20px;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+    }
+  }
+
+  .show {
+    button {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  > div {
+    > div {
+      border-radius: 8px;
+      .dropdown-item {
+        font-size: 12px;
+        color: ${props => props.theme.colors.headingColor};
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
+      }
+      .dropdown-item:last-child {
+        color: #E63757;
+      }
+    }
+  }
 `
