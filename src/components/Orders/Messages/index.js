@@ -272,6 +272,13 @@ export const MessagesUI = (props) => {
     }
   }
 
+  const handleChangeTour = (evt) => {
+    if (isTourOpen && !evt.target.closest('.message-footer')) {
+      orderDetailClose()
+      setCurrentTourStep(4)
+    }
+  }
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -317,7 +324,7 @@ export const MessagesUI = (props) => {
 
   return (
     <MessagesContainer>
-      <WrapperContainer>
+      <WrapperContainer onClick={handleChangeTour}>
         <HeaderProfile>
           <WrapperHeader
             messageDashboardView={messageDashboardView}
@@ -784,7 +791,7 @@ export const MessagesUI = (props) => {
         </Chat>
 
         {!history && (
-          <SendForm>
+          <SendForm className='message-footer'>
             <ImageContainer>
               {user?.level !== 2 && (
                 <ChatContactInfoContainer
