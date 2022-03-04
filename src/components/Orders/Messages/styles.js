@@ -336,7 +336,7 @@ export const WrapperSendInput = styled.div`
   box-sizing: border-box;
 
   > input {
-    background-color: ${props => props.theme.colors.secundary};
+    border: 1px solid ${props => props.theme.colors.borderColor};
   }
 `
 
@@ -353,9 +353,8 @@ export const SendImage = styled.label`
   }
 
   svg {
-    color: #CFD0D0;
-    width: 25px;
-    height: 25px;
+    color: #B1BCCC;
+    font-size: 20px;
     cursor: pointer;
   }
 `

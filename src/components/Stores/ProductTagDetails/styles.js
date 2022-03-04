@@ -105,7 +105,7 @@ export const ActionSelectorWrapper = styled.div`
       box-shadow: none !important;
     }
     svg {
-      color: #B1BCCC;
+      color: ${props => props.theme.colors.headingColor};
       font-size: 20px;
     }
 
@@ -114,13 +114,13 @@ export const ActionSelectorWrapper = styled.div`
     }
 
     &:hover {
-      background: #1507260a !important;
+      background: ${props => props.theme.colors.secundary} !important;
       > svg {
         color:  #151b26;
       }
     }
     &:active {
-      background: #1507261a !important;
+      background: ${props => props.theme.colors.secundaryDarkContrast} !important;
     }
   }
 

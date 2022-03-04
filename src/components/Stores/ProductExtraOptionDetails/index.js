@@ -430,7 +430,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   className={subOption?.preselected ? 'checked default' : 'default'}
                 >
                   <Checkbox
-                    checked={subOption?.preselected}
+                    defaultChecked={subOption?.preselected || false}
                     id='allow_suboption_quantity'
                     onClick={(e) => handleChangeDefaultSuboption(subOption.id)}
                   />

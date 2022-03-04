@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 export const LateralBarContainer = styled.div`
   width: 0;
-  padding: 20px;
+  padding: 28px 20px;
   position: fixed;
   z-index: 1005;
   top: 0;
@@ -18,53 +18,24 @@ export const LateralBarContainer = styled.div`
   ` : css`
     right: 0;
   `}
+`
 
-  table.orders_table {
-    min-width: unset;
-    /* thead {
-      display: none;
-    } */
-    border-collapse: separate;
-    border-spacing: 0 18px;
-    td {
-      border-top: 1px solid ${props => props.theme.colors.borderColor};
-      border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-      &:first-child {
-        padding: 15px;
-        ${props => props.theme?.rtl ? css`
-          border-radius: 0 8px 8px 0;
-        ` : css`
-          border-radius: 8px 0 0 8px;
-        `}
-        ${props => props.theme?.rtl ? css`
-          border-right: 1px solid ${props => props.theme.colors.borderColor};
-        ` : css`
-          border-left: 1px solid ${props => props.theme.colors.borderColor};
-        `}
-      }
-      &:last-child {
-        ${props => props.theme?.rtl ? css`
-          border-radius: 8px 0 0 8px;
-        ` : css`
-          border-radius: 0 8px 8px 0;
-        `}
-        ${props => props.theme?.rtl ? css`
-          border-left: 1px solid ${props => props.theme.colors.borderColor};
-        ` : css`
-          border-right: 1px solid ${props => props.theme.colors.borderColor};
-        `}
-      }
+export const OrdersContainer = styled.div`
+  max-width: 560px;
+
+  #orderTable {
+    border-top: 1px solid ${props => props.theme.colors.borderColor};
+
+    table {
+      min-width: initial;
+      width: 100%;
     }
   }
 `
 
-export const OrdersContainer = styled.div`
-  max-width: 460px;
-`
-
 export const CloseButtonWrapper = styled.div`
   position: absolute;
-  top: 20px;
+  top: 25px;
   cursor: pointer;
 
   ${props => props.theme?.rtl ? css`

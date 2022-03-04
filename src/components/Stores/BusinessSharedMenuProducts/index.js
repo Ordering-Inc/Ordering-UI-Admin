@@ -7,6 +7,7 @@ import { Checkbox } from '../../../styles'
 import { Modal, SearchBar, SideBar } from '../../Shared'
 import { BusinessSharedMenuProductDetails } from '../BusinessSharedMenuProductDetails'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { ChevronRight } from 'react-bootstrap-icons'
 
 import {
   MenuProductsContainer,
@@ -56,10 +57,12 @@ const BusinessSharedMenuProductsUI = (props) => {
           />
         </SearchBarWrapper>
         <ProductListWrapper>
-          {menuState.menu.products.filter(product => product.name?.toLowerCase().includes(searchValue)).map(product => (
+          {menuState.menu.products.filter(product => product.name?.toLowerCase().includes(searchValue)).map((product, index) => (
             <ProductItem
               key={product.id}
+              isBorderTop={index === 0}
               onClick={e => handleOpenProduct(e, product)}
+              active={product.id === currentProduct?.id}
             >
               <Checkbox
                 className='product_checkbox'
@@ -67,6 +70,7 @@ const BusinessSharedMenuProductsUI = (props) => {
                 onChange={e => handleUpdateBusinessSharedMenuProduct(product.id, { enabled: e.target.checked })}
               />
               <span>{product.name}</span>
+              <ChevronRight />
             </ProductItem>
           ))}
         </ProductListWrapper>

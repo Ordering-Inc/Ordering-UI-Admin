@@ -88,7 +88,6 @@ export const BusinessProductList = (props) => {
 
   // Get current products
   const [currentProducts, setCurrentProducts] = useState([])
-  const [totalPages, setTotalPages] = useState(null)
 
   const handleChangePage = (page) => {
     setCurrentPage(page)
@@ -102,14 +101,9 @@ export const BusinessProductList = (props) => {
 
   useEffect(() => {
     if (categoryState.loading) return
-    let _totalPages
-    if (categoryState.products.length > 0) {
-      _totalPages = Math.ceil(categoryState.products.length / productsPerPage)
-    }
     const indexOfLastPost = currentPage * productsPerPage
     const indexOfFirstPost = indexOfLastPost - productsPerPage
     const _currentProducts = categoryState.products.slice(indexOfFirstPost, indexOfLastPost)
-    setTotalPages(_totalPages)
     setCurrentProducts(_currentProducts)
   }, [categoryState, currentPage, productsPerPage])
 
@@ -177,6 +171,8 @@ export const BusinessProductList = (props) => {
                         handleOpenProductDetails={handleOpenProductDetails}
                         dataSelected={dataSelected}
                         setDataSelected={setDataSelected}
+                        category={categoryState}
+                        isLastProduct={currentProducts.length - 1 === i}
                       />
                     ))
                   }
@@ -199,7 +195,7 @@ export const BusinessProductList = (props) => {
               !businessState.loading && categoryState?.products?.length > 0 && (
                 <Pagination
                   currentPage={currentPage}
-                  totalPages={totalPages}
+                  totalPages={Math.ceil(categoryState?.pagination?.totalItems / productsPerPage)}
                   handleChangePage={handleChangePage}
                   defaultPageSize={productsPerPage}
                   handleChangePageSize={handleChangePageSize}
