@@ -167,7 +167,7 @@ var BusinessSharedMenuProductDetailsUI = function BusinessSharedMenuProductDetai
       onChange: function onChange(e) {
         return handleUpdateExtra(extra.id, e.target.checked);
       }
-    }), /*#__PURE__*/_react.default.createElement("span", null, extra.name)), extra.options.map(function (option) {
+    }), /*#__PURE__*/_react.default.createElement("span", null, extra.name)), (extra === null || extra === void 0 ? void 0 : extra.enabled) && extra.options.map(function (option) {
       return showOption(option) && /*#__PURE__*/_react.default.createElement("div", {
         key: option.id
       }, /*#__PURE__*/_react.default.createElement(_styles2.ProductOptionWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
@@ -175,7 +175,7 @@ var BusinessSharedMenuProductDetailsUI = function BusinessSharedMenuProductDetai
         onChange: function onChange(e) {
           return handleUpdateOption(option.id, e.target.checked);
         }
-      }), /*#__PURE__*/_react.default.createElement("span", null, option.name)), option === null || option === void 0 ? void 0 : option.suboptions.map(function (suboption) {
+      }), /*#__PURE__*/_react.default.createElement("span", null, option.name)), (option === null || option === void 0 ? void 0 : option.enabled) && (option === null || option === void 0 ? void 0 : option.suboptions.map(function (suboption) {
         return showSuboption(suboption) && /*#__PURE__*/_react.default.createElement("div", {
           key: suboption.id
         }, /*#__PURE__*/_react.default.createElement(_styles2.ProductSuboptionWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
@@ -184,7 +184,7 @@ var BusinessSharedMenuProductDetailsUI = function BusinessSharedMenuProductDetai
             return handleUpdateSuboption(suboption.id, e.target.checked);
           }
         }), /*#__PURE__*/_react.default.createElement("span", null, suboption.name)));
-      }));
+      })));
     }));
   })));
 };

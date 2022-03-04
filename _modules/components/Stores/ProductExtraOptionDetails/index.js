@@ -349,14 +349,14 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     onChange: function onChange(val) {
       return handleChangeConditionalOption(val);
     }
-  }), conditionalOptionId && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }), conditionalOptionId && (conditionalSubOptions.length > 0 ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: conditionalSubOptions,
     defaultValue: conditionalSubOptionId,
     placeholder: t('SELECT_CHOICE', 'Select choice'),
     onChange: function onChange(val) {
       return handleChangeConditionalSubOption(val);
     }
-  })))))), /*#__PURE__*/_react.default.createElement(_styles2.Dvider, null), /*#__PURE__*/_react.default.createElement(_styles2.ModifierOptionsContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MODIFIER_OPTIONS', 'Modifier options')), optionState === null || optionState === void 0 ? void 0 : (_optionState$option14 = optionState.option) === null || _optionState$option14 === void 0 ? void 0 : (_optionState$option15 = _optionState$option14.suboptions) === null || _optionState$option15 === void 0 ? void 0 : _optionState$option15.map(function (subOption, index) {
+  }) : /*#__PURE__*/_react.default.createElement("p", null, t('NO_CHOICES_AVAILABLE', 'No choices available')))))))), /*#__PURE__*/_react.default.createElement(_styles2.Dvider, null), /*#__PURE__*/_react.default.createElement(_styles2.ModifierOptionsContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MODIFIER_OPTIONS', 'Modifier options')), optionState === null || optionState === void 0 ? void 0 : (_optionState$option14 = optionState.option) === null || _optionState$option14 === void 0 ? void 0 : (_optionState$option15 = _optionState$option14.suboptions) === null || _optionState$option15 === void 0 ? void 0 : _optionState$option15.map(function (subOption, index) {
     var _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2, _settingChangeState$c, _settingChangeState$c2, _optionState$option16, _settingChangeState$c3, _settingChangeState$c4, _optionState$option17;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.SubOptionContainer, {
@@ -607,6 +607,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     closeOnBackdrop: false
   }), (openModal === null || openModal === void 0 ? void 0 : openModal.option) && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
+    overflow: "initial",
+    padding: "0px",
     open: openModal === null || openModal === void 0 ? void 0 : openModal.option,
     onClose: function onClose() {
       return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {

@@ -50,13 +50,14 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Select = function Select(props) {
+  var _referenceElement$cur2;
+
   var placeholder = props.placeholder,
       options = props.options,
       defaultValue = props.defaultValue,
       onChange = props.onChange,
       notAsync = props.notAsync,
       noSelected = props.noSelected,
-      minWidth = props.minWidth,
       isSecondIcon = props.isSecondIcon,
       isShowSearchBar = props.isShowSearchBar,
       searchValue = props.searchValue,
@@ -161,7 +162,7 @@ var Select = function Select(props) {
 
   var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
     display: open ? 'block' : 'none',
-    minWidth: minWidth || '100px'
+    minWidth: (referenceElement === null || referenceElement === void 0 ? void 0 : (_referenceElement$cur2 = referenceElement.current) === null || _referenceElement$cur2 === void 0 ? void 0 : _referenceElement$cur2.offsetWidth) || '100px'
   });
 
   if (!open) {
@@ -198,7 +199,6 @@ var Select = function Select(props) {
   }, options.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
       key: i,
-      minWidth: minWidth,
       selected: value === option.value,
       color: option.color,
       onClick: function onClick(e) {

@@ -227,7 +227,7 @@ var ProductExtraOptionMetaFieldsUI = function ProductExtraOptionMetaFieldsUI(pro
       width: 25,
       height: 30
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.WrapMetaFields, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FIELDS', 'Custom Fields')), metaFieldsList.metaFields.map(function (metaField) {
+  })) : /*#__PURE__*/_react.default.createElement(_styles.WrapMetaFields, null, /*#__PURE__*/_react.default.createElement(_styles.MetaTitle, null, t('CUSTOM_FIELDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_styles.MetakeysListContainer, null, metaFieldsList.metaFields.map(function (metaField) {
     return /*#__PURE__*/_react.default.createElement(_styles.MetaContainer, {
       key: metaField.id
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -241,7 +241,7 @@ var ProductExtraOptionMetaFieldsUI = function ProductExtraOptionMetaFieldsUI(pro
         return handleDeleteMetaField(metaField.id);
       }
     })));
-  }), /*#__PURE__*/_react.default.createElement(_styles.MetaAddForm, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.MetaAddForm, {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles.MetaAddContainer, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "meta_type"

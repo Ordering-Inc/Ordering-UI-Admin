@@ -72,6 +72,7 @@ var ModalUI = function ModalUI(props) {
     height: props.height,
     width: props.width,
     padding: props.padding,
+    overflow: props.overflow,
     isTransparent: isTransparent
   }, !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles2.ModalIcon, {
     className: "modal-close-icon"

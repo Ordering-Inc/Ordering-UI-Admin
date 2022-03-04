@@ -203,6 +203,7 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     business: business,
     product: productState.product,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
+    handleSuccessUpdate: handleSuccessUpdate,
     handleUpdateBusinessState: handleUpdateBusinessState
   }), showOption === 'product_images' && /*#__PURE__*/_react.default.createElement(_ProductGallery.ProductGallery, {
     business: business,

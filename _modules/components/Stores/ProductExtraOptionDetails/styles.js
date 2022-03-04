@@ -202,6 +202,6 @@ var AdddSubOptionForm = _styledComponents.default.form(_templateObject48 || (_te
 
 exports.AdddSubOptionForm = AdddSubOptionForm;
 
-var SelectboxGroup = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  max-width: 50%;\n  \n  > div {\n    background: #F8F9FA;\n    &:first-child {\n      margin-bottom: 20px;\n    }\n  }\n\n  @media (min-width: 1200px) {\n    max-width: initial;\n  }\n"])));
+var SelectboxGroup = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  max-width: 50%;\n  \n  > div {\n    background: #F8F9FA;\n    &:first-child {\n      margin-bottom: 20px;\n    }\n  }\n\n  > p {\n    font-size: 14px;\n    margin: 0;\n  }\n\n  @media (min-width: 1200px) {\n    max-width: initial;\n  }\n"])));
 
 exports.SelectboxGroup = SelectboxGroup;
