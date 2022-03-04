@@ -384,6 +384,13 @@ var MessagesUI = function MessagesUI(props) {
     }
   };
 
+  var handleChangeTour = function handleChangeTour(evt) {
+    if (isTourOpen && !evt.target.closest('.message-footer')) {
+      orderDetailClose();
+      setCurrentTourStep(4);
+    }
+  };
+
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -436,7 +443,9 @@ var MessagesUI = function MessagesUI(props) {
       if (!(canRead !== null && canRead !== void 0 && canRead.customer) && !(canRead !== null && canRead !== void 0 && canRead.driver)) setIsChatDisabled(true);else setIsChatDisabled(false);
     }
   }, [canRead]);
-  return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperHeader, {
+  return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
+    onClick: handleChangeTour
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperHeader, {
     messageDashboardView: messageDashboardView,
     historyView: history
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, isChat && /*#__PURE__*/_react.default.createElement(_styles.ChatHeader, null, /*#__PURE__*/_react.default.createElement(_styles.OrderNumber, null, t('INVOICE_ORDER_NO', 'Order No'), " ", order.id), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, (user === null || user === void 0 ? void 0 : user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_Shared.Image, {
@@ -637,7 +646,9 @@ var MessagesUI = function MessagesUI(props) {
       src: (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.photo,
       fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
     })))))));
-  }))), !history && /*#__PURE__*/_react.default.createElement(_styles.SendForm, null, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, (user === null || user === void 0 ? void 0 : user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
+  }))), !history && /*#__PURE__*/_react.default.createElement(_styles.SendForm, {
+    className: "message-footer"
+  }, /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, (user === null || user === void 0 ? void 0 : user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.ChatContactInfoContainer, {
     disabled: !(canRead !== null && canRead !== void 0 && canRead.business),
     onClick: function onClick() {
       return setCanRead(_objectSpread(_objectSpread({}, canRead), {}, {

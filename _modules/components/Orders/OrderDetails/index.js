@@ -397,10 +397,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var handleChangeTour = function handleChangeTour(evt) {
     if (!isTourOpen) return;
 
-    if (isTourOpen && (order === null || order === void 0 ? void 0 : order.delivery_type) === 1) {
+    if (isTourOpen && (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && currentTourStep !== 2) {
       setCurrentTourStep(2);
       return;
     }
+
+    if (evt.target.closest('.driver-select')) return;
 
     if (isTourOpen && setCurrentTourStep) {
       handleOpenMessages('chat');

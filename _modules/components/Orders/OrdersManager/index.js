@@ -19,6 +19,8 @@ var _OrdersContentHeader = require("../OrdersContentHeader");
 
 var _OrderDetails = require("../OrderDetails");
 
+var _Shared = require("../../Shared");
+
 var _styles = require("./styles");
 
 var _OrdersDashboard = require("../OrdersDashboard");
@@ -122,10 +124,18 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       isTourFlag = _useState14[0],
       setIsTourFlag = _useState14[1];
 
-  var _useState15 = (0, _react.useState)(0),
+  var _useState15 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
       _useState16 = _slicedToArray(_useState15, 2),
-      totalSelectedOrder = _useState16[0],
-      setTotalSelectedOrder = _useState16[1];
+      alertState = _useState16[0],
+      setAlertState = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(0),
+      _useState18 = _slicedToArray(_useState17, 2),
+      totalSelectedOrder = _useState18[0],
+      setTotalSelectedOrder = _useState18[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
@@ -137,6 +147,13 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     } else {
       handleCustomOrderDetail && handleCustomOrderDetail(false);
     }
+  };
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
   };
 
   var handleOpenOrderDetail = function handleOpenOrderDetail(order) {
@@ -169,6 +186,16 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   };
 
   var _handleOpenTour = function handleOpenTour() {
+    var tourElement = document.querySelector('[data-tour="tour_start"]');
+
+    if (!tourElement) {
+      setAlertState({
+        open: true,
+        content: t('ONE_ORDER_IS_REQUIRED', 'One order is required')
+      });
+      return;
+    }
+
     var orderElement = document.getElementById('orderTable');
     if (orderElement) orderElement.scrollTo(0, 0);
     setCurrentTourStep(0);
@@ -278,6 +305,26 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setIsTourOpen: setIsTourOpen,
     currentStep: currentTourStep,
     detailsOrder: detailsOrder
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('ORDERS_MANAGER', 'Orders manager'),
+    content: alertState.content,
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('ORDERS_MANAGER', 'Orders manager'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
   }));
 };
 

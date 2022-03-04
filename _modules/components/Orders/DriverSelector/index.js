@@ -239,7 +239,8 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       defaultValue: "default",
       options: driversLoading,
       optionInnerMargin: "10px",
-      optionInnerMaxHeight: "150px"
+      optionInnerMaxHeight: "150px",
+      className: "driver-select"
     }));
   } else {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isFirstSelect ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
@@ -252,7 +253,8 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       isShowSearchBar: true,
       searchBarPlaceholder: t('SEARCH', 'Search'),
       searchBarIsCustomLayout: true,
-      handleChangeSearch: handleSearch
+      handleChangeSearch: handleSearch,
+      className: "driver-select"
     }) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
       defaultValue: defaultOption || 'default',
       options: driversOptionList,
@@ -263,13 +265,15 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       isShowSearchBar: true,
       searchBarPlaceholder: t('SEARCH', 'Search'),
       searchBarIsCustomLayout: true,
-      handleChangeSearch: handleSearch
+      handleChangeSearch: handleSearch,
+      className: "driver-select"
     })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
       placeholder: t('SELECT_DRIVER', 'Select driver'),
       defaultValue: "default",
       options: driversLoading,
       optionInnerMargin: "10px",
-      optionInnerMaxHeight: "200px"
+      optionInnerMaxHeight: "200px",
+      className: "driver-select"
     })));
   }
 };

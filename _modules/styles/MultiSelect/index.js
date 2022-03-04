@@ -51,7 +51,8 @@ var MultiSelect = function MultiSelect(props) {
   var placeholder = props.placeholder,
       options = props.options,
       onChange = props.onChange,
-      defaultValue = props.defaultValue;
+      defaultValue = props.defaultValue,
+      className = props.className;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -132,7 +133,9 @@ var MultiSelect = function MultiSelect(props) {
     onChange && onChange(option.value);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_Selects.Select, null, selectedOptions.length === 0 ? /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
+  return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
+    className: className || 'multi-select'
+  }, selectedOptions.length === 0 ? /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
     onClick: function onClick(e) {
       return handleSelectClick(e);
     }

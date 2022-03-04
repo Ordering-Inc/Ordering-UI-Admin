@@ -63,7 +63,8 @@ var Select = function Select(props) {
       searchValue = props.searchValue,
       handleChangeSearch = props.handleChangeSearch,
       searchBarIsCustomLayout = props.searchBarIsCustomLayout,
-      searchBarPlaceholder = props.searchBarPlaceholder;
+      searchBarPlaceholder = props.searchBarPlaceholder,
+      className = props.className;
   var defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
     return option.value === defaultValue;
   });
@@ -172,7 +173,8 @@ var Select = function Select(props) {
   return /*#__PURE__*/_react.default.createElement("div", {
     style: {
       overflow: 'hidden'
-    }
+    },
+    className: className || 'select-wrapper'
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     className: "select",
     ref: referenceElement,
