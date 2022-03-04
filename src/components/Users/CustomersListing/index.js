@@ -62,6 +62,7 @@ const CustomersListingUI = (props) => {
     setIsOpenUserDetails(false)
     setOpenUser(null)
     setQueryId(null)
+    moveDistance && setMoveDistance(0)
     onUserRedirect()
   }
 
