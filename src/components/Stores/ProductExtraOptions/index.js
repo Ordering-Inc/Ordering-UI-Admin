@@ -53,6 +53,7 @@ const ProductExtraOptionsUI = (props) => {
 
     curOption,
     openModal,
+    setCurOption,
     setOpenModal,
     handleOpenModal
   } = props
@@ -223,7 +224,7 @@ const ProductExtraOptionsUI = (props) => {
         </Header>
 
         <OptionsList>
-          <OptionItem>
+          <OptionItem isHeader>
             <OptionNameContainer isHeader>{t('NAME', 'Name')}</OptionNameContainer>
             <MinimumPurchase isHeader>{t('MINIMUM', 'Min')}</MinimumPurchase>
             <MaxPurchase isHeader>{t('MAX', 'Max')}</MaxPurchase>
@@ -232,6 +233,7 @@ const ProductExtraOptionsUI = (props) => {
           {extraState.extra?.options && extraState.extra?.options.map(option => (
             <OptionItem
               key={option.id}
+              active={option.id === curOption?.id}
               onClick={() => handleOpenModal(option, 'edit')}
             >
               <OptionNameContainer>
@@ -329,6 +331,7 @@ const ProductExtraOptionsUI = (props) => {
           open={openModal?.edit}
           onClose={() => {
             setOpenModal({ ...openModal, edit: false })
+            setCurOption(false)
             setIsMaxError(false)
           }}
         >
@@ -341,7 +344,11 @@ const ProductExtraOptionsUI = (props) => {
             handleChangeOptionInput={handleChangeInput}
             handleChangeNumberInput={handleChangeOptionInput}
             handleChangeOptionEnable={handleChangeOptionEnable}
-            onClose={() => setOpenModal({ ...openModal, edit: false })}
+            onClose={() => {
+              setOpenModal({ ...openModal, edit: false })
+              setCurOption(false)
+              setIsMaxError(false)
+            }}
             handleUpdateBusinessState={handleUpdateBusinessState}
             handleSucccessDeleteOption={handleSucccessDeleteOption}
             isMaxError={isMaxError}

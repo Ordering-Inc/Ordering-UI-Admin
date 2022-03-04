@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useLanguage, ProductExtras as ProductExtrasController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { ProductExtras as ProductExtrasController } from './naked'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Checkbox } from '../../../styles'
 import { Alert, Confirm, Modal } from '../../Shared'
