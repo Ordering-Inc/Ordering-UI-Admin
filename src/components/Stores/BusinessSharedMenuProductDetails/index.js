@@ -140,7 +140,7 @@ const BusinessSharedMenuProductDetailsUI = (props) => {
                   />
                   <span>{extra.name}</span>
                 </ProductExtraWrapper>
-                {extra.options.map(option => (
+                {extra?.enabled && extra.options.map(option => (
                   showOption(option) && (
                     <div key={option.id}>
                       <ProductOptionWrapper>
@@ -150,7 +150,7 @@ const BusinessSharedMenuProductDetailsUI = (props) => {
                         />
                         <span>{option.name}</span>
                       </ProductOptionWrapper>
-                      {option?.suboptions.map(suboption => (
+                      {option?.enabled && option?.suboptions.map(suboption => (
                         showSuboption(suboption) && (
                           <div key={suboption.id}>
                             <ProductSuboptionWrapper>
