@@ -320,12 +320,16 @@ const ProductExtraOptionDetailsUI = (props) => {
                     />
                   )}
                   {conditionalOptionId && (
-                    <Select
-                      options={conditionalSubOptions}
-                      defaultValue={conditionalSubOptionId}
-                      placeholder={t('SELECT_CHOICE', 'Select choice')}
-                      onChange={val => handleChangeConditionalSubOption(val)}
-                    />
+                    conditionalSubOptions.length > 0 ? (
+                      <Select
+                        options={conditionalSubOptions}
+                        defaultValue={conditionalSubOptionId}
+                        placeholder={t('SELECT_CHOICE', 'Select choice')}
+                        onChange={val => handleChangeConditionalSubOption(val)}
+                      />
+                    ) : (
+                      <p>{t('NO_CHOICES_AVAILABLE', 'No choices available')}</p>
+                    )
                   )}
                 </SelectboxGroup>
               )}
