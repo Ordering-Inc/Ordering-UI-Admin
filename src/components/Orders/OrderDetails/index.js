@@ -199,10 +199,12 @@ const OrderDetailsUI = (props) => {
 
   const handleChangeTour = (evt) => {
     if (!isTourOpen) return
-    if (isTourOpen && order?.delivery_type === 1) {
+
+    if (isTourOpen && order?.delivery_type === 1 && currentTourStep !== 2) {
       setCurrentTourStep(2)
       return
     }
+    if (evt.target.closest('.driver-select')) return
     if (isTourOpen && setCurrentTourStep) {
       handleOpenMessages('chat')
       setTimeout(() => {

@@ -33,7 +33,8 @@ export const Select = (props) => {
     searchValue,
     handleChangeSearch,
     searchBarIsCustomLayout,
-    searchBarPlaceholder
+    searchBarPlaceholder,
+    className
   } = props
   const defaultOption = options?.find(
     (option) => option.value === defaultValue
@@ -115,7 +116,7 @@ export const Select = (props) => {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
   return (
-    <div style={{ overflow: 'hidden' }}>
+    <div style={{ overflow: 'hidden' }} className={className || 'select-wrapper'}>
       <HeaderItem
         className='select'
         ref={referenceElement}

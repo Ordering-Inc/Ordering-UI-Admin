@@ -3,7 +3,6 @@ import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { OrdersTable } from '../OrdersTable'
 import { OrdersCards } from '../OrdersCards'
-import { getStorageItem, setStorageItem } from '../../../utils'
 import { Button } from '../../../styles'
 
 import {
@@ -50,18 +49,6 @@ export const OrdersListing = (props) => {
   const [, t] = useLanguage()
   const [filterApplied, setFilterApplied] = useState(false)
 
-  const handleSetStorage = async () => {
-    const preVisited = await getStorageItem('visited', true)
-    if (!preVisited?.orders_page) {
-      const visited = {
-        ...preVisited,
-        orders_page: true
-      }
-      await setStorageItem('visited', visited, true)
-      handleOpenTour()
-    }
-  }
-
   useEffect(() => {
     if (orderList.loading || !messageListView) return
     if (orderList.orders.length === 0 || messageOrder) return
@@ -74,11 +61,6 @@ export const OrdersListing = (props) => {
       handleOrderCardClick(orderList.orders[0])
     }
   }, [isMessagesView, orderList, selectedOrderCard])
-
-  useEffect(() => {
-    if (orderList.loading || orderList?.orders?.length === 0) return
-    handleOpenTour && handleSetStorage()
-  }, [orderList.loading])
 
   useEffect(() => {
     let _filterApplied = false
