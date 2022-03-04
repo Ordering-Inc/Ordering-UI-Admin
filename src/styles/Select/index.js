@@ -28,7 +28,6 @@ export const Select = (props) => {
     onChange,
     notAsync,
     noSelected,
-    minWidth,
     isSecondIcon,
     isShowSearchBar,
     searchValue,
@@ -112,7 +111,7 @@ export const Select = (props) => {
     onChange && onChange(option.value)
   }
 
-  const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: minWidth || '100px' }
+  const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: referenceElement?.current?.offsetWidth || '100px' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
@@ -164,7 +163,6 @@ export const Select = (props) => {
             {options.map((option, i) => (
               <Option
                 key={i}
-                minWidth={minWidth}
                 selected={value === option.value}
                 color={option.color}
                 onClick={(e) => handleChangeOption(e, option)}

@@ -18,7 +18,8 @@ import {
   MetaAddForm,
   MetaAddContainer,
   SkeletonItem,
-  WrapperSpinnerLoader
+  WrapperSpinnerLoader,
+  MetakeysListContainer
 } from './styles'
 
 const ProductExtraOptionMetaFieldsUI = (props) => {
@@ -155,30 +156,32 @@ const ProductExtraOptionMetaFieldsUI = (props) => {
           <MetaTitle>
             {t('CUSTOM_FIELDS', 'Custom Fields')}
           </MetaTitle>
-          {metaFieldsList.metaFields.map(metaField => (
-            <MetaContainer key={metaField.id}>
-              <div className='meta_type'>
-                {metaField.value_type}
-              </div>
-              <div className='meta_key'>
-                <RoundBorder>{metaField.key}</RoundBorder>
-              </div>
-              <div className='meta_value'>
-                <RoundBorder>
-                  {metaField.value_type === 'boolean' ? (
-                    <>
-                      {metaField.value === '0' ? t('FALSE', 'fase') : t('TRUE', 'true')}
-                    </>
-                  ) : (
-                    <>
-                      {metaField.value}
-                    </>
-                  )}
-                </RoundBorder>
-                <BsTrash onClick={() => handleDeleteMetaField(metaField.id)} />
-              </div>
-            </MetaContainer>
-          ))}
+          <MetakeysListContainer>
+            {metaFieldsList.metaFields.map(metaField => (
+              <MetaContainer key={metaField.id}>
+                <div className='meta_type'>
+                  {metaField.value_type}
+                </div>
+                <div className='meta_key'>
+                  <RoundBorder>{metaField.key}</RoundBorder>
+                </div>
+                <div className='meta_value'>
+                  <RoundBorder>
+                    {metaField.value_type === 'boolean' ? (
+                      <>
+                        {metaField.value === '0' ? t('FALSE', 'fase') : t('TRUE', 'true')}
+                      </>
+                    ) : (
+                      <>
+                        {metaField.value}
+                      </>
+                    )}
+                  </RoundBorder>
+                  <BsTrash onClick={() => handleDeleteMetaField(metaField.id)} />
+                </div>
+              </MetaContainer>
+            ))}
+          </MetakeysListContainer>
           <MetaAddForm
             onSubmit={handleSubmit(onSubmit)}
           >
