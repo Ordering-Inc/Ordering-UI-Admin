@@ -13,6 +13,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var BusinessSpreadSheetContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral([""])));
+var BusinessSpreadSheetContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  span.product-id {\n    background: ", ";\n    padding: 5px 8px;\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.lightGray;
+});
 
 exports.BusinessSpreadSheetContainer = BusinessSpreadSheetContainer;

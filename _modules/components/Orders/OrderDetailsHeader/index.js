@@ -78,7 +78,7 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
       return handleShowOption('metafields');
     },
     isDisabled: isTourOpen && currentTourStep === 1
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDotsVertical, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return closeSideBar();

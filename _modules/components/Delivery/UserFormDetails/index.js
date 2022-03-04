@@ -360,12 +360,12 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     onChange: function onChange(val) {
       return handleChangeSwtich('driver_zone_restriction', val);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, (formState && Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0 || (formState === null || formState === void 0 ? void 0 : formState.loading)) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     id: "form-btn",
     color: "primary",
     borderRadius: "5px",
     type: "submit",
-    disabled: formState.loading
+    disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0
   }, formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')))) : /*#__PURE__*/_react.default.createElement(_styles2.SkeletonForm, null, _toConsumableArray(Array(6)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i

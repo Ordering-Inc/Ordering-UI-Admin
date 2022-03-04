@@ -9,7 +9,7 @@ exports.SearchBarWrapper = exports.ProductListWrapper = exports.ProductItem = ex
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -29,12 +29,28 @@ var ProductListWrapper = _styledComponents.default.div(_templateObject3 || (_tem
 
 exports.ProductListWrapper = ProductListWrapper;
 
-var ProductItem = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 14px 0;\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n\n  ", "\n\n  span {\n    font-size: 14px;\n  }\n"])), function (props) {
+var ProductItem = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 14px 0;\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n\n  ", "\n\n  ", "\n\n  span {\n    font-size: 14px;\n    flex: 1;\n  }\n\n  > svg {\n    color: ", ";\n    font-size: 13px;\n    margin: 0 3px;\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
+}, function (_ref) {
+  var isBorderTop = _ref.isBorderTop;
+  return isBorderTop && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    border-top: 1px solid ", ";\n  "])), function (props) {
+    return props.theme.colors.borderColor;
+  });
 }, function (props) {
   var _props$theme;
 
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    input {\n      margin-left: 20px;\n    }\n  "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    input {\n      margin-right: 20px;\n    }\n  "])));
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    input {\n      margin-left: 20px;\n    }\n  "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    input {\n      margin-right: 20px;\n    }\n  "])));
+}, function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (_ref2) {
+  var active = _ref2.active;
+  return active && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    border-top: 1px solid ", ";\n    border-bottom: 1px solid ", ";\n    background-color: ", ";\n  "])), function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.lightPrimary;
+  });
 });
 
 exports.ProductItem = ProductItem;

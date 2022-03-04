@@ -92,11 +92,11 @@ var UserDetailsUI = function UserDetailsUI(props) {
     handleSuccessUpdate: handleSuccessUserUpdate
   }))), currentMenuSelected === 'businesses' && /*#__PURE__*/_react.default.createElement(_BusinessManagerBusinesses.BusinessManagerBusinesses, {
     userId: userState === null || userState === void 0 ? void 0 : (_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.id
-  }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_Orders.OrdersManager, {
+  }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_styles.OrdersWrapper, null, /*#__PURE__*/_react.default.createElement(_Orders.OrdersManager, {
     isSelectedOrders: true,
     customerId: (_userState$user10 = userState.user) === null || _userState$user10 === void 0 ? void 0 : _userState$user10.id,
     handleCustomOrderDetail: setExtraOpen
-  }), currentMenuSelected === 'metafields' && /*#__PURE__*/_react.default.createElement(_UserMetaFields.UserMetaFields, {
+  })), currentMenuSelected === 'metafields' && /*#__PURE__*/_react.default.createElement(_UserMetaFields.UserMetaFields, {
     userId: (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.id
   }), currentMenuSelected === 'personalization' && /*#__PURE__*/_react.default.createElement(_styles.PersonalizationWrapper, null, /*#__PURE__*/_react.default.createElement(_Personalization.Personalization, null))));
 };

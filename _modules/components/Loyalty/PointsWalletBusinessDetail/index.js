@@ -123,19 +123,29 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     isBusiness: isBusiness,
     onSubmit: handleSubmit(onSubmit)
   }, (walletData === null || walletData === void 0 ? void 0 : walletData.name) && /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, walletData === null || walletData === void 0 ? void 0 : walletData.name)), /*#__PURE__*/_react.default.createElement(_styles2.DetailContent, null, /*#__PURE__*/_react.default.createElement(_styles2.PointsRedemptionWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('POINTS_REDEMPTION', 'Points redemption')), /*#__PURE__*/_react.default.createElement("p", null, t('VALUE', 'Value')), /*#__PURE__*/_react.default.createElement(_styles2.PointsInputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "number",
+    type: "text",
     placeholder: "00 points",
     name: "redemption_rate",
     value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.redemption_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.redemption_rate : (_walletData$redemptio = walletData === null || walletData === void 0 ? void 0 : walletData.redemption_rate) !== null && _walletData$redemptio !== void 0 ? _walletData$redemptio : '',
-    onChange: handleChangeInput
+    onChange: handleChangeInput,
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   }), /*#__PURE__*/_react.default.createElement("span", null, "="), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)))), /*#__PURE__*/_react.default.createElement(_styles2.PointsAccumulationContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('POINTS_ACCUMULATION', 'Points accumulation')), /*#__PURE__*/_react.default.createElement("p", null, t('AMOUNT_POINTS_ASSIGN', 'Amount of points to assign')), /*#__PURE__*/_react.default.createElement("span", null, t('VALUE', 'Value')), /*#__PURE__*/_react.default.createElement(_styles2.AccumulationInputWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)), /*#__PURE__*/_react.default.createElement("span", {
     className: "equal"
   }, "="), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "number",
+    type: "text",
     placeholder: "00 points",
     name: "accumulation_rate",
     value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.accumulation_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.accumulation_rate : (_walletData$accumulat = walletData === null || walletData === void 0 ? void 0 : walletData.accumulation_rate) !== null && _walletData$accumulat !== void 0 ? _walletData$accumulat : '',
-    onChange: handleChangeInput
+    onChange: handleChangeInput,
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   })))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     type: "submit",

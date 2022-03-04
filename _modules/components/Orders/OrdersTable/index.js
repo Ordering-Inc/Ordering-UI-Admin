@@ -25,6 +25,8 @@ var _DriverSelector = require("../DriverSelector");
 
 var _Shared = require("../../Shared");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -323,9 +325,8 @@ var OrdersTable = function OrdersTable(props) {
     isSelectedOrders: isSelectedOrders,
     noScroll: isTourOpen && currentTourStep === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
-    className: "orders_table",
-    isSelectedOrders: isSelectedOrders
-  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
+    className: "orders_table"
+  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
     className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'orderNo small' : 'orderNo'
   }, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
     isChecked: !orderList.loading && isAllChecked,
@@ -374,7 +375,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "statusInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -408,7 +409,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "driverInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, {
       className: "d-flex align-items-center"
@@ -420,17 +421,17 @@ var OrdersTable = function OrdersTable(props) {
       style: {
         margin: '10px'
       }
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryType) && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryType) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderType"
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 35,
       height: 35
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderStatusTitle"
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusSelector, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100,
       height: 30
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "logistic"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -440,7 +441,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "attempts"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -450,7 +451,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "priority"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -460,7 +461,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
-    })))), /*#__PURE__*/_react.default.createElement("td", {
+    })))), !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderPrice"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -477,7 +478,6 @@ var OrdersTable = function OrdersTable(props) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i,
       className: parseInt(orderDetailId) === order.id ? 'active' : '',
-      isCustomStyle: isSelectedOrders,
       onClick: function onClick(e) {
         return handleClickOrder(order, e);
       },
@@ -498,7 +498,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "date"
     }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "statusInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -520,7 +520,9 @@ var OrdersTable = function OrdersTable(props) {
       className: "info"
     }, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.cellphone)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && /*#__PURE__*/_react.default.createElement("td", null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, {
+    }, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.cellphone)))), isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, {
+      color: "#B1BCCC"
+    })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, {
       className: "driverInfo",
       noClick: isTourOpen && (currentTourStep === 0 || currentTourStep === 4)
     }, /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
@@ -530,7 +532,7 @@ var OrdersTable = function OrdersTable(props) {
       defaultValue: order !== null && order !== void 0 && order.driver_id ? order.driver_id : 'default',
       drivers: driversList.drivers,
       order: order
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "logistic"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -538,13 +540,13 @@ var OrdersTable = function OrdersTable(props) {
       className: "bold"
     }, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status), /*#__PURE__*/_react.default.createElement(_styles.LogisticStatusDot, {
       status: order === null || order === void 0 ? void 0 : order.logistic_status
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "attempts"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
     }, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, t('ATTEMPTS', 'Attempts')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.logistic_attemps))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("td", {
+    }, t('ATTEMPTS', 'Attempts')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.logistic_attemps))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "priority"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -552,7 +554,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "bold"
     }, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority), /*#__PURE__*/_react.default.createElement(_styles.PriorityDot, {
       priority: order === null || order === void 0 ? void 0 : order.priority
-    })))), /*#__PURE__*/_react.default.createElement("td", {
+    })))), !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderPrice"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"

@@ -90,9 +90,9 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
         document.getElementById('driver_lateral_bar').style.width = '100vw';
       } else {
         if (isOpenDriverOrderDetails && width >= 1000) {
-          document.getElementById('driver_lateral_bar').style.width = '1000px';
+          document.getElementById('driver_lateral_bar').style.width = '1100px';
         } else {
-          document.getElementById('driver_lateral_bar').style.width = '500px';
+          document.getElementById('driver_lateral_bar').style.width = '600px';
         }
       }
     }
@@ -109,7 +109,7 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
     if (width < 1000) return;
 
     if (isOpenDriverOrderDetails) {
-      document.getElementById('driver_lateral_bar').style.width = '1000px';
+      document.getElementById('driver_lateral_bar').style.width = '1100px';
     } else {
       toggleMainContent();
     }

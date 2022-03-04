@@ -165,13 +165,13 @@ var Send = _styledComponents.default.form(_templateObject40 || (_templateObject4
 
 exports.Send = Send;
 
-var WrapperSendInput = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  box-sizing: border-box;\n\n  > input {\n    background-color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.secundary;
+var WrapperSendInput = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  box-sizing: border-box;\n\n  > input {\n    border: 1px solid ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
 });
 
 exports.WrapperSendInput = WrapperSendInput;
 
-var SendImage = _styledComponents.default.label(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  width: 25px;\n  height: 25px;\n  \n  position: absolute;\n  top: 10px;\n  right: 10px;\n\n  input {\n    display: none;\n  }\n\n  svg {\n    color: #CFD0D0;\n    width: 25px;\n    height: 25px;\n    cursor: pointer;\n  }\n"])));
+var SendImage = _styledComponents.default.label(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  width: 25px;\n  height: 25px;\n  \n  position: absolute;\n  top: 10px;\n  right: 10px;\n\n  input {\n    display: none;\n  }\n\n  svg {\n    color: #B1BCCC;\n    font-size: 20px;\n    cursor: pointer;\n  }\n"])));
 
 exports.SendImage = SendImage;
 

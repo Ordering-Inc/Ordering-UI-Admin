@@ -449,7 +449,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       name: "preselected",
       className: subOption !== null && subOption !== void 0 && subOption.preselected ? 'checked default' : 'default'
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      checked: subOption === null || subOption === void 0 ? void 0 : subOption.preselected,
+      defaultChecked: (subOption === null || subOption === void 0 ? void 0 : subOption.preselected) || false,
       id: "allow_suboption_quantity",
       onClick: function onClick(e) {
         return handleChangeDefaultSuboption(subOption.id);

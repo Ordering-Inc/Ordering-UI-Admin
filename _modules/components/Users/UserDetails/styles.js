@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.VerifiedItem = exports.UserName = exports.SavedPlaces = exports.PersonalizationWrapper = exports.DetailsHeader = void 0;
+exports.VerifiedItem = exports.UserName = exports.SavedPlaces = exports.PersonalizationWrapper = exports.OrdersWrapper = exports.DetailsHeader = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -50,3 +50,9 @@ exports.SavedPlaces = SavedPlaces;
 var PersonalizationWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  height: calc(100% - 60px);\n  > div {\n    padding: 35px 0px 25px;\n  }\n"])));
 
 exports.PersonalizationWrapper = PersonalizationWrapper;
+
+var OrdersWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  #orderTable {\n    border-top: 1px solid ", ";\n    table {\n      min-width: initial;\n      width: 100%;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
+
+exports.OrdersWrapper = OrdersWrapper;

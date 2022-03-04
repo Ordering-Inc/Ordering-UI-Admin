@@ -94,7 +94,7 @@ var BusinessNameWrapper = _styledComponents.default.div(_templateObject17 || (_t
 
 exports.BusinessNameWrapper = BusinessNameWrapper;
 
-var Breadcrumb = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  font-size: 12px;\n  color: ", ";\n\n  span {\n    &.active {\n      color: ", ";\n    }\n    &.business {\n      cursor: pointer;\n    }\n  }\n\n  svg {\n    margin: 0 9px;\n  }\n"])), function (props) {
+var Breadcrumb = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  font-size: 12px;\n  color: ", ";\n\n  span {\n    &.business {\n      color: ", ";\n      cursor: pointer;\n    }\n  }\n\n  svg {\n    margin: 0 9px;\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.primary;

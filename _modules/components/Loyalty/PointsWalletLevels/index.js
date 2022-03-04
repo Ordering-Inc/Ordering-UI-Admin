@@ -170,6 +170,11 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       autoComplete: "off",
       onChange: function onChange(e) {
         return handleUpdateLevel(e, level === null || level === void 0 ? void 0 : level.id);
+      },
+      onKeyPress: function onKeyPress(e) {
+        if (!/^[0-9.]$/.test(e.key)) {
+          e.preventDefault();
+        }
       }
     })), /*#__PURE__*/_react.default.createElement(_styles2.PointsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
       value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change7 = editFormState.changes) === null || _editFormState$change7 === void 0 ? void 0 : _editFormState$change7.id) === level.id && typeof (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change8 = editFormState.changes) === null || _editFormState$change8 === void 0 ? void 0 : _editFormState$change8.minimum_points) !== 'undefined' ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change9 = editFormState.changes) === null || _editFormState$change9 === void 0 ? void 0 : _editFormState$change9.minimum_points : (_level$minimum_points = level.minimum_points) !== null && _level$minimum_points !== void 0 ? _level$minimum_points : '',
@@ -178,6 +183,11 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       autoComplete: "off",
       onChange: function onChange(e) {
         return handleUpdateLevel(e, level === null || level === void 0 ? void 0 : level.id);
+      },
+      onKeyPress: function onKeyPress(e) {
+        if (!/^[0-9.]$/.test(e.key)) {
+          e.preventDefault();
+        }
       }
     })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change10 = editFormState.changes) === null || _editFormState$change10 === void 0 ? void 0 : _editFormState$change10.id) === level.id ? /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
       color: "primary",
@@ -204,23 +214,33 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       return handleChangeInput(e);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.LastWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "number",
+    type: "text",
     name: "accumulation_rate",
     autoComplete: "off",
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accumulation_rate) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
-    placeholder: "0 days"
+    placeholder: "0 days",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.PointsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "number",
+    type: "text",
     name: "minimum_points",
     autoComplete: "off",
     defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.minimum_points) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
-    placeholder: "0 points"
+    placeholder: "0 points",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary",
     type: "submit"

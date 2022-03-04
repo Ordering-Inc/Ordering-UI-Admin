@@ -61,6 +61,13 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
       setCache = _useState2[1];
 
   var hotTableRef = (0, _react.useRef)(null);
+
+  var productIdColumnRenderer = function productIdColumnRenderer(instance, td, row, col, prop, value, cellProperties) {
+    if (value !== null) {
+      td.innerHTML = '<span class="product-id">' + value + '</span>';
+    }
+  };
+
   var settings = {
     // data: hotTableData,
     licenseKey: 'non-commercial-and-evaluation',
@@ -127,6 +134,10 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
         if (visualColIndex === 0) {
           cellProperties.readOnly = true;
         }
+      }
+
+      if (isBusinessProducts && column === 0) {
+        cellProperties.renderer = productIdColumnRenderer;
       }
 
       return cellProperties;

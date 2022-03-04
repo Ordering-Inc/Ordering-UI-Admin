@@ -11,10 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
-
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _reactBootstrap = require("react-bootstrap");
 
 var _styledComponents = require("styled-components");
@@ -29,9 +25,9 @@ var _BusinessPromotionGeneralForm = require("../BusinessPromotionGeneralForm");
 
 var _BusinessPromotionCustomFields = require("../BusinessPromotionCustomFields");
 
-var _styles2 = require("./styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -61,7 +57,9 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
       promotionListState = props.promotionListState,
       handleChangePromotionActiveState = props.handleChangePromotionActiveState,
       handleDeletePromotion = props.handleDeletePromotion,
-      handleSuccessUpdate = props.handleSuccessUpdate;
+      handleSuccessUpdate = props.handleSuccessUpdate,
+      isSuccessDeleted = props.isSuccessDeleted,
+      setIsSuccessDeleted = props.setIsSuccessDeleted;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -81,7 +79,7 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
       isShowForm = _useState2[0],
       setIsShowForm = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
       curPromotion = _useState4[0],
       setCurPromotion = _useState4[1];
@@ -91,16 +89,9 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
       selectedTab = _useState6[0],
       setSelectedTab = _useState6[1];
 
-  var _useState7 = (0, _react.useState)({
-    open: false,
-    content: null,
-    handleOnAccept: null
-  }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      confirm = _useState8[0],
-      setConfirm = _useState8[1];
-
-  var handleOpenForm = function handleOpenForm(promotion) {
+  var handleOpenForm = function handleOpenForm(e, promotion) {
+    var inValid = e.target.closest('.promotion-checkbox');
+    if (inValid) return;
     setCurPromotion(promotion);
     setSelectedTab('general');
     setIsShowForm(true);
@@ -111,59 +102,47 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
     setIsShowForm(false);
     setCurPromotion(null);
     setIsExtendExtraOpen(false);
+    setIsSuccessDeleted(false);
   };
 
-  var handleDeleteClick = function handleDeleteClick(id) {
-    setConfirm({
-      open: true,
-      content: t('QUESTION_DELETE_COUPON', 'Are you sure that you want to delete this coupon?'),
-      handleOnAccept: function handleOnAccept() {
-        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
-          open: false
-        }));
-        handleDeletePromotion(id);
-      }
-    });
-  };
-
+  (0, _react.useEffect)(function () {
+    if (!isSuccessDeleted) return;
+    handleCloseForm();
+  }, [isSuccessDeleted]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessPromotionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PROMOTIONS', 'Promotions')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
-    onClick: function onClick() {
-      return handleOpenForm({});
+    onClick: function onClick(e) {
+      return handleOpenForm(e, {});
     }
-  }, t('ADD_PROMOTION', 'Add promotion'))), /*#__PURE__*/_react.default.createElement(_styles2.PromotionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PROMOTIONS', 'Promotions')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", null, t('DATES_RANGE', 'Date range')), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ACTIONS', 'Actions')))))), promotionListState.promotions.map(function (promotion) {
-    return /*#__PURE__*/_react.default.createElement("tbody", {
-      key: promotion.id
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionItem, null, /*#__PURE__*/_react.default.createElement("span", null, promotion === null || promotion === void 0 ? void 0 : promotion.name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionItem, null, (promotion === null || promotion === void 0 ? void 0 : promotion.type) === 1 ? t('DISCOUNT', 'Discount') : t('COUPON', 'Coupon'))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionItem, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, parseDate(promotion === null || promotion === void 0 ? void 0 : promotion.start, {
+  }, t('ADD_PROMOTION', 'Add promotion'))), /*#__PURE__*/_react.default.createElement(_styles2.PromotionsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PROMOTIONS', 'Promotions')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", null, t('DATES_RANGE', 'Date range')))), promotionListState.promotions.map(function (promotion) {
+    var _theme$images$dummies;
+
+    return /*#__PURE__*/_react.default.createElement(_styles2.PromotionTbody, {
+      key: promotion.id,
+      active: promotion.id === (curPromotion === null || curPromotion === void 0 ? void 0 : curPromotion.id),
+      onClick: function onClick(e) {
+        return handleOpenForm(e, promotion);
+      }
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+      className: "promotion-checkbox",
+      defaultChecked: promotion === null || promotion === void 0 ? void 0 : promotion.enabled,
+      onChange: function onChange(e) {
+        return handleChangePromotionActiveState(e.target.checked, promotion === null || promotion === void 0 ? void 0 : promotion.id);
+      }
+    }), /*#__PURE__*/_react.default.createElement("img", {
+      src: promotion.image || ((_theme$images$dummies = theme.images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.promotionDummy),
+      alt: "promotion"
+    }), /*#__PURE__*/_react.default.createElement("span", null, promotion === null || promotion === void 0 ? void 0 : promotion.name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionTypeItem, null, (promotion === null || promotion === void 0 ? void 0 : promotion.type) === 1 ? t('DISCOUNT', 'Discount') : t('COUPON', 'Coupon'))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionDateItem, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, parseDate(promotion === null || promotion === void 0 ? void 0 : promotion.start, {
       utc: false,
       outputFormat: 'YYYY-MM-DD'
     })), /*#__PURE__*/_react.default.createElement("p", null, parseDate(promotion === null || promotion === void 0 ? void 0 : promotion.end, {
       utc: false,
       outputFormat: 'YYYY-MM-DD'
-    }))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
-      className: "business_enable_control"
-    }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-      defaultChecked: promotion === null || promotion === void 0 ? void 0 : promotion.enabled,
-      onChange: function onChange(enabled) {
-        return handleChangePromotionActiveState(enabled, promotion === null || promotion === void 0 ? void 0 : promotion.id);
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.DropdownWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null),
-      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleOpenForm(promotion);
-      }
-    }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleDeleteClick(promotion === null || promotion === void 0 ? void 0 : promotion.id);
-      }
-    }, t('DELETE', 'Delete'))))))));
+    }))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)))));
   })), /*#__PURE__*/_react.default.createElement(_styles2.AddNewPromotionText, {
-    onClick: function onClick() {
-      return handleOpenForm({});
+    onClick: function onClick(e) {
+      return handleOpenForm(e, {});
     }
   }, t('ADD_NEW_PROMOTION', 'Add new promotion'))), isShowForm && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(BusinessPromotion, {
     isCloseButtonShow: true,
@@ -171,7 +150,7 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
     selectedTab: selectedTab,
     setSelectedTab: setSelectedTab,
     handleCloseForm: handleCloseForm,
-    handleChangePromotionActiveState: handleChangePromotionActiveState
+    handleDeletePromotion: handleDeletePromotion
   }, selectedTab === 'general' && /*#__PURE__*/_react.default.createElement(_BusinessPromotionGeneralForm.BusinessPromotionGeneralForm, {
     promotion: curPromotion,
     business: business,
@@ -191,7 +170,7 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
     selectedTab: selectedTab,
     setSelectedTab: setSelectedTab,
     handleCloseForm: handleCloseForm,
-    handleChangePromotionActiveState: handleChangePromotionActiveState
+    handleDeletePromotion: handleDeletePromotion
   }, selectedTab === 'general' && /*#__PURE__*/_react.default.createElement(_BusinessPromotionGeneralForm.BusinessPromotionGeneralForm, {
     promotion: curPromotion,
     business: business,
@@ -200,7 +179,72 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
   }), selectedTab === 'custom' && /*#__PURE__*/_react.default.createElement(_BusinessPromotionCustomFields.BusinessPromotionCustomFields, {
     businessId: business === null || business === void 0 ? void 0 : business.id,
     offerId: curPromotion === null || curPromotion === void 0 ? void 0 : curPromotion.id
-  })))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+  })))));
+};
+
+var BusinessPromotion = function BusinessPromotion(props) {
+  var isCloseButtonShow = props.isCloseButtonShow,
+      curPromotion = props.curPromotion,
+      selectedTab = props.selectedTab,
+      setSelectedTab = props.setSelectedTab,
+      handleCloseForm = props.handleCloseForm,
+      handleDeletePromotion = props.handleDeletePromotion;
+  var theme = (0, _styledComponents.useTheme)();
+
+  var _useLanguage3 = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
+
+  var _useState7 = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      confirm = _useState8[0],
+      setConfirm = _useState8[1];
+
+  var handleDeleteClick = function handleDeleteClick(id) {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_COUPON', 'Are you sure that you want to delete this coupon?'),
+      handleOnAccept: function handleOnAccept() {
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+        handleDeletePromotion(curPromotion === null || curPromotion === void 0 ? void 0 : curPromotion.id);
+      }
+    });
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionEditFormContainer, null, isCloseButtonShow && /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return handleCloseForm();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), Object.keys(curPromotion).length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.EditHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.EditTitleHeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, curPromotion === null || curPromotion === void 0 ? void 0 : curPromotion.name)), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleDeleteClick();
+    }
+  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles2.OptionTabsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerTabsContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.AutoScroll, {
+    innerScroll: true,
+    scrollId: "promotion_edit"
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: selectedTab === 'general',
+    onClick: function onClick() {
+      return setSelectedTab('general');
+    }
+  }, t('GENERAL')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: selectedTab === 'custom',
+    onClick: function onClick() {
+      return setSelectedTab('custom');
+    }
+  }, t('CUSTOM_FIELDS', 'Custom fields')))))), props.children), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+    width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -218,44 +262,6 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }));
-};
-
-var BusinessPromotion = function BusinessPromotion(props) {
-  var isCloseButtonShow = props.isCloseButtonShow,
-      curPromotion = props.curPromotion,
-      selectedTab = props.selectedTab,
-      setSelectedTab = props.setSelectedTab,
-      handleCloseForm = props.handleCloseForm,
-      handleChangePromotionActiveState = props.handleChangePromotionActiveState;
-
-  var _useLanguage3 = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
-      t = _useLanguage4[1];
-
-  return /*#__PURE__*/_react.default.createElement(_styles2.PromotionEditFormContainer, null, isCloseButtonShow && /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    color: "black",
-    onClick: function onClick() {
-      return handleCloseForm();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), Object.keys(curPromotion).length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.EditHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.EditTitleHeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, curPromotion === null || curPromotion === void 0 ? void 0 : curPromotion.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: curPromotion === null || curPromotion === void 0 ? void 0 : curPromotion.enabled,
-    onChange: function onChange(enabled) {
-      return handleChangePromotionActiveState(enabled, curPromotion === null || curPromotion === void 0 ? void 0 : curPromotion.id);
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.OptionTabsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerTabsContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.AutoScroll, {
-    innerScroll: true,
-    scrollId: "promotion_edit"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
-    active: selectedTab === 'general',
-    onClick: function onClick() {
-      return setSelectedTab('general');
-    }
-  }, t('GENERAL')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
-    active: selectedTab === 'custom',
-    onClick: function onClick() {
-      return setSelectedTab('custom');
-    }
-  }, t('CUSTOM_FIELDS', 'Custom fields')))))), props.children);
 };
 
 var BusinessPromotionList = function BusinessPromotionList(props) {

@@ -19,6 +19,8 @@ var _BusinessSharedMenuProductDetails = require("../BusinessSharedMenuProductDet
 
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -97,12 +99,14 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
     var _product$name;
 
     return (_product$name = product.name) === null || _product$name === void 0 ? void 0 : _product$name.toLowerCase().includes(searchValue);
-  }).map(function (product) {
+  }).map(function (product, index) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ProductItem, {
       key: product.id,
+      isBorderTop: index === 0,
       onClick: function onClick(e) {
         return handleOpenProduct(e, product);
-      }
+      },
+      active: product.id === (currentProduct === null || currentProduct === void 0 ? void 0 : currentProduct.id)
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
       className: "product_checkbox",
       defaultChecked: product.enabled,
@@ -111,7 +115,7 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
           enabled: e.target.checked
         });
       }
-    }), /*#__PURE__*/_react.default.createElement("span", null, product.name));
+    }), /*#__PURE__*/_react.default.createElement("span", null, product.name), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   }))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isOpenDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     isBorderShow: true,
     sidebarId: "shared_product_details",

@@ -15,21 +15,33 @@ var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiC
 
 var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
 
-var _MdcClose = _interopRequireDefault(require("@meronex/icons/mdc/MdcClose"));
-
 var _styles = require("../../../styles");
 
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 
-var _styles2 = require("./styles");
+var _styles2 = require("../BusinessMenu/styles");
 
-var _styles3 = require("../BusinessMenu/styles");
+var _styledComponents = require("styled-components");
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _reactBootstrap = require("react-bootstrap");
+
+var _Shared = require("../../Shared");
+
+var _styles3 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -52,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PaymentOption = function PaymentOption(props) {
-  var _sitesState$sites, _businessPaymethod$pa, _sitesState$sites3, _sitesState$sites4;
+  var _sitesState$sites, _businessPaymethod$pa2, _sitesState$sites3, _sitesState$sites4;
 
   var open = props.open,
       onClose = props.onClose,
@@ -63,7 +75,9 @@ var PaymentOption = function PaymentOption(props) {
       cleanChangesState = props.cleanChangesState,
       actionState = props.actionState,
       handleSaveClick = props.handleSaveClick,
-      businessPaymethod = props.businessPaymethod;
+      businessPaymethod = props.businessPaymethod,
+      handleDeletePaymethod = props.handleDeletePaymethod;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -81,6 +95,15 @@ var PaymentOption = function PaymentOption(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       paymentTabs = _useState4[0],
       setPaymentTabs = _useState4[1];
+
+  var _useState5 = (0, _react.useState)({
+    open: false,
+    content: null,
+    handleOnAccept: null
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
 
   var setPaymethodInfo = function setPaymethodInfo(values) {
     var _ref, _changesState$values$, _businessPaymethod$va;
@@ -102,7 +125,21 @@ var PaymentOption = function PaymentOption(props) {
     }
 
     setIsMenuOpen(value);
-    document.getElementById('payment_method_option').style.width = value ? width > 1000 ? '500px' : '100%' : '0';
+  };
+
+  var onClickDeletePaymethod = function onClickDeletePaymethod() {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('PAYMETHOD_ID', 'Paymethod')),
+      handleOnAccept: function handleOnAccept() {
+        var _businessPaymethod$pa;
+
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+        handleDeletePaymethod(businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa = businessPaymethod.paymethod) === null || _businessPaymethod$pa === void 0 ? void 0 : _businessPaymethod$pa.id);
+      }
+    });
   };
 
   (0, _react.useEffect)(function () {
@@ -125,21 +162,31 @@ var PaymentOption = function PaymentOption(props) {
   }, [sitesState]);
   (0, _react.useEffect)(function () {
     cleanChangesState({
-      sandbox: businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox
+      sandbox: businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox,
+      allowed_order_types: (businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) || [1, 2, 3, 4, 5]
     });
-  }, [businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
+  }, [businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.id, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles3.Container, {
     id: "payment_method_option"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa = businessPaymethod.paymethod) === null || _businessPaymethod$pa === void 0 ? void 0 : _businessPaymethod$pa.name), /*#__PURE__*/_react.default.createElement(_styles2.CloseButton, null, /*#__PURE__*/_react.default.createElement(_MdcClose.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles3.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa2 = businessPaymethod.paymethod) === null || _businessPaymethod$pa2 === void 0 ? void 0 : _businessPaymethod$pa2.name), /*#__PURE__*/_react.default.createElement(_styles3.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return onClickDeletePaymethod();
+    }
+  }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_styles3.CloseButton, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return onClose();
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles3.TabsContainer, null, (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: paymentTabs === 0,
     onClick: function onClick() {
       return setPaymentTabs(0);
     }
-  }, t('CHANNELS', 'Channels')), /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
+  }, t('CHANNELS', 'Channels')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: paymentTabs === 1,
     onClick: function onClick() {
       return setPaymentTabs(1);
@@ -147,7 +194,7 @@ var PaymentOption = function PaymentOption(props) {
   }, t('ORDER_TYPE', 'Order type'))), paymentTabs === 0 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites4 = sitesState.sites) === null || _sitesState$sites4 === void 0 ? void 0 : _sitesState$sites4.length) > 0 && (sitesState === null || sitesState === void 0 ? void 0 : sitesState.sites.map(function (site) {
     var _ref2, _changesState$sites, _businessPaymethod$si;
 
-    return /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
+    return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: site.id,
       onClick: function onClick() {
         return setPaymethodInfo({
@@ -159,11 +206,11 @@ var PaymentOption = function PaymentOption(props) {
       return s.id;
     })) !== null && _ref2 !== void 0 && _ref2.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.TabOptionName, null, site.name));
+    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, site.name));
   })), paymentTabs === 1 && orderTypes.map(function (type) {
     var _ref3, _changesState$allowed;
 
-    return /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
+    return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: type.value,
       onClick: function onClick() {
         return setPaymethodInfo({
@@ -173,7 +220,7 @@ var PaymentOption = function PaymentOption(props) {
       }
     }, (_ref3 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref3 !== void 0 && _ref3.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.TabOptionName, null, type.text));
+    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, type.text));
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "5px",
     color: "primary",
@@ -181,7 +228,25 @@ var PaymentOption = function PaymentOption(props) {
     onClick: function onClick() {
       return handleSaveClick(businessPaymethod.id);
     }
-  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')));
+  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+    width: "700px",
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
+  }));
 };
 
 exports.PaymentOption = PaymentOption;

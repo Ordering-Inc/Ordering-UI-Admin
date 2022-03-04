@@ -19,6 +19,8 @@ var _useWindowSize2 = require("../../../hooks/useWindowSize");
 
 var _styles = require("../../../styles");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -157,9 +159,10 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     onSearch: function onSearch(val) {
       return setSearchValue(val);
     }
-  })), menuList.map(function (menu) {
+  })), menuList.map(function (menu, index) {
     return /*#__PURE__*/_react.default.createElement(_styles2.MeunItem, {
       key: menu.id,
+      isBorderTop: index === 0,
       active: menu.id === (currentMenu === null || currentMenu === void 0 ? void 0 : currentMenu.id),
       onClick: function onClick(e) {
         return handleOpenEdit(e, menu);
@@ -172,7 +175,7 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       onChange: function onChange(e) {
         return handleChangeBusinessMenuActiveState(menu === null || menu === void 0 ? void 0 : menu.id, e.target.checked);
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.MenuName, null, menu === null || menu === void 0 ? void 0 : menu.name));
+    })), /*#__PURE__*/_react.default.createElement(_styles2.MenuName, null, menu === null || menu === void 0 ? void 0 : menu.name), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   }), !isSelectedSharedMenus && /*#__PURE__*/_react.default.createElement(_styles2.AddMenuButton, {
     onClick: function onClick() {
       return handleOpenOptions('option', {});
