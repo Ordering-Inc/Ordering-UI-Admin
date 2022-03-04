@@ -320,12 +320,16 @@ const ProductExtraOptionDetailsUI = (props) => {
                     />
                   )}
                   {conditionalOptionId && (
-                    <Select
-                      options={conditionalSubOptions}
-                      defaultValue={conditionalSubOptionId}
-                      placeholder={t('SELECT_CHOICE', 'Select choice')}
-                      onChange={val => handleChangeConditionalSubOption(val)}
-                    />
+                    conditionalSubOptions.length > 0 ? (
+                      <Select
+                        options={conditionalSubOptions}
+                        defaultValue={conditionalSubOptionId}
+                        placeholder={t('SELECT_CHOICE', 'Select choice')}
+                        onChange={val => handleChangeConditionalSubOption(val)}
+                      />
+                    ) : (
+                      <p>{t('NO_CHOICES_AVAILABLE', 'No choices available')}</p>
+                    )
                   )}
                 </SelectboxGroup>
               )}
@@ -605,6 +609,8 @@ const ProductExtraOptionDetailsUI = (props) => {
       {openModal?.option && (
         <Modal
           width='70%'
+          overflow='initial'
+          padding='0px'
           open={openModal?.option}
           onClose={() => setOpenModal({ ...openModal, option: false })}
         >

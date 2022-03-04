@@ -41,6 +41,7 @@ const ModalUI = (props) => {
       height={props.height}
       width={props.width}
       padding={props.padding}
+      overflow={props.overflow}
       isTransparent={isTransparent}
     >
       {!hideCloseDefault && (
