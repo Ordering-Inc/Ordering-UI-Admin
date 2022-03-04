@@ -406,6 +406,11 @@ export const SelectboxGroup = styled.div`
     }
   }
 
+  > p {
+    font-size: 14px;
+    margin: 0;
+  }
+
   @media (min-width: 1200px) {
     max-width: initial;
   }

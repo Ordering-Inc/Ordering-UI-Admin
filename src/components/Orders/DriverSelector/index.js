@@ -164,6 +164,7 @@ const DriverSelectorUI = (props) => {
             options={driversLoading}
             optionInnerMargin='10px'
             optionInnerMaxHeight='150px'
+            className='driver-select'
           />
         )}
       </>
@@ -183,6 +184,7 @@ const DriverSelectorUI = (props) => {
                 searchBarPlaceholder={t('SEARCH', 'Search')}
                 searchBarIsCustomLayout
                 handleChangeSearch={handleSearch}
+                className='driver-select'
               />
             ) : (
               <Select
@@ -194,6 +196,7 @@ const DriverSelectorUI = (props) => {
                 searchBarPlaceholder={t('SEARCH', 'Search')}
                 searchBarIsCustomLayout
                 handleChangeSearch={handleSearch}
+                className='driver-select'
               />
             )}
           </>
@@ -205,6 +208,7 @@ const DriverSelectorUI = (props) => {
               options={driversLoading}
               optionInnerMargin='10px'
               optionInnerMaxHeight='200px'
+              className='driver-select'
             />
           </>
         )}

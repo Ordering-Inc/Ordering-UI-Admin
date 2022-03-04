@@ -216,10 +216,16 @@ export const OptionItem = styled.div`
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
-  ${props => props.theme?.rtl ? css`
-    padding-left: 40px;
-  ` : css`
-    padding-right: 40px;
+  ${({ isHeader }) => !isHeader && css`
+    cursor: pointer;
+    &:hover {
+      background-color: ${props => props.theme.colors.lightPrimary};
+    }
+  `}
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
   `}
 `
 export const MinimumPurchase = styled.div`
@@ -239,4 +245,15 @@ export const MaxPurchase = styled.div`
   ` : css`
     font-size: 14px;
   `}
+`
+export const ArrowWrpper = styled.div`
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  svg {
+    font-size: 13px;
+    color: ${props => props.theme.colors.secundaryLight};
+    margin: 0 5px;
+  }
 `
