@@ -4,6 +4,7 @@ import { useLanguage, useSession, OrdersManage as OrdersManageController } from 
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
+import { Alert } from '../../Shared'
 import {
   OrdersListContainer,
   OrdersContent,
@@ -56,6 +57,7 @@ const OrdersManagerUI = (props) => {
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(0)
   const [isTourFlag, setIsTourFlag] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const handleBackRedirect = () => {
@@ -67,6 +69,13 @@ const OrdersManagerUI = (props) => {
     } else {
       handleCustomOrderDetail && handleCustomOrderDetail(false)
     }
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
   const handleOpenOrderDetail = (order, isKeydown = false) => {
@@ -93,6 +102,15 @@ const OrdersManagerUI = (props) => {
   }
 
   const handleOpenTour = () => {
+    const tourElement = document.querySelector('[data-tour="tour_start"]')
+    if (!tourElement) {
+      setAlertState({
+        open: true,
+        content: t('ONE_ORDER_IS_REQUIRED', 'One order is required')
+      })
+      return
+    }
+
     const orderElement = document.getElementById('orderTable')
     if (orderElement) orderElement.scrollTo(0, 0)
     setCurrentTourStep(0)
@@ -231,6 +249,22 @@ const OrdersManagerUI = (props) => {
           detailsOrder={detailsOrder}
         />
       )}
+      <Alert
+        title={t('ORDERS_MANAGER', 'Orders manager')}
+        content={alertState.content}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+      <Alert
+        title={t('ORDERS_MANAGER', 'Orders manager')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
