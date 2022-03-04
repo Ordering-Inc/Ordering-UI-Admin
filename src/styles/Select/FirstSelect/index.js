@@ -32,7 +32,8 @@ export const Select = (props) => {
     searchValue,
     handleChangeSearch,
     searchBarIsCustomLayout,
-    searchBarPlaceholder
+    searchBarPlaceholder,
+    searchBarIsNotLazyLoad
   } = props
 
   const [open, setOpen] = useState(false)
@@ -123,7 +124,7 @@ export const Select = (props) => {
               className='search-bar-container'
             >
               <SearchBar
-                lazyLoad
+                lazyLoad={!searchBarIsNotLazyLoad}
                 isCustomLayout={searchBarIsCustomLayout}
                 search={searchValue}
                 onSearch={handleChangeSearch}

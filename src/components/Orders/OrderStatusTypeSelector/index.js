@@ -27,7 +27,7 @@ export const OrderStatusTypeSelector = (props) => {
   const [defaultOptionValue, setDefaultOptionValue] = useState('default')
   const [filteredOrderStatuses, setFilteredOrderStatuses] = useState([])
 
-  const placeholder = <PlaceholderTitle>{t('SELECT_STATUS', 'Select Status')}</PlaceholderTitle>
+  const placeholder = <PlaceholderTitle><p>{t('SELECT_STATUS', 'Select Status')}</p></PlaceholderTitle>
 
   const orderStatuses = [
     {
@@ -404,9 +404,10 @@ export const OrderStatusTypeSelector = (props) => {
         {isFirstSelect ? (
           <FirstSelect
             searchBarIsCustomLayout
+            searchBarIsNotLazyLoad
             searchBarPlaceholder={t('SEARCH', 'Search')}
             type={type}
-            placeholder={<Option noPadding={noPadding} isSubTitle>{t('CHANGE_STATUS', 'Change Status')}</Option>}
+            placeholder={<Option noPadding={noPadding} isSubTitle><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>}
             optionInnerMaxHeight='50vh'
             noSelected={noSelected}
             defaultValue={defaultOptionValue}
@@ -419,9 +420,10 @@ export const OrderStatusTypeSelector = (props) => {
         ) : (
           <Select
             searchBarIsCustomLayout
+            searchBarIsNotLazyLoad
             searchBarPlaceholder={t('SEARCH', 'Search')}
             type={type}
-            placeholder={<Option noPadding={noPadding} isSubTitle>{t('CHANGE_STATUS', 'Change Status')}</Option>}
+            placeholder={<Option noPadding={noPadding} isSubTitle><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>}
             optionInnerMaxHeight='50vh'
             noSelected={noSelected}
             defaultValue={defaultOptionValue}
