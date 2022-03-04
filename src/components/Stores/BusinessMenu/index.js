@@ -4,6 +4,7 @@ import { BusinessMenuOptions } from '../BusinessMenuOptions'
 import { Confirm, Modal, SearchBar } from '../../Shared'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Checkbox } from '../../../styles'
+import { ChevronRight } from 'react-bootstrap-icons'
 
 import {
   MainContainer,
@@ -16,8 +17,7 @@ import {
   AddMenuButton,
   TabsContainer,
   Tab,
-  SearchBarWrapper,
-  SelectButtonGroup
+  SearchBarWrapper
 } from './styles'
 
 const BusinessMenuUI = (props) => {
@@ -124,9 +124,10 @@ const BusinessMenuUI = (props) => {
           </Button>
         </SelectButtonGroup> */}
 
-        {menuList.map(menu => (
+        {menuList.map((menu, index) => (
           <MeunItem
             key={menu.id}
+            isBorderTop={index === 0}
             active={menu.id === currentMenu?.id}
             onClick={(e) => handleOpenEdit(e, menu)}
           >
@@ -140,6 +141,7 @@ const BusinessMenuUI = (props) => {
               />
             </CheckboxWrapper>
             <MenuName>{menu?.name}</MenuName>
+            <ChevronRight />
           </MeunItem>
         ))}
         {!isSelectedSharedMenus && (

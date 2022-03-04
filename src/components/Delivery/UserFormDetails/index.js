@@ -298,17 +298,15 @@ export const UserFormDetailsUI = (props) => {
               </DriverZoneRestrictionWrapper>
             )}
             <ActionsForm>
-              {((formState && Object.keys(formState?.changes).length > 0) || formState?.loading) && (
-                <Button
-                  id='form-btn'
-                  color='primary'
-                  borderRadius='5px'
-                  type='submit'
-                  disabled={formState.loading}
-                >
-                  {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
-                </Button>
-              )}
+              <Button
+                id='form-btn'
+                color='primary'
+                borderRadius='5px'
+                type='submit'
+                disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+              >
+                {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
+              </Button>
             </ActionsForm>
           </>
         ) : (

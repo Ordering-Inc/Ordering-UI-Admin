@@ -13,7 +13,7 @@ import {
   Headset as HeadsetIcon,
   Truck,
   GraphUp,
-  WindowDock,
+  // WindowDock,
   Award,
   BoxArrowUpRight
 } from 'react-bootstrap-icons'
@@ -70,19 +70,19 @@ export const SidebarMenu = (props) => {
       title: t('REWARDS_PROGRAMS', 'Rewards programs'),
       pageName: 'rewards_programs',
       url: '/loyalty/rewards-programs'
-    },
-    {
-      id: 2,
-      title: t('LOYALTY_LEVELS', 'Loyalty levels'),
-      pageName: 'loyalty_levels',
-      url: '/loyalty/levels'
-    },
-    {
-      id: 3,
-      title: t('REPORTS', 'Reports'),
-      pageName: 'loyalty_reports',
-      url: '/loyalty/reports'
     }
+    // {
+    //   id: 2,
+    //   title: t('LOYALTY_LEVELS', 'Loyalty levels'),
+    //   pageName: 'loyalty_levels',
+    //   url: '/loyalty/levels'
+    // },
+    // {
+    //   id: 3,
+    //   title: t('REPORTS', 'Reports'),
+    //   pageName: 'loyalty_reports',
+    //   url: '/loyalty/reports'
+    // }
   ]
 
   const storesSubMenus = [

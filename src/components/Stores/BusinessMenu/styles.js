@@ -47,9 +47,10 @@ export const Title = styled.h1`
 
 export const MeunItem = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 12px 0;
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
   user-select: none;
 
@@ -57,11 +58,21 @@ export const MeunItem = styled.div`
     background-color: ${props => props.theme.colors.lightPrimary};
   }
 
+  ${({ isBorderTop }) => isBorderTop && css`
+    border-top: 1px solid ${props => props.theme.colors.borderColor};
+  `}
+
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.lightPrimary};
     border-top: 1px solid ${props => props.theme.colors.primary};
     border-bottom: 1px solid ${props => props.theme.colors.primary};
   `}
+
+  > svg {
+    color: ${props => props.theme.colors.secundaryLight};
+    margin: 0 3px;
+    font-size: 13px;
+  }
 `
 
 export const MenuName = styled.span`

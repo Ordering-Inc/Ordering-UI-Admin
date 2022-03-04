@@ -24,6 +24,12 @@ const SpreadSheetEditor = (props) => {
 
   const hotTableRef = useRef(null)
 
+  const productIdColumnRenderer = (instance, td, row, col, prop, value, cellProperties) => {
+    if (value !== null) {
+      td.innerHTML = '<span class="product-id">' + value + '</span>'
+    }
+  }
+
   const settings = {
     // data: hotTableData,
     licenseKey: 'non-commercial-and-evaluation',
@@ -68,6 +74,9 @@ const SpreadSheetEditor = (props) => {
         if (visualColIndex === 0) {
           cellProperties.readOnly = true
         }
+      }
+      if (isBusinessProducts && column === 0) {
+        cellProperties.renderer = productIdColumnRenderer
       }
       return cellProperties
     },
