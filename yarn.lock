@@ -3008,9 +3008,9 @@ camelize@^1.0.0:
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
 
 caniuse-lite@^1.0.30001312:
-  version "1.0.30001312"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001312.tgz#e11eba4b87e24d22697dae05455d5aea28550d5f"
-  integrity sha512-Wiz1Psk2MEK0pX3rUzWaunLTZzqS2JYZFzNKqAiJGiuxIjRPLgV6+VDPOg6lQOUxmDwhTlh198JsTTi8Hzw6aQ==
+  version "1.0.30001313"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001313.tgz#a380b079db91621e1b7120895874e2fd62ed2e2f"
+  integrity sha512-rI1UN0koZUiKINjysQDuRi2VeSCce3bYJNmDcj3PIKREiAmjakugBul1QSkg/fPrlULYl6oWfGg3PbgOSY9X4Q==
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -6700,9 +6700,9 @@ jsoneditor-react@^3.1.1:
     prop-types "^15.7.2"
 
 jsoneditor@^9.3.0:
-  version "9.7.2"
-  resolved "https://registry.yarnpkg.com/jsoneditor/-/jsoneditor-9.7.2.tgz#882501a38e16f734ca0f530945f7ff5100d9c936"
-  integrity sha512-05xyjrlhbDgCzhIwvMeZRqEINe36eOOkleySFPoow+RwAziMFjpPAr7bkuSW/BHO0BMBKhkmvHGkxH0Kgh/+1A==
+  version "9.7.3"
+  resolved "https://registry.yarnpkg.com/jsoneditor/-/jsoneditor-9.7.3.tgz#ff55ac15069410702656e1830137c3b1c8a76e01"
+  integrity sha512-ft1dDXxJtmsG8EZX6WBv7M6KySmpbn4fU90rXlYXU5H21kbsZ0An34sv9S2BePtlBWlYcFTQ1+OIhB3uVUBebQ==
   dependencies:
     ace-builds "^1.4.14"
     ajv "^6.12.6"
@@ -7883,7 +7883,7 @@ optionator@^0.8.3:
 
 "ordering-components-admin@github:Ordering-Inc/ordering-components-admin#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/3a4895739be0a03a1b176b49e4ddfc905ce5ebfe"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/746823b45d8dcbfca09ce2dac392de30a9549f7f"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
