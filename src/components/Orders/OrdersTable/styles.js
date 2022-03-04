@@ -370,3 +370,28 @@ export const Timestatus = styled.div`
     background-color: #E63757;
   `}
 `
+export const Timer = styled.div`
+  p {
+    margin: 0px;
+    color: ${props => props.theme.colors?.lightGray};
+    font-size: 12px;
+  }
+
+  .bold {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${props => props.theme.colors?.headingColor};
+  }
+
+  .in_time{
+    color: #00D27A;
+  }
+
+  .at_risk {
+    color: #FFC700;
+  }
+  
+  .delayed {
+    color: #E63757;
+  }
+`

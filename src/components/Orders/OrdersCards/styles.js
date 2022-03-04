@@ -21,6 +21,13 @@ export const OrderCard = styled.div`
   border: 1px solid ${props => props.theme.colors?.secundary};
   margin-bottom: 20px;
   padding: 15px 20px;
+  padding-left: 25px;
+
+  ${props => props.theme?.rtl && css`
+    padding-left: 0px;
+    padding-right: 25px;
+ `}
+ 
 
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};
@@ -43,6 +50,11 @@ export const OrderCard = styled.div`
   }
 `
 
+export const CardHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 export const OrderHeader = styled.div`
   > div {
     display: flex;
@@ -56,6 +68,31 @@ export const OrderHeader = styled.div`
     font-size: 14px;
     margin-top: 5px;
     color: ${props => props.theme.colors.colorPage};
+  }
+`
+export const Timer = styled.div`
+  align-items: right;
+  p {
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .bold {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .in_time{
+    color: #00D27A;
+  }
+
+  .at_risk {
+    color: #FFC700;
+  }
+  
+  .delayed {
+    color: #E63757;
   }
 `
 
@@ -212,4 +249,25 @@ export const UnreadMessageCounter = styled.div`
   height: 24px;
   color: ${props => props.theme.colors.primary};
   padding: 0 10px;
+`
+export const Timestatus = styled.div`
+  position: absolute;
+  width: 4px;
+  height: 130px;
+  border-radius: 20px;
+  left: 10px;
+  top: 17px;
+  ${props => props.theme?.rtl && css`
+    left: unset;
+    right: 10px;
+ `}
+ ${({ timeState }) => timeState === 'in_time' && css`
+    background-color: #00D27A;
+  `}
+  ${({ timeState }) => timeState === 'at_risk' && css`
+    background-color: #FFC700;
+  `}
+  ${({ timeState }) => timeState === 'delayed' && css`
+    background-color: #E63757;
+  `}
 `

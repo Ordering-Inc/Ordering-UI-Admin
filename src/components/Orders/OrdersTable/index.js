@@ -28,7 +28,8 @@ import {
   StatusInfo,
   LogisticStatusDot,
   PriorityDot,
-  Timestatus
+  Timestatus,
+  Timer
 } from './styles'
 
 export const OrdersTable = (props) => {
@@ -50,14 +51,12 @@ export const OrdersTable = (props) => {
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parsePrice, parseDate, optimizeImage }] = useUtils()
-
+  const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
   const [isAllChecked, setIsAllChecked] = useState(false)
+  const [currentTime, setCurrentTime] = useState()
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }
-  const [currentTime, setCurrentTime] = useState()
-
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(pagination.from / pageSize)
     getPageOrders(pageSize, expectedPage)
@@ -120,19 +119,20 @@ export const OrdersTable = (props) => {
     const _delivery = order?.delivery_datetime_utc
     const _eta = order?.eta_time
     const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
-
-    const day = Math.floor(tagetedMin / 1440)
+    let day = Math.floor(tagetedMin / 1440)
     const restMinOfTargetedMin = tagetedMin - 1440 * day
-    const restHours = Math.floor(restMinOfTargetedMin / 60)
-    const restMins = restMinOfTargetedMin - 60 * restHours
-    const finalTaget = day + 'day  ' + restHours + ':' + restMins
+    let restHours = Math.floor(restMinOfTargetedMin / 60)
+    let restMins = restMinOfTargetedMin - 60 * restHours
 
+    if (order?.time_status === 'in_time' || order?.time_status === 'at_risk') day = Math.abs(day)
+    if (restHours < 10) restHours = ('0' + restHours)
+    if (restMins < 10) restMins = ('0' + restMins)
+    const finalTaget = day + 'day  ' + restHours + ':' + restMins
     return finalTaget
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('This will be called every 1 minutes')
       setCurrentTime(Date.now())
     }, 60000)
 
@@ -561,10 +561,10 @@ export const OrdersTable = (props) => {
                   )}
                   {allowColumns?.timer && (
                     <td className='timer'>
-                      <div className='info'>
+                      <Timer>
                         <p className='bold'>{t('TIMER', 'Timer')}</p>
-                        <p>{getDelayTime(order)}</p>
-                      </div>
+                        <p className={order?.time_status}>{getDelayTime(order)}</p>
+                      </Timer>
                     </td>
                   )}
                   <td className='orderPrice'>
@@ -573,7 +573,13 @@ export const OrdersTable = (props) => {
                         <p className='bold'>{parsePrice(order?.summary?.total)}</p>
                       )}
                       {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
-                        <TimgeAgo order={order} />
+                        <p>
+                          {
+                            order?.delivery_datetime_utc
+                              ? getTimeAgo(order?.delivery_datetime_utc)
+                              : getTimeAgo(order?.delivery_datetime, { utc: false })
+                          }
+                        </p>
                       )}
                     </div>
                   </td>
@@ -596,38 +602,5 @@ export const OrdersTable = (props) => {
         </WrapperPagination>
       )}
     </>
-  )
-}
-
-const TimgeAgo = (props) => {
-  const {
-    order
-  } = props
-  const [{ getTimeAgo }] = useUtils()
-
-  const [diffTime, setDiffTime] = useState(
-    order?.delivery_datetime_utc
-      ? getTimeAgo(order?.delivery_datetime_utc)
-      : getTimeAgo(order?.delivery_datetime, { utc: false })
-  )
-
-  useEffect(() => {
-    const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
-    if (deActive) return
-    const timer = setInterval(() => {
-      const diff = order?.delivery_datetime_utc
-        ? getTimeAgo(order?.delivery_datetime_utc)
-        : getTimeAgo(order?.delivery_datetime, { utc: false })
-      setDiffTime(diff)
-    }, 60 * 1000)
-    return () => {
-      clearInterval(timer)
-    }
-  }, [])
-
-  return (
-    <p>
-      {diffTime}
-    </p>
   )
 }
