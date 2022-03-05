@@ -18,7 +18,8 @@ import {
 export const RecoveryActionHeader = (props) => {
   const {
     searchValue,
-    handleChangeSearch
+    handleChangeSearch,
+    handleOpenDetail
   } = props
 
   const [, t] = useLanguage()
@@ -52,6 +53,7 @@ export const RecoveryActionHeader = (props) => {
           <Button
             borderRadius='8px'
             color='lightPrimary'
+            onClick={() => handleOpenDetail()}
           >
             {t('ADD_RECOVERY_ACTION', 'Add recovery action')}
           </Button>
