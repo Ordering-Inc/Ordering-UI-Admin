@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const ProdcutGalleryContainer = styled.div`
   width: 100%;
@@ -100,31 +101,52 @@ export const DropDownWrapper = styled.div`
     margin-left: 5px;
   `}
   button {
-    background: #F8F9FA !important;
+    display: flex;
+    background: transparent !important;
     border: none;
-    padding: 0px;
+    padding: 5px;
+    border-radius: 8px;
     svg {
       color: ${props => props.theme.colors.headingColor};
+      font-size: 20px;
     }
-
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
     &:after {
       display: none;
+    }
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundaryDarkContrast)} !important;
+    }
+  }
+
+  .show {
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
     }
   }
 
   > div {
     > div {
-      border: 1px solid #E9ECEF;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
       border-radius: 8px;
-
-      a:last-child {
-        color: #E63757;
+      .dropdown-item {
+        font-size: 12px;
+        color: ${props => props.theme.colors.headingColor};
+        padding: 7px 20px;
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
+      }
+      .dropdown-item:last-child {
+        color: ${props => props.theme.colors.danger};
       }
     }
-  }
-
-  .dropdown-item {
-    font-size: 14px;
   }
 `

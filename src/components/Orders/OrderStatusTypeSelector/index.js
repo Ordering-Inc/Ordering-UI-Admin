@@ -26,8 +26,9 @@ export const OrderStatusTypeSelector = (props) => {
   const [, t] = useLanguage()
   const [defaultOptionValue, setDefaultOptionValue] = useState('default')
   const [filteredOrderStatuses, setFilteredOrderStatuses] = useState([])
+  const [searchValue, setSearchValue] = useState(null)
 
-  const placeholder = <PlaceholderTitle>{t('SELECT_STATUS', 'Select Status')}</PlaceholderTitle>
+  const placeholder = <PlaceholderTitle><p>{t('SELECT_STATUS', 'Select Status')}</p></PlaceholderTitle>
 
   const orderStatuses = [
     {
@@ -384,6 +385,7 @@ export const OrderStatusTypeSelector = (props) => {
   }, [filterValues])
 
   const handleChangeSearch = (searchValue) => {
+    setSearchValue(searchValue)
     const _filteredOrderStatuses = [...orderStatuses?.filter(orderStatuse => orderStatuse?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
     setFilteredOrderStatuses(_filteredOrderStatuses)
   }
@@ -404,9 +406,10 @@ export const OrderStatusTypeSelector = (props) => {
         {isFirstSelect ? (
           <FirstSelect
             searchBarIsCustomLayout
+            searchBarIsNotLazyLoad
             searchBarPlaceholder={t('SEARCH', 'Search')}
             type={type}
-            placeholder={<Option noPadding={noPadding} isSubTitle>{t('CHANGE_STATUS', 'Change Status')}</Option>}
+            placeholder={<Option noPadding={noPadding} isSubTitle><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>}
             optionInnerMaxHeight='50vh'
             noSelected={noSelected}
             defaultValue={defaultOptionValue}
@@ -414,18 +417,21 @@ export const OrderStatusTypeSelector = (props) => {
             onChange={(orderStatus) => changeOrderStatus(orderStatus)}
             className='orderStatus'
             isShowSearchBar
+            searchValue={searchValue}
             handleChangeSearch={handleChangeSearch}
           />
         ) : (
           <Select
             searchBarIsCustomLayout
+            searchBarIsNotLazyLoad
             searchBarPlaceholder={t('SEARCH', 'Search')}
             type={type}
-            placeholder={<Option noPadding={noPadding} isSubTitle>{t('CHANGE_STATUS', 'Change Status')}</Option>}
+            placeholder={<Option noPadding={noPadding} isSubTitle><p>{t('CHANGE_STATUS', 'Change Status')}</p></Option>}
             optionInnerMaxHeight='50vh'
             noSelected={noSelected}
             defaultValue={defaultOptionValue}
             options={filteredOrderStatuses}
+            searchValue={searchValue}
             onChange={(orderStatus) => changeOrderStatus(orderStatus)}
             className='orderStatus'
           />
