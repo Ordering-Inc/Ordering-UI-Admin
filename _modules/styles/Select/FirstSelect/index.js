@@ -54,7 +54,8 @@ var Select = function Select(props) {
       searchValue = props.searchValue,
       handleChangeSearch = props.handleChangeSearch,
       searchBarIsCustomLayout = props.searchBarIsCustomLayout,
-      searchBarPlaceholder = props.searchBarPlaceholder;
+      searchBarPlaceholder = props.searchBarPlaceholder,
+      searchBarIsNotLazyLoad = props.searchBarIsNotLazyLoad;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -93,26 +94,25 @@ var Select = function Select(props) {
       var outsideDropdown = !((_dropdownReference$cu = dropdownReference.current) !== null && _dropdownReference$cu !== void 0 && _dropdownReference$cu.contains(e.target));
 
       if (outsideDropdown) {
+        if (isShowSearchBar) {
+          handleChangeSearch('');
+        }
+
         setOpen(false);
       }
     }
   };
 
   (0, _react.useEffect)(function () {
-    if (!open) {
-      if (isShowSearchBar) {
-        handleChangeSearch('');
-      }
-
-      return;
-    }
-
+    if (!open) return;
     document.addEventListener('click', closeSelect);
     return function () {
       return document.removeEventListener('click', closeSelect);
     };
   }, [open]);
   (0, _react.useEffect)(function () {
+    if (isShowSearchBar && searchValue) return;
+
     if (!notAsync) {
       var _defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
         return option.value === defaultValue;
@@ -121,7 +121,7 @@ var Select = function Select(props) {
       setSelectedOption(_defaultOption);
       setValue(defaultValue);
     }
-  }, [defaultValue, options]);
+  }, [defaultValue, options, searchValue]);
 
   var handleChangeOption = function handleChangeOption(e, option) {
     if (e.target.closest('.disabled') === null) setOpen(!open);
@@ -133,10 +133,6 @@ var Select = function Select(props) {
     }
 
     onChange && onChange(option.value);
-
-    if (isShowSearchBar) {
-      handleChangeSearch('');
-    }
   };
 
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
@@ -156,7 +152,7 @@ var Select = function Select(props) {
   }, isShowSearchBar && /*#__PURE__*/_react.default.createElement(_Selects.SearchBarWrapper, {
     className: "search-bar-container"
   }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
-    lazyLoad: true,
+    lazyLoad: !searchBarIsNotLazyLoad,
     isCustomLayout: searchBarIsCustomLayout,
     search: searchValue,
     onSearch: handleChangeSearch,

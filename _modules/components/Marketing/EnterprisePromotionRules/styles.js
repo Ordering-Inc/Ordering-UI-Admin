@@ -84,7 +84,9 @@ var DiscountOption = _styledComponents.default.div(_templateObject19 || (_templa
 
 exports.DiscountOption = DiscountOption;
 
-var CondtionItem = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  cursor: pointer;\n  padding: 12px 0;\n  border-bottom: 1px solid ", ";\n\n  > div {\n    > span {\n      font-size: 14px;\n      ", "\n    }\n  }\n\n  > svg {\n    color: ", ";\n  }\n\n  ", "\n"])), function (props) {
+var CondtionItem = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  cursor: pointer;\n  padding: 12px 0;\n  border-top: 1px solid ", ";\n  border-bottom: 1px solid ", ";\n\n  > div {\n    > span {\n      font-size: 14px;\n      ", "\n    }\n  }\n\n  > svg {\n    color: ", ";\n  }\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   var _props$theme5;
@@ -92,9 +94,17 @@ var CondtionItem = _styledComponents.default.div(_templateObject20 || (_template
   return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n        margin-right: 13px;\n      "]))) : (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n        margin-left: 13px;\n      "])));
 }, function (props) {
   return props.theme.colors.secundaryLight;
+}, function (props) {
+  return props.theme.colors.lightPrimary;
 }, function (_ref2) {
   var active = _ref2.active;
-  return active && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    > div {\n      svg {\n        color: ", ";\n      }\n    }\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    border-top: 1px solid ", ";\n    border-bottom: 1px solid ", ";\n    background-color: ", ";\n    > div {\n      svg {\n        color: ", ";\n      }\n    }\n  "])), function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.lightPrimary;
+  }, function (props) {
     return props.theme.colors.primary;
   });
 });

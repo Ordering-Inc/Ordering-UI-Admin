@@ -254,6 +254,7 @@ var ProductGalleryUI = function ProductGalleryUI(props) {
       return handleChangeInput(e, null);
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
     onClick: function onClick() {
       return handleAddGalleryProduct();
     },

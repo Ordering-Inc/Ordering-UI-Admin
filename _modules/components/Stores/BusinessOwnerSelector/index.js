@@ -103,6 +103,8 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
     onChange: onSelectBusinessOwner,
     isShowSearchBar: true,
     searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: searchValue,
     handleChangeSearch: handleChangeSearch
   });
 };

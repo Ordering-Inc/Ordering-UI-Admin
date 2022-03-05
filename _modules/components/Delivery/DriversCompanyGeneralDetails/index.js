@@ -167,6 +167,7 @@ var DriversCompanyGeneralDetails = function DriversCompanyGeneralDetails(props) 
     optionInnerMaxHeight: "60vh",
     isShowSearchBar: true,
     searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
     searchValue: timezoneSearchValue,
     handleChangeSearch: setTimezoneSearchValue
   }))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_styles.Input, {

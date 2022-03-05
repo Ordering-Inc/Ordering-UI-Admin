@@ -234,6 +234,8 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     },
     isShowSearchBar: true,
     searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: businessSearchValue,
     handleChangeSearch: handleChangeBusinessSearch
   })), selectedInvoice === 'driver' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     className: "col-md-6"
@@ -249,6 +251,8 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     },
     isShowSearchBar: true,
     searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: driverSearchValue,
     handleChangeSearch: handleChangeDriverSearch
   }))), selectedInvoice === 'driver' && /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
     className: "col-md-12"

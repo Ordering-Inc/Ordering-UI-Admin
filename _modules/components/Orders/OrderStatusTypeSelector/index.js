@@ -73,7 +73,12 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
       filteredOrderStatuses = _useState4[0],
       setFilteredOrderStatuses = _useState4[1];
 
-  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_STATUS', 'Select Status'));
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      searchValue = _useState6[0],
+      setSearchValue = _useState6[1];
+
+  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, /*#__PURE__*/_react.default.createElement("p", null, t('SELECT_STATUS', 'Select Status')));
 
   var orderStatuses = [{
     value: 'default',
@@ -336,10 +341,10 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     handleChangeOrderStatus(status);
   };
 
-  var _useState5 = (0, _react.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      defaultFilterValues = _useState6[0],
-      setDefaultFilterValues = _useState6[1];
+  var _useState7 = (0, _react.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      defaultFilterValues = _useState8[0],
+      setDefaultFilterValues = _useState8[1];
 
   (0, _react.useEffect)(function () {
     if (isFilterView) {
@@ -350,6 +355,8 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
   }, [filterValues]);
 
   var handleChangeSearch = function handleChangeSearch(searchValue) {
+    setSearchValue(searchValue);
+
     var _filteredOrderStatuses = _toConsumableArray(orderStatuses === null || orderStatuses === void 0 ? void 0 : orderStatuses.filter(function (orderStatuse) {
       return orderStatuse === null || orderStatuse === void 0 ? void 0 : orderStatuse.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
     }));
@@ -370,12 +377,13 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
   } else {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderStatusTypeSelectWrapper, null, isFirstSelect ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
       searchBarIsCustomLayout: true,
+      searchBarIsNotLazyLoad: true,
       searchBarPlaceholder: t('SEARCH', 'Search'),
       type: type,
       placeholder: /*#__PURE__*/_react.default.createElement(_styles.Option, {
         noPadding: noPadding,
         isSubTitle: true
-      }, t('CHANGE_STATUS', 'Change Status')),
+      }, /*#__PURE__*/_react.default.createElement("p", null, t('CHANGE_STATUS', 'Change Status'))),
       optionInnerMaxHeight: "50vh",
       noSelected: noSelected,
       defaultValue: defaultOptionValue,
@@ -385,19 +393,22 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
       },
       className: "orderStatus",
       isShowSearchBar: true,
+      searchValue: searchValue,
       handleChangeSearch: handleChangeSearch
     }) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
       searchBarIsCustomLayout: true,
+      searchBarIsNotLazyLoad: true,
       searchBarPlaceholder: t('SEARCH', 'Search'),
       type: type,
       placeholder: /*#__PURE__*/_react.default.createElement(_styles.Option, {
         noPadding: noPadding,
         isSubTitle: true
-      }, t('CHANGE_STATUS', 'Change Status')),
+      }, /*#__PURE__*/_react.default.createElement("p", null, t('CHANGE_STATUS', 'Change Status'))),
       optionInnerMaxHeight: "50vh",
       noSelected: noSelected,
       defaultValue: defaultOptionValue,
       options: filteredOrderStatuses,
+      searchValue: searchValue,
       onChange: function onChange(orderStatus) {
         return changeOrderStatus(orderStatus);
       },

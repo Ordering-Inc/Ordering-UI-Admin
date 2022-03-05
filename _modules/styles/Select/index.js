@@ -64,6 +64,7 @@ var Select = function Select(props) {
       handleChangeSearch = props.handleChangeSearch,
       searchBarIsCustomLayout = props.searchBarIsCustomLayout,
       searchBarPlaceholder = props.searchBarPlaceholder,
+      searchBarIsNotLazyLoad = props.searchBarIsNotLazyLoad,
       className = props.className;
   var defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
     return option.value === defaultValue;
@@ -120,6 +121,10 @@ var Select = function Select(props) {
     var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) !== null && _referenceElement$cur !== void 0 && _referenceElement$cur.contains(e.target));
 
     if (outsidePopover && outsidePopoverMenu) {
+      if (isShowSearchBar) {
+        handleChangeSearch('');
+      }
+
       setOpen(false);
     }
   };
@@ -139,6 +144,8 @@ var Select = function Select(props) {
     };
   }, [open]);
   (0, _react.useEffect)(function () {
+    if (isShowSearchBar && searchValue) return;
+
     if (!notAsync) {
       var _defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
         return option.value === defaultValue;
@@ -147,7 +154,7 @@ var Select = function Select(props) {
       setSelectedOption(_defaultOption);
       setValue(defaultValue);
     }
-  }, [defaultValue, options]);
+  }, [defaultValue, options, searchValue]);
 
   var handleChangeOption = function handleChangeOption(e, option) {
     if (e.target.closest('.disabled') === null) setOpen(!open);
@@ -190,7 +197,7 @@ var Select = function Select(props) {
   }, isShowSearchBar && /*#__PURE__*/_react.default.createElement(_Selects.SearchBarWrapper, {
     className: "search-bar-container"
   }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
-    lazyLoad: true,
+    lazyLoad: !searchBarIsNotLazyLoad,
     isCustomLayout: searchBarIsCustomLayout,
     search: searchValue,
     onSearch: handleChangeSearch,

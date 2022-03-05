@@ -253,6 +253,8 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       isShowSearchBar: true,
       searchBarPlaceholder: t('SEARCH', 'Search'),
       searchBarIsCustomLayout: true,
+      searchBarIsNotLazyLoad: true,
+      searchValue: searchValue,
       handleChangeSearch: handleSearch,
       className: "driver-select"
     }) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
@@ -263,8 +265,10 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
         return changeDriver(driverId);
       },
       isShowSearchBar: true,
+      searchBarIsNotLazyLoad: true,
       searchBarPlaceholder: t('SEARCH', 'Search'),
       searchBarIsCustomLayout: true,
+      searchValue: searchValue,
       handleChangeSearch: handleSearch,
       className: "driver-select"
     })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {

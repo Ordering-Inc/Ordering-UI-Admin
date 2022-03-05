@@ -19,6 +19,8 @@ var _ProductIngredientDetails = require("../ProductIngredientDetails");
 
 var _Shared = require("../../Shared");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -69,6 +71,7 @@ var ProductIngredient = function ProductIngredient(props) {
   var handleCloseDetails = function handleCloseDetails() {
     setOpenDetails(false);
     setIsExtendExtraOpen(false);
+    setCurrentIngredient(null);
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.IngredientContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('INGREDIENTS', 'Ingredients'), " / ", t('PROPERTIES', 'Properties')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
@@ -80,10 +83,11 @@ var ProductIngredient = function ProductIngredient(props) {
   }, t('ADD_INGREDIENT', 'Add ingredient'))), (product === null || product === void 0 ? void 0 : product.ingredients) && (product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_styles2.IngredientOption, {
       key: ingredient.id,
+      active: ingredient.id === (currentIngredient === null || currentIngredient === void 0 ? void 0 : currentIngredient.id),
       onClick: function onClick() {
         return handleOpenIngredient(ingredient);
       }
-    }, ingredient === null || ingredient === void 0 ? void 0 : ingredient.name);
+    }, /*#__PURE__*/_react.default.createElement("span", null, ingredient === null || ingredient === void 0 ? void 0 : ingredient.name), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   })), /*#__PURE__*/_react.default.createElement(_styles2.AddIngredientButton, {
     onClick: function onClick() {
       return handleOpenIngredient(null);

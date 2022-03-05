@@ -21,11 +21,9 @@ var _UserFormDetails = require("../UserFormDetails");
 
 var _Shared = require("../../Shared");
 
-var _styles = require("../../../styles");
-
 var _utils = require("../../../utils");
 
-var _styles2 = require("./styles");
+var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54,14 +52,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserProfileFormUI = function UserProfileFormUI(props) {
-  var _formState$changes2, _userState$result, _userState$result$res, _props$beforeElements, _props$beforeComponen, _userState$result2, _userState$result2$re, _formState$changes3, _formState$changes4, _formState$changes4$r, _formState$result, _userState$result3, _userState$result3$re, _userState$result4, _userState$result4$re, _formState$changes5, _formState$changes6, _userState$result5, _userState$result5$re, _userState$result6, _userState$result6$re, _userState$result7, _userState$result7$re, _userState$result8, _userState$result8$re, _userState$result9, _userState$result9$re, _userState$result10, _userState$result10$r, _userState$result11, _userState$result11$r, _userState$result12, _userState$result12$r, _userState$result13, _userState$result13$r, _userState$result14, _props$afterComponent, _props$afterElements;
+  var _formState$changes2, _userState$result, _userState$result$res, _formState$changes3, _formState$changes4, _formState$changes4$r, _formState$result, _userState$result2, _userState$result2$re, _userState$result3, _userState$result3$re, _formState$changes5, _formState$changes6, _userState$result4;
 
-  var userData = props.userData,
-      handleButtonUpdateClick = props.handleButtonUpdateClick,
+  var handleButtonUpdateClick = props.handleButtonUpdateClick,
       handlechangeImage = props.handlechangeImage,
       formState = props.formState,
-      cleanFormState = props.cleanFormState,
-      toggleIsEdit = props.toggleIsEdit,
       isHiddenAddress = props.isHiddenAddress,
       userState = props.userState;
 
@@ -69,18 +64,13 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      edit = _useState2[0],
-      setEdit = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
   var inputRef = (0, _react.useRef)(null);
 
@@ -110,17 +100,6 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     }
   };
 
-  var toggleEditState = function toggleEditState(val) {
-    setEdit(val);
-    toggleIsEdit();
-
-    if (!val) {
-      cleanFormState({
-        changes: {}
-      });
-    }
-  };
-
   var handleClickImage = function handleClickImage() {
     inputRef.current.click();
   };
@@ -140,27 +119,15 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       handleButtonUpdateClick(null, isImage);
     }
   }, [(_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo]);
-  (0, _react.useEffect)(function () {
-    setEdit(false);
-  }, [userState === null || userState === void 0 ? void 0 : (_userState$result = userState.result) === null || _userState$result === void 0 ? void 0 : (_userState$result$res = _userState$result.result) === null || _userState$result$res === void 0 ? void 0 : _userState$result$res.id]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.UserProfileContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
     mbottom: isHiddenAddress && 25
-  }, /*#__PURE__*/_react.default.createElement(_styles2.UserImage, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-    isEdit: edit,
+  }, /*#__PURE__*/_react.default.createElement(_styles.Image, {
     onClick: function onClick() {
       return handleClickImage();
     },
-    isImage: (userState === null || userState === void 0 ? void 0 : (_userState$result2 = userState.result) === null || _userState$result2 === void 0 ? void 0 : (_userState$result2$re = _userState$result2.result) === null || _userState$result2$re === void 0 ? void 0 : _userState$result2$re.photo) || (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo) && !formState.result.error
+    isImage: (userState === null || userState === void 0 ? void 0 : (_userState$result = userState.result) === null || _userState$result === void 0 ? void 0 : (_userState$result$res = _userState$result.result) === null || _userState$result$res === void 0 ? void 0 : _userState$result$res.photo) || (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo) && !formState.result.error
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
     onFiles: handleFiles,
     childRef: function childRef(e) {
@@ -174,44 +141,20 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && (_formState$changes4$r = _formState$changes4.result) !== null && _formState$changes4$r !== void 0 && _formState$changes4$r.photo) || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) === 'Network Error' || formState.result.error ? userState !== null && userState !== void 0 && (_userState$result3 = userState.result) !== null && _userState$result3 !== void 0 && (_userState$result3$re = _userState$result3.result) !== null && _userState$result3$re !== void 0 && _userState$result3$re.photo ? /*#__PURE__*/_react.default.createElement("img", {
-    src: userState === null || userState === void 0 ? void 0 : (_userState$result4 = userState.result) === null || _userState$result4 === void 0 ? void 0 : (_userState$result4$re = _userState$result4.result) === null || _userState$result4$re === void 0 ? void 0 : _userState$result4$re.photo,
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && (_formState$changes4$r = _formState$changes4.result) !== null && _formState$changes4$r !== void 0 && _formState$changes4$r.photo) || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) === 'Network Error' || formState.result.error ? userState !== null && userState !== void 0 && (_userState$result2 = userState.result) !== null && _userState$result2 !== void 0 && (_userState$result2$re = _userState$result2.result) !== null && _userState$result2$re !== void 0 && _userState$result2$re.photo ? /*#__PURE__*/_react.default.createElement("img", {
+    src: userState === null || userState === void 0 ? void 0 : (_userState$result3 = userState.result) === null || _userState$result3 === void 0 ? void 0 : (_userState$result3$re = _userState$result3.result) === null || _userState$result3$re === void 0 ? void 0 : _userState$result3$re.photo,
     alt: "user image",
     width: "90px",
     height: "90px",
     loading: "lazy"
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)) : (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.photo) && /*#__PURE__*/_react.default.createElement("img", {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)) : (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.photo) && /*#__PURE__*/_react.default.createElement("img", {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.photo,
     alt: "user image",
     loading: "lazy"
-  }))), edit && /*#__PURE__*/_react.default.createElement(_styles2.Camera, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)))), !edit && /*#__PURE__*/_react.default.createElement(_styles2.SideForm, {
-    className: "user-form"
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.UserData, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 250,
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 180,
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 210,
-    height: 25
-  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 100,
-    height: 40
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.UserData, null, /*#__PURE__*/_react.default.createElement("h1", null, (userData === null || userData === void 0 ? void 0 : userData.name) || (userState === null || userState === void 0 ? void 0 : (_userState$result5 = userState.result) === null || _userState$result5 === void 0 ? void 0 : (_userState$result5$re = _userState$result5.result) === null || _userState$result5$re === void 0 ? void 0 : _userState$result5$re.name), " ", (userData === null || userData === void 0 ? void 0 : userData.lastname) || (userState === null || userState === void 0 ? void 0 : (_userState$result6 = userState.result) === null || _userState$result6 === void 0 ? void 0 : (_userState$result6$re = _userState$result6.result) === null || _userState$result6$re === void 0 ? void 0 : _userState$result6$re.lastname)), /*#__PURE__*/_react.default.createElement("p", null, (userData === null || userData === void 0 ? void 0 : userData.email) || (userState === null || userState === void 0 ? void 0 : (_userState$result7 = userState.result) === null || _userState$result7 === void 0 ? void 0 : (_userState$result7$re = _userState$result7.result) === null || _userState$result7$re === void 0 ? void 0 : _userState$result7$re.email)), ((userData === null || userData === void 0 ? void 0 : userData.cellphone) || (userState === null || userState === void 0 ? void 0 : (_userState$result8 = userState.result) === null || _userState$result8 === void 0 ? void 0 : (_userState$result8$re = _userState$result8.result) === null || _userState$result8$re === void 0 ? void 0 : _userState$result8$re.cellphone)) && /*#__PURE__*/_react.default.createElement("p", null, ((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (userState === null || userState === void 0 ? void 0 : (_userState$result9 = userState.result) === null || _userState$result9 === void 0 ? void 0 : (_userState$result9$re = _userState$result9.result) === null || _userState$result9$re === void 0 ? void 0 : _userState$result9$re.country_phone_code)) && "+".concat((userData === null || userData === void 0 ? void 0 : userData.country_phone_code) || (userState === null || userState === void 0 ? void 0 : (_userState$result10 = userState.result) === null || _userState$result10 === void 0 ? void 0 : (_userState$result10$r = _userState$result10.result) === null || _userState$result10$r === void 0 ? void 0 : _userState$result10$r.country_phone_code), " "), (userData === null || userData === void 0 ? void 0 : userData.cellphone) || (userState === null || userState === void 0 ? void 0 : (_userState$result11 = userState.result) === null || _userState$result11 === void 0 ? void 0 : (_userState$result11$r = _userState$result11.result) === null || _userState$result11$r === void 0 ? void 0 : _userState$result11$r.cellphone)), ((userData === null || userData === void 0 ? void 0 : userData.birthdate) || (userState === null || userState === void 0 ? void 0 : (_userState$result12 = userState.result) === null || _userState$result12 === void 0 ? void 0 : (_userState$result12$r = _userState$result12.result) === null || _userState$result12$r === void 0 ? void 0 : _userState$result12$r.birthdate)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('BIRTHDATE', 'Birthdate')), /*#__PURE__*/_react.default.createElement("span", null, ": "), /*#__PURE__*/_react.default.createElement("span", null, (userData === null || userData === void 0 ? void 0 : userData.birthdate) || (userState === null || userState === void 0 ? void 0 : (_userState$result13 = userState.result) === null || _userState$result13 === void 0 ? void 0 : (_userState$result13$r = _userState$result13.result) === null || _userState$result13$r === void 0 ? void 0 : _userState$result13$r.birthdate)))))), edit && /*#__PURE__*/_react.default.createElement(_styles2.WrapperForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
-    userData: userState === null || userState === void 0 ? void 0 : (_userState$result14 = userState.result) === null || _userState$result14 === void 0 ? void 0 : _userState$result14.result,
-    onCancel: toggleEditState,
-    onCloseProfile: function onCloseProfile() {
-      return setEdit(false);
-    },
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null))))), /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
+    userData: userState === null || userState === void 0 ? void 0 : (_userState$result4 = userState.result) === null || _userState$result4 === void 0 ? void 0 : _userState$result4.result,
     isHiddenAddress: isHiddenAddress
-  }))), !edit && /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "secundaryDark",
-    borderRadius: "8px",
-    onClick: function onClick() {
-      return toggleEditState(true);
-    }
-  }, t('EDIT', 'Edit'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('PROFILE', 'Profile'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -223,14 +166,6 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
   }));
 };
 
