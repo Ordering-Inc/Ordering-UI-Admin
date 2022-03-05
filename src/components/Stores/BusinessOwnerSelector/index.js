@@ -59,6 +59,8 @@ const BusinessOwnerSelectorUI = (props) => {
       onChange={onSelectBusinessOwner}
       isShowSearchBar
       searchBarIsCustomLayout
+      searchBarIsNotLazyLoad
+      searchValue={searchValue}
       handleChangeSearch={handleChangeSearch}
     />
   )

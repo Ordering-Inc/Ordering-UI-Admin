@@ -99,6 +99,7 @@ export const CondtionItem = styled.div`
   justify-content: space-between;
   cursor: pointer;
   padding: 12px 0;
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
   > div {
@@ -116,7 +117,14 @@ export const CondtionItem = styled.div`
     color: ${props => props.theme.colors.secundaryLight};
   }
 
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
   ${({ active }) => active && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+    background-color: ${props => props.theme.colors.lightPrimary};
     > div {
       svg {
         color: ${props => props.theme.colors.primary};

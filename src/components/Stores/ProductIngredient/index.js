@@ -4,6 +4,7 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button } from '../../../styles'
 import { ProductIngredientDetails } from '../ProductIngredientDetails'
 import { Modal } from '../../Shared'
+import { ChevronRight } from 'react-bootstrap-icons'
 
 import {
   MainContainer,
@@ -33,6 +34,7 @@ export const ProductIngredient = (props) => {
   const handleCloseDetails = () => {
     setOpenDetails(false)
     setIsExtendExtraOpen(false)
+    setCurrentIngredient(null)
   }
 
   return (
@@ -51,9 +53,11 @@ export const ProductIngredient = (props) => {
         {product?.ingredients && product?.ingredients.map(ingredient => (
           <IngredientOption
             key={ingredient.id}
+            active={ingredient.id === currentIngredient?.id}
             onClick={() => handleOpenIngredient(ingredient)}
           >
-            {ingredient?.name}
+            <span>{ingredient?.name}</span>
+            <ChevronRight />
           </IngredientOption>
         ))}
         <AddIngredientButton

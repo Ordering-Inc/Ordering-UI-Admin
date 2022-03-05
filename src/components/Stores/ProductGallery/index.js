@@ -201,6 +201,7 @@ const ProductGalleryUI = (props) => {
                     onChange={e => handleChangeInput(e, null)}
                   />
                   <IconButton
+                    color='black'
                     onClick={() => handleAddGalleryProduct()}
                     disabled={changesState.loading || productGalleryState.loading}
                   >
