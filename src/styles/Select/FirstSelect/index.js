@@ -54,23 +54,22 @@ export const Select = (props) => {
     if (open) {
       const outsideDropdown = !dropdownReference.current?.contains(e.target)
       if (outsideDropdown) {
+        if (isShowSearchBar) {
+          handleChangeSearch('')
+        }
         setOpen(false)
       }
     }
   }
 
   useEffect(() => {
-    if (!open) {
-      if (isShowSearchBar) {
-        handleChangeSearch('')
-      }
-      return
-    }
+    if (!open) return
     document.addEventListener('click', closeSelect)
     return () => document.removeEventListener('click', closeSelect)
   }, [open])
 
   useEffect(() => {
+    if (isShowSearchBar && searchValue) return
     if (!notAsync) {
       const _defaultOption = options?.find(
         (option) => option.value === defaultValue
@@ -78,7 +77,7 @@ export const Select = (props) => {
       setSelectedOption(_defaultOption)
       setValue(defaultValue)
     }
-  }, [defaultValue, options])
+  }, [defaultValue, options, searchValue])
 
   const handleChangeOption = (e, option) => {
     if (e.target.closest('.disabled') === null) setOpen(!open)
@@ -88,10 +87,8 @@ export const Select = (props) => {
       setValue(option.value)
     }
     onChange && onChange(option.value)
-    if (isShowSearchBar) {
-      handleChangeSearch('')
-    }
   }
+
   return (
     <SelectInput type={type} className={className || 'select'}>
       {!selectedOption && (

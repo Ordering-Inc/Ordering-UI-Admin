@@ -26,6 +26,7 @@ export const OrderStatusTypeSelector = (props) => {
   const [, t] = useLanguage()
   const [defaultOptionValue, setDefaultOptionValue] = useState('default')
   const [filteredOrderStatuses, setFilteredOrderStatuses] = useState([])
+  const [searchValue, setSearchValue] = useState(null)
 
   const placeholder = <PlaceholderTitle><p>{t('SELECT_STATUS', 'Select Status')}</p></PlaceholderTitle>
 
@@ -384,6 +385,7 @@ export const OrderStatusTypeSelector = (props) => {
   }, [filterValues])
 
   const handleChangeSearch = (searchValue) => {
+    setSearchValue(searchValue)
     const _filteredOrderStatuses = [...orderStatuses?.filter(orderStatuse => orderStatuse?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
     setFilteredOrderStatuses(_filteredOrderStatuses)
   }
@@ -415,6 +417,7 @@ export const OrderStatusTypeSelector = (props) => {
             onChange={(orderStatus) => changeOrderStatus(orderStatus)}
             className='orderStatus'
             isShowSearchBar
+            searchValue={searchValue}
             handleChangeSearch={handleChangeSearch}
           />
         ) : (
@@ -428,6 +431,7 @@ export const OrderStatusTypeSelector = (props) => {
             noSelected={noSelected}
             defaultValue={defaultOptionValue}
             options={filteredOrderStatuses}
+            searchValue={searchValue}
             onChange={(orderStatus) => changeOrderStatus(orderStatus)}
             className='orderStatus'
           />

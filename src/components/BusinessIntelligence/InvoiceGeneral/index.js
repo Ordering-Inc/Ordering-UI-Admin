@@ -162,6 +162,8 @@ export const InvoiceGeneral = (props) => {
                     onChange={(value) => handleChangeFormState('business', value)}
                     isShowSearchBar
                     searchBarIsCustomLayout
+                    searchBarIsNotLazyLoad
+                    searchValue={businessSearchValue}
                     handleChangeSearch={handleChangeBusinessSearch}
                   />
                 )
@@ -186,6 +188,8 @@ export const InvoiceGeneral = (props) => {
                       onChange={(value) => handleChangeFormState('driver', value)}
                       isShowSearchBar
                       searchBarIsCustomLayout
+                      searchBarIsNotLazyLoad
+                      searchValue={driverSearchValue}
                       handleChangeSearch={handleChangeDriverSearch}
                     />
                   )

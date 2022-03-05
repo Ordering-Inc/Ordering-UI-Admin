@@ -183,6 +183,8 @@ const DriverSelectorUI = (props) => {
                 isShowSearchBar
                 searchBarPlaceholder={t('SEARCH', 'Search')}
                 searchBarIsCustomLayout
+                searchBarIsNotLazyLoad
+                searchValue={searchValue}
                 handleChangeSearch={handleSearch}
                 className='driver-select'
               />
@@ -193,8 +195,10 @@ const DriverSelectorUI = (props) => {
                 optionInnerMaxHeight='200px'
                 onChange={(driverId) => changeDriver(driverId)}
                 isShowSearchBar
+                searchBarIsNotLazyLoad
                 searchBarPlaceholder={t('SEARCH', 'Search')}
                 searchBarIsCustomLayout
+                searchValue={searchValue}
                 handleChangeSearch={handleSearch}
                 className='driver-select'
               />

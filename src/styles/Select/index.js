@@ -73,6 +73,9 @@ export const Select = (props) => {
     const outsidePopover = !popperElement.current?.contains(e.target)
     const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
     if (outsidePopover && outsidePopoverMenu) {
+      if (isShowSearchBar) {
+        handleChangeSearch('')
+      }
       setOpen(false)
     }
   }
@@ -93,6 +96,7 @@ export const Select = (props) => {
   }, [open])
 
   useEffect(() => {
+    if (isShowSearchBar && searchValue) return
     if (!notAsync) {
       const _defaultOption = options?.find(
         (option) => option.value === defaultValue
@@ -100,7 +104,7 @@ export const Select = (props) => {
       setSelectedOption(_defaultOption)
       setValue(defaultValue)
     }
-  }, [defaultValue, options])
+  }, [defaultValue, options, searchValue])
 
   const handleChangeOption = (e, option) => {
     if (e.target.closest('.disabled') === null) setOpen(!open)
