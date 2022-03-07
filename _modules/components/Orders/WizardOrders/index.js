@@ -44,7 +44,7 @@ var WizardOrders = function WizardOrders(props) {
   var tourSteps = [{
     selector: '[data-tour="tour_start"]',
     content: function content(goTo) {
-      return /*#__PURE__*/_react.default.createElement(_styles.HelperContent, null, /*#__PURE__*/_react.default.createElement("span", null, "1."), /*#__PURE__*/_react.default.createElement("p", null, t('TOUR_ORDER_START', 'Let\'s see your trial, we will guide you step by step.')));
+      return /*#__PURE__*/_react.default.createElement(_styles.HelperContent, null, /*#__PURE__*/_react.default.createElement("span", null, "1."), /*#__PURE__*/_react.default.createElement("p", null, t('TOUR_ORDER_START', 'Lets see your trial, we will guide you step by step.')));
     },
     position: 'bottom'
   }, {
