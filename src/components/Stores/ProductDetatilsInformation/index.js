@@ -37,6 +37,7 @@ export const ProductDetatilsInformation = (props) => {
   const [, t] = useLanguage()
   const productImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [minimumRegualrPrice, setMinimumRegualrPrice] = useState(null)
   const [autoGenerateCode, setAutoGenerate] = useState({
     isAutoGenerate: false,
     autoCodeText: product?.slug
@@ -144,6 +145,15 @@ export const ProductDetatilsInformation = (props) => {
     }
   }, [autoGenerateCode])
 
+  useEffect(() => {
+    if (product?.price) {
+      setMinimumRegualrPrice(product?.price + 0.01)
+    }
+    if (formState?.changes?.price) {
+      setMinimumRegualrPrice(formState?.changes?.price + 0.01)
+    }
+  }, [product?.price, formState?.changes?.price])
+
   return (
     <>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -224,8 +234,7 @@ export const ProductDetatilsInformation = (props) => {
               defaultValue={product?.offer_price}
               ref={formMethods.register({
                 min: ((typeof formState?.changes?.in_offer === 'undefined' && product?.in_offer) || formState?.changes?.in_offer)
-                  ? formState?.changes?.price ?? product?.price
-                  : null,
+                  && minimumRegualrPrice,
                 required:
                   ((typeof formState?.changes?.in_offer === 'undefined' && product?.in_offer) || formState?.changes?.in_offer)
                     ? t(
