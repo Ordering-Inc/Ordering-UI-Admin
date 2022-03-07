@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   UserDetails as UserDetailsController,
   useLanguage,
@@ -71,6 +71,12 @@ const CustomerDetailsUI = (props) => {
     setShowOption(null)
     setIsOpenMenu(false)
   }
+
+  useEffect(() => {
+    handleParentSidebarMove(0)
+    setIsOpenMenu(false)
+    setShowOption(null)
+  }, [userState?.user?.id])
 
   return (
     <>

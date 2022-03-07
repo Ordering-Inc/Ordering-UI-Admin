@@ -43,8 +43,8 @@ export const UserImage = styled.div`
 
 export const Image = styled.div`
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 216px;
+  height: 216px;
   border-radius: 8px;
   overflow: hidden;
   background: ${({ isImage, theme }) => isImage ? '#FFF' : `${theme.colors.backgroundPage}`};
@@ -52,11 +52,6 @@ export const Image = styled.div`
   cursor: grab;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
   border: 1px solid ${props => props.theme.colors.borderColor};
-
-  ${({ isEdit }) => !isEdit && css`
-    pointer-events: none;
-  `}
-
   img,
   div:first-child {
     width: 100%;
@@ -74,22 +69,6 @@ export const Image = styled.div`
 
   img{
     object-fit: cover;
-  }
-`
-
-export const SideForm = styled.div`
-  width: 100%;
-
-  @media (min-width: 768px) {
-    width: 70%;
-    display: flex;
-    align-items: center;
-
-    ${props => props.theme?.rtl ? css`
-      margin-right: 20px;
-    ` : css`
-      margin-left: 20px;
-    `}
   }
 `
 
@@ -114,34 +93,6 @@ export const Camera = styled.div`
   }
 `
 
-export const UserData = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  color: ${props => props.theme.colors.headingColor};
-
-  h1 {
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  > * {
-    margin: 5px 0;
-    width: 75%;
-    font-size: 14px;
-  }
-
-  @media (min-width: 768px){
-    align-items: flex-start;
-    text-align: left;
-    ${props => props.theme?.rtl && css`
-     text-align: right;
-    `}
-  }
-`
-
 export const UploadImageIcon = styled.div`
   display: flex;
   justify-content: center;
@@ -153,8 +104,8 @@ export const UploadImageIcon = styled.div`
   }
 
   svg {
-    width: 45px;
-    height: 45px;
+    width: 120px;
+    height: 120px;
   }
 `
 

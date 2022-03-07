@@ -127,6 +127,7 @@ export const DriversCompanyGeneralDetails = (props) => {
 
               isShowSearchBar
               searchBarIsCustomLayout
+              searchBarIsNotLazyLoad
               searchValue={timezoneSearchValue}
               handleChangeSearch={setTimezoneSearchValue}
             />
