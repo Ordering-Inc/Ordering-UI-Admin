@@ -3,27 +3,30 @@ import { useConfig, useLanguage, useUtils, BusinessZoneGoogleMaps } from 'orderi
 import { Select } from '../../../styles/Select/FirstSelect'
 import { Button, Input } from '../../../styles'
 import { Alert } from '../../Shared'
+import { useForm } from 'react-hook-form'
 
 import {
-  BasicContainer,
-  FieldName,
+  FormContainer,
   TypeSelectWrapper,
   WrapperMap,
-  ErrorText
+  ErrorText,
+  FormControl,
+  Row
 } from './styles'
 
-export const BusinessDeliveryZoneBasic = (props) => {
+export const BusinessDeliveryZoneInformation = (props) => {
   const {
     business,
     zone,
-    handleZoneType,
-    handleChangeZoneData,
+    formState,
+    handleChangeInput,
+    handleChangeFormState,
     handleUpdateBusinessDeliveryZone,
-    isAddValid,
-    handleAddBusinessDeliveryZone,
-    loading
+    handleAddBusinessDeliveryZone
   } = props
+
   const [, t] = useLanguage()
+  const { handleSubmit, register, errors } = useForm()
   const [{ parseNumber }] = useUtils()
   const [configState] = useConfig()
   const [clearState, setClearState] = useState(false)
@@ -61,19 +64,19 @@ export const BusinessDeliveryZoneBasic = (props) => {
   }
 
   const handleChangeType = (type) => {
-    handleZoneType(type, zone?.id || null)
+    handleChangeFormState({ type: type })
     setClearState(true)
     setZoneType(type)
   }
 
   const handleZoneData = (data) => {
     setZoneData(data)
-    handleChangeZoneData(data, zone?.id || null)
+    handleChangeFormState({ data: data })
   }
 
-  const handleSave = () => {
+  const onSubmit = () => {
     if (zoneData || zoneType === 4) {
-      if (isAddValid) handleAddBusinessDeliveryZone()
+      if (!zone) handleAddBusinessDeliveryZone()
       else handleUpdateBusinessDeliveryZone()
     } else {
       setAlertState({
@@ -104,23 +107,81 @@ export const BusinessDeliveryZoneBasic = (props) => {
     setInfoContentString(content)
   }, [zoneData, zoneType])
 
+  useEffect(() => {
+    setZoneType(zone?.type || 2)
+    setZoneData(zone?.data)
+  }, [zone?.type, zone?.data])
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map((error) => error.message)
+      })
+    }
+  }, [errors])
+
   return (
     <>
-      <BasicContainer>
-        <FieldName>{t('TYPE', 'Type')}</FieldName>
-        <TypeSelectWrapper>
-          <Select
-            defaultValue={parseInt(zoneType)}
-            options={typeOptions}
-            onChange={handleChangeType}
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <Row>
+          <FormControl>
+            <label>{t('NAME', 'Name')}</label>
+            <Input
+              placeholder={t('NAME', 'Name')}
+              name='name'
+              value={formState.changes?.name ?? zone?.name ?? ''}
+              onChange={handleChangeInput}
+              ref={register({
+                required: t('NAME_REQUIRED', 'The name is required.')
+              })}
+            />
+          </FormControl>
+          <FormControl>
+            <label>{t('TYPE', 'Type')}</label>
+            <TypeSelectWrapper>
+              <Select
+                defaultValue={parseInt(zoneType)}
+                options={typeOptions}
+                onChange={handleChangeType}
+              />
+            </TypeSelectWrapper>
+          </FormControl>
+        </Row>
+        <Row>
+          <FormControl>
+            <label>{t('MINIMUN_PURCHASED', 'Minimum purchase')}</label>
+            <Input
+              placeholder='$0.00'
+              name='minimum'
+              value={formState.changes?.minimum ?? zone?.minimum ?? ''}
+              onChange={handleChangeInput}
+              ref={register({
+                required: t('MINIMUN_PURCHASED_REQUIRED', 'The minimum purchase is required.')
+              })}
+            />
+          </FormControl>
+          <FormControl>
+            <label>{t('DELIVERY_FEE', 'Delivery fee')}</label>
+            <Input
+              placeholder='$0.00'
+              name='price'
+              value={formState.changes?.price ?? zone?.price ?? ''}
+              onChange={handleChangeInput}
+              ref={register({
+                required: t('DELIVERY_PRICE_REQUIRED', 'The delivery price is required.')
+              })}
+            />
+          </FormControl>
+        </Row>
+        <FormControl>
+          <label>{t('BUSINESS_ADDRESS', 'Business address')}</label>
+          <Input
+            name='address'
+            defaultValue={business?.address}
+            disabled
           />
-        </TypeSelectWrapper>
-        <FieldName>{t('BUSINESS_ADDRESS', 'Business address')}</FieldName>
-        <Input
-          name='address'
-          defaultValue={business?.address}
-          disabled
-        />
+        </FormControl>
         {zoneType !== 4 && (
           configState?.configs?.google_maps_api_key?.value ? (
             <WrapperMap>
@@ -148,15 +209,15 @@ export const BusinessDeliveryZoneBasic = (props) => {
         )}
         <Button
           color='primary'
-          borderRadius='5px'
-          onClick={() => handleSave()}
-          disabled={loading}
+          borderRadius='8px'
+          type='submit'
+          disabled={formState.loading || Object.keys(formState.changes).length === 0}
         >
           {
-            isAddValid ? t('ADD', 'Add') : t('SAVE', 'Save')
+            !zone ? t('ADD', 'Add') : t('SAVE', 'Save')
           }
         </Button>
-      </BasicContainer>
+      </FormContainer>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}

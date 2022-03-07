@@ -6,7 +6,7 @@ import { BusinessSupport } from '../BusinessSupport'
 import { BusinessDetail } from '../BusinessDetail'
 import { BusinessSchedule } from '../BusinessSchedule'
 import { BusinessMenu } from '../BusinessMenu'
-import { BusinessDeliveryZone } from '../BusinessDeliveryZone'
+import { BusinessDeliveryPickupMore } from '../BusinessDeliveryPickupMore'
 import { BusinessPaymentMethods } from '../BusinessPaymentMethods'
 import { BusinessPromotionList } from '../BusinessPromotionList'
 import { BusinessCustomFields } from '../BusinessCustomFields'
@@ -179,12 +179,11 @@ export const BusinessDetailsUI = (props) => {
               setIsExtendExtraOpen={setIsExtendExtraOpen}
             />
           )}
-          {selectedItem === 'delivery_zones' && (
-            <BusinessDeliveryZone
+          {selectedItem === 'delivery_pickup_more' && (
+            <BusinessDeliveryPickupMore
               business={businessState?.business}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
-              onClose={() => setIsExtendExtraOpen(false)}
-              handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
           {selectedItem === 'notifications' && (
