@@ -24,7 +24,7 @@ export const WizardOrders = (props) => {
       content: (goTo) => (
         <HelperContent>
           <span>1.</span>
-          <p>{t('TOUR_ORDER_START', 'Let\'s see your trial, we will guide you step by step.')}</p>
+          <p>{t('TOUR_ORDER_START', 'Lets see your trial, we will guide you step by step.')}</p>
         </HelperContent>
       ),
       position: 'bottom'
