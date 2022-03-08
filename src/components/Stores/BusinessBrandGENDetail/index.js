@@ -130,6 +130,19 @@ const BusinessBrandGENDetailUI = (props) => {
             disabled={brandFormState.loading}
             autoComplete='off'
           />
+          <Label>{t('SLUG', 'Slug')}</Label>
+          <input
+            name='slug'
+            placeholder={t('WRITE_A_SLUG', 'Write a slug')}
+            defaultValue={
+              brandFormState?.result?.result
+                ? brandFormState?.result?.result?.slug
+                : (brand?.slug ?? brandFormState?.changes?.slug)
+            }
+            onChange={handleChangeInput}
+            disabled={brandFormState.loading}
+            autoComplete='off'
+          />
         </FormControl>
         <SaveBtnWrapper>
           <Button
