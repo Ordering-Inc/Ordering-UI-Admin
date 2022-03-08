@@ -34,6 +34,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
   const [zoneType, setZoneType] = useState(zone?.type || 2)
   const [zoneData, setZoneData] = useState(zone?.data)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isShowMap, setIsShowMap] = useState(false)
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
@@ -108,9 +109,14 @@ export const BusinessDeliveryZoneInformation = (props) => {
   }, [zoneData, zoneType])
 
   useEffect(() => {
+    setClearState(false)
     setZoneType(zone?.type || 2)
     setZoneData(zone?.data)
-  }, [zone?.type, zone?.data])
+    setIsShowMap(false)
+    setTimeout(() => {
+      setIsShowMap(true)
+    }, [100])
+  }, [zone?.id])
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -182,10 +188,11 @@ export const BusinessDeliveryZoneInformation = (props) => {
             disabled
           />
         </FormControl>
-        {zoneType !== 4 && (
+        {zoneType !== 4 && isShowMap && (
           configState?.configs?.google_maps_api_key?.value ? (
             <WrapperMap>
               <button
+                type='button'
                 onClick={() => setClearState(true)}
               >
                 {t('CLEAR', 'Clear')}

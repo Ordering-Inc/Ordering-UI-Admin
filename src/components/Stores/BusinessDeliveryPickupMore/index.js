@@ -13,8 +13,8 @@ export const BusinessDeliveryPickupMore = (props) => {
   const [selectedTab, setSelectedTab] = useState('delivery')
 
   const tabs = [
-    { key: 'delivery', content: t('DELIVERY', 'Delivery') },
-    { key: 'pickup', content: t('PICKUP', 'Pickup') }
+    { key: 'delivery', content: t('DELIVERY', 'Delivery') }
+    // { key: 'pickup', content: t('PICKUP', 'Pickup') }
   ]
 
   return (

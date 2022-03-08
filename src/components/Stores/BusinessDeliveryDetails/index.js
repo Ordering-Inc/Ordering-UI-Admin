@@ -120,7 +120,7 @@ const BusinessDeliveryDetailsUI = (props) => {
         onClose={() => setIsExtendExtraOpen(false)}
         handleSuccessUpdate={handleUpdateBusinessState}
       />
-      <SectionTitle>{t('ADVANCED_LOGISTICS_SETTINGS', 'Advance logistics settings')}</SectionTitle>
+      <SectionTitle>{t('LOGISTIC', 'Logistic')}</SectionTitle>
       <AdvancedLogisticsSettingsContainer>
         <FormControl>
           <label>{t('EXPIRE_ORDER_AFTER_MINUTES', 'Expire order after minutes')}</label>
