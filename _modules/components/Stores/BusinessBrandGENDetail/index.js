@@ -50,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
-  var _brandFormState$chang, _brandFormState$resul3, _brandFormState$resul4, _brandFormState$chang2, _brandFormState$chang3, _brandFormState$resul5, _brandFormState$resul6, _brandFormState$resul7, _brand$name, _brandFormState$chang4;
+  var _brandFormState$chang, _brandFormState$resul3, _brandFormState$resul4, _brandFormState$chang2, _brandFormState$chang3, _brandFormState$resul5, _brandFormState$resul6, _brandFormState$resul7, _brand$name, _brandFormState$chang4, _brandFormState$resul8, _brandFormState$resul9, _brandFormState$resul10, _brand$slug, _brandFormState$chang5;
 
   var brandFormState = props.brandFormState,
       brand = props.brand,
@@ -152,6 +152,13 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
     name: "name",
     placeholder: t('WRITE_A_NAME', 'Write a name'),
     defaultValue: brandFormState !== null && brandFormState !== void 0 && (_brandFormState$resul5 = brandFormState.result) !== null && _brandFormState$resul5 !== void 0 && _brandFormState$resul5.result ? brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$resul6 = brandFormState.result) === null || _brandFormState$resul6 === void 0 ? void 0 : (_brandFormState$resul7 = _brandFormState$resul6.result) === null || _brandFormState$resul7 === void 0 ? void 0 : _brandFormState$resul7.name : (_brand$name = brand === null || brand === void 0 ? void 0 : brand.name) !== null && _brand$name !== void 0 ? _brand$name : brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang4 = brandFormState.changes) === null || _brandFormState$chang4 === void 0 ? void 0 : _brandFormState$chang4.name,
+    onChange: handleChangeInput,
+    disabled: brandFormState.loading,
+    autoComplete: "off"
+  }), /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement("input", {
+    name: "slug",
+    placeholder: t('WRITE_A_SLUG', 'Write a slug'),
+    defaultValue: brandFormState !== null && brandFormState !== void 0 && (_brandFormState$resul8 = brandFormState.result) !== null && _brandFormState$resul8 !== void 0 && _brandFormState$resul8.result ? brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$resul9 = brandFormState.result) === null || _brandFormState$resul9 === void 0 ? void 0 : (_brandFormState$resul10 = _brandFormState$resul9.result) === null || _brandFormState$resul10 === void 0 ? void 0 : _brandFormState$resul10.slug : (_brand$slug = brand === null || brand === void 0 ? void 0 : brand.slug) !== null && _brand$slug !== void 0 ? _brand$slug : brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang5 = brandFormState.changes) === null || _brandFormState$chang5 === void 0 ? void 0 : _brandFormState$chang5.slug,
     onChange: handleChangeInput,
     disabled: brandFormState.loading,
     autoComplete: "off"
