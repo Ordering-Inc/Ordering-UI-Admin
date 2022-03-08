@@ -34,17 +34,14 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
-  var _WalletState$wallets, _WalletState$wallets$, _WalletState$wallets2, _WalletState$wallets3;
+  var _WalletState$wallets, _WalletState$wallets$;
 
   var WalletState = props.WalletState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
+      t = _useLanguage2[1]; // const [{ parsePrice }] = useUtils()
 
-  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      parsePrice = _useUtils2[0].parsePrice;
 
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('POINTS_WALLET', 'Points wallet')), WalletState !== null && WalletState !== void 0 && WalletState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWalletContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70,
@@ -52,20 +49,9 @@ var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
   })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 30,
     height: 15
-  }))), /*#__PURE__*/_react.default.createElement(_styles.EqualWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 30,
-    height: 20
-  })), /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 70,
-    height: 20
-  })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-    width: 30,
-    height: 15
   }))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWalletContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, ((_WalletState$wallets = WalletState.wallets) === null || _WalletState$wallets === void 0 ? void 0 : (_WalletState$wallets$ = _WalletState$wallets.find(function (wallet) {
     return wallet.type === 'credit_point';
-  })) === null || _WalletState$wallets$ === void 0 ? void 0 : _WalletState$wallets$.balance) || 0), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS', 'Points'))), /*#__PURE__*/_react.default.createElement(_styles.EqualWrapper, null, ","), /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, parsePrice(((_WalletState$wallets2 = WalletState.wallets) === null || _WalletState$wallets2 === void 0 ? void 0 : (_WalletState$wallets3 = _WalletState$wallets2.find(function (wallet) {
-    return wallet.type === 'cash';
-  })) === null || _WalletState$wallets3 === void 0 ? void 0 : _WalletState$wallets3.balance) || 0)), /*#__PURE__*/_react.default.createElement("p", null, t('CASH', 'Cash'))))));
+  })) === null || _WalletState$wallets$ === void 0 ? void 0 : _WalletState$wallets$.balance) || 0), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS', 'Points'))))));
 };
 
 var CustomerPointsWallet = function CustomerPointsWallet(props) {
