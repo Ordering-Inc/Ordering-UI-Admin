@@ -70,6 +70,12 @@ export const RecoveryActionListing = (props) => {
     console.log(val)
   }
 
+  const handleClickRecoverAction = (e, action) => {
+    const inValid = e.target.closest('.enable_control')
+    if (inValid) return
+    handleOpenDetail(action)
+  }
+
   return (
     <Container>
       <Table>
@@ -119,7 +125,10 @@ export const RecoveryActionListing = (props) => {
           ))
         ) : (
           recoveryActionList?.actions.map((action, i) => (
-            <Tbody key={i}>
+            <Tbody
+              key={i}
+              onClick={(e) => handleClickRecoverAction(e, action)}
+            >
               <tr>
                 <td className='actionInfo'>
                   <div>
@@ -165,7 +174,7 @@ export const RecoveryActionListing = (props) => {
       {!recoveryActionList.loading && (
         <PagesBottomContainer>
           <AddNewPageButton
-            onClick={() => handleOpenDetail()}
+            onClick={() => handleOpenDetail({})}
           >
             {t('ADD_NEW_RECOVERY_ACTION', 'Add new recovery action')}
           </AddNewPageButton>

@@ -4,7 +4,9 @@ import { Input, TextArea, Switch, Button } from '../../../styles'
 import {
   X as CloseIcon,
   Circle as UnCheckIcon,
-  RecordCircleFill as CheckIcon
+  RecordCircleFill as CheckIcon,
+  ChevronUp,
+  ChevronDown
 } from 'react-bootstrap-icons'
 
 import {
@@ -17,15 +19,35 @@ import {
   ParentCheckBoxWrapper,
   TimeContent,
   ButtonWrapper,
-  TimeBlock
+  TimeBlock,
+  DaysContent,
+  ArrowIconsWrapper,
+  DateContent,
+  ChildCheckBoxWrapper,
+  DateRangeContent
 } from './styles'
+import { AnalyticsCalendar } from '../../BusinessIntelligence/AnalyticsCalendar'
 
 export const RecoveryGeneral = (props) => {
+  const {
+    isAddMode,
+    formState,
+    recoveryActionState,
+    handleAddRecoveryAction,
+    handleUpdateClick,
+    handleChangeInput
+  } = props
+
   const [, t] = useLanguage()
 
   const [hours, setHours] = useState([])
   const [minutes, setMinutes] = useState([])
   const [curPreorderTime, setCurPreorderTime] = useState({})
+  const [selectedTimeType, setSelectedTimeType] = useState('time')
+
+  const handleChangeTimeType = (index) => {
+    setSelectedTimeType(index)
+  }
 
   const setTimeList = () => {
     const _hours = []
@@ -64,6 +86,16 @@ export const RecoveryGeneral = (props) => {
     // })
   }
 
+  const handleSubmitBtnClick = () => {
+    if (Object.keys(formState.changes).length > 0) {
+      if (isAddMode) {
+        handleAddRecoveryAction()
+      } else {
+        handleUpdateClick()
+      }
+    }
+  }
+
   useEffect(() => {
     setTimeList()
     // setCurPreorderTime({
@@ -78,13 +110,15 @@ export const RecoveryGeneral = (props) => {
         <InputWrapper>
           <label>{t('NAME', 'Name')}</label>
           <Input
-            type='text'
-            placeholder={t('NAME', 'Name')}
             name='name'
-            // value={(typeof formState?.changes?.redemption_rate !== 'undefined')
-            //   ? formState?.changes?.redemption_rate
-            //   : walletData?.redemption_rate ?? ''}
-            // onChange={handleChangeInput}
+            type='text'
+            placeholder={t('NAME', 'name')}
+            value={
+              formState?.changes?.name ?? recoveryActionState?.action?.name ?? ''
+            }
+            onChange={handleChangeInput}
+            disabled={formState.loading}
+            autoComplete='off'
           />
         </InputWrapper>
         <InputWrapper>
@@ -93,10 +127,12 @@ export const RecoveryGeneral = (props) => {
             placeholder={t('WRITE_LITTLE_DESCRIPTION', 'Write a little description')}
             name='description'
             rows={3}
-            // value={(typeof formState?.changes?.redemption_rate !== 'undefined')
-            //   ? formState?.changes?.redemption_rate
-            //   : walletData?.redemption_rate ?? ''}
-            // onChange={handleChangeInput}
+            value={
+              formState?.changes?.description ?? recoveryActionState?.action?.description ?? ''
+            }
+            onChange={handleChangeInput}
+            disabled={formState.loading}
+            autoComplete='off'
           />
         </InputWrapper>
         <AddCouponSwitchWrapper>
@@ -154,58 +190,104 @@ export const RecoveryGeneral = (props) => {
         <LastTimeWrapper>
           <h3>{t('LAST_TIME_CART_WAS_OPENED', 'Last time the cart was opened')}</h3>
           <TypeWrapper>
-            <ParentCheckBoxWrapper>
-              <CheckIcon className='checked-icon' />
+            <ParentCheckBoxWrapper onClick={() => handleChangeTimeType('time')}>
+              {selectedTimeType === 'time' ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
               <span>{t('TIME', 'Time')}</span>
             </ParentCheckBoxWrapper>
-            <TimeContent>
-              <TimeBlock>
-                <select
-                  value={curPreorderTime?.hour}
-                  name='hour'
-                  onChange={handleChangePreorderTime}
-                >
-                  {
-                    hours?.map((hour, i) => (
-                      <option value={hour.hour} key={i}>{hour.text}</option>
-                    ))
-                  }
-                </select>
-                <span>:</span>
-                <select
-                  value={curPreorderTime?.minute}
-                  name='minute'
-                  onChange={handleChangePreorderTime}
-                >
-                  {
-                    minutes?.map((minute, i) => (
+            {selectedTimeType === 'time' && (
+              <TimeContent>
+                <TimeBlock>
+                  <select
+                    value={curPreorderTime?.hour}
+                    name='hour'
+                    onChange={handleChangePreorderTime}
+                  >
+                    {
+                      hours?.map((hour, i) => (
+                        <option value={hour.hour} key={i}>{hour.text}</option>
+                      ))
+                    }
+                  </select>
+                  <span>:</span>
+                  <select
+                    value={curPreorderTime?.minute}
+                    name='minute'
+                    onChange={handleChangePreorderTime}
+                  >
+                    {minutes?.map((minute, i) => (
                       <option value={minute.minute} key={i}>{minute.text}</option>
-                    ))
-                  }
-                </select>
-              </TimeBlock>
-            </TimeContent>
+                    ))}
+                  </select>
+                </TimeBlock>
+              </TimeContent>
+            )}
           </TypeWrapper>
           <TypeWrapper>
-            <ParentCheckBoxWrapper>
-              <UnCheckIcon />
+            <ParentCheckBoxWrapper onClick={() => handleChangeTimeType('days')}>
+              {selectedTimeType === 'days' ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
               <span>{t('DAYS', 'Days')}</span>
             </ParentCheckBoxWrapper>
+            {selectedTimeType === 'days' && (
+              <DaysContent>
+                <div>
+                  <Input
+                    type='text'
+                    placeholder='00'
+                    onKeyPress={(e) => {
+                      if (!/^[0-9.]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
+                  />
+                  <ArrowIconsWrapper>
+                    <ChevronUp />
+                    <ChevronDown />
+                  </ArrowIconsWrapper>
+                </div>
+              </DaysContent>
+            )}
           </TypeWrapper>
           <TypeWrapper>
-            <ParentCheckBoxWrapper>
-              <UnCheckIcon />
+            <ParentCheckBoxWrapper onClick={() => handleChangeTimeType('date')}>
+              {selectedTimeType === 'date' ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
               <span>{t('Date', 'Date')}</span>
             </ParentCheckBoxWrapper>
+            {selectedTimeType === 'date' && (
+              <DateContent>
+                <ChildCheckBoxWrapper>
+                  <UnCheckIcon />
+                  <span>{t('AFTER', 'After')}</span>
+                </ChildCheckBoxWrapper>
+                <ChildCheckBoxWrapper>
+                  <UnCheckIcon />
+                  <span>{t('ON', 'On')}</span>
+                </ChildCheckBoxWrapper>
+                <ChildCheckBoxWrapper>
+                  <UnCheckIcon />
+                  <span>{t('BEFORE', 'Before')}</span>
+                </ChildCheckBoxWrapper>
+                <ChildCheckBoxWrapper>
+                  <UnCheckIcon />
+                  <span>{t('DATE_RANGE', 'Date range')}</span>
+                </ChildCheckBoxWrapper>
+                <DateRangeContent>
+                  <AnalyticsCalendar
+                    handleChangeDate={(from, to) => console.log(from, to)}
+                    leftAlign
+                  />
+                </DateRangeContent>
+              </DateContent>
+            )}
           </TypeWrapper>
         </LastTimeWrapper>
       </Container>
       <ButtonWrapper>
         <Button
           color='primary'
-          type='submit'
+          onClick={() => handleSubmitBtnClick()}
+          disabled={Object.keys(formState.changes).length === 0 || formState.loading}
         >
-          {t('SAVE', 'Save')}
+          {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
         </Button>
       </ButtonWrapper>
     </>

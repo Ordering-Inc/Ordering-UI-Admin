@@ -311,13 +311,13 @@ export const OpenCartsTable = (props) => {
                       </div>
                     </td>
                   )}
-                  <td className='total'>
-                    <div className='info'>
-                      {allowColumns?.total && (
+                  {allowColumns?.total && (
+                    <td className='total'>
+                      <div className='info'>
                         <p className='bold'>{parsePrice(order?.summary?.total)}</p>
-                      )}
-                    </div>
-                  </td>
+                      </div>
+                    </td>
+                  )}
                   <td />
                 </tr>
               </OrderTbody>

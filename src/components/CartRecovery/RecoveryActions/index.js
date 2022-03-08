@@ -11,12 +11,15 @@ import { RecoveryActionDetail } from '../RecoveryActionDetail'
 
 const RecoveryActionsUI = (props) => {
   const [isOpenDetail, setIsOpenDetail] = useState(false)
+  const [selectedAction, setSelectedAction] = useState(null)
 
   const handleCloseDetail = () => {
     setIsOpenDetail(false)
+    setSelectedAction(null)
   }
 
-  const handleOpenDetail = () => {
+  const handleOpenDetail = (action) => {
+    setSelectedAction(action)
     setIsOpenDetail(true)
   }
 
@@ -40,6 +43,8 @@ const RecoveryActionsUI = (props) => {
           defaultSideBarWidth={550}
         >
           <RecoveryActionDetail
+            {...props}
+            action={selectedAction}
             onClose={() => handleCloseDetail()}
           />
         </SideBar>

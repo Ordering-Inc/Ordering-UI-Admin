@@ -120,6 +120,44 @@ export const RecoveryActions = (props) => {
     }
   }
 
+  /**
+   * Method to add the recovery action in the recovery action list
+   * @param {Object} action recovery action to add
+   */
+  const handleSuccessAddRecoveryAction = (action) => {
+    const actions = [...recoveryActionList.actions, action]
+    setPaginationProps({
+      ...paginationProps,
+      to: paginationProps?.to + 1,
+      total: paginationProps?.total + 1
+    })
+    setRecoveryActionList({ ...recoveryActionList, actions })
+  }
+
+  /**
+   * Method to update the recovery action list
+   */
+  const handleSuccessUpdateRecoveryAction = (updatedPromotions) => {
+    setRecoveryActionList({
+      ...recoveryActionList,
+      actions: updatedPromotions
+    })
+  }
+
+  /**
+   * Method to delete the recovery action in the recovery action list
+   * @param {Number} actionId recovery action to delete
+   */
+  const handleSuccessDeleteRecoveryAction = (actionId) => {
+    const actions = recoveryActionList.actions.filter(action => action.id !== actionId)
+    setPaginationProps({
+      ...paginationProps,
+      total: paginationProps?.total - 1
+    })
+    console.log(actions, 'This is actions')
+    setRecoveryActionList({ ...recoveryActionList, actions: actions })
+  }
+
   useEffect(() => {
     if (recoveryActionList.loading) return
     getRecoveryList(1, paginationProps.pageSize)
@@ -135,11 +173,15 @@ export const RecoveryActions = (props) => {
         <UIComponent
           {...props}
           searchValue={searchValue}
-          handleChangeSearch={handleChangeSearch}
           paginationProps={paginationProps}
-          setPaginationProps={setPaginationProps}
           recoveryActionList={recoveryActionList}
           getRecoveryList={getRecoveryList}
+          setPaginationProps={setPaginationProps}
+          handleChangeSearch={handleChangeSearch}
+          handleSuccessAddRecoveryAction={handleSuccessAddRecoveryAction}
+          handleSuccessUpdateRecoveryAction={handleSuccessUpdateRecoveryAction}
+          handleSuccessDeleteRecoveryAction={handleSuccessDeleteRecoveryAction}
+          setFilterValues={setFilterValues}
         />
       )}
     </>

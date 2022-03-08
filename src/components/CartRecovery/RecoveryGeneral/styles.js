@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   width: 100%;
   padding-top: 7px;
+
+  .btn-submit {
+    display: none;
+  }
 `
 
 export const InputWrapper = styled.div`
@@ -105,6 +109,7 @@ export const TypeWrapper = styled.div`
 export const ParentCheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   svg {
     font-size: 16px;
@@ -123,6 +128,10 @@ export const ParentCheckBoxWrapper = styled.div`
       margin-left: 0px;
     `}
   }
+`
+
+export const ChildCheckBoxWrapper = styled(ParentCheckBoxWrapper)`
+  margin-bottom: 10px;
 `
 
 export const TimeContent = styled.div`
@@ -161,5 +170,67 @@ export const TimeBlock = styled.div`
     font-size: 14px;
     color: ${props => props.theme?.colors.secundaryLight};
     appearance: none;
+  }
+`
+
+export const DaysContent = styled.div`
+  padding: 15px 0px 10px 0px;
+  > div {
+    width: 216px;
+    position: relative;
+    input {
+      width: 100%;
+      height: 44px;
+      padding-right: 25px;
+      ${props => props.theme?.rtl && css`
+        padding-left: 25px;
+        padding-right: 15px;
+      `}
+    }
+  }
+`
+
+export const ArrowIconsWrapper = styled.div`
+  position: absolute;
+  height: 100%;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 10px;
+  right: 0px;
+  ${props => props.theme?.rtl && css`
+    right: initial;
+    left: 0px;
+  `}
+  svg {
+    color: ${props => props.theme.colors.secundaryLight};
+    font-size: 12px;
+  }
+`
+
+export const DateContent = styled.div`
+  padding: 15px 25px 10px 25px;
+`
+
+export const DateRangeContent = styled.div`
+  position: relative;
+  > button {
+    border-radius: 8px;
+    height: 44px;
+    background-color: ${props => props.theme.colors.secundary};
+    color: ${props => props.theme.colors.headingColor};
+    border: none;
+  
+    svg {
+      font-size: 16px;
+      margin-right: 12px;
+      color: ${props => props.theme.colors.lightGray};
+      ${props => props.theme.rtl && css`
+        margin-left: 12px;
+        margin-right: 0;
+      `}
+    }
   }
 `

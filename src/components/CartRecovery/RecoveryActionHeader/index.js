@@ -53,7 +53,7 @@ export const RecoveryActionHeader = (props) => {
           <Button
             borderRadius='8px'
             color='lightPrimary'
-            onClick={() => handleOpenDetail()}
+            onClick={() => handleOpenDetail({})}
           >
             {t('ADD_RECOVERY_ACTION', 'Add recovery action')}
           </Button>
