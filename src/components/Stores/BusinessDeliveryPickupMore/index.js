@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessDeliveryDetails } from '../BusinessDeliveryDetails'
+import { BusinessPickupDetails } from '../BusinessPickupDetails'
 
 import {
   Container,
@@ -13,8 +14,8 @@ export const BusinessDeliveryPickupMore = (props) => {
   const [selectedTab, setSelectedTab] = useState('delivery')
 
   const tabs = [
-    { key: 'delivery', content: t('DELIVERY', 'Delivery') }
-    // { key: 'pickup', content: t('PICKUP', 'Pickup') }
+    { key: 'delivery', content: t('DELIVERY', 'Delivery') },
+    { key: 'pickup', content: t('PICKUP', 'Pickup') }
   ]
 
   return (
@@ -33,6 +34,9 @@ export const BusinessDeliveryPickupMore = (props) => {
       </TabsContainer>
       {selectedTab === 'delivery' && (
         <BusinessDeliveryDetails {...props} />
+      )}
+      {selectedTab === 'pickup' && (
+        <BusinessPickupDetails {...props} />
       )}
     </Container>
   )
