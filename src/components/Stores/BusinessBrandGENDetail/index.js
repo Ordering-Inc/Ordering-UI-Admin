@@ -121,24 +121,18 @@ const BusinessBrandGENDetailUI = (props) => {
           <input
             name='name'
             placeholder={t('WRITE_A_NAME', 'Write a name')}
-            defaultValue={
-              brandFormState?.result?.result
-                ? brandFormState?.result?.result?.name
-                : (brand?.name ?? brandFormState?.changes?.name)
-            }
+            value={brandFormState?.changes?.name ?? brand?.name ?? ''}
             onChange={handleChangeInput}
             disabled={brandFormState.loading}
             autoComplete='off'
           />
+        </FormControl>
+        <FormControl>
           <Label>{t('SLUG', 'Slug')}</Label>
           <input
             name='slug'
             placeholder={t('WRITE_A_SLUG', 'Write a slug')}
-            defaultValue={
-              brandFormState?.result?.result
-                ? brandFormState?.result?.result?.slug
-                : (brand?.slug ?? brandFormState?.changes?.slug)
-            }
+            value={brandFormState?.changes?.slug ?? brand?.slug ?? ''}
             onChange={handleChangeInput}
             disabled={brandFormState.loading}
             autoComplete='off'
