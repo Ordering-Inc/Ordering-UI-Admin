@@ -13,6 +13,7 @@ export const PaymentMethodsContainer = styled.div`
     color: ${props => props.theme.colors.headingColor};
     font-size: 20px;
     font-weight: 700;
+    margin-top: 5px;
   }
   > button {
     height: 44px;
@@ -25,7 +26,6 @@ export const PaymentMethodsContainer = styled.div`
 
 export const PaymethodListWrapper = styled.div`
   border-top: 1px solid ${props => props.theme.colors.borderColor};
-  margin: 20px 0;
 `
 
 export const PaymethodOptionContainer = styled.div`
@@ -77,4 +77,24 @@ export const PaymethodName = styled.span`
   font-size: 14px;
   flex: 1;
   margin: 0 10px;
+`
+export const SearchBarWrapper = styled.div`
+  margin-bottom: 15px;
+  margin-top: 27px;
+`
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  button {
+    height: 32px;
+    font-size: 12px;
+    &:first-child {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 20px;
+      ` : css`
+        margin-right: 20px;
+      `}
+    }
+  }
 `
