@@ -118,6 +118,7 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
 
   var handleCloseSidebar = function handleCloseSidebar() {
     setOpenDetail(false);
+    setSelectedBrand(null);
   };
 
   var handleOpenSideBar = function handleOpenSideBar(id) {
