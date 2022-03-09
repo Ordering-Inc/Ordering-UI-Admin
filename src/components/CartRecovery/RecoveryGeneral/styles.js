@@ -7,6 +7,15 @@ export const Container = styled.div`
   .btn-submit {
     display: none;
   }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 `
 
 export const InputWrapper = styled.div`

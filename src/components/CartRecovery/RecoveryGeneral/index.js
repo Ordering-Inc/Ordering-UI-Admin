@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Input, TextArea, Switch, Button } from '../../../styles'
+import { Input, TextArea, Button } from '../../../styles'
 import {
-  X as CloseIcon,
+  // X as CloseIcon,
   Circle as UnCheckIcon,
-  RecordCircleFill as CheckIcon,
   ChevronUp,
-  ChevronDown
+  ChevronDown,
+  RecordCircleFill as CheckIcon
 } from 'react-bootstrap-icons'
 
 import {
   Container,
   InputWrapper,
-  AddCouponSwitchWrapper,
-  CuponCodeWrapper,
+  // AddCouponSwitchWrapper,
+  // CuponCodeWrapper,
   LastTimeWrapper,
   TypeWrapper,
   ParentCheckBoxWrapper,
@@ -21,12 +21,12 @@ import {
   ButtonWrapper,
   TimeBlock,
   DaysContent,
-  ArrowIconsWrapper,
-  DateContent,
-  ChildCheckBoxWrapper,
-  DateRangeContent
+  ArrowIconsWrapper
+  // DateContent,
+  // ChildCheckBoxWrapper,
+  // DateRangeContent
 } from './styles'
-import { AnalyticsCalendar } from '../../BusinessIntelligence/AnalyticsCalendar'
+// import { AnalyticsCalendar } from '../../BusinessIntelligence/AnalyticsCalendar'
 
 export const RecoveryGeneral = (props) => {
   const {
@@ -35,7 +35,8 @@ export const RecoveryGeneral = (props) => {
     recoveryActionState,
     handleAddRecoveryAction,
     handleUpdateClick,
-    handleChangeInput
+    handleChangeInput,
+    handleChangeItem
   } = props
 
   const [, t] = useLanguage()
@@ -43,11 +44,8 @@ export const RecoveryGeneral = (props) => {
   const [hours, setHours] = useState([])
   const [minutes, setMinutes] = useState([])
   const [curPreorderTime, setCurPreorderTime] = useState({})
-  const [selectedTimeType, setSelectedTimeType] = useState('time')
-
-  const handleChangeTimeType = (index) => {
-    setSelectedTimeType(index)
-  }
+  const [curDayTime, setCurDayTime] = useState(0)
+  const [isTime, setIsTime] = useState(true)
 
   const setTimeList = () => {
     const _hours = []
@@ -77,13 +75,16 @@ export const RecoveryGeneral = (props) => {
       ...curPreorderTime,
       [type]: value
     })
-    // let preorderTime = 0
-    // if (type === 'hour') preorderTime = parseInt(value) * 60 + parseInt(curPreorderTime?.minute)
-    // else preorderTime = parseInt(curPreorderTime?.hour) * 60 + parseInt(value)
-    // setFormState({
-    //   ...formState,
-    //   changes: { preorder_time: preorderTime }
-    // })
+    let preorderTime = 0
+    if (type === 'hour') preorderTime = parseInt(value) * 60 + parseInt(curPreorderTime?.minute)
+    else preorderTime = parseInt(curPreorderTime?.hour) * 60 + parseInt(value)
+    handleChangeItem({ times: [preorderTime], launch_type: 'times' })
+  }
+
+  const handleChangeDay = (evt) => {
+    const day = evt.target.value
+    setCurDayTime(day)
+    handleChangeItem({ times: [day * 24 * 60], launch_type: 'times' })
   }
 
   const handleSubmitBtnClick = () => {
@@ -96,13 +97,25 @@ export const RecoveryGeneral = (props) => {
     }
   }
 
+  const handleSwitchTime = () => {
+    setIsTime(prev => !prev)
+  }
+
   useEffect(() => {
     setTimeList()
-    // setCurPreorderTime({
-    //   hour: business?.preorder_time ? (parseInt(business?.preorder_time / 60)) : '0',
-    //   minute: business?.preorder_time ? (business?.preorder_time % 60) : '0'
-    // })
-  }, [])
+    setCurPreorderTime({
+      hour: recoveryActionState?.action?.times ? (parseInt(recoveryActionState?.action?.times[0] / 60)) : '0',
+      minute: recoveryActionState?.action?.times ? (recoveryActionState?.action?.times[0] % 60) : '0'
+    })
+    if (!recoveryActionState?.action?.times) return
+
+    if (recoveryActionState?.action?.times[0] / 60 < 24) {
+      setIsTime(true)
+    } else {
+      setIsTime(false)
+      setCurDayTime(parseInt(recoveryActionState?.action.times[0] / 60 / 24))
+    }
+  }, [recoveryActionState?.action])
 
   return (
     <>
@@ -135,14 +148,14 @@ export const RecoveryGeneral = (props) => {
             autoComplete='off'
           />
         </InputWrapper>
-        <AddCouponSwitchWrapper>
+        {/* <AddCouponSwitchWrapper>
           <span>{t('ADD_COUPON', 'Add coupon')}</span>
           <Switch
             defaultChecked={false}
             onChange={(value) => console.log(value)}
           />
-        </AddCouponSwitchWrapper>
-        <CuponCodeWrapper>
+        </AddCouponSwitchWrapper> */}
+        {/* <CuponCodeWrapper>
           <label>{t('COUPON_CODE', 'Coupon code')}</label>
           <div>
             <Button
@@ -186,15 +199,15 @@ export const RecoveryGeneral = (props) => {
               placeholder={t('WRITE_A_WORD', 'Write a word')}
             />
           </div>
-        </CuponCodeWrapper>
+        </CuponCodeWrapper> */}
         <LastTimeWrapper>
           <h3>{t('LAST_TIME_CART_WAS_OPENED', 'Last time the cart was opened')}</h3>
           <TypeWrapper>
-            <ParentCheckBoxWrapper onClick={() => handleChangeTimeType('time')}>
-              {selectedTimeType === 'time' ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
+            <ParentCheckBoxWrapper onClick={() => handleSwitchTime()}>
+              {isTime ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
               <span>{t('TIME', 'Time')}</span>
             </ParentCheckBoxWrapper>
-            {selectedTimeType === 'time' && (
+            {isTime && (
               <TimeContent>
                 <TimeBlock>
                   <select
@@ -223,21 +236,24 @@ export const RecoveryGeneral = (props) => {
             )}
           </TypeWrapper>
           <TypeWrapper>
-            <ParentCheckBoxWrapper onClick={() => handleChangeTimeType('days')}>
-              {selectedTimeType === 'days' ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
+            <ParentCheckBoxWrapper onClick={() => handleSwitchTime()}>
+              {!isTime ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
               <span>{t('DAYS', 'Days')}</span>
             </ParentCheckBoxWrapper>
-            {selectedTimeType === 'days' && (
+            {!isTime && (
               <DaysContent>
                 <div>
                   <Input
-                    type='text'
+                    type='number'
+                    min='0'
                     placeholder='00'
                     onKeyPress={(e) => {
                       if (!/^[0-9.]$/.test(e.key)) {
                         e.preventDefault()
                       }
                     }}
+                    value={curDayTime}
+                    onChange={handleChangeDay}
                   />
                   <ArrowIconsWrapper>
                     <ChevronUp />
@@ -247,12 +263,16 @@ export const RecoveryGeneral = (props) => {
               </DaysContent>
             )}
           </TypeWrapper>
-          <TypeWrapper>
-            <ParentCheckBoxWrapper onClick={() => handleChangeTimeType('date')}>
-              {selectedTimeType === 'date' ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
+          {/* <TypeWrapper>
+            <ParentCheckBoxWrapper onClick={() => handleChangeItem({ launch_type: 'date' })}>
+              {((typeof formState?.changes?.launch_type !== 'undefined')
+                ? formState?.changes?.launch_type === 'date'
+                : recoveryActionState?.action?.launch_type === 'date')
+                ? <CheckIcon className='checked-icon' />
+                : <UnCheckIcon />}
               <span>{t('Date', 'Date')}</span>
             </ParentCheckBoxWrapper>
-            {selectedTimeType === 'date' && (
+            {((typeof formState?.changes?.launch_type !== 'undefined') ? formState?.changes?.launch_type === 'date' : recoveryActionState?.action?.launch_type === 'date') && (
               <DateContent>
                 <ChildCheckBoxWrapper>
                   <UnCheckIcon />
@@ -278,7 +298,7 @@ export const RecoveryGeneral = (props) => {
                 </DateRangeContent>
               </DateContent>
             )}
-          </TypeWrapper>
+          </TypeWrapper> */}
         </LastTimeWrapper>
       </Container>
       <ButtonWrapper>
