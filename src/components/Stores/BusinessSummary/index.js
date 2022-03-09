@@ -77,6 +77,10 @@ export const BusinessSummary = (props) => {
       value: t('PAYMENTS_METHODS', 'Payment methods')
     },
     {
+      key: 'tax_fees',
+      value: t('TAX_AND_FEES', 'Tax & fees')
+    },
+    {
       key: 'promotions',
       value: t('PROMOTIONS', 'Promotions')
     },

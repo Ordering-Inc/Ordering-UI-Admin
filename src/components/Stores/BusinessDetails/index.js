@@ -8,6 +8,7 @@ import { BusinessSchedule } from '../BusinessSchedule'
 import { BusinessMenu } from '../BusinessMenu'
 import { BusinessDeliveryPickupMore } from '../BusinessDeliveryPickupMore'
 import { BusinessPaymentMethods } from '../BusinessPaymentMethods'
+import { BusinessTaxAndFees } from '../BusinessTaxAndFees'
 import { BusinessPromotionList } from '../BusinessPromotionList'
 import { BusinessCustomFields } from '../BusinessCustomFields'
 import { BusinessWebhooks } from '../BusinessWebhooks'
@@ -200,6 +201,14 @@ export const BusinessDetailsUI = (props) => {
               business={businessState?.business}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               handleSuccessUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'tax_fees' && (
+            <BusinessTaxAndFees
+              formState={formState}
+              setFormState={setFormState}
+              business={businessState?.business}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
             />
           )}
           {selectedItem === 'promotions' && (
