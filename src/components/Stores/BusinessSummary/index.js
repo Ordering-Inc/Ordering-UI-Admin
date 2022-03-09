@@ -85,6 +85,10 @@ export const BusinessSummary = (props) => {
       value: t('PROMOTIONS', 'Promotions')
     },
     {
+      key: 'preorder',
+      value: t('PREORDER_SETTING', 'Preorder')
+    },
+    {
       key: 'custom_fields',
       value: t('CUSTOM_FIELDS', 'Custom fields')
     },

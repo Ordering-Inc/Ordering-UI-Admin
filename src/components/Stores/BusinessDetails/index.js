@@ -8,6 +8,7 @@ import { BusinessSchedule } from '../BusinessSchedule'
 import { BusinessMenu } from '../BusinessMenu'
 import { BusinessDeliveryPickupMore } from '../BusinessDeliveryPickupMore'
 import { BusinessPaymentMethods } from '../BusinessPaymentMethods'
+import { BusinessPreorderDetails } from '../BusinessPreorderDetails'
 import { BusinessTaxAndFees } from '../BusinessTaxAndFees'
 import { BusinessPromotionList } from '../BusinessPromotionList'
 import { BusinessCustomFields } from '../BusinessCustomFields'
@@ -218,6 +219,14 @@ export const BusinessDetailsUI = (props) => {
               business={businessState?.business}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               handleSuccessUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'preorder' && (
+            <BusinessPreorderDetails
+              formState={formState}
+              setFormState={setFormState}
+              business={businessState?.business}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
             />
           )}
           {selectedItem === 'custom_fields' && (
