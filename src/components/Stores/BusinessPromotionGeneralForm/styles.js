@@ -8,24 +8,13 @@ export const Container = styled.div`
     margin-top: 10px;
   }
 `
-
 export const PromotionImage = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  margin: 0 auto;
-
-  @media (min-width: 768px) {
-    width: auto;
-  }
+  margin-bottom: 29px;
 `
-
 export const Image = styled.div`
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 187px;
+  height: 187px;
   border-radius: 8px;
   overflow: hidden;
   background: ${props => props.theme.colors.borderColor};
@@ -78,25 +67,16 @@ export const UploadImageIcon = styled.div`
 
   span {
     margin: 0;
-    font-size: 10px;
+    font-size: 12px;
     color: #ADB5BD;
   }
 
   svg {
-    width: 25px;
-    height: 25px;
+    font-size: 32px;
     color: #ADB5BD;
+    margin-bottom: 6px;
   }
 `
-
-export const SkeletonWrapper = styled.div`
-  span{
-    height: 100%;
-    position: relative;
-    top: -2.5px;
-  }
-`
-
 export const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;

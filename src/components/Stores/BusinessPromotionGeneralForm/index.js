@@ -1,23 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react'
-// import Skeleton from 'react-loading-skeleton'
 import { Button, Input, TextArea } from '../../../styles'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { Alert } from '../../Shared'
 
 import {
   BusinessPromotionForm as BusinessPromotionFormController,
-  // ExamineClick,
-  // DragAndDrop,
+  ExamineClick,
+  DragAndDrop,
   useLanguage
 } from 'ordering-components-admin'
 import {
-  // Camera as CameraIcon,
-  // CardImage,
+  Camera as CameraIcon,
+  CardImage,
   Calendar4,
   Circle,
   RecordCircleFill
 } from 'react-bootstrap-icons'
-// import { bytesConverter } from '../../utils'
+import { bytesConverter } from '../../../utils'
 
 import { DateRange } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
@@ -27,11 +26,10 @@ import moment from 'moment'
 
 import {
   Container,
-  // PromotionImage,
-  // Image,
-  // Camera,
-  // SkeletonWrapper,
-  // UploadImageIcon,
+  PromotionImage,
+  Image,
+  Camera,
+  UploadImageIcon,
   ItemWrapper,
   Label,
   DateRangeWrapper,
@@ -48,7 +46,7 @@ const BusinessPromotionGeneralFormUI = (props) => {
     isAddMode,
     promotionState,
     formState,
-    // handleChangeImage,
+    handleChangeImage,
     handleChangeInput,
     handleChangeItem,
     handleUpdateClick,
@@ -56,7 +54,7 @@ const BusinessPromotionGeneralFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  // const inputRef = useRef(null)
+  const inputRef = useRef(null)
   const calendarRef = useRef()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [dateRange, setDateRange] = useState([
@@ -79,31 +77,31 @@ const BusinessPromotionGeneralFormUI = (props) => {
     }
   ]
 
-  // const handleClickImage = () => {
-  //   inputRef.current.click()
-  // }
+  const handleClickImage = () => {
+    inputRef.current.click()
+  }
 
-  // const handleFiles = (files) => {
-  //   if (files.length === 1) {
-  //     const type = files[0].type.split('/')[0]
-  //     if (type !== 'image') {
-  //       setAlertState({
-  //         open: true,
-  //         content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
-  //       })
-  //       return
-  //     }
+  const handleFiles = (files) => {
+    if (files.length === 1) {
+      const type = files[0].type.split('/')[0]
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        })
+        return
+      }
 
-  //     if (bytesConverter(files[0]?.size) > 2048) {
-  //       setAlertState({
-  //         open: true,
-  //         content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
-  //       })
-  //       return
-  //     }
-  //     handleChangeImage(files[0])
-  //   }
-  // }
+      if (bytesConverter(files[0]?.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        })
+        return
+      }
+      handleChangeImage(files[0])
+    }
+  }
 
   const handleClickOutside = (e) => {
     if (!isShowCalendar) return
@@ -181,15 +179,14 @@ const BusinessPromotionGeneralFormUI = (props) => {
 
   return (
     <Container>
-      {/* <PromotionImage className='user-image'>
+      <PromotionImage>
         <Image
           onClick={() => handleClickImage()}
         >
           <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
             <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
-              {formState.loading
-                ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                : ((!formState.changes?.image || formState.result.error)
+              {
+                (!formState.changes?.image || formState.result.error)
                   ? promotionState?.promotion?.image
                     ? (<img src={promotionState?.promotion?.image} alt='promotion image' width='90px' height='90px' loading='lazy' />)
                     : (
@@ -200,12 +197,12 @@ const BusinessPromotionGeneralFormUI = (props) => {
                     )
                   : formState?.changes?.image &&
                     <img src={formState?.changes?.image} alt='promotion image' loading='lazy' />
-                )}
+              }
             </DragAndDrop>
           </ExamineClick>
           <Camera><CameraIcon /></Camera>
         </Image>
-      </PromotionImage> */}
+      </PromotionImage>
       <ItemWrapper>
         <Label>{t('NAME', 'Name')}</Label>
         <Input
