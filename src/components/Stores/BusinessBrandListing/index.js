@@ -61,6 +61,7 @@ const BusinessBrandListingUI = (props) => {
 
   const handleCloseSidebar = () => {
     setOpenDetail(false)
+    setSelectedBrand(null)
   }
 
   const handleOpenSideBar = (id) => {
