@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ToggleItemWrapper = exports.Title = exports.BusinessNotificationsContainer = exports.AccordionTitle = void 0;
+exports.Title = exports.BusinessNotificationsContainer = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+var _templateObject, _templateObject2;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17,18 +17,10 @@ var BusinessNotificationsContainer = _styledComponents.default.div(_templateObje
 
 exports.BusinessNotificationsContainer = BusinessNotificationsContainer;
 
-var Title = _styledComponents.default.h1(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-size: 20px;\n  font-weight: 700;\n  color: ", ";\n  margin-bottom: 30px;\n"])), function (props) {
+var Title = _styledComponents.default.h1(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  font-size: 20px;\n  font-weight: 700;\n  color: ", ";\n  margin-top: 5px;\n  margin-bottom: 40px;\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
 });
 
 exports.Title = Title;
-
-var ToggleItemWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 10px;\n  border-bottom: 1px solid #E9ECEF;\n  font-weight: 500;\n"])));
-
-exports.ToggleItemWrapper = ToggleItemWrapper;
-
-var AccordionTitle = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  text-transform: capitalize;\n"])));
-
-exports.AccordionTitle = AccordionTitle;

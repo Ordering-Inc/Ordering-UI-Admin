@@ -9,8 +9,6 @@ exports.BusinessNotifications = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactBootstrap = require("react-bootstrap");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styles = require("./styles");
@@ -47,35 +45,7 @@ var BusinessNotifications = function BusinessNotifications(props) {
     if (formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) return;
     handleUpdateBusinessClick();
   }, [formState]);
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessNotificationsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('NOTIFICATIONS', 'Notifications')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
-    eventKey: "0"
-  }, /*#__PURE__*/_react.default.createElement(_styles.AccordionTitle, null, t('EMAILS_AND_PHONES', 'Emails and phones'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
-    eventKey: "0"
-  }, /*#__PURE__*/_react.default.createElement(_BusinessEmailAndPhone.BusinessEmailAndPhone, props)), /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
-    eventKey: "1"
-  }, /*#__PURE__*/_react.default.createElement(_styles.AccordionTitle, null, t('GPRS_PRINTERS', 'Gprs printers'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
-    eventKey: "1"
-  }, /*#__PURE__*/_react.default.createElement(_BusinessGprsPrinters.BusinessGprsPrinters, props))));
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessNotificationsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('NOTIFICATIONS', 'Notifications')), /*#__PURE__*/_react.default.createElement(_BusinessEmailAndPhone.BusinessEmailAndPhone, props), /*#__PURE__*/_react.default.createElement(_BusinessGprsPrinters.BusinessGprsPrinters, props));
 };
 
 exports.BusinessNotifications = BusinessNotifications;
-
-var ContextAwareToggle = function ContextAwareToggle(_ref) {
-  var children = _ref.children,
-      eventKey = _ref.eventKey,
-      callback = _ref.callback;
-  var currentEventKey = (0, _react.useContext)(_reactBootstrap.AccordionContext);
-  var decoratedOnClick = (0, _reactBootstrap.useAccordionToggle)(eventKey, function () {
-    return callback && callback(eventKey);
-  });
-  var isCurrentEventKey = currentEventKey === eventKey;
-
-  var handleButtonClick = function handleButtonClick() {
-    decoratedOnClick();
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_styles.ToggleItemWrapper, {
-    active: isCurrentEventKey,
-    onClick: handleButtonClick
-  }, children);
-};

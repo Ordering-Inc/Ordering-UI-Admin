@@ -66,7 +66,7 @@ var BusinessEmailAndPhone = function BusinessEmailAndPhone(props) {
   var saveEmailOrders = function saveEmailOrders(email) {
     clearTimeout(timeout1);
     timeout1 = setTimeout(function () {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (email.trim() === '' || !re.test(email)) return;
       setFormState(_objectSpread(_objectSpread({}, formState), {}, {
         changes: {
@@ -117,10 +117,10 @@ var BusinessEmailAndPhone = function BusinessEmailAndPhone(props) {
     }));
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEmailAndPhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles.Label, null, t('EMAIL_RECEIVE_ORDERS')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessEmailAndPhoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('EMAILS_NOTIFICATIONS', 'Email notifications')), /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles.Label, null, t('EMAIL_RECEIVE_ORDERS', 'Email to receive orders')), /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "text",
     defaultValue: (_business$email = business === null || business === void 0 ? void 0 : business.email) !== null && _business$email !== void 0 ? _business$email : '',
-    placeholder: t('EMAIL_RECEIVE_ORDERS'),
+    placeholder: t('EMAIL_RECEIVE_ORDERS', 'Email to receive orders'),
     onChange: function onChange(e) {
       return saveEmailOrders(e.target.value);
     }
@@ -138,9 +138,7 @@ var BusinessEmailAndPhone = function BusinessEmailAndPhone(props) {
     onChange: function onChange(e) {
       return saveBusinessCel(e.target.value);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles.Label, null, t('ORDERS_APP_PUSH')), /*#__PURE__*/_react.default.createElement("span", {
-    className: "info"
-  }, t('ORDERS_APP_PUSH_DESC')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.OrdersAppPushContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SectionTitle, null, t('ORDERS_APP_PUSH')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDERS_APP_PUSH_DESC'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('EMAILS_AND_PHONES', 'Emails and phones'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

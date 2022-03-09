@@ -114,8 +114,8 @@ var BusinessSummary = function BusinessSummary(props) {
     key: 'menu',
     value: t('MENU_V21', 'Menu')
   }, {
-    key: 'delivery_zones',
-    value: t('DELIVERY_ZONES', 'Delivery zones')
+    key: 'delivery_pickup_more',
+    value: t('DELIVERY_PICKUP_MORE', 'Delivery, pickup & more')
   }, {
     key: 'notifications',
     value: t('NOTIFICATIONS', 'Notifications')
@@ -123,8 +123,14 @@ var BusinessSummary = function BusinessSummary(props) {
     key: 'payment_methods',
     value: t('PAYMENTS_METHODS', 'Payment methods')
   }, {
+    key: 'tax_fees',
+    value: t('TAX_AND_FEES', 'Tax & fees')
+  }, {
     key: 'promotions',
     value: t('PROMOTIONS', 'Promotions')
+  }, {
+    key: 'preorder',
+    value: t('PREORDER_SETTING', 'Preorder')
   }, {
     key: 'custom_fields',
     value: t('CUSTOM_FIELDS', 'Custom fields')

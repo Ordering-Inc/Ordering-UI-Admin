@@ -23,9 +23,13 @@ var _BusinessSchedule = require("../BusinessSchedule");
 
 var _BusinessMenu = require("../BusinessMenu");
 
-var _BusinessDeliveryZone = require("../BusinessDeliveryZone");
+var _BusinessDeliveryPickupMore = require("../BusinessDeliveryPickupMore");
 
 var _BusinessPaymentMethods = require("../BusinessPaymentMethods");
+
+var _BusinessPreorderDetails = require("../BusinessPreorderDetails");
+
+var _BusinessTaxAndFees = require("../BusinessTaxAndFees");
 
 var _BusinessPromotionList = require("../BusinessPromotionList");
 
@@ -227,13 +231,10 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessBusinessMenu: handleUpdateBusinessState,
     setIsExtendExtraOpen: setIsExtendExtraOpen
-  }), selectedItem === 'delivery_zones' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryZone.BusinessDeliveryZone, {
+  }), selectedItem === 'delivery_pickup_more' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryPickupMore.BusinessDeliveryPickupMore, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
-    onClose: function onClose() {
-      return setIsExtendExtraOpen(false);
-    },
-    handleSuccessUpdate: handleUpdateBusinessState
+    handleUpdateBusinessState: handleUpdateBusinessState
   }), selectedItem === 'notifications' && /*#__PURE__*/_react.default.createElement(_BusinessNotifications.BusinessNotifications, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessUpdate: handleUpdateBusinessState,
@@ -244,12 +245,22 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleSuccessUpdate: handleUpdateBusinessState
+  }), selectedItem === 'tax_fees' && /*#__PURE__*/_react.default.createElement(_BusinessTaxAndFees.BusinessTaxAndFees, {
+    formState: formState,
+    setFormState: setFormState,
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+    handleUpdateBusinessClick: handleUpdateBusinessClick
   }), selectedItem === 'promotions' && /*#__PURE__*/_react.default.createElement(_BusinessPromotionList.BusinessPromotionList, {
     promotions: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.offers,
     businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.id,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleSuccessUpdate: handleUpdateBusinessState
+  }), selectedItem === 'preorder' && /*#__PURE__*/_react.default.createElement(_BusinessPreorderDetails.BusinessPreorderDetails, {
+    formState: formState,
+    setFormState: setFormState,
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+    handleUpdateBusinessClick: handleUpdateBusinessClick
   }), selectedItem === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_BusinessCustomFields.BusinessCustomFields, {
     businessId: businessState === null || businessState === void 0 ? void 0 : businessState.business.id,
     metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.metafields,

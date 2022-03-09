@@ -35,12 +35,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SideBar = function SideBar(props) {
   var open = props.open,
-      sidebarId = props.sidebarId,
       defaultSideBarWidth = props.defaultSideBarWidth,
       moveDistance = props.moveDistance,
       isBorderShow = props.isBorderShow,
       noAnimation = props.noAnimation,
       handleCloseWizard = props.handleCloseWizard;
+  var sideBarRef = (0, _react.useRef)(null);
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -51,7 +51,6 @@ var SideBar = function SideBar(props) {
       setIsMenuOpen = _useState2[1];
 
   var sideBarWidth = defaultSideBarWidth || 500;
-  var id = sidebarId || 'sideBar';
 
   var actionSidebar = function actionSidebar(value) {
     if (!value) {
@@ -64,12 +63,12 @@ var SideBar = function SideBar(props) {
   (0, _react.useEffect)(function () {
     if (isMenuOpen) {
       if (width <= 768 || width <= sideBarWidth) {
-        document.getElementById(id).style.width = '100vw';
+        sideBarRef.current.style.width = '100vw';
       } else {
-        document.getElementById(id).style.width = "".concat(sideBarWidth, "px");
+        sideBarRef.current.style.width = "".concat(sideBarWidth, "px");
       }
     }
-  }, [width, sideBarWidth]);
+  }, [width, sideBarWidth, isMenuOpen]);
   (0, _react.useEffect)(function () {
     if (!open) return;
     actionSidebar(true);
@@ -90,7 +89,7 @@ var SideBar = function SideBar(props) {
     };
   }, [open]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BarContainer, {
-    id: id,
+    ref: sideBarRef,
     isBorderShow: isBorderShow,
     moveDistance: moveDistance,
     noAnimation: noAnimation

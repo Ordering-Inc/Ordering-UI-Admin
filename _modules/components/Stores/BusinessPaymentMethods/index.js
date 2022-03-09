@@ -76,6 +76,8 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       businessPaymethodsState = props.businessPaymethodsState,
       paymethodsList = props.paymethodsList,
       handleClickPayment = props.handleClickPayment,
+      handleSelectAllPaymethods = props.handleSelectAllPaymethods,
+      handleSelectNonePaymethods = props.handleSelectNonePaymethods,
       handleDeleteBusinessPaymethodOption = props.handleDeleteBusinessPaymethodOption,
       setIsExtendExtraOpen = props.setIsExtendExtraOpen,
       actionState = props.actionState,
@@ -117,6 +119,11 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       selectedPaymethodGateway = _useState6[0],
       setSelectedPaymethodGateway = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      searchValue = _useState8[0],
+      setSearchValue = _useState8[1];
 
   var orderTypes = [{
     value: 1,
@@ -188,7 +195,26 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     });
     setSelectedBusinessPaymethod(updatedPaymethod);
   }, [businessPaymethodsState === null || businessPaymethodsState === void 0 ? void 0 : businessPaymethodsState.paymethods, selectedBusinessPaymethod]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMETHODS', 'Payment methods')), paymethodsList.loading || businessPaymethodsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMETHODS', 'Payment methods')), /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+    placeholder: t('SEARCH', 'Search'),
+    isCustomLayout: true,
+    search: searchValue,
+    onSearch: function onSearch(val) {
+      return setSearchValue(val);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "secundaryDark",
+    onClick: function onClick() {
+      return handleSelectAllPaymethods();
+    },
+    disabled: paymethodsList.loading || businessPaymethodsState.loading
+  }, t('SELECT_ALL', 'Select all')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "secundaryDark",
+    onClick: function onClick() {
+      return handleSelectNonePaymethods();
+    },
+    disabled: paymethodsList.loading || businessPaymethodsState.loading
+  }, t('SELECT_NONE', 'Select none'))), paymethodsList.loading || businessPaymethodsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOptionContainer, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOption, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -198,7 +224,11 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       width: 120,
       height: 24
     }))));
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.PaymethodListWrapper, null, paymethodsList.paymethods.map(function (paymethod) {
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.PaymethodListWrapper, null, paymethodsList.paymethods.filter(function (paymethod) {
+    var _paymethod$name;
+
+    return paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$name = paymethod.name) === null || _paymethod$name === void 0 ? void 0 : _paymethod$name.toLowerCase().includes(searchValue.toLowerCase());
+  }).map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOptionContainer, {
       key: paymethod.id,
       onClick: function onClick(e) {
