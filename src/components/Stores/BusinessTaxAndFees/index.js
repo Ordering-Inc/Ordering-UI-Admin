@@ -39,7 +39,7 @@ export const BusinessTaxAndFees = (props) => {
     <Container>
       <h1>{t('TAX_AND_FEES', 'Tax & fees')}</h1>
       <SwitchWrapper>
-        <p>{t('', 'Tax included on price')}</p>
+        <p>{t('TAX_INCLUDED', 'Tax included on price')}</p>
         <Switch
           defaultChecked={business?.tax_type === 1}
           onChange={checked => handleChangeFormState({ tax_type: checked ? 1 : 2 })}
