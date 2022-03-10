@@ -4,7 +4,6 @@ import { SearchBar } from '../../Shared'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
 import { Funnel, List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
-// import { OrdersDashboardControls } from '../OrdersDashboardControls'
 import { OrdersDashboardSLAControls } from '../OrdersDashboardSLAControls'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
@@ -33,10 +32,7 @@ export const OrdersContentHeader = (props) => {
     filterValues,
     selectedOrderIds,
     handleChangeFilterValues,
-    // handleDeleteMultiOrders,
-    // handleChangeMultiOrdersStatus,
     handleOpenTour,
-
     filterModalOpen,
     setFilterModalOpen
   } = props

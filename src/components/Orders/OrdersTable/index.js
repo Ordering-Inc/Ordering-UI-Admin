@@ -322,6 +322,9 @@ export const OrdersTable = (props) => {
             [...Array(10).keys()].map(i => (
               <OrderTbody key={i}>
                 <tr>
+                  <td>
+                    <Timestatus />
+                  </td>
                   <td
                     className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
                   >

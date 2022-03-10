@@ -11,7 +11,6 @@ import {
 } from './styles'
 
 export const OrdersDashboardSLAControls = (props) => {
-  // const { defaultValue } = props
   const [defaultOptionValue, setDefaultOptionValue] = useState(null)
   const [filteredTimeStatus, setFilteredTimeStatus] = useState([])
   const [, t] = useLanguage()
@@ -50,7 +49,6 @@ export const OrdersDashboardSLAControls = (props) => {
   ]
 
   const changeOrderTimeStatus = (val) => {
-    console.log(val)
     setDefaultOptionValue(val)
   }
 
@@ -59,15 +57,15 @@ export const OrdersDashboardSLAControls = (props) => {
     setFilteredTimeStatus(_filteredTimeStatus)
   }
 
-  // useEffect(() => {
-  //   setDefaultOptionValue(defaultValue)
-  // }, [defaultValue])
+  useEffect(() => {
+    setFilteredTimeStatus(timeStatus)
+  }, [])
 
   return (
     <OrdersDashboardSLAControlsContainer>
       <OrderTimeStatusSelectWrapper>
         <FirstSelect
-          // searchBarIsCustomLayout
+          searchBarIsCustomLayout
           placeholder={<Option noPadding><p>{t('SLA_S', 'SLA’s')}</p></Option>}
           options={filteredTimeStatus}
           defaultValue={defaultOptionValue}

@@ -155,11 +155,6 @@ const OrdersManagerUI = (props) => {
     setIsTourFlag(false)
   }, [isTourOpen])
 
-  useEffect(() => {
-    console.log('filterValues')
-    console.log(filterValues)
-  }, [filterValues])
-
   return (
     <>
       <OrdersListContainer
