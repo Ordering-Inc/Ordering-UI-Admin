@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperIndicator = exports.WrapItemView = exports.OrdersListContainer = exports.OrdersInnerContent = exports.OrdersContent = void 0;
+exports.WrapperIndicator = exports.WrapItemView = exports.OrdersListContainer = exports.OrdersInnerContent = exports.OrdersContent = exports.OrderSubFilterControls = exports.OrderStatusSubFilterWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -39,3 +39,11 @@ exports.WrapperIndicator = WrapperIndicator;
 var WrapItemView = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 
 exports.WrapItemView = WrapItemView;
+
+var OrderSubFilterControls = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n"])));
+
+exports.OrderSubFilterControls = OrderSubFilterControls;
+
+var OrderStatusSubFilterWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 50%;\n  display: inline-block;\n  flex: 1;\n  margin-right: 20px;\n"])));
+
+exports.OrderStatusSubFilterWrapper = OrderStatusSubFilterWrapper;
