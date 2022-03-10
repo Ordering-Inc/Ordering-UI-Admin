@@ -102,10 +102,6 @@ export const ProductHeader = styled.div`
     font-size: 14px;
     margin: 0;
   }
-
-  svg {
-    font-size: 16px;
-  }
 `
 
 export const ActionIconList = styled.div`
@@ -179,4 +175,8 @@ export const Breadcrumb = styled.div`
   svg {
     margin: 0 9px;
   }
+`
+export const ColumnsAllowWrapper = styled.div`
+  position: relative;
+  margin: 0 5px;
 `
