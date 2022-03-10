@@ -142,6 +142,12 @@ const ProductExtraOptionDetailsUI = (props) => {
     })
   }
 
+  const handleEnterAddSuboption = (e) => {
+    if (e.key === 'Enter' && e.shiftKey === false) {
+      handleSubmit(handleAddOption)()
+    }
+  }
+
   useEffect(() => {
     if (Object.keys(editErrors).length) {
       const errorContent = []
@@ -529,6 +535,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   if (!/^[0-9.]$/.test(e.key)) {
                     e.preventDefault()
                   }
+                  handleEnterAddSuboption(e)
                 }}
               />
             </InputWrapper>
@@ -546,6 +553,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                     if (!/^[0-9.]$/.test(e.key)) {
                       e.preventDefault()
                     }
+                    handleEnterAddSuboption(e)
                   }}
                 />
               </InputWrapper>
@@ -564,6 +572,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                     if (!/^[0-9.]$/.test(e.key)) {
                       e.preventDefault()
                     }
+                    handleEnterAddSuboption(e)
                   }}
                 />
               </InputWrapper>
