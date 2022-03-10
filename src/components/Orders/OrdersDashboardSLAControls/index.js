@@ -11,6 +11,7 @@ import {
 } from './styles'
 
 export const OrdersDashboardSLAControls = (props) => {
+  const { setTimeStatus } = props
   const [defaultOptionValue, setDefaultOptionValue] = useState(null)
   const [filteredTimeStatus, setFilteredTimeStatus] = useState([])
   const [, t] = useLanguage()
@@ -50,6 +51,7 @@ export const OrdersDashboardSLAControls = (props) => {
 
   const changeOrderTimeStatus = (val) => {
     setDefaultOptionValue(val)
+    setTimeStatus(val)
   }
 
   const handleChangeSearch = (searchValue) => {

@@ -34,7 +34,8 @@ export const OrdersContentHeader = (props) => {
     handleChangeFilterValues,
     handleOpenTour,
     filterModalOpen,
-    setFilterModalOpen
+    setFilterModalOpen,
+    setTimeStatus
   } = props
 
   const [, t] = useLanguage()
@@ -96,7 +97,7 @@ export const OrdersContentHeader = (props) => {
         <TopRightSection>
           {!isDisableControl && (
             <OrdersDashboardSLAControls
-              filterValues={filterValues}
+              setTimeStatus={setTimeStatus}
             />
           )}
           <WrapperSearchAndFilter
