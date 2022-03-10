@@ -44,7 +44,8 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
       spreadSheetState = props.spreadSheetState,
       handleRowRemove = props.handleRowRemove,
       handleAfterSectionEnd = props.handleAfterSectionEnd,
-      handleoutsideClickDeselects = props.handleoutsideClickDeselects;
+      handleoutsideClickDeselects = props.handleoutsideClickDeselects,
+      allowSpreadColumns = props.allowSpreadColumns;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -57,6 +58,11 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
       setAlertState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      hiddenColumns = _useState4[0],
+      setHiddenColumns = _useState4[1];
 
   var spreadSheetHeaderItems = [{
     title: t('ID', 'Id'),
@@ -77,6 +83,11 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
   }, {
     title: t('PRICE', 'Price'),
     code: 'price',
+    readOnly: false,
+    type: 'numeric'
+  }, {
+    title: t('PRODUCT_COST', 'Product cost'),
+    code: 'cost_price',
     readOnly: false,
     type: 'numeric'
   }, {
@@ -110,6 +121,20 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
       });
     }
   }, [spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.result]);
+  (0, _react.useEffect)(function () {
+    var index = 0;
+    var _hiddenColumns = [];
+
+    for (var key in allowSpreadColumns) {
+      if (!allowSpreadColumns[key]) {
+        _hiddenColumns.push(index);
+      }
+
+      index++;
+    }
+
+    setHiddenColumns(_hiddenColumns);
+  }, [allowSpreadColumns]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessSpreadSheetContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.SpreadSheetEditor, _extends({}, props, {
     isBusinessProducts: true,
     hotTableData: spreadSheetState.products,
@@ -118,6 +143,7 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
     handleRowRemove: handleRowRemove,
     handleAfterSectionEnd: handleAfterSectionEnd,
     handleoutsideClickDeselects: handleoutsideClickDeselects,
+    hiddenColumns: hiddenColumns,
     isRemove: true
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     width: "700px",

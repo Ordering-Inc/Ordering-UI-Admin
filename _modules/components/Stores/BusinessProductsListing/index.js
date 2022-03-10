@@ -55,13 +55,13 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -150,6 +150,33 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       _useState14 = _slicedToArray(_useState13, 2),
       openSidebar = _useState14[0],
       setOpenSidebar = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      openColumnsPopover = _useState16[0],
+      setOpenColumnsPopover = _useState16[1];
+
+  var _useState17 = (0, _react.useState)({
+    id: true,
+    name: true,
+    description: true,
+    price: true,
+    cost_price: true,
+    inventoried: true,
+    quantity: true
+  }),
+      _useState18 = _slicedToArray(_useState17, 2),
+      allowSpreadColumns = _useState18[0],
+      setAllowSpreadColumns = _useState18[1];
+
+  var spreadColumnOptions = [{
+    value: 'cost_price',
+    content: t('PRODUCT_COST', 'Product cost')
+  }];
+
+  var handleChangeAllowSpreadColumns = function handleChangeAllowSpreadColumns(type) {
+    setAllowSpreadColumns(_objectSpread(_objectSpread({}, allowSpreadColumns), {}, _defineProperty({}, type, !allowSpreadColumns[type])));
+  };
 
   var handleOpenCategoryDetails = function handleOpenCategoryDetails() {
     var category = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -321,13 +348,24 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return openBatchImageUploader();
     }
-  }, /*#__PURE__*/_react.default.createElement(_RiImageAddFill.default, null))), /*#__PURE__*/_react.default.createElement(_styles2.ViewMethodButton, {
-    active: viewMethod === 'list',
+  }, /*#__PURE__*/_react.default.createElement(_RiImageAddFill.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.ColumnsAllowWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
+    open: openColumnsPopover,
+    allowColumns: allowSpreadColumns,
+    optionsDefault: spreadColumnOptions,
+    onClick: function onClick() {
+      return setOpenColumnsPopover(!openColumnsPopover);
+    },
+    onClose: function onClose() {
+      return setOpenColumnsPopover(false);
+    },
+    handleChangeAllowColumns: handleChangeAllowSpreadColumns
+  }))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: viewMethod === 'list' ? 'primary' : 'black',
     onClick: function onClick() {
       return setViewMethod('list');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.ViewMethodButton, {
-    active: viewMethod === 'spreedsheet',
+  }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: viewMethod === 'spreedsheet' ? 'primary' : 'black',
     onClick: function onClick() {
       return setViewMethod('spreedsheet');
     }
@@ -336,7 +374,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     viewMethod: viewMethod,
     handleOpenProductDetails: handleOpenProductDetails,
     handleParentProductAdd: handleProductAdd,
-    isParentProductAdd: openSidebar === 'add_product'
+    isParentProductAdd: openSidebar === 'add_product',
+    allowSpreadColumns: allowSpreadColumns
   }))))), openSidebar === 'category_details' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     open: openSidebar === 'category_details',
     onClose: handleCloseEdit
@@ -384,10 +423,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState15 = (0, _react.useState)(false),
-      _useState16 = _slicedToArray(_useState15, 2),
-      isInitialRender = _useState16[0],
-      setIsInitialRender = _useState16[1];
+  var _useState19 = (0, _react.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      isInitialRender = _useState20[0],
+      setIsInitialRender = _useState20[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

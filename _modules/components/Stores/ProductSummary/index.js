@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductSummary = function ProductSummary(props) {
-  var _productState$product, _productState$product2, _productState$product3, _productState$product4, _productState$product5, _productState$product6, _productState$product7, _productState$product8, _productState$product9, _productState$product10, _productState$product11, _productState$product12, _productState$product13;
+  var _productState$product5, _productState$product6, _productState$product7, _productState$product8, _productState$product9, _productState$product10, _productState$product11, _productState$product12, _productState$product13, _productState$product14, _productState$product15, _productState$product16, _productState$product17;
 
   var actionSidebar = props.actionSidebar,
       showOption = props.showOption,
@@ -134,16 +134,28 @@ var ProductSummary = function ProductSummary(props) {
         }));
       }
     });
-  }; // const handleCopyLink = () => {
-  //   navigator.clipboard.writeText(window.location.href)
-  //   showToast(ToastType.Success, t('PRODUCT_LINK_COPIED_TO_CLIPBOARD', 'The product link was copied to your clipboard.'))
-  // }
+  };
 
+  var getPercentage = function getPercentage() {
+    if (productState.product) {
+      var _productState$product;
+
+      if (productState !== null && productState !== void 0 && (_productState$product = productState.product) !== null && _productState$product !== void 0 && _productState$product.price) {
+        var _productState$product2, _productState$product3, _productState$product4;
+
+        return ((productState === null || productState === void 0 ? void 0 : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.price) - (productState === null || productState === void 0 ? void 0 : (_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.cost_price)) * 100 / (productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.price);
+      } else {
+        return 100;
+      }
+    } else {
+      return 0;
+    }
+  };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductDetailsContainer, {
     disabled: productState.loading
-  }, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductName, null, productState === null || productState === void 0 ? void 0 : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
-    defaultChecked: (productState === null || productState === void 0 ? void 0 : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.enabled) || false,
+  }, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductName, null, productState === null || productState === void 0 ? void 0 : (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
+    defaultChecked: (productState === null || productState === void 0 ? void 0 : (_productState$product6 = productState.product) === null || _productState$product6 === void 0 ? void 0 : _productState$product6.enabled) || false,
     onChange: handleChangeProductActiveState
   })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
@@ -163,10 +175,11 @@ var ProductSummary = function ProductSummary(props) {
     onClick: function onClick() {
       return isEditMode ? setIsEditMode(false) : actionSidebar(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ProductSummaryContent, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductImageWrapper, null, productState !== null && productState !== void 0 && (_productState$product3 = productState.product) !== null && _productState$product3 !== void 0 && _productState$product3.images ? /*#__PURE__*/_react.default.createElement(_styles2.ProductImage, {
-    bgimage: optimizeImage(productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.images, 'h_200,c_limit')
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ProductSummaryContent, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductImageWrapper, null, productState !== null && productState !== void 0 && (_productState$product7 = productState.product) !== null && _productState$product7 !== void 0 && _productState$product7.images ? /*#__PURE__*/_react.default.createElement(_styles2.ProductImage, {
+    bgimage: optimizeImage(productState === null || productState === void 0 ? void 0 : (_productState$product8 = productState.product) === null || _productState$product8 === void 0 ? void 0 : _productState$product8.images, 'h_200,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_BiImage.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.ProductSales, null, /*#__PURE__*/_react.default.createElement(_Shared.ProgressRing, {
-    percent: 35,
+    isShowPercent: true,
+    percent: getPercentage(),
     size: 70,
     lineWidth: 8,
     progressColor: theme.colors.primary,
@@ -175,7 +188,7 @@ var ProductSummary = function ProductSummary(props) {
     children: true,
     spin: false,
     transitionDuration: 200
-  }), /*#__PURE__*/_react.default.createElement(_styles2.RolWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice((productState === null || productState === void 0 ? void 0 : (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.price) - (productState === null || productState === void 0 ? void 0 : (_productState$product6 = productState.product) === null || _productState$product6 === void 0 ? void 0 : _productState$product6.cost_price))), /*#__PURE__*/_react.default.createElement("p", null, t('PRODUCT_SALES_ROI', 'Product sales ROI'))))), /*#__PURE__*/_react.default.createElement(_styles2.ProductDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductDetails, null, /*#__PURE__*/_react.default.createElement(_styles2.FieldsItem, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product7 = productState.product) === null || _productState$product7 === void 0 ? void 0 : _productState$product7.price)), /*#__PURE__*/_react.default.createElement("p", null, t('PRODUCT_SELLING_PRICE', 'Selling price'))), (productState === null || productState === void 0 ? void 0 : (_productState$product8 = productState.product) === null || _productState$product8 === void 0 ? void 0 : _productState$product8.in_offer) && /*#__PURE__*/_react.default.createElement(_styles2.FieldsItem, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product9 = productState.product) === null || _productState$product9 === void 0 ? void 0 : _productState$product9.offer_price)), /*#__PURE__*/_react.default.createElement("p", null, t('REGULAR_PRICE', 'Regular Price'))), (productState === null || productState === void 0 ? void 0 : (_productState$product10 = productState.product) === null || _productState$product10 === void 0 ? void 0 : _productState$product10.cost_price) && /*#__PURE__*/_react.default.createElement(_styles2.FieldsItem, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product11 = productState.product) === null || _productState$product11 === void 0 ? void 0 : _productState$product11.cost_price)), /*#__PURE__*/_react.default.createElement("p", null, t('PRODUCT_COST', 'Product cost'))), (productState === null || productState === void 0 ? void 0 : (_productState$product12 = productState.product) === null || _productState$product12 === void 0 ? void 0 : _productState$product12.cost_offer_price) && /*#__PURE__*/_react.default.createElement(_styles2.FieldsItem, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product13 = productState.product) === null || _productState$product13 === void 0 ? void 0 : _productState$product13.cost_offer_price)), /*#__PURE__*/_react.default.createElement("p", null, t('PRODUCT_REGULAR_COST', 'Product cost - regular price')))), /*#__PURE__*/_react.default.createElement(_styles2.ProductConfigsContainer, null, configsOptions.map(function (config) {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.RolWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice((productState === null || productState === void 0 ? void 0 : (_productState$product9 = productState.product) === null || _productState$product9 === void 0 ? void 0 : _productState$product9.price) - (productState === null || productState === void 0 ? void 0 : (_productState$product10 = productState.product) === null || _productState$product10 === void 0 ? void 0 : _productState$product10.cost_price))), /*#__PURE__*/_react.default.createElement("p", null, t('PRODUCT_SALES_ROI', 'Product sales ROI'))))), /*#__PURE__*/_react.default.createElement(_styles2.ProductDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductDetails, null, /*#__PURE__*/_react.default.createElement(_styles2.FieldsItem, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product11 = productState.product) === null || _productState$product11 === void 0 ? void 0 : _productState$product11.price)), /*#__PURE__*/_react.default.createElement("p", null, t('PRODUCT_SELLING_PRICE', 'Selling price'))), (productState === null || productState === void 0 ? void 0 : (_productState$product12 = productState.product) === null || _productState$product12 === void 0 ? void 0 : _productState$product12.in_offer) && /*#__PURE__*/_react.default.createElement(_styles2.FieldsItem, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product13 = productState.product) === null || _productState$product13 === void 0 ? void 0 : _productState$product13.offer_price)), /*#__PURE__*/_react.default.createElement("p", null, t('REGULAR_PRICE', 'Regular Price'))), (productState === null || productState === void 0 ? void 0 : (_productState$product14 = productState.product) === null || _productState$product14 === void 0 ? void 0 : _productState$product14.cost_price) && /*#__PURE__*/_react.default.createElement(_styles2.FieldsItem, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product15 = productState.product) === null || _productState$product15 === void 0 ? void 0 : _productState$product15.cost_price)), /*#__PURE__*/_react.default.createElement("p", null, t('PRODUCT_COST', 'Product cost'))), (productState === null || productState === void 0 ? void 0 : (_productState$product16 = productState.product) === null || _productState$product16 === void 0 ? void 0 : _productState$product16.cost_offer_price) && /*#__PURE__*/_react.default.createElement(_styles2.FieldsItem, null, /*#__PURE__*/_react.default.createElement("h4", null, parsePrice(productState === null || productState === void 0 ? void 0 : (_productState$product17 = productState.product) === null || _productState$product17 === void 0 ? void 0 : _productState$product17.cost_offer_price)), /*#__PURE__*/_react.default.createElement("p", null, t('PRODUCT_REGULAR_COST', 'Product cost - regular price')))), /*#__PURE__*/_react.default.createElement(_styles2.ProductConfigsContainer, null, configsOptions.map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ProductConfigOption, {
       key: config.key,
       active: showOption === config.key,

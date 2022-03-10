@@ -9,13 +9,15 @@ exports.ColumnAllowSettingPopover = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _BsLayoutThreeColumns = _interopRequireDefault(require("@meronex/icons/bs/BsLayoutThreeColumns"));
-
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
 
 var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
 
-var _styles = require("./styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _styles = require("../../../styles");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -61,13 +63,14 @@ var ColumnAllowSettingPopover = function ColumnAllowSettingPopover(props) {
     style: {
       overflow: 'hidden'
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.HeaderItem, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
     ref: referenceElement,
     onClick: props.onClick
-  }, /*#__PURE__*/_react.default.createElement(_BsLayoutThreeColumns.default, null)), open && /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LayoutThreeColumns, null))), open && /*#__PURE__*/_react.default.createElement(_styles2.PopoverBody, {
     ref: popperElement
-  }, /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, optionsDefault.map(function (option) {
-    return /*#__PURE__*/_react.default.createElement(_styles.AllowItem, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.PopoverList, null, optionsDefault.map(function (option) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.AllowItem, {
       key: option.value,
       isChecked: allowColumns[option.value],
       onClick: function onClick() {

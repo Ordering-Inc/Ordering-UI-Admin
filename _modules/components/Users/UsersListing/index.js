@@ -186,6 +186,7 @@ var UsersListingUI = function UsersListingUI(props) {
     handleOpenUserDetails: handleOpenUserDetails,
     handleOpenUserAddForm: handleOpenUserAddForm
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
+    isManagers: true,
     open: isOpenUserDetails,
     user: openUser,
     userId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,

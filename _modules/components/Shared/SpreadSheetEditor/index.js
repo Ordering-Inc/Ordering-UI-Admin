@@ -49,7 +49,8 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
       isRemove = props.isRemove,
       isUndo = props.isUndo,
       isRedo = props.isRedo,
-      isBusinessProducts = props.isBusinessProducts;
+      isBusinessProducts = props.isBusinessProducts,
+      hiddenColumns = props.hiddenColumns;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -215,23 +216,24 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
     if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current12 = hotTableRef.current) !== null && _hotTableRef$current12 !== void 0 && _hotTableRef$current12.hotInstance) {
       handleoutsideClickDeselects && handleoutsideClickDeselects(event);
     }
-  }; // useEffect(() => {
-  //   if (hotTableRef?.current?.hotInstance) {
-  //     const hotTableObj = hotTableRef?.current?.hotInstance
-  //     hotTableObj.loadData(hotTableData)
-  //     hotTableObj.updateSettings({
-  //       cells (row, col) {
-  //         const cellProperties = {}
-  //         if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
-  //           cellProperties.readOnly = false
-  //         }
-  //         return cellProperties
-  //       }
-  //     })
-  //   }
-  // }, [hotTableData])
+  };
 
+  (0, _react.useEffect)(function () {
+    var _hotTableRef$current13;
 
+    if (typeof hiddenColumns === 'undefined') return;
+
+    if (hotTableRef !== null && hotTableRef !== void 0 && (_hotTableRef$current13 = hotTableRef.current) !== null && _hotTableRef$current13 !== void 0 && _hotTableRef$current13.hotInstance) {
+      var _hotTableRef$current14;
+
+      var hotTableObj = hotTableRef === null || hotTableRef === void 0 ? void 0 : (_hotTableRef$current14 = hotTableRef.current) === null || _hotTableRef$current14 === void 0 ? void 0 : _hotTableRef$current14.hotInstance;
+      hotTableObj.updateSettings({
+        hiddenColumns: {
+          columns: hiddenColumns
+        }
+      });
+    }
+  }, [hiddenColumns]);
   var handleCache = (0, _react.useCallback)(function () {
     var interVal = setInterval(function () {
       if (navigator.clipboard) {
@@ -245,7 +247,7 @@ var SpreadSheetEditor = function SpreadSheetEditor(props) {
     };
   }, [cache]);
   (0, _react.useEffect)(function () {
-    handleCache(); // return () => clearInterval(interVal)
+    handleCache();
   }, [handleCache]);
   return /*#__PURE__*/_react.default.createElement(_styles.SpreadSheetContainer, null, /*#__PURE__*/_react.default.createElement(_react2.HotTable, {
     data: hotTableData,
