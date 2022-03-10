@@ -93,7 +93,11 @@ export const ProductSummary = (props) => {
 
   const getPercentage = () => {
     if (productState.product) {
-      return (productState?.product?.price - productState?.product?.cost_price) * 100 / productState?.product?.price
+      if (productState?.product?.price) {
+        return (productState?.product?.price - productState?.product?.cost_price) * 100 / productState?.product?.price
+      } else {
+        return 100
+      }
     } else {
       return 0
     }
