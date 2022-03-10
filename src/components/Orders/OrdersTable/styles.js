@@ -339,3 +339,42 @@ export const PriorityDot = styled.span`
     background-color: ${props => props.theme.colors.danger};
   `}
 `
+export const Timestatus = styled.div`
+  width: 4px;
+  height: 37px;
+  border-radius: 20px 20px 20px 20px;
+  ${({ timeState }) => timeState === 'in_time' && css`
+    background-color: #00D27A;
+  `}
+  ${({ timeState }) => timeState === 'at_risk' && css`
+    background-color: #FFC700;
+  `}
+  ${({ timeState }) => timeState === 'delayed' && css`
+    background-color: #E63757;
+  `}
+`
+export const Timer = styled.div`
+  p {
+    margin: 0px;
+    color: ${props => props.theme.colors?.lightGray};
+    font-size: 12px;
+  }
+
+  .bold {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${props => props.theme.colors?.headingColor};
+  }
+
+  .in_time{
+    color: #00D27A;
+  }
+
+  .at_risk {
+    color: #FFC700;
+  }
+  
+  .delayed {
+    color: #E63757;
+  }
+`
