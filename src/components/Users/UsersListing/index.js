@@ -144,6 +144,7 @@ const UsersListingUI = (props) => {
 
       {isOpenUserDetails && (
         <UserDetailsLateralBar
+          isManagers
           open={isOpenUserDetails}
           user={openUser}
           userId={openUser?.id || queryId}

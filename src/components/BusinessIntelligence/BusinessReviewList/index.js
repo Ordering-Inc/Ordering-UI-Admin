@@ -195,6 +195,7 @@ const BusinessReviewsListingUI = (props) => {
 export const BusinessReviewList = (props) => {
   const reviewsProps = {
     ...props,
+    noActiveStatusCondition: true,
     asDashboard: true,
     initialPageSize: 50,
     loadMorePageSize: 10,

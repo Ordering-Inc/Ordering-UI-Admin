@@ -13,7 +13,7 @@ import BsTable from '@meronex/icons/bs/BsTable'
 import { List as MenuIcon, ChevronRight } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Button, IconButton } from '../../../styles'
-import { Modal, SearchBar, SideBar } from '../../Shared'
+import { Modal, SearchBar, SideBar, ColumnAllowSettingPopover } from '../../Shared'
 import { BusinessProductList } from '../BusinessProductList'
 import { BusinessProductsCategories } from '../BusinessProductsCategories'
 import { ProductDetails } from '../ProductDetails'
@@ -35,7 +35,8 @@ import {
   ActionsGroup,
   BusinessNameWrapper,
   BusinessSelector,
-  Breadcrumb
+  Breadcrumb,
+  ColumnsAllowWrapper
 } from './styles'
 
 const BusinessProductsListingUI = (props) => {
@@ -75,8 +76,30 @@ const BusinessProductsListingUI = (props) => {
   const [selectedBusiness, setSelectedBusiness] = useState(null)
   const categoryListRef = useRef()
   const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
-
   const [openSidebar, setOpenSidebar] = useState(null)
+
+  const [openColumnsPopover, setOpenColumnsPopover] = useState(false)
+  const [allowSpreadColumns, setAllowSpreadColumns] = useState({
+    id: true,
+    name: true,
+    description: true,
+    price: true,
+    cost_price: true,
+    inventoried: true,
+    quantity: true
+  })
+  const spreadColumnOptions = [
+    {
+      value: 'cost_price',
+      content: t('PRODUCT_COST', 'Product cost')
+    }
+  ]
+  const handleChangeAllowSpreadColumns = (type) => {
+    setAllowSpreadColumns({
+      ...allowSpreadColumns,
+      [type]: !allowSpreadColumns[type]
+    })
+  }
 
   const handleOpenCategoryDetails = (category = null) => {
     setOpenSidebar(null)
@@ -276,20 +299,30 @@ const BusinessProductsListingUI = (props) => {
                         <RiImageAddFill />
                       </ViewMethodButton>
                     )}
+                    <ColumnsAllowWrapper>
+                      <ColumnAllowSettingPopover
+                        open={openColumnsPopover}
+                        allowColumns={allowSpreadColumns}
+                        optionsDefault={spreadColumnOptions}
+                        onClick={() => setOpenColumnsPopover(!openColumnsPopover)}
+                        onClose={() => setOpenColumnsPopover(false)}
+                        handleChangeAllowColumns={handleChangeAllowSpreadColumns}
+                      />
+                    </ColumnsAllowWrapper>
                   </>
                 )}
-                <ViewMethodButton
-                  active={viewMethod === 'list'}
+                <IconButton
+                  color={viewMethod === 'list' ? 'primary' : 'black'}
                   onClick={() => setViewMethod('list')}
                 >
                   <BsViewList />
-                </ViewMethodButton>
-                <ViewMethodButton
-                  active={viewMethod === 'spreedsheet'}
+                </IconButton>
+                <IconButton
+                  color={viewMethod === 'spreedsheet' ? 'primary' : 'black'}
                   onClick={() => setViewMethod('spreedsheet')}
                 >
                   <BsTable />
-                </ViewMethodButton>
+                </IconButton>
               </ActionIconList>
             </ProductHeader>
             <BusinessProductList
@@ -299,6 +332,7 @@ const BusinessProductsListingUI = (props) => {
               handleOpenProductDetails={handleOpenProductDetails}
               handleParentProductAdd={handleProductAdd}
               isParentProductAdd={openSidebar === 'add_product'}
+              allowSpreadColumns={allowSpreadColumns}
             />
           </ProductListContainer>
         </CategoryProductsContent>
