@@ -4,13 +4,16 @@ import { useLanguage, useSession, OrdersManage as OrdersManageController } from 
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
+import { OrdersDashboardControls } from '../OrdersDashboardControls'
 import { Alert } from '../../Shared'
 import {
   OrdersListContainer,
   OrdersContent,
   OrdersInnerContent,
   WrapItemView,
-  WrapperIndicator
+  WrapperIndicator,
+  OrderSubFilterControls,
+  OrderStatusSubFilterWrapper
 } from './styles'
 import { OrdersDashboard } from '../OrdersDashboard'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
@@ -58,6 +61,7 @@ const OrdersManagerUI = (props) => {
   const [currentTourStep, setCurrentTourStep] = useState(0)
   const [isTourFlag, setIsTourFlag] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [timeStatus, setTimeStatus] = useState(null)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const handleBackRedirect = () => {
@@ -176,16 +180,29 @@ const OrdersManagerUI = (props) => {
           handleOpenTour={() => handleOpenTour()}
           filterModalOpen={filterModalOpen}
           setFilterModalOpen={setFilterModalOpen}
+          setTimeStatus={setTimeStatus}
         />
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
         />
-        <OrderStatusSubFilter
-          ordersStatusGroup={ordersStatusGroup}
-          selectedSubOrderStatus={selectedSubOrderStatus}
-          handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
-        />
+        <OrderSubFilterControls>
+          <OrderStatusSubFilterWrapper>
+            <OrderStatusSubFilter
+              ordersStatusGroup={ordersStatusGroup}
+              selectedSubOrderStatus={selectedSubOrderStatus}
+              handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
+            />
+          </OrderStatusSubFilterWrapper>
+          {!isSelectedOrders && (
+            <OrdersDashboardControls
+              selectedOrderNumber={selectedOrderIds?.length}
+              filterValues={filterValues}
+              handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+              handleDeleteMultiOrders={handleDeleteMultiOrders}
+            />
+          )}
+        </OrderSubFilterControls>
         <OrdersContent>
           <OrdersInnerContent className='order-content'>
             <WrapItemView>
@@ -210,6 +227,7 @@ const OrdersManagerUI = (props) => {
                 isTourOpen={isTourOpen}
                 setIsTourOpen={setIsTourOpen}
                 setFilterModalOpen={setFilterModalOpen}
+                timeStatus={timeStatus}
               />
             </WrapItemView>
           </OrdersInnerContent>
