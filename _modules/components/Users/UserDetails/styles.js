@@ -5,11 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.VerifiedItem = exports.UserName = exports.SavedPlaces = exports.PersonalizationWrapper = exports.OrdersWrapper = exports.DetailsHeader = void 0;
+exports.VerifiedItemsWrapper = exports.VerifiedItem = exports.UserName = exports.SavedPlaces = exports.PersonalizationWrapper = exports.OrdersWrapper = exports.DetailsHeader = exports.ActionSelectorWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _polished = require("polished");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,7 +19,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var DetailsHeader = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 10px;\n"])));
+var DetailsHeader = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 10px;\n"])));
 
 exports.DetailsHeader = DetailsHeader;
 
@@ -56,3 +58,29 @@ var OrdersWrapper = _styledComponents.default.div(_templateObject10 || (_templat
 });
 
 exports.OrdersWrapper = OrdersWrapper;
+
+var ActionSelectorWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  ", "\n  button {\n    background: transparent !important;\n    border: none;\n    padding: 0px 5px;\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: ", ";\n      font-size: 20px;\n    }\n\n    &:after {\n      display: none;\n    }\n\n    &:hover {\n      background: ", " !important;\n    }\n    &:active {\n      background: ", " !important;\n    }\n  }\n\n  .show {\n    button {\n      background: ", " !important;\n    }\n    >div {\n      border: 1px solid ", ";\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n\n  > div {\n    > div {\n      border-radius: 8px;\n      .dropdown-item {\n        font-size: 12px;\n        color: ", ";\n        &:active {\n          background: ", " !important;\n        }\n      }\n      .dropdown-item:last-child {\n        color: #E63757;\n      }\n    }\n  }\n"])), function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    margin-left: 35px;\n  "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    margin-right: 35px;\n  "])));
+}, function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  return (0, _polished.darken)(0.04, props.theme.colors.secundary);
+}, function (props) {
+  return (0, _polished.darken)(0.1, props.theme.colors.secundary);
+}, function (props) {
+  return (0, _polished.darken)(0.04, props.theme.colors.secundary);
+}, function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  return (0, _polished.darken)(0.1, props.theme.colors.secundary);
+});
+
+exports.ActionSelectorWrapper = ActionSelectorWrapper;
+
+var VerifiedItemsWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex: 1;\n"])));
+
+exports.VerifiedItemsWrapper = VerifiedItemsWrapper;

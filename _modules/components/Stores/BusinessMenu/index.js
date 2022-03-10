@@ -170,7 +170,6 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
       className: "business_checkbox_control"
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      disabled: !!currentMenu,
       defaultChecked: menu === null || menu === void 0 ? void 0 : menu.enabled,
       onChange: function onChange(e) {
         return handleChangeBusinessMenuActiveState(menu === null || menu === void 0 ? void 0 : menu.id, e.target.checked);

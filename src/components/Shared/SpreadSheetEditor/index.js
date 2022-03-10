@@ -17,7 +17,8 @@ const SpreadSheetEditor = (props) => {
     isRemove,
     isUndo,
     isRedo,
-    isBusinessProducts
+    isBusinessProducts,
+    hiddenColumns
   } = props
   const [, t] = useLanguage()
   const [cache, setCache] = useState(null)
@@ -143,21 +144,17 @@ const SpreadSheetEditor = (props) => {
     }
   }
 
-  // useEffect(() => {
-  //   if (hotTableRef?.current?.hotInstance) {
-  //     const hotTableObj = hotTableRef?.current?.hotInstance
-  //     hotTableObj.loadData(hotTableData)
-  //     hotTableObj.updateSettings({
-  //       cells (row, col) {
-  //         const cellProperties = {}
-  //         if (hotTableObj.getData()[row][col] === '' || hotTableObj.getData()[row][col] === null) {
-  //           cellProperties.readOnly = false
-  //         }
-  //         return cellProperties
-  //       }
-  //     })
-  //   }
-  // }, [hotTableData])
+  useEffect(() => {
+    if (typeof hiddenColumns === 'undefined') return
+    if (hotTableRef?.current?.hotInstance) {
+      const hotTableObj = hotTableRef?.current?.hotInstance
+      hotTableObj.updateSettings({
+        hiddenColumns: {
+          columns: hiddenColumns
+        }
+      })
+    }
+  }, [hiddenColumns])
 
   const handleCache = useCallback(() => {
     const interVal = setInterval(() => {
@@ -172,7 +169,6 @@ const SpreadSheetEditor = (props) => {
 
   useEffect(() => {
     handleCache()
-    // return () => clearInterval(interVal)
   }, [handleCache])
 
   return (

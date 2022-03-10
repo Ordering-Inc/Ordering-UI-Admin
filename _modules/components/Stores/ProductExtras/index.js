@@ -31,6 +31,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -51,11 +59,11 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       handleOpenAddForm = props.handleOpenAddForm,
       handleChangeExtraInput = props.handleChangeExtraInput,
       handleAddExtra = props.handleAddExtra,
-      handleClickExtra = props.handleClickExtra,
       handleChangeAddExtraInput = props.handleChangeAddExtraInput,
       setIsExtendExtraOpen = props.setIsExtendExtraOpen,
       business = props.business,
-      handleUpdateBusinessState = props.handleUpdateBusinessState;
+      handleUpdateBusinessState = props.handleUpdateBusinessState,
+      handleProductExtraState = props.handleProductExtraState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -93,6 +101,16 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       currentExtra = _useState8[0],
       setCurrentExtra = _useState8[1];
 
+  var _useState9 = (0, _react.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      extraIds = _useState10[0],
+      setExtraIds = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isCheckboxClicked = _useState12[0],
+      setIsCheckboxClicked = _useState12[1];
+
   var handleOpenExtraDetails = function handleOpenExtraDetails(extra) {
     setIsExtendExtraOpen(true);
     setCurrentExtra(extra);
@@ -105,21 +123,6 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     setCurrentExtra(null);
   };
 
-  var isCheckState = function isCheckState(extraId) {
-    var _productState$product;
-
-    if (productState !== null && productState !== void 0 && (_productState$product = productState.product) !== null && _productState$product !== void 0 && _productState$product.extras) {
-      var _productState$product2;
-
-      var found = productState === null || productState === void 0 ? void 0 : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.extras.find(function (extra) {
-        return (extra === null || extra === void 0 ? void 0 : extra.id) === extraId;
-      });
-      return found;
-    } else {
-      return false;
-    }
-  };
-
   var addExtraListener = function addExtraListener(e) {
     var _conatinerRef$current;
 
@@ -130,6 +133,40 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     }
   };
 
+  var handleExtraState = function handleExtraState(id, checked) {
+    if (checked) {
+      setExtraIds(function (prevState) {
+        return [].concat(_toConsumableArray(prevState), [id]);
+      });
+    } else {
+      setExtraIds(function (prevState) {
+        return prevState.filter(function (extraId) {
+          return extraId !== id;
+        });
+      });
+    }
+
+    setIsCheckboxClicked(true);
+  };
+
+  (0, _react.useEffect)(function () {
+    var _productState$product;
+
+    var _extraIds = [];
+
+    if ((_productState$product = productState.product) !== null && _productState$product !== void 0 && _productState$product.extras) {
+      _extraIds = productState.product.extras.reduce(function (ids, extra) {
+        return [].concat(_toConsumableArray(ids), [extra.id]);
+      }, []);
+    }
+
+    setExtraIds(_extraIds);
+  }, []);
+  (0, _react.useEffect)(function () {
+    if (!isCheckboxClicked) return;
+    setIsCheckboxClicked(false);
+    handleProductExtraState(extraIds);
+  }, [isCheckboxClicked, extraIds]);
   (0, _react.useEffect)(function () {
     if (!isAddMode) return;
     document.addEventListener('click', addExtraListener);
@@ -138,14 +175,14 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     };
   }, [isAddMode, changesState]);
   (0, _react.useEffect)(function () {
-    var _productState$product3, _extrasState$extras;
+    var _productState$product2, _extrasState$extras;
 
-    if (productState !== null && productState !== void 0 && (_productState$product3 = productState.product) !== null && _productState$product3 !== void 0 && _productState$product3.error || extrasState !== null && extrasState !== void 0 && (_extrasState$extras = extrasState.extras) !== null && _extrasState$extras !== void 0 && _extrasState$extras.error) {
-      var _productState$product4, _extrasState$extras2;
+    if (productState !== null && productState !== void 0 && (_productState$product2 = productState.product) !== null && _productState$product2 !== void 0 && _productState$product2.error || extrasState !== null && extrasState !== void 0 && (_extrasState$extras = extrasState.extras) !== null && _extrasState$extras !== void 0 && _extrasState$extras.error) {
+      var _productState$product3, _extrasState$extras2;
 
       setAlertState({
         open: true,
-        content: (productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.error) || (extrasState === null || extrasState === void 0 ? void 0 : (_extrasState$extras2 = extrasState.extras) === null || _extrasState$extras2 === void 0 ? void 0 : _extrasState$extras2.error)
+        content: (productState === null || productState === void 0 ? void 0 : (_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.error) || (extrasState === null || extrasState === void 0 ? void 0 : (_extrasState$extras2 = extrasState.extras) === null || _extrasState$extras2 === void 0 ? void 0 : _extrasState$extras2.error)
       });
     }
   }, [productState, extrasState]);
@@ -156,13 +193,15 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       return handleOpenAddForm();
     }
   }, t('ADD_PRODUCT_OPTION', 'Add product option'))), (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras) && (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.map(function (extra) {
+    var _extraIds$includes;
+
     return /*#__PURE__*/_react.default.createElement(_styles2.ExtraOption, {
       key: extra.id,
       active: extra.id === (currentExtra === null || currentExtra === void 0 ? void 0 : currentExtra.id)
     }, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      defaultChecked: isCheckState(extra.id),
-      onClick: function onClick(e) {
-        return handleClickExtra(extra.id, e.target.checked);
+      checked: (_extraIds$includes = extraIds.includes(extra.id)) !== null && _extraIds$includes !== void 0 ? _extraIds$includes : false,
+      onChange: function onChange(e) {
+        return handleExtraState(extra.id, e.target.checked);
       }
     }), /*#__PURE__*/_react.default.createElement("input", {
       type: "text",

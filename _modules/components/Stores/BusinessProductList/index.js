@@ -66,7 +66,8 @@ var BusinessProductList = function BusinessProductList(props) {
       handleChangeSearch = props.handleChangeSearch,
       handleOpenProductDetails = props.handleOpenProductDetails,
       isParentProductAdd = props.isParentProductAdd,
-      handleParentProductAdd = props.handleParentProductAdd;
+      handleParentProductAdd = props.handleParentProductAdd,
+      allowSpreadColumns = props.allowSpreadColumns;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -229,7 +230,8 @@ var BusinessProductList = function BusinessProductList(props) {
       allowColumns: allowColumns
     });
   }) : /*#__PURE__*/_react.default.createElement(_BusinessSpreadSheet.BusinessSpreadSheet, _extends({}, props, {
-    business: businessState === null || businessState === void 0 ? void 0 : businessState.business
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+    allowSpreadColumns: allowSpreadColumns
   }))), !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
     content: !searchValue ? t('ERROR_NOT_FOUND_PRODUCTS_TIME', 'No products found at this time') : t('ERROR_NOT_FOUND_PRODUCTS', 'No products found, please change filters.'),
     btnTitle: !searchValue ? t('SEARCH_REDIRECT', 'Go to Businesses') : t('CLEAR_FILTERS', 'Clear filters'),

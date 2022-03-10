@@ -193,6 +193,12 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     });
   };
 
+  var handleEnterAddSuboption = function handleEnterAddSuboption(e) {
+    if (e.key === 'Enter' && e.shiftKey === false) {
+      handleSubmit(handleAddOption)();
+    }
+  };
+
   (0, _react.useEffect)(function () {
     if (Object.keys(editErrors).length) {
       var errorContent = [];
@@ -334,7 +340,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     }
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "limit_suboptions_by_max"
-  }, t('LIMIT_SUBOPTIONS_BY_MAX', 'Limit suboptions by maximum option')))), /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+  }, t('LIMIT_SUBOPTIONS_BY_MAX', 'Limit suboptions by maximum option')))), (conditionalOptions === null || conditionalOptions === void 0 ? void 0 : conditionalOptions.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "conditioned",
     defaultChecked: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option12 = optionState.option) === null || _optionState$option12 === void 0 ? void 0 : _optionState$option12.conditioned) || false,
     onClick: function onClick(e) {
@@ -342,7 +348,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     }
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "conditioned"
-  }, t('CONDITIONAL', 'Conditional'))), (optionState === null || optionState === void 0 ? void 0 : (_optionState$option13 = optionState.option) === null || _optionState$option13 === void 0 ? void 0 : _optionState$option13.conditioned) && /*#__PURE__*/_react.default.createElement(_styles2.SelectboxGroup, null, conditionalOptions.length && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }, t('CONDITIONAL', 'Conditional'))), (optionState === null || optionState === void 0 ? void 0 : (_optionState$option13 = optionState.option) === null || _optionState$option13 === void 0 ? void 0 : _optionState$option13.conditioned) && /*#__PURE__*/_react.default.createElement(_styles2.SelectboxGroup, null, conditionalOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: conditionalOptions,
     defaultValue: conditionalOptionId,
     placeholder: t('SELECT_OPTION', 'Select option'),
@@ -533,6 +539,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
       }
+
+      handleEnterAddSuboption(e);
     }
   })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c5 = settingChangeState.changes) === null || _settingChangeState$c5 === void 0 ? void 0 : _settingChangeState$c5.with_half_option) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c6 = settingChangeState.changes) === null || _settingChangeState$c6 === void 0 ? void 0 : _settingChangeState$c6.with_half_option : optionState === null || optionState === void 0 ? void 0 : (_optionState$option22 = optionState.option) === null || _optionState$option22 === void 0 ? void 0 : _optionState$option22.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option23 = optionState.option) === null || _optionState$option23 === void 0 ? void 0 : (_optionState$option24 = _optionState$option23.suboptions) === null || _optionState$option24 === void 0 ? void 0 : _optionState$option24.length) === 0
@@ -547,6 +555,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
       }
+
+      handleEnterAddSuboption(e);
     }
   })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c7 = settingChangeState.changes) === null || _settingChangeState$c7 === void 0 ? void 0 : _settingChangeState$c7.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c8 = settingChangeState.changes) === null || _settingChangeState$c8 === void 0 ? void 0 : _settingChangeState$c8.allow_suboption_quantity : optionState === null || optionState === void 0 ? void 0 : (_optionState$option25 = optionState.option) === null || _optionState$option25 === void 0 ? void 0 : _optionState$option25.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option26 = optionState.option) === null || _optionState$option26 === void 0 ? void 0 : (_optionState$option27 = _optionState$option26.suboptions) === null || _optionState$option27 === void 0 ? void 0 : _optionState$option27.length) === 0
@@ -561,6 +571,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
       }
+
+      handleEnterAddSuboption(e);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     maxHeight: true
