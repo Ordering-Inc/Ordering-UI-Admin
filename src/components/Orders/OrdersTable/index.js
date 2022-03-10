@@ -66,13 +66,13 @@ export const OrdersTable = (props) => {
 
   const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
-    status: false,
+    status: true,
     orderNumber: true,
     dateTime: true,
     business: true,
     customer: true,
-    driver: false,
-    advanced: false,
+    driver: true,
+    advanced: true,
     timer: true,
     total: true
   })
@@ -268,6 +268,9 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
+                <th>
+                  <Timestatus />
+                </th>
                 <th
                   className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
                 >
