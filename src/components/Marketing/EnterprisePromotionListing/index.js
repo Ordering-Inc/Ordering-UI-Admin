@@ -96,7 +96,6 @@ const EnterprisePromotionListingUI = (props) => {
 
       {openDetails && (
         <SideBar
-          sidebarId='promotion_details'
           defaultSideBarWidth={600 + moveDistance}
           moveDistance={moveDistance}
           open={openDetails}

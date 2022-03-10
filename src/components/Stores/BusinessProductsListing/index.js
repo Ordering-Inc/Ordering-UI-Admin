@@ -201,7 +201,7 @@ const BusinessProductsListingUI = (props) => {
                     {selectedBusiness?.name || businessState?.business?.name}
                   </span>
                   <ChevronRight />
-                  <span className='active'>{categorySelected?.name}</span>
+                  <span>{categorySelected?.name}</span>
                 </Breadcrumb>
               </>
             )}

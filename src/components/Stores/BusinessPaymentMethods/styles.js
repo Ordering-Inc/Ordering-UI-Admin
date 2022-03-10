@@ -13,6 +13,7 @@ export const PaymentMethodsContainer = styled.div`
     color: ${props => props.theme.colors.headingColor};
     font-size: 20px;
     font-weight: 700;
+    margin-top: 5px;
   }
   > button {
     height: 44px;
@@ -25,7 +26,6 @@ export const PaymentMethodsContainer = styled.div`
 
 export const PaymethodListWrapper = styled.div`
   border-top: 1px solid ${props => props.theme.colors.borderColor};
-  margin: 20px 0;
 `
 
 export const PaymethodOptionContainer = styled.div`
@@ -33,13 +33,35 @@ export const PaymethodOptionContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
+  ${({ disabled }) => disabled && css`
+    cursor: initial;
+    svg {
+      cursor: pointer;
+    }
+  `}
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+  `}
+
+  > svg {
+    font-size: 13px;
+    color: ${props => props.theme.colors.secundaryLight};
+  }
 `
 
 export const PaymethodOption = styled.div`
   display: flex;
   align-items: center;
   padding: 16px 0;
-  cursor: pointer;
   color: ${props => props.theme.colors.headingColor};
   
   > svg {
@@ -53,42 +75,26 @@ export const PaymethodOption = styled.div`
 export const PaymethodName = styled.span`
   color: ${props => props.theme.colors.headingColor};
   font-size: 14px;
-  ${props => props.theme?.rtl ? css`
-    margin-right: 10px;
-  ` : css`
-    margin-left: 10px;
-  `}
+  flex: 1;
+  margin: 0 10px;
 `
-
-export const DropDownWrapper = styled.div`
+export const SearchBarWrapper = styled.div`
+  margin-bottom: 15px;
+  margin-top: 27px;
+`
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
   button {
-    background: transparent !important;
-    border: none;
-    padding: 0px;
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-    }
-
-    &:after {
-      display: none;
-    }
-    &:hover {
-      background: ${props => props.theme.colors.secundary} !important;
-    }
-  }
-
-  > div {
-    > div {
-      border: 1px solid ${props => props.theme.colors.borderColor};
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
-
-      a.dropdown-item {
-        font-size: 14px;
-        &:last-child {
-          color: #E63757;
-        }
-      }
+    height: 32px;
+    font-size: 12px;
+    &:first-child {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 20px;
+      ` : css`
+        margin-right: 20px;
+      `}
     }
   }
 `

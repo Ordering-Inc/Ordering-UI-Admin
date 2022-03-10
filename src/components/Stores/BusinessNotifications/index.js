@@ -1,12 +1,9 @@
-import React, { useContext, useEffect } from 'react'
-import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
+import React, { useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 
 import {
   BusinessNotificationsContainer,
-  Title,
-  ToggleItemWrapper,
-  AccordionTitle
+  Title
 } from './styles'
 import { BusinessEmailAndPhone } from '../BusinessEmailAndPhone'
 import { BusinessGprsPrinters } from '../BusinessGprsPrinters'
@@ -27,43 +24,8 @@ export const BusinessNotifications = (props) => {
   return (
     <BusinessNotificationsContainer>
       <Title>{t('NOTIFICATIONS', 'Notifications')}</Title>
-      <Accordion>
-        <ContextAwareToggle eventKey='0'>
-          <AccordionTitle>{t('EMAILS_AND_PHONES', 'Emails and phones')}</AccordionTitle>
-        </ContextAwareToggle>
-        <Accordion.Collapse eventKey='0'>
-          <BusinessEmailAndPhone {...props} />
-        </Accordion.Collapse>
-
-        <ContextAwareToggle eventKey='1'>
-          <AccordionTitle>{t('GPRS_PRINTERS', 'Gprs printers')}</AccordionTitle>
-        </ContextAwareToggle>
-        <Accordion.Collapse eventKey='1'>
-          <BusinessGprsPrinters {...props} />
-        </Accordion.Collapse>
-      </Accordion>
+      <BusinessEmailAndPhone {...props} />
+      <BusinessGprsPrinters {...props} />
     </BusinessNotificationsContainer>
-  )
-}
-
-const ContextAwareToggle = ({ children, eventKey, callback }) => {
-  const currentEventKey = useContext(AccordionContext)
-  const decoratedOnClick = useAccordionToggle(
-    eventKey,
-    () => callback && callback(eventKey)
-  )
-  const isCurrentEventKey = currentEventKey === eventKey
-
-  const handleButtonClick = () => {
-    decoratedOnClick()
-  }
-
-  return (
-    <ToggleItemWrapper
-      active={isCurrentEventKey}
-      onClick={handleButtonClick}
-    >
-      {children}
-    </ToggleItemWrapper>
   )
 }

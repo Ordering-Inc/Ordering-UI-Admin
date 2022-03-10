@@ -83,3 +83,12 @@ export const PersonalizationWrapper = styled.div`
     padding: 35px 0px 25px;
   }
 `
+export const OrdersWrapper = styled.div`
+  #orderTable {
+    border-top: 1px solid ${props => props.theme.colors.borderColor};
+    table {
+      min-width: initial;
+      width: 100%;
+    }
+  }
+`

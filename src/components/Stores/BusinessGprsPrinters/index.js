@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, useApi, BusinessGprsPrinters as BusinessGprsPrintersController } from 'ordering-components-admin'
-import { Checkbox, TextArea } from '../../../styles'
+import { Switch, TextArea } from '../../../styles'
 import { Select } from '../../../styles/Select'
 
 import {
   BusinessGprsPrintersContainer,
-  CheckboxWrapper,
+  SwitchboxWrapper,
   FormControl,
   Label,
-  SelectWrapper
+  SelectWrapper,
+  SectionTitle
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 
@@ -47,16 +48,14 @@ const BusinessGprsPrintersUI = (props) => {
 
   return (
     <BusinessGprsPrintersContainer>
-      <FormControl>
-        <Label>{t('ACCEPT_GPRS_PRINTER', 'Accept GPRS printer')}</Label>
-        <CheckboxWrapper>
-          <Checkbox
-            defaultChecked={business?.use_printer}
-            onChange={e => changePrinter('use_printer', e.target.checked)}
-          />
-          <span>{t('ACCEPT_GPRS_PRINTER', 'Accept GPRS printer')}</span>
-        </CheckboxWrapper>
-      </FormControl>
+      <SectionTitle>{t('GPRS_PRINTERS', 'Gprs printers')}</SectionTitle>
+      <SwitchboxWrapper>
+        <span>{t('ACCEPT_GPRS_PRINTER', 'Accept GPRS printer')}</span>
+        <Switch
+          defaultChecked={business?.use_printer}
+          onChange={checked => changePrinter('use_printer', checked)}
+        />
+      </SwitchboxWrapper>
       <FormControl>
         <Label>{t('PRINTER_MODEL', 'Printer model')}</Label>
         {printersListState?.loading && (

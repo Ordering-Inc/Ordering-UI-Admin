@@ -110,23 +110,6 @@ export const OrderTbody = styled.tbody`
     td {
       border-top: 1px solid ${props => props.theme.colors.primary} !important;
       border-bottom: 1px solid ${props => props.theme.colors.primary} !important;
-
-      ${({ isCustomStyle }) => isCustomStyle && css`
-        &:first-child {
-          ${props => props.theme?.rtl ? css`
-            border-right: 1px solid ${props => props.theme.colors.primary} !important;
-          ` : css`
-            border-left: 1px solid ${props => props.theme.colors.primary} !important;
-          `}
-        }
-        &:last-child {
-          ${props => props.theme?.rtl ? css`
-            border-left: 1px solid ${props => props.theme.colors.primary} !important;
-          ` : css`
-            border-right: 1px solid ${props => props.theme.colors.primary} !important;
-          `}
-        }
-      `}
     }
   }
 `

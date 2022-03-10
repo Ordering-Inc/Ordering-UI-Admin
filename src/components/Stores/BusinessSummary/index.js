@@ -65,8 +65,8 @@ export const BusinessSummary = (props) => {
       value: t('MENU_V21', 'Menu')
     },
     {
-      key: 'delivery_zones',
-      value: t('DELIVERY_ZONES', 'Delivery zones')
+      key: 'delivery_pickup_more',
+      value: t('DELIVERY_PICKUP_MORE', 'Delivery, pickup & more')
     },
     {
       key: 'notifications',
@@ -77,8 +77,16 @@ export const BusinessSummary = (props) => {
       value: t('PAYMENTS_METHODS', 'Payment methods')
     },
     {
+      key: 'tax_fees',
+      value: t('TAX_AND_FEES', 'Tax & fees')
+    },
+    {
       key: 'promotions',
       value: t('PROMOTIONS', 'Promotions')
+    },
+    {
+      key: 'preorder',
+      value: t('PREORDER_SETTING', 'Preorder')
     },
     {
       key: 'custom_fields',

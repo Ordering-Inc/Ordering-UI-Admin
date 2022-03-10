@@ -113,3 +113,20 @@ export const EmptyContent = styled.div`
   justify-content: center;
   padding: 10px;
 `
+
+export const ChartFooterContainer = styled.div`
+  margin-top: 25px;
+
+  h2 {
+    font-weight: 500;
+    font-size: 20px;
+    color: ${props => props.theme.colors.headingColor};
+    margin: 0;
+  }
+
+  p {
+    font-size: 14px;
+    color: #909BA9;
+    margin: 0;
+  }
+`

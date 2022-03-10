@@ -11,6 +11,8 @@ import {
 import { useTheme } from 'styled-components'
 import { DriverSelector } from '../DriverSelector'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
+import { ChevronRight } from 'react-bootstrap-icons'
+
 import {
   OrdersContainer,
   Table,
@@ -262,8 +264,8 @@ export const OrdersTable = (props) => {
       >
         <Table
           className='orders_table'
-          isSelectedOrders={isSelectedOrders}
         >
+<<<<<<< HEAD
           <thead>
             <tr>
               <th>
@@ -315,6 +317,55 @@ export const OrdersTable = (props) => {
               </th>
             </tr>
           </thead>
+=======
+          {!isSelectedOrders && (
+            <thead>
+              <tr>
+                <th
+                  className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
+                >
+                  <CheckBox
+                    isChecked={!orderList.loading && isAllChecked}
+                    onClick={() => handleSelecteAllOrder()}
+                    className='orderCheckBox'
+                  >
+                    {(!orderList.loading && isAllChecked) ? (
+                      <RiCheckboxFill />
+                    ) : (
+                      <RiCheckboxBlankLine />
+                    )}
+                  </CheckBox>
+                  {t('ORDER', 'Order')}
+                </th>
+                {allowColumns?.status && (
+                  <th className='statusInfo'>{t('STATUS', 'Status')}</th>
+                )}
+                {allowColumns?.business && (
+                  <th className='businessInfo'>{t('BUSINESS', 'Business')}</th>
+                )}
+                {allowColumns?.customer && (
+                  <th className='customerInfo'>{t('CUSTOMER', 'Customer')}</th>
+                )}
+                {allowColumns?.driver && (
+                  <th className='driverInfo'>{t('DRIVER', 'Driver')}</th>
+                )}
+                {allowColumns?.advanced && (
+                  <th colSpan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
+                )}
+                <th className='orderPrice'>
+                  <ColumnAllowSettingPopover
+                    open={openPopover}
+                    allowColumns={allowColumns}
+                    optionsDefault={optionsDefault}
+                    onClick={() => setOpenPopover(!openPopover)}
+                    onClose={() => setOpenPopover(false)}
+                    handleChangeAllowColumns={handleChangeAllowColumns}
+                  />
+                </th>
+              </tr>
+            </thead>
+          )}
+>>>>>>> 769bc7345cd0e68c3842407aab35834ac617fb74
           {orderList.loading ? (
             [...Array(10).keys()].map(i => (
               <OrderTbody key={i}>
@@ -336,7 +387,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </OrderNumberContainer>
                   </td>
-                  {allowColumns?.status && (
+                  {allowColumns?.status && !isSelectedOrders && (
                     <td className='statusInfo'>
                       <StatusInfo>
                         <div className='info'>
@@ -367,7 +418,7 @@ export const OrdersTable = (props) => {
                       </CustomerInfo>
                     </td>
                   )}
-                  {allowColumns?.driver && (
+                  {allowColumns?.driver && !isSelectedOrders && (
                     <td className='driverInfo'>
                       <DriversInfo className='d-flex align-items-center'>
                         <Skeleton width={45} height={45} />
@@ -375,21 +426,21 @@ export const OrdersTable = (props) => {
                       </DriversInfo>
                     </td>
                   )}
-                  {allowColumns?.deliveryType && (
+                  {allowColumns?.deliveryType && !isSelectedOrders && (
                     <td className='orderType'>
                       <OrderType>
                         <Skeleton width={35} height={35} />
                       </OrderType>
                     </td>
                   )}
-                  {allowColumns?.status && (
+                  {allowColumns?.status && !isSelectedOrders && (
                     <td className='orderStatusTitle'>
                       <WrapOrderStatusSelector>
                         <Skeleton width={100} height={30} />
                       </WrapOrderStatusSelector>
                     </td>
                   )}
-                  {allowColumns?.advanced && (
+                  {allowColumns?.advanced && !isSelectedOrders && (
                     <td className='logistic'>
                       <div className='info'>
                         <p className='bold'><Skeleton width={60} /></p>
@@ -397,7 +448,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-                  {allowColumns?.advanced && (
+                  {allowColumns?.advanced && !isSelectedOrders && (
                     <td className='attempts'>
                       <div className='info'>
                         <p className='bold'><Skeleton width={60} /></p>
@@ -405,7 +456,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-                  {allowColumns?.advanced && (
+                  {allowColumns?.advanced && !isSelectedOrders && (
                     <td className='priority'>
                       <div className='info'>
                         <p className='bold'><Skeleton width={60} /></p>
@@ -413,16 +464,18 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-                  <td className='orderPrice'>
-                    <div className='info'>
-                      {allowColumns?.total && (
-                        <p className='bold'><Skeleton width={60} /></p>
-                      )}
-                      <p>
-                        <Skeleton width={100} />
-                      </p>
-                    </div>
-                  </td>
+                  {!isSelectedOrders && (
+                    <td className='orderPrice'>
+                      <div className='info'>
+                        {allowColumns?.total && (
+                          <p className='bold'><Skeleton width={60} /></p>
+                        )}
+                        <p>
+                          <Skeleton width={100} />
+                        </p>
+                      </div>
+                    </td>
+                  )}
                 </tr>
               </OrderTbody>
             ))
@@ -431,7 +484,6 @@ export const OrdersTable = (props) => {
               <OrderTbody
                 key={i}
                 className={parseInt(orderDetailId) === order.id ? 'active' : ''}
-                isCustomStyle={isSelectedOrders}
                 onClick={(e) => handleClickOrder(order, e)}
                 data-tour={i === 0 ? 'tour_start' : ''}
               >
@@ -472,7 +524,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </OrderNumberContainer>
                   </td>
-                  {allowColumns?.status && (
+                  {allowColumns?.status && !isSelectedOrders && (
                     <td className='statusInfo'>
                       <StatusInfo>
                         <div className='info'>
@@ -511,7 +563,12 @@ export const OrdersTable = (props) => {
                       </CustomerInfo>
                     </td>
                   )}
-                  {allowColumns?.driver && (
+                  {isSelectedOrders && (
+                    <td>
+                      <ChevronRight color='#B1BCCC' />
+                    </td>
+                  )}
+                  {allowColumns?.driver && !isSelectedOrders && (
                     <td>
                       {order?.delivery_type === 1 && (
                         <DriversInfo className='driverInfo' noClick={isTourOpen && (currentTourStep === 0 || currentTourStep === 4)}>
@@ -527,7 +584,7 @@ export const OrdersTable = (props) => {
                       )}
                     </td>
                   )}
-                  {allowColumns?.advanced && (
+                  {allowColumns?.advanced && !isSelectedOrders && (
                     <td className='logistic'>
                       <div className='info'>
                         <p className='bold'>{t('LOGISTIC', 'Logistic')}</p>
@@ -540,7 +597,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-                  {allowColumns?.advanced && (
+                  {allowColumns?.advanced && !isSelectedOrders && (
                     <td className='attempts'>
                       <div className='info'>
                         <p className='bold'>{t('ATTEMPTS', 'Attempts')}</p>
@@ -548,7 +605,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-                  {allowColumns?.advanced && (
+                  {allowColumns?.advanced && !isSelectedOrders && (
                     <td className='priority'>
                       <div className='info'>
                         <p className='bold'>{t('PRIORITY', 'Priority')}</p>
@@ -559,6 +616,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
+<<<<<<< HEAD
                   {allowColumns?.timer && (
                     <td className='timer'>
                       <Timer>
@@ -583,6 +641,20 @@ export const OrdersTable = (props) => {
                       )}
                     </div>
                   </td>
+=======
+                  {!isSelectedOrders && (
+                    <td className='orderPrice'>
+                      <div className='info'>
+                        {allowColumns?.total && (
+                          <p className='bold'>{parsePrice(order?.summary?.total)}</p>
+                        )}
+                        {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                          <TimgeAgo order={order} />
+                        )}
+                      </div>
+                    </td>
+                  )}
+>>>>>>> 769bc7345cd0e68c3842407aab35834ac617fb74
                 </tr>
               </OrderTbody>
             ))

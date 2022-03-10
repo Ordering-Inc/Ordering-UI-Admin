@@ -140,6 +140,11 @@ const PointsWalletLevelsUI = (props) => {
                   name='accumulation_rate'
                   autoComplete='off'
                   onChange={(e) => handleUpdateLevel(e, level?.id)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </LastWrapper>
               <PointsWrapper>
@@ -151,6 +156,11 @@ const PointsWalletLevelsUI = (props) => {
                   name='minimum_points'
                   autoComplete='off'
                   onChange={(e) => handleUpdateLevel(e, level?.id)}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
               </PointsWrapper>
               <ButtonWrapper>
@@ -190,22 +200,32 @@ const PointsWalletLevelsUI = (props) => {
           </LevelNameWrapper>
           <LastWrapper>
             <Input
-              type='number'
+              type='text'
               name='accumulation_rate'
               autoComplete='off'
               defaultValue={formState?.changes?.accumulation_rate || ''}
               onChange={(e) => handleChangeInput(e)}
               placeholder='0 days'
+              onKeyPress={(e) => {
+                if (!/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
             />
           </LastWrapper>
           <PointsWrapper>
             <Input
-              type='number'
+              type='text'
               name='minimum_points'
               autoComplete='off'
               defaultValue={formState?.changes?.minimum_points || ''}
               onChange={(e) => handleChangeInput(e)}
               placeholder='0 points'
+              onKeyPress={(e) => {
+                if (!/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
             />
           </PointsWrapper>
           <ButtonWrapper>

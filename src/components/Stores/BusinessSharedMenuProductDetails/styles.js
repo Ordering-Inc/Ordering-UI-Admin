@@ -7,7 +7,7 @@ export const DetailsContainer = styled.div`
   > h1 {
     font-size: 20px;
     font-weight: 700;
-    margin-top: 0;
+    margin-top: 5px;
     margin-bottom: 26px;
   }
 `
@@ -49,7 +49,6 @@ export const SearchbarWrapper = styled.div`
     font-weight: 600;
     margin-bottom: 17px;
   }
-
 `
 export const ProductExtraWrapper = styled.div`
   display: flex;

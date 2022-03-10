@@ -28,13 +28,14 @@ export const Select = (props) => {
     onChange,
     notAsync,
     noSelected,
-    minWidth,
     isSecondIcon,
     isShowSearchBar,
     searchValue,
     handleChangeSearch,
     searchBarIsCustomLayout,
-    searchBarPlaceholder
+    searchBarPlaceholder,
+    searchBarIsNotLazyLoad,
+    className
   } = props
   const defaultOption = options?.find(
     (option) => option.value === defaultValue
@@ -72,6 +73,9 @@ export const Select = (props) => {
     const outsidePopover = !popperElement.current?.contains(e.target)
     const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
     if (outsidePopover && outsidePopoverMenu) {
+      if (isShowSearchBar) {
+        handleChangeSearch('')
+      }
       setOpen(false)
     }
   }
@@ -92,6 +96,7 @@ export const Select = (props) => {
   }, [open])
 
   useEffect(() => {
+    if (isShowSearchBar && searchValue) return
     if (!notAsync) {
       const _defaultOption = options?.find(
         (option) => option.value === defaultValue
@@ -99,7 +104,7 @@ export const Select = (props) => {
       setSelectedOption(_defaultOption)
       setValue(defaultValue)
     }
-  }, [defaultValue, options])
+  }, [defaultValue, options, searchValue])
 
   const handleChangeOption = (e, option) => {
     if (e.target.closest('.disabled') === null) setOpen(!open)
@@ -111,12 +116,12 @@ export const Select = (props) => {
     onChange && onChange(option.value)
   }
 
-  const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: minWidth || '100px' }
+  const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: referenceElement?.current?.offsetWidth || '100px' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
   }
   return (
-    <div style={{ overflow: 'hidden' }}>
+    <div style={{ overflow: 'hidden' }} className={className || 'select-wrapper'}>
       <HeaderItem
         className='select'
         ref={referenceElement}
@@ -148,7 +153,7 @@ export const Select = (props) => {
               className='search-bar-container'
             >
               <SearchBar
-                lazyLoad
+                lazyLoad={!searchBarIsNotLazyLoad}
                 isCustomLayout={searchBarIsCustomLayout}
                 search={searchValue}
                 onSearch={handleChangeSearch}
@@ -163,7 +168,6 @@ export const Select = (props) => {
             {options.map((option, i) => (
               <Option
                 key={i}
-                minWidth={minWidth}
                 selected={value === option.value}
                 color={option.color}
                 onClick={(e) => handleChangeOption(e, option)}

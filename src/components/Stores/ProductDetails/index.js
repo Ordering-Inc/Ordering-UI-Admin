@@ -158,6 +158,7 @@ const ProductDetailsUI = (props) => {
               business={business}
               product={productState.product}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
+              handleSuccessUpdate={handleSuccessUpdate}
               handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}

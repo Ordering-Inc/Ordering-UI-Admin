@@ -38,9 +38,31 @@ export const Header = styled.div`
 `
 export const IngredientOption = styled.div`
   cursor: pointer;
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   padding: 12px 0;
   font-size: 14px;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+
+  span {
+    flex: 1;
+  }
+
+  svg {
+    margin: 0 5px;
+    font-size: 13px;
+    color: ${props => props.theme.colors.secundaryLight};
+  }
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+  `}
 `
 export const AddIngredientButton = styled.div`
   cursor: pointer;

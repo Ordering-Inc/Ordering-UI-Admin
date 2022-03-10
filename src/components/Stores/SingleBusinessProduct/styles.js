@@ -31,9 +31,14 @@ export const SingleListBusinessContainer = styled.tbody`
   }
 
   ${({ isAccept }) => isAccept && css`
-    background-color: #F8F9FA;
     tr {
-      border-top: 1px solid ${props => props.theme.colors.headingColor};
+      border-top: 1px solid ${props => props.theme.colors.primary};
+    }
+  `}
+
+  ${({ isBorderBottom }) => isBorderBottom && css`
+    tr {
+      border-bottom: 1px solid ${props => props.theme.colors.primary};
     }
   `}
 `

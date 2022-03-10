@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Input } from '../../../styles/Inputs'
 import { Alert } from '../../Shared'
+
 import {
   BusinessEmailAndPhoneContainer,
+  SectionTitle,
   FormControl,
-  Label
+  Label,
+  OrdersAppPushContainer
 } from './styles'
 
 export const BusinessEmailAndPhone = (props) => {
@@ -25,7 +28,7 @@ export const BusinessEmailAndPhone = (props) => {
   const saveEmailOrders = (email) => {
     clearTimeout(timeout1)
     timeout1 = setTimeout(() => {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (email.trim() === '' || !re.test(email)) return
       setFormState({
         ...formState,
@@ -77,12 +80,13 @@ export const BusinessEmailAndPhone = (props) => {
   return (
     <>
       <BusinessEmailAndPhoneContainer>
+        <SectionTitle>{t('EMAILS_NOTIFICATIONS', 'Email notifications')}</SectionTitle>
         <FormControl>
-          <Label>{t('EMAIL_RECEIVE_ORDERS')}</Label>
+          <Label>{t('EMAIL_RECEIVE_ORDERS', 'Email to receive orders')}</Label>
           <Input
             type='text'
             defaultValue={business?.email ?? ''}
-            placeholder={t('EMAIL_RECEIVE_ORDERS')}
+            placeholder={t('EMAIL_RECEIVE_ORDERS', 'Email to receive orders')}
             onChange={(e) => saveEmailOrders(e.target.value)}
           />
         </FormControl>
@@ -104,11 +108,13 @@ export const BusinessEmailAndPhone = (props) => {
             onChange={(e) => saveBusinessCel(e.target.value)}
           />
         </FormControl>
-        <FormControl>
-          <Label>{t('ORDERS_APP_PUSH')}</Label>
-          <span className='info'>{t('ORDERS_APP_PUSH_DESC')}</span>
-        </FormControl>
       </BusinessEmailAndPhoneContainer>
+
+      <OrdersAppPushContainer>
+        <SectionTitle>{t('ORDERS_APP_PUSH')}</SectionTitle>
+        <p>{t('ORDERS_APP_PUSH_DESC')}</p>
+      </OrdersAppPushContainer>
+
       <Alert
         title={t('EMAILS_AND_PHONES', 'Emails and phones')}
         content={alertState.content}
