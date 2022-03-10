@@ -265,59 +265,6 @@ export const OrdersTable = (props) => {
         <Table
           className='orders_table'
         >
-<<<<<<< HEAD
-          <thead>
-            <tr>
-              <th>
-                <Timestatus />
-              </th>
-              <th
-                className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
-              >
-                <CheckBox
-                  isChecked={!orderList.loading && isAllChecked}
-                  onClick={() => handleSelecteAllOrder()}
-                  className='orderCheckBox'
-                >
-                  {(!orderList.loading && isAllChecked) ? (
-                    <RiCheckboxFill />
-                  ) : (
-                    <RiCheckboxBlankLine />
-                  )}
-                </CheckBox>
-                {t('ORDER', 'Order')}
-              </th>
-              {allowColumns?.status && (
-                <th className='statusInfo'>{t('STATUS', 'Status')}</th>
-              )}
-              {allowColumns?.business && (
-                <th className='businessInfo'>{t('BUSINESS', 'Business')}</th>
-              )}
-              {allowColumns?.customer && (
-                <th className='customerInfo'>{t('CUSTOMER', 'Customer')}</th>
-              )}
-              {allowColumns?.driver && (
-                <th className='driverInfo'>{t('DRIVER', 'Driver')}</th>
-              )}
-              {allowColumns?.advanced && (
-                <th colSpan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
-              )}
-              {allowColumns?.timer && (
-                <th colSpan={3} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
-              )}
-              <th className='orderPrice'>
-                <ColumnAllowSettingPopover
-                  open={openPopover}
-                  allowColumns={allowColumns}
-                  optionsDefault={optionsDefault}
-                  onClick={() => setOpenPopover(!openPopover)}
-                  onClose={() => setOpenPopover(false)}
-                  handleChangeAllowColumns={handleChangeAllowColumns}
-                />
-              </th>
-            </tr>
-          </thead>
-=======
           {!isSelectedOrders && (
             <thead>
               <tr>
@@ -352,6 +299,9 @@ export const OrdersTable = (props) => {
                 {allowColumns?.advanced && (
                   <th colSpan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
                 )}
+                {allowColumns?.timer && (
+                  <th colSpan={3} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
+                )}
                 <th className='orderPrice'>
                   <ColumnAllowSettingPopover
                     open={openPopover}
@@ -365,7 +315,6 @@ export const OrdersTable = (props) => {
               </tr>
             </thead>
           )}
->>>>>>> 769bc7345cd0e68c3842407aab35834ac617fb74
           {orderList.loading ? (
             [...Array(10).keys()].map(i => (
               <OrderTbody key={i}>
@@ -616,7 +565,6 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-<<<<<<< HEAD
                   {allowColumns?.timer && (
                     <td className='timer'>
                       <Timer>
@@ -641,20 +589,6 @@ export const OrdersTable = (props) => {
                       )}
                     </div>
                   </td>
-=======
-                  {!isSelectedOrders && (
-                    <td className='orderPrice'>
-                      <div className='info'>
-                        {allowColumns?.total && (
-                          <p className='bold'>{parsePrice(order?.summary?.total)}</p>
-                        )}
-                        {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
-                          <TimgeAgo order={order} />
-                        )}
-                      </div>
-                    </td>
-                  )}
->>>>>>> 769bc7345cd0e68c3842407aab35834ac617fb74
                 </tr>
               </OrderTbody>
             ))

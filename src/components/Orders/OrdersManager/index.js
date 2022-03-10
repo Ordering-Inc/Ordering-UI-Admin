@@ -4,11 +4,8 @@ import { useLanguage, useSession, OrdersManage as OrdersManageController } from 
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
-<<<<<<< HEAD
 import { OrdersDashboardControls } from '../OrdersDashboardControls'
-=======
 import { Alert } from '../../Shared'
->>>>>>> 769bc7345cd0e68c3842407aab35834ac617fb74
 import {
   OrdersListContainer,
   OrdersContent,
