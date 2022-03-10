@@ -39,3 +39,14 @@ export const WrapperIndicator = styled.div`
 export const WrapItemView = styled.div`
   width: 100%;
 `
+export const OrderSubFilterControls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`
+export const OrderStatusSubFilterWrapper = styled.div`
+  width: 50%;
+  display: inline-block;
+  flex: 1;
+  margin-right: 20px;
+`

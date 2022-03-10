@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -16,7 +17,10 @@ import {
   CardContent,
   DriverSelectorWrapper,
   WrapperPagination,
-  UnreadMessageCounter
+  UnreadMessageCounter,
+  Timestatus,
+  CardHeading,
+  Timer
 } from './styles'
 
 export const OrdersCards = (props) => {
@@ -35,6 +39,7 @@ export const OrdersCards = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parseDate, optimizeImage }] = useUtils()
+  const [currentTime, setCurrentTime] = useState()
 
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
@@ -82,6 +87,31 @@ export const OrdersCards = (props) => {
 
     return objectStatus && objectStatus
   }
+
+  const getDelayTime = (order) => {
+    // targetMin = delivery_datetime  + eta_time - now()
+    const _delivery = order?.delivery_datetime_utc
+    const _eta = order?.eta_time
+    const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
+    let day = Math.floor(tagetedMin / 1440)
+    const restMinOfTargetedMin = tagetedMin - 1440 * day
+    let restHours = Math.floor(restMinOfTargetedMin / 60)
+    let restMins = restMinOfTargetedMin - 60 * restHours
+
+    if (order?.time_status === 'in_time' || order?.time_status === 'at_risk') day = Math.abs(day)
+    if (restHours < 10) restHours = ('0' + restHours)
+    if (restMins < 10) restMins = ('0' + restMins)
+    const finalTaget = day + 'day  ' + restHours + ':' + restMins
+    return finalTaget
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(Date.now())
+    }, 60000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     if (orderList.loading || !selectedOrderCard) return
@@ -136,23 +166,31 @@ export const OrdersCards = (props) => {
                 active={selectedOrderCard?.id === order.id}
                 onClick={(e) => handleOrderClick(e, order)}
               >
-                <OrderHeader>
-                  <h2>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</h2>
-                  <p>{getOrderStatus(order.status)?.value}</p>
-                  <div>
-                    <p>
-                      {order?.delivery_datetime_utc
-                        ? parseDate(order?.delivery_datetime_utc)
-                        : parseDate(order?.delivery_datetime, { utc: false })}
-                    </p>
-                    <ViewDetails
-                      className='view-details'
-                      onClick={() => handleOpenOrderDetail(order)}
-                    >
-                      {t('VIEW_DETAILS', 'View details')}
-                    </ViewDetails>
-                  </div>
-                </OrderHeader>
+                <CardHeading>
+                  <OrderHeader>
+                    <h2>
+                      <span>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</span>
+                    </h2>
+                    <p>{getOrderStatus(order.status)?.value}</p>
+                    <div>
+                      <p>
+                        {order?.delivery_datetime_utc
+                          ? parseDate(order?.delivery_datetime_utc)
+                          : parseDate(order?.delivery_datetime, { utc: false })}
+                      </p>
+                      <ViewDetails
+                        className='view-details'
+                        onClick={() => handleOpenOrderDetail(order)}
+                      >
+                        {t('VIEW_DETAILS', 'View details')}
+                      </ViewDetails>
+                    </div>
+                  </OrderHeader>
+                  <Timer>
+                    <p className='bold'>Timer</p>
+                    <p className={order?.time_status}>{getDelayTime(order)}</p>
+                  </Timer>
+                </CardHeading>
                 {isMessagesView && order?.unread_count > 0 && (
                   <UnreadMessageCounter>
                     {order?.unread_count}
@@ -181,6 +219,7 @@ export const OrdersCards = (props) => {
                     />
                   </DriverSelectorWrapper>
                 </CardContent>
+                <Timestatus timeState={order?.time_status} />
               </OrderCard>
             ))}
           </>
