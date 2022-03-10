@@ -4,12 +4,12 @@ import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { SearchBar, Pagination, Modal, SideBar, Alert } from '../../Shared'
-import { Button, Switch } from '../../../styles'
+import { Switch } from '../../../styles'
 import { ChevronRight, Square, CheckSquareFill } from 'react-bootstrap-icons'
 import {
   Container,
   SearchWrapper,
-  BusinessSelectOption,
+  // BusinessSelectOption,
   TableWrapper,
   BusinessTable,
   TBoday,
@@ -69,6 +69,10 @@ const PointsWalletBusinessListUI = (props) => {
 
   const handleClickBusiness = (business, e) => {
     if (e.target.closest('.accumulates') || e.target.closest('.redeems') || e.target.closest('.wallet_enabled')) return
+    if (!pointWallet) {
+      setAlertState({ open: true, content: [t('YOU_MUST_CREATE_LOYALTY_PLAN', 'You must create a loyalty plan')] })
+      return
+    }
     if (!business?.wallet_enabled) {
       setAlertState({ open: true, content: t('DISABLED_BUSINESS', 'Disabled business') })
       return
@@ -139,12 +143,12 @@ const PointsWalletBusinessListUI = (props) => {
         />
       </SearchWrapper>
 
-      {pointWallet?.type !== 'credit_point' && (
+      {/* {pointWallet?.type !== 'credit_point' && (
         <BusinessSelectOption>
           <Button color='secundaryDark'>{t('SELECT_ALL', 'Select all')}</Button>
           <Button color='secundaryDark'>{t('SELECT_NONE', 'Select none')}</Button>
         </BusinessSelectOption>
-      )}
+      )} */}
 
       <TableWrapper>
         {businessList.loading ? (
