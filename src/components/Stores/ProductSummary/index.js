@@ -91,10 +91,13 @@ export const ProductSummary = (props) => {
     })
   }
 
-  // const handleCopyLink = () => {
-  //   navigator.clipboard.writeText(window.location.href)
-  //   showToast(ToastType.Success, t('PRODUCT_LINK_COPIED_TO_CLIPBOARD', 'The product link was copied to your clipboard.'))
-  // }
+  const getPercentage = () => {
+    if (productState.product) {
+      return (productState?.product?.price - productState?.product?.cost_price) * 100 / productState?.product?.price
+    } else {
+      return 0
+    }
+  }
 
   return (
     <>
@@ -110,11 +113,6 @@ export const ProductSummary = (props) => {
             />
           </LeftHeader>
           <RightHeader>
-            {/* <IconButton
-              onClick={() => handleCopyLink()}
-            >
-              <Link45deg />
-            </IconButton> */}
             <ActionSelectorWrapper>
               <DropdownButton
                 className='product_actions'
@@ -152,7 +150,8 @@ export const ProductSummary = (props) => {
           </ProductImageWrapper>
           <ProductSales>
             <ProgressRing
-              percent={35}
+              isShowPercent
+              percent={getPercentage()}
               size={70}
               lineWidth={8}
               progressColor={theme.colors.primary}

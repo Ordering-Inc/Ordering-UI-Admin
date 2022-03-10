@@ -8,9 +8,11 @@ export const ProgressRing = (props) => {
     progressColor,
     trackColor,
     caps,
-    children,
+    isShowPercent,
     spin,
-    transitionDuration
+    transitionDuration,
+    percentColor,
+    fontSize
   } = props
 
   const halfSize = size / 2
@@ -24,7 +26,8 @@ export const ProgressRing = (props) => {
         height: size,
         display: 'flex',
         placeContent: 'center',
-        placeItems: 'center'
+        placeItems: 'center',
+        position: 'relative'
       }}
     >
       <svg
@@ -68,7 +71,18 @@ export const ProgressRing = (props) => {
           />
         </g>
       </svg>
-      {children ? <div style={{ zIndex: 1 }}>{children}</div> : null}
+      {isShowPercent && (
+        <div
+          style={{
+            position: 'absolute',
+            color: percentColor || '#2c7be5',
+            fontSize: fontSize || '14px',
+            fontWeight: '600'
+          }}
+        >
+          {Math.round(percent)}%
+        </div>
+      )}
     </div>
   )
 }
