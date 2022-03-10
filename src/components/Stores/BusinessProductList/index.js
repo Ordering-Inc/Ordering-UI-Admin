@@ -27,7 +27,8 @@ export const BusinessProductList = (props) => {
     handleChangeSearch,
     handleOpenProductDetails,
     isParentProductAdd,
-    handleParentProductAdd
+    handleParentProductAdd,
+    allowSpreadColumns
   } = props
   const [, t] = useLanguage()
 
@@ -231,6 +232,7 @@ export const BusinessProductList = (props) => {
                 <BusinessSpreadSheet
                   {...props}
                   business={businessState?.business}
+                  allowSpreadColumns={allowSpreadColumns}
                 />
               )}
             </ProductListSpreadContainer>
