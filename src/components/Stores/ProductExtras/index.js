@@ -26,11 +26,11 @@ const ProductExtrasUI = (props) => {
     handleOpenAddForm,
     handleChangeExtraInput,
     handleAddExtra,
-    handleClickExtra,
     handleChangeAddExtraInput,
     setIsExtendExtraOpen,
     business,
-    handleUpdateBusinessState
+    handleUpdateBusinessState,
+    handleProductExtraState
   } = props
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -40,6 +40,8 @@ const ProductExtrasUI = (props) => {
 
   const [openExtraDetails, setOpenExtraDetails] = useState(false)
   const [currentExtra, setCurrentExtra] = useState(null)
+  const [extraIds, setExtraIds] = useState([])
+  const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
 
   const handleOpenExtraDetails = (extra) => {
     setIsExtendExtraOpen(true)
@@ -53,21 +55,35 @@ const ProductExtrasUI = (props) => {
     setCurrentExtra(null)
   }
 
-  const isCheckState = (extraId) => {
-    if (productState?.product?.extras) {
-      const found = productState?.product?.extras.find(extra => extra?.id === extraId)
-      return found
-    } else {
-      return false
-    }
-  }
-
   const addExtraListener = (e) => {
     const outsideDropdown = !conatinerRef.current?.contains(e.target)
     if (outsideDropdown) {
       handleAddExtra()
     }
   }
+
+  const handleExtraState = (id, checked) => {
+    if (checked) {
+      setExtraIds(prevState => ([...prevState, id]))
+    } else {
+      setExtraIds(prevState => prevState.filter(extraId => extraId !== id))
+    }
+    setIsCheckboxClicked(true)
+  }
+
+  useEffect(() => {
+    let _extraIds = []
+    if (productState.product?.extras) {
+      _extraIds = productState.product.extras.reduce((ids, extra) => [...ids, extra.id], [])
+    }
+    setExtraIds(_extraIds)
+  }, [])
+
+  useEffect(() => {
+    if (!isCheckboxClicked) return
+    setIsCheckboxClicked(false)
+    handleProductExtraState(extraIds)
+  }, [isCheckboxClicked, extraIds])
 
   useEffect(() => {
     if (!isAddMode) return
@@ -104,8 +120,8 @@ const ProductExtrasUI = (props) => {
           >
             <CheckboxContainer>
               <Checkbox
-                defaultChecked={isCheckState(extra.id)}
-                onClick={(e) => handleClickExtra(extra.id, e.target.checked)}
+                checked={extraIds.includes(extra.id) ?? false}
+                onChange={e => handleExtraState(extra.id, e.target.checked)}
               />
               <input
                 type='text'
