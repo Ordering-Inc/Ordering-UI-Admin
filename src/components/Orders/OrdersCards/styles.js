@@ -53,6 +53,7 @@ export const OrderCard = styled.div`
 export const CardHeading = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 94%;
 `
 
 export const OrderHeader = styled.div`

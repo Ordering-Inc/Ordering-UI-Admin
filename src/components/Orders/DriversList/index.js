@@ -11,8 +11,7 @@ import {
   Image,
   DriverInfo,
   WrapperStar,
-  AssignedOrdersCount,
-  Timestatus
+  AssignedOrdersCount
 } from './styles'
 
 export const DriversList = (props) => {
@@ -64,7 +63,6 @@ export const DriversList = (props) => {
               onClick={(e) => handleClickDriver(e, driver)}
               active={selectedDriver?.id === driver.id}
             >
-              <Timestatus timeState={ 'in_time' } />
               <WrapperImage>
                 <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
               </WrapperImage>
