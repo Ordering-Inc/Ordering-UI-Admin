@@ -48,7 +48,8 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
       formState = props.formState,
       handleChangeInput = props.handleChangeInput,
       handleClickSubmit = props.handleClickSubmit,
-      isBusiness = props.isBusiness;
+      isBusiness = props.isBusiness,
+      selectedBusinessList = props.selectedBusinessList;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -83,6 +84,20 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
   };
 
   var onSubmit = function onSubmit() {
+    if (!walletData) {
+      var findBusiness = selectedBusinessList.find(function (business) {
+        return business.wallet_enabled;
+      });
+
+      if (!findBusiness) {
+        setAlertState({
+          open: true,
+          content: t('SELECT_LEAST_ONE_BUSINESS', 'Select at least one business.')
+        });
+        return;
+      }
+    }
+
     if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0) {
       var _formState$changes, _formState$changes2;
 
@@ -126,6 +141,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     type: "text",
     placeholder: "00 points",
     name: "redemption_rate",
+    autoComplete: "off",
     value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.redemption_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.redemption_rate : (_walletData$redemptio = walletData === null || walletData === void 0 ? void 0 : walletData.redemption_rate) !== null && _walletData$redemptio !== void 0 ? _walletData$redemptio : '',
     onChange: handleChangeInput,
     onKeyPress: function onKeyPress(e) {
@@ -139,6 +155,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     type: "text",
     placeholder: "00 points",
     name: "accumulation_rate",
+    autoComplete: "off",
     value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.accumulation_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.accumulation_rate : (_walletData$accumulat = walletData === null || walletData === void 0 ? void 0 : walletData.accumulation_rate) !== null && _walletData$accumulat !== void 0 ? _walletData$accumulat : '',
     onChange: handleChangeInput,
     onKeyPress: function onKeyPress(e) {
@@ -150,7 +167,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     color: "primary",
     type: "submit",
     disabled: Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0
-  }, t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, walletData ? ('SAVE', 'Save') : ('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('POINTS_WALLET', 'Points wallet'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

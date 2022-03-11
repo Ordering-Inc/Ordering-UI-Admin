@@ -146,6 +146,14 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
   var handleClickBusiness = function handleClickBusiness(business, e) {
     if (e.target.closest('.accumulates') || e.target.closest('.redeems') || e.target.closest('.wallet_enabled')) return;
 
+    if (!pointWallet) {
+      setAlertState({
+        open: true,
+        content: [t('YOU_MUST_CREATE_LOYALTY_PLAN', 'You must create a loyalty plan')]
+      });
+      return;
+    }
+
     if (!(business !== null && business !== void 0 && business.wallet_enabled)) {
       setAlertState({
         open: true,
@@ -222,11 +230,7 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
       return setSearchVal(value);
     },
     placeholder: t('SEARCH', 'Search')
-  })), (pointWallet === null || pointWallet === void 0 ? void 0 : pointWallet.type) !== 'credit_point' && /*#__PURE__*/_react.default.createElement(_styles2.BusinessSelectOption, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "secundaryDark"
-  }, t('SELECT_ALL', 'Select all')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "secundaryDark"
-  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, businessList.loading ? /*#__PURE__*/_react.default.createElement(_styles2.BusinessTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, businessList.loading ? /*#__PURE__*/_react.default.createElement(_styles2.BusinessTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
     className: "business-info"
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100,
