@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   useUtils,
   useApi,
@@ -26,7 +26,8 @@ const CategoryTreeNode = (props) => {
     index,
     selectedProductsIds,
     setSelectedProductsIds,
-    include
+    include,
+    subCategoriesList
   } = props
 
   const [{ optimizeImage }] = useUtils()
@@ -91,61 +92,65 @@ const CategoryTreeNode = (props) => {
   }
 
   return (
-    <AccordionSection>
-      <Accordion
-        onClick={(e) => toggleAccordion(e, category.id)}
-      >
-        <AccordionItem
-          margin={20 * index}
-        >
-          <GoTriangleDown className={setRotate} />
-          <div>
-            <Checkbox
-              ref={categoryRef}
-              checked={isCheckedCategory()}
-              onChange={() => handleChangeSelectCategory(include)}
-            />
-            <span>{category.name}</span>
-          </div>
-        </AccordionItem>
-      </Accordion>
-      <AccordionContent
-        ref={content}
-        style={{
-          maxHeight: !setActive && '0px'
-        }}
-      >
-        {category?.products.map(product => (
-          <AccordionItem
-            key={product.id}
-            margin={20 * (index + 1)}
-            isProduct
+    <>
+      {subCategoriesList.find(_category => _category.id === category.id)?.productIds?.length > 0 && (
+        <AccordionSection>
+          <Accordion
+            onClick={(e) => toggleAccordion(e, category.id)}
           >
-            <div>
-              <Checkbox
-                ref={checkboxRef}
-                checked={!!selectedProductsIds[product.id] && selectedProductsIds[product.id].include === include}
-                onChange={() => handleClickProduct(product, include)}
-              />
-              <WrapperImage>
-                <Image bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_50,c_limit')} />
-              </WrapperImage>
-              <span>{product.name}</span>
-            </div>
-          </AccordionItem>
-        ))}
-        {(category?.subcategories && category?.subcategories?.length > 0) && (
-          category.subcategories.map(subCategory => (
-            <CategoryTreeNode
-              {...props}
-              key={subCategory.id}
-              category={subCategory}
-              index={index + 1}
-            />
-          ))
-        )}
-      </AccordionContent>
-    </AccordionSection>
+            <AccordionItem
+              margin={20 * index}
+            >
+              <GoTriangleDown className={setRotate} />
+              <div>
+                <Checkbox
+                  ref={categoryRef}
+                  checked={isCheckedCategory()}
+                  onChange={() => handleChangeSelectCategory(include)}
+                />
+                <span>{category.name}</span>
+              </div>
+            </AccordionItem>
+          </Accordion>
+          <AccordionContent
+            ref={content}
+            style={{
+              maxHeight: !setActive && '0px'
+            }}
+          >
+            {category?.products.map(product => (
+              <AccordionItem
+                key={product.id}
+                margin={20 * (index + 1)}
+                isProduct
+              >
+                <div>
+                  <Checkbox
+                    ref={checkboxRef}
+                    checked={!!selectedProductsIds[product.id] && selectedProductsIds[product.id].include === include}
+                    onChange={() => handleClickProduct(product, include)}
+                  />
+                  <WrapperImage>
+                    <Image bgimage={optimizeImage(product?.images || theme.images?.dummies?.product, 'h_50,c_limit')} />
+                  </WrapperImage>
+                  <span>{product.name}</span>
+                </div>
+              </AccordionItem>
+            ))}
+            {(category?.subcategories && category?.subcategories?.length > 0) && (
+              category.subcategories.map(subCategory => (
+                <CategoryTreeNode
+                  {...props}
+                  key={subCategory.id}
+                  category={subCategory}
+                  index={index + 1}
+                />
+              ))
+            )}
+          </AccordionContent>
+        </AccordionSection>
+      )}
+    </>
   )
 }
 
@@ -156,6 +161,38 @@ const SelectBusinessProductsUI = (props) => {
     setSelectedProductsIds,
     include
   } = props
+
+  const [subCategoriesList, setSubCategoriesList] = useState([])
+
+  useEffect(() => {
+    if (businessState.loading) return
+    const _subCategoriesList = []
+    const iterateCategories = (categories) => {
+      return (
+        categories?.length > 0 && categories?.forEach(category => {
+          let productIds = []
+          const _productIds = category.products.reduce((ids, product) => [...ids, product.id], [])
+          productIds = [...productIds, ..._productIds]
+          if (category?.subcategories?.length) {
+            category.subcategories.forEach(function iterate (category) {
+              const _productIds = category.products.reduce((ids, product) => [...ids, product.id], [])
+              productIds = [...productIds, ..._productIds]
+              Array.isArray(category?.subcategories) && category.subcategories.forEach(iterate)
+            })
+          }
+
+          _subCategoriesList.push({
+            id: category.id,
+            name: category.name,
+            productIds: productIds
+          })
+          iterateCategories(category.subcategories)
+        })
+      )
+    }
+    iterateCategories(businessState.business?.categories)
+    setSubCategoriesList(_subCategoriesList)
+  }, [businessState.business?.categories])
 
   return (
     <Container>
@@ -172,6 +209,7 @@ const SelectBusinessProductsUI = (props) => {
       ) : (
         businessState.business?.categories.sort((a, b) => a.rank - b.rank).map(category => (
           <CategoryTreeNode
+            subCategoriesList={subCategoriesList}
             key={category.id}
             index={0}
             category={category}

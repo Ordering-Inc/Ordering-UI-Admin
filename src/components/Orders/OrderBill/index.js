@@ -91,12 +91,6 @@ export const OrderBill = (props) => {
               <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee, { currencyPosition: 'left' })}</td>
             </tr>
           )}
-          {order?.payment_events?.length > 0 && order?.payment_events?.map((event, i) => (
-            <tr key={i}>
-              <td>{walletName[event?.wallet_event?.wallet?.type]?.name}</td>
-              <td>-{parsePrice(event?.amount)}</td>
-            </tr>
-          ))}
         </tbody>
       </table>
       <table className='total'>
@@ -107,6 +101,27 @@ export const OrderBill = (props) => {
           </tr>
         </tbody>
       </table>
+      {order?.payment_events?.length > 0 && (
+        <table className='payments'>
+          <thead>
+            <tr>
+              <th calSpan={2}>{t('PAYMENTS', 'Payments')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {order?.payment_events?.map((event, i) => (
+              <tr key={i}>
+                <td>
+                  {event?.wallet_event
+                    ? walletName[event?.wallet_event?.wallet?.type]?.name
+                    : event?.paymethod?.name}
+                </td>
+                <td>-{parsePrice(event?.amount)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
       {order?.comment && (
         <table className='comments'>
           <tbody>

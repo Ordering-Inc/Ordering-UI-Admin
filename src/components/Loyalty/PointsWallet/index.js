@@ -19,6 +19,7 @@ export const PointsWallet = (props) => {
 
   const [, t] = useLanguage()
   const [selectedOption, setSelectedOption] = useState('general')
+  const [selectedBusinessList, setSelectedBusinessList] = useState([])
 
   const walletOptionList = [
     { key: 'general', name: t('GENERAL', 'General') },
@@ -47,9 +48,10 @@ export const PointsWallet = (props) => {
         <PointsWalletBusinessDetail
           walletData={pointWallet}
           handleUpdatePointsWallet={handleUpdatePointsWallet}
+          selectedBusinessList={selectedBusinessList}
         />
       )}
-      {selectedOption === 'business' && <PointsWalletBusinessList {...props} />}
+      {selectedOption === 'business' && <PointsWalletBusinessList {...props} setSelectedBusinessList={setSelectedBusinessList} />}
     </Container>
   )
 }
