@@ -569,14 +569,16 @@ export const SidebarMenu = (props) => {
                     <span>{t('SUPPORT', 'Support')}</span>
                   </Button>
                 )}
-                <Button
-                  className='d-flex align-items-center'
-                  variant={false}
-                  onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
-                >
-                  <BoxArrowUpRight />
-                  <span>{t('MARKETPLACE', 'Marketplace')}</span>
-                </Button>
+                {sessionState?.user?.level === 0 && (
+                  <Button
+                    className='d-flex align-items-center'
+                    variant={false}
+                    onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
+                  >
+                    <BoxArrowUpRight />
+                    <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                  </Button>
+                )}
               </div>
             </SidebarContent>
             <UserInfo
