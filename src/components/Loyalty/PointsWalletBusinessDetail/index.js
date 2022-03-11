@@ -28,7 +28,8 @@ const PointsWalletBusinessDetailUI = (props) => {
     handleChangeInput,
     handleClickSubmit,
     // setFormState,
-    isBusiness
+    isBusiness,
+    selectedBusinessList
   } = props
 
   const [, t] = useLanguage()
@@ -51,6 +52,13 @@ const PointsWalletBusinessDetailUI = (props) => {
   }
 
   const onSubmit = () => {
+    if (!walletData) {
+      const findBusiness = selectedBusinessList.find(business => business.wallet_enabled)
+      if (!findBusiness) {
+        setAlertState({ open: true, content: t('SELECT_LEAST_ONE_BUSINESS', 'Select at least one business.') })
+        return
+      }
+    }
     if (Object.keys(formState?.changes).length > 0) {
       if (formState?.changes?.redemption_rate === '') {
         setAlertState({
@@ -108,6 +116,7 @@ const PointsWalletBusinessDetailUI = (props) => {
               type='text'
               placeholder='00 points'
               name='redemption_rate'
+              autoComplete='off'
               value={(typeof formState?.changes?.redemption_rate !== 'undefined')
                 ? formState?.changes?.redemption_rate
                 : walletData?.redemption_rate ?? ''}
@@ -158,6 +167,7 @@ const PointsWalletBusinessDetailUI = (props) => {
               type='text'
               placeholder='00 points'
               name='accumulation_rate'
+              autoComplete='off'
               value={(typeof formState?.changes?.accumulation_rate !== 'undefined')
                 ? formState?.changes?.accumulation_rate
                 : walletData?.accumulation_rate ?? ''}
@@ -187,7 +197,7 @@ const PointsWalletBusinessDetailUI = (props) => {
           type='submit'
           disabled={Object.keys(formState?.changes).length === 0}
         >
-          {t('SAVE', 'Save')}
+          {walletData ? ('SAVE', 'Save') : ('ADD', 'Add')}
         </Button>
       </ButtonWrapper>
       <Alert
