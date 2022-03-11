@@ -41,6 +41,10 @@ var CustomerCashWalletEvents = function CustomerCashWalletEvents(props) {
   var cashEventsState = props.cashEventsState,
       parseEvent = props.parseEvent;
 
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
@@ -66,7 +70,7 @@ var CustomerCashWalletEvents = function CustomerCashWalletEvents(props) {
       dangerouslySetInnerHTML: {
         __html: parseEvent(event)
       }
-    }), /*#__PURE__*/_react.default.createElement(_styles.TransactionDescription, null, event.description));
+    }), /*#__PURE__*/_react.default.createElement(_styles.TransactionDescription, null, event.description), /*#__PURE__*/_react.default.createElement(_styles.TransactionCode, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("strong", null, t('CODE', 'Code'), ":"), " ", event === null || event === void 0 ? void 0 : event.code)));
   })));
 };
 

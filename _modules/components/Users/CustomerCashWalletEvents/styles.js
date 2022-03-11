@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TransactionHeader = exports.TransactionDescription = exports.Transaction = exports.HistoryItem = exports.HistoriesWrapper = exports.Container = exports.Amount = void 0;
+exports.TransactionHeader = exports.TransactionDescription = exports.TransactionCode = exports.Transaction = exports.HistoryItem = exports.HistoriesWrapper = exports.Container = exports.Amount = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -23,7 +23,7 @@ exports.Container = Container;
 
 var HistoriesWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: relative;\n  ", "\n"])), function (_ref) {
   var isLoading = _ref.isLoading;
-  return !isLoading && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    &:before {\n      content: \"\";\n      background: ", ";\n      position: absolute;\n      width: 2px;\n      top: 7px;\n      height: calc(100% - 37px);\n      ", "\n    }\n  "])), function (props) {
+  return !isLoading && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    &:before {\n      content: \"\";\n      background: ", ";\n      position: absolute;\n      width: 2px;\n      top: 7px;\n      height: calc(100% - 10px);\n      ", "\n    }\n  "])), function (props) {
     return props.theme.colors.borderColor;
   }, function (props) {
     var _props$theme;
@@ -72,3 +72,13 @@ var Amount = _styledComponents.default.span(_templateObject14 || (_templateObjec
 });
 
 exports.Amount = Amount;
+
+var TransactionCode = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  color: ", ";\n  ", "\n"])), function (props) {
+  return props.theme.colors.lightGray;
+}, function (props) {
+  var _props$theme4;
+
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n  "])));
+});
+
+exports.TransactionCode = TransactionCode;
