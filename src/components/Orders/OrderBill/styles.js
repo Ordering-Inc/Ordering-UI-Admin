@@ -8,7 +8,7 @@ export const OrderBillContainer = styled.div`
   flex-direction: column;
   table {
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
     tr td:nth-child(2) {
       text-align: right;
       ${props => props.theme?.rtl && css`
@@ -30,6 +30,13 @@ export const OrderBillContainer = styled.div`
   }
   table.payments {
     margin-top: 15px;
+    thead {
+      th {
+        font-weight: 600;
+        font-size: 16px;
+        padding-bottom: 5px;
+      }
+    }
   }
   table.comments {
     margin-top: 20px;
