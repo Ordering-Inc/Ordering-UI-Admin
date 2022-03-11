@@ -11,17 +11,20 @@ const BusinessSpreadSheetUI = (props) => {
     spreadSheetState,
     handleRowRemove,
     handleAfterSectionEnd,
-    handleoutsideClickDeselects
+    handleoutsideClickDeselects,
+    allowSpreadColumns
   } = props
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [hiddenColumns, setHiddenColumns] = useState([])
 
   const spreadSheetHeaderItems = [
     { title: t('ID', 'Id'), code: 'id', readOnly: true, type: 'numeric' },
     { title: t('NAME', 'Name'), code: 'name', readOnly: false, type: 'text', editor: false },
     { title: t('DESCRIPTION', 'Description'), code: 'description', readOnly: false, type: 'text' },
     { title: t('PRICE', 'Price'), code: 'price', readOnly: false, type: 'numeric' },
+    { title: t('PRODUCT_COST', 'Product cost'), code: 'cost_price', readOnly: false, type: 'numeric' },
     { title: t('INVENTORY', 'Inventory'), code: 'inventoried', readOnly: false, type: 'checkbox' },
     { title: t('QUANTITY', 'Quantity'), code: 'quantity', readOnly: false, type: 'numeric' }
   ]
@@ -42,6 +45,18 @@ const BusinessSpreadSheetUI = (props) => {
     }
   }, [spreadSheetState?.result])
 
+  useEffect(() => {
+    let index = 0
+    const _hiddenColumns = []
+    for (const key in allowSpreadColumns) {
+      if (!allowSpreadColumns[key]) {
+        _hiddenColumns.push(index)
+      }
+      index++
+    }
+    setHiddenColumns(_hiddenColumns)
+  }, [allowSpreadColumns])
+
   return (
     <>
       <BusinessSpreadSheetContainer>
@@ -54,6 +69,7 @@ const BusinessSpreadSheetUI = (props) => {
           handleRowRemove={handleRowRemove}
           handleAfterSectionEnd={handleAfterSectionEnd}
           handleoutsideClickDeselects={handleoutsideClickDeselects}
+          hiddenColumns={hiddenColumns}
           isRemove
         />
       </BusinessSpreadSheetContainer>

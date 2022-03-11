@@ -94,6 +94,9 @@ export const ActionSelectorWrapper = styled.div`
       .dropdown-item {
         font-size: 12px;
         color: ${props => props.theme.colors.headingColor};
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
       }
       .dropdown-item:last-child {
         color: #E63757;

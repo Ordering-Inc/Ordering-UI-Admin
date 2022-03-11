@@ -142,13 +142,6 @@ const SingleBusinessProductUI = (props) => {
                     </BusinessGeneralInfo>
                   </td>
                 )}
-                {allowColumns?.price && (
-                  <td>
-                    <InfoBlock>
-                      <Skeleton width={80} />
-                    </InfoBlock>
-                  </td>
-                )}
                 {allowColumns?.description && (
                   <td>
                     <InfoBlock className='description'>
@@ -156,12 +149,33 @@ const SingleBusinessProductUI = (props) => {
                     </InfoBlock>
                   </td>
                 )}
-                <td>
-                  <Skeleton width={100} />
-                </td>
-                <td>
-                  <Skeleton width={100} />
-                </td>
+                {allowColumns?.price && (
+                  <td>
+                    <InfoBlock>
+                      <Skeleton width={80} />
+                    </InfoBlock>
+                  </td>
+                )}
+                {allowColumns?.offer_price && (
+                  <td>
+                    <Skeleton width={100} />
+                  </td>
+                )}
+                {allowColumns?.cost_price && (
+                  <td>
+                    <Skeleton width={100} />
+                  </td>
+                )}
+                {allowColumns?.tax && (
+                  <td>
+                    <Skeleton width={100} />
+                  </td>
+                )}
+                {allowColumns?.fee && (
+                  <td>
+                    <Skeleton width={100} />
+                  </td>
+                )}
                 <td>
                   <Skeleton width={100} />
                 </td>
