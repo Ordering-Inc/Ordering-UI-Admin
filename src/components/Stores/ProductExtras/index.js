@@ -4,6 +4,7 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Checkbox } from '../../../styles'
 import { Alert, Confirm, Modal } from '../../Shared'
 import { ProductExtraOptions } from '../ProductExtraOptions'
+import { ChevronRight } from 'react-bootstrap-icons'
 
 import {
   MainContainer,
@@ -131,7 +132,7 @@ const ProductExtrasUI = (props) => {
             </CheckboxContainer>
             <MoreContainer>
               <Details onClick={() => handleOpenExtraDetails(extra)}>
-                {t('DETAILS', 'Details')}
+                <ChevronRight />
               </Details>
             </MoreContainer>
           </ExtraOption>

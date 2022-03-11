@@ -10,13 +10,17 @@ import { Checkbox, IconButton, Input, Switch } from '../../../styles'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { bytesConverter } from '../../../utils'
 import { Alert, Confirm, Modal } from '../../Shared'
 
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 import { ProductExtraSubOptionMetaFields } from '../ProductExtraSubOptionMetaFields'
-import { PlusCircle, ThreeDots } from 'react-bootstrap-icons'
+import {
+  PlusCircle,
+  Circle as UnCheckIcon,
+  ThreeDots,
+  RecordCircleFill as CheckIcon
+} from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -31,7 +35,6 @@ import {
   InputWrapper,
   ActionsContainer,
   EnableWrapper,
-  DropDownWrapper,
   OptionInfoContainer,
   RightOptionContent,
   OptionSettings,
@@ -83,7 +86,6 @@ const ProductExtraOptionDetailsUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const optionImageInputRef = useRef(null)
-  const ActionIcon = <FiMoreVertical />
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openModal, setOpenModal] = useState({})
@@ -436,16 +438,14 @@ const ProductExtraOptionDetailsUI = (props) => {
                 </InputWrapper>
               )}
               <InputWrapper maxHeight primary={index === 0} disabled={optionState?.loading}>
-                <label>{t('DEFAULT', 'Default')}</label>
+                <label>{t('PRESELECT', 'Preselect')}</label>
                 <div
                   name='preselected'
                   className={subOption?.preselected ? 'checked default' : 'default'}
                 >
-                  <Checkbox
-                    defaultChecked={subOption?.preselected || false}
-                    id='allow_suboption_quantity'
-                    onClick={(e) => handleChangeDefaultSuboption(subOption.id)}
-                  />
+                  <span onClick={(e) => handleChangeDefaultSuboption(subOption.id)}>
+                    {subOption?.preselected ? <CheckIcon /> : <UnCheckIcon />}
+                  </span>
                 </div>
               </InputWrapper>
               <ActionsContainer primary={index === 0}>
@@ -456,10 +456,11 @@ const ProductExtraOptionDetailsUI = (props) => {
                     onChange={enabled => handleChangeSubOptionEnable(enabled, subOption.id)}
                   />
                 </EnableWrapper>
-                <DropDownWrapper>
+                <ActionSelectorWrapper>
                   <DropdownButton
+                    className='product_actions'
                     menuAlign={theme?.rtl ? 'left' : 'right'}
-                    title={ActionIcon}
+                    title={<ThreeDots />}
                     id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                   >
                     <Dropdown.Item
@@ -472,7 +473,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => handleDeteteClick(subOption.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
                   </DropdownButton>
-                </DropDownWrapper>
+                </ActionSelectorWrapper>
               </ActionsContainer>
             </RightSubOptionContent>
           </SubOptionContainer>

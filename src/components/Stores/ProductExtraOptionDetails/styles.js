@@ -170,6 +170,11 @@ export const InputWrapper = styled.div`
   }
   .default {
     min-width: 50px;
+    width: 65px;
+    text-align: center;
+    svg {
+      color: ${props => props.theme.colors.secundaryLight};
+    }
   }
   ${({ primary }) => !primary && css`
     label {
@@ -255,36 +260,6 @@ export const EnableWrapper = styled.div`
   }
 `
 
-export const DropDownWrapper = styled.div`
-  button {
-    background: #F8F9FA !important;
-    border: none;
-    padding: 0px;
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-    }
-
-    &:after {
-      display: none;
-    }
-  }
-
-  > div {
-    > div {
-      border: 1px solid #E9ECEF;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
-
-      a:last-child {
-        color: #E63757;
-      }
-    }
-  }
-
-  .dropdown-item {
-    font-size: 14px;
-  }
-`
 export const OptionSettings = styled.div`
   display: flex;
   margin: 20px 0;
