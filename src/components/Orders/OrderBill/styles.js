@@ -18,7 +18,7 @@ export const OrderBillContainer = styled.div`
   }
 
   table.total {
-  border-top: 1px solid #E9ECEF;
+    border-top: 1px solid ${props => props.theme.colors.borderColor};
     margin-top: 15px;
     tr {
       font-size: 16px;
@@ -27,6 +27,9 @@ export const OrderBillContainer = styled.div`
         padding-top: 10px;
       }
     }
+  }
+  table.payments {
+    margin-top: 15px;
   }
   table.comments {
     margin-top: 20px;
