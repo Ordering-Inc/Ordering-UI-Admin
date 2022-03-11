@@ -390,3 +390,16 @@ export const SelectboxGroup = styled.div`
     max-width: initial;
   }
 `
+
+export const AddNewOptionButton = styled.div`
+  margin-top: 15px;
+  font-size: 14px;
+  color: ${props => props.theme.colors.lightGray};
+  span {
+    cursor: pointer;
+  }
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
+`
