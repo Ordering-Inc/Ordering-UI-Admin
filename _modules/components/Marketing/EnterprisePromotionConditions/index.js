@@ -90,7 +90,9 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
   var singleConditions = ['limit', 'limit_per_user', 'max_discount', 'minimum', 'valid_from_after_user_last_order_minutes', 'valid_until_after_user_last_order_minutes'];
   var specifics = ['products', 'categories', 'delivery_zones'];
 
-  var handlePromotionEdit = function handlePromotionEdit(condition, title) {
+  var handlePromotionEdit = function handlePromotionEdit(e, condition, title) {
+    var inValid = e.target.closest('.condition-checkbox');
+    if (inValid) return;
     setSelectedCondition(condition);
     setSelectedTitle(title);
 
@@ -174,15 +176,17 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     var _promotionState$promo;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.ConditionItem, {
-      key: index
+      key: index,
+      onClick: function onClick(e) {
+        return handlePromotionEdit(e, condition.attribute, condition.title);
+      }
     }, /*#__PURE__*/_react.default.createElement("div", null, (typeof formState.changes[condition.attribute] !== 'undefined' ? formState.changes[condition.attribute] : Array.isArray(promotionState.promotion[condition.attribute]) ? (_promotionState$promo = promotionState.promotion[condition.attribute]) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.length : promotionState.promotion[condition.attribute]) ? /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+      className: "condition-checkbox",
       active: true // onClick={() => handleChangeItem({ [condition.attribute]: null })}
 
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2, null)) : /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null), /*#__PURE__*/_react.default.createElement("span", null, condition.title)), /*#__PURE__*/_react.default.createElement(_styles2.EditButton, {
-      onClick: function onClick() {
-        return handlePromotionEdit(condition.attribute, condition.title);
-      }
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)));
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2, null)) : /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+      className: "condition-checkbox"
+    }), /*#__PURE__*/_react.default.createElement("span", null, condition.title)), /*#__PURE__*/_react.default.createElement(_styles2.EditButton, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)));
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",

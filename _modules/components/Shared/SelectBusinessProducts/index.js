@@ -56,13 +56,14 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CategoryTreeNode = function CategoryTreeNode(props) {
-  var _category$subcategori;
+  var _subCategoriesList$fi, _subCategoriesList$fi2, _category$subcategori;
 
   var category = props.category,
       index = props.index,
       selectedProductsIds = props.selectedProductsIds,
       setSelectedProductsIds = props.setSelectedProductsIds,
-      include = props.include;
+      include = props.include,
+      subCategoriesList = props.subCategoriesList;
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -155,7 +156,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles2.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles2.Accordion, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_subCategoriesList$fi = subCategoriesList.find(function (_category) {
+    return _category.id === category.id;
+  })) === null || _subCategoriesList$fi === void 0 ? void 0 : (_subCategoriesList$fi2 = _subCategoriesList$fi.productIds) === null || _subCategoriesList$fi2 === void 0 ? void 0 : _subCategoriesList$fi2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles2.Accordion, {
     onClick: function onClick(e) {
       return toggleAccordion(e, category.id);
     }
@@ -196,16 +199,64 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       category: subCategory,
       index: index + 1
     }));
-  })));
+  }))));
 };
 
 var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
-  var _businessState$busine;
+  var _businessState$busine2, _businessState$busine3;
 
   var businessState = props.businessState,
       selectedProductsIds = props.selectedProductsIds,
       setSelectedProductsIds = props.setSelectedProductsIds,
       include = props.include;
+
+  var _useState5 = (0, _react.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      subCategoriesList = _useState6[0],
+      setSubCategoriesList = _useState6[1];
+
+  (0, _react.useEffect)(function () {
+    var _businessState$busine;
+
+    if (businessState.loading) return;
+    var _subCategoriesList = [];
+
+    var iterateCategories = function iterateCategories(categories) {
+      return (categories === null || categories === void 0 ? void 0 : categories.length) > 0 && (categories === null || categories === void 0 ? void 0 : categories.forEach(function (category) {
+        var _category$subcategori2;
+
+        var productIds = [];
+
+        var _productIds = category.products.reduce(function (ids, product) {
+          return [].concat(_toConsumableArray(ids), [product.id]);
+        }, []);
+
+        productIds = [].concat(_toConsumableArray(productIds), _toConsumableArray(_productIds));
+
+        if (category !== null && category !== void 0 && (_category$subcategori2 = category.subcategories) !== null && _category$subcategori2 !== void 0 && _category$subcategori2.length) {
+          category.subcategories.forEach(function iterate(category) {
+            var _productIds = category.products.reduce(function (ids, product) {
+              return [].concat(_toConsumableArray(ids), [product.id]);
+            }, []);
+
+            productIds = [].concat(_toConsumableArray(productIds), _toConsumableArray(_productIds));
+            Array.isArray(category === null || category === void 0 ? void 0 : category.subcategories) && category.subcategories.forEach(iterate);
+          });
+        }
+
+        _subCategoriesList.push({
+          id: category.id,
+          name: category.name,
+          productIds: productIds
+        });
+
+        iterateCategories(category.subcategories);
+      }));
+    };
+
+    iterateCategories((_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.categories);
+    setSubCategoriesList(_subCategoriesList);
+  }, [(_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.categories]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, {
       key: i
@@ -219,10 +270,11 @@ var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
       width: 120,
       height: 20
     }));
-  })) : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.categories.sort(function (a, b) {
+  })) : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.categories.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (category) {
     return /*#__PURE__*/_react.default.createElement(CategoryTreeNode, {
+      subCategoriesList: subCategoriesList,
       key: category.id,
       index: 0,
       category: category,
@@ -238,10 +290,10 @@ var SelectBusinessProducts = function SelectBusinessProducts(props) {
       _useApi2 = _slicedToArray(_useApi, 1),
       ordering = _useApi2[0];
 
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isInitialRender = _useState6[0],
-      setIsInitialRender = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isInitialRender = _useState8[0],
+      setIsInitialRender = _useState8[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     ordering: ordering,
