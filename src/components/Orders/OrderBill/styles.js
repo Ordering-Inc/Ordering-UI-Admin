@@ -8,7 +8,7 @@ export const OrderBillContainer = styled.div`
   flex-direction: column;
   table {
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
     tr td:nth-child(2) {
       text-align: right;
       ${props => props.theme?.rtl && css`
@@ -18,13 +18,23 @@ export const OrderBillContainer = styled.div`
   }
 
   table.total {
-  border-top: 1px solid #E9ECEF;
+    border-top: 1px solid ${props => props.theme.colors.borderColor};
     margin-top: 15px;
     tr {
       font-size: 16px;
       td {
         font-weight: bold;
         padding-top: 10px;
+      }
+    }
+  }
+  table.payments {
+    margin-top: 15px;
+    thead {
+      th {
+        font-weight: 600;
+        font-size: 16px;
+        padding-bottom: 5px;
       }
     }
   }

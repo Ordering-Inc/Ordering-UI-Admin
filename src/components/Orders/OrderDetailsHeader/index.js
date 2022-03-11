@@ -31,6 +31,14 @@ export const OrderDetailsHeader = (props) => {
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const walletName = {
+    cash: {
+      name: t('CASH_WALLET', 'Cash Wallet')
+    },
+    credit_point: {
+      name: t('POINTS_WALLET', 'Points Wallet')
+    }
+  }
 
   const closeSideBar = () => {
     actionSidebar(false)
@@ -42,8 +50,23 @@ export const OrderDetailsHeader = (props) => {
       <div>
         <h1>{t('INVOICE_ORDER_NO', 'Order No')} {order?.id}</h1>
         <p>
-          <span>{order?.paymethod?.name}</span>
-          <EnDotSingle />
+          {order?.payment_events?.length > 0 ? (
+            order?.payment_events?.map((event, i) => (
+              <React.Fragment key={i}>
+                <span>
+                  {event?.wallet_event
+                    ? walletName[event?.wallet_event?.wallet?.type]?.name
+                    : event?.paymethod?.name}
+                </span>
+                <EnDotSingle />
+              </React.Fragment>
+            ))
+          ) : (
+            <>
+              <span>{order?.paymethod?.name}</span>
+              <EnDotSingle />
+            </>
+          )}
           {order?.delivery_type === 1 && (
             <span>
               {t('DELIVERY', 'Delivery')}
