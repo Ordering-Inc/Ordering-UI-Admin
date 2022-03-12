@@ -3,6 +3,8 @@ import { useLanguage } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { Select } from '../../../styles/Select'
 import { Alert, Confirm } from '../../Shared'
+import { SingleRecoveryNotification as SingleRecoveryNotificationController } from './naked'
+
 import {
   Container,
   InputWrapper,
@@ -10,7 +12,7 @@ import {
   Option
 } from './styles'
 
-export const SingleRecoveryNotification = (props) => {
+const SingleRecoveryNotificationUI = (props) => {
   const {
     notification,
     formState,
@@ -69,7 +71,7 @@ export const SingleRecoveryNotification = (props) => {
       open: true,
       content: formState?.error
     })
-  }, [formState])
+  }, [formState?.error])
 
   return (
     <>
@@ -168,4 +170,12 @@ export const SingleRecoveryNotification = (props) => {
       />
     </>
   )
+}
+
+export const SingleRecoveryNotification = (props) => {
+  const singleRecoveryNotificationProps = {
+    ...props,
+    UIComponent: SingleRecoveryNotificationUI
+  }
+  return <SingleRecoveryNotificationController {...singleRecoveryNotificationProps} />
 }

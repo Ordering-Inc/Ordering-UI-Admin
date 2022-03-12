@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { RecoveryNotificationList as RecoveryNotificationListController } from './naked'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
-import { RecoveryNotificationList as RecoveryNotificationListController } from './naked'
+import { Modal, Alert } from '../../Shared'
 import { Switch, Button } from '../../../styles'
-import { Modal } from '../../Shared'
+import { SingleRecoveryNotification } from '../SingleRecoveryNotification'
 
 import {
   Container,
@@ -27,18 +28,16 @@ import {
   SmsPreviewContentWrapper,
   AddNewNotificationButton
 } from './styles'
-import { SingleRecoveryNotification } from '../SingleRecoveryNotification'
 
 const RecoveryNotificationListUI = (props) => {
   const {
+    action,
     notificationListState,
-    formState,
-    handleChangeInput,
     handleUpdateClick,
-    cleanFormState,
-    handleDeleteClick,
-    handleClickAddBtn,
-    handleChangeSelect
+    handleAddNotifications,
+    handleUpdateNotifications,
+    handleDeleteNotifications,
+    actionState
   } = props
 
   const [, t] = useLanguage()
@@ -47,6 +46,7 @@ const RecoveryNotificationListUI = (props) => {
   const [showPreview, setShowPreview] = useState(false)
   const [selectedNotification, setSelectedNotification] = useState(null)
   const [isAddModal, setIsAddModal] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleEditNotification = (notification) => {
     setSelectedNotification(notification)
@@ -54,15 +54,24 @@ const RecoveryNotificationListUI = (props) => {
   }
 
   const handleClosePreview = () => {
-    cleanFormState && cleanFormState()
     setShowPreview(false)
     setSelectedNotification(null)
   }
 
-  const hanldeCloseAddModal = () => {
-    cleanFormState && cleanFormState()
-    setIsAddModal(false)
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
+
+  useEffect(() => {
+    if (!actionState?.error || actionState.loading) return
+    setAlertState({
+      open: true,
+      content: actionState?.error
+    })
+  }, [actionState?.error])
 
   return (
     <>
@@ -70,7 +79,7 @@ const RecoveryNotificationListUI = (props) => {
         {notificationListState?.loading ? (
           <>
             {[...Array(2).keys()].map(i => (
-              <NotificationBlock key={i}>
+              <NotificationBlock key={i} noBorder={i === 0}>
                 <BlockHeader>
                   <Skeleton width={80} height={20} />
                   <Skeleton width={40} height={20} style={{ margin: '0px 10px' }} />
@@ -157,6 +166,7 @@ const RecoveryNotificationListUI = (props) => {
           </>
         )}
       </Container>
+
       <Modal
         width='700px'
         height='80vh'
@@ -167,11 +177,11 @@ const RecoveryNotificationListUI = (props) => {
       >
         <SingleRecoveryNotification
           notification={selectedNotification}
-          handleChangeInput={handleChangeInput}
-          formState={formState}
-          handleUpdateClick={handleUpdateClick}
-          handleDeleteClick={handleDeleteClick}
+          handleAddNotifications={handleAddNotifications}
+          handleUpdateNotifications={handleUpdateNotifications}
+          handleDeleteNotifications={handleDeleteNotifications}
           onClose={() => handleClosePreview()}
+          action={action}
         />
       </Modal>
       <Modal
@@ -180,22 +190,29 @@ const RecoveryNotificationListUI = (props) => {
         padding='30px'
         title={t('NOTIFICATIONS', 'Notifications')}
         open={isAddModal}
-        onClose={() => hanldeCloseAddModal()}
+        onClose={() => setIsAddModal(false)}
       >
         <SingleRecoveryNotification
           isAdd
+          action={action}
           notification={selectedNotification}
-          handleChangeInput={handleChangeInput}
-          handleChangeSelect={handleChangeSelect}
-          formState={formState}
-          handleUpdateClick={handleUpdateClick}
-          handleDeleteClick={handleDeleteClick}
-          handleClickAddBtn={handleClickAddBtn}
-          onClose={() => hanldeCloseAddModal()}
+          handleAddNotifications={handleAddNotifications}
+          handleUpdateNotifications={handleUpdateNotifications}
+          handleDeleteNotifications={handleDeleteNotifications}
+          onClose={() => setIsAddModal(false)}
         />
       </Modal>
-    </>
 
+      <Alert
+        title={t('RECOVERY_ACTIONS', 'Recovery actions')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+    </>
   )
 }
 

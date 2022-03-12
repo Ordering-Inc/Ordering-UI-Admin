@@ -18,7 +18,7 @@ export const InputWrapper = styled.div`
   }
   margin-bottom: 35px;
 
-  select {
+  .select {
     border: 1px solid ${props => props.theme.colors.gray};
   }
 `

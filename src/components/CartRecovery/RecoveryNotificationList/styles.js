@@ -165,6 +165,7 @@ export const NotificationContent = styled.div`
 
 export const SmsPreviewContentWrapper = styled(NotificationContent)`
   background-color: transparent;
+  width: 100%;
   padding: 9px;
   margin-top: 30px;
   height: 165px;
@@ -199,6 +200,7 @@ export const NotificationMessageContent = styled(SmsPreviewContent)`
 export const AddNewNotificationButton = styled.div`
   font-size: 14px;
   color: ${props => props.theme.colors.lightGray};
+  padding-bottom: 15px;
   span {
     cursor: pointer;
   }

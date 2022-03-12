@@ -12,19 +12,13 @@ export const RecoveryNotificationList = (props) => {
     UIComponent
   } = props
 
-  const [, t] = useLanguage()
   const [ordering] = useApi()
-  const [{ token }] = useSession()
-  const [notificationListState, setNotificationListState] = useState({ loading: false, notifications: [], error: null })
-  const [formState, setFormState] = useState({ loading: false, changes: {}, error: null })
+  const [, t] = useLanguage()
   const [, { showToast }] = useToast()
+  const [{ token }] = useSession()
 
-  /**
-   * Clean formState
-   */
-  const cleanFormState = () => {
-    setFormState({ ...formState, changes: {} })
-  }
+  const [notificationListState, setNotificationListState] = useState({ loading: false, notifications: [], error: null })
+  const [actionState, setActionState] = useState({ loading: false, error: null })
 
   /**
    * Method to change multi orders status from API
@@ -63,88 +57,36 @@ export const RecoveryNotificationList = (props) => {
     }
   }
 
-  const handleChangeInput = (evt) => {
-    setFormState({
-      ...formState,
-      changes: {
-        ...formState.changes,
-        [evt.target.name]: evt.target.value
-      }
-    })
-  }
-
-  const handleChangeSelect = (name, val) => {
-    setFormState({
-      ...formState,
-      changes: {
-        ...formState.changes,
-        [name]: val
-      }
-    })
-  }
-
   /**
    * Method to add the notification in the notification list
    * @param {Object} result notification to add
    */
-  const handleSuccessAddNotifications = (result) => {
+  const handleAddNotifications = (result) => {
     const notifications = [...notificationListState.notifications, result]
     setNotificationListState({ ...notificationListState, notifications })
   }
 
-  // const handleUpdateNotifications = (result) => {
-  //   const updatedNotifications = notificationListState.notifications.filter(_notification => {
-  //     if (_notification.id === result.id) {
-  //       Object.assign(_notification, result)
-  //     }
-  //     return true
-  //   })
-  //   setNotificationListState({ ...notificationListState, notifications: updatedNotifications })
-  // }
+  /**
+   * Method to update the notification in the notification list
+   * @param {Object} result notification to update
+   */
+  const handleUpdateNotifications = (result) => {
+    const updatedNotifications = notificationListState.notifications.filter(_notification => {
+      if (_notification.id === result.id) {
+        Object.assign(_notification, result)
+      }
+      return true
+    })
+    setNotificationListState({ ...notificationListState, notifications: updatedNotifications })
+  }
 
   /**
-   * Default fuction to add a notification
+   * Method to delete the notification in the notification list
+   * @param {Object} result notification to delete
    */
-  const handleClickAddBtn = async () => {
-    try {
-      showToast(ToastType.Info, t('LOADING', 'Loading'))
-      setFormState({ ...formState, loading: true })
-      const changes = { ...formState?.changes }
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(changes)
-      }
-
-      const response = await fetch(`${ordering.root}/event_rules/${action?.id}/channels`, requestOptions)
-      const content = await response.json()
-
-      if (!content.error) {
-        setFormState({
-          ...formState,
-          changes: {},
-          loading: false,
-          error: null
-        })
-        handleSuccessAddNotifications(content.result)
-        showToast(ToastType.Success, t('NOTIFICATION_ADDED', 'Notification added'))
-      } else {
-        setFormState({
-          ...formState,
-          loading: false,
-          error: content.result
-        })
-      }
-    } catch (err) {
-      setFormState({
-        ...formState,
-        loading: false,
-        error: err.message
-      })
-    }
+  const handleDeleteNotifications = (result) => {
+    const updatedNotifications = notificationListState.notifications.filter(_notification => _notification.id !== result.id)
+    setNotificationListState({ ...notificationListState, notifications: updatedNotifications })
   }
 
   /**
@@ -153,7 +95,7 @@ export const RecoveryNotificationList = (props) => {
   const handleUpdateClick = async (channelId, changes) => {
     try {
       showToast(ToastType.Info, t('LOADING', 'Loading'))
-      setFormState({ ...formState, loading: true })
+      setActionState({ ...actionState, loading: true })
       const requestOptions = {
         method: 'PUT',
         headers: {
@@ -167,79 +109,14 @@ export const RecoveryNotificationList = (props) => {
       const content = await response.json()
 
       if (!content.error) {
-        setFormState({
-          ...formState,
-          changes: {},
-          loading: false,
-          error: null
-        })
-        const updatedNotifications = notificationListState.notifications.filter(_notification => {
-          if (_notification.id === channelId) {
-            Object.assign(_notification, content.result)
-          }
-          return true
-        })
-        setNotificationListState({ ...notificationListState, notifications: updatedNotifications })
-        cleanFormState()
+        setActionState({ loading: false, error: null })
+        handleUpdateNotifications && handleUpdateNotifications(content.result)
         showToast(ToastType.Success, t('NOTIFICATION_SAVED', 'Notification saved'))
       } else {
-        setFormState({
-          ...formState,
-          loading: false,
-          error: content.result
-        })
+        setActionState({ loading: false, error: content.result })
       }
     } catch (err) {
-      setFormState({
-        ...formState,
-        loading: false,
-        error: err.message
-      })
-    }
-  }
-
-  /**
-   * Default fuction to delete a channel
-   */
-  const handleDeleteClick = async (channelId) => {
-    try {
-      showToast(ToastType.Info, t('LOADING', 'Loading'))
-      setFormState({ ...formState, loading: true })
-      const requestOptions = {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      }
-
-      const response = await fetch(`${ordering.root}/event_rules/${action?.id}/channels/${channelId}`, requestOptions)
-      const content = await response.json()
-
-      if (!content.error) {
-        setFormState({
-          ...formState,
-          changes: {},
-          loading: false,
-          error: null
-        })
-        const updatedNotifications = notificationListState.notifications.filter(_notification => _notification.id !== channelId)
-        setNotificationListState({ ...notificationListState, notifications: updatedNotifications })
-        cleanFormState()
-        showToast(ToastType.Success, t('NOTIFICATION_DELETED', 'Notification deleted'))
-      } else {
-        setFormState({
-          ...formState,
-          loading: false,
-          error: content.result
-        })
-      }
-    } catch (err) {
-      setFormState({
-        ...formState,
-        loading: false,
-        error: err.message
-      })
+      setActionState({ loading: false, error: err.message })
     }
   }
 
@@ -253,14 +130,12 @@ export const RecoveryNotificationList = (props) => {
         UIComponent && (
           <UIComponent
             {...props}
-            formState={formState}
+            actionState={actionState}
             notificationListState={notificationListState}
-            cleanFormState={cleanFormState}
-            handleChangeInput={handleChangeInput}
-            handleChangeSelect={handleChangeSelect}
+            handleAddNotifications={handleAddNotifications}
+            handleUpdateNotifications={handleUpdateNotifications}
+            handleDeleteNotifications={handleDeleteNotifications}
             handleUpdateClick={handleUpdateClick}
-            handleDeleteClick={handleDeleteClick}
-            handleClickAddBtn={handleClickAddBtn}
           />
         )
       }

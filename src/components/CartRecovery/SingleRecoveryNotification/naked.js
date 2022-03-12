@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
@@ -10,7 +10,9 @@ export const SingleRecoveryNotification = (props) => {
   const {
     action,
     UIComponent,
-    handleSuccessAddNotifications
+    handleAddNotifications,
+    handleUpdateNotifications,
+    handleDeleteNotifications
   } = props
 
   const [, t] = useLanguage()
@@ -53,7 +55,7 @@ export const SingleRecoveryNotification = (props) => {
     try {
       showToast(ToastType.Info, t('LOADING', 'Loading'))
       setFormState({ ...formState, loading: true })
-      const changes = { ...formState?.changes }
+      const changes = { ...formState?.changes, enabled: true }
       const requestOptions = {
         method: 'POST',
         headers: {
@@ -73,7 +75,7 @@ export const SingleRecoveryNotification = (props) => {
           loading: false,
           error: null
         })
-        handleSuccessAddNotifications(content.result)
+        handleAddNotifications(content.result)
         showToast(ToastType.Success, t('NOTIFICATION_ADDED', 'Notification added'))
       } else {
         setFormState({
@@ -117,13 +119,7 @@ export const SingleRecoveryNotification = (props) => {
           loading: false,
           error: null
         })
-        const updatedNotifications = notificationListState.notifications.filter(_notification => {
-          if (_notification.id === channelId) {
-            Object.assign(_notification, content.result)
-          }
-          return true
-        })
-        setNotificationListState({ ...notificationListState, notifications: updatedNotifications })
+        handleUpdateNotifications && handleUpdateNotifications(content.result)
         cleanFormState()
         showToast(ToastType.Success, t('NOTIFICATION_SAVED', 'Notification saved'))
       } else {
@@ -167,8 +163,7 @@ export const SingleRecoveryNotification = (props) => {
           loading: false,
           error: null
         })
-        const updatedNotifications = notificationListState.notifications.filter(_notification => _notification.id !== channelId)
-        setNotificationListState({ ...notificationListState, notifications: updatedNotifications })
+        handleDeleteNotifications && handleDeleteNotifications(content.result)
         cleanFormState()
         showToast(ToastType.Success, t('NOTIFICATION_DELETED', 'Notification deleted'))
       } else {
@@ -187,10 +182,6 @@ export const SingleRecoveryNotification = (props) => {
     }
   }
 
-  useEffect(() => {
-    getNotificationList()
-  }, [action])
-
   return (
     <>
       {
@@ -198,7 +189,6 @@ export const SingleRecoveryNotification = (props) => {
           <UIComponent
             {...props}
             formState={formState}
-            notificationListState={notificationListState}
             cleanFormState={cleanFormState}
             handleChangeInput={handleChangeInput}
             handleChangeSelect={handleChangeSelect}
