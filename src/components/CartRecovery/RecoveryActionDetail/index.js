@@ -18,7 +18,7 @@ import {
   Tab
 } from './styles'
 import { RecoveryGeneral } from '../RecoveryGeneral'
-import { RecoveryNotifications } from '../RecoveryNotifications'
+import { RecoveryNotificationList } from '../RecoveryNotificationList'
 
 const RecoveryActionDetailUI = (props) => {
   const {
@@ -132,7 +132,7 @@ const RecoveryActionDetailUI = (props) => {
           />
         )}
         {selectedOption === 'notifications' && (
-          <RecoveryNotifications
+          <RecoveryNotificationList
             {...props}
           />
         )}

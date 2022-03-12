@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
-import { RecoveryNotifications as RecoveryNotificationsController } from './naked'
+import { RecoveryNotificationList as RecoveryNotificationListController } from './naked'
 import { Switch, Button } from '../../../styles'
 import { Modal } from '../../Shared'
 
@@ -27,9 +27,9 @@ import {
   SmsPreviewContentWrapper,
   AddNewNotificationButton
 } from './styles'
-import { RecoveryNotificationPreview } from '../RecoveryNotificationPreview'
+import { SingleRecoveryNotification } from '../SingleRecoveryNotification'
 
-const RecoveryNotificationsUI = (props) => {
+const RecoveryNotificationListUI = (props) => {
   const {
     notificationListState,
     formState,
@@ -165,7 +165,7 @@ const RecoveryNotificationsUI = (props) => {
         open={showPreview}
         onClose={() => handleClosePreview()}
       >
-        <RecoveryNotificationPreview
+        <SingleRecoveryNotification
           notification={selectedNotification}
           handleChangeInput={handleChangeInput}
           formState={formState}
@@ -182,7 +182,7 @@ const RecoveryNotificationsUI = (props) => {
         open={isAddModal}
         onClose={() => hanldeCloseAddModal()}
       >
-        <RecoveryNotificationPreview
+        <SingleRecoveryNotification
           isAdd
           notification={selectedNotification}
           handleChangeInput={handleChangeInput}
@@ -199,10 +199,10 @@ const RecoveryNotificationsUI = (props) => {
   )
 }
 
-export const RecoveryNotifications = (props) => {
+export const RecoveryNotificationList = (props) => {
   const recoveryNotificationsProps = {
     ...props,
-    UIComponent: RecoveryNotificationsUI
+    UIComponent: RecoveryNotificationListUI
   }
-  return <RecoveryNotificationsController {...recoveryNotificationsProps} />
+  return <RecoveryNotificationListController {...recoveryNotificationsProps} />
 }

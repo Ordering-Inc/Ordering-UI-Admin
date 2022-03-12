@@ -17,6 +17,10 @@ export const InputWrapper = styled.div`
     height: 80px;
   }
   margin-bottom: 35px;
+
+  select {
+    border: 1px solid ${props => props.theme.colors.gray};
+  }
 `
 
 export const ButtonGroup = styled.div`

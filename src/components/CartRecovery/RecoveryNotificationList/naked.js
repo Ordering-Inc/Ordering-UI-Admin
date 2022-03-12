@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 // import { useToast, ToastType } from '../../contexts/ToastContext'
 import { useSession, useApi, useLanguage, useToast, ToastType } from 'ordering-components-admin'
 
-export const RecoveryNotifications = (props) => {
+export const RecoveryNotificationList = (props) => {
   const {
     action,
     UIComponent
@@ -91,6 +91,16 @@ export const RecoveryNotifications = (props) => {
     const notifications = [...notificationListState.notifications, result]
     setNotificationListState({ ...notificationListState, notifications })
   }
+
+  // const handleUpdateNotifications = (result) => {
+  //   const updatedNotifications = notificationListState.notifications.filter(_notification => {
+  //     if (_notification.id === result.id) {
+  //       Object.assign(_notification, result)
+  //     }
+  //     return true
+  //   })
+  //   setNotificationListState({ ...notificationListState, notifications: updatedNotifications })
+  // }
 
   /**
    * Default fuction to add a notification
@@ -258,7 +268,7 @@ export const RecoveryNotifications = (props) => {
   )
 }
 
-RecoveryNotifications.propTypes = {
+RecoveryNotificationList.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -285,7 +295,7 @@ RecoveryNotifications.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-RecoveryNotifications.defaultProps = {
+RecoveryNotificationList.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

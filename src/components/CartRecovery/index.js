@@ -1,7 +1,7 @@
 import { OpenCarts } from './OpenCarts'
-import { RecoveryActions } from './RecoveryActions'
+import { RecoveryActionListing } from './RecoveryActionListing'
 
 export {
   OpenCarts,
-  RecoveryActions
+  RecoveryActionListing
 }

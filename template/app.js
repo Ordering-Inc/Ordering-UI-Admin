@@ -52,7 +52,7 @@ import { SpinnerLoader } from '../src/components/Shared'
 import { HelmetTags } from './components/HelmetTags'
 import { RewardsPrograms } from './pages/RewardsPrograms'
 import { OpenCarts } from './pages/OpenCarts'
-import { RecoveryActions } from './pages/RecoveryActions'
+import { RecoveryActionListing } from './pages/RecoveryActionListing'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -343,7 +343,7 @@ export const App = () => {
                     <Route exact path='/cart-recovery/recovery-actions'>
                       {
                         auth
-                          ? <RecoveryActions />
+                          ? <RecoveryActionListing />
                           : <Redirect to='/login' />
                       }
                     </Route>

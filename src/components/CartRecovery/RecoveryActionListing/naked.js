@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 // import { useApi } from '../../contexts/ApiContext'
 // import { useWebsocket } from '../../contexts/WebsocketContext'
 import { useApi, useSession, useLanguage, useToast, ToastType } from 'ordering-components-admin'
-export const RecoveryActions = (props) => {
+
+export const RecoveryActionListing = (props) => {
   const {
     UIComponent,
     paginationSettings,
@@ -72,6 +73,7 @@ export const RecoveryActions = (props) => {
           conditions: searchConditions
         })
       }
+
       if (conditions.length) {
         where = {
           conditions,
@@ -234,7 +236,7 @@ export const RecoveryActions = (props) => {
   )
 }
 
-RecoveryActions.propTypes = {
+RecoveryActionListing.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -261,7 +263,7 @@ RecoveryActions.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-RecoveryActions.defaultProps = {
+RecoveryActionListing.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],

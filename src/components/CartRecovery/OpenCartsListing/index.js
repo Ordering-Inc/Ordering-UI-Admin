@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTheme } from 'styled-components'
-import { OpenCartsTable } from '../OpenCartsTable'
+import { OpenCartsList } from '../OpenCartsList'
 import {
   WrapperNoneOrders,
   WrapperOrderListContent,
@@ -64,7 +64,7 @@ export const OpenCartsListing = (props) => {
             <WrapperOrderListContent
               maxHeight={orderListView !== 'table'}
             >
-              <OpenCartsTable
+              <OpenCartsList
                 setSelectedOrderIds={setSelectedOrderIds}
                 isSelectedOrders={isSelectedOrders}
                 orderList={orderList}

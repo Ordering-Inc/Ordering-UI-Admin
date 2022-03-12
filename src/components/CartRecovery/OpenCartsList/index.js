@@ -22,7 +22,7 @@ import {
   WrapperPagination
 } from './styles'
 
-export const OpenCartsTable = (props) => {
+export const OpenCartsList = (props) => {
   const {
     isSelectedOrders,
     orderList,

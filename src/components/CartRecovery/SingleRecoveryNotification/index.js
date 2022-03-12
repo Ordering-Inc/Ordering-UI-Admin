@@ -10,7 +10,7 @@ import {
   Option
 } from './styles'
 
-export const RecoveryNotificationPreview = (props) => {
+export const SingleRecoveryNotification = (props) => {
   const {
     notification,
     formState,
