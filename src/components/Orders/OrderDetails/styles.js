@@ -8,7 +8,6 @@ export const Container = styled.div`
   box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);
 
   ${({ isSelectedOrders }) => isSelectedOrders && css`
-    position: absolute;
     box-shadow: none;
 
     ${props => props.theme?.rtl ? css`

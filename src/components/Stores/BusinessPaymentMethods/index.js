@@ -8,7 +8,7 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { ChevronRight } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { Modal, SearchBar } from '../../Shared'
+import { Modal, SearchBar, Alert } from '../../Shared'
 import { Button } from '../../../styles'
 import { PaymentOptionStripeDirect } from '../PaymentOptionStripeDirect'
 import { PaymentOption } from '../PaymentOption'
@@ -35,7 +35,7 @@ const BusinessPaymentMethodsUI = (props) => {
     paymethodsList,
     handleClickPayment,
     handleSelectAllPaymethods,
-    handleSelectNonePaymethods,
+    // handleSelectNonePaymethods,
     handleDeleteBusinessPaymethodOption,
     setIsExtendExtraOpen,
     actionState,
@@ -64,6 +64,7 @@ const BusinessPaymentMethodsUI = (props) => {
   const [selectedBusinessPaymethod, setSelectedBusinessPaymethod] = useState(null)
   const [selectedPaymethodGateway, setSelectedPaymethodGateway] = useState(null)
   const [searchValue, setSearchValue] = useState('')
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const orderTypes = [
     { value: 1, text: t('DELIVERY', 'Delivery') },
@@ -72,6 +73,13 @@ const BusinessPaymentMethodsUI = (props) => {
     { value: 4, text: t('CURBSIDE', 'Curbside') },
     { value: 5, text: t('DRIVER_THRU', 'Driver thru') }
   ]
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
 
   const isCheckEnableSate = (id) => {
     const found = businessPaymethodsState.paymethods.find(paymethod => paymethod.paymethod_id === id)
@@ -97,6 +105,23 @@ const BusinessPaymentMethodsUI = (props) => {
       setIsEdit(true)
       setIsExtendExtraOpen(true)
     }
+  }
+
+  const handleClickCheckBox = (id) => {
+    let i = 0
+    paymethodsList.paymethods.forEach(paymethod => {
+      if (isCheckEnableSate(paymethod.id)) {
+        i += 1
+      }
+    })
+    if (isCheckEnableSate(id) && i < 2) {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_MIN_ARRAY', 'The _attribute_ must have at least _min_ items.').replace('_attribute_', t('PAYMETHODS', 'Payment methods')).replace('_min_', t('ONE', 'one'))
+      })
+      return
+    }
+    handleClickPayment && handleClickPayment(id)
   }
 
   const handleCloseEdit = () => {
@@ -137,13 +162,13 @@ const BusinessPaymentMethodsUI = (props) => {
           >
             {t('SELECT_ALL', 'Select all')}
           </Button>
-          <Button
+          {/* <Button
             color='secundaryDark'
             onClick={() => handleSelectNonePaymethods()}
             disabled={(paymethodsList.loading || businessPaymethodsState.loading)}
           >
             {t('SELECT_NONE', 'Select none')}
-          </Button>
+          </Button> */}
         </ButtonGroup>
 
         {(paymethodsList.loading || businessPaymethodsState.loading) ? (
@@ -168,7 +193,7 @@ const BusinessPaymentMethodsUI = (props) => {
               >
                 <PaymethodOption
                   className='paymethod-checkbox'
-                  onClick={() => handleClickPayment(paymethod.id)}
+                  onClick={() => handleClickCheckBox(paymethod.id)}
                 >
                   {isCheckEnableSate(paymethod.id) ? (
                     <RiCheckboxFill className='fill' />
@@ -431,6 +456,15 @@ const BusinessPaymentMethodsUI = (props) => {
           )}
         </>
       )}
+      <Alert
+        title={t('PAYMETHODS', 'Payment methods')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </MainContainer>
   )
 }

@@ -71,7 +71,7 @@ export const CheckboxContainer = styled.div`
 
 export const MoreContainer = styled.div`
   display: flex;
-  algin-items: center;
+  align-items: center;
   svg {
     cursor: pointer;
     font-size: 20px;
@@ -83,6 +83,12 @@ export const Details = styled.div`
   cursor: pointer;
   font-size: 14px;
   color: ${props => props.theme.colors.primary};
+
+  svg {
+    margin: 0 5px;
+    font-size: 13px;
+    color: ${props => props.theme.colors.secundaryLight};
+  }
 `
 
 export const AddButton = styled.div`

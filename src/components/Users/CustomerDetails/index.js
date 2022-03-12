@@ -70,6 +70,7 @@ const CustomerDetailsUI = (props) => {
     handleParentSidebarMove(0)
     setShowOption(null)
     setIsOpenMenu(false)
+    setMenuMoveDistance(0)
   }
 
   useEffect(() => {
