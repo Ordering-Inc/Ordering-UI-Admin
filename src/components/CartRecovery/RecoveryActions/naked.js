@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 // import { useWebsocket } from '../../contexts/WebsocketContext'
-import { useApi, useSession } from 'ordering-components-admin'
+import { useApi, useSession, useLanguage, useToast, ToastType } from 'ordering-components-admin'
 export const RecoveryActions = (props) => {
   const {
     UIComponent,
@@ -14,6 +14,8 @@ export const RecoveryActions = (props) => {
 
   const [ordering] = useApi()
   const [{ token }] = useSession()
+  const [, { showToast }] = useToast()
+  const [, t] = useLanguage()
 
   const [searchValue, setSearchValue] = useState(null)
   const [recoveryActionList, setRecoveryActionList] = useState({ actions: [], loading: false, error: null })
@@ -121,6 +123,49 @@ export const RecoveryActions = (props) => {
   }
 
   /**
+   * Default fuction for recovery action workflow
+   */
+  const handleUpdateAction = async (id, changes) => {
+    try {
+      showToast(ToastType.Info, t('LOADING', 'Loading'))
+      const requestOptions = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(changes)
+      }
+
+      const response = await fetch(`${ordering.root}/event_rules/${id}`, requestOptions)
+      const content = await response.json()
+
+      if (!content.error) {
+        if (handleSuccessUpdateRecoveryAction) {
+          const updatedActions = recoveryActionList?.actions.filter(_action => {
+            if (_action.id === id) {
+              Object.assign(_action, content.result)
+            }
+            return true
+          })
+          handleSuccessUpdateRecoveryAction(updatedActions)
+        }
+        showToast(ToastType.Success, t('RECOVERY_ACTION_SAVED', 'Recovery action saved'))
+      } else {
+        setRecoveryActionList({
+          ...recoveryActionList,
+          error: content.result
+        })
+      }
+    } catch (err) {
+      setRecoveryActionList({
+        ...recoveryActionList,
+        error: err.message
+      })
+    }
+  }
+
+  /**
    * Method to add the recovery action in the recovery action list
    * @param {Object} action recovery action to add
    */
@@ -137,10 +182,10 @@ export const RecoveryActions = (props) => {
   /**
    * Method to update the recovery action list
    */
-  const handleSuccessUpdateRecoveryAction = (updatedPromotions) => {
+  const handleSuccessUpdateRecoveryAction = (updatedActions) => {
     setRecoveryActionList({
       ...recoveryActionList,
-      actions: updatedPromotions
+      actions: updatedActions
     })
   }
 
@@ -176,12 +221,13 @@ export const RecoveryActions = (props) => {
           paginationProps={paginationProps}
           recoveryActionList={recoveryActionList}
           getRecoveryList={getRecoveryList}
+          setFilterValues={setFilterValues}
           setPaginationProps={setPaginationProps}
           handleChangeSearch={handleChangeSearch}
+          handleUpdateAction={handleUpdateAction}
           handleSuccessAddRecoveryAction={handleSuccessAddRecoveryAction}
           handleSuccessUpdateRecoveryAction={handleSuccessUpdateRecoveryAction}
           handleSuccessDeleteRecoveryAction={handleSuccessDeleteRecoveryAction}
-          setFilterValues={setFilterValues}
         />
       )}
     </>

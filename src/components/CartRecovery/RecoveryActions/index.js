@@ -56,7 +56,9 @@ const RecoveryActionsUI = (props) => {
 export const RecoveryActions = (props) => {
   const recoveryActionsProps = {
     ...props,
-    UIComponent: RecoveryActionsUI
+    UIComponent: RecoveryActionsUI,
+    isSearchByName: true,
+    isSearchByDescription: true
   }
   return <RecoveryActionsController {...recoveryActionsProps} />
 }

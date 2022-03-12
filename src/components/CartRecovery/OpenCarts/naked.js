@@ -153,6 +153,7 @@ export const OpenCarts = (props) => {
   const handleDeleteMultiOrders = () => {
     setStartMulitOrderDelete(true)
   }
+
   /**
    * Method to delete order from API
    */

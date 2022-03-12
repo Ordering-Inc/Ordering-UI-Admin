@@ -42,6 +42,17 @@ const RecoveryActionDetailUI = (props) => {
     { key: 'notifications', name: t('NOTIFICATIONS', 'Notifications') }
   ]
 
+  const handleSelectOption = (key) => {
+    if (key === 'notifications' && isAddMode) {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_REQUIRED', 'The action field is required').replace('_attribute_', t('Action', 'action'))
+      })
+      return
+    }
+    setSelectedOption(key)
+  }
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -93,9 +104,9 @@ const RecoveryActionDetailUI = (props) => {
                   title={<ThreeDots />}
                   id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                 >
-                  <Dropdown.Item>
+                  {/* <Dropdown.Item>
                     {t('CUSTOM_FIELDS', 'Custom fields')}
-                  </Dropdown.Item>
+                  </Dropdown.Item> */}
                   <Dropdown.Item onClick={() => onClickDeleteRecoveryAction()}>
                     {t('DELETE', 'Delete')}
                   </Dropdown.Item>
@@ -109,7 +120,7 @@ const RecoveryActionDetailUI = (props) => {
             <Tab
               key={option.key}
               active={selectedOption === option.key}
-              onClick={() => setSelectedOption(option.key)}
+              onClick={() => handleSelectOption(option.key)}
             >
               {option.name}
             </Tab>

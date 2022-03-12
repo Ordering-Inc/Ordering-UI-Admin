@@ -73,8 +73,72 @@ export const RecoveryNotifications = (props) => {
     })
   }
 
+  const handleChangeSelect = (name, val) => {
+    setFormState({
+      ...formState,
+      changes: {
+        ...formState.changes,
+        [name]: val
+      }
+    })
+  }
+
   /**
-   * Default fuction for business profile workflow
+   * Method to add the notification in the notification list
+   * @param {Object} result notification to add
+   */
+  const handleSuccessAddNotifications = (result) => {
+    const notifications = [...notificationListState.notifications, result]
+    setNotificationListState({ ...notificationListState, notifications })
+  }
+
+  /**
+   * Default fuction to add a notification
+   */
+  const handleClickAddBtn = async () => {
+    try {
+      showToast(ToastType.Info, t('LOADING', 'Loading'))
+      setFormState({ ...formState, loading: true })
+      const changes = { ...formState?.changes }
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(changes)
+      }
+
+      const response = await fetch(`${ordering.root}/event_rules/${action?.id}/channels`, requestOptions)
+      const content = await response.json()
+
+      if (!content.error) {
+        setFormState({
+          ...formState,
+          changes: {},
+          loading: false,
+          error: null
+        })
+        handleSuccessAddNotifications(content.result)
+        showToast(ToastType.Success, t('NOTIFICATION_ADDED', 'Notification added'))
+      } else {
+        setFormState({
+          ...formState,
+          loading: false,
+          error: content.result
+        })
+      }
+    } catch (err) {
+      setFormState({
+        ...formState,
+        loading: false,
+        error: err.message
+      })
+    }
+  }
+
+  /**
+   * Default fuction to update a notification
    */
   const handleUpdateClick = async (channelId, changes) => {
     try {
@@ -152,7 +216,7 @@ export const RecoveryNotifications = (props) => {
         const updatedNotifications = notificationListState.notifications.filter(_notification => _notification.id !== channelId)
         setNotificationListState({ ...notificationListState, notifications: updatedNotifications })
         cleanFormState()
-        showToast(ToastType.Success, t('NOTIFICATION_SAVED', 'Notification saved'))
+        showToast(ToastType.Success, t('NOTIFICATION_DELETED', 'Notification deleted'))
       } else {
         setFormState({
           ...formState,
@@ -183,8 +247,10 @@ export const RecoveryNotifications = (props) => {
             notificationListState={notificationListState}
             cleanFormState={cleanFormState}
             handleChangeInput={handleChangeInput}
+            handleChangeSelect={handleChangeSelect}
             handleUpdateClick={handleUpdateClick}
             handleDeleteClick={handleDeleteClick}
+            handleClickAddBtn={handleClickAddBtn}
           />
         )
       }

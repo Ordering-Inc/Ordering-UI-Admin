@@ -21,7 +21,8 @@ export const RecoveryActionListing = (props) => {
     paginationProps,
     setPaginationProps,
     getRecoveryList,
-    handleOpenDetail
+    handleOpenDetail,
+    handleUpdateAction
   } = props
 
   const [, t] = useLanguage()
@@ -64,10 +65,6 @@ export const RecoveryActionListing = (props) => {
       ...allowColumns,
       [type]: !allowColumns[type]
     })
-  }
-
-  const handleUpdateStatus = (id, val) => {
-    console.log(val)
   }
 
   const handleClickRecoverAction = (e, action) => {
@@ -160,7 +157,8 @@ export const RecoveryActionListing = (props) => {
                       <p className='recovery-enabled'>{t('ENABLE', 'Enable')}</p>
                       <Switch
                         defaultChecked={action?.enabled}
-                        onChange={val => handleUpdateStatus(action.id, val)}
+                        onChange={val => handleUpdateAction(action.id, { enabled: val })}
+                        className='enable_control'
                       />
                     </SwitchWrapper>
                   )}

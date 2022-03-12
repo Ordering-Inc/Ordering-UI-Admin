@@ -35,3 +35,8 @@ export const ButtonGroup = styled.div`
     `}
   }
 `
+
+export const Option = styled.div`
+  font-size: 14px;
+  line-height: 24px;
+`

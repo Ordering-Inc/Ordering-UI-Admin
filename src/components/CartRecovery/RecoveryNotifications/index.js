@@ -24,9 +24,10 @@ import {
   NotificationContentHeader,
   NotificationContent,
   NotificationMessageContent,
-  SmsPreviewContentWrapper
+  SmsPreviewContentWrapper,
+  AddNewNotificationButton
 } from './styles'
-import { NotificationPreview } from '../NotificationPreview'
+import { RecoveryNotificationPreview } from '../RecoveryNotificationPreview'
 
 const RecoveryNotificationsUI = (props) => {
   const {
@@ -35,7 +36,9 @@ const RecoveryNotificationsUI = (props) => {
     handleChangeInput,
     handleUpdateClick,
     cleanFormState,
-    handleDeleteClick
+    handleDeleteClick,
+    handleClickAddBtn,
+    handleChangeSelect
   } = props
 
   const [, t] = useLanguage()
@@ -43,6 +46,7 @@ const RecoveryNotificationsUI = (props) => {
 
   const [showPreview, setShowPreview] = useState(false)
   const [selectedNotification, setSelectedNotification] = useState(null)
+  const [isAddModal, setIsAddModal] = useState(false)
 
   const handleEditNotification = (notification) => {
     setSelectedNotification(notification)
@@ -53,6 +57,11 @@ const RecoveryNotificationsUI = (props) => {
     cleanFormState && cleanFormState()
     setShowPreview(false)
     setSelectedNotification(null)
+  }
+
+  const hanldeCloseAddModal = () => {
+    cleanFormState && cleanFormState()
+    setIsAddModal(false)
   }
 
   return (
@@ -142,24 +151,47 @@ const RecoveryNotificationsUI = (props) => {
                 </PreviewContent>
               </NotificationBlock>
             ))}
+            <AddNewNotificationButton>
+              <span onClick={() => setIsAddModal(true)}>{t('ADD_NEW_NOTIFICATION', 'Add new notification')}</span>
+            </AddNewNotificationButton>
           </>
         )}
       </Container>
       <Modal
-        width='70%'
+        width='700px'
         height='80vh'
         padding='30px'
         title={selectedNotification?.channel || t('NOTIFICATIONS', 'Notifications')}
         open={showPreview}
         onClose={() => handleClosePreview()}
       >
-        <NotificationPreview
+        <RecoveryNotificationPreview
           notification={selectedNotification}
           handleChangeInput={handleChangeInput}
           formState={formState}
           handleUpdateClick={handleUpdateClick}
           handleDeleteClick={handleDeleteClick}
           onClose={() => handleClosePreview()}
+        />
+      </Modal>
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('NOTIFICATIONS', 'Notifications')}
+        open={isAddModal}
+        onClose={() => hanldeCloseAddModal()}
+      >
+        <RecoveryNotificationPreview
+          isAdd
+          notification={selectedNotification}
+          handleChangeInput={handleChangeInput}
+          handleChangeSelect={handleChangeSelect}
+          formState={formState}
+          handleUpdateClick={handleUpdateClick}
+          handleDeleteClick={handleDeleteClick}
+          handleClickAddBtn={handleClickAddBtn}
+          onClose={() => hanldeCloseAddModal()}
         />
       </Modal>
     </>
