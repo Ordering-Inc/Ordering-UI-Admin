@@ -28,6 +28,10 @@ export const SingleRecoveryNotification = (props) => {
     setFormState({ ...formState, changes: {} })
   }
 
+  /**
+   * Update channel
+   * @param {EventTarget} evt Related HTML event
+   */
   const handleChangeInput = (evt) => {
     setFormState({
       ...formState,
@@ -38,6 +42,11 @@ export const SingleRecoveryNotification = (props) => {
     })
   }
 
+  /**
+   * Method to update channel field
+   * @param {String} name params key of channel
+   * @param {String} val params key of channel
+   */
   const handleChangeSelect = (name, val) => {
     setFormState({
       ...formState,
@@ -49,7 +58,7 @@ export const SingleRecoveryNotification = (props) => {
   }
 
   /**
-   * Default fuction to add a notification
+   * Default fuction to add a channel
    */
   const handleClickAddBtn = async () => {
     try {
@@ -94,7 +103,7 @@ export const SingleRecoveryNotification = (props) => {
   }
 
   /**
-   * Default fuction to update a notification
+   * Default fuction to update a channel
    */
   const handleUpdateClick = async (channelId, changes) => {
     try {

@@ -201,7 +201,6 @@ export const RecoveryActionListing = (props) => {
       ...paginationProps,
       total: paginationProps?.total - 1
     })
-    console.log(actions, 'This is actions')
     setRecoveryActionList({ ...recoveryActionList, actions: actions })
   }
 

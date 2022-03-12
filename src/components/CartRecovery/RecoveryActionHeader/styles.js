@@ -11,7 +11,7 @@ export const ActionHeadercontainer = styled.div`
     flex-direction: column;
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 993px) {
     ${({ isDisableControl }) => !isDisableControl && css`
       flex-direction: column;
     `}
