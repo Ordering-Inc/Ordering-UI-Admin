@@ -12,7 +12,7 @@ export const HistoriesWrapper = styled.div`
       position: absolute;
       width: 2px;
       top: 7px;
-      height: calc(100% - 37px);
+      height: calc(100% - 10px);
       ${props => props.theme?.rtl ? css`
         right: 2px;
       ` : css`
@@ -62,5 +62,14 @@ export const Amount = styled.span`
   font-weight: 500;
   ${({ negative }) => !negative && css`
     color: ${props => props.theme.colors.primary};
+  `}
+`
+export const TransactionCode = styled.div`
+  font-size: 12px;
+  color: ${props => props.theme.colors.lightGray};
+  ${props => props.theme?.rtl ? css`
+    margin-right: 15px;
+  ` : css`
+    margin-left: 15px;
   `}
 `

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const BusinessEmailAndPhoneContainer = styled.div`
-  padding: 10px;
 `
 
 export const FormControl = styled.div`
@@ -14,11 +13,6 @@ export const FormControl = styled.div`
     height: 44px;
     width: 100%;
   }
-
-  .info {
-    font-size: 13px;
-    color: ${props => props.theme?.colors.headingColor};
-  }
 `
 
 export const Label = styled.p`
@@ -26,4 +20,21 @@ export const Label = styled.p`
   margin-bottom: 10px;
   font-size: 14px;
   color: ${props => props.theme?.colors.headingColor};
+`
+export const SectionTitle = styled.div`
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+`
+export const OrdersAppPushContainer = styled.div`
+  margin-top: 44px;
+  margin-bottom: 60px;
+  p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 13px;
+    color: ${props => props.theme?.colors.lightGray};
+  }
 `

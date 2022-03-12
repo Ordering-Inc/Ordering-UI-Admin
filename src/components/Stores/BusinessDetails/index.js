@@ -6,8 +6,10 @@ import { BusinessSupport } from '../BusinessSupport'
 import { BusinessDetail } from '../BusinessDetail'
 import { BusinessSchedule } from '../BusinessSchedule'
 import { BusinessMenu } from '../BusinessMenu'
-import { BusinessDeliveryZone } from '../BusinessDeliveryZone'
+import { BusinessDeliveryPickupMore } from '../BusinessDeliveryPickupMore'
 import { BusinessPaymentMethods } from '../BusinessPaymentMethods'
+import { BusinessPreorderDetails } from '../BusinessPreorderDetails'
+import { BusinessTaxAndFees } from '../BusinessTaxAndFees'
 import { BusinessPromotionList } from '../BusinessPromotionList'
 import { BusinessCustomFields } from '../BusinessCustomFields'
 import { BusinessWebhooks } from '../BusinessWebhooks'
@@ -179,12 +181,11 @@ export const BusinessDetailsUI = (props) => {
               setIsExtendExtraOpen={setIsExtendExtraOpen}
             />
           )}
-          {selectedItem === 'delivery_zones' && (
-            <BusinessDeliveryZone
+          {selectedItem === 'delivery_pickup_more' && (
+            <BusinessDeliveryPickupMore
               business={businessState?.business}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
-              onClose={() => setIsExtendExtraOpen(false)}
-              handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
           {selectedItem === 'notifications' && (
@@ -203,6 +204,14 @@ export const BusinessDetailsUI = (props) => {
               handleSuccessUpdate={handleUpdateBusinessState}
             />
           )}
+          {selectedItem === 'tax_fees' && (
+            <BusinessTaxAndFees
+              formState={formState}
+              setFormState={setFormState}
+              business={businessState?.business}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+            />
+          )}
           {selectedItem === 'promotions' && (
             <BusinessPromotionList
               promotions={businessState?.business?.offers}
@@ -210,6 +219,14 @@ export const BusinessDetailsUI = (props) => {
               business={businessState?.business}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               handleSuccessUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'preorder' && (
+            <BusinessPreorderDetails
+              formState={formState}
+              setFormState={setFormState}
+              business={businessState?.business}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
             />
           )}
           {selectedItem === 'custom_fields' && (

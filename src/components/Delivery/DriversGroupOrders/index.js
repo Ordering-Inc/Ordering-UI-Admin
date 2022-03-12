@@ -109,7 +109,7 @@ const DriversGroupOrdersUI = (props) => {
       {(changesState?.orders_group_use_maps_api || (typeof changesState?.orders_group_use_maps_api === 'undefined' && curDriversGroup?.orders_group_use_maps_api)) && (
         <>
           <FieldWrapper>
-            <label>{t('MAX_DISTANCE_BETWEEN_BUSINESS', 'Maxiumum distance between businesses in meters')}</label>
+            <label>{t('MAX_TIME_BETWEEN_PICKUP', 'Maximum time between pickup points in seconds')}</label>
             <FieldRowContainer>
               <IconImage
                 url={theme.images?.icons?.shopToShop}
@@ -135,7 +135,7 @@ const DriversGroupOrdersUI = (props) => {
             </FieldRowContainer>
           </FieldWrapper>
           <FieldWrapper>
-            <label>{t('MAX_DISTANCE_BETWEEN_DELIVERY', 'Maxiumum distance between deliveries in meters')}</label>
+            <label>{t('MAX_TIME_BETWEEN_DELIVERY', 'Maximum time between delivery points in seconds')}</label>
             <FieldRowContainer>
               <IconImage
                 url={theme.images?.icons?.homeToHome}

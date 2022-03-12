@@ -18,8 +18,7 @@ import {
   InputContainer,
   FieldRow,
   WeightWrapper,
-  PropertyOptionWrapper,
-  PricePerUnit
+  PropertyOptionWrapper
 } from './styles'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { Alert, Modal } from '../../Shared'
@@ -54,9 +53,6 @@ const ProductDetailsAdvancedUI = (props) => {
   const [fesSelected, setFeeSelected] = useState(null)
   const [taxSelected, setTaxSelected] = useState(null)
   const [taxToDelete, setTaxToDelete] = useState({ action: null, id: null })
-  const [productPrice, setProductPrice] = useState()
-  const [unitPrice, setunitPrice] = useState(0)
-  const [pricePerUnit, setPricePerUnit] = useState('grams')
 
   const estimatedPersons = [
     { value: 'no_apply', content: <Option>{t('NO_APPLY', 'No apply')}</Option>, showOnSelected: <Option>{t('NO_APPLY', 'No apply')}</Option> },
@@ -88,12 +84,6 @@ const ProductDetailsAdvancedUI = (props) => {
       ratio: 0.00220462
     }
   ]
-
-  const [inputs, setInputs] = useState({
-    productWeight: null,
-    unitOfWeight: weightUnitOptions[0].ratio,
-    perPriceOfWeight: weightUnitOptions[0].ratio
-  })
 
   const getTaxOrFeeString = (string) => {
     return string === 'taxes' ? 'tax' : 'fee'
@@ -197,47 +187,9 @@ const ProductDetailsAdvancedUI = (props) => {
 
   const handleEnablePriceWeight = (enabled) => {
     setIsShowPriceByWeight(enabled)
-    setunitPrice(0)
     if (!enabled) {
       handleClickProperty('weight', null)
     }
-  }
-
-  const handleChangeWeight = (e) => {
-    handleClickProperty('weight', e.target.value)
-    e.persist()
-    setInputs(values => ({
-      ...values,
-      productWeight: e.target.value
-    }))
-  }
-
-  const handleChangeUnit = (val) => {
-    handleClickProperty('weight_unit', val ?? 'grams')
-    setPricePerUnit(val)
-    const _unitRatio = weightUnitOptions.filter(option => option.value === val)[0]?.ratio
-    setInputs(values => ({
-      ...values,
-      unitOfWeight: _unitRatio
-    }))
-  }
-
-  const handleChangePricePerUnit = (val) => {
-    setPricePerUnit(val)
-    const _unitRatio = weightUnitOptions.filter(option => option.value === val)[0]?.ratio
-    setInputs(values => ({
-      ...values,
-      perPriceOfWeight: _unitRatio
-    }))
-  }
-
-  const getPerWeightPrice = () => {
-    const pricePerWeight = productPrice / inputs.productWeight / inputs.perPriceOfWeight * inputs.unitOfWeight
-    if (pricePerWeight === Number.POSITIVE_INFINITY || pricePerWeight === Number.NEGATIVE_INFINITY) {
-      setunitPrice(0)
-      return
-    }
-    setunitPrice(pricePerWeight)
   }
 
   useEffect(() => {
@@ -287,27 +239,10 @@ const ProductDetailsAdvancedUI = (props) => {
   }, [productState?.weight])
 
   useEffect(() => {
-    if (formState?.changes?.weight && !productState?.weight_unit) {
+    if (formState?.changes?.weight && !(formState?.changes?.weight_unit)) {
       handleClickProperty('weight_unit', 'grams')
     }
   }, [formState?.changes?.weight])
-
-  useEffect(() => {
-    setProductPrice(productState?.price)
-    if (productState?.weight && productState?.weight_unit) {
-      const _unitRatio = weightUnitOptions.filter(option => option.value === productState?.weight_unit)[0]?.ratio
-      setInputs(values => ({
-        ...values,
-        productWeight: productState?.weight,
-        perPriceOfWeight: _unitRatio
-      }))
-      setPricePerUnit(productState?.weight_unit)
-    }
-  }, [productState])
-
-  useEffect(() => {
-    getPerWeightPrice()
-  }, [inputs])
 
   return (
     <PropertiesContainer>
@@ -421,8 +356,7 @@ const ProductDetailsAdvancedUI = (props) => {
                 id='weight'
                 placeholder='0.00'
                 defaultValue={productState?.weight ?? ''}
-                // onChange={(e) => handleClickProperty('weight', e.target.value ?? null)}
-                onChange={handleChangeWeight}
+                onChange={(e) => handleClickProperty('weight', e.target.value ?? null)}
                 disabled={formState.loading}
                 autoComplete='off'
                 onKeyPress={(e) => {
@@ -435,7 +369,7 @@ const ProductDetailsAdvancedUI = (props) => {
                 notAsync
                 defaultValue={productState?.weight_unit ?? 'grams'}
                 options={weightUnitOptions}
-                onChange={(val) => handleChangeUnit(val)}
+                onChange={(val) => handleClickProperty('weight_unit', val ?? 'grams')}
               />
             </WeightWrapper>
           </InputContainer>
@@ -477,16 +411,6 @@ const ProductDetailsAdvancedUI = (props) => {
             onChange={enabled => handleEnablePriceWeight(enabled)}
           />
         </PropertyOption>
-        {isShowPriceByWeight && (
-          <PricePerUnit>
-            <label>{parsePrice(unitPrice)} / </label>
-            <Select
-              defaultValue={pricePerUnit}
-              options={weightUnitOptions}
-              onChange={(val) => handleChangePricePerUnit(val)}
-            />
-          </PricePerUnit>
-        )}
       </PropertyOptionWrapper>
       <Button
         color='primary'

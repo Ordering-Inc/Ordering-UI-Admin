@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 
 export const BusinessGprsPrintersContainer = styled.div`
-  padding: 10px;
 `
 
 export const FormControl = styled.div`
@@ -20,16 +19,17 @@ export const Label = styled.p`
   color: ${props => props.theme?.colors.headingColor};
 `
 
-export const CheckboxWrapper = styled.div`
+export const SwitchboxWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 35px;
 
-  span {
+  > span {
     font-size: 14px;
     ${props => props.theme?.rtl ? css`
-      margin-right: 15px;
+      margin-left: 50px;
     ` : css`
-      margin-left: 15px;
+      margin-right: 50px;
     `}
   }
 `
@@ -47,4 +47,11 @@ export const SelectWrapper = styled.div`
   .list {
     width: 100%;
   }
+`
+export const SectionTitle = styled.div`
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
 `

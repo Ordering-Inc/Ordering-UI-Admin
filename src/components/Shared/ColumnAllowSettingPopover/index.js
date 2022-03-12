@@ -1,7 +1,9 @@
 import React, { useRef, useEffect } from 'react'
-import BsLayoutThreeColumns from '@meronex/icons/bs/BsLayoutThreeColumns'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
+import { LayoutThreeColumns } from 'react-bootstrap-icons'
+import { IconButton } from '../../../styles'
+
 import {
   HeaderItem,
   PopoverBody,
@@ -47,11 +49,14 @@ export const ColumnAllowSettingPopover = (props) => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <HeaderItem
-        ref={referenceElement}
-        onClick={props.onClick}
-      >
-        <BsLayoutThreeColumns />
+      <HeaderItem>
+        <IconButton
+          color='black'
+          ref={referenceElement}
+          onClick={props.onClick}
+        >
+          <LayoutThreeColumns />
+        </IconButton>
       </HeaderItem>
       {open && (
         <PopoverBody ref={popperElement}>

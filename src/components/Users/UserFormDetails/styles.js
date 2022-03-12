@@ -106,23 +106,6 @@ export const SkeletonForm = styled.div`
   }
 `
 
-export const WrapperUserTypeSelector = styled.div`
-  width: 100%;
-  margin-bottom: 10px;
-
-  div.select {
-    border: none;
-    background-color: ${props => props.theme.colors.secundary};
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  > div {
-    width: 100%;
-    color: ${props => props.theme.colors.secundaryContrast};
-  }
-`
-
 export const DriverZoneRestrictionWrapper = styled.div`
   width: 100%;
   display: flex;

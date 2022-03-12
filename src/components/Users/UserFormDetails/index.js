@@ -3,7 +3,6 @@ import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useCustomer } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
-import { UserTypeSelector } from '../UserTypeSelector'
 import { Alert, InputPhoneNumber } from '../../Shared'
 import { sortInputFields } from '../../../utils'
 import { Switch, Input, Button } from '../../../styles'
@@ -13,7 +12,6 @@ import {
   FormInput,
   ActionsForm,
   SkeletonForm,
-  WrapperUserTypeSelector,
   DriverZoneRestrictionWrapper,
   WrapperPassword,
   TogglePassword
@@ -21,9 +19,7 @@ import {
 
 export const UserFormDetailsUI = (props) => {
   const {
-    isEdit,
     formState,
-    onCancel,
     showField,
     cleanFormState,
     isRequiredField,
@@ -33,9 +29,7 @@ export const UserFormDetailsUI = (props) => {
     isCheckout,
     userData,
     isCustomerMode,
-    handleChangeUserType,
     isDriversPage,
-    isDriversManagersPage,
     handleChangeSwtich
   } = props
 
@@ -66,10 +60,6 @@ export const UserFormDetailsUI = (props) => {
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   const setUserCellPhone = (isEdit = false) => {
-    if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
-      setUserPhoneNumber(userPhoneNumber)
-      return
-    }
     if (user?.cellphone) {
       let phone = null
       if (formState.result.error && formState.changes?.cellphone && formState.changes?.country_phone_code) {
@@ -190,14 +180,10 @@ export const UserFormDetailsUI = (props) => {
   }, [formState?.loading])
 
   useEffect(() => {
-    if ((user || !isEdit) && !formState?.loading) {
+    if ((user) && !formState?.loading) {
       setUserCellPhone()
-      if (!isEdit && !formState?.loading) {
-        cleanFormState && cleanFormState({ changes: {} })
-        setUserCellPhone(true)
-      }
     }
-  }, [user, isEdit])
+  }, [user])
 
   useEffect(() => {
     if (!validationFields.loading && emailInput.current) {
@@ -221,25 +207,9 @@ export const UserFormDetailsUI = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} isCheckout={isCheckout}>
         {!validationFields?.loading ? (
           <>
-            {
-            props.beforeMidElements?.map((BeforeMidElements, i) => (
-              <React.Fragment key={i}>
-                {BeforeMidElements}
-              </React.Fragment>))
-            }
-            {
-            props.beforeMidComponents?.map((BeforeMidComponents, i) => (
-              <BeforeMidComponents key={i} {...props} />))
-            }
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
               showField && showField(field.code) && (
                 <React.Fragment key={field.id}>
@@ -317,26 +287,6 @@ export const UserFormDetailsUI = (props) => {
                 </TogglePassword>
               </WrapperPassword>
             )}
-            {
-            props.afterMidElements?.map((MidElement, i) => (
-              <React.Fragment key={i}>
-                {MidElement}
-              </React.Fragment>))
-            }
-            {
-             props.afterMidComponents?.map((MidComponent, i) => (
-               <MidComponent key={i} {...props} />))
-            }
-            {!(isDriversManagersPage || isDriversPage) && (
-              <WrapperUserTypeSelector>
-                <UserTypeSelector
-                  isPrimary
-                  userId={user.id}
-                  defaultUserType={formState?.changes?.level ?? user?.level}
-                  handleChangeUserType={handleChangeUserType}
-                />
-              </WrapperUserTypeSelector>
-            )}
             {isDriversPage && (
               <DriverZoneRestrictionWrapper>
                 <span>{('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')}</span>
@@ -347,29 +297,15 @@ export const UserFormDetailsUI = (props) => {
               </DriverZoneRestrictionWrapper>
             )}
             <ActionsForm>
-              {onCancel && (
-                <Button
-                  outline
-                  borderRadius='5px'
-                  type='button'
-                  onClick={() => onCancel(false)}
-                  disabled={formState.loading}
-                >
-                  {t('CANCEL', 'Cancel')}
-                </Button>
-              )}
-
-              {((formState && Object.keys(formState?.changes).length > 0 && isEdit) || formState?.loading) && (
-                <Button
-                  id='form-btn'
-                  color='primary'
-                  borderRadius='5px'
-                  type='submit'
-                  disabled={formState.loading}
-                >
-                  {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
-                </Button>
-              )}
+              <Button
+                id='form-btn'
+                color='primary'
+                borderRadius='5px'
+                type='submit'
+                disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+              >
+                {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
+              </Button>
             </ActionsForm>
           </>
         ) : (
@@ -389,12 +325,6 @@ export const UserFormDetailsUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }

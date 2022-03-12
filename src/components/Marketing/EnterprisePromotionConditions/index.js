@@ -44,7 +44,9 @@ export const EnterprisePromotionConditions = (props) => {
 
   const specifics = ['products', 'categories', 'delivery_zones']
 
-  const handlePromotionEdit = (condition, title) => {
+  const handlePromotionEdit = (e, condition, title) => {
+    const inValid = e.target.closest('.condition-checkbox')
+    if (inValid) return
     setSelectedCondition(condition)
     setSelectedTitle(title)
     if (singleConditions.includes(condition)) {
@@ -92,7 +94,10 @@ export const EnterprisePromotionConditions = (props) => {
         </Header>
 
         {conditions.map((condition, index) => (
-          <ConditionItem key={index}>
+          <ConditionItem
+            key={index}
+            onClick={e => handlePromotionEdit(e, condition.attribute, condition.title)}
+          >
             <div>
               {
                 (typeof formState.changes[condition.attribute] !== 'undefined'
@@ -102,19 +107,18 @@ export const EnterprisePromotionConditions = (props) => {
                     : promotionState.promotion[condition.attribute])
                   ? (
                     <CheckboxWrapper
+                      className='condition-checkbox'
                       active
                       // onClick={() => handleChangeItem({ [condition.attribute]: null })}
                     >
                       <Check2 />
                     </CheckboxWrapper>
                   )
-                  : <CheckboxWrapper />
+                  : <CheckboxWrapper className='condition-checkbox' />
               }
               <span>{condition.title}</span>
             </div>
-            <EditButton
-              onClick={() => handlePromotionEdit(condition.attribute, condition.title)}
-            >
+            <EditButton>
               <Pencil />
             </EditButton>
           </ConditionItem>

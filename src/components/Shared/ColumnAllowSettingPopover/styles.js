@@ -1,16 +1,8 @@
 import styled, { css } from 'styled-components'
 
 export const HeaderItem = styled.div`
-  ${props => props.theme?.rtl ? css`
-    text-align: left;
-    ` : css`
-    text-align: right;
-  `}
-  svg {
-    cursor: pointer;
-    color: ${props => props.theme.colors?.headingColor};
-    font-size: 20px;
-  }
+  display: flex;
+  justify-content: flex-end;
 `
 
 export const PopoverBody = styled.div`
