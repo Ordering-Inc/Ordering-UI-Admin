@@ -129,6 +129,7 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     handleParentSidebarMove(0);
     setShowOption(null);
     setIsOpenMenu(false);
+    setMenuMoveDistance(0);
   };
 
   (0, _react.useEffect)(function () {

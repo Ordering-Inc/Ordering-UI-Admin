@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SubOptionImage = exports.SubOptionContainer = exports.SelectboxGroup = exports.RightSubOptionContent = exports.RightOptionContent = exports.OptionSettings = exports.OptionSettingItem = exports.OptionInfoContainer = exports.OptionImage = exports.OptionContent = exports.OptionContainer = exports.ModifierOptionsContainer = exports.MainContainer = exports.LeftSubOptionContent = exports.InputWrapper = exports.Header = exports.EnableWrapper = exports.Dvider = exports.DropDownWrapper = exports.CheckboxWrapper = exports.AdddSubOptionForm = exports.ActionsContainer = exports.ActionSelectorWrapper = void 0;
+exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SubOptionImage = exports.SubOptionContainer = exports.SelectboxGroup = exports.RightSubOptionContent = exports.RightOptionContent = exports.OptionSettings = exports.OptionSettingItem = exports.OptionInfoContainer = exports.OptionImage = exports.OptionContent = exports.OptionContainer = exports.ModifierOptionsContainer = exports.MainContainer = exports.LeftSubOptionContent = exports.InputWrapper = exports.Header = exports.EnableWrapper = exports.Dvider = exports.CheckboxWrapper = exports.AdddSubOptionForm = exports.AddNewOptionButton = exports.ActionsContainer = exports.ActionSelectorWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
@@ -86,12 +86,14 @@ var RightOptionContent = _styledComponents.default.div(_templateObject14 || (_te
 
 exports.RightOptionContent = RightOptionContent;
 
-var InputWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  input {\n    border-color: ", ";\n  }\n  label {\n    color: ", ";\n    font-size: 14px;\n    margin-bottom: 10px;\n  }\n  .default {\n    min-width: 50px;\n  }\n  ", "\n  ", "\n\n  ", "\n\n  ", "\n  \n  .checked {\n    svg {\n      color: ", ";\n    }\n  }\n"])), function (_ref2) {
+var InputWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  input {\n    border-color: ", ";\n  }\n  label {\n    color: ", ";\n    font-size: 14px;\n    margin-bottom: 10px;\n  }\n  .default {\n    min-width: 50px;\n    width: 65px;\n    text-align: center;\n    svg {\n      color: ", ";\n    }\n  }\n  ", "\n  ", "\n\n  ", "\n\n  ", "\n  \n  .checked {\n    svg {\n      color: ", ";\n    }\n  }\n"])), function (_ref2) {
   var isMaxError = _ref2.isMaxError,
       theme = _ref2.theme;
   return isMaxError ? "".concat(theme.colors.danger, " !important") : '#DEE2E6';
 }, function (props) {
   return props.theme.colors.headingColor;
+}, function (props) {
+  return props.theme.colors.secundaryLight;
 }, function (_ref3) {
   var primary = _ref3.primary;
   return !primary && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    label {\n      display: none;\n    }\n  "])));
@@ -137,71 +139,73 @@ var EnableWrapper = _styledComponents.default.div(_templateObject28 || (_templat
 
 exports.EnableWrapper = EnableWrapper;
 
-var DropDownWrapper = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  button {\n    background: #F8F9FA !important;\n    border: none;\n    padding: 0px;\n    svg {\n      color: ", ";\n    }\n\n    &:after {\n      display: none;\n    }\n  }\n\n  > div {\n    > div {\n      border: 1px solid #E9ECEF;\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n      border-radius: 8px;\n\n      a:last-child {\n        color: #E63757;\n      }\n    }\n  }\n\n  .dropdown-item {\n    font-size: 14px;\n  }\n"])), function (props) {
-  return props.theme.colors.headingColor;
-});
-
-exports.DropDownWrapper = DropDownWrapper;
-
-var OptionSettings = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 20px 0;\n  flex-direction: column;\n\n  @media (min-width: 1200px) {\n    flex-direction: row;\n  }\n"])));
+var OptionSettings = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 20px 0;\n  flex-direction: column;\n\n  @media (min-width: 1200px) {\n    flex-direction: row;\n  }\n"])));
 
 exports.OptionSettings = OptionSettings;
 
-var OptionSettingItem = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  flex: 1;\n"])));
+var OptionSettingItem = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  flex: 1;\n"])));
 
 exports.OptionSettingItem = OptionSettingItem;
 
-var CheckboxWrapper = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 20px;\n\n  label {\n    cursor: pointer;\n    color: ", ";\n    font-size: 14px;\n    margin-bottom: 0px;\n\n    ", "\n  }\n"])), function (props) {
+var CheckboxWrapper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 20px;\n\n  label {\n    cursor: pointer;\n    color: ", ";\n    font-size: 14px;\n    margin-bottom: 0px;\n\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme7;
 
-  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n      padding-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n      padding-left: 10px;\n    "])));
+  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n      padding-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n      padding-left: 10px;\n    "])));
 });
 
 exports.CheckboxWrapper = CheckboxWrapper;
 
-var Dvider = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  height: 13px;\n  background: #F8F9FA;\n  margin: 10px 0 30px;\n"])));
+var Dvider = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  height: 13px;\n  background: #F8F9FA;\n  margin: 10px 0 30px;\n"])));
 
 exports.Dvider = Dvider;
 
-var ModifierOptionsContainer = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n  h2 {\n    font-size: 18px;\n    font-weight: 600;\n    color: ", ";\n    margin-bottom: 30px;\n  }\n"])), function (props) {
+var ModifierOptionsContainer = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n  h2 {\n    font-size: 18px;\n    font-weight: 600;\n    color: ", ";\n    margin-bottom: 30px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.ModifierOptionsContainer = ModifierOptionsContainer;
 
-var SubOptionContainer = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  margin-top: 15px;\n"])));
+var SubOptionContainer = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  margin-top: 15px;\n"])));
 
 exports.SubOptionContainer = SubOptionContainer;
 
-var SubOptionImage = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  width: 44px;\n  height: 44px;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  ", "\n  ", "\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n"])), function (_ref6) {
+var SubOptionImage = _styledComponents.default.div(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  width: 44px;\n  height: 44px;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  ", "\n  ", "\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n"])), function (_ref6) {
   var primary = _ref6.primary;
-  return primary && (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n    margin-top: 27px;\n  "])));
+  return primary && (0, _styledComponents.css)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n    margin-top: 27px;\n  "])));
 }, function (props) {
   var _props$theme8;
 
-  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    margin-left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    margin-right: 20px;\n  "])));
+  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n    margin-left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    margin-right: 20px;\n  "])));
 });
 
 exports.SubOptionImage = SubOptionImage;
 
-var LeftSubOptionContent = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n"])));
+var LeftSubOptionContent = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n"])));
 
 exports.LeftSubOptionContent = LeftSubOptionContent;
 
-var RightSubOptionContent = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  input {\n    max-width: 100px;\n    ", "\n  }\n"])), function (props) {
+var RightSubOptionContent = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  input {\n    max-width: 100px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme9;
 
-  return (_props$theme9 = props.theme) !== null && _props$theme9 !== void 0 && _props$theme9.rtl ? (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "])));
+  return (_props$theme9 = props.theme) !== null && _props$theme9 !== void 0 && _props$theme9.rtl ? (0, _styledComponents.css)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "])));
 });
 
 exports.RightSubOptionContent = RightSubOptionContent;
 
-var AdddSubOptionForm = _styledComponents.default.form(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  margin-top: 15px;\n"])));
+var AdddSubOptionForm = _styledComponents.default.form(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  margin-top: 15px;\n"])));
 
 exports.AdddSubOptionForm = AdddSubOptionForm;
 
-var SelectboxGroup = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  max-width: 50%;\n  \n  > div {\n    background: #F8F9FA;\n    &:first-child {\n      margin-bottom: 20px;\n    }\n  }\n\n  > p {\n    font-size: 14px;\n    margin: 0;\n  }\n\n  @media (min-width: 1200px) {\n    max-width: initial;\n  }\n"])));
+var SelectboxGroup = _styledComponents.default.div(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  max-width: 50%;\n  \n  > div {\n    background: #F8F9FA;\n    &:first-child {\n      margin-bottom: 20px;\n    }\n  }\n\n  > p {\n    font-size: 14px;\n    margin: 0;\n  }\n\n  @media (min-width: 1200px) {\n    max-width: initial;\n  }\n"])));
 
 exports.SelectboxGroup = SelectboxGroup;
+
+var AddNewOptionButton = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  margin-top: 15px;\n  font-size: 14px;\n  color: ", ";\n  span {\n    cursor: pointer;\n  }\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.lightGray;
+}, function (props) {
+  return props.theme.colors.primary;
+});
+
+exports.AddNewOptionButton = AddNewOptionButton;

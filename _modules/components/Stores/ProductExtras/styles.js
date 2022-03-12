@@ -58,14 +58,16 @@ var CheckboxContainer = _styledComponents.default.div(_templateObject8 || (_temp
 
 exports.CheckboxContainer = CheckboxContainer;
 
-var MoreContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  algin-items: center;\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n    color: ", ";\n  }\n"])), function (props) {
+var MoreContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.MoreContainer = MoreContainer;
 
-var Details = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n"])), function (props) {
+var Details = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n\n  svg {\n    margin: 0 5px;\n    font-size: 13px;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.colors.secundaryLight;
 });
 
 exports.Details = Details;

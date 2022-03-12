@@ -115,13 +115,15 @@ var ProductSummary = function ProductSummary(props) {
   }, {
     key: 'product_images',
     value: t('PRODUCT_IMAGES', 'Product images')
-  }, {
-    key: 'custom_fields',
-    value: t('CUSTOM_FIELDS', 'Custom fields')
-  }, {
-    key: 'personalization',
-    value: t('PERSONALIZATION', 'Personalization')
-  }];
+  } // {
+  //   key: 'custom_fields',
+  //   value: t('CUSTOM_FIELDS', 'Custom fields')
+  // },
+  // {
+  //   key: 'personalization',
+  //   value: t('PERSONALIZATION', 'Personalization')
+  // }
+  ];
 
   var handleDeleteClick = function handleDeleteClick() {
     setConfirm({
@@ -167,6 +169,14 @@ var ProductSummary = function ProductSummary(props) {
       return setIsProductPreview(true);
     }
   }, t('PREVIEW', 'Preview')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleShowOption('custom_fields');
+    }
+  }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleShowOption('personalization');
+    }
+  }, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleDeleteClick();
     }

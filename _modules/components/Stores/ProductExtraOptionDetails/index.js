@@ -21,8 +21,6 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _styledComponents = require("styled-components");
 
-var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
-
 var _utils = require("../../../utils");
 
 var _Shared = require("../../Shared");
@@ -99,8 +97,6 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   var theme = (0, _styledComponents.useTheme)();
   var optionImageInputRef = (0, _react.useRef)(null);
 
-  var ActionIcon = /*#__PURE__*/_react.default.createElement(_FiMoreVertical.default, null);
-
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -132,6 +128,11 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       handleSubmit = _useForm.handleSubmit,
       register = _useForm.register,
       errors = _useForm.errors;
+
+  var _useState9 = (0, _react.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isAddForm = _useState10[0],
+      setIsAddForm = _useState10[1];
 
   var handleClickImage = function handleClickImage() {
     optionImageInputRef.current.click();
@@ -223,6 +224,21 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       });
     }
   }, [errors]);
+
+  var closeAddForm = function closeAddForm(e) {
+    var outsideDropdown = !e.target.closest('.add-product-option') && !e.target.closest('.add-option-btn');
+    if (outsideDropdown && Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0) setIsAddForm(false);
+  };
+
+  (0, _react.useEffect)(function () {
+    document.addEventListener('click', closeAddForm);
+    return function () {
+      return document.removeEventListener('click', closeAddForm);
+    };
+  }, [changesState]);
+  (0, _react.useEffect)(function () {
+    if (Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0) setIsAddForm(false);
+  }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTION', 'Product option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
@@ -451,25 +467,24 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       maxHeight: true,
       primary: index === 0,
       disabled: optionState === null || optionState === void 0 ? void 0 : optionState.loading
-    }, /*#__PURE__*/_react.default.createElement("label", null, t('DEFAULT', 'Default')), /*#__PURE__*/_react.default.createElement("div", {
+    }, /*#__PURE__*/_react.default.createElement("label", null, t('PRESELECT', 'Preselect')), /*#__PURE__*/_react.default.createElement("div", {
       name: "preselected",
       className: subOption !== null && subOption !== void 0 && subOption.preselected ? 'checked default' : 'default'
-    }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      defaultChecked: (subOption === null || subOption === void 0 ? void 0 : subOption.preselected) || false,
-      id: "allow_suboption_quantity",
+    }, /*#__PURE__*/_react.default.createElement("span", {
       onClick: function onClick(e) {
         return handleChangeDefaultSuboption(subOption.id);
       }
-    }))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, {
+    }, subOption !== null && subOption !== void 0 && subOption.preselected ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, {
       primary: index === 0
     }, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: subOption === null || subOption === void 0 ? void 0 : subOption.enabled,
       onChange: function onChange(enabled) {
         return handleChangeSubOptionEnable(enabled, subOption.id);
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.DropDownWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+      className: "product_actions",
       menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: ActionIcon,
+      title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
       id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
       onClick: function onClick() {
@@ -483,7 +498,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
         return handleDeteteClick(subOption.id);
       }
     }, t('DELETE', 'Delete')))))));
-  }), /*#__PURE__*/_react.default.createElement(_styles2.AdddSubOptionForm, {
+  }), isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AdddSubOptionForm, {
     onSubmit: handleSubmit(handleAddOption),
     className: "add-product-option"
   }, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, {
@@ -582,7 +597,12 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary",
     type: "submit"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null)))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null))))), !isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AddNewOptionButton, null, /*#__PURE__*/_react.default.createElement("span", {
+    className: "add-option-btn",
+    onClick: function onClick() {
+      return setIsAddForm(true);
+    }
+  }, t('ADD_SUBOPTION', 'Add suboption')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

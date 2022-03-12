@@ -309,6 +309,7 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     isDriversManagersPage: isDriversManagersPage,
     open: isOpenUserDetails,
     user: openUser,
+    handleDeleteUser: handleDeleteUser,
     userId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     onClose: function onClose() {
       return handleBackRedirect();

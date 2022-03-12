@@ -45,25 +45,17 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
   }, {
     key: 'saved_places',
     content: t('SAVED_PLACES', 'Saved places')
-  }, {
-    key: 'metafields',
-    content: t('METAFIELDS', 'Metafields')
-  }, {
-    key: 'personalization',
-    content: t('PERSONALIZATION', 'Personalization')
-  }] : [{
+  } // { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
+  // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
+  ] : [{
     key: 'profile',
     content: t('PROFILE', 'Profile')
   }, {
     key: 'saved_places',
     content: t('SAVED_PLACES', 'Saved places')
-  }, {
-    key: 'metafields',
-    content: t('METAFIELDS', 'Metafields')
-  }, {
-    key: 'personalization',
-    content: t('PERSONALIZATION', 'Personalization')
-  }];
+  } // { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
+  // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
+  ];
   return /*#__PURE__*/_react.default.createElement(_styles.UserDetailsMenuContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, menuItems.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: menu.key,
