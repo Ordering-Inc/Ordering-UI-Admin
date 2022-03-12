@@ -198,6 +198,7 @@ const DeliveryUsersListingUI = (props) => {
           isDriversManagersPage={isDriversManagersPage}
           open={isOpenUserDetails}
           user={openUser}
+          handleDeleteUser={handleDeleteUser}
           userId={openUser?.id || queryId}
           onClose={() => handleBackRedirect()}
           handleSuccessUpdate={handleSuccessUpdate}
