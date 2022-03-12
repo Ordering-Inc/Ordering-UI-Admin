@@ -10,13 +10,17 @@ import { Checkbox, IconButton, Input, Switch } from '../../../styles'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { bytesConverter } from '../../../utils'
 import { Alert, Confirm, Modal } from '../../Shared'
 
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 import { ProductExtraSubOptionMetaFields } from '../ProductExtraSubOptionMetaFields'
-import { PlusCircle, ThreeDots } from 'react-bootstrap-icons'
+import {
+  PlusCircle,
+  Circle as UnCheckIcon,
+  ThreeDots,
+  RecordCircleFill as CheckIcon
+} from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -31,7 +35,6 @@ import {
   InputWrapper,
   ActionsContainer,
   EnableWrapper,
-  DropDownWrapper,
   OptionInfoContainer,
   RightOptionContent,
   OptionSettings,
@@ -44,7 +47,8 @@ import {
   LeftSubOptionContent,
   RightSubOptionContent,
   SelectboxGroup,
-  AdddSubOptionForm
+  AdddSubOptionForm,
+  AddNewOptionButton
 } from './styles'
 
 const ProductExtraOptionDetailsUI = (props) => {
@@ -83,12 +87,12 @@ const ProductExtraOptionDetailsUI = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const optionImageInputRef = useRef(null)
-  const ActionIcon = <FiMoreVertical />
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openModal, setOpenModal] = useState({})
   const [selectedSubOptionId, setSelectedSubOptionId] = useState(null)
   const { handleSubmit, register, errors } = useForm()
+  const [isAddForm, setIsAddForm] = useState(false)
 
   const handleClickImage = () => {
     optionImageInputRef.current.click()
@@ -170,6 +174,20 @@ const ProductExtraOptionDetailsUI = (props) => {
       })
     }
   }, [errors])
+
+  const closeAddForm = (e) => {
+    const outsideDropdown = !e.target.closest('.add-product-option') && !e.target.closest('.add-option-btn')
+    if (outsideDropdown && Object.keys(changesState?.changes).length === 0) setIsAddForm(false)
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', closeAddForm)
+    return () => document.removeEventListener('click', closeAddForm)
+  }, [changesState])
+
+  useEffect(() => {
+    if (Object.keys(changesState?.changes).length === 0) setIsAddForm(false)
+  }, [changesState?.changes])
 
   return (
     <MainContainer>
@@ -436,16 +454,14 @@ const ProductExtraOptionDetailsUI = (props) => {
                 </InputWrapper>
               )}
               <InputWrapper maxHeight primary={index === 0} disabled={optionState?.loading}>
-                <label>{t('DEFAULT', 'Default')}</label>
+                <label>{t('PRESELECT', 'Preselect')}</label>
                 <div
                   name='preselected'
                   className={subOption?.preselected ? 'checked default' : 'default'}
                 >
-                  <Checkbox
-                    defaultChecked={subOption?.preselected || false}
-                    id='allow_suboption_quantity'
-                    onClick={(e) => handleChangeDefaultSuboption(subOption.id)}
-                  />
+                  <span onClick={(e) => handleChangeDefaultSuboption(subOption.id)}>
+                    {subOption?.preselected ? <CheckIcon /> : <UnCheckIcon />}
+                  </span>
                 </div>
               </InputWrapper>
               <ActionsContainer primary={index === 0}>
@@ -456,10 +472,11 @@ const ProductExtraOptionDetailsUI = (props) => {
                     onChange={enabled => handleChangeSubOptionEnable(enabled, subOption.id)}
                   />
                 </EnableWrapper>
-                <DropDownWrapper>
+                <ActionSelectorWrapper>
                   <DropdownButton
+                    className='product_actions'
                     menuAlign={theme?.rtl ? 'left' : 'right'}
-                    title={ActionIcon}
+                    title={<ThreeDots />}
                     id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                   >
                     <Dropdown.Item
@@ -472,83 +489,66 @@ const ProductExtraOptionDetailsUI = (props) => {
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => handleDeteteClick(subOption.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
                   </DropdownButton>
-                </DropDownWrapper>
+                </ActionSelectorWrapper>
               </ActionsContainer>
             </RightSubOptionContent>
           </SubOptionContainer>
         ))}
 
-        <AdddSubOptionForm onSubmit={handleSubmit(handleAddOption)} className='add-product-option'>
-          <LeftSubOptionContent>
-            <SubOptionImage
-              onClick={() => handleClickSubOptionImage('add_suboption_image')}
-            >
-              <ExamineClick
-                onFiles={files => handleSubOptionFiles(files, null)}
-                childId='add_suboption_image'
-                accept='image/png, image/jpeg, image/jpg'
-                disabled={optionState.loading}
+        {isAddForm && (
+          <AdddSubOptionForm onSubmit={handleSubmit(handleAddOption)} className='add-product-option'>
+            <LeftSubOptionContent>
+              <SubOptionImage
+                onClick={() => handleClickSubOptionImage('add_suboption_image')}
               >
-                <DragAndDrop
-                  onDrop={dataTransfer => handleSubOptionFiles(dataTransfer.files, 'add_suboption_image')}
+                <ExamineClick
+                  onFiles={files => handleSubOptionFiles(files, null)}
+                  childId='add_suboption_image'
                   accept='image/png, image/jpeg, image/jpg'
                   disabled={optionState.loading}
                 >
-                  {
-                    (changesState?.result?.image && editSubOptionId === null)
-                      ? (<img src={changesState?.result?.image} alt='sub option image' loading='lazy' />)
-                      : (changesState?.changes?.image && editSubOptionId === null) && (<img src={changesState?.changes?.image} alt='sub option image' loading='lazy' />)
-                  }
-                  <UploadImageIconContainer>
-                    <UploadImageIcon small>
-                      <BiImage />
-                    </UploadImageIcon>
-                  </UploadImageIconContainer>
-                </DragAndDrop>
-              </ExamineClick>
-            </SubOptionImage>
-            <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
-              <label>{t('NAME', 'Name')}</label>
-              <Input
-                name='name'
-                autoComplete='off'
-                placeholder={t('NAME', 'Name')}
-                value={
-                  ((editSubOptionId === null) && changesState?.changes?.name) || ''
-                }
-                onChange={(e) => handleChangeInput(e, null)}
-                ref={register({
-                  required: t('NAME_REQUIRED', 'The name is required.')
-                })}
-              />
-            </InputWrapper>
-          </LeftSubOptionContent>
-          <RightSubOptionContent>
-            <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
-              <label>{t('PRICE', 'Price')}</label>
-              <Input
-                name='price'
-                placeholder={t('PRICE', 'Price')}
-                value={
-                  ((editSubOptionId === null) && changesState?.changes?.price) || ''
-                }
-                onChange={(e) => handleChangeInput(e, null)}
-                onKeyPress={(e) => {
-                  if (!/^[0-9.]$/.test(e.key)) {
-                    e.preventDefault()
-                  }
-                  handleEnterAddSuboption(e)
-                }}
-              />
-            </InputWrapper>
-            {(typeof settingChangeState?.changes?.with_half_option !== 'undefined' ? settingChangeState?.changes?.with_half_option : optionState?.option?.with_half_option) && (
+                  <DragAndDrop
+                    onDrop={dataTransfer => handleSubOptionFiles(dataTransfer.files, 'add_suboption_image')}
+                    accept='image/png, image/jpeg, image/jpg'
+                    disabled={optionState.loading}
+                  >
+                    {
+                      (changesState?.result?.image && editSubOptionId === null)
+                        ? (<img src={changesState?.result?.image} alt='sub option image' loading='lazy' />)
+                        : (changesState?.changes?.image && editSubOptionId === null) && (<img src={changesState?.changes?.image} alt='sub option image' loading='lazy' />)
+                    }
+                    <UploadImageIconContainer>
+                      <UploadImageIcon small>
+                        <BiImage />
+                      </UploadImageIcon>
+                    </UploadImageIconContainer>
+                  </DragAndDrop>
+                </ExamineClick>
+              </SubOptionImage>
               <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
-                <label>{t('HALF_PRICE', 'Half price')}</label>
+                <label>{t('NAME', 'Name')}</label>
                 <Input
-                  name='half_price'
-                  placeholder={t('HALF_PRICE', 'Half price')}
+                  name='name'
+                  autoComplete='off'
+                  placeholder={t('NAME', 'Name')}
                   value={
-                    ((editSubOptionId === null) && changesState?.changes?.half_price) || ''
+                    ((editSubOptionId === null) && changesState?.changes?.name) || ''
+                  }
+                  onChange={(e) => handleChangeInput(e, null)}
+                  ref={register({
+                    required: t('NAME_REQUIRED', 'The name is required.')
+                  })}
+                />
+              </InputWrapper>
+            </LeftSubOptionContent>
+            <RightSubOptionContent>
+              <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
+                <label>{t('PRICE', 'Price')}</label>
+                <Input
+                  name='price'
+                  placeholder={t('PRICE', 'Price')}
+                  value={
+                    ((editSubOptionId === null) && changesState?.changes?.price) || ''
                   }
                   onChange={(e) => handleChangeInput(e, null)}
                   onKeyPress={(e) => {
@@ -559,42 +559,71 @@ const ProductExtraOptionDetailsUI = (props) => {
                   }}
                 />
               </InputWrapper>
-            )}
-            {(typeof settingChangeState?.changes?.allow_suboption_quantity !== 'undefined' ? settingChangeState?.changes?.allow_suboption_quantity : optionState?.option?.allow_suboption_quantity) && (
-              <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
-                <label>{t('MAX', 'Max')}</label>
-                <Input
-                  name='max'
-                  placeholder={t('MAX', 'Max')}
-                  value={
-                    ((editSubOptionId === null) && changesState?.changes?.max) || ''
-                  }
-                  onChange={(e) => handleChangeInput(e, null)}
-                  onKeyPress={(e) => {
-                    if (!/^[0-9.]$/.test(e.key)) {
-                      e.preventDefault()
+              {(typeof settingChangeState?.changes?.with_half_option !== 'undefined' ? settingChangeState?.changes?.with_half_option : optionState?.option?.with_half_option) && (
+                <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
+                  <label>{t('HALF_PRICE', 'Half price')}</label>
+                  <Input
+                    name='half_price'
+                    placeholder={t('HALF_PRICE', 'Half price')}
+                    value={
+                      ((editSubOptionId === null) && changesState?.changes?.half_price) || ''
                     }
-                    handleEnterAddSuboption(e)
-                  }}
+                    onChange={(e) => handleChangeInput(e, null)}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9.]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                      handleEnterAddSuboption(e)
+                    }}
+                  />
+                </InputWrapper>
+              )}
+              {(typeof settingChangeState?.changes?.allow_suboption_quantity !== 'undefined' ? settingChangeState?.changes?.allow_suboption_quantity : optionState?.option?.allow_suboption_quantity) && (
+                <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
+                  <label>{t('MAX', 'Max')}</label>
+                  <Input
+                    name='max'
+                    placeholder={t('MAX', 'Max')}
+                    value={
+                      ((editSubOptionId === null) && changesState?.changes?.max) || ''
+                    }
+                    onChange={(e) => handleChangeInput(e, null)}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9.]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                      handleEnterAddSuboption(e)
+                    }}
+                  />
+                </InputWrapper>
+              )}
+              <InputWrapper maxHeight>
+                <div
+                  name='preselected'
+                  className='default'
                 />
               </InputWrapper>
-            )}
-            <InputWrapper maxHeight>
-              <div
-                name='preselected'
-                className='default'
-              />
-            </InputWrapper>
-            <ActionsContainer>
-              <IconButton
-                color='primary'
-                type='submit'
-              >
-                <PlusCircle />
-              </IconButton>
-            </ActionsContainer>
-          </RightSubOptionContent>
-        </AdddSubOptionForm>
+              <ActionsContainer>
+                <IconButton
+                  color='primary'
+                  type='submit'
+                >
+                  <PlusCircle />
+                </IconButton>
+              </ActionsContainer>
+            </RightSubOptionContent>
+          </AdddSubOptionForm>
+        )}
+        {!isAddForm && (
+          <AddNewOptionButton>
+            <span
+              className='add-option-btn'
+              onClick={() => setIsAddForm(true)}
+            >
+              {t('ADD_SUBOPTION', 'Add suboption')}
+            </span>
+          </AddNewOptionButton>
+        )}
       </ModifierOptionsContainer>
       <Alert
         width='700px'
