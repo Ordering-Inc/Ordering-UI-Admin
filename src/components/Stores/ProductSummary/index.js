@@ -69,15 +69,15 @@ export const ProductSummary = (props) => {
     {
       key: 'product_images',
       value: t('PRODUCT_IMAGES', 'Product images')
-    },
-    {
-      key: 'custom_fields',
-      value: t('CUSTOM_FIELDS', 'Custom fields')
-    },
-    {
-      key: 'personalization',
-      value: t('PERSONALIZATION', 'Personalization')
     }
+    // {
+    //   key: 'custom_fields',
+    //   value: t('CUSTOM_FIELDS', 'Custom fields')
+    // },
+    // {
+    //   key: 'personalization',
+    //   value: t('PERSONALIZATION', 'Personalization')
+    // }
   ]
 
   const handleDeleteClick = () => {
@@ -128,6 +128,16 @@ export const ProductSummary = (props) => {
                   onClick={() => setIsProductPreview(true)}
                 >
                   {t('PREVIEW', 'Preview')}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => handleShowOption('custom_fields')}
+                >
+                  {t('CUSTOM_FIELDS', 'Custom fields')}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => handleShowOption('personalization')}
+                >
+                  {t('PERSONALIZATION', 'Personalization')}
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => handleDeleteClick()}
