@@ -74,12 +74,6 @@ const SingleBusinessSubCateogriesUI = (props) => {
   return (
     <AccordionSection
       ref={containerRef}
-      onDrop={e => handleDrop(e)}
-      onDragOver={e => handleDragOverChange(e)}
-      onDragEnd={e => handleDragEndChange(e)}
-      className='draggable-category'
-      data-index={category?.id}
-      isAccept={dataSelected && dataSelected === category?.id.toString()}
     >
       {isSkeleton ? (
         <>
@@ -98,6 +92,13 @@ const SingleBusinessSubCateogriesUI = (props) => {
             <AccordionItem
               margin={20 * index}
               active={!isSkeleton && (category?.id === categorySelected?.id)}
+
+              onDrop={e => handleDrop(e)}
+              onDragOver={e => handleDragOverChange(e)}
+              onDragEnd={e => handleDragEndChange(e)}
+              className='draggable-category'
+              data-index={category?.id}
+              isAccept={dataSelected && dataSelected === category?.id.toString()}
             >
               <div>
                 <img
@@ -125,8 +126,8 @@ const SingleBusinessSubCateogriesUI = (props) => {
               maxHeight: !setActive && '0px'
             }}
           >
-            {category?.subcategories && (
-              category.subcategories.map(subCategory => (
+            {category?.subcategories?.length > 0 && (
+              category.subcategories.sort((a, b) => a.rank - b.rank).map(subCategory => (
                 <SingleBusinessSubCateogries
                   {...props}
                   key={subCategory.id}
