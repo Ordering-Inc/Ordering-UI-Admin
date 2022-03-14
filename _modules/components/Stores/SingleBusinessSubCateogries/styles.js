@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -47,7 +47,7 @@ var Accordion = function Accordion(props) {
 
 exports.Accordion = Accordion;
 
-var AccordionItem = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 10px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    align-items: center;\n    img {\n      opacity: 0;\n    }\n    svg,\n    img {\n      ", "\n    }\n\n    span {\n      font-size: 14px;\n      font-weight: 500;\n    }\n  }\n\n  ", "\n\n  ", "\n  \n  border-radius: 8px;\n  &:hover {\n    background-color: ", ";\n\n    > div {\n      img {\n        opacity: 1;\n      }\n    }\n  }\n\n  ", "\n"])), function (props) {
+var AccordionItem = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 10px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    align-items: center;\n    img {\n      opacity: 0;\n    }\n    svg,\n    img {\n      ", "\n    }\n\n    span {\n      font-size: 14px;\n      font-weight: 500;\n    }\n  }\n\n  ", "\n\n  ", "\n  \n  border-radius: 8px;\n  &:hover {\n    background-color: ", ";\n\n    > div {\n      img {\n        opacity: 1;\n      }\n    }\n  }\n  ", "\n\n  ", "\n\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin-right: 10px;\n      "])));
@@ -67,8 +67,13 @@ var AccordionItem = _styledComponents.default.div(_templateObject5 || (_template
 }, function (props) {
   return props.theme.colors.secundary;
 }, function (_ref5) {
-  var active = _ref5.active;
-  return active && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    background-color: ", " !important;\n    border: 1px solid ", ";\n  "])), function (props) {
+  var isAccept = _ref5.isAccept;
+  return isAccept && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    border-top: 1px solid ", ";\n    border-radius: unset;\n  "])), function (props) {
+    return props.theme.colors.primary;
+  });
+}, function (_ref6) {
+  var active = _ref6.active;
+  return active && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background-color: ", " !important;\n    border: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.lightPrimary;
   }, function (props) {
     return props.theme.colors.primary;
@@ -77,6 +82,6 @@ var AccordionItem = _styledComponents.default.div(_templateObject5 || (_template
 
 exports.AccordionItem = AccordionItem;
 
-var AccordionContent = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  overflow: hidden;\n  transition: max-height 0.6s ease;\n  width: 100%;\n"])));
+var AccordionContent = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  overflow: hidden;\n  transition: max-height 0.6s ease;\n  width: 100%;\n"])));
 
 exports.AccordionContent = AccordionContent;
