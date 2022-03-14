@@ -94,11 +94,16 @@ export const AccordionItem = styled.div`
       }
     }
   }
+  ${({ isAccept }) => isAccept && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-radius: unset;
+  `}
 
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.lightPrimary} !important;
     border: 1px solid ${props => props.theme.colors.primary};
   `}
+
 `
 
 export const AccordionContent = styled.div`
