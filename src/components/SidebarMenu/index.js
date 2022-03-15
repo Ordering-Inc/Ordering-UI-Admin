@@ -187,6 +187,8 @@ export const SidebarMenu = (props) => {
     }
   ]
 
+  const businessOwnerIntelligencesIncluded = [1]
+
   const deliverySubmenus = [
     {
       id: 1,
@@ -305,6 +307,7 @@ export const SidebarMenu = (props) => {
                     <Accordion.Collapse eventKey='1'>
                       <MenuContent>
                         {ordersSubMenus.map(item => (
+                          !(sessionState?.user?.level === 2 && item.pageName === 'drivers') &&
                           !(sessionState?.user?.level === 5 && item.pageName === 'drivers') &&
                           !(sessionState?.user?.level === 5 && item.pageName === 'deliveries') && (
                             <SubMenu
@@ -409,15 +412,20 @@ export const SidebarMenu = (props) => {
                       </ContextAwareToggle>
                       <Accordion.Collapse eventKey='5'>
                         <MenuContent>
-                          {businessIntelligenceSubMenus.map(item => (
-                            <SubMenu
-                              key={item.id}
-                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                              onClick={() => handleGoToPage({ page: item.pageName })}
-                            >
-                              {item.title}
-                            </SubMenu>
-                          ))}
+                          {
+                            (sessionState?.user?.level === 2
+                              ? businessIntelligenceSubMenus.filter(menu => businessOwnerIntelligencesIncluded.includes(menu.id))
+                              : businessIntelligenceSubMenus
+                            ).map(item => (
+                              <SubMenu
+                                key={item.id}
+                                active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                                onClick={() => handleGoToPage({ page: item.pageName })}
+                              >
+                                {item.title}
+                              </SubMenu>
+                            ))
+                          }
                         </MenuContent>
                       </Accordion.Collapse>
                     </MenuContainer>
@@ -561,14 +569,16 @@ export const SidebarMenu = (props) => {
                     <span>{t('SUPPORT', 'Support')}</span>
                   </Button>
                 )}
-                <Button
-                  className='d-flex align-items-center'
-                  variant={false}
-                  onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
-                >
-                  <BoxArrowUpRight />
-                  <span>{t('MARKETPLACE', 'Marketplace')}</span>
-                </Button>
+                {sessionState?.user?.level === 0 && (
+                  <Button
+                    className='d-flex align-items-center'
+                    variant={false}
+                    onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
+                  >
+                    <BoxArrowUpRight />
+                    <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                  </Button>
+                )}
               </div>
             </SidebarContent>
             <UserInfo
