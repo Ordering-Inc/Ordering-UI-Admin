@@ -165,7 +165,7 @@ var BusinessesList = function BusinessesList(props) {
     }
   }, t('ADD_NEW_STORE', 'Add new store')), pagination && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, (pagination === null || pagination === void 0 ? void 0 : pagination.total) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
-    totalPages: pagination.totalPages,
+    totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),
     handleChangePage: handleChangePage,
     handleChangePageSize: handleChangePageSize
   })))), viewMethod === 'card' && /*#__PURE__*/_react.default.createElement(_styles2.BusinessCardContainer, null, businessList.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
