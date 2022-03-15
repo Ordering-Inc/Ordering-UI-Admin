@@ -65,12 +65,12 @@ const BusinessBrandListingUI = (props) => {
   }
 
   const handleOpenSideBar = (id) => {
+    setSelectedType('general')
     if (id) {
       const brand = brandListState?.brands.find(item => item.id === id)
       setSelectedBrand(brand)
     } else {
       setSelectedBrand(null)
-      setSelectedType('general')
     }
     setOpenDetail(true)
   }
