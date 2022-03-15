@@ -62,26 +62,26 @@ export const BusinessLocation = (props) => {
       method: 'GET'
     })
     const result = await response.json()
-    setFormState({
-      ...formState,
+    setFormState(prevState => ({
+      ...prevState,
       changes: {
-        ...formState?.changes,
+        ...prevState?.changes,
         address: address?.address,
         location: { ...address?.location, zipcode: address?.zipcode ? address.zipcode : -1, zoom: 15 },
         timezone: result?.timeZoneId
       }
-    })
+    }))
   }
 
   const handleChangeCenter = (address) => {
-    setFormState({
-      ...formState,
+    setFormState(prevState => ({
+      ...prevState,
       changes: {
-        ...formState?.changes,
+        ...prevState?.changes,
         address: business?.address,
         location: { ...business?.location, lat: address?.lat(), lng: address?.lng(), zoom: 15 }
       }
-    })
+    }))
   }
 
   useEffect(() => {
@@ -116,7 +116,7 @@ export const BusinessLocation = (props) => {
         </WrapperCitySelector>
         <WrapperTimezone>
           <p>{t('TIMEZONE', 'Timezone')}</p>
-          <p>{business?.timezone}</p>
+          <p>{formState.changes?.timezone ?? business?.timezone ?? ''}</p>
         </WrapperTimezone>
       </Section>
 
