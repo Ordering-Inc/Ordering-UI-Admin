@@ -122,6 +122,8 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
   };
 
   var handleOpenSideBar = function handleOpenSideBar(id) {
+    setSelectedType('general');
+
     if (id) {
       var brand = brandListState === null || brandListState === void 0 ? void 0 : brandListState.brands.find(function (item) {
         return item.id === id;
@@ -129,7 +131,6 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
       setSelectedBrand(brand);
     } else {
       setSelectedBrand(null);
-      setSelectedType('general');
     }
 
     setOpenDetail(true);
