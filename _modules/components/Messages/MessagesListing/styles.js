@@ -21,7 +21,7 @@ var MessagesListingContainer = _styledComponents.default.div(_templateObject || 
 
 exports.MessagesListingContainer = MessagesListingContainer;
 
-var MessagesContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  margin-top: 0px;\n\n  @media (min-width: 760px) {\n    margin-top: 15px\n  }\n\n  @media (min-width: 1024px) {\n    flex-direction: row;\n    height: calc(100vh - 105px);\n  }\n"])));
+var MessagesContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  margin-top: 0px;\n\n  @media (min-width: 760px) {\n    margin-top: 15px\n  }\n\n  @media (min-width: 1024px) {\n    flex-direction: row;\n    height: calc(var(--vh, 1vh) * 100 - 105px);\n  }\n"])));
 
 exports.MessagesContent = MessagesContent;
 

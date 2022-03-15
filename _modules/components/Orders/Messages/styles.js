@@ -11,7 +11,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -161,23 +161,27 @@ var SendForm = _styledComponents.default.div(_templateObject39 || (_templateObje
 
 exports.SendForm = SendForm;
 
-var Send = _styledComponents.default.form(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  align-items: center;\n  display: flex;\n  margin-top: 8px;\n  height: auto;\n  max-width: 1200px;\n  justify-content: space-between;\n  column-gap: 10px;\n  width: 100%;\n  input {\n    padding-top: 10px;\n    padding-bottom: 10px;\n    width: 100%;\n    flex: 1;\n  }\n"])));
+var Send = _styledComponents.default.form(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  align-items: center;\n  display: flex;\n  margin-top: 8px;\n  height: auto;\n  max-width: 1200px;\n  justify-content: space-between;\n  width: 100%;\n  input {\n    padding-top: 10px;\n    padding-bottom: 10px;\n    width: 100%;\n    flex: 1;\n  }\n"])));
 
 exports.Send = Send;
 
-var WrapperSendInput = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  box-sizing: border-box;\n\n  > input {\n    border: 1px solid ", ";\n    padding-right: 45px;\n    ", "\n  }\n"])), function (props) {
+var WrapperSendInput = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  box-sizing: border-box;\n  ", "\n\n  > input {\n    border: 1px solid ", ";\n    padding-right: 45px;\n    ", "\n  }\n"])), function (props) {
+  var _props$theme9;
+
+  return (_props$theme9 = props.theme) !== null && _props$theme9 !== void 0 && _props$theme9.rtl ? (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "])));
+}, function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n      padding-left: 45px;\n      padding-right: 15px;\n    "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n      padding-left: 45px;\n      padding-right: 15px;\n    "])));
 });
 
 exports.WrapperSendInput = WrapperSendInput;
 
-var SendImage = _styledComponents.default.label(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  width: 25px;\n  height: 25px;\n  \n  position: absolute;\n  top: 10px;\n  right: 10px;\n\n  input {\n    display: none;\n  }\n\n  svg {\n    color: #B1BCCC;\n    font-size: 20px;\n    cursor: pointer;\n  }\n"])));
+var SendImage = _styledComponents.default.label(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  width: 25px;\n  height: 25px;\n  \n  position: absolute;\n  top: 10px;\n  right: 10px;\n\n  input {\n    display: none;\n  }\n\n  svg {\n    color: #B1BCCC;\n    font-size: 20px;\n    cursor: pointer;\n  }\n"])));
 
 exports.SendImage = SendImage;
 
-var WrapperDeleteImage = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 5px;\n  right: 10px;\n\n  img {\n    width: 30px;\n    height: 30px;\n    &:disabled {\n    cursor: not-allowed;\n    }\n    border-radius: 8px;\n  }\n\n  svg {\n    color: black;\n  }\n\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: ", ";\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n  }\n"])), function (props) {
+var WrapperDeleteImage = _styledComponents.default.div(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 5px;\n  right: 10px;\n\n  img {\n    width: 30px;\n    height: 30px;\n    &:disabled {\n    cursor: not-allowed;\n    }\n    border-radius: 8px;\n  }\n\n  svg {\n    color: black;\n  }\n\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: ", ";\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
@@ -185,21 +189,21 @@ var WrapperDeleteImage = _styledComponents.default.div(_templateObject44 || (_te
 
 exports.WrapperDeleteImage = WrapperDeleteImage;
 
-var WrapperSendMessageButton = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  white-space: nowrap;\n  width: fit-content;\n\n  button {\n    height: 43px;\n    svg {\n       width: 1.5em;\n       height: 1.5em; \n       vertical-align: middle;\n       color: white;\n       ", "\n    }\n\n    span {\n      display: none;\n    }\n\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n\n  @media (min-width: 480px) {\n    button {\n      svg {\n        margin-right: 10px;\n      }\n      span {\n        display: inline;\n      }\n    }\n  }\n"])), function (props) {
-  var _props$theme9;
+var WrapperSendMessageButton = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  white-space: nowrap;\n  width: fit-content;\n\n  button {\n    height: 43px;\n    svg {\n       width: 1.5em;\n       height: 1.5em; \n       vertical-align: middle;\n       color: white;\n       ", "\n    }\n\n    span {\n      display: none;\n    }\n\n    &:disabled {\n      opacity: 0.5;\n      cursor: not-allowed;\n    }\n  }\n\n  @media (min-width: 480px) {\n    button {\n      svg {\n        margin-right: 10px;\n      }\n      span {\n        display: inline;\n      }\n    }\n  }\n"])), function (props) {
+  var _props$theme10;
 
-  return ((_props$theme9 = props.theme) === null || _props$theme9 === void 0 ? void 0 : _props$theme9.rtl) && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0px;\n        transform: rotate(270deg);\n      "])));
+  return ((_props$theme10 = props.theme) === null || _props$theme10 === void 0 ? void 0 : _props$theme10.rtl) && (0, _styledComponents.css)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n        margin-right: 0px;\n        transform: rotate(270deg);\n      "])));
 });
 
 exports.WrapperSendMessageButton = WrapperSendMessageButton;
 
-var WrapperHitoryHeader = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  align-items: center;\n"])));
+var WrapperHitoryHeader = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  align-items: center;\n"])));
 
 exports.WrapperHitoryHeader = WrapperHitoryHeader;
 
-var TabItem = _styledComponents.default.div(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  padding: 5px 10px;\n  cursor: pointer;\n  text-align: center;\n  color: #909BA9;\n  \n  ", "\n\n  @media (max-width: 576px) {\n    padding: 5px 10px;\n    font-size: 14px;\n  }\n"])), function (_ref5) {
+var TabItem = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  padding: 5px 10px;\n  cursor: pointer;\n  text-align: center;\n  color: #909BA9;\n  \n  ", "\n\n  @media (max-width: 576px) {\n    padding: 5px 10px;\n    font-size: 14px;\n  }\n"])), function (_ref5) {
   var active = _ref5.active;
-  return active && (0, _styledComponents.css)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n    border-bottom: 1px solid ", ";\n    color: ", ";\n    font-weight: 600;\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["\n    border-bottom: 1px solid ", ";\n    color: ", ";\n    font-weight: 600;\n  "])), function (props) {
     var _props$theme$colors2;
 
     return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
@@ -212,53 +216,53 @@ var TabItem = _styledComponents.default.div(_templateObject48 || (_templateObjec
 
 exports.TabItem = TabItem;
 
-var SkeletonHitory = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  column-gap: 20px;\n\n  @media (max-width: 576px) {\n    span {\n      width: 250px !important;\n    }\n  }\n"])));
+var SkeletonHitory = _styledComponents.default.div(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  column-gap: 20px;\n\n  @media (max-width: 576px) {\n    span {\n      width: 250px !important;\n    }\n  }\n"])));
 
 exports.SkeletonHitory = SkeletonHitory;
 
-var WrapperLogistics = _styledComponents.default.div(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral([""])));
+var WrapperLogistics = _styledComponents.default.div(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral([""])));
 
 exports.WrapperLogistics = WrapperLogistics;
 
-var WrapperLogisticInformation = _styledComponents.default.div(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral([""])));
+var WrapperLogisticInformation = _styledComponents.default.div(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral([""])));
 
 exports.WrapperLogisticInformation = WrapperLogisticInformation;
 
-var HeaderInfo = _styledComponents.default.div(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n"])), function (props) {
+var HeaderInfo = _styledComponents.default.div(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 
 exports.HeaderInfo = HeaderInfo;
 
-var ChatHeader = _styledComponents.default.div(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  padding-bottom: 15px;\n"])));
+var ChatHeader = _styledComponents.default.div(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 100%;\n  padding-bottom: 15px;\n"])));
 
 exports.ChatHeader = ChatHeader;
 
-var SearchAndDetailControlContainer = _styledComponents.default.div(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["\n  display: flex;\n  column-gap: 10px;\n  align-items: center;\n"])));
+var SearchAndDetailControlContainer = _styledComponents.default.div(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["\n  display: flex;\n  column-gap: 10px;\n  align-items: center;\n"])));
 
 exports.SearchAndDetailControlContainer = SearchAndDetailControlContainer;
 
-var MessagesSearch = _styledComponents.default.div(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["\n  position: relative;\n\n  img {\n    position: absolute;\n    top: 13px;\n    left: 14px;\n  }\n\n  input {\n    width: 200px;\n    border: 1px solid #1C202E;\n    border-radius: 22px;\n    outline: none;\n    padding: 8px;\n    padding-left: 40px;\n    font-size: 15px;\n    background: transparent;\n\n    &::placeholder {\n      color: #182964;\n    }\n  }\n"])));
+var MessagesSearch = _styledComponents.default.div(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["\n  position: relative;\n\n  img {\n    position: absolute;\n    top: 13px;\n    left: 14px;\n  }\n\n  input {\n    width: 200px;\n    border: 1px solid #1C202E;\n    border-radius: 22px;\n    outline: none;\n    padding: 8px;\n    padding-left: 40px;\n    font-size: 15px;\n    background: transparent;\n\n    &::placeholder {\n      color: #182964;\n    }\n  }\n"])));
 
 exports.MessagesSearch = MessagesSearch;
 
-var OrderDetailIconButton = _styledComponents.default.button(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["\n  outline: none;\n  border: none;\n  background: #b9bcc7;\n  &:active {\n    background: ", ";\n  }\n  border-radius: 5px;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  padding: 5px;\n\n  svg {\n    font-size: 30px;\n  }\n"])), function () {
+var OrderDetailIconButton = _styledComponents.default.button(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["\n  outline: none;\n  border: none;\n  background: #b9bcc7;\n  &:active {\n    background: ", ";\n  }\n  border-radius: 5px;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  padding: 5px;\n\n  svg {\n    font-size: 30px;\n  }\n"])), function () {
   return (0, _polished.darken)(0.07, '#b9bcc7');
 });
 
 exports.OrderDetailIconButton = OrderDetailIconButton;
 
-var ChatContactInfoContainer = _styledComponents.default.div(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n\n  ", "\n"])), function (_ref6) {
+var ChatContactInfoContainer = _styledComponents.default.div(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n\n  ", "\n"])), function (_ref6) {
   var disabled = _ref6.disabled;
-  return disabled && (0, _styledComponents.css)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["\n    opacity: 0.2;\n  "])));
+  return disabled && (0, _styledComponents.css)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["\n    opacity: 0.2;\n  "])));
 });
 
 exports.ChatContactInfoContainer = ChatContactInfoContainer;
 
-var InfoBlock = _styledComponents.default.div(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["\n  ", "\n  > p {\n    margin: 0px;\n\n    &:first-child {\n      color: ", ";\n      font-size: 14px;\n      font-weight: 500;\n    }\n    &:last-child {\n      color: ", ";\n      font-size: 12px;\n    }\n  }\n"])), function (props) {
-  var _props$theme10;
+var InfoBlock = _styledComponents.default.div(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["\n  ", "\n  > p {\n    margin: 0px;\n\n    &:first-child {\n      color: ", ";\n      font-size: 14px;\n      font-weight: 500;\n    }\n    &:last-child {\n      color: ", ";\n      font-size: 12px;\n    }\n  }\n"])), function (props) {
+  var _props$theme11;
 
-  return (_props$theme10 = props.theme) !== null && _props$theme10 !== void 0 && _props$theme10.rtl ? (0, _styledComponents.css)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "])));
+  return (_props$theme11 = props.theme) !== null && _props$theme11 !== void 0 && _props$theme11.rtl ? (0, _styledComponents.css)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "])));
 }, function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
@@ -267,21 +271,21 @@ var InfoBlock = _styledComponents.default.div(_templateObject60 || (_templateObj
 
 exports.InfoBlock = InfoBlock;
 
-var SendToContainer = _styledComponents.default.div(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["\n  p {\n    color: ", ";\n    margin-bottom: 2px;\n    text-align: end;\n    font-size: 12px;\n  }\n\n  ", "\n"])), function (props) {
+var SendToContainer = _styledComponents.default.div(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["\n  p {\n    color: ", ";\n    margin-bottom: 2px;\n    text-align: end;\n    font-size: 12px;\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.secundaryContrast;
 }, function (_ref7) {
   var isReceived = _ref7.isReceived;
-  return isReceived && (0, _styledComponents.css)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["\n    text-align: initial;\n  "])));
+  return isReceived && (0, _styledComponents.css)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["\n    text-align: initial;\n  "])));
 });
 
 exports.SendToContainer = SendToContainer;
 
-var MessageSender = _styledComponents.default.p(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["\n  margin-bottom: 5px;\n  text-align: center;\n"])));
+var MessageSender = _styledComponents.default.p(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["\n  margin-bottom: 5px;\n  text-align: center;\n"])));
 
 exports.MessageSender = MessageSender;
 
-var QuickMessageWrapper = _styledComponents.default.div(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  margin-top: 20px;\n\n  button {\n    margin-bottom: 6px;\n    margin-right: 12px;\n    line-height: 22px;\n    font-size: 12px;\n    padding: 0 10px;\n\n    ", "\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["\n      margin-right: 0px;\n      margin-left: 12px;\n    "])));
+var QuickMessageWrapper = _styledComponents.default.div(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  margin-top: 20px;\n\n  button {\n    margin-bottom: 6px;\n    margin-right: 12px;\n    line-height: 22px;\n    font-size: 12px;\n    padding: 0 10px;\n\n    ", "\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["\n      margin-right: 0px;\n      margin-left: 12px;\n    "])));
 });
 
 exports.QuickMessageWrapper = QuickMessageWrapper;

@@ -110,10 +110,12 @@ var BusinessInfo = _styledComponents.default.div(_templateObject16 || (_template
 exports.BusinessInfo = BusinessInfo;
 var CustomerInfo = (0, _styledComponents.default)(BusinessInfo)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  p {\n    max-width: 125px;\n  }\n"])));
 exports.CustomerInfo = CustomerInfo;
-var StatusInfo = (0, _styledComponents.default)(BusinessInfo)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  .info {\n    margin: 0;\n    .bold {\n      max-width: 150px;\n    }\n  }\n"])));
+
+var StatusInfo = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  .bold {\n    max-width: 150px;\n    font-weight: 600;\n    margin: 0;\n  }\n"])));
+
 exports.StatusInfo = StatusInfo;
 
-var DriversInfo = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  > div {\n    > div {\n      border: none;\n      &:first-child {\n        .driver-photo {\n          width: 45px;\n          height: 45px;\n        }\n        .driver-info {\n          p {\n            color: ", ";\n            font-size: 14px;\n            font-weight: 600;\n          }\n          span {\n            display: initial;\n          }\n        }\n      }\n    }\n  }\n  ", "\n"])), function (props) {
+var DriversInfo = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  .select {\n    > div:first-child {\n      padding-left: 0;\n      padding-right: 0;\n    }\n  }\n  > div {\n    > div {\n      border: none;\n      &:first-child {\n        .driver-photo {\n          width: 45px;\n          height: 45px;\n        }\n        .driver-info {\n          p {\n            color: ", ";\n            font-size: 14px;\n            font-weight: 600;\n          }\n          span {\n            display: initial;\n          }\n        }\n      }\n    }\n  }\n  ", "\n"])), function (props) {
   var _props$theme$colors6;
 
   return (_props$theme$colors6 = props.theme.colors) === null || _props$theme$colors6 === void 0 ? void 0 : _props$theme$colors6.headingColor;
