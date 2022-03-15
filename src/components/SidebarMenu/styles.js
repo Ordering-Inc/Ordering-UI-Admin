@@ -9,7 +9,7 @@ export const SidebarContainer = styled.div`
   background: ${props => props.theme.colors.backgroundPage};
   z-index: 1000;
   transition: all 0.25s ease;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: auto;
   width: 100vw;
   ${({ isCollapse }) => isCollapse && css`
@@ -17,7 +17,6 @@ export const SidebarContainer = styled.div`
   `}
 
   @media (min-width: 768px) {
-    overflow: hidden;
     position: relative;
     width: 240px;
     ${({ isCollapse }) => isCollapse && css`
@@ -62,7 +61,6 @@ export const SidebarContainer = styled.div`
 export const SidebarInnerContainer = styled.div`
   height: 100%;
   @media (min-width: 760px) {
-    height: 100vh;
     position: sticky;
     top: 0px;
     ${props => props.theme?.rtl ? css`
