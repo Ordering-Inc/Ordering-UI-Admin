@@ -138,7 +138,6 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     selectedPromotion: selectedPromotion,
     handleOpenDetails: handleOpenDetails
   }))), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    sidebarId: "promotion_details",
     defaultSideBarWidth: 600 + moveDistance,
     moveDistance: moveDistance,
     open: openDetails,

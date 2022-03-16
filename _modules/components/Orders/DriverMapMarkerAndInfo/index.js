@@ -44,9 +44,7 @@ var DriverMapMarkerAndInfo = function DriverMapMarkerAndInfo(props) {
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      parseDate = _useUtils2$.parseDate,
-      optimizeImage = _useUtils2$.optimizeImage;
+      parseDate = _useUtils2[0].parseDate;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -62,7 +60,7 @@ var DriverMapMarkerAndInfo = function DriverMapMarkerAndInfo(props) {
 
   (0, _react.useEffect)(function () {
     if (!infoShow) return;
-    setInfoTop("-".concat(infoRef.current.scrollHeight + 55, "px"));
+    setInfoTop("-".concat(infoRef.current.scrollHeight + 30, "px"));
   }, [infoShow]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, infoShow && /*#__PURE__*/_react.default.createElement(_styles.DriverInfo, {
     ref: infoRef,
@@ -94,7 +92,7 @@ var DriverMapMarkerAndInfo = function DriverMapMarkerAndInfo(props) {
       return setInfoShow(false);
     }
   }, driver.photo ? /*#__PURE__*/_react.default.createElement(_styles.MapMarkerImg, {
-    bgimage: optimizeImage(driver.photo, 'h_50,c_limit')
+    bgimage: driver.photo
   }) : /*#__PURE__*/_react.default.createElement(_styles.MapMarkerImg, {
     bgimage: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver
   })));

@@ -27,7 +27,7 @@ var Header = _styledComponents.default.div(_templateObject2 || (_templateObject2
 
 exports.Header = Header;
 
-var ConditionItem = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n  padding: 12px 0;\n\n  > div {\n    display: flex;\n    align-items: center;\n\n    span {\n      font-size: 14px;\n      ", "\n    }\n  }\n"])), function (props) {
+var ConditionItem = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n  padding: 12px 0;\n\n  > div {\n    display: flex;\n    align-items: center;\n\n    span {\n      font-size: 14px;\n      ", "\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   var _props$theme;

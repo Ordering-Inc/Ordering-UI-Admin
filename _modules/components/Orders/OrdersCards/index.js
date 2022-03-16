@@ -9,6 +9,8 @@ exports.OrdersCards = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _moment = _interopRequireDefault(require("moment"));
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styledComponents = require("styled-components");
@@ -71,6 +73,11 @@ var OrdersCards = function OrdersCards(props) {
       _useUtils2$ = _useUtils2[0],
       parseDate = _useUtils2$.parseDate,
       optimizeImage = _useUtils2$.optimizeImage;
+
+  var _useState = (0, _react.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      currentTime = _useState2[0],
+      setCurrentTime = _useState2[1];
 
   var handleChangePage = function handleChangePage(page) {
     getPageOrders(pagination.pageSize, page);
@@ -164,6 +171,32 @@ var OrdersCards = function OrdersCards(props) {
     return objectStatus && objectStatus;
   };
 
+  var getDelayTime = function getDelayTime(order) {
+    // targetMin = delivery_datetime  + eta_time - now()
+    var _delivery = order === null || order === void 0 ? void 0 : order.delivery_datetime_utc;
+
+    var _eta = order === null || order === void 0 ? void 0 : order.eta_time;
+
+    var tagetedMin = (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'minutes');
+    var day = Math.floor(tagetedMin / 1440);
+    var restMinOfTargetedMin = tagetedMin - 1440 * day;
+    var restHours = Math.floor(restMinOfTargetedMin / 60);
+    var restMins = restMinOfTargetedMin - 60 * restHours;
+    if ((order === null || order === void 0 ? void 0 : order.time_status) === 'in_time' || (order === null || order === void 0 ? void 0 : order.time_status) === 'at_risk') day = Math.abs(day);
+    if (restHours < 10) restHours = '0' + restHours;
+    if (restMins < 10) restMins = '0' + restMins;
+    var finalTaget = day + 'day  ' + restHours + ':' + restMins;
+    return finalTaget;
+  };
+
+  (0, _react.useEffect)(function () {
+    var interval = setInterval(function () {
+      setCurrentTime(Date.now());
+    }, 60000);
+    return function () {
+      return clearInterval(interval);
+    };
+  }, []);
   (0, _react.useEffect)(function () {
     if (orderList.loading || !selectedOrderCard) return;
     var updatedOrder = orderList === null || orderList === void 0 ? void 0 : orderList.orders.find(function (order) {
@@ -216,14 +249,18 @@ var OrdersCards = function OrdersCards(props) {
       onClick: function onClick(e) {
         return handleOrderClick(e, order);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.CardHeading, null, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id)), /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     })), /*#__PURE__*/_react.default.createElement(_styles.ViewDetails, {
       className: "view-details",
       onClick: function onClick() {
         return handleOpenOrderDetail(order);
       }
-    }, t('VIEW_DETAILS', 'View details')))), isMessagesView && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageCounter, null, order === null || order === void 0 ? void 0 : order.unread_count), /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    }, t('VIEW_DETAILS', 'View details')))), /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
+      className: "bold"
+    }, "Timer"), /*#__PURE__*/_react.default.createElement("p", {
+      className: order === null || order === void 0 ? void 0 : order.time_status
+    }, getDelayTime(order)))), isMessagesView && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageCounter, null, order === null || order === void 0 ? void 0 : order.unread_count), /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
       bgimage: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit')
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -238,7 +275,9 @@ var OrdersCards = function OrdersCards(props) {
       defaultValue: order !== null && order !== void 0 && order.driver_id ? order.driver_id : 'default',
       drivers: driversList.drivers,
       order: order
-    }))));
+    }))), /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
+      timeState: order === null || order === void 0 ? void 0 : order.time_status
+    }));
   }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
     totalPages: pagination.totalPages,
