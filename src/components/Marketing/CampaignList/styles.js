@@ -152,6 +152,30 @@ export const SwitchWrapper = styled.div`
   }
 `
 
+export const StatusWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  p {
+    text-transform: capitalize;
+    margin-right: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    ${props => props.theme.rtl && css`
+      margin-left: 12px;
+      margin-right: 0px;
+    `}
+  }
+`
+
+export const StatusPoint = styled.div`
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #E9ECEF;
+`
+
 export const PagesBottomContainer = styled.div`
   display: flex;
   justify-content: space-between;

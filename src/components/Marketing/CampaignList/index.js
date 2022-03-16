@@ -10,7 +10,9 @@ import {
   Tbody,
   PagesBottomContainer,
   AddNewPageButton,
-  SwitchWrapper
+  SwitchWrapper,
+  StatusWrapper,
+  StatusPoint
 } from './styles'
 
 export const CampaignList = (props) => {
@@ -19,7 +21,8 @@ export const CampaignList = (props) => {
     getCampaignList,
     paginationProps,
     setPaginationProps,
-    handleOpenDetail
+    handleOpenDetail,
+    selectedCampaign
   } = props
 
   const [, t] = useLanguage()
@@ -71,6 +74,14 @@ export const CampaignList = (props) => {
     }
   ]
 
+  const checkColor = (status) => {
+    const index = status.toLocaleLowerCase()
+    if (index === 'sent') return '#00D27A'
+    else if (index === 'scheduled') return '#FFC700'
+    else if (index === 'draft') return '#E9ECEF'
+    else return '#E9ECEF'
+  }
+
   const handleChangeAllowColumns = (type) => {
     setAllowColumns({
       ...allowColumns,
@@ -86,6 +97,12 @@ export const CampaignList = (props) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
     setPaginationProps({ ...paginationProps, pageSize: pageSize })
     getCampaignList(expectedPage, pageSize)
+  }
+
+  const handleClickCampaign = (e, campaign) => {
+    const inValid = e.target.closest('.enable_control')
+    if (inValid) return
+    handleOpenDetail(campaign)
   }
 
   return (
@@ -169,7 +186,11 @@ export const CampaignList = (props) => {
           ))
         ) : (
           campaignList?.campaigns.map((campaign, i) => (
-            <Tbody key={i}>
+            <Tbody
+              key={i}
+              className={selectedCampaign?.id === campaign.id ? 'active' : ''}
+              onClick={(e) => handleClickCampaign(e, campaign)}
+            >
               <tr>
                 {allowColumns?.campaign && (
                   <td className='right-border'>
@@ -209,6 +230,12 @@ export const CampaignList = (props) => {
                           className='enable_control'
                         />
                       </SwitchWrapper>
+                    )}
+                    {allowColumns?.update && campaign?.audience_type === 'fixed' && (
+                      <StatusWrapper>
+                        <p>{campaign?.status}</p>
+                        <StatusPoint style={{ background: checkColor(campaign?.status) }} />
+                      </StatusWrapper>
                     )}
                   </td>
                 )}
