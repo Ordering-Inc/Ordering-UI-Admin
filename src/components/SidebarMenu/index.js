@@ -471,7 +471,8 @@ export const SidebarMenu = (props) => {
                     <ContextAwareToggle
                       eventKey='8'
                       active={
-                        location.pathname === '/marketing/promotions-enterprise'
+                        location.pathname === '/marketing/promotions-enterprise' ||
+                        location.pathname === '/marketing/campaign'
                       }
                     >
                       <GraphUp />
