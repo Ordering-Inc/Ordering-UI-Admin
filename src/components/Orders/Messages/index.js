@@ -114,6 +114,14 @@ export const MessagesUI = (props) => {
   }
 
   useEffect(() => {
+    const msgElement = document.getElementById('message')
+    if (msgElement) {
+      msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length
+      msgElement.focus()
+    }
+  }, [message])
+
+  useEffect(() => {
     if (user.level === 0) setMessageList(adminMessageList)
     else if (user.level === 2) setMessageList(storeMessageList)
     else setMessageList([])
