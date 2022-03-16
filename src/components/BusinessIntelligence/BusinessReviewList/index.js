@@ -162,7 +162,6 @@ const BusinessReviewsListingUI = (props) => {
       </PagesBottomContainer>
       {openReview && (
         <SideBar
-          sidebarId='review-details'
           defaultSideBarWidth={550}
           open={openReview}
           onClose={() => {

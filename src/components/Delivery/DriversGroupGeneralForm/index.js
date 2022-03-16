@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useConfig } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
-import { Input, DefaultSelect, Checkbox, Button } from '../../../styles'
+import { Input, Checkbox, Button, SecondSelect as DefaultSelect } from '../../../styles'
 import { Alert } from '../../Shared'
 import { DriversGroupDrivers } from '../DriversGroupDrivers'
 import { DriversGroupCompanies } from '../DriversGroupCompanies'
@@ -138,6 +138,7 @@ export const DriversGroupGeneralForm = (props) => {
       <InputWrapper>
         <label>{t('DRIVER_MANAGER', 'Driver manager')}</label>
         <DefaultSelect
+          isSecondIcon
           placeholder={t('SELECT_MANAGER', 'Select driver manager')}
           options={driversManagersOptions}
           defaultValue={changesState?.administrator_id ?? driversGroupState.driversGroup?.administrator_id}
@@ -148,6 +149,7 @@ export const DriversGroupGeneralForm = (props) => {
       <InputWrapper>
         <label>{t('TYPE', 'Type')}</label>
         <DefaultSelect
+          isSecondIcon
           placeholder={t('SELECT_TYPE', 'Select type')}
           options={typeOptions}
           defaultValue={changesState?.type ?? driversGroupState.driversGroup?.type}
@@ -164,6 +166,7 @@ export const DriversGroupGeneralForm = (props) => {
       <InputWrapper>
         <label>{t('PRIORITY', 'Priority')}</label>
         <DefaultSelect
+          isSecondIcon
           placeholder={t('SELECT_PRIORITY', 'Select priority')}
           options={priorityOptions}
           defaultValue={changesState?.priority ?? driversGroupState.driversGroup?.priority}
