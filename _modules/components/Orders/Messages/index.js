@@ -198,6 +198,14 @@ var MessagesUI = function MessagesUI(props) {
   };
 
   (0, _react.useEffect)(function () {
+    var msgElement = document.getElementById('message');
+
+    if (msgElement) {
+      msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length;
+      msgElement.focus();
+    }
+  }, [message]);
+  (0, _react.useEffect)(function () {
     if (user.level === 0) setMessageList(adminMessageList);else if (user.level === 2) setMessageList(storeMessageList);else setMessageList([]);
   }, [user]);
   (0, _react.useEffect)(function () {
