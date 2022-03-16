@@ -22,6 +22,7 @@ export const Header = styled.div`
   }
 `
 export const ConditionItem = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
