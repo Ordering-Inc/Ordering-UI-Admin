@@ -67,6 +67,13 @@ const BusinessPaymentMethodsUI = (props) => {
     { value: 5, text: t('DRIVER_THRU', 'Driver thru') }
   ]
 
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
   const isCheckEnableSate = (id) => {
     const found = businessPaymethodsState.paymethods.find(paymethod => paymethod.paymethod_id === id)
     let valid = false
@@ -91,6 +98,23 @@ const BusinessPaymentMethodsUI = (props) => {
       setIsEdit(true)
       setIsExtendExtraOpen(true)
     }
+  }
+
+  const handleClickCheckBox = (id) => {
+    let i = 0
+    paymethodsList.paymethods.forEach(paymethod => {
+      if (isCheckEnableSate(paymethod.id)) {
+        i += 1
+      }
+    })
+    if (isCheckEnableSate(id) && i < 2) {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_MIN_ARRAY', 'The _attribute_ must have at least _min_ items.').replace('_attribute_', t('PAYMETHODS', 'Payment methods')).replace('_min_', t('ONE', 'one'))
+      })
+      return
+    }
+    handleClickPayment && handleClickPayment(id)
   }
 
   const handleCloseEdit = () => {
@@ -137,7 +161,7 @@ const BusinessPaymentMethodsUI = (props) => {
               >
                 <PaymethodOption
                   className='paymethod-checkbox'
-                  onClick={() => handleClickPayment(paymethod.id)}
+                  onClick={() => handleClickCheckBox(paymethod.id)}
                 >
                   {isCheckEnableSate(paymethod.id) ? (
                     <RiCheckboxFill className='fill' />
@@ -400,6 +424,15 @@ const BusinessPaymentMethodsUI = (props) => {
           )}
         </>
       )}
+      <Alert
+        title={t('PAYMETHODS', 'Payment methods')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </MainContainer>
   )
 }
