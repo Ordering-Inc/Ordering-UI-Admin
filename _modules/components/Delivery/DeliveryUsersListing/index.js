@@ -317,7 +317,6 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleSuccessUpdate: handleSuccessUpdate,
     handleSuccessDeleteUser: handleSuccessDeleteUser
   }), openUserAddForm && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    sidebarId: "user_add_form",
     open: openUserAddForm,
     noAnimation: isTourOpen,
     onClose: function onClose() {

@@ -241,7 +241,7 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     }
   }, [chartDataList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ChartHeaderContainer, null, /*#__PURE__*/_react.default.createElement("p", null, isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
-    disabled: (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data17 = chartDataList.data) === null || _chartDataList$data17 === void 0 ? void 0 : (_chartDataList$data18 = _chartDataList$data17.dataset) === null || _chartDataList$data18 === void 0 ? void 0 : (_chartDataList$data19 = _chartDataList$data18.dataset[0]) === null || _chartDataList$data19 === void 0 ? void 0 : _chartDataList$data19.data.length) === 0
+    disabled: !(chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data17 = chartDataList.data) !== null && _chartDataList$data17 !== void 0 && (_chartDataList$data18 = _chartDataList$data17.dataset) !== null && _chartDataList$data18 !== void 0 && (_chartDataList$data19 = _chartDataList$data18.dataset[0]) !== null && _chartDataList$data19 !== void 0 && _chartDataList$data19.data.length)
   }, /*#__PURE__*/_react.default.createElement(_BsArrowsAngleExpand.default, {
     onClick: previewChart
   }), /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
