@@ -135,6 +135,13 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     text: t('DRIVER_THRU', 'Driver thru')
   }];
 
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
+
   var isCheckEnableSate = function isCheckEnableSate(id) {
     var found = businessPaymethodsState.paymethods.find(function (paymethod) {
       return paymethod.paymethod_id === id;
@@ -168,6 +175,25 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       setIsEdit(true);
       setIsExtendExtraOpen(true);
     }
+  };
+
+  var handleClickCheckBox = function handleClickCheckBox(id) {
+    var i = 0;
+    paymethodsList.paymethods.forEach(function (paymethod) {
+      if (isCheckEnableSate(paymethod.id)) {
+        i += 1;
+      }
+    });
+
+    if (isCheckEnableSate(id) && i < 2) {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_MIN_ARRAY', 'The _attribute_ must have at least _min_ items.').replace('_attribute_', t('PAYMETHODS', 'Payment methods')).replace('_min_', t('ONE', 'one'))
+      });
+      return;
+    }
+
+    handleClickPayment && handleClickPayment(id);
   };
 
   var handleCloseEdit = function handleCloseEdit() {
@@ -209,7 +235,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOption, {
       className: "paymethod-checkbox",
       onClick: function onClick() {
-        return handleClickPayment(paymethod.id);
+        return handleClickCheckBox(paymethod.id);
       }
     }, isCheckEnableSate(paymethod.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
@@ -419,7 +445,19 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeStripeInput: handleChangeStripeInput,
     handleStripeSave: handleStripeSave,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption
-  })))));
+  })))), /*#__PURE__*/_react.default.createElement(Alert, {
+    title: t('PAYMETHODS', 'Payment methods'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 var BusinessPaymentMethods = function BusinessPaymentMethods(props) {
