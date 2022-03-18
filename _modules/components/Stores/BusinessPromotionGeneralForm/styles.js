@@ -9,7 +9,7 @@ exports.UploadImageIcon = exports.PromotionTypeWrapper = exports.PromotionTypeCo
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -117,20 +117,12 @@ var PromotionTypeWrapper = _styledComponents.default.div(_templateObject22 || (_
 
 exports.PromotionTypeWrapper = PromotionTypeWrapper;
 
-var DiscountContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 30px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n\n    input::-webkit-outer-spin-button,\n    input::-webkit-inner-spin-button {\n      display: none;\n    }\n    \n    &:first-child {\n      ", "\n\n      .select {\n        padding-top: 4px;\n        padding-bottom: 4px;\n        font-size: 14px;\n        border: none;\n        background-color: ", ";\n      }\n    }\n  }\n"])), function (props) {
-  var _props$theme6;
-
-  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
-}, function (props) {
+var DiscountContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 30px;\n\n  > div {\n    width: calc(50% - 10px);\n    display: flex;\n    flex-direction: column;\n\n    input::-webkit-outer-spin-button,\n    input::-webkit-inner-spin-button {\n      display: none;\n    }\n    \n    &:first-child {\n      .select {\n        padding-top: 4px;\n        padding-bottom: 4px;\n        font-size: 14px;\n        border: none;\n        background-color: ", ";\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 });
 
 exports.DiscountContainer = DiscountContainer;
 
-var MinimumLimitContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 30px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n\n    input::-webkit-outer-spin-button,\n    input::-webkit-inner-spin-button {\n      display: none;\n    }\n    \n    &:first-child {\n      ", "\n    }\n  }\n"])), function (props) {
-  var _props$theme7;
-
-  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
-});
+var MinimumLimitContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 30px;\n\n  > div {\n    width: calc(50% - 10px);\n    display: flex;\n    flex-direction: column;\n\n    input::-webkit-outer-spin-button,\n    input::-webkit-inner-spin-button {\n      display: none;\n    }    \n  }\n"])));
 
 exports.MinimumLimitContainer = MinimumLimitContainer;

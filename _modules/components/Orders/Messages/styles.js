@@ -85,11 +85,11 @@ var MessageConsole = _styledComponents.default.div(_templateObject19 || (_templa
 
 exports.MessageConsole = MessageConsole;
 
-var MessageBusiness = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  flex-wrap: wrap;\n  font-size: 0.8em;\n  width: 91%;\n  margin: 0 auto;\n  margin-bottom: 20px;\n"])));
+var MessageBusiness = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  font-size: 0.8em;\n  width: 91%;\n  margin: 0 auto;\n  margin-bottom: 20px;\n"])));
 
 exports.MessageBusiness = MessageBusiness;
 
-var MessageCustomer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  flex-wrap: wrap;\n  font-size: 0.8em;\n  width: 91%;\n  margin: 0 auto;\n  margin-bottom: 20px;\n"])));
+var MessageCustomer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-end;\n  font-size: 0.8em;\n  width: 91%;\n  margin: 0 auto;\n  margin-bottom: 20px;\n"])));
 
 exports.MessageCustomer = MessageCustomer;
 

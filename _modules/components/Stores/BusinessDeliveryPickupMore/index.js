@@ -34,6 +34,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
+  var setIsExtendExtraOpen = props.setIsExtendExtraOpen;
+
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
@@ -50,6 +52,9 @@ var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
     key: 'pickup',
     content: t('PICKUP', 'Pickup')
   }];
+  (0, _react.useEffect)(function () {
+    setIsExtendExtraOpen(false);
+  }, [selectedTab]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_PICKUP_MORE', 'Delivery, pickup & more')), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, tabs.map(function (tab) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: tab.key,

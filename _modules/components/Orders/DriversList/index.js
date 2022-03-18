@@ -65,6 +65,14 @@ var DriversList = function DriversList(props) {
     handleChangeDriver(driver);
   };
 
+  var onOpenDriverOrdersDetail = function onOpenDriverOrdersDetail(driver) {
+    if ((selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id) !== driver.id) {
+      handleChangeDriver(driver);
+    }
+
+    handleOpenDriverOrders(driver);
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.DriversListContainer, null, loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.DriverCard, {
       key: i
@@ -91,7 +99,7 @@ var DriversList = function DriversList(props) {
       className: "driver-orders",
       disabled: !(driver !== null && driver !== void 0 && driver.assigned_orders_count) || (driver === null || driver === void 0 ? void 0 : driver.assigned_orders_count) === 0,
       onClick: function onClick() {
-        return handleOpenDriverOrders(driver);
+        return onOpenDriverOrdersDetail(driver);
       }
     }, driver === null || driver === void 0 ? void 0 : driver.assigned_orders_count, " ", t('ORDERS', 'Orders'))), (driver === null || driver === void 0 ? void 0 : driver.qualification) && /*#__PURE__*/_react.default.createElement(_styles.WrapperStar, {
       width: (0, _utils.getStarWidth)(driver === null || driver === void 0 ? void 0 : driver.qualification)

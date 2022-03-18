@@ -25,7 +25,9 @@ var _CustomerCashWallet = require("../CustomerCashWallet");
 
 var _Shared = require("../../Shared");
 
-var _styles = require("./styles");
+var _styles = require("../../../styles");
+
+var _styles2 = require("./styles");
 
 var _CustomerPointsWallet = require("../CustomerPointsWallet");
 
@@ -54,11 +56,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CustomerDetailsUI = function CustomerDetailsUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _userState$user6, _userState$user7, _userState$user8, _userState$user9;
+  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user6, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11;
 
   var userState = props.userState,
       handleDeleteUser = props.handleDeleteUser,
-      handleParentSidebarMove = props.handleParentSidebarMove;
+      handleParentSidebarMove = props.handleParentSidebarMove,
+      handleChangeActiveUser = props.handleChangeActiveUser;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -137,11 +140,26 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     setIsOpenMenu(false);
     setShowOption(null);
   }, [userState === null || userState === void 0 ? void 0 : (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.id]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.UserName, null, userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   }) : /*#__PURE__*/_react.default.createElement("span", {
     className: "customer-name"
-  }, (_userState$user2 = userState.user) === null || _userState$user2 === void 0 ? void 0 : _userState$user2.name, " ", (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.lastname), !!((_userState$user4 = userState.user) !== null && _userState$user4 !== void 0 && _userState$user4.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!((_userState$user5 = userState.user) !== null && _userState$user5 !== void 0 && _userState$user5.email_verified) && /*#__PURE__*/_react.default.createElement(_styles.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, (_userState$user2 = userState.user) === null || _userState$user2 === void 0 ? void 0 : _userState$user2.name, " ", (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.lastname), userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 50,
+    style: {
+      margin: '0px 5px'
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, handleChangeActiveUser && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (userState === null || userState === void 0 ? void 0 : (_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.enabled) || false,
+    onChange: function onChange(enabled) {
+      var _userState$user5;
+
+      return handleChangeActiveUser({
+        id: userState === null || userState === void 0 ? void 0 : (_userState$user5 = userState.user) === null || _userState$user5 === void 0 ? void 0 : _userState$user5.id,
+        enabled: enabled
+      });
+    }
+  }))), !!((_userState$user6 = userState.user) !== null && _userState$user6 !== void 0 && _userState$user6.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!((_userState$user7 = userState.user) !== null && _userState$user7 !== void 0 && _userState$user7.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -149,13 +167,13 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     onClick: function onClick() {
       return onDeleteCustomer();
     }
-  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles.PhotoWrapper, null, userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null) : (_userState$user6 = userState.user) !== null && _userState$user6 !== void 0 && _userState$user6.photo ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optimizeImage((_userState$user7 = userState.user) === null || _userState$user7 === void 0 ? void 0 : _userState$user7.photo, 'w_220,c_limit'),
+  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles2.PhotoWrapper, null, userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null) : (_userState$user8 = userState.user) !== null && _userState$user8 !== void 0 && _userState$user8.photo ? /*#__PURE__*/_react.default.createElement("img", {
+    src: optimizeImage((_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.photo, 'w_220,c_limit'),
     alt: ""
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null)), /*#__PURE__*/_react.default.createElement(_styles.MenusContainer, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null)), /*#__PURE__*/_react.default.createElement(_styles2.MenusContainer, {
     isLoading: userState.loading
   }, customerMenus.map(function (option) {
-    return /*#__PURE__*/_react.default.createElement(_styles.OptionMenu, {
+    return /*#__PURE__*/_react.default.createElement(_styles2.OptionMenu, {
       key: option.key,
       active: showOption === option.key,
       onClick: function onClick() {
@@ -189,16 +207,16 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     isBorderShow: true,
     defaultSideBarWidth: 500 + menuMoveDistance,
     moveDistance: menuMoveDistance
-  }, showOption === 'user_details' && /*#__PURE__*/_react.default.createElement(_styles.UserDetailsWrapper, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
+  }, showOption === 'user_details' && /*#__PURE__*/_react.default.createElement(_styles2.UserDetailsWrapper, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     userId: props.userId,
     user: userState.user,
     setExtraOpen: function setExtraOpen(isOpen) {
       return setMenuMoveDistance(isOpen ? 500 : 0);
     }
   })), showOption === 'cash_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerCashWallet.CustomerCashWallet, {
-    userId: (_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.id
+    userId: (_userState$user10 = userState.user) === null || _userState$user10 === void 0 ? void 0 : _userState$user10.id
   }), showOption === 'points_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerPointsWallet.CustomerPointsWallet, {
-    userId: (_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.id,
+    userId: (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.id,
     user: userState.user
   })));
 };
