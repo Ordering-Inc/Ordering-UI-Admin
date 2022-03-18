@@ -18,15 +18,15 @@ export const ModalDialog = styled.div`
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
-  max-height: 90vh;
+  max-height: calc(var(--vh. 1vh) * 90);
   overflow: ${({ overflow }) => overflow || 'auto'};
   @media (max-width: 860px) {
     width: 80%;
   }
   @media (max-width: 768px) {
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
+    height: calc(var(--vh. 1vh) * 100);
+    max-height: calc(var(--vh. 1vh) * 100);
     border-radius: 0px;
   }
 `
