@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const OrdersContainer = styled.div`
-  max-height: calc(100vh - 410px);
   overflow: auto;
 
   ${({ noScroll }) => noScroll && css`
