@@ -162,7 +162,6 @@ export const MessageBusiness = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
   margin: 0 auto;
@@ -173,7 +172,6 @@ export const MessageCustomer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
   margin: 0 auto;
