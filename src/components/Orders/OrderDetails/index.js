@@ -423,7 +423,7 @@ const OrderDetailsUI = (props) => {
                 onClose={() => handleCloseMessages()}
               >
                 {openMessages?.chat && (
-                  <ChatContainer>
+                  <ChatContainer data-tour='tour_message'>
                     <Messages
                       orderId={order?.id}
                       order={order}
@@ -432,6 +432,9 @@ const OrderDetailsUI = (props) => {
                       handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
                       onClose={() => handleCloseMessages()}
                       messages={messages}
+                      isTourOpen={isTourOpen}
+                      setCurrentTourStep={setCurrentTourStep}
+                      orderDetailClose={() => props.onClose()}
                     />
                   </ChatContainer>
                 )}
