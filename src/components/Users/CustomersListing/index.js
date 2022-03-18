@@ -178,6 +178,7 @@ const CustomersListingUI = (props) => {
             handleSuccessDeleteUser={handleSuccessDeleteUser}
             onClose={() => handleBackRedirect()}
             handleParentSidebarMove={val => setMoveDistance(val)}
+            handleChangeActiveUser={handleChangeActiveUser}
           />
         </SideBar>
       )}

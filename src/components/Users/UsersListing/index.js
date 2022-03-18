@@ -151,6 +151,7 @@ const UsersListingUI = (props) => {
           onClose={() => handleBackRedirect()}
           handleSuccessUpdate={handleSuccessUpdate}
           handleSuccessDeleteUser={handleSuccessDeleteUser}
+          handleChangeActiveUser={handleChangeActiveUser}
         />
       )}
       {openUserAddForm && (

@@ -174,3 +174,16 @@ export const UserDetailsWrapper = styled.div`
   width: 100%;
   padding: 20px;
 `
+
+export const UserName = styled.div`
+  display: flex;
+  align-items: center;
+
+  > label {
+    margin-left: 10px;
+    ${props => props.theme.rtl && css`
+      margin-right: 10px;
+      margin-left: 0px;
+    `}
+  }
+`

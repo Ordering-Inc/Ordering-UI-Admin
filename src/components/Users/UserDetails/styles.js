@@ -6,13 +6,26 @@ export const DetailsHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  margin-top: -5px;
 `
-export const UserName = styled.h1`
-  font-size: 20px;
-  font-weight: 700;
-  color: ${props => props.theme.colors.headingColor};
-  margin: 0;
+export const UserName = styled.div`
+  display: flex;
+  align-items: center;
+  > span {
+    font-size: 20px;
+    font-weight: 700;
+    color: ${props => props.theme.colors.headingColor};
+    margin: 0;
+  }
+  > label {
+    margin-left: 10px;
+    ${props => props.theme.rtl && css`
+      margin-right: 10px;
+      margin-left: 0px;
+    `}
+  }
 `
+
 export const VerifiedItem = styled.span`
   font-size: 10px;
   background-color: ${props => props.theme.colors.lightGreen};
