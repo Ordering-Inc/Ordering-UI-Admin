@@ -9,7 +9,9 @@ import {
   DateTimeWrapper
 } from './styles'
 
-export const CampaignCalendarTime = () => {
+export const CampaignCalendarTime = (props) => {
+  const { showTime } = props
+
   const [startDate, setStartDate] = useState(new Date())
   const [isOpen, setIsOpen] = useState(false)
 
@@ -30,11 +32,11 @@ export const CampaignCalendarTime = () => {
           onClick={() => setIsOpen(true)}
         >
           <Calendar4 />
-          {moment(startDate).format('DD MMM, YYYY h:m A')}
+          {showTime ? moment(startDate).format('DD MMM, YYYY h:m A') : moment(startDate).format('DD MMM, YYYY')}
         </Button>
         <DatePicker
           selected={startDate}
-          showTimeSelect
+          showTimeSelect={showTime}
           onChange={(date) => setStartDate(date)}
           open={isOpen}
         />

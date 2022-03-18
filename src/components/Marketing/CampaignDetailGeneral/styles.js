@@ -231,6 +231,7 @@ export const RulesWrapper = styled.div`
     margin: 0px;
     font-size: 12px;
     line-height: 18px;
+    margin-bottom: 20px;
     span {
       color: ${props => props.theme.colors.lightGray};
     }
@@ -241,7 +242,10 @@ export const CheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 12px 0px;
-  border-top: 1px solid ${props => props.theme.colors.borderColor};
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  ${({ borderTop }) => borderTop && css`
+    border-top: 1px solid ${props => props.theme.colors.borderColor};
+  `}
   justify-content: space-between;
   > div {
     display: flex;

@@ -29,6 +29,10 @@ import {
   CheckBoxWrapper
 } from './styles'
 import { CampaignCalendarTime } from '../CampaignCalendarTime'
+import { Modal } from '../../Shared'
+import { CampaignAmountOption } from '../CampaignAmountOption'
+import { CampaignSignUpOption } from '../CampaignSignUpOption'
+import { CampaignOpenCartsOption } from '../CampaignOpenCartsOption'
 
 export const CampaignDetailGeneral = (props) => {
   const {
@@ -44,6 +48,8 @@ export const CampaignDetailGeneral = (props) => {
   const [contactTypeSearchVal, setContactTypeSearchVal] = useState('')
   const [typeOptions, setTypeOptions] = useState(null)
   const [isASAP, setIsASAP] = useState(true)
+  const [isRuleModal, setIsRuleModal] = useState(false)
+  const [selectedRule, setSelectedRule] = useState(null)
 
   const typeList = [
     { value: 'email', content: <Option>{t('EMAIL', 'Email')}</Option> },
@@ -58,9 +64,18 @@ export const CampaignDetailGeneral = (props) => {
     { value: 0, title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options') },
     { value: 1, title: t('SIGN_UP_DATE_OPTIONS', 'Sign up date options') },
     { value: 2, title: t('LAST_ORDER_DATE_OPTIONS', 'Last order date options') },
-    { value: 3, title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options') },
-    { value: 4, title: `${t('OPEN_CARTS', 'Open Carts')} / ${t('CART_RECOVERY', 'Cart recovery')}` }
+    { value: 3, title: `${t('OPEN_CARTS', 'Open Carts')} / ${t('CART_RECOVERY', 'Cart recovery')}` }
   ]
+
+  const handleCloseRuleModal = () => {
+    setIsRuleModal(false)
+    setSelectedRule(null)
+  }
+
+  const handleOpenRuleModal = (index) => {
+    setSelectedRule(index)
+    setIsRuleModal(true)
+  }
 
   const checkColor = (status) => {
     const index = status.toLocaleLowerCase()
@@ -160,7 +175,7 @@ export const CampaignDetailGeneral = (props) => {
                   </RadioCheckWrapper>
                   {!isASAP && (
                     <ScheduleForLateWrapper>
-                      <CampaignCalendarTime />
+                      <CampaignCalendarTime showTime />
                     </ScheduleForLateWrapper>
                   )}
                 </>
@@ -174,13 +189,16 @@ export const CampaignDetailGeneral = (props) => {
             <span>{t('REACHING', 'Reaching')}: </span>
             890 {t('PEOPLE', 'People')}
           </p>
-          {ruleList.map(rule => (
-            <CheckBoxWrapper key={rule.value}>
+          {ruleList.map((rule, i) => (
+            <CheckBoxWrapper
+              key={i}
+              borderTop={i === 0}
+            >
               <div>
                 <CheckSquareFill />
                 <span>{rule.title}</span>
               </div>
-              <ChevronRight />
+              <ChevronRight onClick={() => handleOpenRuleModal(rule.value)} />
             </CheckBoxWrapper>
           ))}
         </RulesWrapper>
@@ -194,6 +212,18 @@ export const CampaignDetailGeneral = (props) => {
           {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
         </Button>
       </ButtonWrapper>
+      <Modal
+        width='600px'
+        height='550px'
+        padding='25px'
+        open={isRuleModal}
+        onClose={handleCloseRuleModal}
+      >
+        {selectedRule === 0 && <CampaignAmountOption />}
+        {selectedRule === 1 && <CampaignSignUpOption title={t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options ')} />}
+        {selectedRule === 2 && <CampaignSignUpOption title={t('LAST_ORDER_DATE_OPTIONS', 'Last order date options')} />}
+        {selectedRule === 3 && <CampaignOpenCartsOption />}
+      </Modal>
     </>
   )
 }
