@@ -203,6 +203,7 @@ const DeliveryUsersListingUI = (props) => {
           onClose={() => handleBackRedirect()}
           handleSuccessUpdate={handleSuccessUpdate}
           handleSuccessDeleteUser={handleSuccessDeleteUser}
+          handleChangeActiveUser={handleChangeActiveUser}
         />
       )}
       {openUserAddForm && (
@@ -238,7 +239,8 @@ export const DeliveryUsersListing = (props) => {
     UIComponent: DeliveryUsersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
-    isSearchByUserName: true
+    isSearchByUserName: true,
+    isDriver: true
   }
   return (
     <UsersListController {...usersListingProps} />
