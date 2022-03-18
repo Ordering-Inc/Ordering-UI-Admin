@@ -17,7 +17,7 @@ export const Container = styled.div`
     `}
   `}
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   top: 0px;
   z-index: 1001;
   overflow-x: hidden;

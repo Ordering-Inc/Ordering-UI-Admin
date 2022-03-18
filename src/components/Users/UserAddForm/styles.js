@@ -28,6 +28,7 @@ export const UserImage = styled.div`
 export const Image = styled.div`
   width: 90px;
   height: 90px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   background: ${({ isImage, theme }) => isImage ? '#FFF' : `${theme.colors.backgroundPage}`};

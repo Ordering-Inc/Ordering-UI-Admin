@@ -35,6 +35,13 @@ export const DriversList = (props) => {
     handleChangeDriver(driver)
   }
 
+  const onOpenDriverOrdersDetail = (driver) => {
+    if (selectedDriver?.id !== driver.id) {
+      handleChangeDriver(driver)
+    }
+    handleOpenDriverOrders(driver)
+  }
+
   return (
     <DriversListContainer>
       {loading ? (
@@ -73,7 +80,7 @@ export const DriversList = (props) => {
                   <AssignedOrdersCount
                     className='driver-orders'
                     disabled={!driver?.assigned_orders_count || driver?.assigned_orders_count === 0}
-                    onClick={() => handleOpenDriverOrders(driver)}
+                    onClick={() => onOpenDriverOrdersDetail(driver)}
                   >
                     {driver?.assigned_orders_count} {t('ORDERS', 'Orders')}
                   </AssignedOrdersCount>
