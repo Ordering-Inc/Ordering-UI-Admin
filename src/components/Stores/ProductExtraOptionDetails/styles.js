@@ -84,6 +84,7 @@ export const OptionContainer = styled.div`
 export const OptionImage = styled.div`
   width: 95px;
   height: 95px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;
@@ -317,6 +318,7 @@ export const SubOptionContainer = styled.div`
 export const SubOptionImage = styled.div`
   width: 44px;
   height: 44px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;

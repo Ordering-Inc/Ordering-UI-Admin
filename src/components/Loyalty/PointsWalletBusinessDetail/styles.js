@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.form`
   width: 100%;
-  min-height: calc(100vh - 150px);
+  min-height: calc(var(--vh, 1vh) * 100 - 150px);
   ${({ isBusiness }) => isBusiness && css`
     padding: 20px;
   `}
