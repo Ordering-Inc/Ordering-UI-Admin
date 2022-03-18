@@ -12,6 +12,7 @@ import { useTheme } from 'styled-components'
 import { Confirm } from '../../Shared'
 import { Personalization } from '../../Shared/Personalization'
 import { UserMetaFields } from '../UserMetaFields'
+import { Switch } from '../../../styles'
 
 import {
   DetailsHeader,
@@ -30,7 +31,8 @@ export const UserDetailsUI = (props) => {
     userState,
     setExtraOpen,
     handleSuccessUserUpdate,
-    handleDeleteUser
+    handleDeleteUser,
+    handleChangeActiveUser
   } = props
 
   const theme = useTheme()
@@ -58,10 +60,22 @@ export const UserDetailsUI = (props) => {
     <>
       <DetailsHeader>
         <UserName>
-          {userState.loading ? (
+          {userState?.loading ? (
             <Skeleton width={150} />
           ) : (
-            <span>{userState?.user?.name} {userState?.user?.lastname}</span>
+            <span className='customer-name'>{userState.user?.name} {userState.user?.lastname}</span>
+          )}
+          {userState?.loading ? (
+            <Skeleton width={50} style={{ margin: '0px 5px' }} />
+          ) : (
+            <>
+              {handleChangeActiveUser && (
+                <Switch
+                  defaultChecked={userState?.user?.enabled || false}
+                  onChange={enabled => handleChangeActiveUser({ id: userState?.user?.id, enabled: enabled })}
+                />
+              )}
+            </>
           )}
         </UserName>
         {isManagers && (
