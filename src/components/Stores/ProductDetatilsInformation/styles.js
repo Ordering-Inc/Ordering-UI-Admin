@@ -6,6 +6,7 @@ export const FormInput = styled.form`
 export const ProductImage = styled.div`
   width: 200px;
   height: 200px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;

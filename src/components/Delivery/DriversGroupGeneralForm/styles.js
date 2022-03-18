@@ -24,10 +24,18 @@ export const InputWrapper = styled.div`
   }
 
   .select {
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding: 11px 0;
     border: none;
     background-color: ${props => props.theme.colors.secundary};
+  }
+  .list {
+    .options {
+      > div {
+        > div {
+          padding: 7px 10px;
+        }
+      }
+    }
   }
 `
 
