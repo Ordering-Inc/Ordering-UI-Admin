@@ -9,20 +9,20 @@ export const OrdersContainer = styled.div`
   `}
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 385px);
+    max-height: calc(var(--vh, 1vh) * 100 - 385px);
   }
 
   @media (min-width: 992px) {
-    max-height: calc(100vh - 305px);
+    max-height: calc(var(--vh, 1vh) * 100 - 305px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
-      max-height: calc(100vh - 345px);
+      max-height: calc(var(--vh, 1vh) * 100 - 345px);
     `}
   }
 
   @media (min-width: 1200px) {
-    max-height: calc(100vh - 275px);
+    max-height: calc(var(--vh, 1vh) * 100 - 275px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
-      max-height: calc(100vh - 345px);
+      max-height: calc(var(--vh, 1vh) * 100 - 345px);
     `}
   }
 `
