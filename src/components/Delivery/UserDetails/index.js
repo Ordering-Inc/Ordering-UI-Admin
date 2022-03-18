@@ -10,6 +10,7 @@ import { UserProfileForm } from '../UserProfileForm'
 import { UserMetaFields } from '../../Users'
 import { DriverGroupSetting } from '../DriverGroupSetting'
 import { ThreeDots } from 'react-bootstrap-icons'
+import { Switch } from '../../../styles'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 
 import {
@@ -27,7 +28,8 @@ export const UserDetailsUI = (props) => {
     userState,
     setExtraOpen,
     handleSuccessUserUpdate,
-    handleDeleteUser
+    handleDeleteUser,
+    handleChangeActiveUser
   } = props
 
   const theme = useTheme()
@@ -45,10 +47,22 @@ export const UserDetailsUI = (props) => {
     <>
       <DetailsHeader>
         <UserName>
-          {userState.loading ? (
+          {userState?.loading ? (
             <Skeleton width={150} />
           ) : (
-            <span>{userState?.user?.name} {userState?.user?.lastname}</span>
+            <span>{userState.user?.name} {userState.user?.lastname}</span>
+          )}
+          {userState?.loading ? (
+            <Skeleton width={50} style={{ margin: '0px 5px' }} />
+          ) : (
+            <>
+              {handleChangeActiveUser && (
+                <Switch
+                  defaultChecked={userState?.user?.enabled || false}
+                  onChange={enabled => handleChangeActiveUser({ id: userState?.user?.id, enabled: enabled })}
+                />
+              )}
+            </>
           )}
         </UserName>
         {userState.user?.id && (
