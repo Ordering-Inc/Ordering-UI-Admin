@@ -534,7 +534,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     name: "name",
     autoComplete: "off",
     placeholder: t('NAME', 'Name'),
-    value: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes5 = changesState.changes) === null || _changesState$changes5 === void 0 ? void 0 : _changesState$changes5.name) || '',
+    defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes5 = changesState.changes) === null || _changesState$changes5 === void 0 ? void 0 : _changesState$changes5.name) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e, null);
     },
@@ -546,7 +546,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "price",
     placeholder: t('PRICE', 'Price'),
-    value: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes6 = changesState.changes) === null || _changesState$changes6 === void 0 ? void 0 : _changesState$changes6.price) || '',
+    defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes6 = changesState.changes) === null || _changesState$changes6 === void 0 ? void 0 : _changesState$changes6.price) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e, null);
     },
@@ -562,7 +562,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement("label", null, t('HALF_PRICE', 'Half price')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "half_price",
     placeholder: t('HALF_PRICE', 'Half price'),
-    value: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes7 = changesState.changes) === null || _changesState$changes7 === void 0 ? void 0 : _changesState$changes7.half_price) || '',
+    defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes7 = changesState.changes) === null || _changesState$changes7 === void 0 ? void 0 : _changesState$changes7.half_price) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e, null);
     },
@@ -578,7 +578,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement("label", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "max",
     placeholder: t('MAX', 'Max'),
-    value: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes8 = changesState.changes) === null || _changesState$changes8 === void 0 ? void 0 : _changesState$changes8.max) || '',
+    defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes8 = changesState.changes) === null || _changesState$changes8 === void 0 ? void 0 : _changesState$changes8.max) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e, null);
     },

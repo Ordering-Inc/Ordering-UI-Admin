@@ -84,6 +84,12 @@ var ProductIngredientDetailsUI = function ProductIngredientDetailsUI(props) {
     });
   };
 
+  var checkKeyDown = function checkKeyDown(e) {
+    var keyCode = e.keyCode ? e.keyCode : e.which;
+    if (ingredientState.loading || Object.keys(changesState).length === 0 || keyCode !== 13) return;
+    if (isAddMode) handleAddIngredient();else handleUpdateIngredient();
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, isAddMode ? t('ADD_INGREDIENT', 'Add ingredient') : (_ref = (_changesState$name = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name !== void 0 ? _changesState$name : ingredientState === null || ingredientState === void 0 ? void 0 : (_ingredientState$ingr = ingredientState.ingredient) === null || _ingredientState$ingr === void 0 ? void 0 : _ingredientState$ingr.name) !== null && _ref !== void 0 ? _ref : ''), /*#__PURE__*/_react.default.createElement("div", null, !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
@@ -102,7 +108,8 @@ var ProductIngredientDetailsUI = function ProductIngredientDetailsUI(props) {
     name: "name",
     placeholder: t('NAME', 'Name'),
     value: (_ref2 = (_changesState$name2 = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name2 !== void 0 ? _changesState$name2 : ingredientState === null || ingredientState === void 0 ? void 0 : (_ingredientState$ingr2 = ingredientState.ingredient) === null || _ingredientState$ingr2 === void 0 ? void 0 : _ingredientState$ingr2.name) !== null && _ref2 !== void 0 ? _ref2 : '',
-    onChange: handleChangeInput
+    onChange: handleChangeInput,
+    onKeyDown: checkKeyDown
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
