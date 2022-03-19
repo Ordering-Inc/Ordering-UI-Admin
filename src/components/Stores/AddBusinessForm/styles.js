@@ -41,6 +41,7 @@ export const FormInputInnerContainer = styled.div`
 export const HeaderImage = styled.div`
   width: 100%;
   height: 150px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;
