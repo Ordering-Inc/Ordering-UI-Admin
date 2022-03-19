@@ -52,9 +52,6 @@ export const AccordionItem = styled.div`
     flex: 1;
     display: flex;
     align-items: center;
-    img {
-      opacity: 0;
-    }
     svg,
     img {
       ${props => props.theme?.rtl ? css`
@@ -87,12 +84,6 @@ export const AccordionItem = styled.div`
   border-radius: 8px;
   &:hover {
     background-color: ${props => props.theme.colors.secundary};
-
-    > div {
-      img {
-        opacity: 1;
-      }
-    }
   }
   ${({ isAccept }) => isAccept && css`
     border-top: 1px solid ${props => props.theme.colors.primary};

@@ -47,17 +47,24 @@ export const ProductImageWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 8px;
   overflow: hidden;
   background: ${props => props.theme.colors.lightGray};
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+  margin-bottom: 20px;
 
   > svg {
     width: 70%;
     height: 70%;
     color: white;
+  }
+
+  @media (min-width: 768px) {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 0px;
   }
 `
 const ProductImageStyled = styled.div`
@@ -236,18 +243,27 @@ export const ProductPreviewHeader = styled.div`
 `
 export const ProductSummaryContent = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 `
 export const ProductSales = styled.div`
   display: flex;
   align-items: center;
-  width: 230px;
+  width: 100%;
   height: 90px;
   padding: 10px;
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   border-radius: 7.6px;
+
+  @media (min-width: 768px) {
+    width: 230px;
+  }
 `
 export const RolWrapper = styled.div`
   margin-left: 20px;

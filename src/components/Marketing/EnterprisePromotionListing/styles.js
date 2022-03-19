@@ -6,10 +6,6 @@ export const PromotionsListingContainer = styled.div`
   box-sizing: border-box;
   transition: all 0.5s;
   overflow: hidden;
-
-  ${({ eventDisabled }) => eventDisabled && css`
-    pointer-events: none;
-  `}
 `
 export const HeaderContainer = styled.div`
   display: flex;
@@ -56,7 +52,6 @@ export const HeaderTitleContainer = styled.div`
     }
   }
 `
-
 export const ActionsWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -73,4 +68,8 @@ export const ActionsWrapper = styled.div`
       width: unset;
     }
   }
+
+  ${({ eventDisabled }) => eventDisabled && css`
+    pointer-events: none;
+  `}
 `

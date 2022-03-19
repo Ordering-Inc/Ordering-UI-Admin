@@ -14,8 +14,9 @@ export const ScheduleContainer = styled.div`
 `
 
 export const ScheduleSection = styled.div`
-  border-top: 1px solid #E9ECEF;
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
   margin-top: 30px;
+  overflow: auto;
 `
 
 export const Title = styled.h1`
