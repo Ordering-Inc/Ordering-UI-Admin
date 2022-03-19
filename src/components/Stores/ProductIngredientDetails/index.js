@@ -39,6 +39,14 @@ const ProductIngredientDetailsUI = (props) => {
     })
   }
 
+  const checkKeyDown = (e) => {
+    const keyCode = e.keyCode ? e.keyCode : e.which
+    if ((ingredientState.loading || Object.keys(changesState).length === 0) || keyCode !== 13) return
+
+    if (isAddMode) handleAddIngredient()
+    else handleUpdateIngredient()
+  }
+
   return (
     <>
       <Container>
@@ -82,6 +90,7 @@ const ProductIngredientDetailsUI = (props) => {
             placeholder={t('NAME', 'Name')}
             value={changesState?.name ?? ingredientState?.ingredient?.name ?? ''}
             onChange={handleChangeInput}
+            onKeyDown={checkKeyDown}
           />
         </InputWrapper>
 
