@@ -17,11 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ScheduleContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n"])));
+var ScheduleContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  min-width: 400px;\n"])));
 
 exports.ScheduleContainer = ScheduleContainer;
 
-var TimeScheduleItemContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 12px 0;\n  border-bottom: 1px solid ", ";\n\n  > div {\n    display: flex;\n    align-items: center;\n    h4 {\n      font-size: 14px;\n      font-weight: 600;\n      margin: 0px;\n      padding: 0 16px;\n    }\n\n    &:first-child {\n      width: 95px;\n    }\n\n    &:nth-child(2) {\n      flex-direction: column;\n      flex: 1;\n      ", "\n      > div {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        &:not(:last-child) {\n          margin-bottom: 10px;\n        }\n  \n        svg {\n          font-size: 20px;\n          cursor: pointer;\n        }\n      }\n      > p {\n        margin: 6px 0;\n      }\n    }\n\n    &:nth-child(3) {\n      > span {\n        svg {\n          cursor: pointer;\n          font-size: 20px;\n          color: ", ";\n          ", "\n        }\n      }\n    }\n  }\n"])), function (props) {
+var TimeScheduleItemContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 12px 0;\n  border-bottom: 1px solid ", ";\n\n  > div {\n    display: flex;\n    align-items: center;\n    h4 {\n      font-size: 13px;\n      font-weight: 600;\n      margin: 0px;\n      padding: 0 16px;\n    }\n\n    &:first-child {\n      width: 95px;\n    }\n\n    &:nth-child(2) {\n      flex-direction: column;\n      flex: 1;\n      ", "\n      > div {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        &:not(:last-child) {\n          margin-bottom: 10px;\n        }\n  \n        svg {\n          font-size: 20px;\n          cursor: pointer;\n        }\n      }\n      > p {\n        margin: 6px 0;\n        font-size: 13px;\n      }\n    }\n\n    &:nth-child(3) {\n      > span {\n        svg {\n          cursor: pointer;\n          font-size: 20px;\n          color: ", ";\n          ", "\n        }\n      }\n    }\n  }\n\n  @media (min-width: 380px) {\n    > div {\n      h4 {\n        font-size: 14px;\n      }\n      &:nth-child(2) {\n        p {\n          font-size: 14px;\n        }\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   var _props$theme;
@@ -37,7 +37,7 @@ var TimeScheduleItemContainer = _styledComponents.default.div(_templateObject2 |
 
 exports.TimeScheduleItemContainer = TimeScheduleItemContainer;
 
-var SelectWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  width: 90px;\n  .select {\n    border: none;\n    svg {\n      display: none;\n    }\n    .list {\n      width: 100%;\n      > div {\n        > div {\n          min-width: initial;\n        }\n      }\n    }\n  }\n"])), function (props) {
+var SelectWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  width: 70px;\n  display: flex;\n  justify-content: center;\n  .select {\n    border: none;\n    svg {\n      display: none;\n    }\n    .list {\n      width: 100%;\n      > div {\n        > div {\n          min-width: initial;\n        }\n      }\n    }\n  }\n\n  @media (min-width: 380px) {\n    width: 90px;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 

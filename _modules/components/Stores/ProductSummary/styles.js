@@ -54,7 +54,7 @@ var RightHeader = _styledComponents.default.div(_templateObject8 || (_templateOb
 
 exports.RightHeader = RightHeader;
 
-var ProductImageWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 200px;\n  height: 200px;\n  border-radius: 8px;\n  overflow: hidden;\n  background: ", ";\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  > svg {\n    width: 70%;\n    height: 70%;\n    color: white;\n  }\n"])), function (props) {
+var ProductImageWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 150px;\n  height: 150px;\n  border-radius: 8px;\n  overflow: hidden;\n  background: ", ";\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n  margin-bottom: 20px;\n\n  > svg {\n    width: 70%;\n    height: 70%;\n    color: white;\n  }\n\n  @media (min-width: 768px) {\n    width: 200px;\n    height: 200px;\n    margin-bottom: 0px;\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 
@@ -149,11 +149,11 @@ var ProductPreviewHeader = _styledComponents.default.div(_templateObject20 || (_
 
 exports.ProductPreviewHeader = ProductPreviewHeader;
 
-var ProductSummaryContent = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n"])));
+var ProductSummaryContent = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n"])));
 
 exports.ProductSummaryContent = ProductSummaryContent;
 
-var ProductSales = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 230px;\n  height: 90px;\n  padding: 10px;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  border-radius: 7.6px;\n"])));
+var ProductSales = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  height: 90px;\n  padding: 10px;\n  border: 1px solid #E9ECEF;\n  box-sizing: border-box;\n  border-radius: 7.6px;\n\n  @media (min-width: 768px) {\n    width: 230px;\n  }\n"])));
 
 exports.ProductSales = ProductSales;
 

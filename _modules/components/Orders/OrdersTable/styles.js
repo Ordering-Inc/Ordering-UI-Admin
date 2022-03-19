@@ -23,15 +23,15 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var OrdersContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  max-height: calc(100vh - 410px);\n  overflow: auto;\n\n  ", "\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 385px);\n  }\n\n  @media (min-width: 992px) {\n    max-height: calc(100vh - 305px);\n    ", "\n  }\n\n  @media (min-width: 1200px) {\n    max-height: calc(100vh - 275px);\n    ", "\n  }\n"])), function (_ref) {
+var OrdersContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  overflow: auto;\n\n  ", "\n\n  @media (min-width: 768px) {\n    max-height: calc(var(--vh, 1vh) * 100 - 385px);\n  }\n\n  @media (min-width: 992px) {\n    max-height: calc(var(--vh, 1vh) * 100 - 305px);\n    ", "\n  }\n\n  @media (min-width: 1200px) {\n    max-height: calc(var(--vh, 1vh) * 100 - 275px);\n    ", "\n  }\n"])), function (_ref) {
   var noScroll = _ref.noScroll;
   return noScroll && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    overflow: hidden;\n  "])));
 }, function (_ref2) {
   var isSelectedOrders = _ref2.isSelectedOrders;
-  return isSelectedOrders && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      max-height: calc(100vh - 345px);\n    "])));
+  return isSelectedOrders && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      max-height: calc(var(--vh, 1vh) * 100 - 345px);\n    "])));
 }, function (_ref3) {
   var isSelectedOrders = _ref3.isSelectedOrders;
-  return isSelectedOrders && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      max-height: calc(100vh - 345px);\n    "])));
+  return isSelectedOrders && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      max-height: calc(var(--vh, 1vh) * 100 - 345px);\n    "])));
 });
 
 exports.OrdersContainer = OrdersContainer;

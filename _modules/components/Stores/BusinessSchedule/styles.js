@@ -21,7 +21,9 @@ var ScheduleContainer = _styledComponents.default.div(_templateObject || (_templ
 
 exports.ScheduleContainer = ScheduleContainer;
 
-var ScheduleSection = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-top: 1px solid #E9ECEF;\n  margin-top: 30px;\n"])));
+var ScheduleSection = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-top: 1px solid ", ";\n  margin-top: 30px;\n  overflow: auto;\n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
 
 exports.ScheduleSection = ScheduleSection;
 

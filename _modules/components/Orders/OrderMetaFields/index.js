@@ -19,7 +19,7 @@ var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
 
 var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
 
-var _FirstSelect = require("../../../styles/Select/FirstSelect");
+var _Select = require("../../../styles/Select");
 
 var _reactHookForm = require("react-hook-form");
 
@@ -239,7 +239,7 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles.MetaAddContainer, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "meta_type"
-  }, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     defaultValue: selectedMetaKey || 'text',
     options: metaTypeOptions,
     onChange: function onChange(key) {
@@ -303,7 +303,7 @@ var MetaFieldsUI = function MetaFieldsUI(props) {
         message: t('VALIDATION_ERROR_DECIMAL', 'Invalid decimal').replace('_attribute_', t('VALUE', 'Vlue'))
       }
     })
-  }), selectedMetaKey === 'boolean' && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }), selectedMetaKey === 'boolean' && /*#__PURE__*/_react.default.createElement(_Select.Select, {
     className: "select-input",
     defaultValue: selectedBoolean || '1',
     options: booleanOptions,

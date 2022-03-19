@@ -47,7 +47,7 @@ var Accordion = function Accordion(props) {
 
 exports.Accordion = Accordion;
 
-var AccordionItem = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 10px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    align-items: center;\n    img {\n      opacity: 0;\n    }\n    svg,\n    img {\n      ", "\n    }\n\n    span {\n      font-size: 14px;\n      font-weight: 500;\n    }\n  }\n\n  ", "\n\n  ", "\n  \n  border-radius: 8px;\n  &:hover {\n    background-color: ", ";\n\n    > div {\n      img {\n        opacity: 1;\n      }\n    }\n  }\n  ", "\n\n  ", "\n\n"])), function (props) {
+var AccordionItem = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 10px;\n\n  > div {\n    flex: 1;\n    display: flex;\n    align-items: center;\n    svg,\n    img {\n      ", "\n    }\n\n    span {\n      font-size: 14px;\n      font-weight: 500;\n    }\n  }\n\n  ", "\n\n  ", "\n  \n  border-radius: 8px;\n  &:hover {\n    background-color: ", ";\n  }\n  ", "\n\n  ", "\n\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin-right: 10px;\n      "])));

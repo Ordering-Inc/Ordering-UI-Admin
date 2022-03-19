@@ -358,10 +358,7 @@ var OrdersTable = function OrdersTable(props) {
     return function () {
       return document.removeEventListener('keydown', handleChangeKeyboard);
     };
-  }, [isTourOpen, currentTourStep]); // useEffect(() => {
-  //   setTimeState
-  // }, [])
-
+  }, [isTourOpen, currentTourStep]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     id: "orderTable",
     isSelectedOrders: isSelectedOrders,
@@ -388,7 +385,7 @@ var OrdersTable = function OrdersTable(props) {
     colSpan: 3,
     className: "advanced"
   }, t('ADVANCED_LOGISTICS', 'Advanced logistics')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && /*#__PURE__*/_react.default.createElement("th", {
-    colSpan: 3,
+    colSpan: 2,
     className: "timer"
   }, t('SLA_TIMER', 'SLA’s timer')), /*#__PURE__*/_react.default.createElement("th", {
     className: "orderPrice"
@@ -613,7 +610,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "bold"
     }, parsePrice(order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total)), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
-    }))))));
+    })))), /*#__PURE__*/_react.default.createElement("td", null)));
   }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
     totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),

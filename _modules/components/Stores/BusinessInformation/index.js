@@ -234,7 +234,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     type: "submit",
     color: "primary",
-    borderRadius: "5px",
+    borderRadius: "8px",
     disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0
   }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('BUSINESS', 'Business'),
