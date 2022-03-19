@@ -251,10 +251,6 @@ export const OrdersTable = (props) => {
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
 
-  // useEffect(() => {
-  //   setTimeState
-  // }, [])
-
   return (
     <>
       <OrdersContainer
@@ -303,7 +299,7 @@ export const OrdersTable = (props) => {
                   <th colSpan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
                 )}
                 {allowColumns?.timer && (
-                  <th colSpan={3} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
+                  <th colSpan={2} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
                 )}
                 <th className='orderPrice'>
                   <ColumnAllowSettingPopover
@@ -593,6 +589,7 @@ export const OrdersTable = (props) => {
                       )}
                     </div>
                   </td>
+                  <td />
                 </tr>
               </OrderTbody>
             ))

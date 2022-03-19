@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const ScheduleContainer = styled.div`
+  min-width: 400px;
 `
 
 export const TimeScheduleItemContainer = styled.div`
@@ -14,7 +15,7 @@ export const TimeScheduleItemContainer = styled.div`
     display: flex;
     align-items: center;
     h4 {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       margin: 0px;
       padding: 0 16px;
@@ -47,6 +48,7 @@ export const TimeScheduleItemContainer = styled.div`
       }
       > p {
         margin: 6px 0;
+        font-size: 13px;
       }
     }
 
@@ -65,12 +67,27 @@ export const TimeScheduleItemContainer = styled.div`
       }
     }
   }
+
+  @media (min-width: 380px) {
+    > div {
+      h4 {
+        font-size: 14px;
+      }
+      &:nth-child(2) {
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
 `
 
 export const SelectWrapper = styled.div`
   border: 1px solid ${props => props.theme.colors.borderColor};
   border-radius: 8px;
-  width: 90px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
   .select {
     border: none;
     svg {
@@ -84,6 +101,10 @@ export const SelectWrapper = styled.div`
         }
       }
     }
+  }
+
+  @media (min-width: 380px) {
+    width: 90px;
   }
 `
 
