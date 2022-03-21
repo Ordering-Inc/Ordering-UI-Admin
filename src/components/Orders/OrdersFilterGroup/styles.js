@@ -40,6 +40,14 @@ export const WrapperRow = styled.div`
     background-color: ${props => props.theme.colors.secundary};
     border: none;
     font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .order-status-multi-select {
+    p {
+      padding: 0;
+      color: ${props => props.theme.colors.headingColor} !important;
+    }
   }
 
   .date-filter-container {
