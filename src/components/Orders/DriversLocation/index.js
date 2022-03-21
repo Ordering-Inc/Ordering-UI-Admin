@@ -99,8 +99,10 @@ export const DriversLocation = (props) => {
       {googleMapsApiKey && (
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: googleMapsApiKey
+            key: window.document.getElementById('__googleMapsScriptId') ? null : googleMapsApiKey,
+            libraries: ['places', 'geometry', 'drawing', 'visualization']
           }}
+          id='test_map'
           onGoogleApiLoaded={() => setMapLoaded(false)}
           defaultCenter={defaultCenter}
           center={mapCenter}
