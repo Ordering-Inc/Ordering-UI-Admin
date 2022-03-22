@@ -69,6 +69,10 @@ export const ProductSummary = (props) => {
     {
       key: 'product_images',
       value: t('PRODUCT_IMAGES', 'Product images')
+    },
+    {
+      key: 'product_video',
+      value: t('PRODUCT_VIDEO', 'Product video')
     }
     // {
     //   key: 'custom_fields',
@@ -214,7 +218,7 @@ export const ProductSummary = (props) => {
             )}
           </ProductPrice>
           <ProductDescription>{productState?.product?.description}</ProductDescription> */}
-          <ProductConfigsContainer>
+          <ProductConfigsContainer className='testmark'>
             {configsOptions.map(config => (
               <ProductConfigOption
                 key={config.key}
