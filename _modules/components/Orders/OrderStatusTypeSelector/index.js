@@ -366,6 +366,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
 
   if (isFilterView) {
     return /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
+      className: "order-status-multi-select",
       optionInnerMaxHeight: "50vh",
       placeholder: placeholder,
       defaultValue: defaultFilterValues,

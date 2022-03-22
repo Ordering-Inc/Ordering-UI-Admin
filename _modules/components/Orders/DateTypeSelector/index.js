@@ -76,7 +76,9 @@ var DateTypeSelector = function DateTypeSelector(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('LAST_30_DAYS', 'Last 30 days'))
   }, {
     value: 'term',
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, t('FROM', 'From'), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      isDateOption: true
+    }, /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('FROM', 'From')), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
       selected: startDate,
       placeholderText: "mm/dd/yyyy",
       className: "startDate",
@@ -84,7 +86,7 @@ var DateTypeSelector = function DateTypeSelector(props) {
       onChange: function onChange(date) {
         return _handleChangeFromDate(date);
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, t('TO', 'To'), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
+    })), /*#__PURE__*/_react.default.createElement(_styles.DateContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('TO', 'To')), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
       selected: endDate,
       minDate: new Date(startDate),
       placeholderText: "mm/dd/yyyy",

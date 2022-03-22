@@ -70,7 +70,8 @@ var CitySelectorUI = function CitySelectorUI(props) {
       return {
         value: city.id,
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
-          noPadding: true
+          noPadding: true,
+          isDefault: isDefault
         }, city === null || city === void 0 ? void 0 : city.name),
         showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, {
           isDefault: isDefault

@@ -94,6 +94,7 @@ var UsersListingHeader = function UsersListingHeader(props) {
     handleDeleteSeveralUsers: handleDeleteSeveralUsers
   }), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
+    isCustomLayout: true,
     onSearch: onSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')

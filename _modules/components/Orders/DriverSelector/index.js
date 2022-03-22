@@ -147,7 +147,8 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
           content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
             small: small,
             isPhoneView: isPhoneView,
-            padding: padding
+            padding: padding,
+            isFilterView: isFilterView
           }, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverImage, {
             small: small,
             className: "driver-photo"

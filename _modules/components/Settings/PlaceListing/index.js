@@ -286,6 +286,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
     }
   }, t('DELETE', 'Delete')), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
+    isCustomLayout: true,
     placeholder: t('SEARCH', 'Search'),
     searchValue: searchValue,
     onSearch: function onSearch(val) {

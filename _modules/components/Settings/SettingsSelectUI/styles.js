@@ -23,7 +23,9 @@ var SelectHeader = _styledComponents.default.div(_templateObject2 || (_templateO
 
 exports.SelectHeader = SelectHeader;
 
-var SelectContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  p {\n    font-size: 14px;\n    color: #748194;\n  }\n\n  .select {\n    border: none;\n    width: 100%;\n    line-height: 26px;\n\n    > div:first-child {\n      padding: 8px 15px;\n      border-radius: 7.6px;\n      border: 1px solid #DEE2E6;\n      font-size: 14px;\n    }\n\n    .list {\n      max-height: 300px;\n      overflow: auto;\n    }\n  }\n"])));
+var SelectContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  p {\n    font-size: 14px;\n    color: #748194;\n  }\n\n  .select {\n    border: none;\n    width: 100%;\n    line-height: 26px;\n\n    > div:first-child {\n      padding: 8px 15px;\n      border-radius: 7.6px;\n      border: 1px solid ", ";\n      font-size: 14px;\n    }\n\n    .list {\n      max-height: 300px;\n      overflow: auto;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
 
 exports.SelectContent = SelectContent;
 

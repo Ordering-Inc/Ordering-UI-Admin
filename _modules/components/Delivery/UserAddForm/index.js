@@ -25,6 +25,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -85,6 +87,9 @@ var UserAddFormUI = function UserAddFormUI(props) {
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
+
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+      width = _useWindowSize.width;
 
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -309,7 +314,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     isCheckout: isCheckout,
-    "data-tour": "tour_fill"
+    "data-tour": width > 768 ? 'tour_fill' : ''
   }, /*#__PURE__*/_react.default.createElement("h1", null, isDriversPage ? t('NEW_DRIVER', 'New driver') : isDriversManagersPage ? t('NEW_DRIVER_MANAGER', 'New driver manager') : t('USERS_REGISTER', 'New user')), /*#__PURE__*/_react.default.createElement(_styles2.UserImage, {
     className: "user-image"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
@@ -334,7 +339,9 @@ var UserAddFormUI = function UserAddFormUI(props) {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.photo,
     alt: "user image",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))))), !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
+  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))))), /*#__PURE__*/_react.default.createElement(_styles2.MainInformationContainer, {
+    "data-tour": width <= 768 ? 'tour_fill' : ''
+  }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
     values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout
   }).map(function (field) {
     var _formState$result6, _formState$result7, _formState$changes$fi, _formState$result8, _formState$result9, _formState$changes$fi2;
@@ -400,7 +407,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i
     });
-  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('PROFILE', 'Profile'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

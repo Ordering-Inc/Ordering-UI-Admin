@@ -135,7 +135,7 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
   (0, _react.useEffect)(function () {
     if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) setAddSubOption(false);
   }, [formState === null || formState === void 0 ? void 0 : formState.changes]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('LEVELS', 'Levels')), /*#__PURE__*/_react.default.createElement(_styles2.LevelWrapper, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('LEVELS', 'Levels')), /*#__PURE__*/_react.default.createElement(_styles2.LevelContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LevelWrapper, {
     isTitle: true
   }, /*#__PURE__*/_react.default.createElement(_styles2.LevelNameWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('NAME', 'Name'))), /*#__PURE__*/_react.default.createElement(_styles2.LastWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('IN_THE_LAST', 'In the last'))), /*#__PURE__*/_react.default.createElement(_styles2.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('POINTS', 'Points'))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null)), levelList !== null && levelList !== void 0 && levelList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.LevelWrapper, {
@@ -249,7 +249,7 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       return setAddSubOption(true);
     },
     className: "sub-option"
-  }, t('ADD_SUBOPTION', 'Add suboption')), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('ADD_SUBOPTION', 'Add suboption'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('LEVELS', 'Levels'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
