@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
 export const SpreadSheetContainer = styled.div`
+  overflow: auto;
+  > div {
+    min-width: 900px !important;
+    > div {
+      min-width: 100% !important;
+    }
+  }
+
   .ht_clone_top {
     height: auto !important;
   }
@@ -12,6 +20,7 @@ export const SpreadSheetContainer = styled.div`
   }
 
   .ht_master .wtHolder {
+    overflow: initial;
     @media (min-width: 768px) {
       max-height: calc(100vh - 230px);
     }
