@@ -55,12 +55,6 @@ var CityDetails = function CityDetails(props) {
     onChange: function onChange(e) {
       return handleChangesState('name', e.target.value);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADMINISTRATOR', 'Administrator')), /*#__PURE__*/_react.default.createElement(_CityAdministratorSelector.CityAdministratorSelector, {
-    defaultValue: (changesState === null || changesState === void 0 ? void 0 : changesState.administrator_id) || (city === null || city === void 0 ? void 0 : city.administrator_id),
-    cityManagers: cityManagers,
-    handleChangeAdministrator: function handleChangeAdministrator(val) {
-      return handleChangesState('administrator_id', val);
-    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('COUNTRY', 'Country')), /*#__PURE__*/_react.default.createElement(_CountrySelector.CountrySelector, {
     defaultValue: (changesState === null || changesState === void 0 ? void 0 : changesState.country_id) || parseInt(city === null || city === void 0 ? void 0 : city.country_id),
     countries: countries,
