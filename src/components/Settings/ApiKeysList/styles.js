@@ -48,6 +48,7 @@ export const ApiKeysListTable = styled.table`
     th,
     td {
       font-size: 12px;
+      word-break: break-all;
 
       &:last-child {
         width: 100px;

@@ -393,6 +393,7 @@ export const OrderStatusTypeSelector = (props) => {
   if (isFilterView) {
     return (
       <MultiSelect
+        className='order-status-multi-select'
         optionInnerMaxHeight='50vh'
         placeholder={placeholder}
         defaultValue={defaultFilterValues}

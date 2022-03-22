@@ -32,7 +32,7 @@ export const SelectContent = styled.div`
     > div:first-child {
       padding: 8px 15px;
       border-radius: 7.6px;
-      border: 1px solid #DEE2E6;
+      border: 1px solid ${props => props.theme.colors.borderColor};
       font-size: 14px;
     }
 
