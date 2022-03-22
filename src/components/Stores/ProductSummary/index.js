@@ -218,7 +218,7 @@ export const ProductSummary = (props) => {
             )}
           </ProductPrice>
           <ProductDescription>{productState?.product?.description}</ProductDescription> */}
-          <ProductConfigsContainer className='testmark'>
+          <ProductConfigsContainer>
             {configsOptions.map(config => (
               <ProductConfigOption
                 key={config.key}
