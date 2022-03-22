@@ -241,6 +241,7 @@ export const RulesWrapper = styled.div`
 export const CheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
   padding: 12px 0px;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   ${({ borderTop }) => borderTop && css`
@@ -250,18 +251,22 @@ export const CheckBoxWrapper = styled.div`
   > div {
     display: flex;
     align-items: center;
-    svg {
-      color: ${props => props.theme.colors.primary};
+    .rule-control {
+      svg {
+        color: ${props => props.theme.colors.secundaryLight};
+        &.fill {
+          color: ${props => props.theme.colors.primary};
+        }
+      }
     }
-    span {
+    p {
       font-weight: 400;
       font-size: 14px;
       line-height: 24px;
-      margin-left: 20px;
+      margin: 0px 0px 0px 20px;
 
       ${props => props.theme.rtl && css`
-        margin-left: 0px;
-        margin-right: 20px;
+        margin: 0px 20px 0px 0px;
       `}
     }
   }

@@ -106,145 +106,146 @@ export const CampaignList = (props) => {
   }
 
   return (
-    <Container>
-      <Table>
-        <thead>
-          <tr>
-            {allowColumns?.campaign && (
-              <th>{t('CAMPAIGN', 'Campaign')}</th>
-            )}
-            {allowColumns?.contact_type && (
-              <th>{t('CONTACT_TYPE', 'Contact type')}</th>
-            )}
-            {allowColumns?.audience && (
-              <th>{t('AUDIENCE', 'Audience')}</th>
-            )}
-            {allowColumns?.sales_general && (
-              <th>{t('SALES_GENERAL', 'Sales general')}</th>
-            )}
-            {allowColumns?.open_rate && (
-              <th>{t('OPEN_RATE', 'Open rate')}</th>
-            )}
-            {allowColumns?.click_rate && (
-              <th>{t('CLICK_RATE', 'Click rate')}</th>
-            )}
-            <th className='allow-colums action'>
-              <ColumnAllowSettingPopover
-                open={openPopover}
-                allowColumns={allowColumns}
-                optionsDefault={optionsDefault}
-                onClick={() => setOpenPopover(!openPopover)}
-                onClose={() => setOpenPopover(false)}
-                handleChangeAllowColumns={handleChangeAllowColumns}
-                title={t('DISPLAYED_DATA_THE_ORDER', 'Displayed data the order')}
-              />
-            </th>
-          </tr>
-        </thead>
-        {campaignList?.loading ? (
-          [...Array(8).keys()].map(i => (
-            <Tbody key={i}>
-              <tr>
-                {allowColumns?.campaign && (
+    <>
+      <Container>
+        <Table>
+          <thead>
+            <tr>
+              {allowColumns?.campaign && (
+                <th>{t('CAMPAIGN', 'Campaign')}</th>
+              )}
+              {allowColumns?.contact_type && (
+                <th>{t('CONTACT_TYPE', 'Contact type')}</th>
+              )}
+              {allowColumns?.audience && (
+                <th>{t('AUDIENCE', 'Audience')}</th>
+              )}
+              {allowColumns?.sales_general && (
+                <th>{t('SALES_GENERAL', 'Sales general')}</th>
+              )}
+              {allowColumns?.open_rate && (
+                <th>{t('OPEN_RATE', 'Open rate')}</th>
+              )}
+              {allowColumns?.click_rate && (
+                <th>{t('CLICK_RATE', 'Click rate')}</th>
+              )}
+              <th className='allow-colums action'>
+                <ColumnAllowSettingPopover
+                  open={openPopover}
+                  allowColumns={allowColumns}
+                  optionsDefault={optionsDefault}
+                  onClick={() => setOpenPopover(!openPopover)}
+                  onClose={() => setOpenPopover(false)}
+                  handleChangeAllowColumns={handleChangeAllowColumns}
+                  title={t('DISPLAYED_DATA_THE_ORDER', 'Displayed data the order')}
+                />
+              </th>
+            </tr>
+          </thead>
+          {campaignList?.loading ? (
+            [...Array(8).keys()].map(i => (
+              <Tbody key={i}>
+                <tr>
+                  {allowColumns?.campaign && (
+                    <td>
+                      <Skeleton width={120} height={20} />
+                    </td>
+                  )}
+                  {allowColumns?.contact_type && (
+                    <td>
+                      <Skeleton width={100} height={20} />
+                    </td>
+                  )}
+                  {allowColumns?.audience && (
+                    <td>
+                      <Skeleton width={100} height={20} />
+                    </td>
+                  )}
+                  {allowColumns?.sales_general && (
+                    <td>
+                      <Skeleton width={50} height={20} />
+                    </td>
+                  )}
+                  {allowColumns?.open_rate && (
+                    <td>
+                      <Skeleton width={50} height={20} />
+                    </td>
+                  )}
+                  {allowColumns?.click_rate && (
+                    <td>
+                      <Skeleton width={50} height={20} />
+                    </td>
+                  )}
                   <td>
-                    <Skeleton width={120} height={20} />
+                    <SwitchWrapper>
+                      <p className='campaign-enabled'><Skeleton width={80} height={20} /></p>
+                      <Skeleton width={40} height={20} />
+                    </SwitchWrapper>
                   </td>
-                )}
-                {allowColumns?.contact_type && (
-                  <td>
-                    <Skeleton width={100} height={20} />
-                  </td>
-                )}
-                {allowColumns?.audience && (
-                  <td>
-                    <Skeleton width={100} height={20} />
-                  </td>
-                )}
-                {allowColumns?.sales_general && (
-                  <td>
-                    <Skeleton width={50} height={20} />
-                  </td>
-                )}
-                {allowColumns?.open_rate && (
-                  <td>
-                    <Skeleton width={50} height={20} />
-                  </td>
-                )}
-                {allowColumns?.click_rate && (
-                  <td>
-                    <Skeleton width={50} height={20} />
-                  </td>
-                )}
-                <td>
-                  <SwitchWrapper>
-                    <p className='campaign-enabled'><Skeleton width={80} height={20} /></p>
-                    <Skeleton width={40} height={20} />
-                  </SwitchWrapper>
-                </td>
-              </tr>
-            </Tbody>
-          ))
-        ) : (
-          campaignList?.campaigns.map((campaign, i) => (
-            <Tbody
-              key={i}
-              className={selectedCampaign?.id === campaign.id ? 'active' : ''}
-              onClick={(e) => handleClickCampaign(e, campaign)}
-            >
-              <tr>
-                {allowColumns?.campaign && (
-                  <td className='right-border'>
-                    <div>
-                      <p className='bold'>{campaign?.name}</p>
-                    </div>
-                  </td>
-                )}
-                {allowColumns?.contact_type && (
-                  <td>{campaign?.contact_type}</td>
-                )}
-                {allowColumns?.audience && (
-                  <td>{campaign?.audience_type}</td>
-                )}
-                {allowColumns?.sales_general && (
-                  <td>05</td>
-                )}
-                {allowColumns?.open_rate && (
-                  <td>02</td>
-                )}
-                {allowColumns?.click_rate && (
-                  <td className='right-border'>
-                    <div>
-                      <p>02</p>
-                    </div>
-                  </td>
-                )}
-                {(allowColumns?.update || allowColumns?.actions) && (
-                  <td>
-                    {allowColumns?.actions && campaign?.audience_type === 'dynamic' && (
-                      <SwitchWrapper>
-                        <p className='campaign-enabled'>{t('ENABLE', 'Enable')}</p>
-                        <Switch
-                          defaultChecked={campaign?.enabled}
-                          onChange={val => console.log(val)}
-                          // onChange={val => handleUpdateAction(action.id, { enabled: val })}
-                          className='enable_control'
-                        />
-                      </SwitchWrapper>
-                    )}
-                    {allowColumns?.update && campaign?.audience_type === 'fixed' && (
-                      <StatusWrapper>
-                        <p>{campaign?.status}</p>
-                        <StatusPoint style={{ background: checkColor(campaign?.status) }} />
-                      </StatusWrapper>
-                    )}
-                  </td>
-                )}
-              </tr>
-            </Tbody>
-          ))
-        )}
-      </Table>
-
+                </tr>
+              </Tbody>
+            ))
+          ) : (
+            campaignList?.campaigns.map((campaign, i) => (
+              <Tbody
+                key={i}
+                className={selectedCampaign?.id === campaign.id ? 'active' : ''}
+                onClick={(e) => handleClickCampaign(e, campaign)}
+              >
+                <tr>
+                  {allowColumns?.campaign && (
+                    <td className='right-border'>
+                      <div>
+                        <p className='bold'>{campaign?.name}</p>
+                      </div>
+                    </td>
+                  )}
+                  {allowColumns?.contact_type && (
+                    <td>{campaign?.contact_type}</td>
+                  )}
+                  {allowColumns?.audience && (
+                    <td>{campaign?.audience_type}</td>
+                  )}
+                  {allowColumns?.sales_general && (
+                    <td>05</td>
+                  )}
+                  {allowColumns?.open_rate && (
+                    <td>02</td>
+                  )}
+                  {allowColumns?.click_rate && (
+                    <td className='right-border'>
+                      <div>
+                        <p>02</p>
+                      </div>
+                    </td>
+                  )}
+                  {(allowColumns?.update || allowColumns?.actions) && (
+                    <td>
+                      {allowColumns?.actions && campaign?.audience_type === 'dynamic' && (
+                        <SwitchWrapper>
+                          <p className='campaign-enabled'>{t('ENABLE', 'Enable')}</p>
+                          <Switch
+                            defaultChecked={campaign?.enabled}
+                            onChange={val => console.log(val)}
+                            // onChange={val => handleUpdateAction(action.id, { enabled: val })}
+                            className='enable_control'
+                          />
+                        </SwitchWrapper>
+                      )}
+                      {allowColumns?.update && campaign?.audience_type === 'fixed' && (
+                        <StatusWrapper>
+                          <p>{campaign?.status}</p>
+                          <StatusPoint style={{ background: checkColor(campaign?.status) }} />
+                        </StatusWrapper>
+                      )}
+                    </td>
+                  )}
+                </tr>
+              </Tbody>
+            ))
+          )}
+        </Table>
+      </Container>
       {!campaignList.loading && (
         <PagesBottomContainer>
           <AddNewPageButton
@@ -263,6 +264,6 @@ export const CampaignList = (props) => {
           )}
         </PagesBottomContainer>
       )}
-    </Container>
+    </>
   )
 }

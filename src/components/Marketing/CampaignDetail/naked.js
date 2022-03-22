@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 // import { useLanguage } from '../../contexts/LanguageContext'
@@ -9,11 +10,11 @@ import { useSession, useApi, useLanguage, useToast, ToastType } from 'ordering-c
 export const CampaignDetail = (props) => {
   const {
     campaign,
-    recoveryActionList,
+    campaignList,
     UIComponent,
-    handleSuccessUpdateRecoveryAction,
-    handleSuccessAddRecoveryAction,
-    handleSuccessDeleteRecoveryAction
+    handleSuccessUpdateCampaign,
+    handleSuccessAddCampaign,
+    handleSuccessDeleteCampaign
   } = props
 
   const [, t] = useLanguage()
@@ -22,8 +23,7 @@ export const CampaignDetail = (props) => {
   const [, { showToast }] = useToast()
 
   const [campaignState, setCampaignState] = useState({ campaign: campaign, loading: false, error: null })
-  const [formState, setFormState] = useState({ loading: false, changes: {} })
-  const [actionState, setActionState] = useState({ loading: false, error: null })
+  const [formState, setFormState] = useState({ loading: false, changes: {}, error: null })
   const [isAddMode, setIsAddMode] = useState(false)
 
   /**
@@ -39,6 +39,20 @@ export const CampaignDetail = (props) => {
     setFormState({
       ...formState,
       changes: { ...formState.changes, [e.target.name]: e.target.value }
+    })
+  }
+
+  /**
+   * Update credential data
+   * @param {EventTarget} e Related HTML event
+   */
+  const handleChangeContactData = (e) => {
+    const changes = formState.changes?.contact_data
+      ? { ...formState.changes?.contact_data, [e.target.name]: e.target.value }
+      : { [e.target.name]: e.target.value }
+    setFormState({
+      ...formState,
+      changes: { ...formState.changes, contact_data: changes }
     })
   }
 
@@ -76,7 +90,7 @@ export const CampaignDetail = (props) => {
   const handleUpdateClick = async () => {
     try {
       showToast(ToastType.Info, t('LOADING', 'Loading'))
-      setActionState({ loading: true, error: null })
+      setFormState({ ...formState, loading: true, error: null })
       const changes = { ...formState?.changes }
       for (const key in changes) {
         if ((typeof changes[key] === 'object' && changes[key] !== null) || Array.isArray(changes[key])) {
@@ -92,7 +106,7 @@ export const CampaignDetail = (props) => {
         body: JSON.stringify(changes)
       }
 
-      const response = await fetch(`${ordering.root}/event_rules/${campaign.id}`, requestOptions)
+      const response = await fetch(`${ordering.root}/marketing_campaigns/${campaign.id}`, requestOptions)
       const content = await response.json()
 
       if (!content.error) {
@@ -100,26 +114,28 @@ export const CampaignDetail = (props) => {
           ...campaignState,
           campaign: content.result
         })
-        setActionState({ loading: false, error: null })
-        if (handleSuccessUpdateRecoveryAction) {
-          const updatedActions = recoveryActionList?.actions.filter(_action => {
+        setFormState({ ...formState, loading: false, error: null, changes: {} })
+        if (handleSuccessUpdateCampaign) {
+          const updatedCampaigns = campaignList?.campaigns.filter(_action => {
             if (_action.id === campaign.id) {
               Object.assign(_action, content.result)
             }
             return true
           })
-          handleSuccessUpdateRecoveryAction(updatedActions)
+          handleSuccessUpdateCampaign(updatedCampaigns)
         }
         cleanFormState()
-        showToast(ToastType.Success, t('RECOVERY_ACTION_SAVED', 'Recovery action saved'))
+        showToast(ToastType.Success, t('CAMPAIGN_SAVED', 'Campaign saved'))
       } else {
-        setActionState({
+        setFormState({
+          ...formState,
           loading: false,
           error: content.result
         })
       }
     } catch (err) {
-      setActionState({
+      setFormState({
+        ...formState,
         loading: false,
         error: err.message
       })
@@ -127,13 +143,18 @@ export const CampaignDetail = (props) => {
   }
 
   /**
-   * Method to add new recovery action from API
+   * Method to add new campaign from API
    */
-  const handleAddRecoveryAction = async () => {
+  const handleAddCampaign = async () => {
     try {
       showToast(ToastType.Info, t('LOADING', 'Loading'))
-      setActionState({ loading: true, error: null })
+      setFormState({ ...formState, loading: true, error: null })
       const changes = { ...formState?.changes }
+      for (const key in changes) {
+        if ((typeof changes[key] === 'object' && changes[key] !== null) || Array.isArray(changes[key])) {
+          changes[key] = JSON.stringify(changes[key])
+        }
+      }
       const requestOptions = {
         method: 'POST',
         headers: {
@@ -143,21 +164,23 @@ export const CampaignDetail = (props) => {
         body: JSON.stringify(changes)
       }
 
-      const response = await fetch(`${ordering.root}/event_rules`, requestOptions)
+      const response = await fetch(`${ordering.root}/marketing_campaigns`, requestOptions)
       const content = await response.json()
       if (!content.error) {
-        setActionState({ error: null, loading: false })
-        handleSuccessAddRecoveryAction && handleSuccessAddRecoveryAction(content.result)
-        showToast(ToastType.Success, t('RECOVERY_ACTION_ADDED', 'Recovery action added'))
+        setFormState({ ...formState, loading: false, error: null })
+        handleSuccessAddCampaign && handleSuccessAddCampaign(content.result)
+        showToast(ToastType.Success, t('CAMPAIGN_ADDED', 'Campaign added'))
         props.onClose && props.onClose()
       } else {
-        setActionState({
+        setFormState({
+          ...formState,
           loading: false,
           error: content.result
         })
       }
     } catch (err) {
-      setActionState({
+      setFormState({
+        ...formState,
         loading: false,
         error: err.message
       })
@@ -165,12 +188,12 @@ export const CampaignDetail = (props) => {
   }
 
   /**
-   * Method to delete the recovery action
+   * Method to delete a campaign
    */
-  const handleDeleteRecoveryAction = async () => {
+  const handleDeleteCampaign = async () => {
     try {
       showToast(ToastType.Info, t('LOADING', 'Loading'))
-      setActionState({ ...actionState, loading: true })
+      setFormState({ ...formState, loading: true, error: null })
       const requestOptions = {
         method: 'DELETE',
         headers: {
@@ -178,15 +201,26 @@ export const CampaignDetail = (props) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const response = await fetch(`${ordering.root}/event_rules/${campaign.id}`, requestOptions)
+      const response = await fetch(`${ordering.root}/marketing_campaigns/${campaign.id}`, requestOptions)
       const content = await response.json()
       if (!content.error) {
-        handleSuccessDeleteRecoveryAction && handleSuccessDeleteRecoveryAction(campaign.id)
-        showToast(ToastType.Success, t('RECOVERY_ACTION_DELETED', 'Recovery action deleted'))
+        handleSuccessDeleteCampaign && handleSuccessDeleteCampaign(campaign.id)
+        showToast(ToastType.Success, t('CAMPAIGN_DELETED', 'Campaign deleted'))
+        setFormState({ ...formState, loading: false, error: null })
         props.onClose && props.onClose()
+      } else {
+        setFormState({
+          ...formState,
+          loading: false,
+          error: content.result
+        })
       }
     } catch (err) {
-      setActionState({ loading: false, error: [err.message] })
+      setFormState({
+        ...formState,
+        loading: false,
+        error: err.message
+      })
     }
   }
 
@@ -196,7 +230,8 @@ export const CampaignDetail = (props) => {
       setFormState({
         ...formState,
         changes: {
-          enabled: true
+          enabled: true,
+          conditions: []
         }
       })
     } else {
@@ -205,6 +240,21 @@ export const CampaignDetail = (props) => {
     }
     setCampaignState({ ...campaignState, campaign: campaign })
   }, [campaign])
+
+  useEffect(() => {
+    console.log(formState.changes)
+  }, [formState.changes])
+
+  useEffect(() => {
+    if (!formState.changes?.audience_type) return
+    if (formState.changes?.audience_type === 'dynamic') {
+      const changes = {
+        ...formState.changes,
+        end_at: formState.changes?.end_at ?? campaign?.end_at ?? moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+      }
+      setFormState({ ...formState, changes: changes })
+    }
+  }, [formState.changes?.audience_type])
 
   return (
     <>
@@ -215,13 +265,14 @@ export const CampaignDetail = (props) => {
             isAddMode={isAddMode}
             campaignState={campaignState}
             formState={formState}
-            actionState={actionState}
             handleChangeItem={handleChangeItem}
             handleChangeInput={handleChangeInput}
-            handleAddRecoveryAction={handleAddRecoveryAction}
-            handleDeleteRecoveryAction={handleDeleteRecoveryAction}
+            handleAddCampaign={handleAddCampaign}
+            handleDeleteCampaign={handleDeleteCampaign}
             handleUpdateClick={handleUpdateClick}
             handleRemoveKey={handleRemoveKey}
+            handleChangeContactData={handleChangeContactData}
+            setCampaignState={setCampaignState}
           />
         )
       }

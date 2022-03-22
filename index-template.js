@@ -30,6 +30,8 @@ import mobileCase from './template/assets/images/mobile-case.png'
 import mobileMask from './template/assets/images/mobile-mask.png'
 import level from './template/assets/images/level.png'
 import registerOrder from './template/assets/images/register-order.png'
+import mobileHalfMask from './template/assets/images/mobile-half-mask.png'
+import whatsappHeader from './template/assets/images/whatsapp-header.png'
 
 /**
  * business tutorials
@@ -152,7 +154,9 @@ theme.images = {
     mobileCase,
     mobileMask,
     level,
-    registerOrder
+    registerOrder,
+    mobileHalfMask,
+    whatsappHeader
   },
   order: {
     status0: orderStatus0,

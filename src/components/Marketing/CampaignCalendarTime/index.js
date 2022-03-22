@@ -10,7 +10,7 @@ import {
 } from './styles'
 
 export const CampaignCalendarTime = (props) => {
-  const { showTime } = props
+  const { showTime, dateTime, handleChangeDateTime } = props
 
   const [startDate, setStartDate] = useState(new Date())
   const [isOpen, setIsOpen] = useState(false)
@@ -20,10 +20,19 @@ export const CampaignCalendarTime = (props) => {
     setIsOpen(false)
   }
 
+  const handleChangeDate = (date) => {
+    setStartDate(date)
+    handleChangeDateTime && handleChangeDateTime(moment(date).format('YYYY-MM-DD HH:mm:ss'))
+  }
+
   useEffect(() => {
     window.addEventListener('click', handleClickOutside)
     return () => window.removeEventListener('click', handleClickOutside)
   }, [isOpen])
+
+  useEffect(() => {
+    if (dateTime) setStartDate(new Date(dateTime))
+  }, [dateTime])
 
   return (
     <>
@@ -37,7 +46,7 @@ export const CampaignCalendarTime = (props) => {
         <DatePicker
           selected={startDate}
           showTimeSelect={showTime}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => handleChangeDate(date)}
           open={isOpen}
         />
       </DateTimeWrapper>

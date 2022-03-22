@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useLanguage } from 'ordering-components-admin'
 import { ThreeDots } from 'react-bootstrap-icons'
-import { Confirm } from '../../Shared'
+import { Confirm, Alert } from '../../Shared'
 import { CampaignDetail as CampaignDetailController } from './naked'
+import { CampaignDetailGeneral } from '../CampaignDetailGeneral'
+import { CampaignNotification } from '../CampaignNotification'
+import { CampaignWhatsapp } from '../CampaignWhatsapp'
+import { CampaignPopup } from '../CampaignPopup'
+import { CampaignEmail } from '../CampaignEmail'
+import { CampaignSMS } from '../CampaignSMS'
 
 import {
   CampaignDetailContainer,
@@ -16,20 +22,29 @@ import {
   Tabs,
   Tab
 } from './styles'
-import { CampaignDetailGeneral } from '../CampaignDetailGeneral'
+import { CampaignWebHook } from '../CampaignWebHook'
 
 const CampaignDetailUI = (props) => {
   const {
     isAddMode,
     formState,
-    campaignState
+    campaignState,
+    handleDeleteCampaign
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [selectedOption, setSelectedOption] = useState('general')
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
 
   const contentOptionList = [
     { key: 'general', name: t('GENERAL', 'General') },
@@ -42,10 +57,18 @@ const CampaignDetailUI = (props) => {
       content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('CAMPAIGN', 'Campaign')),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
-        // handleDeleteRecoveryAction()
+        handleDeleteCampaign()
       }
     })
   }
+
+  useEffect(() => {
+    if (!formState?.error || formState.loading) return
+    setAlertState({
+      open: true,
+      content: formState?.error
+    })
+  }, [formState?.error])
 
   return (
     <>
@@ -86,12 +109,35 @@ const CampaignDetailUI = (props) => {
             </Tab>
           ))}
         </Tabs>
-        {selectedOption === 'general' && (
-          <CampaignDetailGeneral
-            {...props}
-          />
+        {selectedOption === 'general' && <CampaignDetailGeneral {...props} />}
+        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'email' && (
+          <CampaignEmail {...props} />
+        )}
+        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'sms' && (
+          <CampaignSMS {...props} />
+        )}
+        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'whatsapp' && (
+          <CampaignWhatsapp {...props} />
+        )}
+        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'notification' && (
+          <CampaignNotification {...props} />
+        )}
+        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'popup' && (
+          <CampaignPopup {...props} />
+        )}
+        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'webhook' && (
+          <CampaignWebHook {...props} />
         )}
       </CampaignDetailContainer>
+      <Alert
+        title={t('CAMPAIGN', 'Campaign')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
       <Confirm
         width='700px'
         title={t('WEB_APPNAME', 'Ordering')}

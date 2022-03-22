@@ -45,6 +45,7 @@ export const CampaignListingUI = (props) => {
           <CampaignDetail
             {...props}
             campaign={selectedCampaign}
+            onClose={() => handleCloseDetail()}
           />
         </SideBar>
       )}

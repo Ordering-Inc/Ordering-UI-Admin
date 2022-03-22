@@ -21,25 +21,30 @@ export const Title = styled.h1`
 `
 
 export const RadioCheckWrapper = styled.div`
-  display: flex;
-  align-items: center;
   margin-top: 24px;
 
-  span {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-  }
+  > div {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
 
-  svg {
-    margin-right: 13px;
-    ${props => props.theme.rtl && css`
-      margin-right: 0px;
-      margin-left: 13px;
-    `}
-    color: ${props => props.theme.colors.secundaryLight};
-    &.fill {
-      color:${props => props.theme.colors.primary};
+    span {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    svg {
+      margin-right: 13px;
+      ${props => props.theme.rtl && css`
+        margin-right: 0px;
+        margin-left: 13px;
+      `}
+      color: ${props => props.theme.colors.secundaryLight};
+      &.fill {
+        color:${props => props.theme.colors.primary};
+      }
     }
   }
 `

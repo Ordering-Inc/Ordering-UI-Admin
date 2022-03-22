@@ -138,7 +138,6 @@ export const Tbody = styled.tbody`
 export const SwitchWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
 
   > .campaign-enabled {
     margin-bottom: 0px;

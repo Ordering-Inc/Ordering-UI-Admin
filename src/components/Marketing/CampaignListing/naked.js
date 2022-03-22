@@ -139,20 +139,20 @@ export const CampaignListing = (props) => {
         body: JSON.stringify(changes)
       }
 
-      const response = await fetch(`${ordering.root}/event_rules/${id}`, requestOptions)
+      const response = await fetch(`${ordering.root}/marketing_campaigns/${id}`, requestOptions)
       const content = await response.json()
 
       if (!content.error) {
-        if (handleSuccessUpdateRecoveryAction) {
-          const updatedActions = campaignList?.actions.filter(_action => {
+        if (handleSuccessUpdateCampaign) {
+          const updatedActions = campaignList?.campaigns.filter(_action => {
             if (_action.id === id) {
               Object.assign(_action, content.result)
             }
             return true
           })
-          handleSuccessUpdateRecoveryAction(updatedActions)
+          handleSuccessUpdateCampaign(updatedActions)
         }
-        showToast(ToastType.Success, t('RECOVERY_ACTION_SAVED', 'Recovery action saved'))
+        showToast(ToastType.Success, t('CAMPAIGN_SAVED', 'Campaign saved'))
       } else {
         setCampaignList({
           ...campaignList,
@@ -168,26 +168,26 @@ export const CampaignListing = (props) => {
   }
 
   /**
-   * Method to add the recovery action in the recovery action list
-   * @param {Object} action recovery action to add
+   * Method to add the campaign in the campaign list
+   * @param {Object} result recovery action to add
    */
-  const handleSuccessAddRecoveryAction = (action) => {
-    const actions = [...campaignList.campaigns, action]
+  const handleSuccessAddCampaign = (result) => {
+    const campaigns = [...campaignList.campaigns, result]
     setPaginationProps({
       ...paginationProps,
       to: paginationProps?.to + 1,
       total: paginationProps?.total + 1
     })
-    setCampaignList({ ...campaignList, actions })
+    setCampaignList({ ...campaignList, campaigns })
   }
 
   /**
-   * Method to update the recovery action list
+   * Method to update the campaign list
    */
-  const handleSuccessUpdateRecoveryAction = (updatedActions) => {
+  const handleSuccessUpdateCampaign = (result) => {
     setCampaignList({
       ...campaignList,
-      actions: updatedActions
+      campaigns: result
     })
   }
 
@@ -195,13 +195,13 @@ export const CampaignListing = (props) => {
    * Method to delete the recovery action in the recovery action list
    * @param {Number} actionId recovery action to delete
    */
-  const handleSuccessDeleteRecoveryAction = (actionId) => {
-    const actions = campaignList.campaigns.filter(action => action.id !== actionId)
+  const handleSuccessDeleteCampaign = (campaignId) => {
+    const filteredCampaigns = campaignList.campaigns.filter(campaign => campaign.id !== campaignId)
     setPaginationProps({
       ...paginationProps,
       total: paginationProps?.total - 1
     })
-    setCampaignList({ ...campaignList, actions: actions })
+    setCampaignList({ ...campaignList, campaigns: filteredCampaigns })
   }
 
   useEffect(() => {
@@ -226,9 +226,9 @@ export const CampaignListing = (props) => {
           setPaginationProps={setPaginationProps}
           handleChangeSearch={handleChangeSearch}
           handleUpdateAction={handleUpdateAction}
-          handleSuccessAddRecoveryAction={handleSuccessAddRecoveryAction}
-          handleSuccessUpdateRecoveryAction={handleSuccessUpdateRecoveryAction}
-          handleSuccessDeleteRecoveryAction={handleSuccessDeleteRecoveryAction}
+          handleSuccessAddCampaign={handleSuccessAddCampaign}
+          handleSuccessUpdateCampaign={handleSuccessUpdateCampaign}
+          handleSuccessDeleteCampaign={handleSuccessDeleteCampaign}
         />
       )}
     </>

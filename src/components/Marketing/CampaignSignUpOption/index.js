@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { CampaignSignUpOption as CampaignSignUpOptionController } from './naked'
 import {
   Circle as UnCheckIcon,
   RecordCircleFill as CheckIcon
@@ -14,28 +15,72 @@ import {
   DateRangeWrapper,
   CalendarWrapper
 } from './styles'
-import { RangeCalendar } from '../../Shared'
+import { RangeCalendar, Alert } from '../../Shared'
 import { CampaignCalendarTime } from '../CampaignCalendarTime'
 
-export const CampaignSignUpOption = (props) => {
-  const { title } = props
+const CampaignSignUpOptionUI = (props) => {
+  const {
+    type,
+    title,
+    handleChangeItem,
+    onClose,
+    isAddMode,
+    handleUpdateRule,
+    formState,
+    handleAddRule,
+    ruleFormState,
+    handleChangeDate,
+    handleChangeOption,
+    handleChangeDateTime
+  } = props
 
   const [, t] = useLanguage()
-
-  const [selectedOption, setSelectedOption] = useState('')
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const defaultValue = ruleFormState.changes?.max_date && { from: ruleFormState.changes?.date, to: ruleFormState.changes?.max_date }
 
   const optionList = [
-    { key: 'after', title: t('AFTER', 'After') },
-    { key: 'on', title: t('ON', 'On') },
-    { key: 'before', title: t('BEFORE', 'Before') }
+    { key: '>', title: t('AFTER', 'After') },
+    { key: '=', title: t('ON', 'On') },
+    { key: '<', title: t('BEFORE', 'Before') }
   ]
 
-  const handleChangeDate = (date1, date2) => {
-    console.log(date1, date2)
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
-  const handleChangeOption = (index) => {
-    setSelectedOption(index)
+  const handleSaveRule = () => {
+    if (!ruleFormState.changes?.date_condition) {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_REQUIRED', 'Date condition is required').replace('_attribute_', t('DATE_CONDITION', 'Date condition'))
+      })
+      return
+    }
+    if (!ruleFormState.changes?.date) {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_REQUIRED', 'Date is required').replace('_attribute_', t('DATE', 'Date'))
+      })
+      return
+    }
+
+    if (isAddMode) {
+      const updatedConditions = formState?.changes?.conditions.map(condition => {
+        if (condition.type === type) {
+          return { ...condition, ...ruleFormState.changes }
+        }
+        return condition
+      })
+      handleChangeItem('conditions', updatedConditions)
+    } else if (ruleFormState.changes?.id) {
+      handleUpdateRule()
+    } else {
+      handleAddRule()
+    }
+    onClose && onClose()
   }
 
   return (
@@ -44,33 +89,65 @@ export const CampaignSignUpOption = (props) => {
         <Title>{title}</Title>
         {optionList.map(option => (
           <React.Fragment key={option.key}>
-            <RadioCheckWrapper onClick={() => handleChangeOption(option.key)}>
-              {selectedOption === option.key ? <CheckIcon className='fill' /> : <UnCheckIcon />}
-              <span>{option.title}</span>
+            <RadioCheckWrapper>
+              <div onClick={() => handleChangeOption(option.key)}>
+                {ruleFormState.changes?.date_condition === option.key ? <CheckIcon className='fill' /> : <UnCheckIcon />}
+                <span>{option.title}</span>
+              </div>
             </RadioCheckWrapper>
-            {selectedOption === option.key && (
+            {ruleFormState.changes?.date_condition === option.key && (
               <CalendarWrapper>
-                <CampaignCalendarTime />
+                <CampaignCalendarTime
+                  showTime
+                  dateTime={ruleFormState.changes?.date}
+                  handleChangeDateTime={handleChangeDateTime}
+                />
               </CalendarWrapper>
             )}
           </React.Fragment>
         ))}
-        <RadioCheckWrapper onClick={() => handleChangeOption('range')}>
-          {selectedOption === 'range' ? <CheckIcon className='fill' /> : <UnCheckIcon />}
-          <span>{t('DATE_RANGE', 'Date range')}</span>
+        <RadioCheckWrapper>
+          <div onClick={() => handleChangeOption('<>')}>
+            {ruleFormState.changes?.date_condition === '<>' ? <CheckIcon className='fill' /> : <UnCheckIcon />}
+            <span>{t('DATE_RANGE', 'Date range')}</span>
+          </div>
         </RadioCheckWrapper>
-        {selectedOption === 'range' && (
+        {ruleFormState.changes?.date_condition === '<>' && (
           <DateRangeWrapper>
             <RangeCalendar
               handleChangeDate={handleChangeDate}
+              defaultValue={defaultValue}
               isLeft
             />
           </DateRangeWrapper>
         )}
       </Container>
       <ButtonWrapper>
-        <Button color='primary' borderRadius='8px'>{t('DONE', 'Done')}</Button>
+        <Button
+          color='primary'
+          borderRadius='8px'
+          onClick={handleSaveRule}
+        >
+          {t('DONE', 'Done')}
+        </Button>
       </ButtonWrapper>
+      <Alert
+        title={t('CAMPAIGN', 'Campaign')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
+}
+
+export const CampaignSignUpOption = (props) => {
+  const campaignSignUpOptionProps = {
+    ...props,
+    UIComponent: CampaignSignUpOptionUI
+  }
+  return <CampaignSignUpOptionController {...campaignSignUpOptionProps} />
 }
