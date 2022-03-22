@@ -20,7 +20,6 @@ export const SpreadSheetContainer = styled.div`
   }
 
   .ht_master .wtHolder {
-    overflow: initial;
     @media (min-width: 768px) {
       max-height: calc(100vh - 230px);
     }
