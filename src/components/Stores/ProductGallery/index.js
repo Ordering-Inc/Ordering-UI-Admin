@@ -202,7 +202,7 @@ const ProductGalleryUI = (props) => {
                   />
                   <IconButton
                     color='black'
-                    onClick={() => handleAddGalleryProduct()}
+                    onClick={() => handleAddGalleryProduct(1)}
                     disabled={changesState.loading || productGalleryState.loading}
                   >
                     <PlusCircle />
