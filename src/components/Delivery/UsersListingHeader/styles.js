@@ -57,6 +57,9 @@ export const ActionContainer = styled.div`
   align-items: center;
   margin-top: 20px;
   flex-wrap: wrap;
+  > * {
+    margin-bottom: 10px;
+  }
 
   > *:not(:last-child) {
     ${props => props.theme?.rtl ? css`
@@ -78,14 +81,15 @@ export const ActionContainer = styled.div`
   > *:last-child {
     flex: inherit;
     width: 100%;
-    margin-top: 15px;
   }
 
   @media (min-width: 768px) {
     margin-top: 0px;
+    > * {
+      margin-bottom: 0px;
+    }
     > *:last-child {
       flex: 1;
-      margin-top: 0;
     }
   }
 `
