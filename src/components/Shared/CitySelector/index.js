@@ -26,7 +26,7 @@ const CitySelectorUI = (props) => {
     const _cityOptions = citiesList?.cities.map(city => {
       return {
         value: city.id,
-        content: <Option noPadding>{city?.name}</Option>,
+        content: <Option noPadding isDefault={isDefault}>{city?.name}</Option>,
         showOnSelected: <Option isDefault={isDefault}>{city?.name}</Option>
       }
     })

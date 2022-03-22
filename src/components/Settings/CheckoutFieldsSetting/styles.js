@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const CheckoutFieldsDetailsContainer = styled.div`
-  padding: 26px 40px;
+  padding: 26px 15px;
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
@@ -10,6 +10,15 @@ export const CheckoutFieldsDetailsContainer = styled.div`
     font-weight: 700;
     font-size: 20px;
     margin-bottom: 10px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 40px;
+    ` : css`
+      margin-right: 40px;
+    `}
+  }
+
+  @media (min-width: 768px) {
+    padding: 26px 40px;
   }
 `
 

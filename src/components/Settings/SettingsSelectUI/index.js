@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { Select } from '../../../styles/Select/FirstSelect'
+import { Select } from '../../../styles/Select'
 
 import {
   SettingsSelectContainer,
@@ -51,7 +51,6 @@ export const SettingsSelectUI = (props) => {
             <Select
               defaultValue={config?.value}
               options={options}
-              className='select'
               onChange={(typeValue) => handleSelectChange(typeValue)}
               placeholder={t('SELECT_A_OPTION', 'Select a option')}
             />
