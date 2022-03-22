@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components'
 
 export const DropdownOptionsContainer = styled.div`
+  overflow: auto;
 `
 
 export const DropdownOptionWrapper = styled.div`
+  min-width: 700px;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   width: 100%;
   display: flex;
