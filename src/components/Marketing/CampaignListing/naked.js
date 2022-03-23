@@ -125,9 +125,9 @@ export const CampaignListing = (props) => {
   }
 
   /**
-   * Default fuction for recovery action workflow
+   * Default fuction for campaign workflow
    */
-  const handleUpdateAction = async (id, changes) => {
+  const handleUpdateCampaign = async (id, changes) => {
     try {
       showToast(ToastType.Info, t('LOADING', 'Loading'))
       const requestOptions = {
@@ -144,32 +144,23 @@ export const CampaignListing = (props) => {
 
       if (!content.error) {
         if (handleSuccessUpdateCampaign) {
-          const updatedActions = campaignList?.campaigns.filter(_action => {
+          const updatedCampaigns = campaignList?.campaigns.filter(_action => {
             if (_action.id === id) {
               Object.assign(_action, content.result)
             }
             return true
           })
-          handleSuccessUpdateCampaign(updatedActions)
+          handleSuccessUpdateCampaign(updatedCampaigns)
         }
         showToast(ToastType.Success, t('CAMPAIGN_SAVED', 'Campaign saved'))
-      } else {
-        setCampaignList({
-          ...campaignList,
-          error: content.result
-        })
       }
     } catch (err) {
-      setCampaignList({
-        ...campaignList,
-        error: err.message
-      })
+      console.log(err.message)
     }
   }
-
   /**
    * Method to add the campaign in the campaign list
-   * @param {Object} result recovery action to add
+   * @param {Object} result campaign to add
    */
   const handleSuccessAddCampaign = (result) => {
     const campaigns = [...campaignList.campaigns, result]
@@ -192,8 +183,8 @@ export const CampaignListing = (props) => {
   }
 
   /**
-   * Method to delete the recovery action in the recovery action list
-   * @param {Number} actionId recovery action to delete
+   * Method to delete the campaign in the campaign list
+   * @param {Number} campaignId campaign to delete
    */
   const handleSuccessDeleteCampaign = (campaignId) => {
     const filteredCampaigns = campaignList.campaigns.filter(campaign => campaign.id !== campaignId)
@@ -225,7 +216,7 @@ export const CampaignListing = (props) => {
           setFilterValues={setFilterValues}
           setPaginationProps={setPaginationProps}
           handleChangeSearch={handleChangeSearch}
-          handleUpdateAction={handleUpdateAction}
+          handleUpdateCampaign={handleUpdateCampaign}
           handleSuccessAddCampaign={handleSuccessAddCampaign}
           handleSuccessUpdateCampaign={handleSuccessUpdateCampaign}
           handleSuccessDeleteCampaign={handleSuccessDeleteCampaign}

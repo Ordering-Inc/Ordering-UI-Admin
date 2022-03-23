@@ -22,7 +22,8 @@ export const CampaignList = (props) => {
     paginationProps,
     setPaginationProps,
     handleOpenDetail,
-    selectedCampaign
+    selectedCampaign,
+    handleUpdateCampaign
   } = props
 
   const [, t] = useLanguage()
@@ -226,8 +227,7 @@ export const CampaignList = (props) => {
                           <p className='campaign-enabled'>{t('ENABLE', 'Enable')}</p>
                           <Switch
                             defaultChecked={campaign?.enabled}
-                            onChange={val => console.log(val)}
-                            // onChange={val => handleUpdateAction(action.id, { enabled: val })}
+                            onChange={val => handleUpdateCampaign(campaign.id, { enabled: val })}
                             className='enable_control'
                           />
                         </SwitchWrapper>

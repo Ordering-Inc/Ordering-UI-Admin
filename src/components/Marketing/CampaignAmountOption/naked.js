@@ -183,8 +183,6 @@ export const CampaignAmountOption = (props) => {
     }
   }, [campaignState?.campaign])
 
-  console.log(ruleFormState)
-
   return (
     <>
       {

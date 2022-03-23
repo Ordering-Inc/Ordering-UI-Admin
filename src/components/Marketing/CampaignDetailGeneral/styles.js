@@ -225,6 +225,7 @@ export const RulesWrapper = styled.div`
     font-size: 16px;
     line-height: 24px;
     margin: 0px;
+    margin-bottom: 15px;
   }
   > p {
     font-weight: 400;

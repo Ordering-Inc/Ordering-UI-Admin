@@ -101,6 +101,7 @@ export const CampaignDetailGeneral = (props) => {
   const handleChangeCheckBox = (key) => {
     const conditions = formState?.changes?.conditions ?? campaignState?.campaign?.conditions
     const isUpdate = isEnableStatus(key)
+    // const isValid = getCheckBoxStatus(key)
     let updatedConditions = []
     if (isUpdate) {
       updatedConditions = conditions.filter(item => item.type !== key)
@@ -110,6 +111,16 @@ export const CampaignDetailGeneral = (props) => {
     }
     handleChangeItem('conditions', updatedConditions)
   }
+
+  // const getCheckBoxStatus = (key) => {
+  //   let valid = false
+  //   ruleList.forEach(item => {
+  //     if (key !== item.key && isEnableStatus(item.key)) {
+  //       valid = true
+  //     }
+  //   })
+  //   return valid
+  // }
 
   const handleSubmitBtnClick = () => {
     if (Object.keys(formState.changes).length > 0) {
@@ -189,7 +200,9 @@ export const CampaignDetailGeneral = (props) => {
                       onChange={val => handleChangeItem('enabled', val)}
                     />
                   </SwitchWrapper>
-                  <p>{t('LAST_TIME_ON', 'Last time on')}: <span>{campaignState?.campaign?.end_at ? moment(campaignState?.campaign?.end_at).format('MM/DD/YYYY · HH:mm a') : ''}</span></p>
+                  {campaignState?.campaign?.end_at && (
+                    <p>{t('LAST_TIME_ON', 'Last time on')}: <span>{moment(campaignState?.campaign?.end_at).format('MM/DD/YYYY · HH:mm a')}</span></p>
+                  )}
                 </>
               )}
             </DynamicContentWrapper>
@@ -241,10 +254,10 @@ export const CampaignDetailGeneral = (props) => {
         </AudienceWrapper>
         <RulesWrapper>
           <h2>{t('RULES', 'Rules')}</h2>
-          <p>
+          {/* <p>
             <span>{t('REACHING', 'Reaching')}: </span>
             890 {t('PEOPLE', 'People')}
-          </p>
+          </p> */}
           {ruleList.map((rule, i) => (
             <CheckBoxWrapper
               key={i}

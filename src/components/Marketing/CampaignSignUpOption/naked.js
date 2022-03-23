@@ -199,8 +199,6 @@ export const CampaignSignUpOption = (props) => {
     }
   }, [campaignState?.campaign])
 
-  console.log(ruleFormState)
-
   return (
     <>
       {

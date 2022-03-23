@@ -97,6 +97,7 @@ export const CampaignDetail = (props) => {
           changes[key] = JSON.stringify(changes[key])
         }
       }
+      if (changes?.conditions) delete changes.conditions
       const requestOptions = {
         method: 'PUT',
         headers: {
@@ -224,6 +225,54 @@ export const CampaignDetail = (props) => {
     }
   }
 
+  /**
+   * Method to delete a campaign
+   */
+  const handleDeleteCondition = async (conditionId) => {
+    try {
+      showToast(ToastType.Info, t('LOADING', 'Loading'))
+      setFormState({ ...formState, loading: true, error: null })
+      const requestOptions = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+      const response = await fetch(`${ordering.root}/marketing_campaigns/${campaign.id}/conditions/${conditionId}`, requestOptions)
+      const content = await response.json()
+      if (!content.error) {
+        showToast(ToastType.Success, t('CONDITION_DELETED', 'Condition deleted'))
+        setFormState({ ...formState, loading: false, error: null })
+        if (handleSuccessUpdateCampaign) {
+          const updatedCampaigns = campaignList?.campaigns.map(_action => {
+            if (_action.id === campaign.id) {
+              const conditions = _action.conditions.filter(item => item.id !== content.result)
+              return {
+                ..._action,
+                conditions: conditions
+              }
+            }
+            return _action
+          })
+          handleSuccessUpdateCampaign(updatedCampaigns)
+        }
+      } else {
+        setFormState({
+          ...formState,
+          loading: false,
+          error: content.result
+        })
+      }
+    } catch (err) {
+      setFormState({
+        ...formState,
+        loading: false,
+        error: err.message
+      })
+    }
+  }
+
   useEffect(() => {
     if (Object.keys(campaign).length === 0) {
       setIsAddMode(true)
@@ -240,10 +289,6 @@ export const CampaignDetail = (props) => {
     }
     setCampaignState({ ...campaignState, campaign: campaign })
   }, [campaign])
-
-  useEffect(() => {
-    console.log(formState.changes)
-  }, [formState.changes])
 
   useEffect(() => {
     if (!formState.changes?.audience_type) return
@@ -273,6 +318,7 @@ export const CampaignDetail = (props) => {
             handleRemoveKey={handleRemoveKey}
             handleChangeContactData={handleChangeContactData}
             setCampaignState={setCampaignState}
+            handleDeleteCondition={handleDeleteCondition}
           />
         )
       }

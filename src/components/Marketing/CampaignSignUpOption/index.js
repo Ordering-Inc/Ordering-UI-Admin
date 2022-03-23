@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { CampaignSignUpOption as CampaignSignUpOptionController } from './naked'
+import { useLanguage, CampaignSignUpOption as CampaignSignUpOptionController } from 'ordering-components-admin'
+// import { CampaignSignUpOption as CampaignSignUpOptionController } from './naked'
 import {
   Circle as UnCheckIcon,
   RecordCircleFill as CheckIcon
