@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useLanguage, CampaignAmountOption as CampaignAmountOptionController } from 'ordering-components-admin'
-// import { CampaignAmountOption as CampaignAmountOptionController } from './naked'
 import { Alert } from '../../Shared'
 import {
   Circle as UnCheckIcon,
