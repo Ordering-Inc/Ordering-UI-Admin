@@ -14,6 +14,7 @@ import { PaginationButton } from './PaginationButton'
 import { Personalization } from './Personalization'
 import { Schedule } from './Schedule'
 import { SearchBar } from './SearchBar'
+import { RangeCalendar } from './RangeCalendar'
 
 import { SelectBusinessCategories } from './SelectBusinessCategories'
 import { SelectBusinessProducts } from './SelectBusinessProducts'
@@ -42,6 +43,7 @@ export {
   Personalization,
   Schedule,
   SearchBar,
+  RangeCalendar,
 
   SelectBusinessCategories,
   SelectBusinessProducts,
