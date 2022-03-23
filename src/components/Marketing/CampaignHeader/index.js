@@ -17,7 +17,8 @@ export const CampaignHeader = (props) => {
   const {
     searchValue,
     handleChangeSearch,
-    handleOpenDetail
+    handleOpenDetail,
+    paginationProps
   } = props
 
   const [, t] = useLanguage()
@@ -34,7 +35,7 @@ export const CampaignHeader = (props) => {
             <MenuIcon />
           </IconButton>
         )}
-        <HeaderTitle>{t('CAMPAIGN', 'Campaign')}<span>30 credits available</span></HeaderTitle>
+        <HeaderTitle>{t('CAMPAIGN', 'Campaign')}<span>{paginationProps?.totalItems || 0} credits available</span></HeaderTitle>
       </HeaderSection>
       <TopRightSection>
         <WrapperSearch>

@@ -33,9 +33,9 @@ export const CampaignList = (props) => {
     campaign: true,
     contact_type: true,
     audience: true,
-    sales_general: true,
-    open_rate: true,
-    click_rate: true,
+    // sales_general: true,
+    // open_rate: true,
+    // click_rate: true,
     update: true,
     actions: true
   })
@@ -53,18 +53,18 @@ export const CampaignList = (props) => {
       value: 'audience',
       content: t('AUDIENCE', 'Audience')
     },
-    {
-      value: 'sales_general',
-      content: t('SALES_GENERAL', 'Sales general')
-    },
-    {
-      value: 'open_rate',
-      content: t('OPEN_RATE', 'Open rate')
-    },
-    {
-      value: 'click_rate',
-      content: t('CLICK_RATE', 'Click rate')
-    },
+    // {
+    //   value: 'sales_general',
+    //   content: t('SALES_GENERAL', 'Sales general')
+    // },
+    // {
+    //   value: 'open_rate',
+    //   content: t('OPEN_RATE', 'Open rate')
+    // },
+    // {
+    //   value: 'click_rate',
+    //   content: t('CLICK_RATE', 'Click rate')
+    // },
     {
       value: 'update',
       content: t('UPDATE', 'Update')
@@ -121,7 +121,7 @@ export const CampaignList = (props) => {
               {allowColumns?.audience && (
                 <th>{t('AUDIENCE', 'Audience')}</th>
               )}
-              {allowColumns?.sales_general && (
+              {/* {allowColumns?.sales_general && (
                 <th>{t('SALES_GENERAL', 'Sales general')}</th>
               )}
               {allowColumns?.open_rate && (
@@ -129,7 +129,7 @@ export const CampaignList = (props) => {
               )}
               {allowColumns?.click_rate && (
                 <th>{t('CLICK_RATE', 'Click rate')}</th>
-              )}
+              )} */}
               <th className='allow-colums action'>
                 <ColumnAllowSettingPopover
                   open={openPopover}
@@ -162,7 +162,7 @@ export const CampaignList = (props) => {
                       <Skeleton width={100} height={20} />
                     </td>
                   )}
-                  {allowColumns?.sales_general && (
+                  {/* {allowColumns?.sales_general && (
                     <td>
                       <Skeleton width={50} height={20} />
                     </td>
@@ -176,7 +176,7 @@ export const CampaignList = (props) => {
                     <td>
                       <Skeleton width={50} height={20} />
                     </td>
-                  )}
+                  )} */}
                   <td>
                     <SwitchWrapper>
                       <p className='campaign-enabled'><Skeleton width={80} height={20} /></p>
@@ -207,7 +207,7 @@ export const CampaignList = (props) => {
                   {allowColumns?.audience && (
                     <td>{campaign?.audience_type}</td>
                   )}
-                  {allowColumns?.sales_general && (
+                  {/* {allowColumns?.sales_general && (
                     <td>05</td>
                   )}
                   {allowColumns?.open_rate && (
@@ -219,7 +219,7 @@ export const CampaignList = (props) => {
                         <p>02</p>
                       </div>
                     </td>
-                  )}
+                  )} */}
                   {(allowColumns?.update || allowColumns?.actions) && (
                     <td>
                       {allowColumns?.actions && campaign?.audience_type === 'dynamic' && (

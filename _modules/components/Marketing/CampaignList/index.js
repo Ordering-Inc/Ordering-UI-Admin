@@ -75,9 +75,9 @@ var CampaignList = function CampaignList(props) {
     campaign: true,
     contact_type: true,
     audience: true,
-    sales_general: true,
-    open_rate: true,
-    click_rate: true,
+    // sales_general: true,
+    // open_rate: true,
+    // click_rate: true,
     update: true,
     actions: true
   }),
@@ -94,16 +94,19 @@ var CampaignList = function CampaignList(props) {
   }, {
     value: 'audience',
     content: t('AUDIENCE', 'Audience')
-  }, {
-    value: 'sales_general',
-    content: t('SALES_GENERAL', 'Sales general')
-  }, {
-    value: 'open_rate',
-    content: t('OPEN_RATE', 'Open rate')
-  }, {
-    value: 'click_rate',
-    content: t('CLICK_RATE', 'Click rate')
-  }, {
+  }, // {
+  //   value: 'sales_general',
+  //   content: t('SALES_GENERAL', 'Sales general')
+  // },
+  // {
+  //   value: 'open_rate',
+  //   content: t('OPEN_RATE', 'Open rate')
+  // },
+  // {
+  //   value: 'click_rate',
+  //   content: t('CLICK_RATE', 'Click rate')
+  // },
+  {
     value: 'update',
     content: t('UPDATE', 'Update')
   }, {
@@ -138,7 +141,7 @@ var CampaignList = function CampaignList(props) {
     handleOpenDetail(campaign);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Table, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.campaign) && /*#__PURE__*/_react.default.createElement("th", null, t('CAMPAIGN', 'Campaign')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.contact_type) && /*#__PURE__*/_react.default.createElement("th", null, t('CONTACT_TYPE', 'Contact type')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("th", null, t('AUDIENCE', 'Audience')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.sales_general) && /*#__PURE__*/_react.default.createElement("th", null, t('SALES_GENERAL', 'Sales general')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.open_rate) && /*#__PURE__*/_react.default.createElement("th", null, t('OPEN_RATE', 'Open rate')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.click_rate) && /*#__PURE__*/_react.default.createElement("th", null, t('CLICK_RATE', 'Click rate')), /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Table, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.campaign) && /*#__PURE__*/_react.default.createElement("th", null, t('CAMPAIGN', 'Campaign')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.contact_type) && /*#__PURE__*/_react.default.createElement("th", null, t('CONTACT_TYPE', 'Contact type')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("th", null, t('AUDIENCE', 'Audience')), /*#__PURE__*/_react.default.createElement("th", {
     className: "allow-colums action"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     open: openPopover,
@@ -164,15 +167,6 @@ var CampaignList = function CampaignList(props) {
     })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100,
       height: 20
-    })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.sales_general) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 50,
-      height: 20
-    })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.open_rate) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 50,
-      height: 20
-    })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.click_rate) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 50,
-      height: 20
     })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "campaign-enabled"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -193,9 +187,7 @@ var CampaignList = function CampaignList(props) {
       className: "right-border"
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, campaign === null || campaign === void 0 ? void 0 : campaign.name))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.contact_type) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.contact_type), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.audience_type), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.sales_general) && /*#__PURE__*/_react.default.createElement("td", null, "05"), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.open_rate) && /*#__PURE__*/_react.default.createElement("td", null, "02"), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.click_rate) && /*#__PURE__*/_react.default.createElement("td", {
-      className: "right-border"
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "02"))), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.update) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions)) && /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions) && (campaign === null || campaign === void 0 ? void 0 : campaign.audience_type) === 'dynamic' && /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
+    }, campaign === null || campaign === void 0 ? void 0 : campaign.name))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.contact_type) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.contact_type), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.audience_type), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.update) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions)) && /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions) && (campaign === null || campaign === void 0 ? void 0 : campaign.audience_type) === 'dynamic' && /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "campaign-enabled"
     }, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: campaign === null || campaign === void 0 ? void 0 : campaign.enabled,
