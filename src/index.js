@@ -37,7 +37,7 @@ import {
 import { DeliveryUsersListing, DriversCompaniesListing, DriversGroupsListing } from './components/Delivery'
 import { HomePage } from './components/Home'
 import { LoginForm, ForgotPasswordForm } from './components/Login'
-import { EnterprisePromotionListing } from './components/Marketing'
+import { EnterprisePromotionListing, CampaignListing } from './components/Marketing'
 import { Cms, IntegrationListing, LanguageManager, PlaceListing, Settings, SettingItemUI } from './components/Settings'
 import { BusinessBrandListing, BusinessesListing, BusinessProductsListing } from './components/Stores'
 import { UsersListing, CustomersListing } from './components/Users'
@@ -117,6 +117,7 @@ export {
   LoginForm,
 
   EnterprisePromotionListing,
+  CampaignListing,
   OrderingProductsListing,
 
   Cms,
