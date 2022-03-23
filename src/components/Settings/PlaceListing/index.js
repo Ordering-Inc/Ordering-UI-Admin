@@ -271,7 +271,7 @@ const PlaceListingUI = (props) => {
                 </CheckboxWrapper>
                 <span>{t('CITY', 'City')}</span>
               </CityName>
-              <CityAdministrator isHeader>{t('ADMINISTRATOR', 'Administrator')}</CityAdministrator>
+              {/* <CityAdministrator isHeader>{t('ADMINISTRATOR', 'Administrator')}</CityAdministrator> */}
               <CountryName isHeader>{t('COUNTRY', 'Country')}</CountryName>
               <ActionsContainer isHeader>{t('ACTIONS', 'Actions')}</ActionsContainer>
             </CityWrapper>
@@ -308,12 +308,12 @@ const PlaceListingUI = (props) => {
                           </CheckboxWrapper>
                           <span>{city?.name}</span>
                         </CityName>
-                        <CityAdministrator>
+                        {/* <CityAdministrator>
                           <CityAdministratorSelector
                             defaultValue={parseInt(city?.administrator_id)}
                             cityManagers={cityManagerList.users}
                           />
-                        </CityAdministrator>
+                        </CityAdministrator> */}
                         <CountryName>
                           <CountrySelector
                             defaultValue={parseInt(city?.country_id)}
