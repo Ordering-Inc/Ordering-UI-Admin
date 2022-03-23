@@ -238,7 +238,12 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.slug) || (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.slug) || ''
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.slug) || (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.slug) || '',
+    onKeyPress: function onKeyPress(e) {
+      if (e.which === 32) {
+        e.preventDefault();
+      }
+    }
   }), /*#__PURE__*/_react.default.createElement(_styles2.GenerateButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "7.6px",

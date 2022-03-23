@@ -161,7 +161,12 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
     value: (_ref2 = (_brandFormState$chang6 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang7 = brandFormState.changes) === null || _brandFormState$chang7 === void 0 ? void 0 : _brandFormState$chang7.slug) !== null && _brandFormState$chang6 !== void 0 ? _brandFormState$chang6 : brand === null || brand === void 0 ? void 0 : brand.slug) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: handleChangeInput,
     disabled: brandFormState.loading,
-    autoComplete: "off"
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (e.which === 32) {
+        e.preventDefault();
+      }
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.SaveBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "7.6px",
     color: "primary",

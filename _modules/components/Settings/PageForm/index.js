@@ -192,7 +192,12 @@ var PageFormUI = function PageFormUI(props) {
     onChange: function onChange(e) {
       return handleChangeFormState('slug', e.target.value.replace(/\s/g, ''));
     },
-    placeholder: t('Slug', 'Slug')
+    placeholder: t('Slug', 'Slug'),
+    onKeyPress: function onKeyPress(e) {
+      if (e.which === 32) {
+        e.preventDefault();
+      }
+    }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperEditor, null, /*#__PURE__*/_react.default.createElement(_reactSummernote.default, {
     value: (_pageState$page5 = pageState.page) === null || _pageState$page5 === void 0 ? void 0 : _pageState$page5.body,
     placeholder: t('START_NEW_PAGE'),

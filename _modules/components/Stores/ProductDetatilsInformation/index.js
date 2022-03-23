@@ -305,7 +305,12 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    defaultValue: product === null || product === void 0 ? void 0 : product.slug
+    defaultValue: product === null || product === void 0 ? void 0 : product.slug,
+    onKeyPress: function onKeyPress(e) {
+      if (e.which === 32) {
+        e.preventDefault();
+      }
+    }
   }), /*#__PURE__*/_react.default.createElement(_styles2.Wrapper, {
     style: {
       paddingTop: 10

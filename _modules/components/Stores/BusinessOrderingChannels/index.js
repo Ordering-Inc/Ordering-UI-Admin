@@ -105,6 +105,11 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
     placeholder: t('SLUG', 'Slug'),
     onChange: function onChange(e) {
       return setSlug(e.target.value);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (e.which === 32) {
+        e.preventDefault();
+      }
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",

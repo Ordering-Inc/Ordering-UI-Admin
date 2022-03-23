@@ -266,7 +266,12 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
       required: t('BUSINESS_SLUG_REQUIRED', 'Business slug is required')
     }),
     disabled: formState.loading,
-    autoComplete: "off"
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (e.which === 32) {
+        e.preventDefault();
+      }
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_DESCRIPTION', 'Business description')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     rows: 4,
     name: "description",
