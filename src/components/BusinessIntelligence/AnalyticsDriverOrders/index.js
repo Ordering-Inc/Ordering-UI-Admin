@@ -137,7 +137,7 @@ export const AnalyticsDriverOrders = (props) => {
       <Container>
         <ChartHeaderContainer>
           <p>{isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}</p>
-          <ActionBlock disabled={chartDataList?.data?.dataset?.dataset[0]?.data.length === 0}>
+          <ActionBlock disabled={!chartDataList?.data?.dataset?.dataset[0]?.data.length}>
             <BsArrowsAngleExpand onClick={previewChart} />
             <BsDownload className='download-view' onClick={downloadCSV} />
           </ActionBlock>

@@ -531,7 +531,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   name='name'
                   autoComplete='off'
                   placeholder={t('NAME', 'Name')}
-                  value={
+                  defaultValue={
                     ((editSubOptionId === null) && changesState?.changes?.name) || ''
                   }
                   onChange={(e) => handleChangeInput(e, null)}
@@ -547,7 +547,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 <Input
                   name='price'
                   placeholder={t('PRICE', 'Price')}
-                  value={
+                  defaultValue={
                     ((editSubOptionId === null) && changesState?.changes?.price) || ''
                   }
                   onChange={(e) => handleChangeInput(e, null)}
@@ -565,7 +565,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   <Input
                     name='half_price'
                     placeholder={t('HALF_PRICE', 'Half price')}
-                    value={
+                    defaultValue={
                       ((editSubOptionId === null) && changesState?.changes?.half_price) || ''
                     }
                     onChange={(e) => handleChangeInput(e, null)}
@@ -584,7 +584,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   <Input
                     name='max'
                     placeholder={t('MAX', 'Max')}
-                    value={
+                    defaultValue={
                       ((editSubOptionId === null) && changesState?.changes?.max) || ''
                     }
                     onChange={(e) => handleChangeInput(e, null)}

@@ -44,6 +44,7 @@ export const ActionBlock = styled.div`
     svg {
       color: ${props => props.theme?.colors.disabled};
       cursor: not-allowed;
+      pointer-events: none;
     }
   `}
 `

@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const OrdersContainer = styled.div`
-  max-height: calc(100vh - 410px);
   overflow: auto;
 
   ${({ noScroll }) => noScroll && css`
@@ -10,20 +9,20 @@ export const OrdersContainer = styled.div`
   `}
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 385px);
+    max-height: calc(var(--vh, 1vh) * 100 - 385px);
   }
 
   @media (min-width: 992px) {
-    max-height: calc(100vh - 305px);
+    max-height: calc(var(--vh, 1vh) * 100 - 305px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
-      max-height: calc(100vh - 345px);
+      max-height: calc(var(--vh, 1vh) * 100 - 345px);
     `}
   }
 
   @media (min-width: 1200px) {
-    max-height: calc(100vh - 275px);
+    max-height: calc(var(--vh, 1vh) * 100 - 275px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
-      max-height: calc(100vh - 345px);
+      max-height: calc(var(--vh, 1vh) * 100 - 345px);
     `}
   }
 `
@@ -168,16 +167,21 @@ export const CustomerInfo = styled(BusinessInfo)`
     max-width: 125px;
   }
 `
-export const StatusInfo = styled(BusinessInfo)`
-  .info {
+export const StatusInfo = styled.div`
+  .bold {
+    max-width: 150px;
+    font-weight: 600;
     margin: 0;
-    .bold {
-      max-width: 150px;
-    }
   }
 `
 
 export const DriversInfo = styled.div`
+  .select {
+    > div:first-child {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
   > div {
     > div {
       border: none;

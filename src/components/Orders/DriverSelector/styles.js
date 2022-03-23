@@ -22,14 +22,21 @@ export const Option = styled.div`
   }
 
   ${({ small }) => small && css`
-    padding: 5px 0px;
+    padding: ${({ padding }) => padding || '5px 0px'};
     img {
       width: 25px;
     }
   `}
 
   @media (max-width: 576px) {
-    padding: 5px 0;
+    padding: ${({ padding }) => padding || '5px 0px'};
+    ${({ isFilterView }) => isFilterView && css`
+      ${props => props.theme?.rtl ? css`
+        margin-right: 10px;
+      ` : css`
+        margin-left: 10px;
+      `}
+    `}
   }
 `
 

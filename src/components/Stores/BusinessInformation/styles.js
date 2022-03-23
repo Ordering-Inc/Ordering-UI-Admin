@@ -8,6 +8,7 @@ export const FormInput = styled.form`
 export const HeaderImage = styled.div`
   width: 100%;
   height: 150px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;
@@ -111,7 +112,7 @@ export const ActionsForm = styled.div`
   top: 100%;
   margin-top: 15px;
   > button {
-    height: 35px;
+    height: 44px;
   }
 `
 
@@ -145,12 +146,13 @@ export const LogoImage = styled.div`
 export const PhoneWrapper = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   margin-bottom: 35px;
   > div {
     width: 100%;
   }
   @media (min-width: 576px) {
-    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     > div {
       width: 48%;

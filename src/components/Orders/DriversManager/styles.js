@@ -44,8 +44,9 @@ export const HeaderTitleContainer = styled.div`
 
   h1 {
     color: ${(props) => props.theme.colors.headingColor};
-    font-size: 24px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
     margin: 0px;
     text-transform: capitalize;
   }

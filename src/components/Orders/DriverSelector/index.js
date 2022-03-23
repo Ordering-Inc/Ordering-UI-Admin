@@ -47,7 +47,9 @@ const DriverSelectorUI = (props) => {
       {
         value: 'default',
         content: (
-          <Option padding={orderView ? padding : '0px'}>
+          <Option
+            padding={orderView ? padding : '0px'}
+          >
             {orderView ? (
               <>
                 <WrapperDriverImage small={small} className='driver-photo'>
@@ -90,7 +92,7 @@ const DriverSelectorUI = (props) => {
           value: driver.id,
           showDisable: isFilterView ? true : !(isFilterView || (driver?.enabled && driver?.available && !driver?.busy)),
           content: (
-            <Option small={small} isPhoneView={isPhoneView} padding={padding}>
+            <Option small={small} isPhoneView={isPhoneView} padding={padding} isFilterView={isFilterView}>
               <WrapperDriverImage small={small} className='driver-photo'>
                 <DriverImage bgimage={driver.photo || theme.images.icons?.noDriver} small={small} />
               </WrapperDriverImage>

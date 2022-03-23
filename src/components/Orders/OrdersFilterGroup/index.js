@@ -56,13 +56,13 @@ const OrdersFilterGroupUI = (props) => {
 
   return (
     <Modal
-      title={t('FILTER', 'Filter')}
       width='80%'
-      padding='30px'
+      padding='0px'
       open={open}
       onClose={() => handleCloseFilterModal()}
     >
       <FilterGroupListContainer className='filter-modal'>
+        <h1>{t('FILTER', 'Filter')}</h1>
         <WrapperRow>
           <Input
             type='text'

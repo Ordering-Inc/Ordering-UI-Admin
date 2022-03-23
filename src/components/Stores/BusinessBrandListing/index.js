@@ -65,12 +65,12 @@ const BusinessBrandListingUI = (props) => {
   }
 
   const handleOpenSideBar = (id) => {
+    setSelectedType('general')
     if (id) {
       const brand = brandListState?.brands.find(item => item.id === id)
       setSelectedBrand(brand)
     } else {
       setSelectedBrand(null)
-      setSelectedType('general')
     }
     setOpenDetail(true)
   }
@@ -199,7 +199,7 @@ const BusinessBrandListingUI = (props) => {
                     </td>
                     <td>
                       <ActionsContainer>
-                        <EnableWrapper calssName='brand_enable_control'>
+                        <EnableWrapper className='brand_enable_control'>
                           <span>{t('ENABLE', 'Enable')}</span>
                           <Switch
                             defaultChecked={brand?.enabled}

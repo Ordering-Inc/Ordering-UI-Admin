@@ -14,7 +14,8 @@ import {
   LastWrapper,
   ButtonWrapper,
   PointsWrapper,
-  AddSubOption
+  AddSubOption,
+  LevelContainer
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 
@@ -84,167 +85,169 @@ const PointsWalletLevelsUI = (props) => {
   return (
     <Container>
       <Title>{t('LEVELS', 'Levels')}</Title>
-      <LevelWrapper isTitle>
-        <LevelNameWrapper>
-          <span>{t('NAME', 'Name')}</span>
-        </LevelNameWrapper>
-        <LastWrapper>
-          <span>{t('IN_THE_LAST', 'In the last')}</span>
-        </LastWrapper>
-        <PointsWrapper>
-          <span>{t('POINTS', 'Points')}</span>
-        </PointsWrapper>
-        <ButtonWrapper />
-      </LevelWrapper>
-
-      {levelList?.loading ? (
-        <>
-          {[...Array(5).keys()].map(i => (
-            <LevelWrapper key={i}>
-              <LevelNameWrapper>
-                <Skeleton height={40} />
-              </LevelNameWrapper>
-              <LastWrapper>
-                <Skeleton height={40} />
-              </LastWrapper>
-              <PointsWrapper>
-                <Skeleton height={40} />
-              </PointsWrapper>
-              <ButtonWrapper>
-                <Skeleton width={25} height={25} />
-              </ButtonWrapper>
-            </LevelWrapper>
-          ))}
-        </>
-      ) : (
-        <>
-          {levelList?.levels?.map((level, i) => (
-            <LevelWrapper key={i}>
-              <LevelNameWrapper>
-                <Input
-                  value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.name !== 'undefined'))
-                    ? editFormState?.changes?.name
-                    : level.name ?? ''}
-                  name='name'
-                  autoComplete='off'
-                  placeholder={t('NAME', 'name')}
-                  onChange={(e) => handleUpdateLevel(e, level?.id)}
-                />
-              </LevelNameWrapper>
-              <LastWrapper>
-                <Input
-                  value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.accumulation_rate !== 'undefined'))
-                    ? editFormState?.changes?.accumulation_rate
-                    : level.accumulation_rate ?? ''}
-                  placeholder='0 days'
-                  name='accumulation_rate'
-                  autoComplete='off'
-                  onChange={(e) => handleUpdateLevel(e, level?.id)}
-                  onKeyPress={(e) => {
-                    if (!/^[0-9.]$/.test(e.key)) {
-                      e.preventDefault()
-                    }
-                  }}
-                />
-              </LastWrapper>
-              <PointsWrapper>
-                <Input
-                  value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.minimum_points !== 'undefined'))
-                    ? editFormState?.changes?.minimum_points
-                    : level.minimum_points ?? ''}
-                  placeholder='0 points'
-                  name='minimum_points'
-                  autoComplete='off'
-                  onChange={(e) => handleUpdateLevel(e, level?.id)}
-                  onKeyPress={(e) => {
-                    if (!/^[0-9.]$/.test(e.key)) {
-                      e.preventDefault()
-                    }
-                  }}
-                />
-              </PointsWrapper>
-              <ButtonWrapper>
-                {editFormState?.changes?.id === level.id ? (
-                  <IconButton
-                    color='primary'
-                    type='button'
-                    onClick={() => handleUpdateBtnClick()}
-                  >
-                    <BsPlusSquare />
-                  </IconButton>
-                ) : (
-                  <IconButton
-                    color='black'
-                    type='button'
-                    onClick={() => handleUpdateDeleteClick(level.id)}
-                  >
-                    <Trash />
-                  </IconButton>
-                )}
-              </ButtonWrapper>
-            </LevelWrapper>
-          ))}
-        </>
-      )}
-
-      {addSubOption ? (
-        <LevelWrapper onSubmit={handleSubmit(onSubmit)} ref={containerRef}>
+      <LevelContainer>
+        <LevelWrapper isTitle>
           <LevelNameWrapper>
-            <Input
-              name='name'
-              autoComplete='off'
-              placeholder={t('NAME', 'name')}
-              defaultValue={formState?.changes?.name || ''}
-              onChange={(e) => handleChangeInput(e)}
-            />
+            <span>{t('NAME', 'Name')}</span>
           </LevelNameWrapper>
           <LastWrapper>
-            <Input
-              type='text'
-              name='accumulation_rate'
-              autoComplete='off'
-              defaultValue={formState?.changes?.accumulation_rate || ''}
-              onChange={(e) => handleChangeInput(e)}
-              placeholder='0 days'
-              onKeyPress={(e) => {
-                if (!/^[0-9.]$/.test(e.key)) {
-                  e.preventDefault()
-                }
-              }}
-            />
+            <span>{t('IN_THE_LAST', 'In the last')}</span>
           </LastWrapper>
           <PointsWrapper>
-            <Input
-              type='text'
-              name='minimum_points'
-              autoComplete='off'
-              defaultValue={formState?.changes?.minimum_points || ''}
-              onChange={(e) => handleChangeInput(e)}
-              placeholder='0 points'
-              onKeyPress={(e) => {
-                if (!/^[0-9.]$/.test(e.key)) {
-                  e.preventDefault()
-                }
-              }}
-            />
+            <span>{t('POINTS', 'Points')}</span>
           </PointsWrapper>
-          <ButtonWrapper>
-            <IconButton
-              color='primary'
-              type='submit'
-            >
-              <BsPlusSquare />
-            </IconButton>
-          </ButtonWrapper>
+          <ButtonWrapper />
         </LevelWrapper>
-      ) : (
-        <AddSubOption
-          onClick={() => setAddSubOption(true)}
-          className='sub-option'
-        >
-          {t('ADD_SUBOPTION', 'Add suboption')}
-        </AddSubOption>
-      )}
+
+        {levelList?.loading ? (
+          <>
+            {[...Array(5).keys()].map(i => (
+              <LevelWrapper key={i}>
+                <LevelNameWrapper>
+                  <Skeleton height={40} />
+                </LevelNameWrapper>
+                <LastWrapper>
+                  <Skeleton height={40} />
+                </LastWrapper>
+                <PointsWrapper>
+                  <Skeleton height={40} />
+                </PointsWrapper>
+                <ButtonWrapper>
+                  <Skeleton width={25} height={25} />
+                </ButtonWrapper>
+              </LevelWrapper>
+            ))}
+          </>
+        ) : (
+          <>
+            {levelList?.levels?.map((level, i) => (
+              <LevelWrapper key={i}>
+                <LevelNameWrapper>
+                  <Input
+                    value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.name !== 'undefined'))
+                      ? editFormState?.changes?.name
+                      : level.name ?? ''}
+                    name='name'
+                    autoComplete='off'
+                    placeholder={t('NAME', 'name')}
+                    onChange={(e) => handleUpdateLevel(e, level?.id)}
+                  />
+                </LevelNameWrapper>
+                <LastWrapper>
+                  <Input
+                    value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.accumulation_rate !== 'undefined'))
+                      ? editFormState?.changes?.accumulation_rate
+                      : level.accumulation_rate ?? ''}
+                    placeholder='0 days'
+                    name='accumulation_rate'
+                    autoComplete='off'
+                    onChange={(e) => handleUpdateLevel(e, level?.id)}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9.]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
+                  />
+                </LastWrapper>
+                <PointsWrapper>
+                  <Input
+                    value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.minimum_points !== 'undefined'))
+                      ? editFormState?.changes?.minimum_points
+                      : level.minimum_points ?? ''}
+                    placeholder='0 points'
+                    name='minimum_points'
+                    autoComplete='off'
+                    onChange={(e) => handleUpdateLevel(e, level?.id)}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9.]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
+                  />
+                </PointsWrapper>
+                <ButtonWrapper>
+                  {editFormState?.changes?.id === level.id ? (
+                    <IconButton
+                      color='primary'
+                      type='button'
+                      onClick={() => handleUpdateBtnClick()}
+                    >
+                      <BsPlusSquare />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      color='black'
+                      type='button'
+                      onClick={() => handleUpdateDeleteClick(level.id)}
+                    >
+                      <Trash />
+                    </IconButton>
+                  )}
+                </ButtonWrapper>
+              </LevelWrapper>
+            ))}
+          </>
+        )}
+
+        {addSubOption ? (
+          <LevelWrapper onSubmit={handleSubmit(onSubmit)} ref={containerRef}>
+            <LevelNameWrapper>
+              <Input
+                name='name'
+                autoComplete='off'
+                placeholder={t('NAME', 'name')}
+                defaultValue={formState?.changes?.name || ''}
+                onChange={(e) => handleChangeInput(e)}
+              />
+            </LevelNameWrapper>
+            <LastWrapper>
+              <Input
+                type='text'
+                name='accumulation_rate'
+                autoComplete='off'
+                defaultValue={formState?.changes?.accumulation_rate || ''}
+                onChange={(e) => handleChangeInput(e)}
+                placeholder='0 days'
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+              />
+            </LastWrapper>
+            <PointsWrapper>
+              <Input
+                type='text'
+                name='minimum_points'
+                autoComplete='off'
+                defaultValue={formState?.changes?.minimum_points || ''}
+                onChange={(e) => handleChangeInput(e)}
+                placeholder='0 points'
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+              />
+            </PointsWrapper>
+            <ButtonWrapper>
+              <IconButton
+                color='primary'
+                type='submit'
+              >
+                <BsPlusSquare />
+              </IconButton>
+            </ButtonWrapper>
+          </LevelWrapper>
+        ) : (
+          <AddSubOption
+            onClick={() => setAddSubOption(true)}
+            className='sub-option'
+          >
+            {t('ADD_SUBOPTION', 'Add suboption')}
+          </AddSubOption>
+        )}
+      </LevelContainer>
       <Alert
         title={t('LEVELS', 'Levels')}
         content={alertState.content}

@@ -197,10 +197,11 @@ export const PromotionTypeWrapper = styled.div`
 
 export const DiscountContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-bottom: 30px;
 
   > div {
-    flex: 1;
+    width: calc(50% - 10px);
     display: flex;
     flex-direction: column;
 
@@ -210,12 +211,6 @@ export const DiscountContainer = styled.div`
     }
     
     &:first-child {
-      ${props => props.theme?.rtl ? css`
-        margin-left: 20px;
-      ` : css`
-        margin-right: 20px;
-      `}
-
       .select {
         padding-top: 4px;
         padding-bottom: 4px;
@@ -229,24 +224,17 @@ export const DiscountContainer = styled.div`
 
 export const MinimumLimitContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-bottom: 30px;
 
   > div {
-    flex: 1;
+    width: calc(50% - 10px);
     display: flex;
     flex-direction: column;
 
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
       display: none;
-    }
-    
-    &:first-child {
-      ${props => props.theme?.rtl ? css`
-        margin-left: 20px;
-      ` : css`
-        margin-right: 20px;
-      `}
-    }
+    }    
   }
 `

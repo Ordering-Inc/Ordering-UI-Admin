@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import Tour from 'reactour'
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+// import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { Stars } from 'react-bootstrap-icons'
 
 import {
@@ -81,8 +81,8 @@ export const WizardOrders = (props) => {
       maskClassName='mask'
       className='helper'
       rounded={8}
-      onAfterOpen={target => disableBodyScroll(target)}
-      onBeforeClose={target => enableBodyScroll(target)}
+      // onAfterOpen={target => disableBodyScroll(target)}
+      // onBeforeClose={target => enableBodyScroll(target)}
       showNavigation={false}
       showCloseButton={false}
       disableFocusLock

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrdersContentHeader, OrdersDashboardList, OrderNotification, OrderDetails, Messages } from '../../Orders'
 import { Button } from '../../../styles/Buttons'
@@ -6,6 +6,7 @@ import MdClose from '@meronex/icons/ios/MdClose'
 import { ChatContactList } from '../ChatContactList'
 import { ChatBusinessesList } from '../ChatBusinessesList'
 import { AutoScroll } from '../../Shared'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   MessagesListingContainer,
@@ -34,6 +35,7 @@ const MessagesListingUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const [selectedOption, setSelectedOption] = useState('orders')
   const [orderByOption, setOrderByOption] = useState('last_direct_message_at')
   const [contactsOption, setContactsOption] = useState('drivers')
@@ -52,6 +54,11 @@ const MessagesListingUI = (props) => {
   const handleOrderCardClick = (order) => {
     setSelectedOrder({ ...order })
   }
+
+  useEffect(() => {
+    if (width >= 768) return
+    document.body.style.overflow = isOpenOrderDetail ? 'hidden' : 'auto'
+  }, [width, isOpenOrderDetail])
 
   return (
     <>

@@ -4,6 +4,13 @@ export const FilterGroupListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding: 15px 20px;
+  > h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
 
   & > div {
     width: 48%;
@@ -14,6 +21,10 @@ export const FilterGroupListContainer = styled.div`
     & > div {
       width: 100%;
     }
+  }
+
+  @media (min-width: 768px) {
+    padding: 30px;
   }
 `
 export const WrapperRow = styled.div`
@@ -28,6 +39,15 @@ export const WrapperRow = styled.div`
     margin-bottom: 20px;
     background-color: ${props => props.theme.colors.secundary};
     border: none;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .order-status-multi-select {
+    p {
+      padding: 0;
+      color: ${props => props.theme.colors.headingColor} !important;
+    }
   }
 
   .date-filter-container {

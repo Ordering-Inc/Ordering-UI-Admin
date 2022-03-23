@@ -231,7 +231,7 @@ const BusinessInformationUI = (props) => {
           <Button
             type='submit'
             color='primary'
-            borderRadius='5px'
+            borderRadius='8px'
             disabled={formState.loading || Object.keys(formState?.changes).length === 0}
           >
             {t('SAVE', 'Save')}
