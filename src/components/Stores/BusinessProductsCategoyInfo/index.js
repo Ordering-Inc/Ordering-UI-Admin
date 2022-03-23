@@ -197,6 +197,9 @@ export const BusinessProductsCategoyInfo = (props) => {
           value={
             formState?.changes?.slug || formState?.result?.result?.slug || ''
           }
+          onKeyPress={e => {
+            if (e.which === 32) { e.preventDefault() }
+          }}
         />
         <GenerateButtonWrapper>
           <Button
