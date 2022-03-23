@@ -324,9 +324,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
     }, []).length
   }, !countriesState.loading && selectedCityList.length === countriesState.countries.reduce(function (_cities, country) {
     return [].concat(_toConsumableArray(_cities), _toConsumableArray(country === null || country === void 0 ? void 0 : country.cities));
-  }, []).length ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('CITY', 'City'))), /*#__PURE__*/_react.default.createElement(_styles2.CityAdministrator, {
-    isHeader: true
-  }, t('ADMINISTRATOR', 'Administrator')), /*#__PURE__*/_react.default.createElement(_styles2.CountryName, {
+  }, []).length ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('CITY', 'City'))), /*#__PURE__*/_react.default.createElement(_styles2.CountryName, {
     isHeader: true
   }, t('COUNTRY', 'Country')), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, {
     isHeader: true
@@ -359,10 +357,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
       })
     }, selectedCityList.find(function (_city) {
       return (_city === null || _city === void 0 ? void 0 : _city.id) === city.id;
-    }) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, city === null || city === void 0 ? void 0 : city.name)), /*#__PURE__*/_react.default.createElement(_styles2.CityAdministrator, null, /*#__PURE__*/_react.default.createElement(_CityAdministratorSelector.CityAdministratorSelector, {
-      defaultValue: parseInt(city === null || city === void 0 ? void 0 : city.administrator_id),
-      cityManagers: cityManagerList.users
-    })), /*#__PURE__*/_react.default.createElement(_styles2.CountryName, null, /*#__PURE__*/_react.default.createElement(_CountrySelector.CountrySelector, {
+    }) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, city === null || city === void 0 ? void 0 : city.name)), /*#__PURE__*/_react.default.createElement(_styles2.CountryName, null, /*#__PURE__*/_react.default.createElement(_CountrySelector.CountrySelector, {
       defaultValue: parseInt(city === null || city === void 0 ? void 0 : city.country_id),
       countries: countriesState === null || countriesState === void 0 ? void 0 : countriesState.countries
     })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
