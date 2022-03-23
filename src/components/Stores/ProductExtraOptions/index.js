@@ -5,7 +5,7 @@ import {
   useToast,
   ProductExtraOptions as ProductExtraOptionsController
 } from 'ordering-components-admin'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { PlusCircle, XLg, ThreeDots, Image as ImageIcon, ChevronRight } from 'react-bootstrap-icons'
@@ -61,7 +61,9 @@ const ProductExtraOptionsUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
-  const { handleSubmit, register, errors } = useForm()
+  const { control, handleSubmit, errors, setValue } = useForm({
+    defaultValues: addChangesState
+  })
   const [, { showToast }] = useToast()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -189,6 +191,14 @@ const ProductExtraOptionsUI = (props) => {
     })
   }
 
+  useEffect(() => {
+    if (!addChangesState?.name && addChangesState?.min === 1 && addChangesState?.max === 1) {
+      setValue('name', addChangesState?.name || '')
+      setValue('min', addChangesState?.min || '')
+      setValue('max', addChangesState?.max || '')
+    }
+  }, [addChangesState])
+
   return (
     <MainContainer id='extra_options'>
       <OptionsContainer>
@@ -259,44 +269,71 @@ const ProductExtraOptionsUI = (props) => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <OptionNameContainer>
-            <input
+            <Controller
               name='name'
-              value={addChangesState?.name || ''}
-              placeholder={t('WRITE_A_NAME', 'Write a name')}
-              onChange={(e) => handleChangeAddOption(e)}
-              ref={register({
+              control={control}
+              render={({ onChange, value }) => (
+                <input
+                  name='name'
+                  placeholder={t('WRITE_A_NAME', 'Write a name')}
+                  value={value}
+                  onChange={(e) => {
+                    onChange(e)
+                    handleChangeAddOption(e)
+                  }}
+                  autoComplete='off'
+                />
+              )}
+              rules={{
                 required: t('NAME_REQUIRED', 'The name is required.')
-              })}
-              autoComplete='off'
+              }}
             />
           </OptionNameContainer>
-          <input
+          <Controller
             name='min'
-            value={addChangesState?.min}
-            onChange={(e) => handleChangeAddOptionInput(e, true)}
-            onKeyPress={(e) => {
-              if (!/^[0-9.]$/.test(e.key)) {
-                e.preventDefault()
-              }
-            }}
-            ref={register({
+            control={control}
+            render={({ onChange, value }) => (
+              <input
+                name='min'
+                value={value}
+                onChange={(e) => {
+                  onChange(e)
+                  handleChangeAddOptionInput(e, true)
+                }}
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+                autoComplete='off'
+              />
+            )}
+            rules={{
               required: t('MIN_PURCHASED_REQUIRED', 'The min is required.')
-            })}
-            autoComplete='off'
-          />
-          <input
-            name='max'
-            value={addChangesState?.max}
-            onChange={(e) => handleChangeAddOptionInput(e, false)}
-            onKeyPress={(e) => {
-              if (!/^[0-9.]$/.test(e.key)) {
-                e.preventDefault()
-              }
             }}
-            ref={register({
+          />
+          <Controller
+            name='max'
+            control={control}
+            render={({ onChange, value }) => (
+              <input
+                name='max'
+                value={value}
+                onChange={(e) => {
+                  onChange(e)
+                  handleChangeAddOptionInput(e, false)
+                }}
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+                autoComplete='off'
+              />
+            )}
+            rules={{
               required: t('MAX_PURCHASED_REQUIRED', 'The max is required.')
-            })}
-            autoComplete='off'
+            }}
           />
           <IconButton
             type='submit'
