@@ -274,6 +274,9 @@ export const ProductDetatilsInformation = (props) => {
             disabled={formState.loading}
             autoComplete='off'
             defaultValue={product?.slug}
+            onKeyPress={e => {
+              if (e.which === 32) { e.preventDefault() }
+            }}
           />
           <Wrapper
             style={{ paddingTop: 10 }}

@@ -162,6 +162,9 @@ const PageFormUI = (props) => {
               defaultValue={formState.changes?.slug ?? pageState.page?.slug ?? ''}
               onChange={e => handleChangeFormState('slug', e.target.value.replace(/\s/g, ''))}
               placeholder={t('Slug', 'Slug')}
+              onKeyPress={e => {
+                if (e.which === 32) { e.preventDefault() }
+              }}
             />
           </InputWrapper>
         </InputGroup>
