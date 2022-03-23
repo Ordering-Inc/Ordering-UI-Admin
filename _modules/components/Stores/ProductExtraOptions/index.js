@@ -89,10 +89,13 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
-  var _useForm = (0, _reactHookForm.useForm)(),
+  var _useForm = (0, _reactHookForm.useForm)({
+    defaultValues: addChangesState
+  }),
+      control = _useForm.control,
       handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
-      errors = _useForm.errors;
+      errors = _useForm.errors,
+      setValue = _useForm.setValue;
 
   var _useToast = (0, _orderingComponentsAdmin.useToast)(),
       _useToast2 = _slicedToArray(_useToast, 2),
@@ -264,6 +267,13 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     });
   };
 
+  (0, _react.useEffect)(function () {
+    if (!(addChangesState !== null && addChangesState !== void 0 && addChangesState.name) && (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) === 1 && (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) === 1) {
+      setValue('name', (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) || '');
+      setValue('min', (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) || '');
+      setValue('max', (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) || '');
+    }
+  }, [addChangesState]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, {
     id: "extra_options"
   }, /*#__PURE__*/_react.default.createElement(_styles2.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, extraState.extra.name), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
@@ -308,47 +318,77 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null)), /*#__PURE__*/_react.default.createElement("span", null, option.name)), /*#__PURE__*/_react.default.createElement(_styles2.MinimumPurchase, null, option === null || option === void 0 ? void 0 : option.min), /*#__PURE__*/_react.default.createElement(_styles2.MaxPurchase, null, option === null || option === void 0 ? void 0 : option.max), /*#__PURE__*/_react.default.createElement(_styles2.ArrowWrpper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)));
   }))), /*#__PURE__*/_react.default.createElement(_styles2.AddOptionForm, {
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement("input", {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "name",
-    value: (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) || '',
-    placeholder: t('WRITE_A_NAME', 'Write a name'),
-    onChange: function onChange(e) {
-      return handleChangeAddOption(e);
+    control: control,
+    render: function render(_ref) {
+      var _onChange = _ref.onChange,
+          value = _ref.value;
+      return /*#__PURE__*/_react.default.createElement("input", {
+        name: "name",
+        placeholder: t('WRITE_A_NAME', 'Write a name'),
+        value: value,
+        onChange: function onChange(e) {
+          _onChange(e);
+
+          handleChangeAddOption(e);
+        },
+        autoComplete: "off"
+      });
     },
-    ref: register({
+    rules: {
       required: t('NAME_REQUIRED', 'The name is required.')
-    }),
-    autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement("input", {
+    }
+  })), /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "min",
-    value: addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min,
-    onChange: function onChange(e) {
-      return handleChangeAddOptionInput(e, true);
+    control: control,
+    render: function render(_ref2) {
+      var _onChange2 = _ref2.onChange,
+          value = _ref2.value;
+      return /*#__PURE__*/_react.default.createElement("input", {
+        name: "min",
+        value: value,
+        onChange: function onChange(e) {
+          _onChange2(e);
+
+          handleChangeAddOptionInput(e, true);
+        },
+        onKeyPress: function onKeyPress(e) {
+          if (!/^[0-9.]$/.test(e.key)) {
+            e.preventDefault();
+          }
+        },
+        autoComplete: "off"
+      });
     },
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    },
-    ref: register({
+    rules: {
       required: t('MIN_PURCHASED_REQUIRED', 'The min is required.')
-    }),
-    autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement("input", {
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "max",
-    value: addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max,
-    onChange: function onChange(e) {
-      return handleChangeAddOptionInput(e, false);
+    control: control,
+    render: function render(_ref3) {
+      var _onChange3 = _ref3.onChange,
+          value = _ref3.value;
+      return /*#__PURE__*/_react.default.createElement("input", {
+        name: "max",
+        value: value,
+        onChange: function onChange(e) {
+          _onChange3(e);
+
+          handleChangeAddOptionInput(e, false);
+        },
+        onKeyPress: function onKeyPress(e) {
+          if (!/^[0-9.]$/.test(e.key)) {
+            e.preventDefault();
+          }
+        },
+        autoComplete: "off"
+      });
     },
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    },
-    ref: register({
+    rules: {
       required: t('MAX_PURCHASED_REQUIRED', 'The max is required.')
-    }),
-    autoComplete: "off"
+    }
   }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     type: "submit"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null)))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
