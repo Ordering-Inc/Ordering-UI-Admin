@@ -238,6 +238,68 @@ export const SkipButton = styled.div`
   }
 `
 
-export const LongDescriptionWrapper = styled.div`
-  
+export const HeaderImage = styled.div`
+  width: 100%;
+  height: 150px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: -webkit-grab;
+  cursor: grab;
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+
+  ${({ isEdit }) => !isEdit && css`
+    pointer-event: none;
+  `}
+
+  img,
+  div {
+    width: 100%;
+    border-radius: 8px;
+    height: 100%;
+    overflow: hidden;
+  };
+
+  img{
+    object-fit: cover;
+  }
+
+  @media (min-width: 768px) {
+    height: 180px;
+  }
+`
+
+export const LogoImage = styled.div`
+  transform: translate3d(20px, -30px, 0px);
+  height: 60px;
+  width: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: -webkit-grab;
+  cursor: grab;
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+
+  ${({ isEdit }) => !isEdit && css`
+    pointer-event: none;
+  `}
+
+  img,
+  div {
+    width: 100%;
+    border-radius: 8px;
+    height: 100%;
+    overflow: hidden;
+  };
+
+  img{
+    object-fit: cover;
+  }
+`
+
+export const SkeletonImgWrapper = styled.div`
+  span{
+    height: 100%;
+    position: relative;
+    top: -2.5px;
+  }
 `
