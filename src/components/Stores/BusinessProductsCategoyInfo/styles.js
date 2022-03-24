@@ -106,7 +106,7 @@ export const UploadImageIcon = styled.div`
 `
 
 export const CategoryNameWrapper = styled.div`
-  margin-top: 50px;
+  margin-top: 40px;
 
   label {
     width: 100%;
@@ -115,7 +115,7 @@ export const CategoryNameWrapper = styled.div`
     margin-bottom: 12px;
   }
 
-  input {
+  input, textarea {
     font-size: 14px;
     width: 100%;
   }
@@ -236,4 +236,8 @@ export const SkipButton = styled.div`
   &:hover {
     color: ${props => props.theme.colors.primary};
   }
+`
+
+export const LongDescriptionWrapper = styled.div`
+  
 `

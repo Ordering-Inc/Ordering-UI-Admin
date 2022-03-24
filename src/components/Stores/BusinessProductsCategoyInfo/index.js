@@ -7,7 +7,7 @@ import {
 } from 'ordering-components-admin'
 import { bytesConverter } from '../../../utils'
 import { Alert, Confirm } from '../../Shared'
-import { Button, DefaultSelect, Input, Switch } from '../../../styles'
+import { Button, DefaultSelect, Input, Switch, TextArea } from '../../../styles'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 
 import {
@@ -182,6 +182,16 @@ export const BusinessProductsCategoyInfo = (props) => {
           placeholder={t('ENTER_CATEGORY_NAME', 'Enter a category name')}
           name='name'
           defaultValue={formState?.changes?.name || ''}
+          onChange={handleChangeInput}
+          autoComplete='off'
+        />
+      </CategoryNameWrapper>
+      <CategoryNameWrapper>
+        <label>{t('DESCRIPTION', 'Description')}</label>
+        <TextArea
+          placeholder={t('TYPE_DESCRIPTION', 'Type description ')}
+          name='description'
+          defaultValue={formState?.changes?.description || ''}
           onChange={handleChangeInput}
           autoComplete='off'
         />
