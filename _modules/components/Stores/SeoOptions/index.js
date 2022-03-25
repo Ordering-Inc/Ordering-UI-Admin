@@ -121,7 +121,7 @@ var SeoOptions = function SeoOptions(props) {
         return;
       }
 
-      if (isBusinessSeo) handlechangeImage(files[0]);else handlechangeImageProductCategory(files[0], true);
+      if (isBusinessSeo) handlechangeImage(files[0]);else handlechangeImageProductCategory(files[0], 'seo_image');
     }
   };
 

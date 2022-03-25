@@ -11,13 +11,15 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _utils = require("../../../utils");
 
 var _Shared = require("../../Shared");
 
 var _styles = require("../../../styles");
 
-var _FiCamera = _interopRequireDefault(require("@meronex/icons/fi/FiCamera"));
+var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _styles2 = require("./styles");
 
@@ -46,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
-  var _configState$configs, _configState$configs$, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result3, _formState$result3$re, _formState$changes6, _formState$changes7;
+  var _configState$configs, _configState$configs$, _formState$changes2, _formState$result3, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result4, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9, _formState$changes10, _formState$result5, _formState$result5$re, _formState$changes11, _formState$changes12;
 
   var formState = props.formState,
       handlechangeImage = props.handlechangeImage,
@@ -79,7 +81,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var categoryTypeImageInputRef = (0, _react.useRef)(null);
+  var logoImageInputRef = (0, _react.useRef)(null);
 
   var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -103,11 +105,19 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
       autoGenerateCode = _useState8[0],
       setAutoGenerate = _useState8[1];
 
-  var handleClickImage = function handleClickImage() {
-    categoryTypeImageInputRef.current.click();
+  var headerImageInputRef = (0, _react.useRef)(null);
+
+  var handleClickImage = function handleClickImage(type) {
+    if (type === 'header') {
+      headerImageInputRef.current.click();
+    }
+
+    if (type === 'image') {
+      logoImageInputRef.current.click();
+    }
   };
 
-  var handleFiles = function handleFiles(files) {
+  var handleFiles = function handleFiles(files, name) {
     if (files.length === 1) {
       var _files$;
 
@@ -129,7 +139,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
         return;
       }
 
-      handlechangeImage(files[0]);
+      handlechangeImage(files[0], name);
     }
   };
 
@@ -202,34 +212,74 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
       }));
     }
   }, [autoGenerateCode]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CategoryTypeImage, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderImage, {
     onClick: function onClick() {
-      return handleClickImage();
-    },
-    disabled: formState === null || formState === void 0 ? void 0 : formState.loading
+      return handleClickImage('header');
+    }
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
     onFiles: function onFiles(files) {
-      return handleFiles(files);
+      return handleFiles(files, 'header');
     },
     childRef: function childRef(e) {
-      categoryTypeImageInputRef.current = e;
+      headerImageInputRef.current = e;
     },
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: formState === null || formState === void 0 ? void 0 : formState.loading
+    disabled: formState.loading
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
     onDrop: function onDrop(dataTransfer) {
-      return handleFiles(dataTransfer.files);
+      return handleFiles(dataTransfer.files, 'header');
     },
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: formState === null || formState === void 0 ? void 0 : formState.loading
-  }, formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.image,
-    alt: "business type image",
+    disabled: formState.loading
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonImgWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.header) || ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) === 'Network Error' || formState.result.error ? (category === null || category === void 0 ? void 0 : category.header) && /*#__PURE__*/_react.default.createElement("img", {
+    src: category === null || category === void 0 ? void 0 : category.header,
+    alt: "header image",
     loading: "lazy"
-  }) : /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CATEGORY_NAME', 'Category name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.header) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.header,
+    alt: "header image",
+    loading: "lazy"
+  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), /*#__PURE__*/_react.default.createElement(_styles2.LogoImage, {
+    onClick: function onClick() {
+      return handleClickImage('image');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+    onFiles: function onFiles(files) {
+      return handleFiles(files, 'image');
+    },
+    childRef: function childRef(e) {
+      logoImageInputRef.current = e;
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: formState.loading
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
+    onDrop: function onDrop(dataTransfer) {
+      return handleFiles(dataTransfer.files, 'image');
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: formState.loading
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonImgWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.image) || ((_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result) === 'Network Error' || formState.result.error ? (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
+    src: category === null || category === void 0 ? void 0 : category.image,
+    alt: "logo image",
+    loading: "lazy"
+  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.image) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.image,
+    alt: "logo image",
+    loading: "lazy"
+  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
+    small: true
+  }, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, {
+    small: true
+  }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CATEGORY_NAME', 'Category name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('ENTER_CATEGORY_NAME', 'Enter a category name'),
     name: "name",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.name) || '',
+    onChange: handleChangeInput,
+    autoComplete: "off"
+  })), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+    placeholder: t('TYPE_DESCRIPTION', 'Type description '),
+    name: "description",
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.description) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -238,7 +288,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.slug) || (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.slug) || '',
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.slug) || (formState === null || formState === void 0 ? void 0 : (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : (_formState$result5$re = _formState$result5.result) === null || _formState$result5$re === void 0 ? void 0 : _formState$result5$re.slug) || '',
     onKeyPress: function onKeyPress(e) {
       if (e.which === 32) {
         e.preventDefault();
@@ -247,7 +297,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles2.GenerateButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "7.6px",
-    disabled: formState.loading || !((_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.name),
+    disabled: formState.loading || !((_formState$changes11 = formState.changes) !== null && _formState$changes11 !== void 0 && _formState$changes11.name),
     onClick: function onClick() {
       return setAutoGenerate(_objectSpread(_objectSpread({}, autoGenerateCode), {}, {
         isAutoGenerate: true
@@ -273,7 +323,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   })), !isAddMode && categorySelected && parentCategories.length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ParentCategorySelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PARENT_CATEGORY', 'Parent category')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_PARENT_CATEGORY', 'Select a parent category'),
     options: parentCategoriesOptions,
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.parent_category_id,
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.parent_category_id,
     onChange: function onChange(val) {
       return handleChangeItem({
         parent_category_id: val
