@@ -5,14 +5,15 @@ import {
   ExamineClick,
   useConfig
 } from 'ordering-components-admin'
+import Skeleton from 'react-loading-skeleton'
 import { bytesConverter } from '../../../utils'
 import { Alert, Confirm } from '../../Shared'
-import { Button, DefaultSelect, Input, Switch } from '../../../styles'
-import FiCamera from '@meronex/icons/fi/FiCamera'
+import { Button, DefaultSelect, Input, Switch, TextArea } from '../../../styles'
+// import FiCamera from '@meronex/icons/fi/FiCamera'
+import BiImage from '@meronex/icons/bi/BiImage'
 
 import {
   BusinessEnableWrapper,
-  CategoryTypeImage,
   BtnWrapper,
   UploadImageIconContainer,
   UploadImageIcon,
@@ -20,7 +21,10 @@ import {
   ParentCategorySelectWrapper,
   Option,
   GenerateButtonWrapper,
-  SkipButton
+  SkipButton,
+  HeaderImage,
+  LogoImage,
+  SkeletonImgWrapper
 } from './styles'
 
 export const BusinessProductsCategoyInfo = (props) => {
@@ -44,7 +48,7 @@ export const BusinessProductsCategoyInfo = (props) => {
   const useParentCategory = configState?.configs?.use_parent_category?.value
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const categoryTypeImageInputRef = useRef(null)
+  const logoImageInputRef = useRef(null)
   const [parentCategoriesOptions, setParentCategoriesOptions] = useState([])
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [autoGenerateCode, setAutoGenerate] = useState({
@@ -52,11 +56,19 @@ export const BusinessProductsCategoyInfo = (props) => {
     autoCodeText: categorySelected?.slug
   })
 
-  const handleClickImage = () => {
-    categoryTypeImageInputRef.current.click()
+  const headerImageInputRef = useRef(null)
+
+  const handleClickImage = (type) => {
+    if (type === 'header') {
+      headerImageInputRef.current.click()
+    }
+
+    if (type === 'image') {
+      logoImageInputRef.current.click()
+    }
   }
 
-  const handleFiles = (files) => {
+  const handleFiles = (files, name) => {
     if (files.length === 1) {
       const type = files[0].type.split('/')[0]
       if (type !== 'image') {
@@ -74,7 +86,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         })
         return
       }
-      handlechangeImage(files[0])
+      handlechangeImage(files[0], name)
     }
   }
 
@@ -148,40 +160,83 @@ export const BusinessProductsCategoyInfo = (props) => {
 
   return (
     <>
-      <CategoryTypeImage
-        onClick={() => handleClickImage()}
-        disabled={formState?.loading}
+      <HeaderImage
+        onClick={() => handleClickImage('header')}
       >
         <ExamineClick
-          onFiles={files => handleFiles(files)}
-          childRef={(e) => { categoryTypeImageInputRef.current = e }}
+          onFiles={files => handleFiles(files, 'header')}
+          childRef={(e) => { headerImageInputRef.current = e }}
           accept='image/png, image/jpeg, image/jpg'
-          disabled={formState?.loading}
+          disabled={formState.loading}
         >
           <DragAndDrop
-            onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+            onDrop={dataTransfer => handleFiles(dataTransfer.files, 'header')}
             accept='image/png, image/jpeg, image/jpg'
-            disabled={formState?.loading}
+            disabled={formState.loading}
           >
-            {
-            formState?.changes?.image
-              ? <img src={formState?.changes?.image} alt='business type image' loading='lazy' />
-              : <div />
-            }
+            {formState.loading
+              ? (<SkeletonImgWrapper><Skeleton /></SkeletonImgWrapper>)
+              : ((!formState.changes?.header || formState.result?.result === 'Network Error' || formState.result.error)
+                ? category?.header &&
+                  (<img src={category?.header} alt='header image' loading='lazy' />)
+                : formState?.changes?.header &&
+                  <img src={formState?.changes?.header} alt='header image' loading='lazy' />
+              )}
             <UploadImageIconContainer>
               <UploadImageIcon>
-                <FiCamera />
+                <BiImage />
+                <span>{t('DRAG_DROP_IMAGE_HERE', 'Put your image here')}</span>
               </UploadImageIcon>
             </UploadImageIconContainer>
           </DragAndDrop>
         </ExamineClick>
-      </CategoryTypeImage>
+      </HeaderImage>
+      <LogoImage
+        onClick={() => handleClickImage('image')}
+      >
+        <ExamineClick
+          onFiles={files => handleFiles(files, 'image')}
+          childRef={(e) => { logoImageInputRef.current = e }}
+          accept='image/png, image/jpeg, image/jpg'
+          disabled={formState.loading}
+        >
+          <DragAndDrop
+            onDrop={dataTransfer => handleFiles(dataTransfer.files, 'image')}
+            accept='image/png, image/jpeg, image/jpg'
+            disabled={formState.loading}
+          >
+            {formState.loading
+              ? (<SkeletonImgWrapper><Skeleton /></SkeletonImgWrapper>)
+              : ((!formState.changes?.image || formState.result?.result === 'Network Error' || formState.result.error)
+                ? category?.image &&
+                  (<img src={category?.image} alt='logo image' loading='lazy' />)
+                : formState?.changes?.image &&
+                  <img src={formState?.changes?.image} alt='logo image' loading='lazy' />
+              )}
+            <UploadImageIconContainer small>
+              <UploadImageIcon small>
+                <BiImage />
+              </UploadImageIcon>
+            </UploadImageIconContainer>
+          </DragAndDrop>
+        </ExamineClick>
+      </LogoImage>
       <CategoryNameWrapper>
         <label>{t('CATEGORY_NAME', 'Category name')}</label>
         <Input
           placeholder={t('ENTER_CATEGORY_NAME', 'Enter a category name')}
           name='name'
           defaultValue={formState?.changes?.name || ''}
+          onChange={handleChangeInput}
+          autoComplete='off'
+        />
+      </CategoryNameWrapper>
+      <CategoryNameWrapper>
+        <label>{t('DESCRIPTION', 'Description')}</label>
+        <TextArea
+          placeholder={t('TYPE_DESCRIPTION', 'Type description ')}
+          name='description'
+          defaultValue={formState?.changes?.description || ''}
           onChange={handleChangeInput}
           autoComplete='off'
         />
