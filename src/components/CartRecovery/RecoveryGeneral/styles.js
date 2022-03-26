@@ -116,26 +116,29 @@ export const TypeWrapper = styled.div`
 `
 
 export const ParentCheckBoxWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+  > div {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
 
-  svg {
-    font-size: 16px;
-    color: ${props => props.theme.colors.secundaryLight};
-    &.checked-icon {
-      color: ${props => props.theme.colors.primary};
+    svg {
+      font-size: 16px;
+      color: ${props => props.theme.colors.secundaryLight};
+      &.checked-icon {
+        color: ${props => props.theme.colors.primary};
+      }
     }
-  }
-  
-  > span {
-    font-size: 14px;
-    line-height: 24px;
-    margin-left: 13px;
-    ${props => props.theme.rtl && css`
-      margin-right: 13px;
-      margin-left: 0px;
-    `}
+    
+    > span {
+      font-size: 14px;
+      line-height: 24px;
+      margin-left: 13px;
+      ${props => props.theme.rtl && css`
+        margin-right: 13px;
+        margin-left: 0px;
+      `}
+    }
   }
 `
 

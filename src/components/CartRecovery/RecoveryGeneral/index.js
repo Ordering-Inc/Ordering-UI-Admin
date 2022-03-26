@@ -203,9 +203,11 @@ export const RecoveryGeneral = (props) => {
         <LastTimeWrapper>
           <h3>{t('LAST_TIME_CART_WAS_OPENED', 'Last time the cart was opened')}</h3>
           <TypeWrapper>
-            <ParentCheckBoxWrapper onClick={() => handleSwitchTime()}>
-              {isTime ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
-              <span>{t('TIME', 'Time')}</span>
+            <ParentCheckBoxWrapper>
+              <div onClick={() => handleSwitchTime()}>
+                {isTime ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
+                <span>{t('TIME', 'Time')}</span>
+              </div>
             </ParentCheckBoxWrapper>
             {isTime && (
               <TimeContent>
@@ -236,9 +238,11 @@ export const RecoveryGeneral = (props) => {
             )}
           </TypeWrapper>
           <TypeWrapper>
-            <ParentCheckBoxWrapper onClick={() => handleSwitchTime()}>
-              {!isTime ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
-              <span>{t('DAYS', 'Days')}</span>
+            <ParentCheckBoxWrapper>
+              <div onClick={() => handleSwitchTime()}>
+                {!isTime ? <CheckIcon className='checked-icon' /> : <UnCheckIcon />}
+                <span>{t('DAYS', 'Days')}</span>
+              </div>
             </ParentCheckBoxWrapper>
             {!isTime && (
               <DaysContent>
