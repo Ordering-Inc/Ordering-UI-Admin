@@ -62,7 +62,7 @@ export const EmailPreviewWrapper = styled.div`
 
 export const EmailPreviewHeader = styled.div`
   width: 100%;
-  height: 17px;
+  height: 18px;
   background: ${props => props.theme.colors.secundaryDarkContrast};
 `
 

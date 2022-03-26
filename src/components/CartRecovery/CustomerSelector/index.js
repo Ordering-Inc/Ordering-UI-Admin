@@ -1,52 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import {
-  useLanguage
+  useLanguage,
+  UsersList as UsersListController
 } from 'ordering-components-admin'
 import { MultiSelect } from '../../../styles'
+import Skeleton from 'react-loading-skeleton'
 import {
   Option,
   PlaceholderTitle,
   OptionContent,
   OptionName,
-  OptionCategory,
   WrapperBusinessImage,
   BusinessImage
 } from './styles'
 
-export const CustomerSelector = (props) => {
+const CustomerSelectorUI = (props) => {
   const {
-    filterValues,
-    businessesList,
-    handleChangeBusinesses
+    cartFilterValues,
+    handleChangeCustomers,
+    usersList
   } = props
 
   const [, t] = useLanguage()
-  const [businessTypes, setBusinessTypes] = useState([])
+  const [customerTypes, setCustomerTypes] = useState([])
 
   const Placeholder = <PlaceholderTitle>{t('SELECT_A_CUSTOMER', 'Select a customer')}</PlaceholderTitle>
-  const businessesLoading = [{ value: 'default', content: <Option>{t('CUSTOMER_LOADING', 'Customer loading')}...</Option> }]
 
   useEffect(() => {
     const _businessesOptionList = []
-    if (!businessesList.loading) {
-      const _businessesOption = businessesList.businesses.map((business) => {
+    if (!usersList.loading) {
+      const _businessesOption = usersList.users.map((user) => {
         return {
-          value: business.id,
+          value: user.id,
           content: (
             <Option>
               <WrapperBusinessImage>
-                {business.logo && <BusinessImage bgimage={business.logo} />}
+                {user.photo && <BusinessImage bgimage={user.photo} />}
               </WrapperBusinessImage>
               <OptionContent>
                 <OptionName>
-                  {business.name}
+                  {user.name} {user.lastname}
                 </OptionName>
-                <OptionCategory>
-                  {business?.alcohol && t('ALCOHOL', 'Alcohol')}
-                  {business?.food && t('FOOD', 'Food')}
-                  {business?.groceries && t('GROCERIES', 'Groceries')}
-                  {business?.laundry && t('LAUNDRY', 'Laundry')}
-                </OptionCategory>
               </OptionContent>
             </Option>
           )
@@ -57,31 +51,36 @@ export const CustomerSelector = (props) => {
         _businessesOptionList.push(option)
       }
     }
-
-    setBusinessTypes(_businessesOptionList)
-  }, [businessesList])
+    setCustomerTypes(_businessesOptionList)
+  }, [usersList])
 
   return (
     <>
-      {!businessesList.loading ? (
+      {!usersList.loading ? (
         <MultiSelect
-          defaultValue={filterValues.businessIds}
+          defaultValue={cartFilterValues.customerIds}
           placeholder={Placeholder}
-          options={businessTypes}
+          options={customerTypes}
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'
           optionBottomBorder
-          onChange={(business) => handleChangeBusinesses(business)}
+          onChange={(customer) => handleChangeCustomers(customer)}
         />
       ) : (
-        <MultiSelect
-          defaultValue='default'
-          options={businessesLoading}
-          optionInnerMargin='10px'
-          optionInnerMaxHeight='150px'
-          optionBottomBorder
-        />
+        <div>
+          <Skeleton style={{ width: '100%', height: '44px' }} />
+        </div>
       )}
     </>
   )
+}
+
+export const CustomerSelector = (props) => {
+  const customerSelectorProps = {
+    ...props,
+    UIComponent: CustomerSelectorUI,
+    deafultUserTypesSelected: [3],
+    propsToFetch: ['name', 'lastname', 'photo']
+  }
+  return <UsersListController {...customerSelectorProps} />
 }

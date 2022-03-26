@@ -27,11 +27,6 @@ export const OptionName = styled.div`
   font-size: 14px;
   line-height: 1.3;
 `
-export const OptionCategory = styled.div`
-  color: #263238;
-  font-size: 12px;
-  line-height: 1.3;
-`
 
 export const WrapperBusinessImage = styled.div`
   width: 30px;

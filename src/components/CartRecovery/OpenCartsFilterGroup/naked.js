@@ -23,7 +23,8 @@ export const OrdersFilter = (props) => {
     cityIds: [],
     statuses: [],
     deliveryTypes: [],
-    paymethodIds: []
+    paymethodIds: [],
+    customerIds: []
   })
 
   /**
@@ -123,6 +124,7 @@ export const OrdersFilter = (props) => {
     }
     setFilterValues({ ...filterValues, deliveryEndDatetime: endDatetime })
   }
+
   /**
    * Change businesses
    * * @param {number} businessId business id
@@ -136,6 +138,21 @@ export const OrdersFilter = (props) => {
     }
     setFilterValues({ ...filterValues, businessIds: _businessIds })
   }
+
+  /**
+   * Change customers
+   * * @param {number} customerId customer id
+  */
+  const handleChangeCustomers = (customerId) => {
+    let _customerIds = [...filterValues.customerIds]
+    if (!_customerIds.includes(customerId)) {
+      _customerIds.push(customerId)
+    } else {
+      _customerIds = _customerIds.filter((_customerId) => _customerId !== customerId)
+    }
+    setFilterValues({ ...filterValues, customerIds: _customerIds })
+  }
+
   /**
    * Change driver
    * * @param {number} driverId driver id
@@ -248,6 +265,7 @@ export const OrdersFilter = (props) => {
           handleChangeBusinesses={handleChangeBusinesses}
           handleChangeDriver={handleChangeDriver}
           handleChangeCity={handleChangeCity}
+          handleChangeCustomers={handleChangeCustomers}
           handleChangeOrderStatus={handleChangeOrderStatus}
           handleChangeDeliveryType={handleChangeDeliveryType}
           handleChangePaymethodType={handleChangePaymethodType}

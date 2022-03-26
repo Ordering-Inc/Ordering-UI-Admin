@@ -26,7 +26,8 @@ const OpenCartsFilterGroupUI = (props) => {
     handleChangeCity,
     handleResetFilterValues,
     handleChangeFilterValues,
-    handleChangeOrderId
+    handleChangeOrderId,
+    handleChangeCustomers
   } = props
 
   const [, t] = useLanguage()
@@ -66,9 +67,8 @@ const OpenCartsFilterGroupUI = (props) => {
             handleChangeBusinesses={handleChangeBusinesses}
           />
           <CustomerSelector
-            filterValues={filterValues}
-            businessesList={businessesList}
-            handleChangeBusinesses={handleChangeBusinesses}
+            cartFilterValues={filterValues}
+            handleChangeCustomers={handleChangeCustomers}
           />
         </WrapperRow>
         <WrapperRow className='city-filter'>
