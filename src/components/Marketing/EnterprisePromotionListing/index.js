@@ -58,7 +58,7 @@ const EnterprisePromotionListingUI = (props) => {
 
   return (
     <>
-      <PromotionsListingContainer eventDisabled={advancedOfferModuleDisabled}>
+      <PromotionsListingContainer>
         <HeaderContainer>
           <HeaderTitleContainer>
             {isCollapse && (
@@ -71,7 +71,7 @@ const EnterprisePromotionListingUI = (props) => {
             )}
             <h1>{t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise')}</h1>
           </HeaderTitleContainer>
-          <ActionsWrapper>
+          <ActionsWrapper eventDisabled={advancedOfferModuleDisabled}>
             <Button
               color='lightPrimary'
               borderRadius='8px'

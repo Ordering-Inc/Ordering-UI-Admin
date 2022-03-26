@@ -186,8 +186,8 @@ const OrdersManagerUI = (props) => {
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
         />
-        <OrderSubFilterControls>
-          <OrderStatusSubFilterWrapper>
+        <OrderSubFilterControls isColumn={selectedOrderIds?.length}>
+          <OrderStatusSubFilterWrapper isColumn={selectedOrderIds?.length}>
             <OrderStatusSubFilter
               ordersStatusGroup={ordersStatusGroup}
               selectedSubOrderStatus={selectedSubOrderStatus}

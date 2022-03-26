@@ -48,7 +48,7 @@ export const WrapperDriversList = styled.div`
 `
 
 export const WrapperDriversLocation = styled.div`
-  height: 80vh;
+  height: calc(var(--vh, 1vh) * 100 - 190px);
   border-radius: 8px;
   overflow: hidden;
   margin-top: 20px;

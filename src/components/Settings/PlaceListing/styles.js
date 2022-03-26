@@ -46,6 +46,7 @@ export const HeaderLeft = styled.div`
 export const HeaderRight = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   button {
     height: 41px;
     ${props => props.theme?.rtl ? css`
@@ -54,10 +55,25 @@ export const HeaderRight = styled.div`
       margin-right: 11px;
     `}
   }
-
   input {
     border: none;
     background-color: ${props => props.theme.colors.secundary};
+  }
+  > * {
+    margin-bottom: 10px;
+    &:last-child {
+      width: 100%;
+      flex: initial;
+    }
+  }
+  @media (min-width: 768px) {
+    > * {
+      margin-bottom: 0px;
+      &:last-child {
+        width: initial;
+        flex: 1;
+      }
+    }
   }
 `
 
@@ -107,9 +123,11 @@ export const Tab = styled.div`
 `
 
 export const CitiesListContainer = styled.div`
+  overflow: auto;
 `
 
 export const CityWrapper = styled.div`
+  min-width: 700px;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   width: 100%;
   display: flex;

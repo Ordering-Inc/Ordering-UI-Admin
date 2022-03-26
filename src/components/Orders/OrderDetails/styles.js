@@ -8,7 +8,6 @@ export const Container = styled.div`
   box-shadow: 0px 8px 35px rgba(0, 0, 0, 0.16);
 
   ${({ isSelectedOrders }) => isSelectedOrders && css`
-    position: absolute;
     box-shadow: none;
 
     ${props => props.theme?.rtl ? css`
@@ -18,7 +17,7 @@ export const Container = styled.div`
     `}
   `}
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   top: 0px;
   z-index: 1001;
   overflow-x: hidden;

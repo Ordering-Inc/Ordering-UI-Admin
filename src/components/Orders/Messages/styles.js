@@ -162,7 +162,6 @@ export const MessageBusiness = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
   margin: 0 auto;
@@ -173,7 +172,6 @@ export const MessageCustomer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  flex-wrap: wrap;
   font-size: 0.8em;
   width: 91%;
   margin: 0 auto;
@@ -320,7 +318,6 @@ export const Send = styled.form`
   height: auto;
   max-width: 1200px;
   justify-content: space-between;
-  column-gap: 10px;
   width: 100%;
   input {
     padding-top: 10px;
@@ -334,9 +331,19 @@ export const WrapperSendInput = styled.div`
   flex: 1;
   position: relative;
   box-sizing: border-box;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
 
   > input {
     border: 1px solid ${props => props.theme.colors.borderColor};
+    padding-right: 45px;
+    ${props => props.theme.rtl && css`
+      padding-left: 45px;
+      padding-right: 15px;
+    `}
   }
 `
 

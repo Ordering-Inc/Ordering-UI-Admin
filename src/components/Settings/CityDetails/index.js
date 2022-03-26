@@ -42,14 +42,14 @@ export const CityDetails = (props) => {
             onChange={e => handleChangesState('name', e.target.value)}
           />
         </InputWrapper>
-        <InputWrapper>
+        {/* <InputWrapper>
           <label>{t('ADMINISTRATOR', 'Administrator')}</label>
           <CityAdministratorSelector
             defaultValue={changesState?.administrator_id || city?.administrator_id}
             cityManagers={cityManagers}
             handleChangeAdministrator={val => handleChangesState('administrator_id', val)}
           />
-        </InputWrapper>
+        </InputWrapper> */}
         <InputWrapper>
           <label>{t('COUNTRY', 'Country')}</label>
           <CountrySelector

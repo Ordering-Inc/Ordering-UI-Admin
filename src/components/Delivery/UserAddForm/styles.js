@@ -26,6 +26,7 @@ export const UserImage = styled.div`
 `
 
 export const Image = styled.div`
+  position: relative;
   width: 90px;
   height: 90px;
   border-radius: 8px;
@@ -182,4 +183,7 @@ export const SkeletonForm = styled.div`
       margin: 5px;
     }
   }
+`
+export const MainInformationContainer = styled.div`
+  flex: 1;
 `

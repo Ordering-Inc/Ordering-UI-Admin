@@ -84,6 +84,7 @@ export const OptionContainer = styled.div`
 export const OptionImage = styled.div`
   width: 95px;
   height: 95px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;
@@ -170,6 +171,11 @@ export const InputWrapper = styled.div`
   }
   .default {
     min-width: 50px;
+    width: 65px;
+    text-align: center;
+    svg {
+      color: ${props => props.theme.colors.secundaryLight};
+    }
   }
   ${({ primary }) => !primary && css`
     label {
@@ -255,36 +261,6 @@ export const EnableWrapper = styled.div`
   }
 `
 
-export const DropDownWrapper = styled.div`
-  button {
-    background: #F8F9FA !important;
-    border: none;
-    padding: 0px;
-    svg {
-      color: ${props => props.theme.colors.headingColor};
-    }
-
-    &:after {
-      display: none;
-    }
-  }
-
-  > div {
-    > div {
-      border: 1px solid #E9ECEF;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
-
-      a:last-child {
-        color: #E63757;
-      }
-    }
-  }
-
-  .dropdown-item {
-    font-size: 14px;
-  }
-`
 export const OptionSettings = styled.div`
   display: flex;
   margin: 20px 0;
@@ -342,6 +318,7 @@ export const SubOptionContainer = styled.div`
 export const SubOptionImage = styled.div`
   width: 44px;
   height: 44px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;
@@ -413,5 +390,18 @@ export const SelectboxGroup = styled.div`
 
   @media (min-width: 1200px) {
     max-width: initial;
+  }
+`
+
+export const AddNewOptionButton = styled.div`
+  margin-top: 15px;
+  font-size: 14px;
+  color: ${props => props.theme.colors.lightGray};
+  span {
+    cursor: pointer;
+  }
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
   }
 `

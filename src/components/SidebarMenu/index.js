@@ -194,14 +194,16 @@ export const SidebarMenu = (props) => {
       title: t('INVOICE_MANAGER', 'Invoice manager'),
       pageName: 'invoice',
       url: '/intelligence/invoice'
-    },
-    {
-      id: 5,
-      title: t('ADVANCED_REPORTS', 'Advanced Reports'),
-      pageName: 'reports',
-      url: '/intelligence/reports'
     }
+    // {
+    //   id: 5,
+    //   title: t('ADVANCED_REPORTS', 'Advanced Reports'),
+    //   pageName: 'reports',
+    //   url: '/intelligence/reports'
+    // }
   ]
+
+  const businessOwnerIntelligencesIncluded = [1]
 
   const deliverySubmenus = [
     {
@@ -236,6 +238,12 @@ export const SidebarMenu = (props) => {
       title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
       pageName: 'enterprise_promotions',
       url: '/marketing/promotions-enterprise'
+    },
+    {
+      id: 2,
+      title: t('CAMPAIGN', 'Campaign'),
+      pageName: 'campaign',
+      url: '/marketing/campaign'
     }
   ]
 
@@ -321,6 +329,7 @@ export const SidebarMenu = (props) => {
                     <Accordion.Collapse eventKey='1'>
                       <MenuContent>
                         {ordersSubMenus.map(item => (
+                          !(sessionState?.user?.level === 2 && item.pageName === 'drivers') &&
                           !(sessionState?.user?.level === 5 && item.pageName === 'drivers') &&
                           !(sessionState?.user?.level === 5 && item.pageName === 'deliveries') && (
                             <SubMenu
@@ -425,15 +434,20 @@ export const SidebarMenu = (props) => {
                       </ContextAwareToggle>
                       <Accordion.Collapse eventKey='5'>
                         <MenuContent>
-                          {businessIntelligenceSubMenus.map(item => (
-                            <SubMenu
-                              key={item.id}
-                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                              onClick={() => handleGoToPage({ page: item.pageName })}
-                            >
-                              {item.title}
-                            </SubMenu>
-                          ))}
+                          {
+                            (sessionState?.user?.level === 2
+                              ? businessIntelligenceSubMenus.filter(menu => businessOwnerIntelligencesIncluded.includes(menu.id))
+                              : businessIntelligenceSubMenus
+                            ).map(item => (
+                              <SubMenu
+                                key={item.id}
+                                active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                                onClick={() => handleGoToPage({ page: item.pageName })}
+                              >
+                                {item.title}
+                              </SubMenu>
+                            ))
+                          }
                         </MenuContent>
                       </Accordion.Collapse>
                     </MenuContainer>
@@ -473,7 +487,8 @@ export const SidebarMenu = (props) => {
                     <ContextAwareToggle
                       eventKey='8'
                       active={
-                        location.pathname === '/marketing/promotions-enterprise'
+                        location.pathname === '/marketing/promotions-enterprise' ||
+                        location.pathname === '/marketing/campaign'
                       }
                     >
                       <GraphUp />
@@ -602,14 +617,16 @@ export const SidebarMenu = (props) => {
                     <span>{t('SUPPORT', 'Support')}</span>
                   </Button>
                 )}
-                <Button
-                  className='d-flex align-items-center'
-                  variant={false}
-                  onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
-                >
-                  <BoxArrowUpRight />
-                  <span>{t('MARKETPLACE', 'Marketplace')}</span>
-                </Button>
+                {sessionState?.user?.level === 0 && (
+                  <Button
+                    className='d-flex align-items-center'
+                    variant={false}
+                    onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
+                  >
+                    <BoxArrowUpRight />
+                    <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                  </Button>
+                )}
               </div>
             </SidebarContent>
             <UserInfo

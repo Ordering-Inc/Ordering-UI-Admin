@@ -9,6 +9,7 @@ import {
 import { useSession, useOrder, useLanguage, useConfig, GoogleTagManager } from 'ordering-components-admin'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
+import { useWindowSize } from '../src/hooks/useWindowSize'
 
 import { SidebarMenu } from '../src/components/SidebarMenu'
 import { Layout } from '../src/components/Layout'
@@ -53,6 +54,7 @@ import { HelmetTags } from './components/HelmetTags'
 import { RewardsPrograms } from './pages/RewardsPrograms'
 import { OpenCarts } from './pages/OpenCarts'
 import { RecoveryActionListing } from './pages/RecoveryActionListing'
+import { CampaignListing } from './pages/CampaignListing'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -61,6 +63,7 @@ export const App = () => {
   const [loaded, setLoaded] = useState(false)
   const [, t] = useLanguage()
   const onlineStatus = useOnlineStatus()
+  const { height } = useWindowSize()
 
   useEffect(() => {
     if (!loaded && !orderStatus.loading) {
@@ -73,6 +76,13 @@ export const App = () => {
       setLoaded(!auth)
     }
   }, [loading])
+
+  useEffect(() => {
+    if (height) {
+      const vh = height * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    }
+  }, [height])
 
   return (
     <>
@@ -323,6 +333,13 @@ export const App = () => {
                       {
                         auth
                           ? <EnterprisePromotionList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/marketing/campaign'>
+                      {
+                        auth
+                          ? <CampaignListing />
                           : <Redirect to='/login' />
                       }
                     </Route>

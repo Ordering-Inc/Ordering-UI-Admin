@@ -23,7 +23,10 @@ export const Title = styled.h1`
   margin-bottom: 13px;
   margin-top: 0px;
 `
-
+export const LevelContainer = styled.div`
+  overflow: auto;
+  padding-bottom: 40px;
+`
 export const LevelWrapper = styled.form`
   display: flex;
   align-items: center;
@@ -31,6 +34,7 @@ export const LevelWrapper = styled.form`
   ${({ isTitle }) => isTitle && css`
     margin-bottom: 9px;
   `}
+  min-width: 450px;
 `
 
 export const LevelNameWrapper = styled.div`
@@ -45,7 +49,7 @@ export const LevelNameWrapper = styled.div`
 `
 
 export const LastWrapper = styled.div`
-  width: 60px;
+  width: 95px;
   margin: 0px 12px;
 
   > input {
@@ -54,10 +58,10 @@ export const LastWrapper = styled.div`
   span {
     font-size: 14px;
     line-height: 24px;
+    white-space: nowrap;
   }
 
   @media (min-width: 576px) {
-    width: 95px;
     margin: 0px 24px;
   }
 `

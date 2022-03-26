@@ -11,6 +11,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { UserDetails } from '../UserDetails'
 import { CustomerCashWallet } from '../CustomerCashWallet'
 import { Confirm, SideBar } from '../../Shared'
+import { Switch } from '../../../styles'
 
 import {
   DetailsContainer,
@@ -21,7 +22,8 @@ import {
   PhotoWrapper,
   MenusContainer,
   OptionMenu,
-  UserDetailsWrapper
+  UserDetailsWrapper,
+  UserName
 } from './styles'
 import { CustomerPointsWallet } from '../CustomerPointsWallet'
 
@@ -29,7 +31,8 @@ const CustomerDetailsUI = (props) => {
   const {
     userState,
     handleDeleteUser,
-    handleParentSidebarMove
+    handleParentSidebarMove,
+    handleChangeActiveUser
   } = props
 
   const theme = useTheme()
@@ -70,6 +73,7 @@ const CustomerDetailsUI = (props) => {
     handleParentSidebarMove(0)
     setShowOption(null)
     setIsOpenMenu(false)
+    setMenuMoveDistance(0)
   }
 
   useEffect(() => {
@@ -83,11 +87,25 @@ const CustomerDetailsUI = (props) => {
       <DetailsContainer>
         <HeaderContainer>
           <LeftHeader>
-            {userState?.loading ? (
-              <Skeleton width={150} />
-            ) : (
-              <span className='customer-name'>{userState.user?.name} {userState.user?.lastname}</span>
-            )}
+            <UserName>
+              {userState?.loading ? (
+                <Skeleton width={150} />
+              ) : (
+                <span className='customer-name'>{userState.user?.name} {userState.user?.lastname}</span>
+              )}
+              {userState?.loading ? (
+                <Skeleton width={50} style={{ margin: '0px 5px' }} />
+              ) : (
+                <>
+                  {handleChangeActiveUser && (
+                    <Switch
+                      defaultChecked={userState?.user?.enabled || false}
+                      onChange={enabled => handleChangeActiveUser({ id: userState?.user?.id, enabled: enabled })}
+                    />
+                  )}
+                </>
+              )}
+            </UserName>
             {!!userState.user?.phone_verified && (
               <VerifiedItem>
                 <Phone />

@@ -264,6 +264,9 @@ const AddBusinessFormUI = (props) => {
                 })}
                 disabled={formState.loading}
                 autoComplete='off'
+                onKeyPress={e => {
+                  if (e.which === 32) { e.preventDefault() }
+                }}
               />
             </InputWrapper>
             <InputWrapper>

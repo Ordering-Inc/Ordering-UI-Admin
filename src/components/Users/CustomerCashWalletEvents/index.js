@@ -54,6 +54,11 @@ export const CustomerCashWalletEvents = (props) => {
               <TransactionDescription>
                 {event.description}
               </TransactionDescription>
+              {event?.wallet_event?.order_id && (
+                <TransactionDescription>
+                  <strong>{t('INVOICE_ORDER_NO', 'Order No')}</strong> {event?.wallet_event?.order_id}
+                </TransactionDescription>
+              )}
               <TransactionCode>
                 <span><strong>{t('CODE', 'Code')}:</strong> {event?.code}</span>
               </TransactionCode>

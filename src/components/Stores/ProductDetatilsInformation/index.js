@@ -233,8 +233,7 @@ export const ProductDetatilsInformation = (props) => {
               placeholder={parsePrice(0)}
               defaultValue={product?.offer_price}
               ref={formMethods.register({
-                min: ((typeof formState?.changes?.in_offer === 'undefined' && product?.in_offer) || formState?.changes?.in_offer)
-                  && minimumRegualrPrice,
+                min: ((typeof formState?.changes?.in_offer === 'undefined' && product?.in_offer) || formState?.changes?.in_offer) && minimumRegualrPrice,
                 required:
                   ((typeof formState?.changes?.in_offer === 'undefined' && product?.in_offer) || formState?.changes?.in_offer)
                     ? t(
@@ -275,6 +274,9 @@ export const ProductDetatilsInformation = (props) => {
             disabled={formState.loading}
             autoComplete='off'
             defaultValue={product?.slug}
+            onKeyPress={e => {
+              if (e.which === 32) { e.preventDefault() }
+            }}
           />
           <Wrapper
             style={{ paddingTop: 10 }}

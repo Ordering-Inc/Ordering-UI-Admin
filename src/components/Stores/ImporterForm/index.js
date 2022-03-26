@@ -178,6 +178,9 @@ export const ImporterFormUI = (props) => {
             onChange={handleChangeInput}
             disabled={formState.loading}
             autoComplete='off'
+            onKeyPress={e => {
+              if (e.which === 32) { e.preventDefault() }
+            }}
           />
         </InputWrapper>
 

@@ -11,7 +11,7 @@ export const BarContainer = styled.div`
   ${({ noAnimation }) => !noAnimation && css`
     transition: 0.3s;
   `}
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   ${({ isBorderShow }) => isBorderShow ? css`
     ${props => props.theme?.rtl ? css`
       border-right: 1px solid ${props => props.theme.colors.borderColor};

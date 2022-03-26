@@ -23,7 +23,7 @@ export const MessagesContent = styled.div`
 
   @media (min-width: 1024px) {
     flex-direction: row;
-    height: calc(100vh - 105px);
+    height: calc(var(--vh, 1vh) * 100 - 105px);
   }
 `
 

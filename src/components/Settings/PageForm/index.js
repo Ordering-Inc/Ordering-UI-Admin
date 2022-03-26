@@ -41,10 +41,12 @@ const PageFormUI = (props) => {
     isAddMode,
     handleAddPage
   } = props
+
   const [, t] = useLanguage()
   const [openModal, setOpenModal] = useState(null)
   const [editorContext, setEditorContext] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [pageContent, setPageContent] = useState(null)
 
   const insertLink = (context) => {
     const ui = $.summernote.ui
@@ -106,6 +108,11 @@ const PageFormUI = (props) => {
     })
   }, [formState?.error])
 
+  useEffect(() => {
+    if (!pageContent) return
+    handleChangeFormState('body', pageContent)
+  }, [pageContent])
+
   return (
     <>
       <PageContainer>
@@ -152,9 +159,12 @@ const PageFormUI = (props) => {
               {t('SLUG', 'Slug')}
             </label>
             <Input
-              value={formState.changes?.slug ?? pageState.page?.slug ?? ''}
+              defaultValue={formState.changes?.slug ?? pageState.page?.slug ?? ''}
               onChange={e => handleChangeFormState('slug', e.target.value.replace(/\s/g, ''))}
               placeholder={t('Slug', 'Slug')}
+              onKeyPress={e => {
+                if (e.which === 32) { e.preventDefault() }
+              }}
             />
           </InputWrapper>
         </InputGroup>
@@ -181,7 +191,7 @@ const PageFormUI = (props) => {
                 insertVideo: insertVideo
               }
             }}
-            onChange={content => handleChangeFormState('body', content)}
+            onChange={content => setPageContent(content)}
           />
         </WrapperEditor>
         <ButtonGroupWrapper>

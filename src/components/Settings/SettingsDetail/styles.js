@@ -17,7 +17,7 @@ export const Container = styled.div`
     `}
   `}
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   top: 0px;
   z-index: 1001;
   overflow-x: hidden;
@@ -34,11 +34,15 @@ export const Container = styled.div`
 `
 
 export const DescriptionContent = styled.div`
-  padding: 26px 40px;
+  padding: 26px 20px;
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
   position: relative;
+
+  @media (min-width: 768px) {
+    padding: 26px 40px;
+  }
 `
 
 export const DescriptionHeader = styled.div`
@@ -101,8 +105,12 @@ export const CategoryExtraContent = styled.div`
 export const Description = styled.p`
   margin-top: 40px;
   font-size: 14px;
-  color: #344050;
   margin-bottom: 0px;
+  text-align: justify;
+
+  @media (min-width: 768px) {
+    text-align: initial;
+  }
 `
 
 export const VideoContainer = styled.div`
@@ -159,7 +167,6 @@ export const IframeWrapper = styled.div`
 `
 
 export const SubCategoryWrapper = styled.div`
-  height: 100%;
 `
 
 export const SkeletonWrapper = styled.div``

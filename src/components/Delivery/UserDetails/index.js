@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { UserDetails as UserDetailsController } from 'ordering-components-admin'
+import { useTheme } from 'styled-components'
+import { useLanguage, UserDetails as UserDetailsController } from 'ordering-components-admin'
 import { OrdersManager } from '../../Orders'
 import { AddressList } from '../AddressList'
-import { Personalization } from '../../Shared'
+import { Personalization, Modal } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { UserMetaFields } from '../../Users'
 import { DriverGroupSetting } from '../DriverGroupSetting'
+import { ThreeDots } from 'react-bootstrap-icons'
+import { Switch } from '../../../styles'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
 
 import {
   UserName,
   SavedPlaces,
-  PersonalizationWrapper
+  PersonalizationWrapper,
+  DetailsHeader,
+  ActionSelectorWrapper
 } from './styles'
 
 export const UserDetailsUI = (props) => {
@@ -21,10 +27,17 @@ export const UserDetailsUI = (props) => {
     isDriversManagersPage,
     userState,
     setExtraOpen,
-    handleSuccessUserUpdate
+    handleSuccessUserUpdate,
+    handleDeleteUser,
+    handleChangeActiveUser
   } = props
 
+  const theme = useTheme()
+  const [, t] = useLanguage()
+
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
+  const [isCustomField, setIsCustomField] = useState(false)
+  const [isPersonalization, setIsPersonalization] = useState(false)
 
   useEffect(() => {
     setExtraOpen(false)
@@ -32,13 +45,47 @@ export const UserDetailsUI = (props) => {
 
   return (
     <>
-      <UserName>
-        {userState.loading ? (
-          <Skeleton width={150} />
-        ) : (
-          <span>{userState?.user?.name} {userState?.user?.lastname}</span>
+      <DetailsHeader>
+        <UserName>
+          {userState?.loading ? (
+            <Skeleton width={150} />
+          ) : (
+            <span>{userState.user?.name} {userState.user?.lastname}</span>
+          )}
+          {userState?.loading ? (
+            <Skeleton width={50} style={{ margin: '0px 5px' }} />
+          ) : (
+            <>
+              {handleChangeActiveUser && (
+                <Switch
+                  defaultChecked={userState?.user?.enabled || false}
+                  onChange={enabled => handleChangeActiveUser({ id: userState?.user?.id, enabled: enabled })}
+                />
+              )}
+            </>
+          )}
+        </UserName>
+        {userState.user?.id && (
+          <ActionSelectorWrapper>
+            <DropdownButton
+              menuAlign={theme?.rtl ? 'left' : 'right'}
+              title={<ThreeDots />}
+              id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+            >
+              <Dropdown.Item onClick={() => setIsCustomField(true)}>
+                {t('CUSTOM_FIELDS', 'Custom fields')}
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setIsPersonalization(true)}>
+                {t('PERSONALIZATION', 'Personalization')}
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => handleDeleteUser(userState.user?.id)}>
+                {t('DELETE', 'Delete')}
+              </Dropdown.Item>
+            </DropdownButton>
+          </ActionSelectorWrapper>
         )}
-      </UserName>
+      </DetailsHeader>
+
       <UserDetailsMenu
         isDriverMenu={isDriversPage}
         currentMenuSelected={currentMenuSelected}
@@ -82,18 +129,32 @@ export const UserDetailsUI = (props) => {
               handleCustomOrderDetail={setExtraOpen}
             />
           )}
-          {currentMenuSelected === 'metafields' && (
-            <UserMetaFields
-              userId={userState.user?.id}
-            />
-          )}
-          {currentMenuSelected === 'personalization' && (
-            <PersonalizationWrapper>
-              <Personalization />
-            </PersonalizationWrapper>
-          )}
         </>
       )}
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('CUSTOM_FIELDS', 'Custom fields')}
+        open={isCustomField}
+        onClose={() => setIsCustomField(false)}
+      >
+        <UserMetaFields
+          userId={userState.user?.id}
+        />
+      </Modal>
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('PERSONALIZATION', 'Personalization')}
+        open={isPersonalization}
+        onClose={() => setIsPersonalization(false)}
+      >
+        <PersonalizationWrapper>
+          <Personalization />
+        </PersonalizationWrapper>
+      </Modal>
     </>
   )
 }
