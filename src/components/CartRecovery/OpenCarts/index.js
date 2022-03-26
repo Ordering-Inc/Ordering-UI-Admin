@@ -151,7 +151,6 @@ const OpenCartsUI = (props) => {
           onClose={() => handleBackRedirect()}
         />
       )}
-
       {totalSelectedOrder > 0 && (
         <WrapperIndicator>
           {selectedOrderIds.length}/{totalSelectedOrder}
