@@ -65,3 +65,11 @@ export const BusinessImage = (props) => {
     </BusinessImageStyled>
   )
 }
+
+export const SkeletonWrapper = styled.div`
+  background-color: transparent !important;
+
+  > span {
+    display: flex;
+  }
+`

@@ -11,7 +11,8 @@ import {
   OptionContent,
   OptionName,
   WrapperBusinessImage,
-  BusinessImage
+  BusinessImage,
+  SkeletonWrapper
 } from './styles'
 
 const CustomerSelectorUI = (props) => {
@@ -67,9 +68,9 @@ const CustomerSelectorUI = (props) => {
           onChange={(customer) => handleChangeCustomers(customer)}
         />
       ) : (
-        <div>
-          <Skeleton style={{ width: '100%', height: '44px' }} />
-        </div>
+        <SkeletonWrapper>
+          <Skeleton height={44} />
+        </SkeletonWrapper>
       )}
     </>
   )
