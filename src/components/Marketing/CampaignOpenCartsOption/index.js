@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { CampaignCalendarTime } from '../CampaignCalendarTime'
+import { Button, Input } from '../../../styles'
 import {
   Circle as UnCheckIcon,
   RecordCircleFill as CheckIcon,
   ChevronUp,
   ChevronDown
 } from 'react-bootstrap-icons'
-import { Button, Input } from '../../../styles'
 
 import {
   Container,
@@ -19,7 +20,6 @@ import {
   TimeContent,
   TimeBlock
 } from './styles'
-import { CampaignCalendarTime } from '../CampaignCalendarTime'
 
 export const CampaignOpenCartsOption = () => {
   const [, t] = useLanguage()

@@ -57,8 +57,8 @@ export const CampaignDetailGeneral = (props) => {
   const typeList = [
     { value: 'email', content: <Option>{t('EMAIL', 'Email')}</Option> },
     { value: 'sms', content: <Option>{t('SMS', 'SMS')}</Option> },
-    { value: 'notification', content: <Option>{t('NOTIFICATION', 'Notification')}</Option> },
-    { value: 'webhook', content: <Option>{t('WEBHOOK', 'Webhook')}</Option> },
+    { value: 'notification', content: <Option>{t('MOBILE_FRONT_NOTIFICATIONS', 'Notification')}</Option> },
+    { value: 'webhook', content: <Option>{t('WEBHOOKS', 'Webhooks')}</Option> },
     { value: 'popup', content: <Option>{t('POPUP', 'Popup')}</Option> },
     { value: 'whatsapp', content: <Option>{t('WHATSAPP', 'Whatsapp')}</Option> }
   ]
@@ -230,7 +230,7 @@ export const CampaignDetailGeneral = (props) => {
                     isBottom
                   >
                     {isASAP ? <CheckIcon className='fill' /> : <UnCheckIcon />}
-                    <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} + {t('DELIVERY_TIME', 'delivery time')})</span>
+                    <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} + {t('MENU_LIST_DELIVERY_TIME', 'delivery time')})</span>
                   </RadioCheckWrapper>
                   <RadioCheckWrapper
                     onClick={() => setIsASAP(false)}
