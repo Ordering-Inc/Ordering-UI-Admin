@@ -250,7 +250,7 @@ export const BusinessProductsCategoyInfo = (props) => {
           disabled={formState.loading}
           autoComplete='off'
           value={
-            formState?.changes?.slug || formState?.result?.result?.slug || ''
+            formState?.changes?.slug || ''
           }
           onKeyPress={e => {
             if (e.which === 32) { e.preventDefault() }
