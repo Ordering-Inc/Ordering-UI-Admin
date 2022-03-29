@@ -101,12 +101,12 @@ var BusinessGprsPrintersUI = function BusinessGprsPrintersUI(props) {
 
     setPrinters(_printers);
   }, [printersListState === null || printersListState === void 0 ? void 0 : printersListState.printers]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.BusinessGprsPrintersContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('ACCEPT_GPRS_PRINTER', 'Accept GPRS printer')), /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.BusinessGprsPrintersContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('GPRS_PRINTERS', 'Gprs printers')), /*#__PURE__*/_react.default.createElement(_styles2.SwitchboxWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ACCEPT_GPRS_PRINTER', 'Accept GPRS printer')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: business === null || business === void 0 ? void 0 : business.use_printer,
-    onChange: function onChange(e) {
-      return changePrinter('use_printer', e.target.checked);
+    onChange: function onChange(checked) {
+      return changePrinter('use_printer', checked);
     }
-  }), /*#__PURE__*/_react.default.createElement("span", null, t('ACCEPT_GPRS_PRINTER', 'Accept GPRS printer')))), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('PRINTER_MODEL', 'Printer model')), (printersListState === null || printersListState === void 0 ? void 0 : printersListState.loading) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), !(printersListState !== null && printersListState !== void 0 && printersListState.loading) && (printers === null || printers === void 0 ? void 0 : printers.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('PRINTER_MODEL', 'Printer model')), (printersListState === null || printersListState === void 0 ? void 0 : printersListState.loading) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null), !(printersListState !== null && printersListState !== void 0 && printersListState.loading) && (printers === null || printers === void 0 ? void 0 : printers.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     defaultValue: (_business$printer_id = business === null || business === void 0 ? void 0 : business.printer_id) !== null && _business$printer_id !== void 0 ? _business$printer_id : '',
     options: printers,
     onChange: function onChange(value) {

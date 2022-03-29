@@ -77,6 +77,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       paymethodsList = props.paymethodsList,
       handleClickPayment = props.handleClickPayment,
       handleSelectAllPaymethods = props.handleSelectAllPaymethods,
+      handleSelectNonePaymethods = props.handleSelectNonePaymethods,
       handleDeleteBusinessPaymethodOption = props.handleDeleteBusinessPaymethodOption,
       setIsExtendExtraOpen = props.setIsExtendExtraOpen,
       actionState = props.actionState,
@@ -241,7 +242,13 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       return handleSelectAllPaymethods();
     },
     disabled: paymethodsList.loading || businessPaymethodsState.loading
-  }, t('SELECT_ALL', 'Select all'))), paymethodsList.loading || businessPaymethodsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  }, t('SELECT_ALL', 'Select all')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "secundaryDark",
+    onClick: function onClick() {
+      return handleSelectNonePaymethods();
+    },
+    disabled: paymethodsList.loading || businessPaymethodsState.loading
+  }, t('SELECT_NONE', 'Select none'))), paymethodsList.loading || businessPaymethodsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOptionContainer, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOption, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var DetailsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 20px;\n\n  > h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin-top: 0;\n    margin-bottom: 26px;\n  }\n"])));
+var DetailsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 20px;\n\n  > h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin-top: 5px;\n    margin-bottom: 26px;\n  }\n"])));
 
 exports.DetailsContainer = DetailsContainer;
 
@@ -33,7 +33,7 @@ var SwitchWrapper = _styledComponents.default.div(_templateObject4 || (_template
 
 exports.SwitchWrapper = SwitchWrapper;
 
-var SearchbarWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 59px 0 16px 0;\n  label {\n    font-size: 16px;\n    line-height: 24px;\n    font-weight: 600;\n    margin-bottom: 17px;\n  }\n\n"])));
+var SearchbarWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 59px 0 16px 0;\n  label {\n    font-size: 16px;\n    line-height: 24px;\n    font-weight: 600;\n    margin-bottom: 17px;\n  }\n"])));
 
 exports.SearchbarWrapper = SearchbarWrapper;
 
