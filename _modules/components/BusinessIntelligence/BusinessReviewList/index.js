@@ -238,6 +238,7 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
 
 var BusinessReviewList = function BusinessReviewList(props) {
   var reviewsProps = _objectSpread(_objectSpread({}, props), {}, {
+    noActiveStatusCondition: true,
     asDashboard: true,
     initialPageSize: 50,
     loadMorePageSize: 10,

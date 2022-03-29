@@ -16,9 +16,11 @@ var ProgressRing = function ProgressRing(props) {
       progressColor = props.progressColor,
       trackColor = props.trackColor,
       caps = props.caps,
-      children = props.children,
+      isShowPercent = props.isShowPercent,
       spin = props.spin,
-      transitionDuration = props.transitionDuration;
+      transitionDuration = props.transitionDuration,
+      percentColor = props.percentColor,
+      fontSize = props.fontSize;
   var halfSize = size / 2;
   var radius = halfSize - lineWidth / 2;
   var circleLength = radius * 2 * Math.PI;
@@ -28,7 +30,8 @@ var ProgressRing = function ProgressRing(props) {
       height: size,
       display: 'flex',
       placeContent: 'center',
-      placeItems: 'center'
+      placeItems: 'center',
+      position: 'relative'
     }
   }, /*#__PURE__*/_react.default.createElement("svg", {
     height: size,
@@ -62,11 +65,14 @@ var ProgressRing = function ProgressRing(props) {
     strokeWidth: lineWidth,
     stroke: progressColor,
     strokeLinecap: caps
-  }))), children ? /*#__PURE__*/_react.default.createElement("div", {
+  }))), isShowPercent && /*#__PURE__*/_react.default.createElement("div", {
     style: {
-      zIndex: 1
+      position: 'absolute',
+      color: percentColor || '#2c7be5',
+      fontSize: fontSize || '14px',
+      fontWeight: '600'
     }
-  }, children) : null);
+  }, Math.round(percent), "%"));
 };
 /*
   interface Props
