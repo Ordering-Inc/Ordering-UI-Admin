@@ -56,6 +56,7 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
       isSkeleton = props.isSkeleton,
       handleChangeCategory = props.handleChangeCategory,
       handelChangeCategoryActive = props.handelChangeCategoryActive,
+      setCurrentCategory = props.setCurrentCategory,
       handleDragStart = props.handleDragStart,
       handleDragOver = props.handleDragOver,
       handleDrop = props.handleDrop,
@@ -82,6 +83,7 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
       setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
     }
 
+    setCurrentCategory(category);
     handleChangeCategory(e, category);
   };
 

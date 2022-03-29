@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
-  var _configState$configs, _configState$configs$, _formState$changes2, _formState$result3, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result4, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9, _formState$changes10, _formState$result5, _formState$result5$re, _formState$changes11, _formState$changes12;
+  var _configState$configs, _configState$configs$, _formState$changes2, _formState$result3, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result4, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9, _formState$changes10, _formState$changes11, _formState$changes12;
 
   var formState = props.formState,
       handlechangeImage = props.handlechangeImage,
@@ -273,13 +273,13 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CATEGORY_NAME', 'Category name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('ENTER_CATEGORY_NAME', 'Enter a category name'),
     name: "name",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.name) || '',
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.name) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     placeholder: t('TYPE_DESCRIPTION', 'Type description '),
     name: "description",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.description) || '',
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.description) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -288,7 +288,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.slug) || (formState === null || formState === void 0 ? void 0 : (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : (_formState$result5$re = _formState$result5.result) === null || _formState$result5$re === void 0 ? void 0 : _formState$result5$re.slug) || '',
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.slug) || '',
     onKeyPress: function onKeyPress(e) {
       if (e.which === 32) {
         e.preventDefault();

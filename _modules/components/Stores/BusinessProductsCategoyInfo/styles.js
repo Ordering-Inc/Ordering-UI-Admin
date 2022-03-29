@@ -50,7 +50,7 @@ var CategoryTypeImage = _styledComponents.default.div(_templateObject8 || (_temp
 
 exports.CategoryTypeImage = CategoryTypeImage;
 
-var BtnWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  display: flex;\n  align-items: center;\n\n  button {\n    height: 42px;\n  }\n"])));
+var BtnWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  display: flex;\n  align-items: center;\n  margin-top: 15px;\n\n  button {\n    height: 42px;\n  }\n"])));
 
 exports.BtnWrapper = BtnWrapper;
 

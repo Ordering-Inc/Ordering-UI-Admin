@@ -55,7 +55,7 @@ var CampaignCalendarTime = function CampaignCalendarTime(props) {
       setIsOpen = _useState4[1];
 
   var handleClickOutside = function handleClickOutside(e) {
-    if (e.target.closest('.calendar-box') || !isOpen) return;
+    if (e.target.closest('.react-datepicker__tab-loop') || e.target.closest('.react-datepicker-wrapper') || e.target.closest('.calendar-box-btn') || !isOpen) return;
     setIsOpen(false);
   };
 
@@ -73,12 +73,11 @@ var CampaignCalendarTime = function CampaignCalendarTime(props) {
   (0, _react.useEffect)(function () {
     if (dateTime) setStartDate(new Date(dateTime));
   }, [dateTime]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DateTimeWrapper, {
-    className: "calendar-box"
-  }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DateTimeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setIsOpen(true);
-    }
+    },
+    className: "calendar-box-btn"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), showTime ? (0, _moment.default)(startDate).format('DD MMM, YYYY h:m A') : (0, _moment.default)(startDate).format('DD MMM, YYYY')), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
     selected: startDate,
     showTimeSelect: showTime,
