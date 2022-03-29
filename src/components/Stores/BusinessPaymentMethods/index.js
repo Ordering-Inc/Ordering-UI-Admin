@@ -35,7 +35,7 @@ const BusinessPaymentMethodsUI = (props) => {
     paymethodsList,
     handleClickPayment,
     handleSelectAllPaymethods,
-    // handleSelectNonePaymethods,
+    handleSelectNonePaymethods,
     handleDeleteBusinessPaymethodOption,
     setIsExtendExtraOpen,
     actionState,
@@ -162,13 +162,13 @@ const BusinessPaymentMethodsUI = (props) => {
           >
             {t('SELECT_ALL', 'Select all')}
           </Button>
-          {/* <Button
+          <Button
             color='secundaryDark'
             onClick={() => handleSelectNonePaymethods()}
             disabled={(paymethodsList.loading || businessPaymethodsState.loading)}
           >
             {t('SELECT_NONE', 'Select none')}
-          </Button> */}
+          </Button>
         </ButtonGroup>
 
         {(paymethodsList.loading || businessPaymethodsState.loading) ? (

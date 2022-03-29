@@ -1,48 +1,38 @@
 import styled, { css } from 'styled-components'
 
-export const BasicContainer = styled.div`
+export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  min-height: calc(100% - 90px);
-
-  > input {
-    color: ${props => props.theme.colors.headingColor};
-  }
+  min-height: calc(100% - 130px);
 
   > button {
     width: fit-content;
     position: sticky;
     top: 100%;
+    margin-top: 30px;
     height: 42px;
   }
 `
-
-export const FieldName = styled.p`
-  color: ${props => props.theme.colors.headingColor};
-  padding-top: 20px;
-  font-size: 14px;
-  margin-bottom: 9px;
-`
-
 export const TypeSelectWrapper = styled.div`
-  > div {
+  .select {
     background: ${props => props.theme.colors.secundary};
-    min-width: 50%;
+    width: 100%;
     border: none;
-    div {
-      color: ${props => props.theme.colors.headingColor};
-      font-size: 14px;
+    font-size: 14px;
+    color: ${props => props.theme.colors.headingColor};
+    > div:first-child {
+      padding-top: 4px;
+      padding-bottom: 4px;
     }
   }
 `
-
 export const WrapperMap = styled.div`
   width: 100%;
   height: 300px;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  margin: 20px 0;
+  margin: 29px 0 20px 0;
   position: relative;
   > div {
     position: relative !important; 
@@ -77,4 +67,24 @@ export const ErrorText = styled.div`
   color: ${props => props.theme.colors.lightGray};
   text-align: center;
   margin: 20px 0;
+`
+export const FormControl = styled.div`
+  display: flex;
+  flex-direction: column;
+  label {
+    font-size: 14px;
+    margin-bottom: 9px;
+  }
+  input {
+    width: 100%;
+  }
+`
+export const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 29px;
+
+  > div {
+    width: 45%;
+  }
 `
