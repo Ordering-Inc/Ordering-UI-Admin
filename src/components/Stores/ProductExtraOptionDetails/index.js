@@ -142,6 +142,12 @@ const ProductExtraOptionDetailsUI = (props) => {
     })
   }
 
+  const handleEnterAddSuboption = (e) => {
+    if (e.key === 'Enter' && e.shiftKey === false) {
+      handleSubmit(handleAddOption)()
+    }
+  }
+
   useEffect(() => {
     if (Object.keys(editErrors).length) {
       const errorContent = []
@@ -300,40 +306,42 @@ const ProductExtraOptionDetailsUI = (props) => {
                 </CheckboxWrapper>
               )}
             </OptionSettingItem>
-            <OptionSettingItem>
-              <CheckboxWrapper>
-                <Checkbox
-                  id='conditioned'
-                  defaultChecked={optionState?.option?.conditioned || false}
-                  onClick={(e) => handleOptionSetting('conditioned', e.target.checked)}
-                />
-                <label htmlFor='conditioned'>{t('CONDITIONAL', 'Conditional')}</label>
-              </CheckboxWrapper>
-              {optionState?.option?.conditioned && (
-                <SelectboxGroup>
-                  {conditionalOptions.length && (
-                    <Select
-                      options={conditionalOptions}
-                      defaultValue={conditionalOptionId}
-                      placeholder={t('SELECT_OPTION', 'Select option')}
-                      onChange={val => handleChangeConditionalOption(val)}
-                    />
-                  )}
-                  {conditionalOptionId && (
-                    conditionalSubOptions.length > 0 ? (
+            {conditionalOptions?.length > 0 && (
+              <OptionSettingItem>
+                <CheckboxWrapper>
+                  <Checkbox
+                    id='conditioned'
+                    defaultChecked={optionState?.option?.conditioned || false}
+                    onClick={(e) => handleOptionSetting('conditioned', e.target.checked)}
+                  />
+                  <label htmlFor='conditioned'>{t('CONDITIONAL', 'Conditional')}</label>
+                </CheckboxWrapper>
+                {optionState?.option?.conditioned && (
+                  <SelectboxGroup>
+                    {conditionalOptions.length > 0 && (
                       <Select
-                        options={conditionalSubOptions}
-                        defaultValue={conditionalSubOptionId}
-                        placeholder={t('SELECT_CHOICE', 'Select choice')}
-                        onChange={val => handleChangeConditionalSubOption(val)}
+                        options={conditionalOptions}
+                        defaultValue={conditionalOptionId}
+                        placeholder={t('SELECT_OPTION', 'Select option')}
+                        onChange={val => handleChangeConditionalOption(val)}
                       />
-                    ) : (
-                      <p>{t('NO_CHOICES_AVAILABLE', 'No choices available')}</p>
-                    )
-                  )}
-                </SelectboxGroup>
-              )}
-            </OptionSettingItem>
+                    )}
+                    {conditionalOptionId && (
+                      conditionalSubOptions.length > 0 ? (
+                        <Select
+                          options={conditionalSubOptions}
+                          defaultValue={conditionalSubOptionId}
+                          placeholder={t('SELECT_CHOICE', 'Select choice')}
+                          onChange={val => handleChangeConditionalSubOption(val)}
+                        />
+                      ) : (
+                        <p>{t('NO_CHOICES_AVAILABLE', 'No choices available')}</p>
+                      )
+                    )}
+                  </SelectboxGroup>
+                )}
+              </OptionSettingItem>
+            )}
           </OptionSettings>
         </OptionInfoContainer>
       </OptionContainer>
@@ -529,6 +537,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   if (!/^[0-9.]$/.test(e.key)) {
                     e.preventDefault()
                   }
+                  handleEnterAddSuboption(e)
                 }}
               />
             </InputWrapper>
@@ -546,6 +555,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                     if (!/^[0-9.]$/.test(e.key)) {
                       e.preventDefault()
                     }
+                    handleEnterAddSuboption(e)
                   }}
                 />
               </InputWrapper>
@@ -564,6 +574,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                     if (!/^[0-9.]$/.test(e.key)) {
                       e.preventDefault()
                     }
+                    handleEnterAddSuboption(e)
                   }}
                 />
               </InputWrapper>
