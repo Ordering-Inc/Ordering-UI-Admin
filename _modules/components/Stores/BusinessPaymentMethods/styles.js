@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PaymethodOptionContainer = exports.PaymethodOption = exports.PaymethodName = exports.PaymethodListWrapper = exports.PaymentMethodsContainer = exports.MainContainer = void 0;
+exports.SearchBarWrapper = exports.PaymethodOptionContainer = exports.PaymethodOption = exports.PaymethodName = exports.PaymethodListWrapper = exports.PaymentMethodsContainer = exports.MainContainer = exports.ButtonGroup = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,19 +21,19 @@ var MainContainer = _styledComponents.default.div(_templateObject || (_templateO
 
 exports.MainContainer = MainContainer;
 
-var PaymentMethodsContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  height: 100%;\n  overflow-x: hidden;\n  flex: 1;\n  h1 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n  }\n  > button {\n    height: 44px;\n    margin: 20px 0;\n  }\n  @media (min-width: 576px) {\n    padding: 20px;\n  }\n"])), function (props) {
+var PaymentMethodsContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  height: 100%;\n  overflow-x: hidden;\n  flex: 1;\n  h1 {\n    color: ", ";\n    font-size: 20px;\n    font-weight: 700;\n    margin-top: 5px;\n  }\n  > button {\n    height: 44px;\n    margin: 20px 0;\n  }\n  @media (min-width: 576px) {\n    padding: 20px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.PaymentMethodsContainer = PaymentMethodsContainer;
 
-var PaymethodListWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-top: 1px solid ", ";\n  margin: 20px 0;\n"])), function (props) {
+var PaymethodListWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  border-top: 1px solid ", ";\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 
 exports.PaymethodListWrapper = PaymethodListWrapper;
 
-var PaymethodOptionContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n\n  ", "\n\n  > svg {\n    font-size: 13px;\n    color: ", ";\n  }\n"])), function (props) {
+var PaymethodOptionContainer = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n  &:hover {\n    background-color: ", ";\n  }\n  ", "\n  ", "\n  > svg {\n    font-size: 13px;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.lightPrimary;
@@ -68,3 +68,15 @@ var PaymethodName = _styledComponents.default.span(_templateObject8 || (_templat
 });
 
 exports.PaymethodName = PaymethodName;
+
+var SearchBarWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-bottom: 15px;\n  margin-top: 27px;\n"])));
+
+exports.SearchBarWrapper = SearchBarWrapper;
+
+var ButtonGroup = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 15px;\n  button {\n    height: 32px;\n    font-size: 12px;\n    &:first-child {\n      ", "\n    }\n  }\n"])), function (props) {
+  var _props$theme;
+
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
+});
+
+exports.ButtonGroup = ButtonGroup;
