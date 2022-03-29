@@ -8,7 +8,7 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { ChevronRight } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { Modal } from '../../Shared'
+import { Modal, SearchBar, Alert } from '../../Shared'
 import { Button } from '../../../styles'
 import { PaymentOptionStripeDirect } from '../PaymentOptionStripeDirect'
 import { PaymentOption } from '../PaymentOption'
@@ -23,7 +23,9 @@ import {
   PaymethodListWrapper,
   PaymethodOptionContainer,
   PaymethodOption,
-  PaymethodName
+  PaymethodName,
+  SearchBarWrapper,
+  ButtonGroup
 } from './styles'
 
 const BusinessPaymentMethodsUI = (props) => {
@@ -32,6 +34,8 @@ const BusinessPaymentMethodsUI = (props) => {
     businessPaymethodsState,
     paymethodsList,
     handleClickPayment,
+    handleSelectAllPaymethods,
+    // handleSelectNonePaymethods,
     handleDeleteBusinessPaymethodOption,
     setIsExtendExtraOpen,
     actionState,
@@ -53,11 +57,14 @@ const BusinessPaymentMethodsUI = (props) => {
     isTutorialMode,
     handleTutorialContinue
   } = props
+
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [isEdit, setIsEdit] = useState(false)
   const [selectedBusinessPaymethod, setSelectedBusinessPaymethod] = useState(null)
   const [selectedPaymethodGateway, setSelectedPaymethodGateway] = useState(null)
+  const [searchValue, setSearchValue] = useState('')
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const orderTypes = [
     { value: 1, text: t('DELIVERY', 'Delivery') },
@@ -139,6 +146,31 @@ const BusinessPaymentMethodsUI = (props) => {
     <MainContainer>
       <PaymentMethodsContainer>
         <h1>{t('PAYMETHODS', 'Payment methods')}</h1>
+        <SearchBarWrapper>
+          <SearchBar
+            placeholder={t('SEARCH', 'Search')}
+            isCustomLayout
+            search={searchValue}
+            onSearch={val => setSearchValue(val)}
+          />
+        </SearchBarWrapper>
+        <ButtonGroup>
+          <Button
+            color='secundaryDark'
+            onClick={() => handleSelectAllPaymethods()}
+            disabled={(paymethodsList.loading || businessPaymethodsState.loading)}
+          >
+            {t('SELECT_ALL', 'Select all')}
+          </Button>
+          {/* <Button
+            color='secundaryDark'
+            onClick={() => handleSelectNonePaymethods()}
+            disabled={(paymethodsList.loading || businessPaymethodsState.loading)}
+          >
+            {t('SELECT_NONE', 'Select none')}
+          </Button> */}
+        </ButtonGroup>
+
         {(paymethodsList.loading || businessPaymethodsState.loading) ? (
           [...Array(10).keys()].map(i => (
             <PaymethodOptionContainer key={i}>
@@ -152,7 +184,7 @@ const BusinessPaymentMethodsUI = (props) => {
           ))
         ) : (
           <PaymethodListWrapper>
-            {paymethodsList.paymethods.map(paymethod => (
+            {paymethodsList.paymethods.filter(paymethod => paymethod?.name?.toLowerCase().includes(searchValue.toLowerCase())).map(paymethod => (
               <PaymethodOptionContainer
                 key={paymethod.id}
                 onClick={e => handleOpenEdit(e, paymethod.id, paymethod.gateway)}
