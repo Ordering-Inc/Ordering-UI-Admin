@@ -189,6 +189,9 @@ export const PromotionListBottom = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
+  ${({ eventDisabled }) => eventDisabled && css`
+    pointer-events: none;
+  `}
 `
 export const AddNewButton = styled.div`
   cursor: pointer;

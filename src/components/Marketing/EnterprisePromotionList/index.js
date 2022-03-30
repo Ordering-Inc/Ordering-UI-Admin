@@ -269,7 +269,7 @@ export const EnterprisePromotionList = (props) => {
           )}
         </PromotionListTable>
       </PromotionListContainer>
-      <PromotionListBottom>
+      <PromotionListBottom eventDisabled={eventDisabled}>
         <AddNewButton
           onClick={() => handleOpenDetails({})}
         >
