@@ -45,7 +45,6 @@ export const EnterprisePromotionList = (props) => {
   const theme = useTheme()
   const [{ parseDate, optimizeImage }] = useUtils()
 
-  const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     promotions: true,
     promotionType: true,
@@ -128,11 +127,8 @@ export const EnterprisePromotionList = (props) => {
               )}
               <th>
                 <ColumnAllowSettingPopover
-                  open={openPopover}
                   allowColumns={allowColumns}
                   optionsDefault={optionsDefault}
-                  onClick={() => setOpenPopover(!openPopover)}
-                  onClose={() => setOpenPopover(false)}
                   handleChangeAllowColumns={handleChangeAllowColumns}
                 />
               </th>
