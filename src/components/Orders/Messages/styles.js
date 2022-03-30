@@ -81,6 +81,7 @@ export const Status = styled.p`
 `
 
 export const ImageContainer = styled.div`
+  overflow: auto;
   display: flex;
   align-items: center;
 
@@ -562,6 +563,7 @@ export const InfoBlock = styled.div`
       color: ${props => props.theme.colors.headingColor};
       font-size: 14px;
       font-weight: 500;
+      white-space: nowrap;
     }
     &:last-child {
       color: ${props => props.theme.colors.lightGray};
