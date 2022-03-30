@@ -20,6 +20,7 @@ const SingleBusinessSubCateogriesUI = (props) => {
     isSkeleton,
     handleChangeCategory,
     handelChangeCategoryActive,
+    setCurrentCategory,
 
     handleDragStart,
     handleDragOver,
@@ -44,6 +45,7 @@ const SingleBusinessSubCateogriesUI = (props) => {
         setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate'
       )
     }
+    setCurrentCategory(category)
     handleChangeCategory(e, category)
   }
 

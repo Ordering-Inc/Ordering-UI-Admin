@@ -77,6 +77,7 @@ export const BtnWrapper = styled.div`
   top: 100%;
   display: flex;
   align-items: center;
+  margin-top: 15px;
 
   button {
     height: 42px;
