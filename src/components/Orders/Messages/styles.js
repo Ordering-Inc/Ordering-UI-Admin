@@ -342,6 +342,7 @@ export const WrapperSendInput = styled.div`
   > input {
     border: 1px solid ${props => props.theme.colors.borderColor};
     padding-right: 45px;
+    -webkit-appearance: none;
     ${props => props.theme.rtl && css`
       padding-left: 45px;
       padding-right: 15px;
