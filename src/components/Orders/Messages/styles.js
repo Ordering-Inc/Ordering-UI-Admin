@@ -84,6 +84,7 @@ export const ImageContainer = styled.div`
   overflow: auto;
   display: flex;
   align-items: center;
+  padding-bottom: 20px;
 
   > * {
     ${props => props.theme?.rtl ? css`
@@ -594,7 +595,6 @@ export const QuickMessageWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 20px;
 
   button {
     margin-bottom: 6px;
