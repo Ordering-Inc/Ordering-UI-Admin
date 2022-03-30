@@ -6,6 +6,11 @@ export const PromotionListContainer = styled.div`
   overflow: auto;
   margin-top: 30px;
 
+  
+  ${({ eventDisabled }) => eventDisabled && css`
+    pointer-events: none;
+  `}
+
   @media (min-width: 768px) {
     max-height: calc(100vh - 200px);
   }

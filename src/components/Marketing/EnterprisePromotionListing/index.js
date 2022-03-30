@@ -89,6 +89,7 @@ const EnterprisePromotionListingUI = (props) => {
         </HeaderContainer>
         <EnterprisePromotionList
           {...props}
+          eventDisabled={advancedOfferModuleDisabled}
           selectedPromotion={selectedPromotion}
           handleOpenDetails={handleOpenDetails}
         />

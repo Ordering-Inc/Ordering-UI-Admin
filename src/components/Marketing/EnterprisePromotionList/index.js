@@ -27,6 +27,8 @@ import {
 
 export const EnterprisePromotionList = (props) => {
   const {
+    eventDisabled,
+
     promotionListState,
     paginationProps,
     getPromotions,
@@ -109,7 +111,7 @@ export const EnterprisePromotionList = (props) => {
 
   return (
     <>
-      <PromotionListContainer>
+      <PromotionListContainer eventDisabled={eventDisabled}>
         <PromotionListTable>
           <thead>
             <tr>
