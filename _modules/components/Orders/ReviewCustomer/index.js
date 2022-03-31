@@ -21,6 +21,8 @@ var _styles = require("../../../styles");
 
 var _Shared = require("../../Shared");
 
+var _utils = require("../../../utils");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -56,6 +58,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReviewCustomerUI = function ReviewCustomerUI(props) {
+  var _commentsList, _commentsList2, _commentsList2$list;
+
   var customer = props.customer,
       reviewState = props.reviewState,
       setReviewState = props.setReviewState,
@@ -121,19 +125,7 @@ var ReviewCustomerUI = function ReviewCustomerUI(props) {
     left: 'initial',
     right: 0
   }];
-  var commentsList = [{
-    key: 0,
-    content: t('RESPECTFUL', 'Respectful')
-  }, {
-    key: 1,
-    content: t('EXCELLENT_COMMUNICATION', 'Excellent communication')
-  }, {
-    key: 2,
-    content: t('RUDE', 'Rude')
-  }, {
-    key: 3,
-    content: t('CONFUSING_INSTRUCTIONS', 'Confusing instructions')
-  }];
+  var commentsList = (0, _utils.reviewCommentList)(1);
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -207,7 +199,7 @@ var ReviewCustomerUI = function ReviewCustomerUI(props) {
         return handleChangeQualification(qualification === null || qualification === void 0 ? void 0 : qualification.key);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, qualification === null || qualification === void 0 ? void 0 : qualification.text, /*#__PURE__*/_react.default.createElement("span", null)));
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENTS', 'Comments')), commentsList === null || commentsList === void 0 ? void 0 : commentsList.map(function (commentItem, i) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, (_commentsList = commentsList[(reviewState === null || reviewState === void 0 ? void 0 : reviewState.qualification) || 1]) === null || _commentsList === void 0 ? void 0 : _commentsList.title), (_commentsList2 = commentsList[(reviewState === null || reviewState === void 0 ? void 0 : reviewState.qualification) || 1]) === null || _commentsList2 === void 0 ? void 0 : (_commentsList2$list = _commentsList2.list) === null || _commentsList2$list === void 0 ? void 0 : _commentsList2$list.map(function (commentItem, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.CommentButton, {
       key: i,
       active: isSelectedComment(commentItem === null || commentItem === void 0 ? void 0 : commentItem.key),
