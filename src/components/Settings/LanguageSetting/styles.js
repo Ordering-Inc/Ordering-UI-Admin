@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const LanguageDetailsContainer = styled.div`
   padding: 26px 40px;
+  margin-bottom: 30px;
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
