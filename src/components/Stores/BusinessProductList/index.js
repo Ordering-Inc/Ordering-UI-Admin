@@ -139,11 +139,8 @@ export const BusinessProductList = (props) => {
                   )}
                   <th className='more'>
                     <ColumnAllowSettingPopover
-                      open={openPopover}
                       allowColumns={allowColumns}
                       optionsDefault={optionsDefault}
-                      onClick={() => setOpenPopover(!openPopover)}
-                      onClose={() => setOpenPopover(false)}
                       handleChangeAllowColumns={handleChangeAllowColumns}
                     />
                   </th>

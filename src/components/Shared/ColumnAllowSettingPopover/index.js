@@ -1,7 +1,8 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { LayoutThreeColumns } from 'react-bootstrap-icons'
+import { usePopper } from 'react-popper'
 import { IconButton } from '../../../styles'
 
 import {
@@ -14,27 +15,49 @@ import {
 
 export const ColumnAllowSettingPopover = (props) => {
   const {
-    open,
     optionsDefault,
     allowColumns,
     handleChangeAllowColumns,
     title
   } = props
+
+  const [open, setOpen] = useState(false)
+
   const referenceElement = useRef()
   const popperElement = useRef()
+  const arrowElement = useRef()
+
+  const popper = usePopper(referenceElement.current, popperElement.current, {
+    placement: 'bottom-end',
+    modifiers: [
+      { name: 'arrow', options: { element: arrowElement.current } },
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 12]
+        }
+      }
+    ]
+  })
+
+  const { styles, attributes, forceUpdate } = popper
+
+  useEffect(() => {
+    forceUpdate && forceUpdate()
+  }, [open])
 
   const handleClickOutside = (e) => {
     if (!open) return
     const outsidePopover = !popperElement.current?.contains(e.target)
     const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
     if (outsidePopover && outsidePopoverMenu) {
-      props.onClose && props.onClose()
+      setOpen(false)
     }
   }
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 27) {
-      props.onClose && props.onClose()
+      setOpen(false)
     }
   }
 
@@ -47,40 +70,43 @@ export const ColumnAllowSettingPopover = (props) => {
     }
   }, [open])
 
+  const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: '100px' }
+  if (!open) {
+    popStyle.transform = 'translate3d(0px, 0px, 0px)'
+  }
+
   return (
     <div style={{ overflow: 'hidden' }}>
       <HeaderItem>
         <IconButton
           color='black'
           ref={referenceElement}
-          onClick={props.onClick}
+          onClick={() => setOpen(!open)}
         >
           <LayoutThreeColumns />
         </IconButton>
       </HeaderItem>
-      {open && (
-        <PopoverBody ref={popperElement}>
-          {title && <Title>{title}</Title>}
-          <PopoverList>
-            {optionsDefault.map(option => (
-              <AllowItem
-                key={option.value}
-                isChecked={allowColumns[option.value]}
-                onClick={() => handleChangeAllowColumns(option.value)}
-              >
-                {allowColumns[option.value] ? (
-                  <RiCheckboxFill />
-                ) : (
-                  <RiCheckboxBlankLine />
-                )}
-                <span>
-                  {option.content}
-                </span>
-              </AllowItem>
-            ))}
-          </PopoverList>
-        </PopoverBody>
-      )}
+      <PopoverBody ref={popperElement} style={popStyle} {...attributes.popper}>
+        {title && <Title>{title}</Title>}
+        <PopoverList>
+          {optionsDefault.map(option => (
+            <AllowItem
+              key={option.value}
+              isChecked={allowColumns[option.value]}
+              onClick={() => handleChangeAllowColumns(option.value)}
+            >
+              {allowColumns[option.value] ? (
+                <RiCheckboxFill />
+              ) : (
+                <RiCheckboxBlankLine />
+              )}
+              <span>
+                {option.content}
+              </span>
+            </AllowItem>
+          ))}
+        </PopoverList>
+      </PopoverBody>
     </div>
   )
 }

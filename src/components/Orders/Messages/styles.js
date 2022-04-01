@@ -81,8 +81,10 @@ export const Status = styled.p`
 `
 
 export const ImageContainer = styled.div`
+  overflow: auto;
   display: flex;
   align-items: center;
+  padding-bottom: 20px;
 
   > * {
     ${props => props.theme?.rtl ? css`
@@ -340,6 +342,7 @@ export const WrapperSendInput = styled.div`
   > input {
     border: 1px solid ${props => props.theme.colors.borderColor};
     padding-right: 45px;
+    -webkit-appearance: none;
     ${props => props.theme.rtl && css`
       padding-left: 45px;
       padding-right: 15px;
@@ -562,6 +565,7 @@ export const InfoBlock = styled.div`
       color: ${props => props.theme.colors.headingColor};
       font-size: 14px;
       font-weight: 500;
+      white-space: nowrap;
     }
     &:last-child {
       color: ${props => props.theme.colors.lightGray};
@@ -592,7 +596,6 @@ export const QuickMessageWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 20px;
 
   button {
     margin-bottom: 6px;
