@@ -114,6 +114,14 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
   var handleClickTab = function handleClickTab(option) {
     setMoveDistance(0);
     setSelectedOption(option);
+
+    if (Object.keys(formState.changes).length !== 0 && !actionState.loading) {
+      if (isAddMode) {
+        handleAddPromotion();
+      } else {
+        handleUpdateClick();
+      }
+    }
   };
 
   var onClickDeletePromotion = function onClickDeletePromotion() {
