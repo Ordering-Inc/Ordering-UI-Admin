@@ -115,7 +115,7 @@ import exampleCSV from './template/assets/files/ordering_business_example.csv'
 if (!(window?.location?.hostname === 'localhost')) {
   Sentry.init({
     environment: process.env.NODE_ENV,
-    dsn: 'https://84af7231923c4a298cc81c2d8d8365c7@o460529.ingest.sentry.io/5681485',
+    dsn: 'https://ee8c5677dcce40e5a0740ecdb222f357@o460529.ingest.sentry.io/5681485',
     integrations: [
       new Integrations.BrowserTracing()
     ],
