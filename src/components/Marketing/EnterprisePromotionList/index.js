@@ -27,6 +27,8 @@ import {
 
 export const EnterprisePromotionList = (props) => {
   const {
+    eventDisabled,
+
     promotionListState,
     paginationProps,
     getPromotions,
@@ -45,7 +47,6 @@ export const EnterprisePromotionList = (props) => {
   const theme = useTheme()
   const [{ parseDate, optimizeImage }] = useUtils()
 
-  const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     promotions: true,
     promotionType: true,
@@ -110,7 +111,7 @@ export const EnterprisePromotionList = (props) => {
 
   return (
     <>
-      <PromotionListContainer>
+      <PromotionListContainer eventDisabled={eventDisabled}>
         <PromotionListTable>
           <thead>
             <tr>
@@ -128,11 +129,8 @@ export const EnterprisePromotionList = (props) => {
               )}
               <th>
                 <ColumnAllowSettingPopover
-                  open={openPopover}
                   allowColumns={allowColumns}
                   optionsDefault={optionsDefault}
-                  onClick={() => setOpenPopover(!openPopover)}
-                  onClose={() => setOpenPopover(false)}
                   handleChangeAllowColumns={handleChangeAllowColumns}
                 />
               </th>
@@ -271,7 +269,7 @@ export const EnterprisePromotionList = (props) => {
           )}
         </PromotionListTable>
       </PromotionListContainer>
-      <PromotionListBottom>
+      <PromotionListBottom eventDisabled={eventDisabled}>
         <AddNewButton
           onClick={() => handleOpenDetails({})}
         >
