@@ -53,7 +53,7 @@ var Status = _styledComponents.default.p(_templateObject9 || (_templateObject9 =
 
 exports.Status = Status;
 
-var ImageContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > * {\n    ", "\n\n    &:last-child {\n      ", "\n    }\n  }\n\n  img {\n    width: 40px;\n    height: 40px;\n    border-radius: 8px;\n    object-fit: cover;\n    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);\n  }\n\n  svg {\n    width: 40px;\n    height: 40px;\n    border-radius: 8px;\n    padding: 6px;\n    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);\n  }\n  ", "\n\n"])), function (props) {
+var ImageContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  overflow: auto;\n  display: flex;\n  align-items: center;\n  padding-bottom: 20px;\n\n  > * {\n    ", "\n\n    &:last-child {\n      ", "\n    }\n  }\n\n  img {\n    width: 40px;\n    height: 40px;\n    border-radius: 8px;\n    object-fit: cover;\n    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);\n  }\n\n  svg {\n    width: 40px;\n    height: 40px;\n    border-radius: 8px;\n    padding: 6px;\n    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);\n  }\n  ", "\n\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "])));
@@ -165,7 +165,7 @@ var Send = _styledComponents.default.form(_templateObject40 || (_templateObject4
 
 exports.Send = Send;
 
-var WrapperSendInput = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  box-sizing: border-box;\n  ", "\n\n  > input {\n    border: 1px solid ", ";\n    padding-right: 45px;\n    ", "\n  }\n"])), function (props) {
+var WrapperSendInput = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  box-sizing: border-box;\n  ", "\n\n  > input {\n    border: 1px solid ", ";\n    padding-right: 45px;\n    -webkit-appearance: none;\n    ", "\n  }\n"])), function (props) {
   var _props$theme9;
 
   return (_props$theme9 = props.theme) !== null && _props$theme9 !== void 0 && _props$theme9.rtl ? (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "])));
@@ -259,7 +259,7 @@ var ChatContactInfoContainer = _styledComponents.default.div(_templateObject60 |
 
 exports.ChatContactInfoContainer = ChatContactInfoContainer;
 
-var InfoBlock = _styledComponents.default.div(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["\n  ", "\n  > p {\n    margin: 0px;\n\n    &:first-child {\n      color: ", ";\n      font-size: 14px;\n      font-weight: 500;\n    }\n    &:last-child {\n      color: ", ";\n      font-size: 12px;\n    }\n  }\n"])), function (props) {
+var InfoBlock = _styledComponents.default.div(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["\n  ", "\n  > p {\n    margin: 0px;\n\n    &:first-child {\n      color: ", ";\n      font-size: 14px;\n      font-weight: 500;\n      white-space: nowrap;\n    }\n    &:last-child {\n      color: ", ";\n      font-size: 12px;\n    }\n  }\n"])), function (props) {
   var _props$theme11;
 
   return (_props$theme11 = props.theme) !== null && _props$theme11 !== void 0 && _props$theme11.rtl ? (0, _styledComponents.css)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "])));
@@ -284,7 +284,7 @@ var MessageSender = _styledComponents.default.p(_templateObject67 || (_templateO
 
 exports.MessageSender = MessageSender;
 
-var QuickMessageWrapper = _styledComponents.default.div(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  margin-top: 20px;\n\n  button {\n    margin-bottom: 6px;\n    margin-right: 12px;\n    line-height: 22px;\n    font-size: 12px;\n    padding: 0 10px;\n\n    ", "\n  }\n"])), function (props) {
+var QuickMessageWrapper = _styledComponents.default.div(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n\n  button {\n    margin-bottom: 6px;\n    margin-right: 12px;\n    line-height: 22px;\n    font-size: 12px;\n    padding: 0 10px;\n\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["\n      margin-right: 0px;\n      margin-left: 12px;\n    "])));
 });
 

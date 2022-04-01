@@ -64,6 +64,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersTable = function OrdersTable(props) {
+  var _orderList$orders;
+
   var isSelectedOrders = props.isSelectedOrders,
       orderList = props.orderList,
       driversList = props.driversList,
@@ -112,12 +114,7 @@ var OrdersTable = function OrdersTable(props) {
     getPageOrders(pageSize, expectedPage);
   };
 
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      openPopover = _useState6[0],
-      setOpenPopover = _useState6[1];
-
-  var _useState7 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     status: true,
     orderNumber: true,
     dateTime: true,
@@ -128,9 +125,9 @@ var OrdersTable = function OrdersTable(props) {
     timer: true,
     total: true
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      allowColumns = _useState8[0],
-      setAllowColumns = _useState8[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      allowColumns = _useState6[0],
+      setAllowColumns = _useState6[1];
 
   var optionsDefault = [{
     value: 'status',
@@ -364,7 +361,8 @@ var OrdersTable = function OrdersTable(props) {
     isSelectedOrders: isSelectedOrders,
     noScroll: isTourOpen && currentTourStep === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
-    className: "orders_table"
+    className: "orders_table",
+    noFixedHeader: !orderList.loading && ((_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) <= 5
   }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("th", {
     className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'orderNo small' : 'orderNo'
   }, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
@@ -390,15 +388,8 @@ var OrdersTable = function OrdersTable(props) {
   }, t('SLA_TIMER', 'SLA’s timer')), /*#__PURE__*/_react.default.createElement("th", {
     className: "orderPrice"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
-    open: openPopover,
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
-    onClick: function onClick() {
-      return setOpenPopover(!openPopover);
-    },
-    onClose: function onClose() {
-      return setOpenPopover(false);
-    },
     handleChangeAllowColumns: handleChangeAllowColumns
   })))), orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {

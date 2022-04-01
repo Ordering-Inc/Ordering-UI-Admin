@@ -195,6 +195,11 @@ var MessagesUI = function MessagesUI(props) {
     var quickMsg = message ? "".concat(message, " ").concat(msg) : msg;
     setValue('message', quickMsg);
     setMessage(quickMsg);
+    var messageInput = document.getElementById('message');
+
+    if (messageInput) {
+      messageInput.scrollLeft = messageInput.scrollWidth;
+    }
   };
 
   (0, _react.useEffect)(function () {

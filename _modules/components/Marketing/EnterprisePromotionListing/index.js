@@ -135,6 +135,7 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
   }))), /*#__PURE__*/_react.default.createElement(_EnterprisePromotionList.EnterprisePromotionList, _extends({}, props, {
+    eventDisabled: advancedOfferModuleDisabled,
     selectedPromotion: selectedPromotion,
     handleOpenDetails: handleOpenDetails
   }))), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {

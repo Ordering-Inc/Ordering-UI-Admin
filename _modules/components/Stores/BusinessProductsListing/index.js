@@ -350,15 +350,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return openBatchImageUploader();
     }
   }, /*#__PURE__*/_react.default.createElement(_RiImageAddFill.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.ColumnsAllowWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
-    open: openColumnsPopover,
     allowColumns: allowSpreadColumns,
     optionsDefault: spreadColumnOptions,
-    onClick: function onClick() {
-      return setOpenColumnsPopover(!openColumnsPopover);
-    },
-    onClose: function onClose() {
-      return setOpenColumnsPopover(false);
-    },
     handleChangeAllowColumns: handleChangeAllowSpreadColumns
   }))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: viewMethod === 'list' ? 'primary' : 'black',

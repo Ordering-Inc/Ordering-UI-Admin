@@ -9,7 +9,7 @@ exports.Title = exports.PopoverList = exports.PopoverBody = exports.HeaderItem =
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,7 +21,7 @@ var HeaderItem = _styledComponents.default.div(_templateObject || (_templateObje
 
 exports.HeaderItem = HeaderItem;
 
-var PopoverBody = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: absolute;\n  background: ", ";\n  padding: 15px;\n  border-radius: 7.6px;\n  max-width: 250px;\n  z-index: 1001;\n  border: 1px solid ", ";\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n\n  ", "\n"])), function (props) {
+var PopoverBody = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  z-index: 1001;\n  background: ", ";\n  border: 1px solid ", ";\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;\n  border-radius: 7.6px;\n  padding: 15px;\n  max-width: 250px;\n"])), function (props) {
   var _props$theme$colors;
 
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
@@ -29,29 +29,25 @@ var PopoverBody = _styledComponents.default.div(_templateObject2 || (_templateOb
   var _props$theme$colors2;
 
   return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.borderColor;
-}, function (props) {
-  var _props$theme;
-
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    left: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    right: 0px;\n  "])));
 });
 
 exports.PopoverBody = PopoverBody;
 
-var PopoverList = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n"])));
+var PopoverList = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n"])));
 
 exports.PopoverList = PopoverList;
 
-var AllowItem = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  color: ", ";\n  padding: 7px;\n  cursor: pointer;\n  svg {\n    font-size: 24px;\n  }\n  span {\n    white-space: nowrap;\n    font-size: 12px;\n    font-weight: 400;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
+var AllowItem = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  color: ", ";\n  padding: 7px;\n  cursor: pointer;\n  svg {\n    font-size: 24px;\n  }\n  span {\n    white-space: nowrap;\n    font-size: 12px;\n    font-weight: 400;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
   var _props$theme$colors3;
 
   return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.headingColor;
 }, function (props) {
-  var _props$theme2;
+  var _props$theme;
 
-  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
 }, function (_ref) {
   var isChecked = _ref.isChecked;
-  return isChecked && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
+  return isChecked && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
     var _props$theme$colors4;
 
     return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.primary;
@@ -60,6 +56,6 @@ var AllowItem = _styledComponents.default.div(_templateObject6 || (_templateObje
 
 exports.AllowItem = AllowItem;
 
-var Title = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 18px;\n  padding: 0px 7px;\n"])));
+var Title = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  font-weight: 500;\n  font-size: 12px;\n  line-height: 18px;\n  padding: 0px 7px;\n"])));
 
 exports.Title = Title;

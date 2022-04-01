@@ -11,6 +11,8 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _reactour = _interopRequireDefault(require("reactour"));
 
+var _bodyScrollLock = require("body-scroll-lock");
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("./styles");
@@ -78,9 +80,13 @@ var WizardOrders = function WizardOrders(props) {
     },
     maskClassName: "mask",
     className: "helper",
-    rounded: 8 // onAfterOpen={target => disableBodyScroll(target)}
-    // onBeforeClose={target => enableBodyScroll(target)}
-    ,
+    rounded: 8,
+    onAfterOpen: function onAfterOpen(target) {
+      return (0, _bodyScrollLock.disableBodyScroll)(target);
+    },
+    onBeforeClose: function onBeforeClose(target) {
+      return (0, _bodyScrollLock.enableBodyScroll)(target);
+    },
     showNavigation: false,
     showCloseButton: false,
     disableFocusLock: true,

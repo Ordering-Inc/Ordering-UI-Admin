@@ -66,12 +66,7 @@ var CampaignList = function CampaignList(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      openPopover = _useState2[0],
-      setOpenPopover = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     campaign: true,
     contact_type: true,
     audience: true,
@@ -81,9 +76,9 @@ var CampaignList = function CampaignList(props) {
     update: true,
     actions: true
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      allowColumns = _useState4[0],
-      setAllowColumns = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      allowColumns = _useState2[0],
+      setAllowColumns = _useState2[1];
 
   var optionsDefault = [{
     value: 'campaign',
@@ -144,15 +139,8 @@ var CampaignList = function CampaignList(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Table, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.campaign) && /*#__PURE__*/_react.default.createElement("th", null, t('CAMPAIGN', 'Campaign')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.contact_type) && /*#__PURE__*/_react.default.createElement("th", null, t('CONTACT_TYPE', 'Contact type')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("th", null, t('AUDIENCE', 'Audience')), /*#__PURE__*/_react.default.createElement("th", {
     className: "allow-colums action"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
-    open: openPopover,
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
-    onClick: function onClick() {
-      return setOpenPopover(!openPopover);
-    },
-    onClose: function onClose() {
-      return setOpenPopover(false);
-    },
     handleChangeAllowColumns: handleChangeAllowColumns,
     title: t('DISPLAYED_DATA_THE_ORDER', 'Displayed data the order')
   })))), campaignList !== null && campaignList !== void 0 && campaignList.loading ? _toConsumableArray(Array(8).keys()).map(function (i) {
