@@ -112,18 +112,14 @@ export const MessagesUI = (props) => {
     const quickMsg = message ? `${message} ${msg}` : msg
     setValue('message', quickMsg)
     setMessage(quickMsg)
-
-    const messageInput = messageInputRef?.current
-    if (messageInput) {
-      messageInput.scrollLeft = messageInput.scrollWidth
-    }
   }
 
   useEffect(() => {
     const msgElement = messageInputRef?.current
     if (msgElement) {
-      msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length
       msgElement.focus()
+      msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length
+      msgElement.scrollLeft = msgElement.scrollWidth
     }
   }, [message])
 
