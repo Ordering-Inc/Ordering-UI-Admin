@@ -19,6 +19,8 @@ var _Shared = require("../../Shared");
 
 var _ProductExtraOptions = require("../ProductExtraOptions");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -213,7 +215,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       onClick: function onClick() {
         return handleOpenExtraDetails(extra);
       }
-    }, t('DETAILS', 'Details'))));
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))));
   })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ExtraAddForm, {
     ref: conatinerRef,
     onSubmit: function onSubmit(e) {
