@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { Alert } from '../../Shared'
@@ -14,14 +14,14 @@ import {
 
 export const CampaignEmail = (props) => {
   const {
-    formState,
-    campaignState,
-    handleChangeItem
+    isAddMode,
+    contactState,
+    handleChangeData,
+    handleUpdateContact,
+    handleAddCampaign
   } = props
 
   const [, t] = useLanguage()
-
-  const [email, setEmail] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const closeAlert = () => {
@@ -31,32 +31,25 @@ export const CampaignEmail = (props) => {
     })
   }
 
-  const handleChangeInput = (evt) => {
-    setEmail({ ...email, [evt.target.name]: evt.target.value })
-  }
-
   const handleSaveEmail = () => {
-    if (!email?.title) {
+    if (!contactState?.changes?.contact_data?.title) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Title is required').replace('_attribute_', t('TITLE', 'Title'))
       })
       return
     }
-    if (!email?.body) {
+    if (!contactState?.changes?.contact_data?.body) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Body is required').replace('_attribute_', t('BODY', 'Body'))
       })
       return
     }
-    handleChangeItem('contact_data', email)
-  }
 
-  useEffect(() => {
-    const contactData = formState?.changes?.contact_data ?? campaignState?.campaign?.contact_data
-    if (contactData) setEmail({ ...contactData })
-  }, [formState, campaignState])
+    if (isAddMode) handleAddCampaign()
+    else handleUpdateContact()
+  }
 
   return (
     <>
@@ -66,8 +59,8 @@ export const CampaignEmail = (props) => {
           <Input
             name='title'
             placeholder={t('TITLE', 'Title')}
-            defaultValue={email?.title || ''}
-            onChange={handleChangeInput}
+            defaultValue={contactState?.changes?.contact_data?.title || ''}
+            onChange={handleChangeData}
           />
         </InputWrapper>
         <InputWrapper>
@@ -75,8 +68,8 @@ export const CampaignEmail = (props) => {
           <TextArea
             name='body'
             placeholder={t('WRITE_MESSAGE', 'Write a message')}
-            defaultValue={email?.body || ''}
-            onChange={handleChangeInput}
+            defaultValue={contactState?.changes?.contact_data?.body || ''}
+            onChange={handleChangeData}
           />
         </InputWrapper>
         <EmailPreviewWrapper>
@@ -88,8 +81,8 @@ export const CampaignEmail = (props) => {
             </PointGroup>
           </EmailPreviewHeader>
           <EmailPreviewContent>
-            <h2>{email?.title || ''}</h2>
-            <p>{email?.body || ''}</p>
+            <h2>{contactState?.changes?.contact_data?.title || ''}</h2>
+            <p>{contactState?.changes?.contact_data?.body || ''}</p>
           </EmailPreviewContent>
         </EmailPreviewWrapper>
       </Container>
@@ -97,9 +90,9 @@ export const CampaignEmail = (props) => {
         <Button
           color='primary'
           onClick={handleSaveEmail}
-          disabled={formState.loading}
+          disabled={contactState.loading}
         >
-          {t('SAVE', 'Save')}
+          {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
         </Button>
       </ButtonWrapper>
       <Alert

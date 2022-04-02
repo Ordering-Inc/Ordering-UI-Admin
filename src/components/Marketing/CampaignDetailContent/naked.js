@@ -8,7 +8,13 @@ import { useApi, useSession, useLanguage, useToast, ToastType } from 'ordering-c
 
 export const CampaignDetailContent = (props) => {
   const {
-    UIComponent
+    UIComponent,
+    campaignState,
+    isAddMode,
+    handleChangeItem,
+    handleChangeContactData,
+    handleSuccessUpdateCampaign,
+    campaignList
   } = props
 
   const [ordering] = useApi()
@@ -16,12 +22,52 @@ export const CampaignDetailContent = (props) => {
   const [, { showToast }] = useToast()
   const [, t] = useLanguage()
 
+  const [formState, setFormState] = useState({ loading: false, changes: {}, error: null })
+
   /**
-   * Default fuction for campaign workflow
+   * Update parameter data
+   * @param {string} name parameters to change
+   * @param {string} value parameters to change
    */
-  const handleUpdateCampaign = async (id, changes) => {
+  const handleChangeType = (name, value) => {
+    const changes = { ...formState?.changes, [name]: value }
+    setFormState({ ...formState, changes: changes })
+
+    if (isAddMode) {
+      handleChangeItem && handleChangeItem(name, value)
+    }
+  }
+
+  /**
+   * Update credential data
+   * @param {EventTarget} e Related HTML event
+   */
+  const handleChangeData = (e) => {
+    const contactData = { ...formState.changes?.contact_data, [e.target.name]: e.target.value }
+    setFormState({
+      ...formState,
+      changes: { ...formState.changes, contact_data: contactData }
+    })
+
+    if (isAddMode) {
+      handleChangeContactData && handleChangeContactData(e)
+    }
+  }
+
+  /**
+   * Default fuction for recovery action workflow
+   */
+  const handleUpdateContact = async () => {
     try {
       showToast(ToastType.Info, t('LOADING', 'Loading'))
+      setFormState({ ...formState, loading: true, error: null })
+
+      const changes = { ...formState?.changes }
+      for (const key in changes) {
+        if ((typeof changes[key] === 'object' && changes[key] !== null) || Array.isArray(changes[key])) {
+          changes[key] = JSON.stringify(changes[key])
+        }
+      }
       const requestOptions = {
         method: 'PUT',
         headers: {
@@ -31,22 +77,56 @@ export const CampaignDetailContent = (props) => {
         body: JSON.stringify(changes)
       }
 
-      const response = await fetch(`${ordering.root}/marketing_campaigns/${id}`, requestOptions)
+      const response = await fetch(`${ordering.root}/marketing_campaigns/${campaignState?.campaign?.id}`, requestOptions)
       const content = await response.json()
 
       if (!content.error) {
+        setFormState({ ...formState, loading: false, error: null })
+        if (handleSuccessUpdateCampaign) {
+          const updatedCampaigns = campaignList?.campaigns.filter(_campaign => {
+            if (_campaign.id === campaignState?.campaign?.id) {
+              Object.assign(_campaign, content.result)
+            }
+            return true
+          })
+          handleSuccessUpdateCampaign(updatedCampaigns)
+        }
         showToast(ToastType.Success, t('CAMPAIGN_SAVED', 'Campaign saved'))
+      } else {
+        setFormState({
+          ...formState,
+          loading: false,
+          error: content.result
+        })
       }
     } catch (err) {
-      console.log(err.message)
+      setFormState({
+        ...formState,
+        loading: false,
+        error: err.message
+      })
     }
   }
+
+  useEffect(() => {
+    setFormState({
+      ...formState,
+      changes: {
+        contact_type: campaignState?.campaign?.contact_type || '',
+        contact_data: campaignState?.campaign?.contact_data || {}
+      }
+    })
+  }, [campaignState?.campaign])
 
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
+          contactState={formState}
+          handleChangeType={handleChangeType}
+          handleChangeData={handleChangeData}
+          handleUpdateContact={handleUpdateContact}
         />
       )}
     </>

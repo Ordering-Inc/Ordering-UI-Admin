@@ -8,17 +8,18 @@ import { CampaignNotification } from '../CampaignNotification'
 import { CampaignPopup } from '../CampaignPopup'
 import { CampaignWebHook } from '../CampaignWebHook'
 
+import { CampaignDetailContent as CampaignDetailContentController } from './naked'
+
 import {
   Container,
   SelectWrapper,
   Option
 } from './styles'
 
-export const CampaignDetailContent = (props) => {
+const CampaignDetailContentUI = (props) => {
   const {
-    handleChangeItem,
-    formState,
-    campaignState
+    handleChangeType,
+    contactState
   } = props
 
   const [, t] = useLanguage()
@@ -46,9 +47,9 @@ export const CampaignDetailContent = (props) => {
         <Select
           options={typeOptions}
           className='select'
-          defaultValue={formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type ?? ''}
+          defaultValue={contactState?.changes?.contact_type || ''}
           placeholder={t('SELECT_OPTION', 'Select an option')}
-          onChange={(value) => handleChangeItem('contact_type', value)}
+          onChange={(value) => handleChangeType('contact_type', value)}
           isShowSearchBar
           searchBarIsCustomLayout
           searchBarIsNotLazyLoad
@@ -57,12 +58,20 @@ export const CampaignDetailContent = (props) => {
         />
       </SelectWrapper>
 
-      {(formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'email' && <CampaignEmail {...props} />}
-      {(formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'sms' && <CampaignSMS {...props} />}
-      {(formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'whatsapp' && <CampaignWhatsapp {...props} />}
-      {(formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'notification' && <CampaignNotification {...props} />}
-      {(formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'popup' && <CampaignPopup {...props} />}
-      {(formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'webhook' && <CampaignWebHook {...props} />}
+      {contactState?.changes?.contact_type === 'email' && <CampaignEmail {...props} />}
+      {contactState?.changes?.contact_type === 'sms' && <CampaignSMS {...props} />}
+      {contactState?.changes?.contact_type === 'whatsapp' && <CampaignWhatsapp {...props} />}
+      {contactState?.changes?.contact_type === 'notification' && <CampaignNotification {...props} />}
+      {contactState?.changes?.contact_type === 'popup' && <CampaignPopup {...props} />}
+      {contactState?.changes?.contact_type === 'webhook' && <CampaignWebHook {...props} />}
     </Container>
   )
+}
+
+export const CampaignDetailContent = (props) => {
+  const campaignDetailContentProps = {
+    ...props,
+    UIComponent: CampaignDetailContentUI
+  }
+  return <CampaignDetailContentController {...campaignDetailContentProps} />
 }
