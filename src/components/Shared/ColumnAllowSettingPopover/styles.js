@@ -6,20 +6,13 @@ export const HeaderItem = styled.div`
 `
 
 export const PopoverBody = styled.div`
-  position: absolute;
-  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-  padding: 15px;
-  border-radius: 7.6px;
-  max-width: 250px;
   z-index: 1001;
+  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   border: 1px solid ${props => props.theme.colors?.borderColor};
   box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
-
-  ${props => props.theme?.rtl ? css`
-    left: 0px;
-  ` : css`
-    right: 0px;
-  `}
+  border-radius: 7.6px;
+  padding: 15px;
+  max-width: 250px;
 `
 
 export const PopoverList = styled.div`

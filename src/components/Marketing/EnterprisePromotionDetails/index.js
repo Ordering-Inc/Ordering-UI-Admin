@@ -56,6 +56,13 @@ const EnterprisePromotionDetailsUI = (props) => {
   const handleClickTab = (option) => {
     setMoveDistance(0)
     setSelectedOption(option)
+    if (Object.keys(formState.changes).length !== 0 && !actionState.loading) {
+      if (isAddMode) {
+        handleAddPromotion()
+      } else {
+        handleUpdateClick()
+      }
+    }
   }
 
   const onClickDeletePromotion = () => {

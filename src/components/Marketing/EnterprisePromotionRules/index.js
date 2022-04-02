@@ -72,6 +72,19 @@ export const EnterprisePromotionRules = (props) => {
     setIsShowConditions(true)
   }
 
+  const handleMaxPercentValidate = () => {
+    const rateType = formState.changes?.rate_type ?? promotionState.promotion?.rate_type
+    if (rateType !== 1) return true
+    const rate = formState.changes?.rate ?? promotionState?.promotion?.rate ?? ''
+    if (parseFloat(rate) <= 100) {
+      return true
+    } else {
+      return t('VALIDATION_ERROR_MAX_NUMERIC', 'The _attribute_ may not be greater than _max_.')
+        .replace('_attribute_', t('PERCENTAGE', 'Percentage'))
+        .replace('_max_', 100)
+    }
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -130,7 +143,8 @@ export const EnterprisePromotionRules = (props) => {
                   }
                 }}
                 ref={formMethods.register({
-                  required: t('VALIDATION_ERROR_REQUIRED', 'The _attribute_ field is required.').replace('_attribute_', t('RATE', 'Rate'))
+                  required: t('VALIDATION_ERROR_REQUIRED', 'The _attribute_ field is required.').replace('_attribute_', t('RATE', 'Rate')),
+                  validate: handleMaxPercentValidate
                 })}
               />
             </div>
