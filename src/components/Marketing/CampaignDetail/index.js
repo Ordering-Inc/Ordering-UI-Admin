@@ -5,11 +5,6 @@ import { useLanguage, CampaignDetail as CampaignDetailController } from 'orderin
 import { ThreeDots } from 'react-bootstrap-icons'
 import { Confirm, Alert } from '../../Shared'
 import { CampaignDetailGeneral } from '../CampaignDetailGeneral'
-import { CampaignNotification } from '../CampaignNotification'
-import { CampaignWhatsapp } from '../CampaignWhatsapp'
-import { CampaignPopup } from '../CampaignPopup'
-import { CampaignEmail } from '../CampaignEmail'
-import { CampaignSMS } from '../CampaignSMS'
 
 import {
   CampaignDetailContainer,
@@ -21,7 +16,7 @@ import {
   Tabs,
   Tab
 } from './styles'
-import { CampaignWebHook } from '../CampaignWebHook'
+import { CampaignDetailContent } from '../CampaignDetailContent'
 
 const CampaignDetailUI = (props) => {
   const {
@@ -109,7 +104,8 @@ const CampaignDetailUI = (props) => {
           ))}
         </Tabs>
         {selectedOption === 'general' && <CampaignDetailGeneral {...props} />}
-        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'email' && (
+        {selectedOption === 'content' && <CampaignDetailContent {...props} />}
+        {/* {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'email' && (
           <CampaignEmail {...props} />
         )}
         {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'sms' && (
@@ -126,7 +122,7 @@ const CampaignDetailUI = (props) => {
         )}
         {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'webhook' && (
           <CampaignWebHook {...props} />
-        )}
+        )} */}
       </CampaignDetailContainer>
       <Alert
         title={t('CAMPAIGN', 'Campaign')}
