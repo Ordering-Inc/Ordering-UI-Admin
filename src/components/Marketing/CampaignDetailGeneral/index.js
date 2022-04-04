@@ -166,9 +166,9 @@ export const CampaignDetailGeneral = (props) => {
                       onChange={val => handleChangeItem('enabled', val)}
                     />
                   </SwitchWrapper>
-                  {campaignState?.campaign?.end_at && (
+                  {/* {campaignState?.campaign?.end_at && (
                     <p>{t('LAST_TIME_ON', 'Last time on')}: <span>{moment(campaignState?.campaign?.end_at).format('MM/DD/YYYY · HH:mm a')}</span></p>
-                  )}
+                  )} */}
                 </>
               )}
             </DynamicContentWrapper>

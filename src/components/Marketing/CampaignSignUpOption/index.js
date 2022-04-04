@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLanguage, CampaignSignUpOption as CampaignSignUpOptionController } from 'ordering-components-admin'
 import {
   Circle as UnCheckIcon,
@@ -35,6 +35,8 @@ const CampaignSignUpOptionUI = (props) => {
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const defaultValue = ruleFormState.changes?.max_date && { from: ruleFormState.changes?.date, to: ruleFormState.changes?.max_date }
+
+  const contentEndRef = useRef(null)
 
   const optionList = [
     { key: '>', title: t('AFTER', 'After') },
@@ -80,6 +82,24 @@ const CampaignSignUpOptionUI = (props) => {
     }
     onClose && onClose()
   }
+
+  const scrollDown = (e) => {
+    if (!e.target.closest('.ordering-calendar-btn')) return
+
+    const el = document.querySelector('.popup-dialog')
+    if (el?.scrollHeight > el?.clientHeight) {
+      const top = contentEndRef.current.offsetTop
+      el.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('click', scrollDown)
+    return () => window.removeEventListener('click', scrollDown)
+  }, [])
 
   return (
     <>
@@ -131,6 +151,7 @@ const CampaignSignUpOptionUI = (props) => {
           {t('DONE', 'Done')}
         </Button>
       </ButtonWrapper>
+      <div ref={contentEndRef} />
       <Alert
         title={t('CAMPAIGN', 'Campaign')}
         content={alertState.content}

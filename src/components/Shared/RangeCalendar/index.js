@@ -99,6 +99,7 @@ export const RangeCalendar = (props) => {
         onClick={handleOpenCalendar}
         borderRadius='8px'
         color='secundary'
+        className='ordering-calendar-btn'
       >
         <Calendar4 />
         {!isSingleDate && (dateRange[0].startDate ? rangeFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range'))}
