@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, Switch, Button } from '../../../styles'
-import { Modal } from '../../Shared'
-import { CampaignCalendarTime } from '../CampaignCalendarTime'
+import { Modal, RangeCalendar } from '../../Shared'
 import { CampaignAmountOption } from '../CampaignAmountOption'
 import { CampaignSignUpOption } from '../CampaignSignUpOption'
 
@@ -79,7 +78,7 @@ export const CampaignDetailGeneral = (props) => {
 
   const checkColor = (status) => {
     const index = status.toLocaleLowerCase()
-    if (index === 'sent') return '#00D27A'
+    if (index === 'ended') return '#00D27A'
     else if (index === 'scheduled') return '#FFC700'
     else if (index === 'draft') return '#E9ECEF'
     else return '#E9ECEF'
@@ -207,10 +206,12 @@ export const CampaignDetailGeneral = (props) => {
                   </RadioCheckWrapper>
                   {!isASAP && (
                     <ScheduleForLateWrapper>
-                      <CampaignCalendarTime
-                        showTime
-                        dateTime={formState?.changes?.scheduled_at ?? campaignState?.campaign?.scheduled_at}
-                        handleChangeDateTime={handleChangeDateTime}
+                      <RangeCalendar
+                        withTime
+                        isLeft
+                        isSingleDate
+                        defaultValue={formState?.changes?.scheduled_at ?? campaignState?.campaign?.scheduled_at}
+                        handleChangeDate={handleChangeDateTime}
                       />
                     </ScheduleForLateWrapper>
                   )}

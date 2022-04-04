@@ -82,8 +82,8 @@ const CampaignDetailUI = (props) => {
                   title={<ThreeDots />}
                   id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                 >
-                  {/* <Dropdown.Item>
-                    {t('CUSTOM_FIELDS', 'Custom fields')}
+                  {/* <Dropdown.Item onClick={() => handleAddCampaign(true)}>
+                    {t('DUPLICATE', 'Duplicate')}
                   </Dropdown.Item> */}
                   <Dropdown.Item onClick={onClickDeteteCampaign}>
                     {t('DELETE', 'Delete')}

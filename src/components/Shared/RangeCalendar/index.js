@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import moment from 'moment'
-import { DateRange } from 'react-date-range'
+import { DateRange, Calendar } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { Calendar4 } from 'react-bootstrap-icons'
@@ -12,7 +12,9 @@ export const RangeCalendar = (props) => {
   const {
     handleChangeDate,
     defaultValue,
-    isLeft
+    isLeft,
+    isSingleDate,
+    withTime
   } = props
 
   const [, t] = useLanguage()
@@ -23,6 +25,7 @@ export const RangeCalendar = (props) => {
       key: 'selection'
     }
   ])
+  const [date, setDate] = useState(null)
   const [isShowCalendar, setIsShowCalendar] = useState(false)
   const calendarRef = useRef()
 
@@ -39,14 +42,23 @@ export const RangeCalendar = (props) => {
     setIsShowCalendar(true)
   }
 
+  const handleChangeSingleDate = (dateTime) => {
+    const dateFormat = withTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'
+    handleChangeDate && handleChangeDate(moment(date).format(dateFormat))
+
+    setDate(dateTime)
+  }
+
   const handleChangeDates = (item) => {
     if (item.selection?.startDate && item.selection?.endDate) {
-      handleChangeDate(moment(item.selection.startDate).format('YYYY-MM-DD'), moment(item.selection.endDate).format('YYYY-MM-DD'))
+      const dateFormat = withTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'
+      handleChangeDate(moment(item.selection.startDate).format(dateFormat), moment(item.selection.endDate).format(dateFormat))
     }
+
     setDateRange([item.selection])
   }
 
-  const dateFormat = (date1, date2) => {
+  const rangeFormat = (date1, date2) => {
     let formattedDate = `${moment(date1).format('YYYY-MM-DD')}~${moment(date2).format('YYYY-MM-DD')}`
     if (moment(date1).format('YYYY') === moment(date2).format('YYYY')) {
       if (moment(date1).format('MM') === moment(date2).format('MM')) formattedDate = `${moment(date1).format('DD')} - ${moment(date2).format('DD')} ${moment(date2).format('MMM')}, ${moment(date1).format('YYYY')}`
@@ -55,12 +67,21 @@ export const RangeCalendar = (props) => {
     return formattedDate
   }
 
+  const dateFormat = (dateTime) => {
+    return `${moment(dateTime).format('DD')} ${moment(dateTime).format('MMM')}, ${moment(dateTime).format('YYYY')}`
+  }
+
   useEffect(() => {
     window.addEventListener('click', handleClickOutside)
     return () => window.removeEventListener('click', handleClickOutside)
   }, [isShowCalendar])
 
   useEffect(() => {
+    if (isSingleDate && defaultValue) {
+      setDate(new Date(defaultValue))
+      return
+    }
+
     if (defaultValue && defaultValue?.from !== '' && defaultValue?.to !== '') {
       setDateRange([
         {
@@ -80,19 +101,25 @@ export const RangeCalendar = (props) => {
         color='secundary'
       >
         <Calendar4 />
-        {
-          dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')
-        }
+        {!isSingleDate && (dateRange[0].startDate ? rangeFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range'))}
+        {isSingleDate && (date ? dateFormat(date) : t('SELECT_DATE', 'Select a Date'))}
       </Button>
       {
         isShowCalendar && (
           <CalendarWrapper ref={calendarRef} isLeft={isLeft}>
-            <DateRange
-              editableDateInputs
-              onChange={item => handleChangeDates(item)}
-              moveRangeOnFirstSelection={false}
-              ranges={dateRange}
-            />
+            {isSingleDate ? (
+              <Calendar
+                date={date}
+                onChange={(date) => handleChangeSingleDate(date)}
+              />
+            ) : (
+              <DateRange
+                editableDateInputs
+                onChange={item => handleChangeDates(item)}
+                moveRangeOnFirstSelection={false}
+                ranges={dateRange}
+              />
+            )}
           </CalendarWrapper>
         )
       }

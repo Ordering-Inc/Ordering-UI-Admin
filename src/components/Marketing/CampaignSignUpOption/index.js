@@ -15,7 +15,6 @@ import {
   CalendarWrapper
 } from './styles'
 import { RangeCalendar, Alert } from '../../Shared'
-import { CampaignCalendarTime } from '../CampaignCalendarTime'
 
 const CampaignSignUpOptionUI = (props) => {
   const {
@@ -96,10 +95,12 @@ const CampaignSignUpOptionUI = (props) => {
             </RadioCheckWrapper>
             {ruleFormState.changes?.date_condition === option.key && (
               <CalendarWrapper>
-                <CampaignCalendarTime
-                  showTime
-                  dateTime={ruleFormState.changes?.date}
-                  handleChangeDateTime={handleChangeDateTime}
+                <RangeCalendar
+                  withTime
+                  isLeft
+                  isSingleDate
+                  defaultValue={ruleFormState.changes?.date}
+                  handleChangeDate={handleChangeDateTime}
                 />
               </CalendarWrapper>
             )}
