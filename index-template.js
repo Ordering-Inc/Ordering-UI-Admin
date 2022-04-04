@@ -87,6 +87,9 @@ import orderCancelled from './template/assets/images/orderStatus/cancelled.svg'
 import noDriver from './template/assets/images/avatars/noDriver.png'
 import driverDelivery from './template/assets/images/icons/driverDelivery.svg'
 import pickUp from './template/assets/images/icons/pickUp.svg'
+import clock1 from './template/assets/images/icons/clock1.svg'
+import clockRisk from './template/assets/images/icons/clock-history1.svg'
+import clockDelayed from './template/assets/images/icons/clock-fill1.svg'
 
 import orderStatus0 from './template/assets/images/order/status-0.svg'
 import orderStatus1 from './template/assets/images/order/status-1.svg'
@@ -223,7 +226,10 @@ theme.images = {
     batchWise: batchWise,
     roundRobin: roundRobin,
     leftArrow: leftArrow,
-    rightArrow: rightArrow
+    rightArrow: rightArrow,
+    clock1: clock1,
+    clockRisk: clockRisk,
+    clockDelayed: clockDelayed
   },
   dummies: {
     noOrders: noOrders,

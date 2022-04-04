@@ -5,6 +5,7 @@ import { OrdersFilterGroup } from '../OrdersFilterGroup'
 import { Funnel, List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import { OrdersDashboardSLAControls } from '../OrdersDashboardSLAControls'
+import { OrderDashboardSLASetting } from '../OrderDashboardSLASetting'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
@@ -96,9 +97,12 @@ export const OrdersContentHeader = (props) => {
         )}
         <TopRightSection>
           {!isDisableControl && (
-            <OrdersDashboardSLAControls
-              setTimeStatus={setTimeStatus}
-            />
+            <>
+              <OrderDashboardSLASetting />
+              <OrdersDashboardSLAControls
+                setTimeStatus={setTimeStatus}
+              />
+            </>
           )}
           <WrapperSearchAndFilter
             fullWidth={isDisableTitle && isDisableControl}
