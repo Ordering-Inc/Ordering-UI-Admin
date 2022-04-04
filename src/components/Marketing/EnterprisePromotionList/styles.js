@@ -6,6 +6,11 @@ export const PromotionListContainer = styled.div`
   overflow: auto;
   margin-top: 30px;
 
+  
+  ${({ eventDisabled }) => eventDisabled && css`
+    pointer-events: none;
+  `}
+
   @media (min-width: 768px) {
     max-height: calc(100vh - 200px);
   }
@@ -184,6 +189,9 @@ export const PromotionListBottom = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
+  ${({ eventDisabled }) => eventDisabled && css`
+    pointer-events: none;
+  `}
 `
 export const AddNewButton = styled.div`
   cursor: pointer;
