@@ -108,7 +108,7 @@ export const CampaignList = (props) => {
   return (
     <>
       <Container>
-        <Table>
+        <Table isRelative={campaignList?.campaigns?.length < 5}>
           <thead>
             <tr>
               {allowColumns?.campaign && (

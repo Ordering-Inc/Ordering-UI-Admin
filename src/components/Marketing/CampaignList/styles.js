@@ -10,7 +10,6 @@ export const Container = styled.div`
 
   @media (min-width: 768px) {
     max-height: calc(100vh - 385px);
-    min-height: 420px;
   }
 
   @media (min-width: 992px) {
@@ -90,6 +89,16 @@ export const Table = styled.table`
       }
     }
   }
+
+  ${({ isRelative }) => isRelative && css`
+    thead {
+      tr {
+        th {
+          position: relative;
+        }
+      }
+    }
+  `}
 
   p {
     overflow: hidden;
