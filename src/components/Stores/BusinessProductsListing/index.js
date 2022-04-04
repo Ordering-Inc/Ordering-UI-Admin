@@ -78,7 +78,6 @@ const BusinessProductsListingUI = (props) => {
   const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
   const [openSidebar, setOpenSidebar] = useState(null)
 
-  const [openColumnsPopover, setOpenColumnsPopover] = useState(false)
   const [allowSpreadColumns, setAllowSpreadColumns] = useState({
     id: true,
     name: true,
