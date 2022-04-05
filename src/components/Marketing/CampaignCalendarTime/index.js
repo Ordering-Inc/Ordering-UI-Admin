@@ -16,7 +16,11 @@ export const CampaignCalendarTime = (props) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClickOutside = (e) => {
-    if (e.target.closest('.calendar-box') || !isOpen) return
+    if (e.target.closest('.react-datepicker__tab-loop') ||
+      e.target.closest('.react-datepicker-wrapper') ||
+      e.target.closest('.calendar-box-btn') ||
+      !isOpen
+    ) return
     setIsOpen(false)
   }
 
@@ -36,9 +40,10 @@ export const CampaignCalendarTime = (props) => {
 
   return (
     <>
-      <DateTimeWrapper className='calendar-box'>
+      <DateTimeWrapper>
         <Button
           onClick={() => setIsOpen(true)}
+          className='calendar-box-btn'
         >
           <Calendar4 />
           {showTime ? moment(startDate).format('DD MMM, YYYY h:m A') : moment(startDate).format('DD MMM, YYYY')}

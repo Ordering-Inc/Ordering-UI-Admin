@@ -40,7 +40,6 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     handleChangeItem,
     isAddMode,
     handleDeleteCategory,
-
     isTutorialMode,
     handleTutorialSkip
   } = props
@@ -114,11 +113,9 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                       <span>{t('NEW_CATEGORY', 'New category')}</span>
                     ) : (
                       <>
-                        {
-                          formState?.changes?.name && (
-                            <span>{formState?.changes?.name}</span>
-                          )
-                        }
+                        {formState?.changes?.name && (
+                          <span>{formState?.changes?.name}</span>
+                        )}
                         <Switch
                           defaultChecked={formState?.changes?.enabled || false}
                           onChange={(val) => handleChangeCheckBox({ enabled: val })}

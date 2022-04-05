@@ -31,6 +31,7 @@ export const BusinessName = styled.span`
 
 export const FilterBtnWrapper = styled.div`
   margin-top: 20px;
+  margin-bottom: 40px;
   display: flex;
   justify-content: flex-end;
   position: sticky;
