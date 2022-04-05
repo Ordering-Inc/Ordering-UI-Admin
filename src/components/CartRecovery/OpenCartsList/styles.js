@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const OrdersContainer = styled.div`
+export const CartsContainer = styled.div`
   max-height: calc(100vh - 410px);
   overflow: auto;
 
@@ -180,7 +180,7 @@ export const BusinessInfo = styled.div`
   display: flex;
   align-items: center;
   p {
-    max-width: 125px;
+    max-width: 250px;
   }
   div.info {
     ${props => props.theme?.rtl ? css`
@@ -193,7 +193,7 @@ export const BusinessInfo = styled.div`
 
 export const CustomerInfo = styled(BusinessInfo)`
   p {
-    max-width: 125px;
+    max-width: 150px;
   }
 `
 

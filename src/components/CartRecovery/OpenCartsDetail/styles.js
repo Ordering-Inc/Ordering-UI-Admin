@@ -35,16 +35,6 @@ export const Container = styled.div`
   }
 `
 
-export const SkeletonWrapper = styled.div`
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  flex-direction: column;
-  > span {
-    width: 100%;
-  }
-`
-
 export const OrderDetailsContent = styled.div`
   padding: 30px 20px;
   box-sizing: border-box;

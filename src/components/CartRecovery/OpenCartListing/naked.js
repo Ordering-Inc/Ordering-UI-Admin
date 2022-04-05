@@ -3,27 +3,31 @@ import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 // import { useWebsocket } from '../../contexts/WebsocketContext'
-import { useSession, useApi, useWebsocket } from 'ordering-components-admin'
-export const OpenCarts = (props) => {
+import { useSession, useApi } from 'ordering-components-admin'
+
+export const OpenCartListing = (props) => {
   const {
     UIComponent,
-    statusGroup,
-    driversPropsToFetch
+    isSearchByName,
+    paginationSettings
   } = props
 
   const [ordering] = useApi()
-  const socket = useWebsocket()
   const [{ user, token, loading }] = useSession()
 
   const requestsState = {}
   const [searchValue, setSearchValue] = useState(null)
-  const [ordersStatusGroup, setOrdersStatusGroup] = useState(statusGroup || 'pending')
   const [filterValues, setFilterValues] = useState({})
-  const [updateStatus, setUpdateStatus] = useState(null)
-  const [startMulitOrderStatusChange, setStartMulitOrderStatusChange] = useState(false)
   const [startMulitOrderDelete, setStartMulitOrderDelete] = useState(false)
   const [actionStatus, setActionStatus] = useState({ loading: false, error: null })
   const [deletedOrderId, setDeletedOrderId] = useState(null)
+  const [cartList, setCartList] = useState({ loading: false, carts: [], error: null })
+  const [pagination, setPagination] = useState({
+    currentPage: (paginationSettings.controlType === 'pages' && paginationSettings.initialPage && paginationSettings.initialPage >= 1) ? paginationSettings.initialPage - 1 : 0,
+    pageSize: paginationSettings.pageSize ?? 10,
+    totalItems: null,
+    totalPages: null
+  })
   /**
    * Object to save driver group list
    */
@@ -49,16 +53,6 @@ export const OpenCarts = (props) => {
    * Object to save selected order ids
    */
   const [selectedOrderIds, setSelectedOrderIds] = useState([])
-  /**
-   * Object to save order substatuses
-   */
-  const [selectedSubOrderStatus, setSelectedSubOrderStatus] = useState({
-    pending: [0, 13],
-    inProgress: [7, 8, 4, 9, 3, 14, 18, 19, 20, 21],
-    completed: [1, 11, 15],
-    cancelled: [2, 5, 6, 10, 12, 16, 17],
-    all: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
-  })
 
   /**
    * Save ids of orders selected
@@ -84,15 +78,6 @@ export const OpenCarts = (props) => {
   }
 
   /**
-   * Change orders filter by statuses selected
-   * @param {string} ordersStatusGroup orders status
-   */
-  const handleOrdersStatusGroupFilter = (statusGroup) => {
-    if (statusGroup === ordersStatusGroup) return
-    setOrdersStatusGroup(statusGroup)
-    setSelectedOrderIds([])
-  }
-  /**
    * Change text to search
    * @param {string} search Search value
    */
@@ -108,46 +93,6 @@ export const OpenCarts = (props) => {
   }
 
   /**
-   * save status for multi orders selected
-   * @param {number} status order status
-   */
-  const handleChangeMultiOrdersStatus = (status) => {
-    setUpdateStatus(status)
-    setStartMulitOrderStatusChange(true)
-  }
-  /**
-   * Method to change multi orders status from API
-   */
-  const handleChangeMultiOrderStatus = async (orderId) => {
-    try {
-      setActionStatus({ ...actionStatus, loading: true })
-      const requestOptions = {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ status: updateStatus })
-      }
-      const response = await fetch(`${ordering.root}/orders/${orderId}`, requestOptions)
-      const { result } = await response.json()
-
-      if (parseInt(result.status) === updateStatus) {
-        const _ordersIds = [...selectedOrderIds]
-        _ordersIds.shift()
-        if (_ordersIds.length === 0) {
-          setStartMulitOrderStatusChange(false)
-        }
-        setSelectedOrderIds(_ordersIds)
-      }
-      setActionStatus({ ...actionStatus, loading: false })
-    } catch (err) {
-      setActionStatus({ loading: false, error: [err.message] })
-      setStartMulitOrderStatusChange(false)
-    }
-  }
-
-  /**
    * Delete orders for orders selected
    */
   const handleDeleteMultiOrders = () => {
@@ -157,12 +102,22 @@ export const OpenCarts = (props) => {
   /**
    * Method to delete order from API
    */
-  const deleteOrder = async (id) => {
+  const deleteCart = async (id) => {
     try {
       setActionStatus({ ...actionStatus, loading: true })
       const source = {}
       requestsState.deleteOrder = source
-      const { content } = await ordering.setAccessToken(token).orders(id).delete({ cancelToken: source })
+      const requestOptions = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      const response = await fetch(`${ordering.root}/carts/dashboard/${id}`, requestOptions)
+      const content = await response.json()
+
       if (!content.error) {
         setDeletedOrderId(id)
         const _ordersIds = [...selectedOrderIds]
@@ -179,35 +134,6 @@ export const OpenCarts = (props) => {
     } catch (err) {
       setActionStatus({ loading: false, error: [err.message] })
       setStartMulitOrderDelete(false)
-    }
-  }
-
-  /**
-   * Method to get drivers from API
-   */
-  const getDrivers = async () => {
-    try {
-      const source = {}
-      requestsState.drivers = source
-
-      const { content: { result } } = await ordering
-        .setAccessToken(token)
-        .users()
-        .select(driversPropsToFetch)
-        .where([{ attribute: 'level', value: [4] }])
-        .get({ cancelToken: source })
-
-      setDriversList({
-        ...driversList,
-        loading: false,
-        drivers: result
-      })
-    } catch (err) {
-      setDriversList({
-        ...driversList,
-        loading: false,
-        error: err.message
-      })
     }
   }
 
@@ -254,87 +180,90 @@ export const OpenCarts = (props) => {
     }
   }
 
-  /**
-   * Listening driver change
-   */
-  useEffect(() => {
-    if (loading) return
-    const handleUpdateDriver = (driver) => {
-      const found = driversList.drivers.find(_driver => _driver.id === driver.id)
-      let _drivers = []
-      if (found) {
-        _drivers = driversList.drivers.filter(_driver => {
-          if (_driver.id === driver.id) {
-            Object.assign(_driver, driver)
-          }
-          return true
+  const getCartList = async (pageSize, page) => {
+    try {
+      setCartList({ ...cartList, loading: true })
+      let where = null
+      const conditions = []
+      if (searchValue) {
+        const searchConditions = []
+        if (isSearchByName) {
+          searchConditions.push(
+            {
+              attribute: 'name',
+              value: {
+                condition: 'ilike',
+                value: encodeURI(`%${searchValue}%`)
+              }
+            }
+          )
+        }
+        conditions.push({
+          conector: 'OR',
+          conditions: searchConditions
+        })
+      }
+
+      if (conditions.length) {
+        where = {
+          conditions,
+          conector: 'AND'
+        }
+      }
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      const fetchEndpoint = where
+        ? `${ordering.root}/carts/dashboard?page=${page}&page_size=${pageSize}&&where=${JSON.stringify(where)}`
+        : `${ordering.root}/carts/dashboard?page=${page}&page_size=${pageSize}`
+
+      const response = await fetch(fetchEndpoint, requestOptions)
+      const content = await response.json()
+      if (!content.error) {
+        setCartList({
+          loading: false,
+          carts: content.result,
+          error: null
+        })
+        setPagination({
+          ...pagination,
+          currentPage: content.pagination.current_page,
+          totalPages: content.pagination.total_pages,
+          totalItems: content.pagination.total,
+          from: content.pagination.from,
+          to: content.pagination.to
         })
       } else {
-        _drivers = [...driversList.drivers, driver]
+        setCartList({
+          ...cartList,
+          loading: false,
+          error: content.result
+        })
       }
-      setDriversList({
-        ...driversList,
-        drivers: _drivers
+    } catch (err) {
+      setCartList({
+        ...cartList,
+        loading: false,
+        error: [err.message]
       })
     }
-    const handleTrackingDriver = (trackingData) => {
-      let drivers = []
-      drivers = driversList.drivers.filter(_driver => {
-        if (_driver.id === trackingData.driver_id) {
-          if (typeof trackingData.location === 'string') {
-            const trackingLocation = trackingData.location
-            const _location = trackingLocation.replaceAll('\\', '')
-            const location = JSON.parse(_location)
-            _driver.location = location
-          } else {
-            _driver.location = trackingData.location
-          }
-        }
-        return true
-      })
-      setDriversList({ ...driversList, drivers: drivers })
-    }
-    socket.on('drivers_update', handleUpdateDriver)
-    socket.on('tracking_driver', handleTrackingDriver)
-    return () => {
-      socket.off('drivers_update', handleUpdateDriver)
-      socket.off('tracking_driver', handleTrackingDriver)
-    }
-  }, [socket, loading, driversList.drivers])
-
-  useEffect(() => {
-    if (!user) return
-    socket.join('drivers')
-    if (user.level === 0) {
-      socket.join('orders')
-      socket.join('messages_orders')
-    } else {
-      socket.join(`orders_${user?.id}`)
-      socket.join(`messages_orders_${user?.id}`)
-    }
-  }, [socket, loading, user])
-
-  /**
-   * Listening multi orders action start to change status
-   */
-  useEffect(() => {
-    if (!startMulitOrderStatusChange || selectedOrderIds.length === 0) return
-    handleChangeMultiOrderStatus(selectedOrderIds[0])
-  }, [selectedOrderIds, startMulitOrderStatusChange])
+  }
 
   /**
   * Listening mulit orders delete action start
   */
   useEffect(() => {
     if (!startMulitOrderDelete || selectedOrderIds.length === 0) return
-    deleteOrder(selectedOrderIds[0])
+    deleteCart(selectedOrderIds[0])
   }, [selectedOrderIds, startMulitOrderDelete])
 
   useEffect(() => {
     if (loading) return
-    if (user?.level === 0 || user?.level === 2) {
-      getDrivers()
-    }
     getControlsOrders()
 
     return () => {
@@ -343,6 +272,15 @@ export const OpenCarts = (props) => {
       }
     }
   }, [user, loading])
+
+  useEffect(() => {
+    if (cartList.loading) return
+    getCartList(pagination.pageSize, 1)
+  }, [searchValue])
+
+  useEffect(() => {
+    if ((Object.keys(filterValues).length > 0) && !cartList.loading) getCartList(pagination.pageSize, 1)
+  }, [filterValues])
 
   return (
     <>
@@ -355,30 +293,26 @@ export const OpenCarts = (props) => {
           paymethodsList={paymethodsList}
           businessesList={businessesList}
           citiesList={citiesList}
-          ordersStatusGroup={ordersStatusGroup}
           filterValues={filterValues}
-          multiOrderUpdateStatus={updateStatus}
           selectedOrderIds={selectedOrderIds}
           deletedOrderId={deletedOrderId}
-          startMulitOrderStatusChange={startMulitOrderStatusChange}
           startMulitOrderDelete={startMulitOrderDelete}
-          selectedSubOrderStatus={selectedSubOrderStatus}
-          handleSelectedSubOrderStatus={setSelectedSubOrderStatus}
           handleSelectedOrderIds={handleSelectedOrderIds}
           handleRemoveSelectedOrderId={handleRemoveSelectedOrderId}
           handleChangeSearch={handleChangeSearch}
           handleChangeFilterValues={handleChangeFilterValues}
-          handleOrdersStatusGroupFilter={handleOrdersStatusGroupFilter}
-          handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
           handleDeleteMultiOrders={handleDeleteMultiOrders}
           setSelectedOrderIds={setSelectedOrderIds}
+          getCartList={getCartList}
+          pagination={pagination}
+          cartList={cartList}
         />
       )}
     </>
   )
 }
 
-OpenCarts.propTypes = {
+OpenCartListing.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -405,10 +339,10 @@ OpenCarts.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-OpenCarts.defaultProps = {
-  driversPropsToFetch: ['id', 'name', 'lastname', 'assigned_orders_count', 'available', 'phone', 'cellphone', 'location', 'photo', 'qualification', 'last_order_assigned_at'],
+OpenCartListing.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],
-  afterElements: []
+  afterElements: [],
+  paginationSettings: { initialPage: 1, pageSize: 10, controlType: 'infinity' }
 }

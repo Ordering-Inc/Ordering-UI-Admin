@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useSession, useUtils, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
+import { useLanguage, useUtils } from 'ordering-components-admin'
+import { OpenCartsDetail as OpenCartsDetailController } from './naked'
 import { ProductItemAccordion } from '../../Orders/ProductItemAccordion'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { OrderBill } from '../../Orders/OrderBill'
@@ -11,7 +11,6 @@ import { XLg as CloseIcon } from 'react-bootstrap-icons'
 
 import {
   Container,
-  SkeletonWrapper,
   OrderDetailsContent,
   OrderProducts,
   HeaderContainer,
@@ -25,33 +24,14 @@ const OpenCartsDetailUI = (props) => {
     open,
     driversList,
     handleBackRedirect,
-    messages
+    cart
   } = props
 
   const [, t] = useLanguage()
   const { width } = useWindowSize()
-  const [{ user }] = useSession()
   const [{ parseDate }] = useUtils()
 
-  const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const {
-    order,
-    loading
-  } = props.order
-
-  const unreadMessages = () => {
-    const unreadedMessages = messages?.messages.filter(message => !message?.read && message?.can_see?.includes(0) && message?.author_id !== user.id)
-    const customer = unreadedMessages?.some(message => message?.author?.level === 3)
-    const business = unreadedMessages?.some(message => message?.author?.level === 2)
-    const driver = unreadedMessages?.some(message => message?.author?.level === 4)
-    setUnreadAlert({ business, driver, customer })
-  }
-
-  useEffect(() => {
-    unreadMessages()
-  }, [messages?.messages])
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
@@ -96,28 +76,15 @@ const OpenCartsDetailUI = (props) => {
     <Container
       isSelectedOrders={isSelectedOrders}
       id='orderDetails'
-      isSkeleton={loading}
     >
-      {loading && (
-        <SkeletonWrapper>
-          <Skeleton height={75} count={3} style={{ marginBottom: '10px' }} />
-          <Skeleton height={200} style={{ marginBottom: '10px' }} />
-          <Skeleton height={30} style={{ marginBottom: '10px' }} />
-          <Skeleton height={50} style={{ marginBottom: '10px' }} />
-          <Skeleton height={200} style={{ marginBottom: '10px' }} />
-          <Skeleton height={50} style={{ marginBottom: '10px' }} />
-        </SkeletonWrapper>
-      )}
-      {order && Object.keys(order).length > 0 && !loading && (
+      {cart && Object.keys(cart).length > 0 && (
         <OrderDetailsContent>
           <HeaderContainer>
             <OrderInfoWrapper>
-              <h1>{('ID', 'ID')} {order?.id}</h1>
+              <h1>{('ID', 'ID')} {cart?.id}</h1>
               <p>
                 <span>{t('LAST_UPDATED', 'Last updated')}:</span>
-                {order?.delivery_datetime_utc
-                  ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY • HH:mm a' })
-                  : parseDate(order?.delivery_datetime, { utc: false })}
+                {cart?.updated_at && parseDate(cart?.updated_at, { outputFormat: 'MM/DD/YY • HH:mm a' })}
               </p>
             </OrderInfoWrapper>
             <ButtonGroup>
@@ -132,13 +99,12 @@ const OpenCartsDetailUI = (props) => {
 
           <div>
             <OpenCartsContactInformation
-              order={order}
-              unreadAlert={unreadAlert}
+              cart={cart}
               driversList={driversList}
             />
             <OrderProducts>
               <h2>{t('ORDER_DETAILS', 'Order details')}</h2>
-              {order?.products?.length && order?.products.map((product) => (
+              {cart?.products?.length && cart?.products.map((product) => (
                 <ProductItemAccordion
                   key={product.id}
                   product={product}
@@ -146,13 +112,13 @@ const OpenCartsDetailUI = (props) => {
               ))}
             </OrderProducts>
             <OrderBill
-              order={order}
+              order={cart}
             />
           </div>
         </OrderDetailsContent>
       )}
 
-      {!loading && !order && (
+      {!cart && (
         <NotFoundSource
           content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
           btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
@@ -171,6 +137,6 @@ export const OpenCartsDetail = (props) => {
   }
 
   return (
-    <OrderDetailsController {...orderDetailsProps} />
+    <OpenCartsDetailController {...orderDetailsProps} />
   )
 }

@@ -18,7 +18,7 @@ import {
 
 export const OpenCartsContactInformation = (props) => {
   const {
-    order
+    cart
   } = props
 
   const [{ user }] = useSession()
@@ -32,18 +32,18 @@ export const OpenCartsContactInformation = (props) => {
             <ContextAwareToggle eventKey='0'>
               <BusinessInfo>
                 <PhotoWrapper>
-                  {order?.business?.logo ? (
-                    <Photo bgimage={optimizeImage(order?.business?.logo, 'h_50,c_limit')} />
+                  {cart?.business?.logo ? (
+                    <Photo bgimage={optimizeImage(cart?.business?.logo, 'h_50,c_limit')} />
                   ) : (
                     <BisBusiness />
                   )}
                 </PhotoWrapper>
                 <InfoContent>
                   <div>
-                    <p className='name'>{order?.business?.name}</p>
-                    {order?.business?.phone && (
+                    <p className='name'>{cart?.business?.name}</p>
+                    {cart?.business?.phone && (
                       <IconButton
-                        onClick={() => window.open(`tel:${order.business.phone}`)}
+                        onClick={() => window.open(`tel:${cart.business.phone}`)}
                         className='btn-phone'
                       >
                         <Telephone />
@@ -56,9 +56,9 @@ export const OpenCartsContactInformation = (props) => {
             </ContextAwareToggle>
             <Accordion.Collapse eventKey='0'>
               <CutsomerDetail>
-                <p>{order?.business?.phone}</p>
-                <p>{order?.business?.email}</p>
-                <p>{order?.business?.address}</p>
+                <p>{cart?.business?.phone}</p>
+                <p>{cart?.business?.email}</p>
+                <p>{cart?.business?.address}</p>
               </CutsomerDetail>
             </Accordion.Collapse>
           </>
@@ -66,18 +66,18 @@ export const OpenCartsContactInformation = (props) => {
         <ContextAwareToggle eventKey='1'>
           <CustomerInfo>
             <PhotoWrapper>
-              {order?.customer?.photo ? (
-                <Photo bgimage={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} />
+              {cart?.user?.photo ? (
+                <Photo bgimage={optimizeImage(cart?.user?.photo, 'h_50,c_limit')} />
               ) : (
                 <FaUserAlt />
               )}
             </PhotoWrapper>
             <InfoContent>
               <div>
-                <p className='name'>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
-                {order?.customer?.cellphone && (
+                <p className='name'>{cart?.user?.name} {cart?.user?.middle_name} {cart?.user?.lastname} {cart?.user?.second_lastname}</p>
+                {cart?.user?.cellphone && (
                   <IconButton
-                    onClick={() => window.open(`tel:${order?.customer?.cellphone}`)}
+                    onClick={() => window.open(`tel:${cart?.user?.cellphone}`)}
                     className='btn-phone'
                   >
                     <Telephone />
@@ -90,9 +90,9 @@ export const OpenCartsContactInformation = (props) => {
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='1'>
           <CutsomerDetail>
-            {order?.customer?.cellphone && <p>{order?.customer?.cellphone}</p>}
-            {order?.customer?.email && <p>{order?.customer?.email}</p>}
-            {order?.customer?.address && <p>{order?.customer?.address}</p>}
+            {cart?.user?.cellphone && <p>{cart?.user?.cellphone}</p>}
+            {cart?.user?.email && <p>{cart?.user?.email}</p>}
+            {cart?.user?.address && <p>{cart?.user?.address}</p>}
           </CutsomerDetail>
         </Accordion.Collapse>
       </Accordion>

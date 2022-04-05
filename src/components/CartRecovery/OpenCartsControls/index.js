@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSession } from 'ordering-components-admin'
 import { OpenCartsExportCSV } from '../OpenCartsExportCSV'
-// import { OrderDelete } from '../OrderDelete'
+import { OpenCartDelete } from '../OpenCartDelete'
 import {
   OrderDashboardControlsContainer,
   InnerContnet
@@ -9,9 +9,9 @@ import {
 
 export const OpenCartsControls = (props) => {
   const {
-    // selectedOrderNumber,
+    selectedOrderNumber,
     filterValues,
-    // handleDeleteMultiOrders
+    handleDeleteMultiOrders
   } = props
 
   const [{ user }] = useSession()
@@ -21,15 +21,15 @@ export const OpenCartsControls = (props) => {
       <OrderDashboardControlsContainer>
         <InnerContnet>
           <OpenCartsExportCSV filterValues={filterValues} />
-          {/* {selectedOrderNumber > 0 && (
+          {selectedOrderNumber > 0 && (
             <>
               {user?.level !== 5 && (
-                <OrderDelete
+                <OpenCartDelete
                   handleDeleteMultiOrders={handleDeleteMultiOrders}
                 />
               )}
             </>
-          )} */}
+          )}
         </InnerContnet>
       </OrderDashboardControlsContainer>
     </>

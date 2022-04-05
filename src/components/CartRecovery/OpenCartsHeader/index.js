@@ -27,10 +27,9 @@ export const OpenCartsHeader = (props) => {
     paymethodsList,
     businessesList,
     filterValues,
-    // selectedOrderIds,
-    handleChangeFilterValues
-    // handleDeleteMultiOrders,
-    // handleChangeMultiOrdersStatus
+    selectedOrderIds,
+    handleChangeFilterValues,
+    handleDeleteMultiOrders
   } = props
 
   const [, t] = useLanguage()
@@ -69,10 +68,10 @@ export const OpenCartsHeader = (props) => {
         </HeaderSection>
         <TopRightSection>
           <OpenCartsControls
-            // selectedOrderNumber={selectedOrderIds?.length}
+            selectedOrderNumber={selectedOrderIds?.length}
             filterValues={filterValues}
             // handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-            // handleDeleteMultiOrders={handleDeleteMultiOrders}
+            handleDeleteMultiOrders={handleDeleteMultiOrders}
           />
           <WrapperSearchAndFilter>
             <SearchBar

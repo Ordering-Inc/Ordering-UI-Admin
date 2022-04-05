@@ -9,7 +9,7 @@ import {
 import { useTheme } from 'styled-components'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
 import {
-  OrdersContainer,
+  CartsContainer,
   Table,
   OrderTbody,
   OrderNumberContainer,
@@ -25,11 +25,11 @@ import {
 export const OpenCartsList = (props) => {
   const {
     isSelectedOrders,
-    orderList,
+    cartList,
     pagination,
     selectedOrderIds,
-    orderDetailId,
-    getPageOrders,
+    cartDetailId,
+    getCartList,
     handleSelectedOrderIds,
     handleOpenOrderDetail,
     setSelectedOrderIds
@@ -42,12 +42,12 @@ export const OpenCartsList = (props) => {
   const [isAllChecked, setIsAllChecked] = useState(false)
 
   const handleChangePage = (page) => {
-    getPageOrders(pagination.pageSize, page)
+    getCartList(pagination.pageSize, page)
   }
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(pagination.from / pageSize)
-    getPageOrders(pageSize, expectedPage)
+    getCartList(pageSize, expectedPage)
   }
 
   const [openPopover, setOpenPopover] = useState(false)
@@ -94,14 +94,14 @@ export const OpenCartsList = (props) => {
     })
   }
 
-  const handleClickOrder = (order, e) => {
+  const handleClickOrder = (cart, e) => {
     const inValid = !isSelectedOrders && (e.target.closest('.orderCheckBox') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'))
     if (inValid) return
-    handleOpenOrderDetail(order)
+    handleOpenOrderDetail(cart)
   }
 
   const handleSelecteAllOrder = () => {
-    const orderIds = orderList.orders.reduce((ids, order) => [...ids, order.id], [])
+    const orderIds = cartList.carts.reduce((ids, cart) => [...ids, cart.id], [])
     if (!isAllChecked) {
       setSelectedOrderIds([...selectedOrderIds, ...orderIds])
     } else {
@@ -114,31 +114,31 @@ export const OpenCartsList = (props) => {
   }
 
   useEffect(() => {
-    if (orderList.loading) return
-    const orderIds = orderList.orders.reduce((ids, order) => [...ids, order.id], [])
+    if (cartList.loading) return
+    const orderIds = cartList.carts.reduce((ids, cart) => [...ids, cart.id], [])
     const _isAllChecked = orderIds.every(elem => selectedOrderIds.includes(elem))
     setIsAllChecked(_isAllChecked)
-  }, [orderList.orders, selectedOrderIds])
+  }, [cartList.carts, selectedOrderIds])
 
   return (
     <>
-      <OrdersContainer
-        id='orderTable'
+      <CartsContainer
+        id='cartTable'
         isSelectedOrders={isSelectedOrders}
       >
         <Table
-          className='orders_table'
+          className='carts_table'
           isSelectedOrders={isSelectedOrders}
         >
           <thead>
             <tr>
               <th className='carts-id'>
                 <CheckBox
-                  isChecked={!orderList.loading && isAllChecked}
+                  isChecked={!cartList.loading && isAllChecked}
                   onClick={() => handleSelecteAllOrder()}
                   className='orderCheckBox'
                 >
-                  {(!orderList.loading && isAllChecked) ? (
+                  {(!cartList.loading && isAllChecked) ? (
                     <CheckSquareFill />
                   ) : (
                     <Square />
@@ -171,18 +171,18 @@ export const OpenCartsList = (props) => {
               </th>
             </tr>
           </thead>
-          {orderList.loading ? (
+          {cartList.loading ? (
             [...Array(10).keys()].map(i => (
               <OrderTbody key={i}>
                 <tr>
                   <td className='carts-id'>
                     <OrderNumberContainer>
                       <CheckBox>
-                        <Skeleton width={20} height={20} style={{ margin: '10px' }} />
+                        <Skeleton width={20} height={20} />
                       </CheckBox>
                       <div className='info'>
                         {allowColumns?.id && (
-                          <p><Skeleton width={100} /></p>
+                          <p><Skeleton width={50} height={25} /></p>
                         )}
                       </div>
                     </OrderNumberContainer>
@@ -214,14 +214,14 @@ export const OpenCartsList = (props) => {
                   {allowColumns?.last_update && (
                     <td className='last-update'>
                       <WrapOrderStatusSelector>
-                        <Skeleton width={100} height={30} />
+                        <Skeleton width={120} height={20} />
                       </WrapOrderStatusSelector>
                     </td>
                   )}
                   {allowColumns?.total && (
                     <td className='total'>
                       <WrapOrderStatusSelector>
-                        <Skeleton width={100} height={30} />
+                        <Skeleton width={100} height={20} />
                       </WrapOrderStatusSelector>
                     </td>
                   )}
@@ -234,12 +234,12 @@ export const OpenCartsList = (props) => {
               </OrderTbody>
             ))
           ) : (
-            orderList.orders.map((order, i) => (
+            cartList.carts.map((cart, i) => (
               <OrderTbody
                 key={i}
-                className={parseInt(orderDetailId) === order.id ? 'active' : ''}
+                className={parseInt(cartDetailId) === cart.id ? 'active' : ''}
                 isCustomStyle={isSelectedOrders}
-                onClick={(e) => handleClickOrder(order, e)}
+                onClick={(e) => handleClickOrder(cart, e)}
               >
                 <tr>
                   <td
@@ -248,11 +248,11 @@ export const OpenCartsList = (props) => {
                     <OrderNumberContainer>
                       {!isSelectedOrders && (
                         <CheckBox
-                          isChecked={selectedOrderIds.includes(order?.id)}
-                          onClick={() => handleSelectedOrderIds(order.id)}
+                          isChecked={selectedOrderIds.includes(cart?.id)}
+                          onClick={() => handleSelectedOrderIds(cart.id)}
                           className='orderCheckBox'
                         >
-                          {selectedOrderIds.includes(order?.id) ? (
+                          {selectedOrderIds.includes(cart?.id) ? (
                             <CheckSquareFill />
                           ) : (
                             <Square />
@@ -261,7 +261,7 @@ export const OpenCartsList = (props) => {
                       )}
                       <div className='info'>
                         {allowColumns?.id && (
-                          <p className='bold'>{order?.id}</p>
+                          <p className='bold'>{cart?.id}</p>
                         )}
                       </div>
                     </OrderNumberContainer>
@@ -270,12 +270,12 @@ export const OpenCartsList = (props) => {
                     <td className='businessInfo'>
                       <BusinessInfo>
                         <WrapperImage>
-                          <Image bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
+                          <Image bgimage={optimizeImage(cart.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
                         </WrapperImage>
                         <div className='info'>
-                          <p className='bold'>{order?.business?.name}</p>
+                          <p className='bold'>{cart?.business?.name}</p>
                           {allowColumns?.city && (
-                            <p>{order?.business?.city?.name}</p>
+                            <p>{cart?.business?.address}</p>
                           )}
                         </div>
                       </BusinessInfo>
@@ -286,15 +286,15 @@ export const OpenCartsList = (props) => {
                       <div>
                         <CustomerInfo>
                           <WrapperImage>
-                            {order?.customer?.photo ? (
-                              <Image bgimage={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} />
+                            {cart?.user?.photo ? (
+                              <Image bgimage={optimizeImage(cart?.user?.photo, 'h_50,c_limit')} />
                             ) : (
                               <FaUserAlt />
                             )}
                           </WrapperImage>
                           <div className='info'>
-                            <p className='bold'>{order?.customer?.name}</p>
-                            <p>{order?.customer?.cellphone}</p>
+                            <p className='bold'>{cart?.user?.name} {cart?.user?.lastname}</p>
+                            <p>{cart?.user?.cellphone || cart?.user?.phone}</p>
                           </div>
                         </CustomerInfo>
                       </div>
@@ -304,9 +304,7 @@ export const OpenCartsList = (props) => {
                     <td className='last-update'>
                       <div className='info'>
                         <p className='bold'>
-                          {order?.delivery_datetime_utc
-                            ? parseDate(order?.delivery_datetime_utc, { outputFormat: 'MM/DD/YY • HH:mm a' })
-                            : parseDate(order?.delivery_datetime, { utc: false })}
+                          {cart?.updated_at && parseDate(cart?.updated_at, { outputFormat: 'MM/DD/YY • HH:mm a' })}
                         </p>
                       </div>
                     </td>
@@ -314,7 +312,7 @@ export const OpenCartsList = (props) => {
                   {allowColumns?.total && (
                     <td className='total'>
                       <div className='info'>
-                        <p className='bold'>{parsePrice(order?.summary?.total)}</p>
+                        <p className='bold'>{parsePrice(cart?.summary?.total)}</p>
                       </div>
                     </td>
                   )}
@@ -324,13 +322,13 @@ export const OpenCartsList = (props) => {
             ))
           )}
         </Table>
-      </OrdersContainer>
+      </CartsContainer>
 
       {pagination && (
         <WrapperPagination>
           <Pagination
             currentPage={pagination.currentPage}
-            totalPages={Math.ceil(pagination?.total / pagination.pageSize)}
+            totalPages={pagination.totalPages}
             handleChangePage={handleChangePage}
             defaultPageSize={pagination.pageSize}
             handleChangePageSize={handleChangePageSize}
