@@ -50,7 +50,7 @@ const RewardsProgramsUI = (props) => {
             </IconWrapper>
             <LoyaltyItemContent>
               <h5>{t('POINTS_WALLET', 'Points wallet')}</h5>
-              <p>{t('POINTS_WALLET_DESC', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.')}</p>
+              <p>{t('POINTS_WALLET_DESCRIPTION', 'Points wallet general and per business setup.')}</p>
             </LoyaltyItemContent>
           </LoyaltyItemWrapper>
           <LoyaltyItemWrapper onClick={() => setShowOption('levels')}>
@@ -59,7 +59,7 @@ const RewardsProgramsUI = (props) => {
             </IconWrapper>
             <LoyaltyItemContent>
               <h5>{t('LEVELS', 'Levels')}</h5>
-              <p>{t('LEVELS_DESC', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.')}</p>
+              <p>{t('LEVELS_DESCRIPTION', 'Setup different loyalty levels for your users.')}</p>
             </LoyaltyItemContent>
           </LoyaltyItemWrapper>
         </LoyaltyListContainer>

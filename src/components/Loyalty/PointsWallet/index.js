@@ -44,14 +44,27 @@ export const PointsWallet = (props) => {
           </Tab>
         ))}
       </Tabs>
-      {selectedOption === 'general' && (
+      <div
+        style={{
+          display: selectedOption === 'general' ? 'block' : 'none'
+        }}
+      >
         <PointsWalletBusinessDetail
           walletData={pointWallet}
           handleUpdatePointsWallet={handleUpdatePointsWallet}
           selectedBusinessList={selectedBusinessList}
         />
-      )}
-      {selectedOption === 'business' && <PointsWalletBusinessList {...props} setSelectedBusinessList={setSelectedBusinessList} />}
+      </div>
+      <div
+        style={{
+          display: selectedOption === 'business' ? 'block' : 'none'
+        }}
+      >
+        <PointsWalletBusinessList
+          {...props}
+          setSelectedBusinessList={setSelectedBusinessList}
+        />
+      </div>
     </Container>
   )
 }
