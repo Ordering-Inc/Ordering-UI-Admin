@@ -72,13 +72,21 @@ var PointsWallet = function PointsWallet(props) {
         return setSelectedOption(option.key);
       }
     }, option.name);
-  })), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_PointsWalletBusinessDetail.PointsWalletBusinessDetail, {
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      display: selectedOption === 'general' ? 'block' : 'none'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_PointsWalletBusinessDetail.PointsWalletBusinessDetail, {
     walletData: pointWallet,
     handleUpdatePointsWallet: handleUpdatePointsWallet,
     selectedBusinessList: selectedBusinessList
-  }), selectedOption === 'business' && /*#__PURE__*/_react.default.createElement(_PointsWalletBusinessList.PointsWalletBusinessList, _extends({}, props, {
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      display: selectedOption === 'business' ? 'block' : 'none'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_PointsWalletBusinessList.PointsWalletBusinessList, _extends({}, props, {
     setSelectedBusinessList: setSelectedBusinessList
-  })));
+  }))));
 };
 
 exports.PointsWallet = PointsWallet;

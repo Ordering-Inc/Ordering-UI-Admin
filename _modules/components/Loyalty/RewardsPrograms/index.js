@@ -83,11 +83,11 @@ var RewardsProgramsUI = function RewardsProgramsUI(props) {
     onClick: function onClick() {
       return setShowOption('points_wallet');
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Wallet, null)), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('POINTS_WALLET', 'Points wallet')), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS_WALLET_DESC', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.')))), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Wallet, null)), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('POINTS_WALLET', 'Points wallet')), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS_WALLET_DESCRIPTION', 'Points wallet general and per business setup.')))), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
     onClick: function onClick() {
       return setShowOption('levels');
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartSteps, null)), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('LEVELS', 'Levels')), /*#__PURE__*/_react.default.createElement("p", null, t('LEVELS_DESC', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor ut diam id sit phasellus dolor.')))))), showOption === 'points_wallet' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartSteps, null)), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('LEVELS', 'Levels')), /*#__PURE__*/_react.default.createElement("p", null, t('LEVELS_DESCRIPTION', 'Setup different loyalty levels for your users.')))))), showOption === 'points_wallet' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "loyaltyWallet",
     open: showOption === 'points_wallet',
     onClose: hanldeClosePointsWallet,
