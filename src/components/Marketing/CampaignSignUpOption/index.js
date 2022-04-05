@@ -34,7 +34,7 @@ const CampaignSignUpOptionUI = (props) => {
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const defaultValue = ruleFormState.changes?.max_date && { from: ruleFormState.changes?.date, to: ruleFormState.changes?.max_date }
+  const defaultValue = ruleFormState.changes?.max_date && ruleFormState.changes?.date && { from: ruleFormState.changes?.date, to: ruleFormState.changes?.max_date }
 
   const contentEndRef = useRef(null)
 

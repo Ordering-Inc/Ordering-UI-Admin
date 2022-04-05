@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, CampaignDetailContent as CampaignDetailContentController } from 'ordering-components-admin'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { CampaignEmail } from '../CampaignEmail'
 import { CampaignSMS } from '../CampaignSMS'
@@ -7,8 +7,6 @@ import { CampaignWhatsapp } from '../CampaignWhatsapp'
 import { CampaignNotification } from '../CampaignNotification'
 import { CampaignPopup } from '../CampaignPopup'
 import { CampaignWebHook } from '../CampaignWebHook'
-
-import { CampaignDetailContent as CampaignDetailContentController } from './naked'
 
 import {
   Container,

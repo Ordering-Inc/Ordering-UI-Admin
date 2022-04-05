@@ -44,7 +44,7 @@ export const RangeCalendar = (props) => {
 
   const handleChangeSingleDate = (dateTime) => {
     const dateFormat = withTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'
-    handleChangeDate && handleChangeDate(moment(date).format(dateFormat))
+    handleChangeDate && handleChangeDate(moment(dateTime).format(dateFormat))
 
     setDate(dateTime)
   }
