@@ -5,11 +5,6 @@ import { useLanguage, CampaignDetail as CampaignDetailController } from 'orderin
 import { ThreeDots } from 'react-bootstrap-icons'
 import { Confirm, Alert } from '../../Shared'
 import { CampaignDetailGeneral } from '../CampaignDetailGeneral'
-import { CampaignNotification } from '../CampaignNotification'
-import { CampaignWhatsapp } from '../CampaignWhatsapp'
-import { CampaignPopup } from '../CampaignPopup'
-import { CampaignEmail } from '../CampaignEmail'
-import { CampaignSMS } from '../CampaignSMS'
 
 import {
   CampaignDetailContainer,
@@ -21,7 +16,7 @@ import {
   Tabs,
   Tab
 } from './styles'
-import { CampaignWebHook } from '../CampaignWebHook'
+import { CampaignDetailContent } from '../CampaignDetailContent'
 
 const CampaignDetailUI = (props) => {
   const {
@@ -86,8 +81,8 @@ const CampaignDetailUI = (props) => {
                   title={<ThreeDots />}
                   id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                 >
-                  {/* <Dropdown.Item>
-                    {t('CUSTOM_FIELDS', 'Custom fields')}
+                  {/* <Dropdown.Item onClick={() => handleAddCampaign(true)}>
+                    {t('DUPLICATE', 'Duplicate')}
                   </Dropdown.Item> */}
                   <Dropdown.Item onClick={onClickDeteteCampaign}>
                     {t('DELETE', 'Delete')}
@@ -109,24 +104,7 @@ const CampaignDetailUI = (props) => {
           ))}
         </Tabs>
         {selectedOption === 'general' && <CampaignDetailGeneral {...props} />}
-        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'email' && (
-          <CampaignEmail {...props} />
-        )}
-        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'sms' && (
-          <CampaignSMS {...props} />
-        )}
-        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'whatsapp' && (
-          <CampaignWhatsapp {...props} />
-        )}
-        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'notification' && (
-          <CampaignNotification {...props} />
-        )}
-        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'popup' && (
-          <CampaignPopup {...props} />
-        )}
-        {selectedOption === 'content' && (formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type) === 'webhook' && (
-          <CampaignWebHook {...props} />
-        )}
+        {selectedOption === 'content' && <CampaignDetailContent {...props} />}
       </CampaignDetailContainer>
       <Alert
         title={t('CAMPAIGN', 'Campaign')}
