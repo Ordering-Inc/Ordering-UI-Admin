@@ -5,7 +5,7 @@ import { CitySelector } from '../CitySelector'
 import { DateTypeSelector } from '../DateTypeSelector'
 import { Modal } from '../../Shared'
 import { Button, Input } from '../../../styles'
-import { OrdersFilter as OrdersFilterController } from './naked'
+import { OpenCartFilter as OpenCartFilterController } from './naked'
 
 import {
   FilterGroupListContainer,
@@ -26,7 +26,7 @@ const OpenCartsFilterGroupUI = (props) => {
     handleChangeCity,
     handleResetFilterValues,
     handleChangeFilterValues,
-    handleChangeOrderId,
+    handleChangeCartId,
     handleChangeCustomers
   } = props
 
@@ -56,8 +56,8 @@ const OpenCartsFilterGroupUI = (props) => {
             type='text'
             placeholder='ID'
             autoComplete='off'
-            value={filterValues?.orderId || ''}
-            onChange={(e) => handleChangeOrderId(e)}
+            value={filterValues?.cartId || ''}
+            onChange={(e) => handleChangeCartId(e)}
           />
         </WrapperRow>
         <WrapperRow>
@@ -104,15 +104,10 @@ const OpenCartsFilterGroupUI = (props) => {
 }
 
 export const OpenCartsFilterGroup = (props) => {
-  const FilterControlProps = {
+  const openCartFilterGroupProps = {
     ...props,
-    UIComponent: OpenCartsFilterGroupUI,
-    driverGroupList: props.driverGroupList
+    UIComponent: OpenCartsFilterGroupUI
   }
 
-  return (
-    <>
-      <OrdersFilterController {...FilterControlProps} />
-    </>
-  )
+  return <OpenCartFilterController {...openCartFilterGroupProps} />
 }

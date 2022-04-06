@@ -8,7 +8,10 @@ import { useSession, useApi } from 'ordering-components-admin'
 export const OpenCartListing = (props) => {
   const {
     UIComponent,
-    isSearchByName,
+    isSearchByCartId,
+    isSearchByCustomerEmail,
+    isSearchByCustomerPhone,
+    isSearchByBusinessName,
     paginationSettings
   } = props
 
@@ -185,12 +188,13 @@ export const OpenCartListing = (props) => {
       setCartList({ ...cartList, loading: true })
       let where = null
       const conditions = []
+
       if (searchValue) {
         const searchConditions = []
-        if (isSearchByName) {
+        if (isSearchByCartId) {
           searchConditions.push(
             {
-              attribute: 'name',
+              attribute: 'id',
               value: {
                 condition: 'ilike',
                 value: encodeURI(`%${searchValue}%`)
@@ -198,10 +202,129 @@ export const OpenCartListing = (props) => {
             }
           )
         }
+        if (isSearchByCustomerEmail) {
+          searchConditions.push(
+            {
+              attribute: 'user',
+              conditions: [
+                {
+                  attribute: 'email',
+                  value: {
+                    condition: 'ilike',
+                    value: encodeURI(`%${searchValue}%`)
+                  }
+                }
+              ]
+            }
+          )
+        }
+
+        if (isSearchByCustomerPhone) {
+          searchConditions.push(
+            {
+              attribute: 'user',
+              conditions: [
+                {
+                  attribute: 'cellphone',
+                  value: {
+                    condition: 'ilike',
+                    value: encodeURI(`%${searchValue}%`)
+                  }
+                }
+              ]
+            }
+          )
+        }
+
+        if (isSearchByBusinessName) {
+          searchConditions.push(
+            {
+              attribute: 'business',
+              conditions: [
+                {
+                  attribute: 'name',
+                  value: {
+                    condition: 'ilike',
+                    value: encodeURI(`%${searchValue}%`)
+                  }
+                }
+              ]
+            }
+          )
+        }
+
         conditions.push({
           conector: 'OR',
           conditions: searchConditions
         })
+      }
+
+      if (Object.keys(filterValues).length) {
+        const filterConditons = []
+        if (filterValues?.cartId) {
+          filterConditons.push(
+            {
+              attribute: 'id',
+              value: {
+                condition: 'ilike',
+                value: encodeURI(`%${filterValues?.cartId}%`)
+              }
+            }
+          )
+        }
+        if (filterValues.deliveryFromDatetime !== null) {
+          filterConditons.push(
+            {
+              attribute: 'delivery_datetime',
+              value: {
+                condition: '>=',
+                value: encodeURI(filterValues.deliveryFromDatetime)
+              }
+            }
+          )
+        }
+        if (filterValues.deliveryEndDatetime !== null) {
+          filterConditons.push(
+            {
+              attribute: 'delivery_datetime',
+              value: {
+                condition: '<=',
+                value: filterValues.deliveryEndDatetime
+              }
+            }
+          )
+        }
+        if (filterValues.businessIds.length !== 0) {
+          filterConditons.push(
+            {
+              attribute: 'business_id',
+              value: filterValues.businessIds
+            }
+          )
+        }
+        if (filterValues.customerIds.length !== 0) {
+          filterConditons.push(
+            {
+              attribute: 'user_id',
+              value: filterValues.customerIds
+            }
+          )
+        }
+        if (filterValues.cityIds.length !== 0) {
+          filterConditons.push(
+            {
+              attribute: 'city_id',
+              value: filterValues.cityIds
+            }
+          )
+        }
+
+        if (filterConditons.length) {
+          conditions.push({
+            conector: 'AND',
+            conditions: filterConditons
+          })
+        }
       }
 
       if (conditions.length) {
@@ -210,6 +333,7 @@ export const OpenCartListing = (props) => {
           conector: 'AND'
         }
       }
+
       const requestOptions = {
         method: 'GET',
         headers: {
@@ -219,7 +343,7 @@ export const OpenCartListing = (props) => {
       }
 
       const fetchEndpoint = where
-        ? `${ordering.root}/carts/dashboard?page=${page}&page_size=${pageSize}&&where=${JSON.stringify(where)}`
+        ? `${ordering.root}/carts/dashboard?page=${page}&page_size=${pageSize}&where=${JSON.stringify(where)}`
         : `${ordering.root}/carts/dashboard?page=${page}&page_size=${pageSize}`
 
       const response = await fetch(fetchEndpoint, requestOptions)

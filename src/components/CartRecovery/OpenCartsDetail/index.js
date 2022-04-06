@@ -3,7 +3,7 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import { OpenCartsDetail as OpenCartsDetailController } from './naked'
 import { ProductItemAccordion } from '../../Orders/ProductItemAccordion'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { OrderBill } from '../../Orders/OrderBill'
+import { OpenCartBill } from '../OpenCartBill'
 import { OpenCartsContactInformation } from '../OpenCartsContactInformation'
 import { NotFoundSource } from '../../Shared'
 import { IconButton as ButtonLink } from '../../../styles'
@@ -82,9 +82,6 @@ const OpenCartsDetailUI = (props) => {
         <SkeletonWrapper>
           <Skeleton height={75} count={3} style={{ marginBottom: '10px' }} />
           <Skeleton height={200} style={{ marginBottom: '10px' }} />
-          <Skeleton height={30} style={{ marginBottom: '10px' }} />
-          <Skeleton height={50} style={{ marginBottom: '10px' }} />
-          <Skeleton height={200} style={{ marginBottom: '10px' }} />
           <Skeleton height={50} style={{ marginBottom: '10px' }} />
         </SkeletonWrapper>
       ) : (
@@ -122,14 +119,13 @@ const OpenCartsDetailUI = (props) => {
                     />
                   ))}
                 </OrderProducts>
-                <OrderBill
-                  order={cartState?.cart}
+                <OpenCartBill
+                  cart={cartState?.cart}
                 />
               </div>
             </OrderDetailsContent>
           )}
         </>
-
       )}
 
       {!cartState?.loading && !cartState?.cart && (

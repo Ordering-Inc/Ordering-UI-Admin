@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 
-export const OrdersFilter = (props) => {
+export const OpenCartFilter = (props) => {
   const {
-    UIComponent,
-    driverGroupList
+    UIComponent
   } = props
 
   /**
    * This property is used to set in state the current value
    */
   const [filterValues, setFilterValues] = useState({
-    orderId: null,
-    groupTypes: [],
+    cartId: null,
     dateType: null,
     deliveryFromDatetime: null,
     deliveryEndDatetime: null,
     businessIds: [],
-    driverIds: [],
-    driverGroupIds: [],
     cityIds: [],
-    statuses: [],
-    deliveryTypes: [],
-    paymethodIds: [],
     customerIds: []
   })
 
@@ -31,26 +24,11 @@ export const OrdersFilter = (props) => {
    * Changer order Id
    * @param {EventTarget} e Related HTML event
    */
-  const handleChangeOrderId = (e) => {
-    const orderId = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
-    setFilterValues({ ...filterValues, orderId })
+  const handleChangeCartId = (e) => {
+    const cartId = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
+    setFilterValues({ ...filterValues, cartId })
   }
 
-  /**
-   * Change group type
-   * * @param {object} groupType Group type
-   */
-  const handleChangeGroup = (groupType) => {
-    let _groupTypes = [...filterValues.groupTypes]
-    if (!_groupTypes.includes(groupType)) {
-      _groupTypes.push(groupType)
-    } else {
-      _groupTypes = _groupTypes.filter((type) => type !== groupType)
-    }
-
-    // setGroupDriverIds(_driverIds)
-    setFilterValues({ ...filterValues, groupTypes: _groupTypes })
-  }
   /**
    * Change date type
    * * @param {string} dateType date type
@@ -154,19 +132,6 @@ export const OrdersFilter = (props) => {
   }
 
   /**
-   * Change driver
-   * * @param {number} driverId driver id
-  */
-  const handleChangeDriver = (driverId) => {
-    let _driverIds = [...filterValues.driverIds]
-    if (!_driverIds.includes(driverId)) {
-      _driverIds.push(driverId)
-    } else {
-      _driverIds = _driverIds.filter((id) => id !== driverId)
-    }
-    setFilterValues({ ...filterValues, driverIds: _driverIds })
-  }
-  /**
    * Change city
    * * @param {number} cityId city id of business
   */
@@ -179,77 +144,21 @@ export const OrdersFilter = (props) => {
     }
     setFilterValues({ ...filterValues, cityIds: _cityIds })
   }
-  /**
-   * Change order status
-   * * @param {number} status status
-  */
-  const handleChangeOrderStatus = (status) => {
-    let _statuses = [...filterValues.statuses]
-    if (!_statuses.includes(status)) {
-      _statuses.push(status)
-    } else {
-      _statuses = _statuses.filter((_status) => _status !== status)
-    }
-    setFilterValues({ ...filterValues, statuses: _statuses })
-  }
-  /**
-   * Change delivery type
-   * * @param {number} deliveryType delivery type
-  */
-  const handleChangeDeliveryType = (deliveryType) => {
-    let _deliveryTypes = [...filterValues.deliveryTypes]
-    if (!_deliveryTypes.includes(deliveryType)) {
-      _deliveryTypes.push(deliveryType)
-    } else {
-      _deliveryTypes = _deliveryTypes.filter((_deliveryType) => _deliveryType !== deliveryType)
-    }
-    setFilterValues({ ...filterValues, deliveryTypes: _deliveryTypes })
-  }
-  /**
-   * Change paymethod type
-   * * @param {number} paymethodId paymethod Id
-  */
-  const handleChangePaymethodType = (paymethodId) => {
-    let _paymethodIds = [...filterValues.paymethodIds]
-    if (!_paymethodIds.includes(paymethodId)) {
-      _paymethodIds.push(paymethodId)
-    } else {
-      _paymethodIds = _paymethodIds.filter((_paymethodId) => _paymethodId !== paymethodId)
-    }
-    setFilterValues({ ...filterValues, paymethodIds: _paymethodIds })
-  }
+
   /**
    * Reset filter values
   */
   const handleResetFilterValues = () => {
     setFilterValues({
-      orderId: null,
-      groupTypes: [],
+      cartId: null,
+      dateType: null,
       deliveryFromDatetime: null,
       deliveryEndDatetime: null,
       businessIds: [],
-      driverIds: [],
       cityIds: [],
-      statuses: [],
-      deliveryTypes: [],
-      paymethodIds: []
+      customerIds: []
     })
   }
-
-  useEffect(() => {
-    let groupDriverIds = []
-    if (filterValues.groupTypes.length > 0) {
-      for (const groupId of filterValues.groupTypes) {
-        const selectedDriverGroup = driverGroupList.groups.find(group => group.id === groupId)
-        if (selectedDriverGroup) {
-          groupDriverIds = [...groupDriverIds, ...selectedDriverGroup?.drivers]
-        }
-      }
-    }
-
-    const uniqueDriverIds = groupDriverIds.filter((v, i, a) => a.indexOf(v) === i)
-    setFilterValues({ ...filterValues, driverGroupIds: uniqueDriverIds })
-  }, [filterValues.groupTypes])
 
   return (
     <>
@@ -257,18 +166,13 @@ export const OrdersFilter = (props) => {
         <UIComponent
           {...props}
           filterValues={filterValues}
-          handleChangeOrderId={handleChangeOrderId}
-          handleChangeGroup={handleChangeGroup}
+          handleChangeCartId={handleChangeCartId}
           handleChangeDateType={handleChangeDateType}
           handleChangeFromDate={handleChangeFromDate}
           handleChangeEndDate={handleChangeEndDate}
           handleChangeBusinesses={handleChangeBusinesses}
-          handleChangeDriver={handleChangeDriver}
           handleChangeCity={handleChangeCity}
           handleChangeCustomers={handleChangeCustomers}
-          handleChangeOrderStatus={handleChangeOrderStatus}
-          handleChangeDeliveryType={handleChangeDeliveryType}
-          handleChangePaymethodType={handleChangePaymethodType}
           handleResetFilterValues={handleResetFilterValues}
           handleChangeDateRange={handleChangeDateRange}
         />
@@ -277,7 +181,7 @@ export const OrdersFilter = (props) => {
   )
 }
 
-OrdersFilter.propTypes = {
+OpenCartFilter.propTypes = {
   /**
    * UI Component, this must be containt all graphic elements and use parent props
    */
@@ -303,7 +207,7 @@ OrdersFilter.propTypes = {
   afterElements: PropTypes.arrayOf(PropTypes.element)
 }
 
-OrdersFilter.defaultProps = {
+OpenCartFilter.defaultProps = {
   beforeComponents: [],
   afterComponents: [],
   beforeElements: [],
