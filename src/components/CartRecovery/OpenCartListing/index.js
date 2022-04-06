@@ -23,7 +23,7 @@ const OpenCartListingUI = (props) => {
     businessesList,
     citiesList,
     filterValues,
-    // deletedOrderId,
+    // deletedCartId,
     startMulitOrderStatusChange,
     startMulitOrderDelete,
     handleChangeSearch,
@@ -34,7 +34,8 @@ const OpenCartListingUI = (props) => {
     setSelectedOrderIds,
     cartList,
     pagination,
-    getCartList
+    getCartList,
+    onCartRedirect
   } = props
   const [{ user }] = useSession()
 
@@ -49,12 +50,14 @@ const OpenCartListingUI = (props) => {
     setIsOpenOrderDetail(false)
     setDetailsCart(null)
     setCartDetailId(null)
+    onCartRedirect()
   }
 
   const handleOpenOrderDetail = (cart) => {
     setDetailsCart(cart)
     setCartDetailId(cart.id)
     setIsOpenOrderDetail(true)
+    onCartRedirect(cart?.id)
   }
 
   useEffect(() => {
@@ -74,16 +77,23 @@ const OpenCartListingUI = (props) => {
   useEffect(() => {
     if (isSelectedOrders) return
     const id = query.get('id')
-    if (id === null) setIsOpenOrderDetail(false)
-    else {
+    if (id === null || (!cartList?.loading && cartList?.carts.length === 0)) {
+      setIsOpenOrderDetail(false)
+      return
+    }
+    if (!cartList?.loading) {
       if (user?.level === 5) {
         handleBackRedirect()
       } else {
+        const found = cartList?.carts.find(_cart => _cart.id === parseInt(id))
         setCartDetailId(id)
-        setIsOpenOrderDetail(true)
+        if (found) {
+          setDetailsCart(found)
+          setIsOpenOrderDetail(true)
+        }
       }
     }
-  }, [user])
+  }, [cartList])
 
   return (
     <>
@@ -128,7 +138,6 @@ const OpenCartListingUI = (props) => {
           open={isOpenOrderDetail}
           cart={detailsCart}
           cartId={cartDetailId}
-          driversList={driversList}
           onClose={() => handleBackRedirect()}
         />
       )}

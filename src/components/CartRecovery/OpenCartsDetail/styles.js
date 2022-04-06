@@ -101,3 +101,13 @@ export const OrderInfoWrapper = styled.div`
 `
 
 export const ButtonGroup = styled.div``
+
+export const SkeletonWrapper = styled.div`
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-direction: column;
+  > span {
+    width: 100%;
+  }
+`

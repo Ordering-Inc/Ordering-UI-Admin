@@ -8,6 +8,7 @@ import { OpenCartsContactInformation } from '../OpenCartsContactInformation'
 import { NotFoundSource } from '../../Shared'
 import { IconButton as ButtonLink } from '../../../styles'
 import { XLg as CloseIcon } from 'react-bootstrap-icons'
+import Skeleton from 'react-loading-skeleton'
 
 import {
   Container,
@@ -15,16 +16,16 @@ import {
   OrderProducts,
   HeaderContainer,
   OrderInfoWrapper,
-  ButtonGroup
+  ButtonGroup,
+  SkeletonWrapper
 } from './styles'
 
 const OpenCartsDetailUI = (props) => {
   const {
     isSelectedOrders,
     open,
-    driversList,
     handleBackRedirect,
-    cart
+    cartState
   } = props
 
   const [, t] = useLanguage()
@@ -77,48 +78,61 @@ const OpenCartsDetailUI = (props) => {
       isSelectedOrders={isSelectedOrders}
       id='orderDetails'
     >
-      {cart && Object.keys(cart).length > 0 && (
-        <OrderDetailsContent>
-          <HeaderContainer>
-            <OrderInfoWrapper>
-              <h1>{('ID', 'ID')} {cart?.id}</h1>
-              <p>
-                <span>{t('LAST_UPDATED', 'Last updated')}:</span>
-                {cart?.updated_at && parseDate(cart?.updated_at, { outputFormat: 'MM/DD/YY • HH:mm a' })}
-              </p>
-            </OrderInfoWrapper>
-            <ButtonGroup>
-              <ButtonLink
-                color='black'
-                onClick={() => props.onClose() && props.onClose()}
-              >
-                <CloseIcon />
-              </ButtonLink>
-            </ButtonGroup>
-          </HeaderContainer>
+      {cartState?.loading ? (
+        <SkeletonWrapper>
+          <Skeleton height={75} count={3} style={{ marginBottom: '10px' }} />
+          <Skeleton height={200} style={{ marginBottom: '10px' }} />
+          <Skeleton height={30} style={{ marginBottom: '10px' }} />
+          <Skeleton height={50} style={{ marginBottom: '10px' }} />
+          <Skeleton height={200} style={{ marginBottom: '10px' }} />
+          <Skeleton height={50} style={{ marginBottom: '10px' }} />
+        </SkeletonWrapper>
+      ) : (
+        <>
+          {cartState?.cart && Object.keys(cartState?.cart).length > 0 && (
+            <OrderDetailsContent>
+              <HeaderContainer>
+                <OrderInfoWrapper>
+                  <h1>{('ID', 'ID')} {cartState?.cart?.id}</h1>
+                  <p>
+                    <span>{t('LAST_UPDATED', 'Last updated')}:</span>
+                    {cartState?.cart?.updated_at && parseDate(cartState?.cart?.updated_at, { outputFormat: 'MM/DD/YY • HH:mm a' })}
+                  </p>
+                </OrderInfoWrapper>
+                <ButtonGroup>
+                  <ButtonLink
+                    color='black'
+                    onClick={() => props.onClose() && props.onClose()}
+                  >
+                    <CloseIcon />
+                  </ButtonLink>
+                </ButtonGroup>
+              </HeaderContainer>
 
-          <div>
-            <OpenCartsContactInformation
-              cart={cart}
-              driversList={driversList}
-            />
-            <OrderProducts>
-              <h2>{t('ORDER_DETAILS', 'Order details')}</h2>
-              {cart?.products?.length && cart?.products.map((product) => (
-                <ProductItemAccordion
-                  key={product.id}
-                  product={product}
+              <div>
+                <OpenCartsContactInformation
+                  cart={cartState?.cart}
                 />
-              ))}
-            </OrderProducts>
-            <OrderBill
-              order={cart}
-            />
-          </div>
-        </OrderDetailsContent>
+                <OrderProducts>
+                  <h2>{t('ORDER_DETAILS', 'Order details')}</h2>
+                  {cartState?.cart?.products?.length && cartState?.cart?.products.map((product) => (
+                    <ProductItemAccordion
+                      key={product.id}
+                      product={product}
+                    />
+                  ))}
+                </OrderProducts>
+                <OrderBill
+                  order={cartState?.cart}
+                />
+              </div>
+            </OrderDetailsContent>
+          )}
+        </>
+
       )}
 
-      {!cart && (
+      {!cartState?.loading && !cartState?.cart && (
         <NotFoundSource
           content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
           btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}

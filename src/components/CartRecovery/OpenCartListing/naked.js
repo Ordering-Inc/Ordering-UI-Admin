@@ -20,7 +20,7 @@ export const OpenCartListing = (props) => {
   const [filterValues, setFilterValues] = useState({})
   const [startMulitOrderDelete, setStartMulitOrderDelete] = useState(false)
   const [actionStatus, setActionStatus] = useState({ loading: false, error: null })
-  const [deletedOrderId, setDeletedOrderId] = useState(null)
+  const [deletedCartId, setDeletedCartId] = useState(null)
   const [cartList, setCartList] = useState({ loading: false, carts: [], error: null })
   const [pagination, setPagination] = useState({
     currentPage: (paginationSettings.controlType === 'pages' && paginationSettings.initialPage && paginationSettings.initialPage >= 1) ? paginationSettings.initialPage - 1 : 0,
@@ -119,7 +119,7 @@ export const OpenCartListing = (props) => {
       const content = await response.json()
 
       if (!content.error) {
-        setDeletedOrderId(id)
+        setDeletedCartId(id)
         const _ordersIds = [...selectedOrderIds]
         _ordersIds.shift()
         if (_ordersIds.length === 0) {
@@ -295,7 +295,7 @@ export const OpenCartListing = (props) => {
           citiesList={citiesList}
           filterValues={filterValues}
           selectedOrderIds={selectedOrderIds}
-          deletedOrderId={deletedOrderId}
+          deletedCartId={deletedCartId}
           startMulitOrderDelete={startMulitOrderDelete}
           handleSelectedOrderIds={handleSelectedOrderIds}
           handleRemoveSelectedOrderId={handleRemoveSelectedOrderId}

@@ -4,129 +4,74 @@ import PropTypes, { string } from 'prop-types'
 // import { useApi } from '../../contexts/ApiContext'
 // import { useWebsocket } from '../../contexts/WebsocketContext'
 // import { useEvent } from '../../contexts/EventContext'
-import { useSession, useApi, useEvent } from 'ordering-components-admin'
+import { useSession, useApi } from 'ordering-components-admin'
 
 export const OpenCartsDetail = (props) => {
   const {
-    cartId,
-    propsToFetch,
-    asDashboard,
-    hashKey,
-    userCustomerId,
+    cart,
     UIComponent
   } = props
 
   const [{ token }] = useSession()
   const [ordering] = useApi()
-  const [events] = useEvent()
 
-  const [orderState, setOrderState] = useState({ order: null, loading: !props.order, error: null })
-  const [actionStatus, setActionStatus] = useState({ loading: false, error: null })
+  const [cartState, setCartState] = useState({ cart: null, loading: false, error: null })
 
-  /**
-   * Method to format a price number
-   * @param {Number} price
-   */
-  const formatPrice = price => price && `$ ${price.toFixed(2)}`
-
-  /**
-   * Method to get order from API
-   */
-  const getOrder = async () => {
-    const options = {}
-    if (hashKey) {
-      options.headers = {
-        'X-uuid-access-X': hashKey
-      }
-    }
-    if (userCustomerId) {
-      options.query = {
-        mode: 'dashboard'
-      }
-    }
+  const getCartList = async () => {
     try {
-      setOrderState({
-        ...orderState,
-        loading: true
-      })
-      let functionFetch
-      if (propsToFetch) {
-        functionFetch = asDashboard
-          ? ordering.setAccessToken(token).orders(cartId).asDashboard().select(propsToFetch)
-          : ordering.setAccessToken(token).orders(cartId).select(propsToFetch)
+      setCartState({ ...cartState, loading: true })
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      const fetchEndpoint = `${ordering.root}/carts/${cart?.uuid}?user_id=${cart?.user_id}`
+
+      const response = await fetch(fetchEndpoint, requestOptions)
+      const content = await response.json()
+      if (!content.error) {
+        const _cart = {
+          ...content.result,
+          id: cart?.id,
+          business: { ...content.result.business, ...cart?.business },
+          user: { ...cart?.user, ...(cart?.address?.address && { address: cart.address.address }) },
+          updated_at: cart?.updated_at
+        }
+        setCartState({
+          loading: false,
+          cart: _cart,
+          error: null
+        })
       } else {
-        functionFetch = asDashboard
-          ? ordering.setAccessToken(token).orders(cartId).asDashboard()
-          : ordering.setAccessToken(token).orders(cartId)
+        setCartState({
+          ...cartState,
+          loading: false,
+          error: content.result
+        })
       }
-      const { content: { result } } = await functionFetch.get()
-      const order = Array.isArray(result) ? null : result
-      setOrderState({
-        ...orderState,
-        loading: false,
-        order
-      })
-    } catch (e) {
-      setOrderState({
-        ...orderState,
-        loading: false,
-        error: [e.message]
-      })
-    }
-  }
-  /**
-   * Method to change order status from API
-   * @param {object} order orders id and new status
-   */
-  const handleUpdateOrderStatus = async (order) => {
-    try {
-      setActionStatus({ ...actionStatus, loading: true })
-      const requestsState = {}
-      const source = {}
-      requestsState.updateOrder = source
-      const { content } = await ordering.setAccessToken(token).orders(order.id).save({ status: order.newStatus }, { cancelToken: source })
-      setActionStatus({
-        loading: false,
-        error: content.error ? content.result : null
-      })
     } catch (err) {
-      setActionStatus({ ...actionStatus, loading: false, error: [err.message] })
+      setCartState({
+        ...cartState,
+        loading: false,
+        error: [err.message]
+      })
     }
   }
 
   useEffect(() => {
-    if (props.order) {
-      setOrderState({
-        ...orderState,
-        order: props.order
-      })
-    } else {
-      getOrder()
-    }
-  }, [cartId])
-
-  useEffect(() => {
-    const handleCustomerReviewed = (review) => {
-      setOrderState({
-        ...orderState,
-        order: { ...orderState.order, user_review: review }
-      })
-    }
-    events.on('customer_reviewed', handleCustomerReviewed)
-    return () => {
-      events.off('customer_reviewed', handleCustomerReviewed)
-    }
-  }, [orderState])
+    if (!cart) return
+    getCartList()
+  }, [cart])
 
   return (
     <>
       {UIComponent && (
         <UIComponent
           {...props}
-          order={orderState}
-          actionStatus={actionStatus}
-          formatPrice={formatPrice}
-          handleUpdateOrderStatus={handleUpdateOrderStatus}
+          cartState={cartState}
         />
       )}
     </>
