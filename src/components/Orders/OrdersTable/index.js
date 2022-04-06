@@ -49,7 +49,8 @@ export const OrdersTable = (props) => {
     currentTourStep,
     isTourOpen,
     handleOpenTour,
-    setIsTourOpen
+    setIsTourOpen,
+    slaSettingTime
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -135,7 +136,7 @@ export const OrdersTable = (props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(Date.now())
-    }, 60000)
+    }, slaSettingTime)
 
     return () => clearInterval(interval)
   }, [])

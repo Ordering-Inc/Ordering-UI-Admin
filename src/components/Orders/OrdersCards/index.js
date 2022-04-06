@@ -34,7 +34,8 @@ export const OrdersCards = (props) => {
     handleOpenOrderDetail,
     selectedOrderCard,
     handleOrderCardClick,
-    handleUpdateDriverLocation
+    handleUpdateDriverLocation,
+    slaSettingTime
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -108,7 +109,7 @@ export const OrdersCards = (props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(Date.now())
-    }, 60000)
+    }, slaSettingTime)
 
     return () => clearInterval(interval)
   }, [])

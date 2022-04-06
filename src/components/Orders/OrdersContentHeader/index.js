@@ -15,6 +15,7 @@ import {
   HeaderSection,
   HeaderTitle,
   TopRightSection,
+  SLAControlsWrapper,
   WrapperSearchAndFilter
 } from './styles'
 
@@ -36,7 +37,8 @@ export const OrdersContentHeader = (props) => {
     handleOpenTour,
     filterModalOpen,
     setFilterModalOpen,
-    setTimeStatus
+    setTimeStatus,
+    setSlaSettingTime
   } = props
 
   const [, t] = useLanguage()
@@ -96,14 +98,14 @@ export const OrdersContentHeader = (props) => {
           </HeaderSection>
         )}
         <TopRightSection>
-          {!isDisableControl && (
-            <>
-              <OrderDashboardSLASetting />
-              <OrdersDashboardSLAControls
-                setTimeStatus={setTimeStatus}
-              />
-            </>
-          )}
+          <SLAControlsWrapper>
+            <OrderDashboardSLASetting
+              setSlaSettingTime={setSlaSettingTime}
+            />
+            <OrdersDashboardSLAControls
+              setTimeStatus={setTimeStatus}
+            />
+          </SLAControlsWrapper>
           <WrapperSearchAndFilter
             fullWidth={isDisableTitle && isDisableControl}
           >

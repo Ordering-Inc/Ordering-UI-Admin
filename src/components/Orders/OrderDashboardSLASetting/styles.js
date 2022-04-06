@@ -2,11 +2,16 @@ import styled, { css } from 'styled-components'
 
 export const SettingContainer = styled.div`
   display: flex;
-  margin: 0 10px;
-  height: 100%;
+  /* margin: 0 10px;
+  width: 90px; */
+  height: 41px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   button {
     border-radius: 7.6px;
+
 
     &:hover {
       background: #f7f7f7;
@@ -14,7 +19,7 @@ export const SettingContainer = styled.div`
   }
 
 `
-export const SettingControlPanel = styled.div`
+export const SettingControlPanel = styled.form`
   display: inline-block;
   width: 100%;
 `
@@ -78,6 +83,7 @@ export const ItemStatus = styled.span`
 export const ItemHeader = styled.div`
   display: flex;
   margin-bottom: 5px;
+  cursor: pointer;
 `
 
 export const ItemContent = styled.div`
@@ -119,19 +125,30 @@ export const TimerInputWrapper = styled.div`
   color: ${props => props.theme.colors.disabled};
 
   input {
-    border: none;
+    border: none !important;
+    outline: none !important;
     padding: 5px;
+    font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
   }
 
   input:first-child {
-    width: 30px;
+    width: 33px;
   }
 
   input:last-child {
     width: 38px;
   }
 
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 `
 export const OverLine = styled.div`
   position: absolute;
