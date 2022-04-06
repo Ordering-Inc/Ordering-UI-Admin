@@ -60,3 +60,11 @@ export const AddDeliveryZoneButton = styled.div`
     color: ${props => props.theme.colors.primary};
   }
 `
+export const CheckboxWrapper = styled.div`
+  display: flex;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
+`
