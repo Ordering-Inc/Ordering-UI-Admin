@@ -6,6 +6,7 @@ import {
 import { BusinessDeliveryZoneList } from '../BusinessDeliveryZoneList'
 import { Select } from '../../../styles/Select'
 import { Button, Input } from '../../../styles'
+import { Alert } from '../../Shared'
 
 import {
   Container,
@@ -24,13 +25,19 @@ const BusinessDeliveryDetailsUI = (props) => {
     handleUpdateBusinessState,
     formState,
     handleChangeForm,
-    handleDeliveryStateSave
+    onDeliveryStateSave,
+
+    actionState,
+    zoneListState,
+    handleChangeZoneState,
+    handleChangeAllZoneState
   } = props
 
   const [, t] = useLanguage()
   const [hours, setHours] = useState([])
   const [minutes, setMinutes] = useState([])
   const [curDeliveryTime, setCurDeliveryTime] = useState({})
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const priorityList = [
     { value: '2', content: t('URGENT', 'Urgent') },
@@ -83,6 +90,14 @@ const BusinessDeliveryDetailsUI = (props) => {
     })
   }, [])
 
+  useEffect(() => {
+    if (!actionState?.error) return
+    setAlertState({
+      open: true,
+      content: actionState?.error
+    })
+  }, [actionState.error])
+
   return (
     <Container>
       <SectionTitle>{t('PREORDER_STEP_2_TIME', 'Order time')}</SectionTitle>
@@ -119,6 +134,9 @@ const BusinessDeliveryDetailsUI = (props) => {
         setIsExtendExtraOpen={setIsExtendExtraOpen}
         onClose={() => setIsExtendExtraOpen(false)}
         handleSuccessUpdate={handleUpdateBusinessState}
+        zoneListState={zoneListState}
+        handleChangeZoneState={handleChangeZoneState}
+        handleChangeAllZoneState={handleChangeAllZoneState}
       />
       <SectionTitle>{t('LOGISTIC', 'Logistic')}</SectionTitle>
       <AdvancedLogisticsSettingsContainer>
@@ -149,11 +167,20 @@ const BusinessDeliveryDetailsUI = (props) => {
       <Button
         borderRadius='8px'
         color='primary'
-        disabled={formState.loading || Object.keys(formState.changes).length === 0}
-        onClick={() => handleDeliveryStateSave()}
+        disabled={actionState.loading || (Object.keys(formState.changes).length === 0 && !zoneListState.isDirty)}
+        onClick={() => onDeliveryStateSave()}
       >
         {t('SAVE', 'Save')}
       </Button>
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }

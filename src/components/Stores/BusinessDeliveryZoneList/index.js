@@ -3,19 +3,24 @@ import { useLanguage } from 'ordering-components-admin'
 import { BusinessDeliveryZoneDetails } from '../BusinessDeliveryZoneDetails'
 import { SideBar } from '../../Shared'
 import { ChevronRight } from 'react-bootstrap-icons'
+import { Checkbox } from '../../../styles'
 
 import {
   ZoneContainer,
   DeliveryZonesTable,
   AddDeliveryZoneButton,
-  ZoneTbody
+  ZoneTbody,
+  CheckboxWrapper
 } from './styles'
 
 export const BusinessDeliveryZoneList = (props) => {
   const {
     business,
     setIsExtendExtraOpen,
-    handleSuccessUpdate
+    handleSuccessUpdate,
+    zoneListState,
+    handleChangeZoneState,
+    handleChangeAllZoneState
   } = props
 
   const [, t] = useLanguage()
@@ -28,7 +33,9 @@ export const BusinessDeliveryZoneList = (props) => {
     setCurZone(null)
   }
 
-  const handleOpenZone = (zone) => {
+  const handleOpenZone = (e, zone) => {
+    const isInvalid = e.target.closest('.zone-enabled')
+    if (isInvalid) return
     setCurZone(zone)
     setIsExtendExtraOpen(true)
     setIsOpenDetails(true)
@@ -40,6 +47,14 @@ export const BusinessDeliveryZoneList = (props) => {
         <DeliveryZonesTable>
           <thead>
             <tr>
+              <th>
+                <CheckboxWrapper>
+                  <Checkbox
+                    checked={zoneListState.isCheckAll}
+                    onChange={e => handleChangeAllZoneState(e.target.checked)}
+                  />
+                </CheckboxWrapper>
+              </th>
               <th>{t('NAME', 'Name')}</th>
               <th>{t('MINIMUM', 'Minimum')}</th>
               <th>{t('PRICE', 'Price')}</th>
@@ -50,9 +65,17 @@ export const BusinessDeliveryZoneList = (props) => {
             <ZoneTbody
               key={zone.id}
               active={zone.id === curZone?.id}
-              onClick={() => handleOpenZone(zone)}
+              onClick={(e) => handleOpenZone(e, zone)}
             >
               <tr>
+                <td>
+                  <CheckboxWrapper className='zone-enabled'>
+                    <Checkbox
+                      checked={!!zoneListState.changes[zone.id]}
+                      onChange={e => handleChangeZoneState(zone.id, e.target.checked)}
+                    />
+                  </CheckboxWrapper>
+                </td>
                 <td>{zone?.name}</td>
                 <td>{zone?.minimum}</td>
                 <td>{zone?.price}</td>

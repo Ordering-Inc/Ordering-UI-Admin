@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components'
 
 export const ZoneContainer = styled.div`
-  max-width: 500px;
   margin: 30px 0 20px 0;
+  @media (min-width: 1000px) {
+    max-width: 500px;
+  }
 `
 
 export const DeliveryZonesTable = styled.table`
@@ -57,4 +59,12 @@ export const AddDeliveryZoneButton = styled.div`
   &:hover {
     color: ${props => props.theme.colors.primary};
   }
+`
+export const CheckboxWrapper = styled.div`
+  display: flex;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
 `
