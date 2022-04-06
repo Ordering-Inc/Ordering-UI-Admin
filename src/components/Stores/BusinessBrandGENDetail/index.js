@@ -116,6 +116,15 @@ const BusinessBrandGENDetailUI = (props) => {
             </DragAndDrop>
           </ExamineClick>
         </BrandLogo>
+        {brand && (
+          <FormControl>
+            <Label>{t('ID', 'ID')}</Label>
+            <input
+              value={brand?.id}
+              disabled
+            />
+          </FormControl>
+        )}
         <FormControl>
           <Label>{t('NAME', 'Name')}</Label>
           <input

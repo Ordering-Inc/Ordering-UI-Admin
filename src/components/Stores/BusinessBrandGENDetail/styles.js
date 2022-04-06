@@ -13,6 +13,7 @@ export const BrandLogo = styled.div`
   cursor: grab;
   background: #E9ECEF;
   border-radius: 7.6px;
+  margin-bottom: 45px;
 
   img,
   div {
@@ -86,7 +87,6 @@ export const CameraIconContainer = styled.span`
 
 export const FormControl = styled.div`
   margin-bottom: 30px;
-  margin-top: 45px;
 
   input {
     background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
@@ -97,6 +97,9 @@ export const FormControl = styled.div`
     padding: 10px 15px;
     outline: none;
     width: 100%;
+    &:disabled {
+      background: ${props => props.theme.colors.secundary};
+    }
   }
 `
 
@@ -109,6 +112,7 @@ export const Label = styled.label`
 export const SaveBtnWrapper = styled.div`
   position: sticky;
   top: 100%;
+  margin: 20px 0;
   button {
     padding: 6px 20px;
   }
