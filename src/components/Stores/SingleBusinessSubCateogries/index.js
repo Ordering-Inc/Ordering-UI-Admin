@@ -21,13 +21,13 @@ const SingleBusinessSubCateogriesUI = (props) => {
     handleChangeCategory,
     handelChangeCategoryActive,
     setCurrentCategory,
-
     handleDragStart,
     handleDragOver,
     handleDrop,
     handleDragEnd,
-    onDataSelected,
-    dataSelected
+    dataSelected,
+    isCategoriesBottom,
+    isLastCategory
   } = props
 
   const theme = useTheme()
@@ -47,19 +47,6 @@ const SingleBusinessSubCateogriesUI = (props) => {
     }
     setCurrentCategory(category)
     handleChangeCategory(e, category)
-  }
-
-  const handleDragOverChange = (e) => {
-    const element = e.target.closest('.draggable-category')
-    if (element) {
-      onDataSelected(element.dataset.index)
-    }
-    handleDragOver(e)
-  }
-
-  const handleDragEndChange = (e) => {
-    onDataSelected('')
-    handleDragEnd(e)
   }
 
   useEffect(() => {
@@ -96,11 +83,12 @@ const SingleBusinessSubCateogriesUI = (props) => {
               active={!isSkeleton && (category?.id === categorySelected?.id)}
 
               onDrop={e => handleDrop(e)}
-              onDragOver={e => handleDragOverChange(e)}
-              onDragEnd={e => handleDragEndChange(e)}
+              onDragOver={e => handleDragOver(e, isLastCategory)}
+              onDragEnd={e => handleDragEnd(e)}
               className='draggable-category'
               data-index={category?.id}
               isAccept={dataSelected && dataSelected === category?.id.toString()}
+              isBorderBottom={isCategoriesBottom && isLastCategory}
             >
               <div>
                 <img
