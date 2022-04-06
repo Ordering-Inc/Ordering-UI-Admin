@@ -9,7 +9,7 @@ export const Container = styled.div`
     margin-top: 5px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1000px) {
     max-width: 500px;
   }
 `
