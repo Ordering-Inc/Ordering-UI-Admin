@@ -61,8 +61,9 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
       handleDragOver = props.handleDragOver,
       handleDrop = props.handleDrop,
       handleDragEnd = props.handleDragEnd,
-      onDataSelected = props.onDataSelected,
-      dataSelected = props.dataSelected;
+      dataSelected = props.dataSelected,
+      isCategoriesBottom = props.isCategoriesBottom,
+      isLastCategory = props.isLastCategory;
   var theme = (0, _styledComponents.useTheme)();
   var containerRef = (0, _react.useRef)(null);
   var content = (0, _react.useRef)(null);
@@ -85,21 +86,6 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
 
     setCurrentCategory(category);
     handleChangeCategory(e, category);
-  };
-
-  var handleDragOverChange = function handleDragOverChange(e) {
-    var element = e.target.closest('.draggable-category');
-
-    if (element) {
-      onDataSelected(element.dataset.index);
-    }
-
-    handleDragOver(e);
-  };
-
-  var handleDragEndChange = function handleDragEndChange(e) {
-    onDataSelected('');
-    handleDragEnd(e);
   };
 
   (0, _react.useEffect)(function () {
@@ -130,14 +116,15 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
       return handleDrop(e);
     },
     onDragOver: function onDragOver(e) {
-      return handleDragOverChange(e);
+      return handleDragOver(e, isLastCategory);
     },
     onDragEnd: function onDragEnd(e) {
-      return handleDragEndChange(e);
+      return handleDragEnd(e);
     },
     className: "draggable-category",
     "data-index": category === null || category === void 0 ? void 0 : category.id,
-    isAccept: dataSelected && dataSelected === (category === null || category === void 0 ? void 0 : category.id.toString())
+    isAccept: dataSelected && dataSelected === (category === null || category === void 0 ? void 0 : category.id.toString()),
+    isBorderBottom: isCategoriesBottom && isLastCategory
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
     alt: "six dots",

@@ -17,7 +17,11 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("../../../styles");
 
+var _reactNumericInput = _interopRequireDefault(require("react-numeric-input"));
+
 var _styles2 = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -142,20 +146,19 @@ var CampaignAmountOptionUI = function CampaignAmountOptionUI(props) {
       }
     }, ((_ruleFormState$change4 = ruleFormState.changes) === null || _ruleFormState$change4 === void 0 ? void 0 : _ruleFormState$change4.condition) === item.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, item.name))), ((_ruleFormState$change5 = ruleFormState.changes) === null || _ruleFormState$change5 === void 0 ? void 0 : _ruleFormState$change5.condition) === item.key && /*#__PURE__*/_react.default.createElement(_styles2.DaysContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-      type: "number",
-      min: "0",
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, item.name))), ((_ruleFormState$change5 = ruleFormState.changes) === null || _ruleFormState$change5 === void 0 ? void 0 : _ruleFormState$change5.condition) === item.key && /*#__PURE__*/_react.default.createElement(_styles2.DaysContent, null, /*#__PURE__*/_react.default.createElement(_reactNumericInput.default, {
       placeholder: "00",
       onKeyPress: function onKeyPress(e) {
-        if (!/^[0-9.]$/.test(e.key)) {
+        if (!/^[0-9]$/.test(e.key)) {
           e.preventDefault();
         }
       },
       value: ((_ruleFormState$change6 = ruleFormState.changes) === null || _ruleFormState$change6 === void 0 ? void 0 : _ruleFormState$change6.value) || '',
-      onChange: function onChange(e) {
-        return handleChangeValue('value', e.target.value);
-      }
-    }), /*#__PURE__*/_react.default.createElement(_styles2.ArrowIconsWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronUp, null), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, null)))));
+      onChange: function onChange(value) {
+        return handleChangeValue('value', value);
+      },
+      min: 0
+    })));
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",

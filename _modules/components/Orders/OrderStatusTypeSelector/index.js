@@ -190,6 +190,20 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business'))),
     color: 'primary'
   }, {
+    value: 22,
+    name: t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver'),
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      noPadding: noPadding
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver'))),
+    color: 'primary'
+  }, {
+    value: 23,
+    name: t('ORDER_DRIVER_ON_WAY', 'Driver on way'),
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      noPadding: noPadding
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_DRIVER_ON_WAY', 'Driver on way'))),
+    color: 'primary'
+  }, {
     value: null,
     name: t('COMPLETED', 'Completed'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
@@ -299,9 +313,9 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
         var extractOrderStatus = [];
         extractOrderStatus = orderStatuses.slice(0, 13);
         _filteredOrderStatues = _toConsumableArray(extractOrderStatus);
-        extractOrderStatus = orderStatuses.slice(15, 18);
+        extractOrderStatus = orderStatuses.slice(15, 20);
         _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
-        extractOrderStatus = orderStatuses.slice(19, 26);
+        extractOrderStatus = orderStatuses.slice(21, 28);
         _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
         setFilteredOrderStatuses(_filteredOrderStatues);
       } else {
@@ -311,11 +325,13 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
         _filteredOrderStatues2 = _toConsumableArray(_extractOrderStatus);
         _extractOrderStatus = orderStatuses.slice(10, 11);
         _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-        _extractOrderStatus = orderStatuses.slice(13, 17);
+        _extractOrderStatus = orderStatuses.slice(13, 15);
         _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-        _extractOrderStatus = orderStatuses.slice(18, 22);
+        _extractOrderStatus = orderStatuses.slice(17, 19);
         _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-        _extractOrderStatus = orderStatuses.slice(25, 27);
+        _extractOrderStatus = orderStatuses.slice(20, 24);
+        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
+        _extractOrderStatus = orderStatuses.slice(27, 29);
         _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
         setFilteredOrderStatuses(_filteredOrderStatues2);
       }
@@ -324,11 +340,11 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
       var _extractOrderStatus2 = [];
       _extractOrderStatus2 = orderStatuses.slice(2, 4);
       _filteredOrderStatues3 = _toConsumableArray(_extractOrderStatus2);
-      _extractOrderStatus2 = orderStatuses.slice(5, 15);
+      _extractOrderStatus2 = orderStatuses.slice(5, 17);
       _filteredOrderStatues3 = [].concat(_toConsumableArray(_filteredOrderStatues3), _toConsumableArray(_extractOrderStatus2));
-      _extractOrderStatus2 = orderStatuses.slice(16, 19);
+      _extractOrderStatus2 = orderStatuses.slice(18, 21);
       _filteredOrderStatues3 = [].concat(_toConsumableArray(_filteredOrderStatues3), _toConsumableArray(_extractOrderStatus2));
-      _extractOrderStatus2 = orderStatuses.slice(20, 27);
+      _extractOrderStatus2 = orderStatuses.slice(22, 29);
       _filteredOrderStatues3 = [].concat(_toConsumableArray(_filteredOrderStatues3), _toConsumableArray(_extractOrderStatus2));
       setFilteredOrderStatuses(_filteredOrderStatues3);
     }

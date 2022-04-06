@@ -113,6 +113,12 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
   }, {
     key: 21,
     value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business')
+  }, {
+    key: 22,
+    value: t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver')
+  }, {
+    key: 23,
+    value: t('ORDER_DRIVER_ON_WAY', 'Driver on way')
   }];
 
   var generateLabels = function generateLabels() {

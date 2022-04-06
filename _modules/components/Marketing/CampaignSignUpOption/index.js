@@ -19,8 +19,6 @@ var _styles2 = require("./styles");
 
 var _Shared = require("../../Shared");
 
-var _CampaignCalendarTime = require("../CampaignCalendarTime");
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -44,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
-  var _ruleFormState$change, _ruleFormState$change2, _ruleFormState$change3, _ruleFormState$change10, _ruleFormState$change11;
+  var _ruleFormState$change, _ruleFormState$change2, _ruleFormState$change3, _ruleFormState$change4, _ruleFormState$change11, _ruleFormState$change12;
 
   var type = props.type,
       title = props.title,
@@ -71,10 +69,11 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var defaultValue = ((_ruleFormState$change = ruleFormState.changes) === null || _ruleFormState$change === void 0 ? void 0 : _ruleFormState$change.max_date) && {
-    from: (_ruleFormState$change2 = ruleFormState.changes) === null || _ruleFormState$change2 === void 0 ? void 0 : _ruleFormState$change2.date,
-    to: (_ruleFormState$change3 = ruleFormState.changes) === null || _ruleFormState$change3 === void 0 ? void 0 : _ruleFormState$change3.max_date
+  var defaultValue = ((_ruleFormState$change = ruleFormState.changes) === null || _ruleFormState$change === void 0 ? void 0 : _ruleFormState$change.max_date) && ((_ruleFormState$change2 = ruleFormState.changes) === null || _ruleFormState$change2 === void 0 ? void 0 : _ruleFormState$change2.date) && {
+    from: (_ruleFormState$change3 = ruleFormState.changes) === null || _ruleFormState$change3 === void 0 ? void 0 : _ruleFormState$change3.date,
+    to: (_ruleFormState$change4 = ruleFormState.changes) === null || _ruleFormState$change4 === void 0 ? void 0 : _ruleFormState$change4.max_date
   };
+  var contentEndRef = (0, _react.useRef)(null);
   var optionList = [{
     key: '>',
     title: t('AFTER', 'After')
@@ -94,9 +93,9 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
   };
 
   var handleSaveRule = function handleSaveRule() {
-    var _ruleFormState$change4, _ruleFormState$change5, _ruleFormState$change6;
+    var _ruleFormState$change5, _ruleFormState$change6, _ruleFormState$change7;
 
-    if (!((_ruleFormState$change4 = ruleFormState.changes) !== null && _ruleFormState$change4 !== void 0 && _ruleFormState$change4.date_condition)) {
+    if (!((_ruleFormState$change5 = ruleFormState.changes) !== null && _ruleFormState$change5 !== void 0 && _ruleFormState$change5.date_condition)) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Date condition is required').replace('_attribute_', t('DATE_CONDITION', 'Date condition'))
@@ -104,7 +103,7 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
       return;
     }
 
-    if (!((_ruleFormState$change5 = ruleFormState.changes) !== null && _ruleFormState$change5 !== void 0 && _ruleFormState$change5.date)) {
+    if (!((_ruleFormState$change6 = ruleFormState.changes) !== null && _ruleFormState$change6 !== void 0 && _ruleFormState$change6.date)) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Date is required').replace('_attribute_', t('DATE', 'Date'))
@@ -123,7 +122,7 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
         return condition;
       });
       handleChangeItem('conditions', updatedConditions);
-    } else if ((_ruleFormState$change6 = ruleFormState.changes) !== null && _ruleFormState$change6 !== void 0 && _ruleFormState$change6.id) {
+    } else if ((_ruleFormState$change7 = ruleFormState.changes) !== null && _ruleFormState$change7 !== void 0 && _ruleFormState$change7.id) {
       handleUpdateRule();
     } else {
       handleAddRule();
@@ -132,8 +131,27 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
     onClose && onClose();
   };
 
+  var scrollDown = function scrollDown(e) {
+    if (!e.target.closest('.ordering-calendar-btn')) return;
+    var el = document.querySelector('.popup-dialog');
+
+    if ((el === null || el === void 0 ? void 0 : el.scrollHeight) > (el === null || el === void 0 ? void 0 : el.clientHeight)) {
+      var top = contentEndRef.current.offsetTop;
+      el.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    window.addEventListener('click', scrollDown);
+    return function () {
+      return window.removeEventListener('click', scrollDown);
+    };
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, title), optionList.map(function (option) {
-    var _ruleFormState$change7, _ruleFormState$change8, _ruleFormState$change9;
+    var _ruleFormState$change8, _ruleFormState$change9, _ruleFormState$change10;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: option.key
@@ -141,20 +159,22 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
       onClick: function onClick() {
         return handleChangeOption(option.key);
       }
-    }, ((_ruleFormState$change7 = ruleFormState.changes) === null || _ruleFormState$change7 === void 0 ? void 0 : _ruleFormState$change7.date_condition) === option.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    }, ((_ruleFormState$change8 = ruleFormState.changes) === null || _ruleFormState$change8 === void 0 ? void 0 : _ruleFormState$change8.date_condition) === option.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, option.title))), ((_ruleFormState$change8 = ruleFormState.changes) === null || _ruleFormState$change8 === void 0 ? void 0 : _ruleFormState$change8.date_condition) === option.key && /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_CampaignCalendarTime.CampaignCalendarTime, {
-      showTime: true,
-      dateTime: (_ruleFormState$change9 = ruleFormState.changes) === null || _ruleFormState$change9 === void 0 ? void 0 : _ruleFormState$change9.date,
-      handleChangeDateTime: handleChangeDateTime
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, option.title))), ((_ruleFormState$change9 = ruleFormState.changes) === null || _ruleFormState$change9 === void 0 ? void 0 : _ruleFormState$change9.date_condition) === option.key && /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
+      withTime: true,
+      isLeft: true,
+      isSingleDate: true,
+      defaultValue: (_ruleFormState$change10 = ruleFormState.changes) === null || _ruleFormState$change10 === void 0 ? void 0 : _ruleFormState$change10.date,
+      handleChangeDate: handleChangeDateTime
     })));
   }), /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
     onClick: function onClick() {
       return handleChangeOption('<>');
     }
-  }, ((_ruleFormState$change10 = ruleFormState.changes) === null || _ruleFormState$change10 === void 0 ? void 0 : _ruleFormState$change10.date_condition) === '<>' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+  }, ((_ruleFormState$change11 = ruleFormState.changes) === null || _ruleFormState$change11 === void 0 ? void 0 : _ruleFormState$change11.date_condition) === '<>' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DATE_RANGE', 'Date range')))), ((_ruleFormState$change11 = ruleFormState.changes) === null || _ruleFormState$change11 === void 0 ? void 0 : _ruleFormState$change11.date_condition) === '<>' && /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DATE_RANGE', 'Date range')))), ((_ruleFormState$change12 = ruleFormState.changes) === null || _ruleFormState$change12 === void 0 ? void 0 : _ruleFormState$change12.date_condition) === '<>' && /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: defaultValue,
     isLeft: true
@@ -162,7 +182,9 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
     color: "primary",
     borderRadius: "8px",
     onClick: handleSaveRule
-  }, t('DONE', 'Done'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('DONE', 'Done'))), /*#__PURE__*/_react.default.createElement("div", {
+    ref: contentEndRef
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('CAMPAIGN', 'Campaign'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

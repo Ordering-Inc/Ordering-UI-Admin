@@ -90,7 +90,9 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
     });
   }), (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
     return a.rank - b.rank;
-  }).map(function (category) {
+  }).map(function (category, i) {
+    var _businessState$busine3, _businessState$busine4;
+
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, _extends({}, props, {
       index: 0,
       key: category.id,
@@ -99,7 +101,8 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       handleChangeCategory: handleChangeCategory,
       business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
       dataSelected: dataSelected,
-      onDataSelected: setDataSelected
+      setDataSelected: setDataSelected,
+      isLastCategory: (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : (_businessState$busine4 = _businessState$busine3.categories) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.length) - 1 === i
     }));
   })))), /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
     ref: addButtonRef,

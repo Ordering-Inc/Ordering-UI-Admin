@@ -21,19 +21,9 @@ var _Shared = require("../../Shared");
 
 var _CampaignDetailGeneral = require("../CampaignDetailGeneral");
 
-var _CampaignNotification = require("../CampaignNotification");
-
-var _CampaignWhatsapp = require("../CampaignWhatsapp");
-
-var _CampaignPopup = require("../CampaignPopup");
-
-var _CampaignEmail = require("../CampaignEmail");
-
-var _CampaignSMS = require("../CampaignSMS");
-
 var _styles = require("./styles");
 
-var _CampaignWebHook = require("../CampaignWebHook");
+var _CampaignDetailContent = require("../CampaignDetailContent");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -58,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CampaignDetailUI = function CampaignDetailUI(props) {
-  var _formState$changes, _campaignState$campai, _formState$changes$na, _formState$changes2, _campaignState$campai2, _formState$changes$co, _formState$changes3, _campaignState$campai3, _formState$changes$co2, _formState$changes4, _campaignState$campai4, _formState$changes$co3, _formState$changes5, _campaignState$campai5, _formState$changes$co4, _formState$changes6, _campaignState$campai6, _formState$changes$co5, _formState$changes7, _campaignState$campai7, _formState$changes$co6, _formState$changes8, _campaignState$campai8;
+  var _formState$changes, _campaignState$campai, _formState$changes$na, _formState$changes2, _campaignState$campai2;
 
   var isAddMode = props.isAddMode,
       formState = props.formState,
@@ -141,7 +131,7 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
         return setSelectedOption(option.key);
       }
     }, option.name);
-  })), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_CampaignDetailGeneral.CampaignDetailGeneral, props), selectedOption === 'content' && ((_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.contact_type) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai3 = campaignState.campaign) === null || _campaignState$campai3 === void 0 ? void 0 : _campaignState$campai3.contact_type) === 'email' && /*#__PURE__*/_react.default.createElement(_CampaignEmail.CampaignEmail, props), selectedOption === 'content' && ((_formState$changes$co2 = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.contact_type) !== null && _formState$changes$co2 !== void 0 ? _formState$changes$co2 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai4 = campaignState.campaign) === null || _campaignState$campai4 === void 0 ? void 0 : _campaignState$campai4.contact_type) === 'sms' && /*#__PURE__*/_react.default.createElement(_CampaignSMS.CampaignSMS, props), selectedOption === 'content' && ((_formState$changes$co3 = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.contact_type) !== null && _formState$changes$co3 !== void 0 ? _formState$changes$co3 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai5 = campaignState.campaign) === null || _campaignState$campai5 === void 0 ? void 0 : _campaignState$campai5.contact_type) === 'whatsapp' && /*#__PURE__*/_react.default.createElement(_CampaignWhatsapp.CampaignWhatsapp, props), selectedOption === 'content' && ((_formState$changes$co4 = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.contact_type) !== null && _formState$changes$co4 !== void 0 ? _formState$changes$co4 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai6 = campaignState.campaign) === null || _campaignState$campai6 === void 0 ? void 0 : _campaignState$campai6.contact_type) === 'notification' && /*#__PURE__*/_react.default.createElement(_CampaignNotification.CampaignNotification, props), selectedOption === 'content' && ((_formState$changes$co5 = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.contact_type) !== null && _formState$changes$co5 !== void 0 ? _formState$changes$co5 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai7 = campaignState.campaign) === null || _campaignState$campai7 === void 0 ? void 0 : _campaignState$campai7.contact_type) === 'popup' && /*#__PURE__*/_react.default.createElement(_CampaignPopup.CampaignPopup, props), selectedOption === 'content' && ((_formState$changes$co6 = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.contact_type) !== null && _formState$changes$co6 !== void 0 ? _formState$changes$co6 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai8 = campaignState.campaign) === null || _campaignState$campai8 === void 0 ? void 0 : _campaignState$campai8.contact_type) === 'webhook' && /*#__PURE__*/_react.default.createElement(_CampaignWebHook.CampaignWebHook, props)), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_CampaignDetailGeneral.CampaignDetailGeneral, props), selectedOption === 'content' && /*#__PURE__*/_react.default.createElement(_CampaignDetailContent.CampaignDetailContent, props)), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('CAMPAIGN', 'Campaign'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

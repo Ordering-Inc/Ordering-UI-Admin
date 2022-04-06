@@ -49,10 +49,22 @@ var ArrowIconsWrapper = _styledComponents.default.div(_templateObject6 || (_temp
 
 exports.ArrowIconsWrapper = ArrowIconsWrapper;
 
-var DaysContent = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding: 15px 0px 10px 0px;\n  > div {\n    width: 216px;\n    position: relative;\n    input {\n      width: 100%;\n      height: 44px;\n      padding-right: 25px;\n      ", "\n    }\n  }\n"])), function (props) {
+var DaysContent = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding: 15px 0px 10px 0px;\n\n  input {\n    width: 100%;\n    height: 44px;\n    border-radius: 8px !important;\n    padding: 0px 15px !important;\n    outline: none !important;\n    border: 1px solid ", " !important;\n    padding-right: 25px;\n    ", "\n    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */\n      color: ", ";\n      opacity: 1; /* Firefox */\n    }\n\n    &:-ms-input-placeholder { /* Internet Explorer 10-11 */\n      color: ", ";\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      color: ", ";\n    }\n  }\n\n  b {\n    border: none !important;\n    background: transparent !important;\n    box-shadow: none !important;\n    &:nth-child(2) {\n      i {\n        border: none !important;\n        box-shadow: -1px 1px 0 ", ";\n        transform: rotate(135deg);\n        width: 7px !important;\n        height: 7px !important;\n        margin: 0ex 0px 0px -0.56ex !important;\n      }\n    }\n    &:last-child {\n      i {\n        border: none !important;\n        box-shadow: -1px 1px 0 ", ";\n        transform: rotate(-45deg);\n        width: 7px !important;\n        height: 7px !important;\n        margin: -0.9ex 0px 0px -0.56ex !important;\n      }\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.gray;
+}, function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        padding-left: 25px;\n        padding-right: 15px;\n      "])));
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      padding-left: 25px;\n      padding-right: 15px;\n    "])));
+}, function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (props) {
+  return props.theme.colors.secundaryLight;
 });
 
 exports.DaysContent = DaysContent;

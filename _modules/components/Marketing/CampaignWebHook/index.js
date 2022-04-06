@@ -21,12 +21,6 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -40,26 +34,25 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CampaignWebHook = function CampaignWebHook(props) {
-  var formState = props.formState,
-      campaignState = props.campaignState,
-      handleChangeItem = props.handleChangeItem;
+  var _contactState$changes7, _contactState$changes8, _contactState$changes9, _contactState$changes10, _contactState$changes11, _contactState$changes12;
+
+  var isAddMode = props.isAddMode,
+      contactState = props.contactState,
+      handleChangeData = props.handleChangeData,
+      handleUpdateContact = props.handleUpdateContact,
+      handleAddCampaign = props.handleAddCampaign;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      webHook = _useState2[0],
-      setWebHook = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -68,12 +61,10 @@ var CampaignWebHook = function CampaignWebHook(props) {
     });
   };
 
-  var handleChangeInput = function handleChangeInput(evt) {
-    setWebHook(_objectSpread(_objectSpread({}, webHook), {}, _defineProperty({}, evt.target.name, evt.target.value)));
-  };
-
   var handleSaveSms = function handleSaveSms() {
-    if (!(webHook !== null && webHook !== void 0 && webHook.title)) {
+    var _contactState$changes, _contactState$changes2, _contactState$changes3, _contactState$changes4, _contactState$changes5, _contactState$changes6;
+
+    if (!(contactState !== null && contactState !== void 0 && (_contactState$changes = contactState.changes) !== null && _contactState$changes !== void 0 && (_contactState$changes2 = _contactState$changes.contact_data) !== null && _contactState$changes2 !== void 0 && _contactState$changes2.title)) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Title is required').replace('_attribute_', t('TITLE', 'Title'))
@@ -81,7 +72,7 @@ var CampaignWebHook = function CampaignWebHook(props) {
       return;
     }
 
-    if (!(webHook !== null && webHook !== void 0 && webHook.body)) {
+    if (!(contactState !== null && contactState !== void 0 && (_contactState$changes3 = contactState.changes) !== null && _contactState$changes3 !== void 0 && (_contactState$changes4 = _contactState$changes3.contact_data) !== null && _contactState$changes4 !== void 0 && _contactState$changes4.body)) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Body is required').replace('_attribute_', t('BODY', 'Body'))
@@ -89,7 +80,7 @@ var CampaignWebHook = function CampaignWebHook(props) {
       return;
     }
 
-    if (!(webHook !== null && webHook !== void 0 && webHook.webhook)) {
+    if (!(contactState !== null && contactState !== void 0 && (_contactState$changes5 = contactState.changes) !== null && _contactState$changes5 !== void 0 && (_contactState$changes6 = _contactState$changes5.contact_data) !== null && _contactState$changes6 !== void 0 && _contactState$changes6.webhook)) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'URL is required').replace('_attribute_', t('URL', 'URL'))
@@ -97,37 +88,31 @@ var CampaignWebHook = function CampaignWebHook(props) {
       return;
     }
 
-    handleChangeItem('contact_data', webHook);
+    if (isAddMode) handleAddCampaign();else handleUpdateContact();
   };
 
-  (0, _react.useEffect)(function () {
-    var _formState$changes$co, _formState$changes, _campaignState$campai;
-
-    var contactData = (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.contact_data) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai = campaignState.campaign) === null || _campaignState$campai === void 0 ? void 0 : _campaignState$campai.contact_data;
-    if (contactData) setWebHook(_objectSpread({}, contactData));
-  }, [formState, campaignState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
-    defaultValue: setWebHook.title || '',
-    onChange: handleChangeInput
+    defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes7 = contactState.changes) === null || _contactState$changes7 === void 0 ? void 0 : (_contactState$changes8 = _contactState$changes7.contact_data) === null || _contactState$changes8 === void 0 ? void 0 : _contactState$changes8.title) || '',
+    onChange: handleChangeData
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGE', 'Message')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     name: "body",
     placeholder: t('WRITE_MESSAGE', 'Write a message'),
-    defaultValue: setWebHook.body || '',
-    onChange: handleChangeInput
+    defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes9 = contactState.changes) === null || _contactState$changes9 === void 0 ? void 0 : (_contactState$changes10 = _contactState$changes9.contact_data) === null || _contactState$changes10 === void 0 ? void 0 : _contactState$changes10.body) || '',
+    onChange: handleChangeData
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('HOOK', 'Hook')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "webhook",
     placeholder: t('URL', 'URL'),
-    defaultValue: setWebHook.webhook || '',
-    onChange: handleChangeInput
+    defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes11 = contactState.changes) === null || _contactState$changes11 === void 0 ? void 0 : (_contactState$changes12 = _contactState$changes11.contact_data) === null || _contactState$changes12 === void 0 ? void 0 : _contactState$changes12.webhook) || '',
+    onChange: handleChangeData
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: function onClick() {
       return handleSaveSms();
     },
-    disabled: formState.loading
-  }, t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    disabled: contactState.loading
+  }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('CAMPAIGN', 'Campaign'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

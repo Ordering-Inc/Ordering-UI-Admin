@@ -46,7 +46,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RangeCalendar = function RangeCalendar(props) {
   var handleChangeDate = props.handleChangeDate,
       defaultValue = props.defaultValue,
-      isLeft = props.isLeft;
+      isLeft = props.isLeft,
+      isSingleDate = props.isSingleDate,
+      withTime = props.withTime;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -61,10 +63,15 @@ var RangeCalendar = function RangeCalendar(props) {
       dateRange = _useState2[0],
       setDateRange = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      isShowCalendar = _useState4[0],
-      setIsShowCalendar = _useState4[1];
+      date = _useState4[0],
+      setDate = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isShowCalendar = _useState6[0],
+      setIsShowCalendar = _useState6[1];
 
   var calendarRef = (0, _react.useRef)();
 
@@ -84,17 +91,25 @@ var RangeCalendar = function RangeCalendar(props) {
     setIsShowCalendar(true);
   };
 
+  var handleChangeSingleDate = function handleChangeSingleDate(dateTime) {
+    var dateFormat = withTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+    handleChangeDate && handleChangeDate((0, _moment.default)(dateTime).format(dateFormat));
+    setDate(dateTime);
+  };
+
   var handleChangeDates = function handleChangeDates(item) {
     var _item$selection, _item$selection2;
 
     if ((_item$selection = item.selection) !== null && _item$selection !== void 0 && _item$selection.startDate && (_item$selection2 = item.selection) !== null && _item$selection2 !== void 0 && _item$selection2.endDate) {
-      handleChangeDate((0, _moment.default)(item.selection.startDate).format('YYYY-MM-DD'), (0, _moment.default)(item.selection.endDate).format('YYYY-MM-DD'));
+      var _dateFormat = withTime ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD';
+
+      handleChangeDate((0, _moment.default)(item.selection.startDate).format(_dateFormat), (0, _moment.default)(item.selection.endDate).format(_dateFormat));
     }
 
     setDateRange([item.selection]);
   };
 
-  var dateFormat = function dateFormat(date1, date2) {
+  var rangeFormat = function rangeFormat(date1, date2) {
     var formattedDate = "".concat((0, _moment.default)(date1).format('YYYY-MM-DD'), "~").concat((0, _moment.default)(date2).format('YYYY-MM-DD'));
 
     if ((0, _moment.default)(date1).format('YYYY') === (0, _moment.default)(date2).format('YYYY')) {
@@ -104,6 +119,10 @@ var RangeCalendar = function RangeCalendar(props) {
     return formattedDate;
   };
 
+  var dateFormat = function dateFormat(dateTime) {
+    return "".concat((0, _moment.default)(dateTime).format('DD'), " ").concat((0, _moment.default)(dateTime).format('MMM'), ", ").concat((0, _moment.default)(dateTime).format('YYYY'));
+  };
+
   (0, _react.useEffect)(function () {
     window.addEventListener('click', handleClickOutside);
     return function () {
@@ -111,6 +130,11 @@ var RangeCalendar = function RangeCalendar(props) {
     };
   }, [isShowCalendar]);
   (0, _react.useEffect)(function () {
+    if (isSingleDate && defaultValue) {
+      setDate(new Date(defaultValue));
+      return;
+    }
+
     if (defaultValue && (defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from) !== '' && (defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.to) !== '') {
       setDateRange([{
         startDate: new Date(defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from),
@@ -122,11 +146,17 @@ var RangeCalendar = function RangeCalendar(props) {
   return /*#__PURE__*/_react.default.createElement(_styles3.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     onClick: handleOpenCalendar,
     borderRadius: "8px",
-    color: "secundary"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles3.CalendarWrapper, {
+    color: "secundary",
+    className: "ordering-calendar-btn"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), !isSingleDate && (dateRange[0].startDate ? rangeFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')), isSingleDate && (date ? dateFormat(date) : t('SELECT_DATE', 'Select a Date'))), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles3.CalendarWrapper, {
     ref: calendarRef,
     isLeft: isLeft
-  }, /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
+  }, isSingleDate ? /*#__PURE__*/_react.default.createElement(_reactDateRange.Calendar, {
+    date: date,
+    onChange: function onChange(date) {
+      return handleChangeSingleDate(date);
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
     editableDateInputs: true,
     onChange: function onChange(item) {
       return handleChangeDates(item);
