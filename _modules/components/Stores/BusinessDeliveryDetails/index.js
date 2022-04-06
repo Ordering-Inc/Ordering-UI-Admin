@@ -17,6 +17,8 @@ var _Select = require("../../../styles/Select");
 
 var _styles = require("../../../styles");
 
+var _Shared = require("../../Shared");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -49,7 +51,11 @@ var BusinessDeliveryDetailsUI = function BusinessDeliveryDetailsUI(props) {
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       formState = props.formState,
       handleChangeForm = props.handleChangeForm,
-      handleDeliveryStateSave = props.handleDeliveryStateSave;
+      onDeliveryStateSave = props.onDeliveryStateSave,
+      actionState = props.actionState,
+      zoneListState = props.zoneListState,
+      handleChangeZoneState = props.handleChangeZoneState,
+      handleChangeAllZoneState = props.handleChangeAllZoneState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -69,6 +75,14 @@ var BusinessDeliveryDetailsUI = function BusinessDeliveryDetailsUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       curDeliveryTime = _useState6[0],
       setCurDeliveryTime = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
 
   var priorityList = [{
     value: '2',
@@ -130,6 +144,13 @@ var BusinessDeliveryDetailsUI = function BusinessDeliveryDetailsUI(props) {
       minute: business !== null && business !== void 0 && business.delivery_time ? (business === null || business === void 0 ? void 0 : (_business$delivery_ti2 = business.delivery_time) === null || _business$delivery_ti2 === void 0 ? void 0 : _business$delivery_ti2.split(':')[1]) * 1 + '' : '0'
     });
   }, []);
+  (0, _react.useEffect)(function () {
+    if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
+    setAlertState({
+      open: true,
+      content: actionState === null || actionState === void 0 ? void 0 : actionState.error
+    });
+  }, [actionState.error]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('PREORDER_STEP_2_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles2.TimeSelectContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('DELIVERY_TIME', 'Delivery time')), /*#__PURE__*/_react.default.createElement(_styles2.TimeBlock, null, /*#__PURE__*/_react.default.createElement("select", {
     value: curDeliveryTime === null || curDeliveryTime === void 0 ? void 0 : curDeliveryTime.hour,
     name: "hour",
@@ -154,7 +175,10 @@ var BusinessDeliveryDetailsUI = function BusinessDeliveryDetailsUI(props) {
     onClose: function onClose() {
       return setIsExtendExtraOpen(false);
     },
-    handleSuccessUpdate: handleUpdateBusinessState
+    handleSuccessUpdate: handleUpdateBusinessState,
+    zoneListState: zoneListState,
+    handleChangeZoneState: handleChangeZoneState,
+    handleChangeAllZoneState: handleChangeAllZoneState
   }), /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement(_styles2.AdvancedLogisticsSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('EXPIRE_ORDER_AFTER_MINUTES', 'Expire order after minutes')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     name: "cancel_order_after_minutes",
@@ -179,11 +203,29 @@ var BusinessDeliveryDetailsUI = function BusinessDeliveryDetailsUI(props) {
   })))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
-    disabled: formState.loading || Object.keys(formState.changes).length === 0,
+    disabled: actionState.loading || Object.keys(formState.changes).length === 0 && !zoneListState.isDirty,
     onClick: function onClick() {
-      return handleDeliveryStateSave();
+      return onDeliveryStateSave();
     }
-  }, t('SAVE', 'Save')));
+  }, t('SAVE', 'Save')), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 var BusinessDeliveryDetails = function BusinessDeliveryDetails(props) {

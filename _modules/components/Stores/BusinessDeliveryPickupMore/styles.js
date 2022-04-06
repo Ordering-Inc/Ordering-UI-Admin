@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px;\n  height: 100%;\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin-top: 5px;\n  }\n\n  @media (min-width: 768px) {\n    max-width: 500px;\n  }\n"])));
+var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px;\n  height: 100%;\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin-top: 5px;\n  }\n\n  @media (min-width: 1000px) {\n    max-width: 500px;\n  }\n"])));
 
 exports.Container = Container;
 
