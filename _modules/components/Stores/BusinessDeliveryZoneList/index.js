@@ -17,7 +17,9 @@ var _Shared = require("../../Shared");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _styles = require("./styles");
+var _styles = require("../../../styles");
+
+var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -40,7 +42,10 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
 
   var business = props.business,
       setIsExtendExtraOpen = props.setIsExtendExtraOpen,
-      handleSuccessUpdate = props.handleSuccessUpdate;
+      handleSuccessUpdate = props.handleSuccessUpdate,
+      zoneListState = props.zoneListState,
+      handleChangeZoneState = props.handleChangeZoneState,
+      handleChangeAllZoneState = props.handleChangeAllZoneState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -62,25 +67,39 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
     setCurZone(null);
   };
 
-  var handleOpenZone = function handleOpenZone(zone) {
+  var handleOpenZone = function handleOpenZone(e, zone) {
+    var isInvalid = e.target.closest('.zone-enabled');
+    if (isInvalid) return;
     setCurZone(zone);
     setIsExtendExtraOpen(true);
     setIsOpenDetails(true);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ZoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveryZonesTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MINIMUM', 'Minimum')), /*#__PURE__*/_react.default.createElement("th", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement("th", null))), business === null || business === void 0 ? void 0 : (_business$zones = business.zones) === null || _business$zones === void 0 ? void 0 : _business$zones.filter(function (zone) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ZoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DeliveryZonesTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    checked: zoneListState.isCheckAll,
+    onChange: function onChange(e) {
+      return handleChangeAllZoneState(e.target.checked);
+    }
+  }))), /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MINIMUM', 'Minimum')), /*#__PURE__*/_react.default.createElement("th", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement("th", null))), business === null || business === void 0 ? void 0 : (_business$zones = business.zones) === null || _business$zones === void 0 ? void 0 : _business$zones.filter(function (zone) {
     return (zone === null || zone === void 0 ? void 0 : zone.type) !== 3;
   }).map(function (zone) {
-    return /*#__PURE__*/_react.default.createElement(_styles.ZoneTbody, {
+    return /*#__PURE__*/_react.default.createElement(_styles2.ZoneTbody, {
       key: zone.id,
       active: zone.id === (curZone === null || curZone === void 0 ? void 0 : curZone.id),
-      onClick: function onClick() {
-        return handleOpenZone(zone);
+      onClick: function onClick(e) {
+        return handleOpenZone(e, zone);
       }
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, zone === null || zone === void 0 ? void 0 : zone.name), /*#__PURE__*/_react.default.createElement("td", null, zone === null || zone === void 0 ? void 0 : zone.minimum), /*#__PURE__*/_react.default.createElement("td", null, zone === null || zone === void 0 ? void 0 : zone.price), /*#__PURE__*/_react.default.createElement("td", {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+      className: "zone-enabled"
+    }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+      checked: !!zoneListState.changes[zone.id],
+      onChange: function onChange(e) {
+        return handleChangeZoneState(zone.id, e.target.checked);
+      }
+    }))), /*#__PURE__*/_react.default.createElement("td", null, zone === null || zone === void 0 ? void 0 : zone.name), /*#__PURE__*/_react.default.createElement("td", null, zone === null || zone === void 0 ? void 0 : zone.minimum), /*#__PURE__*/_react.default.createElement("td", null, zone === null || zone === void 0 ? void 0 : zone.price), /*#__PURE__*/_react.default.createElement("td", {
       className: "arrow"
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))));
-  })), /*#__PURE__*/_react.default.createElement(_styles.AddDeliveryZoneButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.AddDeliveryZoneButton, {
     onClick: function onClick() {
       return handleOpenZone(null);
     }
