@@ -180,6 +180,26 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
+      value: 22,
+      name: t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver'),
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 23,
+      name: t('ORDER_DRIVER_ON_WAY', 'Driver on way'),
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('ORDER_DRIVER_ON_WAY', 'Driver on way')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
       value: null,
       name: t('COMPLETED', 'Completed'),
       content: (
@@ -321,10 +341,10 @@ export const OrderStatusTypeSelector = (props) => {
         extractOrderStatus = orderStatuses.slice(0, 13)
         _filteredOrderStatues = [...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(15, 18)
+        extractOrderStatus = orderStatuses.slice(15, 20)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(19, 26)
+        extractOrderStatus = orderStatuses.slice(21, 28)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
         setFilteredOrderStatuses(_filteredOrderStatues)
@@ -337,13 +357,16 @@ export const OrderStatusTypeSelector = (props) => {
         extractOrderStatus = orderStatuses.slice(10, 11)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(13, 17)
+        extractOrderStatus = orderStatuses.slice(13, 15)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(18, 22)
+        extractOrderStatus = orderStatuses.slice(17, 19)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-        extractOrderStatus = orderStatuses.slice(25, 27)
+        extractOrderStatus = orderStatuses.slice(20, 24)
+        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+
+        extractOrderStatus = orderStatuses.slice(27, 29)
         _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
         setFilteredOrderStatuses(_filteredOrderStatues)
@@ -354,13 +377,13 @@ export const OrderStatusTypeSelector = (props) => {
       extractOrderStatus = orderStatuses.slice(2, 4)
       _filteredOrderStatues = [...extractOrderStatus]
 
-      extractOrderStatus = orderStatuses.slice(5, 15)
+      extractOrderStatus = orderStatuses.slice(5, 17)
       _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-      extractOrderStatus = orderStatuses.slice(16, 19)
+      extractOrderStatus = orderStatuses.slice(18, 21)
       _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
-      extractOrderStatus = orderStatuses.slice(20, 27)
+      extractOrderStatus = orderStatuses.slice(22, 29)
       _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
 
       setFilteredOrderStatuses(_filteredOrderStatues)

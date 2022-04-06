@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { useLanguage } from 'ordering-components-admin'
-import { Select } from '../../../styles/Select/FirstSelect'
 import { Input, Switch, Button } from '../../../styles'
-import { Modal } from '../../Shared'
-import { CampaignCalendarTime } from '../CampaignCalendarTime'
+import { Modal, RangeCalendar } from '../../Shared'
 import { CampaignAmountOption } from '../CampaignAmountOption'
 import { CampaignSignUpOption } from '../CampaignSignUpOption'
 
@@ -19,7 +17,6 @@ import {
 import {
   Container,
   InputWrapper,
-  Option,
   AudienceWrapper,
   DynamicWrapper,
   RadioCheckWrapper,
@@ -48,20 +45,9 @@ export const CampaignDetailGeneral = (props) => {
 
   const [, t] = useLanguage()
 
-  const [contactTypeSearchVal, setContactTypeSearchVal] = useState('')
-  const [typeOptions, setTypeOptions] = useState(null)
   const [isASAP, setIsASAP] = useState(true)
   const [isRuleModal, setIsRuleModal] = useState(false)
   const [selectedRule, setSelectedRule] = useState(null)
-
-  const typeList = [
-    { value: 'email', content: <Option>{t('EMAIL', 'Email')}</Option> },
-    { value: 'sms', content: <Option>{t('SMS', 'SMS')}</Option> },
-    { value: 'notification', content: <Option>{t('NOTIFICATION', 'Notification')}</Option> },
-    { value: 'webhook', content: <Option>{t('WEBHOOK', 'Webhook')}</Option> },
-    { value: 'popup', content: <Option>{t('POPUP', 'Popup')}</Option> },
-    { value: 'whatsapp', content: <Option>{t('WHATSAPP', 'Whatsapp')}</Option> }
-  ]
 
   const ruleList = [
     { key: 'orders_count', title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options') },
@@ -92,7 +78,7 @@ export const CampaignDetailGeneral = (props) => {
 
   const checkColor = (status) => {
     const index = status.toLocaleLowerCase()
-    if (index === 'sent') return '#00D27A'
+    if (index === 'ended') return '#00D27A'
     else if (index === 'scheduled') return '#FFC700'
     else if (index === 'draft') return '#E9ECEF'
     else return '#E9ECEF'
@@ -143,11 +129,6 @@ export const CampaignDetailGeneral = (props) => {
   }
 
   useEffect(() => {
-    const options = typeList.filter(option => option?.value.toLocaleLowerCase().includes(contactTypeSearchVal.toLocaleLowerCase()))
-    setTypeOptions(options)
-  }, [contactTypeSearchVal])
-
-  useEffect(() => {
     if (campaignState?.campaign?.scheduled_at) {
       setIsASAP(false)
     }
@@ -163,21 +144,6 @@ export const CampaignDetailGeneral = (props) => {
             name='name'
             value={formState?.changes?.name ?? campaignState?.campaign?.name ?? ''}
             onChange={handleChangeInput}
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <label>{t('CONTACT_TYPE', 'Contact type')}</label>
-          <Select
-            options={typeOptions}
-            className='select'
-            defaultValue={formState?.changes?.contact_type ?? campaignState?.campaign?.contact_type ?? ''}
-            placeholder={t('SELECT_OPTION', 'Select an option')}
-            onChange={(value) => handleChangeItem('contact_type', value)}
-            isShowSearchBar
-            searchBarIsCustomLayout
-            searchBarIsNotLazyLoad
-            searchValue={contactTypeSearchVal}
-            handleChangeSearch={(val) => setContactTypeSearchVal(val)}
           />
         </InputWrapper>
         <AudienceWrapper>
@@ -200,9 +166,9 @@ export const CampaignDetailGeneral = (props) => {
                       onChange={val => handleChangeItem('enabled', val)}
                     />
                   </SwitchWrapper>
-                  {campaignState?.campaign?.end_at && (
+                  {/* {campaignState?.campaign?.end_at && (
                     <p>{t('LAST_TIME_ON', 'Last time on')}: <span>{moment(campaignState?.campaign?.end_at).format('MM/DD/YYYY · HH:mm a')}</span></p>
-                  )}
+                  )} */}
                 </>
               )}
             </DynamicContentWrapper>
@@ -240,10 +206,12 @@ export const CampaignDetailGeneral = (props) => {
                   </RadioCheckWrapper>
                   {!isASAP && (
                     <ScheduleForLateWrapper>
-                      <CampaignCalendarTime
-                        showTime
-                        dateTime={formState?.changes?.scheduled_at ?? campaignState?.campaign?.scheduled_at}
-                        handleChangeDateTime={handleChangeDateTime}
+                      <RangeCalendar
+                        withTime
+                        isLeft
+                        isSingleDate
+                        defaultValue={formState?.changes?.scheduled_at ?? campaignState?.campaign?.scheduled_at}
+                        handleChangeDate={handleChangeDateTime}
                       />
                     </ScheduleForLateWrapper>
                   )}

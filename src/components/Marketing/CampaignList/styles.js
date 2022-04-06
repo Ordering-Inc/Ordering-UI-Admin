@@ -10,7 +10,6 @@ export const Container = styled.div`
 
   @media (min-width: 768px) {
     max-height: calc(100vh - 385px);
-    min-height: 420px;
   }
 
   @media (min-width: 992px) {
@@ -83,13 +82,22 @@ export const Table = styled.table`
       th {
         color: ${props => props.theme.colors?.headingColor};
         white-space: nowrap;
-        position: sticky;
-        top: 0px;
         z-index: 100;
         background: ${props => props.theme.colors.backgroundPage};
       }
     }
   }
+
+  ${({ isRelative }) => isRelative && css`
+    thead {
+      tr {
+        th {
+          position: sticky;
+          top: 0px;
+        }
+      }
+    }
+  `}
 
   p {
     overflow: hidden;
