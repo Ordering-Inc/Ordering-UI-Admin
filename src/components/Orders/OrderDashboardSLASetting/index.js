@@ -85,11 +85,9 @@ export const OrderDashboardSLASetting = (props) => {
 
   const onSubmit = (data) => {
     if (data && Object.keys(data).length > 0) {
-      console.log('data: ', data)
       const _hour = parseInt(data.hour)
       const _min = parseInt(data.minute)
       const _settingTimeSecond = _hour * 3600 + _min * 60
-      console.log('setting time: ', _settingTimeSecond)
       setSlaSettingTime(_settingTimeSecond)
       showToast(ToastType.Success, t('SLA_SETTING_UPDATED', 'SLAs setting updated'))
       setSettingOpen(false)

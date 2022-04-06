@@ -157,10 +157,6 @@ const OrdersManagerUI = (props) => {
     setIsTourFlag(false)
   }, [isTourOpen])
 
-  useEffect(() => {
-    console.log('timeStatus: ', timeStatus)
-  }, [timeStatus])
-
   return (
     <>
       <OrdersListContainer
