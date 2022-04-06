@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components'
 
 export const ZoneContainer = styled.div`
-  max-width: 500px;
   margin: 30px 0 20px 0;
+  @media (min-width: 1000px) {
+    max-width: 500px;
+  }
 `
 
 export const DeliveryZonesTable = styled.table`
