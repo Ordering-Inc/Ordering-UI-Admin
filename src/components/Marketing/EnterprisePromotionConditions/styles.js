@@ -69,7 +69,9 @@ export const CheckboxWrapper = styled.div`
     color: #FFF;
     font-size: 16px;
   }
-  cursor: not-allowed;
+  ${({ isCursorAllowed }) => !isCursorAllowed && css`
+    cursor: not-allowed;
+  `}
 
   ${({ active }) => active ? css`
     /* cursor: pointer; */
