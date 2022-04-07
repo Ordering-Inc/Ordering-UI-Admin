@@ -9,9 +9,7 @@ export const OpenCartListing = (props) => {
   const {
     UIComponent,
     isSearchByCartId,
-    isSearchByCustomerEmail,
-    isSearchByCustomerPhone,
-    isSearchByBusinessName,
+    isSearchByCityName,
     paginationSettings
   } = props
 
@@ -178,44 +176,10 @@ export const OpenCartListing = (props) => {
             }
           )
         }
-        if (isSearchByCustomerEmail) {
+        if (isSearchByCityName) {
           searchConditions.push(
             {
-              attribute: 'user',
-              conditions: [
-                {
-                  attribute: 'email',
-                  value: {
-                    condition: 'ilike',
-                    value: encodeURI(`%${searchValue}%`)
-                  }
-                }
-              ]
-            }
-          )
-        }
-
-        if (isSearchByCustomerPhone) {
-          searchConditions.push(
-            {
-              attribute: 'user',
-              conditions: [
-                {
-                  attribute: 'cellphone',
-                  value: {
-                    condition: 'ilike',
-                    value: encodeURI(`%${searchValue}%`)
-                  }
-                }
-              ]
-            }
-          )
-        }
-
-        if (isSearchByBusinessName) {
-          searchConditions.push(
-            {
-              attribute: 'business',
+              attribute: 'city',
               conditions: [
                 {
                   attribute: 'name',

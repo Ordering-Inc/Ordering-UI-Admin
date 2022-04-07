@@ -138,9 +138,7 @@ export const OpenCartListing = (props) => {
     ...props,
     UIComponent: OpenCartListingUI,
     isSearchByCartId: true,
-    isSearchByCustomerEmail: true,
-    isSearchByCustomerPhone: true,
-    isSearchByBusinessName: true
+    isSearchByCityName: true
   }
   return <OpenCartListingController {...openCartsProps} />
 }

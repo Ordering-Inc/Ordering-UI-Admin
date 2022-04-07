@@ -265,7 +265,7 @@ export const OpenCartList = (props) => {
                         <div className='info'>
                           <p className='bold'>{cart?.business?.name}</p>
                           {allowColumns?.city && (
-                            <p>{cart?.business?.address}</p>
+                            <p>{cart?.city?.name}</p>
                           )}
                         </div>
                       </BusinessInfo>

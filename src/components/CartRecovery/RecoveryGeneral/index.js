@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
+import NumericInput from 'react-numeric-input'
+
 import {
   // X as CloseIcon,
   Circle as UnCheckIcon,
-  ChevronUp,
-  ChevronDown,
   RecordCircleFill as CheckIcon
 } from 'react-bootstrap-icons'
 
@@ -20,8 +20,7 @@ import {
   TimeContent,
   ButtonWrapper,
   TimeBlock,
-  DaysContent,
-  ArrowIconsWrapper
+  DaysContent
   // DateContent,
   // ChildCheckBoxWrapper,
   // DateRangeContent
@@ -81,10 +80,9 @@ export const RecoveryGeneral = (props) => {
     handleChangeItem({ times: [preorderTime], launch_type: 'times' })
   }
 
-  const handleChangeDay = (evt) => {
-    const day = evt.target.value
-    setCurDayTime(day)
-    handleChangeItem({ times: [day * 24 * 60], launch_type: 'times' })
+  const handleChangeDay = (value) => {
+    setCurDayTime(value)
+    handleChangeItem({ times: [value * 24 * 60], launch_type: 'times' })
   }
 
   const handleSubmitBtnClick = () => {
@@ -246,24 +244,17 @@ export const RecoveryGeneral = (props) => {
             </ParentCheckBoxWrapper>
             {!isTime && (
               <DaysContent>
-                <div>
-                  <Input
-                    type='number'
-                    min='0'
-                    placeholder='00'
-                    onKeyPress={(e) => {
-                      if (!/^[0-9.]$/.test(e.key)) {
-                        e.preventDefault()
-                      }
-                    }}
-                    value={curDayTime}
-                    onChange={handleChangeDay}
-                  />
-                  <ArrowIconsWrapper>
-                    <ChevronUp />
-                    <ChevronDown />
-                  </ArrowIconsWrapper>
-                </div>
+                <NumericInput
+                  placeholder='00'
+                  onKeyPress={(e) => {
+                    if (!/^[0-9]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
+                  value={curDayTime || ''}
+                  onChange={(value) => handleChangeDay(value)}
+                  min={0}
+                />
               </DaysContent>
             )}
           </TypeWrapper>
