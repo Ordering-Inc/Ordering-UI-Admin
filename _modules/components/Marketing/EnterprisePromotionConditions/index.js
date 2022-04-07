@@ -54,6 +54,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionConditions = function EnterprisePromotionConditions(props) {
+  var _promotionState$promo3;
+
   var isAddMode = props.isAddMode,
       formState = props.formState,
       actionState = props.actionState,
@@ -61,7 +63,8 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
       handleRemoveKey = props.handleRemoveKey,
       handleUpdateClick = props.handleUpdateClick,
       selectedBusinessIds = props.selectedBusinessIds,
-      handleAddPromotion = props.handleAddPromotion;
+      handleAddPromotion = props.handleAddPromotion,
+      handleChangeItem = props.handleChangeItem;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -172,22 +175,40 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
     setOpenMultipleModal(false);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ConditionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CONDITIONS', 'Conditions'))), conditions.map(function (condition, index) {
+  var handleIncludeOptions = function handleIncludeOptions() {
     var _promotionState$promo;
+
+    var includeOptions = typeof formState.changes.include_options !== 'undefined' ? formState.changes.include_options : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.include_options;
+    handleChangeItem({
+      include_options: !includeOptions
+    });
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ConditionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CONDITIONS', 'Conditions'))), conditions.map(function (condition, index) {
+    var _promotionState$promo2;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.ConditionItem, {
       key: index,
       onClick: function onClick(e) {
         return handlePromotionEdit(e, condition.attribute, condition.title);
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null, (typeof formState.changes[condition.attribute] !== 'undefined' ? formState.changes[condition.attribute] : Array.isArray(promotionState.promotion[condition.attribute]) ? (_promotionState$promo = promotionState.promotion[condition.attribute]) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.length : promotionState.promotion[condition.attribute]) ? /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+    }, /*#__PURE__*/_react.default.createElement("div", null, (typeof formState.changes[condition.attribute] !== 'undefined' ? formState.changes[condition.attribute] : Array.isArray(promotionState.promotion[condition.attribute]) ? (_promotionState$promo2 = promotionState.promotion[condition.attribute]) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.length : promotionState.promotion[condition.attribute]) ? /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
       className: "condition-checkbox",
       active: true // onClick={() => handleChangeItem({ [condition.attribute]: null })}
 
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2, null)) : /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
       className: "condition-checkbox"
     }), /*#__PURE__*/_react.default.createElement("span", null, condition.title)), /*#__PURE__*/_react.default.createElement(_styles2.EditButton, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.ConditionItem, {
+    onClick: function onClick() {
+      return handleIncludeOptions();
+    }
+  }, /*#__PURE__*/_react.default.createElement("div", null, (typeof formState.changes.include_options !== 'undefined' ? formState.changes.include_options : (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.include_options) ? /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+    isCursorAllowed: true,
+    active: true
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2, null)) : /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+    isCursorAllowed: true
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('', 'Include options')))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     onClick: function onClick() {
