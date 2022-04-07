@@ -29,7 +29,8 @@ export const EnterprisePromotionConditions = (props) => {
     handleRemoveKey,
     handleUpdateClick,
     selectedBusinessIds,
-    handleAddPromotion
+    handleAddPromotion,
+    handleChangeItem
   } = props
 
   const [, t] = useLanguage()
@@ -86,6 +87,13 @@ export const EnterprisePromotionConditions = (props) => {
     setOpenMultipleModal(false)
   }
 
+  const handleIncludeOptions = () => {
+    const includeOptions = (typeof formState.changes.include_options !== 'undefined'
+      ? formState.changes.include_options
+      : promotionState.promotion?.include_options)
+    handleChangeItem({ include_options: !includeOptions })
+  }
+
   return (
     <>
       <ConditionsContainer>
@@ -123,6 +131,23 @@ export const EnterprisePromotionConditions = (props) => {
             </EditButton>
           </ConditionItem>
         ))}
+        <ConditionItem
+          onClick={() => handleIncludeOptions()}
+        >
+          <div>
+            {(typeof formState.changes.include_options !== 'undefined'
+              ? formState.changes.include_options
+              : promotionState.promotion?.include_options)
+              ? (
+                <CheckboxWrapper isCursorAllowed active>
+                  <Check2 />
+                </CheckboxWrapper>
+              ) : (
+                <CheckboxWrapper isCursorAllowed />
+              )}
+            <span>{t('', 'Include options')}</span>
+          </div>
+        </ConditionItem>
 
         <Button
           borderRadius='8px'

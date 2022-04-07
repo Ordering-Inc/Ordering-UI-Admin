@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { useTheme } from 'styled-components'
@@ -16,14 +16,15 @@ import {
 
 export const CampaignSMS = (props) => {
   const {
-    formState,
-    campaignState,
-    handleChangeItem
+    isAddMode,
+    contactState,
+    handleChangeData,
+    handleUpdateContact,
+    handleAddCampaign
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [sms, setSms] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const closeAlert = () => {
@@ -33,32 +34,25 @@ export const CampaignSMS = (props) => {
     })
   }
 
-  const handleChangeInput = (evt) => {
-    setSms({ ...sms, [evt.target.name]: evt.target.value })
-  }
-
   const handleSaveSms = () => {
-    if (!sms?.title) {
+    if (!contactState?.changes?.contact_data?.title) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Title is required').replace('_attribute_', t('TITLE', 'Title'))
       })
       return
     }
-    if (!sms?.body) {
+    if (!contactState?.changes?.contact_data?.body) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Body is required').replace('_attribute_', t('BODY', 'Body'))
       })
       return
     }
-    handleChangeItem('contact_data', sms)
-  }
 
-  useEffect(() => {
-    const contactData = formState?.changes?.contact_data ?? campaignState?.campaign?.contact_data
-    if (contactData) setSms({ ...contactData })
-  }, [formState, campaignState])
+    if (isAddMode) handleAddCampaign()
+    else handleUpdateContact()
+  }
 
   return (
     <>
@@ -68,8 +62,8 @@ export const CampaignSMS = (props) => {
           <Input
             name='title'
             placeholder={t('TITLE', 'Title')}
-            defaultValue={sms.title || ''}
-            onChange={handleChangeInput}
+            defaultValue={contactState?.changes?.contact_data?.title || ''}
+            onChange={handleChangeData}
           />
         </InputWrapper>
         <InputWrapper>
@@ -77,16 +71,16 @@ export const CampaignSMS = (props) => {
           <TextArea
             name='body'
             placeholder={t('WRITE_MESSAGE', 'Write a message')}
-            defaultValue={sms.body || ''}
-            onChange={handleChangeInput}
+            defaultValue={contactState?.changes?.contact_data?.body || ''}
+            onChange={handleChangeData}
           />
         </InputWrapper>
         <SmsPreviewWrapper>
           <SmsContentLayout bgimage={theme.images.general.mobileHalfMask}>
             <SmsPreviewContentWrapper>
               <SmsPreviewContent>
-                <h2>{sms.title || ''}</h2>
-                <p>{sms.body || ''}</p>
+                <h2>{contactState?.changes?.contact_data?.title || ''}</h2>
+                <p>{contactState?.changes?.contact_data?.body || ''}</p>
               </SmsPreviewContent>
             </SmsPreviewContentWrapper>
           </SmsContentLayout>
@@ -96,9 +90,9 @@ export const CampaignSMS = (props) => {
         <Button
           color='primary'
           onClick={() => handleSaveSms()}
-          disabled={formState.loading}
+          disabled={contactState.loading}
         >
-          {t('SAVE', 'Save')}
+          {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
         </Button>
       </ButtonWrapper>
       <Alert
