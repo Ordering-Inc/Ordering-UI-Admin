@@ -45,6 +45,7 @@ export const Table = styled.table`
 
     &.carts-id {
       height: 0px;
+      padding: 5px;
     }
   }
 
@@ -108,7 +109,7 @@ export const Table = styled.table`
   }
 `
 
-export const OrderTbody = styled.tbody`
+export const CartBody = styled.tbody`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
 
@@ -144,7 +145,8 @@ export const OrderTbody = styled.tbody`
 export const OrderNumberContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 100%;
+  /* height: 100%; */
+  height: 45px;
 
   p {
     max-width: 130px;

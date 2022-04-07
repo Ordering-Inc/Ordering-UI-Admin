@@ -89,7 +89,7 @@ export const RecoveryActionListing = (props) => {
       }
 
       const fetchEndpoint = where
-        ? `${ordering.root}/event_rules?page=${page}&page_size=${pageSize}&&where=${JSON.stringify(where)}`
+        ? `${ordering.root}/event_rules?page=${page}&page_size=${pageSize}&where=${JSON.stringify(where)}`
         : `${ordering.root}/event_rules?page=${page}&page_size=${pageSize}`
 
       const response = await fetch(fetchEndpoint, requestOptions)

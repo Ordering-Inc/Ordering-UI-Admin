@@ -4,7 +4,6 @@ import { SearchBar } from '../../Shared'
 import { OpenCartsFilterGroup } from '../OpenCartsFilterGroup'
 import { Funnel, List as MenuIcon } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
-import { OpenCartsControls } from '../OpenCartsControls'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 
@@ -18,18 +17,14 @@ import {
 
 export const OpenCartsHeader = (props) => {
   const {
-    isDisableControl,
     handleChangeSearch,
     searchValue,
-    driverGroupList,
-    driversList,
     citiesList,
-    paymethodsList,
     businessesList,
     filterValues,
-    selectedOrderIds,
-    handleChangeFilterValues,
-    handleDeleteMultiOrders
+    // selectedCartIds,
+    // handleDeleteMultiOrders,
+    handleChangeFilterValues
   } = props
 
   const [, t] = useLanguage()
@@ -52,9 +47,7 @@ export const OpenCartsHeader = (props) => {
 
   return (
     <>
-      <OrderContentHeaderContainer
-        isDisableControl={isDisableControl}
-      >
+      <OrderContentHeaderContainer>
         <HeaderSection>
           {isCollapse && (
             <IconButton
@@ -67,12 +60,6 @@ export const OpenCartsHeader = (props) => {
           <HeaderTitle>{t('OPEN_CARTS', 'Open carts')}</HeaderTitle>
         </HeaderSection>
         <TopRightSection>
-          <OpenCartsControls
-            selectedOrderNumber={selectedOrderIds?.length}
-            filterValues={filterValues}
-            // handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-            handleDeleteMultiOrders={handleDeleteMultiOrders}
-          />
           <WrapperSearchAndFilter>
             <SearchBar
               isCustomLayout
@@ -95,9 +82,6 @@ export const OpenCartsHeader = (props) => {
       <OpenCartsFilterGroup
         open={filterModalOpen}
         handleCloseFilterModal={() => setFilterModalOpen(false)}
-        driverGroupList={driverGroupList}
-        driversList={driversList}
-        paymethodsList={paymethodsList}
         businessesList={businessesList}
         citiesList={citiesList}
         handleChangeFilterValues={handleChangeFilterValues}

@@ -32,18 +32,6 @@ export const OpenCartListing = (props) => {
     totalPages: null
   })
   /**
-   * Object to save driver group list
-   */
-  const [driverGroupList, setDriverGroupList] = useState({ groups: [], loading: false, error: null })
-  /**
-   * Object to save drivers
-   */
-  const [driversList, setDriversList] = useState({ drivers: [], loading: true, error: null })
-  /**
-   * Object to save paymethods
-   */
-  const [paymethodsList, setPaymethodsList] = useState({ paymethods: [], loading: true, error: null })
-  /**
    * Object to save businesses
    */
   const [businessesList, setBusinessesList] = useState({ businesses: [], loading: true, error: null })
@@ -53,31 +41,31 @@ export const OpenCartListing = (props) => {
   const [citiesList, setCitiesList] = useState([])
 
   /**
-   * Object to save selected order ids
+   * Object to save selected cart ids
    */
-  const [selectedOrderIds, setSelectedOrderIds] = useState([])
+  const [selectedCartIds, setSelectedCartIds] = useState([])
 
   /**
-   * Save ids of orders selected
-   * @param {string} orderId order id
+   * Save ids of carts selected
+   * @param {string} cartId cart id
    */
-  const handleSelectedOrderIds = (orderId) => {
-    let _ids = [...selectedOrderIds]
-    if (!_ids.includes(orderId)) {
-      _ids.push(orderId)
+  const handleSelectedCartIds = (cartId) => {
+    let _ids = [...selectedCartIds]
+    if (!_ids.includes(cartId)) {
+      _ids.push(cartId)
     } else {
-      _ids = _ids.filter((_id) => _id !== orderId)
+      _ids = _ids.filter((_id) => _id !== cartId)
     }
-    setSelectedOrderIds(_ids)
+    setSelectedCartIds(_ids)
   }
   /**
-   * Remove id of order updated or delected
-   * @param {string} orderId order id
+   * Remove id of cart updated or delected
+   * @param {string} cartId cart id
    */
-  const handleRemoveSelectedOrderId = (orderId) => {
-    let _ids = [...selectedOrderIds]
-    _ids = _ids.filter((_id) => _id !== orderId)
-    setSelectedOrderIds(_ids)
+  const handleRemoveSelectedCartId = (cartId) => {
+    let _ids = [...selectedCartIds]
+    _ids = _ids.filter((_id) => _id !== cartId)
+    setSelectedCartIds(_ids)
   }
 
   /**
@@ -96,9 +84,9 @@ export const OpenCartListing = (props) => {
   }
 
   /**
-   * Delete orders for orders selected
+   * Delete carts for carts selected
    */
-  const handleDeleteMultiOrders = () => {
+  const handleDeleteMultiCarts = () => {
     setStartMulitOrderDelete(true)
   }
 
@@ -123,12 +111,12 @@ export const OpenCartListing = (props) => {
 
       if (!content.error) {
         setDeletedCartId(id)
-        const _ordersIds = [...selectedOrderIds]
-        _ordersIds.shift()
-        if (_ordersIds.length === 0) {
+        const _cartIds = [...setSelectedCartIds]
+        _cartIds.shift()
+        if (_cartIds.length === 0) {
           setStartMulitOrderDelete(false)
         }
-        setSelectedOrderIds(_ordersIds)
+        setSelectedCartIds(_cartIds)
       }
       setActionStatus({
         loading: false,
@@ -154,27 +142,11 @@ export const OpenCartListing = (props) => {
       const content = await response.json()
       if (!content.error) {
         setCitiesList(content.result.cities)
-        setDriverGroupList({
-          ...driverGroupList,
-          loading: false,
-          groups: content.result.driver_groups
-        })
-        setPaymethodsList({
-          ...paymethodsList,
-          loading: false,
-          paymethods: content.result.paymethods
-        })
         setBusinessesList({
           ...businessesList,
           loading: false,
           businesses: content.result.businesses
         })
-        if (user?.level !== 0 && user?.level !== 2) {
-          setDriversList({
-            ...driversList,
-            drivers: content.result.drivers
-          })
-        }
       } else {
         setActionStatus({ loading: false, error: content?.result })
       }
@@ -183,6 +155,10 @@ export const OpenCartListing = (props) => {
     }
   }
 
+  /**
+   * Method to get cartlist from API
+   * @param {number} page page number
+   */
   const getCartList = async (pageSize, page) => {
     try {
       setCartList({ ...cartList, loading: true })
@@ -379,12 +355,12 @@ export const OpenCartListing = (props) => {
   }
 
   /**
-  * Listening mulit orders delete action start
+  * Listening mulit carts delete action start
   */
   useEffect(() => {
-    if (!startMulitOrderDelete || selectedOrderIds.length === 0) return
-    deleteCart(selectedOrderIds[0])
-  }, [selectedOrderIds, startMulitOrderDelete])
+    if (!startMulitOrderDelete || setSelectedCartIds.length === 0) return
+    deleteCart(setSelectedCartIds[0])
+  }, [setSelectedCartIds, startMulitOrderDelete])
 
   useEffect(() => {
     if (loading) return
@@ -412,21 +388,18 @@ export const OpenCartListing = (props) => {
         <UIComponent
           {...props}
           searchValue={searchValue}
-          driverGroupList={driverGroupList}
-          driversList={driversList}
-          paymethodsList={paymethodsList}
           businessesList={businessesList}
           citiesList={citiesList}
           filterValues={filterValues}
-          selectedOrderIds={selectedOrderIds}
+          selectedCartIds={selectedCartIds}
           deletedCartId={deletedCartId}
           startMulitOrderDelete={startMulitOrderDelete}
-          handleSelectedOrderIds={handleSelectedOrderIds}
-          handleRemoveSelectedOrderId={handleRemoveSelectedOrderId}
+          handleSelectedCartIds={handleSelectedCartIds}
+          handleRemoveSelectedCartId={handleRemoveSelectedCartId}
           handleChangeSearch={handleChangeSearch}
           handleChangeFilterValues={handleChangeFilterValues}
-          handleDeleteMultiOrders={handleDeleteMultiOrders}
-          setSelectedOrderIds={setSelectedOrderIds}
+          handleDeleteMultiCarts={handleDeleteMultiCarts}
+          setSelectedCartIds={setSelectedCartIds}
           getCartList={getCartList}
           pagination={pagination}
           cartList={cartList}
@@ -442,22 +415,22 @@ OpenCartListing.propTypes = {
    */
   UIComponent: PropTypes.elementType,
   /**
-   * Components types before my orders
+   * Components types before my carts
    * Array of type components, the parent props will pass to these components
    */
   beforeComponents: PropTypes.arrayOf(PropTypes.elementType),
   /**
-   * Components types after my orders
+   * Components types after my carts
    * Array of type components, the parent props will pass to these components
    */
   afterComponents: PropTypes.arrayOf(PropTypes.elementType),
   /**
-   * Elements before my orders
+   * Elements before my carts
    * Array of HTML/Components elements, these components will not get the parent props
    */
   beforeElements: PropTypes.arrayOf(PropTypes.element),
   /**
-   * Elements after my orders
+   * Elements after my carts
    * Array of HTML/Components elements, these components will not get the parent props
    */
   afterElements: PropTypes.arrayOf(PropTypes.element)

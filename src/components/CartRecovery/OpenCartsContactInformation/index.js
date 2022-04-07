@@ -41,9 +41,9 @@ export const OpenCartsContactInformation = (props) => {
                 <InfoContent>
                   <div>
                     <p className='name'>{cart?.business?.name}</p>
-                    {cart?.business?.phone && (
+                    {(cart?.business?.phone || cart?.business?.cellphone) && (
                       <IconButton
-                        onClick={() => window.open(`tel:${cart.business.phone}`)}
+                        onClick={() => window.open(`tel:${cart?.business?.phone || cart?.business?.cellphone}`)}
                         className='btn-phone'
                       >
                         <Telephone />
@@ -56,7 +56,7 @@ export const OpenCartsContactInformation = (props) => {
             </ContextAwareToggle>
             <Accordion.Collapse eventKey='0'>
               <CutsomerDetail>
-                <p>{cart?.business?.phone}</p>
+                <p>{cart?.business?.phone || cart?.business?.cellphone}</p>
                 <p>{cart?.business?.email}</p>
                 <p>{cart?.business?.address}</p>
               </CutsomerDetail>
@@ -75,9 +75,9 @@ export const OpenCartsContactInformation = (props) => {
             <InfoContent>
               <div>
                 <p className='name'>{cart?.user?.name} {cart?.user?.middle_name} {cart?.user?.lastname} {cart?.user?.second_lastname}</p>
-                {cart?.user?.cellphone && (
+                {(cart?.user?.cellphone || cart?.user?.phone) && (
                   <IconButton
-                    onClick={() => window.open(`tel:${cart?.user?.cellphone}`)}
+                    onClick={() => window.open(`tel:${cart?.user?.cellphone || cart?.user?.phone}`)}
                     className='btn-phone'
                   >
                     <Telephone />
@@ -90,7 +90,7 @@ export const OpenCartsContactInformation = (props) => {
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='1'>
           <CutsomerDetail>
-            {cart?.user?.cellphone && <p>{cart?.user?.cellphone}</p>}
+            {(cart?.user?.cellphone || cart?.user?.phone) && <p>{cart?.user?.cellphone || cart?.user?.phone}</p>}
             {cart?.user?.email && <p>{cart?.user?.email}</p>}
             {cart?.user?.address && <p>{cart?.user?.address}</p>}
           </CutsomerDetail>

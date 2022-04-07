@@ -45,9 +45,9 @@ const OpenCartsDetailUI = (props) => {
   const toggleMainContent = () => {
     if (isMenuOpen) {
       if (width <= 500) {
-        document.getElementById('orderDetails').style.width = '100vw'
+        document.getElementById('cartDetails').style.width = '100vw'
       } else {
-        document.getElementById('orderDetails').style.width = '500px'
+        document.getElementById('cartDetails').style.width = '500px'
       }
     }
   }
@@ -76,13 +76,17 @@ const OpenCartsDetailUI = (props) => {
   return (
     <Container
       isSelectedOrders={isSelectedOrders}
-      id='orderDetails'
+      id='cartDetails'
     >
       {cartState?.loading ? (
         <SkeletonWrapper>
-          <Skeleton height={75} count={3} style={{ marginBottom: '10px' }} />
-          <Skeleton height={200} style={{ marginBottom: '10px' }} />
-          <Skeleton height={50} style={{ marginBottom: '10px' }} />
+          <Skeleton height={35} style={{ marginBottom: '10px' }} />
+          <Skeleton height={20} width={200} style={{ marginBottom: '10px' }} />
+          <Skeleton height={75} count={2} style={{ marginBottom: '15px' }} />
+          <Skeleton height={25} width={150} style={{ marginBottom: '10px' }} />
+          <Skeleton height={150} style={{ marginBottom: '10px' }} />
+          <Skeleton height={15} count={5} style={{ marginBottom: '5px' }} />
+          <Skeleton height={30} style={{ marginTop: '10px' }} />
         </SkeletonWrapper>
       ) : (
         <>

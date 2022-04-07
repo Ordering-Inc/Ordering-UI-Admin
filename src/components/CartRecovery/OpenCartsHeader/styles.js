@@ -10,12 +10,6 @@ export const OrderContentHeaderContainer = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
-
-  @media (max-width: 993px) {
-    ${({ isDisableControl }) => !isDisableControl && css`
-      flex-direction: column;
-    `}
-  }
 `
 export const HeaderSection = styled.div`
   display: flex;

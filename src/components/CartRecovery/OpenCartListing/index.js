@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession } from 'ordering-components-admin'
 import { OpenCartsHeader } from '../OpenCartsHeader'
 import { OpenCartListing as OpenCartListingController } from './naked'
-import { OpenCartsList } from '../OpenCartsList'
+import { OpenCartsDetail } from '../OpenCartsDetail'
+import { OpenCartList } from '../OpenCartList'
 import {
   OpenCartsContainer,
   OpenCartsContent,
@@ -11,86 +11,76 @@ import {
   WrapItemView,
   WrapperIndicator
 } from './styles'
-import { OpenCartsDetail } from '../OpenCartsDetail'
 
 const OpenCartListingUI = (props) => {
   const {
-    isSelectedOrders,
     searchValue,
-    driverGroupList,
-    driversList,
-    paymethodsList,
     businessesList,
     citiesList,
     filterValues,
-    // deletedCartId,
     startMulitOrderStatusChange,
     startMulitOrderDelete,
     handleChangeSearch,
     handleChangeFilterValues,
     handleDeleteMultiOrders,
-    handleSelectedOrderIds,
-    selectedOrderIds,
-    setSelectedOrderIds,
+    handleSelectedCartIds,
+    selectedCartIds,
+    setSelectedCartIds,
     cartList,
     pagination,
     getCartList,
     onCartRedirect
   } = props
-  const [{ user }] = useSession()
 
   const query = new URLSearchParams(useLocation().search)
-  const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
+  const [isOpenCartDetail, setIsOpenCartDetail] = useState(false)
   const [cartDetailId, setCartDetailId] = useState(null)
   const [detailsCart, setDetailsCart] = useState(null)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
 
   const handleBackRedirect = () => {
-    setIsOpenOrderDetail(false)
+    setIsOpenCartDetail(false)
     setDetailsCart(null)
     setCartDetailId(null)
     onCartRedirect()
   }
 
-  const handleOpenOrderDetail = (cart) => {
+  const handleOpenCartDetail = (cart) => {
     setDetailsCart(cart)
     setCartDetailId(cart.id)
-    setIsOpenOrderDetail(true)
+    setIsOpenCartDetail(true)
     onCartRedirect(cart?.id)
   }
 
   useEffect(() => {
     if (startMulitOrderStatusChange || startMulitOrderDelete) {
-      setTotalSelectedOrder(selectedOrderIds.length)
+      setTotalSelectedOrder(selectedCartIds.length)
     }
   }, [startMulitOrderStatusChange, startMulitOrderDelete])
 
   useEffect(() => {
-    if (selectedOrderIds.length === 0) {
+    if (selectedCartIds.length === 0) {
       setTimeout(() => {
         setTotalSelectedOrder(0)
       }, 500)
     }
-  }, [selectedOrderIds])
+  }, [selectedCartIds])
 
   useEffect(() => {
-    if (isSelectedOrders) return
     const id = query.get('id')
     if (id === null || (!cartList?.loading && cartList?.carts.length === 0)) {
-      setIsOpenOrderDetail(false)
+      setIsOpenCartDetail(false)
       return
     }
     if (!cartList?.loading) {
-      if (user?.level === 5) {
-        handleBackRedirect()
+      const found = cartList?.carts.find(_cart => _cart.id === parseInt(id))
+      setCartDetailId(parseInt(id))
+      if (found) {
+        setDetailsCart(found)
+        setIsOpenCartDetail(true)
       } else {
-        const found = cartList?.carts.find(_cart => _cart.id === parseInt(id))
-        setCartDetailId(id)
-        if (found) {
-          setDetailsCart(found)
-          setIsOpenOrderDetail(true)
-        }
+        handleBackRedirect()
       }
     }
   }, [cartList])
@@ -99,43 +89,35 @@ const OpenCartListingUI = (props) => {
     <>
       <OpenCartsContainer>
         <OpenCartsHeader
-          isDisableTitle={isSelectedOrders}
-          isDisableControl={isSelectedOrders}
           searchValue={searchValue}
-          driverGroupList={driverGroupList}
-          driversList={driversList}
           citiesList={citiesList}
-          paymethodsList={paymethodsList}
           businessesList={businessesList}
           filterValues={filterValues}
           handleChangeSearch={handleChangeSearch}
           handleChangeFilterValues={handleChangeFilterValues}
-          selectedOrderIds={selectedOrderIds}
+          selectedCartIds={selectedCartIds}
           handleDeleteMultiOrders={handleDeleteMultiOrders}
         />
         <OpenCartsContent>
           <OpenCartsInnerContent className='order-content'>
             <WrapItemView>
-              <OpenCartsList
-                setSelectedOrderIds={setSelectedOrderIds}
-                isSelectedOrders={isSelectedOrders}
+              <OpenCartList
+                setSelectedCartIds={setSelectedCartIds}
                 cartList={cartList}
-                driversList={driversList}
                 pagination={pagination}
-                selectedOrderIds={selectedOrderIds}
+                selectedCartIds={selectedCartIds}
                 cartDetailId={cartDetailId}
                 getCartList={getCartList}
-                handleSelectedOrderIds={handleSelectedOrderIds}
-                handleOpenOrderDetail={handleOpenOrderDetail}
+                handleSelectedCartIds={handleSelectedCartIds}
+                handleOpenCartDetail={handleOpenCartDetail}
               />
             </WrapItemView>
           </OpenCartsInnerContent>
         </OpenCartsContent>
       </OpenCartsContainer>
-      {isOpenOrderDetail && (
+      {isOpenCartDetail && (
         <OpenCartsDetail
-          isSelectedOrders={isSelectedOrders}
-          open={isOpenOrderDetail}
+          open={isOpenCartDetail}
           cart={detailsCart}
           cartId={cartDetailId}
           onClose={() => handleBackRedirect()}
@@ -143,7 +125,7 @@ const OpenCartListingUI = (props) => {
       )}
       {totalSelectedOrder > 0 && (
         <WrapperIndicator>
-          {selectedOrderIds.length}/{totalSelectedOrder}
+          {setSelectedCartIds.length}/{totalSelectedOrder}
         </WrapperIndicator>
       )}
     </>

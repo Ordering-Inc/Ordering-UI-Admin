@@ -70,6 +70,8 @@ export const InfoContent = styled.div`
     .btn-phone {
       > svg {
         font-size: 16px !important;
+        width: 16px;
+        height: 16px;
       }
     }
 
@@ -88,6 +90,7 @@ export const InfoContent = styled.div`
     }
 
     > button {
+      height: 25px;
       ${props => props.theme?.rtl ? css`
         margin-right: 8px;
       ` : css`

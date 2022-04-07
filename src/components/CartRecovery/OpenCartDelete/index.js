@@ -15,7 +15,7 @@ const OpenCartDeleteUI = (props) => {
     checkPasswordStatus,
     handleChangePassword,
     getCheckPassword,
-    handleDeleteMultiOrders
+    handleDeleteMultiCarts
   } = props
   const { width } = useWindowSize()
   const [, t] = useLanguage()
@@ -40,7 +40,7 @@ const OpenCartDeleteUI = (props) => {
     if (checkPasswordStatus.result === 'OK') {
       setCheckPasswordModalOpen(false)
       setPassword('')
-      handleDeleteMultiOrders()
+      handleDeleteMultiCarts()
     }
   }, [checkPasswordStatus])
 
