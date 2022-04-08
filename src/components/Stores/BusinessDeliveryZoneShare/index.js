@@ -1,6 +1,5 @@
 import React from 'react'
-// import { BusinessDeliveryZoneShare as BusinessDeliveryZoneShareController } from 'ordering-components-admin'
-import { BusinessDeliveryZoneShare as BusinessDeliveryZoneShareController } from './nest'
+import { BusinessDeliveryZoneShare as BusinessDeliveryZoneShareController } from 'ordering-components-admin'
 import { SelectBusinesses } from '../../Shared'
 
 export const BusinessDeliveryZoneShareUI = (props) => {
