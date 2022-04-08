@@ -5,7 +5,6 @@ import { CitySelector } from '../CitySelector'
 import { DateTypeSelector } from '../DateTypeSelector'
 import { Modal } from '../../Shared'
 import { Button, Input } from '../../../styles'
-// import { OpenCartFilter as OpenCartFilterController } from './naked'
 
 import {
   FilterGroupListContainer,
