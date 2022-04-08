@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { RecoveryNotificationList as RecoveryNotificationListController } from './naked'
+import { useLanguage, RecoveryNotificationList as RecoveryNotificationListController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { Modal, Alert } from '../../Shared'

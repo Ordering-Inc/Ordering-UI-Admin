@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
+import { RecoveryActionListing as RecoveryActionListingController } from 'ordering-components-admin'
 import { RecoveryActionHeader } from '../RecoveryActionHeader'
 import { RecoveryActionList } from '../RecoveryActionList'
 import { SideBar } from '../../Shared'
-import { RecoveryActionListing as RecoveryActionListingController } from './naked'
+import { RecoveryActionDetail } from '../RecoveryActionDetail'
 
 import {
   RecoveryActionsContainer
 } from './styles'
-import { RecoveryActionDetail } from '../RecoveryActionDetail'
 
 const RecoveryActionListingUI = (props) => {
   const [isOpenDetail, setIsOpenDetail] = useState(false)
@@ -33,6 +33,7 @@ const RecoveryActionListingUI = (props) => {
         <RecoveryActionList
           {...props}
           handleOpenDetail={handleOpenDetail}
+          selectedAction={selectedAction}
         />
       </RecoveryActionsContainer>
       {isOpenDetail && (

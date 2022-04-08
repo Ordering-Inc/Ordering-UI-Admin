@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, SingleRecoveryNotification as SingleRecoveryNotificationController } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { Select } from '../../../styles/Select'
 import { Alert, Confirm } from '../../Shared'
-import { SingleRecoveryNotification as SingleRecoveryNotificationController } from './naked'
 
 import {
   Container,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes, { string } from 'prop-types'
+import PropTypes from 'prop-types'
 // import { useSession } from '../../contexts/SessionContext'
 // import { useApi } from '../../contexts/ApiContext'
 // import { useWebsocket } from '../../contexts/WebsocketContext'
@@ -83,10 +83,6 @@ OpenCartsDetail.propTypes = {
    * UI Component, this must be containt all graphic elements and use parent props
    */
   UIComponent: PropTypes.elementType,
-  /**
-   * Array of drivers props to fetch
-   */
-  propsToFetch: PropTypes.arrayOf(string),
   /**
    * This must be contains cartId to fetch
    */

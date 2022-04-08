@@ -22,7 +22,8 @@ export const RecoveryActionList = (props) => {
     setPaginationProps,
     getRecoveryList,
     handleOpenDetail,
-    handleUpdateAction
+    handleUpdateAction,
+    selectedAction
   } = props
 
   const [, t] = useLanguage()
@@ -125,6 +126,7 @@ export const RecoveryActionList = (props) => {
             <Tbody
               key={i}
               onClick={(e) => handleClickRecoverAction(e, action)}
+              active={selectedAction?.id === action.id}
             >
               <tr>
                 <td className='actionInfo'>

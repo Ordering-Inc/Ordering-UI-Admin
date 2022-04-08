@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
-import { OpenCartsDetail as OpenCartsDetailController } from './naked'
+import { useLanguage, useUtils, OpenCartsDetail as OpenCartsDetailController } from 'ordering-components-admin'
+// import { OpenCartsDetail as OpenCartsDetailController } from './naked'
 import { ProductItemAccordion } from '../../Orders/ProductItemAccordion'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { OpenCartBill } from '../OpenCartBill'

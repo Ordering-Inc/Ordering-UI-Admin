@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { OpenCartsHeader } from '../OpenCartsHeader'
-import { OpenCartListing as OpenCartListingController } from './naked'
+import { OpenCartListing as OpenCartListingController } from 'ordering-components-admin'
 import { OpenCartsDetail } from '../OpenCartsDetail'
 import { OpenCartList } from '../OpenCartList'
 import {
