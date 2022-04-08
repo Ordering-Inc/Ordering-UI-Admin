@@ -41,6 +41,10 @@ var CustomerCashWalletEvents = function CustomerCashWalletEvents(props) {
   var cashEventsState = props.cashEventsState,
       parseEvent = props.parseEvent;
 
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
@@ -54,6 +58,8 @@ var CustomerCashWalletEvents = function CustomerCashWalletEvents(props) {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null));
   }) : cashEventsState.events.map(function (event) {
+    var _event$wallet_event, _event$wallet_event2;
+
     return /*#__PURE__*/_react.default.createElement(_styles.HistoryItem, {
       key: event.id
     }, /*#__PURE__*/_react.default.createElement(_styles.TransactionHeader, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CircleFill, null), /*#__PURE__*/_react.default.createElement("span", {
@@ -66,7 +72,7 @@ var CustomerCashWalletEvents = function CustomerCashWalletEvents(props) {
       dangerouslySetInnerHTML: {
         __html: parseEvent(event)
       }
-    }), /*#__PURE__*/_react.default.createElement(_styles.TransactionDescription, null, event.description));
+    }), /*#__PURE__*/_react.default.createElement(_styles.TransactionDescription, null, event.description), (event === null || event === void 0 ? void 0 : (_event$wallet_event = event.wallet_event) === null || _event$wallet_event === void 0 ? void 0 : _event$wallet_event.order_id) && /*#__PURE__*/_react.default.createElement(_styles.TransactionDescription, null, /*#__PURE__*/_react.default.createElement("strong", null, t('INVOICE_ORDER_NO', 'Order No')), " ", event === null || event === void 0 ? void 0 : (_event$wallet_event2 = event.wallet_event) === null || _event$wallet_event2 === void 0 ? void 0 : _event$wallet_event2.order_id), /*#__PURE__*/_react.default.createElement(_styles.TransactionCode, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("strong", null, t('CODE', 'Code'), ":"), " ", event === null || event === void 0 ? void 0 : event.code)));
   })));
 };
 
