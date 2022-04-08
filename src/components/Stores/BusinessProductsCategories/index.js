@@ -52,7 +52,7 @@ export const BusinessProductsCategories = (props) => {
             )
           }
           {businessState?.business?.categories?.length > 0 && (
-            businessState?.business.categories.sort((a, b) => a.rank - b.rank).map(category => (
+            businessState?.business.categories.sort((a, b) => a.rank - b.rank).map((category, i) => (
               <SingleBusinessSubCateogries
                 {...props}
                 index={0}
@@ -62,7 +62,8 @@ export const BusinessProductsCategories = (props) => {
                 handleChangeCategory={handleChangeCategory}
                 business={businessState?.business}
                 dataSelected={dataSelected}
-                onDataSelected={setDataSelected}
+                setDataSelected={setDataSelected}
+                isLastCategory={businessState?.business?.categories?.length - 1 === i}
               />
             ))
           )}

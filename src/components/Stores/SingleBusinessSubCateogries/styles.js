@@ -94,10 +94,20 @@ export const AccordionItem = styled.div`
       }
     }
   }
-
+  
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.lightPrimary} !important;
     border: 1px solid ${props => props.theme.colors.primary};
+  `}
+  ${({ isAccept }) => isAccept && css`
+    border-radius: unset;
+    border: 1px solid ${props => props.theme.colors.backgroundPage};
+    border-top: 1px solid ${props => props.theme.colors.primary};
+  `}
+  ${({ isBorderBottom }) => isBorderBottom && css`
+    border-radius: unset;
+    border: 1px solid ${props => props.theme.colors.backgroundPage};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
   `}
 `
 
