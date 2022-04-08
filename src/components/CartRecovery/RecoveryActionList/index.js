@@ -126,7 +126,7 @@ export const RecoveryActionList = (props) => {
             <Tbody
               key={i}
               onClick={(e) => handleClickRecoverAction(e, action)}
-              active={selectedAction?.id === action.id}
+              className={`${selectedAction?.id === action.id ? 'active' : ''}`}
             >
               <tr>
                 <td className='actionInfo'>
