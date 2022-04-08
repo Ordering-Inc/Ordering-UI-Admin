@@ -151,12 +151,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       openSidebar = _useState14[0],
       setOpenSidebar = _useState14[1];
 
-  var _useState15 = (0, _react.useState)(false),
-      _useState16 = _slicedToArray(_useState15, 2),
-      openColumnsPopover = _useState16[0],
-      setOpenColumnsPopover = _useState16[1];
-
-  var _useState17 = (0, _react.useState)({
+  var _useState15 = (0, _react.useState)({
     id: true,
     name: true,
     description: true,
@@ -165,9 +160,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     inventoried: true,
     quantity: true
   }),
-      _useState18 = _slicedToArray(_useState17, 2),
-      allowSpreadColumns = _useState18[0],
-      setAllowSpreadColumns = _useState18[1];
+      _useState16 = _slicedToArray(_useState15, 2),
+      allowSpreadColumns = _useState16[0],
+      setAllowSpreadColumns = _useState16[1];
 
   var spreadColumnOptions = [{
     value: 'cost_price',
@@ -423,10 +418,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState19 = (0, _react.useState)(false),
-      _useState20 = _slicedToArray(_useState19, 2),
-      isInitialRender = _useState20[0],
-      setIsInitialRender = _useState20[1];
+  var _useState17 = (0, _react.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      isInitialRender = _useState18[0],
+      setIsInitialRender = _useState18[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,
