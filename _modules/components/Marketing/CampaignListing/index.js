@@ -90,7 +90,9 @@ exports.CampaignListingUI = CampaignListingUI;
 
 var CampaignListing = function CampaignListing(props) {
   var campaignListingProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: CampaignListingUI
+    UIComponent: CampaignListingUI,
+    isSearchByContactType: true,
+    isSearchByName: true
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.CampaignListing, campaignListingProps);
