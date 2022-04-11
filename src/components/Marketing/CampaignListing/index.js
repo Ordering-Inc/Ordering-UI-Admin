@@ -56,7 +56,9 @@ export const CampaignListingUI = (props) => {
 export const CampaignListing = (props) => {
   const campaignListingProps = {
     ...props,
-    UIComponent: CampaignListingUI
+    UIComponent: CampaignListingUI,
+    isSearchByContactType: true,
+    isSearchByName: true
   }
   return <CampaignListingController {...campaignListingProps} />
 }
