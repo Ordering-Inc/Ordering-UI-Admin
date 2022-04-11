@@ -151,7 +151,7 @@ export const ProductDetatilsInformation = (props) => {
       return
     }
     if (product?.price) {
-      setMinimumRegualrPrice(product?.price + 0.01)
+      setMinimumRegualrPrice(parseFloat(product?.price) + 0.01)
     }
   }, [product?.price, formState?.changes?.price])
 
