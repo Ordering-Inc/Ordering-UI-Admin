@@ -86,7 +86,7 @@ export const BusinessDeliveryZoneList = (props) => {
         </DeliveryZonesTable>
 
         <AddDeliveryZoneButton
-          onClick={() => handleOpenZone(null)}
+          onClick={(e) => handleOpenZone(e, null)}
         >
           {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
         </AddDeliveryZoneButton>
