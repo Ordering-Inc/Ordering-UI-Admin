@@ -38,6 +38,7 @@ export const ListenPageChanges = ({ children }) => {
     drivers_companies: '/delivery/drivers-companies',
     drivers_groups: '/delivery/drivers-groups',
     enterprise_promotions: '/marketing/promotions-enterprise',
+    campaign: '/marketing/campaign',
     ordering_products: '/ordering-products',
     support: '/support',
     rewards_programs: '/loyalty/rewards-programs'
