@@ -7879,9 +7879,9 @@ optionator@^0.8.3:
   dependencies:
     "@babel/runtime" "^7.10.4"
 
-"ordering-components-admin@github:Ordering-Inc/ordering-components-admin#campaign":
+"ordering-components-admin@github:Ordering-Inc/ordering-components-admin#sales-marketing":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/f520b9cd95dd8ecc46302e20f6ef980c96b75f92"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/607c5cd10ad29308c202950231945b56f6024808"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -8783,6 +8783,11 @@ react-loading-skeleton@^2.1.1:
   integrity sha512-HH37uj9aobrUJSqFglHqO9KQt5zGQe+Svutv8LIq7Iq6gpJqCwIzJOsEVfkQy7ReirbI2uLhCtKloBGQIDP0BQ==
   dependencies:
     "@emotion/core" "^10.0.22"
+
+react-numeric-input@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-numeric-input/-/react-numeric-input-2.2.3.tgz#4bf5918c3eafed851a80df1eb992d941002bb552"
+  integrity sha1-S/WRjD6v7YUagN8euZLZQQArtVI=
 
 react-onclickoutside@^6.10.0:
   version "6.12.1"

@@ -77,7 +77,7 @@ export const CampaignList = (props) => {
 
   const checkColor = (status) => {
     const index = status.toLocaleLowerCase()
-    if (index === 'sent') return '#00D27A'
+    if (index === 'ended') return '#00D27A'
     else if (index === 'scheduled') return '#FFC700'
     else if (index === 'draft') return '#E9ECEF'
     else return '#E9ECEF'
@@ -109,7 +109,7 @@ export const CampaignList = (props) => {
   return (
     <>
       <Container>
-        <Table>
+        <Table isRelative={campaignList?.campaigns?.length > 5}>
           <thead>
             <tr>
               {allowColumns?.campaign && (
