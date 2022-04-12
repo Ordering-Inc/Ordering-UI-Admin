@@ -252,7 +252,7 @@ var InvoiceBusinessPdf = function InvoiceBusinessPdf(props) {
     style: styles.table.thead.trFirst
   }, /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th,
-    colSpan: "5"
+    colspan: "5"
   }, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement("tr", {
     style: styles.table.thead.trLast
   }, /*#__PURE__*/_react.default.createElement("th", {
@@ -287,14 +287,14 @@ var InvoiceBusinessPdf = function InvoiceBusinessPdf(props) {
     style: styles.table.tfoot.tr
   }, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td,
-    colSpan: "4"
+    colspan: "4"
   }, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td
   }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in11 = exportInvoiceList.invoice) === null || _exportInvoiceList$in11 === void 0 ? void 0 : _exportInvoiceList$in11.orders_subtotal))), /*#__PURE__*/_react.default.createElement("tr", {
     style: styles.table.tfoot.tr
   }, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td,
-    colSpan: "4"
+    colspan: "4"
   }, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td
   }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in12 = exportInvoiceList.invoice) === null || _exportInvoiceList$in12 === void 0 ? void 0 : _exportInvoiceList$in12.orders_total))))), /*#__PURE__*/_react.default.createElement("table", {
@@ -303,7 +303,7 @@ var InvoiceBusinessPdf = function InvoiceBusinessPdf(props) {
     style: styles.table.thead.trLast
   }, /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th,
-    colSpan: "2"
+    colspan: "2"
   }, t('TOTALS', 'Totals')))), /*#__PURE__*/_react.default.createElement("tbody", null, (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in13 = exportInvoiceList.invoice) === null || _exportInvoiceList$in13 === void 0 ? void 0 : _exportInvoiceList$in13.type) === 'payout' && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.td
   }, t('ORDERS', 'Orders'), " (", t('SUBTOTAL', 'Subtotal'), ")"), /*#__PURE__*/_react.default.createElement("td", {

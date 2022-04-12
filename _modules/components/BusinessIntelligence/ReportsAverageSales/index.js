@@ -177,7 +177,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (th, j) {
       return /*#__PURE__*/_react.default.createElement("th", {
         key: j,
-        colSpan: th.colspan
+        colspan: th.colspan
       }, th.value);
     }));
   })), reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.body) === null || _reportData$content6$ === void 0 ? void 0 : _reportData$content6$.rows.map(function (tbody, i) {
@@ -186,7 +186,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     }, /*#__PURE__*/_react.default.createElement("tr", null, tbody.map(function (td, j) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
-        colSpan: td.colspan
+        colspan: td.colspan
       }, td.value_unit === 'currency' ? parsePrice(td.value) : td.value);
     })));
   }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.footer) === null || _reportData$content7$ === void 0 ? void 0 : _reportData$content7$.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.footer) === null || _reportData$content8$ === void 0 ? void 0 : _reportData$content8$.rows.map(function (tr, i) {
@@ -195,7 +195,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (td, j) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
-        colSpan: td.colspan
+        colspan: td.colspan
       }, td.value);
     }));
   }))) : /*#__PURE__*/_react.default.createElement(_styles2.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
@@ -219,7 +219,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (th, j) {
       return /*#__PURE__*/_react.default.createElement("th", {
         key: j,
-        colSpan: th.colspan
+        colspan: th.colspan
       }, th.value);
     }));
   })), reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content7 = reportData1.content) === null || _reportData1$content7 === void 0 ? void 0 : (_reportData1$content8 = _reportData1$content7.body) === null || _reportData1$content8 === void 0 ? void 0 : _reportData1$content8.rows.map(function (tbody, i) {
@@ -228,7 +228,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     }, /*#__PURE__*/_react.default.createElement("tr", null, tbody.map(function (td, j) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
-        colSpan: td.colspan
+        colspan: td.colspan
       }, td.value_unit === 'currency' ? parsePrice(td.value) : td.value);
     })));
   }), (reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content9 = reportData1.content) === null || _reportData1$content9 === void 0 ? void 0 : (_reportData1$content10 = _reportData1$content9.footer) === null || _reportData1$content10 === void 0 ? void 0 : _reportData1$content10.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content11 = reportData1.content) === null || _reportData1$content11 === void 0 ? void 0 : (_reportData1$content12 = _reportData1$content11.footer) === null || _reportData1$content12 === void 0 ? void 0 : _reportData1$content12.rows.map(function (tr, i) {
@@ -237,7 +237,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (td, j) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: j,
-        colSpan: td.colspan
+        colspan: td.colspan
       }, td.value);
     }));
   }))) : /*#__PURE__*/_react.default.createElement(_styles2.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {

@@ -105,9 +105,9 @@ var MessagesUI = function MessagesUI(props) {
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
       setValue = _useForm.setValue,
-      errors = _useForm.errors;
+      errors = _useForm.errors,
+      control = _useForm.control;
 
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
@@ -121,6 +121,7 @@ var MessagesUI = function MessagesUI(props) {
       optimizeImage = _useUtils2$.optimizeImage;
 
   var buttonRef = (0, _react.useRef)(null);
+  var messageInputRef = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -195,19 +196,15 @@ var MessagesUI = function MessagesUI(props) {
     var quickMsg = message ? "".concat(message, " ").concat(msg) : msg;
     setValue('message', quickMsg);
     setMessage(quickMsg);
-    var messageInput = document.getElementById('message');
-
-    if (messageInput) {
-      messageInput.scrollLeft = messageInput.scrollWidth;
-    }
   };
 
   (0, _react.useEffect)(function () {
-    var msgElement = document.getElementById('message');
+    var msgElement = messageInputRef === null || messageInputRef === void 0 ? void 0 : messageInputRef.current;
 
     if (msgElement) {
-      msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length;
       msgElement.focus();
+      msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length;
+      msgElement.scrollLeft = msgElement.scrollWidth;
     }
   }, [message]);
   (0, _react.useEffect)(function () {
@@ -390,10 +387,11 @@ var MessagesUI = function MessagesUI(props) {
   };
 
   var clearInputs = function clearInputs() {
-    var input = document.getElementById('message');
+    var input = messageInputRef === null || messageInputRef === void 0 ? void 0 : messageInputRef.current;
 
     if (input) {
       input.value = '';
+      setValue('message', '');
     }
 
     removeImage();
@@ -714,17 +712,31 @@ var MessagesUI = function MessagesUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.Send, {
     onSubmit: handleSubmit(onSubmit),
     noValidate: true
-  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSendInput, null, /*#__PURE__*/_react.default.createElement(_styles2.Input, {
-    placeholder: t('WRITE_A_MESSAGE', 'Write a message...'),
-    onChange: onChangeMessage,
-    onFocus: unreadMessageControl,
+  }, /*#__PURE__*/_react.default.createElement(_styles.WrapperSendInput, null, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "message",
-    id: "message",
-    ref: register({
+    control: control,
+    render: function render(_ref) {
+      var _onChange = _ref.onChange,
+          value = _ref.value;
+      return /*#__PURE__*/_react.default.createElement(_styles2.Input, {
+        placeholder: t('WRITE_A_MESSAGE', 'Write a message...'),
+        value: value,
+        onChange: function onChange(e) {
+          _onChange(e.target.value);
+
+          onChangeMessage(e);
+        },
+        onFocus: unreadMessageControl,
+        name: "message",
+        ref: messageInputRef,
+        autoComplete: "off",
+        readOnly: isChatDisabled
+      });
+    },
+    rules: {
       required: !image
-    }),
-    autoComplete: "off",
-    readOnly: isChatDisabled
+    },
+    defaultValue: ""
   }), !image && /*#__PURE__*/_react.default.createElement(_styles.SendImage, {
     htmlFor: "chat_image"
   }, /*#__PURE__*/_react.default.createElement("input", {

@@ -11,7 +11,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Layout = function Layout(props) {
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "d-flex w-100"
+    className: "d-flex",
+    style: {
+      maxWidth: '100vw',
+      width: '100vw'
+    }
   }, props.children);
 };
 
