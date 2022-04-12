@@ -25,7 +25,7 @@ export const ModalDialog = styled.div`
   }
   @media (max-width: 768px) {
     width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
+    height: 100%;
     max-height: calc(var(--vh, 1vh) * 100);
     border-radius: 0px;
   }
