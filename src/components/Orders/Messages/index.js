@@ -247,6 +247,10 @@ export const MessagesUI = (props) => {
         return t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business')
       case 21:
         return t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business')
+      case 22:
+        return t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver')
+      case 23:
+        return t('ORDER_DRIVER_ON_WAY', 'Driver on way')
       default:
         return status
     }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { Alert } from '../../Shared'
@@ -11,13 +11,15 @@ import {
 
 export const CampaignWebHook = (props) => {
   const {
-    formState,
-    campaignState,
-    handleChangeItem
+    isAddMode,
+    contactState,
+    handleChangeData,
+    handleUpdateContact,
+    handleAddCampaign
   } = props
 
   const [, t] = useLanguage()
-  const [webHook, setWebHook] = useState({})
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const closeAlert = () => {
@@ -27,39 +29,32 @@ export const CampaignWebHook = (props) => {
     })
   }
 
-  const handleChangeInput = (evt) => {
-    setWebHook({ ...webHook, [evt.target.name]: evt.target.value })
-  }
-
   const handleSaveSms = () => {
-    if (!webHook?.title) {
+    if (!contactState?.changes?.contact_data?.title) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Title is required').replace('_attribute_', t('TITLE', 'Title'))
       })
       return
     }
-    if (!webHook?.body) {
+    if (!contactState?.changes?.contact_data?.body) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Body is required').replace('_attribute_', t('BODY', 'Body'))
       })
       return
     }
-    if (!webHook?.webhook) {
+    if (!contactState?.changes?.contact_data?.webhook) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'URL is required').replace('_attribute_', t('URL', 'URL'))
       })
       return
     }
-    handleChangeItem('contact_data', webHook)
-  }
 
-  useEffect(() => {
-    const contactData = formState?.changes?.contact_data ?? campaignState?.campaign?.contact_data
-    if (contactData) setWebHook({ ...contactData })
-  }, [formState, campaignState])
+    if (isAddMode) handleAddCampaign()
+    else handleUpdateContact()
+  }
 
   return (
     <>
@@ -69,26 +64,26 @@ export const CampaignWebHook = (props) => {
           <Input
             name='title'
             placeholder={t('TITLE', 'Title')}
-            defaultValue={setWebHook.title || ''}
-            onChange={handleChangeInput}
+            defaultValue={contactState?.changes?.contact_data?.title || ''}
+            onChange={handleChangeData}
           />
         </InputWrapper>
         <InputWrapper>
-          <label>{t('MESSAGE', 'Message')}</label>
+          <label>{t('MESSAGES', 'Messages')}</label>
           <TextArea
             name='body'
             placeholder={t('WRITE_MESSAGE', 'Write a message')}
-            defaultValue={setWebHook.body || ''}
-            onChange={handleChangeInput}
+            defaultValue={contactState?.changes?.contact_data?.body || ''}
+            onChange={handleChangeData}
           />
         </InputWrapper>
         <InputWrapper>
-          <label>{t('HOOK', 'Hook')}</label>
+          <label>{t('HOOKS', 'Hooks')}</label>
           <Input
             name='webhook'
             placeholder={t('URL', 'URL')}
-            defaultValue={setWebHook.webhook || ''}
-            onChange={handleChangeInput}
+            defaultValue={contactState?.changes?.contact_data?.webhook || ''}
+            onChange={handleChangeData}
           />
         </InputWrapper>
       </Container>
@@ -96,9 +91,9 @@ export const CampaignWebHook = (props) => {
         <Button
           color='primary'
           onClick={() => handleSaveSms()}
-          disabled={formState.loading}
+          disabled={contactState.loading}
         >
-          {t('SAVE', 'Save')}
+          {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
         </Button>
       </ButtonWrapper>
       <Alert

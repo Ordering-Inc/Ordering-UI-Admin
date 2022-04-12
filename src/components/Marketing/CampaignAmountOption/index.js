@@ -3,18 +3,16 @@ import { useLanguage, CampaignAmountOption as CampaignAmountOptionController } f
 import { Alert } from '../../Shared'
 import {
   Circle as UnCheckIcon,
-  RecordCircleFill as CheckIcon,
-  ChevronUp,
-  ChevronDown
+  RecordCircleFill as CheckIcon
 } from 'react-bootstrap-icons'
-import { Button, Input } from '../../../styles'
+import { Button } from '../../../styles'
+import NumericInput from 'react-numeric-input'
 
 import {
   Container,
   Title,
   RadioCheckWrapper,
   ButtonWrapper,
-  ArrowIconsWrapper,
   DaysContent,
   SubTitle
 } from './styles'
@@ -83,7 +81,7 @@ const CampaignAmountOptionUI = (props) => {
   return (
     <>
       <Container>
-        <Title>{t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options ')}</Title>
+        <Title>{t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options')}</Title>
         <SubTitle>{t('RELATIVE', 'Relative')}</SubTitle>
         {ruleList.map((item, i) => (
           <React.Fragment key={i}>
@@ -95,24 +93,17 @@ const CampaignAmountOptionUI = (props) => {
             </RadioCheckWrapper>
             {ruleFormState.changes?.condition === item.key && (
               <DaysContent>
-                <div>
-                  <Input
-                    type='number'
-                    min='0'
-                    placeholder='00'
-                    onKeyPress={(e) => {
-                      if (!/^[0-9.]$/.test(e.key)) {
-                        e.preventDefault()
-                      }
-                    }}
-                    value={ruleFormState.changes?.value || ''}
-                    onChange={(e) => handleChangeValue('value', e.target.value)}
-                  />
-                  <ArrowIconsWrapper>
-                    <ChevronUp />
-                    <ChevronDown />
-                  </ArrowIconsWrapper>
-                </div>
+                <NumericInput
+                  placeholder='00'
+                  onKeyPress={(e) => {
+                    if (!/^[0-9]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
+                  value={ruleFormState.changes?.value || ''}
+                  onChange={(value) => handleChangeValue('value', value)}
+                  min={0}
+                />
               </DaysContent>
             )}
           </React.Fragment>

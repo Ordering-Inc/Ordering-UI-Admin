@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { X as CloseIcon } from 'react-bootstrap-icons'
@@ -19,14 +19,15 @@ import {
 
 export const CampaignPopup = (props) => {
   const {
-    formState,
-    campaignState,
-    handleChangeItem
+    isAddMode,
+    contactState,
+    handleChangeData,
+    handleUpdateContact,
+    handleAddCampaign
   } = props
 
   const [, t] = useLanguage()
 
-  const [popup, setPopup] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const closeAlert = () => {
@@ -36,32 +37,25 @@ export const CampaignPopup = (props) => {
     })
   }
 
-  const handleChangeInput = (evt) => {
-    setPopup({ ...popup, [evt.target.name]: evt.target.value })
-  }
-
   const handleSaveNotification = () => {
-    if (!popup?.title) {
+    if (!contactState?.changes?.contact_data?.title) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Title is required').replace('_attribute_', t('TITLE', 'Title'))
       })
       return
     }
-    if (!popup?.body) {
+    if (!contactState?.changes?.contact_data?.body) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Body is required').replace('_attribute_', t('BODY', 'Body'))
       })
       return
     }
-    handleChangeItem('contact_data', popup)
-  }
 
-  useEffect(() => {
-    const contactData = formState?.changes?.contact_data ?? campaignState?.campaign?.contact_data
-    if (contactData) setPopup({ ...contactData })
-  }, [formState, campaignState])
+    if (isAddMode) handleAddCampaign()
+    else handleUpdateContact()
+  }
 
   return (
     <>
@@ -71,17 +65,17 @@ export const CampaignPopup = (props) => {
           <Input
             name='title'
             placeholder={t('TITLE', 'Title')}
-            defaultValue={popup?.title || ''}
-            onChange={handleChangeInput}
+            defaultValue={contactState?.changes?.contact_data?.title || ''}
+            onChange={handleChangeData}
           />
         </InputWrapper>
         <InputWrapper>
-          <label>{t('MESSAGE', 'Message')}</label>
+          <label>{t('MESSAGES', 'Messages')}</label>
           <TextArea
             name='body'
             placeholder={t('WRITE_MESSAGE', 'Write a message')}
-            defaultValue={popup?.body || ''}
-            onChange={handleChangeInput}
+            defaultValue={contactState?.changes?.contact_data?.body || ''}
+            onChange={handleChangeData}
           />
         </InputWrapper>
         <EmailPreviewWrapper>
@@ -95,10 +89,10 @@ export const CampaignPopup = (props) => {
           <EmailPreviewContent>
             <PopupContent>
               <HeaderWrapper>
-                <h1>{popup?.title | ''}</h1>
+                <h1>{contactState?.changes?.contact_data?.title || ''}</h1>
                 <CloseIcon />
               </HeaderWrapper>
-              <p>{popup.body || ''}</p>
+              <p>{contactState?.changes?.contact_data?.body || ''}</p>
               <PopupButtonWrapper>
                 <Button color='primary' borderRadius='8px'>{t('DONE', 'Done')}</Button>
               </PopupButtonWrapper>
@@ -110,9 +104,9 @@ export const CampaignPopup = (props) => {
         <Button
           color='primary'
           onClick={() => handleSaveNotification()}
-          disabled={formState.loading}
+          disabled={contactState.loading}
         >
-          {t('SAVE', 'Save')}
+          {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
         </Button>
       </ButtonWrapper>
       <Alert

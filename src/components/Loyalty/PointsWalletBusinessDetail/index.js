@@ -158,7 +158,7 @@ const PointsWalletBusinessDetailUI = (props) => {
         </PaymentOptionListWrapper> */}
         <PointsAccumulationContainer>
           <h2>{t('POINTS_ACCUMULATION', 'Points accumulation')}</h2>
-          <p>{t('AMOUNT_POINTS_ASSIGN', 'Amount of points to assign')}</p>
+          <p>{t('AMOUNT_POINTS_ASSIGN_TO_ORDER_SUBTOTAL', 'Amount of points to assign in relation to the order subtotal')}</p>
           <span>{t('VALUE', 'Value')}</span>
           <AccumulationInputWrapper>
             <span>{parsePrice(1)}</span>
