@@ -167,6 +167,7 @@ export const IframeWrapper = styled.div`
 `
 
 export const SubCategoryWrapper = styled.div`
+  height: 100%;
 `
 
 export const SkeletonWrapper = styled.div``
