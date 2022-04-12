@@ -44,15 +44,18 @@ export const AnalyticsCustomerSatisfaction = (props) => {
       csv += `${dataList?.data[row]},`
       csv += '\n'
     }
-    var downloadLink = document.createElement('a')
-    var blob = new Blob(['\ufeff', csv])
-    var url = URL.createObjectURL(blob)
-    downloadLink.href = url
+
+    const link = document.createElement('a')
     const fileSuffix = new Date().getTime()
-    downloadLink.download = `customer_satification_${fileSuffix}.csv`
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
+    link.download = `customer_satification_${fileSuffix}.csv`
+
+    const blob = new Blob(['\ufeff', csv], { type: 'text/csv' })
+    const reader = new FileReader()
+    reader.readAsDataURL(blob)
+    reader.onload = () => {
+      link.href = reader.result
+      link.click()
+    }
   }
 
   return (
