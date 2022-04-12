@@ -47,7 +47,7 @@ export const VerifiedItem = styled.span`
 `
 export const SavedPlaces = styled.div`
   text-align: center;
-  height: calc(100% - 100px);
+  height: calc(100% - 120px);
   margin-top: 25px;
   padding-bottom: 0px;
   overflow: auto;
