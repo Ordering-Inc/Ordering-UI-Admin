@@ -96,7 +96,7 @@ var IframeWrapper = _styledComponents.default.div(_templateObject23 || (_templat
 
 exports.IframeWrapper = IframeWrapper;
 
-var SubCategoryWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n"])));
+var SubCategoryWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  height: 100%;\n"])));
 
 exports.SubCategoryWrapper = SubCategoryWrapper;
 

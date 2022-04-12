@@ -25,13 +25,13 @@ var _MdcPlayCircle = _interopRequireDefault(require("@meronex/icons/mdc/MdcPlayC
 
 var _BsArrowRight = _interopRequireDefault(require("@meronex/icons/bs/BsArrowRight"));
 
-var _SettingsList = require("../SettingsList");
-
-var _styles2 = require("./styles");
-
 var _EmailSetting = require("../EmailSetting");
 
 var _NotificationSetting = require("../NotificationSetting");
+
+var _SettingsList = require("../SettingsList");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
