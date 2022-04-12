@@ -100,8 +100,8 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
       className: "arrow"
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))));
   })), /*#__PURE__*/_react.default.createElement(_styles2.AddDeliveryZoneButton, {
-    onClick: function onClick() {
-      return handleOpenZone(null);
+    onClick: function onClick(e) {
+      return handleOpenZone(e, null);
     }
   }, t('ADD_DELIVERY_ZONE', 'Add delivery zone'))), isOpenDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     isBorderShow: true,
