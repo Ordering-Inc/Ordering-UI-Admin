@@ -81,7 +81,7 @@ const CampaignAmountOptionUI = (props) => {
   return (
     <>
       <Container>
-        <Title>{t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options ')}</Title>
+        <Title>{t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options')}</Title>
         <SubTitle>{t('RELATIVE', 'Relative')}</SubTitle>
         {ruleList.map((item, i) => (
           <React.Fragment key={i}>

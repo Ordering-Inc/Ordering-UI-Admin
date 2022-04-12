@@ -11,7 +11,8 @@ import { AnalyticsCalendarContainer } from './styles'
 export const AnalyticsCalendar = (props) => {
   const {
     handleChangeDate,
-    defaultValue
+    defaultValue,
+    leftAlign
   } = props
 
   const [, t] = useLanguage()
@@ -81,7 +82,7 @@ export const AnalyticsCalendar = (props) => {
       </Button>
       {
         isShowCalendar && (
-          <AnalyticsCalendarContainer ref={calendarRef}>
+          <AnalyticsCalendarContainer ref={calendarRef} leftAlign={leftAlign}>
             <DateRange
               editableDateInputs
               onChange={item => handleChangeDates(item)}
