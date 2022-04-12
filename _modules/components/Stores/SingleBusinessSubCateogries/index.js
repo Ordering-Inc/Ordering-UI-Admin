@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props) {
-  var _theme$images$icons;
+  var _theme$images$icons, _category$subcategori;
 
   var index = props.index,
       category = props.category,
@@ -84,6 +84,7 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
       setRotateState(setActive === 'active' ? 'accordion__icon' : 'accordion__icon rotate');
     }
 
+    setCurrentCategory(category);
     handleChangeCategory(e, category);
   };
 
@@ -99,19 +100,7 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
     }
   }, [category === null || category === void 0 ? void 0 : category.enabled]);
   return /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, {
-    ref: containerRef,
-    onDrop: function onDrop(e) {
-      return handleDrop(e);
-    },
-    onDragOver: function onDragOver(e) {
-      return handleDragOverChange(e);
-    },
-    onDragEnd: function onDragEnd(e) {
-      return handleDragEndChange(e);
-    },
-    className: "draggable-category",
-    "data-index": category === null || category === void 0 ? void 0 : category.id,
-    isAccept: dataSelected && dataSelected === (category === null || category === void 0 ? void 0 : category.id.toString())
+    ref: containerRef
   }, isSkeleton ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.AccordionItem, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 120
   })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -153,7 +142,9 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
     style: {
       maxHeight: !setActive && '0px'
     }
-  }, (category === null || category === void 0 ? void 0 : category.subcategories) && category.subcategories.map(function (subCategory) {
+  }, (category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0 && category.subcategories.sort(function (a, b) {
+    return a.rank - b.rank;
+  }).map(function (subCategory) {
     return /*#__PURE__*/_react.default.createElement(SingleBusinessSubCateogries, _extends({}, props, {
       key: subCategory.id,
       category: subCategory,

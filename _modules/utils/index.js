@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.setStorageItem = exports.scrollTo = exports.removeStorageItem = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.setStorageItem = exports.scrollTo = exports.reviewCommentList = exports.removeStorageItem = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -16,6 +16,8 @@ var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
 var _FaCreditCard = _interopRequireDefault(require("@meronex/icons/fa/FaCreditCard"));
 
 var _moment = _interopRequireDefault(require("moment"));
+
+var _orderingComponentsAdmin = require("ordering-components-admin");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -413,5 +415,126 @@ var convertHMS = function convertHMS(value) {
 
   return sec < 0 ? '-' : '' + hours + ':' + minutes + ':' + seconds; // Return is HH : MM : SS
 };
+/**
+ * function to manage review comment list
+ * @param {number} param0 type of reviews to return
+ * @returns object with reviews dictionary
+ */
+
 
 exports.convertHMS = convertHMS;
+
+var reviewCommentList = function reviewCommentList(type) {
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
+
+  var reviews = {
+    1: {
+      1: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_1', "What went wrong?"),
+        list: [{
+          key: 0,
+          content: t('CUSTOMER_QUICK_COMMENT_1_0', "Not handled with care")
+        }, {
+          key: 1,
+          content: t('CUSTOMER_QUICK_COMMENT_1_1', "Poor communication")
+        }, {
+          key: 2,
+          content: t('CUSTOMER_QUICK_COMMENT_1_2', "COVID-19 issue")
+        }, {
+          key: 3,
+          content: t('CUSTOMER_QUICK_COMMENT_1_3', "Didn't follow instructions")
+        }, {
+          key: 4,
+          content: t('CUSTOMER_QUICK_COMMENT_1_4', "Rude")
+        }, {
+          key: 5,
+          content: t('CUSTOMER_QUICK_COMMENT_1_5', "Not on-time")
+        }]
+      },
+      2: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_2', "What went wrong?"),
+        list: [{
+          key: 0,
+          content: t('CUSTOMER_QUICK_COMMENT_2_0', "Not handled with care")
+        }, {
+          key: 1,
+          content: t('CUSTOMER_QUICK_COMMENT_2_1', "Poor communication")
+        }, {
+          key: 2,
+          content: t('CUSTOMER_QUICK_COMMENT_2_2', "COVID-19 issue")
+        }, {
+          key: 3,
+          content: t('CUSTOMER_QUICK_COMMENT_2_3', "Didn't follow instructions")
+        }, {
+          key: 4,
+          content: t('CUSTOMER_QUICK_COMMENT_2_4', "Rude")
+        }, {
+          key: 5,
+          content: t('CUSTOMER_QUICK_COMMENT_2_5', "Not on-time")
+        }]
+      },
+      3: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_3', "What could have been better?"),
+        list: [{
+          key: 0,
+          content: t('CUSTOMER_QUICK_COMMENT_3_0', "Not handled with care")
+        }, {
+          key: 1,
+          content: t('CUSTOMER_QUICK_COMMENT_3_1', "Poor communication")
+        }, {
+          key: 2,
+          content: t('CUSTOMER_QUICK_COMMENT_3_2', "COVID-19 issue")
+        }, {
+          key: 3,
+          content: t('CUSTOMER_QUICK_COMMENT_3_3', "Didn't follow instructions")
+        }, {
+          key: 4,
+          content: t('CUSTOMER_QUICK_COMMENT_3_4', "Rude")
+        }, {
+          key: 5,
+          content: t('CUSTOMER_QUICK_COMMENT_3_5', "Not on-time")
+        }]
+      },
+      4: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_4', " Tell us more"),
+        list: [{
+          key: 0,
+          content: t('CUSTOMER_QUICK_COMMENT_4_0', "Not handled with care")
+        }, {
+          key: 1,
+          content: t('CUSTOMER_QUICK_COMMENT_4_1', "Poor communication")
+        }, {
+          key: 2,
+          content: t('CUSTOMER_QUICK_COMMENT_4_2', "COVID-19 issue")
+        }, {
+          key: 3,
+          content: t('CUSTOMER_QUICK_COMMENT_4_3', "Didn't follow instructions")
+        }, {
+          key: 4,
+          content: t('CUSTOMER_QUICK_COMMENT_4_4', "Rude")
+        }, {
+          key: 5,
+          content: t('CUSTOMER_QUICK_COMMENT_4_5', "Not on-time")
+        }]
+      },
+      5: {
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_5', "What went well?"),
+        list: [{
+          key: 0,
+          content: t('CUSTOMER_QUICK_COMMENT_5_0', "Good communication")
+        }, {
+          key: 1,
+          content: t('CUSTOMER_QUICK_COMMENT_5_1', "Friendly")
+        }, {
+          key: 2,
+          content: t('CUSTOMER_QUICK_COMMENT_5_2', "Above and beyond")
+        }]
+      }
+    }
+  };
+  return reviews[type];
+};
+
+exports.reviewCommentList = reviewCommentList;

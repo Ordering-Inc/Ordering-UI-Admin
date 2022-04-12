@@ -206,6 +206,11 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
     pageName: 'enterprise_promotions',
     url: '/marketing/promotions-enterprise'
+  }, {
+    id: 2,
+    title: t('CAMPAIGN', 'Campaign'),
+    pageName: 'campaign',
+    url: '/marketing/campaign'
   }];
 
   var handleGoToPage = function handleGoToPage(data) {
@@ -353,7 +358,7 @@ var SidebarMenu = function SidebarMenu(props) {
     }, item.title);
   })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "8",
-    active: location.pathname === '/marketing/promotions-enterprise'
+    active: location.pathname === '/marketing/promotions-enterprise' || location.pathname === '/marketing/campaign'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GraphUp, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETING', 'Marketing'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "8"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, marketingSubmenus.map(function (item) {

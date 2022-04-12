@@ -21,6 +21,8 @@ var _styles = require("../../../styles");
 
 var _Shared = require("../../Shared");
 
+var _utils = require("../../../utils");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -29,12 +31,6 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -42,6 +38,12 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -56,11 +58,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReviewCustomerUI = function ReviewCustomerUI(props) {
+  var _commentsList, _commentsList2, _commentsList2$list;
+
   var customer = props.customer,
       reviewState = props.reviewState,
       setReviewState = props.setReviewState,
       actionState = props.actionState,
-      handleChangeQualification = props.handleChangeQualification,
       handleSendCustomerReview = props.handleSendCustomerReview;
   var theme = (0, _styledComponents.useTheme)();
 
@@ -121,25 +124,21 @@ var ReviewCustomerUI = function ReviewCustomerUI(props) {
     left: 'initial',
     right: 0
   }];
-  var commentsList = [{
-    key: 0,
-    content: t('RESPECTFUL', 'Respectful')
-  }, {
-    key: 1,
-    content: t('EXCELLENT_COMMUNICATION', 'Excellent communication')
-  }, {
-    key: 2,
-    content: t('RUDE', 'Rude')
-  }, {
-    key: 3,
-    content: t('CONFUSING_INSTRUCTIONS', 'Confusing instructions')
-  }];
+  var commentsList = (0, _utils.reviewCommentList)(1);
 
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
+  };
+
+  var handleChangeQualification = function handleChangeQualification(index) {
+    if (index) setReviewState(_objectSpread(_objectSpread({}, reviewState), {}, {
+      qualification: index,
+      comment: ''
+    }));
+    setComments([]);
   };
 
   var isSelectedComment = function isSelectedComment(commentKey) {
@@ -207,7 +206,7 @@ var ReviewCustomerUI = function ReviewCustomerUI(props) {
         return handleChangeQualification(qualification === null || qualification === void 0 ? void 0 : qualification.key);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, qualification === null || qualification === void 0 ? void 0 : qualification.text, /*#__PURE__*/_react.default.createElement("span", null)));
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENTS', 'Comments')), commentsList === null || commentsList === void 0 ? void 0 : commentsList.map(function (commentItem, i) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.CommentsList, null, /*#__PURE__*/_react.default.createElement("p", null, (_commentsList = commentsList[(reviewState === null || reviewState === void 0 ? void 0 : reviewState.qualification) || 1]) === null || _commentsList === void 0 ? void 0 : _commentsList.title), (_commentsList2 = commentsList[(reviewState === null || reviewState === void 0 ? void 0 : reviewState.qualification) || 1]) === null || _commentsList2 === void 0 ? void 0 : (_commentsList2$list = _commentsList2.list) === null || _commentsList2$list === void 0 ? void 0 : _commentsList2$list.map(function (commentItem, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.CommentButton, {
       key: i,
       active: isSelectedComment(commentItem === null || commentItem === void 0 ? void 0 : commentItem.key),

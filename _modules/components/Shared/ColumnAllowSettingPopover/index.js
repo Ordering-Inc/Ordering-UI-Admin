@@ -29,7 +29,8 @@ var ColumnAllowSettingPopover = function ColumnAllowSettingPopover(props) {
   var open = props.open,
       optionsDefault = props.optionsDefault,
       allowColumns = props.allowColumns,
-      handleChangeAllowColumns = props.handleChangeAllowColumns;
+      handleChangeAllowColumns = props.handleChangeAllowColumns,
+      title = props.title;
   var referenceElement = (0, _react.useRef)();
   var popperElement = (0, _react.useRef)();
 
@@ -69,7 +70,7 @@ var ColumnAllowSettingPopover = function ColumnAllowSettingPopover(props) {
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LayoutThreeColumns, null))), open && /*#__PURE__*/_react.default.createElement(_styles2.PopoverBody, {
     ref: popperElement
-  }, /*#__PURE__*/_react.default.createElement(_styles2.PopoverList, null, optionsDefault.map(function (option) {
+  }, title && /*#__PURE__*/_react.default.createElement(_styles2.Title, null, title), /*#__PURE__*/_react.default.createElement(_styles2.PopoverList, null, optionsDefault.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles2.AllowItem, {
       key: option.value,
       isChecked: allowColumns[option.value],
