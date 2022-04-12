@@ -222,15 +222,19 @@ var AnalyticsRegisterUsers = function AnalyticsRegisterUsers(props) {
       _iterator.f();
     }
 
-    var downloadLink = document.createElement('a');
-    var blob = new Blob(["\uFEFF", csv]);
-    var url = URL.createObjectURL(blob);
-    downloadLink.href = url;
+    var link = document.createElement('a');
     var fileSuffix = new Date().getTime();
-    downloadLink.download = "registers_users_".concat(fileSuffix, ".csv");
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    link.download = "registers_users_".concat(fileSuffix, ".csv");
+    var blob = new Blob(["\uFEFF", csv], {
+      type: 'text/csv'
+    });
+    var reader = new FileReader();
+    reader.readAsDataURL(blob);
+
+    reader.onload = function () {
+      link.href = reader.result;
+      link.click();
+    };
   };
 
   var defaultData = {

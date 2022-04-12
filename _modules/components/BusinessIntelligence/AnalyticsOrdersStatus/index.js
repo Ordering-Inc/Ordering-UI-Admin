@@ -208,15 +208,19 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
       _iterator4.f();
     }
 
-    var downloadLink = document.createElement('a');
-    var blob = new Blob(["\uFEFF", csv]);
-    var url = URL.createObjectURL(blob);
-    downloadLink.href = url;
+    var link = document.createElement('a');
     var fileSuffix = new Date().getTime();
-    downloadLink.download = "orders_status_".concat(fileSuffix, ".csv");
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    link.download = "orders_status_".concat(fileSuffix, ".csv");
+    var blob = new Blob(["\uFEFF", csv], {
+      type: 'text/csv'
+    });
+    var reader = new FileReader();
+    reader.readAsDataURL(blob);
+
+    reader.onload = function () {
+      link.href = reader.result;
+      link.click();
+    };
   };
 
   var data = {

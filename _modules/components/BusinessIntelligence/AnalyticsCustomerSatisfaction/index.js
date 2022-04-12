@@ -79,15 +79,19 @@ var AnalyticsCustomerSatisfaction = function AnalyticsCustomerSatisfaction(props
       csv += '\n';
     }
 
-    var downloadLink = document.createElement('a');
-    var blob = new Blob(["\uFEFF", csv]);
-    var url = URL.createObjectURL(blob);
-    downloadLink.href = url;
+    var link = document.createElement('a');
     var fileSuffix = new Date().getTime();
-    downloadLink.download = "customer_satification_".concat(fileSuffix, ".csv");
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    link.download = "customer_satification_".concat(fileSuffix, ".csv");
+    var blob = new Blob(["\uFEFF", csv], {
+      type: 'text/csv'
+    });
+    var reader = new FileReader();
+    reader.readAsDataURL(blob);
+
+    reader.onload = function () {
+      link.href = reader.result;
+      link.click();
+    };
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.CustomerSatisfactionHeader, null, /*#__PURE__*/_react.default.createElement("p", null, t('CUSTOMER_SATISFACTION', 'Customer Safisfaction')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
