@@ -58,9 +58,9 @@ const EnterprisePromotionDetailsUI = (props) => {
     setSelectedOption(option)
     if (Object.keys(formState.changes).length !== 0 && !actionState.loading) {
       if (isAddMode) {
-        handleAddPromotion()
+        onAddPromotion()
       } else {
-        handleUpdateClick()
+        onUpdateClick()
       }
     }
   }
@@ -74,6 +74,35 @@ const EnterprisePromotionDetailsUI = (props) => {
         handleDeletePromotion()
       }
     })
+  }
+
+  const handleCheckDiscountPercentageValidation = () => {
+    const rateType = formState.changes?.rate_type ?? promotionState.promotion?.rate_type
+    const rate = formState.changes?.rate ?? promotionState?.promotion?.rate ?? ''
+    if (rateType === 1 && parseFloat(rate) > 100) {
+      setAlertState({
+        open: true,
+        content: [
+          t('VALIDATION_ERROR_MAX_NUMERIC', 'The _attribute_ may not be greater than _max_.')
+            .replace('_attribute_', t('DISCOUNT_PERCENTAGE', 'Discount percentage'))
+            .replace('_max_', 100)
+        ]
+      })
+      return false
+    }
+    return true
+  }
+
+  const onUpdateClick = () => {
+    const isValid = handleCheckDiscountPercentageValidation()
+    if (!isValid) return
+    handleUpdateClick()
+  }
+
+  const onAddPromotion = () => {
+    const isValid = handleCheckDiscountPercentageValidation()
+    if (!isValid) return
+    handleAddPromotion()
   }
 
   useEffect(() => {
@@ -134,6 +163,8 @@ const EnterprisePromotionDetailsUI = (props) => {
         {selectedOption === 'general' && (
           <EnterprisePromotionGeneralDetails
             {...props}
+            handleUpdateClick={onUpdateClick}
+            handleAddPromotion={onAddPromotion}
           />
         )}
         {selectedOption === 'sites' && (
@@ -145,8 +176,8 @@ const EnterprisePromotionDetailsUI = (props) => {
             handleSelectAllSites={() => handleSelectAllSites(true)}
             handleSelectNoneSites={() => handleSelectAllSites(false)}
             isDisabled={Object.keys(formState.changes).length === 0 || actionState.loading}
-            handleUpdateClick={handleUpdateClick}
-            handleAddPromotion={handleAddPromotion}
+            handleUpdateClick={onUpdateClick}
+            handleAddPromotion={onAddPromotion}
           />
         )}
         {selectedOption === 'businesses' && (
@@ -158,13 +189,15 @@ const EnterprisePromotionDetailsUI = (props) => {
             handleSelectAllBusinesses={() => handleSelectAllBusiness(true)}
             handleSelectNoneBusinesses={() => handleSelectAllBusiness(false)}
             isDisabled={Object.keys(formState.changes).length === 0 || actionState.loading}
-            handleUpdateClick={handleUpdateClick}
-            handleAddClick={handleAddPromotion}
+            handleUpdateClick={onUpdateClick}
+            handleAddClick={onAddPromotion}
           />
         )}
         {selectedOption === 'rules' && (
           <EnterprisePromotionRules
             {...props}
+            handleUpdateClick={onUpdateClick}
+            handleAddPromotion={onAddPromotion}
           />
         )}
       </DetailsContainer>
