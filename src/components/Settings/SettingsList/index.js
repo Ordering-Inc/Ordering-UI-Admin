@@ -52,6 +52,10 @@ export const SettingsListUI = (props) => {
         setAlertState({ open: true, content: t('DRIVER_TIP_OPTIONS_ERROR') })
         return
       }
+      if (item?.key === 'max_days_preorder' && item.value < 1) {
+        setAlertState({ open: true, content: t('MAX_PREORDER_DAYS_MUST_BIGGER_ZERO', 'Max preorder days must be bigger than zero') })
+        return
+      }
     }
     handleClickUpdate && handleClickUpdate()
   }
@@ -68,10 +72,12 @@ export const SettingsListUI = (props) => {
   return (
     <>
       <SettingsListContainer>
+        <GeneralTitle>
+          <p>{t('SETTINGS', 'All Settings')}</p>
+        </GeneralTitle>
         {
           !settingsState.error && settingsState.loading && (
             <SkeletonWrapper>
-              <Skeleton height={40} width={250} style={{ marginBottom: '25px' }} />
               {[...Array(6)].map((item, i) => (
                 <div key={i}>
                   <Skeleton height={25} width={200} />
@@ -84,9 +90,6 @@ export const SettingsListUI = (props) => {
         {
           !settingsState.error && !settingsState.loading && configs && !settingsState.API && (
             <GeneralContainer>
-              <GeneralTitle>
-                <p>{t('SETTINGS', 'All Settings')}</p>
-              </GeneralTitle>
               <FormContainer>
                 {
                   configs.length > 0 && configs.map((config, i) => (

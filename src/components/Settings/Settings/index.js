@@ -117,9 +117,7 @@ const SettingsUI = (props) => {
             </IconButton>
           )}
           <h1>
-            {
-              settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')
-            }
+            {settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')}
           </h1>
         </HeaderTitleContainer>
         <ContentWrapper className='row'>
