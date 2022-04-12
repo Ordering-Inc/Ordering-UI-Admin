@@ -68,7 +68,8 @@ var OrdersListing = function OrdersListing(props) {
       handleOpenTour = props.handleOpenTour,
       currentTourStep = props.currentTourStep,
       isTourOpen = props.isTourOpen,
-      setIsTourOpen = props.setIsTourOpen;
+      setIsTourOpen = props.setIsTourOpen,
+      slaSettingTime = props.slaSettingTime;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -135,7 +136,8 @@ var OrdersListing = function OrdersListing(props) {
     currentTourStep: currentTourStep,
     isTourOpen: isTourOpen,
     handleOpenTour: handleOpenTour,
-    setIsTourOpen: setIsTourOpen
+    setIsTourOpen: setIsTourOpen,
+    slaSettingTime: slaSettingTime
   }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
     isMessagesView: isMessagesView,
     orderList: orderList,
@@ -149,7 +151,8 @@ var OrdersListing = function OrdersListing(props) {
     handleOpenOrderDetail: handleOpenOrderDetail,
     selectedOrderCard: selectedOrderCard,
     handleOrderCardClick: handleOrderCardClick,
-    handleUpdateDriverLocation: handleUpdateDriverLocation
+    handleUpdateDriverLocation: handleUpdateDriverLocation,
+    slaSettingTime: slaSettingTime
   }))));
 };
 

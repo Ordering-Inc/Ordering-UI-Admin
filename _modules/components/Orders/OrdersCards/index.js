@@ -60,7 +60,8 @@ var OrdersCards = function OrdersCards(props) {
       handleOpenOrderDetail = props.handleOpenOrderDetail,
       selectedOrderCard = props.selectedOrderCard,
       handleOrderCardClick = props.handleOrderCardClick,
-      handleUpdateDriverLocation = props.handleUpdateDriverLocation;
+      handleUpdateDriverLocation = props.handleUpdateDriverLocation,
+      slaSettingTime = props.slaSettingTime;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -198,7 +199,7 @@ var OrdersCards = function OrdersCards(props) {
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
       setCurrentTime(Date.now());
-    }, 60000);
+    }, slaSettingTime);
     return function () {
       return clearInterval(interval);
     };

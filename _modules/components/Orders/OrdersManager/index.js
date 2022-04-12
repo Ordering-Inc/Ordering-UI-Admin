@@ -139,10 +139,15 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       timeStatus = _useState18[0],
       setTimeStatus = _useState18[1];
 
-  var _useState19 = (0, _react.useState)(0),
+  var _useState19 = (0, _react.useState)(60000),
       _useState20 = _slicedToArray(_useState19, 2),
-      totalSelectedOrder = _useState20[0],
-      setTotalSelectedOrder = _useState20[1];
+      slaSettingTime = _useState20[0],
+      setSlaSettingTime = _useState20[1];
+
+  var _useState21 = (0, _react.useState)(0),
+      _useState22 = _slicedToArray(_useState21, 2),
+      totalSelectedOrder = _useState22[0],
+      setTotalSelectedOrder = _useState22[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
@@ -262,7 +267,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     },
     filterModalOpen: filterModalOpen,
     setFilterModalOpen: setFilterModalOpen,
-    setTimeStatus: setTimeStatus
+    setTimeStatus: setTimeStatus,
+    setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter
@@ -302,7 +308,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isTourOpen: isTourOpen,
     setIsTourOpen: setIsTourOpen,
     setFilterModalOpen: setFilterModalOpen,
-    timeStatus: timeStatus
+    timeStatus: timeStatus,
+    slaSettingTime: slaSettingTime
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,

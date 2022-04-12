@@ -79,7 +79,8 @@ var OrdersTable = function OrdersTable(props) {
       currentTourStep = props.currentTourStep,
       isTourOpen = props.isTourOpen,
       handleOpenTour = props.handleOpenTour,
-      setIsTourOpen = props.setIsTourOpen;
+      setIsTourOpen = props.setIsTourOpen,
+      slaSettingTime = props.slaSettingTime;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -179,7 +180,7 @@ var OrdersTable = function OrdersTable(props) {
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
       setCurrentTime(Date.now());
-    }, 60000);
+    }, slaSettingTime);
     return function () {
       return clearInterval(interval);
     };

@@ -21,6 +21,8 @@ var _MdcFilterOff = _interopRequireDefault(require("@meronex/icons/mdc/MdcFilter
 
 var _OrdersDashboardSLAControls = require("../OrdersDashboardSLAControls");
 
+var _OrderDashboardSLASetting = require("../OrderDashboardSLASetting");
+
 var _styles = require("../../../styles");
 
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
@@ -64,7 +66,8 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
       handleOpenTour = props.handleOpenTour,
       filterModalOpen = props.filterModalOpen,
       setFilterModalOpen = props.setFilterModalOpen,
-      setTimeStatus = props.setTimeStatus;
+      setTimeStatus = props.setTimeStatus,
+      setSlaSettingTime = props.setSlaSettingTime;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -109,9 +112,11 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     onClick: function onClick() {
       return handleOpenTour();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.TopRightSection, null, !isDisableControl && /*#__PURE__*/_react.default.createElement(_OrdersDashboardSLAControls.OrdersDashboardSLAControls, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.TopRightSection, null, /*#__PURE__*/_react.default.createElement(_styles2.SLAControlsWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderDashboardSLASetting.OrderDashboardSLASetting, {
+    setSlaSettingTime: setSlaSettingTime
+  }), /*#__PURE__*/_react.default.createElement(_OrdersDashboardSLAControls.OrdersDashboardSLAControls, {
     setTimeStatus: setTimeStatus
-  }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearchAndFilter, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearchAndFilter, {
     fullWidth: isDisableTitle && isDisableControl
   }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     isCustomLayout: true,

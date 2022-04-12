@@ -88,6 +88,16 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
       filterModalOpen = _useState8[0],
       setFilterModalOpen = _useState8[1];
 
+  var _useState9 = (0, _react.useState)(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      timeStatus = _useState10[0],
+      setTimeStatus = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(60000),
+      _useState12 = _slicedToArray(_useState11, 2),
+      slaSettingTime = _useState12[0],
+      setSlaSettingTime = _useState12[1];
+
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     onOrderRedirect();
@@ -120,7 +130,9 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     handleChangeSearch: handleChangeSearch,
     handleChangeFilterValues: handleChangeFilterValues,
     filterModalOpen: filterModalOpen,
-    setFilterModalOpen: setFilterModalOpen
+    setFilterModalOpen: setFilterModalOpen,
+    setTimeStatus: setTimeStatus,
+    setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapItemView, null, /*#__PURE__*/_react.default.createElement(_DeliveryDashboard.DeliveryDashboard, {
     searchValue: searchValue,
     filterValues: filterValues,
@@ -133,7 +145,9 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     handleOrdersStatusGroupFilter: handleOrdersStatusGroupFilter,
     handleSelectedSubOrderStatus: handleSelectedSubOrderStatus,
     isOnlyDelivery: true,
-    setFilterModalOpen: setFilterModalOpen
+    setFilterModalOpen: setFilterModalOpen,
+    slaSettingTime: slaSettingTime,
+    timeStatus: timeStatus
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     open: isOpenOrderDetail,
     order: detailsOrder,
