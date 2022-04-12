@@ -123,7 +123,7 @@ export const UsersList = (props) => {
                 <th>{t('USER', 'User')}</th>
                 <th>{t('DETAILS', 'Details')}</th>
                 <th />
-                <th colSpan={2}>{t('ACTION', 'Action')}</th>
+                <th colspan={2}>{t('ACTION', 'Action')}</th>
               </tr>
             </thead>
             {usersList.loading ? (

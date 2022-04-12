@@ -134,7 +134,7 @@ export const InvoiceBusinessPdf = (props) => {
       <table style={styles.table}>
         <thead>
           <tr style={styles.table.thead.trFirst}>
-            <th style={styles.table.thead.th} colSpan='5'>{t('ORDERS', 'Orders')}</th>
+            <th style={styles.table.thead.th} colspan='5'>{t('ORDERS', 'Orders')}</th>
           </tr>
           <tr style={styles.table.thead.trLast}>
             <th style={styles.table.thead.th}>{t('EXPORT_ORDER_NUMBER', 'Order number')}</th>
@@ -159,11 +159,11 @@ export const InvoiceBusinessPdf = (props) => {
         </tbody>
         <tfoot style={styles.table.tfoot}>
           <tr style={styles.table.tfoot.tr}>
-            <td style={styles.table.tfoot.tr.td} colSpan='4'>{t('SUBTOTAL', 'Subtotal')}</td>
+            <td style={styles.table.tfoot.tr.td} colspan='4'>{t('SUBTOTAL', 'Subtotal')}</td>
             <td style={styles.table.tfoot.tr.td}>{parsePrice(exportInvoiceList?.invoice?.orders_subtotal)}</td>
           </tr>
           <tr style={styles.table.tfoot.tr}>
-            <td style={styles.table.tfoot.tr.td} colSpan='4'>{t('TOTAL', 'Total')}</td>
+            <td style={styles.table.tfoot.tr.td} colspan='4'>{t('TOTAL', 'Total')}</td>
             <td style={styles.table.tfoot.tr.td}>{parsePrice(exportInvoiceList?.invoice?.orders_total)}</td>
           </tr>
         </tfoot>
@@ -171,7 +171,7 @@ export const InvoiceBusinessPdf = (props) => {
       <table style={styles.table}>
         <thead>
           <tr style={styles.table.thead.trLast}>
-            <th style={styles.table.thead.th} colSpan='2'>{t('TOTALS', 'Totals')}</th>
+            <th style={styles.table.thead.th} colspan='2'>{t('TOTALS', 'Totals')}</th>
           </tr>
         </thead>
         <tbody>

@@ -132,7 +132,7 @@ const ReportsAverageSalesUI = (props) => {
                         reportData?.content?.header?.rows.map((tr, i) => (
                           <tr key={i}>
                             {tr?.map((th, j) => (
-                              <th key={j} colSpan={th.colspan}>{th.value}</th>
+                              <th key={j} colspan={th.colspan}>{th.value}</th>
                             ))}
                           </tr>
                         ))
@@ -143,7 +143,7 @@ const ReportsAverageSalesUI = (props) => {
                     <Tbody key={i}>
                       <tr>
                         {tbody.map((td, j) => (
-                          <td key={j} colSpan={td.colspan}>{td.value_unit === 'currency' ? parsePrice(td.value) : td.value}</td>
+                          <td key={j} colspan={td.colspan}>{td.value_unit === 'currency' ? parsePrice(td.value) : td.value}</td>
                         ))}
                       </tr>
                     </Tbody>
@@ -154,7 +154,7 @@ const ReportsAverageSalesUI = (props) => {
                         reportData?.content?.footer?.rows.map((tr, i) => (
                           <tr key={i}>
                             {tr?.map((td, j) => (
-                              <td key={j} colSpan={td.colspan}>{td.value}</td>
+                              <td key={j} colspan={td.colspan}>{td.value}</td>
                             ))}
                           </tr>
                         ))
@@ -189,7 +189,7 @@ const ReportsAverageSalesUI = (props) => {
                         reportData1?.content?.header?.rows.map((tr, i) => (
                           <tr key={i}>
                             {tr?.map((th, j) => (
-                              <th key={j} colSpan={th.colspan}>{th.value}</th>
+                              <th key={j} colspan={th.colspan}>{th.value}</th>
                             ))}
                           </tr>
                         ))
@@ -200,7 +200,7 @@ const ReportsAverageSalesUI = (props) => {
                     <Tbody key={i}>
                       <tr>
                         {tbody.map((td, j) => (
-                          <td key={j} colSpan={td.colspan}>{td.value_unit === 'currency' ? parsePrice(td.value) : td.value}</td>
+                          <td key={j} colspan={td.colspan}>{td.value_unit === 'currency' ? parsePrice(td.value) : td.value}</td>
                         ))}
                       </tr>
                     </Tbody>
@@ -211,7 +211,7 @@ const ReportsAverageSalesUI = (props) => {
                         reportData1?.content?.footer?.rows.map((tr, i) => (
                           <tr key={i}>
                             {tr?.map((td, j) => (
-                              <td key={j} colSpan={td.colspan}>{td.value}</td>
+                              <td key={j} colspan={td.colspan}>{td.value}</td>
                             ))}
                           </tr>
                         ))
