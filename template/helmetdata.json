@@ -209,6 +209,20 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "open_carts": {
+    "title": "Open Carts",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "recovery_actions": {
+    "title": "Recovery Actions",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "support": {
     "title": "Support",
     "description": "a dummy description about this page",

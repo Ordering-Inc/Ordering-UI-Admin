@@ -51,6 +51,7 @@
     "deadlineRisk": "#FFBF12",
     "info": "#27BCFD",
     "warning": "#FFC700",
-    "success": "#00D27A"
+    "success": "#00D27A",
+    "backgroundInfo": "#F5F9FF"
   }
 }

@@ -42,6 +42,7 @@ import { Cms, IntegrationListing, LanguageManager, PlaceListing, Settings, Setti
 import { BusinessBrandListing, BusinessesListing, BusinessProductsListing } from './components/Stores'
 import { UsersListing, CustomersListing } from './components/Users'
 import { RewardsPrograms } from './components/Loyalty'
+import { OpenCartListing, RecoveryActionListing } from './components/CartRecovery'
 
 import { Layout } from './components/Layout'
 import { SidebarMenu } from './components/SidebarMenu'
@@ -136,6 +137,9 @@ export {
   CustomersListing,
 
   RewardsPrograms,
+
+  OpenCartListing,
+  RecoveryActionListing,
 
   Layout,
   SidebarMenu,

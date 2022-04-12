@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useLanguage, CampaignSignUpOption as CampaignSignUpOptionController } from 'ordering-components-admin'
+import { RangeCalendar, Alert } from '../../Shared'
 import {
   Circle as UnCheckIcon,
   RecordCircleFill as CheckIcon
@@ -14,7 +15,6 @@ import {
   DateRangeWrapper,
   CalendarWrapper
 } from './styles'
-import { RangeCalendar, Alert } from '../../Shared'
 
 const CampaignSignUpOptionUI = (props) => {
   const {

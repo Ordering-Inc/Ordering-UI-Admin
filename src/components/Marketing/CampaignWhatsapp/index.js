@@ -69,7 +69,7 @@ export const CampaignWhatsapp = (props) => {
           />
         </InputWrapper>
         <InputWrapper>
-          <label>{t('MESSAGE', 'Message')}</label>
+          <label>{t('MESSAGES', 'Messages')}</label>
           <TextArea
             name='body'
             placeholder={t('WRITE_MESSAGE', 'Write a message')}

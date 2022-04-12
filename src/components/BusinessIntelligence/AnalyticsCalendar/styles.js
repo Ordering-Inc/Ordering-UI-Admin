@@ -16,6 +16,16 @@ export const AnalyticsCalendarContainer = styled.div`
   ` : css`
     right: 0px;
   `}
+
+  ${({ leftAlign }) => leftAlign && css`
+    ${props => props.theme?.rtl ? css`
+      right: 0px;
+      left: initial;
+    ` : css`
+      left: 0px;
+      right: initial;
+    `}
+  `}
   .rdrDateRangeWrapper {
     .rdrDateDisplayWrapper {
       background-color: transparent;
