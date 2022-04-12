@@ -11,13 +11,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _Shared = require("../../Shared");
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("../../../styles");
 
 var _styles2 = require("./styles");
-
-var _Shared = require("../../Shared");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 

@@ -92,7 +92,7 @@ var CampaignNotification = function CampaignNotification(props) {
     placeholder: t('TITLE', 'Title'),
     defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes5 = contactState.changes) === null || _contactState$changes5 === void 0 ? void 0 : (_contactState$changes6 = _contactState$changes5.contact_data) === null || _contactState$changes6 === void 0 ? void 0 : _contactState$changes6.title) || '',
     onChange: handleChangeData
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGE', 'Message')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGES', 'Messages')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     name: "body",
     placeholder: t('WRITE_MESSAGE', 'Write a message'),
     defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes7 = contactState.changes) === null || _contactState$changes7 === void 0 ? void 0 : (_contactState$changes8 = _contactState$changes7.contact_data) === null || _contactState$changes8 === void 0 ? void 0 : _contactState$changes8.body) || '',

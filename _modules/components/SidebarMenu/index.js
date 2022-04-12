@@ -100,6 +100,17 @@ var SidebarMenu = function SidebarMenu(props) {
   //   url: '/loyalty/reports'
   // }
   ];
+  var cartRecoveryMenus = [{
+    id: 1,
+    title: t('OPEN_CARTS', 'Open carts'),
+    pageName: 'open_carts',
+    url: '/cart-recovery/open-carts'
+  }, {
+    id: 2,
+    title: t('RECOVERY_ACTIONS', 'Recovery actions'),
+    pageName: 'recovery_actions',
+    url: '/cart-recovery/recovery-actions'
+  }];
   var storesSubMenus = [{
     id: 1,
     title: t('STORES_LIST', 'Stores list'),
@@ -377,6 +388,21 @@ var SidebarMenu = function SidebarMenu(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Award, null), /*#__PURE__*/_react.default.createElement("span", null, t('LOYALTY', 'Loyalty'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "9"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, loyaltySubMenus.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+      key: item.id,
+      active: location.pathname.includes(item.url),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: item.pageName
+        });
+      }
+    }, item.title);
+  })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+    eventKey: "10",
+    active: location.pathname === '/cart-recovery/open-carts' || location.pathname === '/cart-recovery/recovery-actions'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("span", null, t('CART_RECOVERY', 'Cart recovery'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+    eventKey: "10"
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, cartRecoveryMenus.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
       active: location.pathname.includes(item.url),

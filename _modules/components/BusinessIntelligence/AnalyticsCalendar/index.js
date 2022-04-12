@@ -45,7 +45,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AnalyticsCalendar = function AnalyticsCalendar(props) {
   var handleChangeDate = props.handleChangeDate,
-      defaultValue = props.defaultValue;
+      defaultValue = props.defaultValue,
+      leftAlign = props.leftAlign;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -121,7 +122,8 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     onClick: handleOpenCalendar
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles3.AnalyticsCalendarContainer, {
-    ref: calendarRef
+    ref: calendarRef,
+    leftAlign: leftAlign
   }, /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
     editableDateInputs: true,
     onChange: function onChange(item) {

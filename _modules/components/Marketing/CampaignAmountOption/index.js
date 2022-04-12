@@ -135,7 +135,7 @@ var CampaignAmountOptionUI = function CampaignAmountOptionUI(props) {
     onClose && onClose();
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options ')), /*#__PURE__*/_react.default.createElement(_styles2.SubTitle, null, t('RELATIVE', 'Relative')), ruleList.map(function (item, i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options')), /*#__PURE__*/_react.default.createElement(_styles2.SubTitle, null, t('RELATIVE', 'Relative')), ruleList.map(function (item, i) {
     var _ruleFormState$change4, _ruleFormState$change5, _ruleFormState$change6;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {

@@ -31,6 +31,8 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -50,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) {
-  var _formState$changes, _promotionState$promo, _formState$changes$na, _formState$changes2, _promotionState$promo2, _formState$changes3, _formState$changes4, _promotionState$promo3, _promotionState$promo4;
+  var _formState$changes3, _promotionState$promo3, _formState$changes$na, _formState$changes4, _promotionState$promo4, _formState$changes5, _formState$changes6, _promotionState$promo5, _promotionState$promo6;
 
   var isAddMode = props.isAddMode,
       promotionState = props.promotionState,
@@ -117,9 +119,9 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
 
     if (Object.keys(formState.changes).length !== 0 && !actionState.loading) {
       if (isAddMode) {
-        handleAddPromotion();
+        onAddPromotion();
       } else {
-        handleUpdateClick();
+        onUpdateClick();
       }
     }
   };
@@ -137,6 +139,35 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     });
   };
 
+  var handleCheckDiscountPercentageValidation = function handleCheckDiscountPercentageValidation() {
+    var _formState$changes$ra, _formState$changes, _promotionState$promo, _ref, _formState$changes$ra2, _formState$changes2, _promotionState$promo2;
+
+    var rateType = (_formState$changes$ra = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.rate_type) !== null && _formState$changes$ra !== void 0 ? _formState$changes$ra : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.rate_type;
+    var rate = (_ref = (_formState$changes$ra2 = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.rate) !== null && _formState$changes$ra2 !== void 0 ? _formState$changes$ra2 : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.rate) !== null && _ref !== void 0 ? _ref : '';
+
+    if (rateType === 1 && parseFloat(rate) > 100) {
+      setAlertState({
+        open: true,
+        content: [t('VALIDATION_ERROR_MAX_NUMERIC', 'The _attribute_ may not be greater than _max_.').replace('_attribute_', t('DISCOUNT_PERCENTAGE', 'Discount percentage')).replace('_max_', 100)]
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  var onUpdateClick = function onUpdateClick() {
+    var isValid = handleCheckDiscountPercentageValidation();
+    if (!isValid) return;
+    handleUpdateClick();
+  };
+
+  var onAddPromotion = function onAddPromotion() {
+    var isValid = handleCheckDiscountPercentageValidation();
+    if (!isValid) return;
+    handleAddPromotion();
+  };
+
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error) || actionState.loading) return;
     setAlertState({
@@ -144,8 +175,8 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("div", null, (((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) || (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.name)) && /*#__PURE__*/_react.default.createElement("h1", null, (_formState$changes$na = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: typeof ((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled) !== 'undefined' ? (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.enabled : (_promotionState$promo3 = (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.enabled) !== null && _promotionState$promo3 !== void 0 ? _promotionState$promo3 : false,
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("div", null, (((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.name) || (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.name)) && /*#__PURE__*/_react.default.createElement("h1", null, (_formState$changes$na = (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: typeof ((_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.enabled) !== 'undefined' ? (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.enabled : (_promotionState$promo5 = (_promotionState$promo6 = promotionState.promotion) === null || _promotionState$promo6 === void 0 ? void 0 : _promotionState$promo6.enabled) !== null && _promotionState$promo5 !== void 0 ? _promotionState$promo5 : false,
     onChange: function onChange(val) {
       return handleChangeItem({
         enabled: val
@@ -167,7 +198,10 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
         return handleClickTab(option.key);
       }
     }, option.content);
-  }))), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionGeneralDetails.EnterprisePromotionGeneralDetails, props), selectedOption === 'sites' && /*#__PURE__*/_react.default.createElement(_Shared.SelectSites, {
+  }))), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionGeneralDetails.EnterprisePromotionGeneralDetails, _extends({}, props, {
+    handleUpdateClick: onUpdateClick,
+    handleAddPromotion: onAddPromotion
+  })), selectedOption === 'sites' && /*#__PURE__*/_react.default.createElement(_Shared.SelectSites, {
     isAddMode: isAddMode,
     allSites: sitesState.sites,
     selectedSitesIds: selectedSitesIds,
@@ -179,8 +213,8 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       return _handleSelectAllSites(false);
     },
     isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
-    handleUpdateClick: handleUpdateClick,
-    handleAddPromotion: handleAddPromotion
+    handleUpdateClick: onUpdateClick,
+    handleAddPromotion: onAddPromotion
   }), selectedOption === 'businesses' && /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinesses, {
     isAddMode: isAddMode,
     allBusinesses: businessesList.businesses,
@@ -193,9 +227,12 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       return handleSelectAllBusiness(false);
     },
     isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
-    handleUpdateClick: handleUpdateClick,
-    handleAddClick: handleAddPromotion
-  }), selectedOption === 'rules' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionRules.EnterprisePromotionRules, props)), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    handleUpdateClick: onUpdateClick,
+    handleAddClick: onAddPromotion
+  }), selectedOption === 'rules' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionRules.EnterprisePromotionRules, _extends({}, props, {
+    handleUpdateClick: onUpdateClick,
+    handleAddPromotion: onAddPromotion
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

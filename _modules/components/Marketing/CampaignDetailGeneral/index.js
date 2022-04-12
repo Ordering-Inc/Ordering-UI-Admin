@@ -220,7 +220,7 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     isBottom: true
   }, isASAP ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP'), " (", (0, _moment.default)(new Date()).format('LLLL'), " + ", t('DELIVERY_TIME', 'delivery time'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('CHECKOUT_ASAP', 'ASAP'), " (", (0, _moment.default)(new Date()).format('LLLL'), " + ", t('MENU_LIST_DELIVERY_TIME', 'delivery time'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, {
     onClick: function onClick() {
       return setIsASAP(false);
     }

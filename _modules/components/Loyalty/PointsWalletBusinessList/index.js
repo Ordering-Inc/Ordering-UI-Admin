@@ -275,7 +275,7 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     })))));
   })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
     className: "business-info"
-  }, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement("th", null, t('STATUS', 'Status')), /*#__PURE__*/_react.default.createElement("th", null, t('Redeeem', 'Redeeem')), /*#__PURE__*/_react.default.createElement("th", null, t('ACCUMULATION', 'Accumulation')), /*#__PURE__*/_react.default.createElement("th", null))), currentPages.map(function (business, i) {
+  }, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement("th", null, t('ORDERS_BOX_STATUS_HEADER', 'Status')), /*#__PURE__*/_react.default.createElement("th", null, t('Redeeem', 'Redeeem')), /*#__PURE__*/_react.default.createElement("th", null, t('ACCUMULATION', 'Accumulation')), /*#__PURE__*/_react.default.createElement("th", null))), currentPages.map(function (business, i) {
     var _theme$images, _theme$images$dummies;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.TBoday, {

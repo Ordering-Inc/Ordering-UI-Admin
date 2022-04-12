@@ -96,12 +96,12 @@ var CampaignWebHook = function CampaignWebHook(props) {
     placeholder: t('TITLE', 'Title'),
     defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes7 = contactState.changes) === null || _contactState$changes7 === void 0 ? void 0 : (_contactState$changes8 = _contactState$changes7.contact_data) === null || _contactState$changes8 === void 0 ? void 0 : _contactState$changes8.title) || '',
     onChange: handleChangeData
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGE', 'Message')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGES', 'Messages')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     name: "body",
     placeholder: t('WRITE_MESSAGE', 'Write a message'),
     defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes9 = contactState.changes) === null || _contactState$changes9 === void 0 ? void 0 : (_contactState$changes10 = _contactState$changes9.contact_data) === null || _contactState$changes10 === void 0 ? void 0 : _contactState$changes10.body) || '',
     onChange: handleChangeData
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('HOOK', 'Hook')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('HOOKS', 'Hooks')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "webhook",
     placeholder: t('URL', 'URL'),
     defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes11 = contactState.changes) === null || _contactState$changes11 === void 0 ? void 0 : (_contactState$changes12 = _contactState$changes11.contact_data) === null || _contactState$changes12 === void 0 ? void 0 : _contactState$changes12.webhook) || '',
