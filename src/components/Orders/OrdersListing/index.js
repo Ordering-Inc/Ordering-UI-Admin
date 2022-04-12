@@ -42,7 +42,8 @@ export const OrdersListing = (props) => {
     handleOpenTour,
     currentTourStep,
     isTourOpen,
-    setIsTourOpen
+    setIsTourOpen,
+    slaSettingTime
   } = props
 
   const theme = useTheme()
@@ -68,8 +69,8 @@ export const OrdersListing = (props) => {
       _filterApplied = false
     } else {
       _filterApplied = filterValues?.groupTypes?.length || filterValues?.businessIds?.length > 0 || filterValues?.cityIds?.length > 0 ||
-       filterValues?.deliveryEndDatetime !== null || filterValues?.deliveryFromDatetime !== null || filterValues?.deliveryTypes?.length > 0 ||
-       filterValues?.driverIds?.length > 0 || filterValues?.paymethodIds?.length > 0 || filterValues?.statuses?.length > 0
+        filterValues?.deliveryEndDatetime !== null || filterValues?.deliveryFromDatetime !== null || filterValues?.deliveryTypes?.length > 0 ||
+        filterValues?.driverIds?.length > 0 || filterValues?.paymethodIds?.length > 0 || filterValues?.statuses?.length > 0
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
@@ -121,6 +122,7 @@ export const OrdersListing = (props) => {
                   isTourOpen={isTourOpen}
                   handleOpenTour={handleOpenTour}
                   setIsTourOpen={setIsTourOpen}
+                  slaSettingTime={slaSettingTime}
                 />
               ) : (
                 <OrdersCards
@@ -138,6 +140,7 @@ export const OrdersListing = (props) => {
                   selectedOrderCard={selectedOrderCard}
                   handleOrderCardClick={handleOrderCardClick}
                   handleUpdateDriverLocation={handleUpdateDriverLocation}
+                  slaSettingTime={slaSettingTime}
                 />
               )}
             </WrapperOrderListContent>
