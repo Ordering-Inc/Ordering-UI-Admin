@@ -121,7 +121,7 @@ export const OpenCartList = (props) => {
   return (
     <>
       <CartsContainer id='cartTable'>
-        <Table className='carts_table'>
+        <Table className='carts_table' isRelative={cartList?.carts?.length > 5}>
           <thead>
             <tr>
               <th className='carts-id'>

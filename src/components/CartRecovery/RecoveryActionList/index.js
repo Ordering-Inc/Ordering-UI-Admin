@@ -77,7 +77,7 @@ export const RecoveryActionList = (props) => {
   return (
     <>
       <Container>
-        <Table>
+        <Table isRelative={recoveryActionList?.actions?.length > 5}>
           <thead>
             <tr>
               <th>{t('ACTION', 'Action')}</th>

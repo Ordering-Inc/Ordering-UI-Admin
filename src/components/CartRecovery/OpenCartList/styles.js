@@ -81,13 +81,22 @@ export const Table = styled.table`
       th {
         color: ${props => props.theme.colors?.headingColor};
         white-space: nowrap;
-        position: sticky;
-        top: 0px;
         z-index: 100;
         background: ${props => props.theme.colors.backgroundPage};
       }
     }
   }
+
+  ${({ isRelative }) => isRelative && css`
+    thead {
+      tr {
+        th {
+          position: sticky;
+          top: 0px;
+        }
+      }
+    }
+  `}
 
   p {
     overflow: hidden;
