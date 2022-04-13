@@ -21,9 +21,9 @@ var _Shared = require("../../Shared");
 
 var _CampaignDetailGeneral = require("../CampaignDetailGeneral");
 
-var _styles = require("./styles");
-
 var _CampaignDetailContent = require("../CampaignDetailContent");
+
+var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 

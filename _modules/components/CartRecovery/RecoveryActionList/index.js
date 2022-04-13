@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var RecoveryActionList = function RecoveryActionList(props) {
-  var _recoveryActionList$a;
+  var _recoveryActionList$a, _recoveryActionList$a2;
 
   var recoveryActionList = props.recoveryActionList,
       paginationProps = props.paginationProps,
@@ -117,7 +117,9 @@ var RecoveryActionList = function RecoveryActionList(props) {
     handleOpenDetail(action);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Table, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('ACTION', 'Action')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Table, {
+    isRelative: (recoveryActionList === null || recoveryActionList === void 0 ? void 0 : (_recoveryActionList$a = recoveryActionList.actions) === null || _recoveryActionList$a === void 0 ? void 0 : _recoveryActionList$a.length) > 5
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('ACTION', 'Action')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement("th", {
     className: "allow-colums action"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     open: openPopover,
@@ -190,11 +192,11 @@ var RecoveryActionList = function RecoveryActionList(props) {
       },
       className: "enable_control"
     })))));
-  })), !recoveryActionList.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
+  }))), !recoveryActionList.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
     onClick: function onClick() {
       return handleOpenDetail({});
     }
-  }, t('ADD_NEW_RECOVERY_ACTION', 'Add new recovery action')), (recoveryActionList === null || recoveryActionList === void 0 ? void 0 : (_recoveryActionList$a = recoveryActionList.actions) === null || _recoveryActionList$a === void 0 ? void 0 : _recoveryActionList$a.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }, t('ADD_NEW_RECOVERY_ACTION', 'Add new recovery action')), (recoveryActionList === null || recoveryActionList === void 0 ? void 0 : (_recoveryActionList$a2 = recoveryActionList.actions) === null || _recoveryActionList$a2 === void 0 ? void 0 : _recoveryActionList$a2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage,
     totalPages: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages,
     handleChangePage: handleChangePage,

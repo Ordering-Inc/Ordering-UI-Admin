@@ -54,6 +54,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OpenCartList = function OpenCartList(props) {
+  var _cartList$carts;
+
   var cartList = props.cartList,
       pagination = props.pagination,
       cartDetailId = props.cartDetailId,
@@ -150,7 +152,8 @@ var OpenCartList = function OpenCartList(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CartsContainer, {
     id: "cartTable"
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
-    className: "carts_table"
+    className: "carts_table",
+    isRelative: (cartList === null || cartList === void 0 ? void 0 : (_cartList$carts = cartList.carts) === null || _cartList$carts === void 0 ? void 0 : _cartList$carts.length) > 5
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
     className: "carts-id"
   }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.id) && /*#__PURE__*/_react.default.createElement("span", {

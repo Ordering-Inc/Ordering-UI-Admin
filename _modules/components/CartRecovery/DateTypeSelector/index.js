@@ -110,15 +110,15 @@ var DateTypeSelector = function DateTypeSelector(props) {
     };
   }, [isShowCalendar]);
   (0, _react.useEffect)(function () {
-    if (filterValues && filterValues !== null && filterValues !== void 0 && filterValues.deliveryFromDatetime && filterValues !== null && filterValues !== void 0 && filterValues.deliveryEndDatetime) {
-      setDateRange([{
-        startDate: new Date((0, _moment.default)(filterValues === null || filterValues === void 0 ? void 0 : filterValues.deliveryFromDatetime).format('YYYY-MM-DD')),
-        endDate: new Date((0, _moment.default)(filterValues === null || filterValues === void 0 ? void 0 : filterValues.deliveryEndDatetime).format('YYYY-MM-DD')),
-        key: 'selection'
-      }]);
-    }
-  }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.PlaceholderTitle, {
+    setDateRange([{
+      startDate: filterValues !== null && filterValues !== void 0 && filterValues.deliveryFromDatetime ? new Date((0, _moment.default)(filterValues === null || filterValues === void 0 ? void 0 : filterValues.deliveryFromDatetime).format('YYYY-MM-DD')) : null,
+      endDate: filterValues !== null && filterValues !== void 0 && filterValues.deliveryEndDatetime ? new Date((0, _moment.default)(filterValues === null || filterValues === void 0 ? void 0 : filterValues.deliveryEndDatetime).format('YYYY-MM-DD')) : null,
+      key: 'selection'
+    }]);
+  }, [filterValues]);
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
+    className: "ordering-calendar-btn"
+  }, /*#__PURE__*/_react.default.createElement(_styles2.PlaceholderTitle, {
     onClick: handleOpenCalendar
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsCalendarContainer, {
     ref: calendarRef
