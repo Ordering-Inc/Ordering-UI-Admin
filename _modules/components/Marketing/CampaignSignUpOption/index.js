@@ -42,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
-  var _ruleFormState$change, _ruleFormState$change2, _ruleFormState$change3, _ruleFormState$change4, _ruleFormState$change11, _ruleFormState$change12;
+  var _ruleFormState$change, _ruleFormState$change2, _ruleFormState$change3, _ruleFormState$change4, _ruleFormState$change13, _ruleFormState$change14;
 
   var type = props.type,
       title = props.title,
@@ -93,7 +93,7 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
   };
 
   var handleSaveRule = function handleSaveRule() {
-    var _ruleFormState$change5, _ruleFormState$change6, _ruleFormState$change7;
+    var _ruleFormState$change5, _ruleFormState$change6, _ruleFormState$change9;
 
     if (!((_ruleFormState$change5 = ruleFormState.changes) !== null && _ruleFormState$change5 !== void 0 && _ruleFormState$change5.date_condition)) {
       setAlertState({
@@ -112,9 +112,17 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
     }
 
     if (isAddMode) {
-      var _formState$changes;
+      var _formState$changes, _ruleFormState$change7, _ruleFormState$change8, _formState$changes2;
 
-      var updatedConditions = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.conditions.map(function (condition) {
+      if ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.audience_type) === 'fixed' && ((ruleFormState === null || ruleFormState === void 0 ? void 0 : (_ruleFormState$change7 = ruleFormState.changes) === null || _ruleFormState$change7 === void 0 ? void 0 : _ruleFormState$change7.date_condition) === '=' || (ruleFormState === null || ruleFormState === void 0 ? void 0 : (_ruleFormState$change8 = ruleFormState.changes) === null || _ruleFormState$change8 === void 0 ? void 0 : _ruleFormState$change8.date_condition) === '>')) {
+        setAlertState({
+          open: true,
+          content: t('REQUIRED_BEFORE_OR_RANGE_OPTION_WHEN_FIXED', 'when audience type is Fixed, date condition is required Before or Date range option')
+        });
+        return;
+      }
+
+      var updatedConditions = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.conditions.map(function (condition) {
         if (condition.type === type) {
           return _objectSpread(_objectSpread({}, condition), ruleFormState.changes);
         }
@@ -122,7 +130,7 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
         return condition;
       });
       handleChangeItem('conditions', updatedConditions);
-    } else if ((_ruleFormState$change7 = ruleFormState.changes) !== null && _ruleFormState$change7 !== void 0 && _ruleFormState$change7.id) {
+    } else if ((_ruleFormState$change9 = ruleFormState.changes) !== null && _ruleFormState$change9 !== void 0 && _ruleFormState$change9.id) {
       handleUpdateRule();
     } else {
       handleAddRule();
@@ -151,7 +159,7 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
     };
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, title), optionList.map(function (option) {
-    var _ruleFormState$change8, _ruleFormState$change9, _ruleFormState$change10;
+    var _ruleFormState$change10, _ruleFormState$change11, _ruleFormState$change12;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: option.key
@@ -159,22 +167,22 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
       onClick: function onClick() {
         return handleChangeOption(option.key);
       }
-    }, ((_ruleFormState$change8 = ruleFormState.changes) === null || _ruleFormState$change8 === void 0 ? void 0 : _ruleFormState$change8.date_condition) === option.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    }, ((_ruleFormState$change10 = ruleFormState.changes) === null || _ruleFormState$change10 === void 0 ? void 0 : _ruleFormState$change10.date_condition) === option.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, option.title))), ((_ruleFormState$change9 = ruleFormState.changes) === null || _ruleFormState$change9 === void 0 ? void 0 : _ruleFormState$change9.date_condition) === option.key && /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, option.title))), ((_ruleFormState$change11 = ruleFormState.changes) === null || _ruleFormState$change11 === void 0 ? void 0 : _ruleFormState$change11.date_condition) === option.key && /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
       withTime: true,
       isLeft: true,
       isSingleDate: true,
-      defaultValue: (_ruleFormState$change10 = ruleFormState.changes) === null || _ruleFormState$change10 === void 0 ? void 0 : _ruleFormState$change10.date,
+      defaultValue: (_ruleFormState$change12 = ruleFormState.changes) === null || _ruleFormState$change12 === void 0 ? void 0 : _ruleFormState$change12.date,
       handleChangeDate: handleChangeDateTime
     })));
   }), /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
     onClick: function onClick() {
       return handleChangeOption('<>');
     }
-  }, ((_ruleFormState$change11 = ruleFormState.changes) === null || _ruleFormState$change11 === void 0 ? void 0 : _ruleFormState$change11.date_condition) === '<>' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+  }, ((_ruleFormState$change13 = ruleFormState.changes) === null || _ruleFormState$change13 === void 0 ? void 0 : _ruleFormState$change13.date_condition) === '<>' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DATE_RANGE', 'Date range')))), ((_ruleFormState$change12 = ruleFormState.changes) === null || _ruleFormState$change12 === void 0 ? void 0 : _ruleFormState$change12.date_condition) === '<>' && /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DATE_RANGE', 'Date range')))), ((_ruleFormState$change14 = ruleFormState.changes) === null || _ruleFormState$change14 === void 0 ? void 0 : _ruleFormState$change14.date_condition) === '<>' && /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: defaultValue,
     isLeft: true
