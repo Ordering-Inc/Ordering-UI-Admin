@@ -1,18 +1,29 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
-export const UserName = styled.h1`
-  font-size: 20px;
-  font-weight: 700;
-  color: ${props => props.theme.colors.headingColor};
-  margin: 0px;
+export const UserName = styled.div`
+  display: flex;
+  align-items: center;
+  > span {
+    font-size: 20px;
+    font-weight: 700;
+    color: ${props => props.theme.colors.headingColor};
+    margin: 0;
+  }
+  > label {
+    margin-left: 10px;
+    ${props => props.theme.rtl && css`
+      margin-right: 10px;
+      margin-left: 0px;
+    `}
+  }
 `
 
 export const DetailsHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: -2px;
+  margin-top: -5px;
 `
 
 export const SavedPlaces = styled.div`
