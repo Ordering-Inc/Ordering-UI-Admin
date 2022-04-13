@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, Switch, Button } from '../../../styles'
-import { Modal, RangeCalendar } from '../../Shared'
+import { Modal, RangeCalendar, Alert } from '../../Shared'
 import { CampaignAmountOption } from '../CampaignAmountOption'
 import { CampaignSignUpOption } from '../CampaignSignUpOption'
 
@@ -48,6 +48,7 @@ export const CampaignDetailGeneral = (props) => {
   const [isASAP, setIsASAP] = useState(true)
   const [isRuleModal, setIsRuleModal] = useState(false)
   const [selectedRule, setSelectedRule] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const ruleList = [
     { key: 'orders_count', title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options') },
@@ -55,6 +56,13 @@ export const CampaignDetailGeneral = (props) => {
     { key: 'user_last_order_at', title: t('LAST_ORDER_DATE_OPTIONS', 'Last order date options') },
     { key: 'user_last_open_cart_at', title: `${t('OPEN_CARTS', 'Open Carts')} / ${t('CART_RECOVERY', 'Cart recovery')}` }
   ]
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
 
   const handleCloseRuleModal = () => {
     setIsRuleModal(false)
@@ -118,6 +126,28 @@ export const CampaignDetailGeneral = (props) => {
     }
   }
 
+  const handleChangeFixed = () => {
+    const valid = getConditionStatus()
+    if (isAddMode && valid) {
+      setAlertState({
+        open: true,
+        content: t('REQUIRED_BEFORE_OR_RANGE_OPTION_WHEN_FIXED', 'when audience type is Fixed, date condition is required Before or Date range option')
+      })
+      return
+    }
+    handleChangeItem('audience_type', 'fixed')
+  }
+
+  const getConditionStatus = () => {
+    let valid = false
+    formState?.changes?.conditions && formState.changes.conditions.forEach(condition => {
+      if (condition?.date_condition === '=' || condition?.date_condition === '>') {
+        valid = true
+      }
+    })
+    return valid
+  }
+
   const isEnableStatus = (key) => {
     const conditions = formState?.changes?.conditions ?? campaignState?.campaign?.conditions
     if (!conditions) {
@@ -175,7 +205,7 @@ export const CampaignDetailGeneral = (props) => {
           </DynamicWrapper>
           <FixedWrapper>
             <RadioCheckWrapper
-              onClick={() => handleChangeItem('audience_type', 'fixed')}
+              onClick={handleChangeFixed}
             >
               {(formState?.changes?.audience_type ?? campaignState?.campaign?.audience_type) === 'fixed' ? <CheckIcon className='fill' /> : <UnCheckIcon />}
               <span>{t('FIXED', 'Fixed')}</span>
@@ -252,6 +282,15 @@ export const CampaignDetailGeneral = (props) => {
           {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
         </Button>
       </ButtonWrapper>
+      <Alert
+        title={t('CAMPAIGN', 'Campaign')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
       <Modal
         width='600px'
         height='550px'
