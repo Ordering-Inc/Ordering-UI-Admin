@@ -281,6 +281,7 @@ export const WrapOrderStatusSelector = styled.div`
 
 export const WrapperPagination = styled.div`
   padding-top: 5px;
+  width: calc(100% - 10px);
 
   > div {
     justify-content: flex-end;

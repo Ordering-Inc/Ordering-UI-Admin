@@ -175,6 +175,7 @@ export const DragImageWrapper = styled.div`
 `
 
 export const PagesBottomContainer = styled.div`
+  width: calc(100% - 10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
