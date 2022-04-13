@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
-  var _campaignState$campai4, _ref, _formState$changes$na, _formState$changes3, _campaignState$campai5, _formState$changes$au, _formState$changes4, _campaignState$campai6, _formState$changes$au2, _formState$changes5, _campaignState$campai7, _ref2, _formState$changes$en, _formState$changes6, _campaignState$campai8, _formState$changes$au3, _formState$changes7, _campaignState$campai9, _formState$changes$au4, _formState$changes8, _campaignState$campai10, _formState$changes9, _campaignState$campai11, _formState$changes$st, _formState$changes10, _campaignState$campai12, _formState$changes$st2, _formState$changes11, _campaignState$campai13, _formState$changes$sc, _formState$changes12, _campaignState$campai14;
+  var _campaignState$campai4, _ref, _formState$changes$na, _formState$changes4, _campaignState$campai5, _formState$changes$au, _formState$changes5, _campaignState$campai6, _formState$changes$au2, _formState$changes6, _campaignState$campai7, _ref2, _formState$changes$en, _formState$changes7, _campaignState$campai8, _formState$changes$au3, _formState$changes8, _campaignState$campai9, _formState$changes$au4, _formState$changes9, _campaignState$campai10, _formState$changes10, _campaignState$campai11, _formState$changes$st, _formState$changes11, _campaignState$campai12, _formState$changes$st2, _formState$changes12, _campaignState$campai13, _formState$changes$sc, _formState$changes13, _campaignState$campai14;
 
   var formState = props.formState,
       campaignState = props.campaignState,
@@ -83,6 +83,14 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
       selectedRule = _useState6[0],
       setSelectedRule = _useState6[1];
 
+  var _useState7 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
+
   var ruleList = [{
     key: 'orders_count',
     title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options')
@@ -96,6 +104,13 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     key: 'user_last_open_cart_at',
     title: "".concat(t('OPEN_CARTS', 'Open Carts'), " / ").concat(t('CART_RECOVERY', 'Cart recovery'))
   }];
+
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
 
   var handleCloseRuleModal = function handleCloseRuleModal() {
     setIsRuleModal(false);
@@ -163,10 +178,36 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     }
   };
 
-  var isEnableStatus = function isEnableStatus(key) {
-    var _formState$changes$co2, _formState$changes2, _campaignState$campai2;
+  var handleChangeFixed = function handleChangeFixed() {
+    var valid = getConditionStatus();
 
-    var conditions = (_formState$changes$co2 = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.conditions) !== null && _formState$changes$co2 !== void 0 ? _formState$changes$co2 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai2 = campaignState.campaign) === null || _campaignState$campai2 === void 0 ? void 0 : _campaignState$campai2.conditions;
+    if (isAddMode && valid) {
+      setAlertState({
+        open: true,
+        content: t('REQUIRED_BEFORE_OR_RANGE_OPTION_WHEN_FIXED', 'when audience type is Fixed, date condition is required Before or Date range option')
+      });
+      return;
+    }
+
+    handleChangeItem('audience_type', 'fixed');
+  };
+
+  var getConditionStatus = function getConditionStatus() {
+    var _formState$changes2;
+
+    var valid = false;
+    (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.conditions) && formState.changes.conditions.forEach(function (condition) {
+      if ((condition === null || condition === void 0 ? void 0 : condition.date_condition) === '=' || (condition === null || condition === void 0 ? void 0 : condition.date_condition) === '>') {
+        valid = true;
+      }
+    });
+    return valid;
+  };
+
+  var isEnableStatus = function isEnableStatus(key) {
+    var _formState$changes$co2, _formState$changes3, _campaignState$campai2;
+
+    var conditions = (_formState$changes$co2 = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.conditions) !== null && _formState$changes$co2 !== void 0 ? _formState$changes$co2 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai2 = campaignState.campaign) === null || _campaignState$campai2 === void 0 ? void 0 : _campaignState$campai2.conditions;
 
     if (!conditions) {
       return false;
@@ -188,30 +229,28 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('NAME', 'Name'),
     name: "name",
-    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai5 = campaignState.campaign) === null || _campaignState$campai5 === void 0 ? void 0 : _campaignState$campai5.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai5 = campaignState.campaign) === null || _campaignState$campai5 === void 0 ? void 0 : _campaignState$campai5.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: handleChangeInput
   })), /*#__PURE__*/_react.default.createElement(_styles2.AudienceWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('AUDIENCE', 'Audience')), /*#__PURE__*/_react.default.createElement(_styles2.DynamicWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, {
     onClick: function onClick() {
       return handleChangeItem('audience_type', 'dynamic');
     }
-  }, ((_formState$changes$au = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.audience_type) !== null && _formState$changes$au !== void 0 ? _formState$changes$au : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai6 = campaignState.campaign) === null || _campaignState$campai6 === void 0 ? void 0 : _campaignState$campai6.audience_type) === 'dynamic' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+  }, ((_formState$changes$au = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.audience_type) !== null && _formState$changes$au !== void 0 ? _formState$changes$au : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai6 = campaignState.campaign) === null || _campaignState$campai6 === void 0 ? void 0 : _campaignState$campai6.audience_type) === 'dynamic' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DYNAMIC', 'Dynamic'))), /*#__PURE__*/_react.default.createElement(_styles2.DynamicContentWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('CAMPAIGN_DYNAMIC_DESCRIPTION', 'People who match rules now and in the future')), ((_formState$changes$au2 = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.audience_type) !== null && _formState$changes$au2 !== void 0 ? _formState$changes$au2 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai7 = campaignState.campaign) === null || _campaignState$campai7 === void 0 ? void 0 : _campaignState$campai7.audience_type) === 'dynamic' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DYNAMIC', 'Dynamic'))), /*#__PURE__*/_react.default.createElement(_styles2.DynamicContentWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('CAMPAIGN_DYNAMIC_DESCRIPTION', 'People who match rules now and in the future')), ((_formState$changes$au2 = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.audience_type) !== null && _formState$changes$au2 !== void 0 ? _formState$changes$au2 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai7 = campaignState.campaign) === null || _campaignState$campai7 === void 0 ? void 0 : _campaignState$campai7.audience_type) === 'dynamic' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "campaign-enabled"
   }, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_ref2 = (_formState$changes$en = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.enabled) !== null && _formState$changes$en !== void 0 ? _formState$changes$en : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai8 = campaignState.campaign) === null || _campaignState$campai8 === void 0 ? void 0 : _campaignState$campai8.enabled) !== null && _ref2 !== void 0 ? _ref2 : false,
+    defaultChecked: (_ref2 = (_formState$changes$en = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.enabled) !== null && _formState$changes$en !== void 0 ? _formState$changes$en : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai8 = campaignState.campaign) === null || _campaignState$campai8 === void 0 ? void 0 : _campaignState$campai8.enabled) !== null && _ref2 !== void 0 ? _ref2 : false,
     onChange: function onChange(val) {
       return handleChangeItem('enabled', val);
     }
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.FixedWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, {
-    onClick: function onClick() {
-      return handleChangeItem('audience_type', 'fixed');
-    }
-  }, ((_formState$changes$au3 = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.audience_type) !== null && _formState$changes$au3 !== void 0 ? _formState$changes$au3 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai9 = campaignState.campaign) === null || _campaignState$campai9 === void 0 ? void 0 : _campaignState$campai9.audience_type) === 'fixed' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    onClick: handleChangeFixed
+  }, ((_formState$changes$au3 = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.audience_type) !== null && _formState$changes$au3 !== void 0 ? _formState$changes$au3 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai9 = campaignState.campaign) === null || _campaignState$campai9 === void 0 ? void 0 : _campaignState$campai9.audience_type) === 'fixed' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('FIXED', 'Fixed'))), /*#__PURE__*/_react.default.createElement(_styles2.FixedContent, null, /*#__PURE__*/_react.default.createElement("p", null, t('CAMPAIGN_FIXED_DESCRIPTION', 'Only people who match rules right now')), ((_formState$changes$au4 = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.audience_type) !== null && _formState$changes$au4 !== void 0 ? _formState$changes$au4 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai10 = campaignState.campaign) === null || _campaignState$campai10 === void 0 ? void 0 : _campaignState$campai10.audience_type) === 'fixed' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.status) || (campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai11 = campaignState.campaign) === null || _campaignState$campai11 === void 0 ? void 0 : _campaignState$campai11.status)) && /*#__PURE__*/_react.default.createElement(_styles2.FixedStatusWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, (_formState$changes$st = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.status) !== null && _formState$changes$st !== void 0 ? _formState$changes$st : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai12 = campaignState.campaign) === null || _campaignState$campai12 === void 0 ? void 0 : _campaignState$campai12.status), /*#__PURE__*/_react.default.createElement(_styles2.StatusPoint, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('FIXED', 'Fixed'))), /*#__PURE__*/_react.default.createElement(_styles2.FixedContent, null, /*#__PURE__*/_react.default.createElement("p", null, t('CAMPAIGN_FIXED_DESCRIPTION', 'Only people who match rules right now')), ((_formState$changes$au4 = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.audience_type) !== null && _formState$changes$au4 !== void 0 ? _formState$changes$au4 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai10 = campaignState.campaign) === null || _campaignState$campai10 === void 0 ? void 0 : _campaignState$campai10.audience_type) === 'fixed' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.status) || (campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai11 = campaignState.campaign) === null || _campaignState$campai11 === void 0 ? void 0 : _campaignState$campai11.status)) && /*#__PURE__*/_react.default.createElement(_styles2.FixedStatusWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, (_formState$changes$st = formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.status) !== null && _formState$changes$st !== void 0 ? _formState$changes$st : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai12 = campaignState.campaign) === null || _campaignState$campai12 === void 0 ? void 0 : _campaignState$campai12.status), /*#__PURE__*/_react.default.createElement(_styles2.StatusPoint, {
     style: {
-      background: checkColor((_formState$changes$st2 = formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.status) !== null && _formState$changes$st2 !== void 0 ? _formState$changes$st2 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai13 = campaignState.campaign) === null || _campaignState$campai13 === void 0 ? void 0 : _campaignState$campai13.status)
+      background: checkColor((_formState$changes$st2 = formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.status) !== null && _formState$changes$st2 !== void 0 ? _formState$changes$st2 : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai13 = campaignState.campaign) === null || _campaignState$campai13 === void 0 ? void 0 : _campaignState$campai13.status)
     }
   })), /*#__PURE__*/_react.default.createElement("h3", null, ('DELIVERY_SCHEDULE', 'Delivery Schedule')), /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, {
     onClick: function onClick() {
@@ -230,7 +269,7 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     withTime: true,
     isLeft: true,
     isSingleDate: true,
-    defaultValue: (_formState$changes$sc = formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.scheduled_at) !== null && _formState$changes$sc !== void 0 ? _formState$changes$sc : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai14 = campaignState.campaign) === null || _campaignState$campai14 === void 0 ? void 0 : _campaignState$campai14.scheduled_at,
+    defaultValue: (_formState$changes$sc = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.scheduled_at) !== null && _formState$changes$sc !== void 0 ? _formState$changes$sc : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai14 = campaignState.campaign) === null || _campaignState$campai14 === void 0 ? void 0 : _campaignState$campai14.scheduled_at,
     handleChangeDate: handleChangeDateTime
   })))))), /*#__PURE__*/_react.default.createElement(_styles2.RulesWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('RULES', 'Rules')), ruleList.map(function (rule, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
@@ -253,7 +292,19 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
       return handleSubmitBtnClick();
     },
     disabled: Object.keys(formState.changes).length === 0 || formState.loading
-  }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+  }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('CAMPAIGN', 'Campaign'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "600px",
     height: "550px",
     padding: "25px",
