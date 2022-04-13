@@ -134,6 +134,7 @@ export const EnterprisePromotionRules = (props) => {
               <label>{t('VALUE', 'Value')}</label>
               <Input
                 name='rate'
+                id='discount_value'
                 value={formState.changes?.rate ?? promotionState?.promotion?.rate ?? ''}
                 placeholder={0}
                 onChange={handleChangeInput}
@@ -146,6 +147,7 @@ export const EnterprisePromotionRules = (props) => {
                   required: t('VALIDATION_ERROR_REQUIRED', 'The _attribute_ field is required.').replace('_attribute_', t('RATE', 'Rate')),
                   validate: handleMaxPercentValidate
                 })}
+                autoComplete='off'
               />
             </div>
           </DiscountContainer>
