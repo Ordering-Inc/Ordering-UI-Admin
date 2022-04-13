@@ -79,7 +79,8 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
 
   var _useState = (0, _react.useState)({
     open: false,
-    content: []
+    content: [],
+    handleOnAccept: null
   }),
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
@@ -114,14 +115,19 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
   }];
 
   var handleClickTab = function handleClickTab(option) {
+    if (selectedOption === 'rules') {
+      var isValid = handleCheckDiscountPercentageValidation();
+      if (!isValid) return;
+    }
+
     setMoveDistance(0);
     setSelectedOption(option);
 
     if (Object.keys(formState.changes).length !== 0 && !actionState.loading) {
       if (isAddMode) {
-        onAddPromotion();
+        handleAddPromotion();
       } else {
-        onUpdateClick();
+        handleUpdateClick();
       }
     }
   };
@@ -148,24 +154,22 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     if (rateType === 1 && parseFloat(rate) > 100) {
       setAlertState({
         open: true,
-        content: [t('VALIDATION_ERROR_MAX_NUMERIC', 'The _attribute_ may not be greater than _max_.').replace('_attribute_', t('DISCOUNT_PERCENTAGE', 'Discount percentage')).replace('_max_', 100)]
+        content: [t('VALIDATION_ERROR_MAX_NUMERIC', 'The _attribute_ may not be greater than _max_.').replace('_attribute_', t('DISCOUNT_PERCENTAGE', 'Discount percentage')).replace('_max_', 100)],
+        handleOnAccept: function handleOnAccept() {
+          if (document.getElementById('discount_value')) {
+            document.getElementById('discount_value').focus();
+          }
+
+          setAlertState({
+            open: false,
+            content: []
+          });
+        }
       });
       return false;
     }
 
     return true;
-  };
-
-  var onUpdateClick = function onUpdateClick() {
-    var isValid = handleCheckDiscountPercentageValidation();
-    if (!isValid) return;
-    handleUpdateClick();
-  };
-
-  var onAddPromotion = function onAddPromotion() {
-    var isValid = handleCheckDiscountPercentageValidation();
-    if (!isValid) return;
-    handleAddPromotion();
   };
 
   (0, _react.useEffect)(function () {
@@ -199,8 +203,8 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       }
     }, option.content);
   }))), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionGeneralDetails.EnterprisePromotionGeneralDetails, _extends({}, props, {
-    handleUpdateClick: onUpdateClick,
-    handleAddPromotion: onAddPromotion
+    handleUpdateClick: handleUpdateClick,
+    handleAddPromotion: handleAddPromotion
   })), selectedOption === 'sites' && /*#__PURE__*/_react.default.createElement(_Shared.SelectSites, {
     isAddMode: isAddMode,
     allSites: sitesState.sites,
@@ -213,8 +217,8 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       return _handleSelectAllSites(false);
     },
     isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
-    handleUpdateClick: onUpdateClick,
-    handleAddPromotion: onAddPromotion
+    handleUpdateClick: handleUpdateClick,
+    handleAddPromotion: handleAddPromotion
   }), selectedOption === 'businesses' && /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinesses, {
     isAddMode: isAddMode,
     allBusinesses: businessesList.businesses,
@@ -227,11 +231,11 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       return handleSelectAllBusiness(false);
     },
     isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
-    handleUpdateClick: onUpdateClick,
-    handleAddClick: onAddPromotion
+    handleUpdateClick: handleUpdateClick,
+    handleAddClick: handleAddPromotion
   }), selectedOption === 'rules' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionRules.EnterprisePromotionRules, _extends({}, props, {
-    handleUpdateClick: onUpdateClick,
-    handleAddPromotion: onAddPromotion
+    handleUpdateClick: handleUpdateClick,
+    handleAddPromotion: handleAddPromotion
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
@@ -244,7 +248,7 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       });
     },
     onAccept: function onAccept() {
-      return setAlertState({
+      return alertState !== null && alertState !== void 0 && alertState.handleOnAccept ? alertState.handleOnAccept() : setAlertState({
         open: false,
         content: []
       });
