@@ -98,8 +98,9 @@ const DeliveryUsersListingUI = (props) => {
   useEffect(() => {
     if (usersList.loading) return
     const id = query.get('id')
-    if (id === null) setIsOpenUserDetails(false)
-    else {
+    if (id === null) {
+      !isDriversManagersPage && setIsOpenUserDetails(false)
+    } else {
       const user = usersList.users.find(_user => _user.id === parseInt(id))
       if (user) {
         setOpenUser(user)
