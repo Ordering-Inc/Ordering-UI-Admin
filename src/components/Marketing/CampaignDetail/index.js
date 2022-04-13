@@ -5,6 +5,7 @@ import { useLanguage, CampaignDetail as CampaignDetailController } from 'orderin
 import { ThreeDots } from 'react-bootstrap-icons'
 import { Confirm, Alert } from '../../Shared'
 import { CampaignDetailGeneral } from '../CampaignDetailGeneral'
+import { CampaignDetailContent } from '../CampaignDetailContent'
 
 import {
   CampaignDetailContainer,
@@ -16,7 +17,6 @@ import {
   Tabs,
   Tab
 } from './styles'
-import { CampaignDetailContent } from '../CampaignDetailContent'
 
 const CampaignDetailUI = (props) => {
   const {

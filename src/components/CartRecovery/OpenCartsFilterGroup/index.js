@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useLanguage, OpenCartFilter as OpenCartFilterController } from 'ordering-components-admin'
 import { BusinessesSelector } from '../BusinessesSelector'
 import { CitySelector } from '../CitySelector'
@@ -31,6 +31,8 @@ const OpenCartsFilterGroupUI = (props) => {
 
   const [, t] = useLanguage()
 
+  const contentEndRef = useRef()
+
   const handleAcceptFilter = () => {
     handleChangeFilterValues(filterValues)
     handleCloseFilterModal()
@@ -40,6 +42,24 @@ const OpenCartsFilterGroupUI = (props) => {
     handleResetFilterValues()
     handleChangeFilterValues({})
   }
+
+  const scrollDown = (e) => {
+    if (!e.target.closest('.ordering-calendar-btn')) return
+
+    const el = document.querySelector('.popup-dialog')
+    if (el?.scrollHeight > el?.clientHeight) {
+      const top = contentEndRef.current.offsetTop
+      el.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('click', scrollDown)
+    return () => window.removeEventListener('click', scrollDown)
+  }, [])
 
   return (
     <Modal
@@ -98,6 +118,7 @@ const OpenCartsFilterGroupUI = (props) => {
           </Button>
         </ButtonGroup>
       </FilterGroupListContainer>
+      <div ref={contentEndRef} />
     </Modal>
   )
 }
