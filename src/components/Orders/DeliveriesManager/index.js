@@ -37,6 +37,8 @@ const DeliveriesManagerUI = (props) => {
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [detailsOrder, setDetailsOrder] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
+  const [timeStatus, setTimeStatus] = useState(null)
+  const [slaSettingTime, setSlaSettingTime] = useState(60000)
 
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
@@ -76,6 +78,8 @@ const DeliveriesManagerUI = (props) => {
           handleChangeFilterValues={handleChangeFilterValues}
           filterModalOpen={filterModalOpen}
           setFilterModalOpen={setFilterModalOpen}
+          setTimeStatus={setTimeStatus}
+          setSlaSettingTime={setSlaSettingTime}
         />
         <OrdersContent>
           <WrapItemView>
@@ -92,6 +96,8 @@ const DeliveriesManagerUI = (props) => {
               handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
               isOnlyDelivery
               setFilterModalOpen={setFilterModalOpen}
+              slaSettingTime={slaSettingTime}
+              timeStatus={timeStatus}
             />
           </WrapItemView>
         </OrdersContent>

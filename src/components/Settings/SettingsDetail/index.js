@@ -7,7 +7,8 @@ import { IconButton } from '../../../styles'
 import { Modal, NotFoundSource } from '../../Shared'
 import MdcPlayCircle from '@meronex/icons/mdc/MdcPlayCircle'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
-
+import { EmailSetting } from '../EmailSetting'
+import { NotificationSetting } from '../NotificationSetting'
 import { SettingsList } from '../SettingsList'
 
 import {
@@ -26,8 +27,6 @@ import {
   SubCategoryWrapper,
   SkeletonWrapper
 } from './styles'
-import { EmailSetting } from '../EmailSetting'
-import { NotificationSetting } from '../NotificationSetting'
 
 export const SettingsDetail = (props) => {
   const {

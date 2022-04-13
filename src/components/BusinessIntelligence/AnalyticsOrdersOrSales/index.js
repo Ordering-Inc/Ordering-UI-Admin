@@ -192,16 +192,19 @@ export const AnalyticsOrdersOrSales = (props) => {
       csv += `${isOrders ? row.orders : row.sales},`
       csv += '\n'
     }
-    var downloadLink = document.createElement('a')
-    var blob = new Blob(['\ufeff', csv])
-    var url = URL.createObjectURL(blob)
-    downloadLink.href = url
+
+    const link = document.createElement('a')
     const fileSuffix = new Date().getTime()
     const exportName = isOrders ? 'orders' : 'sales'
-    downloadLink.download = `${exportName}_${fileSuffix}.csv`
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
+    link.download = `${exportName}_${fileSuffix}.csv`
+
+    const blob = new Blob(['\ufeff', csv], { type: 'text/csv' })
+    const reader = new FileReader()
+    reader.readAsDataURL(blob)
+    reader.onload = () => {
+      link.href = reader.result
+      link.click()
+    }
   }
 
   const previewChart = () => {

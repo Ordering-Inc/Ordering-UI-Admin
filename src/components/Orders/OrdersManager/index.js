@@ -62,6 +62,7 @@ const OrdersManagerUI = (props) => {
   const [isTourFlag, setIsTourFlag] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [timeStatus, setTimeStatus] = useState(null)
+  const [slaSettingTime, setSlaSettingTime] = useState(60000)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const handleBackRedirect = () => {
@@ -181,6 +182,7 @@ const OrdersManagerUI = (props) => {
           filterModalOpen={filterModalOpen}
           setFilterModalOpen={setFilterModalOpen}
           setTimeStatus={setTimeStatus}
+          setSlaSettingTime={setSlaSettingTime}
         />
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
@@ -228,6 +230,7 @@ const OrdersManagerUI = (props) => {
                 setIsTourOpen={setIsTourOpen}
                 setFilterModalOpen={setFilterModalOpen}
                 timeStatus={timeStatus}
+                slaSettingTime={slaSettingTime}
               />
             </WrapItemView>
           </OrdersInnerContent>
