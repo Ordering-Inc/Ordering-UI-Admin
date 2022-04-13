@@ -105,6 +105,11 @@ export const EnterprisePromotionRules = (props) => {
     }
   }, [width])
 
+  useEffect(() => {
+    const rate = formState.changes?.rate ?? promotionState?.promotion?.rate ?? ''
+    formMethods.setValue('rate', rate)
+  }, [formState.changes?.rate, promotionState?.promotion?.rate])
+
   return (
     <RulesContainer>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -134,7 +139,7 @@ export const EnterprisePromotionRules = (props) => {
               <label>{t('VALUE', 'Value')}</label>
               <Input
                 name='rate'
-                value={formState.changes?.rate ?? promotionState?.promotion?.rate ?? ''}
+                id='discount_value'
                 placeholder={0}
                 onChange={handleChangeInput}
                 onKeyPress={(e) => {
@@ -146,6 +151,7 @@ export const EnterprisePromotionRules = (props) => {
                   required: t('VALIDATION_ERROR_REQUIRED', 'The _attribute_ field is required.').replace('_attribute_', t('RATE', 'Rate')),
                   validate: handleMaxPercentValidate
                 })}
+                autoComplete='off'
               />
             </div>
           </DiscountContainer>
