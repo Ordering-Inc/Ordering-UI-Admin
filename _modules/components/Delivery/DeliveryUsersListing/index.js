@@ -165,7 +165,10 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
   (0, _react.useEffect)(function () {
     if (usersList.loading) return;
     var id = query.get('id');
-    if (id === null) setIsOpenUserDetails(false);else {
+
+    if (id === null) {
+      !isDriversManagersPage && setIsOpenUserDetails(false);
+    } else {
       var user = usersList.users.find(function (_user) {
         return _user.id === parseInt(id);
       });
