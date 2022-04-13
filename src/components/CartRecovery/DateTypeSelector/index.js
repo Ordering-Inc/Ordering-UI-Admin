@@ -61,23 +61,21 @@ export const DateTypeSelector = (props) => {
   }, [isShowCalendar])
 
   useEffect(() => {
-    if (filterValues && filterValues?.deliveryFromDatetime && filterValues?.deliveryEndDatetime) {
-      setDateRange([
-        {
-          startDate: new Date(moment(filterValues?.deliveryFromDatetime).format('YYYY-MM-DD')),
-          endDate: new Date(moment(filterValues?.deliveryEndDatetime).format('YYYY-MM-DD')),
-          key: 'selection'
-        }
-      ])
-    }
-  }, [])
+    setDateRange([{
+      startDate: filterValues?.deliveryFromDatetime ? new Date(moment(filterValues?.deliveryFromDatetime).format('YYYY-MM-DD')) : null,
+      endDate: filterValues?.deliveryEndDatetime ? new Date(moment(filterValues?.deliveryEndDatetime).format('YYYY-MM-DD')) : null,
+      key: 'selection'
+    }])
+  }, [filterValues])
 
   return (
-    <Container>
+    <Container className='ordering-calendar-btn'>
       <PlaceholderTitle onClick={handleOpenCalendar}>
         <Calendar4 />
         {
-          dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')
+          dateRange[0].startDate
+            ? dateFormat(dateRange[0].startDate, dateRange[0].endDate)
+            : t('SELECT_DATE_RANGE', 'Select Date Range')
         }
       </PlaceholderTitle>
       {
