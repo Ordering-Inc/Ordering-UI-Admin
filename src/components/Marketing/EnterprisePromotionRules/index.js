@@ -105,6 +105,11 @@ export const EnterprisePromotionRules = (props) => {
     }
   }, [width])
 
+  useEffect(() => {
+    const rate = formState.changes?.rate ?? promotionState?.promotion?.rate ?? ''
+    formMethods.setValue('rate', rate)
+  }, [formState.changes?.rate, promotionState?.promotion?.rate])
+
   return (
     <RulesContainer>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -135,7 +140,6 @@ export const EnterprisePromotionRules = (props) => {
               <Input
                 name='rate'
                 id='discount_value'
-                value={formState.changes?.rate ?? promotionState?.promotion?.rate ?? ''}
                 placeholder={0}
                 onChange={handleChangeInput}
                 onKeyPress={(e) => {
