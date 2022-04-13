@@ -11,10 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
-var _styledComponents = require("styled-components");
-
-var _reactBootstrap = require("react-bootstrap");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
@@ -72,7 +68,6 @@ var UsersList = function UsersList(props) {
       getUsers = props.getUsers,
       handleChangeUserType = props.handleChangeUserType,
       handleChangeActiveUser = props.handleChangeActiveUser,
-      handleDeleteUser = props.handleDeleteUser,
       selectedUsers = props.selectedUsers,
       handleSelectedUsers = props.handleSelectedUsers,
       handleOpenUserDetails = props.handleOpenUserDetails,
@@ -83,8 +78,6 @@ var UsersList = function UsersList(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
-
-  var theme = (0, _styledComponents.useTheme)();
 
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -213,9 +206,7 @@ var UsersList = function UsersList(props) {
       width: 100
     })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 50
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 20
-    }))));
+    })))));
   }) : usersList === null || usersList === void 0 ? void 0 : usersList.users.map(function (user) {
     var _getUserType;
 
@@ -254,21 +245,7 @@ var UsersList = function UsersList(props) {
       onChange: function onChange(enabled) {
         return handleEnable(user, enabled);
       }
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperUserActionSelector, {
-      className: "user_action"
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
-      menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
-      title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDotsVertical, null),
-      id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleOpenUserDetails(user);
-      }
-    }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
-      onClick: function onClick() {
-        return handleDeleteUser(user === null || user === void 0 ? void 0 : user.id);
-      }
-    }, t('DELETE', 'Delete')))))));
+    })))));
   }))), /*#__PURE__*/_react.default.createElement(_styles2.UsersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewUserButton, {
     onClick: function onClick() {
       return handleOpenUserAddForm();

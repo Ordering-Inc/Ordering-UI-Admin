@@ -165,7 +165,10 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
   (0, _react.useEffect)(function () {
     if (usersList.loading) return;
     var id = query.get('id');
-    if (id === null) setIsOpenUserDetails(false);else {
+
+    if (id === null) {
+      !isDriversManagersPage && setIsOpenUserDetails(false);
+    } else {
       var user = usersList.users.find(function (_user) {
         return _user.id === parseInt(id);
       });
@@ -309,12 +312,14 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     isDriversManagersPage: isDriversManagersPage,
     open: isOpenUserDetails,
     user: openUser,
+    handleDeleteUser: handleDeleteUser,
     userId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     onClose: function onClose() {
       return handleBackRedirect();
     },
     handleSuccessUpdate: handleSuccessUpdate,
-    handleSuccessDeleteUser: handleSuccessDeleteUser
+    handleSuccessDeleteUser: handleSuccessDeleteUser,
+    handleChangeActiveUser: handleChangeActiveUser
   }), openUserAddForm && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "user_add_form",
     open: openUserAddForm,
@@ -342,7 +347,8 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
     UIComponent: DeliveryUsersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
-    isSearchByUserName: true
+    isSearchByUserName: true,
+    isDriver: true
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UsersList, usersListingProps);

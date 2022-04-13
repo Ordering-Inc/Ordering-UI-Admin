@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
+var _styledComponents = require("styled-components");
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Orders = require("../../Orders");
@@ -27,7 +29,13 @@ var _Users = require("../../Users");
 
 var _DriverGroupSetting = require("../DriverGroupSetting");
 
-var _styles = require("./styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _styles = require("../../../styles");
+
+var _reactBootstrap = require("react-bootstrap");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54,25 +62,75 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _userState$user6, _userState$user7, _userState$user8;
+  var _userState$user, _userState$user2, _userState$user3, _userState$user5, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _userState$user12;
 
   var isDriversPage = props.isDriversPage,
       isDriversManagersPage = props.isDriversManagersPage,
       userState = props.userState,
       setExtraOpen = props.setExtraOpen,
-      handleSuccessUserUpdate = props.handleSuccessUserUpdate;
+      handleSuccessUserUpdate = props.handleSuccessUserUpdate,
+      handleDeleteUser = props.handleDeleteUser,
+      handleChangeActiveUser = props.handleChangeActiveUser;
+  var theme = (0, _styledComponents.useTheme)();
+
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+      _useLanguage2 = _slicedToArray(_useLanguage, 2),
+      t = _useLanguage2[1];
 
   var _useState = (0, _react.useState)('profile'),
       _useState2 = _slicedToArray(_useState, 2),
       currentMenuSelected = _useState2[0],
       setCurrentMenuSelected = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isCustomField = _useState4[0],
+      setIsCustomField = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isPersonalization = _useState6[0],
+      setIsPersonalization = _useState6[1];
+
   (0, _react.useEffect)(function () {
     setExtraOpen(false);
   }, [currentMenuSelected]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UserName, null, userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.UserName, null, userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
-  }) : /*#__PURE__*/_react.default.createElement("span", null, userState === null || userState === void 0 ? void 0 : (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.name, " ", userState === null || userState === void 0 ? void 0 : (_userState$user2 = userState.user) === null || _userState$user2 === void 0 ? void 0 : _userState$user2.lastname)), /*#__PURE__*/_react.default.createElement(_UserDetailsMenu.UserDetailsMenu, {
+  }) : /*#__PURE__*/_react.default.createElement("span", null, (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.name, " ", (_userState$user2 = userState.user) === null || _userState$user2 === void 0 ? void 0 : _userState$user2.lastname), userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 50,
+    style: {
+      margin: '0px 5px'
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, handleChangeActiveUser && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (userState === null || userState === void 0 ? void 0 : (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.enabled) || false,
+    onChange: function onChange(enabled) {
+      var _userState$user4;
+
+      return handleChangeActiveUser({
+        id: userState === null || userState === void 0 ? void 0 : (_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.id,
+        enabled: enabled
+      });
+    }
+  }))), ((_userState$user5 = userState.user) === null || _userState$user5 === void 0 ? void 0 : _userState$user5.id) && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return setIsCustomField(true);
+    }
+  }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return setIsPersonalization(true);
+    }
+  }, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      var _userState$user6;
+
+      return handleDeleteUser((_userState$user6 = userState.user) === null || _userState$user6 === void 0 ? void 0 : _userState$user6.id);
+    }
+  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_UserDetailsMenu.UserDetailsMenu, {
     isDriverMenu: isDriversPage,
     currentMenuSelected: currentMenuSelected,
     handleChangeMenu: setCurrentMenuSelected
@@ -82,21 +140,39 @@ var UserDetailsUI = function UserDetailsUI(props) {
     user: userState.user,
     handleSuccessUpdate: handleSuccessUserUpdate
   }), currentMenuSelected === 'driver_group' && /*#__PURE__*/_react.default.createElement(_DriverGroupSetting.DriverGroupSetting, {
-    userId: userState === null || userState === void 0 ? void 0 : (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.id
-  }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 ? void 0 : (_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.addresses) && /*#__PURE__*/_react.default.createElement(_styles.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    userId: userState === null || userState === void 0 ? void 0 : (_userState$user7 = userState.user) === null || _userState$user7 === void 0 ? void 0 : _userState$user7.id
+  }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 ? void 0 : (_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.addresses) && /*#__PURE__*/_react.default.createElement(_styles2.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isSeletectedUserAddresses: true,
-    userId: (_userState$user5 = userState.user) === null || _userState$user5 === void 0 ? void 0 : _userState$user5.id,
-    addresses: (_userState$user6 = userState.user) === null || _userState$user6 === void 0 ? void 0 : _userState$user6.addresses,
+    userId: (_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.id,
+    addresses: (_userState$user10 = userState.user) === null || _userState$user10 === void 0 ? void 0 : _userState$user10.addresses,
     setExtraOpen: setExtraOpen,
     userState: userState,
     handleSuccessUpdate: handleSuccessUserUpdate
   }))), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_Orders.OrdersManager, {
     isSelectedOrders: true,
-    customerId: (_userState$user7 = userState.user) === null || _userState$user7 === void 0 ? void 0 : _userState$user7.id,
+    customerId: (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.id,
     handleCustomOrderDetail: setExtraOpen
-  }), currentMenuSelected === 'metafields' && /*#__PURE__*/_react.default.createElement(_Users.UserMetaFields, {
-    userId: (_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.id
-  }), currentMenuSelected === 'personalization' && /*#__PURE__*/_react.default.createElement(_styles.PersonalizationWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.Personalization, null))));
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('CUSTOM_FIELDS', 'Custom fields'),
+    open: isCustomField,
+    onClose: function onClose() {
+      return setIsCustomField(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Users.UserMetaFields, {
+    userId: (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.id
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('PERSONALIZATION', 'Personalization'),
+    open: isPersonalization,
+    onClose: function onClose() {
+      return setIsPersonalization(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles2.PersonalizationWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.Personalization, null))));
 };
 
 exports.UserDetailsUI = UserDetailsUI;

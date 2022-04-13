@@ -149,7 +149,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
         e.preventDefault();
       }
     }
-  }), /*#__PURE__*/_react.default.createElement("span", null, "="), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)))), /*#__PURE__*/_react.default.createElement(_styles2.PointsAccumulationContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('POINTS_ACCUMULATION', 'Points accumulation')), /*#__PURE__*/_react.default.createElement("p", null, t('AMOUNT_POINTS_ASSIGN', 'Amount of points to assign')), /*#__PURE__*/_react.default.createElement("span", null, t('VALUE', 'Value')), /*#__PURE__*/_react.default.createElement(_styles2.AccumulationInputWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)), /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react.default.createElement("span", null, "="), /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)))), /*#__PURE__*/_react.default.createElement(_styles2.PointsAccumulationContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('POINTS_ACCUMULATION', 'Points accumulation')), /*#__PURE__*/_react.default.createElement("p", null, t('AMOUNT_POINTS_ASSIGN_TO_ORDER_SUBTOTAL', 'Amount of points to assign in relation to the order subtotal')), /*#__PURE__*/_react.default.createElement("span", null, t('VALUE', 'Value')), /*#__PURE__*/_react.default.createElement(_styles2.AccumulationInputWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(1)), /*#__PURE__*/_react.default.createElement("span", {
     className: "equal"
   }, "="), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",

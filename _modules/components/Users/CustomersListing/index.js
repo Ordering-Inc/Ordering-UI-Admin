@@ -205,7 +205,8 @@ var CustomersListingUI = function CustomersListingUI(props) {
     },
     handleParentSidebarMove: function handleParentSidebarMove(val) {
       return setMoveDistance(val);
-    }
+    },
+    handleChangeActiveUser: handleChangeActiveUser
   })), openUserAddForm && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "user_add_form",
     open: openUserAddForm,

@@ -21,7 +21,7 @@ var BrandGeneralDetail = _styledComponents.default.div(_templateObject || (_temp
 
 exports.BrandGeneralDetail = BrandGeneralDetail;
 
-var BrandLogo = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 200px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  background: #E9ECEF;\n  border-radius: 7.6px;\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 7.6px;\n    height: 100%;\n    overflow: hidden;\n    position: relative;\n  };\n\n  img{\n    object-fit: cover;\n  }\n\n  @media (min-width: 768px) {\n    width: 240px;\n    height: 240px;\n  }\n"])));
+var BrandLogo = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 200px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  background: #E9ECEF;\n  border-radius: 7.6px;\n  margin-bottom: 45px;\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 7.6px;\n    height: 100%;\n    overflow: hidden;\n    position: relative;\n  };\n\n  img{\n    object-fit: cover;\n  }\n\n  @media (min-width: 768px) {\n    width: 240px;\n    height: 240px;\n  }\n"])));
 
 exports.BrandLogo = BrandLogo;
 
@@ -50,10 +50,12 @@ var CameraIconContainer = _styledComponents.default.span(_templateObject12 || (_
 
 exports.CameraIconContainer = CameraIconContainer;
 
-var FormControl = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-bottom: 30px;\n  margin-top: 45px;\n\n  input {\n    background: ", ";\n    border: 1px solid #DEE2E6;\n    box-sizing: border-box;\n    border-radius: 7.6px;\n    font-size: 14px;\n    padding: 10px 15px;\n    outline: none;\n    width: 100%;\n  }\n"])), function (props) {
+var FormControl = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-bottom: 30px;\n\n  input {\n    background: ", ";\n    border: 1px solid #DEE2E6;\n    box-sizing: border-box;\n    border-radius: 7.6px;\n    font-size: 14px;\n    padding: 10px 15px;\n    outline: none;\n    width: 100%;\n    &:disabled {\n      background: ", ";\n    }\n  }\n"])), function (props) {
   var _props$theme$colors;
 
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (props) {
+  return props.theme.colors.secundary;
 });
 
 exports.FormControl = FormControl;
@@ -66,6 +68,6 @@ var Label = _styledComponents.default.label(_templateObject14 || (_templateObjec
 
 exports.Label = Label;
 
-var SaveBtnWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  button {\n    padding: 6px 20px;\n  }\n"])));
+var SaveBtnWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  margin: 20px 0;\n  button {\n    padding: 6px 20px;\n  }\n"])));
 
 exports.SaveBtnWrapper = SaveBtnWrapper;
