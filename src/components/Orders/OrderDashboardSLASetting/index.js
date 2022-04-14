@@ -31,6 +31,8 @@ export const OrderDashboardSLASetting = (props) => {
   const theme = useTheme()
   const formMethods = useForm()
   const [, { showToast }] = useToast()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [readySettingTime, setReadySettingTime] = useState([])
 
   const defaultOrderTypes = [
     { key: 1, name: t('DELIVERY', 'Delivery') },
@@ -58,7 +60,7 @@ export const OrderDashboardSLASetting = (props) => {
     {
       key: t('DELAYED', 'Delayed'),
       des: t('DELIVERY_DELAYED_STATUS_DESC', 'If this time is exceeded, the order will be delayed.'),
-      timmer: true,
+      timmer: false,
       icon: theme.images.icons?.clockDelayed,
       backColor: '#E63757'
     }
@@ -68,11 +70,19 @@ export const OrderDashboardSLASetting = (props) => {
     setSettingOpen(false)
   }
 
+  const checkReadySatus = (data) => {
+    let _readySettingTime = [...readySettingTime]
+    if (data?.status) {
+      _readySettingTime.push(data)
+    } else {
+      _readySettingTime = _readySettingTime.filter(ele => ele.id !== data.id)
+    }
+    setReadySettingTime(_readySettingTime)
+  }
+
   useEffect(() => {
     setSelectedTabStatus(deliveryStatus)
   }, [])
-
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
@@ -133,13 +143,14 @@ export const OrderDashboardSLASetting = (props) => {
           </TabsContainer>
           <DeliveryStatusWrapper>
             {selectedTabStatus && selectedTabStatus.length > 0 && selectedTabStatus.map((item, i) => (
-              <StatusBlock key={i} item={item} last={i + 1 === selectedTabStatus.length} formMethods={formMethods} />
+              <StatusBlock key={i} item={item} last={i + 1 === selectedTabStatus.length} formMethods={formMethods} checkReadySatus={checkReadySatus} />
             ))}
           </DeliveryStatusWrapper>
           <Actions>
             <Button
               color='primary'
               type='submit'
+              disabled={readySettingTime.length === 0}
             >
               {t('ACCEPT', 'Accept')}
             </Button>
@@ -147,7 +158,7 @@ export const OrderDashboardSLASetting = (props) => {
         </SettingControlPanel>
       </Modal>
       <Alert
-        title={t('SIGN_UP_FOR_BUSINESS', 'Sign up for business')}
+        title={t('SLA_SETTING', 'SLA’s settings')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
@@ -160,18 +171,23 @@ export const OrderDashboardSLASetting = (props) => {
 }
 
 export const StatusBlock = (props) => {
-  const { item, last, formMethods } = props
+  const { item, last, formMethods, checkReadySatus } = props
   const [showTime, setShowTime] = useState(false)
 
+  const handleShowTimer = () => {
+    checkReadySatus({ id: item?.key, status: !showTime })
+    setShowTime(!showTime)
+  }
+
   useEffect(() => {
-    if (last) {
+    if (item?.timmer) {
       setShowTime(true)
     }
-  }, [last])
+  }, [item?.timmer])
 
   return (
     <StatusItems>
-      <ItemHeader onClick={() => setShowTime(!showTime)}>
+      <ItemHeader onClick={() => handleShowTimer()}>
         <IconWrapper>
           <img src={item?.icon} alt='' />
         </IconWrapper>
@@ -202,15 +218,7 @@ export const Timer = (props) => {
         type='number'
         placeholder='HH'
         ref={formMethods.register({
-          required: t('VALIDATION_ERROR_HOUR_REQUIRED', 'The field hour is required').replace('_attribute_', t('HOUR', 'Hour')),
-          maxLength: {
-            value: 2,
-            message: t('VALIDATION_ERROR_TIME_MAX_LENGTH', 'The Time fields must be less than 2 characters.').replace('_attribute_', t('TIME', 'Time'))
-          },
-          max: {
-            value: 12,
-            message: t('VALIDATION_ERROR_HOUR_MAX_VALUE', 'The hour must be less than 12.')
-          }
+          required: t('VALIDATION_ERROR_HOUR_REQUIRED', 'The field hour is required').replace('_attribute_', t('HOUR', 'Hour'))
         })}
       />
       :
@@ -219,15 +227,7 @@ export const Timer = (props) => {
         type='number'
         placeholder='MM'
         ref={formMethods.register({
-          required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute')),
-          maxLength: {
-            value: 2,
-            message: t('VALIDATION_ERROR_TIME_MAX_LENGTH', 'The Time fields must be less than 2 characters.').replace('_attribute_', t('TIME', 'Time'))
-          },
-          max: {
-            value: 60,
-            message: t('VALIDATION_ERROR_MINUTE_MAX_VALUE', 'The minute must be less than 60.')
-          }
+          required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute'))
         })}
       />
     </TimerInputWrapper>
