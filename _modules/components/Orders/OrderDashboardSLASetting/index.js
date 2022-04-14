@@ -25,6 +25,14 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -68,6 +76,19 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
       _useToast2 = _slicedToArray(_useToast, 2),
       showToast = _useToast2[1].showToast;
 
+  var _useState7 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
+
+  var _useState9 = (0, _react.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      readySettingTime = _useState10[0],
+      setReadySettingTime = _useState10[1];
+
   var defaultOrderTypes = [{
     key: 1,
     name: t('DELIVERY', 'Delivery')
@@ -99,7 +120,7 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
   }, {
     key: t('DELAYED', 'Delayed'),
     des: t('DELIVERY_DELAYED_STATUS_DESC', 'If this time is exceeded, the order will be delayed.'),
-    timmer: true,
+    timmer: false,
     icon: (_theme$images$icons3 = theme.images.icons) === null || _theme$images$icons3 === void 0 ? void 0 : _theme$images$icons3.clockDelayed,
     backColor: '#E63757'
   }];
@@ -108,18 +129,23 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
     setSettingOpen(false);
   };
 
+  var checkReadySatus = function checkReadySatus(data) {
+    var _readySettingTime = _toConsumableArray(readySettingTime);
+
+    if (data !== null && data !== void 0 && data.status) {
+      _readySettingTime.push(data);
+    } else {
+      _readySettingTime = _readySettingTime.filter(function (ele) {
+        return ele.id !== data.id;
+      });
+    }
+
+    setReadySettingTime(_readySettingTime);
+  };
+
   (0, _react.useEffect)(function () {
     setSelectedTabStatus(deliveryStatus);
   }, []);
-
-  var _useState7 = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      alertState = _useState8[0],
-      setAlertState = _useState8[1];
-
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
@@ -178,13 +204,15 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
       key: i,
       item: item,
       last: i + 1 === selectedTabStatus.length,
-      formMethods: formMethods
+      formMethods: formMethods,
+      checkReadySatus: checkReadySatus
     });
   })), /*#__PURE__*/_react.default.createElement(_styles2.Actions, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
-    type: "submit"
+    type: "submit",
+    disabled: readySettingTime.length === 0
   }, t('ACCEPT', 'Accept'))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
-    title: t('SIGN_UP_FOR_BUSINESS', 'Sign up for business'),
+    title: t('SLA_SETTING', 'SLA’s settings'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
@@ -203,21 +231,30 @@ exports.OrderDashboardSLASetting = OrderDashboardSLASetting;
 var StatusBlock = function StatusBlock(props) {
   var item = props.item,
       last = props.last,
-      formMethods = props.formMethods;
+      formMethods = props.formMethods,
+      checkReadySatus = props.checkReadySatus;
 
-  var _useState9 = (0, _react.useState)(false),
-      _useState10 = _slicedToArray(_useState9, 2),
-      showTime = _useState10[0],
-      setShowTime = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      showTime = _useState12[0],
+      setShowTime = _useState12[1];
+
+  var handleShowTimer = function handleShowTimer() {
+    checkReadySatus({
+      id: item === null || item === void 0 ? void 0 : item.key,
+      status: !showTime
+    });
+    setShowTime(!showTime);
+  };
 
   (0, _react.useEffect)(function () {
-    if (last) {
+    if (item !== null && item !== void 0 && item.timmer) {
       setShowTime(true);
     }
-  }, [last]);
+  }, [item === null || item === void 0 ? void 0 : item.timmer]);
   return /*#__PURE__*/_react.default.createElement(_styles2.StatusItems, null, /*#__PURE__*/_react.default.createElement(_styles2.ItemHeader, {
     onClick: function onClick() {
-      return setShowTime(!showTime);
+      return handleShowTimer();
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     src: item === null || item === void 0 ? void 0 : item.icon,
@@ -243,30 +280,14 @@ var Timer = function Timer(props) {
     type: "number",
     placeholder: "HH",
     ref: formMethods.register({
-      required: t('VALIDATION_ERROR_HOUR_REQUIRED', 'The field hour is required').replace('_attribute_', t('HOUR', 'Hour')),
-      maxLength: {
-        value: 2,
-        message: t('VALIDATION_ERROR_TIME_MAX_LENGTH', 'The Time fields must be less than 2 characters.').replace('_attribute_', t('TIME', 'Time'))
-      },
-      max: {
-        value: 12,
-        message: t('VALIDATION_ERROR_HOUR_MAX_VALUE', 'The hour must be less than 12.')
-      }
+      required: t('VALIDATION_ERROR_HOUR_REQUIRED', 'The field hour is required').replace('_attribute_', t('HOUR', 'Hour'))
     })
   }), ":", /*#__PURE__*/_react.default.createElement("input", {
     name: "minute",
     type: "number",
     placeholder: "MM",
     ref: formMethods.register({
-      required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute')),
-      maxLength: {
-        value: 2,
-        message: t('VALIDATION_ERROR_TIME_MAX_LENGTH', 'The Time fields must be less than 2 characters.').replace('_attribute_', t('TIME', 'Time'))
-      },
-      max: {
-        value: 60,
-        message: t('VALIDATION_ERROR_MINUTE_MAX_VALUE', 'The minute must be less than 60.')
-      }
+      required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute'))
     })
   }));
 };
