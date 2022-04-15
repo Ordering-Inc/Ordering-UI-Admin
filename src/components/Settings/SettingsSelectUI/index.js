@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../../styles/Select'
+import { Input } from '../../../styles/Inputs'
 
 import {
   SettingsSelectContainer,
   SelectHeader,
   SelectContent,
   Option,
-  OptionsError
+  OptionsError,
+  InputWrapper
 } from './styles'
 
 export const SettingsSelectUI = (props) => {
@@ -32,6 +34,21 @@ export const SettingsSelectUI = (props) => {
       const selectedTypes = config?.options?.map(item => {
         return { value: item.value, content: <Option>{t(item.text.toUpperCase())}</Option> }
       })
+      if (config.customizable) {
+        selectedTypes.push({
+          value: config?.value,
+          content: <Option>{t('CUSTOM', 'Custom')}</Option>,
+          showOnSelected: (
+            <InputWrapper className='open-disabled'>
+              <Input
+                placeholder={t('CUSTOM', 'Custom')}
+                defaultValue={config?.value}
+                onChange={e => handleSelectChange(e.target.value)}
+              />
+            </InputWrapper>
+          )
+        })
+      }
       setOptions(selectedTypes)
     }
   }, [config])
@@ -49,6 +66,7 @@ export const SettingsSelectUI = (props) => {
         options ? (
           <SelectContent>
             <Select
+              notAsync
               defaultValue={config?.value}
               options={options}
               onChange={(typeValue) => handleSelectChange(typeValue)}
