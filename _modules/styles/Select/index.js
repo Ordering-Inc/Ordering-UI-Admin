@@ -168,6 +168,11 @@ var Select = function Select(props) {
     onChange && onChange(option.value);
   };
 
+  var handleClickHeader = function handleClickHeader(e) {
+    if (e.target.closest('.open-disabled')) return;
+    setOpen(!open);
+  };
+
   var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
     display: open ? 'block' : 'none',
     minWidth: (referenceElement === null || referenceElement === void 0 ? void 0 : (_referenceElement$cur2 = referenceElement.current) === null || _referenceElement$cur2 === void 0 ? void 0 : _referenceElement$cur2.offsetWidth) || '100px'
@@ -185,8 +190,8 @@ var Select = function Select(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderItem, {
     className: "select",
     ref: referenceElement,
-    onClick: function onClick() {
-      return setOpen(!open);
+    onClick: function onClick(e) {
+      return handleClickHeader(e);
     }
   }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null)))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "list",
