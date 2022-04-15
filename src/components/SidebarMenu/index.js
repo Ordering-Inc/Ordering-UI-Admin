@@ -110,6 +110,12 @@ export const SidebarMenu = (props) => {
     },
     {
       id: 2,
+      title: t('PRODUCTS', 'Products'),
+      pageName: 'store',
+      url: '/stores/products'
+    },
+    {
+      id: 3,
       title: t('BRAND_MANAGER', 'Brand manager'),
       pageName: 'brand',
       url: '/stores/brand'
@@ -376,7 +382,7 @@ export const SidebarMenu = (props) => {
                             !(sessionState?.user?.level === 2 && item.pageName === 'brand') && (
                               <SubMenu
                                 key={item.id}
-                                active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                                active={location.pathname.includes(item?.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
                                 {item.title}

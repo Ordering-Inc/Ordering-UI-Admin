@@ -186,6 +186,12 @@ const BusinessProductsListingUI = (props) => {
     setBatchImageFormOpen(true)
   }
 
+  useEffect(() => {
+    if (!slug) {
+      setSelectedBusiness(null)
+    }
+  }, [slug])
+
   return (
     <>
       <CategoryProductsContainer>
@@ -206,7 +212,7 @@ const BusinessProductsListingUI = (props) => {
                 <>
                   <BusinessSelector>
                     <BusinessNameWrapper onClick={() => handleSelectHeader()}>
-                      <h1>{selectedBusiness?.name || businessState?.business?.name} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
+                      <h1>{selectedBusiness?.name || businessState?.business?.name || t('SELECT_BUSINESS', 'Select a business')} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
                     </BusinessNameWrapper>
                     {showSelectHeader && (
                       <BusinessSelectHeader
@@ -216,21 +222,23 @@ const BusinessProductsListingUI = (props) => {
                       />
                     )}
                   </BusinessSelector>
-                  <Breadcrumb>
-                    <span
-                      className='business'
-                      onClick={() => setOpenSidebar('business_details')}
-                    >
-                      {selectedBusiness?.name || businessState?.business?.name}
-                    </span>
-                    <ChevronRight />
-                    <span>{categorySelected?.name}</span>
-                  </Breadcrumb>
+                  {(selectedBusiness?.name || businessState?.business?.name) && (
+                    <Breadcrumb>
+                      <span
+                        className='business'
+                        onClick={() => setOpenSidebar('business_details')}
+                      >
+                        {selectedBusiness?.name || businessState?.business?.name}
+                      </span>
+                      <ChevronRight />
+                      <span>{categorySelected?.name}</span>
+                    </Breadcrumb>
+                  )}
                 </>
               )}
             </div>
           </HeaderTitleContainer>
-          <ActionsGroup>
+          <ActionsGroup isDisabled={!slug}>
             <Button
               borderRadius='8px'
               color='lightPrimary'
@@ -273,7 +281,7 @@ const BusinessProductsListingUI = (props) => {
               />
             }
           </CategoryListContainer>
-          <ProductListContainer>
+          <ProductListContainer isDisabled={!slug}>
             <ProductHeader>
               <SingleBusinessCategoryEdit
                 {...props}

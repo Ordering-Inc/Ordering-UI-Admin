@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils } from 'ordering-components-admin'
+import { useLanguage, useUtils, useEvent } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -39,14 +38,14 @@ export const BusinessSummary = (props) => {
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
+  const [events] = useEvent()
   const theme = useTheme()
-  const history = useHistory()
   const [isBusinessPreview, setIsBusinessPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const handleOpenCategory = () => {
-    history.push(`/stores/list/${businessState?.business?.slug}`)
+    events.emit('go_to_page', { page: 'store', params: { store: businessState?.business?.slug } })
   }
 
   const itemsExcluded = ['publishing']
