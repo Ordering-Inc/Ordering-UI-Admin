@@ -116,6 +116,11 @@ export const Select = (props) => {
     onChange && onChange(option.value)
   }
 
+  const handleClickHeader = (e) => {
+    if (e.target.closest('.open-disabled')) return
+    setOpen(!open)
+  }
+
   const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: referenceElement?.current?.offsetWidth || '100px' }
   if (!open) {
     popStyle.transform = 'translate3d(0px, 0px, 0px)'
@@ -125,7 +130,7 @@ export const Select = (props) => {
       <HeaderItem
         className='select'
         ref={referenceElement}
-        onClick={() => setOpen(!open)}
+        onClick={(e) => handleClickHeader(e)}
       >
         {!selectedOption && (
           <Selected>
