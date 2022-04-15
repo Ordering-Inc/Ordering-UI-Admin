@@ -222,7 +222,7 @@ const BusinessProductsListingUI = (props) => {
                       />
                     )}
                   </BusinessSelector>
-                  {(selectedBusiness?.name || businessState?.business?.name) && (
+                  {slug && (
                     <Breadcrumb>
                       <span
                         className='business'
