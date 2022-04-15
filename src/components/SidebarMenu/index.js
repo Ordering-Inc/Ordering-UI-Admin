@@ -104,7 +104,7 @@ export const SidebarMenu = (props) => {
   const storesSubMenus = [
     {
       id: 1,
-      title: t('STORES_LIST', 'Stores list'),
+      title: t('STORES', 'Stores'),
       pageName: 'businesses',
       url: '/stores/list'
     },
@@ -116,7 +116,7 @@ export const SidebarMenu = (props) => {
     },
     {
       id: 3,
-      title: t('BRAND_MANAGER', 'Brand manager'),
+      title: t('BRANDS', 'Brands'),
       pageName: 'brand',
       url: '/stores/brand'
     }
