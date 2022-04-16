@@ -56,6 +56,8 @@ import { OpenCarts } from './pages/OpenCarts'
 import { RecoveryActionListing } from './pages/RecoveryActionListing'
 import { CampaignListing } from './pages/CampaignListing'
 
+import { FreeProductsList } from './pages/FreeProductsList'
+
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
   const [orderStatus] = useOrder()
@@ -371,7 +373,13 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-
+                    <Route exact path='/downloads/free-products'>
+                      {
+                        auth
+                          ? <FreeProductsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
                     <Route path='*'>
                       <PageNotFound />
                     </Route>

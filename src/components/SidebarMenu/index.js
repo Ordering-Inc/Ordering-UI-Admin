@@ -16,7 +16,8 @@ import {
   // WindowDock,
   Award,
   BoxArrowUpRight,
-  Cart3
+  Cart3,
+  CloudDownload
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
@@ -244,6 +245,21 @@ export const SidebarMenu = (props) => {
       title: t('CAMPAIGN', 'Campaign'),
       pageName: 'campaign',
       url: '/marketing/campaign'
+    }
+  ]
+
+  const downloadsSubMenus = [
+    {
+      id: 1,
+      title: t('FREE_PRODUCTS', 'Free products'),
+      pageName: 'free_products',
+      url: '/downloads/free-products'
+    },
+    {
+      id: 2,
+      title: t('PURCHASED_PRODUCTS', 'Purchased products'),
+      pageName: 'purchased_products',
+      url: '/downloads/purchased-products'
     }
   ]
 
@@ -627,6 +643,33 @@ export const SidebarMenu = (props) => {
                     <span>{t('MARKETPLACE', 'Marketplace')}</span>
                   </Button>
                 )}
+                <Accordion>
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='11'
+                      active={
+                        location.pathname === '/downloads/free-products' ||
+                        location.pathname === '/downloads/purchased-products'
+                      }
+                    >
+                      <CloudDownload />
+                      <span>{t('DOWNLOADS', 'Downloads')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='11'>
+                      <MenuContent>
+                        {downloadsSubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
+                </Accordion>
               </div>
             </SidebarContent>
             <UserInfo
