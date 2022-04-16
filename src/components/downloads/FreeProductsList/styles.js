@@ -35,6 +35,12 @@ export const HeaderTitleContainer = styled.div`
     }
   }
 `
+export const ViewMethodsConatiner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+`
 export const ContentWrapper = styled.div`
 `
 export const ProductItemContainer = styled.div``
@@ -52,6 +58,7 @@ export const ProductItemWrapper = styled.div`
 
   ${({ active }) => active && css`
     border: 1px solid ${props => props.theme.colors.primary} !important;
+    background-color: ${props => props.theme.colors.lightPrimary};
   `}
 
   &:hover {
@@ -170,4 +177,115 @@ export const DownloadLinksContainer = styled.div`
       `}
     }
   }
+`
+export const ProductsRowListContainer = styled.div`
+  margin-top: 15px;
+  overflow: auto;
+`
+export const ProductRow = styled.div`
+  min-width: 600px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 18px 0;
+  ${({ isHeader }) => !isHeader && css`
+    cursor: pointer;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    margin-bottom: 35px;
+    &:hover {
+      background-color: ${props => props.theme.colors.lightPrimary};
+    }
+    ${({ active }) => active && css`
+      border: 1px solid ${props => props.theme.colors.primary};
+      background-color: ${props => props.theme.colors.lightPrimary};
+    `}
+  `}
+`
+export const AppImageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  min-width: 155px;
+  width: 18%;
+
+  > img {
+    width: 105px;
+    height: 90px;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+`
+export const AppDescriptionWarpper = styled.div`
+  flex: 1;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h3 {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: ${props => props.theme.colors.headingColor};
+    margin: 0;
+  }
+  p {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0;
+    color: ${props => props.theme.colors.lightGray};
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  ${({ isHeader }) => !isHeader && css`
+    height: 72px;
+    ${props => props.theme?.rtl ? css`
+      border-right: 1px solid ${props => props.theme.colors.borderColor};
+    ` : css`
+      border-left: 1px solid ${props => props.theme.colors.borderColor};
+    `}
+  `}
+`
+export const AppDownloadLinksWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 145px;
+  padding: 0 24px;
+  justify-content: center;
+
+  > a {
+    margin: 5px 0;
+  }
+  ${({ isHeader }) => !isHeader && css`
+    height: 72px;
+    ${props => props.theme?.rtl ? css`
+      border-right: 1px solid ${props => props.theme.colors.borderColor};
+    ` : css`
+      border-left: 1px solid ${props => props.theme.colors.borderColor};
+    `}
+  `}
+
+  @media (min-width: 992px) {
+    width: 263px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: initial;
+    > a {
+      &:first-child {
+        ${props => props.theme?.rtl ? css`
+          margin-left: 23px;
+        ` : css`
+          margin-right: 23px;
+        `}
+      }
+    }
+  }
+`
+export const AppHeaderTitle = styled.div`
+  font-size: 12px;
+  font-weight: 700;
+  color: ${props => props.theme.colors.headingColor};
+  line-height: 18px;
 `

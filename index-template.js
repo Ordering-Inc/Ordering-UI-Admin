@@ -34,6 +34,15 @@ import appStore from './template/assets/images/app-store.png'
 import googlePlay from './template/assets/images/google-play.png'
 
 /**
+ * Theme apps
+ */
+import storeApp from './template/assets/images/store-app.png'
+import driverApp from './template/assets/images/driver-app.png'
+import posApp from './template/assets/images/pos-app.png'
+import kioskApp from './template/assets/images/kiosk-app.png'
+import callCenterApp from './template/assets/images/call-center-app.png'
+
+/**
  * business tutorials
  */
 import businessTutorial1 from './template/assets/images/tutorials/business-tutorial-1.png'
@@ -144,6 +153,13 @@ theme.images = {
     whatsappHeader,
     appStore,
     googlePlay
+  },
+  apps: {
+    storeApp,
+    driverApp,
+    posApp,
+    kioskApp,
+    callCenterApp
   },
   order: {
     status0: orderStatus0,
