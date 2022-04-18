@@ -54,7 +54,7 @@ export const ImportersList = (props) => {
           <thead>
             <tr>
               <th>{t('NAME', 'Name')}</th>
-              <th colSpan={2}>{t('ACTION', 'Action')}</th>
+              <th colspan={2}>{t('ACTION', 'Action')}</th>
             </tr>
           </thead>
           <tbody>
@@ -111,7 +111,7 @@ export const ImportersList = (props) => {
                   </>
                 ) : (
                   <tr style={{ backgroundColor: '#fff !important' }}>
-                    <td colSpan='2'>
+                    <td colspan='2'>
                       <NotFoundWrapper>
                         <NotFoundSource content={t('NOT_FOUND_IMPOTERS', "Can't found importers")} />
                       </NotFoundWrapper>
