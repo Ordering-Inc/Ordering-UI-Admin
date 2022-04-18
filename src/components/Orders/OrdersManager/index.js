@@ -181,11 +181,23 @@ const OrdersManagerUI = (props) => {
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
         />
-        <OrderStatusSubFilter
-          ordersStatusGroup={ordersStatusGroup}
-          selectedSubOrderStatus={selectedSubOrderStatus}
-          handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
-        />
+        <OrderSubFilterControls isColumn={selectedOrderIds?.length}>
+          <OrderStatusSubFilterWrapper isColumn={selectedOrderIds?.length}>
+            <OrderStatusSubFilter
+              ordersStatusGroup={ordersStatusGroup}
+              selectedSubOrderStatus={selectedSubOrderStatus}
+              handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
+            />
+          </OrderStatusSubFilterWrapper>
+          {!isSelectedOrders && (
+            <OrdersDashboardControls
+              selectedOrderNumber={selectedOrderIds?.length}
+              filterValues={filterValues}
+              handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+              handleDeleteMultiOrders={handleDeleteMultiOrders}
+            />
+          )}
+        </OrderSubFilterControls>
         <OrdersContent>
           <OrdersInnerContent className='order-content'>
             <WrapItemView>

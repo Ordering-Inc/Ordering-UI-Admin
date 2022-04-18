@@ -127,10 +127,12 @@ export const ProductListBottom = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-
-  ${props => props.theme?.rtl ? css`
-    margin-right: 30px;
-  ` : css`
-    margin-left: 30px;
-  `}
+  
+  @media (min-width: 768px) {
+    ${props => props.theme?.rtl ? css`
+      margin-right: 30px;
+    ` : css`
+      margin-left: 30px;
+    `}
+  }
 `

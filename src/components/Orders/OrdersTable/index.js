@@ -264,6 +264,9 @@ export const OrdersTable = (props) => {
                 {allowColumns?.advanced && (
                   <th colSpan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
                 )}
+                {allowColumns?.timer && (
+                  <th colSpan={2} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
+                )}
                 <th className='orderPrice'>
                   <ColumnAllowSettingPopover
                     open={openPopover}
@@ -532,6 +535,23 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
+                  <td className='orderPrice'>
+                    <div className='info'>
+                      {allowColumns?.total && (
+                        <p className='bold'>{parsePrice(order?.summary?.total)}</p>
+                      )}
+                      {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                        <p>
+                          {
+                            order?.delivery_datetime_utc
+                              ? getTimeAgo(order?.delivery_datetime_utc)
+                              : getTimeAgo(order?.delivery_datetime, { utc: false })
+                          }
+                        </p>
+                      )}
+                    </div>
+                  </td>
+                  <td />
                 </tr>
               </OrderTbody>
             ))

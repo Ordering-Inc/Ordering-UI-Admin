@@ -31,6 +31,7 @@ export const HeaderContainer = styled.div`
 
 export const HeaderTitleContainer = styled.div`
   flex: 1;
+  display: flex;
 `
 
 export const ActionsGroup = styled.div`
@@ -52,8 +53,18 @@ export const ActionsGroup = styled.div`
     background: ${props => props.theme.colors.secundary};
   }
 
+  > div {
+    width: 100%;
+    flex: inherit;
+    margin-top: 15px;
+  }
+
   @media (min-width: 992px) {
     margin-top: 0px;
+    > div {
+      width: initial;
+      margin-top: 0;
+    }
   }
 `
 
@@ -89,18 +100,21 @@ export const ProductHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
-
-  ${props => props.theme?.rtl ? css`
-    margin-right: 20px;
-  ` : css`
-    margin-left: 20px;
-  `}
 
   h1 {
     font-weight: 600;
     font-size: 14px;
     margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0 10px;
+
+    ${props => props.theme?.rtl ? css`
+      margin-right: 20px;
+    ` : css`
+      margin-left: 20px;
+    `}
   }
 `
 

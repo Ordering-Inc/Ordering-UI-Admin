@@ -199,34 +199,36 @@ const BusinessProductsListingUI = (props) => {
                 <MenuIcon />
               </IconButton>
             )}
-            {!selectedBusiness && businessState.loading ? (
-              <h1><Skeleton width={200} height={30} /></h1>
-            ) : (
-              <>
-                <BusinessSelector>
-                  <BusinessNameWrapper onClick={() => handleSelectHeader()}>
-                    <h1>{selectedBusiness?.name || businessState?.business?.name} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
-                  </BusinessNameWrapper>
-                  {showSelectHeader && (
-                    <BusinessSelectHeader
-                      close={handleClose}
-                      isOpen={showSelectHeader}
-                      changeBusinessState={changeBusinessState}
-                    />
-                  )}
-                </BusinessSelector>
-                <Breadcrumb>
-                  <span
-                    className='business'
-                    onClick={() => setOpenSidebar('business_details')}
-                  >
-                    {selectedBusiness?.name || businessState?.business?.name}
-                  </span>
-                  <ChevronRight />
-                  <span>{categorySelected?.name}</span>
-                </Breadcrumb>
-              </>
-            )}
+            <div>
+              {!selectedBusiness && businessState.loading ? (
+                <h1><Skeleton width={200} height={30} /></h1>
+              ) : (
+                <>
+                  <BusinessSelector>
+                    <BusinessNameWrapper onClick={() => handleSelectHeader()}>
+                      <h1>{selectedBusiness?.name || businessState?.business?.name} &nbsp; <BisDownArrow className={showSelectHeader ? 'rotate-arrow' : ''} /></h1>
+                    </BusinessNameWrapper>
+                    {showSelectHeader && (
+                      <BusinessSelectHeader
+                        close={handleClose}
+                        isOpen={showSelectHeader}
+                        changeBusinessState={changeBusinessState}
+                      />
+                    )}
+                  </BusinessSelector>
+                  <Breadcrumb>
+                    <span
+                      className='business'
+                      onClick={() => setOpenSidebar('business_details')}
+                    >
+                      {selectedBusiness?.name || businessState?.business?.name}
+                    </span>
+                    <ChevronRight />
+                    <span>{categorySelected?.name}</span>
+                  </Breadcrumb>
+                </>
+              )}
+            </div>
           </HeaderTitleContainer>
           <ActionsGroup>
             <Button
