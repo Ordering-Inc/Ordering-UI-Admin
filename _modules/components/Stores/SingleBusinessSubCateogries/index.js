@@ -144,11 +144,14 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
     }
   }, (category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0 && category.subcategories.sort(function (a, b) {
     return a.rank - b.rank;
-  }).map(function (subCategory) {
+  }).map(function (subCategory, i) {
+    var _category$subcategori2;
+
     return /*#__PURE__*/_react.default.createElement(SingleBusinessSubCateogries, _extends({}, props, {
       key: subCategory.id,
       category: subCategory,
-      index: index + 1
+      index: index + 1,
+      isLastCategory: (category === null || category === void 0 ? void 0 : (_category$subcategori2 = category.subcategories) === null || _category$subcategori2 === void 0 ? void 0 : _category$subcategori2.length) - 1 === i
     }));
   }))));
 };
