@@ -433,9 +433,7 @@ export const OrdersTable = (props) => {
                   {allowColumns?.status && !isSelectedOrders && (
                     <td className='statusInfo'>
                       <StatusInfo>
-                        <div className='info'>
-                          <p className='bold'>{getOrderStatus(order.status)?.value}</p>
-                        </div>
+                        <p className='bold'>{getOrderStatus(order.status)?.value}</p>
                       </StatusInfo>
                     </td>
                   )}

@@ -168,16 +168,21 @@ export const CustomerInfo = styled(BusinessInfo)`
     max-width: 125px;
   }
 `
-export const StatusInfo = styled(BusinessInfo)`
-  .info {
+export const StatusInfo = styled.div`
+  .bold {
+    max-width: 150px;
+    font-weight: 600;
     margin: 0;
-    .bold {
-      max-width: 150px;
-    }
   }
 `
 
 export const DriversInfo = styled.div`
+  .select {
+    > div:first-child {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
   > div {
     > div {
       border: none;
