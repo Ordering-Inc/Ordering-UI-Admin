@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
-  var _optionChangesState$r, _optionChangesState$r2, _optionChangesState$c, _optionChangesState$c2, _optionState$option, _optionState$option2, _optionState$option4, _optionState$option5, _optionState$option6, _optionState$option8, _optionState$option9, _optionState$option10, _optionState$option11, _optionState$option12, _optionState$option13, _settingChangeState$c, _settingChangeState$c2, _optionState$option14, _settingChangeState$c3, _settingChangeState$c4, _optionState$option15, _optionState$option16, _optionState$option17, _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2, _optionState$option18, _optionState$option19, _changesState$changes3, _optionState$option20, _optionState$option21, _changesState$changes4, _settingChangeState$c5, _settingChangeState$c6, _optionState$option22, _optionState$option23, _optionState$option24, _changesState$changes5, _settingChangeState$c7, _settingChangeState$c8, _optionState$option25, _optionState$option26, _optionState$option27, _changesState$changes6;
+  var _optionChangesState$r, _optionChangesState$r2, _optionChangesState$c4, _optionChangesState$c5, _optionState$option, _optionState$option2, _optionState$option4, _optionState$option5, _optionState$option6, _optionState$option8, _optionState$option9, _optionState$option10, _optionState$option11, _optionState$option12, _optionState$option13, _settingChangeState$c, _settingChangeState$c2, _optionState$option14, _settingChangeState$c3, _settingChangeState$c4, _optionState$option15, _optionState$option16, _optionState$option17, _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2, _optionState$option18, _optionState$option19, _changesState$changes3, _optionState$option20, _optionState$option21, _changesState$changes4, _settingChangeState$c5, _settingChangeState$c6, _optionState$option22, _optionState$option23, _optionState$option24, _changesState$changes5, _settingChangeState$c7, _settingChangeState$c8, _optionState$option25, _optionState$option26, _optionState$option27, _changesState$changes6;
 
   var optionState = props.optionState,
       optionChangesState = props.optionChangesState,
@@ -90,7 +90,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       extra = props.extra,
       handleAddOption = props.handleAddOption,
       handleDeteteOption = props.handleDeteteOption,
-      isMaxError = props.isMaxError;
+      isMaxError = props.isMaxError,
+      handleClickUpdateOption = props.handleClickUpdateOption;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -98,6 +99,10 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
 
   var theme = (0, _styledComponents.useTheme)();
   var optionImageInputRef = (0, _react.useRef)(null);
+  var mainContainerRef = (0, _react.useRef)();
+  var optionNameRef = (0, _react.useRef)();
+  var optionMinRef = (0, _react.useRef)();
+  var optionMaxRef = (0, _react.useRef)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -201,8 +206,19 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   }, [errors]);
 
   var closeAddForm = function closeAddForm(e) {
+    var _mainContainerRef$cur;
+
     var outsideDropdown = !e.target.closest('.add-product-option') && !e.target.closest('.add-option-btn');
     if (outsideDropdown && Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0) setIsAddForm(false);
+
+    if ((_mainContainerRef$cur = mainContainerRef.current) !== null && _mainContainerRef$cur !== void 0 && _mainContainerRef$cur.contains(e.target)) {
+      var _optionChangesState$c, _optionNameRef$curren, _optionChangesState$c2, _optionMinRef$current, _optionChangesState$c3, _optionMaxRef$current;
+
+      if ((optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c = optionChangesState.changes) === null || _optionChangesState$c === void 0 ? void 0 : _optionChangesState$c.name) === '' && (_optionNameRef$curren = optionNameRef.current) !== null && _optionNameRef$curren !== void 0 && _optionNameRef$curren.contains(e.target)) return;
+      if ((optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c2 = optionChangesState.changes) === null || _optionChangesState$c2 === void 0 ? void 0 : _optionChangesState$c2.min) === '' && (_optionMinRef$current = optionMinRef.current) !== null && _optionMinRef$current !== void 0 && _optionMinRef$current.contains(e.target)) return;
+      if ((optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c3 = optionChangesState.changes) === null || _optionChangesState$c3 === void 0 ? void 0 : _optionChangesState$c3.max) === '' && (_optionMaxRef$current = optionMaxRef.current) !== null && _optionMaxRef$current !== void 0 && _optionMaxRef$current.contains(e.target)) return;
+      handleClickUpdateOption();
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -210,11 +226,13 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     return function () {
       return document.removeEventListener('click', closeAddForm);
     };
-  }, [changesState]);
+  }, [changesState, handleClickUpdateOption]);
   (0, _react.useEffect)(function () {
     if (Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0) setIsAddForm(false);
   }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTION', 'Product option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, {
+    ref: mainContainerRef
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTION', 'Product option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
@@ -252,8 +270,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$r2 = optionChangesState.result) === null || _optionChangesState$r2 === void 0 ? void 0 : _optionChangesState$r2.image,
     alt: "sub option image",
     loading: "lazy"
-  }) : optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$c = optionChangesState.changes) !== null && _optionChangesState$c !== void 0 && _optionChangesState$c.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c2 = optionChangesState.changes) === null || _optionChangesState$c2 === void 0 ? void 0 : _optionChangesState$c2.image,
+  }) : optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$c4 = optionChangesState.changes) !== null && _optionChangesState$c4 !== void 0 && _optionChangesState$c4.image ? /*#__PURE__*/_react.default.createElement("img", {
+    src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c5 = optionChangesState.changes) === null || _optionChangesState$c5 === void 0 ? void 0 : _optionChangesState$c5.image,
     alt: "product image",
     loading: "lazy"
   }) : (optionState === null || optionState === void 0 ? void 0 : (_optionState$option = optionState.option) === null || _optionState$option === void 0 ? void 0 : _optionState$option.image) && /*#__PURE__*/_react.default.createElement("img", {
@@ -264,6 +282,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     primary: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('OPTION_NAME', 'Option name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
+    ref: optionNameRef,
     autoComplete: "off",
     defaultValue: optionState === null || optionState === void 0 ? void 0 : optionState.option.name,
     onChange: function onChange(e) {
@@ -275,6 +294,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     primary: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('MINIMUM', 'Minimum')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "min",
+    ref: optionMinRef,
     defaultValue: optionState === null || optionState === void 0 ? void 0 : (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : _optionState$option4.min,
     onChange: function onChange(e) {
       return handleChangeNumberInput(e, optionState.option, true);
@@ -289,6 +309,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     isMaxError: isMaxError
   }, /*#__PURE__*/_react.default.createElement("label", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "max",
+    ref: optionMaxRef,
     defaultValue: optionState === null || optionState === void 0 ? void 0 : (_optionState$option5 = optionState.option) === null || _optionState$option5 === void 0 ? void 0 : _optionState$option5.max,
     onChange: function onChange(e) {
       return handleChangeNumberInput(e, optionState.option, false);

@@ -75,6 +75,7 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       handleDeleteExtra = props.handleDeleteExtra,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       handleSucccessDeleteOption = props.handleSucccessDeleteOption,
+      handleClickUpdateOption = props.handleClickUpdateOption,
       curOption = props.curOption,
       openModal = props.openModal,
       setCurOption = props.setCurOption,
@@ -448,7 +449,8 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     },
     handleUpdateBusinessState: handleUpdateBusinessState,
     handleSucccessDeleteOption: handleSucccessDeleteOption,
-    isMaxError: isMaxError
+    isMaxError: isMaxError,
+    handleClickUpdateOption: handleClickUpdateOption
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
     open: openModal === null || openModal === void 0 ? void 0 : openModal.metaField,
