@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const BusinessEmailAndPhoneContainer = styled.div`
+export const BusinessEmailContainer = styled.div`
 `
 
 export const FormControl = styled.div`

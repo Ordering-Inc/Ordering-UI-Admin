@@ -5,7 +5,7 @@ import {
   BusinessNotificationsContainer,
   Title
 } from './styles'
-import { BusinessEmailAndPhone } from '../BusinessEmailAndPhone'
+import { BusinessEmail } from '../BusinessEmail'
 import { BusinessGprsPrinters } from '../BusinessGprsPrinters'
 
 export const BusinessNotifications = (props) => {
@@ -24,7 +24,7 @@ export const BusinessNotifications = (props) => {
   return (
     <BusinessNotificationsContainer>
       <Title>{t('NOTIFICATIONS', 'Notifications')}</Title>
-      <BusinessEmailAndPhone {...props} />
+      <BusinessEmail {...props} />
       <BusinessGprsPrinters {...props} />
     </BusinessNotificationsContainer>
   )
