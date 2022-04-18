@@ -117,12 +117,13 @@ const SingleBusinessSubCateogriesUI = (props) => {
             }}
           >
             {category?.subcategories?.length > 0 && (
-              category.subcategories.sort((a, b) => a.rank - b.rank).map(subCategory => (
+              category.subcategories.sort((a, b) => a.rank - b.rank).map((subCategory, i) => (
                 <SingleBusinessSubCateogries
                   {...props}
                   key={subCategory.id}
                   category={subCategory}
                   index={index + 1}
+                  isLastCategory={category?.subcategories?.length - 1 === i}
                 />
               ))
             )}
