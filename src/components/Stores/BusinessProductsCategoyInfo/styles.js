@@ -49,6 +49,7 @@ export const CategoryTypeImage = styled.div`
   margin-top: 48px;
   height: 240px;
   width: 240px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;

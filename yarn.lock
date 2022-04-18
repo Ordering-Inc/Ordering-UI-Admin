@@ -1480,9 +1480,9 @@
   integrity sha512-q/ytXxO5NKvyT37pmisQAItCFqA7FD/vNb8dgaJy3/630Fsc+Mz9/9f2SziBoIZ30TJooXyTwZmhi1zjXmObYg==
 
 "@react-native-async-storage/async-storage@^1.13.1":
-  version "1.16.2"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.16.2.tgz#6b95f562f6823af00e90587ae0447c344bdcb4e7"
-  integrity sha512-Bl/jYRahiePZe/mlijQ8JGYl5Mk4f7Q3iz6iXA7darhUnWhiumlwrnBNTq57PaE4WCZCaBzuDkgOca0qSuEUAg==
+  version "1.16.3"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.16.3.tgz#f52dc48469c3384d870d581d169e5486c2295701"
+  integrity sha512-yTjoTKTwI7yMi2IIlzauA7t1zoPLatEGqkvEtf4Z5p91qYp4o3M5Rdb9NiyQz7pwlTw8FqWawYPUz8nlQ2z06Q==
   dependencies:
     merge-options "^3.0.4"
 
@@ -7893,7 +7893,7 @@ optionator@^0.8.3:
 
 "ordering-components-admin@github:Ordering-Inc/ordering-components-admin#release":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/842a229dadae04f5c6ad208ccbbfc27703083111"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/ed4293dd9a3d1ec6e310112919c3e756750c6b1a"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"

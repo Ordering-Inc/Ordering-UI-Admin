@@ -209,7 +209,6 @@ const DeliveryUsersListingUI = (props) => {
       )}
       {openUserAddForm && (
         <SideBar
-          sidebarId='user_add_form'
           open={openUserAddForm}
           noAnimation={isTourOpen}
           onClose={() => handleCloseAddForm()}
