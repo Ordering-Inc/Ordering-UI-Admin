@@ -44,6 +44,7 @@ export const SidebarContainer = styled.div`
     }
 
     span {
+      text-transform: capitalize;
       ${props => props.theme?.rtl ? css`
         margin-right: 15px;
       ` : css`
