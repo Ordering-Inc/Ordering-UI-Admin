@@ -34,7 +34,6 @@ export const BusinessesList = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
 
-  const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     business: true,
     featured: true,
@@ -106,11 +105,8 @@ export const BusinessesList = (props) => {
                   )}
                   <th className='action'>
                     <ColumnAllowSettingPopover
-                      open={openPopover}
                       allowColumns={allowColumns}
                       optionsDefault={optionsDefault}
-                      onClick={() => setOpenPopover(!openPopover)}
-                      onClose={() => setOpenPopover(false)}
                       handleChangeAllowColumns={handleChangeAllowColumns}
                     />
                   </th>

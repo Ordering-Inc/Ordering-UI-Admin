@@ -28,7 +28,6 @@ export const CampaignList = (props) => {
 
   const [, t] = useLanguage()
 
-  const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     campaign: true,
     contact_type: true,
@@ -132,11 +131,8 @@ export const CampaignList = (props) => {
               )} */}
               <th className='allow-colums action'>
                 <ColumnAllowSettingPopover
-                  open={openPopover}
                   allowColumns={allowColumns}
                   optionsDefault={optionsDefault}
-                  onClick={() => setOpenPopover(!openPopover)}
-                  onClose={() => setOpenPopover(false)}
                   handleChangeAllowColumns={handleChangeAllowColumns}
                   title={t('DISPLAYED_DATA_THE_ORDER', 'Displayed data the order')}
                 />

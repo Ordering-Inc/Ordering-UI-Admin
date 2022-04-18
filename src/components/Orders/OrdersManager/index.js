@@ -253,14 +253,12 @@ const OrdersManagerUI = (props) => {
         </WrapperIndicator>
       )}
 
-      {isTourOpen && (
-        <WizardOrders
-          isTourOpen={isTourOpen}
-          setIsTourOpen={setIsTourOpen}
-          currentStep={currentTourStep}
-          detailsOrder={detailsOrder}
-        />
-      )}
+      <WizardOrders
+        isTourOpen={isTourOpen}
+        setIsTourOpen={setIsTourOpen}
+        currentStep={currentTourStep}
+        detailsOrder={detailsOrder}
+      />
       <Alert
         title={t('ORDERS_MANAGER', 'Orders manager')}
         content={alertState.content}

@@ -63,7 +63,6 @@ export const OrdersTable = (props) => {
     getPageOrders(pageSize, expectedPage)
   }
 
-  const [openPopover, setOpenPopover] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     status: true,
     orderNumber: true,
@@ -229,6 +228,7 @@ export const OrdersTable = (props) => {
       >
         <Table
           className='orders_table'
+          noFixedHeader={!orderList.loading && orderList.orders?.length <= 5}
         >
           {!isSelectedOrders && (
             <thead>
@@ -269,11 +269,8 @@ export const OrdersTable = (props) => {
                 )}
                 <th className='orderPrice'>
                   <ColumnAllowSettingPopover
-                    open={openPopover}
                     allowColumns={allowColumns}
                     optionsDefault={optionsDefault}
-                    onClick={() => setOpenPopover(!openPopover)}
-                    onClose={() => setOpenPopover(false)}
                     handleChangeAllowColumns={handleChangeAllowColumns}
                   />
                 </th>

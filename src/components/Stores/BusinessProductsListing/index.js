@@ -302,11 +302,8 @@ const BusinessProductsListingUI = (props) => {
                     )}
                     <ColumnsAllowWrapper>
                       <ColumnAllowSettingPopover
-                        open={openColumnsPopover}
                         allowColumns={allowSpreadColumns}
                         optionsDefault={spreadColumnOptions}
-                        onClick={() => setOpenColumnsPopover(!openColumnsPopover)}
-                        onClose={() => setOpenColumnsPopover(false)}
                         handleChangeAllowColumns={handleChangeAllowSpreadColumns}
                       />
                     </ColumnsAllowWrapper>

@@ -111,6 +111,11 @@ export const MessagesUI = (props) => {
     const quickMsg = message ? `${message} ${msg}` : msg
     setValue('message', quickMsg)
     setMessage(quickMsg)
+
+    const messageInput = document.getElementById('message')
+    if (messageInput) {
+      messageInput.scrollLeft = messageInput.scrollWidth
+    }
   }
 
   useEffect(() => {
