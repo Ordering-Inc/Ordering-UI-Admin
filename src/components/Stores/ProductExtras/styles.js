@@ -111,7 +111,8 @@ export const ExtraAddForm = styled.form`
     width: 100%;
     border: none;
     outline: none;
-    border-bottom: 1px solid #E9ECEF;
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     padding: 12px 0;
 
     &::placeholder,

@@ -70,6 +70,8 @@ export const OptionNameContainer = styled.div`
     padding: 5px;
     border: none;
     outline: none;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+
     &:focus {
       border: 1px dashed ${props => props.theme.colors.lightGray};
     }
@@ -195,6 +197,7 @@ export const AddOptionForm = styled.form`
     border: none;
     outline: none;
     font-size: 14px;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
 
     &:focus {
       border: 1px dashed ${props => props.theme.colors.lightGray};
