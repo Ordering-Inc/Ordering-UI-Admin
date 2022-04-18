@@ -203,7 +203,7 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/stores/list/:store'>
+                    <Route exact path='/stores/products/:store?'>
                       {
                         auth
                           ? <BusinessProductsList />
