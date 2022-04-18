@@ -124,14 +124,10 @@ const ProductExtrasUI = (props) => {
                 checked={extraIds.includes(extra.id) ?? false}
                 onChange={e => handleExtraState(extra.id, e.target.checked)}
               />
-              <input
-                type='text'
-                defaultValue={extra.name}
-                onChange={(e) => handleChangeExtraInput(e, extra.id)}
-              />
             </CheckboxContainer>
-            <MoreContainer>
-              <Details onClick={() => handleOpenExtraDetails(extra)}>
+            <MoreContainer onClick={() => handleOpenExtraDetails(extra)}>
+              <span>{extra.name}</span>
+              <Details>
                 <ChevronRight />
               </Details>
             </MoreContainer>
@@ -167,6 +163,7 @@ const ProductExtrasUI = (props) => {
               onClose={() => handleCloseExtraDetails()}
               business={business}
               extra={currentExtra}
+              handleChangeExtraName={handleChangeExtraInput}
               handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
@@ -184,6 +181,7 @@ const ProductExtrasUI = (props) => {
                 onClose={() => handleCloseExtraDetails()}
                 business={business}
                 extra={currentExtra}
+                handleChangeExtraName={handleChangeExtraInput}
                 handleUpdateBusinessState={handleUpdateBusinessState}
               />
             </Modal>

@@ -27,10 +27,14 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  h1 {
+
+  > input {
+    background-color: transparent;
+    border: none;
+    outline: none;
     font-size: 20px;
     font-weight: 700;
-    color: ${props => props.theme.colors.headingColor};
+    padding: 0;
     margin: 5px 0;
   }
 
