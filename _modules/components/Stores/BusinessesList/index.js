@@ -70,19 +70,14 @@ var BusinessesList = function BusinessesList(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      openPopover = _useState2[0],
-      setOpenPopover = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     business: true,
     featured: true,
     ratings: true
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      allowColumns = _useState4[0],
-      setAllowColumns = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      allowColumns = _useState2[0],
+      setAllowColumns = _useState2[1];
 
   var optionsDefault = [{
     value: 'business',
@@ -129,15 +124,8 @@ var BusinessesList = function BusinessesList(props) {
   }, t('BUSINESS', 'Business')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) && /*#__PURE__*/_react.default.createElement("th", null, t('FEATURED', 'Featured')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings) && /*#__PURE__*/_react.default.createElement("th", null, t('RATINGS', 'Ratings')), /*#__PURE__*/_react.default.createElement("th", {
     className: "action"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
-    open: openPopover,
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
-    onClick: function onClick() {
-      return setOpenPopover(!openPopover);
-    },
-    onClose: function onClose() {
-      return setOpenPopover(false);
-    },
     handleChangeAllowColumns: handleChangeAllowColumns
   })))), businessList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusiness.SingleBusiness, {

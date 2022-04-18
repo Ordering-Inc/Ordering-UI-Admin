@@ -24,7 +24,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: ", ";\n  height: ", ";\n  border-radius: 10px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  max-height: 90vh;\n  overflow: ", ";\n  @media (max-width: 860px) {\n    width: 80%;\n  }\n  @media (max-width: 768px) {\n    width: 100vw;\n    height: 100vh;\n    max-height: 100vh;\n    border-radius: 0px;\n  }\n"])), function (_ref2) {
+var ModalDialog = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  background-color: ", ";\n  padding: ", ";\n  width: ", ";\n  height: ", ";\n  border-radius: 10px;\n  box-sizing: border-box;\n  margin-top: auto;\n  margin-bottom: auto;\n  max-height: calc(var(--vh, 1vh) * 90);\n  overflow: ", ";\n  @media (max-width: 860px) {\n    width: 80%;\n  }\n  @media (max-width: 768px) {\n    width: 100vw;\n    height: calc(var(--vh, 1vh) * 100);\n    max-height: calc(var(--vh, 1vh) * 100);\n    border-radius: 0px;\n  }\n"])), function (_ref2) {
   var isTransparent = _ref2.isTransparent;
   return isTransparent ? 'transparent' : '#FFF';
 }, function (_ref3) {

@@ -56,7 +56,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionList = function EnterprisePromotionList(props) {
-  var promotionListState = props.promotionListState,
+  var eventDisabled = props.eventDisabled,
+      promotionListState = props.promotionListState,
       paginationProps = props.paginationProps,
       getPromotions = props.getPromotions,
       setPaginationProps = props.setPaginationProps,
@@ -81,21 +82,16 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       parseDate = _useUtils2$.parseDate,
       optimizeImage = _useUtils2$.optimizeImage;
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      openPopover = _useState2[0],
-      setOpenPopover = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     promotions: true,
     promotionType: true,
     how: true,
     dateRange: true,
     actions: true
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      allowColumns = _useState4[0],
-      setAllowColumns = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      allowColumns = _useState2[0],
+      setAllowColumns = _useState2[1];
 
   var optionsDefault = [{
     value: 'promotions',
@@ -167,20 +163,15 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       handleChangePage(paginationProps.currentPage - 1);
     }
   }, [promotionListState.promotions, paginationProps]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.promotions) && /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionListContainer, {
+    eventDisabled: eventDisabled
+  }, /*#__PURE__*/_react.default.createElement(_styles2.PromotionListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.promotions) && /*#__PURE__*/_react.default.createElement("th", {
     className: "promotion"
   }, t('PROMOTIONS', 'Promotions')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.promotionType) && /*#__PURE__*/_react.default.createElement("th", null, t('PROMOTION_TYPES', 'Promotion types')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.how) && /*#__PURE__*/_react.default.createElement("th", null, t('QUESTION_HOW', 'How?')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateRange) && /*#__PURE__*/_react.default.createElement("th", {
     className: "date_range"
   }, t('DATE_RANGE', 'Date Range')), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
-    open: openPopover,
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
-    onClick: function onClick() {
-      return setOpenPopover(!openPopover);
-    },
-    onClose: function onClose() {
-      return setOpenPopover(false);
-    },
     handleChangeAllowColumns: handleChangeAllowColumns
   })))), promotionListState !== null && promotionListState !== void 0 && promotionListState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SinglePromotionTbody, {
@@ -260,7 +251,9 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
         return handleEnablePromotion(promotion.id, enabled);
       }
     })))));
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.PromotionListBottom, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.PromotionListBottom, {
+    eventDisabled: eventDisabled
+  }, /*#__PURE__*/_react.default.createElement(_styles2.AddNewButton, {
     onClick: function onClick() {
       return handleOpenDetails({});
     }

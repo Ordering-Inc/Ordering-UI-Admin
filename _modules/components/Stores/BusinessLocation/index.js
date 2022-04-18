@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessLocation = function BusinessLocation(props) {
-  var _configs$google_maps_, _configs$google_maps_2, _formState$result, _formState$result2, _formState$result2$re, _ref2, _formState$changes$ad, _formState$changes, _configs$country_auto, _formState$result3, _formState$result4, _formState$result4$re, _ref3, _formState$changes$ad2, _formState$changes2;
+  var _configs$google_maps_, _configs$google_maps_2, _ref2, _formState$changes$ti, _formState$changes, _formState$result, _formState$result2, _formState$result2$re, _ref3, _formState$changes$ad, _formState$changes2, _configs$country_auto, _formState$result3, _formState$result4, _formState$result4$re, _ref4, _formState$changes$ad2, _formState$changes3;
 
   var business = props.business,
       formState = props.formState,
@@ -136,16 +136,18 @@ var BusinessLocation = function BusinessLocation(props) {
 
             case 8:
               result = _context.sent;
-              setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-                changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, {
-                  address: address === null || address === void 0 ? void 0 : address.address,
-                  location: _objectSpread(_objectSpread({}, address === null || address === void 0 ? void 0 : address.location), {}, {
-                    zipcode: address !== null && address !== void 0 && address.zipcode ? address.zipcode : -1,
-                    zoom: 15
-                  }),
-                  timezone: result === null || result === void 0 ? void 0 : result.timeZoneId
-                })
-              }));
+              setFormState(function (prevState) {
+                return _objectSpread(_objectSpread({}, prevState), {}, {
+                  changes: _objectSpread(_objectSpread({}, prevState === null || prevState === void 0 ? void 0 : prevState.changes), {}, {
+                    address: address === null || address === void 0 ? void 0 : address.address,
+                    location: _objectSpread(_objectSpread({}, address === null || address === void 0 ? void 0 : address.location), {}, {
+                      zipcode: address !== null && address !== void 0 && address.zipcode ? address.zipcode : -1,
+                      zoom: 15
+                    }),
+                    timezone: result === null || result === void 0 ? void 0 : result.timeZoneId
+                  })
+                });
+              });
 
             case 10:
             case "end":
@@ -161,16 +163,18 @@ var BusinessLocation = function BusinessLocation(props) {
   }();
 
   var handleChangeCenter = function handleChangeCenter(address) {
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, {
-        address: business === null || business === void 0 ? void 0 : business.address,
-        location: _objectSpread(_objectSpread({}, business === null || business === void 0 ? void 0 : business.location), {}, {
-          lat: address === null || address === void 0 ? void 0 : address.lat(),
-          lng: address === null || address === void 0 ? void 0 : address.lng(),
-          zoom: 15
+    setFormState(function (prevState) {
+      return _objectSpread(_objectSpread({}, prevState), {}, {
+        changes: _objectSpread(_objectSpread({}, prevState === null || prevState === void 0 ? void 0 : prevState.changes), {}, {
+          address: business === null || business === void 0 ? void 0 : business.address,
+          location: _objectSpread(_objectSpread({}, business === null || business === void 0 ? void 0 : business.location), {}, {
+            lat: address === null || address === void 0 ? void 0 : address.lat(),
+            lng: address === null || address === void 0 ? void 0 : address.lng(),
+            zoom: 15
+          })
         })
-      })
-    }));
+      });
+    });
   };
 
   (0, _react.useEffect)(function () {
@@ -191,7 +195,7 @@ var BusinessLocation = function BusinessLocation(props) {
     isDefault: true,
     defaultValue: business === null || business === void 0 ? void 0 : business.city_id,
     handleChangeCity: handleChangeBusinessCity
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperTimezone, null, /*#__PURE__*/_react.default.createElement("p", null, t('TIMEZONE', 'Timezone')), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.timezone))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperGoogleAutoCompleteInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleAutocompleteInput, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperTimezone, null, /*#__PURE__*/_react.default.createElement("p", null, t('TIMEZONE', 'Timezone')), /*#__PURE__*/_react.default.createElement("p", null, (_ref2 = (_formState$changes$ti = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.timezone) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : business === null || business === void 0 ? void 0 : business.timezone) !== null && _ref2 !== void 0 ? _ref2 : ''))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperGoogleAutoCompleteInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleAutocompleteInput, {
     className: "input-autocomplete",
     apiKey: googleMapsApiKey,
     placeholder: t('ADDRESS', 'Address'),
@@ -201,12 +205,12 @@ var BusinessLocation = function BusinessLocation(props) {
     onChange: function onChange(e) {
       handleChangeInput(e.target.value);
     },
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re.address : (_ref2 = (_formState$changes$ad = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : business === null || business === void 0 ? void 0 : business.address) !== null && _ref2 !== void 0 ? _ref2 : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re.address : (_ref3 = (_formState$changes$ad = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : business === null || business === void 0 ? void 0 : business.address) !== null && _ref3 !== void 0 ? _ref3 : '',
     autoComplete: "new-field",
     countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperAddressnotes, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS_NOTES', 'Address notes')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     rows: 4,
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.address_notes : (_ref3 = (_formState$changes$ad2 = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.address_notes) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : business === null || business === void 0 ? void 0 : business.address_notes) !== null && _ref3 !== void 0 ? _ref3 : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.address_notes : (_ref4 = (_formState$changes$ad2 = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.address_notes) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : business === null || business === void 0 ? void 0 : business.address_notes) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: function onChange(e) {
       return handleChangeTextarea(e.target.value);
     },

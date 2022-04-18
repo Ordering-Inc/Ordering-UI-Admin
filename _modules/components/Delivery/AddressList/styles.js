@@ -72,7 +72,7 @@ var ContinueButton = _styledComponents.default.div(_templateObject12 || (_templa
 
 exports.ContinueButton = ContinueButton;
 
-var WrapperAddressForm = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 0px;\n  ", "\n  background: ", ";\n  width: 100vw;\n  height: 100vh;\n  overflow: auto;\n  box-sizing: border-box;\n  padding: 35px 20px;\n\n  ", "\n\n  @media (min-width: 500px) {\n    width: 500px;\n  }\n"])), function (props) {
+var WrapperAddressForm = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 0px;\n  ", "\n  background: ", ";\n  width: 100vw;\n  height: calc(var(--vh, 1vh) * 100);\n  overflow: auto;\n  box-sizing: border-box;\n  padding: 35px 20px;\n\n  ", "\n\n  @media (min-width: 500px) {\n    width: 500px;\n  }\n"])), function (props) {
   var _props$theme5;
 
   return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    left: 0px;\n  "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    right: 0px;\n  "])));

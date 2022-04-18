@@ -116,14 +116,14 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
       content: promotionListState === null || promotionListState === void 0 ? void 0 : promotionListState.error
     });
   }, [promotionListState === null || promotionListState === void 0 ? void 0 : promotionListState.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionsListingContainer, {
-    eventDisabled: advancedOfferModuleDisabled
-  }, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, {
+    eventDisabled: advancedOfferModuleDisabled
+  }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick() {
@@ -135,6 +135,7 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
   }))), /*#__PURE__*/_react.default.createElement(_EnterprisePromotionList.EnterprisePromotionList, _extends({}, props, {
+    eventDisabled: advancedOfferModuleDisabled,
     selectedPromotion: selectedPromotion,
     handleOpenDetails: handleOpenDetails
   }))), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {

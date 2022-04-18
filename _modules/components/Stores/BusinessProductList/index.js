@@ -180,15 +180,8 @@ var BusinessProductList = function BusinessProductList(props) {
   }, t('FEE', 'Fee')), /*#__PURE__*/_react.default.createElement("th", {
     className: "more"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
-    open: openPopover,
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
-    onClick: function onClick() {
-      return setOpenPopover(!openPopover);
-    },
-    onClose: function onClose() {
-      return setOpenPopover(false);
-    },
     handleChangeAllowColumns: handleChangeAllowColumns
   })))), categoryState.loading || businessState.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, {

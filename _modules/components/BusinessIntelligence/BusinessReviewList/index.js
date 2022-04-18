@@ -204,7 +204,6 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     defaultPageSize: businessesPerPage,
     handleChangePageSize: handleChangePageSize
   })), openReview && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    sidebarId: "review-details",
     defaultSideBarWidth: 550,
     open: openReview,
     onClose: function onClose() {

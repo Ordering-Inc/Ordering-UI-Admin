@@ -76,7 +76,7 @@ var ImportersList = function ImportersList(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles2.ImportListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImportersTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ImpotersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", {
-    colSpan: 2
+    colspan: 2
   }, t('ACTION', 'Action')))), /*#__PURE__*/_react.default.createElement("tbody", null, importerList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
@@ -126,7 +126,7 @@ var ImportersList = function ImportersList(props) {
       backgroundColor: '#fff !important'
     }
   }, /*#__PURE__*/_react.default.createElement("td", {
-    colSpan: "2"
+    colspan: "2"
   }, /*#__PURE__*/_react.default.createElement(_styles2.NotFoundWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
     content: t('NOT_FOUND_IMPOTERS', "Can't found importers")
   })))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImportersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewImporterButton, {

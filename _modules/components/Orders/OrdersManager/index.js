@@ -258,11 +258,20 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter
-  }), /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
+  }), /*#__PURE__*/_react.default.createElement(OrderSubFilterControls, {
+    isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
+  }, /*#__PURE__*/_react.default.createElement(OrderStatusSubFilterWrapper, {
+    isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
+  }, /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
     ordersStatusGroup: ordersStatusGroup,
     selectedSubOrderStatus: selectedSubOrderStatus,
     handleSelectedSubOrderStatus: handleSelectedSubOrderStatus
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersInnerContent, {
+  })), !isSelectedOrders && /*#__PURE__*/_react.default.createElement(OrdersDashboardControls, {
+    selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
+    filterValues: filterValues,
+    handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,
+    handleDeleteMultiOrders: handleDeleteMultiOrders
+  })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersInnerContent, {
     className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapItemView, null, /*#__PURE__*/_react.default.createElement(_OrdersDashboard.OrdersDashboard, {
     isSelectedOrders: isSelectedOrders,
@@ -300,7 +309,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isTourFlag: isTourFlag,
     setIsTourFlag: setIsTourFlag,
     setIsTourOpen: setIsTourOpen
-  }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), isTourOpen && /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
+  }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
     isTourOpen: isTourOpen,
     setIsTourOpen: setIsTourOpen,
     currentStep: currentTourStep,

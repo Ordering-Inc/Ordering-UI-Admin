@@ -23,6 +23,8 @@ var _ChatBusinessesList = require("../ChatBusinessesList");
 
 var _Shared = require("../../Shared");
 
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -63,6 +65,9 @@ var MessagesListingUI = function MessagesListingUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+      width = _useWindowSize.width;
 
   var _useState = (0, _react.useState)('orders'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -114,6 +119,10 @@ var MessagesListingUI = function MessagesListingUI(props) {
     setSelectedOrder(_objectSpread({}, order));
   };
 
+  (0, _react.useEffect)(function () {
+    if (width >= 768) return;
+    document.body.style.overflow = isOpenOrderDetail ? 'hidden' : 'auto';
+  }, [width, isOpenOrderDetail]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MessagesListingContainer, null, /*#__PURE__*/_react.default.createElement(_Orders.OrdersContentHeader, {
     isDisableControl: true,
     title: t('MESSAGES', 'Messages'),

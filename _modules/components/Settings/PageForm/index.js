@@ -102,6 +102,11 @@ var PageFormUI = function PageFormUI(props) {
       alertState = _useState6[0],
       setAlertState = _useState6[1];
 
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      pageContent = _useState8[0],
+      setPageContent = _useState8[1];
+
   var insertLink = function insertLink(context) {
     var ui = _jquery.default.summernote.ui;
     var button = ui.button({
@@ -163,6 +168,10 @@ var PageFormUI = function PageFormUI(props) {
       content: formState === null || formState === void 0 ? void 0 : formState.error
     });
   }, [formState === null || formState === void 0 ? void 0 : formState.error]);
+  (0, _react.useEffect)(function () {
+    if (!pageContent) return;
+    handleChangeFormState('body', pageContent);
+  }, [pageContent]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PageContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, isAddMode ? t('ADD_PAGE', 'Add page') : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, pageState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   }) : (_ref = (_formState$changes$na = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : (_pageState$page = pageState.page) === null || _pageState$page === void 0 ? void 0 : _pageState$page.name) !== null && _ref !== void 0 ? _ref : '')), !isAddMode && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, pageState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -179,7 +188,7 @@ var PageFormUI = function PageFormUI(props) {
     },
     placeholder: t('NAME', 'Name')
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    value: (_ref2 = (_formState$changes$sl = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.slug) !== null && _formState$changes$sl !== void 0 ? _formState$changes$sl : (_pageState$page4 = pageState.page) === null || _pageState$page4 === void 0 ? void 0 : _pageState$page4.slug) !== null && _ref2 !== void 0 ? _ref2 : '',
+    defaultValue: (_ref2 = (_formState$changes$sl = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.slug) !== null && _formState$changes$sl !== void 0 ? _formState$changes$sl : (_pageState$page4 = pageState.page) === null || _pageState$page4 === void 0 ? void 0 : _pageState$page4.slug) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: function onChange(e) {
       return handleChangeFormState('slug', e.target.value.replace(/\s/g, ''));
     },
@@ -198,7 +207,7 @@ var PageFormUI = function PageFormUI(props) {
       }
     },
     onChange: function onChange(content) {
-      return handleChangeFormState('body', content);
+      return setPageContent(content);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroupWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",

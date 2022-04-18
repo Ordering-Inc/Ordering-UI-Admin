@@ -74,16 +74,20 @@ var AnalyticsProductCategories = function AnalyticsProductCategories(props) {
       _iterator.f();
     }
 
-    var downloadLink = document.createElement('a');
-    var blob = new Blob(["\uFEFF", csv]);
-    var url = URL.createObjectURL(blob);
-    downloadLink.href = url;
+    var link = document.createElement('a');
     var fileSuffix = new Date().getTime();
-    var name = isProducts ? 'top_products' : 'top_categories';
-    downloadLink.download = "".concat(name, "_").concat(fileSuffix, ".csv");
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    var exportName = isProducts ? 'top_products' : 'top_categories';
+    link.download = "".concat(exportName, "_").concat(fileSuffix, ".csv");
+    var blob = new Blob(["\uFEFF", csv], {
+      type: 'text/csv'
+    });
+    var reader = new FileReader();
+    reader.readAsDataURL(blob);
+
+    reader.onload = function () {
+      link.href = reader.result;
+      link.click();
+    };
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ProductCategoryHeader, null, /*#__PURE__*/_react.default.createElement("p", null, isProducts ? t('TOP_PRODUCTS', 'Top Products') : t('TOP_CATEGORIES', 'Top Categories')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {

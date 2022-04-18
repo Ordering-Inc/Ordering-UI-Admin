@@ -21,7 +21,7 @@ var FormInput = _styledComponents.default.form(_templateObject || (_templateObje
 
 exports.FormInput = FormInput;
 
-var HeaderImage = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 150px;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  ", "\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n\n  @media (min-width: 768px) {\n    height: 180px;\n  }\n"])), function (_ref) {
+var HeaderImage = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 150px;\n  position: relative;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  ", "\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n\n  @media (min-width: 768px) {\n    height: 180px;\n  }\n"])), function (_ref) {
   var isEdit = _ref.isEdit;
   return !isEdit && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    pointer-event: none;\n  "])));
 });
@@ -58,7 +58,7 @@ var InputWrapper = _styledComponents.default.div(_templateObject11 || (_template
 
 exports.InputWrapper = InputWrapper;
 
-var ActionsForm = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  margin-top: 15px;\n  > button {\n    height: 35px;\n  }\n"])));
+var ActionsForm = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  margin-top: 15px;\n  > button {\n    height: 44px;\n  }\n"])));
 
 exports.ActionsForm = ActionsForm;
 
@@ -69,7 +69,7 @@ var LogoImage = _styledComponents.default.div(_templateObject14 || (_templateObj
 
 exports.LogoImage = LogoImage;
 
-var PhoneWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  margin-bottom: 35px;\n  > div {\n    width: 100%;\n  }\n  @media (min-width: 576px) {\n    display: flex;\n    justify-content: space-between;\n    > div {\n      width: 48%;\n    }\n  }\n"])));
+var PhoneWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 35px;\n  > div {\n    width: 100%;\n  }\n  @media (min-width: 576px) {\n    flex-direction: row;\n    justify-content: space-between;\n    > div {\n      width: 48%;\n    }\n  }\n"])));
 
 exports.PhoneWrapper = PhoneWrapper;
 

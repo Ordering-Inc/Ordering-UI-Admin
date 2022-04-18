@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SidebarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  @media print {\n    display: none;\n  }\n\n  position: fixed;\n  background: ", ";\n  z-index: 1000;\n  transition: all 0.25s ease;\n  height: 100vh;\n  overflow: auto;\n  width: 100vw;\n  ", "\n\n  @media (min-width: 768px) {\n    overflow: hidden;\n    position: relative;\n    width: 240px;\n    ", "\n  }\n\n  button.btn-primary {\n    background-color: ", ";\n  }\n\n  button {\n    display: flex;\n    font-size: 14px;\n    box-sizing: border-box;\n    border-radius: 8px;\n    font-weight: 500;\n    &:hover {\n      background-color: ", ";\n    }\n    &.btn-primary {\n      &:hover {\n        background-color: ", ";\n      }\n    }\n\n    span {\n      ", "\n    }\n\n    svg {\n      font-size: 20px;\n    }\n  }\n\n"])), function (props) {
+var SidebarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  @media print {\n    display: none;\n  }\n\n  position: fixed;\n  background: ", ";\n  z-index: 1000;\n  transition: all 0.25s ease;\n  height: calc(var(--vh, 1vh) * 100);\n  overflow: auto;\n  width: 100vw;\n  ", "\n\n  @media (min-width: 768px) {\n    position: relative;\n    width: 240px;\n    ", "\n  }\n\n  button.btn-primary {\n    background-color: ", ";\n  }\n\n  button {\n    display: flex;\n    font-size: 14px;\n    box-sizing: border-box;\n    border-radius: 8px;\n    font-weight: 500;\n    &:hover {\n      background-color: ", ";\n    }\n    &.btn-primary {\n      &:hover {\n        background-color: ", ";\n      }\n    }\n\n    span {\n      text-transform: capitalize;\n      ", "\n    }\n\n    svg {\n      font-size: 20px;\n    }\n  }\n\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (_ref) {
   var isCollapse = _ref.isCollapse;
@@ -39,7 +39,7 @@ var SidebarContainer = _styledComponents.default.div(_templateObject || (_templa
 
 exports.SidebarContainer = SidebarContainer;
 
-var SidebarInnerContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: 100%;\n  @media (min-width: 760px) {\n    height: 100vh;\n    position: sticky;\n    top: 0px;\n    ", "\n  }\n"])), function (props) {
+var SidebarInnerContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: 100%;\n  @media (min-width: 760px) {\n    position: sticky;\n    top: 0px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {
