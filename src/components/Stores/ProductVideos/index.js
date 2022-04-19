@@ -94,7 +94,7 @@ const ProductVideosUI = (props) => {
     if (!matches) {
       setAlertState({
         open: true,
-        content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
+        content: t('INVALID_VIDEO_FORMAT', 'The video format is invalid.')
       })
       return false
     }
