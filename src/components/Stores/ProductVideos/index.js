@@ -59,6 +59,70 @@ const ProductVideosUI = (props) => {
     if (Object.entries(changesState?.changes).length === 0 && inputAddRef?.current) inputAddRef.current.value = ''
   }, [changesState?.changes])
 
+  const handleAddVideo = () => {
+    const _url = changesState?.changes?.video
+    const matchFormat = matchYoutubeUrl(_url)
+    let validId
+
+    if (matchFormat) {
+      validId = validationVideoId(_url)
+    }
+
+    if (matchFormat && validId) {
+      fetch('https://www.youtube.com/oembed?url=https%3A//youtube.com/watch%3Fv%3D' + validId + '&format=json')
+        .then(response => response.json())
+        .then(data => {
+          if (data) {
+            handleAddGalleryProduct(2)
+          }
+        })
+        .catch(error => {
+          if (error) {
+            console.log(error?.message)
+          }
+          setAlertState({
+            open: true,
+            content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
+          })
+        })
+    }
+  }
+
+  const matchYoutubeUrl = (url) => {
+    const patt = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|videoseries\?.+&list=|playlist\?.+&list=)?)((\w|-){11})(?:\S+)?$/
+    const matches = url.match(patt)
+    if (!matches) {
+      setAlertState({
+        open: true,
+        content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
+      })
+      return false
+    }
+    return true
+  }
+
+  const validationVideoId = (url) => {
+    const keys = url.split('/')
+    let _videoId = keys[keys.length - 1]
+    if (_videoId.includes('watch')) {
+      const __url = _videoId.split('=')[1]
+      _videoId = __url
+    }
+    if (_videoId.includes('?')) {
+      const __url = _videoId.split('?')[0]
+      _videoId = __url
+    }
+
+    if (!(_videoId.length === 11)) {
+      setAlertState({
+        open: true,
+        content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
+      })
+      return false
+    }
+    return _videoId
+  }
+
   return (
     <>
       <ProdcutVideosContainer>
@@ -107,7 +171,7 @@ const ProductVideosUI = (props) => {
                 <div style={{ width: 18 }} />
                 <Button
                   color='primary'
-                  onClick={() => handleAddGalleryProduct(2)}
+                  onClick={() => handleAddVideo()}
                 >
                   {t('ADD', 'Add')}
                 </Button>
