@@ -123,6 +123,12 @@ Object.defineProperty(exports, "ForgotPasswordForm", {
     return _Login.ForgotPasswordForm;
   }
 });
+Object.defineProperty(exports, "FreeProductsList", {
+  enumerable: true,
+  get: function get() {
+    return _Downloads.FreeProductsList;
+  }
+});
 Object.defineProperty(exports, "HomePage", {
   enumerable: true,
   get: function get() {
@@ -265,6 +271,12 @@ Object.defineProperty(exports, "PlaceListing", {
   enumerable: true,
   get: function get() {
     return _Settings.PlaceListing;
+  }
+});
+Object.defineProperty(exports, "PurchasedProductsList", {
+  enumerable: true,
+  get: function get() {
+    return _Downloads.PurchasedProductsList;
   }
 });
 Object.defineProperty(exports, "RecoveryActionListing", {
@@ -567,6 +579,8 @@ var _Users = require("./components/Users");
 var _Loyalty = require("./components/Loyalty");
 
 var _CartRecovery = require("./components/CartRecovery");
+
+var _Downloads = require("./components/Downloads");
 
 var _Layout = require("./components/Layout");
 
