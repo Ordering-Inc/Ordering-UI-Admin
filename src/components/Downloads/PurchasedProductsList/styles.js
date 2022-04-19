@@ -161,6 +161,9 @@ export const ProductTboday = styled.tbody`
       border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
       &:first-child {
+        width: 18%;
+        min-width: 155px;
+  
         ${props => props.theme?.rtl ? css`
           border-top-right-radius: 8px;
           border-bottom-right-radius: 8px;

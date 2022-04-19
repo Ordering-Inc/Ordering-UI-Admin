@@ -83,7 +83,9 @@ export const FreeProductsList = (props) => {
     }
   ]
 
-  const handleOpenProductDetails = (product) => {
+  const handleOpenProductDetails = (e, product) => {
+    const isInvalid = e.target.closest('.download-link')
+    if (isInvalid) return
     setSelectedProduct(product)
     setIsOpenProduct(true)
   }
@@ -123,7 +125,7 @@ export const FreeProductsList = (props) => {
             <ProductRow
               key={product.key}
               active={product.key === selectedProduct?.key}
-              onClick={() => handleOpenProductDetails(product)}
+              onClick={(e) => handleOpenProductDetails(e, product)}
             >
               <AppImageWrapper>
                 <img src={product.image} alt='' />
@@ -135,16 +137,16 @@ export const FreeProductsList = (props) => {
               <AppDownloadLinksWrapper>
                 {product.type === 1 && (
                   <>
-                    <DownloadLink href={product.app_store} target='_blank'>
+                    <DownloadLink href={product.app_store} target='_blank' className='download-link'>
                       <img src={theme.images.general.appStore} alt='App store' />
                     </DownloadLink>
-                    <DownloadLink href={product.google_play_store} target='_blank'>
+                    <DownloadLink href={product.google_play_store} target='_blank' className='download-link'>
                       <img src={theme.images.general.googlePlay} alt='Google play' />
                     </DownloadLink>
                   </>
                 )}
                 {product.type === 2 && (
-                  <DownloadLink href={product.web_url} target='_blank' isSingle={product.type === 2}>
+                  <DownloadLink href={product.web_url} target='_blank' isSingle={product.type === 2} className='download-link'>
                     {product.title}
                   </DownloadLink>
                 )}
