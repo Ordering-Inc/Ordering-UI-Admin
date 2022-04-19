@@ -31,9 +31,7 @@ var OptionsContainer = _styledComponents.default.div(_templateObject4 || (_templ
 
 exports.OptionsContainer = OptionsContainer;
 
-var Header = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    color: ", ";\n    margin: 5px 0;\n  }\n\n  > div {\n    display: flex;\n    align-items: center;\n    > button {\n      display: none;\n    }\n  }\n\n  @media (min-width: 1000px) {\n    > div {\n      > button {\n        display: block;\n        cursor: pointer;\n        ", "\n      }\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.headingColor;
-}, function (props) {
+var Header = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  > input {\n    background-color: transparent;\n    border: none;\n    outline: none;\n    font-size: 20px;\n    font-weight: 700;\n    padding: 0;\n    margin: 5px 0;\n  }\n\n  > div {\n    display: flex;\n    align-items: center;\n    > button {\n      display: none;\n    }\n  }\n\n  @media (min-width: 1000px) {\n    > div {\n      > button {\n        display: block;\n        cursor: pointer;\n        ", "\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n          margin-right: 10px;\n        "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n          margin-left: 10px;\n        "])));
@@ -41,7 +39,11 @@ var Header = _styledComponents.default.div(_templateObject5 || (_templateObject5
 
 exports.Header = Header;
 
-var OptionNameContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  width: 70%;\n  margin: 12px 0;\n  font-size: 14px;\n  > input {\n    flex: 1;\n    height: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    &:focus {\n      border: 1px dashed ", ";\n    }\n    ", "\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
+var OptionNameContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  width: 70%;\n  margin: 12px 0;\n  font-size: 14px;\n  > input {\n    flex: 1;\n    height: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    background: ", ";\n\n    &:focus {\n      border: 1px dashed ", ";\n    }\n    ", "\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+}, function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   var _props$theme3;
@@ -90,10 +92,14 @@ var ActionSelectorWrapper = _styledComponents.default.div(_templateObject17 || (
 
 exports.ActionSelectorWrapper = ActionSelectorWrapper;
 
-var AddOptionForm = _styledComponents.default.form(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-top: 13px solid ", ";\n  border-bottom: 1px solid ", ";\n\n  > input {\n    width: 80px;\n    height: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    font-size: 14px;\n\n    &:focus {\n      border: 1px dashed ", ";\n    }\n  }\n  > button {\n    ", "\n  }\n"])), function (props) {
+var AddOptionForm = _styledComponents.default.form(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-top: 13px solid ", ";\n  border-bottom: 1px solid ", ";\n\n  > input {\n    width: 80px;\n    height: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    font-size: 14px;\n    background: ", ";\n\n    &:focus {\n      border: 1px dashed ", ";\n    }\n  }\n  > button {\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.borderColor;
+}, function (props) {
+  var _props$theme$colors2;
+
+  return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
 }, function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {

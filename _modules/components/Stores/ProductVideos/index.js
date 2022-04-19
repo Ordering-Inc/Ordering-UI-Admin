@@ -111,6 +111,81 @@ var ProductVideosUI = function ProductVideosUI(props) {
   (0, _react.useEffect)(function () {
     if (Object.entries(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0 && inputAddRef !== null && inputAddRef !== void 0 && inputAddRef.current) inputAddRef.current.value = '';
   }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes]);
+
+  var handleAddVideo = function handleAddVideo() {
+    var _changesState$changes;
+
+    var _url = changesState === null || changesState === void 0 ? void 0 : (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.video;
+
+    var matchFormat = matchYoutubeUrl(_url);
+    var validId;
+
+    if (matchFormat) {
+      validId = validationVideoId(_url);
+    }
+
+    if (matchFormat && validId) {
+      fetch('https://www.youtube.com/oembed?url=https%3A//youtube.com/watch%3Fv%3D' + validId + '&format=json').then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        if (data) {
+          handleAddGalleryProduct(2);
+        }
+      }).catch(function (error) {
+        if (error) {
+          console.log(error === null || error === void 0 ? void 0 : error.message);
+        }
+
+        setAlertState({
+          open: true,
+          content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
+        });
+      });
+    }
+  };
+
+  var matchYoutubeUrl = function matchYoutubeUrl(url) {
+    var patt = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|videoseries\?.+&list=|playlist\?.+&list=)?)((\w|-){11})(?:\S+)?$/;
+    var matches = url.match(patt);
+
+    if (!matches) {
+      setAlertState({
+        open: true,
+        content: t('INVALID_VIDEO_FORMAT', 'The video format is invalid.')
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  var validationVideoId = function validationVideoId(url) {
+    var keys = url.split('/');
+    var _videoId = keys[keys.length - 1];
+
+    if (_videoId.includes('watch')) {
+      var __url = _videoId.split('=')[1];
+
+      _videoId = __url;
+    }
+
+    if (_videoId.includes('?')) {
+      var _url2 = _videoId.split('?')[0];
+
+      _videoId = _url2;
+    }
+
+    if (!(_videoId.length === 11)) {
+      setAlertState({
+        open: true,
+        content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
+      });
+      return false;
+    }
+
+    return _videoId;
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ProdcutVideosContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_VIDEOS', 'Product videos')), /*#__PURE__*/_react.default.createElement(_styles2.GalleryVideosContainer, null, productGalleryState !== null && productGalleryState !== void 0 && productGalleryState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.GalleryVideos, null, _toConsumableArray(Array(2).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.GalleryItem, {
       key: i
@@ -149,7 +224,7 @@ var ProductVideosUI = function ProductVideosUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: function onClick() {
-      return handleAddGalleryProduct(2);
+      return handleAddVideo();
     }
   }, t('ADD', 'Add')))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),

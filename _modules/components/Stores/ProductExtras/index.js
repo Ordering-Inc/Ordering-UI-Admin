@@ -205,17 +205,11 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       onChange: function onChange(e) {
         return handleExtraState(extra.id, e.target.checked);
       }
-    }), /*#__PURE__*/_react.default.createElement("input", {
-      type: "text",
-      defaultValue: extra.name,
-      onChange: function onChange(e) {
-        return handleChangeExtraInput(e, extra.id);
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.MoreContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Details, {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.MoreContainer, {
       onClick: function onClick() {
         return handleOpenExtraDetails(extra);
       }
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))));
+    }, /*#__PURE__*/_react.default.createElement("span", null, extra.name), /*#__PURE__*/_react.default.createElement(_styles2.Details, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))));
   })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ExtraAddForm, {
     ref: conatinerRef,
     onSubmit: function onSubmit(e) {
@@ -240,6 +234,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     },
     business: business,
     extra: currentExtra,
+    handleChangeExtraName: handleChangeExtraInput,
     handleUpdateBusinessState: handleUpdateBusinessState
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openExtraDetails && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
@@ -254,6 +249,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     },
     business: business,
     extra: currentExtra,
+    handleChangeExtraName: handleChangeExtraInput,
     handleUpdateBusinessState: handleUpdateBusinessState
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),

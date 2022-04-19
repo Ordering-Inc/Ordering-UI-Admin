@@ -80,7 +80,8 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       openModal = props.openModal,
       setCurOption = props.setCurOption,
       setOpenModal = props.setOpenModal,
-      handleOpenModal = props.handleOpenModal;
+      handleOpenModal = props.handleOpenModal,
+      handleChangeExtraName = props.handleChangeExtraName;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -268,6 +269,16 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     });
   };
 
+  var timeout = null;
+
+  var onChangeExtraName = function onChangeExtraName(e) {
+    e.persist();
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      handleChangeExtraName(e, extraState.extra.id);
+    }, 500);
+  };
+
   (0, _react.useEffect)(function () {
     if (!(addChangesState !== null && addChangesState !== void 0 && addChangesState.name) && (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) === 1 && (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) === 1) {
       setValue('name', (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) || '');
@@ -277,7 +288,14 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   }, [addChangesState]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, {
     id: "extra_options"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, extraState.extra.name), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    placeholder: t('NAME', ''),
+    defaultValue: extraState.extra.name,
+    onChange: function onChange(e) {
+      return onChangeExtraName(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
