@@ -128,6 +128,8 @@ import exampleCSV from './template/assets/files/ordering_business_example.csv'
 import delivery from './template/assets/images/icons/delivery.svg'
 import poster from './template/assets/images/icons/poster.svg'
 import posTerminal from './template/assets/images/icons/pos-terminal.svg'
+import apple from './template/assets/images/icons/apple.svg'
+import android from './template/assets/images/icons/android.svg'
 
 const logos = {
   logotype,
@@ -232,7 +234,9 @@ theme.images = {
     clockDelayed: clockDelayed,
     delivery: delivery,
     posTerminal: posTerminal,
-    poster: poster
+    poster: poster,
+    apple: apple,
+    android: android
   },
   dummies: {
     noOrders: noOrders,

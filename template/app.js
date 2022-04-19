@@ -55,8 +55,8 @@ import { RewardsPrograms } from './pages/RewardsPrograms'
 import { OpenCarts } from './pages/OpenCarts'
 import { RecoveryActionListing } from './pages/RecoveryActionListing'
 import { CampaignListing } from './pages/CampaignListing'
-
 import { FreeProductsList } from './pages/FreeProductsList'
+import { PurchasedProductsList } from './pages/PurchasedProductsList'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -377,6 +377,13 @@ export const App = () => {
                       {
                         auth
                           ? <FreeProductsList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/downloads/purchased-products'>
+                      {
+                        auth
+                          ? <PurchasedProductsList />
                           : <Redirect to='/login' />
                       }
                     </Route>
