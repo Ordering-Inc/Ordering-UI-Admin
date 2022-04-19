@@ -27,10 +27,14 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  h1 {
+
+  > input {
+    background-color: transparent;
+    border: none;
+    outline: none;
     font-size: 20px;
     font-weight: 700;
-    color: ${props => props.theme.colors.headingColor};
+    padding: 0;
     margin: 5px 0;
   }
 
@@ -70,6 +74,8 @@ export const OptionNameContainer = styled.div`
     padding: 5px;
     border: none;
     outline: none;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+
     &:focus {
       border: 1px dashed ${props => props.theme.colors.lightGray};
     }
@@ -195,6 +201,7 @@ export const AddOptionForm = styled.form`
     border: none;
     outline: none;
     font-size: 14px;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
 
     &:focus {
       border: 1px dashed ${props => props.theme.colors.lightGray};
