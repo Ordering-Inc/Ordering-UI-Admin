@@ -16,14 +16,14 @@ import {
   CouponContainer,
   CouponHeader,
   CouponContent,
-  ShowInCartContainer,
   CouponCodeContainer,
   DiscountOption,
   CondtionItem,
   Option,
   SelectWrapper,
   DiscountContainer,
-  AutomaticDiscountEnableWrapper
+  AutomaticEnableWrapper,
+  PublicEnableWrapper
 } from './styles'
 
 export const EnterprisePromotionRules = (props) => {
@@ -171,20 +171,6 @@ export const EnterprisePromotionRules = (props) => {
             </CouponHeader>
             {(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2)) && (
               <CouponContent>
-                <ShowInCartContainer>
-                  <Checkbox
-                    checked={
-                      typeof formState.changes?.public !== 'undefined'
-                        ? formState.changes?.public
-                        : promotionState.promotion?.public
-                    }
-                    onChange={e => handleChangeItem({ public: e.target.checked })}
-                  />
-                  <div>
-                    <p>{t('SHOW_IN_CART', 'Show in cart')}</p>
-                    <p>{t('PLEASE_INDICATE_COUPON_FOR_CART', 'Please indicate if you want the coupon to be seen in the cart or hidden')}</p>
-                  </div>
-                </ShowInCartContainer>
                 <CouponCodeContainer>
                   <label>{t('COUPON_CODE', 'Coupon code')}</label>
                   <Input
@@ -195,7 +181,6 @@ export const EnterprisePromotionRules = (props) => {
                 </CouponCodeContainer>
               </CouponContent>
             )}
-
           </CouponContainer>
           <DiscountOption>
             <CouponHeader
@@ -209,21 +194,32 @@ export const EnterprisePromotionRules = (props) => {
               )}
               <span>{t('DISCOUNT', 'discount')}</span>
             </CouponHeader>
-            {(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1)) && (
-              <AutomaticDiscountEnableWrapper>
-                <Checkbox
-                  checked={
-                    typeof formState.changes?.auto !== 'undefined'
-                      ? formState.changes?.auto
-                      : promotionState.promotion?.auto
-                  }
-                  onChange={e => handleChangeItem({ auto: e.target.checked })}
-                />
-                <span>{t('AUTOMATIC_DISCOUNT', 'Automatic discount')}</span>
-              </AutomaticDiscountEnableWrapper>
-            )}
           </DiscountOption>
-
+          <AutomaticEnableWrapper>
+            <Checkbox
+              checked={
+                typeof formState.changes?.auto !== 'undefined'
+                  ? formState.changes?.auto
+                  : promotionState.promotion?.auto
+              }
+              onChange={e => handleChangeItem({ auto: e.target.checked })}
+            />
+            <span>{t('AUTOMATIC_OFFER', 'Automatic offer')}</span>
+          </AutomaticEnableWrapper>
+          <PublicEnableWrapper>
+            <Checkbox
+              checked={
+                typeof formState.changes?.public !== 'undefined'
+                  ? formState.changes?.public
+                  : promotionState.promotion?.public
+              }
+              onChange={e => handleChangeItem({ public: e.target.checked })}
+            />
+            <div>
+              <p>{t('PUBLIC', 'Public')}</p>
+              <p>{t('USERS_WILL_ABLE_TO_SEE', 'Users will be able to see it')}</p>
+            </div>
+          </PublicEnableWrapper>
           <SectionTitle>{t('CONDITIONS', 'Conditions')}</SectionTitle>
           <CondtionItem
             active={isShowConditions}
