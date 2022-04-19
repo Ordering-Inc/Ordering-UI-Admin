@@ -35,102 +35,7 @@ export const HeaderTitleContainer = styled.div`
     }
   }
 `
-export const ViewMethodsConatiner = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-top: 10px;
-`
-export const ContentWrapper = styled.div`
-`
-export const ProductItemContainer = styled.div``
 
-export const ProductItemWrapper = styled.div`
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  margin: 15px 0;
-  padding: 20px 10px;
-  transition: all 0.3s;
-  border-radius: 8px;
-  cursor: pointer;
-  border: 1px solid transparent;
-
-  ${({ active }) => active && css`
-    border: 1px solid ${props => props.theme.colors.primary} !important;
-    background-color: ${props => props.theme.colors.lightPrimary};
-  `}
-
-  &:hover {
-    background: ${props => props.theme.colors.lightPrimary};
-  }
-
-  @media (max-width: 576px) {
-    flex-direction: column;
-  }
-`
-export const IconWrapper = styled.div`
-  width: 64px;
-  height: 64px;
-  min-width: 64px;
-  min-height: 64px;
-  background: ${props => props.theme.colors.secundary};
-  border-radius: 7.5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  margin-bottom: 10px;
-  ${props => props.theme?.rtl ? css`
-    margin-left: 15px;
-  ` : css`
-    margin-right: 15px;
-  `}
-
-  @media (min-width: 577px) {
-    align-self: flex-start;
-    margin-bottom: 0;
-  }
-
-  svg {
-    font-size: 24px;
-    color: ${props => props.theme?.colors.secundaryLight};
-  }
-  img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-  }
-`
-
-export const ProductItemContent = styled.div`
-  width: 100%;
-`
-
-export const ProductTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-export const ProductTitle = styled.p`
-  font-weight: 500;
-  font-size: 13px;
-  color: ${props => props.theme.colors.headingColor};
-  margin-bottom: 8px;
-`
-
-export const ProductItemDescription = styled.div`
-  font-weight: normal;
-  font-size: 12px;
-  color: ${props => props.theme.colors.lightGray};
-
-  @media (min-width: 577px) {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-`
 export const ProductDetailsContainer = styled.div`
   padding: 25px 20px;
   box-sizing: border-box;
@@ -156,6 +61,7 @@ export const ProductDetailsContainer = styled.div`
     color: ${props => props.theme.colors.headingColor};
     margin-top: 59px;
     margin-bottom: 43px;
+    white-space: pre-wrap;
   }
 `
 export const DownloadLink = styled.a`
@@ -164,16 +70,20 @@ export const DownloadLink = styled.a`
     height: 28px;
     object-fit: cover;
   }
+
+  ${({ isSingle }) => isSingle && css`
+    margin: 0 auto;
+  `}
 `
 export const DownloadLinksContainer = styled.div`
   display: flex;
 
   > a {
-    &:first-child {
+    &:not(:first-child) {
       ${props => props.theme?.rtl ? css`
-        margin-left: 24px;
-      ` : css`
         margin-right: 24px;
+      ` : css`
+        margin-left: 24px;
       `}
     }
   }
@@ -256,7 +166,8 @@ export const AppDownloadLinksWrapper = styled.div`
   justify-content: center;
 
   > a {
-    margin: 5px 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
   ${({ isHeader }) => !isHeader && css`
     height: 72px;
@@ -273,11 +184,11 @@ export const AppDownloadLinksWrapper = styled.div`
     align-items: center;
     justify-content: initial;
     > a {
-      &:first-child {
+      &:not(:first-child) {
         ${props => props.theme?.rtl ? css`
-          margin-left: 23px;
-        ` : css`
           margin-right: 23px;
+        ` : css`
+          margin-left: 23px;
         `}
       }
     }

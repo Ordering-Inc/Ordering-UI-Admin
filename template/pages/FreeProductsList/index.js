@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { FreeProductsList as FreeProductsListController } from '../../../src/components/downloads'
+import { FreeProductsList as FreeProductsListController } from '../../../src/components/Downloads'
 
 export const FreeProductsList = (props) => {
   return (
