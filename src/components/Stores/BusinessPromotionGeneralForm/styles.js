@@ -238,3 +238,128 @@ export const MinimumLimitContainer = styled.div`
     }    
   }
 `
+export const PoromotionTargetWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 24px 0;
+
+  .select {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 14px;
+    border: none;
+    background-color: ${props => props.theme.colors.secundary};
+  }
+`
+
+export const CouponContainer = styled.div`
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};  
+`
+export const CouponHeader = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  cursor: pointer;
+
+  ${({ active }) => active && css`
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
+  `}
+
+  > span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 13px;
+    ` : css`
+      margin-left: 13px;
+    `}
+  }
+`
+export const CouponCodeContainer = styled.div`
+  margin-top: 26px;
+  margin-bottom: 17px;
+  display: flex;
+  flex-direction: column;
+
+  ${props => props.theme?.rtl ? css`
+    margin-right: 30px;
+  ` : css`
+    margin-left: 30px;
+  `}
+
+  label {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+`
+export const CouponContent = styled.div``
+
+export const ShowInCartContainer = styled.div`
+  display: flex;
+
+  ${props => props.theme?.rtl ? css`
+    margin-right: 30px;
+  ` : css`
+    margin-left: 30px;
+  `}
+
+  > div {
+    p {
+      margin: 0;
+      &:first-child {
+        font-size: 14px;
+      }
+      &:last-child {
+        font-size: 12px;
+        color: ${props => props.theme.colors.lightGray};
+      }
+    }
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
+  }
+`
+export const DiscountOption = styled.div`
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+`
+export const AutomaticDiscountEnableWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  ${props => props.theme?.rtl ? css`
+    margin-right: 30px;
+  ` : css`
+    margin-left: 30px;
+  `}
+
+  span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
+  }
+`
+export const SectionTitle = styled.div`
+  font-size: 16px;
+  font-weight: 600;
+  margin: 30px 0 18px 0;
+`
+export const StackableContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+
+  > span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 10px;
+    ` : css`
+      margin-right: 10px;
+    `}
+  }
+`

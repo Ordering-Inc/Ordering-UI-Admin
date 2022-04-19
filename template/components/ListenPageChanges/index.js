@@ -43,7 +43,9 @@ export const ListenPageChanges = ({ children }) => {
     campaign: '/marketing/campaign',
     ordering_products: '/ordering-products',
     support: '/support',
-    rewards_programs: '/loyalty/rewards-programs'
+    rewards_programs: '/loyalty/rewards-programs',
+    free_products: '/downloads/free-products',
+    purchased_products: '/downloads/purchased-products'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {

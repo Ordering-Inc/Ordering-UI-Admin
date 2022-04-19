@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Button, Input, TextArea } from '../../../styles'
+import { Button, Checkbox, Input, Switch, TextArea } from '../../../styles'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { Alert } from '../../Shared'
 
@@ -7,7 +7,8 @@ import {
   BusinessPromotionForm as BusinessPromotionFormController,
   ExamineClick,
   DragAndDrop,
-  useLanguage
+  useLanguage,
+  useConfig
 } from 'ordering-components-admin'
 import {
   Camera as CameraIcon,
@@ -38,7 +39,17 @@ import {
   PromotionTypeContainer,
   PromotionTypeWrapper,
   DiscountContainer,
-  MinimumLimitContainer
+  MinimumLimitContainer,
+  PoromotionTargetWrapper,
+  SectionTitle,
+  CouponContainer,
+  CouponHeader,
+  CouponCodeContainer,
+  CouponContent,
+  ShowInCartContainer,
+  DiscountOption,
+  AutomaticDiscountEnableWrapper,
+  StackableContainer
 } from './styles'
 
 const BusinessPromotionGeneralFormUI = (props) => {
@@ -52,6 +63,9 @@ const BusinessPromotionGeneralFormUI = (props) => {
     handleUpdateClick,
     handleAddClick
   } = props
+
+  const [{ configs }] = useConfig()
+  const isAdvancedOffersActivated = configs?.advanced_offers_module?.value
 
   const [, t] = useLanguage()
   const inputRef = useRef(null)
@@ -75,6 +89,11 @@ const BusinessPromotionGeneralFormUI = (props) => {
       value: 2,
       content: t('PRICE', 'Price')
     }
+  ]
+  const promotionTypes = [
+    { value: 1, content: t('MOBILE_FRONT_SUB_TOTAL', 'Subtotal') },
+    { value: 2, content: t('DELIVERY_FEE', 'Delivery fee') },
+    { value: 3, content: t('BUSINESS_SERVICE_FEE', 'Service fee') }
   ]
 
   const handleClickImage = () => {
@@ -212,16 +231,20 @@ const BusinessPromotionGeneralFormUI = (props) => {
           onChange={e => handleChangeInput(e)}
         />
       </ItemWrapper>
-      {(formState?.changes?.type === 2 || (!formState?.changes?.type && promotionState?.promotion?.type === 2)) && (
-        <ItemWrapper>
-          <Label>{t('COUPON', 'Coupon')}</Label>
-          <Input
-            name='coupon'
-            value={formState.changes?.coupon ?? promotionState?.promotion?.coupon ?? ''}
-            placeholder={t('COUPON_CODE', 'Coupon code')}
-            onChange={e => handleChangeInput(e)}
-          />
-        </ItemWrapper>
+      {!isAdvancedOffersActivated && (
+        <>
+          {(formState?.changes?.type === 2 || (!formState?.changes?.type && promotionState?.promotion?.type === 2)) && (
+            <ItemWrapper>
+              <Label>{t('COUPON', 'Coupon')}</Label>
+              <Input
+                name='coupon'
+                value={formState.changes?.coupon ?? promotionState?.promotion?.coupon ?? ''}
+                placeholder={t('COUPON_CODE', 'Coupon code')}
+                onChange={e => handleChangeInput(e)}
+              />
+            </ItemWrapper>
+          )}
+        </>
       )}
       <ItemWrapper>
         <Label>{t('DESCRIPTION', 'Description')}</Label>
@@ -264,30 +287,46 @@ const BusinessPromotionGeneralFormUI = (props) => {
           }
         </CalendarContainer>
       </DateRangeWrapper>
-      <PromotionTypeContainer>
-        <PromotionTypeWrapper
-          active={(formState?.changes?.type ? formState?.changes?.type === 2 : promotionState?.promotion?.type === 2)}
-          onClick={() => handleChangeItem({ type: 2 })}
-        >
-          {(formState?.changes?.type ? formState?.changes?.type === 2 : promotionState?.promotion?.type === 2) ? (
-            <RecordCircleFill />
-          ) : (
-            <Circle />
-          )}
-          <span>{t('COUPON', 'Coupon')}</span>
-        </PromotionTypeWrapper>
-        <PromotionTypeWrapper
-          active={(formState?.changes?.type ? formState?.changes?.type === 1 : promotionState?.promotion?.type === 1)}
-          onClick={() => handleChangeItem({ type: 1 })}
-        >
-          {(formState?.changes?.type ? formState?.changes?.type === 1 : promotionState?.promotion?.type === 1) ? (
-            <RecordCircleFill />
-          ) : (
-            <Circle />
-          )}
-          <span>{t('DISCOUNT', 'Discount')}</span>
-        </PromotionTypeWrapper>
-      </PromotionTypeContainer>
+      {isAdvancedOffersActivated && (
+        <PoromotionTargetWrapper>
+          <Label>{t('PROMOTION_TYPES', 'Promotion types')}</Label>
+          <Select
+            defaultValue={
+              typeof formState.changes?.target !== 'undefined'
+                ? formState.changes?.target
+                : promotionState.promotion?.target
+            }
+            options={promotionTypes}
+            onChange={val => handleChangeItem({ target: val })}
+          />
+        </PoromotionTargetWrapper>
+      )}
+      {!isAdvancedOffersActivated && (
+        <PromotionTypeContainer>
+          <PromotionTypeWrapper
+            active={(formState?.changes?.type ? formState?.changes?.type === 2 : promotionState?.promotion?.type === 2)}
+            onClick={() => handleChangeItem({ type: 2 })}
+          >
+            {(formState?.changes?.type ? formState?.changes?.type === 2 : promotionState?.promotion?.type === 2) ? (
+              <RecordCircleFill />
+            ) : (
+              <Circle />
+            )}
+            <span>{t('COUPON', 'Coupon')}</span>
+          </PromotionTypeWrapper>
+          <PromotionTypeWrapper
+            active={(formState?.changes?.type ? formState?.changes?.type === 1 : promotionState?.promotion?.type === 1)}
+            onClick={() => handleChangeItem({ type: 1 })}
+          >
+            {(formState?.changes?.type ? formState?.changes?.type === 1 : promotionState?.promotion?.type === 1) ? (
+              <RecordCircleFill />
+            ) : (
+              <Circle />
+            )}
+            <span>{t('DISCOUNT', 'Discount')}</span>
+          </PromotionTypeWrapper>
+        </PromotionTypeContainer>
+      )}
 
       <DiscountContainer>
         <div>
@@ -331,6 +370,89 @@ const BusinessPromotionGeneralFormUI = (props) => {
           />
         </div>
       </MinimumLimitContainer>
+
+      {isAdvancedOffersActivated && (
+        <>
+          <SectionTitle>{t('QUESTION_HOW_GOING_APPLIED', 'How it\'s going to be applied?')}</SectionTitle>
+          <CouponContainer>
+            <CouponHeader
+              active={(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2))}
+              onClick={() => handleChangeItem({ type: 2 })}
+            >
+              {(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2)) ? (
+                <RecordCircleFill />
+              ) : (
+                <Circle />
+              )}
+              <span>{t('COUPON', 'Coupon')}</span>
+            </CouponHeader>
+            {(formState.changes?.type === 2 || (!formState?.changes.type && promotionState?.promotion?.type === 2)) && (
+              <CouponContent>
+                <ShowInCartContainer>
+                  <Checkbox
+                    checked={
+                      typeof formState.changes?.public !== 'undefined'
+                        ? formState.changes?.public
+                        : promotionState.promotion?.public
+                    }
+                    onChange={e => handleChangeItem({ public: e.target.checked })}
+                  />
+                  <div>
+                    <p>{t('SHOW_IN_CART', 'Show in cart')}</p>
+                    <p>{t('PLEASE_INDICATE_COUPON_FOR_CART', 'Please indicate if you want the coupon to be seen in the cart or hidden')}</p>
+                  </div>
+                </ShowInCartContainer>
+                <CouponCodeContainer>
+                  <label>{t('COUPON_CODE', 'Coupon code')}</label>
+                  <Input
+                    name='coupon'
+                    value={formState.changes?.coupon ?? promotionState?.promotion?.coupon ?? ''}
+                    onChange={e => handleChangeItem({ coupon: e.target.value.replace(/\s+/g, '') })}
+                  />
+                </CouponCodeContainer>
+              </CouponContent>
+            )}
+
+          </CouponContainer>
+          <DiscountOption>
+            <CouponHeader
+              active={(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1))}
+              onClick={() => handleChangeItem({ type: 1 })}
+            >
+              {(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1)) ? (
+                <RecordCircleFill />
+              ) : (
+                <Circle />
+              )}
+              <span>{t('DISCOUNT', 'discount')}</span>
+            </CouponHeader>
+            {(formState.changes?.type === 1 || (!formState?.changes.type && promotionState?.promotion?.type === 1)) && (
+              <AutomaticDiscountEnableWrapper>
+                <Checkbox
+                  checked={
+                    typeof formState.changes?.auto !== 'undefined'
+                      ? formState.changes?.auto
+                      : promotionState.promotion?.auto
+                  }
+                  onChange={e => handleChangeItem({ auto: e.target.checked })}
+                />
+                <span>{t('AUTOMATIC_DISCOUNT', 'Automatic discount')}</span>
+              </AutomaticDiscountEnableWrapper>
+            )}
+          </DiscountOption>
+          <StackableContainer>
+            <span>{t('ALLOW_COMBINE_OFFER', 'Allow to combine offer (discount/coupon) with others?')}</span>
+            <Switch
+              defaultChecked={
+                typeof formState.changes?.stackable !== 'undefined'
+                  ? formState.changes?.stackable
+                  : promotionState.promotion?.stackable ?? false
+              }
+              onChange={val => handleChangeItem({ stackable: val })}
+            />
+          </StackableContainer>
+        </>
+      )}
 
       <Button
         borderRadius='8px'
