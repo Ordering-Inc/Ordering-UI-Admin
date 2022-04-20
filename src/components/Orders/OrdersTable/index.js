@@ -119,6 +119,8 @@ export const OrdersTable = (props) => {
   const getDelayTime = (order) => {
     // targetMin = delivery_datetime  + eta_time - now()
     const _delivery = order?.delivery_datetime_utc
+      ? parseDate(order?.delivery_datetime_utc)
+      : parseDate(order?.delivery_datetime, { utc: false })
     const _eta = order?.eta_time
     const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
     let day = Math.floor(tagetedMin / 1440)
