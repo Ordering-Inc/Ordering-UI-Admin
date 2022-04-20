@@ -16,6 +16,7 @@ import { PaymethodOptionPaypalExpress } from '../PaymethodOptionPaypalExpress'
 import { PaymethodOptionStripeRedirect } from '../PaymethodOptionStripeRedirect'
 import { PaymethodOptionStripeConnect } from '../PaymethodOptionStripeConnect'
 import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
+import { BusinessWalletsList } from '../BusinessWalletsList'
 
 import {
   MainContainer,
@@ -65,6 +66,7 @@ const BusinessPaymentMethodsUI = (props) => {
   const [selectedPaymethodGateway, setSelectedPaymethodGateway] = useState(null)
   const [searchValue, setSearchValue] = useState('')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isOpenWalletDetails, setIsOpenWalletDetails] = useState(false)
 
   const orderTypes = [
     { value: 1, text: t('DELIVERY', 'Delivery') },
@@ -144,7 +146,7 @@ const BusinessPaymentMethodsUI = (props) => {
 
   return (
     <MainContainer>
-      <PaymentMethodsContainer>
+      <PaymentMethodsContainer isOpenWalletDetails={isOpenWalletDetails}>
         <h1>{t('PAYMETHODS', 'Payment methods')}</h1>
         <SearchBarWrapper>
           <SearchBar
@@ -207,6 +209,13 @@ const BusinessPaymentMethodsUI = (props) => {
                 )}
               </PaymethodOptionContainer>
             ))}
+            <BusinessWalletsList
+              business={business}
+              setIsOpenWalletDetails={setIsOpenWalletDetails}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+              isClose={isEdit}
+              handleClosePaymethodDetails={handleCloseEdit}
+            />
           </PaymethodListWrapper>
         )}
 
