@@ -90,7 +90,8 @@ var OrdersTable = function OrdersTable(props) {
       _useUtils2$ = _useUtils2[0],
       parsePrice = _useUtils2$.parsePrice,
       parseDate = _useUtils2$.parseDate,
-      optimizeImage = _useUtils2$.optimizeImage;
+      optimizeImage = _useUtils2$.optimizeImage,
+      getTimeAgo = _useUtils2$.getTimeAgo;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -341,10 +342,10 @@ var OrdersTable = function OrdersTable(props) {
   }, t('CUSTOMER', 'Customer')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && /*#__PURE__*/_react.default.createElement("th", {
     className: "driverInfo"
   }, t('DRIVER', 'Driver')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("th", {
-    colspan: 3,
+    colSpan: 3,
     className: "advanced"
   }, t('ADVANCED_LOGISTICS', 'Advanced logistics')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && /*#__PURE__*/_react.default.createElement("th", {
-    colspan: 2,
+    colSpan: 2,
     className: "timer"
   }, t('SLA_TIMER', 'SLA’s timer')), /*#__PURE__*/_react.default.createElement("th", {
     className: "orderPrice"

@@ -19,6 +19,8 @@ var _OrdersContentHeader = require("../OrdersContentHeader");
 
 var _OrderDetails = require("../OrderDetails");
 
+var _OrdersDashboardControls = require("../OrdersDashboardControls");
+
 var _Shared = require("../../Shared");
 
 var _styles = require("./styles");
@@ -258,15 +260,15 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter
-  }), /*#__PURE__*/_react.default.createElement(OrderSubFilterControls, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, {
     isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
-  }, /*#__PURE__*/_react.default.createElement(OrderStatusSubFilterWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, {
     isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
   }, /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
     ordersStatusGroup: ordersStatusGroup,
     selectedSubOrderStatus: selectedSubOrderStatus,
     handleSelectedSubOrderStatus: handleSelectedSubOrderStatus
-  })), !isSelectedOrders && /*#__PURE__*/_react.default.createElement(OrdersDashboardControls, {
+  })), !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_OrdersDashboardControls.OrdersDashboardControls, {
     selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
     filterValues: filterValues,
     handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,
