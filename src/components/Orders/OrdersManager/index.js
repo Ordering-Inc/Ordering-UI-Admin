@@ -4,13 +4,16 @@ import { useLanguage, useSession, OrdersManage as OrdersManageController } from 
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
+import { OrdersDashboardControls } from '../OrdersDashboardControls'
 import { Alert } from '../../Shared'
 import {
   OrdersListContainer,
   OrdersContent,
   OrdersInnerContent,
   WrapItemView,
-  WrapperIndicator
+  WrapperIndicator,
+  OrderSubFilterControls,
+  OrderStatusSubFilterWrapper
 } from './styles'
 import { OrdersDashboard } from '../OrdersDashboard'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
