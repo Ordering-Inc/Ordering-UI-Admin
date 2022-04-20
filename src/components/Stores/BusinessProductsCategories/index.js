@@ -23,6 +23,7 @@ export const BusinessProductsCategories = (props) => {
   const containerRef = useRef()
   const listRef = useRef()
   const addButtonRef = useRef()
+
   useEffect(() => {
     let listener
     if (containerRef?.current && categoryListRef) {

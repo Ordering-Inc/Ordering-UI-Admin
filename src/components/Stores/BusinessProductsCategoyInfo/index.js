@@ -226,7 +226,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         <Input
           placeholder={t('ENTER_CATEGORY_NAME', 'Enter a category name')}
           name='name'
-          defaultValue={formState?.changes?.name || ''}
+          value={formState?.changes?.name || ''}
           onChange={handleChangeInput}
           autoComplete='off'
         />
@@ -236,7 +236,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         <TextArea
           placeholder={t('TYPE_DESCRIPTION', 'Type description ')}
           name='description'
-          defaultValue={formState?.changes?.description || ''}
+          value={formState?.changes?.description || ''}
           onChange={handleChangeInput}
           autoComplete='off'
         />
@@ -250,7 +250,7 @@ export const BusinessProductsCategoyInfo = (props) => {
           disabled={formState.loading}
           autoComplete='off'
           value={
-            formState?.changes?.slug || formState?.result?.result?.slug || ''
+            formState?.changes?.slug || ''
           }
         />
         <GenerateButtonWrapper>

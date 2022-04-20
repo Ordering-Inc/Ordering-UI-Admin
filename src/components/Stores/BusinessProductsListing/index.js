@@ -103,9 +103,9 @@ const BusinessProductsListingUI = (props) => {
   const handleOpenCategoryDetails = (category = null) => {
     setOpenSidebar(null)
     setSelectedProduct(null)
+    setCurrentCategory(category)
     if (category && category?.id !== null) {
       setCategorySelected(category)
-      setCurrentCategory(category)
       setOpenSidebar('category_details')
     } else {
       setCurrentCategory(null)
@@ -269,6 +269,7 @@ const BusinessProductsListingUI = (props) => {
                 handleUpdateBusinessState={handleUpdateBusinessState}
                 setCategorySelected={setCategorySelected}
                 categoryListRef={categoryListRef?.current}
+                setCurrentCategory={setCurrentCategory}
               />
             }
           </CategoryListContainer>
