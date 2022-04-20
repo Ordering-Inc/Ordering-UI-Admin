@@ -173,6 +173,12 @@ const ProductDetailsAdvancedUI = (props) => {
     setFeeSelected(feesOptions.find(fee => fee.value === productState?.fee_id) || inheritOption)
   }
 
+  const onSubmit = () => {
+    if (Object.keys(formState.changes).length > 0) {
+      handleUpdateClick()
+    }
+  }
+
   const deleteTax = (data) => {
     handleDeleteTax(data.id, data.action)
     closeAlert()
@@ -214,7 +220,11 @@ const ProductDetailsAdvancedUI = (props) => {
 
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
-      const content = Object.values(formMethods.errors).map(error => error.message)
+      const content = Object.values(formMethods.errors).map(error => {
+        if (error.type === 'max') {
+          return t('MINIMUM_QUANTITY_MUST_SMALL_MAXIMUM_QUANTITY', 'This minimum quantity must be small than maximum quantity')
+        } else return error.message
+      })
       setAlertState({
         open: true,
         content
@@ -244,8 +254,17 @@ const ProductDetailsAdvancedUI = (props) => {
     }
   }, [formState?.changes?.weight])
 
+  useEffect(() => {
+    if (formState?.changes?.minimum_per_order && !(formState?.changes?.maximum_per_order)) {
+      handleClickProperty('maximum_per_order', productState?.maximum_per_order)
+    }
+    if (formState?.changes?.maximum_per_order && !(formState?.changes?.minimum_per_order)) {
+      handleClickProperty('minimum_per_order', productState?.minimum_per_order)
+    }
+  }, [formState?.changes?.minimum_per_order, formState?.changes?.maximum_per_order])
+
   return (
-    <PropertiesContainer>
+    <PropertiesContainer onSubmit={formMethods.handleSubmit(onSubmit)}>
       {isSku && (
         <>
           <LabelCustom htmlFor='sku'>SKU</LabelCustom>
@@ -319,6 +338,46 @@ const ProductDetailsAdvancedUI = (props) => {
             placeholder='0.00'
             defaultValue={productState?.cost_offer_price ?? ''}
             onChange={(e) => handleClickProperty('cost_offer_price', e.target.value ?? null)}
+            disabled={formState.loading}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </InputContainer>
+      </FieldRow>
+      <FieldRow>
+        <InputContainer>
+          <LabelCustom htmlFor='minimum_per_order'>{t('MINIMUM_QUANTITY_ORDER', 'Minimum quantity to order')}</LabelCustom>
+          <Input
+            name='minimum_per_order'
+            id='minimum_per_order'
+            placeholder='0'
+            defaultValue={productState?.minimum_per_order ?? ''}
+            ref={formMethods.register({
+              max: ((typeof formState?.changes?.maximum_per_order === 'undefined' && productState?.maximum_per_order - 1) || formState?.changes?.maximum_per_order - 1),
+              required: t('MINIMUM_QUANTITY_REQUIRED', 'The minimum quantity is required')
+            })}
+            onChange={(e) => handleClickProperty('minimum_per_order', e.target.value ?? null)}
+            disabled={formState.loading}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </InputContainer>
+        <InputContainer>
+          <LabelCustom htmlFor='maximum_per_order'>{t('MAXIMUM_QUANTITY_ORDER', 'Maximum quantity to order')}</LabelCustom>
+          <Input
+            name='maximum_per_order'
+            id='maximum_per_order'
+            placeholder='0'
+            defaultValue={productState?.maximum_per_order ?? ''}
+            onChange={(e) => handleClickProperty('maximum_per_order', e.target.value ?? null)}
             disabled={formState.loading}
             autoComplete='off'
             onKeyPress={(e) => {
@@ -413,10 +472,10 @@ const ProductDetailsAdvancedUI = (props) => {
         </PropertyOption>
       </PropertyOptionWrapper>
       <Button
+        type='submit'
         color='primary'
         borderRadius='7.6px'
         disabled={formState.loading || Object.keys(formState?.changes).length === 0}
-        onClick={() => handleUpdateClick()}
       >
         {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
       </Button>
