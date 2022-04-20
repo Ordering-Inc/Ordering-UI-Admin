@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
-  var _formState$changes3, _productState$estimat, _taxSelected$value, _fesSelected$value, _productState$cost_pr, _productState$cost_of, _productState$calorie, _productState$weight, _productState$weight_;
+  var _formState$changes3, _formState$changes8, _formState$changes9, _productState$estimat, _taxSelected$value, _fesSelected$value, _productState$cost_pr, _productState$cost_of, _productState$minimum, _formState$changes10, _formState$changes11, _productState$maximum, _productState$calorie, _productState$weight, _productState$weight_;
 
   var formState = props.formState,
       productState = props.productState,
@@ -270,6 +270,12 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     }) || inheritOption);
   };
 
+  var onSubmit = function onSubmit() {
+    if (Object.keys(formState.changes).length > 0) {
+      handleUpdateClick();
+    }
+  };
+
   var deleteTax = function deleteTax(data) {
     handleDeleteTax(data.id, data.action);
     closeAlert();
@@ -308,7 +314,9 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
-        return error.message;
+        if (error.type === 'max') {
+          return t('MINIMUM_QUANTITY_MUST_SMALL_MAXIMUM_QUANTITY', 'This minimum quantity must be small than maximum quantity');
+        } else return error.message;
       });
       setAlertState({
         open: true,
@@ -337,7 +345,20 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
       handleClickProperty('weight_unit', 'grams');
     }
   }, [formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.weight]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.PropertiesContainer, null, isSku && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+  (0, _react.useEffect)(function () {
+    var _formState$changes4, _formState$changes5, _formState$changes6, _formState$changes7;
+
+    if (formState !== null && formState !== void 0 && (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.minimum_per_order && !(formState !== null && formState !== void 0 && (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.maximum_per_order)) {
+      handleClickProperty('maximum_per_order', productState === null || productState === void 0 ? void 0 : productState.maximum_per_order);
+    }
+
+    if (formState !== null && formState !== void 0 && (_formState$changes6 = formState.changes) !== null && _formState$changes6 !== void 0 && _formState$changes6.maximum_per_order && !(formState !== null && formState !== void 0 && (_formState$changes7 = formState.changes) !== null && _formState$changes7 !== void 0 && _formState$changes7.minimum_per_order)) {
+      handleClickProperty('minimum_per_order', productState === null || productState === void 0 ? void 0 : productState.minimum_per_order);
+    }
+  }, [formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.minimum_per_order, formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.maximum_per_order]);
+  return /*#__PURE__*/_react.default.createElement(_styles2.PropertiesContainer, {
+    onSubmit: formMethods.handleSubmit(onSubmit)
+  }, isSku && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
     htmlFor: "sku"
   }, "SKU"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "sku",
@@ -438,6 +459,48 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
         e.preventDefault();
       }
     }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+    htmlFor: "minimum_per_order"
+  }, t('MINIMUM_QUANTITY_ORDER', 'Minimum quantity to order')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "minimum_per_order",
+    id: "minimum_per_order",
+    placeholder: "0",
+    defaultValue: (_productState$minimum = productState === null || productState === void 0 ? void 0 : productState.minimum_per_order) !== null && _productState$minimum !== void 0 ? _productState$minimum : '',
+    ref: formMethods.register({
+      max: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.maximum_per_order) === 'undefined' && (productState === null || productState === void 0 ? void 0 : productState.maximum_per_order) - 1 || (formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.maximum_per_order) - 1,
+      required: t('MINIMUM_QUANTITY_REQUIRED', 'The minimum quantity is required')
+    }),
+    onChange: function onChange(e) {
+      var _e$target$value4;
+
+      return handleClickProperty('minimum_per_order', (_e$target$value4 = e.target.value) !== null && _e$target$value4 !== void 0 ? _e$target$value4 : null);
+    },
+    disabled: formState.loading,
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+    htmlFor: "maximum_per_order"
+  }, t('MAXIMUM_QUANTITY_ORDER', 'Maximum quantity to order')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "maximum_per_order",
+    id: "maximum_per_order",
+    placeholder: "0",
+    defaultValue: (_productState$maximum = productState === null || productState === void 0 ? void 0 : productState.maximum_per_order) !== null && _productState$maximum !== void 0 ? _productState$maximum : '',
+    onChange: function onChange(e) {
+      var _e$target$value5;
+
+      return handleClickProperty('maximum_per_order', (_e$target$value5 = e.target.value) !== null && _e$target$value5 !== void 0 ? _e$target$value5 : null);
+    },
+    disabled: formState.loading,
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, {
     className: "".concat(isShowPriceByWeight ? 'growUnset showWeight' : 'growUnset')
   }, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
@@ -448,9 +511,9 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     placeholder: "0.00",
     defaultValue: (_productState$calorie = productState === null || productState === void 0 ? void 0 : productState.calories) !== null && _productState$calorie !== void 0 ? _productState$calorie : '',
     onChange: function onChange(e) {
-      var _e$target$value4;
+      var _e$target$value6;
 
-      return handleClickProperty('calories', (_e$target$value4 = e.target.value) !== null && _e$target$value4 !== void 0 ? _e$target$value4 : null);
+      return handleClickProperty('calories', (_e$target$value6 = e.target.value) !== null && _e$target$value6 !== void 0 ? _e$target$value6 : null);
     },
     disabled: formState.loading,
     autoComplete: "off",
@@ -467,9 +530,9 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     placeholder: "0.00",
     defaultValue: (_productState$weight = productState === null || productState === void 0 ? void 0 : productState.weight) !== null && _productState$weight !== void 0 ? _productState$weight : '',
     onChange: function onChange(e) {
-      var _e$target$value5;
+      var _e$target$value7;
 
-      return handleClickProperty('weight', (_e$target$value5 = e.target.value) !== null && _e$target$value5 !== void 0 ? _e$target$value5 : null);
+      return handleClickProperty('weight', (_e$target$value7 = e.target.value) !== null && _e$target$value7 !== void 0 ? _e$target$value7 : null);
     },
     disabled: formState.loading,
     autoComplete: "off",
@@ -511,12 +574,10 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
       return handleEnablePriceWeight(enabled);
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    type: "submit",
     color: "primary",
     borderRadius: "7.6px",
-    disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0,
-    onClick: function onClick() {
-      return handleUpdateClick();
-    }
+    disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0
   }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     open: !!(taxToEdit !== null && taxToEdit !== void 0 && taxToEdit.action),
     width: "80%",

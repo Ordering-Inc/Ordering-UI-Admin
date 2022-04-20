@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var PropertiesContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  label:first-child{\n    margin-top: 0;\n  }\n\n  > input {\n    width: 100%;\n  }\n\n  > button {\n    height: 44px;\n    margin-top: 30px;\n  }\n"])));
+var PropertiesContainer = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  label:first-child{\n    margin-top: 0;\n  }\n\n  > input {\n    width: 100%;\n  }\n\n  > button {\n    height: 44px;\n    margin-top: 30px;\n  }\n"])));
 
 exports.PropertiesContainer = PropertiesContainer;
 
