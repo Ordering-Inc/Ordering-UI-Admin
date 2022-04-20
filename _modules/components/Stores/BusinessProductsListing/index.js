@@ -177,10 +177,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     var category = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
     setOpenSidebar(null);
     setSelectedProduct(null);
+    setCurrentCategory(category);
 
     if (category && (category === null || category === void 0 ? void 0 : category.id) !== null) {
       setCategorySelected(category);
-      setCurrentCategory(category);
       setOpenSidebar('category_details');
     } else {
       setCurrentCategory(null);
@@ -323,7 +323,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     openCategories: openCategories,
     handleUpdateBusinessState: handleUpdateBusinessState,
     setCategorySelected: setCategorySelected,
-    categoryListRef: categoryListRef === null || categoryListRef === void 0 ? void 0 : categoryListRef.current
+    categoryListRef: categoryListRef === null || categoryListRef === void 0 ? void 0 : categoryListRef.current,
+    setCurrentCategory: setCurrentCategory
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductHeader, null, /*#__PURE__*/_react.default.createElement(_SingleBusinessCategoryEdit.SingleBusinessCategoryEdit, _extends({}, props, {
     category: categorySelected,
     categorySelected: categorySelected,
