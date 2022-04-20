@@ -215,20 +215,32 @@ export const Timer = (props) => {
     <TimerInputWrapper>
       <input
         name='hour'
-        type='number'
+        type='text'
         placeholder='HH'
+        maxlength='2'
         ref={formMethods.register({
           required: t('VALIDATION_ERROR_HOUR_REQUIRED', 'The field hour is required').replace('_attribute_', t('HOUR', 'Hour'))
         })}
+        onKeyPress={(e) => {
+          if (!/^[0-9.]$/.test(e.key)) {
+            e.preventDefault()
+          }
+        }}
       />
       :
       <input
         name='minute'
-        type='number'
+        type='text'
         placeholder='MM'
+        maxlength='2'
         ref={formMethods.register({
           required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute'))
         })}
+        onKeyPress={(e) => {
+          if (!/^[0-9.]$/.test(e.key)) {
+            e.preventDefault()
+          }
+        }}
       />
     </TimerInputWrapper>
   )
