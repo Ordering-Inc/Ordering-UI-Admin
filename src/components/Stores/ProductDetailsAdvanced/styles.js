@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const PropertiesContainer = styled.div`
+export const PropertiesContainer = styled.form`
   label:first-child{
     margin-top: 0;
   }
