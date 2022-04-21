@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useToast, ToastType } from 'ordering-components-admin'
+import { useLanguage, useConfig, SettingsList as SettingsListController } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
 import { Button } from '../../../styles'
 import { Modal, DragScroll, Alert } from '../../Shared'
@@ -22,17 +22,19 @@ import {
   OverLine
 } from './styles'
 
-export const OrderDashboardSLASetting = (props) => {
-  const { setSlaSettingTime } = props
+export const OrderDashboardSLASettingUI = (props) => {
+  const {
+    settingsState,
+    handleInputChange,
+    handleClickUpdate
+  } = props
   const [, t] = useLanguage()
   const [settingOpen, setSettingOpen] = useState(false)
   const [currentTabItem, setCurrentTabItem] = useState(1)
   const [selectedTabStatus, setSelectedTabStatus] = useState(null)
   const theme = useTheme()
   const formMethods = useForm()
-  const [, { showToast }] = useToast()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [readySettingTime, setReadySettingTime] = useState([])
 
   const defaultOrderTypes = [
     { key: 1, name: t('DELIVERY', 'Delivery') },
@@ -70,14 +72,17 @@ export const OrderDashboardSLASetting = (props) => {
     setSettingOpen(false)
   }
 
-  const checkReadySatus = (data) => {
-    let _readySettingTime = [...readySettingTime]
-    if (data?.status) {
-      _readySettingTime.push(data)
-    } else {
-      _readySettingTime = _readySettingTime.filter(ele => ele.id !== data.id)
+  const onSubmit = (data) => {
+    if (data && Object.keys(data).length > 0) {
+      handleClickUpdate()
     }
-    setReadySettingTime(_readySettingTime)
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
   useEffect(() => {
@@ -93,23 +98,14 @@ export const OrderDashboardSLASetting = (props) => {
     }
   }, [formMethods.errors])
 
-  const onSubmit = (data) => {
-    if (data && Object.keys(data).length > 0) {
-      const _hour = parseInt(data.hour)
-      const _min = parseInt(data.minute)
-      const _settingTimeSecond = _hour * 3600 + _min * 60
-      setSlaSettingTime(_settingTimeSecond)
-      showToast(ToastType.Success, t('SLA_SETTING_UPDATED', 'SLAs setting updated'))
-      setSettingOpen(false)
+  useEffect(() => {
+    if (settingsState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: settingsState?.result?.result
+      })
     }
-  }
-
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
-  }
+  }, [settingsState?.result])
 
   return (
     <SettingContainer>
@@ -143,14 +139,13 @@ export const OrderDashboardSLASetting = (props) => {
           </TabsContainer>
           <DeliveryStatusWrapper>
             {selectedTabStatus && selectedTabStatus.length > 0 && selectedTabStatus.map((item, i) => (
-              <StatusBlock key={i} item={item} last={i + 1 === selectedTabStatus.length} formMethods={formMethods} checkReadySatus={checkReadySatus} />
+              <StatusBlock key={i} item={item} last={i + 1 === selectedTabStatus.length} formMethods={formMethods} handleInputChange={handleInputChange} />
             ))}
           </DeliveryStatusWrapper>
           <Actions>
             <Button
               color='primary'
               type='submit'
-              disabled={readySettingTime.length === 0}
             >
               {t('ACCEPT', 'Accept')}
             </Button>
@@ -171,23 +166,19 @@ export const OrderDashboardSLASetting = (props) => {
 }
 
 export const StatusBlock = (props) => {
-  const { item, last, formMethods, checkReadySatus } = props
-  const [showTime, setShowTime] = useState(false)
+  const { item, last, formMethods, handleInputChange } = props
+  const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+  const [inputWidth, setInputWidth] = useState(38)
 
-  const handleShowTimer = () => {
-    checkReadySatus({ id: item?.key, status: !showTime })
-    setShowTime(!showTime)
+  const handleMiuteChange = (e) => {
+    setInputWidth((e.target.value.length + 1) * 8.5)
+    handleInputChange(e.target.value, configs?.order_deadlines_delayed_time?.id)
   }
-
-  useEffect(() => {
-    if (item?.timmer) {
-      setShowTime(true)
-    }
-  }, [item?.timmer])
 
   return (
     <StatusItems>
-      <ItemHeader onClick={() => handleShowTimer()}>
+      <ItemHeader>
         <IconWrapper>
           <img src={item?.icon} alt='' />
         </IconWrapper>
@@ -197,8 +188,25 @@ export const StatusBlock = (props) => {
       <ItemContent>
         <p>{item?.des}</p>
       </ItemContent>
-      {showTime && (
-        <Timer formMethods={formMethods} />
+      {last && (
+        <TimerInputWrapper>
+          <input
+            name='minute'
+            type='text'
+            placeholder='MM'
+            defaultValue={configs?.order_deadlines_delayed_time?.value}
+            ref={formMethods.register({
+              required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute'))
+            })}
+            style={{ width: inputWidth }}
+            onChange={(e) => handleMiuteChange(e)}
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </TimerInputWrapper>
       )}
       {last && (
         <OverLine />
@@ -207,41 +215,12 @@ export const StatusBlock = (props) => {
   )
 }
 
-export const Timer = (props) => {
-  const { formMethods } = props
-  const [, t] = useLanguage()
-
-  return (
-    <TimerInputWrapper>
-      <input
-        name='hour'
-        type='text'
-        placeholder='HH'
-        maxlength='2'
-        ref={formMethods.register({
-          required: t('VALIDATION_ERROR_HOUR_REQUIRED', 'The field hour is required').replace('_attribute_', t('HOUR', 'Hour'))
-        })}
-        onKeyPress={(e) => {
-          if (!/^[0-9.]$/.test(e.key)) {
-            e.preventDefault()
-          }
-        }}
-      />
-      :
-      <input
-        name='minute'
-        type='text'
-        placeholder='MM'
-        maxlength='2'
-        ref={formMethods.register({
-          required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute'))
-        })}
-        onKeyPress={(e) => {
-          if (!/^[0-9.]$/.test(e.key)) {
-            e.preventDefault()
-          }
-        }}
-      />
-    </TimerInputWrapper>
-  )
+export const OrderDashboardSLASetting = (props) => {
+  const [{ configs }] = useConfig()
+  const settingsListProps = {
+    ...props,
+    category: { configs: [{ ...configs?.order_deadlines_delayed_time }] },
+    UIComponent: OrderDashboardSLASettingUI
+  }
+  return <SettingsListController {...settingsListProps} />
 }
