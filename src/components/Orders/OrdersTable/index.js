@@ -50,7 +50,8 @@ export const OrdersTable = (props) => {
     isTourOpen,
     handleOpenTour,
     setIsTourOpen,
-    slaSettingTime
+    slaSettingTime,
+    groupStatus
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -254,6 +255,15 @@ export const OrdersTable = (props) => {
     document.addEventListener('keydown', handleChangeKeyboard)
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
+
+  useEffect(() => {
+    if (groupStatus === 'completed' || groupStatus === 'cancelled') {
+      setAllowColumns({
+        ...allowColumns,
+        timer: false
+      })
+    }
+  }, [groupStatus])
 
   return (
     <>
@@ -570,8 +580,12 @@ export const OrdersTable = (props) => {
                   {allowColumns?.timer && (
                     <td className='timer'>
                       <Timer>
-                        <p className='bold'>{t('TIMER', 'Timer')}</p>
-                        <p className={order?.time_status}>{getDelayTime(order)}</p>
+                        {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                          <>
+                            <p className='bold'>{t('TIMER', 'Timer')}</p>
+                            <p className={order?.time_status}>{getDelayTime(order)}</p>
+                          </>
+                        )}
                       </Timer>
                     </td>
                   )}
