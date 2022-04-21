@@ -75,20 +75,15 @@ var BusinessProductList = function BusinessProductList(props) {
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      openPopover = _useState2[0],
-      setOpenPopover = _useState2[1];
+      isAddProduct = _useState2[0],
+      setIsAddProduct = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      isAddProduct = _useState4[0],
-      setIsAddProduct = _useState4[1];
+      dataSelected = _useState4[0],
+      setDataSelected = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(''),
-      _useState6 = _slicedToArray(_useState5, 2),
-      dataSelected = _useState6[0],
-      setDataSelected = _useState6[1];
-
-  var _useState7 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     products: true,
     description: true,
     price: true,
@@ -97,9 +92,9 @@ var BusinessProductList = function BusinessProductList(props) {
     tax: true,
     fee: true
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      allowColumns = _useState8[0],
-      setAllowColumns = _useState8[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      allowColumns = _useState6[0],
+      setAllowColumns = _useState6[1];
 
   var optionsDefault = [{
     value: 'products',
@@ -130,21 +125,21 @@ var BusinessProductList = function BusinessProductList(props) {
   }; // Change page
 
 
-  var _useState9 = (0, _react.useState)(1),
+  var _useState7 = (0, _react.useState)(1),
+      _useState8 = _slicedToArray(_useState7, 2),
+      currentPage = _useState8[0],
+      setCurrentPage = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(10),
       _useState10 = _slicedToArray(_useState9, 2),
-      currentPage = _useState10[0],
-      setCurrentPage = _useState10[1];
+      productsPerPage = _useState10[0],
+      setProductsPerPage = _useState10[1]; // Get current products
 
-  var _useState11 = (0, _react.useState)(10),
+
+  var _useState11 = (0, _react.useState)([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      productsPerPage = _useState12[0],
-      setProductsPerPage = _useState12[1]; // Get current products
-
-
-  var _useState13 = (0, _react.useState)([]),
-      _useState14 = _slicedToArray(_useState13, 2),
-      currentProducts = _useState14[0],
-      setCurrentProducts = _useState14[1];
+      currentProducts = _useState12[0],
+      setCurrentProducts = _useState12[1];
 
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);
@@ -165,7 +160,9 @@ var BusinessProductList = function BusinessProductList(props) {
 
     setCurrentProducts(_currentProducts);
   }, [categoryState, currentPage, productsPerPage]);
-  return /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.products) && /*#__PURE__*/_react.default.createElement("th", null, t('PRODUCTS', 'Products')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, {
+    noFixedHeader: !businessState.loading && currentProducts.length <= 4
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.products) && /*#__PURE__*/_react.default.createElement("th", null, t('PRODUCTS', 'Products')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", {
     className: "description"
   }, t('DESCRIPTION', 'Description')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.price) && /*#__PURE__*/_react.default.createElement("th", {
     className: "price"

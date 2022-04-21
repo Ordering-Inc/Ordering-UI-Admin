@@ -203,14 +203,15 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
   (0, _react.useEffect)(function () {
     var _formState$changes;
 
-    if (product !== null && product !== void 0 && product.price) {
-      setMinimumRegualrPrice((product === null || product === void 0 ? void 0 : product.price) + 0.01);
-    }
-
-    if (formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.price) {
+    if (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.price) !== 'undefined') {
       var _formState$changes2;
 
-      setMinimumRegualrPrice((formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.price) + 0.01);
+      setMinimumRegualrPrice(parseFloat(formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.price) + 0.01);
+      return;
+    }
+
+    if (product !== null && product !== void 0 && product.price) {
+      setMinimumRegualrPrice(parseFloat(product === null || product === void 0 ? void 0 : product.price) + 0.01);
     }
   }, [product === null || product === void 0 ? void 0 : product.price, formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.price]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {

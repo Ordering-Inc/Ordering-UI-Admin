@@ -130,7 +130,7 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       return menu === null || menu === void 0 ? void 0 : menu.name.toLowerCase().includes(searchValue.toLowerCase());
     });
     setMenuList(filteredMenus);
-  }, [businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus, businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menusShared, searchValue, isSelectedSharedMenus]);
+  }, [JSON.stringify(businessMenusState.menus), JSON.stringify(businessMenusState.menusShared), searchValue, isSelectedSharedMenus]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.MenuContainer, {
     isHide: isOpenSharedProduct
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('MENU_V21', 'Menu')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
