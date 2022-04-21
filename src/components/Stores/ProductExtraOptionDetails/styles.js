@@ -177,9 +177,14 @@ export const InputWrapper = styled.div`
       color: ${props => props.theme.colors.secundaryLight};
     }
   }
-  ${({ primary }) => !primary && css`
+  ${({ header }) => header && css`
+    input {
+      visibility: hidden;
+      height: 0;
+      padding: 0;
+    }
     label {
-      display: none;
+      margin-bottom: 0;
     }
   `}
   ${props => props.theme?.rtl ? css`
@@ -242,6 +247,10 @@ export const ActionsContainer = styled.div`
       margin-left: 35px;
     `}
   }
+  ${({ header }) => header && css`
+    border-left: none;
+    border-right: none;
+  `}
 `
 
 export const EnableWrapper = styled.div`
