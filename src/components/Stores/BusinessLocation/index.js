@@ -38,7 +38,7 @@ export const BusinessLocation = (props) => {
   }
 
   const handleChangeBusinessCity = (cityId) => {
-    setFormState({ ...formState, changes: { ...formState?.changes, city_id: cityId } })
+    setFormState(prevState => ({ ...prevState, changes: { ...prevState?.changes, city_id: cityId } }))
   }
 
   const handleChangeAddress = (address) => {
@@ -47,11 +47,11 @@ export const BusinessLocation = (props) => {
   }
 
   const handleChangeInput = (value) => {
-    setFormState({ ...formState, changes: { ...formState?.changes, address: value } })
+    setFormState(prevState => ({ ...prevState, changes: { ...prevState?.changes, address: value } }))
   }
 
   const handleChangeTextarea = (value) => {
-    setFormState({ ...formState, changes: { ...formState?.changes, address_notes: value } })
+    setFormState(prevState => ({ ...prevState, changes: { ...prevState?.changes, address_notes: value } }))
   }
 
   const getTimeZone = async (address) => {
@@ -78,7 +78,6 @@ export const BusinessLocation = (props) => {
       ...prevState,
       changes: {
         ...prevState?.changes,
-        address: business?.address,
         location: { ...business?.location, lat: address?.lat(), lng: address?.lng(), zoom: 15 }
       }
     }))

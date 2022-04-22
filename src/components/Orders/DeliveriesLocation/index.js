@@ -54,7 +54,7 @@ export const DeliveriesLocation = (props) => {
         return
       }
       for (const driver of driversList.drivers) {
-        const marker = (driver.location !== null && typeof driver.location === 'object') ? driver.location : defaultCenter
+        const marker = (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat && driver.location?.lng) ? driver.location : defaultCenter
         const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
       }
@@ -71,12 +71,12 @@ export const DeliveriesLocation = (props) => {
       bounds.extend(newPoint)
 
       if (interActionMapOrder.driver !== null) {
-        marker = (interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object') ? interActionOrderDriverLocation : defaultCenter
+        marker = (interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object' && interActionOrderDriverLocation?.lat && interActionOrderDriverLocation?.lng) ? interActionOrderDriverLocation : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
       } else {
         for (const activeDriver of activeDrivers) {
-          const marker = (activeDriver.location !== null && typeof activeDriver.location === 'object') ? activeDriver.location : defaultCenter
+          const marker = (activeDriver.location !== null && typeof activeDriver.location === 'object' && activeDriver.location?.lat && activeDriver.location?.lng) ? activeDriver.location : defaultCenter
           const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
           bounds.extend(newPoint)
         }

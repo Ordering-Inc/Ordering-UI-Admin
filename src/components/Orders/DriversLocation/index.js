@@ -33,13 +33,13 @@ export const DriversLocation = (props) => {
     const bounds = new window.google.maps.LatLngBounds()
 
     if (showDrivers.length === 1) {
-      setMapCenter((showDrivers[0].location !== null && typeof showDrivers[0].location === 'object') ? showDrivers[0].location : defaultCenter)
+      setMapCenter((showDrivers[0].location !== null && typeof showDrivers[0].location === 'object' && showDrivers[0].location?.lat && showDrivers[0].location?.lng) ? showDrivers[0].location : defaultCenter)
       setMapZoom(mapZoom)
       return
     }
 
     for (const driver of showDrivers) {
-      const marker = (driver.location !== null && typeof driver.location === 'object') ? driver.location : defaultCenter
+      const marker = (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat && driver.location?.lng) ? driver.location : defaultCenter
       const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
     }
@@ -117,8 +117,8 @@ export const DriversLocation = (props) => {
               <DriverMapMarkerAndInfo
                 key={driver.id}
                 driver={driver}
-                lat={(driver.location !== null && typeof driver.location === 'object') ? driver.location.lat : defaultCenter.lat}
-                lng={(driver.location !== null && typeof driver.location === 'object') ? driver.location.lng : defaultCenter.lng}
+                lat={(driver.location !== null && typeof driver.location === 'object' && driver.location?.lat) ? driver.location.lat : defaultCenter.lat}
+                lng={(driver.location !== null && typeof driver.location === 'object' && driver.location?.lng) ? driver.location.lng : defaultCenter.lng}
               />
             ))}
         </GoogleMapReact>
