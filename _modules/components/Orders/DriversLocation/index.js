@@ -88,7 +88,9 @@ var DriversLocation = function DriversLocation(props) {
     var bounds = new window.google.maps.LatLngBounds();
 
     if (showDrivers.length === 1) {
-      setMapCenter(showDrivers[0].location !== null && _typeof(showDrivers[0].location) === 'object' ? showDrivers[0].location : defaultCenter);
+      var _showDrivers$0$locati, _showDrivers$0$locati2;
+
+      setMapCenter(showDrivers[0].location !== null && _typeof(showDrivers[0].location) === 'object' && (_showDrivers$0$locati = showDrivers[0].location) !== null && _showDrivers$0$locati !== void 0 && _showDrivers$0$locati.lat && (_showDrivers$0$locati2 = showDrivers[0].location) !== null && _showDrivers$0$locati2 !== void 0 && _showDrivers$0$locati2.lng ? showDrivers[0].location : defaultCenter);
       setMapZoom(mapZoom);
       return;
     }
@@ -98,8 +100,10 @@ var DriversLocation = function DriversLocation(props) {
 
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var _driver$location, _driver$location2;
+
         var driver = _step.value;
-        var marker = driver.location !== null && _typeof(driver.location) === 'object' ? driver.location : defaultCenter;
+        var marker = driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location = driver.location) !== null && _driver$location !== void 0 && _driver$location.lat && (_driver$location2 = driver.location) !== null && _driver$location2 !== void 0 && _driver$location2.lng ? driver.location : defaultCenter;
         var newPoint = new window.google.maps.LatLng(marker.lat, marker.lng);
         bounds.extend(newPoint);
       }
@@ -185,11 +189,13 @@ var DriversLocation = function DriversLocation(props) {
     },
     yesIWantToUseGoogleMapApiInternals: true
   }, showDrivers.length !== 0 && showDrivers.map(function (driver) {
+    var _driver$location3, _driver$location4;
+
     return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
       key: driver.id,
       driver: driver,
-      lat: driver.location !== null && _typeof(driver.location) === 'object' ? driver.location.lat : defaultCenter.lat,
-      lng: driver.location !== null && _typeof(driver.location) === 'object' ? driver.location.lng : defaultCenter.lng
+      lat: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location3 = driver.location) !== null && _driver$location3 !== void 0 && _driver$location3.lat ? driver.location.lat : defaultCenter.lat,
+      lng: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location4 = driver.location) !== null && _driver$location4 !== void 0 && _driver$location4.lng ? driver.location.lng : defaultCenter.lng
     });
   })));
 };

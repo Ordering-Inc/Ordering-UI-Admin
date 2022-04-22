@@ -84,11 +84,13 @@ var BusinessLocation = function BusinessLocation(props) {
   };
 
   var handleChangeBusinessCity = function handleChangeBusinessCity(cityId) {
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, {
-        city_id: cityId
-      })
-    }));
+    setFormState(function (prevState) {
+      return _objectSpread(_objectSpread({}, prevState), {}, {
+        changes: _objectSpread(_objectSpread({}, prevState === null || prevState === void 0 ? void 0 : prevState.changes), {}, {
+          city_id: cityId
+        })
+      });
+    });
   };
 
   var handleChangeAddress = function handleChangeAddress(address) {
@@ -97,19 +99,23 @@ var BusinessLocation = function BusinessLocation(props) {
   };
 
   var handleChangeInput = function handleChangeInput(value) {
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, {
-        address: value
-      })
-    }));
+    setFormState(function (prevState) {
+      return _objectSpread(_objectSpread({}, prevState), {}, {
+        changes: _objectSpread(_objectSpread({}, prevState === null || prevState === void 0 ? void 0 : prevState.changes), {}, {
+          address: value
+        })
+      });
+    });
   };
 
   var handleChangeTextarea = function handleChangeTextarea(value) {
-    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
-      changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, {
-        address_notes: value
-      })
-    }));
+    setFormState(function (prevState) {
+      return _objectSpread(_objectSpread({}, prevState), {}, {
+        changes: _objectSpread(_objectSpread({}, prevState === null || prevState === void 0 ? void 0 : prevState.changes), {}, {
+          address_notes: value
+        })
+      });
+    });
   };
 
   var getTimeZone = /*#__PURE__*/function () {
@@ -166,7 +172,6 @@ var BusinessLocation = function BusinessLocation(props) {
     setFormState(function (prevState) {
       return _objectSpread(_objectSpread({}, prevState), {}, {
         changes: _objectSpread(_objectSpread({}, prevState === null || prevState === void 0 ? void 0 : prevState.changes), {}, {
-          address: business === null || business === void 0 ? void 0 : business.address,
           location: _objectSpread(_objectSpread({}, business === null || business === void 0 ? void 0 : business.location), {}, {
             lat: address === null || address === void 0 ? void 0 : address.lat(),
             lng: address === null || address === void 0 ? void 0 : address.lng(),
