@@ -12,11 +12,21 @@ import {
 
 export const OrdersDashboardSLAControls = (props) => {
   const { setTimeStatus } = props
-  const [defaultOptionValue, setDefaultOptionValue] = useState(null)
+  const [defaultOptionValue, setDefaultOptionValue] = useState('default')
   const [filteredTimeStatus, setFilteredTimeStatus] = useState([])
   const [, t] = useLanguage()
 
   const timeStatus = [
+    {
+      value: 'default',
+      name: t('SLA_S', 'SLA’s'),
+      content: (
+        <Option noPadding>
+          <Timestatus timeState='' />
+          <p>{t('SLA_S', 'SLA’s')}</p>
+        </Option>
+      )
+    },
     {
       value: 'in_time',
       name: t('OK', 'Ok'),
@@ -51,6 +61,10 @@ export const OrdersDashboardSLAControls = (props) => {
 
   const changeOrderTimeStatus = (val) => {
     setDefaultOptionValue(val)
+    if (val === 'default') {
+      setTimeStatus(null)
+      return
+    }
     setTimeStatus(val)
   }
 

@@ -360,6 +360,7 @@ export const Timestatus = styled.div`
   `}
 `
 export const Timer = styled.div`
+  min-width: 65px;
   p {
     margin: 0px;
     color: ${props => props.theme.colors?.lightGray};
