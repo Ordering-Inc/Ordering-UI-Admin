@@ -56,7 +56,7 @@ const OrderDetailsUI = (props) => {
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
-
+  const placeSpotEnabled = [3, 4]
   const {
     order,
     loading
@@ -328,11 +328,13 @@ const OrderDetailsUI = (props) => {
               />
             </OrderStatusSelectorWrapper>
           </OrderStatus>
-          <PlaceSpotContainer>
-            <p>
-              {t('SPOT', 'Spot')}: {order?.place?.name}
-            </p>
-          </PlaceSpotContainer>
+          {order?.place && placeSpotEnabled.includes(order?.delivery_type) && (
+            <PlaceSpotContainer>
+              <p>
+                {t('SPOT', 'Spot')}: {order?.place?.name}
+              </p>
+            </PlaceSpotContainer>
+          )}
           <StatusBarContainer>
             <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
           </StatusBarContainer>
