@@ -163,7 +163,7 @@ export const PurchasedProductsList = (props) => {
                           <Button
                             color='primary'
                             borderRadius='8px'
-                            onClick={() => window.open(`${product.google_play_store}`, '_blank')}
+                            onClick={() => window.open(`${product.app_store}`, '_blank')}
                           >
                             {t('PURCHASE_NOW', 'Purchase now')}
                           </Button>
@@ -174,7 +174,7 @@ export const PurchasedProductsList = (props) => {
                           <Button
                             color='primary'
                             borderRadius='8px'
-                            onClick={() => window.open(`${product.app_store}`, '_blank')}
+                            onClick={() => window.open(`${product.google_play_store}`, '_blank')}
                           >
                             {t('PURCHASE_NOW', 'Purchase now')}
                           </Button>
