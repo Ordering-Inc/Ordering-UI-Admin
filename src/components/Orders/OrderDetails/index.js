@@ -25,7 +25,8 @@ import {
   AdvancedLogistic,
   OrderProducts,
   CloseButtonWrapper,
-  OrderStatusSelectorWrapper
+  OrderStatusSelectorWrapper,
+  PlaceSpotContainer
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -327,6 +328,11 @@ const OrderDetailsUI = (props) => {
               />
             </OrderStatusSelectorWrapper>
           </OrderStatus>
+          <PlaceSpotContainer>
+            <p>
+              {t('SPOT', 'Spot')}: {order?.place?.name}
+            </p>
+          </PlaceSpotContainer>
           <StatusBarContainer>
             <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
           </StatusBarContainer>
