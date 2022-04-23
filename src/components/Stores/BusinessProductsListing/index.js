@@ -189,6 +189,9 @@ const BusinessProductsListingUI = (props) => {
   useEffect(() => {
     if (!slug) {
       setSelectedBusiness(null)
+      setOpenSidebar(null)
+      handleChangeSearch(null)
+      setViewMethod('list')
     }
   }, [slug])
 
