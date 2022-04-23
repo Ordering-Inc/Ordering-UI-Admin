@@ -187,6 +187,32 @@ export const ProductTboday = styled.tbody`
       }
     }
   }
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+
+    tr {
+      > td {
+        border-top: 1px solid ${props => props.theme.colors.primary};
+        border-bottom: 1px solid ${props => props.theme.colors.primary};
+
+        &:first-child {
+          ${props => props.theme?.rtl ? css`
+            border-right: 1px solid ${props => props.theme.colors.primary};
+          ` : css`
+            border-left: 1px solid ${props => props.theme.colors.primary};
+          `}
+        }
+        &:last-child {
+          ${props => props.theme?.rtl ? css`
+            border-left: 1px solid ${props => props.theme.colors.primary};
+          ` : css`
+            border-right: 1px solid ${props => props.theme.colors.primary};
+          `}
+        }
+        }
+    }
+  `}
 `
 export const AppHeaderTitle = styled.div`
   font-size: 12px;

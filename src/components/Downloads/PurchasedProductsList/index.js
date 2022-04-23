@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Button, IconButton } from '../../../styles'
@@ -23,6 +23,7 @@ import {
 export const PurchasedProductsList = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
+  const productsRef = useRef(null)
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [isOpenProduct, setIsOpenProduct] = useState(false)
@@ -96,9 +97,23 @@ export const PurchasedProductsList = (props) => {
     setSelectedProduct(null)
   }
 
+  const handleClickOutside = (e) => {
+    const isInvalid = e.target.closest('.purchased-product-row') || !productsRef.current?.contains(e.target)
+    if (isInvalid) return
+    handleCloseProduct()
+  }
+
+  useEffect(() => {
+    if (!isOpenProduct) return
+    window.addEventListener('mouseup', handleClickOutside)
+    return () => {
+      window.removeEventListener('mouseup', handleClickOutside)
+    }
+  }, [isOpenProduct])
+
   return (
     <>
-      <ProductsListContainer>
+      <ProductsListContainer ref={productsRef}>
         <HeaderTitleContainer>
           {isCollapse && (
             <IconButton
@@ -142,6 +157,8 @@ export const PurchasedProductsList = (props) => {
             {productItems.map(product => (
               <ProductTboday
                 key={product.key}
+                className='purchased-product-row'
+                active={product.key === selectedProduct?.key}
                 onClick={(e) => handleOpenProductDetails(e, product)}
               >
                 <tr>

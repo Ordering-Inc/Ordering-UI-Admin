@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
@@ -22,6 +22,7 @@ import {
 export const FreeProductsList = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
+  const productsRef = useRef(null)
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [isOpenProduct, setIsOpenProduct] = useState(false)
@@ -95,9 +96,23 @@ export const FreeProductsList = (props) => {
     setSelectedProduct(null)
   }
 
+  const handleClickOutside = (e) => {
+    const isInvalid = e.target.closest('.free-product-row') || !productsRef.current?.contains(e.target)
+    if (isInvalid) return
+    handleCloseProduct()
+  }
+
+  useEffect(() => {
+    if (!isOpenProduct) return
+    window.addEventListener('mouseup', handleClickOutside)
+    return () => {
+      window.removeEventListener('mouseup', handleClickOutside)
+    }
+  }, [isOpenProduct])
+
   return (
     <>
-      <FreeProductsListContainer>
+      <FreeProductsListContainer ref={productsRef}>
         <HeaderTitleContainer>
           {isCollapse && (
             <IconButton
@@ -124,6 +139,7 @@ export const FreeProductsList = (props) => {
           {productItems.map(product => (
             <ProductRow
               key={product.key}
+              className='free-product-row'
               active={product.key === selectedProduct?.key}
               onClick={(e) => handleOpenProductDetails(e, product)}
             >
