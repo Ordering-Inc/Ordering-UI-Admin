@@ -263,7 +263,7 @@ const BusinessProductsListingUI = (props) => {
             />
           </ActionsGroup>
         </HeaderContainer>
-        <CategoryProductsContent>
+        <CategoryProductsContent isDisabled={!slug}>
           <CategoryListContainer ref={categoryListRef}>
             {
               <BusinessProductsCategories
