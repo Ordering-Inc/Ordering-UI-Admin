@@ -123,6 +123,7 @@ export const OrdersListing = (props) => {
                   handleOpenTour={handleOpenTour}
                   setIsTourOpen={setIsTourOpen}
                   slaSettingTime={slaSettingTime}
+                  groupStatus={groupStatus}
                 />
               ) : (
                 <OrdersCards
