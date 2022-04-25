@@ -29,7 +29,7 @@ const DriverGroupSettingUI = (props) => {
     if (driversGroupsState.loading) return
     let _filteredGroups = []
     if (searchValue) {
-      _filteredGroups = driversGroupsState.groups.filter(group => group?.name.toLowerCase().includes(searchValue.toLowerCase()))
+      _filteredGroups = driversGroupsState.groups.filter(group => group?.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       _filteredGroups = [...driversGroupsState.groups]
     }

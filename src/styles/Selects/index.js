@@ -68,7 +68,7 @@ export const Options = styled.div`
   border-radius: 7.6px;
   overflow: hidden;
 
-  ${({ position }) => position?.toLowerCase() === 'left' && css`
+  ${({ position }) => position??.toLowerCase() === 'left' && css`
     left: 0;
     margin-left: -1px;
     ${props => props.theme?.rtl && css`
@@ -78,7 +78,7 @@ export const Options = styled.div`
         left: initial;
     `}
   `}
-  ${({ position }) => position?.toLowerCase() === 'right' && css`
+  ${({ position }) => position??.toLowerCase() === 'right' && css`
     right: 0;
     margin-right: -1px;
     ${props => props.theme?.rtl && css`

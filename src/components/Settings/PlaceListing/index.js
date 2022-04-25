@@ -105,7 +105,7 @@ const PlaceListingUI = (props) => {
     const _cities = countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], [])
     let cities = []
     if (searchValue) {
-      cities = _cities.filter(city => city.name.toLowerCase().includes(searchValue.toLowerCase()))
+      cities = _cities.filter(city => city.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       cities = [..._cities]
     }

@@ -53,11 +53,11 @@ const BusinessSharedMenuProductsUI = (props) => {
             placeholder={t('SEARCH', 'Search')}
             isCustomLayout
             search={searchValue}
-            onSearch={val => setSearchValue(val.toLowerCase())}
+            onSearch={val => setSearchValue(val?.toLowerCase())}
           />
         </SearchBarWrapper>
         <ProductListWrapper>
-          {menuState.menu.products.filter(product => product.name?.toLowerCase().includes(searchValue)).map((product, index) => (
+          {menuState.menu.products.filter(product => product.name??.toLowerCase().includes(searchValue)).map((product, index) => (
             <ProductItem
               key={product.id}
               isBorderTop={index === 0}

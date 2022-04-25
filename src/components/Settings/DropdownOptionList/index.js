@@ -73,7 +73,7 @@ export const DropdownOptionList = (props) => {
     let _totalPages
     let dropdownOptions = []
     if (searchValue) {
-      dropdownOptions = dropdownOptionsState.options.filter(option => option.name.toLowerCase().includes(searchValue.toLowerCase()))
+      dropdownOptions = dropdownOptionsState.options.filter(option => option.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       dropdownOptions = [...dropdownOptionsState.options]
     }

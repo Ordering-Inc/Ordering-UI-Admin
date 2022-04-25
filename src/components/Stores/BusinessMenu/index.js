@@ -62,7 +62,7 @@ const BusinessMenuUI = (props) => {
 
   useEffect(() => {
     const updatedMenus = [...(isSelectedSharedMenus ? businessMenusState?.menusShared : businessMenusState?.menus)]
-    const filteredMenus = updatedMenus.filter(menu => menu?.name.toLowerCase().includes(searchValue.toLowerCase()))
+    const filteredMenus = updatedMenus.filter(menu => menu?.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     setMenuList(filteredMenus)
   }, [JSON.stringify(businessMenusState.menus), JSON.stringify(businessMenusState.menusShared), searchValue, isSelectedSharedMenus])
 

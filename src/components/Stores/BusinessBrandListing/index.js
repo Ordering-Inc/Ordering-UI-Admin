@@ -92,7 +92,7 @@ const BusinessBrandListingUI = (props) => {
     if (brandListState?.brands?.length > 0) {
       let brands = []
       if (searchValue) {
-        brands = brandListState?.brands?.filter(brand => (brand.name?.toLowerCase().includes(searchValue.toLowerCase())))
+        brands = brandListState?.brands?.filter(brand => (brand.name??.toLowerCase().includes(searchValue?.toLowerCase())))
       } else {
         brands = [...brandListState?.brands]
       }
