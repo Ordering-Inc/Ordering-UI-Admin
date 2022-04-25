@@ -74,7 +74,7 @@ export const ShowInCartContainer = styled.div`
 export const CouponContent = styled.div`
 `
 export const CouponCodeContainer = styled.div`
-  margin-top: 26px;
+  margin-top: 10px;
   margin-bottom: 17px;
   display: flex;
   flex-direction: column;
@@ -187,15 +187,12 @@ export const DiscountContainer = styled.div`
     }
   }
 `
-export const AutomaticDiscountEnableWrapper = styled.div`
+
+export const AutomaticEnableWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 15px;
-  ${props => props.theme?.rtl ? css`
-    margin-right: 30px;
-  ` : css`
-    margin-left: 30px;
-  `}
+  margin-top: 15px;
 
   span {
     font-size: 14px;
@@ -205,4 +202,8 @@ export const AutomaticDiscountEnableWrapper = styled.div`
       margin-left: 10px;
     `}
   }
+`
+
+export const PublicEnableWrapper = styled(ShowInCartContainer)`
+  margin-left: 0;
 `
