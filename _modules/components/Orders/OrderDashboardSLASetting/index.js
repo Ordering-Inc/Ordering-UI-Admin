@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Timer = exports.StatusBlock = exports.OrderDashboardSLASetting = void 0;
+exports.StatusBlock = exports.OrderDashboardSLASettingUI = exports.OrderDashboardSLASetting = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -25,13 +25,11 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -45,10 +43,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
+var OrderDashboardSLASettingUI = function OrderDashboardSLASettingUI(props) {
   var _theme$images$icons, _theme$images$icons2, _theme$images$icons3;
 
-  var setSlaSettingTime = props.setSlaSettingTime;
+  var settingsState = props.settingsState,
+      handleInputChange = props.handleInputChange,
+      handleClickUpdate = props.handleClickUpdate;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -72,10 +72,6 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
   var theme = (0, _styledComponents.useTheme)();
   var formMethods = (0, _reactHookForm.useForm)();
 
-  var _useToast = (0, _orderingComponentsAdmin.useToast)(),
-      _useToast2 = _slicedToArray(_useToast, 2),
-      showToast = _useToast2[1].showToast;
-
   var _useState7 = (0, _react.useState)({
     open: false,
     content: []
@@ -83,11 +79,6 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       alertState = _useState8[0],
       setAlertState = _useState8[1];
-
-  var _useState9 = (0, _react.useState)([]),
-      _useState10 = _slicedToArray(_useState9, 2),
-      readySettingTime = _useState10[0],
-      setReadySettingTime = _useState10[1];
 
   var defaultOrderTypes = [{
     key: 1,
@@ -129,18 +120,17 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
     setSettingOpen(false);
   };
 
-  var checkReadySatus = function checkReadySatus(data) {
-    var _readySettingTime = _toConsumableArray(readySettingTime);
-
-    if (data !== null && data !== void 0 && data.status) {
-      _readySettingTime.push(data);
-    } else {
-      _readySettingTime = _readySettingTime.filter(function (ele) {
-        return ele.id !== data.id;
-      });
+  var onSubmit = function onSubmit(data) {
+    if (data && Object.keys(data).length > 0) {
+      handleClickUpdate();
     }
+  };
 
-    setReadySettingTime(_readySettingTime);
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
   };
 
   (0, _react.useEffect)(function () {
@@ -156,28 +146,18 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
       });
     }
   }, [formMethods.errors]);
+  (0, _react.useEffect)(function () {
+    var _settingsState$result;
 
-  var onSubmit = function onSubmit(data) {
-    if (data && Object.keys(data).length > 0) {
-      var _hour = parseInt(data.hour);
+    if (settingsState !== null && settingsState !== void 0 && (_settingsState$result = settingsState.result) !== null && _settingsState$result !== void 0 && _settingsState$result.error) {
+      var _settingsState$result2;
 
-      var _min = parseInt(data.minute);
-
-      var _settingTimeSecond = _hour * 3600 + _min * 60;
-
-      setSlaSettingTime(_settingTimeSecond);
-      showToast(_orderingComponentsAdmin.ToastType.Success, t('SLA_SETTING_UPDATED', 'SLAs setting updated'));
-      setSettingOpen(false);
+      setAlertState({
+        open: true,
+        content: settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$result2 = settingsState.result) === null || _settingsState$result2 === void 0 ? void 0 : _settingsState$result2.result
+      });
     }
-  };
-
-  var closeAlert = function closeAlert() {
-    setAlertState({
-      open: false,
-      content: []
-    });
-  };
-
+  }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.result]);
   return /*#__PURE__*/_react.default.createElement(_styles2.SettingContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "secundary",
     onClick: function onClick() {
@@ -205,12 +185,11 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
       item: item,
       last: i + 1 === selectedTabStatus.length,
       formMethods: formMethods,
-      checkReadySatus: checkReadySatus
+      handleInputChange: handleInputChange
     });
   })), /*#__PURE__*/_react.default.createElement(_styles2.Actions, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
-    type: "submit",
-    disabled: readySettingTime.length === 0
+    type: "submit"
   }, t('ACCEPT', 'Accept'))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('SLA_SETTING', 'SLA’s settings'),
     content: alertState.content,
@@ -226,70 +205,78 @@ var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
   }));
 };
 
-exports.OrderDashboardSLASetting = OrderDashboardSLASetting;
+exports.OrderDashboardSLASettingUI = OrderDashboardSLASettingUI;
 
 var StatusBlock = function StatusBlock(props) {
+  var _configs$order_deadli2;
+
   var item = props.item,
       last = props.last,
       formMethods = props.formMethods,
-      checkReadySatus = props.checkReadySatus;
-
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      showTime = _useState12[0],
-      setShowTime = _useState12[1];
-
-  var handleShowTimer = function handleShowTimer() {
-    checkReadySatus({
-      id: item === null || item === void 0 ? void 0 : item.key,
-      status: !showTime
-    });
-    setShowTime(!showTime);
-  };
-
-  (0, _react.useEffect)(function () {
-    if (item !== null && item !== void 0 && item.timmer) {
-      setShowTime(true);
-    }
-  }, [item === null || item === void 0 ? void 0 : item.timmer]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.StatusItems, null, /*#__PURE__*/_react.default.createElement(_styles2.ItemHeader, {
-    onClick: function onClick() {
-      return handleShowTimer();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: item === null || item === void 0 ? void 0 : item.icon,
-    alt: ""
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ItemStatus, {
-    backColor: item === null || item === void 0 ? void 0 : item.backColor
-  }), /*#__PURE__*/_react.default.createElement("span", null, item === null || item === void 0 ? void 0 : item.key)), /*#__PURE__*/_react.default.createElement(_styles2.ItemContent, null, /*#__PURE__*/_react.default.createElement("p", null, item === null || item === void 0 ? void 0 : item.des)), showTime && /*#__PURE__*/_react.default.createElement(Timer, {
-    formMethods: formMethods
-  }), last && /*#__PURE__*/_react.default.createElement(_styles2.OverLine, null));
-};
-
-exports.StatusBlock = StatusBlock;
-
-var Timer = function Timer(props) {
-  var formMethods = props.formMethods;
+      handleInputChange = props.handleInputChange;
 
   var _useLanguage3 = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage4 = _slicedToArray(_useLanguage3, 2),
       t = _useLanguage4[1];
 
-  return /*#__PURE__*/_react.default.createElement(_styles2.TimerInputWrapper, null, /*#__PURE__*/_react.default.createElement("input", {
-    name: "hour",
-    type: "number",
-    placeholder: "HH",
-    ref: formMethods.register({
-      required: t('VALIDATION_ERROR_HOUR_REQUIRED', 'The field hour is required').replace('_attribute_', t('HOUR', 'Hour'))
-    })
-  }), ":", /*#__PURE__*/_react.default.createElement("input", {
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var _useState9 = (0, _react.useState)(38),
+      _useState10 = _slicedToArray(_useState9, 2),
+      inputWidth = _useState10[0],
+      setInputWidth = _useState10[1];
+
+  var handleMiuteChange = function handleMiuteChange(e) {
+    var _configs$order_deadli;
+
+    setInputWidth((e.target.value.length + 1) * 8.5);
+    handleInputChange(e.target.value, configs === null || configs === void 0 ? void 0 : (_configs$order_deadli = configs.order_deadlines_delayed_time) === null || _configs$order_deadli === void 0 ? void 0 : _configs$order_deadli.id);
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_styles2.StatusItems, null, /*#__PURE__*/_react.default.createElement(_styles2.ItemHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: item === null || item === void 0 ? void 0 : item.icon,
+    alt: ""
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ItemStatus, {
+    backColor: item === null || item === void 0 ? void 0 : item.backColor
+  }), /*#__PURE__*/_react.default.createElement("span", null, item === null || item === void 0 ? void 0 : item.key)), /*#__PURE__*/_react.default.createElement(_styles2.ItemContent, null, /*#__PURE__*/_react.default.createElement("p", null, item === null || item === void 0 ? void 0 : item.des)), last && /*#__PURE__*/_react.default.createElement(_styles2.TimerInputWrapper, null, /*#__PURE__*/_react.default.createElement("input", {
     name: "minute",
-    type: "number",
+    type: "text",
     placeholder: "MM",
+    defaultValue: configs === null || configs === void 0 ? void 0 : (_configs$order_deadli2 = configs.order_deadlines_delayed_time) === null || _configs$order_deadli2 === void 0 ? void 0 : _configs$order_deadli2.value,
     ref: formMethods.register({
       required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute'))
-    })
-  }));
+    }),
+    style: {
+      width: inputWidth
+    },
+    onChange: function onChange(e) {
+      return handleMiuteChange(e);
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  })), last && /*#__PURE__*/_react.default.createElement(_styles2.OverLine, null));
 };
 
-exports.Timer = Timer;
+exports.StatusBlock = StatusBlock;
+
+var OrderDashboardSLASetting = function OrderDashboardSLASetting(props) {
+  var _useConfig3 = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig4 = _slicedToArray(_useConfig3, 1),
+      configs = _useConfig4[0].configs;
+
+  var settingsListProps = _objectSpread(_objectSpread({}, props), {}, {
+    category: {
+      configs: [_objectSpread({}, configs === null || configs === void 0 ? void 0 : configs.order_deadlines_delayed_time)]
+    },
+    UIComponent: OrderDashboardSLASettingUI
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.SettingsList, settingsListProps);
+};
+
+exports.OrderDashboardSLASetting = OrderDashboardSLASetting;

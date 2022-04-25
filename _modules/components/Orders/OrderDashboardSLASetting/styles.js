@@ -70,7 +70,7 @@ var ItemStatus = _styledComponents.default.span(_templateObject11 || (_templateO
 
 exports.ItemStatus = ItemStatus;
 
-var ItemHeader = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 5px;\n  cursor: pointer;\n"])));
+var ItemHeader = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 5px;\n"])));
 
 exports.ItemHeader = ItemHeader;
 
@@ -88,7 +88,7 @@ var Actions = _styledComponents.default.div(_templateObject15 || (_templateObjec
 
 exports.Actions = Actions;
 
-var TimerInputWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border: 1px solid ", ";\n  border-radius: 7.6px;\n  padding: 7px;\n  width: fit-content;\n  margin: 0 30px 15px;\n  color: ", ";\n\n  input {\n    border: none !important;\n    outline: none !important;\n    padding: 5px;\n    font-size: 14px;\n    color: ", ";\n  }\n\n  input:first-child {\n    width: 33px;\n  }\n\n  input:last-child {\n    width: 38px;\n  }\n\n  input::-webkit-outer-spin-button,\n  input::-webkit-inner-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n  }\n\n  input[type=number] {\n    -moz-appearance: textfield;\n  }\n"])), function (props) {
+var TimerInputWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border: 1px solid ", ";\n  border-radius: 7.6px;\n  padding: 7px;\n  width: fit-content;\n  margin: 0 30px 15px;\n  color: ", ";\n\n  input {\n    flex: 1;\n    border: none !important;\n    outline: none !important;\n    padding: 5px;\n    font-size: 14px;\n    min-width: 38px;\n    width: fit-content;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.disabled;

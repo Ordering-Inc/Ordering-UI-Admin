@@ -80,7 +80,8 @@ var OrdersTable = function OrdersTable(props) {
       isTourOpen = props.isTourOpen,
       handleOpenTour = props.handleOpenTour,
       setIsTourOpen = props.setIsTourOpen,
-      slaSettingTime = props.slaSettingTime;
+      slaSettingTime = props.slaSettingTime,
+      groupStatus = props.groupStatus;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -161,7 +162,9 @@ var OrdersTable = function OrdersTable(props) {
 
   var getDelayTime = function getDelayTime(order) {
     // targetMin = delivery_datetime  + eta_time - now()
-    var _delivery = order === null || order === void 0 ? void 0 : order.delivery_datetime_utc;
+    var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+      utc: false
+    });
 
     var _eta = order === null || order === void 0 ? void 0 : order.eta_time;
 
@@ -363,6 +366,13 @@ var OrdersTable = function OrdersTable(props) {
       return document.removeEventListener('keydown', handleChangeKeyboard);
     };
   }, [isTourOpen, currentTourStep]);
+  (0, _react.useEffect)(function () {
+    if (groupStatus === 'completed' || groupStatus === 'cancelled') {
+      setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
+        timer: false
+      }));
+    }
+  }, [groupStatus]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     id: "orderTable",
     isSelectedOrders: isSelectedOrders,
@@ -387,10 +397,10 @@ var OrdersTable = function OrdersTable(props) {
   }, t('CUSTOMER', 'Customer')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && /*#__PURE__*/_react.default.createElement("th", {
     className: "driverInfo"
   }, t('DRIVER', 'Driver')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("th", {
-    colspan: 3,
+    colSpan: "3",
     className: "advanced"
   }, t('ADVANCED_LOGISTICS', 'Advanced logistics')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && /*#__PURE__*/_react.default.createElement("th", {
-    colspan: 2,
+    colSpan: "2",
     className: "timer"
   }, t('SLA_TIMER', 'SLA’s timer')), /*#__PURE__*/_react.default.createElement("th", {
     className: "orderPrice"
@@ -596,11 +606,11 @@ var OrdersTable = function OrdersTable(props) {
       priority: order === null || order === void 0 ? void 0 : order.priority
     })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && /*#__PURE__*/_react.default.createElement("td", {
       className: "timer"
-    }, /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.Timer, null, !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, t('TIMER', 'Timer')), /*#__PURE__*/_react.default.createElement("p", {
       className: order === null || order === void 0 ? void 0 : order.time_status
-    }, getDelayTime(order)))), /*#__PURE__*/_react.default.createElement("td", {
+    }, getDelayTime(order))))), /*#__PURE__*/_react.default.createElement("td", {
       className: "orderPrice"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"

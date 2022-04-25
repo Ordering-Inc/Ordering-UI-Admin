@@ -273,6 +273,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   (0, _react.useEffect)(function () {
     if (!slug) {
       setSelectedBusiness(null);
+      setOpenSidebar(null);
+      handleChangeSearch(null);
+      setViewMethod('list');
     }
   }, [slug]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CategoryProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
@@ -319,7 +322,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     search: searchValue,
     onSearch: handleChangeSearch,
     placeholder: t('SEARCH', 'Search')
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryProductsContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CategoryListContainer, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryProductsContent, {
+    isDisabled: !slug
+  }, /*#__PURE__*/_react.default.createElement(_styles2.CategoryListContainer, {
     ref: categoryListRef
   }, /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, _extends({}, props, {
     businessState: businessState,

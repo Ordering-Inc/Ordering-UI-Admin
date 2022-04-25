@@ -31,7 +31,7 @@ var HeaderTitleContainer = _styledComponents.default.div(_templateObject2 || (_t
 
 exports.HeaderTitleContainer = HeaderTitleContainer;
 
-var ProductDetailsContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  padding: 25px 20px;\n  box-sizing: border-box;\n  width: 100%;\n  overflow-x: hidden;\n\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    color: ", ";\n    ", "\n    margin-top: 0;\n    margin-bottom: 0;\n  }\n\n  p {\n    font-size: 14px;\n    line-height: 24px;\n    color: ", ";\n    margin-top: 59px;\n    margin-bottom: 43px;\n    white-space: pre-wrap;\n  }\n"])), function (props) {
+var ProductDetailsContainer = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  padding: 25px 20px;\n  box-sizing: border-box;\n  width: 100%;\n  overflow-x: hidden;\n\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    color: ", ";\n    ", "\n    margin-top: 0;\n    margin-bottom: 0;\n  }\n\n  .description {\n    font-size: 14px;\n    line-height: 24px;\n    color: ", ";\n    margin-top: 59px;\n    margin-bottom: 43px;\n    white-space: pre-wrap;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme2;
@@ -84,7 +84,7 @@ var AppImageWrapper = _styledComponents.default.div(_templateObject17 || (_templ
 
 exports.AppImageWrapper = AppImageWrapper;
 
-var AppDescriptionWarpper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 0 24px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n\n  h3 {\n    font-size: 16px;\n    line-height: 24px;\n    font-weight: 500;\n    color: ", ";\n    margin: 0;\n  }\n  p {\n    font-size: 14px;\n    line-height: 24px;\n    margin: 0;\n    color: ", ";\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  ", "\n"])), function (props) {
+var AppDescriptionWarpper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 0 24px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n\n  h3 {\n    font-size: 16px;\n    line-height: 24px;\n    font-weight: 500;\n    color: ", ";\n    margin: 0;\n  }\n  div {\n    font-size: 14px;\n    line-height: 24px;\n    margin: 0;\n    color: ", ";\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.lightGray;

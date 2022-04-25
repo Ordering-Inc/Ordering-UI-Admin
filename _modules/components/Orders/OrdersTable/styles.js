@@ -241,7 +241,7 @@ var Timestatus = _styledComponents.default.div(_templateObject46 || (_templateOb
 
 exports.Timestatus = Timestatus;
 
-var Timer = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  p {\n    margin: 0px;\n    color: ", ";\n    font-size: 12px;\n  }\n\n  .bold {\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n  }\n\n  .in_time{\n    color: #00D27A;\n  }\n\n  .at_risk {\n    color: #FFC700;\n  }\n  \n  .delayed {\n    color: #E63757;\n  }\n"])), function (props) {
+var Timer = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  min-width: 65px;\n  p {\n    margin: 0px;\n    color: ", ";\n    font-size: 12px;\n  }\n\n  .bold {\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n  }\n\n  .in_time{\n    color: #00D27A;\n  }\n\n  .at_risk {\n    color: #FFC700;\n  }\n  \n  .delayed {\n    color: #E63757;\n  }\n"])), function (props) {
   var _props$theme$colors8;
 
   return (_props$theme$colors8 = props.theme.colors) === null || _props$theme$colors8 === void 0 ? void 0 : _props$theme$colors8.lightGray;

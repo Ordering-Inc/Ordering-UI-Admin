@@ -15,8 +15,6 @@ var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _styles = require("../../../styles");
 
-var _FirstSelect = require("../../../styles/Select/FirstSelect");
-
 var _reactBootstrap = require("react-bootstrap");
 
 var _styledComponents = require("styled-components");
@@ -34,6 +32,8 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactHookForm = require("react-hook-form");
 
 var _ProductExtraSuboption = require("../ProductExtraSuboption");
+
+var _ProductExtraOptionForm = require("../ProductExtraOptionForm");
 
 var _styles2 = require("./styles");
 
@@ -62,13 +62,12 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
-  var _optionChangesState$r, _optionChangesState$r2, _optionChangesState$c4, _optionChangesState$c5, _optionState$option, _optionState$option2, _optionState$option4, _optionState$option5, _optionState$option6, _optionState$option8, _optionState$option9, _optionState$option10, _optionState$option11, _optionState$option12, _optionState$option13, _settingChangeState$c, _settingChangeState$c2, _optionState$option14, _settingChangeState$c3, _settingChangeState$c4, _optionState$option15, _optionState$option16, _optionState$option17, _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2, _optionState$option18, _optionState$option19, _changesState$changes3, _optionState$option20, _optionState$option21, _changesState$changes4, _settingChangeState$c5, _settingChangeState$c6, _optionState$option22, _optionState$option23, _optionState$option24, _changesState$changes5, _settingChangeState$c7, _settingChangeState$c8, _optionState$option25, _optionState$option26, _optionState$option27, _changesState$changes6;
+  var _settingChangeState$c, _settingChangeState$c2, _optionState$option, _settingChangeState$c3, _settingChangeState$c4, _optionState$option2, _optionState$option3, _optionState$option3$, _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2, _optionState$option4, _optionState$option4$, _changesState$changes3, _optionState$option5, _optionState$option5$, _changesState$changes4, _settingChangeState$c5, _settingChangeState$c6, _optionState$option6, _optionState$option7, _optionState$option7$, _changesState$changes5, _settingChangeState$c7, _settingChangeState$c8, _optionState$option8, _optionState$option9, _optionState$option9$, _changesState$changes6;
 
   var optionState = props.optionState,
       optionChangesState = props.optionChangesState,
       handleOptionFiles = props.handleOptionFiles,
       handleChangeOptionInput = props.handleChangeOptionInput,
-      handleChangeNumberInput = props.handleChangeNumberInput,
       handleChangeOptionEnable = props.handleChangeOptionEnable,
       changesState = props.changesState,
       editSubOptionId = props.editSubOptionId,
@@ -86,23 +85,19 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       handleChangeConditionalSubOption = props.handleChangeConditionalSubOption,
       handleChangeDefaultSuboption = props.handleChangeDefaultSuboption,
       handleUpdateSubOption = props.handleUpdateSubOption,
+      handleUpdateOption = props.handleUpdateOption,
       business = props.business,
       extra = props.extra,
       handleAddOption = props.handleAddOption,
       handleDeteteOption = props.handleDeteteOption,
-      isMaxError = props.isMaxError,
-      handleClickUpdateOption = props.handleClickUpdateOption;
+      isMaxError = props.isMaxError;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-  var optionImageInputRef = (0, _react.useRef)(null);
   var mainContainerRef = (0, _react.useRef)();
-  var optionNameRef = (0, _react.useRef)();
-  var optionMinRef = (0, _react.useRef)();
-  var optionMaxRef = (0, _react.useRef)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -140,10 +135,6 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       _useState10 = _slicedToArray(_useState9, 2),
       isAddForm = _useState10[0],
       setIsAddForm = _useState10[1];
-
-  var handleClickImage = function handleClickImage() {
-    optionImageInputRef.current.click();
-  };
 
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
@@ -206,19 +197,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   }, [errors]);
 
   var closeAddForm = function closeAddForm(e) {
-    var _mainContainerRef$cur;
-
     var outsideDropdown = !e.target.closest('.add-product-option') && !e.target.closest('.add-option-btn');
     if (outsideDropdown && Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0) setIsAddForm(false);
-
-    if ((_mainContainerRef$cur = mainContainerRef.current) !== null && _mainContainerRef$cur !== void 0 && _mainContainerRef$cur.contains(e.target)) {
-      var _optionChangesState$c, _optionNameRef$curren, _optionChangesState$c2, _optionMinRef$current, _optionChangesState$c3, _optionMaxRef$current;
-
-      if ((optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c = optionChangesState.changes) === null || _optionChangesState$c === void 0 ? void 0 : _optionChangesState$c.name) === '' && (_optionNameRef$curren = optionNameRef.current) !== null && _optionNameRef$curren !== void 0 && _optionNameRef$curren.contains(e.target)) return;
-      if ((optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c2 = optionChangesState.changes) === null || _optionChangesState$c2 === void 0 ? void 0 : _optionChangesState$c2.min) === '' && (_optionMinRef$current = optionMinRef.current) !== null && _optionMinRef$current !== void 0 && _optionMinRef$current.contains(e.target)) return;
-      if ((optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c3 = optionChangesState.changes) === null || _optionChangesState$c3 === void 0 ? void 0 : _optionChangesState$c3.max) === '' && (_optionMaxRef$current = optionMaxRef.current) !== null && _optionMaxRef$current !== void 0 && _optionMaxRef$current.contains(e.target)) return;
-      handleClickUpdateOption();
-    }
   };
 
   (0, _react.useEffect)(function () {
@@ -226,7 +206,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     return function () {
       return document.removeEventListener('click', closeAddForm);
     };
-  }, [changesState, handleClickUpdateOption]);
+  }, [changesState]);
   (0, _react.useEffect)(function () {
     if (Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0) setIsAddForm(false);
   }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes]);
@@ -247,146 +227,35 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     onClick: function onClick() {
       return handleDeleteOption();
     }
-  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles2.OptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionImage, {
-    onClick: function onClick() {
-      return handleClickImage();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
-    onFiles: function onFiles(files) {
-      return handleOptionFiles(files, optionState === null || optionState === void 0 ? void 0 : optionState.option.id);
-    },
-    childRef: function childRef(e) {
-      optionImageInputRef.current = e;
-    },
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: optionState.loading
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
-    onDrop: function onDrop(dataTransfer) {
-      return handleOptionFiles(dataTransfer.files, optionState === null || optionState === void 0 ? void 0 : optionState.option.id);
-    },
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: optionState.loading
-  }, optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$r = optionChangesState.result) !== null && _optionChangesState$r !== void 0 && _optionChangesState$r.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$r2 = optionChangesState.result) === null || _optionChangesState$r2 === void 0 ? void 0 : _optionChangesState$r2.image,
-    alt: "sub option image",
-    loading: "lazy"
-  }) : optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$c4 = optionChangesState.changes) !== null && _optionChangesState$c4 !== void 0 && _optionChangesState$c4.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c5 = optionChangesState.changes) === null || _optionChangesState$c5 === void 0 ? void 0 : _optionChangesState$c5.image,
-    alt: "product image",
-    loading: "lazy"
-  }) : (optionState === null || optionState === void 0 ? void 0 : (_optionState$option = optionState.option) === null || _optionState$option === void 0 ? void 0 : _optionState$option.image) && /*#__PURE__*/_react.default.createElement("img", {
-    src: optionState === null || optionState === void 0 ? void 0 : (_optionState$option2 = optionState.option) === null || _optionState$option2 === void 0 ? void 0 : _optionState$option2.image,
-    alt: "product image",
-    loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.OptionInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-    primary: true
-  }, /*#__PURE__*/_react.default.createElement("label", null, t('OPTION_NAME', 'Option name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "name",
-    ref: optionNameRef,
-    autoComplete: "off",
-    defaultValue: optionState === null || optionState === void 0 ? void 0 : optionState.option.name,
-    onChange: function onChange(e) {
-      var _optionState$option3;
-
-      return handleChangeOptionInput(e, (_optionState$option3 = optionState.option) === null || _optionState$option3 === void 0 ? void 0 : _optionState$option3.id);
-    }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.RightOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-    primary: true
-  }, /*#__PURE__*/_react.default.createElement("label", null, t('MINIMUM', 'Minimum')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "min",
-    ref: optionMinRef,
-    defaultValue: optionState === null || optionState === void 0 ? void 0 : (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : _optionState$option4.min,
-    onChange: function onChange(e) {
-      return handleChangeNumberInput(e, optionState.option, true);
-    },
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-    primary: true,
-    isMaxError: isMaxError
-  }, /*#__PURE__*/_react.default.createElement("label", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "max",
-    ref: optionMaxRef,
-    defaultValue: optionState === null || optionState === void 0 ? void 0 : (_optionState$option5 = optionState.option) === null || _optionState$option5 === void 0 ? void 0 : _optionState$option5.max,
-    onChange: function onChange(e) {
-      return handleChangeNumberInput(e, optionState.option, false);
-    },
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, {
-    top: true
-  }, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_optionState$option6 = optionState.option) === null || _optionState$option6 === void 0 ? void 0 : _optionState$option6.enabled,
-    onChange: function onChange(enabled) {
-      var _optionState$option7;
-
-      return handleChangeOptionEnable(enabled, (_optionState$option7 = optionState.option) === null || _optionState$option7 === void 0 ? void 0 : _optionState$option7.id);
-    }
-  }))))), /*#__PURE__*/_react.default.createElement(_styles2.OptionSettings, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    id: "with_half_option",
-    defaultChecked: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option8 = optionState.option) === null || _optionState$option8 === void 0 ? void 0 : _optionState$option8.with_half_option) || false,
-    onClick: function onClick(e) {
-      return handleOptionSetting('with_half_option', e.target.checked);
-    }
-  }), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "with_half_option"
-  }, t('WITH_HALF_PRICE', 'Allow half option & price')))), /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    id: "allow_suboption_quantity",
-    defaultChecked: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option9 = optionState.option) === null || _optionState$option9 === void 0 ? void 0 : _optionState$option9.allow_suboption_quantity) || false,
-    onClick: function onClick(e) {
-      return handleOptionSetting('allow_suboption_quantity', e.target.checked);
-    }
-  }), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "allow_suboption_quantity"
-  }, t('SUBOPTION_QUANTITY', 'Allow suboptions quantity'))), (optionState === null || optionState === void 0 ? void 0 : (_optionState$option10 = optionState.option) === null || _optionState$option10 === void 0 ? void 0 : _optionState$option10.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    id: "limit_suboptions_by_max",
-    defaultChecked: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option11 = optionState.option) === null || _optionState$option11 === void 0 ? void 0 : _optionState$option11.limit_suboptions_by_max) || false,
-    onClick: function onClick(e) {
-      return handleOptionSetting('limit_suboptions_by_max', e.target.checked);
-    }
-  }), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "limit_suboptions_by_max"
-  }, t('LIMIT_SUBOPTIONS_BY_MAX', 'Limit suboptions by maximum option')))), (conditionalOptions === null || conditionalOptions === void 0 ? void 0 : conditionalOptions.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    id: "conditioned",
-    defaultChecked: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option12 = optionState.option) === null || _optionState$option12 === void 0 ? void 0 : _optionState$option12.conditioned) || false,
-    onClick: function onClick(e) {
-      return handleOptionSetting('conditioned', e.target.checked);
-    }
-  }), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "conditioned"
-  }, t('CONDITIONAL', 'Conditional'))), (optionState === null || optionState === void 0 ? void 0 : (_optionState$option13 = optionState.option) === null || _optionState$option13 === void 0 ? void 0 : _optionState$option13.conditioned) && /*#__PURE__*/_react.default.createElement(_styles2.SelectboxGroup, null, conditionalOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
-    options: conditionalOptions,
-    defaultValue: conditionalOptionId,
-    placeholder: t('SELECT_OPTION', 'Select option'),
-    onChange: function onChange(val) {
-      return handleChangeConditionalOption(val);
-    }
-  }), conditionalOptionId && (conditionalSubOptions.length > 0 ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
-    options: conditionalSubOptions,
-    defaultValue: conditionalSubOptionId,
-    placeholder: t('SELECT_CHOICE', 'Select choice'),
-    onChange: function onChange(val) {
-      return handleChangeConditionalSubOption(val);
-    }
-  }) : /*#__PURE__*/_react.default.createElement("p", null, t('NO_CHOICES_AVAILABLE', 'No choices available')))))))), /*#__PURE__*/_react.default.createElement(_styles2.Dvider, null), /*#__PURE__*/_react.default.createElement(_styles2.ModifierOptionsContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MODIFIER_OPTIONS', 'Modifier options')), /*#__PURE__*/_react.default.createElement(_styles2.SubOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, null), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_ProductExtraOptionForm.ProductExtraOptionForm, {
+    optionState: optionState,
+    optionChangesState: optionChangesState,
+    mainContainerRef: mainContainerRef,
+    isMaxError: isMaxError,
+    handleOptionFiles: handleOptionFiles,
+    handleChangeOptionInput: handleChangeOptionInput,
+    handleChangeOptionEnable: handleChangeOptionEnable,
+    handleOptionSetting: handleOptionSetting,
+    conditionalOptions: conditionalOptions,
+    conditionalSubOptions: conditionalSubOptions,
+    conditionalOptionId: conditionalOptionId,
+    conditionalSubOptionId: conditionalSubOptionId,
+    handleChangeConditionalOption: handleChangeConditionalOption,
+    handleChangeConditionalSubOption: handleChangeConditionalSubOption,
+    handleUpdateOption: handleUpdateOption
+  }), /*#__PURE__*/_react.default.createElement(_styles2.Dvider, null), /*#__PURE__*/_react.default.createElement(_styles2.ModifierOptionsContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MODIFIER_OPTIONS', 'Modifier options')), /*#__PURE__*/_react.default.createElement(_styles2.SubOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, null), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     header: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, null))), /*#__PURE__*/_react.default.createElement(_styles2.RightSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     header: true
-  }, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.Input, null)), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c = settingChangeState.changes) === null || _settingChangeState$c === void 0 ? void 0 : _settingChangeState$c.with_half_option) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c2 = settingChangeState.changes) === null || _settingChangeState$c2 === void 0 ? void 0 : _settingChangeState$c2.with_half_option : optionState === null || optionState === void 0 ? void 0 : (_optionState$option14 = optionState.option) === null || _optionState$option14 === void 0 ? void 0 : _optionState$option14.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+  }, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.Input, null)), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c = settingChangeState.changes) === null || _settingChangeState$c === void 0 ? void 0 : _settingChangeState$c.with_half_option) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c2 = settingChangeState.changes) === null || _settingChangeState$c2 === void 0 ? void 0 : _settingChangeState$c2.with_half_option : optionState === null || optionState === void 0 ? void 0 : (_optionState$option = optionState.option) === null || _optionState$option === void 0 ? void 0 : _optionState$option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     header: true
-  }, /*#__PURE__*/_react.default.createElement("label", null, t('HALF_PRICE', 'Half price')), /*#__PURE__*/_react.default.createElement(_styles.Input, null)), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c3 = settingChangeState.changes) === null || _settingChangeState$c3 === void 0 ? void 0 : _settingChangeState$c3.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c4 = settingChangeState.changes) === null || _settingChangeState$c4 === void 0 ? void 0 : _settingChangeState$c4.allow_suboption_quantity : optionState === null || optionState === void 0 ? void 0 : (_optionState$option15 = optionState.option) === null || _optionState$option15 === void 0 ? void 0 : _optionState$option15.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+  }, /*#__PURE__*/_react.default.createElement("label", null, t('HALF_PRICE', 'Half price')), /*#__PURE__*/_react.default.createElement(_styles.Input, null)), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c3 = settingChangeState.changes) === null || _settingChangeState$c3 === void 0 ? void 0 : _settingChangeState$c3.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c4 = settingChangeState.changes) === null || _settingChangeState$c4 === void 0 ? void 0 : _settingChangeState$c4.allow_suboption_quantity : optionState === null || optionState === void 0 ? void 0 : (_optionState$option2 = optionState.option) === null || _optionState$option2 === void 0 ? void 0 : _optionState$option2.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     header: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles.Input, null)), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     header: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('PRESELECT', 'Preselect'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, {
     header: true
-  }))), optionState === null || optionState === void 0 ? void 0 : (_optionState$option16 = optionState.option) === null || _optionState$option16 === void 0 ? void 0 : (_optionState$option17 = _optionState$option16.suboptions) === null || _optionState$option17 === void 0 ? void 0 : _optionState$option17.map(function (subOption) {
+  }))), optionState === null || optionState === void 0 ? void 0 : (_optionState$option3 = optionState.option) === null || _optionState$option3 === void 0 ? void 0 : (_optionState$option3$ = _optionState$option3.suboptions) === null || _optionState$option3$ === void 0 ? void 0 : _optionState$option3$.map(function (subOption) {
     return /*#__PURE__*/_react.default.createElement(_ProductExtraSuboption.ProductExtraSuboption, {
       key: subOption.id,
       subOption: subOption,
@@ -435,7 +304,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, {
     small: true
   }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-    primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option18 = optionState.option) === null || _optionState$option18 === void 0 ? void 0 : (_optionState$option19 = _optionState$option18.suboptions) === null || _optionState$option19 === void 0 ? void 0 : _optionState$option19.length) === 0
+    primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : (_optionState$option4$ = _optionState$option4.suboptions) === null || _optionState$option4$ === void 0 ? void 0 : _optionState$option4$.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     autoComplete: "off",
@@ -448,7 +317,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       required: t('NAME_REQUIRED', 'The name is required.')
     })
   }))), /*#__PURE__*/_react.default.createElement(_styles2.RightSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-    primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option20 = optionState.option) === null || _optionState$option20 === void 0 ? void 0 : (_optionState$option21 = _optionState$option20.suboptions) === null || _optionState$option21 === void 0 ? void 0 : _optionState$option21.length) === 0
+    primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option5 = optionState.option) === null || _optionState$option5 === void 0 ? void 0 : (_optionState$option5$ = _optionState$option5.suboptions) === null || _optionState$option5$ === void 0 ? void 0 : _optionState$option5$.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "price",
     placeholder: t('PRICE', 'Price'),
@@ -463,8 +332,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
 
       handleEnterAddSuboption(e);
     }
-  })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c5 = settingChangeState.changes) === null || _settingChangeState$c5 === void 0 ? void 0 : _settingChangeState$c5.with_half_option) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c6 = settingChangeState.changes) === null || _settingChangeState$c6 === void 0 ? void 0 : _settingChangeState$c6.with_half_option : optionState === null || optionState === void 0 ? void 0 : (_optionState$option22 = optionState.option) === null || _optionState$option22 === void 0 ? void 0 : _optionState$option22.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-    primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option23 = optionState.option) === null || _optionState$option23 === void 0 ? void 0 : (_optionState$option24 = _optionState$option23.suboptions) === null || _optionState$option24 === void 0 ? void 0 : _optionState$option24.length) === 0
+  })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c5 = settingChangeState.changes) === null || _settingChangeState$c5 === void 0 ? void 0 : _settingChangeState$c5.with_half_option) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c6 = settingChangeState.changes) === null || _settingChangeState$c6 === void 0 ? void 0 : _settingChangeState$c6.with_half_option : optionState === null || optionState === void 0 ? void 0 : (_optionState$option6 = optionState.option) === null || _optionState$option6 === void 0 ? void 0 : _optionState$option6.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+    primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option7 = optionState.option) === null || _optionState$option7 === void 0 ? void 0 : (_optionState$option7$ = _optionState$option7.suboptions) === null || _optionState$option7$ === void 0 ? void 0 : _optionState$option7$.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "half_price",
     placeholder: t('HALF_PRICE', 'Half price'),
@@ -479,8 +348,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
 
       handleEnterAddSuboption(e);
     }
-  })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c7 = settingChangeState.changes) === null || _settingChangeState$c7 === void 0 ? void 0 : _settingChangeState$c7.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c8 = settingChangeState.changes) === null || _settingChangeState$c8 === void 0 ? void 0 : _settingChangeState$c8.allow_suboption_quantity : optionState === null || optionState === void 0 ? void 0 : (_optionState$option25 = optionState.option) === null || _optionState$option25 === void 0 ? void 0 : _optionState$option25.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-    primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option26 = optionState.option) === null || _optionState$option26 === void 0 ? void 0 : (_optionState$option27 = _optionState$option26.suboptions) === null || _optionState$option27 === void 0 ? void 0 : _optionState$option27.length) === 0
+  })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c7 = settingChangeState.changes) === null || _settingChangeState$c7 === void 0 ? void 0 : _settingChangeState$c7.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c8 = settingChangeState.changes) === null || _settingChangeState$c8 === void 0 ? void 0 : _settingChangeState$c8.allow_suboption_quantity : optionState === null || optionState === void 0 ? void 0 : (_optionState$option8 = optionState.option) === null || _optionState$option8 === void 0 ? void 0 : _optionState$option8.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+    primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option9 = optionState.option) === null || _optionState$option9 === void 0 ? void 0 : (_optionState$option9$ = _optionState$option9.suboptions) === null || _optionState$option9$ === void 0 ? void 0 : _optionState$option9$.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "max",
     placeholder: t('MAX', 'Max'),

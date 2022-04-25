@@ -46,6 +46,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var productsRef = (0, _react.useRef)(null);
+
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
       isCollapse = _useInfoShare2[0].isCollapse,
@@ -66,7 +68,7 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     type: 1,
     title: t('ORDERING_STORE_APP', 'Store App _version_').replace('_version_', '2.0'),
     short_description: t('STORE_APP_SHORT_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.'),
-    long_description: t('STORE_APP_LONG_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.\n\nUse it Branded on your business at no cost.\nAll you need to do is use the Business Owners Credentials that you currently have on your Dashboard.'),
+    long_description: t('STORE_APP_LONG_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.<br /><br />Use it Branded on your business at no cost.<br />All you need to do is use the Business Owners Credentials that you currently have on your Dashboard.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CartPlusFill, null),
     image: theme.images.apps.storeApp,
     app_store: 'https://apps.apple.com/us/app/store-app-2-0/id1608192050',
@@ -76,7 +78,7 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     type: 1,
     title: t('ORDERING_DRIVER_APP', 'Driver App _version_').replace('_version_', '2.0'),
     short_description: t('DRIVER_APP_SHORT_DESCRIPTION', 'Use it Branded on your business at no cost.'),
-    long_description: t('DRIVER_APP_LONG_DESCRIPTION', 'Use it Branded on your business at no cost.\nAll you need to do is use the Driver Credentials that you currently have on your Dashboard.'),
+    long_description: t('DRIVER_APP_LONG_DESCRIPTION', 'Use it Branded on your business at no cost.<br />All you need to do is use the Driver Credentials that you currently have on your Dashboard.'),
     icon: /*#__PURE__*/_react.default.createElement("img", {
       src: theme.images.icons.delivery,
       alt: "delivery app icon"
@@ -89,7 +91,7 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     type: 1,
     title: t('ORDERING_POS', 'POS _version_').replace('_version_', '2.0'),
     short_description: t('POS_APP_SHORT_DESCRIPTION', 'Create orders in your system without the hassle and auto-complete information.'),
-    long_description: t('POS_APP_LONG_DESCRIPTION', 'POS Ordering System: Take orders on the phone easily\nCreate orders in your system without the hassle and auto-complete information.\nSave customer info with their number'),
+    long_description: t('POS_APP_LONG_DESCRIPTION', 'POS Ordering System: Take orders on the phone easily<br />Create orders in your system without the hassle and auto-complete information.<br />Save customer info with their number'),
     icon: /*#__PURE__*/_react.default.createElement("img", {
       src: theme.images.icons.posTerminal,
       alt: "pos app icon"
@@ -102,7 +104,7 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     type: 1,
     title: t('ORDERING_KIOSK', 'Ordering Kiosk _version_').replace('_version_', '2.0'),
     short_description: t('KIOSK_APP_SHORT_DESCRIPTION', 'Ordering Kiosk completes that final step for each sale'),
-    long_description: t('KIOSK_APP_LONG_DESCRIPTION', 'Did you know that 7 out of 10 customers prefer to make their orders themselves?\nOrdering Kiosk completes that final step for each sale.'),
+    long_description: t('KIOSK_APP_LONG_DESCRIPTION', 'Did you know that 7 out of 10 customers prefer to make their orders themselves?<br />Ordering Kiosk completes that final step for each sale.'),
     icon: /*#__PURE__*/_react.default.createElement("img", {
       src: theme.images.icons.poster,
       alt: "kiosk app icon"
@@ -114,8 +116,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     key: 'call_center',
     type: 2,
     title: t('ORDERING_CALL_CENTER', 'Call Center _version_').replace('_version_', '2.0'),
-    short_description: t('CALL_CENTER_SHORT_DESCRIPTION', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
-    long_description: t('CALL_CENTER_LONG_DESCRIPTION', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+    short_description: t('CALL_CENTER_SHORT_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
+    long_description: t('CALL_CENTER_LONG_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null),
     image: theme.images.apps.callCenterApp,
     web_url: 'https://react-call-center.tryordering.com/'
@@ -133,7 +135,24 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     setSelectedProduct(null);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  var handleClickOutside = function handleClickOutside(e) {
+    var _productsRef$current;
+
+    var isInvalid = e.target.closest('.purchased-product-row') || !((_productsRef$current = productsRef.current) !== null && _productsRef$current !== void 0 && _productsRef$current.contains(e.target));
+    if (isInvalid) return;
+    handleCloseProduct();
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!isOpenProduct) return;
+    window.addEventListener('mouseup', handleClickOutside);
+    return function () {
+      window.removeEventListener('mouseup', handleClickOutside);
+    };
+  }, [isOpenProduct]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductsListContainer, {
+    ref: productsRef
+  }, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
@@ -155,19 +174,25 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
   }), /*#__PURE__*/_react.default.createElement("span", null, "Android"))))), productItems.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ProductTboday, {
       key: product.key,
+      className: "purchased-product-row",
+      active: product.key === (selectedProduct === null || selectedProduct === void 0 ? void 0 : selectedProduct.key),
       onClick: function onClick(e) {
         return handleOpenProductDetails(e, product);
       }
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.AppImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
       src: product.image,
       alt: ""
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.AppDescriptionWarpper, null, /*#__PURE__*/_react.default.createElement("h3", null, product.title), /*#__PURE__*/_react.default.createElement("p", null, product.short_description))), product.type === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, {
+    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.AppDescriptionWarpper, null, /*#__PURE__*/_react.default.createElement("h3", null, product.title), /*#__PURE__*/_react.default.createElement("div", {
+      dangerouslySetInnerHTML: {
+        __html: product.short_description
+      }
+    }))), product.type === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, {
       className: "purchase-btn"
     }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
       color: "primary",
       borderRadius: "8px",
       onClick: function onClick() {
-        return window.open("".concat(product.google_play_store), '_blank');
+        return window.open("".concat(product.app_store), '_blank');
       }
     }, t('PURCHASE_NOW', 'Purchase now')))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, {
       className: "purchase-btn"
@@ -175,7 +200,7 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
       color: "primary",
       borderRadius: "8px",
       onClick: function onClick() {
-        return window.open("".concat(product.app_store), '_blank');
+        return window.open("".concat(product.google_play_store), '_blank');
       }
     }, t('PURCHASE_NOW', 'Purchase now'))))), product.type === 2 && /*#__PURE__*/_react.default.createElement("td", {
       colSpan: 2
@@ -193,7 +218,12 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     onClose: function onClose() {
       return handleCloseProduct();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.ProductDetailsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, selectedProduct.title), /*#__PURE__*/_react.default.createElement("p", null, selectedProduct.long_description), /*#__PURE__*/_react.default.createElement(_styles2.DownloadLinksContainer, null, selectedProduct.type === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DownloadLink, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.ProductDetailsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, selectedProduct.title), /*#__PURE__*/_react.default.createElement("div", {
+    className: "description",
+    dangerouslySetInnerHTML: {
+      __html: selectedProduct.long_description
+    }
+  }), /*#__PURE__*/_react.default.createElement(_styles2.DownloadLinksContainer, null, selectedProduct.type === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DownloadLink, {
     href: selectedProduct.app_store,
     target: "_blank"
   }, /*#__PURE__*/_react.default.createElement("img", {

@@ -137,7 +137,8 @@ var OrdersListing = function OrdersListing(props) {
     isTourOpen: isTourOpen,
     handleOpenTour: handleOpenTour,
     setIsTourOpen: setIsTourOpen,
-    slaSettingTime: slaSettingTime
+    slaSettingTime: slaSettingTime,
+    groupStatus: groupStatus
   }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
     isMessagesView: isMessagesView,
     orderList: orderList,

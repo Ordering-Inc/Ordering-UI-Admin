@@ -42,7 +42,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersDashboardSLAControls = function OrdersDashboardSLAControls(props) {
   var setTimeStatus = props.setTimeStatus;
 
-  var _useState = (0, _react.useState)(null),
+  var _useState = (0, _react.useState)('default'),
       _useState2 = _slicedToArray(_useState, 2),
       defaultOptionValue = _useState2[0],
       setDefaultOptionValue = _useState2[1];
@@ -57,6 +57,14 @@ var OrdersDashboardSLAControls = function OrdersDashboardSLAControls(props) {
       t = _useLanguage2[1];
 
   var timeStatus = [{
+    value: 'default',
+    name: t('SLA_S', 'SLA’s'),
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      noPadding: true
+    }, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
+      timeState: ""
+    }), /*#__PURE__*/_react.default.createElement("p", null, t('SLA_S', 'SLA’s')))
+  }, {
     value: 'in_time',
     name: t('OK', 'Ok'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
@@ -84,6 +92,12 @@ var OrdersDashboardSLAControls = function OrdersDashboardSLAControls(props) {
 
   var changeOrderTimeStatus = function changeOrderTimeStatus(val) {
     setDefaultOptionValue(val);
+
+    if (val === 'default') {
+      setTimeStatus(null);
+      return;
+    }
+
     setTimeStatus(val);
   };
 
