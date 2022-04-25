@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ShowInCartContainer = exports.SelectWrapper = exports.SectionTitle = exports.RulesContainer = exports.Option = exports.FormInput = exports.FormInnerContainer = exports.DiscountOption = exports.DiscountContainer = exports.CouponHeader = exports.CouponContent = exports.CouponContainer = exports.CouponCodeContainer = exports.CondtionItem = exports.AutomaticDiscountEnableWrapper = void 0;
+exports.ShowInCartContainer = exports.SelectWrapper = exports.SectionTitle = exports.RulesContainer = exports.PublicEnableWrapper = exports.Option = exports.FormInput = exports.FormInnerContainer = exports.DiscountOption = exports.DiscountContainer = exports.CouponHeader = exports.CouponContent = exports.CouponContainer = exports.CouponCodeContainer = exports.CondtionItem = exports.AutomaticEnableWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -70,7 +70,7 @@ var CouponContent = _styledComponents.default.div(_templateObject15 || (_templat
 
 exports.CouponContent = CouponContent;
 
-var CouponCodeContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-top: 26px;\n  margin-bottom: 17px;\n  display: flex;\n  flex-direction: column;\n\n  ", "\n\n  label {\n    font-size: 14px;\n    margin-bottom: 8px;\n  }\n"])), function (props) {
+var CouponCodeContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n  margin-bottom: 17px;\n  display: flex;\n  flex-direction: column;\n\n  ", "\n\n  label {\n    font-size: 14px;\n    margin-bottom: 8px;\n  }\n"])), function (props) {
   var _props$theme4;
 
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "])));
@@ -133,14 +133,12 @@ var DiscountContainer = _styledComponents.default.div(_templateObject26 || (_tem
 
 exports.DiscountContainer = DiscountContainer;
 
-var AutomaticDiscountEnableWrapper = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 15px;\n  ", "\n\n  span {\n    font-size: 14px;\n    ", "\n  }\n"])), function (props) {
+var AutomaticEnableWrapper = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 15px;\n  margin-top: 15px;\n\n  span {\n    font-size: 14px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme7;
 
-  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "])));
-}, function (props) {
-  var _props$theme8;
-
-  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
+  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
 });
 
-exports.AutomaticDiscountEnableWrapper = AutomaticDiscountEnableWrapper;
+exports.AutomaticEnableWrapper = AutomaticEnableWrapper;
+var PublicEnableWrapper = (0, _styledComponents.default)(ShowInCartContainer)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  margin-left: 0;\n"])));
+exports.PublicEnableWrapper = PublicEnableWrapper;

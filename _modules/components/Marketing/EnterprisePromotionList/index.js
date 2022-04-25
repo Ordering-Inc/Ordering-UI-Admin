@@ -60,7 +60,6 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       promotionListState = props.promotionListState,
       paginationProps = props.paginationProps,
       getPromotions = props.getPromotions,
-      setPaginationProps = props.setPaginationProps,
       selectedPromotion = props.selectedPromotion,
       handleOpenDetails = props.handleOpenDetails,
       dataSelected = props.dataSelected,
@@ -142,9 +141,6 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
 
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(paginationProps.from / pageSize);
-    setPaginationProps(_objectSpread(_objectSpread({}, paginationProps), {}, {
-      pageSize: pageSize
-    }));
     getPromotions(expectedPage, pageSize);
   };
 
