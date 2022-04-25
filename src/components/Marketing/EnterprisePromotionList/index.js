@@ -32,7 +32,6 @@ export const EnterprisePromotionList = (props) => {
     promotionListState,
     paginationProps,
     getPromotions,
-    setPaginationProps,
     selectedPromotion,
     handleOpenDetails,
     dataSelected,
@@ -90,7 +89,6 @@ export const EnterprisePromotionList = (props) => {
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
-    setPaginationProps({ ...paginationProps, pageSize: pageSize })
     getPromotions(expectedPage, pageSize)
   }
 
