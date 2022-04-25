@@ -9,6 +9,7 @@ import { OrderDashboardSLASetting } from '../OrderDashboardSLASetting'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   OrderContentHeaderContainer,
@@ -41,6 +42,7 @@ export const OrdersContentHeader = (props) => {
     setSlaSettingTime
   } = props
 
+  const { width } = useWindowSize()
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
@@ -76,7 +78,7 @@ export const OrdersContentHeader = (props) => {
             <HeaderTitle>
               {title}
             </HeaderTitle>
-            {selectedOrderIds && (
+            {selectedOrderIds && width > 768 && (
               <OverlayTrigger
                 placement='bottom'
                 overlay={
