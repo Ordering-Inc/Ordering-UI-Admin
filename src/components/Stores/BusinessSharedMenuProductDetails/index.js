@@ -33,14 +33,14 @@ const BusinessSharedMenuProductDetailsUI = (props) => {
 
   const showExtra = (extra) => {
     let valid = false
-    if (extra.name??.toLowerCase().includes(searchValue)) valid = true
+    if (extra.name?.toLowerCase().includes(searchValue)) valid = true
     else {
       extra.options.forEach(option => {
-        if (option.name??.toLowerCase().includes(searchValue)) {
+        if (option.name?.toLowerCase().includes(searchValue)) {
           valid = true
         }
         option.suboptions.forEach(suboption => {
-          if (suboption.name??.toLowerCase().includes(searchValue)) {
+          if (suboption.name?.toLowerCase().includes(searchValue)) {
             valid = true
           }
         })
@@ -51,10 +51,10 @@ const BusinessSharedMenuProductDetailsUI = (props) => {
 
   const showOption = (option) => {
     let valid = false
-    if (option.name??.toLowerCase().includes(searchValue)) valid = true
+    if (option.name?.toLowerCase().includes(searchValue)) valid = true
     else {
       option.suboptions.forEach(suboption => {
-        if (suboption.name??.toLowerCase().includes(searchValue)) {
+        if (suboption.name?.toLowerCase().includes(searchValue)) {
           valid = true
         }
       })
@@ -64,7 +64,7 @@ const BusinessSharedMenuProductDetailsUI = (props) => {
 
   const showSuboption = (suboption) => {
     let valid = false
-    if (suboption.name??.toLowerCase().includes(searchValue)) valid = true
+    if (suboption.name?.toLowerCase().includes(searchValue)) valid = true
     return valid
   }
 
@@ -127,7 +127,7 @@ const BusinessSharedMenuProductDetailsUI = (props) => {
               placeholder={t('SEARCH', 'Search')}
               isCustomLayout
               search={searchValue}
-              onSearch={val => setSearchValue(val??.toLowerCase())}
+              onSearch={val => setSearchValue(val?.toLowerCase())}
             />
           </SearchbarWrapper>
           {productState.product.extras.map(extra => (

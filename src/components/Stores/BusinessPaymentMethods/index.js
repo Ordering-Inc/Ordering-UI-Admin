@@ -186,7 +186,7 @@ const BusinessPaymentMethodsUI = (props) => {
           ))
         ) : (
           <PaymethodListWrapper>
-            {paymethodsList.paymethods.filter(paymethod => paymethod?.name??.toLowerCase().includes(searchValue?.toLowerCase())).map(paymethod => (
+            {paymethodsList.paymethods.filter(paymethod => paymethod?.name?.toLowerCase().includes(searchValue?.toLowerCase())).map(paymethod => (
               <PaymethodOptionContainer
                 key={paymethod.id}
                 onClick={e => handleOpenEdit(e, paymethod.id, paymethod.gateway)}
