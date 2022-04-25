@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
@@ -22,6 +22,7 @@ import {
 export const FreeProductsList = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
+  const productsRef = useRef(null)
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [isOpenProduct, setIsOpenProduct] = useState(false)
@@ -32,7 +33,7 @@ export const FreeProductsList = (props) => {
       type: 1,
       title: t('ORDERING_STORE_APP', 'Store App _version_').replace('_version_', '2.0'),
       short_description: t('STORE_APP_SHORT_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.'),
-      long_description: t('STORE_APP_LONG_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.\n\nUse it Branded on your business at no cost.\nAll you need to do is use the Business Owners Credentials that you currently have on your Dashboard.'),
+      long_description: t('STORE_APP_LONG_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.<br /><br />Use it Branded on your business at no cost.<br />All you need to do is use the Business Owners Credentials that you currently have on your Dashboard.'),
       icon: <CartPlusFill />,
       image: theme.images.apps.storeApp,
       app_store: 'https://apps.apple.com/us/app/store-app-2-0/id1608192050',
@@ -43,7 +44,7 @@ export const FreeProductsList = (props) => {
       type: 1,
       title: t('ORDERING_DRIVER_APP', 'Driver App _version_').replace('_version_', '2.0'),
       short_description: t('DRIVER_APP_SHORT_DESCRIPTION', 'Use it Branded on your business at no cost.'),
-      long_description: t('DRIVER_APP_LONG_DESCRIPTION', 'Use it Branded on your business at no cost.\nAll you need to do is use the Driver Credentials that you currently have on your Dashboard.'),
+      long_description: t('DRIVER_APP_LONG_DESCRIPTION', 'Use it Branded on your business at no cost.<br />All you need to do is use the Driver Credentials that you currently have on your Dashboard.'),
       icon: <img src={theme.images.icons.delivery} alt='delivery app icon' />,
       image: theme.images.apps.driverApp,
       app_store: 'https://apps.apple.com/us/app/driver-app-2-0/id1606257815',
@@ -54,7 +55,7 @@ export const FreeProductsList = (props) => {
       type: 1,
       title: t('ORDERING_POS', 'POS _version_').replace('_version_', '2.0'),
       short_description: t('POS_APP_SHORT_DESCRIPTION', 'Create orders in your system without the hassle and auto-complete information.'),
-      long_description: t('POS_APP_LONG_DESCRIPTION', 'POS Ordering System: Take orders on the phone easily\nCreate orders in your system without the hassle and auto-complete information.\nSave customer info with their number'),
+      long_description: t('POS_APP_LONG_DESCRIPTION', 'POS Ordering System: Take orders on the phone easily<br />Create orders in your system without the hassle and auto-complete information.<br />Save customer info with their number'),
       icon: <img src={theme.images.icons.posTerminal} alt='pos app icon' />,
       image: theme.images.apps.posApp,
       app_store: 'https://apps.apple.com/us/app/ordering-pos-2-0/id1609520468',
@@ -65,7 +66,7 @@ export const FreeProductsList = (props) => {
       type: 1,
       title: t('ORDERING_KIOSK', 'Ordering Kiosk _version_').replace('_version_', '2.0'),
       short_description: t('KIOSK_APP_SHORT_DESCRIPTION', 'Ordering Kiosk completes that final step for each sale'),
-      long_description: t('KIOSK_APP_LONG_DESCRIPTION', 'Did you know that 7 out of 10 customers prefer to make their orders themselves?\nOrdering Kiosk completes that final step for each sale.'),
+      long_description: t('KIOSK_APP_LONG_DESCRIPTION', 'Did you know that 7 out of 10 customers prefer to make their orders themselves?<br />Ordering Kiosk completes that final step for each sale.'),
       icon: <img src={theme.images.icons.poster} alt='kiosk app icon' />,
       image: theme.images.apps.kioskApp,
       app_store: 'https://apps.apple.com/us/app/ordering-kiosk-2-0/id1609314960',
@@ -75,8 +76,8 @@ export const FreeProductsList = (props) => {
       key: 'call_center',
       type: 2,
       title: t('ORDERING_CALL_CENTER', 'Call Center _version_').replace('_version_', '2.0'),
-      short_description: t('CALL_CENTER_SHORT_DESCRIPTION', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
-      long_description: t('CALL_CENTER_LONG_DESCRIPTION', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+      short_description: t('CALL_CENTER_SHORT_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
+      long_description: t('CALL_CENTER_LONG_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
       icon: <Headset />,
       image: theme.images.apps.callCenterApp,
       web_url: 'https://react-call-center.tryordering.com/'
@@ -95,9 +96,23 @@ export const FreeProductsList = (props) => {
     setSelectedProduct(null)
   }
 
+  const handleClickOutside = (e) => {
+    const isInvalid = e.target.closest('.free-product-row') || !productsRef.current?.contains(e.target)
+    if (isInvalid) return
+    handleCloseProduct()
+  }
+
+  useEffect(() => {
+    if (!isOpenProduct) return
+    window.addEventListener('mouseup', handleClickOutside)
+    return () => {
+      window.removeEventListener('mouseup', handleClickOutside)
+    }
+  }, [isOpenProduct])
+
   return (
     <>
-      <FreeProductsListContainer>
+      <FreeProductsListContainer ref={productsRef}>
         <HeaderTitleContainer>
           {isCollapse && (
             <IconButton
@@ -124,6 +139,7 @@ export const FreeProductsList = (props) => {
           {productItems.map(product => (
             <ProductRow
               key={product.key}
+              className='free-product-row'
               active={product.key === selectedProduct?.key}
               onClick={(e) => handleOpenProductDetails(e, product)}
             >
@@ -132,7 +148,7 @@ export const FreeProductsList = (props) => {
               </AppImageWrapper>
               <AppDescriptionWarpper>
                 <h3>{product.title}</h3>
-                <p>{product.short_description}</p>
+                <div dangerouslySetInnerHTML={{ __html: product.short_description }} />
               </AppDescriptionWarpper>
               <AppDownloadLinksWrapper>
                 {product.type === 1 && (
@@ -162,7 +178,7 @@ export const FreeProductsList = (props) => {
         >
           <ProductDetailsContainer>
             <h1>{selectedProduct.title}</h1>
-            <p>{selectedProduct.long_description}</p>
+            <div className='description' dangerouslySetInnerHTML={{ __html: selectedProduct.long_description }} />
             <DownloadLinksContainer>
               {selectedProduct.type === 1 && (
                 <>
