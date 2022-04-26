@@ -31,10 +31,6 @@ export const PhotoWrapper = styled.div`
     height: 40px;
     border-radius: 50%;
   }
-
-  @media print {
-    display: none;
-  }
 `
 
 const PhotoStyled = styled.div`

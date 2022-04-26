@@ -7856,7 +7856,7 @@ optionator@^0.8.3:
 
 "ordering-components-admin@github:Ordering-Inc/ordering-components-admin#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/8fd162cfd7aaa6fd3a30cd7753367bc45b2786c6"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/bd1343610072e62c1dd44d35db0696e1858f3cdd"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -8453,7 +8453,7 @@ prop-types-extra@^1.1.0:
     react-is "^16.3.2"
     warning "^4.0.0"
 
-prop-types@15, prop-types@^15.5.10, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15, prop-types@^15.5.10, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8857,6 +8857,13 @@ react-summernote@^2.0.2:
     codemirror "^5.26.0"
     prop-types "^15.5.10"
     summernote "^0.8.15"
+
+react-to-print@^2.14.6:
+  version "2.14.6"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.6.tgz#a6fddfaee207e1093e87b5eceb5dfca46b5922cf"
+  integrity sha512-LlhbfNAzPm6AOGmCcsVzgyDIBFs5lTXOMpRL+IUmZRZU04i79rujEj5nXKmbRTPTZV8ezLIHSY6ecj4y0lD5iA==
+  dependencies:
+    prop-types "^15.8.1"
 
 react-toastify@^6.1.0:
   version "6.2.0"

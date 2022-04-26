@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useSession, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -12,6 +12,7 @@ import { OrderContactInformation } from '../OrderContactInformation'
 import { XLg } from 'react-bootstrap-icons'
 import { NotFoundSource, Modal } from '../../Shared'
 import { IconButton } from '../../../styles'
+import { OrderToPrint } from '../OrderToPrint'
 
 import {
   Container,
@@ -52,6 +53,7 @@ const OrderDetailsUI = (props) => {
   const [showOption, setShowOption] = useState(null)
   const [{ parseDate }] = useUtils()
   const [{ user }] = useSession()
+  const printRef = useRef()
 
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -309,6 +311,7 @@ const OrderDetailsUI = (props) => {
             isTourOpen={isTourOpen}
             currentTourStep={currentTourStep}
             setIsTourOpen={setIsTourOpen}
+            printRef={printRef}
           />
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
@@ -487,6 +490,17 @@ const OrderDetailsUI = (props) => {
           content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
           btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
           onClickButton={handleBackRedirect}
+        />
+      )}
+
+      {order && Object.keys(order).length > 0 && !loading && (
+        <OrderToPrint
+          ref={printRef}
+          order={order}
+          placeSpotEnabled={placeSpotEnabled}
+          getOrderStatus={getOrderStatus}
+          getLogisticTag={getLogisticTag}
+          getPriorityTag={getPriorityTag}
         />
       )}
     </Container>
