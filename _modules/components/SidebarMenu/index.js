@@ -102,12 +102,17 @@ var SidebarMenu = function SidebarMenu(props) {
   ];
   var storesSubMenus = [{
     id: 1,
-    title: t('STORES_LIST', 'Stores list'),
+    title: t('STORES', 'Stores'),
     pageName: 'businesses',
     url: '/stores/list'
   }, {
     id: 2,
-    title: t('BRAND_MANAGER', 'Brand manager'),
+    title: t('PRODUCTS', 'Products'),
+    pageName: 'store',
+    url: '/stores/products'
+  }, {
+    id: 3,
+    title: t('BRANDS', 'Brands'),
     pageName: 'brand',
     url: '/stores/brand'
   }];
@@ -303,7 +308,7 @@ var SidebarMenu = function SidebarMenu(props) {
 
     return !((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user7 = sessionState.user) === null || _sessionState$user7 === void 0 ? void 0 : _sessionState$user7.level) === 2 && item.pageName === 'brand') && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
-      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
+      active: location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
       onClick: function onClick() {
         return handleGoToPage({
           page: item.pageName

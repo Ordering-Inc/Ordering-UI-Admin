@@ -9,8 +9,6 @@ exports.BusinessSummary = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouter = require("react-router");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
@@ -75,8 +73,11 @@ var BusinessSummary = function BusinessSummary(props) {
       _useUtils2 = _slicedToArray(_useUtils, 1),
       optimizeImage = _useUtils2[0].optimizeImage;
 
+  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var theme = (0, _styledComponents.useTheme)();
-  var history = (0, _reactRouter.useHistory)();
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -100,7 +101,12 @@ var BusinessSummary = function BusinessSummary(props) {
   var handleOpenCategory = function handleOpenCategory() {
     var _businessState$busine;
 
-    history.push("/stores/list/".concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.slug));
+    events.emit('go_to_page', {
+      page: 'store',
+      params: {
+        store: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.slug
+      }
+    });
   };
 
   var itemsExcluded = ['publishing'];
