@@ -26,7 +26,7 @@ export const DriversGroupCompanies = (props) => {
   useEffect(() => {
     let _filteredCompanies = []
     if (searchValue) {
-      _filteredCompanies = companies.filter(company => company?.name.toLowerCase().includes(searchValue.toLowerCase()))
+      _filteredCompanies = companies.filter(company => company?.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       _filteredCompanies = [...companies]
     }

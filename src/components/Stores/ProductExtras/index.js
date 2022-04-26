@@ -75,7 +75,7 @@ const ProductExtrasUI = (props) => {
   useEffect(() => {
     let _extraIds = []
     if (productState.product?.extras) {
-      _extraIds = productState.product.extras.reduce((ids, extra) => [...ids, extra.id], [])
+      _extraIds = productState.product.extras?.reduce((ids, extra) => [...ids, extra.id], [])
     }
     setExtraIds(_extraIds)
   }, [])

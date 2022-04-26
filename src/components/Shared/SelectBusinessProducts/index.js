@@ -51,7 +51,7 @@ const CategoryTreeNode = (props) => {
 
   const isCheckedCategory = () => {
     if (category?.products) {
-      const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
+      const productsIds = category.products?.reduce((ids, product) => [...ids, product.id], [])
       return productsIds.every(id => !!selectedProductsIds[id] && selectedProductsIds[id].include === include)
     } else {
       return false
@@ -69,7 +69,7 @@ const CategoryTreeNode = (props) => {
   }
 
   const handleChangeSelectCategory = (include) => {
-    const productsIds = category.products.reduce((ids, product) => [...ids, product.id], [])
+    const productsIds = category.products?.reduce((ids, product) => [...ids, product.id], [])
     const everyContain = productsIds.every(id => !!selectedProductsIds[id] && selectedProductsIds[id].include === include)
     let _selectedProductsIds = {}
     _selectedProductsIds = {
@@ -81,7 +81,7 @@ const CategoryTreeNode = (props) => {
       })
       setSelectedProductsIds(_selectedProductsIds)
     } else {
-      const _keys = Object.keys(selectedProductsIds).reduce((ids, id) => {
+      const _keys = Object.keys(selectedProductsIds)?.reduce((ids, id) => {
         ids.push(parseInt(id))
         return ids
       }, [])
@@ -171,11 +171,11 @@ const SelectBusinessProductsUI = (props) => {
       return (
         categories?.length > 0 && categories?.forEach(category => {
           let productIds = []
-          const _productIds = category.products.reduce((ids, product) => [...ids, product.id], [])
+          const _productIds = category.products?.reduce((ids, product) => [...ids, product.id], [])
           productIds = [...productIds, ..._productIds]
           if (category?.subcategories?.length) {
             category.subcategories.forEach(function iterate (category) {
-              const _productIds = category.products.reduce((ids, product) => [...ids, product.id], [])
+              const _productIds = category.products?.reduce((ids, product) => [...ids, product.id], [])
               productIds = [...productIds, ..._productIds]
               Array.isArray(category?.subcategories) && category.subcategories.forEach(iterate)
             })
