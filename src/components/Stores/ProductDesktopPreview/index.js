@@ -291,7 +291,7 @@ export const ProductDesktopPreview = (props) => {
                 {product?.extras && (
                   <div id='extra'>
                     {
-                      product?.extras.map(extra => extra.options.map(option => {
+                      product?.extras?.map(extra => extra?.options?.map(option => {
                         return (
                           <div key={option?.id}>
                             {
