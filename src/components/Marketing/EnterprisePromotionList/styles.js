@@ -49,9 +49,11 @@ export const PromotionListTable = styled.table`
     border-bottom: 1px solid ${props => props.theme.colors.disabled};
     tr {
       th {
-        position: sticky;
-        top: 0px;
-        z-index: 100;
+        ${({ noFixedHeader }) => !noFixedHeader && css`
+          position: sticky;
+          top: 0px;
+          z-index: 100;
+        `}
         background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
       }
     }
