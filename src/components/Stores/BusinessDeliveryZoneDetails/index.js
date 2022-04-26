@@ -21,6 +21,7 @@ import {
 const BusinessDeliveryZoneDetailsUI = (props) => {
   const {
     business,
+    businessZones,
     zoneState,
     formState,
     handleChangeInput,
@@ -88,6 +89,7 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
           <BusinessDeliveryZoneInformation
             business={business}
             zone={zoneState.zone}
+            businessZones={businessZones}
             formState={formState}
             handleChangeInput={handleChangeInput}
             handleChangeFormState={handleChangeFormState}
