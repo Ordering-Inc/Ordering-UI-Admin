@@ -189,6 +189,9 @@ const BusinessProductsListingUI = (props) => {
   useEffect(() => {
     if (!slug) {
       setSelectedBusiness(null)
+      setOpenSidebar(null)
+      handleChangeSearch(null)
+      setViewMethod('list')
     }
   }, [slug])
 
@@ -263,7 +266,7 @@ const BusinessProductsListingUI = (props) => {
             />
           </ActionsGroup>
         </HeaderContainer>
-        <CategoryProductsContent>
+        <CategoryProductsContent isDisabled={!slug}>
           <CategoryListContainer ref={categoryListRef}>
             {
               <BusinessProductsCategories

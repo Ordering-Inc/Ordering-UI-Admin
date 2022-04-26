@@ -78,6 +78,10 @@ export const CategoryProductsContent = styled.div`
   margin-top: 50px;
   min-height: calc(100% - 150px);
 
+  ${({ isDisabled }) => isDisabled && css`
+    pointer-events: none;
+  `}
+
   @media (max-width: 768px) {
     flex-direction: column;
   }
