@@ -89,7 +89,7 @@ export const DropdownOptionList = (props) => {
 
   useEffect(() => {
     if (countriesState.loading) return
-    const _cities = countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], [])
+    const _cities = countriesState.countries?.reduce((_cities, country) => [..._cities, ...country?.cities], [])
     setCities(_cities)
   }, [countriesState])
 
