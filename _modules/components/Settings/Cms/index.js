@@ -139,7 +139,9 @@ var CmsUI = function CmsUI(props) {
 
     if (searchValue) {
       pages = pagesListState.pages.filter(function (page) {
-        return page.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _page$name;
+
+        return (_page$name = page.name) === null || _page$name === void 0 ? void 0 : _page$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       pages = _toConsumableArray(pagesListState.pages);

@@ -145,7 +145,9 @@ var DropdownOptionList = function DropdownOptionList(props) {
 
     if (searchValue) {
       dropdownOptions = dropdownOptionsState.options.filter(function (option) {
-        return option.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _option$name;
+
+        return (_option$name = option.name) === null || _option$name === void 0 ? void 0 : _option$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       dropdownOptions = _toConsumableArray(dropdownOptionsState.options);
@@ -164,9 +166,11 @@ var DropdownOptionList = function DropdownOptionList(props) {
     setCurrentDropdownOptions(_currentDropdownOptions);
   }, [dropdownOptionsState, currentPage, dropdownOptionsPerPage, searchValue]);
   (0, _react.useEffect)(function () {
+    var _countriesState$count;
+
     if (countriesState.loading) return;
 
-    var _cities = countriesState.countries.reduce(function (_cities, country) {
+    var _cities = (_countriesState$count = countriesState.countries) === null || _countriesState$count === void 0 ? void 0 : _countriesState$count.reduce(function (_cities, country) {
       return [].concat(_toConsumableArray(_cities), _toConsumableArray(country === null || country === void 0 ? void 0 : country.cities));
     }, []);
 

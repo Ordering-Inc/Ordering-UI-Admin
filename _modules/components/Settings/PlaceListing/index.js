@@ -74,6 +74,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PlaceListingUI = function PlaceListingUI(props) {
+  var _countriesState$count2, _countriesState$count3;
+
   var countriesState = props.countriesState,
       cityManagerList = props.cityManagerList,
       handleChangeCountryName = props.handleChangeCountryName,
@@ -178,9 +180,11 @@ var PlaceListingUI = function PlaceListingUI(props) {
   };
 
   (0, _react.useEffect)(function () {
+    var _countriesState$count;
+
     if (countriesState.loading) return;
 
-    var _cities = countriesState.countries.reduce(function (_cities, country) {
+    var _cities = (_countriesState$count = countriesState.countries) === null || _countriesState$count === void 0 ? void 0 : _countriesState$count.reduce(function (_cities, country) {
       return [].concat(_toConsumableArray(_cities), _toConsumableArray(country === null || country === void 0 ? void 0 : country.cities));
     }, []);
 
@@ -188,7 +192,9 @@ var PlaceListingUI = function PlaceListingUI(props) {
 
     if (searchValue) {
       cities = _cities.filter(function (city) {
-        return city.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _city$name;
+
+        return (_city$name = city.name) === null || _city$name === void 0 ? void 0 : _city$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       cities = _toConsumableArray(_cities);
@@ -320,12 +326,12 @@ var PlaceListingUI = function PlaceListingUI(props) {
     onClick: function onClick() {
       return handleAllCheckboxClick();
     },
-    active: !countriesState.loading && selectedCityList.length === countriesState.countries.reduce(function (_cities, country) {
+    active: !countriesState.loading && selectedCityList.length === ((_countriesState$count2 = countriesState.countries) === null || _countriesState$count2 === void 0 ? void 0 : _countriesState$count2.reduce(function (_cities, country) {
       return [].concat(_toConsumableArray(_cities), _toConsumableArray(country === null || country === void 0 ? void 0 : country.cities));
-    }, []).length
-  }, !countriesState.loading && selectedCityList.length === countriesState.countries.reduce(function (_cities, country) {
+    }, []).length)
+  }, !countriesState.loading && selectedCityList.length === ((_countriesState$count3 = countriesState.countries) === null || _countriesState$count3 === void 0 ? void 0 : _countriesState$count3.reduce(function (_cities, country) {
     return [].concat(_toConsumableArray(_cities), _toConsumableArray(country === null || country === void 0 ? void 0 : country.cities));
-  }, []).length ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('CITY', 'City'))), /*#__PURE__*/_react.default.createElement(_styles2.CountryName, {
+  }, []).length) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('CITY', 'City'))), /*#__PURE__*/_react.default.createElement(_styles2.CountryName, {
     isHeader: true
   }, t('COUNTRY', 'Country')), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, {
     isHeader: true

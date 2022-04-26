@@ -184,7 +184,7 @@ var ReportsOrderTypeFilter = function ReportsOrderTypeFilter(props) {
   (0, _react.useEffect)(function () {
     var _filterList$delivery_;
 
-    var _orderTypeIds = orderTypes.reduce(function (prev, cur) {
+    var _orderTypeIds = orderTypes === null || orderTypes === void 0 ? void 0 : orderTypes.reduce(function (prev, cur) {
       return [].concat(_toConsumableArray(prev), [cur.value]);
     }, []);
 

@@ -29,6 +29,8 @@ var _InfoShareContext = require("../../../contexts/InfoShareContext");
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -69,6 +71,9 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
       setTimeStatus = props.setTimeStatus,
       setSlaSettingTime = props.setSlaSettingTime;
 
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+      width = _useWindowSize.width;
+
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
@@ -103,7 +108,7 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitle, null, title), selectedOrderIds && /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitle, null, title), selectedOrderIds && width > 768 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
     placement: "bottom",
     overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, t('START_TUTORIAL', 'Start tutorial'))
   }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {

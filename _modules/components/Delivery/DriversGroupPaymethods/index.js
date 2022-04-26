@@ -71,7 +71,9 @@ var DriversGroupPaymethods = function DriversGroupPaymethods(props) {
 
     if (searchValue) {
       _filteredPaymethods = paymethods.filter(function (paymethod) {
-        return paymethod === null || paymethod === void 0 ? void 0 : paymethod.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _paymethod$name;
+
+        return paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$name = paymethod.name) === null || _paymethod$name === void 0 ? void 0 : _paymethod$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       _filteredPaymethods = _toConsumableArray(paymethods);

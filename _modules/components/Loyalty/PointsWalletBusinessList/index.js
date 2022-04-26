@@ -202,7 +202,9 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     if ((businessList === null || businessList === void 0 ? void 0 : businessList.businesses.length) > 0) {
       if (searchVal) {
         filteredBusinessList = businessList.businesses.filter(function (business) {
-          return business === null || business === void 0 ? void 0 : business.name.toLowerCase().includes(searchVal.toLowerCase());
+          var _business$name;
+
+          return business === null || business === void 0 ? void 0 : (_business$name = business.name) === null || _business$name === void 0 ? void 0 : _business$name.toLowerCase().includes(searchVal === null || searchVal === void 0 ? void 0 : searchVal.toLowerCase());
         });
       } else {
         filteredBusinessList = _toConsumableArray(businessList.businesses);

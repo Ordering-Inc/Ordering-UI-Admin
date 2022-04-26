@@ -87,7 +87,9 @@ var DriverGroupSettingUI = function DriverGroupSettingUI(props) {
 
     if (searchValue) {
       _filteredGroups = driversGroupsState.groups.filter(function (group) {
-        return group === null || group === void 0 ? void 0 : group.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _group$name;
+
+        return group === null || group === void 0 ? void 0 : (_group$name = group.name) === null || _group$name === void 0 ? void 0 : _group$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       _filteredGroups = _toConsumableArray(driversGroupsState.groups);

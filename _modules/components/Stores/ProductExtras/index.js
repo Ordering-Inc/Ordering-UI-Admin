@@ -157,7 +157,9 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     var _extraIds = [];
 
     if ((_productState$product = productState.product) !== null && _productState$product !== void 0 && _productState$product.extras) {
-      _extraIds = productState.product.extras.reduce(function (ids, extra) {
+      var _productState$product2;
+
+      _extraIds = (_productState$product2 = productState.product.extras) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.reduce(function (ids, extra) {
         return [].concat(_toConsumableArray(ids), [extra.id]);
       }, []);
     }
@@ -177,14 +179,14 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     };
   }, [isAddMode, changesState]);
   (0, _react.useEffect)(function () {
-    var _productState$product2, _extrasState$extras;
+    var _productState$product3, _extrasState$extras;
 
-    if (productState !== null && productState !== void 0 && (_productState$product2 = productState.product) !== null && _productState$product2 !== void 0 && _productState$product2.error || extrasState !== null && extrasState !== void 0 && (_extrasState$extras = extrasState.extras) !== null && _extrasState$extras !== void 0 && _extrasState$extras.error) {
-      var _productState$product3, _extrasState$extras2;
+    if (productState !== null && productState !== void 0 && (_productState$product3 = productState.product) !== null && _productState$product3 !== void 0 && _productState$product3.error || extrasState !== null && extrasState !== void 0 && (_extrasState$extras = extrasState.extras) !== null && _extrasState$extras !== void 0 && _extrasState$extras.error) {
+      var _productState$product4, _extrasState$extras2;
 
       setAlertState({
         open: true,
-        content: (productState === null || productState === void 0 ? void 0 : (_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.error) || (extrasState === null || extrasState === void 0 ? void 0 : (_extrasState$extras2 = extrasState.extras) === null || _extrasState$extras2 === void 0 ? void 0 : _extrasState$extras2.error)
+        content: (productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.error) || (extrasState === null || extrasState === void 0 ? void 0 : (_extrasState$extras2 = extrasState.extras) === null || _extrasState$extras2 === void 0 ? void 0 : _extrasState$extras2.error)
       });
     }
   }, [productState, extrasState]);

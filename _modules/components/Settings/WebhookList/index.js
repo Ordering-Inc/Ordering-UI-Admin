@@ -155,7 +155,9 @@ var WebhookListUI = function WebhookListUI(props) {
 
     if (searchValue) {
       webhooks = webhookListState.webhooks.filter(function (plugin) {
-        return plugin.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _plugin$name;
+
+        return (_plugin$name = plugin.name) === null || _plugin$name === void 0 ? void 0 : _plugin$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       webhooks = _toConsumableArray(webhookListState.webhooks);

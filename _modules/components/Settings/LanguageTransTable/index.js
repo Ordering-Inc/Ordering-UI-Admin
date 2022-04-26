@@ -146,9 +146,9 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
       var _translationList$tran;
 
       translations = translationList === null || translationList === void 0 ? void 0 : (_translationList$tran = translationList.translations) === null || _translationList$tran === void 0 ? void 0 : _translationList$tran.filter(function (translation) {
-        var _translation$key;
+        var _translation$key, _translation$text;
 
-        return ((_translation$key = translation.key) === null || _translation$key === void 0 ? void 0 : _translation$key.toLowerCase().includes(searchValue.toLowerCase())) || translation.text.toLowerCase().includes(searchValue.toLowerCase());
+        return ((_translation$key = translation.key) === null || _translation$key === void 0 ? void 0 : _translation$key.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase())) || ((_translation$text = translation.text) === null || _translation$text === void 0 ? void 0 : _translation$text.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase()));
       });
     } else {
       translations = _toConsumableArray(translationList === null || translationList === void 0 ? void 0 : translationList.translations);

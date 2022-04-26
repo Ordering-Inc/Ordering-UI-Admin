@@ -91,7 +91,6 @@ var DateTypeSelector = function DateTypeSelector(props) {
       minDate: new Date(startDate),
       placeholderText: "mm/dd/yyyy",
       className: "endDate",
-      isClearable: true,
       onChange: function onChange(date) {
         return _handleChangeEndDate(date);
       }

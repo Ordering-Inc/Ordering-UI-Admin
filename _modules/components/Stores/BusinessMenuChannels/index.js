@@ -101,7 +101,9 @@ var BusinessMenuChannels = function BusinessMenuChannels(props) {
       return handleSelectNoneChannels();
     }
   }, t('SELECT_NONE', 'Select none'))), (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : (_sitesState$sites$fil = _sitesState$sites.filter(function (site) {
-    return site === null || site === void 0 ? void 0 : site.name.toLowerCase().includes(searchValue);
+    var _site$name;
+
+    return site === null || site === void 0 ? void 0 : (_site$name = site.name) === null || _site$name === void 0 ? void 0 : _site$name.toLowerCase().includes(searchValue);
   })) === null || _sitesState$sites$fil === void 0 ? void 0 : _sitesState$sites$fil.map(function (site) {
     var _formState$changes$si, _formState$changes, _formState$changes$si2, _menu$sites;
 

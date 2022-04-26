@@ -115,7 +115,8 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
     onClose: function onClose() {
       return handleCloseOption();
     },
-    handleSuccessUpdate: handleSuccessUpdate
+    handleSuccessUpdate: handleSuccessUpdate,
+    businessZones: business === null || business === void 0 ? void 0 : business.zones
   })));
 };
 

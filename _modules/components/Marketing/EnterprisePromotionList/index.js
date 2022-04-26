@@ -56,6 +56,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionList = function EnterprisePromotionList(props) {
+  var _promotionListState$p;
+
   var eventDisabled = props.eventDisabled,
       promotionListState = props.promotionListState,
       paginationProps = props.paginationProps,
@@ -161,7 +163,9 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
   }, [promotionListState.promotions, paginationProps]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionListContainer, {
     eventDisabled: eventDisabled
-  }, /*#__PURE__*/_react.default.createElement(_styles2.PromotionListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.promotions) && /*#__PURE__*/_react.default.createElement("th", {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.PromotionListTable, {
+    noFixedHeader: !promotionListState.loading && ((_promotionListState$p = promotionListState.promotions) === null || _promotionListState$p === void 0 ? void 0 : _promotionListState$p.length) < 4
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.promotions) && /*#__PURE__*/_react.default.createElement("th", {
     className: "promotion"
   }, t('PROMOTIONS', 'Promotions')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.promotionType) && /*#__PURE__*/_react.default.createElement("th", null, t('PROMOTION_TYPES', 'Promotion types')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.how) && /*#__PURE__*/_react.default.createElement("th", null, t('QUESTION_HOW', 'How?')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateRange) && /*#__PURE__*/_react.default.createElement("th", {
     className: "date_range"

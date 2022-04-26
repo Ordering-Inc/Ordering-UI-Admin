@@ -93,7 +93,7 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
     isCustomLayout: true,
     search: searchValue,
     onSearch: function onSearch(val) {
-      return setSearchValue(val.toLowerCase());
+      return setSearchValue(val === null || val === void 0 ? void 0 : val.toLowerCase());
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ProductListWrapper, null, menuState.menu.products.filter(function (product) {
     var _product$name;

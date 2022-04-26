@@ -95,7 +95,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
 
   var isCheckedCategory = function isCheckedCategory() {
     if (category !== null && category !== void 0 && category.products) {
-      var productsIds = category.products.reduce(function (ids, product) {
+      var _category$products;
+
+      var productsIds = (_category$products = category.products) === null || _category$products === void 0 ? void 0 : _category$products.reduce(function (ids, product) {
         return [].concat(_toConsumableArray(ids), [product.id]);
       }, []);
       return productsIds.every(function (id) {
@@ -121,7 +123,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   };
 
   var handleChangeSelectCategory = function handleChangeSelectCategory(include) {
-    var productsIds = category.products.reduce(function (ids, product) {
+    var _category$products2;
+
+    var productsIds = (_category$products2 = category.products) === null || _category$products2 === void 0 ? void 0 : _category$products2.reduce(function (ids, product) {
       return [].concat(_toConsumableArray(ids), [product.id]);
     }, []);
     var everyContain = productsIds.every(function (id) {
@@ -139,7 +143,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
       });
       setSelectedProductsIds(_selectedProductsIds);
     } else {
-      var _keys = Object.keys(selectedProductsIds).reduce(function (ids, id) {
+      var _Object$keys;
+
+      var _keys = (_Object$keys = Object.keys(selectedProductsIds)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.reduce(function (ids, id) {
         ids.push(parseInt(id));
         return ids;
       }, []);
@@ -223,11 +229,11 @@ var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
 
     var iterateCategories = function iterateCategories(categories) {
       return (categories === null || categories === void 0 ? void 0 : categories.length) > 0 && (categories === null || categories === void 0 ? void 0 : categories.forEach(function (category) {
-        var _category$subcategori2;
+        var _category$products3, _category$subcategori2;
 
         var productIds = [];
 
-        var _productIds = category.products.reduce(function (ids, product) {
+        var _productIds = (_category$products3 = category.products) === null || _category$products3 === void 0 ? void 0 : _category$products3.reduce(function (ids, product) {
           return [].concat(_toConsumableArray(ids), [product.id]);
         }, []);
 
@@ -235,7 +241,9 @@ var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
 
         if (category !== null && category !== void 0 && (_category$subcategori2 = category.subcategories) !== null && _category$subcategori2 !== void 0 && _category$subcategori2.length) {
           category.subcategories.forEach(function iterate(category) {
-            var _productIds = category.products.reduce(function (ids, product) {
+            var _category$products4;
+
+            var _productIds = (_category$products4 = category.products) === null || _category$products4 === void 0 ? void 0 : _category$products4.reduce(function (ids, product) {
               return [].concat(_toConsumableArray(ids), [product.id]);
             }, []);
 

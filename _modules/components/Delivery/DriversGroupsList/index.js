@@ -106,7 +106,9 @@ var DriversGroupsList = function DriversGroupsList(props) {
 
     if (searchValue) {
       groups = driversGroupsState.groups.filter(function (plugin) {
-        return plugin.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _plugin$name;
+
+        return (_plugin$name = plugin.name) === null || _plugin$name === void 0 ? void 0 : _plugin$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       groups = _toConsumableArray(driversGroupsState.groups);

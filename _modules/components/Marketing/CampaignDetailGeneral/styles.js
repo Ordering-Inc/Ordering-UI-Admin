@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SwitchWrapper = exports.StatusPoint = exports.ScheduleForLateWrapper = exports.RulesWrapper = exports.RadioCheckWrapper = exports.InputWrapper = exports.FixedWrapper = exports.FixedStatusWrapper = exports.FixedContent = exports.DynamicWrapper = exports.DynamicContentWrapper = exports.Container = exports.CheckBoxWrapper = exports.ButtonWrapper = exports.AudienceWrapper = void 0;
+exports.SwitchWrapper = exports.StatusPoint = exports.ScheduleForLateWrapper = exports.RulesWrapper = exports.RadioCheckWrapper = exports.InputWrapper = exports.FixedWrapper = exports.FixedStatusWrapper = exports.FixedContent = exports.EndDateWrapper = exports.DynamicWrapper = exports.DynamicContentWrapper = exports.Container = exports.CheckBoxWrapper = exports.ButtonWrapper = exports.AudienceWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -122,3 +122,7 @@ var CheckBoxWrapper = _styledComponents.default.div(_templateObject21 || (_templ
 });
 
 exports.CheckBoxWrapper = CheckBoxWrapper;
+
+var EndDateWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n  }\n\n  > div {\n    margin-top: 5px;\n  }\n"])));
+
+exports.EndDateWrapper = EndDateWrapper;

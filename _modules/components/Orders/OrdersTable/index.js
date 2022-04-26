@@ -64,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersTable = function OrdersTable(props) {
-  var _orderList$orders;
+  var _orderList$orders3;
 
   var isSelectedOrders = props.isSelectedOrders,
       orderList = props.orderList,
@@ -324,7 +324,9 @@ var OrdersTable = function OrdersTable(props) {
   };
 
   var handleSelecteAllOrder = function handleSelecteAllOrder() {
-    var orderIds = orderList.orders.reduce(function (ids, order) {
+    var _orderList$orders;
+
+    var orderIds = (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.reduce(function (ids, order) {
       return [].concat(_toConsumableArray(ids), [order.id]);
     }, []);
 
@@ -340,8 +342,10 @@ var OrdersTable = function OrdersTable(props) {
   };
 
   (0, _react.useEffect)(function () {
+    var _orderList$orders2;
+
     if (orderList.loading) return;
-    var orderIds = orderList.orders.reduce(function (ids, order) {
+    var orderIds = (_orderList$orders2 = orderList.orders) === null || _orderList$orders2 === void 0 ? void 0 : _orderList$orders2.reduce(function (ids, order) {
       return [].concat(_toConsumableArray(ids), [order.id]);
     }, []);
 
@@ -379,7 +383,7 @@ var OrdersTable = function OrdersTable(props) {
     noScroll: isTourOpen && currentTourStep === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "orders_table",
-    noFixedHeader: !orderList.loading && ((_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.length) <= 5
+    noFixedHeader: !orderList.loading && ((_orderList$orders3 = orderList.orders) === null || _orderList$orders3 === void 0 ? void 0 : _orderList$orders3.length) <= 5
   }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("th", {
     className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'orderNo small' : 'orderNo'
   }, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
