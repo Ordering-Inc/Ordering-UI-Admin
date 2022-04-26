@@ -29,7 +29,8 @@ import {
   ScheduleForLateWrapper,
   ButtonWrapper,
   RulesWrapper,
-  CheckBoxWrapper
+  CheckBoxWrapper,
+  EndDateWrapper
 } from './styles'
 
 export const CampaignDetailGeneral = (props) => {
@@ -54,7 +55,7 @@ export const CampaignDetailGeneral = (props) => {
     { key: 'orders_count', title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options') },
     { key: 'user_created_at', title: t('SIGN_UP_DATE_OPTIONS', 'Sign up date options') },
     { key: 'user_last_order_at', title: t('LAST_ORDER_DATE_OPTIONS', 'Last order date options') },
-    { key: 'user_last_open_cart_at', title: `${t('OPEN_CARTS', 'Open Carts')} / ${t('CART_RECOVERY', 'Cart recovery')}` }
+    { key: 'user_last_open_cart_at', title: t('OPEN_CARTS', 'Open Carts') }
   ]
 
   const closeAlert = () => {
@@ -64,19 +65,23 @@ export const CampaignDetailGeneral = (props) => {
     })
   }
 
-  const handleCloseRuleModal = () => {
+  const handleCloseRuleModal = (index) => {
+    const isClosed = isConditionStatus(selectedRule)
+    if (index && isClosed) handleChangeCheckBox(selectedRule)
     setIsRuleModal(false)
     setSelectedRule(null)
   }
 
   const handleOpenRuleModal = (evt, index) => {
     if (evt.target.closest('.rule-control')) return
+    const isUpdate = isEnableStatus(index)
+    if (!isUpdate) handleChangeCheckBox(index)
     setSelectedRule(index)
     setIsRuleModal(true)
   }
 
-  const handleChangeDateTime = (date) => {
-    handleChangeItem('scheduled_at', date)
+  const handleChangeDateTime = (name, date) => {
+    handleChangeItem(name, date)
   }
 
   const handleChangeSchedule = () => {
@@ -140,12 +145,23 @@ export const CampaignDetailGeneral = (props) => {
 
   const getConditionStatus = () => {
     let valid = false
+    let isDate = true
     formState?.changes?.conditions && formState.changes.conditions.forEach(condition => {
       if (condition?.date_condition === '=' || condition?.date_condition === '>') {
         valid = true
       }
+      if (condition?.date_condition) isDate = false
     })
-    return valid
+    return valid || isDate
+  }
+
+  const isConditionStatus = (index) => {
+    const conditions = isAddMode ? formState?.changes?.conditions : campaignState?.campaign?.conditions
+    let isClosed = true
+    conditions.forEach(item => {
+      if (item.type === index && (item?.condition || item?.date_condition)) isClosed = false
+    })
+    return isClosed
   }
 
   const isEnableStatus = (key) => {
@@ -199,6 +215,16 @@ export const CampaignDetailGeneral = (props) => {
                   {/* {campaignState?.campaign?.end_at && (
                     <p>{t('LAST_TIME_ON', 'Last time on')}: <span>{moment(campaignState?.campaign?.end_at).format('MM/DD/YYYY · HH:mm a')}</span></p>
                   )} */}
+                  <EndDateWrapper>
+                    <span>{t('END_DATE', 'End date')}</span>
+                    <RangeCalendar
+                      withTime
+                      isLeft
+                      isSingleDate
+                      defaultValue={formState?.changes?.end_at ?? campaignState?.campaign?.end_at}
+                      handleChangeDate={(date) => handleChangeDateTime('end_at', date)}
+                    />
+                  </EndDateWrapper>
                 </>
               )}
             </DynamicContentWrapper>
@@ -226,7 +252,7 @@ export const CampaignDetailGeneral = (props) => {
                     isBottom
                   >
                     {isASAP ? <CheckIcon className='fill' /> : <UnCheckIcon />}
-                    <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} + {t('MENU_LIST_DELIVERY_TIME', 'delivery time')})</span>
+                    <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')})</span>
                   </RadioCheckWrapper>
                   <RadioCheckWrapper
                     onClick={() => setIsASAP(false)}
@@ -241,7 +267,7 @@ export const CampaignDetailGeneral = (props) => {
                         isLeft
                         isSingleDate
                         defaultValue={formState?.changes?.scheduled_at ?? campaignState?.campaign?.scheduled_at}
-                        handleChangeDate={handleChangeDateTime}
+                        handleChangeDate={(date) => handleChangeDateTime('scheduled_at', date)}
                       />
                     </ScheduleForLateWrapper>
                   )}
@@ -260,7 +286,7 @@ export const CampaignDetailGeneral = (props) => {
             <CheckBoxWrapper
               key={i}
               borderTop={i === 0}
-              onClick={(e) => isEnableStatus(rule.key) && handleOpenRuleModal(e, rule.key)}
+              onClick={(e) => handleOpenRuleModal(e, rule.key)}
             >
               <div>
                 <span className='rule-control' onClick={() => handleChangeCheckBox(rule.key)}>
@@ -296,7 +322,7 @@ export const CampaignDetailGeneral = (props) => {
         height='550px'
         padding='25px'
         open={isRuleModal}
-        onClose={handleCloseRuleModal}
+        onClose={() => handleCloseRuleModal(true)}
       >
         {selectedRule === 'orders_count' && (
           <CampaignAmountOption
@@ -323,7 +349,7 @@ export const CampaignDetailGeneral = (props) => {
         )}
         {selectedRule === 'user_last_open_cart_at' && (
           <CampaignSignUpOption
-            title={`${t('OPEN_CARTS', 'Open Carts')} / ${t('CART_RECOVERY', 'Cart recovery')}`}
+            title={t('OPEN_CARTS', 'Open Carts')}
             type='user_last_open_cart_at'
             {...props}
             onClose={handleCloseRuleModal}

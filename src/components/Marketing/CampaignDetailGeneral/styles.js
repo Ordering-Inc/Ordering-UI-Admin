@@ -228,3 +228,16 @@ export const CheckBoxWrapper = styled.div`
     }
   }
 `
+
+export const EndDateWrapper = styled.div`
+  margin-top: 10px;
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  > div {
+    margin-top: 5px;
+  }
+`

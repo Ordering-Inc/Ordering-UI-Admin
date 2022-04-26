@@ -79,7 +79,7 @@ export const ReportsOrderTypeFilter = (props) => {
   }
 
   useEffect(() => {
-    const _orderTypeIds = orderTypes.reduce((prev, cur) => [...prev, cur.value], [])
+    const _orderTypeIds = orderTypes?.reduce((prev, cur) => [...prev, cur.value], [])
     setOrderTypeIds([...filterList?.delivery_types_ids || _orderTypeIds])
     if (!filterList?.delivery_types_ids || filterList?.delivery_types_ids?.length === orderTypes.length) setIsAllCheck(true)
   }, [])

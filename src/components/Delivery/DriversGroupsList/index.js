@@ -62,7 +62,7 @@ export const DriversGroupsList = (props) => {
     let _totalPages
     let groups = []
     if (searchValue) {
-      groups = driversGroupsState.groups.filter(plugin => plugin.name.toLowerCase().includes(searchValue.toLowerCase()))
+      groups = driversGroupsState.groups.filter(plugin => plugin.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       groups = [...driversGroupsState.groups]
     }

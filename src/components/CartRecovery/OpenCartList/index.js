@@ -99,7 +99,7 @@ export const OpenCartList = (props) => {
   }
 
   // const handleSelecteAllCarts = () => {
-  //   const cartIds = cartList.carts.reduce((ids, cart) => [...ids, cart.id], [])
+  //   const cartIds = cartList.carts?.reduce((ids, cart) => [...ids, cart.id], [])
   //   if (!isAllChecked) {
   //     setSelectedCartIds([...selectedCartIds, ...cartIds])
   //   } else {
@@ -113,7 +113,7 @@ export const OpenCartList = (props) => {
 
   // useEffect(() => {
   //   if (cartList.loading) return
-  //   const cartIds = cartList.carts.reduce((ids, cart) => [...ids, cart.id], [])
+  //   const cartIds = cartList.carts?.reduce((ids, cart) => [...ids, cart.id], [])
   //   const _isAllChecked = cartIds.every(elem => selectedCartIds.includes(elem))
   //   setIsAllChecked(_isAllChecked)
   // }, [cartList.carts, selectedCartIds])

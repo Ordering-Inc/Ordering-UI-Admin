@@ -159,7 +159,7 @@ const SpreadSheetEditor = (props) => {
   const handleCache = useCallback(() => {
     const interVal = setInterval(() => {
       if (navigator.clipboard) {
-        navigator.clipboard.readText().then(function (clipboardData) {
+        navigator.clipboard.readText && navigator.clipboard.readText().then(function (clipboardData) {
           if (clipboardData) setCache(clipboardData)
         }).catch(function (e) { })
       }

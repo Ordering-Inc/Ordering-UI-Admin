@@ -54,6 +54,7 @@ const BusinessPaymentMethodsUI = (props) => {
     handleStripeSave,
     isSuccessDeleted,
     setIsSuccessDeleted,
+    handleSuccessUpdate,
 
     isTutorialMode,
     handleTutorialContinue
@@ -186,7 +187,7 @@ const BusinessPaymentMethodsUI = (props) => {
           ))
         ) : (
           <PaymethodListWrapper>
-            {paymethodsList.paymethods.filter(paymethod => paymethod?.name?.toLowerCase().includes(searchValue.toLowerCase())).map(paymethod => (
+            {paymethodsList.paymethods.filter(paymethod => paymethod?.name?.toLowerCase().includes(searchValue?.toLowerCase())).map(paymethod => (
               <PaymethodOptionContainer
                 key={paymethod.id}
                 onClick={e => handleOpenEdit(e, paymethod.id, paymethod.gateway)}
@@ -215,6 +216,7 @@ const BusinessPaymentMethodsUI = (props) => {
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               isClose={isEdit}
               handleClosePaymethodDetails={handleCloseEdit}
+              handleSuccessUpdate={handleSuccessUpdate}
             />
           </PaymethodListWrapper>
         )}
