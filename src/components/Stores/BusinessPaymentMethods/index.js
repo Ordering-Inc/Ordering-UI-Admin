@@ -54,6 +54,7 @@ const BusinessPaymentMethodsUI = (props) => {
     handleStripeSave,
     isSuccessDeleted,
     setIsSuccessDeleted,
+    handleSuccessUpdate,
 
     isTutorialMode,
     handleTutorialContinue
@@ -215,6 +216,7 @@ const BusinessPaymentMethodsUI = (props) => {
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               isClose={isEdit}
               handleClosePaymethodDetails={handleCloseEdit}
+              handleSuccessUpdate={handleSuccessUpdate}
             />
           </PaymethodListWrapper>
         )}
