@@ -55,7 +55,7 @@ export const ProductDetailsContainer = styled.div`
     margin-bottom: 0;
   }
 
-  p {
+  .description {
     font-size: 14px;
     line-height: 24px;
     color: ${props => props.theme.colors.headingColor};
@@ -115,7 +115,7 @@ export const AppDescriptionWarpper = styled.div`
     color: ${props => props.theme.colors.headingColor};
     margin: 0;
   }
-  p {
+  > div {
     font-size: 14px;
     line-height: 24px;
     margin: 0;
@@ -187,6 +187,32 @@ export const ProductTboday = styled.tbody`
       }
     }
   }
+
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+
+    tr {
+      > td {
+        border-top: 1px solid ${props => props.theme.colors.primary};
+        border-bottom: 1px solid ${props => props.theme.colors.primary};
+
+        &:first-child {
+          ${props => props.theme?.rtl ? css`
+            border-right: 1px solid ${props => props.theme.colors.primary};
+          ` : css`
+            border-left: 1px solid ${props => props.theme.colors.primary};
+          `}
+        }
+        &:last-child {
+          ${props => props.theme?.rtl ? css`
+            border-left: 1px solid ${props => props.theme.colors.primary};
+          ` : css`
+            border-right: 1px solid ${props => props.theme.colors.primary};
+          `}
+        }
+        }
+    }
+  `}
 `
 export const AppHeaderTitle = styled.div`
   font-size: 12px;
