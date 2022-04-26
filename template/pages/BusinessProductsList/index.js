@@ -57,7 +57,7 @@ export const BusinessProductsList = (props) => {
 
   return (
     <>
-      <HelmetTags page='store' helmetTitle={capitalize(store)} />
+      <HelmetTags page='store' helmetTitle={store ? capitalize(store) : 'products'} />
       <BusinessProductsListing {...businessProductsProps} />
     </>
   )
