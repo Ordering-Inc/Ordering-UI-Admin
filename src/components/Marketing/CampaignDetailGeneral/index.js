@@ -143,8 +143,6 @@ export const CampaignDetailGeneral = (props) => {
     handleChangeItem('audience_type', 'fixed')
   }
 
-  console.log(formState)
-
   const getConditionStatus = () => {
     let valid = false
     let isDate = true
