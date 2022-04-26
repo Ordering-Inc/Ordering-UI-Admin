@@ -72,7 +72,7 @@ const PluginListUI = (props) => {
     let _totalPages
     let plugins = []
     if (searchValue) {
-      plugins = pluginListState.plugins.filter(plugin => plugin.name.toLowerCase().includes(searchValue.toLowerCase()))
+      plugins = pluginListState.plugins.filter(plugin => plugin.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       plugins = [...pluginListState.plugins]
     }

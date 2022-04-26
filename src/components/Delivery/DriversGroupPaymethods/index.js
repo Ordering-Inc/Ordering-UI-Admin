@@ -30,7 +30,7 @@ export const DriversGroupPaymethods = (props) => {
   useEffect(() => {
     let _filteredPaymethods = []
     if (searchValue) {
-      _filteredPaymethods = paymethods.filter(paymethod => paymethod?.name.toLowerCase().includes(searchValue.toLowerCase()))
+      _filteredPaymethods = paymethods.filter(paymethod => paymethod?.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       _filteredPaymethods = [...paymethods]
     }

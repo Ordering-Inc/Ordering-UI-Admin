@@ -41,7 +41,7 @@ const EnterprisePromotionDeliveryzonesUI = (props) => {
       deliveryZones = [...formState.changes?.delivery_zones]
     } else {
       if (Array.isArray(promotionState.promotion?.delivery_zones)) {
-        deliveryZones = promotionState.promotion?.delivery_zones.reduce((ids, zone) => [...ids, zone.id], [])
+        deliveryZones = promotionState.promotion?.delivery_zones?.reduce((ids, zone) => [...ids, zone.id], [])
       }
     }
     if (checked) {

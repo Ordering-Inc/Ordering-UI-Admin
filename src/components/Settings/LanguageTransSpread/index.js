@@ -36,7 +36,7 @@ const LanguageTransSpreadUI = (props) => {
     if (translationList?.loading) return
     let translations = []
     if (searchValue) {
-      translations = translationList?.translations?.filter(translation => (translation.key?.toLowerCase().includes(searchValue.toLowerCase()) || translation.text.toLowerCase().includes(searchValue.toLowerCase())))
+      translations = translationList?.translations?.filter(translation => (translation.key?.toLowerCase().includes(searchValue?.toLowerCase()) || translation.text?.toLowerCase().includes(searchValue?.toLowerCase())))
     } else {
       translations = [...translationList?.translations]
     }

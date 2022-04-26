@@ -102,6 +102,7 @@ export const BusinessDeliveryZoneList = (props) => {
             business={business}
             onClose={() => handleCloseOption()}
             handleSuccessUpdate={handleSuccessUpdate}
+            businessZones={business?.zones}
           />
         </SideBar>
       )}
