@@ -36,7 +36,6 @@ const ProductExtrasUI = (props) => {
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const conatinerRef = useRef(null)
-  const checkboxRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
@@ -123,7 +122,6 @@ const ProductExtrasUI = (props) => {
             onClick={e => handleOpenExtraDetails(e, extra)}
           >
             <CheckboxContainer
-              ref={checkboxRef}
               className='extra-checkbox'
             >
               <Checkbox
