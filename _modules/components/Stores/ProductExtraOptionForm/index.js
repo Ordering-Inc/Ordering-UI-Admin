@@ -103,7 +103,7 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
 
     var max = (_optionChangesState$c = optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c2 = optionChangesState.changes) === null || _optionChangesState$c2 === void 0 ? void 0 : _optionChangesState$c2.max) !== null && _optionChangesState$c !== void 0 ? _optionChangesState$c : optionState === null || optionState === void 0 ? void 0 : (_optionState$option = optionState.option) === null || _optionState$option === void 0 ? void 0 : _optionState$option.max;
     var min = (_optionChangesState$c3 = optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c4 = optionChangesState.changes) === null || _optionChangesState$c4 === void 0 ? void 0 : _optionChangesState$c4.min) !== null && _optionChangesState$c3 !== void 0 ? _optionChangesState$c3 : optionState === null || optionState === void 0 ? void 0 : (_optionState$option2 = optionState.option) === null || _optionState$option2 === void 0 ? void 0 : _optionState$option2.min;
-    if (parseFloat(min) < parseFloat(max)) return true;else {
+    if (parseFloat(min) <= parseFloat(max)) return true;else {
       return t('ERROR_MATCH_MAX_DEFAULT_SUBOPTIONS', 'Max default suboptions length is less than preselected suboptions');
     }
   };

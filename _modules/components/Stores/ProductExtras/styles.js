@@ -37,7 +37,7 @@ var Header = _styledComponents.default.div(_templateObject3 || (_templateObject3
 
 exports.Header = Header;
 
-var ExtraOption = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  padding: 12px 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  ", "\n"])), function (props) {
+var ExtraOption = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  padding: 12px 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  cursor: pointer;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref) {
   var active = _ref.active;
@@ -56,7 +56,7 @@ var CheckboxContainer = _styledComponents.default.div(_templateObject8 || (_temp
 
 exports.CheckboxContainer = CheckboxContainer;
 
-var MoreContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  cursor: pointer;\n\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n    color: ", ";\n  }\n\n  > span {\n    font-size: 14px;\n    padding: 0 10px;\n  }\n"])), function (props) {
+var MoreContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n    color: ", ";\n  }\n\n  > span {\n    font-size: 14px;\n    padding: 0 10px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 

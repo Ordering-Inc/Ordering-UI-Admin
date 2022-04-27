@@ -208,8 +208,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     };
   }, [changesState]);
   (0, _react.useEffect)(function () {
-    if (Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0) setIsAddForm(false);
-  }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes]);
+    if (Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0 && !editSubOptionId) setIsAddForm(false);
+  }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes, editSubOptionId]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, {
     ref: mainContainerRef
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTION', 'Product option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {

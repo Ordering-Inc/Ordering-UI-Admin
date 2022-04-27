@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
-  var _extraState$extra, _extraState$extra2;
+  var _extraState$extra, _extraState$extra3, _extraState$extra4, _extraState$extra5;
 
   var open = props.open,
       onClose = props.onClose,
@@ -97,32 +97,42 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       errors = _useForm.errors,
       setValue = _useForm.setValue;
 
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(((_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.name) || ''),
       _useState2 = _slicedToArray(_useState, 2),
-      isMenuOpen = _useState2[0],
-      setIsMenuOpen = _useState2[1];
+      extraName = _useState2[0],
+      setExtraName = _useState2[1];
 
-  var _useState3 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      timer = _useState4[0],
+      setTimer = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isMenuOpen = _useState6[0],
+      setIsMenuOpen = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
 
-  var _useState5 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      confirm = _useState6[0],
-      setConfirm = _useState6[1];
+      _useState10 = _slicedToArray(_useState9, 2),
+      confirm = _useState10[0],
+      setConfirm = _useState10[1];
 
-  var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isMaxError = _useState8[0],
-      setIsMaxError = _useState8[1];
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isMaxError = _useState12[0],
+      setIsMaxError = _useState12[1];
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -216,14 +226,16 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     });
   };
 
-  var timeout = null;
-
   var onChangeExtraName = function onChangeExtraName(e) {
     e.persist();
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
+    clearTimeout(timer);
+    setExtraName(e.target.value);
+
+    var _timer = setTimeout(function () {
       handleChangeExtraName(e, extraState.extra.id);
-    }, 500);
+    }, 750);
+
+    setTimer(_timer);
   };
 
   (0, _react.useEffect)(function () {
@@ -233,12 +245,17 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       setValue('max', (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) || '');
     }
   }, [addChangesState]);
+  (0, _react.useEffect)(function () {
+    var _extraState$extra2;
+
+    setExtraName((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.name);
+  }, [(_extraState$extra3 = extraState.extra) === null || _extraState$extra3 === void 0 ? void 0 : _extraState$extra3.name]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, {
     id: "extra_options"
   }, /*#__PURE__*/_react.default.createElement(_styles2.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     placeholder: t('NAME', ''),
-    defaultValue: extraState.extra.name,
+    value: extraName,
     onChange: function onChange(e) {
       return onChangeExtraName(e);
     }
@@ -270,7 +287,7 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     isHeader: true
   }, t('MINIMUM', 'Min')), /*#__PURE__*/_react.default.createElement(_styles2.MaxPurchase, {
     isHeader: true
-  }, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles2.ArrowWrpper, null)), ((_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.options) && ((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.options.map(function (option) {
+  }, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles2.ArrowWrpper, null)), ((_extraState$extra4 = extraState.extra) === null || _extraState$extra4 === void 0 ? void 0 : _extraState$extra4.options) && ((_extraState$extra5 = extraState.extra) === null || _extraState$extra5 === void 0 ? void 0 : _extraState$extra5.options.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles2.OptionItem, {
       key: option.id,
       active: option.id === (curOption === null || curOption === void 0 ? void 0 : curOption.id),

@@ -113,7 +113,8 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       isCheckboxClicked = _useState12[0],
       setIsCheckboxClicked = _useState12[1];
 
-  var handleOpenExtraDetails = function handleOpenExtraDetails(extra) {
+  var handleOpenExtraDetails = function handleOpenExtraDetails(e, extra) {
+    if (e.target.closest('.extra-checkbox')) return;
     setIsExtendExtraOpen(true);
     setCurrentExtra(extra);
     setOpenExtraDetails(true);
@@ -201,17 +202,18 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles2.ExtraOption, {
       key: extra.id,
-      active: extra.id === (currentExtra === null || currentExtra === void 0 ? void 0 : currentExtra.id)
-    }, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+      active: extra.id === (currentExtra === null || currentExtra === void 0 ? void 0 : currentExtra.id),
+      onClick: function onClick(e) {
+        return handleOpenExtraDetails(e, extra);
+      }
+    }, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, {
+      className: "extra-checkbox"
+    }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
       checked: (_extraIds$includes = extraIds.includes(extra.id)) !== null && _extraIds$includes !== void 0 ? _extraIds$includes : false,
       onChange: function onChange(e) {
         return handleExtraState(extra.id, e.target.checked);
       }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.MoreContainer, {
-      onClick: function onClick() {
-        return handleOpenExtraDetails(extra);
-      }
-    }, /*#__PURE__*/_react.default.createElement("span", null, extra.name), /*#__PURE__*/_react.default.createElement(_styles2.Details, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))));
+    })), /*#__PURE__*/_react.default.createElement(_styles2.MoreContainer, null, /*#__PURE__*/_react.default.createElement("span", null, extra.name), /*#__PURE__*/_react.default.createElement(_styles2.Details, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))));
   })), isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ExtraAddForm, {
     ref: conatinerRef,
     onSubmit: function onSubmit(e) {
