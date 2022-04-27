@@ -62,6 +62,8 @@ const ProductExtraOptionsUI = (props) => {
     defaultValues: addChangesState
   })
 
+  const [extraName, setExtraName] = useState(extraState.extra?.name || '')
+  const [timer, setTimer] = useState(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -151,13 +153,14 @@ const ProductExtraOptionsUI = (props) => {
     })
   }
 
-  let timeout = null
   const onChangeExtraName = (e) => {
     e.persist()
-    clearTimeout(timeout)
-    timeout = setTimeout(function () {
+    clearTimeout(timer)
+    setExtraName(e.target.value)
+    const _timer = setTimeout(function () {
       handleChangeExtraName(e, extraState.extra.id)
-    }, 500)
+    }, 750)
+    setTimer(_timer)
   }
 
   useEffect(() => {
@@ -168,6 +171,10 @@ const ProductExtraOptionsUI = (props) => {
     }
   }, [addChangesState])
 
+  useEffect(() => {
+    setExtraName(extraState.extra?.name)
+  }, [extraState.extra?.name])
+
   return (
     <MainContainer id='extra_options'>
       <OptionsContainer>
@@ -175,7 +182,7 @@ const ProductExtraOptionsUI = (props) => {
           <input
             type='text'
             placeholder={t('NAME', '')}
-            defaultValue={extraState.extra.name}
+            value={extraName}
             onChange={(e) => onChangeExtraName(e)}
           />
           <div>
