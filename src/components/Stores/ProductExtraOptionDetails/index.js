@@ -145,8 +145,8 @@ const ProductExtraOptionDetailsUI = (props) => {
   }, [changesState])
 
   useEffect(() => {
-    if (Object.keys(changesState?.changes).length === 0) setIsAddForm(false)
-  }, [changesState?.changes])
+    if (Object.keys(changesState?.changes).length === 0 && !editSubOptionId) setIsAddForm(false)
+  }, [changesState?.changes, editSubOptionId])
 
   return (
     <MainContainer ref={mainContainerRef}>
