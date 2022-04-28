@@ -337,6 +337,7 @@ const BusinessProductsListingUI = (props) => {
             </ProductHeader>
             <BusinessProductList
               {...props}
+              categorySelected={categorySelected}
               productDetailsId={selectedProduct?.id}
               viewMethod={viewMethod}
               handleOpenProductDetails={handleOpenProductDetails}
