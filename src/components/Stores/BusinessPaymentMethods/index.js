@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
+  useConfig,
   BusinessPaymethods as BusinessPaymentMethodsController
 } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
@@ -61,6 +62,7 @@ const BusinessPaymentMethodsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const { width } = useWindowSize()
   const [isEdit, setIsEdit] = useState(false)
   const [selectedBusinessPaymethod, setSelectedBusinessPaymethod] = useState(null)
@@ -68,6 +70,7 @@ const BusinessPaymentMethodsUI = (props) => {
   const [searchValue, setSearchValue] = useState('')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isOpenWalletDetails, setIsOpenWalletDetails] = useState(false)
+  const isWalletCashEnabled = configs?.wallet_enabled?.value === '1'
 
   const orderTypes = [
     { value: 1, text: t('DELIVERY', 'Delivery') },
@@ -210,14 +213,16 @@ const BusinessPaymentMethodsUI = (props) => {
                 )}
               </PaymethodOptionContainer>
             ))}
-            <BusinessWalletsList
-              business={business}
-              setIsOpenWalletDetails={setIsOpenWalletDetails}
-              setIsExtendExtraOpen={setIsExtendExtraOpen}
-              isClose={isEdit}
-              handleClosePaymethodDetails={handleCloseEdit}
-              handleSuccessUpdate={handleSuccessUpdate}
-            />
+            {isWalletCashEnabled && (
+              <BusinessWalletsList
+                business={business}
+                setIsOpenWalletDetails={setIsOpenWalletDetails}
+                setIsExtendExtraOpen={setIsExtendExtraOpen}
+                isClose={isEdit}
+                handleClosePaymethodDetails={handleCloseEdit}
+                handleSuccessUpdate={handleSuccessUpdate}
+              />
+            )}
           </PaymethodListWrapper>
         )}
 
