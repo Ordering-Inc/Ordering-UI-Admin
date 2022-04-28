@@ -44,7 +44,8 @@ const ProductExtrasUI = (props) => {
   const [extraIds, setExtraIds] = useState([])
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
 
-  const handleOpenExtraDetails = (extra) => {
+  const handleOpenExtraDetails = (e, extra) => {
+    if (e.target.closest('.extra-checkbox')) return
     setIsExtendExtraOpen(true)
     setCurrentExtra(extra)
     setOpenExtraDetails(true)
@@ -118,14 +119,17 @@ const ProductExtrasUI = (props) => {
           <ExtraOption
             key={extra.id}
             active={extra.id === currentExtra?.id}
+            onClick={e => handleOpenExtraDetails(e, extra)}
           >
-            <CheckboxContainer>
+            <CheckboxContainer
+              className='extra-checkbox'
+            >
               <Checkbox
                 checked={extraIds.includes(extra.id) ?? false}
                 onChange={e => handleExtraState(extra.id, e.target.checked)}
               />
             </CheckboxContainer>
-            <MoreContainer onClick={() => handleOpenExtraDetails(extra)}>
+            <MoreContainer>
               <span>{extra.name}</span>
               <Details>
                 <ChevronRight />
