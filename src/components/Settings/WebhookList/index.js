@@ -74,7 +74,7 @@ const WebhookListUI = (props) => {
     let _totalPages
     let webhooks = []
     if (searchValue) {
-      webhooks = webhookListState.webhooks.filter(plugin => plugin.name.toLowerCase().includes(searchValue.toLowerCase()))
+      webhooks = webhookListState.webhooks.filter(plugin => plugin.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       webhooks = [...webhookListState.webhooks]
     }

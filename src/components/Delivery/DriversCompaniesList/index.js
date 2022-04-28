@@ -57,7 +57,7 @@ export const DriversCompaniesList = (props) => {
     let _totalPages
     let companies = []
     if (searchValue) {
-      companies = driversCompaniesState.companies.filter(plugin => plugin.name.toLowerCase().includes(searchValue.toLowerCase()))
+      companies = driversCompaniesState.companies.filter(plugin => plugin.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       companies = [...driversCompaniesState.companies]
     }

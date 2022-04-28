@@ -16,7 +16,7 @@ export const optimizeImage = (url, params, fallback) => {
 }
 
 export const getIconCard = (brand = '') => {
-  const value = brand.toLowerCase()
+  const value = brand?.toLowerCase()
   switch (value) {
     case 'visa':
       return <FaCcVisa />

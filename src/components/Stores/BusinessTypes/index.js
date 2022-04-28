@@ -97,7 +97,7 @@ export const BusinessTypes = (props) => {
   }, [])
 
   useEffect(() => {
-    const updatedBusinessTypes = businessTypes.filter(type => type?.name.toLowerCase().includes(searchVal.toLowerCase()))
+    const updatedBusinessTypes = businessTypes.filter(type => type?.name?.toLowerCase().includes(searchVal?.toLowerCase()))
     setFilteredBusinessTypes([...updatedBusinessTypes])
   }, [businessTypes, searchVal])
 

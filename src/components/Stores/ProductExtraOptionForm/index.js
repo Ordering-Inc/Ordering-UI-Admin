@@ -69,7 +69,7 @@ export const ProductExtraOptionForm = (props) => {
     const max = optionChangesState?.changes?.max ?? optionState?.option?.max
     const min = optionChangesState?.changes?.min ?? optionState?.option?.min
 
-    if (parseFloat(min) < parseFloat(max)) return true
+    if (parseFloat(min) <= parseFloat(max)) return true
     else {
       return t('ERROR_MATCH_MAX_DEFAULT_SUBOPTIONS', 'Max default suboptions length is less than preselected suboptions')
     }

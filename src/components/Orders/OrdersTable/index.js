@@ -224,7 +224,7 @@ export const OrdersTable = (props) => {
   }
 
   const handleSelecteAllOrder = () => {
-    const orderIds = orderList.orders.reduce((ids, order) => [...ids, order.id], [])
+    const orderIds = orderList.orders?.reduce((ids, order) => [...ids, order.id], [])
     if (!isAllChecked) {
       setSelectedOrderIds([...selectedOrderIds, ...orderIds])
     } else {
@@ -238,7 +238,7 @@ export const OrdersTable = (props) => {
 
   useEffect(() => {
     if (orderList.loading) return
-    const orderIds = orderList.orders.reduce((ids, order) => [...ids, order.id], [])
+    const orderIds = orderList.orders?.reduce((ids, order) => [...ids, order.id], [])
     const _isAllChecked = orderIds.every(elem => selectedOrderIds.includes(elem))
     setIsAllChecked(_isAllChecked)
   }, [orderList.orders, selectedOrderIds])
