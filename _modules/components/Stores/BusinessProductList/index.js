@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductList = function BusinessProductList(props) {
-  var _businessState$busine, _businessState$busine2, _categoryState$produc, _categoryState$pagina, _businessState$busine3, _businessState$busine4;
+  var _businessState$busine, _businessState$busine2, _businessState$busine3, _categoryState$produc, _categoryState$pagina, _businessState$busine4, _businessState$busine5;
 
   var productDetailsId = props.productDetailsId,
       categoryState = props.categoryState,
@@ -67,11 +67,15 @@ var BusinessProductList = function BusinessProductList(props) {
       handleOpenProductDetails = props.handleOpenProductDetails,
       isParentProductAdd = props.isParentProductAdd,
       handleParentProductAdd = props.handleParentProductAdd,
-      allowSpreadColumns = props.allowSpreadColumns;
+      allowSpreadColumns = props.allowSpreadColumns,
+      getPageProducts = props.getPageProducts,
+      categorySelected = props.categorySelected;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var isLazyLoadProducts = (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.lazy_load_products_recommended;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -143,23 +147,34 @@ var BusinessProductList = function BusinessProductList(props) {
 
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);
+
+    if (isLazyLoadProducts) {
+      getPageProducts(true, page, productsPerPage);
+    }
   };
 
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(((currentPage - 1) * productsPerPage + 1) / pageSize);
     setCurrentPage(expectedPage);
     setProductsPerPage(pageSize);
+
+    if (isLazyLoadProducts) {
+      getPageProducts(true, expectedPage, pageSize);
+    }
   };
 
   (0, _react.useEffect)(function () {
-    if (categoryState.loading) return;
+    if (categoryState.loading || isLazyLoadProducts) return;
     var indexOfLastPost = currentPage * productsPerPage;
     var indexOfFirstPost = indexOfLastPost - productsPerPage;
 
     var _currentProducts = categoryState.products.slice(indexOfFirstPost, indexOfLastPost);
 
     setCurrentProducts(_currentProducts);
-  }, [categoryState, currentPage, productsPerPage]);
+  }, [categoryState, currentPage, productsPerPage, isLazyLoadProducts]);
+  (0, _react.useEffect)(function () {
+    setCurrentPage(1);
+  }, [categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.id, isLazyLoadProducts]);
   return /*#__PURE__*/_react.default.createElement(_styles.ListContent, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, {
     noFixedHeader: !businessState.loading && currentProducts.length <= 4
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.products) && /*#__PURE__*/_react.default.createElement("th", null, t('PRODUCTS', 'Products')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", {
@@ -187,7 +202,7 @@ var BusinessProductList = function BusinessProductList(props) {
       viewMethod: viewMethod,
       allowColumns: allowColumns
     });
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentProducts.sort(function (a, b) {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (isLazyLoadProducts ? categoryState.products : currentProducts).sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
@@ -202,24 +217,24 @@ var BusinessProductList = function BusinessProductList(props) {
       category: categoryState,
       isLastProduct: currentProducts.length - 1 === i
     }));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductListBottom, null, !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductListBottom, null, !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : (_businessState$busine3 = _businessState$busine2.categories) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
     onClick: function onClick() {
       return handleParentProductAdd(true);
     }
   }, t('ADD_NEW_PRODUCT', 'Add new product')), !businessState.loading && (categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$produc = categoryState.products) === null || _categoryState$produc === void 0 ? void 0 : _categoryState$produc.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
-    currentPage: currentPage,
-    totalPages: Math.ceil((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$pagina = categoryState.pagination) === null || _categoryState$pagina === void 0 ? void 0 : _categoryState$pagina.totalItems) / productsPerPage),
+    currentPage: isLazyLoadProducts ? categoryState === null || categoryState === void 0 ? void 0 : categoryState.pagination.currentPage : currentPage,
+    totalPages: isLazyLoadProducts ? Math.ceil((categoryState === null || categoryState === void 0 ? void 0 : (_categoryState$pagina = categoryState.pagination) === null || _categoryState$pagina === void 0 ? void 0 : _categoryState$pagina.totalItems) / productsPerPage) : Math.ceil(categoryState.products.length / productsPerPage),
     handleChangePage: handleChangePage,
     defaultPageSize: productsPerPage,
     handleChangePageSize: handleChangePageSize
-  })), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : (_businessState$busine4 = _businessState$busine3.categories) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, t('CREATE_CATEGORY_BEFORE_PRODUCT', 'Please create a category before adding your products.'))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListSpreadContainer, null, categoryState.loading || businessState.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
+  })), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : (_businessState$busine5 = _businessState$busine4.categories) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, t('CREATE_CATEGORY_BEFORE_PRODUCT', 'Please create a category before adding your products.'))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListSpreadContainer, null, categoryState.loading || businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, _toConsumableArray(Array(15).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, {
       key: i,
       isSkeleton: true,
       viewMethod: viewMethod,
       allowColumns: allowColumns
     });
-  }) : /*#__PURE__*/_react.default.createElement(_BusinessSpreadSheet.BusinessSpreadSheet, _extends({}, props, {
+  })) : /*#__PURE__*/_react.default.createElement(_BusinessSpreadSheet.BusinessSpreadSheet, _extends({}, props, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     allowSpreadColumns: allowSpreadColumns
   }))), !categoryState.loading && !businessState.loading && categoryState.products.length === 0 && !(searchValue && errorQuantityProducts || !searchValue && !errorQuantityProducts) && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {

@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SwitchWrapper = exports.StatusPoint = exports.ScheduleForLateWrapper = exports.RulesWrapper = exports.RadioCheckWrapper = exports.InputWrapper = exports.FixedWrapper = exports.FixedStatusWrapper = exports.FixedContent = exports.EndDateWrapper = exports.DynamicWrapper = exports.DynamicContentWrapper = exports.Container = exports.CheckBoxWrapper = exports.ButtonWrapper = exports.AudienceWrapper = void 0;
+exports.SwitchWrapper = exports.StatusPoint = exports.ScheduleForLateWrapper = exports.RulesWrapper = exports.RadioCheckWrapper = exports.InputWrapper = exports.FixedWrapper = exports.FixedStatusWrapper = exports.FixedContent = exports.EndDateWrapper = exports.DynamicWrapper = exports.DynamicContentWrapper = exports.Container = exports.CheckBoxWrapper = exports.CheckBoxListWrapper = exports.ButtonWrapper = exports.AudienceWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -100,17 +100,21 @@ var ButtonWrapper = _styledComponents.default.div(_templateObject19 || (_templat
 
 exports.ButtonWrapper = ButtonWrapper;
 
-var RulesWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-top: 35px;\n\n  > h2 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin: 0px;\n    margin-bottom: 15px;\n  }\n  > p {\n    font-weight: 400;\n    margin: 0px;\n    font-size: 12px;\n    line-height: 18px;\n    margin-bottom: 20px;\n    span {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var RulesWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-top: 35px;\n\n  > h2 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin: 0px;\n    margin-bottom: 5px;\n  }\n  > p {\n    font-weight: 400;\n    margin: 0px;\n    font-size: 12px;\n    line-height: 18px;\n    margin-bottom: 5px;\n    span {\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 
 exports.RulesWrapper = RulesWrapper;
 
-var CheckBoxWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  padding: 12px 0px;\n  border-bottom: 1px solid ", ";\n  ", "\n  justify-content: space-between;\n  > div {\n    display: flex;\n    align-items: center;\n    .rule-control {\n      svg {\n        color: ", ";\n        &.fill {\n          color: ", ";\n        }\n      }\n    }\n    p {\n      font-weight: 400;\n      font-size: 14px;\n      line-height: 24px;\n      margin: 0px 0px 0px 20px;\n\n      ", "\n    }\n  }\n"])), function (props) {
+var CheckBoxListWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n"])));
+
+exports.CheckBoxListWrapper = CheckBoxListWrapper;
+
+var CheckBoxWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  padding: 12px 0px;\n  border-bottom: 1px solid ", ";\n  ", "\n  justify-content: space-between;\n  > div {\n    display: flex;\n    align-items: center;\n    .rule-control {\n      svg {\n        color: ", ";\n        &.fill {\n          color: ", ";\n        }\n      }\n    }\n    p {\n      font-weight: 400;\n      font-size: 14px;\n      line-height: 24px;\n      margin: 0px 0px 0px 20px;\n\n      ", "\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref2) {
   var borderTop = _ref2.borderTop;
-  return borderTop && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    border-top: 1px solid ", ";\n  "])), function (props) {
+  return borderTop && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    border-top: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.borderColor;
   });
 }, function (props) {
@@ -118,11 +122,11 @@ var CheckBoxWrapper = _styledComponents.default.div(_templateObject21 || (_templ
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n        margin: 0px 20px 0px 0px;\n      "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n        margin: 0px 20px 0px 0px;\n      "])));
 });
 
 exports.CheckBoxWrapper = CheckBoxWrapper;
 
-var EndDateWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n  }\n\n  > div {\n    margin-top: 5px;\n  }\n"])));
+var EndDateWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n  }\n\n  > div {\n    margin-top: 5px;\n  }\n"])));
 
 exports.EndDateWrapper = EndDateWrapper;

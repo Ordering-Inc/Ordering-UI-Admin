@@ -74,6 +74,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
+  var _configs$wallet_enabl;
+
   var business = props.business,
       businessPaymethodsState = props.businessPaymethodsState,
       paymethodsList = props.paymethodsList,
@@ -103,6 +105,10 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -140,6 +146,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       isOpenWalletDetails = _useState12[0],
       setIsOpenWalletDetails = _useState12[1];
 
+  var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1';
   var orderTypes = [{
     value: 1,
     text: t('DELIVERY', 'Delivery')
@@ -281,7 +288,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     }, isCheckEnableSate(paymethod.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.PaymethodName, null, paymethod === null || paymethod === void 0 ? void 0 : paymethod.name), !isTutorialMode && isCheckFoundBusinessPaymethod(paymethod.id) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  }), /*#__PURE__*/_react.default.createElement(_BusinessWalletsList.BusinessWalletsList, {
+  }), isWalletCashEnabled && /*#__PURE__*/_react.default.createElement(_BusinessWalletsList.BusinessWalletsList, {
     business: business,
     setIsOpenWalletDetails: setIsOpenWalletDetails,
     setIsExtendExtraOpen: setIsExtendExtraOpen,

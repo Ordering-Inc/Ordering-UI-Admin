@@ -142,7 +142,8 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
     options: businessOptions,
     onChange: function onChange(val) {
       return setSelectedBusinessSlug(val);
-    }
+    },
+    optionInnerMaxHeight: "300px"
   }))), selectedBusinessSlug ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SELECT_PRODUCT_INCLUDE', 'Select product to include')), /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinessProducts, {
     slug: selectedBusinessSlug,
     selectedProductsIds: selectedProductsIds,

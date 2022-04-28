@@ -24,14 +24,12 @@ var CampaignHeaderContainer = _styledComponents.default.div(_templateObject || (
 
 exports.CampaignHeaderContainer = CampaignHeaderContainer;
 
-var HeaderSection = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: flex-start;\n"])));
+var HeaderSection = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 
 exports.HeaderSection = HeaderSection;
 
-var HeaderTitle = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 20px;\n  font-weight: bold;\n  margin: 0px;\n  text-transform: capitalize;\n  white-space: nowrap;\n  display: flex;\n  flex-direction: column;\n\n  span {\n    font-weight: 400;\n    font-size: 12px;\n    line-height: 18px;\n    white-space: nowrap;\n    color: ", ";\n    text-transform: lowercase;\n  }\n\n  @media (max-width: 560px) {\n    width: calc(100% - 50px);\n  }\n"])), function (props) {
+var HeaderTitle = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 20px;\n  font-weight: bold;\n  margin: 0px;\n  text-transform: capitalize;\n  white-space: nowrap;\n\n  @media (max-width: 560px) {\n    width: calc(100% - 50px);\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
-}, function (props) {
-  return props.theme.colors.lightGray;
 });
 
 exports.HeaderTitle = HeaderTitle;
