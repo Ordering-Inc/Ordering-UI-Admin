@@ -28,10 +28,13 @@ export const BusinessProductList = (props) => {
     handleOpenProductDetails,
     isParentProductAdd,
     handleParentProductAdd,
-    allowSpreadColumns
+    allowSpreadColumns,
+    getPageProducts,
+    categorySelected
   } = props
   const [, t] = useLanguage()
 
+  const isLazyLoadProducts = businessState.business?.lazy_load_products_recommended
   const [isAddProduct, setIsAddProduct] = useState(false)
   const [dataSelected, setDataSelected] = useState('')
   const [allowColumns, setAllowColumns] = useState({
@@ -91,21 +94,31 @@ export const BusinessProductList = (props) => {
 
   const handleChangePage = (page) => {
     setCurrentPage(page)
+    if (isLazyLoadProducts) {
+      getPageProducts(true, page, productsPerPage)
+    }
   }
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(((currentPage - 1) * productsPerPage + 1) / pageSize)
     setCurrentPage(expectedPage)
     setProductsPerPage(pageSize)
+    if (isLazyLoadProducts) {
+      getPageProducts(true, expectedPage, pageSize)
+    }
   }
 
   useEffect(() => {
-    if (categoryState.loading) return
+    if (categoryState.loading || isLazyLoadProducts) return
     const indexOfLastPost = currentPage * productsPerPage
     const indexOfFirstPost = indexOfLastPost - productsPerPage
     const _currentProducts = categoryState.products.slice(indexOfFirstPost, indexOfLastPost)
     setCurrentProducts(_currentProducts)
-  }, [categoryState, currentPage, productsPerPage])
+  }, [categoryState, currentPage, productsPerPage, isLazyLoadProducts])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [categorySelected?.id, isLazyLoadProducts])
 
   return (
     <ListContent>
@@ -159,7 +172,7 @@ export const BusinessProductList = (props) => {
               ) : (
                 <>
                   {
-                    currentProducts.sort((a, b) => a.rank - b.rank).map((product, i) => (
+                    (isLazyLoadProducts ? categoryState.products : currentProducts).sort((a, b) => a.rank - b.rank).map((product, i) => (
                       <SingleBusinessProduct
                         {...props}
                         key={i}
@@ -193,8 +206,8 @@ export const BusinessProductList = (props) => {
             {
               !businessState.loading && categoryState?.products?.length > 0 && (
                 <Pagination
-                  currentPage={currentPage}
-                  totalPages={Math.ceil(categoryState?.pagination?.totalItems / productsPerPage)}
+                  currentPage={isLazyLoadProducts ? categoryState?.pagination.currentPage : currentPage}
+                  totalPages={isLazyLoadProducts ? Math.ceil(categoryState?.pagination?.totalItems / productsPerPage) : Math.ceil(categoryState.products.length / productsPerPage)}
                   handleChangePage={handleChangePage}
                   defaultPageSize={productsPerPage}
                   handleChangePageSize={handleChangePageSize}
