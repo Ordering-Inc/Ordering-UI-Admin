@@ -231,14 +231,18 @@ export const BusinessProductList = (props) => {
           <>
             <ProductListSpreadContainer>
               {(categoryState.loading || businessState.loading) ? (
-                [...Array(30).keys()].map(i => (
-                  <SingleBusinessProduct
-                    key={i}
-                    isSkeleton
-                    viewMethod={viewMethod}
-                    allowColumns={allowColumns}
-                  />
-                ))
+                <BusinessProductListTable>
+                  {
+                    [...Array(15).keys()].map(i => (
+                      <SingleBusinessProduct
+                        key={i}
+                        isSkeleton
+                        viewMethod={viewMethod}
+                        allowColumns={allowColumns}
+                      />
+                    ))
+                  }
+                </BusinessProductListTable>
               ) : (
                 <BusinessSpreadSheet
                   {...props}

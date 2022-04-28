@@ -343,24 +343,27 @@ const SingleBusinessProductUI = (props) => {
               <tr>
                 <td>
                   <InfoBlock>
-                    <p><Skeleton width={30} /></p>
+                    <p><Skeleton width={40} height={20} /></p>
                   </InfoBlock>
                 </td>
                 <td>
                   <InfoBlock>
-                    <p><Skeleton width={50} /></p>
+                    <p><Skeleton width={80} height={15} /></p>
                   </InfoBlock>
                 </td>
                 <td>
                   <InfoBlock className='description'>
-                    <p><Skeleton width={100} height={30} /></p>
+                    <p><Skeleton width={100} height={15} /></p>
                   </InfoBlock>
                 </td>
                 <td>
-                  <Skeleton width={50} />
+                  <Skeleton width={80} height={15} />
                 </td>
                 <td>
-                  <Skeleton width={50} />
+                  <Skeleton width={20} height={20} />
+                </td>
+                <td>
+                  <Skeleton width={80} height={15} />
                 </td>
               </tr>
             </SingleListBusinessContainer>
