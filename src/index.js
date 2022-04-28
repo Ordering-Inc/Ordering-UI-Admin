@@ -52,7 +52,8 @@ import {
   Alert,
   SpinnerLoader,
   Modal,
-  SideBar
+  SideBar,
+  ProtectedRoute
 } from './components/Shared'
 
 import { capitalize } from './utils'
@@ -151,6 +152,7 @@ export {
   SpinnerLoader,
   Modal,
   SideBar,
+  ProtectedRoute,
 
   capitalize,
 
