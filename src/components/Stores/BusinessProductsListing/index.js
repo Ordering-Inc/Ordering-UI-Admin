@@ -21,6 +21,7 @@ import { SingleBusinessCategoryEdit } from '../SingleBusinessCategoryEdit'
 import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { BatchImageForm } from '../BatchImageForm'
 import { BusinessDetails } from '../BusinessDetails'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 
 import {
   CategoryProductsContainer,
@@ -327,12 +328,22 @@ const BusinessProductsListingUI = (props) => {
                 >
                   <BsViewList />
                 </IconButton>
-                <IconButton
-                  color={viewMethod === 'spreedsheet' ? 'primary' : 'black'}
-                  onClick={() => setViewMethod('spreedsheet')}
+                <OverlayTrigger
+                  placement='top'
+                  overlay={
+                    <Tooltip>
+                      {t('SPREADSHEET', 'Spreadsheet')}
+                    </Tooltip>
+                  }
                 >
-                  <BsTable />
-                </IconButton>
+                  <IconButton
+                    color={viewMethod === 'spreedsheet' ? 'primary' : 'black'}
+                    className='tour_btn'
+                    onClick={() => setViewMethod('spreedsheet')}
+                  >
+                    <BsTable />
+                  </IconButton>
+                </OverlayTrigger>
               </ActionIconList>
             </ProductHeader>
             <BusinessProductList
