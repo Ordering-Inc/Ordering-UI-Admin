@@ -132,6 +132,7 @@ export const ActionsForm = styled.div`
   width: 100%;
   position: sticky;
   top: 100%;
+  margin: 20px 0;
 
   button {
     flex: 1;
