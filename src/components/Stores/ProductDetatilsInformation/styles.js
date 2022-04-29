@@ -170,4 +170,8 @@ export const RegularWrapper = styled.div`
 export const FieldRow = styled.div`
   display: flex;
   justify-content: space-between;
+
+  > div {
+    width: calc(50% - 10px);
+  }
 `
