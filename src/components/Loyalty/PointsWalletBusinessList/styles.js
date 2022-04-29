@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components'
 import React from 'react'
 
-export const Container = styled.div``
+export const Container = styled.div`
+  padding-bottom: 20px;
+`
 
 export const BusinessSelectOption = styled.div`
   display: flex;
