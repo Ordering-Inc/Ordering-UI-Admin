@@ -40,10 +40,10 @@ export const ColumnAllowSettingPopover = (props) => {
     ]
   })
 
-  const { styles, attributes, forceUpdate } = popper
+  const { styles, attributes, update } = popper
 
   useEffect(() => {
-    forceUpdate && forceUpdate()
+    update && update()
   }, [open])
 
   const handleClickOutside = (e) => {
