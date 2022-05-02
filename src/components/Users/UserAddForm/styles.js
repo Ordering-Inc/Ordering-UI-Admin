@@ -95,7 +95,6 @@ export const FormInput = styled.form`
   align-items: center;
   padding: 20px;
   width: 100%;
-  height: 100%;
   margin: 0 auto;
   div.phone_number {
     margin-bottom: 20px;
@@ -132,6 +131,7 @@ export const ActionsForm = styled.div`
   width: 100%;
   position: sticky;
   top: 100%;
+  margin: 20px 0;
 
   button {
     flex: 1;
