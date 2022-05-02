@@ -86,6 +86,6 @@ var ToggleWrapper = _styledComponents.default.div(_templateObject18 || (_templat
 
 exports.ToggleWrapper = ToggleWrapper;
 
-var ButtonWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n\n  button {\n    margin-top: 20px;\n    height: 44px;\n    border-radius: 8px;\n  }\n"])));
+var ButtonWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  padding: 20px 0;\n\n  button {\n    height: 44px;\n    border-radius: 8px;\n  }\n"])));
 
 exports.ButtonWrapper = ButtonWrapper;
