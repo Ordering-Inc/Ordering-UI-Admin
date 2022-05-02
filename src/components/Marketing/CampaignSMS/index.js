@@ -20,7 +20,8 @@ export const CampaignSMS = (props) => {
     contactState,
     handleChangeData,
     handleUpdateContact,
-    handleAddCampaign
+    handleAddCampaign,
+    formState
   } = props
 
   const [, t] = useLanguage()
@@ -50,8 +51,29 @@ export const CampaignSMS = (props) => {
       return
     }
 
-    if (isAddMode) handleAddCampaign()
-    else handleUpdateContact()
+    if (isAddMode) {
+      if (formState?.changes?.conditions?.length > 0) {
+        for (const item of formState?.changes?.conditions) {
+          if (item?.date_condition === '=' || item?.date_condition === '>') {
+            setAlertState({
+              open: true,
+              content: t('REQUIRED_BEFORE_OR_RANGE_OPTION_WHEN_FIXED', 'when audience type is Fixed, date condition is required Before or Date range option')
+            })
+            return
+          }
+          if (item?.condition === '=') {
+            setAlertState({
+              open: true,
+              content: t('REQUIRED_MORE_OR_LESS_OPTION_WHEN_FIXED', 'when audience type is Fixed, order condition is required More or Less option')
+            })
+            return
+          }
+        }
+      }
+      handleAddCampaign()
+    } else {
+      handleUpdateContact()
+    }
   }
 
   return (

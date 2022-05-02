@@ -7854,9 +7854,9 @@ optionator@^0.8.3:
   dependencies:
     "@babel/runtime" "^7.10.4"
 
-"ordering-components-admin@github:Ordering-Inc/ordering-components-admin#development":
+"ordering-components-admin@github:Ordering-Inc/ordering-components-admin#campaign-feedback":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/b5e44780b1d164838ee347ce72c57f217e037ced"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/6405dee24c3c83c017155a4f2e727dd74c271b04"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
