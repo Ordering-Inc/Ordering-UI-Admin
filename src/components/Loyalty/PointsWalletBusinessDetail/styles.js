@@ -197,9 +197,9 @@ export const ToggleWrapper = styled.div`
 export const ButtonWrapper = styled.div`
   position: sticky;
   top: 100%;
+  padding: 20px 0;
 
   button {
-    margin-top: 20px;
     height: 44px;
     border-radius: 8px;
   }

@@ -92,6 +92,7 @@ export const EnterprisePromotionSpecficCategory = (props) => {
             placeholder={t('MOBILE_BUSINESS_LIST_SELECT_RESTAURANT', 'Select Business')}
             options={businessOptions}
             onChange={val => setSelectedBusinessSlug(val)}
+            optionInnerMaxHeight='300px'
           />
         </BusinessSelectWrapper>
       </BusinessSelectorContainer>
