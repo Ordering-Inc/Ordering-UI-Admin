@@ -159,6 +159,10 @@ export const AccordionContent = styled.div`
   @media (min-width: 481px) {
     width: 80%;
   }
+
+  @media print {
+    margin-top: 20px;
+  }
 `
 
 export const AccordionText = styled.div`
@@ -190,7 +194,7 @@ export const ProductComment = styled.div`
     line-height: 1.5;
     overflow: hidden;
     ${props => props.theme?.rtl && css`
-      margin: 0px 40px 0px 20px
+      margin: 0px 40px 0px 20px;
     `}
   }
 `
