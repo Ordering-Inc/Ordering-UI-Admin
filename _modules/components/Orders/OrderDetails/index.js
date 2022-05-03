@@ -35,6 +35,8 @@ var _Shared = require("../../Shared");
 
 var _styles = require("../../../styles");
 
+var _OrderToPrint = require("../OrderToPrint");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -105,6 +107,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
+
+  var printRef = (0, _react.useRef)();
 
   var _useState5 = (0, _react.useState)({
     business: false,
@@ -543,7 +547,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     handleOpenMessages: handleOpenMessages,
     isTourOpen: isTourOpen,
     currentTourStep: currentTourStep,
-    setIsTourOpen: setIsTourOpen
+    setIsTourOpen: setIsTourOpen,
+    printRef: printRef
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
     isDisabled: isTourOpen && currentTourStep === 1
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
@@ -654,6 +659,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     content: t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.'),
     btnTitle: t('PROFILE_ORDERS_REDIRECT', 'Go to Orders'),
     onClickButton: handleBackRedirect
+  }), order && Object.keys(order).length > 0 && !loading && /*#__PURE__*/_react.default.createElement(_OrderToPrint.OrderToPrint, {
+    ref: printRef,
+    order: order,
+    placeSpotEnabled: placeSpotEnabled,
+    getOrderStatus: getOrderStatus,
+    getLogisticTag: getLogisticTag,
+    getPriorityTag: getPriorityTag
   }));
 };
 

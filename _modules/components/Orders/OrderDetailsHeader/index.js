@@ -11,6 +11,8 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _EnDotSingle = _interopRequireDefault(require("@meronex/icons/en/EnDotSingle"));
 
+var _reactToPrint = _interopRequireDefault(require("react-to-print"));
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styles = require("../../../styles");
@@ -42,7 +44,8 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
       isTourOpen = props.isTourOpen,
       currentTourStep = props.currentTourStep,
       showOption = props.showOption,
-      openMessage = props.openMessage;
+      openMessage = props.openMessage,
+      printRef = props.printRef;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -79,7 +82,18 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
       return handleOpenMessages('chat');
     },
     isDisabled: isTourOpen && currentTourStep === 1
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.UreadMessageAlert, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Dot, null))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.UreadMessageAlert, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Dot, null))), /*#__PURE__*/_react.default.createElement(_reactToPrint.default, {
+    trigger: function trigger() {
+      return /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+        color: "black",
+        isDisabled: isTourOpen && currentTourStep === 1
+      }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Printer, null));
+    },
+    content: function content() {
+      return printRef.current;
+    },
+    removeAfterPrint: true
+  }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     active: openMessage === null || openMessage === void 0 ? void 0 : openMessage.history,
     onClick: function onClick() {
