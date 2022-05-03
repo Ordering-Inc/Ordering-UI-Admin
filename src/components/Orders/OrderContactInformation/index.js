@@ -208,7 +208,6 @@ export const OrderContactInformation = (props) => {
           <DriverSelectorContainer>
             <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
             <DriverSelector
-              isFirstSelect
               small
               drivers={driversList.drivers}
               isPhoneView
