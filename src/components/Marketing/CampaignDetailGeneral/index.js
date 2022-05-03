@@ -103,7 +103,6 @@ export const CampaignDetailGeneral = (props) => {
   const handleChangeCheckBox = (key) => {
     const conditions = formState?.changes?.conditions ?? campaignState?.campaign?.conditions
     const isUpdate = isEnableStatus(key)
-    // const isValid = getCheckBoxStatus(key)
     let updatedConditions = []
     if (isUpdate) {
       updatedConditions = conditions.filter(item => item.type !== key)
@@ -114,19 +113,27 @@ export const CampaignDetailGeneral = (props) => {
     handleChangeItem('conditions', updatedConditions)
   }
 
-  // const getCheckBoxStatus = (key) => {
-  //   let valid = false
-  //   ruleList.forEach(item => {
-  //     if (key !== item.key && isEnableStatus(item.key)) {
-  //       valid = true
-  //     }
-  //   })
-  //   return valid
-  // }
-
   const handleSubmitBtnClick = () => {
     if (Object.keys(formState.changes).length > 0) {
       if (isAddMode) {
+        if (formState?.changes?.conditions?.length > 0) {
+          for (const item of formState?.changes?.conditions) {
+            if (item?.date_condition === '=' || item?.date_condition === '>') {
+              setAlertState({
+                open: true,
+                content: t('REQUIRED_BEFORE_OR_RANGE_OPTION_WHEN_FIXED', 'when audience type is Fixed, date condition is required Before or Date range option')
+              })
+              return
+            }
+            if (item?.condition === '=') {
+              setAlertState({
+                open: true,
+                content: t('REQUIRED_MORE_OR_LESS_OPTION_WHEN_FIXED', 'when audience type is Fixed, order condition is required More or Less option')
+              })
+              return
+            }
+          }
+        }
         handleAddCampaign()
       } else {
         handleUpdateClick()
@@ -154,10 +161,9 @@ export const CampaignDetailGeneral = (props) => {
   }
 
   useEffect(() => {
-    if (campaignState?.campaign?.scheduled_at) {
-      setIsASAP(false)
-    }
-  }, [campaignState?.campaign?.scheduled_at])
+    if ((typeof formState?.changes?.scheduled_at === 'undefined') ? campaignState?.campaign?.scheduled_at : formState?.changes?.scheduled_at) setIsASAP(false)
+    else setIsASAP(true)
+  }, [campaignState?.campaign?.scheduled_at, formState?.changes?.scheduled_at])
 
   return (
     <>
