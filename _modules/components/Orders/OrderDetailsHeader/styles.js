@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UreadMessageAlert = exports.OrderDetailsHeaderContainer = exports.ButtonGroup = void 0;
+exports.UreadMessageAlert = exports.StripeLink = exports.OrderDetailsHeaderContainer = exports.ButtonGroup = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -17,11 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var OrderDetailsHeaderContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column-reverse;\n\n  > div:first-child {\n    color: ", ";\n    width: 100%;\n    h1 {\n      font-size: 24px;\n      margin: 0px;\n      font-weight: 700;\n    }\n\n    p {\n      font-size: 14px;\n      margin: 0px;\n    }\n  }\n\n  > div:not(:first-child) {\n    display: flex;\n    width: 100%;\n    justify-content: flex-end;\n    margin-bottom: 20px;\n  }\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    > div:not(:first-child) {\n      margin-bottom: 0px;\n    }\n  }\n"])), function (props) {
-  var _props$theme$colors;
-
-  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
-});
+var OrderDetailsHeaderContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  > div {\n    display: flex;\n    justify-content: space-between;\n    flex-direction: column-reverse;\n    h1 {\n      width: 100%;\n      font-size: 24px;\n      margin: 0px;\n      font-weight: 700;\n    }\n    > div {\n      display: flex;\n      width: 100%;\n      justify-content: flex-end;\n      margin-bottom: 20px;\n    }\n  }\n\n  p {\n    font-size: 14px;\n    margin: 0px;\n    padding: 5px 0;\n  }\n\n  @media (min-width: 768px) {\n    > div {\n      flex-direction: row;\n      align-items: center;\n    }\n    > div {\n      > div {\n        margin-bottom: 0px;\n      }\n    }\n  }\n"])));
 
 exports.OrderDetailsHeaderContainer = OrderDetailsHeaderContainer;
 
@@ -46,3 +42,11 @@ var UreadMessageAlert = _styledComponents.default.span(_templateObject7 || (_tem
 });
 
 exports.UreadMessageAlert = UreadMessageAlert;
+
+var StripeLink = _styledComponents.default.a(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  color: ", ";\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.colors.primary;
+});
+
+exports.StripeLink = StripeLink;
