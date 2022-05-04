@@ -62,10 +62,10 @@ export const Select = (props) => {
     ]
   })
 
-  const { styles, attributes, forceUpdate } = popper
+  const { styles, attributes, update } = popper
 
   useEffect(() => {
-    forceUpdate && forceUpdate()
+    update && update()
   }, [open, sessionState])
 
   const handleClickOutside = (e) => {
