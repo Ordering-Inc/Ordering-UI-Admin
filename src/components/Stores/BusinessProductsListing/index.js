@@ -193,6 +193,7 @@ const BusinessProductsListingUI = (props) => {
       setOpenSidebar(null)
       handleChangeSearch(null)
       setViewMethod('list')
+      setShowSelectHeader(true)
     }
   }, [slug])
 
@@ -242,122 +243,126 @@ const BusinessProductsListingUI = (props) => {
               )}
             </div>
           </HeaderTitleContainer>
-          <ActionsGroup isDisabled={!slug}>
-            <Button
-              borderRadius='8px'
-              color='lightPrimary'
-              onClick={() => handleOpenCategoryDetails()}
-            >
-              {t('ADD_CATEGORY', 'Add category')}
-            </Button>
-            <Button
-              borderRadius='8px'
-              color='lightPrimary'
-              onClick={() => handleProductAdd(true)}
-              disabled={businessState?.business?.categories?.length === 0}
-            >
-              {t('ADD_PRODUCT', 'Add product')}
-            </Button>
-            <SearchBar
-              isCustomLayout
-              lazyLoad
-              search={searchValue}
-              onSearch={handleChangeSearch}
-              placeholder={t('SEARCH', 'Search')}
-            />
-          </ActionsGroup>
+          {slug && (
+            <ActionsGroup>
+              <Button
+                borderRadius='8px'
+                color='lightPrimary'
+                onClick={() => handleOpenCategoryDetails()}
+              >
+                {t('ADD_CATEGORY', 'Add category')}
+              </Button>
+              <Button
+                borderRadius='8px'
+                color='lightPrimary'
+                onClick={() => handleProductAdd(true)}
+                disabled={businessState?.business?.categories?.length === 0}
+              >
+                {t('ADD_PRODUCT', 'Add product')}
+              </Button>
+              <SearchBar
+                isCustomLayout
+                lazyLoad
+                search={searchValue}
+                onSearch={handleChangeSearch}
+                placeholder={t('SEARCH', 'Search')}
+              />
+            </ActionsGroup>
+          )}
         </HeaderContainer>
-        <CategoryProductsContent isDisabled={!slug}>
-          <CategoryListContainer ref={categoryListRef}>
-            {
-              <BusinessProductsCategories
-                {...props}
-                businessState={businessState}
-                categorySelected={categorySelected}
-                onClickCategory={handleChangeCategory}
-                featured={featuredProducts}
-                handleOpenCategoryDetails={handleOpenCategoryDetails}
-                openCategories={openCategories}
-                handleUpdateBusinessState={handleUpdateBusinessState}
-                setCategorySelected={setCategorySelected}
-                categoryListRef={categoryListRef?.current}
-                setCurrentCategory={setCurrentCategory}
-              />
-            }
-          </CategoryListContainer>
-          <ProductListContainer isDisabled={!slug}>
-            <ProductHeader>
-              <SingleBusinessCategoryEdit
-                {...props}
-                category={categorySelected}
-                categorySelected={categorySelected}
-                handleChangeCategory={handleChangeCategory}
-                business={businessState?.business}
-                handleOpenCategoryDetails={handleOpenCategoryDetails}
-              />
-              <ActionIconList>
-                {viewMethod === 'spreedsheet' && (
-                  <>
-                    {width > 767 ? (
-                      <Button
-                        outline
-                        borderRadius='5px'
-                        className='batch-image-upload'
-                        color='lightPrimary'
-                        onClick={() => openBatchImageUploader()}
-                      >
-                        {t('UPLOAD_IMAGES_BATCH', 'Upload images in batch')}
-                      </Button>
-                    ) : (
-                      <ViewMethodButton className='batch' onClick={() => openBatchImageUploader()}>
-                        <RiImageAddFill />
-                      </ViewMethodButton>
-                    )}
-                    <ColumnsAllowWrapper>
-                      <ColumnAllowSettingPopover
-                        allowColumns={allowSpreadColumns}
-                        optionsDefault={spreadColumnOptions}
-                        handleChangeAllowColumns={handleChangeAllowSpreadColumns}
-                      />
-                    </ColumnsAllowWrapper>
-                  </>
-                )}
-                <IconButton
-                  color={viewMethod === 'list' ? 'primary' : 'black'}
-                  onClick={() => setViewMethod('list')}
-                >
-                  <BsViewList />
-                </IconButton>
-                <OverlayTrigger
-                  placement='top'
-                  overlay={
-                    <Tooltip>
-                      {t('SPREADSHEET', 'Spreadsheet')}
-                    </Tooltip>
-                  }
-                >
+        {slug && (
+          <CategoryProductsContent>
+            <CategoryListContainer ref={categoryListRef}>
+              {
+                <BusinessProductsCategories
+                  {...props}
+                  businessState={businessState}
+                  categorySelected={categorySelected}
+                  onClickCategory={handleChangeCategory}
+                  featured={featuredProducts}
+                  handleOpenCategoryDetails={handleOpenCategoryDetails}
+                  openCategories={openCategories}
+                  handleUpdateBusinessState={handleUpdateBusinessState}
+                  setCategorySelected={setCategorySelected}
+                  categoryListRef={categoryListRef?.current}
+                  setCurrentCategory={setCurrentCategory}
+                />
+              }
+            </CategoryListContainer>
+            <ProductListContainer>
+              <ProductHeader>
+                <SingleBusinessCategoryEdit
+                  {...props}
+                  category={categorySelected}
+                  categorySelected={categorySelected}
+                  handleChangeCategory={handleChangeCategory}
+                  business={businessState?.business}
+                  handleOpenCategoryDetails={handleOpenCategoryDetails}
+                />
+                <ActionIconList>
+                  {viewMethod === 'spreedsheet' && (
+                    <>
+                      {width > 767 ? (
+                        <Button
+                          outline
+                          borderRadius='5px'
+                          className='batch-image-upload'
+                          color='lightPrimary'
+                          onClick={() => openBatchImageUploader()}
+                        >
+                          {t('UPLOAD_IMAGES_BATCH', 'Upload images in batch')}
+                        </Button>
+                      ) : (
+                        <ViewMethodButton className='batch' onClick={() => openBatchImageUploader()}>
+                          <RiImageAddFill />
+                        </ViewMethodButton>
+                      )}
+                      <ColumnsAllowWrapper>
+                        <ColumnAllowSettingPopover
+                          allowColumns={allowSpreadColumns}
+                          optionsDefault={spreadColumnOptions}
+                          handleChangeAllowColumns={handleChangeAllowSpreadColumns}
+                        />
+                      </ColumnsAllowWrapper>
+                    </>
+                  )}
                   <IconButton
-                    color={viewMethod === 'spreedsheet' ? 'primary' : 'black'}
-                    className='tour_btn'
-                    onClick={() => setViewMethod('spreedsheet')}
+                    color={viewMethod === 'list' ? 'primary' : 'black'}
+                    onClick={() => setViewMethod('list')}
                   >
-                    <BsTable />
+                    <BsViewList />
                   </IconButton>
-                </OverlayTrigger>
-              </ActionIconList>
-            </ProductHeader>
-            <BusinessProductList
-              {...props}
-              categorySelected={categorySelected}
-              productDetailsId={selectedProduct?.id}
-              viewMethod={viewMethod}
-              handleOpenProductDetails={handleOpenProductDetails}
-              handleParentProductAdd={handleProductAdd}
-              isParentProductAdd={openSidebar === 'add_product'}
-              allowSpreadColumns={allowSpreadColumns}
-            />
-          </ProductListContainer>
-        </CategoryProductsContent>
+                  <OverlayTrigger
+                    placement='top'
+                    overlay={
+                      <Tooltip>
+                        {t('SPREADSHEET', 'Spreadsheet')}
+                      </Tooltip>
+                    }
+                  >
+                    <IconButton
+                      color={viewMethod === 'spreedsheet' ? 'primary' : 'black'}
+                      className='tour_btn'
+                      onClick={() => setViewMethod('spreedsheet')}
+                    >
+                      <BsTable />
+                    </IconButton>
+                  </OverlayTrigger>
+                </ActionIconList>
+              </ProductHeader>
+              <BusinessProductList
+                {...props}
+                categorySelected={categorySelected}
+                productDetailsId={selectedProduct?.id}
+                viewMethod={viewMethod}
+                handleOpenProductDetails={handleOpenProductDetails}
+                handleParentProductAdd={handleProductAdd}
+                isParentProductAdd={openSidebar === 'add_product'}
+                allowSpreadColumns={allowSpreadColumns}
+              />
+            </ProductListContainer>
+          </CategoryProductsContent>
+        )}
       </CategoryProductsContainer>
       {
         openSidebar === 'category_details' && (
