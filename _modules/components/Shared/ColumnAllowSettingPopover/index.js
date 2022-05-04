@@ -77,9 +77,9 @@ var ColumnAllowSettingPopover = function ColumnAllowSettingPopover(props) {
   });
   var styles = popper.styles,
       attributes = popper.attributes,
-      forceUpdate = popper.forceUpdate;
+      update = popper.update;
   (0, _react.useEffect)(function () {
-    forceUpdate && forceUpdate();
+    update && update();
   }, [open]);
 
   var handleClickOutside = function handleClickOutside(e) {

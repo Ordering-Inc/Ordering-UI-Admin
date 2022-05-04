@@ -108,9 +108,9 @@ var Select = function Select(props) {
   });
   var styles = popper.styles,
       attributes = popper.attributes,
-      forceUpdate = popper.forceUpdate;
+      update = popper.update;
   (0, _react.useEffect)(function () {
-    forceUpdate && forceUpdate();
+    update && update();
   }, [open, sessionState]);
 
   var handleClickOutside = function handleClickOutside(e) {
