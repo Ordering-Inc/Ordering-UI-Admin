@@ -19,11 +19,6 @@ import {
   SmsPreviewWrapper,
   SmsContentLayout,
   SmsPreviewContent,
-  NotificationPreviewWrapper,
-  NotificationPreviewLayout,
-  NotificationContentHeader,
-  NotificationContent,
-  NotificationMessageContent,
   SmsPreviewContentWrapper,
   AddNewNotificationButton
 } from './styles'
@@ -144,17 +139,16 @@ const RecoveryNotificationListUI = (props) => {
                     </SmsPreviewWrapper>
                   )}
                   {notification?.channel === 'notification' && (
-                    <NotificationPreviewWrapper>
-                      <NotificationPreviewLayout>
-                        <NotificationContentHeader bgimage={theme.images.general.whatsappHeader} />
-                        <NotificationContent>
-                          <NotificationMessageContent>
+                    <SmsPreviewWrapper>
+                      <SmsContentLayout bgimage={theme.images.general.mobileHalfMask}>
+                        <SmsPreviewContentWrapper>
+                          <SmsPreviewContent>
                             <h2>{notification?.title}</h2>
                             <p>{notification.body}</p>
-                          </NotificationMessageContent>
-                        </NotificationContent>
-                      </NotificationPreviewLayout>
-                    </NotificationPreviewWrapper>
+                          </SmsPreviewContent>
+                        </SmsPreviewContentWrapper>
+                      </SmsContentLayout>
+                    </SmsPreviewWrapper>
                   )}
                 </PreviewContent>
               </NotificationBlock>
