@@ -69,6 +69,7 @@
     "bootstrap": "^4.6.0",
     "chart.js": "^3.5.0",
     "chartjs-adapter-moment": "^1.0.0",
+    "cropperjs": "^1.5.12",
     "date-fns": "^2.24.0",
     "devextreme": "^21.2.3",
     "devextreme-react": "^21.2.3",

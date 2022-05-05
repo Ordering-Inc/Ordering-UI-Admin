@@ -5,6 +5,7 @@ import { Alert, Confirm } from './Confirm'
 import { ConfirmAdmin } from './ConfirmAdmin'
 import { DragScroll } from './DragScroll'
 import { Image } from './Image'
+import { ImageCrop } from './ImageCrop'
 import { InputPhoneNumber } from './InputPhoneNumber'
 import { Modal } from './Modal'
 import { MoreSidebarLayout } from './MoreSidebarLayout'
@@ -35,6 +36,7 @@ export {
   ConfirmAdmin,
   DragScroll,
   Image,
+  ImageCrop,
   InputPhoneNumber,
   Modal,
   MoreSidebarLayout,
