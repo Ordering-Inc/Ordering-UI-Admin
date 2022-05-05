@@ -58,10 +58,6 @@ export const ActionsGroup = styled.div`
     flex: inherit;
     margin-top: 15px;
   }
-
-  ${({ isDisabled }) => isDisabled && css`
-    pointer-events: none;
-  `}
      
   @media (min-width: 992px) {
     margin-top: 0px;
@@ -77,10 +73,6 @@ export const CategoryProductsContent = styled.div`
   flex-direction: row;
   margin-top: 50px;
   min-height: calc(100% - 150px);
-
-  ${({ isDisabled }) => isDisabled && css`
-    pointer-events: none;
-  `}
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -98,10 +90,6 @@ export const CategoryListContainer = styled.div`
 export const ProductListContainer = styled.div`
   flex-grow: 1;
   width: 100%;
-
-  ${({ isDisabled }) => isDisabled && css`
-    pointer-events: none;
-  `}
 
   @media (min-width: 769px) {
     width: calc(100% - 260px);
