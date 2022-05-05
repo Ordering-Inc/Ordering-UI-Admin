@@ -82,7 +82,7 @@ var SingleRecoveryNotificationUI = function SingleRecoveryNotificationUI(props) 
     content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('SMS', 'SMS'))
   }, {
     value: 'notification',
-    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('NOTIFICATION', 'Notification'))
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('PUSH_NOTIFICATION', 'Push notification'))
   }];
 
   var handleClickDeleteBtn = function handleClickDeleteBtn(id) {
