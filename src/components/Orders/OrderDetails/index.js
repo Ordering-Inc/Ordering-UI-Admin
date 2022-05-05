@@ -44,7 +44,9 @@ const OrderDetailsUI = (props) => {
     currentTourStep,
     isTourFlag,
     setIsTourFlag,
-    setIsTourOpen
+    setIsTourOpen,
+    actionStatus,
+    handleRefundOrder
   } = props
 
   const [, t] = useLanguage()
@@ -378,6 +380,8 @@ const OrderDetailsUI = (props) => {
             </OrderProducts>
             <OrderBill
               order={order}
+              actionStatus={actionStatus}
+              handleRefundOrder={handleRefundOrder}
             />
           </div>
         </OrderDetailsContent>
