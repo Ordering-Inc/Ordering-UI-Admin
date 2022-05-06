@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Alert } from '../../Shared'
+import { Alert, Modal, ImageCrop } from '../../Shared'
 import { bytesConverter } from '../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Button, Input, Switch } from '../../../styles'
@@ -29,11 +29,13 @@ const BusinessInformationUI = (props) => {
     handleButtonUpdateClick,
     handleChangeSwtich
   } = props
+
   const formMethods = useForm()
   const [, t] = useLanguage()
   const headerImageInputRef = useRef(null)
   const logoImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const handleClickImage = (type) => {
     if (type === 'header') {
@@ -63,6 +65,12 @@ const BusinessInformationUI = (props) => {
         })
         return
       }
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: name, data: reader.result, open: true })
+      }
+      reader.onerror = error => console.log(error)
       handlechangeImage(files[0], name)
     }
   }
@@ -78,6 +86,11 @@ const BusinessInformationUI = (props) => {
     if (Object.keys(formState.changes).length > 0) {
       handleButtonUpdateClick()
     }
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeSwtich(cropState?.name, croppedImg)
+    setCropState({ name: null, data: null, open: false })
   }
 
   useEffect(() => {
@@ -247,6 +260,19 @@ const BusinessInformationUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </>
   )
 }

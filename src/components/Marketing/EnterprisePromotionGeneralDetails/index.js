@@ -14,7 +14,7 @@ import {
   Calendar4
 } from 'react-bootstrap-icons'
 import { bytesConverter } from '../../../utils'
-import { Alert } from '../../Shared'
+import { Alert, Modal, ImageCrop } from '../../Shared'
 import { DateRange } from 'react-date-range'
 
 import {
@@ -62,6 +62,7 @@ export const EnterprisePromotionGeneralDetails = (props) => {
   ])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isShowCalendar, setIsShowCalendar] = useState(false)
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const OrderPriorityOptions = [
     { value: 2, content: t('URGENT', 'Urgent') },
@@ -92,6 +93,14 @@ export const EnterprisePromotionGeneralDetails = (props) => {
         })
         return
       }
+
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'image', data: reader.result, open: true })
+      }
+      reader.onerror = error => console.log(error)
+
       handleChangeImage(files[0])
     }
   }
@@ -120,6 +129,11 @@ export const EnterprisePromotionGeneralDetails = (props) => {
       end: item.selection.endDate ? moment(item.selection.endDate).format('YYYY-MM-DD') : null
     })
     setDateRange([item.selection])
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeItem({ [cropState?.name]: croppedImg })
+    setCropState({ name: null, data: null, open: false })
   }
 
   const handleClickOutside = (e) => {
@@ -317,6 +331,19 @@ export const EnterprisePromotionGeneralDetails = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </>
   )
 }
