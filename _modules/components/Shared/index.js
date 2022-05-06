@@ -51,6 +51,12 @@ Object.defineProperty(exports, "Image", {
     return _Image.Image;
   }
 });
+Object.defineProperty(exports, "ImageCrop", {
+  enumerable: true,
+  get: function get() {
+    return _ImageCrop.ImageCrop;
+  }
+});
 Object.defineProperty(exports, "InputPhoneNumber", {
   enumerable: true,
   get: function get() {
@@ -179,6 +185,8 @@ var _ConfirmAdmin = require("./ConfirmAdmin");
 var _DragScroll = require("./DragScroll");
 
 var _Image = require("./Image");
+
+var _ImageCrop = require("./ImageCrop");
 
 var _InputPhoneNumber = require("./InputPhoneNumber");
 

@@ -77,6 +77,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
       handlechangeImage = props.handlechangeImage,
       isDriversPage = props.isDriversPage,
       isDriversManagersPage = props.isDriversManagersPage,
+      handleChangeSwtich = props.handleChangeSwtich,
       isTourOpen = props.isTourOpen;
   var formMethods = (0, _reactHookForm.useForm)();
 
@@ -113,6 +114,15 @@ var UserAddFormUI = function UserAddFormUI(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       isSuccessSubmitted = _useState8[0],
       setIsSuccessSubmitted = _useState8[1];
+
+  var _useState9 = (0, _react.useState)({
+    name: null,
+    data: null,
+    open: false
+  }),
+      _useState10 = _slicedToArray(_useState9, 2),
+      cropState = _useState10[0],
+      setCropState = _useState10[1];
 
   var emailInput = (0, _react.useRef)(null);
   var inputRef = (0, _react.useRef)(null);
@@ -177,8 +187,32 @@ var UserAddFormUI = function UserAddFormUI(props) {
         return;
       }
 
+      var reader = new window.FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = function () {
+        setCropState({
+          name: 'photo',
+          data: reader.result,
+          open: true
+        });
+      };
+
+      reader.onerror = function (error) {
+        return console.log(error);
+      };
+
       handlechangeImage(files[0]);
     }
+  };
+
+  var handleChangePhoto = function handleChangePhoto(croppedImg) {
+    handleChangeSwtich(cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg);
+    setCropState({
+      name: null,
+      data: null,
+      open: false
+    });
   };
 
   var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
@@ -313,7 +347,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
       });
     }
   }, [isTourOpen, isSuccessSubmitted, formState === null || formState === void 0 ? void 0 : formState.loading]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     isCheckout: isCheckout,
     "data-tour": width > 768 ? 'tour_fill' : ''
@@ -421,7 +455,21 @@ var UserAddFormUI = function UserAddFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }));
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('IMAGE_CROP', 'Image crop'),
+    open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
+    onClose: function onClose() {
+      return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
+        open: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
+    handleChangePhoto: handleChangePhoto
+  })));
 };
 
 var UserAddForm = function UserAddForm(props) {
