@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
-  ToastType,
-  useToast,
   ProductExtraOptions as ProductExtraOptionsController
 } from 'ordering-components-admin'
 import { useForm, Controller } from 'react-hook-form'
@@ -35,8 +33,6 @@ const ProductExtraOptionsUI = (props) => {
   const {
     open,
     onClose,
-    editErrors,
-    cleanEditErrors,
     extraState,
     changesState,
     handleChangeImage,
@@ -50,8 +46,7 @@ const ProductExtraOptionsUI = (props) => {
     handleDeleteExtra,
     handleUpdateBusinessState,
     handleSucccessDeleteOption,
-    handleClickUpdateOption,
-
+    handleUpdateOption,
     curOption,
     openModal,
     setCurOption,
@@ -66,39 +61,19 @@ const ProductExtraOptionsUI = (props) => {
   const { control, handleSubmit, errors, setValue } = useForm({
     defaultValues: addChangesState
   })
-  const [, { showToast }] = useToast()
 
+  const [extraName, setExtraName] = useState(extraState.extra?.name || '')
+  const [timer, setTimer] = useState(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isMaxError, setIsMaxError] = useState(false)
 
   const closeAlert = () => {
-    cleanEditErrors()
     setAlertState({
       open: false,
       content: []
     })
-  }
-
-  const handleChangeOptionInput = (e, option, min) => {
-    const regexp = /^[0-9.\b]+$/
-    if (e.target.value === '' || regexp.test(e.target.value)) {
-      if (min) {
-        const max = changesState?.changes?.max ? changesState?.changes?.max : option?.max
-        if (parseInt(e.target.value) > parseInt(max)) return
-      } else {
-        if (option?.suboptions?.filter(suboption => suboption?.preselected)?.length > parseInt(e?.target?.value)) {
-          setIsMaxError(true)
-          showToast(ToastType.Error, t('ERROR_MATCH_MAX_DEFAULT_SUBOPTIONS', 'Max default suboptions length is less than preselected suboptions'))
-          return
-        }
-        setIsMaxError(false)
-        const min = changesState?.changes?.min ? changesState?.changes?.min : option?.min
-        if (parseInt(e.target.value) < parseInt(min)) return
-      }
-      handleChangeInput(e, option.id)
-    }
   }
 
   const handleChangeAddOptionInput = (e, min) => {
@@ -167,21 +142,6 @@ const ProductExtraOptionsUI = (props) => {
     actionSidebar(true)
   }, [open])
 
-  useEffect(() => {
-    if (Object.keys(editErrors).length) {
-      const errorContent = []
-      if (editErrors?.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'))
-      if (editErrors?.min) errorContent.push(t('MIN_PURCHASED_REQUIRED', 'The min is required.'))
-      if (editErrors?.max) errorContent.push(t('MAX_PURCHASED_REQUIRED', 'The max is required.'))
-      if (errorContent.length) {
-        setAlertState({
-          open: true,
-          content: errorContent
-        })
-      }
-    }
-  }, [editErrors])
-
   const handleDeleteExtraClick = () => {
     setConfirm({
       open: true,
@@ -193,13 +153,14 @@ const ProductExtraOptionsUI = (props) => {
     })
   }
 
-  let timeout = null
   const onChangeExtraName = (e) => {
     e.persist()
-    clearTimeout(timeout)
-    timeout = setTimeout(function () {
+    clearTimeout(timer)
+    setExtraName(e.target.value)
+    const _timer = setTimeout(function () {
       handleChangeExtraName(e, extraState.extra.id)
-    }, 500)
+    }, 750)
+    setTimer(_timer)
   }
 
   useEffect(() => {
@@ -210,6 +171,10 @@ const ProductExtraOptionsUI = (props) => {
     }
   }, [addChangesState])
 
+  useEffect(() => {
+    setExtraName(extraState.extra?.name)
+  }, [extraState.extra?.name])
+
   return (
     <MainContainer id='extra_options'>
       <OptionsContainer>
@@ -217,7 +182,7 @@ const ProductExtraOptionsUI = (props) => {
           <input
             type='text'
             placeholder={t('NAME', '')}
-            defaultValue={extraState.extra.name}
+            value={extraName}
             onChange={(e) => onChangeExtraName(e)}
           />
           <div>
@@ -395,7 +360,6 @@ const ProductExtraOptionsUI = (props) => {
             optionChangesState={editOptionId === curOption.id ? changesState : {}}
             handleOptionFiles={handleFiles}
             handleChangeOptionInput={handleChangeInput}
-            handleChangeNumberInput={handleChangeOptionInput}
             handleChangeOptionEnable={handleChangeOptionEnable}
             onClose={() => {
               setOpenModal({ ...openModal, edit: false })
@@ -405,7 +369,7 @@ const ProductExtraOptionsUI = (props) => {
             handleUpdateBusinessState={handleUpdateBusinessState}
             handleSucccessDeleteOption={handleSucccessDeleteOption}
             isMaxError={isMaxError}
-            handleClickUpdateOption={handleClickUpdateOption}
+            handleUpdateOption={handleUpdateOption}
           />
         </Modal>
       )}

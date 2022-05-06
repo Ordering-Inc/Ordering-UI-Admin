@@ -114,7 +114,7 @@ const PointsWalletBusinessListUI = (props) => {
     let filteredBusinessList = []
     if (businessList?.businesses.length > 0) {
       if (searchVal) {
-        filteredBusinessList = businessList.businesses.filter(business => business?.name.toLowerCase().includes(searchVal.toLowerCase()))
+        filteredBusinessList = businessList.businesses.filter(business => business?.name?.toLowerCase().includes(searchVal?.toLowerCase()))
       } else {
         filteredBusinessList = [...businessList.businesses]
       }

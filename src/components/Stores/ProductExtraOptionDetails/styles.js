@@ -76,33 +76,6 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
 `
-export const OptionContainer = styled.div`
-  display: flex;
-  width: 100%;
-`
-
-export const OptionImage = styled.div`
-  width: 95px;
-  height: 95px;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: -webkit-grab;
-  cursor: grab;
-  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
-
-  img,
-  div {
-    width: 100%;
-    border-radius: 8px;
-    height: 100%;
-    overflow: hidden;
-  };
-
-  img{
-    object-fit: cover;
-  }
-`
 
 export const UploadImageIconContainer = styled.div`
   position: absolute;
@@ -124,36 +97,6 @@ export const UploadImageIcon = styled.div`
 
   svg {   
     font-size: ${({ small }) => small ? '16px' : '32px'};
-  }
-`
-
-export const OptionInfoContainer = styled.div`
-  flex: 1;
-  ${props => props.theme?.rtl ? css`
-    margin-right: 20px;
-  ` : css`
-    margin-left: 20px;
-  `}
-`
-
-export const OptionContent = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: 1200px) {
-    flex-direction: row;
-  }
-`
-
-export const RightOptionContent = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  > div:not(:last-child) {
-    width: 100px;
-  }
-  @media (min-width: 1200px) {
-    margin-top: 0px;
   }
 `
 
@@ -252,56 +195,6 @@ export const ActionsContainer = styled.div`
     border-right: none;
   `}
 `
-
-export const EnableWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: fit-content;
-
-  span {
-    font-size: 14px;
-    color: ${props => props.theme.colors.headingColor};
-
-    ${props => props.theme?.rtl ? css`
-      padding-left: 10px;
-    ` : css`
-      padding-right: 10px;
-    `}
-  }
-`
-
-export const OptionSettings = styled.div`
-  display: flex;
-  margin: 20px 0;
-  flex-direction: column;
-
-  @media (min-width: 1200px) {
-    flex-direction: row;
-  }
-`
-
-export const OptionSettingItem = styled.div`
-  flex: 1;
-`
-export const CheckboxWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-
-  label {
-    cursor: pointer;
-    color: ${props => props.theme.colors.headingColor};
-    font-size: 14px;
-    margin-bottom: 0px;
-
-    ${props => props.theme?.rtl ? css`
-      padding-right: 10px;
-    ` : css`
-      padding-left: 10px;
-    `}
-  }
-`
-
 export const Dvider = styled.div`
   height: 13px;
   background: #F8F9FA;
@@ -378,28 +271,6 @@ export const AdddSubOptionForm = styled.form`
   display: flex;
   width: 100%;
   margin-top: 15px;
-`
-
-export const SelectboxGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 50%;
-  
-  > div {
-    background: #F8F9FA;
-    &:first-child {
-      margin-bottom: 20px;
-    }
-  }
-
-  > p {
-    font-size: 14px;
-    margin: 0;
-  }
-
-  @media (min-width: 1200px) {
-    max-width: initial;
-  }
 `
 
 export const AddNewOptionButton = styled.div`

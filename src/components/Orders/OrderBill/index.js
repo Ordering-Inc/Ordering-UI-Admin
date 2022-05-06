@@ -1,19 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, useConfig } from 'ordering-components-admin'
 import { verifyDecimals } from '../../../utils'
+import { Alert, Confirm } from '../../Shared'
+import { Button } from '../../../styles'
 
 import {
-  OrderBillContainer
+  OrderBillContainer,
+  RefundButtonWrapper
 } from './styles'
 
 export const OrderBill = (props) => {
   const {
-    order
+    order,
+    actionStatus,
+    handleRefundOrder
   } = props
 
   const [, t] = useLanguage()
   const [{ parsePrice, parseNumber }] = useUtils()
   const [{ configs }] = useConfig()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const walletName = {
     cash: {
@@ -23,6 +30,34 @@ export const OrderBill = (props) => {
       name: t('POINTS_WALLET', 'Points Wallet')
     }
   }
+  const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
+  const onClickRefund = () => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_REFUND_ORDER', 'Do you want to reimburse this order? This action is irreversible.'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleRefundOrder()
+      }
+    })
+  }
+
+  useEffect(() => {
+    if (!actionStatus?.error) return
+    if (Object.keys(actionStatus.error).length > 0) {
+      setAlertState({
+        open: true,
+        content: actionStatus.error
+      })
+    }
+  }, [actionStatus?.error])
 
   return (
     <OrderBillContainer>
@@ -105,7 +140,7 @@ export const OrderBill = (props) => {
         <table className='payments'>
           <thead>
             <tr>
-              <th calSpan={2}>{t('PAYMENTS', 'Payments')}</th>
+              <th colSpan='2'>{t('PAYMENTS', 'Payments')}</th>
             </tr>
           </thead>
           <tbody>
@@ -132,6 +167,41 @@ export const OrderBill = (props) => {
           </tbody>
         </table>
       )}
+
+      {!order?.refund_data && stripePaymethods.includes(order?.paymethod?.gateway) && (
+        <RefundButtonWrapper>
+          <Button
+            color='primary'
+            borderRadius='8px'
+            disabled={actionStatus?.loading}
+            onClick={onClickRefund}
+          >
+            {t('REFUND', 'Refund')}
+          </Button>
+        </RefundButtonWrapper>
+      )}
+
+      <Alert
+        width='700px'
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
+      <Confirm
+        width='700px'
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </OrderBillContainer>
   )
 }

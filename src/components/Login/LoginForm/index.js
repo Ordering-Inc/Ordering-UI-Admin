@@ -3,6 +3,7 @@ import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
 import { useForm } from 'react-hook-form'
 import {
   LoginForm as LoginFormController,
+  ReCaptcha,
   useLanguage,
   useApi
 } from 'ordering-components-admin'
@@ -25,7 +26,8 @@ import {
   TitleFormSide,
   InputWithIcon,
   WrapperPassword,
-  TogglePassword
+  TogglePassword,
+  ReCAPTCHAWrapper
 } from './styles'
 
 const LoginFormUI = (props) => {
@@ -39,7 +41,9 @@ const LoginFormUI = (props) => {
     elementLinkToForgotPassword,
     formState,
     loginTab,
-    isPopup
+    isPopup,
+    isReCaptchaEnable,
+    handleReCaptcha
   } = props
   const [, t] = useLanguage()
   const [ordering] = useApi()
@@ -49,20 +53,20 @@ const LoginFormUI = (props) => {
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [submitted, setSubmitted] = useState(false)
-  const [projectName, setProjectName] = useState(null)
   const [passwordSee, setPasswordSee] = useState(false)
 
   const onSubmit = () => {
-    const _configFile = configFile
-    _configFile.project = projectName
-    setConfigFile({ ..._configFile })
-    localStorage.setItem('project', projectName)
     setSubmitted(true)
   }
 
+  let timeout = null
   const hanldeChangeProject = (e) => {
+    e.persist()
+    clearTimeout(timeout)
     setSubmitted(false)
-    setProjectName(e.target.value)
+    timeout = setTimeout(function () {
+      setConfigFile({ ...configFile, project: e.target.value })
+    }, 750)
   }
 
   useEffect(() => {
@@ -95,6 +99,13 @@ const LoginFormUI = (props) => {
       content: []
     })
   }
+
+  useEffect(() => {
+    setConfigFile({
+      ...configFile,
+      project: window.localStorage.getItem('project') || null
+    })
+  }, [])
 
   return (
     <LoginContainer isPopup={isPopup}>
@@ -235,6 +246,15 @@ const LoginFormUI = (props) => {
                 {!passwordSee ? <Eye /> : <EyeSlash />}
               </TogglePassword>
             </WrapperPassword>
+
+            {isReCaptchaEnable && (
+              <ReCAPTCHAWrapper>
+                <ReCaptcha
+                  handleReCaptcha={handleReCaptcha}
+                />
+              </ReCAPTCHAWrapper>
+            )}
+
             <Button
               borderRadius='8px'
               color='primary'

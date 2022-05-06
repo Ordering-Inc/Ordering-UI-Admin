@@ -50,7 +50,8 @@ export const OrdersTable = (props) => {
     isTourOpen,
     handleOpenTour,
     setIsTourOpen,
-    slaSettingTime
+    slaSettingTime,
+    groupStatus
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -119,6 +120,8 @@ export const OrdersTable = (props) => {
   const getDelayTime = (order) => {
     // targetMin = delivery_datetime  + eta_time - now()
     const _delivery = order?.delivery_datetime_utc
+      ? parseDate(order?.delivery_datetime_utc)
+      : parseDate(order?.delivery_datetime, { utc: false })
     const _eta = order?.eta_time
     const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
     let day = Math.floor(tagetedMin / 1440)
@@ -221,7 +224,7 @@ export const OrdersTable = (props) => {
   }
 
   const handleSelecteAllOrder = () => {
-    const orderIds = orderList.orders.reduce((ids, order) => [...ids, order.id], [])
+    const orderIds = orderList.orders?.reduce((ids, order) => [...ids, order.id], [])
     if (!isAllChecked) {
       setSelectedOrderIds([...selectedOrderIds, ...orderIds])
     } else {
@@ -235,7 +238,7 @@ export const OrdersTable = (props) => {
 
   useEffect(() => {
     if (orderList.loading) return
-    const orderIds = orderList.orders.reduce((ids, order) => [...ids, order.id], [])
+    const orderIds = orderList.orders?.reduce((ids, order) => [...ids, order.id], [])
     const _isAllChecked = orderIds.every(elem => selectedOrderIds.includes(elem))
     setIsAllChecked(_isAllChecked)
   }, [orderList.orders, selectedOrderIds])
@@ -252,6 +255,15 @@ export const OrdersTable = (props) => {
     document.addEventListener('keydown', handleChangeKeyboard)
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
+
+  useEffect(() => {
+    if (groupStatus === 'completed' || groupStatus === 'cancelled') {
+      setAllowColumns({
+        ...allowColumns,
+        timer: false
+      })
+    }
+  }, [groupStatus])
 
   return (
     <>
@@ -299,10 +311,10 @@ export const OrdersTable = (props) => {
                   <th className='driverInfo'>{t('DRIVER', 'Driver')}</th>
                 )}
                 {allowColumns?.advanced && (
-                  <th colspan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
+                  <th colSpan='3' className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
                 )}
                 {allowColumns?.timer && (
-                  <th colspan={2} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
+                  <th colSpan='2' className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
                 )}
                 <th className='orderPrice'>
                   <ColumnAllowSettingPopover
@@ -568,8 +580,12 @@ export const OrdersTable = (props) => {
                   {allowColumns?.timer && (
                     <td className='timer'>
                       <Timer>
-                        <p className='bold'>{t('TIMER', 'Timer')}</p>
-                        <p className={order?.time_status}>{getDelayTime(order)}</p>
+                        {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                          <>
+                            <p className='bold'>{t('TIMER', 'Timer')}</p>
+                            <p className={order?.time_status}>{getDelayTime(order)}</p>
+                          </>
+                        )}
                       </Timer>
                     </td>
                   )}

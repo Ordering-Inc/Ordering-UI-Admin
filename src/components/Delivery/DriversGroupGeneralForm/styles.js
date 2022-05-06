@@ -2,12 +2,13 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.form`
   min-height: calc(100% - 160px);
+  padding-bottom: 30px;
 
   > button {
     position: sticky;
     top: 100%;
     height: 42px;
-    margin: 30px 0 20px;
+    margin: 30px 0 0 0px;
   }
 `
 export const InputWrapper = styled.div`

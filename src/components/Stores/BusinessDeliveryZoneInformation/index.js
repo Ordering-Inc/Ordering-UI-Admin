@@ -18,6 +18,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
   const {
     business,
     zone,
+    businessZones,
     formState,
     handleChangeInput,
     handleChangeFormState,
@@ -62,6 +63,14 @@ export const BusinessDeliveryZoneInformation = (props) => {
     fillOpacity: 0.2,
     strokeWeight: 2,
     editable: true
+  }
+
+  const greenFillStyle = {
+    fillColor: '#008000',
+    fillOpacity: 0.3,
+    strokeColor: '#008000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2
   }
 
   const handleChangeType = (type) => {
@@ -129,7 +138,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
 
   return (
     <>
-      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <FormContainer onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
         <Row>
           <FormControl>
             <label>{t('NAME', 'Name')}</label>
@@ -208,6 +217,9 @@ export const BusinessDeliveryZoneInformation = (props) => {
                 handleData={handleZoneData}
                 fillStyle={fillStyle}
                 infoContentString={infoContentString}
+                greenFillStyle={greenFillStyle}
+                isAddMode={!zone}
+                businessZones={businessZones}
               />
             </WrapperMap>
           ) : (

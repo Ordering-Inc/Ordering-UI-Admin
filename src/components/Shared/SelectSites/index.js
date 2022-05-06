@@ -30,7 +30,7 @@ export const SelectSites = (props) => {
   useEffect(() => {
     let _filteredSites = []
     if (searchValue) {
-      _filteredSites = allSites.filter(site => site?.name.toLowerCase().includes(searchValue.toLowerCase()))
+      _filteredSites = allSites.filter(site => site?.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       _filteredSites = [...allSites]
     }

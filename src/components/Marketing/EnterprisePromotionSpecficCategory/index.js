@@ -37,7 +37,7 @@ export const EnterprisePromotionSpecficCategory = (props) => {
   useEffect(() => {
     let businessIds = []
     if (Object.keys(promotionState?.promotion).length) {
-      businessIds = promotionState?.promotion.businesses.reduce((ids, business) => [...ids, business.id], [])
+      businessIds = promotionState?.promotion.businesses?.reduce((ids, business) => [...ids, business.id], [])
     } else {
       businessIds = formState?.changes?.businesses ? [...formState?.changes?.businesses] : []
     }
@@ -74,7 +74,7 @@ export const EnterprisePromotionSpecficCategory = (props) => {
 
   useEffect(() => {
     if (!promotionState?.promotion?.categories) return
-    const _selectedCategoryIds = promotionState?.promotion?.categories.reduce((ids, category) => {
+    const _selectedCategoryIds = promotionState?.promotion?.categories?.reduce((ids, category) => {
       ids[category.id] = { id: category.id, include: category.pivot.include }
       return ids
     }, {})
@@ -92,6 +92,7 @@ export const EnterprisePromotionSpecficCategory = (props) => {
             placeholder={t('MOBILE_BUSINESS_LIST_SELECT_RESTAURANT', 'Select Business')}
             options={businessOptions}
             onChange={val => setSelectedBusinessSlug(val)}
+            optionInnerMaxHeight='300px'
           />
         </BusinessSelectWrapper>
       </BusinessSelectorContainer>

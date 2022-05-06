@@ -68,7 +68,7 @@ const CmsUI = (props) => {
     if (pagesListState.loading) return
     let pages = []
     if (searchValue) {
-      pages = pagesListState.pages.filter(page => page.name.toLowerCase().includes(searchValue.toLowerCase()))
+      pages = pagesListState.pages.filter(page => page.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       pages = [...pagesListState.pages]
     }

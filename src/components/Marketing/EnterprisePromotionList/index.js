@@ -110,7 +110,9 @@ export const EnterprisePromotionList = (props) => {
   return (
     <>
       <PromotionListContainer eventDisabled={eventDisabled}>
-        <PromotionListTable>
+        <PromotionListTable
+          noFixedHeader={!promotionListState.loading && promotionListState.promotions?.length < 4}
+        >
           <thead>
             <tr>
               {allowColumns?.promotions && (

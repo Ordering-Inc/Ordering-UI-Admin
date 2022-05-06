@@ -54,7 +54,7 @@ export const FormSide = styled(Side)`
   flex-direction: column;
   justify-content: center;
   background-color: #1C202E;
-  padding: 0 8%;
+  padding: 30px 8%;
   box-sizing: border-box;
   height: 100vh;
 
@@ -296,4 +296,12 @@ export const TogglePassword = styled.span`
   ` : css`
     right: 15px;
   `}
+`
+export const ReCAPTCHAWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  * {
+    padding: 0;
+  }
 `

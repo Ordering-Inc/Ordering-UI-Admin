@@ -99,7 +99,7 @@ export const BusinessProductsCategoyInfo = (props) => {
 
   const stringToSlug = str => {
     str = str.replace(/^\s+|\s+$/g, '') // trim
-    str = str.toLowerCase()
+    str = str?.toLowerCase()
 
     // remove accents, swap ñ for n, etc
     var from = 'åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;'

@@ -101,9 +101,7 @@ export const BusinessMenuCategoryTreeNode = (props) => {
   }
 
   useEffect(() => {
-    if (category?.products?.length) {
-      setIsCategoryState(isCheckedCategory())
-    }
+    setIsCategoryState(isCheckedCategory())
   }, [selectedProductsIds])
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useSession, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -12,6 +12,7 @@ import { OrderContactInformation } from '../OrderContactInformation'
 import { XLg } from 'react-bootstrap-icons'
 import { NotFoundSource, Modal } from '../../Shared'
 import { IconButton } from '../../../styles'
+import { OrderToPrint } from '../OrderToPrint'
 
 import {
   Container,
@@ -25,7 +26,8 @@ import {
   AdvancedLogistic,
   OrderProducts,
   CloseButtonWrapper,
-  OrderStatusSelectorWrapper
+  OrderStatusSelectorWrapper,
+  PlaceSpotContainer
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -42,7 +44,9 @@ const OrderDetailsUI = (props) => {
     currentTourStep,
     isTourFlag,
     setIsTourFlag,
-    setIsTourOpen
+    setIsTourOpen,
+    actionStatus,
+    handleRefundOrder
   } = props
 
   const [, t] = useLanguage()
@@ -51,11 +55,12 @@ const OrderDetailsUI = (props) => {
   const [showOption, setShowOption] = useState(null)
   const [{ parseDate }] = useUtils()
   const [{ user }] = useSession()
+  const printRef = useRef()
 
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
-
+  const placeSpotEnabled = [3, 4]
   const {
     order,
     loading
@@ -308,6 +313,7 @@ const OrderDetailsUI = (props) => {
             isTourOpen={isTourOpen}
             currentTourStep={currentTourStep}
             setIsTourOpen={setIsTourOpen}
+            printRef={printRef}
           />
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
@@ -329,6 +335,13 @@ const OrderDetailsUI = (props) => {
               />
             </OrderStatusSelectorWrapper>
           </OrderStatus>
+          {order?.place && placeSpotEnabled.includes(order?.delivery_type) && (
+            <PlaceSpotContainer>
+              <p>
+                {t('SPOT', 'Spot')}: {order?.place?.name}
+              </p>
+            </PlaceSpotContainer>
+          )}
           <StatusBarContainer>
             <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
           </StatusBarContainer>
@@ -367,6 +380,8 @@ const OrderDetailsUI = (props) => {
             </OrderProducts>
             <OrderBill
               order={order}
+              actionStatus={actionStatus}
+              handleRefundOrder={handleRefundOrder}
             />
           </div>
         </OrderDetailsContent>
@@ -479,6 +494,17 @@ const OrderDetailsUI = (props) => {
           content={t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.')}
           btnTitle={t('PROFILE_ORDERS_REDIRECT', 'Go to Orders')}
           onClickButton={handleBackRedirect}
+        />
+      )}
+
+      {order && Object.keys(order).length > 0 && !loading && (
+        <OrderToPrint
+          ref={printRef}
+          order={order}
+          placeSpotEnabled={placeSpotEnabled}
+          getOrderStatus={getOrderStatus}
+          getLogisticTag={getLogisticTag}
+          getPriorityTag={getPriorityTag}
         />
       )}
     </Container>

@@ -181,18 +181,22 @@ export const RulesWrapper = styled.div`
     font-size: 16px;
     line-height: 24px;
     margin: 0px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
   > p {
     font-weight: 400;
     margin: 0px;
     font-size: 12px;
     line-height: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     span {
       color: ${props => props.theme.colors.lightGray};
     }
   }
+`
+
+export const CheckBoxListWrapper = styled.div`
+  margin-top: 10px;
 `
 
 export const CheckBoxWrapper = styled.div`
@@ -226,5 +230,18 @@ export const CheckBoxWrapper = styled.div`
         margin: 0px 20px 0px 0px;
       `}
     }
+  }
+`
+
+export const EndDateWrapper = styled.div`
+  margin-top: 10px;
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  > div {
+    margin-top: 5px;
   }
 `

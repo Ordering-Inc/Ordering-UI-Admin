@@ -6,8 +6,7 @@ import {
   ProductExtraOptionDetails as ProductExtraOptionDetailsController
 } from 'ordering-components-admin'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { Checkbox, IconButton, Input, Switch } from '../../../styles'
-import { Select } from '../../../styles/Select/FirstSelect'
+import { IconButton, Input } from '../../../styles'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { bytesConverter } from '../../../utils'
@@ -21,30 +20,21 @@ import {
 } from 'react-bootstrap-icons'
 import { useForm } from 'react-hook-form'
 import { ProductExtraSuboption } from '../ProductExtraSuboption'
+import { ProductExtraOptionForm } from '../ProductExtraOptionForm'
 
 import {
   MainContainer,
   Header,
   ActionSelectorWrapper,
-  OptionContainer,
-  OptionImage,
   UploadImageIconContainer,
   UploadImageIcon,
-  OptionContent,
   InputWrapper,
   ActionsContainer,
-  EnableWrapper,
-  OptionInfoContainer,
-  RightOptionContent,
-  OptionSettings,
-  CheckboxWrapper,
-  OptionSettingItem,
   Dvider,
   ModifierOptionsContainer,
   SubOptionImage,
   LeftSubOptionContent,
   RightSubOptionContent,
-  SelectboxGroup,
   AdddSubOptionForm,
   AddNewOptionButton,
   SubOptionContainer
@@ -56,7 +46,6 @@ const ProductExtraOptionDetailsUI = (props) => {
     optionChangesState,
     handleOptionFiles,
     handleChangeOptionInput,
-    handleChangeNumberInput,
     handleChangeOptionEnable,
     changesState,
     editSubOptionId,
@@ -75,33 +64,23 @@ const ProductExtraOptionDetailsUI = (props) => {
     handleChangeConditionalSubOption,
     handleChangeDefaultSuboption,
     handleUpdateSubOption,
-
+    handleUpdateOption,
     business,
     extra,
     handleAddOption,
     handleDeteteOption,
-    isMaxError,
-
-    handleClickUpdateOption
+    isMaxError
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const optionImageInputRef = useRef(null)
   const mainContainerRef = useRef()
-  const optionNameRef = useRef()
-  const optionMinRef = useRef()
-  const optionMaxRef = useRef()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openModal, setOpenModal] = useState({})
   const [selectedSubOptionId, setSelectedSubOptionId] = useState(null)
   const { handleSubmit, register, errors } = useForm()
   const [isAddForm, setIsAddForm] = useState(false)
-
-  const handleClickImage = () => {
-    optionImageInputRef.current.click()
-  }
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -158,23 +137,16 @@ const ProductExtraOptionDetailsUI = (props) => {
   const closeAddForm = (e) => {
     const outsideDropdown = !e.target.closest('.add-product-option') && !e.target.closest('.add-option-btn')
     if (outsideDropdown && Object.keys(changesState?.changes).length === 0) setIsAddForm(false)
-
-    if (mainContainerRef.current?.contains(e.target)) {
-      if (optionChangesState?.changes?.name === '' && optionNameRef.current?.contains(e.target)) return
-      if (optionChangesState?.changes?.min === '' && optionMinRef.current?.contains(e.target)) return
-      if (optionChangesState?.changes?.max === '' && optionMaxRef.current?.contains(e.target)) return
-      handleClickUpdateOption()
-    }
   }
 
   useEffect(() => {
     document.addEventListener('click', closeAddForm)
     return () => document.removeEventListener('click', closeAddForm)
-  }, [changesState, handleClickUpdateOption])
+  }, [changesState])
 
   useEffect(() => {
-    if (Object.keys(changesState?.changes).length === 0) setIsAddForm(false)
-  }, [changesState?.changes])
+    if (Object.keys(changesState?.changes).length === 0 && !editSubOptionId) setIsAddForm(false)
+  }, [changesState?.changes, editSubOptionId])
 
   return (
     <MainContainer ref={mainContainerRef}>
@@ -201,158 +173,24 @@ const ProductExtraOptionDetailsUI = (props) => {
         </ActionSelectorWrapper>
       </Header>
 
-      <OptionContainer>
-        <OptionImage
-          onClick={() => handleClickImage()}
-        >
-          <ExamineClick
-            onFiles={files => handleOptionFiles(files, optionState?.option.id)}
-            childRef={(e) => { optionImageInputRef.current = e }}
-            accept='image/png, image/jpeg, image/jpg'
-            disabled={optionState.loading}
-          >
-            <DragAndDrop
-              onDrop={dataTransfer => handleOptionFiles(dataTransfer.files, optionState?.option.id)}
-              accept='image/png, image/jpeg, image/jpg'
-              disabled={optionState.loading}
-            >
-              {
-                optionChangesState?.result?.image
-                  ? (<img src={optionChangesState?.result?.image} alt='sub option image' loading='lazy' />)
-                  : optionChangesState?.changes?.image
-                    ? (<img src={optionChangesState?.changes?.image} alt='product image' loading='lazy' />)
-                    : optionState?.option?.image && (<img src={optionState?.option?.image} alt='product image' loading='lazy' />)
-              }
-              <UploadImageIconContainer>
-                <UploadImageIcon>
-                  <BiImage />
-                </UploadImageIcon>
-              </UploadImageIconContainer>
-            </DragAndDrop>
-          </ExamineClick>
-        </OptionImage>
-        <OptionInfoContainer>
-          <OptionContent>
-            <InputWrapper primary>
-              <label>{t('OPTION_NAME', 'Option name')}</label>
-              <Input
-                name='name'
-                ref={optionNameRef}
-                autoComplete='off'
-                defaultValue={optionState?.option.name}
-                onChange={(e) => handleChangeOptionInput(e, optionState.option?.id)}
-              />
-            </InputWrapper>
-            <RightOptionContent>
-              <InputWrapper primary>
-                <label>{t('MINIMUM', 'Minimum')}</label>
-                <Input
-                  name='min'
-                  ref={optionMinRef}
-                  defaultValue={optionState?.option?.min}
-                  onChange={(e) => handleChangeNumberInput(e, optionState.option, true)}
-                  onKeyPress={(e) => {
-                    if (!/^[0-9.]$/.test(e.key)) {
-                      e.preventDefault()
-                    }
-                  }}
-                />
-              </InputWrapper>
-              <InputWrapper primary isMaxError={isMaxError}>
-                <label>{t('MAX', 'Max')}</label>
-                <Input
-                  name='max'
-                  ref={optionMaxRef}
-                  defaultValue={optionState?.option?.max}
-                  onChange={(e) => handleChangeNumberInput(e, optionState.option, false)}
-                  onKeyPress={(e) => {
-                    if (!/^[0-9.]$/.test(e.key)) {
-                      e.preventDefault()
-                    }
-                  }}
-                />
-              </InputWrapper>
-              <ActionsContainer top>
-                <EnableWrapper>
-                  <span>{t('ENABLE', 'Enable')}</span>
-                  <Switch
-                    defaultChecked={optionState.option?.enabled}
-                    onChange={enabled => handleChangeOptionEnable(enabled, optionState.option?.id)}
-                  />
-                </EnableWrapper>
-              </ActionsContainer>
-            </RightOptionContent>
-          </OptionContent>
-          <OptionSettings>
-            <OptionSettingItem>
-              <CheckboxWrapper>
-                <Checkbox
-                  id='with_half_option'
-                  defaultChecked={optionState?.option?.with_half_option || false}
-                  onClick={(e) => handleOptionSetting('with_half_option', e.target.checked)}
-                />
-                <label htmlFor='with_half_option'>{t('WITH_HALF_PRICE', 'Allow half option & price')}</label>
-              </CheckboxWrapper>
-            </OptionSettingItem>
-            <OptionSettingItem>
-              <CheckboxWrapper>
-                <Checkbox
-                  id='allow_suboption_quantity'
-                  defaultChecked={optionState?.option?.allow_suboption_quantity || false}
-                  onClick={(e) => handleOptionSetting('allow_suboption_quantity', e.target.checked)}
-                />
-                <label htmlFor='allow_suboption_quantity'>{t('SUBOPTION_QUANTITY', 'Allow suboptions quantity')}</label>
-              </CheckboxWrapper>
-              {optionState?.option?.allow_suboption_quantity && (
-                <CheckboxWrapper>
-                  <Checkbox
-                    id='limit_suboptions_by_max'
-                    defaultChecked={optionState?.option?.limit_suboptions_by_max || false}
-                    onClick={(e) => handleOptionSetting('limit_suboptions_by_max', e.target.checked)}
-                  />
-                  <label htmlFor='limit_suboptions_by_max'>{t('LIMIT_SUBOPTIONS_BY_MAX', 'Limit suboptions by maximum option')}</label>
-                </CheckboxWrapper>
-              )}
-            </OptionSettingItem>
-            {conditionalOptions?.length > 0 && (
-              <OptionSettingItem>
-                <CheckboxWrapper>
-                  <Checkbox
-                    id='conditioned'
-                    defaultChecked={optionState?.option?.conditioned || false}
-                    onClick={(e) => handleOptionSetting('conditioned', e.target.checked)}
-                  />
-                  <label htmlFor='conditioned'>{t('CONDITIONAL', 'Conditional')}</label>
-                </CheckboxWrapper>
-                {optionState?.option?.conditioned && (
-                  <SelectboxGroup>
-                    {conditionalOptions.length > 0 && (
-                      <Select
-                        options={conditionalOptions}
-                        defaultValue={conditionalOptionId}
-                        placeholder={t('SELECT_OPTION', 'Select option')}
-                        onChange={val => handleChangeConditionalOption(val)}
-                      />
-                    )}
-                    {conditionalOptionId && (
-                      conditionalSubOptions.length > 0 ? (
-                        <Select
-                          options={conditionalSubOptions}
-                          defaultValue={conditionalSubOptionId}
-                          placeholder={t('SELECT_CHOICE', 'Select choice')}
-                          onChange={val => handleChangeConditionalSubOption(val)}
-                        />
-                      ) : (
-                        <p>{t('NO_CHOICES_AVAILABLE', 'No choices available')}</p>
-                      )
-                    )}
-                  </SelectboxGroup>
-                )}
-              </OptionSettingItem>
-            )}
-          </OptionSettings>
-        </OptionInfoContainer>
-      </OptionContainer>
+      <ProductExtraOptionForm
+        optionState={optionState}
+        optionChangesState={optionChangesState}
+        mainContainerRef={mainContainerRef}
+        isMaxError={isMaxError}
+        handleOptionFiles={handleOptionFiles}
+        handleChangeOptionInput={handleChangeOptionInput}
+        handleChangeOptionEnable={handleChangeOptionEnable}
+        handleOptionSetting={handleOptionSetting}
+        conditionalOptions={conditionalOptions}
+        conditionalSubOptions={conditionalSubOptions}
+        conditionalOptionId={conditionalOptionId}
+        conditionalSubOptionId={conditionalSubOptionId}
+        handleChangeConditionalOption={handleChangeConditionalOption}
+        handleChangeConditionalSubOption={handleChangeConditionalSubOption}
+        handleUpdateOption={handleUpdateOption}
+      />
+
       <Dvider />
       <ModifierOptionsContainer>
         <h2>{t('MODIFIER_OPTIONS', 'Modifier options')}</h2>

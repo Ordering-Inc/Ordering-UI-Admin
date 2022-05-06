@@ -73,7 +73,7 @@ export const DropdownOptionList = (props) => {
     let _totalPages
     let dropdownOptions = []
     if (searchValue) {
-      dropdownOptions = dropdownOptionsState.options.filter(option => option.name.toLowerCase().includes(searchValue.toLowerCase()))
+      dropdownOptions = dropdownOptionsState.options.filter(option => option.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       dropdownOptions = [...dropdownOptionsState.options]
     }
@@ -89,7 +89,7 @@ export const DropdownOptionList = (props) => {
 
   useEffect(() => {
     if (countriesState.loading) return
-    const _cities = countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], [])
+    const _cities = countriesState.countries?.reduce((_cities, country) => [..._cities, ...country?.cities], [])
     setCities(_cities)
   }, [countriesState])
 

@@ -19,7 +19,7 @@ export const CampaignHeaderContainer = styled.div`
 `
 export const HeaderSection = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 `
 
 export const HeaderTitle = styled.p`
@@ -29,17 +29,6 @@ export const HeaderTitle = styled.p`
   margin: 0px;
   text-transform: capitalize;
   white-space: nowrap;
-  display: flex;
-  flex-direction: column;
-
-  span {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
-    white-space: nowrap;
-    color: ${props => props.theme.colors.lightGray};
-    text-transform: lowercase;
-  }
 
   @media (max-width: 560px) {
     width: calc(100% - 50px);

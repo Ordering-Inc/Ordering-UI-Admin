@@ -28,7 +28,7 @@ export const OpenCartBill = (props) => {
     if (cart?.taxes === null) {
       return cart.business.tax_type === 1 ? cart?.tax : 0
     } else {
-      return cart?.taxes.reduce((taxIncluded, tax) => {
+      return cart?.taxes?.reduce((taxIncluded, tax) => {
         return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
       }, 0)
     }

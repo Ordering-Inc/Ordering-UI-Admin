@@ -212,15 +212,49 @@ const ProductDetailsAdvancedUI = (props) => {
     }
   }, [taxToDelete])
 
+  const onSubmit = () => {
+    const valid = checkValidate()
+    if (Object.keys(formState.changes).length > 0 && valid) {
+      handleUpdateClick()
+    }
+  }
+
+  const checkValidate = () => {
+    let valid = true
+
+    if (formState?.changes?.minimum_per_order && formState?.changes?.maximum_per_order && !(formState?.changes?.maximum_per_order === null)) {
+      if (!(formState?.changes?.minimum_per_order < formState?.changes?.maximum_per_order)) {
+        valid = false
+        setAlertState({
+          open: true,
+          content: t('MINIMUM_QUANTITY_MUST_SMALL_MAXIMUM_QUANTITY', 'This minimum quantity must be small than maximum quantity')
+        })
+      }
+    }
+
+    return valid
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
-      const content = Object.values(formMethods.errors).map(error => error.message)
+      const content = Object.values(formMethods.errors).map(error => {
+        return error.message
+      })
       setAlertState({
         open: true,
         content
       })
     }
   }, [formMethods.errors])
+
+  useEffect(() => {
+    if (formState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: formState?.result?.result
+      })
+    }
+  }, [formState?.result])
 
   useEffect(() => {
     if (parseInt(productState?.sku) === -1 || !productState?.sku) {
@@ -244,8 +278,17 @@ const ProductDetailsAdvancedUI = (props) => {
     }
   }, [formState?.changes?.weight])
 
+  useEffect(() => {
+    if (formState?.changes?.minimum_per_order && !(formState?.changes?.maximum_per_order || formState?.changes?.maximum_per_order === null)) {
+      handleClickProperty('maximum_per_order', productState?.maximum_per_order)
+    }
+    if ((formState?.changes?.maximum_per_order || formState?.changes?.maximum_per_order === null) && !(formState?.changes?.minimum_per_order)) {
+      handleClickProperty('minimum_per_order', productState?.minimum_per_order)
+    }
+  }, [formState?.changes])
+
   return (
-    <PropertiesContainer>
+    <PropertiesContainer onSubmit={formMethods.handleSubmit(onSubmit)}>
       {isSku && (
         <>
           <LabelCustom htmlFor='sku'>SKU</LabelCustom>
@@ -319,6 +362,45 @@ const ProductDetailsAdvancedUI = (props) => {
             placeholder='0.00'
             defaultValue={productState?.cost_offer_price ?? ''}
             onChange={(e) => handleClickProperty('cost_offer_price', e.target.value ?? null)}
+            disabled={formState.loading}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </InputContainer>
+      </FieldRow>
+      <FieldRow>
+        <InputContainer>
+          <LabelCustom htmlFor='minimum_per_order'>{t('MINIMUM_QUANTITY_ORDER', 'Minimum quantity to order')}</LabelCustom>
+          <Input
+            name='minimum_per_order'
+            id='minimum_per_order'
+            placeholder='0'
+            defaultValue={productState?.minimum_per_order ?? ''}
+            ref={formMethods.register({
+              required: t('MINIMUM_QUANTITY_REQUIRED', 'The minimum quantity is required')
+            })}
+            onChange={(e) => handleClickProperty('minimum_per_order', e.target.value ?? null)}
+            disabled={formState.loading}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9.]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </InputContainer>
+        <InputContainer>
+          <LabelCustom htmlFor='maximum_per_order'>{t('MAXIMUM_QUANTITY_ORDER', 'Maximum quantity to order')}</LabelCustom>
+          <Input
+            name='maximum_per_order'
+            id='maximum_per_order'
+            placeholder='0'
+            defaultValue={productState?.maximum_per_order ?? ''}
+            onChange={(e) => { handleClickProperty('maximum_per_order', e.target.value === '' ? null : e.target.value) }}
             disabled={formState.loading}
             autoComplete='off'
             onKeyPress={(e) => {
@@ -413,10 +495,10 @@ const ProductDetailsAdvancedUI = (props) => {
         </PropertyOption>
       </PropertyOptionWrapper>
       <Button
+        type='submit'
         color='primary'
         borderRadius='7.6px'
         disabled={formState.loading || Object.keys(formState?.changes).length === 0}
-        onClick={() => handleUpdateClick()}
       >
         {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
       </Button>

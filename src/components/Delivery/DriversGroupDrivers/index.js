@@ -33,8 +33,8 @@ export const DriversGroupDrivers = (props) => {
       _filteredDrivers = drivers
         .filter(
           driver => (
-            driver?.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-            driver?.email.toLowerCase().includes(searchValue.toLowerCase())
+            driver?.name?.toLowerCase().includes(searchValue?.toLowerCase()) ||
+            driver?.email?.toLowerCase().includes(searchValue?.toLowerCase())
           )
         )
     } else {

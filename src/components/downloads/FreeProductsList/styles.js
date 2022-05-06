@@ -55,7 +55,7 @@ export const ProductDetailsContainer = styled.div`
     margin-bottom: 0;
   }
 
-  p {
+  .description {
     font-size: 14px;
     line-height: 24px;
     color: ${props => props.theme.colors.headingColor};
@@ -138,7 +138,7 @@ export const AppDescriptionWarpper = styled.div`
     color: ${props => props.theme.colors.headingColor};
     margin: 0;
   }
-  p {
+  div {
     font-size: 14px;
     line-height: 24px;
     margin: 0;

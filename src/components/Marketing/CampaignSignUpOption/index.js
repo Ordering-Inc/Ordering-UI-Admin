@@ -69,16 +69,16 @@ const CampaignSignUpOptionUI = (props) => {
     }
 
     if (isAddMode) {
-      if (formState?.changes?.audience_type === 'fixed' &&
-        (ruleFormState?.changes?.date_condition === '=' ||
-          ruleFormState?.changes?.date_condition === '>')
-      ) {
-        setAlertState({
-          open: true,
-          content: t('REQUIRED_BEFORE_OR_RANGE_OPTION_WHEN_FIXED', 'when audience type is Fixed, date condition is required Before or Date range option')
-        })
-        return
-      }
+      // if (formState?.changes?.audience_type === 'fixed' &&
+      //   (ruleFormState?.changes?.date_condition === '=' ||
+      //     ruleFormState?.changes?.date_condition === '>')
+      // ) {
+      //   setAlertState({
+      //     open: true,
+      //     content: t('REQUIRED_BEFORE_OR_RANGE_OPTION_WHEN_FIXED', 'when audience type is Fixed, date condition is required Before or Date range option')
+      //   })
+      //   return
+      // }
       const updatedConditions = formState?.changes?.conditions.map(condition => {
         if (condition.type === type) {
           return { ...condition, ...ruleFormState.changes }
