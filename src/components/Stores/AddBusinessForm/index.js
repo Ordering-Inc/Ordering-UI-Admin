@@ -12,7 +12,7 @@ import {
 import BiImage from '@meronex/icons/bi/BiImage'
 import Skeleton from 'react-loading-skeleton'
 import { bytesConverter } from '../../../utils'
-import { Alert, CitySelector } from '../../Shared'
+import { Alert, CitySelector, ImageCrop, Modal } from '../../Shared'
 import { Button, Input, TextArea } from '../../../styles'
 
 import {
@@ -40,7 +40,8 @@ const AddBusinessFormUI = (props) => {
     handleChangeInput,
     handleAddBusiness,
     handleChangeAddress,
-    handleChangeCenter
+    handleChangeCenter,
+    handleChangeSwtich
   } = props
 
   const [, t] = useLanguage()
@@ -50,6 +51,7 @@ const AddBusinessFormUI = (props) => {
   const headerImageInputRef = useRef(null)
   const logoImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const googleMapsControls = {
@@ -94,6 +96,12 @@ const AddBusinessFormUI = (props) => {
         })
         return
       }
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: name, data: reader.result, open: true })
+      }
+      reader.onerror = error => console.log(error)
       handlechangeImage(files[0], name)
     }
   }
@@ -103,6 +111,11 @@ const AddBusinessFormUI = (props) => {
       open: false,
       content: []
     })
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeSwtich(cropState?.name, croppedImg)
+    setCropState({ name: null, data: null, open: false })
   }
 
   const onSubmit = () => {
@@ -354,6 +367,19 @@ const AddBusinessFormUI = (props) => {
           closeOnBackdrop={false}
         />
       </BusinessDetailsContainer>
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </>
   )
 }

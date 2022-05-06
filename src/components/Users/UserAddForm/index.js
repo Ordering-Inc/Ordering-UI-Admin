@@ -7,7 +7,7 @@ import {
   UserFormDetails as UserFormDetailsController
 } from 'ordering-components-admin'
 import { Input, Button } from '../../../styles'
-import { Alert, InputPhoneNumber } from '../../Shared'
+import { Alert, InputPhoneNumber, Modal, ImageCrop } from '../../Shared'
 import { UserTypeSelector } from '../UserTypeSelector'
 import parsePhoneNumber from 'libphonenumber-js'
 import { sortInputFields, bytesConverter } from '../../../utils'
@@ -38,7 +38,8 @@ const UserAddFormUI = (props) => {
     handleButtonAddClick,
     isCheckout,
     handleChangeUserType,
-    handlechangeImage
+    handlechangeImage,
+    handleChangeSwtich
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
@@ -46,6 +47,7 @@ const UserAddFormUI = (props) => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const emailInput = useRef(null)
   const inputRef = useRef(null)
 
@@ -95,8 +97,21 @@ const UserAddFormUI = (props) => {
         })
         return
       }
+
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'photo', data: reader.result, open: true })
+      }
+      reader.onerror = error => console.log(error)
+
       handlechangeImage(files[0])
     }
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeSwtich(cropState?.name, croppedImg)
+    setCropState({ name: null, data: null, open: false })
   }
 
   const handleChangePhoneNumber = (number, isValid) => {
@@ -184,152 +199,167 @@ const UserAddFormUI = (props) => {
   }, [formMethods])
 
   return (
-    <FormContainer>
-      <FormInput
-        onSubmit={formMethods.handleSubmit(onSubmit)}
-        isCheckout={isCheckout}
-        data-tour='tour_fill'
-      >
-        <h1>
-          {t('USERS_REGISTER', 'New user')}
-        </h1>
-        <UserImage className='user-image'>
-          <Image onClick={() => handleClickImage()} isImage={formState?.changes?.photo && !formState.result.error}>
-            <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
-              <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
-                {
-                  formState.loading
-                    ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
-                    : formState?.changes?.photo && <img src={formState?.changes?.photo} alt='user image' loading='lazy' />
-                }
-                <UploadImageIconContainer>
-                  <UploadImageIcon>
-                    <BiImage />
-                  </UploadImageIcon>
-                </UploadImageIconContainer>
-              </DragAndDrop>
-            </ExamineClick>
-          </Image>
-        </UserImage>
-        {!validationFields?.loading ? (
-          <>
-            {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
-              showField && showField(field.code) && (
-                <React.Fragment key={field.id}>
-                  {field.code === 'email' ? (
-                    <Input
-                      key={field.id}
-                      type={field.type}
-                      name={field.code}
-                      className='form'
-                      placeholder={t(field.code.toUpperCase(), field?.name)}
-                      defaultValue={
-                      formState?.result?.result
-                        ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? ''
-                      }
-                      onChange={handleChangeInputEmail}
-                      ref={(e) => {
-                        emailInput.current = e
-                      }}
-                      autoComplete='off'
-                    />
-                  ) : (
-                    <Input
-                      key={field.id}
-                      type={field.type}
-                      name={field.code}
-                      className='form'
-                      placeholder={t(field.code.toUpperCase(), field?.name)}
-                      defaultValue={
-                      formState?.result?.result
-                        ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? ''
-                      }
-                      onChange={handleChangeInput}
-                      ref={formMethods.register({
-                        required: isRequiredField(field.code)
-                          ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
-                          : null
-                      })}
-                      autoComplete='off'
-                    />
-                  )}
-
-                </React.Fragment>
-              )
-            )}
-            {!!showInputPhoneNumber && (
-              <InputPhoneNumber
-                value={userPhoneNumber}
-                setValue={handleChangePhoneNumber}
-                handleIsValid={setIsValidPhoneNumber}
-              />
-            )}
-            {!isCheckout && (
-              <Input
-                type='password'
-                name='password'
-                className='form'
-                placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
-                onChange={handleChangeInput}
-                ref={formMethods.register({
-                  required: isRequiredField('password')
-                    ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                    : null,
-                  minLength: {
-                    value: 8,
-                    message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+    <>
+      <FormContainer>
+        <FormInput
+          onSubmit={formMethods.handleSubmit(onSubmit)}
+          isCheckout={isCheckout}
+          data-tour='tour_fill'
+        >
+          <h1>
+            {t('USERS_REGISTER', 'New user')}
+          </h1>
+          <UserImage className='user-image'>
+            <Image onClick={() => handleClickImage()} isImage={formState?.changes?.photo && !formState.result.error}>
+              <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
+                <DragAndDrop onDrop={dataTransfer => handleFiles(dataTransfer.files)} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
+                  {
+                    formState.loading
+                      ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
+                      : formState?.changes?.photo && <img src={formState?.changes?.photo} alt='user image' loading='lazy' />
                   }
-                })}
-              />
-            )}
-            {
-            props.afterMidElements?.map((MidElement, i) => (
-              <React.Fragment key={i}>
-                {MidElement}
-              </React.Fragment>))
-            }
-            {
-             props.afterMidComponents?.map((MidComponent, i) => (
-               <MidComponent key={i} {...props} />))
-            }
-            <WrapperUserTypeSelector>
-              <UserTypeSelector
-                isPrimary
-                defaultUserType={formState?.changes?.level}
-                handleChangeUserType={handleChangeUserType}
-              />
-            </WrapperUserTypeSelector>
-            <ActionsForm>
-              <Button
-                color='primary'
-                borderRadius='8px'
-                type='submit'
-                disabled={Object.keys(formState?.changes).length === 0 || formState.loading}
-              >
-                {formState.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')}
-              </Button>
-            </ActionsForm>
-          </>
-        ) : (
-          <SkeletonForm>
-            {[...Array(6)].map((item, i) => (
-              <Skeleton key={i} />
-            ))}
-          </SkeletonForm>
-        )}
-      </FormInput>
-      <Alert
-        title={t('PROFILE', 'Profile')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
-    </FormContainer>
+                  <UploadImageIconContainer>
+                    <UploadImageIcon>
+                      <BiImage />
+                    </UploadImageIcon>
+                  </UploadImageIconContainer>
+                </DragAndDrop>
+              </ExamineClick>
+            </Image>
+          </UserImage>
+          {!validationFields?.loading ? (
+            <>
+              {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
+                showField && showField(field.code) && (
+                  <React.Fragment key={field.id}>
+                    {field.code === 'email' ? (
+                      <Input
+                        key={field.id}
+                        type={field.type}
+                        name={field.code}
+                        className='form'
+                        placeholder={t(field.code.toUpperCase(), field?.name)}
+                        defaultValue={
+                        formState?.result?.result
+                          ? formState?.result?.result[field.code]
+                          : formState?.changes[field.code] ?? ''
+                        }
+                        onChange={handleChangeInputEmail}
+                        ref={(e) => {
+                          emailInput.current = e
+                        }}
+                        autoComplete='off'
+                      />
+                    ) : (
+                      <Input
+                        key={field.id}
+                        type={field.type}
+                        name={field.code}
+                        className='form'
+                        placeholder={t(field.code.toUpperCase(), field?.name)}
+                        defaultValue={
+                        formState?.result?.result
+                          ? formState?.result?.result[field.code]
+                          : formState?.changes[field.code] ?? ''
+                        }
+                        onChange={handleChangeInput}
+                        ref={formMethods.register({
+                          required: isRequiredField(field.code)
+                            ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
+                            : null
+                        })}
+                        autoComplete='off'
+                      />
+                    )}
+
+                  </React.Fragment>
+                )
+              )}
+              {!!showInputPhoneNumber && (
+                <InputPhoneNumber
+                  value={userPhoneNumber}
+                  setValue={handleChangePhoneNumber}
+                  handleIsValid={setIsValidPhoneNumber}
+                />
+              )}
+              {!isCheckout && (
+                <Input
+                  type='password'
+                  name='password'
+                  className='form'
+                  placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
+                  onChange={handleChangeInput}
+                  ref={formMethods.register({
+                    required: isRequiredField('password')
+                      ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                      : null,
+                    minLength: {
+                      value: 8,
+                      message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                    }
+                  })}
+                />
+              )}
+              {
+              props.afterMidElements?.map((MidElement, i) => (
+                <React.Fragment key={i}>
+                  {MidElement}
+                </React.Fragment>))
+              }
+              {
+              props.afterMidComponents?.map((MidComponent, i) => (
+                <MidComponent key={i} {...props} />))
+              }
+              <WrapperUserTypeSelector>
+                <UserTypeSelector
+                  isPrimary
+                  defaultUserType={formState?.changes?.level}
+                  handleChangeUserType={handleChangeUserType}
+                />
+              </WrapperUserTypeSelector>
+              <ActionsForm>
+                <Button
+                  color='primary'
+                  borderRadius='8px'
+                  type='submit'
+                  disabled={Object.keys(formState?.changes).length === 0 || formState.loading}
+                >
+                  {formState.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')}
+                </Button>
+              </ActionsForm>
+            </>
+          ) : (
+            <SkeletonForm>
+              {[...Array(6)].map((item, i) => (
+                <Skeleton key={i} />
+              ))}
+            </SkeletonForm>
+          )}
+        </FormInput>
+        <Alert
+          title={t('PROFILE', 'Profile')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => closeAlert()}
+          onAccept={() => closeAlert()}
+          closeOnBackdrop={false}
+        />
+      </FormContainer>
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
+    </>
   )
 }
 
