@@ -1,5 +1,5 @@
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Image } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 
@@ -119,40 +119,14 @@ export const InvoiceBusinessPdf = (props) => {
     return objectStatus && objectStatus
   }
 
-  const logoImage = theme?.images?.logos?.logotype
-  const [base64ImageString, setBase64ImageString] = useState(null)
-
-  const getBase64ImageFromUrl = async (imageUrl) => {
-    const response = await fetch(imageUrl)
-    const blob = await response.blob()
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.addEventListener('load', function () {
-        resolve(reader.result)
-      }, false)
-      reader.onerror = (error) => {
-        return reject(error)
-      }
-      reader.readAsDataURL(blob)
-    })
-  }
-
-  useEffect(() => {
-    getBase64ImageFromUrl(logoImage).then(base64 => {
-      setBase64ImageString(base64)
-    })
-  }, [])
-
   return (
     <div style={styles.root}>
-      {base64ImageString && (
-        <Image
-          src={base64ImageString}
-          fluid
-          loading='lazy'
-          style={styles.imageWrapper}
-        />
-      )}
+      <Image
+        src={theme?.images?.logos?.logotype}
+        fluid
+        loading='lazy'
+        style={styles.imageWrapper}
+      />
       <br />
       <span>{t('INVOICE_FOR', 'Invoice for')} <b>{exportInvoiceList?.invoice?.business?.name}</b></span><br />
       {
