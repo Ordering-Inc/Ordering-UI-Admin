@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const SettingsSelectContainer = styled.div`
   margin-bottom: 20px;
@@ -28,6 +28,7 @@ export const SelectContent = styled.div`
     border: none;
     width: 100%;
     line-height: 26px;
+    padding: 0;
 
     > div:first-child {
       padding: 8px 15px;
@@ -55,4 +56,20 @@ export const Option = styled.div`
 export const OptionsError = styled.span`
   font-size: 12px;
   color: #d83520;
+`
+export const InputWrapper = styled.div`
+  height: 26px;
+
+  > input {
+    position: absolute;
+    top: 0;
+    height: 42px;
+    width: calc(100% - 40px);
+    border: none;
+    ${props => props.theme?.rtl ? css`
+      right: 0px;
+    ` : css`
+      left: 0px;
+    `}
+  }
 `
