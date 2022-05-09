@@ -226,7 +226,7 @@ export const CampaignDetailGeneral = (props) => {
                     isBottom
                   >
                     {isASAP ? <CheckIcon className='fill' /> : <UnCheckIcon />}
-                    <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} + {t('DELIVERY_TIME', 'delivery time')})</span>
+                    <span>{t('CHECKOUT_ASAP', 'ASAP')} ({moment(new Date()).format('LLLL')} + {t('MENU_LIST_DELIVERY_TIME', 'delivery time')})</span>
                   </RadioCheckWrapper>
                   <RadioCheckWrapper
                     onClick={() => setIsASAP(false)}

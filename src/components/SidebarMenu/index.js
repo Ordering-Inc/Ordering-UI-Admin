@@ -15,7 +15,8 @@ import {
   GraphUp,
   // WindowDock,
   Award,
-  BoxArrowUpRight
+  BoxArrowUpRight,
+  Cart3
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
@@ -83,6 +84,21 @@ export const SidebarMenu = (props) => {
     //   pageName: 'loyalty_reports',
     //   url: '/loyalty/reports'
     // }
+  ]
+
+  const cartRecoveryMenus = [
+    {
+      id: 1,
+      title: t('OPEN_CARTS', 'Open carts'),
+      pageName: 'open_carts',
+      url: '/cart-recovery/open-carts'
+    },
+    {
+      id: 2,
+      title: t('RECOVERY_ACTIONS', 'Recovery actions'),
+      pageName: 'recovery_actions',
+      url: '/cart-recovery/recovery-actions'
+    }
   ]
 
   const storesSubMenus = [
@@ -513,6 +529,31 @@ export const SidebarMenu = (props) => {
                     <Accordion.Collapse eventKey='9'>
                       <MenuContent>
                         {loyaltySubMenus.map(item => (
+                          <SubMenu
+                            key={item.id}
+                            active={location.pathname.includes(item.url)}
+                            onClick={() => handleGoToPage({ page: item.pageName })}
+                          >
+                            {item.title}
+                          </SubMenu>
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='10'
+                      active={
+                        location.pathname === '/cart-recovery/open-carts' ||
+                        location.pathname === '/cart-recovery/recovery-actions'
+                      }
+                    >
+                      <Cart3 />
+                      <span>{t('CART_RECOVERY', 'Cart recovery')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='10'>
+                      <MenuContent>
+                        {cartRecoveryMenus.map(item => (
                           <SubMenu
                             key={item.id}
                             active={location.pathname.includes(item.url)}

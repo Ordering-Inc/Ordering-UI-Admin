@@ -33,6 +33,8 @@ export const ListenPageChanges = ({ children }) => {
     reviews: '/intelligence/reviews',
     reviewProducts: '/intelligence/reviews/:store',
     reports: '/intelligence/reports',
+    open_carts: '/cart-recovery/open-carts',
+    recovery_actions: '/cart-recovery/recovery-actions',
     delivery_drivers: '/delivery/drivers-list',
     drivers_managers: '/delivery/drivers-managers',
     drivers_companies: '/delivery/drivers-companies',
