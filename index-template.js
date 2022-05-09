@@ -32,6 +32,17 @@ import level from './template/assets/images/level.png'
 import registerOrder from './template/assets/images/register-order.png'
 import mobileHalfMask from './template/assets/images/mobile-half-mask.png'
 import whatsappHeader from './template/assets/images/whatsapp-header.png'
+import appStore from './template/assets/images/app-store.png'
+import googlePlay from './template/assets/images/google-play.png'
+
+/**
+ * Theme apps
+ */
+import storeApp from './template/assets/images/store-app.png'
+import driverApp from './template/assets/images/driver-app.png'
+import posApp from './template/assets/images/pos-app.png'
+import kioskApp from './template/assets/images/kiosk-app.png'
+import callCenterApp from './template/assets/images/call-center-app.png'
 
 /**
  * business tutorials
@@ -116,6 +127,11 @@ import orderStatus21 from './template/assets/images/order/status-21.svg'
 
 import categoryAll from './template/assets/images/categories/category-all.png'
 import exampleCSV from './template/assets/files/ordering_business_example.csv'
+import delivery from './template/assets/images/icons/delivery.svg'
+import poster from './template/assets/images/icons/poster.svg'
+import posTerminal from './template/assets/images/icons/pos-terminal.svg'
+import apple from './template/assets/images/icons/apple.svg'
+import android from './template/assets/images/icons/android.svg'
 
 if (!(window?.location?.hostname === 'localhost')) {
   Sentry.init({
@@ -159,7 +175,16 @@ theme.images = {
     level,
     registerOrder,
     mobileHalfMask,
-    whatsappHeader
+    whatsappHeader,
+    appStore,
+    googlePlay
+  },
+  apps: {
+    storeApp,
+    driverApp,
+    posApp,
+    kioskApp,
+    callCenterApp
   },
   order: {
     status0: orderStatus0,
@@ -229,7 +254,12 @@ theme.images = {
     rightArrow: rightArrow,
     clock1: clock1,
     clockRisk: clockRisk,
-    clockDelayed: clockDelayed
+    clockDelayed: clockDelayed,
+    delivery: delivery,
+    posTerminal: posTerminal,
+    poster: poster,
+    apple: apple,
+    android: android
   },
   dummies: {
     noOrders: noOrders,
