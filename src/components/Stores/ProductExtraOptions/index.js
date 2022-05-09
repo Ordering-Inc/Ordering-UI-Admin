@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
-  ToastType,
-  useToast,
   ProductExtraOptions as ProductExtraOptionsController
 } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
@@ -35,8 +33,6 @@ const ProductExtraOptionsUI = (props) => {
   const {
     open,
     onClose,
-    editErrors,
-    cleanEditErrors,
     extraState,
     changesState,
     handleChangeImage,
@@ -50,8 +46,7 @@ const ProductExtraOptionsUI = (props) => {
     handleDeleteExtra,
     handleUpdateBusinessState,
     handleSucccessDeleteOption,
-    handleClickUpdateOption,
-
+    handleUpdateOption,
     curOption,
     openModal,
     setCurOption,
@@ -63,8 +58,9 @@ const ProductExtraOptionsUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
-  const { handleSubmit, register, errors } = useForm()
-  const [, { showToast }] = useToast()
+  const { control, handleSubmit, errors, setValue } = useForm({
+    defaultValues: addChangesState
+  })
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -72,31 +68,10 @@ const ProductExtraOptionsUI = (props) => {
   const [isMaxError, setIsMaxError] = useState(false)
 
   const closeAlert = () => {
-    cleanEditErrors()
     setAlertState({
       open: false,
       content: []
     })
-  }
-
-  const handleChangeOptionInput = (e, option, min) => {
-    const regexp = /^[0-9.\b]+$/
-    if (e.target.value === '' || regexp.test(e.target.value)) {
-      if (min) {
-        const max = changesState?.changes?.max ? changesState?.changes?.max : option?.max
-        if (parseInt(e.target.value) > parseInt(max)) return
-      } else {
-        if (option?.suboptions?.filter(suboption => suboption?.preselected)?.length > parseInt(e?.target?.value)) {
-          setIsMaxError(true)
-          showToast(ToastType.Error, t('ERROR_MATCH_MAX_DEFAULT_SUBOPTIONS', 'Max default suboptions length is less than preselected suboptions'))
-          return
-        }
-        setIsMaxError(false)
-        const min = changesState?.changes?.min ? changesState?.changes?.min : option?.min
-        if (parseInt(e.target.value) < parseInt(min)) return
-      }
-      handleChangeInput(e, option.id)
-    }
   }
 
   const handleChangeAddOptionInput = (e, min) => {
@@ -164,21 +139,6 @@ const ProductExtraOptionsUI = (props) => {
     if (!open) return
     actionSidebar(true)
   }, [open])
-
-  useEffect(() => {
-    if (Object.keys(editErrors).length) {
-      const errorContent = []
-      if (editErrors?.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'))
-      if (editErrors?.min) errorContent.push(t('MIN_PURCHASED_REQUIRED', 'The min is required.'))
-      if (editErrors?.max) errorContent.push(t('MAX_PURCHASED_REQUIRED', 'The max is required.'))
-      if (errorContent.length) {
-        setAlertState({
-          open: true,
-          content: errorContent
-        })
-      }
-    }
-  }, [editErrors])
 
   const handleDeleteExtraClick = () => {
     setConfirm({
@@ -366,7 +326,6 @@ const ProductExtraOptionsUI = (props) => {
             optionChangesState={editOptionId === curOption.id ? changesState : {}}
             handleOptionFiles={handleFiles}
             handleChangeOptionInput={handleChangeInput}
-            handleChangeNumberInput={handleChangeOptionInput}
             handleChangeOptionEnable={handleChangeOptionEnable}
             onClose={() => {
               setOpenModal({ ...openModal, edit: false })
@@ -376,7 +335,7 @@ const ProductExtraOptionsUI = (props) => {
             handleUpdateBusinessState={handleUpdateBusinessState}
             handleSucccessDeleteOption={handleSucccessDeleteOption}
             isMaxError={isMaxError}
-            handleClickUpdateOption={handleClickUpdateOption}
+            handleUpdateOption={handleUpdateOption}
           />
         </Modal>
       )}
