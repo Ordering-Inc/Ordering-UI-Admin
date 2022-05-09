@@ -125,7 +125,8 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
       backgroundColor: '#eee'
     },
     imageWrapper: {
-      width: '150px'
+      width: '150px',
+      marginBottom: '15px'
     }
   };
 
@@ -247,7 +248,7 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
     return objectStatus && objectStatus;
   };
 
-  var logoImage = theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype;
+  var logoImage = theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logoPdf;
 
   var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
