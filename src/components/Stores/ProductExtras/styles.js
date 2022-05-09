@@ -53,34 +53,30 @@ export const ExtraOption = styled.div`
 `
 
 export const CheckboxContainer = styled.div`
-  flex: 1;
   display: flex;
   align-items: center;
-
-  input[type='text'] {
-    flex: 1;
-    margin: 0 5px;
-    color: ${props => props.theme.colors.headingColor};
-    padding: 5px;
-    outline: none;
-    border: none;
-    font-size: 14px;
-    background: transparent;
-  }
 `
 
 export const MoreContainer = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
   svg {
     cursor: pointer;
     font-size: 20px;
     color: ${props => props.theme.colors.headingColor};
   }
+
+  > span {
+    font-size: 14px;
+    padding: 0 10px;
+  }
 `
 
 export const Details = styled.div`
-  cursor: pointer;
   font-size: 14px;
   color: ${props => props.theme.colors.primary};
 
@@ -111,7 +107,8 @@ export const ExtraAddForm = styled.form`
     width: 100%;
     border: none;
     outline: none;
-    border-bottom: 1px solid #E9ECEF;
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
     padding: 12px 0;
 
     &::placeholder,

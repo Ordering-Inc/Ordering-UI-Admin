@@ -13,7 +13,6 @@ import { BusinessTaxAndFees } from '../BusinessTaxAndFees'
 import { BusinessPromotionList } from '../BusinessPromotionList'
 import { BusinessCustomFields } from '../BusinessCustomFields'
 import { BusinessWebhooks } from '../BusinessWebhooks'
-import { BusinessMoreDetail } from '../BusinessMoreDetail'
 import { BusinessNotifications } from '../BusinessNotifications'
 import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
 import { BusinessFrontLayout } from '../BusinessFrontLayout'
@@ -270,15 +269,6 @@ export const BusinessDetailsUI = (props) => {
             <BusinessWebhooks
               business={businessState?.business}
               handleSuccessUpdate={handleUpdateBusinessState}
-            />
-          )}
-          {selectedItem === 'more' && (
-            <BusinessMoreDetail
-              business={businessState?.business}
-              handleSuccessUpdate={handleUpdateBusinessState}
-              handleUpdateBusinessClick={handleUpdateBusinessClick}
-              formState={formState}
-              setFormState={setFormState}
             />
           )}
         </MoreSidebarLayout>

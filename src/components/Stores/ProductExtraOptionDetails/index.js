@@ -80,12 +80,18 @@ const ProductExtraOptionDetailsUI = (props) => {
     extra,
     handleAddOption,
     handleDeteteOption,
-    isMaxError
+    isMaxError,
+
+    handleClickUpdateOption
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const optionImageInputRef = useRef(null)
+  const mainContainerRef = useRef()
+  const optionNameRef = useRef()
+  const optionMinRef = useRef()
+  const optionMaxRef = useRef()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openModal, setOpenModal] = useState({})
@@ -152,19 +158,26 @@ const ProductExtraOptionDetailsUI = (props) => {
   const closeAddForm = (e) => {
     const outsideDropdown = !e.target.closest('.add-product-option') && !e.target.closest('.add-option-btn')
     if (outsideDropdown && Object.keys(changesState?.changes).length === 0) setIsAddForm(false)
+
+    if (mainContainerRef.current?.contains(e.target)) {
+      if (optionChangesState?.changes?.name === '' && optionNameRef.current?.contains(e.target)) return
+      if (optionChangesState?.changes?.min === '' && optionMinRef.current?.contains(e.target)) return
+      if (optionChangesState?.changes?.max === '' && optionMaxRef.current?.contains(e.target)) return
+      handleClickUpdateOption()
+    }
   }
 
   useEffect(() => {
     document.addEventListener('click', closeAddForm)
     return () => document.removeEventListener('click', closeAddForm)
-  }, [changesState])
+  }, [changesState, handleClickUpdateOption])
 
   useEffect(() => {
     if (Object.keys(changesState?.changes).length === 0) setIsAddForm(false)
   }, [changesState?.changes])
 
   return (
-    <MainContainer>
+    <MainContainer ref={mainContainerRef}>
       <Header>
         <h1>{t('PRODUCT_OPTION', 'Product option')}</h1>
         <ActionSelectorWrapper>
@@ -224,6 +237,7 @@ const ProductExtraOptionDetailsUI = (props) => {
               <label>{t('OPTION_NAME', 'Option name')}</label>
               <Input
                 name='name'
+                ref={optionNameRef}
                 autoComplete='off'
                 defaultValue={optionState?.option.name}
                 onChange={(e) => handleChangeOptionInput(e, optionState.option?.id)}
@@ -234,6 +248,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 <label>{t('MINIMUM', 'Minimum')}</label>
                 <Input
                   name='min'
+                  ref={optionMinRef}
                   defaultValue={optionState?.option?.min}
                   onChange={(e) => handleChangeNumberInput(e, optionState.option, true)}
                   onKeyPress={(e) => {
@@ -247,6 +262,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                 <label>{t('MAX', 'Max')}</label>
                 <Input
                   name='max'
+                  ref={optionMaxRef}
                   defaultValue={optionState?.option?.max}
                   onChange={(e) => handleChangeNumberInput(e, optionState.option, false)}
                   onKeyPress={(e) => {

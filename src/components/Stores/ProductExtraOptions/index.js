@@ -50,12 +50,14 @@ const ProductExtraOptionsUI = (props) => {
     handleDeleteExtra,
     handleUpdateBusinessState,
     handleSucccessDeleteOption,
+    handleClickUpdateOption,
 
     curOption,
     openModal,
     setCurOption,
     setOpenModal,
-    handleOpenModal
+    handleOpenModal,
+    handleChangeExtraName
   } = props
 
   const theme = useTheme()
@@ -189,11 +191,33 @@ const ProductExtraOptionsUI = (props) => {
     })
   }
 
+  let timeout = null
+  const onChangeExtraName = (e) => {
+    e.persist()
+    clearTimeout(timeout)
+    timeout = setTimeout(function () {
+      handleChangeExtraName(e, extraState.extra.id)
+    }, 500)
+  }
+
+  useEffect(() => {
+    if (!addChangesState?.name && addChangesState?.min === 1 && addChangesState?.max === 1) {
+      setValue('name', addChangesState?.name || '')
+      setValue('min', addChangesState?.min || '')
+      setValue('max', addChangesState?.max || '')
+    }
+  }, [addChangesState])
+
   return (
     <MainContainer id='extra_options'>
       <OptionsContainer>
         <Header>
-          <h1>{extraState.extra.name}</h1>
+          <input
+            type='text'
+            placeholder={t('NAME', '')}
+            defaultValue={extraState.extra.name}
+            onChange={(e) => onChangeExtraName(e)}
+          />
           <div>
             <ActionSelectorWrapper>
               <DropdownButton
@@ -352,6 +376,7 @@ const ProductExtraOptionsUI = (props) => {
             handleUpdateBusinessState={handleUpdateBusinessState}
             handleSucccessDeleteOption={handleSucccessDeleteOption}
             isMaxError={isMaxError}
+            handleClickUpdateOption={handleClickUpdateOption}
           />
         </Modal>
       )}

@@ -4,14 +4,14 @@ import { Input } from '../../../styles/Inputs'
 import { Alert } from '../../Shared'
 
 import {
-  BusinessEmailAndPhoneContainer,
+  BusinessEmailContainer,
   SectionTitle,
   FormControl,
   Label,
   OrdersAppPushContainer
 } from './styles'
 
-export const BusinessEmailAndPhone = (props) => {
+export const BusinessEmail = (props) => {
   const {
     business,
     setFormState,
@@ -22,8 +22,6 @@ export const BusinessEmailAndPhone = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
 
   let timeout1 = null
-  let timeout2 = null
-  let timeout3 = null
 
   const saveEmailOrders = (email) => {
     clearTimeout(timeout1)
@@ -37,38 +35,6 @@ export const BusinessEmailAndPhone = (props) => {
     }, 500)
   }
 
-  const saveBusinessTel = (phone) => {
-    clearTimeout(timeout2)
-    timeout2 = setTimeout(() => {
-      if (phone.trim() === '') {
-        setAlertState({
-          ...alertState,
-          open: true,
-          content: [t('PHONE_REQUIRED')]
-        })
-        return
-      }
-      if (phone.length >= 7) {
-        setFormState({
-          ...formState,
-          changes: { phone: phone }
-        })
-      }
-    }, 500)
-  }
-
-  const saveBusinessCel = (cellphone) => {
-    clearTimeout(timeout3)
-    timeout3 = setTimeout(() => {
-      if (cellphone.length >= 10 || cellphone.length === 0) {
-        setFormState({
-          ...formState,
-          changes: { cellphone: cellphone || '' }
-        })
-      }
-    }, 500)
-  }
-
   const closeAlert = () => {
     setAlertState({
       ...alertState,
@@ -79,7 +45,7 @@ export const BusinessEmailAndPhone = (props) => {
 
   return (
     <>
-      <BusinessEmailAndPhoneContainer>
+      <BusinessEmailContainer>
         <SectionTitle>{t('EMAILS_NOTIFICATIONS', 'Email notifications')}</SectionTitle>
         <FormControl>
           <Label>{t('EMAIL_RECEIVE_ORDERS', 'Email to receive orders')}</Label>
@@ -90,25 +56,7 @@ export const BusinessEmailAndPhone = (props) => {
             onChange={(e) => saveEmailOrders(e.target.value)}
           />
         </FormControl>
-        <FormControl>
-          <Label>{t('PHONE_NUMBER')}</Label>
-          <Input
-            type='text'
-            defaultValue={business?.phone ?? ''}
-            placeholder={t('PHONE_NUMBER')}
-            onChange={(e) => saveBusinessTel(e.target.value)}
-          />
-        </FormControl>
-        <FormControl>
-          <Label>{t('MOBILE_NUMBER')} ({t('OPTIONAL')})</Label>
-          <Input
-            type='text'
-            defaultValue={business?.cellphone ?? ''}
-            placeholder={t('MOBILE_NUMBER')}
-            onChange={(e) => saveBusinessCel(e.target.value)}
-          />
-        </FormControl>
-      </BusinessEmailAndPhoneContainer>
+      </BusinessEmailContainer>
 
       <OrdersAppPushContainer>
         <SectionTitle>{t('ORDERS_APP_PUSH')}</SectionTitle>
@@ -116,7 +64,7 @@ export const BusinessEmailAndPhone = (props) => {
       </OrdersAppPushContainer>
 
       <Alert
-        title={t('EMAILS_AND_PHONES', 'Emails and phones')}
+        title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
