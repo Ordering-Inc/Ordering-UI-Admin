@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const OrdersDashboardSLAControlsContainer = styled.div`
   display: flex;
-  margin-top: 10px;
 
   button {
     height: 42px;

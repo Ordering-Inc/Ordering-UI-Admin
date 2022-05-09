@@ -69,9 +69,19 @@ export const TopRightSection = styled.div`
   justify-content: flex-end;
   flex-direction: column;
   
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
+  }
+`
+
+export const SLAControlsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+
+  @media (min-width: 768px) {
+    margin-top: 0px;
   }
 `
 
