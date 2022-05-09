@@ -82,7 +82,8 @@ export const InvoiceBusinessPdf = (props) => {
       backgroundColor: '#eee'
     },
     imageWrapper: {
-      width: '150px'
+      width: '150px',
+      marginBottom: '15px'
     }
   }
 
@@ -119,7 +120,7 @@ export const InvoiceBusinessPdf = (props) => {
     return objectStatus && objectStatus
   }
 
-  const logoImage = theme?.images?.logos?.logotype
+  const logoImage = theme?.images?.logos?.logoPdf
   const [base64ImageString, setBase64ImageString] = useState(null)
 
   const getBase64ImageFromUrl = async (imageUrl) => {
