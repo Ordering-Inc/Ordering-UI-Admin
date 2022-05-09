@@ -117,6 +117,14 @@ export const OrderDetailsHeader = (props) => {
                   ? walletName[event?.wallet_event?.wallet?.type]?.name
                   : event?.paymethod?.name}
               </span>
+              {stripePaymethods.includes(event?.data?.gateway) && (
+                <>
+                  <span> (</span>
+                  <StripeLink href={`https://dashboard.stripe.com/payments/${event?.data?.result?.pay_data}`} target='_blank'>{event?.data?.result?.pay_data}</StripeLink>
+                  <span>) </span>
+                  <span> ({order?.refund_data ? t('REFUNDED', 'Refunded') : t('MOBILE_SUCCESS', 'Success')}) </span>
+                </>
+              )}
               <EnDotSingle />
             </React.Fragment>
           ))
