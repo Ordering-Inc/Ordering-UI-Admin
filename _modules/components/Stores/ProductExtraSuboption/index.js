@@ -67,7 +67,8 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
       handleChangeDefaultSuboption = props.handleChangeDefaultSuboption,
       handleChangeSubOptionEnable = props.handleChangeSubOptionEnable,
       handleDeteteSubOption = props.handleDeteteSubOption,
-      handleUpdateSubOption = props.handleUpdateSubOption;
+      handleUpdateSubOption = props.handleUpdateSubOption,
+      handleChangeItem = props.handleChangeItem;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -99,6 +100,15 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
       confirm = _useState6[0],
       setConfirm = _useState6[1];
 
+  var _useState7 = (0, _react.useState)({
+    name: null,
+    data: null,
+    open: false
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      cropState = _useState8[0],
+      setCropState = _useState8[1];
+
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
   };
@@ -125,6 +135,22 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
         return;
       }
 
+      var reader = new window.FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = function () {
+        setCropState({
+          name: 'image',
+          data: reader.result,
+          open: true,
+          id: subOptionId
+        });
+      };
+
+      reader.onerror = function (error) {
+        return console.log(error);
+      };
+
       handleChangeSubOptionImage(files[0], subOptionId);
     }
   };
@@ -139,6 +165,15 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
         }));
         handleDeteteSubOption(id);
       }
+    });
+  };
+
+  var handleChangePhoto = function handleChangePhoto(croppedImg) {
+    handleChangeItem(_defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg), cropState === null || cropState === void 0 ? void 0 : cropState.id);
+    setCropState({
+      name: null,
+      data: null,
+      open: false
     });
   };
 
@@ -166,6 +201,7 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
         return;
       }
 
+      if (e.target.closest('.ordering-img-crop')) return;
       handleUpdateSubOption();
     }
   };
@@ -330,7 +366,22 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     },
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('IMAGE_CROP', 'Image crop'),
+    open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
+    onClose: function onClose() {
+      return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
+        open: false
+      }));
+    },
+    className: "ordering-img-crop"
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
+    handleChangePhoto: handleChangePhoto
+  })));
 };
 
 exports.ProductExtraSuboption = ProductExtraSuboption;

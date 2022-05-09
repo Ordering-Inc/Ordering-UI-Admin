@@ -48,7 +48,8 @@ var ModalUI = function ModalUI(props) {
       acceptText = props.acceptText,
       cancelText = props.cancelText,
       isTransparent = props.isTransparent,
-      hideCloseDefault = props.hideCloseDefault;
+      hideCloseDefault = props.hideCloseDefault,
+      className = props.className;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -68,7 +69,7 @@ var ModalUI = function ModalUI(props) {
     };
   }, [props.open]);
   return /*#__PURE__*/_react.default.createElement(_styles2.ModalDialog, {
-    className: "popup-dialog",
+    className: "popup-dialog ".concat(className || ''),
     height: props.height,
     width: props.width,
     padding: props.padding,

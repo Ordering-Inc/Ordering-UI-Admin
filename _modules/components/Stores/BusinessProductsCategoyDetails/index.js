@@ -190,6 +190,7 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
   }), selectedInfoItem === 'seo_options' && /*#__PURE__*/_react.default.createElement(_SeoOptions.SeoOptions, {
     data: categorySelected,
     formState: formState,
+    setFormState: handleChangeItem,
     handleUpdateClick: handleUpdateClick,
     handleProductCategoryChangeInput: handleChangeInput,
     handlechangeImageProductCategory: handlechangeImage,

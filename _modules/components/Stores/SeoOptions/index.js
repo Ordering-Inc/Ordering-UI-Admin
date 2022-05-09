@@ -78,6 +78,15 @@ var SeoOptions = function SeoOptions(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var _useState3 = (0, _react.useState)({
+    name: null,
+    data: null,
+    open: false
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      cropState = _useState4[0],
+      setCropState = _useState4[1];
+
   var handleClickImage = function handleClickImage() {
     productImageInputRef.current.click();
   };
@@ -121,8 +130,39 @@ var SeoOptions = function SeoOptions(props) {
         return;
       }
 
+      var reader = new window.FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = function () {
+        setCropState({
+          name: 'seo_image',
+          data: reader.result,
+          open: true
+        });
+      };
+
+      reader.onerror = function (error) {
+        return console.log(error);
+      };
+
       if (isBusinessSeo) handlechangeImage(files[0]);else handlechangeImageProductCategory(files[0], 'seo_image');
     }
+  };
+
+  var handleChangePhoto = function handleChangePhoto(croppedImg) {
+    if (isBusinessSeo) {
+      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+        changes: _objectSpread(_objectSpread({}, formState.changes), {}, _defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg))
+      }));
+    } else {
+      setFormState(_defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg));
+    }
+
+    setCropState({
+      name: null,
+      data: null,
+      open: false
+    });
   };
 
   var handleChangeInput = function handleChangeInput(e) {
@@ -203,7 +243,21 @@ var SeoOptions = function SeoOptions(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('IMAGE_CROP', 'Image crop'),
+    open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
+    onClose: function onClose() {
+      return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
+        open: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
+    handleChangePhoto: handleChangePhoto
+  })));
 };
 
 exports.SeoOptions = SeoOptions;

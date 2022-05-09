@@ -117,15 +117,10 @@ var ProductVideosUI = function ProductVideosUI(props) {
 
     var _url = changesState === null || changesState === void 0 ? void 0 : (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.video;
 
-    var matchFormat = matchYoutubeUrl(_url);
-    var validId;
+    var validId = validationVideoId(_url);
 
-    if (matchFormat) {
-      validId = validationVideoId(_url);
-    }
-
-    if (matchFormat && validId) {
-      fetch('https://www.youtube.com/oembed?url=https%3A//youtube.com/watch%3Fv%3D' + validId + '&format=json').then(function (response) {
+    if (validId) {
+      fetch('https://www.youtube.com/oembed?url=https://youtube.com/watch?v=' + validId + '&format=json').then(function (response) {
         return response.json();
       }).then(function (data) {
         if (data) {
@@ -144,46 +139,40 @@ var ProductVideosUI = function ProductVideosUI(props) {
     }
   };
 
-  var matchYoutubeUrl = function matchYoutubeUrl(url) {
-    var patt = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|videoseries\?.+&list=|playlist\?.+&list=)?)((\w|-){11})(?:\S+)?$/;
-    var matches = url.match(patt);
-
-    if (!matches) {
-      setAlertState({
-        open: true,
-        content: t('INVALID_VIDEO_FORMAT', 'The video format is invalid.')
-      });
-      return false;
-    }
-
-    return true;
-  };
-
   var validationVideoId = function validationVideoId(url) {
-    var keys = url.split('/');
-    var _videoId = keys[keys.length - 1];
+    var patt = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|videoseries\?.+&list=|playlist\?.+&list=)?)((\w|-){11})(?:\S+)?$/;
+    var matched = patt.exec(url);
 
-    if (_videoId.includes('watch')) {
-      var __url = _videoId.split('=')[1];
+    if (matched) {
+      var keys = url.split('/');
+      var _videoId = keys[keys.length - 1];
 
-      _videoId = __url;
+      if (_videoId.includes('watch')) {
+        var __url = _videoId.split('=')[1];
+
+        _videoId = __url;
+      } else if (_videoId.includes('?')) {
+        var _url2 = _videoId.split('?')[0];
+
+        _videoId = _url2;
+      }
+
+      if (_videoId.search(/&/i) >= 0) {
+        _videoId = _videoId.split('&')[0];
+      } else if (_videoId.search(/\?/i) >= 0) {
+        _videoId = _videoId.split('?')[0];
+      }
+
+      if (_videoId.length === 11) {
+        return _videoId;
+      }
     }
 
-    if (_videoId.includes('?')) {
-      var _url2 = _videoId.split('?')[0];
-
-      _videoId = _url2;
-    }
-
-    if (!(_videoId.length === 11)) {
-      setAlertState({
-        open: true,
-        content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
-      });
-      return false;
-    }
-
-    return _videoId;
+    setAlertState({
+      open: true,
+      content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
+    });
+    return false;
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ProdcutVideosContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_VIDEOS', 'Product videos')), /*#__PURE__*/_react.default.createElement(_styles2.GalleryVideosContainer, null, productGalleryState !== null && productGalleryState !== void 0 && productGalleryState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.GalleryVideos, null, _toConsumableArray(Array(2).keys()).map(function (i) {
