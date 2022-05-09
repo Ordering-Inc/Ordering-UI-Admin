@@ -59,7 +59,6 @@ const CampaignSignUpOptionUI = (props) => {
       })
       return
     }
-
     if (!ruleFormState.changes?.date) {
       setAlertState({
         open: true,

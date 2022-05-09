@@ -151,7 +151,7 @@ export const BusinessesList = (props) => {
                 {pagination?.total > 0 && (
                   <Pagination
                     currentPage={pagination.currentPage}
-                    totalPages={pagination.totalPages}
+                    totalPages={Math.ceil(pagination?.total / pagination.pageSize)}
                     handleChangePage={handleChangePage}
                     handleChangePageSize={handleChangePageSize}
                   />
