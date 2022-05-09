@@ -62,9 +62,9 @@ const EnterprisePromotionDetailsUI = (props) => {
     setSelectedOption(option)
     if (Object.keys(formState.changes).length !== 0 && !actionState.loading) {
       if (isAddMode) {
-        handleAddPromotion()
+        onAddPromotion()
       } else {
-        handleUpdateClick()
+        onUpdateClick()
       }
     }
   }
@@ -174,8 +174,8 @@ const EnterprisePromotionDetailsUI = (props) => {
             handleSelectAllSites={() => handleSelectAllSites(true)}
             handleSelectNoneSites={() => handleSelectAllSites(false)}
             isDisabled={Object.keys(formState.changes).length === 0 || actionState.loading}
-            handleUpdateClick={handleUpdateClick}
-            handleAddPromotion={handleAddPromotion}
+            handleUpdateClick={onUpdateClick}
+            handleAddPromotion={onAddPromotion}
           />
         )}
         {selectedOption === 'businesses' && (
@@ -187,8 +187,8 @@ const EnterprisePromotionDetailsUI = (props) => {
             handleSelectAllBusinesses={() => handleSelectAllBusiness(true)}
             handleSelectNoneBusinesses={() => handleSelectAllBusiness(false)}
             isDisabled={Object.keys(formState.changes).length === 0 || actionState.loading}
-            handleUpdateClick={handleUpdateClick}
-            handleAddClick={handleAddPromotion}
+            handleUpdateClick={onUpdateClick}
+            handleAddClick={onAddPromotion}
           />
         )}
         {selectedOption === 'rules' && (
