@@ -53,7 +53,7 @@ const BusinessSharedMenuProductsUI = (props) => {
             placeholder={t('SEARCH', 'Search')}
             isCustomLayout
             search={searchValue}
-            onSearch={val => setSearchValue(val.toLowerCase())}
+            onSearch={val => setSearchValue(val?.toLowerCase())}
           />
         </SearchBarWrapper>
         <ProductListWrapper>

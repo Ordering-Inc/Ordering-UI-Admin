@@ -102,10 +102,10 @@ const PlaceListingUI = (props) => {
 
   useEffect(() => {
     if (countriesState.loading) return
-    const _cities = countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], [])
+    const _cities = countriesState.countries?.reduce((_cities, country) => [..._cities, ...country?.cities], [])
     let cities = []
     if (searchValue) {
-      cities = _cities.filter(city => city.name.toLowerCase().includes(searchValue.toLowerCase()))
+      cities = _cities.filter(city => city.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       cities = [..._cities]
     }
@@ -261,9 +261,9 @@ const PlaceListingUI = (props) => {
               <CityName>
                 <CheckboxWrapper
                   onClick={() => handleAllCheckboxClick()}
-                  active={!countriesState.loading && selectedCityList.length === countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], []).length}
+                  active={!countriesState.loading && selectedCityList.length === countriesState.countries?.reduce((_cities, country) => [..._cities, ...country?.cities], []).length}
                 >
-                  {!countriesState.loading && selectedCityList.length === countriesState.countries.reduce((_cities, country) => [..._cities, ...country?.cities], []).length ? (
+                  {!countriesState.loading && selectedCityList.length === countriesState.countries?.reduce((_cities, country) => [..._cities, ...country?.cities], []).length ? (
                     <RiCheckboxFill />
                   ) : (
                     <RiCheckboxBlankLine />

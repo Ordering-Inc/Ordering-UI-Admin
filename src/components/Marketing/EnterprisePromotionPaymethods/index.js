@@ -24,7 +24,7 @@ export const EnterprisePromotionPaymethods = (props) => {
       paymethods = [...formState.changes?.paymethods]
     } else {
       if (Array.isArray(promotionState.promotion?.paymethods)) {
-        paymethods = promotionState.promotion?.paymethods.reduce((ids, paymedhod) => [...ids, paymedhod.id], [])
+        paymethods = promotionState.promotion?.paymethods?.reduce((ids, paymedhod) => [...ids, paymedhod.id], [])
       }
     }
     if (checked) {

@@ -46,7 +46,6 @@ export const DateTypeSelector = (props) => {
               minDate={new Date(startDate)}
               placeholderText='mm/dd/yyyy'
               className='endDate'
-              isClearable
               onChange={date => _handleChangeEndDate(date)}
             />
           </DateContainer>

@@ -67,7 +67,7 @@ export const BusinessMenuChannels = (props) => {
             {t('SELECT_NONE', 'Select none')}
           </Button>
         </ButtonGroup>
-        {sitesState.sites?.filter(site => site?.name.toLowerCase().includes(searchValue))?.map(site => (
+        {sitesState.sites?.filter(site => site?.name?.toLowerCase().includes(searchValue))?.map(site => (
           <TabOption
             key={site.id}
             onClick={() => handleChangeMenuSite(site.id)}

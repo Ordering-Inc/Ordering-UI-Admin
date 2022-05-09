@@ -278,14 +278,14 @@ theme.files = {
 }
 
 const RouteApp = () => {
-  const language = JSON.parse(localStorage.getItem('language'))?.code || 'en'
+  const language = JSON.parse(window.localStorage.getItem('language'))?.code || 'en'
   const [configFile, setConfigFile] = useState({
     ...settings,
     api: {
       ...settings.api,
       language: language
     },
-    project: localStorage.getItem('project') !== null ? localStorage.getItem('project') : null
+    project: window.localStorage.getItem('project') !== null ? window.localStorage.getItem('project') : null
   })
 
   return (

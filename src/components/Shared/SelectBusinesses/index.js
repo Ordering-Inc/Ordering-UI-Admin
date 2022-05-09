@@ -39,7 +39,7 @@ export const SelectBusinesses = (props) => {
   useEffect(() => {
     let _filteredBusinesses = []
     if (searchValue) {
-      _filteredBusinesses = allBusinesses.filter(business => business?.name.toLowerCase().includes(searchValue.toLowerCase()))
+      _filteredBusinesses = allBusinesses.filter(business => business?.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       _filteredBusinesses = [...allBusinesses]
     }
