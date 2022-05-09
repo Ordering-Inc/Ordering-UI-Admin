@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import moment from 'moment'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -28,7 +29,9 @@ import {
   WrapperPagination,
   StatusInfo,
   LogisticStatusDot,
-  PriorityDot
+  PriorityDot,
+  Timestatus,
+  Timer
 } from './styles'
 
 export const OrdersTable = (props) => {
@@ -51,13 +54,11 @@ export const OrdersTable = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
-
   const [isAllChecked, setIsAllChecked] = useState(false)
-
+  const [currentTime, setCurrentTime] = useState()
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }
-
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(pagination.from / pageSize)
     getPageOrders(pageSize, expectedPage)
@@ -71,6 +72,7 @@ export const OrdersTable = (props) => {
     customer: true,
     driver: true,
     advanced: true,
+    timer: true,
     total: true
   })
 
@@ -104,10 +106,39 @@ export const OrdersTable = (props) => {
       content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
     },
     {
+      value: 'timer',
+      content: t('SLA_TIMER', 'SLA’s timer')
+    },
+    {
       value: 'total',
       content: t('EXPORT_TOTAL', 'Total')
     }
   ]
+
+  const getDelayTime = (order) => {
+    // targetMin = delivery_datetime  + eta_time - now()
+    const _delivery = order?.delivery_datetime_utc
+    const _eta = order?.eta_time
+    const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
+    let day = Math.floor(tagetedMin / 1440)
+    const restMinOfTargetedMin = tagetedMin - 1440 * day
+    let restHours = Math.floor(restMinOfTargetedMin / 60)
+    let restMins = restMinOfTargetedMin - 60 * restHours
+
+    if (order?.time_status === 'in_time' || order?.time_status === 'at_risk') day = Math.abs(day)
+    if (restHours < 10) restHours = ('0' + restHours)
+    if (restMins < 10) restMins = ('0' + restMins)
+    const finalTaget = day + 'day  ' + restHours + ':' + restMins
+    return finalTaget
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(Date.now())
+    }, 60000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   const getLogisticTag = (status) => {
     switch (parseInt(status)) {
@@ -221,6 +252,10 @@ export const OrdersTable = (props) => {
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
 
+  // useEffect(() => {
+  //   setTimeState
+  // }, [])
+
   return (
     <>
       <OrdersContainer
@@ -235,6 +270,9 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
+                <th>
+                  <Timestatus />
+                </th>
                 <th
                   className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
                 >
@@ -267,7 +305,7 @@ export const OrdersTable = (props) => {
                   <th colSpan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
                 )}
                 {allowColumns?.timer && (
-                  <th colSpan={2} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
+                  <th colSpan={3} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
                 )}
                 <th className='orderPrice'>
                   <ColumnAllowSettingPopover
@@ -283,6 +321,9 @@ export const OrdersTable = (props) => {
             [...Array(10).keys()].map(i => (
               <OrderTbody key={i}>
                 <tr>
+                  <td>
+                    <Timestatus />
+                  </td>
                   <td
                     className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
                   >
@@ -401,6 +442,11 @@ export const OrdersTable = (props) => {
                 data-tour={i === 0 ? 'tour_start' : ''}
               >
                 <tr>
+                  <td>
+                    <Timestatus
+                      timeState={order?.time_status}
+                    />
+                  </td>
                   <td
                     className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'small' : ''}
                   >
@@ -522,16 +568,12 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-                  {!isSelectedOrders && (
-                    <td className='orderPrice'>
-                      <div className='info'>
-                        {allowColumns?.total && (
-                          <p className='bold'>{parsePrice(order?.summary?.total)}</p>
-                        )}
-                        {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
-                          <TimgeAgo order={order} />
-                        )}
-                      </div>
+                  {allowColumns?.timer && (
+                    <td className='timer'>
+                      <Timer>
+                        <p className='bold'>{t('TIMER', 'Timer')}</p>
+                        <p className={order?.time_status}>{getDelayTime(order)}</p>
+                      </Timer>
                     </td>
                   )}
                   <td className='orderPrice'>
@@ -550,7 +592,6 @@ export const OrdersTable = (props) => {
                       )}
                     </div>
                   </td>
-                  <td />
                 </tr>
               </OrderTbody>
             ))
@@ -570,38 +611,5 @@ export const OrdersTable = (props) => {
         </WrapperPagination>
       )}
     </>
-  )
-}
-
-const TimgeAgo = (props) => {
-  const {
-    order
-  } = props
-  const [{ getTimeAgo }] = useUtils()
-
-  const [diffTime, setDiffTime] = useState(
-    order?.delivery_datetime_utc
-      ? getTimeAgo(order?.delivery_datetime_utc)
-      : getTimeAgo(order?.delivery_datetime, { utc: false })
-  )
-
-  useEffect(() => {
-    const deActive = order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12
-    if (deActive) return
-    const timer = setInterval(() => {
-      const diff = order?.delivery_datetime_utc
-        ? getTimeAgo(order?.delivery_datetime_utc)
-        : getTimeAgo(order?.delivery_datetime, { utc: false })
-      setDiffTime(diff)
-    }, 60 * 1000)
-    return () => {
-      clearInterval(timer)
-    }
-  }, [])
-
-  return (
-    <p>
-      {diffTime}
-    </p>
   )
 }

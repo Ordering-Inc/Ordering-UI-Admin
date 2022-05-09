@@ -9,6 +9,7 @@ export const DriverCard = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
+  position: relative;
   border: 1px solid ${props => props.theme.colors.borderColor};
   box-sizing: border-box;
   border-radius: 8px;
@@ -121,5 +122,24 @@ export const AssignedOrdersCount = styled.span`
   ${({ disabled }) => disabled && css`
     pointer-events: none;
     opacity: 0.5;
+  `}
+`
+export const Timestatus = styled.div`
+  width: 4px;
+  height: 42px;
+  border-radius: 20px;
+  margin-right: 10px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 0px;
+    margin-left: 10px;
+ `}
+ ${({ timeState }) => timeState === 'in_time' && css`
+    background-color: #00D27A;
+  `}
+  ${({ timeState }) => timeState === 'at_risk' && css`
+    background-color: #FFC700;
+  `}
+  ${({ timeState }) => timeState === 'delayed' && css`
+    background-color: #E63757;
   `}
 `
