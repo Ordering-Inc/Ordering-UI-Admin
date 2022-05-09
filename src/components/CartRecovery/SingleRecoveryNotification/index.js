@@ -19,7 +19,6 @@ const SingleRecoveryNotificationUI = (props) => {
     handleChangeSelect,
     handleUpdateClick,
     handleDeleteClick,
-    onClose,
     isAdd,
     handleClickAddBtn
   } = props
@@ -37,7 +36,6 @@ const SingleRecoveryNotificationUI = (props) => {
 
   const handleClickDeleteBtn = (id) => {
     handleDeleteClick && handleDeleteClick(id)
-    onClose && onClose()
   }
 
   const handleClickUpdateBtn = (id) => {
