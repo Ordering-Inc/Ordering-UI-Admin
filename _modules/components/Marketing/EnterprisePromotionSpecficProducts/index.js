@@ -75,7 +75,9 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
     var businessIds = [];
 
     if (Object.keys(promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion).length) {
-      businessIds = promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion.businesses.reduce(function (ids, business) {
+      var _promotionState$promo;
+
+      businessIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion.businesses) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.reduce(function (ids, business) {
         return [].concat(_toConsumableArray(ids), [business.id]);
       }, []);
     } else {
@@ -120,11 +122,11 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
     });
   }, [selectedProductsIds]);
   (0, _react.useEffect)(function () {
-    var _promotionState$promo, _promotionState$promo2;
+    var _promotionState$promo2, _promotionState$promo3, _promotionState$promo4;
 
-    if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo = promotionState.promotion) !== null && _promotionState$promo !== void 0 && _promotionState$promo.products)) return;
+    if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo2 = promotionState.promotion) !== null && _promotionState$promo2 !== void 0 && _promotionState$promo2.products)) return;
 
-    var _selectedProductsIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.products.reduce(function (ids, product) {
+    var _selectedProductsIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : (_promotionState$promo4 = _promotionState$promo3.products) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.reduce(function (ids, product) {
       ids[product.id] = {
         id: product.id,
         include: product.pivot.include
@@ -140,7 +142,8 @@ var EnterprisePromotionSpecficProducts = function EnterprisePromotionSpecficProd
     options: businessOptions,
     onChange: function onChange(val) {
       return setSelectedBusinessSlug(val);
-    }
+    },
+    optionInnerMaxHeight: "300px"
   }))), selectedBusinessSlug ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SELECT_PRODUCT_INCLUDE', 'Select product to include')), /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinessProducts, {
     slug: selectedBusinessSlug,
     selectedProductsIds: selectedProductsIds,

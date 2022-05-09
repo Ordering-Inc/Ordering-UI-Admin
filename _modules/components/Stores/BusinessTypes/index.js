@@ -180,7 +180,9 @@ var BusinessTypes = function BusinessTypes(props) {
   }, []);
   (0, _react.useEffect)(function () {
     var updatedBusinessTypes = businessTypes.filter(function (type) {
-      return type === null || type === void 0 ? void 0 : type.name.toLowerCase().includes(searchVal.toLowerCase());
+      var _type$name;
+
+      return type === null || type === void 0 ? void 0 : (_type$name = type.name) === null || _type$name === void 0 ? void 0 : _type$name.toLowerCase().includes(searchVal === null || searchVal === void 0 ? void 0 : searchVal.toLowerCase());
     });
     setFilteredBusinessTypes(_toConsumableArray(updatedBusinessTypes));
   }, [businessTypes, searchVal]);

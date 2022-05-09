@@ -66,7 +66,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation, _swiper.Thumbs]);
 
 var ProductDesktopPreview = function ProductDesktopPreview(props) {
-  var _product$product, _product$product2, _theme$defaultLanguag, _product$ingredients, _product$extras, _product$ingredients2, _theme$defaultLanguag2;
+  var _product$product, _product$product2, _theme$defaultLanguag, _product$ingredients, _product$extras, _product$ingredients2, _theme$defaultLanguag2, _product$extras2;
 
   var product = props.product,
       productCart = props.productCart,
@@ -280,8 +280,10 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
     }), /*#__PURE__*/_react.default.createElement("span", null, ingredient.name));
   }))), (product === null || product === void 0 ? void 0 : product.extras) && /*#__PURE__*/_react.default.createElement("div", {
     id: "extra"
-  }, product === null || product === void 0 ? void 0 : product.extras.map(function (extra) {
-    return extra.options.map(function (option) {
+  }, product === null || product === void 0 ? void 0 : (_product$extras2 = product.extras) === null || _product$extras2 === void 0 ? void 0 : _product$extras2.map(function (extra) {
+    var _extra$options;
+
+    return extra === null || extra === void 0 ? void 0 : (_extra$options = extra.options) === null || _extra$options === void 0 ? void 0 : _extra$options.map(function (option) {
       return /*#__PURE__*/_react.default.createElement("div", {
         key: option === null || option === void 0 ? void 0 : option.id
       }, showProductOption(option) && /*#__PURE__*/_react.default.createElement(_styles2.OptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionWrapHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionTitleContainer, null, option.image && option.image !== '-' && /*#__PURE__*/_react.default.createElement(_styles2.OptionThumbnail, {

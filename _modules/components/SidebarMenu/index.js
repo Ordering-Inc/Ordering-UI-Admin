@@ -100,6 +100,17 @@ var SidebarMenu = function SidebarMenu(props) {
   //   url: '/loyalty/reports'
   // }
   ];
+  var cartRecoveryMenus = [{
+    id: 1,
+    title: t('OPEN_CARTS', 'Open carts'),
+    pageName: 'open_carts',
+    url: '/cart-recovery/open-carts'
+  }, {
+    id: 2,
+    title: t('RECOVERY_ACTIONS', 'Recovery actions'),
+    pageName: 'recovery_actions',
+    url: '/cart-recovery/recovery-actions'
+  }];
   var storesSubMenus = [{
     id: 1,
     title: t('STORES', 'Stores'),
@@ -217,6 +228,17 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('CAMPAIGN', 'Campaign'),
     pageName: 'campaign',
     url: '/marketing/campaign'
+  }];
+  var downloadsSubMenus = [{
+    id: 1,
+    title: t('FREE_PRODUCTS', 'Free products'),
+    pageName: 'free_products',
+    url: '/downloads/free-products'
+  }, {
+    id: 2,
+    title: t('PURCHASED_PRODUCTS', 'Purchased products'),
+    pageName: 'purchased_products',
+    url: '/downloads/purchased-products'
   }];
 
   var handleGoToPage = function handleGoToPage(data) {
@@ -392,6 +414,21 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
+  })))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+    eventKey: "10",
+    active: location.pathname === '/cart-recovery/open-carts' || location.pathname === '/cart-recovery/recovery-actions'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("span", null, t('CART_RECOVERY', 'Cart recovery'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+    eventKey: "10"
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, cartRecoveryMenus.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+      key: item.id,
+      active: location.pathname.includes(item.url),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: item.pageName
+        });
+      }
+    }, item.title);
   })))))), /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column mt-4"
   }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user12 = sessionState.user) === null || _sessionState$user12 === void 0 ? void 0 : _sessionState$user12.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
@@ -423,7 +460,22 @@ var SidebarMenu = function SidebarMenu(props) {
     onClick: function onClick() {
       return handleGoToLink('https://apps.tryordering.com/store/marketplace');
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowUpRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETPLACE', 'Marketplace'))))), /*#__PURE__*/_react.default.createElement(_styles.UserInfo, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowUpRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETPLACE', 'Marketplace'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+    eventKey: "11",
+    active: location.pathname === '/downloads/free-products' || location.pathname === '/downloads/purchased-products'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CloudDownload, null), /*#__PURE__*/_react.default.createElement("span", null, t('DOWNLOADS', 'Downloads'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+    eventKey: "11"
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, downloadsSubMenus.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+      key: item.id,
+      active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
+      onClick: function onClick() {
+        return handleGoToPage({
+          page: item.pageName
+        });
+      }
+    }, item.title);
+  }))))))), /*#__PURE__*/_react.default.createElement(_styles.UserInfo, {
     id: "user_info",
     className: "d-flex flex-column px-1"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {

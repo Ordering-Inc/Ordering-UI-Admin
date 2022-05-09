@@ -42,6 +42,7 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
 
   var business = props.business,
       zone = props.zone,
+      businessZones = props.businessZones,
       formState = props.formState,
       handleChangeInput = props.handleChangeInput,
       handleChangeFormState = props.handleChangeFormState,
@@ -132,6 +133,13 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     strokeWeight: 2,
     editable: true
   };
+  var greenFillStyle = {
+    fillColor: '#008000',
+    fillOpacity: 0.3,
+    strokeColor: '#008000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2
+  };
 
   var handleChangeType = function handleChangeType(type) {
     handleChangeFormState({
@@ -198,7 +206,8 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     }
   }, [errors]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, {
-    onSubmit: handleSubmit(onSubmit)
+    onSubmit: handleSubmit(onSubmit),
+    autoComplete: "off"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Row, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('NAME', 'Name'),
     name: "name",
@@ -246,7 +255,10 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     data: zoneData,
     handleData: handleZoneData,
     fillStyle: fillStyle,
-    infoContentString: infoContentString
+    infoContentString: infoContentString,
+    greenFillStyle: greenFillStyle,
+    isAddMode: !zone,
+    businessZones: businessZones
   })) : /*#__PURE__*/_react.default.createElement(_styles2.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required'))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",

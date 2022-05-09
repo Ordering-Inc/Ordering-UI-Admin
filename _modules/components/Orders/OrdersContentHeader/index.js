@@ -19,7 +19,9 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _MdcFilterOff = _interopRequireDefault(require("@meronex/icons/mdc/MdcFilterOff"));
 
-var _OrdersDashboardControls = require("../OrdersDashboardControls");
+var _OrdersDashboardSLAControls = require("../OrdersDashboardSLAControls");
+
+var _OrderDashboardSLASetting = require("../OrderDashboardSLASetting");
 
 var _styles = require("../../../styles");
 
@@ -61,11 +63,11 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
       filterValues = props.filterValues,
       selectedOrderIds = props.selectedOrderIds,
       handleChangeFilterValues = props.handleChangeFilterValues,
-      handleDeleteMultiOrders = props.handleDeleteMultiOrders,
-      handleChangeMultiOrdersStatus = props.handleChangeMultiOrdersStatus,
       handleOpenTour = props.handleOpenTour,
       filterModalOpen = props.filterModalOpen,
-      setFilterModalOpen = props.setFilterModalOpen;
+      setFilterModalOpen = props.setFilterModalOpen,
+      setTimeStatus = props.setTimeStatus,
+      setSlaSettingTime = props.setSlaSettingTime;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -110,12 +112,11 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     onClick: function onClick() {
       return handleOpenTour();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.TopRightSection, null, !isDisableControl && /*#__PURE__*/_react.default.createElement(_OrdersDashboardControls.OrdersDashboardControls, {
-    selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
-    filterValues: filterValues,
-    handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,
-    handleDeleteMultiOrders: handleDeleteMultiOrders
-  }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearchAndFilter, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.TopRightSection, null, /*#__PURE__*/_react.default.createElement(_styles2.SLAControlsWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderDashboardSLASetting.OrderDashboardSLASetting, {
+    setSlaSettingTime: setSlaSettingTime
+  }), /*#__PURE__*/_react.default.createElement(_OrdersDashboardSLAControls.OrdersDashboardSLAControls, {
+    setTimeStatus: setTimeStatus
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearchAndFilter, {
     fullWidth: isDisableTitle && isDisableControl
   }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     isCustomLayout: true,

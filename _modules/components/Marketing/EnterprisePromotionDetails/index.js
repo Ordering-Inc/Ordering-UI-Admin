@@ -52,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) {
-  var _formState$changes3, _promotionState$promo3, _formState$changes$na, _formState$changes4, _promotionState$promo4, _formState$changes5, _formState$changes6, _promotionState$promo5, _promotionState$promo6;
+  var _formState$changes4, _promotionState$promo3, _formState$changes$na, _formState$changes5, _promotionState$promo4, _formState$changes6, _formState$changes7, _promotionState$promo5, _promotionState$promo6;
 
   var isAddMode = props.isAddMode,
       promotionState = props.promotionState,
@@ -115,6 +115,8 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
   }];
 
   var handleClickTab = function handleClickTab(option) {
+    var _formState$changes, _formState$changes$bu;
+
     if (selectedOption === 'rules') {
       var isValid = handleCheckDiscountPercentageValidation();
       if (!isValid) return;
@@ -123,9 +125,9 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     setMoveDistance(0);
     setSelectedOption(option);
 
-    if (Object.keys(formState.changes).length !== 0 && !actionState.loading) {
+    if (((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$bu = _formState$changes.businesses) === null || _formState$changes$bu === void 0 ? void 0 : _formState$changes$bu.length) > 0 && Object.keys(formState.changes).length !== 0 && !actionState.loading) {
       if (isAddMode) {
-        handleAddPromotion();
+        handleAddPromotion(true);
       } else {
         handleUpdateClick();
       }
@@ -146,10 +148,10 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
   };
 
   var handleCheckDiscountPercentageValidation = function handleCheckDiscountPercentageValidation() {
-    var _formState$changes$ra, _formState$changes, _promotionState$promo, _ref, _formState$changes$ra2, _formState$changes2, _promotionState$promo2;
+    var _formState$changes$ra, _formState$changes2, _promotionState$promo, _ref, _formState$changes$ra2, _formState$changes3, _promotionState$promo2;
 
-    var rateType = (_formState$changes$ra = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.rate_type) !== null && _formState$changes$ra !== void 0 ? _formState$changes$ra : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.rate_type;
-    var rate = (_ref = (_formState$changes$ra2 = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.rate) !== null && _formState$changes$ra2 !== void 0 ? _formState$changes$ra2 : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.rate) !== null && _ref !== void 0 ? _ref : '';
+    var rateType = (_formState$changes$ra = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.rate_type) !== null && _formState$changes$ra !== void 0 ? _formState$changes$ra : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.rate_type;
+    var rate = (_ref = (_formState$changes$ra2 = (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.rate) !== null && _formState$changes$ra2 !== void 0 ? _formState$changes$ra2 : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.rate) !== null && _ref !== void 0 ? _ref : '';
 
     if (rateType === 1 && parseFloat(rate) > 100) {
       setAlertState({
@@ -179,8 +181,8 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("div", null, (((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.name) || (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.name)) && /*#__PURE__*/_react.default.createElement("h1", null, (_formState$changes$na = (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: typeof ((_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.enabled) !== 'undefined' ? (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.enabled : (_promotionState$promo5 = (_promotionState$promo6 = promotionState.promotion) === null || _promotionState$promo6 === void 0 ? void 0 : _promotionState$promo6.enabled) !== null && _promotionState$promo5 !== void 0 ? _promotionState$promo5 : false,
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("div", null, (((_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) || (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.name)) && /*#__PURE__*/_react.default.createElement("h1", null, (_formState$changes$na = (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: typeof ((_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.enabled) !== 'undefined' ? (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.enabled : (_promotionState$promo5 = (_promotionState$promo6 = promotionState.promotion) === null || _promotionState$promo6 === void 0 ? void 0 : _promotionState$promo6.enabled) !== null && _promotionState$promo5 !== void 0 ? _promotionState$promo5 : false,
     onChange: function onChange(val) {
       return handleChangeItem({
         enabled: val

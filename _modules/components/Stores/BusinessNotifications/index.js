@@ -13,7 +13,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styles = require("./styles");
 
-var _BusinessEmailAndPhone = require("../BusinessEmailAndPhone");
+var _BusinessEmail = require("../BusinessEmail");
 
 var _BusinessGprsPrinters = require("../BusinessGprsPrinters");
 
@@ -45,7 +45,7 @@ var BusinessNotifications = function BusinessNotifications(props) {
     if (formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) return;
     handleUpdateBusinessClick();
   }, [formState]);
-  return /*#__PURE__*/_react.default.createElement(_styles.BusinessNotificationsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('NOTIFICATIONS', 'Notifications')), /*#__PURE__*/_react.default.createElement(_BusinessEmailAndPhone.BusinessEmailAndPhone, props), /*#__PURE__*/_react.default.createElement(_BusinessGprsPrinters.BusinessGprsPrinters, props));
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessNotificationsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('NOTIFICATIONS', 'Notifications')), /*#__PURE__*/_react.default.createElement(_BusinessEmail.BusinessEmail, props), /*#__PURE__*/_react.default.createElement(_BusinessGprsPrinters.BusinessGprsPrinters, props));
 };
 
 exports.BusinessNotifications = BusinessNotifications;

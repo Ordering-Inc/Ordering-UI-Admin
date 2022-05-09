@@ -134,10 +134,20 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       alertState = _useState16[0],
       setAlertState = _useState16[1];
 
-  var _useState17 = (0, _react.useState)(0),
+  var _useState17 = (0, _react.useState)(null),
       _useState18 = _slicedToArray(_useState17, 2),
-      totalSelectedOrder = _useState18[0],
-      setTotalSelectedOrder = _useState18[1];
+      timeStatus = _useState18[0],
+      setTimeStatus = _useState18[1];
+
+  var _useState19 = (0, _react.useState)(60000),
+      _useState20 = _slicedToArray(_useState19, 2),
+      slaSettingTime = _useState20[0],
+      setSlaSettingTime = _useState20[1];
+
+  var _useState21 = (0, _react.useState)(0),
+      _useState22 = _slicedToArray(_useState21, 2),
+      totalSelectedOrder = _useState22[0],
+      setTotalSelectedOrder = _useState22[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
@@ -256,15 +266,13 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       return _handleOpenTour();
     },
     filterModalOpen: filterModalOpen,
-    setFilterModalOpen: setFilterModalOpen
+    setFilterModalOpen: setFilterModalOpen,
+    setTimeStatus: setTimeStatus,
+    setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, {
-    isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, {
-    isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
-  }, /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
     ordersStatusGroup: ordersStatusGroup,
     selectedSubOrderStatus: selectedSubOrderStatus,
     handleSelectedSubOrderStatus: handleSelectedSubOrderStatus
@@ -295,7 +303,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleOpenTour: _handleOpenTour,
     isTourOpen: isTourOpen,
     setIsTourOpen: setIsTourOpen,
-    setFilterModalOpen: setFilterModalOpen
+    setFilterModalOpen: setFilterModalOpen,
+    timeStatus: timeStatus,
+    slaSettingTime: slaSettingTime
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,

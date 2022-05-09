@@ -71,7 +71,9 @@ var SelectSites = function SelectSites(props) {
 
     if (searchValue) {
       _filteredSites = allSites.filter(function (site) {
-        return site === null || site === void 0 ? void 0 : site.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _site$name;
+
+        return site === null || site === void 0 ? void 0 : (_site$name = site.name) === null || _site$name === void 0 ? void 0 : _site$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       _filteredSites = _toConsumableArray(allSites);

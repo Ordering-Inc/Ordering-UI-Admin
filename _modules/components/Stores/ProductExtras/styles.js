@@ -37,7 +37,7 @@ var Header = _styledComponents.default.div(_templateObject3 || (_templateObject3
 
 exports.Header = Header;
 
-var ExtraOption = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  padding: 12px 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  ", "\n"])), function (props) {
+var ExtraOption = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  padding: 12px 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  cursor: pointer;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref) {
   var active = _ref.active;
@@ -52,19 +52,17 @@ var ExtraOption = _styledComponents.default.div(_templateObject6 || (_templateOb
 
 exports.ExtraOption = ExtraOption;
 
-var CheckboxContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n\n  input[type='text'] {\n    flex: 1;\n    margin: 0 5px;\n    color: ", ";\n    padding: 5px;\n    outline: none;\n    border: none;\n    font-size: 14px;\n    background: transparent;\n  }\n"])), function (props) {
-  return props.theme.colors.headingColor;
-});
+var CheckboxContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 
 exports.CheckboxContainer = CheckboxContainer;
 
-var MoreContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n    color: ", ";\n  }\n"])), function (props) {
+var MoreContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  svg {\n    cursor: pointer;\n    font-size: 20px;\n    color: ", ";\n  }\n\n  > span {\n    font-size: 14px;\n    padding: 0 10px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
 exports.MoreContainer = MoreContainer;
 
-var Details = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n\n  svg {\n    margin: 0 5px;\n    font-size: 13px;\n    color: ", ";\n  }\n"])), function (props) {
+var Details = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: ", ";\n\n  svg {\n    margin: 0 5px;\n    font-size: 13px;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.secundaryLight;
@@ -80,6 +78,12 @@ var AddButton = _styledComponents.default.div(_templateObject11 || (_templateObj
 
 exports.AddButton = AddButton;
 
-var ExtraAddForm = _styledComponents.default.form(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  input {\n    width: 100%;\n    border: none;\n    outline: none;\n    border-bottom: 1px solid #E9ECEF;\n    padding: 12px 0;\n\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #B1BCCC;\n    }\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n  }\n"])));
+var ExtraAddForm = _styledComponents.default.form(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  input {\n    width: 100%;\n    border: none;\n    outline: none;\n    border-bottom: 1px solid ", ";\n    background: ", ";\n    padding: 12px 0;\n\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #B1BCCC;\n    }\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  var _props$theme$colors;
+
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
+});
 
 exports.ExtraAddForm = ExtraAddForm;

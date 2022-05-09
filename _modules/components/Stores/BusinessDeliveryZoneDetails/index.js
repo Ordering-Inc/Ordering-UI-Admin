@@ -49,6 +49,7 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
   var _zoneState$zone;
 
   var business = props.business,
+      businessZones = props.businessZones,
       zoneState = props.zoneState,
       formState = props.formState,
       handleChangeInput = props.handleChangeInput,
@@ -115,6 +116,7 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
   })), selectedMenuOption === 'information' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryZoneInformation.BusinessDeliveryZoneInformation, {
     business: business,
     zone: zoneState.zone,
+    businessZones: businessZones,
     formState: formState,
     handleChangeInput: handleChangeInput,
     handleChangeFormState: handleChangeFormState,

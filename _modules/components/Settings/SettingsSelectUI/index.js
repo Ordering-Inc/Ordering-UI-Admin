@@ -11,7 +11,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _FirstSelect = require("../../../styles/Select/FirstSelect");
+var _Select = require("../../../styles/Select");
+
+var _Inputs = require("../../../styles/Inputs");
 
 var _styles = require("./styles");
 
@@ -65,10 +67,28 @@ var SettingsSelectUI = function SettingsSelectUI(props) {
           content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t(item.text.toUpperCase()))
         };
       });
+
+      if (config.customizable) {
+        selectedTypes.push({
+          value: config === null || config === void 0 ? void 0 : config.value,
+          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('CUSTOM', 'Custom')),
+          showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.InputWrapper, {
+            className: "open-disabled"
+          }, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
+            placeholder: t('CUSTOM', 'Custom'),
+            defaultValue: config === null || config === void 0 ? void 0 : config.value,
+            onChange: function onChange(e) {
+              return handleSelectChange(e.target.value);
+            }
+          }))
+        });
+      }
+
       setOptions(selectedTypes);
     }
   }, [config]);
-  return /*#__PURE__*/_react.default.createElement(_styles.SettingsSelectContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SelectHeader, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.name)), options ? /*#__PURE__*/_react.default.createElement(_styles.SelectContent, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  return /*#__PURE__*/_react.default.createElement(_styles.SettingsSelectContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SelectHeader, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.name)), options ? /*#__PURE__*/_react.default.createElement(_styles.SelectContent, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+    notAsync: true,
     defaultValue: config === null || config === void 0 ? void 0 : config.value,
     options: options,
     className: "select",

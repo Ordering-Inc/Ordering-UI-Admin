@@ -84,9 +84,9 @@ var EnterprisePromotionDeliveryzonesUI = function EnterprisePromotionDeliveryzon
       var _promotionState$promo;
 
       if (Array.isArray((_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.delivery_zones)) {
-        var _promotionState$promo2;
+        var _promotionState$promo2, _promotionState$promo3;
 
-        deliveryZones = (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.delivery_zones.reduce(function (ids, zone) {
+        deliveryZones = (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : (_promotionState$promo3 = _promotionState$promo2.delivery_zones) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.reduce(function (ids, zone) {
           return [].concat(_toConsumableArray(ids), [zone.id]);
         }, []);
       }
@@ -106,12 +106,12 @@ var EnterprisePromotionDeliveryzonesUI = function EnterprisePromotionDeliveryzon
   };
 
   var isDefaultChecked = function isDefaultChecked(zoneId) {
-    var _promotionState$promo3;
+    var _promotionState$promo4;
 
-    if (Array.isArray((_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.delivery_zones)) {
-      var _promotionState$promo4;
+    if (Array.isArray((_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.delivery_zones)) {
+      var _promotionState$promo5;
 
-      var found = (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.delivery_zones.find(function (zone) {
+      var found = (_promotionState$promo5 = promotionState.promotion) === null || _promotionState$promo5 === void 0 ? void 0 : _promotionState$promo5.delivery_zones.find(function (zone) {
         return zone.id === zoneId;
       });
       if (found) return true;else return false;

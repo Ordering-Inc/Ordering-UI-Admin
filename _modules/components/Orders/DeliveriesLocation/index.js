@@ -118,8 +118,10 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _driver$location, _driver$location2;
+
           var driver = _step.value;
-          var marker = driver.location !== null && _typeof(driver.location) === 'object' ? driver.location : defaultCenter;
+          var marker = driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location = driver.location) !== null && _driver$location !== void 0 && _driver$location.lat && (_driver$location2 = driver.location) !== null && _driver$location2 !== void 0 && _driver$location2.lng ? driver.location : defaultCenter;
           var newPoint = new window.google.maps.LatLng(marker.lat, marker.lng);
           bounds.extend(newPoint);
         }
@@ -143,7 +145,7 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
       bounds.extend(_newPoint);
 
       if (interActionMapOrder.driver !== null) {
-        _marker = interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' ? interActionOrderDriverLocation : defaultCenter;
+        _marker = interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' && interActionOrderDriverLocation !== null && interActionOrderDriverLocation !== void 0 && interActionOrderDriverLocation.lat && interActionOrderDriverLocation !== null && interActionOrderDriverLocation !== void 0 && interActionOrderDriverLocation.lng ? interActionOrderDriverLocation : defaultCenter;
         _newPoint = new window.google.maps.LatLng(_marker.lat, _marker.lng);
         bounds.extend(_newPoint);
       } else {
@@ -152,9 +154,11 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
 
         try {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var _activeDriver$locatio, _activeDriver$locatio2;
+
             var activeDriver = _step2.value;
 
-            var _marker2 = activeDriver.location !== null && _typeof(activeDriver.location) === 'object' ? activeDriver.location : defaultCenter;
+            var _marker2 = activeDriver.location !== null && _typeof(activeDriver.location) === 'object' && (_activeDriver$locatio = activeDriver.location) !== null && _activeDriver$locatio !== void 0 && _activeDriver$locatio.lat && (_activeDriver$locatio2 = activeDriver.location) !== null && _activeDriver$locatio2 !== void 0 && _activeDriver$locatio2.lng ? activeDriver.location : defaultCenter;
 
             var _newPoint2 = new window.google.maps.LatLng(_marker2.lat, _marker2.lng);
 
@@ -276,13 +280,13 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
     lng: interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' ? interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.lng : defaultCenter.lng,
     image: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : (_interActionMapOrder$21 = interActionMapOrder.driver) === null || _interActionMapOrder$21 === void 0 ? void 0 : _interActionMapOrder$21.photo
   }), interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && activeDrivers.length > 0 && activeDrivers.map(function (driver) {
-    var _driver$location, _driver$location2, _driver$location3, _driver$location4;
+    var _driver$location3, _driver$location4, _driver$location5, _driver$location6;
 
     return /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
       key: driver.id,
       driver: driver,
-      lat: driver !== null && driver !== void 0 && (_driver$location = driver.location) !== null && _driver$location !== void 0 && _driver$location.lat ? driver === null || driver === void 0 ? void 0 : (_driver$location2 = driver.location) === null || _driver$location2 === void 0 ? void 0 : _driver$location2.lat : defaultCenter.lat,
-      lng: driver !== null && driver !== void 0 && (_driver$location3 = driver.location) !== null && _driver$location3 !== void 0 && _driver$location3.lng ? driver === null || driver === void 0 ? void 0 : (_driver$location4 = driver.location) === null || _driver$location4 === void 0 ? void 0 : _driver$location4.lng : defaultCenter.lng,
+      lat: driver !== null && driver !== void 0 && (_driver$location3 = driver.location) !== null && _driver$location3 !== void 0 && _driver$location3.lat ? driver === null || driver === void 0 ? void 0 : (_driver$location4 = driver.location) === null || _driver$location4 === void 0 ? void 0 : _driver$location4.lat : defaultCenter.lat,
+      lng: driver !== null && driver !== void 0 && (_driver$location5 = driver.location) !== null && _driver$location5 !== void 0 && _driver$location5.lng ? driver === null || driver === void 0 ? void 0 : (_driver$location6 = driver.location) === null || _driver$location6 === void 0 ? void 0 : _driver$location6.lng : defaultCenter.lng,
       image: driver === null || driver === void 0 ? void 0 : driver.photo
     });
   })), interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && activeDrivers.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperOnlineDrivers, null, /*#__PURE__*/_react.default.createElement("p", null, t('ACTIVE_DRIVERS', 'Drivers online')), /*#__PURE__*/_react.default.createElement(_styles.OnlineDrivers, null, /*#__PURE__*/_react.default.createElement(_Shared.AutoScroll, {

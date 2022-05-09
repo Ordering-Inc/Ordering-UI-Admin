@@ -104,7 +104,9 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
 
     if (searchValue) {
       companies = driversCompaniesState.companies.filter(function (plugin) {
-        return plugin.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _plugin$name;
+
+        return (_plugin$name = plugin.name) === null || _plugin$name === void 0 ? void 0 : _plugin$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       companies = _toConsumableArray(driversCompaniesState.companies);

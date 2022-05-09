@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperStar = exports.WrapperImage = exports.Image = exports.DriversListContainer = exports.DriverInfo = exports.DriverCard = exports.AssignedOrdersCount = void 0;
+exports.WrapperStar = exports.WrapperImage = exports.Timestatus = exports.Image = exports.DriversListContainer = exports.DriverInfo = exports.DriverCard = exports.AssignedOrdersCount = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -27,7 +27,7 @@ var DriversListContainer = _styledComponents.default.div(_templateObject || (_te
 
 exports.DriversListContainer = DriversListContainer;
 
-var DriverCard = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  border-radius: 8px;\n  margin-bottom: 20px;\n  padding: 10px 15px;\n\n  &:hover {\n    background-color: ", ";\n  }\n  \n  ", "\n"])), function (props) {
+var DriverCard = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  position: relative;\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  border-radius: 8px;\n  margin-bottom: 20px;\n  padding: 10px 15px;\n\n  &:hover {\n    background-color: ", ";\n  }\n  \n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.lightPrimary;
@@ -87,3 +87,20 @@ var AssignedOrdersCount = _styledComponents.default.span(_templateObject10 || (_
 });
 
 exports.AssignedOrdersCount = AssignedOrdersCount;
+
+var Timestatus = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 4px;\n  height: 42px;\n  border-radius: 20px;\n  margin-right: 10px;\n  ", "\n ", "\n  ", "\n  ", "\n"])), function (props) {
+  var _props$theme2;
+
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    margin-right: 0px;\n    margin-left: 10px;\n "])));
+}, function (_ref4) {
+  var timeState = _ref4.timeState;
+  return timeState === 'in_time' && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    background-color: #00D27A;\n  "])));
+}, function (_ref5) {
+  var timeState = _ref5.timeState;
+  return timeState === 'at_risk' && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    background-color: #FFC700;\n  "])));
+}, function (_ref6) {
+  var timeState = _ref6.timeState;
+  return timeState === 'delayed' && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    background-color: #E63757;\n  "])));
+});
+
+exports.Timestatus = Timestatus;

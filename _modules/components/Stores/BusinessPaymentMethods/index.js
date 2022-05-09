@@ -261,7 +261,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_styles2.PaymethodListWrapper, null, paymethodsList.paymethods.filter(function (paymethod) {
     var _paymethod$name;
 
-    return paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$name = paymethod.name) === null || _paymethod$name === void 0 ? void 0 : _paymethod$name.toLowerCase().includes(searchValue.toLowerCase());
+    return paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$name = paymethod.name) === null || _paymethod$name === void 0 ? void 0 : _paymethod$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
   }).map(function (paymethod) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOptionContainer, {
       key: paymethod.id,

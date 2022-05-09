@@ -161,7 +161,7 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
         brands = brandListState === null || brandListState === void 0 ? void 0 : (_brandListState$brand2 = brandListState.brands) === null || _brandListState$brand2 === void 0 ? void 0 : _brandListState$brand2.filter(function (brand) {
           var _brand$name;
 
-          return (_brand$name = brand.name) === null || _brand$name === void 0 ? void 0 : _brand$name.toLowerCase().includes(searchValue.toLowerCase());
+          return (_brand$name = brand.name) === null || _brand$name === void 0 ? void 0 : _brand$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
         });
       } else {
         brands = _toConsumableArray(brandListState === null || brandListState === void 0 ? void 0 : brandListState.brands);

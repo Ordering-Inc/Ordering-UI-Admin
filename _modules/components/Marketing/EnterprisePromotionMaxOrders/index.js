@@ -76,7 +76,8 @@ var EnterprisePromotionMaxOrders = function EnterprisePromotionMaxOrders(props) 
       return handleChangeItem({
         user_order_count_condition: val
       });
-    }
+    },
+    optionInnerMaxHeight: "300px"
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",

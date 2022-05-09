@@ -37,8 +37,6 @@ var _BusinessCustomFields = require("../BusinessCustomFields");
 
 var _BusinessWebhooks = require("../BusinessWebhooks");
 
-var _BusinessMoreDetail = require("../BusinessMoreDetail");
-
 var _BusinessNotifications = require("../BusinessNotifications");
 
 var _BusinessOrderingChannels = require("../BusinessOrderingChannels");
@@ -287,12 +285,6 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
   }), selectedItem === 'webhooks' && /*#__PURE__*/_react.default.createElement(_BusinessWebhooks.BusinessWebhooks, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessUpdate: handleUpdateBusinessState
-  }), selectedItem === 'more' && /*#__PURE__*/_react.default.createElement(_BusinessMoreDetail.BusinessMoreDetail, {
-    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    handleSuccessUpdate: handleUpdateBusinessState,
-    handleUpdateBusinessClick: handleUpdateBusinessClick,
-    formState: formState,
-    setFormState: setFormState
   })));
 };
 

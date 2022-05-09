@@ -67,7 +67,9 @@ var DriversGroupCompanies = function DriversGroupCompanies(props) {
 
     if (searchValue) {
       _filteredCompanies = companies.filter(function (company) {
-        return company === null || company === void 0 ? void 0 : company.name.toLowerCase().includes(searchValue.toLowerCase());
+        var _company$name;
+
+        return company === null || company === void 0 ? void 0 : (_company$name = company.name) === null || _company$name === void 0 ? void 0 : _company$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       _filteredCompanies = _toConsumableArray(companies);

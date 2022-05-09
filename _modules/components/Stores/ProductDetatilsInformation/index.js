@@ -133,9 +133,11 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
   };
 
   var stringToSlug = function stringToSlug(str) {
+    var _str;
+
     str = str.replace(/^\s+|\s+$/g, ''); // trim
 
-    str = str.toLowerCase(); // remove accents, swap ñ for n, etc
+    str = (_str = str) === null || _str === void 0 ? void 0 : _str.toLowerCase(); // remove accents, swap ñ for n, etc
 
     var from = 'åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;';
     var to = 'aaaaaaeeeeiiiioooouuuunc------';

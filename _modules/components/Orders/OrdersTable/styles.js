@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperPagination = exports.WrapperImage = exports.WrapOrderStatusSelector = exports.Table = exports.StatusInfo = exports.PriorityDot = exports.OrdersContainer = exports.OrderType = exports.OrderTbody = exports.OrderNumberContainer = exports.LogisticStatusDot = exports.Image = exports.DriversInfo = exports.CustomerInfo = exports.CheckBox = exports.BusinessInfo = void 0;
+exports.WrapperPagination = exports.WrapperImage = exports.WrapOrderStatusSelector = exports.Timestatus = exports.Timer = exports.Table = exports.StatusInfo = exports.PriorityDot = exports.OrdersContainer = exports.OrderType = exports.OrderTbody = exports.OrderNumberContainer = exports.LogisticStatusDot = exports.Image = exports.DriversInfo = exports.CustomerInfo = exports.CheckBox = exports.BusinessInfo = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -227,3 +227,28 @@ var PriorityDot = _styledComponents.default.span(_templateObject39 || (_template
 });
 
 exports.PriorityDot = PriorityDot;
+
+var Timestatus = _styledComponents.default.div(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  width: 4px;\n  height: 37px;\n  border-radius: 20px 20px 20px 20px;\n  ", "\n  ", "\n  ", "\n"])), function (_ref16) {
+  var timeState = _ref16.timeState;
+  return timeState === 'in_time' && (0, _styledComponents.css)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n    background-color: #00D27A;\n  "])));
+}, function (_ref17) {
+  var timeState = _ref17.timeState;
+  return timeState === 'at_risk' && (0, _styledComponents.css)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n    background-color: #FFC700;\n  "])));
+}, function (_ref18) {
+  var timeState = _ref18.timeState;
+  return timeState === 'delayed' && (0, _styledComponents.css)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n    background-color: #E63757;\n  "])));
+});
+
+exports.Timestatus = Timestatus;
+
+var Timer = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  min-width: 65px;\n  p {\n    margin: 0px;\n    color: ", ";\n    font-size: 12px;\n  }\n\n  .bold {\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n  }\n\n  .in_time{\n    color: #00D27A;\n  }\n\n  .at_risk {\n    color: #FFC700;\n  }\n  \n  .delayed {\n    color: #E63757;\n  }\n"])), function (props) {
+  var _props$theme$colors8;
+
+  return (_props$theme$colors8 = props.theme.colors) === null || _props$theme$colors8 === void 0 ? void 0 : _props$theme$colors8.lightGray;
+}, function (props) {
+  var _props$theme$colors9;
+
+  return (_props$theme$colors9 = props.theme.colors) === null || _props$theme$colors9 === void 0 ? void 0 : _props$theme$colors9.headingColor;
+});
+
+exports.Timer = Timer;

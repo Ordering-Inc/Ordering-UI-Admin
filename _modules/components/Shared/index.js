@@ -99,6 +99,12 @@ Object.defineProperty(exports, "ProgressRing", {
     return _ProgressRing.ProgressRing;
   }
 });
+Object.defineProperty(exports, "ProtectedRoute", {
+  enumerable: true,
+  get: function get() {
+    return _ProtectedRoute.ProtectedRoute;
+  }
+});
 Object.defineProperty(exports, "RangeCalendar", {
   enumerable: true,
   get: function get() {
@@ -187,6 +193,8 @@ var _Pagination = require("./Pagination");
 var _PaginationButton = require("./PaginationButton");
 
 var _Personalization = require("./Personalization");
+
+var _ProtectedRoute = require("./ProtectedRoute");
 
 var _Schedule = require("./Schedule");
 

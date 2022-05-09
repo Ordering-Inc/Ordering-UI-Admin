@@ -76,7 +76,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       currentTourStep = props.currentTourStep,
       isTourFlag = props.isTourFlag,
       setIsTourFlag = props.setIsTourFlag,
-      setIsTourOpen = props.setIsTourOpen;
+      setIsTourOpen = props.setIsTourOpen,
+      actionStatus = props.actionStatus,
+      handleRefundOrder = props.handleRefundOrder;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -572,7 +574,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       product: product
     });
   }))), /*#__PURE__*/_react.default.createElement(_OrderBill.OrderBill, {
-    order: order
+    order: order,
+    actionStatus: actionStatus,
+    handleRefundOrder: handleRefundOrder
   }))), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {

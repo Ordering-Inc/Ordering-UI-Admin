@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
-  var _configState$configs, _configState$configs$, _formState$changes2, _formState$result3, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result4, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9, _formState$changes10, _formState$changes11, _formState$changes12;
+  var _configState$configs, _configState$configs$, _formState$changes2, _formState$result3, _formState$changes3, _formState$changes4, _formState$changes5, _formState$result4, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9, _formState$changes10, _formState$changes11, _formState$changes12, _formState$changes13;
 
   var formState = props.formState,
       handlechangeImage = props.handlechangeImage,
@@ -151,9 +151,11 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   };
 
   var stringToSlug = function stringToSlug(str) {
+    var _str;
+
     str = str.replace(/^\s+|\s+$/g, ''); // trim
 
-    str = str.toLowerCase(); // remove accents, swap ñ for n, etc
+    str = (_str = str) === null || _str === void 0 ? void 0 : _str.toLowerCase(); // remove accents, swap ñ for n, etc
 
     var from = 'åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;';
     var to = 'aaaaaaeeeeiiiioooouuuunc------';
@@ -282,17 +284,23 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     value: (formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.description) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
+  })), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+    placeholder: t('TYPE_DESCRIPTION', 'Type description '),
+    name: "description",
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.description) || '',
+    onChange: handleChangeInput,
+    autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "slug",
     placeholder: t('SLUG', 'Slug'),
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.slug) || ''
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.slug) || ''
   }), /*#__PURE__*/_react.default.createElement(_styles2.GenerateButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "7.6px",
-    disabled: formState.loading || !((_formState$changes11 = formState.changes) !== null && _formState$changes11 !== void 0 && _formState$changes11.name),
+    disabled: formState.loading || !((_formState$changes12 = formState.changes) !== null && _formState$changes12 !== void 0 && _formState$changes12.name),
     onClick: function onClick() {
       return setAutoGenerate(_objectSpread(_objectSpread({}, autoGenerateCode), {}, {
         isAutoGenerate: true
@@ -318,7 +326,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   })), !isAddMode && categorySelected && parentCategories.length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ParentCategorySelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PARENT_CATEGORY', 'Parent category')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_PARENT_CATEGORY', 'Select a parent category'),
     options: parentCategoriesOptions,
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.parent_category_id,
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.parent_category_id,
     onChange: function onChange(val) {
       return handleChangeItem({
         parent_category_id: val

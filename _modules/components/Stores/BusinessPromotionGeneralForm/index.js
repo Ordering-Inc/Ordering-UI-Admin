@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(props) {
-  var _formState$result3, _formState$changes6, _promotionState$promo5, _promotionState$promo6, _formState$changes7, _formState$changes8, _ref, _formState$changes$na, _formState$changes9, _promotionState$promo7, _formState$changes10, _formState$changes11, _promotionState$promo8, _ref2, _formState$changes$co, _formState$changes12, _promotionState$promo9, _ref3, _formState$changes$de, _formState$changes13, _promotionState$promo10, _formState$changes14, _formState$changes15, _promotionState$promo11, _formState$changes16, _formState$changes17, _promotionState$promo12, _formState$changes18, _formState$changes19, _promotionState$promo13, _formState$changes20, _formState$changes21, _promotionState$promo14, _formState$changes$ra, _ref4, _formState$changes$ra2, _formState$changes22, _promotionState$promo15, _ref5, _formState$changes$mi, _formState$changes23, _promotionState$promo16, _ref6, _formState$changes$li, _formState$changes24, _promotionState$promo17;
+  var _configs$advanced_off, _formState$result3, _formState$changes6, _promotionState$promo5, _promotionState$promo6, _formState$changes7, _formState$changes8, _ref, _formState$changes$na, _formState$changes9, _promotionState$promo7, _formState$changes10, _formState$changes11, _promotionState$promo8, _ref2, _formState$changes$co, _formState$changes12, _promotionState$promo9, _ref3, _formState$changes$de, _formState$changes13, _promotionState$promo10, _formState$changes14, _formState$changes15, _promotionState$promo11, _formState$changes16, _formState$changes17, _promotionState$promo12, _formState$changes18, _formState$changes19, _promotionState$promo13, _formState$changes20, _formState$changes21, _promotionState$promo14, _formState$changes22, _formState$changes23, _promotionState$promo15, _formState$changes$ra, _ref4, _formState$changes$ra2, _formState$changes24, _promotionState$promo16, _ref5, _formState$changes$mi, _formState$changes25, _promotionState$promo17, _ref6, _formState$changes$li, _formState$changes26, _promotionState$promo18, _formState$changes27, _promotionState$promo19, _formState$changes28, _promotionState$promo20, _formState$changes29, _promotionState$promo21, _formState$changes30, _formState$changes31, _promotionState$promo22, _ref7, _formState$changes$co2, _formState$changes32, _promotionState$promo23, _formState$changes33, _promotionState$promo24, _formState$changes34, _promotionState$promo25, _formState$changes35, _promotionState$promo26, _formState$changes36, _formState$changes37, _promotionState$promo27, _formState$changes38, _formState$changes39, _promotionState$promo28, _promotionState$promo29;
 
   var isAddMode = props.isAddMode,
       promotionState = props.promotionState,
@@ -66,6 +66,12 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
       handleChangeItem = props.handleChangeItem,
       handleUpdateClick = props.handleUpdateClick,
       handleAddClick = props.handleAddClick;
+
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var isAdvancedOffersActivated = configs === null || configs === void 0 ? void 0 : (_configs$advanced_off = configs.advanced_offers_module) === null || _configs$advanced_off === void 0 ? void 0 : _configs$advanced_off.value;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -102,6 +108,16 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
   }, {
     value: 2,
     content: t('PRICE', 'Price')
+  }];
+  var promotionTypes = [{
+    value: 1,
+    content: t('MOBILE_FRONT_SUB_TOTAL', 'Subtotal')
+  }, {
+    value: 2,
+    content: t('DELIVERY_FEE', 'Delivery fee')
+  }, {
+    value: 3,
+    content: t('BUSINESS_SERVICE_FEE', 'Service fee')
   }];
 
   var handleClickImage = function handleClickImage() {
@@ -248,14 +264,14 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
-  })), ((formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.type) === 2 || !(formState !== null && formState !== void 0 && (_formState$changes11 = formState.changes) !== null && _formState$changes11 !== void 0 && _formState$changes11.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo8 = promotionState.promotion) === null || _promotionState$promo8 === void 0 ? void 0 : _promotionState$promo8.type) === 2) && /*#__PURE__*/_react.default.createElement(_styles3.ItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('COUPON', 'Coupon')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), !isAdvancedOffersActivated && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.type) === 2 || !(formState !== null && formState !== void 0 && (_formState$changes11 = formState.changes) !== null && _formState$changes11 !== void 0 && _formState$changes11.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo8 = promotionState.promotion) === null || _promotionState$promo8 === void 0 ? void 0 : _promotionState$promo8.type) === 2) && /*#__PURE__*/_react.default.createElement(_styles3.ItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('COUPON', 'Coupon')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "coupon",
     value: (_ref2 = (_formState$changes$co = (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.coupon) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo9 = promotionState.promotion) === null || _promotionState$promo9 === void 0 ? void 0 : _promotionState$promo9.coupon) !== null && _ref2 !== void 0 ? _ref2 : '',
     placeholder: t('COUPON_CODE', 'Coupon code'),
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles3.ItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles3.ItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     rows: 3,
     name: "description",
     value: (_ref3 = (_formState$changes$de = (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo10 = promotionState.promotion) === null || _promotionState$promo10 === void 0 ? void 0 : _promotionState$promo10.description) !== null && _ref3 !== void 0 ? _ref3 : '',
@@ -279,21 +295,29 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
     },
     moveRangeOnFirstSelection: false,
     ranges: dateRange
-  })))), /*#__PURE__*/_react.default.createElement(_styles3.PromotionTypeContainer, null, /*#__PURE__*/_react.default.createElement(_styles3.PromotionTypeWrapper, {
-    active: formState !== null && formState !== void 0 && (_formState$changes14 = formState.changes) !== null && _formState$changes14 !== void 0 && _formState$changes14.type ? (formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.type) === 2 : (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo11 = promotionState.promotion) === null || _promotionState$promo11 === void 0 ? void 0 : _promotionState$promo11.type) === 2,
+  })))), isAdvancedOffersActivated && /*#__PURE__*/_react.default.createElement(_styles3.PoromotionTargetWrapper, null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('PROMOTION_TYPES', 'Promotion types')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    defaultValue: typeof ((_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.target) !== 'undefined' ? (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.target : (_promotionState$promo11 = promotionState.promotion) === null || _promotionState$promo11 === void 0 ? void 0 : _promotionState$promo11.target,
+    options: promotionTypes,
+    onChange: function onChange(val) {
+      return handleChangeItem({
+        target: val
+      });
+    }
+  })), !isAdvancedOffersActivated && /*#__PURE__*/_react.default.createElement(_styles3.PromotionTypeContainer, null, /*#__PURE__*/_react.default.createElement(_styles3.PromotionTypeWrapper, {
+    active: formState !== null && formState !== void 0 && (_formState$changes16 = formState.changes) !== null && _formState$changes16 !== void 0 && _formState$changes16.type ? (formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.type) === 2 : (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo12 = promotionState.promotion) === null || _promotionState$promo12 === void 0 ? void 0 : _promotionState$promo12.type) === 2,
     onClick: function onClick() {
       return handleChangeItem({
         type: 2
       });
     }
-  }, (formState !== null && formState !== void 0 && (_formState$changes16 = formState.changes) !== null && _formState$changes16 !== void 0 && _formState$changes16.type ? (formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.type) === 2 : (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo12 = promotionState.promotion) === null || _promotionState$promo12 === void 0 ? void 0 : _promotionState$promo12.type) === 2) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('COUPON', 'Coupon'))), /*#__PURE__*/_react.default.createElement(_styles3.PromotionTypeWrapper, {
-    active: formState !== null && formState !== void 0 && (_formState$changes18 = formState.changes) !== null && _formState$changes18 !== void 0 && _formState$changes18.type ? (formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.type) === 1 : (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo13 = promotionState.promotion) === null || _promotionState$promo13 === void 0 ? void 0 : _promotionState$promo13.type) === 1,
+  }, (formState !== null && formState !== void 0 && (_formState$changes18 = formState.changes) !== null && _formState$changes18 !== void 0 && _formState$changes18.type ? (formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.type) === 2 : (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo13 = promotionState.promotion) === null || _promotionState$promo13 === void 0 ? void 0 : _promotionState$promo13.type) === 2) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('COUPON', 'Coupon'))), /*#__PURE__*/_react.default.createElement(_styles3.PromotionTypeWrapper, {
+    active: formState !== null && formState !== void 0 && (_formState$changes20 = formState.changes) !== null && _formState$changes20 !== void 0 && _formState$changes20.type ? (formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.type) === 1 : (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo14 = promotionState.promotion) === null || _promotionState$promo14 === void 0 ? void 0 : _promotionState$promo14.type) === 1,
     onClick: function onClick() {
       return handleChangeItem({
         type: 1
       });
     }
-  }, (formState !== null && formState !== void 0 && (_formState$changes20 = formState.changes) !== null && _formState$changes20 !== void 0 && _formState$changes20.type ? (formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.type) === 1 : (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo14 = promotionState.promotion) === null || _promotionState$promo14 === void 0 ? void 0 : _promotionState$promo14.type) === 1) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DISCOUNT', 'Discount')))), /*#__PURE__*/_react.default.createElement(_styles3.DiscountContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('DISCOUNT_TYPE', 'Discount type')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }, (formState !== null && formState !== void 0 && (_formState$changes22 = formState.changes) !== null && _formState$changes22 !== void 0 && _formState$changes22.type ? (formState === null || formState === void 0 ? void 0 : (_formState$changes23 = formState.changes) === null || _formState$changes23 === void 0 ? void 0 : _formState$changes23.type) === 1 : (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo15 = promotionState.promotion) === null || _promotionState$promo15 === void 0 ? void 0 : _promotionState$promo15.type) === 1) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DISCOUNT', 'Discount')))), /*#__PURE__*/_react.default.createElement(_styles3.DiscountContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('DISCOUNT_TYPE', 'Discount type')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     defaultValue: (_formState$changes$ra = formState.changes.rate_type) !== null && _formState$changes$ra !== void 0 ? _formState$changes$ra : promotionState.promotion.rate_type,
     options: discountTypes,
     onChange: function onChange(val) {
@@ -304,7 +328,7 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('VALUE', 'Value')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "number",
     name: "rate",
-    value: (_ref4 = (_formState$changes$ra2 = (_formState$changes22 = formState.changes) === null || _formState$changes22 === void 0 ? void 0 : _formState$changes22.rate) !== null && _formState$changes$ra2 !== void 0 ? _formState$changes$ra2 : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo15 = promotionState.promotion) === null || _promotionState$promo15 === void 0 ? void 0 : _promotionState$promo15.rate) !== null && _ref4 !== void 0 ? _ref4 : '',
+    value: (_ref4 = (_formState$changes$ra2 = (_formState$changes24 = formState.changes) === null || _formState$changes24 === void 0 ? void 0 : _formState$changes24.rate) !== null && _formState$changes$ra2 !== void 0 ? _formState$changes$ra2 : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo16 = promotionState.promotion) === null || _promotionState$promo16 === void 0 ? void 0 : _promotionState$promo16.rate) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -312,7 +336,7 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
   }))), /*#__PURE__*/_react.default.createElement(_styles3.MinimumLimitContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('MINIMUN_PURCHASED', 'Minimum purchase')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "number",
     name: "minimum",
-    value: (_ref5 = (_formState$changes$mi = (_formState$changes23 = formState.changes) === null || _formState$changes23 === void 0 ? void 0 : _formState$changes23.minimum) !== null && _formState$changes$mi !== void 0 ? _formState$changes$mi : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo16 = promotionState.promotion) === null || _promotionState$promo16 === void 0 ? void 0 : _promotionState$promo16.minimum) !== null && _ref5 !== void 0 ? _ref5 : '',
+    value: (_ref5 = (_formState$changes$mi = (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25.minimum) !== null && _formState$changes$mi !== void 0 ? _formState$changes$mi : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo17 = promotionState.promotion) === null || _promotionState$promo17 === void 0 ? void 0 : _promotionState$promo17.minimum) !== null && _ref5 !== void 0 ? _ref5 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -320,11 +344,54 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles3.Label, null, t('LIMIT', 'Limit')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "number",
     name: "limit",
-    value: (_ref6 = (_formState$changes$li = (_formState$changes24 = formState.changes) === null || _formState$changes24 === void 0 ? void 0 : _formState$changes24.limit) !== null && _formState$changes$li !== void 0 ? _formState$changes$li : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo17 = promotionState.promotion) === null || _promotionState$promo17 === void 0 ? void 0 : _promotionState$promo17.limit) !== null && _ref6 !== void 0 ? _ref6 : '',
+    value: (_ref6 = (_formState$changes$li = (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.limit) !== null && _formState$changes$li !== void 0 ? _formState$changes$li : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo18 = promotionState.promotion) === null || _promotionState$promo18 === void 0 ? void 0 : _promotionState$promo18.limit) !== null && _ref6 !== void 0 ? _ref6 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
     placeholder: 0
+  }))), isAdvancedOffersActivated && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles3.SectionTitle, null, t('QUESTION_HOW_GOING_APPLIED', 'How it\'s going to be applied?')), /*#__PURE__*/_react.default.createElement(_styles3.CouponContainer, null, /*#__PURE__*/_react.default.createElement(_styles3.CouponHeader, {
+    active: ((_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27.type) === 2 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo19 = promotionState.promotion) === null || _promotionState$promo19 === void 0 ? void 0 : _promotionState$promo19.type) === 2,
+    onClick: function onClick() {
+      return handleChangeItem({
+        type: 2
+      });
+    }
+  }, ((_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.type) === 2 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo20 = promotionState.promotion) === null || _promotionState$promo20 === void 0 ? void 0 : _promotionState$promo20.type) === 2 ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('COUPON', 'Coupon'))), (((_formState$changes29 = formState.changes) === null || _formState$changes29 === void 0 ? void 0 : _formState$changes29.type) === 2 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo21 = promotionState.promotion) === null || _promotionState$promo21 === void 0 ? void 0 : _promotionState$promo21.type) === 2) && /*#__PURE__*/_react.default.createElement(_styles3.CouponContent, null, /*#__PURE__*/_react.default.createElement(_styles3.ShowInCartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    checked: typeof ((_formState$changes30 = formState.changes) === null || _formState$changes30 === void 0 ? void 0 : _formState$changes30.public) !== 'undefined' ? (_formState$changes31 = formState.changes) === null || _formState$changes31 === void 0 ? void 0 : _formState$changes31.public : (_promotionState$promo22 = promotionState.promotion) === null || _promotionState$promo22 === void 0 ? void 0 : _promotionState$promo22.public,
+    onChange: function onChange(e) {
+      return handleChangeItem({
+        public: e.target.checked
+      });
+    }
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('SHOW_IN_CART', 'Show in cart')), /*#__PURE__*/_react.default.createElement("p", null, t('PLEASE_INDICATE_COUPON_FOR_CART', 'Please indicate if you want the coupon to be seen in the cart or hidden')))), /*#__PURE__*/_react.default.createElement(_styles3.CouponCodeContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('COUPON_CODE', 'Coupon code')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "coupon",
+    value: (_ref7 = (_formState$changes$co2 = (_formState$changes32 = formState.changes) === null || _formState$changes32 === void 0 ? void 0 : _formState$changes32.coupon) !== null && _formState$changes$co2 !== void 0 ? _formState$changes$co2 : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo23 = promotionState.promotion) === null || _promotionState$promo23 === void 0 ? void 0 : _promotionState$promo23.coupon) !== null && _ref7 !== void 0 ? _ref7 : '',
+    onChange: function onChange(e) {
+      return handleChangeItem({
+        coupon: e.target.value.replace(/\s+/g, '')
+      });
+    }
+  })))), /*#__PURE__*/_react.default.createElement(_styles3.DiscountOption, null, /*#__PURE__*/_react.default.createElement(_styles3.CouponHeader, {
+    active: ((_formState$changes33 = formState.changes) === null || _formState$changes33 === void 0 ? void 0 : _formState$changes33.type) === 1 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo24 = promotionState.promotion) === null || _promotionState$promo24 === void 0 ? void 0 : _promotionState$promo24.type) === 1,
+    onClick: function onClick() {
+      return handleChangeItem({
+        type: 1
+      });
+    }
+  }, ((_formState$changes34 = formState.changes) === null || _formState$changes34 === void 0 ? void 0 : _formState$changes34.type) === 1 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo25 = promotionState.promotion) === null || _promotionState$promo25 === void 0 ? void 0 : _promotionState$promo25.type) === 1 ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DISCOUNT', 'discount'))), (((_formState$changes35 = formState.changes) === null || _formState$changes35 === void 0 ? void 0 : _formState$changes35.type) === 1 || !(formState !== null && formState !== void 0 && formState.changes.type) && (promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo26 = promotionState.promotion) === null || _promotionState$promo26 === void 0 ? void 0 : _promotionState$promo26.type) === 1) && /*#__PURE__*/_react.default.createElement(_styles3.AutomaticDiscountEnableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    checked: typeof ((_formState$changes36 = formState.changes) === null || _formState$changes36 === void 0 ? void 0 : _formState$changes36.auto) !== 'undefined' ? (_formState$changes37 = formState.changes) === null || _formState$changes37 === void 0 ? void 0 : _formState$changes37.auto : (_promotionState$promo27 = promotionState.promotion) === null || _promotionState$promo27 === void 0 ? void 0 : _promotionState$promo27.auto,
+    onChange: function onChange(e) {
+      return handleChangeItem({
+        auto: e.target.checked
+      });
+    }
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('AUTOMATIC_DISCOUNT', 'Automatic discount')))), /*#__PURE__*/_react.default.createElement(_styles3.StackableContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('ALLOW_COMBINE_OFFER', 'Allow to combine offer (discount/coupon) with others?')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: typeof ((_formState$changes38 = formState.changes) === null || _formState$changes38 === void 0 ? void 0 : _formState$changes38.stackable) !== 'undefined' ? (_formState$changes39 = formState.changes) === null || _formState$changes39 === void 0 ? void 0 : _formState$changes39.stackable : (_promotionState$promo28 = (_promotionState$promo29 = promotionState.promotion) === null || _promotionState$promo29 === void 0 ? void 0 : _promotionState$promo29.stackable) !== null && _promotionState$promo28 !== void 0 ? _promotionState$promo28 : false,
+    onChange: function onChange(val) {
+      return handleChangeItem({
+        stackable: val
+      });
+    }
   }))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",

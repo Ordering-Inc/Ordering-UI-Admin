@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIcon = exports.PromotionTypeWrapper = exports.PromotionTypeContainer = exports.PromotionImage = exports.MinimumLimitContainer = exports.Label = exports.ItemWrapper = exports.Image = exports.DiscountContainer = exports.DateRangeWrapper = exports.Container = exports.Camera = exports.CalendarWrapper = exports.CalendarContainer = void 0;
+exports.UploadImageIcon = exports.StackableContainer = exports.ShowInCartContainer = exports.SectionTitle = exports.PromotionTypeWrapper = exports.PromotionTypeContainer = exports.PromotionImage = exports.PoromotionTargetWrapper = exports.MinimumLimitContainer = exports.Label = exports.ItemWrapper = exports.Image = exports.DiscountOption = exports.DiscountContainer = exports.DateRangeWrapper = exports.CouponHeader = exports.CouponContent = exports.CouponContainer = exports.CouponCodeContainer = exports.Container = exports.Camera = exports.CalendarWrapper = exports.CalendarContainer = exports.AutomaticDiscountEnableWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -126,3 +126,84 @@ exports.DiscountContainer = DiscountContainer;
 var MinimumLimitContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 30px;\n\n  > div {\n    width: calc(50% - 10px);\n    display: flex;\n    flex-direction: column;\n\n    input::-webkit-outer-spin-button,\n    input::-webkit-inner-spin-button {\n      display: none;\n    }    \n  }\n"])));
 
 exports.MinimumLimitContainer = MinimumLimitContainer;
+
+var PoromotionTargetWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin: 24px 0;\n\n  .select {\n    padding-top: 4px;\n    padding-bottom: 4px;\n    font-size: 14px;\n    border: none;\n    background-color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.secundary;
+});
+
+exports.PoromotionTargetWrapper = PoromotionTargetWrapper;
+
+var CouponContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";  \n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
+
+exports.CouponContainer = CouponContainer;
+
+var CouponHeader = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 15px 0;\n  cursor: pointer;\n\n  ", "\n\n  > span {\n    font-size: 14px;\n    ", "\n  }\n"])), function (_ref3) {
+  var active = _ref3.active;
+  return active && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
+    return props.theme.colors.primary;
+  });
+}, function (props) {
+  var _props$theme6;
+
+  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n      margin-right: 13px;\n    "]))) : (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n      margin-left: 13px;\n    "])));
+});
+
+exports.CouponHeader = CouponHeader;
+
+var CouponCodeContainer = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  margin-top: 26px;\n  margin-bottom: 17px;\n  display: flex;\n  flex-direction: column;\n\n  ", "\n\n  label {\n    font-size: 14px;\n    margin-bottom: 8px;\n  }\n"])), function (props) {
+  var _props$theme7;
+
+  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "])));
+});
+
+exports.CouponCodeContainer = CouponCodeContainer;
+
+var CouponContent = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral([""])));
+
+exports.CouponContent = CouponContent;
+
+var ShowInCartContainer = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  display: flex;\n\n  ", "\n\n  > div {\n    p {\n      margin: 0;\n      &:first-child {\n        font-size: 14px;\n      }\n      &:last-child {\n        font-size: 12px;\n        color: ", ";\n      }\n    }\n    ", "\n  }\n"])), function (props) {
+  var _props$theme8;
+
+  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "])));
+}, function (props) {
+  return props.theme.colors.lightGray;
+}, function (props) {
+  var _props$theme9;
+
+  return (_props$theme9 = props.theme) !== null && _props$theme9 !== void 0 && _props$theme9.rtl ? (0, _styledComponents.css)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
+});
+
+exports.ShowInCartContainer = ShowInCartContainer;
+
+var DiscountOption = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
+
+exports.DiscountOption = DiscountOption;
+
+var AutomaticDiscountEnableWrapper = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 15px;\n  ", "\n\n  span {\n    font-size: 14px;\n    ", "\n  }\n"])), function (props) {
+  var _props$theme10;
+
+  return (_props$theme10 = props.theme) !== null && _props$theme10 !== void 0 && _props$theme10.rtl ? (0, _styledComponents.css)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "])));
+}, function (props) {
+  var _props$theme11;
+
+  return (_props$theme11 = props.theme) !== null && _props$theme11 !== void 0 && _props$theme11.rtl ? (0, _styledComponents.css)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
+});
+
+exports.AutomaticDiscountEnableWrapper = AutomaticDiscountEnableWrapper;
+
+var SectionTitle = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  font-weight: 600;\n  margin: 30px 0 18px 0;\n"])));
+
+exports.SectionTitle = SectionTitle;
+
+var StackableContainer = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin: 24px 0;\n\n  > span {\n    font-size: 14px;\n    ", "\n  }\n"])), function (props) {
+  var _props$theme12;
+
+  return (_props$theme12 = props.theme) !== null && _props$theme12 !== void 0 && _props$theme12.rtl ? (0, _styledComponents.css)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "])));
+});
+
+exports.StackableContainer = StackableContainer;

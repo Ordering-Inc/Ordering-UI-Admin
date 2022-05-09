@@ -55,7 +55,7 @@ exports.optimizeImage = optimizeImage;
 
 var getIconCard = function getIconCard() {
   var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var value = brand.toLowerCase();
+  var value = brand === null || brand === void 0 ? void 0 : brand.toLowerCase();
 
   switch (value) {
     case 'visa':
