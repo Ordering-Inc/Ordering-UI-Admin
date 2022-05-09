@@ -50,7 +50,8 @@ export const OrdersTable = (props) => {
     isTourOpen,
     handleOpenTour,
     setIsTourOpen,
-    slaSettingTime
+    slaSettingTime,
+    groupStatus
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -119,6 +120,8 @@ export const OrdersTable = (props) => {
   const getDelayTime = (order) => {
     // targetMin = delivery_datetime  + eta_time - now()
     const _delivery = order?.delivery_datetime_utc
+      ? parseDate(order?.delivery_datetime_utc)
+      : parseDate(order?.delivery_datetime, { utc: false })
     const _eta = order?.eta_time
     const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
     let day = Math.floor(tagetedMin / 1440)
@@ -253,9 +256,14 @@ export const OrdersTable = (props) => {
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
 
-  // useEffect(() => {
-  //   setTimeState
-  // }, [])
+  useEffect(() => {
+    if (groupStatus === 'completed' || groupStatus === 'cancelled') {
+      setAllowColumns({
+        ...allowColumns,
+        timer: false
+      })
+    }
+  }, [groupStatus])
 
   return (
     <>
@@ -572,8 +580,12 @@ export const OrdersTable = (props) => {
                   {allowColumns?.timer && (
                     <td className='timer'>
                       <Timer>
-                        <p className='bold'>{t('TIMER', 'Timer')}</p>
-                        <p className={order?.time_status}>{getDelayTime(order)}</p>
+                        {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                          <>
+                            <p className='bold'>{t('TIMER', 'Timer')}</p>
+                            <p className={order?.time_status}>{getDelayTime(order)}</p>
+                          </>
+                        )}
                       </Timer>
                     </td>
                   )}

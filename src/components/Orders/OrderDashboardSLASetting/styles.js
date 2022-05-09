@@ -83,7 +83,6 @@ export const ItemStatus = styled.span`
 export const ItemHeader = styled.div`
   display: flex;
   margin-bottom: 5px;
-  cursor: pointer;
 `
 
 export const ItemContent = styled.div`
@@ -125,29 +124,14 @@ export const TimerInputWrapper = styled.div`
   color: ${props => props.theme.colors.disabled};
 
   input {
+    flex: 1;
     border: none !important;
     outline: none !important;
     padding: 5px;
     font-size: 14px;
+    min-width: 38px;
+    width: fit-content;
     color: ${props => props.theme.colors.headingColor};
-  }
-
-  input:first-child {
-    width: 33px;
-  }
-
-  input:last-child {
-    width: 38px;
-  }
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type=number] {
-    -moz-appearance: textfield;
   }
 `
 export const OverLine = styled.div`
