@@ -35,7 +35,7 @@ var HeaderLeft = _styledComponents.default.div(_templateObject3 || (_templateObj
 
 exports.HeaderLeft = HeaderLeft;
 
-var HeaderRight = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  button {\n    height: 41px;\n    ", "\n  }\n\n  input {\n    border: none;\n    background-color: ", ";\n  }\n"])), function (props) {
+var HeaderRight = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  button {\n    height: 41px;\n    ", "\n  }\n  input {\n    border: none;\n    background-color: ", ";\n  }\n  > * {\n    margin-bottom: 10px;\n    &:last-child {\n      width: 100%;\n      flex: initial;\n    }\n  }\n  @media (min-width: 768px) {\n    > * {\n      margin-bottom: 0px;\n      &:last-child {\n        width: initial;\n        flex: 1;\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-left: 11px;\n    "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-right: 11px;\n    "])));
@@ -79,11 +79,11 @@ var Tab = _styledComponents.default.div(_templateObject12 || (_templateObject12 
 
 exports.Tab = Tab;
 
-var CitiesListContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n"])));
+var CitiesListContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  overflow: auto;\n"])));
 
 exports.CitiesListContainer = CitiesListContainer;
 
-var CityWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  width: 100%;\n  display: flex;\n  align-items: center;\n  padding: 10px 0;\n\n  ", "\n\n  ", "\n"])), function (props) {
+var CityWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  min-width: 700px;\n  border-bottom: 1px solid ", ";\n  width: 100%;\n  display: flex;\n  align-items: center;\n  padding: 10px 0;\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref3) {
   var isHeader = _ref3.isHeader;

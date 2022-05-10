@@ -17,11 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var DropdownOptionsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n"])));
+var DropdownOptionsContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  overflow: auto;\n"])));
 
 exports.DropdownOptionsContainer = DropdownOptionsContainer;
 
-var DropdownOptionWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  width: 100%;\n  display: flex;\n  align-items: center;\n  padding: 10px 0;\n\n  ", "\n\n  ", "\n"])), function (props) {
+var DropdownOptionWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  min-width: 700px;\n  border-bottom: 1px solid ", ";\n  width: 100%;\n  display: flex;\n  align-items: center;\n  padding: 10px 0;\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref) {
   var isHeader = _ref.isHeader;

@@ -172,11 +172,7 @@ var BusinessMenuCategoryTreeNode = function BusinessMenuCategoryTreeNode(props) 
   };
 
   (0, _react.useEffect)(function () {
-    var _category$products;
-
-    if (category !== null && category !== void 0 && (_category$products = category.products) !== null && _category$products !== void 0 && _category$products.length) {
-      setIsCategoryState(isCheckedCategory());
-    }
+    setIsCategoryState(isCheckedCategory());
   }, [selectedProductsIds]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_subCategoriesList$fi2 = subCategoriesList.find(function (_category) {
     return _category.id === category.id;

@@ -98,12 +98,21 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
       setConfirm = _useState6[1];
 
   var _useState7 = (0, _react.useState)({
+    name: null,
+    data: null,
+    open: false
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      cropState = _useState8[0],
+      setCropState = _useState8[1];
+
+  var _useState9 = (0, _react.useState)({
     isAutoGenerate: false,
     autoCodeText: categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.slug
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      autoGenerateCode = _useState8[0],
-      setAutoGenerate = _useState8[1];
+      _useState10 = _slicedToArray(_useState9, 2),
+      autoGenerateCode = _useState10[0],
+      setAutoGenerate = _useState10[1];
 
   var headerImageInputRef = (0, _react.useRef)(null);
 
@@ -139,6 +148,21 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
         return;
       }
 
+      var reader = new window.FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = function () {
+        setCropState({
+          name: name,
+          data: reader.result,
+          open: true
+        });
+      };
+
+      reader.onerror = function (error) {
+        return console.log(error);
+      };
+
       handlechangeImage(files[0], name);
     }
   };
@@ -171,6 +195,15 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     .replace(/-+$/, ''); // trim - from end of text
 
     return str;
+  };
+
+  var handleChangePhoto = function handleChangePhoto(croppedImg) {
+    handleChangeItem(_defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg));
+    setCropState({
+      name: null,
+      data: null,
+      open: false
+    });
   };
 
   (0, _react.useEffect)(function () {
@@ -374,7 +407,21 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     },
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('IMAGE_CROP', 'Image crop'),
+    open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
+    onClose: function onClose() {
+      return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
+        open: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
+    handleChangePhoto: handleChangePhoto
+  })));
 };
 
 exports.BusinessProductsCategoyInfo = BusinessProductsCategoyInfo;

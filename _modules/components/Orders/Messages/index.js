@@ -240,13 +240,19 @@ var MessagesUI = function MessagesUI(props) {
 
     if (load < 3) {
       var chat = document.getElementById('chat');
-      chat.scrollTop = chat.scrollHeight;
+
+      if (chat) {
+        chat.scrollTop = chat.scrollHeight;
+      }
     }
   }, [load]);
   (0, _react.useEffect)(function () {
     if (history) return;
     var chat = document.getElementById('chat');
-    chat.scrollTop = chat.scrollHeight;
+
+    if (chat) {
+      chat.scrollTop = chat.scrollHeight;
+    }
   }, [messages.messages.length, filteredMessages]);
   (0, _react.useEffect)(function () {
     if (history) return;

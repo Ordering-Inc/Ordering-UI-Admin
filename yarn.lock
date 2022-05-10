@@ -7909,7 +7909,6 @@ optionator@^0.8.3:
     dayjs "^1.9.3"
     ordering-api-sdk "github:Ordering-Inc/ordering-api-sdk#release"
     prop-types "^15.7.2"
-    react-google-recaptcha "^2.1.0"
     socket.io-client "^2.3.0"
 
 original@^1.0.0:
@@ -8916,6 +8915,13 @@ react-summernote@^2.0.2:
     codemirror "^5.26.0"
     prop-types "^15.5.10"
     summernote "^0.8.15"
+
+react-to-print@^2.14.6:
+  version "2.14.7"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.7.tgz#d288de0e573e6e63e203a48d4bad7a1759d18688"
+  integrity sha512-lWVVAs9Co25uyE0toxcWeFsmaZObwUozXrJD9WMpDPclpBgk+WIzxlt3Q3omL/BCBG/cpf0XNvhayUWa+99YGw==
+  dependencies:
+    prop-types "^15.8.1"
 
 react-toastify@^6.1.0:
   version "6.2.0"

@@ -87,16 +87,15 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
-    title: t('FILTER', 'Filter'),
     width: "80%",
-    padding: "30px",
+    padding: "0px",
     open: open,
     onClose: function onClose() {
       return handleCloseFilterModal();
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.FilterGroupListContainer, {
     className: "filter-modal"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('FILTER', 'Filter')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: "ID",
     autoComplete: "off",

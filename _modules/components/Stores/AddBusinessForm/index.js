@@ -59,7 +59,8 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
       handleChangeInput = props.handleChangeInput,
       handleAddBusiness = props.handleAddBusiness,
       handleChangeAddress = props.handleChangeAddress,
-      handleChangeCenter = props.handleChangeCenter;
+      handleChangeCenter = props.handleChangeCenter,
+      handleChangeSwtich = props.handleChangeSwtich;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -80,6 +81,15 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
       setAlertState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)({
+    name: null,
+    data: null,
+    open: false
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      cropState = _useState4[0],
+      setCropState = _useState4[1];
 
   var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var googleMapsControls = {
@@ -131,6 +141,21 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
         return;
       }
 
+      var reader = new window.FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = function () {
+        setCropState({
+          name: name,
+          data: reader.result,
+          open: true
+        });
+      };
+
+      reader.onerror = function (error) {
+        return console.log(error);
+      };
+
       handlechangeImage(files[0], name);
     }
   };
@@ -139,6 +164,15 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     setAlertState({
       open: false,
       content: []
+    });
+  };
+
+  var handleChangePhoto = function handleChangePhoto(croppedImg) {
+    handleChangeSwtich(cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg);
+    setCropState({
+      name: null,
+      data: null,
+      open: false
     });
   };
 
@@ -322,6 +356,20 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('IMAGE_CROP', 'Image crop'),
+    open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
+    onClose: function onClose() {
+      return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
+        open: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
+    handleChangePhoto: handleChangePhoto
   })));
 };
 

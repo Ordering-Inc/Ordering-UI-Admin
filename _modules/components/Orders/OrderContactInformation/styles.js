@@ -27,7 +27,7 @@ var BusinessInfo = _styledComponents.default.div(_templateObject || (_templateOb
 
 exports.BusinessInfo = BusinessInfo;
 
-var PhotoWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  max-width: 48px;\n  max-height: 48px;\n  height: 48px;\n  width: 48px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n\n  svg {\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n  }\n\n  @media print {\n    display: none;\n  }\n"])));
+var PhotoWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  max-width: 48px;\n  max-height: 48px;\n  height: 48px;\n  width: 48px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n\n  svg {\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n  }\n"])));
 
 exports.PhotoWrapper = PhotoWrapper;
 
@@ -71,7 +71,7 @@ exports.DriverInfoContainer = DriverInfoContainer;
 var DriverInfo = (0, _styledComponents.default)(BusinessInfo)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral([""])));
 exports.DriverInfo = DriverInfo;
 
-var DriverSelectorContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-top: 23px;\n  margin-bottom: 13px;\n  > p {\n    font-size: 14px;\n    margin-top: 0;\n    margin-bottom: 15px;\n  }\n  > div {\n    width: 50%;\n    border-radius: 8px;\n    border-color: ", ";\n    background-color: ", ";\n    > div {\n      &:first-child {\n        padding-top: 4px;\n        padding-bottom: 4px;\n      }\n      > div:first-child {\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
+var DriverSelectorContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-top: 23px;\n  margin-bottom: 13px;\n  > p {\n    font-size: 14px;\n    margin-top: 0;\n    margin-bottom: 15px;\n  }\n  > div {\n    width: 100%;\n    border-radius: 8px;\n    border-color: ", ";\n    background-color: ", ";\n\n    > div {\n      &:first-child {\n        padding-top: 4px;\n        padding-bottom: 4px;\n      }\n      > div:first-child {\n        color: ", ";\n      }\n    }\n  }\n\n  @media (min-width: 768px) {\n    > div {\n      width: 50%;\n    }\n  }\n  @media (max-width: 576px) {\n    > div {\n      p {\n        max-width: initial;\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme$colors3;
 
   return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.secundary;

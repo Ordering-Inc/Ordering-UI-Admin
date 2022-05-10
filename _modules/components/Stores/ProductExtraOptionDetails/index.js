@@ -90,7 +90,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       extra = props.extra,
       handleAddOption = props.handleAddOption,
       handleDeteteOption = props.handleDeteteOption,
-      isMaxError = props.isMaxError;
+      isMaxError = props.isMaxError,
+      handleChangeItem = props.handleChangeItem;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -136,6 +137,15 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       isAddForm = _useState10[0],
       setIsAddForm = _useState10[1];
 
+  var _useState11 = (0, _react.useState)({
+    name: null,
+    data: null,
+    open: false
+  }),
+      _useState12 = _slicedToArray(_useState11, 2),
+      cropState = _useState12[0],
+      setCropState = _useState12[1];
+
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
   };
@@ -162,8 +172,33 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
         return;
       }
 
+      var reader = new window.FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = function () {
+        setCropState({
+          name: 'image',
+          data: reader.result,
+          open: true,
+          id: subOptionId
+        });
+      };
+
+      reader.onerror = function (error) {
+        return console.log(error);
+      };
+
       handleChangeSubOptionImage(files[0], subOptionId);
     }
+  };
+
+  var handleChangePhoto = function handleChangePhoto(croppedImg) {
+    handleChangeItem(_defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg), cropState === null || cropState === void 0 ? void 0 : cropState.id);
+    setCropState({
+      name: null,
+      data: null,
+      open: false
+    });
   };
 
   var handleDeleteOption = function handleDeleteOption() {
@@ -271,7 +306,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       handleChangeDefaultSuboption: handleChangeDefaultSuboption,
       handleChangeSubOptionEnable: handleChangeSubOptionEnable,
       handleDeteteSubOption: handleDeteteSubOption,
-      handleUpdateSubOption: handleUpdateSubOption
+      handleUpdateSubOption: handleUpdateSubOption,
+      handleChangeItem: handleChangeItem
     });
   }), isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AdddSubOptionForm, {
     onSubmit: handleSubmit(handleAddOption),
@@ -440,6 +476,21 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     extraId: extra.id,
     optionId: optionState.option.id,
     subOptionId: selectedSubOptionId
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('IMAGE_CROP', 'Image crop'),
+    open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
+    onClose: function onClose() {
+      return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
+        open: false
+      }));
+    },
+    className: "ordering-img-crop"
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
+    handleChangePhoto: handleChangePhoto
   })));
 };
 

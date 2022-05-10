@@ -35,6 +35,8 @@ var _Shared = require("../../Shared");
 
 var _styles = require("../../../styles");
 
+var _OrderToPrint = require("../OrderToPrint");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -62,7 +64,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderDetailsUI = function OrderDetailsUI(props) {
-  var _getOrderStatus, _order$products;
+  var _order$place, _getOrderStatus, _order$products;
 
   var isSelectedOrders = props.isSelectedOrders,
       open = props.open,
@@ -108,6 +110,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       user = _useSession2[0].user;
 
+  var printRef = (0, _react.useRef)();
+
   var _useState5 = (0, _react.useState)({
     business: false,
     driver: false,
@@ -127,6 +131,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       extraOpen = _useState10[0],
       setExtraOpen = _useState10[1];
 
+  var placeSpotEnabled = [3, 4];
   var _props$order = props.order,
       order = _props$order.order,
       loading = _props$order.loading;
@@ -544,7 +549,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     handleOpenMessages: handleOpenMessages,
     isTourOpen: isTourOpen,
     currentTourStep: currentTourStep,
-    setIsTourOpen: setIsTourOpen
+    setIsTourOpen: setIsTourOpen,
+    printRef: printRef
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
     isDisabled: isTourOpen && currentTourStep === 1
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
@@ -556,7 +562,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     deliveryType: order === null || order === void 0 ? void 0 : order.delivery_type,
     defaultValue: parseInt(order.status),
     handleUpdateOrderStatus: handleUpdateOrderStatus
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.StatusBarContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.StatusBar, {
+  }))), (order === null || order === void 0 ? void 0 : order.place) && placeSpotEnabled.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement(_styles2.PlaceSpotContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('SPOT', 'Spot'), ": ", order === null || order === void 0 ? void 0 : (_order$place = order.place) === null || _order$place === void 0 ? void 0 : _order$place.name)), /*#__PURE__*/_react.default.createElement(_styles2.StatusBarContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.StatusBar, {
     percentage: (_getOrderStatus = getOrderStatus(order === null || order === void 0 ? void 0 : order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.percentage
   })), /*#__PURE__*/_react.default.createElement(_styles2.AdvancedLogistic, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('ATTEMPTS', 'Attempts')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.logistic_attemps)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority)))), /*#__PURE__*/_react.default.createElement("div", {
     "data-tour": "tour_driver"
@@ -657,6 +663,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     content: t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.'),
     btnTitle: t('PROFILE_ORDERS_REDIRECT', 'Go to Orders'),
     onClickButton: handleBackRedirect
+  }), order && Object.keys(order).length > 0 && !loading && /*#__PURE__*/_react.default.createElement(_OrderToPrint.OrderToPrint, {
+    ref: printRef,
+    order: order,
+    placeSpotEnabled: placeSpotEnabled,
+    getOrderStatus: getOrderStatus,
+    getLogisticTag: getLogisticTag,
+    getPriorityTag: getPriorityTag
   }));
 };
 

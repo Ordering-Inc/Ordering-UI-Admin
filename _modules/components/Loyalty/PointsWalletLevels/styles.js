@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.PointsWrapper = exports.LevelWrapper = exports.LevelNameWrapper = exports.LastWrapper = exports.Container = exports.ButtonWrapper = exports.AddSubOption = void 0;
+exports.Title = exports.PointsWrapper = exports.LevelWrapper = exports.LevelNameWrapper = exports.LevelContainer = exports.LastWrapper = exports.Container = exports.ButtonWrapper = exports.AddSubOption = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -25,34 +25,38 @@ var Title = _styledComponents.default.h1(_templateObject2 || (_templateObject2 =
 
 exports.Title = Title;
 
-var LevelWrapper = _styledComponents.default.form(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 17px;\n  ", "\n"])), function (_ref) {
+var LevelContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  overflow: auto;\n  padding-bottom: 40px;\n"])));
+
+exports.LevelContainer = LevelContainer;
+
+var LevelWrapper = _styledComponents.default.form(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 17px;\n  ", "\n  min-width: 450px;\n"])), function (_ref) {
   var isTitle = _ref.isTitle;
-  return isTitle && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-bottom: 9px;\n  "])));
+  return isTitle && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    margin-bottom: 9px;\n  "])));
 });
 
 exports.LevelWrapper = LevelWrapper;
 
-var LevelNameWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex: 1;\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n"])));
+var LevelNameWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  flex: 1;\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n"])));
 
 exports.LevelNameWrapper = LevelNameWrapper;
 
-var LastWrapper = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 60px;\n  margin: 0px 12px;\n\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n\n  @media (min-width: 576px) {\n    width: 95px;\n    margin: 0px 24px;\n  }\n"])));
+var LastWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 95px;\n  margin: 0px 12px;\n\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 576px) {\n    margin: 0px 24px;\n  }\n"])));
 
 exports.LastWrapper = LastWrapper;
 
-var PointsWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: 60px;\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n\n  @media (min-width: 576px) {\n    width: 95px;\n  }\n"])));
+var PointsWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 60px;\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n\n  @media (min-width: 576px) {\n    width: 95px;\n  }\n"])));
 
 exports.PointsWrapper = PointsWrapper;
 
-var ButtonWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 30px;\n  margin-left: 10px;\n  ", "\n\n  @media (min-width: 576px) {\n    margin-left: 17px;\n    ", "\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0px;\n  "])));
+var ButtonWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 30px;\n  margin-left: 10px;\n  ", "\n\n  @media (min-width: 576px) {\n    margin-left: 17px;\n    ", "\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0px;\n  "])));
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin-right: 17px;\n      margin-left: 0px;\n    "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      margin-right: 17px;\n      margin-left: 0px;\n    "])));
 });
 
 exports.ButtonWrapper = ButtonWrapper;
 
-var AddSubOption = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  user-select: none;\n  cursor: pointer;\n  font-size: 14px;\n  line-height: 24px;\n  color: ", ";\n  margin-top: 6px;\n"])), function (props) {
+var AddSubOption = _styledComponents.default.span(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  user-select: none;\n  cursor: pointer;\n  font-size: 14px;\n  line-height: 24px;\n  color: ", ";\n  margin-top: 6px;\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 

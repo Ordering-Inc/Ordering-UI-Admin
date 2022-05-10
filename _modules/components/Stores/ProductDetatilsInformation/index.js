@@ -88,12 +88,21 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
       setMinimumRegualrPrice = _useState4[1];
 
   var _useState5 = (0, _react.useState)({
+    name: null,
+    data: null,
+    open: false
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      cropState = _useState6[0],
+      setCropState = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
     isAutoGenerate: false,
     autoCodeText: product === null || product === void 0 ? void 0 : product.slug
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      autoGenerateCode = _useState6[0],
-      setAutoGenerate = _useState6[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      autoGenerateCode = _useState8[0],
+      setAutoGenerate = _useState8[1];
 
   var handleClickImage = function handleClickImage() {
     productImageInputRef.current.click();
@@ -120,6 +129,21 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
         });
         return;
       }
+
+      var reader = new window.FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = function () {
+        setCropState({
+          name: 'images',
+          data: reader.result,
+          open: true
+        });
+      };
+
+      reader.onerror = function (error) {
+        return console.log(error);
+      };
 
       handlechangeImage(files[0]);
     }
@@ -172,6 +196,15 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     } else {
       handleChangeInput(e);
     }
+  };
+
+  var handleChangePhoto = function handleChangePhoto(croppedImg) {
+    handleChangeFormState(_defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg));
+    setCropState({
+      name: null,
+      data: null,
+      open: false
+    });
   };
 
   (0, _react.useEffect)(function () {
@@ -367,7 +400,21 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('IMAGE_CROP', 'Image crop'),
+    open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
+    onClose: function onClose() {
+      return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
+        open: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
+    handleChangePhoto: handleChangePhoto
+  })));
 };
 
 exports.ProductDetatilsInformation = ProductDetatilsInformation;

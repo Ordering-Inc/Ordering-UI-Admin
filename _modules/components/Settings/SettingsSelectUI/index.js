@@ -91,7 +91,6 @@ var SettingsSelectUI = function SettingsSelectUI(props) {
     notAsync: true,
     defaultValue: config === null || config === void 0 ? void 0 : config.value,
     options: options,
-    className: "select",
     onChange: function onChange(typeValue) {
       return handleSelectChange(typeValue);
     },

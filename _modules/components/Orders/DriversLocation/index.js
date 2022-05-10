@@ -170,7 +170,8 @@ var DriversLocation = function DriversLocation(props) {
     className: "drivers-location"
   }, googleMapsApiKey && /*#__PURE__*/_react.default.createElement(_googleMapReact.default, {
     bootstrapURLKeys: {
-      key: googleMapsApiKey
+      key: window.document.getElementById('__googleMapsScriptId') ? null : googleMapsApiKey,
+      libraries: ['places', 'geometry', 'drawing', 'visualization']
     },
     onGoogleApiLoaded: function onGoogleApiLoaded() {
       return setMapLoaded(false);
