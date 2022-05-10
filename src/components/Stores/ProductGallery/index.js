@@ -10,7 +10,7 @@ import Skeleton from 'react-loading-skeleton'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { bytesConverter } from '../../../utils'
-import { Alert, Confirm } from '../../Shared'
+import { Alert, Confirm, Modal, ImageCrop } from '../../Shared'
 import { IconButton } from '../../../styles'
 
 import {
@@ -30,7 +30,8 @@ const ProductGalleryUI = (props) => {
     handleChangeImage,
     handleChangeInput,
     handleAddGalleryProduct,
-    handleDeteteProductGalleryItem
+    handleDeteteProductGalleryItem,
+    handleChangeItem
   } = props
 
   const [, t] = useLanguage()
@@ -40,6 +41,7 @@ const ProductGalleryUI = (props) => {
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const closeAlert = () => {
     setAlertState({
@@ -70,6 +72,14 @@ const ProductGalleryUI = (props) => {
         })
         return
       }
+
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'file', data: reader.result, open: true, id: optionId })
+      }
+      reader.onerror = error => console.log(error)
+
       handleChangeImage(files[0], optionId)
     }
     if (!optionId && inputRef?.value) inputRef.value = null
@@ -84,6 +94,11 @@ const ProductGalleryUI = (props) => {
         handleDeteteProductGalleryItem(itemId, type)
       }
     })
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeItem({ [cropState?.name]: croppedImg }, cropState?.id)
+    setCropState({ name: null, data: null, open: false })
   }
 
   useEffect(() => {
@@ -232,6 +247,20 @@ const ProductGalleryUI = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+        className='ordering-img-crop'
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </>
   )
 }

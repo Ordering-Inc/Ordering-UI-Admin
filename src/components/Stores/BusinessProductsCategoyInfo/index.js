@@ -7,7 +7,7 @@ import {
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { bytesConverter } from '../../../utils'
-import { Alert, Confirm } from '../../Shared'
+import { Alert, Confirm, Modal, ImageCrop } from '../../Shared'
 import { Button, DefaultSelect, Input, Switch, TextArea } from '../../../styles'
 // import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -51,6 +51,7 @@ export const BusinessProductsCategoyInfo = (props) => {
   const logoImageInputRef = useRef(null)
   const [parentCategoriesOptions, setParentCategoriesOptions] = useState([])
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [autoGenerateCode, setAutoGenerate] = useState({
     isAutoGenerate: false,
     autoCodeText: categorySelected?.slug
@@ -86,6 +87,14 @@ export const BusinessProductsCategoyInfo = (props) => {
         })
         return
       }
+
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: name, data: reader.result, open: true })
+      }
+      reader.onerror = error => console.log(error)
+
       handlechangeImage(files[0], name)
     }
   }
@@ -117,6 +126,11 @@ export const BusinessProductsCategoyInfo = (props) => {
       .replace(/-+$/, '') // trim - from end of text
 
     return str
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeItem({ [cropState?.name]: croppedImg })
+    setCropState({ name: null, data: null, open: false })
   }
 
   useEffect(() => {
@@ -348,6 +362,19 @@ export const BusinessProductsCategoyInfo = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </>
   )
 }

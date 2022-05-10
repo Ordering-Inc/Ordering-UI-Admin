@@ -6,7 +6,7 @@ import {
   BusinessBrandGENDetail as BusinessBrandGENDetailContorller
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Alert } from '../../Shared'
+import { Alert, Modal, ImageCrop } from '../../Shared'
 import { bytesConverter } from '../../../utils'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
@@ -27,13 +27,15 @@ const BusinessBrandGENDetailUI = (props) => {
   const {
     brandFormState,
     brand,
-    handlechangeImage,
+    // handlechangeImage,
     handleChangeInput,
-    handleUpdateClick
+    handleUpdateClick,
+    handleChangeItem
   } = props
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const brandImageInputRef = useRef(null)
 
@@ -66,8 +68,21 @@ const BusinessBrandGENDetailUI = (props) => {
         })
         return
       }
-      handlechangeImage(files[0], name)
+
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: name, data: reader.result, open: true })
+      }
+      reader.onerror = error => console.log(error)
+
+      // handlechangeImage(files[0], name)
     }
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeItem({ [cropState?.name]: croppedImg })
+    setCropState({ name: null, data: null, open: false })
   }
 
   useEffect(() => {
@@ -167,6 +182,19 @@ const BusinessBrandGENDetailUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Image } from 'react-bootstrap'
+import { useTheme } from 'styled-components'
 
 export const InvoiceBusinessPdf = (props) => {
   const {
@@ -8,6 +9,8 @@ export const InvoiceBusinessPdf = (props) => {
     getSubtotal,
     getTotal
   } = props
+
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parseDate, parsePrice }] = useUtils()
 
@@ -77,6 +80,10 @@ export const InvoiceBusinessPdf = (props) => {
       whiteSpace: 'normal',
       fontSize: '14px',
       backgroundColor: '#eee'
+    },
+    imageWrapper: {
+      width: '150px',
+      marginBottom: '15px'
     }
   }
 
@@ -113,14 +120,40 @@ export const InvoiceBusinessPdf = (props) => {
     return objectStatus && objectStatus
   }
 
+  const logoImage = theme?.images?.logos?.logoPdf
+  const [base64ImageString, setBase64ImageString] = useState(null)
+
+  const getBase64ImageFromUrl = async (imageUrl) => {
+    const response = await fetch(imageUrl)
+    const blob = await response.blob()
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.addEventListener('load', function () {
+        resolve(reader.result)
+      }, false)
+      reader.onerror = (error) => {
+        return reject(error)
+      }
+      reader.readAsDataURL(blob)
+    })
+  }
+
+  useEffect(() => {
+    getBase64ImageFromUrl(logoImage).then(base64 => {
+      setBase64ImageString(base64)
+    })
+  }, [])
+
   return (
     <div style={styles.root}>
-      <Image
-        src='https://reactdemo.ordering.co/ac950c6a4d2521f00bfc442ebfa83f77.svg'
-        fluid
-        height='45px'
-        width='150px'
-      />
+      {base64ImageString && (
+        <Image
+          src={base64ImageString}
+          fluid
+          loading='lazy'
+          style={styles.imageWrapper}
+        />
+      )}
       <br />
       <span>{t('INVOICE_FOR', 'Invoice for')} <b>{exportInvoiceList?.invoice?.business?.name}</b></span><br />
       {
@@ -134,7 +167,7 @@ export const InvoiceBusinessPdf = (props) => {
       <table style={styles.table}>
         <thead>
           <tr style={styles.table.thead.trFirst}>
-            <th style={styles.table.thead.th} colspan='5'>{t('ORDERS', 'Orders')}</th>
+            <th style={styles.table.thead.th} colSpan='5'>{t('ORDERS', 'Orders')}</th>
           </tr>
           <tr style={styles.table.thead.trLast}>
             <th style={styles.table.thead.th}>{t('EXPORT_ORDER_NUMBER', 'Order number')}</th>
@@ -159,11 +192,11 @@ export const InvoiceBusinessPdf = (props) => {
         </tbody>
         <tfoot style={styles.table.tfoot}>
           <tr style={styles.table.tfoot.tr}>
-            <td style={styles.table.tfoot.tr.td} colspan='4'>{t('SUBTOTAL', 'Subtotal')}</td>
+            <td style={styles.table.tfoot.tr.td} colSpan='4'>{t('SUBTOTAL', 'Subtotal')}</td>
             <td style={styles.table.tfoot.tr.td}>{parsePrice(exportInvoiceList?.invoice?.orders_subtotal)}</td>
           </tr>
           <tr style={styles.table.tfoot.tr}>
-            <td style={styles.table.tfoot.tr.td} colspan='4'>{t('TOTAL', 'Total')}</td>
+            <td style={styles.table.tfoot.tr.td} colSpan='4'>{t('TOTAL', 'Total')}</td>
             <td style={styles.table.tfoot.tr.td}>{parsePrice(exportInvoiceList?.invoice?.orders_total)}</td>
           </tr>
         </tfoot>
@@ -171,7 +204,7 @@ export const InvoiceBusinessPdf = (props) => {
       <table style={styles.table}>
         <thead>
           <tr style={styles.table.thead.trLast}>
-            <th style={styles.table.thead.th} colspan='2'>{t('TOTALS', 'Totals')}</th>
+            <th style={styles.table.thead.th} colSpan='2'>{t('TOTALS', 'Totals')}</th>
           </tr>
         </thead>
         <tbody>

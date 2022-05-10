@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { Alert } from '../../Shared'
+import { Alert, ImageCrop, Modal } from '../../Shared'
 import { bytesConverter } from '../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Button, Input, TextArea } from '../../../styles'
@@ -30,13 +30,15 @@ const BusinessProductAddFormUI = (props) => {
     handleUpdateClick,
     handlechangeImage,
     isTutorialMode,
-    handleTutorialSkip
+    handleTutorialSkip,
+    handleChangeItem
   } = props
 
   const [, t] = useLanguage()
 
   const productImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const handleClickImage = () => {
     productImageInputRef.current.click()
@@ -60,8 +62,20 @@ const BusinessProductAddFormUI = (props) => {
         })
         return
       }
+
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'images', data: reader.result, open: true })
+      }
+      reader.onerror = error => console.log(error)
       handlechangeImage(files[0])
     }
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeItem({ [cropState?.name]: croppedImg })
+    setCropState({ name: null, data: null, open: false })
   }
 
   const closeAlert = () => {
@@ -188,6 +202,19 @@ const BusinessProductAddFormUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </>
   )
 }

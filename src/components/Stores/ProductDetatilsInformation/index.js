@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLanguage, DragAndDrop, ExamineClick, useUtils } from 'ordering-components-admin'
-import { Alert } from '../../Shared'
+import { Alert, Modal, ImageCrop } from '../../Shared'
 import { bytesConverter } from '../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Button, Input, TextArea, Switch } from '../../../styles'
@@ -38,6 +38,7 @@ export const ProductDetatilsInformation = (props) => {
   const productImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [minimumRegualrPrice, setMinimumRegualrPrice] = useState(null)
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [autoGenerateCode, setAutoGenerate] = useState({
     isAutoGenerate: false,
     autoCodeText: product?.slug
@@ -65,6 +66,14 @@ export const ProductDetatilsInformation = (props) => {
         })
         return
       }
+
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'images', data: reader.result, open: true })
+      }
+      reader.onerror = error => console.log(error)
+
       handlechangeImage(files[0])
     }
   }
@@ -110,6 +119,11 @@ export const ProductDetatilsInformation = (props) => {
     } else {
       handleChangeInput(e)
     }
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeFormState({ [cropState?.name]: croppedImg })
+    setCropState({ name: null, data: null, open: false })
   }
 
   useEffect(() => {
@@ -352,6 +366,19 @@ export const ProductDetatilsInformation = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </>
   )
 }

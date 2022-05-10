@@ -19,6 +19,7 @@ import logotype from './template/assets/images/logotype.svg'
 import logotypeInvert from './template/assets/images/logotype-invert.svg'
 import isotype from './template/assets/images/isotype.svg'
 import isotypeInvert from './template/assets/images/isotype-invert.svg'
+import logoPdf from './template/assets/images/logo-pdf.png'
 
 import notNetwork from './template/assets/images/not-network.svg'
 import notFound from './template/assets/images/not-found.svg'
@@ -158,7 +159,8 @@ const logos = {
   logotype,
   logotypeInvert,
   isotype,
-  isotypeInvert
+  isotypeInvert,
+  logoPdf
 }
 
 theme.images = {
