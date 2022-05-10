@@ -34,10 +34,13 @@ const PaymentOptionSquareUI = (props) => {
     orderTypes,
     handleChangeBusinessPaymentState,
 
+    actionState,
     squareUrlState,
     handleConnectSquare,
     squareData,
-    handleSavePaymethod
+    handleSavePaymethod,
+    handleChangeDataInput,
+    handleChangeSanboxDataInput
   } = props
 
   const theme = useTheme()
@@ -163,36 +166,61 @@ const PaymentOptionSquareUI = (props) => {
             <FormController>
               <label>{t('APPLICATION_ID', 'Application Id')}</label>
               <Input
-                disabled
+                name='application_id'
+                disabled={actionState?.loading}
                 value={squareData?.data?.application_id ?? businessPaymethod?.data?.application_id ?? ''}
+                onChange={handleChangeDataInput}
               />
             </FormController>
             <FormController>
               <label>{t('LOCATION_ID', 'Location Id')}</label>
               <Input
-                disabled
+                name='location_id'
+                disabled={actionState?.loading}
                 value={squareData?.data?.location_id ?? businessPaymethod?.data?.location_id ?? ''}
+                onChange={handleChangeDataInput}
+              />
+            </FormController>
+            <FormController>
+              <label>{t('CLIENT_SECRET', 'Client secret')}</label>
+              <Input
+                name='client_secret'
+                disabled={actionState?.loading}
+                value={squareData?.data?.client_secret ?? businessPaymethod?.data?.client_secret ?? ''}
+                onChange={handleChangeDataInput}
               />
             </FormController>
             <FormController>
               <label>{t('APPLICATION_ID', 'Application Id')} ({t('SANDBOX', 'Sandbox')})</label>
               <Input
-                disabled
+                name='application_id'
+                disabled={actionState?.loading}
                 value={squareData?.data_sandbox?.application_id ?? businessPaymethod?.data_sandbox?.application_id ?? ''}
+                onChange={handleChangeSanboxDataInput}
               />
             </FormController>
             <FormController>
               <label>{t('LOCATION_ID', 'Location Id')} ({t('SANDBOX', 'Sandbox')})</label>
               <Input
-                disabled
+                name='location_id'
+                disabled={actionState?.loading}
                 value={squareData?.data_sandbox?.location_id ?? businessPaymethod?.data_sandbox?.location_id ?? ''}
+                onChange={handleChangeSanboxDataInput}
+              />
+            </FormController>
+            <FormController>
+              <label>{t('CLIENT_SECRET', 'Client secret')} ({t('SANDBOX', 'Sandbox')})</label>
+              <Input
+                name='client_secret'
+                disabled={actionState?.loading}
+                value={squareData?.data_sandbox?.client_secret ?? businessPaymethod?.data_sandbox?.client_secret ?? ''}
+                onChange={handleChangeSanboxDataInput}
               />
             </FormController>
             <Button
               borderRadius='8px'
               color='primary'
-              disabled={!squareData}
-              onClick={() => handleSavePaymethod(businessPaymethod?.id, squareData)}
+              onClick={() => handleSavePaymethod(businessPaymethod?.id)}
             >
               {t('SAVE', 'Save')}
             </Button>
