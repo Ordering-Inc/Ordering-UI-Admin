@@ -186,3 +186,6 @@ export const SkeletonForm = styled.div`
     }
   }
 `
+export const MainInformationContainer = styled.div`
+  flex: 1;
+`

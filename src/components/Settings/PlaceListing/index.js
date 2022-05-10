@@ -221,6 +221,7 @@ const PlaceListingUI = (props) => {
             )}
             <SearchBar
               lazyLoad
+              isCustomLayout
               placeholder={t('SEARCH', 'Search')}
               searchValue={searchValue}
               onSearch={val => setSearchValue(val)}

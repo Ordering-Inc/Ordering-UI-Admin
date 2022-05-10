@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
 export const SpreadSheetContainer = styled.div`
+  overflow: auto;
+  > div {
+    min-width: 900px !important;
+    > div {
+      min-width: 100% !important;
+    }
+  }
+
   .ht_clone_top {
     height: auto !important;
   }

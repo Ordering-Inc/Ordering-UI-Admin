@@ -1,8 +1,10 @@
 import React from 'react'
 import { useLanguage, useSession } from 'ordering-components-admin'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
+import ReactToPrint from 'react-to-print'
 import {
   // Wallet2,
+  Printer,
   Diagram3,
   ThreeDots,
   XLg as CloseIcon,
@@ -26,11 +28,13 @@ export const OrderDetailsHeader = (props) => {
     isTourOpen,
     currentTourStep,
     showOption,
-    openMessage
+    openMessage,
+    printRef
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+
   const walletName = {
     cash: {
       name: t('CASH_WALLET', 'Cash Wallet')
@@ -116,9 +120,18 @@ export const OrderDetailsHeader = (props) => {
             )}
           </ButtonLink>
         )}
-        {/* <ButtonLink onClick={() => window.print()}>
-          <Printer />
-        </ButtonLink> */}
+        <ReactToPrint
+          trigger={() => (
+            <ButtonLink
+              color='black'
+              isDisabled={isTourOpen && currentTourStep === 1}
+            >
+              <Printer />
+            </ButtonLink>
+          )}
+          content={() => printRef.current}
+          removeAfterPrint
+        />
         <ButtonLink
           color='black'
           active={openMessage?.history}

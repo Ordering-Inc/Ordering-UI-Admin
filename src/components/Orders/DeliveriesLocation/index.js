@@ -132,7 +132,8 @@ export const DeliveriesLocation = (props) => {
       {googleMapsApiKey && (
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: googleMapsApiKey
+            key: window.document.getElementById('__googleMapsScriptId') ? null : googleMapsApiKey,
+            libraries: ['places', 'geometry', 'drawing', 'visualization']
           }}
           onGoogleApiLoaded={() => setMapLoaded(false)}
           defaultCenter={defaultCenter}

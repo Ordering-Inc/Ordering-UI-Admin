@@ -13,6 +13,7 @@ import { sortInputFields, bytesConverter, setStorageItem } from '../../../utils'
 import parsePhoneNumber from 'libphonenumber-js'
 import Skeleton from 'react-loading-skeleton'
 import BiImage from '@meronex/icons/bi/BiImage'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   FormContainer,
@@ -23,7 +24,8 @@ import {
   SkeletonWrapper,
   FormInput,
   ActionsForm,
-  SkeletonForm
+  SkeletonForm,
+  MainInformationContainer
 } from './styles'
 
 const UserAddFormUI = (props) => {
@@ -45,6 +47,7 @@ const UserAddFormUI = (props) => {
   const formMethods = useForm()
   const [, t] = useLanguage()
   const [events] = useEvent()
+  const { width } = useWindowSize()
 
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
@@ -215,7 +218,7 @@ const UserAddFormUI = (props) => {
       <FormInput
         onSubmit={formMethods.handleSubmit(onSubmit)}
         isCheckout={isCheckout}
-        data-tour='tour_fill'
+        data-tour={width > 768 ? 'tour_fill' : ''}
       >
         <h1>
           {
@@ -244,107 +247,111 @@ const UserAddFormUI = (props) => {
             </ExamineClick>
           </Image>
         </UserImage>
-        {!validationFields?.loading ? (
-          <>
-            {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
-              showField && showField(field.code) && (
-                <React.Fragment key={field.id}>
-                  {field.code === 'email' ? (
-                    <Input
-                      key={field.id}
-                      type={field.type}
-                      name={field.code}
-                      className='form'
-                      placeholder={t(field.code.toUpperCase(), field?.name)}
-                      defaultValue={
-                      formState?.result?.result
-                        ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? ''
-                      }
-                      onChange={handleChangeInputEmail}
-                      ref={(e) => {
-                        emailInput.current = e
-                      }}
-                      autoComplete='off'
-                    />
-                  ) : (
-                    <Input
-                      key={field.id}
-                      type={field.type}
-                      name={field.code}
-                      className='form'
-                      placeholder={t(field.code.toUpperCase(), field?.name)}
-                      defaultValue={
-                      formState?.result?.result
-                        ? formState?.result?.result[field.code]
-                        : formState?.changes[field.code] ?? ''
-                      }
-                      onChange={handleChangeInput}
-                      ref={formMethods.register({
-                        required: isRequiredField(field.code)
-                          ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
-                          : null
-                      })}
-                      autoComplete='off'
-                    />
-                  )}
+        <MainInformationContainer
+          data-tour={width <= 768 ? 'tour_fill' : ''}
+        >
+          {!validationFields?.loading ? (
+            <>
+              {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
+                showField && showField(field.code) && (
+                  <React.Fragment key={field.id}>
+                    {field.code === 'email' ? (
+                      <Input
+                        key={field.id}
+                        type={field.type}
+                        name={field.code}
+                        className='form'
+                        placeholder={t(field.code.toUpperCase(), field?.name)}
+                        defaultValue={
+                        formState?.result?.result
+                          ? formState?.result?.result[field.code]
+                          : formState?.changes[field.code] ?? ''
+                        }
+                        onChange={handleChangeInputEmail}
+                        ref={(e) => {
+                          emailInput.current = e
+                        }}
+                        autoComplete='off'
+                      />
+                    ) : (
+                      <Input
+                        key={field.id}
+                        type={field.type}
+                        name={field.code}
+                        className='form'
+                        placeholder={t(field.code.toUpperCase(), field?.name)}
+                        defaultValue={
+                        formState?.result?.result
+                          ? formState?.result?.result[field.code]
+                          : formState?.changes[field.code] ?? ''
+                        }
+                        onChange={handleChangeInput}
+                        ref={formMethods.register({
+                          required: isRequiredField(field.code)
+                            ? t(`VALIDATION_ERROR_${field.code.toUpperCase()}_REQUIRED`, `${field?.name} is required`).replace('_attribute_', t(field?.name, field.code))
+                            : null
+                        })}
+                        autoComplete='off'
+                      />
+                    )}
 
-                </React.Fragment>
-              )
-            )}
-            {!!showInputPhoneNumber && (
-              <InputPhoneNumber
-                value={userPhoneNumber}
-                setValue={handleChangePhoneNumber}
-                handleIsValid={setIsValidPhoneNumber}
-              />
-            )}
-            {!isCheckout && (
-              <Input
-                type='password'
-                name='password'
-                className='form'
-                placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
-                onChange={handleChangeInput}
-                ref={formMethods.register({
-                  required: isRequiredField('password')
-                    ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
-                    : null,
-                  minLength: {
-                    value: 8,
-                    message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
-                  }
-                })}
-              />
-            )}
-            {
-            props.afterMidElements?.map((MidElement, i) => (
-              <React.Fragment key={i}>
-                {MidElement}
-              </React.Fragment>))
-            }
-            {
-             props.afterMidComponents?.map((MidComponent, i) => (
-               <MidComponent key={i} {...props} />))
-            }
-            <ActionsForm>
-              <Button
-                color='primary'
-                borderRadius='8px'
-                type='submit'
-                disabled={Object.keys(formState?.changes).length === 0 || formState.loading}
-              >
-                {formState.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')}
-              </Button>
-            </ActionsForm>
-          </>
-        ) : (
-          <SkeletonForm>
-            {[...Array(6)].map((item, i) => (
-              <Skeleton key={i} />
-            ))}
-          </SkeletonForm>
-        )}
+                  </React.Fragment>
+                )
+              )}
+              {!!showInputPhoneNumber && (
+                <InputPhoneNumber
+                  value={userPhoneNumber}
+                  setValue={handleChangePhoneNumber}
+                  handleIsValid={setIsValidPhoneNumber}
+                />
+              )}
+              {!isCheckout && (
+                <Input
+                  type='password'
+                  name='password'
+                  className='form'
+                  placeholder={t('FRONT_VISUALS_PASSWORD', 'Password')}
+                  onChange={handleChangeInput}
+                  ref={formMethods.register({
+                    required: isRequiredField('password')
+                      ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password'))
+                      : null,
+                    minLength: {
+                      value: 8,
+                      message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
+                    }
+                  })}
+                />
+              )}
+              {
+              props.afterMidElements?.map((MidElement, i) => (
+                <React.Fragment key={i}>
+                  {MidElement}
+                </React.Fragment>))
+              }
+              {
+              props.afterMidComponents?.map((MidComponent, i) => (
+                <MidComponent key={i} {...props} />))
+              }
+              <ActionsForm>
+                <Button
+                  color='primary'
+                  borderRadius='8px'
+                  type='submit'
+                  disabled={Object.keys(formState?.changes).length === 0 || formState.loading}
+                >
+                  {formState.loading ? t('LOADING', 'Loading') : t('ADD', 'Add')}
+                </Button>
+              </ActionsForm>
+            </>
+          ) : (
+            <SkeletonForm>
+              {[...Array(6)].map((item, i) => (
+                <Skeleton key={i} />
+              ))}
+            </SkeletonForm>
+          )}
+        </MainInformationContainer>
       </FormInput>
       <Alert
         title={t('PROFILE', 'Profile')}

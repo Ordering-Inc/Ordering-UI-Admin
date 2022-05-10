@@ -208,3 +208,16 @@ export const CloseButtonWrapper = styled.div`
     right: 20px;
   `}
 `
+
+export const PlaceSpotContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+
+  p {
+    color: ${props => props.theme.colors?.headingColor};
+    font-size: 14px;
+    margin: 0px;
+  }
+`

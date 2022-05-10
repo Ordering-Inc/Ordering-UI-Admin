@@ -69,7 +69,6 @@ export const SettingsSelectUI = (props) => {
               notAsync
               defaultValue={config?.value}
               options={options}
-              className='select'
               onChange={(typeValue) => handleSelectChange(typeValue)}
               placeholder={t('SELECT_A_OPTION', 'Select a option')}
             />
