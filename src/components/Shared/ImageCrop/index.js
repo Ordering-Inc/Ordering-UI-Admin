@@ -53,10 +53,7 @@ export const ImageCrop = (props) => {
       // aspectRatio: 16 / 9,
       dragMode: 'move',
       zoomable: false,
-      toggleDragModeOnDblclick: false,
-      crop (event) {
-        console.log(event.detail.x)
-      }
+      toggleDragModeOnDblclick: false
     })
     setCropper(_cropper)
   }, [photo])

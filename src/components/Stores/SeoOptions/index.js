@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useLanguage, DragAndDrop, ExamineClick, useUtils } from 'ordering-components-admin'
 import { Button, Input, TextArea } from '../../../styles'
-import { Alert } from '../../Shared'
+import { Alert, Modal, ImageCrop } from '../../Shared'
 import { bytesConverter } from '../../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { Camera, Image as ImageIcon } from 'react-bootstrap-icons'
@@ -35,6 +35,7 @@ export const SeoOptions = (props) => {
   const [{ optimizeImage }] = useUtils()
   const productImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const handleClickImage = () => {
     productImageInputRef.current.click()
@@ -72,9 +73,31 @@ export const SeoOptions = (props) => {
         })
         return
       }
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'seo_image', data: reader.result, open: true })
+      }
+      reader.onerror = error => console.log(error)
+
       if (isBusinessSeo) handlechangeImage(files[0])
       else handlechangeImageProductCategory(files[0], 'seo_image')
     }
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    if (isBusinessSeo) {
+      setFormState({
+        ...formState,
+        changes: {
+          ...formState.changes,
+          [cropState?.name]: croppedImg
+        }
+      })
+    } else {
+      setFormState({ [cropState?.name]: croppedImg })
+    }
+    setCropState({ name: null, data: null, open: false })
   }
 
   const handleChangeInput = (e) => {
@@ -186,6 +209,19 @@ export const SeoOptions = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </>
   )
 }

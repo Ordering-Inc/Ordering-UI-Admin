@@ -61,15 +61,10 @@ const ProductVideosUI = (props) => {
 
   const handleAddVideo = () => {
     const _url = changesState?.changes?.video
-    const matchFormat = matchYoutubeUrl(_url)
-    let validId
+    const validId = validationVideoId(_url)
 
-    if (matchFormat) {
-      validId = validationVideoId(_url)
-    }
-
-    if (matchFormat && validId) {
-      fetch('https://www.youtube.com/oembed?url=https%3A//youtube.com/watch%3Fv%3D' + validId + '&format=json')
+    if (validId) {
+      fetch('https://www.youtube.com/oembed?url=https://youtube.com/watch?v=' + validId + '&format=json')
         .then(response => response.json())
         .then(data => {
           if (data) {
@@ -88,39 +83,33 @@ const ProductVideosUI = (props) => {
     }
   }
 
-  const matchYoutubeUrl = (url) => {
-    const patt = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|videoseries\?.+&list=|playlist\?.+&list=)?)((\w|-){11})(?:\S+)?$/
-    const matches = url.match(patt)
-    if (!matches) {
-      setAlertState({
-        open: true,
-        content: t('INVALID_VIDEO_FORMAT', 'The video format is invalid.')
-      })
-      return false
-    }
-    return true
-  }
-
   const validationVideoId = (url) => {
-    const keys = url.split('/')
-    let _videoId = keys[keys.length - 1]
-    if (_videoId.includes('watch')) {
-      const __url = _videoId.split('=')[1]
-      _videoId = __url
+    const patt = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|videoseries\?.+&list=|playlist\?.+&list=)?)((\w|-){11})(?:\S+)?$/
+    const matched = patt.exec(url)
+    if (matched) {
+      const keys = url.split('/')
+      let _videoId = keys[keys.length - 1]
+      if (_videoId.includes('watch')) {
+        const __url = _videoId.split('=')[1]
+        _videoId = __url
+      } else if (_videoId.includes('?')) {
+        const __url = _videoId.split('?')[0]
+        _videoId = __url
+      }
+      if (_videoId.search(/&/i) >= 0) {
+        _videoId = _videoId.split('&')[0]
+      } else if (_videoId.search(/\?/i) >= 0) {
+        _videoId = _videoId.split('?')[0]
+      }
+      if ((_videoId.length === 11)) {
+        return _videoId
+      }
     }
-    if (_videoId.includes('?')) {
-      const __url = _videoId.split('?')[0]
-      _videoId = __url
-    }
-
-    if (!(_videoId.length === 11)) {
-      setAlertState({
-        open: true,
-        content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
-      })
-      return false
-    }
-    return _videoId
+    setAlertState({
+      open: true,
+      content: t('INVALID_VIDEO_ID', 'The video ID is not valid')
+    })
+    return false
   }
 
   return (

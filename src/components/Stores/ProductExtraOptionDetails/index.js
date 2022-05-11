@@ -10,7 +10,7 @@ import { IconButton, Input } from '../../../styles'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { bytesConverter } from '../../../utils'
-import { Alert, Confirm, Modal } from '../../Shared'
+import { Alert, Confirm, Modal, ImageCrop } from '../../Shared'
 
 import { ProductExtraOptionMetaFields } from '../ProductExtraOptionMetaFields'
 import { ProductExtraSubOptionMetaFields } from '../ProductExtraSubOptionMetaFields'
@@ -69,7 +69,8 @@ const ProductExtraOptionDetailsUI = (props) => {
     extra,
     handleAddOption,
     handleDeteteOption,
-    isMaxError
+    isMaxError,
+    handleChangeItem
   } = props
 
   const [, t] = useLanguage()
@@ -81,6 +82,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const [selectedSubOptionId, setSelectedSubOptionId] = useState(null)
   const { handleSubmit, register, errors } = useForm()
   const [isAddForm, setIsAddForm] = useState(false)
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -104,8 +106,21 @@ const ProductExtraOptionDetailsUI = (props) => {
         })
         return
       }
+
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'image', data: reader.result, open: true, id: subOptionId })
+      }
+      reader.onerror = error => console.log(error)
+
       handleChangeSubOptionImage(files[0], subOptionId)
     }
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeItem({ [cropState?.name]: croppedImg }, cropState?.id)
+    setCropState({ name: null, data: null, open: false })
   }
 
   const handleDeleteOption = () => {
@@ -242,6 +257,7 @@ const ProductExtraOptionDetailsUI = (props) => {
             handleChangeSubOptionEnable={handleChangeSubOptionEnable}
             handleDeteteSubOption={handleDeteteSubOption}
             handleUpdateSubOption={handleUpdateSubOption}
+            handleChangeItem={handleChangeItem}
           />
         ))}
 
@@ -424,6 +440,20 @@ const ProductExtraOptionDetailsUI = (props) => {
           />
         </Modal>
       )}
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+        className='ordering-img-crop'
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </MainContainer>
   )
 }

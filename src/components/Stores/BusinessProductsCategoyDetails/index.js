@@ -168,6 +168,7 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                   <SeoOptions
                     data={categorySelected}
                     formState={formState}
+                    setFormState={handleChangeItem}
                     handleUpdateClick={handleUpdateClick}
                     handleProductCategoryChangeInput={handleChangeInput}
                     handlechangeImageProductCategory={handlechangeImage}
