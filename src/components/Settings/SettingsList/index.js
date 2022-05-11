@@ -75,6 +75,13 @@ export const SettingsListUI = (props) => {
     handleClickUpdate && handleClickUpdate()
   }
 
+  const handleKeyPress = (e, key) => {
+    if (key === 'platform_fee_fixed' || key === 'platform_fee_percentage') {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault()
+      }
+    }
+  }
   useEffect(() => {
     if (settingsState?.result?.error) {
       setAlertState({
@@ -117,6 +124,7 @@ export const SettingsListUI = (props) => {
                               type='text'
                               defaultValue={config?.value}
                               onChange={(e) => handleInputChange(e.target.value, config?.id)}
+                              onKeyPress={(e) => handleKeyPress(e, config?.key)}
                               className='form-control'
                               placeholder={config?.name}
                             />
