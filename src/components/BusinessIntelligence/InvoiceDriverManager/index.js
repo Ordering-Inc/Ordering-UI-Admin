@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useLanguage, useApi, InvoiceDriverManager as InvoiceDriverManagerController } from 'ordering-components-admin'
 import { DragScroll, SpinnerLoader } from '../../Shared'
 import {
@@ -13,6 +13,8 @@ import {
 import { InvoiceGeneral } from '../InvoiceGeneral'
 import { InvoicePayMethods } from '../InvoicePayMethods'
 import { InvoiceDriverPdf } from '../InvoiceDriverPdf'
+import { Download } from 'react-bootstrap-icons'
+import { IconButton } from '../../../styles'
 
 const InvoiceDriverManagerUI = (props) => {
   const {
@@ -31,10 +33,9 @@ const InvoiceDriverManagerUI = (props) => {
     setSelectedDetailType(detailType)
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!exportInvoiceList?.loading && exportInvoiceList?.invoice) {
       inputRef.current.value = invoicePdfRef?.current.innerHTML
-      submitBtnRef.current.click()
     }
   }, [exportInvoiceList?.loading])
 
@@ -42,6 +43,13 @@ const InvoiceDriverManagerUI = (props) => {
     <InvoiceDriversContainer>
       <DetailsHeader>
         <h2>{t('DRIVER_INVOICE', 'Driver invoice')}</h2>
+        <IconButton
+          color='black'
+          disabled={exportInvoiceList?.loading || !exportInvoiceList?.invoice}
+          onClick={() => submitBtnRef.current.click()}
+        >
+          <Download />
+        </IconButton>
       </DetailsHeader>
       <DetailsList>
         <DragScroll>
