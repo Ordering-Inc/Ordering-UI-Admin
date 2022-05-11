@@ -69,7 +69,9 @@ var LoginFormUI = function LoginFormUI(props) {
       elementLinkToForgotPassword = props.elementLinkToForgotPassword,
       formState = props.formState,
       loginTab = props.loginTab,
-      isPopup = props.isPopup;
+      isPopup = props.isPopup,
+      isReCaptchaEnable = props.isReCaptchaEnable,
+      handleReCaptcha = props.handleReCaptcha;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -104,27 +106,26 @@ var LoginFormUI = function LoginFormUI(props) {
       submitted = _useState4[0],
       setSubmitted = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      projectName = _useState6[0],
-      setProjectName = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      passwordSee = _useState8[0],
-      setPasswordSee = _useState8[1];
+      passwordSee = _useState6[0],
+      setPasswordSee = _useState6[1];
 
   var onSubmit = function onSubmit() {
-    var _configFile = configFile;
-    _configFile.project = projectName;
-    setConfigFile(_objectSpread({}, _configFile));
-    localStorage.setItem('project', projectName);
     setSubmitted(true);
   };
 
+  var timeout = null;
+
   var hanldeChangeProject = function hanldeChangeProject(e) {
+    e.persist();
+    clearTimeout(timeout);
     setSubmitted(false);
-    setProjectName(e.target.value);
+    timeout = setTimeout(function () {
+      setConfigFile(_objectSpread(_objectSpread({}, configFile), {}, {
+        project: e.target.value
+      }));
+    }, 750);
   };
 
   (0, _react.useEffect)(function () {
@@ -162,6 +163,11 @@ var LoginFormUI = function LoginFormUI(props) {
     });
   };
 
+  (0, _react.useEffect)(function () {
+    setConfigFile(_objectSpread(_objectSpread({}, configFile), {}, {
+      project: window.localStorage.getItem('project') || null
+    }));
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.LoginContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles2.LoginHeroContainer, {
@@ -252,7 +258,9 @@ var LoginFormUI = function LoginFormUI(props) {
     onClick: function onClick() {
       return setPasswordSee(!passwordSee);
     }
-  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), isReCaptchaEnable && /*#__PURE__*/_react.default.createElement(_styles2.ReCAPTCHAWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ReCaptcha, {
+    handleReCaptcha: handleReCaptcha
+  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     type: "submit",
