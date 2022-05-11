@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useLayoutEffect } from 'react'
 import { useLanguage, useApi, InvoiceDriverManager as InvoiceDriverManagerController } from 'ordering-components-admin'
 import { DragScroll, SpinnerLoader } from '../../Shared'
 import {
@@ -31,7 +31,7 @@ const InvoiceDriverManagerUI = (props) => {
     setSelectedDetailType(detailType)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!exportInvoiceList?.loading && exportInvoiceList?.invoice) {
       inputRef.current.value = invoicePdfRef?.current.innerHTML
       submitBtnRef.current.click()
@@ -68,7 +68,7 @@ const InvoiceDriverManagerUI = (props) => {
       }
       <Form target='_blank' action={`${ordering.root}/pdf/html`} method='POST'>
         <input ref={inputRef} type='hidden' name='html' />
-        <button ref={submitBtnRef} type='submit' />
+        <button ref={e => { submitBtnRef.current = e }} type='submit' id='driver-invoice-btn' />
       </Form>
       <InvoicePdfWrapper ref={invoicePdfRef}>
         <InvoiceDriverPdf {...props} />
