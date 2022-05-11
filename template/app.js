@@ -57,6 +57,7 @@ import { RecoveryActionListing } from './pages/RecoveryActionListing'
 import { CampaignListing } from './pages/CampaignListing'
 import { FreeProductsList } from './pages/FreeProductsList'
 import { PurchasedProductsList } from './pages/PurchasedProductsList'
+import { Professionals } from './pages/Professionals'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -188,6 +189,13 @@ export const App = () => {
                       {
                         auth
                           ? <ManagersList />
+                          : <Redirect to='/login' />
+                      }
+                    </Route>
+                    <Route exact path='/users/professionals'>
+                      {
+                        auth
+                          ? <Professionals />
                           : <Redirect to='/login' />
                       }
                     </Route>

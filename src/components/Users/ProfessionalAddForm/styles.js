@@ -1,0 +1,214 @@
+import styled from 'styled-components'
+
+export const FormContainer = styled.div`
+  width: 100%;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    width: 100%;
+    margin-bottom: 0px;
+    color: ${props => props.theme.colors.headingColor};
+  }
+`
+
+export const UserImage = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  margin: 20px auto;
+
+  @media (min-width: 768px) {
+    width: auto;
+  }
+`
+
+export const Image = styled.div`
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: ${({ isImage, theme }) => isImage ? '#FFF' : `${theme.colors.backgroundPage}`};
+  cursor: -webkit-grab;
+  cursor: grab;
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+
+  img,
+  div {
+    width: 100%;
+    border-radius: 8px;
+    height: 100%;
+    overflow: hidden;
+  };
+
+  img{
+    object-fit: cover;
+  }
+`
+
+export const Camera = styled.div`
+  > * {
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+  }
+`
+
+export const UploadImageIconContainer = styled.div`
+  position: absolute;
+  top: 0px;
+  background: rgba(0,0,0,0.2);
+  padding: 4px;
+`
+
+export const UploadImageIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #FFF;
+  border: 1px dashed #fff;
+  span {
+    margin: 0;
+  }
+
+  svg {   
+    width: 45px;
+    height: 45px;
+  }
+`
+
+export const SkeletonWrapper = styled.div`
+  span{
+    height: 100%;
+    position: relative;
+    top: -2.5px;
+  }
+`
+
+export const FormInput = styled.form`
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  div.phone_number {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  input {
+    color: ${props => props.theme.colors.headingColor};
+  }
+  input.form {
+    padding: 10px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    &:disabled {
+      background-color: rgba(239, 239, 239, 0.3);
+      cursor: not-allowed;
+    }
+  }
+  div.PhoneInput {
+    input {
+      border-radius: 8px;
+    }
+  }
+`
+
+export const ActionsForm = styled.div`
+  position: sticky;
+  top: 100%;
+
+  button {
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    height: 44px;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+`
+
+export const SkeletonForm = styled.div`
+  width: 100%;
+  justify-content: center;
+  height: auto;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-top: 0px;
+  > * {
+    width: 100%;
+    margin: 10px 0;
+    display: inline;
+    height: 50px;
+    span{
+      border-radius: 16px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  @media (min-width: 768px){
+    justify-content: flex-start;
+    > * {
+      width: calc(50% - 10px);
+      margin: 5px;
+    }
+  }
+`
+
+export const WrapperUserTypeSelector = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+
+  div.select {
+    border: none;
+    background-color: ${props => props.theme.colors.secundary};
+    > div:first-child {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+
+  > div {
+    width: 100%;
+    color: ${props => props.theme.colors.secundaryContrast};
+  }
+`
+
+export const InputWrapper = styled.div`
+  margin-bottom: 25px;
+  width: 100%;
+
+  .email-input {
+    margin-bottom: 35px;
+  }
+
+  > label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 7px;
+  }
+
+  .PhoneInputCountry {
+    border: 1px solid ${props => props.theme.colors.gray};
+    border-radius: 7.6px;
+    padding: 5px;
+  }
+`
+
+export const CalendarWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 25px;
+
+  > label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 7px;
+  }
+`
