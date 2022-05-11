@@ -256,16 +256,6 @@ export const BusinessProductsCategoyInfo = (props) => {
         />
       </CategoryNameWrapper>
       <CategoryNameWrapper>
-        <label>{t('DESCRIPTION', 'Description')}</label>
-        <TextArea
-          placeholder={t('TYPE_DESCRIPTION', 'Type description ')}
-          name='description'
-          value={formState?.changes?.description || ''}
-          onChange={handleChangeInput}
-          autoComplete='off'
-        />
-      </CategoryNameWrapper>
-      <CategoryNameWrapper>
         <label>{t('SLUG', 'Slug')}</label>
         <Input
           name='slug'
