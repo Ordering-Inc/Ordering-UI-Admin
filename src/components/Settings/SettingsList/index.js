@@ -47,15 +47,30 @@ export const SettingsListUI = (props) => {
   }
 
   const handleSubmit = () => {
+    const invalidMessageList = []
     for (const item of formState.changes) {
       if (item.key === 'driver_tip_options' && !/^((\d)+,)*(\d)+$/.test(item.value)) {
-        setAlertState({ open: true, content: t('DRIVER_TIP_OPTIONS_ERROR') })
-        return
+        invalidMessageList.push(t('DRIVER_TIP_OPTIONS_ERROR'))
+        continue
       }
       if (item?.key === 'max_days_preorder' && item.value < 1) {
-        setAlertState({ open: true, content: t('MAX_PREORDER_DAYS_MUST_BIGGER_ZERO', 'Max preorder days must be bigger than zero') })
-        return
+        invalidMessageList.push(t('MAX_PREORDER_DAYS_MUST_BIGGER_ZERO', 'Max preorder days must be bigger than zero'))
+        continue
       }
+      if (item?.key === 'platform_fee_fixed' || item?.key === 'platform_fee_percentage') {
+        if (isNaN(Number(item?.value))) {
+          invalidMessageList.push(t('VALIDATION_ERROR_NUMERIC', `The ${item?.name} must be a number.`).replace('_attribute_', item?.name))
+          continue
+        }
+        if (isNaN(Number(item?.value)) || Number(item?.value) < 0) {
+          invalidMessageList.push(t('VALIDATION_MUST_BIGGER_ZERO', `${item?.name} must be bigger than zero`).replace('_attribute_', item?.name))
+          continue
+        }
+      }
+    }
+    if (invalidMessageList.length > 0) {
+      setAlertState({ open: true, content: invalidMessageList })
+      return
     }
     handleClickUpdate && handleClickUpdate()
   }
