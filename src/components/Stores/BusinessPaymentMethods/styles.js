@@ -9,6 +9,9 @@ export const PaymentMethodsContainer = styled.div`
   height: 100%;
   overflow-x: hidden;
   flex: 1;
+  ${({ isOpenWalletDetails }) => isOpenWalletDetails && css`
+    max-width: 500px;
+  `}
   h1 {
     color: ${props => props.theme.colors.headingColor};
     font-size: 20px;
