@@ -98,7 +98,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     handleChangeInvocing(_objectSpread(_objectSpread({}, invocing), {}, _defineProperty({}, type, value)));
   };
 
-  var pdfDownload = function pdfDownload() {
+  var onSave = function onSave() {
     if (businessList && (invocing === null || invocing === void 0 ? void 0 : invocing.business) === '') {
       setAlertState({
         open: true,
@@ -376,8 +376,8 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
     borderRadius: "7.6px",
     color: "primary",
     disabled: (driverList === null || driverList === void 0 ? void 0 : driverList.loading) || (businessList === null || businessList === void 0 ? void 0 : businessList.loading),
-    onClick: pdfDownload
-  }, t('EXPORT', 'Export')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    onClick: onSave
+  }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: selectedInvoice === 'business' ? t('BUSINESS_INVOICE', 'Business invoice') : t('DRIVER_INVOICE', 'Driver invoice'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

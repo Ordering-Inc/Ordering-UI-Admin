@@ -71,8 +71,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     long_description: t('STORE_APP_LONG_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.<br /><br />Use it Branded on your business at no cost.<br />All you need to do is use the Business Owners Credentials that you currently have on your Dashboard.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CartPlusFill, null),
     image: theme.images.apps.storeApp,
-    app_store: 'https://apps.apple.com/us/app/store-app-2-0/id1608192050',
-    google_play_store: 'https://play.google.com/store/apps/details?id=com.ordering.storeappv5'
+    app_store: 'https://www.ordering.co/ordering-sales',
+    google_play_store: 'https://www.ordering.co/ordering-sales'
   }, {
     key: 'driver_app',
     type: 1,
@@ -84,8 +84,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
       alt: "delivery app icon"
     }),
     image: theme.images.apps.driverApp,
-    app_store: 'https://apps.apple.com/us/app/driver-app-2-0/id1606257815',
-    google_play_store: 'https://play.google.com/store/apps/details?id=com.ordering.deliveryv5'
+    app_store: 'https://www.ordering.co/ordering-sales',
+    google_play_store: 'https://www.ordering.co/ordering-sales'
   }, {
     key: 'pos_app',
     type: 1,
@@ -97,8 +97,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
       alt: "pos app icon"
     }),
     image: theme.images.apps.posApp,
-    app_store: 'https://apps.apple.com/us/app/ordering-pos-2-0/id1609520468',
-    google_play_store: 'https://play.google.com/store/apps/details?id=com.ordering.posv5&hl=en&gl=US'
+    app_store: 'https://www.ordering.co/ordering-sales',
+    google_play_store: 'https://www.ordering.co/ordering-sales'
   }, {
     key: 'kiosk_app',
     type: 1,
@@ -110,8 +110,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
       alt: "kiosk app icon"
     }),
     image: theme.images.apps.kioskApp,
-    app_store: 'https://apps.apple.com/us/app/ordering-kiosk-2-0/id1609314960',
-    google_play_store: 'https://play.google.com/store/apps/details?id=com.ordering.orderingkioskv5&hl=en&gl=US'
+    app_store: 'https://www.ordering.co/ordering-sales',
+    google_play_store: 'https://www.ordering.co/ordering-sales'
   }, {
     key: 'call_center',
     type: 2,
@@ -120,7 +120,7 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     long_description: t('CALL_CENTER_LONG_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null),
     image: theme.images.apps.callCenterApp,
-    web_url: 'https://react-call-center.tryordering.com/'
+    web_url: 'https://www.ordering.co/ordering-sales'
   }];
 
   var handleOpenProductDetails = function handleOpenProductDetails(e, product) {

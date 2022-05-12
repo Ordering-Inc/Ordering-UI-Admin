@@ -120,7 +120,7 @@ var FreeProductsList = function FreeProductsList(props) {
     long_description: t('CALL_CENTER_LONG_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null),
     image: theme.images.apps.callCenterApp,
-    web_url: 'https://react-call-center.tryordering.com/'
+    web_url: 'https://callcenter.tryordering.com/search'
   }];
 
   var handleOpenProductDetails = function handleOpenProductDetails(e, product) {
