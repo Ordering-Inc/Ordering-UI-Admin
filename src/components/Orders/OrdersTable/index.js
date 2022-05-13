@@ -117,23 +117,38 @@ export const OrdersTable = (props) => {
     }
   ]
 
-  const getDelayTime = (order) => {
+  const getDelayMinutes = (order) => {
     // targetMin = delivery_datetime  + eta_time - now()
+    const offset = 300
+    const cdtToutc = parseDate(moment(order?.delivery_datetime).add(offset, 'minutes'))
     const _delivery = order?.delivery_datetime_utc
       ? parseDate(order?.delivery_datetime_utc)
-      : parseDate(order?.delivery_datetime, { utc: false })
+      : parseDate(cdtToutc)
     const _eta = order?.eta_time
-    const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
+    return moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
+  }
+
+  const displayDelayedTime = (order) => {
+    let tagetedMin = getDelayMinutes(order)
+    // get day, hour and minutes
+    const sign = tagetedMin >= 0 ? '' : '- '
+    tagetedMin = Math.abs(tagetedMin)
     let day = Math.floor(tagetedMin / 1440)
     const restMinOfTargetedMin = tagetedMin - 1440 * day
     let restHours = Math.floor(restMinOfTargetedMin / 60)
     let restMins = restMinOfTargetedMin - 60 * restHours
+    // make standard time format
+    day = day === 0 ? '' : day + 'day  '
+    restHours = restHours < 10 ? '0' + restHours : restHours
+    restMins = restMins < 10 ? '0' + restMins : restMins
 
-    if (order?.time_status === 'in_time' || order?.time_status === 'at_risk') day = Math.abs(day)
-    if (restHours < 10) restHours = ('0' + restHours)
-    if (restMins < 10) restMins = ('0' + restMins)
-    const finalTaget = day + 'day  ' + restHours + ':' + restMins
+    const finalTaget = sign + day + restHours + ':' + restMins
     return finalTaget
+  }
+
+  const getStatusClassName = (minutes) => {
+    if (isNaN(Number(minutes))) return 0
+    return minutes > 0 ? 'in_time' : minutes === 0 ? 'at_risk' : 'delayed'
   }
 
   useEffect(() => {
@@ -453,7 +468,7 @@ export const OrdersTable = (props) => {
                 <tr>
                   <td>
                     <Timestatus
-                      timeState={order?.time_status}
+                      timeState={getStatusClassName(getDelayMinutes(order))}
                     />
                   </td>
                   <td
@@ -583,7 +598,7 @@ export const OrdersTable = (props) => {
                         {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
                           <>
                             <p className='bold'>{t('TIMER', 'Timer')}</p>
-                            <p className={order?.time_status}>{getDelayTime(order)}</p>
+                            <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
                           </>
                         )}
                       </Timer>
