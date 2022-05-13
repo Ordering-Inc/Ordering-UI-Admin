@@ -113,7 +113,7 @@ var ProductMainDetails = function ProductMainDetails(props) {
     fees: fees,
     setFees: setFees
   }), selectedOption === 'labels' && /*#__PURE__*/_react.default.createElement(_ProductTagsList.ProductTagsList, {
-    tags: product.tags,
+    tags: (product === null || product === void 0 ? void 0 : product.tags) || [],
     businessId: business.id,
     product: product,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
