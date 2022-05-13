@@ -51,6 +51,7 @@ export const EnterprisePromotionMaxOrders = (props) => {
           defaultValue={formState.changes?.user_order_count_condition ?? promotionState.promotion?.user_order_count_condition}
           options={conditions}
           onChange={val => handleChangeItem({ user_order_count_condition: val })}
+          optionInnerMaxHeight='300px'
         />
       </InputWrapper>
       <Button

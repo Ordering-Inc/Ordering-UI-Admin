@@ -86,7 +86,7 @@ export const ProductMainDetails = (props) => {
       )}
       {selectedOption === 'labels' && (
         <ProductTagsList
-          tags={product.tags}
+          tags={product?.tags || []}
           businessId={business.id}
           product={product}
           setIsExtendExtraOpen={setIsExtendExtraOpen}

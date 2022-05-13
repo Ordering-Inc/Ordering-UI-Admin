@@ -31,7 +31,7 @@ const SingleRecoveryNotificationUI = (props) => {
   const channelList = [
     { value: 'email', content: <Option>{t('EMAIL', 'Email')}</Option> },
     { value: 'sms', content: <Option>{t('SMS', 'SMS')}</Option> },
-    { value: 'notification', content: <Option>{t('NOTIFICATION', 'Notification')}</Option> }
+    { value: 'notification', content: <Option>{t('PUSH_NOTIFICATION', 'Push notification')}</Option> }
   ]
 
   const handleClickDeleteBtn = (id) => {

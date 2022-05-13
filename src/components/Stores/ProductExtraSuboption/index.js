@@ -10,7 +10,7 @@ import {
   RecordCircleFill as CheckIcon
 } from 'react-bootstrap-icons'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { Alert, Confirm } from '../../Shared'
+import { Alert, Confirm, ImageCrop, Modal } from '../../Shared'
 import { Input, Switch } from '../../../styles'
 import { bytesConverter } from '../../../utils'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
@@ -43,7 +43,8 @@ export const ProductExtraSuboption = (props) => {
     handleChangeDefaultSuboption,
     handleChangeSubOptionEnable,
     handleDeteteSubOption,
-    handleUpdateSubOption
+    handleUpdateSubOption,
+    handleChangeItem
   } = props
 
   const theme = useTheme()
@@ -54,6 +55,7 @@ export const ProductExtraSuboption = (props) => {
   const [editErrors, setEditErrors] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -77,6 +79,13 @@ export const ProductExtraSuboption = (props) => {
         })
         return
       }
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'image', data: reader.result, open: true, id: subOptionId })
+      }
+      reader.onerror = error => console.log(error)
+
       handleChangeSubOptionImage(files[0], subOptionId)
     }
   }
@@ -90,6 +99,11 @@ export const ProductExtraSuboption = (props) => {
         handleDeteteSubOption(id)
       }
     })
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeItem({ [cropState?.name]: croppedImg }, cropState?.id)
+    setCropState({ name: null, data: null, open: false })
   }
 
   const handleClickOutside = (e) => {
@@ -108,6 +122,7 @@ export const ProductExtraSuboption = (props) => {
         })
         return
       }
+      if (e.target.closest('.ordering-img-crop')) return
       handleUpdateSubOption()
     }
   }
@@ -278,6 +293,20 @@ export const ProductExtraSuboption = (props) => {
         onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+        className='ordering-img-crop'
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </SubOptionContainer>
   )
 }

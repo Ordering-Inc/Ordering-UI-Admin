@@ -43,3 +43,11 @@ export const OrderBillContainer = styled.div`
     align-items: center;
   }
 `
+export const RefundButtonWrapper = styled.div`
+  width: 100%;
+  padding: 20px 0;
+
+  > button {
+    height: 44px;
+  }
+`

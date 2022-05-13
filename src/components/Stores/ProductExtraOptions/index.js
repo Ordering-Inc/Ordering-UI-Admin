@@ -9,7 +9,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { PlusCircle, XLg, ThreeDots, Image as ImageIcon, ChevronRight } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { bytesConverter } from '../../../utils'
-import { Alert, Confirm, Modal } from '../../Shared'
+import { Alert, Confirm, Modal, ImageCrop } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { ProductExtraMetaFields } from '../ProductExtraMetaFields'
 import { ProductExtraOptionDetails } from '../ProductExtraOptionDetails'
@@ -52,7 +52,8 @@ const ProductExtraOptionsUI = (props) => {
     setCurOption,
     setOpenModal,
     handleOpenModal,
-    handleChangeExtraName
+    handleChangeExtraName,
+    handleChangeItem
   } = props
 
   const theme = useTheme()
@@ -68,6 +69,7 @@ const ProductExtraOptionsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isMaxError, setIsMaxError] = useState(false)
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const closeAlert = () => {
     setAlertState({
@@ -103,8 +105,21 @@ const ProductExtraOptionsUI = (props) => {
         })
         return
       }
+
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'image', data: reader.result, open: true, id: optionId })
+      }
+      reader.onerror = error => console.log(error)
+
       handleChangeImage(files[0], optionId)
     }
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeItem({ [cropState?.name]: croppedImg }, cropState?.id)
+    setCropState({ name: null, data: null, open: false })
   }
 
   const actionSidebar = (value) => {
@@ -381,6 +396,20 @@ const ProductExtraOptionsUI = (props) => {
         <ProductExtraMetaFields
           businessId={business.id}
           extraId={extraState.extra.id}
+        />
+      </Modal>
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+        className='ordering-image-crop'
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
         />
       </Modal>
     </MainContainer>

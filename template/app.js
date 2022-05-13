@@ -49,7 +49,7 @@ import { EnterprisePromotionList } from './pages/EnterprisePromotionList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
-import { SpinnerLoader } from '../src/components/Shared'
+import { ProtectedRoute, SpinnerLoader } from '../src/components/Shared'
 import { HelmetTags } from './components/HelmetTags'
 import { RewardsPrograms } from './pages/RewardsPrograms'
 import { OpenCarts } from './pages/OpenCarts'
@@ -150,251 +150,121 @@ export const App = () => {
                           : <Redirect to='/login' />
                       }
                     </Route>
-                    <Route exact path='/orders'>
-                      {
-                        auth
-                          ? <OrdersList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/deliveries'>
-                      {
-                        auth
-                          ? <DeliveriesManager />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/drivers'>
-                      {
-                        auth
-                          ? <DriversList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/messages'>
-                      {
-                        auth
-                          ? <MessagesList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/users/customers'>
-                      {
-                        auth
-                          ? <CustomersList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/users/managers'>
-                      {
-                        auth
-                          ? <ManagersList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/users/professionals'>
-                      {
-                        auth
-                          ? <Professionals />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/stores/list'>
-                      {
-                        auth
-                          ? <BusinessesList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/stores/brand'>
-                      {
-                        auth
-                          ? <BrandManager />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/stores/products/:store?'>
-                      {
-                        auth
-                          ? <BusinessProductsList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/settings/basic'>
-                      {
-                        auth
-                          ? <BasicSettings />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/settings/operation'>
-                      {
-                        auth
-                          ? <OperationSettings />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/settings/pages'>
-                      {
-                        auth
-                          ? <Cms />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/settings/places'>
-                      {
-                        auth
-                          ? <PlacesList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/settings/integrations'>
-                      {
-                        auth
-                          ? <IntegrationsList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/settings/language'>
-                      {
-                        auth
-                          ? <LanguageManager />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/support'>
-                      {
-                        auth
-                          ? <Support />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/intelligence/business'>
-                      {
-                        auth
-                          ? <BusinessAnalytics />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/intelligence/drivers'>
-                      {
-                        auth
-                          ? <DriverAnalytics />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/intelligence/invoice'>
-                      {
-                        auth
-                          ? <InvoiceManager />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/intelligence/reviews'>
-                      {
-                        auth
-                          ? <ReviewsList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/intelligence/reviews/:store'>
-                      {
-                        auth
-                          ? <ReviewProducts />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/intelligence/reports'>
-                      {
-                        auth
-                          ? <AdvancedReports />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/delivery/drivers-list'>
-                      {
-                        auth
-                          ? <DeliveryDriversList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/delivery/drivers-managers'>
-                      {
-                        auth
-                          ? <DriversManagersList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/delivery/drivers-companies'>
-                      {
-                        auth
-                          ? <DriversCompaniesList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/delivery/drivers-groups'>
-                      {
-                        auth
-                          ? <DriversGroupsList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/marketing/promotions-enterprise'>
-                      {
-                        auth
-                          ? <EnterprisePromotionList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/marketing/campaign'>
-                      {
-                        auth
-                          ? <CampaignListing />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    {/* <Route exact path='/ordering-products'>
-                      {
-                        auth
-                          ? <OrderingProducts />
-                          : <Redirect to='/login' />
-                      }
-                    </Route> */}
-                    <Route exact path='/cart-recovery/open-carts'>
-                      {
-                        auth
-                          ? <OpenCarts />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/cart-recovery/recovery-actions'>
-                      {
-                        auth
-                          ? <RecoveryActionListing />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/loyalty/rewards-programs'>
-                      {
-                        auth
-                          ? <RewardsPrograms />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/downloads/free-products'>
-                      {
-                        auth
-                          ? <FreeProductsList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
-                    <Route exact path='/downloads/purchased-products'>
-                      {
-                        auth
-                          ? <PurchasedProductsList />
-                          : <Redirect to='/login' />
-                      }
-                    </Route>
+
+                    <ProtectedRoute path='/orders' allowedLevels={[0, 2, 5]}>
+                      <OrdersList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/deliveries' allowedLevels={[0, 2, 5]}>
+                      <DeliveriesManager />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/drivers' allowedLevels={[0, 5]}>
+                      <DriversList />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/messages' allowedLevels={[0, 2]}>
+                      <MessagesList />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/stores/list' allowedLevels={[0, 2]}>
+                      <BusinessesList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/stores/products/:store?' allowedLevels={[0, 2]}>
+                      <BusinessProductsList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/stores/brand' allowedLevels={[0]}>
+                      <BrandManager />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/users/customers' allowedLevels={[0]}>
+                      <CustomersList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/users/managers' allowedLevels={[0]}>
+                      <ManagersList />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/intelligence/business' allowedLevels={[0, 2]}>
+                      <BusinessAnalytics />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/intelligence/drivers' allowedLevels={[0]}>
+                      <DriverAnalytics />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/intelligence/invoice' allowedLevels={[0]}>
+                      <InvoiceManager />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/intelligence/reviews/:store' allowedLevels={[0]}>
+                      <ReviewProducts />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/intelligence/reviews' allowedLevels={[0]}>
+                      <ReviewsList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/intelligence/reports' allowedLevels={[0]}>
+                      <AdvancedReports />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/delivery/drivers-list' allowedLevels={[0]}>
+                      <DeliveryDriversList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/delivery/drivers-managers' allowedLevels={[0]}>
+                      <DriversManagersList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/delivery/drivers-companies' allowedLevels={[0]}>
+                      <DriversCompaniesList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/delivery/drivers-groups' allowedLevels={[0]}>
+                      <DriversGroupsList />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/marketing/promotions-enterprise' allowedLevels={[0, 2]}>
+                      <EnterprisePromotionList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/marketing/campaign' allowedLevels={[0, 2]}>
+                      <CampaignListing />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/loyalty/rewards-programs' allowedLevels={[0, 2]}>
+                      <RewardsPrograms />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/cart-recovery/open-carts' allowedLevels={[0, 2]}>
+                      <OpenCarts />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/cart-recovery/recovery-actions' allowedLevels={[0, 2]}>
+                      <RecoveryActionListing />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/settings/basic' allowedLevels={[0]}>
+                      <BasicSettings />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/settings/operation' allowedLevels={[0]}>
+                      <OperationSettings />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/settings/pages' allowedLevels={[0]}>
+                      <Cms />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/settings/places' allowedLevels={[0]}>
+                      <PlacesList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/settings/integrations' allowedLevels={[0]}>
+                      <IntegrationsList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/settings/language' allowedLevels={[0]}>
+                      <LanguageManager />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/support' allowedLevels={[0]}>
+                      <Support />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/downloads/free-products' allowedLevels={[0, 2, 5]}>
+                      <FreeProductsList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/professionals' allowedLevels={[0, 2, 5]}>
+                      <Professionals />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/downloads/purchased-products' allowedLevels={[0, 2, 5]}>
+                      <PurchasedProductsList />
+                    </ProtectedRoute>
+
                     <Route path='*'>
                       <PageNotFound />
                     </Route>

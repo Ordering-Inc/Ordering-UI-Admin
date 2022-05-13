@@ -20,7 +20,8 @@ const ModalUI = (props) => {
     acceptText,
     cancelText,
     isTransparent,
-    hideCloseDefault
+    hideCloseDefault,
+    className
   } = props
   const [, t] = useLanguage()
 
@@ -37,7 +38,7 @@ const ModalUI = (props) => {
   }, [props.open])
   return (
     <ModalDialog
-      className='popup-dialog'
+      className={`popup-dialog ${className || ''}`}
       height={props.height}
       width={props.width}
       padding={props.padding}
