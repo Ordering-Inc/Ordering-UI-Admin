@@ -17,6 +17,7 @@ import { Layout } from '../src/components/Layout'
 import { Home } from './pages/Home'
 import { PageNotFound } from './pages/PageNotFound'
 import { Login } from './pages/Login'
+import { Signup } from './pages/Signup'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { OrdersList } from './pages/OrdersList'
 import { DeliveriesManager } from './pages/DeliveriesManager'
@@ -124,6 +125,23 @@ export const App = () => {
                             <Login
                               useLoginByEmail
                               elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                              elementLinkToSignup={<Link to='/signup'>{t('GET_STARTED', 'Get started')}</Link>}
+                            />
+                          )
+                          : (
+                            <Redirect to='/home' />
+                          )
+                      }
+                    </Route>
+
+                    <Route exact path='/Signup'>
+                      {
+                        !auth
+                          ? (
+                            <Signup
+                              elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                              useChekoutFileds
+                              isRecaptchaEnable
                             />
                           )
                           : (

@@ -269,14 +269,14 @@ const LoginFormUI = (props) => {
               <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
               {elementLinkToForgotPassword}
             </RedirectLink>
-          </FormInput>
-        )}
 
-        {elementLinkToSignup && (
-          <RedirectLink register isPopup={isPopup}>
-            <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
-            {elementLinkToSignup}
-          </RedirectLink>
+            {elementLinkToSignup && (
+              <RedirectLink style={{ marginTop: 0 }} isPopup={isPopup}>
+                <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
+                {elementLinkToSignup}
+              </RedirectLink>
+            )}
+          </FormInput>
         )}
       </FormSide>
       <Alert
