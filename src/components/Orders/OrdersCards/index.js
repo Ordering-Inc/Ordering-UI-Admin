@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
-import { useLanguage, useUtils } from 'ordering-components-admin'
+import { useLanguage, useUtils, useConfig } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { DriverSelector } from '../DriverSelector'
@@ -41,6 +41,11 @@ export const OrdersCards = (props) => {
   const theme = useTheme()
   const [{ parseDate, optimizeImage }] = useUtils()
   const [, setCurrentTime] = useState()
+  const [configState] = useConfig()
+  const [allowColumns, setAllowColumns] = useState({
+    timer: true,
+    slaBar: true
+  })
 
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
@@ -141,6 +146,15 @@ export const OrdersCards = (props) => {
     }
   }, [orderList?.orders])
 
+  useEffect(() => {
+    const slaSettings = configState?.configs?.order_deadlines_enabled?.value === '1'
+    setAllowColumns({
+      ...allowColumns,
+      timer: slaSettings,
+      slaBar: slaSettings
+    })
+  }, [configState.loading])
+
   return (
     <>
       <OrdersListContainer>
@@ -206,10 +220,12 @@ export const OrdersCards = (props) => {
                       </ViewDetails>
                     </div>
                   </OrderHeader>
-                  <Timer>
-                    <p className='bold'>Timer</p>
-                    <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
-                  </Timer>
+                  {allowColumns?.timer && (
+                    <Timer>
+                      <p className='bold'>Timer</p>
+                      <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
+                    </Timer>
+                  )}
                 </CardHeading>
                 {isMessagesView && order?.unread_count > 0 && (
                   <UnreadMessageCounter>
@@ -239,7 +255,9 @@ export const OrdersCards = (props) => {
                     />
                   </DriverSelectorWrapper>
                 </CardContent>
-                <Timestatus timeState={getStatusClassName(getDelayMinutes(order))} />
+                {allowColumns?.slaBar && (
+                  <Timestatus timeState={getStatusClassName(getDelayMinutes(order))} />
+                )}
               </OrderCard>
             ))}
           </>

@@ -6,7 +6,8 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
-  useUtils
+  useUtils,
+  useConfig
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { DriverSelector } from '../DriverSelector'
@@ -65,7 +66,7 @@ export const OrdersTable = (props) => {
     const expectedPage = Math.ceil(pagination.from / pageSize)
     getPageOrders(pageSize, expectedPage)
   }
-
+  const [configState] = useConfig()
   const [allowColumns, setAllowColumns] = useState({
     status: true,
     orderNumber: true,
@@ -75,6 +76,7 @@ export const OrdersTable = (props) => {
     driver: true,
     advanced: true,
     timer: true,
+    slaBar: true,
     total: true
   })
 
@@ -280,6 +282,15 @@ export const OrdersTable = (props) => {
     }
   }, [groupStatus])
 
+  useEffect(() => {
+    const slaSettings = configState?.configs?.order_deadlines_enabled?.value === '1'
+    setAllowColumns({
+      ...allowColumns,
+      timer: slaSettings,
+      slaBar: slaSettings
+    })
+  }, [configState.loading])
+
   return (
     <>
       <OrdersContainer
@@ -294,9 +305,11 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
-                <th>
-                  <Timestatus />
-                </th>
+                {allowColumns?.slaBar && (
+                  <th>
+                    <Timestatus />
+                  </th>
+                )}
                 <th
                   className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
                 >
@@ -466,11 +479,13 @@ export const OrdersTable = (props) => {
                 data-tour={i === 0 ? 'tour_start' : ''}
               >
                 <tr>
-                  <td>
-                    <Timestatus
-                      timeState={getStatusClassName(getDelayMinutes(order))}
-                    />
-                  </td>
+                  {allowColumns?.slaBar && (
+                    <td>
+                      <Timestatus
+                        timeState={getStatusClassName(getDelayMinutes(order))}
+                      />
+                    </td>
+                  )}
                   <td
                     className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'small' : ''}
                   >
