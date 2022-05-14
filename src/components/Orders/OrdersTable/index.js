@@ -57,7 +57,7 @@ export const OrdersTable = (props) => {
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
   const [isAllChecked, setIsAllChecked] = useState(false)
-  const [currentTime, setCurrentTime] = useState()
+  const [, setCurrentTime] = useState()
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }

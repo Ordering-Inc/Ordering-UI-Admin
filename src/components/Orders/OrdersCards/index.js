@@ -40,7 +40,7 @@ export const OrdersCards = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parseDate, optimizeImage }] = useUtils()
-  const [currentTime, setCurrentTime] = useState()
+  const [, setCurrentTime] = useState()
 
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
