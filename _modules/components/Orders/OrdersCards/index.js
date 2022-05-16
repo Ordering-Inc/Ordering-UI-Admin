@@ -37,6 +37,12 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -77,8 +83,19 @@ var OrdersCards = function OrdersCards(props) {
 
   var _useState = (0, _react.useState)(),
       _useState2 = _slicedToArray(_useState, 2),
-      currentTime = _useState2[0],
       setCurrentTime = _useState2[1];
+
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configState = _useConfig2[0];
+
+  var _useState3 = (0, _react.useState)({
+    timer: true,
+    slaBar: true
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      allowColumns = _useState4[0],
+      setAllowColumns = _useState4[1];
 
   var handleChangePage = function handleChangePage(page) {
     getPageOrders(pagination.pageSize, page);
@@ -178,22 +195,38 @@ var OrdersCards = function OrdersCards(props) {
     return objectStatus && objectStatus;
   };
 
-  var getDelayTime = function getDelayTime(order) {
+  var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
-    var _delivery = order === null || order === void 0 ? void 0 : order.delivery_datetime_utc;
+    var offset = 300;
+    var cdtToutc = parseDate((0, _moment.default)(order === null || order === void 0 ? void 0 : order.delivery_datetime).add(offset, 'minutes'));
+
+    var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(cdtToutc);
 
     var _eta = order === null || order === void 0 ? void 0 : order.eta_time;
 
-    var tagetedMin = (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'minutes');
+    return (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'minutes');
+  };
+
+  var displayDelayedTime = function displayDelayedTime(order) {
+    var tagetedMin = getDelayMinutes(order); // get day, hour and minutes
+
+    var sign = tagetedMin >= 0 ? '' : '- ';
+    tagetedMin = Math.abs(tagetedMin);
     var day = Math.floor(tagetedMin / 1440);
     var restMinOfTargetedMin = tagetedMin - 1440 * day;
     var restHours = Math.floor(restMinOfTargetedMin / 60);
-    var restMins = restMinOfTargetedMin - 60 * restHours;
-    if ((order === null || order === void 0 ? void 0 : order.time_status) === 'in_time' || (order === null || order === void 0 ? void 0 : order.time_status) === 'at_risk') day = Math.abs(day);
-    if (restHours < 10) restHours = '0' + restHours;
-    if (restMins < 10) restMins = '0' + restMins;
-    var finalTaget = day + 'day  ' + restHours + ':' + restMins;
+    var restMins = restMinOfTargetedMin - 60 * restHours; // make standard time format
+
+    day = day === 0 ? '' : day + 'day  ';
+    restHours = restHours < 10 ? '0' + restHours : restHours;
+    restMins = restMins < 10 ? '0' + restMins : restMins;
+    var finalTaget = sign + day + restHours + ':' + restMins;
     return finalTaget;
+  };
+
+  var getStatusClassName = function getStatusClassName(minutes) {
+    if (isNaN(Number(minutes))) return 0;
+    return minutes > 0 ? 'in_time' : minutes === 0 ? 'at_risk' : 'delayed';
   };
 
   (0, _react.useEffect)(function () {
@@ -214,6 +247,15 @@ var OrdersCards = function OrdersCards(props) {
       handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder);
     }
   }, [orderList === null || orderList === void 0 ? void 0 : orderList.orders]);
+  (0, _react.useEffect)(function () {
+    var _configState$configs, _configState$configs$;
+
+    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1';
+    setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
+      timer: slaSettings,
+      slaBar: slaSettings
+    }));
+  }, [configState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, null, orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderCard, {
       key: i
@@ -263,11 +305,11 @@ var OrdersCards = function OrdersCards(props) {
       onClick: function onClick() {
         return handleOpenOrderDetail(order);
       }
-    }, t('VIEW_DETAILS', 'View details')))), /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
+    }, t('VIEW_DETAILS', 'View details')))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, "Timer"), /*#__PURE__*/_react.default.createElement("p", {
-      className: order === null || order === void 0 ? void 0 : order.time_status
-    }, getDelayTime(order)))), isMessagesView && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageCounter, null, order === null || order === void 0 ? void 0 : order.unread_count), /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
+      className: getStatusClassName(getDelayMinutes(order))
+    }, displayDelayedTime(order)))), isMessagesView && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageCounter, null, order === null || order === void 0 ? void 0 : order.unread_count), /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
       bgimage: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit')
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -282,8 +324,8 @@ var OrdersCards = function OrdersCards(props) {
       defaultValue: order !== null && order !== void 0 && order.driver_id ? order.driver_id : 'default',
       drivers: driversList.drivers,
       order: order
-    }))), /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
-      timeState: order === null || order === void 0 ? void 0 : order.time_status
+    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.slaBar) && /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
+      timeState: getStatusClassName(getDelayMinutes(order))
     }));
   }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,

@@ -104,7 +104,6 @@ var OrdersTable = function OrdersTable(props) {
 
   var _useState3 = (0, _react.useState)(),
       _useState4 = _slicedToArray(_useState3, 2),
-      currentTime = _useState4[0],
       setCurrentTime = _useState4[1];
 
   var handleChangePage = function handleChangePage(page) {
@@ -116,6 +115,10 @@ var OrdersTable = function OrdersTable(props) {
     getPageOrders(pageSize, expectedPage);
   };
 
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configState = _useConfig2[0];
+
   var _useState5 = (0, _react.useState)({
     status: true,
     orderNumber: true,
@@ -125,6 +128,7 @@ var OrdersTable = function OrdersTable(props) {
     driver: true,
     advanced: true,
     timer: true,
+    slaBar: true,
     total: true
   }),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -160,24 +164,38 @@ var OrdersTable = function OrdersTable(props) {
     content: t('EXPORT_TOTAL', 'Total')
   }];
 
-  var getDelayTime = function getDelayTime(order) {
+  var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
-    var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
-      utc: false
-    });
+    var offset = 300;
+    var cdtToutc = parseDate((0, _moment.default)(order === null || order === void 0 ? void 0 : order.delivery_datetime).add(offset, 'minutes'));
+
+    var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(cdtToutc);
 
     var _eta = order === null || order === void 0 ? void 0 : order.eta_time;
 
-    var tagetedMin = (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'minutes');
+    return (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'minutes');
+  };
+
+  var displayDelayedTime = function displayDelayedTime(order) {
+    var tagetedMin = getDelayMinutes(order); // get day, hour and minutes
+
+    var sign = tagetedMin >= 0 ? '' : '- ';
+    tagetedMin = Math.abs(tagetedMin);
     var day = Math.floor(tagetedMin / 1440);
     var restMinOfTargetedMin = tagetedMin - 1440 * day;
     var restHours = Math.floor(restMinOfTargetedMin / 60);
-    var restMins = restMinOfTargetedMin - 60 * restHours;
-    if ((order === null || order === void 0 ? void 0 : order.time_status) === 'in_time' || (order === null || order === void 0 ? void 0 : order.time_status) === 'at_risk') day = Math.abs(day);
-    if (restHours < 10) restHours = '0' + restHours;
-    if (restMins < 10) restMins = '0' + restMins;
-    var finalTaget = day + 'day  ' + restHours + ':' + restMins;
+    var restMins = restMinOfTargetedMin - 60 * restHours; // make standard time format
+
+    day = day === 0 ? '' : day + 'day  ';
+    restHours = restHours < 10 ? '0' + restHours : restHours;
+    restMins = restMins < 10 ? '0' + restMins : restMins;
+    var finalTaget = sign + day + restHours + ':' + restMins;
     return finalTaget;
+  };
+
+  var getStatusClassName = function getStatusClassName(minutes) {
+    if (isNaN(Number(minutes))) return 0;
+    return minutes > 0 ? 'in_time' : minutes === 0 ? 'at_risk' : 'delayed';
   };
 
   (0, _react.useEffect)(function () {
@@ -377,6 +395,15 @@ var OrdersTable = function OrdersTable(props) {
       }));
     }
   }, [groupStatus]);
+  (0, _react.useEffect)(function () {
+    var _configState$configs, _configState$configs$;
+
+    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1';
+    setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
+      timer: slaSettings,
+      slaBar: slaSettings
+    }));
+  }, [configState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     id: "orderTable",
     isSelectedOrders: isSelectedOrders,
@@ -384,7 +411,7 @@ var OrdersTable = function OrdersTable(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "orders_table",
     noFixedHeader: !orderList.loading && ((_orderList$orders3 = orderList.orders) === null || _orderList$orders3 === void 0 ? void 0 : _orderList$orders3.length) <= 5
-  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("th", {
+  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.slaBar) && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("th", {
     className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'orderNo small' : 'orderNo'
   }, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
     isChecked: !orderList.loading && isAllChecked,
@@ -536,8 +563,8 @@ var OrdersTable = function OrdersTable(props) {
         return handleClickOrder(order, e);
       },
       "data-tour": i === 0 ? 'tour_start' : ''
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
-      timeState: order === null || order === void 0 ? void 0 : order.time_status
+    }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.slaBar) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
+      timeState: getStatusClassName(getDelayMinutes(order))
     })), /*#__PURE__*/_react.default.createElement("td", {
       className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'small' : ''
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderNumberContainer, null, !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
@@ -613,8 +640,8 @@ var OrdersTable = function OrdersTable(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles.Timer, null, !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, t('TIMER', 'Timer')), /*#__PURE__*/_react.default.createElement("p", {
-      className: order === null || order === void 0 ? void 0 : order.time_status
-    }, getDelayTime(order))))), /*#__PURE__*/_react.default.createElement("td", {
+      className: getStatusClassName(getDelayMinutes(order))
+    }, displayDelayedTime(order))))), /*#__PURE__*/_react.default.createElement("td", {
       className: "orderPrice"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
