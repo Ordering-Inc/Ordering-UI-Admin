@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
-import { useLanguage, useUtils } from 'ordering-components-admin'
+import { useLanguage, useUtils, useConfig } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { DriverSelector } from '../DriverSelector'
@@ -40,7 +40,12 @@ export const OrdersCards = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ parseDate, optimizeImage }] = useUtils()
-  const [currentTime, setCurrentTime] = useState()
+  const [, setCurrentTime] = useState()
+  const [configState] = useConfig()
+  const [allowColumns, setAllowColumns] = useState({
+    timer: true,
+    slaBar: true
+  })
 
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
@@ -91,21 +96,38 @@ export const OrdersCards = (props) => {
     return objectStatus && objectStatus
   }
 
-  const getDelayTime = (order) => {
+  const getDelayMinutes = (order) => {
     // targetMin = delivery_datetime  + eta_time - now()
+    const offset = 300
+    const cdtToutc = parseDate(moment(order?.delivery_datetime).add(offset, 'minutes'))
     const _delivery = order?.delivery_datetime_utc
+      ? parseDate(order?.delivery_datetime_utc)
+      : parseDate(cdtToutc)
     const _eta = order?.eta_time
-    const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
+    return moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
+  }
+
+  const displayDelayedTime = (order) => {
+    let tagetedMin = getDelayMinutes(order)
+    // get day, hour and minutes
+    const sign = tagetedMin >= 0 ? '' : '- '
+    tagetedMin = Math.abs(tagetedMin)
     let day = Math.floor(tagetedMin / 1440)
     const restMinOfTargetedMin = tagetedMin - 1440 * day
     let restHours = Math.floor(restMinOfTargetedMin / 60)
     let restMins = restMinOfTargetedMin - 60 * restHours
+    // make standard time format
+    day = day === 0 ? '' : day + 'day  '
+    restHours = restHours < 10 ? '0' + restHours : restHours
+    restMins = restMins < 10 ? '0' + restMins : restMins
 
-    if (order?.time_status === 'in_time' || order?.time_status === 'at_risk') day = Math.abs(day)
-    if (restHours < 10) restHours = ('0' + restHours)
-    if (restMins < 10) restMins = ('0' + restMins)
-    const finalTaget = day + 'day  ' + restHours + ':' + restMins
+    const finalTaget = sign + day + restHours + ':' + restMins
     return finalTaget
+  }
+
+  const getStatusClassName = (minutes) => {
+    if (isNaN(Number(minutes))) return 0
+    return minutes > 0 ? 'in_time' : minutes === 0 ? 'at_risk' : 'delayed'
   }
 
   useEffect(() => {
@@ -123,6 +145,15 @@ export const OrdersCards = (props) => {
       handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder)
     }
   }, [orderList?.orders])
+
+  useEffect(() => {
+    const slaSettings = configState?.configs?.order_deadlines_enabled?.value === '1'
+    setAllowColumns({
+      ...allowColumns,
+      timer: slaSettings,
+      slaBar: slaSettings
+    })
+  }, [configState.loading])
 
   return (
     <>
@@ -189,10 +220,12 @@ export const OrdersCards = (props) => {
                       </ViewDetails>
                     </div>
                   </OrderHeader>
-                  <Timer>
-                    <p className='bold'>Timer</p>
-                    <p className={order?.time_status}>{getDelayTime(order)}</p>
-                  </Timer>
+                  {allowColumns?.timer && (
+                    <Timer>
+                      <p className='bold'>Timer</p>
+                      <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
+                    </Timer>
+                  )}
                 </CardHeading>
                 {isMessagesView && order?.unread_count > 0 && (
                   <UnreadMessageCounter>
@@ -222,7 +255,9 @@ export const OrdersCards = (props) => {
                     />
                   </DriverSelectorWrapper>
                 </CardContent>
-                <Timestatus timeState={order?.time_status} />
+                {allowColumns?.slaBar && (
+                  <Timestatus timeState={getStatusClassName(getDelayMinutes(order))} />
+                )}
               </OrderCard>
             ))}
           </>
