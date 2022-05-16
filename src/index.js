@@ -53,7 +53,6 @@ import {
   BusinessDetails,
   BusinessFrontLayout,
   BusinessMenu,
-  BusinessMoreDetail,
   BusinessNotifications,
   BusinessOrderingChannels,
   BusinessPaymentMethods,
@@ -66,7 +65,6 @@ import {
   BusinessWebhooks,
   AddBusinessForm,
   ImportersLateralBar,
-  Personalization,
   WizardBusiness
 } from './components/Stores'
 import { UsersListing, CustomersListing } from './components/Users'
@@ -83,7 +81,8 @@ import {
   Modal,
   SideBar,
   ProtectedRoute,
-  MoreSidebarLayout
+  MoreSidebarLayout,
+  Personalization
 } from './components/Shared'
 
 import { capitalize } from './utils'
@@ -175,7 +174,6 @@ export {
   BusinessDetails,
   BusinessFrontLayout,
   BusinessMenu,
-  BusinessMoreDetail,
   BusinessNotifications,
   BusinessOrderingChannels,
   BusinessPaymentMethods,
@@ -188,7 +186,6 @@ export {
   BusinessWebhooks,
   AddBusinessForm,
   ImportersLateralBar,
-  Personalization,
   WizardBusiness,
 
   UsersListing,
@@ -210,6 +207,7 @@ export {
   SideBar,
   ProtectedRoute,
   MoreSidebarLayout,
+  Personalization,
 
   capitalize,
 
