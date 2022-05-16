@@ -244,6 +244,7 @@ var StatusBlock = function StatusBlock(props) {
     name: "minute",
     type: "text",
     placeholder: "MM",
+    disabled: true,
     defaultValue: configs === null || configs === void 0 ? void 0 : (_configs$order_deadli2 = configs.order_deadlines_delayed_time) === null || _configs$order_deadli2 === void 0 ? void 0 : _configs$order_deadli2.value,
     ref: formMethods.register({
       required: t('VALIDATION_ERROR_MINUTE_REQUIRED', 'The field minute is required').replace('_attribute_', t('MINUTE', 'Minute'))
