@@ -11,7 +11,6 @@ import { BusinessDetail } from './BusinessDetail'
 import { BusinessDetails } from './BusinessDetails'
 import { BusinessFrontLayout } from './BusinessFrontLayout'
 import { BusinessMenu } from './BusinessMenu'
-import { BusinessMoreDetail } from './BusinessMoreDetail'
 import { BusinessNotifications } from './BusinessNotifications'
 import { BusinessOrderingChannels } from './BusinessOrderingChannels'
 import { BusinessPaymentMethods } from './BusinessPaymentMethods'
@@ -24,7 +23,6 @@ import { BusinessTaxAndFees } from './BusinessTaxAndFees'
 import { BusinessWebhooks } from './BusinessWebhooks'
 import { AddBusinessForm } from './AddBusinessForm'
 import { ImportersLateralBar } from './ImportersLateralBar'
-import { Personalization } from './Personalization'
 import { WizardBusiness } from './WizardBusiness'
 
 export {
@@ -41,7 +39,6 @@ export {
   BusinessDetails,
   BusinessFrontLayout,
   BusinessMenu,
-  BusinessMoreDetail,
   BusinessNotifications,
   BusinessOrderingChannels,
   BusinessPaymentMethods,
@@ -54,6 +51,5 @@ export {
   BusinessWebhooks,
   AddBusinessForm,
   ImportersLateralBar,
-  Personalization,
   WizardBusiness,
 }
