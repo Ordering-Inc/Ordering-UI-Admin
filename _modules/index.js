@@ -81,12 +81,6 @@ Object.defineProperty(exports, "BusinessMenu", {
     return _Stores.BusinessMenu;
   }
 });
-Object.defineProperty(exports, "BusinessMoreDetail", {
-  enumerable: true,
-  get: function get() {
-    return _Stores.BusinessMoreDetail;
-  }
-});
 Object.defineProperty(exports, "BusinessNotifications", {
   enumerable: true,
   get: function get() {
@@ -414,7 +408,7 @@ Object.defineProperty(exports, "PageNotFound", {
 Object.defineProperty(exports, "Personalization", {
   enumerable: true,
   get: function get() {
-    return _Stores.Personalization;
+    return _Shared.Personalization;
   }
 });
 Object.defineProperty(exports, "PlaceListing", {

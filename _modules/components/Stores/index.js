@@ -57,12 +57,6 @@ Object.defineProperty(exports, "BusinessMenu", {
     return _BusinessMenu.BusinessMenu;
   }
 });
-Object.defineProperty(exports, "BusinessMoreDetail", {
-  enumerable: true,
-  get: function get() {
-    return _BusinessMoreDetail.BusinessMoreDetail;
-  }
-});
 Object.defineProperty(exports, "BusinessNotifications", {
   enumerable: true,
   get: function get() {
@@ -159,12 +153,6 @@ Object.defineProperty(exports, "ImportersLateralBar", {
     return _ImportersLateralBar.ImportersLateralBar;
   }
 });
-Object.defineProperty(exports, "Personalization", {
-  enumerable: true,
-  get: function get() {
-    return _Personalization.Personalization;
-  }
-});
 Object.defineProperty(exports, "WizardBusiness", {
   enumerable: true,
   get: function get() {
@@ -198,8 +186,6 @@ var _BusinessFrontLayout = require("./BusinessFrontLayout");
 
 var _BusinessMenu = require("./BusinessMenu");
 
-var _BusinessMoreDetail = require("./BusinessMoreDetail");
-
 var _BusinessNotifications = require("./BusinessNotifications");
 
 var _BusinessOrderingChannels = require("./BusinessOrderingChannels");
@@ -223,7 +209,5 @@ var _BusinessWebhooks = require("./BusinessWebhooks");
 var _AddBusinessForm = require("./AddBusinessForm");
 
 var _ImportersLateralBar = require("./ImportersLateralBar");
-
-var _Personalization = require("./Personalization");
 
 var _WizardBusiness = require("./WizardBusiness");
