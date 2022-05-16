@@ -74,7 +74,7 @@ const BusinessWalletsListUI = (props) => {
         </WalletsListContainer>
       ) : (
         <>
-          {walletsListState.wallets.length > 0 && (isWalletCashEnabled || isWalletPointsEnabled) && (
+          {walletsListState.wallets.length > 0 && (walletsEnabled.wallet_cash_enabled || walletsEnabled.wallet_credit_point_enabled) && (
             <WalletsListContainer>
               <h2>{t('WALLETS', 'Wallets')}</h2>
               {walletsListState.wallets.filter(config => walletsEnabled[config.key]).map(config => (
