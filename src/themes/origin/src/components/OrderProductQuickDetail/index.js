@@ -33,7 +33,7 @@ const OrderProductsQuickDetailUI = (props) => {
 
   const getProductPrice = (product) => {
     let subOptionPrice = 0
-    if (product.options.length > 0) {
+    if (product.options?.length > 0) {
       for (const option of product.options) {
         for (const suboption of option.suboptions) {
           subOptionPrice += suboption.quantity * suboption.price
@@ -134,7 +134,7 @@ const OrderProductsQuickDetailUI = (props) => {
                           {product.name}
                         </ProductImageContainer>
                         <AccordionContent>
-                          {product.ingredients.length > 0 && product.ingredients.some(ingredient => !ingredient.selected) && (
+                          {product.ingredients?.length > 0 && product.ingredients.some(ingredient => !ingredient.selected) && (
                             <ProductOptionsList>
                               <p>{t('INGREDIENTS', 'Ingredients')}</p>
                               {product.ingredients.map((ingredient) => !ingredient.selected && (
@@ -144,7 +144,7 @@ const OrderProductsQuickDetailUI = (props) => {
                               ))}
                             </ProductOptionsList>
                           )}
-                          {product.options.length > 0 && (
+                          {product.options?.length > 0 && (
                             <ProductOptionsList>
                               {product.options.map((option, i) => (
                                 <li key={i}>

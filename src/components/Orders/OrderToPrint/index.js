@@ -314,7 +314,7 @@ export const OrderToPrint = forwardRef((props, ref) => {
               </ContentInfo>
             </ProductInfo>
             <AccordionContent>
-              {product.ingredients.length > 0 && product.ingredients.some(ingredient => !ingredient.selected) && (
+              {product.ingredients?.length > 0 && product.ingredients.some(ingredient => !ingredient.selected) && (
                 <ProductOptionsList>
                   <p>{t('INGREDIENTS', 'Ingredients')}</p>
                   {product.ingredients.map((ingredient) => !ingredient.selected && (
@@ -324,7 +324,7 @@ export const OrderToPrint = forwardRef((props, ref) => {
                   ))}
                 </ProductOptionsList>
               )}
-              {product.options.length > 0 && (
+              {product.options?.length > 0 && (
                 <ProductOptionsList>
                   {Array.isArray(product.options) && product.options.map((option, i) => (
                     <li key={i}>
