@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, BusinessWalletsList as BusinessWalletsListController } from 'ordering-components-admin'
+import { useLanguage, useConfig, BusinessWalletsList as BusinessWalletsListController } from 'ordering-components-admin'
+import Skeleton from 'react-loading-skeleton'
 import { ChevronRight } from 'react-bootstrap-icons'
 import { SideBar } from '../../Shared'
 import { Select } from '../../../styles/Select/FirstSelect'
@@ -14,6 +15,7 @@ import {
 
 const BusinessWalletsListUI = (props) => {
   const {
+    loyaltyPlanState,
     walletsListState,
     setIsExtendExtraOpen,
     setIsOpenWalletDetails,
@@ -23,9 +25,17 @@ const BusinessWalletsListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [isOpenDetails, setIsOpenDetails] = useState(false)
   const [currentConfig, setCurrentConfig] = useState(null)
   const [options, setOptions] = useState(null)
+  const isWalletCashEnabled = configs?.wallet_cash_enabled?.value === '1'
+  const isWalletPointsEnabled = configs?.wallet_credit_point_enabled?.value === '1'
+
+  const walletsEnabled = {
+    wallet_cash_enabled: isWalletCashEnabled,
+    wallet_credit_point_enabled: isWalletPointsEnabled && loyaltyPlanState.created
+  }
 
   const handleOpenWallet = (config) => {
     setIsOpenWalletDetails(true)
@@ -58,20 +68,28 @@ const BusinessWalletsListUI = (props) => {
 
   return (
     <>
-      {walletsListState.wallets.length > 0 && (
+      {(loyaltyPlanState.loading || walletsListState.loading) ? (
         <WalletsListContainer>
-          <h2>{t('WALLETS', 'Wallets')}</h2>
-          {walletsListState.wallets.map(config => (
-            <WalletOption
-              key={config.id}
-              active={config.id === currentConfig?.id}
-              onClick={() => handleOpenWallet(config)}
-            >
-              <WalletName>{config.name}</WalletName>
-              <ChevronRight />
-            </WalletOption>
-          ))}
+          <Skeleton height={30} />
         </WalletsListContainer>
+      ) : (
+        <>
+          {walletsListState.wallets.length > 0 && (walletsEnabled.wallet_cash_enabled || walletsEnabled.wallet_credit_point_enabled) && (
+            <WalletsListContainer>
+              <h2>{t('WALLETS', 'Wallets')}</h2>
+              {walletsListState.wallets.filter(config => walletsEnabled[config.key]).map(config => (
+                <WalletOption
+                  key={config.id}
+                  active={config.id === currentConfig?.id}
+                  onClick={() => handleOpenWallet(config)}
+                >
+                  <WalletName>{config.name}</WalletName>
+                  <ChevronRight />
+                </WalletOption>
+              ))}
+            </WalletsListContainer>
+          )}
+        </>
       )}
       {isOpenDetails && (
         <SideBar
