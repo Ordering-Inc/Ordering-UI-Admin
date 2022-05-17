@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _Shared = require("../../Shared");
@@ -18,6 +20,8 @@ var _Shared = require("../../Shared");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
 
 var _styles = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -42,7 +46,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
-  var walletsListState = props.walletsListState,
+  var _configs$wallet_cash_, _configs$wallet_credi;
+
+  var loyaltyPlanState = props.loyaltyPlanState,
+      walletsListState = props.walletsListState,
       setIsExtendExtraOpen = props.setIsExtendExtraOpen,
       setIsOpenWalletDetails = props.setIsOpenWalletDetails,
       isClose = props.isClose,
@@ -52,6 +59,10 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -67,6 +78,13 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       options = _useState6[0],
       setOptions = _useState6[1];
+
+  var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_cash_ = configs.wallet_cash_enabled) === null || _configs$wallet_cash_ === void 0 ? void 0 : _configs$wallet_cash_.value) === '1';
+  var isWalletPointsEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_credi = configs.wallet_credit_point_enabled) === null || _configs$wallet_credi === void 0 ? void 0 : _configs$wallet_credi.value) === '1';
+  var walletsEnabled = {
+    wallet_cash_enabled: isWalletCashEnabled,
+    wallet_credit_point_enabled: isWalletPointsEnabled && loyaltyPlanState.created
+  };
 
   var handleOpenWallet = function handleOpenWallet(config) {
     setIsOpenWalletDetails(true);
@@ -101,7 +119,11 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
     setIsOpenDetails(false);
     setCurrentConfig(null);
   }, [isClose]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, walletsListState.wallets.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WalletsListContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WALLETS', 'Wallets')), walletsListState.wallets.map(function (config) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, loyaltyPlanState.loading || walletsListState.loading ? /*#__PURE__*/_react.default.createElement(_styles.WalletsListContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 30
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, walletsListState.wallets.length > 0 && (walletsEnabled.wallet_cash_enabled || walletsEnabled.wallet_credit_point_enabled) && /*#__PURE__*/_react.default.createElement(_styles.WalletsListContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WALLETS', 'Wallets')), walletsListState.wallets.filter(function (config) {
+    return walletsEnabled[config.key];
+  }).map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles.WalletOption, {
       key: config.id,
       active: config.id === (currentConfig === null || currentConfig === void 0 ? void 0 : currentConfig.id),
@@ -109,7 +131,7 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
         return handleOpenWallet(config);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.WalletName, null, config.name), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  })), isOpenDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }))), isOpenDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     isBorderShow: true,
     open: isOpenDetails,
     onClose: handleCloseWallet
