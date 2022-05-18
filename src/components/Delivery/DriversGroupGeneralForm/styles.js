@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.form`
-  min-height: calc(100% - 160px);
   padding-bottom: 30px;
 
   > button {

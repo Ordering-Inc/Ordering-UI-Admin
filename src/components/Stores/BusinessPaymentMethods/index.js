@@ -17,6 +17,7 @@ import { PaymethodOptionPaypalExpress } from '../PaymethodOptionPaypalExpress'
 import { PaymethodOptionStripeRedirect } from '../PaymethodOptionStripeRedirect'
 import { PaymethodOptionStripeConnect } from '../PaymethodOptionStripeConnect'
 import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
+import { PaymentOptionSquare } from '../PaymentOptionSquare'
 import { BusinessWalletsList } from '../BusinessWalletsList'
 
 import {
@@ -55,6 +56,7 @@ const BusinessPaymentMethodsUI = (props) => {
     handleStripeSave,
     isSuccessDeleted,
     setIsSuccessDeleted,
+    handleSuccessPaymethodUpdate,
     handleSuccessUpdate,
 
     isTutorialMode,
@@ -244,7 +246,8 @@ const BusinessPaymentMethodsUI = (props) => {
                 'paypal',
                 'paypal_express',
                 'stripe_redirect',
-                'stripe_connect'
+                'stripe_connect',
+                'square'
               ].includes(selectedPaymethodGateway) && (
                 <PaymentOption
                   sitesState={sitesState}
@@ -345,6 +348,21 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeStripeInput={handleChangeStripeInput}
                   handleStripeSave={handleStripeSave}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                />
+              )}
+              {selectedPaymethodGateway === 'square' && (
+                <PaymentOptionSquare
+                  open={isEdit}
+                  sitesState={sitesState}
+                  business={business}
+                  changesState={changesState}
+                  orderTypes={orderTypes}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                  handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                  businessPaymethods={businessPaymethodsState?.paymethods}
+                  handleSuccessPaymethodUpdate={handleSuccessPaymethodUpdate}
                 />
               )}
             </>
@@ -465,6 +483,21 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeStripeInput={handleChangeStripeInput}
                     handleStripeSave={handleStripeSave}
                     handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                  />
+                )}
+                {selectedPaymethodGateway === 'square' && (
+                  <PaymentOptionSquare
+                    open={isEdit}
+                    sitesState={sitesState}
+                    business={business}
+                    changesState={changesState}
+                    orderTypes={orderTypes}
+                    onClose={() => handleCloseEdit()}
+                    businessPaymethod={selectedBusinessPaymethod}
+                    handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                    handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                    businessPaymethods={businessPaymethodsState?.paymethods}
+                    handleSuccessPaymethodUpdate={handleSuccessPaymethodUpdate}
                   />
                 )}
               </Modal>

@@ -100,7 +100,7 @@ export const ProductItemAccordion = (props) => {
   const getProductPrice = (product) => {
     let subOptionPrice = 0
     if (Array.isArray(product.options)) {
-      if (product.options.length > 0) {
+      if (product.options?.length > 0) {
         for (const option of product.options) {
           for (const suboption of option.suboptions) {
             subOptionPrice += suboption.quantity * suboption.price
@@ -177,7 +177,7 @@ export const ProductItemAccordion = (props) => {
               <span>
                 {parsePrice(getProductPrice(product), { currencyPosition: 'left' })}
               </span>
-              {(productInfo().ingredients.length > 0 || productInfo().options.length > 0 || product.comment) && (
+              {(productInfo().ingredients?.length > 0 || productInfo().options?.length > 0 || product.comment) && (
                 <p>
                   <IosArrowUp className={`${setRotate}`} />
                 </p>
@@ -250,7 +250,7 @@ export const ProductItemAccordion = (props) => {
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
       >
-        {productInfo().ingredients.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
+        {productInfo().ingredients?.length > 0 && productInfo().ingredients.some(ingredient => !ingredient.selected) && (
           <ProductOptionsList>
             <p>{t('INGREDIENTS', 'Ingredients')}</p>
             {productInfo().ingredients.map((ingredient) => !ingredient.selected && (
@@ -260,7 +260,7 @@ export const ProductItemAccordion = (props) => {
             ))}
           </ProductOptionsList>
         )}
-        {productInfo().options.length > 0 && (
+        {productInfo().options?.length > 0 && (
           <ProductOptionsList>
             {Array.isArray(productInfo().options) && productInfo().options.map((option, i) => (
               <li key={i}>

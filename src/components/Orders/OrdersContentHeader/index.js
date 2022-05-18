@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useConfig } from 'ordering-components-admin'
 import { SearchBar } from '../../Shared'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
 import { Funnel, List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
@@ -47,6 +47,7 @@ export const OrdersContentHeader = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
   const [filterApplied, setFilterApplied] = useState(false)
+  const [configState] = useConfig()
 
   useEffect(() => {
     let _filterApplied = false
@@ -100,14 +101,16 @@ export const OrdersContentHeader = (props) => {
           </HeaderSection>
         )}
         <TopRightSection>
-          <SLAControlsWrapper>
-            <OrderDashboardSLASetting
-              setSlaSettingTime={setSlaSettingTime}
-            />
-            <OrdersDashboardSLAControls
-              setTimeStatus={setTimeStatus}
-            />
-          </SLAControlsWrapper>
+          {(configState?.configs?.order_deadlines_enabled?.value === '1') && (
+            <SLAControlsWrapper>
+              <OrderDashboardSLASetting
+                setSlaSettingTime={setSlaSettingTime}
+              />
+              <OrdersDashboardSLAControls
+                setTimeStatus={setTimeStatus}
+              />
+            </SLAControlsWrapper>
+          )}
           <WrapperSearchAndFilter
             fullWidth={isDisableTitle && isDisableControl}
           >
@@ -120,7 +123,7 @@ export const OrdersContentHeader = (props) => {
             />
             <IconButton
               color='black'
-              onClick={() => setFilterModalOpen(true)}
+              onClick={() => setFilterModalOpen && setFilterModalOpen(true)}
               name='filter-btn'
             >
               {filterApplied ? <Funnel /> : <MdcFilterOff />}
@@ -131,7 +134,7 @@ export const OrdersContentHeader = (props) => {
 
       <OrdersFilterGroup
         open={filterModalOpen}
-        handleCloseFilterModal={() => setFilterModalOpen(false)}
+        handleCloseFilterModal={() => setFilterModalOpen && setFilterModalOpen(false)}
         driverGroupList={driverGroupList}
         driversList={driversList}
         paymethodsList={paymethodsList}

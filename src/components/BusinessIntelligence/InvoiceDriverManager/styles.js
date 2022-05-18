@@ -19,6 +19,12 @@ export const DetailsHeader = styled.div`
     margin: 0;
     color: ${props => props.theme?.colors.headingColor};
   }
+
+  ${props => props.theme?.rtl ? css`
+    padding-left: 35px;
+  ` : css`
+    padding-right: 35px;
+  `}
 `
 export const DetailsList = styled.div`
   width: 100%;
