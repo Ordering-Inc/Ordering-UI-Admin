@@ -5,6 +5,7 @@ import { Button, Checkbox } from '../../../styles'
 import { Alert, Confirm, Modal } from '../../Shared'
 import { ProductExtraOptions } from '../ProductExtraOptions'
 import { ChevronRight } from 'react-bootstrap-icons'
+import { useTheme } from 'styled-components'
 
 import {
   MainContainer,
@@ -15,7 +16,8 @@ import {
   MoreContainer,
   Details,
   ExtraAddForm,
-  AddButton
+  AddButton,
+  DragImageWrapper
 } from './styles'
 
 const ProductExtrasUI = (props) => {
@@ -31,8 +33,15 @@ const ProductExtrasUI = (props) => {
     setIsExtendExtraOpen,
     business,
     handleUpdateBusinessState,
-    handleProductExtraState
+    handleProductExtraState,
+    dragoverExtaId,
+    isExtrasBottom,
+    handleDragStart,
+    hanldeDragOver,
+    handleDrop,
+    handleDragEnd
   } = props
+  const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const conatinerRef = useRef(null)
@@ -45,7 +54,7 @@ const ProductExtrasUI = (props) => {
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
 
   const handleOpenExtraDetails = (e, extra) => {
-    if (e.target.closest('.extra-checkbox')) return
+    if (e.target.closest('.extra-checkbox') || e.target.closest('.draggable-dots')) return
     setIsExtendExtraOpen(true)
     setCurrentExtra(extra)
     setOpenExtraDetails(true)
@@ -115,28 +124,45 @@ const ProductExtrasUI = (props) => {
             {t('ADD_PRODUCT_OPTION', 'Add product option')}
           </Button>
         </Header>
-        {extrasState?.extras && extrasState?.extras.map(extra => (
-          <ExtraOption
-            key={extra.id}
-            active={extra.id === currentExtra?.id}
-            onClick={e => handleOpenExtraDetails(e, extra)}
-          >
-            <CheckboxContainer
-              className='extra-checkbox'
+        {extrasState?.extras && extrasState?.extras.sort((a, b) => a.rank - b.rank).map((extra, index) => {
+          const isLastExtra = index === extrasState.extras.length - 1
+          return (
+            <ExtraOption
+              key={extra.id}
+              active={extra.id === currentExtra?.id}
+              onClick={e => handleOpenExtraDetails(e, extra)}
+              isDragOver={dragoverExtaId === extra.id}
+              isBorderBottom={isExtrasBottom && isLastExtra}
+              onDragOver={e => hanldeDragOver(e, extra, isLastExtra)}
+              onDrop={e => handleDrop(e, extra)}
+              onDragEnd={handleDragEnd}
+              className='draggable-extra'
             >
-              <Checkbox
-                checked={extraIds.includes(extra.id) ?? false}
-                onChange={e => handleExtraState(extra.id, e.target.checked)}
-              />
-            </CheckboxContainer>
-            <MoreContainer>
-              <span>{extra.name}</span>
-              <Details>
-                <ChevronRight />
-              </Details>
-            </MoreContainer>
-          </ExtraOption>
-        ))}
+              <DragImageWrapper className='draggable-dots'>
+                <img
+                  src={theme.images.icons?.sixDots}
+                  alt='six dots'
+                  draggable
+                  onDragStart={e => handleDragStart(e, extra)}
+                />
+              </DragImageWrapper>
+              <CheckboxContainer
+                className='extra-checkbox'
+              >
+                <Checkbox
+                  checked={extraIds.includes(extra.id) ?? false}
+                  onChange={e => handleExtraState(extra.id, e.target.checked)}
+                />
+              </CheckboxContainer>
+              <MoreContainer>
+                <span>{extra.name}</span>
+                <Details>
+                  <ChevronRight />
+                </Details>
+              </MoreContainer>
+            </ExtraOption>
+          )
+        })}
         {isAddMode && (
           <ExtraAddForm
             ref={conatinerRef}
