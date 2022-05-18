@@ -235,11 +235,20 @@ export const convertHMS = (value) => {
 }
 
 /**
+ * List shape for ribbon
+ */
+export const shape = {
+  rectangle: 'rectangle',
+  rectangleRound: 'rectangle_round',
+  capsuleShape: 'capsule_shape'
+}
+
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
  */
- export const reviewCommentList = (type) => {
+export const reviewCommentList = (type) => {
   const [, t] = useLanguage()
 
   const reviews = {
@@ -252,7 +261,7 @@ export const convertHMS = (value) => {
           { key: 2, content: t('CUSTOMER_QUICK_COMMENT_1_2', "COVID-19 issue") },
           { key: 3, content: t('CUSTOMER_QUICK_COMMENT_1_3', "Didn't follow instructions") },
           { key: 4, content: t('CUSTOMER_QUICK_COMMENT_1_4', "Rude") },
-          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_1_5', "Not on-time") },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_1_5', "Not on-time") }
         ]
       },
       2: {
@@ -263,7 +272,7 @@ export const convertHMS = (value) => {
           { key: 2, content: t('CUSTOMER_QUICK_COMMENT_2_2', "COVID-19 issue") },
           { key: 3, content: t('CUSTOMER_QUICK_COMMENT_2_3', "Didn't follow instructions") },
           { key: 4, content: t('CUSTOMER_QUICK_COMMENT_2_4', "Rude") },
-          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_2_5', "Not on-time") },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_2_5', "Not on-time") }
         ]
       },
       3: {
@@ -274,7 +283,7 @@ export const convertHMS = (value) => {
           { key: 2, content: t('CUSTOMER_QUICK_COMMENT_3_2', "COVID-19 issue") },
           { key: 3, content: t('CUSTOMER_QUICK_COMMENT_3_3', "Didn't follow instructions") },
           { key: 4, content: t('CUSTOMER_QUICK_COMMENT_3_4', "Rude") },
-          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_3_5', "Not on-time") },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_3_5', "Not on-time") }
         ]
       },
       4: {
@@ -285,7 +294,7 @@ export const convertHMS = (value) => {
           { key: 2, content: t('CUSTOMER_QUICK_COMMENT_4_2', "COVID-19 issue") },
           { key: 3, content: t('CUSTOMER_QUICK_COMMENT_4_3', "Didn't follow instructions") },
           { key: 4, content: t('CUSTOMER_QUICK_COMMENT_4_4', "Rude") },
-          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_4_5', "Not on-time") },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_4_5', "Not on-time") }
         ]
       },
       5: {
@@ -293,9 +302,9 @@ export const convertHMS = (value) => {
         list: [
           { key: 0, content: t('CUSTOMER_QUICK_COMMENT_5_0', "Good communication") },
           { key: 1, content: t('CUSTOMER_QUICK_COMMENT_5_1', "Friendly") },
-          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_5_2', "Above and beyond") },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_5_2', "Above and beyond") }
         ]
-      },
+      }
     }
   }
 
