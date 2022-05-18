@@ -29,8 +29,12 @@ import {
   InputWithIcon,
   WrapperPassword,
   TogglePassword,
-  ReCAPTCHAWrapper
+  ReCAPTCHAWrapper,
+  Option,
+  FormControl
 } from './styles'
+// import { Select } from '../../../styles/Select'
+import { Select } from '../../../styles/Select/FirstSelect'
 
 const SignupFormUI = (props) => {
   const {
@@ -52,6 +56,20 @@ const SignupFormUI = (props) => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
 
   const inputs = ['name', 'lastname', 'project_name', 'project']
+
+  const businessTypeList = [
+    { value: null, content: <Option>{t('SELECT_BUSINESS_TYPE_DEFAULT', 'Please select a business type')}</Option> },
+    { value: 1, content: <Option>{t('RESTAURANT_FIVE_LOCATIONS', 'Restaurant (1-5 locations)')}</Option> },
+    { value: 2, content: <Option>{t('RESTAURANT_MORE_SIX_LOCATIONS', 'Restaurant (+6 locations)')}</Option> },
+    { value: 3, content: <Option>{t('STORE_FIVE_LOCATIONS', 'Store (1-5 locations)')}</Option> },
+    { value: 4, content: <Option>{t('STORE_MORE_SIX_LOCATIONS', 'Store (+6 locations)')}</Option> },
+    { value: 5, content: <Option>{t('NEW_STARTUP_MARKETPLACE', 'New startup/marketplace')}</Option> },
+    { value: 6, content: <Option>{t('EXISTING_STARTUPS_MARKETPLACE', 'Existing startup/marketplace')}</Option> },
+    { value: 7, content: <Option>{t('CLOUD_KITCHEN_FIVE_LOCATIONS', 'Cloud Kitchen (1-5 locations)')}</Option> },
+    { value: 8, content: <Option>{t('CLOUD_KITCHEN_MORE_SIX_LOCATIONS', 'Cloud Kitchen (+6 locations)')}</Option> },
+    { value: 9, content: <Option>{t('CUSTOM_PROJECT', 'Custom project')}</Option> },
+    { value: 10, content: <Option>{t('OTHER_FRANCHISE_OR_ENTERPRISE', 'Other Franchise or Enterprise')}</Option> }
+  ]
 
   const closeAlert = () => {
     setAlertState({
@@ -185,6 +203,15 @@ const SignupFormUI = (props) => {
               )}
             </InputWithIcon>
           ))}
+
+          <FormControl>
+            <Select
+              options={businessTypeList}
+              className='select'
+              defaultValue={null}
+              onChange={(value) => handleChangeInput('type', value)}
+            />
+          </FormControl>
 
           <InputWithIcon>
             <Input

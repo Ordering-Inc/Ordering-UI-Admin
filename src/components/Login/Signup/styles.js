@@ -310,3 +310,66 @@ export const ReCAPTCHAWrapper = styled.div`
     padding: 0;
   }
 `
+
+export const Option = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 13px;
+  line-height: 2;
+  font-weight: 500;
+`
+
+export const FormControl = styled.div`
+  margin-bottom: 15px;
+  margin-top: 15px;
+
+  input, textarea {
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+    border: 1px solid #DEE2E6;
+    box-sizing: border-box;
+    border-radius: 7.6px;
+    font-size: 14px;
+    padding: 10px 15px;
+    outline: none;
+    width: 100%;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  .select {
+    width: 100%;
+    background: #F8F9FA;
+    color: #748194;
+    border: none;
+
+    > div:first-child {
+      font-size: 14px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+
+      div:first-child {
+        font-size: 14px;
+        padding: 1px 0;
+      }
+    }
+
+    .list {
+      > div {
+        max-height: 250px;
+      }
+    }
+  }
+`
