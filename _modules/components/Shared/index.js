@@ -21,6 +21,12 @@ Object.defineProperty(exports, "CitySelector", {
     return _CitySelector.CitySelector;
   }
 });
+Object.defineProperty(exports, "ColorPicker", {
+  enumerable: true,
+  get: function get() {
+    return _ColorPicker.ColorPicker;
+  }
+});
 Object.defineProperty(exports, "ColumnAllowSettingPopover", {
   enumerable: true,
   get: function get() {
@@ -225,5 +231,7 @@ var _SpinnerLoader = require("./SpinnerLoader");
 var _SpreadSheetEditor = _interopRequireDefault(require("./SpreadSheetEditor"));
 
 var _ProgressRing = require("./ProgressRing");
+
+var _ColorPicker = require("./ColorPicker");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

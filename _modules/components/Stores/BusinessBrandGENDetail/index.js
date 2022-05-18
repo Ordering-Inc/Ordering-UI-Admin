@@ -23,6 +23,8 @@ var _BsCardImage = _interopRequireDefault(require("@meronex/icons/bs/BsCardImage
 
 var _styles = require("../../../styles");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -50,13 +52,14 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
-  var _brandFormState$chang, _brandFormState$resul3, _brandFormState$resul4, _brandFormState$chang2, _brandFormState$chang3, _ref, _brandFormState$chang4, _brandFormState$chang5, _ref2, _brandFormState$chang6, _brandFormState$chang7;
+  var _brandFormState$chang7, _brandFormState$resul3, _brandFormState$resul4, _brandFormState$chang8, _brandFormState$chang9, _ref, _brandFormState$chang10, _brandFormState$chang11, _ref2, _brandFormState$chang12, _brandFormState$chang13, _brand$ribbon2, _brandFormState$chang14, _brandFormState$chang15, _brandFormState$chang16, _brandFormState$chang17, _brand$ribbon3, _brandFormState$chang18, _brandFormState$chang19, _brandFormState$chang20, _brand$ribbon4, _brandFormState$chang21, _brandFormState$chang22, _brandFormState$chang23, _brand$ribbon5;
 
   var brandFormState = props.brandFormState,
       brand = props.brand,
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
-      handleChangeItem = props.handleChangeItem;
+      handleChangeItem = props.handleChangeItem,
+      handleChangeRibbon = props.handleChangeRibbon;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -141,6 +144,20 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
     });
   };
 
+  var handleSubmit = function handleSubmit() {
+    var _brandFormState$chang, _brandFormState$chang2, _brandFormState$chang3, _brandFormState$chang4, _brand$ribbon, _brandFormState$chang5, _brandFormState$chang6;
+
+    if ((typeof (brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang = brandFormState.changes) === null || _brandFormState$chang === void 0 ? void 0 : (_brandFormState$chang2 = _brandFormState$chang.ribbon) === null || _brandFormState$chang2 === void 0 ? void 0 : _brandFormState$chang2.enabled) !== 'undefined' ? brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang3 = brandFormState.changes) === null || _brandFormState$chang3 === void 0 ? void 0 : (_brandFormState$chang4 = _brandFormState$chang3.ribbon) === null || _brandFormState$chang4 === void 0 ? void 0 : _brandFormState$chang4.enabled : brand === null || brand === void 0 ? void 0 : (_brand$ribbon = brand.ribbon) === null || _brand$ribbon === void 0 ? void 0 : _brand$ribbon.enabled) && (brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang5 = brandFormState.changes) === null || _brandFormState$chang5 === void 0 ? void 0 : (_brandFormState$chang6 = _brandFormState$chang5.ribbon) === null || _brandFormState$chang6 === void 0 ? void 0 : _brandFormState$chang6.text) === '') {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_REQUIRED', 'The Ribbon text field is required').replace('_attribute_', t('Ribbon_Text', 'Ribbon text'))
+      });
+      return;
+    }
+
+    handleUpdateClick && handleUpdateClick();
+  };
+
   (0, _react.useEffect)(function () {
     var _brandFormState$resul;
 
@@ -149,7 +166,7 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
 
       setAlertState({
         open: true,
-        content: [brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$resul2 = brandFormState.result) === null || _brandFormState$resul2 === void 0 ? void 0 : _brandFormState$resul2.result]
+        content: brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$resul2 = brandFormState.result) === null || _brandFormState$resul2 === void 0 ? void 0 : _brandFormState$resul2.result
       });
     }
   }, [brandFormState === null || brandFormState === void 0 ? void 0 : brandFormState.result]);
@@ -172,12 +189,12 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: brandFormState.loading
-  }, brandFormState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_brandFormState$chang = brandFormState.changes) !== null && _brandFormState$chang !== void 0 && _brandFormState$chang.logo) || ((_brandFormState$resul3 = brandFormState.result) === null || _brandFormState$resul3 === void 0 ? void 0 : _brandFormState$resul3.result) === 'Network Error' || (_brandFormState$resul4 = brandFormState.result) !== null && _brandFormState$resul4 !== void 0 && _brandFormState$resul4.error ? (brand === null || brand === void 0 ? void 0 : brand.logo) && /*#__PURE__*/_react.default.createElement("img", {
+  }, brandFormState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_brandFormState$chang7 = brandFormState.changes) !== null && _brandFormState$chang7 !== void 0 && _brandFormState$chang7.logo) || ((_brandFormState$resul3 = brandFormState.result) === null || _brandFormState$resul3 === void 0 ? void 0 : _brandFormState$resul3.result) === 'Network Error' || (_brandFormState$resul4 = brandFormState.result) !== null && _brandFormState$resul4 !== void 0 && _brandFormState$resul4.error ? (brand === null || brand === void 0 ? void 0 : brand.logo) && /*#__PURE__*/_react.default.createElement("img", {
     src: brand === null || brand === void 0 ? void 0 : brand.logo,
     alt: "business brand logo",
     loading: "lazy"
-  }) : (brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang2 = brandFormState.changes) === null || _brandFormState$chang2 === void 0 ? void 0 : _brandFormState$chang2.logo) && /*#__PURE__*/_react.default.createElement("img", {
-    src: brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang3 = brandFormState.changes) === null || _brandFormState$chang3 === void 0 ? void 0 : _brandFormState$chang3.logo,
+  }) : (brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang8 = brandFormState.changes) === null || _brandFormState$chang8 === void 0 ? void 0 : _brandFormState$chang8.logo) && /*#__PURE__*/_react.default.createElement("img", {
+    src: brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang9 = brandFormState.changes) === null || _brandFormState$chang9 === void 0 ? void 0 : _brandFormState$chang9.logo,
     alt: "business brand logo",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop')))), /*#__PURE__*/_react.default.createElement(_styles2.CameraIconContainer, null, /*#__PURE__*/_react.default.createElement(_FiCamera.default, null))))), brand && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('ID', 'ID')), /*#__PURE__*/_react.default.createElement("input", {
@@ -186,14 +203,14 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("input", {
     name: "name",
     placeholder: t('WRITE_A_NAME', 'Write a name'),
-    value: (_ref = (_brandFormState$chang4 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang5 = brandFormState.changes) === null || _brandFormState$chang5 === void 0 ? void 0 : _brandFormState$chang5.name) !== null && _brandFormState$chang4 !== void 0 ? _brandFormState$chang4 : brand === null || brand === void 0 ? void 0 : brand.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_brandFormState$chang10 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang11 = brandFormState.changes) === null || _brandFormState$chang11 === void 0 ? void 0 : _brandFormState$chang11.name) !== null && _brandFormState$chang10 !== void 0 ? _brandFormState$chang10 : brand === null || brand === void 0 ? void 0 : brand.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: handleChangeInput,
     disabled: brandFormState.loading,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement("input", {
     name: "slug",
     placeholder: t('WRITE_A_SLUG', 'Write a slug'),
-    value: (_ref2 = (_brandFormState$chang6 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang7 = brandFormState.changes) === null || _brandFormState$chang7 === void 0 ? void 0 : _brandFormState$chang7.slug) !== null && _brandFormState$chang6 !== void 0 ? _brandFormState$chang6 : brand === null || brand === void 0 ? void 0 : brand.slug) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref2 = (_brandFormState$chang12 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang13 = brandFormState.changes) === null || _brandFormState$chang13 === void 0 ? void 0 : _brandFormState$chang13.slug) !== null && _brandFormState$chang12 !== void 0 ? _brandFormState$chang12 : brand === null || brand === void 0 ? void 0 : brand.slug) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: handleChangeInput,
     disabled: brandFormState.loading,
     autoComplete: "off",
@@ -202,11 +219,50 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
         e.preventDefault();
       }
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.SaveBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('RIBBON', 'Ribbon')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (brand === null || brand === void 0 ? void 0 : (_brand$ribbon2 = brand.ribbon) === null || _brand$ribbon2 === void 0 ? void 0 : _brand$ribbon2.enabled) || false,
+    onChange: function onChange(val) {
+      return handleChangeRibbon({
+        enabled: val
+      });
+    }
+  })), (typeof (brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang14 = brandFormState.changes) === null || _brandFormState$chang14 === void 0 ? void 0 : (_brandFormState$chang15 = _brandFormState$chang14.ribbon) === null || _brandFormState$chang15 === void 0 ? void 0 : _brandFormState$chang15.enabled) !== 'undefined' ? brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang16 = brandFormState.changes) === null || _brandFormState$chang16 === void 0 ? void 0 : (_brandFormState$chang17 = _brandFormState$chang16.ribbon) === null || _brandFormState$chang17 === void 0 ? void 0 : _brandFormState$chang17.enabled : brand === null || brand === void 0 ? void 0 : (_brand$ribbon3 = brand.ribbon) === null || _brand$ribbon3 === void 0 ? void 0 : _brand$ribbon3.enabled) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEXT', 'Text')), /*#__PURE__*/_react.default.createElement("input", {
+    name: "text",
+    placeholder: t('TEXT', 'Text'),
+    value: (_brandFormState$chang18 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang19 = brandFormState.changes) === null || _brandFormState$chang19 === void 0 ? void 0 : (_brandFormState$chang20 = _brandFormState$chang19.ribbon) === null || _brandFormState$chang20 === void 0 ? void 0 : _brandFormState$chang20.text) !== null && _brandFormState$chang18 !== void 0 ? _brandFormState$chang18 : brand === null || brand === void 0 ? void 0 : (_brand$ribbon4 = brand.ribbon) === null || _brand$ribbon4 === void 0 ? void 0 : _brand$ribbon4.text,
+    onChange: function onChange(e) {
+      return handleChangeRibbon({
+        text: e.target.value
+      });
+    },
+    disabled: brandFormState.loading,
+    autoComplete: "off"
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ColorShapeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ColorWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('COLOR', 'Color')), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
+    defaultColor: (_brandFormState$chang21 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang22 = brandFormState.changes) === null || _brandFormState$chang22 === void 0 ? void 0 : (_brandFormState$chang23 = _brandFormState$chang22.ribbon) === null || _brandFormState$chang23 === void 0 ? void 0 : _brandFormState$chang23.color) !== null && _brandFormState$chang21 !== void 0 ? _brandFormState$chang21 : brand === null || brand === void 0 ? void 0 : (_brand$ribbon5 = brand.ribbon) === null || _brand$ribbon5 === void 0 ? void 0 : _brand$ribbon5.color,
+    onChangeColor: function onChangeColor(color) {
+      return handleChangeRibbon({
+        color: color
+      });
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ShapeWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHAPE', 'Shape')), /*#__PURE__*/_react.default.createElement(_styles2.ShapeContentWrapper, null, _utils.shape && Object.keys(_utils.shape).map(function (key, i) {
+    var _brandFormState$chang24, _brandFormState$chang25, _brandFormState$chang26, _brandFormState$chang27, _brand$ribbon6, _brandFormState$chang28, _brandFormState$chang29, _brandFormState$chang30, _brandFormState$chang31, _brand$ribbon7;
+
+    return /*#__PURE__*/_react.default.createElement(_styles2.ShapeBoxWrapper, {
+      key: i,
+      shapeRect: _utils.shape[key] === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
+      round: _utils.shape[key] === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape),
+      active: brandFormState !== null && brandFormState !== void 0 && (_brandFormState$chang24 = brandFormState.changes) !== null && _brandFormState$chang24 !== void 0 && (_brandFormState$chang25 = _brandFormState$chang24.ribbon) !== null && _brandFormState$chang25 !== void 0 && _brandFormState$chang25.shape ? (brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang26 = brandFormState.changes) === null || _brandFormState$chang26 === void 0 ? void 0 : (_brandFormState$chang27 = _brandFormState$chang26.ribbon) === null || _brandFormState$chang27 === void 0 ? void 0 : _brandFormState$chang27.shape) === _utils.shape[key] : (brand === null || brand === void 0 ? void 0 : (_brand$ribbon6 = brand.ribbon) === null || _brand$ribbon6 === void 0 ? void 0 : _brand$ribbon6.shape) === _utils.shape[key],
+      onClick: function onClick() {
+        return handleChangeRibbon({
+          shape: _utils.shape[key]
+        });
+      }
+    }, /*#__PURE__*/_react.default.createElement("div", null), (brandFormState !== null && brandFormState !== void 0 && (_brandFormState$chang28 = brandFormState.changes) !== null && _brandFormState$chang28 !== void 0 && (_brandFormState$chang29 = _brandFormState$chang28.ribbon) !== null && _brandFormState$chang29 !== void 0 && _brandFormState$chang29.shape ? (brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang30 = brandFormState.changes) === null || _brandFormState$chang30 === void 0 ? void 0 : (_brandFormState$chang31 = _brandFormState$chang30.ribbon) === null || _brandFormState$chang31 === void 0 ? void 0 : _brandFormState$chang31.shape) === _utils.shape[key] : (brand === null || brand === void 0 ? void 0 : (_brand$ribbon7 = brand.ribbon) === null || _brand$ribbon7 === void 0 ? void 0 : _brand$ribbon7.shape) === _utils.shape[key]) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
+  }))))), /*#__PURE__*/_react.default.createElement(_styles2.SaveBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "7.6px",
     color: "primary",
     disabled: brandFormState.loading,
-    onClick: handleUpdateClick
+    onClick: handleSubmit
   }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('BUSINESS_BRAND', 'Business Brand'),
     content: alertState.content,

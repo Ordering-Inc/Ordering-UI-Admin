@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SkeletonWrapper = exports.SaveBtnWrapper = exports.Label = exports.FormControl = exports.CameraIconContainer = exports.BrandLogo = exports.BrandGeneralDetail = void 0;
+exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SwitchWrapper = exports.SkeletonWrapper = exports.ShapeWrapper = exports.ShapeContentWrapper = exports.ShapeBoxWrapper = exports.SaveBtnWrapper = exports.Label = exports.FormControl = exports.ColorWrapper = exports.ColorShapeWrapper = exports.CameraIconContainer = exports.BrandLogo = exports.BrandGeneralDetail = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -68,6 +68,49 @@ var Label = _styledComponents.default.label(_templateObject14 || (_templateObjec
 
 exports.Label = Label;
 
-var SaveBtnWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  margin: 20px 0;\n  button {\n    padding: 6px 20px;\n  }\n"])));
+var SaveBtnWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  margin-top: 20px;\n  padding-bottom: 20px;\n  button {\n    padding: 6px 20px;\n  }\n"])));
 
 exports.SaveBtnWrapper = SaveBtnWrapper;
+
+var SwitchWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 30px;\n\n  > span {\n    font-size: 16px;\n    font-weight: 600;\n\n    ", "\n  }\n"])), function (props) {
+  var _props$theme2;
+
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      margin-left: 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      margin-right: 20px;\n    "])));
+});
+
+exports.SwitchWrapper = SwitchWrapper;
+
+var ColorShapeWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n  flex-wrap: wrap;\n"])));
+
+exports.ColorShapeWrapper = ColorShapeWrapper;
+
+var ColorWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-top: 5px;\n\n  > label {\n    font-weight: 400;\n    font-size: 14px;\n    margin-bottom: 7px;\n  }\n"])));
+
+exports.ColorWrapper = ColorWrapper;
+var ShapeWrapper = (0, _styledComponents.default)(ColorWrapper)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  > label {\n    font-weight: 400;\n    font-size: 14px;\n  }\n"])));
+exports.ShapeWrapper = ShapeWrapper;
+
+var ShapeContentWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+
+exports.ShapeContentWrapper = ShapeContentWrapper;
+
+var ShapeBoxWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  cursor: pointer;\n\n  > div {\n    width: 76px;\n    height: 36px;\n    border: 1px solid ", ";\n    margin-bottom: 15px;\n    transition: all 0.3s linear;\n  }\n\n  svg {\n    font-size: 16px;\n    color: ", ";\n    transition: all 0.3s linear;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (_ref4) {
+  var shapeRect = _ref4.shapeRect;
+  return shapeRect && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n     > div {\n       border-radius: 7.6px;\n     }\n    margin: 0px 20px;\n  "])));
+}, function (_ref5) {
+  var round = _ref5.round;
+  return round && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n     > div {\n       border-radius: 50px;\n     }\n  "])));
+}, function (_ref6) {
+  var active = _ref6.active;
+  return active && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    > div {\n      border: 1px solid ", ";\n    }\n\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.primary;
+  });
+});
+
+exports.ShapeBoxWrapper = ShapeBoxWrapper;

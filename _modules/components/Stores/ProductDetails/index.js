@@ -74,7 +74,8 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
       handleChangeInput = props.handleChangeInput,
       handleUpdateClick = props.handleUpdateClick,
       handleChangeFormState = props.handleChangeFormState,
-      handleSuccessUpdate = props.handleSuccessUpdate;
+      handleSuccessUpdate = props.handleSuccessUpdate,
+      handleChangeRibbon = props.handleChangeRibbon;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -184,6 +185,7 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     formState: formState,
     handlechangeImage: handlechangeImage,
     handleChangeFormState: handleChangeFormState,
+    handleChangeRibbon: handleChangeRibbon,
     handleChangeInput: handleChangeInput,
     handleUpdateClick: handleUpdateClick,
     isExtendExtraOpen: isExtendExtraOpen,

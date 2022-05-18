@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SwitchWrapper = exports.SkeletonWrapper = exports.PhoneWrapper = exports.LogoImage = exports.InputWrapper = exports.HeaderImage = exports.FormInput = exports.ActionsForm = void 0;
+exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SwitchWrapper = exports.SkeletonWrapper = exports.ShapeWrapper = exports.ShapeContentWrapper = exports.ShapeBoxWrapper = exports.RibbonSwitchWrapper = exports.PhoneWrapper = exports.LogoImage = exports.InputWrapper = exports.HeaderImage = exports.FormInput = exports.ColorWrapper = exports.ColorShapeWrapper = exports.ActionsForm = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -23,7 +23,7 @@ exports.FormInput = FormInput;
 
 var HeaderImage = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 150px;\n  position: relative;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  ", "\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n\n  @media (min-width: 768px) {\n    height: 180px;\n  }\n"])), function (_ref) {
   var isEdit = _ref.isEdit;
-  return !isEdit && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    pointer-event: none;\n  "])));
+  return !isEdit && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
 });
 
 exports.HeaderImage = HeaderImage;
@@ -76,3 +76,82 @@ exports.PhoneWrapper = PhoneWrapper;
 var SwitchWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  max-width: 120px;\n  width: 100%;\n  margin-bottom: 15px;\n  > span {\n    font-size: 14px;\n  }\n"])));
 
 exports.SwitchWrapper = SwitchWrapper;
+var RibbonSwitchWrapper = (0, _styledComponents.default)(SwitchWrapper)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  padding-top: 15px;\n  margin-bottom: 0px;\n  > span {\n    font-weight: 600;\n  }\n"])));
+exports.RibbonSwitchWrapper = RibbonSwitchWrapper;
+
+var ColorShapeWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n  flex-wrap: wrap;\n"])));
+
+exports.ColorShapeWrapper = ColorShapeWrapper;
+
+var ColorWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin-top: 24px;\n\n  > label {\n    font-weight: 400;\n    font-size: 14px;\n    margin-bottom: 7px;\n  }\n"])));
+
+exports.ColorWrapper = ColorWrapper;
+var ShapeWrapper = (0, _styledComponents.default)(ColorWrapper)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  > label {\n    font-weight: 400;\n    font-size: 14px;\n  }\n"])));
+exports.ShapeWrapper = ShapeWrapper;
+
+var ShapeContentWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+
+exports.ShapeContentWrapper = ShapeContentWrapper;
+
+var ShapeBoxWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  cursor: pointer;\n\n  > div {\n    width: 76px;\n    height: 36px;\n    border: 1px solid ", ";\n    margin-bottom: 15px;\n    transition: all 0.3s linear;\n  }\n\n  svg {\n    font-size: 16px;\n    color: ", ";\n    transition: all 0.3s linear;\n  }\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (_ref5) {
+  var shapeRect = _ref5.shapeRect;
+  return shapeRect && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n     > div {\n       border-radius: 7.6px;\n     }\n    margin: 0px 20px;\n  "])));
+}, function (_ref6) {
+  var round = _ref6.round;
+  return round && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n     > div {\n       border-radius: 50px;\n     }\n  "])));
+}, function (_ref7) {
+  var active = _ref7.active;
+  return active && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    > div {\n      border: 1px solid ", ";\n    }\n\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
+    return props.theme.colors.primary;
+  });
+}); // export const PriceFilterWrapper = styled.div`
+//   > label {
+//     font-weight: 600;
+//     font-size: 16px;
+//     line-height: 24px;
+//     margin-bottom: 0px;
+//   }
+// `
+// export const PriceFilterListWrapper = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   width: calc(100% + 20px);
+//   margin-left: -10px;
+//   > div {
+//     width: calc(20% - 20px);
+//     margin: 10px;
+//   }
+// `
+// export const PriceFilterItem = styled.div`
+//   display: flex;
+//   align-items: center;
+//   svg {
+//     font-size: 16px;
+//     color: ${props => props.theme.colors.secundaryLight};
+//     transition: all 0.3s linear;
+//     min-width: 16px;
+//   }
+//   span {
+//     font-weight: 400;
+//     font-size: 14px;
+//     margin-left: 8px;
+//     ${props => props.theme.rtl && css`
+//       margin-right: 8px;
+//       margin-left: 0px;
+//     `}
+//   }
+//   ${({ active }) => active && css`
+//     svg {
+//       color: ${props => props.theme.colors.primary};
+//     }
+//   `}
+// `
+
+
+exports.ShapeBoxWrapper = ShapeBoxWrapper;
