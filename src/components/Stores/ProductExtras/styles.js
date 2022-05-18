@@ -51,6 +51,18 @@ export const ExtraOption = styled.div`
     border-bottom: 1px solid ${props => props.theme.colors.primary};
     background: ${props => props.theme.colors.lightPrimary};
   `}
+
+  ${({ isDragOver }) => isDragOver && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
+  `}
+
+  ${({ isBorderBottom }) => isBorderBottom && css`
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+  `}
+
+  &:hover {
+    background: ${props => props.theme.colors.lightPrimary};
+  }
 `
 
 export const CheckboxContainer = styled.div`
@@ -117,6 +129,18 @@ export const ExtraAddForm = styled.form`
     }
     &:-ms-input-placeholder {
       color: #B1BCCC;
+    }
+  }
+`
+export const DragImageWrapper = styled.div`
+  img {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
+    &:hover {
+      cursor: grab;
     }
   }
 `

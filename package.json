@@ -89,6 +89,7 @@
     "react-bootstrap": "^1.6.0",
     "react-bootstrap-icons": "^1.5.0",
     "react-chartjs-2": "^3.0.4",
+    "react-color": "^2.19.3",
     "react-date-range": "^1.4.0",
     "react-datepicker": "^3.7.0",
     "react-helmet": "^6.1.0",
