@@ -16,7 +16,7 @@ export const HeaderImage = styled.div`
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
 
   ${({ isEdit }) => !isEdit && css`
-    pointer-event: none;
+    pointer-events: none;
   `}
 
   img,
@@ -171,3 +171,133 @@ export const SwitchWrapper = styled.div`
     font-size: 14px;
   }
 `
+
+export const RibbonSwitchWrapper = styled(SwitchWrapper)`
+  padding-top: 15px;
+  margin-bottom: 0px;
+  > span {
+    font-weight: 600;
+  }
+`
+
+export const ColorShapeWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`
+
+export const ColorWrapper = styled.div`
+  margin-top: 24px;
+
+  > label {
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 7px;
+  }
+`
+
+export const ShapeWrapper = styled(ColorWrapper)`
+  > label {
+    font-weight: 400;
+    font-size: 14px;
+  }
+`
+
+export const ShapeContentWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const ShapeBoxWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+
+  > div {
+    width: 76px;
+    height: 36px;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    margin-bottom: 15px;
+    transition: all 0.3s linear;
+  }
+
+  svg {
+    font-size: 16px;
+    color: ${props => props.theme.colors.secundaryLight};
+    transition: all 0.3s linear;
+  }
+
+  ${({ shapeRect }) => shapeRect && css`
+     > div {
+       border-radius: 7.6px;
+     }
+    margin: 0px 20px;
+  `}
+
+  ${({ round }) => round && css`
+     > div {
+       border-radius: 50px;
+     }
+  `}
+
+  ${({ active }) => active && css`
+    > div {
+      border: 1px solid ${props => props.theme.colors.primary};
+    }
+
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
+  `}
+`
+
+// export const PriceFilterWrapper = styled.div`
+//   > label {
+//     font-weight: 600;
+//     font-size: 16px;
+//     line-height: 24px;
+//     margin-bottom: 0px;
+//   }
+// `
+
+// export const PriceFilterListWrapper = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   width: calc(100% + 20px);
+//   margin-left: -10px;
+
+//   > div {
+//     width: calc(20% - 20px);
+//     margin: 10px;
+//   }
+// `
+
+// export const PriceFilterItem = styled.div`
+//   display: flex;
+//   align-items: center;
+
+//   svg {
+//     font-size: 16px;
+//     color: ${props => props.theme.colors.secundaryLight};
+//     transition: all 0.3s linear;
+//     min-width: 16px;
+//   }
+
+//   span {
+//     font-weight: 400;
+//     font-size: 14px;
+//     margin-left: 8px;
+//     ${props => props.theme.rtl && css`
+//       margin-right: 8px;
+//       margin-left: 0px;
+//     `}
+//   }
+
+//   ${({ active }) => active && css`
+//     svg {
+//       color: ${props => props.theme.colors.primary};
+//     }
+//   `}
+// `

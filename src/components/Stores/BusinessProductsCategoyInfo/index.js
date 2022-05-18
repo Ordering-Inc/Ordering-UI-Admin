@@ -6,8 +6,9 @@ import {
   useConfig
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { bytesConverter } from '../../../utils'
-import { Alert, Confirm, Modal, ImageCrop } from '../../Shared'
+import { bytesConverter, shape } from '../../../utils'
+import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
+import { Alert, Confirm, Modal, ImageCrop, ColorPicker } from '../../Shared'
 import { Button, DefaultSelect, Input, Switch, TextArea } from '../../../styles'
 // import FiCamera from '@meronex/icons/fi/FiCamera'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -24,7 +25,14 @@ import {
   SkipButton,
   HeaderImage,
   LogoImage,
-  SkeletonImgWrapper
+  SkeletonImgWrapper,
+  SwitchWrapper,
+  ColorShapeWrapper,
+  ColorWrapper,
+  ShapeWrapper,
+  ShapeContentWrapper,
+  ShapeBoxWrapper,
+  RibbonTextWrapper
 } from './styles'
 
 export const BusinessProductsCategoyInfo = (props) => {
@@ -40,7 +48,8 @@ export const BusinessProductsCategoyInfo = (props) => {
     handleChangeItem,
     isAddMode,
     isTutorialMode,
-    handleTutorialSkip
+    handleTutorialSkip,
+    handleChangeRibbon
   } = props
 
   const [, t] = useLanguage()
@@ -97,6 +106,20 @@ export const BusinessProductsCategoyInfo = (props) => {
 
       handlechangeImage(files[0], name)
     }
+  }
+
+  const onSubmit = () => {
+    if ((typeof (formState?.changes?.ribbon?.enabled) !== 'undefined') && formState?.changes?.ribbon?.text === '') {
+      setAlertState({
+        open: true,
+        content: t(
+          'VALIDATION_ERROR_REQUIRED',
+          'The Ribbon text field is required'
+        ).replace('_attribute_', t('Ribbon_Text', 'Ribbon text'))
+      })
+      return
+    }
+    handleUpdateClick && handleUpdateClick()
   }
 
   const closeAlert = () => {
@@ -284,6 +307,56 @@ export const BusinessProductsCategoyInfo = (props) => {
           </Button>
         </GenerateButtonWrapper>
       </CategoryNameWrapper>
+      <SwitchWrapper>
+        <span>{t('RIBBON', 'Ribbon')}</span>
+        <Switch
+          defaultChecked={formState?.changes?.ribbon?.enabled || false}
+          onChange={val => handleChangeRibbon({ enabled: val })}
+        />
+      </SwitchWrapper>
+      {formState?.changes?.ribbon?.enabled && (
+        <>
+          <RibbonTextWrapper>
+            <label>{t('TEXT', 'Text')}</label>
+            <Input
+              name='text'
+              placeholder={t('TEXT', 'Text')}
+              defaultValue={formState?.changes?.ribbon?.text}
+              onChange={(e) => handleChangeRibbon({ text: e.target.value })}
+              disabled={formState.loading}
+              autoComplete='off'
+            />
+          </RibbonTextWrapper>
+          <ColorShapeWrapper>
+            <ColorWrapper>
+              <label>{t('COLOR', 'Color')}</label>
+              <ColorPicker
+                defaultColor={formState?.changes?.ribbon?.color}
+                onChangeColor={(color) => handleChangeRibbon({ color })}
+              />
+            </ColorWrapper>
+            <ShapeWrapper>
+              <label>{t('SHAPE', 'Shape')}</label>
+              <ShapeContentWrapper>
+                {shape && Object.keys(shape).map((key, i) => (
+                  <ShapeBoxWrapper
+                    key={i}
+                    shapeRect={shape[key] === shape?.rectangleRound}
+                    round={shape[key] === shape?.capsuleShape}
+                    active={formState?.changes?.ribbon?.shape === shape[key]}
+                    onClick={() => handleChangeRibbon({ shape: shape[key] })}
+                  >
+                    <div />
+                    {(formState?.changes?.ribbon?.shape === shape[key])
+                      ? <RecordCircleFill />
+                      : <Circle />}
+                  </ShapeBoxWrapper>
+                ))}
+              </ShapeContentWrapper>
+            </ShapeWrapper>
+          </ColorShapeWrapper>
+        </>
+      )}
       {useParentCategory === '1' && (
         <>
           {categorySelected && isAddMode && (
@@ -320,7 +393,7 @@ export const BusinessProductsCategoyInfo = (props) => {
             <Button
               borderRadius='8px'
               color='primary'
-              onClick={handleUpdateClick}
+              onClick={onSubmit}
             >
               {t('SAVE_AND_CONTINUE', 'Save and continue')}
             </Button>
@@ -329,7 +402,7 @@ export const BusinessProductsCategoyInfo = (props) => {
           <Button
             borderRadius='8px'
             color='primary'
-            onClick={handleUpdateClick}
+            onClick={onSubmit}
           >
             {category ? t('SAVE', 'Save') : t('ADD', 'Add')}
           </Button>
