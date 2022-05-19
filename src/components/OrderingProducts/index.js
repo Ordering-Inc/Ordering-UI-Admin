@@ -1,5 +1,7 @@
 import { OrderingProductsListing } from './OrderingProductsListing'
+import { OrderingProductDetails } from './OrderingProductDetails'
 
 export {
-  OrderingProductsListing
+  OrderingProductsListing,
+  OrderingProductDetails
 }
