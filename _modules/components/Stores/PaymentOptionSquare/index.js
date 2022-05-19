@@ -68,7 +68,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
-  var _businessPaymethod$pa2, _sitesState$sites, _ref2, _squareData$data$appl, _squareData$data, _businessPaymethod$da, _ref3, _squareData$data$loca, _squareData$data2, _businessPaymethod$da2, _ref4, _squareData$data$clie, _squareData$data3, _businessPaymethod$da3, _ref5, _squareData$data_sand, _squareData$data_sand2, _businessPaymethod$da4, _ref6, _squareData$data_sand3, _squareData$data_sand4, _businessPaymethod$da5, _ref7, _squareData$data_sand5, _squareData$data_sand6, _businessPaymethod$da6, _sitesState$sites2;
+  var _businessPaymethod$pa2, _sitesState$sites, _ref2, _squareData$sandbox, _ref3, _squareData$data$appl, _squareData$data, _businessPaymethod$da, _ref4, _squareData$data$loca, _squareData$data2, _businessPaymethod$da2, _ref5, _squareData$data$clie, _squareData$data3, _businessPaymethod$da3, _ref6, _squareData$data_sand, _squareData$data_sand2, _businessPaymethod$da4, _ref7, _squareData$data_sand3, _squareData$data_sand4, _businessPaymethod$da5, _ref8, _squareData$data_sand5, _squareData$data_sand6, _businessPaymethod$da6, _sitesState$sites2;
 
   var open = props.open,
       onClose = props.onClose,
@@ -84,7 +84,8 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
       squareData = props.squareData,
       handleSavePaymethod = props.handleSavePaymethod,
       handleChangeDataInput = props.handleChangeDataInput,
-      handleChangeSanboxDataInput = props.handleChangeSanboxDataInput;
+      handleChangeSanboxDataInput = props.handleChangeSanboxDataInput,
+      handleChangeSandbox = props.handleChangeSandbox;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -101,17 +102,25 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
 
   var _useState3 = (0, _react.useState)({
     open: false,
+    content: []
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
+
+  var _useState5 = (0, _react.useState)({
+    open: false,
     content: null,
     handleOnAccept: null
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      confirm = _useState4[0],
-      setConfirm = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
-      paymentTabs = _useState6[0],
-      setPaymentTabs = _useState6[1];
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(0),
+      _useState8 = _slicedToArray(_useState7, 2),
+      paymentTabs = _useState8[0],
+      setPaymentTabs = _useState8[1];
 
   var actionSidebar = function actionSidebar(value) {
     if (!value) {
@@ -163,6 +172,13 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     if (!open) return;
     actionSidebar(true);
   }, [open]);
+  (0, _react.useEffect)(function () {
+    if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
+    setAlertState({
+      open: true,
+      content: actionState === null || actionState === void 0 ? void 0 : actionState.error
+    });
+  }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
   return /*#__PURE__*/_react.default.createElement(_styles4.Container, {
     id: "payment_method_square"
   }, /*#__PURE__*/_react.default.createElement(_styles4.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa2 = businessPaymethod.paymethod) === null || _businessPaymethod$pa2 === void 0 ? void 0 : _businessPaymethod$pa2.name), /*#__PURE__*/_react.default.createElement(_styles4.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
@@ -198,35 +214,40 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     color: "primary",
     onClick: handleConnectSquare,
     disabled: squareUrlState.loading
-  }, /*#__PURE__*/_react.default.createElement(_SiSquare.default, null), t('CONNECT_WITH_SQUARE', 'Connect with Square'))), /*#__PURE__*/_react.default.createElement(_styles4.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('APPLICATION_ID', 'Application Id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_SiSquare.default, null), t('CONNECT_WITH_SQUARE', 'Connect with Square'))), /*#__PURE__*/_react.default.createElement(_styles4.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles4.SandboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    defaultChecked: (_ref2 = (_squareData$sandbox = squareData === null || squareData === void 0 ? void 0 : squareData.sandbox) !== null && _squareData$sandbox !== void 0 ? _squareData$sandbox : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox) !== null && _ref2 !== void 0 ? _ref2 : false,
+    onChange: function onChange(e) {
+      return handleChangeSandbox(e.target.checked);
+    }
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('SANDBOX', 'Sandbox'))), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('APPLICATION_ID', 'Application Id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "application_id",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref2 = (_squareData$data$appl = squareData === null || squareData === void 0 ? void 0 : (_squareData$data = squareData.data) === null || _squareData$data === void 0 ? void 0 : _squareData$data.application_id) !== null && _squareData$data$appl !== void 0 ? _squareData$data$appl : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.application_id) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref3 = (_squareData$data$appl = squareData === null || squareData === void 0 ? void 0 : (_squareData$data = squareData.data) === null || _squareData$data === void 0 ? void 0 : _squareData$data.application_id) !== null && _squareData$data$appl !== void 0 ? _squareData$data$appl : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.application_id) !== null && _ref3 !== void 0 ? _ref3 : '',
     onChange: handleChangeDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('LOCATION_ID', 'Location Id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "location_id",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref3 = (_squareData$data$loca = squareData === null || squareData === void 0 ? void 0 : (_squareData$data2 = squareData.data) === null || _squareData$data2 === void 0 ? void 0 : _squareData$data2.location_id) !== null && _squareData$data$loca !== void 0 ? _squareData$data$loca : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.location_id) !== null && _ref3 !== void 0 ? _ref3 : '',
+    value: (_ref4 = (_squareData$data$loca = squareData === null || squareData === void 0 ? void 0 : (_squareData$data2 = squareData.data) === null || _squareData$data2 === void 0 ? void 0 : _squareData$data2.location_id) !== null && _squareData$data$loca !== void 0 ? _squareData$data$loca : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.location_id) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: handleChangeDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('CLIENT_SECRET', 'Client secret')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "client_secret",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref4 = (_squareData$data$clie = squareData === null || squareData === void 0 ? void 0 : (_squareData$data3 = squareData.data) === null || _squareData$data3 === void 0 ? void 0 : _squareData$data3.client_secret) !== null && _squareData$data$clie !== void 0 ? _squareData$data$clie : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da3 = businessPaymethod.data) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.client_secret) !== null && _ref4 !== void 0 ? _ref4 : '',
+    value: (_ref5 = (_squareData$data$clie = squareData === null || squareData === void 0 ? void 0 : (_squareData$data3 = squareData.data) === null || _squareData$data3 === void 0 ? void 0 : _squareData$data3.client_secret) !== null && _squareData$data$clie !== void 0 ? _squareData$data$clie : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da3 = businessPaymethod.data) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.client_secret) !== null && _ref5 !== void 0 ? _ref5 : '',
     onChange: handleChangeDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('APPLICATION_ID', 'Application Id'), " (", t('SANDBOX', 'Sandbox'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "application_id",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref5 = (_squareData$data_sand = squareData === null || squareData === void 0 ? void 0 : (_squareData$data_sand2 = squareData.data_sandbox) === null || _squareData$data_sand2 === void 0 ? void 0 : _squareData$data_sand2.application_id) !== null && _squareData$data_sand !== void 0 ? _squareData$data_sand : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.application_id) !== null && _ref5 !== void 0 ? _ref5 : '',
+    value: (_ref6 = (_squareData$data_sand = squareData === null || squareData === void 0 ? void 0 : (_squareData$data_sand2 = squareData.data_sandbox) === null || _squareData$data_sand2 === void 0 ? void 0 : _squareData$data_sand2.application_id) !== null && _squareData$data_sand !== void 0 ? _squareData$data_sand : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.application_id) !== null && _ref6 !== void 0 ? _ref6 : '',
     onChange: handleChangeSanboxDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('LOCATION_ID', 'Location Id'), " (", t('SANDBOX', 'Sandbox'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "location_id",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref6 = (_squareData$data_sand3 = squareData === null || squareData === void 0 ? void 0 : (_squareData$data_sand4 = squareData.data_sandbox) === null || _squareData$data_sand4 === void 0 ? void 0 : _squareData$data_sand4.location_id) !== null && _squareData$data_sand3 !== void 0 ? _squareData$data_sand3 : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da5 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da5 === void 0 ? void 0 : _businessPaymethod$da5.location_id) !== null && _ref6 !== void 0 ? _ref6 : '',
+    value: (_ref7 = (_squareData$data_sand3 = squareData === null || squareData === void 0 ? void 0 : (_squareData$data_sand4 = squareData.data_sandbox) === null || _squareData$data_sand4 === void 0 ? void 0 : _squareData$data_sand4.location_id) !== null && _squareData$data_sand3 !== void 0 ? _squareData$data_sand3 : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da5 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da5 === void 0 ? void 0 : _businessPaymethod$da5.location_id) !== null && _ref7 !== void 0 ? _ref7 : '',
     onChange: handleChangeSanboxDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('CLIENT_SECRET', 'Client secret'), " (", t('SANDBOX', 'Sandbox'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "client_secret",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref7 = (_squareData$data_sand5 = squareData === null || squareData === void 0 ? void 0 : (_squareData$data_sand6 = squareData.data_sandbox) === null || _squareData$data_sand6 === void 0 ? void 0 : _squareData$data_sand6.client_secret) !== null && _squareData$data_sand5 !== void 0 ? _squareData$data_sand5 : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da6 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da6 === void 0 ? void 0 : _businessPaymethod$da6.client_secret) !== null && _ref7 !== void 0 ? _ref7 : '',
+    value: (_ref8 = (_squareData$data_sand5 = squareData === null || squareData === void 0 ? void 0 : (_squareData$data_sand6 = squareData.data_sandbox) === null || _squareData$data_sand6 === void 0 ? void 0 : _squareData$data_sand6.client_secret) !== null && _squareData$data_sand5 !== void 0 ? _squareData$data_sand5 : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da6 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da6 === void 0 ? void 0 : _businessPaymethod$da6.client_secret) !== null && _ref8 !== void 0 ? _ref8 : '',
     onChange: handleChangeSanboxDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
@@ -235,7 +256,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
       return handleSavePaymethod(businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.id);
     }
   }, t('SAVE', 'Save')))), paymentTabs === 1 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 && (sitesState === null || sitesState === void 0 ? void 0 : sitesState.sites.map(function (site) {
-    var _ref8, _changesState$sites, _businessPaymethod$si;
+    var _ref9, _changesState$sites, _businessPaymethod$si;
 
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: site.id,
@@ -245,13 +266,13 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
           value: site.id
         });
       }
-    }, (_ref8 = (_changesState$sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites) !== null && _changesState$sites !== void 0 ? _changesState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
+    }, (_ref9 = (_changesState$sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites) !== null && _changesState$sites !== void 0 ? _changesState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
       return s.id;
-    })) !== null && _ref8 !== void 0 && _ref8.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+    })) !== null && _ref9 !== void 0 && _ref9.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, site.name));
   })), paymentTabs === 2 && orderTypes.map(function (type) {
-    var _ref9, _changesState$allowed;
+    var _ref10, _changesState$allowed;
 
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: type.value,
@@ -261,7 +282,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
           value: type.value
         });
       }
-    }, (_ref9 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref9 !== void 0 && _ref9.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+    }, (_ref10 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref10 !== void 0 && _ref10.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, type.text));
   }), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
@@ -281,6 +302,24 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
       }));
     },
     onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
     closeOnBackdrop: false
   }));
 };

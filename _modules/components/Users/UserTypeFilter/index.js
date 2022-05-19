@@ -74,7 +74,7 @@ var UserTypeFilter = function UserTypeFilter(props) {
     userTypes: props.userTypes || [{
       id: 1,
       title: t('ALL', 'All'),
-      value: [0, 2]
+      value: [0, 2, 9]
     }, {
       id: 2,
       title: t('BUSINESS_OWNER', 'Business owner'),
@@ -83,8 +83,12 @@ var UserTypeFilter = function UserTypeFilter(props) {
       id: 3,
       title: t('ADMINISTRATORS', 'Administrators'),
       value: [0]
+    }, {
+      id: 4,
+      title: t('CALL_CENTER_AGENT', 'Call center agent'),
+      value: [9]
     }],
-    defaultUserTypes: props.defaultUserTypes || [0, 2],
+    defaultUserTypes: props.defaultUserTypes || [0, 2, 9],
     onChangeUserType: props.handleChangeUserType
   });
 

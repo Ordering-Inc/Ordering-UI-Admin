@@ -3,10 +3,22 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+Object.defineProperty(exports, "AnalyticsAvailableTimes", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsAvailableTimes.AnalyticsAvailableTimes;
+  }
+});
 Object.defineProperty(exports, "AnalyticsBusinessFilter", {
   enumerable: true,
   get: function get() {
     return _AnalyticsBusinessFilter.AnalyticsBusinessFilter;
+  }
+});
+Object.defineProperty(exports, "AnalyticsBusyTimes", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsBusyTimes.AnalyticsBusyTimes;
   }
 });
 Object.defineProperty(exports, "AnalyticsCalendar", {
@@ -15,10 +27,100 @@ Object.defineProperty(exports, "AnalyticsCalendar", {
     return _AnalyticsCalendar.AnalyticsCalendar;
   }
 });
+Object.defineProperty(exports, "AnalyticsCustomerSatisfaction", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsCustomerSatisfaction.AnalyticsCustomerSatisfaction;
+  }
+});
+Object.defineProperty(exports, "AnalyticsDriversFilter", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsDriversFilter.AnalyticsDriversFilter;
+  }
+});
+Object.defineProperty(exports, "AnalyticsFilterTimeZone", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsFilterTimeZone.AnalyticsFilterTimeZone;
+  }
+});
+Object.defineProperty(exports, "AnalyticsMap", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsMap.AnalyticsMap;
+  }
+});
+Object.defineProperty(exports, "AnalyticsOrdersAcceptSpend", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsOrdersAcceptSpend.AnalyticsOrdersAcceptSpend;
+  }
+});
+Object.defineProperty(exports, "AnalyticsOrdersOrSales", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsOrdersOrSales.AnalyticsOrdersOrSales;
+  }
+});
+Object.defineProperty(exports, "AnalyticsOrdersStatus", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsOrdersStatus.AnalyticsOrdersStatus;
+  }
+});
+Object.defineProperty(exports, "AnalyticsProductCategories", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsProductCategories.AnalyticsProductCategories;
+  }
+});
+Object.defineProperty(exports, "AnalyticsRegisterUsers", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsRegisterUsers.AnalyticsRegisterUsers;
+  }
+});
+Object.defineProperty(exports, "AnalyticsSpendList", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsSpendList.AnalyticsSpendList;
+  }
+});
+Object.defineProperty(exports, "AnalyticsSpendTimes", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsSpendTimes.AnalyticsSpendTimes;
+  }
+});
+Object.defineProperty(exports, "AnalyticsStatusFilterBar", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsStatusFilterBar.AnalyticsStatusFilterBar;
+  }
+});
+Object.defineProperty(exports, "AnalyticsStatusSubFilter", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsStatusSubFilter.AnalyticsStatusSubFilter;
+  }
+});
+Object.defineProperty(exports, "AnalyticsTopOrders", {
+  enumerable: true,
+  get: function get() {
+    return _AnalyticsTopOrders.AnalyticsTopOrders;
+  }
+});
 Object.defineProperty(exports, "BusinessAnalytics", {
   enumerable: true,
   get: function get() {
     return _BusinessAnalytics.BusinessAnalytics;
+  }
+});
+Object.defineProperty(exports, "BusinessReviewList", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessReviewList.BusinessReviewList;
   }
 });
 Object.defineProperty(exports, "DriverAnalytics", {
@@ -27,10 +129,22 @@ Object.defineProperty(exports, "DriverAnalytics", {
     return _DriverAnalytics.DriverAnalytics;
   }
 });
+Object.defineProperty(exports, "InvoiceDetails", {
+  enumerable: true,
+  get: function get() {
+    return _InvoiceDetails.InvoiceDetails;
+  }
+});
 Object.defineProperty(exports, "InvoiceManager", {
   enumerable: true,
   get: function get() {
     return _InvoiceManager.InvoiceManager;
+  }
+});
+Object.defineProperty(exports, "ProductReviewDetails", {
+  enumerable: true,
+  get: function get() {
+    return _ProductReviewDetails.ProductReviewDetails;
   }
 });
 Object.defineProperty(exports, "Reports", {
@@ -39,10 +153,22 @@ Object.defineProperty(exports, "Reports", {
     return _Reports.Reports;
   }
 });
+Object.defineProperty(exports, "ReportsAppIdFilter", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsAppIdFilter.ReportsAppIdFilter;
+  }
+});
 Object.defineProperty(exports, "ReportsAverageSales", {
   enumerable: true,
   get: function get() {
     return _ReportsAverageSales.ReportsAverageSales;
+  }
+});
+Object.defineProperty(exports, "ReportsBrandFilter", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsBrandFilter.ReportsBrandFilter;
   }
 });
 Object.defineProperty(exports, "ReportsBusinessDistance", {
@@ -111,6 +237,12 @@ Object.defineProperty(exports, "ReportsGeneralSales", {
     return _ReportsGeneralSales.ReportsGeneralSales;
   }
 });
+Object.defineProperty(exports, "ReportsHeatMap", {
+  enumerable: true,
+  get: function get() {
+    return _ReportsHeatMap.ReportsHeatMap;
+  }
+});
 Object.defineProperty(exports, "ReportsOrderDistance", {
   enumerable: true,
   get: function get() {
@@ -177,6 +309,12 @@ Object.defineProperty(exports, "ReviewsListing", {
     return _ReviewsListing.ReviewsListing;
   }
 });
+Object.defineProperty(exports, "UsersReviewList", {
+  enumerable: true,
+  get: function get() {
+    return _UsersReviewList.UsersReviewList;
+  }
+});
 
 var _BusinessAnalytics = require("./BusinessAnalytics");
 
@@ -235,3 +373,49 @@ var _ReportsBusinessSpend = require("./ReportsBusinessSpend");
 var _ReportsOrderDistance = require("./ReportsOrderDistance");
 
 var _ReportsBusinessDistance = require("./ReportsBusinessDistance");
+
+var _AnalyticsStatusFilterBar = require("./AnalyticsStatusFilterBar");
+
+var _AnalyticsStatusSubFilter = require("./AnalyticsStatusSubFilter");
+
+var _AnalyticsMap = require("./AnalyticsMap");
+
+var _AnalyticsOrdersOrSales = require("./AnalyticsOrdersOrSales");
+
+var _AnalyticsProductCategories = require("./AnalyticsProductCategories");
+
+var _AnalyticsOrdersStatus = require("./AnalyticsOrdersStatus");
+
+var _AnalyticsRegisterUsers = require("./AnalyticsRegisterUsers");
+
+var _AnalyticsCustomerSatisfaction = require("./AnalyticsCustomerSatisfaction");
+
+var _AnalyticsOrdersAcceptSpend = require("./AnalyticsOrdersAcceptSpend");
+
+var _AnalyticsSpendList = require("./AnalyticsSpendList");
+
+var _ReportsBrandFilter = require("./ReportsBrandFilter");
+
+var _AnalyticsDriversFilter = require("./AnalyticsDriversFilter");
+
+var _AnalyticsFilterTimeZone = require("./AnalyticsFilterTimeZone");
+
+var _AnalyticsTopOrders = require("./AnalyticsTopOrders");
+
+var _AnalyticsSpendTimes = require("./AnalyticsSpendTimes");
+
+var _AnalyticsAvailableTimes = require("./AnalyticsAvailableTimes");
+
+var _AnalyticsBusyTimes = require("./AnalyticsBusyTimes");
+
+var _InvoiceDetails = require("./InvoiceDetails");
+
+var _ReportsHeatMap = require("./ReportsHeatMap");
+
+var _BusinessReviewList = require("./BusinessReviewList");
+
+var _UsersReviewList = require("./UsersReviewList");
+
+var _ProductReviewDetails = require("./ProductReviewDetails");
+
+var _ReportsAppIdFilter = require("./ReportsAppIdFilter");

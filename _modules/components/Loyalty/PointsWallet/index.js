@@ -85,7 +85,8 @@ var PointsWallet = function PointsWallet(props) {
       display: selectedOption === 'business' ? 'block' : 'none'
     }
   }, /*#__PURE__*/_react.default.createElement(_PointsWalletBusinessList.PointsWalletBusinessList, _extends({}, props, {
-    setSelectedBusinessList: setSelectedBusinessList
+    setSelectedBusinessList: setSelectedBusinessList,
+    isCloseBusinessDetails: selectedOption !== 'business'
   }))));
 };
 
