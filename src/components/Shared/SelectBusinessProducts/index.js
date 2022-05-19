@@ -51,7 +51,7 @@ const CategoryTreeNode = (props) => {
 
   const isCheckedCategory = () => {
     if (category?.products) {
-      const productsIds = category.products?.reduce((ids, product) => [...ids, product.id], [])
+      const productsIds = category.products?.filter(product => product?.enabled).reduce((ids, product) => [...ids, product.id], [])
       return productsIds.every(id => !!selectedProductsIds[id] && selectedProductsIds[id].include === include)
     } else {
       return false
@@ -69,7 +69,7 @@ const CategoryTreeNode = (props) => {
   }
 
   const handleChangeSelectCategory = (include) => {
-    const productsIds = category.products?.reduce((ids, product) => [...ids, product.id], [])
+    const productsIds = category.products?.filter(product => product?.enabled).reduce((ids, product) => [...ids, product.id], [])
     const everyContain = productsIds.every(id => !!selectedProductsIds[id] && selectedProductsIds[id].include === include)
     let _selectedProductsIds = {}
     _selectedProductsIds = {
@@ -118,7 +118,7 @@ const CategoryTreeNode = (props) => {
               maxHeight: !setActive && '0px'
             }}
           >
-            {category?.products.map(product => (
+            {category?.products.filter(product => product?.enabled).map(product => (
               <AccordionItem
                 key={product.id}
                 margin={20 * (index + 1)}
@@ -207,7 +207,7 @@ const SelectBusinessProductsUI = (props) => {
           ))}
         </>
       ) : (
-        businessState.business?.categories.sort((a, b) => a.rank - b.rank).map(category => (
+        businessState.business?.categories?.filter(category => category?.enabled).sort((a, b) => a.rank - b.rank).map(category => (
           <CategoryTreeNode
             subCategoriesList={subCategoriesList}
             key={category.id}
