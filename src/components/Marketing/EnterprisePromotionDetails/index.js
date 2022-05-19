@@ -61,9 +61,7 @@ const EnterprisePromotionDetailsUI = (props) => {
     setMoveDistance(0)
     setSelectedOption(option)
     if (formState.changes?.businesses?.length > 0 && Object.keys(formState.changes).length !== 0 && !actionState.loading) {
-      if (isAddMode) {
-        handleAddPromotion(true)
-      } else {
+      if (!isAddMode) {
         handleUpdateClick()
       }
     }

@@ -27,6 +27,29 @@ import { ReportsDriverOrderTime } from './ReportsDriverOrderTime'
 import { ReportsBusinessSpend } from './ReportsBusinessSpend'
 import { ReportsOrderDistance } from './ReportsOrderDistance'
 import { ReportsBusinessDistance } from './ReportsBusinessDistance'
+import { AnalyticsStatusFilterBar } from './AnalyticsStatusFilterBar'
+import { AnalyticsStatusSubFilter } from './AnalyticsStatusSubFilter'
+import { AnalyticsMap } from './AnalyticsMap'
+import { AnalyticsOrdersOrSales } from './AnalyticsOrdersOrSales'
+import { AnalyticsProductCategories } from './AnalyticsProductCategories'
+import { AnalyticsOrdersStatus } from './AnalyticsOrdersStatus'
+import { AnalyticsRegisterUsers } from './AnalyticsRegisterUsers'
+import { AnalyticsCustomerSatisfaction } from './AnalyticsCustomerSatisfaction'
+import { AnalyticsOrdersAcceptSpend } from './AnalyticsOrdersAcceptSpend'
+import { AnalyticsSpendList } from './AnalyticsSpendList'
+import { ReportsBrandFilter } from './ReportsBrandFilter'
+import { AnalyticsDriversFilter } from './AnalyticsDriversFilter'
+import { AnalyticsFilterTimeZone } from './AnalyticsFilterTimeZone'
+import { AnalyticsTopOrders } from './AnalyticsTopOrders'
+import { AnalyticsSpendTimes } from './AnalyticsSpendTimes'
+import { AnalyticsAvailableTimes } from './AnalyticsAvailableTimes'
+import { AnalyticsBusyTimes } from './AnalyticsBusyTimes'
+import { InvoiceDetails } from './InvoiceDetails'
+import { ReportsHeatMap } from './ReportsHeatMap'
+import { BusinessReviewList } from './BusinessReviewList'
+import { UsersReviewList } from './UsersReviewList'
+import { ProductReviewDetails } from './ProductReviewDetails'
+import { ReportsAppIdFilter } from './ReportsAppIdFilter'
 
 export {
   BusinessAnalytics,
@@ -58,4 +81,27 @@ export {
   ReportsBusinessSpend,
   ReportsOrderDistance,
   ReportsBusinessDistance,
+  AnalyticsStatusFilterBar,
+  AnalyticsStatusSubFilter,
+  AnalyticsMap,
+  AnalyticsOrdersOrSales,
+  AnalyticsProductCategories,
+  AnalyticsOrdersStatus,
+  AnalyticsRegisterUsers,
+  AnalyticsCustomerSatisfaction,
+  AnalyticsOrdersAcceptSpend,
+  AnalyticsSpendList,
+  ReportsBrandFilter,
+  AnalyticsDriversFilter,
+  AnalyticsFilterTimeZone,
+  AnalyticsTopOrders,
+  AnalyticsSpendTimes,
+  AnalyticsAvailableTimes,
+  AnalyticsBusyTimes,
+  InvoiceDetails,
+  ReportsHeatMap,
+  BusinessReviewList,
+  UsersReviewList,
+  ProductReviewDetails,
+  ReportsAppIdFilter
 }
