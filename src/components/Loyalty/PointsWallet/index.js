@@ -63,6 +63,7 @@ export const PointsWallet = (props) => {
         <PointsWalletBusinessList
           {...props}
           setSelectedBusinessList={setSelectedBusinessList}
+          isCloseBusinessDetails={selectedOption !== 'business'}
         />
       </div>
     </Container>
