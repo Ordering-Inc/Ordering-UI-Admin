@@ -66,7 +66,8 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
       handleCheckBox = props.handleCheckBox,
       handleUpdateWalletBusiness = props.handleUpdateWalletBusiness,
       handleUpdateBusinessList = props.handleUpdateBusinessList,
-      handleChangeSwitch = props.handleChangeSwitch;
+      handleChangeSwitch = props.handleChangeSwitch,
+      isCloseBusinessDetails = props.isCloseBusinessDetails;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -224,6 +225,11 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
   (0, _react.useEffect)(function () {
     setCurrentPage(1);
   }, [searchVal]);
+  (0, _react.useEffect)(function () {
+    if (!isCloseBusinessDetails) return;
+    setExtraOpen(false);
+    setSelectedBusiness(null);
+  }, [isCloseBusinessDetails]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     search: searchVal,
     isCustomLayout: true,

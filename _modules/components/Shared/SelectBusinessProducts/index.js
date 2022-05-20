@@ -97,7 +97,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     if (category !== null && category !== void 0 && category.products) {
       var _category$products;
 
-      var productsIds = (_category$products = category.products) === null || _category$products === void 0 ? void 0 : _category$products.reduce(function (ids, product) {
+      var productsIds = (_category$products = category.products) === null || _category$products === void 0 ? void 0 : _category$products.filter(function (product) {
+        return product === null || product === void 0 ? void 0 : product.enabled;
+      }).reduce(function (ids, product) {
         return [].concat(_toConsumableArray(ids), [product.id]);
       }, []);
       return productsIds.every(function (id) {
@@ -125,7 +127,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
   var handleChangeSelectCategory = function handleChangeSelectCategory(include) {
     var _category$products2;
 
-    var productsIds = (_category$products2 = category.products) === null || _category$products2 === void 0 ? void 0 : _category$products2.reduce(function (ids, product) {
+    var productsIds = (_category$products2 = category.products) === null || _category$products2 === void 0 ? void 0 : _category$products2.filter(function (product) {
+      return product === null || product === void 0 ? void 0 : product.enabled;
+    }).reduce(function (ids, product) {
       return [].concat(_toConsumableArray(ids), [product.id]);
     }, []);
     var everyContain = productsIds.every(function (id) {
@@ -183,7 +187,9 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
     style: {
       maxHeight: !setActive && '0px'
     }
-  }, category === null || category === void 0 ? void 0 : category.products.map(function (product) {
+  }, category === null || category === void 0 ? void 0 : category.products.filter(function (product) {
+    return product === null || product === void 0 ? void 0 : product.enabled;
+  }).map(function (product) {
     var _theme$images, _theme$images$dummies;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.AccordionItem, {
@@ -209,7 +215,7 @@ var CategoryTreeNode = function CategoryTreeNode(props) {
 };
 
 var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
-  var _businessState$busine2, _businessState$busine3;
+  var _businessState$busine2, _businessState$busine3, _businessState$busine4;
 
   var businessState = props.businessState,
       selectedProductsIds = props.selectedProductsIds,
@@ -278,7 +284,9 @@ var SelectBusinessProductsUI = function SelectBusinessProductsUI(props) {
       width: 120,
       height: 20
     }));
-  })) : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.categories.sort(function (a, b) {
+  })) : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : (_businessState$busine4 = _businessState$busine3.categories) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.filter(function (category) {
+    return category === null || category === void 0 ? void 0 : category.enabled;
+  }).sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (category) {
     return /*#__PURE__*/_react.default.createElement(CategoryTreeNode, {
