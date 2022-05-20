@@ -71,13 +71,13 @@ export const ReviewsListing = (props) => {
         )}
         {showOption === 'drivers' && (
           <UsersReviewList
-            deafultUserTypesSelected={[4]}
+            defaultUserTypesSelected={[4]}
             parentSearchValue={searchValue}
           />
         )}
         {showOption === 'customers' && (
           <UsersReviewList
-            deafultUserTypesSelected={[3]}
+            defaultUserTypesSelected={[3]}
             parentSearchValue={searchValue}
           />
         )}

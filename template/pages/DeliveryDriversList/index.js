@@ -9,7 +9,7 @@ export const DeliveryDriversList = (props) => {
   const usersProps = {
     ...props,
     headerTitle: t('DRIVERS', 'Drivers'),
-    deafultUserTypesSelected: [4],
+    defaultUserTypesSelected: [4],
     disabledActiveStateCondition: true,
     isDriversPage: true,
     onUserRedirect: (userId) => {
