@@ -226,7 +226,7 @@ const ProductDetailsAdvancedUI = (props) => {
       valid = false
       setAlertState({
         open: true,
-        content: t('REMOVE_MAXIMUM_QUANTITY_RESTRICTION', 'To remove the maximum quantity restriction, let the Maximum quantity to order space empty')
+        content: t('REMOVE_MAXIMUM_QUANTITY_RESTRICTION', 'To remove the maximum quantity restriction, leave the Maximum quantity to order space empty')
       })
     }
     if (formState?.changes?.minimum_per_order && formState?.changes?.maximum_per_order && !(formState?.changes?.maximum_per_order === null || formState?.changes?.maximum_per_order === '0')) {
