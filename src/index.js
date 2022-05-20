@@ -39,9 +39,9 @@ import { HomePage } from './components/Home'
 import { LoginForm, ForgotPasswordForm } from './components/Login'
 import { EnterprisePromotionListing, CampaignListing } from './components/Marketing'
 import { Cms, IntegrationListing, LanguageManager, PlaceListing, Settings, SettingItemUI } from './components/Settings'
-import { 
-  BusinessBrandListing, 
-  BusinessesListing, 
+import {
+  BusinessBrandListing,
+  BusinessesListing,
   BusinessProductsListing,
   BusinessesListingHeader,
   BusinessActiveStateFilter,
