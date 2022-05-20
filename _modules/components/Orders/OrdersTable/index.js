@@ -167,13 +167,14 @@ var OrdersTable = function OrdersTable(props) {
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
     var offset = 300;
-    var cdtToutc = parseDate((0, _moment.default)(order === null || order === void 0 ? void 0 : order.delivery_datetime).add(offset, 'minutes'));
+    var cdtToutc = (0, _moment.default)(order === null || order === void 0 ? void 0 : order.delivery_datetime).add(offset, 'minutes').format('YYYY-MM-DD HH:mm:ss');
 
     var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(cdtToutc);
 
     var _eta = order === null || order === void 0 ? void 0 : order.eta_time;
 
-    return (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'minutes');
+    var diffTimeAsSeconds = (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'seconds');
+    return Math.ceil(diffTimeAsSeconds / 60);
   };
 
   var displayDelayedTime = function displayDelayedTime(order) {
@@ -194,8 +195,11 @@ var OrdersTable = function OrdersTable(props) {
   };
 
   var getStatusClassName = function getStatusClassName(minutes) {
-    if (isNaN(Number(minutes))) return 0;
-    return minutes > 0 ? 'in_time' : minutes === 0 ? 'at_risk' : 'delayed';
+    var _configState$configs, _configState$configs$;
+
+    if (isNaN(Number(minutes))) return 'in_time';
+    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_delayed_time) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
+    return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed';
   };
 
   (0, _react.useEffect)(function () {
@@ -396,9 +400,9 @@ var OrdersTable = function OrdersTable(props) {
     }
   }, [groupStatus]);
   (0, _react.useEffect)(function () {
-    var _configState$configs, _configState$configs$;
+    var _configState$configs2, _configState$configs3;
 
-    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1';
+    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
       timer: slaSettings,
       slaBar: slaSettings
