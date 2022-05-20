@@ -227,7 +227,7 @@ const ProductDetailsAdvancedUI = (props) => {
         valid = false
         setAlertState({
           open: true,
-          content: t('MINIMUM_QUANTITY_MUST_SMALL_MAXIMUM_QUANTITY', 'This minimum quantity must be small than maximum quantity')
+          content: t('MINIMUM_QUANTITY_MUST_SMALL_MAXIMUM_QUANTITY', 'The minimum quantity must be small than the maximum quantity')
         })
       }
     }
