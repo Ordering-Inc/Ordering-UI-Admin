@@ -13,7 +13,7 @@ import {
   Headset as HeadsetIcon,
   Truck,
   GraphUp,
-  // WindowDock,
+  WindowDock,
   Award,
   BoxArrowUpRight,
   Cart3,
@@ -619,14 +619,14 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   </Accordion>
                 )}
-                {/* <Button
+                <Button
                   className='d-flex align-items-center'
                   variant={location.pathname === '/ordering-products' && 'primary'}
                   onClick={() => handleGoToPage({ page: 'ordering_products' })}
                 >
                   <WindowDock />
                   <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>
-                </Button> */}
+                </Button>
                 {sessionState?.user?.level === 0 && (
                   <Button
                     className='d-flex align-items-center'
