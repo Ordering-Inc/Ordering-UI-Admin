@@ -30,7 +30,8 @@ const PointsWalletBusinessListUI = (props) => {
     handleCheckBox,
     handleUpdateWalletBusiness,
     handleUpdateBusinessList,
-    handleChangeSwitch
+    handleChangeSwitch,
+    isCloseBusinessDetails
   } = props
 
   const [, t] = useLanguage()
@@ -130,6 +131,12 @@ const PointsWalletBusinessListUI = (props) => {
   useEffect(() => {
     setCurrentPage(1)
   }, [searchVal])
+
+  useEffect(() => {
+    if (!isCloseBusinessDetails) return
+    setExtraOpen(false)
+    setSelectedBusiness(null)
+  }, [isCloseBusinessDetails])
 
   return (
     <Container>
