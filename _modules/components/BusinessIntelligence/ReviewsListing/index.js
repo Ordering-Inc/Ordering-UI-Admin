@@ -91,10 +91,10 @@ var ReviewsListing = function ReviewsListing(props) {
   }, t('CUSTOMERS', 'Customers'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
     parentSearchValue: searchValue
   }), showOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
-    deafultUserTypesSelected: [4],
+    defaultUserTypesSelected: [4],
     parentSearchValue: searchValue
   }), showOption === 'customers' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
-    deafultUserTypesSelected: [3],
+    defaultUserTypesSelected: [3],
     parentSearchValue: searchValue
   })));
 };

@@ -38,7 +38,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UsersListingHeader = function UsersListingHeader(props) {
-  var deafultUserTypesSelected = props.deafultUserTypesSelected,
+  var defaultUserTypesSelected = props.defaultUserTypesSelected,
       disabledActiveStateCondition = props.disabledActiveStateCondition,
       title = props.title,
       selectedUsers = props.selectedUsers,
@@ -84,7 +84,7 @@ var UsersListingHeader = function UsersListingHeader(props) {
     },
     "data-tour": "tour_add"
   }, isDriversPage ? t('ADD_DRIVER', 'Add driver') : isDriversManagersPage ? t('ADD_DRIVER_MANAGER', 'Add driver manager') : t('ADD_USER', 'Add user')), /*#__PURE__*/_react.default.createElement(_Users.UsersExportCSV, {
-    deafultUserTypesSelected: deafultUserTypesSelected,
+    defaultUserTypesSelected: defaultUserTypesSelected,
     disabledActiveStateCondition: disabledActiveStateCondition,
     userTypesSelected: userTypesSelected,
     selectedUserActiveState: selectedUserActiveState
