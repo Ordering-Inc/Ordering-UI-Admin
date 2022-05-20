@@ -9,7 +9,7 @@ export const CustomersList = (props) => {
   const customersProps = {
     ...props,
     headerTitle: t('CUSTOMERS', 'Customers'),
-    deafultUserTypesSelected: [3],
+    defaultUserTypesSelected: [3],
     propsToFetch: [
       'name', 'lastname', 'email', 'phone', 'photo', 'cellphone',
       'country_phone_code', 'city_id', 'city', 'address', 'addresses',
