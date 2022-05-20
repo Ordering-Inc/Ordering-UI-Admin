@@ -1,14 +1,14 @@
-import { 
+import {
   MessagesListing,
   ChatContactList,
   ChatBusinessesList
 } from './components/Messages'
-import { 
+import {
   OrderingProductsListing,
   OrderingProductDetails
 } from './components/OrderingProducts'
 import { PageNotFound } from './components/PageNotFound'
-import {  
+import {
   DeliveriesManager,
   DriversManager,
   Messages,
@@ -109,7 +109,7 @@ import {
   ProductReviewDetails,
   ReportsAppIdFilter
 } from './components/BusinessIntelligence'
-import { 
+import {
   AddressList,
   AddressForm,
   DeliveryUsersListing,
@@ -138,7 +138,7 @@ import {
 } from './components/Delivery'
 import { HomePage } from './components/Home'
 import { LoginForm, ForgotPasswordForm } from './components/Login'
-import { 
+import {
   EnterprisePromotionListing,
   CampaignListing,
   EnterprisePromotionList,
@@ -168,12 +168,12 @@ import {
   CampaignPopup,
   CampaignWebHook
 } from './components/Marketing'
-import { 
-  Cms, 
-  IntegrationListing, 
-  LanguageManager, 
-  PlaceListing, 
-  Settings, 
+import {
+  Cms,
+  IntegrationListing,
+  LanguageManager,
+  PlaceListing,
+  Settings,
   SettingItemUI,
   AddressFieldsSetting,
   CheckoutFieldsSetting,
@@ -200,9 +200,9 @@ import {
   LanguageTransSpread,
   LanguageTransTable
 } from './components/Settings'
-import { 
-  BusinessBrandListing, 
-  BusinessesListing, 
+import {
+  BusinessBrandListing,
+  BusinessesListing,
   BusinessProductsListing,
   BusinessesListingHeader,
   BusinessActiveStateFilter,
@@ -295,7 +295,7 @@ import {
   ProductIngredientDetails,
   ProductTagDetails
 } from './components/Stores'
-import { 
+import {
   CustomersListing,
   UserAddForm,
   UserMetaFields,
@@ -319,7 +319,7 @@ import {
   CustomerCashWalletEvents,
   UserFormDetailsUI
 } from './components/Users'
-import { 
+import {
   RewardsPrograms,
   PointsWallet,
   PointsWalletLevels,
@@ -501,7 +501,6 @@ export {
   DriversGroupAutoassign,
   DriversMarkAsBusy,
   GoogleGpsButton,
-
 
   HomePage,
   LoginForm,

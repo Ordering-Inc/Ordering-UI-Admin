@@ -36,7 +36,7 @@ import { IntegrationsList } from './pages/IntegrationsList'
 import { LanguageManager } from './pages/LanguageManager'
 import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
-// import { OrderingProducts } from './pages/OrderingProducts'
+import { OrderingProducts } from './pages/OrderingProducts'
 import { ReviewsList } from './pages/ReviewsList'
 import { ReviewProducts } from './pages/ReviewProducts'
 import { DeliveryDriversList } from './pages/DeliveryDriversList'
@@ -259,6 +259,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/downloads/purchased-products' allowedLevels={[0, 2, 5]}>
                       <PurchasedProductsList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/ordering-products' allowedLevels={[0, 2, 5]}>
+                      <OrderingProducts />
                     </ProtectedRoute>
 
                     <Route path='*'>
