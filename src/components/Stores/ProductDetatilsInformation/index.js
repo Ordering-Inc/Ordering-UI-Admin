@@ -6,6 +6,7 @@ import { bytesConverter, shape } from '../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Button, Input, TextArea, Switch } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
+import { Select } from '../../../styles/Select/FirstSelect'
 import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
 
 import {
@@ -24,7 +25,11 @@ import {
   ColorWrapper,
   ShapeWrapper,
   ShapeContentWrapper,
-  ShapeBoxWrapper
+  ShapeBoxWrapper,
+  SelectWrapper,
+  Option,
+  TimeContent,
+  TimeBlock
 } from './styles'
 
 export const ProductDetatilsInformation = (props) => {
@@ -43,13 +48,51 @@ export const ProductDetatilsInformation = (props) => {
   const formMethods = useForm()
   const [, t] = useLanguage()
   const productImageInputRef = useRef(null)
+  const [hours, setHours] = useState([])
+  const [minutes, setMinutes] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [minimumRegualrPrice, setMinimumRegualrPrice] = useState(null)
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
+  const [curPreorderTime, setCurPreorderTime] = useState({})
+  const [isCustom, setIsCustom] = useState(false)
   const [autoGenerateCode, setAutoGenerate] = useState({
     isAutoGenerate: false,
     autoCodeText: product?.slug
   })
+
+  const typeList = [
+    { value: 'item', content: <Option>{t('DEFAULT', 'Default')}</Option> },
+    { value: 'service', content: <Option>{t('SERVICE', 'Service')}</Option> }
+  ]
+
+  const durationList = [
+    { value: 15, content: <Option>15 <span>{t('MINUTES', 'minutes')}</span></Option> },
+    { value: 30, content: <Option>30 <span>{t('MINUTES', 'minutes')}</span></Option> },
+    { value: 45, content: <Option>45 <span>{t('MINUTES', 'minutes')}</span></Option> },
+    { value: 60, content: <Option>1 <span>{('HOUR', 'hour')}</span></Option> },
+    { value: 'custom', content: <Option><span>{('CUSTOME', 'custom')}</span></Option> }
+  ]
+
+  const setTimeList = () => {
+    const _hours = []
+    const _minutes = []
+    for (let i = 0; i < 24; i++) {
+      const text = (i < 10 ? '0' : ' ') + i
+      _hours.push({
+        text: text,
+        hour: i
+      })
+    }
+    for (let i = 0; i < 60; i++) {
+      const text = (i < 10 ? '0' : '') + i
+      _minutes.push({
+        text: text,
+        minute: i
+      })
+    }
+    setHours(_hours)
+    setMinutes(_minutes)
+  }
 
   const handleClickImage = () => {
     productImageInputRef.current.click()
@@ -133,6 +176,30 @@ export const ProductDetatilsInformation = (props) => {
     setCropState({ name: null, data: null, open: false })
   }
 
+  const handleChangePreorderTime = (evt) => {
+    const type = evt.target.name
+    const value = evt.target.value
+    setCurPreorderTime({
+      ...curPreorderTime,
+      [type]: value
+    })
+    let preorderTime = 0
+    if (type === 'hour') preorderTime = parseInt(value) * 60 + parseInt(curPreorderTime?.minute)
+    else preorderTime = parseInt(curPreorderTime?.hour) * 60 + parseInt(value)
+    handleChangeFormState({ duration: preorderTime })
+  }
+
+  const handleChangeSelect = (value) => {
+    if (value === 'custom') {
+      setIsCustom(true)
+      handleChangeFormState({ duration: null })
+      return
+    }
+    setCurPreorderTime({ hour: '0', minute: '0' })
+    setIsCustom(false)
+    handleChangeFormState({ duration: value })
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => {
@@ -185,6 +252,21 @@ export const ProductDetatilsInformation = (props) => {
     }
   }, [product?.price, formState?.changes?.price])
 
+  useEffect(() => {
+    setTimeList()
+    setCurPreorderTime({
+      hour: product?.duration ? (parseInt(product?.duration / 60)) : '0',
+      minute: product?.duration ? (parseInt(product?.duration) % 60) : '0'
+    })
+    if (!product?.duration) return
+
+    if (parseInt(product?.duration) === 15 || parseInt(product?.duration) === 30 || parseInt(product?.duration) === 45 || parseInt(product?.duration) === 60) {
+      setIsCustom(false)
+    } else {
+      setIsCustom(true)
+    }
+  }, [product])
+
   return (
     <>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -218,6 +300,60 @@ export const ProductDetatilsInformation = (props) => {
             </DragAndDrop>
           </ExamineClick>
         </ProductImage>
+        <SelectWrapper>
+          <label>{t('TYPE', 'Type')}</label>
+          <Select
+            options={typeList}
+            className='select'
+            defaultValue={formState?.changes?.type ?? product?.type}
+            placeholder={t('SELECT_OPTION', 'Select an option')}
+            onChange={(value) => handleChangeFormState({ type: value })}
+          />
+        </SelectWrapper>
+        {((formState?.changes?.type ?? product?.type) === 'service') && (
+          <FieldRow>
+            <SelectWrapper>
+              <label>{t('DURATION', 'Duration')}</label>
+              <Select
+                options={durationList}
+                className='select'
+                defaultValue={isCustom ? 'custom' : (formState?.changes?.duration ?? product?.duration)}
+                placeholder={t('SELECT_OPTION', 'Select an option')}
+                onChange={(value) => handleChangeSelect(value)}
+              />
+            </SelectWrapper>
+            {isCustom && (
+              <InputWrapper>
+                <label>{t('CUSTOM_DURATION', 'Custom duration')}</label>
+                <TimeContent>
+                  <TimeBlock>
+                    <select
+                      value={curPreorderTime?.hour}
+                      name='hour'
+                      onChange={handleChangePreorderTime}
+                    >
+                      {
+                        hours?.map((hour, i) => (
+                          <option value={hour.hour} key={i}>{hour.text}</option>
+                        ))
+                      }
+                    </select>
+                    <span>:</span>
+                    <select
+                      value={curPreorderTime?.minute}
+                      name='minute'
+                      onChange={handleChangePreorderTime}
+                    >
+                      {minutes?.map((minute, i) => (
+                        <option value={minute.minute} key={i}>{minute.text}</option>
+                      ))}
+                    </select>
+                  </TimeBlock>
+                </TimeContent>
+              </InputWrapper>
+            )}
+          </FieldRow>
+        )}
         <InputWrapper>
           <label>{t('Name_V2', 'Name')}</label>
           <Input
