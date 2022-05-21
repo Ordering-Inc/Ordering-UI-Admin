@@ -420,6 +420,17 @@ export const ProductDetatilsInformation = (props) => {
             </>
           )
         }
+        <InputWrapper>
+          <label>{t('SEO_KEYWORDS', 'SEO Keywords')}</label>
+          <Input
+            name='seo_keywords'
+            placeholder={t('SEO_KEYWORDS', 'SEO Keywords')}
+            defaultValue={product?.seo_keywords}
+            onChange={handleChangeInput}
+            disabled={formState.loading}
+            autoComplete='off'
+          />
+        </InputWrapper>
         <ActionsForm>
           {onCancel && (
             <Button
