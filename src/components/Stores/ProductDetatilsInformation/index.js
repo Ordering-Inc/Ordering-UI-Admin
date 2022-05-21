@@ -429,6 +429,15 @@ export const ProductDetatilsInformation = (props) => {
             onChange={handleChangeInput}
             disabled={formState.loading}
             autoComplete='off'
+            ref={formMethods.register({
+              required:
+                (typeof (formState?.changes?.seo_keywords) !== 'undefined')
+                  ? t(
+                    'VALIDATION_ERROR_REQUIRED',
+                    'SEO Keywords field is required'
+                  ).replace('_attribute_', t('SEO_KEYWORDS', 'SEO Keywords'))
+                  : false
+            })}
           />
         </InputWrapper>
         <ActionsForm>
