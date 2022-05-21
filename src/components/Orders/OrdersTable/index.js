@@ -6,7 +6,8 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
-  useUtils
+  useUtils,
+  useConfig
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { DriverSelector } from '../DriverSelector'
@@ -57,7 +58,7 @@ export const OrdersTable = (props) => {
   const theme = useTheme()
   const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
   const [isAllChecked, setIsAllChecked] = useState(false)
-  const [currentTime, setCurrentTime] = useState()
+  const [, setCurrentTime] = useState()
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }
@@ -65,7 +66,7 @@ export const OrdersTable = (props) => {
     const expectedPage = Math.ceil(pagination.from / pageSize)
     getPageOrders(pageSize, expectedPage)
   }
-
+  const [configState] = useConfig()
   const [allowColumns, setAllowColumns] = useState({
     status: true,
     orderNumber: true,
@@ -75,6 +76,7 @@ export const OrdersTable = (props) => {
     driver: true,
     advanced: true,
     timer: true,
+    slaBar: true,
     total: true
   })
 
@@ -117,23 +119,40 @@ export const OrdersTable = (props) => {
     }
   ]
 
-  const getDelayTime = (order) => {
+  const getDelayMinutes = (order) => {
     // targetMin = delivery_datetime  + eta_time - now()
+    const offset = 300
+    const cdtToutc = moment(order?.delivery_datetime).add(offset, 'minutes').format('YYYY-MM-DD HH:mm:ss')
     const _delivery = order?.delivery_datetime_utc
       ? parseDate(order?.delivery_datetime_utc)
-      : parseDate(order?.delivery_datetime, { utc: false })
+      : parseDate(cdtToutc)
     const _eta = order?.eta_time
-    const tagetedMin = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'minutes')
+    const diffTimeAsSeconds = moment(_delivery).add(_eta, 'minutes').diff(moment().utc(), 'seconds')
+    return Math.ceil(diffTimeAsSeconds / 60)
+  }
+
+  const displayDelayedTime = (order) => {
+    let tagetedMin = getDelayMinutes(order)
+    // get day, hour and minutes
+    const sign = tagetedMin >= 0 ? '' : '- '
+    tagetedMin = Math.abs(tagetedMin)
     let day = Math.floor(tagetedMin / 1440)
     const restMinOfTargetedMin = tagetedMin - 1440 * day
     let restHours = Math.floor(restMinOfTargetedMin / 60)
     let restMins = restMinOfTargetedMin - 60 * restHours
+    // make standard time format
+    day = day === 0 ? '' : day + 'day  '
+    restHours = restHours < 10 ? '0' + restHours : restHours
+    restMins = restMins < 10 ? '0' + restMins : restMins
 
-    if (order?.time_status === 'in_time' || order?.time_status === 'at_risk') day = Math.abs(day)
-    if (restHours < 10) restHours = ('0' + restHours)
-    if (restMins < 10) restMins = ('0' + restMins)
-    const finalTaget = day + 'day  ' + restHours + ':' + restMins
+    const finalTaget = sign + day + restHours + ':' + restMins
     return finalTaget
+  }
+
+  const getStatusClassName = (minutes) => {
+    if (isNaN(Number(minutes))) return 'in_time'
+    const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
+    return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
   }
 
   useEffect(() => {
@@ -265,6 +284,15 @@ export const OrdersTable = (props) => {
     }
   }, [groupStatus])
 
+  useEffect(() => {
+    const slaSettings = configState?.configs?.order_deadlines_enabled?.value === '1'
+    setAllowColumns({
+      ...allowColumns,
+      timer: slaSettings,
+      slaBar: slaSettings
+    })
+  }, [configState.loading])
+
   return (
     <>
       <OrdersContainer
@@ -279,9 +307,11 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
-                <th>
-                  <Timestatus />
-                </th>
+                {allowColumns?.slaBar && (
+                  <th>
+                    <Timestatus />
+                  </th>
+                )}
                 <th
                   className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
                 >
@@ -451,11 +481,13 @@ export const OrdersTable = (props) => {
                 data-tour={i === 0 ? 'tour_start' : ''}
               >
                 <tr>
-                  <td>
-                    <Timestatus
-                      timeState={order?.time_status}
-                    />
-                  </td>
+                  {allowColumns?.slaBar && (
+                    <td>
+                      <Timestatus
+                        timeState={getStatusClassName(getDelayMinutes(order))}
+                      />
+                    </td>
+                  )}
                   <td
                     className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'small' : ''}
                   >
@@ -583,7 +615,7 @@ export const OrdersTable = (props) => {
                         {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
                           <>
                             <p className='bold'>{t('TIMER', 'Timer')}</p>
-                            <p className={order?.time_status}>{getDelayTime(order)}</p>
+                            <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
                           </>
                         )}
                       </Timer>

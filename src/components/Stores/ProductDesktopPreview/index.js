@@ -244,7 +244,7 @@ export const ProductDesktopPreview = (props) => {
                           {t('ALL', 'All')}
                         </Tab>
                         {
-                          product?.ingredients.length > 0 && (
+                          product?.ingredients?.length > 0 && (
                             <Tab
                               key='ingredients'
                               active={tabValue === 'ingredients'}
@@ -255,7 +255,7 @@ export const ProductDesktopPreview = (props) => {
                           )
                         }
                         {
-                          product?.extras.length > 0 && (
+                          product?.extras?.length > 0 && (
                             <Tab
                               key='extra'
                               active={tabValue === 'extra'}

@@ -80,7 +80,7 @@ export const CustomerSelector = (props) => {
   const customerSelectorProps = {
     ...props,
     UIComponent: CustomerSelectorUI,
-    deafultUserTypesSelected: [3],
+    defaultUserTypesSelected: [3],
     propsToFetch: ['name', 'lastname', 'photo']
   }
   return <UsersListController {...customerSelectorProps} />

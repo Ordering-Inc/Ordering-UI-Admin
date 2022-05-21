@@ -71,7 +71,7 @@ export const BusinessOwnerSelector = (props) => {
     ...props,
     UIComponent: BusinessOwnerSelectorUI,
     isBusinessOwners: true,
-    deafultUserTypesSelected: [2]
+    defaultUserTypesSelected: [2]
   }
   return <UsersListController {...businessOwnersProps} />
 }

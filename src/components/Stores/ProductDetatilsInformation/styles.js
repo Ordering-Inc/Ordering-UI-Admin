@@ -175,3 +175,76 @@ export const FieldRow = styled.div`
     width: calc(50% - 10px);
   }
 `
+
+export const ColorShapeWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`
+
+export const ColorWrapper = styled.div`
+  margin-top: 24px;
+
+  > label {
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 7px;
+  }
+`
+
+export const ShapeWrapper = styled(ColorWrapper)`
+  > label {
+    font-weight: 400;
+    font-size: 14px;
+  }
+`
+
+export const ShapeContentWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const ShapeBoxWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+
+  > div {
+    width: 76px;
+    height: 36px;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    margin-bottom: 15px;
+    transition: all 0.3s linear;
+  }
+
+  svg {
+    font-size: 16px;
+    color: ${props => props.theme.colors.secundaryLight};
+    transition: all 0.3s linear;
+  }
+
+  ${({ shapeRect }) => shapeRect && css`
+     > div {
+       border-radius: 7.6px;
+     }
+    margin: 0px 20px;
+  `}
+
+  ${({ round }) => round && css`
+     > div {
+       border-radius: 50px;
+     }
+  `}
+
+  ${({ active }) => active && css`
+    > div {
+      border: 1px solid ${props => props.theme.colors.primary};
+    }
+
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
+  `}
+`

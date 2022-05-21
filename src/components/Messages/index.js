@@ -1,5 +1,9 @@
 import { MessagesListing } from './MessagesListing'
+import { ChatContactList } from './ChatContactList'
+import { ChatBusinessesList } from './ChatBusinessesList'
 
 export {
-  MessagesListing
+  MessagesListing,
+  ChatContactList,
+  ChatBusinessesList
 }

@@ -159,7 +159,7 @@ export const MessagesUI = (props) => {
     if (load < 3) {
       const chat = document.getElementById('chat')
       if (chat) {
-        chat.scrollTop = chat.scrollHeight
+        chat.scrollTop = chat?.scrollHeight
       }
     }
   }, [load])
@@ -168,7 +168,7 @@ export const MessagesUI = (props) => {
     if (history) return
     const chat = document.getElementById('chat')
     if (chat) {
-      chat.scrollTop = chat.scrollHeight
+      chat.scrollTop = chat?.scrollHeight
     }
   }, [messages.messages.length, filteredMessages])
 
@@ -176,7 +176,7 @@ export const MessagesUI = (props) => {
     if (history) return
     setTimeout(() => {
       const chat = document.getElementById('chat')
-      chat.scrollTop = chat.scrollHeight
+      chat.scrollTop = chat?.scrollHeight
     }, 10)
   }, [isChat])
 

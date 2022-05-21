@@ -222,12 +222,19 @@ const ProductDetailsAdvancedUI = (props) => {
   const checkValidate = () => {
     let valid = true
 
-    if (formState?.changes?.minimum_per_order && formState?.changes?.maximum_per_order && !(formState?.changes?.maximum_per_order === null)) {
+    if (formState?.changes?.maximum_per_order === '0') {
+      valid = false
+      setAlertState({
+        open: true,
+        content: t('REMOVE_MAXIMUM_QUANTITY_RESTRICTION', 'To remove the maximum quantity restriction, leave the Maximum quantity to order space empty')
+      })
+    }
+    if (formState?.changes?.minimum_per_order && formState?.changes?.maximum_per_order && !(formState?.changes?.maximum_per_order === null || formState?.changes?.maximum_per_order === '0')) {
       if (!(formState?.changes?.minimum_per_order < formState?.changes?.maximum_per_order)) {
         valid = false
         setAlertState({
           open: true,
-          content: t('MINIMUM_QUANTITY_MUST_SMALL_MAXIMUM_QUANTITY', 'This minimum quantity must be small than maximum quantity')
+          content: t('MINIMUM_QUANTITY_MUST_SMALL_MAXIMUM_QUANTITY', 'The minimum quantity must be small than the maximum quantity')
         })
       }
     }
@@ -398,7 +405,7 @@ const ProductDetailsAdvancedUI = (props) => {
           <Input
             name='maximum_per_order'
             id='maximum_per_order'
-            placeholder='0'
+            placeholder={t('NO_LIMITS_IN_MAX_QUANTITY_TO_ORDER', 'No limits in max quantity to order')}
             defaultValue={productState?.maximum_per_order ?? ''}
             onChange={(e) => { handleClickProperty('maximum_per_order', e.target.value === '' ? null : e.target.value) }}
             disabled={formState.loading}

@@ -18,7 +18,7 @@ import {
 
 const DeliveryUsersListingUI = (props) => {
   const {
-    deafultUserTypesSelected,
+    defaultUserTypesSelected,
     disabledActiveStateCondition,
     headerTitle,
     isShowActiveStateFilter,
@@ -148,7 +148,7 @@ const DeliveryUsersListingUI = (props) => {
     <>
       <UsersListingContainer>
         <UsersListingHeader
-          deafultUserTypesSelected={deafultUserTypesSelected}
+          defaultUserTypesSelected={defaultUserTypesSelected}
           disabledActiveStateCondition={disabledActiveStateCondition}
           isDriversPage={isDriversPage}
           isDriversManagersPage={isDriversManagersPage}
