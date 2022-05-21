@@ -142,7 +142,7 @@ const ProfessionalListingUI = (props) => {
 
       {isOpenUserDetails && (
         <UserDetailsLateralBar
-          isManagers
+          isProfessionals
           open={isOpenUserDetails}
           user={openUser}
           userId={openUser?.id || queryId}

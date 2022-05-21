@@ -3,25 +3,23 @@ import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController, useLanguage, useSession } from 'ordering-components-admin'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
-import { BusinessManagerBusinesses } from '../BusinessManagerBusinesses'
 import { Envelope, Phone, ThreeDots } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Confirm } from '../../Shared'
-import { Personalization } from '../../Shared/Personalization'
-import { UserMetaFields } from '../UserMetaFields'
 import { Switch } from '../../../styles'
 
 import {
   DetailsHeader,
   VerifiedItem,
   UserName,
-  PersonalizationWrapper,
   ActionSelectorWrapper,
   VerifiedItemsWrapper
 } from './styles'
+import { ProfessionalSchedule } from '../ProfessionalSchedule'
+import { ProfessionalBusinessService } from '../ProfessionalBusinessService'
 
-export const UserDetailsUI = (props) => {
+export const ProfessionalDetailUI = (props) => {
   const {
     isManagers,
     userState,
@@ -111,7 +109,7 @@ export const UserDetailsUI = (props) => {
       <UserDetailsMenu
         currentMenuSelected={currentMenuSelected}
         handleChangeMenu={setCurrentMenuSelected}
-        isBusinessOwner={userState?.user?.level === 2}
+        isProfessional
       />
       {!userState?.loading && userState?.user && (
         <>
@@ -121,20 +119,17 @@ export const UserDetailsUI = (props) => {
               handleSuccessUpdate={handleSuccessUserUpdate}
             />
           )}
-          {currentMenuSelected === 'businesses' && (
-            <BusinessManagerBusinesses
-              userId={userState?.user?.id}
+          {currentMenuSelected === 'schedule' && (
+            <ProfessionalSchedule
+              user={userState.user}
+              handleSuccessUpdate={handleSuccessUserUpdate}
             />
           )}
-          {currentMenuSelected === 'metafields' && (
-            <UserMetaFields
-              userId={userState.user?.id}
+          {currentMenuSelected === 'business_services' && (
+            <ProfessionalBusinessService
+              user={userState.user}
+              handleSuccessUpdate={handleSuccessUserUpdate}
             />
-          )}
-          {currentMenuSelected === 'personalization' && (
-            <PersonalizationWrapper>
-              <Personalization />
-            </PersonalizationWrapper>
           )}
         </>
       )}
@@ -153,10 +148,10 @@ export const UserDetailsUI = (props) => {
   )
 }
 
-export const UserDetails = (props) => {
+export const ProfessionalDetail = (props) => {
   const userDetailsControlProps = {
     ...props,
-    UIComponent: UserDetailsUI
+    UIComponent: ProfessionalDetailUI
   }
 
   return (

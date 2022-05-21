@@ -46,13 +46,6 @@ export const VerifiedItem = styled.span`
   }
 `
 
-export const PersonalizationWrapper = styled.div`
-  height: calc(100% - 60px);
-  > div {
-    padding: 35px 0px 25px;
-  }
-`
-
 export const ActionSelectorWrapper = styled.div`
   ${props => props.theme?.rtl ? css`
     margin-left: 35px;

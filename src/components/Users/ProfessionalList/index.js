@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
-import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
-import { Envelope, Phone } from 'react-bootstrap-icons'
+import { Envelope, Phone, CheckSquareFill, Square } from 'react-bootstrap-icons'
 import { Switch } from '../../../styles'
 import { ConfirmAdmin, Pagination, ColumnAllowSettingPopover } from '../../Shared'
 
@@ -205,9 +203,9 @@ export const ProfessionalList = (props) => {
                             onClick={() => handleSelectedUsers(user.id)}
                           >
                             {selectedUsers.includes(user.id) ? (
-                              <MdCheckBox />
+                              <CheckSquareFill />
                             ) : (
-                              <MdCheckBoxOutlineBlank />
+                              <Square />
                             )}
                           </CheckBoxWrapper>
                           <WrapperImage>

@@ -3,12 +3,11 @@ import { useForm } from 'react-hook-form'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick,
-  UserFormDetails as UserFormDetailsController
+  ExamineClick
 } from 'ordering-components-admin'
+import { UserFormDetails as UserFormDetailsController } from './naked'
 import { Input, Button } from '../../../styles'
 import { Alert, InputPhoneNumber, RangeCalendar } from '../../Shared'
-import { UserTypeSelector } from '../UserTypeSelector'
 import parsePhoneNumber from 'libphonenumber-js'
 import { sortInputFields, bytesConverter } from '../../../utils'
 import Skeleton from 'react-loading-skeleton'
@@ -24,7 +23,6 @@ import {
   FormInput,
   ActionsForm,
   SkeletonForm,
-  WrapperUserTypeSelector,
   InputWrapper,
   CalendarWrapper
 } from './styles'
@@ -39,8 +37,8 @@ const ProfessionalAddFormUI = (props) => {
     handleChangeInput,
     handleButtonAddClick,
     isCheckout,
-    handleChangeUserType,
-    handlechangeImage
+    handlechangeImage,
+    handleChangeSwtich
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
@@ -162,10 +160,6 @@ const ProfessionalAddFormUI = (props) => {
   }, [formState?.loading])
 
   useEffect(() => {
-    cleanFormState && cleanFormState({ changes: { level: 3 } })
-  }, [])
-
-  useEffect(() => {
     if (!validationFields.loading && emailInput.current) {
       formMethods.setValue('email', formState?.result?.result
         ? formState?.result?.result?.email
@@ -220,7 +214,7 @@ const ProfessionalAddFormUI = (props) => {
                 <React.Fragment key={field.id}>
                   {field.code === 'email' ? (
                     <InputWrapper className='email-input'>
-                      <lable>{t(field.code.toUpperCase(), field?.name)}</lable>
+                      <label>{t(field.code.toUpperCase(), field?.name)}</label>
                       <Input
                         key={field.id}
                         type={field.type}
@@ -266,27 +260,6 @@ const ProfessionalAddFormUI = (props) => {
                 </React.Fragment>
               )
             )}
-            <InputWrapper>
-              <label>{t('SPECIALIST', 'Specialist')}</label>
-              <Input
-                type='text'
-                name='specialist'
-                className='form'
-                placeholder={t('SPECIALLIST', 'Specialist')}
-                defaultValue={
-                formState?.result?.result
-                  ? formState?.result?.result?.specialist
-                  : formState?.changes?.specialist ?? ''
-                }
-                onChange={handleChangeInput}
-                ref={formMethods.register({
-                  required: isRequiredField('specialist')
-                    ? t('VALIDATION_ERROR_SPECIALLIST_REQUIRED', 'Special is required').replace('_attribute_', t('SPECIALLIST', 'Specialist'))
-                    : null
-                })}
-                autoComplete='off'
-              />
-            </InputWrapper>
             {!isCheckout && (
               <InputWrapper>
                 <label>{t('PASSWORD', 'Password')}</label>
@@ -328,21 +301,17 @@ const ProfessionalAddFormUI = (props) => {
              props.afterMidComponents?.map((MidComponent, i) => (
                <MidComponent key={i} {...props} />))
             }
-            <WrapperUserTypeSelector>
-              <UserTypeSelector
-                isPrimary
-                defaultUserType={formState?.changes?.level}
-                handleChangeUserType={handleChangeUserType}
-              />
-            </WrapperUserTypeSelector>
             <CalendarWrapper>
               <label>{t('DATE_OF_BIRTH', 'Date of birth')}</label>
               <RangeCalendar
-                withTime
                 isLeft
                 isSingleDate
-                // defaultValue={formState?.changes?.end_at ?? campaignState?.campaign?.end_at}
-                // handleChangeDate={(date) => handleChangeDateTime('end_at', date)}
+                defaultValue={
+                  formState?.result?.result
+                    ? formState?.result?.result?.birthdate
+                    : formState?.changes?.birthdate ?? ''
+                }
+                handleChangeDate={(date) => handleChangeSwtich('birthdate', date)}
               />
             </CalendarWrapper>
             <ActionsForm>
@@ -382,6 +351,7 @@ export const ProfessionalAddForm = (props) => {
     ...props,
     useSessionUser: false,
     useValidationFields: true,
+    isProfessional: true,
     UIComponent: ProfessionalAddFormUI
   }
   return (

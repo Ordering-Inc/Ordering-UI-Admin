@@ -181,6 +181,9 @@ export const App = () => {
                     <ProtectedRoute path='/users/managers' allowedLevels={[0]}>
                       <ManagersList />
                     </ProtectedRoute>
+                    <ProtectedRoute path='/users/professionals' allowedLevels={[0, 2, 5]}>
+                      <Professionals />
+                    </ProtectedRoute>
 
                     <ProtectedRoute path='/intelligence/business' allowedLevels={[0, 2]}>
                       <BusinessAnalytics />
@@ -257,9 +260,6 @@ export const App = () => {
 
                     <ProtectedRoute path='/downloads/free-products' allowedLevels={[0, 2, 5]}>
                       <FreeProductsList />
-                    </ProtectedRoute>
-                    <ProtectedRoute path='/professionals' allowedLevels={[0, 2, 5]}>
-                      <Professionals />
                     </ProtectedRoute>
                     <ProtectedRoute path='/downloads/purchased-products' allowedLevels={[0, 2, 5]}>
                       <PurchasedProductsList />

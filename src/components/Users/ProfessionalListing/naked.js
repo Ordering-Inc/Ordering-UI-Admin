@@ -577,8 +577,8 @@ UsersList.propTypes = {
 
 UsersList.defaultProps = {
   propsToFetch: [
-    'name', 'lastname', 'email', 'phone', 'photo', 'cellphone',
-    'country_phone_code', 'city_id', 'city', 'address', 'addresses',
+    'name', 'lastname', 'email', 'phone', 'photo', 'cellphone', 'schedule',
+    'country_phone_code', 'city_id', 'city', 'address', 'addresses', 'max_days_in_future',
     'address_notes', 'driver_zone_restriction', 'dropdown_option_id', 'dropdown_option', 'location',
     'zipcode', 'level', 'enabled', 'middle_name', 'second_lastname', 'birthdate', 'drivergroups'
   ],

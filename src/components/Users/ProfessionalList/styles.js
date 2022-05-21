@@ -130,7 +130,7 @@ export const CheckBoxWrapper = styled.div`
     margin-right: 10px;
   `}
   svg {
-    font-size: 24px;
+    font-size: 16px;
     color: #B1BCCC;
   }
 
