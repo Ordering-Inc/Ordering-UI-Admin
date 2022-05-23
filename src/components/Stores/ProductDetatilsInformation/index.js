@@ -342,11 +342,11 @@ export const ProductDetatilsInformation = (props) => {
                 name='quantity'
                 placeholder={t('QUANTITY', 'Quantity')}
                 defaultValue={product?.quantity}
-                onChange={handleChangeInput}
+                onChange={e => handleChangeFormState({ quantity: parseInt(e.target.value) })}
                 disabled={formState.loading}
                 autoComplete='off'
                 onKeyPress={(e) => {
-                  if (!/^[0-9.]$/.test(e.key)) {
+                  if (!/^[0-9]$/.test(e.key)) {
                     e.preventDefault()
                   }
                 }}
