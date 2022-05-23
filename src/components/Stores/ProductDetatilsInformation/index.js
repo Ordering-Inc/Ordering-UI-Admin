@@ -425,7 +425,7 @@ export const ProductDetatilsInformation = (props) => {
           <Input
             name='seo_keywords'
             placeholder={t('SEO_KEYWORDS', 'SEO Keywords')}
-            defaultValue={product?.seo_keywords}
+            defaultValue={product?.seo_keywords || ''}
             onChange={handleChangeInput}
             disabled={formState.loading}
             autoComplete='off'
