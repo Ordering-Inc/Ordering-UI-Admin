@@ -137,7 +137,7 @@ import {
   GoogleGpsButton
 } from './components/Delivery'
 import { HomePage } from './components/Home'
-import { LoginForm, ForgotPasswordForm } from './components/Login'
+import { LoginForm, ForgotPasswordForm, QueryLogin } from './components/Login'
 import {
   EnterprisePromotionListing,
   CampaignListing,
@@ -504,6 +504,7 @@ export {
 
   HomePage,
   LoginForm,
+  QueryLogin,
 
   EnterprisePromotionListing,
   CampaignListing,

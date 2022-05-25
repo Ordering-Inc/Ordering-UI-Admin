@@ -4,7 +4,8 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
+  useLocation
 } from 'react-router-dom'
 import { useSession, useOrder, useLanguage, useConfig, GoogleTagManager } from 'ordering-components-admin'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -57,6 +58,7 @@ import { RecoveryActionListing } from './pages/RecoveryActionListing'
 import { CampaignListing } from './pages/CampaignListing'
 import { FreeProductsList } from './pages/FreeProductsList'
 import { PurchasedProductsList } from './pages/PurchasedProductsList'
+import { QueryLogin } from '../src/components/Login'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -66,6 +68,15 @@ export const App = () => {
   const [, t] = useLanguage()
   const onlineStatus = useOnlineStatus()
   const { height } = useWindowSize()
+
+  const { search } = useLocation()
+  let queryProject
+  let queryToken
+  if (search) {
+    const query = new URLSearchParams(search)
+    queryProject = query.get('project')
+    queryToken = query.get('token')
+  }
 
   useEffect(() => {
     if (!loaded && !orderStatus.loading) {
@@ -113,7 +124,9 @@ export const App = () => {
                       {
                         auth
                           ? user?.level !== 5 ? <Redirect to='/home' /> : <Redirect to='/orders' />
-                          : <Redirect to='/login' />
+                          : (queryProject && queryToken)
+                            ? <QueryLogin project={queryProject} token={queryToken} />
+                            : <Redirect to='/login' />
                       }
                     </Route>
 
