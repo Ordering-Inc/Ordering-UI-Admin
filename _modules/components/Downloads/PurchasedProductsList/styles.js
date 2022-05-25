@@ -43,14 +43,16 @@ var ProductDetailsContainer = _styledComponents.default.div(_templateObject5 || 
 
 exports.ProductDetailsContainer = ProductDetailsContainer;
 
-var DownloadLink = _styledComponents.default.a(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  img {\n    width: 95px;\n    height: 28px;\n    object-fit: cover;\n  }\n\n  ", "\n"])), function (_ref) {
+var DownloadLink = _styledComponents.default.button(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding: 0;\n  border: none;\n  outline: none;\n  background: transparent;\n  color: ", ";\n\n  &:hover {\n    text-decoration: underline;\n  }\n\n  img {\n    width: 95px;\n    height: 28px;\n    object-fit: cover;\n  }\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (_ref) {
   var isSingle = _ref.isSingle;
   return isSingle && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    margin: 0 auto;\n  "])));
 });
 
 exports.DownloadLink = DownloadLink;
 
-var DownloadLinksContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n\n  > a {\n    &:not(:first-child) {\n      ", "\n    }\n  }\n"])), function (props) {
+var DownloadLinksContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n\n  > button {\n    &:not(:first-child) {\n      ", "\n    }\n  }\n"])), function (props) {
   var _props$theme3;
 
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        margin-right: 24px;\n      "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        margin-left: 24px;\n      "])));

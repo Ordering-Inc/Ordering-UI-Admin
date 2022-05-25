@@ -1665,6 +1665,12 @@ Object.defineProperty(exports, "PurchasedProductsList", {
     return _Downloads.PurchasedProductsList;
   }
 });
+Object.defineProperty(exports, "QueryLogin", {
+  enumerable: true,
+  get: function get() {
+    return _Login.QueryLogin;
+  }
+});
 Object.defineProperty(exports, "RecoveryActionListing", {
   enumerable: true,
   get: function get() {

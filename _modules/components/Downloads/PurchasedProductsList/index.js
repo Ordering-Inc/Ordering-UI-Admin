@@ -71,8 +71,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     long_description: t('STORE_APP_LONG_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.<br /><br />Use it Branded on your business at no cost.<br />All you need to do is use the Business Owners Credentials that you currently have on your Dashboard.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CartPlusFill, null),
     image: theme.images.apps.storeApp,
-    app_store: 'https://www.ordering.co/ordering-sales',
-    google_play_store: 'https://www.ordering.co/ordering-sales'
+    app_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1717',
+    google_play_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1717'
   }, {
     key: 'driver_app',
     type: 1,
@@ -84,8 +84,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
       alt: "delivery app icon"
     }),
     image: theme.images.apps.driverApp,
-    app_store: 'https://www.ordering.co/ordering-sales',
-    google_play_store: 'https://www.ordering.co/ordering-sales'
+    app_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1718',
+    google_play_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1718'
   }, {
     key: 'pos_app',
     type: 1,
@@ -97,8 +97,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
       alt: "pos app icon"
     }),
     image: theme.images.apps.posApp,
-    app_store: 'https://www.ordering.co/ordering-sales',
-    google_play_store: 'https://www.ordering.co/ordering-sales'
+    app_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1793',
+    google_play_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1793'
   }, {
     key: 'kiosk_app',
     type: 1,
@@ -110,8 +110,8 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
       alt: "kiosk app icon"
     }),
     image: theme.images.apps.kioskApp,
-    app_store: 'https://www.ordering.co/ordering-sales',
-    google_play_store: 'https://www.ordering.co/ordering-sales'
+    app_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1794',
+    google_play_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1794'
   }, {
     key: 'call_center',
     type: 2,
@@ -120,7 +120,7 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
     long_description: t('CALL_CENTER_LONG_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null),
     image: theme.images.apps.callCenterApp,
-    web_url: 'https://www.ordering.co/ordering-sales'
+    web_url: 'https://apps.tryordering.com/store/marketplace?category=306&product=1792'
   }];
 
   var handleOpenProductDetails = function handleOpenProductDetails(e, product) {
@@ -224,20 +224,23 @@ var PurchasedProductsList = function PurchasedProductsList(props) {
       __html: selectedProduct.long_description
     }
   }), /*#__PURE__*/_react.default.createElement(_styles2.DownloadLinksContainer, null, selectedProduct.type === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DownloadLink, {
-    href: selectedProduct.app_store,
-    target: "_blank"
+    onClick: function onClick() {
+      return window.open("".concat(selectedProduct.app_store), '_blank');
+    }
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.appStore,
     alt: "App store"
   })), /*#__PURE__*/_react.default.createElement(_styles2.DownloadLink, {
-    href: selectedProduct.google_play_store,
-    target: "_blank"
+    onClick: function onClick() {
+      return window.open("".concat(selectedProduct.google_play_store), '_blank');
+    }
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.googlePlay,
     alt: "Google play"
   }))), selectedProduct.type === 2 && /*#__PURE__*/_react.default.createElement(_styles2.DownloadLink, {
-    href: selectedProduct.web_url,
-    target: "_blank"
+    onClick: function onClick() {
+      return window.open("".concat(selectedProduct.web_url), '_blank');
+    }
   }, selectedProduct.title)))));
 };
 
