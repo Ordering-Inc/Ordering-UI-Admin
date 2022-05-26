@@ -21,12 +21,6 @@ Object.defineProperty(exports, "CustomerCashWalletDetails", {
     return _CustomerCashWalletDetails.CustomerCashWalletDetails;
   }
 });
-Object.defineProperty(exports, "CustomerCashWalletEvents", {
-  enumerable: true,
-  get: function get() {
-    return _CustomerCashWalletEvents.CustomerCashWalletEvents;
-  }
-});
 Object.defineProperty(exports, "CustomerDetails", {
   enumerable: true,
   get: function get() {
@@ -37,6 +31,12 @@ Object.defineProperty(exports, "CustomerPointsWallet", {
   enumerable: true,
   get: function get() {
     return _CustomerPointsWallet.CustomerPointsWallet;
+  }
+});
+Object.defineProperty(exports, "CustomerWalletEvents", {
+  enumerable: true,
+  get: function get() {
+    return _CustomerWalletEvents.CustomerWalletEvents;
   }
 });
 Object.defineProperty(exports, "CustomersListing", {
@@ -176,6 +176,6 @@ var _CustomerPointsWallet = require("./CustomerPointsWallet");
 
 var _CustomerCashWalletDetails = require("./CustomerCashWalletDetails");
 
-var _CustomerCashWalletEvents = require("./CustomerCashWalletEvents");
+var _CustomerWalletEvents = require("./CustomerWalletEvents");
 
 var _UserFormDetails = require("./UserFormDetails");

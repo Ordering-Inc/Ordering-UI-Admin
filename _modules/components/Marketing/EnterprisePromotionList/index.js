@@ -231,7 +231,7 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       alt: "six dots",
       draggable: true,
       onDragStart: function onDragStart(e) {
-        return handleDragStart(e, promotion);
+        return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, promotion);
       }
     })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, promotion !== null && promotion !== void 0 && promotion.image ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage(promotion === null || promotion === void 0 ? void 0 : promotion.image, 'h_50,c_limit')

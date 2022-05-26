@@ -103,26 +103,33 @@ var SettingsListUI = function SettingsListUI(props) {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var item = _step.value;
 
-        if (item.key === 'driver_tip_options' && !/^((\d)+,)*(\d)+$/.test(item.value)) {
-          invalidMessageList.push(t('DRIVER_TIP_OPTIONS_ERROR'));
-          continue;
-        }
+        switch (item === null || item === void 0 ? void 0 : item.key) {
+          case 'driver_tip_options':
+            !/^((\d)+,)*(\d)+$/.test(item.value) && invalidMessageList.push(t('DRIVER_TIP_OPTIONS_ERROR'));
+            break;
 
-        if ((item === null || item === void 0 ? void 0 : item.key) === 'max_days_preorder' && item.value < 1) {
-          invalidMessageList.push(t('MAX_PREORDER_DAYS_MUST_BIGGER_ZERO', 'Max preorder days must be bigger than zero'));
-          continue;
-        }
+          case 'max_days_preorder':
+            item.value < 1 && invalidMessageList.push(t('MAX_PREORDER_DAYS_MUST_BIGGER_ZERO', 'Max preorder days must be bigger than zero'));
+            break;
 
-        if ((item === null || item === void 0 ? void 0 : item.key) === 'platform_fee_fixed' || (item === null || item === void 0 ? void 0 : item.key) === 'platform_fee_percentage') {
-          if (isNaN(Number(item === null || item === void 0 ? void 0 : item.value))) {
-            invalidMessageList.push(t('VALIDATION_ERROR_NUMERIC', "The ".concat(item === null || item === void 0 ? void 0 : item.name, " must be a number.")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
-            continue;
-          }
+          case 'platform_fee_fixed':
+          case 'platform_fee_percentage':
+            if (isNaN(Number(item === null || item === void 0 ? void 0 : item.value))) {
+              invalidMessageList.push(t('VALIDATION_ERROR_NUMERIC', "The ".concat(item === null || item === void 0 ? void 0 : item.name, " must be a number.")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
+            }
 
-          if (isNaN(Number(item === null || item === void 0 ? void 0 : item.value)) || Number(item === null || item === void 0 ? void 0 : item.value) < 0) {
-            invalidMessageList.push(t('VALIDATION_MUST_BIGGER_ZERO', "".concat(item === null || item === void 0 ? void 0 : item.name, " must be bigger than zero")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
-            continue;
-          }
+            if (isNaN(Number(item === null || item === void 0 ? void 0 : item.value)) || Number(item === null || item === void 0 ? void 0 : item.value) < 0) {
+              invalidMessageList.push(t('VALIDATION_MUST_BIGGER_ZERO', "".concat(item === null || item === void 0 ? void 0 : item.name, " must be bigger than zero")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
+            }
+
+            if ((item === null || item === void 0 ? void 0 : item.key) === 'platform_fee_percentage' && Number(item === null || item === void 0 ? void 0 : item.value) >= 100) {
+              invalidMessageList.push(t('VALIDATION_MUST_SMALLER_HUNDRED', "".concat(item === null || item === void 0 ? void 0 : item.name, " must be not bigger than 100")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
+            }
+
+            break;
+
+          default:
+            break;
         }
       }
     } catch (err) {
@@ -143,10 +150,14 @@ var SettingsListUI = function SettingsListUI(props) {
   };
 
   var handleKeyPress = function handleKeyPress(e, key) {
-    if (key === 'platform_fee_fixed' || key === 'platform_fee_percentage') {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault();
-      }
+    switch (key) {
+      case 'platform_fee_fixed':
+      case 'platform_fee_percentage':
+        !/^[0-9.]$/.test(e.key) && e.preventDefault();
+        break;
+
+      default:
+        break;
     }
   };
 

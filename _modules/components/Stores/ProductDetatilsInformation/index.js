@@ -310,7 +310,9 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     placeholder: parsePrice(0),
     defaultValue: product === null || product === void 0 ? void 0 : product.price,
     onChange: function onChange(e) {
-      return handleChangeInput(e);
+      return handleChangeFormState({
+        price: Number(e.target.value)
+      });
     },
     disabled: formState.loading,
     autoComplete: "off",

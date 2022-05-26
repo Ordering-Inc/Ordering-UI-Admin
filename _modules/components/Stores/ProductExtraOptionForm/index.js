@@ -46,7 +46,6 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
 
   var optionState = props.optionState,
       optionChangesState = props.optionChangesState,
-      mainContainerRef = props.mainContainerRef,
       isMaxError = props.isMaxError,
       handleOptionFiles = props.handleOptionFiles,
       handleChangeOptionInput = props.handleChangeOptionInput,
@@ -70,9 +69,6 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
       control = _useForm.control;
 
   var optionImageInputRef = (0, _react.useRef)(null);
-  var optionNameRef = (0, _react.useRef)(null);
-  var optionMinRef = (0, _react.useRef)(null);
-  var optionMaxRef = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -82,20 +78,13 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      timer = _useState4[0],
+      setTimer = _useState4[1];
+
   var handleClickImage = function handleClickImage() {
     optionImageInputRef.current.click();
-  };
-
-  var handleClickOutside = function handleClickOutside(e) {
-    var _mainContainerRef$cur;
-
-    if ((_mainContainerRef$cur = mainContainerRef.current) !== null && _mainContainerRef$cur !== void 0 && _mainContainerRef$cur.contains(e.target)) {
-      var _optionNameRef$curren, _optionMinRef$current, _optionMaxRef$current;
-
-      if (!Object.keys((optionChangesState === null || optionChangesState === void 0 ? void 0 : optionChangesState.changes) || {}).length) return;
-      if ((_optionNameRef$curren = optionNameRef.current) !== null && _optionNameRef$curren !== void 0 && _optionNameRef$curren.contains(e.target) || (_optionMinRef$current = optionMinRef.current) !== null && _optionMinRef$current !== void 0 && _optionMinRef$current.contains(e.target) || (_optionMaxRef$current = optionMaxRef.current) !== null && _optionMaxRef$current !== void 0 && _optionMaxRef$current.contains(e.target)) return;
-      handleSubmit(handleUpdateOption)();
-    }
   };
 
   var handleMaxValidate = function handleMaxValidate() {
@@ -109,12 +98,6 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
   };
 
   (0, _react.useEffect)(function () {
-    document.addEventListener('click', handleClickOutside);
-    return function () {
-      return document.removeEventListener('click', handleClickOutside);
-    };
-  }, [optionChangesState]);
-  (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState({
         open: true,
@@ -124,6 +107,16 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
       });
     }
   }, [errors]);
+  (0, _react.useEffect)(function () {
+    if (!Object.keys((optionChangesState === null || optionChangesState === void 0 ? void 0 : optionChangesState.changes) || {}).length) return;
+    clearTimeout(timer);
+
+    var _timer = setTimeout(function () {
+      handleSubmit(handleUpdateOption)();
+    }, 500);
+
+    setTimer(_timer);
+  }, [optionChangesState === null || optionChangesState === void 0 ? void 0 : optionChangesState.changes]);
   return /*#__PURE__*/_react.default.createElement(_styles2.OptionContainer, {
     onSubmit: handleSubmit(handleUpdateOption)
   }, /*#__PURE__*/_react.default.createElement(_styles2.OptionImage, {
@@ -169,7 +162,6 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
         name: "name",
         autoComplete: "off",
         value: value,
-        ref: optionNameRef,
         onChange: function onChange(e) {
           var _optionState$option5;
 
@@ -195,7 +187,6 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
         name: "min",
         autoComplete: "off",
         value: value,
-        ref: optionMinRef,
         onChange: function onChange(e) {
           var _optionState$option6;
 
@@ -226,7 +217,6 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
           value = _ref3.value;
       return /*#__PURE__*/_react.default.createElement(_styles.Input, {
         name: "max",
-        ref: optionMaxRef,
         value: value,
         autoComplete: "off",
         onChange: function onChange(e) {
