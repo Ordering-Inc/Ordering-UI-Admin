@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useLanguage, UserCashWallet } from 'ordering-components-admin'
+import { useLanguage, UserWallet as UserWalletController } from 'ordering-components-admin'
 import { CustomerCashWalletDetails } from '../CustomerCashWalletDetails'
-import { CustomerCashWalletEvents } from '../CustomerCashWalletEvents'
+import { CustomerWalletEvents } from '../CustomerWalletEvents'
 
 import {
   Container,
@@ -34,7 +34,7 @@ const CustomerCashWalletUI = (props) => {
         <CustomerCashWalletDetails {...props} />
       )}
       {showOption === 'history' && (
-        <CustomerCashWalletEvents {...props} />
+        <CustomerWalletEvents {...props} />
       )}
     </Container>
   )
@@ -43,7 +43,8 @@ const CustomerCashWalletUI = (props) => {
 export const CustomerCashWallet = (props) => {
   const customerWalletProps = {
     ...props,
+    walletType: 'cash',
     UIComponent: CustomerCashWalletUI
   }
-  return <UserCashWallet {...customerWalletProps} />
+  return <UserWalletController {...customerWalletProps} />
 }

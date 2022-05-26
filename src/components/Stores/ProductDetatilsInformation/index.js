@@ -241,7 +241,7 @@ export const ProductDetatilsInformation = (props) => {
               name='price'
               placeholder={parsePrice(0)}
               defaultValue={product?.price}
-              onChange={(e) => handleChangeInput(e)}
+              onChange={(e) => handleChangeFormState({ price: Number(e.target.value) })}
               disabled={formState.loading}
               autoComplete='off'
               onKeyPress={(e) => {

@@ -12,7 +12,7 @@ import {
 
 export const CustomerCashWalletDetails = (props) => {
   const {
-    cashWalletState,
+    walletState,
     addWalletState,
     reduceWalletState,
     actionState,
@@ -59,10 +59,10 @@ export const CustomerCashWalletDetails = (props) => {
     <>
       <WalletBalaceContainer>
         <span>
-          {cashWalletState.loading ? (
+          {walletState.loading ? (
             <Skeleton height={24} width={100} />
           ) : (
-            parsePrice(cashWalletState.wallet?.balance)
+            parsePrice(walletState.wallet?.balance)
           )}
         </span>
         <span>{t('WALLET_MONEY', 'Wallet money')}</span>

@@ -1,52 +1,65 @@
-import React from 'react'
-import { useLanguage, CustomerPointsWallet as CustomerPointsWalletController } from 'ordering-components-admin'
+import React, { useState } from 'react'
+import { useLanguage, UserWallet as UserWalletController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
+import { CustomerWalletEvents } from '../CustomerWalletEvents'
 import {
   Container,
   PointsWalletContainer,
-  PointsWrapper
-  // EqualWrapper
+  PointsWrapper,
+  Tabs,
+  Tab
 } from './styles'
 
 const CustomerPointsWalletUI = (props) => {
   const {
-    WalletState
+    walletState
   } = props
 
   const [, t] = useLanguage()
-  // const [{ parsePrice }] = useUtils()
+  const [showOption, setShowOption] = useState('points_wallet')
 
   return (
     <Container>
       <h1>{t('POINTS_WALLET', 'Points wallet')}</h1>
-      {WalletState?.loading ? (
+      <Tabs>
+        <Tab
+          active={showOption === 'points_wallet'}
+          onClick={() => setShowOption('points_wallet')}
+        >
+          {t('POINTS_WALLET', 'Points wallet')}
+        </Tab>
+        <Tab
+          active={showOption === 'history'}
+          onClick={() => setShowOption('history')}
+        >
+          {t('TRANSACTION_HISTORY', 'Transaction history')}
+        </Tab>
+      </Tabs>
+      {showOption === 'points_wallet' && (
         <>
-          <PointsWalletContainer>
-            <PointsWrapper>
-              <h2><Skeleton width={70} height={20} /></h2>
-              <p><Skeleton width={30} height={15} /></p>
-            </PointsWrapper>
-            {/* <EqualWrapper><Skeleton width={30} height={20} /></EqualWrapper>
-            <PointsWrapper>
-              <h2><Skeleton width={70} height={20} /></h2>
-              <p><Skeleton width={30} height={15} /></p>
-            </PointsWrapper> */}
-          </PointsWalletContainer>
+          {walletState?.loading ? (
+            <>
+              <PointsWalletContainer>
+                <PointsWrapper>
+                  <h2><Skeleton width={70} height={20} /></h2>
+                  <p><Skeleton width={30} height={15} /></p>
+                </PointsWrapper>
+              </PointsWalletContainer>
+            </>
+          ) : (
+            <>
+              <PointsWalletContainer>
+                <PointsWrapper>
+                  <h2>{walletState.wallet?.balance || 0}</h2>
+                  <p>{t('POINTS', 'Points')}</p>
+                </PointsWrapper>
+              </PointsWalletContainer>
+            </>
+          )}
         </>
-      ) : (
-        <>
-          <PointsWalletContainer>
-            <PointsWrapper>
-              <h2>{WalletState.wallets?.find(wallet => wallet.type === 'credit_point')?.balance || 0}</h2>
-              <p>{t('POINTS', 'Points')}</p>
-            </PointsWrapper>
-            {/* <EqualWrapper>,</EqualWrapper>
-            <PointsWrapper>
-              <h2>{parsePrice(WalletState.wallets?.find(wallet => wallet.type === 'cash')?.balance || 0)}</h2>
-              <p>{t('CASH', 'Cash')}</p>
-            </PointsWrapper> */}
-          </PointsWalletContainer>
-        </>
+      )}
+      {showOption === 'history' && (
+        <CustomerWalletEvents {...props} />
       )}
     </Container>
   )
@@ -55,7 +68,8 @@ const CustomerPointsWalletUI = (props) => {
 export const CustomerPointsWallet = (props) => {
   const customerPointsWalletProps = {
     ...props,
+    walletType: 'credit_point',
     UIComponent: CustomerPointsWalletUI
   }
-  return <CustomerPointsWalletController {...customerPointsWalletProps} />
+  return <UserWalletController {...customerPointsWalletProps} />
 }

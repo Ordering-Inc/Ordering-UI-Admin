@@ -18,7 +18,7 @@ import { CustomerDetails } from './CustomerDetails'
 import { CustomerCashWallet } from './CustomerCashWallet'
 import { CustomerPointsWallet } from './CustomerPointsWallet'
 import { CustomerCashWalletDetails } from './CustomerCashWalletDetails'
-import { CustomerCashWalletEvents } from './CustomerCashWalletEvents'
+import { CustomerWalletEvents } from './CustomerWalletEvents'
 import { UserFormDetailsUI } from './UserFormDetails'
 
 export {
@@ -42,6 +42,6 @@ export {
   CustomerCashWallet,
   CustomerPointsWallet,
   CustomerCashWalletDetails,
-  CustomerCashWalletEvents,
+  CustomerWalletEvents,
   UserFormDetailsUI
 }
