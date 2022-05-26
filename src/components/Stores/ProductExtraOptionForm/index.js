@@ -27,8 +27,6 @@ export const ProductExtraOptionForm = (props) => {
   const {
     optionState,
     optionChangesState,
-
-    mainContainerRef,
     isMaxError,
     handleOptionFiles,
     handleChangeOptionInput,
@@ -40,7 +38,6 @@ export const ProductExtraOptionForm = (props) => {
     conditionalSubOptionId,
     handleChangeConditionalOption,
     handleChangeConditionalSubOption,
-
     handleUpdateOption
   } = props
 
@@ -48,21 +45,11 @@ export const ProductExtraOptionForm = (props) => {
   const { handleSubmit, errors, control } = useForm()
 
   const optionImageInputRef = useRef(null)
-  const optionNameRef = useRef(null)
-  const optionMinRef = useRef(null)
-  const optionMaxRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [timer, setTimer] = useState(null)
 
   const handleClickImage = () => {
     optionImageInputRef.current.click()
-  }
-
-  const handleClickOutside = (e) => {
-    if (mainContainerRef.current?.contains(e.target)) {
-      if (!Object.keys(optionChangesState?.changes || {}).length) return
-      if (optionNameRef.current?.contains(e.target) || optionMinRef.current?.contains(e.target) || optionMaxRef.current?.contains(e.target)) return
-      handleSubmit(handleUpdateOption)()
-    }
   }
 
   const handleMaxValidate = () => {
@@ -76,11 +63,6 @@ export const ProductExtraOptionForm = (props) => {
   }
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside)
-    return () => document.removeEventListener('click', handleClickOutside)
-  }, [optionChangesState])
-
-  useEffect(() => {
     if (Object.keys(errors).length > 0) {
       setAlertState({
         open: true,
@@ -88,6 +70,15 @@ export const ProductExtraOptionForm = (props) => {
       })
     }
   }, [errors])
+
+  useEffect(() => {
+    if (!Object.keys(optionChangesState?.changes || {}).length) return
+    clearTimeout(timer)
+    const _timer = setTimeout(() => {
+      handleSubmit(handleUpdateOption)()
+    }, 500)
+    setTimer(_timer)
+  }, [optionChangesState?.changes])
 
   return (
     <OptionContainer
@@ -134,7 +125,6 @@ export const ProductExtraOptionForm = (props) => {
                   name='name'
                   autoComplete='off'
                   value={value}
-                  ref={optionNameRef}
                   onChange={(e) => {
                     onChange(e.target.value)
                     handleChangeOptionInput(e, optionState.option?.id)
@@ -158,7 +148,6 @@ export const ProductExtraOptionForm = (props) => {
                     name='min'
                     autoComplete='off'
                     value={value}
-                    ref={optionMinRef}
                     onChange={(e) => {
                       onChange(e.target.value)
                       handleChangeOptionInput(e, optionState.option?.id)
@@ -185,7 +174,6 @@ export const ProductExtraOptionForm = (props) => {
                 render={({ onChange, value }) => (
                   <Input
                     name='max'
-                    ref={optionMaxRef}
                     value={value}
                     autoComplete='off'
                     onChange={(e) => {
