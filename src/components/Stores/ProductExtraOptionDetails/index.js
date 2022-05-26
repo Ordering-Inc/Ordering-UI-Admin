@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
   DragAndDrop,
@@ -75,7 +75,6 @@ const ProductExtraOptionDetailsUI = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const mainContainerRef = useRef()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openModal, setOpenModal] = useState({})
@@ -164,7 +163,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   }, [changesState?.changes, editSubOptionId])
 
   return (
-    <MainContainer ref={mainContainerRef}>
+    <MainContainer>
       <Header>
         <h1>{t('PRODUCT_OPTION', 'Product option')}</h1>
         <ActionSelectorWrapper>
@@ -191,7 +190,6 @@ const ProductExtraOptionDetailsUI = (props) => {
       <ProductExtraOptionForm
         optionState={optionState}
         optionChangesState={optionChangesState}
-        mainContainerRef={mainContainerRef}
         isMaxError={isMaxError}
         handleOptionFiles={handleOptionFiles}
         handleChangeOptionInput={handleChangeOptionInput}
