@@ -93,8 +93,9 @@ export const SelectWrapper = styled.div`
     svg {
       display: none;
     }
-    .list {
-      width: 100%;
+  }
+  .list {
+    .options {
       > div {
         > div {
           min-width: initial;

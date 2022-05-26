@@ -219,7 +219,7 @@ export const DriversGroupsList = (props) => {
                           <span>{t('ENABLE', 'Enable')}</span>
                           <Switch
                             defaultChecked={group?.enabled}
-                            onChange={enabled => handleUpdateDriversGroup(group.id, { enabled: enabled })}
+                            onChange={enabled => handleUpdateDriversGroup?.(group.id, { enabled: enabled })}
                           />
                         </EnableWrapper>
                       </ActionsContainer>

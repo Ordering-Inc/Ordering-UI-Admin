@@ -67,7 +67,7 @@ const BusinessSharedMenuProductsUI = (props) => {
               <Checkbox
                 className='product_checkbox'
                 defaultChecked={product.enabled}
-                onChange={e => handleUpdateBusinessSharedMenuProduct(product.id, { enabled: e.target.checked })}
+                onChange={e => handleUpdateBusinessSharedMenuProduct?.(product.id, { enabled: e.target.checked })}
               />
               <span>{product.name}</span>
               <ChevronRight />

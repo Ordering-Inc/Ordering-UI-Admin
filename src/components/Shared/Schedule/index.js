@@ -11,7 +11,7 @@ import {
 } from 'react-bootstrap-icons'
 import { Alert, Confirm } from '../Confirm'
 import { ScheduleCopyTimes } from '../ScheduleCopyTimes'
-import { DefaultSelect, Checkbox } from '../../../styles'
+import { SecondSelect as DefaultSelect, Checkbox } from '../../../styles'
 
 import {
   ScheduleContainer,

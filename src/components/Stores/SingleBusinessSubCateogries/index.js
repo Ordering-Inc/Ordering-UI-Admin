@@ -83,7 +83,7 @@ const SingleBusinessSubCateogriesUI = (props) => {
               active={!isSkeleton && (category?.id === categorySelected?.id)}
 
               onDrop={e => handleDrop(e)}
-              onDragOver={e => handleDragOver(e, isLastCategory)}
+              onDragOver={e => handleDragOver?.(e, isLastCategory)}
               onDragEnd={e => handleDragEnd(e)}
               className='draggable-category'
               data-index={category?.id}
@@ -95,7 +95,7 @@ const SingleBusinessSubCateogriesUI = (props) => {
                   src={theme.images.icons?.sixDots}
                   alt='six dots'
                   draggable
-                  onDragStart={e => handleDragStart(e)}
+                  onDragStart={e => handleDragStart?.(e)}
                 />
                 {category?.subcategories && (
                   category?.subcategories.length > 0 && (

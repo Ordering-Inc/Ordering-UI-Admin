@@ -49,23 +49,27 @@ export const SettingsListUI = (props) => {
   const handleSubmit = () => {
     const invalidMessageList = []
     for (const item of formState.changes) {
-      if (item.key === 'driver_tip_options' && !/^((\d)+,)*(\d)+$/.test(item.value)) {
-        invalidMessageList.push(t('DRIVER_TIP_OPTIONS_ERROR'))
-        continue
-      }
-      if (item?.key === 'max_days_preorder' && item.value < 1) {
-        invalidMessageList.push(t('MAX_PREORDER_DAYS_MUST_BIGGER_ZERO', 'Max preorder days must be bigger than zero'))
-        continue
-      }
-      if (item?.key === 'platform_fee_fixed' || item?.key === 'platform_fee_percentage') {
-        if (isNaN(Number(item?.value))) {
-          invalidMessageList.push(t('VALIDATION_ERROR_NUMERIC', `The ${item?.name} must be a number.`).replace('_attribute_', item?.name))
-          continue
-        }
-        if (isNaN(Number(item?.value)) || Number(item?.value) < 0) {
-          invalidMessageList.push(t('VALIDATION_MUST_BIGGER_ZERO', `${item?.name} must be bigger than zero`).replace('_attribute_', item?.name))
-          continue
-        }
+      switch (item?.key) {
+        case 'driver_tip_options':
+          !/^((\d)+,)*(\d)+$/.test(item.value) && invalidMessageList.push(t('DRIVER_TIP_OPTIONS_ERROR'))
+          break
+        case 'max_days_preorder':
+          item.value < 1 && invalidMessageList.push(t('MAX_PREORDER_DAYS_MUST_BIGGER_ZERO', 'Max preorder days must be bigger than zero'))
+          break
+        case 'platform_fee_fixed':
+        case 'platform_fee_percentage':
+          if (isNaN(Number(item?.value))) {
+            invalidMessageList.push(t('VALIDATION_ERROR_NUMERIC', `The ${item?.name} must be a number.`).replace('_attribute_', item?.name))
+          }
+          if (isNaN(Number(item?.value)) || Number(item?.value) < 0) {
+            invalidMessageList.push(t('VALIDATION_MUST_BIGGER_ZERO', `${item?.name} must be bigger than zero`).replace('_attribute_', item?.name))
+          }
+          if (item?.key === 'platform_fee_percentage' && Number(item?.value) >= 100) {
+            invalidMessageList.push(t('VALIDATION_MUST_SMALLER_HUNDRED', `${item?.name} must be not bigger than 100`).replace('_attribute_', item?.name))
+          }
+          break
+        default:
+          break
       }
     }
     if (invalidMessageList.length > 0) {
@@ -76,10 +80,13 @@ export const SettingsListUI = (props) => {
   }
 
   const handleKeyPress = (e, key) => {
-    if (key === 'platform_fee_fixed' || key === 'platform_fee_percentage') {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault()
-      }
+    switch (key) {
+      case 'platform_fee_fixed':
+      case 'platform_fee_percentage':
+        !/^[0-9.]$/.test(e.key) && e.preventDefault()
+        break
+      default:
+        break
     }
   }
   useEffect(() => {
