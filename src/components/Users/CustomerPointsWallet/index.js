@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { UserWallet as UserWalletController } from './naked'
+import { useLanguage, UserWallet as UserWalletController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { CustomerWalletEvents } from '../CustomerWalletEvents'
 import {
