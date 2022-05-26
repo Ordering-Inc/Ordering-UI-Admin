@@ -217,7 +217,7 @@ export const ProfessionalList = (props) => {
                           </WrapperImage>
                           <InfoBlock>
                             <p className='bold'>{user.name} {user?.lastname}</p>
-                            <p>{user?.email}</p>
+                            {allowColumns?.city && user?.city && <p>{user?.city}</p>}
                           </InfoBlock>
                           {(user?.phone_verified || user?.email_verified) && (
                             <VerifiedItemsContainer>

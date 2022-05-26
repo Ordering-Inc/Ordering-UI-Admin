@@ -45,7 +45,7 @@ const ProfessionalBusinessServiceUI = (props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pagesPerPage, setPagesPerPage] = useState(10)
 
-  // Get current products
+  // Get current business
   const [currentBusinesses, setCurrentBusinesses] = useState([])
   const [totalPages, setTotalPages] = useState(null)
   const [selectedBusinessId, setSelectedBusinessId] = useState(null)
