@@ -300,7 +300,7 @@ export const ProductDetatilsInformation = (props) => {
             </DragAndDrop>
           </ExamineClick>
         </ProductImage>
-        <SelectWrapper>
+        <SelectWrapper notAllow>
           <label>{t('TYPE', 'Type')}</label>
           <Select
             options={typeList}

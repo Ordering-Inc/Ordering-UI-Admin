@@ -20,8 +20,46 @@ export const BusinessItemContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid #E9ECEF;
-  margin-bottom: 5px;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  justify-content: space-between;
+  transition: all 0.3s linear;
+  cursor: pointer;
+
+  &:hover {
+    background: ${props => props.theme.colors.secundary};
+  }
+
+  ${({ active }) => active && css`
+    background: ${props => props.theme.colors.backgroundInfo};
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+  `}
+
+  ${({ notAllow }) => notAllow && css`
+    cursor: not-allowed;
+  `}
+
+  > svg {
+    font-size: 18px;
+    color: ${props => props.theme.colors.secundaryLight};
+  }
+`
+
+export const CheckWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    cursor: pointer;
+    svg {
+      font-size: 16px;
+      color: ${props => props.theme.colors.secundaryLight};
+
+      &.active {
+        color: ${props => props.theme.colors.primary};
+      }
+    }
+  }
 
   > label {
     margin: 0;

@@ -305,6 +305,13 @@ export const SelectWrapper = styled.div`
       }
     }
   }
+
+  ${({ notAllow }) => notAllow && css`
+    cursor: not-allowed;
+    > div {
+      pointer-events: none;
+    }
+  `}
 `
 
 export const TimeBlock = styled.div`

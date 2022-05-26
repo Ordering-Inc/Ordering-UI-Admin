@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage } from 'ordering-components-admin'
-import { UsersList as UsersListController } from './naked'
+import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
 import { ProfessionalList } from '../ProfessionalList'
 import { UsersListingHeader } from '../UsersListingHeader'
-import { ProfessionalTypeFilter } from '../ProfessionalTypeFilter'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
 import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
+import { ProfessionalAddForm } from '../ProfessionalAddForm'
 import { SideBar } from '../../Shared'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
@@ -17,11 +16,10 @@ import {
   ActionsContainer,
   ActionButtonsGroup
 } from './styles'
-import { ProfessionalAddForm } from '../ProfessionalAddForm'
 
 const ProfessionalListingUI = (props) => {
   const {
-    deafultUserTypesSelected,
+    defaultUserTypesSelected,
     disabledActiveStateCondition,
     headerTitle,
 
@@ -104,7 +102,6 @@ const ProfessionalListingUI = (props) => {
           handleChangeUserActiveState={handleChangeUserActiveState}
         />
         <ActionsContainer>
-          <ProfessionalTypeFilter />
           <ActionButtonsGroup>
             <Button
               borderRadius='8px'
@@ -114,7 +111,7 @@ const ProfessionalListingUI = (props) => {
               {t('ADD_PROFESSIONAL', 'Add professional')}
             </Button>
             <UsersExportCSV
-              deafultUserTypesSelected={deafultUserTypesSelected}
+              defaultUserTypesSelected={defaultUserTypesSelected}
               disabledActiveStateCondition={disabledActiveStateCondition}
               userTypesSelected={userTypesSelected}
               selectedUserActiveState={selectedUserActiveState}

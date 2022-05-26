@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { ProfessionalSchedule as ProfessionalScheduleController } from './naked'
+import { useLanguage, ProfessionalSchedule as ProfessionalScheduleController } from 'ordering-components-admin'
 import { Circle as UnCheckIcon, RecordCircleFill as CheckIcon } from 'react-bootstrap-icons'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { Schedule } from '../../Shared'
@@ -68,8 +67,6 @@ const ProfessionalScheduleUI = (props) => {
     if (typeof user?.max_days_in_future === 'number') setIsMaxDays(true)
     if (user?.schedule) setScheduleType('customize')
   }, [user])
-
-  console.log(formState, 'This is formState')
 
   return (
     <>

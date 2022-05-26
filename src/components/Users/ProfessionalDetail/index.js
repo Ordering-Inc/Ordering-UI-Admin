@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController, useLanguage, useSession } from 'ordering-components-admin'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
-import { Envelope, Phone, ThreeDots } from 'react-bootstrap-icons'
+import { ThreeDots } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Confirm } from '../../Shared'
@@ -11,17 +11,14 @@ import { Switch } from '../../../styles'
 
 import {
   DetailsHeader,
-  VerifiedItem,
   UserName,
-  ActionSelectorWrapper,
-  VerifiedItemsWrapper
+  ActionSelectorWrapper
 } from './styles'
 import { ProfessionalSchedule } from '../ProfessionalSchedule'
 import { ProfessionalBusinessService } from '../ProfessionalBusinessService'
 
 export const ProfessionalDetailUI = (props) => {
   const {
-    isManagers,
     userState,
     setExtraOpen,
     handleSuccessUserUpdate,
@@ -72,38 +69,19 @@ export const ProfessionalDetailUI = (props) => {
             </>
           )}
         </UserName>
-        {isManagers && (
-          <>
-            <VerifiedItemsWrapper>
-              {!!userState.user?.phone_verified && (
-                <VerifiedItem>
-                  <Phone />
-                  {t('VERIFIED', 'Verified')}
-                </VerifiedItem>
-              )}
 
-              {!!userState.user?.email_verified && (
-                <VerifiedItem>
-                  <Envelope />
-                  {t('VERIFIED', 'Verified')}
-                </VerifiedItem>
-              )}
-            </VerifiedItemsWrapper>
-
-            {adminUserState.user?.id !== userState.user?.id && (
-              <ActionSelectorWrapper>
-                <DropdownButton
-                  menuAlign={theme?.rtl ? 'left' : 'right'}
-                  title={<ThreeDots />}
-                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                >
-                  <Dropdown.Item onClick={() => onDeleteCustomer()}>
-                    {t('DELETE', 'Delete')}
-                  </Dropdown.Item>
-                </DropdownButton>
-              </ActionSelectorWrapper>
-            )}
-          </>
+        {adminUserState.user?.id !== userState.user?.id && (
+          <ActionSelectorWrapper>
+            <DropdownButton
+              menuAlign={theme?.rtl ? 'left' : 'right'}
+              title={<ThreeDots />}
+              id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+            >
+              <Dropdown.Item onClick={() => onDeleteCustomer()}>
+                {t('DELETE', 'Delete')}
+              </Dropdown.Item>
+            </DropdownButton>
+          </ActionSelectorWrapper>
         )}
       </DetailsHeader>
       <UserDetailsMenu
@@ -117,18 +95,21 @@ export const ProfessionalDetailUI = (props) => {
             <UserProfileForm
               user={userState.user}
               handleSuccessUpdate={handleSuccessUserUpdate}
+              isProfessional
             />
           )}
           {currentMenuSelected === 'schedule' && (
             <ProfessionalSchedule
               user={userState.user}
               handleSuccessUpdate={handleSuccessUserUpdate}
+              setExtraOpen={setExtraOpen}
             />
           )}
           {currentMenuSelected === 'business_services' && (
             <ProfessionalBusinessService
               user={userState.user}
               handleSuccessUpdate={handleSuccessUserUpdate}
+              setExtraOpen={setExtraOpen}
             />
           )}
         </>

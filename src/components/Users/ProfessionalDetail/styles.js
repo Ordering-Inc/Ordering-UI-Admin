@@ -8,6 +8,7 @@ export const DetailsHeader = styled.div`
   margin-bottom: 10px;
   margin-top: -5px;
 `
+
 export const UserName = styled.div`
   display: flex;
   align-items: center;
@@ -22,26 +23,6 @@ export const UserName = styled.div`
     ${props => props.theme.rtl && css`
       margin-right: 10px;
       margin-left: 0px;
-    `}
-  }
-`
-
-export const VerifiedItem = styled.span`
-  font-size: 10px;
-  background-color: ${props => props.theme.colors.lightGreen};
-  padding: 2px 7px;
-  border-radius: 50px;
-  color: ${props => props.theme.colors.green};
-  display: flex;
-  align-items: center;
-  margin: 0 5px;
-
-  svg {
-    font-size: 12px;
-    ${props => props.theme?.rtl ? css`
-      margin-left: 3px;
-    ` : css`
-      margin-right: 3px;
     `}
   }
 `
@@ -103,9 +84,4 @@ export const ActionSelectorWrapper = styled.div`
       }
     }
   }
-`
-export const VerifiedItemsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  flex: 1;
 `

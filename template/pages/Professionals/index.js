@@ -9,7 +9,7 @@ export const Professionals = (props) => {
   const professionalProps = {
     ...props,
     headerTitle: t('PROFESSIONALS', 'Professionals'),
-    deafultUserTypesSelected: [8],
+    defaultUserTypesSelected: [8],
     propsToFetch: [
       'name', 'lastname', 'email', 'phone', 'photo', 'cellphone', 'schedule',
       'country_phone_code', 'city_id', 'city', 'address', 'addresses', 'max_days_in_future',

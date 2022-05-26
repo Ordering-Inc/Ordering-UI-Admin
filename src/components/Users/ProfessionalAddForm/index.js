@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  UserFormDetails as UserFormDetailsController
 } from 'ordering-components-admin'
-import { UserFormDetails as UserFormDetailsController } from './naked'
 import { Input, Button } from '../../../styles'
 import { Alert, InputPhoneNumber, RangeCalendar } from '../../Shared'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -187,7 +187,7 @@ const ProfessionalAddFormUI = (props) => {
         data-tour='tour_fill'
       >
         <h1>
-          {t('USERS_REGISTER', 'New user')}
+          {t('NEW_PROFESSIONAL', 'New professional')}
         </h1>
         <UserImage className='user-image'>
           <Image onClick={() => handleClickImage()} isImage={formState?.changes?.photo && !formState.result.error}>

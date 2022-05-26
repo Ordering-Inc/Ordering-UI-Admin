@@ -91,7 +91,7 @@ export const RangeCalendar = (props) => {
         }
       ])
     }
-  }, [])
+  }, [defaultValue])
 
   return (
     <Container>
