@@ -4,7 +4,7 @@ import {
   useUtils,
   ProfessionalBusinessService as ProfessionalBusinessServiceController
 } from 'ordering-components-admin'
-import { NotFoundSource, Pagination, SearchBar, SideBar } from '../../Shared'
+import { NotFoundSource, Pagination, SearchBar, SideBar, Alert } from '../../Shared'
 import { Button } from '../../../styles'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -33,7 +33,9 @@ const ProfessionalBusinessServiceUI = (props) => {
     handleUpdateBusinessIds,
     userServiceList,
     user,
-    handleUpdateServices
+    handleUpdateServices,
+    extraSelected,
+    setExtraSelected
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -47,15 +49,24 @@ const ProfessionalBusinessServiceUI = (props) => {
   const [currentBusinesses, setCurrentBusinesses] = useState([])
   const [totalPages, setTotalPages] = useState(null)
   const [selectedBusinessId, setSelectedBusinessId] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleOpenService = (businessId) => {
     if (businessId) {
       setSelectedBusinessId(businessId)
+      setExtraSelected(null)
       setExtraOpen(true)
     } else {
       setSelectedBusinessId(null)
       setExtraOpen(false)
     }
+  }
+
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
   }
 
   const handleSelectAllBusinesses = (index) => {
@@ -79,7 +90,11 @@ const ProfessionalBusinessServiceUI = (props) => {
   }
 
   const handleClickItem = (e, businessId) => {
-    if (e.target.closest('.check-box') || !businessIds?.includes(businessId)) return
+    if (e.target.closest('.check-box')) return
+    if (!businessIds?.includes(businessId)) {
+      setAlertState({ open: true, content: t('DISABLED_BUSINESS', 'Disabled business') })
+      return
+    }
     handleOpenService(businessId)
   }
 
@@ -103,6 +118,10 @@ const ProfessionalBusinessServiceUI = (props) => {
   useEffect(() => {
     if (searchValue) setCurrentPage(1)
   }, [searchValue])
+
+  useEffect(() => {
+    if (extraSelected) setSelectedBusinessId(null)
+  }, [extraSelected])
 
   return (
     <>
@@ -211,6 +230,15 @@ const ProfessionalBusinessServiceUI = (props) => {
           />
         </SideBar>
       )}
+      <Alert
+        title={t('BUSINESS_AND_SERVICES', 'Business & Services')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

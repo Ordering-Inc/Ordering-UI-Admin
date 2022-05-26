@@ -33,5 +33,5 @@ export const SkeletonCheckWrapper = styled.div`
 `
 
 export const SearchWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 25px;
 `

@@ -37,6 +37,9 @@ export const BusinessItemContainer = styled.div`
 
   ${({ notAllow }) => notAllow && css`
     cursor: not-allowed;
+    * {
+      cursor: not-allowed;
+    }
   `}
 
   > svg {
@@ -49,9 +52,13 @@ export const CheckWrapper = styled.div`
   display: flex;
   align-items: center;
 
+  .check-box {
+    cursor: pointer !important;
+  }
+
   span {
-    cursor: pointer;
     svg {
+      cursor: pointer !important;
       font-size: 16px;
       color: ${props => props.theme.colors.secundaryLight};
 

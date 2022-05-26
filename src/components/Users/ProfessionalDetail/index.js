@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { UserDetails as UserDetailsController, useLanguage, useSession } from 'ordering-components-admin'
-import { UserDetailsMenu } from '../UserDetailsMenu'
-import { UserProfileForm } from '../UserProfileForm'
 import { ThreeDots } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { Confirm } from '../../Shared'
+import { UserDetails as UserDetailsController, useLanguage, useSession } from 'ordering-components-admin'
+import { Confirm, Personalization, SideBar } from '../../Shared'
+import { UserDetailsMenu } from '../UserDetailsMenu'
+import { UserProfileForm } from '../UserProfileForm'
+import { ProfessionalSchedule } from '../ProfessionalSchedule'
+import { ProfessionalBusinessService } from '../ProfessionalBusinessService'
+import { UserMetaFields } from '../UserMetaFields'
 import { Switch } from '../../../styles'
 
 import {
   DetailsHeader,
   UserName,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  SideBarWrapper
 } from './styles'
-import { ProfessionalSchedule } from '../ProfessionalSchedule'
-import { ProfessionalBusinessService } from '../ProfessionalBusinessService'
 
 export const ProfessionalDetailUI = (props) => {
   const {
@@ -30,6 +32,7 @@ export const ProfessionalDetailUI = (props) => {
   const [adminUserState] = useSession()
   const [, t] = useLanguage()
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
+  const [extraSelected, setExtraSelected] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const onDeleteCustomer = () => {
@@ -43,8 +46,19 @@ export const ProfessionalDetailUI = (props) => {
     })
   }
 
+  const handleOpenExtra = (index) => {
+    if (index) {
+      setExtraSelected(index)
+      setExtraOpen(true)
+    } else {
+      setExtraSelected(null)
+      setExtraOpen(false)
+    }
+  }
+
   useEffect(() => {
     setExtraOpen(false)
+    setExtraSelected(null)
   }, [currentMenuSelected])
 
   return (
@@ -77,6 +91,12 @@ export const ProfessionalDetailUI = (props) => {
               title={<ThreeDots />}
               id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
             >
+              <Dropdown.Item onClick={() => handleOpenExtra('custom_fields')}>
+                {t('CUSTOM_FIELDS', 'Custom fields')}
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => handleOpenExtra('personalization')}>
+                {t('PERSONALIZATION', 'Personalization')}
+              </Dropdown.Item>
               <Dropdown.Item onClick={() => onDeleteCustomer()}>
                 {t('DELETE', 'Delete')}
               </Dropdown.Item>
@@ -110,9 +130,38 @@ export const ProfessionalDetailUI = (props) => {
               user={userState.user}
               handleSuccessUpdate={handleSuccessUserUpdate}
               setExtraOpen={setExtraOpen}
+              extraSelected={extraSelected}
+              setExtraSelected={setExtraSelected}
             />
           )}
         </>
+      )}
+      {extraSelected && (
+        <SideBar
+          sidebarId='extra_field'
+          defaultSideBarWidth={500}
+          isBorderShow
+          IconTop='30px'
+          open={extraSelected}
+          onClose={() => handleOpenExtra()}
+        >
+          <SideBarWrapper>
+            {extraSelected === 'custom_fields' && (
+              <>
+                <h1>{t('CUSTOM_FIELDS', 'Custom fields')}</h1>
+                <UserMetaFields
+                  userId={userState.user?.id}
+                />
+              </>
+            )}
+            {extraSelected === 'personalization' && (
+              <>
+                <h1>{t('PERSONALIZATION', 'Personalization')}</h1>
+                <Personalization />
+              </>
+            )}
+          </SideBarWrapper>
+        </SideBar>
       )}
       <Confirm
         width='700px'

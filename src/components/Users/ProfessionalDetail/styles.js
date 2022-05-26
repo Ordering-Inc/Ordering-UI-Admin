@@ -85,3 +85,19 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
 `
+
+export const SideBarWrapper = styled.div`
+  max-width: 500px;
+  height: 100%;
+  padding: 35px 20px;
+  width: 100%;
+  > h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+  > div {
+    padding: 0px;
+    height: calc(100% - 50px);
+  }
+`
