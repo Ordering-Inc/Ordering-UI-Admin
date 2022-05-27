@@ -142,7 +142,7 @@ var RangeCalendar = function RangeCalendar(props) {
         key: 'selection'
       }]);
     }
-  }, []);
+  }, [defaultValue]);
   return /*#__PURE__*/_react.default.createElement(_styles3.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     onClick: handleOpenCalendar,
     borderRadius: "8px",

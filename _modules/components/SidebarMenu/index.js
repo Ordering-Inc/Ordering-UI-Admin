@@ -137,6 +137,11 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('MANAGERS', 'Managers'),
     pageName: 'managers',
     url: '/users/managers'
+  }, {
+    id: 3,
+    title: t('PROFESSIONALS', 'Professionals'),
+    pageName: 'professionals',
+    url: '/users/professionals'
   }];
   var settingsSubMenus = [{
     id: 1,
@@ -338,7 +343,7 @@ var SidebarMenu = function SidebarMenu(props) {
     }, item.title);
   })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user6 = sessionState.user) === null || _sessionState$user6 === void 0 ? void 0 : _sessionState$user6.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "4",
-    active: location.pathname === '/users/customers' || location.pathname === '/users/managers' || location.pathname === '/users/operation'
+    active: location.pathname === '/users/customers' || location.pathname === '/users/managers' || location.pathname === '/users/operation' || location.pathname === '/users/professionals'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "4"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, usersSubMenus.map(function (item) {

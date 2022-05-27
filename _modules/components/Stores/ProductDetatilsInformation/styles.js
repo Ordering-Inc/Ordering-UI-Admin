@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Wrapper = exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SkeletonWrapper = exports.ShapeWrapper = exports.ShapeContentWrapper = exports.ShapeBoxWrapper = exports.RegularWrapper = exports.ProductImage = exports.InventoryWrapper = exports.InputWrapper = exports.FormInput = exports.FieldRow = exports.ColorWrapper = exports.ColorShapeWrapper = exports.ActionsForm = void 0;
+exports.Wrapper = exports.UploadImageIconContainer = exports.UploadImageIcon = exports.TimeContent = exports.TimeBlock = exports.SkeletonWrapper = exports.ShapeWrapper = exports.ShapeContentWrapper = exports.ShapeBoxWrapper = exports.SelectWrapper = exports.RegularWrapper = exports.ProductImage = exports.Option = exports.InventoryWrapper = exports.InputWrapper = exports.FormInput = exports.FieldRow = exports.ColorWrapper = exports.ColorShapeWrapper = exports.ActionsForm = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -46,7 +46,7 @@ var UploadImageIcon = _styledComponents.default.div(_templateObject8 || (_templa
 
 exports.UploadImageIcon = UploadImageIcon;
 
-var InputWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-top: 24px;\n\n  label {\n    color: ", ";\n    margin-bottom: 10px;\n    font-size: 14px;\n  }\n\n  input,\n  textarea {\n    color: ", ";\n  }\n\n  input::-webkit-outer-spin-button,\n  input::-webkit-inner-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n  }\n\n  input[type=number] {\n    -moz-appearance: textfield;\n  }\n"])), function (props) {
+var InputWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-top: 24px;\n  justify-content: flex-end;\n\n  label {\n    color: ", ";\n    margin-bottom: 10px;\n    font-size: 14px;\n  }\n\n  input,\n  textarea {\n    color: ", ";\n  }\n\n  input::-webkit-outer-spin-button,\n  input::-webkit-inner-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n  }\n\n  input[type=number] {\n    -moz-appearance: textfield;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.headingColor;
@@ -124,3 +124,42 @@ var ShapeBoxWrapper = _styledComponents.default.div(_templateObject29 || (_templ
 });
 
 exports.ShapeBoxWrapper = ShapeBoxWrapper;
+
+var Option = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 24px;\n  color: ", ";\n  span {\n    text-transform: lowercase;\n  }\n"])), function (props) {
+  return props.theme.colors.secundaryContrast;
+});
+
+exports.Option = Option;
+
+var SelectWrapper = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n\n  label {\n    color: ", ";\n    margin-bottom: 10px;\n    font-size: 14px;\n  }\n\n  > div {\n    width: 100%;\n    border: none;\n\n    > div:first-child {\n      background-color: ", ";\n      height: 43px;\n      border: none;\n      border-radius: 7.6px;\n      font-weight: 400;\n      font-size: 14px;\n      line-height: 24px;\n      color: ", ";\n    }\n    .list {\n      background-color: ", ";\n      border: none;\n      \n      .search-bar-container {\n        padding: 10px;\n        input {\n          background-color: transparent;\n          height: 44px;\n        }\n      }\n\n      .list-wrapper {\n        > div {\n          padding: 6px 10px;\n          &:hover {\n            background-color: #f2f5f7;\n          }\n        }\n      }\n    }\n  }\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.secundaryContrast;
+}, function (props) {
+  return props.theme.colors.secundary;
+}, function (_ref7) {
+  var notAllow = _ref7.notAllow;
+  return notAllow && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    cursor: not-allowed;\n    > div {\n      pointer-events: none;\n    }\n  "])));
+});
+
+exports.SelectWrapper = SelectWrapper;
+
+var TimeBlock = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  display: flex;\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  border-radius: 7.6px;\n  width: fit-content;\n  align-items: center;\n  overflow: hidden;\n\n  > span {\n    color: ", ";\n  }\n  \n  > select {\n    height: 40px;\n    padding: 0px 10px;\n    border: none;\n    outline: none;\n    font-size: 14px;\n    color: ", ";\n    appearance: none;\n  }\n"])), function (props) {
+  return props.theme.colors.gray;
+}, function (props) {
+  var _props$theme5;
+
+  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.colors.secundaryLight;
+}, function (props) {
+  var _props$theme6;
+
+  return (_props$theme6 = props.theme) === null || _props$theme6 === void 0 ? void 0 : _props$theme6.colors.secundaryLight;
+});
+
+exports.TimeBlock = TimeBlock;
+
+var TimeContent = _styledComponents.default.div(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral([""])));
+
+exports.TimeContent = TimeContent;

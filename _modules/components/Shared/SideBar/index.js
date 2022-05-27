@@ -39,7 +39,8 @@ var SideBar = function SideBar(props) {
       moveDistance = props.moveDistance,
       isBorderShow = props.isBorderShow,
       noAnimation = props.noAnimation,
-      handleCloseWizard = props.handleCloseWizard;
+      handleCloseWizard = props.handleCloseWizard,
+      IconTop = props.IconTop;
   var sideBarRef = (0, _react.useRef)(null);
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
@@ -92,7 +93,8 @@ var SideBar = function SideBar(props) {
     ref: sideBarRef,
     isBorderShow: isBorderShow,
     moveDistance: moveDistance,
-    noAnimation: noAnimation
+    noAnimation: noAnimation,
+    IconTop: IconTop
   }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {

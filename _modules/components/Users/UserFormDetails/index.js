@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _formState$changes$dr, _formState$changes6;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _formState$changes$dr, _formState$changes6, _formState$changes$bi, _formState$changes7;
 
   var formState = props.formState,
       showField = props.showField,
@@ -67,7 +67,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       userData = props.userData,
       isCustomerMode = props.isCustomerMode,
       isDriversPage = props.isDriversPage,
-      handleChangeSwtich = props.handleChangeSwtich;
+      handleChangeSwtich = props.handleChangeSwtich,
+      isProfessional = props.isProfessional;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -359,6 +360,13 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     defaultChecked: (_formState$changes$dr = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction,
     onChange: function onChange(val) {
       return handleChangeSwtich('driver_zone_restriction', val);
+    }
+  })), isProfessional && /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
+    isLeft: true,
+    isSingleDate: true,
+    defaultValue: (_formState$changes$bi = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.birthdate) !== null && _formState$changes$bi !== void 0 ? _formState$changes$bi : user === null || user === void 0 ? void 0 : user.birthdate,
+    handleChangeDate: function handleChangeDate(date) {
+      return handleChangeSwtich('birthdate', date);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     id: "form-btn",

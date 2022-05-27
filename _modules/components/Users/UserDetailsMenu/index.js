@@ -30,13 +30,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsMenu = function UserDetailsMenu(props) {
   var currentMenuSelected = props.currentMenuSelected,
       handleChangeMenu = props.handleChangeMenu,
-      isBusinessOwner = props.isBusinessOwner;
+      isBusinessOwner = props.isBusinessOwner,
+      isProfessional = props.isProfessional;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var menuItems = isBusinessOwner ? [{
+  var businessMenuList = [{
     key: 'profile',
     content: t('PROFILE', 'Profile')
   }, {
@@ -54,7 +55,8 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
   }, {
     key: 'personalization',
     content: t('PERSONALIZATION', 'Personalization')
-  }] : [{
+  }];
+  var userMenuList = [{
     key: 'profile',
     content: t('PROFILE', 'Profile')
   }, {
@@ -70,6 +72,24 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
     key: 'personalization',
     content: t('PERSONALIZATION', 'Personalization')
   }];
+  var professionalMenuList = [{
+    key: 'profile',
+    content: t('PROFILE', 'Profile')
+  }, {
+    key: 'schedule',
+    content: t('Schedule', 'Schedule')
+  }, {
+    key: 'business_services',
+    content: t('BUSINESS_AND_SERVICES', 'Business & Services')
+  }];
+
+  var getMenuList = function getMenuList() {
+    if (isBusinessOwner) return businessMenuList;
+    if (isProfessional) return professionalMenuList;
+    return userMenuList;
+  };
+
+  var menuItems = getMenuList();
   return /*#__PURE__*/_react.default.createElement(_styles.UserDetailsMenuContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, menuItems.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: menu.key,
