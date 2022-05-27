@@ -27,7 +27,8 @@ export const BusinessDetail = (props) => {
     handleSuccessDeleteBusinessItem,
     handleSucessUpdateBusiness,
     setIsExtendExtraOpen,
-    isExtendExtraOpen
+    isExtendExtraOpen,
+    handleUpdateBusinessState
   } = props
 
   const [, t] = useLanguage()
@@ -50,6 +51,7 @@ export const BusinessDetail = (props) => {
             <BusinessInformation
               business={business}
               handleSuccessUpdate={handleSucessUpdateBusiness}
+              handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
           {selectedInfoItem === 'owner' && (
