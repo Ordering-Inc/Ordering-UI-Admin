@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useCustomer } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
-import { Alert, InputPhoneNumber } from '../../Shared'
+import { Alert, InputPhoneNumber, RangeCalendar } from '../../Shared'
 import { sortInputFields } from '../../../utils'
 import { Switch, Input, Button } from '../../../styles'
 import { Eye, EyeSlash } from 'react-bootstrap-icons'
@@ -14,7 +14,8 @@ import {
   SkeletonForm,
   DriverZoneRestrictionWrapper,
   WrapperPassword,
-  TogglePassword
+  TogglePassword,
+  CalendarWrapper
 } from './styles'
 
 export const UserFormDetailsUI = (props) => {
@@ -30,7 +31,8 @@ export const UserFormDetailsUI = (props) => {
     userData,
     isCustomerMode,
     isDriversPage,
-    handleChangeSwtich
+    handleChangeSwtich,
+    isProfessional
   } = props
 
   const formMethods = useForm()
@@ -295,6 +297,16 @@ export const UserFormDetailsUI = (props) => {
                   onChange={(val) => handleChangeSwtich('driver_zone_restriction', val)}
                 />
               </DriverZoneRestrictionWrapper>
+            )}
+            {isProfessional && (
+              <CalendarWrapper>
+                <RangeCalendar
+                  isLeft
+                  isSingleDate
+                  defaultValue={formState?.changes?.birthdate ?? user?.birthdate}
+                  handleChangeDate={(date) => handleChangeSwtich('birthdate', date)}
+                />
+              </CalendarWrapper>
             )}
             <ActionsForm>
               <Button

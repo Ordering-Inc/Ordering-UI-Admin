@@ -76,6 +76,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 24px;
+  justify-content: flex-end;
 
   label {
     color: ${props => props.theme.colors.headingColor};
@@ -248,3 +249,93 @@ export const ShapeBoxWrapper = styled.div`
     }
   `}
 `
+
+export const Option = styled.div`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: ${props => props.theme.colors.secundaryContrast};
+  span {
+    text-transform: lowercase;
+  }
+`
+
+export const SelectWrapper = styled.div`
+  margin-top: 25px;
+
+  label {
+    color: ${props => props.theme.colors.headingColor};
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  > div {
+    width: 100%;
+    border: none;
+
+    > div:first-child {
+      background-color: ${props => props.theme.colors.secundary};
+      height: 43px;
+      border: none;
+      border-radius: 7.6px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      color: ${props => props.theme.colors.secundaryContrast};
+    }
+    .list {
+      background-color: ${props => props.theme.colors.secundary};
+      border: none;
+      
+      .search-bar-container {
+        padding: 10px;
+        input {
+          background-color: transparent;
+          height: 44px;
+        }
+      }
+
+      .list-wrapper {
+        > div {
+          padding: 6px 10px;
+          &:hover {
+            background-color: #f2f5f7;
+          }
+        }
+      }
+    }
+  }
+
+  ${({ notAllow }) => notAllow && css`
+    cursor: not-allowed;
+    > div {
+      pointer-events: none;
+    }
+  `}
+`
+
+export const TimeBlock = styled.div`
+  display: flex;
+  border: 1px solid ${props => props.theme.colors.gray};
+  box-sizing: border-box;
+  border-radius: 7.6px;
+  width: fit-content;
+  align-items: center;
+  overflow: hidden;
+
+  > span {
+    color: ${props => props.theme?.colors.secundaryLight};
+  }
+  
+  > select {
+    height: 40px;
+    padding: 0px 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: ${props => props.theme?.colors.secundaryLight};
+    appearance: none;
+  }
+`
+
+export const TimeContent = styled.div``

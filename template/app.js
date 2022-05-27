@@ -58,6 +58,7 @@ import { RecoveryActionListing } from './pages/RecoveryActionListing'
 import { CampaignListing } from './pages/CampaignListing'
 import { FreeProductsList } from './pages/FreeProductsList'
 import { PurchasedProductsList } from './pages/PurchasedProductsList'
+import { Professionals } from './pages/Professionals'
 import { QueryLogin } from '../src/components/Login'
 
 export const App = () => {
@@ -192,6 +193,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/users/managers' allowedLevels={[0]}>
                       <ManagersList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/users/professionals' allowedLevels={[0, 2, 5]}>
+                      <Professionals />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/intelligence/business' allowedLevels={[0, 2]}>
