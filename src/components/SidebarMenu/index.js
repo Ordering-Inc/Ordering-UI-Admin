@@ -135,6 +135,12 @@ export const SidebarMenu = (props) => {
       title: t('MANAGERS', 'Managers'),
       pageName: 'managers',
       url: '/users/managers'
+    },
+    {
+      id: 3,
+      title: t('PROFESSIONALS', 'Professionals'),
+      pageName: 'professionals',
+      url: '/users/professionals'
     }
   ]
 
@@ -415,7 +421,8 @@ export const SidebarMenu = (props) => {
                         active={
                           location.pathname === '/users/customers' ||
                           location.pathname === '/users/managers' ||
-                          location.pathname === '/users/operation'
+                          location.pathname === '/users/operation' ||
+                          location.pathname === '/users/professionals'
                         }
                       >
                         <PeopleIcon />

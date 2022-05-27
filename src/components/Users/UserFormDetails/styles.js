@@ -28,7 +28,7 @@ export const FormInput = styled.form`
       border-radius: 8px;
     }
   }
-  button {
+  > button {
     width: 100%;
     padding: 7px 0;
   }
@@ -146,4 +146,9 @@ export const TogglePassword = styled.span`
   ` : css`
     right: 10px;
   `}
+`
+
+export const CalendarWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
 `

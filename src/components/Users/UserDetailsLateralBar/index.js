@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { ProfessionalDetail } from '../ProfessionalDetail'
 import { UserDetails } from '../UserDetails'
 import { XLg } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles'
@@ -12,7 +13,8 @@ import {
 
 export const UserDetailsLateralBar = (props) => {
   const {
-    open
+    open,
+    isProfessionals
   } = props
 
   const { width } = useWindowSize()
@@ -82,10 +84,17 @@ export const UserDetailsLateralBar = (props) => {
             <XLg />
           </IconButton>
         </CloseButtonWrapper>
-        <UserDetails
-          {...props}
-          setExtraOpen={setExtraOpen}
-        />
+        {isProfessionals ? (
+          <ProfessionalDetail
+            {...props}
+            setExtraOpen={setExtraOpen}
+          />
+        ) : (
+          <UserDetails
+            {...props}
+            setExtraOpen={setExtraOpen}
+          />
+        )}
       </WrapUserDetails>
     </LateralBarContainer>
   )

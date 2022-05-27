@@ -40,4 +40,10 @@ export const BarContainer = styled.div`
       right: ${({ moveDistance }) => moveDistance ? `${moveDistance + 20}px` : '20px'};
     `}
   }
+
+  ${({ IconTop }) => IconTop && css`
+    > button {
+      top: ${IconTop}
+    }
+  `}
 `
