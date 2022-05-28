@@ -8,6 +8,7 @@ import { OrderContentHeader } from '../OrderContentHeader'
 import { OrderDetails } from '../OrderDetails'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
+import { useTheme } from 'styled-components'
 import {
   OrdersListContainer,
   OrdersContent,
@@ -43,6 +44,7 @@ const MainOrdersManagerUI = (props) => {
     selectedOrderIds
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const [events] = useEvent()
@@ -318,8 +320,8 @@ const MainOrdersManagerUI = (props) => {
       </Modal>
 
       <audio id='notification-sound' muted>
-        <source src={require('../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
-        <source src={require('../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
+        <source src={theme.sounds.notificationOgg} type='audio/ogg' />
+        <source src={theme.sounds.notificationMp3} type='audio/mpeg' />
       </audio>
 
       {totalSelectedOrder > 0 && (
