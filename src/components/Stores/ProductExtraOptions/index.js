@@ -46,7 +46,6 @@ const ProductExtraOptionsUI = (props) => {
     handleDeleteExtra,
     handleUpdateBusinessState,
     handleSucccessDeleteOption,
-    handleUpdateOption,
     curOption,
     openModal,
     setCurOption,
@@ -384,7 +383,6 @@ const ProductExtraOptionsUI = (props) => {
             handleUpdateBusinessState={handleUpdateBusinessState}
             handleSucccessDeleteOption={handleSucccessDeleteOption}
             isMaxError={isMaxError}
-            handleUpdateOption={handleUpdateOption}
           />
         </Modal>
       )}
