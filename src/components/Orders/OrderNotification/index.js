@@ -121,8 +121,8 @@ const OrderNotificationUI = (props) => {
         </ModalContainer>
       </Modal>
       <audio id='notification-sound' muted>
-        <source src={require('../../../../template/assets/sounds/notification.ogg')} type='audio/ogg' />
-        <source src={require('../../../../template/assets/sounds/notification.mp3')} type='audio/mpeg' />
+        <source src={theme.sounds.notificationOgg} type='audio/ogg' />
+        <source src={theme.sounds.notificationMp3} type='audio/mpeg' />
       </audio>
     </>
   )
