@@ -6,10 +6,13 @@ export const CategoryProductsContainer = styled.div`
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
-  overflow: hidden;
 
   @media print {
     display: none;
+  }
+
+  @media (min-width: 768px) {
+    overflow: hidden;
   }
 `
 

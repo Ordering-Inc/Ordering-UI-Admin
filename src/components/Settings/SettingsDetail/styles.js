@@ -79,7 +79,7 @@ export const CategoryName = styled.div`
 
 export const CategoryExtraContent = styled.div`
   position: relative;
-  padding: 26px;
+  padding: 26px 26px 60px 26px;
   box-sizing: border-box;
   width: 100%;
   overflow: auto;

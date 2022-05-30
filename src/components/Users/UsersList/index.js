@@ -50,7 +50,8 @@ export const UsersList = (props) => {
       { key: 0, value: t('ADMINISTRATOR', 'Administrator') },
       { key: 1, value: t('CITY_MANAGER', 'City manager') },
       { key: 2, value: t('BUSINESS_OWNER', 'Business owner') },
-      { key: 3, value: t('USER', 'User') }
+      { key: 3, value: t('USER', 'User') },
+      { key: 9, value: t('CALL_CENTER_AGENT', 'Call center agent') }
     ]
 
     const objectStatus = userTypes.find(o => o.key === type)

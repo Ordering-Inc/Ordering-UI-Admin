@@ -14,9 +14,10 @@ import {
   TransactionCode
 } from './styles'
 
-export const CustomerCashWalletEvents = (props) => {
+export const CustomerWalletEvents = (props) => {
   const {
-    cashEventsState,
+    walletType,
+    walletEventsState,
     parseEvent
   } = props
 
@@ -26,16 +27,16 @@ export const CustomerCashWalletEvents = (props) => {
   return (
     <Container>
       <HistoriesWrapper
-        isLoading={cashEventsState.loading}
+        isLoading={walletEventsState.loading}
       >
-        {cashEventsState.loading ? (
+        {walletEventsState.loading ? (
           [...Array(10).keys()].map(i => (
             <HistoryItem key={i}>
               <Skeleton />
             </HistoryItem>
           ))
         ) : (
-          cashEventsState.events.map(event => (
+          walletEventsState.events.map(event => (
             <HistoryItem
               key={event.id}
             >
@@ -44,7 +45,9 @@ export const CustomerCashWalletEvents = (props) => {
                 <span className='date'>
                   {parseDate(event?.created_at, { utc: false })}
                 </span>
-                <Amount negative={Math.sign(event.amount) === -1}>{parsePrice(event.amount)}</Amount>
+                <Amount negative={Math.sign(event.amount) === -1}>
+                  {walletType === 'cash' ? parsePrice(event.amount) : event.amount}
+                </Amount>
               </TransactionHeader>
               <Transaction
                 dangerouslySetInnerHTML={{

@@ -37,8 +37,8 @@ export const PurchasedProductsList = (props) => {
       long_description: t('STORE_APP_LONG_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.<br /><br />Use it Branded on your business at no cost.<br />All you need to do is use the Business Owners Credentials that you currently have on your Dashboard.'),
       icon: <CartPlusFill />,
       image: theme.images.apps.storeApp,
-      app_store: 'https://www.ordering.co/ordering-sales',
-      google_play_store: 'https://www.ordering.co/ordering-sales'
+      app_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1717',
+      google_play_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1717'
     },
     {
       key: 'driver_app',
@@ -48,8 +48,8 @@ export const PurchasedProductsList = (props) => {
       long_description: t('DRIVER_APP_LONG_DESCRIPTION', 'Use it Branded on your business at no cost.<br />All you need to do is use the Driver Credentials that you currently have on your Dashboard.'),
       icon: <img src={theme.images.icons.delivery} alt='delivery app icon' />,
       image: theme.images.apps.driverApp,
-      app_store: 'https://www.ordering.co/ordering-sales',
-      google_play_store: 'https://www.ordering.co/ordering-sales'
+      app_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1718',
+      google_play_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1718'
     },
     {
       key: 'pos_app',
@@ -59,8 +59,8 @@ export const PurchasedProductsList = (props) => {
       long_description: t('POS_APP_LONG_DESCRIPTION', 'POS Ordering System: Take orders on the phone easily<br />Create orders in your system without the hassle and auto-complete information.<br />Save customer info with their number'),
       icon: <img src={theme.images.icons.posTerminal} alt='pos app icon' />,
       image: theme.images.apps.posApp,
-      app_store: 'https://www.ordering.co/ordering-sales',
-      google_play_store: 'https://www.ordering.co/ordering-sales'
+      app_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1793',
+      google_play_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1793'
     },
     {
       key: 'kiosk_app',
@@ -70,8 +70,8 @@ export const PurchasedProductsList = (props) => {
       long_description: t('KIOSK_APP_LONG_DESCRIPTION', 'Did you know that 7 out of 10 customers prefer to make their orders themselves?<br />Ordering Kiosk completes that final step for each sale.'),
       icon: <img src={theme.images.icons.poster} alt='kiosk app icon' />,
       image: theme.images.apps.kioskApp,
-      app_store: 'https://www.ordering.co/ordering-sales',
-      google_play_store: 'https://www.ordering.co/ordering-sales'
+      app_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1794',
+      google_play_store: 'https://apps.tryordering.com/store/marketplace?category=306&product=1794'
     },
     {
       key: 'call_center',
@@ -81,7 +81,7 @@ export const PurchasedProductsList = (props) => {
       long_description: t('CALL_CENTER_LONG_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
       icon: <Headset />,
       image: theme.images.apps.callCenterApp,
-      web_url: 'https://www.ordering.co/ordering-sales'
+      web_url: 'https://apps.tryordering.com/store/marketplace?category=306&product=1792'
     }
   ]
 
@@ -229,16 +229,22 @@ export const PurchasedProductsList = (props) => {
             <DownloadLinksContainer>
               {selectedProduct.type === 1 && (
                 <>
-                  <DownloadLink href={selectedProduct.app_store} target='_blank'>
+                  <DownloadLink
+                    onClick={() => window.open(`${selectedProduct.app_store}`, '_blank')}
+                  >
                     <img src={theme.images.general.appStore} alt='App store' />
                   </DownloadLink>
-                  <DownloadLink href={selectedProduct.google_play_store} target='_blank'>
+                  <DownloadLink
+                    onClick={() => window.open(`${selectedProduct.google_play_store}`, '_blank')}
+                  >
                     <img src={theme.images.general.googlePlay} alt='Google play' />
                   </DownloadLink>
                 </>
               )}
               {selectedProduct.type === 2 && (
-                <DownloadLink href={selectedProduct.web_url} target='_blank'>
+                <DownloadLink
+                  onClick={() => window.open(`${selectedProduct.web_url}`, '_blank')}
+                >
                   {selectedProduct.title}
                 </DownloadLink>
               )}

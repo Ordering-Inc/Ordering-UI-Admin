@@ -64,7 +64,17 @@ export const ProductDetailsContainer = styled.div`
     white-space: pre-wrap;
   }
 `
-export const DownloadLink = styled.a`
+export const DownloadLink = styled.button`
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: ${props => props.theme.colors.primary};
+
+  &:hover {
+    text-decoration: underline;
+  }
+
   img {
     width: 95px;
     height: 28px;
@@ -78,7 +88,7 @@ export const DownloadLink = styled.a`
 export const DownloadLinksContainer = styled.div`
   display: flex;
 
-  > a {
+  > button {
     &:not(:first-child) {
       ${props => props.theme?.rtl ? css`
         margin-right: 24px;

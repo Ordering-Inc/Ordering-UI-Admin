@@ -123,7 +123,7 @@ export const OrdersContentHeader = (props) => {
             />
             <IconButton
               color='black'
-              onClick={() => setFilterModalOpen(true)}
+              onClick={() => setFilterModalOpen && setFilterModalOpen(true)}
               name='filter-btn'
             >
               {filterApplied ? <Funnel /> : <MdcFilterOff />}
@@ -134,7 +134,7 @@ export const OrdersContentHeader = (props) => {
 
       <OrdersFilterGroup
         open={filterModalOpen}
-        handleCloseFilterModal={() => setFilterModalOpen(false)}
+        handleCloseFilterModal={() => setFilterModalOpen && setFilterModalOpen(false)}
         driverGroupList={driverGroupList}
         driversList={driversList}
         paymethodsList={paymethodsList}

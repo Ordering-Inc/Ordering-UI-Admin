@@ -136,7 +136,7 @@ export const ChatContactList = (props) => {
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
     isSearchByUserName: true,
-    deafultUserTypesSelected: props.isDriver ? [4] : [3],
+    defaultUserTypesSelected: props.isDriver ? [4] : [3],
     propsToFetch: ['name', 'lastname', 'photo', 'assigned_orders_count']
   }
   return (

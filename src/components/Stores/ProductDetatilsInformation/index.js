@@ -225,7 +225,7 @@ export const ProductDetatilsInformation = (props) => {
               name='price'
               placeholder={parsePrice(0)}
               defaultValue={product?.price}
-              onChange={(e) => handleChangeInput(e)}
+              onChange={(e) => handleChangeFormState({ price: Number(e.target.value) })}
               disabled={formState.loading}
               autoComplete='off'
               onKeyPress={(e) => {
@@ -322,11 +322,11 @@ export const ProductDetatilsInformation = (props) => {
                 name='quantity'
                 placeholder={t('QUANTITY', 'Quantity')}
                 defaultValue={product?.quantity}
-                onChange={handleChangeInput}
+                onChange={e => handleChangeFormState({ quantity: parseInt(e.target.value) })}
                 disabled={formState.loading}
                 autoComplete='off'
                 onKeyPress={(e) => {
-                  if (!/^[0-9.]$/.test(e.key)) {
+                  if (!/^[0-9]$/.test(e.key)) {
                     e.preventDefault()
                   }
                 }}
@@ -334,6 +334,92 @@ export const ProductDetatilsInformation = (props) => {
             </InputWrapper>
           )
         }
+
+        <InventoryWrapper>
+          <span>{t('RIBBON', 'Ribbon')}</span>
+          <Switch
+            defaultChecked={product?.ribbon?.enabled || false}
+            onChange={val => handleChangeRibbon({ enabled: val })}
+          />
+        </InventoryWrapper>
+        {
+          (typeof (formState?.changes?.ribbon?.enabled) !== 'undefined' ? formState?.changes?.ribbon?.enabled : product?.ribbon?.enabled) && (
+            <>
+              <InputWrapper>
+                <label>{t('TEXT', 'Text')}</label>
+                <Input
+                  name='text'
+                  placeholder={t('TEXT', 'Text')}
+                  defaultValue={formState?.changes?.ribbon?.text ?? product?.ribbon?.text}
+                  onChange={(e) => handleChangeRibbon({ text: e.target.value })}
+                  disabled={formState.loading}
+                  autoComplete='off'
+                  ref={formMethods.register({
+                    required:
+                      (product?.ribbon && (typeof (formState?.changes?.ribbon?.enabled) !== 'undefined' ? formState?.changes?.ribbon?.enabled : product?.ribbon?.enabled))
+                        ? t(
+                          'VALIDATION_ERROR_REQUIRED',
+                          'The Ribbon text field is required'
+                        ).replace('_attribute_', t('Ribbon_Text', 'Ribbon text'))
+                        : false
+                  })}
+                />
+              </InputWrapper>
+              <ColorShapeWrapper>
+                <ColorWrapper>
+                  <label>{t('COLOR', 'Color')}</label>
+                  <ColorPicker
+                    defaultColor={formState?.changes?.ribbon?.color ?? product?.ribbon?.color}
+                    onChangeColor={(color) => handleChangeRibbon({ color })}
+                  />
+                </ColorWrapper>
+                <ShapeWrapper>
+                  <label>{t('SHAPE', 'Shape')}</label>
+                  <ShapeContentWrapper>
+                    {shape && Object.keys(shape).map((key, i) => (
+                      <ShapeBoxWrapper
+                        key={i}
+                        shapeRect={shape[key] === shape?.rectangleRound}
+                        round={shape[key] === shape?.capsuleShape}
+                        active={formState?.changes?.ribbon?.shape
+                          ? (formState?.changes?.ribbon?.shape === shape[key])
+                          : (product?.ribbon?.shape === shape[key])}
+                        onClick={() => handleChangeRibbon({ shape: shape[key] })}
+                      >
+                        <div />
+                        {(product?.ribbon && formState?.changes?.ribbon?.shape
+                          ? (formState?.changes?.ribbon?.shape === shape[key])
+                          : (product?.ribbon?.shape === shape[key]))
+                          ? <RecordCircleFill />
+                          : <Circle />}
+                      </ShapeBoxWrapper>
+                    ))}
+                  </ShapeContentWrapper>
+                </ShapeWrapper>
+              </ColorShapeWrapper>
+            </>
+          )
+        }
+        <InputWrapper>
+          <label>{t('SEO_KEYWORDS', 'SEO Keywords')}</label>
+          <Input
+            name='seo_keywords'
+            placeholder={t('SEO_KEYWORDS', 'SEO Keywords')}
+            defaultValue={product?.seo_keywords || ''}
+            onChange={handleChangeInput}
+            disabled={formState.loading}
+            autoComplete='off'
+            ref={formMethods.register({
+              required:
+                (typeof (formState?.changes?.seo_keywords) !== 'undefined')
+                  ? t(
+                    'VALIDATION_ERROR_REQUIRED',
+                    'SEO Keywords field is required'
+                  ).replace('_attribute_', t('SEO_KEYWORDS', 'SEO Keywords'))
+                  : false
+            })}
+          />
+        </InputWrapper>
         <ActionsForm>
           {onCancel && (
             <Button
