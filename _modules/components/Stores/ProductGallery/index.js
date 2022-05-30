@@ -291,7 +291,7 @@ var ProductGalleryUI = function ProductGalleryUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
-      return handleAddGalleryProduct();
+      return handleAddGalleryProduct(1);
     },
     disabled: changesState.loading || productGalleryState.loading
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null))))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {

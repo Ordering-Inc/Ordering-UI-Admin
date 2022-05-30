@@ -86,6 +86,6 @@ var RegularWrapper = _styledComponents.default.div(_templateObject21 || (_templa
 
 exports.RegularWrapper = RegularWrapper;
 
-var FieldRow = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n"])));
+var FieldRow = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n\n  > div {\n    width: calc(50% - 10px);\n  }\n"])));
 
 exports.FieldRow = FieldRow;

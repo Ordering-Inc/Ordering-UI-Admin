@@ -21,6 +21,10 @@ var _InvoicePayMethods = require("../InvoicePayMethods");
 
 var _InvoiceDriverPdf = require("../InvoiceDriverPdf");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
+var _styles2 = require("../../../styles");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -71,10 +75,15 @@ var InvoiceDriverManagerUI = function InvoiceDriverManagerUI(props) {
   (0, _react.useEffect)(function () {
     if (!(exportInvoiceList !== null && exportInvoiceList !== void 0 && exportInvoiceList.loading) && exportInvoiceList !== null && exportInvoiceList !== void 0 && exportInvoiceList.invoice) {
       inputRef.current.value = invoicePdfRef === null || invoicePdfRef === void 0 ? void 0 : invoicePdfRef.current.innerHTML;
-      submitBtnRef.current.click();
     }
   }, [exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : exportInvoiceList.loading]);
-  return /*#__PURE__*/_react.default.createElement(_styles.InvoiceDriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER_INVOICE', 'Driver invoice'))), /*#__PURE__*/_react.default.createElement(_styles.DetailsList, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  return /*#__PURE__*/_react.default.createElement(_styles.InvoiceDriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER_INVOICE', 'Driver invoice')), /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
+    color: "black",
+    disabled: (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : exportInvoiceList.loading) || !(exportInvoiceList !== null && exportInvoiceList !== void 0 && exportInvoiceList.invoice),
+    onClick: function onClick() {
+      return submitBtnRef.current.click();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, null))), /*#__PURE__*/_react.default.createElement(_styles.DetailsList, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedDetailType === 'general',
     onClick: function onClick() {
       return changeSelectedAnalyticsStatus('general');
@@ -93,8 +102,11 @@ var InvoiceDriverManagerUI = function InvoiceDriverManagerUI(props) {
     type: "hidden",
     name: "html"
   }), /*#__PURE__*/_react.default.createElement("button", {
-    ref: submitBtnRef,
-    type: "submit"
+    ref: function ref(e) {
+      submitBtnRef.current = e;
+    },
+    type: "submit",
+    id: "driver-invoice-btn"
   })), /*#__PURE__*/_react.default.createElement(_styles.InvoicePdfWrapper, {
     ref: invoicePdfRef
   }, /*#__PURE__*/_react.default.createElement(_InvoiceDriverPdf.InvoiceDriverPdf, props)), (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : exportInvoiceList.loading) && /*#__PURE__*/_react.default.createElement(_styles.LoadingWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, null)));

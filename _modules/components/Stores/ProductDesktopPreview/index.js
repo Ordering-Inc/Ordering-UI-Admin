@@ -66,7 +66,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _swiper.default.use([_swiper.Navigation, _swiper.Thumbs]);
 
 var ProductDesktopPreview = function ProductDesktopPreview(props) {
-  var _product$product, _product$product2, _theme$defaultLanguag, _product$ingredients, _product$extras, _product$ingredients2, _theme$defaultLanguag2, _product$extras2;
+  var _product$product, _product$product2, _theme$defaultLanguag, _product$ingredients, _product$extras, _product$ingredients2, _product$extras2, _product$ingredients3, _theme$defaultLanguag2, _product$extras3;
 
   var product = props.product,
       productCart = props.productCart,
@@ -254,13 +254,13 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
     onClick: function onClick() {
       return setTabValue('all');
     }
-  }, t('ALL', 'All')), (product === null || product === void 0 ? void 0 : product.ingredients.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, t('ALL', 'All')), (product === null || product === void 0 ? void 0 : (_product$ingredients2 = product.ingredients) === null || _product$ingredients2 === void 0 ? void 0 : _product$ingredients2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     key: "ingredients",
     active: tabValue === 'ingredients',
     onClick: function onClick() {
       return setTabValue('ingredients');
     }
-  }, t('INGREDIENTS', 'ingredients')), (product === null || product === void 0 ? void 0 : product.extras.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, t('INGREDIENTS', 'ingredients')), (product === null || product === void 0 ? void 0 : (_product$extras2 = product.extras) === null || _product$extras2 === void 0 ? void 0 : _product$extras2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     key: "extra",
     active: tabValue === 'extra',
     onClick: function onClick() {
@@ -268,7 +268,7 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
     }
   }, t('EXTRA', 'Extra')))), /*#__PURE__*/_react.default.createElement("div", {
     id: "ingredients"
-  }, (product === null || product === void 0 ? void 0 : (_product$ingredients2 = product.ingredients) === null || _product$ingredients2 === void 0 ? void 0 : _product$ingredients2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.INGREDIENTS) || 'Ingredients')), (product === null || product === void 0 ? void 0 : product.ingredients) && /*#__PURE__*/_react.default.createElement(_styles2.WrapperIngredients, {
+  }, (product === null || product === void 0 ? void 0 : (_product$ingredients3 = product.ingredients) === null || _product$ingredients3 === void 0 ? void 0 : _product$ingredients3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('INGREDIENTS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.INGREDIENTS) || 'Ingredients')), (product === null || product === void 0 ? void 0 : product.ingredients) && /*#__PURE__*/_react.default.createElement(_styles2.WrapperIngredients, {
     isProductSoldout: isSoldOut
   }, product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     var _productCart$ingredie;
@@ -280,7 +280,7 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
     }), /*#__PURE__*/_react.default.createElement("span", null, ingredient.name));
   }))), (product === null || product === void 0 ? void 0 : product.extras) && /*#__PURE__*/_react.default.createElement("div", {
     id: "extra"
-  }, product === null || product === void 0 ? void 0 : (_product$extras2 = product.extras) === null || _product$extras2 === void 0 ? void 0 : _product$extras2.map(function (extra) {
+  }, product === null || product === void 0 ? void 0 : (_product$extras3 = product.extras) === null || _product$extras3 === void 0 ? void 0 : _product$extras3.map(function (extra) {
     var _extra$options;
 
     return extra === null || extra === void 0 ? void 0 : (_extra$options = extra.options) === null || _extra$options === void 0 ? void 0 : _extra$options.map(function (option) {

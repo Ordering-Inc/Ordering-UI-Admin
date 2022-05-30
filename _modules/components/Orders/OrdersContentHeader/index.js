@@ -138,13 +138,13 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
-      return setFilterModalOpen(true);
+      return setFilterModalOpen && setFilterModalOpen(true);
     },
     name: "filter-btn"
   }, filterApplied ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Funnel, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null))))), /*#__PURE__*/_react.default.createElement(_OrdersFilterGroup.OrdersFilterGroup, {
     open: filterModalOpen,
     handleCloseFilterModal: function handleCloseFilterModal() {
-      return setFilterModalOpen(false);
+      return setFilterModalOpen && setFilterModalOpen(false);
     },
     driverGroupList: driverGroupList,
     driversList: driversList,

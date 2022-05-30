@@ -242,7 +242,7 @@ var MessagesUI = function MessagesUI(props) {
       var chat = document.getElementById('chat');
 
       if (chat) {
-        chat.scrollTop = chat.scrollHeight;
+        chat.scrollTop = chat === null || chat === void 0 ? void 0 : chat.scrollHeight;
       }
     }
   }, [load]);
@@ -251,14 +251,14 @@ var MessagesUI = function MessagesUI(props) {
     var chat = document.getElementById('chat');
 
     if (chat) {
-      chat.scrollTop = chat.scrollHeight;
+      chat.scrollTop = chat === null || chat === void 0 ? void 0 : chat.scrollHeight;
     }
   }, [messages.messages.length, filteredMessages]);
   (0, _react.useEffect)(function () {
     if (history) return;
     setTimeout(function () {
       var chat = document.getElementById('chat');
-      chat.scrollTop = chat.scrollHeight;
+      chat.scrollTop = chat === null || chat === void 0 ? void 0 : chat.scrollHeight;
     }, 10);
   }, [isChat]);
 

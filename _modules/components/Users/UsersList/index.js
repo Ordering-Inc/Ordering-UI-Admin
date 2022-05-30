@@ -99,6 +99,9 @@ var UsersList = function UsersList(props) {
     }, {
       key: 3,
       value: t('USER', 'User')
+    }, {
+      key: 9,
+      value: t('CALL_CENTER_AGENT', 'Call center agent')
     }];
     var objectStatus = userTypes.find(function (o) {
       return o.key === type;

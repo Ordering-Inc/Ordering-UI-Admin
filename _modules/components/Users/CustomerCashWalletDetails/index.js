@@ -38,9 +38,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CustomerCashWalletDetails = function CustomerCashWalletDetails(props) {
-  var _cashWalletState$wall;
+  var _walletState$wallet;
 
-  var cashWalletState = props.cashWalletState,
+  var walletState = props.walletState,
       addWalletState = props.addWalletState,
       reduceWalletState = props.reduceWalletState,
       actionState = props.actionState,
@@ -95,10 +95,10 @@ var CustomerCashWalletDetails = function CustomerCashWalletDetails(props) {
       content: actionState.error
     });
   }, [actionState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WalletBalaceContainer, null, /*#__PURE__*/_react.default.createElement("span", null, cashWalletState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WalletBalaceContainer, null, /*#__PURE__*/_react.default.createElement("span", null, walletState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 24,
     width: 100
-  }) : parsePrice((_cashWalletState$wall = cashWalletState.wallet) === null || _cashWalletState$wall === void 0 ? void 0 : _cashWalletState$wall.balance)), /*#__PURE__*/_react.default.createElement("span", null, t('WALLET_MONEY', 'Wallet money'))), /*#__PURE__*/_react.default.createElement(_styles2.SectionContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('ADD_WALLET_MONEY', 'Add wallet money')), /*#__PURE__*/_react.default.createElement(_styles2.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('INDICATE_THE_AMOUNT_TO_ADD', 'Indicate the amount to add')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }) : parsePrice((_walletState$wallet = walletState.wallet) === null || _walletState$wallet === void 0 ? void 0 : _walletState$wallet.balance)), /*#__PURE__*/_react.default.createElement("span", null, t('WALLET_MONEY', 'Wallet money'))), /*#__PURE__*/_react.default.createElement(_styles2.SectionContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('ADD_WALLET_MONEY', 'Add wallet money')), /*#__PURE__*/_react.default.createElement(_styles2.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('INDICATE_THE_AMOUNT_TO_ADD', 'Indicate the amount to add')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "number",
     name: "amount",
     placeholder: "".concat(parsePrice(0)),

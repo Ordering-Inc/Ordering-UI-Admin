@@ -13,7 +13,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _CustomerCashWalletDetails = require("../CustomerCashWalletDetails");
 
-var _CustomerCashWalletEvents = require("../CustomerCashWalletEvents");
+var _CustomerWalletEvents = require("../CustomerWalletEvents");
 
 var _styles = require("./styles");
 
@@ -59,15 +59,16 @@ var CustomerCashWalletUI = function CustomerCashWalletUI(props) {
     onClick: function onClick() {
       return setShowOption('history');
     }
-  }, t('TRANSACTION_HISTORY', 'Transaction history'))), showOption === 'cash_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerCashWalletDetails.CustomerCashWalletDetails, props), showOption === 'history' && /*#__PURE__*/_react.default.createElement(_CustomerCashWalletEvents.CustomerCashWalletEvents, props));
+  }, t('TRANSACTION_HISTORY', 'Transaction history'))), showOption === 'cash_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerCashWalletDetails.CustomerCashWalletDetails, props), showOption === 'history' && /*#__PURE__*/_react.default.createElement(_CustomerWalletEvents.CustomerWalletEvents, props));
 };
 
 var CustomerCashWallet = function CustomerCashWallet(props) {
   var customerWalletProps = _objectSpread(_objectSpread({}, props), {}, {
+    walletType: 'cash',
     UIComponent: CustomerCashWalletUI
   });
 
-  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UserCashWallet, customerWalletProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UserWallet, customerWalletProps);
 };
 
 exports.CustomerCashWallet = CustomerCashWallet;

@@ -115,6 +115,9 @@ var ProductSummary = function ProductSummary(props) {
   }, {
     key: 'product_images',
     value: t('PRODUCT_IMAGES', 'Product images')
+  }, {
+    key: 'product_video',
+    value: t('PRODUCT_VIDEO', 'Product video')
   } // {
   //   key: 'custom_fields',
   //   value: t('CUSTOM_FIELDS', 'Custom fields')

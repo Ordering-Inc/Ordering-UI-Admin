@@ -37,6 +37,8 @@ var _PaymethodOptionStripeConnect = require("../PaymethodOptionStripeConnect");
 
 var _PaymentOptionPaypal = require("../PaymentOptionPaypal");
 
+var _PaymentOptionSquare = require("../PaymentOptionSquare");
+
 var _BusinessWalletsList = require("../BusinessWalletsList");
 
 var _styles2 = require("./styles");
@@ -99,6 +101,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       handleStripeSave = props.handleStripeSave,
       isSuccessDeleted = props.isSuccessDeleted,
       setIsSuccessDeleted = props.setIsSuccessDeleted,
+      handleSuccessPaymethodUpdate = props.handleSuccessPaymethodUpdate,
       handleSuccessUpdate = props.handleSuccessUpdate,
       isTutorialMode = props.isTutorialMode,
       handleTutorialContinue = props.handleTutorialContinue;
@@ -308,7 +311,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     onClick: function onClick() {
       return handleTutorialContinue();
     }
-  }, t('CONTINUE', 'Continue'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect'].includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
+  }, t('CONTINUE', 'Continue'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square'].includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
     sitesState: sitesState,
     open: isEdit,
     onClose: function onClose() {
@@ -404,6 +407,20 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeStripeInput: handleChangeStripeInput,
     handleStripeSave: handleStripeSave,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption
+  }), selectedPaymethodGateway === 'square' && /*#__PURE__*/_react.default.createElement(_PaymentOptionSquare.PaymentOptionSquare, {
+    open: isEdit,
+    sitesState: sitesState,
+    business: business,
+    changesState: changesState,
+    orderTypes: orderTypes,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
+    handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
+    businessPaymethods: businessPaymethodsState === null || businessPaymethodsState === void 0 ? void 0 : businessPaymethodsState.paymethods,
+    handleSuccessPaymethodUpdate: handleSuccessPaymethodUpdate
   }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     open: isEdit,
@@ -507,6 +524,20 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeStripeInput: handleChangeStripeInput,
     handleStripeSave: handleStripeSave,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption
+  }), selectedPaymethodGateway === 'square' && /*#__PURE__*/_react.default.createElement(_PaymentOptionSquare.PaymentOptionSquare, {
+    open: isEdit,
+    sitesState: sitesState,
+    business: business,
+    changesState: changesState,
+    orderTypes: orderTypes,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
+    handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
+    businessPaymethods: businessPaymethodsState === null || businessPaymethodsState === void 0 ? void 0 : businessPaymethodsState.paymethods,
+    handleSuccessPaymethodUpdate: handleSuccessPaymethodUpdate
   })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('PAYMETHODS', 'Payment methods'),
     content: alertState.content,

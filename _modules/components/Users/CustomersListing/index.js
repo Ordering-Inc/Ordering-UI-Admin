@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CustomersListingUI = function CustomersListingUI(props) {
-  var deafultUserTypesSelected = props.deafultUserTypesSelected,
+  var defaultUserTypesSelected = props.defaultUserTypesSelected,
       disabledActiveStateCondition = props.disabledActiveStateCondition,
       headerTitle = props.headerTitle,
       usersList = props.usersList,
@@ -167,7 +167,7 @@ var CustomersListingUI = function CustomersListingUI(props) {
     },
     "data-tour": "tour_add"
   }, t('ADD_USER', 'Add user')), /*#__PURE__*/_react.default.createElement(_UsersExportCSV.UsersExportCSV, {
-    deafultUserTypesSelected: deafultUserTypesSelected,
+    defaultUserTypesSelected: defaultUserTypesSelected,
     disabledActiveStateCondition: disabledActiveStateCondition,
     userTypesSelected: userTypesSelected,
     selectedUserActiveState: selectedUserActiveState

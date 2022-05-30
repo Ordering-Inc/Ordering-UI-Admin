@@ -21,6 +21,8 @@ var _ProductExtraOptions = require("../ProductExtraOptions");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
+var _styledComponents = require("styled-components");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -65,7 +67,14 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       setIsExtendExtraOpen = props.setIsExtendExtraOpen,
       business = props.business,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
-      handleProductExtraState = props.handleProductExtraState;
+      handleProductExtraState = props.handleProductExtraState,
+      dragoverExtaId = props.dragoverExtaId,
+      isExtrasBottom = props.isExtrasBottom,
+      handleDragStart = props.handleDragStart,
+      hanldeDragOver = props.hanldeDragOver,
+      handleDrop = props.handleDrop,
+      handleDragEnd = props.handleDragEnd;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -114,7 +123,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       setIsCheckboxClicked = _useState12[1];
 
   var handleOpenExtraDetails = function handleOpenExtraDetails(e, extra) {
-    if (e.target.closest('.extra-checkbox')) return;
+    if (e.target.closest('.extra-checkbox') || e.target.closest('.draggable-dots')) return;
     setIsExtendExtraOpen(true);
     setCurrentExtra(extra);
     setOpenExtraDetails(true);
@@ -197,16 +206,38 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  }, t('ADD_PRODUCT_OPTION', 'Add product option'))), (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras) && (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.map(function (extra) {
-    var _extraIds$includes;
+  }, t('ADD_PRODUCT_OPTION', 'Add product option'))), (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras) && (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.sort(function (a, b) {
+    return a.rank - b.rank;
+  }).map(function (extra, index) {
+    var _theme$images$icons, _extraIds$includes;
 
+    var isLastExtra = index === extrasState.extras.length - 1;
     return /*#__PURE__*/_react.default.createElement(_styles2.ExtraOption, {
       key: extra.id,
       active: extra.id === (currentExtra === null || currentExtra === void 0 ? void 0 : currentExtra.id),
       onClick: function onClick(e) {
         return handleOpenExtraDetails(e, extra);
+      },
+      isDragOver: dragoverExtaId === extra.id,
+      isBorderBottom: isExtrasBottom && isLastExtra,
+      onDragOver: function onDragOver(e) {
+        return hanldeDragOver(e, extra, isLastExtra);
+      },
+      onDrop: function onDrop(e) {
+        return handleDrop(e, extra);
+      },
+      onDragEnd: handleDragEnd,
+      className: "draggable-extra"
+    }, /*#__PURE__*/_react.default.createElement(_styles2.DragImageWrapper, {
+      className: "draggable-dots"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
+      alt: "six dots",
+      draggable: true,
+      onDragStart: function onDragStart(e) {
+        return handleDragStart(e, extra);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, {
       className: "extra-checkbox"
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
       checked: (_extraIds$includes = extraIds.includes(extra.id)) !== null && _extraIds$includes !== void 0 ? _extraIds$includes : false,
