@@ -9,6 +9,7 @@ import { Button } from '../../../styles'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { ChevronRight, CheckSquareFill, Square } from 'react-bootstrap-icons'
+import { ProfessionalServices } from '../ProfessionalServices'
 import {
   BrandBUSIDetailContainer,
   SearchWrapper,
@@ -20,7 +21,6 @@ import {
   SelectButtonGroup,
   CheckWrapper
 } from './styles'
-import { ProfessionalServices } from '../ProfessionalServices'
 
 const ProfessionalBusinessServiceUI = (props) => {
   const {
@@ -70,8 +70,8 @@ const ProfessionalBusinessServiceUI = (props) => {
   }
 
   const handleSelectAllBusinesses = (index) => {
-    if (index) {
-      const ids = currentBusinesses.reduce((prev, current) => [...prev, current.id], [])
+    if (index && businessList?.businesses?.length) {
+      const ids = businessList.businesses.reduce((prev, current) => [...prev, current.id], [])
       handleUpdateBusinessIds(ids)
       return
     }

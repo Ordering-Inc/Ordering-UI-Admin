@@ -30,7 +30,7 @@ export const ProfessionalCategoryTreeNode = (props) => {
   const checkboxRef = useRef(null)
   const categoryRef = useRef(null)
 
-  const [setActive, setActiveState] = useState('active')
+  const [setActive, setActiveState] = useState('')
   const [setRotate, setRotateState] = useState('accordion__icon')
 
   const toggleAccordion = (e) => {

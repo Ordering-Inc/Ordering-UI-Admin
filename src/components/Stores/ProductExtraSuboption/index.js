@@ -238,7 +238,7 @@ export const ProductExtraSuboption = (props) => {
             name='preselected'
             className={subOption?.preselected ? 'checked default' : 'default'}
           >
-            <span onClick={(e) => handleChangeDefaultSuboption(subOption.id)}>
+            <span className='radio' onClick={(e) => handleChangeDefaultSuboption(subOption.id)}>
               {subOption?.preselected ? <CheckIcon /> : <UnCheckIcon />}
             </span>
           </div>

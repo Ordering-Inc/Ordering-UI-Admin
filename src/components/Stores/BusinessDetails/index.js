@@ -165,6 +165,7 @@ export const BusinessDetailsUI = (props) => {
               handleSucessUpdateBusiness={handleSucessUpdateBusiness}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
               isExtendExtraOpen={isExtendExtraOpen}
+              handleUpdateBusinessState={handleUpdateBusinessState}
             />
           )}
           {selectedItem === 'schedule' && (
