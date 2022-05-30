@@ -57,7 +57,7 @@ var UploadImageIcon = _styledComponents.default.div(_templateObject11 || (_templ
 
 exports.UploadImageIcon = UploadImageIcon;
 
-var InputWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  input {\n    border-color: ", ";\n  }\n  label {\n    color: ", ";\n    font-size: 14px;\n    margin-bottom: 10px;\n  }\n  .default {\n    min-width: 50px;\n    width: 65px;\n    text-align: center;\n    svg {\n      color: ", ";\n    }\n  }\n  ", "\n\n  ", "\n\n  ", "\n  \n  .checked {\n    svg {\n      color: ", ";\n    }\n  }\n"])), function (_ref3) {
+var InputWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  input {\n    border-color: ", ";\n  }\n  label {\n    color: ", ";\n    font-size: 14px;\n    margin-bottom: 10px;\n  }\n  .default {\n    min-width: 50px;\n    width: 65px;\n    text-align: center;\n    > span.radio {\n      cursor: pointer;\n    }\n    svg {\n      color: ", ";\n    }\n  }\n  ", "\n\n  ", "\n\n  ", "\n  \n  .checked {\n    svg {\n      color: ", ";\n    }\n  }\n"])), function (_ref3) {
   var isMaxError = _ref3.isMaxError,
       theme = _ref3.theme;
   return isMaxError ? "".concat(theme.colors.danger, " !important") : '#DEE2E6';

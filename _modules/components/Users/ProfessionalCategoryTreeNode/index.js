@@ -49,7 +49,7 @@ var ProfessionalCategoryTreeNode = function ProfessionalCategoryTreeNode(props) 
   var checkboxRef = (0, _react.useRef)(null);
   var categoryRef = (0, _react.useRef)(null);
 
-  var _useState = (0, _react.useState)('active'),
+  var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       setActive = _useState2[0],
       setActiveState = _useState2[1];

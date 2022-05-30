@@ -307,6 +307,7 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     name: "preselected",
     className: subOption !== null && subOption !== void 0 && subOption.preselected ? 'checked default' : 'default'
   }, /*#__PURE__*/_react.default.createElement("span", {
+    className: "radio",
     onClick: function onClick(e) {
       return handleChangeDefaultSuboption(subOption.id);
     }

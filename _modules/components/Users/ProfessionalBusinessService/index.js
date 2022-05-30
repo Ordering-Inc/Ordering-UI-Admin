@@ -21,9 +21,9 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _styles2 = require("./styles");
-
 var _ProfessionalServices = require("../ProfessionalServices");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProfessionalBusinessServiceUI = function ProfessionalBusinessServiceUI(props) {
-  var _businessList$busines;
+  var _businessList$busines2;
 
   var searchValue = props.searchValue,
       _onSearch = props.onSearch,
@@ -136,8 +136,10 @@ var ProfessionalBusinessServiceUI = function ProfessionalBusinessServiceUI(props
   };
 
   var handleSelectAllBusinesses = function handleSelectAllBusinesses(index) {
-    if (index) {
-      var ids = currentBusinesses.reduce(function (prev, current) {
+    var _businessList$busines;
+
+    if (index && businessList !== null && businessList !== void 0 && (_businessList$busines = businessList.businesses) !== null && _businessList$busines !== void 0 && _businessList$busines.length) {
+      var ids = businessList.businesses.reduce(function (prev, current) {
         return [].concat(_toConsumableArray(prev), [current.id]);
       }, []);
       handleUpdateBusinessIds(ids);
@@ -252,7 +254,7 @@ var ProfessionalBusinessServiceUI = function ProfessionalBusinessServiceUI(props
     }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, business === null || business === void 0 ? void 0 : business.name))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  }) : /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null), (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }) : /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null), (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines2 = businessList.businesses) === null || _businessList$busines2 === void 0 ? void 0 : _businessList$busines2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,

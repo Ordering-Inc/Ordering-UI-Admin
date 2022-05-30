@@ -58,7 +58,8 @@ var BusinessDetail = function BusinessDetail(props) {
       handleSuccessDeleteBusinessItem = props.handleSuccessDeleteBusinessItem,
       handleSucessUpdateBusiness = props.handleSucessUpdateBusiness,
       setIsExtendExtraOpen = props.setIsExtendExtraOpen,
-      isExtendExtraOpen = props.isExtendExtraOpen;
+      isExtendExtraOpen = props.isExtendExtraOpen,
+      handleUpdateBusinessState = props.handleUpdateBusinessState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -77,7 +78,8 @@ var BusinessDetail = function BusinessDetail(props) {
     handleSelectInfoItem: setSelctedInfoItem
   }), selectedInfoItem === 'information' && /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
     business: business,
-    handleSuccessUpdate: handleSucessUpdateBusiness
+    handleSuccessUpdate: handleSucessUpdateBusiness,
+    handleUpdateBusinessState: handleUpdateBusinessState
   }), selectedInfoItem === 'owner' && /*#__PURE__*/_react.default.createElement(_BusinessOwners.BusinessOwners, {
     business: business,
     handleDeleteBusinessOwner: handleDeleteBusinessOwner,
