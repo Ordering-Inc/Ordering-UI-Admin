@@ -48,7 +48,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SeoOptions = function SeoOptions(props) {
-  var _formState$changes, _formState$result, _formState$changes2, _formState$changes3, _formState$changes4, _formState$result2, _formState$result3, _formState$result3$re, _ref, _formState$changes$se, _formState$changes5, _formState$result4, _formState$result5, _formState$result5$re, _ref2, _formState$changes$se2, _formState$changes6;
+  var _formState$changes, _formState$result, _formState$changes2, _formState$changes3, _formState$changes4, _formState$result2, _formState$result3, _formState$result3$re, _ref, _formState$changes$se, _formState$changes5, _formState$result4, _formState$result5, _formState$result5$re, _ref2, _formState$changes$se2, _formState$changes6, _formState$result6, _formState$result7, _formState$result7$re, _ref3, _formState$changes$se3, _formState$changes7;
 
   var data = props.data,
       formState = props.formState,
@@ -224,6 +224,13 @@ var SeoOptions = function SeoOptions(props) {
       if (isProductSeo || isCategorySeo) handleProductCategoryChangeInput(e);
     },
     placeholder: t('SEO_DESCRIPTION', 'SEO Description')
+  })), isProductSeo && /*#__PURE__*/_react.default.createElement(_styles2.WrapperDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEO_KEYWORDS', 'SEO Keywords')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "seo_keywords",
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result6 = formState.result) !== null && _formState$result6 !== void 0 && _formState$result6.result ? formState === null || formState === void 0 ? void 0 : (_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : (_formState$result7$re = _formState$result7.result) === null || _formState$result7$re === void 0 ? void 0 : _formState$result7$re.seo_keywords : (_ref3 = (_formState$changes$se3 = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.seo_keywords) !== null && _formState$changes$se3 !== void 0 ? _formState$changes$se3 : data === null || data === void 0 ? void 0 : data.seo_keywords) !== null && _ref3 !== void 0 ? _ref3 : '',
+    onChange: function onChange(e) {
+      return handleProductCategoryChangeInput(e);
+    },
+    placeholder: t('SEO_KEYWORDS', 'SEO Keywords')
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "5px",

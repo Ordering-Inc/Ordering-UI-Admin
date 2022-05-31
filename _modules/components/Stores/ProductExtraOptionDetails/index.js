@@ -73,7 +73,6 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       editSubOptionId = props.editSubOptionId,
       handleChangeInput = props.handleChangeInput,
       handleChangeSubOptionImage = props.handleChangeSubOptionImage,
-      handleChangeSubOptionEnable = props.handleChangeSubOptionEnable,
       handleDeteteSubOption = props.handleDeteteSubOption,
       handleOptionSetting = props.handleOptionSetting,
       settingChangeState = props.settingChangeState,
@@ -297,13 +296,9 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       setSelectedSubOptionId: setSelectedSubOptionId,
       openModal: openModal,
       setOpenModal: setOpenModal,
-      handleChangeInput: handleChangeInput,
-      handleChangeSubOptionImage: handleChangeSubOptionImage,
       handleChangeDefaultSuboption: handleChangeDefaultSuboption,
-      handleChangeSubOptionEnable: handleChangeSubOptionEnable,
       handleDeteteSubOption: handleDeteteSubOption,
-      handleUpdateSubOption: handleUpdateSubOption,
-      handleChangeItem: handleChangeItem
+      handleUpdateSubOption: handleUpdateSubOption
     });
   }), isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AdddSubOptionForm, {
     onSubmit: handleSubmit(handleAddOption),

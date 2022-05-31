@@ -25,6 +25,8 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _styledComponents = require("styled-components");
 
+var _reactHookForm = require("react-hook-form");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -52,36 +54,34 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraSuboption = function ProductExtraSuboption(props) {
-  var _changesState$result, _changesState$result2, _changesState$changes7, _changesState$changes8, _settingChangeState$c, _settingChangeState$c2, _optionState$option, _settingChangeState$c3, _settingChangeState$c4, _optionState$option2;
+  var _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2, _settingChangeState$c, _settingChangeState$c2, _optionState$option, _settingChangeState$c3, _settingChangeState$c4, _optionState$option2;
 
   var subOption = props.subOption,
       optionState = props.optionState,
       editSubOptionId = props.editSubOptionId,
-      handleChangeInput = props.handleChangeInput,
       settingChangeState = props.settingChangeState,
       changesState = props.changesState,
       setSelectedSubOptionId = props.setSelectedSubOptionId,
       openModal = props.openModal,
       setOpenModal = props.setOpenModal,
-      handleChangeSubOptionImage = props.handleChangeSubOptionImage,
       handleChangeDefaultSuboption = props.handleChangeDefaultSuboption,
-      handleChangeSubOptionEnable = props.handleChangeSubOptionEnable,
       handleDeteteSubOption = props.handleDeteteSubOption,
-      handleUpdateSubOption = props.handleUpdateSubOption,
-      handleChangeItem = props.handleChangeItem;
+      handleUpdateSubOption = props.handleUpdateSubOption;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var nameRef = (0, _react.useRef)();
-  var priceRef = (0, _react.useRef)();
+  var _useForm = (0, _reactHookForm.useForm)(),
+      handleSubmit = _useForm.handleSubmit,
+      errors = _useForm.errors,
+      control = _useForm.control;
 
-  var _useState = (0, _react.useState)({}),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
-      editErrors = _useState2[0],
-      setEditErrors = _useState2[1];
+      timer = _useState2[0],
+      setTimer = _useState2[1];
 
   var _useState3 = (0, _react.useState)({
     open: false,
@@ -108,6 +108,11 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       cropState = _useState8[0],
       setCropState = _useState8[1];
+
+  var _useState9 = (0, _react.useState)({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      formState = _useState10[0],
+      setFormState = _useState10[1];
 
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
@@ -150,8 +155,6 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
       reader.onerror = function (error) {
         return console.log(error);
       };
-
-      handleChangeSubOptionImage(files[0], subOptionId);
     }
   };
 
@@ -169,7 +172,9 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
   };
 
   var handleChangePhoto = function handleChangePhoto(croppedImg) {
-    handleChangeItem(_defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg), cropState === null || cropState === void 0 ? void 0 : cropState.id);
+    setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+      image: croppedImg
+    }));
     setCropState({
       name: null,
       data: null,
@@ -177,57 +182,39 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     });
   };
 
-  var handleClickOutside = function handleClickOutside(e) {
-    if (editSubOptionId === subOption.id) {
-      var _nameRef$current, _changesState$changes, _priceRef$current, _changesState$changes4;
+  var onSubmit = function onSubmit() {
+    handleUpdateSubOption(_objectSpread({
+      id: subOption.id
+    }, formState));
+  };
 
-      if (!((_nameRef$current = nameRef.current) !== null && _nameRef$current !== void 0 && _nameRef$current.contains(e.target)) && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.name) === '') {
-        var _changesState$changes2, _changesState$changes3;
-
-        setEditErrors({
-          name: (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.name) === '',
-          price: (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes3 = changesState.changes) === null || _changesState$changes3 === void 0 ? void 0 : _changesState$changes3.price) === ''
-        });
-        return;
-      }
-
-      if (!((_priceRef$current = priceRef.current) !== null && _priceRef$current !== void 0 && _priceRef$current.contains(e.target)) && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.price) === '') {
-        var _changesState$changes5, _changesState$changes6;
-
-        setEditErrors({
-          name: (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes5 = changesState.changes) === null || _changesState$changes5 === void 0 ? void 0 : _changesState$changes5.name) === '',
-          price: (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes6 = changesState.changes) === null || _changesState$changes6 === void 0 ? void 0 : _changesState$changes6.price) === ''
-        });
-        return;
-      }
-
-      if (e.target.closest('.ordering-img-crop')) return;
-      handleUpdateSubOption();
-    }
+  var handleChangeInput = function handleChangeInput(e) {
+    setFormState(_objectSpread(_objectSpread({}, formState), {}, _defineProperty({}, e.target.name, e.target.value)));
   };
 
   (0, _react.useEffect)(function () {
-    if (editSubOptionId !== subOption.id) return;
-    window.addEventListener('mouseup', handleClickOutside);
-    return function () {
-      window.removeEventListener('mouseup', handleClickOutside);
-    };
-  }, [editSubOptionId, subOption.id, changesState]);
-  (0, _react.useEffect)(function () {
-    if (Object.keys(editErrors).length) {
-      var errorContent = [];
-      if (editErrors !== null && editErrors !== void 0 && editErrors.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'));
-      if (editErrors !== null && editErrors !== void 0 && editErrors.price) errorContent.push(t('PRICE_REQUIRED', 'The price is required.'));
-
-      if (errorContent.length) {
-        setAlertState({
-          open: true,
-          content: errorContent
-        });
-      }
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(function (error) {
+          return error.message;
+        })
+      });
     }
-  }, [editErrors]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.SubOptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, {
+  }, [errors]);
+  (0, _react.useEffect)(function () {
+    if (!Object.keys(formState).length) return;
+    clearTimeout(timer);
+
+    var _timer = setTimeout(function () {
+      onSubmit();
+    }, 500);
+
+    setTimer(_timer);
+  }, [formState]);
+  return /*#__PURE__*/_react.default.createElement(_styles2.SubOptionContainer, {
+    onSubmit: handleSubmit(onSubmit)
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, {
     onClick: function onClick() {
       return handleClickSubOptionImage("suboption_image_".concat(subOption.id));
     }
@@ -248,8 +235,8 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     src: changesState === null || changesState === void 0 ? void 0 : (_changesState$result2 = changesState.result) === null || _changesState$result2 === void 0 ? void 0 : _changesState$result2.image,
     alt: "sub option image",
     loading: "lazy"
-  }) : changesState !== null && changesState !== void 0 && (_changesState$changes7 = changesState.changes) !== null && _changesState$changes7 !== void 0 && _changesState$changes7.image && editSubOptionId === subOption.id ? /*#__PURE__*/_react.default.createElement("img", {
-    src: changesState === null || changesState === void 0 ? void 0 : (_changesState$changes8 = changesState.changes) === null || _changesState$changes8 === void 0 ? void 0 : _changesState$changes8.image,
+  }) : changesState !== null && changesState !== void 0 && (_changesState$changes = changesState.changes) !== null && _changesState$changes !== void 0 && _changesState$changes.image && editSubOptionId === subOption.id ? /*#__PURE__*/_react.default.createElement("img", {
+    src: changesState === null || changesState === void 0 ? void 0 : (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.image,
     alt: "sub option image",
     loading: "lazy"
   }) : (subOption === null || subOption === void 0 ? void 0 : subOption.image) && /*#__PURE__*/_react.default.createElement("img", {
@@ -258,48 +245,97 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, {
     small: true
-  }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    ref: nameRef,
+  }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "name",
-    autoComplete: "off",
+    control: control,
+    render: function render(_ref) {
+      var _onChange = _ref.onChange,
+          value = _ref.value;
+      return /*#__PURE__*/_react.default.createElement(_styles.Input, {
+        name: "name",
+        autoComplete: "off",
+        value: value,
+        onChange: function onChange(e) {
+          _onChange(e.target.vaue);
+
+          handleChangeInput(e);
+        }
+      });
+    },
     defaultValue: subOption.name,
-    onChange: function onChange(e) {
-      return handleChangeInput(e, subOption.id);
+    rules: {
+      required: t('NAME_REQUIRED', 'The name is required.')
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.RightSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    ref: priceRef,
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.RightSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "price",
+    control: control,
+    render: function render(_ref2) {
+      var _onChange2 = _ref2.onChange,
+          value = _ref2.value;
+      return /*#__PURE__*/_react.default.createElement(_styles.Input, {
+        name: "price",
+        autoComplete: "off",
+        value: value,
+        onChange: function onChange(e) {
+          _onChange2(e.target.value);
+
+          handleChangeInput(e);
+        },
+        onKeyPress: function onKeyPress(e) {
+          if (!/^[0-9.]$/.test(e.key)) {
+            e.preventDefault();
+          }
+        }
+      });
+    },
     defaultValue: subOption === null || subOption === void 0 ? void 0 : subOption.price,
-    onChange: function onChange(e) {
-      return handleChangeInput(e, subOption.id);
-    },
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault();
-      }
+    rules: {
+      required: t('PRICE_REQUIRED', 'The price is required.')
     }
-  })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c = settingChangeState.changes) === null || _settingChangeState$c === void 0 ? void 0 : _settingChangeState$c.with_half_option) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c2 = settingChangeState.changes) === null || _settingChangeState$c2 === void 0 ? void 0 : _settingChangeState$c2.with_half_option : optionState === null || optionState === void 0 ? void 0 : (_optionState$option = optionState.option) === null || _optionState$option === void 0 ? void 0 : _optionState$option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c = settingChangeState.changes) === null || _settingChangeState$c === void 0 ? void 0 : _settingChangeState$c.with_half_option) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c2 = settingChangeState.changes) === null || _settingChangeState$c2 === void 0 ? void 0 : _settingChangeState$c2.with_half_option : optionState === null || optionState === void 0 ? void 0 : (_optionState$option = optionState.option) === null || _optionState$option === void 0 ? void 0 : _optionState$option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "half_price",
-    defaultValue: subOption === null || subOption === void 0 ? void 0 : subOption.half_price,
-    onChange: function onChange(e) {
-      return handleChangeInput(e, subOption.id);
+    control: control,
+    render: function render(_ref3) {
+      var _onChange3 = _ref3.onChange,
+          value = _ref3.value;
+      return /*#__PURE__*/_react.default.createElement(_styles.Input, {
+        name: "half_price",
+        value: value,
+        onChange: function onChange(e) {
+          _onChange3(e.target.value);
+
+          handleChangeInput(e);
+        },
+        onKeyPress: function onKeyPress(e) {
+          if (!/^[0-9.]$/.test(e.key)) {
+            e.preventDefault();
+          }
+        }
+      });
     },
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    }
-  })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c3 = settingChangeState.changes) === null || _settingChangeState$c3 === void 0 ? void 0 : _settingChangeState$c3.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c4 = settingChangeState.changes) === null || _settingChangeState$c4 === void 0 ? void 0 : _settingChangeState$c4.allow_suboption_quantity : optionState === null || optionState === void 0 ? void 0 : (_optionState$option2 = optionState.option) === null || _optionState$option2 === void 0 ? void 0 : _optionState$option2.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "max",
-    defaultValue: subOption === null || subOption === void 0 ? void 0 : subOption.max,
-    onChange: function onChange(e) {
-      return handleChangeInput(e, subOption.id);
+    defaultValue: subOption === null || subOption === void 0 ? void 0 : subOption.half_price
+  })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c3 = settingChangeState.changes) === null || _settingChangeState$c3 === void 0 ? void 0 : _settingChangeState$c3.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c4 = settingChangeState.changes) === null || _settingChangeState$c4 === void 0 ? void 0 : _settingChangeState$c4.allow_suboption_quantity : optionState === null || optionState === void 0 ? void 0 : (_optionState$option2 = optionState.option) === null || _optionState$option2 === void 0 ? void 0 : _optionState$option2.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
+    name: "half_price",
+    control: control,
+    render: function render(_ref4) {
+      var _onChange4 = _ref4.onChange,
+          value = _ref4.value;
+      return /*#__PURE__*/_react.default.createElement(_styles.Input, {
+        name: "max",
+        value: value,
+        onChange: function onChange(e) {
+          _onChange4(e.target.value);
+
+          handleChangeInput(e);
+        },
+        onKeyPress: function onKeyPress(e) {
+          if (!/^[0-9.]$/.test(e.key)) {
+            e.preventDefault();
+          }
+        }
+      });
     },
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9.]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    }
+    defaultValue: subOption === null || subOption === void 0 ? void 0 : subOption.max
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     maxHeight: true,
     disabled: optionState === null || optionState === void 0 ? void 0 : optionState.loading
@@ -314,7 +350,9 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
   }, subOption !== null && subOption !== void 0 && subOption.preselected ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: subOption === null || subOption === void 0 ? void 0 : subOption.enabled,
     onChange: function onChange(enabled) {
-      return handleChangeSubOptionEnable(enabled, subOption.id);
+      return setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+        enabled: enabled
+      }));
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",

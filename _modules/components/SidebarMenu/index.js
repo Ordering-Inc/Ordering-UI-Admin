@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
-  var _theme$images, _theme$images$logos, _sessionState$user, _sessionState$user3, _sessionState$user4, _sessionState$user6, _sessionState$user7, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user12, _sessionState$user13, _sessionState$user14, _sessionState$user15, _sessionState$user16;
+  var _theme$images, _theme$images$logos, _sessionState$user, _sessionState$user3, _sessionState$user4, _sessionState$user6, _sessionState$user7, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user12, _sessionState$user13, _sessionState$user14, _sessionState$user15, _sessionState$user16, _sessionState$user17;
 
   var location = (0, _reactRouterDom.useLocation)();
   var theme = (0, _styledComponents.useTheme)();
@@ -472,7 +472,7 @@ var SidebarMenu = function SidebarMenu(props) {
     onClick: function onClick() {
       return handleGoToLink('https://apps.tryordering.com/store/marketplace');
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowUpRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETPLACE', 'Marketplace'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowUpRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETPLACE', 'Marketplace'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user13 = sessionState.user) === null || _sessionState$user13 === void 0 ? void 0 : _sessionState$user13.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "11",
     active: location.pathname === '/downloads/free-products' || location.pathname === '/downloads/purchased-products'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CloudDownload, null), /*#__PURE__*/_react.default.createElement("span", null, t('DOWNLOADS', 'Downloads'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -498,12 +498,12 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     },
     variant: location.pathname === '/profile' && 'primary'
-  }, sessionState !== null && sessionState !== void 0 && (_sessionState$user13 = sessionState.user) !== null && _sessionState$user13 !== void 0 && _sessionState$user13.photo ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
-    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user14 = sessionState.user) === null || _sessionState$user14 === void 0 ? void 0 : _sessionState$user14.photo,
+  }, sessionState !== null && sessionState !== void 0 && (_sessionState$user14 = sessionState.user) !== null && _sessionState$user14 !== void 0 && _sessionState$user14.photo ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
+    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user15 = sessionState.user) === null || _sessionState$user15 === void 0 ? void 0 : _sessionState$user15.photo,
     width: "30px",
     height: "30px",
     roundedCircle: true
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user15 = sessionState.user) === null || _sessionState$user15 === void 0 ? void 0 : _sessionState$user15.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user16 = sessionState.user) === null || _sessionState$user16 === void 0 ? void 0 : _sessionState$user16.lastname)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))))));
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user16 = sessionState.user) === null || _sessionState$user16 === void 0 ? void 0 : _sessionState$user16.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user17 = sessionState.user) === null || _sessionState$user17 === void 0 ? void 0 : _sessionState$user17.lastname)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))))));
 };
 
 exports.SidebarMenu = SidebarMenu;

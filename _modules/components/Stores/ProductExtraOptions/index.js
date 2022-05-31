@@ -62,7 +62,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       onClose = props.onClose,
       extraState = props.extraState,
       changesState = props.changesState,
-      handleChangeImage = props.handleChangeImage,
       handleChangeInput = props.handleChangeInput,
       handleChangeOptionEnable = props.handleChangeOptionEnable,
       handleChangeAddOption = props.handleChangeAddOption,
@@ -197,8 +196,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       reader.onerror = function (error) {
         return console.log(error);
       };
-
-      handleChangeImage(files[0], optionId);
     }
   };
 
