@@ -51,7 +51,6 @@ const ProductExtraOptionDetailsUI = (props) => {
     editSubOptionId,
     handleChangeInput,
     handleChangeSubOptionImage,
-    handleChangeSubOptionEnable,
     handleDeteteSubOption,
     handleOptionSetting,
     settingChangeState,
@@ -249,13 +248,9 @@ const ProductExtraOptionDetailsUI = (props) => {
             setSelectedSubOptionId={setSelectedSubOptionId}
             openModal={openModal}
             setOpenModal={setOpenModal}
-            handleChangeInput={handleChangeInput}
-            handleChangeSubOptionImage={handleChangeSubOptionImage}
             handleChangeDefaultSuboption={handleChangeDefaultSuboption}
-            handleChangeSubOptionEnable={handleChangeSubOptionEnable}
             handleDeteteSubOption={handleDeteteSubOption}
             handleUpdateSubOption={handleUpdateSubOption}
-            handleChangeItem={handleChangeItem}
           />
         ))}
 

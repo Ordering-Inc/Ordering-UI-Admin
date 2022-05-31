@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
-export const SubOptionContainer = styled.div`
+export const SubOptionContainer = styled.form`
   display: flex;
   width: 100%;
   margin-bottom: 15px;
