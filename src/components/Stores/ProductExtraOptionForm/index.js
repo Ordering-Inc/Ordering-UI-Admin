@@ -42,7 +42,7 @@ export const ProductExtraOptionForm = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const { handleSubmit, errors, control } = useForm()
+  const { handleSubmit, errors, control, setValue } = useForm()
 
   const optionImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -73,6 +73,9 @@ export const ProductExtraOptionForm = (props) => {
 
   useEffect(() => {
     if (!Object.keys(optionChangesState?.changes || {}).length) return
+    if (optionChangesState?.changes?.image) {
+      setValue('image', optionChangesState?.changes?.image)
+    }
     clearTimeout(timer)
     const _timer = setTimeout(() => {
       handleSubmit(handleUpdateOption)()
@@ -84,35 +87,41 @@ export const ProductExtraOptionForm = (props) => {
     <OptionContainer
       onSubmit={handleSubmit(handleUpdateOption)}
     >
-      <OptionImage
-        onClick={() => handleClickImage()}
-      >
-        <ExamineClick
-          onFiles={files => handleOptionFiles(files, optionState?.option.id)}
-          childRef={(e) => { optionImageInputRef.current = e }}
-          accept='image/png, image/jpeg, image/jpg'
-          disabled={optionState.loading}
-        >
-          <DragAndDrop
-            onDrop={dataTransfer => handleOptionFiles(dataTransfer.files, optionState?.option.id)}
-            accept='image/png, image/jpeg, image/jpg'
-            disabled={optionState.loading}
+      <Controller
+        name='image'
+        control={control}
+        render={({ onChange, value }) => (
+          <OptionImage
+            onClick={() => handleClickImage()}
           >
-            {
-              optionChangesState?.result?.image
-                ? (<img src={optionChangesState?.result?.image} alt='sub option image' loading='lazy' />)
-                : optionChangesState?.changes?.image
-                  ? (<img src={optionChangesState?.changes?.image} alt='product image' loading='lazy' />)
-                  : optionState?.option?.image && (<img src={optionState?.option?.image} alt='product image' loading='lazy' />)
-            }
-            <UploadImageIconContainer>
-              <UploadImageIcon>
-                <BiImage />
-              </UploadImageIcon>
-            </UploadImageIconContainer>
-          </DragAndDrop>
-        </ExamineClick>
-      </OptionImage>
+            <ExamineClick
+              onFiles={files => handleOptionFiles(files, optionState?.option.id)}
+              childRef={(e) => { optionImageInputRef.current = e }}
+              accept='image/png, image/jpeg, image/jpg'
+              disabled={optionState.loading}
+            >
+              <DragAndDrop
+                onDrop={dataTransfer => handleOptionFiles(dataTransfer.files, optionState?.option.id)}
+                accept='image/png, image/jpeg, image/jpg'
+                disabled={optionState.loading}
+              >
+                {
+                  optionChangesState?.result?.image
+                    ? (<img src={optionChangesState?.result?.image} alt='sub option image' loading='lazy' />)
+                    : optionChangesState?.changes?.image
+                      ? (<img src={optionChangesState?.changes?.image} alt='product image' loading='lazy' />)
+                      : optionState?.option?.image && (<img src={optionState?.option?.image} alt='product image' loading='lazy' />)
+                }
+                <UploadImageIconContainer>
+                  <UploadImageIcon>
+                    <BiImage />
+                  </UploadImageIcon>
+                </UploadImageIconContainer>
+              </DragAndDrop>
+            </ExamineClick>
+          </OptionImage>
+        )}
+      />
       <OptionInfoContainer>
         <OptionContent>
           <InputWrapper primary>
