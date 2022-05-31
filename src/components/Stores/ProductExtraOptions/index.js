@@ -35,7 +35,6 @@ const ProductExtraOptionsUI = (props) => {
     onClose,
     extraState,
     changesState,
-    handleChangeImage,
     handleChangeInput,
     handleChangeOptionEnable,
     handleChangeAddOption,
@@ -111,8 +110,6 @@ const ProductExtraOptionsUI = (props) => {
         setCropState({ name: 'image', data: reader.result, open: true, id: optionId })
       }
       reader.onerror = error => console.log(error)
-
-      handleChangeImage(files[0], optionId)
     }
   }
 
