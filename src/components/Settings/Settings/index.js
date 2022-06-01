@@ -10,6 +10,7 @@ import { SideBar } from '../../Shared'
 import { CheckoutFieldsSetting } from '../CheckoutFieldsSetting'
 import { AddressFieldsSetting } from '../AddressFieldsSetting'
 import { LanguageSetting } from '../LanguageSetting'
+import { SitesAuthSettings } from '../SitesAuthSettings'
 
 import {
   BasicSettingsContainer,
@@ -27,11 +28,13 @@ const SettingsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+  const { search } = useLocation()
 
   const [isOpenDescription, setIsOpenDescription] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
-  const { search } = useLocation()
+  const [openSitesAuthSettings, setOpenSitesAuthSettings] = useState(false)
+  const [moveDistance, setMoveDistance] = useState(0)
 
   let category
 
@@ -59,6 +62,7 @@ const SettingsUI = (props) => {
 
   const handleOpenDescription = (category) => {
     setIsOpenSettingDetails(null)
+    setOpenSitesAuthSettings(false)
     setIsOpenDescription(true)
     setSelectedCategory(category)
     onBasicSettingsRedirect({ category: category?.id })
@@ -67,6 +71,7 @@ const SettingsUI = (props) => {
 
   const handleOpenSettingDetails = (item) => {
     setIsOpenDescription(false)
+    setOpenSitesAuthSettings(false)
     setSelectedCategory(null)
     setIsOpenSettingDetails(item)
   }
@@ -156,6 +161,21 @@ const SettingsUI = (props) => {
                   active={isOpenSettingDetails === 'address'}
                 />
               </SettingItemWrapper>
+              <SettingItemWrapper
+                className='col-md-4 col-sm-6'
+                onClick={() => {
+                  setIsOpenDescription(false)
+                  setIsOpenSettingDetails(null)
+                  setOpenSitesAuthSettings(true)
+                }}
+              >
+                <SettingItemUI
+                  title={t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings')}
+                  description={t('SITES_LOGIN_SIGNUP_SETTINGS_DESC', 'Advanced sites login/sign up settings')}
+                  icon={<GearFill />}
+                  active={openSitesAuthSettings}
+                />
+              </SettingItemWrapper>
             </>
           )}
           {
@@ -196,6 +216,19 @@ const SettingsUI = (props) => {
           />
         )
       }
+      {openSitesAuthSettings && (
+        <SideBar
+          defaultSideBarWidth={500 + moveDistance}
+          moveDistance={moveDistance}
+          open={openSitesAuthSettings}
+          onClose={() => {
+            setMoveDistance(0)
+            setOpenSitesAuthSettings(false)
+          }}
+        >
+          <SitesAuthSettings setMoveDistance={setMoveDistance} />
+        </SideBar>
+      )}
       {
         isOpenSettingDetails && (
           <SideBar
