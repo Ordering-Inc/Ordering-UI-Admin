@@ -34,9 +34,7 @@ const PaymentOptionSquareUI = (props) => {
     changesState,
     orderTypes,
     handleChangeBusinessPaymentState,
-
     actionState,
-    squareUrlState,
     handleConnectSquare,
     squareData,
     handleSavePaymethod,
@@ -167,7 +165,6 @@ const PaymentOptionSquareUI = (props) => {
               borderRadius='8px'
               color='primary'
               onClick={handleConnectSquare}
-              disabled={squareUrlState.loading}
             >
               <SiSquare />
               {t('CONNECT_WITH_SQUARE', 'Connect with Square')}
