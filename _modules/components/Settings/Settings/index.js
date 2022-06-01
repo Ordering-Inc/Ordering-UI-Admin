@@ -31,6 +31,8 @@ var _AddressFieldsSetting = require("../AddressFieldsSetting");
 
 var _LanguageSetting = require("../LanguageSetting");
 
+var _SitesAuthSettings = require("../SitesAuthSettings");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -79,6 +81,9 @@ var SettingsUI = function SettingsUI(props) {
       isCollapse = _useInfoShare2[0].isCollapse,
       handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
+  var _useLocation = (0, _reactRouterDom.useLocation)(),
+      search = _useLocation.search;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       isOpenDescription = _useState2[0],
@@ -94,8 +99,15 @@ var SettingsUI = function SettingsUI(props) {
       isOpenSettingDetails = _useState6[0],
       setIsOpenSettingDetails = _useState6[1];
 
-  var _useLocation = (0, _reactRouterDom.useLocation)(),
-      search = _useLocation.search;
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      openSitesAuthSettings = _useState8[0],
+      setOpenSitesAuthSettings = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(0),
+      _useState10 = _slicedToArray(_useState9, 2),
+      moveDistance = _useState10[0],
+      setMoveDistance = _useState10[1];
 
   var category;
 
@@ -135,6 +147,7 @@ var SettingsUI = function SettingsUI(props) {
 
   var handleOpenDescription = function handleOpenDescription(category) {
     setIsOpenSettingDetails(null);
+    setOpenSitesAuthSettings(false);
     setIsOpenDescription(true);
     setSelectedCategory(category);
     onBasicSettingsRedirect({
@@ -145,6 +158,7 @@ var SettingsUI = function SettingsUI(props) {
 
   var handleOpenSettingDetails = function handleOpenSettingDetails(item) {
     setIsOpenDescription(false);
+    setOpenSitesAuthSettings(false);
     setSelectedCategory(null);
     setIsOpenSettingDetails(item);
   };
@@ -224,6 +238,18 @@ var SettingsUI = function SettingsUI(props) {
     description: t('ADDRESS_FIELDS_DESC'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAltFill, null),
     active: isOpenSettingDetails === 'address'
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
+    className: "col-md-4 col-sm-6",
+    onClick: function onClick() {
+      setIsOpenDescription(false);
+      setIsOpenSettingDetails(null);
+      setOpenSitesAuthSettings(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
+    title: t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings'),
+    description: t('SITES_LOGIN_SIGNUP_SETTINGS_DESC', 'Advanced sites login/sign up settings'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
+    active: openSitesAuthSettings
   }))), categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
       className: "col-md-4 col-sm-6",
@@ -252,6 +278,16 @@ var SettingsUI = function SettingsUI(props) {
     category: selectedCategory,
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
+  })), openSitesAuthSettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    defaultSideBarWidth: 500 + moveDistance,
+    moveDistance: moveDistance,
+    open: openSitesAuthSettings,
+    onClose: function onClose() {
+      setMoveDistance(0);
+      setOpenSitesAuthSettings(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SitesAuthSettings.SitesAuthSettings, {
+    setMoveDistance: setMoveDistance
   })), isOpenSettingDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "setting-details",
     defaultSideBarWidth: 550,
