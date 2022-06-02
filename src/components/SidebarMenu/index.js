@@ -649,33 +649,35 @@ export const SidebarMenu = (props) => {
                     <span>{t('MARKETPLACE', 'Marketplace')}</span>
                   </Button>
                 )}
-                <Accordion>
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='11'
-                      active={
-                        location.pathname === '/downloads/free-products' ||
-                        location.pathname === '/downloads/purchased-products'
-                      }
-                    >
-                      <CloudDownload />
-                      <span>{t('DOWNLOADS', 'Downloads')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='11'>
-                      <MenuContent>
-                        {downloadsSubMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
-                </Accordion>
+                {sessionState?.user?.level === 0 && (
+                  <Accordion>
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='11'
+                        active={
+                          location.pathname === '/downloads/free-products' ||
+                          location.pathname === '/downloads/purchased-products'
+                        }
+                      >
+                        <CloudDownload />
+                        <span>{t('DOWNLOADS', 'Downloads')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='11'>
+                        <MenuContent>
+                          {downloadsSubMenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  </Accordion>
+                )}
               </div>
             </SidebarContent>
             <UserInfo

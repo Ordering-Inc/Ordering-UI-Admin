@@ -267,10 +267,10 @@ export const App = () => {
                       <Support />
                     </ProtectedRoute>
 
-                    <ProtectedRoute path='/downloads/free-products' allowedLevels={[0, 2, 5]}>
+                    <ProtectedRoute path='/downloads/free-products' allowedLevels={[0]}>
                       <FreeProductsList />
                     </ProtectedRoute>
-                    <ProtectedRoute path='/downloads/purchased-products' allowedLevels={[0, 2, 5]}>
+                    <ProtectedRoute path='/downloads/purchased-products' allowedLevels={[0]}>
                       <PurchasedProductsList />
                     </ProtectedRoute>
                     <ProtectedRoute path='/ordering-products' allowedLevels={[0, 2, 5]}>
