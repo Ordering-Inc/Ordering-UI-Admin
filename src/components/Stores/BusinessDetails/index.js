@@ -23,6 +23,7 @@ import { MoreSidebarLayout, Personalization } from '../../Shared'
 import {
   BarContainer
 } from './styles'
+import { BusinessPlaceList } from '../BusinessPlaceList'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -270,6 +271,13 @@ export const BusinessDetailsUI = (props) => {
             <BusinessWebhooks
               business={businessState?.business}
               handleSuccessUpdate={handleUpdateBusinessState}
+            />
+          )}
+          {selectedItem === 'places' && (
+            <BusinessPlaceList
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
             />
           )}
         </MoreSidebarLayout>
