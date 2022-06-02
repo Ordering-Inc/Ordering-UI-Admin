@@ -308,47 +308,101 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     if (!isFilterView) {
       if (orderControl) {
         setFilteredOrderStatuses(orderStatuses);
-      } else if (deliveryType === 1) {
+      } else {
         var _filteredOrderStatues = [];
         var extractOrderStatus = [];
-        extractOrderStatus = orderStatuses.slice(0, 13);
-        _filteredOrderStatues = _toConsumableArray(extractOrderStatus);
-        extractOrderStatus = orderStatuses.slice(15, 20);
-        _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
-        extractOrderStatus = orderStatuses.slice(21, 28);
-        _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
-        setFilteredOrderStatuses(_filteredOrderStatues);
-      } else {
-        var _filteredOrderStatues2 = [];
-        var _extractOrderStatus = [];
-        _extractOrderStatus = orderStatuses.slice(0, 7);
-        _filteredOrderStatues2 = _toConsumableArray(_extractOrderStatus);
-        _extractOrderStatus = orderStatuses.slice(10, 11);
-        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-        _extractOrderStatus = orderStatuses.slice(13, 15);
-        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-        _extractOrderStatus = orderStatuses.slice(17, 19);
-        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-        _extractOrderStatus = orderStatuses.slice(20, 24);
-        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-        _extractOrderStatus = orderStatuses.slice(27, 29);
-        _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
-        setFilteredOrderStatuses(_filteredOrderStatues2);
+
+        switch (deliveryType) {
+          case 1:
+            extractOrderStatus = orderStatuses.slice(0, 13);
+            _filteredOrderStatues = _toConsumableArray(extractOrderStatus);
+            extractOrderStatus = orderStatuses.slice(15, 20);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(21, 28);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            setFilteredOrderStatuses(_filteredOrderStatues);
+            break;
+
+          case 2:
+            extractOrderStatus = orderStatuses.slice(0, 7);
+            _filteredOrderStatues = _toConsumableArray(extractOrderStatus);
+            extractOrderStatus = orderStatuses.slice(10, 11);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(13, 15);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(17, 19);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(20, 24);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(27, 29);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            setFilteredOrderStatuses(_filteredOrderStatues);
+            break;
+
+          case 3:
+            extractOrderStatus = orderStatuses.slice(0, 3);
+            _filteredOrderStatues = _toConsumableArray(extractOrderStatus);
+            extractOrderStatus = orderStatuses.slice(4, 7);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(17, 18);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(20, 24);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(27, 29);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            setFilteredOrderStatuses(_filteredOrderStatues);
+            break;
+
+          case 4:
+            extractOrderStatus = orderStatuses.slice(0, 7);
+            _filteredOrderStatues = _toConsumableArray(extractOrderStatus);
+            extractOrderStatus = orderStatuses.slice(10, 11);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(13, 15);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(17, 19);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(20, 24);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(27, 29);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            setFilteredOrderStatuses(_filteredOrderStatues);
+            break;
+
+          case 5:
+            extractOrderStatus = orderStatuses.slice(0, 7);
+            _filteredOrderStatues = _toConsumableArray(extractOrderStatus);
+            extractOrderStatus = orderStatuses.slice(10, 11);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(13, 15);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(17, 19);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(20, 24);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(27, 29);
+            _filteredOrderStatues = [].concat(_toConsumableArray(_filteredOrderStatues), _toConsumableArray(extractOrderStatus));
+            setFilteredOrderStatuses(_filteredOrderStatues);
+            break;
+
+          default:
+            setFilteredOrderStatuses(orderStatuses);
+        }
       }
     } else {
-      var _filteredOrderStatues3 = [];
-      var _extractOrderStatus2 = [];
-      _extractOrderStatus2 = orderStatuses.slice(2, 4);
-      _filteredOrderStatues3 = _toConsumableArray(_extractOrderStatus2);
-      _extractOrderStatus2 = orderStatuses.slice(5, 17);
-      _filteredOrderStatues3 = [].concat(_toConsumableArray(_filteredOrderStatues3), _toConsumableArray(_extractOrderStatus2));
-      _extractOrderStatus2 = orderStatuses.slice(18, 21);
-      _filteredOrderStatues3 = [].concat(_toConsumableArray(_filteredOrderStatues3), _toConsumableArray(_extractOrderStatus2));
-      _extractOrderStatus2 = orderStatuses.slice(22, 29);
-      _filteredOrderStatues3 = [].concat(_toConsumableArray(_filteredOrderStatues3), _toConsumableArray(_extractOrderStatus2));
-      setFilteredOrderStatuses(_filteredOrderStatues3);
+      var _filteredOrderStatues2 = [];
+      var _extractOrderStatus = [];
+      _extractOrderStatus = orderStatuses.slice(2, 4);
+      _filteredOrderStatues2 = _toConsumableArray(_extractOrderStatus);
+      _extractOrderStatus = orderStatuses.slice(5, 17);
+      _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
+      _extractOrderStatus = orderStatuses.slice(18, 21);
+      _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
+      _extractOrderStatus = orderStatuses.slice(22, 29);
+      _filteredOrderStatues2 = [].concat(_toConsumableArray(_filteredOrderStatues2), _toConsumableArray(_extractOrderStatus));
+      setFilteredOrderStatuses(_filteredOrderStatues2);
     }
-  }, []);
+  }, [deliveryType]);
   (0, _react.useEffect)(function () {
     setDefaultOptionValue(defaultValue);
   }, [defaultValue]);
