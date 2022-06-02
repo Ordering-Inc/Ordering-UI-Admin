@@ -335,41 +335,80 @@ export const OrderStatusTypeSelector = (props) => {
     if (!isFilterView) {
       if (orderControl) {
         setFilteredOrderStatuses(orderStatuses)
-      } else if (deliveryType === 1) {
-        let _filteredOrderStatues = []
-        let extractOrderStatus = []
-        extractOrderStatus = orderStatuses.slice(0, 13)
-        _filteredOrderStatues = [...extractOrderStatus]
-
-        extractOrderStatus = orderStatuses.slice(15, 20)
-        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
-
-        extractOrderStatus = orderStatuses.slice(21, 28)
-        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
-
-        setFilteredOrderStatuses(_filteredOrderStatues)
       } else {
         let _filteredOrderStatues = []
         let extractOrderStatus = []
-        extractOrderStatus = orderStatuses.slice(0, 7)
-        _filteredOrderStatues = [...extractOrderStatus]
-
-        extractOrderStatus = orderStatuses.slice(10, 11)
-        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
-
-        extractOrderStatus = orderStatuses.slice(13, 15)
-        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
-
-        extractOrderStatus = orderStatuses.slice(17, 19)
-        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
-
-        extractOrderStatus = orderStatuses.slice(20, 24)
-        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
-
-        extractOrderStatus = orderStatuses.slice(27, 29)
-        _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
-
-        setFilteredOrderStatuses(_filteredOrderStatues)
+        switch (deliveryType) {
+          case 1:
+            extractOrderStatus = orderStatuses.slice(0, 13)
+            _filteredOrderStatues = [...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(15, 20)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(21, 28)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            setFilteredOrderStatuses(_filteredOrderStatues)
+            break
+          case 2:
+            extractOrderStatus = orderStatuses.slice(0, 7)
+            _filteredOrderStatues = [...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(10, 11)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(13, 15)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(17, 19)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(20, 24)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(27, 29)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            setFilteredOrderStatuses(_filteredOrderStatues)
+            break
+          case 3:
+            extractOrderStatus = orderStatuses.slice(0, 3)
+            _filteredOrderStatues = [...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(4, 7)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(17, 18)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(20, 24)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(27, 29)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            setFilteredOrderStatuses(_filteredOrderStatues)
+            break
+          case 4:
+            extractOrderStatus = orderStatuses.slice(0, 7)
+            _filteredOrderStatues = [...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(10, 11)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(13, 15)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(17, 19)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(20, 24)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(27, 29)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            setFilteredOrderStatuses(_filteredOrderStatues)
+            break
+          case 5:
+            extractOrderStatus = orderStatuses.slice(0, 7)
+            _filteredOrderStatues = [...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(10, 11)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(13, 15)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(17, 19)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(20, 24)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(27, 29)
+            _filteredOrderStatues = [..._filteredOrderStatues, ...extractOrderStatus]
+            setFilteredOrderStatuses(_filteredOrderStatues)
+            break
+          default:
+            setFilteredOrderStatuses(orderStatuses)
+        }
       }
     } else {
       let _filteredOrderStatues = []
@@ -388,7 +427,7 @@ export const OrderStatusTypeSelector = (props) => {
 
       setFilteredOrderStatuses(_filteredOrderStatues)
     }
-  }, [])
+  }, [deliveryType])
 
   useEffect(() => {
     setDefaultOptionValue(defaultValue)
