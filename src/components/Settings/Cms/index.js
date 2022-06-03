@@ -206,6 +206,7 @@ const CmsUI = (props) => {
         width='70%'
         open={openModal}
         onClose={() => setOpenModal(false)}
+        closeOnBackdrop={false}
       >
         <PageForm
           pageId={curPageId}
