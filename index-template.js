@@ -141,7 +141,9 @@ if (!(window?.location?.hostname === 'localhost')) {
     integrations: [
       new Integrations.BrowserTracing()
     ],
-    release: process.env.npm_package_version ? 'ordering-ui-admin@' + process.env.npm_package_version : 'ordering-ui-admin@' + '0.0.2',
+    release: 'ordering-ui-admin@' + process.env.npm_package_version,
+    // Release health
+    autoSessionTracking: true,
     ignoreErrors: [
       'is not defined',
       'is not a function',
