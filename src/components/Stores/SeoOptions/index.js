@@ -189,6 +189,21 @@ export const SeoOptions = (props) => {
             placeholder={t('SEO_DESCRIPTION', 'SEO Description')}
           />
         </WrapperDescription>
+        {isProductSeo && (
+          <WrapperDescription>
+            <label>{t('SEO_KEYWORDS', 'SEO Keywords')}</label>
+            <Input
+              name='seo_keywords'
+              defaultValue={
+                formState?.result?.result
+                  ? formState?.result?.result?.seo_keywords
+                  : formState?.changes?.seo_keywords ?? data?.seo_keywords ?? ''
+              }
+              onChange={(e) => handleProductCategoryChangeInput(e)}
+              placeholder={t('SEO_KEYWORDS', 'SEO Keywords')}
+            />
+          </WrapperDescription>
+        )}
         <ActionButtons>
           <Button
             color='primary'

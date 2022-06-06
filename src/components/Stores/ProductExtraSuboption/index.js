@@ -1,20 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
-import {
-  useLanguage,
-  DragAndDrop,
-  ExamineClick
-} from 'ordering-components-admin'
-import {
-  Circle as UnCheckIcon,
-  ThreeDots,
-  RecordCircleFill as CheckIcon
-} from 'react-bootstrap-icons'
+import React, { useState, useEffect } from 'react'
+import { useLanguage, DragAndDrop, ExamineClick } from 'ordering-components-admin'
+import { Circle as UnCheckIcon, ThreeDots, RecordCircleFill as CheckIcon } from 'react-bootstrap-icons'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Alert, Confirm, ImageCrop, Modal } from '../../Shared'
 import { Input, Switch } from '../../../styles'
 import { bytesConverter } from '../../../utils'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
+import { useForm, Controller } from 'react-hook-form'
 import {
   SubOptionContainer,
   LeftSubOptionContent,
@@ -33,29 +26,25 @@ export const ProductExtraSuboption = (props) => {
     subOption,
     optionState,
     editSubOptionId,
-    handleChangeInput,
     settingChangeState,
     changesState,
     setSelectedSubOptionId,
     openModal,
     setOpenModal,
-    handleChangeSubOptionImage,
     handleChangeDefaultSuboption,
-    handleChangeSubOptionEnable,
     handleDeteteSubOption,
-    handleUpdateSubOption,
-    handleChangeItem
+    handleUpdateSubOption
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const nameRef = useRef()
-  const priceRef = useRef()
+  const { handleSubmit, errors, control } = useForm()
+  const [timer, setTimer] = useState(null)
 
-  const [editErrors, setEditErrors] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
+  const [formState, setFormState] = useState({ })
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -85,8 +74,6 @@ export const ProductExtraSuboption = (props) => {
         setCropState({ name: 'image', data: reader.result, open: true, id: subOptionId })
       }
       reader.onerror = error => console.log(error)
-
-      handleChangeSubOptionImage(files[0], subOptionId)
     }
   }
 
@@ -102,55 +89,47 @@ export const ProductExtraSuboption = (props) => {
   }
 
   const handleChangePhoto = (croppedImg) => {
-    handleChangeItem({ [cropState?.name]: croppedImg }, cropState?.id)
+    setFormState({
+      ...formState,
+      image: croppedImg
+    })
     setCropState({ name: null, data: null, open: false })
   }
 
-  const handleClickOutside = (e) => {
-    if (editSubOptionId === subOption.id) {
-      if (!nameRef.current?.contains(e.target) && changesState?.changes?.name === '') {
-        setEditErrors({
-          name: changesState?.changes?.name === '',
-          price: changesState?.changes?.price === ''
-        })
-        return
-      }
-      if (!priceRef.current?.contains(e.target) && changesState?.changes?.price === '') {
-        setEditErrors({
-          name: changesState?.changes?.name === '',
-          price: changesState?.changes?.price === ''
-        })
-        return
-      }
-      if (e.target.closest('.ordering-img-crop')) return
-      handleUpdateSubOption()
-    }
+  const onSubmit = () => {
+    handleUpdateSubOption({
+      id: subOption.id,
+      ...formState
+    })
+  }
+
+  const handleChangeInput = (e) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value
+    })
   }
 
   useEffect(() => {
-    if (editSubOptionId !== subOption.id) return
-    window.addEventListener('mouseup', handleClickOutside)
-    return () => {
-      window.removeEventListener('mouseup', handleClickOutside)
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
     }
-  }, [editSubOptionId, subOption.id, changesState])
+  }, [errors])
 
   useEffect(() => {
-    if (Object.keys(editErrors).length) {
-      const errorContent = []
-      if (editErrors?.name) errorContent.push(t('NAME_REQUIRED', 'The name is required.'))
-      if (editErrors?.price) errorContent.push(t('PRICE_REQUIRED', 'The price is required.'))
-      if (errorContent.length) {
-        setAlertState({
-          open: true,
-          content: errorContent
-        })
-      }
-    }
-  }, [editErrors])
+    if (!Object.keys(formState).length) return
+    clearTimeout(timer)
+    const _timer = setTimeout(() => {
+      onSubmit()
+    }, 500)
+    setTimer(_timer)
+  }, [formState])
 
   return (
-    <SubOptionContainer>
+    <SubOptionContainer onSubmit={handleSubmit(onSubmit)}>
       <LeftSubOptionContent>
         <SubOptionImage
           onClick={() => handleClickSubOptionImage(`suboption_image_${subOption.id}`)}
@@ -182,54 +161,95 @@ export const ProductExtraSuboption = (props) => {
           </ExamineClick>
         </SubOptionImage>
         <InputWrapper>
-          <Input
-            ref={nameRef}
+          <Controller
             name='name'
-            autoComplete='off'
+            control={control}
+            render={({ onChange, value }) => (
+              <Input
+                name='name'
+                autoComplete='off'
+                value={value}
+                onChange={e => {
+                  onChange(e.target.vaue)
+                  handleChangeInput(e)
+                }}
+              />
+            )}
             defaultValue={subOption.name}
-            onChange={(e) => handleChangeInput(e, subOption.id)}
+            rules={{ required: t('NAME_REQUIRED', 'The name is required.') }}
           />
         </InputWrapper>
       </LeftSubOptionContent>
       <RightSubOptionContent>
         <InputWrapper>
-          <Input
-            ref={priceRef}
+          <Controller
             name='price'
+            control={control}
+            render={({ onChange, value }) => (
+              <Input
+                name='price'
+                autoComplete='off'
+                value={value}
+                onChange={(e) => {
+                  onChange(e.target.value)
+                  handleChangeInput(e)
+                }}
+                onKeyPress={(e) => {
+                  if (!/^[0-9.]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+              />
+            )}
             defaultValue={subOption?.price}
-            onChange={(e) => handleChangeInput(e, subOption.id)}
-            onKeyPress={(e) => {
-              if (!/^[0-9.]$/.test(e.key)) {
-                e.preventDefault()
-              }
-            }}
+            rules={{ required: t('PRICE_REQUIRED', 'The price is required.') }}
           />
         </InputWrapper>
         {(typeof settingChangeState?.changes?.with_half_option !== 'undefined' ? settingChangeState?.changes?.with_half_option : optionState?.option?.with_half_option) && (
           <InputWrapper>
-            <Input
+            <Controller
               name='half_price'
+              control={control}
+              render={({ onChange, value }) => (
+                <Input
+                  name='half_price'
+                  value={value}
+                  onChange={(e) => {
+                    onChange(e.target.value)
+                    handleChangeInput(e)
+                  }}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
+                />
+              )}
               defaultValue={subOption?.half_price}
-              onChange={(e) => handleChangeInput(e, subOption.id)}
-              onKeyPress={(e) => {
-                if (!/^[0-9.]$/.test(e.key)) {
-                  e.preventDefault()
-                }
-              }}
             />
           </InputWrapper>
         )}
         {(typeof settingChangeState?.changes?.allow_suboption_quantity !== 'undefined' ? settingChangeState?.changes?.allow_suboption_quantity : optionState?.option?.allow_suboption_quantity) && (
           <InputWrapper>
-            <Input
-              name='max'
+            <Controller
+              name='half_price'
+              control={control}
+              render={({ onChange, value }) => (
+                <Input
+                  name='max'
+                  value={value}
+                  onChange={(e) => {
+                    onChange(e.target.value)
+                    handleChangeInput(e)
+                  }}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
+                />
+              )}
               defaultValue={subOption?.max}
-              onChange={(e) => handleChangeInput(e, subOption.id)}
-              onKeyPress={(e) => {
-                if (!/^[0-9.]$/.test(e.key)) {
-                  e.preventDefault()
-                }
-              }}
             />
           </InputWrapper>
         )}
@@ -238,7 +258,7 @@ export const ProductExtraSuboption = (props) => {
             name='preselected'
             className={subOption?.preselected ? 'checked default' : 'default'}
           >
-            <span onClick={(e) => handleChangeDefaultSuboption(subOption.id)}>
+            <span className='radio' onClick={(e) => handleChangeDefaultSuboption(subOption.id)}>
               {subOption?.preselected ? <CheckIcon /> : <UnCheckIcon />}
             </span>
           </div>
@@ -248,7 +268,7 @@ export const ProductExtraSuboption = (props) => {
             <span>{t('ENABLE', 'Enable')}</span>
             <Switch
               defaultChecked={subOption?.enabled}
-              onChange={enabled => handleChangeSubOptionEnable(enabled, subOption.id)}
+              onChange={enabled => setFormState({ ...formState, enabled: enabled })}
             />
           </EnableWrapper>
           <ActionSelectorWrapper>

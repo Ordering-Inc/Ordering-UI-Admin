@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
-export const SubOptionContainer = styled.div`
+export const SubOptionContainer = styled.form`
   display: flex;
   width: 100%;
   margin-bottom: 15px;
@@ -95,6 +95,9 @@ export const InputWrapper = styled.div`
     min-width: 50px;
     width: 65px;
     text-align: center;
+    > span.radio {
+      cursor: pointer;
+    }
     svg {
       color: ${props => props.theme.colors.secundaryLight};
     }

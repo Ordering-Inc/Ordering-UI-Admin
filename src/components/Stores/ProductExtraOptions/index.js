@@ -35,7 +35,6 @@ const ProductExtraOptionsUI = (props) => {
     onClose,
     extraState,
     changesState,
-    handleChangeImage,
     handleChangeInput,
     handleChangeOptionEnable,
     handleChangeAddOption,
@@ -46,7 +45,6 @@ const ProductExtraOptionsUI = (props) => {
     handleDeleteExtra,
     handleUpdateBusinessState,
     handleSucccessDeleteOption,
-    handleUpdateOption,
     curOption,
     openModal,
     setCurOption,
@@ -112,8 +110,6 @@ const ProductExtraOptionsUI = (props) => {
         setCropState({ name: 'image', data: reader.result, open: true, id: optionId })
       }
       reader.onerror = error => console.log(error)
-
-      handleChangeImage(files[0], optionId)
     }
   }
 
@@ -384,7 +380,6 @@ const ProductExtraOptionsUI = (props) => {
             handleUpdateBusinessState={handleUpdateBusinessState}
             handleSucccessDeleteOption={handleSucccessDeleteOption}
             isMaxError={isMaxError}
-            handleUpdateOption={handleUpdateOption}
           />
         </Modal>
       )}

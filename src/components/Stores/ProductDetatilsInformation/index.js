@@ -400,26 +400,6 @@ export const ProductDetatilsInformation = (props) => {
             </>
           )
         }
-        <InputWrapper>
-          <label>{t('SEO_KEYWORDS', 'SEO Keywords')}</label>
-          <Input
-            name='seo_keywords'
-            placeholder={t('SEO_KEYWORDS', 'SEO Keywords')}
-            defaultValue={product?.seo_keywords || ''}
-            onChange={handleChangeInput}
-            disabled={formState.loading}
-            autoComplete='off'
-            ref={formMethods.register({
-              required:
-                (typeof (formState?.changes?.seo_keywords) !== 'undefined')
-                  ? t(
-                    'VALIDATION_ERROR_REQUIRED',
-                    'SEO Keywords field is required'
-                  ).replace('_attribute_', t('SEO_KEYWORDS', 'SEO Keywords'))
-                  : false
-            })}
-          />
-        </InputWrapper>
         <ActionsForm>
           {onCancel && (
             <Button
