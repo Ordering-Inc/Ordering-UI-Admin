@@ -79,10 +79,8 @@ var CampaignAmountOptionUI = function CampaignAmountOptionUI(props) {
   var ruleList = [{
     key: '>',
     name: t('MORE_THAN', 'More than')
-  }, {
-    key: '=',
-    name: t('EXACTLY', 'Exactly')
-  }, {
+  }, // { key: '=', name: t('EXACTLY', 'Exactly') },
+  {
     key: '<',
     name: t('LESS_THAN', 'Less than')
   }];
