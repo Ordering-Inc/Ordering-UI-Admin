@@ -39,8 +39,6 @@ const CampaignSignUpOptionUI = (props) => {
   const contentEndRef = useRef(null)
 
   const optionList = [
-    { key: '>', title: t('AFTER', 'After') },
-    { key: '=', title: t('ON', 'On') },
     { key: '<', title: t('BEFORE', 'Before') }
   ]
 
