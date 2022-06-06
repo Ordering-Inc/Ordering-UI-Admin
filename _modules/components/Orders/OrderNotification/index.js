@@ -174,10 +174,10 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     id: "notification-sound",
     muted: true
   }, /*#__PURE__*/_react.default.createElement("source", {
-    src: require('../../../../template/assets/sounds/notification.ogg'),
+    src: theme.sounds.notificationOgg,
     type: "audio/ogg"
   }), /*#__PURE__*/_react.default.createElement("source", {
-    src: require('../../../../template/assets/sounds/notification.mp3'),
+    src: theme.sounds.notificationMp3,
     type: "audio/mpeg"
   })));
 };

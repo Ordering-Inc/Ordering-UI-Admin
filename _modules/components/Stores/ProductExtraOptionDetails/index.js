@@ -73,7 +73,6 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       editSubOptionId = props.editSubOptionId,
       handleChangeInput = props.handleChangeInput,
       handleChangeSubOptionImage = props.handleChangeSubOptionImage,
-      handleChangeSubOptionEnable = props.handleChangeSubOptionEnable,
       handleDeteteSubOption = props.handleDeteteSubOption,
       handleOptionSetting = props.handleOptionSetting,
       settingChangeState = props.settingChangeState,
@@ -98,7 +97,6 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-  var mainContainerRef = (0, _react.useRef)();
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -245,9 +243,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   (0, _react.useEffect)(function () {
     if (Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0 && !editSubOptionId) setIsAddForm(false);
   }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes, editSubOptionId]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, {
-    ref: mainContainerRef
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTION', 'Product option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTION', 'Product option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
@@ -265,7 +261,6 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_ProductExtraOptionForm.ProductExtraOptionForm, {
     optionState: optionState,
     optionChangesState: optionChangesState,
-    mainContainerRef: mainContainerRef,
     isMaxError: isMaxError,
     handleOptionFiles: handleOptionFiles,
     handleChangeOptionInput: handleChangeOptionInput,
@@ -301,13 +296,9 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       setSelectedSubOptionId: setSelectedSubOptionId,
       openModal: openModal,
       setOpenModal: setOpenModal,
-      handleChangeInput: handleChangeInput,
-      handleChangeSubOptionImage: handleChangeSubOptionImage,
       handleChangeDefaultSuboption: handleChangeDefaultSuboption,
-      handleChangeSubOptionEnable: handleChangeSubOptionEnable,
       handleDeteteSubOption: handleDeteteSubOption,
-      handleUpdateSubOption: handleUpdateSubOption,
-      handleChangeItem: handleChangeItem
+      handleUpdateSubOption: handleUpdateSubOption
     });
   }), isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AdddSubOptionForm, {
     onSubmit: handleSubmit(handleAddOption),

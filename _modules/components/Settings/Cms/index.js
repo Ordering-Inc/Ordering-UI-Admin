@@ -234,7 +234,8 @@ var CmsUI = function CmsUI(props) {
     open: openModal,
     onClose: function onClose() {
       return setOpenModal(false);
-    }
+    },
+    closeOnBackdrop: false
   }, /*#__PURE__*/_react.default.createElement(_PageForm.PageForm, {
     pageId: curPageId,
     pageList: pagesListState.pages,

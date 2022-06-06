@@ -50,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
-  var _formState$changes3, _formState$changes4, _formState$result, _formState$changes5, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9, _formState$changes10, _formState$changes$in, _formState$changes11, _formState$changes12, _formState$changes13, _product$ribbon, _formState$changes14, _formState$changes14$, _formState$changes15, _formState$changes15$, _product$ribbon2, _formState$changes$ri, _formState$changes16, _formState$changes16$, _product$ribbon3, _formState$changes17, _formState$changes17$, _formState$changes18, _formState$changes18$, _product$ribbon4, _formState$changes$ri2, _formState$changes19, _formState$changes19$, _product$ribbon5, _formState$changes24;
+  var _formState$changes3, _formState$changes4, _formState$result, _formState$changes5, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9, _formState$changes10, _formState$changes$in, _formState$changes11, _formState$changes12, _formState$changes13, _product$ribbon, _formState$changes14, _formState$changes14$, _formState$changes15, _formState$changes15$, _product$ribbon2, _formState$changes$ri, _formState$changes16, _formState$changes16$, _product$ribbon3, _formState$changes17, _formState$changes17$, _formState$changes18, _formState$changes18$, _product$ribbon4, _formState$changes$ri2, _formState$changes19, _formState$changes19$, _product$ribbon5;
 
   var product = props.product,
       formState = props.formState,
@@ -422,17 +422,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
         });
       }
     }, /*#__PURE__*/_react.default.createElement("div", null), (product !== null && product !== void 0 && product.ribbon && formState !== null && formState !== void 0 && (_formState$changes22 = formState.changes) !== null && _formState$changes22 !== void 0 && (_formState$changes22$ = _formState$changes22.ribbon) !== null && _formState$changes22$ !== void 0 && _formState$changes22$.shape ? (formState === null || formState === void 0 ? void 0 : (_formState$changes23 = formState.changes) === null || _formState$changes23 === void 0 ? void 0 : (_formState$changes23$ = _formState$changes23.ribbon) === null || _formState$changes23$ === void 0 ? void 0 : _formState$changes23$.shape) === shape[key] : (product === null || product === void 0 ? void 0 : (_product$ribbon7 = product.ribbon) === null || _product$ribbon7 === void 0 ? void 0 : _product$ribbon7.shape) === shape[key]) ? /*#__PURE__*/_react.default.createElement(RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(Circle, null));
-  }))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEO_KEYWORDS', 'SEO Keywords')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "seo_keywords",
-    placeholder: t('SEO_KEYWORDS', 'SEO Keywords'),
-    defaultValue: (product === null || product === void 0 ? void 0 : product.seo_keywords) || '',
-    onChange: handleChangeInput,
-    disabled: formState.loading,
-    autoComplete: "off",
-    ref: formMethods.register({
-      required: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes24 = formState.changes) === null || _formState$changes24 === void 0 ? void 0 : _formState$changes24.seo_keywords) !== 'undefined' ? t('VALIDATION_ERROR_REQUIRED', 'SEO Keywords field is required').replace('_attribute_', t('SEO_KEYWORDS', 'SEO Keywords')) : false
-    })
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, onCancel && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }))))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, onCancel && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     outline: true,
     borderRadius: "7.6px",
     type: "button",

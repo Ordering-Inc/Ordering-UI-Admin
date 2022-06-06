@@ -62,7 +62,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       onClose = props.onClose,
       extraState = props.extraState,
       changesState = props.changesState,
-      handleChangeImage = props.handleChangeImage,
       handleChangeInput = props.handleChangeInput,
       handleChangeOptionEnable = props.handleChangeOptionEnable,
       handleChangeAddOption = props.handleChangeAddOption,
@@ -73,7 +72,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       handleDeleteExtra = props.handleDeleteExtra,
       handleUpdateBusinessState = props.handleUpdateBusinessState,
       handleSucccessDeleteOption = props.handleSucccessDeleteOption,
-      handleUpdateOption = props.handleUpdateOption,
       curOption = props.curOption,
       openModal = props.openModal,
       setCurOption = props.setCurOption,
@@ -198,8 +196,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       reader.onerror = function (error) {
         return console.log(error);
       };
-
-      handleChangeImage(files[0], optionId);
     }
   };
 
@@ -465,8 +461,7 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     },
     handleUpdateBusinessState: handleUpdateBusinessState,
     handleSucccessDeleteOption: handleSucccessDeleteOption,
-    isMaxError: isMaxError,
-    handleUpdateOption: handleUpdateOption
+    isMaxError: isMaxError
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
     open: openModal === null || openModal === void 0 ? void 0 : openModal.metaField,

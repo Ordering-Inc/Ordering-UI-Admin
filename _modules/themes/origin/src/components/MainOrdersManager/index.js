@@ -27,6 +27,8 @@ var _Modal = require("../Modal");
 
 var _Buttons = require("../../styles/Buttons");
 
+var _styledComponents = require("styled-components");
+
 var _styles = require("./styles");
 
 var _OrdersDashboard = require("../OrdersDashboard");
@@ -85,6 +87,7 @@ var MainOrdersManagerUI = function MainOrdersManagerUI(props) {
       handleDeleteMultiOrders = props.handleDeleteMultiOrders,
       handleSelectedOrderIds = props.handleSelectedOrderIds,
       selectedOrderIds = props.selectedOrderIds;
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -410,10 +413,10 @@ var MainOrdersManagerUI = function MainOrdersManagerUI(props) {
     id: "notification-sound",
     muted: true
   }, /*#__PURE__*/_react.default.createElement("source", {
-    src: require('../../../template/assets/sounds/notification.ogg'),
+    src: theme.sounds.notificationOgg,
     type: "audio/ogg"
   }), /*#__PURE__*/_react.default.createElement("source", {
-    src: require('../../../template/assets/sounds/notification.mp3'),
+    src: theme.sounds.notificationMp3,
     type: "audio/mpeg"
   })), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder));
 };

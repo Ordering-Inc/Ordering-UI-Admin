@@ -42,11 +42,10 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
-  var _optionChangesState$r, _optionChangesState$r2, _optionChangesState$c5, _optionChangesState$c6, _optionState$option3, _optionState$option4, _optionState$option7, _optionState$option9, _optionState$option10, _optionState$option12, _optionState$option13, _optionState$option14, _optionState$option15, _optionState$option16, _optionState$option17;
+  var _optionState$option7, _optionState$option9, _optionState$option10, _optionState$option12, _optionState$option13, _optionState$option14, _optionState$option15, _optionState$option16, _optionState$option17;
 
   var optionState = props.optionState,
       optionChangesState = props.optionChangesState,
-      mainContainerRef = props.mainContainerRef,
       isMaxError = props.isMaxError,
       handleOptionFiles = props.handleOptionFiles,
       handleChangeOptionInput = props.handleChangeOptionInput,
@@ -67,12 +66,10 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
       errors = _useForm.errors,
-      control = _useForm.control;
+      control = _useForm.control,
+      setValue = _useForm.setValue;
 
   var optionImageInputRef = (0, _react.useRef)(null);
-  var optionNameRef = (0, _react.useRef)(null);
-  var optionMinRef = (0, _react.useRef)(null);
-  var optionMaxRef = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -82,20 +79,13 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      timer = _useState4[0],
+      setTimer = _useState4[1];
+
   var handleClickImage = function handleClickImage() {
     optionImageInputRef.current.click();
-  };
-
-  var handleClickOutside = function handleClickOutside(e) {
-    var _mainContainerRef$cur;
-
-    if ((_mainContainerRef$cur = mainContainerRef.current) !== null && _mainContainerRef$cur !== void 0 && _mainContainerRef$cur.contains(e.target)) {
-      var _optionNameRef$curren, _optionMinRef$current, _optionMaxRef$current;
-
-      if (!Object.keys((optionChangesState === null || optionChangesState === void 0 ? void 0 : optionChangesState.changes) || {}).length) return;
-      if ((_optionNameRef$curren = optionNameRef.current) !== null && _optionNameRef$curren !== void 0 && _optionNameRef$curren.contains(e.target) || (_optionMinRef$current = optionMinRef.current) !== null && _optionMinRef$current !== void 0 && _optionMinRef$current.contains(e.target) || (_optionMaxRef$current = optionMaxRef.current) !== null && _optionMaxRef$current !== void 0 && _optionMaxRef$current.contains(e.target)) return;
-      handleSubmit(handleUpdateOption)();
-    }
   };
 
   var handleMaxValidate = function handleMaxValidate() {
@@ -109,12 +99,6 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
   };
 
   (0, _react.useEffect)(function () {
-    document.addEventListener('click', handleClickOutside);
-    return function () {
-      return document.removeEventListener('click', handleClickOutside);
-    };
-  }, [optionChangesState]);
-  (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState({
         open: true,
@@ -124,52 +108,80 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
       });
     }
   }, [errors]);
+  (0, _react.useEffect)(function () {
+    var _optionChangesState$c5;
+
+    if (!Object.keys((optionChangesState === null || optionChangesState === void 0 ? void 0 : optionChangesState.changes) || {}).length) return;
+
+    if (optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$c5 = optionChangesState.changes) !== null && _optionChangesState$c5 !== void 0 && _optionChangesState$c5.image) {
+      var _optionChangesState$c6;
+
+      setValue('image', optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c6 = optionChangesState.changes) === null || _optionChangesState$c6 === void 0 ? void 0 : _optionChangesState$c6.image);
+    }
+
+    clearTimeout(timer);
+
+    var _timer = setTimeout(function () {
+      handleSubmit(handleUpdateOption)();
+    }, 500);
+
+    setTimer(_timer);
+  }, [optionChangesState === null || optionChangesState === void 0 ? void 0 : optionChangesState.changes]);
   return /*#__PURE__*/_react.default.createElement(_styles2.OptionContainer, {
     onSubmit: handleSubmit(handleUpdateOption)
-  }, /*#__PURE__*/_react.default.createElement(_styles2.OptionImage, {
-    onClick: function onClick() {
-      return handleClickImage();
+  }, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
+    name: "image",
+    control: control,
+    render: function render(_ref) {
+      var _optionChangesState$r, _optionChangesState$r2, _optionChangesState$c7, _optionChangesState$c8, _optionState$option3, _optionState$option4;
+
+      var onChange = _ref.onChange,
+          value = _ref.value;
+      return /*#__PURE__*/_react.default.createElement(_styles2.OptionImage, {
+        onClick: function onClick() {
+          return handleClickImage();
+        }
+      }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+        onFiles: function onFiles(files) {
+          return handleOptionFiles(files, optionState === null || optionState === void 0 ? void 0 : optionState.option.id);
+        },
+        childRef: function childRef(e) {
+          optionImageInputRef.current = e;
+        },
+        accept: "image/png, image/jpeg, image/jpg",
+        disabled: optionState.loading
+      }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
+        onDrop: function onDrop(dataTransfer) {
+          return handleOptionFiles(dataTransfer.files, optionState === null || optionState === void 0 ? void 0 : optionState.option.id);
+        },
+        accept: "image/png, image/jpeg, image/jpg",
+        disabled: optionState.loading
+      }, optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$r = optionChangesState.result) !== null && _optionChangesState$r !== void 0 && _optionChangesState$r.image ? /*#__PURE__*/_react.default.createElement("img", {
+        src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$r2 = optionChangesState.result) === null || _optionChangesState$r2 === void 0 ? void 0 : _optionChangesState$r2.image,
+        alt: "sub option image",
+        loading: "lazy"
+      }) : optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$c7 = optionChangesState.changes) !== null && _optionChangesState$c7 !== void 0 && _optionChangesState$c7.image ? /*#__PURE__*/_react.default.createElement("img", {
+        src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c8 = optionChangesState.changes) === null || _optionChangesState$c8 === void 0 ? void 0 : _optionChangesState$c8.image,
+        alt: "product image",
+        loading: "lazy"
+      }) : (optionState === null || optionState === void 0 ? void 0 : (_optionState$option3 = optionState.option) === null || _optionState$option3 === void 0 ? void 0 : _optionState$option3.image) && /*#__PURE__*/_react.default.createElement("img", {
+        src: optionState === null || optionState === void 0 ? void 0 : (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : _optionState$option4.image,
+        alt: "product image",
+        loading: "lazy"
+      }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))));
     }
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
-    onFiles: function onFiles(files) {
-      return handleOptionFiles(files, optionState === null || optionState === void 0 ? void 0 : optionState.option.id);
-    },
-    childRef: function childRef(e) {
-      optionImageInputRef.current = e;
-    },
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: optionState.loading
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
-    onDrop: function onDrop(dataTransfer) {
-      return handleOptionFiles(dataTransfer.files, optionState === null || optionState === void 0 ? void 0 : optionState.option.id);
-    },
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: optionState.loading
-  }, optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$r = optionChangesState.result) !== null && _optionChangesState$r !== void 0 && _optionChangesState$r.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$r2 = optionChangesState.result) === null || _optionChangesState$r2 === void 0 ? void 0 : _optionChangesState$r2.image,
-    alt: "sub option image",
-    loading: "lazy"
-  }) : optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$c5 = optionChangesState.changes) !== null && _optionChangesState$c5 !== void 0 && _optionChangesState$c5.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c6 = optionChangesState.changes) === null || _optionChangesState$c6 === void 0 ? void 0 : _optionChangesState$c6.image,
-    alt: "product image",
-    loading: "lazy"
-  }) : (optionState === null || optionState === void 0 ? void 0 : (_optionState$option3 = optionState.option) === null || _optionState$option3 === void 0 ? void 0 : _optionState$option3.image) && /*#__PURE__*/_react.default.createElement("img", {
-    src: optionState === null || optionState === void 0 ? void 0 : (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : _optionState$option4.image,
-    alt: "product image",
-    loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.OptionInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.OptionInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     primary: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('OPTION_NAME', 'Option name')), /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "name",
     control: control,
-    render: function render(_ref) {
-      var _onChange = _ref.onChange,
-          value = _ref.value;
+    render: function render(_ref2) {
+      var _onChange = _ref2.onChange,
+          value = _ref2.value;
       return /*#__PURE__*/_react.default.createElement(_styles.Input, {
         name: "name",
         autoComplete: "off",
         value: value,
-        ref: optionNameRef,
         onChange: function onChange(e) {
           var _optionState$option5;
 
@@ -188,14 +200,13 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
   }, /*#__PURE__*/_react.default.createElement("label", null, t('MINIMUM', 'Minimum')), /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "min",
     control: control,
-    render: function render(_ref2) {
-      var _onChange2 = _ref2.onChange,
-          value = _ref2.value;
+    render: function render(_ref3) {
+      var _onChange2 = _ref3.onChange,
+          value = _ref3.value;
       return /*#__PURE__*/_react.default.createElement(_styles.Input, {
         name: "min",
         autoComplete: "off",
         value: value,
-        ref: optionMinRef,
         onChange: function onChange(e) {
           var _optionState$option6;
 
@@ -221,12 +232,11 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
   }, /*#__PURE__*/_react.default.createElement("label", null, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "max",
     control: control,
-    render: function render(_ref3) {
-      var _onChange3 = _ref3.onChange,
-          value = _ref3.value;
+    render: function render(_ref4) {
+      var _onChange3 = _ref4.onChange,
+          value = _ref4.value;
       return /*#__PURE__*/_react.default.createElement(_styles.Input, {
         name: "max",
-        ref: optionMaxRef,
         value: value,
         autoComplete: "off",
         onChange: function onChange(e) {
