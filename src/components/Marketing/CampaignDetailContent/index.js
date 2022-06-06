@@ -27,10 +27,10 @@ const CampaignDetailContentUI = (props) => {
   const typeList = [
     { value: 'email', content: <Option>{t('EMAIL', 'Email')}</Option> },
     { value: 'sms', content: <Option>{t('SMS', 'SMS')}</Option> },
-    { value: 'notification', content: <Option>{t('NOTIFICATION', 'Notification')}</Option> },
-    { value: 'webhook', content: <Option>{t('WEBHOOK', 'Webhook')}</Option> },
-    { value: 'popup', content: <Option>{t('POPUP', 'Popup')}</Option> },
-    { value: 'whatsapp', content: <Option>{t('WHATSAPP', 'Whatsapp')}</Option> }
+    { value: 'notification', content: <Option>{t('PUSH_NOTIFICATIONS', 'Push notifications')}</Option> },
+    { value: 'webhook', content: <Option>{t('WEBHOOK', 'Webhook')}</Option> }
+    // { value: 'popup', content: <Option>{t('POPUP', 'Popup')}</Option> },
+    // { value: 'whatsapp', content: <Option>{t('WHATSAPP', 'Whatsapp')}</Option> }
   ]
 
   useEffect(() => {
