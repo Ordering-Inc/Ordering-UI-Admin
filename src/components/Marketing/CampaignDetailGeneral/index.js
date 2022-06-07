@@ -76,7 +76,6 @@ export const CampaignDetailGeneral = (props) => {
   }
 
   const handleOpenRuleModal = (evt, index) => {
-    console.log(index, 'index')
     if (evt.target.closest('.rule-control')) return
     const isUpdate = isEnableStatus(index)
     if (!isUpdate) handleChangeCheckBox(index)
