@@ -270,6 +270,11 @@ export const PriceFilterListWrapper = styled.div`
   width: calc(100% + 20px);
   margin-left: -10px;
 
+  ${props => props.theme.rtl && css`
+    margin-right: -10px;
+    margin-left: 0px;
+  `}
+
   > div {
     width: calc(33.33% - 20px);
     margin: 10px;
