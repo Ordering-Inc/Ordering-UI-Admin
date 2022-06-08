@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SwitchWrapper = exports.SkeletonWrapper = exports.ShapeWrapper = exports.ShapeContentWrapper = exports.ShapeBoxWrapper = exports.RibbonSwitchWrapper = exports.PhoneWrapper = exports.LogoImage = exports.InputWrapper = exports.HeaderImage = exports.FormInput = exports.ColorWrapper = exports.ColorShapeWrapper = exports.ActionsForm = void 0;
+exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SwitchWrapper = exports.SkeletonWrapper = exports.ShapeWrapper = exports.ShapeContentWrapper = exports.ShapeBoxWrapper = exports.RibbonSwitchWrapper = exports.PriceFilterWrapper = exports.PriceFilterListWrapper = exports.PriceFilterItem = exports.PhoneWrapper = exports.LogoImage = exports.InputWrapper = exports.HeaderImage = exports.FormInput = exports.ColorWrapper = exports.ColorShapeWrapper = exports.ActionsForm = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -110,48 +110,29 @@ var ShapeBoxWrapper = _styledComponents.default.div(_templateObject23 || (_templ
   }, function (props) {
     return props.theme.colors.primary;
   });
-}); // export const PriceFilterWrapper = styled.div`
-//   > label {
-//     font-weight: 600;
-//     font-size: 16px;
-//     line-height: 24px;
-//     margin-bottom: 0px;
-//   }
-// `
-// export const PriceFilterListWrapper = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   width: calc(100% + 20px);
-//   margin-left: -10px;
-//   > div {
-//     width: calc(20% - 20px);
-//     margin: 10px;
-//   }
-// `
-// export const PriceFilterItem = styled.div`
-//   display: flex;
-//   align-items: center;
-//   svg {
-//     font-size: 16px;
-//     color: ${props => props.theme.colors.secundaryLight};
-//     transition: all 0.3s linear;
-//     min-width: 16px;
-//   }
-//   span {
-//     font-weight: 400;
-//     font-size: 14px;
-//     margin-left: 8px;
-//     ${props => props.theme.rtl && css`
-//       margin-right: 8px;
-//       margin-left: 0px;
-//     `}
-//   }
-//   ${({ active }) => active && css`
-//     svg {
-//       color: ${props => props.theme.colors.primary};
-//     }
-//   `}
-// `
-
+});
 
 exports.ShapeBoxWrapper = ShapeBoxWrapper;
+
+var PriceFilterWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n\n  > label {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin-bottom: 0px;\n  }\n"])));
+
+exports.PriceFilterWrapper = PriceFilterWrapper;
+
+var PriceFilterListWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  width: calc(100% + 20px);\n  margin-left: -10px;\n\n  ", "\n\n  > div {\n    width: calc(33.33% - 20px);\n    margin: 10px;\n  }\n\n  @media (min-width: 576px) {\n    > div {\n      width: calc(20% - 20px);\n    }\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    margin-right: -10px;\n    margin-left: 0px;\n  "])));
+});
+
+exports.PriceFilterListWrapper = PriceFilterListWrapper;
+
+var PriceFilterItem = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n\n  svg {\n    font-size: 16px;\n    color: ", ";\n    transition: all 0.3s linear;\n    min-width: 16px;\n  }\n\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    margin-left: 8px;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n      margin-left: 0px;\n    "])));
+}, function (_ref8) {
+  var active = _ref8.active;
+  return active && (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
+    return props.theme.colors.primary;
+  });
+});
+
+exports.PriceFilterItem = PriceFilterItem;
