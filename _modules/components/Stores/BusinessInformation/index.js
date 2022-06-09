@@ -88,19 +88,19 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       setCropState = _useState4[1];
 
   var priceList = [{
-    key: 1,
+    key: '1',
     value: '$'
   }, {
-    key: 2,
+    key: '2',
     value: '$$'
   }, {
-    key: 3,
+    key: '3',
     value: '$$$'
   }, {
-    key: 4,
+    key: '4',
     value: '$$$$'
   }, {
-    key: 5,
+    key: '5',
     value: '$$$$$'
   }];
 
