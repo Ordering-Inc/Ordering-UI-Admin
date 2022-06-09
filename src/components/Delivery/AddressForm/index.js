@@ -141,7 +141,7 @@ const AddressFormUI = (props) => {
         }
         data.address = {
           address: addressChange,
-          location: { lat: results?.[0].geometry.location.lat(), lng: results?.[0].geometry.location.lng() },
+          location: { lat: results?.[0]?.geometry?.location?.lat?.(), lng: results?.[0]?.geometry?.location?.lng?.() },
           utc_offset: results?.[0].utc_offset_minutes ?? 0,
           map_data: {
             library: 'google',

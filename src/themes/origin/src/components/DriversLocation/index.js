@@ -122,12 +122,12 @@ export const DriversLocation = (props) => {
 
     const newBounds = {
       ne: {
-        lat: bounds.getNorthEast().lat(),
-        lng: bounds.getNorthEast().lng()
+        lat: bounds.getNorthEast()?.lat?.(),
+        lng: bounds.getNorthEast()?.lng?.()
       },
       sw: {
-        lat: bounds.getSouthWest().lat(),
-        lng: bounds.getSouthWest().lng()
+        lat: bounds.getSouthWest()?.lat?.(),
+        lng: bounds.getSouthWest()?.lng?.()
       }
     }
 
