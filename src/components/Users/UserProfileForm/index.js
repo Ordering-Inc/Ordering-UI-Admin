@@ -32,7 +32,8 @@ const UserProfileFormUI = (props) => {
     formState,
     isHiddenAddress,
     userState,
-    handleChangeSwtich
+    handleChangeSwtich,
+    isService
   } = props
 
   const [, t] = useLanguage()
@@ -95,7 +96,7 @@ const UserProfileFormUI = (props) => {
 
   return (
     <>
-      <Container>
+      <Container isCalcHeight={!isService}>
         <UserProfileContainer mbottom={isHiddenAddress && 25}>
           <UserImage className='user-image'>
             <Image onClick={() => handleClickImage()} isImage={userState?.result?.result?.photo || (formState?.changes?.photo && !formState.result.error)}>

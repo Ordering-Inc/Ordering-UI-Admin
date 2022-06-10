@@ -2,11 +2,17 @@ import styled from 'styled-components'
 
 export const FormContainer = styled.div`
   width: 100%;
+`
+
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
 
   h1 {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     width: 100%;
+    margin-top: 3px;
     margin-bottom: 0px;
     color: ${props => props.theme.colors.headingColor};
   }
