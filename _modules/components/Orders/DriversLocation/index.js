@@ -85,6 +85,8 @@ var DriversLocation = function DriversLocation(props) {
       setShowDrivers = _useState10[1];
 
   var mapFit = function mapFit() {
+    var _bounds$getNorthEast, _bounds$getNorthEast$, _bounds$getNorthEast2, _bounds$getNorthEast3, _bounds$getSouthWest, _bounds$getSouthWest$, _bounds$getSouthWest2, _bounds$getSouthWest3;
+
     var bounds = new window.google.maps.LatLngBounds();
 
     if (showDrivers.length === 1) {
@@ -115,12 +117,12 @@ var DriversLocation = function DriversLocation(props) {
 
     var newBounds = {
       ne: {
-        lat: bounds.getNorthEast().lat(),
-        lng: bounds.getNorthEast().lng()
+        lat: (_bounds$getNorthEast = bounds.getNorthEast()) === null || _bounds$getNorthEast === void 0 ? void 0 : (_bounds$getNorthEast$ = _bounds$getNorthEast.lat) === null || _bounds$getNorthEast$ === void 0 ? void 0 : _bounds$getNorthEast$.call(_bounds$getNorthEast),
+        lng: (_bounds$getNorthEast2 = bounds.getNorthEast()) === null || _bounds$getNorthEast2 === void 0 ? void 0 : (_bounds$getNorthEast3 = _bounds$getNorthEast2.lng) === null || _bounds$getNorthEast3 === void 0 ? void 0 : _bounds$getNorthEast3.call(_bounds$getNorthEast2)
       },
       sw: {
-        lat: bounds.getSouthWest().lat(),
-        lng: bounds.getSouthWest().lng()
+        lat: (_bounds$getSouthWest = bounds.getSouthWest()) === null || _bounds$getSouthWest === void 0 ? void 0 : (_bounds$getSouthWest$ = _bounds$getSouthWest.lat) === null || _bounds$getSouthWest$ === void 0 ? void 0 : _bounds$getSouthWest$.call(_bounds$getSouthWest),
+        lng: (_bounds$getSouthWest2 = bounds.getSouthWest()) === null || _bounds$getSouthWest2 === void 0 ? void 0 : (_bounds$getSouthWest3 = _bounds$getSouthWest2.lng) === null || _bounds$getSouthWest3 === void 0 ? void 0 : _bounds$getSouthWest3.call(_bounds$getSouthWest2)
       }
     };
     var mapSize = {

@@ -166,7 +166,7 @@ var ProfessionalBusinessServiceUI = function ProfessionalBusinessServiceUI(props
     if (!(businessIds !== null && businessIds !== void 0 && businessIds.includes(businessId))) {
       setAlertState({
         open: true,
-        content: t('DISABLED_BUSINESS', 'Disabled business')
+        content: t('YOU_NEED_TO_SELECT_BUSINESS', 'You need to select a business')
       });
       return;
     }

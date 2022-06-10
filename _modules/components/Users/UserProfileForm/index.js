@@ -59,7 +59,8 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       formState = props.formState,
       isHiddenAddress = props.isHiddenAddress,
       userState = props.userState,
-      handleChangeSwtich = props.handleChangeSwtich;
+      handleChangeSwtich = props.handleChangeSwtich,
+      isService = props.isService;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -153,7 +154,9 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
       handleButtonUpdateClick(null, isImage);
     }
   }, [(_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.photo]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    isCalcHeight: !isService
+  }, /*#__PURE__*/_react.default.createElement(_styles.UserProfileContainer, {
     mbottom: isHiddenAddress && 25
   }, /*#__PURE__*/_react.default.createElement(_styles.UserImage, {
     className: "user-image"

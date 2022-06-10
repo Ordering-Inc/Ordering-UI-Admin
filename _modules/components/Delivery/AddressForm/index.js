@@ -207,7 +207,7 @@ var AddressFormUI = function AddressFormUI(props) {
       var postalCode = null;
 
       if (status === 'OK' && results && results.length > 0) {
-        var _results$0$utc_offset, _arrayList$map$some;
+        var _results$, _results$$geometry, _results$$geometry$lo, _results$$geometry$lo2, _results$2, _results$2$geometry, _results$2$geometry$l, _results$2$geometry$l2, _results$0$utc_offset, _arrayList$map$some;
 
         var _iterator = _createForOfIteratorHelper(results === null || results === void 0 ? void 0 : results[0].address_components),
             _step;
@@ -233,8 +233,8 @@ var AddressFormUI = function AddressFormUI(props) {
         data.address = {
           address: addressChange,
           location: {
-            lat: results === null || results === void 0 ? void 0 : results[0].geometry.location.lat(),
-            lng: results === null || results === void 0 ? void 0 : results[0].geometry.location.lng()
+            lat: results === null || results === void 0 ? void 0 : (_results$ = results[0]) === null || _results$ === void 0 ? void 0 : (_results$$geometry = _results$.geometry) === null || _results$$geometry === void 0 ? void 0 : (_results$$geometry$lo = _results$$geometry.location) === null || _results$$geometry$lo === void 0 ? void 0 : (_results$$geometry$lo2 = _results$$geometry$lo.lat) === null || _results$$geometry$lo2 === void 0 ? void 0 : _results$$geometry$lo2.call(_results$$geometry$lo),
+            lng: results === null || results === void 0 ? void 0 : (_results$2 = results[0]) === null || _results$2 === void 0 ? void 0 : (_results$2$geometry = _results$2.geometry) === null || _results$2$geometry === void 0 ? void 0 : (_results$2$geometry$l = _results$2$geometry.location) === null || _results$2$geometry$l === void 0 ? void 0 : (_results$2$geometry$l2 = _results$2$geometry$l.lng) === null || _results$2$geometry$l2 === void 0 ? void 0 : _results$2$geometry$l2.call(_results$2$geometry$l)
           },
           utc_offset: (_results$0$utc_offset = results === null || results === void 0 ? void 0 : results[0].utc_offset_minutes) !== null && _results$0$utc_offset !== void 0 ? _results$0$utc_offset : 0,
           map_data: {

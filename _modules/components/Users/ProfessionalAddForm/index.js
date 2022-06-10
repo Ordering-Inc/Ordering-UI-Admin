@@ -25,6 +25,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -73,7 +75,9 @@ var ProfessionalAddFormUI = function ProfessionalAddFormUI(props) {
       handleButtonAddClick = props.handleButtonAddClick,
       isCheckout = props.isCheckout,
       handlechangeImage = props.handlechangeImage,
-      handleChangeSwtich = props.handleChangeSwtich;
+      handleChangeSwtich = props.handleChangeSwtich,
+      onClose = props.onClose,
+      isService = props.isService;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -256,7 +260,12 @@ var ProfessionalAddFormUI = function ProfessionalAddFormUI(props) {
     onSubmit: formMethods.handleSubmit(onSubmit),
     isCheckout: isCheckout,
     "data-tour": "tour_fill"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('NEW_PROFESSIONAL', 'New professional')), /*#__PURE__*/_react.default.createElement(_styles2.UserImage, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('NEW_PROFESSIONAL', 'New professional')), isService && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return onClose();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles2.UserImage, {
     className: "user-image"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
     onClick: function onClick() {
