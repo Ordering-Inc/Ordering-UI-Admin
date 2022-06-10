@@ -117,7 +117,7 @@ export const ProductDescription = styled.p`
   word-break: break-word;
   font-size: 14px;
   color: ${props => props.theme.colors.headingColor};
-  margin: 25px 0;
+  margin-bottom: 27px;
 `
 
 export const ProductConfigsContainer = styled.div`
@@ -314,5 +314,16 @@ export const FieldsItem = styled.div`
     font-size: 12px;
     line-height: 18px;
     ${props => props.theme.colors.lightGray};
+  }
+`
+
+export const PriceDuration = styled.div`
+  display: flex;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 15px;
+
+  .dot {
+    margin: 0px 5px;
   }
 `

@@ -6,12 +6,13 @@ import {
   ExamineClick,
   UserFormDetails as UserFormDetailsController
 } from 'ordering-components-admin'
-import { Input, Button } from '../../../styles'
+import { Input, Button, IconButton } from '../../../styles'
 import { Alert, InputPhoneNumber, RangeCalendar } from '../../Shared'
 import parsePhoneNumber from 'libphonenumber-js'
 import { sortInputFields, bytesConverter } from '../../../utils'
 import Skeleton from 'react-loading-skeleton'
 import BiImage from '@meronex/icons/bi/BiImage'
+import { XLg } from 'react-bootstrap-icons'
 
 import {
   FormContainer,
@@ -24,7 +25,8 @@ import {
   ActionsForm,
   SkeletonForm,
   InputWrapper,
-  CalendarWrapper
+  CalendarWrapper,
+  Header
 } from './styles'
 
 const ProfessionalAddFormUI = (props) => {
@@ -38,7 +40,9 @@ const ProfessionalAddFormUI = (props) => {
     handleButtonAddClick,
     isCheckout,
     handlechangeImage,
-    handleChangeSwtich
+    handleChangeSwtich,
+    onClose,
+    isService
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
@@ -186,9 +190,19 @@ const ProfessionalAddFormUI = (props) => {
         isCheckout={isCheckout}
         data-tour='tour_fill'
       >
-        <h1>
-          {t('NEW_PROFESSIONAL', 'New professional')}
-        </h1>
+        <Header>
+          <h1>
+            {t('NEW_PROFESSIONAL', 'New professional')}
+          </h1>
+          {isService && (
+            <IconButton
+              color='black'
+              onClick={() => onClose()}
+            >
+              <XLg />
+            </IconButton>
+          )}
+        </Header>
         <UserImage className='user-image'>
           <Image onClick={() => handleClickImage()} isImage={formState?.changes?.photo && !formState.result.error}>
             <ExamineClick onFiles={handleFiles} childRef={(e) => { inputRef.current = e }} accept='image/png, image/jpeg, image/jpg' disabled={formState.loading}>
