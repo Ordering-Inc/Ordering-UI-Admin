@@ -135,8 +135,8 @@ const AddressListUI = (props) => {
     props.forEach(prop => {
       if (address?.[prop]) {
         if (prop === 'location') {
-          values.push(address?.[prop].lat === orderState?.options?.address?.[prop]?.lat &&
-            address?.[prop].lng === orderState?.options?.address?.[prop]?.lng)
+          values.push(address?.[prop]?.lat === orderState?.options?.address?.[prop]?.lat &&
+            address?.[prop]?.lng === orderState?.options?.address?.[prop]?.lng)
         } else {
           values.push(address?.[prop] === orderState?.options?.address?.[prop])
         }
