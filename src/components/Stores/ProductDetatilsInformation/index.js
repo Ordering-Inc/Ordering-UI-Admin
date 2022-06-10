@@ -61,7 +61,7 @@ export const ProductDetatilsInformation = (props) => {
   })
 
   const typeList = [
-    { value: 'item', content: <Option>{t('DEFAULT', 'Default')}</Option> },
+    { value: 'item', content: <Option>{t('ITEM', 'Item')}</Option> },
     { value: 'service', content: <Option>{t('SERVICE', 'Service')}</Option> }
   ]
 
