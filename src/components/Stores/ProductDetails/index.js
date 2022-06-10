@@ -9,6 +9,8 @@ import { ProductExtras } from '../ProductExtras'
 import { ProductGallery } from '../ProductGallery'
 import { ProductVideos } from '../ProductVideos'
 import { ProductMainDetails } from '../ProductMainDetails'
+import { BusinessServiceProfessionals } from '../BusinessServiceProfessionals'
+import { ServiceDetail } from '../ServiceDetail'
 
 import {
   Container
@@ -146,6 +148,36 @@ const ProductDetailsUI = (props) => {
               setTaxes={setTaxes}
               fees={fees}
               setFees={setFees}
+            />
+          )}
+          {showOption === 'service_details' && (
+            <ServiceDetail
+              product={productState?.product}
+              formState={formState}
+              handlechangeImage={handlechangeImage}
+              handleChangeFormState={handleChangeFormState}
+              handleChangeRibbon={handleChangeRibbon}
+              handleChangeInput={handleChangeInput}
+              handleUpdateClick={handleUpdateClick}
+              isExtendExtraOpen={isExtendExtraOpen}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+              business={business}
+              handleSuccessUpdate={handleSuccessUpdate}
+              setFormTaxState={setFormTaxState}
+              formTaxState={formTaxState}
+              taxes={taxes}
+              setTaxes={setTaxes}
+              fees={fees}
+              setFees={setFees}
+            />
+          )}
+          {showOption === 'professionals' && (
+            <BusinessServiceProfessionals
+              product={productState?.product}
+              formState={formState}
+              isExtendExtraOpen={isExtendExtraOpen}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+              handleUpdateClick={handleUpdateClick}
             />
           )}
           {showOption === 'ingredients' && (

@@ -7960,7 +7960,7 @@ optionator@^0.8.3:
 
 "ordering-components-admin@github:Ordering-Inc/ordering-components-admin#development":
   version "0.0.1"
-  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/f692d94748c928de4dfe9e09a34e4a9f2a6536ec"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/df04ee88d768b79a1ef13ce0db948d447b019f46"
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -10556,7 +10556,7 @@ tmp@~0.2.1:
 to-array@0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/to-array/-/to-array-0.1.4.tgz#17e6c11f73dd4f3d74cda7a4ff3238e9ad9bf890"
-  integrity sha1-F+bBH3PdTz10zaek/zI46a2b+JA=
+  integrity sha512-LhVdShQD/4Mk4zXNroIQZJC+Ap3zgLcDuwEdcmLv9CCO73NWockQDwyUnW/m8VX/EElfL6FcYx7EeutN4HJA6A==
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"
