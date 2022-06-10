@@ -27,7 +27,9 @@ import {
   OrderProducts,
   CloseButtonWrapper,
   OrderStatusSelectorWrapper,
-  PlaceSpotContainer
+  PlaceSpotContainer,
+  RejectReasonsContainer,
+  RejectReasonWrapper
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -66,6 +68,7 @@ const OrderDetailsUI = (props) => {
     loading
   } = props.order
 
+  const rejectResonStatuses = [2, 5, 6, 10, 12, 14, 16]
   const getOrderStatus = (status) => {
     const orderStatus = [
       { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 25 },
@@ -359,6 +362,12 @@ const OrderDetailsUI = (props) => {
               <p>{getPriorityTag(order?.priority)}</p>
             </div>
           </AdvancedLogistic>
+          {rejectResonStatuses.includes(order?.status) && order?.reject_reason && (
+            <RejectReasonsContainer>
+              <p>{t('REJECT_REASONS', 'Reject reasons')}</p>
+              <RejectReasonWrapper>{order?.reject_reason}</RejectReasonWrapper>
+            </RejectReasonsContainer>
+          )}
           <div data-tour='tour_driver'>
             <OrderContactInformation
               order={order}

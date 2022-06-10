@@ -221,3 +221,21 @@ export const PlaceSpotContainer = styled.div`
     margin: 0px;
   }
 `
+export const RejectReasonsContainer = styled.div`
+  > p {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    margin: 0;
+  }
+`
+export const RejectReasonWrapper = styled.div`
+  background-color: #FEEDF0;
+  padding: 4px 10px;
+  border-radius: 50px;
+  color: ${props => props.theme.colors.danger};
+  font-size: 12px;
+  line-height: 18px;
+  margin: 15px 0;
+  width: fit-content;
+`
