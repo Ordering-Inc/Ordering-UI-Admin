@@ -318,6 +318,7 @@ export const CampaignDetailGeneral = (props) => {
           <CampaignAmountOption
             {...props}
             onClose={handleCloseRuleModal}
+            title={t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options')}
             type='orders_count'
           />
         )}
@@ -325,7 +326,7 @@ export const CampaignDetailGeneral = (props) => {
           <CampaignSignUpOption
             {...props}
             onClose={handleCloseRuleModal}
-            title={t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options ')}
+            title={t('SIGN_UP_DATE_OPTIONS', 'Sign up date options')}
             type='user_created_at'
           />
         )}
