@@ -1,6 +1,6 @@
 {
-  "app_id": "ordering-react",
-  "app_name": "Ordering",
+  "app_id": "ordering-admin-react",
+  "app_name": "Ordering Admin",
   "api": {
     "url": "https://apiv4.ordering.co",
     "language": "en",
