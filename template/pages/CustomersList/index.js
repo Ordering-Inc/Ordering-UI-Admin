@@ -11,7 +11,7 @@ export const CustomersList = (props) => {
     headerTitle: t('CUSTOMERS', 'Customers'),
     defaultUserTypesSelected: [3],
     propsToFetch: [
-      'name', 'lastname', 'email', 'phone', 'photo', 'cellphone',
+      'name', 'lastname', 'email', 'phone', 'photo', 'cellphone', 'loyalty_level',
       'country_phone_code', 'city_id', 'city', 'address', 'addresses',
       'address_notes', 'dropdown_option_id', 'dropdown_option', 'location',
       'zipcode', 'level', 'enabled', 'middle_name', 'second_lastname', 'birthdate', 'drivergroups',
