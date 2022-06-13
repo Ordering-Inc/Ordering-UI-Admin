@@ -15,6 +15,8 @@ var _reactHookForm = require("react-hook-form");
 
 var _styles = require("../../../styles");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _Shared = require("../../Shared");
 
 var _styles2 = require("./styles");
@@ -42,14 +44,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) {
-  var _formState$changes3, _formState$changes4, _walletData$redemptio, _formState$changes5, _formState$changes6, _walletData$accumulat;
+  var _formState$changes5, _formState$changes6, _walletData$redemptio, _formState$changes7, _formState$changes8, _walletData$accumulat, _ref, _formState$changes$ma, _formState$changes9;
 
   var walletData = props.walletData,
       formState = props.formState,
       handleChangeInput = props.handleChangeInput,
       handleClickSubmit = props.handleClickSubmit,
       isBusiness = props.isBusiness,
-      selectedBusinessList = props.selectedBusinessList;
+      selectedBusinessList = props.selectedBusinessList,
+      handleChangeItem = props.handleChangeItem;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -60,7 +63,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
       parsePrice = _useUtils2[0].parsePrice;
 
   var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit; // const [paymentRules, setPaymentRules] = useState('maximum_redemption_type')
+      handleSubmit = _useForm.handleSubmit; // const [paymentRules, setPaymentRules] = useState('no_limit')
 
 
   var _useState = (0, _react.useState)({
@@ -69,7 +72,22 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
   }),
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
-      setAlertState = _useState2[1]; // const ruleList = [
+      setAlertState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      expiration = _useState4[0],
+      setExpiration = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isMaximum = _useState6[0],
+      setIsMaximum = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      maxValue = _useState8[0],
+      setMaxValue = _useState8[1]; // const ruleList = [
   //   { key: 'no_limit', description: t('NO_LIMIT', 'No limit') },
   //   { key: 'maximum_redemption_type', description: `${t('MAXIMUM_POINTS_REDEEMED_PER_ORDER', 'Maximum amount of points that can be redeemed per order')} (${t('FIXED', 'fixed')})` },
   //   { key: 'maximum_redemption_rate', description: `${t('MAXIMUM_POINTS_REDEEMED_PER_ORDER', 'Maximum amount of points that can be redeemed per order')} (%)` }
@@ -80,6 +98,36 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     setAlertState({
       open: false,
       content: []
+    });
+  };
+
+  var handleChangeExpirtation = function handleChangeExpirtation(index) {
+    if (index) {
+      setExpiration(index);
+      return;
+    }
+
+    setExpiration(null);
+    handleChangeItem({
+      expire_after_minutes: null
+    });
+    setMaxValue('');
+  };
+
+  var handleClickSwitch = function handleClickSwitch(value) {
+    setIsMaximum(value);
+    if (!value) handleChangeItem({
+      maximum_accumulation: null
+    });
+  };
+
+  var handleChangeMaxValue = function handleChangeMaxValue(e) {
+    var value = e.target.value;
+    setMaxValue(value);
+    if (value) handleChangeItem({
+      expire_after_minutes: value * 24 * 60
+    });else handleChangeItem({
+      expire_after_minutes: null
     });
   };
 
@@ -134,6 +182,24 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
       content: formState.error
     });
   }, [formState === null || formState === void 0 ? void 0 : formState.error]);
+  (0, _react.useEffect)(function () {
+    var _formState$changes3, _formState$changes4;
+
+    if (formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.maximum_accumulation ? formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.maximum_accumulation : walletData === null || walletData === void 0 ? void 0 : walletData.maximum_accumulation) {
+      setIsMaximum(true);
+    } else {
+      setIsMaximum(false);
+    }
+  }, [walletData === null || walletData === void 0 ? void 0 : walletData.maximum_accumulation]);
+  (0, _react.useEffect)(function () {
+    if (walletData !== null && walletData !== void 0 && walletData.expire_after_minutes) {
+      setMaxValue((walletData === null || walletData === void 0 ? void 0 : walletData.expire_after_minutes) / (24 * 60));
+      setExpiration('days');
+    } else {
+      setExpiration(null);
+      setMaxValue('');
+    }
+  }, [walletData === null || walletData === void 0 ? void 0 : walletData.expire_after_minutes]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     isBusiness: isBusiness,
     onSubmit: handleSubmit(onSubmit)
@@ -142,7 +208,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     placeholder: "00 points",
     name: "redemption_rate",
     autoComplete: "off",
-    value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.redemption_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.redemption_rate : (_walletData$redemptio = walletData === null || walletData === void 0 ? void 0 : walletData.redemption_rate) !== null && _walletData$redemptio !== void 0 ? _walletData$redemptio : '',
+    value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.redemption_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.redemption_rate : (_walletData$redemptio = walletData === null || walletData === void 0 ? void 0 : walletData.redemption_rate) !== null && _walletData$redemptio !== void 0 ? _walletData$redemptio : '',
     onChange: handleChangeInput,
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {
@@ -156,13 +222,47 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     placeholder: "00 points",
     name: "accumulation_rate",
     autoComplete: "off",
-    value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.accumulation_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.accumulation_rate : (_walletData$accumulat = walletData === null || walletData === void 0 ? void 0 : walletData.accumulation_rate) !== null && _walletData$accumulat !== void 0 ? _walletData$accumulat : '',
+    value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.accumulation_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.accumulation_rate : (_walletData$accumulat = walletData === null || walletData === void 0 ? void 0 : walletData.accumulation_rate) !== null && _walletData$accumulat !== void 0 ? _walletData$accumulat : '',
     onChange: handleChangeInput,
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
       }
     }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ToggleWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('MAXIMUM_OF_POINTS', 'Maximum of points')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: isMaximum,
+    onChange: function onChange(val) {
+      return handleClickSwitch(val);
+    }
+  })), isMaximum && /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: "00 points",
+    name: "maximum_accumulation",
+    value: (_ref = (_formState$changes$ma = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.maximum_accumulation) !== null && _formState$changes$ma !== void 0 ? _formState$changes$ma : walletData === null || walletData === void 0 ? void 0 : walletData.maximum_accumulation) !== null && _ref !== void 0 ? _ref : '',
+    onChange: handleChangeInput,
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ExPirationWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPIRATION', 'Expiration')), /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+    onClick: function onClick() {
+      return handleChangeExpirtation(null);
+    }
+  }, !expiration ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    className: "active"
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("p", null, t('NO', 'No'))), /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+    onClick: function onClick() {
+      return handleChangeExpirtation('days');
+    }
+  }, expiration ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    className: "active"
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("p", null, t('EXPIRATION_IN_DAYS', 'Expiration in days'))), expiration && /*#__PURE__*/_react.default.createElement(_styles2.OptionInputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "number",
+    placeholder: "00 points",
+    name: "expire_after_minutes",
+    value: maxValue,
+    onChange: handleChangeMaxValue
   })))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     type: "submit",

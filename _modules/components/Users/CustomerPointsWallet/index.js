@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _styledComponents = require("styled-components");
+
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 
 var _CustomerWalletEvents = require("../CustomerWalletEvents");
@@ -42,13 +44,16 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
-  var _walletState$wallet;
+  var _walletState$wallet, _user$loyalty_level$i, _user$loyalty_level, _user$loyalty;
 
-  var walletState = props.walletState;
+  var walletState = props.walletState,
+      user = props.user;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useState = (0, _react.useState)('points_wallet'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -71,7 +76,21 @@ var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
   })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 30,
     height: 15
-  }))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWalletContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, ((_walletState$wallet = walletState.wallet) === null || _walletState$wallet === void 0 ? void 0 : _walletState$wallet.balance) || 0), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS', 'Points')))))), showOption === 'history' && /*#__PURE__*/_react.default.createElement(_CustomerWalletEvents.CustomerWalletEvents, props));
+  }))), /*#__PURE__*/_react.default.createElement(_styles.LoyaltyLevel, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70,
+    height: 20
+  })), /*#__PURE__*/_react.default.createElement(_styles.LoyaltyLevelContent, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 150,
+    style: {
+      width: '100%'
+    }
+  }), /*#__PURE__*/_react.default.createElement("h3", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 100,
+    height: 23
+  })))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWalletContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, ((_walletState$wallet = walletState.wallet) === null || _walletState$wallet === void 0 ? void 0 : _walletState$wallet.balance) || 0), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS', 'Points'))), (user === null || user === void 0 ? void 0 : user.loyalty_level) && /*#__PURE__*/_react.default.createElement(_styles.LoyaltyLevel, null, /*#__PURE__*/_react.default.createElement("h2", null, t('LEVEL', 'Level')), /*#__PURE__*/_react.default.createElement(_styles.LoyaltyLevelContent, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: (_user$loyalty_level$i = user === null || user === void 0 ? void 0 : (_user$loyalty_level = user.loyalty_level) === null || _user$loyalty_level === void 0 ? void 0 : _user$loyalty_level.image) !== null && _user$loyalty_level$i !== void 0 ? _user$loyalty_level$i : theme.images.general.level,
+    alt: ""
+  }), /*#__PURE__*/_react.default.createElement("h3", null, user === null || user === void 0 ? void 0 : (_user$loyalty = user.loyalty) === null || _user$loyalty === void 0 ? void 0 : _user$loyalty.name)))))), showOption === 'history' && /*#__PURE__*/_react.default.createElement(_CustomerWalletEvents.CustomerWalletEvents, props));
 };
 
 var CustomerPointsWallet = function CustomerPointsWallet(props) {

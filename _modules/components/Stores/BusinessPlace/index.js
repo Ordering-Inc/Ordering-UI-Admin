@@ -17,8 +17,6 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _styledComponents = require("styled-components");
 
-var _useWindowSize2 = require("../../../hooks/useWindowSize");
-
 var _styles = require("../../../styles");
 
 var _reactHookForm = require("react-hook-form");
@@ -52,8 +50,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessPlaceUI = function BusinessPlaceUI(props) {
   var _ref, _formState$changes$na, _formState$changes;
 
-  var open = props.open,
-      onClose = props.onClose,
+  var onClose = props.onClose,
       place = props.place,
       formState = props.formState,
       handleChangeInput = props.handleChangeInput,
@@ -66,34 +63,17 @@ var BusinessPlaceUI = function BusinessPlaceUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width;
-
   var formMethods = (0, _reactHookForm.useForm)();
 
-  var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isMenuOpen = _useState2[0],
-      setIsMenuOpen = _useState2[1];
-
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
 
   var buttonRef = (0, _react.useRef)(null);
-
-  var actionSidebar = function actionSidebar(value) {
-    if (!value) {
-      props.onClose();
-    }
-
-    setIsMenuOpen(value);
-    document.getElementById('business_place').style.width = value ? width > 1000 ? '500px' : '100%' : '0';
-  };
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -107,19 +87,6 @@ var BusinessPlaceUI = function BusinessPlaceUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (isMenuOpen) {
-      if (width < 1000) {
-        document.getElementById('business_place').style.width = '100%';
-      } else {
-        document.getElementById('business_place').style.width = '500px';
-      }
-    }
-  }, [width]);
-  (0, _react.useEffect)(function () {
-    if (!open) return;
-    actionSidebar(true);
-  }, [open]);
-  (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
         open: true,
@@ -129,9 +96,7 @@ var BusinessPlaceUI = function BusinessPlaceUI(props) {
       });
     }
   }, [formMethods.errors]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
-    id: "business_place"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, place ? place === null || place === void 0 ? void 0 : place.name : t('NEW_PLACE', 'New place')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, place && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, place ? place === null || place === void 0 ? void 0 : place.name : t('NEW_OPTION', 'New option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, place && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),

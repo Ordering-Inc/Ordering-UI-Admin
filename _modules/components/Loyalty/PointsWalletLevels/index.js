@@ -11,19 +11,21 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
-
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _styles = require("../../../styles");
 
 var _reactHookForm = require("react-hook-form");
 
 var _Shared = require("../../Shared");
 
+var _utils = require("../../../utils");
+
+var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
+
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles2 = require("./styles");
 
-var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+var _SingleLoyaltyLevel = require("../SingleLoyaltyLevel");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,8 +37,6 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -44,6 +44,8 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -58,16 +60,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
-  var _levelList$levels, _formState$changes, _formState$changes2, _formState$changes3;
+  var _levelList$levels, _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5;
 
   var formState = props.formState,
-      editFormState = props.editFormState,
       handleUpdateAddClick = props.handleUpdateAddClick,
       handleChangeInput = props.handleChangeInput,
       levelList = props.levelList,
-      handleUpdateDeleteClick = props.handleUpdateDeleteClick,
-      handleUpdateLevel = props.handleUpdateLevel,
-      handleUpdateBtnClick = props.handleUpdateBtnClick;
+      handleChangeItem = props.handleChangeItem,
+      handleDeleteLevelList = props.handleDeleteLevelList,
+      handleUpdateLevelList = props.handleUpdateLevelList;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -89,12 +90,31 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       alertState = _useState4[0],
       setAlertState = _useState4[1];
 
+  var _useState5 = (0, _react.useState)({
+    name: null,
+    data: null,
+    open: false
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      cropState = _useState6[0],
+      setCropState = _useState6[1];
+
   var containerRef = (0, _react.useRef)(null);
+  var imageRef = (0, _react.useRef)(null);
 
   var onSubmit = function onSubmit() {
     if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0) {
       handleUpdateAddClick();
     }
+  };
+
+  var handleChangePhoto = function handleChangePhoto(croppedImg) {
+    handleChangeItem(_defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg));
+    setCropState({
+      name: null,
+      data: null,
+      open: false
+    });
   };
 
   var closeAlert = function closeAlert() {
@@ -104,6 +124,52 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
     });
   };
 
+  var handleClickImage = function handleClickImage() {
+    imageRef.current.click();
+  };
+
+  var handleFiles = function handleFiles(files) {
+    if (files.length === 1) {
+      var _files$;
+
+      var type = files[0].type.split('/')[0];
+
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        });
+        return;
+      }
+
+      if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        });
+        return;
+      }
+
+      var reader = new window.FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload = function () {
+        setCropState({
+          name: 'image',
+          data: reader.result,
+          open: true
+        });
+        handleChangeItem({
+          image: reader.result
+        });
+      };
+
+      reader.onerror = function (error) {
+        return console.log(error);
+      };
+    }
+  };
+
   (0, _react.useEffect)(function () {
     if (!formState.error) return;
     setAlertState({
@@ -111,13 +177,6 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       content: formState.error
     });
   }, [formState === null || formState === void 0 ? void 0 : formState.error]);
-  (0, _react.useEffect)(function () {
-    if (!editFormState.error) return;
-    setAlertState({
-      open: true,
-      content: editFormState.error
-    });
-  }, [editFormState === null || editFormState === void 0 ? void 0 : editFormState.error]);
 
   var closeLevelAddForm = function closeLevelAddForm(e) {
     var _containerRef$current;
@@ -137,79 +196,49 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
   }, [formState === null || formState === void 0 ? void 0 : formState.changes]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('LEVELS', 'Levels')), /*#__PURE__*/_react.default.createElement(_styles2.LevelContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LevelWrapper, {
     isTitle: true
-  }, /*#__PURE__*/_react.default.createElement(_styles2.LevelNameWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('NAME', 'Name'))), /*#__PURE__*/_react.default.createElement(_styles2.LastWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('IN_THE_LAST', 'In the last'))), /*#__PURE__*/_react.default.createElement(_styles2.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('POINTS', 'Points'))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null)), levelList !== null && levelList !== void 0 && levelList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_styles2.LevelWrapper, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles2.LevelNameWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      height: 40
-    })), /*#__PURE__*/_react.default.createElement(_styles2.LastWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      height: 40
-    })), /*#__PURE__*/_react.default.createElement(_styles2.PointsWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      height: 40
-    })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 25,
-      height: 25
-    })));
+  }, /*#__PURE__*/_react.default.createElement(_styles2.OriginalImageWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('IMAGE', 'Image'))), /*#__PURE__*/_react.default.createElement(_styles2.LevelNameWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('NAME', 'Name'))), /*#__PURE__*/_react.default.createElement(_styles2.LastWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('IN_THE_LAST', 'In the last'))), /*#__PURE__*/_react.default.createElement(_styles2.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('POINTS', 'Points'))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null)), levelList !== null && levelList !== void 0 && levelList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_SingleLoyaltyLevel.SingleLoyaltyLevel, {
+      key: i,
+      isSkeleton: true
+    });
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, levelList === null || levelList === void 0 ? void 0 : (_levelList$levels = levelList.levels) === null || _levelList$levels === void 0 ? void 0 : _levelList$levels.map(function (level, i) {
-    var _editFormState$change, _editFormState$change2, _editFormState$change3, _level$name, _editFormState$change4, _editFormState$change5, _editFormState$change6, _level$accumulation_r, _editFormState$change7, _editFormState$change8, _editFormState$change9, _level$minimum_points, _editFormState$change10;
-
-    return /*#__PURE__*/_react.default.createElement(_styles2.LevelWrapper, {
-      key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles2.LevelNameWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-      value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change = editFormState.changes) === null || _editFormState$change === void 0 ? void 0 : _editFormState$change.id) === level.id && typeof (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change2 = editFormState.changes) === null || _editFormState$change2 === void 0 ? void 0 : _editFormState$change2.name) !== 'undefined' ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change3 = editFormState.changes) === null || _editFormState$change3 === void 0 ? void 0 : _editFormState$change3.name : (_level$name = level.name) !== null && _level$name !== void 0 ? _level$name : '',
-      name: "name",
-      autoComplete: "off",
-      placeholder: t('NAME', 'name'),
-      onChange: function onChange(e) {
-        return handleUpdateLevel(e, level === null || level === void 0 ? void 0 : level.id);
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.LastWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-      value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change4 = editFormState.changes) === null || _editFormState$change4 === void 0 ? void 0 : _editFormState$change4.id) === level.id && typeof (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change5 = editFormState.changes) === null || _editFormState$change5 === void 0 ? void 0 : _editFormState$change5.accumulation_rate) !== 'undefined' ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change6 = editFormState.changes) === null || _editFormState$change6 === void 0 ? void 0 : _editFormState$change6.accumulation_rate : (_level$accumulation_r = level.accumulation_rate) !== null && _level$accumulation_r !== void 0 ? _level$accumulation_r : '',
-      placeholder: "0 days",
-      name: "accumulation_rate",
-      autoComplete: "off",
-      onChange: function onChange(e) {
-        return handleUpdateLevel(e, level === null || level === void 0 ? void 0 : level.id);
-      },
-      onKeyPress: function onKeyPress(e) {
-        if (!/^[0-9.]$/.test(e.key)) {
-          e.preventDefault();
-        }
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.PointsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-      value: (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change7 = editFormState.changes) === null || _editFormState$change7 === void 0 ? void 0 : _editFormState$change7.id) === level.id && typeof (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change8 = editFormState.changes) === null || _editFormState$change8 === void 0 ? void 0 : _editFormState$change8.minimum_points) !== 'undefined' ? editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change9 = editFormState.changes) === null || _editFormState$change9 === void 0 ? void 0 : _editFormState$change9.minimum_points : (_level$minimum_points = level.minimum_points) !== null && _level$minimum_points !== void 0 ? _level$minimum_points : '',
-      placeholder: "0 points",
-      name: "minimum_points",
-      autoComplete: "off",
-      onChange: function onChange(e) {
-        return handleUpdateLevel(e, level === null || level === void 0 ? void 0 : level.id);
-      },
-      onKeyPress: function onKeyPress(e) {
-        if (!/^[0-9.]$/.test(e.key)) {
-          e.preventDefault();
-        }
-      }
-    })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, (editFormState === null || editFormState === void 0 ? void 0 : (_editFormState$change10 = editFormState.changes) === null || _editFormState$change10 === void 0 ? void 0 : _editFormState$change10.id) === level.id ? /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-      color: "primary",
-      type: "button",
-      onClick: function onClick() {
-        return handleUpdateBtnClick();
-      }
-    }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)) : /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-      color: "black",
-      type: "button",
-      onClick: function onClick() {
-        return handleUpdateDeleteClick(level.id);
-      }
-    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, null))));
+    return /*#__PURE__*/_react.default.createElement(_SingleLoyaltyLevel.SingleLoyaltyLevel, {
+      key: i,
+      level: level,
+      handleDeleteLevelList: handleDeleteLevelList,
+      handleUpdateLevelList: handleUpdateLevelList
+    });
   })), addSubOption ? /*#__PURE__*/_react.default.createElement(_styles2.LevelWrapper, {
     onSubmit: handleSubmit(onSubmit),
     ref: containerRef
-  }, /*#__PURE__*/_react.default.createElement(_styles2.LevelNameWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.ImageWrapper, {
+    onClick: function onClick() {
+      return handleClickImage();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+    onFiles: function onFiles(files) {
+      return handleFiles(files);
+    },
+    childRef: function childRef(e) {
+      imageRef.current = e;
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: formState.loading
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
+    onDrop: function onDrop(dataTransfer) {
+      return handleFiles(dataTransfer.files);
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: formState.loading
+  }, formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.image ? /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.image,
+    alt: "header image",
+    loading: "lazy"
+  }) : /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))), /*#__PURE__*/_react.default.createElement(_styles2.LevelNameWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     autoComplete: "off",
     placeholder: t('NAME', 'name'),
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.name) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -217,7 +246,7 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
     type: "text",
     name: "accumulation_rate",
     autoComplete: "off",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accumulation_rate) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.accumulation_rate) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -231,7 +260,7 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
     type: "text",
     name: "minimum_points",
     autoComplete: "off",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.minimum_points) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.minimum_points) || '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -244,7 +273,7 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary",
     type: "submit"
-  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)))) : /*#__PURE__*/_react.default.createElement(_styles2.AddSubOption, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, null)))) : /*#__PURE__*/_react.default.createElement(_styles2.AddSubOption, {
     onClick: function onClick() {
       return setAddSubOption(true);
     },
@@ -261,7 +290,21 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    title: t('IMAGE_CROP', 'Image crop'),
+    open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
+    onClose: function onClose() {
+      return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
+        open: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
+    handleChangePhoto: handleChangePhoto
+  })));
 };
 
 var PointsWalletLevels = function PointsWalletLevels(props) {

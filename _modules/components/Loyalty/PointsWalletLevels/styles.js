@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.PointsWrapper = exports.LevelWrapper = exports.LevelNameWrapper = exports.LevelContainer = exports.LastWrapper = exports.Container = exports.ButtonWrapper = exports.AddSubOption = void 0;
+exports.Title = exports.PointsWrapper = exports.OriginalImageWrapper = exports.LevelWrapper = exports.LevelNameWrapper = exports.LevelContainer = exports.LastWrapper = exports.ImageWrapper = exports.Container = exports.ButtonWrapper = exports.AddSubOption = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -61,3 +61,15 @@ var AddSubOption = _styledComponents.default.span(_templateObject12 || (_templat
 });
 
 exports.AddSubOption = AddSubOption;
+
+var OriginalImageWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 43px;\n  margin-right: 20px;\n\n  ", "\n\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    margin-left: 20px;\n    margin-right: 0px;\n  "])));
+});
+
+exports.OriginalImageWrapper = OriginalImageWrapper;
+var ImageWrapper = (0, _styledComponents.default)(OriginalImageWrapper)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  padding-left: 2px;\n  ", "\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    overflow: hidden;\n    display: flex;\n    align-items: center;\n    justify-content:center;\n    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);\n    height: 43px;\n    border-radius: 8px;\n    background-color: ", ";\n    position: relative;\n    cursor: -webkit-grab;\n    cursor: grab;\n    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n    svg {\n      color: #ADB5BD;\n      font-size: 16px;\n    }\n  };\n\n  img{\n    object-fit: cover;\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    padding-left: 0px;\n    padding-right: 2px;\n  "])));
+}, function (props) {
+  return props.theme.colors.secundaryDarkContrast;
+});
+exports.ImageWrapper = ImageWrapper;

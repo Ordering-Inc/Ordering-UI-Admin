@@ -43,11 +43,11 @@ var _BusinessOrderingChannels = require("../BusinessOrderingChannels");
 
 var _BusinessFrontLayout = require("../BusinessFrontLayout");
 
+var _BusinessPlaceGroupList = require("../BusinessPlaceGroupList");
+
 var _Shared = require("../../Shared");
 
 var _styles = require("./styles");
-
-var _BusinessPlaceList = require("../BusinessPlaceList");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -288,7 +288,7 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
   }), selectedItem === 'webhooks' && /*#__PURE__*/_react.default.createElement(_BusinessWebhooks.BusinessWebhooks, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessUpdate: handleUpdateBusinessState
-  }), selectedItem === 'places' && /*#__PURE__*/_react.default.createElement(_BusinessPlaceList.BusinessPlaceList, {
+  }), selectedItem === 'places' && /*#__PURE__*/_react.default.createElement(_BusinessPlaceGroupList.BusinessPlaceGroupList, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessUpdate: handleUpdateBusinessState,
     setIsExtendExtraOpen: setIsExtendExtraOpen
