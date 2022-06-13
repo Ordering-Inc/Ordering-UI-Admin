@@ -106,3 +106,52 @@ export const AddSubOption = styled.span`
   color: ${props => props.theme.colors.lightGray};
   margin-top: 6px;
 `
+
+export const OriginalImageWrapper = styled.div`
+  width: 43px;
+  margin-right: 20px;
+
+  ${props => props.theme.rtl && css`
+    margin-left: 20px;
+    margin-right: 0px;
+  `}
+
+  span {
+    font-size: 14px;
+    line-height: 24px;
+  }
+`
+
+export const ImageWrapper = styled(OriginalImageWrapper)`
+  padding-left: 2px;
+  ${props => props.theme.rtl && css`
+    padding-left: 0px;
+    padding-right: 2px;
+  `}
+
+  img,
+  div {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);
+    height: 43px;
+    border-radius: 8px;
+    background-color: ${props => props.theme.colors.secundaryDarkContrast};
+    position: relative;
+    cursor: -webkit-grab;
+    cursor: grab;
+    filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+    svg {
+      color: #ADB5BD;
+      font-size: 16px;
+    }
+  };
+
+  img{
+    object-fit: cover;
+  }
+`
