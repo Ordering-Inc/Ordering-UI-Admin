@@ -25,6 +25,8 @@ var _styles = require("../../../styles");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
+var _UserTypeSelector = require("../UserTypeSelector");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -54,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _formState$changes$dr, _formState$changes6, _formState$changes$bi, _formState$changes7;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _formState$changes$dr, _formState$changes6, _formState$changes$bi, _formState$changes7, _formState$changes$le, _formState$changes8;
 
   var formState = props.formState,
       showField = props.showField,
@@ -68,6 +70,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       isCustomerMode = props.isCustomerMode,
       isDriversPage = props.isDriversPage,
       handleChangeSwtich = props.handleChangeSwtich,
+      handleChangeUserType = props.handleChangeUserType,
       isProfessional = props.isProfessional;
   var formMethods = (0, _reactHookForm.useForm)();
 
@@ -368,6 +371,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     handleChangeDate: function handleChangeDate(date) {
       return handleChangeSwtich('birthdate', date);
     }
+  })), !isProfessional && /*#__PURE__*/_react.default.createElement(_styles2.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
+    isPrimary: true,
+    defaultUserType: (_formState$changes$le = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.level) !== null && _formState$changes$le !== void 0 ? _formState$changes$le : user === null || user === void 0 ? void 0 : user.level,
+    handleChangeUserType: handleChangeUserType
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     id: "form-btn",
     color: "primary",

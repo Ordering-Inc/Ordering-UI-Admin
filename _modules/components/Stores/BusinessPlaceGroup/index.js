@@ -217,7 +217,7 @@ var BusinessPlaceGroupUI = function BusinessPlaceGroupUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles2.HideSubmitBtn, {
     type: "submit",
     ref: buttonRef
-  })), (placeList === null || placeList === void 0 ? void 0 : placeList.loading) && /*#__PURE__*/_react.default.createElement(_styles2.OptionList, null, _toConsumableArray(Array(5).keys()).map(function (i) {
+  })), placeGroup && (placeList === null || placeList === void 0 ? void 0 : placeList.loading) && /*#__PURE__*/_react.default.createElement(_styles2.OptionList, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PlaceItemContainer, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -229,7 +229,7 @@ var BusinessPlaceGroupUI = function BusinessPlaceGroupUI(props) {
       width: 16,
       height: 16
     }));
-  })), !(placeList !== null && placeList !== void 0 && placeList.loading) && /*#__PURE__*/_react.default.createElement(_styles2.OptionList, null, (placeList === null || placeList === void 0 ? void 0 : (_placeList$places = placeList.places) === null || _placeList$places === void 0 ? void 0 : _placeList$places.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.TableHead, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+  })), placeGroup && !(placeList !== null && placeList !== void 0 && placeList.loading) && /*#__PURE__*/_react.default.createElement(_styles2.OptionList, null, (placeList === null || placeList === void 0 ? void 0 : (_placeList$places = placeList.places) === null || _placeList$places === void 0 ? void 0 : _placeList$places.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.TableHead, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "check-box",
     onClick: function onClick() {
       return handleMultiPlaceChangeEnabled();

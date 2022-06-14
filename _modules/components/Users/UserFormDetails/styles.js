@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperPassword = exports.TogglePassword = exports.SkeletonForm = exports.FormInput = exports.DriverZoneRestrictionWrapper = exports.CalendarWrapper = exports.ActionsForm = void 0;
+exports.WrapperUserTypeSelector = exports.WrapperPassword = exports.TogglePassword = exports.SkeletonForm = exports.FormInput = exports.DriverZoneRestrictionWrapper = exports.CalendarWrapper = exports.ActionsForm = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -61,3 +61,11 @@ exports.TogglePassword = TogglePassword;
 var CalendarWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-bottom: 20px;\n"])));
 
 exports.CalendarWrapper = CalendarWrapper;
+
+var WrapperUserTypeSelector = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-bottom: 10px;\n\n  div.select {\n    border: none;\n    background-color: ", ";\n    > div:first-child {\n      padding-top: 5px;\n      padding-bottom: 5px;\n    }\n  }\n\n  > div {\n    width: 100%;\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.secundaryContrast;
+});
+
+exports.WrapperUserTypeSelector = WrapperUserTypeSelector;

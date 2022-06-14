@@ -189,7 +189,7 @@ var SettingsListUI = function SettingsListUI(props) {
       key: i
     }, config.type === 1 && /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
       className: "form-group"
-    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), /*#__PURE__*/_react.default.createElement("input", {
+    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles2.Description, null, config === null || config === void 0 ? void 0 : config.description), /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
       defaultValue: config === null || config === void 0 ? void 0 : config.value,
       onChange: function onChange(e) {
@@ -205,14 +205,15 @@ var SettingsListUI = function SettingsListUI(props) {
       handleSelectChange: function handleSelectChange(value) {
         return handleInputChange(value, config === null || config === void 0 ? void 0 : config.id);
       },
-      label: config === null || config === void 0 ? void 0 : config.name
+      label: config === null || config === void 0 ? void 0 : config.name,
+      description: config === null || config === void 0 ? void 0 : config.description
     }) : /*#__PURE__*/_react.default.createElement(_SettingsSelectUI.SettingsSelectUI, {
       config: config,
       defaultValue: config === null || config === void 0 ? void 0 : config.value,
       handleSelectChange: function handleSelectChange(value) {
         return handleInputChange(value, config === null || config === void 0 ? void 0 : config.id);
       }
-    })), config.type === 3 && /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options2 = config.options) === null || _config$options2 === void 0 ? void 0 : _config$options2.map(function (item, j) {
+    })), config.type === 3 && /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 ? void 0 : (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options2 = config.options) === null || _config$options2 === void 0 ? void 0 : _config$options2.map(function (item, j) {
       return /*#__PURE__*/_react.default.createElement(_styles2.FormGroupWrapper, {
         key: j
       }, /*#__PURE__*/_react.default.createElement(_styles2.FormGroupCheck, {
@@ -228,7 +229,7 @@ var SettingsListUI = function SettingsListUI(props) {
       }), item.text)));
     })), !(config !== null && config !== void 0 && config.options) && /*#__PURE__*/_react.default.createElement(_styles2.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value'))), config.type === 4 && (config.key === 'driver_tip_options' ? /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
       className: "form-group"
-    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), /*#__PURE__*/_react.default.createElement("input", {
+    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles2.Description, null, config === null || config === void 0 ? void 0 : config.description), /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
       defaultValue: formatArray(config === null || config === void 0 ? void 0 : config.value),
       onChange: function onChange(e) {
@@ -236,7 +237,7 @@ var SettingsListUI = function SettingsListUI(props) {
       },
       className: "form-control",
       placeholder: "placeholder"
-    })) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : (_config$options3 = config.options) === null || _config$options3 === void 0 ? void 0 : _config$options3.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options4 = config.options) === null || _config$options4 === void 0 ? void 0 : _config$options4.map(function (item, j) {
+    })) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 ? void 0 : (_config$options3 = config.options) === null || _config$options3 === void 0 ? void 0 : _config$options3.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options4 = config.options) === null || _config$options4 === void 0 ? void 0 : _config$options4.map(function (item, j) {
       return /*#__PURE__*/_react.default.createElement(_styles2.FormGroupWrapper, {
         key: j
       }, /*#__PURE__*/_react.default.createElement(_styles2.FormGroupCheck, {

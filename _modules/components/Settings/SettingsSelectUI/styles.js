@@ -17,11 +17,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SettingsSelectContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n"])));
+var SettingsSelectContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-bottom: 30px;\n"])));
 
 exports.SettingsSelectContainer = SettingsSelectContainer;
 
-var SelectHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 10px;\n\n  p {\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n    margin: 0;\n  }\n"])), function (props) {
+var SelectHeader = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin-bottom: 5px;\n\n  label {\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n    margin: 0;\n  }\n  p {\n    margin-top: 10px;\n    margin-bottom: 0px;\n    font-size: 14px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 

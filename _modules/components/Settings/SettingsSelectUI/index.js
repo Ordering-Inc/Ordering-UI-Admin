@@ -87,7 +87,7 @@ var SettingsSelectUI = function SettingsSelectUI(props) {
       setOptions(selectedTypes);
     }
   }, [config]);
-  return /*#__PURE__*/_react.default.createElement(_styles.SettingsSelectContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SelectHeader, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.name)), options ? /*#__PURE__*/_react.default.createElement(_styles.SelectContent, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  return /*#__PURE__*/_react.default.createElement(_styles.SettingsSelectContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SelectHeader, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description)), options ? /*#__PURE__*/_react.default.createElement(_styles.SelectContent, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     notAsync: true,
     defaultValue: config === null || config === void 0 ? void 0 : config.value,
     options: options,
