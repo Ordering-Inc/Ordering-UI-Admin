@@ -7,10 +7,17 @@ export const CountrySelectWrapper = styled.div`
   position: relative;
   margin-bottom: 20px;
 
-  > p {
+  > label {
     margin-top: 0;
     font-weight: 600;
     margin-bottom: 10px;
+    font-size: 14px;
+    color: ${props => props.theme?.colors.headingColor};
+  }
+
+  > p {
+    margin-top: 0;
+    margin-bottom: 5px;
     font-size: 14px;
     color: ${props => props.theme?.colors.headingColor};
   }
