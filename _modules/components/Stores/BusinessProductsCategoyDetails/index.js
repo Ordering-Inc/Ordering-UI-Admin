@@ -70,6 +70,7 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       handleChangeItem = props.handleChangeItem,
       isAddMode = props.isAddMode,
       handleDeleteCategory = props.handleDeleteCategory,
+      handleChangeRibbon = props.handleChangeRibbon,
       isTutorialMode = props.isTutorialMode,
       handleTutorialSkip = props.handleTutorialSkip;
   var theme = (0, _styledComponents.useTheme)();
@@ -186,6 +187,7 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     handleChangeItem: handleChangeItem,
     isAddMode: isAddMode,
     isTutorialMode: isTutorialMode,
+    handleChangeRibbon: handleChangeRibbon,
     handleTutorialSkip: handleTutorialSkip
   }), selectedInfoItem === 'seo_options' && /*#__PURE__*/_react.default.createElement(_SeoOptions.SeoOptions, {
     data: categorySelected,

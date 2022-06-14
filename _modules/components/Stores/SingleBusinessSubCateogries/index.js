@@ -116,7 +116,7 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
       return handleDrop(e);
     },
     onDragOver: function onDragOver(e) {
-      return handleDragOver(e, isLastCategory);
+      return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e, isLastCategory);
     },
     onDragEnd: function onDragEnd(e) {
       return handleDragEnd(e);
@@ -130,7 +130,7 @@ var SingleBusinessSubCateogriesUI = function SingleBusinessSubCateogriesUI(props
     alt: "six dots",
     draggable: true,
     onDragStart: function onDragStart(e) {
-      return handleDragStart(e);
+      return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e);
     }
   }), (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 ? void 0 : category.subcategories.length) > 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretRightFill, {
     className: setRotate

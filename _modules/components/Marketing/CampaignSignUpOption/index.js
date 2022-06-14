@@ -75,12 +75,6 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
   };
   var contentEndRef = (0, _react.useRef)(null);
   var optionList = [{
-    key: '>',
-    title: t('AFTER', 'After')
-  }, {
-    key: '=',
-    title: t('ON', 'On')
-  }, {
     key: '<',
     title: t('BEFORE', 'Before')
   }];

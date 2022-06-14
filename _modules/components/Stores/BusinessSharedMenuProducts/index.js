@@ -111,7 +111,7 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
       className: "product_checkbox",
       defaultChecked: product.enabled,
       onChange: function onChange(e) {
-        return handleUpdateBusinessSharedMenuProduct(product.id, {
+        return handleUpdateBusinessSharedMenuProduct === null || handleUpdateBusinessSharedMenuProduct === void 0 ? void 0 : handleUpdateBusinessSharedMenuProduct(product.id, {
           enabled: e.target.checked
         });
       }

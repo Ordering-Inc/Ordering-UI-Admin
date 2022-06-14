@@ -77,17 +77,13 @@ var CampaignDetailContentUI = function CampaignDetailContentUI(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('SMS', 'SMS'))
   }, {
     value: 'notification',
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('NOTIFICATION', 'Notification'))
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('PUSH_NOTIFICATIONS', 'Push notifications'))
   }, {
     value: 'webhook',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('WEBHOOK', 'Webhook'))
-  }, {
-    value: 'popup',
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('POPUP', 'Popup'))
-  }, {
-    value: 'whatsapp',
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('WHATSAPP', 'Whatsapp'))
-  }];
+  } // { value: 'popup', content: <Option>{t('POPUP', 'Popup')}</Option> },
+  // { value: 'whatsapp', content: <Option>{t('WHATSAPP', 'Whatsapp')}</Option> }
+  ];
   (0, _react.useEffect)(function () {
     var options = typeList.filter(function (option) {
       return option === null || option === void 0 ? void 0 : option.value.toLocaleLowerCase().includes(contactTypeSearchVal.toLocaleLowerCase());

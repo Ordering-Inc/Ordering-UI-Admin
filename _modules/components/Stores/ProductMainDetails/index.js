@@ -45,6 +45,7 @@ var ProductMainDetails = function ProductMainDetails(props) {
       handlechangeImage = props.handlechangeImage,
       handleChangeInput = props.handleChangeInput,
       handleChangeFormState = props.handleChangeFormState,
+      handleChangeRibbon = props.handleChangeRibbon,
       handleUpdateClick = props.handleUpdateClick,
       isExtendExtraOpen = props.isExtendExtraOpen,
       setIsExtendExtraOpen = props.setIsExtendExtraOpen,
@@ -99,6 +100,7 @@ var ProductMainDetails = function ProductMainDetails(props) {
     product: product,
     formState: formState,
     handlechangeImage: handlechangeImage,
+    handleChangeRibbon: handleChangeRibbon,
     handleChangeInput: handleChangeInput,
     handleChangeFormState: handleChangeFormState,
     handleButtonUpdateClick: handleUpdateClick

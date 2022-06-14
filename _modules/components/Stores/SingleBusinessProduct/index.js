@@ -224,7 +224,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     alt: "six dots",
     draggable: true,
     onDragStart: function onDragStart(e) {
-      return handleDragStart(e, product.id);
+      return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, product.id);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTypeImage, {
     onClick: function onClick() {

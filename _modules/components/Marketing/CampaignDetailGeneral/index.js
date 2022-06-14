@@ -346,10 +346,11 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     }
   }, selectedRule === 'orders_count' && /*#__PURE__*/_react.default.createElement(_CampaignAmountOption.CampaignAmountOption, _extends({}, props, {
     onClose: handleCloseRuleModal,
+    title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options'),
     type: "orders_count"
   })), selectedRule === 'user_created_at' && /*#__PURE__*/_react.default.createElement(_CampaignSignUpOption.CampaignSignUpOption, _extends({}, props, {
     onClose: handleCloseRuleModal,
-    title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options '),
+    title: t('SIGN_UP_DATE_OPTIONS', 'Sign up date options'),
     type: "user_created_at"
   })), selectedRule === 'user_last_order_at' && /*#__PURE__*/_react.default.createElement(_CampaignSignUpOption.CampaignSignUpOption, _extends({
     title: t('LAST_ORDER_DATE_OPTIONS', 'Last order date options'),

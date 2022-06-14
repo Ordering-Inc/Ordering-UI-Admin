@@ -199,7 +199,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: group === null || group === void 0 ? void 0 : group.enabled,
       onChange: function onChange(enabled) {
-        return handleUpdateDriversGroup(group.id, {
+        return handleUpdateDriversGroup === null || handleUpdateDriversGroup === void 0 ? void 0 : handleUpdateDriversGroup(group.id, {
           enabled: enabled
         });
       }

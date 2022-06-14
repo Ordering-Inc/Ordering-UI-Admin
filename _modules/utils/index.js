@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.setStorageItem = exports.scrollTo = exports.reviewCommentList = exports.removeStorageItem = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.reviewCommentList = exports.removeStorageItem = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -416,13 +416,23 @@ var convertHMS = function convertHMS(value) {
   return sec < 0 ? '-' : '' + hours + ':' + minutes + ':' + seconds; // Return is HH : MM : SS
 };
 /**
+ * List shape for ribbon
+ */
+
+
+exports.convertHMS = convertHMS;
+var shape = {
+  rectangle: 'rectangle',
+  rectangleRound: 'rectangle_round',
+  capsuleShape: 'capsule_shape'
+};
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
  */
 
-
-exports.convertHMS = convertHMS;
+exports.shape = shape;
 
 var reviewCommentList = function reviewCommentList(type) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
