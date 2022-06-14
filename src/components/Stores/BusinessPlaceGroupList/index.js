@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { useLanguage, BusinessPlaceList as BusinessPlaceListController } from 'ordering-components-admin'
+import { useLanguage, BusinessPlaceGroupList as BusinessPlaceGroupListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
 import { ChevronRight, CheckSquareFill, Square } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { BusinessPlaceGroup } from '../BusinessPlaceGroup'
 import { Modal } from '../../Shared'
 
 import {
@@ -16,16 +17,15 @@ import {
   PlaceItemContainer,
   PlaceContainer
 } from './styles'
-import { BusinessPlace } from '../BusinessPlace'
 
-export const BusinessPlaceListUI = (props) => {
+export const BusinessPlaceGroupListUI = (props) => {
   const {
-    placeList,
+    placeGroupList,
     setIsExtendExtraOpen,
     business,
-    handleSuccessAddPlace,
-    handleSuccessUpdatePlace,
-    handleSuccessDeletePlace,
+    handleSuccessAddPlaceGroup,
+    handleSuccessUpdatePlaceGroup,
+    handleSuccessDeletePlaceGroup,
     handleChangeEnabled,
     handleMultiChangeEnabled,
     getMultiCheckStatus
@@ -36,9 +36,9 @@ export const BusinessPlaceListUI = (props) => {
   const [openDetail, setOpenDetail] = useState(false)
   const [selectedPlace, setSelectedPlace] = useState(null)
 
-  const handleOpenDetail = (place) => {
+  const handleOpenDetail = (placeGroup) => {
     setOpenDetail(true)
-    setSelectedPlace(place)
+    setSelectedPlace(placeGroup)
     setIsExtendExtraOpen(true)
   }
 
@@ -48,17 +48,17 @@ export const BusinessPlaceListUI = (props) => {
     setIsExtendExtraOpen(false)
   }
 
-  const handleUpdateSelectedPlace = (place) => {
-    setSelectedPlace(place)
+  const handleUpdateSelectedPlaceGroup = (placeGroup) => {
+    setSelectedPlace(placeGroup)
   }
 
-  const handlePlaceClick = (e, place) => {
+  const handlePlaceClick = (e, placeGroup) => {
     if (e.target.closest('.check-box')) return
-    handleOpenDetail(place)
+    handleOpenDetail(placeGroup)
   }
 
-  const handleCheckBoxChange = (place) => {
-    handleChangeEnabled(place?.id, { enabled: !place?.enabled })
+  const handleCheckBoxChange = (placeGroup) => {
+    handleChangeEnabled(placeGroup?.id, { enabled: !placeGroup?.enabled })
   }
 
   return (
@@ -74,7 +74,7 @@ export const BusinessPlaceListUI = (props) => {
             {t('ADD_PLACES', 'Add places')}
           </Button>
         </Header>
-        {placeList?.loading ? (
+        {placeGroupList?.loading ? (
           <Content>
             {
               [...Array(5).keys()].map(i => (
@@ -92,7 +92,7 @@ export const BusinessPlaceListUI = (props) => {
           </Content>
         ) : (
           <Content>
-            {placeList?.places?.length > 0 && (
+            {placeGroupList?.placeGroups?.length > 0 && (
               <TableHead>
                 <CheckWrapper>
                   <span className='check-box' onClick={() => handleMultiChangeEnabled()}>
@@ -102,17 +102,17 @@ export const BusinessPlaceListUI = (props) => {
                 </CheckWrapper>
               </TableHead>
             )}
-            {placeList?.places?.map((place, i) => (
+            {placeGroupList?.placeGroups?.map((placeGroup, i) => (
               <PlaceItemContainer
                 key={i}
-                active={selectedPlace?.id === place?.id}
-                onClick={(e) => handlePlaceClick(e, place)}
+                active={selectedPlace?.id === placeGroup?.id}
+                onClick={(e) => handlePlaceClick(e, placeGroup)}
               >
                 <CheckWrapper>
-                  <span className='check-box' onClick={() => handleCheckBoxChange(place)}>
-                    {place?.enabled ? <CheckSquareFill className='active' /> : <Square />}
+                  <span className='check-box' onClick={() => handleCheckBoxChange(placeGroup)}>
+                    {placeGroup?.enabled ? <CheckSquareFill className='active' /> : <Square />}
                   </span>
-                  <label>{place?.name}</label>
+                  <label>{placeGroup?.name}</label>
                 </CheckWrapper>
                 <ChevronRight />
               </PlaceItemContainer>
@@ -124,15 +124,15 @@ export const BusinessPlaceListUI = (props) => {
       {width >= 1000 ? (
         <>
           {openDetail && (
-            <BusinessPlace
+            <BusinessPlaceGroup
               businessId={business?.id}
               open={openDetail}
               onClose={handleCloseDetail}
-              place={selectedPlace}
-              handleSuccessAddPlace={handleSuccessAddPlace}
-              handleSuccessUpdatePlace={handleSuccessUpdatePlace}
-              handleSuccessDeletePlace={handleSuccessDeletePlace}
-              handleUpdateSelectedPlace={handleUpdateSelectedPlace}
+              placeGroup={selectedPlace}
+              handleSuccessAddPlaceGroup={handleSuccessAddPlaceGroup}
+              handleSuccessUpdatePlaceGroup={handleSuccessUpdatePlaceGroup}
+              handleSuccessDeletePlaceGroup={handleSuccessDeletePlaceGroup}
+              handleUpdateSelectedPlaceGroup={handleUpdateSelectedPlaceGroup}
             />
           )}
         </>
@@ -144,15 +144,15 @@ export const BusinessPlaceListUI = (props) => {
               open={openDetail}
               onClose={() => handleCloseDetail()}
             >
-              <BusinessPlace
+              <BusinessPlaceGroup
                 businessId={business?.id}
                 open={openDetail}
                 onClose={handleCloseDetail}
-                place={selectedPlace}
-                handleSuccessAddPlace={handleSuccessAddPlace}
-                handleSuccessUpdatePlace={handleSuccessUpdatePlace}
-                handleSuccessDeletePlace={handleSuccessDeletePlace}
-                handleUpdateSelectedPlace={handleUpdateSelectedPlace}
+                placeGroup={selectedPlace}
+                handleSuccessAddPlaceGroup={handleSuccessAddPlaceGroup}
+                handleSuccessUpdatePlaceGroup={handleSuccessUpdatePlaceGroup}
+                handleSuccessDeletePlaceGroup={handleSuccessDeletePlaceGroup}
+                handleUpdateSelectedPlaceGroup={handleUpdateSelectedPlaceGroup}
               />
             </Modal>
           )}
@@ -162,10 +162,10 @@ export const BusinessPlaceListUI = (props) => {
   )
 }
 
-export const BusinessPlaceList = (props) => {
+export const BusinessPlaceGroupList = (props) => {
   const businessPlaceListProps = {
     ...props,
-    UIComponent: BusinessPlaceListUI
+    UIComponent: BusinessPlaceGroupListUI
   }
-  return <BusinessPlaceListController {...businessPlaceListProps} />
+  return <BusinessPlaceGroupListController {...businessPlaceListProps} />
 }
