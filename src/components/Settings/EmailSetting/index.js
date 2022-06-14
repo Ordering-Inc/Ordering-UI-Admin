@@ -12,7 +12,8 @@ import {
   FormGroupCheck,
   OptionsError,
   SubmitBtnWrapper,
-  GeneralTitle
+  GeneralTitle,
+  Description
 } from '../SettingsList/styles'
 
 const EmailSettingUI = (props) => {
@@ -95,6 +96,7 @@ const EmailSettingUI = (props) => {
                       config.type === 1 && (
                         <FormGroupText className='form-group'>
                           <label>{config?.name}</label>
+                          {config?.description && <Description>{config?.description}</Description>}
                           <input
                             type='text'
                             defaultValue={config?.value}
@@ -124,6 +126,7 @@ const EmailSettingUI = (props) => {
           </ContextAwareToggle>
           <Accordion.Collapse eventKey='1'>
             <CheckBoxWrapper>
+              {superAdmin?.description && <p>{superAdmin?.description}</p>}
               {
                 superAdmin?.options?.length > 0 && superAdmin?.options?.map((item, j) => (
                   <FormGroupWrapper key={j}>
@@ -152,6 +155,7 @@ const EmailSettingUI = (props) => {
           </ContextAwareToggle>
           <Accordion.Collapse eventKey='2'>
             <CheckBoxWrapper>
+              {business?.description && <p>{business?.description}</p>}
               {
                 business?.options?.length > 0 && business?.options?.map((item, j) => (
                   <FormGroupWrapper key={j}>
@@ -180,6 +184,7 @@ const EmailSettingUI = (props) => {
           </ContextAwareToggle>
           <Accordion.Collapse eventKey='3'>
             <CheckBoxWrapper>
+              {customer?.description && <p>{customer?.description}</p>}
               {
                 customer?.options?.length > 0 && customer?.options?.map((item, j) => (
                   <FormGroupWrapper key={j}>
@@ -208,6 +213,7 @@ const EmailSettingUI = (props) => {
           </ContextAwareToggle>
           <Accordion.Collapse eventKey='4'>
             <CheckBoxWrapper>
+              {cityManager?.description && <p>{cityManager?.description}</p>}
               {
                 cityManager?.options?.length > 0 && cityManager?.options?.map((item, j) => (
                   <FormGroupWrapper key={j}>
