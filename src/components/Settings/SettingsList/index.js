@@ -16,7 +16,8 @@ import {
   SkeletonWrapper,
   CheckBoxWrapper,
   OptionsError,
-  SubmitBtnWrapper
+  SubmitBtnWrapper,
+  Description
 } from './styles'
 
 export const SettingsListUI = (props) => {
@@ -127,6 +128,7 @@ export const SettingsListUI = (props) => {
                         config.type === 1 && (
                           <FormGroupText className='form-group'>
                             <label>{config?.name}</label>
+                            {config?.description && <Description>{config?.description}</Description>}
                             <input
                               type='text'
                               defaultValue={config?.value}
@@ -145,6 +147,7 @@ export const SettingsListUI = (props) => {
                               defaultValue={config?.value}
                               handleSelectChange={(value) => handleInputChange(value, config?.id)}
                               label={config?.name}
+                              description={config?.description}
                             />
                           ) : (
                             <SettingsSelectUI
@@ -159,7 +162,10 @@ export const SettingsListUI = (props) => {
                         config.type === 3 && (
                           <CheckBoxWrapper>
                             {config?.name && (
-                              <p>{config?.name}</p>
+                              <label>{config?.name}</label>
+                            )}
+                            {config?.description && (
+                              <p>{config?.description}</p>
                             )}
                             {
                               config?.options?.length > 0 && config?.options?.map((item, j) => (
@@ -190,6 +196,7 @@ export const SettingsListUI = (props) => {
                           config.key === 'driver_tip_options' ? (
                             <FormGroupText className='form-group'>
                               <label>{config?.name}</label>
+                              {config?.description && <Description>{config?.description}</Description>}
                               <input
                                 type='text'
                                 defaultValue={formatArray(config?.value)}
@@ -201,7 +208,10 @@ export const SettingsListUI = (props) => {
                           ) : (
                             <CheckBoxWrapper>
                               {config?.name && (
-                                <p>{config?.name}</p>
+                                <label>{config?.name}</label>
+                              )}
+                              {config?.description && (
+                                <p>{config?.description}</p>
                               )}
                               {
                                 config?.options?.length > 0 && config?.options?.map((item, j) => (

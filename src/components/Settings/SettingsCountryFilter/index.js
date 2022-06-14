@@ -15,7 +15,8 @@ export const SettingsCountryFilter = (props) => {
   const {
     defaultValue,
     handleSelectChange,
-    label
+    label,
+    description
   } = props
   const [, t] = useLanguage()
   const [timeZoneList, setTimeZoneList] = useState(countryList)
@@ -51,7 +52,10 @@ export const SettingsCountryFilter = (props) => {
   return (
     <CountrySelectWrapper>
       {label && (
-        <p>{label}</p>
+        <label>{label}</label>
+      )}
+      {description && (
+        <p>{description}</p>
       )}
       <CountrySearchWrapper ref={countryRef}>
         <CountrySearchInput

@@ -12,7 +12,8 @@ import {
   FormGroupCheck,
   OptionsError,
   SubmitBtnWrapper,
-  GeneralTitle
+  GeneralTitle,
+  Description
 } from '../SettingsList/styles'
 
 const NotificationSettingUI = (props) => {
@@ -91,6 +92,7 @@ const NotificationSettingUI = (props) => {
                       config.type === 1 && (
                         <FormGroupText className='form-group'>
                           <label>{config?.name}</label>
+                          {config?.description && <Description>{config?.description}</Description>}
                           <input
                             type='text'
                             defaultValue={config?.value}
@@ -120,6 +122,7 @@ const NotificationSettingUI = (props) => {
           </ContextAwareToggle>
           <Accordion.Collapse eventKey='1'>
             <CheckBoxWrapper>
+              {superAdmin?.description && <p>{superAdmin?.description}</p>}
               {
                 superAdmin?.options?.length > 0 && superAdmin?.options?.map((item, j) => (
                   <FormGroupWrapper key={j}>
@@ -148,6 +151,7 @@ const NotificationSettingUI = (props) => {
           </ContextAwareToggle>
           <Accordion.Collapse eventKey='2'>
             <CheckBoxWrapper>
+              {business?.description && <p>{business?.description}</p>}
               {
                 business?.options?.length > 0 && business?.options?.map((item, j) => (
                   <FormGroupWrapper key={j}>
@@ -176,6 +180,7 @@ const NotificationSettingUI = (props) => {
           </ContextAwareToggle>
           <Accordion.Collapse eventKey='3'>
             <CheckBoxWrapper>
+              {customer?.description && <p>{customer?.description}</p>}
               {
                 customer?.options?.length > 0 && customer?.options?.map((item, j) => (
                   <FormGroupWrapper key={j}>
@@ -204,6 +209,7 @@ const NotificationSettingUI = (props) => {
           </ContextAwareToggle>
           <Accordion.Collapse eventKey='4'>
             <CheckBoxWrapper>
+              {driver?.description && <p>{driver?.description}</p>}
               {
                 driver?.options?.length > 0 && driver?.options?.map((item, j) => (
                   <FormGroupWrapper key={j}>

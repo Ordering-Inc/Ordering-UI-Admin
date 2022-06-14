@@ -7,6 +7,7 @@ import { Alert, InputPhoneNumber, RangeCalendar } from '../../Shared'
 import { sortInputFields } from '../../../utils'
 import { Switch, Input, Button } from '../../../styles'
 import { Eye, EyeSlash } from 'react-bootstrap-icons'
+import { UserTypeSelector } from '../UserTypeSelector'
 
 import {
   FormInput,
@@ -15,7 +16,8 @@ import {
   DriverZoneRestrictionWrapper,
   WrapperPassword,
   TogglePassword,
-  CalendarWrapper
+  CalendarWrapper,
+  WrapperUserTypeSelector
 } from './styles'
 
 export const UserFormDetailsUI = (props) => {
@@ -32,6 +34,7 @@ export const UserFormDetailsUI = (props) => {
     isCustomerMode,
     isDriversPage,
     handleChangeSwtich,
+    handleChangeUserType,
     isProfessional
   } = props
 
@@ -307,6 +310,15 @@ export const UserFormDetailsUI = (props) => {
                   handleChangeDate={(date) => handleChangeSwtich('birthdate', date)}
                 />
               </CalendarWrapper>
+            )}
+            {!isProfessional && (
+              <WrapperUserTypeSelector>
+                <UserTypeSelector
+                  isPrimary
+                  defaultUserType={formState?.changes?.level ?? user?.level}
+                  handleChangeUserType={handleChangeUserType}
+                />
+              </WrapperUserTypeSelector>
             )}
             <ActionsForm>
               <Button
