@@ -49,6 +49,20 @@ export const OrderBill = (props) => {
     })
   }
 
+  const getIncludedTaxes = () => {
+    if (order?.taxes?.length === 0) {
+      return order.tax_type === 1 ? order?.summary?.tax ?? 0 : 0
+    } else {
+      return order?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
+  const getIncludedTaxesDiscounts = () => {
+    return order?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
+  }
+
   useEffect(() => {
     if (!actionStatus?.error) return
     if (Object.keys(actionStatus.error).length > 0) {
@@ -66,12 +80,10 @@ export const OrderBill = (props) => {
           <tr>
             <td>{t('SUBTOTAL', 'Subtotal')}</td>
             <td>
-              {order.tax_type === 1
-                ? parsePrice(((order?.summary?.subtotal || order?.subtotal) + (order?.summary?.tax || order?.tax)) || 0, { currencyPosition: 'left' })
-                : parsePrice((order?.summary?.subtotal || order?.subtotal) || 0, { currencyPosition: 'left' })}
+              {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()))}
             </td>
           </tr>
-          {(order?.summary?.discount > 0 || order?.discount > 0) && (
+          {(order?.summary?.discount > 0 ?? order?.discount > 0) && order?.offers?.length === 0 && (
             <tr>
               {order?.offer_type === 1 ? (
                 <td>
@@ -81,31 +93,114 @@ export const OrderBill = (props) => {
               ) : (
                 <td>{t('DISCOUNT', 'Discount')}</td>
               )}
-              <td>- {parsePrice(order?.summary?.discount || order?.discount, { currencyPosition: 'left' })}</td>
+              <td>- {parsePrice(order?.summary?.discount ?? order?.discount)}</td>
             </tr>
           )}
+          {
+            order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
+              <tr key={offer.id}>
+                <td>
+                  {offer.name}
+                  {offer.rate_type === 1 && (
+                    <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                  )}
+                </td>
+                <td>
+                  - {parsePrice(offer?.summary?.discount)}
+                </td>
+              </tr>
+            ))
+          }
           {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
             <tr>
               <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
               {order?.tax_type === 1 ? (
-                <td>{parsePrice((order?.summary?.subtotal_with_discount + (order?.summary?.tax || order?.tax)) || 0)}</td>
+                <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0))}</td>
               ) : (
-                <td>{parsePrice(order?.summary?.subtotal_with_discount || 0)}</td>
+                <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0)}</td>
               )}
             </tr>
           )}
-          {order?.summary?.tax > 0 && order?.tax_type !== 1 && (
-            <tr>
-              <td>{t('TAX', 'Tax')} {`(${verifyDecimals(order?.tax, parseNumber)}%)`}</td>
-              <td>{parsePrice(order?.summary?.tax, { currencyPosition: 'left' })}</td>
-            </tr>
-          )}
-          {(order?.summary?.delivery_price > 0 || order?.deliveryFee > 0) && (
+          {
+            order?.taxes?.length === 0 && order?.tax_type === 2 && (
+              <tr>
+                <td>
+                  {t('TAX', 'Tax')}
+                  <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
+                </td>
+                <td>{parsePrice(order?.summary?.tax ?? 0)}</td>
+              </tr>
+            )
+          }
+          {
+            order?.fees?.length === 0 && (
+              <tr>
+                <td>
+                  {t('SERVICE_FEE', 'Service fee')}
+                  <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
+                </td>
+                <td>{parsePrice(order?.summary?.service_fee ?? 0)}</td>
+              </tr>
+            )
+          }
+          {
+            order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
+              <tr key={tax?.id}>
+                <td>
+                  {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                </td>
+                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
+              </tr>
+            ))
+          }
+          {
+            order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
+              <tr key={fee.id}>
+                <td>
+                  {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
+                </td>
+                <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
+              </tr>
+            ))
+          }
+          {
+            order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
+              <tr key={offer.id}>
+                <td>
+                  {offer.name}
+                  {offer.rate_type === 1 && (
+                    <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                  )}
+                </td>
+                <td>
+                  - {parsePrice(offer?.summary?.discount)}
+                </td>
+              </tr>
+            ))
+          }
+          {order?.summary?.delivery_price > 0 && (
             <tr>
               <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-              <td>{parsePrice(order?.summary?.delivery_price || order?.deliveryFee, { currencyPosition: 'left' })}</td>
+              <td>{parsePrice(order?.summary?.delivery_price)}</td>
             </tr>
           )}
+          {
+            order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
+              <tr key={offer.id}>
+                <td>
+                  {offer.name}
+                  {offer.rate_type === 1 && (
+                    <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
+                  )}
+                </td>
+                <td>
+                  - {parsePrice(offer?.summary?.discount)}
+                </td>
+              </tr>
+            ))
+          }
           {(order?.summary?.driver_tip > 0 || order?.driver_tip > 0) && (
             <tr>
               <td>
@@ -117,13 +212,7 @@ export const OrderBill = (props) => {
                     <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
                   )}
               </td>
-              <td>{parsePrice(order?.summary?.driver_tip || order?.totalDriverTip, { currencyPosition: 'left' })}</td>
-            </tr>
-          )}
-          {(order?.summary?.service_fee > 0 || order?.serviceFee > 0) && (
-            <tr>
-              <td>{t('SERVICE_FEE', 'Service Fee')} ({parseNumber(order?.service_fee)}%)</td>
-              <td>{parsePrice(order?.summary?.service_fee || order?.serviceFee, { currencyPosition: 'left' })}</td>
+              <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip)}</td>
             </tr>
           )}
         </tbody>
@@ -154,6 +243,20 @@ export const OrderBill = (props) => {
                 <td>-{parsePrice(event?.amount)}</td>
               </tr>
             ))}
+          </tbody>
+        </table>
+      )}
+      {order?.delivery_option && (
+        <table className='delivery_option'>
+          <thead>
+            <tr>
+              <th colSpan='2'>{t('DELIVERY_PREFERENCE', 'Delivery Preference')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{order?.delivery_option?.name}</td>
+            </tr>
           </tbody>
         </table>
       )}

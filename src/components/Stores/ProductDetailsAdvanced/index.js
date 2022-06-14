@@ -230,7 +230,7 @@ const ProductDetailsAdvancedUI = (props) => {
       })
     }
     if (formState?.changes?.minimum_per_order && formState?.changes?.maximum_per_order && !(formState?.changes?.maximum_per_order === null || formState?.changes?.maximum_per_order === '0')) {
-      if (!(formState?.changes?.minimum_per_order < formState?.changes?.maximum_per_order)) {
+      if ((Number(formState?.changes?.minimum_per_order) >= Number(formState?.changes?.maximum_per_order))) {
         valid = false
         setAlertState({
           open: true,
@@ -238,7 +238,6 @@ const ProductDetailsAdvancedUI = (props) => {
         })
       }
     }
-
     return valid
   }
 

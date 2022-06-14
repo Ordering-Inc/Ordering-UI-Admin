@@ -134,6 +134,12 @@ import posTerminal from './template/assets/images/icons/pos-terminal.svg'
 import apple from './template/assets/images/icons/apple.svg'
 import android from './template/assets/images/icons/android.svg'
 
+/**
+ * sounds
+ */
+ import notificationOgg from './template/assets/sounds/notification.ogg'
+ import notificationMp3 from './template/assets/sounds/notification.mp3'
+ 
 if (!(window?.location?.hostname === 'localhost')) {
   Sentry.init({
     environment: process.env.NODE_ENV,
@@ -276,7 +282,10 @@ theme.images = {
     businessTutorial2: businessTutorial2
   }
 }
-
+theme.sounds = {
+  notificationMp3,
+  notificationOgg
+}
 theme.files = {
   exampleCSV
 }

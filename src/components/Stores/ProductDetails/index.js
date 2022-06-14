@@ -32,7 +32,8 @@ const ProductDetailsUI = (props) => {
     handleChangeInput,
     handleUpdateClick,
     handleChangeFormState,
-    handleSuccessUpdate
+    handleSuccessUpdate,
+    handleChangeRibbon
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -132,6 +133,7 @@ const ProductDetailsUI = (props) => {
               formState={formState}
               handlechangeImage={handlechangeImage}
               handleChangeFormState={handleChangeFormState}
+              handleChangeRibbon={handleChangeRibbon}
               handleChangeInput={handleChangeInput}
               handleUpdateClick={handleUpdateClick}
               isExtendExtraOpen={isExtendExtraOpen}

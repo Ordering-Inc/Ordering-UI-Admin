@@ -203,7 +203,7 @@ export const EnterprisePromotionList = (props) => {
                               src={theme.images.icons?.sixDots}
                               alt='six dots'
                               draggable
-                              onDragStart={e => handleDragStart(e, promotion)}
+                              onDragStart={e => handleDragStart?.(e, promotion)}
                             />
                           </DragImageWrapper>
                           <WrapperImage>

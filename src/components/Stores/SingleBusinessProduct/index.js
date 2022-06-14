@@ -203,7 +203,7 @@ const SingleBusinessProductUI = (props) => {
                           src={theme.images.icons?.sixDots}
                           alt='six dots'
                           draggable
-                          onDragStart={e => handleDragStart(e, product.id)}
+                          onDragStart={e => handleDragStart?.(e, product.id)}
                         />
                       </DragImageWrapper>
                       <BusinessGeneralInfo>
