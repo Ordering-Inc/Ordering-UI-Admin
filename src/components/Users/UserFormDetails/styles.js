@@ -152,3 +152,22 @@ export const CalendarWrapper = styled.div`
   width: 100%;
   margin-bottom: 20px;
 `
+
+export const WrapperUserTypeSelector = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+
+  div.select {
+    border: none;
+    background-color: ${props => props.theme.colors.secundary};
+    > div:first-child {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+
+  > div {
+    width: 100%;
+    color: ${props => props.theme.colors.secundaryContrast};
+  }
+`
