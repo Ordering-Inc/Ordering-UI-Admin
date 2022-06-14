@@ -173,7 +173,7 @@ export const BusinessPlaceGroupUI = (props) => {
           />
           <HideSubmitBtn type='submit' ref={buttonRef} />
         </Content>
-        {placeList?.loading && (
+        {placeGroup && placeList?.loading && (
           <OptionList>
             {
               [...Array(5).keys()].map(i => (
@@ -190,7 +190,7 @@ export const BusinessPlaceGroupUI = (props) => {
             }
           </OptionList>
         )}
-        {!placeList?.loading && (
+        {placeGroup && !placeList?.loading && (
           <OptionList>
             {placeList?.places?.length > 0 && (
               <TableHead>
