@@ -128,7 +128,7 @@ export const SettingsListUI = (props) => {
                         config.type === 1 && (
                           <FormGroupText className='form-group'>
                             <label>{config?.name}</label>
-                            <Description>{config?.description}</Description>
+                            {config?.description && <Description>{config?.description}</Description>}
                             <input
                               type='text'
                               defaultValue={config?.value}
@@ -196,7 +196,7 @@ export const SettingsListUI = (props) => {
                           config.key === 'driver_tip_options' ? (
                             <FormGroupText className='form-group'>
                               <label>{config?.name}</label>
-                              <Description>{config?.description}</Description>
+                              {config?.description && <Description>{config?.description}</Description>}
                               <input
                                 type='text'
                                 defaultValue={formatArray(config?.value)}
