@@ -8,7 +8,8 @@ import { Alert } from '../../Shared'
 import {
   ForgotPasswordForm as ForgotPasswordController,
   useLanguage,
-  useApi
+  useApi,
+  ReCaptcha
 } from 'ordering-components-admin'
 import {
   ForgotPasswordContainer,
@@ -17,7 +18,8 @@ import {
   FormInput,
   TitleFormSide,
   RedirectLink,
-  InputWithIcon
+  InputWithIcon,
+  ReCAPTCHAWrapper
 } from './styles'
 
 import { Button, Input } from '../../../styles'
@@ -30,7 +32,9 @@ const ForgotPasswordUI = (props) => {
     formState,
     formData,
     elementLinkToLogin,
-    isPopup
+    isPopup,
+    isReCaptchaEnable,
+    handleReCaptcha
   } = props
 
   const { handleSubmit, register, errors } = useForm()
@@ -41,7 +45,6 @@ const ForgotPasswordUI = (props) => {
 
   const [configFile, setConfigFile] = useContext(ConfigFileContext)
   const [submitted, setSubmitted] = useState(false)
-  const [projectName, setProjectName] = useState(null)
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -70,16 +73,26 @@ const ForgotPasswordUI = (props) => {
         ...alertState,
         open: true,
         title: t('LINK_SEND_SUCCESSFULLY', 'Link Sent Successfully'),
-        content: `${t('SUCCESS_SEND_FORGOT_PASSWORD', 'Your link has been sent to the email')}: ${formData.email}`
+        content: t('IF_ACCOUNT_EXIST_EMAIL_SEND_PASSWORD', 'If an account exists with this email a password will be sent')
       })
     }
   }, [formState.loading])
 
+  useEffect(() => {
+    if (!formState.loading && formState.result?.error) {
+      setAlertState({
+        open: true,
+        content: formState.result?.result || [t('ERROR', 'Error')]
+      })
+      setSubmitted(false)
+    }
+  }, [formState])
+
   const onSubmit = () => {
-    const _configFile = { ...configFile }
-    _configFile.project = projectName
-    setConfigFile(_configFile)
-    localStorage.setItem('project', projectName)
+    // const _configFile = { ...configFile }
+    // _configFile.project = projectName
+    // setConfigFile(_configFile)
+    // localStorage.setItem('project', projectName)
     setSubmitted(true)
   }
 
@@ -90,15 +103,29 @@ const ForgotPasswordUI = (props) => {
       content: []
     })
   }
+
+  let timeout = null
   const hanldeChangeProject = (e) => {
+    e.persist()
+    clearTimeout(timeout)
     setSubmitted(false)
-    setProjectName(e.target.value)
+    timeout = setTimeout(function () {
+      setConfigFile({ ...configFile, project: e.target.value })
+    }, 750)
   }
+
   useEffect(() => {
     if (ordering.project === '' || !submitted) return
     setAlertState({ ...alertState, success: true })
     handleButtonForgotPasswordClick()
   }, [ordering, submitted])
+
+  useEffect(() => {
+    setConfigFile({
+      ...configFile,
+      project: window.localStorage.getItem('project') || null
+    })
+  }, [])
 
   return (
     <ForgotPasswordContainer isPopup={isPopup}>
@@ -151,6 +178,13 @@ const ForgotPasswordUI = (props) => {
             />
             <HiOutlineMail />
           </InputWithIcon>
+          {isReCaptchaEnable && (
+            <ReCAPTCHAWrapper>
+              <ReCaptcha
+                handleReCaptcha={handleReCaptcha}
+              />
+            </ReCAPTCHAWrapper>
+          )}
           <Button
             borderRadius='8px'
             color='primary'
@@ -172,7 +206,7 @@ const ForgotPasswordUI = (props) => {
         </FormInput>
       </FormSide>
       <Alert
-        title={alertState.title}
+        title={alertState.title || t('TITLE_FORGOT_PASSWORD', 'Forgot your password?')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
