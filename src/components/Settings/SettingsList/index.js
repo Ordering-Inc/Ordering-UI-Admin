@@ -5,6 +5,7 @@ import { Alert, NotFoundSource } from '../../Shared'
 import { Button } from '../../../styles'
 import { SettingsSelectUI } from '../SettingsSelectUI'
 import { SettingsCountryFilter } from '../SettingsCountryFilter'
+import { SettingsImage } from '../SettingsImage'
 import {
   SettingsListContainer,
   GeneralContainer,
@@ -27,7 +28,8 @@ export const SettingsListUI = (props) => {
     onCloseSettingsList,
     handleCheckBoxChange,
     handleInputChange,
-    handleClickUpdate
+    handleClickUpdate,
+    saveConfig
   } = props
 
   const [, t] = useLanguage()
@@ -224,6 +226,14 @@ export const SettingsListUI = (props) => {
                               {!config?.options && <OptionsError>{t('NO_OPTIONS_VALUE', 'There is no options value')}</OptionsError>}
                             </CheckBoxWrapper>
                           )
+                        )
+                      }
+                      {
+                        config.type === 5 && (
+                          <SettingsImage
+                            config={config}
+                            saveConfig={saveConfig}
+                          />
                         )
                       }
                     </div>
