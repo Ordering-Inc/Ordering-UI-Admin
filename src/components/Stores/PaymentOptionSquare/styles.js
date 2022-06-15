@@ -131,3 +131,17 @@ export const FormController = styled.div`
     margin-bottom: 10px;
   }
 `
+export const SandboxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px 0 25px;
+
+  > span {
+    font-size: 14px;
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
+  }
+`

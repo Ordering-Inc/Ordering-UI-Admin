@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, PaymentOptionSquare as PaymentOptionSquareController } from 'ordering-components-admin'
-import { Button, IconButton, Input } from '../../../styles'
+import { Button, IconButton, Input, Checkbox } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { ThreeDots, XLg } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { Confirm } from '../../Shared'
+import { Confirm, Alert } from '../../Shared'
 import { Tab, TabsContainer } from '../BusinessMenu/styles'
 import { TabOption, TabOptionName } from '../PaymentOptionStripeDirect/styles'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
@@ -20,7 +20,8 @@ import {
   SquareInfoContainer,
   SquareButtonWrapper,
   FormContainer,
-  FormController
+  FormController,
+  SandboxWrapper
 } from './styles'
 
 const PaymentOptionSquareUI = (props) => {
@@ -33,20 +34,20 @@ const PaymentOptionSquareUI = (props) => {
     changesState,
     orderTypes,
     handleChangeBusinessPaymentState,
-
     actionState,
-    squareUrlState,
     handleConnectSquare,
     squareData,
     handleSavePaymethod,
     handleChangeDataInput,
-    handleChangeSanboxDataInput
+    handleChangeSanboxDataInput,
+    handleChangeSandbox
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [paymentTabs, setPaymentTabs] = useState(0)
 
@@ -99,6 +100,14 @@ const PaymentOptionSquareUI = (props) => {
     if (!open) return
     actionSidebar(true)
   }, [open])
+
+  useEffect(() => {
+    if (!actionState?.error) return
+    setAlertState({
+      open: true,
+      content: actionState?.error
+    })
+  }, [actionState?.error])
 
   return (
     <Container id='payment_method_square'>
@@ -156,13 +165,19 @@ const PaymentOptionSquareUI = (props) => {
               borderRadius='8px'
               color='primary'
               onClick={handleConnectSquare}
-              disabled={squareUrlState.loading}
             >
               <SiSquare />
               {t('CONNECT_WITH_SQUARE', 'Connect with Square')}
             </Button>
           </SquareButtonWrapper>
           <FormContainer>
+            <SandboxWrapper>
+              <Checkbox
+                defaultChecked={squareData?.sandbox ?? businessPaymethod?.sandbox ?? false}
+                onChange={e => handleChangeSandbox(e.target.checked)}
+              />
+              <span>{t('SANDBOX', 'Sandbox')}</span>
+            </SandboxWrapper>
             <FormController>
               <label>{t('APPLICATION_ID', 'Application Id')}</label>
               <Input
@@ -267,6 +282,15 @@ const PaymentOptionSquareUI = (props) => {
         onClose={() => setConfirm({ ...confirm, open: false })}
         onCancel={() => setConfirm({ ...confirm, open: false })}
         onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
         closeOnBackdrop={false}
       />
     </Container>
