@@ -21,6 +21,8 @@ var _SettingsSelectUI = require("../SettingsSelectUI");
 
 var _SettingsCountryFilter = require("../SettingsCountryFilter");
 
+var _SettingsImage = require("../SettingsImage");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -66,7 +68,8 @@ var SettingsListUI = function SettingsListUI(props) {
       onCloseSettingsList = props.onCloseSettingsList,
       handleCheckBoxChange = props.handleCheckBoxChange,
       handleInputChange = props.handleInputChange,
-      handleClickUpdate = props.handleClickUpdate;
+      handleClickUpdate = props.handleClickUpdate,
+      saveConfig = props.saveConfig;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -251,7 +254,10 @@ var SettingsListUI = function SettingsListUI(props) {
           return handleCheckBoxChange(e, false, config === null || config === void 0 ? void 0 : config.value);
         }
       }), item.text)));
-    })), !(config !== null && config !== void 0 && config.options) && /*#__PURE__*/_react.default.createElement(_styles2.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value')))));
+    })), !(config !== null && config !== void 0 && config.options) && /*#__PURE__*/_react.default.createElement(_styles2.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value')))), config.type === 5 && /*#__PURE__*/_react.default.createElement(_SettingsImage.SettingsImage, {
+      config: config,
+      saveConfig: saveConfig
+    }));
   }))), !settingsState.loading && settingsState.error && /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
     content: t('NOT_FOUND_CONFIG', 'Sorry, we couldn\'t find the config.'),
     btnTitle: t('PROFILE_CATEGORY_REDIRECT', 'Go to Category Description'),
