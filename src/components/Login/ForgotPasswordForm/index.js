@@ -105,7 +105,7 @@ const ForgotPasswordUI = (props) => {
   }
 
   let timeout = null
-  const hanldeChangeProject = (e) => {
+  const handleChangeProject = (e) => {
     e.persist()
     clearTimeout(timeout)
     setSubmitted(false)
@@ -154,7 +154,7 @@ const ForgotPasswordUI = (props) => {
                   'The project field is required'
                 ).replace('_attribute_', t('PROJECT', 'Project'))
               })}
-              onChange={(e) => hanldeChangeProject(e)}
+              onChange={(e) => handleChangeProject(e)}
               autoComplete='off'
             />
             <MdExitToApp />
