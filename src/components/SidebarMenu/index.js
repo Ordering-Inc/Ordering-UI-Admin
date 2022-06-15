@@ -20,7 +20,7 @@ import {
   CloudDownload
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { useEvent, useLanguage, useSession } from 'ordering-components-admin'
+import { useEvent, useLanguage, useSession, useConfig } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
@@ -45,6 +45,7 @@ export const SidebarMenu = (props) => {
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [sessionState] = useSession()
+  const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
 
@@ -301,15 +302,10 @@ export const SidebarMenu = (props) => {
         <SidebarInnerContainer
           className='d-flex flex-column'
         >
-          <SidebarHeader
-            className='p-1'
-          >
+          <SidebarHeader>
             <Image
-              src={theme?.images?.logos?.logotype}
-              fluid
+              src={configs?.dashboard_logo?.value || theme?.images?.logos?.logotype}
               onClick={() => handleGoToPage({ page: 'home' })}
-              width='150px'
-              height='45px'
             />
             <BurgerButton
               onClick={() => handleMenuCollapse(true)}
