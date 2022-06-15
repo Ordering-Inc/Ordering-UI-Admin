@@ -73,15 +73,16 @@ export const SidebarInnerContainer = styled.div`
 `
 
 export const SidebarHeader = styled.div`
-  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  ${props => props.theme?.rtl ? css`
-    margin-right: 0.75rem;
-  ` : css`
-    margin-left: 0.75rem;
-  `}
+  padding: 12px;
+
+  > img {
+    max-width: 150px;
+    max-height: 100px;
+    object-fit: contain;
+  }
 `
 
 export const BurgerButton = styled.button`
@@ -119,7 +120,6 @@ export const SidebarMainContent = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
-  height: calc(100% - 80px);
 `
 
 export const SidebarContent = styled.div`
