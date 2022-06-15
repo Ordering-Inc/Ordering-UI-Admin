@@ -1,10 +1,14 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  height: calc(100% - 100px);
   overflow: auto;
   padding-bottom: 20px;
   padding: 0 5px;
+
+  ${({ isCalcHeight }) => isCalcHeight && css`
+    height: calc(100% - 100px);
+  `}
+
   > button {
     height: 44px;
     margin: 40px 0;

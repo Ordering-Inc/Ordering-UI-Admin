@@ -3,7 +3,6 @@ import { useLanguage, BusinessPlace as BusinessPlaceController } from 'ordering-
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { XLg, ThreeDots } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, IconButton, Input } from '../../../styles'
 import { useForm } from 'react-hook-form'
 import { Alert } from '../../Shared'
@@ -20,7 +19,6 @@ import {
 
 export const BusinessPlaceUI = (props) => {
   const {
-    open,
     onClose,
     place,
     formState,
@@ -32,23 +30,11 @@ export const BusinessPlaceUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const { width } = useWindowSize()
   const formMethods = useForm()
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const buttonRef = useRef(null)
-
-  const actionSidebar = (value) => {
-    if (!value) {
-      props.onClose()
-    }
-    setIsMenuOpen(value)
-    document.getElementById('business_place').style.width = value
-      ? width > 1000 ? '500px' : '100%'
-      : '0'
-  }
 
   const closeAlert = () => {
     setAlertState({
@@ -63,21 +49,6 @@ export const BusinessPlaceUI = (props) => {
   }
 
   useEffect(() => {
-    if (isMenuOpen) {
-      if (width < 1000) {
-        document.getElementById('business_place').style.width = '100%'
-      } else {
-        document.getElementById('business_place').style.width = '500px'
-      }
-    }
-  }, [width])
-
-  useEffect(() => {
-    if (!open) return
-    actionSidebar(true)
-  }, [open])
-
-  useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       setAlertState({
         open: true,
@@ -88,9 +59,9 @@ export const BusinessPlaceUI = (props) => {
 
   return (
     <>
-      <Container id='business_place'>
+      <Container>
         <Header>
-          <h1>{place ? place?.name : t('NEW_PLACE', 'New place')}</h1>
+          <h1>{place ? place?.name : t('NEW_OPTION', 'New option')}</h1>
           <ActionBlock>
             {place && (
               <ActionSelectorWrapper>

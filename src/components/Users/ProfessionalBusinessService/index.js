@@ -92,7 +92,7 @@ const ProfessionalBusinessServiceUI = (props) => {
   const handleClickItem = (e, businessId) => {
     if (e.target.closest('.check-box')) return
     if (!businessIds?.includes(businessId)) {
-      setAlertState({ open: true, content: t('DISABLED_BUSINESS', 'Disabled business') })
+      setAlertState({ open: true, content: t('YOU_NEED_TO_SELECT_BUSINESS', 'You need to select a business') })
       return
     }
     handleOpenService(businessId)

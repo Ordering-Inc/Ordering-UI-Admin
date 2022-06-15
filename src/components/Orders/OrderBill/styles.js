@@ -42,6 +42,16 @@ export const OrderBillContainer = styled.div`
     margin-top: 20px;
     align-items: center;
   }
+  table.delivery_option {
+    margin-top: 15px;
+    thead {
+      th {
+        font-weight: 600;
+        font-size: 16px;
+        padding-bottom: 5px;
+      }
+    }
+  }
 `
 export const RefundButtonWrapper = styled.div`
   width: 100%;

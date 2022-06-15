@@ -6,6 +6,7 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 import { SearchBar, Pagination, Modal, SideBar, Alert } from '../../Shared'
 import { Switch } from '../../../styles'
 import { ChevronRight, Square, CheckSquareFill } from 'react-bootstrap-icons'
+import { PointsWalletBusinessDetail } from '../PointsWalletBusinessDetail'
 import {
   Container,
   SearchWrapper,
@@ -20,7 +21,6 @@ import {
   ModifiedWrapper,
   CheckBoxInnerWrapper
 } from './styles'
-import { PointsWalletBusinessDetail } from '../PointsWalletBusinessDetail'
 
 const PointsWalletBusinessListUI = (props) => {
   const {

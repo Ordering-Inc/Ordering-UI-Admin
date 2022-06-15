@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useLanguage, PointsWalletLevels as PointsWalletLevelsController } from 'ordering-components-admin'
-import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
-import { Trash } from 'react-bootstrap-icons'
+import { useLanguage, DragAndDrop, ExamineClick, PointsWalletLevels as PointsWalletLevelsController } from 'ordering-components-admin'
 import { IconButton, Input } from '../../../styles'
 import { useForm } from 'react-hook-form'
-import { Alert } from '../../Shared'
+import { Alert, ImageCrop, Modal } from '../../Shared'
+import { bytesConverter } from '../../../utils'
+import BiImage from '@meronex/icons/bi/BiImage'
+import { PlusSquare } from 'react-bootstrap-icons'
 
 import {
   Container,
@@ -15,20 +16,21 @@ import {
   ButtonWrapper,
   PointsWrapper,
   AddSubOption,
-  LevelContainer
+  LevelContainer,
+  OriginalImageWrapper,
+  ImageWrapper
 } from './styles'
-import Skeleton from 'react-loading-skeleton'
+import { SingleLoyaltyLevel } from '../SingleLoyaltyLevel'
 
 const PointsWalletLevelsUI = (props) => {
   const {
     formState,
-    editFormState,
     handleUpdateAddClick,
     handleChangeInput,
     levelList,
-    handleUpdateDeleteClick,
-    handleUpdateLevel,
-    handleUpdateBtnClick
+    handleChangeItem,
+    handleDeleteLevelList,
+    handleUpdateLevelList
   } = props
 
   const [, t] = useLanguage()
@@ -36,13 +38,20 @@ const PointsWalletLevelsUI = (props) => {
   const { handleSubmit } = useForm()
   const [addSubOption, setAddSubOption] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const containerRef = useRef(null)
+  const imageRef = useRef(null)
 
   const onSubmit = () => {
     if (Object.keys(formState?.changes).length > 0) {
       handleUpdateAddClick()
     }
+  }
+
+  const handleChangePhoto = (croppedImg) => {
+    handleChangeItem({ [cropState?.name]: croppedImg })
+    setCropState({ name: null, data: null, open: false })
   }
 
   const closeAlert = () => {
@@ -52,6 +61,38 @@ const PointsWalletLevelsUI = (props) => {
     })
   }
 
+  const handleClickImage = () => {
+    imageRef.current.click()
+  }
+
+  const handleFiles = (files) => {
+    if (files.length === 1) {
+      const type = files[0].type.split('/')[0]
+      if (type !== 'image') {
+        setAlertState({
+          open: true,
+          content: [t('ERROR_ONLY_IMAGES', 'Only images can be accepted')]
+        })
+        return
+      }
+
+      if (bytesConverter(files[0]?.size) > 2048) {
+        setAlertState({
+          open: true,
+          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+        })
+        return
+      }
+      const reader = new window.FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        setCropState({ name: 'image', data: reader.result, open: true })
+        handleChangeItem({ image: reader.result })
+      }
+      reader.onerror = error => console.log(error)
+    }
+  }
+
   useEffect(() => {
     if (!formState.error) return
     setAlertState({
@@ -59,14 +100,6 @@ const PointsWalletLevelsUI = (props) => {
       content: formState.error
     })
   }, [formState?.error])
-
-  useEffect(() => {
-    if (!editFormState.error) return
-    setAlertState({
-      open: true,
-      content: editFormState.error
-    })
-  }, [editFormState?.error])
 
   const closeLevelAddForm = (e) => {
     const outsideDropdown = !containerRef.current?.contains(e.target)
@@ -87,6 +120,9 @@ const PointsWalletLevelsUI = (props) => {
       <Title>{t('LEVELS', 'Levels')}</Title>
       <LevelContainer>
         <LevelWrapper isTitle>
+          <OriginalImageWrapper>
+            <span>{t('IMAGE', 'Image')}</span>
+          </OriginalImageWrapper>
           <LevelNameWrapper>
             <span>{t('NAME', 'Name')}</span>
           </LevelNameWrapper>
@@ -102,95 +138,42 @@ const PointsWalletLevelsUI = (props) => {
         {levelList?.loading ? (
           <>
             {[...Array(5).keys()].map(i => (
-              <LevelWrapper key={i}>
-                <LevelNameWrapper>
-                  <Skeleton height={40} />
-                </LevelNameWrapper>
-                <LastWrapper>
-                  <Skeleton height={40} />
-                </LastWrapper>
-                <PointsWrapper>
-                  <Skeleton height={40} />
-                </PointsWrapper>
-                <ButtonWrapper>
-                  <Skeleton width={25} height={25} />
-                </ButtonWrapper>
-              </LevelWrapper>
+              <SingleLoyaltyLevel key={i} isSkeleton />
             ))}
           </>
         ) : (
           <>
             {levelList?.levels?.map((level, i) => (
-              <LevelWrapper key={i}>
-                <LevelNameWrapper>
-                  <Input
-                    value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.name !== 'undefined'))
-                      ? editFormState?.changes?.name
-                      : level.name ?? ''}
-                    name='name'
-                    autoComplete='off'
-                    placeholder={t('NAME', 'name')}
-                    onChange={(e) => handleUpdateLevel(e, level?.id)}
-                  />
-                </LevelNameWrapper>
-                <LastWrapper>
-                  <Input
-                    value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.accumulation_rate !== 'undefined'))
-                      ? editFormState?.changes?.accumulation_rate
-                      : level.accumulation_rate ?? ''}
-                    placeholder='0 days'
-                    name='accumulation_rate'
-                    autoComplete='off'
-                    onChange={(e) => handleUpdateLevel(e, level?.id)}
-                    onKeyPress={(e) => {
-                      if (!/^[0-9.]$/.test(e.key)) {
-                        e.preventDefault()
-                      }
-                    }}
-                  />
-                </LastWrapper>
-                <PointsWrapper>
-                  <Input
-                    value={(editFormState?.changes?.id === level.id && (typeof editFormState?.changes?.minimum_points !== 'undefined'))
-                      ? editFormState?.changes?.minimum_points
-                      : level.minimum_points ?? ''}
-                    placeholder='0 points'
-                    name='minimum_points'
-                    autoComplete='off'
-                    onChange={(e) => handleUpdateLevel(e, level?.id)}
-                    onKeyPress={(e) => {
-                      if (!/^[0-9.]$/.test(e.key)) {
-                        e.preventDefault()
-                      }
-                    }}
-                  />
-                </PointsWrapper>
-                <ButtonWrapper>
-                  {editFormState?.changes?.id === level.id ? (
-                    <IconButton
-                      color='primary'
-                      type='button'
-                      onClick={() => handleUpdateBtnClick()}
-                    >
-                      <BsPlusSquare />
-                    </IconButton>
-                  ) : (
-                    <IconButton
-                      color='black'
-                      type='button'
-                      onClick={() => handleUpdateDeleteClick(level.id)}
-                    >
-                      <Trash />
-                    </IconButton>
-                  )}
-                </ButtonWrapper>
-              </LevelWrapper>
+              <SingleLoyaltyLevel
+                key={i}
+                level={level}
+                handleDeleteLevelList={handleDeleteLevelList}
+                handleUpdateLevelList={handleUpdateLevelList}
+              />
             ))}
           </>
         )}
 
         {addSubOption ? (
           <LevelWrapper onSubmit={handleSubmit(onSubmit)} ref={containerRef}>
+            <ImageWrapper onClick={() => handleClickImage()}>
+              <ExamineClick
+                onFiles={files => handleFiles(files)}
+                childRef={(e) => { imageRef.current = e }}
+                accept='image/png, image/jpeg, image/jpg'
+                disabled={formState.loading}
+              >
+                <DragAndDrop
+                  onDrop={dataTransfer => handleFiles(dataTransfer.files)}
+                  accept='image/png, image/jpeg, image/jpg'
+                  disabled={formState.loading}
+                >
+                  {formState?.changes?.image
+                    ? <img src={formState?.changes?.image} alt='header image' loading='lazy' />
+                    : <BiImage />}
+                </DragAndDrop>
+              </ExamineClick>
+            </ImageWrapper>
             <LevelNameWrapper>
               <Input
                 name='name'
@@ -235,7 +218,7 @@ const PointsWalletLevelsUI = (props) => {
                 color='primary'
                 type='submit'
               >
-                <BsPlusSquare />
+                <PlusSquare />
               </IconButton>
             </ButtonWrapper>
           </LevelWrapper>
@@ -257,6 +240,19 @@ const PointsWalletLevelsUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        title={t('IMAGE_CROP', 'Image crop')}
+        open={cropState?.open}
+        onClose={() => setCropState({ ...cropState, open: false })}
+      >
+        <ImageCrop
+          photo={cropState?.data}
+          handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
     </Container>
   )
 }
