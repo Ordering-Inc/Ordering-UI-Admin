@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
-import { bytesConverter, shape } from '../../../utils'
+import { bytesConverter, shape, ribbonValues } from '../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Button, Input, Switch } from '../../../styles'
 import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
@@ -112,6 +112,15 @@ const BusinessInformationUI = (props) => {
     setCropState({ name: null, data: null, open: false })
   }
 
+  const handleChangeEnable = (value) => {
+    if (!businessState?.business?.ribbon && !value) {
+      const ribbonChanges = { ...ribbonValues }
+      handleChangeSwtich('ribbon', ribbonChanges)
+      return
+    }
+    handleChangeRibbon({ enabled: value })
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -201,11 +210,7 @@ const BusinessInformationUI = (props) => {
           <Input
             name='name'
             placeholder={t('Name', 'name')}
-            defaultValue={
-              formState?.result?.result
-                ? formState?.result?.result?.name
-                : formState?.changes?.name ?? businessState?.business?.name
-            }
+            defaultValue={formState?.changes?.name ?? businessState?.business?.name}
             onChange={handleChangeInput}
             ref={formMethods.register({
               required: t('BUSINESS_NAME_REQUIRED', 'Business name is required')
@@ -219,11 +224,7 @@ const BusinessInformationUI = (props) => {
           <Input
             name='description'
             placeholder={t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description')}
-            defaultValue={
-              formState?.result?.result
-                ? formState?.result?.result?.description
-                : formState?.changes?.description ?? businessState?.business?.description
-            }
+            defaultValue={formState?.changes?.description ?? businessState?.business?.description}
             onChange={handleChangeInput}
             disabled={formState.loading}
             autoComplete='off'
@@ -235,11 +236,7 @@ const BusinessInformationUI = (props) => {
             <Input
               name='phone'
               placeholder='(000) 0000 000'
-              defaultValue={
-                formState?.result?.result
-                  ? formState?.result?.result?.phone
-                  : formState?.changes?.phone ?? businessState?.business?.phone
-              }
+              defaultValue={formState?.changes?.phone ?? businessState?.business?.phone}
               onChange={handleChangeInput}
               disabled={formState.loading}
               autoComplete='off'
@@ -250,11 +247,7 @@ const BusinessInformationUI = (props) => {
             <Input
               name='cellphone'
               placeholder='(000) 0000 000'
-              defaultValue={
-                formState?.result?.result
-                  ? formState?.result?.result?.cellphone
-                  : formState?.changes?.cellphone ?? businessState?.business?.cellphone
-              }
+              defaultValue={formState?.changes?.cellphone ?? businessState?.business?.cellphone}
               onChange={handleChangeInput}
               disabled={formState.loading}
               autoComplete='off'
@@ -272,7 +265,7 @@ const BusinessInformationUI = (props) => {
           <span>{t('RIBBON', 'Ribbon')}</span>
           <Switch
             defaultChecked={businessState?.business?.ribbon?.enabled || false}
-            onChange={val => handleChangeRibbon({ enabled: val })}
+            onChange={val => handleChangeEnable(val)}
           />
         </RibbonSwitchWrapper>
         {
