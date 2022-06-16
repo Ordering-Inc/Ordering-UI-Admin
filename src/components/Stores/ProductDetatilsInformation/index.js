@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLanguage, DragAndDrop, ExamineClick, useUtils } from 'ordering-components-admin'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
-import { bytesConverter, shape } from '../../../utils'
+import { bytesConverter, shape, ribbonValues } from '../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Button, Input, TextArea, Switch } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
@@ -131,6 +131,15 @@ export const ProductDetatilsInformation = (props) => {
   const handleChangePhoto = (croppedImg) => {
     handleChangeFormState({ [cropState?.name]: croppedImg })
     setCropState({ name: null, data: null, open: false })
+  }
+
+  const handleChangeEnable = (value) => {
+    if (!product?.ribbon && !value) {
+      const ribbonChanges = { ...ribbonValues }
+      handleChangeFormState({ ribbon: ribbonChanges })
+      return
+    }
+    handleChangeRibbon({ enabled: value })
   }
 
   useEffect(() => {
@@ -359,7 +368,7 @@ export const ProductDetatilsInformation = (props) => {
           <span>{t('RIBBON', 'Ribbon')}</span>
           <Switch
             defaultChecked={product?.ribbon?.enabled || false}
-            onChange={val => handleChangeRibbon({ enabled: val })}
+            onChange={val => handleChangeEnable(val)}
           />
         </InventoryWrapper>
         {

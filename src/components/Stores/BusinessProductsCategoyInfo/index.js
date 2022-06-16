@@ -6,7 +6,7 @@ import {
   useConfig
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { bytesConverter, shape } from '../../../utils'
+import { bytesConverter, shape, ribbonValues } from '../../../utils'
 import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
 import { Alert, Confirm, Modal, ImageCrop, ColorPicker } from '../../Shared'
 import { Button, DefaultSelect, Input, Switch, TextArea } from '../../../styles'
@@ -109,7 +109,7 @@ export const BusinessProductsCategoyInfo = (props) => {
   }
 
   const onSubmit = () => {
-    if ((typeof (formState?.changes?.ribbon?.enabled) !== 'undefined') && formState?.changes?.ribbon?.text === '') {
+    if ((typeof (formState?.changes?.ribbon?.enabled) !== 'undefined') && formState?.changes?.ribbon?.enabled && formState?.changes?.ribbon?.text === '') {
       setAlertState({
         open: true,
         content: t(
@@ -120,6 +120,15 @@ export const BusinessProductsCategoyInfo = (props) => {
       return
     }
     handleUpdateClick && handleUpdateClick()
+  }
+
+  const handleChangeEnable = (value) => {
+    if (!category?.ribbon && !value) {
+      const ribbonChanges = { ...ribbonValues }
+      handleChangeItem({ ribbon: ribbonChanges })
+      return
+    }
+    handleChangeRibbon({ enabled: value })
   }
 
   const closeAlert = () => {
@@ -311,7 +320,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         <span>{t('RIBBON', 'Ribbon')}</span>
         <Switch
           defaultChecked={formState?.changes?.ribbon?.enabled || false}
-          onChange={val => handleChangeRibbon({ enabled: val })}
+          onChange={val => handleChangeEnable(val)}
         />
       </SwitchWrapper>
       {formState?.changes?.ribbon?.enabled && (
