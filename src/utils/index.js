@@ -244,6 +244,16 @@ export const shape = {
 }
 
 /**
+ * default value for bitton
+ */
+export const ribbonValues = {
+  color: '#0083FE',
+  text: 'ribbon',
+  shape: 'rectangle',
+  enabled: false
+}
+
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary

@@ -3,16 +3,17 @@ import styled, { css } from 'styled-components'
 export const FormWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 35px 20px;
   position: relative;
+  overflow-x: hidden;
 `
 
 export const Header = styled.div`
   display: inline-flex;
   color: ${props => props.theme.colors.headingColor};
-  font-size: 24px;
+  font-size: 20px;
   margin: 0px;
-  font-weight: 600;
+  font-weight: 700;
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;
   ` : css`
@@ -67,6 +68,9 @@ export const InputWrapper = styled.div`
 
 export const ActionsForm = styled.div`
   margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   > button {
     height: 42px;
     &:first-child {
@@ -91,13 +95,13 @@ export const UploadCsvInputContainer = styled.div`
     }
   }
 `
-export const CloseButtonWrapper = styled.div`
-  position: absolute;
-  top: 30px;
 
-  ${props => props.theme?.rtl ? css`
-    left: 10px;
-  ` : css`
-    right: 10px;
-  `}
+export const AdvancedOptionsButton = styled.span`
+  cursor: pointer;
+  color: ${props => props.theme.colors.primary};
+  font-size: 14px;
+  font-weight: 500;
+  &:hover {
+    text-decoration: underline;
+  }
 `

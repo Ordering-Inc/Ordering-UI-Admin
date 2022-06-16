@@ -7,7 +7,7 @@ import {
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
-import { bytesConverter, shape } from '../../../utils'
+import { bytesConverter, shape, ribbonValues } from '../../../utils'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import { Button, Switch } from '../../../styles'
@@ -56,6 +56,15 @@ const BusinessBrandGENDetailUI = (props) => {
       open: false,
       content: []
     })
+  }
+
+  const handleChangeEnable = (value) => {
+    if (!brand?.ribbon && !value) {
+      const ribbonChanges = { ...ribbonValues }
+      handleChangeItem({ ribbon: ribbonChanges })
+      return
+    }
+    handleChangeRibbon({ enabled: value })
   }
 
   const handleFiles = (files, name) => {
@@ -195,7 +204,7 @@ const BusinessBrandGENDetailUI = (props) => {
           <span>{t('RIBBON', 'Ribbon')}</span>
           <Switch
             defaultChecked={brand?.ribbon?.enabled || false}
-            onChange={val => handleChangeRibbon({ enabled: val })}
+            onChange={val => handleChangeEnable(val)}
           />
         </SwitchWrapper>
         {
