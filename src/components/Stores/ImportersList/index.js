@@ -5,7 +5,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { Switch } from '../../../styles'
 import { useTheme } from 'styled-components'
-import { NotFoundSource, Pagination } from '../../Shared'
+import { NotFoundSource } from '../../Shared'
 
 import {
   ImportListContainer,
@@ -15,36 +15,30 @@ import {
   ImpotersTable,
   UserEnableWrapper,
   WrapperUserActionSelector,
-  WrapperPagination,
-  NotFoundWrapper
+  NotFoundWrapper,
+  ImoportTbody
 } from './styles'
 
 export const ImportersList = (props) => {
   const {
     importerList,
-    getImporters,
-    paginationProps,
     createImporterJob,
     addNewImporter,
     handleDeleteImporter,
+    selectedImporter,
+    setSelectedImporter,
     handleEditImporter
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
 
+  const defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default']
+
   const handleSelectImporter = (e, importer) => {
     const isInvalid = e.target.closest('.importer_enable_control') || e.target.closest('.importer_action')
     if (isInvalid) return
+    setSelectedImporter({})
     createImporterJob(importer)
-  }
-
-  const handleChangePage = (page) => {
-    getImporters(page, 10)
-  }
-
-  const handleChangePageSize = (pageSize) => {
-    const expectedPage = Math.ceil(paginationProps.from / pageSize)
-    getImporters(expectedPage, pageSize)
   }
 
   return (
@@ -54,13 +48,13 @@ export const ImportersList = (props) => {
           <thead>
             <tr>
               <th>{t('NAME', 'Name')}</th>
-              <th colspan={2}>{t('ACTION', 'Action')}</th>
+              <th colSpan='2'>{t('ACTION', 'Action')}</th>
             </tr>
           </thead>
-          <tbody>
-            {importerList.loading ? (
-              [...Array(10).keys()].map(i => (
-                <tr key={i}>
+          {importerList.loading ? (
+            [...Array(10).keys()].map(i => (
+              <ImoportTbody key={i}>
+                <tr>
                   <td>
                     <Skeleton width='90%' height={21} className='importer-name' />
                   </td>
@@ -73,14 +67,20 @@ export const ImportersList = (props) => {
                     <Skeleton width={21} height={21} />
                   </td>
                 </tr>
-              ))
-            ) : (
-              <>
-                {importerList?.importers.length > 0 ? (
-                  <>
-                    {
-                      importerList?.importers.map(importer => (
-                        <tr key={importer?.id} onClick={(e) => handleSelectImporter(e, importer)}>
+              </ImoportTbody>
+            ))
+          ) : (
+            <>
+              {importerList?.importers.length > 0 ? (
+                <>
+                  {
+                    importerList?.importers.map(importer => (
+                      <ImoportTbody
+                        key={importer?.id}
+                        active={importer.id === selectedImporter?.id}
+                        onClick={(e) => handleSelectImporter(e, importer)}
+                      >
+                        <tr>
                           <td>
                             <span className='importer-name'>{importer?.name}</span>
                           </td>
@@ -101,44 +101,36 @@ export const ImportersList = (props) => {
                                 id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                               >
                                 <Dropdown.Item onClick={() => handleEditImporter(importer)}>{t('EDIT', 'Edit')}</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handleDeleteImporter(importer?.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
+                                {!defaultImporterSlugs.includes(importer?.slug) && (
+                                  <Dropdown.Item onClick={() => handleDeleteImporter(importer?.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
+                                )}
                               </DropdownButton>
                             </WrapperUserActionSelector>
                           </td>
                         </tr>
-                      ))
-                    }
-                  </>
-                ) : (
-                  <tr style={{ backgroundColor: '#fff !important' }}>
-                    <td colspan='2'>
+                      </ImoportTbody>
+                    ))
+                  }
+                </>
+              ) : (
+                <ImoportTbody>
+                  <tr>
+                    <td colSpan='2'>
                       <NotFoundWrapper>
                         <NotFoundSource content={t('NOT_FOUND_IMPOTERS', "Can't found importers")} />
                       </NotFoundWrapper>
                     </td>
                   </tr>
-                )}
-              </>
-
-            )}
-          </tbody>
+                </ImoportTbody>
+              )}
+            </>
+          )}
         </ImpotersTable>
       </ImportersTableWrapper>
       <ImportersBottomContainer>
         <AddNewImporterButton onClick={() => addNewImporter()}>
           {t('ADD_NEW_IMPORTER', 'Add new importer')}
         </AddNewImporterButton>
-        {importerList?.importers.length > 0 && (
-          <WrapperPagination>
-            <Pagination
-              currentPage={paginationProps.currentPage}
-              totalPages={paginationProps.totalPages}
-              handleChangePage={handleChangePage}
-              handleChangePageSize={handleChangePageSize}
-              isHidePagecontrol
-            />
-          </WrapperPagination>
-        )}
       </ImportersBottomContainer>
     </ImportListContainer>
   )

@@ -2,24 +2,25 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 export const ImportersListingContainer = styled.div`
-
+  width: 100%;
+  padding: 30px 20px;
+  overflow-x: hidden;
 `
 export const Header = styled.div`
   display: flex;
   width: 94%;
   justify-content: space-between;
   margin-right: auto;
-  margin-bottom: 60px;
+  margin-bottom: 25px;
   ${props => props.theme?.rtl && css`
     margin-right: unset;
     margin-left: auto;
  `}
 `
 export const Title = styled.div`
-  color: rgb(52, 64, 80);
-  font-size: 24px;
+  font-size: 20px;
   margin: 0px 10px 0px 0px;
-  font-weight: 600;
+  font-weight: 700;
 `
 
 export const ActionButtons = styled.div`
@@ -46,28 +47,6 @@ export const ActionButtons = styled.div`
     @media (min-width: 768px) {
       width: unset;
     }
-  }
-`
-
-export const NewImporterWrapper = styled.div`
-  position: fixed;
-  width: 100vw;
-  top: 0;
-  height: 100%;
-  overflow-y: scroll;
-  padding: 35px 20px 20px;
-  box-sizing: border-box;
-  right: 0;
-  border-left: 1px solid ${props => props.theme.colors.borderColor};
-  background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-  ${props => props.theme?.rtl && css`
-    right: unset;
-    left: 0;
-    border-left: none;
-    border-right: 1px solid ${props => props.theme.colors.borderColor};
- `}
-  @media (min-width: 768px) {
-    width: 500px;
   }
 `
 
@@ -99,12 +78,4 @@ export const ButtonAddNewImporter = styled.div`
   &:hover {
     color: ${props => darken(0.05, props.theme.colors.primary)};
   }
-`
-export const ImportCSVForm = styled.div`
-    position: fixed;
-    width: 500px;
-    height: 100%;
-    right: 0;
-    top: 0;
-    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
 `

@@ -1,11 +1,9 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
-export const ImportListContainer = styled.div`
-  
+export const ImportListContainer = styled.div` 
 `
 export const ImportersTableWrapper = styled.div`
-
 `
 
 export const ImpotersTable = styled.table`
@@ -21,28 +19,32 @@ export const ImpotersTable = styled.table`
   }
 
   thead {
-    tr {
-      border-bottom: solid 1.2px ${props => props.theme.colors.disabled};
-    }
+    border-bottom: solid 1px ${props => props.theme.colors.disabled};
   }
-
-  tbody {
-    tr {
-      border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-      cursor: pointer;
-      td {
-        padding-right: 10px;
-        .importer-name {
-          display: flex;
-          width: 100%;
-          border-right: 1px solid ${props => props.theme.colors.borderColor};
-        }
-      }
-      &:hover {
-        background-color: ${props => props.theme.colors.lightPrimary};
+`
+export const ImoportTbody = styled.tbody`
+  tr {
+    td {
+      padding-right: 10px;
+      .importer-name {
+        display: flex;
+        width: 100%;
+        border-right: 1px solid ${props => props.theme.colors.borderColor};
       }
     }
   }
+  cursor: pointer;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  &:hover {
+    background-color: ${props => props.theme.colors.lightPrimary};
+  }
+  ${({ active }) => active && css`
+    background-color: ${props => props.theme.colors.lightPrimary};
+    td {
+      border-top: 1px solid ${props => props.theme.colors.primary};
+      border-bottom: 1px solid ${props => props.theme.colors.primary};
+    }
+  `}
 `
 export const UserEnableWrapper = styled.div`
   display: flex;
@@ -107,7 +109,6 @@ export const WrapperUserActionSelector = styled.div`
     }
   }
 `
-
 export const ImportersBottomContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -123,10 +124,6 @@ export const AddNewImporterButton = styled.div`
   &:hover {
     color: ${props => darken(0.05, props.theme.colors.primary)};
   }
-`
-
-export const WrapperPagination = styled.div`
-  margin-top: 20px;
 `
 export const NotFoundWrapper = styled.div`
   display: flex;
