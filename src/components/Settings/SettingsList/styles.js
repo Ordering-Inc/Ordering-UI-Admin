@@ -26,7 +26,7 @@ export const OptionsError = styled.span`
 `
 
 export const FormGroupText = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
   label {
     font-weight: 600;
@@ -85,11 +85,16 @@ export const SkeletonWrapper = styled.div`
 export const CheckBoxWrapper = styled.div`
   margin-bottom: 20px;
 
-  p {
+  > label {
     font-weight: 600;
     margin: 20px 0 0;
     font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
+  }
+  > p {
+    font-size: 14px;
+    margin-bottom: 0px;
+    margin-top: 10px;
   }
 `
 
@@ -105,4 +110,10 @@ export const SubmitBtnWrapper = styled.div`
     font-size: 14px;
     margin: 20px 0 10px 0;
   }
+`
+
+export const Description = styled.p`
+  font-size: 14px;
+  margin-top: 0px;
+  margin-bottom: 5px;
 `

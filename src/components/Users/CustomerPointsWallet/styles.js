@@ -13,8 +13,6 @@ export const Container = styled.div`
 `
 
 export const PointsWalletContainer = styled.div`
-  display: flex;
-  align-items: center;
   width: 100%;
   padding-top: 30px;
 `
@@ -94,4 +92,32 @@ export const Tab = styled.div`
       `}
     }
   `}
+`
+
+export const LoyaltyLevel = styled.div`
+  h2 {
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 50px;
+    margin-bottom: 25px;
+  }
+`
+
+export const LoyaltyLevelContent = styled.div`
+  width: 100%;
+  max-width: 359px;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  h3 {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 42px;
+    color: ${props => props.theme.colors.primary};
+    margin-top: 15px;
+    text-align: center;
+  }
 `

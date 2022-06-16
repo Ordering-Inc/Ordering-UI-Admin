@@ -17,13 +17,13 @@ import { BusinessNotifications } from '../BusinessNotifications'
 import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
 import { BusinessFrontLayout } from '../BusinessFrontLayout'
 // import { BusinessPublishing } from '../BusinessPublishing'
+import { BusinessPlaceGroupList } from '../BusinessPlaceGroupList'
 
 import { MoreSidebarLayout, Personalization } from '../../Shared'
 
 import {
   BarContainer
 } from './styles'
-import { BusinessPlaceList } from '../BusinessPlaceList'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -274,7 +274,7 @@ export const BusinessDetailsUI = (props) => {
             />
           )}
           {selectedItem === 'places' && (
-            <BusinessPlaceList
+            <BusinessPlaceGroupList
               business={businessState?.business}
               handleSuccessUpdate={handleUpdateBusinessState}
               setIsExtendExtraOpen={setIsExtendExtraOpen}

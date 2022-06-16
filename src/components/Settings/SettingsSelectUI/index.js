@@ -58,9 +58,10 @@ export const SettingsSelectUI = (props) => {
       <SelectHeader>
         {
           config?.name && (
-            <p>{config?.name}</p>
+            <label>{config?.name}</label>
           )
         }
+        {config?.description && <p>{config?.description}</p>}
       </SelectHeader>
       {
         options ? (
