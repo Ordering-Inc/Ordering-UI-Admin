@@ -260,11 +260,16 @@ const PointsWalletBusinessDetailUI = (props) => {
           {expiration && (
             <OptionInputWrapper>
               <Input
-                type='number'
+                type='text'
                 placeholder='00 points'
                 name='expire_after_minutes'
                 value={maxValue}
                 onChange={handleChangeMaxValue}
+                onKeyPress={(e) => {
+                  if (!/^[0-9]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
               />
             </OptionInputWrapper>
           )}

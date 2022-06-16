@@ -70,7 +70,7 @@ const CustomerPointsWalletUI = (props) => {
                     <h2>{t('LEVEL', 'Level')}</h2>
                     <LoyaltyLevelContent>
                       <img src={user?.loyalty_level?.image ?? theme.images.general.level} alt='' />
-                      <h3>{user?.loyalty?.name}</h3>
+                      <h3>{user?.loyalty_level?.name}</h3>
                     </LoyaltyLevelContent>
                   </LoyaltyLevel>
                 )}
