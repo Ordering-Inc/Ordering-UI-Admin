@@ -44,7 +44,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
-  var _walletState$wallet, _user$loyalty_level$i, _user$loyalty_level, _user$loyalty;
+  var _walletState$wallet, _user$loyalty_level$i, _user$loyalty_level, _user$loyalty_level2;
 
   var walletState = props.walletState,
       user = props.user;
@@ -90,7 +90,7 @@ var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
   })))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWalletContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, ((_walletState$wallet = walletState.wallet) === null || _walletState$wallet === void 0 ? void 0 : _walletState$wallet.balance) || 0), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS', 'Points'))), (user === null || user === void 0 ? void 0 : user.loyalty_level) && /*#__PURE__*/_react.default.createElement(_styles.LoyaltyLevel, null, /*#__PURE__*/_react.default.createElement("h2", null, t('LEVEL', 'Level')), /*#__PURE__*/_react.default.createElement(_styles.LoyaltyLevelContent, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_user$loyalty_level$i = user === null || user === void 0 ? void 0 : (_user$loyalty_level = user.loyalty_level) === null || _user$loyalty_level === void 0 ? void 0 : _user$loyalty_level.image) !== null && _user$loyalty_level$i !== void 0 ? _user$loyalty_level$i : theme.images.general.level,
     alt: ""
-  }), /*#__PURE__*/_react.default.createElement("h3", null, user === null || user === void 0 ? void 0 : (_user$loyalty = user.loyalty) === null || _user$loyalty === void 0 ? void 0 : _user$loyalty.name)))))), showOption === 'history' && /*#__PURE__*/_react.default.createElement(_CustomerWalletEvents.CustomerWalletEvents, props));
+  }), /*#__PURE__*/_react.default.createElement("h3", null, user === null || user === void 0 ? void 0 : (_user$loyalty_level2 = user.loyalty_level) === null || _user$loyalty_level2 === void 0 ? void 0 : _user$loyalty_level2.name)))))), showOption === 'history' && /*#__PURE__*/_react.default.createElement(_CustomerWalletEvents.CustomerWalletEvents, props));
 };
 
 var CustomerPointsWallet = function CustomerPointsWallet(props) {

@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactHookForm = require("react-hook-form");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Shared = require("../../Shared");
@@ -20,6 +18,8 @@ var _Shared = require("../../Shared");
 var _utils = require("../../../utils");
 
 var _styles = require("../../../styles");
+
+var _ImporterForm = require("../ImporterForm");
 
 var _styles2 = require("./styles");
 
@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ImporterJobFormUI = function ImporterJobFormUI(props) {
-  var _formState$result5, _formState$result6, _formState$result6$re, _formState$changes;
+  var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4;
 
   var selectedImporter = props.selectedImporter,
       formState = props.formState,
@@ -54,7 +54,9 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       handleChangeInput = props.handleChangeInput,
       handleUploadCsv = props.handleUploadCsv,
       handleCreateImporterJob = props.handleCreateImporterJob,
-      onClose = props.onClose;
+      onClose = props.onClose,
+      handleOpenChildForm = props.handleOpenChildForm,
+      handleCloseChildForm = props.handleCloseChildForm;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -76,6 +78,11 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       hasImportedFile = _useState4[0],
       setImportedFile = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      openAdvancedOptions = _useState6[0],
+      setOpenAdvancedOptions = _useState6[1];
 
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
@@ -116,6 +123,30 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     }
   };
 
+  var handleGetTitle = function handleGetTitle(type) {
+    var title = '';
+
+    switch (type) {
+      case 'sync_businesses':
+        title = t('STORE_IMPORTER', 'Store importer');
+        break;
+
+      case 'sync_categories':
+        title = t('CATEGORY_IMPORTER', 'Category importer');
+        break;
+
+      case 'sync_products':
+        title = t('PRODUCT_IMPORTER', 'Product importer');
+        break;
+
+      default:
+        title = type;
+        break;
+    }
+
+    return title;
+  };
+
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
@@ -148,18 +179,14 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       setImportedFile(true);
     }
   }, [fileState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, t('CREATE_IMPORTER_JOB', 'Create importer job'), /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    color: "black",
-    onClick: function onClick() {
-      return onClose();
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, handleGetTitle(selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.type)), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEPARATOR', 'Separator (;)')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "separator",
     type: "text",
     placeholder: ";",
     maxLength: "1",
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.separator,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -168,7 +195,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     type: "text",
     placeholder: "\"",
     maxLength: "1",
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : (_formState$result6$re = _formState$result6.result) === null || _formState$result6$re === void 0 ? void 0 : _formState$result6$re.name : formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name,
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.enclosure,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -177,6 +204,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     type: "text",
     placeholder: "\\",
     maxLength: "1",
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.escape,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -184,6 +212,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     name: "start_line",
     type: "text",
     maxLength: "1",
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.start_line,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -226,7 +255,12 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     color: "primary",
     borderRadius: "5px",
     disabled: !hasImportedFile && !(Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0) || (formState === null || formState === void 0 ? void 0 : formState.loading)
-  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('IMPORT', 'Import')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('IMPORT', 'Import')), /*#__PURE__*/_react.default.createElement(_styles2.AdvancedOptionsButton, {
+    onClick: function onClick() {
+      handleOpenChildForm();
+      setOpenAdvancedOptions(true);
+    }
+  }, t('ADVANCED_OPTION', 'Advanced Options')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('CREATE_IMPORTER_JOB', 'Create importer job'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -238,7 +272,17 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  })));
+  }), openAdvancedOptions && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    isBorderShow: true,
+    open: openAdvancedOptions,
+    onClose: function onClose() {
+      handleCloseChildForm();
+      setOpenAdvancedOptions(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ImporterForm.ImporterForm, {
+    isAdvanedOptions: true,
+    selectedImporter: selectedImporter
+  }))));
 };
 
 var ImporterJobForm = function ImporterJobForm(props) {

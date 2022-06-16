@@ -258,11 +258,16 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
   }, expiration ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "active"
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("p", null, t('EXPIRATION_IN_DAYS', 'Expiration in days'))), expiration && /*#__PURE__*/_react.default.createElement(_styles2.OptionInputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "number",
+    type: "text",
     placeholder: "00 points",
     name: "expire_after_minutes",
     value: maxValue,
-    onChange: handleChangeMaxValue
+    onChange: handleChangeMaxValue,
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   })))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     type: "submit",
