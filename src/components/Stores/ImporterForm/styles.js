@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 
 export const NewImporter = styled.div`
   width: 100%;
+  padding: 35px 20px;
+  overflow-x: hidden;
 `
 
 export const Header = styled.div`
@@ -11,22 +13,9 @@ export const Header = styled.div`
 `
 
 export const Title = styled.div`
-  color: rgb(52, 64, 80);
-  font-size: 24px;
+  font-size: 20px;
   margin: 0px 10px 0px 0px;
-  font-weight: 600;
-`
-
-export const CloseButtonWrapper = styled.div`
-  position: absolute;
-  top: 30px;
-
-  ${props => props.theme?.rtl ? css`
-    left: 10px;
-  ` : css`
-    right: 10px;
-  `}
-
+  font-weight: 700;
 `
 
 export const InputWrapper = styled.div`
@@ -67,12 +56,6 @@ export const InputWrapper = styled.div`
      >div:first-child {
       padding: 5px 15px;
      }
-  }
-
-  span a{
-    color: ${props => props.theme.colors.primary};
-    font-size: 16px;
-    font-style: italic;
   }
 `
 
@@ -147,6 +130,16 @@ export const ButtonWrapper = styled.div`
     svg {
       color: ${props => props.theme.colors.primary};
     }
+  } 
+`
+
+export const ExampleCSV = styled.span`
+  color: ${props => props.theme.colors.primary};
+  font-size: 16px;
+  font-style: italic;
+  margin: 0 5px;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
-  
 `

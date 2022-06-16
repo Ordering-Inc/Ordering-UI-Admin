@@ -77,28 +77,3 @@ export const ActionsWrapper = styled.div`
     }
   }
 `
-
-export const CsvImport = styled.div`
-  button {
-    height: 41px;
-    width: 90px;
-    white-space: nowrap;
-    ${props => props.theme?.rtl ? css`
-      margin-left: 15px;
-    ` : css`
-      margin-right: 15px;
-    `}
-    
-    svg {
-      ${props => props.theme?.rtl ? css`
-        margin-right: 8px;
-      ` : css`
-        margin-left: 8px;
-      `}      
-    }
-
-    @media (min-width: 768px) {
-      width: unset;
-    }
-  }
-`
