@@ -5,6 +5,7 @@ import { Alert, NotFoundSource } from '../../Shared'
 import { Button } from '../../../styles'
 import { SettingsSelectUI } from '../SettingsSelectUI'
 import { SettingsCountryFilter } from '../SettingsCountryFilter'
+import { SettingsImage } from '../SettingsImage'
 import {
   SettingsListContainer,
   GeneralContainer,
@@ -16,7 +17,8 @@ import {
   SkeletonWrapper,
   CheckBoxWrapper,
   OptionsError,
-  SubmitBtnWrapper
+  SubmitBtnWrapper,
+  Description
 } from './styles'
 
 export const SettingsListUI = (props) => {
@@ -27,7 +29,8 @@ export const SettingsListUI = (props) => {
     onCloseSettingsList,
     handleCheckBoxChange,
     handleInputChange,
-    handleClickUpdate
+    handleClickUpdate,
+    saveConfig
   } = props
 
   const [, t] = useLanguage()
@@ -127,6 +130,7 @@ export const SettingsListUI = (props) => {
                         config.type === 1 && (
                           <FormGroupText className='form-group'>
                             <label>{config?.name}</label>
+                            {config?.description && <Description>{config?.description}</Description>}
                             <input
                               type='text'
                               defaultValue={config?.value}
@@ -145,6 +149,7 @@ export const SettingsListUI = (props) => {
                               defaultValue={config?.value}
                               handleSelectChange={(value) => handleInputChange(value, config?.id)}
                               label={config?.name}
+                              description={config?.description}
                             />
                           ) : (
                             <SettingsSelectUI
@@ -159,7 +164,10 @@ export const SettingsListUI = (props) => {
                         config.type === 3 && (
                           <CheckBoxWrapper>
                             {config?.name && (
-                              <p>{config?.name}</p>
+                              <label>{config?.name}</label>
+                            )}
+                            {config?.description && (
+                              <p>{config?.description}</p>
                             )}
                             {
                               config?.options?.length > 0 && config?.options?.map((item, j) => (
@@ -190,6 +198,7 @@ export const SettingsListUI = (props) => {
                           config.key === 'driver_tip_options' ? (
                             <FormGroupText className='form-group'>
                               <label>{config?.name}</label>
+                              {config?.description && <Description>{config?.description}</Description>}
                               <input
                                 type='text'
                                 defaultValue={formatArray(config?.value)}
@@ -201,7 +210,10 @@ export const SettingsListUI = (props) => {
                           ) : (
                             <CheckBoxWrapper>
                               {config?.name && (
-                                <p>{config?.name}</p>
+                                <label>{config?.name}</label>
+                              )}
+                              {config?.description && (
+                                <p>{config?.description}</p>
                               )}
                               {
                                 config?.options?.length > 0 && config?.options?.map((item, j) => (
@@ -224,6 +236,14 @@ export const SettingsListUI = (props) => {
                               {!config?.options && <OptionsError>{t('NO_OPTIONS_VALUE', 'There is no options value')}</OptionsError>}
                             </CheckBoxWrapper>
                           )
+                        )
+                      }
+                      {
+                        config.type === 5 && (
+                          <SettingsImage
+                            config={config}
+                            saveConfig={saveConfig}
+                          />
                         )
                       }
                     </div>

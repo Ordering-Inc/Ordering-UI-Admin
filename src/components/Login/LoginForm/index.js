@@ -5,7 +5,8 @@ import {
   LoginForm as LoginFormController,
   ReCaptcha,
   useLanguage,
-  useApi
+  useApi,
+  useConfig
 } from 'ordering-components-admin'
 import { Alert } from '../../Shared'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
@@ -47,6 +48,7 @@ const LoginFormUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [ordering] = useApi()
+  const [{ configs }] = useConfig()
   const theme = useTheme()
   const { handleSubmit, register, errors } = useForm()
   const [configFile, setConfigFile] = useContext(ConfigFileContext)
@@ -109,8 +111,8 @@ const LoginFormUI = (props) => {
 
   return (
     <LoginContainer isPopup={isPopup}>
-      <LoginHeroContainer bgimage={theme.images?.general?.loginHero}>
-        <img src={theme?.images?.logos?.logotypeInvert} alt='Logo login' />
+      <LoginHeroContainer bgimage={configs?.dashboard_login_background?.value || theme.images?.general?.loginHero}>
+        <img src={configs?.dashboard_logo?.value || theme?.images?.logos?.logotypeInvert} alt='Logo login' />
       </LoginHeroContainer>
 
       <FormSide isPopup={isPopup}>

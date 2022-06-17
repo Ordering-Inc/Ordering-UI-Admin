@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { XLg } from 'react-bootstrap-icons'
 import { useLanguage, DragAndDrop, ExamineClick, ImporterJobForm as ImporterJobFormController } from 'ordering-components-admin'
-import { Alert } from '../../Shared'
+import { Alert, SideBar } from '../../Shared'
 import { bytesConverter } from '../../../utils'
-import { Button, IconButton, Input } from '../../../styles'
+import { Button, Input } from '../../../styles'
+import { ImporterForm } from '../ImporterForm'
 import {
   FormWrapper,
   Header,
@@ -12,7 +12,7 @@ import {
   InputWrapper,
   ActionsForm,
   UploadCsvInputContainer,
-  CloseButtonWrapper
+  AdvancedOptionsButton
 } from './styles'
 
 const ImporterJobFormUI = (props) => {
@@ -23,13 +23,16 @@ const ImporterJobFormUI = (props) => {
     handleChangeInput,
     handleUploadCsv,
     handleCreateImporterJob,
-    onClose
+    onClose,
+    handleOpenChildForm,
+    handleCloseChildForm
   } = props
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const headerCsvInputRef = useRef(null)
   const [hasImportedFile, setImportedFile] = useState(false)
+  const [openAdvancedOptions, setOpenAdvancedOptions] = useState(false)
 
   const handleFiles = (files) => {
     if (files.length === 1) {
@@ -65,6 +68,25 @@ const ImporterJobFormUI = (props) => {
     }
   }
 
+  const handleGetTitle = (type) => {
+    let title = ''
+    switch (type) {
+      case 'sync_businesses':
+        title = t('STORE_IMPORTER', 'Store importer')
+        break
+      case 'sync_categories':
+        title = t('CATEGORY_IMPORTER', 'Category importer')
+        break
+      case 'sync_products':
+        title = t('PRODUCT_IMPORTER', 'Product importer')
+        break
+      default:
+        title = type
+        break
+    }
+    return title
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -96,17 +118,7 @@ const ImporterJobFormUI = (props) => {
   return (
     <>
       <FormWrapper>
-        <Header>
-          {t('CREATE_IMPORTER_JOB', 'Create importer job')}
-          <CloseButtonWrapper>
-            <IconButton
-              color='black'
-              onClick={() => onClose()}
-            >
-              <XLg />
-            </IconButton>
-          </CloseButtonWrapper>
-        </Header>
+        <Header>{handleGetTitle(selectedImporter?.type)}</Header>
         <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
           <InputWrapper>
             <label>{t('SEPARATOR', 'Separator (;)')}</label>
@@ -115,6 +127,7 @@ const ImporterJobFormUI = (props) => {
               type='text'
               placeholder=';'
               maxLength='1'
+              defaultValue={formState?.changes?.separator}
               onChange={handleChangeInput}
               disabled={formState.loading}
               autoComplete='off'
@@ -127,11 +140,7 @@ const ImporterJobFormUI = (props) => {
               type='text'
               placeholder='"'
               maxLength='1'
-              defaultValue={
-                formState?.result?.result
-                  ? formState?.result?.result?.name
-                  : formState?.changes?.name
-              }
+              defaultValue={formState?.changes?.enclosure}
               onChange={handleChangeInput}
               disabled={formState.loading}
               autoComplete='off'
@@ -144,6 +153,7 @@ const ImporterJobFormUI = (props) => {
               type='text'
               placeholder='\'
               maxLength='1'
+              defaultValue={formState?.changes?.escape}
               onChange={handleChangeInput}
               disabled={formState.loading}
               autoComplete='off'
@@ -155,6 +165,7 @@ const ImporterJobFormUI = (props) => {
               name='start_line'
               type='text'
               maxLength='1'
+              defaultValue={formState?.changes?.start_line}
               onChange={handleChangeInput}
               disabled={formState.loading}
               autoComplete='off'
@@ -210,6 +221,14 @@ const ImporterJobFormUI = (props) => {
             >
               {formState?.loading ? t('LOADING', 'Loading') : t('IMPORT', 'Import')}
             </Button>
+            <AdvancedOptionsButton
+              onClick={() => {
+                handleOpenChildForm()
+                setOpenAdvancedOptions(true)
+              }}
+            >
+              {t('ADVANCED_OPTION', 'Advanced Options')}
+            </AdvancedOptionsButton>
           </ActionsForm>
         </FormInput>
         <Alert
@@ -221,6 +240,22 @@ const ImporterJobFormUI = (props) => {
           onAccept={() => closeAlert()}
           closeOnBackdrop={false}
         />
+
+        {openAdvancedOptions && (
+          <SideBar
+            isBorderShow
+            open={openAdvancedOptions}
+            onClose={() => {
+              handleCloseChildForm()
+              setOpenAdvancedOptions(false)
+            }}
+          >
+            <ImporterForm
+              isAdvanedOptions
+              selectedImporter={selectedImporter}
+            />
+          </SideBar>
+        )}
       </FormWrapper>
     </>
   )

@@ -31,7 +31,6 @@ import { BusinessVideos } from './BusinessVideos'
 import { BusinessWebhooks } from './BusinessWebhooks'
 import { SeoOptions } from './SeoOptions'
 import { AddBusinessForm } from './AddBusinessForm'
-import { ImportersLateralBar } from './ImportersLateralBar'
 import { WizardBusiness } from './WizardBusiness'
 import { BusinessMenuOptions } from './BusinessMenuOptions'
 import { BusinessDeliveryDetails } from './BusinessDeliveryDetails'
@@ -126,7 +125,6 @@ export {
   BusinessWebhooks,
   SeoOptions,
   AddBusinessForm,
-  ImportersLateralBar,
   WizardBusiness,
   BusinessMenuOptions,
   BusinessDeliveryDetails,
