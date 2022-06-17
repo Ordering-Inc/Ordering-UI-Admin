@@ -126,9 +126,7 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     setSelectedOption(option);
 
     if (((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$bu = _formState$changes.businesses) === null || _formState$changes$bu === void 0 ? void 0 : _formState$changes$bu.length) > 0 && Object.keys(formState.changes).length !== 0 && !actionState.loading) {
-      if (isAddMode) {
-        handleAddPromotion(true);
-      } else {
+      if (!isAddMode) {
         handleUpdateClick();
       }
     }
