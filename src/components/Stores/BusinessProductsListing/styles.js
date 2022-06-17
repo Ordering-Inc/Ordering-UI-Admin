@@ -46,9 +46,9 @@ export const ActionsGroup = styled.div`
   > button {
     height: 41px;
     ${props => props.theme?.rtl ? css`
-      margin-left: 20px;
+      margin-left: 15px;
     ` : css`
-      margin-right: 20px;
+      margin-right: 15px;
     `}
   }
 

@@ -22,6 +22,7 @@ import { BusinessSelectHeader } from '../BusinessSelectHeader'
 import { BatchImageForm } from '../BatchImageForm'
 import { BusinessDetails } from '../BusinessDetails'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { ImportersButton } from '../ImportersButton'
 
 import {
   CategoryProductsContainer,
@@ -245,6 +246,7 @@ const BusinessProductsListingUI = (props) => {
           </HeaderTitleContainer>
           {slug && (
             <ActionsGroup>
+              <ImportersButton defaultSlug='sync_categories_default' />
               <Button
                 borderRadius='8px'
                 color='lightPrimary'
