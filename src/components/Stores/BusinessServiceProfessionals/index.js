@@ -4,7 +4,7 @@ import { Button } from '../../../styles'
 import { SearchBar, Modal, Pagination } from '../../Shared'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
-import { ChevronRight, CheckSquareFill, Square } from 'react-bootstrap-icons'
+import { ChevronRight } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
@@ -34,8 +34,8 @@ const BusinessServiceProfessionalsUI = (props) => {
     handleSuccessAddUser,
     handleDeleteUser,
     getUsers,
-    paginationProps,
-    product
+    paginationProps
+    // product
     // handleUpdateClick
   } = props
 
@@ -80,11 +80,11 @@ const BusinessServiceProfessionalsUI = (props) => {
   //   handleUpdateClick({ users: users })
   // }
 
-  const isEnableCheck = (userId) => {
-    let valid = false
-    if (product?.users?.map(({ id }) => id).includes(userId)) valid = true
-    return valid
-  }
+  // const isEnableCheck = (userId) => {
+  //   let valid = false
+  //   if (product?.users?.map(({ id }) => id).includes(userId)) valid = true
+  //   return valid
+  // }
 
   useEffect(() => {
     if (usersList.loading || usersList.users.length > 0 || paginationProps.totalPages <= 1) return
@@ -123,7 +123,7 @@ const BusinessServiceProfessionalsUI = (props) => {
               [...Array(5).keys()].map(i => (
                 <ProfessionalItemContainer key={i}>
                   <CheckWrapper>
-                    <Skeleton width={16} height={16} />
+                    {/* <Skeleton width={16} height={16} /> */}
                     <label>
                       <WrapperImage>
                         <Skeleton className='d-flex h-100' />
@@ -151,11 +151,11 @@ const BusinessServiceProfessionalsUI = (props) => {
               active={user.id === selectedProfessional?.id}
             >
               <CheckWrapper>
-                <span className='check-box'>
+                {/* <span className='check-box'>
                   {isEnableCheck(user.id)
                     ? <CheckSquareFill className='active' />
                     : <Square />}
-                </span>
+                </span> */}
                 <label htmlFor={user?.id}>
                   <WrapperImage>
                     <Image bgimage={optimizeImage(user?.photo || theme.images?.dummies?.businessLogo)} />

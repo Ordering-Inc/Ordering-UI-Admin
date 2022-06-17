@@ -120,9 +120,9 @@ export const WrapperImage = styled.div`
   border-radius: 7.6px;
 
   ${props => props.theme?.rtl ? css`
-    margin-right: 12px;
+    margin-right: 1px;
   ` : css`
-    margin-left: 12px;
+    margin-left: 1px;
   `}
 `
 
