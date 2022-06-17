@@ -70,8 +70,7 @@ var BusinessServiceProfessionalsUI = function BusinessServiceProfessionalsUI(pro
       handleSuccessAddUser = props.handleSuccessAddUser,
       handleDeleteUser = props.handleDeleteUser,
       getUsers = props.getUsers,
-      paginationProps = props.paginationProps,
-      product = props.product;
+      paginationProps = props.paginationProps;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -126,18 +125,12 @@ var BusinessServiceProfessionalsUI = function BusinessServiceProfessionalsUI(pro
   //   else users = [...product?.users, user]
   //   handleUpdateClick({ users: users })
   // }
+  // const isEnableCheck = (userId) => {
+  //   let valid = false
+  //   if (product?.users?.map(({ id }) => id).includes(userId)) valid = true
+  //   return valid
+  // }
 
-
-  var isEnableCheck = function isEnableCheck(userId) {
-    var _product$users;
-
-    var valid = false;
-    if (product !== null && product !== void 0 && (_product$users = product.users) !== null && _product$users !== void 0 && _product$users.map(function (_ref) {
-      var id = _ref.id;
-      return id;
-    }).includes(userId)) valid = true;
-    return valid;
-  };
 
   (0, _react.useEffect)(function () {
     if (usersList.loading || usersList.users.length > 0 || paginationProps.totalPages <= 1) return;
@@ -165,10 +158,7 @@ var BusinessServiceProfessionalsUI = function BusinessServiceProfessionalsUI(pro
   })), usersList !== null && usersList !== void 0 && usersList.loading ? /*#__PURE__*/_react.default.createElement(_styles2.ProfessionalListWrapper, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ProfessionalItemContainer, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 16,
-      height: 16
-    }), /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       className: "d-flex h-100"
     })), /*#__PURE__*/_react.default.createElement(_styles2.UserInfo, null, /*#__PURE__*/_react.default.createElement("h3", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100,
@@ -188,11 +178,7 @@ var BusinessServiceProfessionalsUI = function BusinessServiceProfessionalsUI(pro
         return handleProfessionalClick(e, user);
       },
       active: user.id === (selectedProfessional === null || selectedProfessional === void 0 ? void 0 : selectedProfessional.id)
-    }, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
-      className: "check-box"
-    }, isEnableCheck(user.id) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
-      className: "active"
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", {
+    }, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("label", {
       htmlFor: user === null || user === void 0 ? void 0 : user.id
     }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage((user === null || user === void 0 ? void 0 : user.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
