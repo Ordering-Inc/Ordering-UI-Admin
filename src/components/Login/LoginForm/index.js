@@ -109,6 +109,8 @@ const LoginFormUI = (props) => {
     })
   }, [])
 
+  console.log(configs)
+
   return (
     <LoginContainer isPopup={isPopup}>
       <LoginHeroContainer bgimage={configs?.dashboard_login_background?.value || theme.images?.general?.loginHero}>
