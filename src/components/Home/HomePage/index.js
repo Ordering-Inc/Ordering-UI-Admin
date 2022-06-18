@@ -28,7 +28,8 @@ import {
   AssistanceWidgets,
   AssistanceTitle,
   AssistanceBody,
-  WidgeBlock
+  WidgeBlock,
+  FeedbackWidgets
 } from './styles'
 
 const HomeUI = (props) => {
@@ -46,7 +47,7 @@ const HomeUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [sessionState] = useSession()
 
-  const goToContact = (location) => {
+  const goToLink = (location) => {
     if (location === 'sales') {
       window.open('https://www.ordering.co/ordering-sales', '_blank')
     }
@@ -253,16 +254,24 @@ const HomeUI = (props) => {
               <WidgeBlock>
                 <h3>{t('CONTACT_SALES_TEAM', 'Contact our Sales Team')}</h3>
                 <p>{t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')}</p>
-                <Button outline color='primary' onClick={() => goToContact('sales')}>{t('SALES_CONTACT', 'Sales Contact')}</Button>
+                <Button outline color='primary' onClick={() => goToLink('sales')}>{t('SALES_CONTACT', 'Sales Contact')}</Button>
               </WidgeBlock>
               <WidgeBlock>
                 <h3>{t('CONTACT_SUPPORT_TEAM', 'Contact our Support Team')}</h3>
                 <p>{t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')}</p>
-                <Button outline color='primary' onClick={() => goToContact('tech')}>{t('TECH_SUPPORT', 'Tech Support')}</Button>
+                <Button outline color='primary' onClick={() => goToLink('tech')}>{t('TECH_SUPPORT', 'Tech Support')}</Button>
               </WidgeBlock>
             </AssistanceBody>
           </AssistanceWidgets>
         </>
+      )}
+      {sessionState?.user?.level === 0 && (
+        <FeedbackWidgets>
+          <ParagraphHeaders>
+            <p>{t('FEEDBACK', 'Feedback')}</p>
+          </ParagraphHeaders>
+          <a href='https://feedback.ordering.co' target='blank'>feedback.ordering.co</a>
+        </FeedbackWidgets>
       )}
     </HomeContainer>
   )
