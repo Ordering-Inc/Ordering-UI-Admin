@@ -95,6 +95,21 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
     });
   };
 
+  var handleChangeEnable = function handleChangeEnable(value) {
+    if (!(brand !== null && brand !== void 0 && brand.ribbon) && !value) {
+      var ribbonChanges = _objectSpread({}, _utils.ribbonValues);
+
+      handleChangeItem({
+        ribbon: ribbonChanges
+      });
+      return;
+    }
+
+    handleChangeRibbon({
+      enabled: value
+    });
+  };
+
   var handleFiles = function handleFiles(files, name) {
     if (files.length === 1) {
       var _files$;
@@ -217,9 +232,7 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('RIBBON', 'Ribbon')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (brand === null || brand === void 0 ? void 0 : (_brand$ribbon2 = brand.ribbon) === null || _brand$ribbon2 === void 0 ? void 0 : _brand$ribbon2.enabled) || false,
     onChange: function onChange(val) {
-      return handleChangeRibbon({
-        enabled: val
-      });
+      return handleChangeEnable(val);
     }
   })), (typeof (brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang14 = brandFormState.changes) === null || _brandFormState$chang14 === void 0 ? void 0 : (_brandFormState$chang15 = _brandFormState$chang14.ribbon) === null || _brandFormState$chang15 === void 0 ? void 0 : _brandFormState$chang15.enabled) !== 'undefined' ? brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang16 = brandFormState.changes) === null || _brandFormState$chang16 === void 0 ? void 0 : (_brandFormState$chang17 = _brandFormState$chang16.ribbon) === null || _brandFormState$chang17 === void 0 ? void 0 : _brandFormState$chang17.enabled : brand === null || brand === void 0 ? void 0 : (_brand$ribbon3 = brand.ribbon) === null || _brand$ribbon3 === void 0 ? void 0 : _brand$ribbon3.enabled) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEXT', 'Text')), /*#__PURE__*/_react.default.createElement("input", {
     name: "text",

@@ -210,6 +210,21 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     });
   };
 
+  var handleChangeEnable = function handleChangeEnable(value) {
+    if (!(product !== null && product !== void 0 && product.ribbon) && !value) {
+      var ribbonChanges = _objectSpread({}, _utils.ribbonValues);
+
+      handleChangeFormState({
+        ribbon: ribbonChanges
+      });
+      return;
+    }
+
+    handleChangeRibbon({
+      enabled: value
+    });
+  };
+
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
@@ -358,7 +373,12 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
-    defaultValue: product === null || product === void 0 ? void 0 : product.slug
+    defaultValue: product === null || product === void 0 ? void 0 : product.slug,
+    onKeyPress: function onKeyPress(e) {
+      if (e.which === 32) {
+        e.preventDefault();
+      }
+    }
   }), /*#__PURE__*/_react.default.createElement(_styles2.Wrapper, {
     style: {
       paddingTop: 10
@@ -399,9 +419,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.InventoryWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('RIBBON', 'Ribbon')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (product === null || product === void 0 ? void 0 : (_product$ribbon = product.ribbon) === null || _product$ribbon === void 0 ? void 0 : _product$ribbon.enabled) || false,
     onChange: function onChange(val) {
-      return handleChangeRibbon({
-        enabled: val
-      });
+      return handleChangeEnable(val);
     }
   })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : (_formState$changes14$ = _formState$changes14.ribbon) === null || _formState$changes14$ === void 0 ? void 0 : _formState$changes14$.enabled) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : (_formState$changes15$ = _formState$changes15.ribbon) === null || _formState$changes15$ === void 0 ? void 0 : _formState$changes15$.enabled : product === null || product === void 0 ? void 0 : (_product$ribbon2 = product.ribbon) === null || _product$ribbon2 === void 0 ? void 0 : _product$ribbon2.enabled) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEXT', 'Text')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "text",

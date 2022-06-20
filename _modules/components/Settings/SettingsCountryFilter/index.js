@@ -46,7 +46,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SettingsCountryFilter = function SettingsCountryFilter(props) {
   var defaultValue = props.defaultValue,
       handleSelectChange = props.handleSelectChange,
-      label = props.label;
+      label = props.label,
+      description = props.description;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -104,7 +105,7 @@ var SettingsCountryFilter = function SettingsCountryFilter(props) {
       return window.removeEventListener('click', handleClickOutside);
     };
   }, [isShowCountryList]);
-  return /*#__PURE__*/_react.default.createElement(_styles.CountrySelectWrapper, null, label && /*#__PURE__*/_react.default.createElement("p", null, label), /*#__PURE__*/_react.default.createElement(_styles.CountrySearchWrapper, {
+  return /*#__PURE__*/_react.default.createElement(_styles.CountrySelectWrapper, null, label && /*#__PURE__*/_react.default.createElement("label", null, label), description && /*#__PURE__*/_react.default.createElement("p", null, description), /*#__PURE__*/_react.default.createElement(_styles.CountrySearchWrapper, {
     ref: countryRef
   }, /*#__PURE__*/_react.default.createElement(_styles.CountrySearchInput, {
     type: "text",

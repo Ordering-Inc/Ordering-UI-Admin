@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LoginFormUI = function LoginFormUI(props) {
-  var _theme$images, _theme$images$general, _theme$images2, _theme$images2$logos;
+  var _configs$dashboard_lo, _theme$images, _theme$images$general, _configs$dashboard_lo2, _theme$images2, _theme$images2$logos;
 
   var useLoginByEmail = props.useLoginByEmail,
       useLoginByCellphone = props.useLoginByCellphone,
@@ -80,6 +80,10 @@ var LoginFormUI = function LoginFormUI(props) {
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
       _useApi2 = _slicedToArray(_useApi, 1),
       ordering = _useApi2[0];
+
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var theme = (0, _styledComponents.useTheme)();
 
@@ -171,9 +175,9 @@ var LoginFormUI = function LoginFormUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.LoginContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles2.LoginHeroContainer, {
-    bgimage: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.loginHero
+    bgimage: (configs === null || configs === void 0 ? void 0 : (_configs$dashboard_lo = configs.dashboard_login_background) === null || _configs$dashboard_lo === void 0 ? void 0 : _configs$dashboard_lo.value) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.loginHero)
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotypeInvert,
+    src: (configs === null || configs === void 0 ? void 0 : (_configs$dashboard_lo2 = configs.dashboard_logo) === null || _configs$dashboard_lo2 === void 0 ? void 0 : _configs$dashboard_lo2.value) || (theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotypeInvert),
     alt: "Logo login"
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormSide, {
     isPopup: isPopup

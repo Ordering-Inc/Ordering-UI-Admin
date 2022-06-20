@@ -45,6 +45,12 @@ Object.defineProperty(exports, "CustomersListing", {
     return _CustomersListing.CustomersListing;
   }
 });
+Object.defineProperty(exports, "ProfessionalListing", {
+  enumerable: true,
+  get: function get() {
+    return _ProfessionalListing.ProfessionalListing;
+  }
+});
 Object.defineProperty(exports, "UserActiveStateFilter", {
   enumerable: true,
   get: function get() {
@@ -149,6 +155,8 @@ var _UsersDeleteButton = require("./UsersDeleteButton");
 var _UsersExportCSV = require("./UsersExportCSV");
 
 var _UserTypeSelector = require("./UserTypeSelector");
+
+var _ProfessionalListing = require("./ProfessionalListing");
 
 var _UsersList = require("./UsersList");
 

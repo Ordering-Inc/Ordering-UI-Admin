@@ -19,6 +19,8 @@ var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 
 var _styles = require("../../../styles");
 
+var _FirstSelect = require("../../../styles/Select/FirstSelect");
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styles2 = require("./styles");
@@ -48,7 +50,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
-  var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5, _formState$changes6;
+  var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes$ty, _formState$changes4, _formState$changes5, _formState$changes$du, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9;
 
   var formState = props.formState,
       handleChangeInput = props.handleChangeInput,
@@ -64,22 +66,92 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
 
   var productImageInputRef = (0, _react.useRef)(null);
 
-  var _useState = (0, _react.useState)({
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      hours = _useState2[0],
+      setHours = _useState2[1];
+
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      minutes = _useState4[0],
+      setMinutes = _useState4[1];
+
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      alertState = _useState6[0],
+      setAlertState = _useState6[1];
 
-  var _useState3 = (0, _react.useState)({
+  var _useState7 = (0, _react.useState)({
     name: null,
     data: null,
     open: false
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      cropState = _useState4[0],
-      setCropState = _useState4[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      cropState = _useState8[0],
+      setCropState = _useState8[1];
+
+  var _useState9 = (0, _react.useState)({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      curPreorderTime = _useState10[0],
+      setCurPreorderTime = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      isCustom = _useState12[0],
+      setIsCustom = _useState12[1];
+
+  var typeList = [{
+    value: 'item',
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('ITEM', 'Item'))
+  }, {
+    value: 'service',
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('SERVICE', 'Service'))
+  }];
+  var durationList = [{
+    value: 15,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, "15 ", /*#__PURE__*/_react.default.createElement("span", null, t('MINUTES', 'minutes')))
+  }, {
+    value: 30,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, "30 ", /*#__PURE__*/_react.default.createElement("span", null, t('MINUTES', 'minutes')))
+  }, {
+    value: 45,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, "45 ", /*#__PURE__*/_react.default.createElement("span", null, t('MINUTES', 'minutes')))
+  }, {
+    value: 60,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, "1 ", /*#__PURE__*/_react.default.createElement("span", null, ('HOUR', 'hour')))
+  }, {
+    value: 'custom',
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement("span", null, ('CUSTOME', 'custom')))
+  }];
+
+  var setTimeList = function setTimeList() {
+    var _hours = [];
+    var _minutes = [];
+
+    for (var i = 0; i < 24; i++) {
+      var text = (i < 10 ? '0' : ' ') + i;
+
+      _hours.push({
+        text: text,
+        hour: i
+      });
+    }
+
+    for (var _i2 = 0; _i2 < 60; _i2++) {
+      var _text = (_i2 < 10 ? '0' : '') + _i2;
+
+      _minutes.push({
+        text: _text,
+        minute: _i2
+      });
+    }
+
+    setHours(_hours);
+    setMinutes(_minutes);
+  };
 
   var handleClickImage = function handleClickImage() {
     productImageInputRef.current.click();
@@ -142,6 +214,36 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     });
   };
 
+  var handleChangePreorderTime = function handleChangePreorderTime(evt) {
+    var type = evt.target.name;
+    var value = evt.target.value;
+    setCurPreorderTime(_objectSpread(_objectSpread({}, curPreorderTime), {}, _defineProperty({}, type, value)));
+    var preorderTime = 0;
+    if (type === 'hour') preorderTime = parseInt(value) * 60 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute);else preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 60 + parseInt(value);
+    handleChangeItem({
+      duration: preorderTime
+    });
+  };
+
+  var handleChangeSelect = function handleChangeSelect(value) {
+    if (value === 'custom') {
+      setIsCustom(true);
+      handleChangeItem({
+        duration: null
+      });
+      return;
+    }
+
+    setCurPreorderTime({
+      hour: '0',
+      minute: '0'
+    });
+    setIsCustom(false);
+    handleChangeItem({
+      duration: value
+    });
+  };
+
   (0, _react.useEffect)(function () {
     var _formState$result;
 
@@ -154,6 +256,9 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
+  (0, _react.useEffect)(function () {
+    setTimeList();
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, null, /*#__PURE__*/_react.default.createElement("h1", null, t('NEW_PRODUCT', 'New product')), /*#__PURE__*/_react.default.createElement(_styles2.ProductImage, {
     onClick: function onClick() {
       return handleClickImage();
@@ -177,17 +282,55 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.images,
     alt: "business type image",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRODUCT_NAME', 'Product name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, {
+    notAllow: true
+  }, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    options: typeList,
+    className: "select",
+    defaultValue: (_formState$changes$ty = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.type) !== null && _formState$changes$ty !== void 0 ? _formState$changes$ty : 'item',
+    placeholder: t('SELECT_OPTION', 'Select an option'),
+    onChange: function onChange(value) {
+      return handleChangeItem({
+        type: value
+      });
+    }
+  })), (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.type) === 'service' && /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DURATION', 'Duration')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    options: durationList,
+    className: "select",
+    defaultValue: isCustom ? 'custom' : (_formState$changes$du = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.duration) !== null && _formState$changes$du !== void 0 ? _formState$changes$du : '',
+    placeholder: t('SELECT_OPTION', 'Select an option'),
+    onChange: function onChange(value) {
+      return handleChangeSelect(value);
+    }
+  })), isCustom && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CUSTOM_DURATION', 'Custom duration')), /*#__PURE__*/_react.default.createElement(_styles2.TimeContent, null, /*#__PURE__*/_react.default.createElement(_styles2.TimeBlock, null, /*#__PURE__*/_react.default.createElement("select", {
+    value: curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour,
+    name: "hour",
+    onChange: handleChangePreorderTime
+  }, hours === null || hours === void 0 ? void 0 : hours.map(function (hour, i) {
+    return /*#__PURE__*/_react.default.createElement("option", {
+      value: hour.hour,
+      key: i
+    }, hour.text);
+  })), /*#__PURE__*/_react.default.createElement("span", null, ":"), /*#__PURE__*/_react.default.createElement("select", {
+    value: curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute,
+    name: "minute",
+    onChange: handleChangePreorderTime
+  }, minutes === null || minutes === void 0 ? void 0 : minutes.map(function (minute, i) {
+    return /*#__PURE__*/_react.default.createElement("option", {
+      value: minute.minute,
+      key: i
+    }, minute.text);
+  })))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRODUCT_NAME', 'Product name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     name: "name",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.name) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_A_NAME', 'Write a name'),
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "number",
     name: "price",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.price) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.price) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_PRICE', 'Write price'),
     autoComplete: "off",
@@ -199,7 +342,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     rows: 4,
     name: "description",
-    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.description) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.description) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_DESCRIPTION', 'Write description'),
     autoComplete: "off"

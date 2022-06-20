@@ -23,9 +23,9 @@ var _styles = require("../../../styles");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
-var _styles2 = require("./styles");
-
 var _PointsWalletBusinessDetail = require("../PointsWalletBusinessDetail");
+
+var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

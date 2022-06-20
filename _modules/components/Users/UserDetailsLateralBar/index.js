@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 
+var _ProfessionalDetail = require("../ProfessionalDetail");
+
 var _UserDetails = require("../UserDetails");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -38,7 +40,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var UserDetailsLateralBar = function UserDetailsLateralBar(props) {
-  var open = props.open;
+  var open = props.open,
+      isProfessionals = props.isProfessionals;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -112,7 +115,9 @@ var UserDetailsLateralBar = function UserDetailsLateralBar(props) {
     onClick: function onClick() {
       return props.onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, _extends({}, props, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), isProfessionals ? /*#__PURE__*/_react.default.createElement(_ProfessionalDetail.ProfessionalDetail, _extends({}, props, {
+    setExtraOpen: setExtraOpen
+  })) : /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, _extends({}, props, {
     setExtraOpen: setExtraOpen
   }))));
 };

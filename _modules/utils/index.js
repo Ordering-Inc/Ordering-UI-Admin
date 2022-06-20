@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.reviewCommentList = exports.removeStorageItem = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -427,12 +427,23 @@ var shape = {
   capsuleShape: 'capsule_shape'
 };
 /**
+ * default value for bitton
+ */
+
+exports.shape = shape;
+var ribbonValues = {
+  color: '#0083FE',
+  text: 'ribbon',
+  shape: 'rectangle',
+  enabled: false
+};
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
  */
 
-exports.shape = shape;
+exports.ribbonValues = ribbonValues;
 
 var reviewCommentList = function reviewCommentList(type) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),

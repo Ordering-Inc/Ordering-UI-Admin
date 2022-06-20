@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
-  var _theme$images, _theme$images$logos, _sessionState$user, _sessionState$user5, _sessionState$user6, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user12, _sessionState$user13, _sessionState$user14, _sessionState$user15, _sessionState$user16, _sessionState$user17, _sessionState$user18, _sessionState$user19;
+  var _configs$dashboard_lo, _theme$images, _theme$images$logos, _sessionState$user, _sessionState$user5, _sessionState$user6, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user12, _sessionState$user13, _sessionState$user14, _sessionState$user15, _sessionState$user16, _sessionState$user17, _sessionState$user18, _sessionState$user19;
 
   var location = (0, _reactRouterDom.useLocation)();
   var theme = (0, _styledComponents.useTheme)();
@@ -62,6 +62,10 @@ var SidebarMenu = function SidebarMenu(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
       _useSession2 = _slicedToArray(_useSession, 1),
       sessionState = _useSession2[0];
+
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
 
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
@@ -137,6 +141,11 @@ var SidebarMenu = function SidebarMenu(props) {
     title: t('MANAGERS', 'Managers'),
     pageName: 'managers',
     url: '/users/managers'
+  }, {
+    id: 3,
+    title: t('PROFESSIONALS', 'Professionals'),
+    pageName: 'professionals',
+    url: '/users/professionals'
   }];
   var settingsSubMenus = [{
     id: 1,
@@ -262,18 +271,13 @@ var SidebarMenu = function SidebarMenu(props) {
     isCollapse: isCollapse
   }, /*#__PURE__*/_react.default.createElement(_styles.SidebarInnerContainer, {
     className: "d-flex flex-column"
-  }, /*#__PURE__*/_react.default.createElement(_styles.SidebarHeader, {
-    className: "p-1"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
-    fluid: true,
+  }, /*#__PURE__*/_react.default.createElement(_styles.SidebarHeader, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
+    src: (configs === null || configs === void 0 ? void 0 : (_configs$dashboard_lo = configs.dashboard_logo) === null || _configs$dashboard_lo === void 0 ? void 0 : _configs$dashboard_lo.value) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype),
     onClick: function onClick() {
       return handleGoToPage({
         page: 'home'
       });
-    },
-    width: "150px",
-    height: "45px"
+    }
   }), /*#__PURE__*/_react.default.createElement(_styles.BurgerButton, {
     onClick: function onClick() {
       return handleMenuCollapse(true);
@@ -338,7 +342,7 @@ var SidebarMenu = function SidebarMenu(props) {
     }, item.title);
   })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user8 = sessionState.user) === null || _sessionState$user8 === void 0 ? void 0 : _sessionState$user8.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "4",
-    active: location.pathname === '/users/customers' || location.pathname === '/users/managers' || location.pathname === '/users/operation'
+    active: location.pathname === '/users/customers' || location.pathname === '/users/managers' || location.pathname === '/users/operation' || location.pathname === '/users/professionals'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "4"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, usersSubMenus.map(function (item) {

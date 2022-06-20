@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SubmitBtnWrapper = exports.SkeletonWrapper = exports.SettingsListContainer = exports.Required = exports.OptionsError = exports.GeneralTitle = exports.GeneralContainer = exports.FormGroupWrapper = exports.FormGroupText = exports.FormGroupCheck = exports.FormContainer = exports.CheckBoxWrapper = void 0;
+exports.SubmitBtnWrapper = exports.SkeletonWrapper = exports.SettingsListContainer = exports.Required = exports.OptionsError = exports.GeneralTitle = exports.GeneralContainer = exports.FormGroupWrapper = exports.FormGroupText = exports.FormGroupCheck = exports.FormContainer = exports.Description = exports.CheckBoxWrapper = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,7 +35,7 @@ var OptionsError = _styledComponents.default.span(_templateObject5 || (_template
 
 exports.OptionsError = OptionsError;
 
-var FormGroupText = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  label {\n    font-weight: 600;\n    margin-bottom: 10px;\n    font-size: 14px;\n    color: ", ";\n  }\n\n  input[type='text'] {\n    font-size: 14px;\n    height: 44px;\n    border: 1px solid #DEE2E6;\n    box-sizing: border-box;\n    border-radius: 7.6px;\n  }\n"])), function (props) {
+var FormGroupText = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-bottom: 30px;\n\n  label {\n    font-weight: 600;\n    margin-bottom: 10px;\n    font-size: 14px;\n    color: ", ";\n  }\n\n  input[type='text'] {\n    font-size: 14px;\n    height: 44px;\n    border: 1px solid #DEE2E6;\n    box-sizing: border-box;\n    border-radius: 7.6px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
@@ -59,7 +59,7 @@ var SkeletonWrapper = _styledComponents.default.div(_templateObject10 || (_templ
 
 exports.SkeletonWrapper = SkeletonWrapper;
 
-var CheckBoxWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  p {\n    font-weight: 600;\n    margin: 20px 0 0;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
+var CheckBoxWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  > label {\n    font-weight: 600;\n    margin: 20px 0 0;\n    font-size: 14px;\n    color: ", ";\n  }\n  > p {\n    font-size: 14px;\n    margin-bottom: 0px;\n    margin-top: 10px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 
@@ -70,3 +70,7 @@ var SubmitBtnWrapper = _styledComponents.default.div(_templateObject12 || (_temp
 });
 
 exports.SubmitBtnWrapper = SubmitBtnWrapper;
+
+var Description = _styledComponents.default.p(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  margin-top: 0px;\n  margin-bottom: 5px;\n"])));
+
+exports.Description = Description;

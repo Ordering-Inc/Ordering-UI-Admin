@@ -9,7 +9,7 @@ exports.UserInfo = exports.SubMenu = exports.SidebarMainContent = exports.Sideba
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -51,23 +51,19 @@ var SidebarInnerContainer = _styledComponents.default.div(_templateObject6 || (_
 
 exports.SidebarInnerContainer = SidebarInnerContainer;
 
-var SidebarHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  height: 80px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  ", "\n"])), function (props) {
-  var _props$theme3;
-
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    margin-right: 0.75rem;\n  "]))) : (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    margin-left: 0.75rem;\n  "])));
-});
+var SidebarHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 12px;\n\n  > img {\n    max-width: 150px;\n    max-height: 100px;\n    object-fit: contain;\n  }\n"])));
 
 exports.SidebarHeader = SidebarHeader;
 
-var BurgerButton = _styledComponents.default.button(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  background-color: transparent;\n  border: none;\n  border-radius: 6px;\n  height: 32px;\n  padding: 0 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all .2s ease-in;\n\n  > svg {\n    width: 25px;\n    height: 16px;\n    color: #B1BCCC;\n  }\n\n  &:hover {\n    background-color: #1507260a !important;\n\n    > svg {\n      color:  #151b26;\n    }\n  }\n\n  &:active {\n    background-color: #1507261a !important;\n  }\n"])));
+var BurgerButton = _styledComponents.default.button(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  background-color: transparent;\n  border: none;\n  border-radius: 6px;\n  height: 32px;\n  padding: 0 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all .2s ease-in;\n\n  > svg {\n    width: 25px;\n    height: 16px;\n    color: #B1BCCC;\n  }\n\n  &:hover {\n    background-color: #1507260a !important;\n\n    > svg {\n      color:  #151b26;\n    }\n  }\n\n  &:active {\n    background-color: #1507261a !important;\n  }\n"])));
 
 exports.BurgerButton = BurgerButton;
 
-var SidebarMainContent = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  overflow: auto;\n  height: calc(100% - 80px);\n"])));
+var SidebarMainContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  overflow: auto;\n"])));
 
 exports.SidebarMainContent = SidebarMainContent;
 
-var SidebarContent = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  flex: 1;\n  box-sizing: border-box;\n  transition: 0.1s;\n  border-top: 1px solid ", ";\n  border-bottom: 1px solid ", ";\n"])), function (props) {
+var SidebarContent = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  flex: 1;\n  box-sizing: border-box;\n  transition: 0.1s;\n  border-top: 1px solid ", ";\n  border-bottom: 1px solid ", ";\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.borderColor;
@@ -75,44 +71,44 @@ var SidebarContent = _styledComponents.default.div(_templateObject14 || (_templa
 
 exports.SidebarContent = SidebarContent;
 
-var UserInfo = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  transition: 0.1s;\n  > button:first-child {\n    margin: 5px 0;\n    ", "\n    span {\n      max-width: calc(100% - 40px);\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      ", "\n      font-weight: 600;\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
+var UserInfo = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  transition: 0.1s;\n  > button:first-child {\n    margin: 5px 0;\n    ", "\n    span {\n      max-width: calc(100% - 40px);\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      ", "\n      font-weight: 600;\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
+  var _props$theme3;
+
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      padding-right: 8px;\n    "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      padding-left: 8px;\n    "])));
+}, function (props) {
   var _props$theme4;
 
-  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      padding-right: 8px;\n    "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      padding-left: 8px;\n    "])));
-}, function (props) {
-  var _props$theme5;
-
-  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n        margin-right: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n      "])));
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n        margin-right: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n      "])));
 });
 
 exports.UserInfo = UserInfo;
 
-var MenuContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n"])));
+var MenuContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n"])));
 
 exports.MenuContainer = MenuContainer;
 
-var MenuContent = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  padding: 5px 0;\n"])));
+var MenuContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  padding: 5px 0;\n"])));
 
 exports.MenuContent = MenuContent;
 
-var SubMenu = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 5px 0;\n  font-size: 14px;\n  color: ", ";\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  border-radius: 8px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n  ", "\n"])), function (props) {
+var SubMenu = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 5px 0;\n  font-size: 14px;\n  color: ", ";\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  border-radius: 8px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n  ", "\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.lightPrimary;
 }, function (_ref3) {
   var active = _ref3.active;
-  return active && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.primary;
   });
 }, function (props) {
-  var _props$theme6;
+  var _props$theme5;
 
-  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    padding-right: 40px;\n  "]))) : (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    padding-left: 40px;\n  "])));
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    padding-right: 40px;\n  "]))) : (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    padding-left: 40px;\n  "])));
 });
 
 exports.SubMenu = SubMenu;
 
-var LanguageSelectorContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  position: relative;\n  border-radius: 8px;\n  min-height: 35px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  .options {\n    > div {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
+var LanguageSelectorContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  position: relative;\n  border-radius: 8px;\n  min-height: 35px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  .options {\n    > div {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.lightPrimary;
 });
 
