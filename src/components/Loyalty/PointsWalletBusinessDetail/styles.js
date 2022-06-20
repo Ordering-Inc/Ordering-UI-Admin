@@ -100,10 +100,13 @@ export const CheckBoxWrapper = styled.div`
   cursor: pointer;
 
   svg {
-    color: ${props => props.theme.colors.primary};
-    font-size: 19px;
-    min-width: 19px;
-    margin-right: 13px;
+    color: ${props => props.theme.colors.secundaryLight};
+    &.active {
+      color: ${props => props.theme.colors.primary};
+    }
+    font-size: 16px;
+    min-width: 16px;
+    margin-right: 12px;
     ${props => props.theme.rtl && css`
       margin-left: 13px;
       margin-right: 0px;
@@ -202,5 +205,17 @@ export const ButtonWrapper = styled.div`
   button {
     height: 44px;
     border-radius: 8px;
+  }
+`
+
+export const ExPirationWrapper = styled.div`
+  margin-top: 50px;
+
+  > h2 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 0px;
+    margin-bottom: 23px;
   }
 `

@@ -317,7 +317,8 @@ import {
   CustomerPointsWallet,
   CustomerCashWalletDetails,
   CustomerCashWalletEvents,
-  UserFormDetailsUI
+  UserFormDetailsUI,
+  ProfessionalListing
 } from './components/Users'
 import {
   RewardsPrograms,
@@ -500,6 +501,7 @@ export {
   DriversGroupOrders,
   DriversGroupAutoassign,
   DriversMarkAsBusy,
+  ProfessionalListing,
   GoogleGpsButton,
 
   HomePage,

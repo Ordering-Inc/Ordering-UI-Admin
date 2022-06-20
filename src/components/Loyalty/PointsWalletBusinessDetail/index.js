@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, useUtils, PointsWalletBusinessDetail as PointsWalletBusinessDetailController } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
-import { Button, Input } from '../../../styles'
-// import IosRadioButtonOff from '@meronex/icons/ios/IosRadioButtonOff'
-// import RiRadioButtonFill from '@meronex/icons/ri/RiRadioButtonFill'
+import { Button, Input, Switch } from '../../../styles'
+import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
 import { Alert } from '../../Shared'
 import {
   Container,
@@ -13,12 +12,13 @@ import {
   PointsInputWrapper,
   // PaymentRulesWrapper,
   // PaymentOptionListWrapper,
-  // CheckBoxWrapper,
-  // OptionInputWrapper,
+  CheckBoxWrapper,
+  OptionInputWrapper,
   PointsAccumulationContainer,
   AccumulationInputWrapper,
-  // ToggleWrapper,
-  ButtonWrapper
+  ToggleWrapper,
+  ButtonWrapper,
+  ExPirationWrapper
 } from './styles'
 
 const PointsWalletBusinessDetailUI = (props) => {
@@ -29,14 +29,18 @@ const PointsWalletBusinessDetailUI = (props) => {
     handleClickSubmit,
     // setFormState,
     isBusiness,
-    selectedBusinessList
+    selectedBusinessList,
+    handleChangeItem
   } = props
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const { handleSubmit } = useForm()
-  // const [paymentRules, setPaymentRules] = useState('maximum_redemption_type')
+  // const [paymentRules, setPaymentRules] = useState('no_limit')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [expiration, setExpiration] = useState(null)
+  const [isMaximum, setIsMaximum] = useState(false)
+  const [maxValue, setMaxValue] = useState('')
 
   // const ruleList = [
   //   { key: 'no_limit', description: t('NO_LIMIT', 'No limit') },
@@ -49,6 +53,28 @@ const PointsWalletBusinessDetailUI = (props) => {
       open: false,
       content: []
     })
+  }
+
+  const handleChangeExpirtation = (index) => {
+    if (index) {
+      setExpiration(index)
+      return
+    }
+    setExpiration(null)
+    handleChangeItem({ expire_after_minutes: null })
+    setMaxValue('')
+  }
+
+  const handleClickSwitch = (value) => {
+    setIsMaximum(value)
+    if (!value) handleChangeItem({ maximum_accumulation: null })
+  }
+
+  const handleChangeMaxValue = (e) => {
+    const value = e.target.value
+    setMaxValue(value)
+    if (value) handleChangeItem({ expire_after_minutes: (value * 24 * 60) })
+    else handleChangeItem({ expire_after_minutes: null })
   }
 
   const onSubmit = () => {
@@ -99,6 +125,26 @@ const PointsWalletBusinessDetailUI = (props) => {
     })
   }, [formState?.error])
 
+  useEffect(() => {
+    if (formState?.changes?.maximum_accumulation
+      ? formState?.changes?.maximum_accumulation
+      : walletData?.maximum_accumulation) {
+      setIsMaximum(true)
+    } else {
+      setIsMaximum(false)
+    }
+  }, [walletData?.maximum_accumulation])
+
+  useEffect(() => {
+    if (walletData?.expire_after_minutes) {
+      setMaxValue(walletData?.expire_after_minutes / (24 * 60))
+      setExpiration('days')
+    } else {
+      setExpiration(null)
+      setMaxValue('')
+    }
+  }, [walletData?.expire_after_minutes])
+
   return (
     <Container isBusiness={isBusiness} onSubmit={handleSubmit(onSubmit)}>
       {walletData?.name && (
@@ -134,12 +180,12 @@ const PointsWalletBusinessDetailUI = (props) => {
         {/* <PaymentRulesWrapper>
           <h2>{t('PAYMENT_RULES', 'Payment rules')}</h2>
           <p>{t('MAXIMUM_REDEEM_PER_ORDER', 'Maximum to redeem per order limit')}</p>
-        </PaymentRulesWrapper> */}
-        {/* <PaymentOptionListWrapper>
+        </PaymentRulesWrapper>
+        <PaymentOptionListWrapper>
           {ruleList.map(rule => (
             <React.Fragment key={rule.key}>
               <CheckBoxWrapper onClick={() => setPaymentRules(rule.key)}>
-                {paymentRules === rule.key ? <RiRadioButtonFill /> : <IosRadioButtonOff />}
+                {paymentRules === rule.key ? <RecordCircleFill className='active' /> : <Circle />}
                 <p>{rule.description}</p>
               </CheckBoxWrapper>
               {rule.key !== 'no_limit' && rule.key === paymentRules && (
@@ -179,17 +225,55 @@ const PointsWalletBusinessDetailUI = (props) => {
               }}
             />
           </AccumulationInputWrapper>
-          {/* <ToggleWrapper>
+          <ToggleWrapper>
             <p>{t('MAXIMUM_OF_POINTS', 'Maximum of points')}</p>
+            <Switch
+              defaultChecked={isMaximum}
+              onChange={val => handleClickSwitch(val)}
+            />
           </ToggleWrapper>
-          <Input
-            type='number'
-            placeholder='00 points'
-            name='maximum_accomulation'
-            value={formState?.changes?.maximum_accomulation ?? walletData?.maximum_accomulation ?? ''}
-            onChange={handleChangeInput}
-          /> */}
+          {isMaximum && (
+            <Input
+              type='text'
+              placeholder='00 points'
+              name='maximum_accumulation'
+              value={formState?.changes?.maximum_accumulation ?? walletData?.maximum_accumulation ?? ''}
+              onChange={handleChangeInput}
+              onKeyPress={(e) => {
+                if (!/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
+            />
+          )}
         </PointsAccumulationContainer>
+        <ExPirationWrapper>
+          <h2>{t('EXPIRATION', 'Expiration')}</h2>
+          <CheckBoxWrapper onClick={() => handleChangeExpirtation(null)}>
+            {!expiration ? <RecordCircleFill className='active' /> : <Circle />}
+            <p>{t('NO', 'No')}</p>
+          </CheckBoxWrapper>
+          <CheckBoxWrapper onClick={() => handleChangeExpirtation('days')}>
+            {expiration ? <RecordCircleFill className='active' /> : <Circle />}
+            <p>{t('EXPIRATION_IN_DAYS', 'Expiration in days')}</p>
+          </CheckBoxWrapper>
+          {expiration && (
+            <OptionInputWrapper>
+              <Input
+                type='text'
+                placeholder='00 points'
+                name='expire_after_minutes'
+                value={maxValue}
+                onChange={handleChangeMaxValue}
+                onKeyPress={(e) => {
+                  if (!/^[0-9]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+              />
+            </OptionInputWrapper>
+          )}
+        </ExPirationWrapper>
       </DetailContent>
       <ButtonWrapper>
         <Button

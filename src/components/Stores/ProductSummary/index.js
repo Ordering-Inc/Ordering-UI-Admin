@@ -20,7 +20,7 @@ import {
   ProductImage,
   ProductDetailsContent,
   // ProductPrice,
-  // ProductDescription,
+  ProductDescription,
   ProductConfigsContainer,
   ProductConfigOption,
   ActionSelectorWrapper,
@@ -29,7 +29,8 @@ import {
   ProductSales,
   RolWrapper,
   ProductDetails,
-  FieldsItem
+  FieldsItem,
+  PriceDuration
 } from './styles'
 
 export const ProductSummary = (props) => {
@@ -53,7 +54,7 @@ export const ProductSummary = (props) => {
   const [isProductPreview, setIsProductPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
 
-  const configsOptions = [
+  const productConfigOptions = [
     {
       key: 'product_details',
       value: t('PRODUCT_DETAILS', 'Product details')
@@ -82,6 +83,25 @@ export const ProductSummary = (props) => {
     //   key: 'personalization',
     //   value: t('PERSONALIZATION', 'Personalization')
     // }
+  ]
+
+  const serviceConfigOptions = [
+    {
+      key: 'service_details',
+      value: t('SERVICE_DETAILS', 'Service details')
+    },
+    {
+      key: 'professionals',
+      value: t('PROFESSIONALS', 'Professionals')
+    },
+    {
+      key: 'product_options',
+      value: t('PRODUCT_OPTIONS', 'Product options')
+    },
+    {
+      key: 'product_images',
+      value: t('PRODUCT_IMAGES', 'Product images')
+    }
   ]
 
   const handleDeleteClick = () => {
@@ -166,51 +186,67 @@ export const ProductSummary = (props) => {
               <BiImage />
             )}
           </ProductImageWrapper>
-          <ProductSales>
-            <ProgressRing
-              isShowPercent
-              percent={getPercentage()}
-              size={70}
-              lineWidth={8}
-              progressColor={theme.colors.primary}
-              trackColor={theme.colors.borderColor}
-              caps='round'
-              children
-              spin={false}
-              transitionDuration={200}
-            />
-            <RolWrapper>
-              <h4>{parsePrice(productState?.product?.price - productState?.product?.cost_price)}</h4>
-              <p>{t('PRODUCT_SALES_ROI', 'Product sales ROI')}</p>
-            </RolWrapper>
-          </ProductSales>
+          {productState?.product?.type !== 'service' && (
+            <ProductSales>
+              <ProgressRing
+                isShowPercent
+                percent={getPercentage()}
+                size={70}
+                lineWidth={8}
+                progressColor={theme.colors.primary}
+                trackColor={theme.colors.borderColor}
+                caps='round'
+                children
+                spin={false}
+                transitionDuration={200}
+              />
+              <RolWrapper>
+                <h4>{parsePrice(productState?.product?.price - productState?.product?.cost_price)}</h4>
+                <p>{t('PRODUCT_SALES_ROI', 'Product sales ROI')}</p>
+              </RolWrapper>
+            </ProductSales>
+          )}
         </ProductSummaryContent>
 
         <ProductDetailsContent>
-          <ProductDetails>
-            <FieldsItem>
-              <h4>{parsePrice(productState?.product?.price)}</h4>
-              <p>{t('PRODUCT_SELLING_PRICE', 'Selling price')}</p>
-            </FieldsItem>
-            {productState?.product?.in_offer && (
+          {productState?.product?.type !== 'service' && (
+            <ProductDetails>
               <FieldsItem>
-                <h4>{parsePrice(productState?.product?.offer_price)}</h4>
-                <p>{t('REGULAR_PRICE', 'Regular Price')}</p>
+                <h4>{parsePrice(productState?.product?.price)}</h4>
+                <p>{t('PRODUCT_SELLING_PRICE', 'Selling price')}</p>
               </FieldsItem>
-            )}
-            {productState?.product?.cost_price && (
-              <FieldsItem>
-                <h4>{parsePrice(productState?.product?.cost_price)}</h4>
-                <p>{t('PRODUCT_COST', 'Product cost')}</p>
-              </FieldsItem>
-            )}
-            {productState?.product?.cost_offer_price && (
-              <FieldsItem>
-                <h4>{parsePrice(productState?.product?.cost_offer_price)}</h4>
-                <p>{t('PRODUCT_REGULAR_COST', 'Product cost - regular price')}</p>
-              </FieldsItem>
-            )}
-          </ProductDetails>
+              {productState?.product?.in_offer && (
+                <FieldsItem>
+                  <h4>{parsePrice(productState?.product?.offer_price)}</h4>
+                  <p>{t('REGULAR_PRICE', 'Regular Price')}</p>
+                </FieldsItem>
+              )}
+              {productState?.product?.cost_price && (
+                <FieldsItem>
+                  <h4>{parsePrice(productState?.product?.cost_price)}</h4>
+                  <p>{t('PRODUCT_COST', 'Product cost')}</p>
+                </FieldsItem>
+              )}
+              {productState?.product?.cost_offer_price && (
+                <FieldsItem>
+                  <h4>{parsePrice(productState?.product?.cost_offer_price)}</h4>
+                  <p>{t('PRODUCT_REGULAR_COST', 'Product cost - regular price')}</p>
+                </FieldsItem>
+              )}
+            </ProductDetails>
+          )}
+          {productState?.product?.type === 'service' && (
+            <>
+              <PriceDuration>
+                <span>{parsePrice(productState?.product?.price)}</span>
+                <span className='dot'>•</span>
+                <span>{productState?.product?.duration}min</span>
+              </PriceDuration>
+              {productState?.product?.description && (
+                <ProductDescription>{productState?.product?.description}</ProductDescription>
+              )}
+            </>
+          )}
           {/* <ProductPrice>
             {parsePrice(productState?.product?.price)}
             {productState?.product?.in_offer && productState?.product?.offer_price && (
@@ -219,7 +255,7 @@ export const ProductSummary = (props) => {
           </ProductPrice>
           <ProductDescription>{productState?.product?.description}</ProductDescription> */}
           <ProductConfigsContainer>
-            {configsOptions.map(config => (
+            {(productState?.product?.type === 'service' ? serviceConfigOptions : productConfigOptions).map(config => (
               <ProductConfigOption
                 key={config.key}
                 active={showOption === config.key}

@@ -76,6 +76,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 24px;
+  justify-content: flex-end;
 
   label {
     color: ${props => props.theme.colors.headingColor};

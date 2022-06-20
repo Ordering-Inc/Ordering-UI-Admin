@@ -1,13 +1,13 @@
 {
   "app": {
-    "title": "Ordering",
+    "title": "Ordering Admin",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "",
     "canonicalUrl": "http://localhost:8300/"
   },
   "home": {
-    "title": "Ordering",
+    "title": "Home",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "",
@@ -169,6 +169,13 @@
   },
   "managers": {
     "title": "Managers",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "professionals": {
+    "title": "Professionals",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

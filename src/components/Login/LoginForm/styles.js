@@ -35,6 +35,8 @@ export const HeroSide = styled.div`
       width: 35%;
       margin-top: 18vh;
       margin-left: -80px;
+      max-height: 100px;
+      object-fit: contain;
     }
   }
 `

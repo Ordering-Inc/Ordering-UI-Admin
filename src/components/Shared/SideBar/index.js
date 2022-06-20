@@ -13,7 +13,8 @@ export const SideBar = (props) => {
     moveDistance,
     isBorderShow,
     noAnimation,
-    handleCloseWizard
+    handleCloseWizard,
+    IconTop
   } = props
 
   const sideBarRef = useRef(null)
@@ -63,6 +64,7 @@ export const SideBar = (props) => {
         isBorderShow={isBorderShow}
         moveDistance={moveDistance}
         noAnimation={noAnimation}
+        IconTop={IconTop}
       >
         <IconButton
           color='black'

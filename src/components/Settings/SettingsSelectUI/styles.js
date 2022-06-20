@@ -1,20 +1,22 @@
 import styled, { css } from 'styled-components'
 
 export const SettingsSelectContainer = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `
 
 export const SelectHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 
-  p {
+  label {
     font-size: 14px;
     font-weight: 600;
     color: ${props => props.theme.colors.headingColor};
     margin: 0;
+  }
+  p {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-size: 14px;
   }
 `
 

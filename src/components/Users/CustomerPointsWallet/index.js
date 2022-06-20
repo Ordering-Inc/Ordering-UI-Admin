@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useLanguage, UserWallet as UserWalletController } from 'ordering-components-admin'
+import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { CustomerWalletEvents } from '../CustomerWalletEvents'
 import {
@@ -7,15 +8,19 @@ import {
   PointsWalletContainer,
   PointsWrapper,
   Tabs,
-  Tab
+  Tab,
+  LoyaltyLevel,
+  LoyaltyLevelContent
 } from './styles'
 
 const CustomerPointsWalletUI = (props) => {
   const {
-    walletState
+    walletState,
+    user
   } = props
 
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [showOption, setShowOption] = useState('points_wallet')
 
   return (
@@ -44,6 +49,13 @@ const CustomerPointsWalletUI = (props) => {
                   <h2><Skeleton width={70} height={20} /></h2>
                   <p><Skeleton width={30} height={15} /></p>
                 </PointsWrapper>
+                <LoyaltyLevel>
+                  <h2><Skeleton width={70} height={20} /></h2>
+                  <LoyaltyLevelContent>
+                    <Skeleton height={150} style={{ width: '100%' }} />
+                    <h3><Skeleton width={100} height={23} /></h3>
+                  </LoyaltyLevelContent>
+                </LoyaltyLevel>
               </PointsWalletContainer>
             </>
           ) : (
@@ -53,6 +65,15 @@ const CustomerPointsWalletUI = (props) => {
                   <h2>{walletState.wallet?.balance || 0}</h2>
                   <p>{t('POINTS', 'Points')}</p>
                 </PointsWrapper>
+                {user?.loyalty_level && (
+                  <LoyaltyLevel>
+                    <h2>{t('LEVEL', 'Level')}</h2>
+                    <LoyaltyLevelContent>
+                      <img src={user?.loyalty_level?.image ?? theme.images.general.level} alt='' />
+                      <h3>{user?.loyalty_level?.name}</h3>
+                    </LoyaltyLevelContent>
+                  </LoyaltyLevel>
+                )}
               </PointsWalletContainer>
             </>
           )}
