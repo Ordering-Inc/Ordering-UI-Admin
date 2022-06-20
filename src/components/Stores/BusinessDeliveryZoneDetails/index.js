@@ -28,7 +28,9 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
     handleChangeFormState,
     handleUpdateBusinessDeliveryZone,
     handleAddBusinessDeliveryZone,
-    handleDeleteBusinessDeliveryZone
+    handleDeleteBusinessDeliveryZone,
+    kmlData,
+    handleUploadKmlFiles
   } = props
 
   const theme = useTheme()
@@ -95,6 +97,8 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
             handleChangeFormState={handleChangeFormState}
             handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
             handleAddBusinessDeliveryZone={handleAddBusinessDeliveryZone}
+            kmlData={kmlData}
+            handleUploadKmlFiles={handleUploadKmlFiles}
           />
         )}
 

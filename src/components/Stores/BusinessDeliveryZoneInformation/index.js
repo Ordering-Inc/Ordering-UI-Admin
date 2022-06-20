@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useConfig, useLanguage, useUtils, BusinessZoneGoogleMaps } from 'ordering-components-admin'
+import React, { useState, useEffect, useRef } from 'react'
+import { useConfig, useLanguage, useUtils, ExamineClick, BusinessZoneGoogleMaps } from 'ordering-components-admin'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { Button, Input } from '../../../styles'
 import { Alert } from '../../Shared'
@@ -11,7 +11,8 @@ import {
   WrapperMap,
   ErrorText,
   FormControl,
-  Row
+  Row,
+  KmlButtonWrapper
 } from './styles'
 
 export const BusinessDeliveryZoneInformation = (props) => {
@@ -23,7 +24,9 @@ export const BusinessDeliveryZoneInformation = (props) => {
     handleChangeInput,
     handleChangeFormState,
     handleUpdateBusinessDeliveryZone,
-    handleAddBusinessDeliveryZone
+    handleAddBusinessDeliveryZone,
+    handleUploadKmlFiles,
+    kmlData
   } = props
 
   const [, t] = useLanguage()
@@ -36,6 +39,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
   const [zoneData, setZoneData] = useState(zone?.data)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isShowMap, setIsShowMap] = useState(false)
+  const kmlRef = useRef(null)
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
@@ -85,7 +89,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
   }
 
   const onSubmit = () => {
-    if (zoneData || zoneType === 4) {
+    if (formState.changes?.data || zoneType === 4) {
       if (!zone) handleAddBusinessDeliveryZone()
       else handleUpdateBusinessDeliveryZone()
     } else {
@@ -136,6 +140,15 @@ export const BusinessDeliveryZoneInformation = (props) => {
     }
   }, [errors])
 
+  useEffect(() => {
+    if (formState.error) {
+      setAlertState({
+        open: true,
+        content: formState.error
+      })
+    }
+  }, [formState])
+
   return (
     <>
       <FormContainer onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
@@ -156,7 +169,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
             <label>{t('TYPE', 'Type')}</label>
             <TypeSelectWrapper>
               <Select
-                defaultValue={parseInt(zoneType)}
+                defaultValue={parseInt(formState.changes?.type || zoneType)}
                 options={typeOptions}
                 onChange={handleChangeType}
               />
@@ -213,19 +226,39 @@ export const BusinessDeliveryZoneInformation = (props) => {
                 clearState={clearState}
                 setClearState={setClearState}
                 type={zoneType}
-                data={zoneData}
+                data={formState.changes?.data || zoneData}
                 handleData={handleZoneData}
                 fillStyle={fillStyle}
                 infoContentString={infoContentString}
                 greenFillStyle={greenFillStyle}
                 isAddMode={!zone}
                 businessZones={businessZones}
+                kmlData={kmlData}
               />
             </WrapperMap>
           ) : (
             <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
           )
         )}
+        {!zone && (
+          <KmlButtonWrapper>
+            <Button
+              color='primary'
+              borderRadius='8px'
+              type='button'
+              onClick={() => kmlRef.current.click()}
+            >
+              <ExamineClick
+                onFiles={files => handleUploadKmlFiles(files)}
+                childRef={e => { kmlRef.current = e }}
+                accept='.kml,.kmz'
+              >
+                <span>{t('UPLOAD_KML', 'Upload KML')}</span>
+              </ExamineClick>
+            </Button>
+          </KmlButtonWrapper>
+        )}
+
         <Button
           color='primary'
           borderRadius='8px'
