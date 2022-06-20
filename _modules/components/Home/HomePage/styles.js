@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WidgeBlock = exports.WelcomeMsg = exports.VideoOnBoardingWrapper = exports.VideoOnBoardingContainer = exports.VideoAndReportsWrapper = exports.SalesGraphContainer = exports.Reports = exports.ParagraphHeaders = exports.OrdersOrSalesContainer = exports.OrdersAndSalesWrapper = exports.OrderingHelpButton = exports.IframeWrapper = exports.HomeContainer = exports.HideAndShowWrapper = exports.HeaderContainer = exports.GuideMsg = exports.FirstStoreToSellWrapper = exports.FirstStoreToSellContent = exports.DetailsContent = exports.ChartHeaderContainer = exports.Breadcrumb = exports.BoxIconContainer = exports.AssistanceWidgets = exports.AssistanceTitle = exports.AssistanceBody = void 0;
+exports.WidgeBlock = exports.WelcomeMsg = exports.VideoOnBoardingWrapper = exports.VideoOnBoardingContainer = exports.VideoAndReportsWrapper = exports.SalesGraphContainer = exports.Reports = exports.ParagraphHeaders = exports.OrdersOrSalesContainer = exports.OrdersAndSalesWrapper = exports.OrderingHelpButton = exports.IframeWrapper = exports.HomeContainer = exports.HideAndShowWrapper = exports.HeaderContainer = exports.GuideMsg = exports.FirstStoreToSellWrapper = exports.FirstStoreToSellContent = exports.FeedbackWidgets = exports.DetailsContent = exports.ChartHeaderContainer = exports.Breadcrumb = exports.BoxIconContainer = exports.AssistanceWidgets = exports.AssistanceTitle = exports.AssistanceBody = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -196,6 +196,12 @@ var AssistanceBody = _styledComponents.default.div(_templateObject39 || (_templa
 
 exports.AssistanceBody = AssistanceBody;
 
-var WidgeBlock = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin-bottom: 20px;\n  h3 {\n    font-size: 20px;\n  }\n  p {\n    font-size: 14px;\n  }\n  button {\n    border-radius: 7.6px;\n    width: 296px;\n    padding: 10px;\n    line-height: 20px;\n  }\n\n  @media (min-width: 1024px) {\n    max-width:45%;\n  }\n\n"])));
+var WidgeBlock = _styledComponents.default.div(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["\n  text-align: center;\n  margin-bottom: 20px;\n  h3 {\n    font-size: 20px;\n  }\n  p {\n    font-size: 14px;\n  }\n  button {\n    border-radius: 7.6px;\n    width: 296px;\n    padding: 10px;\n    line-height: 20px;\n  }\n\n  @media (min-width: 1024px) {\n    max-width:45%;\n  }\n"])));
 
 exports.WidgeBlock = WidgeBlock;
+
+var FeedbackWidgets = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n\n  > a {\n    margin-top: 20px;\n    border-radius: 7.6px;\n    color: ", ";\n    transition: all 0.3s linear;\n\n    &:hover {\n      text-decoration: underline;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+});
+
+exports.FeedbackWidgets = FeedbackWidgets;
