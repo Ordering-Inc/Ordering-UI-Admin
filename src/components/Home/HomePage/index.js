@@ -29,7 +29,9 @@ import {
   AssistanceTitle,
   AssistanceBody,
   WidgeBlock,
-  FeedbackWidgets
+  FeedbackWidgets,
+  FeedbackContainer,
+  ButtonWrapper
 } from './styles'
 
 const HomeUI = (props) => {
@@ -53,6 +55,9 @@ const HomeUI = (props) => {
     }
     if (location === 'tech') {
       window.open('https://www.ordering.co/ordering-support', '_blank')
+    }
+    if (location === 'canny') {
+      window.open('https://feedback.ordering.co', '_blank')
     }
   }
 
@@ -270,7 +275,14 @@ const HomeUI = (props) => {
           <ParagraphHeaders>
             <p>{t('FEEDBACK', 'Feedback')}</p>
           </ParagraphHeaders>
-          <a href='https://feedback.ordering.co' target='blank'>feedback.ordering.co</a>
+          <FeedbackContainer>
+            <h2>{t('SHARE_WITH_US_YOUR_IDEAS', 'Share with us your ideas')}</h2>
+            <p className='center'>{t('FEEDBACK_DESCRIPTION', 'Do you think our functionalities can be improved or do you want to see a new feature?')}</p>
+            <p>{t('SHARE_US_YOUR_COMMENTS', 'Share us your comments')}</p>
+            <ButtonWrapper>
+              <Button outline color='primary' onClick={() => goToLink('canny')}>{t('REQUESTS', 'Requests')}</Button>
+            </ButtonWrapper>
+          </FeedbackContainer>
         </FeedbackWidgets>
       )}
     </HomeContainer>
