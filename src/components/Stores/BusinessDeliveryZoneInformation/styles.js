@@ -88,3 +88,6 @@ export const Row = styled.div`
     width: 45%;
   }
 `
+export const KmlButtonWrapper = styled.div`
+  margin-bottom: 20px;
+`
