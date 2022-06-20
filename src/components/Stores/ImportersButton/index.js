@@ -7,6 +7,9 @@ import { SideBar } from '../../Shared'
 import { CsvImportButtonWrapper } from './styles'
 
 export const ImportersButton = (props) => {
+  const {
+    defaultSlug
+  } = props
   const [, t] = useLanguage()
   const [openImporters, setOpenImporters] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
@@ -31,6 +34,7 @@ export const ImportersButton = (props) => {
           onClose={() => setOpenImporters(false)}
         >
           <ImportersListing
+            defaultSlug={defaultSlug}
             setExtraOpen={setExtraOpen}
           />
         </SideBar>

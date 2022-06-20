@@ -53,7 +53,7 @@ export const BusinessesListingHeader = (props) => {
         </OverlayTrigger>
       </HeaderTitleContainer>
       <ActionsWrapper>
-        <ImportersButton />
+        <ImportersButton defaultSlug='sync_businesses_default' />
         <Button
           color='lightPrimary'
           borderRadius='8px'
