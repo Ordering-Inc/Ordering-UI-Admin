@@ -58,7 +58,9 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
       handleChangeFormState = props.handleChangeFormState,
       handleUpdateBusinessDeliveryZone = props.handleUpdateBusinessDeliveryZone,
       handleAddBusinessDeliveryZone = props.handleAddBusinessDeliveryZone,
-      handleDeleteBusinessDeliveryZone = props.handleDeleteBusinessDeliveryZone;
+      handleDeleteBusinessDeliveryZone = props.handleDeleteBusinessDeliveryZone,
+      kmlData = props.kmlData,
+      handleUploadKmlFiles = props.handleUploadKmlFiles;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -125,7 +127,9 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
     handleChangeInput: handleChangeInput,
     handleChangeFormState: handleChangeFormState,
     handleUpdateBusinessDeliveryZone: handleUpdateBusinessDeliveryZone,
-    handleAddBusinessDeliveryZone: handleAddBusinessDeliveryZone
+    handleAddBusinessDeliveryZone: handleAddBusinessDeliveryZone,
+    kmlData: kmlData,
+    handleUploadKmlFiles: handleUploadKmlFiles
   }), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryZoneShare.BusinessDeliveryZoneShare, {
     business: business,
     zone: zoneState.zone,

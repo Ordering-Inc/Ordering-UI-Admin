@@ -98,6 +98,10 @@ var HomeUI = function HomeUI(props) {
     if (location === 'tech') {
       window.open('https://www.ordering.co/ordering-support', '_blank');
     }
+
+    if (location === 'canny') {
+      window.open('https://feedback.ordering.co', '_blank');
+    }
   };
 
   var generateData = function generateData() {
@@ -292,10 +296,15 @@ var HomeUI = function HomeUI(props) {
     onClick: function onClick() {
       return goToLink('tech');
     }
-  }, t('TECH_SUPPORT', 'Tech Support')))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.FeedbackWidgets, null, /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('FEEDBACK', 'Feedback'))), /*#__PURE__*/_react.default.createElement("a", {
-    href: "https://feedback.ordering.co",
-    target: "blank"
-  }, "feedback.ordering.co")));
+  }, t('TECH_SUPPORT', 'Tech Support')))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.FeedbackWidgets, null, /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('FEEDBACK', 'Feedback'))), /*#__PURE__*/_react.default.createElement(_styles.FeedbackContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SHARE_WITH_US_YOUR_IDEAS', 'Share with us your ideas')), /*#__PURE__*/_react.default.createElement("p", {
+    className: "center"
+  }, t('FEEDBACK_DESCRIPTION', 'Do you think our functionalities can be improved or do you want to see a new feature?')), /*#__PURE__*/_react.default.createElement("p", null, t('SHARE_US_YOUR_COMMENTS', 'Share us your comments')), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    color: "primary",
+    onClick: function onClick() {
+      return goToLink('canny');
+    }
+  }, t('REQUESTS', 'Requests'))))));
 };
 
 var HomePage = function HomePage(props) {
