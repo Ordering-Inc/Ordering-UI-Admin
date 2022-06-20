@@ -7,7 +7,7 @@ import {
   Redirect,
   useLocation
 } from 'react-router-dom'
-import { useSession, useOrder, useLanguage, useConfig, GoogleTagManager } from 'ordering-components-admin'
+import { useSession, useOrder, useLanguage, useConfig, GoogleTagManager, CannyIdentification } from 'ordering-components-admin'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { useWindowSize } from '../src/hooks/useWindowSize'
@@ -70,6 +70,8 @@ export const App = () => {
   const onlineStatus = useOnlineStatus()
   const { height } = useWindowSize()
 
+  const cannyAppId = '5b05e5e2d3f6c47201694ad4'
+
   const { search } = useLocation()
   let queryProject
   let queryToken
@@ -112,6 +114,9 @@ export const App = () => {
             <NotNetworkConnectivity />
             {GoogleTagManager && (
               <GoogleTagManager tagId={configs?.google_tag_manager?.value} />
+            )}
+            {cannyAppId && (
+              <CannyIdentification appId={cannyAppId} />
             )}
             <Layout>
               {auth && (

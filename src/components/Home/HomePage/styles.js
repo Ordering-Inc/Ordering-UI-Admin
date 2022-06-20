@@ -368,5 +368,19 @@ export const WidgeBlock = styled.div`
   @media (min-width: 1024px) {
     max-width:45%;
   }
+`
 
+export const FeedbackWidgets = styled.div`
+  margin-top: 20px;
+
+  > a {
+    margin-top: 20px;
+    border-radius: 7.6px;
+    color: ${props => props.theme.colors.primary};
+    transition: all 0.3s linear;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `
