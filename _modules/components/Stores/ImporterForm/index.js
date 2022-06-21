@@ -52,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ImporterFormUI = function ImporterFormUI(props) {
-  var _editState$mapping$bu, _editState$mapping, _editState$mapping$ex, _editState$mapping2, _editState$mapping$ca, _editState$mapping3, _editState$mapping$ex2, _editState$mapping4, _editState$mapping$ex3, _editState$mapping5, _editState$mapping$pr, _editState$mapping6, _editState$mapping$ex4, _editState$mapping7;
+  var _editState$mapping$bu, _editState$mapping, _editState$mapping$ex, _editState$mapping2, _editState$mapping$ca, _editState$mapping3, _editState$mapping$ex2, _editState$mapping4, _editState$mapping$ex3, _editState$mapping5, _editState$mapping$pr, _editState$mapping6, _editState$mapping$ex4, _editState$mapping7, _editState$mapping$ex5, _editState$mapping8, _editState$mapping$ex6, _editState$mapping9, _editState$mapping$ex7, _editState$mapping10, _editState$mapping$ex8, _editState$mapping11, _editState$mapping$ex9, _editState$mapping12, _editState$mapping$ex10, _editState$mapping13;
 
   var isAdvanedOptions = props.isAdvanedOptions,
       formState = props.formState,
@@ -117,7 +117,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
       metafiledValue = _useState12[0],
       setMetaFiledValue = _useState12[1];
 
-  var defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default'];
+  var defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default', 'sync_extras_default', 'sync_extra_options_default', 'sync_extra_option_suboptions_default', 'sync_extra_products_default'];
   var importypeOptions = [{
     value: 1,
     content: t('STORE', 'Store'),
@@ -130,6 +130,26 @@ var ImporterFormUI = function ImporterFormUI(props) {
     value: 3,
     content: t('PRODUCT', 'Product'),
     sync_name: 'sync_products'
+  }, {
+    value: 4,
+    content: t('EXTRA_PRODUCTS', 'Extra products'),
+    sync_name: 'sync_extra_products'
+  }, {
+    value: 5,
+    content: t('EXTRAS', 'Extras'),
+    sync_name: 'sync_extras'
+  }, {
+    value: 6,
+    content: t('EXTRA_OPTIONS', 'Extra options'),
+    sync_name: 'sync_extra_options'
+  }, {
+    value: 7,
+    content: t('EXTRA_OPTION_SUBOPTIONS', 'extra option suboptions'),
+    sync_name: 'sync_extra_option_suboptions'
+  }, {
+    value: 8,
+    content: t('MULTIPLE', 'Multiple'),
+    sync_name: 'sync_multiple'
   }];
 
   var onSubmit = function onSubmit() {
@@ -249,7 +269,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     onClick: function onClick() {
       return downloadCSV();
     }
-  }, t('FILE_EXAMPLE_CSV', 'example.csv')))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (importType === 1 || importType === 2 || importType === 3) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_BUSINESS_ID', 'Business ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, t('FILE_EXAMPLE_CSV', 'example.csv')))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_BUSINESS_ID', 'Business ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "business_id",
     type: "number",
     placeholder: "0",
@@ -265,7 +285,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     onChange: handleChangeMappingInput,
     disabled: formState.loading,
     autoComplete: "off"
-  })))), (importType === 2 || importType === 3) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_CATEGORY_ID', 'Category ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })))), (importType === 2 || importType === 3 || importType === 4) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_CATEGORY_ID', 'Category ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "category_id",
     type: "number",
     placeholder: "0",
@@ -289,7 +309,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     onChange: handleChangeMappingInput,
     disabled: formState.loading,
     autoComplete: "off"
-  })))), importType === 3 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_PRODUCT_ID', 'Product ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })))), (importType === 3 || importType === 4) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_PRODUCT_ID', 'Product ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "product_id",
     type: "number",
     placeholder: "0",
@@ -302,6 +322,54 @@ var ImporterFormUI = function ImporterFormUI(props) {
     type: "number",
     placeholder: "0",
     defaultValue: (_editState$mapping$ex4 = editState === null || editState === void 0 ? void 0 : (_editState$mapping7 = editState.mapping) === null || _editState$mapping7 === void 0 ? void 0 : _editState$mapping7.external_product_id) !== null && _editState$mapping$ex4 !== void 0 ? _editState$mapping$ex4 : '',
+    onChange: handleChangeMappingInput,
+    disabled: formState.loading,
+    autoComplete: "off"
+  })))), (importType === 4 || importType === 5 || importType === 6 || importType === 7) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_EXTRA_ID', 'Extra ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "extra_id",
+    type: "number",
+    placeholder: "0",
+    defaultValue: (_editState$mapping$ex5 = editState === null || editState === void 0 ? void 0 : (_editState$mapping8 = editState.mapping) === null || _editState$mapping8 === void 0 ? void 0 : _editState$mapping8.extra_id) !== null && _editState$mapping$ex5 !== void 0 ? _editState$mapping$ex5 : '',
+    onChange: handleChangeMappingInput,
+    disabled: formState.loading,
+    autoComplete: "off"
+  }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_EXTERNAL_EXTRA_ID', 'External extra ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "external_extra_id",
+    type: "number",
+    placeholder: "0",
+    defaultValue: (_editState$mapping$ex6 = editState === null || editState === void 0 ? void 0 : (_editState$mapping9 = editState.mapping) === null || _editState$mapping9 === void 0 ? void 0 : _editState$mapping9.external_extra_id) !== null && _editState$mapping$ex6 !== void 0 ? _editState$mapping$ex6 : '',
+    onChange: handleChangeMappingInput,
+    disabled: formState.loading,
+    autoComplete: "off"
+  })))), (importType === 6 || importType === 7) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_EXTRA_OPTION_ID', 'Extra option ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "extra_option_id",
+    type: "number",
+    placeholder: "0",
+    defaultValue: (_editState$mapping$ex7 = editState === null || editState === void 0 ? void 0 : (_editState$mapping10 = editState.mapping) === null || _editState$mapping10 === void 0 ? void 0 : _editState$mapping10.extra_option_id) !== null && _editState$mapping$ex7 !== void 0 ? _editState$mapping$ex7 : '',
+    onChange: handleChangeMappingInput,
+    disabled: formState.loading,
+    autoComplete: "off"
+  }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_EXTERNAL_EXTRA_OPTION_ID', 'External extra option ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "external_extra_option_id",
+    type: "number",
+    placeholder: "0",
+    defaultValue: (_editState$mapping$ex8 = editState === null || editState === void 0 ? void 0 : (_editState$mapping11 = editState.mapping) === null || _editState$mapping11 === void 0 ? void 0 : _editState$mapping11.external_extra_option_id) !== null && _editState$mapping$ex8 !== void 0 ? _editState$mapping$ex8 : '',
+    onChange: handleChangeMappingInput,
+    disabled: formState.loading,
+    autoComplete: "off"
+  })))), importType === 7 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_EXTRA_OPTION_SUBOPTION_ID', 'Extra option suboption ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "extra_option_suboption_id",
+    type: "number",
+    placeholder: "0",
+    defaultValue: (_editState$mapping$ex9 = editState === null || editState === void 0 ? void 0 : (_editState$mapping12 = editState.mapping) === null || _editState$mapping12 === void 0 ? void 0 : _editState$mapping12.extra_option_suboption_id) !== null && _editState$mapping$ex9 !== void 0 ? _editState$mapping$ex9 : '',
+    onChange: handleChangeMappingInput,
+    disabled: formState.loading,
+    autoComplete: "off"
+  }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_EXTERNAL_EXTRA_OPTION_SUBOPTION_ID', 'External extra option suboption ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "external_extra_option_suboption_id",
+    type: "number",
+    placeholder: "0",
+    defaultValue: (_editState$mapping$ex10 = editState === null || editState === void 0 ? void 0 : (_editState$mapping13 = editState.mapping) === null || _editState$mapping13 === void 0 ? void 0 : _editState$mapping13.external_extra_option_suboption_id) !== null && _editState$mapping$ex10 !== void 0 ? _editState$mapping$ex10 : '',
     onChange: handleChangeMappingInput,
     disabled: formState.loading,
     autoComplete: "off"

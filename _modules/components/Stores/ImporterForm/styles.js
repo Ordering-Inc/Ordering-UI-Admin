@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var NewImporter = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 35px 20px;\n  overflow-x: hidden;\n"])));
+var NewImporter = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 35px 20px;\n  overflow-x: hidden;\n\n  .col {\n    display: flex;\n    align-items: flex-end;\n  }\n"])));
 
 exports.NewImporter = NewImporter;
 
@@ -61,7 +61,7 @@ var FieldAddForm = _styledComponents.default.form(_templateObject10 || (_templat
 
 exports.FieldAddForm = FieldAddForm;
 
-var FieldRow = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  &>:first-child {\n    width: 85%;\n  }\n"])));
+var FieldRow = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  &>:first-child {\n    width: 85%;\n  }\n"])));
 
 exports.FieldRow = FieldRow;
 
