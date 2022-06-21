@@ -45,7 +45,9 @@ const OrdersManagerUI = (props) => {
     selectedSubOrderStatus,
     handleSelectedSubOrderStatus,
     handleCustomOrderDetail,
-    setSelectedOrderIds
+    setSelectedOrderIds,
+    numberOfOrdersByStatus,
+    numberOfOrdersBySubstatus
   } = props
 
   const [, t] = useLanguage()
@@ -187,6 +189,7 @@ const OrdersManagerUI = (props) => {
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
+          numberOfOrdersByStatus={numberOfOrdersByStatus}
         />
         <OrderSubFilterControls isColumn={selectedOrderIds?.length}>
           <OrderStatusSubFilterWrapper isColumn={selectedOrderIds?.length}>
@@ -194,6 +197,7 @@ const OrdersManagerUI = (props) => {
               ordersStatusGroup={ordersStatusGroup}
               selectedSubOrderStatus={selectedSubOrderStatus}
               handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
+              numberOfOrdersBySubstatus={numberOfOrdersBySubstatus}
             />
           </OrderStatusSubFilterWrapper>
           {!isSelectedOrders && (
