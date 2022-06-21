@@ -507,6 +507,7 @@ export const MessagesUI = (props) => {
                                   {t('TO', 'to')} {' '}
                                   <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
                                   {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
+                                  <p><strong>Author: </strong>{message?.author?.name + ' ' + message?.author?.lastname}</p>
                                 </>
                                 <OverlayTrigger
                                   placement='top'
@@ -569,6 +570,7 @@ export const MessagesUI = (props) => {
                                   <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
                                   <strong>{message?.change?.comment ? (`\n${t('COMMENT', 'Comment:')}`) : ''}</strong>
                                   {message?.change?.comment ? ` ${message?.change?.comment}` : ''}
+                                  <p><strong>Author: </strong>{message?.author?.name + ' ' + message?.author?.lastname}</p>
                                 </div>
                                 <OverlayTrigger
                                   placement='top'
