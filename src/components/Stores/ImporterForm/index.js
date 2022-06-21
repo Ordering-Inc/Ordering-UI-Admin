@@ -60,24 +60,21 @@ export const ImporterFormUI = (props) => {
   const [metafiledKey, setMetaFiledKey] = useState()
   const [metafiledValue, setMetaFiledValue] = useState()
 
-  const defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default']
+  const defaultImporterSlugs = [
+    'sync_businesses_default', 'sync_categories_default', 'sync_products_default',
+    'sync_extras_default', 'sync_extra_options_default', 'sync_extra_option_suboptions_default',
+    'sync_extra_products_default'
+  ]
 
   const importypeOptions = [
-    {
-      value: 1,
-      content: t('STORE', 'Store'),
-      sync_name: 'sync_businesses'
-    },
-    {
-      value: 2,
-      content: t('CATEGORY', 'Category'),
-      sync_name: 'sync_categories'
-    },
-    {
-      value: 3,
-      content: t('PRODUCT', 'Product'),
-      sync_name: 'sync_products'
-    }
+    { value: 1, content: t('STORE', 'Store'), sync_name: 'sync_businesses' },
+    { value: 2, content: t('CATEGORY', 'Category'), sync_name: 'sync_categories' },
+    { value: 3, content: t('PRODUCT', 'Product'), sync_name: 'sync_products' },
+    { value: 4, content: t('EXTRA_PRODUCTS', 'Extra products'), sync_name: 'sync_extra_products' },
+    { value: 5, content: t('EXTRAS', 'Extras'), sync_name: 'sync_extras' },
+    { value: 6, content: t('EXTRA_OPTIONS', 'Extra options'), sync_name: 'sync_extra_options' },
+    { value: 7, content: t('EXTRA_OPTION_SUBOPTIONS', 'extra option suboptions'), sync_name: 'sync_extra_option_suboptions' },
+    { value: 8, content: t('MULTIPLE', 'Multiple'), sync_name: 'sync_multiple' }
   ]
 
   const onSubmit = () => {
@@ -203,39 +200,37 @@ export const ImporterFormUI = (props) => {
           </span>
         </InputWrapper>
         <>
-          {(importType === 1 || importType === 2 || importType === 3) && (
-            <Row>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_BUSINESS_ID', 'Business ID')}</label>
-                  <Input
-                    name='business_id'
-                    type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.business_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_EXTERNAL_BUSINESS_ID', 'External business ID')}</label>
-                  <Input
-                    name='external_business_id'
-                    type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.external_business_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-            </Row>
-          )}
-          {(importType === 2 || importType === 3) && (
+          <Row>
+            <Col>
+              <InputWrapper>
+                <label>{t('MAPPING_BUSINESS_ID', 'Business ID')}</label>
+                <Input
+                  name='business_id'
+                  type='number'
+                  placeholder='0'
+                  defaultValue={editState?.mapping?.business_id ?? ''}
+                  onChange={handleChangeMappingInput}
+                  disabled={formState.loading}
+                  autoComplete='off'
+                />
+              </InputWrapper>
+            </Col>
+            <Col>
+              <InputWrapper>
+                <label>{t('MAPPING_EXTERNAL_BUSINESS_ID', 'External business ID')}</label>
+                <Input
+                  name='external_business_id'
+                  type='number'
+                  placeholder='0'
+                  defaultValue={editState?.mapping?.external_business_id ?? ''}
+                  onChange={handleChangeMappingInput}
+                  disabled={formState.loading}
+                  autoComplete='off'
+                />
+              </InputWrapper>
+            </Col>
+          </Row>
+          {(importType === 2 || importType === 3 || importType === 4) && (
             <Row>
               <Col>
                 <InputWrapper>
@@ -281,7 +276,7 @@ export const ImporterFormUI = (props) => {
               </Col>
             </Row>
           )}
-          {importType === 3 && (
+          {(importType === 3 || importType === 4) && (
             <Row>
               <Col>
                 <InputWrapper>
@@ -304,6 +299,99 @@ export const ImporterFormUI = (props) => {
                     type='number'
                     placeholder='0'
                     defaultValue={editState?.mapping?.external_product_id ?? ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+            </Row>
+          )}
+          {(importType === 4 || importType === 5 || importType === 6 || importType === 7) && (
+            <Row>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_EXTRA_ID', 'Extra ID')}</label>
+                  <Input
+                    name='extra_id' type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.extra_id ?? ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_EXTERNAL_EXTRA_ID', 'External extra ID')}</label>
+                  <Input
+                    name='external_extra_id'
+                    type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.external_extra_id ?? ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+            </Row>
+          )}
+          {(importType === 6 || importType === 7) && (
+            <Row>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_EXTRA_OPTION_ID', 'Extra option ID')}</label>
+                  <Input
+                    name='extra_option_id' type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.extra_option_id ?? ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_EXTERNAL_EXTRA_OPTION_ID', 'External extra option ID')}</label>
+                  <Input
+                    name='external_extra_option_id'
+                    type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.external_extra_option_id ?? ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+            </Row>
+          )}
+          {(importType === 7) && (
+            <Row>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_EXTRA_OPTION_SUBOPTION_ID', 'Extra option suboption ID')}</label>
+                  <Input
+                    name='extra_option_suboption_id' type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.extra_option_suboption_id ?? ''}
+                    onChange={handleChangeMappingInput}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                </InputWrapper>
+              </Col>
+              <Col>
+                <InputWrapper>
+                  <label>{t('MAPPING_EXTERNAL_EXTRA_OPTION_SUBOPTION_ID', 'External extra option suboption ID')}</label>
+                  <Input
+                    name='external_extra_option_suboption_id'
+                    type='number'
+                    placeholder='0'
+                    defaultValue={editState?.mapping?.external_extra_option_suboption_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
