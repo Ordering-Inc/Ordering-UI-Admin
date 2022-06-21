@@ -127,10 +127,10 @@ const PointsWalletLevelsUI = (props) => {
             <span>{t('NAME', 'Name')}</span>
           </LevelNameWrapper>
           <LastWrapper>
-            <span>{t('IN_THE_LAST', 'In the last')}</span>
+            <span>{t('ACCUMULATION_RATE', 'Accumulation rate')}</span>
           </LastWrapper>
           <PointsWrapper>
-            <span>{t('POINTS', 'Points')}</span>
+            <span>{t('POINTS_REQUIRED', 'Points required')}</span>
           </PointsWrapper>
           <ButtonWrapper />
         </LevelWrapper>

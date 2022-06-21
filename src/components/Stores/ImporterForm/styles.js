@@ -5,6 +5,11 @@ export const NewImporter = styled.div`
   width: 100%;
   padding: 35px 20px;
   overflow-x: hidden;
+
+  .col {
+    display: flex;
+    align-items: flex-end;
+  }
 `
 
 export const Header = styled.div`
@@ -87,6 +92,7 @@ export const FieldAddForm = styled.form`
 
 `
 export const FieldRow = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
   &>:first-child {
