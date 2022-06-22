@@ -130,6 +130,17 @@ export const OptionInputWrapper = styled.div`
   input {
     width: 100%;
     max-width: 215px;
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      text-transform: lowercase;
+    }
+
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+      text-transform: lowercase;
+    }
+
+    &::-ms-input-placeholder { /* Microsoft Edge */
+      text-transform: lowercase;
+    }
   }
 `
 
