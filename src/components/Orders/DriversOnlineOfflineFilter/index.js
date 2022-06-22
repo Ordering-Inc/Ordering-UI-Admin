@@ -8,7 +8,9 @@ import {
 export const DriversOnlineOfflineFilter = (props) => {
   const {
     driversIsOnline,
-    handleChangeDriverIsOnline
+    handleChangeDriverIsOnline,
+    numberOfonlineDrivers,
+    numberOfofflineDrivers
   } = props
   const [, t] = useLanguage()
   return (
@@ -18,12 +20,14 @@ export const DriversOnlineOfflineFilter = (props) => {
         onClick={() => handleChangeDriverIsOnline(true)}
       >
         {t('ONLINE', 'Online')}
+        <span>({numberOfonlineDrivers ?? 0})</span>
       </Tab>
       <Tab
         active={!driversIsOnline}
         onClick={() => handleChangeDriverIsOnline(false)}
       >
         {t('INACTIVE_DRIVERS', 'Offline')}
+        <span>({numberOfofflineDrivers ?? 0})</span>
       </Tab>
     </Container>
   )

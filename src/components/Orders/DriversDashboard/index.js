@@ -25,6 +25,11 @@ export const DriversDashboard = (props) => {
     handleOpenDriverOrders
   } = props
 
+  const numberOfonlineDrivers = onlineDrivers.length
+  const numberOfofflineDrivers = offlineDrivers.length
+  const numberOfbusyDrivers = driversIsOnline ? onlineDrivers.filter(ele => ele.busy).length : offlineDrivers.filter(ele => ele.busy).length
+  const numberOfnotBusyDrivers = driversIsOnline ? onlineDrivers.filter(ele => !ele.busy).length : offlineDrivers.filter(ele => !ele.busy).length
+
   return (
     <DriversDashboardContainer>
       <DriversContainer>
@@ -32,10 +37,14 @@ export const DriversDashboard = (props) => {
           <DriversOnlineOfflineFilter
             driversIsOnline={driversIsOnline}
             handleChangeDriverIsOnline={handleChangeDriverIsOnline}
+            numberOfonlineDrivers={numberOfonlineDrivers}
+            numberOfofflineDrivers={numberOfofflineDrivers}
           />
           <DriversBusyStatusFilter
             driversSubfilter={driversSubfilter}
             handleChangeDriversSubFilter={handleChangeDriversSubFilter}
+            numberOfbusyDrivers={numberOfbusyDrivers}
+            numberOfnotBusyDrivers={numberOfnotBusyDrivers}
           />
         </FilterContainer>
         <WrapperDriversList id='driversList'>
