@@ -29,6 +29,7 @@ export const ImportersListingUI = (props) => {
   const [selectedImporterJob, setSelectedImporterJob] = useState({})
   const [importJobFormMoveDistance, setImportJobFormMoveDistance] = useState(0)
   const [isOpenedDefaultImporter, setIsOpenedDefaultImporter] = useState(false)
+  const [openMappingDetails, setOpenMappingDetails] = useState(false)
 
   const addNewImporter = () => {
     setSelectedImporter({})
@@ -93,8 +94,10 @@ export const ImportersListingUI = (props) => {
         />
         {openNewImporter && (
           <SideBar
-            isBorderShow
+            isBorderShow={!openMappingDetails}
             open={openNewImporter}
+            defaultSideBarWidth={openMappingDetails ? 1000 : 500}
+            moveDistance={openMappingDetails ? 500 : 0}
             onClose={() => {
               setOpenNewImporter(false)
               setSelectedImporter({})
@@ -105,6 +108,8 @@ export const ImportersListingUI = (props) => {
               selectedImporter={selectedImporter}
               handleSuccessAdd={handleSuccessAddImporter}
               handleSuccessUpdateImporter={handleSuccessUpdateImporter}
+              openMappingDetails={openMappingDetails}
+              setOpenMappingDetails={setOpenMappingDetails}
               onClose={() => {
                 setOpenNewImporter(false)
                 setSelectedImporter({})

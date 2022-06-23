@@ -11,7 +11,8 @@ export const OrderStatusSubFilter = (props) => {
   const {
     selectedSubOrderStatus,
     ordersStatusGroup,
-    handleSelectedSubOrderStatus
+    handleSelectedSubOrderStatus,
+    numberOfOrdersBySubstatus
   } = props
 
   const [, t] = useLanguage()
@@ -116,6 +117,7 @@ export const OrderStatusSubFilter = (props) => {
             onClick={() => handleChange(status.key)}
           >
             {status.value}
+            {(numberOfOrdersBySubstatus !== null && numberOfOrdersBySubstatus !== undefined) && <span>({numberOfOrdersBySubstatus[status.key] || 0})</span>}
             {(selectedSubOrderStatus?.pending.includes(status.key) ||
               selectedSubOrderStatus?.inProgress.includes(status.key) ||
               selectedSubOrderStatus?.completed.includes(status.key) ||

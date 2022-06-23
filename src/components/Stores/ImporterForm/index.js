@@ -7,6 +7,7 @@ import { useLanguage, ImporterForm as ImporterFormController } from 'ordering-co
 import { Alert } from '../../Shared'
 import { Button, Input } from '../../../styles'
 import { Select } from '../../../styles/Select/FirstSelect'
+import { ChildMapplingList } from '../ChildMapplingList'
 
 import {
   NewImporter,
@@ -45,7 +46,12 @@ export const ImporterFormUI = (props) => {
     setIsEdit,
     editState,
     editImporter,
-    downloadCSV
+    downloadCSV,
+    openMappingDetails,
+    setOpenMappingDetails,
+    isMapping,
+    headerTitle,
+    handleUpdateMultipleMapping
   } = props
 
   const [, t] = useLanguage()
@@ -79,7 +85,7 @@ export const ImporterFormUI = (props) => {
 
   const onSubmit = () => {
     if (Object.keys(formState.changes).length === 0) return
-    if (Object.keys(editState).length > 0) editImporter()
+    if (Object.keys(selectedImporter).length > 0) editImporter()
     else handleCreateImporter()
   }
 
@@ -143,42 +149,50 @@ export const ImporterFormUI = (props) => {
   return (
     <NewImporter>
       <Header>
-        <Title>
-          {
-            isAdvanedOptions
-              ? t('ADVANCED_OPTION', 'Advanced Options')
-              : selectedImporter?.id ? t('EDIT_IMPORTER', 'Edit importer') : t('ADD_IMPORTER', 'Add importer')
-          }
-        </Title>
+        {headerTitle ? (
+          <Title>{headerTitle}</Title>
+        ) : (
+          <Title>
+            {
+              isAdvanedOptions
+                ? t('ADVANCED_OPTION', 'Advanced Options')
+                : selectedImporter?.id ? t('EDIT_IMPORTER', 'Edit importer') : t('ADD_IMPORTER', 'Add importer')
+            }
+          </Title>
+        )}
       </Header>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} id='importer-form'>
-        <InputWrapper>
-          <label>{t('NAME', 'Name')}</label>
-          <Input
-            name='name'
-            type='text'
-            placeholder={t('NAME', 'name')}
-            defaultValue={editState?.name}
-            onChange={handleChangeInput}
-            disabled={formState.loading || isAdvanedOptions || defaultImporterSlugs.includes(editState?.slug)}
-            autoComplete='off'
-          />
-        </InputWrapper>
+        {!isMapping && (
+          <>
+            <InputWrapper>
+              <label>{t('NAME', 'Name')}</label>
+              <Input
+                name='name'
+                type='text'
+                placeholder={t('NAME', 'name')}
+                defaultValue={editState?.name}
+                onChange={handleChangeInput}
+                disabled={formState.loading || isAdvanedOptions || defaultImporterSlugs.includes(editState?.slug)}
+                autoComplete='off'
+              />
+            </InputWrapper>
 
-        <InputWrapper>
-          <label>{t('SLUG', 'Slug')}</label>
-          <Input
-            name='slug'
-            placeholder={t('SLUG', 'slug')}
-            defaultValue={editState?.slug}
-            onChange={handleChangeInput}
-            disabled={formState.loading || isAdvanedOptions || defaultImporterSlugs.includes(editState?.slug)}
-            autoComplete='off'
-            onKeyPress={e => {
-              if (e.which === 32) { e.preventDefault() }
-            }}
-          />
-        </InputWrapper>
+            <InputWrapper>
+              <label>{t('SLUG', 'Slug')}</label>
+              <Input
+                name='slug'
+                placeholder={t('SLUG', 'slug')}
+                defaultValue={editState?.slug}
+                onChange={handleChangeInput}
+                disabled={formState.loading || isAdvanedOptions || defaultImporterSlugs.includes(editState?.slug)}
+                autoComplete='off'
+                onKeyPress={e => {
+                  if (e.which === 32) { e.preventDefault() }
+                }}
+              />
+            </InputWrapper>
+          </>
+        )}
 
         {!isAdvanedOptions && (
           <InputWrapper>
@@ -192,53 +206,28 @@ export const ImporterFormUI = (props) => {
           </InputWrapper>
         )}
 
-        <InputWrapper>
-          <label style={{ fontSize: '16px', lineHeight: '24px', fontWeight: '600' }}>{t('MAPPING', 'Mapping')}</label>
-          <span style={{ fontSize: '14px', lineHeight: '24px' }}>
-            {t('CSV_FILE_EXAMPLE', 'CSV file example')}
-            <ExampleCSV onClick={() => downloadCSV()}>{t('FILE_EXAMPLE_CSV', 'example.csv')}</ExampleCSV>
-          </span>
-        </InputWrapper>
-        <>
-          <Row>
-            <Col>
-              <InputWrapper>
-                <label>{t('MAPPING_BUSINESS_ID', 'Business ID')}</label>
-                <Input
-                  name='business_id'
-                  type='number'
-                  placeholder='0'
-                  defaultValue={editState?.mapping?.business_id ?? ''}
-                  onChange={handleChangeMappingInput}
-                  disabled={formState.loading}
-                  autoComplete='off'
-                />
-              </InputWrapper>
-            </Col>
-            <Col>
-              <InputWrapper>
-                <label>{t('MAPPING_EXTERNAL_BUSINESS_ID', 'External business ID')}</label>
-                <Input
-                  name='external_business_id'
-                  type='number'
-                  placeholder='0'
-                  defaultValue={editState?.mapping?.external_business_id ?? ''}
-                  onChange={handleChangeMappingInput}
-                  disabled={formState.loading}
-                  autoComplete='off'
-                />
-              </InputWrapper>
-            </Col>
-          </Row>
-          {(importType === 2 || importType === 3 || importType === 4) && (
+        {!isMapping && (
+          <InputWrapper>
+            <label style={{ fontSize: '16px', lineHeight: '24px', fontWeight: '600' }}>{t('MAPPING', 'Mapping')}</label>
+            {Object.keys(selectedImporter).length > 0 && (
+              <span style={{ fontSize: '14px', lineHeight: '24px' }}>
+                {t('CSV_FILE_EXAMPLE', 'CSV file example')}
+                <ExampleCSV onClick={() => downloadCSV()}>{t('FILE_EXAMPLE_CSV', 'example.csv')}</ExampleCSV>
+              </span>
+            )}
+          </InputWrapper>
+        )}
+        {importType !== 8 && (
+          <>
             <Row>
               <Col>
                 <InputWrapper>
-                  <label>{t('MAPPING_CATEGORY_ID', 'Category ID')}</label>
+                  <label>{t('MAPPING_BUSINESS_ID', 'Business ID')}</label>
                   <Input
-                    name='category_id' type='number'
+                    name='business_id'
+                    type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.category_id ?? ''}
+                    defaultValue={editState?.mapping?.business_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -247,27 +236,12 @@ export const ImporterFormUI = (props) => {
               </Col>
               <Col>
                 <InputWrapper>
-                  <label>{t('MAPPING_EXTERNAL_CATEGORY_ID', 'External category ID')}</label>
+                  <label>{t('MAPPING_EXTERNAL_BUSINESS_ID', 'External business ID')}</label>
                   <Input
-                    name='external_category_id'
+                    name='external_business_id'
                     type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.external_category_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-              <Col /> {/* empty col for layout */}
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_EXTERNAL_PARENT_CATEGORY_ID', 'External parent category ID')}</label>
-                  <Input
-                    name='external_parent_category_id'
-                    type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.external_parent_category_id ?? ''}
+                    defaultValue={editState?.mapping?.external_business_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -275,134 +249,180 @@ export const ImporterFormUI = (props) => {
                 </InputWrapper>
               </Col>
             </Row>
-          )}
-          {(importType === 3 || importType === 4) && (
-            <Row>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_PRODUCT_ID', 'Product ID')}</label>
-                  <Input
-                    name='product_id' type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.product_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_EXTERNAL_PRODUCT_ID', 'External product ID')}</label>
-                  <Input
-                    name='external_product_id'
-                    type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.external_product_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-            </Row>
-          )}
-          {(importType === 4 || importType === 5 || importType === 6 || importType === 7) && (
-            <Row>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_EXTRA_ID', 'Extra ID')}</label>
-                  <Input
-                    name='extra_id' type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.extra_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_EXTERNAL_EXTRA_ID', 'External extra ID')}</label>
-                  <Input
-                    name='external_extra_id'
-                    type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.external_extra_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-            </Row>
-          )}
-          {(importType === 6 || importType === 7) && (
-            <Row>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_EXTRA_OPTION_ID', 'Extra option ID')}</label>
-                  <Input
-                    name='extra_option_id' type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.extra_option_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_EXTERNAL_EXTRA_OPTION_ID', 'External extra option ID')}</label>
-                  <Input
-                    name='external_extra_option_id'
-                    type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.external_extra_option_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-            </Row>
-          )}
-          {(importType === 7) && (
-            <Row>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_EXTRA_OPTION_SUBOPTION_ID', 'Extra option suboption ID')}</label>
-                  <Input
-                    name='extra_option_suboption_id' type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.extra_option_suboption_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-              <Col>
-                <InputWrapper>
-                  <label>{t('MAPPING_EXTERNAL_EXTRA_OPTION_SUBOPTION_ID', 'External extra option suboption ID')}</label>
-                  <Input
-                    name='external_extra_option_suboption_id'
-                    type='number'
-                    placeholder='0'
-                    defaultValue={editState?.mapping?.external_extra_option_suboption_id ?? ''}
-                    onChange={handleChangeMappingInput}
-                    disabled={formState.loading}
-                    autoComplete='off'
-                  />
-                </InputWrapper>
-              </Col>
-            </Row>
-          )}
-        </>
+            {(importType === 2 || importType === 3 || importType === 4) && (
+              <Row>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_CATEGORY_ID', 'Category ID')}</label>
+                    <Input
+                      name='category_id' type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.category_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_EXTERNAL_CATEGORY_ID', 'External category ID')}</label>
+                    <Input
+                      name='external_category_id'
+                      type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.external_category_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+                <Col /> {/* empty col for layout */}
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_EXTERNAL_PARENT_CATEGORY_ID', 'External parent category ID')}</label>
+                    <Input
+                      name='external_parent_category_id'
+                      type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.external_parent_category_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+              </Row>
+            )}
+            {(importType === 3 || importType === 4) && (
+              <Row>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_PRODUCT_ID', 'Product ID')}</label>
+                    <Input
+                      name='product_id' type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.product_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_EXTERNAL_PRODUCT_ID', 'External product ID')}</label>
+                    <Input
+                      name='external_product_id'
+                      type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.external_product_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+              </Row>
+            )}
+            {(importType === 4 || importType === 5 || importType === 6 || importType === 7) && (
+              <Row>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_EXTRA_ID', 'Extra ID')}</label>
+                    <Input
+                      name='extra_id' type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.extra_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_EXTERNAL_EXTRA_ID', 'External extra ID')}</label>
+                    <Input
+                      name='external_extra_id'
+                      type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.external_extra_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+              </Row>
+            )}
+            {(importType === 6 || importType === 7) && (
+              <Row>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_EXTRA_OPTION_ID', 'Extra option ID')}</label>
+                    <Input
+                      name='extra_option_id' type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.extra_option_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_EXTERNAL_EXTRA_OPTION_ID', 'External extra option ID')}</label>
+                    <Input
+                      name='external_extra_option_id'
+                      type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.external_extra_option_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+              </Row>
+            )}
+            {(importType === 7) && (
+              <Row>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_EXTRA_OPTION_SUBOPTION_ID', 'Extra option suboption ID')}</label>
+                    <Input
+                      name='extra_option_suboption_id' type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.extra_option_suboption_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+                <Col>
+                  <InputWrapper>
+                    <label>{t('MAPPING_EXTERNAL_EXTRA_OPTION_SUBOPTION_ID', 'External extra option suboption ID')}</label>
+                    <Input
+                      name='external_extra_option_suboption_id'
+                      type='number'
+                      placeholder='0'
+                      defaultValue={editState?.mapping?.external_extra_option_suboption_id ?? ''}
+                      onChange={handleChangeMappingInput}
+                      disabled={formState.loading}
+                      autoComplete='off'
+                    />
+                  </InputWrapper>
+                </Col>
+              </Row>
+            )}
+          </>
+        )}
       </FormInput>
-      {!isAdvanedOptions && (
+      {!isAdvanedOptions && importType !== 8 && (
         <FiledListWrapper>
           <label>{t('FIELDS', 'Fields')}</label>
           {Object.keys(fieldList).length > 0 && (
@@ -466,66 +486,77 @@ export const ImporterFormUI = (props) => {
         </FiledListWrapper>
       )}
 
-      <FiledListWrapper>
-        <label>{t('META_FIELDS', 'MetaFields')}</label>
-        {Object.keys(metafieldList) && Object.keys(metafieldList).length > 0 && (
-          <>
-            {Object.entries(metafieldList).map((value, i) => (
-              <Row key={i} style={{ marginBottom: '15px' }}>
-                <Col>
-                  <FieldName>{value[0]}</FieldName>
-                </Col>
-                <Col>
-                  <FieldRow>
-                    <FieldValue>{value[1]}</FieldValue>
-                    <ButtonWrapper>
-                      <button onClick={() => removeMetaField(value[0])}>
-                        <BsTrash />
-                      </button>
-                    </ButtonWrapper>
-                  </FieldRow>
-                </Col>
-              </Row>
-            ))}
-          </>
-        )}
-        <FieldAddForm
-          onSubmit={metafieldMethods.handleSubmit(onNewMetaFiledSubmit)}
-          id='meta-field-form'
-        >
-          <Row style={{ alignItems: 'flex-end' }}>
-            <Col>
-              <Input
-                name='key'
-                type='text'
-                placeholder={t('NAME', 'name')}
-                onChange={(e) => setMetaFiledKey(e.target.value)}
-                disabled={formState.loading}
-                autoComplete='off'
-              />
-            </Col>
-            <Col style={{ width: '49%' }}>
-              <FieldRow>
+      {importType !== 8 && (
+        <FiledListWrapper>
+          <label>{t('META_FIELDS', 'MetaFields')}</label>
+          {Object.keys(metafieldList) && Object.keys(metafieldList).length > 0 && (
+            <>
+              {Object.entries(metafieldList).map((value, i) => (
+                <Row key={i} style={{ marginBottom: '15px' }}>
+                  <Col>
+                    <FieldName>{value[0]}</FieldName>
+                  </Col>
+                  <Col>
+                    <FieldRow>
+                      <FieldValue>{value[1]}</FieldValue>
+                      <ButtonWrapper>
+                        <button onClick={() => removeMetaField(value[0])}>
+                          <BsTrash />
+                        </button>
+                      </ButtonWrapper>
+                    </FieldRow>
+                  </Col>
+                </Row>
+              ))}
+            </>
+          )}
+          <FieldAddForm
+            onSubmit={metafieldMethods.handleSubmit(onNewMetaFiledSubmit)}
+            id='meta-field-form'
+          >
+            <Row style={{ alignItems: 'flex-end' }}>
+              <Col>
                 <Input
-                  name='value'
-                  type='number'
-                  placeholder='0'
-                  onChange={(e) => setMetaFiledValue(e.target.value)}
+                  name='key'
+                  type='text'
+                  placeholder={t('NAME', 'name')}
+                  onChange={(e) => setMetaFiledKey(e.target.value)}
                   disabled={formState.loading}
                   autoComplete='off'
                 />
-                <ButtonWrapper>
-                  <button
-                    type='submit'
-                  >
-                    <BsPlusSquare />
-                  </button>
-                </ButtonWrapper>
-              </FieldRow>
-            </Col>
-          </Row>
-        </FieldAddForm>
-      </FiledListWrapper>
+              </Col>
+              <Col style={{ width: '49%' }}>
+                <FieldRow>
+                  <Input
+                    name='value'
+                    type='number'
+                    placeholder='0'
+                    onChange={(e) => setMetaFiledValue(e.target.value)}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                  <ButtonWrapper>
+                    <button
+                      type='submit'
+                    >
+                      <BsPlusSquare />
+                    </button>
+                  </ButtonWrapper>
+                </FieldRow>
+              </Col>
+            </Row>
+          </FieldAddForm>
+        </FiledListWrapper>
+      )}
+      {importType === 8 && (
+        <ChildMapplingList
+          mappingList={editState?.mapping || []}
+          importypeOptions={importypeOptions}
+          openMappingDetails={openMappingDetails}
+          setOpenMappingDetails={setOpenMappingDetails}
+          handleUpdateMultipleMapping={handleUpdateMultipleMapping}
+        />
+      )}
 
       <ActionsForm>
         <Button
@@ -535,9 +566,10 @@ export const ImporterFormUI = (props) => {
           disabled={!(Object.keys(formState?.changes).length > 1) || formState?.loading}
           onClick={() => onSubmit()}
         >
-          {formState?.loading ? t('LOADING', 'Loading') : (Object.keys(editState).length > 0 ? t('EDIT', 'Edit') : t('ADD', 'Add'))}
+          {formState?.loading ? t('LOADING', 'Loading') : (Object.keys(selectedImporter).length > 0 ? t('EDIT', 'Edit') : t('ADD', 'Add'))}
         </Button>
       </ActionsForm>
+
       <Alert
         title={t('IMPORT', 'Import')}
         content={alertState.content}
