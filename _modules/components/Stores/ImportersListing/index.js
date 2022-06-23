@@ -88,6 +88,11 @@ var ImportersListingUI = function ImportersListingUI(props) {
       isOpenedDefaultImporter = _useState12[0],
       setIsOpenedDefaultImporter = _useState12[1];
 
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      openMappingDetails = _useState14[0],
+      setOpenMappingDetails = _useState14[1];
+
   var addNewImporter = function addNewImporter() {
     setSelectedImporter({});
     setOpenImportCsv(false);
@@ -139,8 +144,10 @@ var ImportersListingUI = function ImportersListingUI(props) {
     setSelectedImporter: setSelectedImporter,
     handleEditImporter: handleEditImporter
   }), openNewImporter && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    isBorderShow: true,
+    isBorderShow: !openMappingDetails,
     open: openNewImporter,
+    defaultSideBarWidth: openMappingDetails ? 1000 : 500,
+    moveDistance: openMappingDetails ? 500 : 0,
     onClose: function onClose() {
       setOpenNewImporter(false);
       setSelectedImporter({});
@@ -150,6 +157,8 @@ var ImportersListingUI = function ImportersListingUI(props) {
     selectedImporter: selectedImporter,
     handleSuccessAdd: handleSuccessAddImporter,
     handleSuccessUpdateImporter: handleSuccessUpdateImporter,
+    openMappingDetails: openMappingDetails,
+    setOpenMappingDetails: setOpenMappingDetails,
     onClose: function onClose() {
       setOpenNewImporter(false);
       setSelectedImporter({});

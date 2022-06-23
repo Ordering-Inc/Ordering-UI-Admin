@@ -79,7 +79,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       selectedSubOrderStatus = props.selectedSubOrderStatus,
       handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
       handleCustomOrderDetail = props.handleCustomOrderDetail,
-      setSelectedOrderIds = props.setSelectedOrderIds;
+      setSelectedOrderIds = props.setSelectedOrderIds,
+      numberOfOrdersByStatus = props.numberOfOrdersByStatus,
+      numberOfOrdersBySubstatus = props.numberOfOrdersBySubstatus;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -271,7 +273,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     selectedOrderStatus: ordersStatusGroup,
-    changeOrderStatus: handleOrdersStatusGroupFilter
+    changeOrderStatus: handleOrdersStatusGroupFilter,
+    numberOfOrdersByStatus: numberOfOrdersByStatus
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, {
     isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
   }, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, {
@@ -279,7 +282,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
     ordersStatusGroup: ordersStatusGroup,
     selectedSubOrderStatus: selectedSubOrderStatus,
-    handleSelectedSubOrderStatus: handleSelectedSubOrderStatus
+    handleSelectedSubOrderStatus: handleSelectedSubOrderStatus,
+    numberOfOrdersBySubstatus: numberOfOrdersBySubstatus
   })), !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_OrdersDashboardControls.OrdersDashboardControls, {
     selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
     filterValues: filterValues,

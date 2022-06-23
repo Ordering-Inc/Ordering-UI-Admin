@@ -25,6 +25,8 @@ var _styles = require("../../../styles");
 
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
 
+var _ChildMapplingList = require("../ChildMapplingList");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -73,7 +75,12 @@ var ImporterFormUI = function ImporterFormUI(props) {
       setIsEdit = props.setIsEdit,
       editState = props.editState,
       editImporter = props.editImporter,
-      downloadCSV = props.downloadCSV;
+      downloadCSV = props.downloadCSV,
+      openMappingDetails = props.openMappingDetails,
+      setOpenMappingDetails = props.setOpenMappingDetails,
+      isMapping = props.isMapping,
+      headerTitle = props.headerTitle,
+      handleUpdateMultipleMapping = props.handleUpdateMultipleMapping;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -154,7 +161,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
 
   var onSubmit = function onSubmit() {
     if (Object.keys(formState.changes).length === 0) return;
-    if (Object.keys(editState).length > 0) editImporter();else handleCreateImporter();
+    if (Object.keys(selectedImporter).length > 0) editImporter();else handleCreateImporter();
   };
 
   var onNewFiledSubmit = function onNewFiledSubmit() {
@@ -224,10 +231,10 @@ var ImporterFormUI = function ImporterFormUI(props) {
       handleSelectOption(targetOption === null || targetOption === void 0 ? void 0 : targetOption.value);
     }
   }, [selectedImporter]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.NewImporter, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, isAdvanedOptions ? t('ADVANCED_OPTION', 'Advanced Options') : selectedImporter !== null && selectedImporter !== void 0 && selectedImporter.id ? t('EDIT_IMPORTER', 'Edit importer') : t('ADD_IMPORTER', 'Add importer'))), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.NewImporter, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, headerTitle ? /*#__PURE__*/_react.default.createElement(_styles2.Title, null, headerTitle) : /*#__PURE__*/_react.default.createElement(_styles2.Title, null, isAdvanedOptions ? t('ADVANCED_OPTION', 'Advanced Options') : selectedImporter !== null && selectedImporter !== void 0 && selectedImporter.id ? t('EDIT_IMPORTER', 'Edit importer') : t('ADD_IMPORTER', 'Add importer'))), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     id: "importer-form"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, !isMapping && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     type: "text",
     placeholder: t('NAME', 'name'),
@@ -247,20 +254,20 @@ var ImporterFormUI = function ImporterFormUI(props) {
         e.preventDefault();
       }
     }
-  })), !isAdvanedOptions && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }))), !isAdvanedOptions && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     name: "type",
     options: importypeOptions,
     defaultValue: importType,
     onChange: function onChange(value) {
       return handleSelectOption(value);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", {
+  })), !isMapping && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", {
     style: {
       fontSize: '16px',
       lineHeight: '24px',
       fontWeight: '600'
     }
-  }, t('MAPPING', 'Mapping')), /*#__PURE__*/_react.default.createElement("span", {
+  }, t('MAPPING', 'Mapping')), Object.keys(selectedImporter).length > 0 && /*#__PURE__*/_react.default.createElement("span", {
     style: {
       fontSize: '14px',
       lineHeight: '24px'
@@ -269,7 +276,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     onClick: function onClick() {
       return downloadCSV();
     }
-  }, t('FILE_EXAMPLE_CSV', 'example.csv')))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_BUSINESS_ID', 'Business ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, t('FILE_EXAMPLE_CSV', 'example.csv')))), importType !== 8 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_BUSINESS_ID', 'Business ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "business_id",
     type: "number",
     placeholder: "0",
@@ -373,7 +380,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     onChange: handleChangeMappingInput,
     disabled: formState.loading,
     autoComplete: "off"
-  })))))), !isAdvanedOptions && /*#__PURE__*/_react.default.createElement(_styles2.FiledListWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('FIELDS', 'Fields')), Object.keys(fieldList).length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.entries(fieldList).map(function (value, i) {
+  })))))), !isAdvanedOptions && importType !== 8 && /*#__PURE__*/_react.default.createElement(_styles2.FiledListWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('FIELDS', 'Fields')), Object.keys(fieldList).length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.entries(fieldList).map(function (value, i) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
       key: i,
       style: {
@@ -415,7 +422,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement("button", {
     type: "submit"
-  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)))))))), /*#__PURE__*/_react.default.createElement(_styles2.FiledListWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('META_FIELDS', 'MetaFields')), Object.keys(metafieldList) && Object.keys(metafieldList).length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.entries(metafieldList).map(function (value, i) {
+  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)))))))), importType !== 8 && /*#__PURE__*/_react.default.createElement(_styles2.FiledListWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('META_FIELDS', 'MetaFields')), Object.keys(metafieldList) && Object.keys(metafieldList).length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.entries(metafieldList).map(function (value, i) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
       key: i,
       style: {
@@ -457,7 +464,13 @@ var ImporterFormUI = function ImporterFormUI(props) {
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement("button", {
     type: "submit"
-  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)))))))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)))))))), importType === 8 && /*#__PURE__*/_react.default.createElement(_ChildMapplingList.ChildMapplingList, {
+    mappingList: (editState === null || editState === void 0 ? void 0 : editState.mapping) || [],
+    importypeOptions: importypeOptions,
+    openMappingDetails: openMappingDetails,
+    setOpenMappingDetails: setOpenMappingDetails,
+    handleUpdateMultipleMapping: handleUpdateMultipleMapping
+  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     type: "submit",
     color: "primary",
     borderRadius: "5px",
@@ -465,7 +478,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     onClick: function onClick() {
       return onSubmit();
     }
-  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : Object.keys(editState).length > 0 ? t('EDIT', 'Edit') : t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : Object.keys(selectedImporter).length > 0 ? t('EDIT', 'Edit') : t('ADD', 'Add'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('IMPORT', 'Import'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

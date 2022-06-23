@@ -29,7 +29,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
   var selectedOrderStatus = props.selectedOrderStatus,
-      changeOrderStatus = props.changeOrderStatus;
+      changeOrderStatus = props.changeOrderStatus,
+      numberOfOrdersByStatus = props.numberOfOrdersByStatus;
 
   var changeSelectedOrderStatus = function changeSelectedOrderStatus(orderStatus) {
     window.scrollTo(0, 0);
@@ -47,22 +48,22 @@ var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
     onClick: function onClick() {
       return changeSelectedOrderStatus('pending');
     }
-  }, t('PENDING', 'pending')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('PENDING', 'pending'), (numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.pending) && /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.pending, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'inProgress',
     onClick: function onClick() {
       return changeSelectedOrderStatus('inProgress');
     }
-  }, t('IN_PROGRESS', 'in progress')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('IN_PROGRESS', 'in progress'), (numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.inProgress) && /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.inProgress, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'completed',
     onClick: function onClick() {
       return changeSelectedOrderStatus('completed');
     }
-  }, t('COMPLETED', 'completed')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('COMPLETED', 'completed'), (numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.completed) && /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.completed, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'cancelled',
     onClick: function onClick() {
       return changeSelectedOrderStatus('cancelled');
     }
-  }, t('CANCELLED', 'cancelled')))));
+  }, t('CANCELLED', 'cancelled'), (numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.cancelled) && /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.cancelled, ")")))));
 };
 
 exports.OrderStatusFilterBar = OrderStatusFilterBar;

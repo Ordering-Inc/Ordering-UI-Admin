@@ -27,7 +27,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversOnlineOfflineFilter = function DriversOnlineOfflineFilter(props) {
   var driversIsOnline = props.driversIsOnline,
-      handleChangeDriverIsOnline = props.handleChangeDriverIsOnline;
+      handleChangeDriverIsOnline = props.handleChangeDriverIsOnline,
+      numberOfonlineDrivers = props.numberOfonlineDrivers,
+      numberOfofflineDrivers = props.numberOfofflineDrivers;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -38,12 +40,12 @@ var DriversOnlineOfflineFilter = function DriversOnlineOfflineFilter(props) {
     onClick: function onClick() {
       return handleChangeDriverIsOnline(true);
     }
-  }, t('ONLINE', 'Online')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('ONLINE', 'Online'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfonlineDrivers !== null && numberOfonlineDrivers !== void 0 ? numberOfonlineDrivers : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: !driversIsOnline,
     onClick: function onClick() {
       return handleChangeDriverIsOnline(false);
     }
-  }, t('INACTIVE_DRIVERS', 'Offline')));
+  }, t('INACTIVE_DRIVERS', 'Offline'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfofflineDrivers !== null && numberOfofflineDrivers !== void 0 ? numberOfofflineDrivers : 0, ")")));
 };
 
 exports.DriversOnlineOfflineFilter = DriversOnlineOfflineFilter;

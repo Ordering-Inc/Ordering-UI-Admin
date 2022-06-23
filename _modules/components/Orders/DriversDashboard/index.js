@@ -30,12 +30,28 @@ var DriversDashboard = function DriversDashboard(props) {
       handleChangeDriverIsOnline = props.handleChangeDriverIsOnline,
       handleChangeDriversSubFilter = props.handleChangeDriversSubFilter,
       handleOpenDriverOrders = props.handleOpenDriverOrders;
+  var numberOfonlineDrivers = onlineDrivers.length;
+  var numberOfofflineDrivers = offlineDrivers.length;
+  var numberOfbusyDrivers = driversIsOnline ? onlineDrivers.filter(function (ele) {
+    return ele.busy;
+  }).length : offlineDrivers.filter(function (ele) {
+    return ele.busy;
+  }).length;
+  var numberOfnotBusyDrivers = driversIsOnline ? onlineDrivers.filter(function (ele) {
+    return !ele.busy;
+  }).length : offlineDrivers.filter(function (ele) {
+    return !ele.busy;
+  }).length;
   return /*#__PURE__*/_react.default.createElement(_styles.DriversDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_DriversOnlineOfflineFilter.DriversOnlineOfflineFilter, {
     driversIsOnline: driversIsOnline,
-    handleChangeDriverIsOnline: handleChangeDriverIsOnline
+    handleChangeDriverIsOnline: handleChangeDriverIsOnline,
+    numberOfonlineDrivers: numberOfonlineDrivers,
+    numberOfofflineDrivers: numberOfofflineDrivers
   }), /*#__PURE__*/_react.default.createElement(_DriversBusyStatusFilter.DriversBusyStatusFilter, {
     driversSubfilter: driversSubfilter,
-    handleChangeDriversSubFilter: handleChangeDriversSubFilter
+    handleChangeDriversSubFilter: handleChangeDriversSubFilter,
+    numberOfbusyDrivers: numberOfbusyDrivers,
+    numberOfnotBusyDrivers: numberOfnotBusyDrivers
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperDriversList, {
     id: "driversList"
   }, /*#__PURE__*/_react.default.createElement(_DriversList.DriversList, {
