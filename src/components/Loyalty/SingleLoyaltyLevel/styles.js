@@ -12,10 +12,10 @@ export const Container = styled.form`
 
 export const OriginalImageWrapper = styled.div`
   width: 43px;
-  margin-right: 20px;
+  margin-right: 15px;
 
   ${props => props.theme.rtl && css`
-    margin-left: 20px;
+    margin-left: 15px;
     margin-right: 0px;
   `}
 
@@ -71,7 +71,7 @@ export const LevelNameWrapper = styled.div`
 `
 
 export const LastWrapper = styled.div`
-  width: 95px;
+  width: 135px;
   margin: 0px 12px;
 
   > input {
@@ -84,22 +84,18 @@ export const LastWrapper = styled.div`
   }
 
   @media (min-width: 576px) {
-    margin: 0px 24px;
+    margin: 0px 15px;
   }
 `
 
 export const PointsWrapper = styled.div`
-  width: 60px;
+  width: 110px;
   > input {
     width: 100%;
   }
   span {
     font-size: 14px;
     line-height: 24px;
-  }
-
-  @media (min-width: 576px) {
-    width: 95px;
   }
 `
 
@@ -112,9 +108,9 @@ export const ButtonWrapper = styled.div`
   `}
 
   @media (min-width: 576px) {
-    margin-left: 17px;
+    margin-left: 15px;
     ${props => props.theme.rtl && css`
-      margin-right: 17px;
+      margin-right: 15px;
       margin-left: 0px;
     `}
   }
