@@ -10,7 +10,9 @@ import {
 export const DriversBusyStatusFilter = (props) => {
   const {
     driversSubfilter,
-    handleChangeDriversSubFilter
+    handleChangeDriversSubFilter,
+    numberOfbusyDrivers,
+    numberOfnotBusyDrivers
   } = props
   const [, t] = useLanguage()
   return (
@@ -20,6 +22,7 @@ export const DriversBusyStatusFilter = (props) => {
         onClick={() => handleChangeDriversSubFilter({ ...driversSubfilter, busy: !driversSubfilter.busy })}
       >
         {t('BUSY', 'Busy')}
+        <span>({numberOfbusyDrivers ?? 0})</span>
         {driversSubfilter.busy && <MdClose />}
       </Button>
       <Button
@@ -27,6 +30,7 @@ export const DriversBusyStatusFilter = (props) => {
         onClick={() => handleChangeDriversSubFilter({ ...driversSubfilter, notBusy: !driversSubfilter.notBusy })}
       >
         {t('NOT_BUSY', 'Not busy')}
+        <span>({numberOfnotBusyDrivers ?? 0})</span>
         {driversSubfilter.notBusy && <MdClose />}
       </Button>
     </Container>
