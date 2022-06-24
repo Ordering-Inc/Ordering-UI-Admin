@@ -13,6 +13,7 @@ import { XLg } from 'react-bootstrap-icons'
 import { NotFoundSource, Modal } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { OrderToPrint } from '../OrderToPrint'
+import { orderRejectCommentList } from '../../../utils'
 
 import {
   Container,
@@ -29,7 +30,8 @@ import {
   OrderStatusSelectorWrapper,
   PlaceSpotContainer,
   RejectReasonsContainer,
-  RejectReasonWrapper
+  RejectReasonWrapper,
+  RejectReasonsList
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -68,7 +70,7 @@ const OrderDetailsUI = (props) => {
     loading
   } = props.order
 
-  const rejectResonStatuses = [2, 5, 6, 10, 12, 14, 16]
+  const rejectResonStatuses = [6, 9, 10, 11, 12, 14]
   const getOrderStatus = (status) => {
     const orderStatus = [
       { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 25 },
@@ -365,7 +367,16 @@ const OrderDetailsUI = (props) => {
           {rejectResonStatuses.includes(order?.status) && order?.reject_reason && (
             <RejectReasonsContainer>
               <p>{t('REJECT_REASONS', 'Reject reasons')}</p>
-              <RejectReasonWrapper>{order?.reject_reason}</RejectReasonWrapper>
+              <RejectReasonsList>
+                {orderRejectCommentList(order?.status).map(reason => (
+                  <RejectReasonWrapper
+                    key={reason.key}
+                    active={reason.value === order?.reject_reason}
+                  >
+                    {t(`REJECT_REASON_${reason.content.toUpperCase()}`, reason.content.replaceAll('_', ' '))}
+                  </RejectReasonWrapper>
+                ))}
+              </RejectReasonsList>
             </RejectReasonsContainer>
           )}
           <div data-tour='tour_driver'>
