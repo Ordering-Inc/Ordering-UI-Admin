@@ -320,3 +320,58 @@ export const reviewCommentList = (type) => {
 
   return reviews[type]
 }
+
+/**
+ * function to manage order reject comment list
+ * @param {string} param0 type of orders to return
+ * @returns object with orders dictionary
+ */
+export const orderRejectCommentList = (status) => {
+  const messages = {
+    6: [// on reject order
+      'very_far_away',
+      'driver_vehicle_incident',
+      'destination_unreacheable',
+      'unavailable_driver',
+      'other'
+    ],
+    9: [// on force pickup status
+      'forgot_complete_location',
+      'not_internet_conection',
+      'other'
+    ],
+    10: [// on pickup failed by driver
+      'very_far_away',
+      'driver_vehicle_incident',
+      'destination_unreacheable',
+      'store_closed',
+      'unavailable_driver',
+      'other'
+    ],
+    11: [// on force delivery status
+      'forgot_complete_location',
+      'not_internet_conection',
+      'other'
+    ],
+    12: [// on delivery failed by driver
+      'very_far_away',
+      'driver_vehicle_incident',
+      'destination_unreacheable',
+      'recipient_unavailable',
+      'incorrect_missing_items',
+      'refused_damage',
+      'other'
+    ],
+    14: [// on order not ready
+      'store_recieve_order_late',
+      'store_busy',
+      'other'
+    ]
+  }
+
+  if (!messages[parseInt(status)]) return []
+
+  const list = messages[status].map((val, i) => ({ key: i, value: val, content: val }))
+
+  return list
+}
