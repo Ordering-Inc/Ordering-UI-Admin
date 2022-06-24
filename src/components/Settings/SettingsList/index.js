@@ -64,7 +64,7 @@ export const SettingsListUI = (props) => {
           if (isNaN(Number(item?.value))) {
             invalidMessageList.push(t('VALIDATION_ERROR_NUMERIC', `The ${item?.name} must be a number.`).replace('_attribute_', item?.name))
           }
-          if (isNaN(Number(item?.value)) || Number(item?.value) < 0) {
+          if (isNaN(Number(item?.value)) || Number(item?.value) <= 0) {
             invalidMessageList.push(t('VALIDATION_MUST_BIGGER_ZERO', `${item?.name} must be bigger than zero`).replace('_attribute_', item?.name))
           }
           if (item?.key === 'platform_fee_percentage' && Number(item?.value) > 100) {
@@ -133,7 +133,7 @@ export const SettingsListUI = (props) => {
                             {config?.description && <Description>{config?.description}</Description>}
                             <input
                               type='text'
-                              defaultValue={config?.value}
+                              value={config?.value}
                               onChange={(e) => handleInputChange(e.target.value, config?.id)}
                               onKeyPress={(e) => handleKeyPress(e, config?.key)}
                               className='form-control'
