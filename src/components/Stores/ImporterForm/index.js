@@ -237,6 +237,12 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='business_id'
                     type='number'
+                    min={0}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                     placeholder='0'
                     defaultValue={editState?.mapping?.business_id ?? ''}
                     onChange={handleChangeMappingInput}
@@ -251,6 +257,12 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='external_business_id'
                     type='number'
+                    min={0}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                     placeholder='0'
                     defaultValue={editState?.mapping?.external_business_id ?? ''}
                     onChange={handleChangeMappingInput}
@@ -267,6 +279,11 @@ export const ImporterFormUI = (props) => {
                     <label>{t('MAPPING_CATEGORY_ID', 'Category ID')}</label>
                     <Input
                       name='category_id' type='number'
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.category_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -281,6 +298,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_category_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_category_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -296,6 +319,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_parent_category_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_parent_category_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -312,7 +341,14 @@ export const ImporterFormUI = (props) => {
                   <InputWrapper>
                     <label>{t('MAPPING_PRODUCT_ID', 'Product ID')}</label>
                     <Input
-                      name='product_id' type='number'
+                      name='product_id'
+                      type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.product_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -327,6 +363,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_product_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_product_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -344,6 +386,11 @@ export const ImporterFormUI = (props) => {
                     <label>{t('MAPPING_EXTRA_ID', 'Extra ID')}</label>
                     <Input
                       name='extra_id' type='number'
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.extra_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -358,6 +405,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_extra_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_extra_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -375,6 +428,11 @@ export const ImporterFormUI = (props) => {
                     <label>{t('MAPPING_EXTRA_OPTION_ID', 'Extra option ID')}</label>
                     <Input
                       name='extra_option_id' type='number'
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.extra_option_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -389,6 +447,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_extra_option_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_extra_option_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -406,6 +470,11 @@ export const ImporterFormUI = (props) => {
                     <label>{t('MAPPING_EXTRA_OPTION_SUBOPTION_ID', 'Extra option suboption ID')}</label>
                     <Input
                       name='extra_option_suboption_id' type='number'
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.extra_option_suboption_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -420,6 +489,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_extra_option_suboption_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_extra_option_suboption_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -478,6 +553,12 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='value'
                     type='number'
+                    min={0}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                     placeholder='0'
                     onChange={(e) => setFiledValue(e.target.value)}
                     disabled={formState.loading}
@@ -541,6 +622,12 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='value'
                     type='number'
+                    min={0}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                     placeholder='0'
                     onChange={(e) => setMetaFiledValue(e.target.value)}
                     disabled={formState.loading}
