@@ -5,13 +5,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.StatusBarContainer = exports.StatusBar = exports.SkeletonWrapper = exports.RejectReasonsContainer = exports.RejectReasonWrapper = exports.PlaceSpotContainer = exports.OrderStatusSelectorWrapper = exports.OrderStatus = exports.OrderProducts = exports.OrderDetailsExtraContent = exports.OrderDetailsContent = exports.Container = exports.CloseButtonWrapper = exports.ChatContainer = exports.ButtonLink = exports.AdvancedLogistic = void 0;
+exports.StatusBarContainer = exports.StatusBar = exports.SkeletonWrapper = exports.RejectReasonsList = exports.RejectReasonsContainer = exports.RejectReasonWrapper = exports.PlaceSpotContainer = exports.OrderStatusSelectorWrapper = exports.OrderStatus = exports.OrderProducts = exports.OrderDetailsExtraContent = exports.OrderDetailsContent = exports.Container = exports.CloseButtonWrapper = exports.ChatContainer = exports.ButtonLink = exports.AdvancedLogistic = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _polished = require("polished");
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -165,8 +167,19 @@ var RejectReasonsContainer = _styledComponents.default.div(_templateObject27 || 
 
 exports.RejectReasonsContainer = RejectReasonsContainer;
 
-var RejectReasonWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  background-color: #FEEDF0;\n  padding: 4px 10px;\n  border-radius: 50px;\n  color: ", ";\n  font-size: 12px;\n  line-height: 18px;\n  margin: 15px 0;\n  width: fit-content;\n"])), function (props) {
-  return props.theme.colors.danger;
+var RejectReasonsList = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  width: calc(100% + 10px);\n  margin-left: -5px;\n  margin-top: 10px;\n"])));
+
+exports.RejectReasonsList = RejectReasonsList;
+
+var RejectReasonWrapper = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  padding: 4px 10px;\n  border-radius: 50px;\n  font-size: 12px;\n  line-height: 18px;\n  margin: 5px;\n  width: fit-content;\n  \n  ", "\n"])), function (props) {
+  return props.theme.colors.secundary;
+}, function (_ref5) {
+  var active = _ref5.active;
+  return active && (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    color: ", ";\n  "])), function (props) {
+    return (0, _polished.lighten)(0.4, props.theme.colors.danger);
+  }, function (props) {
+    return props.theme.colors.danger;
+  });
 });
 
 exports.RejectReasonWrapper = RejectReasonWrapper;

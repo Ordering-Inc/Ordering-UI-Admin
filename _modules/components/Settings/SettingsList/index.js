@@ -121,7 +121,7 @@ var SettingsListUI = function SettingsListUI(props) {
               invalidMessageList.push(t('VALIDATION_ERROR_NUMERIC', "The ".concat(item === null || item === void 0 ? void 0 : item.name, " must be a number.")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
             }
 
-            if (isNaN(Number(item === null || item === void 0 ? void 0 : item.value)) || Number(item === null || item === void 0 ? void 0 : item.value) < 0) {
+            if (isNaN(Number(item === null || item === void 0 ? void 0 : item.value)) || Number(item === null || item === void 0 ? void 0 : item.value) <= 0) {
               invalidMessageList.push(t('VALIDATION_MUST_BIGGER_ZERO', "".concat(item === null || item === void 0 ? void 0 : item.name, " must be bigger than zero")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
             }
 
@@ -194,7 +194,7 @@ var SettingsListUI = function SettingsListUI(props) {
       className: "form-group"
     }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles2.Description, null, config === null || config === void 0 ? void 0 : config.description), /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
-      defaultValue: config === null || config === void 0 ? void 0 : config.value,
+      value: config === null || config === void 0 ? void 0 : config.value,
       onChange: function onChange(e) {
         return handleInputChange(e.target.value, config === null || config === void 0 ? void 0 : config.id);
       },
