@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { lighten } from 'polished'
 
 export const Container = styled.div`
   display: flex;
@@ -229,13 +230,24 @@ export const RejectReasonsContainer = styled.div`
     margin: 0;
   }
 `
+export const RejectReasonsList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + 10px);
+  margin-left: -5px;
+  margin-top: 10px;
+`
 export const RejectReasonWrapper = styled.div`
-  background-color: #FEEDF0;
+  background-color: ${props => props.theme.colors.secundary};
   padding: 4px 10px;
   border-radius: 50px;
-  color: ${props => props.theme.colors.danger};
   font-size: 12px;
   line-height: 18px;
-  margin: 15px 0;
+  margin: 5px;
   width: fit-content;
+  
+  ${({ active }) => active && css`
+    background-color: ${props => lighten(0.4, props.theme.colors.danger)};
+    color: ${props => props.theme.colors.danger};
+  `}
 `
