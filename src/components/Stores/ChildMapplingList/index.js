@@ -17,7 +17,8 @@ export const ChildMapplingList = (props) => {
     mappingList,
     openMappingDetails,
     setOpenMappingDetails,
-    handleUpdateMultipleMapping
+    handleUpdateMultipleMapping,
+    defaultImporter
   } = props
 
   const [, t] = useLanguage()
@@ -82,11 +83,13 @@ export const ChildMapplingList = (props) => {
             ))}
           </MappingWrapper>
         )}
-        <AddNewMappingButton
-          onClick={() => handleOpenAddMapping()}
-        >
-          {t('ADD_TYPE_MAPPING', 'Add type mapping')}
-        </AddNewMappingButton>
+        {!defaultImporter && (
+          <AddNewMappingButton
+            onClick={() => handleOpenAddMapping()}
+          >
+            {t('ADD_TYPE_MAPPING', 'Add type mapping')}
+          </AddNewMappingButton>
+        )}
       </MappingListContainer>
       {openMappingDetails && (
         <SideBar
@@ -100,6 +103,7 @@ export const ChildMapplingList = (props) => {
             selectedImporter={openAddMapping ? {} : { type: selectedMapping?.type, mapping: selectedMapping }}
             handleCustomEditImporter={handleUpdateMappingList}
             handleCustomAddImporter={handleAddMapping}
+            defaultImporter={defaultImporter}
           />
         </SideBar>
       )}
