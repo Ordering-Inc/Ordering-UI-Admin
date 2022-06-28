@@ -315,7 +315,7 @@ import {
   CustomerCashWallet,
   CustomerPointsWallet,
   CustomerCashWalletDetails,
-  CustomerCashWalletEvents,
+  CustomerWalletEvents,
   UserFormDetailsUI,
   ProfessionalListing
 } from './components/Users'
@@ -688,7 +688,7 @@ export {
   CustomerCashWallet,
   CustomerPointsWallet,
   CustomerCashWalletDetails,
-  CustomerCashWalletEvents,
+  CustomerWalletEvents,
   UserFormDetailsUI,
 
   RewardsPrograms,
