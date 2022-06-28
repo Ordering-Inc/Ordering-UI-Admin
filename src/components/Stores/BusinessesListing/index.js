@@ -11,7 +11,6 @@ import { BusinessesListingHeader } from '../BusinessesListingHeader'
 import { BusinessActiveStateFilter } from '../BusinessActiveStateFilter'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessDetails } from '../BusinessDetails'
-import { ImportersLateralBar } from '../ImportersLateralBar'
 import { AddBusinessForm } from '../AddBusinessForm'
 import { WizardBusiness } from '../WizardBusiness'
 
@@ -49,7 +48,6 @@ const BusinessesListingUI = (props) => {
   const [detailsBusiness, setDetailsBusiness] = useState(null)
   const [detailsBusinessId, setDetailsBusinessId] = useState(null)
   const [openAddBusiness, setOpenAddBusiness] = useState(false)
-  const [openImportCsvForm, setOpenImportCsvForm] = useState(false)
   const [businessTypes, setBusinessTypes] = useState([])
 
   const handleBackRedirect = () => {
@@ -73,10 +71,6 @@ const BusinessesListingUI = (props) => {
       handleBackRedirect()
     }
     setOpenAddBusiness(true)
-  }
-
-  const handleOpenImportCSV = () => {
-    setOpenImportCsvForm(true)
   }
 
   const onhandleSuccessAddBusiness = (business) => {
@@ -138,7 +132,6 @@ const BusinessesListingUI = (props) => {
           searchValue={searchValue}
           onSearch={onSearch}
           handleOpenAddBusiness={handleOpenAddBusiness}
-          handleOpenImportCSV={handleOpenImportCSV}
           handleStartTutorial={handleStartTutorial}
         />
         <ViewContainer>
@@ -206,12 +199,6 @@ const BusinessesListingUI = (props) => {
             handleSucessAddBusiness={onhandleSuccessAddBusiness}
           />
         </SideBar>
-      )}
-      {openImportCsvForm && (
-        <ImportersLateralBar
-          open={openImportCsvForm}
-          onClose={() => setOpenImportCsvForm(false)}
-        />
       )}
 
       <WizardBusiness

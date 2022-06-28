@@ -56,6 +56,9 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { Logistics } from '../Logistics'
 import { OrderLogisticInformation } from '../OrderLogisticInformation'
+
+const filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime']
+
 export const MessagesUI = (props) => {
   const {
     isChat,
@@ -559,17 +562,34 @@ export const MessagesUI = (props) => {
                                 {t('ORDER', 'Order')} {' '}
                                 <strong>{t(message.change.attribute)}</strong> {' '}
                                 {t('CHANGED_FROM', 'Changed from')} {' '}
-                                {message.change.old !== null && (
+                                {filterSpecialStatus.includes(message.change.attribute) ? (
                                   <>
-                                    <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                                    {message.change.old === null ? <strong>0</strong> : (
+                                      <>
+                                        <strong>{message.change.old}</strong> {' '}
+                                      </>
+                                    )}
+                                    <div style={{ whiteSpace: 'pre' }}>
+                                      {t('TO', 'to')} {' '}
+                                      <strong>{message.change.new}</strong> {' '}
+                                      {t('MINUTES', 'Minutes')}
+                                    </div>
+                                  </>
+                                ) : (
+                                  <>
+                                    {message.change.old !== null && (
+                                      <>
+                                        <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                                      </>
+                                    )}
+                                    <div style={{ whiteSpace: 'pre' }}>
+                                      {t('TO', 'to')} {' '}
+                                      <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
+                                      <strong>{message?.change?.comment ? (`\n${t('COMMENT', 'Comment:')}`) : ''}</strong>
+                                      {message?.change?.comment ? ` ${message?.change?.comment}` : ''}
+                                    </div>
                                   </>
                                 )}
-                                <div style={{ whiteSpace: 'pre' }}>
-                                  {t('TO', 'to')} {' '}
-                                  <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
-                                  <strong>{message?.change?.comment ? (`\n${t('COMMENT', 'Comment:')}`) : ''}</strong>
-                                  {message?.change?.comment ? ` ${message?.change?.comment}` : ''}
-                                </div>
                                 <OverlayTrigger
                                   placement='top'
                                   overlay={

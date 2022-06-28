@@ -1,16 +1,16 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { List as MenuIcon, Upload, LifePreserver } from 'react-bootstrap-icons'
+import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../../styles'
 import { SearchBar } from '../../Shared'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { ImportersButton } from '../ImportersButton'
 
 import {
   HeaderContainer,
   HeaderTitleContainer,
-  ActionsWrapper,
-  CsvImport
+  ActionsWrapper
 } from './styles'
 
 export const BusinessesListingHeader = (props) => {
@@ -18,7 +18,6 @@ export const BusinessesListingHeader = (props) => {
     searchValue,
     onSearch,
     handleOpenAddBusiness,
-    handleOpenImportCSV,
     handleStartTutorial
   } = props
   const [, t] = useLanguage()
@@ -54,16 +53,7 @@ export const BusinessesListingHeader = (props) => {
         </OverlayTrigger>
       </HeaderTitleContainer>
       <ActionsWrapper>
-        <CsvImport>
-          <Button
-            borderRadius='5px'
-            color='secundary'
-            onClick={() => handleOpenImportCSV()}
-          >
-            {t('IMPORT', 'Import')}
-            <Upload />
-          </Button>
-        </CsvImport>
+        <ImportersButton />
         <Button
           color='lightPrimary'
           borderRadius='8px'

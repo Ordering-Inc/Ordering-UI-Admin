@@ -215,3 +215,12 @@ export const InputWithIcon = styled.div`
     margin: 0 20px;
   }
 `
+
+export const ReCAPTCHAWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  * {
+    padding: 0;
+  }
+`

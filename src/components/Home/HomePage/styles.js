@@ -368,5 +368,57 @@ export const WidgeBlock = styled.div`
   @media (min-width: 1024px) {
     max-width:45%;
   }
+`
 
+export const FeedbackWidgets = styled.div`
+  margin-top: 20px;
+
+  > a {
+    margin-top: 20px;
+    border-radius: 7.6px;
+    color: ${props => props.theme.colors.primary};
+    transition: all 0.3s linear;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
+
+export const FeedbackContainer = styled.div`
+  margin: 20px auto 0px auto;
+  margin-bottom: 30px;
+  width: fit-content;
+  h2 {
+    font-size: 24px;
+    text-align: center;
+  }
+  p {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 3px;
+  }
+  button {
+    border-radius: 7.6px;
+    height: 44px;
+    margin: 0 auto;
+  }
+  @media (min-width: 800px) {
+    h2 {
+      font-size: 28px;
+    }
+    p {
+      font-size: 16px;
+      text-align: left;
+      &.center {
+        text-align: center;
+      }
+    }
+  }
+`
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 `

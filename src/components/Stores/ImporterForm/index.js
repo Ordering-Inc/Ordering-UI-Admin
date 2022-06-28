@@ -4,17 +4,14 @@ import { Row, Col } from 'react-bootstrap'
 import BsPlusSquare from '@meronex/icons/bs/BsPlusSquare'
 import BsTrash from '@meronex/icons/bs/BsTrash'
 import { useLanguage, ImporterForm as ImporterFormController } from 'ordering-components-admin'
-import { useTheme } from 'styled-components'
 import { Alert } from '../../Shared'
-import { IconButton, Button, Input } from '../../../styles'
-import { XLg } from 'react-bootstrap-icons'
+import { Button, Input } from '../../../styles'
 import { Select } from '../../../styles/Select/FirstSelect'
 
 import {
   NewImporter,
   Header,
   Title,
-  CloseButtonWrapper,
   FormInput,
   InputWrapper,
   ActionsForm,
@@ -23,11 +20,13 @@ import {
   ButtonWrapper,
   FieldRow,
   FieldName,
-  FieldValue
+  FieldValue,
+  ExampleCSV
 } from './styles'
 
 export const ImporterFormUI = (props) => {
   const {
+    isAdvanedOptions,
     formState,
     handleChangeInput,
     handleChangeSelect,
@@ -45,7 +44,8 @@ export const ImporterFormUI = (props) => {
     clearImorterForm,
     setIsEdit,
     editState,
-    editImporter
+    editImporter,
+    downloadCSV
   } = props
 
   const [, t] = useLanguage()
@@ -59,7 +59,8 @@ export const ImporterFormUI = (props) => {
   const [filedValue, setFiledValue] = useState()
   const [metafiledKey, setMetaFiledKey] = useState()
   const [metafiledValue, setMetaFiledValue] = useState()
-  const theme = useTheme()
+
+  const defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default']
 
   const importypeOptions = [
     {
@@ -87,7 +88,9 @@ export const ImporterFormUI = (props) => {
 
   const onNewFiledSubmit = () => {
     addNewField(filedKey, filedValue)
-    document.getElementById('field-form').reset()
+    if (document.getElementById('field-form')) {
+      document.getElementById('field-form').reset()
+    }
   }
 
   const onNewMetaFiledSubmit = () => {
@@ -144,16 +147,12 @@ export const ImporterFormUI = (props) => {
     <NewImporter>
       <Header>
         <Title>
-          {t('ADD_IMPORTER', 'Add importer')}
+          {
+            isAdvanedOptions
+              ? t('ADVANCED_OPTION', 'Advanced Options')
+              : selectedImporter?.id ? t('EDIT_IMPORTER', 'Edit importer') : t('ADD_IMPORTER', 'Add importer')
+          }
         </Title>
-        <CloseButtonWrapper>
-          <IconButton
-            color='black'
-            onClick={() => onClose()}
-          >
-            <XLg />
-          </IconButton>
-        </CloseButtonWrapper>
       </Header>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)} id='importer-form'>
         <InputWrapper>
@@ -164,7 +163,7 @@ export const ImporterFormUI = (props) => {
             placeholder={t('NAME', 'name')}
             defaultValue={editState?.name}
             onChange={handleChangeInput}
-            disabled={formState.loading}
+            disabled={formState.loading || isAdvanedOptions || defaultImporterSlugs.includes(editState?.slug)}
             autoComplete='off'
           />
         </InputWrapper>
@@ -176,24 +175,29 @@ export const ImporterFormUI = (props) => {
             placeholder={t('SLUG', 'slug')}
             defaultValue={editState?.slug}
             onChange={handleChangeInput}
-            disabled={formState.loading}
+            disabled={formState.loading || isAdvanedOptions || defaultImporterSlugs.includes(editState?.slug)}
             autoComplete='off'
           />
         </InputWrapper>
 
-        <InputWrapper>
-          <label>{t('TYPE', 'Type')}</label>
-          <Select
-            name='type'
-            options={importypeOptions}
-            defaultValue={importType}
-            onChange={(value) => handleSelectOption(value)}
-          />
-        </InputWrapper>
+        {!isAdvanedOptions && (
+          <InputWrapper>
+            <label>{t('TYPE', 'Type')}</label>
+            <Select
+              name='type'
+              options={importypeOptions}
+              defaultValue={importType}
+              onChange={(value) => handleSelectOption(value)}
+            />
+          </InputWrapper>
+        )}
 
         <InputWrapper>
           <label style={{ fontSize: '16px', lineHeight: '24px', fontWeight: '600' }}>{t('MAPPING', 'Mapping')}</label>
-          <span style={{ fontSize: '14px', lineHeight: '24px' }}>CSV file example <a href={theme.files?.exampleCSV || 'www.example.com'} target='_blank' rel='noopener noreferrer' download={theme.files?.exampleCSV}>example.csv</a></span>
+          <span style={{ fontSize: '14px', lineHeight: '24px' }}>
+            {t('CSV_FILE_EXAMPLE', 'CSV file example')}
+            <ExampleCSV onClick={() => downloadCSV()}>{t('FILE_EXAMPLE_CSV', 'example.csv')}</ExampleCSV>
+          </span>
         </InputWrapper>
         <>
           {(importType === 1 || importType === 2 || importType === 3) && (
@@ -205,7 +209,7 @@ export const ImporterFormUI = (props) => {
                     name='business_id'
                     type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.business_id || ''}
+                    defaultValue={editState?.mapping?.business_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -219,7 +223,7 @@ export const ImporterFormUI = (props) => {
                     name='external_business_id'
                     type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.external_business_id || ''}
+                    defaultValue={editState?.mapping?.external_business_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -236,7 +240,7 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='category_id' type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.category_id || ''}
+                    defaultValue={editState?.mapping?.category_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -250,7 +254,7 @@ export const ImporterFormUI = (props) => {
                     name='external_category_id'
                     type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.external_category_id || ''}
+                    defaultValue={editState?.mapping?.external_category_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -265,7 +269,7 @@ export const ImporterFormUI = (props) => {
                     name='external_parent_category_id'
                     type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.external_parent_category_id || ''}
+                    defaultValue={editState?.mapping?.external_parent_category_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -282,7 +286,7 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='product_id' type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.product_id || ''}
+                    defaultValue={editState?.mapping?.product_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -296,7 +300,7 @@ export const ImporterFormUI = (props) => {
                     name='external_product_id'
                     type='number'
                     placeholder='0'
-                    defaultValue={editState?.mapping?.external_product_id || ''}
+                    defaultValue={editState?.mapping?.external_product_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
@@ -307,66 +311,69 @@ export const ImporterFormUI = (props) => {
           )}
         </>
       </FormInput>
-      <FiledListWrapper>
-        <label>{t('FIELDS', 'Fields')}</label>
-        {Object.keys(fieldList).length > 0 && (
-          <>
-            {Object.entries(fieldList).map((value, i) => (
-              <Row key={i} style={{ marginBottom: '15px' }}>
-                <Col>
-                  <FieldName>{value[0]}</FieldName>
-                </Col>
-                <Col>
-                  <FieldRow>
-                    <FieldValue>{value[1]}</FieldValue>
-                    <ButtonWrapper>
-                      <button onClick={() => removeField(value[0])}>
-                        <BsTrash />
-                      </button>
-                    </ButtonWrapper>
-                  </FieldRow>
-                </Col>
-              </Row>
-            ))}
-          </>
-        )}
-        <FieldAddForm
-          onSubmit={fieldMethods.handleSubmit(onNewFiledSubmit)}
-          id='field-form'
-        >
-          <Row style={{ alignItems: 'flex-end' }}>
-            <Col>
-              <Input
-                name='key'
-                type='text'
-                placeholder={t('NAME', 'name')}
-                onChange={(e) => setFiledKey(e.target.value)}
-                disabled={formState.loading}
-                autoComplete='off'
-              />
-            </Col>
-            <Col style={{ width: '49%' }}>
-              <FieldRow>
+      {!isAdvanedOptions && (
+        <FiledListWrapper>
+          <label>{t('FIELDS', 'Fields')}</label>
+          {Object.keys(fieldList).length > 0 && (
+            <>
+              {Object.entries(fieldList).map((value, i) => (
+                <Row key={i} style={{ marginBottom: '15px' }}>
+                  <Col>
+                    <FieldName>{value[0]}</FieldName>
+                  </Col>
+                  <Col>
+                    <FieldRow>
+                      <FieldValue>{value[1]}</FieldValue>
+                      <ButtonWrapper>
+                        <button onClick={() => removeField(value[0])}>
+                          <BsTrash />
+                        </button>
+                      </ButtonWrapper>
+                    </FieldRow>
+                  </Col>
+                </Row>
+              ))}
+            </>
+          )}
+
+          <FieldAddForm
+            onSubmit={fieldMethods.handleSubmit(onNewFiledSubmit)}
+            id='field-form'
+          >
+            <Row style={{ alignItems: 'flex-end' }}>
+              <Col>
                 <Input
-                  name='value'
-                  type='number'
-                  placeholder='0'
-                  onChange={(e) => setFiledValue(e.target.value)}
+                  name='key'
+                  type='text'
+                  placeholder={t('NAME', 'name')}
+                  onChange={(e) => setFiledKey(e.target.value)}
                   disabled={formState.loading}
                   autoComplete='off'
                 />
-                <ButtonWrapper>
-                  <button
-                    type='submit'
-                  >
-                    <BsPlusSquare />
-                  </button>
-                </ButtonWrapper>
-              </FieldRow>
-            </Col>
-          </Row>
-        </FieldAddForm>
-      </FiledListWrapper>
+              </Col>
+              <Col style={{ width: '49%' }}>
+                <FieldRow>
+                  <Input
+                    name='value'
+                    type='number'
+                    placeholder='0'
+                    onChange={(e) => setFiledValue(e.target.value)}
+                    disabled={formState.loading}
+                    autoComplete='off'
+                  />
+                  <ButtonWrapper>
+                    <button
+                      type='submit'
+                    >
+                      <BsPlusSquare />
+                    </button>
+                  </ButtonWrapper>
+                </FieldRow>
+              </Col>
+            </Row>
+          </FieldAddForm>
+        </FiledListWrapper>
+      )}
 
       <FiledListWrapper>
         <label>{t('META_FIELDS', 'MetaFields')}</label>
