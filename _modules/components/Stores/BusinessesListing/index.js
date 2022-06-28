@@ -31,8 +31,6 @@ var _BusinessTypeFilter = require("../BusinessTypeFilter");
 
 var _BusinessDetails = require("../BusinessDetails");
 
-var _ImportersLateralBar = require("../ImportersLateralBar");
-
 var _AddBusinessForm = require("../AddBusinessForm");
 
 var _WizardBusiness = require("../WizardBusiness");
@@ -120,15 +118,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       openAddBusiness = _useState14[0],
       setOpenAddBusiness = _useState14[1];
 
-  var _useState15 = (0, _react.useState)(false),
+  var _useState15 = (0, _react.useState)([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      openImportCsvForm = _useState16[0],
-      setOpenImportCsvForm = _useState16[1];
-
-  var _useState17 = (0, _react.useState)([]),
-      _useState18 = _slicedToArray(_useState17, 2),
-      businessTypes = _useState18[0],
-      setBusinessTypes = _useState18[1];
+      businessTypes = _useState16[0],
+      setBusinessTypes = _useState16[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setOpenBusinessDetails(false);
@@ -153,10 +146,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
 
     setOpenAddBusiness(true);
-  };
-
-  var handleOpenImportCSV = function handleOpenImportCSV() {
-    setOpenImportCsvForm(true);
   };
 
   var onhandleSuccessAddBusiness = function onhandleSuccessAddBusiness(business) {
@@ -244,7 +233,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     searchValue: searchValue,
     onSearch: onSearch,
     handleOpenAddBusiness: handleOpenAddBusiness,
-    handleOpenImportCSV: handleOpenImportCSV,
     handleStartTutorial: handleStartTutorial
   }), /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
     selectedBusinessActiveState: selectedBusinessActiveState,
@@ -298,12 +286,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddBusinessForm.AddBusinessForm, {
     isTutorialMode: isTutorialMode,
     handleSucessAddBusiness: onhandleSuccessAddBusiness
-  })), openImportCsvForm && /*#__PURE__*/_react.default.createElement(_ImportersLateralBar.ImportersLateralBar, {
-    open: openImportCsvForm,
-    onClose: function onClose() {
-      return setOpenImportCsvForm(false);
-    }
-  }), /*#__PURE__*/_react.default.createElement(_WizardBusiness.WizardBusiness, {
+  })), /*#__PURE__*/_react.default.createElement(_WizardBusiness.WizardBusiness, {
     isTutorialMode: isTutorialMode,
     openTutorialSidebarState: openTutorialSidebarState,
     setOpenTutorialSidebarState: setOpenTutorialSidebarState,

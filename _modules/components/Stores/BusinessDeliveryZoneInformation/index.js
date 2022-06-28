@@ -38,7 +38,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(props) {
-  var _ref, _formState$changes$na, _formState$changes, _ref2, _formState$changes$mi, _formState$changes2, _ref3, _formState$changes$pr, _formState$changes3, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3;
+  var _ref, _formState$changes$na, _formState$changes2, _formState$changes3, _ref2, _formState$changes$mi, _formState$changes4, _ref3, _formState$changes$pr, _formState$changes5, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _formState$changes6;
 
   var business = props.business,
       zone = props.zone,
@@ -47,7 +47,9 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
       handleChangeInput = props.handleChangeInput,
       handleChangeFormState = props.handleChangeFormState,
       handleUpdateBusinessDeliveryZone = props.handleUpdateBusinessDeliveryZone,
-      handleAddBusinessDeliveryZone = props.handleAddBusinessDeliveryZone;
+      handleAddBusinessDeliveryZone = props.handleAddBusinessDeliveryZone,
+      handleUploadKmlFiles = props.handleUploadKmlFiles,
+      kmlData = props.kmlData;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -99,6 +101,7 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
       isShowMap = _useState12[0],
       setIsShowMap = _useState12[1];
 
+  var kmlRef = (0, _react.useRef)(null);
   var typeOptions = [{
     value: 1,
     content: t('CIRCLE', 'Circle')
@@ -157,7 +160,9 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
   };
 
   var onSubmit = function onSubmit() {
-    if (zoneData || zoneType === 4) {
+    var _formState$changes;
+
+    if ((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.data || zoneType === 4) {
       if (!zone) handleAddBusinessDeliveryZone();else handleUpdateBusinessDeliveryZone();
     } else {
       setAlertState({
@@ -205,25 +210,33 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
       });
     }
   }, [errors]);
+  (0, _react.useEffect)(function () {
+    if (formState.error) {
+      setAlertState({
+        open: true,
+        content: formState.error
+      });
+    }
+  }, [formState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, {
     onSubmit: handleSubmit(onSubmit),
     autoComplete: "off"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Row, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('NAME', 'Name'),
     name: "name",
-    value: (_ref = (_formState$changes$na = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : zone === null || zone === void 0 ? void 0 : zone.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : zone === null || zone === void 0 ? void 0 : zone.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: handleChangeInput,
     ref: register({
       required: t('NAME_REQUIRED', 'The name is required.')
     })
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_styles2.TypeSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
-    defaultValue: parseInt(zoneType),
+    defaultValue: parseInt(((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.type) || zoneType),
     options: typeOptions,
     onChange: handleChangeType
   })))), /*#__PURE__*/_react.default.createElement(_styles2.Row, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('MINIMUN_PURCHASED', 'Minimum purchase')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: "$0.00",
     name: "minimum",
-    value: (_ref2 = (_formState$changes$mi = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.minimum) !== null && _formState$changes$mi !== void 0 ? _formState$changes$mi : zone === null || zone === void 0 ? void 0 : zone.minimum) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref2 = (_formState$changes$mi = (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.minimum) !== null && _formState$changes$mi !== void 0 ? _formState$changes$mi : zone === null || zone === void 0 ? void 0 : zone.minimum) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: handleChangeInput,
     ref: register({
       required: t('MINIMUN_PURCHASED_REQUIRED', 'The minimum purchase is required.')
@@ -231,7 +244,7 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('DELIVERY_FEE', 'Delivery fee')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: "$0.00",
     name: "price",
-    value: (_ref3 = (_formState$changes$pr = (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.price) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : zone === null || zone === void 0 ? void 0 : zone.price) !== null && _ref3 !== void 0 ? _ref3 : '',
+    value: (_ref3 = (_formState$changes$pr = (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.price) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : zone === null || zone === void 0 ? void 0 : zone.price) !== null && _ref3 !== void 0 ? _ref3 : '',
     onChange: handleChangeInput,
     ref: register({
       required: t('DELIVERY_PRICE_REQUIRED', 'The delivery price is required.')
@@ -252,14 +265,30 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     clearState: clearState,
     setClearState: setClearState,
     type: zoneType,
-    data: zoneData,
+    data: ((_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.data) || zoneData,
     handleData: handleZoneData,
     fillStyle: fillStyle,
     infoContentString: infoContentString,
     greenFillStyle: greenFillStyle,
     isAddMode: !zone,
-    businessZones: businessZones
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required'))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    businessZones: businessZones,
+    kmlData: kmlData
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required'))), !zone && /*#__PURE__*/_react.default.createElement(_styles2.KmlButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
+    type: "button",
+    onClick: function onClick() {
+      return kmlRef.current.click();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+    onFiles: function onFiles(files) {
+      return handleUploadKmlFiles(files);
+    },
+    childRef: function childRef(e) {
+      kmlRef.current = e;
+    },
+    accept: ".kml,.kmz"
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('UPLOAD_KML', 'Upload KML'))))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     type: "submit",

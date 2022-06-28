@@ -47,11 +47,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ImportersList = function ImportersList(props) {
   var importerList = props.importerList,
-      getImporters = props.getImporters,
-      paginationProps = props.paginationProps,
       createImporterJob = props.createImporterJob,
       addNewImporter = props.addNewImporter,
       handleDeleteImporter = props.handleDeleteImporter,
+      selectedImporter = props.selectedImporter,
+      setSelectedImporter = props.setSelectedImporter,
       handleEditImporter = props.handleEditImporter;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -59,28 +59,21 @@ var ImportersList = function ImportersList(props) {
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
+  var defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default'];
 
   var handleSelectImporter = function handleSelectImporter(e, importer) {
     var isInvalid = e.target.closest('.importer_enable_control') || e.target.closest('.importer_action');
     if (isInvalid) return;
+    setSelectedImporter({});
     createImporterJob(importer);
   };
 
-  var handleChangePage = function handleChangePage(page) {
-    getImporters(page, 10);
-  };
-
-  var handleChangePageSize = function handleChangePageSize(pageSize) {
-    var expectedPage = Math.ceil(paginationProps.from / pageSize);
-    getImporters(expectedPage, pageSize);
-  };
-
   return /*#__PURE__*/_react.default.createElement(_styles2.ImportListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImportersTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ImpotersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", {
-    colspan: 2
-  }, t('ACTION', 'Action')))), /*#__PURE__*/_react.default.createElement("tbody", null, importerList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement("tr", {
+    colSpan: "2"
+  }, t('ACTION', 'Action')))), importerList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.ImoportTbody, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: "90%",
       height: 21,
       className: "importer-name"
@@ -92,14 +85,15 @@ var ImportersList = function ImportersList(props) {
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 21,
       height: 21
-    })));
+    }))));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (importerList === null || importerList === void 0 ? void 0 : importerList.importers.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, importerList === null || importerList === void 0 ? void 0 : importerList.importers.map(function (importer) {
-    return /*#__PURE__*/_react.default.createElement("tr", {
+    return /*#__PURE__*/_react.default.createElement(_styles2.ImoportTbody, {
       key: importer === null || importer === void 0 ? void 0 : importer.id,
+      active: importer.id === (selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.id),
       onClick: function onClick(e) {
         return handleSelectImporter(e, importer);
       }
-    }, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("span", {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("span", {
       className: "importer-name"
     }, importer === null || importer === void 0 ? void 0 : importer.name)), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
       className: "importer_enable_control"
@@ -116,30 +110,20 @@ var ImportersList = function ImportersList(props) {
       onClick: function onClick() {
         return handleEditImporter(importer);
       }
-    }, t('EDIT', 'Edit')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    }, t('EDIT', 'Edit')), !defaultImporterSlugs.includes(importer === null || importer === void 0 ? void 0 : importer.slug) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
       onClick: function onClick() {
         return handleDeleteImporter(importer === null || importer === void 0 ? void 0 : importer.id);
       }
-    }, t('DELETE', 'Delete'))))));
-  })) : /*#__PURE__*/_react.default.createElement("tr", {
-    style: {
-      backgroundColor: '#fff !important'
-    }
-  }, /*#__PURE__*/_react.default.createElement("td", {
-    colspan: "2"
+    }, t('DELETE', 'Delete')))))));
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.ImoportTbody, null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+    colSpan: "2"
   }, /*#__PURE__*/_react.default.createElement(_styles2.NotFoundWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
     content: t('NOT_FOUND_IMPOTERS', "Can't found importers")
   })))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImportersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewImporterButton, {
     onClick: function onClick() {
       return addNewImporter();
     }
-  }, t('ADD_NEW_IMPORTER', 'Add new importer')), (importerList === null || importerList === void 0 ? void 0 : importerList.importers.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
-    currentPage: paginationProps.currentPage,
-    totalPages: paginationProps.totalPages,
-    handleChangePage: handleChangePage,
-    handleChangePageSize: handleChangePageSize,
-    isHidePagecontrol: true
-  }))));
+  }, t('ADD_NEW_IMPORTER', 'Add new importer'))));
 };
 
 exports.ImportersList = ImportersList;

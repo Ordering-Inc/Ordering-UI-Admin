@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperMap = exports.TypeSelectWrapper = exports.Row = exports.FormControl = exports.FormContainer = exports.ErrorText = void 0;
+exports.WrapperMap = exports.TypeSelectWrapper = exports.Row = exports.KmlButtonWrapper = exports.FormControl = exports.FormContainer = exports.ErrorText = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -56,3 +56,7 @@ exports.FormControl = FormControl;
 var Row = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 29px;\n\n  > div {\n    width: 45%;\n  }\n"])));
 
 exports.Row = Row;
+
+var KmlButtonWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n"])));
+
+exports.KmlButtonWrapper = KmlButtonWrapper;

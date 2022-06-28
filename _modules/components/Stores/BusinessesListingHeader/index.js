@@ -19,6 +19,8 @@ var _InfoShareContext = require("../../../contexts/InfoShareContext");
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _ImportersButton = require("../ImportersButton");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39,7 +41,6 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
   var searchValue = props.searchValue,
       onSearch = props.onSearch,
       handleOpenAddBusiness = props.handleOpenAddBusiness,
-      handleOpenImportCSV = props.handleOpenImportCSV,
       handleStartTutorial = props.handleStartTutorial;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -65,13 +66,7 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     onClick: function onClick() {
       return handleStartTutorial();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CsvImport, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    borderRadius: "5px",
-    color: "secundary",
-    onClick: function onClick() {
-      return handleOpenImportCSV();
-    }
-  }, t('IMPORT', 'Import'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Upload, null))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_ImportersButton.ImportersButton, null), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick() {

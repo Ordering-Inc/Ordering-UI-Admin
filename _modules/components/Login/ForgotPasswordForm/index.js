@@ -59,7 +59,9 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       formState = props.formState,
       formData = props.formData,
       elementLinkToLogin = props.elementLinkToLogin,
-      isPopup = props.isPopup;
+      isPopup = props.isPopup,
+      isReCaptchaEnable = props.isReCaptchaEnable,
+      handleReCaptcha = props.handleReCaptcha;
 
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
@@ -96,11 +98,6 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       submitted = _useState4[0],
       setSubmitted = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      projectName = _useState6[0],
-      setProjectName = _useState6[1];
-
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
@@ -131,17 +128,29 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       setAlertState(_objectSpread(_objectSpread({}, alertState), {}, {
         open: true,
         title: t('LINK_SEND_SUCCESSFULLY', 'Link Sent Successfully'),
-        content: "".concat(t('SUCCESS_SEND_FORGOT_PASSWORD', 'Your link has been sent to the email'), ": ").concat(formData.email)
+        content: t('IF_ACCOUNT_EXIST_EMAIL_SEND_PASSWORD', 'If an account exists with this email a password will be sent')
       }));
     }
   }, [formState.loading]);
+  (0, _react.useEffect)(function () {
+    var _formState$result4;
+
+    if (!formState.loading && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && _formState$result4.error) {
+      var _formState$result5;
+
+      setAlertState({
+        open: true,
+        content: ((_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result) || [t('ERROR', 'Error')]
+      });
+      setSubmitted(false);
+    }
+  }, [formState]);
 
   var onSubmit = function onSubmit() {
-    var _configFile = _objectSpread({}, configFile);
-
-    _configFile.project = projectName;
-    setConfigFile(_configFile);
-    localStorage.setItem('project', projectName);
+    // const _configFile = { ...configFile }
+    // _configFile.project = projectName
+    // setConfigFile(_configFile)
+    // localStorage.setItem('project', projectName)
     setSubmitted(true);
   };
 
@@ -152,9 +161,17 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     }));
   };
 
-  var hanldeChangeProject = function hanldeChangeProject(e) {
+  var timeout = null;
+
+  var handleChangeProject = function handleChangeProject(e) {
+    e.persist();
+    clearTimeout(timeout);
     setSubmitted(false);
-    setProjectName(e.target.value);
+    timeout = setTimeout(function () {
+      setConfigFile(_objectSpread(_objectSpread({}, configFile), {}, {
+        project: e.target.value
+      }));
+    }, 750);
   };
 
   (0, _react.useEffect)(function () {
@@ -164,6 +181,11 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     }));
     handleButtonForgotPasswordClick();
   }, [ordering, submitted]);
+  (0, _react.useEffect)(function () {
+    setConfigFile(_objectSpread(_objectSpread({}, configFile), {}, {
+      project: window.localStorage.getItem('project') || null
+    }));
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.ForgotPasswordContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles.HeroContainer, {
@@ -186,7 +208,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       required: t('VALIDATION_ERROR_REQUIRED', 'The project field is required').replace('_attribute_', t('PROJECT', 'Project'))
     }),
     onChange: function onChange(e) {
-      return hanldeChangeProject(e);
+      return handleChangeProject(e);
     },
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles2.Input, {
@@ -206,7 +228,9 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
       }
     }),
     autoComplete: "off"
-  }), /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null)), isReCaptchaEnable && /*#__PURE__*/_react.default.createElement(_styles.ReCAPTCHAWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ReCaptcha, {
+    handleReCaptcha: handleReCaptcha
+  })), /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     borderRadius: "8px",
     color: "primary",
     type: "submit",
@@ -215,7 +239,7 @@ var ForgotPasswordUI = function ForgotPasswordUI(props) {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('SIGN_IN_MESSAGE', 'Do you want to sign in?')), elementLinkToLogin))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
-    title: alertState.title,
+    title: alertState.title || t('TITLE_FORGOT_PASSWORD', 'Forgot your password?'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

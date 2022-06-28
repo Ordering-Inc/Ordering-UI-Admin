@@ -369,12 +369,6 @@ Object.defineProperty(exports, "ImporterJobForm", {
     return _ImporterJobForm.ImporterJobForm;
   }
 });
-Object.defineProperty(exports, "ImportersLateralBar", {
-  enumerable: true,
-  get: function get() {
-    return _ImportersLateralBar.ImportersLateralBar;
-  }
-});
 Object.defineProperty(exports, "ImportersList", {
   enumerable: true,
   get: function get() {
@@ -627,8 +621,6 @@ var _BusinessWebhooks = require("./BusinessWebhooks");
 var _SeoOptions = require("./SeoOptions");
 
 var _AddBusinessForm = require("./AddBusinessForm");
-
-var _ImportersLateralBar = require("./ImportersLateralBar");
 
 var _WizardBusiness = require("./WizardBusiness");
 

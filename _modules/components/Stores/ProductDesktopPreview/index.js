@@ -289,9 +289,9 @@ var ProductDesktopPreview = function ProductDesktopPreview(props) {
       }, showProductOption(option) && /*#__PURE__*/_react.default.createElement(_styles2.OptionContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionWrapHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionTitleContainer, null, option.image && option.image !== '-' && /*#__PURE__*/_react.default.createElement(_styles2.OptionThumbnail, {
         src: option.image
       }), /*#__PURE__*/_react.default.createElement(_styles2.OptionTitle, null, /*#__PURE__*/_react.default.createElement("span", null, option.name))), /*#__PURE__*/_react.default.createElement(_styles2.OptionFlag, null, getMaxMin(option))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperSubOption, null, option.suboptions.map(function (suboption) {
-        var _productCart$options$;
+        var _productCart$options;
 
-        var currentState = ((_productCart$options$ = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options$ === void 0 ? void 0 : _productCart$options$.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
+        var currentState = ((_productCart$options = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options === void 0 ? void 0 : _productCart$options.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
         var price = option !== null && option !== void 0 && option.with_half_option && suboption !== null && suboption !== void 0 && suboption.half_price && currentState.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
         return suboption !== null && suboption !== void 0 && suboption.enabled ? /*#__PURE__*/_react.default.createElement(_styles2.ProductSuboptionContainer, {
           key: suboption === null || suboption === void 0 ? void 0 : suboption.id

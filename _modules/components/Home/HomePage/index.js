@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HomeUI = function HomeUI(props) {
-  var _sessionState$user;
+  var _sessionState$user, _sessionState$user2;
 
   var ordersList = props.ordersList,
       todaySalelsList = props.todaySalelsList,
@@ -90,13 +90,17 @@ var HomeUI = function HomeUI(props) {
       _useSession2 = _slicedToArray(_useSession, 1),
       sessionState = _useSession2[0];
 
-  var goToContact = function goToContact(location) {
+  var goToLink = function goToLink(location) {
     if (location === 'sales') {
       window.open('https://www.ordering.co/ordering-sales', '_blank');
     }
 
     if (location === 'tech') {
       window.open('https://www.ordering.co/ordering-support', '_blank');
+    }
+
+    if (location === 'canny') {
+      window.open('https://feedback.ordering.co', '_blank');
     }
   };
 
@@ -284,15 +288,23 @@ var HomeUI = function HomeUI(props) {
     outline: true,
     color: "primary",
     onClick: function onClick() {
-      return goToContact('sales');
+      return goToLink('sales');
     }
   }, t('SALES_CONTACT', 'Sales Contact'))), /*#__PURE__*/_react.default.createElement(_styles.WidgeBlock, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CONTACT_SUPPORT_TEAM', 'Contact our Support Team')), /*#__PURE__*/_react.default.createElement("p", null, t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     onClick: function onClick() {
-      return goToContact('tech');
+      return goToLink('tech');
     }
-  }, t('TECH_SUPPORT', 'Tech Support')))))));
+  }, t('TECH_SUPPORT', 'Tech Support')))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.FeedbackWidgets, null, /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('FEEDBACK', 'Feedback'))), /*#__PURE__*/_react.default.createElement(_styles.FeedbackContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SHARE_WITH_US_YOUR_IDEAS', 'Share with us your ideas')), /*#__PURE__*/_react.default.createElement("p", {
+    className: "center"
+  }, t('FEEDBACK_DESCRIPTION', 'Do you think our functionalities can be improved or do you want to see a new feature?')), /*#__PURE__*/_react.default.createElement("p", null, t('SHARE_US_YOUR_COMMENTS', 'Share us your comments')), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    outline: true,
+    color: "primary",
+    onClick: function onClick() {
+      return goToLink('canny');
+    }
+  }, t('REQUESTS', 'Requests'))))));
 };
 
 var HomePage = function HomePage(props) {
