@@ -54,7 +54,8 @@ var ChildMapplingList = function ChildMapplingList(props) {
       mappingList = props.mappingList,
       openMappingDetails = props.openMappingDetails,
       setOpenMappingDetails = props.setOpenMappingDetails,
-      handleUpdateMultipleMapping = props.handleUpdateMultipleMapping;
+      handleUpdateMultipleMapping = props.handleUpdateMultipleMapping,
+      defaultImporter = props.defaultImporter;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -133,7 +134,7 @@ var ChildMapplingList = function ChildMapplingList(props) {
         return handleEditMapping(item, index);
       }
     }, /*#__PURE__*/_react.default.createElement("span", null, (_getMappingType = getMappingType(item.type)) === null || _getMappingType === void 0 ? void 0 : _getMappingType.content), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  })), /*#__PURE__*/_react.default.createElement(_styles.AddNewMappingButton, {
+  })), !defaultImporter && /*#__PURE__*/_react.default.createElement(_styles.AddNewMappingButton, {
     onClick: function onClick() {
       return handleOpenAddMapping();
     }
@@ -149,7 +150,8 @@ var ChildMapplingList = function ChildMapplingList(props) {
       mapping: selectedMapping
     },
     handleCustomEditImporter: handleUpdateMappingList,
-    handleCustomAddImporter: handleAddMapping
+    handleCustomAddImporter: handleAddMapping,
+    defaultImporter: defaultImporter
   })));
 };
 

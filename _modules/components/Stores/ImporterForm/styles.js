@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.NewImporter = exports.InputWrapper = exports.Header = exports.FormInput = exports.FiledListWrapper = exports.FieldValue = exports.FieldRow = exports.FieldName = exports.FieldAddForm = exports.ExampleCSV = exports.ButtonWrapper = exports.ActionsForm = void 0;
+exports.Title = exports.NewImporter = exports.MappingFields = exports.InputWrapper = exports.Header = exports.FormInput = exports.FiledListWrapper = exports.FieldValue = exports.FieldRow = exports.FieldName = exports.FieldAddForm = exports.ExampleCSV = exports.ButtonWrapper = exports.ActionsForm = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -53,19 +53,22 @@ var ActionsForm = _styledComponents.default.div(_templateObject6 || (_templateOb
 
 exports.ActionsForm = ActionsForm;
 
-var FiledListWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 15px;\n  position: relative;\n  label {\n    font-size: 14px;\n  }\n"])));
+var FiledListWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  margin-top: 15px;\n  position: relative;\n  label {\n    font-size: 14px;\n  }\n  ", "\n"])), function (_ref) {
+  var disabled = _ref.disabled;
+  return disabled && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
+});
 
 exports.FiledListWrapper = FiledListWrapper;
 
-var FieldAddForm = _styledComponents.default.form(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n\n"])));
+var FieldAddForm = _styledComponents.default.form(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n\n"])));
 
 exports.FieldAddForm = FieldAddForm;
 
-var FieldRow = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  &>:first-child {\n    width: 85%;\n  }\n"])));
+var FieldRow = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  &>:first-child {\n    width: 85%;\n  }\n"])));
 
 exports.FieldRow = FieldRow;
 
-var FieldName = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  border: 1px solid #DEE2E6;\n  border-radius: 8px;\n  font-size: 14px;\n  padding: 10px 15px;\n  outline: none;\n  width: 98%;\n"])), function (props) {
+var FieldName = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  background: ", ";\n  color: ", ";\n  border: 1px solid #DEE2E6;\n  border-radius: 8px;\n  font-size: 14px;\n  padding: 10px 15px;\n  outline: none;\n  width: 98%;\n"])), function (props) {
   var _props$theme$colors;
 
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
@@ -76,13 +79,13 @@ var FieldName = _styledComponents.default.div(_templateObject12 || (_templateObj
 });
 
 exports.FieldName = FieldName;
-var FieldValue = (0, _styledComponents.default)(FieldName)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 85%;\n"])));
+var FieldValue = (0, _styledComponents.default)(FieldName)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 85%;\n"])));
 exports.FieldValue = FieldValue;
 
-var ButtonWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: inline-flex;\n  margin-left: 15px;\n  ", "\n  \n  button {\n    outline: none;\n    background: transparent;\n    border: none;\n    padding: 0px;\n    height: fit-content;\n    svg {\n      color: ", ";\n    }\n  }\n\n  button[type='submit'] {\n    svg {\n      color: ", ";\n    }\n  } \n"])), function (props) {
+var ButtonWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: inline-flex;\n  margin-left: 15px;\n  ", "\n  \n  button {\n    outline: none;\n    background: transparent;\n    border: none;\n    padding: 0px;\n    height: fit-content;\n    svg {\n      color: ", ";\n    }\n  }\n\n  button[type='submit'] {\n    svg {\n      color: ", ";\n    }\n  } \n"])), function (props) {
   var _props$theme2;
 
-  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n    margin-left: 0;\n "])));
+  return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n    margin-left: 0;\n "])));
 }, function (props) {
   var _props$theme$colors3;
 
@@ -93,8 +96,15 @@ var ButtonWrapper = _styledComponents.default.div(_templateObject14 || (_templat
 
 exports.ButtonWrapper = ButtonWrapper;
 
-var ExampleCSV = _styledComponents.default.span(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 16px;\n  font-style: italic;\n  margin: 0 5px;\n  cursor: pointer;\n  &:hover {\n    text-decoration: underline;\n  }\n"])), function (props) {
+var ExampleCSV = _styledComponents.default.span(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 16px;\n  font-style: italic;\n  margin: 0 5px;\n  cursor: pointer;\n  &:hover {\n    text-decoration: underline;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 
 exports.ExampleCSV = ExampleCSV;
+
+var MappingFields = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref2) {
+  var disabled = _ref2.disabled;
+  return disabled && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
+});
+
+exports.MappingFields = MappingFields;

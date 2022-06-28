@@ -687,12 +687,6 @@ Object.defineProperty(exports, "CustomerCashWalletDetails", {
     return _Users.CustomerCashWalletDetails;
   }
 });
-Object.defineProperty(exports, "CustomerCashWalletEvents", {
-  enumerable: true,
-  get: function get() {
-    return _Users.CustomerCashWalletEvents;
-  }
-});
 Object.defineProperty(exports, "CustomerDetails", {
   enumerable: true,
   get: function get() {
@@ -703,6 +697,12 @@ Object.defineProperty(exports, "CustomerPointsWallet", {
   enumerable: true,
   get: function get() {
     return _Users.CustomerPointsWallet;
+  }
+});
+Object.defineProperty(exports, "CustomerWalletEvents", {
+  enumerable: true,
+  get: function get() {
+    return _Users.CustomerWalletEvents;
   }
 });
 Object.defineProperty(exports, "CustomersListing", {
