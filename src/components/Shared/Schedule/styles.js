@@ -93,6 +93,13 @@ export const SelectWrapper = styled.div`
     svg {
       display: none;
     }
+    > div {
+      padding-left: 13px;
+      padding-right: 13px;
+      > div:last-child {
+        margin: 0px;
+      }
+    }
   }
   .list {
     .options {
@@ -105,7 +112,7 @@ export const SelectWrapper = styled.div`
   }
 
   @media (min-width: 380px) {
-    width: 90px;
+    width: 100px;
   }
 `
 
