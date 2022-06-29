@@ -5,7 +5,7 @@ import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, Confirm } from '../../Shared'
 import { Input, TextArea, Button, DefaultSelect } from '../../../styles'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ThreeDots, InfoCircle } from 'react-bootstrap-icons'
 
 import {
   useLanguage,
@@ -27,10 +27,15 @@ import {
   UploadImageIcon,
   LogoImage,
   FormControl,
+  LabelHeader,
   Label,
   FormGroup,
   SaveBtnWrapper,
-  SocialShareImage
+  SocialShareImage,
+  InfoWrapper,
+  InfoContent,
+  InfoTitle,
+  Info
 } from './styles'
 
 const OrderingProductDetailsUI = (props) => {
@@ -454,7 +459,18 @@ const OrderingProductDetailsUI = (props) => {
             />
           </FormControl>
           <FormControl className='col-md-12'>
-            <Label>{t('PRODUCT_URL_TEMPLATE', 'Product url template')}</Label>
+            <LabelHeader>
+              <Label>{t('PRODUCT_URL_TEMPLATE', 'Product url template')}</Label>
+              <InfoWrapper>
+                <InfoCircle />
+                <InfoContent>
+                  <InfoTitle>{t('AVAILABLE_URL_FORMATS', 'Available Product Url formats').replace('_attribute_', t('PRODUCT', 'Product'))}</InfoTitle>
+                  <Info>store/:business_slug/:category_slug/:product_slug</Info>
+                  <Info>store/:category_slug/:product_slug/?sucursal=:business_slug</Info>
+                  <Info>store/:business_slug?category=:category_id&product=:product_id</Info>
+                </InfoContent>
+              </InfoWrapper>
+            </LabelHeader>
             <Input
               type='text'
               placeholder={t('URL', 'Url')}
@@ -465,7 +481,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
+                  value: /.+/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
