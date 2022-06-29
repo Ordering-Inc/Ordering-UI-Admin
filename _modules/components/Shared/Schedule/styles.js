@@ -37,7 +37,7 @@ var TimeScheduleItemContainer = _styledComponents.default.div(_templateObject2 |
 
 exports.TimeScheduleItemContainer = TimeScheduleItemContainer;
 
-var SelectWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  width: 70px;\n  display: flex;\n  justify-content: center;\n  .select {\n    border: none;\n    svg {\n      display: none;\n    }\n  }\n  .list {\n    .options {\n      > div {\n        > div {\n          min-width: initial;\n        }\n      }\n    }\n  }\n\n  @media (min-width: 380px) {\n    width: 90px;\n  }\n"])), function (props) {
+var SelectWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  width: 70px;\n  display: flex;\n  justify-content: center;\n  .select {\n    border: none;\n    svg {\n      display: none;\n    }\n    > div {\n      padding-left: 13px;\n      padding-right: 13px;\n      > div:last-child {\n        margin: 0px;\n      }\n    }\n  }\n  .list {\n    .options {\n      > div {\n        > div {\n          min-width: initial;\n        }\n      }\n    }\n  }\n\n  @media (min-width: 380px) {\n    width: 100px;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 

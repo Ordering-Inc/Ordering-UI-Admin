@@ -115,7 +115,7 @@ var DateTypeSelector = function DateTypeSelector(props) {
       endDate: filterValues !== null && filterValues !== void 0 && filterValues.deliveryEndDatetime ? new Date((0, _moment.default)(filterValues === null || filterValues === void 0 ? void 0 : filterValues.deliveryEndDatetime).format('YYYY-MM-DD')) : null,
       key: 'selection'
     }]);
-  }, [filterValues]);
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     className: "ordering-calendar-btn"
   }, /*#__PURE__*/_react.default.createElement(_styles2.PlaceholderTitle, {

@@ -341,13 +341,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     value: (_ref4 = (_formState$changes$re = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.reset_password_url_template) !== null && _formState$changes$re !== void 0 ? _formState$changes$re : (_siteState$site11 = siteState.site) === null || _siteState$site11 === void 0 ? void 0 : _siteState$site11.reset_password_url_template) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    },
-    ref: register({
-      pattern: {
-        value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('RESET_PASSWORD_URL_TEMPLATE', 'Reset password url template'))
-      }
-    })
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('TRACK_ORDER_URL_TEMPLATE', 'Track order url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -357,13 +351,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     value: (_ref5 = (_formState$changes$tr = formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.track_order_url_template) !== null && _formState$changes$tr !== void 0 ? _formState$changes$tr : (_siteState$site12 = siteState.site) === null || _siteState$site12 === void 0 ? void 0 : _siteState$site12.track_order_url_template) !== null && _ref5 !== void 0 ? _ref5 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    },
-    ref: register({
-      pattern: {
-        value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('TRACK_ORDER_URL_TEMPLATE', 'Track order url template'))
-      }
-    })
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
@@ -383,13 +371,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     value: (_ref7 = (_formState$changes$ch = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.checkout_url_template) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : (_siteState$site14 = siteState.site) === null || _siteState$site14 === void 0 ? void 0 : _siteState$site14.checkout_url_template) !== null && _ref7 !== void 0 ? _ref7 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    },
-    ref: register({
-      pattern: {
-        value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('CHECKOUT_URL_TEMPLATE', 'Checkout url template'))
-      }
-    })
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('CART_URL_TEMPLATE', 'Cart url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -399,13 +381,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     value: (_ref8 = (_formState$changes$ca = formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.cart_url_template) !== null && _formState$changes$ca !== void 0 ? _formState$changes$ca : (_siteState$site15 = siteState.site) === null || _siteState$site15 === void 0 ? void 0 : _siteState$site15.cart_url_template) !== null && _ref8 !== void 0 ? _ref8 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    },
-    ref: register({
-      pattern: {
-        value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('CART_URL_TEMPLATE', 'Cart url template'))
-      }
-    })
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('BUSINESS_URL_TEMPLATE', 'Business url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -415,13 +391,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     value: (_ref9 = (_formState$changes$bu = formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.business_url_template) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : (_siteState$site16 = siteState.site) === null || _siteState$site16 === void 0 ? void 0 : _siteState$site16.business_url_template) !== null && _ref9 !== void 0 ? _ref9 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    },
-    ref: register({
-      pattern: {
-        value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('BUSINESS_URL_TEMPLATE', 'Business url template'))
-      }
-    })
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('CATEGORY_URL_TEMPLATE', 'Category url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -431,13 +401,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     value: (_ref10 = (_formState$changes$ca2 = formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.category_url_template) !== null && _formState$changes$ca2 !== void 0 ? _formState$changes$ca2 : (_siteState$site17 = siteState.site) === null || _siteState$site17 === void 0 ? void 0 : _siteState$site17.category_url_template) !== null && _ref10 !== void 0 ? _ref10 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    },
-    ref: register({
-      pattern: {
-        value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('CATEGORY_URL_TEMPLATE', 'Category url template'))
-      }
-    })
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('PRODUCT_URL_TEMPLATE', 'Product url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -447,13 +411,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     value: (_ref11 = (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.product_url_template) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_siteState$site18 = siteState.site) === null || _siteState$site18 === void 0 ? void 0 : _siteState$site18.product_url_template) !== null && _ref11 !== void 0 ? _ref11 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    },
-    ref: register({
-      pattern: {
-        value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('PRODUCT_URL_TEMPLATE', 'Product url template'))
-      }
-    })
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('PROFILE_URL_TEMPLATE', 'Profile url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -463,13 +421,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     value: (_ref12 = (_formState$changes$pr2 = formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.profile_url_template) !== null && _formState$changes$pr2 !== void 0 ? _formState$changes$pr2 : (_siteState$site19 = siteState.site) === null || _siteState$site19 === void 0 ? void 0 : _siteState$site19.profile_url_template) !== null && _ref12 !== void 0 ? _ref12 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    },
-    ref: register({
-      pattern: {
-        value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('PROFILE_URL_TEMPLATE', 'Profile url template'))
-      }
-    })
+    }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.SaveBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "7.6px",
     color: "primary",

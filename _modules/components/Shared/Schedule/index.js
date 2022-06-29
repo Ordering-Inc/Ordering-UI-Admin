@@ -44,6 +44,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ScheduleUI = function ScheduleUI(props) {
+  var _configs$format_time;
+
   var scheduleState = props.scheduleState,
       isConflict = props.isConflict,
       setIsConflict = props.setIsConflict,
@@ -65,6 +67,12 @@ var ScheduleUI = function ScheduleUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var is12Hours = ((_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12';
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -135,17 +143,35 @@ var ScheduleUI = function ScheduleUI(props) {
     var _scheduleOptions = [];
 
     for (var hour = 0; hour < 24; hour++) {
+      var hh = '';
+      var meridian = '';
+      if (!is12Hours) hh = hour < 10 ? "0".concat(hour) : hour;else {
+        if (hour === 0) {
+          hh = '12';
+          meridian = ' ' + t('AM', 'AM');
+        } else if (hour > 0 && hour < 12) {
+          hh = hour < 10 ? '0' + hour : hour;
+          meridian = ' ' + t('AM', 'AM');
+        } else if (hour === 12) {
+          hh = '12';
+          meridian = ' ' + t('PM', 'PM');
+        } else {
+          hh = hour - 12 < 10 ? '0' + (hour - 12) : hour - 12;
+          meridian = ' ' + t('PM', 'PM');
+        }
+      }
+
       for (var min = 0; min < 4; min++) {
         _scheduleOptions.push({
           value: hour + ':' + min * 15,
-          content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, hour < 10 ? "0".concat(hour) : hour, " : ", min === 0 ? '00' : min * 15)
+          content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, is12Hours ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, hh, ":", min === 0 ? '00' : min * 15, " ", meridian) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, hh, " : ", min === 0 ? '00' : min * 15))
         });
       }
     }
 
     _scheduleOptions.push({
       value: '23:59',
-      content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, "23 : 59")
+      content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, is12Hours ? '11:59 PM' : '23 : 59')
     });
 
     setScheduleOptions(_scheduleOptions);
