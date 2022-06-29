@@ -261,7 +261,7 @@ const PointsWalletBusinessDetailUI = (props) => {
             <OptionInputWrapper>
               <Input
                 type='text'
-                placeholder='00 points'
+                placeholder={`0 ${t('DAYS', 'days')}`}
                 name='expire_after_minutes'
                 value={maxValue}
                 onChange={handleChangeMaxValue}
