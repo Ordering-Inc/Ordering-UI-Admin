@@ -417,7 +417,17 @@ const OrderingProductDetailsUI = (props) => {
             />
           </FormControl>
           <FormControl className='col-md-12'>
-            <Label>{t('BUSINESS_URL_TEMPLATE', 'Business url template')}</Label>
+            <LabelHeader>
+              <Label>{t('BUSINESS_URL_TEMPLATE', 'Business url template')}</Label>
+              <InfoWrapper>
+                <InfoCircle />
+                <InfoContent>
+                  <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
+                  <Info>store/:business_slug</Info>
+                  <Info>store/?{'<any>'}=:business_slug</Info>
+                </InfoContent>
+              </InfoWrapper>
+            </LabelHeader>
             <Input
               type='text'
               placeholder={t('URL', 'Url')}
@@ -428,7 +438,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
+                  value: /(store\/)((:business_slug$)|(\?[a-zA-Z]+=:business_slug$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
@@ -438,7 +448,17 @@ const OrderingProductDetailsUI = (props) => {
             />
           </FormControl>
           <FormControl className='col-md-12'>
-            <Label>{t('CATEGORY_URL_TEMPLATE', 'Category url template')}</Label>
+            <LabelHeader>
+              <Label>{t('CATEGORY_URL_TEMPLATE', 'Category url template')}</Label>
+              <InfoWrapper>
+                <InfoCircle />
+                <InfoContent>
+                  <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
+                  <Info>store/:business_slug/:category_slug</Info>
+                  <Info>store/:category_slug?{'<any>'}=:business_slug</Info>
+                </InfoContent>
+              </InfoWrapper>
+            </LabelHeader>
             <Input
               type='text'
               placeholder={t('URL', 'Url')}
@@ -449,7 +469,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
+                  value: /(store\/)((:business_slug\/:category_slug$)|(:category_slug\?[a-zA-Z]+=:business_slug$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
@@ -464,10 +484,10 @@ const OrderingProductDetailsUI = (props) => {
               <InfoWrapper>
                 <InfoCircle />
                 <InfoContent>
-                  <InfoTitle>{t('AVAILABLE_URL_FORMATS', 'Available Product Url formats').replace('_attribute_', t('PRODUCT', 'Product'))}</InfoTitle>
+                  <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
                   <Info>store/:business_slug/:category_slug/:product_slug</Info>
-                  <Info>store/:category_slug/:product_slug/?sucursal=:business_slug</Info>
-                  <Info>store/:business_slug?category=:category_id&product=:product_id</Info>
+                  <Info>store/:category_slug/:product_slug?{'<any>'}=:business_slug</Info>
+                  <Info>store/:business_slug?{'<any>'}=:category_id&{'<any>'}=:product_id</Info>
                 </InfoContent>
               </InfoWrapper>
             </LabelHeader>
@@ -481,7 +501,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /.+/g,
+                  value: /(store\/)((:business_slug\/:category_slug\/:product_slug$)|(:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug$)|(:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
