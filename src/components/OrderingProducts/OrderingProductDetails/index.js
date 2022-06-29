@@ -330,15 +330,6 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.reset_password_url_template ?? siteState.site?.reset_password_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('RESET_PASSWORD_URL_TEMPLATE', 'Reset password url template'))
-                }
-              })}
             />
           </FormControl>
           <FormControl className='col-md-12'>
@@ -351,15 +342,6 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.track_order_url_template ?? siteState.site?.track_order_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('TRACK_ORDER_URL_TEMPLATE', 'Track order url template'))
-                }
-              })}
             />
           </FormControl>
           <FormControl className='col-md-12'>
@@ -384,15 +366,6 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.checkout_url_template ?? siteState.site?.checkout_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('CHECKOUT_URL_TEMPLATE', 'Checkout url template'))
-                }
-              })}
             />
           </FormControl>
           <FormControl className='col-md-12'>
@@ -405,15 +378,6 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.cart_url_template ?? siteState.site?.cart_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('CART_URL_TEMPLATE', 'Cart url template'))
-                }
-              })}
             />
           </FormControl>
           <FormControl className='col-md-12'>
@@ -520,15 +484,6 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.profile_url_template ?? siteState.site?.profile_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('PROFILE_URL_TEMPLATE', 'Profile url template'))
-                }
-              })}
             />
           </FormControl>
         </FormGroup>
