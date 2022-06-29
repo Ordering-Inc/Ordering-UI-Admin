@@ -66,7 +66,7 @@ export const DateTypeSelector = (props) => {
       endDate: filterValues?.deliveryEndDatetime ? new Date(moment(filterValues?.deliveryEndDatetime).format('YYYY-MM-DD')) : null,
       key: 'selection'
     }])
-  }, [filterValues])
+  }, [])
 
   return (
     <Container className='ordering-calendar-btn'>
