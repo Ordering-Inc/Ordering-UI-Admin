@@ -64,7 +64,7 @@ var CheckBoxWrapper = _styledComponents.default.div(_templateObject11 || (_templ
 
 exports.CheckBoxWrapper = CheckBoxWrapper;
 
-var OptionInputWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  padding-left: 20px;\n  margin-bottom: 18px;\n  ", "\n\n  input {\n    width: 100%;\n    max-width: 215px;\n  }\n"])), function (props) {
+var OptionInputWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  padding-left: 20px;\n  margin-bottom: 18px;\n  ", "\n\n  input {\n    width: 100%;\n    max-width: 215px;\n    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */\n      text-transform: lowercase;\n    }\n\n    &:-ms-input-placeholder { /* Internet Explorer 10-11 */\n      text-transform: lowercase;\n    }\n\n    &::-ms-input-placeholder { /* Microsoft Edge */\n      text-transform: lowercase;\n    }\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    padding-left: 0px;\n    padding-right: 20px;\n  "])));
 });
 

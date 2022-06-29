@@ -24,8 +24,8 @@ var Container = _styledComponents.default.form(_templateObject || (_templateObje
 
 exports.Container = Container;
 
-var OriginalImageWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 43px;\n  margin-right: 20px;\n\n  ", "\n\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 20px;\n    margin-right: 0px;\n  "])));
+var OriginalImageWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 43px;\n  margin-right: 15px;\n\n  ", "\n\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n    margin-right: 0px;\n  "])));
 });
 
 exports.OriginalImageWrapper = OriginalImageWrapper;
@@ -40,18 +40,18 @@ var LevelNameWrapper = _styledComponents.default.div(_templateObject7 || (_templ
 
 exports.LevelNameWrapper = LevelNameWrapper;
 
-var LastWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 95px;\n  margin: 0px 12px;\n\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 576px) {\n    margin: 0px 24px;\n  }\n"])));
+var LastWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 135px;\n  margin: 0px 12px;\n\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 576px) {\n    margin: 0px 15px;\n  }\n"])));
 
 exports.LastWrapper = LastWrapper;
 
-var PointsWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 60px;\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n\n  @media (min-width: 576px) {\n    width: 95px;\n  }\n"])));
+var PointsWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 110px;\n  > input {\n    width: 100%;\n  }\n  span {\n    font-size: 14px;\n    line-height: 24px;\n  }\n"])));
 
 exports.PointsWrapper = PointsWrapper;
 
-var ButtonWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 30px;\n  margin-left: 10px;\n  ", "\n\n  @media (min-width: 576px) {\n    margin-left: 17px;\n    ", "\n  }\n"])), function (props) {
+var ButtonWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  width: 30px;\n  margin-left: 10px;\n  ", "\n\n  @media (min-width: 576px) {\n    margin-left: 15px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0px;\n  "])));
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-right: 17px;\n      margin-left: 0px;\n    "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n      margin-left: 0px;\n    "])));
 });
 
 exports.ButtonWrapper = ButtonWrapper;
