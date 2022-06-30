@@ -531,6 +531,12 @@ Object.defineProperty(exports, "SeoOptions", {
     return _SeoOptions.SeoOptions;
   }
 });
+Object.defineProperty(exports, "SingleBusiness", {
+  enumerable: true,
+  get: function get() {
+    return _SingleBusiness.SingleBusiness;
+  }
+});
 Object.defineProperty(exports, "SingleBusinessCategoryEdit", {
   enumerable: true,
   get: function get() {
@@ -739,3 +745,5 @@ var _ProductExtraSubOptionMetaFields = require("./ProductExtraSubOptionMetaField
 var _ProductIngredientDetails = require("./ProductIngredientDetails");
 
 var _ProductTagDetails = require("./ProductTagDetails");
+
+var _SingleBusiness = require("./SingleBusiness");

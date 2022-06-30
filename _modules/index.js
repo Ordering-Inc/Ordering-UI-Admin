@@ -1923,6 +1923,12 @@ Object.defineProperty(exports, "SidebarMenu", {
     return _SidebarMenu.SidebarMenu;
   }
 });
+Object.defineProperty(exports, "SingleBusiness", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.SingleBusiness;
+  }
+});
 Object.defineProperty(exports, "SingleBusinessCategoryEdit", {
   enumerable: true,
   get: function get() {

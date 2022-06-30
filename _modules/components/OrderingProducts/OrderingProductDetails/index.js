@@ -384,34 +384,52 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('BUSINESS_URL_TEMPLATE', 'Business url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LabelHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('BUSINESS_URL_TEMPLATE', 'Business url template')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoTitle, null, t('AVAILABLE_FORMATS', 'Available Formats')), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":business_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:business_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/?", '<any>', "=:business_slug")))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "business_url_template",
     value: (_ref9 = (_formState$changes$bu = formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.business_url_template) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : (_siteState$site16 = siteState.site) === null || _siteState$site16 === void 0 ? void 0 : _siteState$site16.business_url_template) !== null && _ref9 !== void 0 ? _ref9 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    }
+    },
+    ref: register({
+      pattern: {
+        value: /(store\/)?((:business_slug$)|(\?[a-zA-Z]+=:business_slug$))$/g,
+        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('BUSINESS_URL_TEMPLATE', 'Business url template'))
+      }
+    })
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('CATEGORY_URL_TEMPLATE', 'Category url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LabelHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('CATEGORY_URL_TEMPLATE', 'Category url template')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoTitle, null, t('AVAILABLE_FORMATS', 'Available Formats')), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:business_slug/:category_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:category_slug?", '<any>', "=:business_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":business_slug/:category_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":category_slug?", '<any>', "=:business_slug")))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "category_url_template",
     value: (_ref10 = (_formState$changes$ca2 = formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.category_url_template) !== null && _formState$changes$ca2 !== void 0 ? _formState$changes$ca2 : (_siteState$site17 = siteState.site) === null || _siteState$site17 === void 0 ? void 0 : _siteState$site17.category_url_template) !== null && _ref10 !== void 0 ? _ref10 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    }
+    },
+    ref: register({
+      pattern: {
+        value: /(store\/)?((:business_slug\/:category_slug$)|(:category_slug\?[a-zA-Z]+=:business_slug$))$/g,
+        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('CATEGORY_URL_TEMPLATE', 'Category url template'))
+      }
+    })
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('PRODUCT_URL_TEMPLATE', 'Product url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LabelHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('PRODUCT_URL_TEMPLATE', 'Product url template')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoTitle, null, t('AVAILABLE_FORMATS', 'Available Formats')), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:business_slug/:category_slug/:product_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:category_slug/:product_slug?", '<any>', "=:business_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:business_slug?", '<any>', "=:category_id&", '<any>', "=:product_id"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":business_slug/:category_slug/:product_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":category_slug/:product_slug?", '<any>', "=:business_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":business_slug?", '<any>', "=:category_id&", '<any>', "=:product_id")))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "product_url_template",
     value: (_ref11 = (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.product_url_template) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_siteState$site18 = siteState.site) === null || _siteState$site18 === void 0 ? void 0 : _siteState$site18.product_url_template) !== null && _ref11 !== void 0 ? _ref11 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
-    }
+    },
+    ref: register({
+      pattern: {
+        value: /(store\/)?((:business_slug\/:category_slug\/:product_slug$)|(:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug$)|(:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id$))$/g,
+        message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('PRODUCT_URL_TEMPLATE', 'Product url template'))
+      }
+    })
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('PROFILE_URL_TEMPLATE', 'Profile url template')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
