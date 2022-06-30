@@ -292,7 +292,8 @@ import {
   ProductExtraOptionMetaFields,
   ProductExtraSubOptionMetaFields,
   ProductIngredientDetails,
-  ProductTagDetails
+  ProductTagDetails,
+  SingleBusiness
 } from './components/Stores'
 import {
   CustomersListing,
@@ -664,6 +665,7 @@ export {
   ProductExtraSubOptionMetaFields,
   ProductIngredientDetails,
   ProductTagDetails,
+  SingleBusiness,
 
   LogoutButton,
   LanguageSelector,
