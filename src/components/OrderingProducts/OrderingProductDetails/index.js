@@ -387,6 +387,7 @@ const OrderingProductDetailsUI = (props) => {
                 <InfoCircle />
                 <InfoContent>
                   <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
+                  <Info>:business_slug</Info>
                   <Info>store/:business_slug</Info>
                   <Info>store/?{'<any>'}=:business_slug</Info>
                 </InfoContent>
@@ -402,7 +403,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(store\/)((:business_slug$)|(\?[a-zA-Z]+=:business_slug$))$/g,
+                  value: /(store\/)?((:business_slug$)|(\?[a-zA-Z]+=:business_slug$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
@@ -420,6 +421,8 @@ const OrderingProductDetailsUI = (props) => {
                   <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
                   <Info>store/:business_slug/:category_slug</Info>
                   <Info>store/:category_slug?{'<any>'}=:business_slug</Info>
+                  <Info>:business_slug/:category_slug</Info>
+                  <Info>:category_slug?{'<any>'}=:business_slug</Info>
                 </InfoContent>
               </InfoWrapper>
             </LabelHeader>
@@ -433,7 +436,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(store\/)((:business_slug\/:category_slug$)|(:category_slug\?[a-zA-Z]+=:business_slug$))$/g,
+                  value: /(store\/)?((:business_slug\/:category_slug$)|(:category_slug\?[a-zA-Z]+=:business_slug$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
@@ -452,6 +455,9 @@ const OrderingProductDetailsUI = (props) => {
                   <Info>store/:business_slug/:category_slug/:product_slug</Info>
                   <Info>store/:category_slug/:product_slug?{'<any>'}=:business_slug</Info>
                   <Info>store/:business_slug?{'<any>'}=:category_id&{'<any>'}=:product_id</Info>
+                  <Info>:business_slug/:category_slug/:product_slug</Info>
+                  <Info>:category_slug/:product_slug?{'<any>'}=:business_slug</Info>
+                  <Info>:business_slug?{'<any>'}=:category_id&{'<any>'}=:product_id</Info>
                 </InfoContent>
               </InfoWrapper>
             </LabelHeader>
@@ -465,7 +471,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(store\/)((:business_slug\/:category_slug\/:product_slug$)|(:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug$)|(:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id$))$/g,
+                  value: /(store\/)?((:business_slug\/:category_slug\/:product_slug$)|(:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug$)|(:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
