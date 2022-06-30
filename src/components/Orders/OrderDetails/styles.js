@@ -238,16 +238,12 @@ export const RejectReasonsList = styled.div`
   margin-top: 10px;
 `
 export const RejectReasonWrapper = styled.div`
-  background-color: ${props => props.theme.colors.secundary};
   padding: 4px 10px;
   border-radius: 50px;
   font-size: 12px;
   line-height: 18px;
   margin: 5px;
   width: fit-content;
-  
-  ${({ active }) => active && css`
-    background-color: ${props => lighten(0.4, props.theme.colors.danger)};
-    color: ${props => props.theme.colors.danger};
-  `}
+  background-color: ${props => lighten(0.4, props.theme.colors.danger)};
+  color: ${props => props.theme.colors.danger};
 `
