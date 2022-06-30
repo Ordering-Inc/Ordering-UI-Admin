@@ -292,7 +292,8 @@ import {
   ProductExtraOptionMetaFields,
   ProductExtraSubOptionMetaFields,
   ProductIngredientDetails,
-  ProductTagDetails
+  ProductTagDetails,
+  SingleBusiness
 } from './components/Stores'
 import {
   CustomersListing,
@@ -315,7 +316,7 @@ import {
   CustomerCashWallet,
   CustomerPointsWallet,
   CustomerCashWalletDetails,
-  CustomerCashWalletEvents,
+  CustomerWalletEvents,
   UserFormDetailsUI,
   ProfessionalListing
 } from './components/Users'
@@ -664,6 +665,7 @@ export {
   ProductExtraSubOptionMetaFields,
   ProductIngredientDetails,
   ProductTagDetails,
+  SingleBusiness,
 
   LogoutButton,
   LanguageSelector,
@@ -688,7 +690,7 @@ export {
   CustomerCashWallet,
   CustomerPointsWallet,
   CustomerCashWalletDetails,
-  CustomerCashWalletEvents,
+  CustomerWalletEvents,
   UserFormDetailsUI,
 
   RewardsPrograms,
