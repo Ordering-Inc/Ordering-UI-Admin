@@ -29,7 +29,7 @@ export const OrderStatusFilterBar = (props) => {
             onClick={() => changeSelectedOrderStatus('pending')}
           >
             {t('PENDING', 'pending')}
-            {(numberOfOrdersByStatus?.pending) && <span>({numberOfOrdersByStatus?.pending})</span>}
+            <span>({numberOfOrdersByStatus?.pending ?? 0})</span>
           </Tab>
 
           <Tab
@@ -37,7 +37,7 @@ export const OrderStatusFilterBar = (props) => {
             onClick={() => changeSelectedOrderStatus('inProgress')}
           >
             {t('IN_PROGRESS', 'in progress')}
-            {(numberOfOrdersByStatus?.inProgress) && <span>({numberOfOrdersByStatus?.inProgress})</span>}
+            <span>({numberOfOrdersByStatus?.inProgress ?? 0})</span>
           </Tab>
 
           <Tab
@@ -45,7 +45,7 @@ export const OrderStatusFilterBar = (props) => {
             onClick={() => changeSelectedOrderStatus('completed')}
           >
             {t('COMPLETED', 'completed')}
-            {(numberOfOrdersByStatus?.completed) && <span>({numberOfOrdersByStatus?.completed})</span>}
+            <span>({numberOfOrdersByStatus?.completed ?? 0})</span>
           </Tab>
 
           <Tab
@@ -53,7 +53,7 @@ export const OrderStatusFilterBar = (props) => {
             onClick={() => changeSelectedOrderStatus('cancelled')}
           >
             {t('CANCELLED', 'cancelled')}
-            {(numberOfOrdersByStatus?.cancelled) && <span>({numberOfOrdersByStatus?.cancelled})</span>}
+            <span>({numberOfOrdersByStatus?.cancelled ?? 0})</span>
           </Tab>
         </DragScroll>
       </OrderStatusFilterContainer>
