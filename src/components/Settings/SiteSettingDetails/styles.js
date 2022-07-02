@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const SettingsListContainer = styled.div`
   width: 100%;
   padding: 26px 20px;
+  overflow-x: hidden;
 `
 
 export const GeneralContainer = styled.div``
