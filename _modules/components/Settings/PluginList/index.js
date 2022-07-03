@@ -60,6 +60,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var PluginListUI = function PluginListUI(props) {
+  var _pluginListState$sysP, _currentPlugins$plugi, _pluginListState$sysP2, _currentPlugins$sysPl;
+
   var pluginListState = props.pluginListState,
       isAddMode = props.isAddMode,
       setIsAddMode = props.setIsAddMode,
@@ -67,7 +69,8 @@ var PluginListUI = function PluginListUI(props) {
       handleAddNewPlugin = props.handleAddNewPlugin,
       actionState = props.actionState,
       handleDeletePlugin = props.handleDeletePlugin,
-      handleUpdatePlugin = props.handleUpdatePlugin;
+      handleUpdatePlugin = props.handleUpdatePlugin,
+      handleInstallSysPlugin = props.handleInstallSysPlugin;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -98,35 +101,47 @@ var PluginListUI = function PluginListUI(props) {
       setConfirm = _useState6[1]; // Change page
 
 
-  var _useState7 = (0, _react.useState)(1),
+  var _useState7 = (0, _react.useState)({
+    plugins: 1,
+    sysPlugins: 1
+  }),
       _useState8 = _slicedToArray(_useState7, 2),
       currentPage = _useState8[0],
       setCurrentPage = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(10),
+  var _useState9 = (0, _react.useState)({
+    plugins: 10,
+    sysPlugins: 10
+  }),
       _useState10 = _slicedToArray(_useState9, 2),
       pluginsPerPage = _useState10[0],
       setPluginsPerPage = _useState10[1]; // Get current plugins
 
 
-  var _useState11 = (0, _react.useState)([]),
+  var _useState11 = (0, _react.useState)({
+    plugins: [],
+    sysPlugins: []
+  }),
       _useState12 = _slicedToArray(_useState11, 2),
       currentPlugins = _useState12[0],
       setCurrentPlugins = _useState12[1];
 
-  var _useState13 = (0, _react.useState)(null),
+  var _useState13 = (0, _react.useState)({
+    plugins: null,
+    sysPlugins: null
+  }),
       _useState14 = _slicedToArray(_useState13, 2),
       totalPages = _useState14[0],
       setTotalPages = _useState14[1];
 
-  var handleChangePage = function handleChangePage(page) {
-    setCurrentPage(page);
+  var _handleChangePage = function handleChangePage(page, type) {
+    setCurrentPage(_objectSpread(_objectSpread({}, currentPage), {}, _defineProperty({}, type, page)));
   };
 
-  var handleChangePageSize = function handleChangePageSize(pageSize) {
-    var expectedPage = Math.ceil(((currentPage - 1) * pluginsPerPage + 1) / pageSize);
-    setCurrentPage(expectedPage);
-    setPluginsPerPage(pageSize);
+  var _handleChangePageSize = function handleChangePageSize(pageSize, type) {
+    var expectedPage = Math.ceil(((currentPage[type] - 1) * pluginsPerPage[type] + 1) / pageSize);
+    setCurrentPage(_objectSpread(_objectSpread({}, currentPage), {}, _defineProperty({}, type, expectedPage)));
+    setPluginsPerPage(_objectSpread(_objectSpread({}, pluginsPerPage), {}, _defineProperty({}, type, pageSize)));
   };
 
   var onClickDeletePlugin = function onClickDeletePlugin(id) {
@@ -147,7 +162,11 @@ var PluginListUI = function PluginListUI(props) {
 
     var _totalPages;
 
+    var _totalsysPages;
+
     var plugins = [];
+
+    var sysPlugins = _toConsumableArray(pluginListState.sysPlugins);
 
     if (searchValue) {
       plugins = pluginListState.plugins.filter(function (plugin) {
@@ -160,16 +179,31 @@ var PluginListUI = function PluginListUI(props) {
     }
 
     if (plugins.length > 0) {
-      _totalPages = Math.ceil(plugins.length / pluginsPerPage);
+      _totalPages = Math.ceil(plugins.length / pluginsPerPage.plugins);
     }
 
-    var indexOfLastPost = currentPage * pluginsPerPage;
-    var indexOfFirstPost = indexOfLastPost - pluginsPerPage;
+    if (sysPlugins.length > 0) {
+      _totalsysPages = Math.ceil(sysPlugins.length / pluginsPerPage.sysPlugins);
+    }
+
+    var indexOfLastPost = currentPage.plugins * pluginsPerPage.plugins;
+    var indexOfFirstPost = indexOfLastPost - pluginsPerPage.plugins;
 
     var _currentPlugins = plugins.slice(indexOfFirstPost, indexOfLastPost);
 
-    setTotalPages(_totalPages);
-    setCurrentPlugins(_currentPlugins);
+    var indexOfLastPostSys = currentPage.sysPlugins * pluginsPerPage.sysPlugins;
+    var indexOfFirstPostSys = indexOfLastPostSys - pluginsPerPage.sysPlugins;
+
+    var _currentSysPlugins = sysPlugins.slice(indexOfFirstPostSys, indexOfLastPostSys);
+
+    setTotalPages({
+      plugins: _totalPages,
+      sysPlugins: _totalsysPages
+    });
+    setCurrentPlugins({
+      plugins: _currentPlugins,
+      sysPlugins: _currentSysPlugins
+    });
   }, [pluginListState, currentPage, pluginsPerPage, searchValue]);
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
@@ -178,7 +212,9 @@ var PluginListUI = function PluginListUI(props) {
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PluginListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PLUGINS', 'Plugins')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PluginListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.PLuginsSeparator, {
+    h: ((_pluginListState$sysP = pluginListState.sysPlugins) === null || _pluginListState$sysP === void 0 ? void 0 : _pluginListState$sysP.length) > 0 && '50%'
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PLUGINS', 'Plugins')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
@@ -192,7 +228,7 @@ var PluginListUI = function PluginListUI(props) {
     onSearch: function onSearch(val) {
       return setSearchValue(val);
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles2.PluginsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PLUGINS', 'Plugins')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), pluginListState.loading ? _toConsumableArray(Array(pluginsPerPage).keys()).map(function (i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.PluginsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PLUGINS', 'Plugins')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), pluginListState.loading ? _toConsumableArray(Array(pluginsPerPage.plugins).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PluginTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -202,7 +238,7 @@ var PluginListUI = function PluginListUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 15
     }))))));
-  }) : currentPlugins.map(function (plugin) {
+  }) : currentPlugins.plugins.map(function (plugin) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PluginTbody, {
       key: plugin.id
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, plugin === null || plugin === void 0 ? void 0 : plugin.name, " (", plugin === null || plugin === void 0 ? void 0 : plugin.hooks.length, " ", t('HOOKS', 'Hooks'), ")"), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
@@ -243,13 +279,47 @@ var PluginListUI = function PluginListUI(props) {
     onClick: function onClick() {
       return setIsAddMode(true);
     }
-  }, t('ADD_NEW_PLUGIN ', 'Add new plugin')), (currentPlugins === null || currentPlugins === void 0 ? void 0 : currentPlugins.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
-    currentPage: currentPage,
-    totalPages: totalPages,
-    handleChangePage: handleChangePage,
-    defaultPageSize: pluginsPerPage,
-    handleChangePageSize: handleChangePageSize
-  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('ADD_NEW_PLUGIN ', 'Add new plugin')), ((_currentPlugins$plugi = currentPlugins.plugins) === null || _currentPlugins$plugi === void 0 ? void 0 : _currentPlugins$plugi.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    currentPage: currentPage.plugins,
+    totalPages: totalPages.plugins,
+    handleChangePage: function handleChangePage(e) {
+      return _handleChangePage(e, 'plugins');
+    },
+    defaultPageSize: pluginsPerPage.plugins,
+    handleChangePageSize: function handleChangePageSize(e) {
+      return _handleChangePageSize(e, 'plugins');
+    }
+  }))), !pluginListState.loading && ((_pluginListState$sysP2 = pluginListState.sysPlugins) === null || _pluginListState$sysP2 === void 0 ? void 0 : _pluginListState$sysP2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.PLuginsSeparator, {
+    h: "50%"
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, {
+    mb: 0
+  }, /*#__PURE__*/_react.default.createElement("h1", {
+    style: {
+      marginTop: 20
+    }
+  }, t('SYSTEM_PLUGINS', 'System Plugins'))), /*#__PURE__*/_react.default.createElement(_styles2.PluginsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('PLUGINS', 'Plugins')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTIONS', 'Actions')))), currentPlugins.sysPlugins.map(function (plugin) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.PluginTbody, {
+      key: plugin.id
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, plugin === null || plugin === void 0 ? void 0 : plugin.name), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, plugin !== null && plugin !== void 0 && plugin.installed ? /*#__PURE__*/_react.default.createElement("span", null, t('SYSTEM_PLUGIN_INSTALLED', 'Installed')) : /*#__PURE__*/_react.default.createElement(_styles.Button, {
+      borderRadius: "8px",
+      color: "lightPrimary",
+      onClick: function onClick() {
+        return handleInstallSysPlugin(plugin.id);
+      }
+    }, /*#__PURE__*/_react.default.createElement("span", null, t('INSTALL', 'Install')))))));
+  })), /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, {
+    justifyContent: "flex-end"
+  }, ((_currentPlugins$sysPl = currentPlugins.sysPlugins) === null || _currentPlugins$sysPl === void 0 ? void 0 : _currentPlugins$sysPl.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    currentPage: currentPage.sysPlugins,
+    totalPages: totalPages.sysPlugins,
+    handleChangePage: function handleChangePage(e) {
+      return _handleChangePage(e, 'sysPlugins');
+    },
+    defaultPageSize: pluginsPerPage.sysPlugins,
+    handleChangePageSize: function handleChangePageSize(e) {
+      return _handleChangePageSize(e, 'sysPlugins');
+    }
+  })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
