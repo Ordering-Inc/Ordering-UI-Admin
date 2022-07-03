@@ -6,11 +6,18 @@ export const PluginListContainer = styled.div`
   box-sizing: border-box;
 `
 
+export const PLuginsSeparator = styled.div`
+  width: 100%;
+  max-height: ${props => props.h ?? '100%'};
+  box-sizing: border-box;
+  overflow-y: auto;
+`
+
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: ${props => props.mb ?? 30}px;
 
   ${props => props.theme?.rtl ? css`
     margin-left: 35px;
@@ -171,7 +178,7 @@ export const ActionSelectorWrapper = styled.div`
 
 export const PagesBottomContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content:  ${props => props.justifyContent ?? 'space-between'};
   align-items: center;
   flex-wrap: wrap;
   row-gap: 10px;
