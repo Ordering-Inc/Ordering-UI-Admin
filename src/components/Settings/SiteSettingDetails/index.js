@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Alert, NotFoundSource } from '../../Shared'
+import { NotFoundSource } from '../../Shared'
 import { SettingsSelectUI } from '../SettingsSelectUI'
 
 import {
@@ -17,29 +17,10 @@ export const SiteSettingDetails = (props) => {
   const {
     selectedSiteId,
     siteConfigsState,
-    handleChangeConfig,
-    actionState
+    handleChangeConfig
   } = props
 
   const [, t] = useLanguage()
-  const [alertState, setAlertState] = useState({ open: false, content: [] })
-
-  const closeAlert = () => {
-    setAlertState({
-      open: false,
-      content: []
-    })
-  }
-
-  useEffect(() => {
-    if (actionState.error) {
-      setAlertState({
-        open: true,
-        content: actionState.error
-      })
-    }
-  }, [actionState.error])
-
   return (
     <>
       <SettingsListContainer>
@@ -100,15 +81,6 @@ export const SiteSettingDetails = (props) => {
           )
         }
       </SettingsListContainer>
-      <Alert
-        title={t('SETTINGS', 'Settings')}
-        content={alertState.content}
-        acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
-        onClose={() => closeAlert()}
-        onAccept={() => closeAlert()}
-        closeOnBackdrop={false}
-      />
     </>
   )
 }

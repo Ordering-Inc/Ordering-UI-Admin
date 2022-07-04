@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage, SitesAuthSettings as SitesAuthSettingsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
-import { SideBar } from '../../Shared'
+import { Alert, SideBar } from '../../Shared'
 import { SiteSettingDetails } from '../SiteSettingDetails'
 
 import {
@@ -23,6 +23,7 @@ const SitesAuthSettingsUI = (props) => {
 
   const [, t] = useLanguage()
   const [selectedSiteId, setSelectedSiteId] = useState(null)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleOpenSiteSettingDetails = (siteId) => {
     handleGetSiteConfigs(siteId)
@@ -34,6 +35,15 @@ const SitesAuthSettingsUI = (props) => {
     setSelectedSiteId(null)
     setMoveDistance(0)
   }
+
+  useEffect(() => {
+    if (actionState.error) {
+      setAlertState({
+        open: true,
+        content: actionState.error
+      })
+    }
+  }, [actionState.error])
 
   return (
     <>
@@ -69,13 +79,21 @@ const SitesAuthSettingsUI = (props) => {
           onClose={() => handleCloseDetails()}
         >
           <SiteSettingDetails
-            actionState={actionState}
             selectedSiteId={selectedSiteId}
             siteConfigsState={siteConfigsState}
             handleChangeConfig={handleChangeConfig}
           />
         </SideBar>
       )}
+      <Alert
+        title={t('SETTINGS', 'Settings')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
