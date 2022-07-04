@@ -37,7 +37,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversBusyStatusFilter = function DriversBusyStatusFilter(props) {
   var driversSubfilter = props.driversSubfilter,
-      handleChangeDriversSubFilter = props.handleChangeDriversSubFilter;
+      handleChangeDriversSubFilter = props.handleChangeDriversSubFilter,
+      numberOfbusyDrivers = props.numberOfbusyDrivers,
+      numberOfnotBusyDrivers = props.numberOfnotBusyDrivers;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -50,14 +52,14 @@ var DriversBusyStatusFilter = function DriversBusyStatusFilter(props) {
         busy: !driversSubfilter.busy
       }));
     }
-  }, t('BUSY', 'Busy'), driversSubfilter.busy && /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, t('BUSY', 'Busy'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfbusyDrivers !== null && numberOfbusyDrivers !== void 0 ? numberOfbusyDrivers : 0, ")"), driversSubfilter.busy && /*#__PURE__*/_react.default.createElement(_MdClose.default, null)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: driversSubfilter.notBusy ? 'primary' : 'secundary',
     onClick: function onClick() {
       return handleChangeDriversSubFilter(_objectSpread(_objectSpread({}, driversSubfilter), {}, {
         notBusy: !driversSubfilter.notBusy
       }));
     }
-  }, t('NOT_BUSY', 'Not busy'), driversSubfilter.notBusy && /*#__PURE__*/_react.default.createElement(_MdClose.default, null)));
+  }, t('NOT_BUSY', 'Not busy'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfnotBusyDrivers !== null && numberOfnotBusyDrivers !== void 0 ? numberOfnotBusyDrivers : 0, ")"), driversSubfilter.notBusy && /*#__PURE__*/_react.default.createElement(_MdClose.default, null)));
 };
 
 exports.DriversBusyStatusFilter = DriversBusyStatusFilter;

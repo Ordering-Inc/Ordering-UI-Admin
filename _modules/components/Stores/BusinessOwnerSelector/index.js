@@ -96,7 +96,7 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
     setSearchValue(searchVal);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  return /*#__PURE__*/_react.default.createElement(_styles.BusinessOwnerSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: usersListOptions,
     defaultValue: selectedOwner === null || selectedOwner === void 0 ? void 0 : selectedOwner.id,
     placeholder: placeholder,
@@ -106,7 +106,7 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
     searchBarIsNotLazyLoad: true,
     searchValue: searchValue,
     handleChangeSearch: handleChangeSearch
-  });
+  }));
 };
 
 var BusinessOwnerSelector = function BusinessOwnerSelector(props) {

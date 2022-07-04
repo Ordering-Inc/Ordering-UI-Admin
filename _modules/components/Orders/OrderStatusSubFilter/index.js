@@ -48,7 +48,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
   var selectedSubOrderStatus = props.selectedSubOrderStatus,
       ordersStatusGroup = props.ordersStatusGroup,
-      handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus;
+      handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
+      numberOfOrdersBySubstatus = props.numberOfOrdersBySubstatus;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -208,7 +209,7 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
       onClick: function onClick() {
         return handleChange(status.key);
       }
-    }, status.value, ((selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled.includes(status.key))) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
+    }, status.value, numberOfOrdersBySubstatus !== null && numberOfOrdersBySubstatus !== undefined && /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersBySubstatus[status.key] || 0, ")"), ((selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled.includes(status.key))) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
   })));
 };
 
