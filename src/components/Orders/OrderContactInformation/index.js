@@ -198,6 +198,12 @@ export const OrderContactInformation = (props) => {
                     <td>{order?.customer?.zipcode}</td>
                   </tr>
                 )}
+                {!!order?.on_behalf_of && (
+                  <tr>
+                    <td>{t('ON_BEHALF_OF', 'On behalf of')}</td>
+                    <td>{order?.on_behalf_of}</td>
+                  </tr>
+                )}
               </tbody>
             </CustomerInfoTable>
           </CutsomerDetail>
