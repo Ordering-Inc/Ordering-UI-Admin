@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
 import { Select } from '../../../styles/Select/FirstSelect'
 
-import { Option } from './styles'
+import { BusinessOwnerSelectorWrapper, Option } from './styles'
 
 const BusinessOwnerSelectorUI = (props) => {
   const {
@@ -52,17 +52,19 @@ const BusinessOwnerSelectorUI = (props) => {
   }
 
   return (
-    <Select
-      options={usersListOptions}
-      defaultValue={selectedOwner?.id}
-      placeholder={placeholder}
-      onChange={onSelectBusinessOwner}
-      isShowSearchBar
-      searchBarIsCustomLayout
-      searchBarIsNotLazyLoad
-      searchValue={searchValue}
-      handleChangeSearch={handleChangeSearch}
-    />
+    <BusinessOwnerSelectorWrapper>
+      <Select
+        options={usersListOptions}
+        defaultValue={selectedOwner?.id}
+        placeholder={placeholder}
+        onChange={onSelectBusinessOwner}
+        isShowSearchBar
+        searchBarIsCustomLayout
+        searchBarIsNotLazyLoad
+        searchValue={searchValue}
+        handleChangeSearch={handleChangeSearch}
+      />
+    </BusinessOwnerSelectorWrapper>
   )
 }
 
