@@ -179,7 +179,9 @@ export const MessagesUI = (props) => {
     if (history) return
     setTimeout(() => {
       const chat = document.getElementById('chat')
-      chat.scrollTop = chat?.scrollHeight
+      if (chat) {
+        chat.scrollTop = chat?.scrollHeight
+      }
     }, 10)
   }, [isChat])
 
