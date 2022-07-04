@@ -1,13 +1,11 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SiteSettingDetails = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
@@ -20,10 +18,6 @@ var _SettingsSelectUI = require("../SettingsSelectUI");
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -48,36 +42,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SiteSettingDetails = function SiteSettingDetails(props) {
   var selectedSiteId = props.selectedSiteId,
       siteConfigsState = props.siteConfigsState,
-      handleChangeConfig = props.handleChangeConfig,
-      actionState = props.actionState;
+      handleChangeConfig = props.handleChangeConfig;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
-
-  var closeAlert = function closeAlert() {
-    setAlertState({
-      open: false,
-      content: []
-    });
-  };
-
-  (0, _react.useEffect)(function () {
-    if (actionState.error) {
-      setAlertState({
-        open: true,
-        content: actionState.error
-      });
-    }
-  }, [actionState.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SettingsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.GeneralTitle, null, /*#__PURE__*/_react.default.createElement("p", null, t('SETTINGS', 'All Settings'))), siteConfigsState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, _toConsumableArray(Array(6).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i
@@ -109,19 +79,7 @@ var SiteSettingDetails = function SiteSettingDetails(props) {
     }));
   }))), !siteConfigsState.loading && siteConfigsState.error && /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
     content: t('NOT_FOUND_CONFIG', 'Sorry, we couldn\'t find the config.')
-  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
-    title: t('SETTINGS', 'Settings'),
-    content: alertState.content,
-    acceptText: t('ACCEPT', 'Accept'),
-    open: alertState.open,
-    onClose: function onClose() {
-      return closeAlert();
-    },
-    onAccept: function onAccept() {
-      return closeAlert();
-    },
-    closeOnBackdrop: false
-  }));
+  })));
 };
 
 exports.SiteSettingDetails = SiteSettingDetails;

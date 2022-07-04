@@ -260,7 +260,10 @@ var MessagesUI = function MessagesUI(props) {
     if (history) return;
     setTimeout(function () {
       var chat = document.getElementById('chat');
-      chat.scrollTop = chat === null || chat === void 0 ? void 0 : chat.scrollHeight;
+
+      if (chat) {
+        chat.scrollTop = chat === null || chat === void 0 ? void 0 : chat.scrollHeight;
+      }
     }, 10);
   }, [isChat]);
 

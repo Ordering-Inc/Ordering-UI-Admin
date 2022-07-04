@@ -70,6 +70,14 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
       selectedSiteId = _useState2[0],
       setSelectedSiteId = _useState2[1];
 
+  var _useState3 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
+
   var handleOpenSiteSettingDetails = function handleOpenSiteSettingDetails(siteId) {
     handleGetSiteConfigs(siteId);
     setSelectedSiteId(siteId);
@@ -81,6 +89,14 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
     setMoveDistance(0);
   };
 
+  (0, _react.useEffect)(function () {
+    if (actionState.error) {
+      setAlertState({
+        open: true,
+        content: actionState.error
+      });
+    }
+  }, [actionState.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SitesListContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings')), sitesState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SitesWrapper, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SiteItem, {
       key: i
@@ -103,11 +119,28 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
       return handleCloseDetails();
     }
   }, /*#__PURE__*/_react.default.createElement(_SiteSettingDetails.SiteSettingDetails, {
-    actionState: actionState,
     selectedSiteId: selectedSiteId,
     siteConfigsState: siteConfigsState,
     handleChangeConfig: handleChangeConfig
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('SETTINGS', 'Settings'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 var SitesAuthSettings = function SitesAuthSettings(props) {
