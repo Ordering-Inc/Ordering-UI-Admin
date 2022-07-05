@@ -38,6 +38,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ImportersButton = function ImportersButton(props) {
+  var defaultSlug = props.defaultSlug;
+
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
@@ -66,6 +68,7 @@ var ImportersButton = function ImportersButton(props) {
       return setOpenImporters(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_ImportersListing.ImportersListing, {
+    defaultSlug: defaultSlug,
     setExtraOpen: setExtraOpen
   })));
 };

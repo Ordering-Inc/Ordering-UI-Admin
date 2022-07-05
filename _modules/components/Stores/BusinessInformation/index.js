@@ -85,14 +85,24 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   }),
       _useState4 = _slicedToArray(_useState3, 2),
       cropState = _useState4[0],
-      setCropState = _useState4[1]; // const priceList = [
-  //   { key: '$', value: '$' },
-  //   { key: '$$', value: '$$' },
-  //   { key: '$$$', value: '$$$' },
-  //   { key: '$$$$', value: '$$$$' },
-  //   { key: '$$$$$', value: '$$$$$' }
-  // ]
+      setCropState = _useState4[1];
 
+  var priceList = [{
+    key: '1',
+    value: '$'
+  }, {
+    key: '2',
+    value: '$$'
+  }, {
+    key: '3',
+    value: '$$$'
+  }, {
+    key: '4',
+    value: '$$$$'
+  }, {
+    key: '5',
+    value: '$$$$$'
+  }];
 
   var handleClickImage = function handleClickImage(type) {
     if (type === 'header') {
@@ -341,7 +351,17 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
         });
       }
     }, /*#__PURE__*/_react.default.createElement("div", null), (formState !== null && formState !== void 0 && (_formState$changes19 = formState.changes) !== null && _formState$changes19 !== void 0 && (_formState$changes19$ = _formState$changes19.ribbon) !== null && _formState$changes19$ !== void 0 && _formState$changes19$.shape ? (formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : (_formState$changes20$ = _formState$changes20.ribbon) === null || _formState$changes20$ === void 0 ? void 0 : _formState$changes20$.shape) === _utils.shape[key] : (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine24 = businessState.business) === null || _businessState$busine24 === void 0 ? void 0 : (_businessState$busine25 = _businessState$busine24.ribbon) === null || _businessState$busine25 === void 0 ? void 0 : _businessState$busine25.shape) === _utils.shape[key]) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
-  }))))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }))))), /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE_FILTER', 'Price filter')), /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterListWrapper, null, priceList.map(function (item, i) {
+    var _formState$changes$pr, _formState$changes21, _businessState$busine26, _formState$changes$pr2, _formState$changes22, _businessState$busine27;
+
+    return /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterItem, {
+      key: i,
+      onClick: function onClick() {
+        return handleChangeSwtich('price_level', item.key);
+      },
+      active: ((_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.price_level) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine26 = businessState.business) === null || _businessState$busine26 === void 0 ? void 0 : _businessState$busine26.price_level) === item.key
+    }, ((_formState$changes$pr2 = formState === null || formState === void 0 ? void 0 : (_formState$changes22 = formState.changes) === null || _formState$changes22 === void 0 ? void 0 : _formState$changes22.price_level) !== null && _formState$changes$pr2 !== void 0 ? _formState$changes$pr2 : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine27 = businessState.business) === null || _businessState$busine27 === void 0 ? void 0 : _businessState$busine27.price_level) === item.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, item.value));
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     type: "submit",
     color: "primary",
     borderRadius: "8px",

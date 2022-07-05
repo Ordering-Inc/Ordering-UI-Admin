@@ -66,7 +66,9 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     onClick: function onClick() {
       return handleStartTutorial();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_ImportersButton.ImportersButton, null), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_ImportersButton.ImportersButton, {
+    defaultSlug: "sync_businesses_default"
+  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick() {

@@ -49,6 +49,8 @@ var _BusinessDetails = require("../BusinessDetails");
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _ImportersButton = require("../ImportersButton");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -304,7 +306,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return setOpenSidebar('business_details');
     }
-  }, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", null, categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name))))), slug && /*#__PURE__*/_react.default.createElement(_styles2.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", null, categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name))))), slug && /*#__PURE__*/_react.default.createElement(_styles2.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_ImportersButton.ImportersButton, {
+    defaultSlug: "sync_categories_default"
+  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {

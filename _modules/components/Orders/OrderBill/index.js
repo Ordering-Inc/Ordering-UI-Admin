@@ -112,6 +112,8 @@ var OrderBill = function OrderBill(props) {
   var getIncludedTaxes = function getIncludedTaxes() {
     var _order$taxes;
 
+    if (!(order !== null && order !== void 0 && order.taxes)) return 0;
+
     if ((order === null || order === void 0 ? void 0 : (_order$taxes = order.taxes) === null || _order$taxes === void 0 ? void 0 : _order$taxes.length) === 0) {
       var _order$summary$tax, _order$summary;
 

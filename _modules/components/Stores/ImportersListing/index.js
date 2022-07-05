@@ -46,7 +46,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ImportersListingUI = function ImportersListingUI(props) {
-  var importerList = props.importerList,
+  var defaultSlug = props.defaultSlug,
+      importerList = props.importerList,
       paginationDetail = props.paginationDetail,
       handleDeleteImporter = props.handleDeleteImporter,
       setExtraOpen = props.setExtraOpen,
@@ -114,14 +115,14 @@ var ImportersListingUI = function ImportersListingUI(props) {
   (0, _react.useEffect)(function () {
     if (importerList.loading || isOpenedDefaultImporter) return;
     var defaultBusinessImporter = importerList === null || importerList === void 0 ? void 0 : importerList.importers.find(function (importer) {
-      return importer.slug === 'sync_businesses_default';
+      return importer.slug === defaultSlug;
     });
 
     if (defaultBusinessImporter) {
       setIsOpenedDefaultImporter(true);
       handleEditImporter(defaultBusinessImporter);
     }
-  }, [importerList, isOpenedDefaultImporter]);
+  }, [importerList, isOpenedDefaultImporter, defaultSlug]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ImportersListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('IMPORTERS', 'Importers')), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "5px",
