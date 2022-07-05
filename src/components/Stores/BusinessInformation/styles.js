@@ -249,51 +249,65 @@ export const ShapeBoxWrapper = styled.div`
   `}
 `
 
-// export const PriceFilterWrapper = styled.div`
-//   > label {
-//     font-weight: 600;
-//     font-size: 16px;
-//     line-height: 24px;
-//     margin-bottom: 0px;
-//   }
-// `
+export const PriceFilterWrapper = styled.div`
+  margin-top: 20px;
 
-// export const PriceFilterListWrapper = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   width: calc(100% + 20px);
-//   margin-left: -10px;
+  > label {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 0px;
+  }
+`
 
-//   > div {
-//     width: calc(20% - 20px);
-//     margin: 10px;
-//   }
-// `
+export const PriceFilterListWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + 20px);
+  margin-left: -10px;
 
-// export const PriceFilterItem = styled.div`
-//   display: flex;
-//   align-items: center;
+  ${props => props.theme.rtl && css`
+    margin-right: -10px;
+    margin-left: 0px;
+  `}
 
-//   svg {
-//     font-size: 16px;
-//     color: ${props => props.theme.colors.secundaryLight};
-//     transition: all 0.3s linear;
-//     min-width: 16px;
-//   }
+  > div {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+  }
 
-//   span {
-//     font-weight: 400;
-//     font-size: 14px;
-//     margin-left: 8px;
-//     ${props => props.theme.rtl && css`
-//       margin-right: 8px;
-//       margin-left: 0px;
-//     `}
-//   }
+  @media (min-width: 576px) {
+    > div {
+      width: calc(20% - 20px);
+    }
+  }
+`
 
-//   ${({ active }) => active && css`
-//     svg {
-//       color: ${props => props.theme.colors.primary};
-//     }
-//   `}
-// `
+export const PriceFilterItem = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  svg {
+    font-size: 16px;
+    color: ${props => props.theme.colors.secundaryLight};
+    transition: all 0.3s linear;
+    min-width: 16px;
+  }
+
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 8px;
+    ${props => props.theme.rtl && css`
+      margin-right: 8px;
+      margin-left: 0px;
+    `}
+  }
+
+  ${({ active }) => active && css`
+    svg {
+      color: ${props => props.theme.colors.primary};
+    }
+  `}
+`

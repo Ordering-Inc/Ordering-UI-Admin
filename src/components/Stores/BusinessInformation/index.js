@@ -24,10 +24,10 @@ import {
   ShapeWrapper,
   ShapeContentWrapper,
   ShapeBoxWrapper,
-  RibbonSwitchWrapper
-  // PriceFilterWrapper,
-  // PriceFilterListWrapper,
-  // PriceFilterItem
+  RibbonSwitchWrapper,
+  PriceFilterWrapper,
+  PriceFilterListWrapper,
+  PriceFilterItem
 } from './styles'
 
 const BusinessInformationUI = (props) => {
@@ -48,13 +48,13 @@ const BusinessInformationUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
-  // const priceList = [
-  //   { key: '$', value: '$' },
-  //   { key: '$$', value: '$$' },
-  //   { key: '$$$', value: '$$$' },
-  //   { key: '$$$$', value: '$$$$' },
-  //   { key: '$$$$$', value: '$$$$$' }
-  // ]
+  const priceList = [
+    { key: '1', value: '$' },
+    { key: '2', value: '$$' },
+    { key: '3', value: '$$$' },
+    { key: '4', value: '$$$$' },
+    { key: '5', value: '$$$$$' }
+  ]
 
   const handleClickImage = (type) => {
     if (type === 'header') {
@@ -326,19 +326,21 @@ const BusinessInformationUI = (props) => {
             </>
           )
         }
-        {/* <PriceFilterWrapper>
+        <PriceFilterWrapper>
           <label>{t('PRICE_FILTER', 'Price filter')}</label>
           <PriceFilterListWrapper>
             {priceList.map((item, i) => (
               <PriceFilterItem
                 key={i}
+                onClick={() => handleChangeSwtich('price_level', item.key)}
+                active={(formState?.changes?.price_level ?? businessState?.business?.price_level) === item.key}
               >
-                <Circle />
+                {((formState?.changes?.price_level ?? businessState?.business?.price_level) === item.key) ? <RecordCircleFill /> : <Circle />}
                 <span>{item.value}</span>
               </PriceFilterItem>
             ))}
           </PriceFilterListWrapper>
-        </PriceFilterWrapper> */}
+        </PriceFilterWrapper>
         <ActionsForm>
           <Button
             type='submit'

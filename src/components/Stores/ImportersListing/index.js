@@ -14,6 +14,7 @@ import {
 
 export const ImportersListingUI = (props) => {
   const {
+    defaultSlug,
     importerList,
     paginationDetail,
     handleDeleteImporter,
@@ -56,12 +57,12 @@ export const ImportersListingUI = (props) => {
 
   useEffect(() => {
     if (importerList.loading || isOpenedDefaultImporter) return
-    const defaultBusinessImporter = importerList?.importers.find(importer => importer.slug === 'sync_businesses_default')
+    const defaultBusinessImporter = importerList?.importers.find(importer => importer.slug === defaultSlug)
     if (defaultBusinessImporter) {
       setIsOpenedDefaultImporter(true)
       handleEditImporter(defaultBusinessImporter)
     }
-  }, [importerList, isOpenedDefaultImporter])
+  }, [importerList, isOpenedDefaultImporter, defaultSlug])
 
   return (
     <>
