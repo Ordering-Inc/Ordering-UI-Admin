@@ -109,7 +109,6 @@ export const OrdersListing = (props) => {
                   setSelectedOrderIds={setSelectedOrderIds}
                   isSelectedOrders={isSelectedOrders}
                   orderList={orderList}
-                  driversList={driversList}
                   pagination={pagination}
                   selectedOrderIds={selectedOrderIds}
                   orderDetailId={orderDetailId}
