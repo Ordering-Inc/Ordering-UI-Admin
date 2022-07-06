@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const OrdersListContainer = styled.div`
@@ -105,7 +104,7 @@ export const ViewDetails = styled.a`
   margin: 0 10px;
 `
 
-export const BusinessInfo = styled.div`
+export const InfoItemContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
   p {
@@ -135,7 +134,7 @@ export const BusinessInfo = styled.div`
     }
   }
   @media (min-width: 1300px) {
-    width: 45%;
+    width: 50%;
   }
 `
 
@@ -149,6 +148,13 @@ export const WrapperImage = styled.div`
     border-radius: 10px;
   `}
 
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 7.6px;
+    object-fit: cover;
+  }
+
   svg {
     width: 100%;
     height: 100%;
@@ -158,29 +164,6 @@ export const WrapperImage = styled.div`
   }
 `
 
-const ImageStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  border-radius: 10px;
-`
-export const Image = (props) => {
-  return (
-    <ImageStyled
-      {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
-    >
-      {props.children}
-    </ImageStyled>
-  )
-}
-
 export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -189,46 +172,6 @@ export const CardContent = styled.div`
     flex-direction: row;
   }
 `
-
-export const DriverSelectorWrapper = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 10px;
-  > div {
-    > div {
-      border: none;
-      &:first-child {
-        .driver-photo {
-          width: 45px;
-          height: 45px;
-        }
-        .driver-info {
-          p {
-            color: ${props => props.theme.colors?.headingColor};
-            font-size: 14px;
-            font-weight: 600;
-          }
-          span {
-            display: initial;
-          }
-        }
-      }
-    }
-  }
-
-  @media (min-width: 1300px) {
-    width: 55%;
-    margin-top: 0px;
-    ${props => props.theme?.rtl ? css`
-      border-right: 1px solid ${props => props.theme.colors?.secundary};
-      padding-right: 15px;
-    ` : css`
-      border-left: 1px solid ${props => props.theme.colors?.secundary};
-      padding-left: 15px;
-    `}
-  }
-`
-
 export const WrapperPagination = styled.div`
   margin: 10px 15px 0 15px;
 `
