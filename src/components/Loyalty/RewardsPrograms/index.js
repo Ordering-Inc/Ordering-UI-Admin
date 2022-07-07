@@ -22,9 +22,15 @@ const RewardsProgramsUI = (props) => {
 
   const [showOption, setShowOption] = useState(null)
   const [moveDistance, setMoveDistance] = useState(0)
+  const [levelMoveDistance, setLevelMoveDistance] = useState(0)
 
   const hanldeClosePointsWallet = () => {
     setMoveDistance(0)
+    setShowOption(null)
+  }
+
+  const handleCloseLevel = () => {
+    setLevelMoveDistance(0)
     setShowOption(null)
   }
 
@@ -81,11 +87,14 @@ const RewardsProgramsUI = (props) => {
       {showOption === 'levels' && (
         <SideBar
           sidebarId='loyaltyLevels'
-          defaultSideBarWidth={600}
           open={showOption === 'levels'}
-          onClose={() => setShowOption(null)}
+          onClose={() => handleCloseLevel()}
+          defaultSideBarWidth={550 + levelMoveDistance}
+          moveDistance={levelMoveDistance}
         >
-          <PointsWalletLevels />
+          <PointsWalletLevels
+            handleParentSidebarMove={val => setLevelMoveDistance(val)}
+          />
         </SideBar>
       )}
     </>
