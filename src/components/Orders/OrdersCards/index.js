@@ -3,7 +3,7 @@ import moment from 'moment'
 import { useLanguage, useUtils, useConfig } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
-import { DriverSelector } from '../DriverSelector'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Pagination } from '../../Shared'
 
 import {
@@ -11,11 +11,9 @@ import {
   OrderCard,
   OrderHeader,
   ViewDetails,
-  BusinessInfo,
+  InfoItemContainer,
   WrapperImage,
-  Image,
   CardContent,
-  DriverSelectorWrapper,
   WrapperPagination,
   UnreadMessageCounter,
   Timestatus,
@@ -28,7 +26,6 @@ export const OrdersCards = (props) => {
     isMessagesView,
 
     orderList,
-    driversList,
     pagination,
     getPageOrders,
     handleOpenOrderDetail,
@@ -173,7 +170,7 @@ export const OrdersCards = (props) => {
                 </div>
               </OrderHeader>
               <CardContent>
-                <BusinessInfo>
+                <InfoItemContainer>
                   <WrapperImage isSkeleton>
                     <Skeleton width={45} height={45} />
                   </WrapperImage>
@@ -181,8 +178,8 @@ export const OrdersCards = (props) => {
                     <p><Skeleton width={100} /></p>
                     <p><Skeleton width={100} /></p>
                   </div>
-                </BusinessInfo>
-                <BusinessInfo>
+                </InfoItemContainer>
+                <InfoItemContainer>
                   <WrapperImage isSkeleton>
                     <Skeleton width={45} height={45} />
                   </WrapperImage>
@@ -190,7 +187,7 @@ export const OrdersCards = (props) => {
                     <p><Skeleton width={100} /></p>
                     <p><Skeleton width={100} /></p>
                   </div>
-                </BusinessInfo>
+                </InfoItemContainer>
               </CardContent>
             </OrderCard>
           ))
@@ -235,27 +232,34 @@ export const OrdersCards = (props) => {
                   </UnreadMessageCounter>
                 )}
                 <CardContent>
-                  <BusinessInfo>
+                  <InfoItemContainer>
                     <WrapperImage>
-                      <Image bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
+                      <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
                     </WrapperImage>
                     <div className='info'>
                       <p className='bold'>{order?.business?.name}</p>
                       <p>{order?.business?.city?.name}</p>
                     </div>
-                  </BusinessInfo>
-                  <DriverSelectorWrapper
-                    className='driver-selector'
-                  >
-                    <DriverSelector
-                      orderView
-                      small
-                      padding='0px'
-                      defaultValue={order?.driver_id ? order.driver_id : 'default'}
-                      drivers={driversList.drivers}
-                      order={order}
-                    />
-                  </DriverSelectorWrapper>
+                  </InfoItemContainer>
+                  <InfoItemContainer>
+                    <WrapperImage>
+                      {order?.driver?.photo ? (
+                        <img src={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
+                      ) : (
+                        <FaUserAlt />
+                      )}
+                    </WrapperImage>
+                    <div className='info'>
+                      {order?.driver ? (
+                        <>
+                          <p className='bold'>{order?.driver?.name}</p>
+                          <p>{order?.driver?.cellphone}</p>
+                        </>
+                      ) : (
+                        <p className='bold'>{t('NO_DRIVER', 'No Driver')}</p>
+                      )}
+                    </div>
+                  </InfoItemContainer>
                 </CardContent>
                 {allowColumns?.slaBar && (
                   <Timestatus timeState={getStatusClassName(getDelayMinutes(order))} />
