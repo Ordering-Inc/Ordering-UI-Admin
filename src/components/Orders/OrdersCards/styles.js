@@ -107,6 +107,7 @@ export const ViewDetails = styled.a`
 export const InfoItemContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
+  margin: 5px 0;
   p {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -135,6 +136,7 @@ export const InfoItemContainer = styled.div`
   }
   @media (min-width: 1300px) {
     width: 50%;
+    margin: 0;
   }
 `
 
