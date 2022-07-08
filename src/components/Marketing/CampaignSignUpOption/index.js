@@ -66,6 +66,14 @@ const CampaignSignUpOptionUI = (props) => {
       return
     }
 
+    if (ruleFormState?.changes?.date === ruleFormState?.changes?.max_date) {
+      setAlertState({
+        open: true,
+        content: t('MAX_DATE_AFTER_DATE', 'The Max date must be a date after date')
+      })
+      return
+    }
+
     if (isAddMode) {
       // if (formState?.changes?.audience_type === 'fixed' &&
       //   (ruleFormState?.changes?.date_condition === '=' ||
@@ -77,12 +85,18 @@ const CampaignSignUpOptionUI = (props) => {
       //   })
       //   return
       // }
-      const updatedConditions = formState?.changes?.conditions.map(condition => {
-        if (condition.type === type) {
-          return { ...condition, ...ruleFormState.changes }
-        }
-        return condition
-      })
+      const found = formState?.changes?.conditions?.find(item => item.type === type)
+      let updatedConditions = [...formState?.changes?.conditions]
+      if (found) {
+        updatedConditions = formState?.changes?.conditions.map(condition => {
+          if (condition.type === type) {
+            return { ...ruleFormState.changes }
+          }
+          return condition
+        })
+      } else {
+        updatedConditions.push({ ...ruleFormState.changes, type: type })
+      }
       handleChangeItem('conditions', updatedConditions)
     } else if (ruleFormState.changes?.id) {
       handleUpdateRule()
