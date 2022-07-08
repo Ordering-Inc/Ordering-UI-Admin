@@ -223,7 +223,7 @@ export const ImporterFormUI = (props) => {
             {Object.keys(selectedImporter).length > 0 && (
               <span style={{ fontSize: '14px', lineHeight: '24px' }}>
                 {t('CSV_FILE_EXAMPLE', 'CSV file example')}
-                <ExampleCSV onClick={() => downloadCSV()}>{t('FILE_EXAMPLE_CSV', 'example.csv')}</ExampleCSV>
+                <ExampleCSV onClick={() => downloadCSV()}>{`${editState?.type}.csv`}</ExampleCSV>
               </span>
             )}
           </InputWrapper>

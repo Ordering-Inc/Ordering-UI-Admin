@@ -88,8 +88,9 @@ export const ImportersListingUI = (props) => {
             defaultSideBarWidth={openMappingDetails ? 1000 : 500}
             moveDistance={openMappingDetails ? 500 : 0}
             onClose={() => {
-              setOpenNewImporter(false)
+              setOpenMappingDetails(false)
               setSelectedImporter({})
+              setOpenNewImporter(false)
             }}
           >
             <ImporterForm
@@ -100,8 +101,9 @@ export const ImportersListingUI = (props) => {
               openMappingDetails={openMappingDetails}
               setOpenMappingDetails={setOpenMappingDetails}
               onClose={() => {
-                setOpenNewImporter(false)
                 setSelectedImporter({})
+                setOpenMappingDetails(false)
+                setOpenNewImporter(false)
               }}
             />
           </SideBar>
@@ -121,6 +123,8 @@ export const ImportersListingUI = (props) => {
             selectedImporter={selectedImporterJob}
             handleOpenChildForm={() => setImportJobFormMoveDistance(500)}
             handleCloseChildForm={() => setImportJobFormMoveDistance(0)}
+            openMappingDetails={openMappingDetails}
+            setOpenMappingDetails={setOpenMappingDetails}
             onClose={() => {
               setOpenImportCsv(false)
               setImportJobFormMoveDistance(0)

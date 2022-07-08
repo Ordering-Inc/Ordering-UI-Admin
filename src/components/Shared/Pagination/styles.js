@@ -23,13 +23,13 @@ export const PageButton = styled.button`
   color: ${props => props.theme.colors.headingColor};
   outline: none;
   border: none;
-  border-radius: 50%;
-  width: 27px;
-  height: 27px;
+  border-radius: 27px;
+  min-width: 27px;
+  min-height: 27px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0px;
+  padding: 0px 7px;
 
   ${props => props.theme?.rtl ? css`
     margin-left: 3px;
