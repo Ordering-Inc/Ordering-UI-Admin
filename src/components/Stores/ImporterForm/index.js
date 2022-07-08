@@ -74,6 +74,8 @@ export const ImporterFormUI = (props) => {
     'sync_extra_products_default', 'sync_full_menu_default'
   ]
 
+  const noAdvancedTypes = ['sync_extras', 'sync_extra_options', 'sync_extra_option_suboptions']
+
   const isDefaultImporter = defaultImporterSlugs.includes(selectedImporter?.slug) || defaultImporter
 
   const importypeOptions = [
@@ -228,7 +230,7 @@ export const ImporterFormUI = (props) => {
             )}
           </InputWrapper>
         )}
-        {importType !== 8 && (
+        {importType !== 8 && !(isAdvanedOptions && noAdvancedTypes.includes(selectedImporter?.type)) && (
           <MappingFields disabled={isDefaultImporter}>
             <Row>
               <Col>
@@ -578,7 +580,7 @@ export const ImporterFormUI = (props) => {
         </FiledListWrapper>
       )}
 
-      {importType !== 8 && (
+      {importType !== 8 && !(isAdvanedOptions && noAdvancedTypes.includes(selectedImporter?.type)) && (
         <FiledListWrapper disabled={isDefaultImporter}>
           <label>{t('META_FIELDS', 'MetaFields')}</label>
           {Object.keys(metafieldList) && Object.keys(metafieldList).length > 0 && (
