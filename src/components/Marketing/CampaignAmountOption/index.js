@@ -62,13 +62,18 @@ const CampaignAmountOptionUI = (props) => {
       return
     }
     if (isAddMode) {
-      const conditions = [...formState?.changes?.conditions]
-      const updatedConditions = conditions.map(condition => {
-        if (condition.type === type) {
-          return { ...condition, ...ruleFormState.changes }
-        }
-        return condition
-      })
+      const found = formState?.changes?.conditions?.find(item => item.type === type)
+      let updatedConditions = [...formState?.changes?.conditions]
+      if (found) {
+        updatedConditions = formState?.changes?.conditions.map(condition => {
+          if (condition.type === type) {
+            return { ...condition, ...ruleFormState.changes }
+          }
+          return condition
+        })
+      } else {
+        updatedConditions.push({ ...ruleFormState.changes, type: type })
+      }
       handleChangeItem('conditions', updatedConditions)
     } else if (ruleFormState.changes?.id) {
       handleUpdateRule()
@@ -76,6 +81,14 @@ const CampaignAmountOptionUI = (props) => {
       handleAddRule()
     }
     onClose && onClose()
+  }
+
+  const handleChangeInput = (key, value) => {
+    if (key === '<' && value === 0) {
+      handleChangeValue('value', null)
+      return
+    }
+    handleChangeValue('value', value)
   }
 
   return (
@@ -100,9 +113,9 @@ const CampaignAmountOptionUI = (props) => {
                       e.preventDefault()
                     }
                   }}
-                  value={ruleFormState.changes?.value || ''}
-                  onChange={(value) => handleChangeValue('value', value)}
-                  min={0}
+                  value={ruleFormState.changes?.value ?? ''}
+                  onChange={(value) => handleChangeInput(item.key, value)}
+                  min={item.key === '>' ? 0 : 1}
                 />
               </DaysContent>
             )}

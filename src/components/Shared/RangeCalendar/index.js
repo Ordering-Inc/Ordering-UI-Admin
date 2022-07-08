@@ -14,7 +14,8 @@ export const RangeCalendar = (props) => {
     defaultValue,
     isLeft,
     isSingleDate,
-    withTime
+    withTime,
+    minDate
   } = props
 
   const [, t] = useLanguage()
@@ -112,6 +113,7 @@ export const RangeCalendar = (props) => {
               <Calendar
                 date={date}
                 onChange={(date) => handleChangeSingleDate(date)}
+                minDate={minDate || new Date('1922-01-01')}
               />
             ) : (
               <DateRange
@@ -119,6 +121,7 @@ export const RangeCalendar = (props) => {
                 onChange={item => handleChangeDates(item)}
                 moveRangeOnFirstSelection={false}
                 ranges={dateRange}
+                minDate={minDate || new Date('1922-01-01')}
               />
             )}
           </CalendarWrapper>
