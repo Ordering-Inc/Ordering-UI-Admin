@@ -8,6 +8,7 @@ export const Professionals = (props) => {
   const [events] = useEvent()
   const professionalProps = {
     ...props,
+    isProfessional: true,
     headerTitle: t('PROFESSIONALS', 'Professionals'),
     defaultUserTypesSelected: [8],
     propsToFetch: [
@@ -15,7 +16,7 @@ export const Professionals = (props) => {
       'country_phone_code', 'city_id', 'city', 'address', 'addresses', 'max_days_in_future',
       'address_notes', 'dropdown_option_id', 'dropdown_option', 'location',
       'zipcode', 'level', 'enabled', 'middle_name', 'second_lastname', 'birthdate', 'drivergroups',
-      'phone_verified', 'email_verified', 'wallets'
+      'phone_verified', 'email_verified', 'wallets', 'occupation_id', 'session', 'session_strategy'
     ],
     onUserRedirect: (userId) => {
       if (!userId) {

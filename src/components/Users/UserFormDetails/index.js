@@ -8,6 +8,7 @@ import { sortInputFields } from '../../../utils'
 import { Switch, Input, Button } from '../../../styles'
 import { Eye, EyeSlash } from 'react-bootstrap-icons'
 import { UserTypeSelector } from '../UserTypeSelector'
+import { OccupationSelector } from '../OccupationSelector'
 
 import {
   FormInput,
@@ -35,7 +36,9 @@ export const UserFormDetailsUI = (props) => {
     isDriversPage,
     handleChangeSwtich,
     handleChangeUserType,
-    isProfessional
+    isProfessional,
+    occupations,
+    handleChangeOccupation
   } = props
 
   const formMethods = useForm()
@@ -257,9 +260,15 @@ export const UserFormDetailsUI = (props) => {
                       autoComplete='off'
                     />
                   )}
-
                 </React.Fragment>
               )
+            )}
+            {isProfessional && occupations.length > 0 && (
+              <OccupationSelector
+                occupationId={user?.occupation_id}
+                occupations={occupations}
+                handleChangeOccupation={handleChangeOccupation}
+              />
             )}
             {!!showInputPhoneNumber && (
               <InputPhoneNumber

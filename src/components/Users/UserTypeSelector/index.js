@@ -39,6 +39,12 @@ export const UserTypeSelector = (props) => {
       content: <Option>{t('CALL_CENTER_AGENT', 'Call center agent')}</Option>,
       showOnSelected: <Option padding>{t('CALL_CENTER_AGENT', 'Call center agent')}</Option>,
       disabled: !isPrimary && defaultUserType === 9
+    },
+    {
+      value: 8,
+      content: <Option>{t('PROFESSIONAL', 'Professional')}</Option>,
+      showOnSelected: <Option padding>{t('PROFESSIONAL', 'Professional')}</Option>,
+      disabled: !isPrimary && defaultUserType === 8
     }
   ]
   const placeholder = <Option isWeight>{t('TYPE', 'Type')}</Option>

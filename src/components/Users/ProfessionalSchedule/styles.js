@@ -125,6 +125,7 @@ export const ScheduleContentWrapper = styled.div`
 export const ButtonWrapper = styled.div`
   position: sticky;
   top: 100%;
+  padding: 20px 0 30px 0;
 
   button {
     height: 44px;
