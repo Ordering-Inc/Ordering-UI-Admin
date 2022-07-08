@@ -27,6 +27,8 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 
 var _UserTypeSelector = require("../UserTypeSelector");
 
+var _OccupationSelector = require("../OccupationSelector");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -71,7 +73,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       isDriversPage = props.isDriversPage,
       handleChangeSwtich = props.handleChangeSwtich,
       handleChangeUserType = props.handleChangeUserType,
-      isProfessional = props.isProfessional;
+      isProfessional = props.isProfessional,
+      occupations = props.occupations,
+      handleChangeOccupation = props.handleChangeOccupation;
   var formMethods = (0, _reactHookForm.useForm)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -337,6 +341,10 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     }));
+  }), isProfessional && occupations.length > 0 && /*#__PURE__*/_react.default.createElement(_OccupationSelector.OccupationSelector, {
+    occupationId: user === null || user === void 0 ? void 0 : user.occupation_id,
+    occupations: occupations,
+    handleChangeOccupation: handleChangeOccupation
   }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,

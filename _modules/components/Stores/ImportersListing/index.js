@@ -46,8 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ImportersListingUI = function ImportersListingUI(props) {
-  var defaultSlug = props.defaultSlug,
-      importerList = props.importerList,
+  var importerList = props.importerList,
       paginationDetail = props.paginationDetail,
       handleDeleteImporter = props.handleDeleteImporter,
       setExtraOpen = props.setExtraOpen,
@@ -85,13 +84,8 @@ var ImportersListingUI = function ImportersListingUI(props) {
 
   var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      isOpenedDefaultImporter = _useState12[0],
-      setIsOpenedDefaultImporter = _useState12[1];
-
-  var _useState13 = (0, _react.useState)(false),
-      _useState14 = _slicedToArray(_useState13, 2),
-      openMappingDetails = _useState14[0],
-      setOpenMappingDetails = _useState14[1];
+      openMappingDetails = _useState12[0],
+      setOpenMappingDetails = _useState12[1];
 
   var addNewImporter = function addNewImporter() {
     setSelectedImporter({});
@@ -117,17 +111,6 @@ var ImportersListingUI = function ImportersListingUI(props) {
   (0, _react.useEffect)(function () {
     setExtraOpen && setExtraOpen(openNewImporter);
   }, [openNewImporter]);
-  (0, _react.useEffect)(function () {
-    if (importerList.loading || isOpenedDefaultImporter) return;
-    var defaultBusinessImporter = importerList === null || importerList === void 0 ? void 0 : importerList.importers.find(function (importer) {
-      return importer.slug === defaultSlug;
-    });
-
-    if (defaultBusinessImporter) {
-      setIsOpenedDefaultImporter(true);
-      handleEditImporter(defaultBusinessImporter);
-    }
-  }, [importerList, isOpenedDefaultImporter, defaultSlug]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ImportersListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('IMPORTERS', 'Importers')), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "5px",

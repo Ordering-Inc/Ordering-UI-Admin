@@ -141,6 +141,26 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
         title = t('PRODUCT_IMPORTER', 'Product importer');
         break;
 
+      case 'sync_extra_products':
+        title = t('EXTRA_PRODUCTS', 'Extra products');
+        break;
+
+      case 'sync_extras':
+        title = t('EXTRAS', 'Extras');
+        break;
+
+      case 'sync_extra_options':
+        title = t('EXTRA_OPTIONS', 'Extra options');
+        break;
+
+      case 'sync_extra_option_suboptions':
+        title = t('EXTRA_OPTION_SUBOPTIONS', 'extra option suboptions');
+        break;
+
+      case 'sync_multiple':
+        title = t('MULTIPLE', 'Multiple');
+        break;
+
       default:
         title = type;
         break;

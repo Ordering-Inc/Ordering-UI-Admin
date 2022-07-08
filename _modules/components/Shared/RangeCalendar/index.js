@@ -48,7 +48,8 @@ var RangeCalendar = function RangeCalendar(props) {
       defaultValue = props.defaultValue,
       isLeft = props.isLeft,
       isSingleDate = props.isSingleDate,
-      withTime = props.withTime;
+      withTime = props.withTime,
+      minDate = props.minDate;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -155,14 +156,16 @@ var RangeCalendar = function RangeCalendar(props) {
     date: date,
     onChange: function onChange(date) {
       return handleChangeSingleDate(date);
-    }
+    },
+    minDate: minDate || new Date('1922-01-01')
   }) : /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
     editableDateInputs: true,
     onChange: function onChange(item) {
       return handleChangeDates(item);
     },
     moveRangeOnFirstSelection: false,
-    ranges: dateRange
+    ranges: dateRange,
+    minDate: minDate || new Date('1922-01-01')
   })));
 };
 

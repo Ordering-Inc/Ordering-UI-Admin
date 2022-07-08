@@ -126,6 +126,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
       setMetaFiledValue = _useState12[1];
 
   var defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default', 'sync_extras_default', 'sync_extra_options_default', 'sync_extra_option_suboptions_default', 'sync_extra_products_default', 'sync_full_menu_default'];
+  var noAdvancedTypes = ['sync_extras', 'sync_extra_options', 'sync_extra_option_suboptions'];
   var isDefaultImporter = defaultImporterSlugs.includes(selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.slug) || defaultImporter;
   var importypeOptions = [{
     value: 1,
@@ -283,7 +284,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     onClick: function onClick() {
       return downloadCSV();
     }
-  }, "".concat(editState === null || editState === void 0 ? void 0 : editState.type, ".csv")))), importType !== 8 && /*#__PURE__*/_react.default.createElement(_styles2.MappingFields, {
+  }, "".concat(editState === null || editState === void 0 ? void 0 : editState.type, ".csv")))), importType !== 8 && !(isAdvanedOptions && noAdvancedTypes.includes(selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.type)) && /*#__PURE__*/_react.default.createElement(_styles2.MappingFields, {
     disabled: isDefaultImporter
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_BUSINESS_ID', 'Business ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "business_id",
@@ -513,7 +514,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     autoComplete: "off"
   }), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement("button", {
     type: "submit"
-  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)))))))), importType !== 8 && /*#__PURE__*/_react.default.createElement(_styles2.FiledListWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_BsPlusSquare.default, null)))))))), importType !== 8 && !(isAdvanedOptions && noAdvancedTypes.includes(selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.type)) && /*#__PURE__*/_react.default.createElement(_styles2.FiledListWrapper, {
     disabled: isDefaultImporter
   }, /*#__PURE__*/_react.default.createElement("label", null, t('META_FIELDS', 'MetaFields')), Object.keys(metafieldList) && Object.keys(metafieldList).length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.entries(metafieldList).map(function (value, i) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {

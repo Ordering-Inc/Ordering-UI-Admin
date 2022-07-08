@@ -31,6 +31,8 @@ var _UsersExportCSV = require("../UsersExportCSV");
 
 var _styles = require("../../../styles");
 
+var _OccupationsFilter = require("../OccupationsFilter");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -76,7 +78,10 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
       onUserRedirect = props.onUserRedirect,
       handleSuccessUpdate = props.handleSuccessUpdate,
       handleSuccessAddUser = props.handleSuccessAddUser,
-      handleSuccessDeleteUser = props.handleSuccessDeleteUser;
+      handleSuccessDeleteUser = props.handleSuccessDeleteUser,
+      occupationsState = props.occupationsState,
+      selectedOccupation = props.selectedOccupation,
+      handleSelectOccupation = props.handleSelectOccupation;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -153,7 +158,11 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState
-  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_OccupationsFilter.OccupationsFilter, {
+    occupationsState: occupationsState,
+    selectedOccupation: selectedOccupation,
+    handleSelectOccupation: handleSelectOccupation
+  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
@@ -184,6 +193,7 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     open: isOpenUserDetails,
     user: openUser,
     userId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
+    occupations: occupationsState.occupations,
     onClose: function onClose() {
       return handleBackRedirect();
     },

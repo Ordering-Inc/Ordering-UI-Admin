@@ -63,10 +63,13 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
   var _userState$user, _userState$user2, _userState$user3, _adminUserState$user, _userState$user5, _userState$user6;
 
   var userState = props.userState,
+      occupations = props.occupations,
       setExtraOpen = props.setExtraOpen,
       handleSuccessUserUpdate = props.handleSuccessUserUpdate,
       handleDeleteUser = props.handleDeleteUser,
-      handleChangeActiveUser = props.handleChangeActiveUser;
+      handleChangeActiveUser = props.handleChangeActiveUser,
+      handleGoogleCalendarSync = props.handleGoogleCalendarSync,
+      actionStatus = props.actionStatus;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
@@ -96,6 +99,14 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
       confirm = _useState6[0],
       setConfirm = _useState6[1];
 
+  var _useState7 = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      alertState = _useState8[0],
+      setAlertState = _useState8[1];
+
   var onDeleteCustomer = function onDeleteCustomer() {
     setConfirm({
       open: true,
@@ -123,6 +134,14 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
     setExtraOpen(false);
     setExtraSelected(null);
   }, [currentMenuSelected]);
+  (0, _react.useEffect)(function () {
+    if (actionStatus.error) {
+      setAlertState({
+        open: true,
+        content: actionStatus.error
+      });
+    }
+  }, [actionStatus.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.UserName, null, userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   }) : /*#__PURE__*/_react.default.createElement("span", {
@@ -142,7 +161,11 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
         enabled: enabled
       });
     }
-  }))), ((_adminUserState$user = adminUserState.user) === null || _adminUserState$user === void 0 ? void 0 : _adminUserState$user.id) !== ((_userState$user5 = userState.user) === null || _userState$user5 === void 0 ? void 0 : _userState$user5.id) && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarSyncWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
+    color: "lightPrimary",
+    onClick: handleGoogleCalendarSync
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('CALENDAR_SYNC', 'Calendar sync')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4Event, null))), ((_adminUserState$user = adminUserState.user) === null || _adminUserState$user === void 0 ? void 0 : _adminUserState$user.id) !== ((_userState$user5 = userState.user) === null || _userState$user5 === void 0 ? void 0 : _userState$user5.id) && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -164,6 +187,7 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
     isProfessional: true
   }), !(userState !== null && userState !== void 0 && userState.loading) && (userState === null || userState === void 0 ? void 0 : userState.user) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentMenuSelected === 'profile' && /*#__PURE__*/_react.default.createElement(_UserProfileForm.UserProfileForm, {
     user: userState.user,
+    occupations: occupations,
     handleSuccessUpdate: handleSuccessUserUpdate,
     isProfessional: true
   }), currentMenuSelected === 'schedule' && /*#__PURE__*/_react.default.createElement(_ProfessionalSchedule.ProfessionalSchedule, {
@@ -204,6 +228,24 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
       }));
     },
     onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
     closeOnBackdrop: false
   }));
 };
