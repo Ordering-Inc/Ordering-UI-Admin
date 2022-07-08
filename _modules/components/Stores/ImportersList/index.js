@@ -59,7 +59,7 @@ var ImportersList = function ImportersList(props) {
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-  var defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default'];
+  var defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default', 'sync_extras_default', 'sync_extra_options_default', 'sync_extra_option_suboptions_default', 'sync_extra_products_default', 'sync_full_menu_default'];
 
   var handleSelectImporter = function handleSelectImporter(e, importer) {
     var isInvalid = e.target.closest('.importer_enable_control') || e.target.closest('.importer_action');

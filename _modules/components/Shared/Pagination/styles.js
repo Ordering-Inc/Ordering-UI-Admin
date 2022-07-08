@@ -31,7 +31,7 @@ var PaginationButtonContainer = _styledComponents.default.div(_templateObject2 |
 
 exports.PaginationButtonContainer = PaginationButtonContainer;
 
-var PageButton = _styledComponents.default.button(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  background-color: transparent;\n  font-size: 14px;\n  color: ", ";\n  outline: none;\n  border: none;\n  border-radius: 50%;\n  width: 27px;\n  height: 27px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0px;\n\n  ", "\n\n  &:hover {\n    background-color: #1507260a;\n  }\n\n  &:disabled {\n    cursor: not-allowed;\n    opacity: 0.5;\n  }\n\n  &:active {\n    background-color: #1507261a;\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
+var PageButton = _styledComponents.default.button(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  background-color: transparent;\n  font-size: 14px;\n  color: ", ";\n  outline: none;\n  border: none;\n  border-radius: 27px;\n  min-width: 27px;\n  min-height: 27px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0px 7px;\n\n  ", "\n\n  &:hover {\n    background-color: #1507260a;\n  }\n\n  &:disabled {\n    cursor: not-allowed;\n    opacity: 0.5;\n  }\n\n  &:active {\n    background-color: #1507261a;\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme2;

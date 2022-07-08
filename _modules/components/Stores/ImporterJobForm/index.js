@@ -56,7 +56,9 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       handleCreateImporterJob = props.handleCreateImporterJob,
       onClose = props.onClose,
       handleOpenChildForm = props.handleOpenChildForm,
-      handleCloseChildForm = props.handleCloseChildForm;
+      handleCloseChildForm = props.handleCloseChildForm,
+      openMappingDetails = props.openMappingDetails,
+      setOpenMappingDetails = props.setOpenMappingDetails;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -275,13 +277,18 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
   }), openAdvancedOptions && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     isBorderShow: true,
     open: openAdvancedOptions,
+    defaultSideBarWidth: openMappingDetails ? 1000 : 500,
+    moveDistance: openMappingDetails ? 500 : 0,
     onClose: function onClose() {
       handleCloseChildForm();
+      setOpenMappingDetails(false);
       setOpenAdvancedOptions(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_ImporterForm.ImporterForm, {
     isAdvanedOptions: true,
-    selectedImporter: selectedImporter
+    selectedImporter: selectedImporter,
+    openMappingDetails: openMappingDetails,
+    setOpenMappingDetails: setOpenMappingDetails
   }))));
 };
 

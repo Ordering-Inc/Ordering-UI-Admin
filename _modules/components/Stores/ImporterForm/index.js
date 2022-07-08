@@ -283,7 +283,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     onClick: function onClick() {
       return downloadCSV();
     }
-  }, t('FILE_EXAMPLE_CSV', 'example.csv')))), importType !== 8 && /*#__PURE__*/_react.default.createElement(_styles2.MappingFields, {
+  }, "".concat(editState === null || editState === void 0 ? void 0 : editState.type, ".csv")))), importType !== 8 && /*#__PURE__*/_react.default.createElement(_styles2.MappingFields, {
     disabled: isDefaultImporter
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAPPING_BUSINESS_ID', 'Business ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "business_id",

@@ -149,8 +149,9 @@ var ImportersListingUI = function ImportersListingUI(props) {
     defaultSideBarWidth: openMappingDetails ? 1000 : 500,
     moveDistance: openMappingDetails ? 500 : 0,
     onClose: function onClose() {
-      setOpenNewImporter(false);
+      setOpenMappingDetails(false);
       setSelectedImporter({});
+      setOpenNewImporter(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_ImporterForm.ImporterForm, {
     openNewImporter: openNewImporter,
@@ -160,8 +161,9 @@ var ImportersListingUI = function ImportersListingUI(props) {
     openMappingDetails: openMappingDetails,
     setOpenMappingDetails: setOpenMappingDetails,
     onClose: function onClose() {
-      setOpenNewImporter(false);
       setSelectedImporter({});
+      setOpenMappingDetails(false);
+      setOpenNewImporter(false);
     }
   }))), openImportCsv && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     open: openImportCsv,
@@ -179,6 +181,8 @@ var ImportersListingUI = function ImportersListingUI(props) {
     handleCloseChildForm: function handleCloseChildForm() {
       return setImportJobFormMoveDistance(0);
     },
+    openMappingDetails: openMappingDetails,
+    setOpenMappingDetails: setOpenMappingDetails,
     onClose: function onClose() {
       setOpenImportCsv(false);
       setImportJobFormMoveDistance(0);
