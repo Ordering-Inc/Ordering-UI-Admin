@@ -14,7 +14,6 @@ import {
 
 export const ImportersListingUI = (props) => {
   const {
-    defaultSlug,
     importerList,
     paginationDetail,
     handleDeleteImporter,
@@ -28,7 +27,6 @@ export const ImportersListingUI = (props) => {
   const [selectedImporter, setSelectedImporter] = useState({})
   const [selectedImporterJob, setSelectedImporterJob] = useState({})
   const [importJobFormMoveDistance, setImportJobFormMoveDistance] = useState(0)
-  const [isOpenedDefaultImporter, setIsOpenedDefaultImporter] = useState(false)
   const [openMappingDetails, setOpenMappingDetails] = useState(false)
 
   const addNewImporter = () => {
@@ -55,15 +53,6 @@ export const ImportersListingUI = (props) => {
   useEffect(() => {
     setExtraOpen && setExtraOpen(openNewImporter)
   }, [openNewImporter])
-
-  useEffect(() => {
-    if (importerList.loading || isOpenedDefaultImporter) return
-    const defaultBusinessImporter = importerList?.importers.find(importer => importer.slug === defaultSlug)
-    if (defaultBusinessImporter) {
-      setIsOpenedDefaultImporter(true)
-      handleEditImporter(defaultBusinessImporter)
-    }
-  }, [importerList, isOpenedDefaultImporter, defaultSlug])
 
   return (
     <>

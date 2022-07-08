@@ -20,7 +20,7 @@ export const Container = styled.div`
   }
 
   @media (min-width: 1200px) {
-    max-height: calc(100vh - 275px);
+    max-height: calc(100vh - 273px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
       max-height: calc(100vh - 345px);
     `}

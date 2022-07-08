@@ -44,7 +44,8 @@ export const CampaignDetailGeneral = (props) => {
     isAddMode,
     handleUpdateClick,
     handleAddCampaign,
-    audienceState
+    audienceState,
+    handleDeleteCondition
   } = props
 
   const [, t] = useLanguage()
@@ -77,8 +78,6 @@ export const CampaignDetailGeneral = (props) => {
 
   const handleOpenRuleModal = (evt, index) => {
     if (evt.target.closest('.rule-control')) return
-    const isUpdate = isEnableStatus(index)
-    if (!isUpdate) handleChangeCheckBox(index)
     setSelectedRule(index)
     setIsRuleModal(true)
   }
@@ -101,16 +100,31 @@ export const CampaignDetailGeneral = (props) => {
   }
 
   const handleChangeCheckBox = (key) => {
-    const conditions = formState?.changes?.conditions ?? campaignState?.campaign?.conditions
     const isUpdate = isEnableStatus(key)
-    let updatedConditions = []
-    if (isUpdate) {
-      updatedConditions = conditions.filter(item => item.type !== key)
-    } else {
-      updatedConditions = [...conditions]
-      updatedConditions.push({ type: key })
+    if (!isUpdate) {
+      setSelectedRule(key)
+      setIsRuleModal(true)
+      return
     }
-    handleChangeItem('conditions', updatedConditions)
+
+    const conditions = isAddMode ? formState?.changes?.conditions : campaignState?.campaign?.conditions
+    if (conditions?.length < 2) {
+      setAlertState({
+        open: true,
+        content: t(
+          'VALIDATION_ERROR_REQUIRED',
+          'Conditions filed is required'
+        ).replace('_attribute_', t('CONDITIONS', 'Conditions'))
+      })
+      return
+    }
+
+    if (isAddMode) {
+      const updatedConditions = formState?.changes?.conditions.filter(item => item.type !== key)
+      handleChangeItem('conditions', updatedConditions)
+    } else {
+      handleDeleteCondition(isUpdate?.id)
+    }
   }
 
   const handleSubmitBtnClick = () => {
@@ -208,6 +222,7 @@ export const CampaignDetailGeneral = (props) => {
                       isSingleDate
                       defaultValue={formState?.changes?.end_at ?? campaignState?.campaign?.end_at}
                       handleChangeDate={(date) => handleChangeDateTime('end_at', date)}
+                      minDate={new Date()}
                     />
                   </EndDateWrapper>
                 </>
@@ -253,6 +268,7 @@ export const CampaignDetailGeneral = (props) => {
                         isSingleDate
                         defaultValue={formState?.changes?.scheduled_at ?? campaignState?.campaign?.scheduled_at}
                         handleChangeDate={(date) => handleChangeDateTime('scheduled_at', date)}
+                        minDate={new Date()}
                       />
                     </ScheduleForLateWrapper>
                   )}
