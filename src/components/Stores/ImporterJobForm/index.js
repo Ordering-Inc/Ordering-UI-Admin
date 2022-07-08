@@ -25,7 +25,9 @@ const ImporterJobFormUI = (props) => {
     handleCreateImporterJob,
     onClose,
     handleOpenChildForm,
-    handleCloseChildForm
+    handleCloseChildForm,
+    openMappingDetails,
+    setOpenMappingDetails
   } = props
   const [, t] = useLanguage()
   const formMethods = useForm()
@@ -245,14 +247,19 @@ const ImporterJobFormUI = (props) => {
           <SideBar
             isBorderShow
             open={openAdvancedOptions}
+            defaultSideBarWidth={openMappingDetails ? 1000 : 500}
+            moveDistance={openMappingDetails ? 500 : 0}
             onClose={() => {
               handleCloseChildForm()
+              setOpenMappingDetails(false)
               setOpenAdvancedOptions(false)
             }}
           >
             <ImporterForm
               isAdvanedOptions
               selectedImporter={selectedImporter}
+              openMappingDetails={openMappingDetails}
+              setOpenMappingDetails={setOpenMappingDetails}
             />
           </SideBar>
         )}

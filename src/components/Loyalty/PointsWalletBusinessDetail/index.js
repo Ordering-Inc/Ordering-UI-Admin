@@ -225,55 +225,62 @@ const PointsWalletBusinessDetailUI = (props) => {
               }}
             />
           </AccumulationInputWrapper>
-          <ToggleWrapper>
-            <p>{t('MAXIMUM_OF_POINTS', 'Maximum of points')}</p>
-            <Switch
-              defaultChecked={isMaximum}
-              onChange={val => handleClickSwitch(val)}
-            />
-          </ToggleWrapper>
-          {isMaximum && (
-            <Input
-              type='text'
-              placeholder='00 points'
-              name='maximum_accumulation'
-              value={formState?.changes?.maximum_accumulation ?? walletData?.maximum_accumulation ?? ''}
-              onChange={handleChangeInput}
-              onKeyPress={(e) => {
-                if (!/^[0-9.]$/.test(e.key)) {
-                  e.preventDefault()
-                }
-              }}
-            />
+          {isBusiness && (
+            <>
+              <ToggleWrapper>
+                <p>{t('MAXIMUM_OF_POINTS', 'Maximum of points')}</p>
+                <Switch
+                  defaultChecked={isMaximum}
+                  onChange={val => handleClickSwitch(val)}
+                />
+              </ToggleWrapper>
+              {isMaximum && (
+                <Input
+                  type='text'
+                  placeholder='00 points'
+                  name='maximum_accumulation'
+                  value={formState?.changes?.maximum_accumulation ?? walletData?.maximum_accumulation ?? ''}
+                  onChange={handleChangeInput}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9.]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
+                />
+              )}
+            </>
           )}
         </PointsAccumulationContainer>
-        <ExPirationWrapper>
-          <h2>{t('EXPIRATION', 'Expiration')}</h2>
-          <CheckBoxWrapper onClick={() => handleChangeExpirtation(null)}>
-            {!expiration ? <RecordCircleFill className='active' /> : <Circle />}
-            <p>{t('NO', 'No')}</p>
-          </CheckBoxWrapper>
-          <CheckBoxWrapper onClick={() => handleChangeExpirtation('days')}>
-            {expiration ? <RecordCircleFill className='active' /> : <Circle />}
-            <p>{t('EXPIRATION_IN_DAYS', 'Expiration in days')}</p>
-          </CheckBoxWrapper>
-          {expiration && (
-            <OptionInputWrapper>
-              <Input
-                type='text'
-                placeholder={`0 ${t('DAYS', 'days')}`}
-                name='expire_after_minutes'
-                value={maxValue}
-                onChange={handleChangeMaxValue}
-                onKeyPress={(e) => {
-                  if (!/^[0-9]$/.test(e.key)) {
-                    e.preventDefault()
-                  }
-                }}
-              />
-            </OptionInputWrapper>
-          )}
-        </ExPirationWrapper>
+        {isBusiness && (
+          <ExPirationWrapper>
+            <h2>{t('EXPIRATION', 'Expiration')}</h2>
+            <CheckBoxWrapper onClick={() => handleChangeExpirtation(null)}>
+              {!expiration ? <RecordCircleFill className='active' /> : <Circle />}
+              <p>{t('NO', 'No')}</p>
+            </CheckBoxWrapper>
+            <CheckBoxWrapper onClick={() => handleChangeExpirtation('days')}>
+              {expiration ? <RecordCircleFill className='active' /> : <Circle />}
+              <p>{t('EXPIRATION_IN_DAYS', 'Expiration in days')}</p>
+            </CheckBoxWrapper>
+            {expiration && (
+              <OptionInputWrapper>
+                <Input
+                  type='text'
+                  placeholder={`0 ${t('DAYS', 'days')}`}
+                  name='expire_after_minutes'
+                  value={maxValue}
+                  onChange={handleChangeMaxValue}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
+                />
+              </OptionInputWrapper>
+            )}
+          </ExPirationWrapper>
+        )}
+
       </DetailContent>
       <ButtonWrapper>
         <Button

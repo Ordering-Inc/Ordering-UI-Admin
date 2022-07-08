@@ -267,3 +267,85 @@ export const SocialShareImage = styled.div`
     object-fit: cover;
   }
 `
+
+export const LabelHeader = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+
+  > button {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+      margin-right: -8px;
+    ` : css`
+      margin-right: 8px;
+      margin-left: -8px;
+    `}
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+`
+
+export const InfoWrapper = styled.div`
+  margin-bottom: 10px;
+  ${props => props.theme?.rtl ? css`
+    margin-left: -8px;
+    margin-right: 8px;
+  ` : css`
+    margin-right: -8px;
+    margin-left: 8px;
+  `}
+
+  &:hover > div {
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
+  }
+`
+
+export const InfoContent = styled.div`
+  position: absolute;
+  top: 100%;
+  z-index: 999;
+  background: ${props => props.theme.colors.backgroundInfo};
+  border: 1px solid ${props => props.theme.colors.primary};
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 18px;
+  min-width: 300px;
+  transition: all 0.3s linear;
+  visibility: hidden;
+  opacity: 0;
+  /* display: none; */
+  left: 0px;
+  ${props => props.theme.rtl && css`
+    left: 0px;
+    right: initial;
+  `}
+
+  @media (min-width: 576px) {
+    min-width: 450px;
+    padding: 12px 15px;
+    ${props => props.theme.rtl && css`
+      right: 0px;
+      left: initial;
+    `}
+  }
+`
+export const InfoTitle = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+`
+
+export const Info = styled.div`
+  border-top: 1px solid gray;
+`

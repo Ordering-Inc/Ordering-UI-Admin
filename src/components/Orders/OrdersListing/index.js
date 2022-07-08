@@ -15,7 +15,6 @@ export const OrdersListing = (props) => {
   const {
     isSelectedOrders,
     orderList,
-    driversList,
     selectedOrderIds,
     orderListView,
     handleUpdateOrderStatus,
@@ -109,7 +108,6 @@ export const OrdersListing = (props) => {
                   setSelectedOrderIds={setSelectedOrderIds}
                   isSelectedOrders={isSelectedOrders}
                   orderList={orderList}
-                  driversList={driversList}
                   pagination={pagination}
                   selectedOrderIds={selectedOrderIds}
                   orderDetailId={orderDetailId}
@@ -130,7 +128,6 @@ export const OrdersListing = (props) => {
                   isMessagesView={isMessagesView}
 
                   orderList={orderList}
-                  driversList={driversList}
                   pagination={pagination}
                   selectedOrderIds={selectedOrderIds}
                   loadMoreOrders={loadMoreOrders}

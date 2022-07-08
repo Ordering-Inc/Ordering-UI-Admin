@@ -5,7 +5,7 @@ import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, Confirm } from '../../Shared'
 import { Input, TextArea, Button, DefaultSelect } from '../../../styles'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ThreeDots, InfoCircle } from 'react-bootstrap-icons'
 
 import {
   useLanguage,
@@ -27,10 +27,15 @@ import {
   UploadImageIcon,
   LogoImage,
   FormControl,
+  LabelHeader,
   Label,
   FormGroup,
   SaveBtnWrapper,
-  SocialShareImage
+  SocialShareImage,
+  InfoWrapper,
+  InfoContent,
+  InfoTitle,
+  Info
 } from './styles'
 
 const OrderingProductDetailsUI = (props) => {
@@ -325,15 +330,6 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.reset_password_url_template ?? siteState.site?.reset_password_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('RESET_PASSWORD_URL_TEMPLATE', 'Reset password url template'))
-                }
-              })}
             />
           </FormControl>
           <FormControl className='col-md-12'>
@@ -346,15 +342,6 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.track_order_url_template ?? siteState.site?.track_order_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('TRACK_ORDER_URL_TEMPLATE', 'Track order url template'))
-                }
-              })}
             />
           </FormControl>
           <FormControl className='col-md-12'>
@@ -379,15 +366,6 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.checkout_url_template ?? siteState.site?.checkout_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('CHECKOUT_URL_TEMPLATE', 'Checkout url template'))
-                }
-              })}
             />
           </FormControl>
           <FormControl className='col-md-12'>
@@ -400,19 +378,21 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.cart_url_template ?? siteState.site?.cart_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('CART_URL_TEMPLATE', 'Cart url template'))
-                }
-              })}
             />
           </FormControl>
           <FormControl className='col-md-12'>
-            <Label>{t('BUSINESS_URL_TEMPLATE', 'Business url template')}</Label>
+            <LabelHeader>
+              <Label>{t('BUSINESS_URL_TEMPLATE', 'Business url template')}</Label>
+              <InfoWrapper>
+                <InfoCircle />
+                <InfoContent>
+                  <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
+                  <Info>:business_slug</Info>
+                  <Info>store/:business_slug</Info>
+                  <Info>store/?{'<any>'}=:business_slug</Info>
+                </InfoContent>
+              </InfoWrapper>
+            </LabelHeader>
             <Input
               type='text'
               placeholder={t('URL', 'Url')}
@@ -423,7 +403,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
+                  value: /(store\/)?((:business_slug$)|(\?[a-zA-Z]+=:business_slug$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
@@ -433,7 +413,19 @@ const OrderingProductDetailsUI = (props) => {
             />
           </FormControl>
           <FormControl className='col-md-12'>
-            <Label>{t('CATEGORY_URL_TEMPLATE', 'Category url template')}</Label>
+            <LabelHeader>
+              <Label>{t('CATEGORY_URL_TEMPLATE', 'Category url template')}</Label>
+              <InfoWrapper>
+                <InfoCircle />
+                <InfoContent>
+                  <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
+                  <Info>store/:business_slug/:category_slug</Info>
+                  <Info>store/:category_slug?{'<any>'}=:business_slug</Info>
+                  <Info>:business_slug/:category_slug</Info>
+                  <Info>:category_slug?{'<any>'}=:business_slug</Info>
+                </InfoContent>
+              </InfoWrapper>
+            </LabelHeader>
             <Input
               type='text'
               placeholder={t('URL', 'Url')}
@@ -444,7 +436,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
+                  value: /(store\/)?((:business_slug\/:category_slug$)|(:category_slug\?[a-zA-Z]+=:business_slug$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
@@ -454,7 +446,21 @@ const OrderingProductDetailsUI = (props) => {
             />
           </FormControl>
           <FormControl className='col-md-12'>
-            <Label>{t('PRODUCT_URL_TEMPLATE', 'Product url template')}</Label>
+            <LabelHeader>
+              <Label>{t('PRODUCT_URL_TEMPLATE', 'Product url template')}</Label>
+              <InfoWrapper>
+                <InfoCircle />
+                <InfoContent>
+                  <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
+                  <Info>store/:business_slug/:category_slug/:product_slug</Info>
+                  <Info>store/:category_slug/:product_slug?{'<any>'}=:business_slug</Info>
+                  <Info>store/:business_slug?{'<any>'}=:category_id&{'<any>'}=:product_id</Info>
+                  <Info>:business_slug/:category_slug/:product_slug</Info>
+                  <Info>:category_slug/:product_slug?{'<any>'}=:business_slug</Info>
+                  <Info>:business_slug?{'<any>'}=:category_id&{'<any>'}=:product_id</Info>
+                </InfoContent>
+              </InfoWrapper>
+            </LabelHeader>
             <Input
               type='text'
               placeholder={t('URL', 'Url')}
@@ -465,7 +471,7 @@ const OrderingProductDetailsUI = (props) => {
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
+                  value: /(store\/)?((:business_slug\/:category_slug\/:product_slug$)|(:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug$)|(:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
@@ -484,15 +490,6 @@ const OrderingProductDetailsUI = (props) => {
                 formState?.changes?.profile_url_template ?? siteState.site?.profile_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
-              ref={register({
-                pattern: {
-                  value: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
-                  message: t(
-                    'VALIDATION_ERROR_ACTIVE_URL',
-                    'The _attribute_ is not a valid URL.'
-                  ).replace('_attribute_', t('PROFILE_URL_TEMPLATE', 'Profile url template'))
-                }
-              })}
             />
           </FormControl>
         </FormGroup>

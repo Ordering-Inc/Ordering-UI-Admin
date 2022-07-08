@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const OrdersContainer = styled.div`
@@ -218,6 +217,13 @@ export const WrapperImage = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
 
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 7.6px;
+  }
+
   svg {
     width: 100%;
     height: 100%;
@@ -226,29 +232,6 @@ export const WrapperImage = styled.div`
     border-radius: 50%;
   }
 `
-
-const ImageStyled = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  object-fit: cover;
-  background-position: center;
-  border-radius: 7.6px;
-`
-export const Image = (props) => {
-  return (
-    <ImageStyled
-      {...props}
-      style={{ backgroundImage: `url(${props.bgimage})` }}
-    >
-      {props.children}
-    </ImageStyled>
-  )
-}
 
 export const OrderType = styled.div`
   display: flex;
