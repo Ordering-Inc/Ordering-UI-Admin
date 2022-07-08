@@ -13,7 +13,6 @@ import { XLg } from 'react-bootstrap-icons'
 import { NotFoundSource, Modal } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { OrderToPrint } from '../OrderToPrint'
-import { orderRejectCommentList } from '../../../utils'
 
 import {
   Container,
@@ -368,14 +367,9 @@ const OrderDetailsUI = (props) => {
             <RejectReasonsContainer>
               <p>{t('REJECT_REASONS', 'Reject reasons')}</p>
               <RejectReasonsList>
-                {orderRejectCommentList(order?.status).map(reason => (
-                  <RejectReasonWrapper
-                    key={reason.key}
-                    active={reason.value === order?.reject_reason}
-                  >
-                    {t(`REJECT_REASON_${reason.content.toUpperCase()}`, reason.content.replaceAll('_', ' '))}
-                  </RejectReasonWrapper>
-                ))}
+                <RejectReasonWrapper>
+                  {t(`REJECT_REASON_${order?.reject_reason.toUpperCase()}`, order?.reject_reason.replace(/_/g, ' '))}
+                </RejectReasonWrapper>
               </RejectReasonsList>
             </RejectReasonsContainer>
           )}

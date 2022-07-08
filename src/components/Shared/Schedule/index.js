@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
+  useConfig,
   Schedule as ScheduleController
 } from 'ordering-components-admin'
 import {
@@ -46,6 +47,9 @@ const ScheduleUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+
+  const is12Hours = configs.format_time?.value === '12'
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -102,12 +106,38 @@ const ScheduleUI = (props) => {
   useEffect(() => {
     const _scheduleOptions = []
     for (let hour = 0; hour < 24; hour++) {
+      let hh = ''
+      let meridian = ''
+      if (!is12Hours) hh = hour < 10 ? `0${hour}` : hour
+      else {
+        if (hour === 0) {
+          hh = '12'
+          meridian = ' ' + t('AM', 'AM')
+        } else if (hour > 0 && hour < 12) {
+          hh = (hour < 10 ? '0' + hour : hour)
+          meridian = ' ' + t('AM', 'AM')
+        } else if (hour === 12) {
+          hh = '12'
+          meridian = ' ' + t('PM', 'PM')
+        } else {
+          hh = ((hour - 12 < 10) ? '0' + (hour - 12) : (hour - 12))
+          meridian = ' ' + t('PM', 'PM')
+        }
+      }
       for (let min = 0; min < 4; min++) {
         _scheduleOptions.push({
           value: hour + ':' + min * 15,
           content: (
             <Option>
-              {hour < 10 ? `0${hour}` : hour} : {min === 0 ? '00' : min * 15}
+              {is12Hours ? (
+                <>
+                  {hh}:{min === 0 ? '00' : min * 15} {meridian}
+                </>
+              ) : (
+                <>
+                  {hh} : {min === 0 ? '00' : min * 15}
+                </>
+              )}
             </Option>
           )
         })
@@ -116,7 +146,7 @@ const ScheduleUI = (props) => {
     _scheduleOptions.push({
       value: '23:59',
       content: (
-        <Option>23 : 59</Option>
+        <Option>{is12Hours ? '11:59 PM' : '23 : 59'}</Option>
       )
     })
     setScheduleOptions(_scheduleOptions)

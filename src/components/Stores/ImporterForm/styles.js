@@ -87,6 +87,9 @@ export const FiledListWrapper = styled.div`
   label {
     font-size: 14px;
   }
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
 `
 export const FieldAddForm = styled.form`
 
@@ -148,4 +151,9 @@ export const ExampleCSV = styled.span`
   &:hover {
     text-decoration: underline;
   }
+`
+export const MappingFields = styled.div`
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
 `

@@ -90,6 +90,9 @@ import { ProductExtraOptionMetaFields } from './ProductExtraOptionMetaFields'
 import { ProductExtraSubOptionMetaFields } from './ProductExtraSubOptionMetaFields'
 import { ProductIngredientDetails } from './ProductIngredientDetails'
 import { ProductTagDetails } from './ProductTagDetails'
+import { SingleBusiness } from './SingleBusiness'
+import { PaymentOptionSquare } from './PaymentOptionSquare'
+import { BusinessWalletsList } from './BusinessWalletsList'
 
 export {
   BusinessBrandListing,
@@ -183,5 +186,8 @@ export {
   ProductExtraOptionMetaFields,
   ProductExtraSubOptionMetaFields,
   ProductIngredientDetails,
-  ProductTagDetails
+  ProductTagDetails,
+  SingleBusiness,
+  PaymentOptionSquare,
+  BusinessWalletsList
 }
