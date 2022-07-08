@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
+import { UsersList as UsersListController, useLanguage } from 'ordering-components-admin'
 import { ProfessionalList } from '../ProfessionalList'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
@@ -10,6 +10,7 @@ import { SideBar } from '../../Shared'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { Button } from '../../../styles'
+import { OccupationsFilter } from '../OccupationsFilter'
 
 import {
   UsersListingContainer,
@@ -41,7 +42,11 @@ const ProfessionalListingUI = (props) => {
     onUserRedirect,
     handleSuccessUpdate,
     handleSuccessAddUser,
-    handleSuccessDeleteUser
+    handleSuccessDeleteUser,
+
+    occupationsState,
+    selectedOccupation,
+    handleSelectOccupation
   } = props
 
   const [, t] = useLanguage()
@@ -102,6 +107,11 @@ const ProfessionalListingUI = (props) => {
           handleChangeUserActiveState={handleChangeUserActiveState}
         />
         <ActionsContainer>
+          <OccupationsFilter
+            occupationsState={occupationsState}
+            selectedOccupation={selectedOccupation}
+            handleSelectOccupation={handleSelectOccupation}
+          />
           <ActionButtonsGroup>
             <Button
               borderRadius='8px'
@@ -143,6 +153,7 @@ const ProfessionalListingUI = (props) => {
           open={isOpenUserDetails}
           user={openUser}
           userId={openUser?.id || queryId}
+          occupations={occupationsState.occupations}
           onClose={() => handleBackRedirect()}
           handleSuccessUpdate={handleSuccessUpdate}
           handleSuccessDeleteUser={handleSuccessDeleteUser}

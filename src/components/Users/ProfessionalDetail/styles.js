@@ -12,6 +12,7 @@ export const DetailsHeader = styled.div`
 export const UserName = styled.div`
   display: flex;
   align-items: center;
+  flex: 1;
   > span {
     font-size: 20px;
     font-weight: 700;
@@ -29,9 +30,9 @@ export const UserName = styled.div`
 
 export const ActionSelectorWrapper = styled.div`
   ${props => props.theme?.rtl ? css`
-    margin-left: 35px;
+    margin-left: 25px;
   ` : css`
-    margin-right: 35px;
+    margin-right: 25px;
   `}
   button {
     background: transparent !important;
@@ -99,5 +100,18 @@ export const SideBarWrapper = styled.div`
   > div {
     padding: 0px;
     height: calc(100% - 50px);
+  }
+`
+export const CalendarSyncWrapper = styled.div`
+  margin: 0 10px;
+  > button {
+    height: 44px;
+    span {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 8px;
+      ` : css`
+        margin-right: 8px;
+      `}
+    }
   }
 `
