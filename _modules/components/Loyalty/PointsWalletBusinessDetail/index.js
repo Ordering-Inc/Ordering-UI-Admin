@@ -229,7 +229,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
         e.preventDefault();
       }
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ToggleWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('MAXIMUM_OF_POINTS', 'Maximum of points')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  })), isBusiness && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ToggleWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('MAXIMUM_OF_POINTS', 'Maximum of points')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: isMaximum,
     onChange: function onChange(val) {
       return handleClickSwitch(val);
@@ -245,7 +245,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
         e.preventDefault();
       }
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ExPirationWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPIRATION', 'Expiration')), /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+  }))), isBusiness && /*#__PURE__*/_react.default.createElement(_styles2.ExPirationWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPIRATION', 'Expiration')), /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
     onClick: function onClick() {
       return handleChangeExpirtation(null);
     }
