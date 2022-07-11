@@ -42,7 +42,6 @@ var OrdersListing = function OrdersListing(props) {
 
   var isSelectedOrders = props.isSelectedOrders,
       orderList = props.orderList,
-      driversList = props.driversList,
       selectedOrderIds = props.selectedOrderIds,
       orderListView = props.orderListView,
       handleUpdateOrderStatus = props.handleUpdateOrderStatus,
@@ -124,7 +123,6 @@ var OrdersListing = function OrdersListing(props) {
     setSelectedOrderIds: setSelectedOrderIds,
     isSelectedOrders: isSelectedOrders,
     orderList: orderList,
-    driversList: driversList,
     pagination: pagination,
     selectedOrderIds: selectedOrderIds,
     orderDetailId: orderDetailId,
@@ -142,7 +140,6 @@ var OrdersListing = function OrdersListing(props) {
   }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
     isMessagesView: isMessagesView,
     orderList: orderList,
-    driversList: driversList,
     pagination: pagination,
     selectedOrderIds: selectedOrderIds,
     loadMoreOrders: loadMoreOrders,
