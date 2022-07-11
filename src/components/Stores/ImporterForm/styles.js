@@ -63,7 +63,7 @@ export const FormInput = styled.form`
   margin-top: 20px;
 `
 export const ActionsForm = styled.div`
-  margin-top: 20px;
+  margin-top: 30px;
   > button {
     height: 42px;
     &:first-child {

@@ -10,7 +10,6 @@ import {
   useConfig
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
-import { DriverSelector } from '../DriverSelector'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
 import { ChevronRight } from 'react-bootstrap-icons'
 
@@ -21,7 +20,6 @@ import {
   OrderNumberContainer,
   CheckBox,
   WrapperImage,
-  Image,
   BusinessInfo,
   CustomerInfo,
   DriversInfo,
@@ -39,7 +37,6 @@ export const OrdersTable = (props) => {
   const {
     isSelectedOrders,
     orderList,
-    driversList,
     pagination,
     selectedOrderIds,
     orderDetailId,
@@ -360,9 +357,11 @@ export const OrdersTable = (props) => {
             [...Array(10).keys()].map(i => (
               <OrderTbody key={i}>
                 <tr>
-                  <td>
-                    <Timestatus />
-                  </td>
+                  {allowColumns?.slaBar && (
+                    <td>
+                      <Timestatus />
+                    </td>
+                  )}
                   <td
                     className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
                   >
@@ -530,7 +529,7 @@ export const OrdersTable = (props) => {
                     <td className='businessInfo'>
                       <BusinessInfo>
                         <WrapperImage>
-                          <Image bgimage={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} />
+                          <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
                         </WrapperImage>
                         <div className='info'>
                           <p className='bold'>{order?.business?.name}</p>
@@ -544,7 +543,7 @@ export const OrdersTable = (props) => {
                       <CustomerInfo>
                         <WrapperImage>
                           {order?.customer?.photo ? (
-                            <Image bgimage={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} />
+                            <img src={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
                           ) : (
                             <FaUserAlt />
                           )}
@@ -564,16 +563,25 @@ export const OrdersTable = (props) => {
                   {allowColumns?.driver && !isSelectedOrders && (
                     <td>
                       {order?.delivery_type === 1 && (
-                        <DriversInfo className='driverInfo' noClick={isTourOpen && (currentTourStep === 0 || currentTourStep === 4)}>
-                          <DriverSelector
-                            orderView
-                            small
-                            padding='0px'
-                            defaultValue={order?.driver_id ? order.driver_id : 'default'}
-                            drivers={driversList.drivers}
-                            order={order}
-                          />
-                        </DriversInfo>
+                        <CustomerInfo>
+                          <WrapperImage>
+                            {order?.driver?.photo ? (
+                              <img src={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
+                            ) : (
+                              <FaUserAlt />
+                            )}
+                          </WrapperImage>
+                          <div className='info'>
+                            {order?.driver ? (
+                              <>
+                                <p className='bold'>{order?.driver?.name}</p>
+                                <p>{order?.driver?.cellphone}</p>
+                              </>
+                            ) : (
+                              <p className='bold'>{t('NO_DRIVER', 'No Driver')}</p>
+                            )}
+                          </div>
+                        </CustomerInfo>
                       )}
                     </td>
                   )}
