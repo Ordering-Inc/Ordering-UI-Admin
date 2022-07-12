@@ -205,11 +205,11 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
     })));
   }), /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
     onClick: function onClick() {
-      return handleChangeOption('<>');
+      return handleChangeOption('><');
     }
-  }, ((_ruleFormState$change13 = ruleFormState.changes) === null || _ruleFormState$change13 === void 0 ? void 0 : _ruleFormState$change13.date_condition) === '<>' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+  }, ((_ruleFormState$change13 = ruleFormState.changes) === null || _ruleFormState$change13 === void 0 ? void 0 : _ruleFormState$change13.date_condition) === '><' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DATE_RANGE', 'Date range')))), ((_ruleFormState$change14 = ruleFormState.changes) === null || _ruleFormState$change14 === void 0 ? void 0 : _ruleFormState$change14.date_condition) === '<>' && /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DATE_RANGE', 'Date range')))), ((_ruleFormState$change14 = ruleFormState.changes) === null || _ruleFormState$change14 === void 0 ? void 0 : _ruleFormState$change14.date_condition) === '><' && /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: defaultValue,
     isLeft: true

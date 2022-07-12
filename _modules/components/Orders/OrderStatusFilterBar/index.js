@@ -28,7 +28,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
-  var _numberOfOrdersByStat, _numberOfOrdersByStat2, _numberOfOrdersByStat3, _numberOfOrdersByStat4;
+  var _numberOfOrdersByStat, _numberOfOrdersByStat2, _numberOfOrdersByStat3, _numberOfOrdersByStat4, _numberOfOrdersByStat5, _numberOfOrdersByStat6, _numberOfOrdersByStat7, _numberOfOrdersByStat8;
 
   var selectedOrderStatus = props.selectedOrderStatus,
       changeOrderStatus = props.changeOrderStatus,
@@ -50,22 +50,22 @@ var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
     onClick: function onClick() {
       return changeSelectedOrderStatus('pending');
     }
-  }, t('PENDING', 'pending'), numberOfOrdersByStatus && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.pending) !== null && _numberOfOrdersByStat !== void 0 ? _numberOfOrdersByStat : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('PENDING', 'pending'), !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.error) && !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.loading) && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat2 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat2 === void 0 ? void 0 : _numberOfOrdersByStat2.pending) !== null && _numberOfOrdersByStat !== void 0 ? _numberOfOrdersByStat : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'inProgress',
     onClick: function onClick() {
       return changeSelectedOrderStatus('inProgress');
     }
-  }, t('IN_PROGRESS', 'in progress'), numberOfOrdersByStatus && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat2 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.inProgress) !== null && _numberOfOrdersByStat2 !== void 0 ? _numberOfOrdersByStat2 : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('IN_PROGRESS', 'in progress'), !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.error) && !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.loading) && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat3 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat4 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat4 === void 0 ? void 0 : _numberOfOrdersByStat4.inProgress) !== null && _numberOfOrdersByStat3 !== void 0 ? _numberOfOrdersByStat3 : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'completed',
     onClick: function onClick() {
       return changeSelectedOrderStatus('completed');
     }
-  }, t('COMPLETED', 'completed'), numberOfOrdersByStatus && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat3 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.completed) !== null && _numberOfOrdersByStat3 !== void 0 ? _numberOfOrdersByStat3 : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('COMPLETED', 'completed'), !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.error) && !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.loading) && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat5 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat6 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat6 === void 0 ? void 0 : _numberOfOrdersByStat6.completed) !== null && _numberOfOrdersByStat5 !== void 0 ? _numberOfOrdersByStat5 : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'cancelled',
     onClick: function onClick() {
       return changeSelectedOrderStatus('cancelled');
     }
-  }, t('CANCELLED', 'cancelled'), numberOfOrdersByStatus && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat4 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : numberOfOrdersByStatus.cancelled) !== null && _numberOfOrdersByStat4 !== void 0 ? _numberOfOrdersByStat4 : 0, ")")))));
+  }, t('CANCELLED', 'cancelled'), !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.error) && !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.loading) && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat7 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat8 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat8 === void 0 ? void 0 : _numberOfOrdersByStat8.cancelled) !== null && _numberOfOrdersByStat7 !== void 0 ? _numberOfOrdersByStat7 : 0, ")")))));
 };
 
 exports.OrderStatusFilterBar = OrderStatusFilterBar;
