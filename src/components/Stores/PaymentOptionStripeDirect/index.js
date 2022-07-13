@@ -94,11 +94,18 @@ export const PaymentOptionStripeDirect = (props) => {
   }, [open])
 
   useEffect(() => {
-    cleanChangesState({
+    const initState = {
       sandbox: businessPaymethod?.sandbox,
       allowed_order_types: businessPaymethod?.allowed_order_types || [1, 2, 3, 4, 5]
-    })
-  }, [businessPaymethod?.sanbox, businessPaymethod?.allowed_order_types])
+    }
+    if (businessPaymethod?.data) {
+      initState.data = businessPaymethod.data
+    }
+    if (businessPaymethod?.data_sandbox) {
+      initState.data_sandbox = businessPaymethod.data_sandbox
+    }
+    cleanChangesState(initState)
+  }, [])
 
   return (
     <>
