@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactHookForm = require("react-hook-form");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Shared = require("../../Shared");
@@ -20,6 +22,8 @@ var _utils = require("../../../utils");
 var _styles = require("../../../styles");
 
 var _ImporterForm = require("../ImporterForm");
+
+var _ImporterHelpContent = require("../ImporterHelpContent");
 
 var _styles2 = require("./styles");
 
@@ -74,17 +78,22 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var headerCsvInputRef = (0, _react.useRef)(null);
-
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      hasImportedFile = _useState4[0],
-      setImportedFile = _useState4[1];
+      openImporterHelp = _useState4[0],
+      setOpenImporterHelp = _useState4[1];
+
+  var headerCsvInputRef = (0, _react.useRef)(null);
 
   var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      openAdvancedOptions = _useState6[0],
-      setOpenAdvancedOptions = _useState6[1];
+      hasImportedFile = _useState6[0],
+      setImportedFile = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      openAdvancedOptions = _useState8[0],
+      setOpenAdvancedOptions = _useState8[1];
 
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
@@ -201,7 +210,12 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       setImportedFile(true);
     }
   }, [fileState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, handleGetTitle(selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.type)), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, handleGetTitle(selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.type), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary",
+    onClick: function onClick() {
+      return setOpenImporterHelp(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null))), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEPARATOR', 'Separator (;)')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "separator",
@@ -294,7 +308,16 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }), openAdvancedOptions && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('HOW_TO_IMPORT', 'How to Import?'),
+    open: openImporterHelp,
+    onClose: function onClose() {
+      return setOpenImporterHelp(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ImporterHelpContent.ImporterHelpContent, null)), openAdvancedOptions && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     isBorderShow: true,
     open: openAdvancedOptions,
     defaultSideBarWidth: openMappingDetails ? 1000 : 500,

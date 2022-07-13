@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Title = exports.NotFoundWrapper = exports.ImportersListingContainer = exports.ImportersList = exports.Header = exports.ButtonAddNewImporter = exports.ActionButtons = void 0;
+exports.TitleContent = exports.Title = exports.NotFoundWrapper = exports.ImportersListingContainer = exports.ImportersList = exports.Header = exports.ButtonAddNewImporter = exports.ActionButtons = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -31,31 +31,35 @@ var Header = _styledComponents.default.div(_templateObject2 || (_templateObject2
 
 exports.Header = Header;
 
-var Title = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  font-size: 20px;\n  margin: 0px 10px 0px 0px;\n  font-weight: 700;\n"])));
+var Title = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  font-size: 20px;\n  margin: 0px 10px 0px 0px;\n  font-weight: 700;\n"])));
 
 exports.Title = Title;
 
-var ActionButtons = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n\n  button {\n    height: 41px;\n    width: 90px;\n    white-space: nowrap;\n    ", "\n    \n    svg {\n      ", "      \n    }\n\n    @media (min-width: 768px) {\n      width: unset;\n    }\n  }\n"])), function (props) {
+var TitleContent = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-right: 5px;\n"])));
+
+exports.TitleContent = TitleContent;
+
+var ActionButtons = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: flex;\n\n  button {\n    height: 41px;\n    width: 90px;\n    white-space: nowrap;\n    ", "\n    \n    svg {\n      ", "      \n    }\n\n    @media (min-width: 768px) {\n      width: unset;\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
-  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "])));
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "])));
 }, function (props) {
   var _props$theme3;
 
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n        margin-right: 8px;\n      "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        margin-left: 8px;\n      "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n        margin-right: 8px;\n      "]))) : (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n        margin-left: 8px;\n      "])));
 });
 
 exports.ActionButtons = ActionButtons;
 
-var ImportersList = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n\n"])));
+var ImportersList = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n\n"])));
 
 exports.ImportersList = ImportersList;
 
-var NotFoundWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  position: relative;\n  #not-found-source {\n    height: auto;\n    h1 {\n      font-size: 18px;\n      margin-top: 25px;\n    }\n  }\n"])));
+var NotFoundWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  position: relative;\n  #not-found-source {\n    height: auto;\n    h1 {\n      font-size: 18px;\n      margin-top: 25px;\n    }\n  }\n"])));
 
 exports.NotFoundWrapper = NotFoundWrapper;
 
-var ButtonAddNewImporter = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: inline-flex;\n  width: fit-content;\n  cursor: pointer;\n  color: rgb(144, 155, 169);\n  font-size: 14px;\n  margin-top: 20px;\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
+var ButtonAddNewImporter = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: inline-flex;\n  width: fit-content;\n  cursor: pointer;\n  color: rgb(144, 155, 169);\n  font-size: 14px;\n  margin-top: 20px;\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
   return (0, _polished.darken)(0.05, props.theme.colors.primary);
 });
 
