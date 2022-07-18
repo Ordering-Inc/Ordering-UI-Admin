@@ -207,9 +207,7 @@ export const OrdersCards = (props) => {
                     <p>{getOrderStatus(order.status)?.value}</p>
                     <div>
                       <p>
-                        {order?.delivery_datetime_utc
-                          ? parseDate(order?.delivery_datetime_utc)
-                          : parseDate(order?.delivery_datetime, { utc: false })}
+                        {parseDate(order?.delivery_datetime, { utc: false })}
                       </p>
                       <ViewDetails
                         className='view-details'
