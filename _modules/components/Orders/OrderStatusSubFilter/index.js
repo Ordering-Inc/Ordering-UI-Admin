@@ -48,8 +48,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
   var selectedSubOrderStatus = props.selectedSubOrderStatus,
       ordersStatusGroup = props.ordersStatusGroup,
-      handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
-      numberOfOrdersBySubstatus = props.numberOfOrdersBySubstatus;
+      handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -203,15 +202,13 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_styles2.SubFilterContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, statues[ordersStatusGroup].map(function (status) {
-    var _numberOfOrdersBySubs;
-
     return /*#__PURE__*/_react.default.createElement(_styles.Button, {
       key: status.key,
       color: selectedSubOrderStatus !== null && selectedSubOrderStatus !== void 0 && selectedSubOrderStatus.pending.includes(status.key) || selectedSubOrderStatus !== null && selectedSubOrderStatus !== void 0 && selectedSubOrderStatus.inProgress.includes(status.key) || selectedSubOrderStatus !== null && selectedSubOrderStatus !== void 0 && selectedSubOrderStatus.completed.includes(status.key) || selectedSubOrderStatus !== null && selectedSubOrderStatus !== void 0 && selectedSubOrderStatus.cancelled.includes(status.key) ? 'primary' : 'secundaryDark',
       onClick: function onClick() {
         return handleChange(status.key);
       }
-    }, status.value, !(numberOfOrdersBySubstatus !== null && numberOfOrdersBySubstatus !== void 0 && numberOfOrdersBySubstatus.error) && !(numberOfOrdersBySubstatus !== null && numberOfOrdersBySubstatus !== void 0 && numberOfOrdersBySubstatus.loading) && /*#__PURE__*/_react.default.createElement("span", null, "(", (numberOfOrdersBySubstatus === null || numberOfOrdersBySubstatus === void 0 ? void 0 : (_numberOfOrdersBySubs = numberOfOrdersBySubstatus.result) === null || _numberOfOrdersBySubs === void 0 ? void 0 : _numberOfOrdersBySubs[status.key]) || 0, ")"), ((selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled.includes(status.key))) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
+    }, status.value, ((selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled.includes(status.key))) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
   })));
 };
 

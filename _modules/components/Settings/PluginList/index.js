@@ -359,7 +359,8 @@ var PluginListUI = function PluginListUI(props) {
 
 var PluginList = function PluginList(props) {
   var pluginListProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: PluginListUI
+    UIComponent: PluginListUI,
+    projectCode: window.localStorage.getItem('project')
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.PluginList, pluginListProps);
