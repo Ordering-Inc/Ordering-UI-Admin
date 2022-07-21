@@ -338,10 +338,10 @@ export const OrdersTable = (props) => {
                   <th className='driverInfo'>{t('DRIVER', 'Driver')}</th>
                 )}
                 {allowColumns?.advanced && (
-                  <th colspan={3} className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
+                  <th colSpan='3' className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
                 )}
                 {allowColumns?.timer && (
-                  <th colSpan={3} className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
+                  <th colSpan='2' className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
                 )}
                 <th className='orderPrice'>
                   <ColumnAllowSettingPopover

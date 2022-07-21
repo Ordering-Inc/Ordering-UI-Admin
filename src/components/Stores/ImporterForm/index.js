@@ -22,7 +22,8 @@ import {
   FieldRow,
   FieldName,
   FieldValue,
-  ExampleCSV
+  ExampleCSV,
+  MappingFields
 } from './styles'
 
 export const ImporterFormUI = (props) => {
@@ -51,7 +52,8 @@ export const ImporterFormUI = (props) => {
     setOpenMappingDetails,
     isMapping,
     headerTitle,
-    handleUpdateMultipleMapping
+    handleUpdateMultipleMapping,
+    defaultImporter
   } = props
 
   const [, t] = useLanguage()
@@ -69,8 +71,12 @@ export const ImporterFormUI = (props) => {
   const defaultImporterSlugs = [
     'sync_businesses_default', 'sync_categories_default', 'sync_products_default',
     'sync_extras_default', 'sync_extra_options_default', 'sync_extra_option_suboptions_default',
-    'sync_extra_products_default'
+    'sync_extra_products_default', 'sync_full_menu_default'
   ]
+
+  const noAdvancedTypes = ['sync_extras', 'sync_extra_options', 'sync_extra_option_suboptions']
+
+  const isDefaultImporter = defaultImporterSlugs.includes(selectedImporter?.slug) || defaultImporter
 
   const importypeOptions = [
     { value: 1, content: t('STORE', 'Store'), sync_name: 'sync_businesses' },
@@ -172,7 +178,7 @@ export const ImporterFormUI = (props) => {
                 placeholder={t('NAME', 'name')}
                 defaultValue={editState?.name}
                 onChange={handleChangeInput}
-                disabled={formState.loading || isAdvanedOptions || defaultImporterSlugs.includes(editState?.slug)}
+                disabled={formState.loading || isAdvanedOptions || isDefaultImporter}
                 autoComplete='off'
               />
             </InputWrapper>
@@ -184,7 +190,7 @@ export const ImporterFormUI = (props) => {
                 placeholder={t('SLUG', 'slug')}
                 defaultValue={editState?.slug}
                 onChange={handleChangeInput}
-                disabled={formState.loading || isAdvanedOptions || defaultImporterSlugs.includes(editState?.slug)}
+                disabled={formState.loading || isAdvanedOptions || isDefaultImporter}
                 autoComplete='off'
                 onKeyPress={e => {
                   if (e.which === 32) { e.preventDefault() }
@@ -197,12 +203,19 @@ export const ImporterFormUI = (props) => {
         {!isAdvanedOptions && (
           <InputWrapper>
             <label>{t('TYPE', 'Type')}</label>
-            <Select
-              name='type'
-              options={importypeOptions}
-              defaultValue={importType}
-              onChange={(value) => handleSelectOption(value)}
-            />
+            {isDefaultImporter ? (
+              <Input
+                disabled
+                value={importypeOptions.find(option => option.sync_name === selectedImporter?.type)?.content}
+              />
+            ) : (
+              <Select
+                name='type'
+                options={importypeOptions}
+                defaultValue={importType}
+                onChange={(value) => handleSelectOption(value)}
+              />
+            )}
           </InputWrapper>
         )}
 
@@ -212,13 +225,13 @@ export const ImporterFormUI = (props) => {
             {Object.keys(selectedImporter).length > 0 && (
               <span style={{ fontSize: '14px', lineHeight: '24px' }}>
                 {t('CSV_FILE_EXAMPLE', 'CSV file example')}
-                <ExampleCSV onClick={() => downloadCSV()}>{`${editState?.type}.csv`}</ExampleCSV>
+                <ExampleCSV onClick={() => downloadCSV()}>{t('FILE_EXAMPLE_CSV', 'example.csv')}</ExampleCSV>
               </span>
             )}
           </InputWrapper>
         )}
-        {importType !== 8 && (
-          <>
+        {importType !== 8 && !(isAdvanedOptions && noAdvancedTypes.includes(selectedImporter?.type)) && (
+          <MappingFields disabled={isDefaultImporter}>
             <Row>
               <Col>
                 <InputWrapper>
@@ -226,6 +239,12 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='business_id'
                     type='number'
+                    min={0}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                     placeholder='0'
                     defaultValue={editState?.mapping?.business_id ?? ''}
                     onChange={handleChangeMappingInput}
@@ -240,6 +259,12 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='external_business_id'
                     type='number'
+                    min={0}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                     placeholder='0'
                     defaultValue={editState?.mapping?.external_business_id ?? ''}
                     onChange={handleChangeMappingInput}
@@ -256,6 +281,11 @@ export const ImporterFormUI = (props) => {
                     <label>{t('MAPPING_CATEGORY_ID', 'Category ID')}</label>
                     <Input
                       name='category_id' type='number'
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.category_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -270,6 +300,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_category_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_category_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -285,6 +321,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_parent_category_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_parent_category_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -301,7 +343,14 @@ export const ImporterFormUI = (props) => {
                   <InputWrapper>
                     <label>{t('MAPPING_PRODUCT_ID', 'Product ID')}</label>
                     <Input
-                      name='product_id' type='number'
+                      name='product_id'
+                      type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.product_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -316,6 +365,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_product_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_product_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -333,6 +388,11 @@ export const ImporterFormUI = (props) => {
                     <label>{t('MAPPING_EXTRA_ID', 'Extra ID')}</label>
                     <Input
                       name='extra_id' type='number'
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.extra_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -347,6 +407,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_extra_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_extra_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -364,6 +430,11 @@ export const ImporterFormUI = (props) => {
                     <label>{t('MAPPING_EXTRA_OPTION_ID', 'Extra option ID')}</label>
                     <Input
                       name='extra_option_id' type='number'
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.extra_option_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -378,6 +449,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_extra_option_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_extra_option_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -395,6 +472,11 @@ export const ImporterFormUI = (props) => {
                     <label>{t('MAPPING_EXTRA_OPTION_SUBOPTION_ID', 'Extra option suboption ID')}</label>
                     <Input
                       name='extra_option_suboption_id' type='number'
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.extra_option_suboption_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -409,6 +491,12 @@ export const ImporterFormUI = (props) => {
                     <Input
                       name='external_extra_option_suboption_id'
                       type='number'
+                      min={0}
+                      onKeyPress={(e) => {
+                        if (!/^[0-9]$/.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
                       placeholder='0'
                       defaultValue={editState?.mapping?.external_extra_option_suboption_id ?? ''}
                       onChange={handleChangeMappingInput}
@@ -419,11 +507,11 @@ export const ImporterFormUI = (props) => {
                 </Col>
               </Row>
             )}
-          </>
+          </MappingFields>
         )}
       </FormInput>
       {!isAdvanedOptions && importType !== 8 && (
-        <FiledListWrapper>
+        <FiledListWrapper disabled={isDefaultImporter}>
           <label>{t('FIELDS', 'Fields')}</label>
           {Object.keys(fieldList).length > 0 && (
             <>
@@ -467,6 +555,12 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='value'
                     type='number'
+                    min={0}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                     placeholder='0'
                     onChange={(e) => setFiledValue(e.target.value)}
                     disabled={formState.loading}
@@ -486,8 +580,8 @@ export const ImporterFormUI = (props) => {
         </FiledListWrapper>
       )}
 
-      {importType !== 8 && (
-        <FiledListWrapper>
+      {importType !== 8 && !(isAdvanedOptions && noAdvancedTypes.includes(selectedImporter?.type)) && (
+        <FiledListWrapper disabled={isDefaultImporter}>
           <label>{t('META_FIELDS', 'MetaFields')}</label>
           {Object.keys(metafieldList) && Object.keys(metafieldList).length > 0 && (
             <>
@@ -530,6 +624,12 @@ export const ImporterFormUI = (props) => {
                   <Input
                     name='value'
                     type='number'
+                    min={0}
+                    onKeyPress={(e) => {
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                     placeholder='0'
                     onChange={(e) => setMetaFiledValue(e.target.value)}
                     disabled={formState.loading}
@@ -555,20 +655,23 @@ export const ImporterFormUI = (props) => {
           openMappingDetails={openMappingDetails}
           setOpenMappingDetails={setOpenMappingDetails}
           handleUpdateMultipleMapping={handleUpdateMultipleMapping}
+          defaultImporter={isDefaultImporter}
         />
       )}
 
-      <ActionsForm>
-        <Button
-          type='submit'
-          color='primary'
-          borderRadius='5px'
-          disabled={!(Object.keys(formState?.changes).length > 1) || formState?.loading}
-          onClick={() => onSubmit()}
-        >
-          {formState?.loading ? t('LOADING', 'Loading') : (Object.keys(selectedImporter).length > 0 ? t('EDIT', 'Edit') : t('ADD', 'Add'))}
-        </Button>
-      </ActionsForm>
+      {!isDefaultImporter && (
+        <ActionsForm>
+          <Button
+            type='submit'
+            color='primary'
+            borderRadius='5px'
+            disabled={!(Object.keys(formState?.changes).length > 1) || formState?.loading}
+            onClick={() => onSubmit()}
+          >
+            {formState?.loading ? t('LOADING', 'Loading') : (Object.keys(selectedImporter).length > 0 ? t('EDIT', 'Edit') : t('ADD', 'Add'))}
+          </Button>
+        </ActionsForm>
+      )}
 
       <Alert
         title={t('IMPORT', 'Import')}

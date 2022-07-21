@@ -246,7 +246,7 @@ const BusinessProductsListingUI = (props) => {
           </HeaderTitleContainer>
           {slug && (
             <ActionsGroup>
-              <ImportersButton defaultSlug='sync_categories_default' />
+              <ImportersButton />
               <Button
                 borderRadius='8px'
                 color='lightPrimary'

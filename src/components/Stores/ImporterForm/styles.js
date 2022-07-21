@@ -5,6 +5,11 @@ export const NewImporter = styled.div`
   width: 100%;
   padding: 35px 20px;
   overflow-x: hidden;
+
+  .col {
+    display: flex;
+    align-items: flex-end;
+  }
 `
 
 export const Header = styled.div`
@@ -82,11 +87,15 @@ export const FiledListWrapper = styled.div`
   label {
     font-size: 14px;
   }
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
 `
 export const FieldAddForm = styled.form`
 
 `
 export const FieldRow = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
   &>:first-child {
@@ -142,4 +151,9 @@ export const ExampleCSV = styled.span`
   &:hover {
     text-decoration: underline;
   }
+`
+export const MappingFields = styled.div`
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+  `}
 `

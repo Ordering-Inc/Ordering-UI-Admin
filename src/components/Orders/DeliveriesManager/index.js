@@ -28,7 +28,9 @@ const DeliveriesManagerUI = (props) => {
     handleSelectedOrderIds,
     selectedSubOrderStatus,
     handleSelectedSubOrderStatus,
-    onOrderRedirect
+    onOrderRedirect,
+    numberOfOrdersByStatus,
+    numberOfOrdersBySubstatus
   } = props
 
   const [, t] = useLanguage()
@@ -98,6 +100,8 @@ const DeliveriesManagerUI = (props) => {
               setFilterModalOpen={setFilterModalOpen}
               slaSettingTime={slaSettingTime}
               timeStatus={timeStatus}
+              numberOfOrdersByStatus={numberOfOrdersByStatus}
+              numberOfOrdersBySubstatus={numberOfOrdersBySubstatus}
             />
           </WrapItemView>
         </OrdersContent>
