@@ -16,5 +16,9 @@ export const TitleHeader = styled.div`
 `
 export const TitleContent = styled.div`
   width: 100%;
-  padding-left: 15px;
+`
+export const SubjectTitle = styled.p`
+  text-align: center;
+  font-weight: 900;
+  font-size: 24px;
 `
