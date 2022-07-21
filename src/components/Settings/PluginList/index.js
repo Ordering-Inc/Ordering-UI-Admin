@@ -310,7 +310,8 @@ const PluginListUI = (props) => {
 export const PluginList = (props) => {
   const pluginListProps = {
     ...props,
-    UIComponent: PluginListUI
+    UIComponent: PluginListUI,
+    projectCode: window.localStorage.getItem('project')
   }
   return <PluginListController {...pluginListProps} />
 }
