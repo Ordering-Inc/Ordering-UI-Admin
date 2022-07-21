@@ -196,7 +196,7 @@ var OrderBill = function OrderBill(props) {
   }))))), (order === null || order === void 0 ? void 0 : (_order$payment_events = order.payment_events) === null || _order$payment_events === void 0 ? void 0 : _order$payment_events.length) > 0 && /*#__PURE__*/_react.default.createElement("table", {
     className: "payments"
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
-    calSpan: 2
+    colSpan: "2"
   }, t('PAYMENTS', 'Payments')))), /*#__PURE__*/_react.default.createElement("tbody", null, order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.map(function (event, i) {
     var _walletName$event$wal, _event$wallet_event, _event$wallet_event$w, _event$paymethod;
 

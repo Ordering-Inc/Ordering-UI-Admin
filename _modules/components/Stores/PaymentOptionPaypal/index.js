@@ -160,11 +160,21 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
     actionSidebar(true);
   }, [open]);
   (0, _react.useEffect)(function () {
-    cleanChangesState({
+    var initState = {
       sandbox: businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox,
       allowed_order_types: (businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) || [1, 2, 3, 4, 5]
-    });
-  }, [businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sanbox, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types]);
+    };
+
+    if (businessPaymethod !== null && businessPaymethod !== void 0 && businessPaymethod.data) {
+      initState.data = businessPaymethod.data;
+    }
+
+    if (businessPaymethod !== null && businessPaymethod !== void 0 && businessPaymethod.data_sandbox) {
+      initState.data_sandbox = businessPaymethod.data_sandbox;
+    }
+
+    cleanChangesState(initState);
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "paypal"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYPAL', 'Paypal')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {

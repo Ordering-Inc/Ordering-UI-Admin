@@ -80,8 +80,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
       handleCustomOrderDetail = props.handleCustomOrderDetail,
       setSelectedOrderIds = props.setSelectedOrderIds,
-      numberOfOrdersByStatus = props.numberOfOrdersByStatus,
-      numberOfOrdersBySubstatus = props.numberOfOrdersBySubstatus;
+      numberOfOrdersByStatus = props.numberOfOrdersByStatus;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -278,8 +277,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
     ordersStatusGroup: ordersStatusGroup,
     selectedSubOrderStatus: selectedSubOrderStatus,
-    handleSelectedSubOrderStatus: handleSelectedSubOrderStatus,
-    numberOfOrdersBySubstatus: numberOfOrdersBySubstatus
+    handleSelectedSubOrderStatus: handleSelectedSubOrderStatus
   })), !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_OrdersDashboardControls.OrdersDashboardControls, {
     selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
     filterValues: filterValues,

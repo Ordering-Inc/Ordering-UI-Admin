@@ -60,7 +60,9 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
       handleSelectedOrderIds = props.handleSelectedOrderIds,
       selectedSubOrderStatus = props.selectedSubOrderStatus,
       handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
-      onOrderRedirect = props.onOrderRedirect;
+      onOrderRedirect = props.onOrderRedirect,
+      numberOfOrdersByStatus = props.numberOfOrdersByStatus,
+      numberOfOrdersBySubstatus = props.numberOfOrdersBySubstatus;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -147,7 +149,9 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     isOnlyDelivery: true,
     setFilterModalOpen: setFilterModalOpen,
     slaSettingTime: slaSettingTime,
-    timeStatus: timeStatus
+    timeStatus: timeStatus,
+    numberOfOrdersByStatus: numberOfOrdersByStatus,
+    numberOfOrdersBySubstatus: numberOfOrdersBySubstatus
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     open: isOpenOrderDetail,
     order: detailsOrder,
