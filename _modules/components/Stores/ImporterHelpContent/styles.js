@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TitleWrapper = exports.TitleNumber = exports.TitleHeader = exports.TitleContent = void 0;
+exports.TitleWrapper = exports.TitleNumber = exports.TitleHeader = exports.TitleContent = exports.SubjectTitle = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,6 +25,10 @@ var TitleHeader = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.TitleHeader = TitleHeader;
 
-var TitleContent = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding-left: 15px;\n"])));
+var TitleContent = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 
 exports.TitleContent = TitleContent;
+
+var SubjectTitle = _styledComponents.default.p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-weight: 900;\n  font-size: 24px;\n"])));
+
+exports.SubjectTitle = SubjectTitle;

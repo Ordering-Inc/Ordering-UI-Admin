@@ -188,7 +188,7 @@ var ImportersListingUI = function ImportersListingUI(props) {
     width: "50%",
     height: "80vh",
     padding: "30px",
-    title: t('HOW_TO_IMPORT', 'How to Import?'),
+    title: "",
     open: openImporterHelp,
     onClose: function onClose() {
       return setOpenImporterHelp(false);

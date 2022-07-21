@@ -210,12 +210,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
       setImportedFile(true);
     }
   }, [fileState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, handleGetTitle(selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.type), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    color: "primary",
-    onClick: function onClick() {
-      return setOpenImporterHelp(true);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null))), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, handleGetTitle(selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.type)), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEPARATOR', 'Separator (;)')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "separator",
@@ -312,7 +307,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     width: "50%",
     height: "80vh",
     padding: "30px",
-    title: t('HOW_TO_IMPORT', 'How to Import?'),
+    title: "",
     open: openImporterHelp,
     onClose: function onClose() {
       return setOpenImporterHelp(false);
