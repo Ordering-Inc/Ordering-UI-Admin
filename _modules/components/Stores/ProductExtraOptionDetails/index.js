@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
-  var _settingChangeState$c, _settingChangeState$c2, _optionState$option, _settingChangeState$c3, _settingChangeState$c4, _optionState$option2, _optionState$option3, _optionState$option3$, _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2, _optionState$option4, _optionState$option4$, _changesState$changes3, _optionState$option5, _optionState$option5$, _changesState$changes4, _settingChangeState$c5, _settingChangeState$c6, _optionState$option6, _optionState$option7, _optionState$option7$, _changesState$changes5, _settingChangeState$c7, _settingChangeState$c8, _optionState$option8, _optionState$option9, _optionState$option9$, _changesState$changes6;
+  var _settingChangeState$c, _settingChangeState$c2, _optionState$option, _settingChangeState$c3, _settingChangeState$c4, _optionState$option2, _optionState$option3, _optionState$option3$, _optionState$option4, _optionState$option4$, _changesState$changes3, _optionState$option5, _optionState$option5$, _changesState$changes4, _settingChangeState$c5, _settingChangeState$c6, _optionState$option6, _optionState$option7, _optionState$option7$, _changesState$changes5, _settingChangeState$c7, _settingChangeState$c8, _optionState$option8, _optionState$option9, _optionState$option9$, _changesState$changes6;
 
   var optionState = props.optionState,
       optionChangesState = props.optionChangesState,
@@ -71,7 +71,6 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       handleChangeOptionEnable = props.handleChangeOptionEnable,
       changesState = props.changesState,
       editSubOptionId = props.editSubOptionId,
-      handleChangeInput = props.handleChangeInput,
       handleChangeSubOptionImage = props.handleChangeSubOptionImage,
       handleDeteteSubOption = props.handleDeteteSubOption,
       handleOptionSetting = props.handleOptionSetting,
@@ -90,7 +89,9 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       handleAddOption = props.handleAddOption,
       handleDeteteOption = props.handleDeteteOption,
       isMaxError = props.isMaxError,
-      handleChangeItem = props.handleChangeItem;
+      handleChangeItem = props.handleChangeItem,
+      isAddForm = props.isAddForm,
+      setIsAddForm = props.setIsAddForm;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -128,21 +129,18 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
       register = _useForm.register,
-      errors = _useForm.errors;
+      errors = _useForm.errors,
+      control = _useForm.control,
+      setValue = _useForm.setValue;
 
-  var _useState9 = (0, _react.useState)(false),
-      _useState10 = _slicedToArray(_useState9, 2),
-      isAddForm = _useState10[0],
-      setIsAddForm = _useState10[1];
-
-  var _useState11 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)({
     name: null,
     data: null,
     open: false
   }),
-      _useState12 = _slicedToArray(_useState11, 2),
-      cropState = _useState12[0],
-      setCropState = _useState12[1];
+      _useState10 = _slicedToArray(_useState9, 2),
+      cropState = _useState10[0],
+      setCropState = _useState10[1];
 
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
@@ -180,13 +178,19 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
           open: true,
           id: subOptionId
         });
+
+        if (!subOptionId) {
+          setValue('image', reader.result);
+        }
       };
 
       reader.onerror = function (error) {
         return console.log(error);
       };
 
-      handleChangeSubOptionImage(files[0], subOptionId);
+      if (subOptionId) {
+        handleChangeSubOptionImage(files[0], subOptionId);
+      }
     }
   };
 
@@ -228,21 +232,6 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       });
     }
   }, [errors]);
-
-  var closeAddForm = function closeAddForm(e) {
-    var outsideDropdown = !e.target.closest('.add-product-option') && !e.target.closest('.add-option-btn');
-    if (outsideDropdown && Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0) setIsAddForm(false);
-  };
-
-  (0, _react.useEffect)(function () {
-    document.addEventListener('click', closeAddForm);
-    return function () {
-      return document.removeEventListener('click', closeAddForm);
-    };
-  }, [changesState]);
-  (0, _react.useEffect)(function () {
-    if (Object.keys(changesState === null || changesState === void 0 ? void 0 : changesState.changes).length === 0 && !editSubOptionId) setIsAddForm(false);
-  }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes, editSubOptionId]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTION', 'Product option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
@@ -301,45 +290,50 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       handleUpdateSubOption: handleUpdateSubOption
     });
   }), isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AdddSubOptionForm, {
-    onSubmit: handleSubmit(handleAddOption),
-    className: "add-product-option"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, {
-    onClick: function onClick() {
-      return handleClickSubOptionImage('add_suboption_image');
-    }
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
-    onFiles: function onFiles(files) {
-      return handleSubOptionFiles(files, null);
+    onSubmit: handleSubmit(handleAddOption)
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
+    name: "image",
+    control: control,
+    render: function render() {
+      var _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2;
+
+      return /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, {
+        onClick: function onClick() {
+          return handleClickSubOptionImage('add_suboption_image');
+        }
+      }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+        onFiles: function onFiles(files) {
+          return handleSubOptionFiles(files, null);
+        },
+        childId: "add_suboption_image",
+        accept: "image/png, image/jpeg, image/jpg",
+        disabled: optionState.loading
+      }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
+        onDrop: function onDrop(dataTransfer) {
+          return handleSubOptionFiles(dataTransfer.files, 'add_suboption_image');
+        },
+        accept: "image/png, image/jpeg, image/jpg",
+        disabled: optionState.loading
+      }, changesState !== null && changesState !== void 0 && (_changesState$result = changesState.result) !== null && _changesState$result !== void 0 && _changesState$result.image && editSubOptionId === null ? /*#__PURE__*/_react.default.createElement("img", {
+        src: changesState === null || changesState === void 0 ? void 0 : (_changesState$result2 = changesState.result) === null || _changesState$result2 === void 0 ? void 0 : _changesState$result2.image,
+        alt: "sub option image",
+        loading: "lazy"
+      }) : (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.image) && editSubOptionId === null && /*#__PURE__*/_react.default.createElement("img", {
+        src: changesState === null || changesState === void 0 ? void 0 : (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.image,
+        alt: "sub option image",
+        loading: "lazy"
+      }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, {
+        small: true
+      }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))));
     },
-    childId: "add_suboption_image",
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: optionState.loading
-  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
-    onDrop: function onDrop(dataTransfer) {
-      return handleSubOptionFiles(dataTransfer.files, 'add_suboption_image');
-    },
-    accept: "image/png, image/jpeg, image/jpg",
-    disabled: optionState.loading
-  }, changesState !== null && changesState !== void 0 && (_changesState$result = changesState.result) !== null && _changesState$result !== void 0 && _changesState$result.image && editSubOptionId === null ? /*#__PURE__*/_react.default.createElement("img", {
-    src: changesState === null || changesState === void 0 ? void 0 : (_changesState$result2 = changesState.result) === null || _changesState$result2 === void 0 ? void 0 : _changesState$result2.image,
-    alt: "sub option image",
-    loading: "lazy"
-  }) : (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.image) && editSubOptionId === null && /*#__PURE__*/_react.default.createElement("img", {
-    src: changesState === null || changesState === void 0 ? void 0 : (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.image,
-    alt: "sub option image",
-    loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, {
-    small: true
-  }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+    defaultValue: ""
+  }), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : (_optionState$option4$ = _optionState$option4.suboptions) === null || _optionState$option4$ === void 0 ? void 0 : _optionState$option4$.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     autoComplete: "off",
     placeholder: t('NAME', 'Name'),
     defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes3 = changesState.changes) === null || _changesState$changes3 === void 0 ? void 0 : _changesState$changes3.name) || '',
-    onChange: function onChange(e) {
-      return handleChangeInput(e, null);
-    },
     ref: register({
       required: t('NAME_REQUIRED', 'The name is required.')
     })
@@ -349,9 +343,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     name: "price",
     placeholder: t('PRICE', 'Price'),
     defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.price) || '',
-    onChange: function onChange(e) {
-      return handleChangeInput(e, null);
-    },
+    ref: register(),
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
@@ -365,9 +357,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     name: "half_price",
     placeholder: t('HALF_PRICE', 'Half price'),
     defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes5 = changesState.changes) === null || _changesState$changes5 === void 0 ? void 0 : _changesState$changes5.half_price) || '',
-    onChange: function onChange(e) {
-      return handleChangeInput(e, null);
-    },
+    ref: register(),
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
@@ -381,9 +371,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     name: "max",
     placeholder: t('MAX', 'Max'),
     defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes6 = changesState.changes) === null || _changesState$changes6 === void 0 ? void 0 : _changesState$changes6.max) || '',
-    onChange: function onChange(e) {
-      return handleChangeInput(e, null);
-    },
+    ref: register(),
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
