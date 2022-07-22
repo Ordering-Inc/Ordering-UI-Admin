@@ -51,7 +51,7 @@ const OrdersFilterGroupUI = (props) => {
 
   const handleClearFilter = () => {
     handleResetFilterValues()
-    handleChangeFilterValues({})
+    // handleChangeFilterValues({})
   }
 
   return (
