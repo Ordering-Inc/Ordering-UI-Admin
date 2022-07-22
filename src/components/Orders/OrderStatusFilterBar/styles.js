@@ -24,4 +24,14 @@ export const Tab = styled.div`
   ${({ active }) => !active && css`
     color: ${props => props.theme.colors.lightGray};
   `}
+
+  @keyframes spinner-content {
+    0% { transform: rotate(0) }
+    100% { transform: rotate(360deg) }
+  }
+
+  svg {
+    animation: spinner-content 1.85s linear infinite;
+    color: ${props => props.theme.colors.headingColor};
+  }
 `
