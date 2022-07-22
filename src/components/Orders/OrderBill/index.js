@@ -21,6 +21,11 @@ export const OrderBill = (props) => {
   const [{ configs }] = useConfig()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const SPOT_DICTIONARY = {
+    3: t('SPOT_NUMBER_EAT_IN', 'Table number'),
+    4: t('SPOT_NUMBER_CURBSIDE', 'Spor number'),
+    5: t('SPOT_NUMBER_DRIVE_THRU', 'Drive thru lane')
+  }
 
   const walletName = {
     cash: {
@@ -267,6 +272,43 @@ export const OrderBill = (props) => {
             <tr>
               <td>{t('COMMENT', 'Comment')}</td>
               <td>{order?.comment}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
+      {order?.spot_number && (
+        <table className='spot_number'>
+          <tbody>
+            <tr>
+              <td>{SPOT_DICTIONARY[order?.delivery_type]}</td>
+              <td>{order?.spot_number}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
+      {order?.vehicle && (
+        <table className='vehicle'>
+          <thead>
+            <tr>
+              <th colSpan='2'>{t('ORDER_VEHICLE', 'Vehicle')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{t('ORDER_VEHICLE_TYPE', 'Type')}</td>
+              <td>{order?.vehicle?.type}</td>
+            </tr>
+            <tr>
+              <td>{t('ORDER_VEHICLE_MODEL', 'Model')}</td>
+              <td>{order?.vehicle?.model}</td>
+            </tr>
+            <tr>
+              <td>{t('ORDER_VEHICLE_CAR_REGISTRATION', 'Car registration')}</td>
+              <td>{order?.vehicle?.car_registration}</td>
+            </tr>
+            <tr>
+              <td>{t('ORDER_VEHICLE_COLOR', 'Color')}</td>
+              <td>{order?.vehicle?.color}</td>
             </tr>
           </tbody>
         </table>
