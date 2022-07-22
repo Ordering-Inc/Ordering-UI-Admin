@@ -18,7 +18,7 @@ import {
   PlusCircle,
   ThreeDots
 } from 'react-bootstrap-icons'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { ProductExtraSuboption } from '../ProductExtraSuboption'
 import { ProductExtraOptionForm } from '../ProductExtraOptionForm'
 
@@ -49,7 +49,6 @@ const ProductExtraOptionDetailsUI = (props) => {
     handleChangeOptionEnable,
     changesState,
     editSubOptionId,
-    handleChangeInput,
     handleChangeSubOptionImage,
     handleDeteteSubOption,
     handleOptionSetting,
@@ -69,7 +68,9 @@ const ProductExtraOptionDetailsUI = (props) => {
     handleAddOption,
     handleDeteteOption,
     isMaxError,
-    handleChangeItem
+    handleChangeItem,
+    isAddForm,
+    setIsAddForm
   } = props
 
   const [, t] = useLanguage()
@@ -78,8 +79,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openModal, setOpenModal] = useState({})
   const [selectedSubOptionId, setSelectedSubOptionId] = useState(null)
-  const { handleSubmit, register, errors } = useForm()
-  const [isAddForm, setIsAddForm] = useState(false)
+  const { handleSubmit, register, errors, control, setValue } = useForm()
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
 
   const handleClickSubOptionImage = (id) => {
@@ -109,10 +109,15 @@ const ProductExtraOptionDetailsUI = (props) => {
       reader.readAsDataURL(files[0])
       reader.onload = () => {
         setCropState({ name: 'image', data: reader.result, open: true, id: subOptionId })
+        if (!subOptionId) {
+          setValue('image', reader.result)
+        }
       }
       reader.onerror = error => console.log(error)
 
-      handleChangeSubOptionImage(files[0], subOptionId)
+      if (subOptionId) {
+        handleChangeSubOptionImage(files[0], subOptionId)
+      }
     }
   }
 
@@ -146,20 +151,6 @@ const ProductExtraOptionDetailsUI = (props) => {
       })
     }
   }, [errors])
-
-  const closeAddForm = (e) => {
-    const outsideDropdown = !e.target.closest('.add-product-option') && !e.target.closest('.add-option-btn')
-    if (outsideDropdown && Object.keys(changesState?.changes).length === 0) setIsAddForm(false)
-  }
-
-  useEffect(() => {
-    document.addEventListener('click', closeAddForm)
-    return () => document.removeEventListener('click', closeAddForm)
-  }, [changesState])
-
-  useEffect(() => {
-    if (Object.keys(changesState?.changes).length === 0 && !editSubOptionId) setIsAddForm(false)
-  }, [changesState?.changes, editSubOptionId])
 
   return (
     <MainContainer>
@@ -255,35 +246,42 @@ const ProductExtraOptionDetailsUI = (props) => {
         ))}
 
         {isAddForm && (
-          <AdddSubOptionForm onSubmit={handleSubmit(handleAddOption)} className='add-product-option'>
+          <AdddSubOptionForm onSubmit={handleSubmit(handleAddOption)}>
             <LeftSubOptionContent>
-              <SubOptionImage
-                onClick={() => handleClickSubOptionImage('add_suboption_image')}
-              >
-                <ExamineClick
-                  onFiles={files => handleSubOptionFiles(files, null)}
-                  childId='add_suboption_image'
-                  accept='image/png, image/jpeg, image/jpg'
-                  disabled={optionState.loading}
-                >
-                  <DragAndDrop
-                    onDrop={dataTransfer => handleSubOptionFiles(dataTransfer.files, 'add_suboption_image')}
-                    accept='image/png, image/jpeg, image/jpg'
-                    disabled={optionState.loading}
+              <Controller
+                name='image'
+                control={control}
+                render={() => (
+                  <SubOptionImage
+                    onClick={() => handleClickSubOptionImage('add_suboption_image')}
                   >
-                    {
-                      (changesState?.result?.image && editSubOptionId === null)
-                        ? (<img src={changesState?.result?.image} alt='sub option image' loading='lazy' />)
-                        : (changesState?.changes?.image && editSubOptionId === null) && (<img src={changesState?.changes?.image} alt='sub option image' loading='lazy' />)
-                    }
-                    <UploadImageIconContainer>
-                      <UploadImageIcon small>
-                        <BiImage />
-                      </UploadImageIcon>
-                    </UploadImageIconContainer>
-                  </DragAndDrop>
-                </ExamineClick>
-              </SubOptionImage>
+                    <ExamineClick
+                      onFiles={files => handleSubOptionFiles(files, null)}
+                      childId='add_suboption_image'
+                      accept='image/png, image/jpeg, image/jpg'
+                      disabled={optionState.loading}
+                    >
+                      <DragAndDrop
+                        onDrop={dataTransfer => handleSubOptionFiles(dataTransfer.files, 'add_suboption_image')}
+                        accept='image/png, image/jpeg, image/jpg'
+                        disabled={optionState.loading}
+                      >
+                        {
+                          (changesState?.result?.image && editSubOptionId === null)
+                            ? (<img src={changesState?.result?.image} alt='sub option image' loading='lazy' />)
+                            : (changesState?.changes?.image && editSubOptionId === null) && (<img src={changesState?.changes?.image} alt='sub option image' loading='lazy' />)
+                        }
+                        <UploadImageIconContainer>
+                          <UploadImageIcon small>
+                            <BiImage />
+                          </UploadImageIcon>
+                        </UploadImageIconContainer>
+                      </DragAndDrop>
+                    </ExamineClick>
+                  </SubOptionImage>
+                )}
+                defaultValue=''
+              />
               <InputWrapper primary={optionState?.option?.suboptions?.length === 0}>
                 <Input
                   name='name'
@@ -292,7 +290,6 @@ const ProductExtraOptionDetailsUI = (props) => {
                   defaultValue={
                     ((editSubOptionId === null) && changesState?.changes?.name) || ''
                   }
-                  onChange={(e) => handleChangeInput(e, null)}
                   ref={register({
                     required: t('NAME_REQUIRED', 'The name is required.')
                   })}
@@ -307,7 +304,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   defaultValue={
                     ((editSubOptionId === null) && changesState?.changes?.price) || ''
                   }
-                  onChange={(e) => handleChangeInput(e, null)}
+                  ref={register()}
                   onKeyPress={(e) => {
                     if (!/^[0-9.]$/.test(e.key)) {
                       e.preventDefault()
@@ -324,7 +321,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                     defaultValue={
                       ((editSubOptionId === null) && changesState?.changes?.half_price) || ''
                     }
-                    onChange={(e) => handleChangeInput(e, null)}
+                    ref={register()}
                     onKeyPress={(e) => {
                       if (!/^[0-9.]$/.test(e.key)) {
                         e.preventDefault()
@@ -342,7 +339,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                     defaultValue={
                       ((editSubOptionId === null) && changesState?.changes?.max) || ''
                     }
-                    onChange={(e) => handleChangeInput(e, null)}
+                    ref={register()}
                     onKeyPress={(e) => {
                       if (!/^[0-9.]$/.test(e.key)) {
                         e.preventDefault()
