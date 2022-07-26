@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useLanguage, UserDetails as UserDetailsController } from 'ordering-components-admin'
 import { OrdersManager } from '../../Orders'
 import { AddressList } from '../AddressList'
-import { Personalization, Modal } from '../../Shared'
+import { Personalization, Modal, Schedule } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { UserMetaFields } from '../../Users'
 import { DriverGroupSetting } from '../DriverGroupSetting'
 import { ThreeDots } from 'react-bootstrap-icons'
-import { Switch } from '../../../styles'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
-
+import { Switch, Button } from '../../../styles'
+import { ActionsForm } from '../UserFormDetails/styles'
 import {
   UserName,
   SavedPlaces,
+  ScheduleSection,
   PersonalizationWrapper,
   DetailsHeader,
   ActionSelectorWrapper
@@ -29,12 +30,14 @@ export const UserDetailsUI = (props) => {
     setExtraOpen,
     handleSuccessUserUpdate,
     handleDeleteUser,
-    handleChangeActiveUser
+    handleChangeActiveUser,
+    formState,
+    handleChangeScheduleState,
+    handleUpdateUser
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
-
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
   const [isCustomField, setIsCustomField] = useState(false)
   const [isPersonalization, setIsPersonalization] = useState(false)
@@ -121,6 +124,25 @@ export const UserDetailsUI = (props) => {
                 </SavedPlaces>
               )}
             </>
+          )}
+          {currentMenuSelected === 'schedule' && (
+            <ScheduleSection>
+              <Schedule
+                scheduleList={userState?.schedule}
+                handleChangeScheduleState={handleChangeScheduleState}
+              />
+              <ActionsForm>
+                <Button
+                  id='form-btn'
+                  color='primary'
+                  borderRadius='5px'
+                  type='submit'
+                  disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+                >
+                  {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
+                </Button>
+              </ActionsForm>
+            </ScheduleSection>
           )}
           {currentMenuSelected === 'orders' && (
             <OrdersManager

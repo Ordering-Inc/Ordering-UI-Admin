@@ -138,3 +138,7 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
 `
+export const ScheduleSection = styled.div`
+  margin-top: 30px;
+  overflow: auto;
+`
