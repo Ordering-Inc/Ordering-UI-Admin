@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useLanguage, UserDetails as UserDetailsController } from 'ordering-components-admin'
 import { OrdersManager } from '../../Orders'
 import { AddressList } from '../AddressList'
-import { Personalization, Modal } from '../../Shared'
+import { Personalization, Modal, Schedule } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { UserMetaFields } from '../../Users'
 import { DriverGroupSetting } from '../DriverGroupSetting'
 import { ThreeDots } from 'react-bootstrap-icons'
-import { Switch } from '../../../styles'
-import { Dropdown, DropdownButton } from 'react-bootstrap'
-
+import { Switch, Button } from '../../../styles'
+import { ActionsForm } from '../UserFormDetails/styles'
 import {
   UserName,
   SavedPlaces,
+  ScheduleSection,
   PersonalizationWrapper,
   DetailsHeader,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  DriverScheduleWraper,
+  DriverSchedule
 } from './styles'
 
 export const UserDetailsUI = (props) => {
@@ -29,15 +32,18 @@ export const UserDetailsUI = (props) => {
     setExtraOpen,
     handleSuccessUserUpdate,
     handleDeleteUser,
-    handleChangeActiveUser
+    handleChangeActiveUser,
+    scheduleState,
+    handleScheduleState,
+    handleScheduleUpdateUser
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
-
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
   const [isCustomField, setIsCustomField] = useState(false)
   const [isPersonalization, setIsPersonalization] = useState(false)
+  const [isDriverSchedule, setIsDriverSchedule] = useState(true)
 
   useEffect(() => {
     setExtraOpen(false)
@@ -121,6 +127,33 @@ export const UserDetailsUI = (props) => {
                 </SavedPlaces>
               )}
             </>
+          )}
+          {currentMenuSelected === 'schedule' && (
+            <ScheduleSection>
+              <DriverScheduleWraper>
+                <DriverSchedule>{t('DRIVER_SCHEDULES', 'Driver schedules')}</DriverSchedule>
+                <Switch
+                  defaultChecked={isDriverSchedule}
+                  onChange={enabled => setIsDriverSchedule(enabled)}
+                />
+              </DriverScheduleWraper>
+              <Schedule
+                scheduleList={userState?.user?.schedule}
+                handleChangeScheduleState={handleScheduleState}
+              />
+              <ActionsForm>
+                <Button
+                  id='form-btn'
+                  color='primary'
+                  borderRadius='5px'
+                  disabled={scheduleState.loading || scheduleState?.change?.length === 0}
+                  style={{ marginTop: 20 }}
+                  onClick={() => handleScheduleUpdateUser()}
+                >
+                  {scheduleState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
+                </Button>
+              </ActionsForm>
+            </ScheduleSection>
           )}
           {currentMenuSelected === 'orders' && (
             <OrdersManager
