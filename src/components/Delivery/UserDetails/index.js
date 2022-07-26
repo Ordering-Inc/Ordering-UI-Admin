@@ -31,9 +31,9 @@ export const UserDetailsUI = (props) => {
     handleSuccessUserUpdate,
     handleDeleteUser,
     handleChangeActiveUser,
-    formState,
-    handleChangeScheduleState,
-    handleUpdateUser
+    scheduleState,
+    handleScheduleState,
+    handleScheduleUpdateUser
   } = props
 
   const theme = useTheme()
@@ -128,18 +128,19 @@ export const UserDetailsUI = (props) => {
           {currentMenuSelected === 'schedule' && (
             <ScheduleSection>
               <Schedule
-                scheduleList={userState?.schedule}
-                handleChangeScheduleState={handleChangeScheduleState}
+                scheduleList={userState?.user?.schedule}
+                handleChangeScheduleState={handleScheduleState}
               />
               <ActionsForm>
                 <Button
                   id='form-btn'
                   color='primary'
                   borderRadius='5px'
-                  type='submit'
-                  disabled={formState.loading || Object.keys(formState?.changes).length === 0}
+                  disabled={scheduleState.loading || scheduleState?.change?.length === 0}
+                  style={{ marginTop: 20 }}
+                  onClick={() => handleScheduleUpdateUser()}
                 >
-                  {formState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
+                  {scheduleState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')}
                 </Button>
               </ActionsForm>
             </ScheduleSection>
