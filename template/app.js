@@ -47,6 +47,7 @@ import { DriversGroupsList } from './pages/DriversGroupsList'
 import { Support } from './pages/Support'
 import { AdvancedReports } from './pages/AdvancedReports'
 import { EnterprisePromotionList } from './pages/EnterprisePromotionList'
+import { Appointments } from './pages/Appointments'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -177,6 +178,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/drivers' allowedLevels={[0, 5]}>
                       <DriversList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/appointments' allowedLevels={[0]}>
+                      <Appointments />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/messages' allowedLevels={[0, 2]}>
