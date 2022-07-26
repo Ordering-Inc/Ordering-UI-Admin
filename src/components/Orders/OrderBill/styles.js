@@ -42,6 +42,10 @@ export const OrderBillContainer = styled.div`
     margin-top: 20px;
     align-items: center;
   }
+  table.spot_number,
+  table.vehicle {
+    margin-top: 20px;
+  }
   table.delivery_option {
     margin-top: 15px;
     thead {
