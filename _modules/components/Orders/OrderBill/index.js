@@ -42,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrderBill = function OrderBill(props) {
-  var _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$offers3$filter, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$fees3$filter, _order$offers4, _order$offers5, _order$offers5$filter, _order$summary12, _order$summary13, _order$offers6, _order$offers7, _order$offers7$filter, _order$summary14, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _order$summary17, _order$payment_events, _order$payment_events2, _order$delivery_optio, _order$paymethod;
+  var _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$offers3$filter, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$fees3$filter, _order$offers4, _order$offers5, _order$offers5$filter, _order$summary12, _order$summary13, _order$offers6, _order$offers7, _order$offers7$filter, _order$summary14, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _order$summary17, _order$payment_events, _order$payment_events2, _order$delivery_optio, _order$vehicle, _order$vehicle2, _order$vehicle3, _order$vehicle4, _order$paymethod;
 
   var order = props.order,
       actionStatus = props.actionStatus,
@@ -79,6 +79,11 @@ var OrderBill = function OrderBill(props) {
       confirm = _useState4[0],
       setConfirm = _useState4[1];
 
+  var SPOT_DICTIONARY = {
+    3: t('SPOT_NUMBER_EAT_IN', 'Table number'),
+    4: t('SPOT_NUMBER_CURBSIDE', 'Spor number'),
+    5: t('SPOT_NUMBER_DRIVE_THRU', 'Drive thru lane')
+  };
   var walletName = {
     cash: {
       name: t('CASH_WALLET', 'Cash Wallet')
@@ -209,7 +214,13 @@ var OrderBill = function OrderBill(props) {
     colSpan: "2"
   }, t('DELIVERY_PREFERENCE', 'Delivery Preference')))), /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, order === null || order === void 0 ? void 0 : (_order$delivery_optio = order.delivery_option) === null || _order$delivery_optio === void 0 ? void 0 : _order$delivery_optio.name)))), (order === null || order === void 0 ? void 0 : order.comment) && /*#__PURE__*/_react.default.createElement("table", {
     className: "comments"
-  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('COMMENT', 'Comment')), /*#__PURE__*/_react.default.createElement("td", null, order === null || order === void 0 ? void 0 : order.comment)))), !(order !== null && order !== void 0 && order.refund_data) && stripePaymethods.includes(order === null || order === void 0 ? void 0 : (_order$paymethod = order.paymethod) === null || _order$paymethod === void 0 ? void 0 : _order$paymethod.gateway) && /*#__PURE__*/_react.default.createElement(_styles2.RefundButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('COMMENT', 'Comment')), /*#__PURE__*/_react.default.createElement("td", null, order === null || order === void 0 ? void 0 : order.comment)))), (order === null || order === void 0 ? void 0 : order.spot_number) && /*#__PURE__*/_react.default.createElement("table", {
+    className: "spot_number"
+  }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, SPOT_DICTIONARY[order === null || order === void 0 ? void 0 : order.delivery_type]), /*#__PURE__*/_react.default.createElement("td", null, order === null || order === void 0 ? void 0 : order.spot_number)))), (order === null || order === void 0 ? void 0 : order.vehicle) && /*#__PURE__*/_react.default.createElement("table", {
+    className: "vehicle"
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
+    colSpan: "2"
+  }, t('ORDER_VEHICLE', 'Vehicle')))), /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('ORDER_VEHICLE_TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("td", null, order === null || order === void 0 ? void 0 : (_order$vehicle = order.vehicle) === null || _order$vehicle === void 0 ? void 0 : _order$vehicle.type)), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('ORDER_VEHICLE_MODEL', 'Model')), /*#__PURE__*/_react.default.createElement("td", null, order === null || order === void 0 ? void 0 : (_order$vehicle2 = order.vehicle) === null || _order$vehicle2 === void 0 ? void 0 : _order$vehicle2.model)), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('ORDER_VEHICLE_CAR_REGISTRATION', 'Car registration')), /*#__PURE__*/_react.default.createElement("td", null, order === null || order === void 0 ? void 0 : (_order$vehicle3 = order.vehicle) === null || _order$vehicle3 === void 0 ? void 0 : _order$vehicle3.car_registration)), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('ORDER_VEHICLE_COLOR', 'Color')), /*#__PURE__*/_react.default.createElement("td", null, order === null || order === void 0 ? void 0 : (_order$vehicle4 = order.vehicle) === null || _order$vehicle4 === void 0 ? void 0 : _order$vehicle4.color)))), !(order !== null && order !== void 0 && order.refund_data) && stripePaymethods.includes(order === null || order === void 0 ? void 0 : (_order$paymethod = order.paymethod) === null || _order$paymethod === void 0 ? void 0 : _order$paymethod.gateway) && /*#__PURE__*/_react.default.createElement(_styles2.RefundButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     disabled: actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading,
