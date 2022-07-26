@@ -45,6 +45,9 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
   }, {
     key: 'saved_places',
     content: t('SAVED_PLACES', 'Saved places')
+  }, {
+    key: 'schedule',
+    content: t('SCHEDULE', 'Schedule')
   } // { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
   // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
   ] : [{
