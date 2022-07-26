@@ -138,3 +138,14 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
 `
+export const ScheduleSection = styled.div`
+  margin-top: 30px;
+  overflow: auto;
+`
+export const DriverScheduleWraper = styled.div`
+  display: flex;
+  align-items: center;
+`
+export const DriverSchedule = styled.span`
+  padding-right: 10px;
+`
