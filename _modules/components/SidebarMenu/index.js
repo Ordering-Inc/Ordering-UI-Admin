@@ -85,6 +85,10 @@ var SidebarMenu = function SidebarMenu(props) {
     id: 3,
     title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
     pageName: 'drivers'
+  }, {
+    id: 4,
+    title: t('APPOINTMENTS', 'Appointments'),
+    pageName: 'appointments'
   }];
   var loyaltySubMenus = [{
     id: 1,
@@ -303,7 +307,7 @@ var SidebarMenu = function SidebarMenu(props) {
     handleGoToPage: handleGoToPage
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOME', 'Home')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "1",
-    active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers'
+    active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers' || location.pathname === '/appointments'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ListCheck, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "1"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ordersSubMenus.map(function (item) {

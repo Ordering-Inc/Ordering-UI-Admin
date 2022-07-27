@@ -80,7 +80,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       setIsTourFlag = props.setIsTourFlag,
       setIsTourOpen = props.setIsTourOpen,
       actionStatus = props.actionStatus,
-      handleRefundOrder = props.handleRefundOrder;
+      handleRefundOrder = props.handleRefundOrder,
+      isServiceOrder = props.isServiceOrder;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -541,6 +542,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       return handleChangeTour(e);
     }
   }, /*#__PURE__*/_react.default.createElement(_OrderDetailsHeader.OrderDetailsHeader, {
+    isServiceOrder: isServiceOrder,
     order: order,
     extraOpen: extraOpen,
     actionSidebar: actionSidebar,
@@ -568,6 +570,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.AdvancedLogistic, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('ATTEMPTS', 'Attempts')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.logistic_attemps)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority)))), rejectResonStatuses.includes(order === null || order === void 0 ? void 0 : order.status) && (order === null || order === void 0 ? void 0 : order.reject_reason) && /*#__PURE__*/_react.default.createElement(_styles2.RejectReasonsContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('REJECT_REASONS', 'Reject reasons')), /*#__PURE__*/_react.default.createElement(_styles2.RejectReasonsList, null, /*#__PURE__*/_react.default.createElement(_styles2.RejectReasonWrapper, null, t("REJECT_REASON_".concat(order === null || order === void 0 ? void 0 : order.reject_reason.toUpperCase()), order === null || order === void 0 ? void 0 : order.reject_reason.replace(/_/g, ' '))))), /*#__PURE__*/_react.default.createElement("div", {
     "data-tour": "tour_driver"
   }, /*#__PURE__*/_react.default.createElement(_OrderContactInformation.OrderContactInformation, {
+    isServiceOrder: isServiceOrder,
     order: order,
     extraOpen: extraOpen,
     unreadAlert: unreadAlert,

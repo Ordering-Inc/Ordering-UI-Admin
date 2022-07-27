@@ -147,6 +147,12 @@ Object.defineProperty(exports, "ApiKeysList", {
     return _Settings.ApiKeysList;
   }
 });
+Object.defineProperty(exports, "Appointments", {
+  enumerable: true,
+  get: function get() {
+    return _Orders.Appointments;
+  }
+});
 Object.defineProperty(exports, "AutoScroll", {
   enumerable: true,
   get: function get() {
