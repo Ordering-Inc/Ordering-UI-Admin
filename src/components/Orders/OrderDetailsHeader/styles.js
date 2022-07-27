@@ -7,7 +7,7 @@ export const OrderDetailsHeaderContainer = styled.div`
     flex-direction: column-reverse;
     h1 {
       width: 100%;
-      font-size: 24px;
+      font-size: 20px;
       margin: 0px;
       font-weight: 700;
     }

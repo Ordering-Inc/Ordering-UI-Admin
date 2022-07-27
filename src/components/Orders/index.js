@@ -1,3 +1,4 @@
+import { Appointments } from './Appointments'
 import { DeliveriesManager } from './DeliveriesManager'
 import { DriversManager } from './DriversManager'
 
@@ -45,6 +46,7 @@ import { OrdersCards } from './OrdersCards'
 import { ReviewCustomer } from './ReviewCustomer'
 
 export {
+  Appointments,
   DeliveriesManager,
   DriversManager,
   Messages,

@@ -49,7 +49,8 @@ const OrderDetailsUI = (props) => {
     setIsTourFlag,
     setIsTourOpen,
     actionStatus,
-    handleRefundOrder
+    handleRefundOrder,
+    isServiceOrder
   } = props
 
   const [, t] = useLanguage()
@@ -307,6 +308,7 @@ const OrderDetailsUI = (props) => {
           onClick={(e) => handleChangeTour(e)}
         >
           <OrderDetailsHeader
+            isServiceOrder={isServiceOrder}
             order={order}
             extraOpen={extraOpen}
             actionSidebar={actionSidebar}
@@ -373,6 +375,7 @@ const OrderDetailsUI = (props) => {
           )}
           <div data-tour='tour_driver'>
             <OrderContactInformation
+              isServiceOrder={isServiceOrder}
               order={order}
               extraOpen={extraOpen}
               unreadAlert={unreadAlert}
