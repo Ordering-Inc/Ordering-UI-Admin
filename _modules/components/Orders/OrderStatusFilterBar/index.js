@@ -11,6 +11,8 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _Shared = require("../../Shared");
 
+var _CgSpinnerTwoAlt = _interopRequireDefault(require("@meronex/icons/cg/CgSpinnerTwoAlt"));
+
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -50,22 +52,22 @@ var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
     onClick: function onClick() {
       return changeSelectedOrderStatus('pending');
     }
-  }, t('PENDING', 'pending'), !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.error) && !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.loading) && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat2 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat2 === void 0 ? void 0 : _numberOfOrdersByStat2.pending) !== null && _numberOfOrdersByStat !== void 0 ? _numberOfOrdersByStat : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('PENDING', 'pending'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.result ? (_numberOfOrdersByStat = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat2 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat2 === void 0 ? void 0 : _numberOfOrdersByStat2.pending) !== null && _numberOfOrdersByStat !== void 0 ? _numberOfOrdersByStat : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'inProgress',
     onClick: function onClick() {
       return changeSelectedOrderStatus('inProgress');
     }
-  }, t('IN_PROGRESS', 'in progress'), !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.error) && !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.loading) && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat3 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat4 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat4 === void 0 ? void 0 : _numberOfOrdersByStat4.inProgress) !== null && _numberOfOrdersByStat3 !== void 0 ? _numberOfOrdersByStat3 : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('IN_PROGRESS', 'in progress'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.result ? (_numberOfOrdersByStat3 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat4 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat4 === void 0 ? void 0 : _numberOfOrdersByStat4.inProgress) !== null && _numberOfOrdersByStat3 !== void 0 ? _numberOfOrdersByStat3 : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'completed',
     onClick: function onClick() {
       return changeSelectedOrderStatus('completed');
     }
-  }, t('COMPLETED', 'completed'), !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.error) && !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.loading) && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat5 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat6 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat6 === void 0 ? void 0 : _numberOfOrdersByStat6.completed) !== null && _numberOfOrdersByStat5 !== void 0 ? _numberOfOrdersByStat5 : 0, ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('COMPLETED', 'completed'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.result ? (_numberOfOrdersByStat5 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat6 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat6 === void 0 ? void 0 : _numberOfOrdersByStat6.completed) !== null && _numberOfOrdersByStat5 !== void 0 ? _numberOfOrdersByStat5 : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'cancelled',
     onClick: function onClick() {
       return changeSelectedOrderStatus('cancelled');
     }
-  }, t('CANCELLED', 'cancelled'), !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.error) && !(numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.loading) && /*#__PURE__*/_react.default.createElement("span", null, "(", (_numberOfOrdersByStat7 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat8 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat8 === void 0 ? void 0 : _numberOfOrdersByStat8.cancelled) !== null && _numberOfOrdersByStat7 !== void 0 ? _numberOfOrdersByStat7 : 0, ")")))));
+  }, t('CANCELLED', 'cancelled'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.result ? (_numberOfOrdersByStat7 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat8 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat8 === void 0 ? void 0 : _numberOfOrdersByStat8.cancelled) !== null && _numberOfOrdersByStat7 !== void 0 ? _numberOfOrdersByStat7 : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")))));
 };
 
 exports.OrderStatusFilterBar = OrderStatusFilterBar;
