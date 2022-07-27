@@ -271,5 +271,12 @@
     "keywords": "test, dummy, data",
     "robots": "index, follow",
     "canonicalUrl": ""
+  },
+  "appointments": {
+    "title": "Appointments",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
   }
 }

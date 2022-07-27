@@ -9,6 +9,7 @@ import {
 } from './components/OrderingProducts'
 import { PageNotFound } from './components/PageNotFound'
 import {
+  Appointments,
   DeliveriesManager,
   DriversManager,
   Messages,
@@ -377,6 +378,7 @@ import { Switch } from './styles/Switch'
 import { Checkbox } from './styles/Checkbox'
 
 export {
+  Appointments,
   DeliveriesManager,
   DriversManager,
   ForgotPasswordForm,

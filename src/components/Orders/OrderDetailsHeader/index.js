@@ -30,7 +30,8 @@ export const OrderDetailsHeader = (props) => {
     currentTourStep,
     showOption,
     openMessage,
-    printRef
+    printRef,
+    isServiceOrder
   } = props
 
   const [, t] = useLanguage()
@@ -55,7 +56,7 @@ export const OrderDetailsHeader = (props) => {
   return (
     <OrderDetailsHeaderContainer>
       <div>
-        <h1>{t('INVOICE_ORDER_NO', 'Order No')} {order?.id}</h1>
+        <h1>{isServiceOrder ? t('APPOINTMENT_NO', 'Appointment No.') : t('INVOICE_ORDER_NO', 'Order No')} {order?.id}</h1>
         <ButtonGroup>
           {user?.level !== 5 && (
             <ButtonLink
@@ -142,30 +143,34 @@ export const OrderDetailsHeader = (props) => {
             <EnDotSingle />
           </>
         )}
-        {order?.delivery_type === 1 && (
-          <span>
-            {t('DELIVERY', 'Delivery')}
-          </span>
-        )}
-        {order?.delivery_type === 2 && (
-          <span>
-            {t('PICKUP', 'Pickup')}
-          </span>
-        )}
-        {order?.delivery_type === 3 && (
-          <span>
-            {t('EAT_IN', 'Eat in')}
-          </span>
-        )}
-        {order?.delivery_type === 4 && (
-          <span>
-            {t('CURBSIDE', 'Curbside')}
-          </span>
-        )}
-        {order?.delivery_type === 5 && (
-          <span>
-            {t('DRIVE_THRU', 'Drive thru')}
-          </span>
+        {!isServiceOrder && (
+          <>
+            {order?.delivery_type === 1 && (
+              <span>
+                {t('DELIVERY', 'Delivery')}
+              </span>
+            )}
+            {order?.delivery_type === 2 && (
+              <span>
+                {t('PICKUP', 'Pickup')}
+              </span>
+            )}
+            {order?.delivery_type === 3 && (
+              <span>
+                {t('EAT_IN', 'Eat in')}
+              </span>
+            )}
+            {order?.delivery_type === 4 && (
+              <span>
+                {t('CURBSIDE', 'Curbside')}
+              </span>
+            )}
+            {order?.delivery_type === 5 && (
+              <span>
+                {t('DRIVE_THRU', 'Drive thru')}
+              </span>
+            )}
+          </>
         )}
       </p>
     </OrderDetailsHeaderContainer>
