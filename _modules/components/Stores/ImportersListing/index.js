@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+
 var _styles = require("../../../styles");
 
 var _ImportersList = require("../ImportersList");
@@ -18,6 +20,8 @@ var _ImportersList = require("../ImportersList");
 var _ImporterForm = require("../ImporterForm");
 
 var _ImporterJobForm = require("../ImporterJobForm");
+
+var _ImporterHelpContent = require("../ImporterHelpContent");
 
 var _Shared = require("../../Shared");
 
@@ -64,28 +68,33 @@ var ImportersListingUI = function ImportersListingUI(props) {
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      openImportCsv = _useState4[0],
-      setOpenImportCsv = _useState4[1];
+      openImporterHelp = _useState4[0],
+      setOpenImporterHelp = _useState4[1];
 
-  var _useState5 = (0, _react.useState)({}),
+  var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedImporter = _useState6[0],
-      setSelectedImporter = _useState6[1];
+      openImportCsv = _useState6[0],
+      setOpenImportCsv = _useState6[1];
 
   var _useState7 = (0, _react.useState)({}),
       _useState8 = _slicedToArray(_useState7, 2),
-      selectedImporterJob = _useState8[0],
-      setSelectedImporterJob = _useState8[1];
+      selectedImporter = _useState8[0],
+      setSelectedImporter = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(0),
+  var _useState9 = (0, _react.useState)({}),
       _useState10 = _slicedToArray(_useState9, 2),
-      importJobFormMoveDistance = _useState10[0],
-      setImportJobFormMoveDistance = _useState10[1];
+      selectedImporterJob = _useState10[0],
+      setSelectedImporterJob = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(false),
+  var _useState11 = (0, _react.useState)(0),
       _useState12 = _slicedToArray(_useState11, 2),
-      openMappingDetails = _useState12[0],
-      setOpenMappingDetails = _useState12[1];
+      importJobFormMoveDistance = _useState12[0],
+      setImportJobFormMoveDistance = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      openMappingDetails = _useState14[0],
+      setOpenMappingDetails = _useState14[1];
 
   var addNewImporter = function addNewImporter() {
     setSelectedImporter({});
@@ -111,7 +120,12 @@ var ImportersListingUI = function ImportersListingUI(props) {
   (0, _react.useEffect)(function () {
     setExtraOpen && setExtraOpen(openNewImporter);
   }, [openNewImporter]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ImportersListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('IMPORTERS', 'Importers')), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ImportersListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleContent, null, t('IMPORTERS', 'Importers')), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary",
+    onClick: function onClick() {
+      return setOpenImporterHelp(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null))), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "5px",
     onClick: function onClick() {
@@ -170,7 +184,16 @@ var ImportersListingUI = function ImportersListingUI(props) {
       setOpenImportCsv(false);
       setImportJobFormMoveDistance(0);
     }
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: "",
+    open: openImporterHelp,
+    onClose: function onClose() {
+      return setOpenImporterHelp(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ImporterHelpContent.ImporterHelpContent, null)));
 };
 
 exports.ImportersListingUI = ImportersListingUI;
