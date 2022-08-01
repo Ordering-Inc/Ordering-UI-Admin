@@ -18,11 +18,14 @@ export const Header = styled.div`
  `}
 `
 export const Title = styled.div`
+  display: flex;
   font-size: 20px;
   margin: 0px 10px 0px 0px;
   font-weight: 700;
 `
-
+export const TitleContent = styled.div`
+  margin-right: 5px;
+`
 export const ActionButtons = styled.div`
   display: flex;
 

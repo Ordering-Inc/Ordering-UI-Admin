@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, ImporterListing as ImportersListingController } from 'ordering-components-admin'
-import { Button } from '../../../styles'
+import { InfoCircle } from 'react-bootstrap-icons'
+import { Button, IconButton } from '../../../styles'
 import { ImportersList } from '../ImportersList'
 import { ImporterForm } from '../ImporterForm'
 import { ImporterJobForm } from '../ImporterJobForm'
-import { SideBar } from '../../Shared'
+import { ImporterHelpContent } from '../ImporterHelpContent'
+import { SideBar, Modal } from '../../Shared'
 import {
   ImportersListingContainer,
   Header,
   Title,
+  TitleContent,
   ActionButtons
 } from './styles'
 
@@ -23,6 +26,7 @@ export const ImportersListingUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [openNewImporter, setOpenNewImporter] = useState(false)
+  const [openImporterHelp, setOpenImporterHelp] = useState(false)
   const [openImportCsv, setOpenImportCsv] = useState(false)
   const [selectedImporter, setSelectedImporter] = useState({})
   const [selectedImporterJob, setSelectedImporterJob] = useState({})
@@ -59,7 +63,13 @@ export const ImportersListingUI = (props) => {
       <ImportersListingContainer>
         <Header>
           <Title>
-            {t('IMPORTERS', 'Importers')}
+            <TitleContent>{t('IMPORTERS', 'Importers')}</TitleContent>
+            <IconButton
+              color='primary'
+              onClick={() => setOpenImporterHelp(true)}
+            >
+              <InfoCircle />
+            </IconButton>
           </Title>
           <ActionButtons>
             <Button
@@ -132,6 +142,16 @@ export const ImportersListingUI = (props) => {
           />
         </SideBar>
       )}
+      <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title=''
+        open={openImporterHelp}
+        onClose={() => setOpenImporterHelp(false)}
+      >
+        <ImporterHelpContent />
+      </Modal>
     </>
   )
 }
