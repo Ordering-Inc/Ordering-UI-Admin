@@ -286,7 +286,7 @@ export const App = () => {
                     <ProtectedRoute path='/downloads/purchased-products' allowedLevels={[0]}>
                       <PurchasedProductsList />
                     </ProtectedRoute>
-                    <ProtectedRoute path='/ordering-products' allowedLevels={[0, 2, 5]}>
+                    <ProtectedRoute path='/ordering-products' allowedLevels={[0, 2]}>
                       <OrderingProducts />
                     </ProtectedRoute>
 
