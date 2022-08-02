@@ -512,82 +512,90 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   )}
 
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='8'
-                      active={
-                        location.pathname === '/marketing/promotions-enterprise' ||
-                        location.pathname === '/marketing/campaign'
-                      }
-                    >
-                      <GraphUp />
-                      <span>{t('MARKETING', 'Marketing')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='8'>
-                      <MenuContent>
-                        {marketingSubmenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='9'
-                      active={
-                        location.pathname === '/loyalty/rewards-programs' ||
-                        location.pathname === '/loyalty/levels' ||
-                        location.pathname === '/loyalty/reports'
-                      }
-                    >
-                      <Award />
-                      <span>{t('LOYALTY', 'Loyalty')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='9'>
-                      <MenuContent>
-                        {loyaltySubMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
-                  <MenuContainer>
-                    <ContextAwareToggle
-                      eventKey='10'
-                      active={
-                        location.pathname === '/cart-recovery/open-carts' ||
-                        location.pathname === '/cart-recovery/recovery-actions'
-                      }
-                    >
-                      <Cart3 />
-                      <span>{t('CART_RECOVERY', 'Cart recovery')}</span>
-                    </ContextAwareToggle>
-                    <Accordion.Collapse eventKey='10'>
-                      <MenuContent>
-                        {cartRecoveryMenus.map(item => (
-                          <SubMenu
-                            key={item.id}
-                            active={location.pathname.includes(item.url)}
-                            onClick={() => handleGoToPage({ page: item.pageName })}
-                          >
-                            {item.title}
-                          </SubMenu>
-                        ))}
-                      </MenuContent>
-                    </Accordion.Collapse>
-                  </MenuContainer>
+                  {sessionState?.user?.level !== 5 && (
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='8'
+                        active={
+                          location.pathname === '/marketing/promotions-enterprise' ||
+                          location.pathname === '/marketing/campaign'
+                        }
+                      >
+                        <GraphUp />
+                        <span>{t('MARKETING', 'Marketing')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='8'>
+                        <MenuContent>
+                          {marketingSubmenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  )}
+
+                  {sessionState?.user?.level !== 5 && (
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='9'
+                        active={
+                          location.pathname === '/loyalty/rewards-programs' ||
+                          location.pathname === '/loyalty/levels' ||
+                          location.pathname === '/loyalty/reports'
+                        }
+                      >
+                        <Award />
+                        <span>{t('LOYALTY', 'Loyalty')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='9'>
+                        <MenuContent>
+                          {loyaltySubMenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  )}
+
+                  {sessionState?.user?.level !== 5 && (
+                    <MenuContainer>
+                      <ContextAwareToggle
+                        eventKey='10'
+                        active={
+                          location.pathname === '/cart-recovery/open-carts' ||
+                          location.pathname === '/cart-recovery/recovery-actions'
+                        }
+                      >
+                        <Cart3 />
+                        <span>{t('CART_RECOVERY', 'Cart recovery')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='10'>
+                        <MenuContent>
+                          {cartRecoveryMenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  )}
                 </Accordion>
               </div>
               <div className='d-flex flex-column mt-4'>
@@ -628,14 +636,16 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   </Accordion>
                 )}
-                <Button
-                  className='d-flex align-items-center'
-                  variant={location.pathname === '/ordering-products' && 'primary'}
-                  onClick={() => handleGoToPage({ page: 'ordering_products' })}
-                >
-                  <WindowDock />
-                  <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>
-                </Button>
+                {sessionState?.user?.level !== 5 && (
+                  <Button
+                    className='d-flex align-items-center'
+                    variant={location.pathname === '/ordering-products' && 'primary'}
+                    onClick={() => handleGoToPage({ page: 'ordering_products' })}
+                  >
+                    <WindowDock />
+                    <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>
+                  </Button>
+                )}
                 {sessionState?.user?.level === 0 && (
                   <Button
                     className='d-flex align-items-center'
