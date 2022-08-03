@@ -54,7 +54,7 @@ const CampaignAmountOptionUI = (props) => {
       })
       return
     }
-    if (!ruleFormState.changes?.value) {
+    if (ruleFormState.changes?.value === null || isNaN(ruleFormState.changes?.value)) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('VALUE', 'Value'))
