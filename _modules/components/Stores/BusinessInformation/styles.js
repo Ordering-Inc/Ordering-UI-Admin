@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SwitchWrapper = exports.SkeletonWrapper = exports.ShapeWrapper = exports.ShapeContentWrapper = exports.ShapeBoxWrapper = exports.RibbonSwitchWrapper = exports.PriceFilterWrapper = exports.PriceFilterListWrapper = exports.PriceFilterItem = exports.PhoneWrapper = exports.LogoImage = exports.InputWrapper = exports.HeaderImage = exports.FormInput = exports.ColorWrapper = exports.ColorShapeWrapper = exports.ActionsForm = void 0;
+exports.UploadImageIconContainer = exports.UploadImageIcon = exports.SwitchWrapper = exports.SocialWrapper = exports.SocialItemWrapper = exports.SocialItemHeader = exports.SocialItemContent = exports.SkeletonWrapper = exports.ShapeWrapper = exports.ShapeContentWrapper = exports.ShapeBoxWrapper = exports.RibbonSwitchWrapper = exports.PriceFilterWrapper = exports.PriceFilterListWrapper = exports.PriceFilterItem = exports.PhoneWrapper = exports.LogoImage = exports.InputWrapper = exports.HeaderImage = exports.FormInput = exports.ColorWrapper = exports.ColorShapeWrapper = exports.ActionsForm = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -133,3 +133,25 @@ var PriceFilterItem = _styledComponents.default.div(_templateObject29 || (_templ
 });
 
 exports.PriceFilterItem = PriceFilterItem;
+
+var SocialWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n  padding-bottom: 20px;\n\n  > h2 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin-bottom: 0px;\n  }\n"])));
+
+exports.SocialWrapper = SocialWrapper;
+
+var SocialItemWrapper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  margin-top: 37px;\n"])));
+
+exports.SocialItemWrapper = SocialItemWrapper;
+
+var SocialItemHeader = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 12px;\n\n  > div {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 27px;\n    height: 27px;\n    border: 1px solid ", ";\n    border-radius: 3px;\n\n    svg {\n      height: 16px;\n      font-size: 16px;\n      color: ", ";\n    }\n  }\n\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-left: 12px;\n    ", "\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (props) {
+  return props.theme.colors.headingColor;
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n      margin-left: 0px;\n      margin-right: 12px;\n    "])));
+});
+
+exports.SocialItemHeader = SocialItemHeader;
+
+var SocialItemContent = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  width: 100%;\n  input {\n    width: 100%;\n    border-radius: 8px;\n  }\n"])));
+
+exports.SocialItemContent = SocialItemContent;

@@ -93,7 +93,7 @@ var CampaignAmountOptionUI = function CampaignAmountOptionUI(props) {
   };
 
   var handleSaveRule = function handleSaveRule() {
-    var _ruleFormState$change, _ruleFormState$change2, _ruleFormState$change3;
+    var _ruleFormState$change, _ruleFormState$change2, _ruleFormState$change3, _ruleFormState$change4;
 
     if (!((_ruleFormState$change = ruleFormState.changes) !== null && _ruleFormState$change !== void 0 && _ruleFormState$change.condition)) {
       setAlertState({
@@ -103,7 +103,7 @@ var CampaignAmountOptionUI = function CampaignAmountOptionUI(props) {
       return;
     }
 
-    if (!((_ruleFormState$change2 = ruleFormState.changes) !== null && _ruleFormState$change2 !== void 0 && _ruleFormState$change2.value)) {
+    if (((_ruleFormState$change2 = ruleFormState.changes) === null || _ruleFormState$change2 === void 0 ? void 0 : _ruleFormState$change2.value) === null || isNaN((_ruleFormState$change3 = ruleFormState.changes) === null || _ruleFormState$change3 === void 0 ? void 0 : _ruleFormState$change3.value)) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', t('VALUE', 'Value'))
@@ -137,7 +137,7 @@ var CampaignAmountOptionUI = function CampaignAmountOptionUI(props) {
       }
 
       handleChangeItem('conditions', updatedConditions);
-    } else if ((_ruleFormState$change3 = ruleFormState.changes) !== null && _ruleFormState$change3 !== void 0 && _ruleFormState$change3.id) {
+    } else if ((_ruleFormState$change4 = ruleFormState.changes) !== null && _ruleFormState$change4 !== void 0 && _ruleFormState$change4.id) {
       handleUpdateRule();
     } else {
       handleAddRule();
@@ -156,7 +156,7 @@ var CampaignAmountOptionUI = function CampaignAmountOptionUI(props) {
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options')), /*#__PURE__*/_react.default.createElement(_styles2.SubTitle, null, t('RELATIVE', 'Relative')), ruleList.map(function (item, i) {
-    var _ruleFormState$change4, _ruleFormState$change5, _ruleFormState$change6, _ruleFormState$change7;
+    var _ruleFormState$change5, _ruleFormState$change6, _ruleFormState$change7, _ruleFormState$change8;
 
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
@@ -164,16 +164,16 @@ var CampaignAmountOptionUI = function CampaignAmountOptionUI(props) {
       onClick: function onClick() {
         return handleChangeValue('condition', item.key);
       }
-    }, ((_ruleFormState$change4 = ruleFormState.changes) === null || _ruleFormState$change4 === void 0 ? void 0 : _ruleFormState$change4.condition) === item.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    }, ((_ruleFormState$change5 = ruleFormState.changes) === null || _ruleFormState$change5 === void 0 ? void 0 : _ruleFormState$change5.condition) === item.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, item.name))), ((_ruleFormState$change5 = ruleFormState.changes) === null || _ruleFormState$change5 === void 0 ? void 0 : _ruleFormState$change5.condition) === item.key && /*#__PURE__*/_react.default.createElement(_styles2.DaysContent, null, /*#__PURE__*/_react.default.createElement(_reactNumericInput.default, {
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, item.name))), ((_ruleFormState$change6 = ruleFormState.changes) === null || _ruleFormState$change6 === void 0 ? void 0 : _ruleFormState$change6.condition) === item.key && /*#__PURE__*/_react.default.createElement(_styles2.DaysContent, null, /*#__PURE__*/_react.default.createElement(_reactNumericInput.default, {
       placeholder: "00",
       onKeyPress: function onKeyPress(e) {
         if (!/^[0-9]$/.test(e.key)) {
           e.preventDefault();
         }
       },
-      value: (_ruleFormState$change6 = (_ruleFormState$change7 = ruleFormState.changes) === null || _ruleFormState$change7 === void 0 ? void 0 : _ruleFormState$change7.value) !== null && _ruleFormState$change6 !== void 0 ? _ruleFormState$change6 : '',
+      value: (_ruleFormState$change7 = (_ruleFormState$change8 = ruleFormState.changes) === null || _ruleFormState$change8 === void 0 ? void 0 : _ruleFormState$change8.value) !== null && _ruleFormState$change7 !== void 0 ? _ruleFormState$change7 : '',
       onChange: function onChange(value) {
         return handleChangeInput(item.key, value);
       },
