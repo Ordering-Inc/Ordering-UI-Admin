@@ -261,6 +261,23 @@ export const MessagesUI = (props) => {
     }
   }
 
+  const getLogisticTagStatus = (status) => {
+    switch (status) {
+      case 0:
+        return t('PENDING', 'Pending')
+      case 1:
+        return t('IN_PROGRESS', 'In Progress')
+      case 2:
+        return t('IN_QUEUE', 'In Queue')
+      case 3:
+        return t('EXPIRED', 'Logistic expired')
+      case 4:
+        return t('RESOLVED', 'Resolved')
+      default:
+        return status
+    }
+  }
+
   const getLevel = (level) => {
     switch (level) {
       case 0:
@@ -505,12 +522,12 @@ export const MessagesUI = (props) => {
                                 {t('CHANGED_FROM', 'Changed from')} {' '}
                                 {message.change.old !== null && (
                                   <>
-                                    <strong>{getStatus(parseInt(message.change.old, 10))}</strong> {' '}
+                                    <strong>{message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : getStatus(parseInt(message.change.old, 10))}</strong> {' '}
                                   </>
                                 )}
                                 <>
                                   {t('TO', 'to')} {' '}
-                                  <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
+                                  <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : getStatus(parseInt(message.change.new, 10))}</strong>
                                   {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
                                   {(message?.author?.name || message?.author?.lastname) && (
                                     <p><strong>Author: </strong>{(message?.author?.name ?? '') + ' ' + (message?.author?.lastname ?? '')}</p>
@@ -584,12 +601,12 @@ export const MessagesUI = (props) => {
                                   <>
                                     {message.change.old !== null && (
                                       <>
-                                        <strong>{t(getStatus(parseInt(message.change.old, 10)))}</strong> {' '}
+                                        <strong>{ message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : getStatus(parseInt(message.change.old, 10))}</strong> {' '}
                                       </>
                                     )}
                                     <div style={{ whiteSpace: 'pre' }}>
                                       {t('TO', 'to')} {' '}
-                                      <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : t(getStatus(parseInt(message.change.new, 10)))}</strong>
+                                      <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : getStatus(parseInt(message.change.new, 10))}</strong>
                                       <strong>{message?.change?.comment ? (`\n${t('COMMENT', 'Comment:')}`) : ''}</strong>
                                       {message?.change?.comment ? ` ${message?.change?.comment}` : ''}
                                       {(message?.author?.name || message?.author?.lastname) && (
