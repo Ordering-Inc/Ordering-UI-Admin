@@ -6,7 +6,7 @@ import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
 import { bytesConverter, shape, ribbonValues } from '../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Button, Input, Switch } from '../../../styles'
-import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
+import { RecordCircleFill, Circle, Facebook, Instagram, Tiktok, Pinterest, Whatsapp, Snapchat } from 'react-bootstrap-icons'
 
 import {
   FormInput,
@@ -27,7 +27,11 @@ import {
   RibbonSwitchWrapper,
   PriceFilterWrapper,
   PriceFilterListWrapper,
-  PriceFilterItem
+  PriceFilterItem,
+  SocialWrapper,
+  SocialItemWrapper,
+  SocialItemHeader,
+  SocialItemContent
 } from './styles'
 
 const BusinessInformationUI = (props) => {
@@ -55,6 +59,15 @@ const BusinessInformationUI = (props) => {
     { key: '4', value: '$$$$' },
     { key: '5', value: '$$$$$' }
   ]
+
+  const socialOriginalURL = {
+    facebook: 'https://www.facebook.com/',
+    instagram: 'https://www.instagram.com/',
+    tiktok: 'https://www.tiktok.com/',
+    snap_chat: 'https://www.snapchat.com/add/',
+    pinterest: 'https://www.pinterest.com/',
+    whatsapp: 'https://wa.me/'
+  }
 
   const handleClickImage = (type) => {
     if (type === 'header') {
@@ -103,6 +116,20 @@ const BusinessInformationUI = (props) => {
 
   const onSubmit = () => {
     if (Object.keys(formState.changes).length > 0) {
+      if (formState?.changes?.whatsapp_number && formState?.changes?.whatsapp_number.search(/^https:\/\/wa\.me\/\+?\d+$/) === -1) {
+        setAlertState({
+          open: true,
+          content: t('WHATS_APP_NUMBER_NOT_VALID', 'Whatsapp number is not valid')
+        })
+        return
+      }
+      if (formState?.changes?.tiktok_profile && formState?.changes?.tiktok_profile.search(/^https:\/\/www\.tiktok\.com\/@.+$/) === -1) {
+        setAlertState({
+          open: true,
+          content: t('TIKTOK_USERNAME_NOT_VALID', 'TikTok user name is not valid')
+        })
+        return
+      }
       handleButtonUpdateClick()
     }
   }
@@ -341,6 +368,111 @@ const BusinessInformationUI = (props) => {
             ))}
           </PriceFilterListWrapper>
         </PriceFilterWrapper>
+        <SocialWrapper>
+          <h2>{t('SOCIAL_NETWORKS', 'Social networks')}</h2>
+          <SocialItemWrapper>
+            <SocialItemHeader>
+              <div>
+                <Facebook />
+              </div>
+              <span>{t('FACEBOOK', 'Facebook')}</span>
+            </SocialItemHeader>
+            <SocialItemContent>
+              <ConvertInput
+                value={formState?.changes?.facebook_profile ?? businessState?.business?.facebook_profile}
+                handleChangeValue={(val) => handleChangeSwtich('facebook_profile', val)}
+                originalURL={socialOriginalURL.facebook}
+                placeholder={t('USER_NAME', 'Username')}
+                name='facebook_profile'
+              />
+            </SocialItemContent>
+          </SocialItemWrapper>
+          <SocialItemWrapper>
+            <SocialItemHeader>
+              <div>
+                <Instagram />
+              </div>
+              <span>{t('INSTAGRAM', 'Instagram')}</span>
+            </SocialItemHeader>
+            <SocialItemContent>
+              <ConvertInput
+                value={formState?.changes?.instagram_profile ?? businessState?.business?.instagram_profile}
+                handleChangeValue={(val) => handleChangeSwtich('instagram_profile', val)}
+                originalURL={socialOriginalURL.instagram}
+                placeholder={t('USER_NAME', 'Username')}
+                name='instagram_profile'
+              />
+            </SocialItemContent>
+          </SocialItemWrapper>
+          <SocialItemWrapper>
+            <SocialItemHeader>
+              <div>
+                <Tiktok />
+              </div>
+              <span>{t('TIK_TOK', 'Tik tok')}</span>
+            </SocialItemHeader>
+            <SocialItemContent>
+              <ConvertInput
+                value={formState?.changes?.tiktok_profile ?? businessState?.business?.tiktok_profile}
+                handleChangeValue={(val) => handleChangeSwtich('tiktok_profile', val)}
+                originalURL={socialOriginalURL.tiktok}
+                placeholder={t('USER_NAME', 'Username')}
+                name='tiktok_profile'
+              />
+            </SocialItemContent>
+          </SocialItemWrapper>
+          <SocialItemWrapper>
+            <SocialItemHeader>
+              <div>
+                <Pinterest />
+              </div>
+              <span>{t('PINTEREST', 'Pinterest')}</span>
+            </SocialItemHeader>
+            <SocialItemContent>
+              <ConvertInput
+                value={formState?.changes?.pinterest_profile ?? businessState?.business?.pinterest_profile}
+                handleChangeValue={(val) => handleChangeSwtich('pinterest_profile', val)}
+                originalURL={socialOriginalURL.pinterest}
+                placeholder={t('USER_NAME', 'Username')}
+                name='pinterest_profile'
+              />
+            </SocialItemContent>
+          </SocialItemWrapper>
+          <SocialItemWrapper>
+            <SocialItemHeader>
+              <div>
+                <Whatsapp />
+              </div>
+              <span>{t('WHATSAPP', 'Whatsapp')}</span>
+            </SocialItemHeader>
+            <SocialItemContent>
+              <ConvertInput
+                value={formState?.changes?.whatsapp_number ?? businessState?.business?.whatsapp_number}
+                handleChangeValue={(val) => handleChangeSwtich('whatsapp_number', val)}
+                originalURL={socialOriginalURL.whatsapp}
+                placeholder={t('USER_NAME', 'Username')}
+                name='whatsapp_number'
+              />
+            </SocialItemContent>
+          </SocialItemWrapper>
+          <SocialItemWrapper>
+            <SocialItemHeader>
+              <div>
+                <Snapchat />
+              </div>
+              <span>{t('SNAPCHAT', 'Snapchat')}</span>
+            </SocialItemHeader>
+            <SocialItemContent>
+              <ConvertInput
+                value={formState?.changes?.snapchat_profile ?? businessState?.business?.snapchat_profile}
+                handleChangeValue={(val) => handleChangeSwtich('snapchat_profile', val)}
+                originalURL={socialOriginalURL.snap_chat}
+                placeholder={t('USER_NAME', 'Username')}
+                name='snapchat_profile'
+              />
+            </SocialItemContent>
+          </SocialItemWrapper>
+        </SocialWrapper>
         <ActionsForm>
           <Button
             type='submit'
@@ -384,4 +516,39 @@ export const BusinessInformation = (props) => {
     UIComponent: BusinessInformationUI
   }
   return <BusinessFormDetailsController {...businessInformationProps} />
+}
+
+export const ConvertInput = (props) => {
+  const { value, handleChangeValue, originalURL, placeholder, name } = props
+
+  const inputRef = useRef()
+  let timeout1 = null
+
+  const handleChangeConvert = (e) => {
+    clearTimeout(timeout1)
+    const inputValue = convertValue(e.target.value)
+    const update = inputValue ? (originalURL + inputValue) : ''
+    timeout1 = setTimeout(() => {
+      handleChangeValue(update)
+      inputRef.current.value = inputValue
+    }, 750)
+  }
+
+  const convertValue = (value) => {
+    if (!value) return ''
+    const splitValue = value.split('/')
+    const updatedValue = splitValue[splitValue.length - 1] === '' ? splitValue[splitValue.length - 2] : splitValue[splitValue.length - 1]
+    return updatedValue
+  }
+
+  return (
+    <Input
+      name={name}
+      ref={inputRef}
+      placeholder={placeholder}
+      defaultValue={convertValue(value)}
+      onChange={handleChangeConvert}
+      autoComplete='off'
+    />
+  )
 }

@@ -311,3 +311,60 @@ export const PriceFilterItem = styled.div`
     }
   `}
 `
+
+export const SocialWrapper = styled.div`
+  margin-top: 20px;
+  padding-bottom: 20px;
+
+  > h2 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 0px;
+  }
+`
+
+export const SocialItemWrapper = styled.div`
+  margin-top: 37px;
+`
+
+export const SocialItemHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    border-radius: 3px;
+
+    svg {
+      height: 16px;
+      font-size: 16px;
+      color: ${props => props.theme.colors.headingColor};
+    }
+  }
+
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    margin-left: 12px;
+    ${props => props.theme.rtl && css`
+      margin-left: 0px;
+      margin-right: 12px;
+    `}
+  }
+`
+
+export const SocialItemContent = styled.div`
+  width: 100%;
+  input {
+    width: 100%;
+    border-radius: 8px;
+  }
+`
