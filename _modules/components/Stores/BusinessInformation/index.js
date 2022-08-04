@@ -393,7 +393,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       return handleChangeSwtich('facebook_profile', val);
     },
     originalURL: socialOriginalURL.facebook,
-    placeholder: t('USER_NAME', 'Username'),
+    placeholder: t('USER_OR_URL', 'User or url'),
     name: "facebook_profile"
   }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Instagram, null)), /*#__PURE__*/_react.default.createElement("span", null, t('INSTAGRAM', 'Instagram'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
     value: (_formState$changes$in = formState === null || formState === void 0 ? void 0 : (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.instagram_profile) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine29 = businessState.business) === null || _businessState$busine29 === void 0 ? void 0 : _businessState$busine29.instagram_profile,
@@ -401,7 +401,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       return handleChangeSwtich('instagram_profile', val);
     },
     originalURL: socialOriginalURL.instagram,
-    placeholder: t('USER_NAME', 'Username'),
+    placeholder: t('USER_OR_URL', 'User or url'),
     name: "instagram_profile"
   }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Tiktok, null)), /*#__PURE__*/_react.default.createElement("span", null, t('TIK_TOK', 'Tik tok'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
     value: (_formState$changes$ti = formState === null || formState === void 0 ? void 0 : (_formState$changes29 = formState.changes) === null || _formState$changes29 === void 0 ? void 0 : _formState$changes29.tiktok_profile) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine30 = businessState.business) === null || _businessState$busine30 === void 0 ? void 0 : _businessState$busine30.tiktok_profile,
@@ -409,7 +409,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       return handleChangeSwtich('tiktok_profile', val);
     },
     originalURL: socialOriginalURL.tiktok,
-    placeholder: t('USER_NAME', 'Username'),
+    placeholder: t('USER_OR_URL', 'User or url'),
     name: "tiktok_profile"
   }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pinterest, null)), /*#__PURE__*/_react.default.createElement("span", null, t('PINTEREST', 'Pinterest'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
     value: (_formState$changes$pi = formState === null || formState === void 0 ? void 0 : (_formState$changes30 = formState.changes) === null || _formState$changes30 === void 0 ? void 0 : _formState$changes30.pinterest_profile) !== null && _formState$changes$pi !== void 0 ? _formState$changes$pi : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine31 = businessState.business) === null || _businessState$busine31 === void 0 ? void 0 : _businessState$busine31.pinterest_profile,
@@ -417,7 +417,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       return handleChangeSwtich('pinterest_profile', val);
     },
     originalURL: socialOriginalURL.pinterest,
-    placeholder: t('USER_NAME', 'Username'),
+    placeholder: t('USER_OR_URL', 'User or url'),
     name: "pinterest_profile"
   }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Whatsapp, null)), /*#__PURE__*/_react.default.createElement("span", null, t('WHATSAPP', 'Whatsapp'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
     value: (_formState$changes$wh = formState === null || formState === void 0 ? void 0 : (_formState$changes31 = formState.changes) === null || _formState$changes31 === void 0 ? void 0 : _formState$changes31.whatsapp_number) !== null && _formState$changes$wh !== void 0 ? _formState$changes$wh : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine32 = businessState.business) === null || _businessState$busine32 === void 0 ? void 0 : _businessState$busine32.whatsapp_number,
@@ -425,7 +425,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       return handleChangeSwtich('whatsapp_number', val);
     },
     originalURL: socialOriginalURL.whatsapp,
-    placeholder: t('USER_NAME', 'Username'),
+    placeholder: t('PHONE_NUMBER', 'Phone number'),
     name: "whatsapp_number"
   }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Snapchat, null)), /*#__PURE__*/_react.default.createElement("span", null, t('SNAPCHAT', 'Snapchat'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
     value: (_formState$changes$sn = formState === null || formState === void 0 ? void 0 : (_formState$changes32 = formState.changes) === null || _formState$changes32 === void 0 ? void 0 : _formState$changes32.snapchat_profile) !== null && _formState$changes$sn !== void 0 ? _formState$changes$sn : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine33 = businessState.business) === null || _businessState$busine33 === void 0 ? void 0 : _businessState$busine33.snapchat_profile,
@@ -433,7 +433,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       return handleChangeSwtich('snapchat_profile', val);
     },
     originalURL: socialOriginalURL.snap_chat,
-    placeholder: t('USER_NAME', 'Username'),
+    placeholder: t('USER_OR_URL', 'User or url'),
     name: "snapchat_profile"
   })))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     type: "submit",
@@ -505,11 +505,22 @@ var ConvertInput = function ConvertInput(props) {
     return updatedValue;
   };
 
+  var checkKeyDown = function checkKeyDown(e) {
+    var keyCode = e.keyCode ? e.keyCode : e.which;
+
+    if (keyCode === 8 || keyCode === 46) {
+      setTimeout(function () {
+        if (inputRef.current.value === '') handleChangeValue('');
+      }, 1);
+    }
+  };
+
   return /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: name,
     ref: inputRef,
     placeholder: placeholder,
     defaultValue: convertValue(value),
+    onKeyDown: checkKeyDown,
     onChange: handleChangeConvert,
     autoComplete: "off"
   });

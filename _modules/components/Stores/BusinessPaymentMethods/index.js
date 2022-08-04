@@ -39,6 +39,8 @@ var _PaymentOptionPaypal = require("../PaymentOptionPaypal");
 
 var _PaymentOptionSquare = require("../PaymentOptionSquare");
 
+var _PaymentOptionMethods = require("../PaymentOptionMethods");
+
 var _BusinessWalletsList = require("../BusinessWalletsList");
 
 var _styles2 = require("./styles");
@@ -166,6 +168,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     value: 5,
     text: t('DRIVER_THRU', 'Driver thru')
   }];
+  var methodsPay = ['google_pay', 'apple_pay'];
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -304,7 +307,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     onClick: function onClick() {
       return handleTutorialContinue();
     }
-  }, t('CONTINUE', 'Continue'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square'].includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
+  }, t('CONTINUE', 'Continue'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square'].concat(methodsPay).includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
     sitesState: sitesState,
     open: isEdit,
     onClose: function onClose() {
@@ -320,6 +323,42 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption
+  }), selectedPaymethodGateway === 'apple_pay' && /*#__PURE__*/_react.default.createElement(_PaymentOptionMethods.PaymentOptionMethods, {
+    sitesState: sitesState,
+    open: isEdit,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    changesState: changesState,
+    orderTypes: orderTypes,
+    handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
+    cleanChangesState: cleanChangesState,
+    actionState: actionState,
+    handleChangeSandbox: handleChangeSandbox,
+    handleChangeInput: handleChangeInput,
+    handleSaveClick: handleSaveClick,
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
+    id: selectedPaymethodGateway,
+    title: "Apple pay"
+  }), selectedPaymethodGateway === 'google_pay' && /*#__PURE__*/_react.default.createElement(_PaymentOptionMethods.PaymentOptionMethods, {
+    sitesState: sitesState,
+    open: isEdit,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    changesState: changesState,
+    orderTypes: orderTypes,
+    handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
+    cleanChangesState: cleanChangesState,
+    actionState: actionState,
+    handleChangeSandbox: handleChangeSandbox,
+    handleChangeInput: handleChangeInput,
+    handleSaveClick: handleSaveClick,
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
+    id: selectedPaymethodGateway,
+    title: "Google pay"
   }), selectedPaymethodGateway === 'stripe_direct' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeDirect.PaymentOptionStripeDirect, {
     sitesState: sitesState,
     open: isEdit,
