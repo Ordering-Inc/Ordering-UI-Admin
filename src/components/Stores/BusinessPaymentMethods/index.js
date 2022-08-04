@@ -18,6 +18,7 @@ import { PaymethodOptionStripeRedirect } from '../PaymethodOptionStripeRedirect'
 import { PaymethodOptionStripeConnect } from '../PaymethodOptionStripeConnect'
 import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
 import { PaymentOptionSquare } from '../PaymentOptionSquare'
+import { PaymentOptionMethods } from '../PaymentOptionMethods'
 import { BusinessWalletsList } from '../BusinessWalletsList'
 
 import {
@@ -81,6 +82,8 @@ const BusinessPaymentMethodsUI = (props) => {
     { value: 4, text: t('CURBSIDE', 'Curbside') },
     { value: 5, text: t('DRIVER_THRU', 'Driver thru') }
   ]
+
+  const methodsPay = ['google_pay', 'apple_pay']
 
   const closeAlert = () => {
     setAlertState({
@@ -247,7 +250,8 @@ const BusinessPaymentMethodsUI = (props) => {
                 'paypal_express',
                 'stripe_redirect',
                 'stripe_connect',
-                'square'
+                'square',
+                ...methodsPay
               ].includes(selectedPaymethodGateway) && (
                 <PaymentOption
                   sitesState={sitesState}
@@ -263,6 +267,44 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeInput={handleChangeInput}
                   handleSaveClick={handleSaveClick}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                />
+              )}
+              {selectedPaymethodGateway === 'apple_pay' && (
+                <PaymentOptionMethods
+                  sitesState={sitesState}
+                  open={isEdit}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  changesState={changesState}
+                  orderTypes={orderTypes}
+                  handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                  cleanChangesState={cleanChangesState}
+                  actionState={actionState}
+                  handleChangeSandbox={handleChangeSandbox}
+                  handleChangeInput={handleChangeInput}
+                  handleSaveClick={handleSaveClick}
+                  handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                  id={selectedPaymethodGateway}
+                  title='Apple pay'
+                />
+              )}
+              {selectedPaymethodGateway === 'google_pay' && (
+                <PaymentOptionMethods
+                  sitesState={sitesState}
+                  open={isEdit}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  changesState={changesState}
+                  orderTypes={orderTypes}
+                  handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                  cleanChangesState={cleanChangesState}
+                  actionState={actionState}
+                  handleChangeSandbox={handleChangeSandbox}
+                  handleChangeInput={handleChangeInput}
+                  handleSaveClick={handleSaveClick}
+                  handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                  id={selectedPaymethodGateway}
+                  title='Google pay'
                 />
               )}
               {selectedPaymethodGateway === 'stripe_direct' && (
