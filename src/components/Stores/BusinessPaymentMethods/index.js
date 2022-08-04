@@ -152,7 +152,7 @@ const BusinessPaymentMethodsUI = (props) => {
     const updatedPaymethod = businessPaymethodsState.paymethods.find(paymethod => paymethod.paymethod_id === selectedBusinessPaymethod.paymethod_id)
     setSelectedBusinessPaymethod(updatedPaymethod)
   }, [businessPaymethodsState?.paymethods, selectedBusinessPaymethod])
-  console.log(selectedBusinessPaymethod)
+
   return (
     <MainContainer>
       <PaymentMethodsContainer isOpenWalletDetails={isOpenWalletDetails}>
