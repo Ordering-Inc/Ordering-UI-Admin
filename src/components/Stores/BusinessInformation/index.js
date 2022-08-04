@@ -382,7 +382,7 @@ const BusinessInformationUI = (props) => {
                 value={formState?.changes?.facebook_profile ?? businessState?.business?.facebook_profile}
                 handleChangeValue={(val) => handleChangeSwtich('facebook_profile', val)}
                 originalURL={socialOriginalURL.facebook}
-                placeholder={t('USER_NAME', 'Username')}
+                placeholder={t('USER_OR_URL', 'User or url')}
                 name='facebook_profile'
               />
             </SocialItemContent>
@@ -399,7 +399,7 @@ const BusinessInformationUI = (props) => {
                 value={formState?.changes?.instagram_profile ?? businessState?.business?.instagram_profile}
                 handleChangeValue={(val) => handleChangeSwtich('instagram_profile', val)}
                 originalURL={socialOriginalURL.instagram}
-                placeholder={t('USER_NAME', 'Username')}
+                placeholder={t('USER_OR_URL', 'User or url')}
                 name='instagram_profile'
               />
             </SocialItemContent>
@@ -416,7 +416,7 @@ const BusinessInformationUI = (props) => {
                 value={formState?.changes?.tiktok_profile ?? businessState?.business?.tiktok_profile}
                 handleChangeValue={(val) => handleChangeSwtich('tiktok_profile', val)}
                 originalURL={socialOriginalURL.tiktok}
-                placeholder={t('USER_NAME', 'Username')}
+                placeholder={t('USER_OR_URL', 'User or url')}
                 name='tiktok_profile'
               />
             </SocialItemContent>
@@ -433,7 +433,7 @@ const BusinessInformationUI = (props) => {
                 value={formState?.changes?.pinterest_profile ?? businessState?.business?.pinterest_profile}
                 handleChangeValue={(val) => handleChangeSwtich('pinterest_profile', val)}
                 originalURL={socialOriginalURL.pinterest}
-                placeholder={t('USER_NAME', 'Username')}
+                placeholder={t('USER_OR_URL', 'User or url')}
                 name='pinterest_profile'
               />
             </SocialItemContent>
@@ -450,7 +450,7 @@ const BusinessInformationUI = (props) => {
                 value={formState?.changes?.whatsapp_number ?? businessState?.business?.whatsapp_number}
                 handleChangeValue={(val) => handleChangeSwtich('whatsapp_number', val)}
                 originalURL={socialOriginalURL.whatsapp}
-                placeholder={t('USER_NAME', 'Username')}
+                placeholder={t('PHONE_NUMBER', 'Phone number')}
                 name='whatsapp_number'
               />
             </SocialItemContent>
@@ -467,7 +467,7 @@ const BusinessInformationUI = (props) => {
                 value={formState?.changes?.snapchat_profile ?? businessState?.business?.snapchat_profile}
                 handleChangeValue={(val) => handleChangeSwtich('snapchat_profile', val)}
                 originalURL={socialOriginalURL.snap_chat}
-                placeholder={t('USER_NAME', 'Username')}
+                placeholder={t('USER_OR_URL', 'User or url')}
                 name='snapchat_profile'
               />
             </SocialItemContent>
@@ -541,12 +541,22 @@ export const ConvertInput = (props) => {
     return updatedValue
   }
 
+  const checkKeyDown = (e) => {
+    const keyCode = e.keyCode ? e.keyCode : e.which
+    if (keyCode === 8 || keyCode === 46) {
+      setTimeout(() => {
+        if (inputRef.current.value === '') handleChangeValue('')
+      }, 1)
+    }
+  }
+
   return (
     <Input
       name={name}
       ref={inputRef}
       placeholder={placeholder}
       defaultValue={convertValue(value)}
+      onKeyDown={checkKeyDown}
       onChange={handleChangeConvert}
       autoComplete='off'
     />
