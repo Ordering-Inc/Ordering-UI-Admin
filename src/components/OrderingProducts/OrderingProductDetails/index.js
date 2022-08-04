@@ -68,10 +68,10 @@ const OrderingProductDetailsUI = (props) => {
   ]
   const availableProductUrls = [
     { key: 0, value: '/store/:business_slug/:category_slug/:product_slug' },
-    { key: 1, value: '/store/:category_slug/:product_slug?"<any>"=:business_slug' },
-    { key: 2, value: '/store/:business_slug?"<any>"=:category_id&"<any>"=:product_id' },
+    { key: 1, value: '/store/:category_slug/:product_slug?<any>=:business_slug' },
+    { key: 2, value: '/store/:business_slug?<any>=:category_id&<any>=:product_id' },
     { key: 3, value: '/:business_slug/:category_slug/:product_slug' },
-    { key: 4, value: '/:business_slug?"<any>"=:category_id&"<any>"=:product_id' }
+    { key: 4, value: '/:business_slug?<any>=:category_id&<any>=:product_id' }
   ]
 
   const moreOptions = [
