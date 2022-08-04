@@ -312,7 +312,7 @@ export const InfoContent = styled.div`
   position: absolute;
   top: 100%;
   z-index: 999;
-  background: ${props => props.theme.colors.backgroundInfo};
+  background: ${props => props.theme.colors.backgroundPage};
   border: 1px solid ${props => props.theme.colors.primary};
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
@@ -324,7 +324,6 @@ export const InfoContent = styled.div`
   transition: all 0.3s linear;
   visibility: hidden;
   opacity: 0;
-  /* display: none; */
   left: 0px;
   ${props => props.theme.rtl && css`
     left: 0px;
@@ -347,5 +346,6 @@ export const InfoTitle = styled.div`
 `
 
 export const Info = styled.div`
-  border-top: 1px solid gray;
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
+  padding: 3px 0;
 `

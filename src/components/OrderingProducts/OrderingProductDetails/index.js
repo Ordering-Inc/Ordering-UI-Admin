@@ -51,13 +51,28 @@ const OrderingProductDetailsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const { handleSubmit, register, errors } = useForm()
+  const { handleSubmit, register, errors, watch } = useForm()
+  const businessUrlTemplate = watch('business_url_template', '')
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const headerImageInputRef = useRef(null)
   const logoImageInputRef = useRef(null)
   const socialShareInputRef = useRef(null)
+
+  const availableBusinessUrls = [
+    { key: 0, value: '/:business_slug' },
+    { key: 1, value: '/store/:business_slug' },
+    { key: 2, value: '/store?<any>=:business_slug' }
+  ]
+  const availableProductUrls = [
+    { key: 0, value: '/store/:business_slug/:category_slug/:product_slug' },
+    { key: 1, value: '/store/:category_slug/:product_slug?"<any>"=:business_slug' },
+    { key: 2, value: '/store/:business_slug?"<any>"=:category_id&"<any>"=:product_id' },
+    { key: 3, value: '/:business_slug/:category_slug/:product_slug' },
+    { key: 4, value: '/:business_slug?"<any>"=:category_id&"<any>"=:product_id' }
+  ]
 
   const moreOptions = [
     { value: 0, content: t('DELETE', 'Delete') }
@@ -121,6 +136,23 @@ const OrderingProductDetailsUI = (props) => {
         handleDeleteSite()
       }
     })
+  }
+
+  const handleValidateProductUrl = (value) => {
+    if (businessUrlTemplate.includes('?')) {
+      const urls = businessUrlTemplate.split('?')
+      if (value.indexOf(urls[0]) === 0 && value.includes(urls[1])) {
+        return true
+      } else {
+        return t('VALIDATE_PRODUCT_TEMPLATE_URL', 'The product url template do not match with business url template')
+      }
+    } else {
+      if (value.indexOf(businessUrlTemplate) === 0) {
+        return true
+      } else {
+        return t('VALIDATE_PRODUCT_TEMPLATE_URL', 'The product url template do not match with business url template')
+      }
+    }
   }
 
   useEffect(() => {
@@ -326,7 +358,7 @@ const OrderingProductDetailsUI = (props) => {
               type='text'
               name='reset_password_url_template'
               placeholder={t('URL', 'Url')}
-              value={
+              defaultValue={
                 formState?.changes?.reset_password_url_template ?? siteState.site?.reset_password_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -338,7 +370,7 @@ const OrderingProductDetailsUI = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='track_order_url_template'
-              value={
+              defaultValue={
                 formState?.changes?.track_order_url_template ?? siteState.site?.track_order_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -350,7 +382,7 @@ const OrderingProductDetailsUI = (props) => {
               name='description'
               rows={5}
               placeholder={t('SHORT_PROMOTION_ABOUT', 'Write a little description')}
-              value={
+              defaultValue={
                 formState?.changes?.description ?? siteState.site?.description ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -362,7 +394,7 @@ const OrderingProductDetailsUI = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='checkout_url_template'
-              value={
+              defaultValue={
                 formState?.changes?.checkout_url_template ?? siteState.site?.checkout_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -374,7 +406,7 @@ const OrderingProductDetailsUI = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='cart_url_template'
-              value={
+              defaultValue={
                 formState?.changes?.cart_url_template ?? siteState.site?.cart_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -387,9 +419,9 @@ const OrderingProductDetailsUI = (props) => {
                 <InfoCircle />
                 <InfoContent>
                   <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
-                  <Info>:business_slug</Info>
-                  <Info>store/:business_slug</Info>
-                  <Info>store/?{'<any>'}=:business_slug</Info>
+                  {availableBusinessUrls.map(url => (
+                    <Info key={url.key}>{url.value}</Info>
+                  ))}
                 </InfoContent>
               </InfoWrapper>
             </LabelHeader>
@@ -397,13 +429,13 @@ const OrderingProductDetailsUI = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='business_url_template'
-              value={
+              defaultValue={
                 formState?.changes?.business_url_template ?? siteState.site?.business_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(store\/)?((:business_slug$)|(\?[a-zA-Z]+=:business_slug$))$/g,
+                  value: /(^\/)(store)?((\/?:business_slug$)|(\/?\?[a-zA-Z]+=:business_slug$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
@@ -430,7 +462,7 @@ const OrderingProductDetailsUI = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='category_url_template'
-              value={
+              defaultValue={
                 formState?.changes?.category_url_template ?? siteState.site?.category_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -452,12 +484,9 @@ const OrderingProductDetailsUI = (props) => {
                 <InfoCircle />
                 <InfoContent>
                   <InfoTitle>{t('AVAILABLE_FORMATS', 'Available Formats')}</InfoTitle>
-                  <Info>store/:business_slug/:category_slug/:product_slug</Info>
-                  <Info>store/:category_slug/:product_slug?{'<any>'}=:business_slug</Info>
-                  <Info>store/:business_slug?{'<any>'}=:category_id&{'<any>'}=:product_id</Info>
-                  <Info>:business_slug/:category_slug/:product_slug</Info>
-                  <Info>:category_slug/:product_slug?{'<any>'}=:business_slug</Info>
-                  <Info>:business_slug?{'<any>'}=:category_id&{'<any>'}=:product_id</Info>
+                  {availableProductUrls.map(url => (
+                    <Info key={url.key}>{url.value}</Info>
+                  ))}
                 </InfoContent>
               </InfoWrapper>
             </LabelHeader>
@@ -465,18 +494,19 @@ const OrderingProductDetailsUI = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='product_url_template'
-              value={
+              defaultValue={
                 formState?.changes?.product_url_template ?? siteState.site?.product_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
-                  value: /(store\/)?((:business_slug\/:category_slug\/:product_slug$)|(:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug$)|(:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id$))$/g,
+                  value: /(^\/)(store\/)?((:business_slug\/:category_slug\/:product_slug$)|(:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug$)|(:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id$))$/g,
                   message: t(
                     'VALIDATION_ERROR_ACTIVE_URL',
                     'The _attribute_ is not a valid URL.'
                   ).replace('_attribute_', t('PRODUCT_URL_TEMPLATE', 'Product url template'))
-                }
+                },
+                validate: handleValidateProductUrl
               })}
             />
           </FormControl>
