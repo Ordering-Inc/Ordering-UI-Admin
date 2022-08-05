@@ -70,7 +70,10 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
   var _useForm = (0, _reactHookForm.useForm)(),
       handleSubmit = _useForm.handleSubmit,
       register = _useForm.register,
-      errors = _useForm.errors;
+      errors = _useForm.errors,
+      watch = _useForm.watch;
+
+  var businessUrlTemplate = watch('business_url_template', '');
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -92,6 +95,32 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
   var headerImageInputRef = (0, _react.useRef)(null);
   var logoImageInputRef = (0, _react.useRef)(null);
   var socialShareInputRef = (0, _react.useRef)(null);
+  var availableBusinessUrls = [{
+    key: 0,
+    value: '/:business_slug'
+  }, {
+    key: 1,
+    value: '/store/:business_slug'
+  }, {
+    key: 2,
+    value: '/store?<any>=:business_slug'
+  }];
+  var availableProductUrls = [{
+    key: 0,
+    value: '/store/:business_slug/:category_slug/:product_slug'
+  }, {
+    key: 1,
+    value: '/store/:category_slug/:product_slug?<any>=:business_slug'
+  }, {
+    key: 2,
+    value: '/store/:business_slug?<any>=:category_id&<any>=:product_id'
+  }, {
+    key: 3,
+    value: '/:business_slug/:category_slug/:product_slug'
+  }, {
+    key: 4,
+    value: '/:business_slug?<any>=:category_id&<any>=:product_id'
+  }];
   var moreOptions = [{
     value: 0,
     content: t('DELETE', 'Delete')
@@ -163,6 +192,24 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
         handleDeleteSite();
       }
     });
+  };
+
+  var handleValidateProductUrl = function handleValidateProductUrl(value) {
+    if (businessUrlTemplate.includes('?')) {
+      var urls = businessUrlTemplate.split('?');
+
+      if (value.indexOf(urls[0]) === 0 && value.includes(urls[1])) {
+        return true;
+      } else {
+        return t('VALIDATE_PRODUCT_TEMPLATE_URL', 'The product url template do not match with business url template');
+      }
+    } else {
+      if (value.indexOf(businessUrlTemplate) === 0) {
+        return true;
+      } else {
+        return t('VALIDATE_PRODUCT_TEMPLATE_URL', 'The product url template do not match with business url template');
+      }
+    }
   };
 
   (0, _react.useEffect)(function () {
@@ -338,7 +385,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     name: "reset_password_url_template",
     placeholder: t('URL', 'Url'),
-    value: (_ref4 = (_formState$changes$re = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.reset_password_url_template) !== null && _formState$changes$re !== void 0 ? _formState$changes$re : (_siteState$site11 = siteState.site) === null || _siteState$site11 === void 0 ? void 0 : _siteState$site11.reset_password_url_template) !== null && _ref4 !== void 0 ? _ref4 : '',
+    defaultValue: (_ref4 = (_formState$changes$re = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.reset_password_url_template) !== null && _formState$changes$re !== void 0 ? _formState$changes$re : (_siteState$site11 = siteState.site) === null || _siteState$site11 === void 0 ? void 0 : _siteState$site11.reset_password_url_template) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -348,7 +395,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "track_order_url_template",
-    value: (_ref5 = (_formState$changes$tr = formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.track_order_url_template) !== null && _formState$changes$tr !== void 0 ? _formState$changes$tr : (_siteState$site12 = siteState.site) === null || _siteState$site12 === void 0 ? void 0 : _siteState$site12.track_order_url_template) !== null && _ref5 !== void 0 ? _ref5 : '',
+    defaultValue: (_ref5 = (_formState$changes$tr = formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.track_order_url_template) !== null && _formState$changes$tr !== void 0 ? _formState$changes$tr : (_siteState$site12 = siteState.site) === null || _siteState$site12 === void 0 ? void 0 : _siteState$site12.track_order_url_template) !== null && _ref5 !== void 0 ? _ref5 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -358,7 +405,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     name: "description",
     rows: 5,
     placeholder: t('SHORT_PROMOTION_ABOUT', 'Write a little description'),
-    value: (_ref6 = (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : (_siteState$site13 = siteState.site) === null || _siteState$site13 === void 0 ? void 0 : _siteState$site13.description) !== null && _ref6 !== void 0 ? _ref6 : '',
+    defaultValue: (_ref6 = (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : (_siteState$site13 = siteState.site) === null || _siteState$site13 === void 0 ? void 0 : _siteState$site13.description) !== null && _ref6 !== void 0 ? _ref6 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -368,7 +415,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "checkout_url_template",
-    value: (_ref7 = (_formState$changes$ch = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.checkout_url_template) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : (_siteState$site14 = siteState.site) === null || _siteState$site14 === void 0 ? void 0 : _siteState$site14.checkout_url_template) !== null && _ref7 !== void 0 ? _ref7 : '',
+    defaultValue: (_ref7 = (_formState$changes$ch = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.checkout_url_template) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : (_siteState$site14 = siteState.site) === null || _siteState$site14 === void 0 ? void 0 : _siteState$site14.checkout_url_template) !== null && _ref7 !== void 0 ? _ref7 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -378,23 +425,27 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "cart_url_template",
-    value: (_ref8 = (_formState$changes$ca = formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.cart_url_template) !== null && _formState$changes$ca !== void 0 ? _formState$changes$ca : (_siteState$site15 = siteState.site) === null || _siteState$site15 === void 0 ? void 0 : _siteState$site15.cart_url_template) !== null && _ref8 !== void 0 ? _ref8 : '',
+    defaultValue: (_ref8 = (_formState$changes$ca = formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.cart_url_template) !== null && _formState$changes$ca !== void 0 ? _formState$changes$ca : (_siteState$site15 = siteState.site) === null || _siteState$site15 === void 0 ? void 0 : _siteState$site15.cart_url_template) !== null && _ref8 !== void 0 ? _ref8 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.LabelHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('BUSINESS_URL_TEMPLATE', 'Business url template')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoTitle, null, t('AVAILABLE_FORMATS', 'Available Formats')), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":business_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:business_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/?", '<any>', "=:business_slug")))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LabelHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('BUSINESS_URL_TEMPLATE', 'Business url template')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoTitle, null, t('AVAILABLE_FORMATS', 'Available Formats')), availableBusinessUrls.map(function (url) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.Info, {
+      key: url.key
+    }, url.value);
+  })))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "business_url_template",
-    value: (_ref9 = (_formState$changes$bu = formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.business_url_template) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : (_siteState$site16 = siteState.site) === null || _siteState$site16 === void 0 ? void 0 : _siteState$site16.business_url_template) !== null && _ref9 !== void 0 ? _ref9 : '',
+    defaultValue: (_ref9 = (_formState$changes$bu = formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.business_url_template) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : (_siteState$site16 = siteState.site) === null || _siteState$site16 === void 0 ? void 0 : _siteState$site16.business_url_template) !== null && _ref9 !== void 0 ? _ref9 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
     ref: register({
       pattern: {
-        value: /(store\/)?((:business_slug$)|(\?[a-zA-Z]+=:business_slug$))$/g,
+        value: /(^\/)(store)?((\/?:business_slug$)|(\/?\?[a-zA-Z]+=:business_slug$))$/g,
         message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('BUSINESS_URL_TEMPLATE', 'Business url template'))
       }
     })
@@ -404,7 +455,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "category_url_template",
-    value: (_ref10 = (_formState$changes$ca2 = formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.category_url_template) !== null && _formState$changes$ca2 !== void 0 ? _formState$changes$ca2 : (_siteState$site17 = siteState.site) === null || _siteState$site17 === void 0 ? void 0 : _siteState$site17.category_url_template) !== null && _ref10 !== void 0 ? _ref10 : '',
+    defaultValue: (_ref10 = (_formState$changes$ca2 = formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.category_url_template) !== null && _formState$changes$ca2 !== void 0 ? _formState$changes$ca2 : (_siteState$site17 = siteState.site) === null || _siteState$site17 === void 0 ? void 0 : _siteState$site17.category_url_template) !== null && _ref10 !== void 0 ? _ref10 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -416,19 +467,24 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     })
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.LabelHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('PRODUCT_URL_TEMPLATE', 'Product url template')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoTitle, null, t('AVAILABLE_FORMATS', 'Available Formats')), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:business_slug/:category_slug/:product_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:category_slug/:product_slug?", '<any>', "=:business_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, "store/:business_slug?", '<any>', "=:category_id&", '<any>', "=:product_id"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":business_slug/:category_slug/:product_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":category_slug/:product_slug?", '<any>', "=:business_slug"), /*#__PURE__*/_react.default.createElement(_styles2.Info, null, ":business_slug?", '<any>', "=:category_id&", '<any>', "=:product_id")))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LabelHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('PRODUCT_URL_TEMPLATE', 'Product url template')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoTitle, null, t('AVAILABLE_FORMATS', 'Available Formats')), availableProductUrls.map(function (url) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.Info, {
+      key: url.key
+    }, url.value);
+  })))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "product_url_template",
-    value: (_ref11 = (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.product_url_template) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_siteState$site18 = siteState.site) === null || _siteState$site18 === void 0 ? void 0 : _siteState$site18.product_url_template) !== null && _ref11 !== void 0 ? _ref11 : '',
+    defaultValue: (_ref11 = (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.product_url_template) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_siteState$site18 = siteState.site) === null || _siteState$site18 === void 0 ? void 0 : _siteState$site18.product_url_template) !== null && _ref11 !== void 0 ? _ref11 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
     ref: register({
       pattern: {
-        value: /(store\/)?((:business_slug\/:category_slug\/:product_slug$)|(:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug$)|(:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id$))$/g,
+        value: /(^\/)(store\/)?((:business_slug\/:category_slug\/:product_slug$)|(:category_slug\/:product_slug\?[a-zA-Z]+=:business_slug$)|(:business_slug\?[a-zA-Z]+=:category_id&[a-zA-Z]+=:product_id$))$/g,
         message: t('VALIDATION_ERROR_ACTIVE_URL', 'The _attribute_ is not a valid URL.').replace('_attribute_', t('PRODUCT_URL_TEMPLATE', 'Product url template'))
-      }
+      },
+      validate: handleValidateProductUrl
     })
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
     className: "col-md-12"

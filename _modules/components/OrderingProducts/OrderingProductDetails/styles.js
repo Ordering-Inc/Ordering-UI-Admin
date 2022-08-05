@@ -134,8 +134,8 @@ var InfoWrapper = _styledComponents.default.div(_templateObject31 || (_templateO
 
 exports.InfoWrapper = InfoWrapper;
 
-var InfoContent = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 100%;\n  z-index: 999;\n  background: ", ";\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  padding: 8px 12px;\n  font-size: 12px;\n  line-height: 18px;\n  min-width: 300px;\n  transition: all 0.3s linear;\n  visibility: hidden;\n  opacity: 0;\n  /* display: none; */\n  left: 0px;\n  ", "\n\n  @media (min-width: 576px) {\n    min-width: 450px;\n    padding: 12px 15px;\n    ", "\n  }\n"])), function (props) {
-  return props.theme.colors.backgroundInfo;
+var InfoContent = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 100%;\n  z-index: 999;\n  background: ", ";\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  padding: 8px 12px;\n  font-size: 12px;\n  line-height: 18px;\n  min-width: 300px;\n  transition: all 0.3s linear;\n  visibility: hidden;\n  opacity: 0;\n  left: 0px;\n  ", "\n\n  @media (min-width: 576px) {\n    min-width: 450px;\n    padding: 12px 15px;\n    ", "\n  }\n"])), function (props) {
+  return props.theme.colors.backgroundPage;
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
@@ -150,6 +150,8 @@ var InfoTitle = _styledComponents.default.div(_templateObject37 || (_templateObj
 
 exports.InfoTitle = InfoTitle;
 
-var Info = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  border-top: 1px solid gray;\n"])));
+var Info = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  border-top: 1px solid ", ";\n  padding: 3px 0;\n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
 
 exports.Info = Info;
