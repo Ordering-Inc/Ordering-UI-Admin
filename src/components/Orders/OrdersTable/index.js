@@ -510,9 +510,7 @@ export const OrdersTable = (props) => {
                         )}
                         {allowColumns?.dateTime && (
                           <p className='date'>
-                            {order?.delivery_datetime_utc
-                              ? parseDate(order?.delivery_datetime_utc)
-                              : parseDate(order?.delivery_datetime, { utc: false })}
+                            {parseDate(order?.delivery_datetime, { utc: false })}
                           </p>
                         )}
                       </div>
