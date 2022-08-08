@@ -37,7 +37,6 @@ const OrderDetailsUI = (props) => {
   const {
     isSelectedOrders,
     open,
-    driversList,
     handleBackRedirect,
     handleUpdateOrderStatus,
     isTourOpen,
@@ -379,7 +378,6 @@ const OrderDetailsUI = (props) => {
               order={order}
               extraOpen={extraOpen}
               unreadAlert={unreadAlert}
-              driversList={driversList}
               isTourOpen={isTourOpen}
               setCurrentTourStep={setCurrentTourStep}
               handleOpenMessages={handleOpenMessages}
@@ -529,7 +527,6 @@ export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,
     asDashboard: true,
-    driversList: props.driversList,
     UIComponent: OrderDetailsUI
   }
 
