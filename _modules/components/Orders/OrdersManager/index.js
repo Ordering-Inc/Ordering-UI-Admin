@@ -317,7 +317,6 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     open: isOpenOrderDetail,
     order: detailsOrder,
     orderId: orderDetailId,
-    driversList: driversList,
     isTourOpen: isTourOpen,
     onClose: function onClose() {
       return handleBackRedirect();
