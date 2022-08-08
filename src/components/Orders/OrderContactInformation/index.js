@@ -27,7 +27,6 @@ import {
 export const OrderContactInformation = (props) => {
   const {
     order,
-    driversList,
     isTourOpen,
     setCurrentTourStep,
     handleOpenMessages,
@@ -216,13 +215,14 @@ export const OrderContactInformation = (props) => {
             <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
             <DriverSelector
               small
-              drivers={driversList.drivers}
               isPhoneView
               defaultValue={order?.driver?.id ? order.driver.id : 'default'}
               order={order}
               isTourOpen={isTourOpen}
               setCurrentTourStep={setCurrentTourStep}
               handleOpenMessages={handleOpenMessages}
+              isOrderDrivers
+              orderId={order?.id}
             />
           </DriverSelectorContainer>
           <DriverInfoContainer>
