@@ -92,6 +92,7 @@ export const ThemeProvider = ({ children, ...props }) => {
       width: fit-content;
       min-width: 200px;
       font-size: 14px;
+      position: fixed;
     }
 
     #___reactour {

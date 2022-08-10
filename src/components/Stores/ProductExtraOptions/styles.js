@@ -234,6 +234,14 @@ export const OptionItem = styled.div`
     border-top: 1px solid ${props => props.theme.colors.primary};
     border-bottom: 1px solid ${props => props.theme.colors.primary};
   `}
+
+  ${({ isDragOver }) => isDragOver && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
+  `}
+
+  ${({ isBorderBottom }) => isBorderBottom && css`
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+  `}
 `
 export const MinimumPurchase = styled.div`
   min-width: 80px;
@@ -262,5 +270,17 @@ export const ArrowWrpper = styled.div`
     font-size: 13px;
     color: ${props => props.theme.colors.secundaryLight};
     margin: 0 5px;
+  }
+`
+export const DragImageWrapper = styled.div`
+  img {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
+    &:hover {
+      cursor: grab;
+    }
   }
 `

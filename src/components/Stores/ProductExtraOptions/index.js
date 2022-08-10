@@ -26,7 +26,8 @@ import {
   OptionItem,
   MinimumPurchase,
   MaxPurchase,
-  ArrowWrpper
+  ArrowWrpper,
+  DragImageWrapper
 } from './styles'
 
 const ProductExtraOptionsUI = (props) => {
@@ -51,7 +52,14 @@ const ProductExtraOptionsUI = (props) => {
     setOpenModal,
     handleOpenModal,
     handleChangeExtraName,
-    handleChangeItem
+    handleChangeItem,
+
+    dragoverOptionId,
+    isOptionsBottom,
+    handleDragStart,
+    hanldeDragOver,
+    handleDrop,
+    handleDragEnd
   } = props
 
   const theme = useTheme()
@@ -232,29 +240,46 @@ const ProductExtraOptionsUI = (props) => {
             <MaxPurchase isHeader>{t('MAX', 'Max')}</MaxPurchase>
             <ArrowWrpper />
           </OptionItem>
-          {extraState.extra?.options && extraState.extra?.options.map(option => (
-            <OptionItem
-              key={option.id}
-              active={option.id === curOption?.id}
-              onClick={() => handleOpenModal(option, 'edit')}
-            >
-              <OptionNameContainer>
-                <OptionImage>
-                  {option?.image ? (
-                    <img src={option?.image} alt='option image' loading='lazy' />
-                  ) : (
-                    <ImageIcon />
-                  )}
-                </OptionImage>
-                <span>{option.name}</span>
-              </OptionNameContainer>
-              <MinimumPurchase>{option?.min}</MinimumPurchase>
-              <MaxPurchase>{option?.max}</MaxPurchase>
-              <ArrowWrpper>
-                <ChevronRight />
-              </ArrowWrpper>
-            </OptionItem>
-          ))}
+          {extraState.extra?.options && extraState.extra?.options.sort((a, b) => a.rank - b.rank).map((option, index) => {
+            const isLastOption = index === extraState.extra?.options.length - 1
+            return (
+              <OptionItem
+                key={option.id}
+                active={option.id === curOption?.id}
+                onClick={() => handleOpenModal(option, 'edit')}
+                isDragOver={dragoverOptionId === option.id}
+                isBorderBottom={isOptionsBottom && isLastOption}
+                onDragOver={e => hanldeDragOver(e, option, isLastOption)}
+                onDrop={e => handleDrop(e, option)}
+                onDragEnd={handleDragEnd}
+                className='draggable-option'
+              >
+                <OptionNameContainer>
+                  <DragImageWrapper>
+                    <img
+                      src={theme.images.icons?.sixDots}
+                      alt='six dots'
+                      draggable
+                      onDragStart={e => handleDragStart(e, option)}
+                    />
+                  </DragImageWrapper>
+                  <OptionImage>
+                    {option?.image ? (
+                      <img src={option?.image} alt='option image' loading='lazy' />
+                    ) : (
+                      <ImageIcon />
+                    )}
+                  </OptionImage>
+                  <span>{option.name}</span>
+                </OptionNameContainer>
+                <MinimumPurchase>{option?.min}</MinimumPurchase>
+                <MaxPurchase>{option?.max}</MaxPurchase>
+                <ArrowWrpper>
+                  <ChevronRight />
+                </ArrowWrpper>
+              </OptionItem>
+            )
+          })}
         </OptionsList>
 
         <AddOptionForm

@@ -53,7 +53,6 @@ const ProductExtraOptionDetailsUI = (props) => {
     handleDeteteSubOption,
     handleOptionSetting,
     settingChangeState,
-
     conditionalOptions,
     conditionalSubOptions,
     conditionalOptionId,
@@ -70,7 +69,14 @@ const ProductExtraOptionDetailsUI = (props) => {
     isMaxError,
     handleChangeItem,
     isAddForm,
-    setIsAddForm
+    setIsAddForm,
+
+    dragoverSubOptionId,
+    isSubOptionsBottom,
+    handleDragStart,
+    hanldeDragOver,
+    handleDrop,
+    handleDragEnd
   } = props
 
   const [, t] = useLanguage()
@@ -198,7 +204,7 @@ const ProductExtraOptionDetailsUI = (props) => {
       <ModifierOptionsContainer>
         <h2>{t('MODIFIER_OPTIONS', 'Modifier options')}</h2>
         <SubOptionContainer>
-          <LeftSubOptionContent>
+          <LeftSubOptionContent header>
             <SubOptionImage />
             <InputWrapper header>
               <label>{t('NAME', 'Name')}</label>
@@ -228,26 +234,36 @@ const ProductExtraOptionDetailsUI = (props) => {
             <ActionsContainer header />
           </RightSubOptionContent>
         </SubOptionContainer>
-        {optionState?.option?.suboptions?.map(subOption => (
-          <ProductExtraSuboption
-            key={subOption.id}
-            subOption={subOption}
-            optionState={optionState}
-            editSubOptionId={editSubOptionId}
-            settingChangeState={settingChangeState}
-            changesState={changesState}
-            setSelectedSubOptionId={setSelectedSubOptionId}
-            openModal={openModal}
-            setOpenModal={setOpenModal}
-            handleChangeDefaultSuboption={handleChangeDefaultSuboption}
-            handleDeteteSubOption={handleDeteteSubOption}
-            handleUpdateSubOption={handleUpdateSubOption}
-          />
-        ))}
+        {optionState?.option?.suboptions?.sort((a, b) => a.rank - b.rank).map((subOption, index) => {
+          const isLastSubOption = index === optionState?.option?.suboptions.length - 1
+          return (
+            <ProductExtraSuboption
+              key={subOption.id}
+              subOption={subOption}
+              optionState={optionState}
+              editSubOptionId={editSubOptionId}
+              settingChangeState={settingChangeState}
+              changesState={changesState}
+              setSelectedSubOptionId={setSelectedSubOptionId}
+              openModal={openModal}
+              setOpenModal={setOpenModal}
+              handleChangeDefaultSuboption={handleChangeDefaultSuboption}
+              handleDeteteSubOption={handleDeteteSubOption}
+              handleUpdateSubOption={handleUpdateSubOption}
+              isLastSubOption={isLastSubOption}
+              dragoverSubOptionId={dragoverSubOptionId}
+              isSubOptionsBottom={isSubOptionsBottom}
+              handleDragStart={handleDragStart}
+              hanldeDragOver={hanldeDragOver}
+              handleDrop={handleDrop}
+              handleDragEnd={handleDragEnd}
+            />
+          )
+        })}
 
         {isAddForm && (
           <AdddSubOptionForm onSubmit={handleSubmit(handleAddOption)}>
-            <LeftSubOptionContent>
+            <LeftSubOptionContent header>
               <Controller
                 name='image'
                 control={control}
