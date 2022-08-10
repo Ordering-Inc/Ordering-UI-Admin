@@ -68,7 +68,6 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
 
   var isSelectedOrders = props.isSelectedOrders,
       open = props.open,
-      driversList = props.driversList,
       handleBackRedirect = props.handleBackRedirect,
       handleUpdateOrderStatus = props.handleUpdateOrderStatus,
       isTourOpen = props.isTourOpen,
@@ -571,7 +570,6 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     order: order,
     extraOpen: extraOpen,
     unreadAlert: unreadAlert,
-    driversList: driversList,
     isTourOpen: isTourOpen,
     setCurrentTourStep: setCurrentTourStep,
     handleOpenMessages: handleOpenMessages
@@ -677,7 +675,6 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
 var OrderDetails = function OrderDetails(props) {
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     asDashboard: true,
-    driversList: props.driversList,
     UIComponent: OrderDetailsUI
   });
 

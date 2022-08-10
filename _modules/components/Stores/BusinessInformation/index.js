@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.BusinessInformation = void 0;
+exports.ConvertInput = exports.BusinessInformation = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -52,7 +52,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BusinessInformationUI = function BusinessInformationUI(props) {
-  var _formState$changes, _formState$result3, _businessState$busine2, _businessState$busine3, _formState$changes2, _formState$changes3, _formState$changes4, _formState$result4, _businessState$busine4, _businessState$busine5, _formState$changes5, _formState$changes6, _formState$changes$na, _formState$changes7, _businessState$busine6, _formState$changes$de, _formState$changes8, _businessState$busine7, _formState$changes$ph, _formState$changes9, _businessState$busine8, _formState$changes$ce, _formState$changes10, _businessState$busine9, _businessState$busine10, _businessState$busine11, _businessState$busine12, _formState$changes11, _formState$changes11$, _formState$changes12, _formState$changes12$, _businessState$busine13, _businessState$busine14, _formState$changes$ri, _formState$changes13, _formState$changes13$, _businessState$busine15, _businessState$busine16, _businessState$busine17, _formState$changes14, _formState$changes14$, _formState$changes15, _formState$changes15$, _businessState$busine18, _businessState$busine19, _formState$changes$ri2, _formState$changes16, _formState$changes16$, _businessState$busine20, _businessState$busine21;
+  var _formState$changes5, _formState$result3, _businessState$busine2, _businessState$busine3, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result4, _businessState$busine4, _businessState$busine5, _formState$changes9, _formState$changes10, _formState$changes$na, _formState$changes11, _businessState$busine6, _formState$changes$de, _formState$changes12, _businessState$busine7, _formState$changes$ph, _formState$changes13, _businessState$busine8, _formState$changes$ce, _formState$changes14, _businessState$busine9, _businessState$busine10, _businessState$busine11, _businessState$busine12, _formState$changes15, _formState$changes15$, _formState$changes16, _formState$changes16$, _businessState$busine13, _businessState$busine14, _formState$changes$ri, _formState$changes17, _formState$changes17$, _businessState$busine15, _businessState$busine16, _businessState$busine17, _formState$changes18, _formState$changes18$, _formState$changes19, _formState$changes19$, _businessState$busine18, _businessState$busine19, _formState$changes$ri2, _formState$changes20, _formState$changes20$, _businessState$busine20, _businessState$busine21, _formState$changes$fa, _formState$changes27, _businessState$busine28, _formState$changes$in, _formState$changes28, _businessState$busine29, _formState$changes$ti, _formState$changes29, _businessState$busine30, _formState$changes$pi, _formState$changes30, _businessState$busine31, _formState$changes$wh, _formState$changes31, _businessState$busine32, _formState$changes$sn, _formState$changes32, _businessState$busine33;
 
   var formState = props.formState,
       businessState = props.businessState,
@@ -103,6 +103,14 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     key: '5',
     value: '$$$$$'
   }];
+  var socialOriginalURL = {
+    facebook: 'https://www.facebook.com/',
+    instagram: 'https://www.instagram.com/',
+    tiktok: 'https://www.tiktok.com/',
+    snap_chat: 'https://www.snapchat.com/add/',
+    pinterest: 'https://www.pinterest.com/',
+    whatsapp: 'https://wa.me/'
+  };
 
   var handleClickImage = function handleClickImage(type) {
     if (type === 'header') {
@@ -164,6 +172,24 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
 
   var onSubmit = function onSubmit() {
     if (Object.keys(formState.changes).length > 0) {
+      var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4;
+
+      if (formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.whatsapp_number && (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.whatsapp_number.search(/^https:\/\/wa\.me\/\+?\d+$/)) === -1) {
+        setAlertState({
+          open: true,
+          content: t('WHATS_APP_NUMBER_NOT_VALID', 'Whatsapp number is not valid')
+        });
+        return;
+      }
+
+      if (formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.tiktok_profile && (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.tiktok_profile.search(/^https:\/\/www\.tiktok\.com\/@.+$/)) === -1) {
+        setAlertState({
+          open: true,
+          content: t('TIKTOK_USERNAME_NOT_VALID', 'TikTok user name is not valid')
+        });
+        return;
+      }
+
       handleButtonUpdateClick();
     }
   };
@@ -236,12 +262,12 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.header) || ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) === 'Network Error' || formState.result.error ? (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.header) && /*#__PURE__*/_react.default.createElement("img", {
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.header) || ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) === 'Network Error' || formState.result.error ? (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.header) && /*#__PURE__*/_react.default.createElement("img", {
     src: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.header,
     alt: "header image",
     loading: "lazy"
-  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.header) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.header,
+  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.header) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.header,
     alt: "header image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), /*#__PURE__*/_react.default.createElement(_styles2.LogoImage, {
@@ -263,12 +289,12 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.logo) || ((_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result) === 'Network Error' || formState.result.error ? (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.logo) && /*#__PURE__*/_react.default.createElement("img", {
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes8 = formState.changes) !== null && _formState$changes8 !== void 0 && _formState$changes8.logo) || ((_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result) === 'Network Error' || formState.result.error ? (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.logo) && /*#__PURE__*/_react.default.createElement("img", {
     src: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.logo,
     alt: "logo image",
     loading: "lazy"
-  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.logo) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.logo,
+  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.logo) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.logo,
     alt: "logo image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
@@ -278,7 +304,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     placeholder: t('Name', 'name'),
-    defaultValue: (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.name,
+    defaultValue: (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.name,
     onChange: handleChangeInput,
     ref: formMethods.register({
       required: t('BUSINESS_NAME_REQUIRED', 'Business name is required')
@@ -288,21 +314,21 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHORT_DESCRIPTION', 'Short description')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "description",
     placeholder: t('TYPE_BUSINESS_SHORT_DESCRIPTION', 'Write a little description'),
-    defaultValue: (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.description,
+    defaultValue: (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.description,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.PhoneWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PHONE_NUMBER', 'Phone number')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "phone",
     placeholder: "(000) 0000 000",
-    defaultValue: (_formState$changes$ph = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.phone) !== null && _formState$changes$ph !== void 0 ? _formState$changes$ph : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine8 = businessState.business) === null || _businessState$busine8 === void 0 ? void 0 : _businessState$busine8.phone,
+    defaultValue: (_formState$changes$ph = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.phone) !== null && _formState$changes$ph !== void 0 ? _formState$changes$ph : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine8 = businessState.business) === null || _businessState$busine8 === void 0 ? void 0 : _businessState$busine8.phone,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MOBILE_NUMBER', 'Mobile number'), " ", /*#__PURE__*/_react.default.createElement("span", null, t('OPTIONAL', 'Optional'))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "cellphone",
     placeholder: "(000) 0000 000",
-    defaultValue: (_formState$changes$ce = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.cellphone) !== null && _formState$changes$ce !== void 0 ? _formState$changes$ce : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine9 = businessState.business) === null || _businessState$busine9 === void 0 ? void 0 : _businessState$busine9.cellphone,
+    defaultValue: (_formState$changes$ce = formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.cellphone) !== null && _formState$changes$ce !== void 0 ? _formState$changes$ce : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine9 = businessState.business) === null || _businessState$busine9 === void 0 ? void 0 : _businessState$busine9.cellphone,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -316,10 +342,10 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     onChange: function onChange(val) {
       return handleChangeEnable(val);
     }
-  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : (_formState$changes11$ = _formState$changes11.ribbon) === null || _formState$changes11$ === void 0 ? void 0 : _formState$changes11$.enabled) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : (_formState$changes12$ = _formState$changes12.ribbon) === null || _formState$changes12$ === void 0 ? void 0 : _formState$changes12$.enabled : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine13 = businessState.business) === null || _businessState$busine13 === void 0 ? void 0 : (_businessState$busine14 = _businessState$busine13.ribbon) === null || _businessState$busine14 === void 0 ? void 0 : _businessState$busine14.enabled) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEXT', 'Text')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : (_formState$changes15$ = _formState$changes15.ribbon) === null || _formState$changes15$ === void 0 ? void 0 : _formState$changes15$.enabled) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : (_formState$changes16$ = _formState$changes16.ribbon) === null || _formState$changes16$ === void 0 ? void 0 : _formState$changes16$.enabled : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine13 = businessState.business) === null || _businessState$busine13 === void 0 ? void 0 : (_businessState$busine14 = _businessState$busine13.ribbon) === null || _businessState$busine14 === void 0 ? void 0 : _businessState$busine14.enabled) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEXT', 'Text')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "text",
     placeholder: t('TEXT', 'Text'),
-    defaultValue: (_formState$changes$ri = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : (_formState$changes13$ = _formState$changes13.ribbon) === null || _formState$changes13$ === void 0 ? void 0 : _formState$changes13$.text) !== null && _formState$changes$ri !== void 0 ? _formState$changes$ri : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine15 = businessState.business) === null || _businessState$busine15 === void 0 ? void 0 : (_businessState$busine16 = _businessState$busine15.ribbon) === null || _businessState$busine16 === void 0 ? void 0 : _businessState$busine16.text,
+    defaultValue: (_formState$changes$ri = formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : (_formState$changes17$ = _formState$changes17.ribbon) === null || _formState$changes17$ === void 0 ? void 0 : _formState$changes17$.text) !== null && _formState$changes$ri !== void 0 ? _formState$changes$ri : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine15 = businessState.business) === null || _businessState$busine15 === void 0 ? void 0 : (_businessState$busine16 = _businessState$busine15.ribbon) === null || _businessState$busine16 === void 0 ? void 0 : _businessState$busine16.text,
     onChange: function onChange(e) {
       return handleChangeRibbon({
         text: e.target.value
@@ -328,40 +354,88 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     disabled: formState.loading,
     autoComplete: "off",
     ref: formMethods.register({
-      required: businessState !== null && businessState !== void 0 && (_businessState$busine17 = businessState.business) !== null && _businessState$busine17 !== void 0 && _businessState$busine17.ribbon && (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : (_formState$changes14$ = _formState$changes14.ribbon) === null || _formState$changes14$ === void 0 ? void 0 : _formState$changes14$.enabled) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : (_formState$changes15$ = _formState$changes15.ribbon) === null || _formState$changes15$ === void 0 ? void 0 : _formState$changes15$.enabled : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine18 = businessState.business) === null || _businessState$busine18 === void 0 ? void 0 : (_businessState$busine19 = _businessState$busine18.ribbon) === null || _businessState$busine19 === void 0 ? void 0 : _businessState$busine19.enabled) ? t('VALIDATION_ERROR_REQUIRED', 'The Ribbon text field is required').replace('_attribute_', t('Ribbon_Text', 'Ribbon text')) : false
+      required: businessState !== null && businessState !== void 0 && (_businessState$busine17 = businessState.business) !== null && _businessState$busine17 !== void 0 && _businessState$busine17.ribbon && (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : (_formState$changes18$ = _formState$changes18.ribbon) === null || _formState$changes18$ === void 0 ? void 0 : _formState$changes18$.enabled) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : (_formState$changes19$ = _formState$changes19.ribbon) === null || _formState$changes19$ === void 0 ? void 0 : _formState$changes19$.enabled : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine18 = businessState.business) === null || _businessState$busine18 === void 0 ? void 0 : (_businessState$busine19 = _businessState$busine18.ribbon) === null || _businessState$busine19 === void 0 ? void 0 : _businessState$busine19.enabled) ? t('VALIDATION_ERROR_REQUIRED', 'The Ribbon text field is required').replace('_attribute_', t('Ribbon_Text', 'Ribbon text')) : false
     })
   })), /*#__PURE__*/_react.default.createElement(_styles2.ColorShapeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ColorWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('COLOR', 'Color')), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
-    defaultColor: (_formState$changes$ri2 = formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : (_formState$changes16$ = _formState$changes16.ribbon) === null || _formState$changes16$ === void 0 ? void 0 : _formState$changes16$.color) !== null && _formState$changes$ri2 !== void 0 ? _formState$changes$ri2 : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine20 = businessState.business) === null || _businessState$busine20 === void 0 ? void 0 : (_businessState$busine21 = _businessState$busine20.ribbon) === null || _businessState$busine21 === void 0 ? void 0 : _businessState$busine21.color,
+    defaultColor: (_formState$changes$ri2 = formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : (_formState$changes20$ = _formState$changes20.ribbon) === null || _formState$changes20$ === void 0 ? void 0 : _formState$changes20$.color) !== null && _formState$changes$ri2 !== void 0 ? _formState$changes$ri2 : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine20 = businessState.business) === null || _businessState$busine20 === void 0 ? void 0 : (_businessState$busine21 = _businessState$busine20.ribbon) === null || _businessState$busine21 === void 0 ? void 0 : _businessState$busine21.color,
     onChangeColor: function onChangeColor(color) {
       return handleChangeRibbon({
         color: color
       });
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ShapeWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHAPE', 'Shape')), /*#__PURE__*/_react.default.createElement(_styles2.ShapeContentWrapper, null, _utils.shape && Object.keys(_utils.shape).map(function (key, i) {
-    var _formState$changes17, _formState$changes17$, _formState$changes18, _formState$changes18$, _businessState$busine22, _businessState$busine23, _formState$changes19, _formState$changes19$, _formState$changes20, _formState$changes20$, _businessState$busine24, _businessState$busine25;
+    var _formState$changes21, _formState$changes21$, _formState$changes22, _formState$changes22$, _businessState$busine22, _businessState$busine23, _formState$changes23, _formState$changes23$, _formState$changes24, _formState$changes24$, _businessState$busine24, _businessState$busine25;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.ShapeBoxWrapper, {
       key: i,
       shapeRect: _utils.shape[key] === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
       round: _utils.shape[key] === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape),
-      active: formState !== null && formState !== void 0 && (_formState$changes17 = formState.changes) !== null && _formState$changes17 !== void 0 && (_formState$changes17$ = _formState$changes17.ribbon) !== null && _formState$changes17$ !== void 0 && _formState$changes17$.shape ? (formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : (_formState$changes18$ = _formState$changes18.ribbon) === null || _formState$changes18$ === void 0 ? void 0 : _formState$changes18$.shape) === _utils.shape[key] : (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine22 = businessState.business) === null || _businessState$busine22 === void 0 ? void 0 : (_businessState$busine23 = _businessState$busine22.ribbon) === null || _businessState$busine23 === void 0 ? void 0 : _businessState$busine23.shape) === _utils.shape[key],
+      active: formState !== null && formState !== void 0 && (_formState$changes21 = formState.changes) !== null && _formState$changes21 !== void 0 && (_formState$changes21$ = _formState$changes21.ribbon) !== null && _formState$changes21$ !== void 0 && _formState$changes21$.shape ? (formState === null || formState === void 0 ? void 0 : (_formState$changes22 = formState.changes) === null || _formState$changes22 === void 0 ? void 0 : (_formState$changes22$ = _formState$changes22.ribbon) === null || _formState$changes22$ === void 0 ? void 0 : _formState$changes22$.shape) === _utils.shape[key] : (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine22 = businessState.business) === null || _businessState$busine22 === void 0 ? void 0 : (_businessState$busine23 = _businessState$busine22.ribbon) === null || _businessState$busine23 === void 0 ? void 0 : _businessState$busine23.shape) === _utils.shape[key],
       onClick: function onClick() {
         return handleChangeRibbon({
           shape: _utils.shape[key]
         });
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null), (formState !== null && formState !== void 0 && (_formState$changes19 = formState.changes) !== null && _formState$changes19 !== void 0 && (_formState$changes19$ = _formState$changes19.ribbon) !== null && _formState$changes19$ !== void 0 && _formState$changes19$.shape ? (formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : (_formState$changes20$ = _formState$changes20.ribbon) === null || _formState$changes20$ === void 0 ? void 0 : _formState$changes20$.shape) === _utils.shape[key] : (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine24 = businessState.business) === null || _businessState$busine24 === void 0 ? void 0 : (_businessState$busine25 = _businessState$busine24.ribbon) === null || _businessState$busine25 === void 0 ? void 0 : _businessState$busine25.shape) === _utils.shape[key]) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
+    }, /*#__PURE__*/_react.default.createElement("div", null), (formState !== null && formState !== void 0 && (_formState$changes23 = formState.changes) !== null && _formState$changes23 !== void 0 && (_formState$changes23$ = _formState$changes23.ribbon) !== null && _formState$changes23$ !== void 0 && _formState$changes23$.shape ? (formState === null || formState === void 0 ? void 0 : (_formState$changes24 = formState.changes) === null || _formState$changes24 === void 0 ? void 0 : (_formState$changes24$ = _formState$changes24.ribbon) === null || _formState$changes24$ === void 0 ? void 0 : _formState$changes24$.shape) === _utils.shape[key] : (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine24 = businessState.business) === null || _businessState$busine24 === void 0 ? void 0 : (_businessState$busine25 = _businessState$busine24.ribbon) === null || _businessState$busine25 === void 0 ? void 0 : _businessState$busine25.shape) === _utils.shape[key]) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE_FILTER', 'Price filter')), /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterListWrapper, null, priceList.map(function (item, i) {
-    var _formState$changes$pr, _formState$changes21, _businessState$busine26, _formState$changes$pr2, _formState$changes22, _businessState$busine27;
+    var _formState$changes$pr, _formState$changes25, _businessState$busine26, _formState$changes$pr2, _formState$changes26, _businessState$busine27;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterItem, {
       key: i,
       onClick: function onClick() {
         return handleChangeSwtich('price_level', item.key);
       },
-      active: ((_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.price_level) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine26 = businessState.business) === null || _businessState$busine26 === void 0 ? void 0 : _businessState$busine26.price_level) === item.key
-    }, ((_formState$changes$pr2 = formState === null || formState === void 0 ? void 0 : (_formState$changes22 = formState.changes) === null || _formState$changes22 === void 0 ? void 0 : _formState$changes22.price_level) !== null && _formState$changes$pr2 !== void 0 ? _formState$changes$pr2 : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine27 = businessState.business) === null || _businessState$busine27 === void 0 ? void 0 : _businessState$busine27.price_level) === item.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, item.value));
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+      active: ((_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25.price_level) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine26 = businessState.business) === null || _businessState$busine26 === void 0 ? void 0 : _businessState$busine26.price_level) === item.key
+    }, ((_formState$changes$pr2 = formState === null || formState === void 0 ? void 0 : (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.price_level) !== null && _formState$changes$pr2 !== void 0 ? _formState$changes$pr2 : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine27 = businessState.business) === null || _businessState$busine27 === void 0 ? void 0 : _businessState$busine27.price_level) === item.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, item.value));
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SOCIAL_NETWORKS', 'Social networks')), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Facebook, null)), /*#__PURE__*/_react.default.createElement("span", null, t('FACEBOOK', 'Facebook'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
+    value: (_formState$changes$fa = formState === null || formState === void 0 ? void 0 : (_formState$changes27 = formState.changes) === null || _formState$changes27 === void 0 ? void 0 : _formState$changes27.facebook_profile) !== null && _formState$changes$fa !== void 0 ? _formState$changes$fa : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine28 = businessState.business) === null || _businessState$busine28 === void 0 ? void 0 : _businessState$busine28.facebook_profile,
+    handleChangeValue: function handleChangeValue(val) {
+      return handleChangeSwtich('facebook_profile', val);
+    },
+    originalURL: socialOriginalURL.facebook,
+    placeholder: t('USER_OR_URL', 'User or url'),
+    name: "facebook_profile"
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Instagram, null)), /*#__PURE__*/_react.default.createElement("span", null, t('INSTAGRAM', 'Instagram'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
+    value: (_formState$changes$in = formState === null || formState === void 0 ? void 0 : (_formState$changes28 = formState.changes) === null || _formState$changes28 === void 0 ? void 0 : _formState$changes28.instagram_profile) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine29 = businessState.business) === null || _businessState$busine29 === void 0 ? void 0 : _businessState$busine29.instagram_profile,
+    handleChangeValue: function handleChangeValue(val) {
+      return handleChangeSwtich('instagram_profile', val);
+    },
+    originalURL: socialOriginalURL.instagram,
+    placeholder: t('USER_OR_URL', 'User or url'),
+    name: "instagram_profile"
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Tiktok, null)), /*#__PURE__*/_react.default.createElement("span", null, t('TIK_TOK', 'Tik tok'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
+    value: (_formState$changes$ti = formState === null || formState === void 0 ? void 0 : (_formState$changes29 = formState.changes) === null || _formState$changes29 === void 0 ? void 0 : _formState$changes29.tiktok_profile) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine30 = businessState.business) === null || _businessState$busine30 === void 0 ? void 0 : _businessState$busine30.tiktok_profile,
+    handleChangeValue: function handleChangeValue(val) {
+      return handleChangeSwtich('tiktok_profile', val);
+    },
+    originalURL: socialOriginalURL.tiktok,
+    placeholder: t('USER_OR_URL', 'User or url'),
+    name: "tiktok_profile"
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pinterest, null)), /*#__PURE__*/_react.default.createElement("span", null, t('PINTEREST', 'Pinterest'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
+    value: (_formState$changes$pi = formState === null || formState === void 0 ? void 0 : (_formState$changes30 = formState.changes) === null || _formState$changes30 === void 0 ? void 0 : _formState$changes30.pinterest_profile) !== null && _formState$changes$pi !== void 0 ? _formState$changes$pi : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine31 = businessState.business) === null || _businessState$busine31 === void 0 ? void 0 : _businessState$busine31.pinterest_profile,
+    handleChangeValue: function handleChangeValue(val) {
+      return handleChangeSwtich('pinterest_profile', val);
+    },
+    originalURL: socialOriginalURL.pinterest,
+    placeholder: t('USER_OR_URL', 'User or url'),
+    name: "pinterest_profile"
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Whatsapp, null)), /*#__PURE__*/_react.default.createElement("span", null, t('WHATSAPP', 'Whatsapp'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
+    value: (_formState$changes$wh = formState === null || formState === void 0 ? void 0 : (_formState$changes31 = formState.changes) === null || _formState$changes31 === void 0 ? void 0 : _formState$changes31.whatsapp_number) !== null && _formState$changes$wh !== void 0 ? _formState$changes$wh : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine32 = businessState.business) === null || _businessState$busine32 === void 0 ? void 0 : _businessState$busine32.whatsapp_number,
+    handleChangeValue: function handleChangeValue(val) {
+      return handleChangeSwtich('whatsapp_number', val);
+    },
+    originalURL: socialOriginalURL.whatsapp,
+    placeholder: t('PHONE_NUMBER', 'Phone number'),
+    name: "whatsapp_number"
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SocialItemHeader, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Snapchat, null)), /*#__PURE__*/_react.default.createElement("span", null, t('SNAPCHAT', 'Snapchat'))), /*#__PURE__*/_react.default.createElement(_styles2.SocialItemContent, null, /*#__PURE__*/_react.default.createElement(ConvertInput, {
+    value: (_formState$changes$sn = formState === null || formState === void 0 ? void 0 : (_formState$changes32 = formState.changes) === null || _formState$changes32 === void 0 ? void 0 : _formState$changes32.snapchat_profile) !== null && _formState$changes$sn !== void 0 ? _formState$changes$sn : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine33 = businessState.business) === null || _businessState$busine33 === void 0 ? void 0 : _businessState$busine33.snapchat_profile,
+    handleChangeValue: function handleChangeValue(val) {
+      return handleChangeSwtich('snapchat_profile', val);
+    },
+    originalURL: socialOriginalURL.snap_chat,
+    placeholder: t('USER_OR_URL', 'User or url'),
+    name: "snapchat_profile"
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     type: "submit",
     color: "primary",
     borderRadius: "8px",
@@ -404,3 +478,52 @@ var BusinessInformation = function BusinessInformation(props) {
 };
 
 exports.BusinessInformation = BusinessInformation;
+
+var ConvertInput = function ConvertInput(props) {
+  var value = props.value,
+      handleChangeValue = props.handleChangeValue,
+      originalURL = props.originalURL,
+      placeholder = props.placeholder,
+      name = props.name;
+  var inputRef = (0, _react.useRef)();
+  var timeout1 = null;
+
+  var handleChangeConvert = function handleChangeConvert(e) {
+    clearTimeout(timeout1);
+    var inputValue = convertValue(e.target.value);
+    var update = inputValue ? originalURL + inputValue : '';
+    timeout1 = setTimeout(function () {
+      handleChangeValue(update);
+      inputRef.current.value = inputValue;
+    }, 750);
+  };
+
+  var convertValue = function convertValue(value) {
+    if (!value) return '';
+    var splitValue = value.split('/');
+    var updatedValue = splitValue[splitValue.length - 1] === '' ? splitValue[splitValue.length - 2] : splitValue[splitValue.length - 1];
+    return updatedValue;
+  };
+
+  var checkKeyDown = function checkKeyDown(e) {
+    var keyCode = e.keyCode ? e.keyCode : e.which;
+
+    if (keyCode === 8 || keyCode === 46) {
+      setTimeout(function () {
+        if (inputRef.current.value === '') handleChangeValue('');
+      }, 1);
+    }
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: name,
+    ref: inputRef,
+    placeholder: placeholder,
+    defaultValue: convertValue(value),
+    onKeyDown: checkKeyDown,
+    onChange: handleChangeConvert,
+    autoComplete: "off"
+  });
+};
+
+exports.ConvertInput = ConvertInput;
