@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OptionsList = exports.OptionsContainer = exports.OptionNameContainer = exports.OptionItem = exports.OptionImage = exports.MinimumPurchase = exports.MaxPurchase = exports.MainContainer = exports.Header = exports.ArrowWrpper = exports.AddOptionForm = exports.ActionSelectorWrapper = void 0;
+exports.OptionsList = exports.OptionsContainer = exports.OptionNameContainer = exports.OptionItem = exports.OptionImage = exports.MinimumPurchase = exports.MaxPurchase = exports.MainContainer = exports.Header = exports.DragImageWrapper = exports.ArrowWrpper = exports.AddOptionForm = exports.ActionSelectorWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -114,7 +114,7 @@ var OptionsList = _styledComponents.default.div(_templateObject21 || (_templateO
 
 exports.OptionsList = OptionsList;
 
-var OptionItem = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid ", ";\n\n  ", "\n  ", "\n"])), function (props) {
+var OptionItem = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid ", ";\n\n  ", "\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref2) {
   var isHeader = _ref2.isHeader;
@@ -130,26 +130,44 @@ var OptionItem = _styledComponents.default.div(_templateObject22 || (_templateOb
   }, function (props) {
     return props.theme.colors.primary;
   });
+}, function (_ref4) {
+  var isDragOver = _ref4.isDragOver;
+  return isDragOver && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    border-top: 1px solid ", ";\n  "])), function (props) {
+    return props.theme.colors.primary;
+  });
+}, function (_ref5) {
+  var isBorderBottom = _ref5.isBorderBottom;
+  return isBorderBottom && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    border-bottom: 1px solid ", ";\n  "])), function (props) {
+    return props.theme.colors.primary;
+  });
 });
 
 exports.OptionItem = OptionItem;
 
-var MinimumPurchase = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  min-width: 80px;\n  ", "\n"])), function (_ref4) {
-  var isHeader = _ref4.isHeader;
-  return isHeader ? (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    font-size: 12px;\n    font-weight: 700;\n  "]))) : (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    font-size: 14px;\n  "])));
+var MinimumPurchase = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  min-width: 80px;\n  ", "\n"])), function (_ref6) {
+  var isHeader = _ref6.isHeader;
+  return isHeader ? (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    font-size: 12px;\n    font-weight: 700;\n  "]))) : (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    font-size: 14px;\n  "])));
 });
 
 exports.MinimumPurchase = MinimumPurchase;
 
-var MaxPurchase = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  min-width: 80px;\n  ", "\n"])), function (_ref5) {
-  var isHeader = _ref5.isHeader;
-  return isHeader ? (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    font-size: 12px;\n    font-weight: 700;\n  "]))) : (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n    font-size: 14px;\n  "])));
+var MaxPurchase = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  min-width: 80px;\n  ", "\n"])), function (_ref7) {
+  var isHeader = _ref7.isHeader;
+  return isHeader ? (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    font-size: 12px;\n    font-weight: 700;\n  "]))) : (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    font-size: 14px;\n  "])));
 });
 
 exports.MaxPurchase = MaxPurchase;
 
-var ArrowWrpper = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  width: 30px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  svg {\n    font-size: 13px;\n    color: ", ";\n    margin: 0 5px;\n  }\n"])), function (props) {
+var ArrowWrpper = _styledComponents.default.div(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  width: 30px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  svg {\n    font-size: 13px;\n    color: ", ";\n    margin: 0 5px;\n  }\n"])), function (props) {
   return props.theme.colors.secundaryLight;
 });
 
 exports.ArrowWrpper = ArrowWrpper;
+
+var DragImageWrapper = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  img {\n    ", "\n    &:hover {\n      cursor: grab;\n    }\n  }\n"])), function (props) {
+  var _props$theme7;
+
+  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n      margin-left: 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n      margin-right: 20px;\n    "])));
+});
+
+exports.DragImageWrapper = DragImageWrapper;
