@@ -20,8 +20,8 @@ export const BusinessSyncBasic = () => {
         <img src={theme.images.general.deliverect} alt='' />
       </LogoWrapper>
       <Description>
-        <p>The easiest way to manage all your online orders.</p>
-        <p>Deliverect integrates all your <span>online orders</span> to your <span>existing POS</span> or our <span>Delivery Manger app.</span> Restaurants large and small rely on Deliverect to reduce failures and order mistakes while speeding up order preparation.</p>
+        <p>{t('SYNC_DEC_FIRST', 'The easiest way to manage all your online orders.')}</p>
+        <p dangerouslySetInnerHTML={{ __html: t('SYNC_DEC_SECOND', 'Deliverect integrates all your <span>online orders</span> to your <span>existing POS</span> or our <span>Delivery Manger app.</span> Restaurants large and small rely on Deliverect to reduce failures and order mistakes while speeding up order preparation.') }} />
       </Description>
       <GuideStep>
         <h4>{t('STEP', 'Step')}1</h4>
