@@ -66,6 +66,13 @@ export const DriversGroupGeneralForm = (props) => {
 
   const onSubmit = () => {
     if (driversGroupState.driversGroup) {
+      if (changesState?.drivers === '[]') {
+        setAlertState({
+          open: true,
+          content: [t('CHOOSE_LEAST_ONE_DRIVER', 'You must choose at least one driver.')]
+        })
+        return
+      }
       handleUpdateDriversGroup(changesState)
     } else {
       if (!changesState?.administrator_id) {
