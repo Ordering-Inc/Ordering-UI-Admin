@@ -20,6 +20,7 @@ import {
   WrapperView,
   ViewMethodButton
 } from './styles'
+import { BusinessSync } from '../BusinessSync'
 
 const BusinessesListingUI = (props) => {
   const {
@@ -49,6 +50,8 @@ const BusinessesListingUI = (props) => {
   const [detailsBusinessId, setDetailsBusinessId] = useState(null)
   const [openAddBusiness, setOpenAddBusiness] = useState(false)
   const [businessTypes, setBusinessTypes] = useState([])
+  const [openSync, setOpenSync] = useState(false)
+  const [moveDistance, setMoveDistance] = useState(0)
 
   const handleBackRedirect = () => {
     setOpenBusinessDetails(false)
@@ -121,6 +124,15 @@ const BusinessesListingUI = (props) => {
     }
   }
 
+  const handleOpenSync = () => {
+    setOpenSync(true)
+  }
+
+  const handleCloseSync = () => {
+    setMoveDistance(0)
+    setOpenSync(false)
+  }
+
   useEffect(() => {
     handleSetStorage()
   }, [])
@@ -133,6 +145,7 @@ const BusinessesListingUI = (props) => {
           onSearch={onSearch}
           handleOpenAddBusiness={handleOpenAddBusiness}
           handleStartTutorial={handleStartTutorial}
+          handleOpenSync={handleOpenSync}
         />
         <ViewContainer>
           <BusinessActiveStateFilter
@@ -197,6 +210,20 @@ const BusinessesListingUI = (props) => {
           <AddBusinessForm
             isTutorialMode={isTutorialMode}
             handleSucessAddBusiness={onhandleSuccessAddBusiness}
+          />
+        </SideBar>
+      )}
+
+      {openSync && (
+        <SideBar
+          id='store_sync'
+          open={openSync}
+          onClose={() => handleCloseSync()}
+          defaultSideBarWidth={550 + moveDistance}
+          moveDistance={moveDistance}
+        >
+          <BusinessSync
+            handleParentSidebarMove={val => setMoveDistance(val)}
           />
         </SideBar>
       )}
