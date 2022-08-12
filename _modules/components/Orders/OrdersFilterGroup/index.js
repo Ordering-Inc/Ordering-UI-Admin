@@ -82,7 +82,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   };
 
   var handleClearFilter = function handleClearFilter() {
-    handleResetFilterValues(); // handleChangeFilterValues({})
+    handleResetFilterValues();
+    handleChangeFilterValues({});
   };
 
   return /*#__PURE__*/_react.default.createElement(_Shared.Modal, {

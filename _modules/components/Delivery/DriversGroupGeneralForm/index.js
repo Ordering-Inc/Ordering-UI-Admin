@@ -115,6 +115,14 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
 
   var onSubmit = function onSubmit() {
     if (driversGroupState.driversGroup) {
+      if ((changesState === null || changesState === void 0 ? void 0 : changesState.drivers) === '[]') {
+        setAlertState({
+          open: true,
+          content: [t('CHOOSE_LEAST_ONE_DRIVER', 'You must choose at least one driver.')]
+        });
+        return;
+      }
+
       handleUpdateDriversGroup(changesState);
     } else {
       if (!(changesState !== null && changesState !== void 0 && changesState.administrator_id)) {
