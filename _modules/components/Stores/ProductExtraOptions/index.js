@@ -78,7 +78,13 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       setOpenModal = props.setOpenModal,
       handleOpenModal = props.handleOpenModal,
       handleChangeExtraName = props.handleChangeExtraName,
-      handleChangeItem = props.handleChangeItem;
+      handleChangeItem = props.handleChangeItem,
+      dragoverOptionId = props.dragoverOptionId,
+      isOptionsBottom = props.isOptionsBottom,
+      handleDragStart = props.handleDragStart,
+      hanldeDragOver = props.hanldeDragOver,
+      handleDrop = props.handleDrop,
+      handleDragEnd = props.handleDragEnd;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -318,14 +324,36 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     isHeader: true
   }, t('MINIMUM', 'Min')), /*#__PURE__*/_react.default.createElement(_styles2.MaxPurchase, {
     isHeader: true
-  }, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles2.ArrowWrpper, null)), ((_extraState$extra4 = extraState.extra) === null || _extraState$extra4 === void 0 ? void 0 : _extraState$extra4.options) && ((_extraState$extra5 = extraState.extra) === null || _extraState$extra5 === void 0 ? void 0 : _extraState$extra5.options.map(function (option) {
+  }, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles2.ArrowWrpper, null)), ((_extraState$extra4 = extraState.extra) === null || _extraState$extra4 === void 0 ? void 0 : _extraState$extra4.options) && ((_extraState$extra5 = extraState.extra) === null || _extraState$extra5 === void 0 ? void 0 : _extraState$extra5.options.sort(function (a, b) {
+    return a.rank - b.rank;
+  }).map(function (option, index) {
+    var _extraState$extra6, _theme$images$icons;
+
+    var isLastOption = index === ((_extraState$extra6 = extraState.extra) === null || _extraState$extra6 === void 0 ? void 0 : _extraState$extra6.options.length) - 1;
     return /*#__PURE__*/_react.default.createElement(_styles2.OptionItem, {
       key: option.id,
       active: option.id === (curOption === null || curOption === void 0 ? void 0 : curOption.id),
       onClick: function onClick() {
         return handleOpenModal(option, 'edit');
+      },
+      isDragOver: dragoverOptionId === option.id,
+      isBorderBottom: isOptionsBottom && isLastOption,
+      onDragOver: function onDragOver(e) {
+        return hanldeDragOver(e, option, isLastOption);
+      },
+      onDrop: function onDrop(e) {
+        return handleDrop(e, option);
+      },
+      onDragEnd: handleDragEnd,
+      className: "draggable-option"
+    }, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DragImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+      src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
+      alt: "six dots",
+      draggable: true,
+      onDragStart: function onDragStart(e) {
+        return handleDragStart(e, option);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionImage, null, option !== null && option !== void 0 && option.image ? /*#__PURE__*/_react.default.createElement("img", {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.OptionImage, null, option !== null && option !== void 0 && option.image ? /*#__PURE__*/_react.default.createElement("img", {
       src: option === null || option === void 0 ? void 0 : option.image,
       alt: "option image",
       loading: "lazy"

@@ -54,7 +54,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraSuboption = function ProductExtraSuboption(props) {
-  var _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2, _settingChangeState$c, _settingChangeState$c2, _optionState$option, _settingChangeState$c3, _settingChangeState$c4, _optionState$option2;
+  var _theme$images$icons, _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2, _settingChangeState$c, _settingChangeState$c2, _optionState$option, _settingChangeState$c3, _settingChangeState$c4, _optionState$option2;
 
   var subOption = props.subOption,
       optionState = props.optionState,
@@ -66,7 +66,14 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
       setOpenModal = props.setOpenModal,
       handleChangeDefaultSuboption = props.handleChangeDefaultSuboption,
       handleDeteteSubOption = props.handleDeteteSubOption,
-      handleUpdateSubOption = props.handleUpdateSubOption;
+      handleUpdateSubOption = props.handleUpdateSubOption,
+      isLastSubOption = props.isLastSubOption,
+      dragoverSubOptionId = props.dragoverSubOptionId,
+      isSubOptionsBottom = props.isSubOptionsBottom,
+      handleDragStart = props.handleDragStart,
+      hanldeDragOver = props.hanldeDragOver,
+      handleDrop = props.handleDrop,
+      handleDragEnd = props.handleDragEnd;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -213,8 +220,25 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     setTimer(_timer);
   }, [formState]);
   return /*#__PURE__*/_react.default.createElement(_styles2.SubOptionContainer, {
-    onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, {
+    onSubmit: handleSubmit(onSubmit),
+    isDragOver: dragoverSubOptionId === subOption.id,
+    isBorderBottom: isSubOptionsBottom && isLastSubOption,
+    onDragOver: function onDragOver(e) {
+      return hanldeDragOver(e, subOption, isLastSubOption);
+    },
+    onDrop: function onDrop(e) {
+      return handleDrop(e, subOption);
+    },
+    onDragEnd: handleDragEnd,
+    className: "draggable-suboption"
+  }, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.DragImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
+    alt: "six dots",
+    draggable: true,
+    onDragStart: function onDragStart(e) {
+      return handleDragStart(e, subOption);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, {
     onClick: function onClick() {
       return handleClickSubOptionImage("suboption_image_".concat(subOption.id));
     }
