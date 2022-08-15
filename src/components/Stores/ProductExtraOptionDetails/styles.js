@@ -253,6 +253,16 @@ export const LeftSubOptionContent = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+
+  ${props => props.theme?.rtl ? css`
+    ${({ header }) => header && css`
+      margin-right: 37px;
+    `}
+  ` : css`
+    ${({ header }) => header && css`
+      margin-left: 37px;
+    `}
+  `}
 `
 
 export const RightSubOptionContent = styled.div`

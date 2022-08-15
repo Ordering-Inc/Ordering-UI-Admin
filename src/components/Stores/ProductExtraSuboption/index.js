@@ -18,7 +18,8 @@ import {
   RightSubOptionContent,
   ActionsContainer,
   EnableWrapper,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  DragImageWrapper
 } from './styles'
 
 export const ProductExtraSuboption = (props) => {
@@ -33,7 +34,15 @@ export const ProductExtraSuboption = (props) => {
     setOpenModal,
     handleChangeDefaultSuboption,
     handleDeteteSubOption,
-    handleUpdateSubOption
+    handleUpdateSubOption,
+
+    isLastSubOption,
+    dragoverSubOptionId,
+    isSubOptionsBottom,
+    handleDragStart,
+    hanldeDragOver,
+    handleDrop,
+    handleDragEnd
   } = props
 
   const theme = useTheme()
@@ -129,8 +138,24 @@ export const ProductExtraSuboption = (props) => {
   }, [formState])
 
   return (
-    <SubOptionContainer onSubmit={handleSubmit(onSubmit)}>
+    <SubOptionContainer
+      onSubmit={handleSubmit(onSubmit)}
+      isDragOver={dragoverSubOptionId === subOption.id}
+      isBorderBottom={isSubOptionsBottom && isLastSubOption}
+      onDragOver={e => hanldeDragOver(e, subOption, isLastSubOption)}
+      onDrop={e => handleDrop(e, subOption)}
+      onDragEnd={handleDragEnd}
+      className='draggable-suboption'
+    >
       <LeftSubOptionContent>
+        <DragImageWrapper>
+          <img
+            src={theme.images.icons?.sixDots}
+            alt='six dots'
+            draggable
+            onDragStart={e => handleDragStart(e, subOption)}
+          />
+        </DragImageWrapper>
         <SubOptionImage
           onClick={() => handleClickSubOptionImage(`suboption_image_${subOption.id}`)}
         >
