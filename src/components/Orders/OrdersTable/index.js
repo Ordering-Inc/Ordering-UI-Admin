@@ -72,8 +72,8 @@ export const OrdersTable = (props) => {
     customer: true,
     driver: true,
     advanced: true,
-    timer: true,
-    slaBar: true,
+    timer: configState?.configs?.order_deadlines_enabled?.value === '1',
+    slaBar: configState?.configs?.order_deadlines_enabled?.value === '1',
     total: true
   })
 
@@ -340,7 +340,7 @@ export const OrdersTable = (props) => {
                 {allowColumns?.advanced && (
                   <th colSpan='3' className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
                 )}
-                {allowColumns?.timer && (
+                {(allowColumns?.timer && (groupStatus === 'pending' || groupStatus === 'inProgress')) && (
                   <th colSpan='2' className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
                 )}
                 <th className='orderPrice'>
@@ -615,18 +615,13 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-                  {allowColumns?.timer && (
+                  {(allowColumns?.timer && (groupStatus === 'pending' || groupStatus === 'inProgress')) && (
                     <td className='timer'>
                       <Timer>
-                        {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
-                          <>
-                            <p className='bold'>{t('TIMER', 'Timer')}</p>
-                            <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
-                          </>
-                        )}
+                        <p className='bold'>{t('TIMER', 'Timer')}</p>
+                        <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
                       </Timer>
-                    </td>
-                  )}
+                    </td>)}
                   <td className='orderPrice'>
                     <div className='info'>
                       {allowColumns?.total && (
