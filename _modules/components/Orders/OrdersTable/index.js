@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersTable = function OrdersTable(props) {
-  var _orderList$orders3;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderList$orders3;
 
   var isSelectedOrders = props.isSelectedOrders,
       orderList = props.orderList,
@@ -124,8 +124,8 @@ var OrdersTable = function OrdersTable(props) {
     customer: true,
     driver: true,
     advanced: true,
-    timer: true,
-    slaBar: true,
+    timer: (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1',
+    slaBar: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1',
     total: true
   }),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -192,10 +192,10 @@ var OrdersTable = function OrdersTable(props) {
   };
 
   var getStatusClassName = function getStatusClassName(minutes) {
-    var _configState$configs, _configState$configs$;
+    var _configState$configs4, _configState$configs5;
 
     if (isNaN(Number(minutes))) return 'in_time';
-    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_delayed_time) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
+    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.order_deadlines_delayed_time) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value;
     return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed';
   };
 
@@ -397,9 +397,9 @@ var OrdersTable = function OrdersTable(props) {
     }
   }, [groupStatus]);
   (0, _react.useEffect)(function () {
-    var _configState$configs2, _configState$configs3;
+    var _configState$configs6, _configState$configs7;
 
-    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
+    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.order_deadlines_enabled) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === '1';
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
       timer: slaSettings,
       slaBar: slaSettings
@@ -431,7 +431,7 @@ var OrdersTable = function OrdersTable(props) {
   }, t('DRIVER', 'Driver')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("th", {
     colSpan: "3",
     className: "advanced"
-  }, t('ADVANCED_LOGISTICS', 'Advanced logistics')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && /*#__PURE__*/_react.default.createElement("th", {
+  }, t('ADVANCED_LOGISTICS', 'Advanced logistics')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && (groupStatus === 'pending' || groupStatus === 'inProgress') && /*#__PURE__*/_react.default.createElement("th", {
     colSpan: "2",
     className: "timer"
   }, t('SLA_TIMER', 'SLA’s timer')), /*#__PURE__*/_react.default.createElement("th", {
@@ -640,13 +640,13 @@ var OrdersTable = function OrdersTable(props) {
       className: "bold"
     }, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority), /*#__PURE__*/_react.default.createElement(_styles.PriorityDot, {
       priority: order === null || order === void 0 ? void 0 : order.priority
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && (groupStatus === 'pending' || groupStatus === 'inProgress') && /*#__PURE__*/_react.default.createElement("td", {
       className: "timer"
-    }, /*#__PURE__*/_react.default.createElement(_styles.Timer, null, !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
+    }, /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, t('TIMER', 'Timer')), /*#__PURE__*/_react.default.createElement("p", {
       className: getStatusClassName(getDelayMinutes(order))
-    }, displayDelayedTime(order))))), /*#__PURE__*/_react.default.createElement("td", {
+    }, displayDelayedTime(order)))), /*#__PURE__*/_react.default.createElement("td", {
       className: "orderPrice"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
