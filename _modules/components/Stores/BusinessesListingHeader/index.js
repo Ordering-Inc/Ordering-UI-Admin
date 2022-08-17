@@ -41,7 +41,8 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
   var searchValue = props.searchValue,
       onSearch = props.onSearch,
       handleOpenAddBusiness = props.handleOpenAddBusiness,
-      handleStartTutorial = props.handleStartTutorial;
+      handleStartTutorial = props.handleStartTutorial,
+      handleOpenSync = props.handleOpenSync;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -72,7 +73,13 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     onClick: function onClick() {
       return handleOpenAddBusiness();
     }
-  }, t('ADD_NEW_STORE', 'Add new store')), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  }, t('ADD_NEW_STORE', 'Add new store')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "lightPrimary",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return handleOpenSync();
+    }
+  }, t('SYNC', 'Sync')), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     isCustomLayout: true,
     lazyLoad: true,
     onSearch: onSearch,

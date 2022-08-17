@@ -37,6 +37,8 @@ var _WizardBusiness = require("../WizardBusiness");
 
 var _styles = require("./styles");
 
+var _BusinessSync = require("../BusinessSync");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -122,6 +124,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       _useState16 = _slicedToArray(_useState15, 2),
       businessTypes = _useState16[0],
       setBusinessTypes = _useState16[1];
+
+  var _useState17 = (0, _react.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      openSync = _useState18[0],
+      setOpenSync = _useState18[1];
+
+  var _useState19 = (0, _react.useState)(0),
+      _useState20 = _slicedToArray(_useState19, 2),
+      moveDistance = _useState20[0],
+      setMoveDistance = _useState20[1];
 
   var handleBackRedirect = function handleBackRedirect() {
     setOpenBusinessDetails(false);
@@ -226,6 +238,15 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
   };
 
+  var handleOpenSync = function handleOpenSync() {
+    setOpenSync(true);
+  };
+
+  var handleCloseSync = function handleCloseSync() {
+    setMoveDistance(0);
+    setOpenSync(false);
+  };
+
   (0, _react.useEffect)(function () {
     handleSetStorage();
   }, []);
@@ -233,7 +254,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     searchValue: searchValue,
     onSearch: onSearch,
     handleOpenAddBusiness: handleOpenAddBusiness,
-    handleStartTutorial: handleStartTutorial
+    handleStartTutorial: handleStartTutorial,
+    handleOpenSync: handleOpenSync
   }), /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleChangeBusinessActiveState: handleChangeBusinessActiveState
@@ -286,6 +308,18 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AddBusinessForm.AddBusinessForm, {
     isTutorialMode: isTutorialMode,
     handleSucessAddBusiness: onhandleSuccessAddBusiness
+  })), openSync && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    id: "store_sync",
+    open: openSync,
+    onClose: function onClose() {
+      return handleCloseSync();
+    },
+    defaultSideBarWidth: 550 + moveDistance,
+    moveDistance: moveDistance
+  }, /*#__PURE__*/_react.default.createElement(_BusinessSync.BusinessSync, {
+    handleParentSidebarMove: function handleParentSidebarMove(val) {
+      return setMoveDistance(val);
+    }
   })), /*#__PURE__*/_react.default.createElement(_WizardBusiness.WizardBusiness, {
     isTutorialMode: isTutorialMode,
     openTutorialSidebarState: openTutorialSidebarState,
