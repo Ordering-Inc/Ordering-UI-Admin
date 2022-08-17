@@ -18,7 +18,8 @@ export const BusinessesListingHeader = (props) => {
     searchValue,
     onSearch,
     handleOpenAddBusiness,
-    handleStartTutorial
+    handleStartTutorial,
+    handleOpenSync
   } = props
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -60,6 +61,13 @@ export const BusinessesListingHeader = (props) => {
           onClick={() => handleOpenAddBusiness()}
         >
           {t('ADD_NEW_STORE', 'Add new store')}
+        </Button>
+        <Button
+          color='lightPrimary'
+          borderRadius='8px'
+          onClick={() => handleOpenSync()}
+        >
+          {t('SYNC', 'Sync')}
         </Button>
         <SearchBar
           isCustomLayout

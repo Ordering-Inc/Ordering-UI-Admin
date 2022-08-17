@@ -35,6 +35,7 @@ import mobileHalfMask from './template/assets/images/mobile-half-mask.png'
 import whatsappHeader from './template/assets/images/whatsapp-header.png'
 import appStore from './template/assets/images/app-store.png'
 import googlePlay from './template/assets/images/google-play.png'
+import deliverect from './template/assets/images/deliverect.png'
 
 /**
  * Theme apps
@@ -187,7 +188,8 @@ theme.images = {
     mobileHalfMask,
     whatsappHeader,
     appStore,
-    googlePlay
+    googlePlay,
+    deliverect
   },
   apps: {
     storeApp,
