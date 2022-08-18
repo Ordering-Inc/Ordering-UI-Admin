@@ -110,6 +110,7 @@ export const DriverInfo = styled.div`
       color: ${props => props.theme.colors?.headingColor};
       font-weight: 600;
       margin: 0px;
+      flex: 1;
     }
   }
 `
