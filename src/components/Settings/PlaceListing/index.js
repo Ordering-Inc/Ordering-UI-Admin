@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, PlaceList as PlaceListController } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
-import { Button, IconButton, Input, Switch } from '../../../styles'
+import { Button, IconButton, Switch } from '../../../styles'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -11,17 +11,15 @@ import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { Alert, Confirm, Pagination, SearchBar, SideBar } from '../../Shared'
 import { CountrySelector } from '../CountrySelector'
-import { CityAdministratorSelector } from '../CityAdministratorSelector'
 import { CityDetails } from '../CityDetails'
 import { DropdownOptionList } from '../DropdownOptionList'
+import { CountriesList } from '../CountriesList'
 
 import {
   PlaceListContainer,
   Header,
   HeaderLeft,
   HeaderRight,
-  CoutryNameContainer,
-  InputWrapper,
   Tabs,
   Tab,
   CitiesListContainer,
@@ -41,7 +39,11 @@ const PlaceListingUI = (props) => {
   const {
     countriesState,
     cityManagerList,
-    handleChangeCountryName,
+    handleUpdateCountry,
+    handleAddCountry,
+    selectedCountries,
+    setSelectedCountries,
+    handleDeleteCountry,
     handleUpdateCity,
     handleDeleteCity,
     actionState,
@@ -57,7 +59,7 @@ const PlaceListingUI = (props) => {
     handleCheckboxClick,
     handleAllCheckboxClick,
     handleSeveralDeleteCities,
-
+    handleSeveralDeleteCountries,
     dropdownOptionsState,
     handleUpdateDropdown,
     openZoneDropdown,
@@ -80,7 +82,7 @@ const PlaceListingUI = (props) => {
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-  const [showOption, setShowOption] = useState('cities')
+  const [showOption, setShowOption] = useState('countries')
   const [searchValue, setSearchValue] = useState(null)
 
   // Change page
@@ -116,14 +118,6 @@ const PlaceListingUI = (props) => {
     setTotalPages(_totalPages)
     setCurrentCities(_currentCities)
   }, [countriesState, currentPage, citiesPerPage, searchValue])
-
-  let timeout = null
-  const onChangeCountryName = (id, changes) => {
-    clearTimeout(timeout)
-    timeout = setTimeout(() => {
-      handleChangeCountryName(id, changes)
-    }, 1000)
-  }
 
   const onDeleteCity = (countryId, cityId) => {
     setConfirm({
@@ -199,6 +193,16 @@ const PlaceListingUI = (props) => {
                 {t('ADD_ZONE_DROPDOWN', 'Add zone dropdown')}
               </Button>
             )}
+            {showOption === 'countries' && (
+              <Button
+                borderRadius='8px'
+                color='secundary'
+                disabled={selectedCountries.length === 0}
+                onClick={() => handleSeveralDeleteCountries()}
+              >
+                {t('DELETE', 'Delete')}
+              </Button>
+            )}
             {showOption === 'cities' && (
               <Button
                 borderRadius='8px'
@@ -228,20 +232,14 @@ const PlaceListingUI = (props) => {
             />
           </HeaderRight>
         </Header>
-        <CoutryNameContainer>
-          <label>{t('COUNTRY', 'Country')}</label>
-          {countriesState.countries.map(country => (
-            <InputWrapper key={country.id}>
-              <Input
-                defaultValue={country?.name}
-                placeholder={t('NAME', 'Name')}
-                onChange={e => onChangeCountryName(country.id, { name: e.target.value })}
-              />
-            </InputWrapper>
-          ))}
-        </CoutryNameContainer>
 
         <Tabs>
+          <Tab
+            active={showOption === 'countries'}
+            onClick={() => setShowOption('countries')}
+          >
+            {t('COUNTRIES', 'Countries')}
+          </Tab>
           <Tab
             active={showOption === 'cities'}
             onClick={() => setShowOption('cities')}
@@ -256,6 +254,17 @@ const PlaceListingUI = (props) => {
           </Tab>
         </Tabs>
 
+        {showOption === 'countries' && (
+          <CountriesList
+            actionState={actionState}
+            countriesState={countriesState}
+            handleUpdateCountry={handleUpdateCountry}
+            handleAddCountry={handleAddCountry}
+            selectedCountries={selectedCountries}
+            setSelectedCountries={setSelectedCountries}
+            handleDeleteCountry={handleDeleteCountry}
+          />
+        )}
         {showOption === 'cities' && (
           <CitiesListContainer>
             <CityWrapper isHeader>
