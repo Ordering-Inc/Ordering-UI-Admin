@@ -33,11 +33,11 @@ var _Shared = require("../../Shared");
 
 var _CountrySelector = require("../CountrySelector");
 
-var _CityAdministratorSelector = require("../CityAdministratorSelector");
-
 var _CityDetails = require("../CityDetails");
 
 var _DropdownOptionList = require("../DropdownOptionList");
+
+var _CountriesList = require("../CountriesList");
 
 var _styles2 = require("./styles");
 
@@ -78,7 +78,11 @@ var PlaceListingUI = function PlaceListingUI(props) {
 
   var countriesState = props.countriesState,
       cityManagerList = props.cityManagerList,
-      handleChangeCountryName = props.handleChangeCountryName,
+      handleUpdateCountry = props.handleUpdateCountry,
+      handleAddCountry = props.handleAddCountry,
+      selectedCountries = props.selectedCountries,
+      setSelectedCountries = props.setSelectedCountries,
+      handleDeleteCountry = props.handleDeleteCountry,
       handleUpdateCity = props.handleUpdateCity,
       handleDeleteCity = props.handleDeleteCity,
       actionState = props.actionState,
@@ -94,6 +98,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
       handleCheckboxClick = props.handleCheckboxClick,
       handleAllCheckboxClick = props.handleAllCheckboxClick,
       handleSeveralDeleteCities = props.handleSeveralDeleteCities,
+      handleSeveralDeleteCountries = props.handleSeveralDeleteCountries,
       dropdownOptionsState = props.dropdownOptionsState,
       handleUpdateDropdown = props.handleUpdateDropdown,
       openZoneDropdown = props.openZoneDropdown,
@@ -137,7 +142,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
       confirm = _useState4[0],
       setConfirm = _useState4[1];
 
-  var _useState5 = (0, _react.useState)('cities'),
+  var _useState5 = (0, _react.useState)('countries'),
       _useState6 = _slicedToArray(_useState5, 2),
       showOption = _useState6[0],
       setShowOption = _useState6[1];
@@ -210,14 +215,6 @@ var PlaceListingUI = function PlaceListingUI(props) {
     setTotalPages(_totalPages);
     setCurrentCities(_currentCities);
   }, [countriesState, currentPage, citiesPerPage, searchValue]);
-  var timeout = null;
-
-  var onChangeCountryName = function onChangeCountryName(id, changes) {
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
-      handleChangeCountryName(id, changes);
-    }, 1000);
-  };
 
   var onDeleteCity = function onDeleteCity(countryId, cityId) {
     setConfirm({
@@ -276,7 +273,14 @@ var PlaceListingUI = function PlaceListingUI(props) {
     onClick: function onClick() {
       return handleOpenZoneDropdownDetails(null);
     }
-  }, t('ADD_ZONE_DROPDOWN', 'Add zone dropdown')), showOption === 'cities' && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('ADD_ZONE_DROPDOWN', 'Add zone dropdown')), showOption === 'countries' && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
+    color: "secundary",
+    disabled: (selectedCountries === null || selectedCountries === void 0 ? void 0 : selectedCountries.length) === 0,
+    onClick: function onClick() {
+      return handleSeveralDeleteCountries();
+    }
+  }, t('DELETE', 'Delete')), showOption === 'cities' && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "secundary",
     disabled: selectedCityList.length === 0,
@@ -298,19 +302,12 @@ var PlaceListingUI = function PlaceListingUI(props) {
     onSearch: function onSearch(val) {
       return setSearchValue(val);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.CoutryNameContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('COUNTRY', 'Country')), countriesState.countries.map(function (country) {
-    return /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-      key: country.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-      defaultValue: country === null || country === void 0 ? void 0 : country.name,
-      placeholder: t('NAME', 'Name'),
-      onChange: function onChange(e) {
-        return onChangeCountryName(country.id, {
-          name: e.target.value
-        });
-      }
-    }));
-  })), /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: showOption === 'countries',
+    onClick: function onClick() {
+      return setShowOption('countries');
+    }
+  }, t('COUNTRIES', 'Countries')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: showOption === 'cities',
     onClick: function onClick() {
       return setShowOption('cities');
@@ -320,7 +317,15 @@ var PlaceListingUI = function PlaceListingUI(props) {
     onClick: function onClick() {
       return setShowOption('zones');
     }
-  }, t('DROPDOWN_OPTIONS', 'Zones dropdown options'))), showOption === 'cities' && /*#__PURE__*/_react.default.createElement(_styles2.CitiesListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.CityWrapper, {
+  }, t('DROPDOWN_OPTIONS', 'Zones dropdown options'))), showOption === 'countries' && /*#__PURE__*/_react.default.createElement(_CountriesList.CountriesList, {
+    actionState: actionState,
+    countriesState: countriesState,
+    handleUpdateCountry: handleUpdateCountry,
+    handleAddCountry: handleAddCountry,
+    selectedCountries: selectedCountries,
+    setSelectedCountries: setSelectedCountries,
+    handleDeleteCountry: handleDeleteCountry
+  }), showOption === 'cities' && /*#__PURE__*/_react.default.createElement(_styles2.CitiesListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.CityWrapper, {
     isHeader: true
   }, /*#__PURE__*/_react.default.createElement(_styles2.CityName, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
     onClick: function onClick() {
