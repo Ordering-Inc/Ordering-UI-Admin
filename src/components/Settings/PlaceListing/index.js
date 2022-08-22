@@ -197,7 +197,7 @@ const PlaceListingUI = (props) => {
               <Button
                 borderRadius='8px'
                 color='secundary'
-                disabled={selectedCountries.length === 0}
+                disabled={selectedCountries?.length === 0}
                 onClick={() => handleSeveralDeleteCountries()}
               >
                 {t('DELETE', 'Delete')}
