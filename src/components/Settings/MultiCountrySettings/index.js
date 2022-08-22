@@ -59,11 +59,12 @@ const MultiCountrySettingsUI = (props) => {
           </SitesWrapper>
         ) : (
           <SitesWrapper>
-            {countryState.countries.map(country => country?.enabled && (
+            {countryState.countries.map(country => (
               <SiteItem
                 key={country?.id}
                 active={country?.id === selectedCountryId}
-                onClick={() => handleOpenCountrySettingDetails(country?.id)}
+                disabled={!country?.enabled}
+                onClick={() => country?.enabled && handleOpenCountrySettingDetails(country?.id)}
               >
                 <span>{country?.name}</span>
                 <BsChevronRight />

@@ -49,4 +49,8 @@ export const SiteItem = styled.div`
     border-bottom: 1px solid ${props => props.theme.colors.primary} !important;
     background-color: ${props => props.theme.colors.lightPrimary};
   `}
+  ${({ disabled }) => disabled && css`
+    cursor: not-allowed;
+    background-color: ${props => props.theme.colors.disabled} !important;
+  `}
 `
