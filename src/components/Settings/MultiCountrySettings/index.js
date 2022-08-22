@@ -59,7 +59,7 @@ const MultiCountrySettingsUI = (props) => {
           </SitesWrapper>
         ) : (
           <SitesWrapper>
-            {countryState.countries.map(country => (
+            {countryState.countries.map(country => country?.enabled && (
               <SiteItem
                 key={country?.id}
                 active={country?.id === selectedCountryId}
