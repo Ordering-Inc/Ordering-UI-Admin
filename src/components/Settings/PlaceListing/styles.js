@@ -77,23 +77,6 @@ export const HeaderRight = styled.div`
   }
 `
 
-export const CoutryNameContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-
-  label {
-    font-weight: 600;
-  }
-`
-
-export const InputWrapper = styled.div`
-  margin-bottom: 15px;
-  > input {
-    width: 100%;
-  }
-`
-
 export const Tabs = styled.div`
   margin-top: 25px;
   display: flex;
