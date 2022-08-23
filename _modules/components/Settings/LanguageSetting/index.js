@@ -87,22 +87,22 @@ var LanguageSettingUI = function LanguageSettingUI(props) {
       }
     })));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, languageFiledsState.fields.map(function (field) {
-    var _languageState$langua, _languageState$langua2, _languageState$langua3;
+    var _languageState$langua;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "name"
     }, field.name), /*#__PURE__*/_react.default.createElement("div", {
-      className: (languageState === null || languageState === void 0 ? void 0 : (_languageState$langua = languageState.language) === null || _languageState$langua === void 0 ? void 0 : _languageState$langua.id) === field.id ? 'checked default' : 'default',
+      className: field.default ? 'checked default' : 'default',
       onClick: function onClick() {
         return setLanguage(field);
       }
-    }, (languageState === null || languageState === void 0 ? void 0 : (_languageState$langua2 = languageState.language) === null || _languageState$langua2 === void 0 ? void 0 : _languageState$langua2.id) === field.id ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircle, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("div", {
+    }, field.default ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircle, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "status"
     }, /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: field.enabled,
-      disabled: (languageState === null || languageState === void 0 ? void 0 : (_languageState$langua3 = languageState.language) === null || _languageState$langua3 === void 0 ? void 0 : _languageState$langua3.id) === field.id,
+      disabled: (languageState === null || languageState === void 0 ? void 0 : (_languageState$langua = languageState.language) === null || _languageState$langua === void 0 ? void 0 : _languageState$langua.id) === field.id,
       onChange: function onChange(val) {
         return handleChangeFieldSetting(field.id, {
           enabled: val

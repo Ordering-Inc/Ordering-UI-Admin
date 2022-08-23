@@ -48,7 +48,10 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     options: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultLanguages : _languages,
     defaultValue: languagesState !== null && languagesState !== void 0 && languagesState.loading ? defaultCurrentLanguage : currentLanguage,
     onChange: function onChange(languageId) {
-      return handleChangeLanguage(languageId);
+      return handleChangeLanguage(languageId, {
+        key: 'enabled',
+        value: true
+      });
     },
     notReload: notReload,
     minWidth: "200px"
