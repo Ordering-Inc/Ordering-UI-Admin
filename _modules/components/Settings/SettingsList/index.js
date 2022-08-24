@@ -121,10 +121,6 @@ var SettingsListUI = function SettingsListUI(props) {
               invalidMessageList.push(t('VALIDATION_ERROR_NUMERIC', "The ".concat(item === null || item === void 0 ? void 0 : item.name, " must be a number.")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
             }
 
-            if (isNaN(Number(item === null || item === void 0 ? void 0 : item.value)) || Number(item === null || item === void 0 ? void 0 : item.value) <= 0) {
-              invalidMessageList.push(t('VALIDATION_MUST_BIGGER_ZERO', "".concat(item === null || item === void 0 ? void 0 : item.name, " must be bigger than zero")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
-            }
-
             if ((item === null || item === void 0 ? void 0 : item.key) === 'platform_fee_percentage' && Number(item === null || item === void 0 ? void 0 : item.value) > 100) {
               invalidMessageList.push(t('VALIDATION_MUST_SMALLER_HUNDRED', "".concat(item === null || item === void 0 ? void 0 : item.name, " must be not bigger than 100")).replace('_attribute_', item === null || item === void 0 ? void 0 : item.name));
             }

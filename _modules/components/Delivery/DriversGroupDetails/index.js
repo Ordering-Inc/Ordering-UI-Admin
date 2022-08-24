@@ -64,7 +64,8 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       actionState = props.actionState,
       handleParentSidebarMove = props.handleParentSidebarMove,
       handleDeleteDriversGroup = props.handleDeleteDriversGroup,
-      handleNextTour = props.handleNextTour;
+      handleNextTour = props.handleNextTour,
+      handleUpdateDriversGroup = props.handleUpdateDriversGroup;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -182,7 +183,12 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     });
   }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, driversGroupState.driversGroup ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, (_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.enabled
+    defaultChecked: (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.enabled,
+    onChange: function onChange(enabled) {
+      return handleUpdateDriversGroup({
+        enabled: enabled
+      });
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
