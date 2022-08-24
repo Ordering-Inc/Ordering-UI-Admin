@@ -64,9 +64,6 @@ export const SettingsListUI = (props) => {
           if (isNaN(Number(item?.value))) {
             invalidMessageList.push(t('VALIDATION_ERROR_NUMERIC', `The ${item?.name} must be a number.`).replace('_attribute_', item?.name))
           }
-          if (isNaN(Number(item?.value)) || Number(item?.value) <= 0) {
-            invalidMessageList.push(t('VALIDATION_MUST_BIGGER_ZERO', `${item?.name} must be bigger than zero`).replace('_attribute_', item?.name))
-          }
           if (item?.key === 'platform_fee_percentage' && Number(item?.value) > 100) {
             invalidMessageList.push(t('VALIDATION_MUST_SMALLER_HUNDRED', `${item?.name} must be not bigger than 100`).replace('_attribute_', item?.name))
           }
