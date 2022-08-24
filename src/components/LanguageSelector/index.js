@@ -33,7 +33,7 @@ const LanguageSelectorUI = (props) => {
           optionInnerMaxHeight='60vh'
           options={languagesState?.loading ? defaultLanguages : _languages}
           defaultValue={languagesState?.loading ? defaultCurrentLanguage : currentLanguage}
-          onChange={(languageId) => handleChangeLanguage(languageId, {key: 'enabled', value: true})}
+          onChange={(languageId) => handleChangeLanguage(languageId, true)}
           notReload={notReload}
           minWidth='200px'
         />
