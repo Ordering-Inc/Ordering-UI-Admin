@@ -117,7 +117,8 @@ export const EnterprisePromotionConditions = (props) => {
                     <CheckboxWrapper
                       className='condition-checkbox'
                       active
-                      // onClick={() => handleChangeItem({ [condition.attribute]: null })}
+                      isCursorAllowed
+                      onClick={() => handleChangeItem({ [condition.attribute]: null })}
                     >
                       <Check2 />
                     </CheckboxWrapper>
