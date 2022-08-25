@@ -56,6 +56,7 @@ export const CityDetails = (props) => {
             defaultValue={changesState?.country_id || parseInt(city?.country_id)}
             countries={countries}
             handleChangeCountry={val => handleChangesState('country_id', val)}
+            isDisabled={!!city}
           />
         </InputWrapper>
         <Button

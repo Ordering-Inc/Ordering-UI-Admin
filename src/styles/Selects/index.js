@@ -128,6 +128,10 @@ export const Selected = styled.div`
     padding-right: 9px;
     font-size: 13px;
   }
+
+  ${({ isDisabled }) => isDisabled && css`
+    pointer-events: none;
+  `}
 `
 
 export const Select = styled.div`
@@ -149,6 +153,11 @@ export const Select = styled.div`
     color: ${props => props.theme.colors.btnPrimaryContrast};
     border-color: ${props => props.theme.colors.btnPrimary};
     border-radius: 7.6px;
+  `}
+
+  ${({ isDisabled }) => isDisabled && css`
+    cursor: not-allowed;
+    background-color: ${props => props.theme.colors.disabled} !important;
   `}
 `
 

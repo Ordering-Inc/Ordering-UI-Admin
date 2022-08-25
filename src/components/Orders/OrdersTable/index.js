@@ -30,7 +30,8 @@ import {
   LogisticStatusDot,
   PriorityDot,
   Timestatus,
-  Timer
+  Timer,
+  OrdersCountWrapper
 } from './styles'
 
 export const OrdersTable = (props) => {
@@ -545,6 +546,9 @@ export const OrdersTable = (props) => {
                           ) : (
                             <FaUserAlt />
                           )}
+                          <OrdersCountWrapper isNew={order?.customer?.orders_count === 0}>
+                            {order?.customer?.orders_count || t('NEW', 'New')}
+                          </OrdersCountWrapper>
                         </WrapperImage>
                         <div className='info'>
                           <p className='bold'>{order?.customer?.name}</p>

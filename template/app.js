@@ -14,6 +14,7 @@ import { useWindowSize } from '../src/hooks/useWindowSize'
 
 import { SidebarMenu } from '../src/components/SidebarMenu'
 import { Layout } from '../src/components/Layout'
+import { DisabledFeatureAlert } from '../src/components/DisabledFeatureAlert'
 
 import { Home } from './pages/Home'
 import { PageNotFound } from './pages/PageNotFound'
@@ -126,6 +127,7 @@ export const App = () => {
               {onlineStatus && (
                 <ScrollToTop>
                   <HelmetTags />
+                  <DisabledFeatureAlert />
                   <Switch>
                     <Route exact path='/'>
                       {
