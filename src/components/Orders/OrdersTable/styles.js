@@ -216,6 +216,7 @@ export const WrapperImage = styled.div`
   width: 45px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7.6px;
+  position: relative;
 
   img {
     width: 100%;
@@ -367,4 +368,30 @@ export const Timer = styled.div`
   .delayed {
     color: #E63757;
   }
+`
+
+export const OrdersCountWrapper = styled.div`
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background-color: ${props => props.theme.colors.backgroundInfo};
+  color: ${props => props.theme.colors.primary};
+  font-weight: 400;
+  font-size: 9px;
+  line-height: 12px;
+  padding: 2px 5px;
+  position: absolute;
+  top: -9px;
+  right: -5px;
+  ${props => props.theme.rtl && css`
+    left: -5px;
+    right: initial;
+  `}
+
+  ${({ isNew }) => isNew && css`
+    background-color: ${props => props.theme.colors.lightGreen};
+    color: ${props => props.theme.colors.success};
+  `}
 `
