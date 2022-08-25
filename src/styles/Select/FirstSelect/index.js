@@ -33,7 +33,8 @@ export const Select = (props) => {
     handleChangeSearch,
     searchBarIsCustomLayout,
     searchBarPlaceholder,
-    searchBarIsNotLazyLoad
+    searchBarIsNotLazyLoad,
+    isDisabled
   } = props
 
   const [open, setOpen] = useState(false)
@@ -90,9 +91,9 @@ export const Select = (props) => {
   }
 
   return (
-    <SelectInput type={type} className={className || 'select'}>
+    <SelectInput type={type} className={className || 'select'} isDisabled={isDisabled}>
       {!selectedOption && (
-        <Selected onClick={handleSelectClick}>
+        <Selected onClick={handleSelectClick} isDisabled={isDisabled}>
           {placeholder || ''}
           <Chevron className='select-arrow'>
             <FiChevronDown />
@@ -100,7 +101,7 @@ export const Select = (props) => {
         </Selected>
       )}
       {selectedOption && (
-        <Selected onClick={handleSelectClick}>
+        <Selected onClick={handleSelectClick} isDisabled={isDisabled}>
           <Header>
             {selectedOption.showOnSelected || selectedOption.content}
           </Header>

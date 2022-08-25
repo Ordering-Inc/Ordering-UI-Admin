@@ -19,7 +19,7 @@ export const CountryDetails = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const { handleSubmit, register, errors, control } = useForm()
+  const { handleSubmit, register, errors, control, reset } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const onSubmit = (values) => {
@@ -38,6 +38,10 @@ export const CountryDetails = (props) => {
       })
     }
   }, [errors])
+
+  useEffect(() => {
+    reset()
+  }, [country?.id])
 
   return (
     <Container>
