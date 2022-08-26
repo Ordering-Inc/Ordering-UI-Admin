@@ -50,7 +50,8 @@ var CountryDetails = function CountryDetails(props) {
       handleSubmit = _useForm.handleSubmit,
       register = _useForm.register,
       errors = _useForm.errors,
-      control = _useForm.control;
+      control = _useForm.control,
+      reset = _useForm.reset;
 
   var _useState = (0, _react.useState)({
     open: false,
@@ -78,6 +79,9 @@ var CountryDetails = function CountryDetails(props) {
       });
     }
   }, [errors]);
+  (0, _react.useEffect)(function () {
+    reset();
+  }, [country === null || country === void 0 ? void 0 : country.id]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, country ? t('COUNTRY_SETTINGS', 'Country settings') : t('ADD_NEW_COUNTRY ', 'Add new country')), country && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: !!(country !== null && country !== void 0 && country.enabled),
     onChange: function onChange(enabled) {

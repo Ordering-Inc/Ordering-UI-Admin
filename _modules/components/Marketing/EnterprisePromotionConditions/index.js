@@ -41,6 +41,8 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -194,8 +196,11 @@ var EnterprisePromotionConditions = function EnterprisePromotionConditions(props
       }
     }, /*#__PURE__*/_react.default.createElement("div", null, (typeof formState.changes[condition.attribute] !== 'undefined' ? formState.changes[condition.attribute] : Array.isArray(promotionState.promotion[condition.attribute]) ? (_promotionState$promo2 = promotionState.promotion[condition.attribute]) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.length : promotionState.promotion[condition.attribute]) ? /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
       className: "condition-checkbox",
-      active: true // onClick={() => handleChangeItem({ [condition.attribute]: null })}
-
+      active: true,
+      isCursorAllowed: true,
+      onClick: function onClick() {
+        return handleChangeItem(_defineProperty({}, condition.attribute, null));
+      }
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2, null)) : /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
       className: "condition-checkbox"
     }), /*#__PURE__*/_react.default.createElement("span", null, condition.title)), /*#__PURE__*/_react.default.createElement(_styles2.EditButton, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Pencil, null)));

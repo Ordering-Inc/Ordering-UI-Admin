@@ -555,7 +555,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     }))))));
   }) : orderList.orders.map(function (order, i) {
-    var _getOrderStatus, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$summary;
+    var _getOrderStatus, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$summary;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i,
@@ -602,11 +602,13 @@ var OrdersTable = function OrdersTable(props) {
       src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo, 'h_50,c_limit'),
       loading: "lazy",
       alt: ""
-    }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement("div", {
+    }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.OrdersCountWrapper, {
+      isNew: (order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.orders_count) === 0
+    }, (order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.orders_count) || t('NEW', 'New'))), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
     }, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.cellphone)))), isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, {
+    }, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.cellphone)))), isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, {
       color: "#B1BCCC"
     })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
       src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit'),

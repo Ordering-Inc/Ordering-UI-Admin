@@ -60,7 +60,8 @@ var CityDetails = function CityDetails(props) {
     countries: countries,
     handleChangeCountry: function handleChangeCountry(val) {
       return handleChangesState('country_id', val);
-    }
+    },
+    isDisabled: !!city
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
