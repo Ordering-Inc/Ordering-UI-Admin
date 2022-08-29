@@ -7,7 +7,8 @@ export const CountrySelector = (props) => {
   const {
     countries,
     defaultValue,
-    handleChangeCountry
+    handleChangeCountry,
+    isDisabled
   } = props
 
   const [, t] = useLanguage()
@@ -25,6 +26,7 @@ export const CountrySelector = (props) => {
       placeholder={<Option>{t('SELECT_COUNTRY', 'Select a country')}</Option>}
       options={options}
       onChange={val => handleChangeCountry(val)}
+      isDisabled={isDisabled}
     />
   )
 }
