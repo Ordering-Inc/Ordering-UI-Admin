@@ -30,7 +30,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CountrySelector = function CountrySelector(props) {
   var countries = props.countries,
       defaultValue = props.defaultValue,
-      handleChangeCountry = props.handleChangeCountry;
+      handleChangeCountry = props.handleChangeCountry,
+      isDisabled = props.isDisabled;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -48,7 +49,8 @@ var CountrySelector = function CountrySelector(props) {
     options: options,
     onChange: function onChange(val) {
       return handleChangeCountry(val);
-    }
+    },
+    isDisabled: isDisabled
   });
 };
 
