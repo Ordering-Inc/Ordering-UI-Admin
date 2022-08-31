@@ -67,24 +67,24 @@ var EditTaxManager = function EditTaxManager(props) {
     placeholder: t('RATE', 'Rate'),
     required: t('TAX_RATE_REQUIRED', 'Tax rate is required'),
     pattern: {
-      value: /^-?\d+\.?\d*$/,
-      message: t('ERROR_TAX_RATE_INTEGER', 'The tax rate must be an integer.')
+      value: /^-?\d*\.?\d*$/,
+      message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('RATE', 'Rate'))
     }
   }] : [{
     field: 'fixed',
     placeholder: t('FIXED', 'Fixed'),
     required: t('FEE_FIXED_REQUIRED', 'Fee fixed is required'),
     pattern: {
-      value: /^-?\d+\.?\d*$/,
-      message: t('ERROR_FEE_FIXED_INTEGER', 'The fee fixed must be an integer.')
+      value: /^-?\d*\.?\d*$/,
+      message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('FIXED', 'Fixed'))
     }
   }, {
     field: 'percentage',
     placeholder: t('PERCENTAGE', 'Percentage'),
     required: t('FEE_PERCENTAGE_REQUIRED', 'Fee percentage is required'),
     pattern: {
-      value: /^-?\d+\.?\d*$/,
-      message: t('ERROR_FEE_PERCENTAGE_INTEGER', 'The fee percentage must be an integer.')
+      value: /^-?\d*\.?\d*$/,
+      message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('PERCENTAGE', 'Percentage'))
     }
   }]]);
   (0, _react.useEffect)(function () {
