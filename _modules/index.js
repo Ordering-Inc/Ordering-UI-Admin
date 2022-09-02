@@ -417,6 +417,12 @@ Object.defineProperty(exports, "BusinessPromotionList", {
     return _Stores.BusinessPromotionList;
   }
 });
+Object.defineProperty(exports, "BusinessPublishing", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.BusinessPublishing;
+  }
+});
 Object.defineProperty(exports, "BusinessReviewList", {
   enumerable: true,
   get: function get() {
@@ -1465,6 +1471,12 @@ Object.defineProperty(exports, "PaymentOption", {
   enumerable: true,
   get: function get() {
     return _Stores.PaymentOption;
+  }
+});
+Object.defineProperty(exports, "PaymentOptionMethods", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.PaymentOptionMethods;
   }
 });
 Object.defineProperty(exports, "PaymentOptionPaypal", {

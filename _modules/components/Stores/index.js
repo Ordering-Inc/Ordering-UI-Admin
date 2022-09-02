@@ -255,6 +255,12 @@ Object.defineProperty(exports, "BusinessPromotionList", {
     return _BusinessPromotionList.BusinessPromotionList;
   }
 });
+Object.defineProperty(exports, "BusinessPublishing", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessPublishing.BusinessPublishing;
+  }
+});
 Object.defineProperty(exports, "BusinessSchedule", {
   enumerable: true,
   get: function get() {
@@ -391,6 +397,12 @@ Object.defineProperty(exports, "PaymentOption", {
   enumerable: true,
   get: function get() {
     return _PaymentOption.PaymentOption;
+  }
+});
+Object.defineProperty(exports, "PaymentOptionMethods", {
+  enumerable: true,
+  get: function get() {
+    return _PaymentOptionMethods.PaymentOptionMethods;
   }
 });
 Object.defineProperty(exports, "PaymentOptionPaypal", {
@@ -763,3 +775,7 @@ var _SingleBusiness = require("./SingleBusiness");
 var _PaymentOptionSquare = require("./PaymentOptionSquare");
 
 var _BusinessWalletsList = require("./BusinessWalletsList");
+
+var _PaymentOptionMethods = require("./PaymentOptionMethods");
+
+var _BusinessPublishing = require("./BusinessPublishing");
