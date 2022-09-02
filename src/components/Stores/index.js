@@ -93,6 +93,8 @@ import { ProductTagDetails } from './ProductTagDetails'
 import { SingleBusiness } from './SingleBusiness'
 import { PaymentOptionSquare } from './PaymentOptionSquare'
 import { BusinessWalletsList } from './BusinessWalletsList'
+import { PaymentOptionMethods } from './PaymentOptionMethods'
+import { BusinessPublishing } from './BusinessPublishing'
 
 export {
   BusinessBrandListing,
@@ -189,5 +191,7 @@ export {
   ProductTagDetails,
   SingleBusiness,
   PaymentOptionSquare,
-  BusinessWalletsList
+  BusinessWalletsList,
+  PaymentOptionMethods,
+  BusinessPublishing
 }
