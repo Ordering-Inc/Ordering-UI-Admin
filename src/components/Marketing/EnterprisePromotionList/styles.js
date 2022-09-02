@@ -60,7 +60,7 @@ export const PromotionListTable = styled.table`
   }
 `
 export const SinglePromotionTbody = styled.tbody`
-  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};
@@ -74,8 +74,12 @@ export const SinglePromotionTbody = styled.tbody`
   }
 
   ${({ isAccept }) => isAccept && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
     background-color: ${props => props.theme.colors.secundary};
   `}
+  &:last-of-type {
+    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  }
 `
 export const EnableWrapper = styled.div`
   display: flex;
