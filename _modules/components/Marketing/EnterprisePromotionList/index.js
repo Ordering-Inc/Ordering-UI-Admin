@@ -205,7 +205,9 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 30
     })))));
-  }) : promotionListState.promotions.map(function (promotion) {
+  }) : promotionListState.promotions.sort(function (a, b) {
+    return Number(a === null || a === void 0 ? void 0 : a.rank) - Number(b === null || b === void 0 ? void 0 : b.rank);
+  }).map(function (promotion) {
     var _theme$images$icons;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.SinglePromotionTbody, {

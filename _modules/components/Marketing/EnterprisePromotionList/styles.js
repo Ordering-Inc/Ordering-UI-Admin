@@ -47,7 +47,7 @@ var PromotionListTable = _styledComponents.default.table(_templateObject3 || (_t
 
 exports.PromotionListTable = PromotionListTable;
 
-var SinglePromotionTbody = _styledComponents.default.tbody(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n  &:hover {\n    background-color: ", ";\n  }\n  &.active {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", ";\n      border-bottom: 1px solid ", ";\n    }\n  }\n\n  ", "\n"])), function (props) {
+var SinglePromotionTbody = _styledComponents.default.tbody(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  border-top: 1px solid ", ";\n  cursor: pointer;\n  &:hover {\n    background-color: ", ";\n  }\n  &.active {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", ";\n      border-bottom: 1px solid ", ";\n    }\n  }\n\n  ", "\n  &:last-of-type {\n    border-bottom: 1px solid ", ";\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.lightPrimary;
@@ -59,9 +59,13 @@ var SinglePromotionTbody = _styledComponents.default.tbody(_templateObject5 || (
   return props.theme.colors.primary;
 }, function (_ref3) {
   var isAccept = _ref3.isAccept;
-  return isAccept && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    background-color: ", ";\n  "])), function (props) {
+  return isAccept && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    border-top: 1px solid ", ";\n    background-color: ", ";\n  "])), function (props) {
+    return props.theme.colors.primary;
+  }, function (props) {
     return props.theme.colors.secundary;
   });
+}, function (props) {
+  return props.theme.colors.borderColor;
 });
 
 exports.SinglePromotionTbody = SinglePromotionTbody;
