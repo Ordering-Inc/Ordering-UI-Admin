@@ -296,7 +296,9 @@ import {
   ProductTagDetails,
   SingleBusiness,
   PaymentOptionSquare,
-  BusinessWalletsList
+  BusinessWalletsList,
+  PaymentOptionMethods,
+  BusinessPublishing
 } from './components/Stores'
 import {
   CustomersListing,
@@ -673,6 +675,8 @@ export {
   SingleBusiness,
   PaymentOptionSquare,
   BusinessWalletsList,
+  PaymentOptionMethods,
+  BusinessPublishing,
 
   LogoutButton,
   LanguageSelector,
