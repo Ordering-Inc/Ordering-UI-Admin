@@ -183,7 +183,7 @@ export const EnterprisePromotionList = (props) => {
               </SinglePromotionTbody>
             ))
           ) : (
-            promotionListState.promotions.map(promotion => (
+            promotionListState.promotions.sort((a, b) => Number(a?.rank) - Number(b?.rank)).map(promotion => (
               <SinglePromotionTbody
                 key={promotion.id}
                 className={(selectedPromotion?.id === promotion.id) ? 'draggable_promotion active' : 'draggable_promotion'}
