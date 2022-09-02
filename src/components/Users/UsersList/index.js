@@ -106,6 +106,7 @@ export const UsersList = (props) => {
                 <th>{t('USER', 'User')}</th>
                 <th>{t('PHONE', 'Phone')}</th>
                 <th>{t('TYPE', 'Type')}</th>
+                <th className='amout-orders '>{t('AMOUNT_OF_ORDERS', 'Amount of orders')}</th>
                 <th>{t('ACTION', 'Action')}</th>
               </tr>
             </thead>
@@ -134,6 +135,9 @@ export const UsersList = (props) => {
                       <UserTypeWrapper>
                         <Skeleton width={80} />
                       </UserTypeWrapper>
+                    </td>
+                    <td>
+                      <Skeleton width={20} />
                     </td>
                     <td>
                       <Skeleton width={20} />
@@ -197,8 +201,13 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      <UserTypeWrapper>
+                      <UserTypeWrapper noBorder>
                         <p>{getUserType(user?.level)?.value}</p>
+                      </UserTypeWrapper>
+                    </td>
+                    <td>
+                      <UserTypeWrapper>
+                        <p>{user?.orders_count || t('NEW', 'New')}</p>
                       </UserTypeWrapper>
                     </td>
                     <td>

@@ -245,7 +245,6 @@ const OrdersManagerUI = (props) => {
           open={isOpenOrderDetail}
           order={detailsOrder}
           orderId={orderDetailId}
-          driversList={driversList}
           isTourOpen={isTourOpen}
           onClose={() => handleBackRedirect()}
           setCurrentTourStep={setCurrentTourStep}

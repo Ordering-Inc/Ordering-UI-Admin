@@ -29,7 +29,8 @@ const DriversGroupDetailsUI = (props) => {
     actionState,
     handleParentSidebarMove,
     handleDeleteDriversGroup,
-    handleNextTour
+    handleNextTour,
+    handleUpdateDriversGroup
   } = props
 
   const theme = useTheme()
@@ -109,6 +110,7 @@ const DriversGroupDetailsUI = (props) => {
                 <h1>{driversGroupState.driversGroup?.name}</h1>
                 <Switch
                   defaultChecked={driversGroupState.driversGroup?.enabled}
+                  onChange={enabled => handleUpdateDriversGroup({ enabled: enabled })}
                 />
               </div>
               <ActionSelectorWrapper>

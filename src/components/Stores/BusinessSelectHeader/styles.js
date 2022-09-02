@@ -4,7 +4,7 @@ export const PopMenuContatiner = styled.div`
   position: absolute;
   left:0px;
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-  width: 240px;
+  width: 280px;
   border: 1px solid #E9ECEF;
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgb(0 0 0 / 12%);
@@ -53,34 +53,39 @@ export const OptionItem = styled.div`
       margin-left: 8px;
     `}
   }
-  span {
+  > div {
     display: flex;
     flex-direction: column;
-    font-size: 12px;
-    max-width: 170px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    color: ${props => props.theme.colors.textGray};
+    max-width: 210px;
     b {
       font-size: 14px;
       line-height: 20px;
       font-weight: 400;
       color: ${props => props.theme.colors.textBlack};
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
+    p {
+      margin: 0;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      color: ${props => props.theme.colors.textGray};
+    }
+  }
+  span {
+    display: flex;
   }
 `
 export const BusinessList = styled.div`
 `
 export const WrapperPagination = styled.div`
-  display: flex;
-  justify-content: flex-end;
   margin-top: 10px;
   >div>div{
     margin: 0;
     button {
-      width: 20px;
-      height: 20px;
       font-size: 12px;
     }
   }

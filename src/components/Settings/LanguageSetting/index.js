@@ -47,10 +47,10 @@ const LanguageSettingUI = (props) => {
               <FieldContainer key={field.id}>
                 <div className='name'>{field.name}</div>
                 <div
-                  className={languageState?.language?.id === field.id ? 'checked default' : 'default'}
+                  className={field.default ? 'checked default' : 'default'}
                   onClick={() => setLanguage(field)}
                 >
-                  {(languageState?.language?.id === field.id) ? <RecordCircle /> : <Circle />}
+                  {(field.default) ? <RecordCircle /> : <Circle />}
                 </div>
                 <div className='status'>
                   <Switch

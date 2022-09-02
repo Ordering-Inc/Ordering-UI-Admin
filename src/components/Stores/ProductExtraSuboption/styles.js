@@ -4,7 +4,16 @@ import { darken } from 'polished'
 export const SubOptionContainer = styled.form`
   display: flex;
   width: 100%;
-  margin-bottom: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+
+  ${({ isDragOver }) => isDragOver && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
+  `}
+
+  ${({ isBorderBottom }) => isBorderBottom && css`
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+  `}
 `
 export const LeftSubOptionContent = styled.div`
   flex: 1;
@@ -232,6 +241,18 @@ export const ActionSelectorWrapper = styled.div`
       .dropdown-item:last-child {
         color: ${props => props.theme.colors.danger};
       }
+    }
+  }
+`
+export const DragImageWrapper = styled.div`
+  img {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 20px;
+    ` : css`
+      margin-right: 20px;
+    `}
+    &:hover {
+      cursor: grab;
     }
   }
 `
