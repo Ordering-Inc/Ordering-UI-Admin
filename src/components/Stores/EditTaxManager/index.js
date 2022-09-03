@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
+import { Alert } from '../../Shared'
 import {
   TypeSelectWrapper,
   Option,
@@ -21,11 +22,12 @@ export const EditTaxManager = (props) => {
     data,
     formChanges,
     onChange,
-    onClose,
-    setAlertState
+    onClose
   } = props
 
   const [, t] = useLanguage()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const formMethods = useForm()
   const positiveNumberFields = ['rate', 'fixed']
   const defaultInputs = [
@@ -172,6 +174,15 @@ export const EditTaxManager = (props) => {
           {t('CLOSE', 'Close')}
         </Button>
       </ButtonGroup>
+      <Alert
+        title={t('ERROR')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </EditTaxContainer>
   )
 }
