@@ -34,7 +34,7 @@ export const EditTaxManager = (props) => {
   ]
 
   const rateValidationNumber = (value) => {
-    if (!isNaN(parseFloat(value))) {
+    if (!isNaN(Number(value))) {
       return true
     } else {
       return t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('RATE', 'Rate'))
@@ -42,7 +42,7 @@ export const EditTaxManager = (props) => {
   }
 
   const feeValidationNumber = (value) => {
-    if (!isNaN(parseFloat(value))) {
+    if (!isNaN(Number(value))) {
       return true
     } else {
       return t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('FIXED', 'Fixed'))
