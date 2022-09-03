@@ -27,11 +27,28 @@ export const EditTaxManager = (props) => {
 
   const [, t] = useLanguage()
   const formMethods = useForm()
-  const positiveNumberFields  =['rate', 'fixed']
+  const positiveNumberFields = ['rate', 'fixed']
   const defaultInputs = [
     { field: 'name', placeholder: t('NAME', 'Name'), required: t('NAME_REQUIRED', 'The name is required') },
     { field: 'description', placeholder: t('DESCRIPTION', 'Description'), required: t('DESCRIPTION_REQUIRED', 'The Description is required') }
   ]
+
+  const rateValidationNumber = (value) => {
+    if (!isNaN(parseFloat(value))) {
+      return true
+    } else {
+      return t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('RATE', 'Rate'))
+    }
+  }
+
+  const feeValidationNumber = (value) => {
+    if (!isNaN(parseFloat(value))) {
+      return true
+    } else {
+      return t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('FIXED', 'Fixed'))
+    }
+  }
+
   const inputs = [
     ...defaultInputs,
     type === 'taxes' ? [
@@ -42,7 +59,8 @@ export const EditTaxManager = (props) => {
         pattern: {
           value: /^\d*\.?\d*$/,
           message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('RATE', 'Rate'))
-        }
+        },
+        validate: rateValidationNumber
       }
     ] : [
       {
@@ -52,7 +70,8 @@ export const EditTaxManager = (props) => {
         pattern: {
           value: /^\d*\.?\d*$/,
           message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('FIXED', 'Fixed'))
-        }
+        },
+        validate: feeValidationNumber
       },
       {
         field: 'percentage',
@@ -90,13 +109,15 @@ export const EditTaxManager = (props) => {
               onChange={(e) => onChange(input.field, e.target.value)}
               ref={formMethods.register({
                 required: input.required,
-                pattern: input.pattern
+                pattern: input.pattern,
+                validate: input.validate
               })}
               onKeyPress={(e) => {
                 if (positiveNumberFields.includes(input.field) && !/^[0-9.]$/.test(e.key)) {
                   e.preventDefault()
                 }
               }}
+              autoComplete='off'
             />
           </InputContainer>
         ))}
