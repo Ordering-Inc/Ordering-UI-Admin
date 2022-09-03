@@ -27,6 +27,7 @@ export const EditTaxManager = (props) => {
 
   const [, t] = useLanguage()
   const formMethods = useForm()
+  const positiveNumberFields  =['rate', 'fixed']
   const defaultInputs = [
     { field: 'name', placeholder: t('NAME', 'Name'), required: t('NAME_REQUIRED', 'The name is required') },
     { field: 'description', placeholder: t('DESCRIPTION', 'Description'), required: t('DESCRIPTION_REQUIRED', 'The Description is required') }
@@ -39,7 +40,7 @@ export const EditTaxManager = (props) => {
         placeholder: t('RATE', 'Rate'),
         required: t('TAX_RATE_REQUIRED', 'Tax rate is required'),
         pattern: {
-          value: /^-?\d*\.?\d*$/,
+          value: /^\d*\.?\d*$/,
           message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('RATE', 'Rate'))
         }
       }
@@ -49,7 +50,7 @@ export const EditTaxManager = (props) => {
         placeholder: t('FIXED', 'Fixed'),
         required: t('FEE_FIXED_REQUIRED', 'Fee fixed is required'),
         pattern: {
-          value: /^-?\d*\.?\d*$/,
+          value: /^\d*\.?\d*$/,
           message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('FIXED', 'Fixed'))
         }
       },
@@ -91,6 +92,11 @@ export const EditTaxManager = (props) => {
                 required: input.required,
                 pattern: input.pattern
               })}
+              onKeyPress={(e) => {
+                if (positiveNumberFields.includes(input.field) && !/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
             />
           </InputContainer>
         ))}
