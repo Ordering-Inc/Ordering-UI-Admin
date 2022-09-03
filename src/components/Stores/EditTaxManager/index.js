@@ -49,6 +49,14 @@ export const EditTaxManager = (props) => {
     }
   }
 
+  const percentageValidationNumber = (value) => {
+    if (Number(value) <= 100) {
+      return true
+    } else {
+      return t('VALIDATION_MUST_SMALLER_HUNDRED', 'The precentage must be not bigger than 100').replace('_attribute_', t('PERCENTAGE', 'Percentage'))
+    }
+  }
+
   const inputs = [
     ...defaultInputs,
     type === 'taxes' ? [
@@ -80,7 +88,8 @@ export const EditTaxManager = (props) => {
         pattern: {
           value: /^-?\d*\.?\d*$/,
           message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('PERCENTAGE', 'Percentage'))
-        }
+        },
+        validate: percentageValidationNumber
       }
     ]
   ]
