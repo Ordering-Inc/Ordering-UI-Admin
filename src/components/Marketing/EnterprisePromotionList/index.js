@@ -39,7 +39,8 @@ export const EnterprisePromotionList = (props) => {
     handleAllowDrop,
     handleDrop,
     handleDragEnd,
-    handleEnablePromotion
+    handleEnablePromotion,
+    isPromotionBottom
   } = props
 
   const [, t] = useLanguage()
@@ -183,15 +184,16 @@ export const EnterprisePromotionList = (props) => {
               </SinglePromotionTbody>
             ))
           ) : (
-            promotionListState.promotions.sort((a, b) => Number(a?.rank) - Number(b?.rank)).map(promotion => (
+            promotionListState.promotions.sort((a, b) => Number(a?.rank) - Number(b?.rank)).map((promotion, index) => (
               <SinglePromotionTbody
                 key={promotion.id}
                 className={(selectedPromotion?.id === promotion.id) ? 'draggable_promotion active' : 'draggable_promotion'}
                 onClick={(e) => handleClickPromotion(e, promotion)}
-                onDragOver={e => handleAllowDrop?.(e, promotion.id)}
+                onDragOver={e => handleAllowDrop?.(e, promotion.id, index)}
                 onDrop={e => handleDrop(e, promotion)}
                 onDragEnd={e => handleDragEnd(e)}
                 isAccept={dataSelected && dataSelected === promotion?.id}
+                isPromotionBottom={isPromotionBottom}
               >
                 <tr>
                   {allowColumns?.promotions && (
