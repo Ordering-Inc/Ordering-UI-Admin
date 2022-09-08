@@ -44,6 +44,7 @@ import { OrdersListing } from './OrdersListing'
 import { OrdersTable } from './OrdersTable'
 import { OrdersCards } from './OrdersCards'
 import { ReviewCustomer } from './ReviewCustomer'
+import { CountryFilter } from './CountryFilter'
 
 export {
   Appointments,
@@ -90,5 +91,6 @@ export {
   OrdersListing,
   OrdersTable,
   OrdersCards,
-  ReviewCustomer
+  ReviewCustomer,
+  CountryFilter
 }
