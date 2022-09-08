@@ -25,6 +25,8 @@ var _DeliveryTypeSelector = require("../DeliveryTypeSelector");
 
 var _PaymethodTypeSelector = require("../PaymethodTypeSelector");
 
+var _CountryFilter = require("../CountryFilter");
+
 var _styles = require("../../../styles");
 
 var _styles2 = require("./styles");
@@ -70,7 +72,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
       handleChangePaymethodType = props.handleChangePaymethodType,
       handleResetFilterValues = props.handleResetFilterValues,
       handleChangeFilterValues = props.handleChangeFilterValues,
-      handleChangeOrderId = props.handleChangeOrderId;
+      handleChangeOrderId = props.handleChangeOrderId,
+      handleChangeCountryCode = props.handleChangeCountryCode;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -136,6 +139,9 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     paymethodsList: paymethodsList,
     filterValues: filterValues,
     handleChangePaymethodType: handleChangePaymethodType
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, {
+    filterValues: filterValues,
+    handleChangeCountryCode: handleChangeCountryCode
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
