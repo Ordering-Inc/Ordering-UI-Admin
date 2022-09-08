@@ -29,7 +29,8 @@ export const OrderContactInformation = (props) => {
     order,
     isTourOpen,
     setCurrentTourStep,
-    handleOpenMessages
+    handleOpenMessages,
+    isServiceOrder
   } = props
 
   const [, t] = useLanguage()
@@ -208,7 +209,7 @@ export const OrderContactInformation = (props) => {
           </CutsomerDetail>
         </Accordion.Collapse>
       </Accordion>
-      {order?.delivery_type === 1 && (
+      {order?.delivery_type === 1 && !isServiceOrder && (
         <>
           <DriverSelectorContainer>
             <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>

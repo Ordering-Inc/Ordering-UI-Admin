@@ -64,6 +64,11 @@ export const SidebarMenu = (props) => {
       id: 3,
       title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
       pageName: 'drivers'
+    },
+    {
+      id: 4,
+      title: t('APPOINTMENTS', 'Appointments'),
+      pageName: 'appointments'
     }
   ]
 
@@ -344,7 +349,8 @@ export const SidebarMenu = (props) => {
                       active={
                         location.pathname === '/orders' ||
                         location.pathname === '/deliveries' ||
-                        location.pathname === '/drivers'
+                        location.pathname === '/drivers' ||
+                        location.pathname === '/appointments'
                       }
                     >
                       <ListCheck />
