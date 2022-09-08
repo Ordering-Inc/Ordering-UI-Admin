@@ -3,6 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+Object.defineProperty(exports, "Appointments", {
+  enumerable: true,
+  get: function get() {
+    return _Appointments.Appointments;
+  }
+});
 Object.defineProperty(exports, "BusinessesSelector", {
   enumerable: true,
   get: function get() {
@@ -267,6 +273,8 @@ Object.defineProperty(exports, "WizardOrders", {
     return _WizardOrders.WizardOrders;
   }
 });
+
+var _Appointments = require("./Appointments");
 
 var _DeliveriesManager = require("./DeliveriesManager");
 
