@@ -67,8 +67,8 @@ var FreeProductsList = function FreeProductsList(props) {
     key: 'store_app',
     type: 1,
     title: t('ORDERING_STORE_APP', 'Store App _version_').replace('_version_', '2.0'),
-    short_description: t('STORE_APP_SHORT_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.'),
-    long_description: t('STORE_APP_LONG_DESCRIPTION', 'Allow your restaurants or business owners to receive their orders on your own white-labeled Orders Manager app.<br /><br />Use it Branded on your business at no cost.<br />All you need to do is use the Business Owners Credentials that you currently have on your Dashboard.'),
+    short_description: t('STORE_APP_SHORT_DESCRIPTION', 'Give your business owners or managers a tool to manage their whole businesses incoming orders on the go by installing a branded app on any mobile device they have.'),
+    long_description: t('STORE_APP_FREE_LONG_DESCRIPTION', 'Give your business owners or managers a tool to manage their whole businesses incoming orders on the go by installing a branded app on any mobile device they have.<br /><sub>This is a branded Ordering.co product; use it with your project, email, and password for free; features might be limited.</sub>'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CartPlusFill, null),
     image: theme.images.apps.storeApp,
     app_store: 'https://apps.apple.com/us/app/store-app-2-0/id1608192050',
@@ -77,8 +77,8 @@ var FreeProductsList = function FreeProductsList(props) {
     key: 'driver_app',
     type: 1,
     title: t('ORDERING_DRIVER_APP', 'Driver App _version_').replace('_version_', '2.0'),
-    short_description: t('DRIVER_APP_SHORT_DESCRIPTION', 'Use it Branded on your business at no cost.'),
-    long_description: t('DRIVER_APP_LONG_DESCRIPTION', 'Use it Branded on your business at no cost.<br />All you need to do is use the Driver Credentials that you currently have on your Dashboard.'),
+    short_description: t('DRIVER_APP_SHORT_DESCRIPTION', 'Your fleet´s best companion gives drivers a tool to receive orders, follow optimal routes, add delivery evidence, set orders timing, and control their busy times.'),
+    long_description: t('DRIVER_APP_FREE_LONG_DESCRIPTION', 'Your fleet´s best companion gives drivers a tool to receive orders, follow optimal routes, add delivery evidence, set orders timing, and control their busy times.<br /><sub>This is a branded Ordering.co product; use it with your project, email, and password for free; features might be limited.</sub>'),
     icon: /*#__PURE__*/_react.default.createElement("img", {
       src: theme.images.icons.delivery,
       alt: "delivery app icon"
@@ -90,8 +90,8 @@ var FreeProductsList = function FreeProductsList(props) {
     key: 'pos_app',
     type: 1,
     title: t('ORDERING_POS', 'POS _version_').replace('_version_', '2.0'),
-    short_description: t('POS_APP_SHORT_DESCRIPTION', 'Create orders in your system without the hassle and auto-complete information.'),
-    long_description: t('POS_APP_LONG_DESCRIPTION', 'POS Ordering System: Take orders on the phone easily<br />Create orders in your system without the hassle and auto-complete information.<br />Save customer info with their number'),
+    short_description: t('POS_APP_SHORT_DESCRIPTION', 'Create a loyal and returning community by offering the best customer experience; customer service is always the definite factor for users to keep returning; this fast software will help you understand customers, save their numbers, and order quickly.'),
+    long_description: t('POS_APP_FREE_LONG_DESCRIPTION', 'Create a loyal and returning community by offering the best customer experience; customer service is always the definite factor for users to keep returning; this fast software will help you understand customers, save their numbers, and order quickly.<br /><sub>This is a branded Ordering.co product; use it with your project, email, and password for free; features might be limited.</sub>'),
     icon: /*#__PURE__*/_react.default.createElement("img", {
       src: theme.images.icons.posTerminal,
       alt: "pos app icon"
@@ -103,8 +103,8 @@ var FreeProductsList = function FreeProductsList(props) {
     key: 'kiosk_app',
     type: 1,
     title: t('ORDERING_KIOSK', 'Ordering Kiosk _version_').replace('_version_', '2.0'),
-    short_description: t('KIOSK_APP_SHORT_DESCRIPTION', 'Ordering Kiosk completes that final step for each sale'),
-    long_description: t('KIOSK_APP_LONG_DESCRIPTION', 'Did you know that 7 out of 10 customers prefer to make their orders themselves?<br />Ordering Kiosk completes that final step for each sale.'),
+    short_description: t('KIOSK_APP_SHORT_DESCRIPTION', 'Simplify the ordering process inside your store. Allow your customers to select what they want to purchase products and pay directly in this kiosk—made with the highest tech, intuitive, and modern.'),
+    long_description: t('KIOSK_APP_FREE_LONG_DESCRIPTION', 'Simplify the ordering process inside your store. Allow your customers to select what they want to purchase products and pay directly in this kiosk—made with the highest tech, intuitive, and modern.<br /><sub>This is a branded Ordering.co product; use it with your project, email, and password for free; features might be limited.</sub>'),
     icon: /*#__PURE__*/_react.default.createElement("img", {
       src: theme.images.icons.poster,
       alt: "kiosk app icon"
@@ -116,8 +116,8 @@ var FreeProductsList = function FreeProductsList(props) {
     key: 'call_center',
     type: 2,
     title: t('ORDERING_CALL_CENTER', 'Call Center _version_').replace('_version_', '2.0'),
-    short_description: t('CALL_CENTER_SHORT_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
-    long_description: t('CALL_CENTER_LONG_DESCRIPTION', 'Improving your <b>Customer Experience</b> and your <b>Orders Management</b> team processes.<br />Seamlessly integrated with your Ordering Solution.'),
+    short_description: t('CALL_CENTER_SHORT_DESCRIPTION', 'Take orders over the phone, too; agents will take orders over the phone and create the order for your customers in just a few minutes, using this friendly and intuitive software.'),
+    long_description: t('CALL_CENTER_FREE_LONG_DESCRIPTION', 'Take orders over the phone, too; agents will take orders over the phone and create the order for your customers in just a few minutes, using this friendly and intuitive software.<br /><sub>This is a branded Ordering.co product; use it with your project, email, and password for free; features might be limited.</sub>'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null),
     image: theme.images.apps.callCenterApp,
     web_url: 'https://callcenter.tryordering.com/search'
