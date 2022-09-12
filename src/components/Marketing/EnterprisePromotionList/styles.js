@@ -46,7 +46,6 @@ export const PromotionListTable = styled.table`
   }
 
   thead {
-    border-bottom: 1px solid ${props => props.theme.colors.disabled};
     tr {
       th {
         ${({ noFixedHeader }) => !noFixedHeader && css`
@@ -60,7 +59,7 @@ export const PromotionListTable = styled.table`
   }
 `
 export const SinglePromotionTbody = styled.tbody`
-  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+  border-top: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};
@@ -73,7 +72,18 @@ export const SinglePromotionTbody = styled.tbody`
     }
   }
 
+  &:first-of-type {
+    ${({ isAccept }) => css`
+      border-top: 1px solid ${props => isAccept ? props.theme.colors.primary : props.theme.colors.disabled};
+    `}
+  }
+  &:last-of-type {
+    ${({ isPromotionBottom }) => css`
+      border-bottom: 1px solid ${props => isPromotionBottom ? props.theme.colors.primary : props.theme.colors.borderColor};
+    `}
+  }
   ${({ isAccept }) => isAccept && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
     background-color: ${props => props.theme.colors.secundary};
   `}
 `
