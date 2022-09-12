@@ -49,6 +49,7 @@ import { Support } from './pages/Support'
 import { AdvancedReports } from './pages/AdvancedReports'
 import { EnterprisePromotionList } from './pages/EnterprisePromotionList'
 import { Appointments } from './pages/Appointments'
+import { GiftCardsList } from './pages/GiftCardsList'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -183,6 +184,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/appointments' allowedLevels={[0]}>
                       <Appointments />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/gift-cards' allowedLevels={[0]}>
+                      <GiftCardsList />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/messages' allowedLevels={[0, 2]}>
