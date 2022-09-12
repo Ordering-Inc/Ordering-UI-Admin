@@ -89,6 +89,10 @@ var SidebarMenu = function SidebarMenu(props) {
     id: 4,
     title: t('APPOINTMENTS', 'Appointments'),
     pageName: 'appointments'
+  }, {
+    id: 5,
+    title: t('GIFT_CARD_MANAGER', 'Gift card manager'),
+    pageName: 'giftCards'
   }];
   var loyaltySubMenus = [{
     id: 1,
