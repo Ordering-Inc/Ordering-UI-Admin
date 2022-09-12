@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, DragAndDrop, ExamineClick } from 'ordering-components-admin'
+import { useLanguage, DragAndDrop, ExamineClick, useToast, ToastType } from 'ordering-components-admin'
+import Skeleton from 'react-loading-skeleton'
 import { ThemeOption } from './ThemeOption'
 import { Alert, ImageCrop, Modal } from '../../Shared'
 import { Checkbox } from '../../../styles'
@@ -27,8 +28,11 @@ export const ThemeComponent = (props) => {
 
   const [, t] = useLanguage()
   const imageRef = useRef(null)
+  const [, { showToast }] = useToast()
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
+  const [imageUploadState, setImageUploadState] = useState({ loading: false, image: null })
 
   const getTitle = (key) => {
     return t(key.toUpperCase, key.replace(/_/g, ' '))
@@ -79,10 +83,38 @@ export const ThemeComponent = (props) => {
     }
   }
 
-  const handleChangePhoto = (croppedImg) => {
-    setCropState({ name: null, data: null, open: false })
-    // handleAddThemeGallery(croppedImg)
-    handleChangeValue(croppedImg)
+  const handleChangePhoto = async (croppedImg) => {
+    try {
+      setImageUploadState({
+        ...imageUploadState,
+        loading: true
+      })
+      showToast(ToastType.Info, t('LOADING', 'Loading'))
+      setCropState({ name: null, data: null, open: false })
+      const { error, result } = await handleAddThemeGallery(croppedImg)
+      if (!error) {
+        showToast(ToastType.Success, t('IMAGE_SAVED', 'Image saved'))
+        handleChangeValue(result?.image)
+      } else {
+        setAlertState({
+          open: true,
+          content: result
+        })
+      }
+      setImageUploadState({
+        loading: false,
+        image: error ? null : result?.image
+      })
+    } catch (error) {
+      setImageUploadState({
+        ...imageUploadState,
+        loading: false
+      })
+      setAlertState({
+        open: true,
+        content: [error.message]
+      })
+    }
   }
 
   return (
@@ -109,8 +141,11 @@ export const ThemeComponent = (props) => {
               onDrop={dataTransfer => handleFiles(dataTransfer.files)}
               accept='image/png, image/jpeg, image/jpg'
             >
-              {valueObject && (
-                <img src={valueObject} alt='image' loading='lazy' />
+              {imageUploadState.loading && (
+                <Skeleton width={160} height={160} />
+              )}
+              {!imageUploadState.loading && (imageUploadState.image || valueObject) && (
+                <img src={imageUploadState.image || valueObject} alt='image' loading='lazy' />
               )}
               <UploadImageIconContainer>
                 <UploadImageIcon>

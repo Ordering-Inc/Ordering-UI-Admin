@@ -1,6 +1,7 @@
 import { Appointments } from './Appointments'
 import { DeliveriesManager } from './DeliveriesManager'
 import { DriversManager } from './DriversManager'
+import { GiftCardsListing } from './GiftCardsListing'
 
 import { Messages } from './Messages'
 import { OrdersContentHeader } from './OrdersContentHeader'
@@ -50,6 +51,7 @@ export {
   Appointments,
   DeliveriesManager,
   DriversManager,
+  GiftCardsListing,
   Messages,
   OrdersContentHeader,
   OrdersManager,
