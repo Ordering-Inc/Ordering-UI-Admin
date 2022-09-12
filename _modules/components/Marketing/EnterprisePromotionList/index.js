@@ -69,7 +69,8 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       handleAllowDrop = props.handleAllowDrop,
       handleDrop = props.handleDrop,
       handleDragEnd = props.handleDragEnd,
-      handleEnablePromotion = props.handleEnablePromotion;
+      handleEnablePromotion = props.handleEnablePromotion,
+      isPromotionBottom = props.isPromotionBottom;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -205,7 +206,9 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 30
     })))));
-  }) : promotionListState.promotions.map(function (promotion) {
+  }) : promotionListState.promotions.sort(function (a, b) {
+    return Number(a === null || a === void 0 ? void 0 : a.rank) - Number(b === null || b === void 0 ? void 0 : b.rank);
+  }).map(function (promotion, index) {
     var _theme$images$icons;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.SinglePromotionTbody, {
@@ -215,7 +218,7 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
         return handleClickPromotion(e, promotion);
       },
       onDragOver: function onDragOver(e) {
-        return handleAllowDrop === null || handleAllowDrop === void 0 ? void 0 : handleAllowDrop(e, promotion.id);
+        return handleAllowDrop === null || handleAllowDrop === void 0 ? void 0 : handleAllowDrop(e, promotion.id, index);
       },
       onDrop: function onDrop(e) {
         return handleDrop(e, promotion);
@@ -223,7 +226,8 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       onDragEnd: function onDragEnd(e) {
         return handleDragEnd(e);
       },
-      isAccept: dataSelected && dataSelected === (promotion === null || promotion === void 0 ? void 0 : promotion.id)
+      isAccept: dataSelected && dataSelected === (promotion === null || promotion === void 0 ? void 0 : promotion.id),
+      isPromotionBottom: isPromotionBottom
     }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.promotions) && /*#__PURE__*/_react.default.createElement("td", {
       className: "promotion"
     }, /*#__PURE__*/_react.default.createElement(_styles2.DragableContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.DragImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {

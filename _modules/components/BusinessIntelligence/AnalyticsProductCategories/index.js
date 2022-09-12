@@ -107,7 +107,7 @@ var AnalyticsProductCategories = function AnalyticsProductCategories(props) {
       key: i
     }, /*#__PURE__*/_react.default.createElement("p", null, item === null || item === void 0 ? void 0 : item.name), /*#__PURE__*/_react.default.createElement(_styles.PercentContainer, {
       percent: item === null || item === void 0 ? void 0 : item.sales
-    }, item === null || item === void 0 ? void 0 : item.sales, "%"));
+    }, item === null || item === void 0 ? void 0 : item.sales));
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data'))));
 };
 
