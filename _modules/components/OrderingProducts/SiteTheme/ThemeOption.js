@@ -13,6 +13,8 @@ var _Shared = require("../../Shared");
 
 var _styles = require("../../../styles");
 
+var _ThemeImage = require("./ThemeImage");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -41,7 +43,8 @@ var ThemeOption = function ThemeOption(props) {
       valueObject = props.valueObject,
       path = props.path,
       themeValues = props.themeValues,
-      setThemeValues = props.setThemeValues;
+      setThemeValues = props.setThemeValues,
+      handleAddThemeGallery = props.handleAddThemeGallery;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -88,7 +91,7 @@ var ThemeOption = function ThemeOption(props) {
     onChange: function onChange(e) {
       return handleChangeValue(e.target.checked);
     }
-  }), /*#__PURE__*/_react.default.createElement("h5", null, getTitle(name))), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'integer' && /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }), /*#__PURE__*/_react.default.createElement("h5", null, getTitle(name))), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'integer' && !(optionObject !== null && optionObject !== void 0 && optionObject.options) && /*#__PURE__*/_react.default.createElement(_styles.Input, {
     defaultValue: valueObject,
     onChange: function onChange(e) {
       return handleChangeValue(e.target.value);
@@ -99,11 +102,19 @@ var ThemeOption = function ThemeOption(props) {
       return handleChangeValue(color);
     }
   })), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.options) && /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+    placeholder: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      isPlaceholder: true
+    }, t('SELECT_ITEM', 'Select a _attribute_').replace('_attribute_', getTitle(name))),
     defaultValue: valueObject,
     options: getOptions(optionObject === null || optionObject === void 0 ? void 0 : optionObject.options),
     onChange: function onChange(value) {
       return handleChangeValue(value);
     }
+  }), (name === 'image' || name === 'dummy_image') && (optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'string' && /*#__PURE__*/_react.default.createElement(_ThemeImage.ThemeImage, {
+    isMarginTop: true,
+    valueObject: valueObject,
+    handleAddThemeGallery: handleAddThemeGallery,
+    handleChangeValue: handleChangeValue
   }), typeof optionObject !== 'string' && Object.keys(optionObject).filter(function (subOption) {
     return subOption !== 'value_type' && subOption !== 'options';
   }).map(function (subOption) {
@@ -115,7 +126,8 @@ var ThemeOption = function ThemeOption(props) {
       valueObject: valueObject[subOption],
       path: path + '.' + subOption,
       themeValues: themeValues,
-      setThemeValues: setThemeValues
+      setThemeValues: setThemeValues,
+      handleAddThemeGallery: handleAddThemeGallery
     }));
   }));
 };

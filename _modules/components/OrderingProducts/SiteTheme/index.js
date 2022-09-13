@@ -19,6 +19,8 @@ var _ThemeOption = require("./ThemeOption");
 
 var _ThemeComponent = require("./ThemeComponent");
 
+var _ThemeImage = require("./ThemeImage");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -99,6 +101,24 @@ var SiteThemeUI = function SiteThemeUI(props) {
     return t(key.toUpperCase, key.replace(/_/g, ' '));
   };
 
+  var updateObject = function updateObject(object, newValue, path) {
+    var stack = path.split('.');
+
+    while (stack.length > 1) {
+      object = object[stack.shift()];
+    }
+
+    object[stack.shift()] = newValue;
+  };
+
+  var _handleChangeValue = function handleChangeValue(value, block) {
+    var _themeValues = _objectSpread({}, themeValues);
+
+    var path = [selectedPage, 'components', block].join('.');
+    updateObject(_themeValues, value, path);
+    setThemeValues(_themeValues);
+  };
+
   (0, _react.useEffect)(function () {
     if (themesList.loading) return;
 
@@ -112,7 +132,7 @@ var SiteThemeUI = function SiteThemeUI(props) {
     setThemeOptions(_themeOptions);
   }, [themesList]);
   (0, _react.useEffect)(function () {
-    var _siteThemesState$resu, _siteThemesState$resu2, _siteThemesState$resu3, _pageOptions$;
+    var _siteThemesState$resu, _siteThemesState$resu2, _siteThemesState$resu3;
 
     if (siteThemesState.loading || siteThemesState.result.length === 0) return;
     setThemeValues((_siteThemesState$resu = siteThemesState.result[0]) === null || _siteThemesState$resu === void 0 ? void 0 : _siteThemesState$resu.values);
@@ -122,7 +142,6 @@ var SiteThemeUI = function SiteThemeUI(props) {
     var _pageOptions = getOptions(Object.keys(structure));
 
     setPageOptions(_pageOptions);
-    setSelectedPage((_pageOptions$ = _pageOptions[0]) === null || _pageOptions$ === void 0 ? void 0 : _pageOptions$.value);
   }, [siteThemesState]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, siteThemesState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.BlockContainer, null, /*#__PURE__*/_react.default.createElement("h3", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20,
@@ -146,21 +165,29 @@ var SiteThemeUI = function SiteThemeUI(props) {
     }
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, siteThemesState.result.length !== 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ThemeStructureContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
-    placeholder: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('SELECT_PAGE', 'Select page')),
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, siteThemesState.result.length !== 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ThemeStructureContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.PageBlockTitle, null, t('SECTION', 'Section')), /*#__PURE__*/_react.default.createElement(_styles2.PageSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+    placeholder: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      isPlaceholder: true
+    }, t('SELECT_SECTION_TO_CUSTOMIZE', 'Select a section to customize')),
     defaultValue: selectedPage,
     options: pageOptions,
     onChange: function onChange(key) {
       return setSelectedPage(key);
     }
-  }), selectedPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PageBlockTitle, null, t('BLOCKS', 'Blocks')), Object.keys((_themeStructure$selec = themeStructure[selectedPage]) === null || _themeStructure$selec === void 0 ? void 0 : _themeStructure$selec.components).map(function (block) {
-    var _components$block, _components$block2;
+  })), selectedPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PageBlockTitle, null, t('PAGE_BLOCKS', 'Page blocks')), Object.keys((_themeStructure$selec = themeStructure[selectedPage]) === null || _themeStructure$selec === void 0 ? void 0 : _themeStructure$selec.components).map(function (block) {
+    var _components$block, _components$block2, _components$block3;
 
     var components = themeStructure[selectedPage].components;
     return /*#__PURE__*/_react.default.createElement(_styles2.BlockContainer, {
       key: block
-    }, /*#__PURE__*/_react.default.createElement("h3", null, getTitle(block)), Object.keys(components[block]).filter(function (option) {
-      return option !== 'components';
+    }, /*#__PURE__*/_react.default.createElement("h3", null, getTitle(block)), (block === 'image' || block === 'dummy_image') && ((_components$block = components[block]) === null || _components$block === void 0 ? void 0 : _components$block.value_type) === 'string' && /*#__PURE__*/_react.default.createElement(_ThemeImage.ThemeImage, {
+      valueObject: themeValues[selectedPage].components[block],
+      handleAddThemeGallery: handleAddThemeGallery,
+      handleChangeValue: function handleChangeValue(value) {
+        return _handleChangeValue(value, block);
+      }
+    }), Object.keys(components[block]).filter(function (option) {
+      return option !== 'components' && option !== 'value_type';
     }).map(function (option) {
       var optionObject = components[block][option];
       return /*#__PURE__*/_react.default.createElement(_ThemeOption.ThemeOption, {
@@ -170,12 +197,13 @@ var SiteThemeUI = function SiteThemeUI(props) {
         valueObject: themeValues[selectedPage].components[block][option],
         path: [selectedPage, 'components', block, option].join('.'),
         themeValues: themeValues,
-        setThemeValues: setThemeValues
+        setThemeValues: setThemeValues,
+        handleAddThemeGallery: handleAddThemeGallery
       });
-    }), ((_components$block = components[block]) === null || _components$block === void 0 ? void 0 : _components$block.components) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys((_components$block2 = components[block]) === null || _components$block2 === void 0 ? void 0 : _components$block2.components).map(function (component) {
-      var _components$block3, _themeValues$selected;
+    }), ((_components$block2 = components[block]) === null || _components$block2 === void 0 ? void 0 : _components$block2.components) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys((_components$block3 = components[block]) === null || _components$block3 === void 0 ? void 0 : _components$block3.components).map(function (component) {
+      var _components$block4, _themeValues$selected;
 
-      var componentObject = (_components$block3 = components[block]) === null || _components$block3 === void 0 ? void 0 : _components$block3.components[component];
+      var componentObject = (_components$block4 = components[block]) === null || _components$block4 === void 0 ? void 0 : _components$block4.components[component];
       return /*#__PURE__*/_react.default.createElement(_ThemeComponent.ThemeComponent, {
         key: component,
         name: component,
