@@ -5,7 +5,9 @@ export const Container = styled.div`
 export const Option = styled.div`
   font-size: 14px;
   padding: 3px 0;
-  text-transform: capitalize;
+  ${({ isPlaceholder }) => !isPlaceholder && css`
+    text-transform: capitalize;
+  `}
 `
 export const ThemeStructureContainer = styled.div`
   overflow: auto;
@@ -21,7 +23,6 @@ export const SelectThemeContainer = styled.div`
   }
 `
 export const PageBlockTitle = styled.div`
-  margin-top: 20px;
   padding: 10px 5px;
   font-weight: 600;
   border-top: 1px solid ${props => props.theme.colors.borderColor};
@@ -137,6 +138,10 @@ export const ComponentImage = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
 
+  ${({ isMarginTop }) => isMarginTop && css`
+    margin-top: 10px;
+  `}
+
   img,
   div {
     width: 100%;
@@ -149,4 +154,7 @@ export const ComponentImage = styled.div`
   img{
     object-fit: contain;
   }
+`
+export const PageSelectWrapper = styled.div`
+  padding: 20px 0 30px 0;
 `
