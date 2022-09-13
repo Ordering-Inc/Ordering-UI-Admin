@@ -138,7 +138,7 @@ export const ComponentImage = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
 
-  ${({ isThemeOption }) => isThemeOption && css`
+  ${({ isMarginTop }) => isMarginTop && css`
     margin-top: 10px;
   `}
 

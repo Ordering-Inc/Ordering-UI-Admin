@@ -4,6 +4,7 @@ import { SecondSelect as Select, Button } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { ThemeOption } from './ThemeOption'
 import { ThemeComponent } from './ThemeComponent'
+import { ThemeImage } from './ThemeImage'
 
 import {
   Container,
@@ -45,6 +46,21 @@ const SiteThemeUI = (props) => {
 
   const getTitle = (key) => {
     return t(key.toUpperCase, key.replace(/_/g, ' '))
+  }
+
+  const updateObject = (object, newValue, path) => {
+    const stack = path.split('.')
+    while (stack.length > 1) {
+      object = object[stack.shift()]
+    }
+    object[stack.shift()] = newValue
+  }
+
+  const handleChangeValue = (value, block) => {
+    const _themeValues = { ...themeValues }
+    const path = [selectedPage, 'components', block].join('.')
+    updateObject(_themeValues, value, path)
+    setThemeValues(_themeValues)
   }
 
   useEffect(() => {
@@ -103,7 +119,14 @@ const SiteThemeUI = (props) => {
                       return (
                         <BlockContainer key={block}>
                           <h3>{getTitle(block)}</h3>
-                          {Object.keys(components[block]).filter(option => option !== 'components').map(option => {
+                          {(block === 'image' || block === 'dummy_image') && components[block]?.value_type === 'string' && (
+                            <ThemeImage
+                              valueObject={themeValues[selectedPage].components[block]}
+                              handleAddThemeGallery={handleAddThemeGallery}
+                              handleChangeValue={value => handleChangeValue(value, block)}
+                            />
+                          )}
+                          {Object.keys(components[block]).filter(option => option !== 'components' && option !== 'value_type').map(option => {
                             const optionObject = components[block][option]
                             return (
                               <ThemeOption
