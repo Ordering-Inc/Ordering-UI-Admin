@@ -128,7 +128,7 @@ export const ThemeComponent = (props) => {
         )}
         <h4>{getTitle(name)}</h4>
       </ComponentHeader>
-      {name === 'image' && componentObject?.value_type === 'string' && (
+      {(name === 'image' || name === 'dummy_image') && componentObject?.value_type === 'string' && (
         <ComponentImage
           onClick={() => handleClickImage()}
         >

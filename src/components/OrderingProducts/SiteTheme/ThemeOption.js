@@ -160,12 +160,13 @@ export const ThemeOption = (props) => {
       )}
       {optionObject?.options && (
         <Select
+          placeholder={<Option isPlaceholder>{t('SELECT_ITEM', 'Select a _attribute_').replace('_attribute_', getTitle(name))}</Option>}
           defaultValue={valueObject}
           options={getOptions(optionObject?.options)}
           onChange={value => handleChangeValue(value)}
         />
       )}
-      {name === 'image' && optionObject?.value_type === 'string' && (
+      {(name === 'image' || name === 'dummy_image') && optionObject?.value_type === 'string' && (
         <ComponentImage
           isThemeOption
           onClick={() => handleClickImage()}
