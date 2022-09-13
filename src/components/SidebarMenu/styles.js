@@ -160,6 +160,14 @@ export const MenuContainer = styled.div`
     width: 100%;
     text-align: initial;
   }
+
+  ${({ disabledFeature }) => disabledFeature && css`
+    background-color: ${props => props.theme.colors.disabled};
+    cursor: not-allowed;
+    > button {
+      pointer-events: none;
+    }
+  `}
 `
 
 export const MenuContent = styled.div`
@@ -183,6 +191,11 @@ export const SubMenu = styled.div`
   ${({ active }) => active && css`
     color: ${props => props.theme.colors.primary};
   `}
+  ${({ disabledFeature }) => disabledFeature && css`
+    background-color: ${props => props.theme.colors.disabled}!important;
+    cursor: not-allowed;
+  `}
+
   ${props => props.theme?.rtl ? css`
     padding-right: 40px;
   ` : css`

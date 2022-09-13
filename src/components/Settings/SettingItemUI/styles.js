@@ -15,6 +15,11 @@ export const SettingItemContainer = styled.div`
     border: 1px solid #2C7BE5 !important;
   `}
 
+  ${({ disabledFeature }) => disabledFeature && css`
+    background-color: ${props => props.theme?.colors.disabled} !important;
+    cursor: not-allowed;
+  `}
+
   &:hover {
     background: #E9F2FE;
   }
