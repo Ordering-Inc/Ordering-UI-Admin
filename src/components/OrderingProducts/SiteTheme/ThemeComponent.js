@@ -136,10 +136,12 @@ export const ThemeComponent = (props) => {
             onFiles={files => handleFiles(files)}
             childRef={(e) => { imageRef.current = e }}
             accept='image/png, image/jpeg, image/jpg'
+            disabled={imageUploadState.loading}
           >
             <DragAndDrop
               onDrop={dataTransfer => handleFiles(dataTransfer.files)}
               accept='image/png, image/jpeg, image/jpg'
+              disabled={imageUploadState.loading}
             >
               {imageUploadState.loading && (
                 <Skeleton width={160} height={160} />
@@ -168,6 +170,7 @@ export const ThemeComponent = (props) => {
             path={path + '.' + option}
             themeValues={themeValues}
             setThemeValues={setThemeValues}
+            handleAddThemeGallery={handleAddThemeGallery}
           />
         )
       })}
@@ -184,6 +187,7 @@ export const ThemeComponent = (props) => {
                 path={path + '.components.' + subComponent}
                 themeValues={themeValues}
                 setThemeValues={setThemeValues}
+                handleAddThemeGallery={handleAddThemeGallery}
               />
             )
           })}

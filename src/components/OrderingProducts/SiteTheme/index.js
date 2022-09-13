@@ -114,6 +114,7 @@ const SiteThemeUI = (props) => {
                                 path={[selectedPage, 'components', block, option].join('.')}
                                 themeValues={themeValues}
                                 setThemeValues={setThemeValues}
+                                handleAddThemeGallery={handleAddThemeGallery}
                               />
                             )
                           })}
