@@ -97,7 +97,7 @@ const SiteThemeUI = (props) => {
                 </PageSelectWrapper>
                 {selectedPage && (
                   <>
-                    <PageBlockTitle>{t('BLOCKS', 'Blocks')}</PageBlockTitle>
+                    <PageBlockTitle>{t('PAGE_BLOCKS', 'Page blocks')}</PageBlockTitle>
                     {Object.keys(themeStructure[selectedPage]?.components).map(block => {
                       const components = themeStructure[selectedPage].components
                       return (
