@@ -5,7 +5,9 @@ export const Container = styled.div`
 export const Option = styled.div`
   font-size: 14px;
   padding: 3px 0;
-  text-transform: capitalize;
+  ${({ isPlaceholder }) => !isPlaceholder && css`
+    text-transform: capitalize;
+  `}
 `
 export const ThemeStructureContainer = styled.div`
   overflow: auto;

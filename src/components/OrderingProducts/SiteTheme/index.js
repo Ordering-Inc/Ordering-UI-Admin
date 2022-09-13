@@ -67,7 +67,6 @@ const SiteThemeUI = (props) => {
     setThemeStructure(structure)
     const _pageOptions = getOptions(Object.keys(structure))
     setPageOptions(_pageOptions)
-    setSelectedPage(_pageOptions[0]?.value)
   }, [siteThemesState])
 
   return (
@@ -90,7 +89,7 @@ const SiteThemeUI = (props) => {
                 <PageBlockTitle>{t('SECTION', 'Section')}</PageBlockTitle>
                 <PageSelectWrapper>
                   <Select
-                    placeholder={<Option>{t('SELECT_PAGE', 'Select page')}</Option>}
+                    placeholder={<Option isPlaceholder>{t('SELECT_SECTION_TO_CUSTOMIZE', 'Select a section to customize')}</Option>}
                     defaultValue={selectedPage}
                     options={pageOptions}
                     onChange={key => setSelectedPage(key)}
