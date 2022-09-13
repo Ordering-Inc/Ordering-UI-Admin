@@ -12,7 +12,8 @@ import {
   SelectThemeContainer,
   PageBlockTitle,
   BlockContainer,
-  UpdateButtonWrapper
+  UpdateButtonWrapper,
+  PageSelectWrapper
 } from './styles'
 
 const SiteThemeUI = (props) => {
@@ -86,12 +87,15 @@ const SiteThemeUI = (props) => {
           {siteThemesState.result.length !== 0 ? (
             <>
               <ThemeStructureContainer>
-                <Select
-                  placeholder={<Option>{t('SELECT_PAGE', 'Select page')}</Option>}
-                  defaultValue={selectedPage}
-                  options={pageOptions}
-                  onChange={key => setSelectedPage(key)}
-                />
+                <PageBlockTitle>{t('SECTION', 'Section')}</PageBlockTitle>
+                <PageSelectWrapper>
+                  <Select
+                    placeholder={<Option>{t('SELECT_PAGE', 'Select page')}</Option>}
+                    defaultValue={selectedPage}
+                    options={pageOptions}
+                    onChange={key => setSelectedPage(key)}
+                  />
+                </PageSelectWrapper>
                 {selectedPage && (
                   <>
                     <PageBlockTitle>{t('BLOCKS', 'Blocks')}</PageBlockTitle>

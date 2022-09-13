@@ -21,7 +21,6 @@ export const SelectThemeContainer = styled.div`
   }
 `
 export const PageBlockTitle = styled.div`
-  margin-top: 20px;
   padding: 10px 5px;
   font-weight: 600;
   border-top: 1px solid ${props => props.theme.colors.borderColor};
@@ -149,4 +148,7 @@ export const ComponentImage = styled.div`
   img{
     object-fit: contain;
   }
+`
+export const PageSelectWrapper = styled.div`
+  padding: 20px 0 30px 0;
 `
