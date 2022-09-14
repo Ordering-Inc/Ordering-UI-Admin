@@ -38,6 +38,7 @@ const DriversGroupDetailsUI = (props) => {
   const [configState] = useConfig()
 
   const autoAssignType = configState?.configs?.autoassign_type?.value
+  const advancedLogistics = !!configState?.configs?.advanced_logistics
 
   const [showMenu, setShowMenu] = useState('general')
   const [useAdvanced, setUseAdvanced] = useState(false)
@@ -51,7 +52,7 @@ const DriversGroupDetailsUI = (props) => {
         { key: 'general', value: t('GENERAL', 'General') },
         { key: 'businesses', value: t('BUSINESSES', 'Businesses') }
       ]
-      : (useAdvanced && autoAssignType !== 'basic')
+      : (useAdvanced && autoAssignType !== 'basic' && advancedLogistics)
         ? [
           { key: 'general', value: t('GENERAL', 'General') },
           { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
