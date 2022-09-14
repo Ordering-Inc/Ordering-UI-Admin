@@ -76,7 +76,8 @@ var PaymentOption = function PaymentOption(props) {
       actionState = props.actionState,
       handleSaveClick = props.handleSaveClick,
       businessPaymethod = props.businessPaymethod,
-      handleDeletePaymethod = props.handleDeletePaymethod;
+      handleDeletePaymethod = props.handleDeletePaymethod,
+      isDisabledPaymentsAdvanced = props.isDisabledPaymentsAdvanced;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -184,20 +185,25 @@ var PaymentOption = function PaymentOption(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: paymentTabs === 0,
     onClick: function onClick() {
-      return setPaymentTabs(0);
-    }
+      return !isDisabledPaymentsAdvanced && setPaymentTabs(0);
+    },
+    disabledFeature: isDisabledPaymentsAdvanced,
+    title: isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
   }, t('CHANNELS', 'Channels')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: paymentTabs === 1,
     onClick: function onClick() {
-      return setPaymentTabs(1);
-    }
+      return !isDisabledPaymentsAdvanced && setPaymentTabs(1);
+    },
+    disabledFeature: isDisabledPaymentsAdvanced,
+    title: isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
   }, t('ORDER_TYPE', 'Order type'))), paymentTabs === 0 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites4 = sitesState.sites) === null || _sitesState$sites4 === void 0 ? void 0 : _sitesState$sites4.length) > 0 && (sitesState === null || sitesState === void 0 ? void 0 : sitesState.sites.map(function (site) {
     var _ref2, _changesState$sites, _businessPaymethod$si;
 
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: site.id,
+      disabledFeature: isDisabledPaymentsAdvanced,
       onClick: function onClick() {
-        return setPaymethodInfo({
+        return !isDisabledPaymentsAdvanced && setPaymethodInfo({
           key: 'sites',
           value: site.id
         });

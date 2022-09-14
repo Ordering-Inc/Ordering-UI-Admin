@@ -73,6 +73,12 @@ var SidebarMenu = function SidebarMenu(props) {
       handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
   var windowSize = (0, _useWindowSize.useWindowSize)();
+
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      disabeldMenus = _useState2[0],
+      setDisabeldMenus = _useState2[1];
+
   var ordersSubMenus = [{
     id: 1,
     title: t('ORDERS_MANAGER', 'Orders manager'),
@@ -274,6 +280,24 @@ var SidebarMenu = function SidebarMenu(props) {
       handleMenuCollapse(true);
     }
   }, [windowSize.width]);
+  (0, _react.useEffect)(function () {
+    if (configs && Object.keys(configs).length > 0) {
+      var featureList = [{
+        configKeyName: 'loyalty_levels_points',
+        menuName: 'loyalty'
+      }, {
+        configKeyName: 'advanced_reports',
+        menuName: 'reports'
+      }, {
+        configKeyName: 'Marketing_dashboard',
+        menuName: 'marketing'
+      }];
+      var disabledFeatureList = featureList.filter(function (feature) {
+        return !Object.keys(configs).includes(feature === null || feature === void 0 ? void 0 : feature.configKeyName);
+      });
+      setDisabeldMenus(disabledFeatureList);
+    }
+  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SidebarContainer, {
     id: "side_bar",
     isCollapse: isCollapse
@@ -375,10 +399,18 @@ var SidebarMenu = function SidebarMenu(props) {
       key: item.id,
       active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
       onClick: function onClick() {
-        return handleGoToPage({
+        return !disabeldMenus.some(function (disabeldCategory) {
+          return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === (item === null || item === void 0 ? void 0 : item.pageName);
+        }) && handleGoToPage({
           page: item.pageName
         });
-      }
+      },
+      disabledFeature: disabeldMenus.some(function (disabeldCategory) {
+        return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === (item === null || item === void 0 ? void 0 : item.pageName);
+      }),
+      title: disabeldMenus.some(function (disabeldCategory) {
+        return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === (item === null || item === void 0 ? void 0 : item.pageName);
+      }) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
     }, item.title);
   })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user10 = sessionState.user) === null || _sessionState$user10 === void 0 ? void 0 : _sessionState$user10.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "7",
@@ -395,7 +427,14 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, {
+    disabledFeature: disabeldMenus.some(function (disabeldCategory) {
+      return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'marketing';
+    }),
+    title: disabeldMenus.some(function (disabeldCategory) {
+      return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'marketing';
+    }) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
+  }, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "8",
     active: location.pathname === '/marketing/promotions-enterprise' || location.pathname === '/marketing/campaign'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GraphUp, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETING', 'Marketing'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -410,7 +449,14 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user12 = sessionState.user) === null || _sessionState$user12 === void 0 ? void 0 : _sessionState$user12.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user12 = sessionState.user) === null || _sessionState$user12 === void 0 ? void 0 : _sessionState$user12.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, {
+    disabledFeature: disabeldMenus.some(function (disabeldCategory) {
+      return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'loyalty';
+    }),
+    title: disabeldMenus.some(function (disabeldCategory) {
+      return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'loyalty';
+    }) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
+  }, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "9",
     active: location.pathname === '/loyalty/rewards-programs' || location.pathname === '/loyalty/levels' || location.pathname === '/loyalty/reports'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Award, null), /*#__PURE__*/_react.default.createElement("span", null, t('LOYALTY', 'Loyalty'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {

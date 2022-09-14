@@ -56,13 +56,8 @@ var DisabledFeatureAlert = function DisabledFeatureAlert(props) {
       setContainerWidth = _useState2[1];
 
   var featureList = ['cash_wallet', 'loyalty_levels_points', 'massive_importer', 'advanced_reports', 'advanced_logistics', 'shared_menus', 'payments_advanced', 'Marketing_dashboard'];
-  var detectedDisabledFeature = featureList.every(function (feature) {
-    return Object.keys(configs).includes(feature);
-  });
 
-  var _showed = !detectedDisabledFeature && (user === null || user === void 0 ? void 0 : user.level) === 0;
-
-  var _useState3 = (0, _react.useState)(_showed),
+  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
       showed = _useState4[0],
       setShowed = _useState4[1];
@@ -70,6 +65,20 @@ var DisabledFeatureAlert = function DisabledFeatureAlert(props) {
   (0, _react.useLayoutEffect)(function () {
     containerRef.current && setContainerWidth(containerRef.current.offsetWidth);
   }, []);
+  (0, _react.useEffect)(function () {
+    if (configs && Object.keys(configs).length > 0 && user) {
+      var detectedDisabledFeature = featureList.every(function (feature) {
+        return Object.keys(configs).includes(feature);
+      });
+
+      var _showed = !detectedDisabledFeature && (user === null || user === void 0 ? void 0 : user.level) === 0;
+
+      setShowed(_showed);
+      return;
+    }
+
+    setShowed(false);
+  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showed && /*#__PURE__*/_react.default.createElement(_styles.DisabledFeatureAlertContainer, {
     ref: containerRef,
     containerWidth: containerWidth

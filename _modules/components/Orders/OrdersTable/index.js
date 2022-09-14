@@ -89,7 +89,6 @@ var OrdersTable = function OrdersTable(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
-      parsePrice = _useUtils2$.parsePrice,
       parseDate = _useUtils2$.parseDate,
       optimizeImage = _useUtils2$.optimizeImage,
       getTimeAgo = _useUtils2$.getTimeAgo;
@@ -654,7 +653,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "info"
     }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.total) && /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, parsePrice(order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total)), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    }, order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total, " ", order === null || order === void 0 ? void 0 : order.currency), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     })))), /*#__PURE__*/_react.default.createElement("td", null)));
   }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {

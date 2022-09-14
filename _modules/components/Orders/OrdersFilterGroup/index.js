@@ -29,6 +29,8 @@ var _CountryFilter = require("../CountryFilter");
 
 var _styles = require("../../../styles");
 
+var _CurrencyFilter = require("../CurrencyFilter");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -73,7 +75,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
       handleResetFilterValues = props.handleResetFilterValues,
       handleChangeFilterValues = props.handleChangeFilterValues,
       handleChangeOrderId = props.handleChangeOrderId,
-      handleChangeCountryCode = props.handleChangeCountryCode;
+      handleChangeCountryCode = props.handleChangeCountryCode,
+      handleChangeCurrency = props.handleChangeCurrency;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -142,6 +145,9 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, {
     filterValues: filterValues,
     handleChangeCountryCode: handleChangeCountryCode
+  }), /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
+    filterValues: filterValues,
+    handleChangeCurrency: handleChangeCurrency
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",

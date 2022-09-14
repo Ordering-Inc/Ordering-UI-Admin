@@ -42,17 +42,37 @@ var ImportersButton = function ImportersButton(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       openImporters = _useState2[0],
       setOpenImporters = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)(true),
       _useState4 = _slicedToArray(_useState3, 2),
-      extraOpen = _useState4[0],
-      setExtraOpen = _useState4[1];
+      disabledImporter = _useState4[0],
+      setDisabledImporter = _useState4[1]; // false means enabled
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CsvImportButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      extraOpen = _useState6[0],
+      setExtraOpen = _useState6[1];
+
+  (0, _react.useEffect)(function () {
+    if (configs && Object.keys(configs).length > 0) {
+      var _disabledImporter = !Object.keys(configs).includes('massive_importer');
+
+      setDisabledImporter(_disabledImporter);
+    }
+  }, [configs]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CsvImportButtonWrapper, {
+    disabledFeature: disabledImporter,
+    title: disabledImporter ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
+  }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {

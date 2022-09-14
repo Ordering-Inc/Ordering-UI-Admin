@@ -78,6 +78,10 @@ var SettingsUI = function SettingsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
       isCollapse = _useInfoShare2[0].isCollapse,
@@ -91,30 +95,35 @@ var SettingsUI = function SettingsUI(props) {
       isOpenDescription = _useState2[0],
       setIsOpenDescription = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(null),
+  var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      selectedCategory = _useState4[0],
-      setSelectedCategory = _useState4[1];
+      disabeldCategoryList = _useState4[0],
+      setDisabeldCategoryList = _useState4[1];
 
   var _useState5 = (0, _react.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      isOpenSettingDetails = _useState6[0],
-      setIsOpenSettingDetails = _useState6[1];
+      selectedCategory = _useState6[0],
+      setSelectedCategory = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(false),
+  var _useState7 = (0, _react.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      openSitesAuthSettings = _useState8[0],
-      setOpenSitesAuthSettings = _useState8[1];
+      isOpenSettingDetails = _useState8[0],
+      setIsOpenSettingDetails = _useState8[1];
 
   var _useState9 = (0, _react.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      openMultiCountrySettings = _useState10[0],
-      setOpenMultiCountrySettings = _useState10[1];
+      openSitesAuthSettings = _useState10[0],
+      setOpenSitesAuthSettings = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(0),
+  var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      moveDistance = _useState12[0],
-      setMoveDistance = _useState12[1];
+      openMultiCountrySettings = _useState12[0],
+      setOpenMultiCountrySettings = _useState12[1];
+
+  var _useState13 = (0, _react.useState)(0),
+      _useState14 = _slicedToArray(_useState13, 2),
+      moveDistance = _useState14[0],
+      setMoveDistance = _useState14[1];
 
   var category;
 
@@ -199,17 +208,19 @@ var SettingsUI = function SettingsUI(props) {
       });
       setSelectedCategory(categorySelected);
     }
-  }, [categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories]); // useEffect(() => {
-  //   if (Object.keys(configs).length > 0) {
-  //     const _configs = [
-  //       configs?.stripe_connect_sandbox,
-  //       { ...configs?.stripe_connect_client_id, name: t('CLIENT_ID_SANDBOX') },
-  //       { ...configs?.stripe_connect_client_id_sandbox, name: t('CLIENT_ID_PRODUCTION') }
-  //     ]
-  //     setStripeConnectConfigs([..._configs])
-  //   }
-  // }, [configs])
-
+  }, [categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories]);
+  (0, _react.useEffect)(function () {
+    if (configs && Object.keys(configs).length > 0) {
+      var featureList = [{
+        configKeyName: 'cash_wallet',
+        settingName: 'wallet'
+      }];
+      var disabledFeatureList = featureList.filter(function (feature) {
+        return !Object.keys(configs).includes(feature === null || feature === void 0 ? void 0 : feature.configKeyName);
+      });
+      setDisabeldCategoryList(disabledFeatureList);
+    }
+  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BasicSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -283,8 +294,13 @@ var SettingsUI = function SettingsUI(props) {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
       className: "col-md-4 col-sm-6",
+      title: disabeldCategoryList.some(function (disabeldCategory) {
+        return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.settingName) === (category === null || category === void 0 ? void 0 : category.key);
+      }) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : '',
       onClick: function onClick() {
-        return handleOpenDescription(category);
+        return !disabeldCategoryList.some(function (disabeldCategory) {
+          return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.settingName) === (category === null || category === void 0 ? void 0 : category.key);
+        }) && handleOpenDescription(category);
       }
     }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
       title: category === null || category === void 0 ? void 0 : category.name,
@@ -292,6 +308,9 @@ var SettingsUI = function SettingsUI(props) {
       icon: category !== null && category !== void 0 && category.image ? /*#__PURE__*/_react.default.createElement("img", {
         src: category === null || category === void 0 ? void 0 : category.image
       }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
+      disabledFeature: disabeldCategoryList.some(function (disabeldCategory) {
+        return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.settingName) === (category === null || category === void 0 ? void 0 : category.key);
+      }),
       active: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === (category === null || category === void 0 ? void 0 : category.id)
     })));
   }))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
