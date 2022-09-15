@@ -124,6 +124,10 @@ export const Tab = styled.div`
   ${({ active }) => !active && css`
     color: ${props => props.theme.colors?.lightGray};
   `}
+
+  ${({ disabledFeature }) => disabledFeature && css`
+    cursor: not-allowed;
+  `}
 `
 
 export const SearchBarWrapper = styled.div`

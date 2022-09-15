@@ -73,7 +73,7 @@ export const AnalyticsProductCategories = (props) => {
                     productCategoryList?.data.map((item, i) => (
                       <ProductCategoryContent key={i}>
                         <p>{item?.name}</p>
-                        <PercentContainer percent={item?.sales}>{item?.sales}%</PercentContainer>
+                        <PercentContainer percent={item?.sales}>{item?.sales}</PercentContainer>
                       </ProductCategoryContent>
                     ))
                   }

@@ -4,6 +4,7 @@ import { SecondSelect as Select, Button } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { ThemeOption } from './ThemeOption'
 import { ThemeComponent } from './ThemeComponent'
+import { ThemeImage } from './ThemeImage'
 
 import {
   Container,
@@ -12,7 +13,8 @@ import {
   SelectThemeContainer,
   PageBlockTitle,
   BlockContainer,
-  UpdateButtonWrapper
+  UpdateButtonWrapper,
+  PageSelectWrapper
 } from './styles'
 
 const SiteThemeUI = (props) => {
@@ -46,6 +48,21 @@ const SiteThemeUI = (props) => {
     return t(key.toUpperCase, key.replace(/_/g, ' '))
   }
 
+  const updateObject = (object, newValue, path) => {
+    const stack = path.split('.')
+    while (stack.length > 1) {
+      object = object[stack.shift()]
+    }
+    object[stack.shift()] = newValue
+  }
+
+  const handleChangeValue = (value, block) => {
+    const _themeValues = { ...themeValues }
+    const path = [selectedPage, 'components', block].join('.')
+    updateObject(_themeValues, value, path)
+    setThemeValues(_themeValues)
+  }
+
   useEffect(() => {
     if (themesList.loading) return
     const _themeOptions = themesList.result.map(theme => {
@@ -66,7 +83,6 @@ const SiteThemeUI = (props) => {
     setThemeStructure(structure)
     const _pageOptions = getOptions(Object.keys(structure))
     setPageOptions(_pageOptions)
-    setSelectedPage(_pageOptions[0]?.value)
   }, [siteThemesState])
 
   return (
@@ -86,21 +102,31 @@ const SiteThemeUI = (props) => {
           {siteThemesState.result.length !== 0 ? (
             <>
               <ThemeStructureContainer>
-                <Select
-                  placeholder={<Option>{t('SELECT_PAGE', 'Select page')}</Option>}
-                  defaultValue={selectedPage}
-                  options={pageOptions}
-                  onChange={key => setSelectedPage(key)}
-                />
+                <PageBlockTitle>{t('SECTION', 'Section')}</PageBlockTitle>
+                <PageSelectWrapper>
+                  <Select
+                    placeholder={<Option isPlaceholder>{t('SELECT_SECTION_TO_CUSTOMIZE', 'Select a section to customize')}</Option>}
+                    defaultValue={selectedPage}
+                    options={pageOptions}
+                    onChange={key => setSelectedPage(key)}
+                  />
+                </PageSelectWrapper>
                 {selectedPage && (
                   <>
-                    <PageBlockTitle>{t('BLOCKS', 'Blocks')}</PageBlockTitle>
+                    <PageBlockTitle>{t('PAGE_BLOCKS', 'Page blocks')}</PageBlockTitle>
                     {Object.keys(themeStructure[selectedPage]?.components).map(block => {
                       const components = themeStructure[selectedPage].components
                       return (
                         <BlockContainer key={block}>
                           <h3>{getTitle(block)}</h3>
-                          {Object.keys(components[block]).filter(option => option !== 'components').map(option => {
+                          {(block === 'image' || block === 'dummy_image') && components[block]?.value_type === 'string' && (
+                            <ThemeImage
+                              valueObject={themeValues[selectedPage].components[block]}
+                              handleAddThemeGallery={handleAddThemeGallery}
+                              handleChangeValue={value => handleChangeValue(value, block)}
+                            />
+                          )}
+                          {Object.keys(components[block]).filter(option => option !== 'components' && option !== 'value_type').map(option => {
                             const optionObject = components[block][option]
                             return (
                               <ThemeOption
@@ -111,6 +137,7 @@ const SiteThemeUI = (props) => {
                                 path={[selectedPage, 'components', block, option].join('.')}
                                 themeValues={themeValues}
                                 setThemeValues={setThemeValues}
+                                handleAddThemeGallery={handleAddThemeGallery}
                               />
                             )
                           })}

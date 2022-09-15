@@ -8,7 +8,9 @@ import { CitySelector, Modal } from '../../Shared'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
 import { PaymethodTypeSelector } from '../PaymethodTypeSelector'
+import { CountryFilter } from '../CountryFilter'
 import { Button, Input } from '../../../styles'
+import { CurrencyFilter } from '../CurrencyFilter'
 
 import {
   FilterGroupListContainer,
@@ -39,7 +41,9 @@ const OrdersFilterGroupUI = (props) => {
     handleChangePaymethodType,
     handleResetFilterValues,
     handleChangeFilterValues,
-    handleChangeOrderId
+    handleChangeOrderId,
+    handleChangeCountryCode,
+    handleChangeCurrency
   } = props
 
   const [, t] = useLanguage()
@@ -121,6 +125,16 @@ const OrdersFilterGroupUI = (props) => {
             paymethodsList={paymethodsList}
             filterValues={filterValues}
             handleChangePaymethodType={handleChangePaymethodType}
+          />
+        </WrapperRow>
+        <WrapperRow>
+          <CountryFilter
+            filterValues={filterValues}
+            handleChangeCountryCode={handleChangeCountryCode}
+          />
+          <CurrencyFilter
+            filterValues={filterValues}
+            handleChangeCurrency={handleChangeCurrency}
           />
         </WrapperRow>
         <ButtonGroup>

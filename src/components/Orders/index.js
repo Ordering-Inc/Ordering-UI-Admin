@@ -1,6 +1,7 @@
 import { Appointments } from './Appointments'
 import { DeliveriesManager } from './DeliveriesManager'
 import { DriversManager } from './DriversManager'
+import { GiftCardsListing } from './GiftCardsListing'
 
 import { Messages } from './Messages'
 import { OrdersContentHeader } from './OrdersContentHeader'
@@ -44,11 +45,13 @@ import { OrdersListing } from './OrdersListing'
 import { OrdersTable } from './OrdersTable'
 import { OrdersCards } from './OrdersCards'
 import { ReviewCustomer } from './ReviewCustomer'
+import { CountryFilter } from './CountryFilter'
 
 export {
   Appointments,
   DeliveriesManager,
   DriversManager,
+  GiftCardsListing,
   Messages,
   OrdersContentHeader,
   OrdersManager,
@@ -90,5 +93,6 @@ export {
   OrdersListing,
   OrdersTable,
   OrdersCards,
-  ReviewCustomer
+  ReviewCustomer,
+  CountryFilter
 }

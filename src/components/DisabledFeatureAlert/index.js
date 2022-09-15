@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react'
 import { InfoCircle, XCircle } from 'react-bootstrap-icons'
 
 import { useLanguage, useConfig, useSession } from 'ordering-components-admin'
@@ -22,13 +22,21 @@ export const DisabledFeatureAlert = (props) => {
 
   const featureList = ['cash_wallet', 'loyalty_levels_points', 'massive_importer', 'advanced_reports',
     'advanced_logistics', 'shared_menus', 'payments_advanced', 'Marketing_dashboard']
-  const detectedDisabledFeature = featureList.every(feature => Object.keys(configs).includes(feature))
-  const _showed = !detectedDisabledFeature && user?.level === 0
-  const [showed, setShowed] = useState(_showed)
+  const [showed, setShowed] = useState(false)
 
   useLayoutEffect(() => {
     containerRef.current && setContainerWidth(containerRef.current.offsetWidth)
   }, [])
+
+  useEffect(() => {
+    if (configs && Object.keys(configs).length > 0 && user) {
+      const detectedDisabledFeature = featureList.every(feature => Object.keys(configs).includes(feature))
+      const _showed = !detectedDisabledFeature && user?.level === 0
+      setShowed(_showed)
+      return
+    }
+    setShowed(false)
+  }, [configs])
   return (
     <>
       {showed && (

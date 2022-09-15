@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
+import { useLanguage, useConfig, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
 import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill } from 'react-bootstrap-icons'
@@ -28,10 +28,12 @@ const SettingsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const { search } = useLocation()
 
   const [isOpenDescription, setIsOpenDescription] = useState(false)
+  const [disabeldCategoryList, setDisabeldCategoryList] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
   const [openSitesAuthSettings, setOpenSitesAuthSettings] = useState(false)
@@ -102,16 +104,13 @@ const SettingsUI = (props) => {
     }
   }, [categoryList?.categories])
 
-  // useEffect(() => {
-  //   if (Object.keys(configs).length > 0) {
-  //     const _configs = [
-  //       configs?.stripe_connect_sandbox,
-  //       { ...configs?.stripe_connect_client_id, name: t('CLIENT_ID_SANDBOX') },
-  //       { ...configs?.stripe_connect_client_id_sandbox, name: t('CLIENT_ID_PRODUCTION') }
-  //     ]
-  //     setStripeConnectConfigs([..._configs])
-  //   }
-  // }, [configs])
+  useEffect(() => {
+    if (configs && Object.keys(configs).length > 0) {
+      const featureList = [{ configKeyName: 'cash_wallet', settingName: 'wallet' }]
+      const disabledFeatureList = featureList.filter(feature => !Object.keys(configs).includes(feature?.configKeyName))
+      setDisabeldCategoryList(disabledFeatureList)
+    }
+  }, [configs])
 
   return (
     <>
@@ -209,12 +208,14 @@ const SettingsUI = (props) => {
                 <React.Fragment key={i}>
                   <SettingItemWrapper
                     className='col-md-4 col-sm-6'
-                    onClick={() => handleOpenDescription(category)}
+                    title={disabeldCategoryList.some(disabeldCategory => disabeldCategory?.settingName === category?.key) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+                    onClick={() => !(disabeldCategoryList.some(disabeldCategory => disabeldCategory?.settingName === category?.key)) && handleOpenDescription(category)}
                   >
                     <SettingItemUI
                       title={category?.name}
                       description={category?.description}
                       icon={category?.image ? <img src={category?.image} /> : <GearFill />}
+                      disabledFeature={disabeldCategoryList.some(disabeldCategory => disabeldCategory?.settingName === category?.key)}
                       active={selectedCategory?.id === category?.id}
                     />
                   </SettingItemWrapper>

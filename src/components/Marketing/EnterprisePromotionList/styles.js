@@ -46,7 +46,6 @@ export const PromotionListTable = styled.table`
   }
 
   thead {
-    border-bottom: 1px solid ${props => props.theme.colors.disabled};
     tr {
       th {
         ${({ noFixedHeader }) => !noFixedHeader && css`
@@ -73,13 +72,20 @@ export const SinglePromotionTbody = styled.tbody`
     }
   }
 
+  &:first-of-type {
+    ${({ isAccept }) => css`
+      border-top: 1px solid ${props => isAccept ? props.theme.colors.primary : props.theme.colors.disabled};
+    `}
+  }
+  &:last-of-type {
+    ${({ isPromotionBottom }) => css`
+      border-bottom: 1px solid ${props => isPromotionBottom ? props.theme.colors.primary : props.theme.colors.borderColor};
+    `}
+  }
   ${({ isAccept }) => isAccept && css`
     border-top: 1px solid ${props => props.theme.colors.primary};
     background-color: ${props => props.theme.colors.secundary};
   `}
-  &:last-of-type {
-    border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-  }
 `
 export const EnableWrapper = styled.div`
   display: flex;
