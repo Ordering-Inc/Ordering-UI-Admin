@@ -12,7 +12,8 @@ export const InsertLink = (props) => {
   const {
     editorContext,
     onClose,
-    handleRestoreEditor
+    handleRestoreEditor,
+    isLinkButton
   } = props
   const [, t] = useLanguage()
   const [changesState, setChangesState] = useState({})
@@ -27,12 +28,15 @@ export const InsertLink = (props) => {
   const handleInsertClick = () => {
     handleRestoreEditor()
     editorContext.invoke('editor.createLink', {
-      text: changesState?.text || '',
+      text: isLinkButton
+        ? `<button style='font-size: 9px;color: white;padding: 6px 11px; cursor: pointer; border-radius: 4px; background: #2C7BE5; border: none;'>${changesState?.text || 'button'}</button>`
+        : (changesState?.text || ''),
       url: changesState?.url || '',
       isNewWindow: changesState?.isNewWindow ?? true
     })
     onClose()
   }
+
   return (
     <InsertLinkContainer>
       <h1>{t('INSERT_LINK', 'Insert link')}</h1>

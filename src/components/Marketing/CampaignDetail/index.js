@@ -127,7 +127,6 @@ const CampaignDetailUI = (props) => {
         closeOnBackdrop={false}
       />
     </>
-
   )
 }
 
