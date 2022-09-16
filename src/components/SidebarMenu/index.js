@@ -54,27 +54,32 @@ export const SidebarMenu = (props) => {
     {
       id: 1,
       title: t('ORDERS_MANAGER', 'Orders manager'),
-      pageName: 'orders'
+      pageName: 'orders',
+      url: '/orders'
     },
     {
       id: 2,
       title: t('DELIVERY_DASHBOARD', 'Deliveries dashboard'),
-      pageName: 'deliveries'
+      pageName: 'deliveries',
+      url: '/deliveries'
     },
     {
       id: 3,
       title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
-      pageName: 'drivers'
+      pageName: 'drivers',
+      url: '/drivers'
     },
     {
       id: 4,
       title: t('APPOINTMENTS', 'Appointments'),
-      pageName: 'appointments'
+      pageName: 'appointments',
+      url: '/appointments'
     },
     {
       id: 5,
       title: t('GIFT_CARD_MANAGER', 'Gift card manager'),
-      pageName: 'giftCards'
+      pageName: 'giftCards',
+      url: '/gift-cards'
     }
   ]
 
@@ -367,7 +372,8 @@ export const SidebarMenu = (props) => {
                         location.pathname === '/orders' ||
                         location.pathname === '/deliveries' ||
                         location.pathname === '/drivers' ||
-                        location.pathname === '/appointments'
+                        location.pathname === '/appointments' ||
+                        location.pathname === '/gift-cards'
                       }
                     >
                       <ListCheck />
@@ -380,7 +386,7 @@ export const SidebarMenu = (props) => {
                           !(sessionState?.user?.level === 5 && item.pageName === 'appointments') && (
                             <SubMenu
                               key={item.id}
-                              active={location.pathname.includes(item.pageName)}
+                              active={location.pathname.includes(item.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
                               {item.title}
