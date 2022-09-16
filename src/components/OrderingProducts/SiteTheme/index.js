@@ -76,9 +76,19 @@ const SiteThemeUI = (props) => {
     setThemeOptions(_themeOptions)
   }, [themesList])
 
+  const recursiveAssign = (a, b) => {
+    if (Object(b) !== b) return b
+    if (Object(a) !== a) a = {}
+    for (const key in b) {
+      a[key] = recursiveAssign(a[key], b[key])
+    }
+    return a
+  }
+
   useEffect(() => {
     if (siteThemesState.loading || siteThemesState.result.length === 0) return
-    setThemeValues(siteThemesState.result[0]?.values)
+    const _themeValues = recursiveAssign(siteThemesState.result[0]?.theme?.values_default, siteThemesState.result[0]?.values)
+    setThemeValues(_themeValues)
     const structure = siteThemesState.result[0]?.theme?.structure || {}
     setThemeStructure(structure)
     const _pageOptions = getOptions(Object.keys(structure))
