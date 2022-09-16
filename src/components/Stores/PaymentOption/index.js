@@ -31,7 +31,8 @@ export const PaymentOption = (props) => {
     actionState,
     handleSaveClick,
     businessPaymethod,
-    handleDeletePaymethod
+    handleDeletePaymethod,
+    isDisabledPaymentsAdvanced
   } = props
 
   const theme = useTheme()
@@ -134,14 +135,18 @@ export const PaymentOption = (props) => {
           {sitesState?.sites?.length > 0 && (
             <Tab
               active={paymentTabs === 0}
-              onClick={() => setPaymentTabs(0)}
+              onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(0)}
+              disabledFeature={isDisabledPaymentsAdvanced}
+              title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
             >
               {t('CHANNELS', 'Channels')}
             </Tab>
           )}
           <Tab
             active={paymentTabs === 1}
-            onClick={() => setPaymentTabs(1)}
+            onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(1)}
+            disabledFeature={isDisabledPaymentsAdvanced}
+            title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
           >
             {t('ORDER_TYPE', 'Order type')}
           </Tab>
@@ -151,7 +156,8 @@ export const PaymentOption = (props) => {
           sitesState?.sites.map(site => (
             <TabOption
               key={site.id}
-              onClick={() => setPaymethodInfo({ key: 'sites', value: site.id })}
+              disabledFeature={isDisabledPaymentsAdvanced}
+              onClick={() => !isDisabledPaymentsAdvanced && setPaymethodInfo({ key: 'sites', value: site.id })}
             >
               {(changesState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
                 <RiCheckboxFill className='fill' />

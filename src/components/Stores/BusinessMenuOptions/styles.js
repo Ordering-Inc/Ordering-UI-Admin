@@ -159,6 +159,12 @@ export const Tab = styled.div`
   ${({ active }) => !active && css`
     color: ${props => props.theme.colors.lightGray};
   `}
+
+  ${({ disabledFeature }) => disabledFeature && css`
+    background-color: ${props => props.theme.colors.disabled};
+    border-radius: 5px;
+    cursor: not-allowed;
+  `}
 `
 
 export const BusinessMenuBasicContainer = styled.div`
