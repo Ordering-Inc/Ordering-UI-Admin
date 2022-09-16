@@ -53,6 +53,7 @@ export const ThemeComponent = (props) => {
       </ComponentHeader>
       {(name === 'image' || name === 'dummy_image') && componentObject?.value_type === 'string' && (
         <ThemeImage
+          key={valueObject}
           valueObject={valueObject}
           handleAddThemeGallery={handleAddThemeGallery}
           handleChangeValue={handleChangeValue}
