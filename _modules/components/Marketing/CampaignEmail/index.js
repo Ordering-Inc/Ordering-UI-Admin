@@ -13,13 +13,39 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styles = require("../../../styles");
 
+var _jquery = _interopRequireDefault(require("jquery"));
+
+var _reactSummernote = _interopRequireDefault(require("react-summernote"));
+
+require("react-summernote/dist/react-summernote.css");
+
+require("bootstrap/js/dist/modal");
+
+require("bootstrap/js/dist/dropdown");
+
+require("bootstrap/js/dist/tooltip");
+
+require("bootstrap/dist/css/bootstrap.css");
+
 var _Shared = require("../../Shared");
 
+var _InsertImage = require("../../Settings/InsertImage");
+
+var _InsertLink = require("../../Settings/InsertLink");
+
 var _styles2 = require("./styles");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
@@ -35,7 +61,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var CampaignEmail = function CampaignEmail(props) {
+var CampaignEmailUI = function CampaignEmailUI(props) {
   var _contactState$changes5, _contactState$changes6, _contactState$changes7, _contactState$changes8, _contactState$changes9, _contactState$changes10, _contactState$changes11, _contactState$changes12;
 
   var isAddMode = props.isAddMode,
@@ -43,7 +69,14 @@ var CampaignEmail = function CampaignEmail(props) {
       handleChangeData = props.handleChangeData,
       handleUpdateContact = props.handleUpdateContact,
       handleAddCampaign = props.handleAddCampaign,
-      formState = props.formState;
+      formState = props.formState,
+      handleChangeContact = props.handleChangeContact,
+      imageListState = props.imageListState,
+      insertImageState = props.insertImageState,
+      handleInsertImage = props.handleInsertImage,
+      handleDeleteImage = props.handleDeleteImage,
+      selectedImageUrl = props.selectedImageUrl,
+      setSelectedImageUrl = props.setSelectedImageUrl;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -56,6 +89,21 @@ var CampaignEmail = function CampaignEmail(props) {
       _useState2 = _slicedToArray(_useState, 2),
       alertState = _useState2[0],
       setAlertState = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      openModal = _useState4[0],
+      setOpenModal = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      editorContext = _useState6[0],
+      setEditorContext = _useState6[1];
+
+  var handleCloseModal = function handleCloseModal() {
+    setOpenModal(false);
+    setEditorContext(null);
+  };
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -125,21 +173,100 @@ var CampaignEmail = function CampaignEmail(props) {
     }
   };
 
+  var handleRestoreEditor = function handleRestoreEditor() {
+    return editorContext.invoke('restoreRange');
+  };
+
+  var insertImage = function insertImage(context) {
+    var ui = _jquery.default.summernote.ui;
+    var button = ui.button({
+      contents: '<i class="note-icon-picture"/>',
+      tooltip: 'picture',
+      class: 'note-btn',
+      click: function click() {
+        setEditorContext(context);
+        context.invoke('editor.saveRange');
+        setOpenModal('image');
+      }
+    });
+    return button.render();
+  };
+
+  var insertLink = function insertLink(context) {
+    var ui = _jquery.default.summernote.ui;
+    var button = ui.button({
+      contents: '<i class="note-icon-link"/>',
+      tooltip: 'link',
+      class: 'note-btn',
+      click: function click() {
+        setEditorContext(context);
+        context.invoke('editor.saveRange');
+        setOpenModal('link');
+      }
+    });
+    return button.render();
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
     defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes5 = contactState.changes) === null || _contactState$changes5 === void 0 ? void 0 : (_contactState$changes6 = _contactState$changes5.contact_data) === null || _contactState$changes6 === void 0 ? void 0 : _contactState$changes6.title) || '',
     onChange: handleChangeData
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGES', 'Messages')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
-    name: "body",
-    placeholder: t('WRITE_MESSAGE', 'Write a message'),
-    defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes7 = contactState.changes) === null || _contactState$changes7 === void 0 ? void 0 : (_contactState$changes8 = _contactState$changes7.contact_data) === null || _contactState$changes8 === void 0 ? void 0 : _contactState$changes8.body) || '',
-    onChange: handleChangeData
-  })), /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.PointGroup, null, /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null))), /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewContent, null, /*#__PURE__*/_react.default.createElement("h2", null, (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes9 = contactState.changes) === null || _contactState$changes9 === void 0 ? void 0 : (_contactState$changes10 = _contactState$changes9.contact_data) === null || _contactState$changes10 === void 0 ? void 0 : _contactState$changes10.title) || ''), /*#__PURE__*/_react.default.createElement("p", null, (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes11 = contactState.changes) === null || _contactState$changes11 === void 0 ? void 0 : (_contactState$changes12 = _contactState$changes11.contact_data) === null || _contactState$changes12 === void 0 ? void 0 : _contactState$changes12.body) || '')))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGES', 'Messages')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperEditor, null, /*#__PURE__*/_react.default.createElement(_reactSummernote.default, {
+    value: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes7 = contactState.changes) === null || _contactState$changes7 === void 0 ? void 0 : (_contactState$changes8 = _contactState$changes7.contact_data) === null || _contactState$changes8 === void 0 ? void 0 : _contactState$changes8.body) || '',
+    placeholder: t('EMAIL_CONTENT', 'Email content'),
+    options: {
+      height: 350,
+      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+      toolbar: [['style', ['style']], ['font', ['bold', 'italic', 'underline', 'clear']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'paragraph']], ['table', ['table']], ['insert', ['insertLink', 'insertImage', 'insertVideo']], ['codeview', ['codeview']]],
+      buttons: {
+        insertLink: insertLink,
+        insertImage: insertImage
+      }
+    },
+    onChange: function onChange(content) {
+      return handleChangeContact('body', content);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.PointGroup, null, /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null))), /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewContent, null, /*#__PURE__*/_react.default.createElement("h2", null, (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes9 = contactState.changes) === null || _contactState$changes9 === void 0 ? void 0 : (_contactState$changes10 = _contactState$changes9.contact_data) === null || _contactState$changes10 === void 0 ? void 0 : _contactState$changes10.title) || ''), /*#__PURE__*/_react.default.createElement(_styles2.Preview, {
+    dangerouslySetInnerHTML: {
+      __html: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes11 = contactState.changes) === null || _contactState$changes11 === void 0 ? void 0 : (_contactState$changes12 = _contactState$changes11.contact_data) === null || _contactState$changes12 === void 0 ? void 0 : _contactState$changes12.body) || ''
+    }
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: handleSaveEmail,
     disabled: contactState.loading
-  }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "60%",
+    open: openModal === 'image',
+    onClose: function onClose() {
+      return setOpenModal(null);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_InsertImage.InsertImage, {
+    imageListState: imageListState,
+    editorContext: editorContext,
+    handleRestoreEditor: handleRestoreEditor,
+    onClose: function onClose() {
+      return handleCloseModal();
+    },
+    insertImageState: insertImageState,
+    handleInsertImage: handleInsertImage,
+    handleDeleteImage: handleDeleteImage,
+    selectedImageUrl: selectedImageUrl,
+    setSelectedImageUrl: setSelectedImageUrl
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "60%",
+    open: openModal === 'link',
+    onClose: function onClose() {
+      return setOpenModal(null);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_InsertLink.InsertLink, {
+    editorContext: editorContext,
+    handleRestoreEditor: handleRestoreEditor,
+    onClose: function onClose() {
+      return handleCloseModal();
+    },
+    isLinkButton: true
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('CAMPAIGN', 'Campaign'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -152,6 +279,14 @@ var CampaignEmail = function CampaignEmail(props) {
     },
     closeOnBackdrop: false
   }));
+};
+
+var CampaignEmail = function CampaignEmail(props) {
+  var campaignEmailProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: CampaignEmailUI
+  });
+
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.CampaignEmail, campaignEmailProps);
 };
 
 exports.CampaignEmail = CampaignEmail;

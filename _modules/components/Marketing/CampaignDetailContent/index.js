@@ -53,7 +53,8 @@ var CampaignDetailContentUI = function CampaignDetailContentUI(props) {
   var _contactState$changes, _contactState$changes2, _contactState$changes3, _contactState$changes4, _contactState$changes5, _contactState$changes6, _contactState$changes7;
 
   var handleChangeType = props.handleChangeType,
-      contactState = props.contactState;
+      contactState = props.contactState,
+      isAddMode = props.isAddMode;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -97,10 +98,11 @@ var CampaignDetailContentUI = function CampaignDetailContentUI(props) {
     placeholder: t('SELECT_OPTION', 'Select an option'),
     onChange: function onChange(value) {
       return handleChangeType('contact_type', value);
-    },
-    isShowSearchBar: true,
+    } // isShowSearchBar
+    ,
     searchBarIsCustomLayout: true,
     searchBarIsNotLazyLoad: true,
+    isDisabled: !isAddMode,
     searchValue: contactTypeSearchVal,
     handleChangeSearch: function handleChangeSearch(val) {
       return setContactTypeSearchVal(val);

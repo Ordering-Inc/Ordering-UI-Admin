@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersTable = function OrdersTable(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderList$orders3;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderList$orders3, _allowColumns$slaBar, _allowColumns$orderNu, _allowColumns$dateTim;
 
   var isSelectedOrders = props.isSelectedOrders,
       orderList = props.orderList,
@@ -102,6 +102,11 @@ var OrdersTable = function OrdersTable(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       setCurrentTime = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      dragOverd = _useState6[0],
+      setDragOverd = _useState6[1];
+
   var handleChangePage = function handleChangePage(page) {
     getPageOrders(pagination.pageSize, page);
   };
@@ -115,21 +120,91 @@ var OrdersTable = function OrdersTable(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configState = _useConfig2[0];
 
-  var _useState5 = (0, _react.useState)({
-    status: true,
-    orderNumber: true,
-    dateTime: true,
-    business: true,
-    customer: true,
-    driver: true,
-    advanced: true,
-    timer: (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1',
-    slaBar: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1',
-    total: true
+  var _useState7 = (0, _react.useState)({
+    status: {
+      visable: true,
+      title: t('STATUS', 'Status'),
+      className: 'statusInfo',
+      draggable: true,
+      colSpan: 1,
+      order: 1
+    },
+    orderNumber: {
+      visable: true,
+      title: '',
+      className: '',
+      draggable: false,
+      colSpan: 1,
+      order: -1
+    },
+    dateTime: {
+      visable: true,
+      title: '',
+      className: '',
+      draggable: false,
+      colSpan: 1,
+      order: -1
+    },
+    business: {
+      visable: true,
+      title: t('BUSINESS', 'Business'),
+      className: 'businessInfo',
+      draggable: true,
+      colSpan: 1,
+      order: 2
+    },
+    customer: {
+      visable: true,
+      title: t('CUSTOMER', 'Customer'),
+      className: 'customerInfo',
+      draggable: true,
+      colSpan: 1,
+      order: 3
+    },
+    driver: {
+      visable: true,
+      title: t('DRIVER', 'Driver'),
+      className: 'driverInfo',
+      draggable: true,
+      colSpan: 1,
+      order: 4
+    },
+    advanced: {
+      visable: true,
+      title: t('ADVANCED_LOGISTICS', 'Advanced logistics'),
+      className: 'advanced',
+      draggable: true,
+      colSpan: 3,
+      order: 5
+    },
+    timer: {
+      visable: (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1',
+      title: t('SLA_TIMER', 'SLA’s timer'),
+      className: 'timer',
+      draggable: true,
+      colSpan: 2,
+      order: 6
+    },
+    slaBar: {
+      visable: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1',
+      title: '',
+      className: '',
+      draggable: false,
+      colSpan: 1,
+      order: -1
+    },
+    total: {
+      visable: true,
+      title: '',
+      className: '',
+      draggable: false,
+      colSpan: 1,
+      order: -1
+    }
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      allowColumns = _useState6[0],
-      setAllowColumns = _useState6[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      allowColumns = _useState8[0],
+      setAllowColumns = _useState8[1];
 
   var optionsDefault = [{
     value: 'status',
@@ -332,7 +407,10 @@ var OrdersTable = function OrdersTable(props) {
   };
 
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
-    setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, !allowColumns[type])));
+    var _column = allowColumns[type];
+    setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
+      visable: !(_column !== null && _column !== void 0 && _column.visable)
+    }))));
   };
 
   var handleClickOrder = function handleClickOrder(order, e) {
@@ -357,6 +435,80 @@ var OrdersTable = function OrdersTable(props) {
       });
       setSelectedOrderIds(updatedSelectedOrderIds);
     }
+  };
+  /**
+   * Method to handle drag start
+   */
+
+
+  var handleDragStart = function handleDragStart(event, columnName) {
+    var _allowColumns$columnN;
+
+    event.dataTransfer.setData('transferColumnName', columnName);
+    var ghostEle = document.createElement('div');
+    ghostEle.classList.add('ghostDragging');
+    ghostEle.innerHTML = (_allowColumns$columnN = allowColumns[columnName]) === null || _allowColumns$columnN === void 0 ? void 0 : _allowColumns$columnN.title;
+    document.body.appendChild(ghostEle);
+    event.dataTransfer.setDragImage(ghostEle, 0, 0);
+  };
+  /**
+   * Method to handle drag over
+   */
+
+
+  var handleDragOver = function handleDragOver(event, columnName) {
+    event.preventDefault();
+    setDragOverd(columnName);
+  };
+  /**
+   * Method to handle drag drop
+   */
+
+
+  var handleDrop = function handleDrop(event, columnName) {
+    var _allowColumns$transfe, _allowColumns$columnN2;
+
+    event.preventDefault();
+    var transferColumnName = event.dataTransfer.getData('transferColumnName');
+    if (columnName === transferColumnName) return;
+    var transferColumnOrder = (_allowColumns$transfe = allowColumns[transferColumnName]) === null || _allowColumns$transfe === void 0 ? void 0 : _allowColumns$transfe.order;
+    var currentColumnOrder = (_allowColumns$columnN2 = allowColumns[columnName]) === null || _allowColumns$columnN2 === void 0 ? void 0 : _allowColumns$columnN2.order;
+
+    var _ref = transferColumnOrder < currentColumnOrder ? [transferColumnOrder, currentColumnOrder] : [currentColumnOrder, transferColumnOrder],
+        _ref2 = _slicedToArray(_ref, 2),
+        lessOrder = _ref2[0],
+        greaterOrder = _ref2[1];
+
+    var _remainAllowColumns = {};
+    var shouldUpdateColumns = Object.keys(allowColumns).filter(function (col) {
+      var _allowColumns$col, _allowColumns$col2;
+
+      return col !== transferColumnName && ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.order) >= lessOrder && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) <= greaterOrder;
+    });
+    shouldUpdateColumns.forEach(function (col) {
+      var _allowColumns$col3;
+
+      _remainAllowColumns[col] = _objectSpread(_objectSpread({}, allowColumns[col]), {}, {
+        order: ((_allowColumns$col3 = allowColumns[col]) === null || _allowColumns$col3 === void 0 ? void 0 : _allowColumns$col3.order) + (transferColumnOrder < currentColumnOrder ? -1 : 1)
+      });
+    });
+    setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, transferColumnName, _objectSpread(_objectSpread({}, allowColumns[transferColumnName]), {}, {
+      order: currentColumnOrder
+    })), _remainAllowColumns));
+  };
+  /**
+   * Method to handle drag end
+   */
+
+
+  var handleDragEnd = function handleDragEnd() {
+    var elements = document.getElementsByClassName('ghostDragging');
+
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+
+    setDragOverd('');
   };
 
   (0, _react.useEffect)(function () {
@@ -389,19 +541,26 @@ var OrdersTable = function OrdersTable(props) {
     };
   }, [isTourOpen, currentTourStep]);
   (0, _react.useEffect)(function () {
-    if (groupStatus === 'completed' || groupStatus === 'cancelled') {
-      setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
-        timer: false
-      }));
-    }
-  }, [groupStatus]);
-  (0, _react.useEffect)(function () {
     var _configState$configs6, _configState$configs7;
 
     var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.order_deadlines_enabled) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === '1';
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
-      timer: slaSettings,
-      slaBar: slaSettings
+      timer: {
+        visable: slaSettings,
+        title: t('SLA_TIMER', 'SLA’s timer'),
+        className: 'timer',
+        draggable: true,
+        colSpan: 2,
+        order: 6
+      },
+      slaBar: {
+        visable: slaSettings,
+        title: '',
+        className: '',
+        draggable: false,
+        colSpan: 1,
+        order: -1
+      }
     }));
   }, [configState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
@@ -411,39 +570,61 @@ var OrdersTable = function OrdersTable(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "orders_table",
     noFixedHeader: !orderList.loading && ((_orderList$orders3 = orderList.orders) === null || _orderList$orders3 === void 0 ? void 0 : _orderList$orders3.length) <= 5
-  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.slaBar) && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("th", {
-    className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'orderNo small' : 'orderNo'
+  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar = allowColumns.slaBar) === null || _allowColumns$slaBar === void 0 ? void 0 : _allowColumns$slaBar.visable) && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("th", {
+    className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu = allowColumns.orderNumber) !== null && _allowColumns$orderNu !== void 0 && _allowColumns$orderNu.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim = allowColumns.dateTime) !== null && _allowColumns$dateTim !== void 0 && _allowColumns$dateTim.visable) ? 'orderNo small' : 'orderNo'
   }, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
     isChecked: !orderList.loading && isAllChecked,
     onClick: function onClick() {
       return handleSelecteAllOrder();
     },
     className: "orderCheckBox"
-  }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "statusInfo"
-  }, t('STATUS', 'Status')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "businessInfo"
-  }, t('BUSINESS', 'Business')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.customer) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "customerInfo"
-  }, t('CUSTOMER', 'Customer')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && /*#__PURE__*/_react.default.createElement("th", {
-    className: "driverInfo"
-  }, t('DRIVER', 'Driver')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && /*#__PURE__*/_react.default.createElement("th", {
-    colSpan: "3",
-    className: "advanced"
-  }, t('ADVANCED_LOGISTICS', 'Advanced logistics')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && (groupStatus === 'pending' || groupStatus === 'inProgress') && /*#__PURE__*/_react.default.createElement("th", {
-    colSpan: "2",
-    className: "timer"
-  }, t('SLA_TIMER', 'SLA’s timer')), /*#__PURE__*/_react.default.createElement("th", {
+  }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order')), Object.keys(allowColumns).filter(function (col) {
+    var _allowColumns$col4, _allowColumns$col5;
+
+    return ((_allowColumns$col4 = allowColumns[col]) === null || _allowColumns$col4 === void 0 ? void 0 : _allowColumns$col4.draggable) && ((_allowColumns$col5 = allowColumns[col]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.visable);
+  }).sort(function (col1, col2) {
+    var _allowColumns$col6, _allowColumns$col7;
+
+    return ((_allowColumns$col6 = allowColumns[col1]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.order) - ((_allowColumns$col7 = allowColumns[col2]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.order);
+  }).map(function (column, i) {
+    var _allowColumns$column$, _allowColumns$column, _allowColumns$column2, _theme$images$icons, _allowColumns$column3;
+
+    return (column !== 'timer' || column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress')) && /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
+      key: "dragTh-".concat(i),
+      onDragOver: function onDragOver(e) {
+        return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e, column);
+      },
+      onDrop: function onDrop(e) {
+        return handleDrop(e, column);
+      },
+      onDragEnd: function onDragEnd(e) {
+        return handleDragEnd(e);
+      },
+      colSpan: (_allowColumns$column$ = (_allowColumns$column = allowColumns[column]) === null || _allowColumns$column === void 0 ? void 0 : _allowColumns$column.colSpan) !== null && _allowColumns$column$ !== void 0 ? _allowColumns$column$ : 1,
+      className: (_allowColumns$column2 = allowColumns[column]) === null || _allowColumns$column2 === void 0 ? void 0 : _allowColumns$column2.className,
+      selectedDragOver: column === dragOverd
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      draggable: true,
+      onDragStart: function onDragStart(e) {
+        return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, column);
+      }
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
+      alt: "six dots"
+    }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title)));
+  }), /*#__PURE__*/_react.default.createElement("th", {
     className: "orderPrice"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
     handleChangeAllowColumns: handleChangeAllowColumns
   })))), orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
+
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.slaBar) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
-      className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'orderNo small' : 'orderNo'
+    }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
+      className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu2 = allowColumns.orderNumber) !== null && _allowColumns$orderNu2 !== void 0 && _allowColumns$orderNu2.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim2 = allowColumns.dateTime) !== null && _allowColumns$dateTim2 !== void 0 && _allowColumns$dateTim2.visable) ? 'orderNo small' : 'orderNo'
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderNumberContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 25,
       height: 25,
@@ -452,11 +633,11 @@ var OrdersTable = function OrdersTable(props) {
       }
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
-    }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.orderNumber) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$orderNu3 = allowColumns.orderNumber) === null || _allowColumns$orderNu3 === void 0 ? void 0 : _allowColumns$orderNu3.visable) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    })), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$dateTim3 = allowColumns.dateTime) === null || _allowColumns$dateTim3 === void 0 ? void 0 : _allowColumns$dateTim3.visable) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$status = allowColumns.status) === null || _allowColumns$status === void 0 ? void 0 : _allowColumns$status.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "statusInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -464,7 +645,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "bold"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$busines = allowColumns.business) === null || _allowColumns$busines === void 0 ? void 0 : _allowColumns$busines.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "businessInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
@@ -477,7 +658,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 80
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.customer) && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$custome = allowColumns.customer) === null || _allowColumns$custome === void 0 ? void 0 : _allowColumns$custome.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "customerInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
@@ -490,7 +671,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$driver = allowColumns.driver) === null || _allowColumns$driver === void 0 ? void 0 : _allowColumns$driver.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "driverInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, {
       className: "d-flex align-items-center"
@@ -502,17 +683,17 @@ var OrdersTable = function OrdersTable(props) {
       style: {
         margin: '10px'
       }
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.deliveryType) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$deliver = allowColumns.deliveryType) === null || _allowColumns$deliver === void 0 ? void 0 : _allowColumns$deliver.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderType"
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 35,
       height: 35
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$status2 = allowColumns.status) === null || _allowColumns$status2 === void 0 ? void 0 : _allowColumns$status2.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderStatusTitle"
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusSelector, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100,
       height: 30
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$advance = allowColumns.advanced) === null || _allowColumns$advance === void 0 ? void 0 : _allowColumns$advance.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "logistic"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -522,7 +703,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$advance2 = allowColumns.advanced) === null || _allowColumns$advance2 === void 0 ? void 0 : _allowColumns$advance2.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "attempts"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -532,7 +713,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$advance3 = allowColumns.advanced) === null || _allowColumns$advance3 === void 0 ? void 0 : _allowColumns$advance3.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "priority"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -546,7 +727,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "orderPrice"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
-    }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.total) && /*#__PURE__*/_react.default.createElement("p", {
+    }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$total = allowColumns.total) === null || _allowColumns$total === void 0 ? void 0 : _allowColumns$total.visable) && /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
@@ -554,7 +735,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     }))))));
   }) : orderList.orders.map(function (order, i) {
-    var _getOrderStatus, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$summary;
+    var _allowColumns$slaBar3, _allowColumns$orderNu4, _allowColumns$dateTim4, _allowColumns$orderNu5, _allowColumns$dateTim5;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i,
@@ -563,10 +744,10 @@ var OrdersTable = function OrdersTable(props) {
         return handleClickOrder(order, e);
       },
       "data-tour": i === 0 ? 'tour_start' : ''
-    }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.slaBar) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar3 = allowColumns.slaBar) === null || _allowColumns$slaBar3 === void 0 ? void 0 : _allowColumns$slaBar3.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
       timeState: getStatusClassName(getDelayMinutes(order))
     })), /*#__PURE__*/_react.default.createElement("td", {
-      className: !(allowColumns !== null && allowColumns !== void 0 && allowColumns.orderNumber || allowColumns !== null && allowColumns !== void 0 && allowColumns.dateTime) ? 'small' : ''
+      className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu4 = allowColumns.orderNumber) !== null && _allowColumns$orderNu4 !== void 0 && _allowColumns$orderNu4.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim4 = allowColumns.dateTime) !== null && _allowColumns$dateTim4 !== void 0 && _allowColumns$dateTim4.visable) ? 'small' : ''
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderNumberContainer, null, !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
       isChecked: selectedOrderIds.includes(order === null || order === void 0 ? void 0 : order.id),
       onClick: function onClick() {
@@ -575,87 +756,136 @@ var OrdersTable = function OrdersTable(props) {
       className: "orderCheckBox"
     }, selectedOrderIds.includes(order === null || order === void 0 ? void 0 : order.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
-    }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.orderNumber) && /*#__PURE__*/_react.default.createElement("p", {
+    }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$orderNu5 = allowColumns.orderNumber) === null || _allowColumns$orderNu5 === void 0 ? void 0 : _allowColumns$orderNu5.visable) && /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.dateTime) && /*#__PURE__*/_react.default.createElement("p", {
+    }, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$dateTim5 = allowColumns.dateTime) === null || _allowColumns$dateTim5 === void 0 ? void 0 : _allowColumns$dateTim5.visable) && /*#__PURE__*/_react.default.createElement("p", {
       className: "date"
     }, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.status) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
-      className: "statusInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
-      className: "businessInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
-      loading: "lazy",
-      alt: ""
-    })), /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : (_order$business3$city = _order$business3.city) === null || _order$business3$city === void 0 ? void 0 : _order$business3$city.name)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.customer) && /*#__PURE__*/_react.default.createElement("td", {
-      className: "customerInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$customer = order.customer) !== null && _order$customer !== void 0 && _order$customer.photo ? /*#__PURE__*/_react.default.createElement("img", {
-      src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo, 'h_50,c_limit'),
-      loading: "lazy",
-      alt: ""
-    }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.OrdersCountWrapper, {
-      isNew: (order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.orders_count) === 0
-    }, (order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.orders_count) || t('NEW', 'New'))), /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.cellphone)))), isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, {
-      color: "#B1BCCC"
-    })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.driver) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", null, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
-      src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit'),
-      loading: "lazy",
-      alt: ""
-    }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, order !== null && order !== void 0 && order.driver ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.cellphone)) : /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, t('NO_DRIVER', 'No Driver'))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
-      className: "logistic"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status), /*#__PURE__*/_react.default.createElement(_styles.LogisticStatusDot, {
-      status: order === null || order === void 0 ? void 0 : order.logistic_status
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
-      className: "attempts"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, t('ATTEMPTS', 'Attempts')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.logistic_attemps))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.advanced) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
-      className: "priority"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority), /*#__PURE__*/_react.default.createElement(_styles.PriorityDot, {
-      priority: order === null || order === void 0 ? void 0 : order.priority
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.timer) && (groupStatus === 'pending' || groupStatus === 'inProgress') && /*#__PURE__*/_react.default.createElement("td", {
-      className: "timer"
-    }, /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, t('TIMER', 'Timer')), /*#__PURE__*/_react.default.createElement("p", {
-      className: getStatusClassName(getDelayMinutes(order))
-    }, displayDelayedTime(order)))), /*#__PURE__*/_react.default.createElement("td", {
-      className: "orderPrice"
-    }, /*#__PURE__*/_react.default.createElement("div", {
-      className: "info"
-    }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.total) && /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
-    }, order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total, " ", order === null || order === void 0 ? void 0 : order.currency), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
-      utc: false
-    })))), /*#__PURE__*/_react.default.createElement("td", null)));
+    }))))), Object.keys(allowColumns).filter(function (col) {
+      var _allowColumns$col8, _allowColumns$col9;
+
+      return ((_allowColumns$col8 = allowColumns[col]) === null || _allowColumns$col8 === void 0 ? void 0 : _allowColumns$col8.draggable) && ((_allowColumns$col9 = allowColumns[col]) === null || _allowColumns$col9 === void 0 ? void 0 : _allowColumns$col9.visable);
+    }).sort(function (col1, col2) {
+      var _allowColumns$col10, _allowColumns$col11;
+
+      return ((_allowColumns$col10 = allowColumns[col1]) === null || _allowColumns$col10 === void 0 ? void 0 : _allowColumns$col10.order) - ((_allowColumns$col11 = allowColumns[col2]) === null || _allowColumns$col11 === void 0 ? void 0 : _allowColumns$col11.order);
+    }).map(function (column, index) {
+      if (column === 'status' && !isSelectedOrders) {
+        var _getOrderStatus;
+
+        return /*#__PURE__*/_react.default.createElement("td", {
+          className: "statusInfo",
+          key: "statusInfo".concat(i, "-").concat(index)
+        }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)));
+      }
+
+      if (column === 'business') {
+        var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city;
+
+        return /*#__PURE__*/_react.default.createElement("td", {
+          className: "businessInfo",
+          key: "businessInfo".concat(i, "-").concat(index)
+        }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
+          src: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
+          loading: "lazy",
+          alt: ""
+        })), /*#__PURE__*/_react.default.createElement("div", {
+          className: "info"
+        }, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : (_order$business3$city = _order$business3.city) === null || _order$business3$city === void 0 ? void 0 : _order$business3$city.name))));
+      }
+
+      if (column === 'customer') {
+        var _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6;
+
+        return /*#__PURE__*/_react.default.createElement("td", {
+          className: "customerInfo",
+          key: "customerInfo".concat(i, "-").concat(index)
+        }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$customer = order.customer) !== null && _order$customer !== void 0 && _order$customer.photo ? /*#__PURE__*/_react.default.createElement("img", {
+          src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo, 'h_50,c_limit'),
+          loading: "lazy",
+          alt: ""
+        }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.OrdersCountWrapper, {
+          isNew: (order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.orders_count) === 0
+        }, (order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.orders_count) || t('NEW', 'New'))), /*#__PURE__*/_react.default.createElement("div", {
+          className: "info"
+        }, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.cellphone))));
+      }
+
+      if (column === 'driver' && !isSelectedOrders) {
+        var _order$driver, _order$driver2, _order$driver3, _order$driver4;
+
+        return /*#__PURE__*/_react.default.createElement("td", {
+          key: "driver".concat(i, "-").concat(index)
+        }, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
+          src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit'),
+          loading: "lazy",
+          alt: ""
+        }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement("div", {
+          className: "info"
+        }, order !== null && order !== void 0 && order.driver ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.cellphone)) : /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, t('NO_DRIVER', 'No Driver')))));
+      }
+
+      if (column === 'advanced' && !isSelectedOrders) {
+        return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+          key: "advanced".concat(i, "-").concat(index)
+        }, /*#__PURE__*/_react.default.createElement("td", {
+          className: "logistic"
+        }, /*#__PURE__*/_react.default.createElement("div", {
+          className: "info"
+        }, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status), /*#__PURE__*/_react.default.createElement(_styles.LogisticStatusDot, {
+          status: order === null || order === void 0 ? void 0 : order.logistic_status
+        })))), /*#__PURE__*/_react.default.createElement("td", {
+          className: "attempts"
+        }, /*#__PURE__*/_react.default.createElement("div", {
+          className: "info"
+        }, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, t('ATTEMPTS', 'Attempts')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.logistic_attemps))), /*#__PURE__*/_react.default.createElement("td", {
+          className: "priority"
+        }, /*#__PURE__*/_react.default.createElement("div", {
+          className: "info"
+        }, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority), /*#__PURE__*/_react.default.createElement(_styles.PriorityDot, {
+          priority: order === null || order === void 0 ? void 0 : order.priority
+        })))));
+      }
+
+      if (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress')) {
+        var _allowColumns$total2, _order$summary;
+
+        return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+          key: "timer".concat(i, "-").concat(index)
+        }, /*#__PURE__*/_react.default.createElement("td", {
+          className: "timer"
+        }, /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, t('TIMER', 'Timer')), /*#__PURE__*/_react.default.createElement("p", {
+          className: getStatusClassName(getDelayMinutes(order))
+        }, displayDelayedTime(order)))), /*#__PURE__*/_react.default.createElement("td", {
+          className: "orderPrice"
+        }, /*#__PURE__*/_react.default.createElement("div", {
+          className: "info"
+        }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$total2 = allowColumns.total) === null || _allowColumns$total2 === void 0 ? void 0 : _allowColumns$total2.visable) && /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total, " ", order === null || order === void 0 ? void 0 : order.currency), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+          utc: false
+        })))));
+      }
+    }), /*#__PURE__*/_react.default.createElement("td", null)));
   }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
     totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),

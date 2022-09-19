@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperPagination = exports.WrapperImage = exports.WrapOrderStatusSelector = exports.Timestatus = exports.Timer = exports.Table = exports.StatusInfo = exports.PriorityDot = exports.OrdersCountWrapper = exports.OrdersContainer = exports.OrderType = exports.OrderTbody = exports.OrderNumberContainer = exports.LogisticStatusDot = exports.DriversInfo = exports.CustomerInfo = exports.CheckBox = exports.BusinessInfo = void 0;
+exports.WrapperPagination = exports.WrapperImage = exports.WrapOrderStatusSelector = exports.Timestatus = exports.Timer = exports.Table = exports.StatusInfo = exports.PriorityDot = exports.OrdersCountWrapper = exports.OrdersContainer = exports.OrderType = exports.OrderTbody = exports.OrderNumberContainer = exports.LogisticStatusDot = exports.DriversInfo = exports.DragTh = exports.CustomerInfo = exports.CheckBox = exports.BusinessInfo = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -251,3 +251,12 @@ var OrdersCountWrapper = _styledComponents.default.div(_templateObject50 || (_te
 });
 
 exports.OrdersCountWrapper = OrdersCountWrapper;
+
+var DragTh = _styledComponents.default.th(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  ", "\n"])), function (_ref20) {
+  var selectedDragOver = _ref20.selectedDragOver;
+  return selectedDragOver && (0, _styledComponents.css)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), function (props) {
+    return props.theme.colors.primary;
+  });
+});
+
+exports.DragTh = DragTh;

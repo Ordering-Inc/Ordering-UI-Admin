@@ -91,7 +91,7 @@ var ThemeOption = function ThemeOption(props) {
     onChange: function onChange(e) {
       return handleChangeValue(e.target.checked);
     }
-  }), /*#__PURE__*/_react.default.createElement("h5", null, getTitle(name))), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'integer' && !(optionObject !== null && optionObject !== void 0 && optionObject.options) && /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }), /*#__PURE__*/_react.default.createElement("h5", null, getTitle(name))), ((optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'integer' || (optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'string') && !(optionObject !== null && optionObject !== void 0 && optionObject.options) && !validHexColor(valueObject) && /*#__PURE__*/_react.default.createElement(_styles.Input, {
     defaultValue: valueObject,
     onChange: function onChange(e) {
       return handleChangeValue(e.target.value);

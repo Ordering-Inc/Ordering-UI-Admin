@@ -105,15 +105,23 @@ var LoginFormUI = function LoginFormUI(props) {
       alertState = _useState2[0],
       setAlertState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)({
+    version: 'v3',
+    siteKey: ''
+  }),
       _useState4 = _slicedToArray(_useState3, 2),
-      submitted = _useState4[0],
-      setSubmitted = _useState4[1];
+      reCaptchaVersion = _useState4[0],
+      setRecaptchaVersion = _useState4[1];
 
   var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      passwordSee = _useState6[0],
-      setPasswordSee = _useState6[1];
+      submitted = _useState6[0],
+      setSubmitted = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      passwordSee = _useState8[0],
+      setPasswordSee = _useState8[1];
 
   var onSubmit = function onSubmit() {
     setSubmitted(true);
@@ -140,11 +148,26 @@ var LoginFormUI = function LoginFormUI(props) {
     var _formState$result;
 
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
-      var _formState$result2;
+      var _formState$result2, _formState$result2$re, _formState$result3;
+
+      if (((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re[0]) === 'ERROR_AUTH_VERIFICATION_CODE') {
+        var _configs$security_rec;
+
+        setRecaptchaVersion({
+          version: 'v2',
+          siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec = configs.security_recaptcha_site_key) === null || _configs$security_rec === void 0 ? void 0 : _configs$security_rec.value
+        });
+        setAlertState({
+          open: true,
+          content: [t('TRY_AGAIN', 'Please try again')]
+        });
+        setSubmitted(false);
+        return;
+      }
 
       setAlertState({
         open: true,
-        content: ((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result) || [t('ERROR')]
+        content: ((_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.result) || [t('ERROR')]
       });
       setSubmitted(false);
     }
@@ -167,6 +190,33 @@ var LoginFormUI = function LoginFormUI(props) {
     });
   };
 
+  (0, _react.useEffect)(function () {
+    var _configs$security_rec2, _configs$security_rec3, _configs$security_rec4, _configs$security_rec6;
+
+    if (configs && Object.keys(configs).length > 0 && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_type) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value) === 'v3' && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec3 = configs.security_recaptcha_score_v3) === null || _configs$security_rec3 === void 0 ? void 0 : _configs$security_rec3.value) > 0 && configs !== null && configs !== void 0 && (_configs$security_rec4 = configs.security_recaptcha_site_key_v3) !== null && _configs$security_rec4 !== void 0 && _configs$security_rec4.value) {
+      var _configs$security_rec5;
+
+      setRecaptchaVersion({
+        version: 'v3',
+        siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec5 = configs.security_recaptcha_site_key_v3) === null || _configs$security_rec5 === void 0 ? void 0 : _configs$security_rec5.value
+      });
+      return;
+    }
+
+    if (configs && Object.keys(configs).length > 0 && configs !== null && configs !== void 0 && (_configs$security_rec6 = configs.security_recaptcha_site_key) !== null && _configs$security_rec6 !== void 0 && _configs$security_rec6.value) {
+      var _configs$security_rec7;
+
+      setRecaptchaVersion({
+        version: 'v2',
+        siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec7 = configs.security_recaptcha_site_key) === null || _configs$security_rec7 === void 0 ? void 0 : _configs$security_rec7.value
+      });
+      return;
+    }
+
+    if (configs && Object.keys(configs).length > 0) {
+      throw new Error('ReCaptcha component: the config doesn\'t have recaptcha site key');
+    }
+  }, [configs]);
   (0, _react.useEffect)(function () {
     setConfigFile(_objectSpread(_objectSpread({}, configFile), {}, {
       project: window.localStorage.getItem('project') || null
@@ -263,7 +313,8 @@ var LoginFormUI = function LoginFormUI(props) {
       return setPasswordSee(!passwordSee);
     }
   }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), isReCaptchaEnable && /*#__PURE__*/_react.default.createElement(_styles2.ReCAPTCHAWrapper, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ReCaptcha, {
-    handleReCaptcha: handleReCaptcha
+    handleReCaptcha: handleReCaptcha,
+    reCaptchaVersion: reCaptchaVersion
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",

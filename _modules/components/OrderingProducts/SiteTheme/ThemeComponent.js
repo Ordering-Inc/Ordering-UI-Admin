@@ -77,6 +77,7 @@ var ThemeComponent = function ThemeComponent(props) {
       return handleChangeValue(e.target.checked);
     }
   }), /*#__PURE__*/_react.default.createElement("h4", null, getTitle(name))), (name === 'image' || name === 'dummy_image') && (componentObject === null || componentObject === void 0 ? void 0 : componentObject.value_type) === 'string' && /*#__PURE__*/_react.default.createElement(_ThemeImage.ThemeImage, {
+    key: valueObject,
     valueObject: valueObject,
     handleAddThemeGallery: handleAddThemeGallery,
     handleChangeValue: handleChangeValue
