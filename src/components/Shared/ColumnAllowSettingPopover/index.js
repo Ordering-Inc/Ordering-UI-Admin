@@ -92,10 +92,10 @@ export const ColumnAllowSettingPopover = (props) => {
           {optionsDefault.map(option => (
             <AllowItem
               key={option.value}
-              isChecked={allowColumns[option.value]}
+              isChecked={allowColumns[option.value]?.visable}
               onClick={() => handleChangeAllowColumns(option.value)}
             >
-              {allowColumns[option.value] ? (
+              {allowColumns[option.value]?.visable ? (
                 <RiCheckboxFill />
               ) : (
                 <RiCheckboxBlankLine />

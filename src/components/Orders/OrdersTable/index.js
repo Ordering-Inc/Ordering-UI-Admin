@@ -31,7 +31,8 @@ import {
   PriorityDot,
   Timestatus,
   Timer,
-  OrdersCountWrapper
+  OrdersCountWrapper,
+  DragTh
 } from './styles'
 
 export const OrdersTable = (props) => {
@@ -57,6 +58,7 @@ export const OrdersTable = (props) => {
   const [{ parseDate, optimizeImage, getTimeAgo }] = useUtils()
   const [isAllChecked, setIsAllChecked] = useState(false)
   const [, setCurrentTime] = useState()
+  const [dragOverd, setDragOverd] = useState('')
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }
@@ -66,16 +68,16 @@ export const OrdersTable = (props) => {
   }
   const [configState] = useConfig()
   const [allowColumns, setAllowColumns] = useState({
-    status: true,
-    orderNumber: true,
-    dateTime: true,
-    business: true,
-    customer: true,
-    driver: true,
-    advanced: true,
-    timer: configState?.configs?.order_deadlines_enabled?.value === '1',
-    slaBar: configState?.configs?.order_deadlines_enabled?.value === '1',
-    total: true
+    status: { visable: true, title: t('STATUS', 'Status'), className: 'statusInfo', draggable: true, colSpan: 1, order: 1 },
+    orderNumber: { visable: true, title: '', className: '', draggable: false, colSpan: 1, order: -1 },
+    dateTime: { visable: true, title: '', className: '', draggable: false, colSpan: 1, order: -1 },
+    business: { visable: true, title: t('BUSINESS', 'Business'), className: 'businessInfo', draggable: true, colSpan: 1, order: 2 },
+    customer: { visable: true, title: t('CUSTOMER', 'Customer'), className: 'customerInfo', draggable: true, colSpan: 1, order: 3 },
+    driver: { visable: true, title: t('DRIVER', 'Driver'), className: 'driverInfo', draggable: true, colSpan: 1, order: 4 },
+    advanced: { visable: true, title: t('ADVANCED_LOGISTICS', 'Advanced logistics'), className: 'advanced', draggable: true, colSpan: 3, order: 5 },
+    timer: { visable: configState?.configs?.order_deadlines_enabled?.value === '1', title: t('SLA_TIMER', 'SLA’s timer'), className: 'timer', draggable: true, colSpan: 2, order: 6 },
+    slaBar: { visable: configState?.configs?.order_deadlines_enabled?.value === '1', title: '', className: '', draggable: false, colSpan: 1, order: -1 },
+    total: { visable: true, title: '', className: '', draggable: false, colSpan: 1, order: -1 }
   })
 
   const optionsDefault = [
@@ -228,9 +230,10 @@ export const OrdersTable = (props) => {
   }
 
   const handleChangeAllowColumns = (type) => {
+    const _column = allowColumns[type]
     setAllowColumns({
       ...allowColumns,
-      [type]: !allowColumns[type]
+      [type]: { ..._column, visable: !_column?.visable }
     })
   }
 
@@ -251,6 +254,61 @@ export const OrdersTable = (props) => {
       })
       setSelectedOrderIds(updatedSelectedOrderIds)
     }
+  }
+  /**
+   * Method to handle drag start
+   */
+  const handleDragStart = (event, columnName) => {
+    event.dataTransfer.setData('transferColumnName', columnName)
+    const ghostEle = document.createElement('div')
+    ghostEle.classList.add('ghostDragging')
+    ghostEle.innerHTML = allowColumns[columnName]?.title
+    document.body.appendChild(ghostEle)
+    event.dataTransfer.setDragImage(ghostEle, 0, 0)
+  }
+  /**
+   * Method to handle drag over
+   */
+  const handleDragOver = (event, columnName) => {
+    event.preventDefault()
+    setDragOverd(columnName)
+  }
+
+  /**
+   * Method to handle drag drop
+   */
+  const handleDrop = (event, columnName) => {
+    event.preventDefault()
+    const transferColumnName = event.dataTransfer.getData('transferColumnName')
+    if (columnName === transferColumnName) return
+    const transferColumnOrder = allowColumns[transferColumnName]?.order
+    const currentColumnOrder = allowColumns[columnName]?.order
+
+    const [lessOrder, greaterOrder] = transferColumnOrder < currentColumnOrder ? [transferColumnOrder, currentColumnOrder] : [currentColumnOrder, transferColumnOrder]
+    const _remainAllowColumns = {}
+    const shouldUpdateColumns = Object.keys(allowColumns).filter(col => col !== transferColumnName && allowColumns[col]?.order >= lessOrder && allowColumns[col]?.order <= greaterOrder)
+    shouldUpdateColumns.forEach(col => {
+      _remainAllowColumns[col] = {
+        ...allowColumns[col],
+        order: allowColumns[col]?.order + ((transferColumnOrder < currentColumnOrder) ? -1 : 1)
+      }
+    })
+
+    setAllowColumns({
+      ...allowColumns,
+      [transferColumnName]: { ...allowColumns[transferColumnName], order: currentColumnOrder },
+      ..._remainAllowColumns
+    })
+  }
+  /**
+   * Method to handle drag end
+   */
+  const handleDragEnd = () => {
+    const elements = document.getElementsByClassName('ghostDragging')
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0])
+    }
+    setDragOverd('')
   }
 
   useEffect(() => {
@@ -274,20 +332,11 @@ export const OrdersTable = (props) => {
   }, [isTourOpen, currentTourStep])
 
   useEffect(() => {
-    if (groupStatus === 'completed' || groupStatus === 'cancelled') {
-      setAllowColumns({
-        ...allowColumns,
-        timer: false
-      })
-    }
-  }, [groupStatus])
-
-  useEffect(() => {
     const slaSettings = configState?.configs?.order_deadlines_enabled?.value === '1'
     setAllowColumns({
       ...allowColumns,
-      timer: slaSettings,
-      slaBar: slaSettings
+      timer: { visable: slaSettings, title: t('SLA_TIMER', 'SLA’s timer'), className: 'timer', draggable: true, colSpan: 2, order: 6 },
+      slaBar: { visable: slaSettings, title: '', className: '', draggable: false, colSpan: 1, order: -1 }
     })
   }, [configState.loading])
 
@@ -305,13 +354,13 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
-                {allowColumns?.slaBar && (
+                {allowColumns?.slaBar?.visable && (
                   <th>
                     <Timestatus />
                   </th>
                 )}
                 <th
-                  className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
+                  className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
                 >
                   <CheckBox
                     isChecked={!orderList.loading && isAllChecked}
@@ -326,24 +375,28 @@ export const OrdersTable = (props) => {
                   </CheckBox>
                   {t('ORDER', 'Order')}
                 </th>
-                {allowColumns?.status && (
-                  <th className='statusInfo'>{t('STATUS', 'Status')}</th>
-                )}
-                {allowColumns?.business && (
-                  <th className='businessInfo'>{t('BUSINESS', 'Business')}</th>
-                )}
-                {allowColumns?.customer && (
-                  <th className='customerInfo'>{t('CUSTOMER', 'Customer')}</th>
-                )}
-                {allowColumns?.driver && (
-                  <th className='driverInfo'>{t('DRIVER', 'Driver')}</th>
-                )}
-                {allowColumns?.advanced && (
-                  <th colSpan='3' className='advanced'>{t('ADVANCED_LOGISTICS', 'Advanced logistics')}</th>
-                )}
-                {(allowColumns?.timer && (groupStatus === 'pending' || groupStatus === 'inProgress')) && (
-                  <th colSpan='2' className='timer'>{t('SLA_TIMER', 'SLA’s timer')}</th>
-                )}
+
+                {Object.keys(allowColumns).filter(col => allowColumns[col]?.draggable && allowColumns[col]?.visable)
+                  .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
+                  .map((column, i) => (column !== 'timer' || (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress'))) && (
+                    <DragTh
+                      key={`dragTh-${i}`}
+                      onDragOver={e => handleDragOver?.(e, column)}
+                      onDrop={e => handleDrop(e, column)}
+                      onDragEnd={e => handleDragEnd(e)}
+                      colSpan={allowColumns[column]?.colSpan ?? 1}
+                      className={allowColumns[column]?.className}
+                      selectedDragOver={column === dragOverd}
+                    >
+                      <div draggable onDragStart={e => handleDragStart?.(e, column)}>
+                        <img
+                          src={theme.images.icons?.sixDots}
+                          alt='six dots'
+                        />
+                        <span>{allowColumns[column]?.title}</span>
+                      </div>
+                    </DragTh>
+                  ))}
                 <th className='orderPrice'>
                   <ColumnAllowSettingPopover
                     allowColumns={allowColumns}
@@ -358,29 +411,29 @@ export const OrdersTable = (props) => {
             [...Array(10).keys()].map(i => (
               <OrderTbody key={i}>
                 <tr>
-                  {allowColumns?.slaBar && (
+                  {allowColumns?.slaBar?.visable && (
                     <td>
                       <Timestatus />
                     </td>
                   )}
                   <td
-                    className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'orderNo small' : 'orderNo'}
+                    className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
                   >
                     <OrderNumberContainer>
                       <CheckBox>
                         <Skeleton width={25} height={25} style={{ margin: '10px' }} />
                       </CheckBox>
                       <div className='info'>
-                        {allowColumns?.orderNumber && (
+                        {allowColumns?.orderNumber?.visable && (
                           <p><Skeleton width={100} /></p>
                         )}
-                        {allowColumns?.dateTime && (
+                        {allowColumns?.dateTime?.visable && (
                           <Skeleton width={120} />
                         )}
                       </div>
                     </OrderNumberContainer>
                   </td>
-                  {allowColumns?.status && !isSelectedOrders && (
+                  {allowColumns?.status?.visable && !isSelectedOrders && (
                     <td className='statusInfo'>
                       <StatusInfo>
                         <div className='info'>
@@ -389,7 +442,7 @@ export const OrdersTable = (props) => {
                       </StatusInfo>
                     </td>
                   )}
-                  {allowColumns?.business && (
+                  {allowColumns?.business?.visable && (
                     <td className='businessInfo'>
                       <BusinessInfo>
                         <Skeleton width={45} height={45} />
@@ -400,7 +453,7 @@ export const OrdersTable = (props) => {
                       </BusinessInfo>
                     </td>
                   )}
-                  {allowColumns?.customer && (
+                  {allowColumns?.customer?.visable && (
                     <td className='customerInfo'>
                       <CustomerInfo>
                         <Skeleton width={45} height={45} />
@@ -411,7 +464,7 @@ export const OrdersTable = (props) => {
                       </CustomerInfo>
                     </td>
                   )}
-                  {allowColumns?.driver && !isSelectedOrders && (
+                  {allowColumns?.driver?.visable && !isSelectedOrders && (
                     <td className='driverInfo'>
                       <DriversInfo className='d-flex align-items-center'>
                         <Skeleton width={45} height={45} />
@@ -419,21 +472,21 @@ export const OrdersTable = (props) => {
                       </DriversInfo>
                     </td>
                   )}
-                  {allowColumns?.deliveryType && !isSelectedOrders && (
+                  {allowColumns?.deliveryType?.visable && !isSelectedOrders && (
                     <td className='orderType'>
                       <OrderType>
                         <Skeleton width={35} height={35} />
                       </OrderType>
                     </td>
                   )}
-                  {allowColumns?.status && !isSelectedOrders && (
+                  {allowColumns?.status?.visable && !isSelectedOrders && (
                     <td className='orderStatusTitle'>
                       <WrapOrderStatusSelector>
                         <Skeleton width={100} height={30} />
                       </WrapOrderStatusSelector>
                     </td>
                   )}
-                  {allowColumns?.advanced && !isSelectedOrders && (
+                  {allowColumns?.advanced?.visable && !isSelectedOrders && (
                     <td className='logistic'>
                       <div className='info'>
                         <p className='bold'><Skeleton width={60} /></p>
@@ -441,7 +494,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-                  {allowColumns?.advanced && !isSelectedOrders && (
+                  {allowColumns?.advanced?.visable && !isSelectedOrders && (
                     <td className='attempts'>
                       <div className='info'>
                         <p className='bold'><Skeleton width={60} /></p>
@@ -449,7 +502,7 @@ export const OrdersTable = (props) => {
                       </div>
                     </td>
                   )}
-                  {allowColumns?.advanced && !isSelectedOrders && (
+                  {allowColumns?.advanced?.visable && !isSelectedOrders && (
                     <td className='priority'>
                       <div className='info'>
                         <p className='bold'><Skeleton width={60} /></p>
@@ -460,7 +513,7 @@ export const OrdersTable = (props) => {
                   {!isSelectedOrders && (
                     <td className='orderPrice'>
                       <div className='info'>
-                        {allowColumns?.total && (
+                        {allowColumns?.total?.visable && (
                           <p className='bold'><Skeleton width={60} /></p>
                         )}
                         <p>
@@ -481,7 +534,7 @@ export const OrdersTable = (props) => {
                 data-tour={i === 0 ? 'tour_start' : ''}
               >
                 <tr>
-                  {allowColumns?.slaBar && (
+                  {allowColumns?.slaBar?.visable && (
                     <td>
                       <Timestatus
                         timeState={getStatusClassName(getDelayMinutes(order))}
@@ -489,7 +542,7 @@ export const OrdersTable = (props) => {
                     </td>
                   )}
                   <td
-                    className={!(allowColumns?.orderNumber || allowColumns?.dateTime) ? 'small' : ''}
+                    className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'small' : ''}
                   >
                     <OrderNumberContainer>
                       {!isSelectedOrders && (
@@ -506,10 +559,10 @@ export const OrdersTable = (props) => {
                         </CheckBox>
                       )}
                       <div className='info'>
-                        {allowColumns?.orderNumber && (
+                        {allowColumns?.orderNumber?.visable && (
                           <p className='bold'>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</p>
                         )}
-                        {allowColumns?.dateTime && (
+                        {allowColumns?.dateTime?.visable && (
                           <p className='date'>
                             {parseDate(order?.delivery_datetime, { utc: false })}
                           </p>
@@ -517,131 +570,143 @@ export const OrdersTable = (props) => {
                       </div>
                     </OrderNumberContainer>
                   </td>
-                  {allowColumns?.status && !isSelectedOrders && (
-                    <td className='statusInfo'>
-                      <StatusInfo>
-                        <p className='bold'>{getOrderStatus(order.status)?.value}</p>
-                      </StatusInfo>
-                    </td>
-                  )}
-                  {allowColumns?.business && (
-                    <td className='businessInfo'>
-                      <BusinessInfo>
-                        <WrapperImage>
-                          <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
-                        </WrapperImage>
-                        <div className='info'>
-                          <p className='bold'>{order?.business?.name}</p>
-                          <p>{order?.business?.city?.name}</p>
-                        </div>
-                      </BusinessInfo>
-                    </td>
-                  )}
-                  {allowColumns?.customer && (
-                    <td className='customerInfo'>
-                      <CustomerInfo>
-                        <WrapperImage>
-                          {order?.customer?.photo ? (
-                            <img src={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
-                          ) : (
-                            <FaUserAlt />
-                          )}
-                          <OrdersCountWrapper isNew={order?.customer?.orders_count === 0}>
-                            {order?.customer?.orders_count || t('NEW', 'New')}
-                          </OrdersCountWrapper>
-                        </WrapperImage>
-                        <div className='info'>
-                          <p className='bold'>{order?.customer?.name}</p>
-                          <p>{order?.customer?.cellphone}</p>
-                        </div>
-                      </CustomerInfo>
-                    </td>
-                  )}
-                  {isSelectedOrders && (
-                    <td>
-                      <ChevronRight color='#B1BCCC' />
-                    </td>
-                  )}
-                  {allowColumns?.driver && !isSelectedOrders && (
-                    <td>
-                      {order?.delivery_type === 1 && (
-                        <CustomerInfo>
-                          <WrapperImage>
-                            {order?.driver?.photo ? (
-                              <img src={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
-                            ) : (
-                              <FaUserAlt />
+                  {Object.keys(allowColumns).filter(col => allowColumns[col]?.draggable && allowColumns[col]?.visable)
+                    .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
+                    .map((column, index) => {
+                      if (column === 'status' && !isSelectedOrders) {
+                        return (
+                          <td className='statusInfo' key={`statusInfo${i}-${index}`}>
+                            <StatusInfo>
+                              <p className='bold'>{getOrderStatus(order.status)?.value}</p>
+                            </StatusInfo>
+                          </td>
+                        )
+                      }
+                      if (column === 'business') {
+                        return (
+                          <td className='businessInfo' key={`businessInfo${i}-${index}`}>
+                            <BusinessInfo>
+                              <WrapperImage>
+                                <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
+                              </WrapperImage>
+                              <div className='info'>
+                                <p className='bold'>{order?.business?.name}</p>
+                                <p>{order?.business?.city?.name}</p>
+                              </div>
+                            </BusinessInfo>
+                          </td>
+                        )
+                      }
+                      if (column === 'customer') {
+                        return (
+                          <td className='customerInfo' key={`customerInfo${i}-${index}`}>
+                            <CustomerInfo>
+                              <WrapperImage>
+                                {order?.customer?.photo ? (
+                                  <img src={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
+                                ) : (
+                                  <FaUserAlt />
+                                )}
+                                <OrdersCountWrapper isNew={order?.customer?.orders_count === 0}>
+                                  {order?.customer?.orders_count || t('NEW', 'New')}
+                                </OrdersCountWrapper>
+                              </WrapperImage>
+                              <div className='info'>
+                                <p className='bold'>{order?.customer?.name}</p>
+                                <p>{order?.customer?.cellphone}</p>
+                              </div>
+                            </CustomerInfo>
+                          </td>
+                        )
+                      }
+                      if (column === 'driver' && !isSelectedOrders) {
+                        return (
+                          <td key={`driver${i}-${index}`}>
+                            {order?.delivery_type === 1 && (
+                              <CustomerInfo>
+                                <WrapperImage>
+                                  {order?.driver?.photo ? (
+                                    <img src={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
+                                  ) : (
+                                    <FaUserAlt />
+                                  )}
+                                </WrapperImage>
+                                <div className='info'>
+                                  {order?.driver ? (
+                                    <>
+                                      <p className='bold'>{order?.driver?.name}</p>
+                                      <p>{order?.driver?.cellphone}</p>
+                                    </>
+                                  ) : (
+                                    <p className='bold'>{t('NO_DRIVER', 'No Driver')}</p>
+                                  )}
+                                </div>
+                              </CustomerInfo>
                             )}
-                          </WrapperImage>
-                          <div className='info'>
-                            {order?.driver ? (
-                              <>
-                                <p className='bold'>{order?.driver?.name}</p>
-                                <p>{order?.driver?.cellphone}</p>
-                              </>
-                            ) : (
-                              <p className='bold'>{t('NO_DRIVER', 'No Driver')}</p>
-                            )}
-                          </div>
-                        </CustomerInfo>
-                      )}
-                    </td>
-                  )}
-                  {allowColumns?.advanced && !isSelectedOrders && (
-                    <td className='logistic'>
-                      <div className='info'>
-                        <p className='bold'>{t('LOGISTIC', 'Logistic')}</p>
-                        <p>
-                          {getLogisticTag(order?.logistic_status)}
-                          <LogisticStatusDot
-                            status={order?.logistic_status}
-                          />
-                        </p>
-                      </div>
-                    </td>
-                  )}
-                  {allowColumns?.advanced && !isSelectedOrders && (
-                    <td className='attempts'>
-                      <div className='info'>
-                        <p className='bold'>{t('ATTEMPTS', 'Attempts')}</p>
-                        <p>{order?.logistic_attemps}</p>
-                      </div>
-                    </td>
-                  )}
-                  {allowColumns?.advanced && !isSelectedOrders && (
-                    <td className='priority'>
-                      <div className='info'>
-                        <p className='bold'>{t('PRIORITY', 'Priority')}</p>
-                        <p>
-                          {getPriorityTag(order?.priority)}
-                          <PriorityDot priority={order?.priority} />
-                        </p>
-                      </div>
-                    </td>
-                  )}
-                  {(allowColumns?.timer && (groupStatus === 'pending' || groupStatus === 'inProgress')) && (
-                    <td className='timer'>
-                      <Timer>
-                        <p className='bold'>{t('TIMER', 'Timer')}</p>
-                        <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
-                      </Timer>
-                    </td>)}
-                  <td className='orderPrice'>
-                    <div className='info'>
-                      {allowColumns?.total && (
-                        <p className='bold'>{order?.summary?.total} {order?.currency}</p>
-                      )}
-                      {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
-                        <p>
-                          {
-                            order?.delivery_datetime_utc
-                              ? getTimeAgo(order?.delivery_datetime_utc)
-                              : getTimeAgo(order?.delivery_datetime, { utc: false })
-                          }
-                        </p>
-                      )}
-                    </div>
-                  </td>
+                          </td>
+                        )
+                      }
+                      if (column === 'advanced' && !isSelectedOrders) {
+                        return (
+                          <React.Fragment key={`advanced${i}-${index}`}>
+                            <td className='logistic'>
+                              <div className='info'>
+                                <p className='bold'>{t('LOGISTIC', 'Logistic')}</p>
+                                <p>
+                                  {getLogisticTag(order?.logistic_status)}
+                                  <LogisticStatusDot
+                                    status={order?.logistic_status}
+                                  />
+                                </p>
+                              </div>
+                            </td>
+                            <td className='attempts'>
+                              <div className='info'>
+                                <p className='bold'>{t('ATTEMPTS', 'Attempts')}</p>
+                                <p>{order?.logistic_attemps}</p>
+                              </div>
+                            </td>
+                            <td className='priority'>
+                              <div className='info'>
+                                <p className='bold'>{t('PRIORITY', 'Priority')}</p>
+                                <p>
+                                  {getPriorityTag(order?.priority)}
+                                  <PriorityDot priority={order?.priority} />
+                                </p>
+                              </div>
+                            </td>
+                          </React.Fragment>
+                        )
+                      }
+                      if (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress')) {
+                        return (
+                          <React.Fragment key={`timer${i}-${index}`}>
+                            <td className='timer'>
+                              <Timer>
+                                <p className='bold'>{t('TIMER', 'Timer')}</p>
+                                <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
+                              </Timer>
+                            </td>
+                            <td className='orderPrice'>
+                              <div className='info'>
+                                {allowColumns?.total?.visable && (
+                                  <p className='bold'>{order?.summary?.total} {order?.currency}</p>
+                                )}
+                                {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                                  <p>
+                                    {
+                                      order?.delivery_datetime_utc
+                                        ? getTimeAgo(order?.delivery_datetime_utc)
+                                        : getTimeAgo(order?.delivery_datetime, { utc: false })
+                                    }
+                                  </p>
+                                )}
+                              </div>
+                            </td>
+                          </React.Fragment>
+                        )
+                      }
+                    })}
                   <td />
                 </tr>
               </OrderTbody>
