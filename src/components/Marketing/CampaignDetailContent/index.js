@@ -17,7 +17,8 @@ import {
 const CampaignDetailContentUI = (props) => {
   const {
     handleChangeType,
-    contactState
+    contactState,
+    isAddMode
   } = props
 
   const [, t] = useLanguage()
@@ -48,9 +49,10 @@ const CampaignDetailContentUI = (props) => {
           defaultValue={contactState?.changes?.contact_type || ''}
           placeholder={t('SELECT_OPTION', 'Select an option')}
           onChange={(value) => handleChangeType('contact_type', value)}
-          isShowSearchBar
+          // isShowSearchBar
           searchBarIsCustomLayout
           searchBarIsNotLazyLoad
+          isDisabled={!isAddMode}
           searchValue={contactTypeSearchVal}
           handleChangeSearch={(val) => setContactTypeSearchVal(val)}
         />

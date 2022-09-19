@@ -68,7 +68,7 @@ export const ThemeOption = (props) => {
         )}
         <h5>{getTitle(name)}</h5>
       </OptionHeader>
-      {(optionObject?.value_type === 'integer' && !optionObject?.options) && (
+      {((optionObject?.value_type === 'integer' || optionObject?.value_type === 'string') && !optionObject?.options && !validHexColor(valueObject)) && (
         <Input
           defaultValue={valueObject}
           onChange={e => handleChangeValue(e.target.value)}
