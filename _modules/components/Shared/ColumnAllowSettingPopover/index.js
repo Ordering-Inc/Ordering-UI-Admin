@@ -136,11 +136,11 @@ var ColumnAllowSettingPopover = function ColumnAllowSettingPopover(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles2.AllowItem, {
       key: option.value,
-      isChecked: (_allowColumns$option$ = allowColumns[option.value]) === null || _allowColumns$option$ === void 0 ? void 0 : _allowColumns$option$.visable,
+      isChecked: allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$option$ = allowColumns[option.value]) === null || _allowColumns$option$ === void 0 ? void 0 : _allowColumns$option$.visable,
       onClick: function onClick() {
         return handleChangeAllowColumns(option.value);
       }
-    }, (_allowColumns$option$2 = allowColumns[option.value]) !== null && _allowColumns$option$2 !== void 0 && _allowColumns$option$2.visable ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, option.content));
+    }, allowColumns !== null && allowColumns !== void 0 && (_allowColumns$option$2 = allowColumns[option.value]) !== null && _allowColumns$option$2 !== void 0 && _allowColumns$option$2.visable ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, option.content));
   }))));
 };
 

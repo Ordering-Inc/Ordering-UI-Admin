@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var OrdersTable = function OrdersTable(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderList$orders3, _allowColumns$slaBar, _allowColumns$orderNu, _allowColumns$dateTim;
+  var _orderList$orders3, _allowColumns$slaBar, _allowColumns$orderNu, _allowColumns$dateTim;
 
   var isSelectedOrders = props.isSelectedOrders,
       orderList = props.orderList,
@@ -78,7 +78,10 @@ var OrdersTable = function OrdersTable(props) {
       handleOpenTour = props.handleOpenTour,
       setIsTourOpen = props.setIsTourOpen,
       slaSettingTime = props.slaSettingTime,
-      groupStatus = props.groupStatus;
+      groupStatus = props.groupStatus,
+      allowColumns = props.allowColumns,
+      setAllowColumns = props.setAllowColumns,
+      handleDrop = props.handleDrop;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -119,92 +122,6 @@ var OrdersTable = function OrdersTable(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configState = _useConfig2[0];
-
-  var _useState7 = (0, _react.useState)({
-    status: {
-      visable: true,
-      title: t('STATUS', 'Status'),
-      className: 'statusInfo',
-      draggable: true,
-      colSpan: 1,
-      order: 1
-    },
-    orderNumber: {
-      visable: true,
-      title: '',
-      className: '',
-      draggable: false,
-      colSpan: 1,
-      order: -1
-    },
-    dateTime: {
-      visable: true,
-      title: '',
-      className: '',
-      draggable: false,
-      colSpan: 1,
-      order: -1
-    },
-    business: {
-      visable: true,
-      title: t('BUSINESS', 'Business'),
-      className: 'businessInfo',
-      draggable: true,
-      colSpan: 1,
-      order: 2
-    },
-    customer: {
-      visable: true,
-      title: t('CUSTOMER', 'Customer'),
-      className: 'customerInfo',
-      draggable: true,
-      colSpan: 1,
-      order: 3
-    },
-    driver: {
-      visable: true,
-      title: t('DRIVER', 'Driver'),
-      className: 'driverInfo',
-      draggable: true,
-      colSpan: 1,
-      order: 4
-    },
-    advanced: {
-      visable: true,
-      title: t('ADVANCED_LOGISTICS', 'Advanced logistics'),
-      className: 'advanced',
-      draggable: true,
-      colSpan: 3,
-      order: 5
-    },
-    timer: {
-      visable: (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1',
-      title: t('SLA_TIMER', 'SLA’s timer'),
-      className: 'timer',
-      draggable: true,
-      colSpan: 2,
-      order: 6
-    },
-    slaBar: {
-      visable: (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1',
-      title: '',
-      className: '',
-      draggable: false,
-      colSpan: 1,
-      order: -1
-    },
-    total: {
-      visable: true,
-      title: '',
-      className: '',
-      draggable: false,
-      colSpan: 1,
-      order: -1
-    }
-  }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      allowColumns = _useState8[0],
-      setAllowColumns = _useState8[1];
 
   var optionsDefault = [{
     value: 'status',
@@ -266,10 +183,10 @@ var OrdersTable = function OrdersTable(props) {
   };
 
   var getStatusClassName = function getStatusClassName(minutes) {
-    var _configState$configs4, _configState$configs5;
+    var _configState$configs, _configState$configs$;
 
     if (isNaN(Number(minutes))) return 'in_time';
-    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.order_deadlines_delayed_time) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value;
+    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_delayed_time) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
     return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed';
   };
 
@@ -461,42 +378,6 @@ var OrdersTable = function OrdersTable(props) {
     setDragOverd(columnName);
   };
   /**
-   * Method to handle drag drop
-   */
-
-
-  var handleDrop = function handleDrop(event, columnName) {
-    var _allowColumns$transfe, _allowColumns$columnN2;
-
-    event.preventDefault();
-    var transferColumnName = event.dataTransfer.getData('transferColumnName');
-    if (columnName === transferColumnName) return;
-    var transferColumnOrder = (_allowColumns$transfe = allowColumns[transferColumnName]) === null || _allowColumns$transfe === void 0 ? void 0 : _allowColumns$transfe.order;
-    var currentColumnOrder = (_allowColumns$columnN2 = allowColumns[columnName]) === null || _allowColumns$columnN2 === void 0 ? void 0 : _allowColumns$columnN2.order;
-
-    var _ref = transferColumnOrder < currentColumnOrder ? [transferColumnOrder, currentColumnOrder] : [currentColumnOrder, transferColumnOrder],
-        _ref2 = _slicedToArray(_ref, 2),
-        lessOrder = _ref2[0],
-        greaterOrder = _ref2[1];
-
-    var _remainAllowColumns = {};
-    var shouldUpdateColumns = Object.keys(allowColumns).filter(function (col) {
-      var _allowColumns$col, _allowColumns$col2;
-
-      return col !== transferColumnName && ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.order) >= lessOrder && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) <= greaterOrder;
-    });
-    shouldUpdateColumns.forEach(function (col) {
-      var _allowColumns$col3;
-
-      _remainAllowColumns[col] = _objectSpread(_objectSpread({}, allowColumns[col]), {}, {
-        order: ((_allowColumns$col3 = allowColumns[col]) === null || _allowColumns$col3 === void 0 ? void 0 : _allowColumns$col3.order) + (transferColumnOrder < currentColumnOrder ? -1 : 1)
-      });
-    });
-    setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, transferColumnName, _objectSpread(_objectSpread({}, allowColumns[transferColumnName]), {}, {
-      order: currentColumnOrder
-    })), _remainAllowColumns));
-  };
-  /**
    * Method to handle drag end
    */
 
@@ -541,9 +422,9 @@ var OrdersTable = function OrdersTable(props) {
     };
   }, [isTourOpen, currentTourStep]);
   (0, _react.useEffect)(function () {
-    var _configState$configs6, _configState$configs7;
+    var _configState$configs2, _configState$configs3;
 
-    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs6 = configState.configs) === null || _configState$configs6 === void 0 ? void 0 : (_configState$configs7 = _configState$configs6.order_deadlines_enabled) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.value) === '1';
+    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
       timer: {
         visable: slaSettings,
@@ -578,14 +459,14 @@ var OrdersTable = function OrdersTable(props) {
       return handleSelecteAllOrder();
     },
     className: "orderCheckBox"
-  }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order')), Object.keys(allowColumns).filter(function (col) {
-    var _allowColumns$col4, _allowColumns$col5;
+  }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order')), allowColumns && Object.keys(allowColumns).filter(function (col) {
+    var _allowColumns$col, _allowColumns$col2;
 
-    return ((_allowColumns$col4 = allowColumns[col]) === null || _allowColumns$col4 === void 0 ? void 0 : _allowColumns$col4.draggable) && ((_allowColumns$col5 = allowColumns[col]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.visable);
+    return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.draggable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.visable);
   }).sort(function (col1, col2) {
-    var _allowColumns$col6, _allowColumns$col7;
+    var _allowColumns$col3, _allowColumns$col4;
 
-    return ((_allowColumns$col6 = allowColumns[col1]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.order) - ((_allowColumns$col7 = allowColumns[col2]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.order);
+    return ((_allowColumns$col3 = allowColumns[col1]) === null || _allowColumns$col3 === void 0 ? void 0 : _allowColumns$col3.order) - ((_allowColumns$col4 = allowColumns[col2]) === null || _allowColumns$col4 === void 0 ? void 0 : _allowColumns$col4.order);
   }).map(function (column, i) {
     var _allowColumns$column$, _allowColumns$column, _allowColumns$column2, _theme$images$icons, _allowColumns$column3;
 
@@ -618,7 +499,7 @@ var OrdersTable = function OrdersTable(props) {
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
     handleChangeAllowColumns: handleChangeAllowColumns
-  })))), orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  })))), orderList.loading && !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
     var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
@@ -763,13 +644,13 @@ var OrdersTable = function OrdersTable(props) {
     }, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     }))))), Object.keys(allowColumns).filter(function (col) {
-      var _allowColumns$col8, _allowColumns$col9;
+      var _allowColumns$col5, _allowColumns$col6;
 
-      return ((_allowColumns$col8 = allowColumns[col]) === null || _allowColumns$col8 === void 0 ? void 0 : _allowColumns$col8.draggable) && ((_allowColumns$col9 = allowColumns[col]) === null || _allowColumns$col9 === void 0 ? void 0 : _allowColumns$col9.visable);
+      return ((_allowColumns$col5 = allowColumns[col]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.draggable) && ((_allowColumns$col6 = allowColumns[col]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.visable);
     }).sort(function (col1, col2) {
-      var _allowColumns$col10, _allowColumns$col11;
+      var _allowColumns$col7, _allowColumns$col8;
 
-      return ((_allowColumns$col10 = allowColumns[col1]) === null || _allowColumns$col10 === void 0 ? void 0 : _allowColumns$col10.order) - ((_allowColumns$col11 = allowColumns[col2]) === null || _allowColumns$col11 === void 0 ? void 0 : _allowColumns$col11.order);
+      return ((_allowColumns$col7 = allowColumns[col1]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.order) - ((_allowColumns$col8 = allowColumns[col2]) === null || _allowColumns$col8 === void 0 ? void 0 : _allowColumns$col8.order);
     }).map(function (column, index) {
       if (column === 'status' && !isSelectedOrders) {
         var _getOrderStatus;

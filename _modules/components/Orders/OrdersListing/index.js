@@ -68,7 +68,10 @@ var OrdersListing = function OrdersListing(props) {
       currentTourStep = props.currentTourStep,
       isTourOpen = props.isTourOpen,
       setIsTourOpen = props.setIsTourOpen,
-      slaSettingTime = props.slaSettingTime;
+      slaSettingTime = props.slaSettingTime,
+      allowColumns = props.allowColumns,
+      setAllowColumns = props.setAllowColumns,
+      handleDrop = props.handleDrop;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -136,7 +139,10 @@ var OrdersListing = function OrdersListing(props) {
     handleOpenTour: handleOpenTour,
     setIsTourOpen: setIsTourOpen,
     slaSettingTime: slaSettingTime,
-    groupStatus: groupStatus
+    groupStatus: groupStatus,
+    allowColumns: allowColumns,
+    setAllowColumns: setAllowColumns,
+    handleDrop: handleDrop
   }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
     isMessagesView: isMessagesView,
     orderList: orderList,
