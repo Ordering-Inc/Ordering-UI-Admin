@@ -51,7 +51,10 @@ export const OrdersTable = (props) => {
     handleOpenTour,
     setIsTourOpen,
     slaSettingTime,
-    groupStatus
+    groupStatus,
+    allowColumns,
+    setAllowColumns,
+    handleDrop
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -67,18 +70,6 @@ export const OrdersTable = (props) => {
     getPageOrders(pageSize, expectedPage)
   }
   const [configState] = useConfig()
-  const [allowColumns, setAllowColumns] = useState({
-    status: { visable: true, title: t('STATUS', 'Status'), className: 'statusInfo', draggable: true, colSpan: 1, order: 1 },
-    orderNumber: { visable: true, title: '', className: '', draggable: false, colSpan: 1, order: -1 },
-    dateTime: { visable: true, title: '', className: '', draggable: false, colSpan: 1, order: -1 },
-    business: { visable: true, title: t('BUSINESS', 'Business'), className: 'businessInfo', draggable: true, colSpan: 1, order: 2 },
-    customer: { visable: true, title: t('CUSTOMER', 'Customer'), className: 'customerInfo', draggable: true, colSpan: 1, order: 3 },
-    driver: { visable: true, title: t('DRIVER', 'Driver'), className: 'driverInfo', draggable: true, colSpan: 1, order: 4 },
-    advanced: { visable: true, title: t('ADVANCED_LOGISTICS', 'Advanced logistics'), className: 'advanced', draggable: true, colSpan: 3, order: 5 },
-    timer: { visable: configState?.configs?.order_deadlines_enabled?.value === '1', title: t('SLA_TIMER', 'SLA’s timer'), className: 'timer', draggable: true, colSpan: 2, order: 6 },
-    slaBar: { visable: configState?.configs?.order_deadlines_enabled?.value === '1', title: '', className: '', draggable: false, colSpan: 1, order: -1 },
-    total: { visable: true, title: '', className: '', draggable: false, colSpan: 1, order: -1 }
-  })
 
   const optionsDefault = [
     {
@@ -275,32 +266,6 @@ export const OrdersTable = (props) => {
   }
 
   /**
-   * Method to handle drag drop
-   */
-  const handleDrop = (event, columnName) => {
-    event.preventDefault()
-    const transferColumnName = event.dataTransfer.getData('transferColumnName')
-    if (columnName === transferColumnName) return
-    const transferColumnOrder = allowColumns[transferColumnName]?.order
-    const currentColumnOrder = allowColumns[columnName]?.order
-
-    const [lessOrder, greaterOrder] = transferColumnOrder < currentColumnOrder ? [transferColumnOrder, currentColumnOrder] : [currentColumnOrder, transferColumnOrder]
-    const _remainAllowColumns = {}
-    const shouldUpdateColumns = Object.keys(allowColumns).filter(col => col !== transferColumnName && allowColumns[col]?.order >= lessOrder && allowColumns[col]?.order <= greaterOrder)
-    shouldUpdateColumns.forEach(col => {
-      _remainAllowColumns[col] = {
-        ...allowColumns[col],
-        order: allowColumns[col]?.order + ((transferColumnOrder < currentColumnOrder) ? -1 : 1)
-      }
-    })
-
-    setAllowColumns({
-      ...allowColumns,
-      [transferColumnName]: { ...allowColumns[transferColumnName], order: currentColumnOrder },
-      ..._remainAllowColumns
-    })
-  }
-  /**
    * Method to handle drag end
    */
   const handleDragEnd = () => {
@@ -376,7 +341,7 @@ export const OrdersTable = (props) => {
                   {t('ORDER', 'Order')}
                 </th>
 
-                {Object.keys(allowColumns).filter(col => allowColumns[col]?.draggable && allowColumns[col]?.visable)
+                {allowColumns && Object.keys(allowColumns).filter(col => allowColumns[col]?.draggable && allowColumns[col]?.visable)
                   .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
                   .map((column, i) => (column !== 'timer' || (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress'))) && (
                     <DragTh
@@ -407,7 +372,7 @@ export const OrdersTable = (props) => {
               </tr>
             </thead>
           )}
-          {orderList.loading ? (
+          {(orderList.loading && !allowColumns) ? (
             [...Array(10).keys()].map(i => (
               <OrderTbody key={i}>
                 <tr>
