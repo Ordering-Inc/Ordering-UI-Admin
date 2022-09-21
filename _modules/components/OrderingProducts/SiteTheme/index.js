@@ -204,9 +204,12 @@ var SiteThemeUI = function SiteThemeUI(props) {
     }), Object.keys(components[block]).filter(function (option) {
       return option !== 'components' && option !== 'value_type';
     }).map(function (option) {
+      var _themeValues$selected, _themeValues$selected2;
+
       var optionObject = components[block][option];
-      return /*#__PURE__*/_react.default.createElement(_ThemeOption.ThemeOption, {
-        key: option,
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: option
+      }, typeof ((_themeValues$selected = themeValues[selectedPage].components) === null || _themeValues$selected === void 0 ? void 0 : (_themeValues$selected2 = _themeValues$selected[block]) === null || _themeValues$selected2 === void 0 ? void 0 : _themeValues$selected2[option]) !== 'undefined' && /*#__PURE__*/_react.default.createElement(_ThemeOption.ThemeOption, {
         name: option,
         optionObject: optionObject,
         valueObject: themeValues[selectedPage].components[block][option],
@@ -214,16 +217,16 @@ var SiteThemeUI = function SiteThemeUI(props) {
         themeValues: themeValues,
         setThemeValues: setThemeValues,
         handleAddThemeGallery: handleAddThemeGallery
-      });
+      }));
     }), ((_components$block2 = components[block]) === null || _components$block2 === void 0 ? void 0 : _components$block2.components) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys((_components$block3 = components[block]) === null || _components$block3 === void 0 ? void 0 : _components$block3.components).map(function (component) {
-      var _components$block4, _themeValues$selected;
+      var _components$block4, _themeValues$selected3;
 
       var componentObject = (_components$block4 = components[block]) === null || _components$block4 === void 0 ? void 0 : _components$block4.components[component];
       return /*#__PURE__*/_react.default.createElement(_ThemeComponent.ThemeComponent, {
         key: component,
         name: component,
         componentObject: componentObject,
-        valueObject: (_themeValues$selected = themeValues[selectedPage].components[block]) === null || _themeValues$selected === void 0 ? void 0 : _themeValues$selected.components[component],
+        valueObject: (_themeValues$selected3 = themeValues[selectedPage].components[block]) === null || _themeValues$selected3 === void 0 ? void 0 : _themeValues$selected3.components[component],
         themeValues: themeValues,
         setThemeValues: setThemeValues,
         path: [selectedPage, 'components', block, 'components', component].join('.'),

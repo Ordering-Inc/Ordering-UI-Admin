@@ -46,7 +46,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SidebarMenu = function SidebarMenu(props) {
-  var _configs$dashboard_lo, _theme$images, _theme$images$logos, _sessionState$user, _sessionState$user4, _sessionState$user5, _sessionState$user7, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user12, _sessionState$user13, _sessionState$user14, _sessionState$user15, _sessionState$user16, _sessionState$user17, _sessionState$user18, _sessionState$user19, _sessionState$user20, _sessionState$user21, _sessionState$user22;
+  var _configs$dashboard_lo, _theme$images, _theme$images$logos, _sessionState$user, _sessionState$user4, _sessionState$user5, _sessionState$user7, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user12, _sessionState$user13, _sessionState$user14, _sessionState$user15, _sessionState$user16, _sessionState$user17, _sessionState$user18, _sessionState$user19, _sessionState$user20, _sessionState$user21, _sessionState$user22, _sessionState$user23, _sessionState$user24, _sessionState$user25, _sessionState$user26, _sessionState$user27, _sessionState$user28;
 
   var location = (0, _reactRouterDom.useLocation)();
   var theme = (0, _styledComponents.useTheme)();
@@ -240,6 +240,17 @@ var SidebarMenu = function SidebarMenu(props) {
     pageName: 'drivers_groups',
     url: '/delivery/drivers-groups'
   }];
+  var driverManagerSubMenus = [{
+    id: 1,
+    title: t('DRIVERS', 'Drivers'),
+    pageName: 'delivery_drivers',
+    url: '/delivery/drivers-list'
+  }, {
+    id: 2,
+    title: t('DRIVERS_GROUPS', 'Drivers groups'),
+    pageName: 'drivers_groups',
+    url: '/delivery/drivers-groups'
+  }];
   var marketingSubmenus = [{
     id: 1,
     title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
@@ -412,12 +423,12 @@ var SidebarMenu = function SidebarMenu(props) {
         return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === (item === null || item === void 0 ? void 0 : item.pageName);
       }) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
     }, item.title);
-  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user10 = sessionState.user) === null || _sessionState$user10 === void 0 ? void 0 : _sessionState$user10.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), ((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user10 = sessionState.user) === null || _sessionState$user10 === void 0 ? void 0 : _sessionState$user10.level) === 0 || (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) === 5) && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "7",
     active: location.pathname === '/delivery/drivers-list' || location.pathname === '/delivery/drivers-managers' || location.pathname === '/delivery/drivers-companies' || location.pathname === '/delivery/drivers-groups'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Truck, null), /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY', 'Delivery'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "7"
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, deliverySubmenus.map(function (item) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user12 = sessionState.user) === null || _sessionState$user12 === void 0 ? void 0 : _sessionState$user12.level) === 5 ? driverManagerSubMenus : deliverySubmenus).map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
       active: location.pathname.includes(item.pageName) || location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
@@ -427,7 +438,7 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user13 = sessionState.user) === null || _sessionState$user13 === void 0 ? void 0 : _sessionState$user13.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user14 = sessionState.user) === null || _sessionState$user14 === void 0 ? void 0 : _sessionState$user14.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, {
     disabledFeature: disabeldMenus.some(function (disabeldCategory) {
       return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'marketing';
     }),
@@ -449,7 +460,7 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user12 = sessionState.user) === null || _sessionState$user12 === void 0 ? void 0 : _sessionState$user12.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user15 = sessionState.user) === null || _sessionState$user15 === void 0 ? void 0 : _sessionState$user15.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user16 = sessionState.user) === null || _sessionState$user16 === void 0 ? void 0 : _sessionState$user16.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, {
     disabledFeature: disabeldMenus.some(function (disabeldCategory) {
       return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'loyalty';
     }),
@@ -471,7 +482,7 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user13 = sessionState.user) === null || _sessionState$user13 === void 0 ? void 0 : _sessionState$user13.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user17 = sessionState.user) === null || _sessionState$user17 === void 0 ? void 0 : _sessionState$user17.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user18 = sessionState.user) === null || _sessionState$user18 === void 0 ? void 0 : _sessionState$user18.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "10",
     active: location.pathname === '/cart-recovery/open-carts' || location.pathname === '/cart-recovery/recovery-actions'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("span", null, t('CART_RECOVERY', 'Cart recovery'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -488,7 +499,7 @@ var SidebarMenu = function SidebarMenu(props) {
     }, item.title);
   })))))), /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column mt-4"
-  }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user14 = sessionState.user) === null || _sessionState$user14 === void 0 ? void 0 : _sessionState$user14.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user19 = sessionState.user) === null || _sessionState$user19 === void 0 ? void 0 : _sessionState$user19.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
     active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation' || location.pathname === '/settings/pages' || location.pathname === '/settings/integrations' || location.pathname === '/settings/places' || location.pathname === '/settings/advanced' || location.pathname === '/settings/language'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -503,7 +514,7 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  }))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user15 = sessionState.user) === null || _sessionState$user15 === void 0 ? void 0 : _sessionState$user15.level) !== 5 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user20 = sessionState.user) === null || _sessionState$user20 === void 0 ? void 0 : _sessionState$user20.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user21 = sessionState.user) === null || _sessionState$user21 === void 0 ? void 0 : _sessionState$user21.level) !== 2 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: location.pathname === '/ordering-products' && 'primary',
     onClick: function onClick() {
@@ -511,7 +522,7 @@ var SidebarMenu = function SidebarMenu(props) {
         page: 'ordering_products'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.WindowDock, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERING_PRODUCTS', 'Ordering products'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user16 = sessionState.user) === null || _sessionState$user16 === void 0 ? void 0 : _sessionState$user16.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.WindowDock, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERING_PRODUCTS', 'Ordering products'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user22 = sessionState.user) === null || _sessionState$user22 === void 0 ? void 0 : _sessionState$user22.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: location.pathname === '/support' && 'primary',
     onClick: function onClick() {
@@ -519,13 +530,13 @@ var SidebarMenu = function SidebarMenu(props) {
         page: 'support'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null), /*#__PURE__*/_react.default.createElement("span", null, t('SUPPORT', 'Support'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user17 = sessionState.user) === null || _sessionState$user17 === void 0 ? void 0 : _sessionState$user17.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null), /*#__PURE__*/_react.default.createElement("span", null, t('SUPPORT', 'Support'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user23 = sessionState.user) === null || _sessionState$user23 === void 0 ? void 0 : _sessionState$user23.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: false,
     onClick: function onClick() {
       return handleGoToLink('https://apps.tryordering.com/store/marketplace');
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowUpRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETPLACE', 'Marketplace'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user18 = sessionState.user) === null || _sessionState$user18 === void 0 ? void 0 : _sessionState$user18.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowUpRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETPLACE', 'Marketplace'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user24 = sessionState.user) === null || _sessionState$user24 === void 0 ? void 0 : _sessionState$user24.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "11",
     active: location.pathname === '/downloads/free-products' || location.pathname === '/downloads/purchased-products'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CloudDownload, null), /*#__PURE__*/_react.default.createElement("span", null, t('DOWNLOADS', 'Downloads'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -551,12 +562,12 @@ var SidebarMenu = function SidebarMenu(props) {
       });
     },
     variant: location.pathname === '/profile' && 'primary'
-  }, sessionState !== null && sessionState !== void 0 && (_sessionState$user19 = sessionState.user) !== null && _sessionState$user19 !== void 0 && _sessionState$user19.photo ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
-    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user20 = sessionState.user) === null || _sessionState$user20 === void 0 ? void 0 : _sessionState$user20.photo,
+  }, sessionState !== null && sessionState !== void 0 && (_sessionState$user25 = sessionState.user) !== null && _sessionState$user25 !== void 0 && _sessionState$user25.photo ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
+    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user26 = sessionState.user) === null || _sessionState$user26 === void 0 ? void 0 : _sessionState$user26.photo,
     width: "30px",
     height: "30px",
     roundedCircle: true
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user21 = sessionState.user) === null || _sessionState$user21 === void 0 ? void 0 : _sessionState$user21.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user22 = sessionState.user) === null || _sessionState$user22 === void 0 ? void 0 : _sessionState$user22.lastname)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))))));
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user27 = sessionState.user) === null || _sessionState$user27 === void 0 ? void 0 : _sessionState$user27.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user28 = sessionState.user) === null || _sessionState$user28 === void 0 ? void 0 : _sessionState$user28.lastname)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))))));
 };
 
 exports.SidebarMenu = SidebarMenu;

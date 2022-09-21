@@ -85,8 +85,9 @@ var ThemeComponent = function ThemeComponent(props) {
     return option !== 'components' && option !== 'value_type';
   }).map(function (option) {
     var optionObject = componentObject[option];
-    return /*#__PURE__*/_react.default.createElement(_ThemeOption.ThemeOption, {
-      key: option,
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: option
+    }, typeof (valueObject === null || valueObject === void 0 ? void 0 : valueObject[option]) !== 'undefined' && /*#__PURE__*/_react.default.createElement(_ThemeOption.ThemeOption, {
       name: option,
       optionObject: optionObject,
       valueObject: valueObject[option],
@@ -94,13 +95,16 @@ var ThemeComponent = function ThemeComponent(props) {
       themeValues: themeValues,
       setThemeValues: setThemeValues,
       handleAddThemeGallery: handleAddThemeGallery
-    });
+    }));
   }), (componentObject === null || componentObject === void 0 ? void 0 : componentObject.components) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys(componentObject === null || componentObject === void 0 ? void 0 : componentObject.components).filter(function (subComponent) {
     return subComponent !== 'value_type';
   }).map(function (subComponent) {
+    var _valueObject$componen;
+
     var subComponentObject = componentObject === null || componentObject === void 0 ? void 0 : componentObject.components[subComponent];
-    return /*#__PURE__*/_react.default.createElement(ThemeComponent, {
-      key: subComponent,
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: subComponent
+    }, typeof (valueObject === null || valueObject === void 0 ? void 0 : (_valueObject$componen = valueObject.components) === null || _valueObject$componen === void 0 ? void 0 : _valueObject$componen[subComponent]) !== 'undefined' && /*#__PURE__*/_react.default.createElement(ThemeComponent, {
       name: subComponent,
       componentObject: subComponentObject,
       valueObject: valueObject === null || valueObject === void 0 ? void 0 : valueObject.components[subComponent],
@@ -108,7 +112,7 @@ var ThemeComponent = function ThemeComponent(props) {
       themeValues: themeValues,
       setThemeValues: setThemeValues,
       handleAddThemeGallery: handleAddThemeGallery
-    });
+    }));
   })));
 };
 
