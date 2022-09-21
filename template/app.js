@@ -232,7 +232,7 @@ export const App = () => {
                       <AdvancedReports />
                     </ProtectedRoute>
 
-                    <ProtectedRoute path='/delivery/drivers-list' allowedLevels={[0]}>
+                    <ProtectedRoute path='/delivery/drivers-list' allowedLevels={[0, 5]}>
                       <DeliveryDriversList />
                     </ProtectedRoute>
                     <ProtectedRoute path='/delivery/drivers-managers' allowedLevels={[0]}>
@@ -241,25 +241,25 @@ export const App = () => {
                     <ProtectedRoute path='/delivery/drivers-companies' allowedLevels={[0]}>
                       <DriversCompaniesList />
                     </ProtectedRoute>
-                    <ProtectedRoute path='/delivery/drivers-groups' allowedLevels={[0]}>
+                    <ProtectedRoute path='/delivery/drivers-groups' allowedLevels={[0, 5]}>
                       <DriversGroupsList />
                     </ProtectedRoute>
 
-                    <ProtectedRoute path='/marketing/promotions-enterprise' allowedLevels={[0, 2]}>
+                    <ProtectedRoute path='/marketing/promotions-enterprise' allowedLevels={[0]}>
                       <EnterprisePromotionList />
                     </ProtectedRoute>
-                    <ProtectedRoute path='/marketing/campaign' allowedLevels={[0, 2]}>
+                    <ProtectedRoute path='/marketing/campaign' allowedLevels={[0]}>
                       <CampaignListing />
                     </ProtectedRoute>
 
-                    <ProtectedRoute path='/loyalty/rewards-programs' allowedLevels={[0, 2]}>
+                    <ProtectedRoute path='/loyalty/rewards-programs' allowedLevels={[0]}>
                       <RewardsPrograms />
                     </ProtectedRoute>
 
-                    <ProtectedRoute path='/cart-recovery/open-carts' allowedLevels={[0, 2]}>
+                    <ProtectedRoute path='/cart-recovery/open-carts' allowedLevels={[0]}>
                       <OpenCarts />
                     </ProtectedRoute>
-                    <ProtectedRoute path='/cart-recovery/recovery-actions' allowedLevels={[0, 2]}>
+                    <ProtectedRoute path='/cart-recovery/recovery-actions' allowedLevels={[0]}>
                       <RecoveryActionListing />
                     </ProtectedRoute>
 
@@ -292,7 +292,7 @@ export const App = () => {
                     <ProtectedRoute path='/downloads/purchased-products' allowedLevels={[0]}>
                       <PurchasedProductsList />
                     </ProtectedRoute>
-                    <ProtectedRoute path='/ordering-products' allowedLevels={[0, 2]}>
+                    <ProtectedRoute path='/ordering-products' allowedLevels={[0]}>
                       <OrderingProducts />
                     </ProtectedRoute>
 
