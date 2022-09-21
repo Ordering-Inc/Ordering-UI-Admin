@@ -139,16 +139,19 @@ const SiteThemeUI = (props) => {
                           {Object.keys(components[block]).filter(option => option !== 'components' && option !== 'value_type').map(option => {
                             const optionObject = components[block][option]
                             return (
-                              <ThemeOption
-                                key={option}
-                                name={option}
-                                optionObject={optionObject}
-                                valueObject={themeValues[selectedPage].components[block][option]}
-                                path={[selectedPage, 'components', block, option].join('.')}
-                                themeValues={themeValues}
-                                setThemeValues={setThemeValues}
-                                handleAddThemeGallery={handleAddThemeGallery}
-                              />
+                              <React.Fragment key={option}>
+                                {typeof themeValues[selectedPage].components?.[block]?.[option] !== 'undefined' && (
+                                  <ThemeOption
+                                    name={option}
+                                    optionObject={optionObject}
+                                    valueObject={themeValues[selectedPage].components[block][option]}
+                                    path={[selectedPage, 'components', block, option].join('.')}
+                                    themeValues={themeValues}
+                                    setThemeValues={setThemeValues}
+                                    handleAddThemeGallery={handleAddThemeGallery}
+                                  />
+                                )}
+                              </React.Fragment>
                             )
                           })}
                           {components[block]?.components && (
