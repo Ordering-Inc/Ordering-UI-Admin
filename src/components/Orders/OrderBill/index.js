@@ -86,7 +86,7 @@ export const OrderBill = (props) => {
           <tr>
             <td>{t('SUBTOTAL', 'Subtotal')}</td>
             <td>
-              {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()))}
+              {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()), { currency: order?.currency })}
             </td>
           </tr>
           {(order?.summary?.discount > 0 ?? order?.discount > 0) && order?.offers?.length === 0 && (
@@ -99,7 +99,7 @@ export const OrderBill = (props) => {
               ) : (
                 <td>{t('DISCOUNT', 'Discount')}</td>
               )}
-              <td>- {parsePrice(order?.summary?.discount ?? order?.discount)}</td>
+              <td>- {parsePrice(order?.summary?.discount ?? order?.discount, { currency: order?.currency })}</td>
             </tr>
           )}
           {
@@ -112,7 +112,7 @@ export const OrderBill = (props) => {
                   )}
                 </td>
                 <td>
-                  - {parsePrice(offer?.summary?.discount)}
+                  - {parsePrice(offer?.summary?.discount, { currency: order?.currency })}
                 </td>
               </tr>
             ))
@@ -121,9 +121,9 @@ export const OrderBill = (props) => {
             <tr>
               <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
               {order?.tax_type === 1 ? (
-                <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0))}</td>
+                <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0), { currency: order?.currency })}</td>
               ) : (
-                <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0)}</td>
+                <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0, { currency: order?.currency })}</td>
               )}
             </tr>
           )}
@@ -134,7 +134,7 @@ export const OrderBill = (props) => {
                   {t('TAX', 'Tax')}
                   <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
                 </td>
-                <td>{parsePrice(order?.summary?.tax ?? 0)}</td>
+                <td>{parsePrice(order?.summary?.tax ?? 0, { currency: order?.currency })}</td>
               </tr>
             )
           }
@@ -145,7 +145,7 @@ export const OrderBill = (props) => {
                   {t('SERVICE_FEE', 'Service fee')}
                   <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
                 </td>
-                <td>{parsePrice(order?.summary?.service_fee ?? 0)}</td>
+                <td>{parsePrice(order?.summary?.service_fee ?? 0, { currency: order?.currency })}</td>
               </tr>
             )
           }
@@ -156,7 +156,7 @@ export const OrderBill = (props) => {
                   {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                 </td>
-                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
+                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0, { currency: order?.currency })}</td>
               </tr>
             ))
           }
@@ -167,7 +167,7 @@ export const OrderBill = (props) => {
                   {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
                 </td>
-                <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
+                <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0, { currency: order?.currency })}</td>
               </tr>
             ))
           }
@@ -181,7 +181,7 @@ export const OrderBill = (props) => {
                   )}
                 </td>
                 <td>
-                  - {parsePrice(offer?.summary?.discount)}
+                  - {parsePrice(offer?.summary?.discount, { currency: order?.currency })}
                 </td>
               </tr>
             ))
@@ -189,7 +189,7 @@ export const OrderBill = (props) => {
           {order?.summary?.delivery_price > 0 && (
             <tr>
               <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-              <td>{parsePrice(order?.summary?.delivery_price)}</td>
+              <td>{parsePrice(order?.summary?.delivery_price, { currency: order?.currency })}</td>
             </tr>
           )}
           {
@@ -202,7 +202,7 @@ export const OrderBill = (props) => {
                   )}
                 </td>
                 <td>
-                  - {parsePrice(offer?.summary?.discount)}
+                  - {parsePrice(offer?.summary?.discount, { currency: order?.currency })}
                 </td>
               </tr>
             ))
@@ -218,7 +218,7 @@ export const OrderBill = (props) => {
                     <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
                   )}
               </td>
-              <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip)}</td>
+              <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip, { currency: order?.currency })}</td>
             </tr>
           )}
         </tbody>
@@ -227,7 +227,7 @@ export const OrderBill = (props) => {
         <tbody>
           <tr>
             <td>{t('TOTAL', 'Total')}</td>
-            <td>{parsePrice(order?.summary?.total || order?.total, { currencyPosition: 'left' })}</td>
+            <td>{parsePrice(order?.summary?.total || order?.total, { currencyPosition: 'left', currency: order?.currency })}</td>
           </tr>
         </tbody>
       </table>
@@ -246,7 +246,7 @@ export const OrderBill = (props) => {
                     ? walletName[event?.wallet_event?.wallet?.type]?.name
                     : event?.paymethod?.name}
                 </td>
-                <td>-{parsePrice(event?.amount)}</td>
+                <td>-{parsePrice(event?.amount, { currency: order?.currency })}</td>
               </tr>
             ))}
           </tbody>

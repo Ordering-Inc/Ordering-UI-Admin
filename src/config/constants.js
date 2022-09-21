@@ -672,3 +672,550 @@ export const countryList = [
   { name: 'Zambia', code: 'ZM' },
   { name: 'Zimbabwe', code: 'ZW' }
 ]
+
+export const currencyList = [
+  {
+    text: 'USD',
+    value: 'USD'
+  },
+  {
+    text: 'AED',
+    value: 'AED'
+  },
+  {
+    text: 'AFN',
+    value: 'AFN'
+  },
+  {
+    text: 'ALL',
+    value: 'ALL'
+  },
+  {
+    text: 'AMD',
+    value: 'AMD'
+  },
+  {
+    text: 'ANG',
+    value: 'ANG'
+  },
+  {
+    text: 'AOA',
+    value: 'AOA'
+  },
+  {
+    text: 'ARS',
+    value: 'ARS'
+  },
+  {
+    text: 'AUD',
+    value: 'AUD'
+  },
+  {
+    text: 'AWG',
+    value: 'AWG'
+  },
+  {
+    text: 'AZN',
+    value: 'AZN'
+  },
+  {
+    text: 'BAM',
+    value: 'BAM'
+  },
+  {
+    text: 'BBD',
+    value: 'BBD'
+  },
+  {
+    text: 'BDT',
+    value: 'BDT'
+  },
+  {
+    text: 'BGN',
+    value: 'BGN'
+  },
+  {
+    text: 'BIF',
+    value: 'BIF'
+  },
+  {
+    text: 'BMD',
+    value: 'BMD'
+  },
+  {
+    text: 'BND',
+    value: 'BND'
+  },
+  {
+    text: 'BOB',
+    value: 'BOB'
+  },
+  {
+    text: 'BRL',
+    value: 'BRL'
+  },
+  {
+    text: 'BSD',
+    value: 'BSD'
+  },
+  {
+    text: 'BWP',
+    value: 'BWP'
+  },
+  {
+    text: 'BYN',
+    value: 'BYN'
+  },
+  {
+    text: 'BZD',
+    value: 'BZD'
+  },
+  {
+    text: 'CAD',
+    value: 'CAD'
+  },
+  {
+    text: 'CDF',
+    value: 'CDF'
+  },
+  {
+    text: 'CHF',
+    value: 'CHF'
+  },
+  {
+    text: 'CLP',
+    value: 'CLP'
+  },
+  {
+    text: 'CNY',
+    value: 'CNY'
+  },
+  {
+    text: 'COP',
+    value: 'COP'
+  },
+  {
+    text: 'CRC',
+    value: 'CRC'
+  },
+  {
+    text: 'CVE',
+    value: 'CVE'
+  },
+  {
+    text: 'CZK',
+    value: 'CZK'
+  },
+  {
+    text: 'DJF',
+    value: 'DJF'
+  },
+  {
+    text: 'DKK',
+    value: 'DKK'
+  },
+  {
+    text: 'DOP',
+    value: 'DOP'
+  },
+  {
+    text: 'DZD',
+    value: 'DZD'
+  },
+  {
+    text: 'EGP',
+    value: 'EGP'
+  },
+  {
+    text: 'ETB',
+    value: 'ETB'
+  },
+  {
+    text: 'EUR',
+    value: 'EUR'
+  },
+  {
+    text: 'FJD',
+    value: 'FJD'
+  },
+  {
+    text: 'FKP',
+    value: 'FKP'
+  },
+  {
+    text: 'GBP',
+    value: 'GBP'
+  },
+  {
+    text: 'GEL',
+    value: 'GEL'
+  },
+  {
+    text: 'GIP',
+    value: 'GIP'
+  },
+  {
+    text: 'GMD',
+    value: 'GMD'
+  },
+  {
+    text: 'GNF',
+    value: 'GNF'
+  },
+  {
+    text: 'GTQ',
+    value: 'GTQ'
+  },
+  {
+    text: 'GYD',
+    value: 'GYD'
+  },
+  {
+    text: 'HKD',
+    value: 'HKD'
+  },
+  {
+    text: 'HNL',
+    value: 'HNL'
+  },
+  {
+    text: 'HRK',
+    value: 'HRK'
+  },
+  {
+    text: 'HTG',
+    value: 'HTG'
+  },
+  {
+    text: 'HUF',
+    value: 'HUF'
+  },
+  {
+    text: 'IDR',
+    value: 'IDR'
+  },
+  {
+    text: 'ILS',
+    value: 'ILS'
+  },
+  {
+    text: 'INR',
+    value: 'INR'
+  },
+  {
+    text: 'ISK',
+    value: 'ISK'
+  },
+  {
+    text: 'JMD',
+    value: 'JMD'
+  },
+  {
+    text: 'JPY',
+    value: 'JPY'
+  },
+  {
+    text: 'KES',
+    value: 'KES'
+  },
+  {
+    text: 'KGS',
+    value: 'KGS'
+  },
+  {
+    text: 'KHR',
+    value: 'KHR'
+  },
+  {
+    text: 'KMF',
+    value: 'KMF'
+  },
+  {
+    text: 'KRW',
+    value: 'KRW'
+  },
+  {
+    text: 'KYD',
+    value: 'KYD'
+  },
+  {
+    text: 'KZT',
+    value: 'KZT'
+  },
+  {
+    text: 'LAK',
+    value: 'LAK'
+  },
+  {
+    text: 'LBP',
+    value: 'LBP'
+  },
+  {
+    text: 'LKR',
+    value: 'LKR'
+  },
+  {
+    text: 'LRD',
+    value: 'LRD'
+  },
+  {
+    text: 'LSL',
+    value: 'LSL'
+  },
+  {
+    text: 'MAD',
+    value: 'MAD'
+  },
+  {
+    text: 'MDL',
+    value: 'MDL'
+  },
+  {
+    text: 'MGA',
+    value: 'MGA'
+  },
+  {
+    text: 'MKD',
+    value: 'MKD'
+  },
+  {
+    text: 'MMK',
+    value: 'MMK'
+  },
+  {
+    text: 'MNT',
+    value: 'MNT'
+  },
+  {
+    text: 'MOP',
+    value: 'MOP'
+  },
+  {
+    text: 'MRO',
+    value: 'MRO'
+  },
+  {
+    text: 'MUR',
+    value: 'MUR'
+  },
+  {
+    text: 'MVR',
+    value: 'MVR'
+  },
+  {
+    text: 'MWK',
+    value: 'MWK'
+  },
+  {
+    text: 'MXN',
+    value: 'MXN'
+  },
+  {
+    text: 'MYR',
+    value: 'MYR'
+  },
+  {
+    text: 'MZN',
+    value: 'MZN'
+  },
+  {
+    text: 'NAD',
+    value: 'NAD'
+  },
+  {
+    text: 'NGN',
+    value: 'NGN'
+  },
+  {
+    text: 'NIO',
+    value: 'NIO'
+  },
+  {
+    text: 'NOK',
+    value: 'NOK'
+  },
+  {
+    text: 'NPR',
+    value: 'NPR'
+  },
+  {
+    text: 'NZD',
+    value: 'NZD'
+  },
+  {
+    text: 'PAB',
+    value: 'PAB'
+  },
+  {
+    text: 'PEN',
+    value: 'PEN'
+  },
+  {
+    text: 'PGK',
+    value: 'PGK'
+  },
+  {
+    text: 'PHP',
+    value: 'PHP'
+  },
+  {
+    text: 'PKR',
+    value: 'PKR'
+  },
+  {
+    text: 'PLN',
+    value: 'PLN'
+  },
+  {
+    text: 'PYG',
+    value: 'PYG'
+  },
+  {
+    text: 'QAR',
+    value: 'QAR'
+  },
+  {
+    text: 'RON',
+    value: 'RON'
+  },
+  {
+    text: 'RSD',
+    value: 'RSD'
+  },
+  {
+    text: 'RUB',
+    value: 'RUB'
+  },
+  {
+    text: 'RWF',
+    value: 'RWF'
+  },
+  {
+    text: 'SAR',
+    value: 'SAR'
+  },
+  {
+    text: 'SBD',
+    value: 'SBD'
+  },
+  {
+    text: 'SCR',
+    value: 'SCR'
+  },
+  {
+    text: 'SEK',
+    value: 'SEK'
+  },
+  {
+    text: 'SGD',
+    value: 'SGD'
+  },
+  {
+    text: 'SHP',
+    value: 'SHP'
+  },
+  {
+    text: 'SLL',
+    value: 'SLL'
+  },
+  {
+    text: 'SOS',
+    value: 'SOS'
+  },
+  {
+    text: 'SRD',
+    value: 'SRD'
+  },
+  {
+    text: 'STD',
+    value: 'STD'
+  },
+  {
+    text: 'SZL',
+    value: 'SZL'
+  },
+  {
+    text: 'THB',
+    value: 'THB'
+  },
+  {
+    text: 'TJS',
+    value: 'TJS'
+  },
+  {
+    text: 'TOP',
+    value: 'TOP'
+  },
+  {
+    text: 'TRY',
+    value: 'TRY'
+  },
+  {
+    text: 'TTD',
+    value: 'TTD'
+  },
+  {
+    text: 'TWD',
+    value: 'TWD'
+  },
+  {
+    text: 'TZS',
+    value: 'TZS'
+  },
+  {
+    text: 'UAH',
+    value: 'UAH'
+  },
+  {
+    text: 'UGX',
+    value: 'UGX'
+  },
+  {
+    text: 'UYU',
+    value: 'UYU'
+  },
+  {
+    text: 'UZS',
+    value: 'UZS'
+  },
+  {
+    text: 'VND',
+    value: 'VND'
+  },
+  {
+    text: 'VUV',
+    value: 'VUV'
+  },
+  {
+    text: 'WST',
+    value: 'WST'
+  },
+  {
+    text: 'XAF',
+    value: 'XAF'
+  },
+  {
+    text: 'XCD',
+    value: 'XCD'
+  },
+  {
+    text: 'XOF',
+    value: 'XOF'
+  },
+  {
+    text: 'XPF',
+    value: 'XPF'
+  },
+  {
+    text: 'YER',
+    value: 'YER'
+  },
+  {
+    text: 'ZAR',
+    value: 'ZAR'
+  },
+  {
+    text: 'ZMW',
+    value: 'ZMW'
+  }
+]
