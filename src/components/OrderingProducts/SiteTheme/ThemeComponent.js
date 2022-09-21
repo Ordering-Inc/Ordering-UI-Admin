@@ -62,16 +62,19 @@ export const ThemeComponent = (props) => {
       {Object.keys(componentObject).filter(option => option !== 'components' && option !== 'value_type').map(option => {
         const optionObject = componentObject[option]
         return (
-          <ThemeOption
-            key={option}
-            name={option}
-            optionObject={optionObject}
-            valueObject={valueObject[option]}
-            path={path + '.' + option}
-            themeValues={themeValues}
-            setThemeValues={setThemeValues}
-            handleAddThemeGallery={handleAddThemeGallery}
-          />
+          <React.Fragment key={option}>
+            {typeof valueObject?.[option] !== 'undefined' && (
+              <ThemeOption
+                name={option}
+                optionObject={optionObject}
+                valueObject={valueObject[option]}
+                path={path + '.' + option}
+                themeValues={themeValues}
+                setThemeValues={setThemeValues}
+                handleAddThemeGallery={handleAddThemeGallery}
+              />
+            )}
+          </React.Fragment>
         )
       })}
       {componentObject?.components && (
@@ -79,16 +82,19 @@ export const ThemeComponent = (props) => {
           {Object.keys(componentObject?.components).filter(subComponent => subComponent !== 'value_type').map(subComponent => {
             const subComponentObject = componentObject?.components[subComponent]
             return (
-              <ThemeComponent
-                key={subComponent}
-                name={subComponent}
-                componentObject={subComponentObject}
-                valueObject={valueObject?.components[subComponent]}
-                path={path + '.components.' + subComponent}
-                themeValues={themeValues}
-                setThemeValues={setThemeValues}
-                handleAddThemeGallery={handleAddThemeGallery}
-              />
+              <React.Fragment key={subComponent}>
+                {typeof valueObject?.components?.[subComponent] !== 'undefined' && (
+                  <ThemeComponent
+                    name={subComponent}
+                    componentObject={subComponentObject}
+                    valueObject={valueObject?.components[subComponent]}
+                    path={path + '.components.' + subComponent}
+                    themeValues={themeValues}
+                    setThemeValues={setThemeValues}
+                    handleAddThemeGallery={handleAddThemeGallery}
+                  />
+                )}
+              </React.Fragment>
             )
           })}
         </>
