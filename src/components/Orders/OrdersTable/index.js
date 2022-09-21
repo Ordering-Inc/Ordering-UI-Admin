@@ -58,7 +58,7 @@ export const OrdersTable = (props) => {
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parseDate, optimizeImage, getTimeAgo }] = useUtils()
+  const [{ parseDate, optimizeImage, getTimeAgo, parsePrice }] = useUtils()
   const [isAllChecked, setIsAllChecked] = useState(false)
   const [, setCurrentTime] = useState()
   const [dragOverd, setDragOverd] = useState('')
@@ -655,7 +655,7 @@ export const OrdersTable = (props) => {
                             <td className='orderPrice'>
                               <div className='info'>
                                 {allowColumns?.total?.visable && (
-                                  <p className='bold'>{order?.summary?.total} {order?.currency}</p>
+                                  <p className='bold'>{parsePrice(order?.summary?.total, { currency: order?.currency })}</p>
                                 )}
                                 {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
                                   <p>
