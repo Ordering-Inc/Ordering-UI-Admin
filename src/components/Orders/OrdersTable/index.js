@@ -296,15 +296,6 @@ export const OrdersTable = (props) => {
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
 
-  useEffect(() => {
-    const slaSettings = configState?.configs?.order_deadlines_enabled?.value === '1'
-    setAllowColumns({
-      ...allowColumns,
-      timer: { visable: slaSettings, title: t('SLA_TIMER', 'SLA’s timer'), className: 'timer', draggable: true, colSpan: 2, order: 6 },
-      slaBar: { visable: slaSettings, title: '', className: '', draggable: false, colSpan: 1, order: -1 }
-    })
-  }, [configState.loading])
-
   return (
     <>
       <OrdersContainer
@@ -319,60 +310,71 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
-                {allowColumns?.slaBar?.visable && (
-                  <th>
-                    <Timestatus />
-                  </th>
-                )}
-                <th
-                  className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
-                >
-                  <CheckBox
-                    isChecked={!orderList.loading && isAllChecked}
-                    onClick={() => handleSelecteAllOrder()}
-                    className='orderCheckBox'
-                  >
-                    {(!orderList.loading && isAllChecked) ? (
-                      <RiCheckboxFill />
-                    ) : (
-                      <RiCheckboxBlankLine />
-                    )}
-                  </CheckBox>
-                  {t('ORDER', 'Order')}
-                </th>
-
-                {allowColumns && Object.keys(allowColumns).filter(col => allowColumns[col]?.draggable && allowColumns[col]?.visable)
+                {allowColumns && Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)
                   .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
-                  .map((column, i) => (column !== 'timer' || (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress'))) && (
-                    <DragTh
-                      key={`dragTh-${i}`}
-                      onDragOver={e => handleDragOver?.(e, column)}
-                      onDrop={e => handleDrop(e, column)}
-                      onDragEnd={e => handleDragEnd(e)}
-                      colSpan={allowColumns[column]?.colSpan ?? 1}
-                      className={allowColumns[column]?.className}
-                      selectedDragOver={column === dragOverd}
-                    >
-                      <div draggable onDragStart={e => handleDragStart?.(e, column)}>
-                        <img
-                          src={theme.images.icons?.sixDots}
-                          alt='six dots'
-                        />
-                        <span>{allowColumns[column]?.title}</span>
-                      </div>
-                    </DragTh>
-                  ))}
-                <th className='orderPrice'>
-                  <ColumnAllowSettingPopover
-                    allowColumns={allowColumns}
-                    optionsDefault={optionsDefault}
-                    handleChangeAllowColumns={handleChangeAllowColumns}
-                  />
-                </th>
+                  .map((column, i) => {
+                    if (column === 'slaBar') {
+                      return (
+                        <th key={`noDragTh-${i}`}>
+                          <Timestatus />
+                        </th>
+                      )
+                    }
+                    if (column === 'orderNumber') {
+                      return (
+                        <th
+                          className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
+                          key={`noDragTh-${i}`}
+                        >
+                          <CheckBox
+                            isChecked={!orderList.loading && isAllChecked}
+                            onClick={() => handleSelecteAllOrder()}
+                            className='orderCheckBox'
+                          >
+                            {(!orderList.loading && isAllChecked) ? (
+                              <RiCheckboxFill />
+                            ) : (
+                              <RiCheckboxBlankLine />
+                            )}
+                          </CheckBox>
+                          {t('ORDER', 'Order')}
+                        </th>
+                      )
+                    }
+                    if (column === 'total') {
+                      return (
+                        <th className='orderPrice' key={`noDragTh-${i}`}>
+                          <ColumnAllowSettingPopover
+                            allowColumns={allowColumns}
+                            optionsDefault={optionsDefault}
+                            handleChangeAllowColumns={handleChangeAllowColumns}
+                          />
+                        </th>
+                      )
+                    }
+                    return (column !== 'timer' || (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress'))) && (
+                      <DragTh
+                        key={`dragTh-${i}`}
+                        onDragOver={e => handleDragOver?.(e, column)}
+                        onDrop={e => handleDrop(e, column)}
+                        onDragEnd={e => handleDragEnd(e)}
+                        colSpan={allowColumns[column]?.colSpan ?? 1}
+                        className={allowColumns[column]?.className}
+                        selectedDragOver={column === dragOverd}
+                      >
+                        <div draggable onDragStart={e => handleDragStart?.(e, column)}>
+                          <img
+                            src={theme.images.icons?.sixDots}
+                            alt='six dots'
+                          />
+                          <span>{allowColumns[column]?.title}</span>
+                        </div>
+                      </DragTh>)
+                  })}
               </tr>
             </thead>
           )}
-          {(orderList.loading && !allowColumns) ? (
+          {(orderList.loading || !allowColumns) ? (
             [...Array(10).keys()].map(i => (
               <OrderTbody key={i}>
                 <tr>
@@ -499,45 +501,52 @@ export const OrdersTable = (props) => {
                 data-tour={i === 0 ? 'tour_start' : ''}
               >
                 <tr>
-                  {allowColumns?.slaBar?.visable && (
-                    <td>
-                      <Timestatus
-                        timeState={getStatusClassName(getDelayMinutes(order))}
-                      />
-                    </td>
-                  )}
-                  <td
-                    className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'small' : ''}
-                  >
-                    <OrderNumberContainer>
-                      {!isSelectedOrders && (
-                        <CheckBox
-                          isChecked={selectedOrderIds.includes(order?.id)}
-                          onClick={() => handleSelectedOrderIds(order.id)}
-                          className='orderCheckBox'
-                        >
-                          {selectedOrderIds.includes(order?.id) ? (
-                            <RiCheckboxFill />
-                          ) : (
-                            <RiCheckboxBlankLine />
-                          )}
-                        </CheckBox>
-                      )}
-                      <div className='info'>
-                        {allowColumns?.orderNumber?.visable && (
-                          <p className='bold'>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</p>
-                        )}
-                        {allowColumns?.dateTime?.visable && (
-                          <p className='date'>
-                            {parseDate(order?.delivery_datetime, { utc: false })}
-                          </p>
-                        )}
-                      </div>
-                    </OrderNumberContainer>
-                  </td>
-                  {Object.keys(allowColumns).filter(col => allowColumns[col]?.draggable && allowColumns[col]?.visable)
+                  {Object.keys(allowColumns).filter(col => allowColumns[col]?.visable)
                     .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
                     .map((column, index) => {
+                      if (column === 'slaBar') {
+                        return (
+                          <td key={`slaBar${i}-${index}`}>
+                            <Timestatus
+                              timeState={getStatusClassName(getDelayMinutes(order))}
+                            />
+                          </td>
+                        )
+                      }
+                      if (column === 'orderNumber') {
+                        return (
+                          <td
+                            className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'small' : ''}
+                            key={`orderNumber${i}-${index}`}
+                          >
+                            <OrderNumberContainer>
+                              {!isSelectedOrders && (
+                                <CheckBox
+                                  isChecked={selectedOrderIds.includes(order?.id)}
+                                  onClick={() => handleSelectedOrderIds(order.id)}
+                                  className='orderCheckBox'
+                                >
+                                  {selectedOrderIds.includes(order?.id) ? (
+                                    <RiCheckboxFill />
+                                  ) : (
+                                    <RiCheckboxBlankLine />
+                                  )}
+                                </CheckBox>
+                              )}
+                              <div className='info'>
+                                {allowColumns?.orderNumber?.visable && (
+                                  <p className='bold'>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</p>
+                                )}
+                                {allowColumns?.dateTime?.visable && (
+                                  <p className='date'>
+                                    {parseDate(order?.delivery_datetime, { utc: false })}
+                                  </p>
+                                )}
+                              </div>
+                            </OrderNumberContainer>
+                          </td>
+                        )
+                      }
                       if (column === 'status' && !isSelectedOrders) {
                         return (
                           <td className='statusInfo' key={`statusInfo${i}-${index}`}>
@@ -645,34 +654,35 @@ export const OrdersTable = (props) => {
                       }
                       if (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress')) {
                         return (
-                          <React.Fragment key={`timer${i}-${index}`}>
-                            <td className='timer'>
-                              <Timer>
-                                <p className='bold'>{t('TIMER', 'Timer')}</p>
-                                <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
-                              </Timer>
-                            </td>
-                            <td className='orderPrice'>
-                              <div className='info'>
-                                {allowColumns?.total?.visable && (
-                                  <p className='bold'>{parsePrice(order?.summary?.total, { currency: order?.currency })}</p>
-                                )}
-                                {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
-                                  <p>
-                                    {
-                                      order?.delivery_datetime_utc
-                                        ? getTimeAgo(order?.delivery_datetime_utc)
-                                        : getTimeAgo(order?.delivery_datetime, { utc: false })
-                                    }
-                                  </p>
-                                )}
-                              </div>
-                            </td>
-                          </React.Fragment>
+                          <td className='timer' key={`timer${i}-${index}`}>
+                            <Timer>
+                              <p className='bold'>{t('TIMER', 'Timer')}</p>
+                              <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
+                            </Timer>
+                          </td>
+                        )
+                      }
+                      if (column === 'total') {
+                        return (
+                          <td className='orderPrice' key={`total${i}-${index}`}>
+                            <div className='info'>
+                              {allowColumns?.total?.visable && (
+                                <p className='bold'>{parsePrice(order?.summary?.total, { currency: order?.currency })}</p>
+                              )}
+                              {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
+                                <p>
+                                  {
+                                    order?.delivery_datetime_utc
+                                      ? getTimeAgo(order?.delivery_datetime_utc)
+                                      : getTimeAgo(order?.delivery_datetime, { utc: false })
+                                  }
+                                </p>
+                              )}
+                            </div>
+                          </td>
                         )
                       }
                     })}
-                  <td />
                 </tr>
               </OrderTbody>
             ))
