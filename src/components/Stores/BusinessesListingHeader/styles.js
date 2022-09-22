@@ -94,10 +94,12 @@ export const ActionsWrapper = styled.div`
       width: 90px;
       > svg {
         display: none;
+        @media (min-width: 768px) {
+          display: inline;
+        }
       }
       @media (min-width: 768px) {
         width: unset;
-        display: inline;
       }
     }
   }
