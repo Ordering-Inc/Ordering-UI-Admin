@@ -65,6 +65,12 @@ export const ReviewsListing = (props) => {
           >
             {t('CUSTOMERS', 'Customers')}
           </Tab>
+          <Tab
+            active={showOption === 'professionals'}
+            onClick={() => setShowOption('professionals')}
+          >
+            {t('PROFESSIONALS', 'Professionals')}
+          </Tab>
         </Tabs>
         {showOption === 'business' && (
           <BusinessReviewList parentSearchValue={searchValue} />
@@ -78,6 +84,12 @@ export const ReviewsListing = (props) => {
         {showOption === 'customers' && (
           <UsersReviewList
             defaultUserTypesSelected={[3]}
+            parentSearchValue={searchValue}
+          />
+        )}
+        {showOption === 'professionals' && (
+          <UsersReviewList
+            defaultUserTypesSelected={[8]}
             parentSearchValue={searchValue}
           />
         )}
