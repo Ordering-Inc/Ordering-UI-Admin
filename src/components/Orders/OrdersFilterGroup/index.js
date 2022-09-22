@@ -10,6 +10,7 @@ import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
 import { PaymethodTypeSelector } from '../PaymethodTypeSelector'
 import { CountryFilter } from '../CountryFilter'
 import { Button, Input } from '../../../styles'
+import { CurrencyFilter } from '../CurrencyFilter'
 
 import {
   FilterGroupListContainer,
@@ -41,7 +42,8 @@ const OrdersFilterGroupUI = (props) => {
     handleResetFilterValues,
     handleChangeFilterValues,
     handleChangeOrderId,
-    handleChangeCountryCode
+    handleChangeCountryCode,
+    handleChangeCurrency
   } = props
 
   const [, t] = useLanguage()
@@ -129,6 +131,10 @@ const OrdersFilterGroupUI = (props) => {
           <CountryFilter
             filterValues={filterValues}
             handleChangeCountryCode={handleChangeCountryCode}
+          />
+          <CurrencyFilter
+            filterValues={filterValues}
+            handleChangeCurrency={handleChangeCurrency}
           />
         </WrapperRow>
         <ButtonGroup>

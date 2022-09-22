@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LogoutButton } from '../LogoutButton'
 import {
@@ -48,6 +48,7 @@ export const SidebarMenu = (props) => {
   const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
+  const [disabeldMenus, setDisabeldMenus] = useState([])
 
   const ordersSubMenus = [
     {
@@ -69,6 +70,11 @@ export const SidebarMenu = (props) => {
       id: 4,
       title: t('APPOINTMENTS', 'Appointments'),
       pageName: 'appointments'
+    },
+    {
+      id: 5,
+      title: t('GIFT_CARD_MANAGER', 'Gift card manager'),
+      pageName: 'giftCards'
     }
   ]
 
@@ -251,6 +257,21 @@ export const SidebarMenu = (props) => {
     }
   ]
 
+  const driverManagerSubMenus = [
+    {
+      id: 1,
+      title: t('DRIVERS', 'Drivers'),
+      pageName: 'delivery_drivers',
+      url: '/delivery/drivers-list'
+    },
+    {
+      id: 2,
+      title: t('DRIVERS_GROUPS', 'Drivers groups'),
+      pageName: 'drivers_groups',
+      url: '/delivery/drivers-groups'
+    }
+  ]
+
   const marketingSubmenus = [
     {
       id: 1,
@@ -298,6 +319,17 @@ export const SidebarMenu = (props) => {
     }
   }, [windowSize.width])
 
+  useEffect(() => {
+    if (configs && Object.keys(configs).length > 0) {
+      const featureList = [
+        { configKeyName: 'loyalty_levels_points', menuName: 'loyalty' },
+        { configKeyName: 'advanced_reports', menuName: 'reports' },
+        { configKeyName: 'Marketing_dashboard', menuName: 'marketing' }
+      ]
+      const disabledFeatureList = featureList.filter(feature => !Object.keys(configs).includes(feature?.configKeyName))
+      setDisabeldMenus(disabledFeatureList)
+    }
+  }, [configs])
   return (
     <>
       <SidebarContainer
@@ -472,7 +504,9 @@ export const SidebarMenu = (props) => {
                               <SubMenu
                                 key={item.id}
                                 active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                                onClick={() => handleGoToPage({ page: item.pageName })}
+                                onClick={() => !(disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === item?.pageName)) && handleGoToPage({ page: item.pageName })}
+                                disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === item?.pageName)}
+                                title={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === item?.pageName) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
                               >
                                 {item.title}
                               </SubMenu>
@@ -483,7 +517,7 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   )}
 
-                  {sessionState?.user?.level === 0 && (
+                  {(sessionState?.user?.level === 0 || sessionState?.user?.level === 5) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='7'
@@ -499,7 +533,7 @@ export const SidebarMenu = (props) => {
                       </ContextAwareToggle>
                       <Accordion.Collapse eventKey='7'>
                         <MenuContent>
-                          {deliverySubmenus.map(item => (
+                          {(sessionState?.user?.level === 5 ? driverManagerSubMenus : deliverySubmenus).map(item => (
                             <SubMenu
                               key={item.id}
                               active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
@@ -513,8 +547,11 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   )}
 
-                  {sessionState?.user?.level !== 5 && (
-                    <MenuContainer>
+                  {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 2 && (
+                    <MenuContainer
+                      disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'marketing')}
+                      title={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'marketing') ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+                    >
                       <ContextAwareToggle
                         eventKey='8'
                         active={
@@ -541,8 +578,11 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   )}
 
-                  {sessionState?.user?.level !== 5 && (
-                    <MenuContainer>
+                  {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 2 && (
+                    <MenuContainer
+                      disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'loyalty')}
+                      title={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'loyalty') ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+                    >
                       <ContextAwareToggle
                         eventKey='9'
                         active={
@@ -570,7 +610,7 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   )}
 
-                  {sessionState?.user?.level !== 5 && (
+                  {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 2 && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='10'
@@ -637,7 +677,7 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   </Accordion>
                 )}
-                {sessionState?.user?.level !== 5 && (
+                {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 2 && (
                   <Button
                     className='d-flex align-items-center'
                     variant={location.pathname === '/ordering-products' && 'primary'}

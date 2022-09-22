@@ -34,7 +34,8 @@ export const ProductItemAccordion = (props) => {
     getProductMax,
     offsetDisabled,
     onDeleteProduct,
-    onEditProduct
+    onEditProduct,
+    currency
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -151,7 +152,7 @@ export const ProductItemAccordion = (props) => {
             <h3>{product.name}</h3>
             {windowSize.width <= 410 && (
               <span>
-                <p>{parsePrice(getProductPrice(product), { currencyPosition: 'left' })}</p>
+                <p>{parsePrice(getProductPrice(product), { currencyPosition: 'left', ...(currency && { currency }) })}</p>
                 {isCartProduct && (
                   <div>
                     {onEditProduct && (
@@ -175,7 +176,7 @@ export const ProductItemAccordion = (props) => {
           <ProductPriceSection>
             <ProductPrice>
               <span>
-                {parsePrice(getProductPrice(product), { currencyPosition: 'left' })}
+                {parsePrice(getProductPrice(product), { currencyPosition: 'left', ...(currency && { currency }) })}
               </span>
               {(productInfo().ingredients?.length > 0 || productInfo().options?.length > 0 || product.comment) && (
                 <p>

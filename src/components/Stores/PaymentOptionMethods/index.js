@@ -37,7 +37,8 @@ export const PaymentOptionMethods = (props) => {
     businessPaymethod,
     handleDeletePaymethod,
     id,
-    title
+    title,
+    isDisabledPaymentsAdvanced
   } = props
 
   const theme = useTheme()
@@ -147,14 +148,18 @@ export const PaymentOptionMethods = (props) => {
           {sitesState?.sites?.length > 0 && (
             <Tab
               active={paymentTabs === 1}
-              onClick={() => setPaymentTabs(1)}
+              onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(1)}
+              disabledFeature={isDisabledPaymentsAdvanced}
+              title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
             >
               {t('CHANNELS', 'Channels')}
             </Tab>
           )}
           <Tab
             active={paymentTabs === 2}
-            onClick={() => setPaymentTabs(2)}
+            onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(2)}
+            disabledFeature={isDisabledPaymentsAdvanced}
+            title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
           >
             {t('ORDER_TYPE', 'Order type')}
           </Tab>
