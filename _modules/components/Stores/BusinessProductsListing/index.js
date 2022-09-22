@@ -104,7 +104,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       taxes = props.taxes,
       setTaxes = props.setTaxes,
       fees = props.fees,
-      setFees = props.setFees;
+      setFees = props.setFees,
+      getBusiness = props.getBusiness;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -143,19 +144,24 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       selectedBusiness = _useState10[0],
       setSelectedBusiness = _useState10[1];
 
+  var _useState11 = (0, _react.useState)(10),
+      _useState12 = _slicedToArray(_useState11, 2),
+      productsPerPage = _useState12[0],
+      setProductsPerPage = _useState12[1];
+
   var categoryListRef = (0, _react.useRef)();
 
-  var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      batchImageFormOpen = _useState12[0],
-      setBatchImageFormOpen = _useState12[1];
-
-  var _useState13 = (0, _react.useState)(null),
+  var _useState13 = (0, _react.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      openSidebar = _useState14[0],
-      setOpenSidebar = _useState14[1];
+      batchImageFormOpen = _useState14[0],
+      setBatchImageFormOpen = _useState14[1];
 
-  var _useState15 = (0, _react.useState)({
+  var _useState15 = (0, _react.useState)(null),
+      _useState16 = _slicedToArray(_useState15, 2),
+      openSidebar = _useState16[0],
+      setOpenSidebar = _useState16[1];
+
+  var _useState17 = (0, _react.useState)({
     id: true,
     name: true,
     description: true,
@@ -164,9 +170,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     inventoried: true,
     quantity: true
   }),
-      _useState16 = _slicedToArray(_useState15, 2),
-      allowSpreadColumns = _useState16[0],
-      setAllowSpreadColumns = _useState16[1];
+      _useState18 = _slicedToArray(_useState17, 2),
+      allowSpreadColumns = _useState18[0],
+      setAllowSpreadColumns = _useState18[1];
 
   var spreadColumnOptions = [{
     value: 'cost_price',
@@ -288,7 +294,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("div", null, !selectedBusiness && businessState.loading ? /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("div", null, !selectedBusiness && !businessState.business ? /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 30
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessSelector, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessNameWrapper, {
@@ -306,7 +312,21 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClick: function onClick() {
       return setOpenSidebar('business_details');
     }
-  }, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", null, categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name))))), slug && /*#__PURE__*/_react.default.createElement(_styles2.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_ImportersButton.ImportersButton, null), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", null, categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name))))), slug && /*#__PURE__*/_react.default.createElement(_styles2.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "lightPrimary",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return getBusiness();
+    },
+    className: businessState.loading ? 'loading' : ''
+  }, t('REFRESH', 'Refresh'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRepeat, {
+    size: 16,
+    style: {
+      marginLeft: 5
+    }
+  })), /*#__PURE__*/_react.default.createElement(_ImportersButton.ImportersButton, {
+    customClass: "importerGroup"
+  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
@@ -324,7 +344,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     lazyLoad: true,
     search: searchValue,
     onSearch: handleChangeSearch,
-    placeholder: t('SEARCH', 'Search')
+    placeholder: t('SEARCH', 'Search'),
+    customClass: "searchBar"
   }))), slug && /*#__PURE__*/_react.default.createElement(_styles2.CategoryProductsContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CategoryListContainer, {
     ref: categoryListRef
   }, /*#__PURE__*/_react.default.createElement(_BusinessProductsCategories.BusinessProductsCategories, _extends({}, props, {
@@ -382,7 +403,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     handleOpenProductDetails: handleOpenProductDetails,
     handleParentProductAdd: handleProductAdd,
     isParentProductAdd: openSidebar === 'add_product',
-    allowSpreadColumns: allowSpreadColumns
+    allowSpreadColumns: allowSpreadColumns,
+    productsPerPage: productsPerPage,
+    setProductsPerPage: setProductsPerPage
   }))))), openSidebar === 'category_details' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     open: openSidebar === 'category_details',
     onClose: handleCloseEdit
@@ -430,10 +453,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
 };
 
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState17 = (0, _react.useState)(false),
-      _useState18 = _slicedToArray(_useState17, 2),
-      isInitialRender = _useState18[0],
-      setIsInitialRender = _useState18[1];
+  var _useState19 = (0, _react.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      isInitialRender = _useState20[0],
+      setIsInitialRender = _useState20[1];
 
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,

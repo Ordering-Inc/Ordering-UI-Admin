@@ -191,30 +191,29 @@ var LoginFormUI = function LoginFormUI(props) {
   };
 
   (0, _react.useEffect)(function () {
-    var _configs$security_rec2, _configs$security_rec3, _configs$security_rec4, _configs$security_rec6;
+    var _configs$security_rec2;
 
-    if (configs && Object.keys(configs).length > 0 && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_type) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value) === 'v3' && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec3 = configs.security_recaptcha_score_v3) === null || _configs$security_rec3 === void 0 ? void 0 : _configs$security_rec3.value) > 0 && configs !== null && configs !== void 0 && (_configs$security_rec4 = configs.security_recaptcha_site_key_v3) !== null && _configs$security_rec4 !== void 0 && _configs$security_rec4.value) {
-      var _configs$security_rec5;
+    if (configs && Object.keys(configs).length > 0 && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_auth) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value) === '1') {
+      var _configs$security_rec3, _configs$security_rec4, _configs$security_rec5, _configs$security_rec7;
 
-      setRecaptchaVersion({
-        version: 'v3',
-        siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec5 = configs.security_recaptcha_site_key_v3) === null || _configs$security_rec5 === void 0 ? void 0 : _configs$security_rec5.value
-      });
-      return;
-    }
+      if ((configs === null || configs === void 0 ? void 0 : (_configs$security_rec3 = configs.security_recaptcha_type) === null || _configs$security_rec3 === void 0 ? void 0 : _configs$security_rec3.value) === 'v3' && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec4 = configs.security_recaptcha_score_v3) === null || _configs$security_rec4 === void 0 ? void 0 : _configs$security_rec4.value) > 0 && configs !== null && configs !== void 0 && (_configs$security_rec5 = configs.security_recaptcha_site_key_v3) !== null && _configs$security_rec5 !== void 0 && _configs$security_rec5.value) {
+        var _configs$security_rec6;
 
-    if (configs && Object.keys(configs).length > 0 && configs !== null && configs !== void 0 && (_configs$security_rec6 = configs.security_recaptcha_site_key) !== null && _configs$security_rec6 !== void 0 && _configs$security_rec6.value) {
-      var _configs$security_rec7;
+        setRecaptchaVersion({
+          version: 'v3',
+          siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec6 = configs.security_recaptcha_site_key_v3) === null || _configs$security_rec6 === void 0 ? void 0 : _configs$security_rec6.value
+        });
+        return;
+      }
 
-      setRecaptchaVersion({
-        version: 'v2',
-        siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec7 = configs.security_recaptcha_site_key) === null || _configs$security_rec7 === void 0 ? void 0 : _configs$security_rec7.value
-      });
-      return;
-    }
+      if (configs !== null && configs !== void 0 && (_configs$security_rec7 = configs.security_recaptcha_site_key) !== null && _configs$security_rec7 !== void 0 && _configs$security_rec7.value) {
+        var _configs$security_rec8;
 
-    if (configs && Object.keys(configs).length > 0) {
-      throw new Error('ReCaptcha component: the config doesn\'t have recaptcha site key');
+        setRecaptchaVersion({
+          version: 'v2',
+          siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec8 = configs.security_recaptcha_site_key) === null || _configs$security_rec8 === void 0 ? void 0 : _configs$security_rec8.value
+        });
+      }
     }
   }, [configs]);
   (0, _react.useEffect)(function () {

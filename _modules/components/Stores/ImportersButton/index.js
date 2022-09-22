@@ -71,6 +71,7 @@ var ImportersButton = function ImportersButton(props) {
   }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CsvImportButtonWrapper, {
     disabledFeature: disabledImporter,
+    className: (props === null || props === void 0 ? void 0 : props.customClass) || '',
     title: disabledImporter ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
   }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",

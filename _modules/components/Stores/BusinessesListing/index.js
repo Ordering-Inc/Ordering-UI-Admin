@@ -80,6 +80,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
       handleSucessRemoveBusiness = props.handleSucessRemoveBusiness,
       handleSucessAddBusiness = props.handleSucessAddBusiness,
       handleSucessUpdateBusiness = props.handleSucessUpdateBusiness,
+      loadBusinesses = props.loadBusinesses,
       onSearch = props.onSearch,
       onBusinessRedirect = props.onBusinessRedirect,
       getPageBusinesses = props.getPageBusinesses;
@@ -255,7 +256,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onSearch: onSearch,
     handleOpenAddBusiness: handleOpenAddBusiness,
     handleStartTutorial: handleStartTutorial,
-    handleOpenSync: handleOpenSync
+    handleOpenSync: handleOpenSync,
+    handleRefreshBusinesses: loadBusinesses,
+    loading: businessList.loading
   }), /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleChangeBusinessActiveState: handleChangeBusinessActiveState

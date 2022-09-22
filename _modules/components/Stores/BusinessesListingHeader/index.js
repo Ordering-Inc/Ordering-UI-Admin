@@ -42,7 +42,9 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
       onSearch = props.onSearch,
       handleOpenAddBusiness = props.handleOpenAddBusiness,
       handleStartTutorial = props.handleStartTutorial,
-      handleOpenSync = props.handleOpenSync;
+      handleOpenSync = props.handleOpenSync,
+      handleRefreshBusinesses = props.handleRefreshBusinesses,
+      loading = props.loading;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -67,7 +69,21 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     onClick: function onClick() {
       return handleStartTutorial();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_ImportersButton.ImportersButton, null), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "lightPrimary",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return handleRefreshBusinesses();
+    },
+    className: loading ? 'loading' : ''
+  }, t('REFRESH', 'Refresh'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRepeat, {
+    size: 16,
+    style: {
+      marginLeft: 5
+    }
+  })), /*#__PURE__*/_react.default.createElement(_ImportersButton.ImportersButton, {
+    customClass: "importerGroup"
+  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick() {
@@ -84,7 +100,8 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     lazyLoad: true,
     onSearch: onSearch,
     search: searchValue,
-    placeholder: t('SEARCH', 'Search')
+    placeholder: t('SEARCH', 'Search'),
+    customClass: "searchBar"
   })));
 };
 
