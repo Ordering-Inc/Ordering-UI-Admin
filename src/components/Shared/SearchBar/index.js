@@ -8,7 +8,8 @@ export const SearchBar = (props) => {
     search,
     placeholder,
     isCustomLayout,
-    lazyLoad
+    lazyLoad,
+    customClass
   } = props
   let timeout = null
   let previousSearch
@@ -45,7 +46,7 @@ export const SearchBar = (props) => {
   }, [search])
 
   return (
-    <SearchContainer isCustomLayout={isCustomLayout}>
+    <SearchContainer isCustomLayout={isCustomLayout} className={customClass || ''}>
       <IosSearch />
       <input type='text' ref={el} name='search' placeholder={placeholder} autoComplete='off' />
     </SearchContainer>
