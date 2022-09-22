@@ -10,7 +10,7 @@ import {
 import { BusinessProductsCategoyDetails } from '../BusinessProductsCategoyDetails'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import BsTable from '@meronex/icons/bs/BsTable'
-import { List as MenuIcon, ChevronRight } from 'react-bootstrap-icons'
+import { List as MenuIcon, ChevronRight, ArrowRepeat } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Button, IconButton } from '../../../styles'
 import { Modal, SearchBar, SideBar, ColumnAllowSettingPopover } from '../../Shared'
@@ -65,7 +65,8 @@ const BusinessProductsListingUI = (props) => {
     taxes,
     setTaxes,
     fees,
-    setFees
+    setFees,
+    getBusiness
   } = props
 
   const [, t] = useLanguage()
@@ -76,6 +77,7 @@ const BusinessProductsListingUI = (props) => {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [showSelectHeader, setShowSelectHeader] = useState(false)
   const [selectedBusiness, setSelectedBusiness] = useState(null)
+  const [productsPerPage, setProductsPerPage] = useState(10)
   const categoryListRef = useRef()
   const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
   const [openSidebar, setOpenSidebar] = useState(null)
@@ -212,7 +214,7 @@ const BusinessProductsListingUI = (props) => {
               </IconButton>
             )}
             <div>
-              {!selectedBusiness && businessState.loading ? (
+              {!selectedBusiness && !businessState.business ? (
                 <h1><Skeleton width={200} height={30} /></h1>
               ) : (
                 <>
@@ -246,7 +248,16 @@ const BusinessProductsListingUI = (props) => {
           </HeaderTitleContainer>
           {slug && (
             <ActionsGroup>
-              <ImportersButton />
+              <Button
+                color='lightPrimary'
+                borderRadius='8px'
+                onClick={() => getBusiness()}
+                className={businessState.loading ? 'loading' : ''}
+              >
+                {t('REFRESH', 'Refresh')}
+                <ArrowRepeat size={16} style={{ marginLeft: 5 }} />
+              </Button>
+              <ImportersButton customClass='importerGroup' />
               <Button
                 borderRadius='8px'
                 color='lightPrimary'
@@ -268,6 +279,7 @@ const BusinessProductsListingUI = (props) => {
                 search={searchValue}
                 onSearch={handleChangeSearch}
                 placeholder={t('SEARCH', 'Search')}
+                customClass='searchBar'
               />
             </ActionsGroup>
           )}
@@ -361,6 +373,8 @@ const BusinessProductsListingUI = (props) => {
                 handleParentProductAdd={handleProductAdd}
                 isParentProductAdd={openSidebar === 'add_product'}
                 allowSpreadColumns={allowSpreadColumns}
+                productsPerPage={productsPerPage}
+                setProductsPerPage={setProductsPerPage}
               />
             </ProductListContainer>
           </CategoryProductsContent>
