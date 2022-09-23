@@ -75,10 +75,6 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
@@ -87,30 +83,24 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
       isMenuOpen = _useState2[0],
       setIsMenuOpen = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)('basic'),
       _useState4 = _slicedToArray(_useState3, 2),
-      isDisabledShareWith = _useState4[0],
-      setIsDisabledShareWith = _useState4[1]; // false means enabled
+      selectedMenuOption = _useState4[0],
+      setSelectedMenuOption = _useState4[1];
 
-
-  var _useState5 = (0, _react.useState)('basic'),
-      _useState6 = _slicedToArray(_useState5, 2),
-      selectedMenuOption = _useState6[0],
-      setSelectedMenuOption = _useState6[1];
-
-  var _useState7 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: null,
     handleOnAccept: null
   }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      confirm = _useState8[0],
-      setConfirm = _useState8[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      confirm = _useState6[0],
+      setConfirm = _useState6[1];
 
-  var _useState9 = (0, _react.useState)(false),
-      _useState10 = _slicedToArray(_useState9, 2),
-      isCustomFieldsOpen = _useState10[0],
-      setIsCustomFieldsOpen = _useState10[1];
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isCustomFieldsOpen = _useState8[0],
+      setIsCustomFieldsOpen = _useState8[1];
 
   var actionSidebar = function actionSidebar(value) {
     if (!value) {
@@ -152,12 +142,6 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
       setSelectedMenuOption('basic');
     }
   }, [menu]);
-  (0, _react.useEffect)(function () {
-    if (configs && Object.keys(configs).length > 0) {
-      var disabledFeature = !Object.keys(configs).includes('shared_menus');
-      setIsDisabledShareWith(disabledFeature);
-    }
-  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "menu_options"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
@@ -194,10 +178,8 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
   }, t('CHANNELS', 'Channels')), Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedMenuOption === 'share_with',
     onClick: function onClick() {
-      return !isDisabledShareWith && setSelectedMenuOption('share_with');
-    },
-    disabledFeature: isDisabledShareWith,
-    title: isDisabledShareWith ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
+      return setSelectedMenuOption('share_with');
+    }
   }, t('SHARE_WITH', 'Share with'))))), !isSelectedSharedMenus || Object.keys(menu).length === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessMenuBasicOptions.BusinessMenuBasicOptions, props), selectedMenuOption === 'channels' && /*#__PURE__*/_react.default.createElement(_BusinessMenuChannels.BusinessMenuChannels, props), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
     menu: menu,
     business: business,

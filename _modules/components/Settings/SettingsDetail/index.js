@@ -31,6 +31,8 @@ var _NotificationSetting = require("../NotificationSetting");
 
 var _SettingsList = require("../SettingsList");
 
+var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -81,6 +83,19 @@ var SettingsDetail = function SettingsDetail(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       extraSubCatOpen = _useState6[0],
       setExtraSubCatOpen = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isDisabledFeature = _useState8[0],
+      setIsDisabledFeature = _useState8[1];
+
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
 
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
@@ -170,6 +185,27 @@ var SettingsDetail = function SettingsDetail(props) {
       return document.removeEventListener('keydown', onCloseSidebar);
     };
   }, [open]);
+  (0, _react.useEffect)(function () {
+    if (configs && Object.keys(configs).length > 0 && user && category) {
+      var featureList = {
+        wallet: 'cash_wallet'
+      };
+
+      if (Object.keys(featureList).every(function (feature) {
+        return feature !== (category === null || category === void 0 ? void 0 : category.key);
+      })) {
+        setIsDisabledFeature(false);
+        return;
+      }
+
+      if (!Object.keys(configs).includes(featureList[category === null || category === void 0 ? void 0 : category.key]) && (user === null || user === void 0 ? void 0 : user.level) === 0) {
+        setIsDisabledFeature(true);
+        return;
+      }
+
+      setIsDisabledFeature(false);
+    }
+  }, [configs, category]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "catDescription"
   }, /*#__PURE__*/_react.default.createElement(_styles2.DescriptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.DescriptionHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderIcons, null, (category === null || category === void 0 ? void 0 : category.support_url) && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
@@ -206,9 +242,10 @@ var SettingsDetail = function SettingsDetail(props) {
     type: "video/webm"
   }))), /*#__PURE__*/_react.default.createElement(_styles2.AllSetting, {
     onClick: function onClick() {
-      return handleExtraOpen(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'All settings')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), extraInfoOpen && category.support_url && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.CategoryExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+      return !isDisabledFeature && handleExtraOpen(false);
+    },
+    isDisabledFeature: isDisabledFeature
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'All settings')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null)))), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), extraInfoOpen && category.support_url && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.CategoryExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return setExtraInfoOpen(false);

@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var DisabledFeatureAlertContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: fixed;\n  min-width: 325px;\n  padding: 7px;\n  z-index: 1000;\n  top: 50px;\n  left: ", ";\n  border: 1px solid ", ";\n  border-radius: 5px;\n  background-color: ", ";\n  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;\n"])), function (props) {
+var DisabledFeatureAlertContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: fixed;\n  min-width: 300px;\n  padding: 7px;\n  z-index: 1000;\n  top: 50px;\n  left: ", ";\n  border: 1px solid ", ";\n  border-radius: 5px;\n  background-color: ", ";\n  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;\n"])), function (props) {
   return props !== null && props !== void 0 && props.containerWidth ? "calc(50vw - ".concat((props === null || props === void 0 ? void 0 : props.containerWidth) / 2, "px)") : '50vw';
 }, function (props) {
   return props.theme.colors.primary;

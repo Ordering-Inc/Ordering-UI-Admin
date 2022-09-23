@@ -39,15 +39,6 @@ var DisabledFeatureAlert = function DisabledFeatureAlert(props) {
       t = _useLanguage2[1];
 
   var theme = (0, _styledComponents.useTheme)();
-
-  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
-
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
   var containerRef = (0, _react.useRef)(null);
 
   var _useState = (0, _react.useState)(true),
@@ -55,31 +46,10 @@ var DisabledFeatureAlert = function DisabledFeatureAlert(props) {
       containerWidth = _useState2[0],
       setContainerWidth = _useState2[1];
 
-  var featureList = ['cash_wallet', 'loyalty_levels_points', 'massive_importer', 'advanced_reports', 'advanced_logistics', 'shared_menus', 'payments_advanced', 'Marketing_dashboard'];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      showed = _useState4[0],
-      setShowed = _useState4[1];
-
   (0, _react.useLayoutEffect)(function () {
     containerRef.current && setContainerWidth(containerRef.current.offsetWidth);
   }, []);
-  (0, _react.useEffect)(function () {
-    if (configs && Object.keys(configs).length > 0 && user) {
-      var detectedDisabledFeature = featureList.every(function (feature) {
-        return Object.keys(configs).includes(feature);
-      });
-
-      var _showed = !detectedDisabledFeature && (user === null || user === void 0 ? void 0 : user.level) === 0;
-
-      setShowed(_showed);
-      return;
-    }
-
-    setShowed(false);
-  }, [configs]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showed && /*#__PURE__*/_react.default.createElement(_styles.DisabledFeatureAlertContainer, {
+  return /*#__PURE__*/_react.default.createElement(_styles.DisabledFeatureAlertContainer, {
     ref: containerRef,
     containerWidth: containerWidth
   }, /*#__PURE__*/_react.default.createElement(_styles.Wrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, {
@@ -87,15 +57,7 @@ var DisabledFeatureAlert = function DisabledFeatureAlert(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.CommentContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Comment, null, t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function')), /*#__PURE__*/_react.default.createElement(_styles.MoreInfo, {
     href: "https://www.ordering.co/ordering-sales",
     target: "_blank"
-  }, t('GET_FEATURE', 'Get this feature'))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XCircle, {
-    onClick: function onClick() {
-      return setShowed(false);
-    },
-    style: {
-      cursor: 'pointer'
-    },
-    color: theme.colors.primary
-  }))));
+  }, t('GET_FEATURE', 'Get this feature')))));
 };
 
 exports.DisabledFeatureAlert = DisabledFeatureAlert;

@@ -58,7 +58,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _driversGroupState$dr3, _driversGroupState$dr4, _driversGroupState$dr5;
+  var _configState$configs, _configState$configs$, _driversGroupState$dr3, _driversGroupState$dr4, _driversGroupState$dr5;
 
   var driversGroupState = props.driversGroupState,
       actionState = props.actionState,
@@ -77,7 +77,6 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       configState = _useConfig2[0];
 
   var autoAssignType = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.autoassign_type) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
-  var advancedLogistics = !!(configState !== null && configState !== void 0 && (_configState$configs2 = configState.configs) !== null && _configState$configs2 !== void 0 && _configState$configs2.advanced_logistics);
 
   var _useState = (0, _react.useState)('general'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -118,7 +117,7 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     }, {
       key: 'businesses',
       value: t('BUSINESSES', 'Businesses')
-    }] : useAdvanced && autoAssignType !== 'basic' && advancedLogistics ? [{
+    }] : useAdvanced && autoAssignType !== 'basic' ? [{
       key: 'general',
       value: t('GENERAL', 'General')
     }, {
