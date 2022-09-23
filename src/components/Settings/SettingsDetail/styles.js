@@ -141,13 +141,20 @@ export const AllSetting = styled.div`
   user-select: none;
   cursor: pointer;
   margin-top: 36px;
+  ${({ isDisabledFeature }) => css`
+    cursor: ${props => isDisabledFeature ? 'not-allowed' : 'pointer'};
+  `}
   span {
     font-weight: 600;
     font-size: 14px;
-    color: #03459E;
+    ${({ isDisabledFeature }) => css`
+      color: ${props => isDisabledFeature ? props.theme.colors?.disabled : '#03459E'};
+    `}
   }
   svg {
-    color: #03459E;
+    ${({ isDisabledFeature }) => css`
+      color: ${props => isDisabledFeature ? props.theme.colors?.disabled : '#03459E'};
+    `}
   }
 `
 

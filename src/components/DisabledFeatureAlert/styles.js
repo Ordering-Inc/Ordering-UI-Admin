@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const DisabledFeatureAlertContainer = styled.div`
   position: fixed;
-  min-width: 325px;
+  min-width: 300px;
   padding: 7px;
   z-index: 1000;
   top: 50px;
