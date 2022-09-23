@@ -48,7 +48,6 @@ export const SidebarMenu = (props) => {
   const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
-  const [disabeldMenus, setDisabeldMenus] = useState([])
 
   const ordersSubMenus = [
     {
@@ -319,17 +318,6 @@ export const SidebarMenu = (props) => {
     }
   }, [windowSize.width])
 
-  useEffect(() => {
-    if (configs && Object.keys(configs).length > 0) {
-      const featureList = [
-        { configKeyName: 'loyalty_levels_points', menuName: 'loyalty' },
-        { configKeyName: 'advanced_reports', menuName: 'reports' },
-        { configKeyName: 'Marketing_dashboard', menuName: 'marketing' }
-      ]
-      const disabledFeatureList = featureList.filter(feature => !Object.keys(configs).includes(feature?.configKeyName))
-      setDisabeldMenus(disabledFeatureList)
-    }
-  }, [configs])
   return (
     <>
       <SidebarContainer
@@ -504,9 +492,7 @@ export const SidebarMenu = (props) => {
                               <SubMenu
                                 key={item.id}
                                 active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                                onClick={() => !(disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === item?.pageName)) && handleGoToPage({ page: item.pageName })}
-                                disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === item?.pageName)}
-                                title={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === item?.pageName) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+                                onClick={() => handleGoToPage({ page: item.pageName })}
                               >
                                 {item.title}
                               </SubMenu>
@@ -548,10 +534,7 @@ export const SidebarMenu = (props) => {
                   )}
 
                   {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 2 && (
-                    <MenuContainer
-                      disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'marketing')}
-                      title={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'marketing') ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
-                    >
+                    <MenuContainer>
                       <ContextAwareToggle
                         eventKey='8'
                         active={
@@ -579,10 +562,7 @@ export const SidebarMenu = (props) => {
                   )}
 
                   {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 2 && (
-                    <MenuContainer
-                      disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'loyalty')}
-                      title={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'loyalty') ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
-                    >
+                    <MenuContainer>
                       <ContextAwareToggle
                         eventKey='9'
                         active={

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
   useLanguage,
-  useConfig,
   BusinessMenuOptions as BusinessMenuOptionsController
 } from 'ordering-components-admin'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
@@ -41,10 +40,8 @@ const BusinessMenuOptionsUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDisabledShareWith, setIsDisabledShareWith] = useState(false) // false means enabled
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isCustomFieldsOpen, setIsCustomFieldsOpen] = useState(false)
@@ -91,12 +88,6 @@ const BusinessMenuOptionsUI = (props) => {
     }
   }, [menu])
 
-  useEffect(() => {
-    if (configs && Object.keys(configs).length > 0) {
-      const disabledFeature = !Object.keys(configs).includes('shared_menus')
-      setIsDisabledShareWith(disabledFeature)
-    }
-  }, [configs])
   return (
     <>
       <Container id='menu_options'>
@@ -155,9 +146,7 @@ const BusinessMenuOptionsUI = (props) => {
                 {Object.keys(menu).length > 0 && (
                   <Tab
                     active={selectedMenuOption === 'share_with'}
-                    onClick={() => !isDisabledShareWith && setSelectedMenuOption('share_with')}
-                    disabledFeature={isDisabledShareWith}
-                    title={isDisabledShareWith ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+                    onClick={() => setSelectedMenuOption('share_with')}
                   >
                     {t('SHARE_WITH', 'Share with')}
                   </Tab>
