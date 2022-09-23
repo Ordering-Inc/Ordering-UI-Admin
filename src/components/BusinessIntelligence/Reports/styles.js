@@ -40,4 +40,15 @@ export const HeaderTitleContainer = styled.div`
 
 export const ReportsList = styled.div`
   margin-top: 10px;
+  ${({ isDisabledFeature }) => isDisabledFeature && css`
+    > div {
+      > div {
+        cursor: not-allowed;
+        background-color: ${props => props.theme.colors.disabled};
+        &:hover {
+          background-color: ${props => props.theme.colors.disabled};
+        }
+      }
+    }
+  `}
 `
