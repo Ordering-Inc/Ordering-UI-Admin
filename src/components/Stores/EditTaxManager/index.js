@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
+import { Alert } from '../../Shared'
 import {
   TypeSelectWrapper,
   Option,
@@ -21,16 +22,43 @@ export const EditTaxManager = (props) => {
     data,
     formChanges,
     onChange,
-    onClose,
-    setAlertState
+    onClose
   } = props
 
   const [, t] = useLanguage()
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const formMethods = useForm()
+  const positiveNumberFields = ['rate', 'fixed']
   const defaultInputs = [
     { field: 'name', placeholder: t('NAME', 'Name'), required: t('NAME_REQUIRED', 'The name is required') },
     { field: 'description', placeholder: t('DESCRIPTION', 'Description'), required: t('DESCRIPTION_REQUIRED', 'The Description is required') }
   ]
+
+  const rateValidationNumber = (value) => {
+    if (!isNaN(Number(value))) {
+      return true
+    } else {
+      return t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('RATE', 'Rate'))
+    }
+  }
+
+  const feeValidationNumber = (value) => {
+    if (!isNaN(Number(value))) {
+      return true
+    } else {
+      return t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('FIXED', 'Fixed'))
+    }
+  }
+
+  const percentageValidationNumber = (value) => {
+    if (Number(value) <= 100) {
+      return true
+    } else {
+      return t('VALIDATION_MUST_SMALLER_HUNDRED', 'The precentage must be not bigger than 100').replace('_attribute_', t('PERCENTAGE', 'Percentage'))
+    }
+  }
+
   const inputs = [
     ...defaultInputs,
     type === 'taxes' ? [
@@ -39,9 +67,10 @@ export const EditTaxManager = (props) => {
         placeholder: t('RATE', 'Rate'),
         required: t('TAX_RATE_REQUIRED', 'Tax rate is required'),
         pattern: {
-          value: /^-?\d*\.?\d*$/,
+          value: /^\d*\.?\d*$/,
           message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('RATE', 'Rate'))
-        }
+        },
+        validate: rateValidationNumber
       }
     ] : [
       {
@@ -49,9 +78,10 @@ export const EditTaxManager = (props) => {
         placeholder: t('FIXED', 'Fixed'),
         required: t('FEE_FIXED_REQUIRED', 'Fee fixed is required'),
         pattern: {
-          value: /^-?\d*\.?\d*$/,
+          value: /^\d*\.?\d*$/,
           message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('FIXED', 'Fixed'))
-        }
+        },
+        validate: feeValidationNumber
       },
       {
         field: 'percentage',
@@ -60,7 +90,8 @@ export const EditTaxManager = (props) => {
         pattern: {
           value: /^-?\d*\.?\d*$/,
           message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('PERCENTAGE', 'Percentage'))
-        }
+        },
+        validate: percentageValidationNumber
       }
     ]
   ]
@@ -89,8 +120,15 @@ export const EditTaxManager = (props) => {
               onChange={(e) => onChange(input.field, e.target.value)}
               ref={formMethods.register({
                 required: input.required,
-                pattern: input.pattern
+                pattern: input.pattern,
+                validate: input.validate
               })}
+              onKeyPress={(e) => {
+                if (positiveNumberFields.includes(input.field) && !/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
+              autoComplete='off'
             />
           </InputContainer>
         ))}
@@ -136,6 +174,15 @@ export const EditTaxManager = (props) => {
           {t('CLOSE', 'Close')}
         </Button>
       </ButtonGroup>
+      <Alert
+        title={t('ERROR')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </EditTaxContainer>
   )
 }

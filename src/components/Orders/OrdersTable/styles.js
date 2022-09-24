@@ -395,3 +395,9 @@ export const OrdersCountWrapper = styled.div`
     color: ${props => props.theme.colors.success};
   `}
 `
+export const DragTh = styled.th`
+  cursor: pointer;
+  ${({ selectedDragOver }) => selectedDragOver && css`
+    border: 1px solid ${props => props.theme.colors.primary};
+  `}
+`

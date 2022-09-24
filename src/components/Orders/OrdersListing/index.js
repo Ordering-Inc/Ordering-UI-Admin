@@ -42,7 +42,11 @@ export const OrdersListing = (props) => {
     currentTourStep,
     isTourOpen,
     setIsTourOpen,
-    slaSettingTime
+    slaSettingTime,
+
+    allowColumns,
+    setAllowColumns,
+    handleDrop
   } = props
 
   const theme = useTheme()
@@ -122,6 +126,9 @@ export const OrdersListing = (props) => {
                   setIsTourOpen={setIsTourOpen}
                   slaSettingTime={slaSettingTime}
                   groupStatus={groupStatus}
+                  allowColumns={allowColumns}
+                  setAllowColumns={setAllowColumns}
+                  handleDrop={handleDrop}
                 />
               ) : (
                 <OrdersCards
