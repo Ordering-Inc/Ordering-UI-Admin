@@ -38,8 +38,7 @@ export const PaymethodOptionStripeConnect = (props) => {
     businessPaymethod,
     orderTypes,
     handleChangeBusinessPaymentState,
-    handleDeletePaymethod,
-    isDisabledPaymentsAdvanced
+    handleDeletePaymethod
   } = props
 
   const theme = useTheme()
@@ -141,18 +140,14 @@ export const PaymethodOptionStripeConnect = (props) => {
           {sitesState?.sites?.length > 0 && (
             <Tab
               active={paymentTabs === 1}
-              onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(1)}
-              disabledFeature={isDisabledPaymentsAdvanced}
-              title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+              onClick={() => setPaymentTabs(1)}
             >
               {t('CHANNELS', 'Channels')}
             </Tab>
           )}
           <Tab
             active={paymentTabs === 2}
-            onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(2)}
-            disabledFeature={isDisabledPaymentsAdvanced}
-            title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+            onClick={() => setPaymentTabs(2)}
           >
             {t('ORDER_TYPE', 'Order type')}
           </Tab>

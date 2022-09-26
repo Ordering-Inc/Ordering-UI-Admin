@@ -114,11 +114,6 @@ export const TabOption = styled.div`
       color: ${props => props.theme.colors.primary};
     }
   }
-
-  ${({ disabledFeature }) => disabledFeature && css`
-    cursor: not-allowed;
-    background-color: ${props => props.theme.colors.disabled};
-  `}
 `
 
 export const TabOptionName = styled.span`
