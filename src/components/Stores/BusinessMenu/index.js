@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-components-admin'
+import { useLanguage, useConfig, useSession, BusinessMenu as BusinessMenuController } from 'ordering-components-admin'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
 import { Confirm, Modal, SearchBar } from '../../Shared'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Checkbox } from '../../../styles'
 import { ChevronRight } from 'react-bootstrap-icons'
+import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 
 import {
   MainContainer,
@@ -32,6 +33,8 @@ const BusinessMenuUI = (props) => {
     sitesState
   } = props
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+  const [{ user }] = useSession()
   const { width } = useWindowSize()
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -40,6 +43,8 @@ const BusinessMenuUI = (props) => {
   const [isOpenSharedProduct, setIsOpenSharedProduct] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const [menuList, setMenuList] = useState([])
+  const [isDisabledFeature, setIsDisabledFeature] = useState(false)
+  const featureName = 'shared_menus'
 
   const handleOpenOptions = (name, menu) => {
     setCurrentMenu(menu)
@@ -66,6 +71,16 @@ const BusinessMenuUI = (props) => {
     setMenuList(filteredMenus)
   }, [JSON.stringify(businessMenusState.menus), JSON.stringify(businessMenusState.menusShared), searchValue, isSelectedSharedMenus])
 
+  useEffect(() => {
+    if (configs && Object.keys(configs).length > 0 && user) {
+      if (!Object.keys(configs).includes(featureName) && user?.level === 0 && isSelectedSharedMenus) {
+        setIsDisabledFeature(true)
+        return
+      }
+      setIsDisabledFeature(false)
+    }
+  }, [configs, isSelectedSharedMenus])
+
   return (
     <MainContainer>
       <MenuContainer isHide={isOpenSharedProduct}>
@@ -75,6 +90,7 @@ const BusinessMenuUI = (props) => {
             borderRadius='8px'
             color='lightPrimary'
             onClick={() => handleOpenOptions('option', {})}
+            disabled={isDisabledFeature}
           >
             {t('ADD_MENU', 'Add menu')}
           </Button>
@@ -100,7 +116,7 @@ const BusinessMenuUI = (props) => {
             {t('SHARED_MENUS', 'Shared menus')}
           </Tab>
         </TabsContainer>
-        <SearchBarWrapper>
+        <SearchBarWrapper isDisabledFeature={isDisabledFeature}>
           <SearchBar
             isCustomLayout
             lazyLoad
@@ -129,7 +145,8 @@ const BusinessMenuUI = (props) => {
             key={menu.id}
             isBorderTop={index === 0}
             active={menu.id === currentMenu?.id}
-            onClick={(e) => handleOpenEdit(e, menu)}
+            onClick={(e) => !isDisabledFeature && handleOpenEdit(e, menu)}
+            isDisabledFeature={isDisabledFeature}
           >
             <CheckboxWrapper
               className='business_checkbox_control'
@@ -151,6 +168,7 @@ const BusinessMenuUI = (props) => {
           </AddMenuButton>
         )}
       </MenuContainer>
+      {isDisabledFeature && (<DisabledFeatureAlert />)}
       {width >= 1000 ? (
         <>
           {showOption === 'option' && (

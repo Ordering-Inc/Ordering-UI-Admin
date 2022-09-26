@@ -70,6 +70,10 @@ export const ActionsWrapper = styled.div`
   }
 
   ${({ eventDisabled }) => eventDisabled && css`
-    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.4;
+    > * {
+      pointer-events: none;
+    }
   `}
 `
