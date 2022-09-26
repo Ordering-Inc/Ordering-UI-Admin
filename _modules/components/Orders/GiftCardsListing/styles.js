@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UserInfoContainer = exports.TabsWrapper = exports.Tab = exports.PaginationWarpper = exports.HeaderTitle = exports.HeaderContainer = exports.GiftCardsTableWrapper = exports.GiftCardRow = exports.Container = void 0;
+exports.UserInfoContainer = exports.TabsWrapper = exports.Tab = exports.PaginationWarpper = exports.HeaderTitle = exports.HeaderContainer = exports.GiftCardsTableWrapper = exports.GiftCardRow = exports.Container = exports.ActionsWrapper = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -21,7 +21,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 
 exports.Container = Container;
 
-var HeaderContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+var HeaderContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n"])));
 
 exports.HeaderContainer = HeaderContainer;
 
@@ -29,54 +29,58 @@ var HeaderTitle = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.HeaderTitle = HeaderTitle;
 
-var TabsWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid ", ";\n  margin: 20px 0 10px 0;\n"])), function (props) {
+var ActionsWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-top: 15px;\n  @media (min-width: 768px) {\n    margin-top: 0;\n  }\n"])));
+
+exports.ActionsWrapper = ActionsWrapper;
+
+var TabsWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid ", ";\n  margin: 20px 0 10px 0;\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 
 exports.TabsWrapper = TabsWrapper;
 
-var Tab = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  padding: 10px 0px;\n  cursor: pointer;\n  color: ", ";\n  white-space: nowrap;\n  font-size: 14px;\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
+var Tab = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  padding: 10px 0px;\n  cursor: pointer;\n  color: ", ";\n  white-space: nowrap;\n  font-size: 14px;\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
   var _props$theme$colors;
 
   return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
 }, function (props) {
   var _props$theme;
 
-  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "])));
+  return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "])));
 }, function (_ref) {
   var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    border-bottom: 2px solid;\n    font-weight: 500;\n  "])));
+  return active && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    border-bottom: 2px solid;\n    font-weight: 500;\n  "])));
 }, function (_ref2) {
   var active = _ref2.active;
-  return !active && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+  return !active && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.lightGray;
   });
 });
 
 exports.Tab = Tab;
 
-var GiftCardsTableWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  table {\n    width: 100%;\n    border-collapse: collapse;\n    td, th {\n      padding: 10px 0;\n      font-size: 14px;\n    }\n    thead {\n      border-bottom: 1px solid ", ";\n    }\n  }\n"])), function (props) {
+var GiftCardsTableWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  table {\n    width: 100%;\n    border-collapse: collapse;\n    td, th {\n      padding: 10px 0;\n      font-size: 14px;\n    }\n    thead {\n      border-bottom: 1px solid ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.disabled;
 });
 
 exports.GiftCardsTableWrapper = GiftCardsTableWrapper;
 
-var GiftCardRow = _styledComponents.default.tbody(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n"])), function (props) {
+var GiftCardRow = _styledComponents.default.tbody(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 
 exports.GiftCardRow = GiftCardRow;
 
-var UserInfoContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  img {\n    width: 38px;\n    height: 38px;\n    border-radius: 8px;\n    object-fit: cover;\n    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  }\n\n  div {\n    ", "\n    p.name {\n      margin: 0;\n      font-weight: 500;\n      font-size: 14px;\n      line-height: 21px;\n    }\n    p.phone {\n      margin: 0;\n      font-size: 10px;\n      line-height: 15px;\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var UserInfoContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  img {\n    width: 38px;\n    height: 38px;\n    border-radius: 8px;\n    object-fit: cover;\n    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  }\n\n  div {\n    ", "\n    p.name {\n      margin: 0;\n      font-weight: 500;\n      font-size: 14px;\n      line-height: 21px;\n    }\n    p.phone {\n      margin: 0;\n      font-size: 10px;\n      line-height: 15px;\n      color: ", ";\n    }\n  }\n"])), function (props) {
   var _props$theme2;
 
-  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n      margin-right: 9px;\n    "]))) : (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      margin-left: 9px;\n    "])));
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      margin-right: 9px;\n    "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      margin-left: 9px;\n    "])));
 }, function (props) {
   return props.theme.colors.lightGray;
 });
 
 exports.UserInfoContainer = UserInfoContainer;
 
-var PaginationWarpper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  margin: 20px 0;\n"])));
+var PaginationWarpper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  margin: 20px 0;\n"])));
 
 exports.PaginationWarpper = PaginationWarpper;

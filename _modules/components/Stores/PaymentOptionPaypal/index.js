@@ -27,6 +27,8 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _Shared = require("../../Shared");
 
+var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
+
 var _styles2 = require("./styles");
 
 var _styles3 = require("../BusinessMenu/styles");
@@ -81,7 +83,7 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
       businessPaymethod = props.businessPaymethod,
       handleChangeBusinessPaymentState = props.handleChangeBusinessPaymentState,
       handleDeletePaymethod = props.handleDeletePaymethod,
-      isDisabledPaymentsAdvanced = props.isDisabledPaymentsAdvanced;
+      isDisabledFeature = props.isDisabledFeature;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -199,17 +201,13 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
   }, t('GENERAL', 'General')), (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
     active: paymentTabs === 1,
     onClick: function onClick() {
-      return !isDisabledPaymentsAdvanced && setPaymentTabs(1);
-    },
-    disabledFeature: isDisabledPaymentsAdvanced,
-    title: isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
+      return setPaymentTabs(1);
+    }
   }, t('CHANNELS', 'Channels')), /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
     active: paymentTabs === 2,
     onClick: function onClick() {
-      return !isDisabledPaymentsAdvanced && setPaymentTabs(2);
-    },
-    disabledFeature: isDisabledPaymentsAdvanced,
-    title: isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
+      return setPaymentTabs(2);
+    }
   }, t('ORDER_TYPE', 'Order type'))), paymentTabs === 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SandboxWrapper, {
     onClick: function onClick() {
       return handleChangeSandbox();
@@ -249,8 +247,9 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles4.TabOption, {
       key: site.id,
+      isDisabledFeature: isDisabledFeature,
       onClick: function onClick() {
-        return setPaymethodInfo({
+        return !isDisabledFeature && setPaymethodInfo({
           key: 'sites',
           value: site.id
         });
@@ -265,8 +264,9 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles4.TabOption, {
       key: type.value,
+      isDisabledFeature: isDisabledFeature,
       onClick: function onClick() {
-        return setPaymethodInfo({
+        return !isDisabledFeature && setPaymethodInfo({
           key: 'allowed_order_types',
           value: type.value
         });
@@ -281,7 +281,7 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
     onClick: function onClick() {
       return handleSaveClick(businessPaymethod.id);
     }
-  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), isDisabledFeature && (paymentTabs === 1 || paymentTabs === 2) && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,

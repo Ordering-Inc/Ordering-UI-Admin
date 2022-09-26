@@ -36,7 +36,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CampaignHeader = function CampaignHeader(props) {
   var searchValue = props.searchValue,
       handleChangeSearch = props.handleChangeSearch,
-      handleOpenDetail = props.handleOpenDetail;
+      handleOpenDetail = props.handleOpenDetail,
+      isDisabledFeature = props.isDisabledFeature;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -52,7 +53,9 @@ var CampaignHeader = function CampaignHeader(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitle, null, t('CAMPAIGN', 'Campaign'))), /*#__PURE__*/_react.default.createElement(_styles2.TopRightSection, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitle, null, t('CAMPAIGN', 'Campaign'))), /*#__PURE__*/_react.default.createElement(_styles2.TopRightSection, {
+    isDisabledFeature: isDisabledFeature
+  }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {

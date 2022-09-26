@@ -76,23 +76,28 @@ var SidebarMenu = function SidebarMenu(props) {
   var ordersSubMenus = [{
     id: 1,
     title: t('ORDERS_MANAGER', 'Orders manager'),
-    pageName: 'orders'
+    pageName: 'orders',
+    url: '/orders'
   }, {
     id: 2,
     title: t('DELIVERY_DASHBOARD', 'Deliveries dashboard'),
-    pageName: 'deliveries'
+    pageName: 'deliveries',
+    url: '/deliveries'
   }, {
     id: 3,
     title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
-    pageName: 'drivers'
+    pageName: 'drivers',
+    url: '/drivers'
   }, {
     id: 4,
     title: t('APPOINTMENTS', 'Appointments'),
-    pageName: 'appointments'
+    pageName: 'appointments',
+    url: '/appointments'
   }, {
     id: 5,
     title: t('GIFT_CARD_MANAGER', 'Gift card manager'),
-    pageName: 'giftCards'
+    pageName: 'giftCards',
+    url: '/gift-cards'
   }];
   var loyaltySubMenus = [{
     id: 1,
@@ -322,7 +327,7 @@ var SidebarMenu = function SidebarMenu(props) {
     handleGoToPage: handleGoToPage
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOME', 'Home')))), /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "1",
-    active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers' || location.pathname === '/appointments'
+    active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers' || location.pathname === '/appointments' || location.pathname === '/gift-cards'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ListCheck, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "1"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ordersSubMenus.map(function (item) {
@@ -330,7 +335,7 @@ var SidebarMenu = function SidebarMenu(props) {
 
     return !((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 2 && item.pageName === 'drivers') && !((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.level) === 5 && item.pageName === 'appointments') && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
-      active: location.pathname.includes(item.pageName),
+      active: location.pathname.includes(item.url),
       onClick: function onClick() {
         return handleGoToPage({
           page: item.pageName

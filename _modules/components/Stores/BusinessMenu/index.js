@@ -21,6 +21,8 @@ var _styles = require("../../../styles");
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 
+var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -67,6 +69,14 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
@@ -104,6 +114,13 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       menuList = _useState12[0],
       setMenuList = _useState12[1];
 
+  var _useState13 = (0, _react.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isDisabledFeature = _useState14[0],
+      setIsDisabledFeature = _useState14[1];
+
+  var featureName = 'shared_menus';
+
   var handleOpenOptions = function handleOpenOptions(name, menu) {
     setCurrentMenu(menu);
     setIsExtendExtraOpen(true);
@@ -133,6 +150,16 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     });
     setMenuList(filteredMenus);
   }, [JSON.stringify(businessMenusState.menus), JSON.stringify(businessMenusState.menusShared), searchValue, isSelectedSharedMenus]);
+  (0, _react.useEffect)(function () {
+    if (configs && Object.keys(configs).length > 0 && user) {
+      if (!Object.keys(configs).includes(featureName) && (user === null || user === void 0 ? void 0 : user.level) === 0 && isSelectedSharedMenus) {
+        setIsDisabledFeature(true);
+        return;
+      }
+
+      setIsDisabledFeature(false);
+    }
+  }, [configs, isSelectedSharedMenus]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.MenuContainer, {
     isHide: isOpenSharedProduct
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('MENU_V21', 'Menu')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
@@ -140,7 +167,8 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     color: "lightPrimary",
     onClick: function onClick() {
       return handleOpenOptions('option', {});
-    }
+    },
+    disabled: isDisabledFeature
   }, t('ADD_MENU', 'Add menu'))), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: !isSelectedSharedMenus,
     onClick: function onClick() {
@@ -153,7 +181,9 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       handleCloseOption();
       setIsSelectedSharedMenus(true);
     }
-  }, t('SHARED_MENUS', 'Shared menus'))), /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  }, t('SHARED_MENUS', 'Shared menus'))), /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, {
+    isDisabledFeature: isDisabledFeature
+  }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     isCustomLayout: true,
     lazyLoad: true,
     placeholder: t('SEARCH', 'Search'),
@@ -167,8 +197,9 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
       isBorderTop: index === 0,
       active: menu.id === (currentMenu === null || currentMenu === void 0 ? void 0 : currentMenu.id),
       onClick: function onClick(e) {
-        return handleOpenEdit(e, menu);
-      }
+        return !isDisabledFeature && handleOpenEdit(e, menu);
+      },
+      isDisabledFeature: isDisabledFeature
     }, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
       className: "business_checkbox_control"
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
@@ -181,7 +212,7 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     onClick: function onClick() {
       return handleOpenOptions('option', {});
     }
-  }, t('ADD_MENU', 'Add menu'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showOption === 'option' && /*#__PURE__*/_react.default.createElement(_BusinessMenuOptions.BusinessMenuOptions, {
+  }, t('ADD_MENU', 'Add menu'))), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showOption === 'option' && /*#__PURE__*/_react.default.createElement(_BusinessMenuOptions.BusinessMenuOptions, {
     open: showOption === 'option',
     business: business,
     menu: currentMenu,

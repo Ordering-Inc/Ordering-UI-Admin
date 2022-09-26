@@ -60,9 +60,9 @@ var TabOption = _styledComponents.default.div(_templateObject7 || (_templateObje
 }, function (props) {
   return props.theme.colors.primary;
 }, function (_ref) {
-  var disabledFeature = _ref.disabledFeature;
-  return disabledFeature && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    cursor: not-allowed;\n    background-color: ", ";\n  "])), function (props) {
-    return props.theme.colors.disabled;
+  var isDisabledFeature = _ref.isDisabledFeature;
+  return isDisabledFeature && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      cursor: not-allowed;\n      opacity: 0.4;\n      &:hover {\n        background-color: ", ";\n      }\n  "])), function (props) {
+    return props.theme.colors.white;
   });
 });
 

@@ -23,6 +23,8 @@ var _SettingsCountryFilter = require("../SettingsCountryFilter");
 
 var _SettingsImage = require("../SettingsImage");
 
+var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
+
 var _styles2 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -64,6 +66,7 @@ var SettingsListUI = function SettingsListUI(props) {
 
   var settingsState = props.settingsState,
       configs = props.configs,
+      category = props.category,
       formState = props.formState,
       onCloseSettingsList = props.onCloseSettingsList,
       handleCheckBoxChange = props.handleCheckBoxChange,
@@ -75,13 +78,28 @@ var SettingsListUI = function SettingsListUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)({
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configState = _useConfig2[0];
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isDisabledFeature = _useState2[0],
+      setIsDisabledFeature = _useState2[1];
+
+  var _useState3 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
+
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
+  var featureName = 'advanced_logistics';
 
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -172,6 +190,24 @@ var SettingsListUI = function SettingsListUI(props) {
       });
     }
   }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.result]);
+  (0, _react.useEffect)(function () {
+    if ((category === null || category === void 0 ? void 0 : category.key) === 'autoassign' && !(configState !== null && configState !== void 0 && configState.loading) && Object.keys(configState === null || configState === void 0 ? void 0 : configState.configs).length > 0 && !(formState !== null && formState !== void 0 && formState.loading) && (formState === null || formState === void 0 ? void 0 : formState.finalResult.length) > 0 && user) {
+      var _formState$changes, _formState$changes$fi, _formState$finalResul, _formState$finalResul2;
+
+      var autoassignType = (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$fi = _formState$changes.find(function (change) {
+        return (change === null || change === void 0 ? void 0 : change.key) === 'autoassign_type';
+      })) === null || _formState$changes$fi === void 0 ? void 0 : _formState$changes$fi.value) || (formState === null || formState === void 0 ? void 0 : (_formState$finalResul = formState.finalResult) === null || _formState$finalResul === void 0 ? void 0 : (_formState$finalResul2 = _formState$finalResul.find(function (re) {
+        return (re === null || re === void 0 ? void 0 : re.key) === 'autoassign_type';
+      })) === null || _formState$finalResul2 === void 0 ? void 0 : _formState$finalResul2.value);
+
+      if (!Object.keys(configState === null || configState === void 0 ? void 0 : configState.configs).includes(featureName) && (user === null || user === void 0 ? void 0 : user.level) === 0 && autoassignType === 'enterprise') {
+        setIsDisabledFeature(true);
+        return;
+      }
+
+      setIsDisabledFeature(false);
+    }
+  }, [configState, formState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SettingsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.GeneralTitle, null, /*#__PURE__*/_react.default.createElement("p", null, t('SETTINGS', 'All Settings'))), !settingsState.error && settingsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, _toConsumableArray(Array(6)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i
@@ -258,9 +294,10 @@ var SettingsListUI = function SettingsListUI(props) {
     content: t('NOT_FOUND_CONFIG', 'Sorry, we couldn\'t find the config.'),
     btnTitle: t('PROFILE_CATEGORY_REDIRECT', 'Go to Category Description'),
     onClickButton: onCloseSettingsList
-  })), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
-    onClick: handleSubmit
+    onClick: handleSubmit,
+    disabled: isDisabledFeature
   }, t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('SETTINGS', 'Settings'),
     content: alertState.content,

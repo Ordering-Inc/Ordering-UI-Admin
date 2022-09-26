@@ -54,7 +54,9 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
       paginationProps = props.paginationProps,
       activeStatus = props.activeStatus,
       setActiveStatus = props.setActiveStatus,
-      getGiftCards = props.getGiftCards;
+      getGiftCards = props.getGiftCards,
+      searchValue = props.searchValue,
+      onSearch = props.onSearch;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -79,7 +81,13 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('GIFT_CARD_MANAGER', 'Gift card manager')))), /*#__PURE__*/_react.default.createElement(_styles2.TabsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('GIFT_CARD_MANAGER', 'Gift card manager'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+    isCustomLayout: true,
+    lazyLoad: true,
+    onSearch: onSearch,
+    search: searchValue,
+    placeholder: t('SEARCH', 'Search')
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.TabsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: activeStatus === 'pending',
     onClick: function onClick() {
       return setActiveStatus('pending');
@@ -152,7 +160,11 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
 
 var GiftCardsListing = function GiftCardsListing(props) {
   var giftCardsProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: GiftCardsListingUI
+    UIComponent: GiftCardsListingUI,
+    isSearchById: true,
+    isSearchByAuthorName: true,
+    isSearchByAuthorEmail: true,
+    isSearchByAuthorPhone: true
   });
 
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GiftCardsList, giftCardsProps);

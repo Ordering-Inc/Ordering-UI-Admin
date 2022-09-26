@@ -43,7 +43,7 @@ var ActionsWrapper = _styledComponents.default.div(_templateObject6 || (_templat
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "])));
 }, function (_ref) {
   var eventDisabled = _ref.eventDisabled;
-  return eventDisabled && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
+  return eventDisabled && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    cursor: not-allowed;\n    opacity: 0.4;\n    > * {\n      pointer-events: none;\n    }\n  "])));
 });
 
 exports.ActionsWrapper = ActionsWrapper;

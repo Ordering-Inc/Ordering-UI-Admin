@@ -29,6 +29,8 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _Shared = require("../../Shared");
 
+var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
+
 var _styles3 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -77,7 +79,7 @@ var PaymentOption = function PaymentOption(props) {
       handleSaveClick = props.handleSaveClick,
       businessPaymethod = props.businessPaymethod,
       handleDeletePaymethod = props.handleDeletePaymethod,
-      isDisabledPaymentsAdvanced = props.isDisabledPaymentsAdvanced;
+      isDisabledFeature = props.isDisabledFeature;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -185,29 +187,25 @@ var PaymentOption = function PaymentOption(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: paymentTabs === 0,
     onClick: function onClick() {
-      return !isDisabledPaymentsAdvanced && setPaymentTabs(0);
-    },
-    disabledFeature: isDisabledPaymentsAdvanced,
-    title: isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
+      return setPaymentTabs(0);
+    }
   }, t('CHANNELS', 'Channels')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: paymentTabs === 1,
     onClick: function onClick() {
-      return !isDisabledPaymentsAdvanced && setPaymentTabs(1);
-    },
-    disabledFeature: isDisabledPaymentsAdvanced,
-    title: isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
+      return setPaymentTabs(1);
+    }
   }, t('ORDER_TYPE', 'Order type'))), paymentTabs === 0 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites4 = sitesState.sites) === null || _sitesState$sites4 === void 0 ? void 0 : _sitesState$sites4.length) > 0 && (sitesState === null || sitesState === void 0 ? void 0 : sitesState.sites.map(function (site) {
     var _ref2, _changesState$sites, _businessPaymethod$si;
 
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: site.id,
-      disabledFeature: isDisabledPaymentsAdvanced,
       onClick: function onClick() {
-        return !isDisabledPaymentsAdvanced && setPaymethodInfo({
+        return !isDisabledFeature && setPaymethodInfo({
           key: 'sites',
           value: site.id
         });
-      }
+      },
+      isDisabledFeature: isDisabledFeature
     }, (_ref2 = (_changesState$sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites) !== null && _changesState$sites !== void 0 ? _changesState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
       return s.id;
     })) !== null && _ref2 !== void 0 && _ref2.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
@@ -219,22 +217,23 @@ var PaymentOption = function PaymentOption(props) {
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: type.value,
       onClick: function onClick() {
-        return setPaymethodInfo({
+        return !isDisabledFeature && setPaymethodInfo({
           key: 'allowed_order_types',
           value: type.value
         });
-      }
+      },
+      isDisabledFeature: isDisabledFeature
     }, (_ref3 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref3 !== void 0 && _ref3.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, type.text));
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "5px",
     color: "primary",
-    disabled: actionState.loading || Object.keys(changesState).length === 0,
+    disabled: isDisabledFeature || actionState.loading || Object.keys(changesState).length === 0,
     onClick: function onClick() {
       return handleSaveClick(businessPaymethod.id);
     }
-  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,

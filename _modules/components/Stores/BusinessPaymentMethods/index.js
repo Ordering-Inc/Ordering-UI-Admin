@@ -115,6 +115,10 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       _useConfig2 = _slicedToArray(_useConfig, 1),
       configs = _useConfig2[0].configs;
 
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
@@ -123,38 +127,40 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       isEdit = _useState2[0],
       setIsEdit = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(false),
+  var _useState3 = (0, _react.useState)(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      isDisabledPaymentsAdvanced = _useState4[0],
-      setIsDisabledPaymentsAdvanced = _useState4[1];
+      selectedBusinessPaymethod = _useState4[0],
+      setSelectedBusinessPaymethod = _useState4[1];
 
   var _useState5 = (0, _react.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedBusinessPaymethod = _useState6[0],
-      setSelectedBusinessPaymethod = _useState6[1];
+      selectedPaymethodGateway = _useState6[0],
+      setSelectedPaymethodGateway = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(null),
+  var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      selectedPaymethodGateway = _useState8[0],
-      setSelectedPaymethodGateway = _useState8[1];
+      searchValue = _useState8[0],
+      setSearchValue = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(''),
-      _useState10 = _slicedToArray(_useState9, 2),
-      searchValue = _useState10[0],
-      setSearchValue = _useState10[1];
-
-  var _useState11 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)({
     open: false,
     content: []
   }),
+      _useState10 = _slicedToArray(_useState9, 2),
+      alertState = _useState10[0],
+      setAlertState = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      alertState = _useState12[0],
-      setAlertState = _useState12[1];
+      isOpenWalletDetails = _useState12[0],
+      setIsOpenWalletDetails = _useState12[1];
+
+  var featureName = 'payments_advanced';
 
   var _useState13 = (0, _react.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      isOpenWalletDetails = _useState14[0],
-      setIsOpenWalletDetails = _useState14[1];
+      isDisabledFeature = _useState14[0],
+      setIsDisabledFeature = _useState14[1];
 
   var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1';
   var orderTypes = [{
@@ -255,9 +261,13 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     setSelectedBusinessPaymethod(updatedPaymethod);
   }, [businessPaymethodsState === null || businessPaymethodsState === void 0 ? void 0 : businessPaymethodsState.paymethods, selectedBusinessPaymethod]);
   (0, _react.useEffect)(function () {
-    if (configs && Object.keys(configs).length > 0) {
-      var disabledFeature = !Object.keys(configs).includes('payments_advanced');
-      setIsDisabledPaymentsAdvanced(disabledFeature);
+    if (configs && Object.keys(configs).length > 0 && user) {
+      if (!Object.keys(configs).includes(featureName) && (user === null || user === void 0 ? void 0 : user.level) === 0) {
+        setIsDisabledFeature(true);
+        return;
+      }
+
+      setIsDisabledFeature(false);
     }
   }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.PaymentMethodsContainer, {
@@ -334,7 +344,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'apple_pay' && /*#__PURE__*/_react.default.createElement(_PaymentOptionMethods.PaymentOptionMethods, {
     sitesState: sitesState,
     open: isEdit,
@@ -353,7 +363,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
     id: selectedPaymethodGateway,
     title: "Apple pay",
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'google_pay' && /*#__PURE__*/_react.default.createElement(_PaymentOptionMethods.PaymentOptionMethods, {
     sitesState: sitesState,
     open: isEdit,
@@ -372,7 +382,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
     id: selectedPaymethodGateway,
     title: "Google pay",
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'stripe_direct' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeDirect.PaymentOptionStripeDirect, {
     sitesState: sitesState,
     open: isEdit,
@@ -389,7 +399,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
     open: isEdit,
     sitesState: sitesState,
@@ -406,7 +416,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'paypal_express' && /*#__PURE__*/_react.default.createElement(_PaymethodOptionPaypalExpress.PaymethodOptionPaypalExpress, {
     open: isEdit,
     sitesState: sitesState,
@@ -423,7 +433,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'stripe_redirect' && /*#__PURE__*/_react.default.createElement(_PaymethodOptionStripeRedirect.PaymethodOptionStripeRedirect, {
     open: isEdit,
     sitesState: sitesState,
@@ -440,7 +450,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'stripe_connect' && /*#__PURE__*/_react.default.createElement(_PaymethodOptionStripeConnect.PaymethodOptionStripeConnect, {
     open: isEdit,
     sitesState: sitesState,
@@ -457,7 +467,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeStripeInput: handleChangeStripeInput,
     handleStripeSave: handleStripeSave,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'square' && /*#__PURE__*/_react.default.createElement(_PaymentOptionSquare.PaymentOptionSquare, {
     open: isEdit,
     sitesState: sitesState,
@@ -472,7 +482,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
     businessPaymethods: businessPaymethodsState === null || businessPaymethodsState === void 0 ? void 0 : businessPaymethodsState.paymethods,
     handleSuccessPaymethodUpdate: handleSuccessPaymethodUpdate,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     open: isEdit,
@@ -495,7 +505,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'stripe_direct' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeDirect.PaymentOptionStripeDirect, {
     sitesState: sitesState,
     open: isEdit,
@@ -512,7 +522,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
     open: isEdit,
     sitesState: sitesState,
@@ -529,7 +539,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'paypal_express' && /*#__PURE__*/_react.default.createElement(_PaymethodOptionPaypalExpress.PaymethodOptionPaypalExpress, {
     open: isEdit,
     sitesState: sitesState,
@@ -546,7 +556,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'stripe_redirect' && /*#__PURE__*/_react.default.createElement(_PaymethodOptionStripeRedirect.PaymethodOptionStripeRedirect, {
     open: isEdit,
     sitesState: sitesState,
@@ -563,7 +573,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'stripe_connect' && /*#__PURE__*/_react.default.createElement(_PaymethodOptionStripeConnect.PaymethodOptionStripeConnect, {
     open: isEdit,
     sitesState: sitesState,
@@ -581,7 +591,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeStripeInput: handleChangeStripeInput,
     handleStripeSave: handleStripeSave,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   }), selectedPaymethodGateway === 'square' && /*#__PURE__*/_react.default.createElement(_PaymentOptionSquare.PaymentOptionSquare, {
     open: isEdit,
     sitesState: sitesState,
@@ -596,7 +606,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
     businessPaymethods: businessPaymethodsState === null || businessPaymethodsState === void 0 ? void 0 : businessPaymethodsState.paymethods,
     handleSuccessPaymethodUpdate: handleSuccessPaymethodUpdate,
-    isDisabledPaymentsAdvanced: isDisabledPaymentsAdvanced
+    isDisabledFeature: isDisabledFeature
   })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('PAYMETHODS', 'Payment methods'),
     content: alertState.content,
