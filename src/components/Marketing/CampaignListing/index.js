@@ -41,11 +41,13 @@ export const CampaignListingUI = (props) => {
         <CampaignHeader
           {...props}
           handleOpenDetail={handleOpenDetail}
+          isDisabledFeature={isDisabledFeature}
         />
         <CampaignList
           {...props}
           handleOpenDetail={handleOpenDetail}
           selectedCampaign={selectedCampaign}
+          isDisabledFeature={isDisabledFeature}
         />
       </CampaignListingContainer>
       {isDisabledFeature && (<DisabledFeatureAlert />)}

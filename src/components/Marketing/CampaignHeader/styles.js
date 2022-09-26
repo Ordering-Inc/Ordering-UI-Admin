@@ -44,6 +44,14 @@ export const TopRightSection = styled.div`
     flex-direction: row;
     align-items: center;
   }
+
+  ${({ isDisabledFeature }) => isDisabledFeature && css`
+      cursor: not-allowed;
+      > div {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+  `}
 `
 
 export const WrapperSearch = styled.div`
