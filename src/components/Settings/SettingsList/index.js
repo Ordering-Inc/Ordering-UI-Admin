@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, SettingsList as SettingsListController } from 'ordering-components-admin'
+import { useLanguage, useConfig, useSession, SettingsList as SettingsListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, NotFoundSource } from '../../Shared'
 import { Button } from '../../../styles'
 import { SettingsSelectUI } from '../SettingsSelectUI'
 import { SettingsCountryFilter } from '../SettingsCountryFilter'
 import { SettingsImage } from '../SettingsImage'
+import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 import {
   SettingsListContainer,
   GeneralContainer,
@@ -25,6 +26,7 @@ export const SettingsListUI = (props) => {
   const {
     settingsState,
     configs,
+    category,
     formState,
     onCloseSettingsList,
     handleCheckBoxChange,
@@ -34,8 +36,11 @@ export const SettingsListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [configState] = useConfig()
+  const [isDisabledFeature, setIsDisabledFeature] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-
+  const [{ user }] = useSession()
+  const featureName = 'advanced_logistics'
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -97,6 +102,21 @@ export const SettingsListUI = (props) => {
       })
     }
   }, [settingsState?.result])
+
+  useEffect(() => {
+    if (category?.key === 'autoassign' && !configState?.loading &&
+      Object.keys(configState?.configs).length > 0 && !formState?.loading &&
+      formState?.finalResult.length > 0 && user) {
+      const autoassignType = formState?.changes?.find(change => change?.key === 'autoassign_type')?.value ||
+        formState?.finalResult?.find(re => re?.key === 'autoassign_type')?.value
+      if (!Object.keys(configState?.configs).includes(featureName) &&
+        user?.level === 0 && autoassignType === 'enterprise') {
+        setIsDisabledFeature(true)
+        return
+      }
+      setIsDisabledFeature(false)
+    }
+  }, [configState, formState])
 
   return (
     <>
@@ -260,10 +280,17 @@ export const SettingsListUI = (props) => {
           )
         }
       </SettingsListContainer>
+      {isDisabledFeature && (<DisabledFeatureAlert />)}
       {
         settingsState?.changes?.length > 0 && (
           <SubmitBtnWrapper>
-            <Button color='primary' onClick={handleSubmit}>{t('SAVE', 'Save')}</Button>
+            <Button
+              color='primary'
+              onClick={handleSubmit}
+              disabled={isDisabledFeature}
+            >
+              {t('SAVE', 'Save')}
+            </Button>
           </SubmitBtnWrapper>
         )
       }

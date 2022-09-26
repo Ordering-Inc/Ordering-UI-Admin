@@ -147,6 +147,7 @@ export const SettingsDetail = (props) => {
       setIsDisabledFeature(false)
     }
   }, [configs, category])
+
   return (
     <Container
       id='catDescription'

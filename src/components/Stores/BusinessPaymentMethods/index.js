@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
   useConfig,
+  useSession,
   BusinessPaymethods as BusinessPaymentMethodsController
 } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
@@ -66,14 +67,16 @@ const BusinessPaymentMethodsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
+  const [{ user }] = useSession()
   const { width } = useWindowSize()
   const [isEdit, setIsEdit] = useState(false)
-  const [isDisabledPaymentsAdvanced, setIsDisabledPaymentsAdvanced] = useState(false)
   const [selectedBusinessPaymethod, setSelectedBusinessPaymethod] = useState(null)
   const [selectedPaymethodGateway, setSelectedPaymethodGateway] = useState(null)
   const [searchValue, setSearchValue] = useState('')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isOpenWalletDetails, setIsOpenWalletDetails] = useState(false)
+  const featureName = 'payments_advanced'
+  const [isDisabledFeature, setIsDisabledFeature] = useState(false)
   const isWalletCashEnabled = configs?.wallet_enabled?.value === '1'
 
   const orderTypes = [
@@ -155,9 +158,12 @@ const BusinessPaymentMethodsUI = (props) => {
   }, [businessPaymethodsState?.paymethods, selectedBusinessPaymethod])
 
   useEffect(() => {
-    if (configs && Object.keys(configs).length > 0) {
-      const disabledFeature = !Object.keys(configs).includes('payments_advanced')
-      setIsDisabledPaymentsAdvanced(disabledFeature)
+    if (configs && Object.keys(configs).length > 0 && user) {
+      if (!Object.keys(configs).includes(featureName) && user?.level === 0) {
+        setIsDisabledFeature(true)
+        return
+      }
+      setIsDisabledFeature(false)
     }
   }, [configs])
 
@@ -275,7 +281,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeInput={handleChangeInput}
                     handleSaveClick={handleSaveClick}
                     handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                    isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                    isDisabledFeature={isDisabledFeature}
                   />
                 )}
               {selectedPaymethodGateway === 'apple_pay' && (
@@ -295,7 +301,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
                   id={selectedPaymethodGateway}
                   title='Apple pay'
-                  isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                  isDisabledFeature={isDisabledFeature}
                 />
               )}
               {selectedPaymethodGateway === 'google_pay' && (
@@ -315,7 +321,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
                   id={selectedPaymethodGateway}
                   title='Google pay'
-                  isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                  isDisabledFeature={isDisabledFeature}
                 />
               )}
               {selectedPaymethodGateway === 'stripe_direct' && (
@@ -333,7 +339,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeInput={handleChangeInput}
                   handleSaveClick={handleSaveClick}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                  isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                  isDisabledFeature={isDisabledFeature}
                 />
               )}
               {selectedPaymethodGateway === 'paypal' && (
@@ -351,7 +357,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeInput={handleChangeInput}
                   handleSaveClick={handleSaveClick}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                  isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                  isDisabledFeature={isDisabledFeature}
                 />
               )}
               {selectedPaymethodGateway === 'paypal_express' && (
@@ -369,7 +375,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeInput={handleChangeInput}
                   handleSaveClick={handleSaveClick}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                  isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                  isDisabledFeature={isDisabledFeature}
                 />
               )}
               {selectedPaymethodGateway === 'stripe_redirect' && (
@@ -387,7 +393,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeInput={handleChangeInput}
                   handleSaveClick={handleSaveClick}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                  isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                  isDisabledFeature={isDisabledFeature}
                 />
               )}
               {selectedPaymethodGateway === 'stripe_connect' && (
@@ -405,7 +411,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeStripeInput={handleChangeStripeInput}
                   handleStripeSave={handleStripeSave}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                  isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                  isDisabledFeature={isDisabledFeature}
                 />
               )}
               {selectedPaymethodGateway === 'square' && (
@@ -421,7 +427,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
                   businessPaymethods={businessPaymethodsState?.paymethods}
                   handleSuccessPaymethodUpdate={handleSuccessPaymethodUpdate}
-                  isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                  isDisabledFeature={isDisabledFeature}
                 />
               )}
             </>
@@ -456,7 +462,7 @@ const BusinessPaymentMethodsUI = (props) => {
                       handleChangeInput={handleChangeInput}
                       handleSaveClick={handleSaveClick}
                       handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                      isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                      isDisabledFeature={isDisabledFeature}
                     />
                   )}
                 {selectedPaymethodGateway === 'stripe_direct' && (
@@ -474,7 +480,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeInput={handleChangeInput}
                     handleSaveClick={handleSaveClick}
                     handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                    isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                    isDisabledFeature={isDisabledFeature}
                   />
                 )}
                 {selectedPaymethodGateway === 'paypal' && (
@@ -492,7 +498,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeInput={handleChangeInput}
                     handleSaveClick={handleSaveClick}
                     handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                    isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                    isDisabledFeature={isDisabledFeature}
                   />
                 )}
                 {selectedPaymethodGateway === 'paypal_express' && (
@@ -510,7 +516,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeInput={handleChangeInput}
                     handleSaveClick={handleSaveClick}
                     handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                    isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                    isDisabledFeature={isDisabledFeature}
                   />
                 )}
                 {selectedPaymethodGateway === 'stripe_redirect' && (
@@ -528,7 +534,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeInput={handleChangeInput}
                     handleSaveClick={handleSaveClick}
                     handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                    isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                    isDisabledFeature={isDisabledFeature}
                   />
                 )}
                 {selectedPaymethodGateway === 'stripe_connect' && (
@@ -547,7 +553,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeStripeInput={handleChangeStripeInput}
                     handleStripeSave={handleStripeSave}
                     handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                    isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                    isDisabledFeature={isDisabledFeature}
                   />
                 )}
                 {selectedPaymethodGateway === 'square' && (
@@ -563,7 +569,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
                     businessPaymethods={businessPaymethodsState?.paymethods}
                     handleSuccessPaymethodUpdate={handleSuccessPaymethodUpdate}
-                    isDisabledPaymentsAdvanced={isDisabledPaymentsAdvanced}
+                    isDisabledFeature={isDisabledFeature}
                   />
                 )}
               </Modal>
