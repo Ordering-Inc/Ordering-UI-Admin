@@ -9,7 +9,13 @@ export const Container = styled.div`
 `
 export const HeaderContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 `
 export const HeaderTitle = styled.div`
   display: flex;
@@ -19,6 +25,12 @@ export const HeaderTitle = styled.div`
     font-size: 20px;
     font-weight: 700;
     margin: 0;
+  }
+`
+export const ActionsWrapper = styled.div`
+  margin-top: 15px;
+  @media (min-width: 768px) {
+    margin-top: 0;
   }
 `
 export const TabsWrapper = styled.div`
