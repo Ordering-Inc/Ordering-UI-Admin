@@ -345,6 +345,12 @@ Object.defineProperty(exports, "BusinessWebhooks", {
     return _BusinessWebhooks.BusinessWebhooks;
   }
 });
+Object.defineProperty(exports, "BusinessWidgets", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessWidgets.BusinessWidgets;
+  }
+});
 Object.defineProperty(exports, "BusinessesList", {
   enumerable: true,
   get: function get() {
@@ -647,6 +653,8 @@ var _BusinessTypes = require("./BusinessTypes");
 var _BusinessVideos = require("./BusinessVideos");
 
 var _BusinessWebhooks = require("./BusinessWebhooks");
+
+var _BusinessWidgets = require("./BusinessWidgets");
 
 var _SeoOptions = require("./SeoOptions");
 

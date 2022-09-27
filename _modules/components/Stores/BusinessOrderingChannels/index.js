@@ -9,8 +9,6 @@ exports.BusinessOrderingChannels = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactBootstrap = require("react-bootstrap");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _styles = require("../../../styles");
@@ -18,6 +16,8 @@ var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
 
 var _styles2 = require("./styles");
+
+var _BusinessWidgets = require("../BusinessWidgets");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -56,14 +56,27 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
       slug = _useState2[0],
       setSlug = _useState2[1];
 
-  var _useState3 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)('custom_slug'),
+      _useState4 = _slicedToArray(_useState3, 2),
+      selectedOption = _useState4[0],
+      setSelectedOption = _useState4[1];
+
+  var _useState5 = (0, _react.useState)({
     open: false,
     content: [],
     success: false
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      alertState = _useState6[0],
+      setAlertState = _useState6[1];
+
+  var optionList = [{
+    key: 'custom_slug',
+    name: t('CUSTOM_SLUG', 'Custom slug')
+  }, {
+    key: 'widgets',
+    name: t('WIDGETS', 'Widgets')
+  }];
 
   var changeCustomslug = function changeCustomslug() {
     if (slug === '') {
@@ -88,6 +101,10 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
     }));
   };
 
+  var handleChangeOption = function handleChangeOption(key) {
+    setSelectedOption(key);
+  };
+
   (0, _react.useEffect)(function () {
     if (formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) return;
     handleUpdateBusinessClick();
@@ -95,11 +112,15 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
   (0, _react.useEffect)(function () {
     if (business) setSlug(business === null || business === void 0 ? void 0 : business.slug);
   }, [business]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessOrderingChannelsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('EXTENSIONS', 'Extensions')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
-    eventKey: "0"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.AccordionTitle, null, t('CUSTOM_SLUG', 'Custom slug'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
-    eventKey: "0"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessCustomSlugContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessOrderingChannelsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('EXTENSIONS', 'Extensions')), /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, optionList.map(function (option) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+      key: option.key,
+      active: selectedOption === option.key,
+      onClick: function onClick() {
+        return handleChangeOption(option.key);
+      }
+    }, option.name);
+  })), selectedOption === 'custom_slug' && /*#__PURE__*/_react.default.createElement(_styles2.BusinessCustomSlugContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     value: slug,
     placeholder: t('SLUG', 'Slug'),
@@ -114,7 +135,9 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: changeCustomslug
-  }, t('SAVE', 'Save')))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('SAVE', 'Save'))), selectedOption === 'widgets' && /*#__PURE__*/_react.default.createElement(_BusinessWidgets.BusinessWidgets, {
+    business: business
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('EXTENSION', 'Extension'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
@@ -130,23 +153,3 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
 };
 
 exports.BusinessOrderingChannels = BusinessOrderingChannels;
-
-var ContextAwareToggle = function ContextAwareToggle(_ref) {
-  var children = _ref.children,
-      eventKey = _ref.eventKey,
-      callback = _ref.callback;
-  var currentEventKey = (0, _react.useContext)(_reactBootstrap.AccordionContext);
-  var decoratedOnClick = (0, _reactBootstrap.useAccordionToggle)(eventKey, function () {
-    return callback && callback(eventKey);
-  });
-  var isCurrentEventKey = currentEventKey === eventKey;
-
-  var handleButtonClick = function handleButtonClick() {
-    decoratedOnClick();
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_styles2.ToggleItemWrapper, {
-    active: isCurrentEventKey,
-    onClick: handleButtonClick
-  }, children);
-};
