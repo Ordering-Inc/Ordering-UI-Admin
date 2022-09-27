@@ -34,6 +34,7 @@ const BusinessesListingUI = (props) => {
     handleSucessRemoveBusiness,
     handleSucessAddBusiness,
     handleSucessUpdateBusiness,
+    loadBusinesses,
     onSearch,
     onBusinessRedirect,
     getPageBusinesses
@@ -146,6 +147,8 @@ const BusinessesListingUI = (props) => {
           handleOpenAddBusiness={handleOpenAddBusiness}
           handleStartTutorial={handleStartTutorial}
           handleOpenSync={handleOpenSync}
+          handleRefreshBusinesses={loadBusinesses}
+          loading={businessList.loading}
         />
         <ViewContainer>
           <BusinessActiveStateFilter

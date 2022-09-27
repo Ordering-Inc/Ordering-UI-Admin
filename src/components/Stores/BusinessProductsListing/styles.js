@@ -6,6 +6,7 @@ export const CategoryProductsContainer = styled.div`
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
+  width: calc(100% - 40px);
 
   @media print {
     display: none;
@@ -45,28 +46,57 @@ export const ActionsGroup = styled.div`
 
   > button {
     height: 41px;
+    width: 90px;
+    white-space: nowrap;
+    margin-top: 5px;
     ${props => props.theme?.rtl ? css`
       margin-left: 15px;
     ` : css`
       margin-right: 15px;
     `}
+    @media (min-width: 768px) {
+      width: unset;
+    }
   }
 
   input {
     background: ${props => props.theme.colors.secundary};
   }
 
-  > div {
-    width: 100%;
-    flex: inherit;
-    margin-top: 15px;
+  > .searchBar {
+    min-width: 100px;
+    margin-top: 5px;
   }
-     
-  @media (min-width: 992px) {
-    margin-top: 0px;
-    > div {
-      width: initial;
-      margin-top: 0;
+  > .importerGroup {
+    margin-top: 5px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 15px;
+    ` : css`
+      margin-right: 15px;
+    `}
+
+    > button {
+      width: 90px;
+      > svg {
+        display: none;
+        @media (min-width: 768px) {
+          display: inline;
+        }
+      }
+      @media (min-width: 768px) {
+        width: unset;
+      }
+    }
+  }
+
+  @keyframes spinner-content {
+    0% { transform: rotate(0) }
+    100% { transform: rotate(360deg) }
+  }
+
+  > .loading {
+    > svg {
+      animation: spinner-content 1.85s linear infinite;
     }
   }
 `

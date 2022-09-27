@@ -21,6 +21,7 @@ export const ColorBox = styled.div`
   min-width: 44px;
   margin-right: 10px;
   background-color: ${props => props.theme.colors.backgroundInfo};
+  border: 1px solid ${props => props.theme.colors.borderColor};
 
   ${props => props.theme.rtl && css`
     margin-left: 10px;

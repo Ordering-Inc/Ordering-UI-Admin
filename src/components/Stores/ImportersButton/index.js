@@ -13,7 +13,11 @@ export const ImportersButton = (props) => {
 
   return (
     <>
-      <CsvImportButtonWrapper>
+      <CsvImportButtonWrapper
+        disabledFeature={disabledImporter}
+        className={props?.customClass || ''}
+        title={disabledImporter ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+      >
         <Button
           borderRadius='8px'
           color='lightPrimary'

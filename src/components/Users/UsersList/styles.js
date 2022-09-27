@@ -34,6 +34,12 @@ export const UsersTable = styled.table`
   thead {
     tr {
       border-bottom: solid 1px ${props => props.theme.colors.disabled};
+      th {
+        white-space: nowrap;
+        &.amout-orders {
+          width: 15%;
+        }
+      }
     }
   }
 
@@ -161,6 +167,9 @@ export const UserTypeWrapper = styled.div`
   ` : css`
     border-right: 1px solid ${props => props.theme.colors.borderColor};
     margin-right: 20px;
+  `}
+  ${({ noBorder }) => noBorder && css`
+    border: none;
   `}
   > p {
     margin: 5px 0 0 0;
