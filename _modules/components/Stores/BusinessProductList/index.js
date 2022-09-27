@@ -69,6 +69,8 @@ var BusinessProductList = function BusinessProductList(props) {
       handleParentProductAdd = props.handleParentProductAdd,
       allowSpreadColumns = props.allowSpreadColumns,
       getPageProducts = props.getPageProducts,
+      productsPerPage = props.productsPerPage,
+      setProductsPerPage = props.setProductsPerPage,
       categorySelected = props.categorySelected;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -132,18 +134,13 @@ var BusinessProductList = function BusinessProductList(props) {
   var _useState7 = (0, _react.useState)(1),
       _useState8 = _slicedToArray(_useState7, 2),
       currentPage = _useState8[0],
-      setCurrentPage = _useState8[1];
+      setCurrentPage = _useState8[1]; // Get current products
 
-  var _useState9 = (0, _react.useState)(10),
+
+  var _useState9 = (0, _react.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      productsPerPage = _useState10[0],
-      setProductsPerPage = _useState10[1]; // Get current products
-
-
-  var _useState11 = (0, _react.useState)([]),
-      _useState12 = _slicedToArray(_useState11, 2),
-      currentProducts = _useState12[0],
-      setCurrentProducts = _useState12[1];
+      currentProducts = _useState10[0],
+      setCurrentProducts = _useState10[1];
 
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);

@@ -83,12 +83,12 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
     ref: containerRef
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, {
     ref: listRef
-  }, businessState.loading && _toConsumableArray(Array(6).keys()).map(function (i) {
+  }, (businessState === null || businessState === void 0 ? void 0 : businessState.loading) && _toConsumableArray(Array(6).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, {
       key: i,
       isSkeleton: true
     });
-  }), (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
+  }), !(businessState !== null && businessState !== void 0 && businessState.loading) && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && (businessState === null || businessState === void 0 ? void 0 : businessState.business.categories.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (category, i) {
     var _businessState$busine3, _businessState$busine4;

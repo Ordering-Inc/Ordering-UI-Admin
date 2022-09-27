@@ -25,8 +25,10 @@ var ColorWrapper = _styledComponents.default.div(_templateObject2 || (_templateO
 
 exports.ColorWrapper = ColorWrapper;
 
-var ColorBox = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 44px;\n  height: 44px;\n  border-radius: 50%;\n  min-width: 44px;\n  margin-right: 10px;\n  background-color: ", ";\n\n  ", "\n\n  ", "\n"])), function (props) {
+var ColorBox = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  width: 44px;\n  height: 44px;\n  border-radius: 50%;\n  min-width: 44px;\n  margin-right: 10px;\n  background-color: ", ";\n  border: 1px solid ", ";\n\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.backgroundInfo;
+}, function (props) {
+  return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n    margin-right: 0px;\n  "])));
 }, function (_ref) {

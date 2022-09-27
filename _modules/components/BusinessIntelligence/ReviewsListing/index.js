@@ -88,13 +88,21 @@ var ReviewsListing = function ReviewsListing(props) {
     onClick: function onClick() {
       return setShowOption('customers');
     }
-  }, t('CUSTOMERS', 'Customers'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
+  }, t('CUSTOMERS', 'Customers')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: showOption === 'professionals',
+    onClick: function onClick() {
+      return setShowOption('professionals');
+    }
+  }, t('PROFESSIONALS', 'Professionals'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
     parentSearchValue: searchValue
   }), showOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
     defaultUserTypesSelected: [4],
     parentSearchValue: searchValue
   }), showOption === 'customers' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
     defaultUserTypesSelected: [3],
+    parentSearchValue: searchValue
+  }), showOption === 'professionals' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
+    defaultUserTypesSelected: [8],
     parentSearchValue: searchValue
   })));
 };

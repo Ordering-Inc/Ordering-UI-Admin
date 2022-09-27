@@ -24,7 +24,8 @@ var SearchBar = function SearchBar(props) {
       search = props.search,
       placeholder = props.placeholder,
       isCustomLayout = props.isCustomLayout,
-      lazyLoad = props.lazyLoad;
+      lazyLoad = props.lazyLoad,
+      customClass = props.customClass;
   var timeout = null;
   var previousSearch;
   var el = (0, _react.useRef)();
@@ -58,7 +59,8 @@ var SearchBar = function SearchBar(props) {
     }
   }, [search]);
   return /*#__PURE__*/_react.default.createElement(_styles.SearchContainer, {
-    isCustomLayout: isCustomLayout
+    isCustomLayout: isCustomLayout,
+    className: customClass || ''
   }, /*#__PURE__*/_react.default.createElement(_IosSearch.default, null), /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     ref: el,

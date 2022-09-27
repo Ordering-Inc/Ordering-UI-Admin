@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperPagination = exports.WrapperImage = exports.WrapOrderStatusSelector = exports.Timestatus = exports.Timer = exports.Table = exports.StatusInfo = exports.PriorityDot = exports.OrdersContainer = exports.OrderType = exports.OrderTbody = exports.OrderNumberContainer = exports.LogisticStatusDot = exports.DriversInfo = exports.CustomerInfo = exports.CheckBox = exports.BusinessInfo = void 0;
+exports.WrapperPagination = exports.WrapperImage = exports.WrapOrderStatusSelector = exports.Timestatus = exports.Timer = exports.Table = exports.StatusInfo = exports.PriorityDot = exports.OrdersCountWrapper = exports.OrdersContainer = exports.OrderType = exports.OrderTbody = exports.OrderNumberContainer = exports.LogisticStatusDot = exports.DriversInfo = exports.DragTh = exports.CustomerInfo = exports.CheckBox = exports.BusinessInfo = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -123,7 +123,7 @@ var DriversInfo = _styledComponents.default.div(_templateObject22 || (_templateO
 
 exports.DriversInfo = DriversInfo;
 
-var WrapperImage = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  max-width: 45px;\n  max-height: 45px;\n  height: 45px;\n  width: 45px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    border-radius: 7.6px;\n  }\n\n  svg {\n    width: 100%;\n    height: 100%;\n    padding: 7px;\n    box-sizing: border-box;\n    border-radius: 50%;\n  }\n"])));
+var WrapperImage = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  max-width: 45px;\n  max-height: 45px;\n  height: 45px;\n  width: 45px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 7.6px;\n  position: relative;\n\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    border-radius: 7.6px;\n  }\n\n  svg {\n    width: 100%;\n    height: 100%;\n    padding: 7px;\n    box-sizing: border-box;\n    border-radius: 50%;\n  }\n"])));
 
 exports.WrapperImage = WrapperImage;
 
@@ -234,3 +234,29 @@ var Timer = _styledComponents.default.div(_templateObject49 || (_templateObject4
 });
 
 exports.Timer = Timer;
+
+var OrdersCountWrapper = _styledComponents.default.div(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  height: 16px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 50px;\n  background-color: ", ";\n  color: ", ";\n  font-weight: 400;\n  font-size: 9px;\n  line-height: 12px;\n  padding: 2px 5px;\n  position: absolute;\n  top: -9px;\n  right: -5px;\n  ", "\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.backgroundInfo;
+}, function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["\n    left: -5px;\n    right: initial;\n  "])));
+}, function (_ref19) {
+  var isNew = _ref19.isNew;
+  return isNew && (0, _styledComponents.css)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    color: ", ";\n  "])), function (props) {
+    return props.theme.colors.lightGreen;
+  }, function (props) {
+    return props.theme.colors.success;
+  });
+});
+
+exports.OrdersCountWrapper = OrdersCountWrapper;
+
+var DragTh = _styledComponents.default.th(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  ", "\n"])), function (_ref20) {
+  var selectedDragOver = _ref20.selectedDragOver;
+  return selectedDragOver && (0, _styledComponents.css)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["\n    border: 1px solid ", ";\n  "])), function (props) {
+    return props.theme.colors.primary;
+  });
+});
+
+exports.DragTh = DragTh;
