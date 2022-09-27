@@ -102,17 +102,6 @@ const SettingsUI = (props) => {
     }
   }, [categoryList?.categories])
 
-  // useEffect(() => {
-  //   if (Object.keys(configs).length > 0) {
-  //     const _configs = [
-  //       configs?.stripe_connect_sandbox,
-  //       { ...configs?.stripe_connect_client_id, name: t('CLIENT_ID_SANDBOX') },
-  //       { ...configs?.stripe_connect_client_id_sandbox, name: t('CLIENT_ID_PRODUCTION') }
-  //     ]
-  //     setStripeConnectConfigs([..._configs])
-  //   }
-  // }, [configs])
-
   return (
     <>
       <BasicSettingsContainer>

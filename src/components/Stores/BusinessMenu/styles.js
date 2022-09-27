@@ -73,6 +73,14 @@ export const MeunItem = styled.div`
     margin: 0 3px;
     font-size: 13px;
   }
+
+  ${({ isDisabledFeature }) => isDisabledFeature && css`
+      cursor: not-allowed;
+      opacity: 0.4;
+      &:hover {
+        background-color: ${props => props.theme.colors.white};
+      }
+  `}
 `
 
 export const MenuName = styled.span`
@@ -124,10 +132,21 @@ export const Tab = styled.div`
   ${({ active }) => !active && css`
     color: ${props => props.theme.colors?.lightGray};
   `}
+
+  ${({ disabledFeature }) => disabledFeature && css`
+    cursor: not-allowed;
+  `}
 `
 
 export const SearchBarWrapper = styled.div`
   margin-bottom: 15px;
+  ${({ isDisabledFeature }) => isDisabledFeature && css`
+      cursor: not-allowed;
+      > div {
+        pointer-events: none;
+        opacity: 0.4;
+      }
+  `}
 `
 export const SelectButtonGroup = styled.div`
   display: flex;

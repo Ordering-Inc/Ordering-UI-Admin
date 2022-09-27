@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LogoutButton } from '../LogoutButton'
 import {
@@ -529,10 +529,7 @@ export const SidebarMenu = (props) => {
                   )}
 
                   {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 2 && (
-                    <MenuContainer
-                      disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'marketing')}
-                      title={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'marketing') ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
-                    >
+                    <MenuContainer>
                       <ContextAwareToggle
                         eventKey='8'
                         active={
@@ -560,10 +557,7 @@ export const SidebarMenu = (props) => {
                   )}
 
                   {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 2 && (
-                    <MenuContainer
-                      disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'loyalty')}
-                      title={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'loyalty') ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
-                    >
+                    <MenuContainer>
                       <ContextAwareToggle
                         eventKey='9'
                         active={

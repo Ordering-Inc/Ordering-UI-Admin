@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, ImporterListing as ImportersListingController } from 'ordering-components-admin'
+import {
+  useLanguage,
+  useConfig,
+  useSession,
+  ImporterListing as ImportersListingController
+} from 'ordering-components-admin'
+
 import { InfoCircle } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../../styles'
 import { ImportersList } from '../ImportersList'
@@ -7,6 +13,8 @@ import { ImporterForm } from '../ImporterForm'
 import { ImporterJobForm } from '../ImporterJobForm'
 import { ImporterHelpContent } from '../ImporterHelpContent'
 import { SideBar, Modal } from '../../Shared'
+import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
+
 import {
   ImportersListingContainer,
   Header,
@@ -25,6 +33,9 @@ export const ImportersListingUI = (props) => {
     handleSuccessUpdateImporter
   } = props
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+  const [{ user }] = useSession()
+  const featureName = 'massive_importer'
   const [openNewImporter, setOpenNewImporter] = useState(false)
   const [openImporterHelp, setOpenImporterHelp] = useState(false)
   const [openImportCsv, setOpenImportCsv] = useState(false)
@@ -32,6 +43,7 @@ export const ImportersListingUI = (props) => {
   const [selectedImporterJob, setSelectedImporterJob] = useState({})
   const [importJobFormMoveDistance, setImportJobFormMoveDistance] = useState(0)
   const [openMappingDetails, setOpenMappingDetails] = useState(false)
+  const [isDisabledFeature, setIsDisabledFeature] = useState(false)
 
   const addNewImporter = () => {
     setSelectedImporter({})
@@ -58,6 +70,14 @@ export const ImportersListingUI = (props) => {
     setExtraOpen && setExtraOpen(openNewImporter)
   }, [openNewImporter])
 
+  useEffect(() => {
+    if (configs && Object.keys(configs).length > 0 && user) {
+      if (!Object.keys(configs).includes(featureName) && user?.level === 0) {
+        setIsDisabledFeature(true)
+      }
+    }
+  }, [configs])
+
   return (
     <>
       <ImportersListingContainer>
@@ -67,6 +87,7 @@ export const ImportersListingUI = (props) => {
             <IconButton
               color='primary'
               onClick={() => setOpenImporterHelp(true)}
+              disabled={isDisabledFeature}
             >
               <InfoCircle />
             </IconButton>
@@ -76,6 +97,7 @@ export const ImportersListingUI = (props) => {
               color='lightPrimary'
               borderRadius='5px'
               onClick={() => addNewImporter()}
+              disabled={isDisabledFeature}
             >
               {t('ADD_IMPORTER', 'Add importer')}
             </Button>
@@ -90,7 +112,9 @@ export const ImportersListingUI = (props) => {
           selectedImporter={selectedImporter}
           setSelectedImporter={setSelectedImporter}
           handleEditImporter={handleEditImporter}
+          isDisabledFeature={isDisabledFeature}
         />
+        {isDisabledFeature && (<DisabledFeatureAlert />)}
         {openNewImporter && (
           <SideBar
             isBorderShow={!openMappingDetails}

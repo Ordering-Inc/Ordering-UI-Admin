@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -25,7 +25,7 @@ import {
   Bag,
   Tag
 } from 'react-bootstrap-icons'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useConfig, useSession } from 'ordering-components-admin'
 import { SideBar } from '../../Shared'
 import { SettingItemUI } from '../SettingItemUI'
 import { ReportsBusinessDistance } from '../ReportsBusinessDistance'
@@ -48,6 +48,7 @@ import { ReportsPaymethodSales } from '../ReportsPaymethodSales'
 import { ReportsSaleAndCategory } from '../ReportsSaleAndCategory'
 import { ReportsAverageSales } from '../ReportsAverageSales'
 import { ReportsGeneralSales } from '../ReportsGeneralSales'
+import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 
 import {
   ReportsContainer,
@@ -57,10 +58,14 @@ import {
 
 export const Reports = (props) => {
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+  const [{ user }] = useSession()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [isOpen, setIsOpen] = useState(false)
   const [selectedReport, setSelectedReport] = useState(0)
+  const [isDisabledFeature, setIsDisabledFeature] = useState(false)
   const { width } = useWindowSize()
+  const featureName = 'advanced_reports'
   const sidebarWidth = 240
 
   const advancedReportsList = [
@@ -96,6 +101,14 @@ export const Reports = (props) => {
     setIsOpen(true)
   }
 
+  useEffect(() => {
+    if (configs && Object.keys(configs).length > 0 && user) {
+      if (!Object.keys(configs).includes(featureName) && user?.level === 0) {
+        setIsDisabledFeature(true)
+      }
+    }
+  }, [configs])
+
   return (
     <ReportsContainer>
       <HeaderTitleContainer>
@@ -109,12 +122,12 @@ export const Reports = (props) => {
         )}
         <h1>{t('ADVANCED_REPORTS', 'Advanced Reports')}</h1>
       </HeaderTitleContainer>
-      <ReportsList className='row'>
+      <ReportsList className='row' isDisabledFeature={isDisabledFeature}>
         {advancedReportsList && advancedReportsList.map((report, i) => (
           <div
             key={i}
             className='col-md-6 col-lg-4'
-            onClick={() => handleOpenSlider(report.id)}
+            onClick={() => !isDisabledFeature && handleOpenSlider(report.id)}
           >
             <SettingItemUI
               title={report.name}
@@ -126,6 +139,7 @@ export const Reports = (props) => {
           </div>
         ))}
       </ReportsList>
+      {isDisabledFeature && (<DisabledFeatureAlert />)}
       {isOpen && (
         <SideBar
           sidebarId='brand-details'
