@@ -375,3 +375,5 @@ export const orderRejectCommentList = (status) => {
 
   return list
 }
+
+export const widgetURL = 'https://orderingweb.ordering.co/'
