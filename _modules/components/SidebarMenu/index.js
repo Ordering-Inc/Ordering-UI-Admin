@@ -402,14 +402,7 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user13 = sessionState.user) === null || _sessionState$user13 === void 0 ? void 0 : _sessionState$user13.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user14 = sessionState.user) === null || _sessionState$user14 === void 0 ? void 0 : _sessionState$user14.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, {
-    disabledFeature: disabeldMenus.some(function (disabeldCategory) {
-      return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'marketing';
-    }),
-    title: disabeldMenus.some(function (disabeldCategory) {
-      return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'marketing';
-    }) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
-  }, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user13 = sessionState.user) === null || _sessionState$user13 === void 0 ? void 0 : _sessionState$user13.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user14 = sessionState.user) === null || _sessionState$user14 === void 0 ? void 0 : _sessionState$user14.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "8",
     active: location.pathname === '/marketing/promotions-enterprise' || location.pathname === '/marketing/campaign'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GraphUp, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETING', 'Marketing'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -424,14 +417,7 @@ var SidebarMenu = function SidebarMenu(props) {
         });
       }
     }, item.title);
-  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user15 = sessionState.user) === null || _sessionState$user15 === void 0 ? void 0 : _sessionState$user15.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user16 = sessionState.user) === null || _sessionState$user16 === void 0 ? void 0 : _sessionState$user16.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, {
-    disabledFeature: disabeldMenus.some(function (disabeldCategory) {
-      return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'loyalty';
-    }),
-    title: disabeldMenus.some(function (disabeldCategory) {
-      return (disabeldCategory === null || disabeldCategory === void 0 ? void 0 : disabeldCategory.menuName) === 'loyalty';
-    }) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''
-  }, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user15 = sessionState.user) === null || _sessionState$user15 === void 0 ? void 0 : _sessionState$user15.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user16 = sessionState.user) === null || _sessionState$user16 === void 0 ? void 0 : _sessionState$user16.level) !== 2 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "9",
     active: location.pathname === '/loyalty/rewards-programs' || location.pathname === '/loyalty/levels' || location.pathname === '/loyalty/reports'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Award, null), /*#__PURE__*/_react.default.createElement("span", null, t('LOYALTY', 'Loyalty'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {

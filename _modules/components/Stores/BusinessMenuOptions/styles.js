@@ -11,7 +11,7 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -83,7 +83,7 @@ var TabInnerContainer = _styledComponents.default.div(_templateObject14 || (_tem
 
 exports.TabInnerContainer = TabInnerContainer;
 
-var Tab = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  padding: 10px 0px;\n  cursor: pointer;\n  color: ", ";\n  white-space: nowrap;\n  font-size: 14px;\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
+var Tab = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  padding: 10px 0px;\n  cursor: pointer;\n  color: ", ";\n  white-space: nowrap;\n  font-size: 14px;\n  ", "\n\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
   var _props$theme$colors2;
 
   return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
@@ -99,14 +99,19 @@ var Tab = _styledComponents.default.div(_templateObject15 || (_templateObject15 
   return !active && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.lightGray;
   });
+}, function (_ref3) {
+  var disabledFeature = _ref3.disabledFeature;
+  return disabledFeature && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    border-radius: 5px;\n    cursor: not-allowed;\n  "])), function (props) {
+    return props.theme.colors.disabled;
+  });
 });
 
 exports.Tab = Tab;
 
-var BusinessMenuBasicContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
+var BusinessMenuBasicContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"])));
 
 exports.BusinessMenuBasicContainer = BusinessMenuBasicContainer;
 
-var BusinessScheduleWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  > div {\n    padding: 0px;\n\n    h1 {\n      font-size: 18px;\n      margin-top: 30px;\n    }\n\n    > div {\n      margin-top: 0px;\n    }\n  }\n"])));
+var BusinessScheduleWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  > div {\n    padding: 0px;\n\n    h1 {\n      font-size: 18px;\n      margin-top: 30px;\n    }\n\n    > div {\n      margin-top: 0px;\n    }\n  }\n"])));
 
 exports.BusinessScheduleWrapper = BusinessScheduleWrapper;

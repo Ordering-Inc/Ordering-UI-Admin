@@ -9,7 +9,7 @@ exports.UserInfo = exports.SubMenu = exports.SidebarMainContent = exports.Sideba
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -83,32 +83,42 @@ var UserInfo = _styledComponents.default.div(_templateObject13 || (_templateObje
 
 exports.UserInfo = UserInfo;
 
-var MenuContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n"])));
+var MenuContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n\n  ", "\n"])), function (_ref3) {
+  var disabledFeature = _ref3.disabledFeature;
+  return disabledFeature && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    cursor: not-allowed;\n    > button {\n      pointer-events: none;\n    }\n  "])), function (props) {
+    return props.theme.colors.disabled;
+  });
+});
 
 exports.MenuContainer = MenuContainer;
 
-var MenuContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  padding: 5px 0;\n"])));
+var MenuContent = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  padding: 5px 0;\n"])));
 
 exports.MenuContent = MenuContent;
 
-var SubMenu = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 5px 0;\n  font-size: 14px;\n  color: ", ";\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  border-radius: 8px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n  ", "\n"])), function (props) {
+var SubMenu = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 5px 0;\n  font-size: 14px;\n  color: ", ";\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  border-radius: 8px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.lightPrimary;
-}, function (_ref3) {
-  var active = _ref3.active;
-  return active && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+}, function (_ref4) {
+  var active = _ref4.active;
+  return active && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.primary;
+  });
+}, function (_ref5) {
+  var disabledFeature = _ref5.disabledFeature;
+  return disabledFeature && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    background-color: ", "!important;\n    cursor: not-allowed;\n  "])), function (props) {
+    return props.theme.colors.disabled;
   });
 }, function (props) {
   var _props$theme5;
 
-  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    padding-right: 40px;\n  "]))) : (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    padding-left: 40px;\n  "])));
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    padding-right: 40px;\n  "]))) : (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    padding-left: 40px;\n  "])));
 });
 
 exports.SubMenu = SubMenu;
 
-var LanguageSelectorContainer = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  position: relative;\n  border-radius: 8px;\n  min-height: 35px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  .options {\n    > div {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
+var LanguageSelectorContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  position: relative;\n  border-radius: 8px;\n  min-height: 35px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  .options {\n    > div {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.lightPrimary;
 });
 

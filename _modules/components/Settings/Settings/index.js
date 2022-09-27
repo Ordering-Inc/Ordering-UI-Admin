@@ -199,17 +199,7 @@ var SettingsUI = function SettingsUI(props) {
       });
       setSelectedCategory(categorySelected);
     }
-  }, [categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories]); // useEffect(() => {
-  //   if (Object.keys(configs).length > 0) {
-  //     const _configs = [
-  //       configs?.stripe_connect_sandbox,
-  //       { ...configs?.stripe_connect_client_id, name: t('CLIENT_ID_SANDBOX') },
-  //       { ...configs?.stripe_connect_client_id_sandbox, name: t('CLIENT_ID_PRODUCTION') }
-  //     ]
-  //     setStripeConnectConfigs([..._configs])
-  //   }
-  // }, [configs])
-
+  }, [categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BasicSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {

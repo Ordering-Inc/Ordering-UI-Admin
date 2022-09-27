@@ -16,11 +16,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var SettingItemUI = function SettingItemUI(props) {
   var isSkeleton = props.isSkeleton,
       active = props.active,
+      disabledFeature = props.disabledFeature,
       icon = props.icon,
       title = props.title,
       description = props.description;
   return /*#__PURE__*/_react.default.createElement(_styles.SettingItemContainer, {
-    active: !isSkeleton && active
+    active: !isSkeleton && active,
+    disabledFeature: disabledFeature
   }, /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 24,
     height: 24

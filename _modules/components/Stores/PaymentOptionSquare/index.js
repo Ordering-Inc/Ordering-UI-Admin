@@ -33,6 +33,8 @@ var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckb
 
 var _SiSquare = _interopRequireDefault(require("@meronex/icons/si/SiSquare"));
 
+var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
+
 var _styles4 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -84,7 +86,8 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
       handleSavePaymethod = props.handleSavePaymethod,
       handleChangeDataInput = props.handleChangeDataInput,
       handleChangeSanboxDataInput = props.handleChangeSanboxDataInput,
-      handleChangeSandbox = props.handleChangeSandbox;
+      handleChangeSandbox = props.handleChangeSandbox,
+      isDisabledFeature = props.isDisabledFeature;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -178,7 +181,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
-  return /*#__PURE__*/_react.default.createElement(_styles4.Container, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles4.Container, {
     id: "payment_method_square"
   }, /*#__PURE__*/_react.default.createElement(_styles4.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa2 = businessPaymethod.paymethod) === null || _businessPaymethod$pa2 === void 0 ? void 0 : _businessPaymethod$pa2.name), /*#__PURE__*/_react.default.createElement(_styles4.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
@@ -258,8 +261,9 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: site.id,
+      isDisabledFeature: isDisabledFeature,
       onClick: function onClick() {
-        return setPaymethodInfo({
+        return !isDisabledFeature && setPaymethodInfo({
           key: 'sites',
           value: site.id
         });
@@ -274,8 +278,9 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: type.value,
+      isDisabledFeature: isDisabledFeature,
       onClick: function onClick() {
-        return setPaymethodInfo({
+        return !isDisabledFeature && setPaymethodInfo({
           key: 'allowed_order_types',
           value: type.value
         });
@@ -319,7 +324,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
       });
     },
     closeOnBackdrop: false
-  }));
+  })), isDisabledFeature && (paymentTabs === 1 || paymentTabs === 2) && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null));
 };
 
 var PaymentOptionSquare = function PaymentOptionSquare(props) {

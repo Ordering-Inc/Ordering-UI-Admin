@@ -23,6 +23,8 @@ var _EnterprisePromotionList = require("../EnterprisePromotionList");
 
 var _EnterprisePromotionDetails = require("../EnterprisePromotionDetails");
 
+var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
+
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -64,38 +66,53 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)({
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+      _useConfig2 = _slicedToArray(_useConfig, 1),
+      configs = _useConfig2[0].configs;
+
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+      _useSession2 = _slicedToArray(_useSession, 1),
+      user = _useSession2[0].user;
+
+  var featureName = 'Marketing_dashboard';
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isDisabledFeature = _useState2[0],
+      setIsDisabledFeature = _useState2[1];
+
+  var _useState3 = (0, _react.useState)({
     open: false,
     content: []
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      advancedOfferModuleDisabled = _useState4[0],
-      setAdvancedOfferModuleDisabled = _useState4[1];
+      alertState = _useState4[0],
+      setAlertState = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      advancedOfferModuleDisabled = _useState6[0],
+      setAdvancedOfferModuleDisabled = _useState6[1];
 
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
       isCollapse = _useInfoShare2[0].isCollapse,
       handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      openDetails = _useState6[0],
-      setOpenDetails = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(null),
+  var _useState7 = (0, _react.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      selectedPromotion = _useState8[0],
-      setSelectedPromotion = _useState8[1];
+      openDetails = _useState8[0],
+      setOpenDetails = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(0),
+  var _useState9 = (0, _react.useState)(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      moveDistance = _useState10[0],
-      setMoveDistance = _useState10[1];
+      selectedPromotion = _useState10[0],
+      setSelectedPromotion = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(0),
+      _useState12 = _slicedToArray(_useState11, 2),
+      moveDistance = _useState12[0],
+      setMoveDistance = _useState12[1];
 
   var handleOpenDetails = function handleOpenDetails(promotion) {
     setMoveDistance(0);
@@ -116,13 +133,20 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
       content: promotionListState === null || promotionListState === void 0 ? void 0 : promotionListState.error
     });
   }, [promotionListState === null || promotionListState === void 0 ? void 0 : promotionListState.error]);
+  (0, _react.useEffect)(function () {
+    if (configs && Object.keys(configs).length > 0 && user) {
+      if (!Object.keys(configs).includes(featureName) && (user === null || user === void 0 ? void 0 : user.level) === 0) {
+        setIsDisabledFeature(false);
+      }
+    }
+  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, {
-    eventDisabled: advancedOfferModuleDisabled
+    eventDisabled: advancedOfferModuleDisabled || isDisabledFeature
   }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
@@ -135,10 +159,10 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
   }))), /*#__PURE__*/_react.default.createElement(_EnterprisePromotionList.EnterprisePromotionList, _extends({}, props, {
-    eventDisabled: advancedOfferModuleDisabled,
+    eventDisabled: advancedOfferModuleDisabled || isDisabledFeature,
     selectedPromotion: selectedPromotion,
     handleOpenDetails: handleOpenDetails
-  }))), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }))), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     defaultSideBarWidth: 600 + moveDistance,
     moveDistance: moveDistance,
     open: openDetails,
