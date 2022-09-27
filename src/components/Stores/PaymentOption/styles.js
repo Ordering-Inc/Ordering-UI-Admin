@@ -115,9 +115,12 @@ export const TabOption = styled.div`
     }
   }
 
-  ${({ disabledFeature }) => disabledFeature && css`
-    cursor: not-allowed;
-    background-color: ${props => props.theme.colors.disabled};
+  ${({ isDisabledFeature }) => isDisabledFeature && css`
+      cursor: not-allowed;
+      opacity: 0.4;
+      &:hover {
+        background-color: ${props => props.theme.colors.white};
+      }
   `}
 `
 

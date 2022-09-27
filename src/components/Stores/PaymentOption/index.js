@@ -9,6 +9,7 @@ import { useTheme } from 'styled-components'
 import { ThreeDots, XLg } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { Confirm } from '../../Shared'
+import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 
 import {
   Container,
@@ -32,7 +33,7 @@ export const PaymentOption = (props) => {
     handleSaveClick,
     businessPaymethod,
     handleDeletePaymethod,
-    isDisabledPaymentsAdvanced
+    isDisabledFeature
   } = props
 
   const theme = useTheme()
@@ -135,18 +136,14 @@ export const PaymentOption = (props) => {
           {sitesState?.sites?.length > 0 && (
             <Tab
               active={paymentTabs === 0}
-              onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(0)}
-              disabledFeature={isDisabledPaymentsAdvanced}
-              title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+              onClick={() => setPaymentTabs(0)}
             >
               {t('CHANNELS', 'Channels')}
             </Tab>
           )}
           <Tab
             active={paymentTabs === 1}
-            onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(1)}
-            disabledFeature={isDisabledPaymentsAdvanced}
-            title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+            onClick={() => setPaymentTabs(1)}
           >
             {t('ORDER_TYPE', 'Order type')}
           </Tab>
@@ -156,8 +153,8 @@ export const PaymentOption = (props) => {
           sitesState?.sites.map(site => (
             <TabOption
               key={site.id}
-              disabledFeature={isDisabledPaymentsAdvanced}
-              onClick={() => !isDisabledPaymentsAdvanced && setPaymethodInfo({ key: 'sites', value: site.id })}
+              onClick={() => !isDisabledFeature && setPaymethodInfo({ key: 'sites', value: site.id })}
+              isDisabledFeature={isDisabledFeature}
             >
               {(changesState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
                 <RiCheckboxFill className='fill' />
@@ -173,7 +170,8 @@ export const PaymentOption = (props) => {
           orderTypes.map(type => (
             <TabOption
               key={type.value}
-              onClick={() => setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
+              onClick={() => !isDisabledFeature && setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
+              isDisabledFeature={isDisabledFeature}
             >
               {(changesState?.allowed_order_types ?? businessPaymethod?.allowed_order_types)?.includes(type.value) ? (
                 <RiCheckboxFill className='fill' />
@@ -188,13 +186,13 @@ export const PaymentOption = (props) => {
         <Button
           borderRadius='5px'
           color='primary'
-          disabled={actionState.loading || Object.keys(changesState).length === 0}
+          disabled={isDisabledFeature || actionState.loading || Object.keys(changesState).length === 0}
           onClick={() => handleSaveClick(businessPaymethod.id)}
         >
           {actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
         </Button>
       </Container>
-
+      {isDisabledFeature && (<DisabledFeatureAlert />)}
       <Confirm
         width='700px'
         title={t('WEB_APPNAME', 'Ordering')}

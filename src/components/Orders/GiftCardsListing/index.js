@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles'
-import { Pagination } from '../../Shared'
+import { Pagination, SearchBar } from '../../Shared'
 
 import {
   Container,
@@ -15,7 +15,8 @@ import {
   GiftCardsTableWrapper,
   GiftCardRow,
   UserInfoContainer,
-  PaginationWarpper
+  PaginationWarpper,
+  ActionsWrapper
 } from './styles'
 
 const GiftCardsListingUI = (props) => {
@@ -24,7 +25,9 @@ const GiftCardsListingUI = (props) => {
     paginationProps,
     activeStatus,
     setActiveStatus,
-    getGiftCards
+    getGiftCards,
+    searchValue,
+    onSearch
   } = props
 
   const [, t] = useLanguage()
@@ -53,6 +56,15 @@ const GiftCardsListingUI = (props) => {
           )}
           <h1>{t('GIFT_CARD_MANAGER', 'Gift card manager')}</h1>
         </HeaderTitle>
+        <ActionsWrapper>
+          <SearchBar
+            isCustomLayout
+            lazyLoad
+            onSearch={onSearch}
+            search={searchValue}
+            placeholder={t('SEARCH', 'Search')}
+          />
+        </ActionsWrapper>
       </HeaderContainer>
       <TabsWrapper>
         <Tab
@@ -156,7 +168,11 @@ const GiftCardsListingUI = (props) => {
 export const GiftCardsListing = (props) => {
   const giftCardsProps = {
     ...props,
-    UIComponent: GiftCardsListingUI
+    UIComponent: GiftCardsListingUI,
+    isSearchById: true,
+    isSearchByAuthorName: true,
+    isSearchByAuthorEmail: true,
+    isSearchByAuthorPhone: true
   }
   return <GiftCardsListController {...giftCardsProps} />
 }
