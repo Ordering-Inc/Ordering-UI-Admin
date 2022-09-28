@@ -9,7 +9,7 @@ export const BasicSettings = (props) => {
   }
   return (
     <>
-      <HelmetTags page='basicSettings' />
+      <HelmetTags page='basic_settings' />
       <SettingsController {...basicSettingsProps} />
     </>
   )
