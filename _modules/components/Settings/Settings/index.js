@@ -129,23 +129,25 @@ var SettingsUI = function SettingsUI(props) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
+  var settingPageList = {
+    key_basic: 'basic_settings',
+    key_operation: 'operation_settings',
+    key_plugin: 'plugin_settings'
+  };
+
   var onBasicSettingsRedirect = function onBasicSettingsRedirect(_ref) {
     var category = _ref.category;
 
     if (!category) {
-      if (settingsType === 'key_basic') return events.emit('go_to_page', {
-        page: 'basicSettings',
-        replace: true
-      });
-      if (settingsType === 'key_operation') return events.emit('go_to_page', {
-        page: 'operationSettings',
+      return events.emit('go_to_page', {
+        page: settingPageList[settingsType],
         replace: true
       });
     }
 
     if (category) {
       events.emit('go_to_page', {
-        page: settingsType === 'key_basic' ? 'basicSettings' : 'operationSettings',
+        page: settingPageList[settingsType],
         search: "?category=".concat(category),
         replace: true
       });
@@ -205,7 +207,7 @@ var SettingsUI = function SettingsUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings '))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 'key_basic' && t('BASIC_SETTINGS', 'Basic settings '), settingsType === 'key_operation' && t('OPERATION_SETTINGS', 'Operation settings '), settingsType === 'key_plugin' && t('PLUGIN_SETTINGS', 'Plugin settings '))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, {
     className: "row"
   }, settingsType === 'key_basic' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",

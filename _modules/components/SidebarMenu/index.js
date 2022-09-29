@@ -163,30 +163,35 @@ var SidebarMenu = function SidebarMenu(props) {
   var settingsSubMenus = [{
     id: 1,
     title: t('BASIC_SETTINGS', 'Basic settings'),
-    pageName: 'basicSettings',
+    pageName: 'basic_settings',
     url: '/settings/basic'
   }, {
     id: 2,
     title: t('OPERATION_SETTINGS', 'Operation settings'),
-    pageName: 'operationSettings',
+    pageName: 'operation_settings',
     url: '/settings/operation'
   }, {
     id: 3,
+    title: t('PLUGIN_SETTINGS', 'Plugin settings'),
+    pageName: 'plugin_settings',
+    url: '/settings/plugin'
+  }, {
+    id: 4,
     title: t('CMS_HEADING', 'CMS'),
     pageName: 'pages',
     url: '/settings/pages'
   }, {
-    id: 4,
+    id: 5,
     title: t('INTEGRATION', 'Integrations'),
     pageName: 'integrations',
     url: '/settings/integrations'
   }, {
-    id: 5,
+    id: 6,
     title: t('COUNTRIES_CITIES', 'Countries/Cities'),
     pageName: 'places',
     url: '/settings/places'
   }, {
-    id: 6,
+    id: 7,
     title: t('LANGUAGE_MANAGER', 'Language manager'),
     pageName: 'language',
     url: '/settings/language'
