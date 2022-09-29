@@ -2,15 +2,15 @@ import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { Settings as SettingsController } from '../../../src/components/Settings'
 
-export const BasicSettings = (props) => {
-  const basicSettingsProps = {
+export const PluginSettings = (props) => {
+  const pluginSettingsProps = {
     ...props,
-    settingsType: 'key_basic'
+    settingsType: 'key_plugin'
   }
   return (
     <>
-      <HelmetTags page='basic_settings' />
-      <SettingsController {...basicSettingsProps} />
+      <HelmetTags page='plugin_settings' />
+      <SettingsController {...pluginSettingsProps} />
     </>
   )
 }

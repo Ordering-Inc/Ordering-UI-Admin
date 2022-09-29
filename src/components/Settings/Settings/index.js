@@ -48,14 +48,19 @@ const SettingsUI = (props) => {
   const categoryId = category && category.split('=')[1]
   const [events] = useEvent()
 
+  const settingPageList = {
+    key_basic: 'basic_settings',
+    key_operation: 'operation_settings',
+    key_plugin: 'plugin_settings'
+  }
+
   const onBasicSettingsRedirect = ({ category }) => {
     if (!category) {
-      if (settingsType === 'key_basic') return events.emit('go_to_page', { page: 'basicSettings', replace: true })
-      if (settingsType === 'key_operation') return events.emit('go_to_page', { page: 'operationSettings', replace: true })
+      return events.emit('go_to_page', { page: settingPageList[settingsType], replace: true })
     }
     if (category) {
       events.emit('go_to_page', {
-        page: settingsType === 'key_basic' ? 'basicSettings' : 'operationSettings',
+        page: settingPageList[settingsType],
         search: `?category=${category}`,
         replace: true
       })
@@ -115,7 +120,9 @@ const SettingsUI = (props) => {
             </IconButton>
           )}
           <h1>
-            {settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')}
+            {settingsType === 'key_basic' && t('BASIC_SETTINGS', 'Basic settings ')}
+            {settingsType === 'key_operation' && t('OPERATION_SETTINGS', 'Operation settings ')}
+            {settingsType === 'key_plugin' && t('PLUGIN_SETTINGS', 'Plugin settings ')}
           </h1>
         </HeaderTitleContainer>
         <ContentWrapper className='row'>
