@@ -62,7 +62,7 @@ var EditTaxManager = function EditTaxManager(props) {
       setAlertState = _useState2[1];
 
   var formMethods = (0, _reactHookForm.useForm)();
-  var positiveNumberFields = ['rate', 'fixed'];
+  var positiveNumberFields = ['rate', 'fixed', 'percentage'];
   var defaultInputs = [{
     field: 'name',
     placeholder: t('NAME', 'Name'),
@@ -120,7 +120,7 @@ var EditTaxManager = function EditTaxManager(props) {
     placeholder: t('PERCENTAGE', 'Percentage'),
     required: t('FEE_PERCENTAGE_REQUIRED', 'Fee percentage is required'),
     pattern: {
-      value: /^-?\d*\.?\d*$/,
+      value: /^\d*\.?\d*$/,
       message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('PERCENTAGE', 'Percentage'))
     },
     validate: percentageValidationNumber

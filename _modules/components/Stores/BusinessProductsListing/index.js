@@ -306,7 +306,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   }))), showSelectHeader && /*#__PURE__*/_react.default.createElement(_BusinessSelectHeader.BusinessSelectHeader, {
     close: handleClose,
     isOpen: showSelectHeader,
-    changeBusinessState: changeBusinessState
+    changeBusinessState: changeBusinessState,
+    noActiveStatusCondition: true
   })), slug && /*#__PURE__*/_react.default.createElement(_styles2.Breadcrumb, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "business",
     onClick: function onClick() {
