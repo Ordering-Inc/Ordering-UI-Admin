@@ -92,7 +92,6 @@ var OrdersTable = function OrdersTable(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
       _useUtils2 = _slicedToArray(_useUtils, 1),
       _useUtils2$ = _useUtils2[0],
-      parsePrice = _useUtils2$.parsePrice,
       parseDate = _useUtils2$.parseDate,
       optimizeImage = _useUtils2$.optimizeImage,
       getTimeAgo = _useUtils2$.getTimeAgo;
