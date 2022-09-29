@@ -58,7 +58,7 @@ export const OrdersTable = (props) => {
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ parsePrice, parseDate, optimizeImage, getTimeAgo }] = useUtils()
+  const [{ parseDate, optimizeImage, getTimeAgo }] = useUtils()
   const [isAllChecked, setIsAllChecked] = useState(false)
   const [, setCurrentTime] = useState()
   const [dragOverd, setDragOverd] = useState('')
