@@ -227,6 +227,7 @@ const BusinessProductsListingUI = (props) => {
                         close={handleClose}
                         isOpen={showSelectHeader}
                         changeBusinessState={changeBusinessState}
+                        noActiveStatusCondition
                       />
                     )}
                   </BusinessSelector>
