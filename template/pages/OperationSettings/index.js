@@ -10,7 +10,7 @@ export const OperationSettings = (props) => {
 
   return (
     <>
-      <HelmetTags page='operationSettings' />
+      <HelmetTags page='operation_settings' />
       <SettingsController {...operationSettingsProps} />
     </>
   )

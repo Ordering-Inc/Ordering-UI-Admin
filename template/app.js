@@ -62,6 +62,7 @@ import { FreeProductsList } from './pages/FreeProductsList'
 import { PurchasedProductsList } from './pages/PurchasedProductsList'
 import { Professionals } from './pages/Professionals'
 import { QueryLogin } from '../src/components/Login'
+import { PluginSettings } from './pages/PluginSettings'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -266,6 +267,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/settings/operation' allowedLevels={[0]}>
                       <OperationSettings />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/settings/plugin' allowedLevels={[0]}>
+                      <PluginSettings />
                     </ProtectedRoute>
                     <ProtectedRoute path='/settings/pages' allowedLevels={[0]}>
                       <Cms />
