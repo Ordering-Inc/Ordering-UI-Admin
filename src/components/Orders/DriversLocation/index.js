@@ -18,12 +18,16 @@ export const DriversLocation = (props) => {
   const [configState] = useConfig()
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
-  const [mapCenter, setMapCenter] = useState({ lat: 19.4326, lng: -99.1332 })
+  const defaultCenter = {
+    lat: Number(configState?.configs?.location_default_latitude?.value || 40.7744146),
+    lng: Number(configState?.configs?.location_default_longitude?.value || -73.9678064)
+  }
+
+  const [mapCenter, setMapCenter] = useState(defaultCenter)
   const [mapZoom, setMapZoom] = useState(10)
   const [mapLoaded, setMapLoaded] = useState(true)
   const [mapFitted, setMapFitted] = useState(false)
 
-  const defaultCenter = { lat: 19.4326, lng: -99.1332 }
   const defaultZoom = 10
   const mapRef = useRef(null)
 
