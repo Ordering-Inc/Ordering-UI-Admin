@@ -70,7 +70,12 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
       businessesList = props.businessesList,
       handleSelectBusiness = props.handleSelectBusiness,
       handleSelectAllBusiness = props.handleSelectAllBusiness,
-      handleDeletePromotion = props.handleDeletePromotion;
+      handleDeletePromotion = props.handleDeletePromotion,
+      selectedUserIds = props.selectedUserIds,
+      handleSelectUser = props.handleSelectUser,
+      selectedLoyaltyLevelIds = props.selectedLoyaltyLevelIds,
+      handleSelectLoyaltyLevel = props.handleSelectLoyaltyLevel,
+      handleSelectAllLoyaltyLevels = props.handleSelectAllLoyaltyLevels;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -109,6 +114,12 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
   }, {
     key: 'businesses',
     content: t('CONTROL_PANEL_BUSINESS', 'Business')
+  }, {
+    key: 'users',
+    content: t('USERS', '')
+  }, {
+    key: 'loyalty_levels',
+    content: t('LOYALTY_LEVELS', 'Loyalty Levels')
   }, {
     key: 'rules',
     content: t('RULES', 'Rules')
@@ -206,6 +217,7 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     handleUpdateClick: handleUpdateClick,
     handleAddPromotion: handleAddPromotion
   })), selectedOption === 'sites' && /*#__PURE__*/_react.default.createElement(_Shared.SelectSites, {
+    isAllChecked: selectedSitesIds.length === 0,
     isAddMode: isAddMode,
     allSites: sitesState.sites,
     selectedSitesIds: selectedSitesIds,
@@ -233,6 +245,21 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
     handleUpdateClick: handleUpdateClick,
     handleAddClick: handleAddPromotion
+  }), selectedOption === 'users' && /*#__PURE__*/_react.default.createElement(_Shared.SelectUsers, {
+    isAddMode: isAddMode,
+    isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
+    selectedUserIds: selectedUserIds,
+    handleSelectUser: handleSelectUser,
+    handleUpdateClick: handleUpdateClick,
+    handleAddPromotion: handleAddPromotion
+  }), selectedOption === 'loyalty_levels' && /*#__PURE__*/_react.default.createElement(_Shared.SelectLoyaltyLevels, {
+    isAddMode: isAddMode,
+    isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
+    selectedLoyaltyLevelIds: selectedLoyaltyLevelIds,
+    handleSelectLoyaltyLevel: handleSelectLoyaltyLevel,
+    handleSelectAllLoyaltyLevels: handleSelectAllLoyaltyLevels,
+    handleUpdateClick: handleUpdateClick,
+    handleAddPromotion: handleAddPromotion
   }), selectedOption === 'rules' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionRules.EnterprisePromotionRules, _extends({}, props, {
     handleUpdateClick: handleUpdateClick,
     handleAddPromotion: handleAddPromotion

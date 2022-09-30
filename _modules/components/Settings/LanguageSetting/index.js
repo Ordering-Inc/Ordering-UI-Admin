@@ -93,11 +93,12 @@ var LanguageSettingUI = function LanguageSettingUI(props) {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "name"
-    }, field.name), /*#__PURE__*/_react.default.createElement("div", {
+    }, field.name), /*#__PURE__*/_react.default.createElement(_styles2.RadioWrapper, {
       className: field.default ? 'checked default' : 'default',
       onClick: function onClick() {
         return setLanguage(field);
-      }
+      },
+      isDisabled: !field.enabled
     }, field.default ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircle, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "status"
     }, /*#__PURE__*/_react.default.createElement(_styles.Switch, {

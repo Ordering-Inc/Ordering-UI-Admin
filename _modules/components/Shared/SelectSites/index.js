@@ -42,7 +42,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SelectSites = function SelectSites(props) {
-  var isAddMode = props.isAddMode,
+  var isAllChecked = props.isAllChecked,
+      isAddMode = props.isAddMode,
       isDisabled = props.isDisabled,
       selectedSitesIds = props.selectedSitesIds,
       allSites = props.allSites,
@@ -102,9 +103,9 @@ var SelectSites = function SelectSites(props) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ChannelItem, {
       key: site.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      checked: selectedSitesIds.includes(site.id),
+      checked: isAllChecked || selectedSitesIds.includes(site.id),
       onChange: function onChange(e) {
-        return handleSelectSite(e.target.checked, site.id);
+        return handleSelectSite(isAllChecked ? true : e.target.checked, site.id);
       }
     }), /*#__PURE__*/_react.default.createElement("span", null, site.name));
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
