@@ -173,6 +173,7 @@ const EnterprisePromotionDetailsUI = (props) => {
         )}
         {selectedOption === 'sites' && (
           <SelectSites
+            isAllChecked={selectedSitesIds.length === 0}
             isAddMode={isAddMode}
             allSites={sitesState.sites}
             selectedSitesIds={selectedSitesIds}
