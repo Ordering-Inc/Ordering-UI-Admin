@@ -7,7 +7,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { ThreeDots } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { Switch } from '../../../styles'
-import { DragScroll, Alert, Confirm, SelectBusinesses, SelectSites } from '../../Shared'
+import { DragScroll, Alert, Confirm, SelectBusinesses, SelectSites, SelectUsers, SelectLoyaltyLevels } from '../../Shared'
 import { EnterprisePromotionGeneralDetails } from '../EnterprisePromotionGeneralDetails'
 import { EnterprisePromotionRules } from '../EnterprisePromotionRules'
 
@@ -37,7 +37,13 @@ const EnterprisePromotionDetailsUI = (props) => {
     businessesList,
     handleSelectBusiness,
     handleSelectAllBusiness,
-    handleDeletePromotion
+    handleDeletePromotion,
+    selectedUserIds,
+    handleSelectUser,
+
+    selectedLoyaltyLevelIds,
+    handleSelectLoyaltyLevel,
+    handleSelectAllLoyaltyLevels
   } = props
 
   const theme = useTheme()
@@ -50,6 +56,8 @@ const EnterprisePromotionDetailsUI = (props) => {
     { key: 'general', content: t('GENERAL', 'General') },
     { key: 'sites', content: t('SITES', 'Sites') },
     { key: 'businesses', content: t('CONTROL_PANEL_BUSINESS', 'Business') },
+    { key: 'users', content: t('USERS', '') },
+    { key: 'loyalty_levels', content: t('LOYALTY_LEVELS', 'Loyalty Levels') },
     { key: 'rules', content: t('RULES', 'Rules') }
   ]
 
@@ -187,6 +195,27 @@ const EnterprisePromotionDetailsUI = (props) => {
             isDisabled={Object.keys(formState.changes).length === 0 || actionState.loading}
             handleUpdateClick={handleUpdateClick}
             handleAddClick={handleAddPromotion}
+          />
+        )}
+        {selectedOption === 'users' && (
+          <SelectUsers
+            isAddMode={isAddMode}
+            isDisabled={Object.keys(formState.changes).length === 0 || actionState.loading}
+            selectedUserIds={selectedUserIds}
+            handleSelectUser={handleSelectUser}
+            handleUpdateClick={handleUpdateClick}
+            handleAddPromotion={handleAddPromotion}
+          />
+        )}
+        {selectedOption === 'loyalty_levels' && (
+          <SelectLoyaltyLevels
+            isAddMode={isAddMode}
+            isDisabled={Object.keys(formState.changes).length === 0 || actionState.loading}
+            selectedLoyaltyLevelIds={selectedLoyaltyLevelIds}
+            handleSelectLoyaltyLevel={handleSelectLoyaltyLevel}
+            handleSelectAllLoyaltyLevels={handleSelectAllLoyaltyLevels}
+            handleUpdateClick={handleUpdateClick}
+            handleAddPromotion={handleAddPromotion}
           />
         )}
         {selectedOption === 'rules' && (

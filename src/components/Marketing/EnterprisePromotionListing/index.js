@@ -37,7 +37,7 @@ const EnterprisePromotionListingUI = (props) => {
   const [moveDistance, setMoveDistance] = useState(0)
 
   const handleOpenDetails = (promotion) => {
-    setMoveDistance(0)
+    setMoveDistance(0) 
     setSelectedPromotion(promotion)
     setOpenDetails(true)
   }
