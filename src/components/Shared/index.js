@@ -22,6 +22,8 @@ import { SelectBusinessCategories } from './SelectBusinessCategories'
 import { SelectBusinessProducts } from './SelectBusinessProducts'
 import { SelectBusinesses } from './SelectBusinesses'
 import { SelectSites } from './SelectSites'
+import { SelectUsers } from './SelectUsers'
+import { SelectLoyaltyLevels } from './SelectLoyaltyLevels'
 import { SideBar } from './SideBar'
 import { SpinnerLoader } from './SpinnerLoader'
 import SpreadSheetEditor from './SpreadSheetEditor'
@@ -54,6 +56,8 @@ export {
   SelectBusinessProducts,
   SelectBusinesses,
   SelectSites,
+  SelectUsers,
+  SelectLoyaltyLevels,
   SideBar,
   SpinnerLoader,
   SpreadSheetEditor,
