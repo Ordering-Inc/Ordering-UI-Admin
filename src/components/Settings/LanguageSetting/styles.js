@@ -56,3 +56,13 @@ export const FieldContainer = styled.div`
     align-items: center;
   }
 `
+
+export const RadioWrapper = styled.div`
+  ${({ isDisabled }) => isDisabled && css`
+    pointer-events: none;
+    svg {
+      color: ${props => props.theme.colors.disabled};
+      opacity: 0.6;
+    }
+  `}
+`
