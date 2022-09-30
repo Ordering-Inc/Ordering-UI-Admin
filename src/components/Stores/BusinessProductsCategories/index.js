@@ -46,13 +46,13 @@ export const BusinessProductsCategories = (props) => {
         </HeaderContainer>
         <ListContent ref={listRef}>
           {
-            businessState.loading && (
+            businessState?.loading && (
               [...Array(6).keys()].map(i => (
                 <SingleBusinessSubCateogries key={i} isSkeleton />
               ))
             )
           }
-          {businessState?.business?.categories?.length > 0 && (
+          {!businessState?.loading && businessState?.business?.categories?.length > 0 && (
             businessState?.business.categories.sort((a, b) => a.rank - b.rank).map((category, i) => (
               <SingleBusinessSubCateogries
                 {...props}

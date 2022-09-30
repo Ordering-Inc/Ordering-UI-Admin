@@ -63,10 +63,12 @@ export const HeaderTitleContainer = styled.div`
 export const ActionsWrapper = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   > button {
     height: 41px;
     width: 90px;
     white-space: nowrap;
+    margin-top: 5px;
     ${props => props.theme?.rtl ? css`
       margin-left: 15px;
     ` : css`
@@ -74,6 +76,42 @@ export const ActionsWrapper = styled.div`
     `}
     @media (min-width: 768px) {
       width: unset;
+    }
+  }
+  > .searchBar {
+    min-width: 100px;
+    margin-top: 5px;
+  }
+  > .importerGroup {
+    margin-top: 5px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 15px;
+    ` : css`
+      margin-right: 15px;
+    `}
+
+    > button {
+      width: 90px;
+      > svg {
+        display: none;
+        @media (min-width: 768px) {
+          display: inline;
+        }
+      }
+      @media (min-width: 768px) {
+        width: unset;
+      }
+    }
+  }
+
+  @keyframes spinner-content {
+    0% { transform: rotate(0) }
+    100% { transform: rotate(360deg) }
+  }
+
+  > .loading {
+    > svg {
+      animation: spinner-content 1.85s linear infinite;
     }
   }
 `

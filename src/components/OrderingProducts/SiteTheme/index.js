@@ -76,9 +76,19 @@ const SiteThemeUI = (props) => {
     setThemeOptions(_themeOptions)
   }, [themesList])
 
+  const recursiveAssign = (a, b) => {
+    if (Object(b) !== b) return b
+    if (Object(a) !== a) a = {}
+    for (const key in b) {
+      a[key] = recursiveAssign(a[key], b[key])
+    }
+    return a
+  }
+
   useEffect(() => {
     if (siteThemesState.loading || siteThemesState.result.length === 0) return
-    setThemeValues(siteThemesState.result[0]?.values)
+    const _themeValues = recursiveAssign(siteThemesState.result[0]?.theme?.values_default, siteThemesState.result[0]?.values)
+    setThemeValues(_themeValues)
     const structure = siteThemesState.result[0]?.theme?.structure || {}
     setThemeStructure(structure)
     const _pageOptions = getOptions(Object.keys(structure))
@@ -129,16 +139,19 @@ const SiteThemeUI = (props) => {
                           {Object.keys(components[block]).filter(option => option !== 'components' && option !== 'value_type').map(option => {
                             const optionObject = components[block][option]
                             return (
-                              <ThemeOption
-                                key={option}
-                                name={option}
-                                optionObject={optionObject}
-                                valueObject={themeValues[selectedPage].components[block][option]}
-                                path={[selectedPage, 'components', block, option].join('.')}
-                                themeValues={themeValues}
-                                setThemeValues={setThemeValues}
-                                handleAddThemeGallery={handleAddThemeGallery}
-                              />
+                              <React.Fragment key={option}>
+                                {typeof themeValues[selectedPage].components?.[block]?.[option] !== 'undefined' && (
+                                  <ThemeOption
+                                    name={option}
+                                    optionObject={optionObject}
+                                    valueObject={themeValues[selectedPage].components[block][option]}
+                                    path={[selectedPage, 'components', block, option].join('.')}
+                                    themeValues={themeValues}
+                                    setThemeValues={setThemeValues}
+                                    handleAddThemeGallery={handleAddThemeGallery}
+                                  />
+                                )}
+                              </React.Fragment>
                             )
                           })}
                           {components[block]?.components && (

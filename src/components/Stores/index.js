@@ -29,6 +29,7 @@ import { BusinessTaxAndFees } from './BusinessTaxAndFees'
 import { BusinessTypes } from './BusinessTypes'
 import { BusinessVideos } from './BusinessVideos'
 import { BusinessWebhooks } from './BusinessWebhooks'
+import { BusinessWidgets } from './BusinessWidgets'
 import { SeoOptions } from './SeoOptions'
 import { AddBusinessForm } from './AddBusinessForm'
 import { WizardBusiness } from './WizardBusiness'
@@ -128,6 +129,7 @@ export {
   BusinessTypes,
   BusinessVideos,
   BusinessWebhooks,
+  BusinessWidgets,
   SeoOptions,
   AddBusinessForm,
   WizardBusiness,

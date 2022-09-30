@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
+import { List as MenuIcon, LifePreserver, ArrowRepeat } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../../styles'
 import { SearchBar } from '../../Shared'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
@@ -19,7 +19,9 @@ export const BusinessesListingHeader = (props) => {
     onSearch,
     handleOpenAddBusiness,
     handleStartTutorial,
-    handleOpenSync
+    handleOpenSync,
+    handleRefreshBusinesses,
+    loading
   } = props
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -54,7 +56,16 @@ export const BusinessesListingHeader = (props) => {
         </OverlayTrigger>
       </HeaderTitleContainer>
       <ActionsWrapper>
-        <ImportersButton />
+        <Button
+          color='lightPrimary'
+          borderRadius='8px'
+          onClick={() => handleRefreshBusinesses()}
+          className={loading ? 'loading' : ''}
+        >
+          {t('REFRESH', 'Refresh')}
+          <ArrowRepeat size={16} style={{ marginLeft: 5 }} />
+        </Button>
+        <ImportersButton customClass='importerGroup' />
         <Button
           color='lightPrimary'
           borderRadius='8px'
@@ -75,6 +86,7 @@ export const BusinessesListingHeader = (props) => {
           onSearch={onSearch}
           search={searchValue}
           placeholder={t('SEARCH', 'Search')}
+          customClass='searchBar'
         />
       </ActionsWrapper>
     </HeaderContainer>

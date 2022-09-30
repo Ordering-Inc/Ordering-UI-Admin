@@ -30,6 +30,8 @@ export const BusinessProductList = (props) => {
     handleParentProductAdd,
     allowSpreadColumns,
     getPageProducts,
+    productsPerPage,
+    setProductsPerPage,
     categorySelected
   } = props
   const [, t] = useLanguage()
@@ -87,7 +89,6 @@ export const BusinessProductList = (props) => {
 
   // Change page
   const [currentPage, setCurrentPage] = useState(1)
-  const [productsPerPage, setProductsPerPage] = useState(10)
 
   // Get current products
   const [currentProducts, setCurrentProducts] = useState([])

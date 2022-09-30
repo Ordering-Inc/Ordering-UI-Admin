@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useConfig, useEvent, Settings as SettingsController } from 'ordering-components-admin'
+import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
 import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill } from 'react-bootstrap-icons'
@@ -28,12 +28,10 @@ const SettingsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const { search } = useLocation()
 
   const [isOpenDescription, setIsOpenDescription] = useState(false)
-  const [disabeldCategoryList, setDisabeldCategoryList] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
   const [openSitesAuthSettings, setOpenSitesAuthSettings] = useState(false)
@@ -50,14 +48,19 @@ const SettingsUI = (props) => {
   const categoryId = category && category.split('=')[1]
   const [events] = useEvent()
 
+  const settingPageList = {
+    key_basic: 'basic_settings',
+    key_operation: 'operation_settings',
+    key_plugin: 'plugin_settings'
+  }
+
   const onBasicSettingsRedirect = ({ category }) => {
     if (!category) {
-      if (settingsType === 'key_basic') return events.emit('go_to_page', { page: 'basicSettings', replace: true })
-      if (settingsType === 'key_operation') return events.emit('go_to_page', { page: 'operationSettings', replace: true })
+      return events.emit('go_to_page', { page: settingPageList[settingsType], replace: true })
     }
     if (category) {
       events.emit('go_to_page', {
-        page: settingsType === 'key_basic' ? 'basicSettings' : 'operationSettings',
+        page: settingPageList[settingsType],
         search: `?category=${category}`,
         replace: true
       })
@@ -104,14 +107,6 @@ const SettingsUI = (props) => {
     }
   }, [categoryList?.categories])
 
-  useEffect(() => {
-    if (configs && Object.keys(configs).length > 0) {
-      const featureList = [{ configKeyName: 'cash_wallet', settingName: 'wallet' }]
-      const disabledFeatureList = featureList.filter(feature => !Object.keys(configs).includes(feature?.configKeyName))
-      setDisabeldCategoryList(disabledFeatureList)
-    }
-  }, [configs])
-
   return (
     <>
       <BasicSettingsContainer>
@@ -125,7 +120,9 @@ const SettingsUI = (props) => {
             </IconButton>
           )}
           <h1>
-            {settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')}
+            {settingsType === 'key_basic' && t('BASIC_SETTINGS', 'Basic settings ')}
+            {settingsType === 'key_operation' && t('OPERATION_SETTINGS', 'Operation settings ')}
+            {settingsType === 'key_plugin' && t('PLUGIN_SETTINGS', 'Plugin settings ')}
           </h1>
         </HeaderTitleContainer>
         <ContentWrapper className='row'>
@@ -208,14 +205,12 @@ const SettingsUI = (props) => {
                 <React.Fragment key={i}>
                   <SettingItemWrapper
                     className='col-md-4 col-sm-6'
-                    title={disabeldCategoryList.some(disabeldCategory => disabeldCategory?.settingName === category?.key) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
-                    onClick={() => !(disabeldCategoryList.some(disabeldCategory => disabeldCategory?.settingName === category?.key)) && handleOpenDescription(category)}
+                    onClick={() => handleOpenDescription(category)}
                   >
                     <SettingItemUI
                       title={category?.name}
                       description={category?.description}
                       icon={category?.image ? <img src={category?.image} /> : <GearFill />}
-                      disabledFeature={disabeldCategoryList.some(disabeldCategory => disabeldCategory?.settingName === category?.key)}
                       active={selectedCategory?.id === category?.id}
                     />
                   </SettingItemWrapper>
