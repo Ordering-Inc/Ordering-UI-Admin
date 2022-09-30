@@ -231,7 +231,7 @@ export const App = () => {
                       <AdvancedReports />
                     </ProtectedRoute>
 
-                    <ProtectedRoute path='/delivery/drivers-list' allowedLevels={[0, 5]}>
+                    <ProtectedRoute path='/delivery/drivers-list' allowedLevels={[0, 5, 2]}>
                       <DeliveryDriversList />
                     </ProtectedRoute>
                     <ProtectedRoute path='/delivery/drivers-managers' allowedLevels={[0]}>
