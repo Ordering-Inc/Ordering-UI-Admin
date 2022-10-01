@@ -549,7 +549,7 @@ export const SidebarMenu = (props) => {
 
                   {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 2 && (
                     <MenuContainer
-                      disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'marketing')}
+                      // disabledFeature={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'marketing')}
                       title={disabeldMenus.some(disabeldCategory => disabeldCategory?.menuName === 'marketing') ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
                     >
                       <ContextAwareToggle

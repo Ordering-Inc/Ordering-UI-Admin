@@ -2,7 +2,7 @@
   "app_id": "ordering-admin-react",
   "app_name": "Ordering Admin",
   "api": {
-    "url": "https://apiv4.ordering.co",
+    "url": "https://apiv4-staging.ordering.co",
     "language": "en",
     "version": "v400"
   },

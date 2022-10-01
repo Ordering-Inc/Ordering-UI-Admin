@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useLanguage, CampaignEmail as CampaignEmailController } from 'ordering-components-admin'
+import React, { useState, useEffect } from 'react'
+import { useLanguage, useEvent, CampaignEmail as CampaignEmailController } from 'ordering-components-admin'
 import { Input, Button } from '../../../styles'
 import $ from 'jquery'
 import ReactSummernote from 'react-summernote'
@@ -20,7 +20,8 @@ import {
   EmailPreviewContent,
   ButtonWrapper,
   WrapperEditor,
-  Preview
+  Preview,
+  Description
 } from './styles'
 
 const CampaignEmailUI = (props) => {
@@ -41,9 +42,11 @@ const CampaignEmailUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [openModal, setOpenModal] = useState(null)
   const [editorContext, setEditorContext] = useState(null)
+  const [emailBody, setEmailBody] = useState(null)
 
   const handleCloseModal = () => {
     setOpenModal(false)
@@ -118,8 +121,8 @@ const CampaignEmailUI = (props) => {
   const insertLink = (context) => {
     const ui = $.summernote.ui
     const button = ui.button({
-      contents: '<i class="note-icon-link"/>',
-      tooltip: 'link',
+      contents: '<button style="background: #2C7BE5; border: none; font-size: 12px; color: white;">BUTTON</button>',
+      tooltip: 'link-button',
       class: 'note-btn',
       click: () => {
         setEditorContext(context)
@@ -130,9 +133,21 @@ const CampaignEmailUI = (props) => {
     return button.render()
   }
 
+  const handleGoToPage = () => {
+    events.emit('go_to_page', { page: 'operationSettings', search: '?category=10' })
+  }
+
+  useEffect(() => {
+    if (!emailBody) return
+    handleChangeContact('body', emailBody)
+  }, [emailBody])
+
   return (
     <>
       <Container>
+        <Description>
+          {t('SMTP_SETTINGS_LINK_DESC', 'You need to complete SMTP configuration first, you can do it here:')} <span onClick={() => handleGoToPage()}>{t('EMAIL_SETTINGS', 'Email settings')}</span>
+        </Description>
         <InputWrapper>
           <label>{t('TITLE', 'Title')}</label>
           <Input
@@ -146,8 +161,9 @@ const CampaignEmailUI = (props) => {
           <label>{t('MESSAGES', 'Messages')}</label>
           <WrapperEditor>
             <ReactSummernote
-              value={contactState?.changes?.contact_data?.body || ''}
+              value={contactState?.changes?.contact_data?.body ?? '<p><br></p>'}
               placeholder={t('EMAIL_CONTENT', 'Email content')}
+              onInit={({ summernote }) => summernote('code', (contactState?.changes?.contact_data?.body ?? '<p><br></p>'))}
               options={{
                 height: 350,
                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
@@ -166,7 +182,7 @@ const CampaignEmailUI = (props) => {
                   insertImage: insertImage
                 }
               }}
-              onChange={content => handleChangeContact('body', content)}
+              onChange={content => setEmailBody(content)}
             />
           </WrapperEditor>
         </InputWrapper>

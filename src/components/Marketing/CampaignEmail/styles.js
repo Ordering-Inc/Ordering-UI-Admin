@@ -116,3 +116,16 @@ export const WrapperEditor = styled.div`
 export const Preview = styled.div`
   overflow: hidden;
 `
+
+export const Description = styled.div`
+  font-size: 14px;
+  margin: 10px 0px;
+  span {
+    color: ${props => props.theme.colors.primary};
+    cursor: pointer;
+    transition: all 0.3s linear;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
