@@ -30,7 +30,8 @@ export const ProductMainDetails = (props) => {
     taxes,
     setTaxes,
     fees,
-    setFees
+    setFees,
+    cleanFormState
   } = props
   const [, t] = useLanguage()
 
@@ -104,6 +105,7 @@ export const ProductMainDetails = (props) => {
           handlechangeImageProductCategory={handlechangeImage}
           handleProductCategoryChangeInput={handleChangeInput}
           isProductSeo
+          cleanFormState={cleanFormState}
         />
       )}
     </Container>
