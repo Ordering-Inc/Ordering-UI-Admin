@@ -58,7 +58,8 @@ var SeoOptions = function SeoOptions(props) {
       handlechangeImageProductCategory = props.handlechangeImageProductCategory,
       isBusinessSeo = props.isBusinessSeo,
       isProductSeo = props.isProductSeo,
-      isCategorySeo = props.isCategorySeo;
+      isCategorySeo = props.isCategorySeo,
+      cleanFormState = props.cleanFormState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -195,6 +196,13 @@ var SeoOptions = function SeoOptions(props) {
     titleRef.current.value = data === null || data === void 0 ? void 0 : data.name;
     descriptionRef.current.value = data === null || data === void 0 ? void 0 : data.description;
   }, [isSameInfo, isProductSeo]);
+  (0, _react.useEffect)(function () {
+    return function () {
+      cleanFormState && cleanFormState({
+        changes: {}
+      });
+    };
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEO_IMAGE', 'SEO Image')), /*#__PURE__*/_react.default.createElement(_styles2.SEOImage, {
     onClick: function onClick() {
       return handleClickImage();

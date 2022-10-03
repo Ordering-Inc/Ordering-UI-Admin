@@ -79,7 +79,8 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
       handleUpdateClick = props.handleUpdateClick,
       handleChangeFormState = props.handleChangeFormState,
       handleSuccessUpdate = props.handleSuccessUpdate,
-      handleChangeRibbon = props.handleChangeRibbon;
+      handleChangeRibbon = props.handleChangeRibbon,
+      cleanFormState = props.cleanFormState;
 
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
@@ -201,7 +202,8 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     taxes: taxes,
     setTaxes: setTaxes,
     fees: fees,
-    setFees: setFees
+    setFees: setFees,
+    cleanFormState: cleanFormState
   }), showOption === 'service_details' && /*#__PURE__*/_react.default.createElement(_ServiceDetail.ServiceDetail, {
     product: productState === null || productState === void 0 ? void 0 : productState.product,
     formState: formState,
