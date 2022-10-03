@@ -29,7 +29,8 @@ export const SeoOptions = (props) => {
     handlechangeImageProductCategory,
     isBusinessSeo,
     isProductSeo,
-    isCategorySeo
+    isCategorySeo,
+    cleanFormState
   } = props
 
   const [, t] = useLanguage()
@@ -128,6 +129,12 @@ export const SeoOptions = (props) => {
     titleRef.current.value = data?.name
     descriptionRef.current.value = data?.description
   }, [isSameInfo, isProductSeo])
+
+  useEffect(() => {
+    return () => {
+      cleanFormState && cleanFormState({ changes: {} })
+    }
+  }, [])
 
   return (
     <>
