@@ -25,8 +25,6 @@ var _ImporterHelpContent = require("../ImporterHelpContent");
 
 var _Shared = require("../../Shared");
 
-var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
-
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -63,16 +61,6 @@ var ImportersListingUI = function ImportersListingUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
-
-  var featureName = 'massive_importer';
-
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       openNewImporter = _useState2[0],
@@ -108,11 +96,6 @@ var ImportersListingUI = function ImportersListingUI(props) {
       openMappingDetails = _useState14[0],
       setOpenMappingDetails = _useState14[1];
 
-  var _useState15 = (0, _react.useState)(false),
-      _useState16 = _slicedToArray(_useState15, 2),
-      isDisabledFeature = _useState16[0],
-      setIsDisabledFeature = _useState16[1];
-
   var addNewImporter = function addNewImporter() {
     setSelectedImporter({});
     setOpenImportCsv(false);
@@ -137,26 +120,17 @@ var ImportersListingUI = function ImportersListingUI(props) {
   (0, _react.useEffect)(function () {
     setExtraOpen && setExtraOpen(openNewImporter);
   }, [openNewImporter]);
-  (0, _react.useEffect)(function () {
-    if (configs && Object.keys(configs).length > 0 && user) {
-      if (!Object.keys(configs).includes(featureName) && (user === null || user === void 0 ? void 0 : user.level) === 0) {
-        setIsDisabledFeature(true);
-      }
-    }
-  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ImportersListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleContent, null, t('IMPORTERS', 'Importers')), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary",
     onClick: function onClick() {
       return setOpenImporterHelp(true);
-    },
-    disabled: isDisabledFeature
+    }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null))), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "5px",
     onClick: function onClick() {
       return addNewImporter();
-    },
-    disabled: isDisabledFeature
+    }
   }, t('ADD_IMPORTER', 'Add importer')))), /*#__PURE__*/_react.default.createElement(_ImportersList.ImportersList, {
     importerList: importerList,
     paginationDetail: paginationDetail,
@@ -165,9 +139,8 @@ var ImportersListingUI = function ImportersListingUI(props) {
     handleDeleteImporter: handleDeleteImporter,
     selectedImporter: selectedImporter,
     setSelectedImporter: setSelectedImporter,
-    handleEditImporter: handleEditImporter,
-    isDisabledFeature: isDisabledFeature
-  }), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), openNewImporter && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    handleEditImporter: handleEditImporter
+  }), openNewImporter && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     isBorderShow: !openMappingDetails,
     open: openNewImporter,
     defaultSideBarWidth: openMappingDetails ? 1000 : 500,

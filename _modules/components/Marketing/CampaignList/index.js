@@ -60,8 +60,7 @@ var CampaignList = function CampaignList(props) {
       setPaginationProps = props.setPaginationProps,
       handleOpenDetail = props.handleOpenDetail,
       selectedCampaign = props.selectedCampaign,
-      handleUpdateCampaign = props.handleUpdateCampaign,
-      isDisabledFeature = props.isDisabledFeature;
+      handleUpdateCampaign = props.handleUpdateCampaign;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -137,9 +136,7 @@ var CampaignList = function CampaignList(props) {
     handleOpenDetail(campaign);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
-    isDisabledFeature: isDisabledFeature
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Table, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Table, {
     isRelative: (campaignList === null || campaignList === void 0 ? void 0 : (_campaignList$campaig = campaignList.campaigns) === null || _campaignList$campaig === void 0 ? void 0 : _campaignList$campaig.length) > 5
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.campaign) && /*#__PURE__*/_react.default.createElement("th", null, t('CAMPAIGN', 'Campaign')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.contact_type) && /*#__PURE__*/_react.default.createElement("th", null, t('CONTACT_TYPE', 'Contact type')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("th", null, t('AUDIENCE', 'Audience')), /*#__PURE__*/_react.default.createElement("th", {
     className: "allow-colums action"
@@ -197,9 +194,8 @@ var CampaignList = function CampaignList(props) {
     })))));
   }))), !campaignList.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
     onClick: function onClick() {
-      return !isDisabledFeature && handleOpenDetail({});
-    },
-    isDisabledFeature: isDisabledFeature
+      return handleOpenDetail({});
+    }
   }, t('ADD_NEW_CAMPAIGN', 'Add new campaign')), (campaignList === null || campaignList === void 0 ? void 0 : (_campaignList$campaig2 = campaignList.campaigns) === null || _campaignList$campaig2 === void 0 ? void 0 : _campaignList$campaig2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage,
     totalPages: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages,

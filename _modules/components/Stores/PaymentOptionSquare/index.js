@@ -33,8 +33,6 @@ var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckb
 
 var _SiSquare = _interopRequireDefault(require("@meronex/icons/si/SiSquare"));
 
-var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
-
 var _styles4 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -86,8 +84,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
       handleSavePaymethod = props.handleSavePaymethod,
       handleChangeDataInput = props.handleChangeDataInput,
       handleChangeSanboxDataInput = props.handleChangeSanboxDataInput,
-      handleChangeSandbox = props.handleChangeSandbox,
-      isDisabledFeature = props.isDisabledFeature;
+      handleChangeSandbox = props.handleChangeSandbox;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -261,9 +258,8 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: site.id,
-      isDisabledFeature: isDisabledFeature,
       onClick: function onClick() {
-        return !isDisabledFeature && setPaymethodInfo({
+        return setPaymethodInfo({
           key: 'sites',
           value: site.id
         });
@@ -278,9 +274,8 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: type.value,
-      isDisabledFeature: isDisabledFeature,
       onClick: function onClick() {
-        return !isDisabledFeature && setPaymethodInfo({
+        return setPaymethodInfo({
           key: 'allowed_order_types',
           value: type.value
         });
@@ -324,7 +319,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
       });
     },
     closeOnBackdrop: false
-  })), isDisabledFeature && (paymentTabs === 1 || paymentTabs === 2) && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null));
+  })));
 };
 
 var PaymentOptionSquare = function PaymentOptionSquare(props) {

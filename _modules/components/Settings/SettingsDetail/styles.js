@@ -9,7 +9,7 @@ exports.VideoContainer = exports.SubCategoryWrapper = exports.SkeletonWrapper = 
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -80,45 +80,32 @@ var VideoContainer = _styledComponents.default.div(_templateObject20 || (_templa
 
 exports.VideoContainer = VideoContainer;
 
-var AllSetting = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  user-select: none;\n  cursor: pointer;\n  margin-top: 36px;\n  ", "\n  span {\n    font-weight: 600;\n    font-size: 14px;\n    ", "\n  }\n  svg {\n    ", "\n  }\n"])), function (_ref2) {
-  var isDisabledFeature = _ref2.isDisabledFeature;
-  return (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    cursor: ", ";\n  "])), function (props) {
-    return isDisabledFeature ? 'not-allowed' : 'pointer';
-  });
-}, function (_ref3) {
-  var isDisabledFeature = _ref3.isDisabledFeature;
-  return (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), function (props) {
-    var _props$theme$colors2;
-
-    return isDisabledFeature ? (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.disabled : '#03459E';
-  });
-}, function (_ref4) {
-  var isDisabledFeature = _ref4.isDisabledFeature;
-  return (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), function (props) {
-    var _props$theme$colors3;
-
-    return isDisabledFeature ? (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.disabled : '#03459E';
-  });
+var AllSetting = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  user-select: none;\n  cursor: pointer;\n  margin-top: 36px;\n  cursor: pointer;\n  span {\n    font-weight: 600;\n    font-size: 14px;\n    color: ", ";\n  }\n  svg {\n    color: ", ";\n    margin-left: 5px;\n    transition: 0.2s linear;\n    ", "\n  }\n  &:hover {\n    svg {\n      transform: translateX(3px);\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n      margin-right: 5px;\n      margin-left: 0px;\n    "])));
 });
 
 exports.AllSetting = AllSetting;
 
-var MoreInfo = _styledComponents.default.span(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  user-select: none;\n  color: ", ";\n  text-decoration: underline;\n  margin-top: 40px;\n  font-size: 14px;\n"])), function (props) {
-  var _props$theme$colors4;
+var MoreInfo = _styledComponents.default.span(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  user-select: none;\n  color: ", ";\n  text-decoration: underline;\n  margin-top: 40px;\n  font-size: 14px;\n"])), function (props) {
+  var _props$theme$colors2;
 
-  return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.primary;
+  return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.primary;
 });
 
 exports.MoreInfo = MoreInfo;
 
-var IframeWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  padding-top: 35px;\n"])));
+var IframeWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  padding-top: 35px;\n"])));
 
 exports.IframeWrapper = IframeWrapper;
 
-var SubCategoryWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n"])));
+var SubCategoryWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n"])));
 
 exports.SubCategoryWrapper = SubCategoryWrapper;
 
-var SkeletonWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral([""])));
+var SkeletonWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral([""])));
 
 exports.SkeletonWrapper = SkeletonWrapper;

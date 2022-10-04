@@ -63,8 +63,6 @@ var _ReportsAverageSales = require("../ReportsAverageSales");
 
 var _ReportsGeneralSales = require("../ReportsGeneralSales");
 
-var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
-
 var _styles2 = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -88,14 +86,6 @@ var Reports = function Reports(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
-
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
       isCollapse = _useInfoShare2[0].isCollapse,
@@ -111,15 +101,9 @@ var Reports = function Reports(props) {
       selectedReport = _useState4[0],
       setSelectedReport = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isDisabledFeature = _useState6[0],
-      setIsDisabledFeature = _useState6[1];
-
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
       width = _useWindowSize.width;
 
-  var featureName = 'advanced_reports';
   var sidebarWidth = 240;
   var advancedReportsList = [{
     id: 1,
@@ -233,27 +217,19 @@ var Reports = function Reports(props) {
     setIsOpen(true);
   };
 
-  (0, _react.useEffect)(function () {
-    if (configs && Object.keys(configs).length > 0 && user) {
-      if (!Object.keys(configs).includes(featureName) && (user === null || user === void 0 ? void 0 : user.level) === 0) {
-        setIsDisabledFeature(true);
-      }
-    }
-  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_styles2.ReportsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('ADVANCED_REPORTS', 'Advanced Reports'))), /*#__PURE__*/_react.default.createElement(_styles2.ReportsList, {
-    className: "row",
-    isDisabledFeature: isDisabledFeature
+    className: "row"
   }, advancedReportsList && advancedReportsList.map(function (report, i) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i,
       className: "col-md-6 col-lg-4",
       onClick: function onClick() {
-        return !isDisabledFeature && handleOpenSlider(report.id);
+        return handleOpenSlider(report.id);
       }
     }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
       title: report.name // description={t('DISTANCE_DESC')}
@@ -262,7 +238,7 @@ var Reports = function Reports(props) {
       icon: report.icon,
       active: selectedReport === report.id
     }));
-  })), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), isOpen && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  })), isOpen && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "brand-details",
     defaultSideBarWidth: width - sidebarWidth,
     open: isOpen,

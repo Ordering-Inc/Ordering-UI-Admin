@@ -27,8 +27,6 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _Shared = require("../../Shared");
 
-var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
-
 var _styles2 = require("./styles");
 
 var _styles3 = require("../BusinessMenu/styles");
@@ -80,8 +78,7 @@ var PaymentOptionStripeDirect = function PaymentOptionStripeDirect(props) {
       handleChangeInput = props.handleChangeInput,
       handleSaveClick = props.handleSaveClick,
       businessPaymethod = props.businessPaymethod,
-      handleDeletePaymethod = props.handleDeletePaymethod,
-      isDisabledFeature = props.isDisabledFeature;
+      handleDeletePaymethod = props.handleDeletePaymethod;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -246,12 +243,11 @@ var PaymentOptionStripeDirect = function PaymentOptionStripeDirect(props) {
     return /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
       key: site.id,
       onClick: function onClick() {
-        return !isDisabledFeature && setPaymethodInfo({
+        return setPaymethodInfo({
           key: 'sites',
           value: site.id
         });
-      },
-      isDisabledFeature: isDisabledFeature
+      }
     }, (_ref2 = (_changesState$sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites) !== null && _changesState$sites !== void 0 ? _changesState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
       return s.id;
     })) !== null && _ref2 !== void 0 && _ref2.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
@@ -262,9 +258,8 @@ var PaymentOptionStripeDirect = function PaymentOptionStripeDirect(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
       key: type.value,
-      isDisabledFeature: isDisabledFeature,
       onClick: function onClick() {
-        return !isDisabledFeature && setPaymethodInfo({
+        return setPaymethodInfo({
           key: 'allowed_order_types',
           value: type.value
         });
@@ -279,7 +274,7 @@ var PaymentOptionStripeDirect = function PaymentOptionStripeDirect(props) {
     onClick: function onClick() {
       return handleSaveClick(businessPaymethod.id);
     }
-  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), isDisabledFeature && (paymentTabs === 1 || paymentTabs === 2) && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,
