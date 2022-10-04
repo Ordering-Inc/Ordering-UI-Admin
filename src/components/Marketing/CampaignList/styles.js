@@ -25,14 +25,6 @@ export const Container = styled.div`
       max-height: calc(100vh - 345px);
     `}
   }
-
-  ${({ isDisabledFeature }) => isDisabledFeature && css`
-    opacity: 0.5;
-    cursor: not-allowed;
-    > table {
-      pointer-events: none;
-    }
-  `}
 `
 
 export const Table = styled.table`
@@ -208,12 +200,4 @@ export const AddNewPageButton = styled.div`
   &:hover {
     color: ${props => props.theme.colors.primary};
   }
-
-  ${({ isDisabledFeature }) => isDisabledFeature && css`
-    opacity: 0.5;
-    cursor: not-allowed;
-    &:hover {
-      color: ${props => props.theme.colors.lightGray};
-    }
-  `}
 `

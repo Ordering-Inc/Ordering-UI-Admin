@@ -23,8 +23,7 @@ export const CampaignList = (props) => {
     setPaginationProps,
     handleOpenDetail,
     selectedCampaign,
-    handleUpdateCampaign,
-    isDisabledFeature
+    handleUpdateCampaign
   } = props
 
   const [, t] = useLanguage()
@@ -113,7 +112,7 @@ export const CampaignList = (props) => {
 
   return (
     <>
-      <Container isDisabledFeature={isDisabledFeature}>
+      <Container>
         <Table isRelative={campaignList?.campaigns?.length > 5}>
           <thead>
             <tr>
@@ -258,8 +257,7 @@ export const CampaignList = (props) => {
       {!campaignList.loading && (
         <PagesBottomContainer>
           <AddNewPageButton
-            onClick={() => !isDisabledFeature && handleOpenDetail({})}
-            isDisabledFeature={isDisabledFeature}
+            onClick={() => handleOpenDetail({})}
           >
             {t('ADD_NEW_CAMPAIGN', 'Add new campaign')}
           </AddNewPageButton>
