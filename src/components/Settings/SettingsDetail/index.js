@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { XLg, LifePreserver } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { useLanguage, useConfig, useSession } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
 import { IconButton } from '../../../styles'
 import { Modal, NotFoundSource } from '../../Shared'
 import MdcPlayCircle from '@meronex/icons/mdc/MdcPlayCircle'
@@ -10,7 +10,6 @@ import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import { EmailSetting } from '../EmailSetting'
 import { NotificationSetting } from '../NotificationSetting'
 import { SettingsList } from '../SettingsList'
-import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 import {
   Container,
   DescriptionContent,
@@ -43,9 +42,6 @@ export const SettingsDetail = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraInfoOpen, setExtraInfoOpen] = useState(false)
   const [extraSubCatOpen, setExtraSubCatOpen] = useState(false)
-  const [isDisabledFeature, setIsDisabledFeature] = useState(false)
-  const [{ configs }] = useConfig()
-  const [{ user }] = useSession()
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
 
@@ -132,22 +128,6 @@ export const SettingsDetail = (props) => {
     return () => document.removeEventListener('keydown', onCloseSidebar)
   }, [open])
 
-  useEffect(() => {
-    if (configs && Object.keys(configs).length > 0 && user && category) {
-      const featureList = { wallet: 'cash_wallet' }
-
-      if (Object.keys(featureList).every(feature => feature !== category?.key)) {
-        setIsDisabledFeature(false)
-        return
-      }
-      if (!Object.keys(configs).includes(featureList[category?.key]) && user?.level === 0) {
-        setIsDisabledFeature(true)
-        return
-      }
-      setIsDisabledFeature(false)
-    }
-  }, [configs, category])
-
   return (
     <Container
       id='catDescription'
@@ -197,14 +177,13 @@ export const SettingsDetail = (props) => {
                 </video>
               </VideoContainer>
             )}
-            <AllSetting onClick={() => !isDisabledFeature && handleExtraOpen(false)} isDisabledFeature={isDisabledFeature}>
+            <AllSetting onClick={() => handleExtraOpen(false)}>
               <span>{t('SETTINGS', 'All settings')}</span>
               <BsArrowRight />
             </AllSetting>
           </Content>
         )}
       </DescriptionContent>
-      {isDisabledFeature && (<DisabledFeatureAlert />)}
       {extraInfoOpen && category.support_url && (
         <>
           {width >= 1000 ? (

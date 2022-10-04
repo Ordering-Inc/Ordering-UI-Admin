@@ -318,7 +318,7 @@ export const ProductDetatilsInformation = (props) => {
               if (e.which === 32) { e.preventDefault() }
             }}
           />
-          <Wrapper
+          {/* <Wrapper
             style={{ paddingTop: 10 }}
           >
             <Button
@@ -333,7 +333,7 @@ export const ProductDetatilsInformation = (props) => {
             >
               {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
             </Button>
-          </Wrapper>
+          </Wrapper> */}
         </InputWrapper>
 
         <InventoryWrapper>

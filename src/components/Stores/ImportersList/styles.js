@@ -1,15 +1,7 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
-export const ImportListContainer = styled.div`
-  ${({ isDisabledFeature }) => isDisabledFeature && css`
-    cursor: not-allowed;
-    opacity: 0.5;
-    > div {
-      pointer-events: none;
-    }
-  `}
-`
+export const ImportListContainer = styled.div``
 export const ImportersTableWrapper = styled.div`
 `
 

@@ -17,8 +17,7 @@ export const CampaignHeader = (props) => {
   const {
     searchValue,
     handleChangeSearch,
-    handleOpenDetail,
-    isDisabledFeature
+    handleOpenDetail
   } = props
 
   const [, t] = useLanguage()
@@ -37,7 +36,7 @@ export const CampaignHeader = (props) => {
         )}
         <HeaderTitle>{t('CAMPAIGN', 'Campaign')}</HeaderTitle>
       </HeaderSection>
-      <TopRightSection isDisabledFeature={isDisabledFeature}>
+      <TopRightSection>
         <WrapperSearch>
           <Button
             borderRadius='8px'
