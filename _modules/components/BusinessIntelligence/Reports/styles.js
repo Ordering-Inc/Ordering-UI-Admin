@@ -9,7 +9,7 @@ exports.ReportsList = exports.ReportsContainer = exports.HeaderTitleContainer = 
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -31,13 +31,6 @@ var HeaderTitleContainer = _styledComponents.default.div(_templateObject2 || (_t
 
 exports.HeaderTitleContainer = HeaderTitleContainer;
 
-var ReportsList = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n  ", "\n"])), function (_ref) {
-  var isDisabledFeature = _ref.isDisabledFeature;
-  return isDisabledFeature && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    > div {\n      > div {\n        cursor: not-allowed;\n        background-color: ", ";\n        &:hover {\n          background-color: ", ";\n        }\n      }\n    }\n  "])), function (props) {
-    return props.theme.colors.disabled;
-  }, function (props) {
-    return props.theme.colors.disabled;
-  });
-});
+var ReportsList = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-top: 10px;\n"])));
 
 exports.ReportsList = ReportsList;

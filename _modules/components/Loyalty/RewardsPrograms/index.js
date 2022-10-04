@@ -25,8 +25,6 @@ var _PointsWallet = require("../PointsWallet");
 
 var _PointsWalletLevels = require("../PointsWalletLevels");
 
-var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -56,40 +54,25 @@ var RewardsProgramsUI = function RewardsProgramsUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
-
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
       isCollapse = _useInfoShare2[0].isCollapse,
       handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
 
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
-      isDisabledFeature = _useState2[0],
-      setIsDisabledFeature = _useState2[1];
+      showOption = _useState2[0],
+      setShowOption = _useState2[1];
 
-  var featureName = 'loyalty_levels_points';
-
-  var _useState3 = (0, _react.useState)(null),
+  var _useState3 = (0, _react.useState)(0),
       _useState4 = _slicedToArray(_useState3, 2),
-      showOption = _useState4[0],
-      setShowOption = _useState4[1];
+      moveDistance = _useState4[0],
+      setMoveDistance = _useState4[1];
 
   var _useState5 = (0, _react.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
-      moveDistance = _useState6[0],
-      setMoveDistance = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(0),
-      _useState8 = _slicedToArray(_useState7, 2),
-      levelMoveDistance = _useState8[0],
-      setLevelMoveDistance = _useState8[1];
+      levelMoveDistance = _useState6[0],
+      setLevelMoveDistance = _useState6[1];
 
   var hanldeClosePointsWallet = function hanldeClosePointsWallet() {
     setMoveDistance(0);
@@ -101,29 +84,20 @@ var RewardsProgramsUI = function RewardsProgramsUI(props) {
     setShowOption(null);
   };
 
-  (0, _react.useEffect)(function () {
-    if (configs && Object.keys(configs).length > 0 && user) {
-      if (!Object.keys(configs).includes(featureName) && (user === null || user === void 0 ? void 0 : user.level) === 0) {
-        setIsDisabledFeature(true);
-      }
-    }
-  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('LOYALTY', 'Loyalty'))), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyListContainer, {
-    isDisabledFeature: isDisabledFeature
-  }, /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('LOYALTY', 'Loyalty'))), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
     onClick: function onClick() {
-      return !isDisabledFeature && setShowOption('points_wallet');
+      return setShowOption('points_wallet');
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Wallet, null)), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('POINTS_WALLET', 'Points wallet')), /*#__PURE__*/_react.default.createElement("p", null, t('POINTS_WALLET_DESCRIPTION', 'Points wallet general and per business setup.')))), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
     onClick: function onClick() {
-      return !isDisabledFeature && setShowOption('levels');
+      return setShowOption('levels');
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartSteps, null)), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('LEVELS', 'Levels')), /*#__PURE__*/_react.default.createElement("p", null, t('LEVELS_DESCRIPTION', 'Setup different loyalty levels for your users.')))))), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), showOption === 'points_wallet' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartSteps, null)), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('LEVELS', 'Levels')), /*#__PURE__*/_react.default.createElement("p", null, t('LEVELS_DESCRIPTION', 'Setup different loyalty levels for your users.')))))), showOption === 'points_wallet' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "loyaltyWallet",
     open: showOption === 'points_wallet',
     onClose: hanldeClosePointsWallet,

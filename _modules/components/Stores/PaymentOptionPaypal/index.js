@@ -27,8 +27,6 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _Shared = require("../../Shared");
 
-var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
-
 var _styles2 = require("./styles");
 
 var _styles3 = require("../BusinessMenu/styles");
@@ -82,8 +80,7 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
       handleSaveClick = props.handleSaveClick,
       businessPaymethod = props.businessPaymethod,
       handleChangeBusinessPaymentState = props.handleChangeBusinessPaymentState,
-      handleDeletePaymethod = props.handleDeletePaymethod,
-      isDisabledFeature = props.isDisabledFeature;
+      handleDeletePaymethod = props.handleDeletePaymethod;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -247,9 +244,8 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles4.TabOption, {
       key: site.id,
-      isDisabledFeature: isDisabledFeature,
       onClick: function onClick() {
-        return !isDisabledFeature && setPaymethodInfo({
+        return setPaymethodInfo({
           key: 'sites',
           value: site.id
         });
@@ -264,9 +260,8 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles4.TabOption, {
       key: type.value,
-      isDisabledFeature: isDisabledFeature,
       onClick: function onClick() {
-        return !isDisabledFeature && setPaymethodInfo({
+        return setPaymethodInfo({
           key: 'allowed_order_types',
           value: type.value
         });
@@ -281,7 +276,7 @@ var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
     onClick: function onClick() {
       return handleSaveClick(businessPaymethod.id);
     }
-  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), isDisabledFeature && (paymentTabs === 1 || paymentTabs === 2) && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,

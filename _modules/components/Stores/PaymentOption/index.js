@@ -29,8 +29,6 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _Shared = require("../../Shared");
 
-var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
-
 var _styles3 = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -78,8 +76,7 @@ var PaymentOption = function PaymentOption(props) {
       actionState = props.actionState,
       handleSaveClick = props.handleSaveClick,
       businessPaymethod = props.businessPaymethod,
-      handleDeletePaymethod = props.handleDeletePaymethod,
-      isDisabledFeature = props.isDisabledFeature;
+      handleDeletePaymethod = props.handleDeletePaymethod;
   var theme = (0, _styledComponents.useTheme)();
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -200,12 +197,11 @@ var PaymentOption = function PaymentOption(props) {
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: site.id,
       onClick: function onClick() {
-        return !isDisabledFeature && setPaymethodInfo({
+        return setPaymethodInfo({
           key: 'sites',
           value: site.id
         });
-      },
-      isDisabledFeature: isDisabledFeature
+      }
     }, (_ref2 = (_changesState$sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites) !== null && _changesState$sites !== void 0 ? _changesState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
       return s.id;
     })) !== null && _ref2 !== void 0 && _ref2.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
@@ -217,23 +213,22 @@ var PaymentOption = function PaymentOption(props) {
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: type.value,
       onClick: function onClick() {
-        return !isDisabledFeature && setPaymethodInfo({
+        return setPaymethodInfo({
           key: 'allowed_order_types',
           value: type.value
         });
-      },
-      isDisabledFeature: isDisabledFeature
+      }
     }, (_ref3 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref3 !== void 0 && _ref3.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, type.text));
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "5px",
     color: "primary",
-    disabled: isDisabledFeature || actionState.loading || Object.keys(changesState).length === 0,
+    disabled: actionState.loading || Object.keys(changesState).length === 0,
     onClick: function onClick() {
       return handleSaveClick(businessPaymethod.id);
     }
-  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+  }, actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,

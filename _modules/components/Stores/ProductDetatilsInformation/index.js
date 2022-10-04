@@ -379,21 +379,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
         e.preventDefault();
       }
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles2.Wrapper, {
-    style: {
-      paddingTop: 10
-    }
-  }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "lightPrimary",
-    borderRadius: "7.6px",
-    type: "button",
-    disabled: formState.loading,
-    onClick: function onClick() {
-      return setAutoGenerate(_objectSpread(_objectSpread({}, autoGenerateCode), {}, {
-        isAutoGenerate: true
-      }));
-    }
-  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')))), /*#__PURE__*/_react.default.createElement(_styles2.InventoryWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('INVENTORY', 'Inventory')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InventoryWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('INVENTORY', 'Inventory')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (product === null || product === void 0 ? void 0 : product.inventoried) || false,
     onChange: function onChange(val) {
       return handleChangeFormState({

@@ -19,8 +19,6 @@ var _CampaignList = require("../CampaignList");
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
-
 var _styles = require("./styles");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -58,21 +56,6 @@ var CampaignListingUI = function CampaignListingUI(props) {
       selectedCampaign = _useState4[0],
       setSelectedCampaign = _useState4[1];
 
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
-  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
-
-  var featureName = 'Marketing_dashboard';
-
-  var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isDisabledFeature = _useState6[0],
-      setIsDisabledFeature = _useState6[1];
-
   var handleOpenDetail = function handleOpenDetail(action) {
     setSelectedCampaign(action);
     setIsOpenDetail(true);
@@ -83,21 +66,12 @@ var CampaignListingUI = function CampaignListingUI(props) {
     setSelectedCampaign(null);
   };
 
-  (0, _react.useEffect)(function () {
-    if (configs && Object.keys(configs).length > 0 && user) {
-      if (!Object.keys(configs).includes(featureName) && (user === null || user === void 0 ? void 0 : user.level) === 0) {
-        setIsDisabledFeature(false);
-      }
-    }
-  }, [configs]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CampaignListingContainer, null, /*#__PURE__*/_react.default.createElement(_CampaignHeader.CampaignHeader, _extends({}, props, {
-    handleOpenDetail: handleOpenDetail,
-    isDisabledFeature: isDisabledFeature
+    handleOpenDetail: handleOpenDetail
   })), /*#__PURE__*/_react.default.createElement(_CampaignList.CampaignList, _extends({}, props, {
     handleOpenDetail: handleOpenDetail,
-    selectedCampaign: selectedCampaign,
-    isDisabledFeature: isDisabledFeature
-  }))), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), isOpenDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    selectedCampaign: selectedCampaign
+  }))), isOpenDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "campaignDetail",
     open: isOpenDetail,
     onClose: function onClose() {

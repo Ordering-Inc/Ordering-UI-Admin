@@ -52,8 +52,7 @@ var ImportersList = function ImportersList(props) {
       handleDeleteImporter = props.handleDeleteImporter,
       selectedImporter = props.selectedImporter,
       setSelectedImporter = props.setSelectedImporter,
-      handleEditImporter = props.handleEditImporter,
-      isDisabledFeature = props.isDisabledFeature;
+      handleEditImporter = props.handleEditImporter;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -69,9 +68,7 @@ var ImportersList = function ImportersList(props) {
     createImporterJob(importer);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_styles2.ImportListContainer, {
-    isDisabledFeature: isDisabledFeature
-  }, /*#__PURE__*/_react.default.createElement(_styles2.ImportersTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ImpotersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_styles2.ImportListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImportersTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ImpotersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", {
     colSpan: "2"
   }, t('ACTION', 'Action')))), importerList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ImoportTbody, {
