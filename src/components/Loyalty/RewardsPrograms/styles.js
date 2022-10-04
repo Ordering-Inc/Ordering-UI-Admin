@@ -41,16 +41,6 @@ export const HeaderTitleContainer = styled.div`
 export const LoyaltyListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-
-  > div {
-    ${({ isDisabledFeature }) => isDisabledFeature && css`
-      cursor: not-allowed;
-      background-color: ${props => props.theme.colors.disabled};
-      &:hover {
-        background-color: ${props => props.theme.colors.disabled};
-      }
-    `}
-  }
 `
 
 export const LoyaltyItemWrapper = styled.div`

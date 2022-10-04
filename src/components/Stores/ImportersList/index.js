@@ -27,8 +27,7 @@ export const ImportersList = (props) => {
     handleDeleteImporter,
     selectedImporter,
     setSelectedImporter,
-    handleEditImporter,
-    isDisabledFeature
+    handleEditImporter
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -47,7 +46,7 @@ export const ImportersList = (props) => {
   }
 
   return (
-    <ImportListContainer isDisabledFeature={isDisabledFeature}>
+    <ImportListContainer>
       <ImportersTableWrapper>
         <ImpotersTable>
           <thead>
