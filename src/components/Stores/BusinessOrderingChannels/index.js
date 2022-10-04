@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Button, Input } from '../../../styles'
 import { Alert } from '../../Shared'
@@ -7,12 +6,13 @@ import { Alert } from '../../Shared'
 import {
   BusinessOrderingChannelsContainer,
   Title,
-  ToggleItemWrapper,
-  AccordionTitle,
   BusinessCustomSlugContainer,
   FormControl,
-  Label
+  Label,
+  Tabs,
+  Tab
 } from './styles'
+import { BusinessWidgets } from '../BusinessWidgets'
 
 export const BusinessOrderingChannels = (props) => {
   const {
@@ -24,7 +24,13 @@ export const BusinessOrderingChannels = (props) => {
 
   const [, t] = useLanguage()
   const [slug, setSlug] = useState('')
+  const [selectedOption, setSelectedOption] = useState('custom_slug')
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
+
+  const optionList = [
+    { key: 'custom_slug', name: t('CUSTOM_SLUG', 'Custom slug') },
+    { key: 'widgets', name: t('WIDGETS', 'Widgets') }
+  ]
 
   const changeCustomslug = () => {
     if (slug === '') {
@@ -49,6 +55,10 @@ export const BusinessOrderingChannels = (props) => {
     })
   }
 
+  const handleChangeOption = (key) => {
+    setSelectedOption(key)
+  }
+
   useEffect(() => {
     if (formState.loading || Object.keys(formState?.changes).length === 0) return
     handleUpdateBusinessClick()
@@ -62,25 +72,35 @@ export const BusinessOrderingChannels = (props) => {
     <>
       <BusinessOrderingChannelsContainer>
         <Title>{t('EXTENSIONS', 'Extensions')}</Title>
-        <Accordion>
-          <ContextAwareToggle eventKey='0'>
-            <AccordionTitle>{t('CUSTOM_SLUG', 'Custom slug')}</AccordionTitle>
-          </ContextAwareToggle>
-          <Accordion.Collapse eventKey='0'>
-            <BusinessCustomSlugContainer>
-              <FormControl>
-                <Label>{t('SLUG', 'Slug')}</Label>
-                <Input
-                  type='text'
-                  value={slug}
-                  placeholder={t('SLUG', 'Slug')}
-                  onChange={(e) => setSlug(e.target.value)}
-                />
-              </FormControl>
-              <Button color='primary' onClick={changeCustomslug}>{t('SAVE', 'Save')}</Button>
-            </BusinessCustomSlugContainer>
-          </Accordion.Collapse>
-        </Accordion>
+        <Tabs>
+          {optionList.map(option => (
+            <Tab
+              key={option.key}
+              active={selectedOption === option.key}
+              onClick={() => handleChangeOption(option.key)}
+            >
+              {option.name}
+            </Tab>
+          ))}
+        </Tabs>
+        {selectedOption === 'custom_slug' && (
+          <BusinessCustomSlugContainer>
+            <FormControl>
+              <Label>{t('SLUG', 'Slug')}</Label>
+              <Input
+                type='text'
+                value={slug}
+                placeholder={t('SLUG', 'Slug')}
+                onChange={(e) => setSlug(e.target.value)}
+                onKeyPress={e => {
+                  if (e.which === 32) { e.preventDefault() }
+                }}
+              />
+            </FormControl>
+            <Button color='primary' onClick={changeCustomslug}>{t('SAVE', 'Save')}</Button>
+          </BusinessCustomSlugContainer>
+        )}
+        {selectedOption === 'widgets' && <BusinessWidgets business={business} />}
       </BusinessOrderingChannelsContainer>
       <Alert
         title={t('EXTENSION', 'Extension')}
@@ -92,27 +112,5 @@ export const BusinessOrderingChannels = (props) => {
         closeOnBackdrop={false}
       />
     </>
-  )
-}
-
-const ContextAwareToggle = ({ children, eventKey, callback }) => {
-  const currentEventKey = useContext(AccordionContext)
-  const decoratedOnClick = useAccordionToggle(
-    eventKey,
-    () => callback && callback(eventKey)
-  )
-  const isCurrentEventKey = currentEventKey === eventKey
-
-  const handleButtonClick = () => {
-    decoratedOnClick()
-  }
-
-  return (
-    <ToggleItemWrapper
-      active={isCurrentEventKey}
-      onClick={handleButtonClick}
-    >
-      {children}
-    </ToggleItemWrapper>
   )
 }

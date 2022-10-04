@@ -229,40 +229,29 @@ export const SidebarMenu = (props) => {
       id: 1,
       title: t('DRIVERS', 'Drivers'),
       pageName: 'delivery_drivers',
-      url: '/delivery/drivers-list'
+      url: '/delivery/drivers-list',
+      enabled: sessionState?.user?.level === 5 || sessionState?.user?.level === 0 || sessionState?.user?.level === 2
     },
     {
       id: 2,
       title: t('DRIVER_MANAGERS', 'Drivers manager'),
       pageName: 'drivers_managers',
-      url: '/delivery/drivers-managers'
+      url: '/delivery/drivers-managers',
+      enabled: sessionState?.user?.level === 0
     },
     {
       id: 3,
       title: t('DRIVERS_COMPANIES', 'Drivers companies'),
       pageName: 'drivers_companies',
-      url: '/delivery/drivers-companies'
+      url: '/delivery/drivers-companies',
+      enabled: sessionState?.user?.level === 0
     },
     {
       id: 4,
       title: t('DRIVERS_GROUPS', 'Drivers groups'),
       pageName: 'drivers_groups',
-      url: '/delivery/drivers-groups'
-    }
-  ]
-
-  const driverManagerSubMenus = [
-    {
-      id: 1,
-      title: t('DRIVERS', 'Drivers'),
-      pageName: 'delivery_drivers',
-      url: '/delivery/drivers-list'
-    },
-    {
-      id: 2,
-      title: t('DRIVERS_GROUPS', 'Drivers groups'),
-      pageName: 'drivers_groups',
-      url: '/delivery/drivers-groups'
+      url: '/delivery/drivers-groups',
+      enabled: sessionState?.user?.level === 5 || sessionState?.user?.level === 0
     }
   ]
 
@@ -498,7 +487,7 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   )}
 
-                  {(sessionState?.user?.level === 0 || sessionState?.user?.level === 5) && (
+                  {(sessionState?.user?.level === 0 || sessionState?.user?.level === 5 || sessionState?.user?.level === 2) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='7'
@@ -514,14 +503,16 @@ export const SidebarMenu = (props) => {
                       </ContextAwareToggle>
                       <Accordion.Collapse eventKey='7'>
                         <MenuContent>
-                          {(sessionState?.user?.level === 5 ? driverManagerSubMenus : deliverySubmenus).map(item => (
-                            <SubMenu
-                              key={item.id}
-                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                              onClick={() => handleGoToPage({ page: item.pageName })}
-                            >
-                              {item.title}
-                            </SubMenu>
+                          {deliverySubmenus.map(item => (
+                            item.enabled && (
+                              <SubMenu
+                                key={item.id}
+                                active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                                onClick={() => handleGoToPage({ page: item.pageName })}
+                              >
+                                {item.title}
+                              </SubMenu>
+                            )
                           ))}
                         </MenuContent>
                       </Accordion.Collapse>
