@@ -5,11 +5,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LanguageDetailsContainer = exports.FieldContainer = void 0;
+exports.RadioWrapper = exports.LanguageDetailsContainer = exports.FieldContainer = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -31,3 +31,12 @@ var FieldContainer = _styledComponents.default.div(_templateObject2 || (_templat
 });
 
 exports.FieldContainer = FieldContainer;
+
+var RadioWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref2) {
+  var isDisabled = _ref2.isDisabled;
+  return isDisabled && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    svg {\n      color: ", ";\n      opacity: 0.6;\n    }\n  "])), function (props) {
+    return props.theme.colors.disabled;
+  });
+});
+
+exports.RadioWrapper = RadioWrapper;

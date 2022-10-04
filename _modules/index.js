@@ -513,6 +513,12 @@ Object.defineProperty(exports, "BusinessWebhooks", {
     return _Stores.BusinessWebhooks;
   }
 });
+Object.defineProperty(exports, "BusinessWidgets", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.BusinessWidgets;
+  }
+});
 Object.defineProperty(exports, "BusinessesList", {
   enumerable: true,
   get: function get() {

@@ -13,6 +13,8 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _reactHookForm = require("react-hook-form");
 
+var _Shared = require("../../Shared");
+
 var _styles = require("./styles");
 
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
@@ -45,14 +47,22 @@ var EditTaxManager = function EditTaxManager(props) {
       data = props.data,
       formChanges = props.formChanges,
       _onChange = props.onChange,
-      onClose = props.onClose,
-      setAlertState = props.setAlertState;
+      onClose = props.onClose;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useState = (0, _react.useState)({
+    open: false,
+    content: []
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      alertState = _useState2[0],
+      setAlertState = _useState2[1];
+
   var formMethods = (0, _reactHookForm.useForm)();
+  var positiveNumberFields = ['rate', 'fixed', 'percentage'];
   var defaultInputs = [{
     field: 'name',
     placeholder: t('NAME', 'Name'),
@@ -62,30 +72,58 @@ var EditTaxManager = function EditTaxManager(props) {
     placeholder: t('DESCRIPTION', 'Description'),
     required: t('DESCRIPTION_REQUIRED', 'The Description is required')
   }];
+
+  var rateValidationNumber = function rateValidationNumber(value) {
+    if (!isNaN(Number(value))) {
+      return true;
+    } else {
+      return t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('RATE', 'Rate'));
+    }
+  };
+
+  var feeValidationNumber = function feeValidationNumber(value) {
+    if (!isNaN(Number(value))) {
+      return true;
+    } else {
+      return t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('FIXED', 'Fixed'));
+    }
+  };
+
+  var percentageValidationNumber = function percentageValidationNumber(value) {
+    if (Number(value) <= 100) {
+      return true;
+    } else {
+      return t('VALIDATION_MUST_SMALLER_HUNDRED', 'The precentage must be not bigger than 100').replace('_attribute_', t('PERCENTAGE', 'Percentage'));
+    }
+  };
+
   var inputs = [].concat(defaultInputs, [type === 'taxes' ? [{
     field: 'rate',
     placeholder: t('RATE', 'Rate'),
     required: t('TAX_RATE_REQUIRED', 'Tax rate is required'),
     pattern: {
-      value: /^-?\d+\.?\d*$/,
-      message: t('ERROR_TAX_RATE_INTEGER', 'The tax rate must be an integer.')
-    }
+      value: /^\d*\.?\d*$/,
+      message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('RATE', 'Rate'))
+    },
+    validate: rateValidationNumber
   }] : [{
     field: 'fixed',
     placeholder: t('FIXED', 'Fixed'),
     required: t('FEE_FIXED_REQUIRED', 'Fee fixed is required'),
     pattern: {
-      value: /^-?\d+\.?\d*$/,
-      message: t('ERROR_FEE_FIXED_INTEGER', 'The fee fixed must be an integer.')
-    }
+      value: /^\d*\.?\d*$/,
+      message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('FIXED', 'Fixed'))
+    },
+    validate: feeValidationNumber
   }, {
     field: 'percentage',
     placeholder: t('PERCENTAGE', 'Percentage'),
     required: t('FEE_PERCENTAGE_REQUIRED', 'Fee percentage is required'),
     pattern: {
-      value: /^-?\d+\.?\d*$/,
-      message: t('ERROR_FEE_PERCENTAGE_INTEGER', 'The fee percentage must be an integer.')
-    }
+      value: /^\d*\.?\d*$/,
+      message: t('VALIDATION_ERROR_NUMERIC', 'The _attribute_ must be a number.').replace('_attribute_', t('PERCENTAGE', 'Percentage'))
+    },
+    validate: percentageValidationNumber
   }]]);
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
@@ -119,8 +157,15 @@ var EditTaxManager = function EditTaxManager(props) {
       },
       ref: formMethods.register({
         required: input.required,
-        pattern: input.pattern
-      })
+        pattern: input.pattern,
+        validate: input.validate
+      }),
+      onKeyPress: function onKeyPress(e) {
+        if (positiveNumberFields.includes(input.field) && !/^[0-9.]$/.test(e.key)) {
+          e.preventDefault();
+        }
+      },
+      autoComplete: "off"
     }));
   }), type === 'taxes' && /*#__PURE__*/_react.default.createElement(_styles.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LabelCustom, {
     htmlFor: "type"
@@ -150,7 +195,25 @@ var EditTaxManager = function EditTaxManager(props) {
     onClick: function onClick() {
       return onClose();
     }
-  }, t('CLOSE', 'Close'))));
+  }, t('CLOSE', 'Close'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('ERROR'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  }));
 };
 
 exports.EditTaxManager = EditTaxManager;

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -593,3 +593,5 @@ var orderRejectCommentList = function orderRejectCommentList(status) {
 };
 
 exports.orderRejectCommentList = orderRejectCommentList;
+var widgetURL = 'https://orderingweb.ordering.co/';
+exports.widgetURL = widgetURL;
