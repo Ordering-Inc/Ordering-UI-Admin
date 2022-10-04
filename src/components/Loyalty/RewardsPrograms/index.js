@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { List as MenuIcon, Wallet, BarChartSteps } from 'react-bootstrap-icons'
-import { useLanguage, useConfig, useSession, RewardsPrograms as RewardsProgramsController } from 'ordering-components-admin'
+import { useLanguage, RewardsPrograms as RewardsProgramsController } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
 import { SideBar } from '../../Shared'
@@ -15,15 +15,10 @@ import {
 } from './styles'
 import { PointsWallet } from '../PointsWallet'
 import { PointsWalletLevels } from '../PointsWalletLevels'
-import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 
 const RewardsProgramsUI = (props) => {
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
-  const [{ user }] = useSession()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
-  const [isDisabledFeature, setIsDisabledFeature] = useState(false)
-  const featureName = 'loyalty_levels_points'
 
   const [showOption, setShowOption] = useState(null)
   const [moveDistance, setMoveDistance] = useState(0)
@@ -39,13 +34,6 @@ const RewardsProgramsUI = (props) => {
     setShowOption(null)
   }
 
-  useEffect(() => {
-    if (configs && Object.keys(configs).length > 0 && user) {
-      if (!Object.keys(configs).includes(featureName) && user?.level === 0) {
-        setIsDisabledFeature(true)
-      }
-    }
-  }, [configs])
   return (
     <>
       <Container>
@@ -61,8 +49,8 @@ const RewardsProgramsUI = (props) => {
           <h1>{t('LOYALTY', 'Loyalty')}</h1>
         </HeaderTitleContainer>
 
-        <LoyaltyListContainer isDisabledFeature={isDisabledFeature}>
-          <LoyaltyItemWrapper onClick={() => !isDisabledFeature && setShowOption('points_wallet')}>
+        <LoyaltyListContainer>
+          <LoyaltyItemWrapper onClick={() => setShowOption('points_wallet')}>
             <IconWrapper>
               <Wallet />
             </IconWrapper>
@@ -71,7 +59,7 @@ const RewardsProgramsUI = (props) => {
               <p>{t('POINTS_WALLET_DESCRIPTION', 'Points wallet general and per business setup.')}</p>
             </LoyaltyItemContent>
           </LoyaltyItemWrapper>
-          <LoyaltyItemWrapper onClick={() => !isDisabledFeature && setShowOption('levels')}>
+          <LoyaltyItemWrapper onClick={() => setShowOption('levels')}>
             <IconWrapper>
               <BarChartSteps />
             </IconWrapper>
@@ -82,7 +70,6 @@ const RewardsProgramsUI = (props) => {
           </LoyaltyItemWrapper>
         </LoyaltyListContainer>
       </Container>
-      {isDisabledFeature && (<DisabledFeatureAlert />)}
       {showOption === 'points_wallet' && (
         <SideBar
           sidebarId='loyaltyWallet'
