@@ -56,7 +56,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversManagerUI = function DriversManagerUI(props) {
   var onDriverRedirect = props.onDriverRedirect,
       handleChangeSearch = props.handleChangeSearch,
-      searchValue = props.searchValue;
+      searchValue = props.searchValue,
+      driversIsOnline = props.driversIsOnline;
   var _props$driversList = props.driversList,
       drivers = _props$driversList.drivers,
       loading = _props$driversList.loading;
@@ -117,6 +118,9 @@ var DriversManagerUI = function DriversManagerUI(props) {
       setIsOpenDriverOrders(true);
     }
   }, [drivers, loading]);
+  (0, _react.useEffect)(function () {
+    setSelectedDriver(null);
+  }, [driversIsOnline]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DriversHeader, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
