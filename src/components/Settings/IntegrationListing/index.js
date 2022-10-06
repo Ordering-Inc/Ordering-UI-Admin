@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import React, { useState, useEffect } from 'react'
+import { useLanguage, useEvent } from 'ordering-components-admin'
 import { IconButton } from '../../../styles'
+import { useLocation } from 'react-router-dom'
 import { List as MenuIcon, PuzzleFill, Display, KeyFill } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { SideBar } from '../../Shared'
@@ -19,8 +20,49 @@ import {
 
 export const IntegrationListing = (props) => {
   const [, t] = useLanguage()
+  const { search } = useLocation()
+  const [events] = useEvent()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [showOption, setShowOption] = useState(null)
+
+  let settingParams
+
+  if (search) {
+    const data = search.substring(1).split('&')
+    settingParams = data[0]
+  }
+
+  const settingId = settingParams && settingParams.split('=')[1]
+
+  const onBasicSettingsRedirect = ({ id }) => {
+    if (!id) {
+      return events.emit('go_to_page', { page: 'integrations', replace: true })
+    }
+    if (id) {
+      events.emit('go_to_page', {
+        page: 'integrations',
+        search: `?id=${id}`,
+        replace: true
+      })
+    }
+  }
+
+  const handleOpenSetting = (id) => {
+    onBasicSettingsRedirect({ id })
+    setShowOption(id)
+  }
+
+  const handleCloseSettings = () => {
+    onBasicSettingsRedirect({ id: null })
+    setShowOption(null)
+  }
+
+  useEffect(() => {
+    if (settingId) {
+      onBasicSettingsRedirect({ id: settingId })
+      setShowOption(settingId)
+    }
+  }, [])
 
   return (
     <>
@@ -38,7 +80,7 @@ export const IntegrationListing = (props) => {
         </Header>
         <SettingListContainer>
           <SettingItemContainer
-            onClick={() => setShowOption('plugins')}
+            onClick={() => handleOpenSetting('plugins')}
           >
             <IconWrapper>
               <PuzzleFill />
@@ -49,7 +91,7 @@ export const IntegrationListing = (props) => {
             </SettingItemContent>
           </SettingItemContainer>
           <SettingItemContainer
-            onClick={() => setShowOption('webhooks')}
+            onClick={() => handleOpenSetting('webhooks')}
           >
             <IconWrapper>
               <Display />
@@ -60,7 +102,7 @@ export const IntegrationListing = (props) => {
             </SettingItemContent>
           </SettingItemContainer>
           <SettingItemContainer
-            onClick={() => setShowOption('apiKeys')}
+            onClick={() => handleOpenSetting('apiKeys')}
           >
             <IconWrapper>
               <KeyFill />
@@ -78,7 +120,7 @@ export const IntegrationListing = (props) => {
           sidebarId='plugins-integrations'
           defaultSideBarWidth={600}
           open={showOption === 'plugins'}
-          onClose={() => setShowOption(null)}
+          onClose={() => handleCloseSettings()}
         >
           <PluginList />
         </SideBar>
@@ -89,7 +131,7 @@ export const IntegrationListing = (props) => {
           sidebarId='webhooks-integrations'
           defaultSideBarWidth={768}
           open={showOption === 'webhooks'}
-          onClose={() => setShowOption(null)}
+          onClose={() => handleCloseSettings()}
         >
           <WebhookList />
         </SideBar>
@@ -100,7 +142,7 @@ export const IntegrationListing = (props) => {
           sidebarId='apikeys-integrations'
           defaultSideBarWidth={700}
           open={showOption === 'apiKeys'}
-          onClose={() => setShowOption(null)}
+          onClose={() => handleCloseSettings()}
         >
           <ApiKeysList />
         </SideBar>

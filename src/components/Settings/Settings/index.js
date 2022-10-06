@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useTheme } from 'styled-components'
 import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
-import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill } from 'react-bootstrap-icons'
+import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill, InfoCircle } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { SideBar } from '../../Shared'
@@ -17,7 +18,11 @@ import {
   BasicSettingsContainer,
   HeaderTitleContainer,
   ContentWrapper,
-  SettingItemWrapper
+  SettingItemWrapper,
+  WrapperNoneConfigs,
+  InnerNoneConfigsContainer,
+  InfoWrapper,
+  InfoContent
 } from './styles'
 
 const SettingsUI = (props) => {
@@ -28,6 +33,7 @@ const SettingsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const theme = useTheme()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const { search } = useLocation()
 
@@ -124,6 +130,20 @@ const SettingsUI = (props) => {
             {settingsType === 'key_operation' && t('OPERATION_SETTINGS', 'Operation settings ')}
             {settingsType === 'key_plugin' && t('PLUGIN_SETTINGS', 'Plugin settings ')}
           </h1>
+          {settingsType === 'key_plugin' && (
+            <InfoWrapper>
+              <IconButton
+                color='primary'
+              >
+                <InfoCircle />
+              </IconButton>
+              <InfoContent>
+                {t('MANAGE_CONFIG_ALL_PLUGINS', 'Manage and configure all your plugins in this tab')}
+                <span onClick={() => events.emit('go_to_page', { page: 'integrations', search: '?id=plugins' })}>{t('ADD_NEW_PLUGIN', 'Add a new plugin')}</span>
+              </InfoContent>
+            </InfoWrapper>
+          )}
+
         </HeaderTitleContainer>
         <ContentWrapper className='row'>
           {settingsType === 'key_basic' && (
@@ -219,6 +239,14 @@ const SettingsUI = (props) => {
             )
           }
         </ContentWrapper>
+        {!categoryList.loading && categoryList.categories?.length === 0 && settingsType !== 'key_basic' && (
+          <WrapperNoneConfigs>
+            <InnerNoneConfigsContainer>
+              <img src={theme?.images?.dummies?.noOrders} alt='none' />
+              <p>{t('NO_SETTINGS', 'No Settings yet.')}</p>
+            </InnerNoneConfigsContainer>
+          </WrapperNoneConfigs>
+        )}
       </BasicSettingsContainer>
       {
         isOpenDescription && (

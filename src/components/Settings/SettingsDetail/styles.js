@@ -72,8 +72,8 @@ export const CategoryName = styled.div`
   p {
     font-weight: bold;
     font-size: 20px;
-    color: #344050;
     margin-bottom: 6px;
+    width: 90%;
   }
 `
 
