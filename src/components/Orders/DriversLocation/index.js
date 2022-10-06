@@ -22,13 +22,13 @@ export const DriversLocation = (props) => {
     lat: Number(configState?.configs?.location_default_latitude?.value || 40.7744146),
     lng: Number(configState?.configs?.location_default_longitude?.value || -73.9678064)
   }
+  const defaultZoom = 10
 
   const [mapCenter, setMapCenter] = useState(defaultCenter)
-  const [mapZoom, setMapZoom] = useState(10)
+  const [mapZoom, setMapZoom] = useState(defaultZoom)
   const [mapLoaded, setMapLoaded] = useState(true)
   const [mapFitted, setMapFitted] = useState(false)
 
-  const defaultZoom = 10
   const mapRef = useRef(null)
 
   const [showDrivers, setShowDrivers] = useState([])
@@ -87,7 +87,13 @@ export const DriversLocation = (props) => {
 
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
-    if (showDrivers.length === 0 || mapLoaded) return
+    if (mapLoaded) return
+    if (showDrivers.length === 0) {
+      setMapZoom(defaultZoom)
+      setMapCenter(defaultCenter)
+      setMapFitted(false)
+      return
+    }
     if (!mapFitted) {
       mapFit()
     }
