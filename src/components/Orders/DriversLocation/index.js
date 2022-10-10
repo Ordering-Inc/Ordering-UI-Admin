@@ -18,9 +18,12 @@ export const DriversLocation = (props) => {
   const [configState] = useConfig()
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
+  const defaultLatitude = Number(configState?.configs?.location_default_latitude?.value)
+  const defaultLongitude = Number(configState?.configs?.location_default_longitude?.value)
+  const isInvalidDefaultLocation = isNaN(defaultLatitude) || isNaN(defaultLongitude)
   const defaultCenter = {
-    lat: Number(configState?.configs?.location_default_latitude?.value || 40.7744146),
-    lng: Number(configState?.configs?.location_default_longitude?.value || -73.9678064)
+    lat: !isInvalidDefaultLocation ? defaultLatitude : 40.7744146,
+    lng: !isInvalidDefaultLocation ? defaultLongitude : -73.9678064
   }
   const defaultZoom = 10
 

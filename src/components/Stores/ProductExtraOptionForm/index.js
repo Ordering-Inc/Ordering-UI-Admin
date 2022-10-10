@@ -205,9 +205,18 @@ export const ProductExtraOptionForm = (props) => {
             <ActionsContainer top>
               <EnableWrapper>
                 <span>{t('ENABLE', 'Enable')}</span>
-                <Switch
-                  defaultChecked={optionState.option?.enabled}
-                  onChange={enabled => handleChangeOptionEnable(enabled, optionState.option?.id)}
+                <Controller
+                  name='enabled'
+                  control={control}
+                  render={({ onChange, value }) => (
+                    <Switch
+                      defaultChecked={optionState.option?.enabled}
+                      onChange={enabled => {
+                        onChange(enabled)
+                        handleChangeOptionEnable(enabled, optionState.option?.id)
+                      }}
+                    />
+                  )}
                 />
               </EnableWrapper>
             </ActionsContainer>
