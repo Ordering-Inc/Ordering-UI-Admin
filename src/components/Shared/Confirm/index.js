@@ -23,6 +23,12 @@ const ConfirmUI = (props) => {
     cancelText
   } = props
   const [, t] = useLanguage()
+
+  const errors = {
+    ERROR_REPORT_MAX_A_DAY_AS_PERIOD: 'Error report, max a day as period',
+    ERROR_REPORT_VERY_LONG_PERIOD: 'Error report, very long period'
+  }
+
   return (
     <PopupDialog
       className='popup-dialog'
@@ -39,7 +45,7 @@ const ConfirmUI = (props) => {
         {content && typeof content === 'object' && Array.isArray(content) && (
           <ul>
             {content.map((item, i) => (
-              <li key={i}>{item}</li>
+              <li key={i}>{t(item.toUpperCase(), errors[item])}</li>
             ))}
           </ul>
         )}

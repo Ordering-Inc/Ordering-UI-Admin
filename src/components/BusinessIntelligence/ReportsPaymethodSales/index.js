@@ -102,6 +102,10 @@ const ReportsPaymethodSalesUI = (props) => {
     return hours + ':' + minutes + ':' + seconds // Return is HH : MM : SS
   }
 
+  const thObj = {
+    REPORT_HEADER_PAYMETHOD: 'Paymethod',
+  }
+
   return (
     <ReportsBusinessSpendContainer>
       <Title>{t('PAYMETHOD_SALES', 'Paymethod sales')}</Title>
@@ -146,7 +150,7 @@ const ReportsPaymethodSalesUI = (props) => {
                       reportData?.content?.header?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((th, j) => (
-                            <th key={j} colSpan={th.colspan}>{th.value}</th>
+                            <th key={j} colSpan={th.colspan}>{t(th.value.toUpperCase(), thObj[th.value])}</th>
                           ))}
                         </tr>
                       ))

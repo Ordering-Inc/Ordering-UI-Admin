@@ -21,7 +21,7 @@ export const SettingsSelectUI = (props) => {
   const [, t] = useLanguage()
 
   const [options, setOptions] = useState(null)
-
+  
   useEffect(() => {
     if (!config) return
     if (config.key === 'terms_and_conditions') {
@@ -32,7 +32,7 @@ export const SettingsSelectUI = (props) => {
       setOptions(selectTypes)
     } else {
       const selectedTypes = config?.options?.map(item => {
-        return { value: item.value, content: <Option>{t(item.text.toUpperCase())}</Option> }
+        return { value: item.value, content: <Option>{t(item.text.toUpperCase(), "Last order assigned")}</Option> }
       })
       if (config.customizable) {
         selectedTypes.push({
