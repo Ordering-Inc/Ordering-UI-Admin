@@ -35,7 +35,8 @@ const ProductDetailsUI = (props) => {
     handleUpdateClick,
     handleChangeFormState,
     handleSuccessUpdate,
-    handleChangeRibbon
+    handleChangeRibbon,
+    cleanFormState
   } = props
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -148,6 +149,7 @@ const ProductDetailsUI = (props) => {
               setTaxes={setTaxes}
               fees={fees}
               setFees={setFees}
+              cleanFormState={cleanFormState}
             />
           )}
           {showOption === 'service_details' && (
