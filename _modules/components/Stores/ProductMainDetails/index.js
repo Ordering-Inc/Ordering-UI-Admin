@@ -56,7 +56,8 @@ var ProductMainDetails = function ProductMainDetails(props) {
       taxes = props.taxes,
       setTaxes = props.setTaxes,
       fees = props.fees,
-      setFees = props.setFees;
+      setFees = props.setFees,
+      cleanFormState = props.cleanFormState;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -127,7 +128,8 @@ var ProductMainDetails = function ProductMainDetails(props) {
     handleUpdateClick: handleUpdateClick,
     handlechangeImageProductCategory: handlechangeImage,
     handleProductCategoryChangeInput: handleChangeInput,
-    isProductSeo: true
+    isProductSeo: true,
+    cleanFormState: cleanFormState
   }));
 };
 
