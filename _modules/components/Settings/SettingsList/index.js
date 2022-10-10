@@ -172,15 +172,18 @@ var SettingsListUI = function SettingsListUI(props) {
       });
     }
   }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.result]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SettingsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.GeneralTitle, null, /*#__PURE__*/_react.default.createElement("p", null, t('SETTINGS', 'All Settings'))), !settingsState.error && settingsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, _toConsumableArray(Array(6)).map(function (item, i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SettingsListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.GeneralTitle, null, /*#__PURE__*/_react.default.createElement("p", null, t('SETTINGS', 'All Settings'))), !settingsState.error && settingsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, _toConsumableArray(Array(6)).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      height: 25,
+      height: 20,
       width: 200
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      height: 30
+      height: 44
     }));
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 70,
+    height: 44
   })), !settingsState.error && !settingsState.loading && configs && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles2.GeneralContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, null, configs.length > 0 && configs.map(function (config, i) {
     var _config$options, _config$options2, _config$options3, _config$options4;
 
@@ -258,7 +261,7 @@ var SettingsListUI = function SettingsListUI(props) {
     content: t('NOT_FOUND_CONFIG', 'Sorry, we couldn\'t find the config.'),
     btnTitle: t('PROFILE_CATEGORY_REDIRECT', 'Go to Category Description'),
     onClickButton: onCloseSettingsList
-  })), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && !settingsState.loading && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles2.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: handleSubmit
   }, t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {

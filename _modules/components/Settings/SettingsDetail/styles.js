@@ -56,7 +56,7 @@ var Content = _styledComponents.default.div(_templateObject12 || (_templateObjec
 
 exports.Content = Content;
 
-var CategoryName = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  p {\n    font-weight: bold;\n    font-size: 20px;\n    color: #344050;\n    margin-bottom: 6px;\n  }\n"])));
+var CategoryName = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  p {\n    font-weight: bold;\n    font-size: 20px;\n    margin-bottom: 6px;\n    width: 90%;\n  }\n"])));
 
 exports.CategoryName = CategoryName;
 

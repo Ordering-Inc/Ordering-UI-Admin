@@ -11,6 +11,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
+var _styledComponents = require("styled-components");
+
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
 var _SettingItemUI = require("../SettingItemUI");
@@ -70,6 +72,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SettingsUI = function SettingsUI(props) {
+  var _categoryList$categor2, _theme$images, _theme$images$dummies;
+
   var categoryList = props.categoryList,
       settingsType = props.settingsType,
       handChangeConfig = props.handChangeConfig;
@@ -77,6 +81,8 @@ var SettingsUI = function SettingsUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
+
+  var theme = (0, _styledComponents.useTheme)();
 
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
       _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
@@ -129,23 +135,25 @@ var SettingsUI = function SettingsUI(props) {
       _useEvent2 = _slicedToArray(_useEvent, 1),
       events = _useEvent2[0];
 
+  var settingPageList = {
+    key_basic: 'basic_settings',
+    key_operation: 'operation_settings',
+    key_plugin: 'plugin_settings'
+  };
+
   var onBasicSettingsRedirect = function onBasicSettingsRedirect(_ref) {
     var category = _ref.category;
 
     if (!category) {
-      if (settingsType === 'key_basic') return events.emit('go_to_page', {
-        page: 'basicSettings',
-        replace: true
-      });
-      if (settingsType === 'key_operation') return events.emit('go_to_page', {
-        page: 'operationSettings',
+      return events.emit('go_to_page', {
+        page: settingPageList[settingsType],
         replace: true
       });
     }
 
     if (category) {
       events.emit('go_to_page', {
-        page: settingsType === 'key_basic' ? 'basicSettings' : 'operationSettings',
+        page: settingPageList[settingsType],
         search: "?category=".concat(category),
         replace: true
       });
@@ -205,7 +213,16 @@ var SettingsUI = function SettingsUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings '))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, settingsType === 'key_basic' && t('BASIC_SETTINGS', 'Basic settings '), settingsType === 'key_operation' && t('OPERATION_SETTINGS', 'Operation settings '), settingsType === 'key_plugin' && t('PLUGIN_SETTINGS', 'Plugin settings ')), settingsType === 'key_plugin' && /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('MANAGE_CONFIG_ALL_PLUGINS', 'Manage and configure all your plugins in this tab'), /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return events.emit('go_to_page', {
+        page: 'integrations',
+        search: '?id=plugins'
+      });
+    }
+  }, t('ADD_NEW_PLUGIN', 'Add a new plugin'))))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, {
     className: "row"
   }, settingsType === 'key_basic' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
@@ -284,7 +301,10 @@ var SettingsUI = function SettingsUI(props) {
       }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
       active: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === (category === null || category === void 0 ? void 0 : category.id)
     })));
-  }))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
+  })), !categoryList.loading && ((_categoryList$categor2 = categoryList.categories) === null || _categoryList$categor2 === void 0 ? void 0 : _categoryList$categor2.length) === 0 && settingsType !== 'key_basic' && /*#__PURE__*/_react.default.createElement(_styles2.WrapperNoneConfigs, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerNoneConfigsContainer, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.noOrders,
+    alt: "none"
+  }), /*#__PURE__*/_react.default.createElement("p", null, t('NO_SETTINGS', 'No Settings yet.'))))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
     open: isOpenDescription,
     category: selectedCategory,
     onClose: handleBackRedirect,
