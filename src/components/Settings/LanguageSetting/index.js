@@ -9,7 +9,8 @@ import { Circle, RecordCircle } from 'react-bootstrap-icons'
 
 import {
   LanguageDetailsContainer,
-  FieldContainer
+  FieldContainer,
+  RadioWrapper
 } from './styles'
 
 const LanguageSettingUI = (props) => {
@@ -46,12 +47,13 @@ const LanguageSettingUI = (props) => {
             {languageFiledsState.fields.map(field => (
               <FieldContainer key={field.id}>
                 <div className='name'>{field.name}</div>
-                <div
+                <RadioWrapper
                   className={field.default ? 'checked default' : 'default'}
                   onClick={() => setLanguage(field)}
+                  isDisabled={!field.enabled}
                 >
                   {(field.default) ? <RecordCircle /> : <Circle />}
-                </div>
+                </RadioWrapper>
                 <div className='status'>
                   <Switch
                     defaultChecked={field.enabled}

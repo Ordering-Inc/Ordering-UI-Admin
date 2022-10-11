@@ -35,7 +35,6 @@ export const SettingsListUI = (props) => {
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -107,12 +106,13 @@ export const SettingsListUI = (props) => {
         {
           !settingsState.error && settingsState.loading && (
             <SkeletonWrapper>
-              {[...Array(6)].map((item, i) => (
+              {[...Array(6)].map((i) => (
                 <div key={i}>
-                  <Skeleton height={25} width={200} />
-                  <Skeleton height={30} />
+                  <Skeleton height={20} width={200} />
+                  <Skeleton height={44} />
                 </div>
               ))}
+              <Skeleton width={70} height={44} />
             </SkeletonWrapper>
           )
         }
@@ -261,9 +261,14 @@ export const SettingsListUI = (props) => {
         }
       </SettingsListContainer>
       {
-        settingsState?.changes?.length > 0 && (
+        settingsState?.changes?.length > 0 && !settingsState.loading && !settingsState.API && (
           <SubmitBtnWrapper>
-            <Button color='primary' onClick={handleSubmit}>{t('SAVE', 'Save')}</Button>
+            <Button
+              color='primary'
+              onClick={handleSubmit}
+            >
+              {t('SAVE', 'Save')}
+            </Button>
           </SubmitBtnWrapper>
         )
       }

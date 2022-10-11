@@ -10,7 +10,6 @@ import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
 import { EmailSetting } from '../EmailSetting'
 import { NotificationSetting } from '../NotificationSetting'
 import { SettingsList } from '../SettingsList'
-
 import {
   Container,
   DescriptionContent,
@@ -43,7 +42,6 @@ export const SettingsDetail = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraInfoOpen, setExtraInfoOpen] = useState(false)
   const [extraSubCatOpen, setExtraSubCatOpen] = useState(false)
-
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
 

@@ -31,8 +31,7 @@ export const PaymentOption = (props) => {
     actionState,
     handleSaveClick,
     businessPaymethod,
-    handleDeletePaymethod,
-    isDisabledPaymentsAdvanced
+    handleDeletePaymethod
   } = props
 
   const theme = useTheme()
@@ -135,18 +134,14 @@ export const PaymentOption = (props) => {
           {sitesState?.sites?.length > 0 && (
             <Tab
               active={paymentTabs === 0}
-              onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(0)}
-              disabledFeature={isDisabledPaymentsAdvanced}
-              title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+              onClick={() => setPaymentTabs(0)}
             >
               {t('CHANNELS', 'Channels')}
             </Tab>
           )}
           <Tab
             active={paymentTabs === 1}
-            onClick={() => !isDisabledPaymentsAdvanced && setPaymentTabs(1)}
-            disabledFeature={isDisabledPaymentsAdvanced}
-            title={isDisabledPaymentsAdvanced ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
+            onClick={() => setPaymentTabs(1)}
           >
             {t('ORDER_TYPE', 'Order type')}
           </Tab>
@@ -156,8 +151,7 @@ export const PaymentOption = (props) => {
           sitesState?.sites.map(site => (
             <TabOption
               key={site.id}
-              disabledFeature={isDisabledPaymentsAdvanced}
-              onClick={() => !isDisabledPaymentsAdvanced && setPaymethodInfo({ key: 'sites', value: site.id })}
+              onClick={() => setPaymethodInfo({ key: 'sites', value: site.id })}
             >
               {(changesState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
                 <RiCheckboxFill className='fill' />
@@ -194,7 +188,6 @@ export const PaymentOption = (props) => {
           {actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
         </Button>
       </Container>
-
       <Confirm
         width='700px'
         title={t('WEB_APPNAME', 'Ordering')}

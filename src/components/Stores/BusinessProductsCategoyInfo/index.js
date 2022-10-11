@@ -21,7 +21,7 @@ import {
   CategoryNameWrapper,
   ParentCategorySelectWrapper,
   Option,
-  GenerateButtonWrapper,
+  // GenerateButtonWrapper,
   SkipButton,
   HeaderImage,
   LogoImage,
@@ -302,7 +302,7 @@ export const BusinessProductsCategoyInfo = (props) => {
             if (e.which === 32) { e.preventDefault() }
           }}
         />
-        <GenerateButtonWrapper>
+        {/* <GenerateButtonWrapper>
           <Button
             color='lightPrimary'
             borderRadius='7.6px'
@@ -314,7 +314,7 @@ export const BusinessProductsCategoyInfo = (props) => {
           >
             {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
           </Button>
-        </GenerateButtonWrapper>
+        </GenerateButtonWrapper> */}
       </CategoryNameWrapper>
       <SwitchWrapper>
         <span>{t('RIBBON', 'Ribbon')}</span>

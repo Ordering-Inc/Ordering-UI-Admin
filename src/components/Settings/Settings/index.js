@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useConfig, useEvent, Settings as SettingsController } from 'ordering-components-admin'
+import { useTheme } from 'styled-components'
+import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
-import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill } from 'react-bootstrap-icons'
+import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill, InfoCircle } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { SideBar } from '../../Shared'
@@ -17,7 +18,11 @@ import {
   BasicSettingsContainer,
   HeaderTitleContainer,
   ContentWrapper,
-  SettingItemWrapper
+  SettingItemWrapper,
+  WrapperNoneConfigs,
+  InnerNoneConfigsContainer,
+  InfoWrapper,
+  InfoContent
 } from './styles'
 
 const SettingsUI = (props) => {
@@ -28,12 +33,11 @@ const SettingsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
+  const theme = useTheme()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const { search } = useLocation()
 
   const [isOpenDescription, setIsOpenDescription] = useState(false)
-  const [disabeldCategoryList, setDisabeldCategoryList] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
   const [openSitesAuthSettings, setOpenSitesAuthSettings] = useState(false)
@@ -50,14 +54,19 @@ const SettingsUI = (props) => {
   const categoryId = category && category.split('=')[1]
   const [events] = useEvent()
 
+  const settingPageList = {
+    key_basic: 'basic_settings',
+    key_operation: 'operation_settings',
+    key_plugin: 'plugin_settings'
+  }
+
   const onBasicSettingsRedirect = ({ category }) => {
     if (!category) {
-      if (settingsType === 'key_basic') return events.emit('go_to_page', { page: 'basicSettings', replace: true })
-      if (settingsType === 'key_operation') return events.emit('go_to_page', { page: 'operationSettings', replace: true })
+      return events.emit('go_to_page', { page: settingPageList[settingsType], replace: true })
     }
     if (category) {
       events.emit('go_to_page', {
-        page: settingsType === 'key_basic' ? 'basicSettings' : 'operationSettings',
+        page: settingPageList[settingsType],
         search: `?category=${category}`,
         replace: true
       })
@@ -104,14 +113,6 @@ const SettingsUI = (props) => {
     }
   }, [categoryList?.categories])
 
-  useEffect(() => {
-    if (configs && Object.keys(configs).length > 0) {
-      const featureList = [{ configKeyName: 'cash_wallet', settingName: 'wallet' }]
-      const disabledFeatureList = featureList.filter(feature => !Object.keys(configs).includes(feature?.configKeyName))
-      setDisabeldCategoryList(disabledFeatureList)
-    }
-  }, [configs])
-
   return (
     <>
       <BasicSettingsContainer>
@@ -125,8 +126,24 @@ const SettingsUI = (props) => {
             </IconButton>
           )}
           <h1>
-            {settingsType === 'key_basic' ? t('BASIC_SETTINGS', 'Basic settings ') : t('OPERATION_SETTINGS', 'Operation settings ')}
+            {settingsType === 'key_basic' && t('BASIC_SETTINGS', 'Basic settings ')}
+            {settingsType === 'key_operation' && t('OPERATION_SETTINGS', 'Operation settings ')}
+            {settingsType === 'key_plugin' && t('PLUGIN_SETTINGS', 'Plugin settings ')}
           </h1>
+          {settingsType === 'key_plugin' && (
+            <InfoWrapper>
+              <IconButton
+                color='primary'
+              >
+                <InfoCircle />
+              </IconButton>
+              <InfoContent>
+                {t('MANAGE_CONFIG_ALL_PLUGINS', 'Manage and configure all your plugins in this tab')}
+                <span onClick={() => events.emit('go_to_page', { page: 'integrations', search: '?id=plugins' })}>{t('ADD_NEW_PLUGIN', 'Add a new plugin')}</span>
+              </InfoContent>
+            </InfoWrapper>
+          )}
+
         </HeaderTitleContainer>
         <ContentWrapper className='row'>
           {settingsType === 'key_basic' && (
@@ -208,14 +225,12 @@ const SettingsUI = (props) => {
                 <React.Fragment key={i}>
                   <SettingItemWrapper
                     className='col-md-4 col-sm-6'
-                    title={disabeldCategoryList.some(disabeldCategory => disabeldCategory?.settingName === category?.key) ? t('PACKAGE_DOSE_NOT_INCLUDE_FUNCTIONS', 'Your package does not include this function') : ''}
-                    onClick={() => !(disabeldCategoryList.some(disabeldCategory => disabeldCategory?.settingName === category?.key)) && handleOpenDescription(category)}
+                    onClick={() => handleOpenDescription(category)}
                   >
                     <SettingItemUI
                       title={category?.name}
                       description={category?.description}
                       icon={category?.image ? <img src={category?.image} /> : <GearFill />}
-                      disabledFeature={disabeldCategoryList.some(disabeldCategory => disabeldCategory?.settingName === category?.key)}
                       active={selectedCategory?.id === category?.id}
                     />
                   </SettingItemWrapper>
@@ -224,6 +239,14 @@ const SettingsUI = (props) => {
             )
           }
         </ContentWrapper>
+        {!categoryList.loading && categoryList.categories?.length === 0 && settingsType !== 'key_basic' && (
+          <WrapperNoneConfigs>
+            <InnerNoneConfigsContainer>
+              <img src={theme?.images?.dummies?.noOrders} alt='none' />
+              <p>{t('NO_SETTINGS', 'No Settings yet.')}</p>
+            </InnerNoneConfigsContainer>
+          </WrapperNoneConfigs>
+        )}
       </BasicSettingsContainer>
       {
         isOpenDescription && (
