@@ -1097,9 +1097,9 @@
     regenerator-runtime "^0.13.4"
 
 "@babel/runtime@^7.10.4":
-  version "7.19.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.0.tgz#22b11c037b094d27a8a2504ea4dcff00f50e2259"
-  integrity sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==
+  version "7.19.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.4.tgz#a42f814502ee467d55b38dd1c256f53a7b885c78"
+  integrity sha512-EXpLCrk55f+cYqmHsSR+yD/0gAIMxxA9QK9lnQWzhMCvt+YmoBN7Zx94s++Kv0+unHk39vxNO8t+CMA2WSS3wA==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -1701,9 +1701,9 @@
   integrity sha512-OsUxk0VLlum8E2d6onlEdKuQcvLMs7qTrOXCnl/BGV3fAm65qr6h3e1IZ5AX4lgUlPRrzRcddSOA5DvkKKYLvg==
 
 "@stripe/stripe-js@^1.9.0":
-  version "1.38.1"
-  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.38.1.tgz#67a27380f021931f6e44abeee2b011b8d7f524de"
-  integrity sha512-v0hF65jEs7tw33JE70E5puJ2fFhpiS2XYwmayupEdjKWavJivycYcZgZKYXAQhTiMgtDgN9YPzqUr86VzVc3Ew==
+  version "1.39.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.39.0.tgz#b70d4d276862771c4b2c86558795358e08f0b77e"
+  integrity sha512-BR7yzewVSBQgRao3V4HsTldpO4HpJUKcIlMDmBQaHqXUvkMpXHgOMF8/CZgFVMACS+pqvZIMmGuy3YvZlLEA2w==
 
 "@types/glob@^7.1.1":
   version "7.2.0"
@@ -8016,6 +8016,7 @@ optionator@^0.8.3:
     ordering-api-sdk "github:Ordering-Inc/ordering-api-sdk#release"
     prop-types "^15.7.2"
     react-google-recaptcha "^2.1.0"
+    react-google-recaptcha-v3 "^1.10.0"
     socket.io-client "^2.3.0"
 
 original@^1.0.0:
@@ -8912,6 +8913,13 @@ react-focus-lock@2.5.2:
     react-clientside-effect "^1.2.5"
     use-callback-ref "^1.2.5"
     use-sidecar "^1.0.5"
+
+react-google-recaptcha-v3@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/react-google-recaptcha-v3/-/react-google-recaptcha-v3-1.10.0.tgz#1ec46825fe9b857d7f4ef08ee89fea05e629a9f9"
+  integrity sha512-JBoqU107X8klQmS8tQSbQh1IMsT1fH3kVoArIqnia0rtn0rPNG9Ld+9rD/dHJMculIczSZpGvIJTXXwtsolMcg==
+  dependencies:
+    hoist-non-react-statics "^3.3.2"
 
 react-google-recaptcha@^2.1.0:
   version "2.1.0"
