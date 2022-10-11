@@ -87,6 +87,12 @@ const ReportsSpentTimeUI = (props) => {
     document.body.removeChild(downloadLink)
   }
 
+  const thObj = {
+    REPORT_HEADER_TOTAL_VS_IDEAL: 'Report header total vs ideal',
+    REPORT_HEADER_RANK: 'Report header rank',
+    REPORT_HEADER_DRIVER_TIMES: 'Report header driver times'
+  }
+
   return (
     <ReportsBusinessSpendContainer>
       <Title>{t('DRIVER_TIME', 'Driver Time')}</Title>
@@ -131,7 +137,7 @@ const ReportsSpentTimeUI = (props) => {
                       reportData?.content?.header?.rows.map((tr, i) => (
                         <tr key={i}>
                           {tr?.map((th, j) => (
-                            <th key={j} colSpan={th.colspan}>{th.value}</th>
+                            <th key={j} colSpan={th.colspan}>{t(th.value.toUpperCase(), thObj[th.value])}</th>
                           ))}
                         </tr>
                       ))

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useEvent } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { Alert } from '../../Shared'
@@ -10,7 +10,8 @@ import {
   SmsPreviewWrapper,
   SmsContentLayout,
   SmsPreviewContentWrapper,
-  SmsPreviewContent
+  SmsPreviewContent,
+  Description
 } from './styles'
 
 export const CampaignNotification = (props) => {
@@ -24,8 +25,8 @@ export const CampaignNotification = (props) => {
   } = props
 
   const [, t] = useLanguage()
-
   const theme = useTheme()
+  const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const closeAlert = () => {
@@ -76,9 +77,16 @@ export const CampaignNotification = (props) => {
     }
   }
 
+  const handleGoToPage = () => {
+    events.emit('go_to_page', { page: 'operationSettings', search: '?category=14' })
+  }
+
   return (
     <>
       <Container>
+        <Description>
+          {t('NOTIFICATION_SETTINGS_LINK_DESC', 'You need to complete One signal configuration first, you can do it here:')} <span onClick={() => handleGoToPage()}>{t('NOTIFICATION_SETTINGS', 'Notification settings')}</span>
+        </Description>
         <InputWrapper>
           <label>{t('TITLE', 'Title')}</label>
           <Input
