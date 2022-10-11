@@ -178,7 +178,7 @@ export const SettingsListUI = (props) => {
                                         defaultChecked={config?.value.split('|').includes(item?.value)}
                                         onChange={(e) => handleCheckBoxChange(e, true, config?.value)}
                                       />
-                                      {item.text}
+                                      {t(item.text.toUpperCase())}
                                     </label>
                                   </FormGroupCheck>
                                 </FormGroupWrapper>
