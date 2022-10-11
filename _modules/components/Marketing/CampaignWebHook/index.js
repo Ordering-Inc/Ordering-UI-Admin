@@ -49,6 +49,10 @@ var CampaignWebHook = function CampaignWebHook(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -133,7 +137,17 @@ var CampaignWebHook = function CampaignWebHook(props) {
     }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  var handleGoToPage = function handleGoToPage() {
+    events.emit('go_to_page', {
+      page: 'integrations'
+    });
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('INTEGRATION_SETTINGS_LINK_DESC', 'You need to have an Integration first, you can do it here:'), " ", /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return handleGoToPage();
+    }
+  }, t('INTEGRATIONS', 'Integrations'))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
     defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes7 = contactState.changes) === null || _contactState$changes7 === void 0 ? void 0 : (_contactState$changes8 = _contactState$changes7.contact_data) === null || _contactState$changes8 === void 0 ? void 0 : _contactState$changes8.title) || '',

@@ -56,7 +56,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ReportsCustomerUI = function ReportsCustomerUI(props) {
-  var _reportData$content7, _reportData$content7$, _reportData$content7$2, _reportData$content8, _reportData$content8$, _reportData$content8$2, _reportData$content8$3, _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content9$3;
+  var _reportData$content7, _reportData$content7$, _reportData$content7$2, _reportData$content7$3, _reportData$content8, _reportData$content8$, _reportData$content8$2, _reportData$content8$3, _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content9$3;
 
   var filterList = props.filterList,
       handleChangeFilterList = props.handleChangeFilterList,
@@ -166,7 +166,7 @@ var ReportsCustomerUI = function ReportsCustomerUI(props) {
   var data = {
     labels: generateLabels(),
     datasets: [{
-      label: reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.dataset) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.dataset[0]) === null || _reportData$content7$2 === void 0 ? void 0 : _reportData$content7$2.label,
+      label: t(reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.dataset) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.dataset[0]) === null || _reportData$content7$2 === void 0 ? void 0 : (_reportData$content7$3 = _reportData$content7$2.label) === null || _reportData$content7$3 === void 0 ? void 0 : _reportData$content7$3.toUpperCase(), 'Report header qualification'),
       data: generateData(),
       fill: true,
       borderColor: '#2C7BE5',

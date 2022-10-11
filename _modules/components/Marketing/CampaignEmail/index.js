@@ -62,7 +62,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var CampaignEmailUI = function CampaignEmailUI(props) {
-  var _contactState$changes5, _contactState$changes6, _contactState$changes7, _contactState$changes8, _contactState$changes9, _contactState$changes10, _contactState$changes11, _contactState$changes12;
+  var _contactState$changes5, _contactState$changes6, _contactState$changes7, _contactState$changes8, _contactState$changes9, _contactState$changes13, _contactState$changes14, _contactState$changes15, _contactState$changes16;
 
   var isAddMode = props.isAddMode,
       contactState = props.contactState,
@@ -82,6 +82,10 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -99,6 +103,11 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       editorContext = _useState6[0],
       setEditorContext = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      emailBody = _useState8[0],
+      setEmailBody = _useState8[1];
 
   var handleCloseModal = function handleCloseModal() {
     setOpenModal(false);
@@ -195,8 +204,8 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
   var insertLink = function insertLink(context) {
     var ui = _jquery.default.summernote.ui;
     var button = ui.button({
-      contents: '<i class="note-icon-link"/>',
-      tooltip: 'link',
+      contents: '<button style="background: #2C7BE5; border: none; font-size: 12px; color: white;">BUTTON</button>',
+      tooltip: 'link-button',
       class: 'note-btn',
       click: function click() {
         setEditorContext(context);
@@ -207,14 +216,35 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
     return button.render();
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  var handleGoToPage = function handleGoToPage() {
+    events.emit('go_to_page', {
+      page: 'operationSettings',
+      search: '?category=10'
+    });
+  };
+
+  (0, _react.useEffect)(function () {
+    if (!emailBody) return;
+    handleChangeContact('body', emailBody);
+  }, [emailBody]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('SMTP_SETTINGS_LINK_DESC', 'You need to complete SMTP configuration first, you can do it here:'), " ", /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return handleGoToPage();
+    }
+  }, t('EMAIL_SETTINGS', 'Email settings'))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
     defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes5 = contactState.changes) === null || _contactState$changes5 === void 0 ? void 0 : (_contactState$changes6 = _contactState$changes5.contact_data) === null || _contactState$changes6 === void 0 ? void 0 : _contactState$changes6.title) || '',
     onChange: handleChangeData
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGES', 'Messages')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperEditor, null, /*#__PURE__*/_react.default.createElement(_reactSummernote.default, {
-    value: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes7 = contactState.changes) === null || _contactState$changes7 === void 0 ? void 0 : (_contactState$changes8 = _contactState$changes7.contact_data) === null || _contactState$changes8 === void 0 ? void 0 : _contactState$changes8.body) || '',
+    value: (_contactState$changes7 = contactState === null || contactState === void 0 ? void 0 : (_contactState$changes8 = contactState.changes) === null || _contactState$changes8 === void 0 ? void 0 : (_contactState$changes9 = _contactState$changes8.contact_data) === null || _contactState$changes9 === void 0 ? void 0 : _contactState$changes9.body) !== null && _contactState$changes7 !== void 0 ? _contactState$changes7 : '<p><br></p>',
     placeholder: t('EMAIL_CONTENT', 'Email content'),
+    onInit: function onInit(_ref) {
+      var _contactState$changes10, _contactState$changes11, _contactState$changes12;
+
+      var summernote = _ref.summernote;
+      return summernote('code', (_contactState$changes10 = contactState === null || contactState === void 0 ? void 0 : (_contactState$changes11 = contactState.changes) === null || _contactState$changes11 === void 0 ? void 0 : (_contactState$changes12 = _contactState$changes11.contact_data) === null || _contactState$changes12 === void 0 ? void 0 : _contactState$changes12.body) !== null && _contactState$changes10 !== void 0 ? _contactState$changes10 : '<p><br></p>');
+    },
     options: {
       height: 350,
       fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
@@ -225,11 +255,11 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
       }
     },
     onChange: function onChange(content) {
-      return handleChangeContact('body', content);
+      return setEmailBody(content);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.PointGroup, null, /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null))), /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewContent, null, /*#__PURE__*/_react.default.createElement("h2", null, (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes9 = contactState.changes) === null || _contactState$changes9 === void 0 ? void 0 : (_contactState$changes10 = _contactState$changes9.contact_data) === null || _contactState$changes10 === void 0 ? void 0 : _contactState$changes10.title) || ''), /*#__PURE__*/_react.default.createElement(_styles2.Preview, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.PointGroup, null, /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null))), /*#__PURE__*/_react.default.createElement(_styles2.EmailPreviewContent, null, /*#__PURE__*/_react.default.createElement("h2", null, (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes13 = contactState.changes) === null || _contactState$changes13 === void 0 ? void 0 : (_contactState$changes14 = _contactState$changes13.contact_data) === null || _contactState$changes14 === void 0 ? void 0 : _contactState$changes14.title) || ''), /*#__PURE__*/_react.default.createElement(_styles2.Preview, {
     dangerouslySetInnerHTML: {
-      __html: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes11 = contactState.changes) === null || _contactState$changes11 === void 0 ? void 0 : (_contactState$changes12 = _contactState$changes11.contact_data) === null || _contactState$changes12 === void 0 ? void 0 : _contactState$changes12.body) || ''
+      __html: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes15 = contactState.changes) === null || _contactState$changes15 === void 0 ? void 0 : (_contactState$changes16 = _contactState$changes15.contact_data) === null || _contactState$changes16 === void 0 ? void 0 : _contactState$changes16.body) || ''
     }
   })))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",

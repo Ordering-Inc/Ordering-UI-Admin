@@ -53,6 +53,10 @@ var CampaignNotification = function CampaignNotification(props) {
 
   var theme = (0, _styledComponents.useTheme)();
 
+  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
+      _useEvent2 = _slicedToArray(_useEvent, 1),
+      events = _useEvent2[0];
+
   var _useState = (0, _react.useState)({
     open: false,
     content: []
@@ -129,7 +133,18 @@ var CampaignNotification = function CampaignNotification(props) {
     }
   };
 
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  var handleGoToPage = function handleGoToPage() {
+    events.emit('go_to_page', {
+      page: 'operationSettings',
+      search: '?category=14'
+    });
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('NOTIFICATION_SETTINGS_LINK_DESC', 'You need to complete One signal configuration first, you can do it here:'), " ", /*#__PURE__*/_react.default.createElement("span", {
+    onClick: function onClick() {
+      return handleGoToPage();
+    }
+  }, t('NOTIFICATION_SETTINGS', 'Notification settings'))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
     defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes5 = contactState.changes) === null || _contactState$changes5 === void 0 ? void 0 : (_contactState$changes6 = _contactState$changes5.contact_data) === null || _contactState$changes6 === void 0 ? void 0 : _contactState$changes6.title) || '',
