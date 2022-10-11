@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useEvent } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { Alert } from '../../Shared'
@@ -11,7 +11,8 @@ import {
   SmsPreviewWrapper,
   SmsContentLayout,
   SmsPreviewContentWrapper,
-  SmsPreviewContent
+  SmsPreviewContent,
+  Description
 } from './styles'
 
 export const CampaignSMS = (props) => {
@@ -26,6 +27,7 @@ export const CampaignSMS = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const closeAlert = () => {
@@ -76,9 +78,16 @@ export const CampaignSMS = (props) => {
     }
   }
 
+  const handleGoToPage = () => {
+    events.emit('go_to_page', { page: 'operationSettings', search: '?category=26' })
+  }
+
   return (
     <>
       <Container>
+        <Description>
+          {t('TWILIO_SETTINGS_LINK_DESC', 'You need to complete Twilio configuration first, you can do it here:')} <span onClick={() => handleGoToPage()}>{t('TWILIO_SETTINGS', 'Twilio settings')}</span>
+        </Description>
         <InputWrapper>
           <label>{t('TITLE', 'Title')}</label>
           <Input

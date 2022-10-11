@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useEvent } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { Alert } from '../../Shared'
 
 import {
   Container,
   InputWrapper,
-  ButtonWrapper
+  ButtonWrapper,
+  Description
 } from './styles'
 
 export const CampaignWebHook = (props) => {
@@ -20,6 +21,7 @@ export const CampaignWebHook = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [events] = useEvent()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -78,9 +80,16 @@ export const CampaignWebHook = (props) => {
     }
   }
 
+  const handleGoToPage = () => {
+    events.emit('go_to_page', { page: 'integrations' })
+  }
+
   return (
     <>
       <Container>
+        <Description>
+          {t('INTEGRATION_SETTINGS_LINK_DESC', 'You need to have an Integration first, you can do it here:')} <span onClick={() => handleGoToPage()}>{t('INTEGRATIONS', 'Integrations')}</span>
+        </Description>
         <InputWrapper>
           <label>{t('TITLE', 'Title')}</label>
           <Input
