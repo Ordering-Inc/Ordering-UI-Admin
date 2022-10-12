@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -438,12 +438,25 @@ var ribbonValues = {
   enabled: false
 };
 /**
+ * Function to check URL
+ * @param {string} url URL of page
+ * @param {string} fallback default URL
+ */
+
+exports.ribbonValues = ribbonValues;
+
+var checkSiteUrl = function checkSiteUrl(url, fallback) {
+  if (!url) return fallback;
+  return url[(url === null || url === void 0 ? void 0 : url.length) - 1] === '/' ? url : "".concat(url, "/");
+};
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
  */
 
-exports.ribbonValues = ribbonValues;
+
+exports.checkSiteUrl = checkSiteUrl;
 
 var reviewCommentList = function reviewCommentList(type) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
