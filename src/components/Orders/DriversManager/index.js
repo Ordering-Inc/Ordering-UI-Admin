@@ -20,7 +20,8 @@ const DriversManagerUI = (props) => {
   const {
     onDriverRedirect,
     handleChangeSearch,
-    searchValue
+    searchValue,
+    driversIsOnline
   } = props
 
   const { drivers, loading } = props.driversList
@@ -62,6 +63,10 @@ const DriversManagerUI = (props) => {
       setIsOpenDriverOrders(true)
     }
   }, [drivers, loading])
+
+  useEffect(() => {
+    setSelectedDriver(null)
+  }, [driversIsOnline])
 
   return (
     <>
