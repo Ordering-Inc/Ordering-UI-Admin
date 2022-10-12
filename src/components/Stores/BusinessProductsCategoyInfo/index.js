@@ -287,35 +287,37 @@ export const BusinessProductsCategoyInfo = (props) => {
           autoComplete='off'
         />
       </CategoryNameWrapper>
-      <CategoryNameWrapper>
-        <label>{t('SLUG', 'Slug')}</label>
-        <Input
-          name='slug'
-          placeholder={t('SLUG', 'Slug')}
-          onChange={handleChangeInput}
-          disabled={formState.loading}
-          autoComplete='off'
-          value={
-            formState?.changes?.slug || ''
-          }
-          onKeyPress={e => {
-            if (e.which === 32) { e.preventDefault() }
-          }}
-        />
-        {/* <GenerateButtonWrapper>
-          <Button
-            color='lightPrimary'
-            borderRadius='7.6px'
-            disabled={formState.loading || !formState.changes?.name}
-            onClick={() => setAutoGenerate({
-              ...autoGenerateCode,
-              isAutoGenerate: true
-            })}
-          >
-            {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
-          </Button>
-        </GenerateButtonWrapper> */}
-      </CategoryNameWrapper>
+      {!isAddMode && (
+        <CategoryNameWrapper>
+          <label>{t('SLUG', 'Slug')}</label>
+          <Input
+            name='slug'
+            placeholder={t('SLUG', 'Slug')}
+            onChange={handleChangeInput}
+            disabled={formState.loading}
+            autoComplete='off'
+            value={
+              formState?.changes?.slug || ''
+            }
+            onKeyPress={e => {
+              if (e.which === 32) { e.preventDefault() }
+            }}
+          />
+          {/* <GenerateButtonWrapper>
+            <Button
+              color='lightPrimary'
+              borderRadius='7.6px'
+              disabled={formState.loading || !formState.changes?.name}
+              onClick={() => setAutoGenerate({
+                ...autoGenerateCode,
+                isAutoGenerate: true
+              })}
+            >
+              {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
+            </Button>
+          </GenerateButtonWrapper> */}
+        </CategoryNameWrapper>
+      )}
       <SwitchWrapper>
         <span>{t('RIBBON', 'Ribbon')}</span>
         <Switch
