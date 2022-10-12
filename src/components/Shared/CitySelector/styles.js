@@ -35,6 +35,10 @@ export const Option = styled.div`
 
 export const PlaceholderTitle = styled(Option)`
   color: ${props => props.theme.colors.headingColor};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 
   ${({ isDefault }) => isDefault ? css`
     padding: 5px 15px;
