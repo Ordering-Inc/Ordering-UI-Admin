@@ -51,3 +51,13 @@ export const GuideLink = styled.div`
     height: 44px;
   }
 `
+
+export const ConfigMessage = styled.div`
+  font-size: 14px;
+  span {
+    color: ${props => props.theme.colors.primary};
+    text-decoration: underline;
+    cursor: pointer;
+    display: block;
+  }
+`
