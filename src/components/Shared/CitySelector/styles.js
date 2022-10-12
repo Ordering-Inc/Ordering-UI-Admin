@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components'
 
 export const Option = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
 
   ${({ isDefault }) => isDefault ? css`
     padding: 5px 15px;
