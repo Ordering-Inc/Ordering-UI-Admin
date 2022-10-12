@@ -36,7 +36,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DriversLocation = function DriversLocation(props) {
-  var _configState$configs, _configState$configs$;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5;
 
   var driversIsOnline = props.driversIsOnline,
       onlineDrivers = props.onlineDrivers,
@@ -48,16 +48,21 @@ var DriversLocation = function DriversLocation(props) {
       configState = _useConfig2[0];
 
   var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
+  var defaultLatitude = Number(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.location_default_latitude) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value);
+  var defaultLongitude = Number(configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.location_default_longitude) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value);
+  var isInvalidDefaultLocation = isNaN(defaultLatitude) || isNaN(defaultLongitude);
+  var defaultCenter = {
+    lat: !isInvalidDefaultLocation ? defaultLatitude : 40.7744146,
+    lng: !isInvalidDefaultLocation ? defaultLongitude : -73.9678064
+  };
+  var defaultZoom = 10;
 
-  var _useState = (0, _react.useState)({
-    lat: 19.4326,
-    lng: -99.1332
-  }),
+  var _useState = (0, _react.useState)(defaultCenter),
       _useState2 = _slicedToArray(_useState, 2),
       mapCenter = _useState2[0],
       setMapCenter = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(10),
+  var _useState3 = (0, _react.useState)(defaultZoom),
       _useState4 = _slicedToArray(_useState3, 2),
       mapZoom = _useState4[0],
       setMapZoom = _useState4[1];
@@ -72,11 +77,6 @@ var DriversLocation = function DriversLocation(props) {
       mapFitted = _useState8[0],
       setMapFitted = _useState8[1];
 
-  var defaultCenter = {
-    lat: 19.4326,
-    lng: -99.1332
-  };
-  var defaultZoom = 10;
   var mapRef = (0, _react.useRef)(null);
 
   var _useState9 = (0, _react.useState)([]),
@@ -145,7 +145,14 @@ var DriversLocation = function DriversLocation(props) {
 
 
   (0, _react.useEffect)(function () {
-    if (showDrivers.length === 0 || mapLoaded) return;
+    if (mapLoaded) return;
+
+    if (showDrivers.length === 0) {
+      setMapZoom(defaultZoom);
+      setMapCenter(defaultCenter);
+      setMapFitted(false);
+      return;
+    }
 
     if (!mapFitted) {
       mapFit();

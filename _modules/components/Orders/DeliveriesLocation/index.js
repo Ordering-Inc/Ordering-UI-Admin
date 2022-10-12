@@ -42,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DeliveriesLocation = function DeliveriesLocation(props) {
-  var _configState$configs, _configState$configs$, _interActionMapOrder$7, _interActionMapOrder$8, _interActionMapOrder$9, _interActionMapOrder$10, _interActionMapOrder$11, _interActionMapOrder$12, _interActionMapOrder$13, _interActionMapOrder$14, _interActionMapOrder$15, _interActionMapOrder$16, _interActionMapOrder$17, _interActionMapOrder$18, _interActionMapOrder$19, _interActionMapOrder$20, _interActionMapOrder$21;
+  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _configState$configs4, _configState$configs5, _interActionMapOrder$7, _interActionMapOrder$8, _interActionMapOrder$9, _interActionMapOrder$10, _interActionMapOrder$11, _interActionMapOrder$12, _interActionMapOrder$13, _interActionMapOrder$14, _interActionMapOrder$15, _interActionMapOrder$16, _interActionMapOrder$17, _interActionMapOrder$18, _interActionMapOrder$19, _interActionMapOrder$20, _interActionMapOrder$21;
 
   var driversList = props.driversList,
       interActionMapOrder = props.interActionMapOrder;
@@ -57,11 +57,15 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
       configState = _useConfig2[0];
 
   var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
+  var defaultLatitude = Number(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.location_default_latitude) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value);
+  var defaultLongitude = Number(configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.location_default_longitude) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value);
+  var isInvalidDefaultLocation = isNaN(defaultLatitude) || isNaN(defaultLongitude);
+  var defaultCenter = {
+    lat: !isInvalidDefaultLocation ? defaultLatitude : 40.7744146,
+    lng: !isInvalidDefaultLocation ? defaultLongitude : -73.9678064
+  };
 
-  var _useState = (0, _react.useState)({
-    lat: 19.4326,
-    lng: -99.1332
-  }),
+  var _useState = (0, _react.useState)(defaultCenter),
       _useState2 = _slicedToArray(_useState, 2),
       mapCenter = _useState2[0],
       setMapCenter = _useState2[1];
@@ -91,10 +95,6 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
       interActionOrderDriverLocation = _useState12[0],
       setInterActionOrderDriverLocation = _useState12[1];
 
-  var defaultCenter = {
-    lat: 19.4326,
-    lng: -99.1332
-  };
   var defaultZoom = 10;
   var mapRef = (0, _react.useRef)(null);
 
