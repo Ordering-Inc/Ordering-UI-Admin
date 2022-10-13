@@ -194,6 +194,17 @@ export const ProductDetatilsInformation = (props) => {
     }
   }, [product?.price, formState?.changes?.price])
 
+  useEffect(() => {
+    if (typeof formState?.changes?.name === 'undefined') return
+    const generateCode = {
+      target: {
+        name: 'slug',
+        value: stringToSlug(formState.changes.name)
+      }
+    }
+    handleChangeInput(generateCode)
+  }, [formState?.changes?.name])
+
   return (
     <>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -313,7 +324,7 @@ export const ProductDetatilsInformation = (props) => {
             onChange={handleChangeInput}
             disabled={formState.loading}
             autoComplete='off'
-            defaultValue={product?.slug}
+            value={formState?.changes?.slug ?? product?.slug ?? ''}
             onKeyPress={e => {
               if (e.which === 32) { e.preventDefault() }
             }}
