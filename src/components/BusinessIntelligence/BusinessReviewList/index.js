@@ -33,48 +33,14 @@ const BusinessReviewsListingUI = (props) => {
   const [openReview, setOpenReview] = useState(false)
   const [curBusiness, setCurBusiness] = useState(null)
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [businessesPerPage, setBusinessesPerPage] = useState(10)
-  const [currentBusinessess, setCurrentBusinessess] = useState([])
-  const [totalPages, setTotalPages] = useState(null)
-
   const handleChangePage = (page) => {
-    if ((pagination.from <= page * businessesPerPage && page * businessesPerPage <= pagination.to) ||
-      (pagination.from <= page * businessesPerPage && page * businessesPerPage > pagination.total)
-    ) {
-      setCurrentPage(page)
-    } else {
-      getPageBusinesses(businessesPerPage, page)
-    }
+    getPageBusinesses(pagination.pageSize, page)
   }
 
   const handleChangePageSize = (pageSize) => {
-    setBusinessesPerPage(pageSize)
     const expectedPage = Math.ceil(pagination.from / pageSize)
-    if ((pagination.from <= expectedPage * pageSize && expectedPage * pageSize <= pagination.to) ||
-      (pagination.from <= expectedPage * pageSize && expectedPage * pageSize > pagination.total)
-    ) {
-      setCurrentPage(expectedPage)
-    } else {
-      setCurrentPage(expectedPage)
-      getPageBusinesses(pageSize, expectedPage)
-    }
+    getPageBusinesses(pageSize, expectedPage)
   }
-
-  useEffect(() => {
-    if (businessList.loading) return
-    let _totalPages
-    if (pagination?.total) {
-      _totalPages = Math.ceil(pagination?.total / businessesPerPage)
-    } else if (businessList.businesses.length > 0) {
-      _totalPages = Math.ceil(businessList.businesses.length / businessesPerPage)
-    }
-    const indexOfLastPost = currentPage * businessesPerPage
-    const indexOfFirstPost = indexOfLastPost - businessesPerPage
-    const _currentBusinessess = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost)
-    setTotalPages(_totalPages)
-    setCurrentBusinessess(_currentBusinessess)
-  }, [businessList, currentPage, pagination, businessesPerPage])
 
   const handleOpenReview = (business) => {
     setCurBusiness(business)
@@ -84,7 +50,6 @@ const BusinessReviewsListingUI = (props) => {
   useEffect(() => {
     if (parentSearchValue === null) return
     onSearch(parentSearchValue)
-    setCurrentPage(1)
   }, [parentSearchValue])
 
   return (
@@ -97,7 +62,7 @@ const BusinessReviewsListingUI = (props) => {
           </tr>
         </thead>
         {businessList.loading ? (
-          [...Array(businessesPerPage).keys()].map(i => (
+          [...Array(pagination.pageSize).keys()].map(i => (
             <ReviewTbody key={i}>
               <tr>
                 <td>
@@ -116,7 +81,7 @@ const BusinessReviewsListingUI = (props) => {
             </ReviewTbody>
           ))
         ) : (
-          currentBusinessess.map(business => (
+          businessList.businesses.map(business => (
             <ReviewTbody
               key={business.id}
               active={business.id === curBusiness?.id}
@@ -149,17 +114,18 @@ const BusinessReviewsListingUI = (props) => {
           ))
         )}
       </ReviewsTable>
-      <PagesBottomContainer>
-        {!businessList.loading && totalPages > 0 && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            handleChangePage={handleChangePage}
-            defaultPageSize={businessesPerPage}
-            handleChangePageSize={handleChangePageSize}
-          />
-        )}
-      </PagesBottomContainer>
+      {pagination && (
+        <PagesBottomContainer>
+          {pagination?.total > 0 && (
+            <Pagination
+              currentPage={pagination.currentPage}
+              totalPages={Math.ceil(pagination?.total / pagination.pageSize)}
+              handleChangePage={handleChangePage}
+              handleChangePageSize={handleChangePageSize}
+            />
+          )}
+        </PagesBottomContainer>
+      )}
       {openReview && (
         <SideBar
           defaultSideBarWidth={550}
@@ -196,8 +162,6 @@ export const BusinessReviewList = (props) => {
     ...props,
     noActiveStatusCondition: true,
     asDashboard: true,
-    initialPageSize: 50,
-    loadMorePageSize: 10,
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
     isSearchByBusinessPhone: true,
