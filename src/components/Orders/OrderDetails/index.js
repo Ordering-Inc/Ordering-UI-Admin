@@ -528,6 +528,7 @@ export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,
     asDashboard: true,
+    isDisableLoadMessages: true,
     UIComponent: OrderDetailsUI
   }
 
