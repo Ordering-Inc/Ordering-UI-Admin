@@ -65,6 +65,7 @@ export const BusinessProductsCategoyInfo = (props) => {
     isAutoGenerate: false,
     autoCodeText: categorySelected?.slug
   })
+  const [isTouchedName, setIsTouchedName] = useState(false)
 
   const headerImageInputRef = useRef(null)
 
@@ -204,6 +205,17 @@ export const BusinessProductsCategoyInfo = (props) => {
     }
   }, [autoGenerateCode])
 
+  useEffect(() => {
+    if (typeof formState?.changes?.name === 'undefined' || !isTouchedName) return
+    const generateCode = {
+      target: {
+        name: 'slug',
+        value: stringToSlug(formState.changes.name)
+      }
+    }
+    handleChangeInput(generateCode)
+  }, [formState?.changes?.name, isTouchedName])
+
   return (
     <>
       <HeaderImage
@@ -273,7 +285,10 @@ export const BusinessProductsCategoyInfo = (props) => {
           placeholder={t('ENTER_CATEGORY_NAME', 'Enter a category name')}
           name='name'
           value={formState?.changes?.name || ''}
-          onChange={handleChangeInput}
+          onChange={e => {
+            !isTouchedName && setIsTouchedName(true)
+            handleChangeInput(e)
+          }}
           autoComplete='off'
         />
       </CategoryNameWrapper>
@@ -287,35 +302,37 @@ export const BusinessProductsCategoyInfo = (props) => {
           autoComplete='off'
         />
       </CategoryNameWrapper>
-      <CategoryNameWrapper>
-        <label>{t('SLUG', 'Slug')}</label>
-        <Input
-          name='slug'
-          placeholder={t('SLUG', 'Slug')}
-          onChange={handleChangeInput}
-          disabled={formState.loading}
-          autoComplete='off'
-          value={
-            formState?.changes?.slug || ''
-          }
-          onKeyPress={e => {
-            if (e.which === 32) { e.preventDefault() }
-          }}
-        />
-        {/* <GenerateButtonWrapper>
-          <Button
-            color='lightPrimary'
-            borderRadius='7.6px'
-            disabled={formState.loading || !formState.changes?.name}
-            onClick={() => setAutoGenerate({
-              ...autoGenerateCode,
-              isAutoGenerate: true
-            })}
-          >
-            {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
-          </Button>
-        </GenerateButtonWrapper> */}
-      </CategoryNameWrapper>
+      {!isAddMode && (
+        <CategoryNameWrapper>
+          <label>{t('SLUG', 'Slug')}</label>
+          <Input
+            name='slug'
+            placeholder={t('SLUG', 'Slug')}
+            onChange={handleChangeInput}
+            disabled={formState.loading}
+            autoComplete='off'
+            value={
+              formState?.changes?.slug || ''
+            }
+            onKeyPress={e => {
+              if (e.which === 32) { e.preventDefault() }
+            }}
+          />
+          {/* <GenerateButtonWrapper>
+            <Button
+              color='lightPrimary'
+              borderRadius='7.6px'
+              disabled={formState.loading || !formState.changes?.name}
+              onClick={() => setAutoGenerate({
+                ...autoGenerateCode,
+                isAutoGenerate: true
+              })}
+            >
+              {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
+            </Button>
+          </GenerateButtonWrapper> */}
+        </CategoryNameWrapper>
+      )}
       <SwitchWrapper>
         <span>{t('RIBBON', 'Ribbon')}</span>
         <Switch
