@@ -48,7 +48,9 @@ var CitySelectorUI = function CitySelectorUI(props) {
       isDefault = props.isDefault,
       filterValues = props.filterValues,
       defaultValue = props.defaultValue,
-      handleChangeCity = props.handleChangeCity;
+      handleChangeCity = props.handleChangeCity,
+      position = props.position,
+      optionInnerMaxHeight = props.optionInnerMaxHeight;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -87,6 +89,8 @@ var CitySelectorUI = function CitySelectorUI(props) {
       lineHeight: 'normal'
     }
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isDefault ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    position: position,
+    optionInnerMaxHeight: optionInnerMaxHeight,
     placeholder: placeholder,
     defaultValue: defaultValue,
     options: cityOptions,

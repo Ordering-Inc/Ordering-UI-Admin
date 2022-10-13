@@ -94,65 +94,14 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
       curBusiness = _useState6[0],
       setCurBusiness = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(1),
-      _useState8 = _slicedToArray(_useState7, 2),
-      currentPage = _useState8[0],
-      setCurrentPage = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(10),
-      _useState10 = _slicedToArray(_useState9, 2),
-      businessesPerPage = _useState10[0],
-      setBusinessesPerPage = _useState10[1];
-
-  var _useState11 = (0, _react.useState)([]),
-      _useState12 = _slicedToArray(_useState11, 2),
-      currentBusinessess = _useState12[0],
-      setCurrentBusinessess = _useState12[1];
-
-  var _useState13 = (0, _react.useState)(null),
-      _useState14 = _slicedToArray(_useState13, 2),
-      totalPages = _useState14[0],
-      setTotalPages = _useState14[1];
-
   var handleChangePage = function handleChangePage(page) {
-    if (pagination.from <= page * businessesPerPage && page * businessesPerPage <= pagination.to || pagination.from <= page * businessesPerPage && page * businessesPerPage > pagination.total) {
-      setCurrentPage(page);
-    } else {
-      getPageBusinesses(businessesPerPage, page);
-    }
+    getPageBusinesses(pagination.pageSize, page);
   };
 
   var handleChangePageSize = function handleChangePageSize(pageSize) {
-    setBusinessesPerPage(pageSize);
     var expectedPage = Math.ceil(pagination.from / pageSize);
-
-    if (pagination.from <= expectedPage * pageSize && expectedPage * pageSize <= pagination.to || pagination.from <= expectedPage * pageSize && expectedPage * pageSize > pagination.total) {
-      setCurrentPage(expectedPage);
-    } else {
-      setCurrentPage(expectedPage);
-      getPageBusinesses(pageSize, expectedPage);
-    }
+    getPageBusinesses(pageSize, expectedPage);
   };
-
-  (0, _react.useEffect)(function () {
-    if (businessList.loading) return;
-
-    var _totalPages;
-
-    if (pagination !== null && pagination !== void 0 && pagination.total) {
-      _totalPages = Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / businessesPerPage);
-    } else if (businessList.businesses.length > 0) {
-      _totalPages = Math.ceil(businessList.businesses.length / businessesPerPage);
-    }
-
-    var indexOfLastPost = currentPage * businessesPerPage;
-    var indexOfFirstPost = indexOfLastPost - businessesPerPage;
-
-    var _currentBusinessess = businessList.businesses.slice(indexOfFirstPost, indexOfLastPost);
-
-    setTotalPages(_totalPages);
-    setCurrentBusinessess(_currentBusinessess);
-  }, [businessList, currentPage, pagination, businessesPerPage]);
 
   var handleOpenReview = function handleOpenReview(business) {
     setCurBusiness(business);
@@ -162,13 +111,12 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
   (0, _react.useEffect)(function () {
     if (parentSearchValue === null) return;
     onSearch(parentSearchValue);
-    setCurrentPage(1);
   }, [parentSearchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
   }, t('BUSINESS', 'Business'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
     isHeader: true
-  }, t('REVIEWS', 'Reviews'))))), businessList.loading ? _toConsumableArray(Array(businessesPerPage).keys()).map(function (i) {
+  }, t('REVIEWS', 'Reviews'))))), businessList.loading ? _toConsumableArray(Array(pagination.pageSize).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, {
@@ -183,7 +131,7 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     }))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 20
     })))));
-  }) : currentBusinessess.map(function (business) {
+  }) : businessList.businesses.map(function (business) {
     var _theme$images, _theme$images$dummies, _business$reviews, _business$reviews2;
 
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewTbody, {
@@ -197,11 +145,10 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.address)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, null, (business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, null), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$reviews2 = business.reviews) === null || _business$reviews2 === void 0 ? void 0 : _business$reviews2.total))))));
-  })), /*#__PURE__*/_react.default.createElement(_styles.PagesBottomContainer, null, !businessList.loading && totalPages > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
-    currentPage: currentPage,
-    totalPages: totalPages,
+  })), pagination && /*#__PURE__*/_react.default.createElement(_styles.PagesBottomContainer, null, (pagination === null || pagination === void 0 ? void 0 : pagination.total) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    currentPage: pagination.currentPage,
+    totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),
     handleChangePage: handleChangePage,
-    defaultPageSize: businessesPerPage,
     handleChangePageSize: handleChangePageSize
   })), openReview && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     defaultSideBarWidth: 550,
@@ -239,8 +186,6 @@ var BusinessReviewList = function BusinessReviewList(props) {
   var reviewsProps = _objectSpread(_objectSpread({}, props), {}, {
     noActiveStatusCondition: true,
     asDashboard: true,
-    initialPageSize: 50,
-    loadMorePageSize: 10,
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
     isSearchByBusinessPhone: true,

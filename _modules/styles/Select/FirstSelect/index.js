@@ -56,7 +56,8 @@ var Select = function Select(props) {
       searchBarIsCustomLayout = props.searchBarIsCustomLayout,
       searchBarPlaceholder = props.searchBarPlaceholder,
       searchBarIsNotLazyLoad = props.searchBarIsNotLazyLoad,
-      isDisabled = props.isDisabled;
+      isDisabled = props.isDisabled,
+      position = props.position;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -151,7 +152,7 @@ var Select = function Select(props) {
   }, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     className: "list",
     isAbsolute: true,
-    position: "right",
+    position: position || 'right',
     ref: dropdownReference
   }, isShowSearchBar && /*#__PURE__*/_react.default.createElement(_Selects.SearchBarWrapper, {
     className: "search-bar-container"
@@ -164,7 +165,7 @@ var Select = function Select(props) {
   })), /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
     className: "list-wrapper",
     optionInnerMargin: props.optionInnerMargin,
-    optionInnerMaxHeight: props.optionInnerMaxHeight
+    optionInnerMaxHeight: props.optionInnerMaxHeight || 'initial'
   }, options.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
       key: i,

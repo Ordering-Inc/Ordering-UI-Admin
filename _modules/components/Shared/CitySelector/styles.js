@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  white-space: nowrap;\n\n  ", "\n\n  ", "\n\n  svg {\n    margin-right: 5px;\n    ", " \n  }\n\n  ", "\n"])), function (_ref) {
+var Option = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-width: 300px;\n\n  ", "\n\n  ", "\n\n  svg {\n    margin-right: 5px;\n    ", " \n  }\n\n  ", "\n"])), function (_ref) {
   var isDefault = _ref.isDefault;
   return isDefault ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    padding: 5px 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    padding: 10px;\n  "])));
 }, function (_ref2) {
@@ -37,7 +37,7 @@ var Option = _styledComponents.default.div(_templateObject || (_templateObject =
 });
 
 exports.Option = Option;
-var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  color: ", ";\n\n  ", "\n"])), function (props) {
+var PlaceholderTitle = (0, _styledComponents.default)(Option)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  color: ", ";\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-width: 200px;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (_ref4) {
   var isDefault = _ref4.isDefault;
