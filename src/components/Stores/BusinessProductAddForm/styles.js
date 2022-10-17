@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const FormInput = styled.form`
+export const FormInput = styled.div`
   overflow: auto;
   width: 100%;
   padding: 20px;
