@@ -16,7 +16,8 @@ import {
   LevelName,
   Image,
   AddNewLevelButton,
-  LevelBottomContainer
+  LevelBottomContainer,
+  NotFoundSourceWrapper
 } from './styles'
 import { LoyaltyLevelDetail } from '../LoyaltyLevelDetail'
 
@@ -106,7 +107,9 @@ const PointsWalletLevelsUI = (props) => {
                 <ChevronRight />
               </LevelItemContainer>
             )) : (
-              <NotFoundSource />
+              <NotFoundSourceWrapper>
+                <NotFoundSource />
+              </NotFoundSourceWrapper>
             )}
           </>
         )}
