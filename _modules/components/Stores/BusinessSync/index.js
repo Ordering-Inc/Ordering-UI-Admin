@@ -40,17 +40,14 @@ var BusinessSync = function BusinessSync(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
-  var _useState = (0, _react.useState)('basic'),
+  var _useState = (0, _react.useState)('deliverect'),
       _useState2 = _slicedToArray(_useState, 2),
       selectedOption = _useState2[0],
       setSelectedOption = _useState2[1];
 
   var syncOptions = [{
-    key: 'basic',
-    name: t('BASIC', 'Basic')
-  }, {
-    key: 'synced_store',
-    name: t('SYNCED_STORE', 'Synced store')
+    key: 'deliverect',
+    name: t('DELIVERECT', 'Deliverect')
   }];
 
   var handleChangeOption = function handleChangeOption(key) {
@@ -66,7 +63,7 @@ var BusinessSync = function BusinessSync(props) {
         return handleChangeOption(option.key);
       }
     }, option.name);
-  })), selectedOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessSyncBasic.BusinessSyncBasic, null), selectedOption === 'synced_store' && /*#__PURE__*/_react.default.createElement(_BusinessSyncStore.BusinessSyncStore, {
+  })), selectedOption === 'deliverect' && /*#__PURE__*/_react.default.createElement(_BusinessSyncBasic.BusinessSyncBasic, null), selectedOption === 'synced_store' && /*#__PURE__*/_react.default.createElement(_BusinessSyncStore.BusinessSyncStore, {
     handleParentSidebarMove: handleParentSidebarMove
   }));
 };

@@ -13,6 +13,8 @@ var _styledComponents = require("styled-components");
 
 var _styles = require("./styles");
 
+var _styles2 = require("../../../styles");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -41,11 +43,13 @@ var BusinessSyncBasic = function BusinessSyncBasic() {
     dangerouslySetInnerHTML: {
       __html: t('SYNC_DEC_SECOND', 'Deliverect integrates all your <span>online orders</span> to your <span>existing POS</span> or our <span>Delivery Manger app.</span> Restaurants large and small rely on Deliverect to reduce failures and order mistakes while speeding up order preparation.')
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles.GuideStep, null, /*#__PURE__*/_react.default.createElement("h4", null, t('STEP', 'Step'), "1"), /*#__PURE__*/_react.default.createElement("p", null, t('CREATE_ACCOUNT_WITH_DELIVERECT', 'Create your account with deliverect.'), " ", /*#__PURE__*/_react.default.createElement("a", {
-    href: "https://www.deliverect.com/"
-  }, "www.deliverect.com"))), /*#__PURE__*/_react.default.createElement(_styles.GuideStep, null, /*#__PURE__*/_react.default.createElement("h4", null, t('STEP', 'Step'), "2"), /*#__PURE__*/_react.default.createElement("p", null, t('COPY_THIS_LINK', 'Copy this link'), ": ", /*#__PURE__*/_react.default.createElement("a", {
-    href: "https://www.deliverect.com/"
-  }, "www.deliverect.com"))), /*#__PURE__*/_react.default.createElement(_styles.GuideStep, null, /*#__PURE__*/_react.default.createElement("h4", null, t('STEP', 'Step'), "3"), /*#__PURE__*/_react.default.createElement("p", null, t('CHECK_VIDEO_TO_LEARN_TO_PASTE_LINK', 'Check this video to learn where to paste the link.'))), /*#__PURE__*/_react.default.createElement(_styles.YoutubeVideoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.YoutubeVideoInner, null, /*#__PURE__*/_react.default.createElement("iframe", {
+  })), /*#__PURE__*/_react.default.createElement(_styles.GetStarted, null, /*#__PURE__*/_react.default.createElement("h2", null, t('GET_STARTED_RIGHT_HERE', 'Get started right here')), /*#__PURE__*/_react.default.createElement("p", null, t('FILL_UP_THIS_FORM_TO_REQUEST_INFORMATION', 'Fill up this form to request more information')), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://share.hsforms.com/1uGzNQ71IS2KXCAFC0mTBCg3neff",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+    color: "primary"
+  }, t('SEND_FORM', 'Send Form')))), /*#__PURE__*/_react.default.createElement(_styles.YoutubeVideoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.YoutubeVideoInner, null, /*#__PURE__*/_react.default.createElement("iframe", {
     title: "youtube",
     src: "https://www.youtube.com/embed/_v8nPmW_E-0?playlist=_v8nPmW_E-0&loop=1"
   }))));
