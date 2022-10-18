@@ -14,11 +14,10 @@ export const BusinessSync = (props) => {
   const { handleParentSidebarMove } = props
 
   const [, t] = useLanguage()
-  const [selectedOption, setSelectedOption] = useState('basic')
+  const [selectedOption, setSelectedOption] = useState('deliverect')
 
   const syncOptions = [
-    { key: 'basic', name: t('BASIC', 'Basic') },
-    { key: 'synced_store', name: t('SYNCED_STORE', 'Synced store') }
+    { key: 'deliverect', name: t('DELIVERECT', 'Deliverect') }
   ]
 
   const handleChangeOption = (key) => {
@@ -42,7 +41,7 @@ export const BusinessSync = (props) => {
           </Tab>
         ))}
       </Tabs>
-      {selectedOption === 'basic' && (
+      {selectedOption === 'deliverect' && (
         <BusinessSyncBasic />
       )}
       {selectedOption === 'synced_store' && (
