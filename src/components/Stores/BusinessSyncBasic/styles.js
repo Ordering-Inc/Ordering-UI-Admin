@@ -30,26 +30,30 @@ export const Description = styled.div`
   }
 `
 
-export const GuideStep = styled.div`
-  margin-bottom: 30px;
-  h4 {
-    font-weight: 400;
+export const GetStarted = styled.div`
+  h2 {
+    font-weight: 500;
     font-size: 14px;
     line-height: 24px;
-    margin-bottom: 7px;
+    margin-top: 0px;
+    margin-bottom: 10px;
   }
   p {
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
+    margin-top: 0px;
+    margin-bottom: 8px;
     color: ${props => props.theme.colors.lightGray};
-    a {
-      color: ${props => props.theme.colors.primary};
-    }
+  }
+  button {
+    border-radius: 8px;
+    height: 44px;
   }
 `
 
 export const YoutubeVideoWrapper = styled.div`
+  margin-top: 50px;
   padding-bottom: 30px;
 `
 
