@@ -153,7 +153,7 @@ const CampaignEmailUI = (props) => {
           <Input
             name='title'
             placeholder={t('TITLE', 'Title')}
-            defaultValue={contactState?.changes?.contact_data?.title || ''}
+            value={contactState?.changes?.contact_data?.title || ''}
             onChange={handleChangeData}
           />
         </InputWrapper>
@@ -174,12 +174,17 @@ const CampaignEmailUI = (props) => {
                   ['color', ['color']],
                   ['para', ['ul', 'paragraph']],
                   ['table', ['table']],
-                  ['insert', ['insertLink', 'insertImage', 'insertVideo']],
+                  ['insert', ['insertLink', 'insertImage']],
                   ['codeview', ['codeview']]
                 ],
                 buttons: {
                   insertLink: insertLink,
                   insertImage: insertImage
+                },
+                popover: {
+                  link: [
+                    ['link', ['linkDialogShow']]
+                  ]
                 }
               }}
               onChange={content => setEmailBody(content)}
