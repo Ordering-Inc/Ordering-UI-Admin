@@ -355,12 +355,13 @@ import {
   CitySelector,
   ColumnAllowSettingPopover,
   Pagination,
-  ImageCrop
+  ImageCrop,
+  NotFoundSource
 } from './components/Shared'
 import { LogoutButton } from './components/LogoutButton'
 import { LanguageSelector } from './components/LanguageSelector'
 
-import { capitalize } from './utils'
+import { capitalize, verifyDecimals } from './utils'
 
 // contexts
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
@@ -736,6 +737,7 @@ export {
   ColumnAllowSettingPopover,
   Pagination,
   ImageCrop,
+  NotFoundSource,
 
   capitalize,
 
