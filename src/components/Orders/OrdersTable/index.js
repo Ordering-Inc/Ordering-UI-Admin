@@ -348,6 +348,7 @@ export const OrdersTable = (props) => {
                             allowColumns={allowColumns}
                             optionsDefault={optionsDefault}
                             handleChangeAllowColumns={handleChangeAllowColumns}
+                            isOrder
                           />
                         </th>
                       )

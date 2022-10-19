@@ -75,6 +75,10 @@ export const ThemeProvider = ({ children, ...props }) => {
       z-index: 3000;
     }
 
+    .modal-backdrop {
+      display: none;
+    }
+
     .popup-component {
       background-color: rgba(0, 0, 0, 0.3);
       display: flex;
