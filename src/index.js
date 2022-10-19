@@ -54,7 +54,8 @@ import {
   OrdersListing,
   OrdersTable,
   OrdersCards,
-  ReviewCustomer
+  ReviewCustomer,
+  OrderToPrint
 } from './components/Orders'
 import { Support } from './components/Support'
 import {
@@ -434,6 +435,7 @@ export {
   OrdersTable,
   OrdersCards,
   ReviewCustomer,
+  OrderToPrint,
 
   BusinessAnalytics,
   DriverAnalytics,
@@ -742,6 +744,7 @@ export {
   NotFoundSource,
 
   capitalize,
+  verifyDecimals,
 
   // contexts
   ThemeContext,
