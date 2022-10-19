@@ -234,7 +234,7 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
   }, t('EMAIL_SETTINGS', 'Email settings'))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
-    defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes5 = contactState.changes) === null || _contactState$changes5 === void 0 ? void 0 : (_contactState$changes6 = _contactState$changes5.contact_data) === null || _contactState$changes6 === void 0 ? void 0 : _contactState$changes6.title) || '',
+    value: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes5 = contactState.changes) === null || _contactState$changes5 === void 0 ? void 0 : (_contactState$changes6 = _contactState$changes5.contact_data) === null || _contactState$changes6 === void 0 ? void 0 : _contactState$changes6.title) || '',
     onChange: handleChangeData
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGES', 'Messages')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperEditor, null, /*#__PURE__*/_react.default.createElement(_reactSummernote.default, {
     value: (_contactState$changes7 = contactState === null || contactState === void 0 ? void 0 : (_contactState$changes8 = contactState.changes) === null || _contactState$changes8 === void 0 ? void 0 : (_contactState$changes9 = _contactState$changes8.contact_data) === null || _contactState$changes9 === void 0 ? void 0 : _contactState$changes9.body) !== null && _contactState$changes7 !== void 0 ? _contactState$changes7 : '<p><br></p>',
@@ -248,10 +248,13 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
     options: {
       height: 350,
       fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
-      toolbar: [['style', ['style']], ['font', ['bold', 'italic', 'underline', 'clear']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'paragraph']], ['table', ['table']], ['insert', ['insertLink', 'insertImage', 'insertVideo']], ['codeview', ['codeview']]],
+      toolbar: [['style', ['style']], ['font', ['bold', 'italic', 'underline', 'clear']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'paragraph']], ['table', ['table']], ['insert', ['insertLink', 'insertImage']], ['codeview', ['codeview']]],
       buttons: {
         insertLink: insertLink,
         insertImage: insertImage
+      },
+      popover: {
+        link: [['link', ['linkDialogShow']]]
       }
     },
     onChange: function onChange(content) {

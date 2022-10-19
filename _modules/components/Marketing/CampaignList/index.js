@@ -73,9 +73,9 @@ var CampaignList = function CampaignList(props) {
     sent_count: true,
     open_count: true,
     unsubscribed_count: true,
-    bounced_count: true,
-    update: true,
-    actions: true
+    bounced_count: true // update: true,
+    // actions: true
+
   }),
       _useState2 = _slicedToArray(_useState, 2),
       allowColumns = _useState2[0],
@@ -102,13 +102,15 @@ var CampaignList = function CampaignList(props) {
   }, {
     value: 'bounced_count',
     content: t('BOUNCES', 'Bounces')
-  }, {
-    value: 'update',
-    content: t('UPDATE', 'Update')
-  }, {
-    value: 'actions',
-    content: t('ACTIONS', 'Actions')
-  }];
+  } // {
+  //   value: 'update',
+  //   content: t('UPDATE', 'Update')
+  // },
+  // {
+  //   value: 'actions',
+  //   content: t('ACTIONS', 'Actions')
+  // }
+  ];
 
   var checkColor = function checkColor(status) {
     var index = status.toLocaleLowerCase();
@@ -190,7 +192,7 @@ var CampaignList = function CampaignList(props) {
       className: "right-border"
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, campaign === null || campaign === void 0 ? void 0 : campaign.name))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.contact_type) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.contact_type), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.audience_type), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.sent_count) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.sent_count), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.open_count) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.open_count), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.unsubscribed_count) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.unsubscribed_count), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.bounced_count) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.bounced_count), ((allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.update) || (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions)) && /*#__PURE__*/_react.default.createElement("td", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.actions) && (campaign === null || campaign === void 0 ? void 0 : campaign.audience_type) === 'dynamic' && /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
+    }, campaign === null || campaign === void 0 ? void 0 : campaign.name))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.contact_type) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.contact_type), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.audience_type), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.sent_count) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.sent_count), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.open_count) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.open_count), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.unsubscribed_count) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.unsubscribed_count), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.bounced_count) && /*#__PURE__*/_react.default.createElement("td", null, campaign === null || campaign === void 0 ? void 0 : campaign.bounced_count), /*#__PURE__*/_react.default.createElement("td", null, (campaign === null || campaign === void 0 ? void 0 : campaign.audience_type) === 'dynamic' && /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "campaign-enabled"
     }, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: campaign === null || campaign === void 0 ? void 0 : campaign.enabled,
@@ -200,7 +202,7 @@ var CampaignList = function CampaignList(props) {
         });
       },
       className: "enable_control"
-    })), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.update) && (campaign === null || campaign === void 0 ? void 0 : campaign.audience_type) === 'fixed' && /*#__PURE__*/_react.default.createElement(_styles2.StatusWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, campaign === null || campaign === void 0 ? void 0 : campaign.status), /*#__PURE__*/_react.default.createElement(_styles2.StatusPoint, {
+    })), (campaign === null || campaign === void 0 ? void 0 : campaign.audience_type) === 'fixed' && /*#__PURE__*/_react.default.createElement(_styles2.StatusWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, campaign === null || campaign === void 0 ? void 0 : campaign.status), /*#__PURE__*/_react.default.createElement(_styles2.StatusPoint, {
       style: {
         background: checkColor(campaign === null || campaign === void 0 ? void 0 : campaign.status)
       }
