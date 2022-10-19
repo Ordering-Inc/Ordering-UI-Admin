@@ -195,6 +195,12 @@ Object.defineProperty(exports, "OrderStatusTypeSelector", {
     return _OrderStatusTypeSelector.OrderStatusTypeSelector;
   }
 });
+Object.defineProperty(exports, "OrderToPrint", {
+  enumerable: true,
+  get: function get() {
+    return _OrderToPrint.OrderToPrint;
+  }
+});
 Object.defineProperty(exports, "OrdersCards", {
   enumerable: true,
   get: function get() {
@@ -379,3 +385,5 @@ var _OrdersCards = require("./OrdersCards");
 var _ReviewCustomer = require("./ReviewCustomer");
 
 var _CountryFilter = require("./CountryFilter");
+
+var _OrderToPrint = require("./OrderToPrint");
