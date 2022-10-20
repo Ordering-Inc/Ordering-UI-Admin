@@ -555,10 +555,22 @@ Object.defineProperty(exports, "ProductTagsList", {
     return _ProductTagsList.ProductTagsList;
   }
 });
+Object.defineProperty(exports, "ProductVideos", {
+  enumerable: true,
+  get: function get() {
+    return _ProductVideos.ProductVideos;
+  }
+});
 Object.defineProperty(exports, "SeoOptions", {
   enumerable: true,
   get: function get() {
     return _SeoOptions.SeoOptions;
+  }
+});
+Object.defineProperty(exports, "ServiceDetail", {
+  enumerable: true,
+  get: function get() {
+    return _ServiceDetail.ServiceDetail;
   }
 });
 Object.defineProperty(exports, "SingleBusiness", {
@@ -787,3 +799,7 @@ var _BusinessWalletsList = require("./BusinessWalletsList");
 var _PaymentOptionMethods = require("./PaymentOptionMethods");
 
 var _BusinessPublishing = require("./BusinessPublishing");
+
+var _ServiceDetail = require("./ServiceDetail");
+
+var _ProductVideos = require("./ProductVideos");
