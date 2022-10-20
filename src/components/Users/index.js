@@ -21,6 +21,7 @@ import { CustomerPointsWallet } from './CustomerPointsWallet'
 import { CustomerCashWalletDetails } from './CustomerCashWalletDetails'
 import { CustomerWalletEvents } from './CustomerWalletEvents'
 import { UserFormDetailsUI } from './UserFormDetails'
+import { ProfessionalAddForm } from './ProfessionalAddForm'
 
 export {
   CustomersListing,
@@ -45,5 +46,6 @@ export {
   CustomerPointsWallet,
   CustomerCashWalletDetails,
   CustomerWalletEvents,
-  UserFormDetailsUI
+  UserFormDetailsUI,
+  ProfessionalAddForm
 }

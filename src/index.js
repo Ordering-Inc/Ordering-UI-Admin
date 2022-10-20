@@ -300,7 +300,9 @@ import {
   PaymentOptionSquare,
   BusinessWalletsList,
   PaymentOptionMethods,
-  BusinessPublishing
+  BusinessPublishing,
+  ServiceDetail,
+  ProductVideos
 } from './components/Stores'
 import {
   CustomersListing,
@@ -325,7 +327,8 @@ import {
   CustomerCashWalletDetails,
   CustomerWalletEvents,
   UserFormDetailsUI,
-  ProfessionalListing
+  ProfessionalListing,
+  ProfessionalAddForm
 } from './components/Users'
 import {
   RewardsPrograms,
@@ -357,7 +360,9 @@ import {
   ColumnAllowSettingPopover,
   Pagination,
   ImageCrop,
-  NotFoundSource
+  NotFoundSource,
+  RangeCalendar,
+  InputPhoneNumber
 } from './components/Shared'
 import { LogoutButton } from './components/LogoutButton'
 import { LanguageSelector } from './components/LanguageSelector'
@@ -513,6 +518,7 @@ export {
   DriversGroupAutoassign,
   DriversMarkAsBusy,
   ProfessionalListing,
+  ProfessionalAddForm,
   GoogleGpsButton,
 
   HomePage,
@@ -682,6 +688,8 @@ export {
   BusinessWalletsList,
   PaymentOptionMethods,
   BusinessPublishing,
+  ServiceDetail,
+  ProductVideos,
 
   LogoutButton,
   LanguageSelector,
@@ -740,6 +748,8 @@ export {
   Pagination,
   ImageCrop,
   NotFoundSource,
+  RangeCalendar,
+  InputPhoneNumber,
 
   capitalize,
   verifyDecimals,
