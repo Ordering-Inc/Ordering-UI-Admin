@@ -96,6 +96,8 @@ import { PaymentOptionSquare } from './PaymentOptionSquare'
 import { BusinessWalletsList } from './BusinessWalletsList'
 import { PaymentOptionMethods } from './PaymentOptionMethods'
 import { BusinessPublishing } from './BusinessPublishing'
+import { ServiceDetail } from './ServiceDetail'
+import { ProductVideos } from './ProductVideos'
 
 export {
   BusinessBrandListing,
@@ -195,5 +197,7 @@ export {
   PaymentOptionSquare,
   BusinessWalletsList,
   PaymentOptionMethods,
-  BusinessPublishing
+  BusinessPublishing,
+  ServiceDetail,
+  ProductVideos
 }
