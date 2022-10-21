@@ -293,6 +293,21 @@ export const BusinessProductsCategoyInfo = (props) => {
         />
       </CategoryNameWrapper>
       <CategoryNameWrapper>
+        <label>{t('EXTERNAL_ID', 'External Id')}</label>
+        <Input
+          placeholder={t('EXTERNAL_ID', 'External Id')}
+          name='external_id'
+          value={formState?.changes?.external_id || ''}
+          onChange={handleChangeInput}
+          autoComplete='off'
+          onKeyPress={(e) => {
+            if (!/^[0-9]$/.test(e.key)) {
+              e.preventDefault()
+            }
+          }}
+        />
+      </CategoryNameWrapper>
+      <CategoryNameWrapper>
         <label>{t('DESCRIPTION', 'Description')}</label>
         <TextArea
           placeholder={t('TYPE_DESCRIPTION', 'Type description ')}
