@@ -107,7 +107,7 @@ export const UploadImageIcon = styled.div`
 `
 
 export const CategoryNameWrapper = styled.div`
-  margin-top: 40px;
+  margin-top: 20px;
 
   label {
     width: 100%;
