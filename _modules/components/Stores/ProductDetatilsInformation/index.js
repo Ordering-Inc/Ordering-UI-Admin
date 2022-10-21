@@ -330,6 +330,18 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     }),
     disabled: formState.loading,
     autoComplete: "off"
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('EXTERNAL_ID', 'External Id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "external_id",
+    placeholder: t('EXTERNAL_ID', 'External Id'),
+    defaultValue: product === null || product === void 0 ? void 0 : product.external_id,
+    onChange: handleChangeInput,
+    disabled: formState.loading,
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", {
     className: "space-between"
   }, /*#__PURE__*/_react.default.createElement("span", null, t('PRICE', 'Price'))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
