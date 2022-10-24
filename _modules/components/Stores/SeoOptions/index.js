@@ -210,7 +210,7 @@ var SeoOptions = function SeoOptions(props) {
   (0, _react.useEffect)(function () {
     var _data$seo_title, _data$seo_description;
 
-    setIsSameInfo(false);
+    // setIsSameInfo(false)
     titleRef.current.value = (_data$seo_title = data === null || data === void 0 ? void 0 : data.seo_title) !== null && _data$seo_title !== void 0 ? _data$seo_title : '';
     descriptionRef.current.value = (_data$seo_description = data === null || data === void 0 ? void 0 : data.seo_description) !== null && _data$seo_description !== void 0 ? _data$seo_description : '';
   }, [data]);
