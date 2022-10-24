@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var FormInput = _styledComponents.default.form(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  overflow: auto;\n  width: 100%;\n  padding: 20px;\n  box-sizing: border-box;\n\n  > h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin-top: 10px;\n    margin-bottom: 50px;\n  }\n"])));
+var FormInput = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  overflow: auto;\n  width: 100%;\n  padding: 20px;\n  box-sizing: border-box;\n\n  > h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin-top: 10px;\n    margin-bottom: 50px;\n  }\n"])));
 
 exports.FormInput = FormInput;
 

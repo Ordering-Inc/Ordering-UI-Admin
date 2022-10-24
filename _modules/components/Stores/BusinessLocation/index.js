@@ -196,6 +196,8 @@ var BusinessLocation = function BusinessLocation(props) {
     isFitCenter: true
   })), /*#__PURE__*/_react.default.createElement(_styles2.Section, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperCitySelector, null, /*#__PURE__*/_react.default.createElement("p", null, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
     isDefault: true,
+    position: "left",
+    optionInnerMaxHeight: "300px",
     defaultValue: business === null || business === void 0 ? void 0 : business.city_id,
     handleChangeCity: handleChangeBusinessCity
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperTimezone, null, /*#__PURE__*/_react.default.createElement("p", null, t('TIMEZONE', 'Timezone')), /*#__PURE__*/_react.default.createElement("p", null, (_ref2 = (_formState$changes$ti = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.timezone) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : business === null || business === void 0 ? void 0 : business.timezone) !== null && _ref2 !== void 0 ? _ref2 : ''))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperGoogleAutoCompleteInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleAutocompleteInput, {

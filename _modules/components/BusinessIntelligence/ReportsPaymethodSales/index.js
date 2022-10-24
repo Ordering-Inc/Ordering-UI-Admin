@@ -169,6 +169,9 @@ var ReportsPaymethodSalesUI = function ReportsPaymethodSalesUI(props) {
     return hours + ':' + minutes + ':' + seconds; // Return is HH : MM : SS
   };
 
+  var thObj = {
+    REPORT_HEADER_PAYMETHOD: 'Paymethod'
+  };
   return /*#__PURE__*/_react.default.createElement(_styles2.ReportsBusinessSpendContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('PAYMETHOD_SALES', 'Paymethod sales')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setIsDriverGroupFilter(true);
@@ -202,7 +205,7 @@ var ReportsPaymethodSalesUI = function ReportsPaymethodSalesUI(props) {
       return /*#__PURE__*/_react.default.createElement("th", {
         key: j,
         colSpan: th.colspan
-      }, th.value);
+      }, t(th.value.toUpperCase(), thObj[th.value]));
     }));
   })), reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.body) === null || _reportData$content6$ === void 0 ? void 0 : _reportData$content6$.rows.map(function (tbody, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tbody, {

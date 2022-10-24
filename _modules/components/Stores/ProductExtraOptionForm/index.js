@@ -42,7 +42,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
-  var _optionState$option7, _optionState$option9, _optionState$option10, _optionState$option12, _optionState$option13, _optionState$option14, _optionState$option15, _optionState$option16, _optionState$option17;
+  var _optionState$option7, _optionState$option9, _optionState$option12, _optionState$option13, _optionState$option14, _optionState$option15, _optionState$option16, _optionState$option17;
 
   var optionState = props.optionState,
       optionChangesState = props.optionChangesState,
@@ -259,12 +259,24 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, {
     top: true
-  }, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_optionState$option10 = optionState.option) === null || _optionState$option10 === void 0 ? void 0 : _optionState$option10.enabled,
-    onChange: function onChange(enabled) {
-      var _optionState$option11;
+  }, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
+    name: "enabled",
+    control: control,
+    render: function render(_ref5) {
+      var _optionState$option10;
 
-      return handleChangeOptionEnable(enabled, (_optionState$option11 = optionState.option) === null || _optionState$option11 === void 0 ? void 0 : _optionState$option11.id);
+      var _onChange4 = _ref5.onChange,
+          value = _ref5.value;
+      return /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+        defaultChecked: (_optionState$option10 = optionState.option) === null || _optionState$option10 === void 0 ? void 0 : _optionState$option10.enabled,
+        onChange: function onChange(enabled) {
+          var _optionState$option11;
+
+          _onChange4(enabled);
+
+          handleChangeOptionEnable(enabled, (_optionState$option11 = optionState.option) === null || _optionState$option11 === void 0 ? void 0 : _optionState$option11.id);
+        }
+      });
     }
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.OptionSettings, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "with_half_option",

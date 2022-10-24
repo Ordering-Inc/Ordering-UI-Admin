@@ -151,6 +151,11 @@ var ReportsSpentTimeUI = function ReportsSpentTimeUI(props) {
     document.body.removeChild(downloadLink);
   };
 
+  var thObj = {
+    REPORT_HEADER_TOTAL_VS_IDEAL: 'Report header total vs ideal',
+    REPORT_HEADER_RANK: 'Report header rank',
+    REPORT_HEADER_DRIVER_TIMES: 'Report header driver times'
+  };
   return /*#__PURE__*/_react.default.createElement(_styles2.ReportsBusinessSpendContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('DRIVER_TIME', 'Driver Time')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setIsDriverGroupFilter(true);
@@ -184,7 +189,7 @@ var ReportsSpentTimeUI = function ReportsSpentTimeUI(props) {
       return /*#__PURE__*/_react.default.createElement("th", {
         key: j,
         colSpan: th.colspan
-      }, th.value);
+      }, t(th.value.toUpperCase(), thObj[th.value]));
     }));
   })), reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.body) === null || _reportData$content6$ === void 0 ? void 0 : _reportData$content6$.rows.map(function (tbody, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tbody, {

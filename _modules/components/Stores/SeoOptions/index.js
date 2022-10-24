@@ -188,14 +188,32 @@ var SeoOptions = function SeoOptions(props) {
   };
 
   (0, _react.useEffect)(function () {
-    if (!isSameInfo || !isProductSeo) return;
-    setFormState({
-      seo_title: data === null || data === void 0 ? void 0 : data.name,
-      seo_description: data === null || data === void 0 ? void 0 : data.description
-    });
+    if (!isSameInfo) return;
+
+    if (isBusinessSeo) {
+      setFormState(_objectSpread(_objectSpread({}, formState), {}, {
+        changes: {
+          seo_title: data === null || data === void 0 ? void 0 : data.name,
+          seo_description: data === null || data === void 0 ? void 0 : data.description
+        }
+      }));
+    } else {
+      setFormState({
+        seo_title: data === null || data === void 0 ? void 0 : data.name,
+        seo_description: data === null || data === void 0 ? void 0 : data.description
+      });
+    }
+
     titleRef.current.value = data === null || data === void 0 ? void 0 : data.name;
     descriptionRef.current.value = data === null || data === void 0 ? void 0 : data.description;
-  }, [isSameInfo, isProductSeo]);
+  }, [isSameInfo, isBusinessSeo, data]);
+  (0, _react.useEffect)(function () {
+    var _data$seo_title, _data$seo_description;
+
+    setIsSameInfo(false);
+    titleRef.current.value = (_data$seo_title = data === null || data === void 0 ? void 0 : data.seo_title) !== null && _data$seo_title !== void 0 ? _data$seo_title : '';
+    descriptionRef.current.value = (_data$seo_description = data === null || data === void 0 ? void 0 : data.seo_description) !== null && _data$seo_description !== void 0 ? _data$seo_description : '';
+  }, [data]);
   (0, _react.useEffect)(function () {
     return function () {
       cleanFormState && cleanFormState({
@@ -232,7 +250,7 @@ var SeoOptions = function SeoOptions(props) {
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
     isImage: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.seo_image) || data.seo_image
-  }, /*#__PURE__*/_react.default.createElement(_styles2.CameraWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP', 'Drag and Drop')))))))), isProductSeo && /*#__PURE__*/_react.default.createElement(_styles2.UseSameInfoWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.CameraWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP', 'Drag and Drop')))))))), /*#__PURE__*/_react.default.createElement(_styles2.UseSameInfoWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: isSameInfo || false,
     onChange: function onChange(val) {
       return setIsSameInfo(val);

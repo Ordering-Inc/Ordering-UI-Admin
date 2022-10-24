@@ -62,7 +62,7 @@ var UploadImageIcon = _styledComponents.default.div(_templateObject12 || (_templ
 
 exports.UploadImageIcon = UploadImageIcon;
 
-var CategoryNameWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-top: 40px;\n\n  label {\n    width: 100%;\n    font-size: 14px;\n    color: ", ";\n    margin-bottom: 12px;\n  }\n\n  input, textarea {\n    font-size: 14px;\n    width: 100%;\n  }\n"])), function (props) {
+var CategoryNameWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-top: 20px;\n\n  label {\n    width: 100%;\n    font-size: 14px;\n    color: ", ";\n    margin-bottom: 12px;\n  }\n\n  input, textarea {\n    font-size: 14px;\n    width: 100%;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 

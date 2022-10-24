@@ -145,6 +145,11 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     document.body.removeChild(downloadLink);
   };
 
+  var thObj = {
+    REPORT_HEADER_SITES: 'Sites',
+    REPORT_HEADER_ORDER_TYPES: 'Order types',
+    REPORT_HEADER_AVERAGE_TICKET: 'Average ticket'
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('AVERAGE_SALES', 'Average sales')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setIsDriverGroupFilter(true);
@@ -178,7 +183,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
       return /*#__PURE__*/_react.default.createElement("th", {
         key: j,
         colspan: th.colspan
-      }, th.value);
+      }, t(th.value.toUpperCase(), thObj[th.value]));
     }));
   })), reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.body) === null || _reportData$content6$ === void 0 ? void 0 : _reportData$content6$.rows.map(function (tbody, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tbody, {
@@ -217,10 +222,12 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (th, j) {
+      var _th$value;
+
       return /*#__PURE__*/_react.default.createElement("th", {
         key: j,
         colspan: th.colspan
-      }, th.value);
+      }, (_th$value = th.value) !== null && _th$value !== void 0 && _th$value.includes("_") ? t(th.value.toUpperCase(), thObj[th.value]) : th.value);
     }));
   })), reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content7 = reportData1.content) === null || _reportData1$content7 === void 0 ? void 0 : (_reportData1$content8 = _reportData1$content7.body) === null || _reportData1$content8 === void 0 ? void 0 : _reportData1$content8.rows.map(function (tbody, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tbody, {

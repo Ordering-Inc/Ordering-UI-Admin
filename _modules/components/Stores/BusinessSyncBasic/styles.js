@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.YoutubeVideoWrapper = exports.YoutubeVideoInner = exports.LogoWrapper = exports.GuideStep = exports.Description = exports.Container = void 0;
+exports.YoutubeVideoWrapper = exports.YoutubeVideoInner = exports.LogoWrapper = exports.GetStarted = exports.Description = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -25,15 +25,13 @@ var Description = _styledComponents.default.div(_templateObject3 || (_templateOb
 
 exports.Description = Description;
 
-var GuideStep = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-bottom: 30px;\n  h4 {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-bottom: 7px;\n  }\n  p {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    color: ", ";\n    a {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var GetStarted = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  h2 {\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 24px;\n    margin-top: 0px;\n    margin-bottom: 10px;\n  }\n  p {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-top: 0px;\n    margin-bottom: 8px;\n    color: ", ";\n  }\n  button {\n    border-radius: 8px;\n    height: 44px;\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
-}, function (props) {
-  return props.theme.colors.primary;
 });
 
-exports.GuideStep = GuideStep;
+exports.GetStarted = GetStarted;
 
-var YoutubeVideoWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  padding-bottom: 30px;\n"])));
+var YoutubeVideoWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin-top: 50px;\n  padding-bottom: 30px;\n"])));
 
 exports.YoutubeVideoWrapper = YoutubeVideoWrapper;
 

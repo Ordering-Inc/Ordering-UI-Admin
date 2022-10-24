@@ -679,6 +679,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
 var OrderDetails = function OrderDetails(props) {
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     asDashboard: true,
+    isDisableLoadMessages: true,
     UIComponent: OrderDetailsUI
   });
 

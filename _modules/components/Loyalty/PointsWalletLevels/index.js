@@ -149,7 +149,7 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
       bgimage: optimizeImage((level === null || level === void 0 ? void 0 : level.image) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles.LevelName, null, level === null || level === void 0 ? void 0 : level.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  }) : /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null))), /*#__PURE__*/_react.default.createElement(_styles.LevelBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddNewLevelButton, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null)))), /*#__PURE__*/_react.default.createElement(_styles.LevelBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddNewLevelButton, {
     onClick: function onClick() {
       return handleOpenDetail({});
     }

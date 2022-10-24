@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperImage = exports.Title = exports.LevelName = exports.LevelItemContainer = exports.LevelContainer = exports.LevelBottomContainer = exports.InfoWrapper = exports.Image = exports.Container = exports.AddNewLevelButton = void 0;
+exports.WrapperImage = exports.Title = exports.NotFoundSourceWrapper = exports.LevelName = exports.LevelItemContainer = exports.LevelContainer = exports.LevelBottomContainer = exports.InfoWrapper = exports.Image = exports.Container = exports.AddNewLevelButton = void 0;
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _react = _interopRequireDefault(require("react"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -102,3 +102,7 @@ var AddNewLevelButton = _styledComponents.default.div(_templateObject16 || (_tem
 });
 
 exports.AddNewLevelButton = AddNewLevelButton;
+
+var NotFoundSourceWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  > div {\n    height: initial;\n    padding: 20px;\n  }\n"])));
+
+exports.NotFoundSourceWrapper = NotFoundSourceWrapper;

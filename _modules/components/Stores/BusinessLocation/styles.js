@@ -27,7 +27,7 @@ var Section = _styledComponents.default.div(_templateObject3 || (_templateObject
 
 exports.Section = Section;
 
-var WrapperCitySelector = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  > p {\n    color: ", ";\n    margin-bottom: 5px;\n  }\n  > div {\n    background: #F8F9FA;\n    border: none;\n  }\n  font-size: 14px;\n"])), function (props) {
+var WrapperCitySelector = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  > p {\n    color: ", ";\n    margin-bottom: 5px;\n  }\n  > div {\n    width: 100%;\n    background: #F8F9FA;\n    border: none;\n  }\n  font-size: 14px;\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 

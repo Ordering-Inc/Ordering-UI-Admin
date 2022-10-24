@@ -53,6 +53,10 @@ var ConfirmUI = function ConfirmUI(props) {
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
       t = _useLanguage2[1];
 
+  var errors = {
+    ERROR_REPORT_MAX_A_DAY_AS_PERIOD: 'Error report, max a day as period',
+    ERROR_REPORT_VERY_LONG_PERIOD: 'Error report, very long period'
+  };
   return /*#__PURE__*/_react.default.createElement(_styles2.PopupDialog, {
     className: "popup-dialog",
     width: props.width
@@ -64,7 +68,7 @@ var ConfirmUI = function ConfirmUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), title && /*#__PURE__*/_react.default.createElement(_styles2.PopupTitle, null, title), /*#__PURE__*/_react.default.createElement(_styles2.PopupContent, null, content && typeof content === 'string' && content, content && _typeof(content) === 'object' && Array.isArray(content) && /*#__PURE__*/_react.default.createElement("ul", null, content.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: i
-    }, item);
+    }, t(item.toUpperCase(), errors[item]));
   })), children), (onCancel || onAccept || onClose) && /*#__PURE__*/_react.default.createElement(_styles2.PopupActions, null, onCancel && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     outline: true,
     onClick: function onClick() {
