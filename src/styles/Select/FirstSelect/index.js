@@ -34,7 +34,8 @@ export const Select = (props) => {
     searchBarIsCustomLayout,
     searchBarPlaceholder,
     searchBarIsNotLazyLoad,
-    isDisabled
+    isDisabled,
+    position
   } = props
 
   const [open, setOpen] = useState(false)
@@ -114,7 +115,7 @@ export const Select = (props) => {
         <Options
           className='list'
           isAbsolute
-          position='right'
+          position={position || 'right'}
           ref={dropdownReference}
         >
           {isShowSearchBar && (
@@ -133,7 +134,7 @@ export const Select = (props) => {
           <OptionsInner
             className='list-wrapper'
             optionInnerMargin={props.optionInnerMargin}
-            optionInnerMaxHeight={props.optionInnerMaxHeight}
+            optionInnerMaxHeight={props.optionInnerMaxHeight || 'initial'}
           >
             {options.map((option, i) => (
               <Option

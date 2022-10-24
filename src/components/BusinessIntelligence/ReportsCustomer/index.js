@@ -75,12 +75,11 @@ const ReportsCustomerUI = (props) => {
     }
     return labels
   }
-
   const data = {
     labels: generateLabels(),
     datasets: [
       {
-        label: reportData?.content?.dataset?.dataset[0]?.label,
+        label: t(reportData?.content?.dataset?.dataset[0]?.label?.toUpperCase(), 'Report header qualification'),
         data: generateData(),
         fill: true,
         borderColor: '#2C7BE5',

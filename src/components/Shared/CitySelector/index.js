@@ -14,7 +14,9 @@ const CitySelectorUI = (props) => {
     isDefault,
     filterValues,
     defaultValue,
-    handleChangeCity
+    handleChangeCity,
+    position,
+    optionInnerMaxHeight
   } = props
 
   const [cityOptions, setCityOptions] = useState([])
@@ -43,6 +45,8 @@ const CitySelectorUI = (props) => {
         <>
           {isDefault ? (
             <Select
+              position={position}
+              optionInnerMaxHeight={optionInnerMaxHeight}
               placeholder={placeholder}
               defaultValue={defaultValue}
               options={cityOptions}
