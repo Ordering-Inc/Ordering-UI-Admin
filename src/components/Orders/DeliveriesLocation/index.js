@@ -27,15 +27,21 @@ export const DeliveriesLocation = (props) => {
   const [configState] = useConfig()
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
-  const [mapCenter, setMapCenter] = useState({ lat: 19.4326, lng: -99.1332 })
+  const defaultLatitude = Number(configState?.configs?.location_default_latitude?.value)
+  const defaultLongitude = Number(configState?.configs?.location_default_longitude?.value)
+  const isInvalidDefaultLocation = isNaN(defaultLatitude) || isNaN(defaultLongitude)
+  const defaultCenter = {
+    lat: !isInvalidDefaultLocation ? defaultLatitude : 40.7744146,
+    lng: !isInvalidDefaultLocation ? defaultLongitude : -73.9678064
+  }
+
+  const [mapCenter, setMapCenter] = useState(defaultCenter)
   const [mapZoom, setMapZoom] = useState(10)
   const [activeDrivers, setActiveDrivers] = useState([])
   const [mapLoaded, setMapLoaded] = useState(true)
   const [mapFitted, setMapFitted] = useState(false)
 
   const [interActionOrderDriverLocation, setInterActionOrderDriverLocation] = useState(null)
-
-  const defaultCenter = { lat: 19.4326, lng: -99.1332 }
   const defaultZoom = 10
   const mapRef = useRef(null)
 

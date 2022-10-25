@@ -72,8 +72,8 @@ export const CategoryName = styled.div`
   p {
     font-weight: bold;
     font-size: 20px;
-    color: #344050;
     margin-bottom: 6px;
+    width: 90%;
   }
 `
 
@@ -141,20 +141,25 @@ export const AllSetting = styled.div`
   user-select: none;
   cursor: pointer;
   margin-top: 36px;
-  ${({ isDisabledFeature }) => css`
-    cursor: ${props => isDisabledFeature ? 'not-allowed' : 'pointer'};
-  `}
+  cursor: pointer;
   span {
     font-weight: 600;
     font-size: 14px;
-    ${({ isDisabledFeature }) => css`
-      color: ${props => isDisabledFeature ? props.theme.colors?.disabled : '#03459E'};
-    `}
+    color: ${props => props.theme.colors.primary};
   }
   svg {
-    ${({ isDisabledFeature }) => css`
-      color: ${props => isDisabledFeature ? props.theme.colors?.disabled : '#03459E'};
+    color: ${props => props.theme.colors.primary};
+    margin-left: 5px;
+    transition: 0.2s linear;
+    ${props => props.theme.rtl && css`
+      margin-right: 5px;
+      margin-left: 0px;
     `}
+  }
+  &:hover {
+    svg {
+      transform: translateX(3px);
+    }
   }
 `
 

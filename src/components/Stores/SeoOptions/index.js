@@ -29,7 +29,8 @@ export const SeoOptions = (props) => {
     handlechangeImageProductCategory,
     isBusinessSeo,
     isProductSeo,
-    isCategorySeo
+    isCategorySeo,
+    cleanFormState
   } = props
 
   const [, t] = useLanguage()
@@ -120,14 +121,36 @@ export const SeoOptions = (props) => {
   }
 
   useEffect(() => {
-    if (!isSameInfo || !isProductSeo) return
-    setFormState({
-      seo_title: data?.name,
-      seo_description: data?.description
-    })
+    if (!isSameInfo) return
+    if (isBusinessSeo) {
+      setFormState({
+        ...formState,
+        changes: {
+          seo_title: data?.name,
+          seo_description: data?.description
+        }
+      })
+    } else {
+      setFormState({
+        seo_title: data?.name,
+        seo_description: data?.description
+      })
+    }
     titleRef.current.value = data?.name
     descriptionRef.current.value = data?.description
-  }, [isSameInfo, isProductSeo])
+  }, [isSameInfo, isBusinessSeo, data])
+
+  useEffect(() => {
+    // setIsSameInfo(false)
+    titleRef.current.value = data?.seo_title ?? ''
+    descriptionRef.current.value = data?.seo_description ?? ''
+  }, [data])
+
+  useEffect(() => {
+    return () => {
+      cleanFormState && cleanFormState({ changes: {} })
+    }
+  }, [])
 
   return (
     <>
@@ -171,15 +194,13 @@ export const SeoOptions = (props) => {
             </ExamineClick>
           </SEOImage>
         </WrapperImage>
-        {isProductSeo && (
-          <UseSameInfoWrapper>
-            <label>{t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information')}</label>
-            <Switch
-              defaultChecked={isSameInfo || false}
-              onChange={val => setIsSameInfo(val)}
-            />
-          </UseSameInfoWrapper>
-        )}
+        <UseSameInfoWrapper>
+          <label>{t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information')}</label>
+          <Switch
+            defaultChecked={isSameInfo || false}
+            onChange={val => setIsSameInfo(val)}
+          />
+        </UseSameInfoWrapper>
         <WrapperShortDescription>
           <label>{t('SEO_TITLE', 'SEO Title')}</label>
           <Input

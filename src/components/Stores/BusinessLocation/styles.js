@@ -40,6 +40,7 @@ export const WrapperCitySelector = styled.div`
     margin-bottom: 5px;
   }
   > div {
+    width: 100%;
     background: #F8F9FA;
     border: none;
   }

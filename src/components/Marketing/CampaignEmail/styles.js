@@ -3,15 +3,15 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div``
 
 export const InputWrapper = styled.div`
-  label {
+  > label {
     margin-bottom: 10px;
     font-size: 14px;
     line-height: 24px;
   }
-  input, textarea {
+  > input, textarea {
     width: 100%;
   }
-  textarea {
+  > textarea {
     height: 80px;
   }
   margin-bottom: 35px;
@@ -112,7 +112,36 @@ export const WrapperEditor = styled.div`
       }
     }
   }
+  .modal-header .close {
+    padding: 0px !important;
+    margin: 0px !important;
+  }
+  .modal-header {
+    align-items: center !important;
+  }
+  .checkbox input {
+    margin-right: 10px;
+    margin-top: 3px;
+  }
+  .modal-body {
+    > div:first-child {
+      display: none;
+    }
+  }
 `
 export const Preview = styled.div`
   overflow: hidden;
+`
+
+export const Description = styled.div`
+  font-size: 14px;
+  margin: 10px 0px;
+  span {
+    color: ${props => props.theme.colors.primary};
+    cursor: pointer;
+    transition: all 0.3s linear;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `

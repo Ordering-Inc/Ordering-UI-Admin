@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useConfig, useSession, SettingsList as SettingsListController } from 'ordering-components-admin'
+import { useLanguage, SettingsList as SettingsListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, NotFoundSource } from '../../Shared'
 import { Button } from '../../../styles'
 import { SettingsSelectUI } from '../SettingsSelectUI'
 import { SettingsCountryFilter } from '../SettingsCountryFilter'
 import { SettingsImage } from '../SettingsImage'
-import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 import {
   SettingsListContainer,
   GeneralContainer,
@@ -26,7 +25,6 @@ export const SettingsListUI = (props) => {
   const {
     settingsState,
     configs,
-    category,
     formState,
     onCloseSettingsList,
     handleCheckBoxChange,
@@ -36,11 +34,7 @@ export const SettingsListUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [configState] = useConfig()
-  const [isDisabledFeature, setIsDisabledFeature] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [{ user }] = useSession()
-  const featureName = 'advanced_logistics'
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -103,21 +97,6 @@ export const SettingsListUI = (props) => {
     }
   }, [settingsState?.result])
 
-  useEffect(() => {
-    if (category?.key === 'autoassign' && !configState?.loading &&
-      Object.keys(configState?.configs).length > 0 && !formState?.loading &&
-      formState?.finalResult.length > 0 && user) {
-      const autoassignType = formState?.changes?.find(change => change?.key === 'autoassign_type')?.value ||
-        formState?.finalResult?.find(re => re?.key === 'autoassign_type')?.value
-      if (!Object.keys(configState?.configs).includes(featureName) &&
-        user?.level === 0 && autoassignType === 'enterprise') {
-        setIsDisabledFeature(true)
-        return
-      }
-      setIsDisabledFeature(false)
-    }
-  }, [configState, formState])
-
   return (
     <>
       <SettingsListContainer>
@@ -127,12 +106,13 @@ export const SettingsListUI = (props) => {
         {
           !settingsState.error && settingsState.loading && (
             <SkeletonWrapper>
-              {[...Array(6)].map((item, i) => (
+              {[...Array(6)].map((i) => (
                 <div key={i}>
-                  <Skeleton height={25} width={200} />
-                  <Skeleton height={30} />
+                  <Skeleton height={20} width={200} />
+                  <Skeleton height={44} />
                 </div>
               ))}
+              <Skeleton width={70} height={44} />
             </SkeletonWrapper>
           )
         }
@@ -198,7 +178,7 @@ export const SettingsListUI = (props) => {
                                         defaultChecked={config?.value.split('|').includes(item?.value)}
                                         onChange={(e) => handleCheckBoxChange(e, true, config?.value)}
                                       />
-                                      {item.text}
+                                      {t(item.text.toUpperCase())}
                                     </label>
                                   </FormGroupCheck>
                                 </FormGroupWrapper>
@@ -280,14 +260,12 @@ export const SettingsListUI = (props) => {
           )
         }
       </SettingsListContainer>
-      {isDisabledFeature && (<DisabledFeatureAlert />)}
       {
-        settingsState?.changes?.length > 0 && (
+        settingsState?.changes?.length > 0 && !settingsState.loading && !settingsState.API && (
           <SubmitBtnWrapper>
             <Button
               color='primary'
               onClick={handleSubmit}
-              disabled={isDisabledFeature}
             >
               {t('SAVE', 'Save')}
             </Button>

@@ -11,7 +11,6 @@ import { TabOption, TabOptionName } from '../PaymentOptionStripeDirect/styles'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import SiSquare from '@meronex/icons/si/SiSquare'
-import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 
 import {
   Container,
@@ -41,8 +40,7 @@ const PaymentOptionSquareUI = (props) => {
     handleSavePaymethod,
     handleChangeDataInput,
     handleChangeSanboxDataInput,
-    handleChangeSandbox,
-    isDisabledFeature
+    handleChangeSandbox
   } = props
 
   const theme = useTheme()
@@ -249,8 +247,7 @@ const PaymentOptionSquareUI = (props) => {
           sitesState?.sites.map(site => (
             <TabOption
               key={site.id}
-              isDisabledFeature={isDisabledFeature}
-              onClick={() => !isDisabledFeature && setPaymethodInfo({ key: 'sites', value: site.id })}
+              onClick={() => setPaymethodInfo({ key: 'sites', value: site.id })}
             >
               {(changesState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
                 <RiCheckboxFill className='fill' />
@@ -265,8 +262,7 @@ const PaymentOptionSquareUI = (props) => {
           orderTypes.map(type => (
             <TabOption
               key={type.value}
-              isDisabledFeature={isDisabledFeature}
-              onClick={() => !isDisabledFeature && setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
+              onClick={() => setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
             >
               {(changesState?.allowed_order_types ?? businessPaymethod?.allowed_order_types)?.includes(type.value) ? (
                 <RiCheckboxFill className='fill' />
@@ -299,7 +295,6 @@ const PaymentOptionSquareUI = (props) => {
           closeOnBackdrop={false}
         />
       </Container>
-      {(isDisabledFeature && (paymentTabs === 1 || paymentTabs === 2)) && (<DisabledFeatureAlert />)}
     </>
   )
 }

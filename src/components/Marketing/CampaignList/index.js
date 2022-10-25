@@ -23,8 +23,7 @@ export const CampaignList = (props) => {
     setPaginationProps,
     handleOpenDetail,
     selectedCampaign,
-    handleUpdateCampaign,
-    isDisabledFeature
+    handleUpdateCampaign
   } = props
 
   const [, t] = useLanguage()
@@ -36,9 +35,9 @@ export const CampaignList = (props) => {
     sent_count: true,
     open_count: true,
     unsubscribed_count: true,
-    bounced_count: true,
-    update: true,
-    actions: true
+    bounced_count: true
+    // update: true,
+    // actions: true
   })
 
   const optionsDefault = [
@@ -69,15 +68,15 @@ export const CampaignList = (props) => {
     {
       value: 'bounced_count',
       content: t('BOUNCES', 'Bounces')
-    },
-    {
-      value: 'update',
-      content: t('UPDATE', 'Update')
-    },
-    {
-      value: 'actions',
-      content: t('ACTIONS', 'Actions')
     }
+    // {
+    //   value: 'update',
+    //   content: t('UPDATE', 'Update')
+    // },
+    // {
+    //   value: 'actions',
+    //   content: t('ACTIONS', 'Actions')
+    // }
   ]
 
   const checkColor = (status) => {
@@ -113,7 +112,7 @@ export const CampaignList = (props) => {
 
   return (
     <>
-      <Container isDisabledFeature={isDisabledFeature}>
+      <Container>
         <Table isRelative={campaignList?.campaigns?.length > 5}>
           <thead>
             <tr>
@@ -229,26 +228,24 @@ export const CampaignList = (props) => {
                   {allowColumns?.bounced_count && (
                     <td>{campaign?.bounced_count}</td>
                   )}
-                  {(allowColumns?.update || allowColumns?.actions) && (
-                    <td>
-                      {allowColumns?.actions && campaign?.audience_type === 'dynamic' && (
-                        <SwitchWrapper>
-                          <p className='campaign-enabled'>{t('ENABLE', 'Enable')}</p>
-                          <Switch
-                            defaultChecked={campaign?.enabled}
-                            onChange={val => handleUpdateCampaign(campaign.id, { enabled: val })}
-                            className='enable_control'
-                          />
-                        </SwitchWrapper>
-                      )}
-                      {allowColumns?.update && campaign?.audience_type === 'fixed' && (
-                        <StatusWrapper>
-                          <p>{campaign?.status}</p>
-                          <StatusPoint style={{ background: checkColor(campaign?.status) }} />
-                        </StatusWrapper>
-                      )}
-                    </td>
-                  )}
+                  <td>
+                    {campaign?.audience_type === 'dynamic' && (
+                      <SwitchWrapper>
+                        <p className='campaign-enabled'>{t('ENABLE', 'Enable')}</p>
+                        <Switch
+                          defaultChecked={campaign?.enabled}
+                          onChange={val => handleUpdateCampaign(campaign.id, { enabled: val })}
+                          className='enable_control'
+                        />
+                      </SwitchWrapper>
+                    )}
+                    {campaign?.audience_type === 'fixed' && (
+                      <StatusWrapper>
+                        <p>{campaign?.status}</p>
+                        <StatusPoint style={{ background: checkColor(campaign?.status) }} />
+                      </StatusWrapper>
+                    )}
+                  </td>
                 </tr>
               </Tbody>
             ))
@@ -258,8 +255,7 @@ export const CampaignList = (props) => {
       {!campaignList.loading && (
         <PagesBottomContainer>
           <AddNewPageButton
-            onClick={() => !isDisabledFeature && handleOpenDetail({})}
-            isDisabledFeature={isDisabledFeature}
+            onClick={() => handleOpenDetail({})}
           >
             {t('ADD_NEW_CAMPAIGN', 'Add new campaign')}
           </AddNewPageButton>

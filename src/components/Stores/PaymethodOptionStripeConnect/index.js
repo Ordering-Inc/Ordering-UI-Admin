@@ -9,7 +9,6 @@ import { useTheme } from 'styled-components'
 import { ThreeDots, XLg } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { Confirm } from '../../Shared'
-import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 
 import {
   Container,
@@ -39,8 +38,7 @@ export const PaymethodOptionStripeConnect = (props) => {
     businessPaymethod,
     orderTypes,
     handleChangeBusinessPaymentState,
-    handleDeletePaymethod,
-    isDisabledFeature
+    handleDeletePaymethod
   } = props
 
   const theme = useTheme()
@@ -249,8 +247,7 @@ export const PaymethodOptionStripeConnect = (props) => {
           sitesState?.sites.map(site => (
             <TabOption
               key={site.id}
-              isDisabledFeature={isDisabledFeature}
-              onClick={() => !isDisabledFeature && setPaymethodInfo({ key: 'sites', value: site.id })}
+              onClick={() => setPaymethodInfo({ key: 'sites', value: site.id })}
             >
               {(changesState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
                 <RiCheckboxFill className='fill' />
@@ -266,8 +263,7 @@ export const PaymethodOptionStripeConnect = (props) => {
           orderTypes.map(type => (
             <TabOption
               key={type.value}
-              isDisabledFeature={isDisabledFeature}
-              onClick={() => !isDisabledFeature && setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
+              onClick={() => setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
             >
               {(changesState?.allowed_order_types ?? businessPaymethod?.allowed_order_types)?.includes(type.value) ? (
                 <RiCheckboxFill className='fill' />
@@ -288,7 +284,6 @@ export const PaymethodOptionStripeConnect = (props) => {
           {actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
         </Button>
       </Container>
-      {(isDisabledFeature && (paymentTabs === 1 || paymentTabs === 2)) && (<DisabledFeatureAlert />)}
       <Confirm
         width='700px'
         title={t('WEB_APPNAME', 'Ordering')}
