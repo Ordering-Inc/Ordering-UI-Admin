@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
-import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
-import { Envelope, Phone } from 'react-bootstrap-icons'
+import { Envelope, Phone, CheckSquareFill, Square } from 'react-bootstrap-icons'
 import { Switch } from '../../../styles'
 import { ConfirmAdmin, Pagination } from '../../Shared'
 
@@ -24,7 +22,8 @@ import {
   AddNewUserButton,
   UsersBottomContainer,
   VerifiedItemsContainer,
-  VerifiedItem
+  VerifiedItem,
+  AllCheckWrapper
 } from './styles'
 
 export const UsersList = (props) => {
@@ -37,13 +36,15 @@ export const UsersList = (props) => {
     selectedUsers,
     handleSelectedUsers,
     handleOpenUserDetails,
-    handleOpenUserAddForm
+    handleOpenUserAddForm,
+    setSelectedUsers
   } = props
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
 
   const [confirmAdmin, setConfirmAdmin] = useState({ open: false, handleOnConfirm: null })
+  const [isAllChecked, setIsAllChecked] = useState(false)
 
   const getUserType = (type) => {
     const userTypes = [
@@ -87,6 +88,26 @@ export const UsersList = (props) => {
     }
   }
 
+  const handleSelecteAllUser = () => {
+    const userIds = usersList.users?.reduce((ids, user) => [...ids, user.id], [])
+    if (!isAllChecked) {
+      setSelectedUsers([...selectedUsers, ...userIds])
+    } else {
+      const userIdsToDeleteSet = new Set(userIds)
+      const updatedSelectedOrderIds = selectedUsers.filter((name) => {
+        return !userIdsToDeleteSet.has(name)
+      })
+      setSelectedUsers(updatedSelectedOrderIds)
+    }
+  }
+
+  useEffect(() => {
+    if (usersList.loading) return
+    const userIds = usersList.users?.reduce((ids, user) => [...ids, user.id], [])
+    const _isAllChecked = userIds.every(elem => selectedUsers.includes(elem))
+    setIsAllChecked(_isAllChecked)
+  }, [usersList.users, selectedUsers])
+
   useEffect(() => {
     if (usersList.loading || usersList.users.length > 0 || paginationProps.totalPages <= 1) return
     if (paginationProps.currentPage !== paginationProps.totalPages) {
@@ -103,7 +124,22 @@ export const UsersList = (props) => {
           <UsersTable>
             <thead>
               <tr>
-                <th>{t('USER', 'User')}</th>
+                <th>
+                  <AllCheckWrapper>
+                    <CheckBoxWrapper
+                      className='all-checkbox'
+                      isChecked={!usersList?.loading && isAllChecked}
+                      onClick={() => handleSelecteAllUser()}
+                    >
+                      {(!usersList?.loading && isAllChecked) ? (
+                        <CheckSquareFill />
+                      ) : (
+                        <Square />
+                      )}
+                    </CheckBoxWrapper>
+                    {t('USER', 'User')}
+                  </AllCheckWrapper>
+                </th>
                 <th>{t('PHONE', 'Phone')}</th>
                 <th>{t('TYPE', 'Type')}</th>
                 <th className='amout-orders '>{t('AMOUNT_OF_ORDERS', 'Amount of orders')}</th>
@@ -159,9 +195,9 @@ export const UsersList = (props) => {
                           onClick={() => handleSelectedUsers(user.id)}
                         >
                           {selectedUsers.includes(user.id) ? (
-                            <MdCheckBox />
+                            <CheckSquareFill />
                           ) : (
-                            <MdCheckBoxOutlineBlank />
+                            <Square />
                           )}
                         </CheckBoxWrapper>
                         <WrapperImage>
