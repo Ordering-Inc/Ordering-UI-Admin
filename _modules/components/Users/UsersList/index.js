@@ -13,10 +13,6 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 
 var _orderingComponentsAdmin = require("ordering-components-admin");
 
-var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
-
-var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
-
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -68,7 +64,8 @@ var UsersList = function UsersList(props) {
       selectedUsers = props.selectedUsers,
       handleSelectedUsers = props.handleSelectedUsers,
       handleOpenUserDetails = props.handleOpenUserDetails,
-      handleOpenUserAddForm = props.handleOpenUserAddForm;
+      handleOpenUserAddForm = props.handleOpenUserAddForm,
+      setSelectedUsers = props.setSelectedUsers;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -85,6 +82,11 @@ var UsersList = function UsersList(props) {
       _useState2 = _slicedToArray(_useState, 2),
       confirmAdmin = _useState2[0],
       setConfirmAdmin = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isAllChecked = _useState4[0],
+      setIsAllChecked = _useState4[1];
 
   var getUserType = function getUserType(type) {
     var userTypes = [{
@@ -146,6 +148,38 @@ var UsersList = function UsersList(props) {
     }
   };
 
+  var handleSelecteAllUser = function handleSelecteAllUser() {
+    var _usersList$users;
+
+    var userIds = (_usersList$users = usersList.users) === null || _usersList$users === void 0 ? void 0 : _usersList$users.reduce(function (ids, user) {
+      return [].concat(_toConsumableArray(ids), [user.id]);
+    }, []);
+
+    if (!isAllChecked) {
+      setSelectedUsers([].concat(_toConsumableArray(selectedUsers), _toConsumableArray(userIds)));
+    } else {
+      var userIdsToDeleteSet = new Set(userIds);
+      var updatedSelectedOrderIds = selectedUsers.filter(function (name) {
+        return !userIdsToDeleteSet.has(name);
+      });
+      setSelectedUsers(updatedSelectedOrderIds);
+    }
+  };
+
+  (0, _react.useEffect)(function () {
+    var _usersList$users2;
+
+    if (usersList.loading) return;
+    var userIds = (_usersList$users2 = usersList.users) === null || _usersList$users2 === void 0 ? void 0 : _usersList$users2.reduce(function (ids, user) {
+      return [].concat(_toConsumableArray(ids), [user.id]);
+    }, []);
+
+    var _isAllChecked = userIds.every(function (elem) {
+      return selectedUsers.includes(elem);
+    });
+
+    setIsAllChecked(_isAllChecked);
+  }, [usersList.users, selectedUsers]);
   (0, _react.useEffect)(function () {
     if (usersList.loading || usersList.users.length > 0 || paginationProps.totalPages <= 1) return;
 
@@ -155,7 +189,13 @@ var UsersList = function UsersList(props) {
       handleChangePage(paginationProps.currentPage - 1);
     }
   }, [usersList.users, paginationProps]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.AllCheckWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+    className: "all-checkbox",
+    isChecked: !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked,
+    onClick: function onClick() {
+      return handleSelecteAllUser();
+    }
+  }, !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), t('USER', 'User'))), /*#__PURE__*/_react.default.createElement("th", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", {
     className: "amout-orders "
   }, t('AMOUNT_OF_ORDERS', 'Amount of orders')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTION', 'Action')))), usersList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
@@ -199,7 +239,7 @@ var UsersList = function UsersList(props) {
       onClick: function onClick() {
         return handleSelectedUsers(user.id);
       }
-    }, selectedUsers.includes(user.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, user !== null && user !== void 0 && user.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
+    }, selectedUsers.includes(user.id) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, user !== null && user !== void 0 && user.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage(user === null || user === void 0 ? void 0 : user.photo, 'h_50,c_limit')
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"

@@ -81,7 +81,8 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
       handleSuccessDeleteUser = props.handleSuccessDeleteUser,
       occupationsState = props.occupationsState,
       selectedOccupation = props.selectedOccupation,
-      handleSelectOccupation = props.handleSelectOccupation;
+      handleSelectOccupation = props.handleSelectOccupation,
+      setSelectedUsers = props.setSelectedUsers;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -187,7 +188,8 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     handleSelectedUsers: handleSelectedUsers,
     userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     handleOpenUserDetails: handleOpenUserDetails,
-    handleOpenUserAddForm: handleOpenUserAddForm
+    handleOpenUserAddForm: handleOpenUserAddForm,
+    setSelectedUsers: setSelectedUsers
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     isProfessionals: true,
     open: isOpenUserDetails,

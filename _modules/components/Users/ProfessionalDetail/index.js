@@ -60,7 +60,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _adminUserState$user, _userState$user5, _userState$user6;
+  var _userState$user, _userState$user2, _userState$user3, _adminUserState$user, _userState$user4, _userState$user5;
 
   var userState = props.userState,
       occupations = props.occupations,
@@ -154,18 +154,15 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, handleChangeActiveUser && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (userState === null || userState === void 0 ? void 0 : (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.enabled) || false,
     onChange: function onChange(enabled) {
-      var _userState$user4;
-
-      return handleChangeActiveUser({
-        id: userState === null || userState === void 0 ? void 0 : (_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.id,
+      return handleChangeActiveUser(_objectSpread(_objectSpread({}, userState === null || userState === void 0 ? void 0 : userState.user), {}, {
         enabled: enabled
-      });
+      }));
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarSyncWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: handleGoogleCalendarSync
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('CALENDAR_SYNC', 'Calendar sync')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4Event, null))), ((_adminUserState$user = adminUserState.user) === null || _adminUserState$user === void 0 ? void 0 : _adminUserState$user.id) !== ((_userState$user5 = userState.user) === null || _userState$user5 === void 0 ? void 0 : _userState$user5.id) && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('CALENDAR_SYNC', 'Calendar sync')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4Event, null))), ((_adminUserState$user = adminUserState.user) === null || _adminUserState$user === void 0 ? void 0 : _adminUserState$user.id) !== ((_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.id) && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -210,7 +207,7 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
       return handleOpenExtra();
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.SideBarWrapper, null, extraSelected === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_UserMetaFields.UserMetaFields, {
-    userId: (_userState$user6 = userState.user) === null || _userState$user6 === void 0 ? void 0 : _userState$user6.id
+    userId: (_userState$user5 = userState.user) === null || _userState$user5 === void 0 ? void 0 : _userState$user5.id
   })), extraSelected === 'personalization' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement(_Shared.Personalization, null)))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),

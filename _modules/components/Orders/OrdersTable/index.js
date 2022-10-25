@@ -25,8 +25,6 @@ var _styledComponents = require("styled-components");
 
 var _Shared = require("../../Shared");
 
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _styles = require("./styles");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -441,17 +439,16 @@ var OrdersTable = function OrdersTable(props) {
     var _allowColumns$column$, _allowColumns$column, _allowColumns$column2, _theme$images$icons, _allowColumns$column3;
 
     if (column === 'slaBar') {
-      return /*#__PURE__*/_react.default.createElement("th", {
-        key: "noDragTh-".concat(i)
-      }, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null));
+      return;
     }
 
     if (column === 'orderNumber') {
-      var _allowColumns$orderNu, _allowColumns$dateTim;
+      var _allowColumns$orderNu, _allowColumns$dateTim, _allowColumns$slaBar;
 
       return /*#__PURE__*/_react.default.createElement("th", {
         className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu = allowColumns.orderNumber) !== null && _allowColumns$orderNu !== void 0 && _allowColumns$orderNu.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim = allowColumns.dateTime) !== null && _allowColumns$dateTim !== void 0 && _allowColumns$dateTim.visable) ? 'orderNo small' : 'orderNo',
-        key: "noDragTh-".concat(i)
+        key: "noDragTh-".concat(i),
+        colSpan: allowColumns !== null && allowColumns !== void 0 && (_allowColumns$slaBar = allowColumns.slaBar) !== null && _allowColumns$slaBar !== void 0 && _allowColumns$slaBar.visable ? 2 : 1
       }, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, {
         isChecked: !orderList.loading && isAllChecked,
         onClick: function onClick() {
@@ -497,11 +494,11 @@ var OrdersTable = function OrdersTable(props) {
       alt: "six dots"
     }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title)));
   }))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    var _allowColumns$slaBar, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
+    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
 
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar = allowColumns.slaBar) === null || _allowColumns$slaBar === void 0 ? void 0 : _allowColumns$slaBar.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
       className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu2 = allowColumns.orderNumber) !== null && _allowColumns$orderNu2 !== void 0 && _allowColumns$orderNu2.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim2 = allowColumns.dateTime) !== null && _allowColumns$dateTim2 !== void 0 && _allowColumns$dateTim2.visable) ? 'orderNo small' : 'orderNo'
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderNumberContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 25,
