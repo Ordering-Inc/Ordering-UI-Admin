@@ -54,7 +54,8 @@ import {
   OrdersListing,
   OrdersTable,
   OrdersCards,
-  ReviewCustomer
+  ReviewCustomer,
+  OrderToPrint
 } from './components/Orders'
 import { Support } from './components/Support'
 import {
@@ -227,6 +228,7 @@ import {
   BusinessSummary,
   BusinessTaxAndFees,
   BusinessWebhooks,
+  BusinessWidgets,
   AddBusinessForm,
   WizardBusiness,
   BusinessInfoSettingList,
@@ -299,7 +301,9 @@ import {
   PaymentOptionSquare,
   BusinessWalletsList,
   PaymentOptionMethods,
-  BusinessPublishing
+  BusinessPublishing,
+  ServiceDetail,
+  ProductVideos
 } from './components/Stores'
 import {
   CustomersListing,
@@ -324,7 +328,8 @@ import {
   CustomerCashWalletDetails,
   CustomerWalletEvents,
   UserFormDetailsUI,
-  ProfessionalListing
+  ProfessionalListing,
+  ProfessionalAddForm
 } from './components/Users'
 import {
   RewardsPrograms,
@@ -355,12 +360,15 @@ import {
   CitySelector,
   ColumnAllowSettingPopover,
   Pagination,
-  ImageCrop
+  ImageCrop,
+  NotFoundSource,
+  RangeCalendar,
+  InputPhoneNumber
 } from './components/Shared'
 import { LogoutButton } from './components/LogoutButton'
 import { LanguageSelector } from './components/LanguageSelector'
 
-import { capitalize } from './utils'
+import { capitalize, verifyDecimals } from './utils'
 
 // contexts
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
@@ -432,6 +440,7 @@ export {
   OrdersTable,
   OrdersCards,
   ReviewCustomer,
+  OrderToPrint,
 
   BusinessAnalytics,
   DriverAnalytics,
@@ -511,6 +520,7 @@ export {
   DriversGroupAutoassign,
   DriversMarkAsBusy,
   ProfessionalListing,
+  ProfessionalAddForm,
   GoogleGpsButton,
 
   HomePage,
@@ -606,6 +616,7 @@ export {
   BusinessSummary,
   BusinessTaxAndFees,
   BusinessWebhooks,
+  BusinessWidgets,
   AddBusinessForm,
   WizardBusiness,
   BusinessInfoSettingList,
@@ -679,6 +690,8 @@ export {
   BusinessWalletsList,
   PaymentOptionMethods,
   BusinessPublishing,
+  ServiceDetail,
+  ProductVideos,
 
   LogoutButton,
   LanguageSelector,
@@ -736,8 +749,12 @@ export {
   ColumnAllowSettingPopover,
   Pagination,
   ImageCrop,
+  NotFoundSource,
+  RangeCalendar,
+  InputPhoneNumber,
 
   capitalize,
+  verifyDecimals,
 
   // contexts
   ThemeContext,

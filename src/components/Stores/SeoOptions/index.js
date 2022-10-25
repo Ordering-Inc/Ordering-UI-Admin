@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useLanguage, DragAndDrop, ExamineClick, useUtils } from 'ordering-components-admin'
-import { Button, Input, TextArea } from '../../../styles'
+import { Button, Input, TextArea, Switch } from '../../../styles'
 import { Alert, Modal, ImageCrop } from '../../Shared'
 import { bytesConverter } from '../../../utils'
 import Skeleton from 'react-loading-skeleton'
@@ -15,7 +15,8 @@ import {
   UploadImageIcon,
   CameraWrapper,
   WrapperImage,
-  ActionButtons
+  ActionButtons,
+  UseSameInfoWrapper
 } from './styles'
 
 export const SeoOptions = (props) => {
@@ -28,7 +29,8 @@ export const SeoOptions = (props) => {
     handlechangeImageProductCategory,
     isBusinessSeo,
     isProductSeo,
-    isCategorySeo
+    isCategorySeo,
+    cleanFormState
   } = props
 
   const [, t] = useLanguage()
@@ -36,6 +38,10 @@ export const SeoOptions = (props) => {
   const productImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
+  const [isSameInfo, setIsSameInfo] = useState(false)
+
+  const titleRef = useRef(null)
+  const descriptionRef = useRef(null)
 
   const handleClickImage = () => {
     productImageInputRef.current.click()
@@ -114,6 +120,38 @@ export const SeoOptions = (props) => {
     })
   }
 
+  useEffect(() => {
+    if (!isSameInfo) return
+    if (isBusinessSeo) {
+      setFormState({
+        ...formState,
+        changes: {
+          seo_title: data?.name,
+          seo_description: data?.description
+        }
+      })
+    } else {
+      setFormState({
+        seo_title: data?.name,
+        seo_description: data?.description
+      })
+    }
+    titleRef.current.value = data?.name
+    descriptionRef.current.value = data?.description
+  }, [isSameInfo, isBusinessSeo, data])
+
+  useEffect(() => {
+    // setIsSameInfo(false)
+    titleRef.current.value = data?.seo_title ?? ''
+    descriptionRef.current.value = data?.seo_description ?? ''
+  }, [data])
+
+  useEffect(() => {
+    return () => {
+      cleanFormState && cleanFormState({ changes: {} })
+    }
+  }, [])
+
   return (
     <>
       <Container>
@@ -156,10 +194,18 @@ export const SeoOptions = (props) => {
             </ExamineClick>
           </SEOImage>
         </WrapperImage>
+        <UseSameInfoWrapper>
+          <label>{t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information')}</label>
+          <Switch
+            defaultChecked={isSameInfo || false}
+            onChange={val => setIsSameInfo(val)}
+          />
+        </UseSameInfoWrapper>
         <WrapperShortDescription>
           <label>{t('SEO_TITLE', 'SEO Title')}</label>
           <Input
             name='seo_title'
+            ref={titleRef}
             defaultValue={
               formState?.result?.result
                 ? formState?.result?.result?.seo_title
@@ -176,6 +222,7 @@ export const SeoOptions = (props) => {
           <label>{t('SEO_DESCRIPTION', 'SEO Description')}</label>
           <TextArea
             name='seo_description'
+            ref={descriptionRef}
             rows={4}
             defaultValue={
               formState?.result?.result

@@ -87,6 +87,12 @@ const ReportsAverageSalesUI = (props) => {
     document.body.removeChild(downloadLink)
   }
 
+  const thObj = {
+    REPORT_HEADER_SITES: 'Sites',
+    REPORT_HEADER_ORDER_TYPES: 'Order types',
+    REPORT_HEADER_AVERAGE_TICKET: 'Average ticket'
+  }
+
   return (
     <>
       <OrderStatusContainer>
@@ -132,7 +138,7 @@ const ReportsAverageSalesUI = (props) => {
                         reportData?.content?.header?.rows.map((tr, i) => (
                           <tr key={i}>
                             {tr?.map((th, j) => (
-                              <th key={j} colspan={th.colspan}>{th.value}</th>
+                              <th key={j} colspan={th.colspan}>{t(th.value.toUpperCase(), thObj[th.value])}</th>
                             ))}
                           </tr>
                         ))
@@ -189,7 +195,7 @@ const ReportsAverageSalesUI = (props) => {
                         reportData1?.content?.header?.rows.map((tr, i) => (
                           <tr key={i}>
                             {tr?.map((th, j) => (
-                              <th key={j} colspan={th.colspan}>{th.value}</th>
+                              <th key={j} colspan={th.colspan}>{th.value?.includes("_") ? t(th.value.toUpperCase(), thObj[th.value]) : th.value}</th>
                             ))}
                           </tr>
                         ))

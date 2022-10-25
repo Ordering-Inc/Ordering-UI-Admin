@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
-export const ImportListContainer = styled.div` 
-`
+export const ImportListContainer = styled.div``
 export const ImportersTableWrapper = styled.div`
 `
 

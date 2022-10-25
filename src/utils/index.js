@@ -254,6 +254,16 @@ export const ribbonValues = {
 }
 
 /**
+ * Function to check URL
+ * @param {string} url URL of page
+ * @param {string} fallback default URL
+ */
+export const checkSiteUrl = (url, fallback) => {
+  if (!url) return fallback
+  return url[url?.length - 1] === '/' ? url : `${url}/`
+}
+
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
@@ -375,3 +385,5 @@ export const orderRejectCommentList = (status) => {
 
   return list
 }
+
+export const widgetURL = 'https://orderingweb.ordering.co/'

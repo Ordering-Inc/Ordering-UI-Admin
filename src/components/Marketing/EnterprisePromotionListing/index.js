@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, EnterprisePromotionList as EnterprisePromontioListController } from 'ordering-components-admin'
+import { useConfig, useSession, useLanguage, EnterprisePromotionList as EnterprisePromontioListController } from 'ordering-components-admin'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Button, IconButton } from '../../../styles'
 import { Alert, SearchBar, SideBar } from '../../Shared'
 import { EnterprisePromotionList } from '../EnterprisePromotionList'
 import { EnterprisePromotionDetails } from '../EnterprisePromotionDetails'
+import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
 
 import {
   PromotionsListingContainer,
@@ -28,6 +29,10 @@ const EnterprisePromotionListingUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+  const [{ user }] = useSession()
+  const featureName = 'Marketing_dashboard'
+  const [isDisabledFeature, setIsDisabledFeature] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [advancedOfferModuleDisabled, setAdvancedOfferModuleDisabled] = useState(false)
 
@@ -37,7 +42,7 @@ const EnterprisePromotionListingUI = (props) => {
   const [moveDistance, setMoveDistance] = useState(0)
 
   const handleOpenDetails = (promotion) => {
-    setMoveDistance(0)
+    setMoveDistance(0) 
     setSelectedPromotion(promotion)
     setOpenDetails(true)
   }
@@ -56,6 +61,14 @@ const EnterprisePromotionListingUI = (props) => {
     })
   }, [promotionListState?.error])
 
+  useEffect(() => {
+    if (configs && Object.keys(configs).length > 0 && user) {
+      if (!Object.keys(configs).includes(featureName) && user?.level === 0) {
+        setIsDisabledFeature(false)
+      }
+    }
+  }, [configs])
+
   return (
     <>
       <PromotionsListingContainer>
@@ -71,7 +84,7 @@ const EnterprisePromotionListingUI = (props) => {
             )}
             <h1>{t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise')}</h1>
           </HeaderTitleContainer>
-          <ActionsWrapper eventDisabled={advancedOfferModuleDisabled}>
+          <ActionsWrapper eventDisabled={advancedOfferModuleDisabled || isDisabledFeature}>
             <Button
               color='lightPrimary'
               borderRadius='8px'
@@ -89,12 +102,12 @@ const EnterprisePromotionListingUI = (props) => {
         </HeaderContainer>
         <EnterprisePromotionList
           {...props}
-          eventDisabled={advancedOfferModuleDisabled}
+          eventDisabled={advancedOfferModuleDisabled || isDisabledFeature}
           selectedPromotion={selectedPromotion}
           handleOpenDetails={handleOpenDetails}
         />
       </PromotionsListingContainer>
-
+      {isDisabledFeature && (<DisabledFeatureAlert />)}
       {openDetails && (
         <SideBar
           defaultSideBarWidth={600 + moveDistance}

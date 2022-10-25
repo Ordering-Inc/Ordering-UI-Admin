@@ -131,3 +131,25 @@ export const ActionButtons = styled.div`
     height: 42px;
   }
 `
+
+export const UseSameInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  label {
+    &:first-child {
+      font-weight: 400;
+      font-size: 14px;
+      margin: 0px;
+      margin-right: 10px;
+      ${props => props.theme.rtl && css`
+        margin-right: 0px;
+        margin-left: 10px;
+      `}
+    }
+    &:last-child {
+      min-width: 25px;
+    }
+  }
+`

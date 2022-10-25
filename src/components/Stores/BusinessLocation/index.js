@@ -109,6 +109,8 @@ export const BusinessLocation = (props) => {
           <p>{t('CITY', 'City')}</p>
           <CitySelector
             isDefault
+            position='left'
+            optionInnerMaxHeight='300px'
             defaultValue={business?.city_id}
             handleChangeCity={handleChangeBusinessCity}
           />

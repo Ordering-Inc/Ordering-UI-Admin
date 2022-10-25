@@ -32,11 +32,12 @@ export const CampaignList = (props) => {
     campaign: true,
     contact_type: true,
     audience: true,
-    // sales_general: true,
-    // open_rate: true,
-    // click_rate: true,
-    update: true,
-    actions: true
+    sent_count: true,
+    open_count: true,
+    unsubscribed_count: true,
+    bounced_count: true
+    // update: true,
+    // actions: true
   })
 
   const optionsDefault = [
@@ -52,26 +53,30 @@ export const CampaignList = (props) => {
       value: 'audience',
       content: t('AUDIENCE', 'Audience')
     },
-    // {
-    //   value: 'sales_general',
-    //   content: t('SALES_GENERAL', 'Sales general')
-    // },
-    // {
-    //   value: 'open_rate',
-    //   content: t('OPEN_RATE', 'Open rate')
-    // },
-    // {
-    //   value: 'click_rate',
-    //   content: t('CLICK_RATE', 'Click rate')
-    // },
     {
-      value: 'update',
-      content: t('UPDATE', 'Update')
+      value: 'sent_count',
+      content: t('SENT', 'Sent')
     },
     {
-      value: 'actions',
-      content: t('ACTIONS', 'Actions')
+      value: 'open_count',
+      content: t('OPENS', 'Opens')
+    },
+    {
+      value: 'unsubscribed_count',
+      content: t('UNSUBSCRIBED', 'Unsubscribed')
+    },
+    {
+      value: 'bounced_count',
+      content: t('BOUNCES', 'Bounces')
     }
+    // {
+    //   value: 'update',
+    //   content: t('UPDATE', 'Update')
+    // },
+    // {
+    //   value: 'actions',
+    //   content: t('ACTIONS', 'Actions')
+    // }
   ]
 
   const checkColor = (status) => {
@@ -120,15 +125,18 @@ export const CampaignList = (props) => {
               {allowColumns?.audience && (
                 <th>{t('AUDIENCE', 'Audience')}</th>
               )}
-              {/* {allowColumns?.sales_general && (
-                <th>{t('SALES_GENERAL', 'Sales general')}</th>
+              {allowColumns?.sent_count && (
+                <th>{t('SENT', 'Sent')}</th>
               )}
-              {allowColumns?.open_rate && (
-                <th>{t('OPEN_RATE', 'Open rate')}</th>
+              {allowColumns?.open_count && (
+                <th>{t('OPENS', 'Opens')}</th>
               )}
-              {allowColumns?.click_rate && (
-                <th>{t('CLICK_RATE', 'Click rate')}</th>
-              )} */}
+              {allowColumns?.unsubscribed_count && (
+                <th>{t('UNSUBSCRIBED', 'Unsubscribed')}</th>
+              )}
+              {allowColumns?.bounced_count && (
+                <th>{t('BOUNCES', 'Bounces')}</th>
+              )}
               <th className='allow-colums action'>
                 <ColumnAllowSettingPopover
                   allowColumns={allowColumns}
@@ -158,21 +166,26 @@ export const CampaignList = (props) => {
                       <Skeleton width={100} height={20} />
                     </td>
                   )}
-                  {/* {allowColumns?.sales_general && (
+                  {allowColumns?.sent_count && (
                     <td>
-                      <Skeleton width={50} height={20} />
+                      <Skeleton width={100} height={20} />
                     </td>
                   )}
-                  {allowColumns?.open_rate && (
+                  {allowColumns?.open_count && (
                     <td>
-                      <Skeleton width={50} height={20} />
+                      <Skeleton width={100} height={20} />
                     </td>
                   )}
-                  {allowColumns?.click_rate && (
+                  {allowColumns?.unsubscribed_count && (
                     <td>
-                      <Skeleton width={50} height={20} />
+                      <Skeleton width={100} height={20} />
                     </td>
-                  )} */}
+                  )}
+                  {allowColumns?.bounced_count && (
+                    <td>
+                      <Skeleton width={100} height={20} />
+                    </td>
+                  )}
                   <td>
                     <SwitchWrapper>
                       <p className='campaign-enabled'><Skeleton width={80} height={20} /></p>
@@ -203,39 +216,36 @@ export const CampaignList = (props) => {
                   {allowColumns?.audience && (
                     <td>{campaign?.audience_type}</td>
                   )}
-                  {/* {allowColumns?.sales_general && (
-                    <td>05</td>
+                  {allowColumns?.sent_count && (
+                    <td>{campaign?.sent_count}</td>
                   )}
-                  {allowColumns?.open_rate && (
-                    <td>02</td>
+                  {allowColumns?.open_count && (
+                    <td>{campaign?.open_count}</td>
                   )}
-                  {allowColumns?.click_rate && (
-                    <td className='right-border'>
-                      <div>
-                        <p>02</p>
-                      </div>
-                    </td>
-                  )} */}
-                  {(allowColumns?.update || allowColumns?.actions) && (
-                    <td>
-                      {allowColumns?.actions && campaign?.audience_type === 'dynamic' && (
-                        <SwitchWrapper>
-                          <p className='campaign-enabled'>{t('ENABLE', 'Enable')}</p>
-                          <Switch
-                            defaultChecked={campaign?.enabled}
-                            onChange={val => handleUpdateCampaign(campaign.id, { enabled: val })}
-                            className='enable_control'
-                          />
-                        </SwitchWrapper>
-                      )}
-                      {allowColumns?.update && campaign?.audience_type === 'fixed' && (
-                        <StatusWrapper>
-                          <p>{campaign?.status}</p>
-                          <StatusPoint style={{ background: checkColor(campaign?.status) }} />
-                        </StatusWrapper>
-                      )}
-                    </td>
+                  {allowColumns?.unsubscribed_count && (
+                    <td>{campaign?.unsubscribed_count}</td>
                   )}
+                  {allowColumns?.bounced_count && (
+                    <td>{campaign?.bounced_count}</td>
+                  )}
+                  <td>
+                    {campaign?.audience_type === 'dynamic' && (
+                      <SwitchWrapper>
+                        <p className='campaign-enabled'>{t('ENABLE', 'Enable')}</p>
+                        <Switch
+                          defaultChecked={campaign?.enabled}
+                          onChange={val => handleUpdateCampaign(campaign.id, { enabled: val })}
+                          className='enable_control'
+                        />
+                      </SwitchWrapper>
+                    )}
+                    {campaign?.audience_type === 'fixed' && (
+                      <StatusWrapper>
+                        <p>{campaign?.status}</p>
+                        <StatusPoint style={{ background: checkColor(campaign?.status) }} />
+                      </StatusWrapper>
+                    )}
+                  </td>
                 </tr>
               </Tbody>
             ))

@@ -24,6 +24,7 @@ export const BusinessName = styled.h1`
   font-size: 20px;
   margin: 0px;
   font-weight: 700;
+  flex: 1;
 
   ${props => props.theme?.rtl ? css`
     margin-left: 10px;

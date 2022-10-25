@@ -62,15 +62,22 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "basicSettings": {
+  "basic_settings": {
     "title": "Basic settings",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "operationSettings": {
+  "operation_settings": {
     "title": "Operation settings",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "plugin_settings": {
+    "title": "Plugin settings",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

@@ -114,6 +114,14 @@ export const TabOption = styled.div`
       color: ${props => props.theme.colors.primary};
     }
   }
+
+  ${({ isDisabledFeature }) => isDisabledFeature && css`
+      cursor: not-allowed;
+      opacity: 0.4;
+      &:hover {
+        background-color: ${props => props.theme.colors.white};
+      }
+  `}
 `
 
 export const TabOptionName = styled.span`

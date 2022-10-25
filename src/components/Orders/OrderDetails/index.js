@@ -388,6 +388,7 @@ const OrderDetailsUI = (props) => {
                 <ProductItemAccordion
                   key={product.id}
                   product={product}
+                  currency={order?.currency}
                 />
               ))}
             </OrderProducts>
@@ -527,6 +528,7 @@ export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,
     asDashboard: true,
+    isDisableLoadMessages: true,
     UIComponent: OrderDetailsUI
   }
 

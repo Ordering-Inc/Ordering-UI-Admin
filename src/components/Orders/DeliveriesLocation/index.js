@@ -27,15 +27,21 @@ export const DeliveriesLocation = (props) => {
   const [configState] = useConfig()
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
-  const [mapCenter, setMapCenter] = useState({ lat: 19.4326, lng: -99.1332 })
+  const defaultLatitude = Number(configState?.configs?.location_default_latitude?.value)
+  const defaultLongitude = Number(configState?.configs?.location_default_longitude?.value)
+  const isInvalidDefaultLocation = isNaN(defaultLatitude) || isNaN(defaultLongitude)
+  const defaultCenter = {
+    lat: !isInvalidDefaultLocation ? defaultLatitude : 40.7744146,
+    lng: !isInvalidDefaultLocation ? defaultLongitude : -73.9678064
+  }
+
+  const [mapCenter, setMapCenter] = useState(defaultCenter)
   const [mapZoom, setMapZoom] = useState(10)
   const [activeDrivers, setActiveDrivers] = useState([])
   const [mapLoaded, setMapLoaded] = useState(true)
   const [mapFitted, setMapFitted] = useState(false)
 
   const [interActionOrderDriverLocation, setInterActionOrderDriverLocation] = useState(null)
-
-  const defaultCenter = { lat: 19.4326, lng: -99.1332 }
   const defaultZoom = 10
   const mapRef = useRef(null)
 
@@ -49,12 +55,28 @@ export const DeliveriesLocation = (props) => {
 
     if (interActionMapOrder === null) {
       if (driversList.drivers.length === 1) {
-        setMapCenter(driversList.drivers[0].location)
+        setMapCenter(
+          (driversList.drivers[0].location !== null && typeof driversList.drivers[0].location === 'object' && driversList.drivers[0].location?.lat && driversList.drivers[0].location?.lng)
+            ? driversList.drivers[0].location
+            : typeof driversList.drivers[0].location === 'string'
+              ? {
+                lat: parseFloat(driversList.drivers[0]?.location?.split(',')[0].replace(/[^-.0-9]/g, '')),
+                lng: parseFloat(driversList.drivers[0]?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+              }
+              : defaultCenter
+        )
         setMapZoom(defaultZoom)
         return
       }
       for (const driver of driversList.drivers) {
-        const marker = (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat && driver.location?.lng) ? driver.location : defaultCenter
+        const marker = (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat && driver.location?.lng)
+          ? driver.location
+          : typeof driver?.location === 'string'
+            ? {
+              lat: parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, '')),
+              lng: parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+            }
+            : defaultCenter
         const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
         bounds.extend(newPoint)
       }
@@ -151,8 +173,20 @@ export const DeliveriesLocation = (props) => {
               <DriverMapMarkerAndInfo
                 key={driver.id}
                 driver={driver}
-                lat={(driver.location !== null && typeof driver.location === 'object') ? driver.location.lat : defaultCenter.lat}
-                lng={(driver.location !== null && typeof driver.location === 'object') ? driver.location.lng : defaultCenter.lng}
+                lat={
+                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
+                    ? driver.location.lat
+                    : typeof driver.location === 'string'
+                      ? parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, ''))
+                      : defaultCenter.lat
+                }
+                lng={
+                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lng)
+                    ? driver.location.lng
+                    : typeof driver.location === 'string'
+                      ? parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+                      : defaultCenter.lng
+                }
               />
             ))}
 
@@ -176,8 +210,20 @@ export const DeliveriesLocation = (props) => {
           {interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
             <InterActOrderMarker
               driver={interActionMapOrder?.driver}
-              lat={(interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object') ? interActionOrderDriverLocation?.lat : defaultCenter.lat}
-              lng={(interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object') ? interActionOrderDriverLocation?.lng : defaultCenter.lng}
+              lat={
+                (interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object' && interActionOrderDriverLocation?.lat)
+                  ? interActionOrderDriverLocation.lat
+                  : typeof interActionOrderDriverLocation === 'string'
+                    ? parseFloat(interActionOrderDriverLocation?.split(',')[0].replace(/[^-.0-9]/g, ''))
+                    : defaultCenter.lat
+              }
+              lng={
+                (interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object' && interActionOrderDriverLocation?.lng)
+                  ? interActionOrderDriverLocation.lng
+                  : typeof interActionOrderDriverLocation === 'string'
+                    ? parseFloat(interActionOrderDriverLocation?.split(',')[1].replace(/[^-.0-9]/g, ''))
+                    : defaultCenter.lng
+              }
               image={interActionMapOrder?.driver?.photo}
             />
           )}
@@ -186,8 +232,20 @@ export const DeliveriesLocation = (props) => {
               <InterActOrderMarker
                 key={driver.id}
                 driver={driver}
-                lat={driver?.location?.lat ? driver?.location?.lat : defaultCenter.lat}
-                lng={driver?.location?.lng ? driver?.location?.lng : defaultCenter.lng}
+                lat={
+                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
+                    ? driver.location.lat
+                    : typeof driver.location === 'string'
+                      ? parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, ''))
+                      : defaultCenter.lat
+                }
+                lng={
+                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lng)
+                    ? driver.location.lng
+                    : typeof driver.location === 'string'
+                      ? parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+                      : defaultCenter.lng
+                }
                 image={driver?.photo}
               />
             ))

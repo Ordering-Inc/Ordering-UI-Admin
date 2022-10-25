@@ -5,7 +5,7 @@ import {
 } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Alert, Pagination, SearchBar, SideBar } from '../../Shared'
-import { List as MenuIcon } from 'react-bootstrap-icons'
+import { List as MenuIcon, InfoCircle } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { OrderingProductDetails } from '../OrderingProductDetails'
@@ -19,7 +19,9 @@ import {
   PageTbody,
   PagesBottomContainer,
   AddNewPageButton,
-  ProductListTableWrapper
+  ProductListTableWrapper,
+  InfoWrapper,
+  InfoContent
 } from './styles'
 
 const OrderingProductsUI = (props) => {
@@ -83,6 +85,16 @@ const OrderingProductsUI = (props) => {
               </IconButton>
             )}
             <h1>{t('ORDERING_PRODUCTS', 'Ordering Products')}</h1>
+            <InfoWrapper>
+              <IconButton
+                color='primary'
+              >
+                <InfoCircle />
+              </IconButton>
+              <InfoContent>
+                {t('ORDERING_PRODUCTS_INFO', 'Select your site and customize it with our basic configurations in General tab and our advanced configurations in Theme tab.')}
+              </InfoContent>
+            </InfoWrapper>
           </HeaderTitleContainer>
           <ActionsGroup>
             <Button

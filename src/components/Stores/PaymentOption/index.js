@@ -188,7 +188,6 @@ export const PaymentOption = (props) => {
           {actionState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
         </Button>
       </Container>
-
       <Confirm
         width='700px'
         title={t('WEB_APPNAME', 'Ordering')}

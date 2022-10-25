@@ -29,6 +29,7 @@ import { BusinessTaxAndFees } from './BusinessTaxAndFees'
 import { BusinessTypes } from './BusinessTypes'
 import { BusinessVideos } from './BusinessVideos'
 import { BusinessWebhooks } from './BusinessWebhooks'
+import { BusinessWidgets } from './BusinessWidgets'
 import { SeoOptions } from './SeoOptions'
 import { AddBusinessForm } from './AddBusinessForm'
 import { WizardBusiness } from './WizardBusiness'
@@ -95,6 +96,8 @@ import { PaymentOptionSquare } from './PaymentOptionSquare'
 import { BusinessWalletsList } from './BusinessWalletsList'
 import { PaymentOptionMethods } from './PaymentOptionMethods'
 import { BusinessPublishing } from './BusinessPublishing'
+import { ServiceDetail } from './ServiceDetail'
+import { ProductVideos } from './ProductVideos'
 
 export {
   BusinessBrandListing,
@@ -128,6 +131,7 @@ export {
   BusinessTypes,
   BusinessVideos,
   BusinessWebhooks,
+  BusinessWidgets,
   SeoOptions,
   AddBusinessForm,
   WizardBusiness,
@@ -193,5 +197,7 @@ export {
   PaymentOptionSquare,
   BusinessWalletsList,
   PaymentOptionMethods,
-  BusinessPublishing
+  BusinessPublishing,
+  ServiceDetail,
+  ProductVideos
 }

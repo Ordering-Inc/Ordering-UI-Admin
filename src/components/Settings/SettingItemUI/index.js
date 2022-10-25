@@ -13,13 +13,14 @@ export const SettingItemUI = (props) => {
   const {
     isSkeleton,
     active,
+    disabledFeature,
     icon,
     title,
     description
   } = props
 
   return (
-    <SettingItemContainer active={!isSkeleton && active}>
+    <SettingItemContainer active={!isSkeleton && active} disabledFeature={disabledFeature}>
       <IconWrapper>
         {
           isSkeleton

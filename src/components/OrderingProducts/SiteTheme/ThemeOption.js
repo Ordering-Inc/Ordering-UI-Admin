@@ -2,6 +2,7 @@ import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { ColorPicker } from '../../Shared'
 import { SecondSelect as Select, Checkbox, Input } from '../../../styles'
+import { ThemeImage } from './ThemeImage'
 
 import {
   OptionContainer,
@@ -17,7 +18,8 @@ export const ThemeOption = (props) => {
     valueObject,
     path,
     themeValues,
-    setThemeValues
+    setThemeValues,
+    handleAddThemeGallery
   } = props
 
   const [, t] = useLanguage()
@@ -66,7 +68,7 @@ export const ThemeOption = (props) => {
         )}
         <h5>{getTitle(name)}</h5>
       </OptionHeader>
-      {(optionObject?.value_type === 'integer') && (
+      {((optionObject?.value_type === 'integer' || optionObject?.value_type === 'string') && !optionObject?.options && !validHexColor(valueObject)) && (
         <Input
           defaultValue={valueObject}
           onChange={e => handleChangeValue(e.target.value)}
@@ -82,9 +84,18 @@ export const ThemeOption = (props) => {
       )}
       {optionObject?.options && (
         <Select
+          placeholder={<Option isPlaceholder>{t('SELECT_ITEM', 'Select a _attribute_').replace('_attribute_', getTitle(name))}</Option>}
           defaultValue={valueObject}
           options={getOptions(optionObject?.options)}
           onChange={value => handleChangeValue(value)}
+        />
+      )}
+      {(name === 'image' || name === 'dummy_image') && optionObject?.value_type === 'string' && (
+        <ThemeImage
+          isMarginTop
+          valueObject={valueObject}
+          handleAddThemeGallery={handleAddThemeGallery}
+          handleChangeValue={handleChangeValue}
         />
       )}
       {typeof optionObject !== 'string' && Object.keys(optionObject).filter(subOption => subOption !== 'value_type' && subOption !== 'options').map(subOption => (
@@ -97,6 +108,7 @@ export const ThemeOption = (props) => {
               path={path + '.' + subOption}
               themeValues={themeValues}
               setThemeValues={setThemeValues}
+              handleAddThemeGallery={handleAddThemeGallery}
             />
           )}
         </React.Fragment>
