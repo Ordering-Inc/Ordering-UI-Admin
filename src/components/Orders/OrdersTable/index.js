@@ -11,7 +11,6 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
-import { ChevronRight } from 'react-bootstrap-icons'
 
 import {
   OrdersContainer,
@@ -314,17 +313,14 @@ export const OrdersTable = (props) => {
                   .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
                   .map((column, i) => {
                     if (column === 'slaBar') {
-                      return (
-                        <th key={`noDragTh-${i}`}>
-                          <Timestatus />
-                        </th>
-                      )
+                      return
                     }
                     if (column === 'orderNumber') {
                       return (
                         <th
                           className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
                           key={`noDragTh-${i}`}
+                          colSpan={allowColumns?.slaBar?.visable ? 2 : 1}
                         >
                           <CheckBox
                             isChecked={!orderList.loading && isAllChecked}

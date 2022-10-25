@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import {
-  UsersList as UsersListController,
+  // UsersList as UsersListController,
   useLanguage
 } from 'ordering-components-admin'
+import { UsersList as UsersListController } from '../UsersListing/naked'
 import { UsersList } from '../UsersList'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
@@ -47,7 +48,8 @@ const CustomersListingUI = (props) => {
     onUserRedirect,
     handleSuccessUpdate,
     handleSuccessAddUser,
-    handleSuccessDeleteUser
+    handleSuccessDeleteUser,
+    setSelectedUsers
   } = props
 
   const [, t] = useLanguage()
@@ -160,6 +162,7 @@ const CustomersListingUI = (props) => {
           userDetailsId={openUser?.id || queryId}
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
+          setSelectedUsers={setSelectedUsers}
         />
       </UsersListingContainer>
 
