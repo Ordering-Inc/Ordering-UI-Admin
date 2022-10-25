@@ -209,7 +209,7 @@ export const App = () => {
                     <ProtectedRoute path='/users/managers' allowedLevels={[0]}>
                       <ManagersList />
                     </ProtectedRoute>
-                    <ProtectedRoute path='/users/professionals' allowedLevels={[0, 2, 5]}>
+                    <ProtectedRoute path='/users/professionals' allowedLevels={[0, 2, 5, 8]}>
                       <Professionals />
                     </ProtectedRoute>
 
