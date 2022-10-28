@@ -140,7 +140,7 @@ import {
   GoogleGpsButton
 } from './components/Delivery'
 import { HomePage } from './components/Home'
-import { LoginForm, ForgotPasswordForm, QueryLogin } from './components/Login'
+import { LoginForm, ForgotPasswordForm, QueryLogin, ResetPassword } from './components/Login'
 import {
   EnterprisePromotionListing,
   CampaignListing,
@@ -344,6 +344,8 @@ import { FreeProductsList, PurchasedProductsList } from './components/Downloads'
 import { Layout } from './components/Layout'
 import { SidebarMenu } from './components/SidebarMenu'
 import { NotNetworkConnectivity } from './components/NotNetworkConnectivity'
+import { ProfilePage } from './components/Profile'
+
 import {
   Alert,
   SpinnerLoader,
@@ -526,6 +528,7 @@ export {
   HomePage,
   LoginForm,
   QueryLogin,
+  ResetPassword,
 
   EnterprisePromotionListing,
   CampaignListing,
@@ -733,6 +736,8 @@ export {
   Layout,
   SidebarMenu,
   NotNetworkConnectivity,
+  ProfilePage,
+
   Alert,
   SpinnerLoader,
   Modal,

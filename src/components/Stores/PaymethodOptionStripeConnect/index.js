@@ -47,6 +47,7 @@ export const PaymethodOptionStripeConnect = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [paymentTabs, setPaymentTabs] = useState(0)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [localState, setLocalState] = useState({allowed_order_types: businessPaymethod?.allowed_order_types })
 
   const setPaymethodInfo = (values) => {
     const data = {}
@@ -101,6 +102,12 @@ export const PaymethodOptionStripeConnect = (props) => {
       allowed_order_types: businessPaymethod?.allowed_order_types || [1, 2, 3, 4, 5]
     })
   }, [businessPaymethod?.allowed_order_types])
+
+  useEffect(() => {
+    if (changesState?.allowed_order_types) {
+      setLocalState({allowed_order_types: changesState?.allowed_order_types})
+    }
+  }, [localState?.allowed_order_types, changesState?.allowed_order_types])
 
   return (
     <>
@@ -265,7 +272,7 @@ export const PaymethodOptionStripeConnect = (props) => {
               key={type.value}
               onClick={() => setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
             >
-              {(changesState?.allowed_order_types ?? businessPaymethod?.allowed_order_types)?.includes(type.value) ? (
+              {(localState?.allowed_order_types ?? businessPaymethod?.allowed_order_types)?.includes(type.value) ? (
                 <RiCheckboxFill className='fill' />
               ) : (
                 <RiCheckboxBlankLine />
