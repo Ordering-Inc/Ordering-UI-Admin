@@ -49,7 +49,8 @@ export const ListenPageChanges = ({ children }) => {
     support: '/support',
     rewards_programs: '/loyalty/rewards-programs',
     free_products: '/downloads/free-products',
-    purchased_products: '/downloads/purchased-products'
+    purchased_products: '/downloads/purchased-products',
+    profile: '/profile'
   }
 
   const handleGoToPage = ({ page, params = {}, search, replace = false }) => {
