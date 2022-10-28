@@ -191,6 +191,14 @@ const BusinessProductsListingUI = (props) => {
   }
 
   useEffect(() => {
+    if (slug && !isInitialRender) {
+      setOpenSidebar(null)
+      setSelectedProduct(null)
+      handleUpdateInitialRender(false)
+    }
+  }, [slug, isInitialRender])
+
+  useEffect(() => {
     if (!slug) {
       setSelectedBusiness(null)
       setOpenSidebar(null)

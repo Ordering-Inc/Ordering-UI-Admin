@@ -240,3 +240,8 @@ export const VerifiedItemsContainer = styled.div`
     }
   }
 `
+
+export const AllCheckWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
