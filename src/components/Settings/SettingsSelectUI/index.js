@@ -32,7 +32,7 @@ export const SettingsSelectUI = (props) => {
       setOptions(selectTypes)
     } else {
       const selectedTypes = config?.options?.map(item => {
-        return { value: item.value, content: <Option>{t(item.text.toUpperCase(), "Last order assigned")}</Option> }
+        return { value: item.value, content: <Option>{t(item.text.toUpperCase())}</Option> }
       })
       if (config.customizable) {
         selectedTypes.push({
