@@ -17,6 +17,7 @@ import {
   Award,
   BoxArrowUpRight,
   Cart3,
+  Cash,
   CloudDownload
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
@@ -718,6 +719,16 @@ export const SidebarMenu = (props) => {
                       </Accordion.Collapse>
                     </MenuContainer>
                   </Accordion>
+                )}
+                {sessionState?.user?.level === 0 && (
+                  <Button
+                    className='d-flex align-items-center'
+                    variant={false}
+                    onClick={() => handleGoToLink('https://billing-dashboard.tryordering.com')}
+                  >
+                    <Cash />
+                    <span>{t('BILLING', 'Billing')}</span>
+                  </Button>
                 )}
               </div>
             </SidebarContent>
