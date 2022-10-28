@@ -1731,6 +1731,12 @@ Object.defineProperty(exports, "ProfessionalListing", {
     return _Users.ProfessionalListing;
   }
 });
+Object.defineProperty(exports, "ProfilePage", {
+  enumerable: true,
+  get: function get() {
+    return _Profile.ProfilePage;
+  }
+});
 Object.defineProperty(exports, "ProtectedRoute", {
   enumerable: true,
   get: function get() {
@@ -1909,6 +1915,12 @@ Object.defineProperty(exports, "ReportsUsers", {
   enumerable: true,
   get: function get() {
     return _BusinessIntelligence.ReportsUsers;
+  }
+});
+Object.defineProperty(exports, "ResetPassword", {
+  enumerable: true,
+  get: function get() {
+    return _Login.ResetPassword;
   }
 });
 Object.defineProperty(exports, "ReviewCustomer", {
@@ -2303,6 +2315,8 @@ var _Layout = require("./components/Layout");
 var _SidebarMenu = require("./components/SidebarMenu");
 
 var _NotNetworkConnectivity = require("./components/NotNetworkConnectivity");
+
+var _Profile = require("./components/Profile");
 
 var _Shared = require("./components/Shared");
 

@@ -64,7 +64,7 @@ var SettingsSelectUI = function SettingsSelectUI(props) {
       var selectedTypes = config === null || config === void 0 ? void 0 : (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.map(function (item) {
         return {
           value: item.value,
-          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t(item.text.toUpperCase(), "Last order assigned"))
+          content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t(item.text.toUpperCase()))
         };
       });
 

@@ -21,9 +21,17 @@ Object.defineProperty(exports, "QueryLogin", {
     return _QueryLogin.QueryLogin;
   }
 });
+Object.defineProperty(exports, "ResetPassword", {
+  enumerable: true,
+  get: function get() {
+    return _ResetPassword.ResetPassword;
+  }
+});
 
 var _ForgotPasswordForm = require("./ForgotPasswordForm");
 
 var _LoginForm = require("./LoginForm");
 
 var _QueryLogin = require("./QueryLogin");
+
+var _ResetPassword = require("./ResetPassword");
