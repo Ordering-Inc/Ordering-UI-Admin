@@ -295,6 +295,10 @@ export const MessagesUI = (props) => {
     }
   }
 
+  const getVehicleSmmary = (vehicle) => {
+    return vehicle?.type + ' ' + vehicle?.model + ' ' + vehicle?.car_registration + ' ' + vehicle?.color
+  }
+
   const clearInputs = () => {
     const input = messageInputRef?.current
     if (input) {
@@ -601,12 +605,30 @@ export const MessagesUI = (props) => {
                                   <>
                                     {message.change.old !== null && (
                                       <>
-                                        <strong>{ message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : getStatus(parseInt(message.change.old, 10))}</strong> {' '}
+                                        <strong>
+                                          {
+                                            message.change?.attribute === 'logistic_status'
+                                              ? getLogisticTagStatus(parseInt(message.change.old, 10))
+                                              : message.change?.attribute === 'vehicle'
+                                                ? getVehicleSmmary(message.change.old)
+                                                : getStatus(parseInt(message.change.old, 10))
+                                          }
+                                        </strong>{' '}
                                       </>
                                     )}
                                     <div style={{ whiteSpace: 'pre' }}>
                                       {t('TO', 'to')} {' '}
-                                      <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : getStatus(parseInt(message.change.new, 10))}</strong>
+                                      <strong>
+                                        {
+                                          message.change.old === null && message.change.attribute === 'delivery_in'
+                                            ? 'null'
+                                            : message.change?.attribute === 'logistic_status'
+                                              ? getLogisticTagStatus(parseInt(message.change.new, 10))
+                                              : message.change?.attribute === 'vehicle'
+                                                ? getVehicleSmmary(message.change.new)
+                                                : getStatus(parseInt(message.change.new, 10))
+                                        }
+                                      </strong>
                                       <strong>{message?.change?.comment ? (`\n${t('COMMENT', 'Comment:')}`) : ''}</strong>
                                       {message?.change?.comment ? ` ${message?.change?.comment}` : ''}
                                       {(message?.author?.name || message?.author?.lastname) && (
