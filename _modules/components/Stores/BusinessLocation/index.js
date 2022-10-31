@@ -211,7 +211,7 @@ var BusinessLocation = function BusinessLocation(props) {
       handleChangeInput(e.target.value);
     },
     defaultValue: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re.address : (_ref3 = (_formState$changes$ad = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : business === null || business === void 0 ? void 0 : business.address) !== null && _ref3 !== void 0 ? _ref3 : '',
-    autoComplete: "new-field",
+    autoComplete: "new-password",
     countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperAddressnotes, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS_NOTES', 'Address notes')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     rows: 4,
