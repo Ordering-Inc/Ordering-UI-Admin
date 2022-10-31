@@ -138,7 +138,7 @@ export const BusinessLocation = (props) => {
               ? formState?.result?.result?.address
               : formState?.changes?.address ?? business?.address ?? ''
           }
-          autoComplete='new-field'
+          autoComplete='new-password'
           countryCode={configs?.country_autocomplete?.value || '*'}
         />
       </WrapperGoogleAutoCompleteInput>

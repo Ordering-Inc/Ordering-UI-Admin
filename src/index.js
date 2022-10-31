@@ -54,7 +54,8 @@ import {
   OrdersListing,
   OrdersTable,
   OrdersCards,
-  ReviewCustomer
+  ReviewCustomer,
+  OrderToPrint
 } from './components/Orders'
 import { Support } from './components/Support'
 import {
@@ -139,7 +140,7 @@ import {
   GoogleGpsButton
 } from './components/Delivery'
 import { HomePage } from './components/Home'
-import { LoginForm, ForgotPasswordForm, QueryLogin } from './components/Login'
+import { LoginForm, ForgotPasswordForm, QueryLogin, ResetPassword } from './components/Login'
 import {
   EnterprisePromotionListing,
   CampaignListing,
@@ -300,7 +301,9 @@ import {
   PaymentOptionSquare,
   BusinessWalletsList,
   PaymentOptionMethods,
-  BusinessPublishing
+  BusinessPublishing,
+  ServiceDetail,
+  ProductVideos
 } from './components/Stores'
 import {
   CustomersListing,
@@ -325,7 +328,8 @@ import {
   CustomerCashWalletDetails,
   CustomerWalletEvents,
   UserFormDetailsUI,
-  ProfessionalListing
+  ProfessionalListing,
+  ProfessionalAddForm
 } from './components/Users'
 import {
   RewardsPrograms,
@@ -340,6 +344,8 @@ import { FreeProductsList, PurchasedProductsList } from './components/Downloads'
 import { Layout } from './components/Layout'
 import { SidebarMenu } from './components/SidebarMenu'
 import { NotNetworkConnectivity } from './components/NotNetworkConnectivity'
+import { ProfilePage } from './components/Profile'
+
 import {
   Alert,
   SpinnerLoader,
@@ -356,12 +362,15 @@ import {
   CitySelector,
   ColumnAllowSettingPopover,
   Pagination,
-  ImageCrop
+  ImageCrop,
+  NotFoundSource,
+  RangeCalendar,
+  InputPhoneNumber
 } from './components/Shared'
 import { LogoutButton } from './components/LogoutButton'
 import { LanguageSelector } from './components/LanguageSelector'
 
-import { capitalize } from './utils'
+import { capitalize, verifyDecimals } from './utils'
 
 // contexts
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
@@ -433,6 +442,7 @@ export {
   OrdersTable,
   OrdersCards,
   ReviewCustomer,
+  OrderToPrint,
 
   BusinessAnalytics,
   DriverAnalytics,
@@ -512,11 +522,13 @@ export {
   DriversGroupAutoassign,
   DriversMarkAsBusy,
   ProfessionalListing,
+  ProfessionalAddForm,
   GoogleGpsButton,
 
   HomePage,
   LoginForm,
   QueryLogin,
+  ResetPassword,
 
   EnterprisePromotionListing,
   CampaignListing,
@@ -681,6 +693,8 @@ export {
   BusinessWalletsList,
   PaymentOptionMethods,
   BusinessPublishing,
+  ServiceDetail,
+  ProductVideos,
 
   LogoutButton,
   LanguageSelector,
@@ -722,6 +736,8 @@ export {
   Layout,
   SidebarMenu,
   NotNetworkConnectivity,
+  ProfilePage,
+
   Alert,
   SpinnerLoader,
   Modal,
@@ -738,8 +754,12 @@ export {
   ColumnAllowSettingPopover,
   Pagination,
   ImageCrop,
+  NotFoundSource,
+  RangeCalendar,
+  InputPhoneNumber,
 
   capitalize,
+  verifyDecimals,
 
   // contexts
   ThemeContext,

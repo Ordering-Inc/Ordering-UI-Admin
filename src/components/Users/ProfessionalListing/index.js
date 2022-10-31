@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { UsersList as UsersListController, useLanguage } from 'ordering-components-admin'
+import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
 import { ProfessionalList } from '../ProfessionalList'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
@@ -46,7 +46,8 @@ const ProfessionalListingUI = (props) => {
 
     occupationsState,
     selectedOccupation,
-    handleSelectOccupation
+    handleSelectOccupation,
+    setSelectedUsers
   } = props
 
   const [, t] = useLanguage()
@@ -144,6 +145,7 @@ const ProfessionalListingUI = (props) => {
           userDetailsId={openUser?.id || queryId}
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
+          setSelectedUsers={setSelectedUsers}
         />
       </UsersListingContainer>
 

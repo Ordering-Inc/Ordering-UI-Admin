@@ -40,6 +40,7 @@ export const PaymentOption = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [paymentTabs, setPaymentTabs] = useState(sitesState?.sites?.length > 0 ? 0 : 1)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [localState, setLocalState] = useState({allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites})
 
   const setPaymethodInfo = (values) => {
     const data = {}
@@ -102,6 +103,15 @@ export const PaymentOption = (props) => {
     })
   }, [businessPaymethod?.id, businessPaymethod?.sandbox, businessPaymethod?.allowed_order_types])
 
+  useEffect(() => {
+    if (changesState?.allowed_order_types) {
+      setLocalState({allowed_order_types: changesState?.allowed_order_types})
+    }
+    if (changesState?.sites) {
+      setLocalState({sites: changesState?.sites})
+    }
+  }, [changesState?.allowed_order_types, changesState?.sites])
+
   return (
     <>
       <Container id='payment_method_option'>
@@ -153,7 +163,7 @@ export const PaymentOption = (props) => {
               key={site.id}
               onClick={() => setPaymethodInfo({ key: 'sites', value: site.id })}
             >
-              {(changesState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
+              {(localState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
                 <RiCheckboxFill className='fill' />
               ) : (
                 <RiCheckboxBlankLine />
@@ -169,7 +179,7 @@ export const PaymentOption = (props) => {
               key={type.value}
               onClick={() => setPaymethodInfo({ key: 'allowed_order_types', value: type.value })}
             >
-              {(changesState?.allowed_order_types ?? businessPaymethod?.allowed_order_types)?.includes(type.value) ? (
+              {(localState?.allowed_order_types ?? businessPaymethod?.allowed_order_types)?.includes(type.value) ? (
                 <RiCheckboxFill className='fill' />
               ) : (
                 <RiCheckboxBlankLine />

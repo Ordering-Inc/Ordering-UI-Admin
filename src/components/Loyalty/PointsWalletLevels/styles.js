@@ -118,3 +118,9 @@ export const AddNewLevelButton = styled.div`
     color: ${props => props.theme.colors.primary};
   }
 `
+export const NotFoundSourceWrapper = styled.div`
+  > div {
+    height: initial;
+    padding: 20px;
+  }
+`

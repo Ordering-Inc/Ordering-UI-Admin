@@ -247,6 +247,22 @@ const BusinessInformationUI = (props) => {
           />
         </InputWrapper>
         <InputWrapper>
+          <label>{t('EXTERNAL_ID', 'External Id')}</label>
+          <Input
+            name='external_id'
+            placeholder={t('EXTERNAL_ID', 'External Id')}
+            defaultValue={formState?.changes?.external_id ?? businessState?.business?.external_id}
+            onChange={handleChangeInput}
+            disabled={formState.loading}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </InputWrapper>
+        <InputWrapper>
           <label>{t('SHORT_DESCRIPTION', 'Short description')}</label>
           <Input
             name='description'

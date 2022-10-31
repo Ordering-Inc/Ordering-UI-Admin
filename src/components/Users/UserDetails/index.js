@@ -72,7 +72,7 @@ export const UserDetailsUI = (props) => {
               {handleChangeActiveUser && (
                 <Switch
                   defaultChecked={userState?.user?.enabled || false}
-                  onChange={enabled => handleChangeActiveUser({ id: userState?.user?.id, enabled: enabled })}
+                  onChange={enabled => handleChangeActiveUser({ ...userState?.user, enabled: enabled })}
                 />
               )}
             </>

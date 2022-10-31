@@ -47,7 +47,8 @@ const CustomersListingUI = (props) => {
     onUserRedirect,
     handleSuccessUpdate,
     handleSuccessAddUser,
-    handleSuccessDeleteUser
+    handleSuccessDeleteUser,
+    setSelectedUsers
   } = props
 
   const [, t] = useLanguage()
@@ -160,6 +161,7 @@ const CustomersListingUI = (props) => {
           userDetailsId={openUser?.id || queryId}
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
+          setSelectedUsers={setSelectedUsers}
         />
       </UsersListingContainer>
 

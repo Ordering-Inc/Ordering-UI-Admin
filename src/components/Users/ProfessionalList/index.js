@@ -22,7 +22,8 @@ import {
   AddNewUserButton,
   UsersBottomContainer,
   VerifiedItemsContainer,
-  VerifiedItem
+  VerifiedItem,
+  AllCheckWrapper
 } from './styles'
 
 export const ProfessionalList = (props) => {
@@ -35,7 +36,8 @@ export const ProfessionalList = (props) => {
     selectedUsers,
     handleSelectedUsers,
     handleOpenUserDetails,
-    handleOpenUserAddForm
+    handleOpenUserAddForm,
+    setSelectedUsers
   } = props
 
   const [, t] = useLanguage()
@@ -44,6 +46,7 @@ export const ProfessionalList = (props) => {
   const [confirmAdmin, setConfirmAdmin] = useState({ open: false, handleOnConfirm: null })
 
   const [openPopover, setOpenPopover] = useState(false)
+  const [isAllChecked, setIsAllChecked] = useState(false)
   const [allowColumns, setAllowColumns] = useState({
     user: true,
     city: true,
@@ -112,6 +115,19 @@ export const ProfessionalList = (props) => {
     }
   }
 
+  const handleSelecteAllUser = () => {
+    const userIds = usersList.users?.reduce((ids, user) => [...ids, user.id], [])
+    if (!isAllChecked) {
+      setSelectedUsers([...selectedUsers, ...userIds])
+    } else {
+      const userIdsToDeleteSet = new Set(userIds)
+      const updatedSelectedOrderIds = selectedUsers.filter((name) => {
+        return !userIdsToDeleteSet.has(name)
+      })
+      setSelectedUsers(updatedSelectedOrderIds)
+    }
+  }
+
   useEffect(() => {
     if (usersList.loading || usersList.users.length > 0 || paginationProps.totalPages <= 1) return
     if (paginationProps.currentPage !== paginationProps.totalPages) {
@@ -121,6 +137,13 @@ export const ProfessionalList = (props) => {
     }
   }, [usersList.users, paginationProps])
 
+  useEffect(() => {
+    if (usersList.loading) return
+    const userIds = usersList.users?.reduce((ids, user) => [...ids, user.id], [])
+    const _isAllChecked = userIds.every(elem => selectedUsers.includes(elem))
+    setIsAllChecked(_isAllChecked)
+  }, [usersList.users, selectedUsers])
+
   return (
     <>
       <UsersConatiner>
@@ -129,7 +152,22 @@ export const ProfessionalList = (props) => {
             <thead>
               <tr>
                 {allowColumns?.user && (
-                  <th>{t('USER', 'User')}</th>
+                  <th>
+                    <AllCheckWrapper>
+                      <CheckBoxWrapper
+                        className='user_checkbox'
+                        isChecked={!usersList?.loading && isAllChecked}
+                        onClick={() => handleSelecteAllUser()}
+                      >
+                        {(!usersList?.loading && isAllChecked) ? (
+                          <CheckSquareFill />
+                        ) : (
+                          <Square />
+                        )}
+                      </CheckBoxWrapper>
+                      {t('USER', 'User')}
+                    </AllCheckWrapper>
+                  </th>
                 )}
                 {allowColumns?.phone && (
                   <th>{t('PHONE', 'Phone')}</th>
