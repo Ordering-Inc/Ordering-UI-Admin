@@ -47,7 +47,7 @@ export const PaymethodOptionStripeConnect = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [paymentTabs, setPaymentTabs] = useState(0)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-  const [localState, setLocalState] = useState({allowed_order_types: businessPaymethod?.allowed_order_types })
+  const [localState, setLocalState] = useState({allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites})
 
   const setPaymethodInfo = (values) => {
     const data = {}
@@ -107,7 +107,10 @@ export const PaymethodOptionStripeConnect = (props) => {
     if (changesState?.allowed_order_types) {
       setLocalState({allowed_order_types: changesState?.allowed_order_types})
     }
-  }, [localState?.allowed_order_types, changesState?.allowed_order_types])
+    if (changesState?.sites) {
+      setLocalState({sites: changesState?.sites})
+    }
+  }, [changesState?.sites, changesState?.allowed_order_types])
 
   return (
     <>
@@ -256,7 +259,7 @@ export const PaymethodOptionStripeConnect = (props) => {
               key={site.id}
               onClick={() => setPaymethodInfo({ key: 'sites', value: site.id })}
             >
-              {(changesState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
+              {(localState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
                 <RiCheckboxFill className='fill' />
               ) : (
                 <RiCheckboxBlankLine />
