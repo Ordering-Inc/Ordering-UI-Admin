@@ -63,6 +63,7 @@ import { PurchasedProductsList } from './pages/PurchasedProductsList'
 import { Professionals } from './pages/Professionals'
 import { QueryLogin } from '../src/components/Login'
 import { PluginSettings } from './pages/PluginSettings'
+import { AdBannersList } from './pages/AdBannersList'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -249,6 +250,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/marketing/campaign' allowedLevels={[0]}>
                       <CampaignListing />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/marketing/ad-banners' allowedLevels={[0]}>
+                      <AdBannersList />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/loyalty/rewards-programs' allowedLevels={[0]}>
