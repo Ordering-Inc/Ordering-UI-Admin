@@ -1,107 +1,72 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BusinessPromotionGeneralForm = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _styles = require("../../../styles");
-
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
-
 var _Shared = require("../../Shared");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _utils = require("../../../utils");
-
 var _reactDateRange = require("react-date-range");
-
 require("react-date-range/dist/styles.css");
-
 require("react-date-range/dist/theme/default.css");
-
 var _moment = _interopRequireDefault(require("moment"));
-
 var _styles3 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(props) {
   var _configs$advanced_off, _formState$result3, _formState$changes6, _promotionState$promo5, _promotionState$promo6, _formState$changes7, _formState$changes8, _ref, _formState$changes$na, _formState$changes9, _promotionState$promo7, _formState$changes10, _formState$changes11, _promotionState$promo8, _ref2, _formState$changes$co, _formState$changes12, _promotionState$promo9, _ref3, _formState$changes$de, _formState$changes13, _promotionState$promo10, _formState$changes14, _formState$changes15, _promotionState$promo11, _formState$changes16, _formState$changes17, _promotionState$promo12, _formState$changes18, _formState$changes19, _promotionState$promo13, _formState$changes20, _formState$changes21, _promotionState$promo14, _formState$changes22, _formState$changes23, _promotionState$promo15, _formState$changes$ra, _ref4, _formState$changes$ra2, _formState$changes24, _promotionState$promo16, _ref5, _formState$changes$mi, _formState$changes25, _promotionState$promo17, _ref6, _formState$changes$li, _formState$changes26, _promotionState$promo18, _formState$changes27, _promotionState$promo19, _formState$changes28, _promotionState$promo20, _formState$changes29, _promotionState$promo21, _formState$changes30, _formState$changes31, _promotionState$promo22, _ref7, _formState$changes$co2, _formState$changes32, _promotionState$promo23, _formState$changes33, _promotionState$promo24, _formState$changes34, _promotionState$promo25, _formState$changes35, _promotionState$promo26, _formState$changes36, _formState$changes37, _promotionState$promo27, _formState$changes38, _formState$changes39, _promotionState$promo28, _promotionState$promo29;
-
   var isAddMode = props.isAddMode,
-      promotionState = props.promotionState,
-      formState = props.formState,
-      handleChangeImage = props.handleChangeImage,
-      handleChangeInput = props.handleChangeInput,
-      handleChangeItem = props.handleChangeItem,
-      handleUpdateClick = props.handleUpdateClick,
-      handleAddClick = props.handleAddClick;
-
+    promotionState = props.promotionState,
+    formState = props.formState,
+    handleChangeImage = props.handleChangeImage,
+    handleChangeInput = props.handleChangeInput,
+    handleChangeItem = props.handleChangeItem,
+    handleUpdateClick = props.handleUpdateClick,
+    handleAddClick = props.handleAddClick;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configs = _useConfig2[0].configs;
-
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var isAdvancedOffersActivated = configs === null || configs === void 0 ? void 0 : (_configs$advanced_off = configs.advanced_offers_module) === null || _configs$advanced_off === void 0 ? void 0 : _configs$advanced_off.value;
-
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var inputRef = (0, _react.useRef)(null);
   var calendarRef = (0, _react.useRef)();
-
   var _useState = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
-
+      open: false,
+      content: []
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    alertState = _useState2[0],
+    setAlertState = _useState2[1];
   var _useState3 = (0, _react.useState)([{
-    startDate: null,
-    endDate: null,
-    key: 'selection'
-  }]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      dateRange = _useState4[0],
-      setDateRange = _useState4[1];
-
+      startDate: null,
+      endDate: null,
+      key: 'selection'
+    }]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    dateRange = _useState4[0],
+    setDateRange = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isShowCalendar = _useState6[0],
-      setIsShowCalendar = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    isShowCalendar = _useState6[0],
+    setIsShowCalendar = _useState6[1];
   var discountTypes = [{
     value: 1,
     content: t('PERCENTAGE', 'Percentage')
@@ -119,17 +84,13 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
     value: 3,
     content: t('BUSINESS_SERVICE_FEE', 'Service fee')
   }];
-
   var handleClickImage = function handleClickImage() {
     inputRef.current.click();
   };
-
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
       var _files$;
-
       var type = files[0].type.split('/')[0];
-
       if (type !== 'image') {
         setAlertState({
           open: true,
@@ -137,7 +98,6 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
         });
         return;
       }
-
       if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
         setAlertState({
           open: true,
@@ -145,22 +105,17 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
         });
         return;
       }
-
       handleChangeImage(files[0]);
     }
   };
-
   var handleClickOutside = function handleClickOutside(e) {
     var _calendarRef$current;
-
     if (!isShowCalendar) return;
     var outsideCalendar = !((_calendarRef$current = calendarRef.current) !== null && _calendarRef$current !== void 0 && _calendarRef$current.contains(e.target));
-
     if (outsideCalendar) {
       setIsShowCalendar(false);
     }
   };
-
   var handleChangeDates = function handleChangeDates(item) {
     handleChangeItem({
       start: (0, _moment.default)(item.selection.startDate).format('YYYY-MM-DD'),
@@ -168,17 +123,14 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
     });
     setDateRange([item.selection]);
   };
-
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
   };
-
   var onButtonClick = function onButtonClick() {
     var _formState$changes, _promotionState$promo, _formState$changes2, _formState$changes3, _formState$changes4, _promotionState$promo2, _formState$changes5;
-
     if (!((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.name) && !(promotionState !== null && promotionState !== void 0 && (_promotionState$promo = promotionState.promotion) !== null && _promotionState$promo !== void 0 && _promotionState$promo.name) || ((_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) === '') {
       setAlertState({
         open: true,
@@ -186,7 +138,6 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
       });
       return;
     }
-
     if ((formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.type) === 2 && (!((_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.coupon) && !(promotionState !== null && promotionState !== void 0 && (_promotionState$promo2 = promotionState.promotion) !== null && _promotionState$promo2 !== void 0 && _promotionState$promo2.coupon) || ((_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.coupon) === '')) {
       setAlertState({
         open: true,
@@ -194,10 +145,8 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
       });
       return;
     }
-
     isAddMode ? handleAddClick() : handleUpdateClick();
   };
-
   (0, _react.useEffect)(function () {
     window.addEventListener('mouseup', handleClickOutside);
     return function () {
@@ -206,7 +155,6 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
   }, [isShowCalendar]);
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result2;
-
     if (!(formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error)) return;
     setAlertState({
       open: true,
@@ -216,7 +164,6 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
   (0, _react.useEffect)(function () {
     if (Object.keys(promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion).length) {
       var _promotionState$promo3, _promotionState$promo4;
-
       setDateRange([{
         startDate: new Date(promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.start),
         endDate: new Date(promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.end),
@@ -413,13 +360,10 @@ var BusinessPromotionGeneralFormUI = function BusinessPromotionGeneralFormUI(pro
     closeOnBackdrop: false
   }));
 };
-
 var BusinessPromotionGeneralForm = function BusinessPromotionGeneralForm(props) {
   var businessPromotionFormProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessPromotionGeneralFormUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessPromotionForm, businessPromotionFormProps);
 };
-
 exports.BusinessPromotionGeneralForm = BusinessPromotionGeneralForm;

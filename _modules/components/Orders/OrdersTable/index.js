@@ -1,127 +1,88 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.OrdersTable = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _moment = _interopRequireDefault(require("moment"));
-
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
-
 var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
-
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _styledComponents = require("styled-components");
-
 var _Shared = require("../../Shared");
-
 var _styles = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var OrdersTable = function OrdersTable(props) {
   var _orderList$orders3;
-
   var isSelectedOrders = props.isSelectedOrders,
-      orderList = props.orderList,
-      pagination = props.pagination,
-      selectedOrderIds = props.selectedOrderIds,
-      orderDetailId = props.orderDetailId,
-      getPageOrders = props.getPageOrders,
-      handleSelectedOrderIds = props.handleSelectedOrderIds,
-      handleOpenOrderDetail = props.handleOpenOrderDetail,
-      setSelectedOrderIds = props.setSelectedOrderIds,
-      currentTourStep = props.currentTourStep,
-      isTourOpen = props.isTourOpen,
-      handleOpenTour = props.handleOpenTour,
-      setIsTourOpen = props.setIsTourOpen,
-      slaSettingTime = props.slaSettingTime,
-      groupStatus = props.groupStatus,
-      allowColumns = props.allowColumns,
-      setAllowColumns = props.setAllowColumns,
-      handleDrop = props.handleDrop;
-
+    orderList = props.orderList,
+    pagination = props.pagination,
+    selectedOrderIds = props.selectedOrderIds,
+    orderDetailId = props.orderDetailId,
+    getPageOrders = props.getPageOrders,
+    handleSelectedOrderIds = props.handleSelectedOrderIds,
+    handleOpenOrderDetail = props.handleOpenOrderDetail,
+    setSelectedOrderIds = props.setSelectedOrderIds,
+    currentTourStep = props.currentTourStep,
+    isTourOpen = props.isTourOpen,
+    handleOpenTour = props.handleOpenTour,
+    setIsTourOpen = props.setIsTourOpen,
+    slaSettingTime = props.slaSettingTime,
+    groupStatus = props.groupStatus,
+    allowColumns = props.allowColumns,
+    setAllowColumns = props.setAllowColumns,
+    handleDrop = props.handleDrop;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
-
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      parseDate = _useUtils2$.parseDate,
-      optimizeImage = _useUtils2$.optimizeImage,
-      getTimeAgo = _useUtils2$.getTimeAgo,
-      parsePrice = _useUtils2$.parsePrice;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    _useUtils2$ = _useUtils2[0],
+    parseDate = _useUtils2$.parseDate,
+    optimizeImage = _useUtils2$.optimizeImage,
+    getTimeAgo = _useUtils2$.getTimeAgo,
+    parsePrice = _useUtils2$.parsePrice;
   var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isAllChecked = _useState2[0],
-      setIsAllChecked = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    isAllChecked = _useState2[0],
+    setIsAllChecked = _useState2[1];
   var _useState3 = (0, _react.useState)(),
-      _useState4 = _slicedToArray(_useState3, 2),
-      setCurrentTime = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    setCurrentTime = _useState4[1];
   var _useState5 = (0, _react.useState)(''),
-      _useState6 = _slicedToArray(_useState5, 2),
-      dragOverd = _useState6[0],
-      setDragOverd = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    dragOverd = _useState6[0],
+    setDragOverd = _useState6[1];
   var handleChangePage = function handleChangePage(page) {
     getPageOrders(pagination.pageSize, page);
   };
-
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(pagination.from / pageSize);
     getPageOrders(pageSize, expectedPage);
   };
-
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
-
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configState = _useConfig2[0];
   var optionsDefault = [{
     value: 'status',
     content: t('STATUS', 'Status')
@@ -150,45 +111,37 @@ var OrdersTable = function OrdersTable(props) {
     value: 'total',
     content: t('EXPORT_TOTAL', 'Total')
   }];
-
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
     var offset = 300;
     var cdtToutc = (0, _moment.default)(order === null || order === void 0 ? void 0 : order.delivery_datetime).add(offset, 'minutes').format('YYYY-MM-DD HH:mm:ss');
-
     var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(cdtToutc);
-
     var _eta = order === null || order === void 0 ? void 0 : order.eta_time;
-
     var diffTimeAsSeconds = (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'seconds');
     return Math.ceil(diffTimeAsSeconds / 60);
   };
-
   var displayDelayedTime = function displayDelayedTime(order) {
-    var tagetedMin = getDelayMinutes(order); // get day, hour and minutes
-
+    var tagetedMin = getDelayMinutes(order);
+    // get day, hour and minutes
     var sign = tagetedMin >= 0 ? '' : '- ';
     tagetedMin = Math.abs(tagetedMin);
     var day = Math.floor(tagetedMin / 1440);
     var restMinOfTargetedMin = tagetedMin - 1440 * day;
     var restHours = Math.floor(restMinOfTargetedMin / 60);
-    var restMins = restMinOfTargetedMin - 60 * restHours; // make standard time format
-
+    var restMins = restMinOfTargetedMin - 60 * restHours;
+    // make standard time format
     day = day === 0 ? '' : day + 'day  ';
     restHours = restHours < 10 ? '0' + restHours : restHours;
     restMins = restMins < 10 ? '0' + restMins : restMins;
     var finalTaget = sign + day + restHours + ':' + restMins;
     return finalTaget;
   };
-
   var getStatusClassName = function getStatusClassName(minutes) {
     var _configState$configs, _configState$configs$;
-
     if (isNaN(Number(minutes))) return 'in_time';
     var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_delayed_time) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
     return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed';
   };
-
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
       setCurrentTime(Date.now());
@@ -197,51 +150,38 @@ var OrdersTable = function OrdersTable(props) {
       return clearInterval(interval);
     };
   }, []);
-
   var getLogisticTag = function getLogisticTag(status) {
     switch (parseInt(status)) {
       case 0:
         return t('PENDING', 'Pending');
-
       case 1:
         return t('IN_PROGRESS', 'In progress');
-
       case 2:
         return t('IN_QUEUE', 'In queue');
-
       case 3:
         return t('EXPIRED', 'Expired');
-
       case 4:
         return t('RESOLVED', 'Resolved');
-
       default:
         return t('UNKNOWN', 'Unknown');
     }
   };
-
   var getPriorityTag = function getPriorityTag(priority) {
     switch (parseInt(priority)) {
       case -1:
         return t('LOW', 'Low');
-
       case 0:
         return t('NORMAL', 'Normal');
-
       case 1:
         return t('HIGH', 'High');
-
       case 2:
         return t('URGENT', 'Urgent');
-
       default:
         return t('UNKNOWN', 'Unknown');
     }
   };
-
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22;
-
     var status = parseInt(s);
     var orderStatus = [{
       key: 0,
@@ -321,27 +261,22 @@ var OrdersTable = function OrdersTable(props) {
     });
     return objectStatus && objectStatus;
   };
-
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
     var _column = allowColumns[type];
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
       visable: !(_column !== null && _column !== void 0 && _column.visable)
     }))));
   };
-
   var handleClickOrder = function handleClickOrder(order, e) {
     var inValid = !isSelectedOrders && (e.target.closest('.orderCheckBox') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'));
     if (inValid) return;
     handleOpenOrderDetail(order);
   };
-
   var handleSelecteAllOrder = function handleSelecteAllOrder() {
     var _orderList$orders;
-
     var orderIds = (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.reduce(function (ids, order) {
       return [].concat(_toConsumableArray(ids), [order.id]);
     }, []);
-
     if (!isAllChecked) {
       setSelectedOrderIds([].concat(_toConsumableArray(selectedOrderIds), _toConsumableArray(orderIds)));
     } else {
@@ -355,11 +290,8 @@ var OrdersTable = function OrdersTable(props) {
   /**
    * Method to handle drag start
    */
-
-
   var handleDragStart = function handleDragStart(event, columnName) {
     var _allowColumns$columnN;
-
     event.dataTransfer.setData('transferColumnName', columnName);
     var ghostEle = document.createElement('div');
     ghostEle.classList.add('ghostDragging');
@@ -370,49 +302,38 @@ var OrdersTable = function OrdersTable(props) {
   /**
    * Method to handle drag over
    */
-
-
   var handleDragOver = function handleDragOver(event, columnName) {
     event.preventDefault();
     setDragOverd(columnName);
   };
+
   /**
    * Method to handle drag end
    */
-
-
   var handleDragEnd = function handleDragEnd() {
     var elements = document.getElementsByClassName('ghostDragging');
-
     while (elements.length > 0) {
       elements[0].parentNode.removeChild(elements[0]);
     }
-
     setDragOverd('');
   };
-
   (0, _react.useEffect)(function () {
     var _orderList$orders2;
-
     if (orderList.loading) return;
     var orderIds = (_orderList$orders2 = orderList.orders) === null || _orderList$orders2 === void 0 ? void 0 : _orderList$orders2.reduce(function (ids, order) {
       return [].concat(_toConsumableArray(ids), [order.id]);
     }, []);
-
     var _isAllChecked = orderIds.every(function (elem) {
       return selectedOrderIds.includes(elem);
     });
-
     setIsAllChecked(_isAllChecked);
   }, [orderList.orders, selectedOrderIds]);
-
   var handleChangeKeyboard = function handleChangeKeyboard(evt) {
     if (evt.code === 'Escape') setIsTourOpen && setIsTourOpen(false);
     if (evt.keyCode === 37 && currentTourStep === 1) handleOpenTour();
     if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0], true);
     if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0]);
   };
-
   (0, _react.useEffect)(function () {
     if (!isTourOpen) return;
     document.addEventListener('keydown', handleChangeKeyboard);
@@ -429,22 +350,17 @@ var OrdersTable = function OrdersTable(props) {
     noFixedHeader: !orderList.loading && ((_orderList$orders3 = orderList.orders) === null || _orderList$orders3 === void 0 ? void 0 : _orderList$orders3.length) <= 5
   }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, allowColumns && Object.keys(allowColumns).filter(function (col) {
     var _allowColumns$col, _allowColumns$col2;
-
     return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.visable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) !== 0;
   }).sort(function (col1, col2) {
     var _allowColumns$col3, _allowColumns$col4;
-
     return ((_allowColumns$col3 = allowColumns[col1]) === null || _allowColumns$col3 === void 0 ? void 0 : _allowColumns$col3.order) - ((_allowColumns$col4 = allowColumns[col2]) === null || _allowColumns$col4 === void 0 ? void 0 : _allowColumns$col4.order);
   }).map(function (column, i) {
     var _allowColumns$column$, _allowColumns$column, _allowColumns$column2, _theme$images$icons, _allowColumns$column3;
-
     if (column === 'slaBar') {
       return;
     }
-
     if (column === 'orderNumber') {
       var _allowColumns$orderNu, _allowColumns$dateTim, _allowColumns$slaBar;
-
       return /*#__PURE__*/_react.default.createElement("th", {
         className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu = allowColumns.orderNumber) !== null && _allowColumns$orderNu !== void 0 && _allowColumns$orderNu.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim = allowColumns.dateTime) !== null && _allowColumns$dateTim !== void 0 && _allowColumns$dateTim.visable) ? 'orderNo small' : 'orderNo',
         key: "noDragTh-".concat(i),
@@ -457,7 +373,6 @@ var OrdersTable = function OrdersTable(props) {
         className: "orderCheckBox"
       }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order'));
     }
-
     if (column === 'total') {
       return /*#__PURE__*/_react.default.createElement("th", {
         className: "orderPrice",
@@ -469,7 +384,6 @@ var OrdersTable = function OrdersTable(props) {
         isOrder: true
       }));
     }
-
     return (column !== 'timer' || column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress')) && /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
       key: "dragTh-".concat(i),
       onDragOver: function onDragOver(e) {
@@ -495,7 +409,6 @@ var OrdersTable = function OrdersTable(props) {
     }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title)));
   }))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
     var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
-
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
@@ -619,11 +532,9 @@ var OrdersTable = function OrdersTable(props) {
       "data-tour": i === 0 ? 'tour_start' : ''
     }, /*#__PURE__*/_react.default.createElement("tr", null, Object.keys(allowColumns).filter(function (col) {
       var _allowColumns$col5;
-
       return (_allowColumns$col5 = allowColumns[col]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.visable;
     }).sort(function (col1, col2) {
       var _allowColumns$col6, _allowColumns$col7;
-
       return ((_allowColumns$col6 = allowColumns[col1]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.order) - ((_allowColumns$col7 = allowColumns[col2]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.order);
     }).map(function (column, index) {
       if (column === 'slaBar') {
@@ -633,10 +544,8 @@ var OrdersTable = function OrdersTable(props) {
           timeState: getStatusClassName(getDelayMinutes(order))
         }));
       }
-
       if (column === 'orderNumber') {
         var _allowColumns$orderNu4, _allowColumns$dateTim4, _allowColumns$orderNu5, _allowColumns$dateTim5;
-
         return /*#__PURE__*/_react.default.createElement("td", {
           className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu4 = allowColumns.orderNumber) !== null && _allowColumns$orderNu4 !== void 0 && _allowColumns$orderNu4.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim4 = allowColumns.dateTime) !== null && _allowColumns$dateTim4 !== void 0 && _allowColumns$dateTim4.visable) ? 'small' : '',
           key: "orderNumber".concat(i, "-").concat(index)
@@ -656,10 +565,8 @@ var OrdersTable = function OrdersTable(props) {
           utc: false
         })))));
       }
-
       if (column === 'status' && !isSelectedOrders) {
         var _getOrderStatus;
-
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "statusInfo",
           key: "statusInfo".concat(i, "-").concat(index)
@@ -667,10 +574,8 @@ var OrdersTable = function OrdersTable(props) {
           className: "bold"
         }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)));
       }
-
       if (column === 'business') {
         var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city;
-
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "businessInfo",
           key: "businessInfo".concat(i, "-").concat(index)
@@ -684,10 +589,8 @@ var OrdersTable = function OrdersTable(props) {
           className: "bold"
         }, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : (_order$business3$city = _order$business3.city) === null || _order$business3$city === void 0 ? void 0 : _order$business3$city.name))));
       }
-
       if (column === 'customer') {
         var _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6;
-
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "customerInfo",
           key: "customerInfo".concat(i, "-").concat(index)
@@ -703,10 +606,8 @@ var OrdersTable = function OrdersTable(props) {
           className: "bold"
         }, order === null || order === void 0 ? void 0 : (_order$customer5 = order.customer) === null || _order$customer5 === void 0 ? void 0 : _order$customer5.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer6 = order.customer) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.cellphone))));
       }
-
       if (column === 'driver' && !isSelectedOrders) {
         var _order$driver, _order$driver2, _order$driver3, _order$driver4;
-
         return /*#__PURE__*/_react.default.createElement("td", {
           key: "driver".concat(i, "-").concat(index)
         }, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
@@ -721,7 +622,6 @@ var OrdersTable = function OrdersTable(props) {
           className: "bold"
         }, t('NO_DRIVER', 'No Driver')))));
       }
-
       if (column === 'advanced' && !isSelectedOrders) {
         return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
           key: "advanced".concat(i, "-").concat(index)
@@ -749,7 +649,6 @@ var OrdersTable = function OrdersTable(props) {
           priority: order === null || order === void 0 ? void 0 : order.priority
         })))));
       }
-
       if (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress')) {
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "timer",
@@ -760,10 +659,8 @@ var OrdersTable = function OrdersTable(props) {
           className: getStatusClassName(getDelayMinutes(order))
         }, displayDelayedTime(order))));
       }
-
       if (column === 'total') {
         var _allowColumns$total2, _order$summary;
-
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "orderPrice",
           key: "total".concat(i, "-").concat(index)
@@ -786,5 +683,4 @@ var OrdersTable = function OrdersTable(props) {
     handleChangePageSize: handleChangePageSize
   })));
 };
-
 exports.OrdersTable = OrdersTable;

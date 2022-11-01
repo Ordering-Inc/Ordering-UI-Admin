@@ -69,19 +69,11 @@ Object.defineProperty(exports, "TextArea", {
     return _Inputs.TextArea;
   }
 });
-
 var _Buttons = require("./Buttons");
-
 var _Checkbox = require("./Checkbox");
-
 var _Inputs = require("./Inputs");
-
 var _MultiSelect = require("./MultiSelect");
-
 var _Select = require("./Select");
-
 var _FirstSelect = require("./Select/FirstSelect");
-
 var _Switch = require("./Switch");
-
 var _Tabs = require("./Tabs");

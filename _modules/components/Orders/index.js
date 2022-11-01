@@ -291,99 +291,51 @@ Object.defineProperty(exports, "WizardOrders", {
     return _WizardOrders.WizardOrders;
   }
 });
-
 var _Appointments = require("./Appointments");
-
 var _DeliveriesManager = require("./DeliveriesManager");
-
 var _DriversManager = require("./DriversManager");
-
 var _GiftCardsListing = require("./GiftCardsListing");
-
 var _Messages = require("./Messages");
-
 var _OrdersContentHeader = require("./OrdersContentHeader");
-
 var _OrdersDashboardList = require("./OrdersDashboardList");
-
 var _OrdersManager = require("./OrdersManager");
-
 var _OrderStatusFilterBar = require("./OrderStatusFilterBar");
-
 var _OrderStatusSubFilter = require("./OrderStatusSubFilter");
-
 var _OrderNotification = require("./OrderNotification");
-
 var _OrderDetails = require("./OrderDetails");
-
 var _OrdersLateralBar = require("./OrdersLateralBar");
-
 var _OrdersDashboardControls = require("./OrdersDashboardControls");
-
 var _OrdersDashboard = require("./OrdersDashboard");
-
 var _WizardOrders = require("./WizardOrders");
-
 var _DriversDashboard = require("./DriversDashboard");
-
 var _DriversLocation = require("./DriversLocation");
-
 var _DriversList = require("./DriversList");
-
 var _DriversOnlineOfflineFilter = require("./DriversOnlineOfflineFilter");
-
 var _DriversBusyStatusFilter = require("./DriversBusyStatusFilter");
-
 var _DeliveryDashboard = require("./DeliveryDashboard");
-
 var _ProductItemAccordion = require("./ProductItemAccordion");
-
 var _OrderStatusTypeSelector = require("./OrderStatusTypeSelector");
-
 var _OrderMetaFields = require("./OrderMetaFields");
-
 var _OrderDetailsHeader = require("./OrderDetailsHeader");
-
 var _OrderBill = require("./OrderBill");
-
 var _OrderContactInformation = require("./OrderContactInformation");
-
 var _OrdersFilterGroup = require("./OrdersFilterGroup");
-
 var _BusinessesSelector = require("./BusinessesSelector");
-
 var _DriversGroupTypeSelector = require("./DriversGroupTypeSelector");
-
 var _DateTypeSelector = require("./DateTypeSelector");
-
 var _DriverSelector = require("./DriverSelector");
-
 var _DeliveryTypeSelector = require("./DeliveryTypeSelector");
-
 var _PaymethodTypeSelector = require("./PaymethodTypeSelector");
-
 var _DeliveriesLocation = require("./DeliveriesLocation");
-
 var _DriverMapMarkerAndInfo = require("./DriverMapMarkerAndInfo");
-
 var _InterActOrderMarker = require("./InterActOrderMarker");
-
 var _OrderDelete = require("./OrderDelete");
-
 var _OrdersExportCSV = require("./OrdersExportCSV");
-
 var _OrderLogisticInformation = require("./OrderLogisticInformation");
-
 var _Logistics = require("./Logistics");
-
 var _OrdersListing = require("./OrdersListing");
-
 var _OrdersTable = require("./OrdersTable");
-
 var _OrdersCards = require("./OrdersCards");
-
 var _ReviewCustomer = require("./ReviewCustomer");
-
 var _CountryFilter = require("./CountryFilter");
-
 var _OrderToPrint = require("./OrderToPrint");

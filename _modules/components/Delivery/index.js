@@ -153,53 +153,28 @@ Object.defineProperty(exports, "WizardDelivery", {
     return _WizardDelivery.WizardDelivery;
   }
 });
-
 var _AddressList = require("./AddressList");
-
 var _AddressForm = require("./AddressForm");
-
 var _DeliveryUsersListing = require("./DeliveryUsersListing");
-
 var _DriversCompaniesListing = require("./DriversCompaniesListing");
-
 var _DriversGroupsListing = require("./DriversGroupsListing");
-
 var _WizardDelivery = require("./WizardDelivery");
-
 var _DriverGroupSetting = require("./DriverGroupSetting");
-
 var _DriversCompaniesList = require("./DriversCompaniesList");
-
 var _DriversCompanyDetailsForm = require("./DriversCompanyDetailsForm");
-
 var _DriversCompanyGeneralDetails = require("./DriversCompanyGeneralDetails");
-
 var _DriversCompanyScheduleDetails = require("./DriversCompanyScheduleDetails");
-
 var _DriversCompanyWebhooksDetails = require("./DriversCompanyWebhooksDetails");
-
 var _DriversGroupDetails = require("./DriversGroupDetails");
-
 var _DriversGroupsList = require("./DriversGroupsList");
-
 var _DriversGroupGeneralForm = require("./DriversGroupGeneralForm");
-
 var _DriversGroupBusinesses = require("./DriversGroupBusinesses");
-
 var _DriversGroupPaymethods = require("./DriversGroupPaymethods");
-
 var _DriversGroupLogistics = require("./DriversGroupLogistics");
-
 var _DriversGroupLogs = require("./DriversGroupLogs");
-
 var _DriversGroupCompanies = require("./DriversGroupCompanies");
-
 var _DriversGroupDrivers = require("./DriversGroupDrivers");
-
 var _DriversGroupOrders = require("./DriversGroupOrders");
-
 var _DriversGroupAutoassign = require("./DriversGroupAutoassign");
-
 var _DriversMarkAsBusy = require("./DriversMarkAsBusy");
-
 var _GoogleGpsButton = require("./GoogleGpsButton");

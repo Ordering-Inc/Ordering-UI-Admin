@@ -21,9 +21,6 @@ Object.defineProperty(exports, "MessagesListing", {
     return _MessagesListing.MessagesListing;
   }
 });
-
 var _MessagesListing = require("./MessagesListing");
-
 var _ChatContactList = require("./ChatContactList");
-
 var _ChatBusinessesList = require("./ChatBusinessesList");

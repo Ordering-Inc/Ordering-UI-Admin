@@ -603,203 +603,103 @@ Object.defineProperty(exports, "WizardBusiness", {
     return _WizardBusiness.WizardBusiness;
   }
 });
-
 var _BusinessBrandListing = require("./BusinessBrandListing");
-
 var _BusinessesListing = require("./BusinessesListing");
-
 var _BusinessProductsListing = require("./BusinessProductsListing");
-
 var _BusinessesListingHeader = require("./BusinessesListingHeader");
-
 var _BusinessActiveStateFilter = require("./BusinessActiveStateFilter");
-
 var _BusinessTypeFilter = require("./BusinessTypeFilter");
-
 var _BusinessesList = require("./BusinessesList");
-
 var _BusinessCustomFields = require("./BusinessCustomFields");
-
 var _BusinessDeliveryPickupMore = require("./BusinessDeliveryPickupMore");
-
 var _BusinessDetail = require("./BusinessDetail");
-
 var _BusinessDetails = require("./BusinessDetails");
-
 var _BusinessFrontLayout = require("./BusinessFrontLayout");
-
 var _BusinessImages = require("./BusinessImages");
-
 var _BusinessInformation = require("./BusinessInformation");
-
 var _BusinessInfoSettingList = require("./BusinessInfoSettingList");
-
 var _BusinessLocation = require("./BusinessLocation");
-
 var _BusinessMenu = require("./BusinessMenu");
-
 var _BusinessNotifications = require("./BusinessNotifications");
-
 var _BusinessOrderingChannels = require("./BusinessOrderingChannels");
-
 var _BusinessOwners = require("./BusinessOwners");
-
 var _BusinessPaymentMethods = require("./BusinessPaymentMethods");
-
 var _BusinessPreview = require("./BusinessPreview");
-
 var _BusinessPreorderDetails = require("./BusinessPreorderDetails");
-
 var _BusinessPromotionList = require("./BusinessPromotionList");
-
 var _BusinessSchedule = require("./BusinessSchedule");
-
 var _BusinessSupport = require("./BusinessSupport");
-
 var _BusinessSummary = require("./BusinessSummary");
-
 var _BusinessTaxAndFees = require("./BusinessTaxAndFees");
-
 var _BusinessTypes = require("./BusinessTypes");
-
 var _BusinessVideos = require("./BusinessVideos");
-
 var _BusinessWebhooks = require("./BusinessWebhooks");
-
 var _BusinessWidgets = require("./BusinessWidgets");
-
 var _SeoOptions = require("./SeoOptions");
-
 var _AddBusinessForm = require("./AddBusinessForm");
-
 var _WizardBusiness = require("./WizardBusiness");
-
 var _BusinessMenuOptions = require("./BusinessMenuOptions");
-
 var _BusinessDeliveryDetails = require("./BusinessDeliveryDetails");
-
 var _BusinessPickupDetails = require("./BusinessPickupDetails");
-
 var _PaymentOptionStripeDirect = require("./PaymentOptionStripeDirect");
-
 var _PaymentOption = require("./PaymentOption");
-
 var _PaymethodOptionPaypalExpress = require("./PaymethodOptionPaypalExpress");
-
 var _PaymethodOptionStripeRedirect = require("./PaymethodOptionStripeRedirect");
-
 var _PaymethodOptionStripeConnect = require("./PaymethodOptionStripeConnect");
-
 var _PaymentOptionPaypal = require("./PaymentOptionPaypal");
-
 var _BusinessPromotionGeneralForm = require("./BusinessPromotionGeneralForm");
-
 var _BusinessPromotionCustomFields = require("./BusinessPromotionCustomFields");
-
 var _BusinessGprsPrinters = require("./BusinessGprsPrinters");
-
 var _BusinessOwnerSelector = require("./BusinessOwnerSelector");
-
 var _BusinessProductsCategoyDetails = require("./BusinessProductsCategoyDetails");
-
 var _BusinessProductAddForm = require("./BusinessProductAddForm");
-
 var _BusinessBrandGENDetail = require("./BusinessBrandGENDetail");
-
 var _BusinessBrandBUSIDetail = require("./BusinessBrandBUSIDetail");
-
 var _BusinessDeliveryZoneList = require("./BusinessDeliveryZoneList");
-
 var _BusinessDeliveryZoneInformation = require("./BusinessDeliveryZoneInformation");
-
 var _BusinessDeliveryZoneDetails = require("./BusinessDeliveryZoneDetails");
-
 var _BusinessMenuCategoryTreeNode = require("./BusinessMenuCategoryTreeNode");
-
 var _BusinessMenuCustomFields = require("./BusinessMenuCustomFields");
-
 var _BusinessSharedMenuProducts = require("./BusinessSharedMenuProducts");
-
 var _BusinessMenuChannels = require("./BusinessMenuChannels");
-
 var _BusinessMenuShare = require("./BusinessMenuShare");
-
 var _BusinessProductList = require("./BusinessProductList");
-
 var _BusinessProductsCategories = require("./BusinessProductsCategories");
-
 var _ProductDetails = require("./ProductDetails");
-
 var _SingleBusinessCategoryEdit = require("./SingleBusinessCategoryEdit");
-
 var _BusinessSelectHeader = require("./BusinessSelectHeader");
-
 var _BatchImageForm = require("./BatchImageForm");
-
 var _SingleBusinessSubCateogries = require("./SingleBusinessSubCateogries");
-
 var _ProductSummary = require("./ProductSummary");
-
 var _ProductIngredient = require("./ProductIngredient");
-
 var _ProductMetaFields = require("./ProductMetaFields");
-
 var _ProductExtras = require("./ProductExtras");
-
 var _ProductGallery = require("./ProductGallery");
-
 var _ProductMainDetails = require("./ProductMainDetails");
-
 var _BusinessSharedMenuProductDetails = require("./BusinessSharedMenuProductDetails");
-
 var _BusinessSpreadSheet = require("./BusinessSpreadSheet");
-
 var _SingleBusinessProduct = require("./SingleBusinessProduct");
-
 var _BusinessTypeDetail = require("./BusinessTypeDetail");
-
 var _ProductDetatilsInformation = require("./ProductDetatilsInformation");
-
 var _ProductDetailsAdvanced = require("./ProductDetailsAdvanced");
-
 var _ProductTagsList = require("./ProductTagsList");
-
 var _EditTaxManager = require("./EditTaxManager");
-
 var _ImportersListing = require("./ImportersListing");
-
 var _ImportersList = require("./ImportersList");
-
 var _ImporterForm = require("./ImporterForm");
-
 var _ImporterJobForm = require("./ImporterJobForm");
-
 var _ProductDesktopPreview = require("./ProductDesktopPreview");
-
 var _ProductExtraOptions = require("./ProductExtraOptions");
-
 var _ProductExtraMetaFields = require("./ProductExtraMetaFields");
-
 var _ProductExtraOptionDetails = require("./ProductExtraOptionDetails");
-
 var _ProductExtraOptionMetaFields = require("./ProductExtraOptionMetaFields");
-
 var _ProductExtraSubOptionMetaFields = require("./ProductExtraSubOptionMetaFields");
-
 var _ProductIngredientDetails = require("./ProductIngredientDetails");
-
 var _ProductTagDetails = require("./ProductTagDetails");
-
 var _SingleBusiness = require("./SingleBusiness");
-
 var _PaymentOptionSquare = require("./PaymentOptionSquare");
-
 var _BusinessWalletsList = require("./BusinessWalletsList");
-
 var _PaymentOptionMethods = require("./PaymentOptionMethods");
-
 var _BusinessPublishing = require("./BusinessPublishing");
-
 var _ServiceDetail = require("./ServiceDetail");
-
 var _ProductVideos = require("./ProductVideos");

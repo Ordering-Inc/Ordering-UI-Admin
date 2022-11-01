@@ -4,23 +4,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ProgressRing = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var ProgressRing = function ProgressRing(props) {
   var percent = props.percent,
-      size = props.size,
-      lineWidth = props.lineWidth,
-      progressColor = props.progressColor,
-      trackColor = props.trackColor,
-      caps = props.caps,
-      isShowPercent = props.isShowPercent,
-      spin = props.spin,
-      transitionDuration = props.transitionDuration,
-      percentColor = props.percentColor,
-      fontSize = props.fontSize;
+    size = props.size,
+    lineWidth = props.lineWidth,
+    progressColor = props.progressColor,
+    trackColor = props.trackColor,
+    caps = props.caps,
+    isShowPercent = props.isShowPercent,
+    spin = props.spin,
+    transitionDuration = props.transitionDuration,
+    percentColor = props.percentColor,
+    fontSize = props.fontSize;
   var halfSize = size / 2;
   var radius = halfSize - lineWidth / 2;
   var circleLength = radius * 2 * Math.PI;
@@ -74,6 +71,7 @@ var ProgressRing = function ProgressRing(props) {
     }
   }, Math.round(percent), "%"));
 };
+
 /*
   interface Props
 
@@ -87,6 +85,4 @@ var ProgressRing = function ProgressRing(props) {
   trackColor?: string;
   transitionDuration?: number;
 */
-
-
 exports.ProgressRing = ProgressRing;

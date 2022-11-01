@@ -33,13 +33,8 @@ Object.defineProperty(exports, "RewardsPrograms", {
     return _RewardsPrograms.RewardsPrograms;
   }
 });
-
 var _RewardsPrograms = require("./RewardsPrograms");
-
 var _PointsWallet = require("./PointsWallet");
-
 var _PointsWalletLevels = require("./PointsWalletLevels");
-
 var _PointsWalletBusinessDetail = require("./PointsWalletBusinessDetail");
-
 var _PointsWalletBusinessList = require("./PointsWalletBusinessList");

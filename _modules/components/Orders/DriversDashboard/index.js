@@ -4,32 +4,24 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.DriversDashboard = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _DriversLocation = require("../DriversLocation");
-
 var _DriversList = require("../DriversList");
-
 var _DriversOnlineOfflineFilter = require("../DriversOnlineOfflineFilter");
-
 var _DriversBusyStatusFilter = require("../DriversBusyStatusFilter");
-
 var _styles = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var DriversDashboard = function DriversDashboard(props) {
   var driversList = props.driversList,
-      onlineDrivers = props.onlineDrivers,
-      offlineDrivers = props.offlineDrivers,
-      driversIsOnline = props.driversIsOnline,
-      driversSubfilter = props.driversSubfilter,
-      selectedDriver = props.selectedDriver,
-      handleChangeDriver = props.handleChangeDriver,
-      handleChangeDriverIsOnline = props.handleChangeDriverIsOnline,
-      handleChangeDriversSubFilter = props.handleChangeDriversSubFilter,
-      handleOpenDriverOrders = props.handleOpenDriverOrders;
+    onlineDrivers = props.onlineDrivers,
+    offlineDrivers = props.offlineDrivers,
+    driversIsOnline = props.driversIsOnline,
+    driversSubfilter = props.driversSubfilter,
+    selectedDriver = props.selectedDriver,
+    handleChangeDriver = props.handleChangeDriver,
+    handleChangeDriverIsOnline = props.handleChangeDriverIsOnline,
+    handleChangeDriversSubFilter = props.handleChangeDriversSubFilter,
+    handleOpenDriverOrders = props.handleOpenDriverOrders;
   var numberOfonlineDrivers = onlineDrivers.length;
   var numberOfofflineDrivers = offlineDrivers.length;
   var numberOfbusyDrivers = driversIsOnline ? onlineDrivers.filter(function (ele) {
@@ -70,5 +62,4 @@ var DriversDashboard = function DriversDashboard(props) {
     driversList: driversList
   })));
 };
-
 exports.DriversDashboard = DriversDashboard;

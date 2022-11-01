@@ -1,93 +1,61 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BusinessWidgets = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _Select = require("../../../styles/Select");
-
 var _styledComponents = require("styled-components");
-
 var _utils = require("../../../utils");
-
 var _styles = require("../../../styles");
-
 var _Shared = require("../../Shared");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _styles2 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var BusinessWidgetsUI = function BusinessWidgetsUI(props) {
   var _sitesListState$sites, _sitesListState$sites2;
-
   var business = props.business,
-      sitesListState = props.sitesListState;
-
+    sitesListState = props.sitesListState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
-
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
-      _useEvent2 = _slicedToArray(_useEvent, 1),
-      events = _useEvent2[0];
-
+    _useEvent2 = _slicedToArray(_useEvent, 1),
+    events = _useEvent2[0];
   var _useState = (0, _react.useState)('modal'),
-      _useState2 = _slicedToArray(_useState, 2),
-      selectedType = _useState2[0],
-      setSelectedType = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    selectedType = _useState2[0],
+    setSelectedType = _useState2[1];
   var _useState3 = (0, _react.useState)(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      siteList = _useState4[0],
-      setSiteList = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    siteList = _useState4[0],
+    setSiteList = _useState4[1];
   var _useState5 = (0, _react.useState)(''),
-      _useState6 = _slicedToArray(_useState5, 2),
-      siteId = _useState6[0],
-      setSiteId = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    siteId = _useState6[0],
+    setSiteId = _useState6[1];
   var _useState7 = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      alertState = _useState8[0],
-      setAlertState = _useState8[1];
-
+      open: false,
+      content: []
+    }),
+    _useState8 = _slicedToArray(_useState7, 2),
+    alertState = _useState8[0],
+    setAlertState = _useState8[1];
   var modalTypes = [{
     value: 'modal',
     content: t('TYPE_MODAL_POPUP', 'Button with modal style')
@@ -95,11 +63,9 @@ var BusinessWidgetsUI = function BusinessWidgetsUI(props) {
     value: 'chat',
     content: t('TYPE_MODAL_CHAT', 'Chat style integration')
   }];
-
   var getBusinessURL = function getBusinessURL(businessURL, slug) {
     if (!businessURL || businessURL === '/store/:business_slug') return "store/".concat(slug);else if (businessURL === '/:business_slug') return slug;else return "store/".concat(businessURL.split('?')[1].replace(':business_slug', '')).concat(business.slug);
   };
-
   var businessURL = getBusinessURL((_sitesListState$sites = sitesListState.sites.find(function (site) {
     return (site === null || site === void 0 ? void 0 : site.id) === siteId;
   })) === null || _sitesListState$sites === void 0 ? void 0 : _sitesListState$sites.business_url_template, business === null || business === void 0 ? void 0 : business.slug);
@@ -112,9 +78,7 @@ var BusinessWidgetsUI = function BusinessWidgetsUI(props) {
   var widgetInline = '<script type="text/javascript">var orderingInlineSettings = {baseUrl: "/"};</script><script type="text/javascript">window.onload=function(){var i={baseUrl:orderingInlineSettings&&orderingInlineSettings.baseUrl?orderingInlineSettings.baseUrl:"/inline/"},l=location.href.split(i.baseUrl)[0],e=location.href.split(i.baseUrl)[1],a="' + url + '",r=document.createElement("iframe");r.id="ordering_iframe",r.src=(a+"/"+e).replace(/([^:]\\/)\\/+/g,"$1"),r.style.border=0,r.style.height="100%",r.style.width="100%",r.style.maxWidth="none",r.allow="geolocation";var d=document.getElementById("ordering_iframe_inline");d.appendChild(r),r.addEventListener("load",function(){t(),setInterval(function(){var e=JSON.stringify({event:"body",data:{}});r.contentWindow.postMessage(e,a)},100)});function t(){var e=document.documentElement,t=window.innerwidth||e.clientWidth,n=window.innerHeight||e.clientHeight,o=(window.pageXOffset||e.scrollLeft)-(e.clientLeft||0),i=(window.pageYOffset||e.scrollTop)-(e.clientTop||0),l=JSON.stringify({event:"scroll",data:{top:i,left:o,width:t,height:n,offsetTop:s(r).top}});r.contentWindow.postMessage(l,a)}function s(e){for(var t=0,n=0;t+=e.offsetTop||0,n+=e.offsetLeft||0,e=e.offsetParent;);return{top:t,left:n}}window.addEventListener("message",function(e){var t=e.data;if("body"==t.event)d.style.height=t.data.height+"px";else if("scroll"==t.event)t.data.enable?document.getElementsByTagName("body")[0].style.overflowY="auto":document.getElementsByTagName("body")[0].style.overflowY="hidden";else if("url"==t.event){var n=document.createElement("a");n.href=t.data;var o=((l?l+"/":"")+i.baseUrl+"/"+n.pathname).replace(/([^:]\\/)\\/+/g,"$1");window.history.pushState("","",o),"http://localhost/"!=t.data&&window.scrollTo(0,s(r).top)}},!1),window.onscroll=function(e){t()}};</script><div style="height: 1000px;" id="ordering_iframe_inline"></div>';
   (0, _react.useEffect)(function () {
     var _sitesListState$sites3;
-
     if (sitesListState !== null && sitesListState !== void 0 && sitesListState.loading) return;
-
     if ((sitesListState === null || sitesListState === void 0 ? void 0 : (_sitesListState$sites3 = sitesListState.sites) === null || _sitesListState$sites3 === void 0 ? void 0 : _sitesListState$sites3.length) > 0) {
       var _siteList = sitesListState.sites.map(function (site) {
         return {
@@ -123,7 +87,6 @@ var BusinessWidgetsUI = function BusinessWidgetsUI(props) {
           disabled: !(site !== null && site !== void 0 && site.url)
         };
       });
-
       setSiteList(_siteList);
     } else {
       setSiteList([]);
@@ -212,13 +175,10 @@ var BusinessWidgetsUI = function BusinessWidgetsUI(props) {
     closeOnBackdrop: false
   }));
 };
-
 var BusinessWidgets = function BusinessWidgets(props) {
   var businessWidgetsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessWidgetsUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.SitesList, businessWidgetsProps);
 };
-
 exports.BusinessWidgets = BusinessWidgets;

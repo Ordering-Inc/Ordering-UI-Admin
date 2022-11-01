@@ -4,56 +4,33 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.OrderStatusSubFilter = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _styles = require("../../../styles");
-
 var _MdClose = _interopRequireDefault(require("@meronex/icons/ios/MdClose"));
-
 var _Shared = require("../../Shared");
-
 var _styles2 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
   var selectedSubOrderStatus = props.selectedSubOrderStatus,
-      ordersStatusGroup = props.ordersStatusGroup,
-      handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus;
-
+    ordersStatusGroup = props.ordersStatusGroup,
+    handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var statues = {
     pending: [{
       key: 0,
@@ -132,16 +109,11 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
       value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Not picked by customer')
     }]
   };
-
   var handleChange = function handleChange(status) {
     var pendingStatuses = _toConsumableArray(selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending);
-
     var inProgressStatuses = _toConsumableArray(selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress);
-
     var completedStatuses = _toConsumableArray(selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed);
-
     var cancelledStatuses = _toConsumableArray(selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled);
-
     switch (ordersStatusGroup) {
       case 'pending':
         if (pendingStatuses.includes(status)) {
@@ -151,12 +123,10 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
         } else {
           pendingStatuses.push(status);
         }
-
         handleSelectedSubOrderStatus(_objectSpread(_objectSpread({}, selectedSubOrderStatus), {}, {
           pending: pendingStatuses
         }));
         break;
-
       case 'inProgress':
         if (inProgressStatuses.includes(status)) {
           inProgressStatuses = inProgressStatuses.filter(function (_status) {
@@ -165,12 +135,10 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
         } else {
           inProgressStatuses.push(status);
         }
-
         handleSelectedSubOrderStatus(_objectSpread(_objectSpread({}, selectedSubOrderStatus), {}, {
           inProgress: inProgressStatuses
         }));
         break;
-
       case 'completed':
         if (completedStatuses.includes(status)) {
           completedStatuses = completedStatuses.filter(function (_status) {
@@ -179,12 +147,10 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
         } else {
           completedStatuses.push(status);
         }
-
         handleSelectedSubOrderStatus(_objectSpread(_objectSpread({}, selectedSubOrderStatus), {}, {
           completed: completedStatuses
         }));
         break;
-
       case 'cancelled':
         if (cancelledStatuses.includes(status)) {
           cancelledStatuses = cancelledStatuses.filter(function (_status) {
@@ -193,14 +159,12 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
         } else {
           cancelledStatuses.push(status);
         }
-
         handleSelectedSubOrderStatus(_objectSpread(_objectSpread({}, selectedSubOrderStatus), {}, {
           cancelled: cancelledStatuses
         }));
         break;
     }
   };
-
   return /*#__PURE__*/_react.default.createElement(_styles2.SubFilterContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, statues[ordersStatusGroup].map(function (status) {
     return /*#__PURE__*/_react.default.createElement(_styles.Button, {
       key: status.key,
@@ -211,5 +175,4 @@ var OrderStatusSubFilter = function OrderStatusSubFilter(props) {
     }, status.value, ((selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed.includes(status.key)) || (selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled.includes(status.key))) && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
   })));
 };
-
 exports.OrderStatusSubFilter = OrderStatusSubFilter;

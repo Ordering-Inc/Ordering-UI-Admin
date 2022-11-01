@@ -9,5 +9,4 @@ Object.defineProperty(exports, "ProfilePage", {
     return _ProfilePage.ProfilePage;
   }
 });
-
 var _ProfilePage = require("./ProfilePage");
