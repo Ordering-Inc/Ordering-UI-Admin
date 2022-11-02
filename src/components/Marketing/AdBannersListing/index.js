@@ -5,7 +5,7 @@ import { IconButton } from '../../../styles'
 import { List as MenuIcon, HouseDoor, ViewStacked, Shop } from 'react-bootstrap-icons'
 import { PostionItemUI } from './PostionItemUI'
 import { SideBar } from '../../Shared'
-import { HomePageBanners } from '../HomePageBanners'
+import { PageBanners } from '../PageBanner'
 
 import {
   AdBannersListingContainer,
@@ -82,11 +82,11 @@ export const AdBannersListing = (props) => {
           defaultSideBarWidth={500 + moveDistance}
           moveDistance={moveDistance}
         >
-          {openPositionDetail?.key === 'home_page' && (
-            <HomePageBanners
-              setMoveDistance={setMoveDistance}
-            />
-          )}
+          <PageBanners
+            setMoveDistance={setMoveDistance}
+            title={openPositionDetail?.title}
+            defaultPosition={openPositionDetail?.key}
+          />
         </SideBar>
       )}
     </>

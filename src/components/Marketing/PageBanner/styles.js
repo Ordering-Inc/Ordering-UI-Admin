@@ -44,6 +44,11 @@ export const BannerItemWrapper = styled.div`
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};
   }
+  ${({ active }) => active && css`
+    border-top: 1px solid ${props => props.theme.colors.primary};
+    border-bottom: 1px solid ${props => props.theme.colors.primary};
+    background-color: ${props => props.theme.colors.lightPrimary};
+  `}
 `
 export const BannerTitleConatiner = styled.div`
   font-size: 14px;
@@ -75,4 +80,15 @@ export const EnableWrapper = styled.div`
   ` : css`
     margin-right: 50px;
   `}
+`
+export const AddNewBanner = styled.div`
+  width: fit-content;
+  cursor: pointer;
+  color: ${props => props.theme.colors.lightGray};
+  font-size: 14px;
+  margin-top: 15px;
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
 `
