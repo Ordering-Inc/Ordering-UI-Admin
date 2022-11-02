@@ -66,6 +66,7 @@ import { QueryLogin } from '../src/components/Login'
 import { PluginSettings } from './pages/PluginSettings'
 import { AdBannersList } from './pages/AdBannersList'
 import { Profile } from './pages/Profile'
+import settings from './config.json'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -126,7 +127,7 @@ export const App = () => {
             )}
             <Layout>
               {auth && (
-                <SidebarMenu />
+                <SidebarMenu billingUrl={settings?.billing_url} />
               )}
               {onlineStatus && (
                 <ScrollToTop>

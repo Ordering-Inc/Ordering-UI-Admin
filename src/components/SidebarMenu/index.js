@@ -17,10 +17,11 @@ import {
   Award,
   BoxArrowUpRight,
   Cart3,
+  Cash,
   CloudDownload
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { useEvent, useLanguage, useSession, useConfig } from 'ordering-components-admin'
+import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
@@ -39,7 +40,9 @@ import {
   LanguageSelectorContainer
 } from './styles'
 
-export const SidebarMenu = (props) => {
+const SidebarMenuUI = (props) => {
+  const { getBillingToken, billingUrl } = props
+
   const location = useLocation()
   const theme = useTheme()
   const [events] = useEvent()
@@ -323,6 +326,13 @@ export const SidebarMenu = (props) => {
       handleMenuCollapse(true)
     }
   }, [windowSize.width])
+
+  const handleClickBilling = async () => {
+    const billingState = await getBillingToken()
+    if (!billingState?.error && billingState?.result?.access_token) {
+      window.open(`${billingUrl}?token=${billingState?.result?.access_token}`, '_blank')
+    }
+  }
 
   return (
     <>
@@ -727,6 +737,16 @@ export const SidebarMenu = (props) => {
                     </MenuContainer>
                   </Accordion>
                 )}
+                {sessionState?.user?.level === 0 && (
+                  <Button
+                    className='d-flex align-items-center'
+                    variant={false}
+                    onClick={() => handleClickBilling()}
+                  >
+                    <Cash />
+                    <span>{t('BILLING', 'Billing')}</span>
+                  </Button>
+                )}
               </div>
             </SidebarContent>
             <UserInfo
@@ -778,4 +798,12 @@ const ContextAwareToggle = ({ children, eventKey, callback, page, handleGoToPage
       {children}
     </Button>
   )
+}
+
+export const SidebarMenu = (props) => {
+  const sidebarMenu = {
+    ...props,
+    UIComponent: SidebarMenuUI
+  }
+  return <SidebarMenuController {...sidebarMenu} />
 }
