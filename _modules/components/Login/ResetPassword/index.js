@@ -159,7 +159,7 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     onChange: function onChange(e) {
       return handleChangeProject(e);
     },
-    autoComplete: "off",
+    autoComplete: "new-password",
     autoCapitalize: "off"
   }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
@@ -175,7 +175,7 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     }),
     placeholder: t('NEW_PASSWORD', 'New passowrd'),
     onChange: handleChangeInput,
-    autoComplete: "off"
+    autoComplete: "new-password"
   }), /*#__PURE__*/_react.default.createElement(_RiLockPasswordLine.default, null)), /*#__PURE__*/_react.default.createElement(_styles.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_Inputs.Input, {
     type: "password",
     name: "confirm-password",
@@ -189,7 +189,7 @@ var ResetPasswordUI = function ResetPasswordUI(props) {
     }),
     placeholder: t('CONFIRM_PASSWORD', 'Confirm Password'),
     onChange: handleChangeInput,
-    autoComplete: "off"
+    autoComplete: "new-password"
   }), /*#__PURE__*/_react.default.createElement(_RiLockPasswordLine.default, null)), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     type: "submit",
     color: formState.loading ? 'secondary' : 'primary',

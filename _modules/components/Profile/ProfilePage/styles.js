@@ -12,9 +12,9 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
 exports.Container = Container;
 var HeaderContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin: 0;\n  }\n"])));
 exports.HeaderContainer = HeaderContainer;
-var UserInfoContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding-top: 30px;\n  display: flex;\n"])));
+var UserInfoContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  padding-top: 30px;\n  display: flex;\n  margin-bottom: 40px;\n"])));
 exports.UserInfoContainer = UserInfoContainer;
-var UserImage = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  border-radius: 8px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  width: 216px;\n  height: 216px;\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: contain;\n    border-radius: 8px;\n  }\n"])));
+var UserImage = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  border-radius: 8px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  width: 216px;\n  height: 216px;\n  img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    border-radius: 8px;\n  }\n"])));
 exports.UserImage = UserImage;
 var UserInfoWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  margin: 0 26px;\n  p {\n    &.name {\n      font-size: 20px;\n      font-weight: 600;\n      margin: 0;\n    }\n    &.email {\n      font-size: 14px;\n      line-height: 24px;\n      margin: 12px 0;\n    }\n    &.phone {\n      font-size: 14px;\n      line-height: 24px;\n      margin: 0;\n    }\n  }\n"])));
 exports.UserInfoWrapper = UserInfoWrapper;
