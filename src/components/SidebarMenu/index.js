@@ -373,39 +373,41 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {sessionState?.user?.level !== 8 && (
-                    <MenuContainer>
-                      <ContextAwareToggle
-                        eventKey='1'
-                        active={
-                          location.pathname === '/orders' ||
-                          location.pathname === '/deliveries' ||
-                          location.pathname === '/drivers' ||
-                          location.pathname === '/appointments' ||
-                          location.pathname === '/gift-cards'
-                        }
-                      >
-                        <ListCheck />
-                        <span>{t('ORDERS', 'Orders')}</span>
-                      </ContextAwareToggle>
-                      <Accordion.Collapse eventKey='1'>
-                        <MenuContent>
-                          {ordersSubMenus.map(item => (
-                            !(sessionState?.user?.level === 2 && item.pageName === 'drivers') &&
-                            !(sessionState?.user?.level === 5 && item.pageName === 'appointments') && (
-                              <SubMenu
-                                key={item.id}
-                                active={location.pathname.includes(item.url)}
-                                onClick={() => handleGoToPage({ page: item.pageName })}
-                              >
-                                {item.title}
-                              </SubMenu>
-                            )
-                          ))}
-                        </MenuContent>
-                      </Accordion.Collapse>
-                    </MenuContainer>
-                  )}
+                  <MenuContainer>
+                    <ContextAwareToggle
+                      eventKey='1'
+                      active={
+                        location.pathname === '/orders' ||
+                        location.pathname === '/deliveries' ||
+                        location.pathname === '/drivers' ||
+                        location.pathname === '/appointments' ||
+                        location.pathname === '/gift-cards'
+                      }
+                    >
+                      <ListCheck />
+                      <span>{t('ORDERS', 'Orders')}</span>
+                    </ContextAwareToggle>
+                    <Accordion.Collapse eventKey='1'>
+                      <MenuContent>
+                        {ordersSubMenus.map(item => (
+                          !(sessionState?.user?.level === 2 && item.pageName === 'drivers') &&
+                          !(sessionState?.user?.level === 5 && item.pageName === 'appointments') &&
+                          !(sessionState?.user?.level === 8 && item.pageName === 'orders') &&
+                          !(sessionState?.user?.level === 8 && item.pageName === 'deliveries') &&
+                          !(sessionState?.user?.level === 8 && item.pageName === 'drivers') &&
+                          !(sessionState?.user?.level === 8 && item.pageName === 'giftCards') && (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          )
+                        ))}
+                      </MenuContent>
+                    </Accordion.Collapse>
+                  </MenuContainer>
 
                   {(sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8) && (
                     <MenuContainer>
