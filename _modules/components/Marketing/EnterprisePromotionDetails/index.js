@@ -189,7 +189,7 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     },
     isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,
     handleUpdateClick: handleUpdateClick,
-    handleAddPromotion: handleAddPromotion
+    handleAddClick: handleAddPromotion
   }), selectedOption === 'businesses' && /*#__PURE__*/_react.default.createElement(_Shared.SelectBusinesses, {
     isAddMode: isAddMode,
     allBusinesses: businessesList.businesses,

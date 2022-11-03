@@ -32,7 +32,7 @@ var SelectSites = function SelectSites(props) {
     handleSelectAllSites = props.handleSelectAllSites,
     handleSelectNoneSites = props.handleSelectNoneSites,
     handleUpdateClick = props.handleUpdateClick,
-    handleAddPromotion = props.handleAddPromotion;
+    handleAddClick = props.handleAddClick;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -87,7 +87,7 @@ var SelectSites = function SelectSites(props) {
     color: "primary",
     disabled: isDisabled,
     onClick: function onClick() {
-      isAddMode ? handleAddPromotion() : handleUpdateClick();
+      isAddMode ? handleAddClick() : handleUpdateClick();
     }
   }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')));
 };
