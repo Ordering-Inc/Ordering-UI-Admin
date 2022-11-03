@@ -26,6 +26,7 @@ import { CampaignWhatsapp } from './CampaignWhatsapp'
 import { CampaignNotification } from './CampaignNotification'
 import { CampaignPopup } from './CampaignPopup'
 import { CampaignWebHook } from './CampaignWebHook'
+import { AdBannersListing } from './AdBannersListing'
 
 export {
   EnterprisePromotionListing,
@@ -55,5 +56,6 @@ export {
   CampaignWhatsapp,
   CampaignNotification,
   CampaignPopup,
-  CampaignWebHook
+  CampaignWebHook,
+  AdBannersListing
 }
