@@ -147,7 +147,7 @@ const ResetPasswordUI = (props) => {
                     })}
                     placeholder={t('PROJECT', 'Project')}
                     onChange={(e) => handleChangeProject(e)}
-                    autoComplete='off'
+                    autoComplete="new-password"
                     autoCapitalize='off'
                   />
                   <MdExitToApp />
@@ -168,7 +168,7 @@ const ResetPasswordUI = (props) => {
                   })}
                   placeholder={t('NEW_PASSWORD', 'New passowrd')}
                   onChange={handleChangeInput}
-                  autoComplete='off'
+                  autoComplete="new-password"
                 />
                 <RiLockPasswordLine />
               </InputWithIcon>
@@ -185,7 +185,7 @@ const ResetPasswordUI = (props) => {
                   })}
                   placeholder={t('CONFIRM_PASSWORD', 'Confirm Password')}
                   onChange={handleChangeInput}
-                  autoComplete='off'
+                  autoComplete="new-password"
                 />
                 <RiLockPasswordLine />
               </InputWithIcon>
