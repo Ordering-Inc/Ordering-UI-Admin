@@ -96,8 +96,8 @@ const BusinessWebhooksUI = (props) => {
       <WebhooksContainer>
         <Title>{t('WEBHOOKS', 'WEbhooks')}</Title>
         {
-          business?.webhooks?.length > 0 && business?.webhooks.map((webhook, i) => (
-            <WebhookAddContainer key={i}>
+          business?.webhooks?.length > 0 && business?.webhooks.map(webhook => (
+            <WebhookAddContainer key={webhook.id}>
               <HookSelectWrapper inActive>
                 <Select
                   defaultValue={webhook?.hook}
