@@ -166,7 +166,7 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
   };
   var handleGoToPage = function handleGoToPage() {
     events.emit('go_to_page', {
-      page: 'operationSettings',
+      page: 'operation_settings',
       search: '?category=10'
     });
   };
