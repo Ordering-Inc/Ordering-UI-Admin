@@ -134,7 +134,7 @@ const CampaignEmailUI = (props) => {
   }
 
   const handleGoToPage = () => {
-    events.emit('go_to_page', { page: 'operationSettings', search: '?category=10' })
+    events.emit('go_to_page', { page: 'operation_settings', search: '?category=10' })
   }
 
   useEffect(() => {
