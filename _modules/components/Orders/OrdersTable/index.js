@@ -468,7 +468,8 @@ var OrdersTable = function OrdersTable(props) {
       }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
         allowColumns: allowColumns,
         optionsDefault: optionsDefault,
-        handleChangeAllowColumns: handleChangeAllowColumns
+        handleChangeAllowColumns: handleChangeAllowColumns,
+        isOrder: true
       }));
     }
 

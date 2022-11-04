@@ -51,7 +51,8 @@ var ColumnAllowSettingPopover = function ColumnAllowSettingPopover(props) {
   var optionsDefault = props.optionsDefault,
       allowColumns = props.allowColumns,
       handleChangeAllowColumns = props.handleChangeAllowColumns,
-      title = props.title;
+      title = props.title,
+      isOrder = props.isOrder;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -136,11 +137,11 @@ var ColumnAllowSettingPopover = function ColumnAllowSettingPopover(props) {
 
     return /*#__PURE__*/_react.default.createElement(_styles2.AllowItem, {
       key: option.value,
-      isChecked: allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$option$ = allowColumns[option.value]) === null || _allowColumns$option$ === void 0 ? void 0 : _allowColumns$option$.visable,
+      isChecked: isOrder ? allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$option$ = allowColumns[option.value]) === null || _allowColumns$option$ === void 0 ? void 0 : _allowColumns$option$.visable : allowColumns[option.value],
       onClick: function onClick() {
         return handleChangeAllowColumns(option.value);
       }
-    }, allowColumns !== null && allowColumns !== void 0 && (_allowColumns$option$2 = allowColumns[option.value]) !== null && _allowColumns$option$2 !== void 0 && _allowColumns$option$2.visable ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, option.content));
+    }, (isOrder ? allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$option$2 = allowColumns[option.value]) === null || _allowColumns$option$2 === void 0 ? void 0 : _allowColumns$option$2.visable : allowColumns[option.value]) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement("span", null, option.content));
   }))));
 };
 
