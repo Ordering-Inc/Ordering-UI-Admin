@@ -283,7 +283,7 @@ export const CampaignDetailGeneral = (props) => {
           {!audienceState?.loading && !audienceState?.error && (
             <p>
               <span>{t('REACHING', 'Reaching')}: </span>
-              {audienceState?.audience} {t('PEOPLE', 'People')}
+              {audienceState?.pagination?.total || 0} {t('PEOPLE', 'People')}
             </p>
           )}
           <CheckBoxListWrapper>
