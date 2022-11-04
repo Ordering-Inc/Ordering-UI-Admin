@@ -78,7 +78,7 @@ export const CampaignNotification = (props) => {
   }
 
   const handleGoToPage = () => {
-    events.emit('go_to_page', { page: 'operationSettings', search: '?category=14' })
+    events.emit('go_to_page', { page: 'operation_settings', search: '?category=14' })
   }
 
   return (
