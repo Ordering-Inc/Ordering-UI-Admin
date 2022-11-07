@@ -10,6 +10,7 @@ import { SideBar } from '../../Shared'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { Button } from '../../../styles'
+import { OccupationsFilter } from '../OccupationsFilter'
 
 import {
   UsersListingContainer,
@@ -41,7 +42,12 @@ const ProfessionalListingUI = (props) => {
     onUserRedirect,
     handleSuccessUpdate,
     handleSuccessAddUser,
-    handleSuccessDeleteUser
+    handleSuccessDeleteUser,
+
+    occupationsState,
+    selectedOccupation,
+    handleSelectOccupation,
+    setSelectedUsers
   } = props
 
   const [, t] = useLanguage()
@@ -102,6 +108,11 @@ const ProfessionalListingUI = (props) => {
           handleChangeUserActiveState={handleChangeUserActiveState}
         />
         <ActionsContainer>
+          <OccupationsFilter
+            occupationsState={occupationsState}
+            selectedOccupation={selectedOccupation}
+            handleSelectOccupation={handleSelectOccupation}
+          />
           <ActionButtonsGroup>
             <Button
               borderRadius='8px'
@@ -134,6 +145,7 @@ const ProfessionalListingUI = (props) => {
           userDetailsId={openUser?.id || queryId}
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
+          setSelectedUsers={setSelectedUsers}
         />
       </UsersListingContainer>
 
@@ -143,6 +155,7 @@ const ProfessionalListingUI = (props) => {
           open={isOpenUserDetails}
           user={openUser}
           userId={openUser?.id || queryId}
+          occupations={occupationsState.occupations}
           onClose={() => handleBackRedirect()}
           handleSuccessUpdate={handleSuccessUpdate}
           handleSuccessDeleteUser={handleSuccessDeleteUser}

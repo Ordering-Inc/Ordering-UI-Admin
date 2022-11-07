@@ -343,6 +343,8 @@ import { FreeProductsList, PurchasedProductsList } from './components/Downloads'
 import { Layout } from './components/Layout'
 import { SidebarMenu } from './components/SidebarMenu'
 import { NotNetworkConnectivity } from './components/NotNetworkConnectivity'
+import { ProfilePage } from './components/Profile'
+
 import {
   Alert,
   SpinnerLoader,
@@ -731,6 +733,8 @@ export {
   Layout,
   SidebarMenu,
   NotNetworkConnectivity,
+  ProfilePage,
+
   Alert,
   SpinnerLoader,
   Modal,

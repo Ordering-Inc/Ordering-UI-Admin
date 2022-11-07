@@ -208,6 +208,12 @@ export const UserFormDetailsUI = (props) => {
     })
   }, [formMethods])
 
+  useEffect(() => {
+    if (user?.id) {
+      cleanFormState && cleanFormState({ changes: {} })
+    }
+  }, [user?.id])
+
   return (
     <>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -223,11 +229,7 @@ export const UserFormDetailsUI = (props) => {
                       name={field.code}
                       className='form'
                       placeholder={t(field.code.toUpperCase(), field?.name)}
-                      defaultValue={
-                        formState?.result?.result
-                          ? formState?.result?.result[field.code]
-                          : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
-                      }
+                      value={formState?.changes[field.code] ?? (user && user[field.code]) ?? ''}
                       onChange={handleChangeInputEmail}
                       ref={(e) => {
                         emailInput.current = e
@@ -241,11 +243,7 @@ export const UserFormDetailsUI = (props) => {
                       name={field.code}
                       className='form'
                       placeholder={t(field.code.toUpperCase(), field?.name)}
-                      defaultValue={
-                        formState?.result?.result
-                          ? formState?.result?.result[field.code]
-                          : formState?.changes[field.code] ?? (user && user[field.code]) ?? ''
-                      }
+                      value={formState?.changes[field.code] ?? (user && user[field.code]) ?? ''}
                       onChange={handleChangeInput}
                       ref={formMethods.register({
                         required: isRequiredField(field.code)

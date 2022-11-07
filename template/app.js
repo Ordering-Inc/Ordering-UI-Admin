@@ -62,6 +62,7 @@ import { PurchasedProductsList } from './pages/PurchasedProductsList'
 import { Professionals } from './pages/Professionals'
 import { QueryLogin } from '../src/components/Login'
 import { PluginSettings } from './pages/PluginSettings'
+import { Profile } from './pages/Profile'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -131,7 +132,9 @@ export const App = () => {
                     <Route exact path='/'>
                       {
                         auth
-                          ? user?.level !== 5 ? <Redirect to='/home' /> : <Redirect to='/orders' />
+                          ? (user?.level !== 5 && user?.level !== 8)
+                            ? <Redirect to='/home' />
+                            : user?.level === 8 ? <Redirect to='/profile' /> : <Redirect to='/orders' />
                           : (queryProject && queryToken)
                             ? <QueryLogin project={queryProject} token={queryToken} />
                             : <Redirect to='/login' />
@@ -166,7 +169,9 @@ export const App = () => {
                     <Route exact path='/home'>
                       {
                         auth
-                          ? user?.level !== 5 ? <Home /> : <Redirect to='/orders' />
+                          ? (user?.level !== 5 && user?.level !== 8)
+                            ? <Home />
+                            : user?.level === 8 ? <Redirect to='/profile' /> : <Redirect to='/orders' />
                           : <Redirect to='/login' />
                       }
                     </Route>
@@ -292,6 +297,10 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/ordering-products' allowedLevels={[0]}>
                       <OrderingProducts />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/profile' allowedLevels={[0, 2, 5, 8]}>
+                      <Profile />
                     </ProtectedRoute>
 
                     <Route path='*'>

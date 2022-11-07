@@ -136,7 +136,7 @@ export const CheckBoxWrapper = styled.div`
     margin-right: 10px;
   `}
   svg {
-    font-size: 24px;
+    font-size: 16px;
     color: #B1BCCC;
   }
 
@@ -144,7 +144,7 @@ export const CheckBoxWrapper = styled.div`
     svg {
       color: ${props => props.theme.colors?.primary};
     }
-`}
+  `}
 `
 
 export const InfoBlock = styled.div`
@@ -248,4 +248,9 @@ export const VerifiedItemsContainer = styled.div`
       margin-top: 5px;
     }
   }
+`
+
+export const AllCheckWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `

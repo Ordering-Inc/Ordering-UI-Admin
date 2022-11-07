@@ -1,31 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ThreeDots, Calendar4Event } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { UserDetails as UserDetailsController, useLanguage, useSession } from 'ordering-components-admin'
-import { Confirm, Personalization, SideBar } from '../../Shared'
+import { useLanguage, useSession, UserDetails as UserDetailsController } from 'ordering-components-admin'
+import { Confirm, Personalization, SideBar, Alert } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { ProfessionalSchedule } from '../ProfessionalSchedule'
 import { ProfessionalBusinessService } from '../ProfessionalBusinessService'
 import { UserMetaFields } from '../UserMetaFields'
-import { Switch } from '../../../styles'
+import { Button, Switch } from '../../../styles'
 
 import {
   DetailsHeader,
   UserName,
   ActionSelectorWrapper,
-  SideBarWrapper
+  SideBarWrapper,
+  CalendarSyncWrapper
 } from './styles'
 
 export const ProfessionalDetailUI = (props) => {
   const {
     userState,
+    occupations,
     setExtraOpen,
     handleSuccessUserUpdate,
     handleDeleteUser,
-    handleChangeActiveUser
+    handleChangeActiveUser,
+    handleGoogleCalendarSync,
+    actionStatus
   } = props
 
   const theme = useTheme()
@@ -34,6 +38,7 @@ export const ProfessionalDetailUI = (props) => {
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
   const [extraSelected, setExtraSelected] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const onDeleteCustomer = () => {
     setConfirm({
@@ -61,6 +66,15 @@ export const ProfessionalDetailUI = (props) => {
     setExtraSelected(null)
   }, [currentMenuSelected])
 
+  useEffect(() => {
+    if (actionStatus.error) {
+      setAlertState({
+        open: true,
+        content: actionStatus.error
+      })
+    }
+  }, [actionStatus.error])
+
   return (
     <>
       <DetailsHeader>
@@ -77,12 +91,23 @@ export const ProfessionalDetailUI = (props) => {
               {handleChangeActiveUser && (
                 <Switch
                   defaultChecked={userState?.user?.enabled || false}
-                  onChange={enabled => handleChangeActiveUser({ id: userState?.user?.id, enabled: enabled })}
+                  onChange={enabled => handleChangeActiveUser({ ...userState?.user, enabled: enabled })}
                 />
               )}
             </>
           )}
         </UserName>
+
+        <CalendarSyncWrapper>
+          <Button
+            borderRadius='8px'
+            color='lightPrimary'
+            onClick={handleGoogleCalendarSync}
+          >
+            <span>{t('CALENDAR_SYNC', 'Calendar sync')}</span>
+            <Calendar4Event />
+          </Button>
+        </CalendarSyncWrapper>
 
         {adminUserState.user?.id !== userState.user?.id && (
           <ActionSelectorWrapper>
@@ -114,6 +139,7 @@ export const ProfessionalDetailUI = (props) => {
           {currentMenuSelected === 'profile' && (
             <UserProfileForm
               user={userState.user}
+              occupations={occupations}
               handleSuccessUpdate={handleSuccessUserUpdate}
               isProfessional
             />
@@ -172,6 +198,15 @@ export const ProfessionalDetailUI = (props) => {
         onClose={() => setConfirm({ ...confirm, open: false })}
         onCancel={() => setConfirm({ ...confirm, open: false })}
         onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
         closeOnBackdrop={false}
       />
     </>

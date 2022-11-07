@@ -79,7 +79,7 @@ export const CampaignSMS = (props) => {
   }
 
   const handleGoToPage = () => {
-    events.emit('go_to_page', { page: 'operationSettings', search: '?category=26' })
+    events.emit('go_to_page', { page: 'operation_settings', search: '?category=26' })
   }
 
   return (
