@@ -55,7 +55,7 @@ const SidebarMenuUI = (props) => {
   const ordersSubMenus = [
     {
       id: 1,
-      title: t('ORDERS_MANAGER', 'Orders manager'),
+      title: t('ORDERS_LIST', 'Orders list'),
       pageName: 'orders',
       url: '/orders'
     },
@@ -88,7 +88,7 @@ const SidebarMenuUI = (props) => {
   const loyaltySubMenus = [
     {
       id: 1,
-      title: t('REWARDS_PROGRAMS', 'Rewards programs'),
+      title: t('LOYALTY_AUTOMATION', 'Loyalty automation'),
       pageName: 'rewards_programs',
       url: '/loyalty/rewards-programs'
     }
@@ -115,7 +115,7 @@ const SidebarMenuUI = (props) => {
     },
     {
       id: 2,
-      title: t('RECOVERY_ACTIONS', 'Recovery actions'),
+      title: t('CART_RECOVERY_AUTOMATION', 'Cart recovery automation'),
       pageName: 'recovery_actions',
       url: '/cart-recovery/recovery-actions'
     }
@@ -235,7 +235,7 @@ const SidebarMenuUI = (props) => {
     },
     {
       id: 5,
-      title: t('ADVANCED_REPORTS', 'Advanced Reports'),
+      title: t('ENTERPRISE_REPORTS', 'Enterprise reports'),
       pageName: 'reports',
       url: '/intelligence/reports'
     }
@@ -260,14 +260,14 @@ const SidebarMenuUI = (props) => {
     },
     {
       id: 3,
-      title: t('DRIVERS_COMPANIES', 'Drivers companies'),
+      title: t('DELIVERY_COMPANIES', 'Delivery companies'),
       pageName: 'drivers_companies',
       url: '/delivery/drivers-companies',
       enabled: sessionState?.user?.level === 0
     },
     {
       id: 4,
-      title: t('DRIVERS_GROUPS', 'Drivers groups'),
+      title: t('DELIVERY_AUTOMATION', 'Delivery automation'),
       pageName: 'drivers_groups',
       url: '/delivery/drivers-groups',
       enabled: sessionState?.user?.level === 5 || sessionState?.user?.level === 0
@@ -277,7 +277,7 @@ const SidebarMenuUI = (props) => {
   const marketingSubmenus = [
     {
       id: 1,
-      title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
+      title: t('PROMOTION_AUTOMATION', 'Promotions automation'),
       pageName: 'enterprise_promotions',
       url: '/marketing/promotions-enterprise'
     },
