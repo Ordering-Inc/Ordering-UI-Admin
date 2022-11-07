@@ -363,6 +363,17 @@ const SidebarMenuUI = (props) => {
             <SidebarContent className='d-flex flex-column justify-content-between p-1 pt-0'>
               <div className='d-flex flex-column'>
                 <Accordion>
+                  {/* {sessionState?.user?.level === 0 && (
+                    <Button
+                      className='d-flex align-items-center'
+                      variant={false}
+                      onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
+                    >
+                      <BoxArrowUpRight />
+                      <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                    </Button>
+                  )} */}
+
                   {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8 && (
                     <MenuContainer>
                       <ContextAwareToggle
@@ -696,16 +707,6 @@ const SidebarMenuUI = (props) => {
                   >
                     <HeadsetIcon />
                     <span>{t('SUPPORT', 'Support')}</span>
-                  </Button>
-                )}
-                {sessionState?.user?.level === 0 && (
-                  <Button
-                    className='d-flex align-items-center'
-                    variant={false}
-                    onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
-                  >
-                    <BoxArrowUpRight />
-                    <span>{t('MARKETPLACE', 'Marketplace')}</span>
                   </Button>
                 )}
                 {sessionState?.user?.level === 0 && (
