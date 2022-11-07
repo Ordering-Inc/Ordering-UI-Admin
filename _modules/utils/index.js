@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -353,13 +353,33 @@ var ribbonValues = {
   shape: 'rectangle',
   enabled: false
 };
+/**
+ * Format seconds to hh:mm:ss
+ * @param {number} seconds
+ */
+exports.ribbonValues = ribbonValues;
+var formatSeconds = function formatSeconds(seconds) {
+  // Hours, minutes and seconds
+  var hrs = Math.floor(seconds / 3600);
+  var mins = Math.floor(seconds % 3600 / 60);
+  var secs = Math.floor(seconds % 60);
+
+  // Output like '1:01' or '4:03:59' or '123:03:59'
+  var ret = '';
+  if (hrs > 0) {
+    ret += '' + hrs + ':' + (mins < 10 ? '0' : '');
+  }
+  ret += '' + mins + ':' + (secs < 10 ? '0' : '');
+  ret += '' + secs;
+  return ret;
+};
 
 /**
  * Function to check URL
  * @param {string} url URL of page
  * @param {string} fallback default URL
  */
-exports.ribbonValues = ribbonValues;
+exports.formatSeconds = formatSeconds;
 var checkSiteUrl = function checkSiteUrl(url, fallback) {
   if (!url) return fallback;
   return url[(url === null || url === void 0 ? void 0 : url.length) - 1] === '/' ? url : "".concat(url, "/");

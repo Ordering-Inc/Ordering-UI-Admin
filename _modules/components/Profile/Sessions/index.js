@@ -124,7 +124,19 @@ var SessionsUI = function SessionsUI(props) {
     onClick: function onClick() {
       return setIsMoreInfo(true);
     }
-  }, t('MORE_INFO', 'More info'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRight, null)))) : /*#__PURE__*/_react.default.createElement(_styles2.NoMessage, null, t('YOU_DONT_HAVE_ANY_SESSIONS', 'You don\'t have any sessions'))) : /*#__PURE__*/_react.default.createElement(_styles2.NoSessionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.NoMessage, null, t('YOU_DONT_HAVE_ENABLED_THE_SESSIONS', 'You don\'t have enabled the sessions, please active them to have a better control of your sessions.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('MORE_INFO', 'More info'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRight, null))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroupWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    disabled: actionState.loading,
+    onClick: function onClick() {
+      return onDeleteAllSessions(false, true);
+    }
+  }, t('DELETE_ALL_SESSIONS', 'Delete all sessions')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    disabled: actionState.loading,
+    onClick: function onClick() {
+      return onDeleteAllSessions(false, false);
+    }
+  }, t('DELETE_ALL_SESSIONS_EXCEPT_CURRENT', 'Delete all sessions except current'))))) : /*#__PURE__*/_react.default.createElement(_styles2.NoMessage, null, t('YOU_DONT_HAVE_ANY_SESSIONS', 'You don\'t have any sessions'))) : /*#__PURE__*/_react.default.createElement(_styles2.NoSessionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.NoMessage, null, t('YOU_DONT_HAVE_ENABLED_THE_SESSIONS', 'You don\'t have enabled the sessions, please active them to have a better control of your sessions.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: function onClick() {
       return onDeleteAllSessions(true, false);
@@ -167,7 +179,7 @@ var SessionsUI = function SessionsUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "760px",
     height: "80vh",
-    padding: "30px",
+    padding: "30px 24px",
     title: t('SESSIONS', 'Sessions'),
     open: isMoreInfo,
     onClose: function onClose() {

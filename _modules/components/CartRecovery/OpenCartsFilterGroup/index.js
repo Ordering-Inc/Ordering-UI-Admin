@@ -52,7 +52,7 @@ var OpenCartsFilterGroupUI = function OpenCartsFilterGroupUI(props) {
   };
   var scrollDown = function scrollDown(e) {
     if (!e.target.closest('.ordering-calendar-btn')) return;
-    var el = document.querySelector('.popup-dialog');
+    var el = document.querySelector('.dialog-inner');
     if ((el === null || el === void 0 ? void 0 : el.scrollHeight) > (el === null || el === void 0 ? void 0 : el.clientHeight)) {
       var top = contentEndRef.current.offsetTop;
       el.scrollTo({

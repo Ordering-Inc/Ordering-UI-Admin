@@ -41,7 +41,7 @@ var OrderDetailsContent = _styledComponents.default.div(_templateObject9 || (_te
   return noScroll && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    overflow: hidden;\n  "])));
 });
 exports.OrderDetailsContent = OrderDetailsContent;
-var OrderDetailsExtraContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  padding: 30px 20px;\n  box-sizing: border-box;\n  width: 100%;\n\n  ", "\n"])), function (props) {
+var OrderDetailsExtraContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  max-width: 500px;\n  position: relative;\n  padding: 30px 20px;\n  box-sizing: border-box;\n  width: 100%;\n\n  ", "\n"])), function (props) {
   var _props$theme3;
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n  "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n  "])));
 });
