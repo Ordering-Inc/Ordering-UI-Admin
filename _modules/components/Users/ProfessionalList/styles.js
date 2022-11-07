@@ -5,13 +5,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperPagination = exports.WrapperImage = exports.VerifiedItemsContainer = exports.VerifiedItem = exports.UsersTable = exports.UsersConatiner = exports.UsersBottomContainer = exports.UserTypeWrapper = exports.UserTableWrapper = exports.UserMainInfo = exports.UserEnableWrapper = exports.InfoBlock = exports.Image = exports.CheckBoxWrapper = exports.AddNewUserButton = void 0;
+exports.WrapperPagination = exports.WrapperImage = exports.VerifiedItemsContainer = exports.VerifiedItem = exports.UsersTable = exports.UsersConatiner = exports.UsersBottomContainer = exports.UserTypeWrapper = exports.UserTableWrapper = exports.UserMainInfo = exports.UserEnableWrapper = exports.InfoBlock = exports.Image = exports.CheckBoxWrapper = exports.AllCheckWrapper = exports.AddNewUserButton = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -162,3 +162,7 @@ var VerifiedItemsContainer = _styledComponents.default.div(_templateObject29 || 
 });
 
 exports.VerifiedItemsContainer = VerifiedItemsContainer;
+
+var AllCheckWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+
+exports.AllCheckWrapper = AllCheckWrapper;

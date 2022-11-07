@@ -135,7 +135,7 @@ var CampaignNotification = function CampaignNotification(props) {
 
   var handleGoToPage = function handleGoToPage() {
     events.emit('go_to_page', {
-      page: 'operationSettings',
+      page: 'operation_settings',
       search: '?category=14'
     });
   };

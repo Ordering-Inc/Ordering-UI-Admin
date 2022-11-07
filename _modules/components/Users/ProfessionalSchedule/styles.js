@@ -65,6 +65,6 @@ var ScheduleContentWrapper = _styledComponents.default.div(_templateObject9 || (
 
 exports.ScheduleContentWrapper = ScheduleContentWrapper;
 
-var ButtonWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n\n  button {\n    height: 44px;\n  }\n"])));
+var ButtonWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  padding: 20px 0 30px 0;\n\n  button {\n    height: 44px;\n  }\n"])));
 
 exports.ButtonWrapper = ButtonWrapper;

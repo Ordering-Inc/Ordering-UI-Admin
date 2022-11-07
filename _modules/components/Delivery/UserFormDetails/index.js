@@ -301,12 +301,19 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }
     });
   }, [formMethods]);
+  (0, _react.useEffect)(function () {
+    if (user !== null && user !== void 0 && user.id) {
+      cleanFormState && cleanFormState({
+        changes: {}
+      });
+    }
+  }, [user === null || user === void 0 ? void 0 : user.id]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
     values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout
   }).map(function (field) {
-    var _formState$result5, _formState$result6, _ref2, _formState$changes$fi, _formState$result7, _formState$result8, _ref3, _formState$changes$fi2;
+    var _ref2, _formState$changes$fi, _ref3, _formState$changes$fi2;
 
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: field.id
@@ -316,7 +323,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       name: field.code,
       className: "form",
       placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
-      defaultValue: formState !== null && formState !== void 0 && (_formState$result5 = formState.result) !== null && _formState$result5 !== void 0 && _formState$result5.result ? formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : _formState$result6.result[field.code] : (_ref2 = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user && user[field.code]) !== null && _ref2 !== void 0 ? _ref2 : '',
+      value: (_ref2 = (_formState$changes$fi = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi !== void 0 ? _formState$changes$fi : user && user[field.code]) !== null && _ref2 !== void 0 ? _ref2 : '',
       onChange: handleChangeInputEmail,
       ref: function ref(e) {
         emailInput.current = e;
@@ -328,7 +335,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       name: field.code,
       className: "form",
       placeholder: t(field.code.toUpperCase(), field === null || field === void 0 ? void 0 : field.name),
-      defaultValue: formState !== null && formState !== void 0 && (_formState$result7 = formState.result) !== null && _formState$result7 !== void 0 && _formState$result7.result ? formState === null || formState === void 0 ? void 0 : (_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : _formState$result8.result[field.code] : (_ref3 = (_formState$changes$fi2 = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : user && user[field.code]) !== null && _ref3 !== void 0 ? _ref3 : '',
+      value: (_ref3 = (_formState$changes$fi2 = formState === null || formState === void 0 ? void 0 : formState.changes[field.code]) !== null && _formState$changes$fi2 !== void 0 ? _formState$changes$fi2 : user && user[field.code]) !== null && _ref3 !== void 0 ? _ref3 : '',
       onChange: handleChangeInput,
       ref: formMethods.register({
         required: isRequiredField(field.code) ? t("VALIDATION_ERROR_".concat(field.code.toUpperCase(), "_REQUIRED"), "".concat(field === null || field === void 0 ? void 0 : field.name, " is required")).replace('_attribute_', t(field === null || field === void 0 ? void 0 : field.name, field.code)) : null

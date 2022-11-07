@@ -67,6 +67,13 @@ var UserTypeSelector = function UserTypeSelector(props) {
       padding: true
     }, t('CALL_CENTER_AGENT', 'Call center agent')),
     disabled: !isPrimary && defaultUserType === 9
+  }, {
+    value: 8,
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('PROFESSIONAL', 'Professional')),
+    showOnSelected: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      padding: true
+    }, t('PROFESSIONAL', 'Professional')),
+    disabled: !isPrimary && defaultUserType === 8
   }];
 
   var placeholder = /*#__PURE__*/_react.default.createElement(_styles.Option, {

@@ -107,6 +107,14 @@ var PaymentOptionStripeDirect = function PaymentOptionStripeDirect(props) {
       confirm = _useState6[0],
       setConfirm = _useState6[1];
 
+  var _useState7 = (0, _react.useState)({
+    allowed_order_types: businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types,
+    sites: businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sites
+  }),
+      _useState8 = _slicedToArray(_useState7, 2),
+      localState = _useState8[0],
+      setLocalState = _useState8[1];
+
   var setPaymethodInfo = function setPaymethodInfo(values) {
     var _ref, _changesState$values$, _businessPaymethod$va;
 
@@ -173,6 +181,19 @@ var PaymentOptionStripeDirect = function PaymentOptionStripeDirect(props) {
 
     cleanChangesState(initState);
   }, []);
+  (0, _react.useEffect)(function () {
+    if (changesState !== null && changesState !== void 0 && changesState.allowed_order_types) {
+      setLocalState({
+        allowed_order_types: changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types
+      });
+    }
+
+    if (changesState !== null && changesState !== void 0 && changesState.sites) {
+      setLocalState({
+        sites: changesState === null || changesState === void 0 ? void 0 : changesState.sites
+      });
+    }
+  }, [changesState === null || changesState === void 0 ? void 0 : changesState.sites, changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "stripe_direct"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('STRIPE_DIRECT', 'Stripe direct')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
@@ -238,7 +259,7 @@ var PaymentOptionStripeDirect = function PaymentOptionStripeDirect(props) {
       return handleChangeInput(e, true);
     }
   })), paymentTabs === 1 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 && (sitesState === null || sitesState === void 0 ? void 0 : sitesState.sites.map(function (site) {
-    var _ref2, _changesState$sites, _businessPaymethod$si;
+    var _ref2, _localState$sites, _businessPaymethod$si;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
       key: site.id,
@@ -248,13 +269,13 @@ var PaymentOptionStripeDirect = function PaymentOptionStripeDirect(props) {
           value: site.id
         });
       }
-    }, (_ref2 = (_changesState$sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites) !== null && _changesState$sites !== void 0 ? _changesState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
+    }, (_ref2 = (_localState$sites = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites !== void 0 ? _localState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
       return s.id;
     })) !== null && _ref2 !== void 0 && _ref2.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.TabOptionName, null, site.name));
   })), paymentTabs === 2 && orderTypes.map(function (type) {
-    var _ref3, _changesState$allowed;
+    var _ref3, _localState$allowed_o;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
       key: type.value,
@@ -264,7 +285,7 @@ var PaymentOptionStripeDirect = function PaymentOptionStripeDirect(props) {
           value: type.value
         });
       }
-    }, (_ref3 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref3 !== void 0 && _ref3.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+    }, (_ref3 = (_localState$allowed_o = localState === null || localState === void 0 ? void 0 : localState.allowed_order_types) !== null && _localState$allowed_o !== void 0 ? _localState$allowed_o : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref3 !== void 0 && _ref3.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.TabOptionName, null, type.text));
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {

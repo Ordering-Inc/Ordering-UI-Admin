@@ -179,11 +179,11 @@ var BusinessWebhooksUI = function BusinessWebhooksUI(props) {
       });
     }
   }, [hookFormState === null || hookFormState === void 0 ? void 0 : hookFormState.result]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WebhooksContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('WEBHOOKS', 'WEbhooks')), (business === null || business === void 0 ? void 0 : (_business$webhooks = business.webhooks) === null || _business$webhooks === void 0 ? void 0 : _business$webhooks.length) > 0 && (business === null || business === void 0 ? void 0 : business.webhooks.map(function (webhook, i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WebhooksContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('WEBHOOKS', 'WEbhooks')), (business === null || business === void 0 ? void 0 : (_business$webhooks = business.webhooks) === null || _business$webhooks === void 0 ? void 0 : _business$webhooks.length) > 0 && (business === null || business === void 0 ? void 0 : business.webhooks.map(function (webhook) {
     var _webhook$delay;
 
     return /*#__PURE__*/_react.default.createElement(_styles2.WebhookAddContainer, {
-      key: i
+      key: webhook.id
     }, /*#__PURE__*/_react.default.createElement(_styles2.HookSelectWrapper, {
       inActive: true
     }, /*#__PURE__*/_react.default.createElement(_Select.Select, {

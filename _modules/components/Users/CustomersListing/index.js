@@ -76,7 +76,8 @@ var CustomersListingUI = function CustomersListingUI(props) {
       onUserRedirect = props.onUserRedirect,
       handleSuccessUpdate = props.handleSuccessUpdate,
       handleSuccessAddUser = props.handleSuccessAddUser,
-      handleSuccessDeleteUser = props.handleSuccessDeleteUser;
+      handleSuccessDeleteUser = props.handleSuccessDeleteUser,
+      setSelectedUsers = props.setSelectedUsers;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -186,7 +187,8 @@ var CustomersListingUI = function CustomersListingUI(props) {
     handleSelectedUsers: handleSelectedUsers,
     userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     handleOpenUserDetails: handleOpenUserDetails,
-    handleOpenUserAddForm: handleOpenUserAddForm
+    handleOpenUserAddForm: handleOpenUserAddForm,
+    setSelectedUsers: setSelectedUsers
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "customer_details",
     open: isOpenUserDetails,

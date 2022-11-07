@@ -64,7 +64,8 @@ var ProfessionalList = function ProfessionalList(props) {
       selectedUsers = props.selectedUsers,
       handleSelectedUsers = props.handleSelectedUsers,
       handleOpenUserDetails = props.handleOpenUserDetails,
-      handleOpenUserAddForm = props.handleOpenUserAddForm;
+      handleOpenUserAddForm = props.handleOpenUserAddForm,
+      setSelectedUsers = props.setSelectedUsers;
 
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
       _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -87,7 +88,12 @@ var ProfessionalList = function ProfessionalList(props) {
       openPopover = _useState4[0],
       setOpenPopover = _useState4[1];
 
-  var _useState5 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isAllChecked = _useState6[0],
+      setIsAllChecked = _useState6[1];
+
+  var _useState7 = (0, _react.useState)({
     user: true,
     city: true,
     phone: true,
@@ -95,9 +101,9 @@ var ProfessionalList = function ProfessionalList(props) {
     action: true // total: true
 
   }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      allowColumns = _useState6[0],
-      setAllowColumns = _useState6[1];
+      _useState8 = _slicedToArray(_useState7, 2),
+      allowColumns = _useState8[0],
+      setAllowColumns = _useState8[1];
 
   var optionsDefault = [{
     value: 'user',
@@ -157,6 +163,24 @@ var ProfessionalList = function ProfessionalList(props) {
     }
   };
 
+  var handleSelecteAllUser = function handleSelecteAllUser() {
+    var _usersList$users;
+
+    var userIds = (_usersList$users = usersList.users) === null || _usersList$users === void 0 ? void 0 : _usersList$users.reduce(function (ids, user) {
+      return [].concat(_toConsumableArray(ids), [user.id]);
+    }, []);
+
+    if (!isAllChecked) {
+      setSelectedUsers([].concat(_toConsumableArray(selectedUsers), _toConsumableArray(userIds)));
+    } else {
+      var userIdsToDeleteSet = new Set(userIds);
+      var updatedSelectedOrderIds = selectedUsers.filter(function (name) {
+        return !userIdsToDeleteSet.has(name);
+      });
+      setSelectedUsers(updatedSelectedOrderIds);
+    }
+  };
+
   (0, _react.useEffect)(function () {
     if (usersList.loading || usersList.users.length > 0 || paginationProps.totalPages <= 1) return;
 
@@ -166,7 +190,27 @@ var ProfessionalList = function ProfessionalList(props) {
       handleChangePage(paginationProps.currentPage - 1);
     }
   }, [usersList.users, paginationProps]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.user) && /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.phone) && /*#__PURE__*/_react.default.createElement("th", null, t('PHONE', 'Phone')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.email) && /*#__PURE__*/_react.default.createElement("th", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement("th", {
+  (0, _react.useEffect)(function () {
+    var _usersList$users2;
+
+    if (usersList.loading) return;
+    var userIds = (_usersList$users2 = usersList.users) === null || _usersList$users2 === void 0 ? void 0 : _usersList$users2.reduce(function (ids, user) {
+      return [].concat(_toConsumableArray(ids), [user.id]);
+    }, []);
+
+    var _isAllChecked = userIds.every(function (elem) {
+      return selectedUsers.includes(elem);
+    });
+
+    setIsAllChecked(_isAllChecked);
+  }, [usersList.users, selectedUsers]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.user) && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.AllCheckWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+    className: "user_checkbox",
+    isChecked: !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked,
+    onClick: function onClick() {
+      return handleSelecteAllUser();
+    }
+  }, !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), t('USER', 'User'))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.phone) && /*#__PURE__*/_react.default.createElement("th", null, t('PHONE', 'Phone')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.email) && /*#__PURE__*/_react.default.createElement("th", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement("th", {
     className: "allow-colums"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     open: openPopover,
