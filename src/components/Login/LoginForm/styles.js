@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const LoginContainer = styled.div`
   width: 100%;
@@ -82,13 +83,7 @@ export const LoginWith = styled.div`
   }
 
   @media (min-width: 992px) {
-    font-size: ${({ isPopup }) => isPopup ? '13px' : '18px'};
-  }
-
-  @media (min-width: 1200px) {
-    ${({ isPopup }) => isPopup && css`
-      font-size: 17px;
-    `};
+    font-size: 18px;
   }
 `
 
@@ -203,7 +198,7 @@ export const SocialButtons = styled.div`
 `
 
 export const TitleFormSide = styled.div`
-  color: #fff;
+  color: ${props => props.theme.colors.white};
   
   h1 {
     text-transform: uppercase;
@@ -306,4 +301,75 @@ export const ReCAPTCHAWrapper = styled.div`
   * {
     padding: 0;
   }
+`
+
+export const Tabs = styled.div`
+  display: flex;  
+`
+
+export const Tab = styled.div`
+  padding: 10px 0;
+  cursor: pointer;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 15px;
+  ` : css`
+    margin-right: 15px;
+  `}
+  ${({ active }) => active && css`
+    color: ${props => props.theme.colors.white};
+  `}
+
+  ${({ active }) => !active && css`
+    color: ${props => props.theme.colors.lightGray};
+  `}
+`
+
+export const CountdownTimer = styled.div`
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  
+  span {
+    font-size: 30px;
+    font-weight: 700;
+    color: ${props => props.theme.colors.white};
+  }
+`
+export const OtpWrapper = styled.div`
+  width: 100%;
+  .otp-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
+    
+    .otp-input{
+      width: 50px !important;
+      height: 45px;
+      border-radius: 8px;
+      background-color: ${props => props.theme.colors.backgroundPage};
+      outline: none;
+      border: none;
+      font-size: 20px;
+      font-weight: bold; 
+
+      &:focus{
+        border-color: ${() => darken(0.07, '#CCC')} !important;
+      }
+
+      &::placeholder,
+      &::-webkit-input-placeholder {
+        color: #DBDCDB;
+      }
+      &:-ms-input-placeholder {
+        color: #DBDCDB;
+      }
+    }
+  }
+`
+export const ResendCode = styled.span`
+  color: ${props => props.disabled ? props.theme.colors.disabled : props.theme.colors.primary};
+  font-size: 20px;
+  align-self: center;
+  margin-bottom: 10px;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 `
