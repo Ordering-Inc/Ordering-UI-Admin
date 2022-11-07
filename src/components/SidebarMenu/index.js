@@ -17,8 +17,7 @@ import {
   Award,
   BoxArrowUpRight,
   Cart3,
-  Cash,
-  CloudDownload
+  Cash
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig } from 'ordering-components-admin'
@@ -292,21 +291,6 @@ const SidebarMenuUI = (props) => {
       title: t('AD_BANNERS', 'Ad banners'),
       pageName: 'ad_banners',
       url: '/marketing/ad-banners'
-    }
-  ]
-
-  const downloadsSubMenus = [
-    {
-      id: 1,
-      title: t('FREE_PRODUCTS', 'Free products'),
-      pageName: 'free_products',
-      url: '/downloads/free-products'
-    },
-    {
-      id: 2,
-      title: t('PURCHASED_PRODUCTS', 'Purchased products'),
-      pageName: 'purchased_products',
-      url: '/downloads/purchased-products'
     }
   ]
 
@@ -708,35 +692,6 @@ const SidebarMenuUI = (props) => {
                     <HeadsetIcon />
                     <span>{t('SUPPORT', 'Support')}</span>
                   </Button>
-                )}
-                {sessionState?.user?.level === 0 && (
-                  <Accordion>
-                    <MenuContainer>
-                      <ContextAwareToggle
-                        eventKey='11'
-                        active={
-                          location.pathname === '/downloads/free-products' ||
-                          location.pathname === '/downloads/purchased-products'
-                        }
-                      >
-                        <CloudDownload />
-                        <span>{t('DOWNLOADS', 'Downloads')}</span>
-                      </ContextAwareToggle>
-                      <Accordion.Collapse eventKey='11'>
-                        <MenuContent>
-                          {downloadsSubMenus.map(item => (
-                            <SubMenu
-                              key={item.id}
-                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                              onClick={() => handleGoToPage({ page: item.pageName })}
-                            >
-                              {item.title}
-                            </SubMenu>
-                          ))}
-                        </MenuContent>
-                      </Accordion.Collapse>
-                    </MenuContainer>
-                  </Accordion>
                 )}
                 {sessionState?.user?.level === 0 && (
                   <Button
