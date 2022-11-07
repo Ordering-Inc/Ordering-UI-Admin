@@ -25,6 +25,7 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
 import { useInfoShare } from '../../contexts/InfoShareContext'
+import { firstLetterCapital } from '../../utils'
 import {
   SidebarContainer,
   SidebarInnerContainer,
@@ -399,7 +400,7 @@ const SidebarMenuUI = (props) => {
                                 active={location.pathname.includes(item.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
-                                {item.title}
+                                {firstLetterCapital(item.title)}
                               </SubMenu>
                             )
                           ))}
@@ -494,7 +495,7 @@ const SidebarMenuUI = (props) => {
                         }
                       >
                         <BarChartLineIcon />
-                        <span>{t('BUSINESS_INTELLIGENCE', 'Business Intelligence')}</span>
+                        <span>{firstLetterCapital(t('BUSINESS_INTELLIGENCE', 'Business Intelligence'))}</span>
                       </ContextAwareToggle>
                       <Accordion.Collapse eventKey='5'>
                         <MenuContent>
@@ -508,7 +509,7 @@ const SidebarMenuUI = (props) => {
                                 active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
-                                {item.title}
+                                {firstLetterCapital(item.title)}
                               </SubMenu>
                             ))
                           }
@@ -540,7 +541,7 @@ const SidebarMenuUI = (props) => {
                                 active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
-                                {item.title}
+                                {firstLetterCapital(item.title)}
                               </SubMenu>
                             )
                           ))}
@@ -569,7 +570,7 @@ const SidebarMenuUI = (props) => {
                               active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -598,7 +599,7 @@ const SidebarMenuUI = (props) => {
                               active={location.pathname.includes(item.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -626,7 +627,7 @@ const SidebarMenuUI = (props) => {
                               active={location.pathname.includes(item.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -665,7 +666,7 @@ const SidebarMenuUI = (props) => {
                               active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>

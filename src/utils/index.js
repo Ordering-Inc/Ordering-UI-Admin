@@ -387,3 +387,7 @@ export const orderRejectCommentList = (status) => {
 }
 
 export const widgetURL = 'https://orderingweb.ordering.co/'
+
+export const firstLetterCapital = (text) => {
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+}
