@@ -13,7 +13,9 @@ import {
   SessionsWrapper,
   DurationWrapper,
   SeessionDelete,
-  MoreInfoWrapper
+  MoreInfoWrapper,
+  ButtonsGroup,
+  ButtonGroupWrapper
 } from './styles'
 
 export const SessionsUI = (props) => {
@@ -107,6 +109,24 @@ export const SessionsUI = (props) => {
                       <ArrowRight />
                     </span>
                   </MoreInfoWrapper>
+                  <ButtonGroupWrapper>
+                    <ButtonsGroup>
+                      <Button
+                        color='primary'
+                        disabled={actionState.loading}
+                        onClick={() => onDeleteAllSessions(false, true)}
+                      >
+                        {t('DELETE_ALL_SESSIONS', 'Delete all sessions')}
+                      </Button>
+                      <Button
+                        color='primary'
+                        disabled={actionState.loading}
+                        onClick={() => onDeleteAllSessions(false, false)}
+                      >
+                        {t('DELETE_ALL_SESSIONS_EXCEPT_CURRENT', 'Delete all sessions except current')}
+                      </Button>
+                    </ButtonsGroup>
+                  </ButtonGroupWrapper>
                 </SessionsWrapper>
               ) : (
                 <NoMessage>
@@ -151,7 +171,7 @@ export const SessionsUI = (props) => {
       <Modal
         width='760px'
         height='80vh'
-        padding='30px'
+        padding='30px 24px'
         title={t('SESSIONS', 'Sessions')}
         open={isMoreInfo}
         onClose={() => setIsMoreInfo(false)}

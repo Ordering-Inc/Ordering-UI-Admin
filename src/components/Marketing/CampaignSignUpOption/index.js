@@ -109,7 +109,7 @@ const CampaignSignUpOptionUI = (props) => {
   const scrollDown = (e) => {
     if (!e.target.closest('.ordering-calendar-btn')) return
 
-    const el = document.querySelector('.popup-dialog')
+    const el = document.querySelector('.dialog-inner')
     if (el?.scrollHeight > el?.clientHeight) {
       const top = contentEndRef.current.offsetTop
       el.scrollTo({
