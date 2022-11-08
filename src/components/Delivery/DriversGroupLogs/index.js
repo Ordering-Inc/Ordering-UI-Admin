@@ -70,6 +70,8 @@ const DriversGroupLogsUI = (props) => {
     }
   }, [logsList.logs, paginationProps])
 
+  console.log(logsList)
+
   return (
     <>
       <DriversGroupLogsContainer>
@@ -128,7 +130,7 @@ const DriversGroupLogsUI = (props) => {
                       </td>
                       <td>
                         <DataListTable>
-                          {log?.data.map((item, i) => (
+                          {(typeof log?.data === 'object' ? Object.values(log?.data) : log?.data).map((item, i) => (
                             <tbody key={i}>
                               <tr>
                                 <td>{getAttributeName(item?.attribute)}</td>
