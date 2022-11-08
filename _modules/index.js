@@ -1911,6 +1911,12 @@ Object.defineProperty(exports, "ReportsUsers", {
     return _BusinessIntelligence.ReportsUsers;
   }
 });
+Object.defineProperty(exports, "ResetPassword", {
+  enumerable: true,
+  get: function get() {
+    return _Login.ResetPassword;
+  }
+});
 Object.defineProperty(exports, "ReviewCustomer", {
   enumerable: true,
   get: function get() {
