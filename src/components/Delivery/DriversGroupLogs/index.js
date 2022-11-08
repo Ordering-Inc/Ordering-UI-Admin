@@ -70,8 +70,6 @@ const DriversGroupLogsUI = (props) => {
     }
   }, [logsList.logs, paginationProps])
 
-  console.log(logsList)
-
   return (
     <>
       <DriversGroupLogsContainer>
