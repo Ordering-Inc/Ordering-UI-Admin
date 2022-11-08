@@ -48,6 +48,8 @@ import { Support } from './pages/Support'
 import { AdvancedReports } from './pages/AdvancedReports'
 import { EnterprisePromotionList } from './pages/EnterprisePromotionList'
 import { Appointments } from './pages/Appointments'
+// import { GiftCardsList } from './pages/GiftCardsList'
+import { ResetPassword } from './pages/ResetPassword'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -166,6 +168,27 @@ export const App = () => {
                           : <Redirect to='/home' />
                       }
                     </Route>
+
+                    <Route exact path='/password/reset'>
+                      {auth ? (
+                        <Redirect to='/' />
+                      ) : (
+                        <ResetPassword
+                          elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                        />
+                      )}
+                    </Route>
+
+                    <Route exact path='/reset_password'>
+                      {auth ? (
+                        <Redirect to='/' />
+                      ) : (
+                        <ResetPassword
+                          elementLinkToLogin={<Link to='/login'>{t('LOGIN', 'Login')}</Link>}
+                        />
+                      )}
+                    </Route>
+
                     <Route exact path='/home'>
                       {
                         auth
