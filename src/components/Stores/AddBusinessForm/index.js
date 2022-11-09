@@ -326,7 +326,7 @@ const AddBusinessFormUI = (props) => {
                     ? formState?.result?.result?.address
                     : formState?.changes?.address ?? ''
                 }
-                autoComplete='new-field'
+                autoComplete='new-password'
                 countryCode={configs?.country_autocomplete?.value || '*'}
               />
             </InputWrapper>
