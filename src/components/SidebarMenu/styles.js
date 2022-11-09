@@ -74,15 +74,23 @@ export const SidebarInnerContainer = styled.div`
 
 export const SidebarHeader = styled.div`
   display: flex;
+  flex-direction: column;
+  padding: 12px;
+`
+
+export const LogoWrapper = styled.div`
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
 
   > img {
     max-width: 150px;
     max-height: 100px;
     object-fit: contain;
   }
+`
+
+export const PoweredWrapper = styled.div`
 `
 
 export const BurgerButton = styled.button`
