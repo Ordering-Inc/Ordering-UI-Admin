@@ -4,10 +4,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ViewMethodButton = exports.ProductListContainer = exports.ProductHeader = exports.HeaderTitleContainer = exports.HeaderContainer = exports.ColumnsAllowWrapper = exports.CategoryProductsContent = exports.CategoryProductsContainer = exports.CategoryListContainer = exports.BusinessSelector = exports.BusinessNameWrapper = exports.Breadcrumb = exports.ActionsGroup = exports.ActionIconList = void 0;
+exports.ViewMethodButton = exports.ProductListContainer = exports.ProductHeader = exports.HeaderTitleContainer = exports.HeaderContainer = exports.ColumnsAllowWrapper = exports.CategoryProductsContent = exports.CategoryProductsContainer = exports.CategoryListContainer = exports.ButtonWrapper = exports.BusinessSelector = exports.BusinessNameWrapper = exports.Breadcrumb = exports.ActionsGroup = exports.ActionIconList = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -29,7 +29,7 @@ var ActionsGroup = _styledComponents.default.div(_templateObject4 || (_templateO
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "])));
 });
 exports.ActionsGroup = ActionsGroup;
-var CategoryProductsContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  margin-top: 50px;\n  min-height: calc(100% - 150px);\n\n  @media (max-width: 768px) {\n    flex-direction: column;\n  }\n"])));
+var CategoryProductsContent = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  min-height: calc(100% - 150px);\n\n  @media (max-width: 768px) {\n    flex-direction: column;\n  }\n"])));
 exports.CategoryProductsContent = CategoryProductsContent;
 var CategoryListContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  min-width: 260px;\n\n  @media (max-width: 576px) {\n    width:100%;\n  }\n"])));
 exports.CategoryListContainer = CategoryListContainer;
@@ -71,3 +71,5 @@ var Breadcrumb = _styledComponents.default.div(_templateObject20 || (_templateOb
 exports.Breadcrumb = Breadcrumb;
 var ColumnsAllowWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: relative;\n  margin: 0 5px;\n"])));
 exports.ColumnsAllowWrapper = ColumnsAllowWrapper;
+var ButtonWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  margin-top: 12px;\n  button {\n    height: 42px;\n  }\n"])));
+exports.ButtonWrapper = ButtonWrapper;

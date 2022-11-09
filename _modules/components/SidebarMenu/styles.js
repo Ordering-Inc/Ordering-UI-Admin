@@ -58,7 +58,9 @@ var UserInfo = _styledComponents.default.div(_templateObject13 || (_templateObje
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n        margin-right: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n      "])));
 });
 exports.UserInfo = UserInfo;
-var MenuContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n\n  ", "\n"])), function (_ref3) {
+var MenuContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n\n  > span {\n    font-weight: 500;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 20px;\n    color: ", ";\n  }\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.lightGray;
+}, function (_ref3) {
   var disabledFeature = _ref3.disabledFeature;
   return disabledFeature && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    cursor: not-allowed;\n    > button {\n      pointer-events: none;\n    }\n  "])), function (props) {
     return props.theme.colors.disabled;

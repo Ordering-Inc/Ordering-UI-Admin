@@ -132,6 +132,7 @@ var LoginFormUI = function LoginFormUI(props) {
   };
   var handleSendOtp = function handleSendOtp() {
     if (willVerifyOtpState) {
+      setOtpState('');
       resetOtpLeftTime();
       if (loginTab === 'otp') {
         generateOtpCode();
@@ -183,14 +184,11 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, [errors]);
   var closeAlert = function closeAlert() {
-    var _checkPhoneCodeState$;
     setAlertState({
       open: false,
       content: []
     });
-    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) {
-      setOtpState('');
-    }
+    setOtpState('');
   };
   (0, _react.useEffect)(function () {
     if ((otpState === null || otpState === void 0 ? void 0 : otpState.length) === numOtpInputs) {
@@ -200,14 +198,14 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, [otpState]);
   (0, _react.useEffect)(function () {
-    var _checkPhoneCodeState$2, _checkPhoneCodeState$4;
-    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$2 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$2 !== void 0 && _checkPhoneCodeState$2.error) {
-      var _checkPhoneCodeState$3;
+    var _checkPhoneCodeState$, _checkPhoneCodeState$3;
+    if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$ = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$ !== void 0 && _checkPhoneCodeState$.error) {
+      var _checkPhoneCodeState$2;
       setAlertState({
         open: true,
-        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$3 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$3 === void 0 ? void 0 : _checkPhoneCodeState$3.result) || [t('ERROR', 'Error')]
+        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
       });
-    } else if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$4 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$4 !== void 0 && _checkPhoneCodeState$4.result) {
+    } else if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$3 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$3 !== void 0 && _checkPhoneCodeState$3.result) {
       setAlertState({
         open: true,
         content: t('CODE_SENT', 'The code has been sent')
@@ -215,6 +213,14 @@ var LoginFormUI = function LoginFormUI(props) {
       resetOtpLeftTime();
     }
   }, [checkPhoneCodeState]);
+  (0, _react.useEffect)(function () {
+    if (otpLeftTime === 0) {
+      setAlertState({
+        open: true,
+        content: t('TIME_IS_UP_PLEASE_RESEND_CODE', 'Time is up. Please resend code again')
+      });
+    }
+  }, [otpLeftTime]);
   (0, _react.useEffect)(function () {
     var _configs$security_rec2;
     if (configs && Object.keys(configs).length > 0 && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_auth) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value) === '1') {
@@ -345,7 +351,8 @@ var LoginFormUI = function LoginFormUI(props) {
     inputStyle: "otp-input",
     placeholder: otpPlaceholder,
     isInputNum: true,
-    shouldAutoFocus: true
+    shouldAutoFocus: true,
+    isDisabled: otpLeftTime === 0
   })), /*#__PURE__*/_react.default.createElement(_styles2.ResendCode, {
     disabled: otpLeftTime > 520,
     onClick: handleSendOtp
