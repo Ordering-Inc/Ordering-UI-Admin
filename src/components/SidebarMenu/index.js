@@ -22,7 +22,7 @@ import {
   BagCheck
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig } from 'ordering-components-admin'
+import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi, useSite } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
@@ -50,6 +50,8 @@ const SidebarMenuUI = (props) => {
   const [, t] = useLanguage()
   const [sessionState] = useSession()
   const [{ configs }] = useConfig()
+  const [ordering] = useApi()
+  const [siteList] = useSite()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
 
@@ -349,6 +351,11 @@ const SidebarMenuUI = (props) => {
     window.open(link, '_blank')
   }
 
+  const handleOpenSite = () => {
+    if (siteList.length && siteList[0]?.url) handleGoToLink(siteList[0]?.url)
+    else handleGoToLink(`https://${ordering.project}.tryordering.com`)
+  }
+
   useEffect(() => {
     if (windowSize.width < 1024) {
       handleMenuCollapse(true)
@@ -390,6 +397,16 @@ const SidebarMenuUI = (props) => {
           <SidebarMainContent>
             <SidebarContent className='d-flex flex-column justify-content-between p-1 pt-0'>
               <div className='d-flex flex-column'>
+                {sessionState?.user?.level === 0 && (
+                  <Button
+                    className='d-flex align-items-center'
+                    variant={false}
+                    onClick={handleOpenSite}
+                  >
+                    <BoxArrowUpRight />
+                    <span>{t('MY_WEBSITE', 'My Website')}</span>
+                  </Button>
+                )}
                 <Accordion>
                   {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8 && (
                     <MenuContainer>

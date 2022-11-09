@@ -243,3 +243,10 @@ export const BusinessPreviewHeader = styled.div`
     }
   }
 `
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  > button:first-child {
+    margin-right: 15px;
+  }
+`

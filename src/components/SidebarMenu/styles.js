@@ -168,6 +168,14 @@ export const MenuContainer = styled.div`
     text-align: initial;
   }
 
+  > span {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 15px;
+    padding: 20px;
+    color: ${props => props.theme.colors.lightGray};
+  }
+
   ${({ disabledFeature }) => disabledFeature && css`
     background-color: ${props => props.theme.colors.disabled};
     cursor: not-allowed;
