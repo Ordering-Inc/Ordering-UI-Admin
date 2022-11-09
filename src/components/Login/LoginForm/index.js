@@ -103,6 +103,7 @@ const LoginFormUI = (props) => {
 
   const handleSendOtp = () => {
     if (willVerifyOtpState) {
+      setOtpState('')
       resetOtpLeftTime()
       if (loginTab === 'otp') {
         generateOtpCode()
@@ -154,9 +155,7 @@ const LoginFormUI = (props) => {
       open: false,
       content: []
     })
-    if (checkPhoneCodeState?.result?.error) {
-      setOtpState('')
-    }
+    setOtpState('')
   }
 
   useEffect(() => {
@@ -181,6 +180,15 @@ const LoginFormUI = (props) => {
       resetOtpLeftTime()
     }
   }, [checkPhoneCodeState])
+
+  useEffect(() => {
+    if (otpLeftTime === 0) {
+      setAlertState({
+        open: true,
+        content: t('TIME_IS_UP_PLEASE_RESEND_CODE', 'Time is up. Please resend code again')
+      })
+    }
+  }, [otpLeftTime])
 
   useEffect(() => {
     if (configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_auth?.value === '1') {
@@ -380,6 +388,7 @@ const LoginFormUI = (props) => {
                   placeholder={otpPlaceholder}
                   isInputNum
                   shouldAutoFocus
+                  isDisabled={otpLeftTime === 0}
                 />
               </OtpWrapper>
               <ResendCode disabled={otpLeftTime > 520} onClick={handleSendOtp}>

@@ -216,7 +216,7 @@ export const OrderContactInformation = (props) => {
             <DriverSelector
               small
               isPhoneView
-              defaultValue={order?.driver?.id ? order.driver.id : 'default'}
+              defaultValue={order?.driver_id ? order.driver_id : 'default'}
               order={order}
               isTourOpen={isTourOpen}
               setCurrentTourStep={setCurrentTourStep}

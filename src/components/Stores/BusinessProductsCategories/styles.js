@@ -28,7 +28,7 @@ export const ListContent = styled.div`
   }
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 230px);
+    max-height: calc(100vh - 240px);
   }
 `
 
