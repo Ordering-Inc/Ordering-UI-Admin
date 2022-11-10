@@ -428,7 +428,7 @@ const AddressFormUI = (props) => {
                         setAddressValue(e.target.value)
                       }}
                       value={addressValue}
-                      autoComplete='new-field'
+                      autoComplete='new-password'
                       countryCode={configState?.configs?.country_autocomplete?.value || '*'}
                     />
                   </WrapAddressInput>
