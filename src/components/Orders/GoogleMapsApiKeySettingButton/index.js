@@ -48,7 +48,7 @@ const GoogleMapsApiKeySettingUI = (props) => {
       >
         <ModalBody onSubmit={handleSubmit(onSubmit)}>
           <h2>{t('GOOGLE_MAPS_API', 'Google Maps API Key')}</h2>
-          <p>{t('', 'Lorem ipsum dolor sit amet consectetur. Risus sit ullamcorper et cras ullamcorper dolor lorem tellus aliquam. Pretium velit sociis tellus mauris cursus volutpat sit aliquam a.')}</p>
+          <p>{t('GOOGLE_MAPS_API_SETUP_DESCRIPTION', 'Set up the google map API of your platform.')}</p>
           <Input
             placeholder={t('ADD_API_KEY', 'Add API Key')}
             name='api_key'
