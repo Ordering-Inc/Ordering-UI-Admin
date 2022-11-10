@@ -40,10 +40,10 @@ const EnterprisePromotionDetailsUI = (props) => {
     handleDeletePromotion,
     selectedUserIds,
     handleSelectUser,
-
     selectedLoyaltyLevelIds,
     handleSelectLoyaltyLevel,
-    handleSelectAllLoyaltyLevels
+    handleSelectAllLoyaltyLevels,
+    handleSelectAllUsers
   } = props
 
   const theme = useTheme()
@@ -206,6 +206,7 @@ const EnterprisePromotionDetailsUI = (props) => {
             handleSelectUser={handleSelectUser}
             handleUpdateClick={handleUpdateClick}
             handleAddPromotion={handleAddPromotion}
+            handleSelectAllUsers={handleSelectAllUsers}
           />
         )}
         {selectedOption === 'loyalty_levels' && (
