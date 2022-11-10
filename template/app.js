@@ -50,6 +50,10 @@ import { EnterprisePromotionList } from './pages/EnterprisePromotionList'
 import { Appointments } from './pages/Appointments'
 import { GiftCardsList } from './pages/GiftCardsList'
 import { ResetPassword } from './pages/ResetPassword'
+import { OrderingWebsite } from './pages/OrderingWebsite'
+import { CustomerApp } from './pages/CustomerApp'
+import { StoreApp } from './pages/StoreApp'
+import { DriverApp } from './pages/DriverApp'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -290,6 +294,22 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/cart-recovery/recovery-actions' allowedLevels={[0]}>
                       <RecoveryActionListing />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/my-products/ordering-website' allowedLevels={[0]}>
+                      <OrderingWebsite />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/my-products/customer-app' allowedLevels={[0]}>
+                      <CustomerApp />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/my-products/store-app' allowedLevels={[0]}>
+                      <StoreApp />
+                    </ProtectedRoute>
+
+                    <ProtectedRoute path='/my-products/driver-app' allowedLevels={[0]}>
+                      <DriverApp />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/settings/basic' allowedLevels={[0]}>
