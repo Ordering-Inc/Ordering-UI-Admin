@@ -107,7 +107,7 @@ export const Reports = (props) => {
             <MenuIcon />
           </IconButton>
         )}
-        <h1>{t('ADVANCED_REPORTS', 'Advanced Reports')}</h1>
+        <h1>{t('ENTERPRISE_REPORTS', 'Enterprise reports')}</h1>
       </HeaderTitleContainer>
       <ReportsList className='row'>
         {advancedReportsList && advancedReportsList.map((report, i) => (

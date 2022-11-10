@@ -75,7 +75,7 @@ const DriversCompaniesListingUI = (props) => {
               <MenuIcon />
             </IconButton>
           )}
-          <h1>{t('DRIVERS_COMPANIES', 'Drivers companies')}</h1>
+          <h1>{t('DELIVERY_COMPANIES', 'Delivery companies')}</h1>
         </HeaderLeftContainer>
         <HeaderRightContainer>
           <Button

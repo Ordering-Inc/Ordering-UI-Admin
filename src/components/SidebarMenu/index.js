@@ -17,8 +17,7 @@ import {
   Award,
   BoxArrowUpRight,
   Cart3,
-  Cash,
-  CloudDownload
+  Cash
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi, useSite } from 'ordering-components-admin'
@@ -26,6 +25,7 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
 import { useInfoShare } from '../../contexts/InfoShareContext'
+import { firstLetterCapital } from '../../utils'
 import {
   SidebarContainer,
   SidebarInnerContainer,
@@ -57,7 +57,7 @@ const SidebarMenuUI = (props) => {
   const ordersSubMenus = [
     {
       id: 1,
-      title: t('ORDERS_MANAGER', 'Orders manager'),
+      title: t('ORDERS_LIST', 'Orders list'),
       pageName: 'orders',
       url: '/orders'
     },
@@ -90,7 +90,7 @@ const SidebarMenuUI = (props) => {
   const loyaltySubMenus = [
     {
       id: 1,
-      title: t('REWARDS_PROGRAMS', 'Rewards programs'),
+      title: t('LOYALTY_AUTOMATION', 'Loyalty automation'),
       pageName: 'rewards_programs',
       url: '/loyalty/rewards-programs'
     }
@@ -117,9 +117,36 @@ const SidebarMenuUI = (props) => {
     },
     {
       id: 2,
-      title: t('RECOVERY_ACTIONS', 'Recovery actions'),
+      title: t('CART_RECOVERY_AUTOMATION', 'Cart recovery automation'),
       pageName: 'recovery_actions',
       url: '/cart-recovery/recovery-actions'
+    }
+  ]
+
+  const myProductMenus = [
+    {
+      id: 1,
+      title: t('ORDERING_WEBSITE', 'Ordering website'),
+      pageName: 'ordering_website',
+      url: '/my-products/ordering-website'
+    },
+    {
+      id: 2,
+      title: t('CUSTOMER_APP', 'Customer app'),
+      pageName: 'customer_app',
+      url: '/my-products/customer-app'
+    },
+    {
+      id: 3,
+      title: t('STORE_APP', 'Store app'),
+      pageName: 'store_app',
+      url: '/my-products/store-app'
+    },
+    {
+      id: 4,
+      title: t('DRIVER_APP', 'Driver app'),
+      pageName: 'driver_app',
+      url: '/my-products/driver-app'
     }
   ]
 
@@ -237,7 +264,7 @@ const SidebarMenuUI = (props) => {
     },
     {
       id: 5,
-      title: t('ADVANCED_REPORTS', 'Advanced Reports'),
+      title: t('ENTERPRISE_REPORTS', 'Enterprise reports'),
       pageName: 'reports',
       url: '/intelligence/reports'
     }
@@ -262,14 +289,14 @@ const SidebarMenuUI = (props) => {
     },
     {
       id: 3,
-      title: t('DRIVERS_COMPANIES', 'Drivers companies'),
+      title: t('DELIVERY_COMPANIES', 'Delivery companies'),
       pageName: 'drivers_companies',
       url: '/delivery/drivers-companies',
       enabled: sessionState?.user?.level === 0
     },
     {
       id: 4,
-      title: t('DRIVERS_GROUPS', 'Drivers groups'),
+      title: t('DELIVERY_AUTOMATION', 'Delivery automation'),
       pageName: 'drivers_groups',
       url: '/delivery/drivers-groups',
       enabled: sessionState?.user?.level === 5 || sessionState?.user?.level === 0
@@ -279,7 +306,7 @@ const SidebarMenuUI = (props) => {
   const marketingSubmenus = [
     {
       id: 1,
-      title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
+      title: t('PROMOTION_AUTOMATION', 'Promotions automation'),
       pageName: 'enterprise_promotions',
       url: '/marketing/promotions-enterprise'
     },
@@ -294,21 +321,6 @@ const SidebarMenuUI = (props) => {
       title: t('AD_BANNERS', 'Ad banners'),
       pageName: 'ad_banners',
       url: '/marketing/ad-banners'
-    }
-  ]
-
-  const downloadsSubMenus = [
-    {
-      id: 1,
-      title: t('FREE_PRODUCTS', 'Free products'),
-      pageName: 'free_products',
-      url: '/downloads/free-products'
-    },
-    {
-      id: 2,
-      title: t('PURCHASED_PRODUCTS', 'Purchased products'),
-      pageName: 'purchased_products',
-      url: '/downloads/purchased-products'
     }
   ]
 
@@ -380,6 +392,17 @@ const SidebarMenuUI = (props) => {
                   </Button>
                 )}
                 <Accordion>
+                  {/* {sessionState?.user?.level === 0 && (
+                    <Button
+                      className='d-flex align-items-center'
+                      variant={false}
+                      onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
+                    >
+                      <BoxArrowUpRight />
+                      <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                    </Button>
+                  )} */}
+
                   {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8 && (
                     <MenuContainer>
                       <ContextAwareToggle
@@ -421,7 +444,7 @@ const SidebarMenuUI = (props) => {
                                 active={location.pathname.includes(item.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
-                                {item.title}
+                                {firstLetterCapital(item.title)}
                               </SubMenu>
                             )
                           ))}
@@ -516,7 +539,7 @@ const SidebarMenuUI = (props) => {
                         }
                       >
                         <BarChartLineIcon />
-                        <span>{t('BUSINESS_INTELLIGENCE', 'Business Intelligence')}</span>
+                        <span>{firstLetterCapital(t('BUSINESS_INTELLIGENCE', 'Business Intelligence'))}</span>
                       </ContextAwareToggle>
                       <Accordion.Collapse eventKey='5'>
                         <MenuContent>
@@ -530,7 +553,7 @@ const SidebarMenuUI = (props) => {
                                 active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
-                                {item.title}
+                                {firstLetterCapital(item.title)}
                               </SubMenu>
                             ))
                           }
@@ -562,7 +585,7 @@ const SidebarMenuUI = (props) => {
                                 active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
-                                {item.title}
+                                {firstLetterCapital(item.title)}
                               </SubMenu>
                             )
                           ))}
@@ -591,7 +614,7 @@ const SidebarMenuUI = (props) => {
                               active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -620,7 +643,7 @@ const SidebarMenuUI = (props) => {
                               active={location.pathname.includes(item.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -643,6 +666,36 @@ const SidebarMenuUI = (props) => {
                       <Accordion.Collapse eventKey='10'>
                         <MenuContent>
                           {cartRecoveryMenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {firstLetterCapital(item.title)}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  )}
+                  {sessionState?.user?.level === 0 && (
+                    <MenuContainer>
+                      <span>{t('SALES_CHANNELS_AND_PRODUCTS', 'Sales channels and products')}</span>
+                      <ContextAwareToggle
+                        eventKey='12'
+                        active={
+                          location.pathname === '/my-products/ordering-website' ||
+                          location.pathname === '/my-products/customer-app' ||
+                          location.pathname === '/my-products/store-app' ||
+                          location.pathname === '/my-products/driver-app'
+                        }
+                      >
+                        <BagCheck />
+                        <span>{t('MY_PRODUCTS', 'My products')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='12'>
+                        <MenuContent>
+                          {myProductMenus.map(item => (
                             <SubMenu
                               key={item.id}
                               active={location.pathname.includes(item.url)}
@@ -687,7 +740,7 @@ const SidebarMenuUI = (props) => {
                               active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -714,45 +767,6 @@ const SidebarMenuUI = (props) => {
                     <HeadsetIcon />
                     <span>{t('SUPPORT', 'Support')}</span>
                   </Button>
-                )}
-                {sessionState?.user?.level === 0 && (
-                  <Button
-                    className='d-flex align-items-center'
-                    variant={false}
-                    onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
-                  >
-                    <BoxArrowUpRight />
-                    <span>{t('MARKETPLACE', 'Marketplace')}</span>
-                  </Button>
-                )}
-                {sessionState?.user?.level === 0 && (
-                  <Accordion>
-                    <MenuContainer>
-                      <ContextAwareToggle
-                        eventKey='11'
-                        active={
-                          location.pathname === '/downloads/free-products' ||
-                          location.pathname === '/downloads/purchased-products'
-                        }
-                      >
-                        <CloudDownload />
-                        <span>{t('DOWNLOADS', 'Downloads')}</span>
-                      </ContextAwareToggle>
-                      <Accordion.Collapse eventKey='11'>
-                        <MenuContent>
-                          {downloadsSubMenus.map(item => (
-                            <SubMenu
-                              key={item.id}
-                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                              onClick={() => handleGoToPage({ page: item.pageName })}
-                            >
-                              {item.title}
-                            </SubMenu>
-                          ))}
-                        </MenuContent>
-                      </Accordion.Collapse>
-                    </MenuContainer>
-                  </Accordion>
                 )}
                 {sessionState?.user?.level === 0 && (
                   <Button
