@@ -18,7 +18,8 @@ import {
   BoxArrowUpRight,
   Cart3,
   Cash,
-  CloudDownload
+  CloudDownload,
+  BagCheck
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi, useSite } from 'ordering-components-admin'
@@ -120,6 +121,33 @@ const SidebarMenuUI = (props) => {
       title: t('RECOVERY_ACTIONS', 'Recovery actions'),
       pageName: 'recovery_actions',
       url: '/cart-recovery/recovery-actions'
+    }
+  ]
+
+  const myProductMenus = [
+    {
+      id: 1,
+      title: t('ORDERING_WEBSITE', 'Ordering website'),
+      pageName: 'ordering_website',
+      url: '/my-products/ordering-website'
+    },
+    {
+      id: 2,
+      title: t('CUSTOMER_APP', 'Customer app'),
+      pageName: 'customer_app',
+      url: '/my-products/customer-app'
+    },
+    {
+      id: 3,
+      title: t('STORE_APP', 'Store app'),
+      pageName: 'store_app',
+      url: '/my-products/store-app'
+    },
+    {
+      id: 4,
+      title: t('DRIVER_APP', 'Driver app'),
+      pageName: 'driver_app',
+      url: '/my-products/driver-app'
     }
   ]
 
@@ -643,6 +671,36 @@ const SidebarMenuUI = (props) => {
                       <Accordion.Collapse eventKey='10'>
                         <MenuContent>
                           {cartRecoveryMenus.map(item => (
+                            <SubMenu
+                              key={item.id}
+                              active={location.pathname.includes(item.url)}
+                              onClick={() => handleGoToPage({ page: item.pageName })}
+                            >
+                              {item.title}
+                            </SubMenu>
+                          ))}
+                        </MenuContent>
+                      </Accordion.Collapse>
+                    </MenuContainer>
+                  )}
+                  {sessionState?.user?.level === 0 && (
+                    <MenuContainer>
+                      <span>{t('SALES_CHANNELS_AND_PRODUCTS', 'Sales channels and products')}</span>
+                      <ContextAwareToggle
+                        eventKey='12'
+                        active={
+                          location.pathname === '/my-products/ordering-website' ||
+                          location.pathname === '/my-products/customer-app' ||
+                          location.pathname === '/my-products/store-app' ||
+                          location.pathname === '/my-products/driver-app'
+                        }
+                      >
+                        <BagCheck />
+                        <span>{t('MY_PRODUCTS', 'My products')}</span>
+                      </ContextAwareToggle>
+                      <Accordion.Collapse eventKey='12'>
+                        <MenuContent>
+                          {myProductMenus.map(item => (
                             <SubMenu
                               key={item.id}
                               active={location.pathname.includes(item.url)}

@@ -237,6 +237,34 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "ordering_website": {
+    "title": "Ordering Website",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "customer_app": {
+    "title": "Customer App",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "store_app": {
+    "title": "Store App",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "driver_app": {
+    "title": "Driver App",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "support": {
     "title": "Support",
     "description": "a dummy description about this page",
