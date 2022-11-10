@@ -17,7 +17,8 @@ import {
   Award,
   BoxArrowUpRight,
   Cart3,
-  Cash
+  Cash,
+  BagCheck
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi, useSite } from 'ordering-components-admin'
