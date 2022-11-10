@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -554,3 +554,27 @@ var orderRejectCommentList = function orderRejectCommentList(status) {
 exports.orderRejectCommentList = orderRejectCommentList;
 var widgetURL = 'https://orderingweb.ordering.co/';
 exports.widgetURL = widgetURL;
+var firstLetterCapital = function firstLetterCapital(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+};
+exports.firstLetterCapital = firstLetterCapital;
+var stringToSlug = function stringToSlug(str) {
+  var _str;
+  str = str.replace(/^\s+|\s+$/g, ''); // trim
+  str = (_str = str) === null || _str === void 0 ? void 0 : _str.toLowerCase();
+
+  // remove accents, swap ñ for n, etc
+  var from = 'åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;';
+  var to = 'aaaaaaeeeeiiiioooouuuunc------';
+  for (var i = 0, l = from.length; i < l; i++) {
+    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  }
+  str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+  .replace(/\s+/g, '_') // collapse whitespace and replace by -
+  .replace(/-+/g, '_') // collapse dashes
+  .replace(/^-+/, '') // trim - from start of text
+  .replace(/-+$/, ''); // trim - from end of text
+
+  return str;
+};
+exports.stringToSlug = stringToSlug;

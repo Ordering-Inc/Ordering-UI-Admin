@@ -175,7 +175,7 @@ var Reports = function Reports(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('ADVANCED_REPORTS', 'Advanced Reports'))), /*#__PURE__*/_react.default.createElement(_styles2.ReportsList, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('ENTERPRISE_REPORTS', 'Enterprise reports'))), /*#__PURE__*/_react.default.createElement(_styles2.ReportsList, {
     className: "row"
   }, advancedReportsList && advancedReportsList.map(function (report, i) {
     return /*#__PURE__*/_react.default.createElement("div", {

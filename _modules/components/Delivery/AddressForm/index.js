@@ -472,7 +472,7 @@ var AddressFormUI = function AddressFormUI(props) {
         setAddressValue(e.target.value);
       },
       value: addressValue,
-      autoComplete: "new-field",
+      autoComplete: "new-password",
       countryCode: (configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.country_autocomplete) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value) || '*'
     })), /*#__PURE__*/_react.default.createElement(_GoogleGpsButton.GoogleGpsButton, {
       className: "gps-button",

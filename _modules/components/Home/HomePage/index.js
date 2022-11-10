@@ -61,7 +61,7 @@ var HomeUI = function HomeUI(props) {
       window.open('https://www.ordering.co/ordering-sales', '_blank');
     }
     if (location === 'tech') {
-      window.open('https://www.ordering.co/ordering-support', '_blank');
+      window.open('https://support.ordering.co', '_blank');
     }
     if (location === 'canny') {
       window.open('https://feedback.ordering.co', '_blank');

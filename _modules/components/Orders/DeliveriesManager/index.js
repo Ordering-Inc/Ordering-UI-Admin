@@ -25,6 +25,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
+  var _configState$configs, _configState$configs$;
   var searchValue = props.searchValue,
     driverGroupList = props.driverGroupList,
     driversList = props.driversList,
@@ -70,6 +71,10 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     slaSettingTime = _useState12[0],
     setSlaSettingTime = _useState12[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configState = _useConfig2[0];
+  var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     onOrderRedirect();
@@ -91,6 +96,7 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveriesContainer, null, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
     isDisableControl: true,
     title: t('DELIVERY_DASHBOARD', 'Delivery dashboard'),
+    isShowMapsKeySettingButton: !googleMapsApiKey,
     searchValue: searchValue,
     driverGroupList: driverGroupList,
     driversList: driversList,
