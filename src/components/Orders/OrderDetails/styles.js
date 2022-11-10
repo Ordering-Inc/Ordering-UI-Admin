@@ -58,6 +58,7 @@ export const OrderDetailsContent = styled.div`
 `
 
 export const OrderDetailsExtraContent = styled.div`
+  max-width: 500px;
   position: relative;
   padding: 30px 20px;
   box-sizing: border-box;

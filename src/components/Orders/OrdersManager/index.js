@@ -252,6 +252,7 @@ const OrdersManagerUI = (props) => {
           isTourFlag={isTourFlag}
           setIsTourFlag={setIsTourFlag}
           setIsTourOpen={setIsTourOpen}
+          drivers={driversList.drivers}
         />
       )}
 

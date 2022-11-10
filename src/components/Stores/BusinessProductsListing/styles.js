@@ -104,7 +104,6 @@ export const ActionsGroup = styled.div`
 export const CategoryProductsContent = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 50px;
   min-height: calc(100% - 150px);
 
   @media (max-width: 768px) {
@@ -226,4 +225,13 @@ export const Breadcrumb = styled.div`
 export const ColumnsAllowWrapper = styled.div`
   position: relative;
   margin: 0 5px;
+`
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+  button {
+    height: 42px;
+  }
 `
