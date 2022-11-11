@@ -30,7 +30,7 @@ export const BusinessSync = (props) => {
   return (
     <Container>
       <Header>
-        <h2>{t('SYNC_WITH_DELIVERECT', 'Sync with deliverect')}</h2>
+        <h2>{t('SYNC_WITH', 'Sync with')}</h2>
       </Header>
       <Tabs>
         {syncOptions.map(option => (
