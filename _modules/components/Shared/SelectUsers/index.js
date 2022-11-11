@@ -1,10 +1,11 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SelectUsers = void 0;
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Pagination = require("../Pagination");
@@ -12,6 +13,8 @@ var _SearchBar = require("../SearchBar");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -36,16 +39,32 @@ var SelectUsersUI = function SelectUsersUI(props) {
     selectedUserIds = props.selectedUserIds,
     handleSelectUser = props.handleSelectUser,
     handleAddPromotion = props.handleAddPromotion,
-    handleUpdateClick = props.handleUpdateClick;
+    handleUpdateClick = props.handleUpdateClick,
+    handleSelectAllUsers = props.handleSelectAllUsers;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useState = (0, _react.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    all = _useState2[0],
+    setAll = _useState2[1];
   var handleChangePage = function handleChangePage(page) {
     getUsers(page, 10);
   };
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(paginationProps.from / pageSize);
     getUsers(expectedPage, pageSize);
+  };
+  (0, _react.useEffect)(function () {
+    setAll(!!!(selectedUserIds !== null && selectedUserIds !== void 0 && selectedUserIds.length));
+  }, [selectedUserIds]);
+  var handleAllCheck = function handleAllCheck(check) {
+    if (!check) {
+      handleSelectAllUsers();
+      setAll(true);
+    } else {
+      setAll(false);
+    }
   };
   return /*#__PURE__*/_react.default.createElement(_styles2.UsersContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_SearchBar.SearchBar, {
     isCustomLayout: true,
@@ -63,7 +82,14 @@ var SelectUsersUI = function SelectUsersUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     })));
-  }) : usersList.users.map(function (user) {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UserItem, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    checked: all,
+    onChange: function onChange() {
+      return handleAllCheck(all);
+    }
+  }), /*#__PURE__*/_react.default.createElement("span", {
+    className: "name"
+  }, t('ALL', 'All'))), (!all || !!(searchValue !== null && searchValue !== void 0 && searchValue.length)) && usersList.users.map(function (user) {
     return /*#__PURE__*/_react.default.createElement(_styles2.UserItem, {
       key: user.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
@@ -74,7 +100,7 @@ var SelectUsersUI = function SelectUsersUI(props) {
     }), /*#__PURE__*/_react.default.createElement("span", {
       className: "name"
     }, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname));
-  }), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+  })), (!all || !!(searchValue !== null && searchValue !== void 0 && searchValue.length)) && (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
     currentPage: paginationProps.currentPage,
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,

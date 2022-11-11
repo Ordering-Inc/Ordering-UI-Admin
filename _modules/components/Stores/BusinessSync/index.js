@@ -8,6 +8,7 @@ exports.BusinessSync = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _BusinessSyncBasic = require("../BusinessSyncBasic");
+var _BusinessSyncItsaCheckmate = require("../BusinessSyncItsaCheckmate");
 var _BusinessSyncStore = require("../BusinessSyncStore");
 var _styles = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -30,12 +31,15 @@ var BusinessSync = function BusinessSync(props) {
   var syncOptions = [{
     key: 'deliverect',
     name: t('DELIVERECT', 'Deliverect')
+  }, {
+    key: 'itsacheckmate',
+    name: t('ITSACHECKMATE', 'ItsaCheckmate')
   }];
   var handleChangeOption = function handleChangeOption(key) {
     handleParentSidebarMove(0);
     setSelectedOption(key);
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SYNC_WITH_DELIVERECT', 'Sync with deliverect'))), /*#__PURE__*/_react.default.createElement(_styles.Tabs, null, syncOptions.map(function (option) {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SYNC_WITH', 'Sync with'))), /*#__PURE__*/_react.default.createElement(_styles.Tabs, null, syncOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: option.key,
       active: selectedOption === option.key,
@@ -43,7 +47,7 @@ var BusinessSync = function BusinessSync(props) {
         return handleChangeOption(option.key);
       }
     }, option.name);
-  })), selectedOption === 'deliverect' && /*#__PURE__*/_react.default.createElement(_BusinessSyncBasic.BusinessSyncBasic, null), selectedOption === 'synced_store' && /*#__PURE__*/_react.default.createElement(_BusinessSyncStore.BusinessSyncStore, {
+  })), selectedOption === 'deliverect' && /*#__PURE__*/_react.default.createElement(_BusinessSyncBasic.BusinessSyncBasic, null), selectedOption === 'itsacheckmate' && /*#__PURE__*/_react.default.createElement(_BusinessSyncItsaCheckmate.BusinessSyncItsaCheckmate, null), selectedOption === 'synced_store' && /*#__PURE__*/_react.default.createElement(_BusinessSyncStore.BusinessSyncStore, {
     handleParentSidebarMove: handleParentSidebarMove
   }));
 };
