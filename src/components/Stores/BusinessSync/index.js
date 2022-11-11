@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessSyncBasic } from '../BusinessSyncBasic'
+import { BusinessSyncItsaCheckmate } from '../BusinessSyncItsaCheckmate'
 import { BusinessSyncStore } from '../BusinessSyncStore'
 
 import {
@@ -17,7 +18,8 @@ export const BusinessSync = (props) => {
   const [selectedOption, setSelectedOption] = useState('deliverect')
 
   const syncOptions = [
-    { key: 'deliverect', name: t('DELIVERECT', 'Deliverect') }
+    { key: 'deliverect', name: t('DELIVERECT', 'Deliverect') },
+    { key: 'itsacheckmate', name: t('ITSACHECKMATE', 'ItsaCheckmate') }
   ]
 
   const handleChangeOption = (key) => {
@@ -43,6 +45,9 @@ export const BusinessSync = (props) => {
       </Tabs>
       {selectedOption === 'deliverect' && (
         <BusinessSyncBasic />
+      )}
+      {selectedOption === 'itsacheckmate' && (
+        <BusinessSyncItsaCheckmate />
       )}
       {selectedOption === 'synced_store' && (
         <BusinessSyncStore
