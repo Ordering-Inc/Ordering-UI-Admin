@@ -164,6 +164,14 @@ if (!(window?.location?.hostname === 'localhost')) {
   })
 }
 
+/**
+ * my products
+ */
+import myCustomerApp from './template/assets/images/myProducts/customer-app.png'
+import myStoreApp from './template/assets/images/myProducts/store-app.png'
+import myDriverApp from './template/assets/images/myProducts/driver-app.png'
+import orderingWebsite from './template/assets/images/myProducts/ordering-website.png'
+
 const logos = {
   logotype,
   logotypeInvert,
@@ -230,6 +238,12 @@ theme.images = {
     inProgress: orderInProgress,
     completed: orderCompleted,
     cancelled: orderCancelled
+  },
+  myProducts: {
+    customerApp: myCustomerApp,
+    storeApp: myStoreApp,
+    driverApp: myDriverApp,
+    orderingWebsite: orderingWebsite
   },
   icons: {
     ordersList: ordersList,
