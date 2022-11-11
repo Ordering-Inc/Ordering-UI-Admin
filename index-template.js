@@ -36,6 +36,13 @@ import googlePlay from './template/assets/images/google-play.png'
 import deliverect from './template/assets/images/deliverect.png'
 
 /**
+ * project statuses
+ */
+import projectActive from './template/assets/images/projectStatuses/project-ative.png'
+import projectExpired from './template/assets/images/projectStatuses/project-expired.png'
+import projectPastDuePayment from './template/assets/images/projectStatuses/project-past-due-payment.png'
+
+/**
  * Theme apps
  */
 import storeApp from './template/assets/images/store-app.png'
@@ -165,6 +172,11 @@ theme.images = {
     appStore,
     googlePlay,
     deliverect
+  },
+  project: {
+    active: projectActive,
+    expired: projectExpired,
+    pastDuePayment: projectPastDuePayment
   },
   apps: {
     storeApp,
