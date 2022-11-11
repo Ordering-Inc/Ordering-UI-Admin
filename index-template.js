@@ -34,6 +34,7 @@ import whatsappHeader from './template/assets/images/whatsapp-header.png'
 import appStore from './template/assets/images/app-store.png'
 import googlePlay from './template/assets/images/google-play.png'
 import deliverect from './template/assets/images/deliverect.png'
+import ItsaCheckmateLogo from './template/assets/images/ItsaCheckmateLogo.png'
 import doordash from './template/assets/images/door-dash.png'
 /**
  * Theme apps
@@ -173,6 +174,7 @@ theme.images = {
     appStore,
     googlePlay,
     deliverect,
+    ItsaCheckmateLogo,
     doordash
   },
   apps: {
