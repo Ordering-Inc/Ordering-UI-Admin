@@ -46,7 +46,7 @@ const RewardsProgramsUI = (props) => {
               <MenuIcon />
             </IconButton>
           )}
-          <h1>{t('LOYALTY', 'Loyalty')}</h1>
+          <h1>{t('LOYALTY_AUTOMATION', 'Loyalty automation')}</h1>
         </HeaderTitleContainer>
 
         <LoyaltyListContainer>

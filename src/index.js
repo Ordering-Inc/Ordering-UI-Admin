@@ -339,6 +339,12 @@ import {
   PointsWalletBusinessDetail,
   PointsWalletBusinessList
 } from './components/Loyalty'
+import {
+  OrderingWebsite,
+  CustomerApp,
+  StoreApp,
+  DriverApp
+} from './components/MyProducts'
 import { OpenCartListing, RecoveryActionListing } from './components/CartRecovery'
 import { FreeProductsList, PurchasedProductsList } from './components/Downloads'
 
@@ -734,6 +740,11 @@ export {
   RecoveryActionListing,
   FreeProductsList,
   PurchasedProductsList,
+
+  OrderingWebsite,
+  CustomerApp,
+  StoreApp,
+  DriverApp,
 
   Layout,
   SidebarMenu,

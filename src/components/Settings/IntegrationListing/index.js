@@ -8,6 +8,7 @@ import { SideBar } from '../../Shared'
 import { PluginList } from '../PluginList'
 import { WebhookList } from '../WebhookList'
 import { ApiKeysList } from '../ApiKeysList'
+import { DoordashConnect } from '../DoordashConnect'
 
 import {
   IntegrationsContainer,
@@ -17,11 +18,13 @@ import {
   IconWrapper,
   SettingItemContent
 } from './styles'
+import { useTheme } from 'styled-components'
 
 export const IntegrationListing = (props) => {
   const [, t] = useLanguage()
   const { search } = useLocation()
   const [events] = useEvent()
+  const theme = useTheme()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [showOption, setShowOption] = useState(null)
 
@@ -112,6 +115,17 @@ export const IntegrationListing = (props) => {
               <p>{t('APIKEYS_DESCRIPTION', 'These keys serve to obtain a direct connection to the API without the need for authentication.')}</p>
             </SettingItemContent>
           </SettingItemContainer>
+          <SettingItemContainer
+            onClick={() => handleOpenSetting('doordash')}
+          >
+            <IconWrapper>
+              <img src={theme.images.general.doordash} />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('CONNECT_WITH_DOORDASH', 'Connect with Doordash')}</h5>
+              <p>{t('CONNECT_DOORDASH_DESCRIPTION', 'Send orders directly to your driver in Doordash and keep customers happy with their deliveries.')}</p>
+            </SettingItemContent>
+          </SettingItemContainer>
         </SettingListContainer>
       </IntegrationsContainer>
 
@@ -146,6 +160,12 @@ export const IntegrationListing = (props) => {
         >
           <ApiKeysList />
         </SideBar>
+      )}
+
+      {showOption === 'doordash' && (
+        <DoordashConnect
+          onClose={() => handleCloseSettings()}
+        />
       )}
     </>
   )
