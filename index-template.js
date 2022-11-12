@@ -138,9 +138,17 @@ import android from './template/assets/images/icons/android.svg'
 /**
  * sounds
  */
- import notificationOgg from './template/assets/sounds/notification.ogg'
- import notificationMp3 from './template/assets/sounds/notification.mp3'
- 
+import notificationOgg from './template/assets/sounds/notification.ogg'
+import notificationMp3 from './template/assets/sounds/notification.mp3'
+
+/**
+ * my products
+ */
+import myCustomerApp from './template/assets/images/myProducts/customer-app.png'
+import myStoreApp from './template/assets/images/myProducts/store-app.png'
+import myDriverApp from './template/assets/images/myProducts/driver-app.png'
+import orderingWebsite from './template/assets/images/myProducts/ordering-website.png'
+
 if (!(window?.location?.hostname === 'localhost')) {
   Sentry.init({
     environment: process.env.NODE_ENV,
@@ -163,14 +171,6 @@ if (!(window?.location?.hostname === 'localhost')) {
     tracesSampleRate: 0.2
   })
 }
-
-/**
- * my products
- */
-import myCustomerApp from './template/assets/images/myProducts/customer-app.png'
-import myStoreApp from './template/assets/images/myProducts/store-app.png'
-import myDriverApp from './template/assets/images/myProducts/driver-app.png'
-import orderingWebsite from './template/assets/images/myProducts/ordering-website.png'
 
 const logos = {
   logotype,
@@ -314,7 +314,11 @@ const RouteApp = () => {
       ...settings.api,
       language: language
     },
-    project: window.localStorage.getItem('project') !== null ? window.localStorage.getItem('project') : null
+    project: settings?.use_project_domain
+      ? '_'
+      : window.localStorage.getItem('project') !== null
+        ? window.localStorage.getItem('project')
+        : null
   })
 
   return (
