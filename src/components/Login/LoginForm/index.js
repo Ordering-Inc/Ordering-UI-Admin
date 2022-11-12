@@ -52,7 +52,7 @@ const LoginFormUI = (props) => {
     isPopup,
     isReCaptchaEnable,
     handleReCaptcha,
-
+    useProjectDomain,
     checkPhoneCodeState,
     otpType,
     setOtpType,
@@ -253,7 +253,7 @@ const LoginFormUI = (props) => {
           isPopup={isPopup}
           onSubmit={handleSubmit(onSubmit)}
         >
-          {!willVerifyOtpState && (
+          {!willVerifyOtpState && !useProjectDomain && (
             <InputWithIcon>
               <Input
                 type='text'
