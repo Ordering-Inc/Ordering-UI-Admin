@@ -50,6 +50,7 @@ var LoginFormUI = function LoginFormUI(props) {
     isPopup = props.isPopup,
     isReCaptchaEnable = props.isReCaptchaEnable,
     handleReCaptcha = props.handleReCaptcha,
+    useProjectDomain = props.useProjectDomain,
     checkPhoneCodeState = props.checkPhoneCodeState,
     otpType = props.otpType,
     setOtpType = props.setOtpType,
@@ -270,7 +271,7 @@ var LoginFormUI = function LoginFormUI(props) {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit)
-  }, !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, !willVerifyOtpState && !useProjectDomain && /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     name: "project",
     "aria-label": "project",
