@@ -9,5 +9,6 @@
   },
   "socket": {
     "url": "https://socket.ordering.co"
-  }
+  },
+  "use_project_domain": true
 }
