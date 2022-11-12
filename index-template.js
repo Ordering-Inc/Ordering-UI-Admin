@@ -292,7 +292,11 @@ const RouteApp = () => {
       ...settings.api,
       language: language
     },
-    project: window.localStorage.getItem('project') !== null ? window.localStorage.getItem('project') : null
+    project: settings?.use_project_domain
+      ? '_'
+      : window.localStorage.getItem('project') !== null
+        ? window.localStorage.getItem('project')
+        : null
   })
 
   return (
