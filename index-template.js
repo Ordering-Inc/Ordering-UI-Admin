@@ -38,8 +38,7 @@ import deliverect from './template/assets/images/deliverect.png'
 /**
  * project statuses
  */
-import projectActive from './template/assets/images/projectStatuses/project-ative.png'
-import projectExpired from './template/assets/images/projectStatuses/project-expired.png'
+import projectActive from './template/assets/images/projectStatuses/project-active.png'
 import projectPastDuePayment from './template/assets/images/projectStatuses/project-past-due-payment.png'
 
 /**
@@ -175,7 +174,6 @@ theme.images = {
   },
   project: {
     active: projectActive,
-    expired: projectExpired,
     pastDuePayment: projectPastDuePayment
   },
   apps: {

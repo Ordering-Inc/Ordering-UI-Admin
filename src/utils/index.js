@@ -416,3 +416,9 @@ export const orderRejectCommentList = (status) => {
 }
 
 export const widgetURL = 'https://orderingweb.ordering.co/'
+
+export const getCurrentDiffDays = (time) => {
+  const current = moment().utc()
+  const compared = moment(time)
+  return compared.diff(current, 'days')
+}
