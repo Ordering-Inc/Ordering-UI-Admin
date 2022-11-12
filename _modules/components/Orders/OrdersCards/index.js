@@ -1,119 +1,81 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.OrdersCards = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _moment = _interopRequireDefault(require("moment"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _styledComponents = require("styled-components");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
-
 var _Shared = require("../../Shared");
-
 var _styles = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var OrdersCards = function OrdersCards(props) {
   var _orderList$orders;
-
   var isMessagesView = props.isMessagesView,
-      orderList = props.orderList,
-      pagination = props.pagination,
-      getPageOrders = props.getPageOrders,
-      handleOpenOrderDetail = props.handleOpenOrderDetail,
-      selectedOrderCard = props.selectedOrderCard,
-      handleOrderCardClick = props.handleOrderCardClick,
-      handleUpdateDriverLocation = props.handleUpdateDriverLocation,
-      slaSettingTime = props.slaSettingTime;
-
+    orderList = props.orderList,
+    pagination = props.pagination,
+    getPageOrders = props.getPageOrders,
+    handleOpenOrderDetail = props.handleOpenOrderDetail,
+    selectedOrderCard = props.selectedOrderCard,
+    handleOrderCardClick = props.handleOrderCardClick,
+    handleUpdateDriverLocation = props.handleUpdateDriverLocation,
+    slaSettingTime = props.slaSettingTime;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
-
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      parseDate = _useUtils2$.parseDate,
-      optimizeImage = _useUtils2$.optimizeImage;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    _useUtils2$ = _useUtils2[0],
+    parseDate = _useUtils2$.parseDate,
+    optimizeImage = _useUtils2$.optimizeImage;
   var _useState = (0, _react.useState)(),
-      _useState2 = _slicedToArray(_useState, 2),
-      setCurrentTime = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    setCurrentTime = _useState2[1];
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
-
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configState = _useConfig2[0];
   var _useState3 = (0, _react.useState)({
-    timer: true,
-    slaBar: true
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      allowColumns = _useState4[0],
-      setAllowColumns = _useState4[1];
-
+      timer: true,
+      slaBar: true
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    allowColumns = _useState4[0],
+    setAllowColumns = _useState4[1];
   var handleChangePage = function handleChangePage(page) {
     getPageOrders(pagination.pageSize, page);
   };
-
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(pagination.from / pageSize);
     getPageOrders(pageSize, expectedPage);
   };
-
   var handleOrderClick = function handleOrderClick(e, order) {
     var isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector');
     if (isInvalid) return;
     handleOrderCardClick(order);
   };
-
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22;
-
     var status = parseInt(s);
     var orderStatus = [{
       key: 0,
@@ -193,45 +155,37 @@ var OrdersCards = function OrdersCards(props) {
     });
     return objectStatus && objectStatus;
   };
-
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
     var offset = 300;
     var cdtToutc = (0, _moment.default)(order === null || order === void 0 ? void 0 : order.delivery_datetime).add(offset, 'minutes').format('YYYY-MM-DD HH:mm:ss');
-
     var _delivery = order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(cdtToutc);
-
     var _eta = order === null || order === void 0 ? void 0 : order.eta_time;
-
     var diffTimeAsSeconds = (0, _moment.default)(_delivery).add(_eta, 'minutes').diff((0, _moment.default)().utc(), 'seconds');
     return Math.ceil(diffTimeAsSeconds / 60);
   };
-
   var displayDelayedTime = function displayDelayedTime(order) {
-    var tagetedMin = getDelayMinutes(order); // get day, hour and minutes
-
+    var tagetedMin = getDelayMinutes(order);
+    // get day, hour and minutes
     var sign = tagetedMin >= 0 ? '' : '- ';
     tagetedMin = Math.abs(tagetedMin);
     var day = Math.floor(tagetedMin / 1440);
     var restMinOfTargetedMin = tagetedMin - 1440 * day;
     var restHours = Math.floor(restMinOfTargetedMin / 60);
-    var restMins = restMinOfTargetedMin - 60 * restHours; // make standard time format
-
+    var restMins = restMinOfTargetedMin - 60 * restHours;
+    // make standard time format
     day = day === 0 ? '' : day + 'day  ';
     restHours = restHours < 10 ? '0' + restHours : restHours;
     restMins = restMins < 10 ? '0' + restMins : restMins;
     var finalTaget = sign + day + restHours + ':' + restMins;
     return finalTaget;
   };
-
   var getStatusClassName = function getStatusClassName(minutes) {
     var _configState$configs, _configState$configs$;
-
     if (isNaN(Number(minutes))) return 'in_time';
     var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_delayed_time) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
     return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed';
   };
-
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
       setCurrentTime(Date.now());
@@ -245,14 +199,12 @@ var OrdersCards = function OrdersCards(props) {
     var updatedOrder = orderList === null || orderList === void 0 ? void 0 : orderList.orders.find(function (order) {
       return order.id === (selectedOrderCard === null || selectedOrderCard === void 0 ? void 0 : selectedOrderCard.id);
     });
-
     if (updatedOrder) {
       handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder);
     }
   }, [orderList === null || orderList === void 0 ? void 0 : orderList.orders]);
   (0, _react.useEffect)(function () {
     var _configState$configs2, _configState$configs3;
-
     var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
       timer: slaSettings,
@@ -294,7 +246,6 @@ var OrdersCards = function OrdersCards(props) {
     }))))));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.map(function (order) {
     var _getOrderStatus, _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city, _order$driver, _order$driver2, _order$driver3, _order$driver4;
-
     return /*#__PURE__*/_react.default.createElement(_styles.OrderCard, {
       key: order.id,
       active: (selectedOrderCard === null || selectedOrderCard === void 0 ? void 0 : selectedOrderCard.id) === order.id,
@@ -341,5 +292,4 @@ var OrdersCards = function OrdersCards(props) {
     handleChangePageSize: handleChangePageSize
   })));
 };
-
 exports.OrdersCards = OrdersCards;

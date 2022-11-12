@@ -1,109 +1,76 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SeoOptions = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _styles = require("../../../styles");
-
 var _Shared = require("../../Shared");
-
 var _utils = require("../../../utils");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _styles2 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var SeoOptions = function SeoOptions(props) {
   var _formState$changes, _formState$result, _formState$changes2, _formState$changes3, _formState$changes4, _formState$result2, _formState$result3, _formState$result3$re, _ref, _formState$changes$se, _formState$changes5, _formState$result4, _formState$result5, _formState$result5$re, _ref2, _formState$changes$se2, _formState$changes6, _formState$result6, _formState$result7, _formState$result7$re, _ref3, _formState$changes$se3, _formState$changes7;
-
   var data = props.data,
-      formState = props.formState,
-      setFormState = props.setFormState,
-      handleUpdateClick = props.handleUpdateClick,
-      handleProductCategoryChangeInput = props.handleProductCategoryChangeInput,
-      handlechangeImageProductCategory = props.handlechangeImageProductCategory,
-      isBusinessSeo = props.isBusinessSeo,
-      isProductSeo = props.isProductSeo,
-      isCategorySeo = props.isCategorySeo,
-      cleanFormState = props.cleanFormState;
-
+    formState = props.formState,
+    setFormState = props.setFormState,
+    handleUpdateClick = props.handleUpdateClick,
+    handleProductCategoryChangeInput = props.handleProductCategoryChangeInput,
+    handlechangeImageProductCategory = props.handlechangeImageProductCategory,
+    isBusinessSeo = props.isBusinessSeo,
+    isProductSeo = props.isProductSeo,
+    isCategorySeo = props.isCategorySeo,
+    cleanFormState = props.cleanFormState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      optimizeImage = _useUtils2[0].optimizeImage;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    optimizeImage = _useUtils2[0].optimizeImage;
   var productImageInputRef = (0, _react.useRef)(null);
-
   var _useState = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
-
+      open: false,
+      content: []
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    alertState = _useState2[0],
+    setAlertState = _useState2[1];
   var _useState3 = (0, _react.useState)({
-    name: null,
-    data: null,
-    open: false
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      cropState = _useState4[0],
-      setCropState = _useState4[1];
-
+      name: null,
+      data: null,
+      open: false
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    cropState = _useState4[0],
+    setCropState = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isSameInfo = _useState6[0],
-      setIsSameInfo = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    isSameInfo = _useState6[0],
+    setIsSameInfo = _useState6[1];
   var titleRef = (0, _react.useRef)(null);
   var descriptionRef = (0, _react.useRef)(null);
-
   var handleClickImage = function handleClickImage() {
     productImageInputRef.current.click();
   };
-
   var handlechangeImage = function handlechangeImage(file) {
     var reader = new window.FileReader();
     reader.readAsDataURL(file);
-
     reader.onload = function () {
       setFormState(_objectSpread(_objectSpread({}, formState), {}, {
         changes: _objectSpread(_objectSpread({}, formState.changes), {}, {
@@ -111,18 +78,14 @@ var SeoOptions = function SeoOptions(props) {
         })
       }));
     };
-
     reader.onerror = function (error) {
       return console.log(error);
     };
   };
-
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
       var _files$;
-
       var type = files[0].type.split('/')[0];
-
       if (type !== 'image') {
         setAlertState({
           open: true,
@@ -130,7 +93,6 @@ var SeoOptions = function SeoOptions(props) {
         });
         return;
       }
-
       if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
         setAlertState({
           open: true,
@@ -138,10 +100,8 @@ var SeoOptions = function SeoOptions(props) {
         });
         return;
       }
-
       var reader = new window.FileReader();
       reader.readAsDataURL(files[0]);
-
       reader.onload = function () {
         setCropState({
           name: 'seo_image',
@@ -149,15 +109,12 @@ var SeoOptions = function SeoOptions(props) {
           open: true
         });
       };
-
       reader.onerror = function (error) {
         return console.log(error);
       };
-
       if (isBusinessSeo) handlechangeImage(files[0]);else handlechangeImageProductCategory(files[0], 'seo_image');
     }
   };
-
   var handleChangePhoto = function handleChangePhoto(croppedImg) {
     if (isBusinessSeo) {
       setFormState(_objectSpread(_objectSpread({}, formState), {}, {
@@ -166,30 +123,25 @@ var SeoOptions = function SeoOptions(props) {
     } else {
       setFormState(_defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg));
     }
-
     setCropState({
       name: null,
       data: null,
       open: false
     });
   };
-
   var handleChangeInput = function handleChangeInput(e) {
     setFormState(_objectSpread(_objectSpread({}, formState), {}, {
       changes: _objectSpread(_objectSpread({}, formState === null || formState === void 0 ? void 0 : formState.changes), {}, _defineProperty({}, e.target.name, e.target.value))
     }));
   };
-
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
   };
-
   (0, _react.useEffect)(function () {
     if (!isSameInfo) return;
-
     if (isBusinessSeo) {
       setFormState(_objectSpread(_objectSpread({}, formState), {}, {
         changes: {
@@ -203,13 +155,11 @@ var SeoOptions = function SeoOptions(props) {
         seo_description: data === null || data === void 0 ? void 0 : data.description
       });
     }
-
     titleRef.current.value = data === null || data === void 0 ? void 0 : data.name;
     descriptionRef.current.value = data === null || data === void 0 ? void 0 : data.description;
   }, [isSameInfo, isBusinessSeo, data]);
   (0, _react.useEffect)(function () {
     var _data$seo_title, _data$seo_description;
-
     setIsSameInfo(false);
     titleRef.current.value = (_data$seo_title = data === null || data === void 0 ? void 0 : data.seo_title) !== null && _data$seo_title !== void 0 ? _data$seo_title : '';
     descriptionRef.current.value = (_data$seo_description = data === null || data === void 0 ? void 0 : data.seo_description) !== null && _data$seo_description !== void 0 ? _data$seo_description : '';
@@ -316,5 +266,4 @@ var SeoOptions = function SeoOptions(props) {
     handleChangePhoto: handleChangePhoto
   })));
 };
-
 exports.SeoOptions = SeoOptions;

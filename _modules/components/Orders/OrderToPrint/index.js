@@ -1,75 +1,49 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.OrderToPrint = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _EnDotSingle = _interopRequireDefault(require("@meronex/icons/en/EnDotSingle"));
-
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
-
 var _BisBusiness = _interopRequireDefault(require("@meronex/icons/bi/BisBusiness"));
-
 var _OrderBill = require("../OrderBill");
-
 var _styles = require("../OrderDetails/styles");
-
 var _styles2 = require("../OrderContactInformation/styles");
-
 var _styles3 = require("../ProductItemAccordion/styles");
-
 var _styles4 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var OrderToPrint = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
   var _order$payment_events, _order$payment_events2, _order$paymethod, _order$place, _getOrderStatus, _order$business, _order$business2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$business11, _order$business12, _order$business13, _order$business14, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _order$customer11, _order$customer12, _order$customer13, _order$customer14, _order$customer15, _order$customer16, _order$customer17, _order$customer18, _order$customer19, _order$customer20, _order$customer21, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$products;
-
   var order = props.order,
-      placeSpotEnabled = props.placeSpotEnabled,
-      getOrderStatus = props.getOrderStatus,
-      getLogisticTag = props.getLogisticTag,
-      getPriorityTag = props.getPriorityTag;
-
+    placeSpotEnabled = props.placeSpotEnabled,
+    getOrderStatus = props.getOrderStatus,
+    getLogisticTag = props.getLogisticTag,
+    getPriorityTag = props.getPriorityTag;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      user = _useSession2[0].user;
-
+    _useSession2 = _slicedToArray(_useSession, 1),
+    user = _useSession2[0].user;
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      parseDate = _useUtils2$.parseDate,
-      getOrderState = _useUtils2$.getOrderState,
-      optimizeImage = _useUtils2$.optimizeImage,
-      parsePrice = _useUtils2$.parsePrice;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    _useUtils2$ = _useUtils2[0],
+    parseDate = _useUtils2$.parseDate,
+    getOrderState = _useUtils2$.getOrderState,
+    optimizeImage = _useUtils2$.optimizeImage,
+    parsePrice = _useUtils2$.parsePrice;
   var walletName = {
     cash: {
       name: t('CASH_WALLET', 'Cash Wallet')
@@ -78,7 +52,6 @@ var OrderToPrint = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
       name: t('POINTS_WALLET', 'Points Wallet')
     }
   };
-
   var getOrderType = function getOrderType(value) {
     var statuses = [{
       value: 1,
@@ -101,13 +74,11 @@ var OrderToPrint = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
     });
     if (objectStatus) return objectStatus === null || objectStatus === void 0 ? void 0 : objectStatus.content;else return value;
   };
-
   var getFormattedSubOptionName = function getFormattedSubOptionName(_ref) {
     var quantity = _ref.quantity,
-        name = _ref.name,
-        position = _ref.position,
-        price = _ref.price;
-
+      name = _ref.name,
+      position = _ref.position,
+      price = _ref.price;
     if (name !== 'No') {
       var pos = position ? "(".concat(position, ")") : '';
       return price > 0 ? "".concat(name, " ").concat(pos, " ").concat(parsePrice(quantity * price, {
@@ -117,12 +88,10 @@ var OrderToPrint = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
       return 'No';
     }
   };
-
   return /*#__PURE__*/_react.default.createElement(_styles4.PrintContainer, {
     ref: ref
   }, /*#__PURE__*/_react.default.createElement("h1", null, t('INVOICE_ORDER_NO', 'Order No'), " ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : (_order$payment_events = order.payment_events) === null || _order$payment_events === void 0 ? void 0 : _order$payment_events.length) > 0 ? order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.map(function (event, i) {
     var _walletName$event$wal, _event$wallet_event, _event$wallet_event$w, _event$paymethod;
-
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("span", null, event !== null && event !== void 0 && event.wallet_event ? (_walletName$event$wal = walletName[event === null || event === void 0 ? void 0 : (_event$wallet_event = event.wallet_event) === null || _event$wallet_event === void 0 ? void 0 : (_event$wallet_event$w = _event$wallet_event.wallet) === null || _event$wallet_event$w === void 0 ? void 0 : _event$wallet_event$w.type]) === null || _walletName$event$wal === void 0 ? void 0 : _walletName$event$wal.name : event === null || event === void 0 ? void 0 : (_event$paymethod = event.paymethod) === null || _event$paymethod === void 0 ? void 0 : _event$paymethod.name), /*#__PURE__*/_react.default.createElement(_EnDotSingle.default, null));
@@ -156,7 +125,6 @@ var OrderToPrint = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
     bgimage: optimizeImage(order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), order.driver_id ? /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name, " ", order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.middle_name, " ", order === null || order === void 0 ? void 0 : (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.lastname, " ", order === null || order === void 0 ? void 0 : (_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.second_lastname)), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))) : /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('NO_DRIVER', 'No driver')))))))), /*#__PURE__*/_react.default.createElement(_styles.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPORT_SUMMARY', 'Summary')), (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     var _product$ingredients, _product$options;
-
     return /*#__PURE__*/_react.default.createElement(_styles3.AccordionSection, {
       key: product.id
     }, /*#__PURE__*/_react.default.createElement(_styles3.ProductInfo, null, (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles3.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles3.ProductImage, {

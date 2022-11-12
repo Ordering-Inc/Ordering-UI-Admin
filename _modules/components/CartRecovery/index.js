@@ -15,7 +15,5 @@ Object.defineProperty(exports, "RecoveryActionListing", {
     return _RecoveryActionListing.RecoveryActionListing;
   }
 });
-
 var _OpenCartListing = require("./OpenCartListing");
-
 var _RecoveryActionListing = require("./RecoveryActionListing");

@@ -1,81 +1,54 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.OrderingProductGeneralDetails = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _reactHookForm = require("react-hook-form");
-
 var _utils = require("../../../utils");
-
 var _BsCardImage = _interopRequireDefault(require("@meronex/icons/bs/BsCardImage"));
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _Shared = require("../../Shared");
-
 var _styles = require("../../../styles");
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _styles2 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var OrderingProductGeneralDetails = function OrderingProductGeneralDetails(props) {
   var _formState$changes, _siteState$site, _siteState$site2, _formState$changes2, _formState$changes3, _formState$changes4, _siteState$site3, _siteState$site4, _formState$changes5, _formState$changes6, _ref, _formState$changes$na, _formState$changes7, _siteState$site5, _ref2, _formState$changes$co, _formState$changes8, _siteState$site6, _ref3, _formState$changes$ur, _formState$changes9, _siteState$site7, _formState$changes10, _siteState$site8, _siteState$site9, _formState$changes11, _formState$changes12, _ref4, _formState$changes$re, _formState$changes13, _siteState$site10, _ref5, _formState$changes$tr, _formState$changes14, _siteState$site11, _ref6, _formState$changes$de, _formState$changes15, _siteState$site12, _ref7, _formState$changes$ch, _formState$changes16, _siteState$site13, _ref8, _formState$changes$ca, _formState$changes17, _siteState$site14, _ref9, _formState$changes$bu, _formState$changes18, _siteState$site15, _ref10, _formState$changes$ca2, _formState$changes19, _siteState$site16, _ref11, _formState$changes$pr, _formState$changes20, _siteState$site17, _ref12, _formState$changes$pr2, _formState$changes21, _siteState$site18;
-
   var siteState = props.siteState,
-      formState = props.formState,
-      isAddMode = props.isAddMode,
-      handleChangeInput = props.handleChangeInput,
-      handlechangeImage = props.handlechangeImage,
-      handleUpdateSite = props.handleUpdateSite,
-      handleAddSite = props.handleAddSite;
-
+    formState = props.formState,
+    isAddMode = props.isAddMode,
+    handleChangeInput = props.handleChangeInput,
+    handlechangeImage = props.handlechangeImage,
+    handleUpdateSite = props.handleUpdateSite,
+    handleAddSite = props.handleAddSite;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
-      errors = _useForm.errors,
-      watch = _useForm.watch;
-
+    handleSubmit = _useForm.handleSubmit,
+    register = _useForm.register,
+    errors = _useForm.errors,
+    watch = _useForm.watch;
   var businessUrlTemplate = watch('business_url_template', '');
-
   var _useState = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
-
+      open: false,
+      content: []
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    alertState = _useState2[0],
+    setAlertState = _useState2[1];
   var headerImageInputRef = (0, _react.useRef)(null);
   var logoImageInputRef = (0, _react.useRef)(null);
   var socialShareInputRef = (0, _react.useRef)(null);
@@ -105,27 +78,21 @@ var OrderingProductGeneralDetails = function OrderingProductGeneralDetails(props
     key: 4,
     value: '/:business_slug?<any>=:category_id&<any>=:product_id'
   }];
-
   var handleClickImage = function handleClickImage(type) {
     if (type === 'header') {
       headerImageInputRef.current.click();
     }
-
     if (type === 'logo') {
       logoImageInputRef.current.click();
     }
-
     if (type === 'social_share') {
       socialShareInputRef.current.click();
     }
   };
-
   var handleFiles = function handleFiles(files, name) {
     if (files.length === 1) {
       var _files$;
-
       var type = files[0].type.split('/')[0];
-
       if (type !== 'image') {
         setAlertState({
           open: true,
@@ -133,7 +100,6 @@ var OrderingProductGeneralDetails = function OrderingProductGeneralDetails(props
         });
         return;
       }
-
       if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
         setAlertState({
           open: true,
@@ -141,11 +107,9 @@ var OrderingProductGeneralDetails = function OrderingProductGeneralDetails(props
         });
         return;
       }
-
       handlechangeImage(files[0], name);
     }
   };
-
   var onSubmit = function onSubmit() {
     if (isAddMode) {
       handleAddSite && handleAddSite();
@@ -153,18 +117,15 @@ var OrderingProductGeneralDetails = function OrderingProductGeneralDetails(props
       handleUpdateSite && handleUpdateSite();
     }
   };
-
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
   };
-
   var handleValidateProductUrl = function handleValidateProductUrl(value) {
     if (businessUrlTemplate.includes('?')) {
       var urls = businessUrlTemplate.split('?');
-
       if (value.indexOf(urls[0]) === 0 && value.includes(urls[1])) {
         return true;
       } else {
@@ -178,7 +139,6 @@ var OrderingProductGeneralDetails = function OrderingProductGeneralDetails(props
       }
     }
   };
-
   (0, _react.useEffect)(function () {
     if (!formState.error) return;
     setAlertState({
@@ -476,5 +436,4 @@ var OrderingProductGeneralDetails = function OrderingProductGeneralDetails(props
     closeOnBackdrop: false
   }));
 };
-
 exports.OrderingProductGeneralDetails = OrderingProductGeneralDetails;

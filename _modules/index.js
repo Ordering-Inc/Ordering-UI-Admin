@@ -2295,77 +2295,40 @@ Object.defineProperty(exports, "verifyDecimals", {
     return _utils.verifyDecimals;
   }
 });
-
 var _Messages = require("./components/Messages");
-
 var _OrderingProducts = require("./components/OrderingProducts");
-
 var _PageNotFound = require("./components/PageNotFound");
-
 var _Orders = require("./components/Orders");
-
 var _Support = require("./components/Support");
-
 var _BusinessIntelligence = require("./components/BusinessIntelligence");
-
 var _Delivery = require("./components/Delivery");
-
 var _Home = require("./components/Home");
-
 var _Login = require("./components/Login");
-
 var _Marketing = require("./components/Marketing");
-
 var _Settings = require("./components/Settings");
-
 var _Stores = require("./components/Stores");
-
 var _Users = require("./components/Users");
-
 var _Loyalty = require("./components/Loyalty");
-
 var _MyProducts = require("./components/MyProducts");
-
 var _CartRecovery = require("./components/CartRecovery");
-
 var _Downloads = require("./components/Downloads");
-
 var _Layout = require("./components/Layout");
-
 var _SidebarMenu = require("./components/SidebarMenu");
-
 var _NotNetworkConnectivity = require("./components/NotNetworkConnectivity");
-
 var _Profile = require("./components/Profile");
-
 var _Shared = require("./components/Shared");
-
 var _LogoutButton = require("./components/LogoutButton");
-
 var _LanguageSelector = require("./components/LanguageSelector");
-
 var _utils = require("./utils");
-
 var _ThemeContext = require("./contexts/ThemeContext");
-
 var _ConfigFileContext = require("./contexts/ConfigFileContext");
-
 var _InfoShareContext = require("./contexts/InfoShareContext");
-
 var _useOnlineStatus = require("./hooks/useOnlineStatus");
-
 var _useWindowSize = require("./hooks/useWindowSize");
-
 var _Buttons = require("./styles/Buttons");
-
 var _Inputs = require("./styles/Inputs");
-
 var _Select = require("./styles/Select");
-
 var _Tabs = require("./styles/Tabs");
-
 var _Toast = require("./styles/Toast");
-
 var _Switch = require("./styles/Switch");
-
 var _Checkbox = require("./styles/Checkbox");

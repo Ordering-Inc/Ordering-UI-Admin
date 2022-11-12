@@ -1,176 +1,133 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ProductExtraOptions = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _reactHookForm = require("react-hook-form");
-
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
-
 var _reactBootstrap = require("react-bootstrap");
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _styledComponents = require("styled-components");
-
 var _utils = require("../../../utils");
-
 var _Shared = require("../../Shared");
-
 var _styles = require("../../../styles");
-
 var _ProductExtraMetaFields = require("../ProductExtraMetaFields");
-
 var _ProductExtraOptionDetails = require("../ProductExtraOptionDetails");
-
 var _styles2 = require("./styles");
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   var _extraState$extra, _extraState$extra3, _extraState$extra4, _extraState$extra5;
-
   var open = props.open,
-      onClose = props.onClose,
-      extraState = props.extraState,
-      changesState = props.changesState,
-      handleChangeInput = props.handleChangeInput,
-      handleChangeOptionEnable = props.handleChangeOptionEnable,
-      handleChangeAddOption = props.handleChangeAddOption,
-      addChangesState = props.addChangesState,
-      handleAddOption = props.handleAddOption,
-      business = props.business,
-      editOptionId = props.editOptionId,
-      handleDeleteExtra = props.handleDeleteExtra,
-      handleUpdateBusinessState = props.handleUpdateBusinessState,
-      handleSucccessDeleteOption = props.handleSucccessDeleteOption,
-      curOption = props.curOption,
-      openModal = props.openModal,
-      setCurOption = props.setCurOption,
-      setOpenModal = props.setOpenModal,
-      handleOpenModal = props.handleOpenModal,
-      handleChangeExtraName = props.handleChangeExtraName,
-      handleChangeItem = props.handleChangeItem,
-      dragoverOptionId = props.dragoverOptionId,
-      isOptionsBottom = props.isOptionsBottom,
-      handleDragStart = props.handleDragStart,
-      hanldeDragOver = props.hanldeDragOver,
-      handleDrop = props.handleDrop,
-      handleDragEnd = props.handleDragEnd;
+    onClose = props.onClose,
+    extraState = props.extraState,
+    changesState = props.changesState,
+    handleChangeInput = props.handleChangeInput,
+    handleChangeOptionEnable = props.handleChangeOptionEnable,
+    handleChangeAddOption = props.handleChangeAddOption,
+    addChangesState = props.addChangesState,
+    handleAddOption = props.handleAddOption,
+    business = props.business,
+    editOptionId = props.editOptionId,
+    handleDeleteExtra = props.handleDeleteExtra,
+    handleUpdateBusinessState = props.handleUpdateBusinessState,
+    handleSucccessDeleteOption = props.handleSucccessDeleteOption,
+    curOption = props.curOption,
+    openModal = props.openModal,
+    setCurOption = props.setCurOption,
+    setOpenModal = props.setOpenModal,
+    handleOpenModal = props.handleOpenModal,
+    handleChangeExtraName = props.handleChangeExtraName,
+    handleChangeItem = props.handleChangeItem,
+    dragoverOptionId = props.dragoverOptionId,
+    isOptionsBottom = props.isOptionsBottom,
+    handleDragStart = props.handleDragStart,
+    hanldeDragOver = props.hanldeDragOver,
+    handleDrop = props.handleDrop,
+    handleDragEnd = props.handleDragEnd;
   var theme = (0, _styledComponents.useTheme)();
-
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width;
-
+    width = _useWindowSize.width;
   var _useForm = (0, _reactHookForm.useForm)({
-    defaultValues: addChangesState
-  }),
-      control = _useForm.control,
-      handleSubmit = _useForm.handleSubmit,
-      errors = _useForm.errors,
-      setValue = _useForm.setValue;
-
+      defaultValues: addChangesState
+    }),
+    control = _useForm.control,
+    handleSubmit = _useForm.handleSubmit,
+    errors = _useForm.errors,
+    setValue = _useForm.setValue;
   var _useState = (0, _react.useState)(((_extraState$extra = extraState.extra) === null || _extraState$extra === void 0 ? void 0 : _extraState$extra.name) || ''),
-      _useState2 = _slicedToArray(_useState, 2),
-      extraName = _useState2[0],
-      setExtraName = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    extraName = _useState2[0],
+    setExtraName = _useState2[1];
   var _useState3 = (0, _react.useState)(null),
-      _useState4 = _slicedToArray(_useState3, 2),
-      timer = _useState4[0],
-      setTimer = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    timer = _useState4[0],
+    setTimer = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
-      _useState6 = _slicedToArray(_useState5, 2),
-      isMenuOpen = _useState6[0],
-      setIsMenuOpen = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    isMenuOpen = _useState6[0],
+    setIsMenuOpen = _useState6[1];
   var _useState7 = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      alertState = _useState8[0],
-      setAlertState = _useState8[1];
-
+      open: false,
+      content: []
+    }),
+    _useState8 = _slicedToArray(_useState7, 2),
+    alertState = _useState8[0],
+    setAlertState = _useState8[1];
   var _useState9 = (0, _react.useState)({
-    open: false,
-    content: null,
-    handleOnAccept: null
-  }),
-      _useState10 = _slicedToArray(_useState9, 2),
-      confirm = _useState10[0],
-      setConfirm = _useState10[1];
-
+      open: false,
+      content: null,
+      handleOnAccept: null
+    }),
+    _useState10 = _slicedToArray(_useState9, 2),
+    confirm = _useState10[0],
+    setConfirm = _useState10[1];
   var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isMaxError = _useState12[0],
-      setIsMaxError = _useState12[1];
-
+    _useState12 = _slicedToArray(_useState11, 2),
+    isMaxError = _useState12[0],
+    setIsMaxError = _useState12[1];
   var _useState13 = (0, _react.useState)({
-    name: null,
-    data: null,
-    open: false
-  }),
-      _useState14 = _slicedToArray(_useState13, 2),
-      cropState = _useState14[0],
-      setCropState = _useState14[1];
-
+      name: null,
+      data: null,
+      open: false
+    }),
+    _useState14 = _slicedToArray(_useState13, 2),
+    cropState = _useState14[0],
+    setCropState = _useState14[1];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
   };
-
   var handleChangeAddOptionInput = function handleChangeAddOptionInput(e, min) {
     if (min) {
       if (parseInt(e.target.value) > parseInt(addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max)) return;
     } else {
       if (parseInt(e.target.value) < parseInt(addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min)) return;
     }
-
     handleChangeAddOption(e);
   };
-
   var handleFiles = function handleFiles(files, optionId) {
     if (files.length === 1) {
       var _files$;
-
       var type = files[0].type.split('/')[0];
-
       if (type !== 'image') {
         setAlertState({
           open: true,
@@ -178,7 +135,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
         });
         return;
       }
-
       if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
         setAlertState({
           open: true,
@@ -186,10 +142,8 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
         });
         return;
       }
-
       var reader = new window.FileReader();
       reader.readAsDataURL(files[0]);
-
       reader.onload = function () {
         setCropState({
           name: 'image',
@@ -198,13 +152,11 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
           id: optionId
         });
       };
-
       reader.onerror = function (error) {
         return console.log(error);
       };
     }
   };
-
   var handleChangePhoto = function handleChangePhoto(croppedImg) {
     handleChangeItem(_defineProperty({}, cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg), cropState === null || cropState === void 0 ? void 0 : cropState.id);
     setCropState({
@@ -213,19 +165,15 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       open: false
     });
   };
-
   var actionSidebar = function actionSidebar(value) {
     if (!value) {
       onClose();
     }
-
     setIsMenuOpen(value);
   };
-
   var onSubmit = function onSubmit() {
     handleAddOption();
   };
-
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -249,7 +197,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     if (!open) return;
     actionSidebar(true);
   }, [open]);
-
   var handleDeleteExtraClick = function handleDeleteExtraClick() {
     setConfirm({
       open: true,
@@ -262,19 +209,15 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       }
     });
   };
-
   var onChangeExtraName = function onChangeExtraName(e) {
     e.persist();
     clearTimeout(timer);
     setExtraName(e.target.value);
-
     var _timer = setTimeout(function () {
       handleChangeExtraName(e, extraState.extra.id);
     }, 750);
-
     setTimer(_timer);
   };
-
   (0, _react.useEffect)(function () {
     if (!(addChangesState !== null && addChangesState !== void 0 && addChangesState.name) && (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) === 1 && (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) === 1) {
       setValue('name', (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) || '');
@@ -284,7 +227,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   }, [addChangesState]);
   (0, _react.useEffect)(function () {
     var _extraState$extra2;
-
     setExtraName((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.name);
   }, [(_extraState$extra3 = extraState.extra) === null || _extraState$extra3 === void 0 ? void 0 : _extraState$extra3.name]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, {
@@ -328,7 +270,6 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     return a.rank - b.rank;
   }).map(function (option, index) {
     var _extraState$extra6, _theme$images$icons;
-
     var isLastOption = index === ((_extraState$extra6 = extraState.extra) === null || _extraState$extra6 === void 0 ? void 0 : _extraState$extra6.options.length) - 1;
     return /*#__PURE__*/_react.default.createElement(_styles2.OptionItem, {
       key: option.id,
@@ -365,14 +306,13 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     control: control,
     render: function render(_ref) {
       var _onChange = _ref.onChange,
-          value = _ref.value;
+        value = _ref.value;
       return /*#__PURE__*/_react.default.createElement("input", {
         name: "name",
         placeholder: t('WRITE_A_NAME', 'Write a name'),
         value: value,
         onChange: function onChange(e) {
           _onChange(e);
-
           handleChangeAddOption(e);
         },
         autoComplete: "off"
@@ -386,13 +326,12 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     control: control,
     render: function render(_ref2) {
       var _onChange2 = _ref2.onChange,
-          value = _ref2.value;
+        value = _ref2.value;
       return /*#__PURE__*/_react.default.createElement("input", {
         name: "min",
         value: value,
         onChange: function onChange(e) {
           _onChange2(e);
-
           handleChangeAddOptionInput(e, true);
         },
         onKeyPress: function onKeyPress(e) {
@@ -411,13 +350,12 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     control: control,
     render: function render(_ref3) {
       var _onChange3 = _ref3.onChange,
-          value = _ref3.value;
+        value = _ref3.value;
       return /*#__PURE__*/_react.default.createElement("input", {
         name: "max",
         value: value,
         onChange: function onChange(e) {
           _onChange3(e);
-
           handleChangeAddOptionInput(e, false);
         },
         onKeyPress: function onKeyPress(e) {
@@ -518,13 +456,10 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     handleChangePhoto: handleChangePhoto
   })));
 };
-
 var ProductExtraOptions = function ProductExtraOptions(props) {
   var productExtraOptionsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProductExtraOptionsUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ProductExtraOptions, productExtraOptionsProps);
 };
-
 exports.ProductExtraOptions = ProductExtraOptions;

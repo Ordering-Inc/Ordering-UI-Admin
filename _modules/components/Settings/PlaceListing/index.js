@@ -1,221 +1,162 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.PlaceListing = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
-
 var _styles = require("../../../styles");
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _reactBootstrap = require("react-bootstrap");
-
 var _styledComponents = require("styled-components");
-
 var _FiMoreVertical = _interopRequireDefault(require("@meronex/icons/fi/FiMoreVertical"));
-
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
-
 var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
-
 var _Shared = require("../../Shared");
-
 var _CountrySelector = require("../CountrySelector");
-
 var _CityDetails = require("../CityDetails");
-
 var _DropdownOptionList = require("../DropdownOptionList");
-
 var _CountriesList = require("../CountriesList");
-
 var _styles2 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var PlaceListingUI = function PlaceListingUI(props) {
   var _countriesState$count2, _countriesState$count3;
-
   var countriesState = props.countriesState,
-      cityManagerList = props.cityManagerList,
-      handleUpdateCountry = props.handleUpdateCountry,
-      handleAddCountry = props.handleAddCountry,
-      selectedCountries = props.selectedCountries,
-      setSelectedCountries = props.setSelectedCountries,
-      handleDeleteCountry = props.handleDeleteCountry,
-      handleUpdateCity = props.handleUpdateCity,
-      handleDeleteCity = props.handleDeleteCity,
-      actionState = props.actionState,
-      selectedCity = props.selectedCity,
-      setSelectedCity = props.setSelectedCity,
-      handleChangesState = props.handleChangesState,
-      changesState = props.changesState,
-      handleSaveCity = props.handleSaveCity,
-      handleAddCity = props.handleAddCity,
-      openCity = props.openCity,
-      setOpenCity = props.setOpenCity,
-      selectedCityList = props.selectedCityList,
-      handleCheckboxClick = props.handleCheckboxClick,
-      handleAllCheckboxClick = props.handleAllCheckboxClick,
-      handleSeveralDeleteCities = props.handleSeveralDeleteCities,
-      handleSeveralDeleteCountries = props.handleSeveralDeleteCountries,
-      dropdownOptionsState = props.dropdownOptionsState,
-      handleUpdateDropdown = props.handleUpdateDropdown,
-      openZoneDropdown = props.openZoneDropdown,
-      setOpenZonedropdown = props.setOpenZonedropdown,
-      selectedZoneDropdown = props.selectedZoneDropdown,
-      setSelectedZoneDropdown = props.setSelectedZoneDropdown,
-      cleanChagesState = props.cleanChagesState,
-      handleSaveZone = props.handleSaveZone,
-      handleAddZone = props.handleAddZone,
-      handleDeleteZone = props.handleDeleteZone,
-      selectedZoneList = props.selectedZoneList,
-      handleCheckboxZoneClick = props.handleCheckboxZoneClick,
-      handleAllCheckboxZoneClick = props.handleAllCheckboxZoneClick,
-      handleSeveralDeleteZones = props.handleSeveralDeleteZones;
-
+    cityManagerList = props.cityManagerList,
+    handleUpdateCountry = props.handleUpdateCountry,
+    handleAddCountry = props.handleAddCountry,
+    selectedCountries = props.selectedCountries,
+    setSelectedCountries = props.setSelectedCountries,
+    handleDeleteCountry = props.handleDeleteCountry,
+    handleUpdateCity = props.handleUpdateCity,
+    handleDeleteCity = props.handleDeleteCity,
+    actionState = props.actionState,
+    selectedCity = props.selectedCity,
+    setSelectedCity = props.setSelectedCity,
+    handleChangesState = props.handleChangesState,
+    changesState = props.changesState,
+    handleSaveCity = props.handleSaveCity,
+    handleAddCity = props.handleAddCity,
+    openCity = props.openCity,
+    setOpenCity = props.setOpenCity,
+    selectedCityList = props.selectedCityList,
+    handleCheckboxClick = props.handleCheckboxClick,
+    handleAllCheckboxClick = props.handleAllCheckboxClick,
+    handleSeveralDeleteCities = props.handleSeveralDeleteCities,
+    handleSeveralDeleteCountries = props.handleSeveralDeleteCountries,
+    dropdownOptionsState = props.dropdownOptionsState,
+    handleUpdateDropdown = props.handleUpdateDropdown,
+    openZoneDropdown = props.openZoneDropdown,
+    setOpenZonedropdown = props.setOpenZonedropdown,
+    selectedZoneDropdown = props.selectedZoneDropdown,
+    setSelectedZoneDropdown = props.setSelectedZoneDropdown,
+    cleanChagesState = props.cleanChagesState,
+    handleSaveZone = props.handleSaveZone,
+    handleAddZone = props.handleAddZone,
+    handleDeleteZone = props.handleDeleteZone,
+    selectedZoneList = props.selectedZoneList,
+    handleCheckboxZoneClick = props.handleCheckboxZoneClick,
+    handleAllCheckboxZoneClick = props.handleAllCheckboxZoneClick,
+    handleSeveralDeleteZones = props.handleSeveralDeleteZones;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
-
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
-      _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
-      isCollapse = _useInfoShare2[0].isCollapse,
-      handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
-
+    _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
+    isCollapse = _useInfoShare2[0].isCollapse,
+    handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
   var _useState = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
-
+      open: false,
+      content: []
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    alertState = _useState2[0],
+    setAlertState = _useState2[1];
   var _useState3 = (0, _react.useState)({
-    open: false,
-    content: null,
-    handleOnAccept: null
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      confirm = _useState4[0],
-      setConfirm = _useState4[1];
-
+      open: false,
+      content: null,
+      handleOnAccept: null
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    confirm = _useState4[0],
+    setConfirm = _useState4[1];
   var _useState5 = (0, _react.useState)('countries'),
-      _useState6 = _slicedToArray(_useState5, 2),
-      showOption = _useState6[0],
-      setShowOption = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    showOption = _useState6[0],
+    setShowOption = _useState6[1];
   var _useState7 = (0, _react.useState)(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      searchValue = _useState8[0],
-      setSearchValue = _useState8[1]; // Change page
+    _useState8 = _slicedToArray(_useState7, 2),
+    searchValue = _useState8[0],
+    setSearchValue = _useState8[1];
 
-
+  // Change page
   var _useState9 = (0, _react.useState)(1),
-      _useState10 = _slicedToArray(_useState9, 2),
-      currentPage = _useState10[0],
-      setCurrentPage = _useState10[1];
-
+    _useState10 = _slicedToArray(_useState9, 2),
+    currentPage = _useState10[0],
+    setCurrentPage = _useState10[1];
   var _useState11 = (0, _react.useState)(10),
-      _useState12 = _slicedToArray(_useState11, 2),
-      citiesPerPage = _useState12[0],
-      setCitiesPerPage = _useState12[1]; // Get current cities
-
-
+    _useState12 = _slicedToArray(_useState11, 2),
+    citiesPerPage = _useState12[0],
+    setCitiesPerPage = _useState12[1];
+  // Get current cities
   var _useState13 = (0, _react.useState)([]),
-      _useState14 = _slicedToArray(_useState13, 2),
-      currentCities = _useState14[0],
-      setCurrentCities = _useState14[1];
-
+    _useState14 = _slicedToArray(_useState13, 2),
+    currentCities = _useState14[0],
+    setCurrentCities = _useState14[1];
   var _useState15 = (0, _react.useState)(null),
-      _useState16 = _slicedToArray(_useState15, 2),
-      totalPages = _useState16[0],
-      setTotalPages = _useState16[1];
-
+    _useState16 = _slicedToArray(_useState15, 2),
+    totalPages = _useState16[0],
+    setTotalPages = _useState16[1];
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);
   };
-
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(((currentPage - 1) * citiesPerPage + 1) / pageSize);
     setCurrentPage(expectedPage);
     setCitiesPerPage(pageSize);
   };
-
   (0, _react.useEffect)(function () {
     var _countriesState$count;
-
     if (countriesState.loading) return;
-
     var _cities = (_countriesState$count = countriesState.countries) === null || _countriesState$count === void 0 ? void 0 : _countriesState$count.reduce(function (_cities, country) {
       return [].concat(_toConsumableArray(_cities), _toConsumableArray(country === null || country === void 0 ? void 0 : country.cities));
     }, []);
-
     var cities = [];
-
     if (searchValue) {
       cities = _cities.filter(function (city) {
         var _city$name;
-
         return (_city$name = city.name) === null || _city$name === void 0 ? void 0 : _city$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       cities = _toConsumableArray(_cities);
     }
-
     var _totalPages = Math.ceil(cities.length / citiesPerPage);
-
     var indexOfLastPost = currentPage * citiesPerPage;
     var indexOfFirstPost = indexOfLastPost - citiesPerPage;
-
     var _currentCities = cities.slice(indexOfFirstPost, indexOfLastPost);
-
     setTotalPages(_totalPages);
     setCurrentCities(_currentCities);
   }, [countriesState, currentPage, citiesPerPage, searchValue]);
-
   var onDeleteCity = function onDeleteCity(countryId, cityId) {
     setConfirm({
       open: true,
@@ -228,23 +169,19 @@ var PlaceListingUI = function PlaceListingUI(props) {
       }
     });
   };
-
   var handleOpenCityDetails = function handleOpenCityDetails(city) {
     setSelectedCity(city);
     setOpenCity(true);
   };
-
   var handleClickCity = function handleClickCity(e, city) {
     var isInvalid = e.target.closest('.city-checkbox') || e.target.closest('.city-enabled') || e.target.closest('.city-actions');
     if (isInvalid) return;
     handleOpenCityDetails(city);
   };
-
   var handleOpenZoneDropdownDetails = function handleOpenZoneDropdownDetails(zone) {
     setSelectedZoneDropdown(zone);
     setOpenZonedropdown(true);
   };
-
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
     setAlertState({
@@ -477,13 +414,10 @@ var PlaceListingUI = function PlaceListingUI(props) {
     handleAddCity: handleAddCity
   })));
 };
-
 var PlaceListing = function PlaceListing(props) {
   var placesProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: PlaceListingUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.PlaceList, placesProps);
 };
-
 exports.PlaceListing = PlaceListing;

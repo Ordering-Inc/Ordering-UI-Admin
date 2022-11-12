@@ -1,130 +1,95 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ImporterFormUI = exports.ImporterForm = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _reactHookForm = require("react-hook-form");
-
 var _reactBootstrap = require("react-bootstrap");
-
 var _BsPlusSquare = _interopRequireDefault(require("@meronex/icons/bs/BsPlusSquare"));
-
 var _BsTrash = _interopRequireDefault(require("@meronex/icons/bs/BsTrash"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _Shared = require("../../Shared");
-
 var _styles = require("../../../styles");
-
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
-
 var _ChildMapplingList = require("../ChildMapplingList");
-
 var _styles2 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var ImporterFormUI = function ImporterFormUI(props) {
   var _importypeOptions$fin, _editState$mapping$bu, _editState$mapping, _editState$mapping$ex, _editState$mapping2, _editState$mapping$ca, _editState$mapping3, _editState$mapping$ex2, _editState$mapping4, _editState$mapping$ex3, _editState$mapping5, _editState$mapping$pr, _editState$mapping6, _editState$mapping$ex4, _editState$mapping7, _editState$mapping$ex5, _editState$mapping8, _editState$mapping$ex6, _editState$mapping9, _editState$mapping$ex7, _editState$mapping10, _editState$mapping$ex8, _editState$mapping11, _editState$mapping$ex9, _editState$mapping12, _editState$mapping$ex10, _editState$mapping13;
-
   var isAdvanedOptions = props.isAdvanedOptions,
-      formState = props.formState,
-      handleChangeInput = props.handleChangeInput,
-      handleChangeSelect = props.handleChangeSelect,
-      handleCreateImporter = props.handleCreateImporter,
-      handleChangeMappingInput = props.handleChangeMappingInput,
-      handleEditState = props.handleEditState,
-      addNewField = props.addNewField,
-      removeField = props.removeField,
-      fieldList = props.fieldList,
-      addNewMetaField = props.addNewMetaField,
-      removeMetaField = props.removeMetaField,
-      metafieldList = props.metafieldList,
-      onClose = props.onClose,
-      selectedImporter = props.selectedImporter,
-      clearImorterForm = props.clearImorterForm,
-      setIsEdit = props.setIsEdit,
-      editState = props.editState,
-      editImporter = props.editImporter,
-      downloadCSV = props.downloadCSV,
-      openMappingDetails = props.openMappingDetails,
-      setOpenMappingDetails = props.setOpenMappingDetails,
-      isMapping = props.isMapping,
-      headerTitle = props.headerTitle,
-      handleUpdateMultipleMapping = props.handleUpdateMultipleMapping,
-      defaultImporter = props.defaultImporter;
-
+    formState = props.formState,
+    handleChangeInput = props.handleChangeInput,
+    handleChangeSelect = props.handleChangeSelect,
+    handleCreateImporter = props.handleCreateImporter,
+    handleChangeMappingInput = props.handleChangeMappingInput,
+    handleEditState = props.handleEditState,
+    addNewField = props.addNewField,
+    removeField = props.removeField,
+    fieldList = props.fieldList,
+    addNewMetaField = props.addNewMetaField,
+    removeMetaField = props.removeMetaField,
+    metafieldList = props.metafieldList,
+    onClose = props.onClose,
+    selectedImporter = props.selectedImporter,
+    clearImorterForm = props.clearImorterForm,
+    setIsEdit = props.setIsEdit,
+    editState = props.editState,
+    editImporter = props.editImporter,
+    downloadCSV = props.downloadCSV,
+    openMappingDetails = props.openMappingDetails,
+    setOpenMappingDetails = props.setOpenMappingDetails,
+    isMapping = props.isMapping,
+    headerTitle = props.headerTitle,
+    handleUpdateMultipleMapping = props.handleUpdateMultipleMapping,
+    defaultImporter = props.defaultImporter;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var formMethods = (0, _reactHookForm.useForm)();
   var fieldMethods = (0, _reactHookForm.useForm)();
   var metafieldMethods = (0, _reactHookForm.useForm)();
-
   var _useState = (0, _react.useState)(1),
-      _useState2 = _slicedToArray(_useState, 2),
-      importType = _useState2[0],
-      setImportType = _useState2[1]; // const [mappingInputData, setMappingInpuData] = useState({})
-
-
+    _useState2 = _slicedToArray(_useState, 2),
+    importType = _useState2[0],
+    setImportType = _useState2[1];
+  // const [mappingInputData, setMappingInpuData] = useState({})
   var _useState3 = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      alertState = _useState4[0],
-      setAlertState = _useState4[1];
-
+      open: false,
+      content: []
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    alertState = _useState4[0],
+    setAlertState = _useState4[1];
   var _useState5 = (0, _react.useState)(),
-      _useState6 = _slicedToArray(_useState5, 2),
-      filedKey = _useState6[0],
-      setFiledKey = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    filedKey = _useState6[0],
+    setFiledKey = _useState6[1];
   var _useState7 = (0, _react.useState)(),
-      _useState8 = _slicedToArray(_useState7, 2),
-      filedValue = _useState8[0],
-      setFiledValue = _useState8[1];
-
+    _useState8 = _slicedToArray(_useState7, 2),
+    filedValue = _useState8[0],
+    setFiledValue = _useState8[1];
   var _useState9 = (0, _react.useState)(),
-      _useState10 = _slicedToArray(_useState9, 2),
-      metafiledKey = _useState10[0],
-      setMetaFiledKey = _useState10[1];
-
+    _useState10 = _slicedToArray(_useState9, 2),
+    metafiledKey = _useState10[0],
+    setMetaFiledKey = _useState10[1];
   var _useState11 = (0, _react.useState)(),
-      _useState12 = _slicedToArray(_useState11, 2),
-      metafiledValue = _useState12[0],
-      setMetaFiledValue = _useState12[1];
-
+    _useState12 = _slicedToArray(_useState11, 2),
+    metafiledValue = _useState12[0],
+    setMetaFiledValue = _useState12[1];
   var defaultImporterSlugs = ['sync_businesses_default', 'sync_categories_default', 'sync_products_default', 'sync_extras_default', 'sync_extra_options_default', 'sync_extra_option_suboptions_default', 'sync_extra_products_default', 'sync_full_menu_default'];
   var noAdvancedTypes = ['sync_extras', 'sync_extra_options', 'sync_extra_option_suboptions'];
   var isDefaultImporter = defaultImporterSlugs.includes(selectedImporter === null || selectedImporter === void 0 ? void 0 : selectedImporter.slug) || defaultImporter;
@@ -161,70 +126,59 @@ var ImporterFormUI = function ImporterFormUI(props) {
     content: t('MULTIPLE', 'Multiple'),
     sync_name: 'sync_multiple'
   }];
-
   var onSubmit = function onSubmit() {
     if (Object.keys(formState.changes).length === 0) return;
     if (Object.keys(selectedImporter).length > 0) editImporter();else handleCreateImporter();
   };
-
   var onNewFiledSubmit = function onNewFiledSubmit() {
     addNewField(filedKey, filedValue);
-
     if (document.getElementById('field-form')) {
       document.getElementById('field-form').reset();
     }
   };
-
   var onNewMetaFiledSubmit = function onNewMetaFiledSubmit() {
     addNewMetaField(metafiledKey, metafiledValue);
     document.getElementById('meta-field-form').reset();
   };
-
   var handleSelectOption = function handleSelectOption(val) {
     setImportType(val);
   };
-
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
   };
-
   (0, _react.useEffect)(function () {
     if (importType) {
       var _target = (importypeOptions === null || importypeOptions === void 0 ? void 0 : importypeOptions.filter(function (options) {
         return options.value === importType;
       }))[0];
-      handleChangeSelect('type', _target.sync_name); // setMappingInpuData(_target.mapping_input_data)
+      handleChangeSelect('type', _target.sync_name);
+      // setMappingInpuData(_target.mapping_input_data)
     }
   }, [importType]);
   (0, _react.useEffect)(function () {
     var _formState$result, _formState$result3, _formState$result4, _formState$result4$re;
-
     if ((_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error && Object.keys(formState.result).length > 0) {
       var _formState$result2;
-
       setAlertState({
         open: true,
         content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
-
     if (!((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && (_formState$result4$re = _formState$result4.result) !== null && _formState$result4$re !== void 0 && _formState$result4$re.id) {
       onClose();
     }
   }, [formState.result]);
   (0, _react.useEffect)(function () {
     clearImorterForm();
-
     if (Object.keys(selectedImporter).length === 0) {
       var _target = (importypeOptions === null || importypeOptions === void 0 ? void 0 : importypeOptions.filter(function (options) {
         return options.value === 1;
       }))[0];
       handleChangeSelect('type', _target.sync_name);
     }
-
     if (Object.keys(selectedImporter).length > 0) {
       setIsEdit(true);
       handleEditState(selectedImporter);
@@ -593,15 +547,11 @@ var ImporterFormUI = function ImporterFormUI(props) {
     closeOnBackdrop: false
   }));
 };
-
 exports.ImporterFormUI = ImporterFormUI;
-
 var ImporterForm = function ImporterForm(props) {
   var addImporterProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ImporterFormUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ImporterForm, addImporterProps);
 };
-
 exports.ImporterForm = ImporterForm;

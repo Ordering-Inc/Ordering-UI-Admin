@@ -9,5 +9,4 @@ Object.defineProperty(exports, "HomePage", {
     return _HomePage.HomePage;
   }
 });
-
 var _HomePage = require("./HomePage");

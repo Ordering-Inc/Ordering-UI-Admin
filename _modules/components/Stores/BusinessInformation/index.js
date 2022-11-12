@@ -1,92 +1,62 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ConvertInput = exports.BusinessInformation = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _reactHookForm = require("react-hook-form");
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 var _Shared = require("../../Shared");
-
 var _utils = require("../../../utils");
-
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
-
 var _styles = require("../../../styles");
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _styles2 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var BusinessInformationUI = function BusinessInformationUI(props) {
   var _formState$changes5, _formState$result3, _businessState$busine2, _businessState$busine3, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result4, _businessState$busine4, _businessState$busine5, _formState$changes9, _formState$changes10, _formState$changes$na, _formState$changes11, _businessState$busine6, _formState$changes$ex, _formState$changes12, _businessState$busine7, _formState$changes$de, _formState$changes13, _businessState$busine8, _formState$changes$ph, _formState$changes14, _businessState$busine9, _formState$changes$ce, _formState$changes15, _businessState$busine10, _businessState$busine11, _businessState$busine12, _businessState$busine13, _formState$changes16, _formState$changes16$, _formState$changes17, _formState$changes17$, _businessState$busine14, _businessState$busine15, _formState$changes$ri, _formState$changes18, _formState$changes18$, _businessState$busine16, _businessState$busine17, _businessState$busine18, _formState$changes19, _formState$changes19$, _formState$changes20, _formState$changes20$, _businessState$busine19, _businessState$busine20, _formState$changes$ri2, _formState$changes21, _formState$changes21$, _businessState$busine21, _businessState$busine22, _formState$changes$fa, _formState$changes28, _businessState$busine29, _formState$changes$in, _formState$changes29, _businessState$busine30, _formState$changes$ti, _formState$changes30, _businessState$busine31, _formState$changes$pi, _formState$changes31, _businessState$busine32, _formState$changes$wh, _formState$changes32, _businessState$busine33, _formState$changes$sn, _formState$changes33, _businessState$busine34;
-
   var formState = props.formState,
-      businessState = props.businessState,
-      handlechangeImage = props.handlechangeImage,
-      handleChangeInput = props.handleChangeInput,
-      handleButtonUpdateClick = props.handleButtonUpdateClick,
-      handleChangeSwtich = props.handleChangeSwtich,
-      handleChangeRibbon = props.handleChangeRibbon;
+    businessState = props.businessState,
+    handlechangeImage = props.handlechangeImage,
+    handleChangeInput = props.handleChangeInput,
+    handleButtonUpdateClick = props.handleButtonUpdateClick,
+    handleChangeSwtich = props.handleChangeSwtich,
+    handleChangeRibbon = props.handleChangeRibbon;
   var formMethods = (0, _reactHookForm.useForm)();
-
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var headerImageInputRef = (0, _react.useRef)(null);
   var logoImageInputRef = (0, _react.useRef)(null);
-
   var _useState = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      alertState = _useState2[0],
-      setAlertState = _useState2[1];
-
+      open: false,
+      content: []
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    alertState = _useState2[0],
+    setAlertState = _useState2[1];
   var _useState3 = (0, _react.useState)({
-    name: null,
-    data: null,
-    open: false
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      cropState = _useState4[0],
-      setCropState = _useState4[1];
-
+      name: null,
+      data: null,
+      open: false
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    cropState = _useState4[0],
+    setCropState = _useState4[1];
   var priceList = [{
     key: '1',
     value: '$'
@@ -111,23 +81,18 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     pinterest: 'https://www.pinterest.com/',
     whatsapp: 'https://wa.me/'
   };
-
   var handleClickImage = function handleClickImage(type) {
     if (type === 'header') {
       headerImageInputRef.current.click();
     }
-
     if (type === 'logo') {
       logoImageInputRef.current.click();
     }
   };
-
   var handleFiles = function handleFiles(files, name) {
     if (files.length === 1) {
       var _files$;
-
       var type = files[0].type.split('/')[0];
-
       if (type !== 'image') {
         setAlertState({
           open: true,
@@ -135,7 +100,6 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
         });
         return;
       }
-
       if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
         setAlertState({
           open: true,
@@ -143,10 +107,8 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
         });
         return;
       }
-
       var reader = new window.FileReader();
       reader.readAsDataURL(files[0]);
-
       reader.onload = function () {
         setCropState({
           name: name,
@@ -154,26 +116,21 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
           open: true
         });
       };
-
       reader.onerror = function (error) {
         return console.log(error);
       };
-
       handlechangeImage(files[0], name);
     }
   };
-
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
   };
-
   var onSubmit = function onSubmit() {
     if (Object.keys(formState.changes).length > 0) {
       var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4;
-
       if (formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.whatsapp_number && (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.whatsapp_number.search(/^https:\/\/wa\.me\/\+?\d+$/)) === -1) {
         setAlertState({
           open: true,
@@ -181,7 +138,6 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
         });
         return;
       }
-
       if (formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.tiktok_profile && (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.tiktok_profile.search(/^https:\/\/www\.tiktok\.com\/@.+$/)) === -1) {
         setAlertState({
           open: true,
@@ -189,11 +145,9 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
         });
         return;
       }
-
       handleButtonUpdateClick();
     }
   };
-
   var handleChangePhoto = function handleChangePhoto(croppedImg) {
     handleChangeSwtich(cropState === null || cropState === void 0 ? void 0 : cropState.name, croppedImg);
     setCropState({
@@ -202,22 +156,17 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
       open: false
     });
   };
-
   var handleChangeEnable = function handleChangeEnable(value) {
     var _businessState$busine;
-
     if (!(businessState !== null && businessState !== void 0 && (_businessState$busine = businessState.business) !== null && _businessState$busine !== void 0 && _businessState$busine.ribbon) && !value) {
       var ribbonChanges = _objectSpread({}, _utils.ribbonValues);
-
       handleChangeSwtich('ribbon', ribbonChanges);
       return;
     }
-
     handleChangeRibbon({
       enabled: value
     });
   };
-
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
@@ -231,10 +180,8 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
     var _formState$result;
-
     if (formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
-
       setAlertState({
         open: true,
         content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
@@ -377,7 +324,6 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ShapeWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHAPE', 'Shape')), /*#__PURE__*/_react.default.createElement(_styles2.ShapeContentWrapper, null, _utils.shape && Object.keys(_utils.shape).map(function (key, i) {
     var _formState$changes22, _formState$changes22$, _formState$changes23, _formState$changes23$, _businessState$busine23, _businessState$busine24, _formState$changes24, _formState$changes24$, _formState$changes25, _formState$changes25$, _businessState$busine25, _businessState$busine26;
-
     return /*#__PURE__*/_react.default.createElement(_styles2.ShapeBoxWrapper, {
       key: i,
       shapeRect: _utils.shape[key] === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
@@ -391,7 +337,6 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     }, /*#__PURE__*/_react.default.createElement("div", null), (formState !== null && formState !== void 0 && (_formState$changes24 = formState.changes) !== null && _formState$changes24 !== void 0 && (_formState$changes24$ = _formState$changes24.ribbon) !== null && _formState$changes24$ !== void 0 && _formState$changes24$.shape ? (formState === null || formState === void 0 ? void 0 : (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : (_formState$changes25$ = _formState$changes25.ribbon) === null || _formState$changes25$ === void 0 ? void 0 : _formState$changes25$.shape) === _utils.shape[key] : (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine25 = businessState.business) === null || _businessState$busine25 === void 0 ? void 0 : (_businessState$busine26 = _businessState$busine25.ribbon) === null || _businessState$busine26 === void 0 ? void 0 : _businessState$busine26.shape) === _utils.shape[key]) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE_FILTER', 'Price filter')), /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterListWrapper, null, priceList.map(function (item, i) {
     var _formState$changes$pr, _formState$changes26, _businessState$busine27, _formState$changes$pr2, _formState$changes27, _businessState$busine28;
-
     return /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterItem, {
       key: i,
       onClick: function onClick() {
@@ -480,26 +425,21 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     handleChangePhoto: handleChangePhoto
   })));
 };
-
 var BusinessInformation = function BusinessInformation(props) {
   var businessInformationProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessInformationUI
   });
-
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessFormDetails, businessInformationProps);
 };
-
 exports.BusinessInformation = BusinessInformation;
-
 var ConvertInput = function ConvertInput(props) {
   var value = props.value,
-      handleChangeValue = props.handleChangeValue,
-      originalURL = props.originalURL,
-      placeholder = props.placeholder,
-      name = props.name;
+    handleChangeValue = props.handleChangeValue,
+    originalURL = props.originalURL,
+    placeholder = props.placeholder,
+    name = props.name;
   var inputRef = (0, _react.useRef)();
   var timeout1 = null;
-
   var handleChangeConvert = function handleChangeConvert(e) {
     clearTimeout(timeout1);
     var inputValue = convertValue(e.target.value);
@@ -509,24 +449,20 @@ var ConvertInput = function ConvertInput(props) {
       inputRef.current.value = inputValue;
     }, 750);
   };
-
   var convertValue = function convertValue(value) {
     if (!value) return '';
     var splitValue = value.split('/');
     var updatedValue = splitValue[splitValue.length - 1] === '' ? splitValue[splitValue.length - 2] : splitValue[splitValue.length - 1];
     return updatedValue;
   };
-
   var checkKeyDown = function checkKeyDown(e) {
     var keyCode = e.keyCode ? e.keyCode : e.which;
-
     if (keyCode === 8 || keyCode === 46) {
       setTimeout(function () {
         if (inputRef.current.value === '') handleChangeValue('');
       }, 1);
     }
   };
-
   return /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: name,
     ref: inputRef,
@@ -537,5 +473,4 @@ var ConvertInput = function ConvertInput(props) {
     autoComplete: "off"
   });
 };
-
 exports.ConvertInput = ConvertInput;

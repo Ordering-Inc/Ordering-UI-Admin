@@ -27,11 +27,7 @@ Object.defineProperty(exports, "ResetPassword", {
     return _ResetPassword.ResetPassword;
   }
 });
-
 var _ForgotPasswordForm = require("./ForgotPasswordForm");
-
 var _LoginForm = require("./LoginForm");
-
 var _QueryLogin = require("./QueryLogin");
-
 var _ResetPassword = require("./ResetPassword");

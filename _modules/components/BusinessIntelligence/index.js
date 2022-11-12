@@ -315,107 +315,55 @@ Object.defineProperty(exports, "UsersReviewList", {
     return _UsersReviewList.UsersReviewList;
   }
 });
-
 var _BusinessAnalytics = require("./BusinessAnalytics");
-
 var _DriverAnalytics = require("./DriverAnalytics");
-
 var _InvoiceManager = require("./InvoiceManager");
-
 var _Reports = require("./Reports");
-
 var _ReviewsListing = require("./ReviewsListing");
-
 var _ReviewProductsListing = require("./ReviewProductsListing");
-
 var _ReportsDriverGroupFilter = require("./ReportsDriverGroupFilter");
-
 var _ReportsDriverFilter = require("./ReportsDriverFilter");
-
 var _AnalyticsBusinessFilter = require("./AnalyticsBusinessFilter");
-
 var _AnalyticsCalendar = require("./AnalyticsCalendar");
-
 var _ReportsSaleAndCategory = require("./ReportsSaleAndCategory");
-
 var _ReportsGeneralSales = require("./ReportsGeneralSales");
-
 var _ReportsAverageSales = require("./ReportsAverageSales");
-
 var _ReportsPaymethodSales = require("./ReportsPaymethodSales");
-
 var _ReportsCustomer = require("./ReportsCustomer");
-
 var _ReportsUsers = require("./ReportsUsers");
-
 var _ReportsSales = require("./ReportsSales");
-
 var _ReportsOrders = require("./ReportsOrders");
-
 var _ReportsTopDrivers = require("./ReportsTopDrivers");
-
 var _ReportsSpentTime = require("./ReportsSpentTime");
-
 var _ReportsDriverDistance = require("./ReportsDriverDistance");
-
 var _ReportsOrderStatus = require("./ReportsOrderStatus");
-
 var _ReportsDriverSchedule = require("./ReportsDriverSchedule");
-
 var _ReportsDriverOrder = require("./ReportsDriverOrder");
-
 var _ReportsDriverSpend = require("./ReportsDriverSpend");
-
 var _ReportsDriverOrderTime = require("./ReportsDriverOrderTime");
-
 var _ReportsBusinessSpend = require("./ReportsBusinessSpend");
-
 var _ReportsOrderDistance = require("./ReportsOrderDistance");
-
 var _ReportsBusinessDistance = require("./ReportsBusinessDistance");
-
 var _AnalyticsStatusFilterBar = require("./AnalyticsStatusFilterBar");
-
 var _AnalyticsStatusSubFilter = require("./AnalyticsStatusSubFilter");
-
 var _AnalyticsMap = require("./AnalyticsMap");
-
 var _AnalyticsOrdersOrSales = require("./AnalyticsOrdersOrSales");
-
 var _AnalyticsProductCategories = require("./AnalyticsProductCategories");
-
 var _AnalyticsOrdersStatus = require("./AnalyticsOrdersStatus");
-
 var _AnalyticsRegisterUsers = require("./AnalyticsRegisterUsers");
-
 var _AnalyticsCustomerSatisfaction = require("./AnalyticsCustomerSatisfaction");
-
 var _AnalyticsOrdersAcceptSpend = require("./AnalyticsOrdersAcceptSpend");
-
 var _AnalyticsSpendList = require("./AnalyticsSpendList");
-
 var _ReportsBrandFilter = require("./ReportsBrandFilter");
-
 var _AnalyticsDriversFilter = require("./AnalyticsDriversFilter");
-
 var _AnalyticsFilterTimeZone = require("./AnalyticsFilterTimeZone");
-
 var _AnalyticsTopOrders = require("./AnalyticsTopOrders");
-
 var _AnalyticsSpendTimes = require("./AnalyticsSpendTimes");
-
 var _AnalyticsAvailableTimes = require("./AnalyticsAvailableTimes");
-
 var _AnalyticsBusyTimes = require("./AnalyticsBusyTimes");
-
 var _InvoiceDetails = require("./InvoiceDetails");
-
 var _ReportsHeatMap = require("./ReportsHeatMap");
-
 var _BusinessReviewList = require("./BusinessReviewList");
-
 var _UsersReviewList = require("./UsersReviewList");
-
 var _ProductReviewDetails = require("./ProductReviewDetails");
-
 var _ReportsAppIdFilter = require("./ReportsAppIdFilter");

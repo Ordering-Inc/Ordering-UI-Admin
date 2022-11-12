@@ -4,20 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.NotNetworkConnectivity = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _styledComponents = require("styled-components");
-
 var _useOnlineStatus = require("../../hooks/useOnlineStatus");
-
 var _styles = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var NotNetworkConnectivity = function NotNetworkConnectivity() {
   var _theme$images, _theme$images$general;
-
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
   var theme = (0, _styledComponents.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
@@ -31,5 +24,4 @@ var NotNetworkConnectivity = function NotNetworkConnectivity() {
     alt: "Not network"
   })));
 };
-
 exports.NotNetworkConnectivity = NotNetworkConnectivity;

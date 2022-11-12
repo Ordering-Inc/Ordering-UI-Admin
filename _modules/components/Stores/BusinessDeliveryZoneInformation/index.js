@@ -1,106 +1,77 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BusinessDeliveryZoneInformation = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
-
 var _styles = require("../../../styles");
-
 var _Shared = require("../../Shared");
-
 var _reactHookForm = require("react-hook-form");
-
 var _styles2 = require("./styles");
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(props) {
   var _ref, _formState$changes$na, _formState$changes2, _formState$changes3, _ref2, _formState$changes$mi, _formState$changes4, _ref3, _formState$changes$pr, _formState$changes5, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _formState$changes6;
-
   var business = props.business,
-      zone = props.zone,
-      businessZones = props.businessZones,
-      formState = props.formState,
-      handleChangeInput = props.handleChangeInput,
-      handleChangeFormState = props.handleChangeFormState,
-      handleUpdateBusinessDeliveryZone = props.handleUpdateBusinessDeliveryZone,
-      handleAddBusinessDeliveryZone = props.handleAddBusinessDeliveryZone,
-      handleUploadKmlFiles = props.handleUploadKmlFiles,
-      kmlData = props.kmlData;
-
+    zone = props.zone,
+    businessZones = props.businessZones,
+    formState = props.formState,
+    handleChangeInput = props.handleChangeInput,
+    handleChangeFormState = props.handleChangeFormState,
+    handleUpdateBusinessDeliveryZone = props.handleUpdateBusinessDeliveryZone,
+    handleAddBusinessDeliveryZone = props.handleAddBusinessDeliveryZone,
+    handleUploadKmlFiles = props.handleUploadKmlFiles,
+    kmlData = props.kmlData;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useForm = (0, _reactHookForm.useForm)(),
-      handleSubmit = _useForm.handleSubmit,
-      register = _useForm.register,
-      errors = _useForm.errors;
-
+    handleSubmit = _useForm.handleSubmit,
+    register = _useForm.register,
+    errors = _useForm.errors;
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      parseNumber = _useUtils2[0].parseNumber;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    parseNumber = _useUtils2[0].parseNumber;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      configState = _useConfig2[0];
-
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configState = _useConfig2[0];
   var _useState = (0, _react.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      clearState = _useState2[0],
-      setClearState = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    clearState = _useState2[0],
+    setClearState = _useState2[1];
   var _useState3 = (0, _react.useState)(''),
-      _useState4 = _slicedToArray(_useState3, 2),
-      infoContentString = _useState4[0],
-      setInfoContentString = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    infoContentString = _useState4[0],
+    setInfoContentString = _useState4[1];
   var _useState5 = (0, _react.useState)((zone === null || zone === void 0 ? void 0 : zone.type) || 2),
-      _useState6 = _slicedToArray(_useState5, 2),
-      zoneType = _useState6[0],
-      setZoneType = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    zoneType = _useState6[0],
+    setZoneType = _useState6[1];
   var _useState7 = (0, _react.useState)(zone === null || zone === void 0 ? void 0 : zone.data),
-      _useState8 = _slicedToArray(_useState7, 2),
-      zoneData = _useState8[0],
-      setZoneData = _useState8[1];
-
+    _useState8 = _slicedToArray(_useState7, 2),
+    zoneData = _useState8[0],
+    setZoneData = _useState8[1];
   var _useState9 = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState10 = _slicedToArray(_useState9, 2),
-      alertState = _useState10[0],
-      setAlertState = _useState10[1];
-
+      open: false,
+      content: []
+    }),
+    _useState10 = _slicedToArray(_useState9, 2),
+    alertState = _useState10[0],
+    setAlertState = _useState10[1];
   var _useState11 = (0, _react.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      isShowMap = _useState12[0],
-      setIsShowMap = _useState12[1];
-
+    _useState12 = _slicedToArray(_useState11, 2),
+    isShowMap = _useState12[0],
+    setIsShowMap = _useState12[1];
   var kmlRef = (0, _react.useRef)(null);
   var typeOptions = [{
     value: 1,
@@ -143,7 +114,6 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     strokeOpacity: 0.8,
     strokeWeight: 2
   };
-
   var handleChangeType = function handleChangeType(type) {
     handleChangeFormState({
       type: type
@@ -151,17 +121,14 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     setClearState(true);
     setZoneType(type);
   };
-
   var handleZoneData = function handleZoneData(data) {
     setZoneData(data);
     handleChangeFormState({
       data: data
     });
   };
-
   var onSubmit = function onSubmit() {
     var _formState$changes;
-
     if ((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.data || zoneType === 4) {
       if (!zone) handleAddBusinessDeliveryZone();else handleUpdateBusinessDeliveryZone();
     } else {
@@ -171,14 +138,12 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
       });
     }
   };
-
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
   };
-
   (0, _react.useEffect)(function () {
     if (clearState) {
       handleZoneData(null);
@@ -307,5 +272,4 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     closeOnBackdrop: false
   }));
 };
-
 exports.BusinessDeliveryZoneInformation = BusinessDeliveryZoneInformation;

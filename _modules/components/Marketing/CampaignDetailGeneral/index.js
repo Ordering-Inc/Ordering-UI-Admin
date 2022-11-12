@@ -1,94 +1,64 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.CampaignDetailGeneral = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _moment = _interopRequireDefault(require("moment"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _styles = require("../../../styles");
-
 var _Shared = require("../../Shared");
-
 var _CampaignAmountOption = require("../CampaignAmountOption");
-
 var _CampaignSignUpOption = require("../CampaignSignUpOption");
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _styles2 = require("./styles");
-
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
   var _campaignState$campai5, _formState$changes9, _ref, _formState$changes$na, _formState$changes10, _campaignState$campai6, _formState$changes$au, _formState$changes11, _campaignState$campai7, _formState$changes$au2, _formState$changes12, _campaignState$campai8, _ref2, _formState$changes$en, _formState$changes13, _campaignState$campai9, _formState$changes$en2, _formState$changes14, _campaignState$campai10, _formState$changes$au3, _formState$changes15, _campaignState$campai11, _formState$changes$au4, _formState$changes16, _campaignState$campai12, _formState$changes17, _campaignState$campai13, _formState$changes$st, _formState$changes18, _campaignState$campai14, _formState$changes$st2, _formState$changes19, _campaignState$campai15, _formState$changes$sc, _formState$changes20, _campaignState$campai16, _audienceState$pagina;
-
   var formState = props.formState,
-      campaignState = props.campaignState,
-      handleChangeItem = props.handleChangeItem,
-      handleChangeInput = props.handleChangeInput,
-      isAddMode = props.isAddMode,
-      handleUpdateClick = props.handleUpdateClick,
-      handleAddCampaign = props.handleAddCampaign,
-      audienceState = props.audienceState,
-      handleDeleteCondition = props.handleDeleteCondition;
-
+    campaignState = props.campaignState,
+    handleChangeItem = props.handleChangeItem,
+    handleChangeInput = props.handleChangeInput,
+    isAddMode = props.isAddMode,
+    handleUpdateClick = props.handleUpdateClick,
+    handleAddCampaign = props.handleAddCampaign,
+    audienceState = props.audienceState,
+    handleDeleteCondition = props.handleDeleteCondition;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useState = (0, _react.useState)(true),
-      _useState2 = _slicedToArray(_useState, 2),
-      isASAP = _useState2[0],
-      setIsASAP = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    isASAP = _useState2[0],
+    setIsASAP = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isRuleModal = _useState4[0],
-      setIsRuleModal = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    isRuleModal = _useState4[0],
+    setIsRuleModal = _useState4[1];
   var _useState5 = (0, _react.useState)(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      selectedRule = _useState6[0],
-      setSelectedRule = _useState6[1];
-
+    _useState6 = _slicedToArray(_useState5, 2),
+    selectedRule = _useState6[0],
+    setSelectedRule = _useState6[1];
   var _useState7 = (0, _react.useState)({
-    open: false,
-    content: []
-  }),
-      _useState8 = _slicedToArray(_useState7, 2),
-      alertState = _useState8[0],
-      setAlertState = _useState8[1];
-
+      open: false,
+      content: []
+    }),
+    _useState8 = _slicedToArray(_useState7, 2),
+    alertState = _useState8[0],
+    setAlertState = _useState8[1];
   var ruleList = [{
     key: 'orders_count',
     title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options')
@@ -102,54 +72,43 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     key: 'user_last_open_cart_at',
     title: t('OPEN_CARTS', 'Open Carts')
   }];
-
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
   };
-
   var handleCloseRuleModal = function handleCloseRuleModal(index) {
     var isClosed = isConditionStatus(selectedRule);
     if (index && isClosed) handleChangeCheckBox(selectedRule);
     setIsRuleModal(false);
     setSelectedRule(null);
   };
-
   var handleOpenRuleModal = function handleOpenRuleModal(evt, index) {
     if (evt.target.closest('.rule-control')) return;
     setSelectedRule(index);
     setIsRuleModal(true);
   };
-
   var handleChangeDateTime = function handleChangeDateTime(name, date) {
     handleChangeItem(name, date);
   };
-
   var handleChangeSchedule = function handleChangeSchedule() {
     handleChangeItem('scheduled_at', null);
     setIsASAP(true);
   };
-
   var checkColor = function checkColor(status) {
     var index = status.toLocaleLowerCase();
     if (index === 'ended') return '#00D27A';else if (index === 'scheduled') return '#FFC700';else if (index === 'draft') return '#E9ECEF';else return '#E9ECEF';
   };
-
   var handleChangeCheckBox = function handleChangeCheckBox(key) {
     var _formState$changes, _campaignState$campai;
-
     var isUpdate = isEnableStatus(key);
-
     if (!isUpdate) {
       setSelectedRule(key);
       setIsRuleModal(true);
       return;
     }
-
     var conditions = isAddMode ? formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.conditions : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai = campaignState.campaign) === null || _campaignState$campai === void 0 ? void 0 : _campaignState$campai.conditions;
-
     if ((conditions === null || conditions === void 0 ? void 0 : conditions.length) < 2) {
       setAlertState({
         open: true,
@@ -157,10 +116,8 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
       });
       return;
     }
-
     if (isAddMode) {
       var _formState$changes2;
-
       var updatedConditions = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.conditions.filter(function (item) {
         return item.type !== key;
       });
@@ -169,22 +126,17 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
       handleDeleteCondition(isUpdate === null || isUpdate === void 0 ? void 0 : isUpdate.id);
     }
   };
-
   var handleSubmitBtnClick = function handleSubmitBtnClick() {
     if (Object.keys(formState.changes).length > 0) {
       if (isAddMode) {
         var _formState$changes3, _formState$changes3$c;
-
         if ((formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : (_formState$changes3$c = _formState$changes3.conditions) === null || _formState$changes3$c === void 0 ? void 0 : _formState$changes3$c.length) > 0) {
           var _formState$changes4;
-
           var _iterator = _createForOfIteratorHelper(formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.conditions),
-              _step;
-
+            _step;
           try {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var item = _step.value;
-
               if ((item === null || item === void 0 ? void 0 : item.date_condition) === '=' || (item === null || item === void 0 ? void 0 : item.date_condition) === '>') {
                 setAlertState({
                   open: true,
@@ -192,7 +144,6 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
                 });
                 return;
               }
-
               if ((item === null || item === void 0 ? void 0 : item.condition) === '=') {
                 setAlertState({
                   open: true,
@@ -207,17 +158,14 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
             _iterator.f();
           }
         }
-
         handleAddCampaign();
       } else {
         handleUpdateClick();
       }
     }
   };
-
   var isConditionStatus = function isConditionStatus(index) {
     var _formState$changes5, _campaignState$campai2;
-
     var conditions = isAddMode ? formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.conditions : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai2 = campaignState.campaign) === null || _campaignState$campai2 === void 0 ? void 0 : _campaignState$campai2.conditions;
     var isClosed = true;
     conditions.forEach(function (item) {
@@ -225,12 +173,9 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     });
     return isClosed;
   };
-
   var isEnableStatus = function isEnableStatus(key) {
     var _formState$changes$co, _formState$changes6, _campaignState$campai3;
-
     var conditions = (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.conditions) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai3 = campaignState.campaign) === null || _campaignState$campai3 === void 0 ? void 0 : _campaignState$campai3.conditions;
-
     if (!conditions) {
       return false;
     } else {
@@ -240,10 +185,8 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
       return findIndex;
     }
   };
-
   (0, _react.useEffect)(function () {
     var _formState$changes7, _campaignState$campai4, _formState$changes8;
-
     if (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.scheduled_at) === 'undefined' ? campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai4 = campaignState.campaign) === null || _campaignState$campai4 === void 0 ? void 0 : _campaignState$campai4.scheduled_at : formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.scheduled_at) setIsASAP(false);else setIsASAP(true);
   }, [campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai5 = campaignState.campaign) === null || _campaignState$campai5 === void 0 ? void 0 : _campaignState$campai5.scheduled_at, formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.scheduled_at]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -369,5 +312,4 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     onClose: handleCloseRuleModal
   }))));
 };
-
 exports.CampaignDetailGeneral = CampaignDetailGeneral;

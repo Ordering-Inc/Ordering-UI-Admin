@@ -1,98 +1,64 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BusinessPreview = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _orderingComponentsAdmin = require("ordering-components-admin");
-
 var _styledComponents = require("styled-components");
-
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-
 var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCircle"));
-
 var _Shared = require("../../Shared");
-
 var _styles = require("../../../styles");
-
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
-
 var _styles2 = require("./styles");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var BusinessPreview = function BusinessPreview(props) {
   var _theme$images, _theme$images$logos, _sessionState$user, _sessionState$user2, _orderState$options, _business$reviews, _business$reviews2, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _orderState$options2, _business$reviews3, _business$reviews4, _business$categories, _selectedCategory$pro, _business$categories2;
-
   var business = props.business,
-      isMobileView = props.isMobileView;
-
+    isMobileView = props.isMobileView;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage2 = _slicedToArray(_useLanguage, 2),
-      t = _useLanguage2[1];
-
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
-
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
-      _useSession2 = _slicedToArray(_useSession, 1),
-      sessionState = _useSession2[0];
-
+    _useSession2 = _slicedToArray(_useSession, 1),
+    sessionState = _useSession2[0];
   var _useOrder = (0, _orderingComponentsAdmin.useOrder)(),
-      _useOrder2 = _slicedToArray(_useOrder, 1),
-      orderState = _useOrder2[0];
-
+    _useOrder2 = _slicedToArray(_useOrder, 1),
+    orderState = _useOrder2[0];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
-      width = _useWindowSize.width;
-
+    width = _useWindowSize.width;
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils2 = _slicedToArray(_useUtils, 1),
-      _useUtils2$ = _useUtils2[0],
-      parsePrice = _useUtils2$.parsePrice,
-      parseDistance = _useUtils2$.parseDistance,
-      optimizeImage = _useUtils2$.optimizeImage;
-
+    _useUtils2 = _slicedToArray(_useUtils, 1),
+    _useUtils2$ = _useUtils2[0],
+    parsePrice = _useUtils2$.parsePrice,
+    parseDistance = _useUtils2$.parseDistance,
+    optimizeImage = _useUtils2$.optimizeImage;
   var _useState = (0, _react.useState)(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      searchValue = _useState2[0],
-      setSearchValue = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    searchValue = _useState2[0],
+    setSearchValue = _useState2[1];
   var _useState3 = (0, _react.useState)({
-    id: 'all'
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      selectedCategory = _useState4[0],
-      setSelectedCateogry = _useState4[1];
-
+      id: 'all'
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    selectedCategory = _useState4[0],
+    setSelectedCateogry = _useState4[1];
   var pos = {
     top: 0,
     left: 0,
@@ -101,7 +67,6 @@ var BusinessPreview = function BusinessPreview(props) {
   };
   var ele = document.getElementById('product_mobile_view');
   var types = ['food', 'laundry', 'alcohol', 'groceries'];
-
   var mouseDownHandler = function mouseDownHandler(e) {
     if (!isMobileView) return;
     ele.style.cursor = 'grabbing';
@@ -115,48 +80,39 @@ var BusinessPreview = function BusinessPreview(props) {
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
   };
-
   var mouseMoveHandler = function mouseMoveHandler(e) {
     var dx = e.clientX - pos.x;
     var dy = e.clientY - pos.y;
     ele.scrollTop = pos.top - dy;
     ele.scrollLeft = pos.left - dx;
   };
-
   var mouseUpHandler = function mouseUpHandler() {
     document.removeEventListener('mousemove', mouseMoveHandler);
     document.removeEventListener('mouseup', mouseUpHandler);
     ele.style.cursor = 'grab';
     ele.style.removeProperty('user-select');
   };
-
   var getBusinessType = function getBusinessType() {
     if (Object.keys(business).length <= 0) return t('GENERAL', 'General');
     var _types = [];
     types.forEach(function (type) {
       var _type$replace;
-
       return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
     });
     return _types.join(', ');
   };
-
   var convertHoursToMinutes = function convertHoursToMinutes(time) {
     var _useLanguage3 = (0, _orderingComponentsAdmin.useLanguage)(),
-        _useLanguage4 = _slicedToArray(_useLanguage3, 2),
-        t = _useLanguage4[1];
-
+      _useLanguage4 = _slicedToArray(_useLanguage3, 2),
+      t = _useLanguage4[1];
     if (!time) return '0min';
-
     var _time$split = time.split(':'),
-        _time$split2 = _slicedToArray(_time$split, 2),
-        hour = _time$split2[0],
-        minute = _time$split2[1];
-
+      _time$split2 = _slicedToArray(_time$split, 2),
+      hour = _time$split2[0],
+      minute = _time$split2[1];
     var result = parseInt(hour, 10) * 60 + parseInt(minute, 10);
     return "".concat(result).concat(t('MIN', 'min'));
   };
-
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     isMobileView: isMobileView
   }, !isMobileView && /*#__PURE__*/_react.default.createElement(_styles2.DesktopHeader, null, /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null)), /*#__PURE__*/_react.default.createElement(_styles2.DesktopBackground, {
@@ -266,7 +222,6 @@ var BusinessPreview = function BusinessPreview(props) {
     });
   })), (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === 'all' && (business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.map(function (category, i) {
     var _category$products, _category$products2;
-
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
     }, (category === null || category === void 0 ? void 0 : (_category$products = category.products) === null || _category$products === void 0 ? void 0 : _category$products.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapAllCategories, {
@@ -292,36 +247,28 @@ var BusinessPreview = function BusinessPreview(props) {
     color: "primary"
   }, t('VIEW_CART', 'View cart')))))));
 };
-
 exports.BusinessPreview = BusinessPreview;
-
 var SingleProductCard = function SingleProductCard(props) {
   var _orderState$carts, _cart$products, _cart$products2, _theme$images4, _theme$images4$dummie;
-
   var product = props.product,
-      businessId = props.businessId,
-      isSoldOut = props.isSoldOut,
-      isMobileView = props.isMobileView;
+    businessId = props.businessId,
+    isSoldOut = props.isSoldOut,
+    isMobileView = props.isMobileView;
   var theme = (0, _styledComponents.useTheme)();
-
   var _useLanguage5 = (0, _orderingComponentsAdmin.useLanguage)(),
-      _useLanguage6 = _slicedToArray(_useLanguage5, 2),
-      t = _useLanguage6[1];
-
+    _useLanguage6 = _slicedToArray(_useLanguage5, 2),
+    t = _useLanguage6[1];
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-      _useConfig2 = _slicedToArray(_useConfig, 1),
-      stateConfig = _useConfig2[0];
-
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    stateConfig = _useConfig2[0];
   var _useOrder3 = (0, _orderingComponentsAdmin.useOrder)(),
-      _useOrder4 = _slicedToArray(_useOrder3, 1),
-      orderState = _useOrder4[0];
-
+    _useOrder4 = _slicedToArray(_useOrder3, 1),
+    orderState = _useOrder4[0];
   var _useUtils3 = (0, _orderingComponentsAdmin.useUtils)(),
-      _useUtils4 = _slicedToArray(_useUtils3, 1),
-      _useUtils4$ = _useUtils4[0],
-      parsePrice = _useUtils4$.parsePrice,
-      optimizeImage = _useUtils4$.optimizeImage;
-
+    _useUtils4 = _slicedToArray(_useUtils3, 1),
+    _useUtils4$ = _useUtils4[0],
+    parsePrice = _useUtils4$.parsePrice,
+    optimizeImage = _useUtils4$.optimizeImage;
   var editMode = typeof (product === null || product === void 0 ? void 0 : product.code) !== 'undefined';
   var removeToBalance = editMode ? product === null || product === void 0 ? void 0 : product.quantity : 0;
   var cart = (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(businessId)];

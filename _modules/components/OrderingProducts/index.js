@@ -15,7 +15,5 @@ Object.defineProperty(exports, "OrderingProductsListing", {
     return _OrderingProductsListing.OrderingProductsListing;
   }
 });
-
 var _OrderingProductsListing = require("./OrderingProductsListing");
-
 var _OrderingProductDetails = require("./OrderingProductDetails");

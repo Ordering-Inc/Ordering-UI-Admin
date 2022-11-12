@@ -15,7 +15,5 @@ Object.defineProperty(exports, "PurchasedProductsList", {
     return _PurchasedProductsList.PurchasedProductsList;
   }
 });
-
 var _FreeProductsList = require("./FreeProductsList");
-
 var _PurchasedProductsList = require("./PurchasedProductsList");
