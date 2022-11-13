@@ -6,7 +6,8 @@ import settings from '../../config.json'
 export const Login = (props) => {
   const loginProps = {
     ...props,
-    billingUrl: settings?.billing_url
+    billingUrl: settings?.billing_url,
+    useProjectDomain: settings?.use_project_domain
   }
   return (
     <>
