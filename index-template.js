@@ -155,6 +155,12 @@ import myCustomerApp from './template/assets/images/myProducts/customer-app.png'
 import myStoreApp from './template/assets/images/myProducts/store-app.png'
 import myDriverApp from './template/assets/images/myProducts/driver-app.png'
 import orderingWebsite from './template/assets/images/myProducts/ordering-website.png'
+import myCallcenterAppBrand from './template/assets/images/myProducts/my-callcenter-app-brand.png'
+import myCallcenterAppLive from './template/assets/images/myProducts/my-callcenter-app-live.png'
+import myKioskAppBrand from './template/assets/images/myProducts/my-kiosk-app-brand.png'
+import myKioskAppLive from './template/assets/images/myProducts/my-kiosk-app-live.png'
+import myPosAppBrand from './template/assets/images/myProducts/my-pos-app-brand.png'
+import myPosAppLive from './template/assets/images/myProducts/my-pos-app-live.png'
 
 if (!(window?.location?.hostname === 'localhost')) {
   Sentry.init({
@@ -256,7 +262,13 @@ theme.images = {
     customerApp: myCustomerApp,
     storeApp: myStoreApp,
     driverApp: myDriverApp,
-    orderingWebsite: orderingWebsite
+    orderingWebsite: orderingWebsite,
+    myCallcenterAppBrand,
+    myCallcenterAppLive,
+    myKioskAppBrand,
+    myKioskAppLive,
+    myPosAppBrand,
+    myPosAppLive
   },
   icons: {
     ordersList: ordersList,

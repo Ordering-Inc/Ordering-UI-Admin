@@ -18,10 +18,11 @@ import {
   BoxArrowUpRight,
   Cart3,
   Cash,
-  BagCheck
+  BagCheck,
+  CloudDownload
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { useEvent, useLanguage, useSession, useConfig } from 'ordering-components-admin'
+import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
@@ -41,7 +42,9 @@ import {
   LanguageSelectorContainer
 } from './styles'
 
-export const SidebarMenu = (props) => {
+const SidebarMenuUI = (props) => {
+  const { getBillingToken, billingUrl } = props
+
   const location = useLocation()
   const theme = useTheme()
   const [events] = useEvent()
@@ -135,6 +138,24 @@ export const SidebarMenu = (props) => {
       title: t('DRIVER_APP', 'Driver app'),
       pageName: 'driver_app',
       url: '/my-products/driver-app'
+    },
+    {
+      id: 5,
+      title: t('POS_APP', 'POS'),
+      pageName: 'pos_app',
+      url: '/my-products/pos-app'
+    },
+    {
+      id: 6,
+      title: t('CALL_CENTER_APP', 'Call center'),
+      pageName: 'call_center_app',
+      url: '/my-products/call-center-app'
+    },
+    {
+      id: 7,
+      title: t('KIOSK_APP', 'Kiosk'),
+      pageName: 'kiosk_app',
+      url: '/my-products/kiosk-app'
     }
   ]
 
@@ -322,6 +343,13 @@ export const SidebarMenu = (props) => {
       handleMenuCollapse(true)
     }
   }, [windowSize.width])
+
+  const handleClickBilling = async () => {
+    const billingState = await getBillingToken()
+    if (!billingState?.error && billingState?.result?.access_token) {
+      window.open(`${billingUrl}?token=${billingState?.result?.access_token}`, '_blank')
+    }
+  }
 
   return (
     <>
@@ -647,7 +675,10 @@ export const SidebarMenu = (props) => {
                           location.pathname === '/my-products/ordering-website' ||
                           location.pathname === '/my-products/customer-app' ||
                           location.pathname === '/my-products/store-app' ||
-                          location.pathname === '/my-products/driver-app'
+                          location.pathname === '/my-products/driver-app' ||
+                          location.pathname === '/my-products/pos-app' ||
+                          location.pathname === '/my-products/call-center-app' ||
+                          location.pathname === '/my-products/kiosk-app'
                         }
                       >
                         <BagCheck />
@@ -789,4 +820,12 @@ const ContextAwareToggle = ({ children, eventKey, callback, page, handleGoToPage
       {children}
     </Button>
   )
+}
+
+export const SidebarMenu = (props) => {
+  const sidebarMenu = {
+    ...props,
+    UIComponent: SidebarMenuUI
+  }
+  return <SidebarMenuController {...sidebarMenu} />
 }

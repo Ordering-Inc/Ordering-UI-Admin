@@ -1,6 +1,7 @@
 {
   "app_id": "ordering-admin-react",
   "app_name": "Ordering Admin",
+  "billing_url": "https://billing-dashboard.tryordering.com",
   "api": {
     "url": "https://apiv4.ordering.co",
     "language": "en",
