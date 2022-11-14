@@ -182,7 +182,12 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
     value: (_ref2 = (_brandFormState$chang12 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang13 = brandFormState.changes) === null || _brandFormState$chang13 === void 0 ? void 0 : _brandFormState$chang13.slug) !== null && _brandFormState$chang12 !== void 0 ? _brandFormState$chang12 : brand === null || brand === void 0 ? void 0 : brand.slug) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: handleChangeInput,
     disabled: brandFormState.loading,
-    autoComplete: "off"
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (e.which === 32) {
+        e.preventDefault();
+      }
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('RIBBON', 'Ribbon')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (brand === null || brand === void 0 ? void 0 : (_brand$ribbon2 = brand.ribbon) === null || _brand$ribbon2 === void 0 ? void 0 : _brand$ribbon2.enabled) || false,
     onChange: function onChange(val) {

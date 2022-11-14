@@ -179,7 +179,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_GROUPS', 'Drivers groups')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_AUTOMATION', 'Delivery automation')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
     placement: "bottom",
     overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, t('START_TUTORIAL', 'Start tutorial'))
   }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {

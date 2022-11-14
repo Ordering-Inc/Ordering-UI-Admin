@@ -44,7 +44,7 @@ var Support = function Support(props) {
     borderRadius: "7.6px",
     color: "primary",
     onClick: function onClick() {
-      return handleGoToLink('https://www.ordering.co/ordering-support');
+      return handleGoToLink('https://support.ordering.co');
     },
     outline: true
   }, t('TECH_SUPPORT', 'Tech Support'))))));

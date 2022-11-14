@@ -59,7 +59,7 @@ var RewardsProgramsUI = function RewardsProgramsUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('LOYALTY', 'Loyalty'))), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('LOYALTY_AUTOMATION', 'Loyalty automation'))), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
     onClick: function onClick() {
       return setShowOption('points_wallet');
     }

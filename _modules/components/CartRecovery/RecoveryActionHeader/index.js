@@ -34,7 +34,7 @@ var RecoveryActionHeader = function RecoveryActionHeader(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitle, null, t('RECOVERY_ACTIONS', 'Recovery actions')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitle, null, t('CART_RECOVERY_AUTOMATION', 'Cart recovery automation')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('RECOVERY_ACTIONS_INFO', 'If you have multiple actions that apply to an order, then your customer will see the highest ranking action. To change the ranking of your actions just drag and drop.')))), /*#__PURE__*/_react.default.createElement(_styles2.TopRightSection, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",

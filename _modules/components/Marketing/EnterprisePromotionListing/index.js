@@ -107,7 +107,7 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('PROMOTION_AUTOMATION', 'Promotions automation'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, {
     eventDisabled: advancedOfferModuleDisabled || isDisabledFeature
   }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
