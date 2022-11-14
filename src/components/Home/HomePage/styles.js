@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components'
+import { lighten } from 'polished'
+
 export const HomeContainer = styled.div`
   flex: 1;
   padding: 20px;
@@ -52,6 +54,7 @@ export const Breadcrumb = styled.div`
   }
 `
 export const HeaderContainer = styled.div`
+  margin-bottom: 25px;
 `
 export const WelcomeMsg = styled.h1`
   font-weight: bold;
@@ -64,7 +67,6 @@ export const WelcomeMsg = styled.h1`
 export const GuideMsg = styled.p`
   font-size: 16px;
   color: ${props => props.theme.colors.headingColor};
-  margin-bottom: 25px;
 `
 export const Reports = styled.div`
   display: flex;
@@ -421,4 +423,49 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+`
+
+export const ProjectStatusContainer = styled.div`
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+
+  > img {
+    max-height: 250px;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+`
+export const ProjectInfoWrapper = styled.div`
+  padding: 20px 30px;
+`
+export const GreetingText = styled.h1`
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 48px;
+  margin: 0;
+`
+export const ProjectStatusDescription = styled.p`
+  font-size: 16px;
+  line-height: 24px;
+`
+export const ProjectCurrentStatus = styled.div`
+  width: fit-content;
+  margin-top: 15px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 24px;
+  color: ${props => props.theme.colors.warning};
+  background-color: ${(props) => lighten(0.4, props.theme.colors.warning)};
+  ${({ isActive }) => isActive && css`
+    color: ${props => props.theme.colors.success};
+    background-color: ${(props) => lighten(0.5, props.theme.colors.success)};
+  `}
 `
