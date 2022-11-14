@@ -37,6 +37,12 @@ import deliverect from './template/assets/images/deliverect.png'
 import ItsaCheckmateLogo from './template/assets/images/ItsaCheckmateLogo.png'
 import doordash from './template/assets/images/door-dash.png'
 /**
+ * project statuses
+ */
+import projectActive from './template/assets/images/projectStatuses/project-active.png'
+import projectPastDuePayment from './template/assets/images/projectStatuses/project-past-due-payment.png'
+
+/**
  * Theme apps
  */
 import storeApp from './template/assets/images/store-app.png'
@@ -176,6 +182,10 @@ theme.images = {
     deliverect,
     ItsaCheckmateLogo,
     doordash
+  },
+  project: {
+    active: projectActive,
+    pastDuePayment: projectPastDuePayment
   },
   apps: {
     storeApp,

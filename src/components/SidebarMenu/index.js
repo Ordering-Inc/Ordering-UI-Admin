@@ -21,7 +21,7 @@ import {
   BagCheck
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi, useSite } from 'ordering-components-admin'
+import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
@@ -51,7 +51,6 @@ const SidebarMenuUI = (props) => {
   const [sessionState] = useSession()
   const [{ configs }] = useConfig()
   const [ordering] = useApi()
-  const [siteList] = useSite()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
 
@@ -337,8 +336,7 @@ const SidebarMenuUI = (props) => {
   }
 
   const handleOpenSite = () => {
-    if (siteList.length && siteList[0]?.url) handleGoToLink(siteList[0]?.url)
-    else handleGoToLink(`https://${ordering.project}.tryordering.com`)
+    handleGoToLink(`https://${ordering.project}.tryordering.com`)
   }
 
   useEffect(() => {

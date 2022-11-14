@@ -417,6 +417,12 @@ export const orderRejectCommentList = (status) => {
 
 export const widgetURL = 'https://orderingweb.ordering.co/'
 
+export const getCurrentDiffDays = (time) => {
+  const current = moment().utc()
+  const compared = moment(time)
+  return compared.diff(current, 'days')
+}
+
 export const firstLetterCapital = (text) => {
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
 }
