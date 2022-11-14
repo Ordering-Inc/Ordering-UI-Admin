@@ -136,6 +136,14 @@ const SiteThemeUI = (props) => {
                               handleChangeValue={value => handleChangeValue(value, block)}
                             />
                           )}
+                          {block === 'slug' && components[block]?.value_type === 'string' && (
+                            <Select
+                              placeholder={<Option isPlaceholder>{t('SELECT_ITEM', 'Select a _attribute_').replace('_attribute_', getTitle(block))}</Option>}
+                              defaultValue={themeValues[selectedPage].components[block]}
+                              options={getOptions(components[block]?.options)}
+                              onChange={value => handleChangeValue(value, block)}
+                            />
+                          )}
                           {Object.keys(components[block]).filter(option => option !== 'components' && option !== 'value_type').map(option => {
                             const optionObject = components[block][option]
                             return (

@@ -8,6 +8,7 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { IconButton, Button } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
+import { Sessions } from '../Sessions'
 
 import {
   Container,
@@ -66,6 +67,7 @@ const ProfilePageUI = (props) => {
           </ButtonsGroup>
         </UserInfoWrapper>
       </UserInfoContainer>
+      <Sessions />
     </Container>
   )
 }

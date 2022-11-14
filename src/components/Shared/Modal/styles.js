@@ -10,16 +10,14 @@ export const Container = styled.div`
 
 export const ModalDialog = styled.div`
   position: relative;
-  background-color: ${({ isTransparent, theme }) => isTransparent ? 'transparent' : theme.colors.backgroundPage || '#FFF'};
-  padding: ${({ padding }) => padding || '20px'};
   width: ${({ width }) => width || '50%'};
   height: ${({ height }) => height};
   border-radius: 10px;
   box-sizing: border-box;
   margin-top: auto;
   margin-bottom: auto;
+  overflow: hidden;
   max-height: calc(var(--vh, 1vh) * 90);
-  overflow: ${({ overflow }) => overflow || 'auto'};
   @media (max-width: 860px) {
     width: 80%;
   }
@@ -30,6 +28,16 @@ export const ModalDialog = styled.div`
     border-radius: 0px;
   }
 `
+
+export const ModalDialogInnerContainer = styled.div`
+  position: relative;
+  padding: ${({ padding }) => padding || '20px'};
+  overflow: ${({ overflow }) => overflow || 'auto'};
+  background-color: ${({ isTransparent, theme }) => isTransparent ? 'transparent' : theme.colors.backgroundPage || '#FFF'};
+  width: 100%;
+  height: 100%;
+`
+
 export const ModalActions = styled.div`
   display: flex;
   justify-content: space-around;
