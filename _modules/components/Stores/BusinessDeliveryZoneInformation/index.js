@@ -21,7 +21,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(props) {
-  var _ref, _formState$changes$na, _formState$changes2, _formState$changes3, _ref2, _formState$changes$mi, _formState$changes4, _ref3, _formState$changes$pr, _formState$changes5, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _formState$changes6;
+  var _zone$businesses$, _ref, _formState$changes$na, _formState$changes2, _zone$businesses$2, _formState$changes3, _ref2, _formState$changes$mi, _formState$changes4, _ref3, _formState$changes$pr, _formState$changes5, _configState$configs, _configState$configs$, _zone$businesses$3, _zone$businesses$4, _configState$configs2, _configState$configs3, _formState$changes6;
   var business = props.business,
     zone = props.zone,
     businessZones = props.businessZones,
@@ -187,6 +187,7 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     onSubmit: handleSubmit(onSubmit),
     autoComplete: "off"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Row, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    disabled: (zone === null || zone === void 0 ? void 0 : (_zone$businesses$ = zone.businesses[0]) === null || _zone$businesses$ === void 0 ? void 0 : _zone$businesses$.id) !== (zone === null || zone === void 0 ? void 0 : zone.pivot.business_id),
     placeholder: t('NAME', 'Name'),
     name: "name",
     value: (_ref = (_formState$changes$na = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : zone === null || zone === void 0 ? void 0 : zone.name) !== null && _ref !== void 0 ? _ref : '',
@@ -195,6 +196,7 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
       required: t('NAME_REQUIRED', 'The name is required.')
     })
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_styles2.TypeSelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    isDisabled: (zone === null || zone === void 0 ? void 0 : (_zone$businesses$2 = zone.businesses[0]) === null || _zone$businesses$2 === void 0 ? void 0 : _zone$businesses$2.id) !== (zone === null || zone === void 0 ? void 0 : zone.pivot.business_id),
     defaultValue: parseInt(((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.type) || zoneType),
     options: typeOptions,
     onChange: handleChangeType
@@ -218,12 +220,13 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     name: "address",
     defaultValue: business === null || business === void 0 ? void 0 : business.address,
     disabled: true
-  })), zoneType !== 4 && isShowMap && (configState !== null && configState !== void 0 && (_configState$configs = configState.configs) !== null && _configState$configs !== void 0 && (_configState$configs$ = _configState$configs.google_maps_api_key) !== null && _configState$configs$ !== void 0 && _configState$configs$.value ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, /*#__PURE__*/_react.default.createElement("button", {
+  })), zoneType !== 4 && isShowMap && (configState !== null && configState !== void 0 && (_configState$configs = configState.configs) !== null && _configState$configs !== void 0 && (_configState$configs$ = _configState$configs.google_maps_api_key) !== null && _configState$configs$ !== void 0 && _configState$configs$.value ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, (zone === null || zone === void 0 ? void 0 : (_zone$businesses$3 = zone.businesses[0]) === null || _zone$businesses$3 === void 0 ? void 0 : _zone$businesses$3.id) === (zone === null || zone === void 0 ? void 0 : zone.pivot.business_id) && /*#__PURE__*/_react.default.createElement("button", {
     type: "button",
     onClick: function onClick() {
       return setClearState(true);
     }
   }, t('CLEAR', 'Clear')), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessZoneGoogleMaps, {
+    disabled: (zone === null || zone === void 0 ? void 0 : (_zone$businesses$4 = zone.businesses[0]) === null || _zone$businesses$4 === void 0 ? void 0 : _zone$businesses$4.id) !== (zone === null || zone === void 0 ? void 0 : zone.pivot.business_id),
     apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value,
     mapControls: googleMapsControls,
     location: business === null || business === void 0 ? void 0 : business.location,
