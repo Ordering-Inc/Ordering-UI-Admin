@@ -704,7 +704,10 @@ const SidebarMenuUI = (props) => {
                           location.pathname === '/my-products/ordering-website' ||
                           location.pathname === '/my-products/customer-app' ||
                           location.pathname === '/my-products/store-app' ||
-                          location.pathname === '/my-products/driver-app'
+                          location.pathname === '/my-products/driver-app' ||
+                          location.pathname === '/my-products/pos-app' ||
+                          location.pathname === '/my-products/call-center-app' ||
+                          location.pathname === '/my-products/kiosk-app'
                         }
                       >
                         <BagCheck />
