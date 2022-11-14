@@ -134,6 +134,21 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     title: t('DRIVER_APP', 'Driver app'),
     pageName: 'driver_app',
     url: '/my-products/driver-app'
+  }, {
+    id: 5,
+    title: t('POS_APP', 'POS'),
+    pageName: 'pos_app',
+    url: '/my-products/pos-app'
+  }, {
+    id: 6,
+    title: t('CALL_CENTER_APP', 'Call center'),
+    pageName: 'call_center_app',
+    url: '/my-products/call-center-app'
+  }, {
+    id: 7,
+    title: t('KIOSK_APP', 'Kiosk'),
+    pageName: 'kiosk_app',
+    url: '/my-products/kiosk-app'
   }];
   var storesSubMenus = [{
     id: 1,
@@ -484,7 +499,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     }, (0, _utils.firstLetterCapital)(item.title));
   })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user29 = sessionState.user) === null || _sessionState$user29 === void 0 ? void 0 : _sessionState$user29.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('SALES_CHANNELS_AND_PRODUCTS', 'Sales channels and products')), /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "12",
-    active: location.pathname === '/my-products/ordering-website' || location.pathname === '/my-products/customer-app' || location.pathname === '/my-products/store-app' || location.pathname === '/my-products/driver-app'
+    active: location.pathname === '/my-products/ordering-website' || location.pathname === '/my-products/customer-app' || location.pathname === '/my-products/store-app' || location.pathname === '/my-products/driver-app' || location.pathname === '/my-products/pos-app' || location.pathname === '/my-products/call-center-app' || location.pathname === '/my-products/kiosk-app'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BagCheck, null), /*#__PURE__*/_react.default.createElement("span", null, t('MY_PRODUCTS', 'My products'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "12"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, myProductMenus.map(function (item) {

@@ -555,6 +555,12 @@ Object.defineProperty(exports, "Button", {
     return _Buttons.Button;
   }
 });
+Object.defineProperty(exports, "CallCenterApp", {
+  enumerable: true,
+  get: function get() {
+    return _MyProducts.CallCenterApp;
+  }
+});
 Object.defineProperty(exports, "CampaignAmountOption", {
   enumerable: true,
   get: function get() {
@@ -1245,6 +1251,12 @@ Object.defineProperty(exports, "InvoiceManager", {
     return _BusinessIntelligence.InvoiceManager;
   }
 });
+Object.defineProperty(exports, "KioskApp", {
+  enumerable: true,
+  get: function get() {
+    return _MyProducts.KioskApp;
+  }
+});
 Object.defineProperty(exports, "LanguageManager", {
   enumerable: true,
   get: function get() {
@@ -1615,6 +1627,12 @@ Object.defineProperty(exports, "PointsWalletLevels", {
   enumerable: true,
   get: function get() {
     return _Loyalty.PointsWalletLevels;
+  }
+});
+Object.defineProperty(exports, "PosApp", {
+  enumerable: true,
+  get: function get() {
+    return _MyProducts.PosApp;
   }
 });
 Object.defineProperty(exports, "ProductDesktopPreview", {
