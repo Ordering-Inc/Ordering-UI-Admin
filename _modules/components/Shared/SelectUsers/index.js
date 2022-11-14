@@ -48,11 +48,16 @@ var SelectUsersUI = function SelectUsersUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     all = _useState2[0],
     setAll = _useState2[1];
+  var _useState3 = (0, _react.useState)(10),
+    _useState4 = _slicedToArray(_useState3, 2),
+    paginationSize = _useState4[0],
+    setPaginationSize = _useState4[1];
   var handleChangePage = function handleChangePage(page) {
-    getUsers(page, 10);
+    getUsers(page, paginationSize);
   };
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(paginationProps.from / pageSize);
+    setPaginationSize(pageSize);
     getUsers(expectedPage, pageSize);
   };
   (0, _react.useEffect)(function () {
@@ -101,6 +106,7 @@ var SelectUsersUI = function SelectUsersUI(props) {
       className: "name"
     }, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname));
   })), (!all || !!(searchValue !== null && searchValue !== void 0 && searchValue.length)) && (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Pagination.Pagination, {
+    paginationSize: paginationSize,
     currentPage: paginationProps.currentPage,
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,

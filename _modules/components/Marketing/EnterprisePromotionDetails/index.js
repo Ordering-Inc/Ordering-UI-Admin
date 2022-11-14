@@ -177,7 +177,6 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     handleUpdateClick: handleUpdateClick,
     handleAddPromotion: handleAddPromotion
   })), selectedOption === 'sites' && /*#__PURE__*/_react.default.createElement(_Shared.SelectSites, {
-    isAllChecked: selectedSitesIds.length === 0,
     isAddMode: isAddMode,
     allSites: sitesState.sites,
     selectedSitesIds: selectedSitesIds,

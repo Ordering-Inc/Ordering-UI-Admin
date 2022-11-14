@@ -52,9 +52,6 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
-  var _useSite = (0, _orderingComponentsAdmin.useSite)(),
-    _useSite2 = _slicedToArray(_useSite, 1),
-    siteList = _useSite2[0];
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
@@ -284,8 +281,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     window.open(link, '_blank');
   };
   var handleOpenSite = function handleOpenSite() {
-    var _siteList$, _siteList$2;
-    if (siteList.length && (_siteList$ = siteList[0]) !== null && _siteList$ !== void 0 && _siteList$.url) handleGoToLink((_siteList$2 = siteList[0]) === null || _siteList$2 === void 0 ? void 0 : _siteList$2.url);else handleGoToLink("https://".concat(ordering.project, ".tryordering.com"));
+    handleGoToLink("https://".concat(ordering.project, ".tryordering.com"));
   };
   (0, _react.useEffect)(function () {
     if (windowSize.width < 1024) {
