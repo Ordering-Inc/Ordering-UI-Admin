@@ -147,6 +147,24 @@ const SidebarMenuUI = (props) => {
       title: t('DRIVER_APP', 'Driver app'),
       pageName: 'driver_app',
       url: '/my-products/driver-app'
+    },
+    {
+      id: 5,
+      title: t('POS_APP', 'POS'),
+      pageName: 'pos_app',
+      url: '/my-products/pos-app'
+    },
+    {
+      id: 6,
+      title: t('CALL_CENTER_APP', 'Call center'),
+      pageName: 'call_center_app',
+      url: '/my-products/call-center-app'
+    },
+    {
+      id: 7,
+      title: t('KIOSK_APP', 'Kiosk'),
+      pageName: 'kiosk_app',
+      url: '/my-products/kiosk-app'
     }
   ]
 
