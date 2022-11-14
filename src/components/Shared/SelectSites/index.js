@@ -12,7 +12,6 @@ import {
 
 export const SelectSites = (props) => {
   const {
-    isAllChecked,
     isAddMode,
     isDisabled,
     selectedSitesIds,
@@ -67,8 +66,8 @@ export const SelectSites = (props) => {
           key={site.id}
         >
           <Checkbox
-            checked={isAllChecked || selectedSitesIds.includes(site.id)}
-            onChange={(e) => handleSelectSite(isAllChecked ? true : e.target.checked, site.id)}
+            checked={selectedSitesIds.includes(site.id)}
+            onChange={(e) => handleSelectSite(e.target.checked, site.id)}
           />
           <span>{site.name}</span>
         </ChannelItem>
