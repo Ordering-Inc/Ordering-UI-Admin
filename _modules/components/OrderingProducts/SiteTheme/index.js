@@ -142,7 +142,7 @@ var SiteThemeUI = function SiteThemeUI(props) {
       return setSelectedPage(key);
     }
   })), selectedPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PageBlockTitle, null, t('PAGE_BLOCKS', 'Page blocks')), Object.keys((_themeStructure$selec = themeStructure[selectedPage]) === null || _themeStructure$selec === void 0 ? void 0 : _themeStructure$selec.components).map(function (block) {
-    var _components$block, _components$block2, _components$block3;
+    var _components$block, _components$block2, _components$block3, _components$block4, _components$block5;
     var components = themeStructure[selectedPage].components;
     return /*#__PURE__*/_react.default.createElement(_styles2.BlockContainer, {
       key: block
@@ -150,6 +150,15 @@ var SiteThemeUI = function SiteThemeUI(props) {
       valueObject: themeValues[selectedPage].components[block],
       handleAddThemeGallery: handleAddThemeGallery,
       handleChangeValue: function handleChangeValue(value) {
+        return _handleChangeValue(value, block);
+      }
+    }), block === 'slug' && ((_components$block2 = components[block]) === null || _components$block2 === void 0 ? void 0 : _components$block2.value_type) === 'string' && /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+      placeholder: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+        isPlaceholder: true
+      }, t('SELECT_ITEM', 'Select a _attribute_').replace('_attribute_', getTitle(block))),
+      defaultValue: themeValues[selectedPage].components[block],
+      options: getOptions((_components$block3 = components[block]) === null || _components$block3 === void 0 ? void 0 : _components$block3.options),
+      onChange: function onChange(value) {
         return _handleChangeValue(value, block);
       }
     }), Object.keys(components[block]).filter(function (option) {
@@ -168,9 +177,9 @@ var SiteThemeUI = function SiteThemeUI(props) {
         setThemeValues: setThemeValues,
         handleAddThemeGallery: handleAddThemeGallery
       }));
-    }), ((_components$block2 = components[block]) === null || _components$block2 === void 0 ? void 0 : _components$block2.components) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys((_components$block3 = components[block]) === null || _components$block3 === void 0 ? void 0 : _components$block3.components).map(function (component) {
-      var _components$block4, _themeValues$selected3;
-      var componentObject = (_components$block4 = components[block]) === null || _components$block4 === void 0 ? void 0 : _components$block4.components[component];
+    }), ((_components$block4 = components[block]) === null || _components$block4 === void 0 ? void 0 : _components$block4.components) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys((_components$block5 = components[block]) === null || _components$block5 === void 0 ? void 0 : _components$block5.components).map(function (component) {
+      var _components$block6, _themeValues$selected3;
+      var componentObject = (_components$block6 = components[block]) === null || _components$block6 === void 0 ? void 0 : _components$block6.components[component];
       return /*#__PURE__*/_react.default.createElement(_ThemeComponent.ThemeComponent, {
         key: component,
         name: component,

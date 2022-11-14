@@ -4,9 +4,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WidgeBlock = exports.WelcomeMsg = exports.VideoOnBoardingWrapper = exports.VideoOnBoardingContainer = exports.VideoAndReportsWrapper = exports.SalesGraphContainer = exports.Reports = exports.ParagraphHeaders = exports.OrdersOrSalesContainer = exports.OrdersAndSalesWrapper = exports.OrderingHelpButton = exports.IframeWrapper = exports.HomeContainer = exports.HideAndShowWrapper = exports.HeaderContainer = exports.GuideMsg = exports.FirstStoreToSellWrapper = exports.FirstStoreToSellContent = exports.FeedbackWidgets = exports.FeedbackContainer = exports.DetailsContent = exports.ChartHeaderContainer = exports.ButtonWrapper = exports.Breadcrumb = exports.BoxIconContainer = exports.AssistanceWidgets = exports.AssistanceTitle = exports.AssistanceBody = void 0;
+exports.WidgeBlock = exports.WelcomeMsg = exports.VideoOnBoardingWrapper = exports.VideoOnBoardingContainer = exports.VideoAndReportsWrapper = exports.SalesGraphContainer = exports.Reports = exports.ProjectStatusDescription = exports.ProjectStatusContainer = exports.ProjectInfoWrapper = exports.ProjectCurrentStatus = exports.ParagraphHeaders = exports.OrdersOrSalesContainer = exports.OrdersAndSalesWrapper = exports.OrderingHelpButton = exports.IframeWrapper = exports.HomeContainer = exports.HideAndShowWrapper = exports.HeaderContainer = exports.GuideMsg = exports.GreetingText = exports.FirstStoreToSellWrapper = exports.FirstStoreToSellContent = exports.FeedbackWidgets = exports.FeedbackContainer = exports.DetailsContent = exports.ChartHeaderContainer = exports.ButtonWrapper = exports.Breadcrumb = exports.BoxIconContainer = exports.AssistanceWidgets = exports.AssistanceTitle = exports.AssistanceBody = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43;
+var _polished = require("polished");
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -25,13 +26,13 @@ var Breadcrumb = _styledComponents.default.div(_templateObject6 || (_templateObj
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      margin-left: 8px;\n      margin-right: -8px;\n    "]))) : (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n      margin-left: -8px;\n    "])));
 });
 exports.Breadcrumb = Breadcrumb;
-var HeaderContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n"])));
+var HeaderContainer = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-bottom: 25px;\n"])));
 exports.HeaderContainer = HeaderContainer;
 var WelcomeMsg = _styledComponents.default.h1(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-weight: bold;\n  font-size: 28px;\n  color: ", ";\n  @media(min-width: 768px) {\n    font-size: 32px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 exports.WelcomeMsg = WelcomeMsg;
-var GuideMsg = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  color: ", ";\n  margin-bottom: 25px;\n"])), function (props) {
+var GuideMsg = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  color: ", ";\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 exports.GuideMsg = GuideMsg;
@@ -136,3 +137,24 @@ var FeedbackContainer = _styledComponents.default.div(_templateObject42 || (_tem
 exports.FeedbackContainer = FeedbackContainer;
 var ButtonWrapper = _styledComponents.default.div(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  margin-top: 20px;\n"])));
 exports.ButtonWrapper = ButtonWrapper;
+var ProjectStatusContainer = _styledComponents.default.div(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 8px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin-bottom: 60px;\n\n  > img {\n    max-height: 250px;\n  }\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    justify-content: space-between;\n  }\n"])));
+exports.ProjectStatusContainer = ProjectStatusContainer;
+var ProjectInfoWrapper = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  padding: 20px 30px;\n"])));
+exports.ProjectInfoWrapper = ProjectInfoWrapper;
+var GreetingText = _styledComponents.default.h1(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  font-size: 32px;\n  font-weight: 700;\n  line-height: 48px;\n  margin: 0;\n"])));
+exports.GreetingText = GreetingText;
+var ProjectStatusDescription = _styledComponents.default.p(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  line-height: 24px;\n"])));
+exports.ProjectStatusDescription = ProjectStatusDescription;
+var ProjectCurrentStatus = _styledComponents.default.div(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  width: fit-content;\n  margin-top: 15px;\n  padding: 10px 16px;\n  border-radius: 8px;\n  font-size: 14px;\n  line-height: 24px;\n  color: ", ";\n  background-color: ", ";\n  ", "\n"])), function (props) {
+  return props.theme.colors.warning;
+}, function (props) {
+  return (0, _polished.lighten)(0.4, props.theme.colors.warning);
+}, function (_ref6) {
+  var isActive = _ref6.isActive;
+  return isActive && (0, _styledComponents.css)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n    color: ", ";\n    background-color: ", ";\n  "])), function (props) {
+    return props.theme.colors.success;
+  }, function (props) {
+    return (0, _polished.lighten)(0.5, props.theme.colors.success);
+  });
+});
+exports.ProjectCurrentStatus = ProjectCurrentStatus;

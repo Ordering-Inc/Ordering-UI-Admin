@@ -13,6 +13,8 @@ var _Buttons = require("../../../styles/Buttons");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
+var _styledComponents = require("styled-components");
+var _utils = require("../../../utils");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -29,11 +31,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var HomeUI = function HomeUI(props) {
-  var _sessionState$user, _sessionState$user2;
-  var ordersList = props.ordersList,
+  var _projectStatus$projec, _sessionState$user, _projectStatus$projec2, _projectStatus$projec3, _project$projectStatu, _projectStatus$projec4, _projectStatus$projec5, _project$projectStatu2, _projectStatus$projec6, _projectStatus$projec7, _project$projectStatu3, _projectStatus$projec8, _project$projectStatu4, _projectStatus$projec9, _sessionState$user2, _sessionState$user3;
+  var projectStatus = props.projectStatus,
+    ordersList = props.ordersList,
     todaySalelsList = props.todaySalelsList,
     monthSalesList = props.monthSalesList,
     getCurrentDateRange = props.getCurrentDateRange;
+  var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -56,6 +60,18 @@ var HomeUI = function HomeUI(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     sessionState = _useSession2[0];
+  var project = {
+    active: {
+      description: t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.'),
+      status: t('PROJECT_ACTIVE', 'Project Active'),
+      image: theme.images.project.active
+    },
+    past_due: {
+      description: t('PROJECT_PAST_DUE_PAYMENT', 'Your account will be suspended in the next _days_ days due to your billing status, please check it to avoid any issues.'),
+      status: t('PROJECT_PAST_DUE_PAYMENT', 'Project Past Due Payment'),
+      image: theme.images.project.pastDuePayment
+    }
+  };
   var goToLink = function goToLink(location) {
     if (location === 'sales') {
       window.open('https://www.ordering.co/ordering-sales', '_blank');
@@ -202,7 +218,14 @@ var HomeUI = function HomeUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('HOME', 'Home'))), /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WelcomeMsg, null, t('WELCOME_TO_ORDERING', 'Welcome to Ordering'), "!"), /*#__PURE__*/_react.default.createElement(_styles.GuideMsg, null, t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.'))), /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('REPORTS', 'Reports')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('HOME', 'Home'))), projectStatus.loading && /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 150
+  })), !projectStatus.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !((_projectStatus$projec = projectStatus.project) !== null && _projectStatus$projec !== void 0 && _projectStatus$projec.current_status) ? /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WelcomeMsg, null, t('WELCOME_TO_ORDERING', 'Welcome to Ordering'), "!"), /*#__PURE__*/_react.default.createElement(_styles.GuideMsg, null, t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.'))) : /*#__PURE__*/_react.default.createElement(_styles.ProjectStatusContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ProjectInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.GreetingText, null, t('WELCOME', 'Welcome'), " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.name, "!"), /*#__PURE__*/_react.default.createElement(_styles.ProjectStatusDescription, null, (_projectStatus$projec2 = projectStatus.project) !== null && _projectStatus$projec2 !== void 0 && _projectStatus$projec2.current_status_until && ((_projectStatus$projec3 = projectStatus.project) === null || _projectStatus$projec3 === void 0 ? void 0 : _projectStatus$projec3.current_status) === 'past_due' ? (_project$projectStatu = project[(_projectStatus$projec4 = projectStatus.project) === null || _projectStatus$projec4 === void 0 ? void 0 : _projectStatus$projec4.current_status]) === null || _project$projectStatu === void 0 ? void 0 : _project$projectStatu.description.replace('_days_', (0, _utils.getCurrentDiffDays)((_projectStatus$projec5 = projectStatus.project) === null || _projectStatus$projec5 === void 0 ? void 0 : _projectStatus$projec5.current_status_until)) : (_project$projectStatu2 = project[(_projectStatus$projec6 = projectStatus.project) === null || _projectStatus$projec6 === void 0 ? void 0 : _projectStatus$projec6.current_status]) === null || _project$projectStatu2 === void 0 ? void 0 : _project$projectStatu2.description), /*#__PURE__*/_react.default.createElement(_styles.ProjectCurrentStatus, {
+    isActive: ((_projectStatus$projec7 = projectStatus.project) === null || _projectStatus$projec7 === void 0 ? void 0 : _projectStatus$projec7.current_status) === 'active'
+  }, (_project$projectStatu3 = project[(_projectStatus$projec8 = projectStatus.project) === null || _projectStatus$projec8 === void 0 ? void 0 : _projectStatus$projec8.current_status]) === null || _project$projectStatu3 === void 0 ? void 0 : _project$projectStatu3.status)), /*#__PURE__*/_react.default.createElement("img", {
+    src: (_project$projectStatu4 = project[(_projectStatus$projec9 = projectStatus.project) === null || _projectStatus$projec9 === void 0 ? void 0 : _projectStatus$projec9.current_status]) === null || _project$projectStatu4 === void 0 ? void 0 : _project$projectStatu4.image,
+    alt: ""
+  }))), /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('REPORTS', 'Reports')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "lightPrimary",
     onClick: function onClick() {
       return handleGoToPage({
@@ -228,7 +251,7 @@ var HomeUI = function HomeUI(props) {
     separator: '.'
   }))), /*#__PURE__*/_react.default.createElement(_styles.BoxIconContainer, {
     isSales: true
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cash, null))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('SUPPORT', 'Support'))), /*#__PURE__*/_react.default.createElement(_styles.AssistanceWidgets, null, /*#__PURE__*/_react.default.createElement(_styles.AssistanceTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SUPPORT_TITLE_START', 'Which kind of'), ' ', /*#__PURE__*/_react.default.createElement("span", null, t('SUPPORT_TITLE_END', 'assistance do you need?'))), /*#__PURE__*/_react.default.createElement("p", null, t('ASSIST_SUB_TITILE', 'Choose the asistance you are looking for in the buttons below.'))), /*#__PURE__*/_react.default.createElement(_styles.AssistanceBody, null, /*#__PURE__*/_react.default.createElement(_styles.WidgeBlock, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CONTACT_SALES_TEAM', 'Contact our Sales Team')), /*#__PURE__*/_react.default.createElement("p", null, t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cash, null))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) !== 2 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('SUPPORT', 'Support'))), /*#__PURE__*/_react.default.createElement(_styles.AssistanceWidgets, null, /*#__PURE__*/_react.default.createElement(_styles.AssistanceTitle, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SUPPORT_TITLE_START', 'Which kind of'), ' ', /*#__PURE__*/_react.default.createElement("span", null, t('SUPPORT_TITLE_END', 'assistance do you need?'))), /*#__PURE__*/_react.default.createElement("p", null, t('ASSIST_SUB_TITILE', 'Choose the asistance you are looking for in the buttons below.'))), /*#__PURE__*/_react.default.createElement(_styles.AssistanceBody, null, /*#__PURE__*/_react.default.createElement(_styles.WidgeBlock, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CONTACT_SALES_TEAM', 'Contact our Sales Team')), /*#__PURE__*/_react.default.createElement("p", null, t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,
     color: "primary",
     onClick: function onClick() {
@@ -240,7 +263,7 @@ var HomeUI = function HomeUI(props) {
     onClick: function onClick() {
       return goToLink('tech');
     }
-  }, t('TECH_SUPPORT', 'Tech Support')))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.FeedbackWidgets, null, /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('FEEDBACK', 'Feedback'))), /*#__PURE__*/_react.default.createElement(_styles.FeedbackContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SHARE_WITH_US_YOUR_IDEAS', 'Share with us your ideas')), /*#__PURE__*/_react.default.createElement("p", {
+  }, t('TECH_SUPPORT', 'Tech Support')))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.FeedbackWidgets, null, /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('FEEDBACK', 'Feedback'))), /*#__PURE__*/_react.default.createElement(_styles.FeedbackContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SHARE_WITH_US_YOUR_IDEAS', 'Share with us your ideas')), /*#__PURE__*/_react.default.createElement("p", {
     className: "center"
   }, t('FEEDBACK_DESCRIPTION', 'Do you think our functionalities can be improved or do you want to see a new feature?')), /*#__PURE__*/_react.default.createElement("p", null, t('SHARE_US_YOUR_COMMENTS', 'Share us your comments')), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     outline: true,

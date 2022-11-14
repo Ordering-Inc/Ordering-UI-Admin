@@ -268,7 +268,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     currentTourStep: currentTourStep,
     isTourFlag: isTourFlag,
     setIsTourFlag: setIsTourFlag,
-    setIsTourOpen: setIsTourOpen
+    setIsTourOpen: setIsTourOpen,
+    drivers: driversList.drivers
   }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
     isTourOpen: isTourOpen,
     setIsTourOpen: setIsTourOpen,

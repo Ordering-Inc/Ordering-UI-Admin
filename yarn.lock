@@ -8012,7 +8012,6 @@ optionator@^0.8.3:
     ordering-api-sdk "github:Ordering-Inc/ordering-api-sdk#release"
     prop-types "^15.7.2"
     react-google-recaptcha "^2.1.0"
-    react-google-recaptcha-v3 "^1.10.0"
     socket.io-client "^2.3.0"
 
 os-browserify@^0.3.0, os-browserify@~0.3.0:
@@ -8966,6 +8965,11 @@ react-onclickoutside@^6.10.0:
   version "6.12.2"
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.12.2.tgz#8e6cf80c7d17a79f2c908399918158a7b02dda01"
   integrity sha512-NMXGa223OnsrGVp5dJHkuKxQ4czdLmXSp5jSV9OqiCky9LOpPATn3vLldc+q5fK3gKbEHvr7J1u0yhBh/xYkpA==
+
+react-otp-input@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-otp-input/-/react-otp-input-2.4.0.tgz#0f0a3de1d8c8d564e2e4fbe5d6b7b56e29e3a6e6"
+  integrity sha512-AIgl7u4sS9BTNCxX1xlaS5fPWay/Zml8Ho5LszXZKXrH1C/TiFsTQGmtl13UecQYO3mSF3HUzG2rrDf0sjEFmg==
 
 react-overlays@^5.1.2, react-overlays@^5.2.0:
   version "5.2.1"

@@ -50,10 +50,12 @@ var ModalUI = function ModalUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.ModalDialog, {
     className: "popup-dialog ".concat(className || ''),
     height: props.height,
-    width: props.width,
+    width: props.width
+  }, /*#__PURE__*/_react.default.createElement(_styles2.ModalDialogInnerContainer, {
     padding: props.padding,
+    isTransparent: isTransparent,
     overflow: props.overflow,
-    isTransparent: isTransparent
+    className: "dialog-inner"
   }, !hideCloseDefault && /*#__PURE__*/_react.default.createElement(_styles2.ModalIcon, {
     className: "modal-close-icon"
   }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
@@ -71,7 +73,7 @@ var ModalUI = function ModalUI(props) {
     onClick: function onClick() {
       return onCancel();
     }
-  }, cancelText || t('CANCEL'))));
+  }, cancelText || t('CANCEL')))));
 };
 var Modal = function Modal(props) {
   var ModalProps = _objectSpread(_objectSpread({}, props), {}, {

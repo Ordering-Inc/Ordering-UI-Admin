@@ -9,4 +9,11 @@ Object.defineProperty(exports, "ProfilePage", {
     return _ProfilePage.ProfilePage;
   }
 });
+Object.defineProperty(exports, "Sessions", {
+  enumerable: true,
+  get: function get() {
+    return _Sessions.Sessions;
+  }
+});
 var _ProfilePage = require("./ProfilePage");
+var _Sessions = require("./Sessions");

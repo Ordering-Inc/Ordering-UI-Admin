@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getAgoMinutes = exports.formatUrlVideo = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -353,13 +353,33 @@ var ribbonValues = {
   shape: 'rectangle',
   enabled: false
 };
+/**
+ * Format seconds to hh:mm:ss
+ * @param {number} seconds
+ */
+exports.ribbonValues = ribbonValues;
+var formatSeconds = function formatSeconds(seconds) {
+  // Hours, minutes and seconds
+  var hrs = Math.floor(seconds / 3600);
+  var mins = Math.floor(seconds % 3600 / 60);
+  var secs = Math.floor(seconds % 60);
+
+  // Output like '1:01' or '4:03:59' or '123:03:59'
+  var ret = '';
+  if (hrs > 0) {
+    ret += '' + hrs + ':' + (mins < 10 ? '0' : '');
+  }
+  ret += '' + mins + ':' + (secs < 10 ? '0' : '');
+  ret += '' + secs;
+  return ret;
+};
 
 /**
  * Function to check URL
  * @param {string} url URL of page
  * @param {string} fallback default URL
  */
-exports.ribbonValues = ribbonValues;
+exports.formatSeconds = formatSeconds;
 var checkSiteUrl = function checkSiteUrl(url, fallback) {
   if (!url) return fallback;
   return url[(url === null || url === void 0 ? void 0 : url.length) - 1] === '/' ? url : "".concat(url, "/");
@@ -523,3 +543,33 @@ var orderRejectCommentList = function orderRejectCommentList(status) {
 exports.orderRejectCommentList = orderRejectCommentList;
 var widgetURL = 'https://orderingweb.ordering.co/';
 exports.widgetURL = widgetURL;
+var getCurrentDiffDays = function getCurrentDiffDays(time) {
+  var current = (0, _moment.default)().utc();
+  var compared = (0, _moment.default)(time);
+  return compared.diff(current, 'days');
+};
+exports.getCurrentDiffDays = getCurrentDiffDays;
+var firstLetterCapital = function firstLetterCapital(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+};
+exports.firstLetterCapital = firstLetterCapital;
+var stringToSlug = function stringToSlug(str) {
+  var _str;
+  str = str.replace(/^\s+|\s+$/g, ''); // trim
+  str = (_str = str) === null || _str === void 0 ? void 0 : _str.toLowerCase();
+
+  // remove accents, swap ñ for n, etc
+  var from = 'åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;';
+  var to = 'aaaaaaeeeeiiiioooouuuunc------';
+  for (var i = 0, l = from.length; i < l; i++) {
+    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  }
+  str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+  .replace(/\s+/g, '_') // collapse whitespace and replace by -
+  .replace(/-+/g, '_') // collapse dashes
+  .replace(/^-+/, '') // trim - from start of text
+  .replace(/-+$/, ''); // trim - from end of text
+
+  return str;
+};
+exports.stringToSlug = stringToSlug;
