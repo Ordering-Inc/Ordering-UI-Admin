@@ -51,8 +51,6 @@ export const ListenPageChanges = ({ children }) => {
     ordering_products: '/ordering-products',
     support: '/support',
     rewards_programs: '/loyalty/rewards-programs',
-    free_products: '/downloads/free-products',
-    purchased_products: '/downloads/purchased-products',
     reset_password: '/password/reset',
     profile: '/profile'
   }

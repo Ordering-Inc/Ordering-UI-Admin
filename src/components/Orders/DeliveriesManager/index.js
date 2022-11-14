@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, OrdersManage as OrdersManageController } from 'ordering-components-admin'
+import { useLanguage, useConfig, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
 import { OrderNotification } from '../OrderNotification'
@@ -42,6 +42,9 @@ const DeliveriesManagerUI = (props) => {
   const [timeStatus, setTimeStatus] = useState(null)
   const [slaSettingTime, setSlaSettingTime] = useState(60000)
 
+  const [configState] = useConfig()
+  const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
+
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
     onOrderRedirect()
@@ -70,6 +73,7 @@ const DeliveriesManagerUI = (props) => {
         <OrdersContentHeader
           isDisableControl
           title={t('DELIVERY_DASHBOARD', 'Delivery dashboard')}
+          isShowMapsKeySettingButton={!googleMapsApiKey}
           searchValue={searchValue}
           driverGroupList={driverGroupList}
           driversList={driversList}

@@ -315,6 +315,9 @@ export const BusinessProductsCategoyInfo = (props) => {
           value={formState?.changes?.description || ''}
           onChange={handleChangeInput}
           autoComplete='off'
+          onKeyPress={e => {
+            if (e.which === 32) { e.preventDefault() }
+          }}
         />
       </CategoryNameWrapper>
       {!isAddMode && (

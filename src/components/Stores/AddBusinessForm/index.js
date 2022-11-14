@@ -11,7 +11,7 @@ import {
 } from 'ordering-components-admin'
 import BiImage from '@meronex/icons/bi/BiImage'
 import Skeleton from 'react-loading-skeleton'
-import { bytesConverter } from '../../../utils'
+import { bytesConverter, stringToSlug } from '../../../utils'
 import { Alert, CitySelector, ImageCrop, Modal } from '../../Shared'
 import { Button, Input, TextArea } from '../../../styles'
 
@@ -224,7 +224,9 @@ const AddBusinessFormUI = (props) => {
                     ? formState?.result?.result?.name
                     : formState?.changes?.name
                 }
-                onChange={handleChangeInput}
+                onChange={e => {
+                  handleChangeInput([{ name: 'name', value: e.target.value }, { name: 'slug', value: stringToSlug(e.target.value) }], true)
+                }}
                 ref={formMethods.register({
                   required: t('BUSINESS_NAME_REQUIRED', 'Business name is required')
                 })}
@@ -266,17 +268,16 @@ const AddBusinessFormUI = (props) => {
               <Input
                 name='slug'
                 placeholder={t('SLUG', 'slug')}
-                defaultValue={
-                  formState?.result?.result
-                    ? formState?.result?.result?.slug
-                    : formState?.changes?.slug
-                }
+                value={formState?.changes?.slug || ''}
                 onChange={handleChangeInput}
                 ref={formMethods.register({
                   required: t('BUSINESS_SLUG_REQUIRED', 'Business slug is required')
                 })}
                 disabled={formState.loading}
                 autoComplete='off'
+                onKeyPress={e => {
+                  if (e.which === 32) { e.preventDefault() }
+                }}
               />
             </InputWrapper>
             <InputWrapper>
@@ -325,7 +326,7 @@ const AddBusinessFormUI = (props) => {
                     ? formState?.result?.result?.address
                     : formState?.changes?.address ?? ''
                 }
-                autoComplete='new-field'
+                autoComplete='new-password'
                 countryCode={configs?.country_autocomplete?.value || '*'}
               />
             </InputWrapper>

@@ -63,8 +63,6 @@ import { RewardsPrograms } from './pages/RewardsPrograms'
 import { OpenCarts } from './pages/OpenCarts'
 import { RecoveryActionListing } from './pages/RecoveryActionListing'
 import { CampaignListing } from './pages/CampaignListing'
-import { FreeProductsList } from './pages/FreeProductsList'
-import { PurchasedProductsList } from './pages/PurchasedProductsList'
 import { Professionals } from './pages/Professionals'
 import { QueryLogin } from '../src/components/Login'
 import { PluginSettings } from './pages/PluginSettings'
@@ -332,12 +330,6 @@ export const App = () => {
                       <Support />
                     </ProtectedRoute>
 
-                    <ProtectedRoute path='/downloads/free-products' allowedLevels={[0]}>
-                      <FreeProductsList />
-                    </ProtectedRoute>
-                    <ProtectedRoute path='/downloads/purchased-products' allowedLevels={[0]}>
-                      <PurchasedProductsList />
-                    </ProtectedRoute>
                     <ProtectedRoute path='/ordering-products' allowedLevels={[0]}>
                       <OrderingProducts />
                     </ProtectedRoute>

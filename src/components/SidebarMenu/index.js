@@ -17,9 +17,7 @@ import {
   Award,
   BoxArrowUpRight,
   Cart3,
-  Cash,
-  CloudDownload,
-  BagCheck
+  Cash
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useEvent, useLanguage, useSession, useConfig } from 'ordering-components-admin'
@@ -27,6 +25,7 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
 import { useInfoShare } from '../../contexts/InfoShareContext'
+import { firstLetterCapital } from '../../utils'
 import {
   SidebarContainer,
   SidebarInnerContainer,
@@ -54,8 +53,9 @@ export const SidebarMenu = (props) => {
   const ordersSubMenus = [
     {
       id: 1,
-      title: t('ORDERS_MANAGER', 'Orders manager'),
-      pageName: 'orders'
+      title: t('ORDERS_LIST', 'Orders list'),
+      pageName: 'orders',
+      url: '/orders'
     },
     {
       id: 2,
@@ -77,7 +77,7 @@ export const SidebarMenu = (props) => {
   const loyaltySubMenus = [
     {
       id: 1,
-      title: t('REWARDS_PROGRAMS', 'Rewards programs'),
+      title: t('LOYALTY_AUTOMATION', 'Loyalty automation'),
       pageName: 'rewards_programs',
       url: '/loyalty/rewards-programs'
     }
@@ -104,7 +104,7 @@ export const SidebarMenu = (props) => {
     },
     {
       id: 2,
-      title: t('RECOVERY_ACTIONS', 'Recovery actions'),
+      title: t('CART_RECOVERY_AUTOMATION', 'Cart recovery automation'),
       pageName: 'recovery_actions',
       url: '/cart-recovery/recovery-actions'
     }
@@ -251,7 +251,7 @@ export const SidebarMenu = (props) => {
     },
     {
       id: 5,
-      title: t('ADVANCED_REPORTS', 'Advanced Reports'),
+      title: t('ENTERPRISE_REPORTS', 'Enterprise reports'),
       pageName: 'reports',
       url: '/intelligence/reports'
     }
@@ -276,14 +276,14 @@ export const SidebarMenu = (props) => {
     },
     {
       id: 3,
-      title: t('DRIVERS_COMPANIES', 'Drivers companies'),
+      title: t('DELIVERY_COMPANIES', 'Delivery companies'),
       pageName: 'drivers_companies',
       url: '/delivery/drivers-companies',
       enabled: sessionState?.user?.level === 0
     },
     {
       id: 4,
-      title: t('DRIVERS_GROUPS', 'Drivers groups'),
+      title: t('DELIVERY_AUTOMATION', 'Delivery automation'),
       pageName: 'drivers_groups',
       url: '/delivery/drivers-groups',
       enabled: sessionState?.user?.level === 5 || sessionState?.user?.level === 0
@@ -293,7 +293,7 @@ export const SidebarMenu = (props) => {
   const marketingSubmenus = [
     {
       id: 1,
-      title: t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise'),
+      title: t('PROMOTION_AUTOMATION', 'Promotions automation'),
       pageName: 'enterprise_promotions',
       url: '/marketing/promotions-enterprise'
     },
@@ -302,21 +302,6 @@ export const SidebarMenu = (props) => {
       title: t('CAMPAIGN', 'Campaign'),
       pageName: 'campaign',
       url: '/marketing/campaign'
-    }
-  ]
-
-  const downloadsSubMenus = [
-    {
-      id: 1,
-      title: t('FREE_PRODUCTS', 'Free products'),
-      pageName: 'free_products',
-      url: '/downloads/free-products'
-    },
-    {
-      id: 2,
-      title: t('PURCHASED_PRODUCTS', 'Purchased products'),
-      pageName: 'purchased_products',
-      url: '/downloads/purchased-products'
     }
   ]
 
@@ -366,6 +351,17 @@ export const SidebarMenu = (props) => {
             <SidebarContent className='d-flex flex-column justify-content-between p-1 pt-0'>
               <div className='d-flex flex-column'>
                 <Accordion>
+                  {/* {sessionState?.user?.level === 0 && (
+                    <Button
+                      className='d-flex align-items-center'
+                      variant={false}
+                      onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
+                    >
+                      <BoxArrowUpRight />
+                      <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                    </Button>
+                  )} */}
+
                   {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8 && (
                     <MenuContainer>
                       <ContextAwareToggle
@@ -407,7 +403,7 @@ export const SidebarMenu = (props) => {
                                 active={location.pathname.includes(item.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
-                                {item.title}
+                                {firstLetterCapital(item.title)}
                               </SubMenu>
                             )
                           ))}
@@ -502,7 +498,7 @@ export const SidebarMenu = (props) => {
                         }
                       >
                         <BarChartLineIcon />
-                        <span>{t('BUSINESS_INTELLIGENCE', 'Business Intelligence')}</span>
+                        <span>{firstLetterCapital(t('BUSINESS_INTELLIGENCE', 'Business Intelligence'))}</span>
                       </ContextAwareToggle>
                       <Accordion.Collapse eventKey='5'>
                         <MenuContent>
@@ -516,7 +512,7 @@ export const SidebarMenu = (props) => {
                                 active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
-                                {item.title}
+                                {firstLetterCapital(item.title)}
                               </SubMenu>
                             ))
                           }
@@ -548,7 +544,7 @@ export const SidebarMenu = (props) => {
                                 active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                                 onClick={() => handleGoToPage({ page: item.pageName })}
                               >
-                                {item.title}
+                                {firstLetterCapital(item.title)}
                               </SubMenu>
                             )
                           ))}
@@ -577,7 +573,7 @@ export const SidebarMenu = (props) => {
                               active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -606,7 +602,7 @@ export const SidebarMenu = (props) => {
                               active={location.pathname.includes(item.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -634,7 +630,7 @@ export const SidebarMenu = (props) => {
                               active={location.pathname.includes(item.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -703,7 +699,7 @@ export const SidebarMenu = (props) => {
                               active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
                               onClick={() => handleGoToPage({ page: item.pageName })}
                             >
-                              {item.title}
+                              {firstLetterCapital(item.title)}
                             </SubMenu>
                           ))}
                         </MenuContent>
@@ -735,40 +731,11 @@ export const SidebarMenu = (props) => {
                   <Button
                     className='d-flex align-items-center'
                     variant={false}
-                    onClick={() => handleGoToLink('https://apps.tryordering.com/store/marketplace')}
+                    onClick={() => handleClickBilling()}
                   >
-                    <BoxArrowUpRight />
-                    <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                    <Cash />
+                    <span>{t('BILLING', 'Billing')}</span>
                   </Button>
-                )}
-                {sessionState?.user?.level === 0 && (
-                  <Accordion>
-                    <MenuContainer>
-                      <ContextAwareToggle
-                        eventKey='11'
-                        active={
-                          location.pathname === '/downloads/free-products' ||
-                          location.pathname === '/downloads/purchased-products'
-                        }
-                      >
-                        <CloudDownload />
-                        <span>{t('DOWNLOADS', 'Downloads')}</span>
-                      </ContextAwareToggle>
-                      <Accordion.Collapse eventKey='11'>
-                        <MenuContent>
-                          {downloadsSubMenus.map(item => (
-                            <SubMenu
-                              key={item.id}
-                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                              onClick={() => handleGoToPage({ page: item.pageName })}
-                            >
-                              {item.title}
-                            </SubMenu>
-                          ))}
-                        </MenuContent>
-                      </Accordion.Collapse>
-                    </MenuContainer>
-                  </Accordion>
                 )}
               </div>
             </SidebarContent>

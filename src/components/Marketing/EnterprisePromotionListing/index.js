@@ -82,7 +82,7 @@ const EnterprisePromotionListingUI = (props) => {
                 <MenuIcon />
               </IconButton>
             )}
-            <h1>{t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise')}</h1>
+            <h1>{t('PROMOTION_AUTOMATION', 'Promotions automation')}</h1>
           </HeaderTitleContainer>
           <ActionsWrapper eventDisabled={advancedOfferModuleDisabled || isDisabledFeature}>
             <Button
