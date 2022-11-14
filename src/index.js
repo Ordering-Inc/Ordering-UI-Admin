@@ -343,7 +343,10 @@ import {
   OrderingWebsite,
   CustomerApp,
   StoreApp,
-  DriverApp
+  DriverApp,
+  PosApp,
+  CallCenterApp,
+  KioskApp
 } from './components/MyProducts'
 import { OpenCartListing, RecoveryActionListing } from './components/CartRecovery'
 import { FreeProductsList, PurchasedProductsList } from './components/Downloads'
@@ -745,6 +748,9 @@ export {
   CustomerApp,
   StoreApp,
   DriverApp,
+  PosApp,
+  CallCenterApp,
+  KioskApp,
 
   Layout,
   SidebarMenu,
