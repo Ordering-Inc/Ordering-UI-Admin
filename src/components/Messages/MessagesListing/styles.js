@@ -5,11 +5,6 @@ export const MessagesListingContainer = styled.div`
   transition: all 0.5s;
   padding: 20px;
   box-sizing: border-box;
-
-
-  @media print {
-    display: none;
-  }
 `
 
 export const MessagesContent = styled.div`
