@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils, useEvent, useSite, useApi } from 'ordering-components-admin'
+import { useLanguage, useUtils, useEvent, useApi } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -8,7 +8,6 @@ import { XLg, LifePreserver, ThreeDots, Laptop, Phone } from 'react-bootstrap-ic
 import { Button, IconButton, Switch } from '../../../styles'
 import { Confirm, Modal } from '../../Shared'
 import { BusinessPreview } from '../BusinessPreview'
-import { checkPreSiteUrl } from '../../../utils'
 
 import {
   BusinessDetailsContainer,
@@ -42,7 +41,6 @@ export const BusinessSummary = (props) => {
   const [{ optimizeImage }] = useUtils()
   const [events] = useEvent()
   const theme = useTheme()
-  const [siteList] = useSite()
   const [ordering] = useApi()
   const [isBusinessPreview, setIsBusinessPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
@@ -53,17 +51,7 @@ export const BusinessSummary = (props) => {
   }
 
   const handleOpenSite = () => {
-    if (siteList.length && siteList[0]?.url && siteList[0]?.business_url_template) {
-      const businessUrlTemplate = checkPreSiteUrl(siteList[0]?.business_url_template, '/store/:business_slug')
-      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
-        window.open(`${siteList[0]?.url}${businessUrlTemplate.replace(':business_slug', businessState?.business?.slug)}`, '_blank')
-      } else {
-        const splitURL = businessUrlTemplate.split('?')
-        window.open(`${siteList[0]?.url}${splitURL[0]}?${splitURL[1].replace(':business_slug', '')}${businessState?.business?.slug}`, '_blank')
-      }
-    } else {
-      window.open(`https://${ordering.project}.tryordering.com/${businessState?.business?.slug}`, '_blank')
-    }
+    window.open(`https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`, '_blank')
   }
 
   const itemsExcluded = ['publishing']
