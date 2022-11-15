@@ -24,7 +24,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CitySelectorUI = function CitySelectorUI(props) {
-  var citiesList = props.citiesList,
+  var isAddMode = props.isAddMode,
+    citiesList = props.citiesList,
     isDefault = props.isDefault,
     filterValues = props.filterValues,
     defaultValue = props.defaultValue,
@@ -57,6 +58,13 @@ var CitySelectorUI = function CitySelectorUI(props) {
     });
     setCityOptions(_cityOptions);
   }, [citiesList, isDefault]);
+  (0, _react.useEffect)(function () {
+    if (!isAddMode) return;
+    if (cityOptions.length === 1) {
+      var _citiesList$cities$;
+      handleChangeCity(citiesList === null || citiesList === void 0 ? void 0 : (_citiesList$cities$ = citiesList.cities[0]) === null || _citiesList$cities$ === void 0 ? void 0 : _citiesList$cities$.id);
+    }
+  }, [cityOptions, isAddMode]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, citiesList !== null && citiesList !== void 0 && citiesList.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     style: {
       height: '100%',

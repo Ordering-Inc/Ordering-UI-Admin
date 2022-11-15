@@ -32,7 +32,7 @@ var HeaderName = _styledComponents.default.p(_templateObject8 || (_templateObjec
 exports.HeaderName = HeaderName;
 var Status = _styledComponents.default.p(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-block-start: 0.1em;\n  margin-block-end: 0.1em;\n  font-size: 0.7em;\n"])));
 exports.Status = Status;
-var ImageContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  overflow: auto;\n  display: flex;\n  align-items: center;\n  padding-bottom: 20px;\n\n  > * {\n    ", "\n\n    &:last-child {\n      ", "\n    }\n  }\n\n  img {\n    width: 40px;\n    height: 40px;\n    border-radius: 8px;\n    object-fit: cover;\n    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);\n  }\n\n  svg {\n    width: 40px;\n    height: 40px;\n    border-radius: 8px;\n    padding: 6px;\n    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);\n  }\n  ", "\n\n"])), function (props) {
+var ImageContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  overflow: auto;\n  display: flex;\n  align-items: center;\n  padding-bottom: 20px;\n  flex-wrap: wrap;\n\n  > * {\n    ", "\n\n    &:last-child {\n      ", "\n    }\n  }\n\n  img {\n    width: 40px;\n    height: 40px;\n    border-radius: 8px;\n    object-fit: cover;\n    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);\n  }\n\n  svg {\n    width: 40px;\n    height: 40px;\n    border-radius: 8px;\n    padding: 6px;\n    box-shadow: 0px 1px 4px rgb(0 0 0 / 10%);\n  }\n  ", "\n\n"])), function (props) {
   var _props$theme2;
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "])));
 }, function (props) {
@@ -157,12 +157,12 @@ var OrderDetailIconButton = _styledComponents.default.button(_templateObject59 |
   return (0, _polished.darken)(0.07, '#b9bcc7');
 });
 exports.OrderDetailIconButton = OrderDetailIconButton;
-var ChatContactInfoContainer = _styledComponents.default.div(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n\n  ", "\n"])), function (_ref6) {
+var ChatContactInfoContainer = _styledComponents.default.div(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  margin-bottom: 10px;\n\n  ", "\n"])), function (_ref6) {
   var disabled = _ref6.disabled;
   return disabled && (0, _styledComponents.css)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["\n    opacity: 0.2;\n  "])));
 });
 exports.ChatContactInfoContainer = ChatContactInfoContainer;
-var InfoBlock = _styledComponents.default.div(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["\n  ", "\n  > p {\n    margin: 0px;\n\n    &:first-child {\n      color: ", ";\n      font-size: 14px;\n      font-weight: 500;\n      white-space: nowrap;\n    }\n    &:last-child {\n      color: ", ";\n      font-size: 12px;\n    }\n  }\n"])), function (props) {
+var InfoBlock = _styledComponents.default.div(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["\n  ", "\n  > p {\n    margin: 0px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    max-width: 190px;\n\n    &:first-child {\n      color: ", ";\n      font-size: 14px;\n      font-weight: 500;\n      white-space: nowrap;\n    }\n    &:last-child {\n      color: ", ";\n      font-size: 12px;\n    }\n  }\n"])), function (props) {
   var _props$theme11;
   return (_props$theme11 = props.theme) !== null && _props$theme11 !== void 0 && _props$theme11.rtl ? (0, _styledComponents.css)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "])));
 }, function (props) {

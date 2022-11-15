@@ -15,7 +15,7 @@ var PopMenuContatiner = _styledComponents.default.div(_templateObject || (_templ
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 });
 exports.PopMenuContatiner = PopMenuContatiner;
-var SelectHeaderContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  height: 100%;\n"])));
+var SelectHeaderContent = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  position: relative;\n  width: 100%;\n  height: 100%;\n\n  > button {\n    margin-top: 10px;\n    width: 100%;\n  }\n"])));
 exports.SelectHeaderContent = SelectHeaderContent;
 var BusinessSearch = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-bottom: 5px;\n  padding: 5px;\n\n  > div {\n   width: 100%;\n\n   > input {\n    background: ", ";\n   }\n  }\n"])), function (props) {
   return props.theme.colors.secundary;

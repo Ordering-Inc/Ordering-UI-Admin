@@ -8,7 +8,8 @@ exports.BusinessSelectHeader = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
-var _styles = require("./styles");
+var _styles = require("../../../styles");
+var _styles2 = require("./styles");
 var _Shared = require("../../Shared");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -34,7 +35,8 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     getPageBusinesses = props.getPageBusinesses,
     isOpen = props.isOpen,
     close = props.close,
-    changeBusinessState = props.changeBusinessState;
+    changeBusinessState = props.changeBusinessState,
+    handleOpenAddBusiness = props.handleOpenAddBusiness;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -65,16 +67,16 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       return document.removeEventListener('mouseup', closeSelect);
     };
   }, [isOpen]);
-  return /*#__PURE__*/_react.default.createElement(_styles.PopMenuContatiner, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.PopMenuContatiner, {
     ref: dropdownReference
-  }, /*#__PURE__*/_react.default.createElement(_styles.SelectHeaderContent, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessSearch, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.SelectHeaderContent, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessSearch, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     isCustomLayout: true,
     lazyLoad: true,
     onSearch: onSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
-  })), /*#__PURE__*/_react.default.createElement(_styles.BusinessList, null, businessList.loading ? _toConsumableArray(Array(pagination.pageSize).keys()).map(function (i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.OptionItem, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessList, null, businessList.loading ? _toConsumableArray(Array(pagination.pageSize).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.OptionItem, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 38,
@@ -99,7 +101,7 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     })));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, businessList.businesses.map(function (business) {
     var _business$city;
-    return /*#__PURE__*/_react.default.createElement(_styles.OptionItem, {
+    return /*#__PURE__*/_react.default.createElement(_styles2.OptionItem, {
       key: business.id,
       onClick: function onClick() {
         return changeBusinessState(business);
@@ -108,7 +110,7 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
       src: optimizeImage(business === null || business === void 0 ? void 0 : business.logo, 'h_50,c_limit'),
       alt: ""
     }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("b", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name)));
-  }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, {
+  }))), pagination && (pagination === null || pagination === void 0 ? void 0 : pagination.total) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, {
     className: "pagination-container"
   }, (pagination === null || pagination === void 0 ? void 0 : pagination.total) && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
@@ -117,7 +119,13 @@ var BusinessessListingUI = function BusinessessListingUI(props) {
     defaultPageSize: pagination.pageSize,
     handleChangePageSize: handleChangePageSize,
     isHidePagecontrol: true
-  }))));
+  })), !businessList.loading && (pagination === null || pagination === void 0 ? void 0 : pagination.total) === 0 && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return handleOpenAddBusiness();
+    }
+  }, t('ADD_NEW_STORE', 'Add new store'))));
 };
 var BusinessSelectHeader = function BusinessSelectHeader(props) {
   var _props$defaultPageSiz, _props$defaultPageSiz2, _props$defaultPropsTo;

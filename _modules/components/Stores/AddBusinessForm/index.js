@@ -278,6 +278,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
     isDefault: true,
+    isAddMode: true,
     defaultValue: formState !== null && formState !== void 0 && (_formState$result13 = formState.result) !== null && _formState$result13 !== void 0 && _formState$result13.result ? formState === null || formState === void 0 ? void 0 : (_formState$result14 = formState.result) === null || _formState$result14 === void 0 ? void 0 : (_formState$result14$r = _formState$result14.result) === null || _formState$result14$r === void 0 ? void 0 : _formState$result14$r.city_id : (_formState$changes$ci = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.city_id) !== null && _formState$changes$ci !== void 0 ? _formState$changes$ci : '',
     handleChangeCity: function handleChangeCity(cityId) {
       return setFormState(_objectSpread(_objectSpread({}, formState), {}, {
