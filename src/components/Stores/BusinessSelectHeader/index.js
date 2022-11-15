@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
   useUtils,
   DashboardBusinessList as BusinessListController
 } from 'ordering-components-admin'
+import { AddBusinessForm } from '../AddBusinessForm'
+import { Button } from '../../../styles'
 import {
   PopMenuContatiner,
   BusinessSearch,
@@ -13,7 +15,7 @@ import {
   WrapperPagination,
   SelectHeaderContent
 } from './styles'
-import { Pagination, SearchBar } from '../../Shared'
+import { Pagination, SearchBar, SideBar } from '../../Shared'
 
 const BusinessessListingUI = (props) => {
   const {
@@ -24,7 +26,8 @@ const BusinessessListingUI = (props) => {
     getPageBusinesses,
     isOpen,
     close,
-    changeBusinessState
+    changeBusinessState,
+    handleOpenAddBusiness
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -91,7 +94,7 @@ const BusinessessListingUI = (props) => {
             </>
           )}
         </BusinessList>
-        {pagination && (
+        {pagination && pagination?.total > 0 && (
           <WrapperPagination className='pagination-container'>
             {pagination?.total && (
               <Pagination
@@ -104,6 +107,16 @@ const BusinessessListingUI = (props) => {
               />
             )}
           </WrapperPagination>
+        )}
+
+        {!businessList.loading && pagination?.total === 0 && (
+          <Button
+            color='primary'
+            borderRadius='8px'
+            onClick={() => handleOpenAddBusiness()}
+          >
+            {t('ADD_NEW_STORE', 'Add new store')}
+          </Button>
         )}
       </SelectHeaderContent>
     </PopMenuContatiner>
