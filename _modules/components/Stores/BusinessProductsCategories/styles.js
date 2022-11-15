@@ -14,7 +14,7 @@ var CategoryListContainer = _styledComponents.default.div(_templateObject || (_t
 exports.CategoryListContainer = CategoryListContainer;
 var HeaderContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  h1 {\n    font-weight: 600;\n    font-size: 14px;\n    margin: 0;\n  }\n"])));
 exports.HeaderContainer = HeaderContainer;
-var ListContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-top: 35px;\n  max-height: calc(100vh - 380px);\n  overflow: auto;\n\n  ", "\n\n  @media (max-width: 576px) {\n    padding: 0px;\n  }\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 230px);\n  }\n"])), function (props) {
+var ListContent = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-top: 35px;\n  max-height: calc(100vh - 380px);\n  overflow: auto;\n\n  ", "\n\n  @media (max-width: 576px) {\n    padding: 0px;\n  }\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 240px);\n  }\n"])), function (props) {
   return props.theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      padding-left: 18px;"]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      padding-right: 18px;"])));
 });
 exports.ListContent = ListContent;

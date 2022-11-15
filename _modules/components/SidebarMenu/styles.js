@@ -58,7 +58,9 @@ var UserInfo = _styledComponents.default.div(_templateObject13 || (_templateObje
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n        margin-right: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n      "])));
 });
 exports.UserInfo = UserInfo;
-var MenuContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > span {\n    font-weight: 500;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 0px 13px;\n    color: ", ";\n  }\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n\n  ", "\n"])), function (props) {
+var MenuContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > span {\n    font-weight: 500;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 0px 13px;\n    color: ", ";\n  }\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n\n  > span {\n    font-weight: 500;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 20px;\n    color: ", ";\n  }\n\n  ", "\n"])), function (props) {
+  return props.theme.colors.lightGray;
+}, function (props) {
   return props.theme.colors.lightGray;
 }, function (_ref3) {
   var disabledFeature = _ref3.disabledFeature;
