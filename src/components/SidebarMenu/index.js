@@ -17,10 +17,11 @@ import {
   Award,
   BoxArrowUpRight,
   Cart3,
-  Cash
+  Cash,
+  BagCheck
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi, useSite } from 'ordering-components-admin'
+import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
@@ -50,7 +51,6 @@ const SidebarMenuUI = (props) => {
   const [sessionState] = useSession()
   const [{ configs }] = useConfig()
   const [ordering] = useApi()
-  const [siteList] = useSite()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
 
@@ -147,6 +147,24 @@ const SidebarMenuUI = (props) => {
       title: t('DRIVER_APP', 'Driver app'),
       pageName: 'driver_app',
       url: '/my-products/driver-app'
+    },
+    {
+      id: 5,
+      title: t('POS_APP', 'POS'),
+      pageName: 'pos_app',
+      url: '/my-products/pos-app'
+    },
+    {
+      id: 6,
+      title: t('CALL_CENTER_APP', 'Call center'),
+      pageName: 'call_center_app',
+      url: '/my-products/call-center-app'
+    },
+    {
+      id: 7,
+      title: t('KIOSK_APP', 'Kiosk'),
+      pageName: 'kiosk_app',
+      url: '/my-products/kiosk-app'
     }
   ]
 
@@ -336,8 +354,7 @@ const SidebarMenuUI = (props) => {
   }
 
   const handleOpenSite = () => {
-    if (siteList.length && siteList[0]?.url) handleGoToLink(siteList[0]?.url)
-    else handleGoToLink(`https://${ordering.project}.tryordering.com`)
+    handleGoToLink(`https://${ordering.project}.tryordering.com`)
   }
 
   useEffect(() => {
@@ -687,7 +704,10 @@ const SidebarMenuUI = (props) => {
                           location.pathname === '/my-products/ordering-website' ||
                           location.pathname === '/my-products/customer-app' ||
                           location.pathname === '/my-products/store-app' ||
-                          location.pathname === '/my-products/driver-app'
+                          location.pathname === '/my-products/driver-app' ||
+                          location.pathname === '/my-products/pos-app' ||
+                          location.pathname === '/my-products/call-center-app' ||
+                          location.pathname === '/my-products/kiosk-app'
                         }
                       >
                         <BagCheck />
