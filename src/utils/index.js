@@ -244,6 +244,16 @@ export const shape = {
 }
 
 /**
+ * Function to check URL
+ * @param {string} url URL of page
+ * @param {string} fallback default URL
+ */
+export const checkPreSiteUrl = (url, fallback) => {
+  if (!url) return fallback
+  return url[0] === '/' ? url : `/${url}`
+}
+
+/**
  * default value for bitton
  */
 export const ribbonValues = {

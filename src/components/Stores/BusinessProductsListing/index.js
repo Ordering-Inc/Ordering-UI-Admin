@@ -5,6 +5,7 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 import RiImageAddFill from '@meronex/icons/ri/RiImageAddFill'
 import {
   useLanguage,
+  useApi,
   BusinessProductsListing as BusinessProductsListingController
 } from 'ordering-components-admin'
 import { BusinessProductsCategoyDetails } from '../BusinessProductsCategoyDetails'
@@ -38,7 +39,8 @@ import {
   BusinessNameWrapper,
   BusinessSelector,
   Breadcrumb,
-  ColumnsAllowWrapper
+  ColumnsAllowWrapper,
+  ButtonWrapper
 } from './styles'
 
 const BusinessProductsListingUI = (props) => {
@@ -71,6 +73,7 @@ const BusinessProductsListingUI = (props) => {
 
   const [, t] = useLanguage()
   const { width } = useWindowSize()
+  const [ordering] = useApi()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [viewMethod, setViewMethod] = useState('list')
   const [currentCategory, setCurrentCategory] = useState(null)
@@ -190,6 +193,10 @@ const BusinessProductsListingUI = (props) => {
     setBatchImageFormOpen(true)
   }
 
+  const handleOpenSite = () => {
+    window.open(`https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`, '_blank')
+  }
+
   useEffect(() => {
     if (slug && !isInitialRender) {
       setOpenSidebar(null)
@@ -293,6 +300,16 @@ const BusinessProductsListingUI = (props) => {
             </ActionsGroup>
           )}
         </HeaderContainer>
+        <ButtonWrapper>
+          <Button
+            color='primary'
+            outline
+            borderRadius='8px'
+            onClick={handleOpenSite}
+          >
+            {t('STORE_WEBSITE', 'Store website')}
+          </Button>
+        </ButtonWrapper>
         {slug && (
           <CategoryProductsContent>
             <CategoryListContainer ref={categoryListRef}>
