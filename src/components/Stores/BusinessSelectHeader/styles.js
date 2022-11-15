@@ -18,7 +18,7 @@ export const SelectHeaderContent = styled.div`
   height: 100%;
 
   > button {
-    margin-top: 20px;
+    margin-top: 10px;
     width: 100%;
   }
 `
