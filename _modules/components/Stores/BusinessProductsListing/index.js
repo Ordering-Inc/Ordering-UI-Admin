@@ -27,6 +27,7 @@ var _BatchImageForm = require("../BatchImageForm");
 var _BusinessDetails = require("../BusinessDetails");
 var _reactBootstrap = require("react-bootstrap");
 var _ImportersButton = require("../ImportersButton");
+var _AddBusinessForm = require("../AddBusinessForm");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -217,6 +218,10 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     var _businessState$busine6;
     window.open("https://".concat(ordering.project, ".tryordering.com/store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.slug), '_blank');
   };
+  var handleOpenAddBusiness = function handleOpenAddBusiness() {
+    setOpenSidebar('add_business');
+    handleClose();
+  };
   (0, _react.useEffect)(function () {
     if (slug && !isInitialRender) {
       setOpenSidebar(null);
@@ -251,7 +256,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     close: handleClose,
     isOpen: showSelectHeader,
     changeBusinessState: changeBusinessState,
-    noActiveStatusCondition: true
+    noActiveStatusCondition: true,
+    handleOpenAddBusiness: handleOpenAddBusiness
   })), slug && /*#__PURE__*/_react.default.createElement(_styles2.Breadcrumb, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "business",
     onClick: function onClick() {
@@ -389,7 +395,16 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onClose: function onClose() {
       return setOpenSidebar(null);
     }
-  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+  }), openSidebar === 'add_business' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    open: openSidebar === 'add_business',
+    onClose: function onClose() {
+      return setOpenSidebar(null);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AddBusinessForm.AddBusinessForm, {
+    handleSucessAddBusiness: function handleSucessAddBusiness() {
+      return setOpenSidebar(false);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: width > 1440 ? '40%' : '60%',
     padding: "20px",
     open: batchImageFormOpen,

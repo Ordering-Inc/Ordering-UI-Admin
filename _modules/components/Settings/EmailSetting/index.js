@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var EmailSettingUI = function EmailSettingUI(props) {
-  var _superAdmin$options, _superAdmin$options2, _business$options, _business$options2, _customer$options, _customer$options2, _cityManager$options, _cityManager$options2, _settingsState$change;
+  var _superAdmin$options, _superAdmin$options2, _business$options, _business$options2, _customer$options, _customer$options2, _settingsState$change;
   var configs = props.configs,
     handleInputChange = props.handleInputChange,
     handleCheckBoxChange = props.handleCheckBoxChange,
@@ -62,10 +62,6 @@ var EmailSettingUI = function EmailSettingUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     customer = _useState10[0],
     setCustomer = _useState10[1];
-  var _useState11 = (0, _react.useState)(null),
-    _useState12 = _slicedToArray(_useState11, 2),
-    cityManager = _useState12[0],
-    setCityManager = _useState12[1];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -86,14 +82,10 @@ var EmailSettingUI = function EmailSettingUI(props) {
     var _customer = configs.find(function (config) {
       return config.key === 'email_customer_states';
     });
-    var _cityManager = configs.find(function (config) {
-      return config.key === 'email_city_manager_states';
-    });
     setGeneral(_toConsumableArray(_general));
     setSuperAdmin(_objectSpread({}, _superAdmin));
     setBusiness(_objectSpread({}, _business));
     setCustomer(_objectSpread({}, _customer));
-    setCityManager(_objectSpread({}, _cityManager));
   }, [configs]);
   (0, _react.useEffect)(function () {
     var _settingsState$result;
@@ -184,26 +176,7 @@ var EmailSettingUI = function EmailSettingUI(props) {
         return handleCheckBoxChange(e, true, customer === null || customer === void 0 ? void 0 : customer.value);
       }
     }), item.text)));
-  })), !(customer !== null && customer !== void 0 && customer.options) && /*#__PURE__*/_react.default.createElement(_styles3.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value')))), /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
-    eventKey: "4",
-    as: "div"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.AccordionTitle, null, t('CITY_MANAGER', 'City manager'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
-    eventKey: "4"
-  }, /*#__PURE__*/_react.default.createElement(_styles3.CheckBoxWrapper, null, (cityManager === null || cityManager === void 0 ? void 0 : cityManager.description) && /*#__PURE__*/_react.default.createElement("p", null, cityManager === null || cityManager === void 0 ? void 0 : cityManager.description), (cityManager === null || cityManager === void 0 ? void 0 : (_cityManager$options = cityManager.options) === null || _cityManager$options === void 0 ? void 0 : _cityManager$options.length) > 0 && (cityManager === null || cityManager === void 0 ? void 0 : (_cityManager$options2 = cityManager.options) === null || _cityManager$options2 === void 0 ? void 0 : _cityManager$options2.map(function (item, j) {
-    return /*#__PURE__*/_react.default.createElement(_styles3.FormGroupWrapper, {
-      key: j
-    }, /*#__PURE__*/_react.default.createElement(_styles3.FormGroupCheck, {
-      className: "checkbox"
-    }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
-      type: "checkbox",
-      name: item === null || item === void 0 ? void 0 : item.value,
-      "data-id": cityManager === null || cityManager === void 0 ? void 0 : cityManager.id,
-      defaultChecked: cityManager === null || cityManager === void 0 ? void 0 : cityManager.value.split('|').includes(item === null || item === void 0 ? void 0 : item.value),
-      onChange: function onChange(e) {
-        return handleCheckBoxChange(e, true, cityManager === null || cityManager === void 0 ? void 0 : cityManager.value);
-      }
-    }), item.text)));
-  })), !(cityManager !== null && cityManager !== void 0 && cityManager.options) && /*#__PURE__*/_react.default.createElement(_styles3.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value'))))), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), !(customer !== null && customer !== void 0 && customer.options) && /*#__PURE__*/_react.default.createElement(_styles3.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value'))))), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: handleClickUpdate
   }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
