@@ -5,11 +5,9 @@ export const MessagesListingContainer = styled.div`
   transition: all 0.5s;
   padding: 20px;
   box-sizing: border-box;
-
-
-  @media print {
-    display: none;
-  }
+  max-height: 100vh;
+  overflow: auto;
+  min-height: 100vh;
 `
 
 export const MessagesContent = styled.div`

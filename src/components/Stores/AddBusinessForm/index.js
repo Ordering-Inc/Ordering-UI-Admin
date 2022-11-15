@@ -300,6 +300,7 @@ const AddBusinessFormUI = (props) => {
               <label>{t('CITY', 'City')}</label>
               <CitySelector
                 isDefault
+                isAddMode
                 defaultValue={
                   formState?.result?.result
                     ? formState?.result?.result?.city_id

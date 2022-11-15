@@ -24,6 +24,7 @@ import { BatchImageForm } from '../BatchImageForm'
 import { BusinessDetails } from '../BusinessDetails'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { ImportersButton } from '../ImportersButton'
+import { AddBusinessForm } from '../AddBusinessForm'
 
 import {
   CategoryProductsContainer,
@@ -197,6 +198,11 @@ const BusinessProductsListingUI = (props) => {
     window.open(`https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`, '_blank')
   }
 
+  const handleOpenAddBusiness = () => {
+    setOpenSidebar('add_business')
+    handleClose()
+  }
+
   useEffect(() => {
     if (slug && !isInitialRender) {
       setOpenSidebar(null)
@@ -243,6 +249,7 @@ const BusinessProductsListingUI = (props) => {
                         isOpen={showSelectHeader}
                         changeBusinessState={changeBusinessState}
                         noActiveStatusCondition
+                        handleOpenAddBusiness={handleOpenAddBusiness}
                       />
                     )}
                   </BusinessSelector>
@@ -447,6 +454,16 @@ const BusinessProductsListingUI = (props) => {
           // handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           onClose={() => setOpenSidebar(null)}
         />
+      )}
+      {openSidebar === 'add_business' && (
+        <SideBar
+          open={openSidebar === 'add_business'}
+          onClose={() => setOpenSidebar(null)}
+        >
+          <AddBusinessForm
+            handleSucessAddBusiness={() => setOpenSidebar(false)}
+          />
+        </SideBar>
       )}
       <Modal
         width={width > 1440 ? '40%' : '60%'}
