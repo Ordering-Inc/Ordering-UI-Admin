@@ -4,9 +4,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WebsiteWrapper = exports.InfoWrapper = exports.HeaderTitleContainer = exports.Container = void 0;
+exports.WebsiteWrapper = exports.UploadImageIconContainer = exports.UploadImageIcon = exports.MoreSettingsHeader = exports.LogoImage = exports.InputFormWrapper = exports.InnerBlock = exports.InfoWrapper = exports.ImgInfoWrapper = exports.ImageFormGroup = exports.HeaderTitleContainer = exports.FormWrapper = exports.FormGroup = exports.FormControl = exports.ContentWrapper = exports.Container = exports.ColorPickerWrapper = exports.CheckBoxWrapper = exports.BackgroundImage = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -27,3 +27,54 @@ var InfoWrapper = _styledComponents.default.div(_templateObject7 || (_templateOb
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-left: 40px;\n      margin-right: 0px;\n    "])));
 });
 exports.InfoWrapper = InfoWrapper;
+var MoreSettingsHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-top: 70px;\n  margin-bottom: 35px;\n  h2 {\n    font-weight: 700;\n    font-size: 24px;\n    line-height: 36px;\n    margin-top: 0px;\n    margin-bottom: 8px;\n    text-align: center;\n    span {\n      color: ", ";\n    }\n  }\n  p {\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 24px;\n    text-align: center;\n  }\n"])), function (props) {
+  return props.theme.colors.primary;
+});
+exports.MoreSettingsHeader = MoreSettingsHeader;
+var FormWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  > button {\n    height: 44px;\n    margin-top: 20px;\n  }\n"])));
+exports.FormWrapper = FormWrapper;
+var InputFormWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  padding: 25px 38px;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  margin-bottom: 30px;\n  h4 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin: 0px;\n  }\n"])));
+exports.InputFormWrapper = InputFormWrapper;
+var InnerBlock = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 576px;\n"])));
+exports.InnerBlock = InnerBlock;
+var FormGroup = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-top: 27px;\n  label {\n    display: block;\n    margin-bottom: 12px;\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n  }\n  > input, textarea {\n    width: 100%;\n  }\n  .custom-domain {\n    width: 330px;\n  }\n"])));
+exports.FormGroup = FormGroup;
+var FormControl = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  input {\n    margin: 0px 15px;\n    flex: 1;\n    &:disabled {\n      border: none;\n    }\n  }\n  div {\n    display: flex;\n    align-items: center;\n    height: 43px;\n    background-color: ", ";\n    color: ", ";\n    border-radius: 8px;\n    padding: 10px 16px;\n    font-size: 14px;\n  }\n  .before {\n    width: 120px;\n  }\n  .after {\n    width: 180px;\n  }\n"])), function (props) {
+  return props.theme.colors.secundary;
+}, function (props) {
+  return props.theme.colors.lightGray;
+});
+exports.FormControl = FormControl;
+var ImageFormGroup = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n"])));
+exports.ImageFormGroup = ImageFormGroup;
+var LogoImage = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 160px;\n  height: 160px;\n  position: relative;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: cover;\n  }\n"])));
+exports.LogoImage = LogoImage;
+var BackgroundImage = (0, _styledComponents.default)(LogoImage)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
+exports.BackgroundImage = BackgroundImage;
+var UploadImageIconContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0px;\n  background: ", ";\n  ", "\n"])), function (props) {
+  return props.theme.colors.secundaryDarkContrast;
+}, function (_ref) {
+  var small = _ref.small;
+  return small ? (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    padding: 4px;\n  "]))) : (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    padding: 8px;\n  "])));
+});
+exports.UploadImageIconContainer = UploadImageIconContainer;
+var UploadImageIcon = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  color: ", ";\n  span {\n    margin-top: 14px;\n    font-size: 14px;\n  }\n\n  svg {   \n    width: 57px;\n    height: 50px;\n  }\n"])), function (props) {
+  return props.theme.colors.disabled;
+});
+exports.UploadImageIcon = UploadImageIcon;
+var ImgInfoWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  margin-top: 15px;\n  h4 {\n    font-size: 14px;\n    line-height: 24px;\n    font-weight: 400;\n    margin: 0px;\n  }\n  p {\n    font-size: 12px;\n    line-height: 18px;\n    margin-top: 2px;\n    margin-bottom: 0px;\n    color: ", ";\n  }\n"])), function (props) {
+  return props.theme.colors.secundaryContrast;
+});
+exports.ImgInfoWrapper = ImgInfoWrapper;
+var CheckBoxWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  width: fit-content;\n  svg {\n    font-size: 16px;\n    color: ", ";\n    &.active {\n      color: ", ";\n    }\n    margin-right: 20px;\n    ", "\n  }\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    user-select: none;\n  }\n"])), function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n      margin-left: 20px;\n      margin-right: 0px;\n    "])));
+});
+exports.CheckBoxWrapper = CheckBoxWrapper;
+var ColorPickerWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  padding-top: 25px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  > div {\n    margin-top: 25px;\n    > p {\n      font-weight: 400;\n      font-size: 14px;\n      line-height: 24px;\n      margin-top: 0px;\n      margin-bottom: 9px;\n    }\n  }\n\n  @media (min-width: 769px) {\n    flex-direction: row;\n  }\n"])));
+exports.ColorPickerWrapper = ColorPickerWrapper;
+var ContentWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  padding-top: 25px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  > div {\n    margin-top: 25px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    > p {\n      font-weight: 600;\n      font-size: 16px;\n      line-height: 24px;\n      margin-top: 0px;\n      margin-bottom: 20px;\n    }\n    button {\n      width: 200px;\n      height: 44px;\n    }\n  }\n  @media (min-width: 769px) {\n    flex-direction: row;\n  }\n"])));
+exports.ContentWrapper = ContentWrapper;
