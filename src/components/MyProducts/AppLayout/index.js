@@ -45,22 +45,34 @@ export const AppLayout = (props) => {
             </ImageWrapper>
             <h2>{appInfo.live_title}</h2>
             <p>{appInfo.live_description}</p>
-            <AppStoreLinksWrapper>
-              {appInfo.web_url ? (
-                <DownloadLink href={appInfo.web_url} target='_blank' isSingle className='download-link'>
-                  {appInfo.web_link_title}
-                </DownloadLink>
-              ) : (
-                <>
-                  <DownloadLink href={appInfo.apple_store_link} target='_blank' className='download-link'>
-                    <img src={theme.images.general.appStore} alt='App store' />
+            {appInfo?.live_purchase_link ? (
+              <ButtonWRapper>
+                <Button
+                  color='primary'
+                  borderRadius='8px'
+                  onClick={() => window.open(`${appInfo.live_purchase_link}`, '_blank')}
+                >
+                  {t('PURCHASE_NOW', 'Purchase Now')}
+                </Button>
+              </ButtonWRapper>
+            ) : (
+              <AppStoreLinksWrapper>
+                {appInfo.web_url ? (
+                  <DownloadLink href={appInfo.web_url} target='_blank' isSingle className='download-link'>
+                    {appInfo.web_link_title}
                   </DownloadLink>
-                  <DownloadLink href={appInfo.google_play_link} target='_blank' className='download-link'>
-                    <img src={theme.images.general.googlePlay} alt='Google play' />
-                  </DownloadLink>
-                </>
-              )}
-            </AppStoreLinksWrapper>
+                ) : (
+                  <>
+                    <DownloadLink href={appInfo.apple_store_link} target='_blank' className='download-link'>
+                      <img src={theme.images.general.appStore} alt='App store' />
+                    </DownloadLink>
+                    <DownloadLink href={appInfo.google_play_link} target='_blank' className='download-link'>
+                      <img src={theme.images.general.googlePlay} alt='Google play' />
+                    </DownloadLink>
+                  </>
+                )}
+              </AppStoreLinksWrapper>
+            )}
           </AppInfoContainer>
           <AppInfoContainer>
             <ImageWrapper>
