@@ -120,36 +120,11 @@ const OrderingWebsiteUI = (props) => {
   }
 
   const handleChangeSiteSettings = (e) => {
-    let value = e.target.value
-    if (e.target.name === 'default_domain') value = `https://${e.target.value}.tryordering.com`
-    handleChangeValue(value, 'website_settings', `values.${e.target.name}`)
+    handleChangeValue(e.target.value, 'website_settings', `values.${e.target.name}`)
   }
 
   const handleChangeContent = (type, content) => {
     handleChangeValue(content, 'theme_settings', `values.${type}`)
-  }
-
-  const convertValues = (value) => {
-    return value ? value.replace('https://', '').replace('.tryordering.com', '') : ''
-  }
-
-  const handleUpdate = () => {
-    const patternForURL = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g
-    if (!themeValues?.website_settings?.components?.values?.default_domain.includes(ordering.project)) {
-      setAlertState({
-        open: true,
-        content: [t('DEFAULT_DOMAIN_NOT_CORRECT', 'Default domain url is not correct')]
-      })
-      return
-    }
-    if (themeValues?.website_settings?.components?.values?.custom_domain && !patternForURL.test(themeValues?.website_settings?.components?.values?.custom_domain)) {
-      setAlertState({
-        open: true,
-        content: [t('CUSTOM_DOMAIN_URL_FORMAT_NOT_CORRECT', 'Custom domain url format is not correct')]
-      })
-      return
-    }
-    handleUpdateTheme()
   }
 
   return (
@@ -206,22 +181,22 @@ const OrderingWebsiteUI = (props) => {
                   <Input
                     name='default_domain'
                     placeholder={t('NAME', 'Name')}
-                    disabled={!!themesList?.result[0]?.values_default?.my_products?.components?.website_settings?.components?.values?.default_domain}
-                    value={convertValues(themeValues?.website_settings?.components?.values?.default_domain)}
-                    onChange={handleChangeSiteSettings}
+                    disabled
+                    defaultValue={ordering.project}
                   />
                   <div className='after'>.tryordering.com</div>
                 </FormControl>
               </FormGroup>
               <FormGroup>
                 <label>{t('CUSTOM_DOMAIN', 'Custom domain')}</label>
-                <Input
-                  placeholder='mybusiness.com'
-                  name='custom_domain'
-                  className='custom-domain'
-                  value={themeValues?.website_settings?.components?.values?.custom_domain || ''}
-                  onChange={handleChangeSiteSettings}
-                />
+                <Button
+                  color='primary'
+                  outline
+                  borderRadius='8px'
+                  onClick={() => window.open('https://www.ordering.co/custom-domain-change', '_blank')}
+                >
+                  {t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain')}
+                </Button>
               </FormGroup>
             </InnerBlock>
           </InputFormWrapper>
@@ -354,7 +329,7 @@ const OrderingWebsiteUI = (props) => {
           <Button
             color='primary'
             borderRadius='8px'
-            onClick={handleUpdate}
+            onClick={() => handleUpdateTheme()}
           >
             {t('SAVE', 'Save')}
           </Button>
