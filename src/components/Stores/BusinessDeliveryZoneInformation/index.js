@@ -44,7 +44,8 @@ export const BusinessDeliveryZoneInformation = (props) => {
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
     { value: 2, content: t('POLYGON', 'Polygon') },
-    { value: 4, content: t('EVERYWHERE', 'Everywhere') }
+    { value: 4, content: t('EVERYWHERE', 'Everywhere') },
+    { value: 5, content: t('DISTANCE_BASED', 'Distance based') }
   ]
 
   const googleMapsControls = {
@@ -95,7 +96,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
     } else {
       setAlertState({
         open: true,
-        content: t('REQUIRED_POLYGON_CIRCLE', 'Polygon or circle must be drawn.')
+        content: t('REQUIRED_POLYGON_CIRCLE', 'Add a distance based or draw a polygon or circle.')
       })
     }
   }
@@ -114,10 +115,10 @@ export const BusinessDeliveryZoneInformation = (props) => {
   }, [clearState])
 
   useEffect(() => {
-    if (zoneType !== 1) return
+    if (zoneType === 2 || zoneType === 4) return
     let content = '<div style="width: 90px; height: 30px">' + '<span>Radius: </span>'
-    content += parseNumber(zoneData?.radio)
-    content += '<span>km</span>' + '</div>'
+    content += parseNumber(zoneData?.radio || zoneData?.distance)
+    content += `<span>${zoneType === 5 ? configState?.configs?.distance_unit?.value : 'km'}</span>` + '</div>'
     setInfoContentString(content)
   }, [zoneData, zoneType])
 
@@ -202,6 +203,22 @@ export const BusinessDeliveryZoneInformation = (props) => {
             />
           </FormControl>
         </Row>
+        {zoneType === 5 &&
+          <Row>
+            <FormControl>
+              <label>{t('DISTANCE_FROM_STORE', 'Distance from store')}</label>
+              <Input
+                placeholder={`0 ${configState?.configs?.distance_unit?.value}`}
+                name='distance'
+                value={formState.changes?.data?.distance ?? zone?.data?.distance ?? ''}
+                onChange={e => handleChangeInput(e, configState?.configs?.distance_unit?.value)}
+                ref={register({
+                  required: t('DISTANCE_FROM_STORE', 'Distance from store')
+                })}
+              />
+            </FormControl>
+          </Row>
+        }
         <FormControl>
           <label>{t('BUSINESS_ADDRESS', 'Business address')}</label>
           <Input
@@ -213,13 +230,16 @@ export const BusinessDeliveryZoneInformation = (props) => {
         {zoneType !== 4 && isShowMap && (
           configState?.configs?.google_maps_api_key?.value ? (
             <WrapperMap>
-              <button
-                type='button'
-                onClick={() => setClearState(true)}
-              >
-                {t('CLEAR', 'Clear')}
-              </button>
+              {zoneType !== 5 &&
+                <button
+                  type='button'
+                  onClick={() => setClearState(true)}
+                >
+                  {t('CLEAR', 'Clear')}
+                </button>
+              }
               <BusinessZoneGoogleMaps
+                distance={formState.changes?.data?.distance}
                 apiKey={configState?.configs?.google_maps_api_key?.value}
                 mapControls={googleMapsControls}
                 location={business?.location}
