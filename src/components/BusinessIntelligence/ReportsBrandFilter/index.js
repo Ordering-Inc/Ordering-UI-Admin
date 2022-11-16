@@ -1,8 +1,7 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, ReportsBrandFilter as ReportsBrandFilterController } from 'ordering-components-admin'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
+import { CheckSquareFill as Checked, Square as UnChecked } from 'react-bootstrap-icons'
 import { Button } from '../../../styles'
 import {
   ReportsBrandFilterContainer,
@@ -23,22 +22,13 @@ const ReportsBrandFilterUI = (props) => {
 
   const [, t] = useLanguage()
 
-  const isCheckEnableSate = (id) => {
-    const found = brandIds?.find(brandId => brandId === id)
-    let valid = false
-    if (found) {
-      valid = true
-    }
-    return valid
-  }
-
   return (
     <>
       <ReportsBrandFilterContainer>
         {brandList.loading ? (
           [...Array(10).keys()].map(i => (
             <BrandFilterOption key={i}>
-              <Skeleton width={15} height={15} />
+              <Skeleton width={18} height={18} />
               <BusinessName>
                 <Skeleton width={120} height={24} />
               </BusinessName>
@@ -50,9 +40,9 @@ const ReportsBrandFilterUI = (props) => {
               onClick={handleChangeAllCheck}
             >
               {isAllCheck ? (
-                <RiCheckboxFill className='fill' />
+                <Checked className='fill' />
               ) : (
-                <RiCheckboxBlankLine />
+                <UnChecked />
               )}
               <BusinessName>{t('ALL', 'All')}</BusinessName>
             </BrandFilterOption>
@@ -61,10 +51,10 @@ const ReportsBrandFilterUI = (props) => {
                 key={i}
                 onClick={() => handleChangeBrandId(brand?.id)}
               >
-                {isCheckEnableSate(brand.id) ? (
-                  <RiCheckboxFill className='fill' />
+                {brandIds?.includes(brand.id) ? (
+                  <Checked className='fill' />
                 ) : (
-                  <RiCheckboxBlankLine />
+                  <UnChecked />
                 )}
                 <BusinessName>{brand?.name}</BusinessName>
               </BrandFilterOption>
