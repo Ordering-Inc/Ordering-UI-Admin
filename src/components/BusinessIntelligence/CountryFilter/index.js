@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, CountryList } from 'ordering-components-admin'
 import { Button } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
-import { CountryList } from './naked'
 import { SearchBar, Pagination } from '../../Shared'
-import { CheckSquareFill as Checked, Square as UnChecked } from 'react-bootstrap-icons'
+import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
 import {
   Container,
   SearchWrapper,
@@ -19,11 +18,9 @@ const CountryFilterUI = (props) => {
     countriesState,
     searchValue,
     onSearch,
-    countryIds,
-    handleChangeCountryIds,
     handleClickFilterButton,
-    handleChangeAllCheck,
-    isAllCheck
+    countryCode,
+    handleChangeCode
   } = props
 
   const [, t] = useLanguage()
@@ -79,32 +76,16 @@ const CountryFilterUI = (props) => {
                 <CountryItem
                   key={i}
                 >
-                  <Skeleton width={18} height={18} />
+                  <Skeleton width={18} height={18} circle />
                   <Skeleton width={200} height={20} style={{ marginLeft: 10 }} />
                 </CountryItem>
               ))}
             </>
           ) : (
             <>
-              {currentPages.length > 0 && (
-                <CountryItem
-                  onClick={handleChangeAllCheck}
-                >
-                  {isAllCheck ? (
-                    <Checked className='checked' />
-                  ) : (
-                    <UnChecked />
-                  )}
-                  <span className='name'>{t('ALL', 'All')}</span>
-                </CountryItem>
-              )}
               {currentPages?.map(country => (
-                <CountryItem key={country?.id} onClick={() => handleChangeCountryIds(country?.id)}>
-                  {countryIds?.includes(country.id) ? (
-                    <Checked className='checked' />
-                  ) : (
-                    <UnChecked />
-                  )}
+                <CountryItem key={country?.id} onClick={() => handleChangeCode(country?.code)}>
+                  {countryCode === country?.code ? <RecordCircleFill className='checked' /> : <Circle />}
                   <span className='name'>{country?.name}</span>
                 </CountryItem>
               ))}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { BusinessAnalytics as BusinessAnalyticsController } from './naked'
+import { useLanguage, BusinessAnalytics as BusinessAnalyticsController } from 'ordering-components-admin'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Button, IconButton } from '../../../styles'
@@ -75,7 +74,7 @@ const BusinessAnalyticsUI = (props) => {
         <HeaderFilterContainer>
           <BusinessFilterWrapper>
             <Button onClick={() => setOpenCountryFilter(true)}>
-              {t('COUNTRY', 'Country')} ({filterList?.countryIds ? filterList?.countryIds.length : t('ALL', 'All')})
+              {t('COUNTRY', 'Country')}
             </Button>
           </BusinessFilterWrapper>
           <BusinessFilterWrapper>
