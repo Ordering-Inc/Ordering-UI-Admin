@@ -10,6 +10,7 @@ import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { GoogleMapsApiKeySettingButton } from '../GoogleMapsApiKeySettingButton'
 
 import {
   OrderContentHeaderContainer,
@@ -39,7 +40,8 @@ export const OrdersContentHeader = (props) => {
     filterModalOpen,
     setFilterModalOpen,
     setTimeStatus,
-    setSlaSettingTime
+    setSlaSettingTime,
+    isShowMapsKeySettingButton
   } = props
 
   const { width } = useWindowSize()
@@ -101,6 +103,9 @@ export const OrdersContentHeader = (props) => {
           </HeaderSection>
         )}
         <TopRightSection>
+          {isShowMapsKeySettingButton && (
+            <GoogleMapsApiKeySettingButton />
+          )}
           {(configState?.configs?.order_deadlines_enabled?.value === '1') && (
             <SLAControlsWrapper>
               <OrderDashboardSLASetting

@@ -44,7 +44,6 @@ export const SidebarContainer = styled.div`
     }
 
     span {
-      text-transform: capitalize;
       ${props => props.theme?.rtl ? css`
         margin-right: 15px;
       ` : css`
@@ -156,9 +155,24 @@ export const UserInfo = styled.div`
 `
 export const MenuContainer = styled.div`
   margin: 5px 0;
+  > span {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 15px;
+    padding: 0px 13px;
+    color: ${props => props.theme.colors.lightGray};
+  }
   > button {
     width: 100%;
     text-align: initial;
+  }
+
+  > span {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 15px;
+    padding: 20px;
+    color: ${props => props.theme.colors.lightGray};
   }
 
   ${({ disabledFeature }) => disabledFeature && css`

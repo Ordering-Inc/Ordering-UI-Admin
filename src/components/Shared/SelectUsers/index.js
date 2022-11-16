@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Pagination } from '../Pagination'
@@ -18,23 +18,39 @@ const SelectUsersUI = (props) => {
     getUsers,
     searchValue,
     onSearch,
-
     isAddMode,
     isDisabled,
     selectedUserIds,
     handleSelectUser,
     handleAddPromotion,
-    handleUpdateClick
+    handleUpdateClick,
+    handleSelectAllUsers
   } = props
   const [, t] = useLanguage()
+  const [all, setAll] = useState(false)
+  const [paginationSize, setPaginationSize] = useState(10)
 
   const handleChangePage = (page) => {
-    getUsers(page, 10)
+    getUsers(page, paginationSize)
   }
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
+    setPaginationSize(pageSize)
     getUsers(expectedPage, pageSize)
+  }
+
+  useEffect(() => {
+    setAll(!!!selectedUserIds?.length)
+  }, [selectedUserIds])
+
+  const handleAllCheck = (check) => {
+    if (!check) {
+      handleSelectAllUsers()
+      setAll(true)
+    } else {
+      setAll(false)
+    }
   }
 
   return (
@@ -57,27 +73,40 @@ const SelectUsersUI = (props) => {
           </UserItem>
         ))
       ) : (
-        usersList.users.map(user => (
-          <UserItem key={user.id}>
+        <>
+          <UserItem>
             <Checkbox
-              checked={selectedUserIds.includes(user.id)}
-              onChange={(e) => handleSelectUser(e.target.checked, user.id)}
+              checked={all}
+              onChange={() => handleAllCheck(all)}
             />
-            <span className='name'>{user?.name} {user?.lastname}</span>
+            <span className='name'>{t('ALL', 'All')}</span>
           </UserItem>
-        ))
+          {(!all || !!searchValue?.length) &&
+            usersList.users.map(user => (
+              <UserItem key={user.id}>
+                <Checkbox
+                  checked={selectedUserIds.includes(user.id)}
+                  onChange={(e) => handleSelectUser(e.target.checked, user.id)}
+                />
+                <span className='name'>{user?.name} {user?.lastname}</span>
+              </UserItem>
+            )
+            )}
+        </>
       )}
-
-      {usersList?.users.length > 0 && (
-        <WrapperPagination>
-          <Pagination
-            currentPage={paginationProps.currentPage}
-            totalPages={paginationProps.totalPages}
-            handleChangePage={handleChangePage}
-            handleChangePageSize={handleChangePageSize}
-          />
-        </WrapperPagination>
-      )}
+      {(!all || !!searchValue?.length) &&
+        usersList?.users.length > 0 && (
+          <WrapperPagination>
+            <Pagination
+              paginationSize={paginationSize}
+              currentPage={paginationProps.currentPage}
+              totalPages={paginationProps.totalPages}
+              handleChangePage={handleChangePage}
+              handleChangePageSize={handleChangePageSize}
+            />
+          </WrapperPagination>
+        )
+      }
 
       <Button
         borderRadius='8px'

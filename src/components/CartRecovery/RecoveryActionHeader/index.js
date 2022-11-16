@@ -36,7 +36,7 @@ export const RecoveryActionHeader = (props) => {
             <MenuIcon />
           </IconButton>
         )}
-        <HeaderTitle>{t('RECOVERY_ACTIONS', 'Recovery actions')}</HeaderTitle>
+        <HeaderTitle>{t('CART_RECOVERY_AUTOMATION', 'Cart recovery automation')}</HeaderTitle>
         <InfoWrapper>
           <IconButton
             color='primary'

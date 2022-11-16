@@ -106,3 +106,27 @@ export const SeessionDelete = styled.div`
     background-color: ${props => props.theme.colors.secundary};
   }
 `
+
+export const ButtonGroupWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+export const ButtonsGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+
+  > button {
+    height: 44px;
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+`

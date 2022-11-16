@@ -50,6 +50,13 @@ import { EnterprisePromotionList } from './pages/EnterprisePromotionList'
 import { Appointments } from './pages/Appointments'
 import { GiftCardsList } from './pages/GiftCardsList'
 import { ResetPassword } from './pages/ResetPassword'
+import { OrderingWebsite } from './pages/OrderingWebsite'
+import { CustomerApp } from './pages/CustomerApp'
+import { StoreApp } from './pages/StoreApp'
+import { DriverApp } from './pages/DriverApp'
+import { PosApp } from './pages/PosApp'
+import { CallCenterApp } from './pages/CallCenterApp'
+import { KioskApp } from './pages/KioskApp'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -59,8 +66,6 @@ import { RewardsPrograms } from './pages/RewardsPrograms'
 import { OpenCarts } from './pages/OpenCarts'
 import { RecoveryActionListing } from './pages/RecoveryActionListing'
 import { CampaignListing } from './pages/CampaignListing'
-import { FreeProductsList } from './pages/FreeProductsList'
-import { PurchasedProductsList } from './pages/PurchasedProductsList'
 import { Professionals } from './pages/Professionals'
 import { QueryLogin } from '../src/components/Login'
 import { PluginSettings } from './pages/PluginSettings'
@@ -210,7 +215,7 @@ export const App = () => {
                     <ProtectedRoute path='/drivers' allowedLevels={[0, 5]}>
                       <DriversList />
                     </ProtectedRoute>
-                    <ProtectedRoute path='/appointments' allowedLevels={[0]}>
+                    <ProtectedRoute path='/appointments' allowedLevels={[0, 2]}>
                       <Appointments />
                     </ProtectedRoute>
                     <ProtectedRoute path='/gift-cards' allowedLevels={[0]}>
@@ -294,6 +299,28 @@ export const App = () => {
                       <RecoveryActionListing />
                     </ProtectedRoute>
 
+                    <ProtectedRoute path='/my-products/ordering-website' allowedLevels={[0]}>
+                      <OrderingWebsite />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/customer-app' allowedLevels={[0]}>
+                      <CustomerApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/store-app' allowedLevels={[0]}>
+                      <StoreApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/driver-app' allowedLevels={[0]}>
+                      <DriverApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/pos-app' allowedLevels={[0]}>
+                      <PosApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/call-center-app' allowedLevels={[0]}>
+                      <CallCenterApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/kiosk-app' allowedLevels={[0]}>
+                      <KioskApp />
+                    </ProtectedRoute>
+
                     <ProtectedRoute path='/settings/basic' allowedLevels={[0]}>
                       <BasicSettings />
                     </ProtectedRoute>
@@ -320,12 +347,6 @@ export const App = () => {
                       <Support />
                     </ProtectedRoute>
 
-                    <ProtectedRoute path='/downloads/free-products' allowedLevels={[0]}>
-                      <FreeProductsList />
-                    </ProtectedRoute>
-                    <ProtectedRoute path='/downloads/purchased-products' allowedLevels={[0]}>
-                      <PurchasedProductsList />
-                    </ProtectedRoute>
                     <ProtectedRoute path='/ordering-products' allowedLevels={[0]}>
                       <OrderingProducts />
                     </ProtectedRoute>

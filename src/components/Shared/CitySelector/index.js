@@ -10,6 +10,7 @@ import {
 
 const CitySelectorUI = (props) => {
   const {
+    isAddMode,
     citiesList,
     isDefault,
     filterValues,
@@ -34,6 +35,13 @@ const CitySelectorUI = (props) => {
     })
     setCityOptions(_cityOptions)
   }, [citiesList, isDefault])
+
+  useEffect(() => {
+    if (!isAddMode) return
+    if (cityOptions.length === 1) {
+      handleChangeCity(citiesList?.cities[0]?.id)
+    }
+  }, [cityOptions, isAddMode])
 
   return (
     <>

@@ -82,6 +82,10 @@ export const IconWrapper = styled.div`
     font-size: 24px;
     color: ${props => props.theme.colors.secundaryLight};
   }
+  img{
+    width: 100%;
+    height: 100%;
+  }
 `
 
 export const SettingItemContent = styled.div`

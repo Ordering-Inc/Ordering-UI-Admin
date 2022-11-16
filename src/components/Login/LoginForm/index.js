@@ -8,14 +8,17 @@ import {
   useApi,
   useConfig
 } from 'ordering-components-admin'
+import { useCountdownTimer } from '../../../hooks/useCountdownTimer'
 import { Alert } from '../../Shared'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
 import MdExitToApp from '@meronex/icons/md/MdExitToApp'
-import { Button, Input, Tabs, Tab } from '../../../styles'
+import { Button, Input } from '../../../styles'
 import { useTheme } from 'styled-components'
 import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
 import RiLockPasswordLine from '@meronex/icons/ri/RiLockPasswordLine'
 import { Eye, EyeSlash } from 'react-bootstrap-icons'
+import OtpInput from 'react-otp-input'
+import { formatSeconds } from '../../../utils'
 
 import {
   LoginContainer,
@@ -28,15 +31,19 @@ import {
   InputWithIcon,
   WrapperPassword,
   TogglePassword,
-  ReCAPTCHAWrapper
+  ReCAPTCHAWrapper,
+  Tabs,
+  Tab,
+  CountdownTimer,
+  OtpWrapper,
+  ResendCode
 } from './styles'
 
 const LoginFormUI = (props) => {
   const {
-    useLoginByEmail,
+    useLoginOtpEmail,
     useLoginByCellphone,
     handleChangeInput,
-    hanldeChangeTab,
     handleButtonLoginClick,
     elementLinkToSignup,
     elementLinkToForgotPassword,
@@ -44,7 +51,15 @@ const LoginFormUI = (props) => {
     loginTab,
     isPopup,
     isReCaptchaEnable,
-    handleReCaptcha
+    handleReCaptcha,
+    useProjectDomain,
+    checkPhoneCodeState,
+    otpType,
+    setOtpType,
+    handleChangeTab,
+    generateOtpCode,
+    otpState,
+    setOtpState
   } = props
   const [, t] = useLanguage()
   const [ordering] = useApi()
@@ -57,6 +72,15 @@ const LoginFormUI = (props) => {
   const [reCaptchaVersion, setRecaptchaVersion] = useState({ version: 'v3', siteKey: '' })
   const [submitted, setSubmitted] = useState(false)
   const [passwordSee, setPasswordSee] = useState(false)
+  const [loginWithOtpState, setLoginWithOtpState] = useState(false)
+  const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
+
+  const numOtpInputs = loginTab === 'otp' ? 6 : 4
+  const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
+  const [otpLeftTime, , resetOtpLeftTime] = useCountdownTimer(
+    600, !checkPhoneCodeState?.loading && willVerifyOtpState)
+
+  const isOtpEmail = loginTab === 'otp' && otpType === 'email'
 
   const onSubmit = () => {
     setSubmitted(true)
@@ -72,9 +96,30 @@ const LoginFormUI = (props) => {
     }, 750)
   }
 
+  const handleChangeOtpType = (type) => {
+    handleChangeTab('otp')
+    setOtpType(type)
+  }
+
+  const handleSendOtp = () => {
+    if (willVerifyOtpState) {
+      setOtpState('')
+      resetOtpLeftTime()
+      if (loginTab === 'otp') {
+        generateOtpCode()
+        setWillVerifyOtpState(true)
+      }
+    }
+  }
+
   useEffect(() => {
     if (ordering.project === null || !submitted) return
-    handleButtonLoginClick()
+    if (loginTab === 'otp') {
+      generateOtpCode()
+      setWillVerifyOtpState(true)
+    } else {
+      handleButtonLoginClick()
+    }
   }, [ordering, submitted])
 
   useEffect(() => {
@@ -110,7 +155,40 @@ const LoginFormUI = (props) => {
       open: false,
       content: []
     })
+    setOtpState('')
   }
+
+  useEffect(() => {
+    if (otpState?.length === numOtpInputs) {
+      if (loginTab === 'otp') {
+        handleButtonLoginClick()
+      }
+    }
+  }, [otpState])
+
+  useEffect(() => {
+    if (checkPhoneCodeState?.result?.error) {
+      setAlertState({
+        open: true,
+        content: checkPhoneCodeState?.result?.result || [t('ERROR', 'Error')]
+      })
+    } else if (checkPhoneCodeState?.result?.result) {
+      setAlertState({
+        open: true,
+        content: t('CODE_SENT', 'The code has been sent')
+      })
+      resetOtpLeftTime()
+    }
+  }, [checkPhoneCodeState])
+
+  useEffect(() => {
+    if (otpLeftTime === 0) {
+      setAlertState({
+        open: true,
+        content: t('TIME_IS_UP_PLEASE_RESEND_CODE', 'Time is up. Please resend code again')
+      })
+    }
+  }, [otpLeftTime])
 
   useEffect(() => {
     if (configs && Object.keys(configs).length > 0 && configs?.security_recaptcha_auth?.value === '1') {
@@ -151,35 +229,31 @@ const LoginFormUI = (props) => {
           </p>
         </TitleFormSide>
 
-        {useLoginByEmail && useLoginByCellphone && (
-          <LoginWith isPopup={isPopup}>
-            <Tabs variant='primary'>
-              {useLoginByEmail && (
-                <Tab
-                  onClick={() => hanldeChangeTab('email')}
-                  active={loginTab === 'email'}
-                >
-                  {t('LOGIN_WITH_EMAIL', 'Login with Email')}
-                </Tab>
-              )}
-              {useLoginByCellphone && (
-                <Tab
-                  onClick={() => hanldeChangeTab('cellphone')}
-                  active={loginTab === 'cellphone'}
-                >
-                  {t('LOGIN_WITH_CELLPHONE', 'Login with Cellphone')}
-                </Tab>
-              )}
+        {(ordering?.project && useLoginOtpEmail) && !loginWithOtpState && !willVerifyOtpState && (
+          <LoginWith>
+            <Tabs>
+              <Tab
+                onClick={() => handleChangeTab('email')}
+                active={loginTab === 'email'}
+              >
+                {t('LOGIN_WITH_EMAIL', 'Login with Email')}
+              </Tab>
+              <Tab
+                onClick={() => handleChangeOtpType('email')}
+                active={isOtpEmail}
+              >
+                {t('BY_OTP_EMAIL', 'by Otp Email')}
+              </Tab>
             </Tabs>
           </LoginWith>
         )}
 
-        {(useLoginByCellphone || useLoginByEmail) && (
-          <FormInput
-            noValidate
-            isPopup={isPopup}
-            onSubmit={handleSubmit(onSubmit)}
-          >
+        <FormInput
+          noValidate
+          isPopup={isPopup}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          {!willVerifyOtpState && !useProjectDomain && (
             <InputWithIcon>
               <Input
                 type='text'
@@ -198,51 +272,53 @@ const LoginFormUI = (props) => {
               />
               <MdExitToApp />
             </InputWithIcon>
+          )}
 
-            {useLoginByEmail && loginTab === 'email' && (
-              <InputWithIcon>
-                <Input
-                  type='email'
-                  name='email'
-                  aria-label='email'
-                  placeholder={t('EMAIL')}
-                  ref={register({
-                    required: t(
-                      'VALIDATION_ERROR_REQUIRED',
-                      'Email is required'
-                    ).replace('_attribute_', t('EMAIL', 'Email')),
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: t(
-                        'VALIDATION_ERROR_EMAIL',
-                        'Invalid email address'
-                      ).replace('_attribute_', t('EMAIL', 'Email'))
-                    }
-                  })}
-                  onChange={(e) => handleChangeInput(e)}
-                  autoComplete='off'
-                  autoCapitalize='off'
-                />
-                <HiOutlineMail />
-              </InputWithIcon>
-            )}
-            {useLoginByCellphone && loginTab === 'cellphone' && (
+          {!willVerifyOtpState && (
+            <InputWithIcon>
               <Input
-                type='tel'
-                name='cellphone'
-                aria-label='cellphone'
-                placeholder='Cellphone'
+                type='email'
+                name='email'
+                aria-label='email'
+                placeholder={t('EMAIL')}
                 ref={register({
                   required: t(
                     'VALIDATION_ERROR_REQUIRED',
-                    'Cellphone is required'
-                  ).replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+                    'Email is required'
+                  ).replace('_attribute_', t('EMAIL', 'Email')),
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: t(
+                      'VALIDATION_ERROR_EMAIL',
+                      'Invalid email address'
+                    ).replace('_attribute_', t('EMAIL', 'Email'))
+                  }
                 })}
                 onChange={(e) => handleChangeInput(e)}
                 autoComplete='off'
+                autoCapitalize='off'
               />
-            )}
+              <HiOutlineMail />
+            </InputWithIcon>
+          )}
+          {useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState && (
+            <Input
+              type='tel'
+              name='cellphone'
+              aria-label='cellphone'
+              placeholder='Cellphone'
+              ref={register({
+                required: t(
+                  'VALIDATION_ERROR_REQUIRED',
+                  'Cellphone is required'
+                ).replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+              })}
+              onChange={(e) => handleChangeInput(e)}
+              autoComplete='off'
+            />
+          )}
 
+          {loginTab !== 'otp' && !willVerifyOtpState && (
             <WrapperPassword>
               <Input
                 type={!passwordSee ? 'password' : 'text'}
@@ -273,29 +349,73 @@ const LoginFormUI = (props) => {
                 {!passwordSee ? <Eye /> : <EyeSlash />}
               </TogglePassword>
             </WrapperPassword>
+          )}
 
-            {isReCaptchaEnable && (
-              <ReCAPTCHAWrapper>
-                <ReCaptcha handleReCaptcha={handleReCaptcha} reCaptchaVersion={reCaptchaVersion} />
-              </ReCAPTCHAWrapper>
-            )}
+          {isReCaptchaEnable && (
+            <ReCAPTCHAWrapper>
+              <ReCaptcha handleReCaptcha={handleReCaptcha} reCaptchaVersion={reCaptchaVersion} />
+            </ReCAPTCHAWrapper>
+          )}
 
+          {(!willVerifyOtpState &&
             <Button
               borderRadius='8px'
               color='primary'
               type='submit'
               disabled={formState.loading}
             >
-              {formState.loading ? t('LOADING') + '...' : t('LOGIN')}
+              {formState.loading
+                ? t('LOADING') + '...'
+                : loginWithOtpState || loginTab === 'otp'
+                  ? t('GET_VERIFY_CODE', 'Get verify code')
+                  : t('LOGIN', 'Login')}
               <BsArrowRightShort />
             </Button>
+          )}
+          {(willVerifyOtpState && !checkPhoneCodeState?.loading) && (
+            <>
+              <CountdownTimer>
+                <span>{formatSeconds(otpLeftTime)}</span>
+              </CountdownTimer>
 
+              <OtpWrapper>
+                <OtpInput
+                  value={otpState}
+                  onChange={otp => setOtpState(otp)}
+                  numInputs={numOtpInputs}
+                  containerStyle='otp-container'
+                  inputStyle='otp-input'
+                  placeholder={otpPlaceholder}
+                  isInputNum
+                  shouldAutoFocus
+                  isDisabled={otpLeftTime === 0}
+                />
+              </OtpWrapper>
+              <ResendCode disabled={otpLeftTime > 520} onClick={handleSendOtp}>
+                {t('RESEND_AGAIN', 'Resend again')}?
+              </ResendCode>
+              <Button
+                borderRadius='8px'
+                type='button'
+                color='primary'
+                disabled={formState.loading}
+                onClick={() => {
+                  setLoginWithOtpState(false)
+                  setWillVerifyOtpState(false)
+                }}
+              >
+                {t('CANCEL', 'Cancel')}
+              </Button>
+            </>
+          )}
+
+          {loginTab !== 'otp' && (
             <RedirectLink isPopup={isPopup}>
               <span>{t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')}</span>
               {elementLinkToForgotPassword}
             </RedirectLink>
-          </FormInput>
-        )}
+          )}
+        </FormInput>
 
         {elementLinkToSignup && (
           <RedirectLink register isPopup={isPopup}>

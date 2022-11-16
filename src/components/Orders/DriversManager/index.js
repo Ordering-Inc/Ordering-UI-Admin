@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, DriversList as DriversController } from 'ordering-components-admin'
+import { useLanguage, useConfig, DriversList as DriversController } from 'ordering-components-admin'
 import { DriversDashboard } from '../DriversDashboard'
 import { OrdersLateralBar } from '../OrdersLateralBar'
 import { SearchBar } from '../../Shared'
@@ -8,6 +8,7 @@ import { OrderNotification } from '../OrderNotification'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles/Buttons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
+import { GoogleMapsApiKeySettingButton } from '../GoogleMapsApiKeySettingButton'
 
 import {
   DriversHeader,
@@ -28,6 +29,8 @@ const DriversManagerUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+  const [configState] = useConfig()
+  const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
   const query = new URLSearchParams(useLocation().search)
   const [isOpenDriverOrders, setIsOpenDriverOrders] = useState(false)
@@ -83,6 +86,9 @@ const DriversManagerUI = (props) => {
             )}
             <h1>{t('DRIVERS_DASHBOARD', 'Drivers dashboard')}</h1>
           </HeaderTitleContainer>
+          {!googleMapsApiKey && (
+            <GoogleMapsApiKeySettingButton />
+          )}
           <SearchBar
             isCustomLayout
             lazyLoad

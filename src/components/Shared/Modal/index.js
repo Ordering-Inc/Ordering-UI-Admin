@@ -7,7 +7,8 @@ import {
   ModalActions,
   ModalTitle,
   ModalIcon,
-  ModalHeader
+  ModalHeader,
+  ModalDialogInnerContainer
 } from './styles'
 
 const ModalUI = (props) => {
@@ -41,33 +42,38 @@ const ModalUI = (props) => {
       className={`popup-dialog ${className || ''}`}
       height={props.height}
       width={props.width}
-      padding={props.padding}
-      overflow={props.overflow}
-      isTransparent={isTransparent}
     >
-      {!hideCloseDefault && (
-        <ModalIcon className='modal-close-icon'>
-          <IconButton
-            color='black'
-            onClick={() => onClose()}
-          >
-            <XLg />
-          </IconButton>
-        </ModalIcon>
-      )}
-      <ModalHeader>
-        {title && (
-          <ModalTitle>
-            {title}
-          </ModalTitle>
+      <ModalDialogInnerContainer
+        padding={props.padding}
+        isTransparent={isTransparent}
+        overflow={props.overflow}
+        className='dialog-inner'
+      >
+        {!hideCloseDefault && (
+          <ModalIcon className='modal-close-icon'>
+            <IconButton
+              color='black'
+              onClick={() => onClose()}
+            >
+              <XLg />
+            </IconButton>
+          </ModalIcon>
         )}
-      </ModalHeader>
-      {children}
-      {(onCancel || onAccept) && (
-        <ModalActions>
-          {onAccept && <Button color='darkBlue' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
-          {onCancel && <Button color='primary' onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
-        </ModalActions>)}
+        <ModalHeader>
+          {title && (
+            <ModalTitle>
+              {title}
+            </ModalTitle>
+          )}
+        </ModalHeader>
+        {children}
+        {(onCancel || onAccept) && (
+          <ModalActions>
+            {onAccept && <Button color='darkBlue' onClick={() => onAccept()}>{acceptText || t('ACCEPT')}</Button>}
+            {onCancel && <Button color='primary' onClick={() => onCancel()}>{cancelText || t('CANCEL')}</Button>}
+          </ModalActions>)}
+      </ModalDialogInnerContainer>
+      
     </ModalDialog>
   )
 }

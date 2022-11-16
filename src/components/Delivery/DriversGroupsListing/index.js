@@ -128,7 +128,7 @@ const DriversGroupsListingUI = (props) => {
                 <MenuIcon />
               </IconButton>
             )}
-            <h1>{t('DRIVERS_GROUPS', 'Drivers groups')}</h1>
+            <h1>{t('DELIVERY_AUTOMATION', 'Delivery automation')}</h1>
             <OverlayTrigger
               placement='bottom'
               overlay={

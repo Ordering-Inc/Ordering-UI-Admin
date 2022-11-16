@@ -34,6 +34,13 @@ import whatsappHeader from './template/assets/images/whatsapp-header.png'
 import appStore from './template/assets/images/app-store.png'
 import googlePlay from './template/assets/images/google-play.png'
 import deliverect from './template/assets/images/deliverect.png'
+import ItsaCheckmateLogo from './template/assets/images/ItsaCheckmateLogo.png'
+import doordash from './template/assets/images/door-dash.png'
+/**
+ * project statuses
+ */
+import projectActive from './template/assets/images/projectStatuses/project-active.png'
+import projectPastDuePayment from './template/assets/images/projectStatuses/project-past-due-payment.png'
 
 /**
  * Theme apps
@@ -139,6 +146,21 @@ import android from './template/assets/images/icons/android.svg'
 import notificationOgg from './template/assets/sounds/notification.ogg'
 import notificationMp3 from './template/assets/sounds/notification.mp3'
 
+/**
+ * my products
+ */
+import myCustomerApp from './template/assets/images/myProducts/customer-app.png'
+import myStoreApp from './template/assets/images/myProducts/store-app.png'
+import myDriverApp from './template/assets/images/myProducts/driver-app.png'
+import orderingWebsite from './template/assets/images/myProducts/ordering-website.png'
+import myCallcenterAppBrand from './template/assets/images/myProducts/my-callcenter-app-brand.png'
+import myCallcenterAppLive from './template/assets/images/myProducts/my-callcenter-app-live.png'
+import myKioskAppBrand from './template/assets/images/myProducts/my-kiosk-app-brand.png'
+import myKioskAppLive from './template/assets/images/myProducts/my-kiosk-app-live.png'
+import myPosAppBrand from './template/assets/images/myProducts/my-pos-app-brand.png'
+import myPosAppLive from './template/assets/images/myProducts/my-pos-app-live.png'
+import { AutologinParams } from './template/components/AutologinParams'
+
 const logos = {
   logotype,
   logotypeInvert,
@@ -164,7 +186,13 @@ theme.images = {
     whatsappHeader,
     appStore,
     googlePlay,
-    deliverect
+    deliverect,
+    ItsaCheckmateLogo,
+    doordash
+  },
+  project: {
+    active: projectActive,
+    pastDuePayment: projectPastDuePayment
   },
   apps: {
     storeApp,
@@ -205,6 +233,18 @@ theme.images = {
     inProgress: orderInProgress,
     completed: orderCompleted,
     cancelled: orderCancelled
+  },
+  myProducts: {
+    customerApp: myCustomerApp,
+    storeApp: myStoreApp,
+    driverApp: myDriverApp,
+    orderingWebsite: orderingWebsite,
+    myCallcenterAppBrand,
+    myCallcenterAppLive,
+    myKioskAppBrand,
+    myKioskAppLive,
+    myPosAppBrand,
+    myPosAppLive
   },
   icons: {
     ordersList: ordersList,
@@ -275,18 +315,24 @@ const RouteApp = () => {
       ...settings.api,
       language: language
     },
-    project: window.localStorage.getItem('project') !== null ? window.localStorage.getItem('project') : null
+    project: settings?.use_project_domain
+      ? '_'
+      : window.localStorage.getItem('project') !== null
+        ? window.localStorage.getItem('project')
+        : null
   })
 
   return (
     <ConfigFileContext.Provider value={[configFile, setConfigFile]}>
       <ThemeProvider theme={theme}>
-        <OrderingProvider Alert={Alert} settings={configFile}>
-          <InfoShareProvider>
-            <Router />
-            <Toast />
-          </InfoShareProvider>
-        </OrderingProvider>
+        <AutologinParams configFile={configFile}>
+          <OrderingProvider Alert={Alert}>
+            <InfoShareProvider>
+              <Router />
+              <Toast />
+            </InfoShareProvider>
+          </OrderingProvider>
+        </AutologinParams>
       </ThemeProvider>
     </ConfigFileContext.Provider>
   )
