@@ -161,6 +161,13 @@ import myKioskAppBrand from './template/assets/images/myProducts/my-kiosk-app-br
 import myKioskAppLive from './template/assets/images/myProducts/my-kiosk-app-live.png'
 import myPosAppBrand from './template/assets/images/myProducts/my-pos-app-brand.png'
 import myPosAppLive from './template/assets/images/myProducts/my-pos-app-live.png'
+import storeAppFree from './template/assets/images/myProducts/store-app-free.png'
+import storeAppBrand from './template/assets/images/myProducts/store-app-brand.png'
+import driverAppFree from './template/assets/images/myProducts/driver-app-free.png'
+import driverAppBrand from './template/assets/images/myProducts/driver-app-brand.png'
+import multiStoreCustomerApp from './template/assets/images/myProducts/multi-store-customer-app.png'
+import singleStoreCustomerApp from './template/assets/images/myProducts/single-store-customer-app.png'
+
 import { AutologinParams } from './template/components/AutologinParams'
 
 if (!(window?.location?.hostname === 'localhost')) {
@@ -269,7 +276,13 @@ theme.images = {
     myKioskAppBrand,
     myKioskAppLive,
     myPosAppBrand,
-    myPosAppLive
+    myPosAppLive,
+    storeAppFree,
+    storeAppBrand,
+    driverAppFree,
+    driverAppBrand,
+    multiStoreCustomerApp,
+    singleStoreCustomerApp
   },
   icons: {
     ordersList: ordersList,
