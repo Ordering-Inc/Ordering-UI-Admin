@@ -15,6 +15,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
+var _CountryFilter = require("../CountryFilter");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -56,6 +57,10 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isBusinessFilter = _useState6[0],
     setIsBusinessFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(true),
+    _useState8 = _slicedToArray(_useState7, 2),
+    openCountryFilter = _useState8[0],
+    setOpenCountryFilter = _useState8[1];
   var tableRef = (0, _react.useRef)(null);
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
@@ -137,7 +142,11 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
-  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    onClick: function onClick() {
+      return setOpenCountryFilter(true);
+    }
+  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
@@ -222,6 +231,18 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
       return setIsBusinessFilter(false);
     },
     isFranchise: true
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "450px",
+    height: "650px",
+    padding: "25px",
+    open: openCountryFilter,
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
+    }
   }))));
 };
 var ReportsGeneralSales = function ReportsGeneralSales(props) {

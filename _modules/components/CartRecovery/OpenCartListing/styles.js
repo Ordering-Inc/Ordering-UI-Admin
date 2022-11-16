@@ -16,5 +16,7 @@ var OpenCartsInnerContent = _styledComponents.default.div(_templateObject3 || (_
 exports.OpenCartsInnerContent = OpenCartsInnerContent;
 var WrapItemView = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 exports.WrapItemView = WrapItemView;
-var WrapperIndicator = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: 100px;\n  height: 50px;\n  border-radius: 5px;\n  background: #151824;\n  z-index: 9999;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  font-weight: 500;\n  font-size: 24px;\n"])));
+var WrapperIndicator = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  width: 100px;\n  height: 50px;\n  border-radius: 5px;\n  background: #151824;\n  z-index: 9999;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: ", ";\n  font-weight: 500;\n  font-size: 24px;\n"])), function (props) {
+  return props.theme.colors.white;
+});
 exports.WrapperIndicator = WrapperIndicator;

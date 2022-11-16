@@ -87,6 +87,7 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     onClick: handleOpenCalendar
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles3.AnalyticsCalendarContainer, {
+    className: "ordering-calendar",
     ref: calendarRef,
     leftAlign: leftAlign
   }, /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {

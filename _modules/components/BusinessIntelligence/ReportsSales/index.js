@@ -13,6 +13,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("../../../styles");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _CountryFilter = require("../CountryFilter");
 var _styles2 = require("./styles");
 var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
@@ -54,6 +55,10 @@ var ReportsSalesUI = function ReportsSalesUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isBrandFilter = _useState6[0],
     setIsBrandFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(true),
+    _useState8 = _slicedToArray(_useState7, 2),
+    openCountryFilter = _useState8[0],
+    setOpenCountryFilter = _useState8[1];
   var generateData = function generateData() {
     var _reportData$content, _reportData$content$d, _reportData$content$d2, _reportData$content$d3, _reportData$content3, _reportData$content3$;
     var list = [];
@@ -179,7 +184,11 @@ var ReportsSalesUI = function ReportsSalesUI(props) {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
-  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    onClick: function onClick() {
+      return setOpenCountryFilter(true);
+    }
+  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ChartTitleBlock, {
@@ -223,6 +232,18 @@ var ReportsSalesUI = function ReportsSalesUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsBrandFilter(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "450px",
+    height: "650px",
+    padding: "25px",
+    open: openCountryFilter,
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
     }
   }))));
 };

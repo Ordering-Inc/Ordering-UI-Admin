@@ -15,6 +15,7 @@ var _Shared = require("../../Shared");
 var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
 var _ReportsOrderTypeFilter = require("../ReportsOrderTypeFilter");
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
+var _CountryFilter = require("../CountryFilter");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -53,17 +54,21 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     isBrandFilter = _useState4[0],
     setIsBrandFilter = _useState4[1];
-  var _useState5 = (0, _react.useState)(false),
+  var _useState5 = (0, _react.useState)(true),
     _useState6 = _slicedToArray(_useState5, 2),
-    isOrderTypeFilter = _useState6[0],
-    setIsOrderTypeFilter = _useState6[1];
-  var _useState7 = (0, _react.useState)({
+    openCountryFilter = _useState6[0],
+    setOpenCountryFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isOrderTypeFilter = _useState8[0],
+    setIsOrderTypeFilter = _useState8[1];
+  var _useState9 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    alertState = _useState8[0],
-    setAlertState = _useState8[1];
+    _useState10 = _slicedToArray(_useState9, 2),
+    alertState = _useState10[0],
+    setAlertState = _useState10[1];
   var tableRef = (0, _react.useRef)(null);
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
@@ -141,7 +146,11 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
     onClick: function onClick() {
       return setIsOrderTypeFilter(true);
     }
-  }, t('ORDER_TYPE', 'Order type'), " (", filterList !== null && filterList !== void 0 && filterList.delivery_types_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.delivery_types_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('ORDER_TYPE', 'Order type'), " (", filterList !== null && filterList !== void 0 && filterList.delivery_types_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.delivery_types_ids.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    onClick: function onClick() {
+      return setOpenCountryFilter(true);
+    }
+  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
@@ -267,6 +276,18 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsOrderTypeFilter.ReportsOrderTypeFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsOrderTypeFilter(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "450px",
+    height: "650px",
+    padding: "25px",
+    open: openCountryFilter,
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
     }
   })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('DRIVER_SCHEDULE', 'Driver schedule'),

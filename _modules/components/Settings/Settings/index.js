@@ -18,8 +18,6 @@ var _Shared = require("../../Shared");
 var _CheckoutFieldsSetting = require("../CheckoutFieldsSetting");
 var _AddressFieldsSetting = require("../AddressFieldsSetting");
 var _LanguageSetting = require("../LanguageSetting");
-var _SitesAuthSettings = require("../SitesAuthSettings");
-var _MultiCountrySettings = require("../MultiCountrySettings");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -64,18 +62,6 @@ var SettingsUI = function SettingsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isOpenSettingDetails = _useState6[0],
     setIsOpenSettingDetails = _useState6[1];
-  var _useState7 = (0, _react.useState)(false),
-    _useState8 = _slicedToArray(_useState7, 2),
-    openSitesAuthSettings = _useState8[0],
-    setOpenSitesAuthSettings = _useState8[1];
-  var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    openMultiCountrySettings = _useState10[0],
-    setOpenMultiCountrySettings = _useState10[1];
-  var _useState11 = (0, _react.useState)(0),
-    _useState12 = _slicedToArray(_useState11, 2),
-    moveDistance = _useState12[0],
-    setMoveDistance = _useState12[1];
   var category;
   if (search) {
     var data = search.substring(1).split('&');
@@ -108,8 +94,6 @@ var SettingsUI = function SettingsUI(props) {
   };
   var handleOpenDescription = function handleOpenDescription(category) {
     setIsOpenSettingDetails(null);
-    setOpenSitesAuthSettings(false);
-    setOpenMultiCountrySettings(false);
     setIsOpenDescription(true);
     setSelectedCategory(category);
     onBasicSettingsRedirect({
@@ -119,8 +103,6 @@ var SettingsUI = function SettingsUI(props) {
   };
   var handleOpenSettingDetails = function handleOpenSettingDetails(item) {
     setIsOpenDescription(false);
-    setOpenSitesAuthSettings(false);
-    setOpenMultiCountrySettings(false);
     setSelectedCategory(null);
     setIsOpenSettingDetails(item);
   };
@@ -196,30 +178,6 @@ var SettingsUI = function SettingsUI(props) {
     description: t('ADDRESS_FIELDS_DESC'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAltFill, null),
     active: isOpenSettingDetails === 'address'
-  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
-    className: "col-md-4 col-sm-6",
-    onClick: function onClick() {
-      setIsOpenDescription(false);
-      setIsOpenSettingDetails(null);
-      setOpenSitesAuthSettings(true);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
-    title: t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings'),
-    description: t('SITES_LOGIN_SIGNUP_SETTINGS_DESC', 'Advanced sites login/sign up settings'),
-    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
-    active: openSitesAuthSettings
-  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
-    className: "col-md-4 col-sm-6",
-    onClick: function onClick() {
-      setIsOpenDescription(false);
-      setIsOpenSettingDetails(null);
-      setOpenMultiCountrySettings(true);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
-    title: t('MULTI_COUNTRY_SETTINGS', 'Multi country settings'),
-    description: t('MULTI_COUNTRY_SETTINGS_DESC', 'Settings according country'),
-    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
-    active: openMultiCountrySettings
   }))), categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
       className: "col-md-4 col-sm-6",
@@ -251,26 +209,6 @@ var SettingsUI = function SettingsUI(props) {
     category: selectedCategory,
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
-  })), openSitesAuthSettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    defaultSideBarWidth: 500 + moveDistance,
-    moveDistance: moveDistance,
-    open: openSitesAuthSettings,
-    onClose: function onClose() {
-      setMoveDistance(0);
-      setOpenSitesAuthSettings(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_SitesAuthSettings.SitesAuthSettings, {
-    setMoveDistance: setMoveDistance
-  })), openMultiCountrySettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    defaultSideBarWidth: 500 + moveDistance,
-    moveDistance: moveDistance,
-    open: openMultiCountrySettings,
-    onClose: function onClose() {
-      setMoveDistance(0);
-      setOpenMultiCountrySettings(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_MultiCountrySettings.MultiCountrySettings, {
-    setMoveDistance: setMoveDistance
   })), isOpenSettingDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "setting-details",
     defaultSideBarWidth: 550,

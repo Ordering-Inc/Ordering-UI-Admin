@@ -15,7 +15,9 @@ var OrdersAcceptSpendHeader = _styledComponents.default.div(_templateObject2 || 
   return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.colors.headingColor;
 });
 exports.OrdersAcceptSpendHeader = OrdersAcceptSpendHeader;
-var ReviewContentWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  p {\n    margin: 0;\n    font-size: 14px;\n    color: #909BA9;\n    text-align: center;\n  }\n"])));
+var ReviewContentWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  p {\n    margin: 0;\n    font-size: 14px;\n    color: ", ";\n    text-align: center;\n  }\n"])), function (props) {
+  return props.theme.colors.lightGray;
+});
 exports.ReviewContentWrapper = ReviewContentWrapper;
 var TimeContentWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  \n  h1{\n    font-weight: 500;\n    font-size: 52px;\n    margin: 0;\n    color: ", "\n  }\n  p {\n    margin: 0;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
   var _props$theme2;

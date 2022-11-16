@@ -16,6 +16,7 @@ var _Shared = require("../../Shared");
 var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
 var _ReportsBarChart = require("../ReportsBarChart");
+var _CountryFilter = require("../CountryFilter");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -51,10 +52,14 @@ var ReportsBusinessDistanceUI = function ReportsBusinessDistanceUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     isBrandFilter = _useState4[0],
     setIsBrandFilter = _useState4[1];
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)(true),
     _useState6 = _slicedToArray(_useState5, 2),
-    chartData = _useState6[0],
-    setChartData = _useState6[1];
+    openCountryFilter = _useState6[0],
+    setOpenCountryFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    chartData = _useState8[0],
+    setChartData = _useState8[1];
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseNumber = _useUtils2[0].parseNumber;
@@ -170,7 +175,11 @@ var ReportsBusinessDistanceUI = function ReportsBusinessDistanceUI(props) {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
-  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    onClick: function onClick() {
+      return setOpenCountryFilter(true);
+    }
+  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
@@ -255,6 +264,18 @@ var ReportsBusinessDistanceUI = function ReportsBusinessDistanceUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsBrandFilter(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "450px",
+    height: "650px",
+    padding: "25px",
+    open: openCountryFilter,
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
     }
   }))));
 };

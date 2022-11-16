@@ -79,14 +79,17 @@ var OrderNumberContainer = _styledComponents.default.div(_templateObject15 || (_
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n    padding-left: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n    padding-right: 15px;\n  "])));
 });
 exports.OrderNumberContainer = OrderNumberContainer;
-var CheckBox = _styledComponents.default.span(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  ", "\n  svg {\n    font-size: 18px;\n    color: #B1BCCC;\n\n    ", "\n  }\n"])), function (props) {
+var CheckBox = _styledComponents.default.span(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  ", "\n  svg {\n    font-size: 18px;\n    color: ", ";\n\n    ", "\n  }\n"])), function (props) {
   var _props$theme5;
   return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    margin-left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    margin-right: 20px;\n  "])));
+}, function (props) {
+  var _props$theme$colors4;
+  return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.secundaryLight;
 }, function (_ref6) {
   var isChecked = _ref6.isChecked;
   return isChecked && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      color: ", ";\n    "])), function (props) {
-    var _props$theme$colors4;
-    return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.primary;
+    var _props$theme$colors5;
+    return (_props$theme$colors5 = props.theme.colors) === null || _props$theme$colors5 === void 0 ? void 0 : _props$theme$colors5.primary;
   });
 });
 exports.CheckBox = CheckBox;
@@ -98,8 +101,8 @@ exports.BusinessInfo = BusinessInfo;
 var CustomerInfo = (0, _styledComponents.default)(BusinessInfo)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  p {\n    max-width: 150px;\n  }\n"])));
 exports.CustomerInfo = CustomerInfo;
 var DriversInfo = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  > div {\n    > div {\n      border: none;\n      padding: 0px;\n      > div:first-child {\n        padding: 0px 10px;\n        p {\n          color: ", ";\n          font-size: 14px;\n        }\n      }\n      > div {\n        > div {\n          > div {\n            padding: 0px;\n          }\n        }\n      }\n    }\n  }\n  ", "\n"])), function (props) {
-  var _props$theme$colors5;
-  return (_props$theme$colors5 = props.theme.colors) === null || _props$theme$colors5 === void 0 ? void 0 : _props$theme$colors5.headingColor;
+  var _props$theme$colors6;
+  return (_props$theme$colors6 = props.theme.colors) === null || _props$theme$colors6 === void 0 ? void 0 : _props$theme$colors6.headingColor;
 }, function (_ref7) {
   var noClick = _ref7.noClick;
   return noClick && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
@@ -117,8 +120,8 @@ var Image = function Image(props) {
 };
 exports.Image = Image;
 var WrapOrderStatusSelector = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  > div {\n    p {\n      font-size: 14px;\n    }\n    > div:first-child {\n      p {\n        color: ", ";\n        max-width: 140px;\n      }\n    }\n  }\n"])), function (props) {
-  var _props$theme$colors6;
-  return (_props$theme$colors6 = props.theme.colors) === null || _props$theme$colors6 === void 0 ? void 0 : _props$theme$colors6.headingColor;
+  var _props$theme$colors7;
+  return (_props$theme$colors7 = props.theme.colors) === null || _props$theme$colors7 === void 0 ? void 0 : _props$theme$colors7.headingColor;
 });
 exports.WrapOrderStatusSelector = WrapOrderStatusSelector;
 var WrapperPagination = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  padding-top: 5px;\n  width: calc(100% - 10px);\n\n  > div {\n    justify-content: flex-end;\n    ", "\n  }\n"])), function (props) {
