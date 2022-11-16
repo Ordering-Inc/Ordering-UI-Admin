@@ -61,7 +61,7 @@ export const ChartFooterContainer = styled.div`
 
   p {
     font-size: 14px;
-    color: #909BA9;
+    color: ${props => props.theme.colors.lightGray};
     margin: 0;
   }
 `

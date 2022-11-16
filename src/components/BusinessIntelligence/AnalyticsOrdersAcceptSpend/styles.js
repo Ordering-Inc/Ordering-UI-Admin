@@ -25,7 +25,7 @@ export const ReviewContentWrapper = styled.div`
   p {
     margin: 0;
     font-size: 14px;
-    color: #909BA9;
+    color: ${props => props.theme.colors.lightGray};
     text-align: center;
   }
 `
