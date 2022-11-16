@@ -161,6 +161,7 @@ import myKioskAppBrand from './template/assets/images/myProducts/my-kiosk-app-br
 import myKioskAppLive from './template/assets/images/myProducts/my-kiosk-app-live.png'
 import myPosAppBrand from './template/assets/images/myProducts/my-pos-app-brand.png'
 import myPosAppLive from './template/assets/images/myProducts/my-pos-app-live.png'
+import { AutologinParams } from './template/components/AutologinParams'
 
 if (!(window?.location?.hostname === 'localhost')) {
   Sentry.init({
@@ -349,12 +350,14 @@ const RouteApp = () => {
   return (
     <ConfigFileContext.Provider value={[configFile, setConfigFile]}>
       <ThemeProvider theme={theme}>
-        <OrderingProvider Alert={Alert} settings={configFile}>
-          <InfoShareProvider>
-            <Router />
-            <Toast />
-          </InfoShareProvider>
-        </OrderingProvider>
+        <AutologinParams configFile={configFile}>
+          <OrderingProvider Alert={Alert}>
+            <InfoShareProvider>
+              <Router />
+              <Toast />
+            </InfoShareProvider>
+          </OrderingProvider>
+        </AutologinParams>
       </ThemeProvider>
     </ConfigFileContext.Provider>
   )
