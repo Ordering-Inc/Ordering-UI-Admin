@@ -36,7 +36,13 @@ var AppLayout = function AppLayout(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('MY_PRODUCTS', 'My products'))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, appInfo.title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.description), /*#__PURE__*/_react.default.createElement(_styles2.BoxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.AppInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     src: appInfo.images.live,
     alt: ""
-  })), /*#__PURE__*/_react.default.createElement("h2", null, appInfo.live_title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.live_description), /*#__PURE__*/_react.default.createElement(_styles2.AppStoreLinksWrapper, null, appInfo.web_url ? /*#__PURE__*/_react.default.createElement(_styles2.DownloadLink, {
+  })), /*#__PURE__*/_react.default.createElement("h2", null, appInfo.live_title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.live_description), appInfo !== null && appInfo !== void 0 && appInfo.live_purchase_link ? /*#__PURE__*/_react.default.createElement(_styles2.ButtonWRapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return window.open("".concat(appInfo.live_purchase_link), '_blank');
+    }
+  }, t('PURCHASE_NOW', 'Purchase Now'))) : /*#__PURE__*/_react.default.createElement(_styles2.AppStoreLinksWrapper, null, appInfo.web_url ? /*#__PURE__*/_react.default.createElement(_styles2.DownloadLink, {
     href: appInfo.web_url,
     target: "_blank",
     isSingle: true,

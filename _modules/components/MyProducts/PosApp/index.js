@@ -28,7 +28,7 @@ var PosApp = function PosApp() {
       brand: theme.images.myProducts.myPosAppBrand
     },
     live_title: t('FREE_TO_USE', 'Free to use'),
-    live_description: t('POS_FREE_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
+    live_description: t('FREE_TO_USE_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
     apple_store_link: 'https://apps.apple.com/us/app/ordering-pos-2-0/id1609520468',
     google_play_link: 'https://play.google.com/store/apps/details?id=com.ordering.posv5&hl=en&gl=US',
     brand_title: t('YOUR_BRANDED_POS', 'Your Branded POS'),
