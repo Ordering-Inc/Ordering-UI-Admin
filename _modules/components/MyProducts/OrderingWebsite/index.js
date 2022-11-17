@@ -27,7 +27,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
-  var _themeValues$website_10, _themeValues$website_11, _themeValues$website_12, _themeValues$website_13, _themeValues$website_14, _themeValues$website_15, _themesList$result$, _themesList$result$$v, _themesList$result$$v2, _themesList$result$$v3, _themesList$result$$v4, _themesList$result$$v5, _themesList$result$$v6, _themeValues$website_16, _themeValues$website_17, _themeValues$website_18, _themeValues$website_19, _themeValues$website_20, _themeValues$website_21, _themeValues$images, _themeValues$images$c, _themeValues$images$c2, _themeValues$images$c3, _themeValues$images2, _themeValues$images2$, _themeValues$images2$2, _themeValues$images2$3, _themeValues$images3, _themeValues$images3$, _themeValues$images3$2, _themeValues$images3$3, _themeValues$images4, _themeValues$images4$, _themeValues$images4$2, _themeValues$images4$3, _themeValues$images6, _themeValues$images6$, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _themeValues$theme_se4, _themeValues$theme_se5, _themeValues$theme_se6, _themeValues$theme_se7, _themeValues$theme_se8, _themeValues$theme_se9, _themeValues$theme_se10, _themeValues$theme_se11, _themeValues$theme_se12;
+  var _themeValues$website_, _themeValues$website_2, _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$images, _themeValues$images$c, _themeValues$images$c2, _themeValues$images$c3, _themeValues$images2, _themeValues$images2$, _themeValues$images2$2, _themeValues$images2$3, _themeValues$images3, _themeValues$images3$, _themeValues$images3$2, _themeValues$images3$3, _themeValues$images4, _themeValues$images4$, _themeValues$images4$2, _themeValues$images4$3, _themeValues$images6, _themeValues$images6$, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _themeValues$theme_se4, _themeValues$theme_se5, _themeValues$theme_se6, _themeValues$theme_se7, _themeValues$theme_se8, _themeValues$theme_se9, _themeValues$theme_se10, _themeValues$theme_se11, _themeValues$theme_se12;
   var themeValues = props.themeValues,
     themesList = props.themesList,
     setThemeValues = props.setThemeValues,
@@ -136,34 +136,10 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     setThemeValues(_themeValues);
   };
   var handleChangeSiteSettings = function handleChangeSiteSettings(e) {
-    var value = e.target.value;
-    if (e.target.name === 'default_domain') value = "https://".concat(e.target.value, ".tryordering.com");
-    handleChangeValue(value, 'website_settings', "values.".concat(e.target.name));
+    handleChangeValue(e.target.value, 'website_settings', "values.".concat(e.target.name));
   };
   var handleChangeContent = function handleChangeContent(type, content) {
     handleChangeValue(content, 'theme_settings', "values.".concat(type));
-  };
-  var convertValues = function convertValues(value) {
-    return value ? value.replace('https://', '').replace('.tryordering.com', '') : '';
-  };
-  var handleUpdate = function handleUpdate() {
-    var _themeValues$website_, _themeValues$website_2, _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$website_7, _themeValues$website_8, _themeValues$website_9;
-    var patternForURL = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
-    if (!(themeValues !== null && themeValues !== void 0 && (_themeValues$website_ = themeValues.website_settings) !== null && _themeValues$website_ !== void 0 && (_themeValues$website_2 = _themeValues$website_.components) !== null && _themeValues$website_2 !== void 0 && (_themeValues$website_3 = _themeValues$website_2.values) !== null && _themeValues$website_3 !== void 0 && _themeValues$website_3.default_domain.includes(ordering.project))) {
-      setAlertState({
-        open: true,
-        content: [t('DEFAULT_DOMAIN_NOT_CORRECT', 'Default domain url is not correct')]
-      });
-      return;
-    }
-    if (themeValues !== null && themeValues !== void 0 && (_themeValues$website_4 = themeValues.website_settings) !== null && _themeValues$website_4 !== void 0 && (_themeValues$website_5 = _themeValues$website_4.components) !== null && _themeValues$website_5 !== void 0 && (_themeValues$website_6 = _themeValues$website_5.values) !== null && _themeValues$website_6 !== void 0 && _themeValues$website_6.custom_domain && !patternForURL.test(themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_7 = themeValues.website_settings) === null || _themeValues$website_7 === void 0 ? void 0 : (_themeValues$website_8 = _themeValues$website_7.components) === null || _themeValues$website_8 === void 0 ? void 0 : (_themeValues$website_9 = _themeValues$website_8.values) === null || _themeValues$website_9 === void 0 ? void 0 : _themeValues$website_9.custom_domain)) {
-      setAlertState({
-        open: true,
-        content: [t('CUSTOM_DOMAIN_URL_FORMAT_NOT_CORRECT', 'Custom domain url format is not correct')]
-      });
-      return;
-    }
-    handleUpdateTheme();
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
@@ -176,30 +152,30 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.MoreSettingsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MORE_SETTINGS_FOR_YOUR', 'More settings for your'), " ", /*#__PURE__*/_react.default.createElement("span", null, t('WEBSITE_ORIGINAL', 'website'))), /*#__PURE__*/_react.default.createElement("p", null, t('MORE_SETTINGS_YOUR_WEBSITE_DESC', 'Change background, colors, fonts, style, branding and all the essentials of your brand.'))), /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_SETTINGS', 'Website settings')), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     placeholder: t('SOURCE_DEMO_WEBSITE', 'Source demo website'),
-    value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_10 = themeValues.website_settings) === null || _themeValues$website_10 === void 0 ? void 0 : (_themeValues$website_11 = _themeValues$website_10.components) === null || _themeValues$website_11 === void 0 ? void 0 : (_themeValues$website_12 = _themeValues$website_11.values) === null || _themeValues$website_12 === void 0 ? void 0 : _themeValues$website_12.name) || '',
+    value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_ = themeValues.website_settings) === null || _themeValues$website_ === void 0 ? void 0 : (_themeValues$website_2 = _themeValues$website_.components) === null || _themeValues$website_2 === void 0 ? void 0 : (_themeValues$website_3 = _themeValues$website_2.values) === null || _themeValues$website_3 === void 0 ? void 0 : _themeValues$website_3.name) || '',
     onChange: handleChangeSiteSettings
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Decription')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     name: "description",
     placeholder: t('DESCRIPTION', 'Decription'),
-    value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_13 = themeValues.website_settings) === null || _themeValues$website_13 === void 0 ? void 0 : (_themeValues$website_14 = _themeValues$website_13.components) === null || _themeValues$website_14 === void 0 ? void 0 : (_themeValues$website_15 = _themeValues$website_14.values) === null || _themeValues$website_15 === void 0 ? void 0 : _themeValues$website_15.description) || '',
+    value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_4 = themeValues.website_settings) === null || _themeValues$website_4 === void 0 ? void 0 : (_themeValues$website_5 = _themeValues$website_4.components) === null || _themeValues$website_5 === void 0 ? void 0 : (_themeValues$website_6 = _themeValues$website_5.values) === null || _themeValues$website_6 === void 0 ? void 0 : _themeValues$website_6.description) || '',
     onChange: handleChangeSiteSettings
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEMPORAL_DOMAIN', 'Temporal domain')), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "before"
   }, "https://"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "default_domain",
     placeholder: t('NAME', 'Name'),
-    disabled: !!(themesList !== null && themesList !== void 0 && (_themesList$result$ = themesList.result[0]) !== null && _themesList$result$ !== void 0 && (_themesList$result$$v = _themesList$result$.values_default) !== null && _themesList$result$$v !== void 0 && (_themesList$result$$v2 = _themesList$result$$v.my_products) !== null && _themesList$result$$v2 !== void 0 && (_themesList$result$$v3 = _themesList$result$$v2.components) !== null && _themesList$result$$v3 !== void 0 && (_themesList$result$$v4 = _themesList$result$$v3.website_settings) !== null && _themesList$result$$v4 !== void 0 && (_themesList$result$$v5 = _themesList$result$$v4.components) !== null && _themesList$result$$v5 !== void 0 && (_themesList$result$$v6 = _themesList$result$$v5.values) !== null && _themesList$result$$v6 !== void 0 && _themesList$result$$v6.default_domain),
-    value: convertValues(themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_16 = themeValues.website_settings) === null || _themeValues$website_16 === void 0 ? void 0 : (_themeValues$website_17 = _themeValues$website_16.components) === null || _themeValues$website_17 === void 0 ? void 0 : (_themeValues$website_18 = _themeValues$website_17.values) === null || _themeValues$website_18 === void 0 ? void 0 : _themeValues$website_18.default_domain),
-    onChange: handleChangeSiteSettings
+    disabled: true,
+    defaultValue: ordering.project
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "after"
-  }, ".tryordering.com"))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('CUSTOM_DOMAIN', 'Custom domain')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    placeholder: "mybusiness.com",
-    name: "custom_domain",
-    className: "custom-domain",
-    value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_19 = themeValues.website_settings) === null || _themeValues$website_19 === void 0 ? void 0 : (_themeValues$website_20 = _themeValues$website_19.components) === null || _themeValues$website_20 === void 0 ? void 0 : (_themeValues$website_21 = _themeValues$website_20.values) === null || _themeValues$website_21 === void 0 ? void 0 : _themeValues$website_21.custom_domain) || '',
-    onChange: handleChangeSiteSettings
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageFormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.LogoImage, {
+  }, ".tryordering.com"))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('CUSTOM_DOMAIN', 'Custom domain')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    outline: true,
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return window.open('https://www.ordering.co/custom-domain-change', '_blank');
+    }
+  }, t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain'))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageFormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.LogoImage, {
     onClick: function onClick() {
       return handleClickImage('logo');
     }
@@ -277,7 +253,9 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   }, t('FOOTER_CONTENT', 'Footer content')))))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
-    onClick: handleUpdate
+    onClick: function onClick() {
+      return handleUpdateTheme();
+    }
   }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('BUSINESS', 'Business'),
     content: alertState.content,

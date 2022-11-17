@@ -37,7 +37,7 @@ var InputFormWrapper = _styledComponents.default.div(_templateObject11 || (_temp
 exports.InputFormWrapper = InputFormWrapper;
 var InnerBlock = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 576px;\n"])));
 exports.InnerBlock = InnerBlock;
-var FormGroup = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-top: 27px;\n  label {\n    display: block;\n    margin-bottom: 12px;\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n  }\n  > input, textarea {\n    width: 100%;\n  }\n  .custom-domain {\n    width: 330px;\n  }\n"])));
+var FormGroup = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  margin-top: 27px;\n  label {\n    display: block;\n    margin-bottom: 12px;\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n  }\n  > input, textarea {\n    width: 100%;\n  }\n  .custom-domain {\n    width: 330px;\n  }\n  button {\n    height: 44px;\n  }\n"])));
 exports.FormGroup = FormGroup;
 var FormControl = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  input {\n    margin: 0px 15px;\n    flex: 1;\n    &:disabled {\n      border: none;\n    }\n  }\n  div {\n    display: flex;\n    align-items: center;\n    height: 43px;\n    background-color: ", ";\n    color: ", ";\n    border-radius: 8px;\n    padding: 10px 16px;\n    font-size: 14px;\n  }\n  .before {\n    width: 120px;\n  }\n  .after {\n    width: 180px;\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
