@@ -165,6 +165,9 @@ export const FormGroup = styled.div`
   .custom-domain {
     width: 330px;
   }
+  button {
+    height: 44px;
+  }
 `
 
 export const FormControl = styled.div`
