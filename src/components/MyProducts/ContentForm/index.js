@@ -109,6 +109,16 @@ const ContentFormUI = (props) => {
     handleChangeFormState('body', pageContent)
   }, [pageContent])
 
+  const onInit = (note) => {
+    note.reset()
+    const regex = /(\<\w*)((\s\/\>)|(.*\<\/\w*\>))/i
+    if (content.match(regex) !== null) {
+      note.replace(content)
+    } else {
+      note.insertText(content)
+    }
+  }
+
   return (
     <>
       <PageContainer>
@@ -117,7 +127,7 @@ const ContentFormUI = (props) => {
         </Header>
         <WrapperEditor>
           <ReactSummernote
-            value={content}
+            onInit={onInit}
             placeholder={t('START_NEW_PAGE')}
             options={{
               height: 350,
