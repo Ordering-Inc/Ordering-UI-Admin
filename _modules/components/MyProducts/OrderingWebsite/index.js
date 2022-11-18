@@ -15,6 +15,8 @@ var _Shared = require("../../Shared");
 var _ContentForm = require("../ContentForm");
 var _utils = require("../../../utils");
 var _styles2 = require("./styles");
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -29,9 +31,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   var _themeValues$website_, _themeValues$website_2, _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$images, _themeValues$images$c, _themeValues$images$c2, _themeValues$images$c3, _themeValues$images2, _themeValues$images2$, _themeValues$images2$2, _themeValues$images2$3, _themeValues$images3, _themeValues$images3$, _themeValues$images3$2, _themeValues$images3$3, _themeValues$images4, _themeValues$images4$, _themeValues$images4$2, _themeValues$images4$3, _themeValues$images6, _themeValues$images6$, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _themeValues$theme_se4, _themeValues$theme_se5, _themeValues$theme_se6, _themeValues$theme_se7, _themeValues$theme_se8, _themeValues$theme_se9, _themeValues$theme_se10, _themeValues$theme_se11, _themeValues$theme_se12;
   var themeValues = props.themeValues,
-    themesList = props.themesList,
+    orderingTheme = props.orderingTheme,
     setThemeValues = props.setThemeValues,
-    handleUpdateTheme = props.handleUpdateTheme;
+    handleUpdateSiteTheme = props.handleUpdateSiteTheme;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -149,17 +151,41 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('MY_PRODUCTS', 'My products'))), /*#__PURE__*/_react.default.createElement(_styles2.WebsiteWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDERING_WEBSITE', 'Ordering website')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDERING_WEBSITE_DESC', 'This product is included in your project by default.'))), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.myProducts.orderingWebsite,
     alt: "ordering-website"
-  })), /*#__PURE__*/_react.default.createElement(_styles2.MoreSettingsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MORE_SETTINGS_FOR_YOUR', 'More settings for your'), " ", /*#__PURE__*/_react.default.createElement("span", null, t('WEBSITE_ORIGINAL', 'website'))), /*#__PURE__*/_react.default.createElement("p", null, t('MORE_SETTINGS_YOUR_WEBSITE_DESC', 'Change background, colors, fonts, style, branding and all the essentials of your brand.'))), /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_SETTINGS', 'Website settings')), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.MoreSettingsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MORE_SETTINGS_FOR_YOUR', 'More settings for your'), " ", /*#__PURE__*/_react.default.createElement("span", null, t('WEBSITE_ORIGINAL', 'website'))), /*#__PURE__*/_react.default.createElement("p", null, t('MORE_SETTINGS_YOUR_WEBSITE_DESC', 'Change background, colors, fonts, style, branding and all the essentials of your brand.'))), /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_SETTINGS', 'Website settings')), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 150
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('NAME', 'Name'))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 40,
+    style: {
+      width: '100%'
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     placeholder: t('SOURCE_DEMO_WEBSITE', 'Source demo website'),
     value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_ = themeValues.website_settings) === null || _themeValues$website_ === void 0 ? void 0 : (_themeValues$website_2 = _themeValues$website_.components) === null || _themeValues$website_2 === void 0 ? void 0 : (_themeValues$website_3 = _themeValues$website_2.values) === null || _themeValues$website_3 === void 0 ? void 0 : _themeValues$website_3.name) || '',
     onChange: handleChangeSiteSettings
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Decription')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 150
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('DESCRIPTION', 'Decription'))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 65,
+    style: {
+      width: '100%'
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     name: "description",
     placeholder: t('DESCRIPTION', 'Decription'),
     value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_4 = themeValues.website_settings) === null || _themeValues$website_4 === void 0 ? void 0 : (_themeValues$website_5 = _themeValues$website_4.components) === null || _themeValues$website_5 === void 0 ? void 0 : (_themeValues$website_6 = _themeValues$website_5.values) === null || _themeValues$website_6 === void 0 ? void 0 : _themeValues$website_6.description) || '',
     onChange: handleChangeSiteSettings
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEMPORAL_DOMAIN', 'Temporal domain')), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("div", {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 150
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('TEMPORAL_DOMAIN', 'Temporal domain'))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 40,
+    style: {
+      width: '100%'
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "before"
   }, "https://"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "default_domain",
@@ -168,14 +194,36 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     defaultValue: ordering.project
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "after"
-  }, ".tryordering.com"))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, t('CUSTOM_DOMAIN', 'Custom domain')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, ".tryordering.com"))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 20,
+    width: 150
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('CUSTOM_DOMAIN', 'Custom domain'))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 40,
+    style: {
+      width: '100%'
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     outline: true,
     borderRadius: "8px",
     onClick: function onClick() {
       return window.open('https://www.ordering.co/custom-domain-change', '_blank');
     }
-  }, t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain'))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageFormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.LogoImage, {
+  }, t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain'))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 100,
+    width: 100,
+    style: {
+      marginBottom: '15px'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 15,
+    count: 3,
+    width: 150,
+    style: {
+      display: 'block',
+      marginBottom: '7px'
+    }
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.ImageFormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.LogoImage, {
     onClick: function onClick() {
       return handleClickImage('logo');
     }
@@ -192,12 +240,26 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       return handleFiles(dataTransfer.files, 'logo');
     },
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: themesList.loading
+    disabled: orderingTheme.loading
   }, themeValues !== null && themeValues !== void 0 && (_themeValues$images = themeValues.images) !== null && _themeValues$images !== void 0 && (_themeValues$images$c = _themeValues$images.components) !== null && _themeValues$images$c !== void 0 && (_themeValues$images$c2 = _themeValues$images$c.logo) !== null && _themeValues$images$c2 !== void 0 && (_themeValues$images$c3 = _themeValues$images$c2.components) !== null && _themeValues$images$c3 !== void 0 && _themeValues$images$c3.image ? /*#__PURE__*/_react.default.createElement("img", {
     src: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$images2 = themeValues.images) === null || _themeValues$images2 === void 0 ? void 0 : (_themeValues$images2$ = _themeValues$images2.components) === null || _themeValues$images2$ === void 0 ? void 0 : (_themeValues$images2$2 = _themeValues$images2$.logo) === null || _themeValues$images2$2 === void 0 ? void 0 : (_themeValues$images2$3 = _themeValues$images2$2.components) === null || _themeValues$images2$3 === void 0 ? void 0 : _themeValues$images2$3.image,
     alt: "logo image",
     loading: "lazy"
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImgInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('HEADER_LOGO', 'Header logo')), /*#__PURE__*/_react.default.createElement("p", null, "900 x 200 px"), /*#__PURE__*/_react.default.createElement("p", null, t('FORMAT', 'Format'), ": PNG"))), /*#__PURE__*/_react.default.createElement(_styles2.ImageFormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.BackgroundImage, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImgInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('HEADER_LOGO', 'Header logo')), /*#__PURE__*/_react.default.createElement("p", null, "900 x 200 px"), /*#__PURE__*/_react.default.createElement("p", null, t('FORMAT', 'Format'), ": PNG"))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 100,
+    style: {
+      marginBottom: '15px',
+      width: '100%'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 15,
+    count: 3,
+    width: 150,
+    style: {
+      display: 'block',
+      marginBottom: '7px'
+    }
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.ImageFormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.BackgroundImage, {
     onClick: function onClick() {
       return handleClickImage('homepage_background');
     }
@@ -214,19 +276,22 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       return handleFiles(dataTransfer.files, 'homepage_background');
     },
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: themesList.loading
+    disabled: orderingTheme.loading
   }, themeValues !== null && themeValues !== void 0 && (_themeValues$images3 = themeValues.images) !== null && _themeValues$images3 !== void 0 && (_themeValues$images3$ = _themeValues$images3.components) !== null && _themeValues$images3$ !== void 0 && (_themeValues$images3$2 = _themeValues$images3$.homepage_background) !== null && _themeValues$images3$2 !== void 0 && (_themeValues$images3$3 = _themeValues$images3$2.components) !== null && _themeValues$images3$3 !== void 0 && _themeValues$images3$3.image ? /*#__PURE__*/_react.default.createElement("img", {
     src: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$images4 = themeValues.images) === null || _themeValues$images4 === void 0 ? void 0 : (_themeValues$images4$ = _themeValues$images4.components) === null || _themeValues$images4$ === void 0 ? void 0 : (_themeValues$images4$2 = _themeValues$images4$.homepage_background) === null || _themeValues$images4$2 === void 0 ? void 0 : (_themeValues$images4$3 = _themeValues$images4$2.components) === null || _themeValues$images4$3 === void 0 ? void 0 : _themeValues$images4$3.image,
     alt: "backgrond image",
     loading: "lazy"
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImgInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('HOMEPAGE_BACKGROUND', 'Homepage background')), /*#__PURE__*/_react.default.createElement("p", null, "1920 x 1280 px"), /*#__PURE__*/_react.default.createElement("p", null, t('FORMAT', 'Format'), ": PNG"))), /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImgInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('HOMEPAGE_BACKGROUND', 'Homepage background')), /*#__PURE__*/_react.default.createElement("p", null, "1920 x 1280 px"), /*#__PURE__*/_react.default.createElement("p", null, t('FORMAT', 'Format'), ": PNG"))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    width: 200,
+    height: 20
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
     onClick: function onClick() {
       var _themeValues$images5, _themeValues$images5$;
       return handleChangeValue(!(themeValues !== null && themeValues !== void 0 && (_themeValues$images5 = themeValues.images) !== null && _themeValues$images5 !== void 0 && (_themeValues$images5$ = _themeValues$images5.components) !== null && _themeValues$images5$ !== void 0 && _themeValues$images5$.homepage_image_fullscreen), 'images', 'homepage_image_fullscreen');
     }
   }, themeValues !== null && themeValues !== void 0 && (_themeValues$images6 = themeValues.images) !== null && _themeValues$images6 !== void 0 && (_themeValues$images6$ = _themeValues$images6.components) !== null && _themeValues$images6$ !== void 0 && _themeValues$images6$.homepage_image_fullscreen ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage  image fullscreen'))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('THEME_SETTINGS', 'Theme Settings')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement(_styles2.ColorPickerWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('PRIMARY_COLOR_BUTTONS', 'Primary Color for Buttons')), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage  image fullscreen'))))), !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('THEME_SETTINGS', 'Theme Settings')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement(_styles2.ColorPickerWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('PRIMARY_COLOR_BUTTONS', 'Primary Color for Buttons')), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
     defaultColor: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$theme_se = themeValues.theme_settings) === null || _themeValues$theme_se === void 0 ? void 0 : (_themeValues$theme_se2 = _themeValues$theme_se.components) === null || _themeValues$theme_se2 === void 0 ? void 0 : (_themeValues$theme_se3 = _themeValues$theme_se2.style) === null || _themeValues$theme_se3 === void 0 ? void 0 : _themeValues$theme_se3.primary_btn_color,
     onChangeColor: function onChangeColor(color) {
       return handleChangeValue(color, 'theme_settings', 'style.primary_btn_color');
@@ -254,8 +319,9 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     color: "primary",
     borderRadius: "8px",
     onClick: function onClick() {
-      return handleUpdateTheme();
-    }
+      return handleUpdateSiteTheme();
+    },
+    disabled: orderingTheme === null || orderingTheme === void 0 ? void 0 : orderingTheme.loading
   }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('BUSINESS', 'Business'),
     content: alertState.content,
@@ -314,7 +380,8 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
 };
 var OrderingWebsite = function OrderingWebsite(props) {
   var orderingWebsiteProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: OrderingWebsiteUI
+    UIComponent: OrderingWebsiteUI,
+    appId: 'orderingwebreact'
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrderingWebsite, orderingWebsiteProps);
 };

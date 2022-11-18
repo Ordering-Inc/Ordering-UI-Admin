@@ -127,8 +127,17 @@ var ContentFormUI = function ContentFormUI(props) {
     if (!pageContent) return;
     handleChangeFormState('body', pageContent);
   }, [pageContent]);
+  var onInit = function onInit(note) {
+    note.reset();
+    var regex = /(\<\w*)((\s\/\>)|(.*\<\/\w*\>))/i;
+    if (content.match(regex) !== null) {
+      note.replace(content);
+    } else {
+      note.insertText(content);
+    }
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PageContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, title)), /*#__PURE__*/_react.default.createElement(_styles2.WrapperEditor, null, /*#__PURE__*/_react.default.createElement(_reactSummernote.default, {
-    value: content,
+    onInit: onInit,
     placeholder: t('START_NEW_PAGE'),
     options: {
       height: 350,
