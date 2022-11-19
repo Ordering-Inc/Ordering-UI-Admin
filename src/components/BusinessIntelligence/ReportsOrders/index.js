@@ -9,6 +9,10 @@ import {
 import { Button } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { Download } from 'react-bootstrap-icons'
+import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
+import { ReportsBrandFilter } from '../ReportsBrandFilter'
+import { CountryFilter } from '../CountryFilter'
+import { Modal } from '../../Shared'
 
 import {
   ReportsOrdersContainer,
@@ -22,9 +26,6 @@ import {
   EmptyContent,
   ChartFooterContainer
 } from './styles'
-import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
-import { ReportsBrandFilter } from '../ReportsBrandFilter'
-import { Modal } from '../../Shared'
 
 const ReportsOrdersUI = (props) => {
   const {
@@ -36,6 +37,7 @@ const ReportsOrdersUI = (props) => {
   const [, t] = useLanguage()
   const [dataOptions, setDataOptions] = useState(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
+  const [openCountryFilter, setOpenCountryFilter] = useState(true)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
 
   const generateData = () => {
@@ -147,6 +149,11 @@ const ReportsOrdersUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
+          <Button
+            onClick={() => setOpenCountryFilter(true)}
+          >
+            {t('COUNTRY', 'Country')}
+          </Button>
         </BrandBusinessWrapper>
         <CalendarWrapper>
           <AnalyticsCalendar
@@ -204,6 +211,18 @@ const ReportsOrdersUI = (props) => {
       >
         <ReportsBrandFilter
           {...props} onClose={() => setIsBrandFilter(false)}
+        />
+      </Modal>
+      <Modal
+        width='450px'
+        height='650px'
+        padding='25px'
+        open={openCountryFilter}
+        onClose={() => setOpenCountryFilter(false)}
+      >
+        <CountryFilter
+          {...props}
+          onClose={() => setOpenCountryFilter(false)}
         />
       </Modal>
     </ReportsOrdersContainer>

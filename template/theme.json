@@ -53,5 +53,8 @@
     "warning": "#FFC700",
     "success": "#00D27A",
     "backgroundInfo": "#F5F9FF"
+  },
+  "defaultLanguages": {
+    "LOADING_DELICIOUS_FOOD": "Loading Ordering Dashboard..."
   }
 }

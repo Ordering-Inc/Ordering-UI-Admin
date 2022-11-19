@@ -28,7 +28,7 @@ export const WrapperIndicator = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: ${props => props.theme.colors.white};
   font-weight: 500;
   font-size: 24px;
 `

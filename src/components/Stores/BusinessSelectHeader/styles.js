@@ -16,6 +16,11 @@ export const SelectHeaderContent = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+
+  > button {
+    margin-top: 10px;
+    width: 100%;
+  }
 `
 export const BusinessSearch = styled.div`
   display: flex;

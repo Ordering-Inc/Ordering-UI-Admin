@@ -37,6 +37,12 @@ import deliverect from './template/assets/images/deliverect.png'
 import ItsaCheckmateLogo from './template/assets/images/ItsaCheckmateLogo.png'
 import doordash from './template/assets/images/door-dash.png'
 /**
+ * project statuses
+ */
+import projectActive from './template/assets/images/projectStatuses/project-active.png'
+import projectPastDuePayment from './template/assets/images/projectStatuses/project-past-due-payment.png'
+
+/**
  * Theme apps
  */
 import storeApp from './template/assets/images/store-app.png'
@@ -147,6 +153,20 @@ import myCustomerApp from './template/assets/images/myProducts/customer-app.png'
 import myStoreApp from './template/assets/images/myProducts/store-app.png'
 import myDriverApp from './template/assets/images/myProducts/driver-app.png'
 import orderingWebsite from './template/assets/images/myProducts/ordering-website.png'
+import myCallcenterAppBrand from './template/assets/images/myProducts/my-callcenter-app-brand.png'
+import myCallcenterAppLive from './template/assets/images/myProducts/my-callcenter-app-live.png'
+import myKioskAppBrand from './template/assets/images/myProducts/my-kiosk-app-brand.png'
+import myKioskAppLive from './template/assets/images/myProducts/my-kiosk-app-live.png'
+import myPosAppBrand from './template/assets/images/myProducts/my-pos-app-brand.png'
+import myPosAppLive from './template/assets/images/myProducts/my-pos-app-live.png'
+import storeAppFree from './template/assets/images/myProducts/store-app-free.png'
+import storeAppBrand from './template/assets/images/myProducts/store-app-brand.png'
+import driverAppFree from './template/assets/images/myProducts/driver-app-free.png'
+import driverAppBrand from './template/assets/images/myProducts/driver-app-brand.png'
+import multiStoreCustomerApp from './template/assets/images/myProducts/multi-store-customer-app.png'
+import singleStoreCustomerApp from './template/assets/images/myProducts/single-store-customer-app.png'
+
+import { AutologinParams } from './template/components/AutologinParams'
 
 const logos = {
   logotype,
@@ -176,6 +196,10 @@ theme.images = {
     deliverect,
     ItsaCheckmateLogo,
     doordash
+  },
+  project: {
+    active: projectActive,
+    pastDuePayment: projectPastDuePayment
   },
   apps: {
     storeApp,
@@ -221,7 +245,19 @@ theme.images = {
     customerApp: myCustomerApp,
     storeApp: myStoreApp,
     driverApp: myDriverApp,
-    orderingWebsite: orderingWebsite
+    orderingWebsite: orderingWebsite,
+    myCallcenterAppBrand,
+    myCallcenterAppLive,
+    myKioskAppBrand,
+    myKioskAppLive,
+    myPosAppBrand,
+    myPosAppLive,
+    storeAppFree,
+    storeAppBrand,
+    driverAppFree,
+    driverAppBrand,
+    multiStoreCustomerApp,
+    singleStoreCustomerApp
   },
   icons: {
     ordersList: ordersList,
@@ -302,12 +338,14 @@ const RouteApp = () => {
   return (
     <ConfigFileContext.Provider value={[configFile, setConfigFile]}>
       <ThemeProvider theme={theme}>
-        <OrderingProvider Alert={Alert} settings={configFile}>
-          <InfoShareProvider>
-            <Router />
-            <Toast />
-          </InfoShareProvider>
-        </OrderingProvider>
+        <AutologinParams configFile={configFile}>
+          <OrderingProvider Alert={Alert}>
+            <InfoShareProvider>
+              <Router />
+              <Toast />
+            </InfoShareProvider>
+          </OrderingProvider>
+        </AutologinParams>
       </ThemeProvider>
     </ConfigFileContext.Provider>
   )

@@ -64,14 +64,14 @@ export const TitleContainer = styled.div`
 export const Title = styled.p`
   font-weight: 500;
   font-size: 13px;
-  color: #344050;
+  color: ${props => props.theme.colors.headingColor};
   margin-bottom: 8px;
 `
 
 export const SettingItemDescription = styled.div`
   font-weight: normal;
   font-size: 12px;
-  color: #909BA9;
+  color: ${props => props.theme.colors.lightGray};
 
   @media (min-width: 577px) {
     display: -webkit-box;

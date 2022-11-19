@@ -30,7 +30,7 @@ const LanguageSelectorUI = (props) => {
       <SelectWrapper>
         <Globe2 />
         <Select
-          optionInnerMaxHeight='60vh'
+          optionInnerMaxHeight='300px'
           options={languagesState?.loading ? defaultLanguages : _languages}
           defaultValue={languagesState?.loading ? defaultCurrentLanguage : currentLanguage}
           onChange={(languageId) => handleChangeLanguage(languageId, true)}

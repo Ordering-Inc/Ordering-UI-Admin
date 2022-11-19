@@ -33,6 +33,7 @@ import {
 } from './styles'
 import { AnalyticsDriverOrders } from '../AnalyticsDriverOrders'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
+import { CountryFilter } from '../CountryFilter'
 
 const DriverAnalyticsUI = (props) => {
   const {
@@ -64,6 +65,7 @@ const DriverAnalyticsUI = (props) => {
   const [driversFilterModal, setDriversFilterModal] = useState(false)
   const [driverGroupModal, setDriverGroupModal] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [openCountryFilter, setOpenCountryFilter] = useState(true)
 
   return (
     <BusinessAnalyticsContainer>
@@ -80,6 +82,11 @@ const DriverAnalyticsUI = (props) => {
           <h1>{t('DRIVERS_ANALYTICS', 'Drivers analytics')}</h1>
         </HeaderTitleContainer>
         <HeaderFilterContainer>
+          <BusinessFilterWrapper>
+            <Button onClick={() => setOpenCountryFilter(true)}>
+              {t('COUNTRY', 'Country')}
+            </Button>
+          </BusinessFilterWrapper>
           <BusinessFilterWrapper>
             <Button onClick={() => setIsBrandFilter(true)}>
               {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id.length : t('ALL', 'All')})
@@ -234,6 +241,18 @@ const DriverAnalyticsUI = (props) => {
         <ReportsBrandFilter
           {...props}
           onClose={() => setIsBrandFilter(false)}
+        />
+      </Modal>
+      <Modal
+        width='450px'
+        height='650px'
+        padding='25px'
+        open={openCountryFilter}
+        onClose={() => setOpenCountryFilter(false)}
+      >
+        <CountryFilter
+          {...props}
+          onClose={() => setOpenCountryFilter(false)}
         />
       </Modal>
     </BusinessAnalyticsContainer>
