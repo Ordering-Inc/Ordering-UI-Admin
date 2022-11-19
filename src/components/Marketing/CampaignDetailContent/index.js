@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, CampaignDetailContent as CampaignDetailContentController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
+import { CampaignDetailContent as CampaignDetailContentController } from './naked'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { CampaignEmail } from '../CampaignEmail'
 import { CampaignSMS } from '../CampaignSMS'
@@ -46,6 +47,7 @@ const CampaignDetailContentUI = (props) => {
   useEffect(() => {
     const options = typeList.filter(option => option?.value.toLocaleLowerCase().includes(contactTypeSearchVal.toLocaleLowerCase()))
     setTypeOptions(options)
+    if (contactTypeSearchVal) console.log(contactTypeSearchVal)
   }, [contactTypeSearchVal])
 
   useEffect(() => {
