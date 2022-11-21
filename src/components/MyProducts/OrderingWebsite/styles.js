@@ -170,30 +170,12 @@ export const FormGroup = styled.div`
   }
 `
 
-export const FormControl = styled.div`
-  display: flex;
-  input {
-    margin: 0px 15px;
-    flex: 1;
-    &:disabled {
-      border: none;
-    }
-  }
-  div {
-    display: flex;
-    align-items: center;
-    height: 43px;
-    background-color: ${props => props.theme.colors.secundary};
-    color: ${props => props.theme.colors.lightGray};
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 14px;
-  }
-  .before {
-    width: 120px;
-  }
-  .after {
-    width: 180px;
+export const TemporalDomail = styled.div`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  > a {
+    color: ${props => props.theme.colors.primary};
   }
 `
 
@@ -220,7 +202,7 @@ export const LogoImage = styled.div`
   };
 
   img{
-    object-fit: cover;
+    object-fit: contain;
   }
 `
 
@@ -344,5 +326,14 @@ export const ContentWrapper = styled.div`
   }
   @media (min-width: 769px) {
     flex-direction: row;
+  }
+`
+
+export const WebsiteButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  button {
+    height: 44px;
   }
 `
