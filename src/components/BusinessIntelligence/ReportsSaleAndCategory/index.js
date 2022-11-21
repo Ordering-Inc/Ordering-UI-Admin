@@ -11,6 +11,7 @@ import { Modal } from '../../Shared'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
+import { CountryFilter } from '../CountryFilter'
 
 import {
   ReportsContainer,
@@ -36,6 +37,7 @@ const ReportsSaleAndCategoryUI = (props) => {
   const [, t] = useLanguage()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [openCountryFilter, setOpenCountryFilter] = useState(true)
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, from: date1, to: date2 })
@@ -170,6 +172,11 @@ const ReportsSaleAndCategoryUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
+          <Button
+            onClick={() => setOpenCountryFilter(true)}
+          >
+            {t('COUNTRY', 'Country')}
+          </Button>
         </BrandBusinessWrapper>
         <CalendarWrapper>
           <AnalyticsCalendar
@@ -239,6 +246,18 @@ const ReportsSaleAndCategoryUI = (props) => {
       >
         <ReportsBrandFilter
           {...props} onClose={() => setIsBrandFilter(false)}
+        />
+      </Modal>
+      <Modal
+        width='450px'
+        height='650px'
+        padding='25px'
+        open={openCountryFilter}
+        onClose={() => setOpenCountryFilter(false)}
+      >
+        <CountryFilter
+          {...props}
+          onClose={() => setOpenCountryFilter(false)}
         />
       </Modal>
     </ReportsContainer>

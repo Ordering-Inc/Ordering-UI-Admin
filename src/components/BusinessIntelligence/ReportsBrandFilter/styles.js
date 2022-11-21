@@ -5,13 +5,13 @@ export const ReportsBrandFilterContainer = styled.div``
 export const BrandFilterOption = styled.div`
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   padding: 10px 0;
   cursor: pointer;
 
   svg {
-    font-size: 24px;
-    color: #B1BCCC;
+    font-size: 18px;
+    color: ${props => props.theme.colors.secundaryLight};
 
     &.fill {
       color: ${props => props.theme.colors.primary};

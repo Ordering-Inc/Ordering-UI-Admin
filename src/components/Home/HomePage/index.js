@@ -6,6 +6,8 @@ import { IconButton, Button } from '../../../styles/Buttons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import Skeleton from 'react-loading-skeleton'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { useTheme } from 'styled-components'
+import { getCurrentDiffDays } from '../../../utils'
 import {
   List as MenuIcon,
   Basket as OrdersIcon,
@@ -31,16 +33,24 @@ import {
   WidgeBlock,
   FeedbackWidgets,
   FeedbackContainer,
-  ButtonWrapper
+  ButtonWrapper,
+  ProjectStatusContainer,
+  ProjectInfoWrapper,
+  GreetingText,
+  ProjectStatusDescription,
+  ProjectCurrentStatus
 } from './styles'
 
 const HomeUI = (props) => {
   const {
+    projectStatus,
     ordersList,
     todaySalelsList,
     monthSalesList,
     getCurrentDateRange
   } = props
+
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [timeAxes, setTimeAxes] = useState([])
@@ -48,6 +58,19 @@ const HomeUI = (props) => {
   const { width } = useWindowSize()
   const [{ parsePrice }] = useUtils()
   const [sessionState] = useSession()
+
+  const project = {
+    active: {
+      description: t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.'),
+      status: t('PROJECT_ACTIVE', 'Project Active'),
+      image: theme.images.project.active
+    },
+    past_due: {
+      description: t('PROJECT_PAST_DUE_PAYMENT', 'Your account will be suspended in the next _days_ days due to your billing status, please check it to avoid any issues.'),
+      status: t('PROJECT_PAST_DUE_PAYMENT', 'Project Past Due Payment'),
+      image: theme.images.project.pastDuePayment
+    }
+  }
 
   const goToLink = (location) => {
     if (location === 'sales') {
@@ -193,10 +216,43 @@ const HomeUI = (props) => {
         )}
         <h1>{t('HOME', 'Home')}</h1>
       </Breadcrumb>
-      <HeaderContainer>
-        <WelcomeMsg>{t('WELCOME_TO_ORDERING', 'Welcome to Ordering')}!</WelcomeMsg>
-        <GuideMsg>{t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.')}</GuideMsg>
-      </HeaderContainer>
+
+      {projectStatus.loading && (
+        <HeaderContainer>
+          <Skeleton height={150} />
+        </HeaderContainer>
+      )}
+
+      {!projectStatus.loading && (
+        <>
+          {!projectStatus.project?.current_status ? (
+            <HeaderContainer>
+              <WelcomeMsg>{t('WELCOME_TO_ORDERING', 'Welcome to Ordering')}!</WelcomeMsg>
+              <GuideMsg>{t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.')}</GuideMsg>
+            </HeaderContainer>
+          ) : (
+            <ProjectStatusContainer>
+              <ProjectInfoWrapper>
+                <GreetingText>{t('WELCOME', 'Welcome')} {sessionState?.user?.name}!</GreetingText>
+                <ProjectStatusDescription>
+                  {
+                    (projectStatus.project?.current_status_until && projectStatus.project?.current_status === 'past_due')
+                      ? project[projectStatus.project?.current_status]?.description.replace('_days_', getCurrentDiffDays(projectStatus.project?.current_status_until))
+                      : project[projectStatus.project?.current_status]?.description
+                  }
+                </ProjectStatusDescription>
+                <ProjectCurrentStatus
+                  isActive={projectStatus.project?.current_status === 'active'}
+                >
+                  {project[projectStatus.project?.current_status]?.status}
+                </ProjectCurrentStatus>
+              </ProjectInfoWrapper>
+              <img src={project[projectStatus.project?.current_status]?.image} alt='' />
+            </ProjectStatusContainer>
+          )}
+        </>
+      )}
+
       <ParagraphHeaders>
         <p>{t('REPORTS', 'Reports')}</p>
         <Button

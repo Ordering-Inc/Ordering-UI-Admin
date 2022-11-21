@@ -8,6 +8,7 @@ import { Alert, Modal } from '../../Shared'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
+import { CountryFilter } from '../CountryFilter'
 import {
   DriverDistanceContainer,
   Title,
@@ -35,6 +36,7 @@ const ReportsDriverDistanceUI = (props) => {
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
+  const [openCountryFilter, setOpenCountryFilter] = useState(true)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [availableDriverIds, setAvailableDriverIds] = useState(null)
   const [{ parseNumber }] = useUtils()
@@ -125,6 +127,11 @@ const ReportsDriverDistanceUI = (props) => {
               onClick={() => setIsDriverFilter(true)}
             >
               {t('DRIVER', 'DRIVER')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setOpenCountryFilter(true)}
+            >
+              {t('COUNTRY', 'Country')}
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -233,6 +240,18 @@ const ReportsDriverDistanceUI = (props) => {
             {...props}
             onClose={() => setIsDriverGroupFilter(false)}
             setAvailableDriverIds={setAvailableDriverIds}
+          />
+        </Modal>
+        <Modal
+          width='450px'
+          height='650px'
+          padding='25px'
+          open={openCountryFilter}
+          onClose={() => setOpenCountryFilter(false)}
+        >
+          <CountryFilter
+            {...props}
+            onClose={() => setOpenCountryFilter(false)}
           />
         </Modal>
       </DriverDistanceContainer>

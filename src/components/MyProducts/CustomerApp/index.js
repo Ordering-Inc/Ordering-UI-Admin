@@ -1,52 +1,28 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { useInfoShare } from '../../../contexts/InfoShareContext'
-import { IconButton, Button } from '../../../styles'
-import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import {
-  Container,
-  HeaderTitleContainer,
-  ContentWrapper,
-  ButtonWrapper
-} from './styles'
-import { BoxLayout } from '../BoxLayout'
+import { AppLayout } from '../AppLayout'
 
 export const CustomerApp = () => {
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
+  const appInfo = {
+    title: t('CUSTOMER_APP', 'Customer App'),
+    description: t('CUSTOMER_APP_DESCRIPTION', 'Give your business owners or managers a tool to manage their whole business\'s incoming orders on the go by installing this app on any mobile device they have.'),
+    images: {
+      live: theme.images.myProducts.multiStoreCustomerApp,
+      brand: theme.images.myProducts.singleStoreCustomerApp
+    },
+    live_title: t('MULTI-STORE-CUSTOMER-APP', 'Multi-store Customer App'),
+    live_description: t('FREE_TO_USE_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
+    live_purchase_link: 'https://www.ordering.co/ordering-sales',
+    brand_title: t('SINGLE_STORE_CUSTOMER_APP', 'Single Store Customer App'),
+    brand_description: t('BRANDED_APP_DESCRIPTION', 'This App is delivered in less than five working days, fully branded with your guidelines, removing all ordering.co presence to give your brand more awareness.'),
+    purchase_link: 'https://www.ordering.co/ordering-sales'
+  }
 
   return (
-    <Container>
-      <HeaderTitleContainer>
-        {isCollapse && (
-          <IconButton
-            color='black'
-            onClick={() => handleMenuCollapse(false)}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
-        <h1>{t('MY_PRODUCTS', 'My products')}</h1>
-      </HeaderTitleContainer>
-      <ContentWrapper>
-        <BoxLayout
-          title={t('CUSTOMER_APP', 'Customer app')}
-          photo={theme.images.myProducts.customerApp}
-          description={t('CUSTOMER_APP_DESC', 'Give your customers the chance to order from their mobile devices wherever they are, receive push notifications, offers, and much more.')}
-        >
-          <ButtonWrapper>
-            <Button
-              color='primary'
-              borderRadius='8px'
-              onClick={() => window.open('https://www.ordering.co/ordering-sales', '_blank')}
-            >
-              {t('REQUEST_APP_NOW', 'Request app now')}
-            </Button>
-          </ButtonWrapper>
-        </BoxLayout>
-      </ContentWrapper>
-    </Container>
+    <AppLayout appInfo={appInfo} />
   )
 }

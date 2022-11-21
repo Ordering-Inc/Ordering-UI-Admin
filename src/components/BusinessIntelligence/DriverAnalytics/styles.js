@@ -56,24 +56,23 @@ export const HeaderFilterContainer = styled.div`
 
   > div {
     margin-top: 10px;
+    width: 100%;
+    > button, > div:not(.ordering-calendar) {
+      width: 100%;
+    }
   }
 
-  @media (min-width: 576px) {
+  @media (min-width: 600px) {
     flex-direction: row;
 
     > div {
       margin-top: 0;
+      width: auto;
     }
   }
 `
 
 export const BusinessFilterWrapper = styled.div`
-  margin-left: 25px;
-  ${props => props.theme.rtl && css`
-    margin-right: 25px;
-    margin-left: 0;
-  `}
-
   > button {
     background: #F8F9FA;
     border-radius: 7.6px;
@@ -81,6 +80,14 @@ export const BusinessFilterWrapper = styled.div`
     font-size: 14px;
     color: #748194;
     border: none;
+  }
+
+  @media (min-width: 600px) {
+    margin-left: 25px;
+    ${props => props.theme.rtl && css`
+      margin-right: 25px;
+      margin-left: 0;
+    `}
   }
 `
 

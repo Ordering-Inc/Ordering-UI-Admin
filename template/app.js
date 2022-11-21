@@ -54,6 +54,9 @@ import { OrderingWebsite } from './pages/OrderingWebsite'
 import { CustomerApp } from './pages/CustomerApp'
 import { StoreApp } from './pages/StoreApp'
 import { DriverApp } from './pages/DriverApp'
+import { PosApp } from './pages/PosApp'
+import { CallCenterApp } from './pages/CallCenterApp'
+import { KioskApp } from './pages/KioskApp'
 
 import { ScrollToTop } from './components/ScrollToTop'
 import { ListenPageChanges } from './components/ListenPageChanges'
@@ -299,17 +302,23 @@ export const App = () => {
                     <ProtectedRoute path='/my-products/ordering-website' allowedLevels={[0]}>
                       <OrderingWebsite />
                     </ProtectedRoute>
-
                     <ProtectedRoute path='/my-products/customer-app' allowedLevels={[0]}>
                       <CustomerApp />
                     </ProtectedRoute>
-
                     <ProtectedRoute path='/my-products/store-app' allowedLevels={[0]}>
                       <StoreApp />
                     </ProtectedRoute>
-
                     <ProtectedRoute path='/my-products/driver-app' allowedLevels={[0]}>
                       <DriverApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/pos-app' allowedLevels={[0]}>
+                      <PosApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/call-center-app' allowedLevels={[0]}>
+                      <CallCenterApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/kiosk-app' allowedLevels={[0]}>
+                      <KioskApp />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/settings/basic' allowedLevels={[0]}>

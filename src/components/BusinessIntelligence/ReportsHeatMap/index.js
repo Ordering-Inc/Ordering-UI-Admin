@@ -9,6 +9,7 @@ import { ReportsDriverFilter } from '../ReportsDriverFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
+import { CountryFilter } from '../CountryFilter'
 import {
   HeatMapContainer,
   Title,
@@ -32,6 +33,7 @@ const ReportsHeatMapUI = (props) => {
   const [{ user }] = useSession()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
+  const [openCountryFilter, setOpenCountryFilter] = useState(true)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [availableDriverIds, setAvailableDriverIds] = useState(null)
@@ -111,6 +113,11 @@ const ReportsHeatMapUI = (props) => {
               onClick={() => setIsDriverFilter(true)}
             >
               {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setOpenCountryFilter(true)}
+            >
+              {t('COUNTRY', 'Country')}
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -208,6 +215,18 @@ const ReportsHeatMapUI = (props) => {
         >
           <ReportsBrandFilter
             {...props} onClose={() => setIsBrandFilter(false)}
+          />
+        </Modal>
+        <Modal
+          width='450px'
+          height='650px'
+          padding='25px'
+          open={openCountryFilter}
+          onClose={() => setOpenCountryFilter(false)}
+        >
+          <CountryFilter
+            {...props}
+            onClose={() => setOpenCountryFilter(false)}
           />
         </Modal>
       </HeatMapContainer>

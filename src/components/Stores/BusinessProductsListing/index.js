@@ -5,7 +5,6 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 import RiImageAddFill from '@meronex/icons/ri/RiImageAddFill'
 import {
   useLanguage,
-  useSite,
   useApi,
   BusinessProductsListing as BusinessProductsListingController
 } from 'ordering-components-admin'
@@ -25,7 +24,7 @@ import { BatchImageForm } from '../BatchImageForm'
 import { BusinessDetails } from '../BusinessDetails'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { ImportersButton } from '../ImportersButton'
-import { checkPreSiteUrl } from '../../../utils'
+import { AddBusinessForm } from '../AddBusinessForm'
 
 import {
   CategoryProductsContainer,
@@ -75,7 +74,6 @@ const BusinessProductsListingUI = (props) => {
 
   const [, t] = useLanguage()
   const { width } = useWindowSize()
-  const [siteList] = useSite()
   const [ordering] = useApi()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [viewMethod, setViewMethod] = useState('list')
@@ -197,17 +195,12 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleOpenSite = () => {
-    if (siteList.length && siteList[0]?.url && siteList[0]?.business_url_template) {
-      const businessUrlTemplate = checkPreSiteUrl(siteList[0]?.business_url_template, '/store/:business_slug')
-      if (businessUrlTemplate === '/store/:business_slug' || businessUrlTemplate === '/:business_slug') {
-        window.open(`${siteList[0]?.url}${businessUrlTemplate.replace(':business_slug', businessState?.business?.slug)}`, '_blank')
-      } else {
-        const splitURL = businessUrlTemplate.split('?')
-        window.open(`${siteList[0]?.url}${splitURL[0]}?${splitURL[1].replace(':business_slug', '')}${businessState?.business?.slug}`, '_blank')
-      }
-    } else {
-      window.open(`https://${ordering.project}.tryordering.com/${businessState?.business?.slug}`, '_blank')
-    }
+    window.open(`https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`, '_blank')
+  }
+
+  const handleOpenAddBusiness = () => {
+    setOpenSidebar('add_business')
+    handleClose()
   }
 
   useEffect(() => {
@@ -256,6 +249,7 @@ const BusinessProductsListingUI = (props) => {
                         isOpen={showSelectHeader}
                         changeBusinessState={changeBusinessState}
                         noActiveStatusCondition
+                        handleOpenAddBusiness={handleOpenAddBusiness}
                       />
                     )}
                   </BusinessSelector>
@@ -460,6 +454,16 @@ const BusinessProductsListingUI = (props) => {
           // handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           onClose={() => setOpenSidebar(null)}
         />
+      )}
+      {openSidebar === 'add_business' && (
+        <SideBar
+          open={openSidebar === 'add_business'}
+          onClose={() => setOpenSidebar(null)}
+        >
+          <AddBusinessForm
+            handleSucessAddBusiness={() => setOpenSidebar(false)}
+          />
+        </SideBar>
       )}
       <Modal
         width={width > 1440 ? '40%' : '60%'}
