@@ -22,7 +22,7 @@ import {
   InputFormWrapper,
   FormGroup,
   InnerBlock,
-  FormControl,
+  TemporalDomail,
   ImageFormGroup,
   LogoImage,
   UploadImageIconContainer,
@@ -31,7 +31,8 @@ import {
   BackgroundImage,
   CheckBoxWrapper,
   ColorPickerWrapper,
-  ContentWrapper
+  ContentWrapper,
+  WebsiteButtonWrapper
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 
@@ -153,6 +154,15 @@ const OrderingWebsiteUI = (props) => {
           <h2>{t('MORE_SETTINGS_FOR_YOUR', 'More settings for your')} <span>{t('WEBSITE_ORIGINAL', 'website')}</span></h2>
           <p>{t('MORE_SETTINGS_YOUR_WEBSITE_DESC', 'Change background, colors, fonts, style, branding and all the essentials of your brand.')}</p>
         </MoreSettingsHeader>
+        <WebsiteButtonWrapper>
+          <Button
+            color='primary'
+            borderRadius='8px'
+            onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
+          >
+            {t('VISIT_MY_WEBSITE', 'Visit My Website')}
+          </Button>
+        </WebsiteButtonWrapper>
         <FormWrapper>
           <InputFormWrapper>
             <InnerBlock>
@@ -210,18 +220,11 @@ const OrderingWebsiteUI = (props) => {
                   )}
                 </label>
                 {orderingTheme?.loading ? (
-                  <Skeleton height={40} style={{ width: '100%' }} />
+                  <Skeleton height={20} style={{ width: '100%' }} />
                 ) : (
-                  <FormControl>
-                    <div className='before'>https://</div>
-                    <Input
-                      name='default_domain'
-                      placeholder={t('NAME', 'Name')}
-                      disabled
-                      defaultValue={ordering.project}
-                    />
-                    <div className='after'>.tryordering.com</div>
-                  </FormControl>
+                  <TemporalDomail>
+                    {t('VISIT', 'Visit')}: <a href={`https://${ordering?.project}.tryordering.com`} rel='noopener noreferrer' target='_blank'>https://{ordering?.project}.tryordering.com</a>
+                  </TemporalDomail>
                 )}
               </FormGroup>
               <FormGroup>
@@ -462,7 +465,7 @@ export const OrderingWebsite = (props) => {
   const orderingWebsiteProps = {
     ...props,
     UIComponent: OrderingWebsiteUI,
-    appId: 'orderingwebreact'
+    appId: 'website'
   }
   return <OrderingWebsiteController {...orderingWebsiteProps} />
 }

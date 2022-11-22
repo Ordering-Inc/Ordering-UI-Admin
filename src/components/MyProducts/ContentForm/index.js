@@ -96,6 +96,16 @@ const ContentFormUI = (props) => {
     setEditorContext(null)
   }
 
+  const handleSubmit = () => {
+    const element = document.querySelector('.note-codeview-keep')
+    if (element && element.classList.contains('active')) {
+      const editValue = document.querySelector('.note-codable').value
+      handleSave(editValue)
+      return
+    }
+    handleSave()
+  }
+
   useEffect(() => {
     if (!formState?.error) return
     setAlertState({
@@ -156,7 +166,7 @@ const ContentFormUI = (props) => {
             borderRadius='8px'
             color='primary'
             disabled={Object.keys(formState.changes).length === 0}
-            onClick={() => handleSave()}
+            onClick={() => handleSubmit()}
           >
             {t('ACCEPT', 'Accept')}
           </Button>
