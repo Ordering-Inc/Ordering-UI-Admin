@@ -54,7 +54,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
     handleCustomOrderDetail = props.handleCustomOrderDetail,
     setSelectedOrderIds = props.setSelectedOrderIds,
-    numberOfOrdersByStatus = props.numberOfOrdersByStatus;
+    numberOfOrdersByStatus = props.numberOfOrdersByStatus,
+    allowColumns = props.allowColumns,
+    setAllowColumns = props.setAllowColumns;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -258,7 +260,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setIsTourOpen: setIsTourOpen,
     setFilterModalOpen: setFilterModalOpen,
     timeStatus: timeStatus,
-    slaSettingTime: slaSettingTime
+    slaSettingTime: slaSettingTime,
+    allowColumns: allowColumns,
+    setAllowColumns: setAllowColumns
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,

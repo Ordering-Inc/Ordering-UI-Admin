@@ -89,12 +89,16 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     setCurDriversGroup = _useState12[1];
   var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    isTourOpen = _useState14[0],
-    setIsTourOpen = _useState14[1];
-  var _useState15 = (0, _react.useState)(4),
+    isExtendExtraOpen = _useState14[0],
+    setIsExtendExtraOpen = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    currentTourStep = _useState16[0],
-    setCurrentTourStep = _useState16[1];
+    isTourOpen = _useState16[0],
+    setIsTourOpen = _useState16[1];
+  var _useState17 = (0, _react.useState)(4),
+    _useState18 = _slicedToArray(_useState17, 2),
+    currentTourStep = _useState18[0],
+    setCurrentTourStep = _useState18[1];
   var handleOpenDetails = function handleOpenDetails(driverGroup) {
     setMoveDistance(0);
     setCurDriversGroup(driverGroup);
@@ -221,7 +225,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     handleAllSelectGroup: handleAllSelectGroup
   })), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "driver_group_details",
-    defaultSideBarWidth: 550 + moveDistance,
+    defaultSideBarWidth: !isExtendExtraOpen ? 540 + moveDistance : 1040,
     open: openDetails,
     moveDistance: moveDistance,
     noAnimation: isTourOpen,
@@ -243,6 +247,8 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     handleParentSidebarMove: function handleParentSidebarMove(val) {
       return setMoveDistance(val);
     },
+    setIsExtendExtraOpen: setIsExtendExtraOpen,
+    isExtendExtraOpen: isExtendExtraOpen,
     onClose: function onClose() {
       setOpenDetails(false);
       if (isTourOpen) {
