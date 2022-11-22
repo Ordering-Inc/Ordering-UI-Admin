@@ -14,6 +14,8 @@ import { DriversGroupBusinesses } from '../DriversGroupBusinesses'
 import { DriversGroupPaymethods } from '../DriversGroupPaymethods'
 import { DriversGroupLogistics } from '../DriversGroupLogistics'
 import { DriversGroupLogs } from '../DriversGroupLogs'
+import { DriverGroupDeliveryDetails } from '../DriversGroupDeliveryDetails'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   DetailsContainer,
@@ -30,11 +32,13 @@ const DriversGroupDetailsUI = (props) => {
     handleParentSidebarMove,
     handleDeleteDriversGroup,
     handleNextTour,
-    handleUpdateDriversGroup
+    handleUpdateDriversGroup,
+    setIsExtendExtraOpen
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const [configState] = useConfig()
 
   const autoAssignType = configState?.configs?.autoassign_type?.value
@@ -44,12 +48,14 @@ const DriversGroupDetailsUI = (props) => {
   const [driversGroupMenus, setDriversGroupMenus] = useState([])
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isOpenDetails, setIsOpenDetails] = useState(false)
 
   useEffect(() => {
     const _driversGroupMenus = !driversGroupState.driversGroup
       ? [
         { key: 'general', value: t('GENERAL', 'General') },
-        { key: 'businesses', value: t('BUSINESSES', 'Businesses') }
+        { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
+        { key: 'delivery_zones', value: t('DELIVERY_ZONES', 'Delivery Zones') }
       ]
       : (useAdvanced && autoAssignType !== 'basic')
         ? [
@@ -57,18 +63,20 @@ const DriversGroupDetailsUI = (props) => {
           { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
           { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
           { key: 'advanced_logistics', value: t('ADVANCED_LOGISTICS', 'Advanced logistics') },
-          { key: 'logs', value: t('LOGS', 'Logs') }
+          { key: 'logs', value: t('LOGS', 'Logs') },
+          { key: 'delivery_zones', value: t('DELIVERY_ZONES', 'Delivery Zones') }
         ]
         : [
           { key: 'general', value: t('GENERAL', 'General') },
           { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
           { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
-          { key: 'logs', value: t('LOGS', 'Logs') }
+          { key: 'logs', value: t('LOGS', 'Logs') },
+          { key: 'delivery_zones', value: t('DELIVERY_ZONES', 'Delivery Zones') }
         ]
     setDriversGroupMenus(_driversGroupMenus)
   }, [useAdvanced])
 
-  const onDeleteGroup = (driversGroupId) => {
+  const onDeleteGroup = () => {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_DRIVER_GROUP', 'Are you sure to remove this driver group?'),
@@ -78,6 +86,10 @@ const DriversGroupDetailsUI = (props) => {
       }
     })
   }
+
+  useEffect(() => {
+    if (width > 1000) setIsExtendExtraOpen(false)
+  }, [width])
 
   const handleNextClick = () => {
     setShowMenu('businesses')
@@ -90,7 +102,9 @@ const DriversGroupDetailsUI = (props) => {
 
   useEffect(() => {
     handleParentSidebarMove(0)
-  }, [showMenu])
+    setIsOpenDetails(false)
+    setIsExtendExtraOpen(false)
+  }, [showMenu, driversGroupState.driversGroup?.id])
 
   useEffect(() => {
     if (!actionState?.error) return
@@ -165,6 +179,15 @@ const DriversGroupDetailsUI = (props) => {
         )}
         {showMenu === 'logs' && (
           <DriversGroupLogs driversGroupId={driversGroupState.driversGroup?.id} />
+        )}
+        {showMenu === 'delivery_zones' && (
+          <DriverGroupDeliveryDetails {...props}
+            handleParentSidebarMove={handleParentSidebarMove}
+            drivergroup={driversGroupState.driversGroup}
+            setIsExtendExtraOpen={setIsExtendExtraOpen}
+            setIsOpenDetails={setIsOpenDetails}
+            isOpenDetails={isOpenDetails}
+          />
         )}
       </DetailsContainer>
       <Alert

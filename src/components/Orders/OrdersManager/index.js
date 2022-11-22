@@ -46,7 +46,9 @@ const OrdersManagerUI = (props) => {
     handleSelectedSubOrderStatus,
     handleCustomOrderDetail,
     setSelectedOrderIds,
-    numberOfOrdersByStatus
+    numberOfOrdersByStatus,
+    allowColumns,
+    setAllowColumns
   } = props
 
   const [, t] = useLanguage()
@@ -233,6 +235,8 @@ const OrdersManagerUI = (props) => {
                 setFilterModalOpen={setFilterModalOpen}
                 timeStatus={timeStatus}
                 slaSettingTime={slaSettingTime}
+                allowColumns={allowColumns}
+                setAllowColumns={setAllowColumns}
               />
             </WrapItemView>
           </OrdersInnerContent>
