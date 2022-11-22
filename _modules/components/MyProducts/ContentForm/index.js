@@ -116,6 +116,15 @@ var ContentFormUI = function ContentFormUI(props) {
     setOpenModal(false);
     setEditorContext(null);
   };
+  var handleSubmit = function handleSubmit() {
+    var element = document.querySelector('.note-codeview-keep');
+    if (element && element.classList.contains('active')) {
+      var editValue = document.querySelector('.note-codable').value;
+      handleSave(editValue);
+      return;
+    }
+    handleSave();
+  };
   (0, _react.useEffect)(function () {
     if (!(formState !== null && formState !== void 0 && formState.error)) return;
     setAlertState({
@@ -157,7 +166,7 @@ var ContentFormUI = function ContentFormUI(props) {
     color: "primary",
     disabled: Object.keys(formState.changes).length === 0,
     onClick: function onClick() {
-      return handleSave();
+      return handleSubmit();
     }
   }, t('ACCEPT', 'Accept')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
