@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils, useEvent, useSession, Home as HomeController } from 'ordering-components-admin'
+import { useLanguage, useUtils, useEvent, useSession, useApi, Home as HomeController } from 'ordering-components-admin'
 import { Line } from 'react-chartjs-2'
 import moment from 'moment'
 import { IconButton, Button } from '../../../styles/Buttons'
@@ -38,7 +38,8 @@ import {
   ProjectInfoWrapper,
   GreetingText,
   ProjectStatusDescription,
-  ProjectCurrentStatus
+  ProjectCurrentStatus,
+  ProjectStatusWrapper
 } from './styles'
 
 const HomeUI = (props) => {
@@ -58,6 +59,7 @@ const HomeUI = (props) => {
   const { width } = useWindowSize()
   const [{ parsePrice }] = useUtils()
   const [sessionState] = useSession()
+  const [ordering] = useApi()
 
   const project = {
     active: {
@@ -241,11 +243,20 @@ const HomeUI = (props) => {
                       : project[projectStatus.project?.current_status]?.description
                   }
                 </ProjectStatusDescription>
-                <ProjectCurrentStatus
-                  isActive={projectStatus.project?.current_status === 'active'}
-                >
-                  {project[projectStatus.project?.current_status]?.status}
-                </ProjectCurrentStatus>
+                <ProjectStatusWrapper>
+                  <ProjectCurrentStatus
+                    isActive={projectStatus.project?.current_status === 'active'}
+                  >
+                    {project[projectStatus.project?.current_status]?.status}
+                  </ProjectCurrentStatus>
+                  <Button
+                    color='primary'
+                    borderRadius='8px'
+                    onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
+                  >
+                    {t('VISIT_MY_WEBSITE', 'Visit my Website')}
+                  </Button>
+                </ProjectStatusWrapper>
               </ProjectInfoWrapper>
               <img src={project[projectStatus.project?.current_status]?.image} alt='' />
             </ProjectStatusContainer>
