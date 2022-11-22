@@ -24,7 +24,8 @@ var Pagination = function Pagination(props) {
     handleChangePage = props.handleChangePage,
     defaultPageSize = props.defaultPageSize,
     handleChangePageSize = props.handleChangePageSize,
-    isHidePagecontrol = props.isHidePagecontrol;
+    isHidePagecontrol = props.isHidePagecontrol,
+    paginationSize = props.paginationSize;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -112,7 +113,7 @@ var Pagination = function Pagination(props) {
     isSecondIcon: true,
     notAsync: true,
     minWidth: "70px",
-    defaultValue: defaultPageSize || 10,
+    defaultValue: defaultPageSize || paginationSize,
     options: pageSizeOptions,
     onChange: function onChange(size) {
       return handleChangePageSize(size);

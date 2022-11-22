@@ -54,7 +54,11 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleSuccessDeleteBusinessItem = props.handleSuccessDeleteBusinessItem,
     handleUpdateBusinessState = props.handleUpdateBusinessState,
     handleDuplicateBusiness = props.handleDuplicateBusiness,
-    handleDeleteBusiness = props.handleDeleteBusiness;
+    handleDeleteBusiness = props.handleDeleteBusiness,
+    actionStatus = props.actionStatus;
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
@@ -72,11 +76,18 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isExtendExtraOpen = _useState6[0],
     setIsExtendExtraOpen = _useState6[1];
-  var isAdmin = (user === null || user === void 0 ? void 0 : user.level) === 0;
-  var _useState7 = (0, _react.useState)(null),
+  var _useState7 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
     _useState8 = _slicedToArray(_useState7, 2),
-    selectedItem = _useState8[0],
-    setSelectedItem = _useState8[1];
+    alertState = _useState8[0],
+    setAlertState = _useState8[1];
+  var isAdmin = (user === null || user === void 0 ? void 0 : user.level) === 0;
+  var _useState9 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState9, 2),
+    selectedItem = _useState10[0],
+    setSelectedItem = _useState10[1];
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
     if (!value) {
@@ -140,6 +151,13 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
       return document.removeEventListener('keydown', onCloseSidebar);
     };
   }, [open]);
+  (0, _react.useEffect)(function () {
+    if (!(actionStatus !== null && actionStatus !== void 0 && actionStatus.error)) return;
+    setAlertState({
+      open: true,
+      content: actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error
+    });
+  }, [actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error]);
   return /*#__PURE__*/_react.default.createElement(_styles.BarContainer, {
     id: "business_details_bar"
   }, (!isExtendExtraOpen || width < 1000) && /*#__PURE__*/_react.default.createElement(_BusinessSummary.BusinessSummary, {
@@ -235,7 +253,25 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
   }), selectedItem === 'webhooks' && /*#__PURE__*/_react.default.createElement(_BusinessWebhooks.BusinessWebhooks, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessUpdate: handleUpdateBusinessState
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  }));
 };
 exports.BusinessDetailsUI = BusinessDetailsUI;
 var BusinessDetails = function BusinessDetails(props) {

@@ -50,7 +50,8 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     handleSelectUser = props.handleSelectUser,
     selectedLoyaltyLevelIds = props.selectedLoyaltyLevelIds,
     handleSelectLoyaltyLevel = props.handleSelectLoyaltyLevel,
-    handleSelectAllLoyaltyLevels = props.handleSelectAllLoyaltyLevels;
+    handleSelectAllLoyaltyLevels = props.handleSelectAllLoyaltyLevels,
+    handleSelectAllUsers = props.handleSelectAllUsers;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -176,7 +177,6 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     handleUpdateClick: handleUpdateClick,
     handleAddPromotion: handleAddPromotion
   })), selectedOption === 'sites' && /*#__PURE__*/_react.default.createElement(_Shared.SelectSites, {
-    isAllChecked: selectedSitesIds.length === 0,
     isAddMode: isAddMode,
     allSites: sitesState.sites,
     selectedSitesIds: selectedSitesIds,
@@ -210,7 +210,8 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     selectedUserIds: selectedUserIds,
     handleSelectUser: handleSelectUser,
     handleUpdateClick: handleUpdateClick,
-    handleAddPromotion: handleAddPromotion
+    handleAddPromotion: handleAddPromotion,
+    handleSelectAllUsers: handleSelectAllUsers
   }), selectedOption === 'loyalty_levels' && /*#__PURE__*/_react.default.createElement(_Shared.SelectLoyaltyLevels, {
     isAddMode: isAddMode,
     isDisabled: Object.keys(formState.changes).length === 0 || actionState.loading,

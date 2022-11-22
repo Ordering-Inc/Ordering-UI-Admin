@@ -23,8 +23,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SelectSites = function SelectSites(props) {
-  var isAllChecked = props.isAllChecked,
-    isAddMode = props.isAddMode,
+  var isAddMode = props.isAddMode,
     isDisabled = props.isDisabled,
     selectedSitesIds = props.selectedSitesIds,
     allSites = props.allSites,
@@ -77,9 +76,9 @@ var SelectSites = function SelectSites(props) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ChannelItem, {
       key: site.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      checked: isAllChecked || selectedSitesIds.includes(site.id),
+      checked: selectedSitesIds.includes(site.id),
       onChange: function onChange(e) {
-        return handleSelectSite(isAllChecked ? true : e.target.checked, site.id);
+        return handleSelectSite(e.target.checked, site.id);
       }
     }), /*#__PURE__*/_react.default.createElement("span", null, site.name));
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
