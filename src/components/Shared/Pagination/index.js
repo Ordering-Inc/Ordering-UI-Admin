@@ -19,7 +19,8 @@ export const Pagination = (props) => {
     handleChangePage,
     defaultPageSize,
     handleChangePageSize,
-    isHidePagecontrol
+    isHidePagecontrol,
+    paginationSize
   } = props
 
   const [, t] = useLanguage()
@@ -131,7 +132,7 @@ export const Pagination = (props) => {
             isSecondIcon
             notAsync
             minWidth='70px'
-            defaultValue={defaultPageSize || 10}
+            defaultValue={defaultPageSize || paginationSize}
             options={pageSizeOptions}
             onChange={size => handleChangePageSize(size)}
           />

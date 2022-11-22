@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BusinessDetails as BusinessDetailsController, useSession } from 'ordering-components-admin'
+import { BusinessDetails as BusinessDetailsController, useSession, useLanguage } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { BusinessSummary } from '../BusinessSummary'
 import { BusinessSupport } from '../BusinessSupport'
@@ -18,7 +18,7 @@ import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
 import { BusinessFrontLayout } from '../BusinessFrontLayout'
 // import { BusinessPublishing } from '../BusinessPublishing'
 
-import { MoreSidebarLayout, Personalization } from '../../Shared'
+import { MoreSidebarLayout, Personalization, Alert } from '../../Shared'
 
 import {
   BarContainer
@@ -42,13 +42,17 @@ export const BusinessDetailsUI = (props) => {
     handleSuccessDeleteBusinessItem,
     handleUpdateBusinessState,
     handleDuplicateBusiness,
-    handleDeleteBusiness
+    handleDeleteBusiness,
+    actionStatus
   } = props
+
+  const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [{ user }] = useSession()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const isAdmin = user?.level === 0
 
@@ -124,6 +128,14 @@ export const BusinessDetailsUI = (props) => {
     document.addEventListener('keydown', onCloseSidebar)
     return () => document.removeEventListener('keydown', onCloseSidebar)
   }, [open])
+
+  useEffect(() => {
+    if (!actionStatus?.error) return
+    setAlertState({
+      open: true,
+      content: actionStatus?.error
+    })
+  }, [actionStatus?.error])
 
   return (
     <BarContainer id='business_details_bar'>
@@ -274,6 +286,16 @@ export const BusinessDetailsUI = (props) => {
           )}
         </MoreSidebarLayout>
       )}
+
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </BarContainer>
   )
 }
