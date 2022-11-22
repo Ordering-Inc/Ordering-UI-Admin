@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, DriversGroupsList as DriversGroupsListController } from 'ordering-components-admin'
-import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
-import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { getStorageItem, removeStorageItem } from '../../../utils'
-import { useInfoShare } from '../../../contexts/InfoShareContext'
-import { Button, IconButton } from '../../../styles'
 import { Alert, Confirm, SearchBar, SideBar } from '../../Shared'
-import { WizardDelivery } from '../WizardDelivery'
-import { DriversGroupsList } from '../DriversGroupsList'
-import { DriversGroupDetails } from '../DriversGroupDetails'
+import { DriversGroupDetails } from '../../Delivery/DriversGroupDetails'
+import { WizardDelivery } from '../../Delivery/WizardDelivery'
+import { DriversGroupsList } from '../../Delivery/DriversGroupsList'
 
 import {
   DriversGroupsListingContainer,
-  HeaderContainer,
-  HeaderLeftContainer,
-  HeaderRightContainer
+  SearchContainer
 } from './styles'
 
-const DriversGroupsListingUI = (props) => {
+const DriversGroupsListingDetailsUI = (props) => {
   const {
     driversGroupsState,
     setDriversGroupsState,
@@ -29,7 +23,6 @@ const DriversGroupsListingUI = (props) => {
     selectedGroupList,
     handleSelectGroup,
     handleAllSelectGroup,
-    handleDeleteSelectedGroups,
     actionState,
     handleUpdateDriversGroup,
     handleDeleteDriversGroup,
@@ -38,14 +31,12 @@ const DriversGroupsListingUI = (props) => {
 
   const history = useHistory()
   const [, t] = useLanguage()
-  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [searchValue, setSearchValue] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [moveDistance, setMoveDistance] = useState(0)
   const [openDetails, setOpenDetails] = useState(false)
   const [curDriversGroup, setCurDriversGroup] = useState(null)
-  const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
 
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(4)
@@ -69,17 +60,6 @@ const DriversGroupsListingUI = (props) => {
       content: actionState?.error
     })
   }, [actionState?.error])
-
-  const onClickSelectedGroupsDelete = () => {
-    setConfirm({
-      open: true,
-      content: t('CONFIRM_DELETE', 'Are you sure to delete?'),
-      handleOnAccept: () => {
-        setConfirm({ ...confirm, open: false })
-        handleDeleteSelectedGroups()
-      }
-    })
-  }
 
   const handleOpenTour = () => {
     setOpenDetails(false)
@@ -118,60 +98,17 @@ const DriversGroupsListingUI = (props) => {
 
   return (
     <>
+      <SearchContainer>
+        <SearchBar
+          lazyLoad
+          isCustomLayout
+          onSearch={val => setSearchValue(val)}
+          search={searchValue}
+          placeholder={t('SEARCH', 'Search')}
+          customClass='searchBar'
+        />
+      </SearchContainer>
       <DriversGroupsListingContainer>
-        <HeaderContainer>
-          <HeaderLeftContainer>
-            {isCollapse && (
-              <IconButton
-                color='black'
-                onClick={() => handleMenuCollapse()}
-              >
-                <MenuIcon />
-              </IconButton>
-            )}
-            <h1>{t('DELIVERY_AUTOMATION', 'Delivery automation')}</h1>
-            <OverlayTrigger
-              placement='bottom'
-              overlay={
-                <Tooltip>
-                  {t('START_TUTORIAL', 'Start tutorial')}
-                </Tooltip>
-              }
-            >
-              <IconButton
-                color='dark'
-                className='tour_btn'
-                onClick={() => handleOpenTour()}
-              >
-                <LifePreserver />
-              </IconButton>
-            </OverlayTrigger>
-          </HeaderLeftContainer>
-          <HeaderRightContainer>
-            <Button
-              borderRadius='8px'
-              color='lightPrimary'
-              data-tour='tour_add_group'
-              onClick={() => handleOpenDetails(null)}
-            >
-              {t('ADD_DRIVER_GROUP', 'Add driver group')}
-            </Button>
-            <Button
-              borderRadius='8px'
-              color='secundary'
-              disabled={selectedGroupList.length === 0}
-              onClick={() => onClickSelectedGroupsDelete()}
-            >
-              {t('DELETE', 'Delete')}
-            </Button>
-            <SearchBar
-              lazyLoad
-              onSearch={val => setSearchValue(val)}
-              search={searchValue}
-              placeholder={t('SEARCH', 'Search')}
-            />
-          </HeaderRightContainer>
-        </HeaderContainer>
         <DriversGroupsList
           curDriversGroup={curDriversGroup}
           driversGroupsState={driversGroupsState}
@@ -187,7 +124,7 @@ const DriversGroupsListingUI = (props) => {
       {openDetails && (
         <SideBar
           sidebarId='driver_group_details'
-          defaultSideBarWidth={!isExtendExtraOpen ? 540 + moveDistance : 1040}
+          defaultSideBarWidth={550 + moveDistance}
           open={openDetails}
           moveDistance={moveDistance}
           noAnimation={isTourOpen}
@@ -208,8 +145,6 @@ const DriversGroupsListingUI = (props) => {
             companies={driversCompanyList?.companies}
             handleUpdateDriversGroup={handleUpdateDriversGroup}
             handleParentSidebarMove={val => setMoveDistance(val)}
-            setIsExtendExtraOpen={setIsExtendExtraOpen}
-            isExtendExtraOpen={isExtendExtraOpen}
             onClose={() => {
               setOpenDetails(false)
               if (isTourOpen) {
@@ -252,11 +187,11 @@ const DriversGroupsListingUI = (props) => {
   )
 }
 
-export const DriversGroupsListing = (props) => {
+export const DriversGroupsListingDetails = (props) => {
   const driversGroupsListProps = {
     ...props,
     isDriversMangersRequired: true,
-    UIComponent: DriversGroupsListingUI
+    UIComponent: DriversGroupsListingDetailsUI
   }
   return (
     <DriversGroupsListController {...driversGroupsListProps} />

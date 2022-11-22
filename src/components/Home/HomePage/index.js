@@ -219,15 +219,15 @@ const HomeUI = (props) => {
         <h1>{t('HOME', 'Home')}</h1>
       </Breadcrumb>
 
-      {projectStatus.loading && (
+      {projectStatus?.loading && (
         <HeaderContainer>
           <Skeleton height={150} />
         </HeaderContainer>
       )}
 
-      {!projectStatus.loading && (
+      {!projectStatus?.loading && (
         <>
-          {!projectStatus.project?.current_status ? (
+          {!projectStatus?.project?.current_status ? (
             <HeaderContainer>
               <WelcomeMsg>{t('WELCOME_TO_ORDERING', 'Welcome to Ordering')}!</WelcomeMsg>
               <GuideMsg>{t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.')}</GuideMsg>
