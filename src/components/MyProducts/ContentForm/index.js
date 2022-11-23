@@ -122,12 +122,16 @@ const ContentFormUI = (props) => {
   const onInit = (note) => {
     note.reset()
     const regex = /(\<\w*)((\s\/\>)|(.*\<\/\w*\>))/i
-    if (content.match(regex) !== null) {
+    if (content?.match(regex) !== null) {
       note.replace(content)
     } else {
       note.insertText(content)
     }
   }
+
+  useEffect(() => {
+    setPageContent(content)
+  }, [content])
 
   return (
     <>

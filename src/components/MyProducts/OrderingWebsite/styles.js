@@ -147,7 +147,7 @@ export const InputFormWrapper = styled.div`
 
 export const InnerBlock = styled.div`
   width: 100%;
-  max-width: 576px;
+  max-width: 647px;
 `
 
 export const FormGroup = styled.div`
@@ -184,8 +184,8 @@ export const ImageFormGroup = styled.div`
 `
 
 export const LogoImage = styled.div`
-  width: 160px;
-  height: 160px;
+  width: 450px;
+  height: 100px;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
@@ -207,13 +207,26 @@ export const LogoImage = styled.div`
 `
 
 export const BackgroundImage = styled(LogoImage)`
-  width: 100%;
+  height: 213px;
+  width: 320px;
+
+  @media (min-width: 768px) {
+    height: 427px;
+    width: 640px;
+  }
 `
 
 export const UploadImageIconContainer = styled.div`
   position: absolute;
   top: 0px;
   background: ${props => props.theme.colors.secundaryDarkContrast};
+  ${({ bgimage }) => bgimage && css`
+    background: transparent;
+    svg, span {
+      color: ${props => props.theme.colors.white};
+    }
+    border: 1px dashed ${props => props.theme.colors.secundaryDarkContrast};
+  `}
   ${({ small }) => small ? css`
     padding: 4px;
   ` : css`
@@ -233,8 +246,8 @@ export const UploadImageIcon = styled.div`
   }
 
   svg {   
-    width: 57px;
-    height: 50px;
+    width: 52px;
+    height: 45px;
   }
 `
 
