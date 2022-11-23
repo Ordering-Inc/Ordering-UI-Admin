@@ -275,16 +275,13 @@ const OrderingWebsiteUI = (props) => {
                         accept='image/png, image/jpeg, image/jpg'
                         disabled={orderingTheme.loading}
                       >
-                        {themeValues?.images?.components?.logo?.components?.image
-                          ? <img src={themeValues?.images?.components?.logo?.components?.image} alt='logo image' loading='lazy' />
-                          : (
-                            <UploadImageIconContainer>
-                              <UploadImageIcon>
-                                <DumyPhoto />
-                                <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
-                              </UploadImageIcon>
-                            </UploadImageIconContainer>
-                          )}
+                        {themeValues?.images?.components?.logo?.components?.image && <img src={themeValues?.images?.components?.logo?.components?.image} alt='logo image' loading='lazy' />}
+                        <UploadImageIconContainer bgimage={themeValues?.images?.components?.logo?.components?.image}>
+                          <UploadImageIcon>
+                            <DumyPhoto />
+                            <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                          </UploadImageIcon>
+                        </UploadImageIconContainer>
                       </DragAndDrop>
                     </ExamineClick>
                   </LogoImage>
@@ -315,16 +312,13 @@ const OrderingWebsiteUI = (props) => {
                         accept='image/png, image/jpeg, image/jpg'
                         disabled={orderingTheme.loading}
                       >
-                        {themeValues?.images?.components?.homepage_background?.components?.image
-                          ? <img src={themeValues?.images?.components?.homepage_background?.components?.image} alt='backgrond image' loading='lazy' />
-                          : (
-                            <UploadImageIconContainer>
-                              <UploadImageIcon>
-                                <DumyPhoto />
-                                <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
-                              </UploadImageIcon>
-                            </UploadImageIconContainer>
-                          )}
+                        {themeValues?.images?.components?.homepage_background?.components?.image && <img src={themeValues?.images?.components?.homepage_background?.components?.image} alt='backgrond image' loading='lazy' />}
+                        <UploadImageIconContainer bgimage={!!themeValues?.images?.components?.homepage_background?.components?.image}>
+                          <UploadImageIcon>
+                            <DumyPhoto />
+                            <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                          </UploadImageIcon>
+                        </UploadImageIconContainer>
                       </DragAndDrop>
                     </ExamineClick>
                   </BackgroundImage>
@@ -361,13 +355,6 @@ const OrderingWebsiteUI = (props) => {
                     <ColorPicker
                       defaultColor={themeValues?.theme_settings?.components?.style?.primary_btn_color}
                       onChangeColor={(color) => handleChangeValue(color, 'theme_settings', 'style.primary_btn_color')}
-                    />
-                  </div>
-                  <div>
-                    <p>{t('PRIMARY_COLOR_LINKS', 'Primary Color for Links')}</p>
-                    <ColorPicker
-                      defaultColor={themeValues?.theme_settings?.components?.style?.primary_link_color}
-                      onChangeColor={(color) => handleChangeValue(color, 'theme_settings', 'style.primary_link_color')}
                     />
                   </div>
                 </ColorPickerWrapper>
@@ -410,7 +397,7 @@ const OrderingWebsiteUI = (props) => {
         </FormWrapper>
       </Container>
       <Alert
-        title={t('BUSINESS', 'Business')}
+        title={t('ORDERING', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
