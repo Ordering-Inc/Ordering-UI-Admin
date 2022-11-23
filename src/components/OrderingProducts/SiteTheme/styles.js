@@ -158,3 +158,21 @@ export const ComponentImage = styled.div`
 export const PageSelectWrapper = styled.div`
   padding: 20px 0 30px 0;
 `
+export const PageHiddenCheckWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+
+  > input {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 5px;
+    ` : css`
+      margin-right: 5px;
+    `}
+  }
+  h4 {
+    font-size: 12px;
+    margin: 0px;
+    text-transform: capitalize;
+  }
+`

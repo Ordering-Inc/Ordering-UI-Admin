@@ -22,7 +22,7 @@ import {
   InputFormWrapper,
   FormGroup,
   InnerBlock,
-  FormControl,
+  TemporalDomail,
   ImageFormGroup,
   LogoImage,
   UploadImageIconContainer,
@@ -31,7 +31,8 @@ import {
   BackgroundImage,
   CheckBoxWrapper,
   ColorPickerWrapper,
-  ContentWrapper
+  ContentWrapper,
+  WebsiteButtonWrapper
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 
@@ -153,6 +154,15 @@ const OrderingWebsiteUI = (props) => {
           <h2>{t('MORE_SETTINGS_FOR_YOUR', 'More settings for your')} <span>{t('WEBSITE_ORIGINAL', 'website')}</span></h2>
           <p>{t('MORE_SETTINGS_YOUR_WEBSITE_DESC', 'Change background, colors, fonts, style, branding and all the essentials of your brand.')}</p>
         </MoreSettingsHeader>
+        <WebsiteButtonWrapper>
+          <Button
+            color='primary'
+            borderRadius='8px'
+            onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
+          >
+            {t('VISIT_MY_WEBSITE', 'Visit My Website')}
+          </Button>
+        </WebsiteButtonWrapper>
         <FormWrapper>
           <InputFormWrapper>
             <InnerBlock>
@@ -210,18 +220,11 @@ const OrderingWebsiteUI = (props) => {
                   )}
                 </label>
                 {orderingTheme?.loading ? (
-                  <Skeleton height={40} style={{ width: '100%' }} />
+                  <Skeleton height={20} style={{ width: '100%' }} />
                 ) : (
-                  <FormControl>
-                    <div className='before'>https://</div>
-                    <Input
-                      name='default_domain'
-                      placeholder={t('NAME', 'Name')}
-                      disabled
-                      defaultValue={ordering.project}
-                    />
-                    <div className='after'>.tryordering.com</div>
-                  </FormControl>
+                  <TemporalDomail>
+                    {t('VISIT', 'Visit')}: <a href={`https://${ordering?.project}.tryordering.com`} rel='noopener noreferrer' target='_blank'>https://{ordering?.project}.tryordering.com</a>
+                  </TemporalDomail>
                 )}
               </FormGroup>
               <FormGroup>
@@ -272,16 +275,13 @@ const OrderingWebsiteUI = (props) => {
                         accept='image/png, image/jpeg, image/jpg'
                         disabled={orderingTheme.loading}
                       >
-                        {themeValues?.images?.components?.logo?.components?.image
-                          ? <img src={themeValues?.images?.components?.logo?.components?.image} alt='logo image' loading='lazy' />
-                          : (
-                            <UploadImageIconContainer>
-                              <UploadImageIcon>
-                                <DumyPhoto />
-                                <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
-                              </UploadImageIcon>
-                            </UploadImageIconContainer>
-                          )}
+                        {themeValues?.images?.components?.logo?.components?.image && <img src={themeValues?.images?.components?.logo?.components?.image} alt='logo image' loading='lazy' />}
+                        <UploadImageIconContainer bgimage={themeValues?.images?.components?.logo?.components?.image}>
+                          <UploadImageIcon>
+                            <DumyPhoto />
+                            <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                          </UploadImageIcon>
+                        </UploadImageIconContainer>
                       </DragAndDrop>
                     </ExamineClick>
                   </LogoImage>
@@ -312,16 +312,13 @@ const OrderingWebsiteUI = (props) => {
                         accept='image/png, image/jpeg, image/jpg'
                         disabled={orderingTheme.loading}
                       >
-                        {themeValues?.images?.components?.homepage_background?.components?.image
-                          ? <img src={themeValues?.images?.components?.homepage_background?.components?.image} alt='backgrond image' loading='lazy' />
-                          : (
-                            <UploadImageIconContainer>
-                              <UploadImageIcon>
-                                <DumyPhoto />
-                                <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
-                              </UploadImageIcon>
-                            </UploadImageIconContainer>
-                          )}
+                        {themeValues?.images?.components?.homepage_background?.components?.image && <img src={themeValues?.images?.components?.homepage_background?.components?.image} alt='backgrond image' loading='lazy' />}
+                        <UploadImageIconContainer bgimage={!!themeValues?.images?.components?.homepage_background?.components?.image}>
+                          <UploadImageIcon>
+                            <DumyPhoto />
+                            <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                          </UploadImageIcon>
+                        </UploadImageIconContainer>
                       </DragAndDrop>
                     </ExamineClick>
                   </BackgroundImage>
@@ -358,13 +355,6 @@ const OrderingWebsiteUI = (props) => {
                     <ColorPicker
                       defaultColor={themeValues?.theme_settings?.components?.style?.primary_btn_color}
                       onChangeColor={(color) => handleChangeValue(color, 'theme_settings', 'style.primary_btn_color')}
-                    />
-                  </div>
-                  <div>
-                    <p>{t('PRIMARY_COLOR_LINKS', 'Primary Color for Links')}</p>
-                    <ColorPicker
-                      defaultColor={themeValues?.theme_settings?.components?.style?.primary_link_color}
-                      onChangeColor={(color) => handleChangeValue(color, 'theme_settings', 'style.primary_link_color')}
                     />
                   </div>
                 </ColorPickerWrapper>
@@ -407,7 +397,7 @@ const OrderingWebsiteUI = (props) => {
         </FormWrapper>
       </Container>
       <Alert
-        title={t('BUSINESS', 'Business')}
+        title={t('ORDERING', 'Ordering')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
@@ -462,7 +452,7 @@ export const OrderingWebsite = (props) => {
   const orderingWebsiteProps = {
     ...props,
     UIComponent: OrderingWebsiteUI,
-    appId: 'orderingwebreact'
+    appId: 'website'
   }
   return <OrderingWebsiteController {...orderingWebsiteProps} />
 }

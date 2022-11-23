@@ -457,7 +457,7 @@ export const ProjectStatusDescription = styled.p`
 `
 export const ProjectCurrentStatus = styled.div`
   width: fit-content;
-  margin-top: 15px;
+  /* margin-top: 15px; */
   padding: 10px 16px;
   border-radius: 8px;
   font-size: 14px;
@@ -468,4 +468,18 @@ export const ProjectCurrentStatus = styled.div`
     color: ${props => props.theme.colors.success};
     background-color: ${(props) => lighten(0.5, props.theme.colors.success)};
   `}
+`
+
+export const ProjectStatusWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  > button {
+    height: 44px;
+    margin-left: 15px;
+    ${props => props.theme.rtl && css`
+      margin-right: 15px;
+      margin-left: 0px;
+    `}
+  }
 `

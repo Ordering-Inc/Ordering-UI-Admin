@@ -96,6 +96,16 @@ const ContentFormUI = (props) => {
     setEditorContext(null)
   }
 
+  const handleSubmit = () => {
+    const element = document.querySelector('.note-codeview-keep')
+    if (element && element.classList.contains('active')) {
+      const editValue = document.querySelector('.note-codable').value
+      handleSave(editValue)
+      return
+    }
+    handleSave()
+  }
+
   useEffect(() => {
     if (!formState?.error) return
     setAlertState({
@@ -112,12 +122,16 @@ const ContentFormUI = (props) => {
   const onInit = (note) => {
     note.reset()
     const regex = /(\<\w*)((\s\/\>)|(.*\<\/\w*\>))/i
-    if (content.match(regex) !== null) {
+    if (content?.match(regex) !== null) {
       note.replace(content)
     } else {
       note.insertText(content)
     }
   }
+
+  useEffect(() => {
+    setPageContent(content)
+  }, [content])
 
   return (
     <>
@@ -156,7 +170,7 @@ const ContentFormUI = (props) => {
             borderRadius='8px'
             color='primary'
             disabled={Object.keys(formState.changes).length === 0}
-            onClick={() => handleSave()}
+            onClick={() => handleSubmit()}
           >
             {t('ACCEPT', 'Accept')}
           </Button>
