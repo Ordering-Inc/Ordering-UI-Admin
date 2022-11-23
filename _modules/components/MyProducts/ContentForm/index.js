@@ -139,12 +139,15 @@ var ContentFormUI = function ContentFormUI(props) {
   var onInit = function onInit(note) {
     note.reset();
     var regex = /(\<\w*)((\s\/\>)|(.*\<\/\w*\>))/i;
-    if (content.match(regex) !== null) {
+    if ((content === null || content === void 0 ? void 0 : content.match(regex)) !== null) {
       note.replace(content);
     } else {
       note.insertText(content);
     }
   };
+  (0, _react.useEffect)(function () {
+    setPageContent(content);
+  }, [content]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PageContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, title)), /*#__PURE__*/_react.default.createElement(_styles2.WrapperEditor, null, /*#__PURE__*/_react.default.createElement(_reactSummernote.default, {
     onInit: onInit,
     placeholder: t('START_NEW_PAGE'),
