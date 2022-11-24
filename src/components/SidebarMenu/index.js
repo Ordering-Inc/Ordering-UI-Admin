@@ -778,7 +778,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   </Accordion>
                 )}
-                {/* {sessionState?.user?.level === 0 && (
+                {sessionState?.user?.level === 0 && (
                   <Button
                     className='d-flex align-items-center'
                     variant={location.pathname === '/ordering-products' && 'primary'}
@@ -787,7 +787,7 @@ const SidebarMenuUI = (props) => {
                     <WindowDock />
                     <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>
                   </Button>
-                )} */}
+                )}
                 {sessionState?.user?.level === 0 && (
                   <Button
                     className='d-flex align-items-center'
