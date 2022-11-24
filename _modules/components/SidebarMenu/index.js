@@ -538,7 +538,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         page: 'ordering_products'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(WindowDock, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERING_PRODUCTS', 'Ordering products'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user32 = sessionState.user) === null || _sessionState$user32 === void 0 ? void 0 : _sessionState$user32.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.WindowDock, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERING_PRODUCTS', 'Ordering products'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user32 = sessionState.user) === null || _sessionState$user32 === void 0 ? void 0 : _sessionState$user32.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: location.pathname === '/support' && 'primary',
     onClick: function onClick() {
