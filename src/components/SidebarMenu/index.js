@@ -13,7 +13,7 @@ import {
   Headset as HeadsetIcon,
   Truck,
   GraphUp,
-  // WindowDock,
+  WindowDock,
   Award,
   BoxArrowUpRight,
   Cart3,
