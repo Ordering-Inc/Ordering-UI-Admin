@@ -21,20 +21,38 @@ export const AdBannersListing = (props) => {
 
   const bannerPositions = [
     {
-      key: 'home_page',
-      title: t('HOME', 'Home'),
+      key: 'web_home_page',
+      title: t('WEB_HOME', 'Web home'),
       description: t('HOME_BANNER_DESCRIPTION', 'Add a banner to your home page and inform everyone about the latest news in your marketplace.'),
       icon: <HouseDoor />
     },
     {
-      key: 'business_listing',
-      title: t('BUSINESS_LISTING', 'Business listing'),
+      key: 'web_business_listing',
+      title: t('WEB_BUSINESS_LISTING', 'Web business listing'),
       description: t('BUSINESS_LISTING_BANNER_DESCRIPTION', 'Add a banner inside your business listing to let everyone know about your latest promotions inside your businesses listed.'),
       icon: <ViewStacked />
     },
     {
-      key: 'business_page',
-      title: t('BUSINESS_PAGE', 'Business page'),
+      key: 'web_business_page',
+      title: t('WEB_BUSINESS_PAGE', 'Web business page'),
+      description: t('BUSINESS_PAGE_BANNER_DESCRIPTION', 'Add a banner inside the business page, and inform news and promotions specifically of the stores customers are ordering from.'),
+      icon: <Shop />
+    },
+    {
+      key: 'app_home_page',
+      title: t('APP_HOME', 'App home'),
+      description: t('HOME_BANNER_DESCRIPTION', 'Add a banner to your home page and inform everyone about the latest news in your marketplace.'),
+      icon: <HouseDoor />
+    },
+    {
+      key: 'app_business_listing',
+      title: t('APP_BUSINESS_LISTING', 'App business listing'),
+      description: t('BUSINESS_LISTING_BANNER_DESCRIPTION', 'Add a banner inside your business listing to let everyone know about your latest promotions inside your businesses listed.'),
+      icon: <ViewStacked />
+    },
+    {
+      key: 'app_business_page',
+      title: t('APP_BUSINESS_PAGE', 'App business page'),
       description: t('BUSINESS_PAGE_BANNER_DESCRIPTION', 'Add a banner inside the business page, and inform news and promotions specifically of the stores customers are ordering from.'),
       icon: <Shop />
     }
