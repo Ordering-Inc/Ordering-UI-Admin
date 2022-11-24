@@ -40,6 +40,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isShowMap, setIsShowMap] = useState(false)
   const kmlRef = useRef(null)
+  const isMyZone = zone?.businesses?.length ? zone?.pivot?.business_id === zone?.businesses[0]?.id : true
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
@@ -157,7 +158,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
           <FormControl>
             <label>{t('NAME', 'Name')}</label>
             <Input
-              disabled={zone?.businesses[0]?.id !== zone?.pivot.business_id}
+              disabled={!isMyZone}
               placeholder={t('NAME', 'Name')}
               name='name'
               value={formState.changes?.name ?? zone?.name ?? ''}
@@ -171,7 +172,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
             <label>{t('TYPE', 'Type')}</label>
             <TypeSelectWrapper>
               <Select
-                isDisabled={zone?.businesses[0]?.id !== zone?.pivot.business_id}
+                isDisabled={!isMyZone}
                 defaultValue={parseInt(formState.changes?.type || zoneType)}
                 options={typeOptions}
                 onChange={handleChangeType}
@@ -210,6 +211,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
             <FormControl>
               <label>{t('DISTANCE_FROM_STORE', 'Distance from store')}</label>
               <Input
+                disabled={!isMyZone}
                 placeholder={`0 ${configState?.configs?.distance_unit?.value}`}
                 name='distance'
                 value={formState.changes?.data?.distance ?? zone?.data?.distance ?? ''}
@@ -232,7 +234,8 @@ export const BusinessDeliveryZoneInformation = (props) => {
         {zoneType !== 4 && isShowMap && (
           configState?.configs?.google_maps_api_key?.value ? (
             <WrapperMap>
-              {(zoneType !== 5 && zone?.businesses[0]?.id === zone?.pivot.business_id) &&
+              {zoneType !== 5 &&
+                isMyZone &&
                 <button
                   type='button'
                   onClick={() => setClearState(true)}
@@ -242,7 +245,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
               }
               <BusinessZoneGoogleMaps
                 distance={formState.changes?.data?.distance}
-                disabled={zone?.businesses[0]?.id !== zone?.pivot.business_id}
+                disabled={!isMyZone || zoneType === 5}
                 apiKey={configState?.configs?.google_maps_api_key?.value}
                 mapControls={googleMapsControls}
                 location={business?.location}
