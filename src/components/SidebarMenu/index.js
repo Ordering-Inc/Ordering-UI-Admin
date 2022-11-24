@@ -13,7 +13,7 @@ import {
   Headset as HeadsetIcon,
   Truck,
   GraphUp,
-  WindowDock,
+  // WindowDock,
   Award,
   BoxArrowUpRight,
   Cart3,
@@ -21,7 +21,7 @@ import {
   BagCheck
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi, useSite } from 'ordering-components-admin'
+import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
@@ -38,7 +38,9 @@ import {
   MenuContainer,
   MenuContent,
   SubMenu,
-  LanguageSelectorContainer
+  LanguageSelectorContainer,
+  LogoWrapper,
+  PoweredWrapper
 } from './styles'
 
 const SidebarMenuUI = (props) => {
@@ -51,9 +53,9 @@ const SidebarMenuUI = (props) => {
   const [sessionState] = useSession()
   const [{ configs }] = useConfig()
   const [ordering] = useApi()
-  const [siteList] = useSite()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
+  const isPoweredByOrderingModule = configs?.powered_by_ordering_module?.value
 
   const ordersSubMenus = [
     {
@@ -148,6 +150,24 @@ const SidebarMenuUI = (props) => {
       title: t('DRIVER_APP', 'Driver app'),
       pageName: 'driver_app',
       url: '/my-products/driver-app'
+    },
+    {
+      id: 5,
+      title: t('POS_APP', 'POS'),
+      pageName: 'pos_app',
+      url: '/my-products/pos-app'
+    },
+    {
+      id: 6,
+      title: t('CALL_CENTER_APP', 'Call center'),
+      pageName: 'call_center_app',
+      url: '/my-products/call-center-app'
+    },
+    {
+      id: 7,
+      title: t('KIOSK_APP', 'Kiosk'),
+      pageName: 'kiosk_app',
+      url: '/my-products/kiosk-app'
     }
   ]
 
@@ -337,8 +357,7 @@ const SidebarMenuUI = (props) => {
   }
 
   const handleOpenSite = () => {
-    if (siteList.length && siteList[0]?.url) handleGoToLink(siteList[0]?.url)
-    else handleGoToLink(`https://${ordering.project}.tryordering.com`)
+    handleGoToLink(`https://${ordering.project}.tryordering.com`)
   }
 
   useEffect(() => {
@@ -364,20 +383,27 @@ const SidebarMenuUI = (props) => {
           className='d-flex flex-column'
         >
           <SidebarHeader>
-            <Image
-              src={configs?.dashboard_logo?.value || theme?.images?.logos?.logotype}
-              onClick={() => handleGoToPage({ page: 'home' })}
-            />
-            <BurgerButton
-              onClick={() => handleMenuCollapse(true)}
-            >
-              <svg viewBox='0 0 50 32'>
-                <path d='M49,4H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,4,49,4z' />
-                <path d='M49,16H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,16,49,16z' />
-                <path d='M49,28H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,28,49,28z' />
-                <path d='M8.1,22.8c-0.3,0-0.5-0.1-0.7-0.3L0.7,15l6.7-7.8c0.4-0.4,1-0.5,1.4-0.1c0.4,0.4,0.5,1,0.1,1.4L3.3,15l5.5,6.2 c0.4,0.4,0.3,1-0.1,1.4C8.6,22.7,8.4,22.8,8.1,22.8z' />
-              </svg>
-            </BurgerButton>
+            <LogoWrapper>
+              <Image
+                src={configs?.dashboard_logo?.value || theme?.images?.logos?.logotype}
+                onClick={() => handleGoToPage({ page: 'home' })}
+              />
+              <BurgerButton
+                onClick={() => handleMenuCollapse(true)}
+              >
+                <svg viewBox='0 0 50 32'>
+                  <path d='M49,4H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,4,49,4z' />
+                  <path d='M49,16H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,16,49,16z' />
+                  <path d='M49,28H19c-0.6,0-1-0.4-1-1s0.4-1,1-1h30c0.6,0,1,0.4,1,1S49.6,28,49,28z' />
+                  <path d='M8.1,22.8c-0.3,0-0.5-0.1-0.7-0.3L0.7,15l6.7-7.8c0.4-0.4,1-0.5,1.4-0.1c0.4,0.4,0.5,1,0.1,1.4L3.3,15l5.5,6.2 c0.4,0.4,0.3,1-0.1,1.4C8.6,22.7,8.4,22.8,8.1,22.8z' />
+                </svg>
+              </BurgerButton>
+            </LogoWrapper>
+            {isPoweredByOrderingModule && (
+              <PoweredWrapper>
+                {t('POWERED_BY_ORDERING', 'Powered by Ordering.co')}
+              </PoweredWrapper>
+            )}
           </SidebarHeader>
           <SidebarMainContent>
             <SidebarContent className='d-flex flex-column justify-content-between p-1 pt-0'>
@@ -688,7 +714,10 @@ const SidebarMenuUI = (props) => {
                           location.pathname === '/my-products/ordering-website' ||
                           location.pathname === '/my-products/customer-app' ||
                           location.pathname === '/my-products/store-app' ||
-                          location.pathname === '/my-products/driver-app'
+                          location.pathname === '/my-products/driver-app' ||
+                          location.pathname === '/my-products/pos-app' ||
+                          location.pathname === '/my-products/call-center-app' ||
+                          location.pathname === '/my-products/kiosk-app'
                         }
                       >
                         <BagCheck />
@@ -749,7 +778,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   </Accordion>
                 )}
-                {sessionState?.user?.level === 0 && (
+                {/* {sessionState?.user?.level === 0 && (
                   <Button
                     className='d-flex align-items-center'
                     variant={location.pathname === '/ordering-products' && 'primary'}
@@ -758,7 +787,7 @@ const SidebarMenuUI = (props) => {
                     <WindowDock />
                     <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>
                   </Button>
-                )}
+                )} */}
                 {sessionState?.user?.level === 0 && (
                   <Button
                     className='d-flex align-items-center'

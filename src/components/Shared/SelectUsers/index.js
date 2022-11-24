@@ -28,13 +28,15 @@ const SelectUsersUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [all, setAll] = useState(false)
+  const [paginationSize, setPaginationSize] = useState(10)
 
   const handleChangePage = (page) => {
-    getUsers(page, 10)
+    getUsers(page, paginationSize)
   }
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
+    setPaginationSize(pageSize)
     getUsers(expectedPage, pageSize)
   }
 
@@ -96,6 +98,7 @@ const SelectUsersUI = (props) => {
         usersList?.users.length > 0 && (
           <WrapperPagination>
             <Pagination
+              paginationSize={paginationSize}
               currentPage={paginationProps.currentPage}
               totalPages={paginationProps.totalPages}
               handleChangePage={handleChangePage}

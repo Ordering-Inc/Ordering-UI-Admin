@@ -11,7 +11,7 @@ export const OrderTypeFilterOption = styled.div`
 
   svg {
     font-size: 24px;
-    color: #B1BCCC;
+    color: ${props => props.theme.colors.secundaryLight};
 
     &.fill {
       color: ${props => props.theme.colors.primary};

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, SiteTheme as SiteThemeController } from 'ordering-components-admin'
-import { SecondSelect as Select, Button } from '../../../styles'
+import { SecondSelect as Select, Button, Checkbox } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { ThemeOption } from './ThemeOption'
 import { ThemeComponent } from './ThemeComponent'
@@ -14,7 +14,8 @@ import {
   PageBlockTitle,
   BlockContainer,
   UpdateButtonWrapper,
-  PageSelectWrapper
+  PageSelectWrapper,
+  PageHiddenCheckWrapper
 } from './styles'
 
 const SiteThemeUI = (props) => {
@@ -60,6 +61,12 @@ const SiteThemeUI = (props) => {
     const _themeValues = { ...themeValues }
     const path = [selectedPage, 'components', block].join('.')
     updateObject(_themeValues, value, path)
+    setThemeValues(_themeValues)
+  }
+
+  const handleHidePage = (hidden) => {
+    const _themeValues = JSON.parse(JSON.stringify(themeValues))
+    _themeValues[selectedPage].hidden = hidden
     setThemeValues(_themeValues)
   }
 
@@ -123,6 +130,15 @@ const SiteThemeUI = (props) => {
                 </PageSelectWrapper>
                 {selectedPage && (
                   <>
+                    {themeStructure[selectedPage]?.hidden && themeStructure[selectedPage]?.hidden?.value_type === 'boolean' && (
+                      <PageHiddenCheckWrapper>
+                        <Checkbox
+                          defaultChecked={themeValues[selectedPage]?.hidden}
+                          onChange={e => handleHidePage(e.target.checked)}
+                        />
+                        <h4>{t('HIDDEN', 'Hidden')}</h4>
+                      </PageHiddenCheckWrapper>
+                    )}
                     <PageBlockTitle>{t('PAGE_BLOCKS', 'Page blocks')}</PageBlockTitle>
                     {Object.keys(themeStructure[selectedPage]?.components).map(block => {
                       const components = themeStructure[selectedPage].components

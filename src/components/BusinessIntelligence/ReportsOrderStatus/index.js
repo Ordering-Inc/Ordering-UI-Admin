@@ -8,6 +8,7 @@ import { Alert, Modal } from '../../Shared'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsOrderTypeFilter } from '../ReportsOrderTypeFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
+import { CountryFilter } from '../CountryFilter'
 import {
   OrderStatusContainer,
   Title,
@@ -36,6 +37,7 @@ const ReportsOrderStatusUI = (props) => {
   const [{ parsePrice }] = useUtils()
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [openCountryFilter, setOpenCountryFilter] = useState(true)
   const [isOrderTypeFilter, setIsOrderTypeFilter] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -126,6 +128,11 @@ const ReportsOrderStatusUI = (props) => {
               onClick={() => setIsOrderTypeFilter(true)}
             >
               {t('ORDER_TYPE', 'Order type')} ({filterList?.delivery_types_ids ? filterList?.delivery_types_ids.length : t('ALL', 'All')})
+            </Button>
+            <Button
+              onClick={() => setOpenCountryFilter(true)}
+            >
+              {t('COUNTRY', 'Country')}
             </Button>
           </BrandBusinessWrapper>
           <CalendarWrapper>
@@ -286,6 +293,18 @@ const ReportsOrderStatusUI = (props) => {
           <ReportsOrderTypeFilter
             {...props}
             onClose={() => setIsOrderTypeFilter(false)}
+          />
+        </Modal>
+        <Modal
+          width='450px'
+          height='650px'
+          padding='25px'
+          open={openCountryFilter}
+          onClose={() => setOpenCountryFilter(false)}
+        >
+          <CountryFilter
+            {...props}
+            onClose={() => setOpenCountryFilter(false)}
           />
         </Modal>
       </OrderStatusContainer>

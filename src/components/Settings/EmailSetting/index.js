@@ -45,7 +45,6 @@ const EmailSettingUI = (props) => {
   const [superAdmin, setSuperAdmin] = useState(null)
   const [business, setBusiness] = useState(null)
   const [customer, setCustomer] = useState(null)
-  const [cityManager, setCityManager] = useState(null)
 
   const closeAlert = () => {
     setAlertState({
@@ -60,12 +59,10 @@ const EmailSettingUI = (props) => {
     const _superAdmin = configs.find(config => config.key === 'email_superadmin_states')
     const _business = configs.find(config => config.key === 'email_business_states')
     const _customer = configs.find(config => config.key === 'email_customer_states')
-    const _cityManager = configs.find(config => config.key === 'email_city_manager_states')
     setGeneral([..._general])
     setSuperAdmin({ ..._superAdmin })
     setBusiness({ ..._business })
     setCustomer({ ..._customer })
-    setCityManager({ ..._cityManager })
   }, [configs])
 
   useEffect(() => {
@@ -205,35 +202,6 @@ const EmailSettingUI = (props) => {
               }
               {
                 !customer?.options && <OptionsError>{t('NO_OPTIONS_VALUE', 'There is no options value')}</OptionsError>
-              }
-            </CheckBoxWrapper>
-          </Accordion.Collapse>
-          <ContextAwareToggle eventKey='4' as='div'>
-            <AccordionTitle>{t('CITY_MANAGER', 'City manager')}</AccordionTitle>
-          </ContextAwareToggle>
-          <Accordion.Collapse eventKey='4'>
-            <CheckBoxWrapper>
-              {cityManager?.description && <p>{cityManager?.description}</p>}
-              {
-                cityManager?.options?.length > 0 && cityManager?.options?.map((item, j) => (
-                  <FormGroupWrapper key={j}>
-                    <FormGroupCheck className='checkbox'>
-                      <label>
-                        <input
-                          type='checkbox'
-                          name={item?.value}
-                          data-id={cityManager?.id}
-                          defaultChecked={cityManager?.value.split('|').includes(item?.value)}
-                          onChange={(e) => handleCheckBoxChange(e, true, cityManager?.value)}
-                        />
-                        {item.text}
-                      </label>
-                    </FormGroupCheck>
-                  </FormGroupWrapper>
-                ))
-              }
-              {
-                !cityManager?.options && <OptionsError>{t('NO_OPTIONS_VALUE', 'There is no options value')}</OptionsError>
               }
             </CheckBoxWrapper>
           </Accordion.Collapse>

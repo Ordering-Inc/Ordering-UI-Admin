@@ -8,8 +8,9 @@ export const AnalyticsTimeZoneContainer = styled.div`
     border-radius: 7.6px;
     padding: 7px 12px;
     font-size: 14px;
-    color: #748194;
+    color: ${props => props.theme.colors.secundaryContrast};
     border: none;
+    width: 100%;
   }
 `
 
@@ -17,19 +18,15 @@ export const TimeZoneSelectWrapper = styled.div`
   position: absolute;
   width: 300px;
   top: 100%;
-  right: -60px;
+  right: 0;
   padding: 25px;
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-  border: 1px solid #E9ECEF;
+  border: 1px solid ${props => props.theme.colors.borderColor};
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
   z-index: 100;
   margin-top: 18px;
-
-  @media (min-width: 576px) {
-    right: 0;
-  }
 `
 export const TimeZoneSearchWrapper = styled.div`
   position: relative;
@@ -50,7 +47,7 @@ export const SearchIconWrapper = styled.div`
 
   svg {
     font-size: 16px;
-    color: #B1BCCC;
+    color: ${props => props.theme.colors.secundaryLight};
   }
 `
 

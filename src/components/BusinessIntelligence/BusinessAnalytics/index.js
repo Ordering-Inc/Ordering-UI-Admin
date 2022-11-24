@@ -28,6 +28,7 @@ import {
   MapWrraper
 } from './styles'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
+import { CountryFilter } from '../CountryFilter'
 
 const BusinessAnalyticsUI = (props) => {
   const {
@@ -50,6 +51,7 @@ const BusinessAnalyticsUI = (props) => {
 
   const [businessFilterModal, setBusinessFilterModal] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [openCountryFilter, setOpenCountryFilter] = useState(true)
 
   const handleChangeDate = (date1, date2) => {
     handleChangeFilterList({ ...filterList, lapse: `${date1},${date2}` })
@@ -70,6 +72,11 @@ const BusinessAnalyticsUI = (props) => {
           <h1>{t('BUSINESS_ANALYTICS', 'Business Analytics')}</h1>
         </HeaderTitleContainer>
         <HeaderFilterContainer>
+          <BusinessFilterWrapper>
+            <Button onClick={() => setOpenCountryFilter(true)}>
+              {t('COUNTRY', 'Country')}
+            </Button>
+          </BusinessFilterWrapper>
           <BusinessFilterWrapper>
             <Button onClick={() => setIsBrandFilter(true)}>
               {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id.length : t('ALL', 'All')})
@@ -182,6 +189,18 @@ const BusinessAnalyticsUI = (props) => {
         <ReportsBrandFilter
           {...props}
           onClose={() => setIsBrandFilter(false)}
+        />
+      </Modal>
+      <Modal
+        width='450px'
+        height='650px'
+        padding='25px'
+        open={openCountryFilter}
+        onClose={() => setOpenCountryFilter(false)}
+      >
+        <CountryFilter
+          {...props}
+          onClose={() => setOpenCountryFilter(false)}
         />
       </Modal>
     </BusinessAnalyticsContainer>
