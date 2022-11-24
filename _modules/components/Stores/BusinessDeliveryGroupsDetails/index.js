@@ -10,7 +10,6 @@ var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _utils = require("../../../utils");
 var _Shared = require("../../Shared");
-var _DriversGroupDetails = require("../../Delivery/DriversGroupDetails");
 var _WizardDelivery = require("../../Delivery/WizardDelivery");
 var _DriversGroupsList = require("../../Delivery/DriversGroupsList");
 var _styles = require("./styles");
@@ -31,18 +30,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props) {
   var _history$location2, _history$location2$st;
   var driversGroupsState = props.driversGroupsState,
-    setDriversGroupsState = props.setDriversGroupsState,
-    driversManagersList = props.driversManagersList,
-    businessesList = props.businessesList,
-    paymethodsList = props.paymethodsList,
-    driversList = props.driversList,
     selectedGroupList = props.selectedGroupList,
     handleSelectGroup = props.handleSelectGroup,
     handleAllSelectGroup = props.handleAllSelectGroup,
     actionState = props.actionState,
-    handleUpdateDriversGroup = props.handleUpdateDriversGroup,
-    handleDeleteDriversGroup = props.handleDeleteDriversGroup,
-    driversCompanyList = props.driversCompanyList;
+    handleUpdateDriversGroup = props.handleUpdateDriversGroup;
   var history = (0, _reactRouterDom.useHistory)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -66,36 +58,14 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
     _useState6 = _slicedToArray(_useState5, 2),
     confirm = _useState6[0],
     setConfirm = _useState6[1];
-  var _useState7 = (0, _react.useState)(0),
+  var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    moveDistance = _useState8[0],
-    setMoveDistance = _useState8[1];
-  var _useState9 = (0, _react.useState)(false),
+    isTourOpen = _useState8[0],
+    setIsTourOpen = _useState8[1];
+  var _useState9 = (0, _react.useState)(4),
     _useState10 = _slicedToArray(_useState9, 2),
-    openDetails = _useState10[0],
-    setOpenDetails = _useState10[1];
-  var _useState11 = (0, _react.useState)(null),
-    _useState12 = _slicedToArray(_useState11, 2),
-    curDriversGroup = _useState12[0],
-    setCurDriversGroup = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
-    _useState14 = _slicedToArray(_useState13, 2),
-    isTourOpen = _useState14[0],
-    setIsTourOpen = _useState14[1];
-  var _useState15 = (0, _react.useState)(4),
-    _useState16 = _slicedToArray(_useState15, 2),
-    currentTourStep = _useState16[0],
-    setCurrentTourStep = _useState16[1];
-  var handleOpenDetails = function handleOpenDetails(driverGroup) {
-    setMoveDistance(0);
-    setCurDriversGroup(driverGroup);
-    setOpenDetails(true);
-    if (!driverGroup) {
-      setTimeout(function () {
-        setCurrentTourStep(5);
-      }, 50);
-    }
-  };
+    currentTourStep = _useState10[0],
+    setCurrentTourStep = _useState10[1];
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
     setAlertState({
@@ -114,16 +84,6 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
       handleOpenTour();
     }
   }, [(_history$location2 = history.location) === null || _history$location2 === void 0 ? void 0 : (_history$location2$st = _history$location2.state) === null || _history$location2$st === void 0 ? void 0 : _history$location2$st.isFromTourDriversGroup]);
-  var handleNextTour = function handleNextTour() {
-    setTimeout(function () {
-      setCurrentTourStep(6);
-    }, 50);
-  };
-  var handleDeliveryTourCompleted = function handleDeliveryTourCompleted() {
-    setTimeout(function () {
-      setCurrentTourStep(7);
-    }, 50);
-  };
   var getDataFromStorage = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var value;
@@ -163,47 +123,13 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
     placeholder: t('SEARCH', 'Search'),
     customClass: "searchBar"
   })), /*#__PURE__*/_react.default.createElement(_styles.DriversGroupsListingContainer, null, /*#__PURE__*/_react.default.createElement(_DriversGroupsList.DriversGroupsList, {
-    curDriversGroup: curDriversGroup,
+    isFromStore: true,
     driversGroupsState: driversGroupsState,
     searchValue: searchValue,
-    handleOpenDetails: handleOpenDetails,
     handleUpdateDriversGroup: handleUpdateDriversGroup,
-    handleDeleteDriversGroup: handleDeleteDriversGroup,
     selectedGroupList: selectedGroupList,
     handleSelectGroup: handleSelectGroup,
     handleAllSelectGroup: handleAllSelectGroup
-  })), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    sidebarId: "driver_group_details",
-    defaultSideBarWidth: 550 + moveDistance,
-    open: openDetails,
-    moveDistance: moveDistance,
-    noAnimation: isTourOpen,
-    onClose: function onClose() {
-      setCurDriversGroup(null);
-      setOpenDetails(false);
-      setIsTourOpen(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_DriversGroupDetails.DriversGroupDetails, {
-    driversGroupsState: driversGroupsState,
-    setDriversGroupsState: setDriversGroupsState,
-    curDriversGroup: curDriversGroup,
-    driversManagers: driversManagersList === null || driversManagersList === void 0 ? void 0 : driversManagersList.managers,
-    businesses: businessesList === null || businessesList === void 0 ? void 0 : businessesList.businesses,
-    paymethods: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods,
-    drivers: driversList === null || driversList === void 0 ? void 0 : driversList.drivers,
-    companies: driversCompanyList === null || driversCompanyList === void 0 ? void 0 : driversCompanyList.companies,
-    handleUpdateDriversGroup: handleUpdateDriversGroup,
-    handleParentSidebarMove: function handleParentSidebarMove(val) {
-      return setMoveDistance(val);
-    },
-    onClose: function onClose() {
-      setOpenDetails(false);
-      if (isTourOpen) {
-        handleDeliveryTourCompleted();
-      }
-    },
-    isTourOpen: isTourOpen,
-    handleNextTour: handleNextTour
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
