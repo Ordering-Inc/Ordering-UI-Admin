@@ -7,6 +7,7 @@ import { SettingItemUI } from './SettingItemUI'
 import { AddressFieldsSetting } from './AddressFieldsSetting'
 import { CheckoutFieldsSetting } from './CheckoutFieldsSetting'
 import { LanguageSetting } from './LanguageSetting'
+import { LalaMoveConnect } from './LalaMoveConnect'
 import { SettingsDetail } from './SettingsDetail'
 import { EmailSetting } from './EmailSetting'
 import { SettingsList } from './SettingsList'
@@ -39,6 +40,7 @@ export {
   AddressFieldsSetting,
   CheckoutFieldsSetting,
   LanguageSetting,
+  LalaMoveConnect,
   SettingsDetail,
   EmailSetting,
   SettingsList,
