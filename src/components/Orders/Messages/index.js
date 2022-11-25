@@ -485,7 +485,7 @@ export const MessagesUI = (props) => {
                     <BubbleConsole>
                       {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
                       <strong>{parseDate(order.created_at)}</strong> {' '}
-                      {t('VIA', 'via')} <strong>{order.app_id}</strong>{' '}
+                      {t('VIA', 'via')} <strong>{order.app_id ? t(order.app_id.toUpperCase(), `${order.app_id}`) : ''}</strong>{' '}
                       <OverlayTrigger
                         placement='top'
                         overlay={

@@ -147,7 +147,7 @@ export const InputFormWrapper = styled.div`
 
 export const InnerBlock = styled.div`
   width: 100%;
-  max-width: 576px;
+  max-width: 647px;
 `
 
 export const FormGroup = styled.div`
@@ -170,30 +170,12 @@ export const FormGroup = styled.div`
   }
 `
 
-export const FormControl = styled.div`
-  display: flex;
-  input {
-    margin: 0px 15px;
-    flex: 1;
-    &:disabled {
-      border: none;
-    }
-  }
-  div {
-    display: flex;
-    align-items: center;
-    height: 43px;
-    background-color: ${props => props.theme.colors.secundary};
-    color: ${props => props.theme.colors.lightGray};
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 14px;
-  }
-  .before {
-    width: 120px;
-  }
-  .after {
-    width: 180px;
+export const TemporalDomail = styled.div`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  > a {
+    color: ${props => props.theme.colors.primary};
   }
 `
 
@@ -202,8 +184,8 @@ export const ImageFormGroup = styled.div`
 `
 
 export const LogoImage = styled.div`
-  width: 160px;
-  height: 160px;
+  width: 450px;
+  height: 100px;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
@@ -220,18 +202,31 @@ export const LogoImage = styled.div`
   };
 
   img{
-    object-fit: cover;
+    object-fit: contain;
   }
 `
 
 export const BackgroundImage = styled(LogoImage)`
-  width: 100%;
+  height: 213px;
+  width: 320px;
+
+  @media (min-width: 768px) {
+    height: 427px;
+    width: 640px;
+  }
 `
 
 export const UploadImageIconContainer = styled.div`
   position: absolute;
   top: 0px;
   background: ${props => props.theme.colors.secundaryDarkContrast};
+  ${({ bgimage }) => bgimage && css`
+    background: transparent;
+    svg, span {
+      color: ${props => props.theme.colors.white};
+    }
+    border: 1px dashed ${props => props.theme.colors.secundaryDarkContrast};
+  `}
   ${({ small }) => small ? css`
     padding: 4px;
   ` : css`
@@ -251,8 +246,8 @@ export const UploadImageIcon = styled.div`
   }
 
   svg {   
-    width: 57px;
-    height: 50px;
+    width: 52px;
+    height: 45px;
   }
 `
 
@@ -344,5 +339,14 @@ export const ContentWrapper = styled.div`
   }
   @media (min-width: 769px) {
     flex-direction: row;
+  }
+`
+
+export const WebsiteButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  button {
+    height: 44px;
   }
 `
