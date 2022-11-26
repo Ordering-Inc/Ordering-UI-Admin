@@ -36,6 +36,7 @@ import googlePlay from './template/assets/images/google-play.png'
 import deliverect from './template/assets/images/deliverect.png'
 import ItsaCheckmateLogo from './template/assets/images/ItsaCheckmateLogo.png'
 import doordash from './template/assets/images/door-dash.png'
+import lalamove from './template/assets/images/lala-move.png'
 /**
  * project statuses
  */
@@ -195,7 +196,8 @@ theme.images = {
     googlePlay,
     deliverect,
     ItsaCheckmateLogo,
-    doordash
+    doordash,
+    lalamove
   },
   project: {
     active: projectActive,
