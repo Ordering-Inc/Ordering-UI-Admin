@@ -34,8 +34,8 @@ var CountryFilterUI = function CountryFilterUI(props) {
     searchValue = props.searchValue,
     _onSearch = props.onSearch,
     handleClickFilterButton = props.handleClickFilterButton,
-    countryCode = props.countryCode,
-    handleChangeCode = props.handleChangeCode;
+    code = props.code,
+    setCode = props.setCode;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -105,9 +105,9 @@ var CountryFilterUI = function CountryFilterUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles2.CountryItem, {
       key: country === null || country === void 0 ? void 0 : country.id,
       onClick: function onClick() {
-        return handleChangeCode(country === null || country === void 0 ? void 0 : country.code);
+        return setCode(country === null || country === void 0 ? void 0 : country.code);
       }
-    }, countryCode === (country === null || country === void 0 ? void 0 : country.code) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    }, code === (country === null || country === void 0 ? void 0 : country.code) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
       className: "checked"
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", {
       className: "name"
