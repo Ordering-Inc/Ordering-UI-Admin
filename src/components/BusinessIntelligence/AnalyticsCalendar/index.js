@@ -82,7 +82,7 @@ export const AnalyticsCalendar = (props) => {
       </Button>
       {
         isShowCalendar && (
-          <AnalyticsCalendarContainer ref={calendarRef} leftAlign={leftAlign}>
+          <AnalyticsCalendarContainer className='ordering-calendar' ref={calendarRef} leftAlign={leftAlign}>
             <DateRange
               editableDateInputs
               onChange={item => handleChangeDates(item)}

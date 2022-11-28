@@ -88,8 +88,8 @@ export const CalendarWrapper = styled.div`
   > button {
     padding: 7px 15px;
     width: 100%;
-    color: #748194;
-    background: #F8F9FA;
+    color: ${props => props.theme.colors.secundaryContrast};
+    background: ${props => props.theme.colors.secundary};
     border-radius: 7.6px;
     border: none;
     text-align: left;

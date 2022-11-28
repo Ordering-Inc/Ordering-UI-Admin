@@ -13,7 +13,7 @@ export const BusinessAnalyticsHeader = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 769px) {
+  @media (min-width: 1024px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -51,21 +51,40 @@ export const HeaderTitleContainer = styled.div`
 export const HeaderFilterContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
+  > div {
+    width: 100%;
+    margin-top: 10px;
+    > button {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+    > div {
+      margin-top: 0px;
+      width: auto;
+    }
+  }
 `
 
 export const BusinessFilterWrapper = styled.div`
-  margin-left: 25px;
-  ${props => props.theme.rtl && css`
-    margin-right: 25px;
-    margin-left: 0;
-  `}
   > button {
     background: #F8F9FA;
     border-radius: 7.6px;
     padding: 7px 12px;
     font-size: 14px;
-    color: #748194;
+    color: ${props => props.theme.colors.secundaryContrast};
     border: none;
+  }
+
+  @media (min-width: 600px) {
+    margin-left: 25px;
+    ${props => props.theme.rtl && css`
+      margin-right: 25px;
+      margin-left: 0;
+    `}
   }
 `
 

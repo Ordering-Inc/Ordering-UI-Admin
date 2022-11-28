@@ -10,6 +10,7 @@ import {
 import { Button } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { Download } from 'react-bootstrap-icons'
+import { CountryFilter } from '../CountryFilter'
 
 import {
   ReportsOrdersContainer,
@@ -39,6 +40,7 @@ const ReportsSalesUI = (props) => {
   const [dataOptions, setDataOptions] = useState(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
+  const [openCountryFilter, setOpenCountryFilter] = useState(true)
 
   const generateData = () => {
     const list = []
@@ -149,6 +151,11 @@ const ReportsSalesUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
+          <Button
+            onClick={() => setOpenCountryFilter(true)}
+          >
+            {t('COUNTRY', 'Country')}
+          </Button>
         </BrandBusinessWrapper>
         <CalendarWrapper>
           <AnalyticsCalendar
@@ -206,6 +213,18 @@ const ReportsSalesUI = (props) => {
       >
         <ReportsBrandFilter
           {...props} onClose={() => setIsBrandFilter(false)}
+        />
+      </Modal>
+      <Modal
+        width='450px'
+        height='650px'
+        padding='25px'
+        open={openCountryFilter}
+        onClose={() => setOpenCountryFilter(false)}
+      >
+        <CountryFilter
+          {...props}
+          onClose={() => setOpenCountryFilter(false)}
         />
       </Modal>
     </ReportsOrdersContainer>
