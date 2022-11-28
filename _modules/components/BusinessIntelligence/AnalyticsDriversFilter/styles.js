@@ -16,7 +16,9 @@ var FilterBtnWrapper = _styledComponents.default.div(_templateObject2 || (_templ
 exports.FilterBtnWrapper = FilterBtnWrapper;
 var TreeViewItemContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral([""])));
 exports.TreeViewItemContainer = TreeViewItemContainer;
-var TreeViewParentItem = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 16px;\n\n  svg {\n    font-size: 24px;\n    color: #B1BCCC;\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var TreeViewParentItem = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 16px;\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (props) {
   var _props$theme;
   return (_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.colors.primary;
 });
@@ -28,9 +30,11 @@ var TreeViewParentLabel = _styledComponents.default.span(_templateObject5 || (_t
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n    margin-left: 0;\n  "])));
 });
 exports.TreeViewParentLabel = TreeViewParentLabel;
-var TreeViewChildrenItem = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 16px;\n  margin-left: 40px;\n  ", "\n\n  svg {\n    font-size: 24px;\n    color: #B1BCCC;\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var TreeViewChildrenItem = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 16px;\n  margin-left: 40px;\n  ", "\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
   var _props$theme3;
   return ((_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.rtl) && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    margin-right: 40px;\n    margin-left: 0;\n  "])));
+}, function (props) {
+  return props.theme.colors.secundaryLight;
 }, function (props) {
   var _props$theme4;
   return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.colors.primary;

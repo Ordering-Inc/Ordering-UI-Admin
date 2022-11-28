@@ -27,8 +27,10 @@ var ActionBlock = _styledComponents.default.div(_templateObject3 || (_templateOb
 exports.ActionBlock = ActionBlock;
 var BarChartWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  min-height: 350px;\n"])));
 exports.BarChartWrapper = BarChartWrapper;
-var OrderStatusFooter = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n\n  h2 {\n    font-weight: 500;\n    font-size: 20px;\n    color: ", ";\n    margin: 0;\n  }\n\n  p {\n    font-size: 14px;\n    color: #909BA9;\n    margin: 0;\n  }\n"])), function (props) {
+var OrderStatusFooter = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-top: 25px;\n\n  h2 {\n    font-weight: 500;\n    font-size: 20px;\n    color: ", ";\n    margin: 0;\n  }\n\n  p {\n    font-size: 14px;\n    color: ", ";\n    margin: 0;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
+}, function (props) {
+  return props.theme.colors.lightGray;
 });
 exports.OrderStatusFooter = OrderStatusFooter;
 var EmptyContent = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  padding: 10px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n"])));

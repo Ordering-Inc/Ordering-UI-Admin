@@ -7,8 +7,7 @@ exports.ReportsBrandFilter = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
-var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
-var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -35,39 +34,29 @@ var ReportsBrandFilterUI = function ReportsBrandFilterUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var isCheckEnableSate = function isCheckEnableSate(id) {
-    var found = brandIds === null || brandIds === void 0 ? void 0 : brandIds.find(function (brandId) {
-      return brandId === id;
-    });
-    var valid = false;
-    if (found) {
-      valid = true;
-    }
-    return valid;
-  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ReportsBrandFilterContainer, null, brandList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BrandFilterOption, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 15,
-      height: 15
+      width: 18,
+      height: 18
     }), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120,
       height: 24
     })));
   }) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.BrandFilterOption, {
     onClick: handleChangeAllCheck
-  }, isAllCheck ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+  }, isAllCheck ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, t('ALL', 'All'))), brandList === null || brandList === void 0 ? void 0 : brandList.brands.map(function (brand, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, t('ALL', 'All'))), brandList === null || brandList === void 0 ? void 0 : brandList.brands.map(function (brand, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BrandFilterOption, {
       key: i,
       onClick: function onClick() {
         return handleChangeBrandId(brand === null || brand === void 0 ? void 0 : brand.id);
       }
-    }, isCheckEnableSate(brand.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+    }, brandIds !== null && brandIds !== void 0 && brandIds.includes(brand.id) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, brand === null || brand === void 0 ? void 0 : brand.name));
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, brand === null || brand === void 0 ? void 0 : brand.name));
   }))), /*#__PURE__*/_react.default.createElement(_styles2.FilterBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "7.6px",
     color: "primary",

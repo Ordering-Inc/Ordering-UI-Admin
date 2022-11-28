@@ -24,9 +24,13 @@ var Label = _styledComponents.default.label(_templateObject3 || (_templateObject
 exports.Label = Label;
 var Option = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  column-gap: 10px;\n  font-size: 13px;\n  line-height: 2;\n  font-weight: 500;\n"])));
 exports.Option = Option;
-var CalendarWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: relative;\n\n  > div {\n    left: 0 !important;\n    right: initial !important;\n\n    ", "\n  }\n\n  > button {\n    padding: 7px 15px;\n    width: 100%;\n    color: #748194;\n    background: #F8F9FA;\n    border-radius: 7.6px;\n    border: none;\n    text-align: left;\n\n    svg {\n      font-size: 16px;\n      margin-right: 12px;\n      ", "\n    }\n  }\n"])), function (props) {
+var CalendarWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: relative;\n\n  > div {\n    left: 0 !important;\n    right: initial !important;\n\n    ", "\n  }\n\n  > button {\n    padding: 7px 15px;\n    width: 100%;\n    color: ", ";\n    background: ", ";\n    border-radius: 7.6px;\n    border: none;\n    text-align: left;\n\n    svg {\n      font-size: 16px;\n      margin-right: 12px;\n      ", "\n    }\n  }\n"])), function (props) {
   var _props$theme2;
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      left: initial;\n      right: 0 !important;\n    "])));
+}, function (props) {
+  return props.theme.colors.secundaryContrast;
+}, function (props) {
+  return props.theme.colors.secundary;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n        margin-right: 12px;\n        margin-left: 0;\n      "])));
 });

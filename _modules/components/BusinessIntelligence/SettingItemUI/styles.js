@@ -27,7 +27,11 @@ var SettingItemContent = _styledComponents.default.div(_templateObject6 || (_tem
 exports.SettingItemContent = SettingItemContent;
 var TitleContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 exports.TitleContainer = TitleContainer;
-var Title = _styledComponents.default.p(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  font-weight: 500;\n  font-size: 13px;\n  color: #344050;\n  margin-bottom: 8px;\n"])));
+var Title = _styledComponents.default.p(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  font-weight: 500;\n  font-size: 13px;\n  color: ", ";\n  margin-bottom: 8px;\n"])), function (props) {
+  return props.theme.colors.headingColor;
+});
 exports.Title = Title;
-var SettingItemDescription = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  font-weight: normal;\n  font-size: 12px;\n  color: #909BA9;\n\n  @media (min-width: 577px) {\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n"])));
+var SettingItemDescription = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  font-weight: normal;\n  font-size: 12px;\n  color: ", ";\n\n  @media (min-width: 577px) {\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n"])), function (props) {
+  return props.theme.colors.lightGray;
+});
 exports.SettingItemDescription = SettingItemDescription;

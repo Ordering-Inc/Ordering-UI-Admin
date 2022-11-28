@@ -12,7 +12,9 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var ReportsDriverGroupContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral([""])));
 exports.ReportsDriverGroupContainer = ReportsDriverGroupContainer;
-var DriverGroupOption = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid #E9ECEF;\n  padding: 10px 0;\n  cursor: pointer;\n\n  svg {\n    font-size: 24px;\n    color: #B1BCCC;\n\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var DriverGroupOption = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-bottom: 1px solid #E9ECEF;\n  padding: 10px 0;\n  cursor: pointer;\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (props) {
   return props.theme.colors.primary;
 });
 exports.DriverGroupOption = DriverGroupOption;

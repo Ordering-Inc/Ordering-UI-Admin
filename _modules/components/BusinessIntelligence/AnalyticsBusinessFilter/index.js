@@ -8,8 +8,7 @@ exports.AnalyticsBusinessFilter = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
-var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
-var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
@@ -70,16 +69,6 @@ var AnalyticsBusinessFilterUI = function AnalyticsBusinessFilterUI(props) {
     setCurrentPage(expectedPage);
     setPagesPerPage(pageSize);
   };
-  var isCheckEnableSate = function isCheckEnableSate(id) {
-    var found = businessIds === null || businessIds === void 0 ? void 0 : businessIds.find(function (businessId) {
-      return businessId === id;
-    });
-    var valid = false;
-    if (found) {
-      valid = true;
-    }
-    return valid;
-  };
   (0, _react.useEffect)(function () {
     if (businessList.loading) return;
     var _totalPages;
@@ -104,25 +93,25 @@ var AnalyticsBusinessFilterUI = function AnalyticsBusinessFilterUI(props) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessFilterOption, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 15,
-      height: 15
+      width: 18,
+      height: 18
     }), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120,
       height: 24
     })));
   }) : /*#__PURE__*/_react.default.createElement("div", null, currentPages.length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.BusinessFilterOption, {
     onClick: handleChangeAllCheck
-  }, isAllCheck ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+  }, isAllCheck ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, t('ALL', 'All'))), currentPages.map(function (business, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, t('ALL', 'All'))), currentPages.map(function (business, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessFilterOption, {
       key: i,
       onClick: function onClick() {
         return handleChangeBusinessId(business === null || business === void 0 ? void 0 : business.id);
       }
-    }, isCheckEnableSate(business.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+    }, businessIds !== null && businessIds !== void 0 && businessIds.includes(business.id) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, business === null || business === void 0 ? void 0 : business.name));
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, business === null || business === void 0 ? void 0 : business.name));
   }), (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,

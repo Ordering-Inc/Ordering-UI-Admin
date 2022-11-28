@@ -16,6 +16,7 @@ var _ReportsDriverFilter = require("../ReportsDriverFilter");
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
 var _AnalyticsCalendar = require("../AnalyticsCalendar");
 var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
+var _CountryFilter = require("../CountryFilter");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -52,29 +53,33 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     isDriverFilter = _useState4[0],
     setIsDriverFilter = _useState4[1];
-  var _useState5 = (0, _react.useState)(false),
+  var _useState5 = (0, _react.useState)(true),
     _useState6 = _slicedToArray(_useState5, 2),
-    isDriverGroupFilter = _useState6[0],
-    setIsDriverGroupFilter = _useState6[1];
-  var _useState7 = (0, _react.useState)({
+    openCountryFilter = _useState6[0],
+    setOpenCountryFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isDriverGroupFilter = _useState8[0],
+    setIsDriverGroupFilter = _useState8[1];
+  var _useState9 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    alertState = _useState8[0],
-    setAlertState = _useState8[1];
-  var _useState9 = (0, _react.useState)(null),
     _useState10 = _slicedToArray(_useState9, 2),
-    availableDriverIds = _useState10[0],
-    setAvailableDriverIds = _useState10[1];
-  var _useState11 = (0, _react.useState)(false),
+    alertState = _useState10[0],
+    setAlertState = _useState10[1];
+  var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    isBrandFilter = _useState12[0],
-    setIsBrandFilter = _useState12[1];
+    availableDriverIds = _useState12[0],
+    setAvailableDriverIds = _useState12[1];
   var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    isHeat = _useState14[0],
-    setIsHeat = _useState14[1];
+    isBrandFilter = _useState14[0],
+    setIsBrandFilter = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    isHeat = _useState16[0],
+    setIsHeat = _useState16[1];
   var theme = (0, _styledComponents.useTheme)();
 
   // const googleMapsApiKey = configs?.google_maps_api_key?.value
@@ -140,7 +145,11 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     onClick: function onClick() {
       return setIsDriverFilter(true);
     }
-  }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    onClick: function onClick() {
+      return setOpenCountryFilter(true);
+    }
+  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   }))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
@@ -218,6 +227,18 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
     onClose: function onClose() {
       return setIsBrandFilter(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "450px",
+    height: "650px",
+    padding: "25px",
+    open: openCountryFilter,
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
     }
   })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('HEAT_MAP', 'Heat map'),
