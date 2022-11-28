@@ -40,7 +40,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isShowMap, setIsShowMap] = useState(false)
   const kmlRef = useRef(null)
-  const isMyZone = zone?.businesses?.length ? zone?.pivot?.business_id === zone?.businesses[0]?.id : true
+  const isMyZone = zone?.businesses?.length ? zone?.pivot?.business_id === zone?.business_id : true
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
@@ -212,7 +212,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
               <label>{t('DISTANCE_FROM_STORE', 'Distance from store')}</label>
               <Input
                 disabled={!isMyZone}
-                placeholder={`0 ${configState?.configs?.distance_unit?.value}`}
+                placeholder={`1 - 99 ${configState?.configs?.distance_unit?.value}`}
                 name='distance'
                 value={formState.changes?.data?.distance ?? zone?.data?.distance ?? ''}
                 onChange={e => handleChangeInput(e, configState?.configs?.distance_unit?.value)}
@@ -245,7 +245,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
               }
               <BusinessZoneGoogleMaps
                 distance={formState.changes?.data?.distance}
-                disabled={!isMyZone || zoneType === 5}
+                disabled={isMyZone}
                 apiKey={configState?.configs?.google_maps_api_key?.value}
                 mapControls={googleMapsControls}
                 location={business?.location}
@@ -266,7 +266,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
             <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
           )
         )}
-        {!zone && (
+        {(!zone && zoneType !== 5) && (
           <KmlButtonWrapper>
             <Button
               color='primary'
