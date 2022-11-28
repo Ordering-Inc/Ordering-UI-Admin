@@ -19,8 +19,8 @@ const CountryFilterUI = (props) => {
     searchValue,
     onSearch,
     handleClickFilterButton,
-    countryCode,
-    handleChangeCode
+    code,
+    setCode
   } = props
 
   const [, t] = useLanguage()
@@ -84,8 +84,8 @@ const CountryFilterUI = (props) => {
           ) : (
             <>
               {currentPages?.map(country => (
-                <CountryItem key={country?.id} onClick={() => handleChangeCode(country?.code)}>
-                  {countryCode === country?.code ? <RecordCircleFill className='checked' /> : <Circle />}
+                <CountryItem key={country?.id} onClick={() => setCode(country?.code)}>
+                  {code === country?.code ? <RecordCircleFill className='checked' /> : <Circle />}
                   <span className='name'>{country?.name}</span>
                 </CountryItem>
               ))}
