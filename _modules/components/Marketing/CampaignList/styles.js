@@ -65,11 +65,11 @@ var Tbody = _styledComponents.default.tbody(_templateObject9 || (_templateObject
   });
 });
 exports.Tbody = Tbody;
-var SwitchWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > .campaign-enabled {\n    margin-bottom: 0px;\n    font-size: 14px;\n    line-height: 24px;\n    margin-right: 7px;\n    ", "\n  }\n"])), function (props) {
+var SwitchWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  > .campaign-enabled {\n    margin-bottom: 0px;\n    font-size: 14px;\n    line-height: 24px;\n    margin-right: 7px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      margin-left: 7px;\n      margin-right: 0px;\n    "])));
 });
 exports.SwitchWrapper = SwitchWrapper;
-var StatusWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  p {\n    text-transform: capitalize;\n    margin-right: 12px;\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    ", "\n  }\n"])), function (props) {
+var StatusWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n\n  p {\n    text-transform: capitalize;\n    margin-right: 12px;\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      margin-left: 12px;\n      margin-right: 0px;\n    "])));
 });
 exports.StatusWrapper = StatusWrapper;
