@@ -30,7 +30,8 @@ export const SettingsListUI = (props) => {
     handleCheckBoxChange,
     handleInputChange,
     handleClickUpdate,
-    saveConfig
+    saveConfig,
+    isCampaign
   } = props
 
   const [, t] = useLanguage()
@@ -100,9 +101,11 @@ export const SettingsListUI = (props) => {
   return (
     <>
       <SettingsListContainer>
-        <GeneralTitle>
-          <p>{t('SETTINGS', 'All Settings')}</p>
-        </GeneralTitle>
+        {!isCampaign && (
+          <GeneralTitle>
+            <p>{t('SETTINGS', 'All Settings')}</p>
+          </GeneralTitle>
+        )}
         {
           !settingsState.error && settingsState.loading && (
             <SkeletonWrapper>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { useLanguage, useEvent } from 'ordering-components-admin'
+import React, { useState, useMemo } from 'react'
+import { useLanguage } from 'ordering-components-admin'
+import { NotificationSetting } from '../../Settings/NotificationSetting'
 import { Input, TextArea, Button } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { Alert } from '../../Shared'
@@ -11,7 +12,8 @@ import {
   SmsContentLayout,
   SmsPreviewContentWrapper,
   SmsPreviewContent,
-  Description
+  Description,
+  BottomSpace
 } from './styles'
 
 export const CampaignNotification = (props) => {
@@ -21,13 +23,28 @@ export const CampaignNotification = (props) => {
     handleChangeData,
     handleUpdateContact,
     handleAddCampaign,
-    formState
+    formState,
+    categoryList
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const generalList = [
+    'onesignal_user_auth',
+    'onesignal_orderingapp_id',
+    'onesignal_businessapp_id',
+    'onesignal_deliveryapp_id',
+    'driver_close_distance',
+    'notification_toast'
+  ]
+
+  const category = categoryList?.categories.find(item => item.key === 'notification')
+
+  const isEnableConfig = useMemo(() => {
+    return category?.configs?.filter(config => generalList.includes(config.key)).every(config => !!config?.value)
+  }, [category])
 
   const closeAlert = () => {
     setAlertState({
@@ -77,54 +94,67 @@ export const CampaignNotification = (props) => {
     }
   }
 
-  const handleGoToPage = () => {
-    events.emit('go_to_page', { page: 'operation_settings', search: '?category=14' })
-  }
-
   return (
     <>
-      <Container>
-        <Description>
-          {t('NOTIFICATION_SETTINGS_LINK_DESC', 'You need to complete One signal configuration first, you can do it here:')} <span onClick={() => handleGoToPage()}>{t('NOTIFICATION_SETTINGS', 'Notification settings')}</span>
-        </Description>
-        <InputWrapper>
-          <label>{t('TITLE', 'Title')}</label>
-          <Input
-            name='title'
-            placeholder={t('TITLE', 'Title')}
-            defaultValue={contactState?.changes?.contact_data?.title || ''}
-            onChange={handleChangeData}
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <label>{t('MESSAGES', 'Messages')}</label>
-          <TextArea
-            name='body'
-            placeholder={t('WRITE_MESSAGE', 'Write a message')}
-            defaultValue={contactState?.changes?.contact_data?.body || ''}
-            onChange={handleChangeData}
-          />
-        </InputWrapper>
-        <SmsPreviewWrapper>
-          <SmsContentLayout bgimage={theme.images.general.mobileHalfMask}>
-            <SmsPreviewContentWrapper>
-              <SmsPreviewContent>
-                <h2>{contactState?.changes?.contact_data?.title || ''}</h2>
-                <p>{contactState?.changes?.contact_data?.body || ''}</p>
-              </SmsPreviewContent>
-            </SmsPreviewContentWrapper>
-          </SmsContentLayout>
-        </SmsPreviewWrapper>
-      </Container>
-      <ButtonWrapper>
-        <Button
-          color='primary'
-          onClick={() => handleSaveNotification()}
-          disabled={contactState.loading}
-        >
-          {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
-        </Button>
-      </ButtonWrapper>
+      {isEnableConfig ? (
+        <>
+          <Container>
+            <InputWrapper>
+              <label>{t('TITLE', 'Title')}</label>
+              <Input
+                name='title'
+                placeholder={t('TITLE', 'Title')}
+                defaultValue={contactState?.changes?.contact_data?.title || ''}
+                onChange={handleChangeData}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>{t('MESSAGES', 'Messages')}</label>
+              <TextArea
+                name='body'
+                placeholder={t('WRITE_MESSAGE', 'Write a message')}
+                defaultValue={contactState?.changes?.contact_data?.body || ''}
+                onChange={handleChangeData}
+              />
+            </InputWrapper>
+            <SmsPreviewWrapper>
+              <SmsContentLayout bgimage={theme.images.general.mobileHalfMask}>
+                <SmsPreviewContentWrapper>
+                  <SmsPreviewContent>
+                    <h2>{contactState?.changes?.contact_data?.title || ''}</h2>
+                    <p>{contactState?.changes?.contact_data?.body || ''}</p>
+                  </SmsPreviewContent>
+                </SmsPreviewContentWrapper>
+              </SmsContentLayout>
+            </SmsPreviewWrapper>
+          </Container>
+          <ButtonWrapper>
+            <Button
+              color='primary'
+              onClick={() => handleSaveNotification()}
+              disabled={contactState.loading}
+            >
+              {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
+            </Button>
+          </ButtonWrapper>
+        </>
+      ) : (
+        <>
+          <Description>
+            <span>
+              {t('NOTIFICATION_SETTINGS_LINK_DESC', 'You need to complete One signal configuration first')}
+            </span>
+          </Description>
+          {category && (
+            <NotificationSetting
+              {...props}
+              category={category}
+              isCampaign
+            />
+          )}
+          <BottomSpace />
+        </>
+      )}
       <Alert
         title={t('CAMPAIGN', 'Campaign')}
         content={alertState.content}
