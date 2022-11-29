@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import { Button, Input, IconButton } from '../../../styles'
+import { Button, Input, IconButton, Checkbox } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { useTheme } from 'styled-components'
 import { ThreeDots, XLg } from 'react-bootstrap-icons'
@@ -46,7 +46,7 @@ export const PaymentOptionMethods = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [paymentTabs, setPaymentTabs] = useState(0)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-  const [localState, setLocalState] = useState({allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites})
+  const [localState, setLocalState] = useState({ allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites })
 
   const setPaymethodInfo = (values) => {
     const data = {}
@@ -112,10 +112,10 @@ export const PaymentOptionMethods = (props) => {
 
   useEffect(() => {
     if (changesState?.allowed_order_types) {
-      setLocalState({allowed_order_types: changesState?.allowed_order_types})
+      setLocalState({ allowed_order_types: changesState?.allowed_order_types })
     }
     if (changesState?.sites) {
-      setLocalState({sites: changesState?.sites})
+      setLocalState({ sites: changesState?.sites })
     }
   }, [changesState?.sites, changesState?.allowed_order_types])
 
@@ -172,14 +172,11 @@ export const PaymentOptionMethods = (props) => {
 
         {paymentTabs === 0 && (
           <>
-            <SandboxWrapper
-              onClick={() => handleChangeSandbox()}
-            >
-              {changesState?.sandbox ?? businessPaymethod?.sandbox ? (
-                <RiCheckboxFill className='fill' />
-              ) : (
-                <RiCheckboxBlankLine />
-              )}
+            <SandboxWrapper>
+              <Checkbox
+                checked={changesState?.sandbox ?? businessPaymethod?.sandbox ?? false}
+                onChange={e => handleChangeSandbox(e.target.checked)}
+              />
               <span>{t('SANDBOX', 'Sandbox')}</span>
             </SandboxWrapper>
             <FieldName>{t('PUBLISHABLE_KEY', 'Publishable key')}</FieldName>
