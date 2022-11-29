@@ -79,8 +79,6 @@ export const OrderBill = (props) => {
     }
   }, [actionStatus?.error])
 
-  console.log(order)
-
   return (
     <OrderBillContainer>
       <table>
