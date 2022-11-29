@@ -167,7 +167,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     color: "primary",
     onClick: handleConnectSquare
   }, /*#__PURE__*/_react.default.createElement(_SiSquare.default, null), t('CONNECT_WITH_SQUARE', 'Connect with Square'))), /*#__PURE__*/_react.default.createElement(_styles4.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles4.SandboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    defaultChecked: (_ref2 = (_squareData$sandbox = squareData === null || squareData === void 0 ? void 0 : squareData.sandbox) !== null && _squareData$sandbox !== void 0 ? _squareData$sandbox : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox) !== null && _ref2 !== void 0 ? _ref2 : false,
+    checked: (_ref2 = (_squareData$sandbox = squareData === null || squareData === void 0 ? void 0 : squareData.sandbox) !== null && _squareData$sandbox !== void 0 ? _squareData$sandbox : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox) !== null && _ref2 !== void 0 ? _ref2 : false,
     onChange: function onChange(e) {
       return handleChangeSandbox(e.target.checked);
     }

@@ -16,15 +16,11 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      border-right: 1px solid #E9ECEF;\n    "]))) : (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      border-left: 1px solid #E9ECEF;\n    "])));
 });
 exports.Container = Container;
-var SandboxWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  margin-top: 30px;\n  display: flex;\n  align-items: center;\n  color: ", ";\n  span {\n    ", "\n  }\n\n  svg {\n    font-size: 20px;\n    color: ", ";\n\n    &.fill {\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var SandboxWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n  display: flex;\n  align-items: center;\n  color: ", ";\n  span {\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme2;
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "])));
-}, function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
-  return props.theme.colors.primary;
 });
 exports.SandboxWrapper = SandboxWrapper;
 var FieldName = _styledComponents.default.p(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  color: ", ";\n  margin: 30px 0 10px;\n"])), function (props) {
