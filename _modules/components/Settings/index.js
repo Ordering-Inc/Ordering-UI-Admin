@@ -75,6 +75,12 @@ Object.defineProperty(exports, "IntegrationListing", {
     return _IntegrationListing.IntegrationListing;
   }
 });
+Object.defineProperty(exports, "LalaMoveConnect", {
+  enumerable: true,
+  get: function get() {
+    return _LalaMoveConnect.LalaMoveConnect;
+  }
+});
 Object.defineProperty(exports, "LanguageManager", {
   enumerable: true,
   get: function get() {
@@ -192,6 +198,7 @@ var _SettingItemUI = require("./SettingItemUI");
 var _AddressFieldsSetting = require("./AddressFieldsSetting");
 var _CheckoutFieldsSetting = require("./CheckoutFieldsSetting");
 var _LanguageSetting = require("./LanguageSetting");
+var _LalaMoveConnect = require("./LalaMoveConnect");
 var _SettingsDetail = require("./SettingsDetail");
 var _EmailSetting = require("./EmailSetting");
 var _SettingsList = require("./SettingsList");
