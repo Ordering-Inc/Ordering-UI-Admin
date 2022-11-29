@@ -79,6 +79,8 @@ export const OrderBill = (props) => {
     }
   }, [actionStatus?.error])
 
+  console.log(order)
+
   return (
     <OrderBillContainer>
       <table>
@@ -252,7 +254,7 @@ export const OrderBill = (props) => {
           </tbody>
         </table>
       )}
-      {order?.delivery_option && (
+      {order?.delivery_option ? (
         <table className='delivery_option'>
           <thead>
             <tr>
@@ -262,6 +264,19 @@ export const OrderBill = (props) => {
           <tbody>
             <tr>
               <td>{order?.delivery_option?.name}</td>
+            </tr>
+          </tbody>
+        </table>
+      ) : (
+        <table className='delivery_option'>
+          <thead>
+            <tr>
+              <th colSpan='2'>{t('DELIVERY_PREFERENCE', 'Delivery Preference')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{t('EITHER_WAY', 'Either way')}</td>
             </tr>
           </tbody>
         </table>
