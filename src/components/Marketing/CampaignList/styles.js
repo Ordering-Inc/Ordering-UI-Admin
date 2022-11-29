@@ -146,6 +146,7 @@ export const Tbody = styled.tbody`
 export const SwitchWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   > .campaign-enabled {
     margin-bottom: 0px;
@@ -162,6 +163,7 @@ export const SwitchWrapper = styled.div`
 export const StatusWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   p {
     text-transform: capitalize;

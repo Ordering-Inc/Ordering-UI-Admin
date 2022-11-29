@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useLanguage, useEvent } from 'ordering-components-admin'
+import React, { useState, useMemo } from 'react'
+import { useLanguage } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { Alert } from '../../Shared'
@@ -12,8 +12,10 @@ import {
   SmsContentLayout,
   SmsPreviewContentWrapper,
   SmsPreviewContent,
-  Description
+  Description,
+  BottomSpace
 } from './styles'
+import { SettingsList } from '../../Settings/SettingsList'
 
 export const CampaignSMS = (props) => {
   const {
@@ -22,13 +24,19 @@ export const CampaignSMS = (props) => {
     handleChangeData,
     handleUpdateContact,
     handleAddCampaign,
-    formState
+    formState,
+    categoryList
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
-  const [events] = useEvent()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+
+  const category = categoryList?.categories.find(item => item.key === 'twilio')
+
+  const isEnableConfig = useMemo(() => {
+    return category?.configs?.every(config => !!config?.value)
+  }, [category])
 
   const closeAlert = () => {
     setAlertState({
@@ -78,54 +86,67 @@ export const CampaignSMS = (props) => {
     }
   }
 
-  const handleGoToPage = () => {
-    events.emit('go_to_page', { page: 'operation_settings', search: '?category=26' })
-  }
-
   return (
     <>
-      <Container>
-        <Description>
-          {t('TWILIO_SETTINGS_LINK_DESC', 'You need to complete Twilio configuration first, you can do it here:')} <span onClick={() => handleGoToPage()}>{t('TWILIO_SETTINGS', 'Twilio settings')}</span>
-        </Description>
-        <InputWrapper>
-          <label>{t('TITLE', 'Title')}</label>
-          <Input
-            name='title'
-            placeholder={t('TITLE', 'Title')}
-            defaultValue={contactState?.changes?.contact_data?.title || ''}
-            onChange={handleChangeData}
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <label>{t('MESSAGES', 'Messages')}</label>
-          <TextArea
-            name='body'
-            placeholder={t('WRITE_MESSAGE', 'Write a message')}
-            defaultValue={contactState?.changes?.contact_data?.body || ''}
-            onChange={handleChangeData}
-          />
-        </InputWrapper>
-        <SmsPreviewWrapper>
-          <SmsContentLayout bgimage={theme.images.general.mobileHalfMask}>
-            <SmsPreviewContentWrapper>
-              <SmsPreviewContent>
-                <h2>{contactState?.changes?.contact_data?.title || ''}</h2>
-                <p>{contactState?.changes?.contact_data?.body || ''}</p>
-              </SmsPreviewContent>
-            </SmsPreviewContentWrapper>
-          </SmsContentLayout>
-        </SmsPreviewWrapper>
-      </Container>
-      <ButtonWrapper>
-        <Button
-          color='primary'
-          onClick={() => handleSaveSms()}
-          disabled={contactState.loading}
-        >
-          {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
-        </Button>
-      </ButtonWrapper>
+      {isEnableConfig ? (
+        <>
+          <Container>
+            <InputWrapper>
+              <label>{t('TITLE', 'Title')}</label>
+              <Input
+                name='title'
+                placeholder={t('TITLE', 'Title')}
+                defaultValue={contactState?.changes?.contact_data?.title || ''}
+                onChange={handleChangeData}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label>{t('MESSAGES', 'Messages')}</label>
+              <TextArea
+                name='body'
+                placeholder={t('WRITE_MESSAGE', 'Write a message')}
+                defaultValue={contactState?.changes?.contact_data?.body || ''}
+                onChange={handleChangeData}
+              />
+            </InputWrapper>
+            <SmsPreviewWrapper>
+              <SmsContentLayout bgimage={theme.images.general.mobileHalfMask}>
+                <SmsPreviewContentWrapper>
+                  <SmsPreviewContent>
+                    <h2>{contactState?.changes?.contact_data?.title || ''}</h2>
+                    <p>{contactState?.changes?.contact_data?.body || ''}</p>
+                  </SmsPreviewContent>
+                </SmsPreviewContentWrapper>
+              </SmsContentLayout>
+            </SmsPreviewWrapper>
+          </Container>
+          <ButtonWrapper>
+            <Button
+              color='primary'
+              onClick={() => handleSaveSms()}
+              disabled={contactState.loading}
+            >
+              {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
+            </Button>
+          </ButtonWrapper>
+        </>
+      ) : (
+        <>
+          <Description>
+            <span>
+              {t('TWILIO_SETTINGS_LINK_DESC', 'You need to complete Twilio configuration first')}
+            </span>
+          </Description>
+          {category && (
+            <SettingsList
+              {...props}
+              category={category}
+              isCampaign
+            />
+          )}
+          <BottomSpace />
+        </>
+      )}
       <Alert
         title={t('CAMPAIGN', 'Campaign')}
         content={alertState.content}
