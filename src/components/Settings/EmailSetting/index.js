@@ -22,7 +22,8 @@ const EmailSettingUI = (props) => {
     handleInputChange,
     handleCheckBoxChange,
     settingsState,
-    handleClickUpdate
+    handleClickUpdate,
+    isCampaign
   } = props
 
   const [, t] = useLanguage()
@@ -77,9 +78,11 @@ const EmailSettingUI = (props) => {
   return (
     <>
       <EmailSettingsContainer>
-        <GeneralTitle>
-          <p>{t('SETTINGS', 'All Settings')}</p>
-        </GeneralTitle>
+        {!isCampaign && (
+          <GeneralTitle>
+            <p>{t('SETTINGS', 'All Settings')}</p>
+          </GeneralTitle>
+        )}
         <Accordion>
           <ContextAwareToggle eventKey='0'>
             <AccordionTitle>{t('GENERAL', 'General')}</AccordionTitle>

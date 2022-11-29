@@ -138,10 +138,9 @@ export const Description = styled.div`
   margin: 10px 0px;
   span {
     color: ${props => props.theme.colors.primary};
-    cursor: pointer;
-    transition: all 0.3s linear;
-    &:hover {
-      text-decoration: underline;
-    }
   }
+`
+
+export const BottomSpace = styled.div`
+  height: 1px;
 `
