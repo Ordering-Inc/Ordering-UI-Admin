@@ -19,6 +19,7 @@ import {
   SettingItemContent
 } from './styles'
 import { useTheme } from 'styled-components'
+import { LalaMoveConnect } from '../LalaMoveConnect'
 
 export const IntegrationListing = (props) => {
   const [, t] = useLanguage()
@@ -126,6 +127,17 @@ export const IntegrationListing = (props) => {
               <p>{t('CONNECT_DOORDASH_DESCRIPTION', 'Send orders directly to your driver in Doordash and keep customers happy with their deliveries.')}</p>
             </SettingItemContent>
           </SettingItemContainer>
+          <SettingItemContainer
+            onClick={() => handleOpenSetting('lalamove')}
+          >
+            <IconWrapper>
+              <img src={theme.images.general.lalamove} />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('CONNECT_WITH_LALAMOVE', 'Connect with lalamove')}</h5>
+              <p>{t('CONNECT_LALAMOVE_DESCRIPTION', 'Send orders directly to your drivers in LalaMove and keep customers happy with their deliveries.')}</p>
+            </SettingItemContent>
+          </SettingItemContainer>
         </SettingListContainer>
       </IntegrationsContainer>
 
@@ -164,6 +176,12 @@ export const IntegrationListing = (props) => {
 
       {showOption === 'doordash' && (
         <DoordashConnect
+          onClose={() => handleCloseSettings()}
+        />
+      )}
+
+      {showOption === 'lalamove' && (
+        <LalaMoveConnect
           onClose={() => handleCloseSettings()}
         />
       )}
