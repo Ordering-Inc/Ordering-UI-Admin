@@ -189,3 +189,18 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
 `
+export const DeleteButtonWrapper = styled.div`
+  position: absolute;
+  cursor: pointer;
+  width: 20px !important;
+  height: 20px !important;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  z-index: 100;
+
+  svg {
+    color: ${props => props.theme.colors.danger};
+    font-size: 20px;
+  }
+`
