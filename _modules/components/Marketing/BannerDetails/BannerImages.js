@@ -24,11 +24,13 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BannerImages = function BannerImages(props) {
   var _changesState$changes3, _changesState$changes4;
-  var bannerItemsState = props.bannerItemsState,
+  var aspectRatio = props.aspectRatio,
+    bannerItemsState = props.bannerItemsState,
     changesState = props.changesState,
     handleChangeItem = props.handleChangeItem,
     handleAddBannerItem = props.handleAddBannerItem,
-    handleUpdateBannerItem = props.handleUpdateBannerItem;
+    handleUpdateBannerItem = props.handleUpdateBannerItem,
+    handleDeleteBannerItem = props.handleDeleteBannerItem;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -47,7 +49,17 @@ var BannerImages = function BannerImages(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     cropState = _useState4[0],
     setCropState = _useState4[1];
-  var handleClickImage = function handleClickImage(idName) {
+  var _useState5 = (0, _react.useState)({
+      open: false,
+      content: null,
+      handleOnAccept: null
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    confirm = _useState6[0],
+    setConfirm = _useState6[1];
+  var handleClickImage = function handleClickImage(idName, e) {
+    var isInvalid = e.target.closest('.banner-delete');
+    if (isInvalid) return;
     document.getElementById(idName).click();
   };
   var handleFiles = function handleFiles(files, itemId) {
@@ -99,6 +111,18 @@ var BannerImages = function BannerImages(props) {
       open: false
     });
   };
+  var onDeleteImage = function onDeleteImage(id) {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('IMAGE', 'Image')),
+      handleOnAccept: function handleOnAccept() {
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+        handleDeleteBannerItem(id);
+      }
+    });
+  };
   (0, _react.useEffect)(function () {
     if (!(changesState !== null && changesState !== void 0 && changesState.error)) return;
     setAlertState({
@@ -110,10 +134,15 @@ var BannerImages = function BannerImages(props) {
     var _changesState$changes, _changesState$changes2;
     return /*#__PURE__*/_react.default.createElement(_styles.BannerImage, {
       key: image.id,
-      onClick: function onClick() {
-        return handleClickImage("banner_image_".concat(image.id));
+      onClick: function onClick(e) {
+        return handleClickImage("banner_image_".concat(image.id), e);
       }
-    }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.DeleteButtonWrapper, {
+      className: "banner-delete",
+      onClick: function onClick() {
+        return onDeleteImage(image.id);
+      }
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XCircleFill, null)), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
       onFiles: function onFiles(files) {
         return handleFiles(files, image.id);
       },
@@ -136,8 +165,8 @@ var BannerImages = function BannerImages(props) {
       loading: "lazy"
     }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CardImage, null), /*#__PURE__*/_react.default.createElement("p", null, t('DRAG_AND_DROP', 'Drag and drop'))))));
   }), /*#__PURE__*/_react.default.createElement(_styles.BannerImage, {
-    onClick: function onClick() {
-      return handleClickImage('banner_image_add');
+    onClick: function onClick(e) {
+      return handleClickImage('banner_image_add', e);
     }
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
     onFiles: function onFiles(files) {
@@ -174,6 +203,23 @@ var BannerImages = function BannerImages(props) {
       });
     },
     closeOnBackdrop: false
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
     height: "80vh",
@@ -187,6 +233,7 @@ var BannerImages = function BannerImages(props) {
     },
     className: "ordering-img-crop"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    aspectRatio: aspectRatio,
     photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
     handleChangePhoto: handleChangePhoto
   })));

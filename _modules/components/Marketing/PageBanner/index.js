@@ -31,6 +31,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PageBannersUI = function PageBannersUI(props) {
   var title = props.title,
+    bannerInfo = props.bannerInfo,
     bannersListState = props.bannersListState,
     setMoveDistance = props.setMoveDistance,
     sitesState = props.sitesState,
@@ -39,7 +40,8 @@ var PageBannersUI = function PageBannersUI(props) {
     handleUpdateBanner = props.handleUpdateBanner,
     handleSuccessAdd = props.handleSuccessAdd,
     defaultPosition = props.defaultPosition,
-    handleSuccessDelete = props.handleSuccessDelete;
+    handleSuccessDelete = props.handleSuccessDelete,
+    aspectRatio = props.aspectRatio;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -78,7 +80,9 @@ var PageBannersUI = function PageBannersUI(props) {
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, bannerInfo))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick(e) {
@@ -130,7 +134,8 @@ var PageBannersUI = function PageBannersUI(props) {
     onClose: function onClose() {
       return handleCloseDetail();
     },
-    defaultPosition: defaultPosition
+    defaultPosition: defaultPosition,
+    aspectRatio: aspectRatio
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

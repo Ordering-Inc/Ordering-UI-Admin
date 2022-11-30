@@ -42,32 +42,44 @@ var AdBannersListing = function AdBannersListing(props) {
     key: 'web_home_page',
     title: t('WEB_HOME', 'Web home'),
     description: t('HOME_BANNER_DESCRIPTION', 'Add a banner to your home page and inform everyone about the latest news in your marketplace.'),
-    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null)
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null),
+    info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
+    aspectRatio: 1440 / 260
   }, {
     key: 'web_business_listing',
     title: t('WEB_BUSINESS_LISTING', 'Web business listing'),
     description: t('BUSINESS_LISTING_BANNER_DESCRIPTION', 'Add a banner inside your business listing to let everyone know about your latest promotions inside your businesses listed.'),
-    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ViewStacked, null)
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ViewStacked, null),
+    info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
+    aspectRatio: 1440 / 260
   }, {
     key: 'web_business_page',
     title: t('WEB_BUSINESS_PAGE', 'Web business page'),
     description: t('BUSINESS_PAGE_BANNER_DESCRIPTION', 'Add a banner inside the business page, and inform news and promotions specifically of the stores customers are ordering from.'),
-    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null)
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null),
+    info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
+    aspectRatio: 1440 / 260
   }, {
     key: 'app_home_page',
     title: t('APP_HOME', 'App home'),
     description: t('HOME_BANNER_DESCRIPTION', 'Add a banner to your home page and inform everyone about the latest news in your marketplace.'),
-    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null)
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null),
+    info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
+    aspectRatio: 300 / 300
   }, {
     key: 'app_business_listing',
     title: t('APP_BUSINESS_LISTING', 'App business listing'),
     description: t('BUSINESS_LISTING_BANNER_DESCRIPTION', 'Add a banner inside your business listing to let everyone know about your latest promotions inside your businesses listed.'),
-    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ViewStacked, null)
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ViewStacked, null),
+    info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
+    aspectRatio: 300 / 300
   }, {
     key: 'app_business_page',
     title: t('APP_BUSINESS_PAGE', 'App business page'),
     description: t('BUSINESS_PAGE_BANNER_DESCRIPTION', 'Add a banner inside the business page, and inform news and promotions specifically of the stores customers are ordering from.'),
-    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null)
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null),
+    info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
+    aspectRatio: 300 / 300
   }];
   var handleSelectBannerPosition = function handleSelectBannerPosition(item) {
     setOpenPositionDetail(item);
@@ -77,7 +89,9 @@ var AdBannersListing = function AdBannersListing(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('AD_BANNERS', 'Ad banners'))), /*#__PURE__*/_react.default.createElement(_styles2.BannerPositionsList, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('AD_BANNERS', 'Ad banners')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('AD_BANNERS_INFO', 'Add banners for your homepage, business list and inside of each business. Use the recommended measures provided in each option for a better quality of your images.')))), /*#__PURE__*/_react.default.createElement(_styles2.BannerPositionsList, {
     className: "row"
   }, bannerPositions.map(function (item) {
     return /*#__PURE__*/_react.default.createElement("div", {
@@ -102,7 +116,9 @@ var AdBannersListing = function AdBannersListing(props) {
   }, /*#__PURE__*/_react.default.createElement(_PageBanner.PageBanners, {
     setMoveDistance: setMoveDistance,
     title: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.title,
-    defaultPosition: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.key
+    bannerInfo: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.info,
+    defaultPosition: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.key,
+    aspectRatio: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.aspectRatio
   })));
 };
 exports.AdBannersListing = AdBannersListing;

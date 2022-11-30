@@ -4,10 +4,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UploadImageIconContainer = exports.TabsConatiner = exports.Tab = exports.RightHeader = exports.LeftHeader = exports.ImagesContainer = exports.HeaderContainer = exports.FormController = exports.Container = exports.BannerImage = exports.AddBannerContainer = exports.ActionSelectorWrapper = void 0;
+exports.UploadImageIconContainer = exports.TabsConatiner = exports.Tab = exports.RightHeader = exports.LeftHeader = exports.ImagesContainer = exports.HeaderContainer = exports.FormController = exports.DeleteButtonWrapper = exports.Container = exports.BannerImage = exports.AddBannerContainer = exports.ActionSelectorWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -78,3 +78,10 @@ var ActionSelectorWrapper = _styledComponents.default.div(_templateObject22 || (
   return (0, _polished.darken)(0.1, props.theme.colors.secundary);
 });
 exports.ActionSelectorWrapper = ActionSelectorWrapper;
+var DeleteButtonWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  position: absolute;\n  cursor: pointer;\n  width: 20px !important;\n  height: 20px !important;\n  top: 5px;\n  ", "\n  display: flex;\n  z-index: 100;\n\n  svg {\n    color: ", ";\n    font-size: 20px;\n  }\n"])), function (props) {
+  var _props$theme4;
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    left: 5px;\n  "]))) : (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    right: 5px;\n  "])));
+}, function (props) {
+  return props.theme.colors.danger;
+});
+exports.DeleteButtonWrapper = DeleteButtonWrapper;
