@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
-import { List as MenuIcon, HouseDoor, ViewStacked, Shop } from 'react-bootstrap-icons'
+import { List as MenuIcon, HouseDoor, ViewStacked, Shop, InfoCircle } from 'react-bootstrap-icons'
 import { PostionItemUI } from './PostionItemUI'
 import { SideBar } from '../../Shared'
 import { PageBanners } from '../PageBanner'
@@ -10,7 +10,9 @@ import { PageBanners } from '../PageBanner'
 import {
   AdBannersListingContainer,
   HeaderContainer,
-  BannerPositionsList
+  BannerPositionsList,
+  InfoWrapper,
+  InfoContent
 } from './styles'
 
 export const AdBannersListing = (props) => {
@@ -75,6 +77,16 @@ export const AdBannersListing = (props) => {
             </IconButton>
           )}
           <h1>{t('AD_BANNERS', 'Ad banners')}</h1>
+          <InfoWrapper>
+            <IconButton
+              color='primary'
+            >
+              <InfoCircle />
+            </IconButton>
+            <InfoContent>
+              {t('AD_BANNERS_INFO', 'Add banners for your homepage, business list and inside of each business. Use the recommended measures provided in each option for a better quality of your images.')}
+            </InfoContent>
+          </InfoWrapper>
         </HeaderContainer>
         <BannerPositionsList className='row'>
           {bannerPositions.map(item => (
