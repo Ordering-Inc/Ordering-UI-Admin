@@ -195,7 +195,11 @@ export const DeleteButtonWrapper = styled.div`
   width: 20px !important;
   height: 20px !important;
   top: 5px;
-  right: 5px;
+  ${props => props.theme?.rtl ? css`
+    left: 5px;
+  ` : css`
+    right: 5px;
+  `}
   display: flex;
   z-index: 100;
 
