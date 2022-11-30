@@ -28,7 +28,7 @@ export const AdBannersListing = (props) => {
       description: t('HOME_BANNER_DESCRIPTION', 'Add a banner to your home page and inform everyone about the latest news in your marketplace.'),
       icon: <HouseDoor />,
       info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
-      aspectRatio: 1440 / 300
+      aspectRatio: 1440 / 260
     },
     {
       key: 'web_business_listing',
@@ -36,7 +36,7 @@ export const AdBannersListing = (props) => {
       description: t('BUSINESS_LISTING_BANNER_DESCRIPTION', 'Add a banner inside your business listing to let everyone know about your latest promotions inside your businesses listed.'),
       icon: <ViewStacked />,
       info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
-      aspectRatio: 1440 / 300
+      aspectRatio: 1440 / 260
     },
     {
       key: 'web_business_page',
@@ -44,7 +44,7 @@ export const AdBannersListing = (props) => {
       description: t('BUSINESS_PAGE_BANNER_DESCRIPTION', 'Add a banner inside the business page, and inform news and promotions specifically of the stores customers are ordering from.'),
       icon: <Shop />,
       info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
-      aspectRatio: 1440 / 300
+      aspectRatio: 1440 / 260
     },
     {
       key: 'app_home_page',
