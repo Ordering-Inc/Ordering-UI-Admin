@@ -18,7 +18,8 @@ export const ImageCrop = (props) => {
   const {
     photo,
     handleChangePhoto,
-    onClose
+    onClose,
+    aspectRatio
   } = props
 
   const [, t] = useLanguage()
@@ -48,15 +49,23 @@ export const ImageCrop = (props) => {
 
   useEffect(() => {
     if (!cropperRef.current || !photo) return
-
-    const _cropper = new Cropper(cropperRef.current, {
-      // aspectRatio: 16 / 9,
-      dragMode: 'move',
-      zoomable: false,
-      toggleDragModeOnDblclick: false
-    })
+    let _cropper
+    if (aspectRatio) {
+      _cropper = new Cropper(cropperRef.current, {
+        aspectRatio: aspectRatio,
+        dragMode: 'move',
+        zoomable: false,
+        toggleDragModeOnDblclick: false
+      })
+    } else {
+      _cropper = new Cropper(cropperRef.current, {
+        dragMode: 'move',
+        zoomable: false,
+        toggleDragModeOnDblclick: false
+      })
+    }
     setCropper(_cropper)
-  }, [photo])
+  }, [photo, aspectRatio])
 
   return (
     <Container>
