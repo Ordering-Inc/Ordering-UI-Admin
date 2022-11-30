@@ -16,6 +16,7 @@ import {
 
 export const BannerImages = (props) => {
   const {
+    aspectRatio,
     bannerItemsState,
     changesState,
     handleChangeItem,
@@ -183,6 +184,7 @@ export const BannerImages = (props) => {
         className='ordering-img-crop'
       >
         <ImageCrop
+          aspectRatio={aspectRatio}
           photo={cropState?.data}
           handleChangePhoto={handleChangePhoto}
         />

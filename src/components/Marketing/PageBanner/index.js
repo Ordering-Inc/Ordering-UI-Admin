@@ -31,7 +31,8 @@ const PageBannersUI = (props) => {
     handleUpdateBanner,
     handleSuccessAdd,
     defaultPosition,
-    handleSuccessDelete
+    handleSuccessDelete,
+    aspectRatio
   } = props
   const [, t] = useLanguage()
   const [openItemsDetail, setOpenItemsDetail] = useState(false)
@@ -149,6 +150,7 @@ const PageBannersUI = (props) => {
             handleSuccessDelete={handleSuccessDelete}
             onClose={() => handleCloseDetail()}
             defaultPosition={defaultPosition}
+            aspectRatio={aspectRatio}
           />
         </SideBar>
       )}
