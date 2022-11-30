@@ -29,7 +29,6 @@ export const Container = styled.div`
 `
 
 export const SandboxWrapper = styled.div`
-  cursor: pointer;
   margin-top: 30px;
   display: flex;
   align-items: center;
@@ -40,15 +39,6 @@ export const SandboxWrapper = styled.div`
     ` : css`
       margin-left: 10px;
     `}
-  }
-
-  svg {
-    font-size: 20px;
-    color: ${props => props.theme.colors.lightGray};
-
-    &.fill {
-      color: ${props => props.theme.colors.primary};
-    }
   }
 `
 

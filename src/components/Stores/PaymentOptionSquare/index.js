@@ -174,7 +174,7 @@ const PaymentOptionSquareUI = (props) => {
             <FormContainer>
               <SandboxWrapper>
                 <Checkbox
-                  defaultChecked={squareData?.sandbox ?? businessPaymethod?.sandbox ?? false}
+                  checked={squareData?.sandbox ?? businessPaymethod?.sandbox ?? false}
                   onChange={e => handleChangeSandbox(e.target.checked)}
                 />
                 <span>{t('SANDBOX', 'Sandbox')}</span>
