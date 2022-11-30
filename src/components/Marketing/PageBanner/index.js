@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, AdBannersList as AdBannersListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { SideBar, Alert } from '../../Shared'
-import { Button, Switch } from '../../../styles'
-import { ChevronRight } from 'react-bootstrap-icons'
+import { Button, Switch, IconButton } from '../../../styles'
+import { ChevronRight, InfoCircle } from 'react-bootstrap-icons'
 import { BannerDetails } from '../BannerDetails'
 import {
   Container,
@@ -14,12 +14,15 @@ import {
   BannerTitleConatiner,
   BannerActionsWrapper,
   EnableWrapper,
-  AddNewBanner
+  AddNewBanner,
+  InfoWrapper,
+  InfoContent
 } from './styles'
 
 const PageBannersUI = (props) => {
   const {
     title,
+    bannerInfo,
     bannersListState,
     setMoveDistance,
     sitesState,
@@ -61,7 +64,18 @@ const PageBannersUI = (props) => {
     <>
       <Container>
         <HeaderContainer>
-          <h1>{title}</h1>
+          <div>
+            <h1>{title}</h1>
+            <InfoWrapper>
+              <IconButton
+                color='primary'
+              >
+                <InfoCircle />
+              </IconButton>
+              <InfoContent>{bannerInfo}</InfoContent>
+            </InfoWrapper>
+          </div>
+
           <Button
             color='lightPrimary'
             borderRadius='8px'

@@ -26,37 +26,43 @@ export const AdBannersListing = (props) => {
       key: 'web_home_page',
       title: t('WEB_HOME', 'Web home'),
       description: t('HOME_BANNER_DESCRIPTION', 'Add a banner to your home page and inform everyone about the latest news in your marketplace.'),
-      icon: <HouseDoor />
+      icon: <HouseDoor />,
+      info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 256')
     },
     {
       key: 'web_business_listing',
       title: t('WEB_BUSINESS_LISTING', 'Web business listing'),
       description: t('BUSINESS_LISTING_BANNER_DESCRIPTION', 'Add a banner inside your business listing to let everyone know about your latest promotions inside your businesses listed.'),
-      icon: <ViewStacked />
+      icon: <ViewStacked />,
+      info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 256')
     },
     {
       key: 'web_business_page',
       title: t('WEB_BUSINESS_PAGE', 'Web business page'),
       description: t('BUSINESS_PAGE_BANNER_DESCRIPTION', 'Add a banner inside the business page, and inform news and promotions specifically of the stores customers are ordering from.'),
-      icon: <Shop />
+      icon: <Shop />,
+      info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 256')
     },
     {
       key: 'app_home_page',
       title: t('APP_HOME', 'App home'),
       description: t('HOME_BANNER_DESCRIPTION', 'Add a banner to your home page and inform everyone about the latest news in your marketplace.'),
-      icon: <HouseDoor />
+      icon: <HouseDoor />,
+      info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 297')
     },
     {
       key: 'app_business_listing',
       title: t('APP_BUSINESS_LISTING', 'App business listing'),
       description: t('BUSINESS_LISTING_BANNER_DESCRIPTION', 'Add a banner inside your business listing to let everyone know about your latest promotions inside your businesses listed.'),
-      icon: <ViewStacked />
+      icon: <ViewStacked />,
+      info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 297')
     },
     {
       key: 'app_business_page',
       title: t('APP_BUSINESS_PAGE', 'App business page'),
       description: t('BUSINESS_PAGE_BANNER_DESCRIPTION', 'Add a banner inside the business page, and inform news and promotions specifically of the stores customers are ordering from.'),
-      icon: <Shop />
+      icon: <Shop />,
+      info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 297')
     }
   ]
 
@@ -115,6 +121,7 @@ export const AdBannersListing = (props) => {
           <PageBanners
             setMoveDistance={setMoveDistance}
             title={openPositionDetail?.title}
+            bannerInfo={openPositionDetail?.info}
             defaultPosition={openPositionDetail?.key}
           />
         </SideBar>

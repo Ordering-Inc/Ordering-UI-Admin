@@ -38,7 +38,6 @@ export const InfoWrapper = styled.div`
     }
   }
   &:hover > div {
-    /* display: block; */
     visibility: visible;
     opacity: 1;
   }
