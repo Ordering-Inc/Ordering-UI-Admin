@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SelectWrapper = exports.PopupContainer = exports.InlineContainer = exports.GuideLink = exports.FormGroup = exports.Container = exports.ConfigMessage = void 0;
+exports.SelectWrapper = exports.PopupContainer = exports.InlineContainer = exports.GuideLink = exports.FormGroup = exports.Container = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral([""])));
@@ -22,7 +22,3 @@ var InlineContainer = _styledComponents.default.div(_templateObject5 || (_templa
 exports.InlineContainer = InlineContainer;
 var GuideLink = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  button {\n    border-radius: 8px;\n    height: 44px;\n  }\n"])));
 exports.GuideLink = GuideLink;
-var ConfigMessage = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  span {\n    color: ", ";\n    text-decoration: underline;\n    cursor: pointer;\n    display: block;\n  }\n"])), function (props) {
-  return props.theme.colors.primary;
-});
-exports.ConfigMessage = ConfigMessage;
