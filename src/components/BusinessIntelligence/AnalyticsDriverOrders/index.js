@@ -19,7 +19,8 @@ import {
 export const AnalyticsDriverOrders = (props) => {
   const {
     isOrders,
-    chartDataList
+    chartDataList,
+    countryCode
   } = props
 
   const [, t] = useLanguage()
@@ -91,11 +92,18 @@ export const AnalyticsDriverOrders = (props) => {
 
   const TotalSales = () => {
     let sales = 0
-    if (!chartDataList?.data?.dataset?.dataset[0]?.data || chartDataList?.data?.dataset?.dataset[0]?.data.length === 0) return sales
+    if (!chartDataList?.data?.dataset?.dataset[0]?.data || chartDataList?.data?.dataset?.dataset[0]?.data.length === 0) return getFormattedValue(sales, countryCode)
     for (const data of chartDataList?.data?.dataset?.dataset[0]?.data) {
       sales += data.y
     }
-    return parsePrice(sales.toFixed(2), { separator: '.' })
+    return getFormattedValue(sales, countryCode)
+  }
+
+  const getFormattedValue = (value, flag) => {
+    const formattedValue = flag
+      ? parsePrice(value.toFixed(2), { separator: '.' })
+      : value.toFixed(2)
+    return formattedValue
   }
 
   const downloadCSV = () => {
