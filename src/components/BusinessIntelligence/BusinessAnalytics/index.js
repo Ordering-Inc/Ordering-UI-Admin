@@ -43,7 +43,8 @@ const BusinessAnalyticsUI = (props) => {
     customerSatisfactionList,
     ordersAcceptSpendList,
     arrivedPickUpSpendList,
-    orderLocationList
+    orderLocationList,
+    countryCode
   } = props
 
   const [, t] = useLanguage()
@@ -113,12 +114,14 @@ const BusinessAnalyticsUI = (props) => {
             isOrders
             filterList={filterList}
             chartDataList={ordersList}
+            countryCode={countryCode}
           />
         </div>
         <div className='col-md-12 col-lg-6'>
           <AnalyticsOrdersOrSales
             filterList={filterList}
             chartDataList={salesList}
+            countryCode={countryCode}
           />
         </div>
         <div className='col-md-12 col-lg-6'>
