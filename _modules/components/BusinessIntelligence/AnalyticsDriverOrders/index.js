@@ -28,7 +28,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
   var _chartDataList$data17, _chartDataList$data18, _chartDataList$data19, _chartDataList$data20, _chartDataList$data21, _chartDataList$data22;
   var isOrders = props.isOrders,
-    chartDataList = props.chartDataList;
+    chartDataList = props.chartDataList,
+    countryCode = props.countryCode;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -125,7 +126,7 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
   var TotalSales = function TotalSales() {
     var _chartDataList$data5, _chartDataList$data5$, _chartDataList$data5$2, _chartDataList$data6, _chartDataList$data6$, _chartDataList$data6$2, _chartDataList$data7, _chartDataList$data7$, _chartDataList$data7$2;
     var sales = 0;
-    if (!(chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data5 = chartDataList.data) !== null && _chartDataList$data5 !== void 0 && (_chartDataList$data5$ = _chartDataList$data5.dataset) !== null && _chartDataList$data5$ !== void 0 && (_chartDataList$data5$2 = _chartDataList$data5$.dataset[0]) !== null && _chartDataList$data5$2 !== void 0 && _chartDataList$data5$2.data) || (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data6 = chartDataList.data) === null || _chartDataList$data6 === void 0 ? void 0 : (_chartDataList$data6$ = _chartDataList$data6.dataset) === null || _chartDataList$data6$ === void 0 ? void 0 : (_chartDataList$data6$2 = _chartDataList$data6$.dataset[0]) === null || _chartDataList$data6$2 === void 0 ? void 0 : _chartDataList$data6$2.data.length) === 0) return sales;
+    if (!(chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data5 = chartDataList.data) !== null && _chartDataList$data5 !== void 0 && (_chartDataList$data5$ = _chartDataList$data5.dataset) !== null && _chartDataList$data5$ !== void 0 && (_chartDataList$data5$2 = _chartDataList$data5$.dataset[0]) !== null && _chartDataList$data5$2 !== void 0 && _chartDataList$data5$2.data) || (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data6 = chartDataList.data) === null || _chartDataList$data6 === void 0 ? void 0 : (_chartDataList$data6$ = _chartDataList$data6.dataset) === null || _chartDataList$data6$ === void 0 ? void 0 : (_chartDataList$data6$2 = _chartDataList$data6$.dataset[0]) === null || _chartDataList$data6$2 === void 0 ? void 0 : _chartDataList$data6$2.data.length) === 0) return getFormattedValue(sales, countryCode);
     var _iterator3 = _createForOfIteratorHelper(chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data7 = chartDataList.data) === null || _chartDataList$data7 === void 0 ? void 0 : (_chartDataList$data7$ = _chartDataList$data7.dataset) === null || _chartDataList$data7$ === void 0 ? void 0 : (_chartDataList$data7$2 = _chartDataList$data7$.dataset[0]) === null || _chartDataList$data7$2 === void 0 ? void 0 : _chartDataList$data7$2.data),
       _step3;
     try {
@@ -138,9 +139,13 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     } finally {
       _iterator3.f();
     }
-    return parsePrice(sales.toFixed(2), {
+    return getFormattedValue(sales, countryCode);
+  };
+  var getFormattedValue = function getFormattedValue(value, flag) {
+    var formattedValue = flag ? parsePrice(value.toFixed(2), {
       separator: '.'
-    });
+    }) : value.toFixed(2);
+    return formattedValue;
   };
   var downloadCSV = function downloadCSV() {
     var _chartDataList$data8, _chartDataList$data8$, _chartDataList$data8$2;
