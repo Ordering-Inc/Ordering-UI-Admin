@@ -52,7 +52,8 @@ const DriverAnalyticsUI = (props) => {
     busyTimesList,
     completeSpendList,
     pickUpSpendList,
-    deliverySpendList
+    deliverySpendList,
+    countryCode
   } = props
 
   const [, t] = useLanguage()
@@ -131,12 +132,14 @@ const DriverAnalyticsUI = (props) => {
             isOrders
             filterList={filterList}
             chartDataList={ordersList}
+            countryCode={countryCode}
           />
         </div>
         <div className='col-md-12 col-lg-6'>
           <AnalyticsDriverOrders
             filterList={filterList}
             chartDataList={salesList}
+            countryCode={countryCode}
           />
         </div>
         <div className='col-md-12 col-lg-6'>
