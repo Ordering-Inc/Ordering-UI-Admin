@@ -50,7 +50,8 @@ var BusinessAnalyticsUI = function BusinessAnalyticsUI(props) {
     customerSatisfactionList = props.customerSatisfactionList,
     ordersAcceptSpendList = props.ordersAcceptSpendList,
     arrivedPickUpSpendList = props.arrivedPickUpSpendList,
-    orderLocationList = props.orderLocationList;
+    orderLocationList = props.orderLocationList,
+    countryCode = props.countryCode;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -103,12 +104,14 @@ var BusinessAnalyticsUI = function BusinessAnalyticsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersOrSales.AnalyticsOrdersOrSales, {
     isOrders: true,
     filterList: filterList,
-    chartDataList: ordersList
+    chartDataList: ordersList,
+    countryCode: countryCode
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsOrdersOrSales.AnalyticsOrdersOrSales, {
     filterList: filterList,
-    chartDataList: salesList
+    chartDataList: salesList,
+    countryCode: countryCode
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsProductCategories.AnalyticsProductCategories, {

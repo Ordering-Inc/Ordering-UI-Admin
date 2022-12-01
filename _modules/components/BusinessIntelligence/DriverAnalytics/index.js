@@ -58,7 +58,8 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
     busyTimesList = props.busyTimesList,
     completeSpendList = props.completeSpendList,
     pickUpSpendList = props.pickUpSpendList,
-    deliverySpendList = props.deliverySpendList;
+    deliverySpendList = props.deliverySpendList,
+    countryCode = props.countryCode;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -119,12 +120,14 @@ var DriverAnalyticsUI = function DriverAnalyticsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsDriverOrders.AnalyticsDriverOrders, {
     isOrders: true,
     filterList: filterList,
-    chartDataList: ordersList
+    chartDataList: ordersList,
+    countryCode: countryCode
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsDriverOrders.AnalyticsDriverOrders, {
     filterList: filterList,
-    chartDataList: salesList
+    chartDataList: salesList,
+    countryCode: countryCode
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "col-md-12 col-lg-6"
   }, /*#__PURE__*/_react.default.createElement(_AnalyticsTopOrders.AnalyticsTopOrders, {

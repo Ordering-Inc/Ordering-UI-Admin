@@ -28,7 +28,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsOrdersOrSales = function AnalyticsOrdersOrSales(props) {
   var isOrders = props.isOrders,
     chartDataList = props.chartDataList,
-    filterList = props.filterList;
+    filterList = props.filterList,
+    countryCode = props.countryCode;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -220,9 +221,10 @@ var AnalyticsOrdersOrSales = function AnalyticsOrdersOrSales(props) {
     } finally {
       _iterator2.f();
     }
-    return parsePrice(sales.toFixed(2), {
+    var totalSales = countryCode ? parsePrice(sales.toFixed(2), {
       separator: '.'
-    });
+    }) : sales.toFixed(2);
+    return totalSales;
   };
   var downloadCSV = function downloadCSV() {
     var csv = "".concat(t('TIME', 'Time'), ", ").concat(isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales'), "\n");
