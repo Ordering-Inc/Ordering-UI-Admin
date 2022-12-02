@@ -222,7 +222,6 @@ var DriverGroupDeliveryZoneInformation = function DriverGroupDeliveryZoneInforma
       return setClearState(true);
     }
   }, t('CLEAR', 'Clear')), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessZoneGoogleMaps, {
-    disabled: zoneType === 5,
     distance: formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : (_formState$changes6$d = _formState$changes6.data) === null || _formState$changes6$d === void 0 ? void 0 : _formState$changes6$d.distance,
     apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.google_maps_api_key) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value,
     mapControls: googleMapsControls,

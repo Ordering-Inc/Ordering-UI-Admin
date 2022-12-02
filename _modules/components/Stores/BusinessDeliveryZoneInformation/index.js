@@ -73,7 +73,7 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     isShowMap = _useState12[0],
     setIsShowMap = _useState12[1];
   var kmlRef = (0, _react.useRef)(null);
-  var isMyZone = zone !== null && zone !== void 0 && (_zone$businesses = zone.businesses) !== null && _zone$businesses !== void 0 && _zone$businesses.length ? (zone === null || zone === void 0 ? void 0 : (_zone$pivot = zone.pivot) === null || _zone$pivot === void 0 ? void 0 : _zone$pivot.business_id) === (zone === null || zone === void 0 ? void 0 : zone.business_id) : true;
+  var isMyZone = zone !== null && zone !== void 0 && (_zone$businesses = zone.businesses) !== null && _zone$businesses !== void 0 && _zone$businesses.length ? (zone === null || zone === void 0 ? void 0 : (_zone$pivot = zone.pivot) === null || _zone$pivot === void 0 ? void 0 : _zone$pivot.business_id) === parseInt(zone === null || zone === void 0 ? void 0 : zone.business_id) : true;
   var typeOptions = [{
     value: 1,
     content: t('CIRCLE', 'Circle')
@@ -225,7 +225,11 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     disabled: !isMyZone,
     placeholder: "1 - 99 ".concat(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.distance_unit) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value),
     name: "distance",
+    maxLength: 2,
     value: (_ref4 = (_formState$changes$da = (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : (_formState$changes6$d = _formState$changes6.data) === null || _formState$changes6$d === void 0 ? void 0 : _formState$changes6$d.distance) !== null && _formState$changes$da !== void 0 ? _formState$changes$da : zone === null || zone === void 0 ? void 0 : (_zone$data = zone.data) === null || _zone$data === void 0 ? void 0 : _zone$data.distance) !== null && _ref4 !== void 0 ? _ref4 : '',
+    onInput: function onInput(e) {
+      e.target.value = e.target.value.match("^[1-9]{1,2}$");
+    },
     onChange: function onChange(e) {
       var _configState$configs4, _configState$configs5;
       return handleChangeInput(e, configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.distance_unit) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value);
