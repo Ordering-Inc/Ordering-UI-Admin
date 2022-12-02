@@ -145,6 +145,7 @@ var ImportersListingUI = function ImportersListingUI(props) {
     },
     openMappingDetails: openMappingDetails,
     setOpenMappingDetails: setOpenMappingDetails,
+    handleSuccessUpdateImporter: handleSuccessUpdateImporter,
     onClose: function onClose() {
       setOpenImportCsv(false);
       setImportJobFormMoveDistance(0);

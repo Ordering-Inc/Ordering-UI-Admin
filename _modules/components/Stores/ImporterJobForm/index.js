@@ -38,7 +38,8 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     handleOpenChildForm = props.handleOpenChildForm,
     handleCloseChildForm = props.handleCloseChildForm,
     openMappingDetails = props.openMappingDetails,
-    setOpenMappingDetails = props.setOpenMappingDetails;
+    setOpenMappingDetails = props.setOpenMappingDetails,
+    handleSuccessUpdateImporter = props.handleSuccessUpdateImporter;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -273,7 +274,13 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     isAdvanedOptions: true,
     selectedImporter: selectedImporter,
     openMappingDetails: openMappingDetails,
-    setOpenMappingDetails: setOpenMappingDetails
+    setOpenMappingDetails: setOpenMappingDetails,
+    handleSuccessUpdateImporter: handleSuccessUpdateImporter,
+    onClose: function onClose() {
+      handleCloseChildForm();
+      setOpenMappingDetails(false);
+      setOpenAdvancedOptions(false);
+    }
   }))));
 };
 var ImporterJobForm = function ImporterJobForm(props) {
