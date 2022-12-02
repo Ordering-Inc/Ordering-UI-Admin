@@ -40,7 +40,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isShowMap, setIsShowMap] = useState(false)
   const kmlRef = useRef(null)
-  const isMyZone = zone?.businesses?.length ? zone?.pivot?.business_id === zone?.business_id : true
+  const isMyZone = zone?.businesses?.length ? zone?.pivot?.business_id === parseInt(zone?.business_id) : true
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
@@ -214,7 +214,11 @@ export const BusinessDeliveryZoneInformation = (props) => {
                 disabled={!isMyZone}
                 placeholder={`1 - 99 ${configState?.configs?.distance_unit?.value}`}
                 name='distance'
+                maxLength={2}
                 value={formState.changes?.data?.distance ?? zone?.data?.distance ?? ''}
+                onInput={(e) => {
+                  e.target.value = e.target.value.match("^[1-9]{1,2}$")
+                }}
                 onChange={e => handleChangeInput(e, configState?.configs?.distance_unit?.value)}
                 ref={register({
                   required: t('DISTANCE_FROM_STORE', 'Distance from store')

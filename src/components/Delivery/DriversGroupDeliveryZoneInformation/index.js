@@ -213,7 +213,6 @@ export const DriverGroupDeliveryZoneInformation = (props) => {
                 {t('CLEAR', 'Clear')}
               </button>
               <DriverGroupZoneGoogleMaps
-                disabled={zoneType === 5}
                 distance={formState?.changes?.data?.distance}
                 apiKey={configState?.configs?.google_maps_api_key?.value}
                 mapControls={googleMapsControls}
