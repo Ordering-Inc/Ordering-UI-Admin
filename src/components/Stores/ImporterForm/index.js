@@ -53,7 +53,8 @@ export const ImporterFormUI = (props) => {
     isMapping,
     headerTitle,
     handleUpdateMultipleMapping,
-    defaultImporter
+    defaultImporter,
+    mappingState
   } = props
 
   const [, t] = useLanguage()
@@ -246,10 +247,10 @@ export const ImporterFormUI = (props) => {
                       }
                     }}
                     placeholder='0'
-                    defaultValue={editState?.mapping?.business_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
+                    value={mappingState?.['business_id'] || ''}
                   />
                 </InputWrapper>
               </Col>
@@ -266,10 +267,10 @@ export const ImporterFormUI = (props) => {
                       }
                     }}
                     placeholder='0'
-                    defaultValue={editState?.mapping?.external_business_id ?? ''}
                     onChange={handleChangeMappingInput}
                     disabled={formState.loading}
                     autoComplete='off'
+                    value={mappingState?.['external_business_id'] || ''}
                   />
                 </InputWrapper>
               </Col>
@@ -287,10 +288,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.category_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['category_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -307,10 +308,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.external_category_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['external_category_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -332,6 +333,7 @@ export const ImporterFormUI = (props) => {
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['external_parent_category_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -352,10 +354,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.product_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['product_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -372,10 +374,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.external_product_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['external_product_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -394,10 +396,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.extra_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['extra_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -414,10 +416,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.external_extra_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['external_extra_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -436,10 +438,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.extra_option_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['extra_option_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -456,10 +458,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.external_extra_option_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['external_extra_option_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -478,10 +480,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.extra_option_suboption_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['extra_option_suboption_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
@@ -498,10 +500,10 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.external_extra_option_suboption_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'
+                      value={mappingState?.['external_extra_option_suboption_id'] || ''}
                     />
                   </InputWrapper>
                 </Col>
