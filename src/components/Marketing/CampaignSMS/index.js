@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
+import { SettingsList } from '../../Settings/SettingsList'
 import { useTheme } from 'styled-components'
 import { Alert } from '../../Shared'
 
@@ -15,7 +17,6 @@ import {
   Description,
   BottomSpace
 } from './styles'
-import { SettingsList } from '../../Settings/SettingsList'
 
 export const CampaignSMS = (props) => {
   const {
@@ -137,7 +138,16 @@ export const CampaignSMS = (props) => {
               {t('TWILIO_SETTINGS_LINK_DESC', 'You need to complete Twilio configuration first')}
             </span>
           </Description>
-          {category && (
+          {categoryList?.loading && (
+            <>
+              {[...Array(5).keys()].map(i => (
+                <p key={i}>
+                  <Skeleton height={20} />
+                </p>
+              ))}
+            </>
+          )}
+          {!categoryList?.loading && category && (
             <SettingsList
               {...props}
               category={category}
