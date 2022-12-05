@@ -161,3 +161,7 @@ export const InfoContent = styled.div`
     `}
   }
 `
+export const SearchBarWrapper = styled.div`
+  margin-top: 33px;
+  margin-bottom: 10px;
+`
