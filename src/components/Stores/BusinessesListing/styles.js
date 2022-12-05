@@ -50,3 +50,37 @@ export const ViewMethodButton = styled.span`
     }
   }
 `
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-direction: column;
+  > div {
+    width: 100%;
+  }
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+    align-items: center;
+    ${({ isSelect }) => isSelect && css`
+      > div {
+        width: calc(100% - 100px);
+      }
+    `}
+  }
+
+  > button {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    svg {
+      min-width: 14px;
+      margin-left: 5px;
+      ${props => props.theme.rtl && css`
+        margin-left: 0px;
+        margin-right: 5px;
+      `}
+    }
+  }
+`
