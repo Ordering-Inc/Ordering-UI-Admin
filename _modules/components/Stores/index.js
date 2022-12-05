@@ -45,6 +45,12 @@ Object.defineProperty(exports, "BusinessCustomFields", {
     return _BusinessCustomFields.BusinessCustomFields;
   }
 });
+Object.defineProperty(exports, "BusinessDelete", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessDelete.BusinessDelete;
+  }
+});
 Object.defineProperty(exports, "BusinessDeliveryDetails", {
   enumerable: true,
   get: function get() {
@@ -614,6 +620,7 @@ var _BusinessCustomFields = require("./BusinessCustomFields");
 var _BusinessDeliveryPickupMore = require("./BusinessDeliveryPickupMore");
 var _BusinessDetail = require("./BusinessDetail");
 var _BusinessDetails = require("./BusinessDetails");
+var _BusinessDelete = require("./BusinessDelete");
 var _BusinessFrontLayout = require("./BusinessFrontLayout");
 var _BusinessImages = require("./BusinessImages");
 var _BusinessInformation = require("./BusinessInformation");

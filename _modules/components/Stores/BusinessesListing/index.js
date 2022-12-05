@@ -21,6 +21,7 @@ var _AddBusinessForm = require("../AddBusinessForm");
 var _WizardBusiness = require("../WizardBusiness");
 var _styles = require("./styles");
 var _BusinessSync = require("../BusinessSync");
+var _BusinessDelete = require("../BusinessDelete");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -50,7 +51,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     loadBusinesses = props.loadBusinesses,
     onSearch = props.onSearch,
     onBusinessRedirect = props.onBusinessRedirect,
-    getPageBusinesses = props.getPageBusinesses;
+    getPageBusinesses = props.getPageBusinesses,
+    businessIds = props.businessIds,
+    handleChangeBusinessIds = props.handleChangeBusinessIds,
+    handleEnableAllBusiness = props.handleEnableAllBusiness,
+    handleDeleteMultiBusinesses = props.handleDeleteMultiBusinesses,
+    setBusinessIds = props.setBusinessIds;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -207,12 +213,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: function onClick() {
       return handleViewMethod('list');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)))), /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
+  }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ButtonGroup, {
+    isSelect: (businessIds === null || businessIds === void 0 ? void 0 : businessIds.length) > 0
+  }, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     businessTypes: props.businessTypes,
     defaultBusinessType: props.defaultBusinessType,
     handleChangeBusinessType: handleChangeBusinessType,
     setBusinessTypes: setBusinessTypes
-  }), /*#__PURE__*/_react.default.createElement(_BusinessesList.BusinessesList, {
+  }), (businessIds === null || businessIds === void 0 ? void 0 : businessIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_BusinessDelete.BusinessDelete, {
+    handleDeleteMultiBusinesses: handleDeleteMultiBusinesses
+  })), /*#__PURE__*/_react.default.createElement(_BusinessesList.BusinessesList, {
     viewMethod: viewMethod,
     businessList: businessList,
     pagination: pagination,
@@ -224,7 +234,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleSucessUpdateBusiness: handleSucessUpdateBusiness,
     handleOpenBusinessDetails: handleOpenBusinessDetails,
     handleOpenAddBusiness: handleOpenAddBusiness,
-    isTutorialMode: isTutorialMode
+    isTutorialMode: isTutorialMode,
+    businessIds: businessIds,
+    setBusinessIds: setBusinessIds,
+    handleChangeBusinessIds: handleChangeBusinessIds,
+    handleEnableAllBusiness: handleEnableAllBusiness,
+    selectedBusinessActiveState: selectedBusinessActiveState
   })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openBusinessDetails
     // business={detailsBusiness}

@@ -11,6 +11,7 @@ var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _styledComponents = require("styled-components");
 var _SingleBusiness = require("../SingleBusiness");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -39,19 +40,32 @@ var BusinessesList = function BusinessesList(props) {
     handleOpenAddBusiness = props.handleOpenAddBusiness,
     detailsBusinessId = props.detailsBusinessId,
     getPageBusinesses = props.getPageBusinesses,
-    isTutorialMode = props.isTutorialMode;
+    isTutorialMode = props.isTutorialMode,
+    businessIds = props.businessIds,
+    handleChangeBusinessIds = props.handleChangeBusinessIds,
+    handleEnableAllBusiness = props.handleEnableAllBusiness,
+    selectedBusinessActiveState = props.selectedBusinessActiveState,
+    setBusinessIds = props.setBusinessIds;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)({
+  var _useState = (0, _react.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isAllChecked = _useState2[0],
+    setIsAllChecked = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isAllFeatured = _useState4[0],
+    setIsAllFeatured = _useState4[1];
+  var _useState5 = (0, _react.useState)({
       business: true,
       featured: true,
       ratings: true
     }),
-    _useState2 = _slicedToArray(_useState, 2),
-    allowColumns = _useState2[0],
-    setAllowColumns = _useState2[1];
+    _useState6 = _slicedToArray(_useState5, 2),
+    allowColumns = _useState6[0],
+    setAllowColumns = _useState6[1];
   var optionsDefault = [{
     value: 'business',
     content: t('BUSINESS', 'Business')
@@ -72,6 +86,20 @@ var BusinessesList = function BusinessesList(props) {
     var expectedPage = Math.ceil(pagination.from / pageSize);
     getPageBusinesses(pageSize, expectedPage);
   };
+  var handleSelecteAllBusiness = function handleSelecteAllBusiness() {
+    var _businessList$busines;
+    var _businessIds = (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.reduce(function (ids, business) {
+      return [].concat(_toConsumableArray(ids), [business.id]);
+    }, []);
+    if (!isAllChecked) {
+      setBusinessIds(_toConsumableArray(new Set([].concat(_toConsumableArray(businessIds), _toConsumableArray(_businessIds)))));
+    } else {
+      var updateBusinessIds = businessIds.filter(function (name) {
+        return !_businessIds.includes(name);
+      });
+      setBusinessIds(updateBusinessIds);
+    }
+  };
   var handleScroll = (0, _react.useCallback)(function () {
     var _document$documentEle, _document$documentEle2;
     var innerHeightScrolltop = window.innerHeight + ((_document$documentEle = document.documentElement) === null || _document$documentEle === void 0 ? void 0 : _document$documentEle.scrollTop) + 10;
@@ -87,15 +115,50 @@ var BusinessesList = function BusinessesList(props) {
       return window.removeEventListener('scroll', handleScroll);
     };
   }, [handleScroll, viewMethod]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('ID', 'ID')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
+  (0, _react.useEffect)(function () {
+    var _isAllFeatured = businessList.businesses.filter(function (business) {
+      return businessIds.includes(business.id);
+    }).every(function (business) {
+      return business.featured;
+    });
+    setIsAllFeatured(_isAllFeatured);
+  }, [JSON.stringify(businessList.businesses), businessIds]);
+  (0, _react.useEffect)(function () {
+    var _businessList$busines2;
+    if (businessList.loading) return;
+    var _businessIds = (_businessList$busines2 = businessList.businesses) === null || _businessList$busines2 === void 0 ? void 0 : _businessList$busines2.reduce(function (ids, business) {
+      return [].concat(_toConsumableArray(ids), [business.id]);
+    }, []);
+    var _isAllChecked = _businessIds.every(function (elem) {
+      return businessIds.includes(elem);
+    });
+    setIsAllChecked(_isAllChecked);
+  }, [JSON.stringify(businessList.businesses), businessIds]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessIdWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+    className: "all-checkbox",
+    isChecked: !(businessList !== null && businessList !== void 0 && businessList.loading) && isAllChecked,
+    onClick: function onClick() {
+      return handleSelecteAllBusiness();
+    }
+  }, !(businessList !== null && businessList !== void 0 && businessList.loading) && isAllChecked ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), t('ID', 'ID'))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("th", {
     className: "business"
-  }, t('BUSINESS', 'Business')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) && /*#__PURE__*/_react.default.createElement("th", null, t('FEATURED', 'Featured')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings) && /*#__PURE__*/_react.default.createElement("th", null, t('RATINGS', 'Ratings')), /*#__PURE__*/_react.default.createElement("th", {
+  }, t('BUSINESS', 'Business')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.featured) && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.FeaturedWrapper, null, (businessIds === null || businessIds === void 0 ? void 0 : businessIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: isAllFeatured,
+    onChange: function onChange(value) {
+      return handleEnableAllBusiness(value, true);
+    }
+  }), t('FEATURED', 'Featured'))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings) && /*#__PURE__*/_react.default.createElement("th", null, t('RATINGS', 'Ratings')), /*#__PURE__*/_react.default.createElement("th", {
     className: "action"
-  }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.ActionWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
     handleChangeAllowColumns: handleChangeAllowColumns
-  })))), businessList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  }), (businessIds === null || businessIds === void 0 ? void 0 : businessIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: selectedBusinessActiveState,
+    onChange: function onChange(value) {
+      return handleEnableAllBusiness(value);
+    }
+  }))))), businessList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusiness.SingleBusiness, {
       key: i,
       isSkeleton: true,
@@ -113,7 +176,9 @@ var BusinessesList = function BusinessesList(props) {
       handleSucessRemoveBusiness: handleSucessRemoveBusiness,
       handleSucessAddBusiness: handleSucessAddBusiness,
       handleSucessUpdateBusiness: handleSucessUpdateBusiness,
-      handleOpenBusinessDetails: handleOpenBusinessDetails
+      handleOpenBusinessDetails: handleOpenBusinessDetails,
+      businessIds: businessIds,
+      handleChangeBusinessIds: handleChangeBusinessIds
     });
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessListBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewButtonLink, {
     onClick: function onClick() {

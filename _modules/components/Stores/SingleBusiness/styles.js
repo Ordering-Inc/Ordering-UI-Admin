@@ -4,10 +4,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperImage = exports.SingleBusinessContainer = exports.SingleBusinessCardContainer = exports.InfoBlock = exports.Image = exports.BusinessLogo = exports.BusinessHeaderContent = exports.BusinessHeader = exports.BusinessGeneralInfo = exports.BusinessEnableWrapper = exports.BusinessContent = exports.BusinessActionContainer = void 0;
+exports.WrapperImage = exports.SingleBusinessContainer = exports.SingleBusinessCardContainer = exports.InfoBlock = exports.Image = exports.FeaturedWrapper = exports.CheckBoxWrapper = exports.BusinessLogo = exports.BusinessIdWrapper = exports.BusinessHeaderContent = exports.BusinessHeader = exports.BusinessGeneralInfo = exports.BusinessEnableWrapper = exports.BusinessContent = exports.BusinessActionContainer = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -110,3 +110,20 @@ var BusinessActionContainer = _styledComponents.default.div(_templateObject23 ||
 exports.BusinessActionContainer = BusinessActionContainer;
 var BusinessHeaderContent = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  position: absolute;\n  bottom: -22px;\n  width: 100%;\n  padding: 0 15px;\n"])));
 exports.BusinessHeaderContent = BusinessHeaderContent;
+var BusinessIdWrapper = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+exports.BusinessIdWrapper = BusinessIdWrapper;
+var CheckBoxWrapper = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  display: flex;\n  ", "\n  svg {\n    font-size: 16px;\n    color: ", ";\n  }\n\n  ", "\n"])), function (props) {
+  var _props$theme5;
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "])));
+}, function (props) {
+  return props.theme.colors.secundaryLight;
+}, function (_ref5) {
+  var isChecked = _ref5.isChecked;
+  return isChecked && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
+    var _props$theme$colors;
+    return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;
+  });
+});
+exports.CheckBoxWrapper = CheckBoxWrapper;
+var FeaturedWrapper = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
+exports.FeaturedWrapper = FeaturedWrapper;
