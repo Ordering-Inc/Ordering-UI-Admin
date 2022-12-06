@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { AppLayout } from '../AppLayout'
+import { removeIntercom } from '../../../utils'
 
 export const DriverApp = () => {
   const [, t] = useLanguage()
@@ -16,14 +17,23 @@ export const DriverApp = () => {
     },
     live_title: t('FREE_TO_USE', 'Free to use'),
     live_description: t('FREE_TO_USE_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
-    apple_store_link: 'https://apps.apple.com/us/app/driver-app-2-0/id1606257815',
-    google_play_link: 'https://play.google.com/store/apps/details?id=com.ordering.deliveryv5',
     brand_title: t('YOUR_BRANDED_APP', 'Your Branded App'),
     brand_description: t('BRANDED_APP_DESCRIPTION', 'This App is delivered in less than five working days, fully branded with your guidelines, removing all ordering.co presence to give your brand more awareness.'),
-    purchase_link: 'https://www.ordering.co/ordering-sales'
+    demo_book_message: 'I would like to book a Demo about the Driver app , can you assist me?',
+    purchase_message: 'I would like to know about the Driver app, can you assist me?',
+    downloads: [
+      { id: 1, icon: theme.images.myProducts.appStoreSmall, link: 'https://apps.apple.com/us/app/driver-app-2-0/id1606257815' },
+      { id: 2, icon: theme.images.myProducts.playStoreSmall, link: 'https://play.google.com/store/apps/details?id=com.ordering.deliveryv5' }
+    ]
   }
 
+  useEffect(() => {
+    return () => {
+      removeIntercom()
+    }
+  }, [])
+
   return (
-    <AppLayout appInfo={appInfo} />
+    <AppLayout appInfo={appInfo} isDriver />
   )
 }
