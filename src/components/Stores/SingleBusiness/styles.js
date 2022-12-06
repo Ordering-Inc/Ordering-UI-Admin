@@ -243,3 +243,33 @@ export const BusinessHeaderContent = styled.div`
   width: 100%;
   padding: 0 15px;
 `
+
+export const BusinessIdWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const CheckBoxWrapper = styled.div`
+  cursor: pointer;
+  display: flex;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
+  svg {
+    font-size: 16px;
+    color: ${props => props.theme.colors.secundaryLight};
+  }
+
+  ${({ isChecked }) => isChecked && css`
+    svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+  `}
+`
+
+export const FeaturedWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`

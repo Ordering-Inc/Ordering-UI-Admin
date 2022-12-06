@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useUtils, useLanguage, BusinessDetails as BusinessController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Switch } from '../../../styles'
-import { StarFill } from 'react-bootstrap-icons'
+import { StarFill, CheckSquareFill, Square } from 'react-bootstrap-icons'
 
 import {
   SingleBusinessContainer,
@@ -17,7 +17,10 @@ import {
   BusinessLogo,
   BusinessContent,
   BusinessActionContainer,
-  BusinessHeaderContent
+  BusinessHeaderContent,
+  BusinessIdWrapper,
+  CheckBoxWrapper,
+  FeaturedWrapper
 } from './styles'
 
 const SingleBusinessUI = (props) => {
@@ -28,7 +31,9 @@ const SingleBusinessUI = (props) => {
     businessState,
     handleChangeActiveBusiness,
     handleOpenBusinessDetails,
-    detailsBusinessId
+    detailsBusinessId,
+    businessIds,
+    handleChangeBusinessIds
   } = props
 
   const [, t] = useLanguage()
@@ -36,7 +41,10 @@ const SingleBusinessUI = (props) => {
   const theme = useTheme()
 
   const handleClickBusiness = (e) => {
-    const isInvalid = e.target.closest('.business_enable_control') || e.target.closest('.business_actions')
+    const isInvalid = e.target.closest('.business_enable_control') ||
+      e.target.closest('.business_actions') ||
+      e.target.closest('.business-id') ||
+      e.target.closest('.featured')
     if (isInvalid) return
     handleOpenBusinessDetails(businessState?.business)
   }
@@ -48,8 +56,11 @@ const SingleBusinessUI = (props) => {
           {(businessState?.loading || isSkeleton) ? (
             <SingleBusinessContainer>
               <tr>
-                <td className='business-id'>
-                  <Skeleton width={30} />
+                <td>
+                  <BusinessIdWrapper>
+                    <Skeleton width={18} height={18} />
+                    <Skeleton width={40} style={{ margin: '0px 5px' }} />
+                  </BusinessIdWrapper>
                 </td>
                 {allowColumns?.business && (
                   <td className='business'>
@@ -90,8 +101,21 @@ const SingleBusinessUI = (props) => {
               onClick={(e) => handleClickBusiness(e)}
             >
               <tr>
-                <td className='business-id'>
-                  {businessState?.business?.id}
+                <td>
+                  <BusinessIdWrapper>
+                    <CheckBoxWrapper
+                      className='business-id'
+                      isChecked={businessIds.includes(businessState?.business?.id)}
+                      onClick={() => handleChangeBusinessIds(businessState?.business?.id)}
+                    >
+                      {(!businessState?.loading && businessIds.includes(businessState?.business?.id)) ? (
+                        <CheckSquareFill />
+                      ) : (
+                        <Square />
+                      )}
+                    </CheckBoxWrapper>
+                    {businessState?.business?.id}
+                  </BusinessIdWrapper>
                 </td>
                 {allowColumns?.business && (
                   <td className='business'>
@@ -108,11 +132,12 @@ const SingleBusinessUI = (props) => {
                 )}
                 {allowColumns?.featured && (
                   <td>
-                    <InfoBlock>
-                      {businessState?.business?.featured && (
-                        <span>{t('FEATURE', 'Featured')}</span>
-                      )}
-                    </InfoBlock>
+                    <FeaturedWrapper className='featured'>
+                      <Switch
+                        defaultChecked={businessState?.business?.featured}
+                        onChange={(enabled) => handleChangeActiveBusiness(enabled, true)}
+                      />
+                    </FeaturedWrapper>
                   </td>
                 )}
                 {allowColumns?.ratings && (
