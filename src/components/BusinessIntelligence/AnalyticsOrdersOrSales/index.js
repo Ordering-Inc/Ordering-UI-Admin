@@ -20,7 +20,8 @@ export const AnalyticsOrdersOrSales = (props) => {
   const {
     isOrders,
     chartDataList,
-    filterList
+    filterList,
+    countryCode
   } = props
 
   const [, t] = useLanguage()
@@ -182,7 +183,10 @@ export const AnalyticsOrdersOrSales = (props) => {
     for (const data of chartDataList?.data) {
       sales += data.sales
     }
-    return parsePrice(sales.toFixed(2), { separator: '.' })
+    const totalSales = countryCode
+      ? parsePrice(sales.toFixed(2), { separator: '.' })
+      : sales.toFixed(2)
+    return totalSales
   }
 
   const downloadCSV = () => {

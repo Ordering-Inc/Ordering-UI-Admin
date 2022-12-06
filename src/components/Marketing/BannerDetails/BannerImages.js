@@ -4,29 +4,35 @@ import {
   DragAndDrop,
   useLanguage
 } from 'ordering-components-admin'
-import { CardImage, PlusCircle } from 'react-bootstrap-icons'
-import { Alert, Modal, ImageCrop } from '../../Shared'
+import { CardImage, PlusCircle, XCircleFill } from 'react-bootstrap-icons'
+import { Alert, Modal, ImageCrop, Confirm } from '../../Shared'
 import { bytesConverter } from '../../../utils'
 import {
   ImagesContainer,
   BannerImage,
-  UploadImageIconContainer
+  UploadImageIconContainer,
+  DeleteButtonWrapper
 } from './styles'
 
 export const BannerImages = (props) => {
   const {
+    aspectRatio,
     bannerItemsState,
     changesState,
     handleChangeItem,
     handleAddBannerItem,
-    handleUpdateBannerItem
+    handleUpdateBannerItem,
+    handleDeleteBannerItem
   } = props
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
-  const handleClickImage = (idName) => {
+  const handleClickImage = (idName, e) => {
+    const isInvalid = e.target.closest('.banner-delete')
+    if (isInvalid) return
     document.getElementById(idName).click()
   }
 
@@ -68,6 +74,17 @@ export const BannerImages = (props) => {
     setCropState({ name: null, data: null, open: false })
   }
 
+  const onDeleteImage = (id) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('IMAGE', 'Image')),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteBannerItem(id)
+      }
+    })
+  }
+
   useEffect(() => {
     if (!changesState?.error) return
     setAlertState({
@@ -81,8 +98,14 @@ export const BannerImages = (props) => {
       {bannerItemsState.images.map(image => (
         <BannerImage
           key={image.id}
-          onClick={() => handleClickImage(`banner_image_${image.id}`)}
+          onClick={e => handleClickImage(`banner_image_${image.id}`, e)}
         >
+          <DeleteButtonWrapper
+            className='banner-delete'
+            onClick={() => onDeleteImage(image.id)}
+          >
+            <XCircleFill />
+          </DeleteButtonWrapper>
           <ExamineClick
             onFiles={files => handleFiles(files, image.id)}
             childId={`banner_image_${image.id}`}
@@ -108,7 +131,7 @@ export const BannerImages = (props) => {
         </BannerImage>
       ))}
       <BannerImage
-        onClick={() => handleClickImage('banner_image_add')}
+        onClick={e => handleClickImage('banner_image_add', e)}
       >
         <ExamineClick
           onFiles={files => handleFiles(files, null)}
@@ -141,6 +164,16 @@ export const BannerImages = (props) => {
         onAccept={() => setAlertState({ open: false, content: [] })}
         closeOnBackdrop={false}
       />
+      <Confirm
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
       <Modal
         width='700px'
         height='80vh'
@@ -151,6 +184,7 @@ export const BannerImages = (props) => {
         className='ordering-img-crop'
       >
         <ImageCrop
+          aspectRatio={aspectRatio}
           photo={cropState?.data}
           handleChangePhoto={handleChangePhoto}
         />

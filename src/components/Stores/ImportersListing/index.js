@@ -140,6 +140,7 @@ export const ImportersListingUI = (props) => {
             handleCloseChildForm={() => setImportJobFormMoveDistance(0)}
             openMappingDetails={openMappingDetails}
             setOpenMappingDetails={setOpenMappingDetails}
+            handleSuccessUpdateImporter={handleSuccessUpdateImporter}
             onClose={() => {
               setOpenImportCsv(false)
               setImportJobFormMoveDistance(0)
