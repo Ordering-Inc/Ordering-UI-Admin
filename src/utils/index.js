@@ -293,7 +293,7 @@ export const checkSiteUrl = (url, fallback) => {
 }
 
 /**
- * Function to insert intercome script dynamically
+ * Function to insert intercom script dynamically
  */
 export const insertIntercom = () => {
   if (document.getElementById('intercom-sdk')) return
@@ -307,7 +307,7 @@ export const insertIntercom = () => {
 }
 
 /**
- * Function to remove intercome script dynamically
+ * Function to remove intercom script dynamically
  */
 export const removeIntercom = () => {
   const intercomSDK = document.getElementById('intercom-sdk')
