@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.removeIntercom = exports.orderRejectCommentList = exports.optimizeImage = exports.insertIntercom = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -397,11 +397,42 @@ var checkSiteUrl = function checkSiteUrl(url, fallback) {
 };
 
 /**
+ * Function to insert intercom script dynamically
+ */
+exports.checkSiteUrl = checkSiteUrl;
+var insertIntercom = function insertIntercom() {
+  if (document.getElementById('intercom-sdk')) return;
+  var script = document.createElement('script');
+  script.async = true;
+  script.id = 'intercom-sdk';
+  script.defer = true;
+  script.innerHTML = 'window.intercomSettings = { api_base: \'https://api-iam.intercom.io\', app_id: \'o912y2nt\' };(function () { var w = window; var ic = w.Intercom; if (typeof ic === \'function\') { ic(\'reattach_activator\'); ic(\'update\', w.intercomSettings) } else { var d = document; var i = function () { i.c(arguments) }; i.q = []; i.c = function (args) { i.q.push(args) }; w.Intercom = i; var l = function () { var s = d.createElement(\'script\'); s.type = \'text/javascript\'; s.async = true; s.src = \'https://widget.intercom.io/widget/o912y2nt\'; var x = d.getElementsByTagName(\'script\')[0]; x.parentNode.insertBefore(s, x) }; if (document.readyState === \'complete\') { l() } else if (w.attachEvent) { w.attachEvent(\'onload\', l) } else { w.addEventListener(\'load\', l, false) } } })();';
+  document.body.appendChild(script);
+};
+
+/**
+ * Function to remove intercom script dynamically
+ */
+exports.insertIntercom = insertIntercom;
+var removeIntercom = function removeIntercom() {
+  var intercomSDK = document.getElementById('intercom-sdk');
+  var intercomContainer = document.getElementById('intercom-container');
+  var intercomFrame = document.getElementById('intercom-frame');
+  var intercomLightWeight = document.querySelector('.intercom-lightweight-app');
+  intercomSDK && document.body.removeChild(intercomSDK);
+  intercomContainer && document.body.removeChild(intercomContainer);
+  intercomFrame && document.body.removeChild(intercomFrame);
+  intercomLightWeight && document.body.removeChild(intercomLightWeight);
+  window.Intercom = null;
+  window.intercomSettings = null;
+};
+
+/**
  * function to manage review comment list
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
  */
-exports.checkSiteUrl = checkSiteUrl;
+exports.removeIntercom = removeIntercom;
 var reviewCommentList = function reviewCommentList(type) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),

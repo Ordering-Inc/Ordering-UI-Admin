@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
-  var _themeValues$website_, _themeValues$website_2, _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$images, _themeValues$images$c, _themeValues$images$c2, _themeValues$images$c3, _themeValues$images2, _themeValues$images2$, _themeValues$images2$2, _themeValues$images2$3, _themeValues$images3, _themeValues$images3$, _themeValues$images3$2, _themeValues$images3$3, _themeValues$images4, _themeValues$images4$, _themeValues$images4$2, _themeValues$images4$3, _themeValues$images5, _themeValues$images5$, _themeValues$images5$2, _themeValues$images5$3, _themeValues$images6, _themeValues$images6$, _themeValues$images6$2, _themeValues$images6$3, _themeValues$images8, _themeValues$images8$, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _themeValues$theme_se4, _themeValues$theme_se5, _themeValues$theme_se6, _themeValues$theme_se7, _themeValues$theme_se8, _themeValues$theme_se9;
+  var _themeValues$website_, _themeValues$website_2, _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$images, _themeValues$images$c, _themeValues$images$c2, _themeValues$images$c3, _themeValues$images2, _themeValues$images2$, _themeValues$images2$2, _themeValues$images2$3, _themeValues$images3, _themeValues$images3$, _themeValues$images3$2, _themeValues$images3$3, _themeValues$images4, _themeValues$images4$, _themeValues$images4$2, _themeValues$images4$3, _themeValues$images5, _themeValues$images5$, _themeValues$images5$2, _themeValues$images5$3, _themeValues$images6, _themeValues$images6$, _themeValues$images6$2, _themeValues$images6$3, _themeValues$images7, _themeValues$images7$, _themeValues$images7$2, _themeValues$images7$3, _themeValues$images8, _themeValues$images8$, _themeValues$images8$2, _themeValues$images8$3, _themeValues$images9, _themeValues$images9$, _themeValues$images9$2, _themeValues$images9$3, _themeValues$images12, _themeValues$images13, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _themeValues$theme_se4, _themeValues$theme_se5, _themeValues$theme_se6, _themeValues$theme_se7, _themeValues$theme_se8, _themeValues$theme_se9;
   var themeValues = props.themeValues,
     orderingTheme = props.orderingTheme,
     setThemeValues = props.setThemeValues,
@@ -46,7 +46,8 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
   var logoRef = (0, _react.useRef)(null);
-  var backgrooundRef = (0, _react.useRef)(null);
+  var backgroundRef = (0, _react.useRef)(null);
+  var mobileBackgroundRef = (0, _react.useRef)(null);
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -75,7 +76,10 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       logoRef.current.click();
     }
     if (type === 'homepage_background') {
-      backgrooundRef.current.click();
+      backgroundRef.current.click();
+    }
+    if (type === 'homepage_mobile_background') {
+      mobileBackgroundRef.current.click();
     }
   };
   var closeAlert = function closeAlert() {
@@ -271,7 +275,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       return handleFiles(files, 'homepage_background');
     },
     childRef: function childRef(e) {
-      backgrooundRef.current = e;
+      backgroundRef.current = e;
     },
     accept: "image/png, image/jpeg, image/jpg"
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
@@ -286,15 +290,53 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
     bgimage: !!(themeValues !== null && themeValues !== void 0 && (_themeValues$images6 = themeValues.images) !== null && _themeValues$images6 !== void 0 && (_themeValues$images6$ = _themeValues$images6.components) !== null && _themeValues$images6$ !== void 0 && (_themeValues$images6$2 = _themeValues$images6$.homepage_background) !== null && _themeValues$images6$2 !== void 0 && (_themeValues$images6$3 = _themeValues$images6$2.components) !== null && _themeValues$images6$3 !== void 0 && _themeValues$images6$3.image)
-  }, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImgInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('HOMEPAGE_BACKGROUND', 'Homepage background')), /*#__PURE__*/_react.default.createElement("p", null, "1920 x 1280 px"), /*#__PURE__*/_react.default.createElement("p", null, t('FORMAT', 'Format'), ": PNG"))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImgInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('HOMEPAGE_BACKGROUND', 'Homepage background')), /*#__PURE__*/_react.default.createElement("p", null, "1920 x 1280 px"), /*#__PURE__*/_react.default.createElement("p", null, t('FORMAT', 'Format'), ": PNG"))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 100,
+    style: {
+      marginBottom: '15px',
+      width: '100%'
+    }
+  }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 15,
+    count: 3,
+    width: 150,
+    style: {
+      display: 'block',
+      marginBottom: '7px'
+    }
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.ImageFormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.BackgroundImage, {
+    onClick: function onClick() {
+      return handleClickImage('homepage_mobile_background');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
+    onFiles: function onFiles(files) {
+      return handleFiles(files, 'homepage_mobile_background');
+    },
+    childRef: function childRef(e) {
+      mobileBackgroundRef.current = e;
+    },
+    accept: "image/png, image/jpeg, image/jpg"
+  }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
+    onDrop: function onDrop(dataTransfer) {
+      return handleFiles(dataTransfer.files, 'homepage_mobile_background');
+    },
+    accept: "image/png, image/jpeg, image/jpg",
+    disabled: orderingTheme.loading
+  }, (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$images7 = themeValues.images) === null || _themeValues$images7 === void 0 ? void 0 : (_themeValues$images7$ = _themeValues$images7.components) === null || _themeValues$images7$ === void 0 ? void 0 : (_themeValues$images7$2 = _themeValues$images7$.homepage_mobile_background) === null || _themeValues$images7$2 === void 0 ? void 0 : (_themeValues$images7$3 = _themeValues$images7$2.components) === null || _themeValues$images7$3 === void 0 ? void 0 : _themeValues$images7$3.image) && /*#__PURE__*/_react.default.createElement("img", {
+    src: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$images8 = themeValues.images) === null || _themeValues$images8 === void 0 ? void 0 : (_themeValues$images8$ = _themeValues$images8.components) === null || _themeValues$images8$ === void 0 ? void 0 : (_themeValues$images8$2 = _themeValues$images8$.homepage_mobile_background) === null || _themeValues$images8$2 === void 0 ? void 0 : (_themeValues$images8$3 = _themeValues$images8$2.components) === null || _themeValues$images8$3 === void 0 ? void 0 : _themeValues$images8$3.image,
+    alt: "backgrond image",
+    loading: "lazy"
+  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
+    bgimage: !!(themeValues !== null && themeValues !== void 0 && (_themeValues$images9 = themeValues.images) !== null && _themeValues$images9 !== void 0 && (_themeValues$images9$ = _themeValues$images9.components) !== null && _themeValues$images9$ !== void 0 && (_themeValues$images9$2 = _themeValues$images9$.homepage_mobile_background) !== null && _themeValues$images9$2 !== void 0 && (_themeValues$images9$3 = _themeValues$images9$2.components) !== null && _themeValues$images9$3 !== void 0 && _themeValues$images9$3.image)
+  }, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImgInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('HOMEPAGE_MOBILE_BACKGROUND', 'Homepage mobile background')), /*#__PURE__*/_react.default.createElement("p", null, "1440 x 770 px"), /*#__PURE__*/_react.default.createElement("p", null, t('FORMAT', 'Format'), ": PNG"))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 200,
     height: 20
   }) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
     onClick: function onClick() {
-      var _themeValues$images7, _themeValues$images7$;
-      return handleChangeValue(!(themeValues !== null && themeValues !== void 0 && (_themeValues$images7 = themeValues.images) !== null && _themeValues$images7 !== void 0 && (_themeValues$images7$ = _themeValues$images7.components) !== null && _themeValues$images7$ !== void 0 && _themeValues$images7$.homepage_image_fullscreen), 'images', 'homepage_image_fullscreen');
+      var _themeValues$images10, _themeValues$images11;
+      return handleChangeValue(!(themeValues !== null && themeValues !== void 0 && (_themeValues$images10 = themeValues.images) !== null && _themeValues$images10 !== void 0 && (_themeValues$images11 = _themeValues$images10.components) !== null && _themeValues$images11 !== void 0 && _themeValues$images11.homepage_image_fullscreen), 'images', 'homepage_image_fullscreen');
     }
-  }, themeValues !== null && themeValues !== void 0 && (_themeValues$images8 = themeValues.images) !== null && _themeValues$images8 !== void 0 && (_themeValues$images8$ = _themeValues$images8.components) !== null && _themeValues$images8$ !== void 0 && _themeValues$images8$.homepage_image_fullscreen ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
+  }, themeValues !== null && themeValues !== void 0 && (_themeValues$images12 = themeValues.images) !== null && _themeValues$images12 !== void 0 && (_themeValues$images13 = _themeValues$images12.components) !== null && _themeValues$images13 !== void 0 && _themeValues$images13.homepage_image_fullscreen ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
     className: "active"
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage  image fullscreen'))))), !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('THEME_SETTINGS', 'Theme Settings')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement(_styles2.ColorPickerWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('PRIMARY_COLOR_BUTTONS', 'Primary Color for Buttons')), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
     defaultColor: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$theme_se = themeValues.theme_settings) === null || _themeValues$theme_se === void 0 ? void 0 : (_themeValues$theme_se2 = _themeValues$theme_se.components) === null || _themeValues$theme_se2 === void 0 ? void 0 : (_themeValues$theme_se3 = _themeValues$theme_se2.style) === null || _themeValues$theme_se3 === void 0 ? void 0 : _themeValues$theme_se3.primary_btn_color,

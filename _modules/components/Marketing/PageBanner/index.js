@@ -41,7 +41,8 @@ var PageBannersUI = function PageBannersUI(props) {
     handleSuccessAdd = props.handleSuccessAdd,
     defaultPosition = props.defaultPosition,
     handleSuccessDelete = props.handleSuccessDelete,
-    aspectRatio = props.aspectRatio;
+    aspectRatio = props.aspectRatio,
+    isSearhShow = props.isSearhShow;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -61,6 +62,10 @@ var PageBannersUI = function PageBannersUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     alertState = _useState6[0],
     setAlertState = _useState6[1];
+  var _useState7 = (0, _react.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    searchValue = _useState8[0],
+    setSearchValue = _useState8[1];
   var handleOpenBannerItemsDetail = function handleOpenBannerItemsDetail(e, banner) {
     var isInvalid = e.target.closest('.banner-enabled');
     if (isInvalid) return;
@@ -80,6 +85,9 @@ var PageBannersUI = function PageBannersUI(props) {
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState]);
+  (0, _react.useEffect)(function () {
+    setSearchValue('');
+  }, [defaultPosition]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, bannerInfo))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
@@ -88,7 +96,14 @@ var PageBannersUI = function PageBannersUI(props) {
     onClick: function onClick(e) {
       return handleOpenBannerItemsDetail(e, {});
     }
-  }, t('ADD_BANNER', 'Add banner'))), /*#__PURE__*/_react.default.createElement(_styles2.BannersHeader, null, t('BANNERS', 'Banners')), /*#__PURE__*/_react.default.createElement(_styles2.BannersListWrapper, null, bannersListState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  }, t('ADD_BANNER', 'Add banner'))), isSearhShow && /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+    search: searchValue,
+    isCustomLayout: true,
+    onSearch: function onSearch(value) {
+      return setSearchValue(value);
+    },
+    placeholder: t('SEARCH', 'Search')
+  })), /*#__PURE__*/_react.default.createElement(_styles2.BannersHeader, null, t('BANNERS', 'Banners')), /*#__PURE__*/_react.default.createElement(_styles2.BannersListWrapper, null, bannersListState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BannerItemWrapper, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles2.BannerTitleConatiner, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -98,7 +113,9 @@ var PageBannersUI = function PageBannersUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 20
     })));
-  }) : bannersListState.banners.map(function (banner) {
+  }) : bannersListState.banners.filter(function (item) {
+    return item.name.toUpperCase().includes(searchValue.toUpperCase());
+  }).map(function (banner) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BannerItemWrapper, {
       key: banner.id,
       active: (selectedBanner === null || selectedBanner === void 0 ? void 0 : selectedBanner.id) === banner.id,

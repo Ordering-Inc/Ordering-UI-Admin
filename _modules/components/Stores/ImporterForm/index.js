@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ImporterFormUI = function ImporterFormUI(props) {
-  var _importypeOptions$fin, _editState$mapping$ex, _editState$mapping;
+  var _importypeOptions$fin;
   var isAdvanedOptions = props.isAdvanedOptions,
     formState = props.formState,
     handleChangeInput = props.handleChangeInput,
@@ -306,7 +306,6 @@ var ImporterFormUI = function ImporterFormUI(props) {
       }
     },
     placeholder: "0",
-    defaultValue: (_editState$mapping$ex = editState === null || editState === void 0 ? void 0 : (_editState$mapping = editState.mapping) === null || _editState$mapping === void 0 ? void 0 : _editState$mapping.external_parent_category_id) !== null && _editState$mapping$ex !== void 0 ? _editState$mapping$ex : '',
     onChange: handleChangeMappingInput,
     disabled: formState.loading,
     autoComplete: "off",
