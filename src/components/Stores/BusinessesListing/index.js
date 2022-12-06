@@ -18,9 +18,11 @@ import {
   BusinessListingContainer,
   ViewContainer,
   WrapperView,
-  ViewMethodButton
+  ViewMethodButton,
+  ButtonGroup
 } from './styles'
 import { BusinessSync } from '../BusinessSync'
+import { BusinessDelete } from '../BusinessDelete'
 
 const BusinessesListingUI = (props) => {
   const {
@@ -37,7 +39,12 @@ const BusinessesListingUI = (props) => {
     loadBusinesses,
     onSearch,
     onBusinessRedirect,
-    getPageBusinesses
+    getPageBusinesses,
+    businessIds,
+    handleChangeBusinessIds,
+    handleEnableAllBusiness,
+    handleDeleteMultiBusinesses,
+    setBusinessIds
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -170,12 +177,19 @@ const BusinessesListingUI = (props) => {
             </ViewMethodButton>
           </WrapperView>
         </ViewContainer>
-        <BusinessTypeFilter
-          businessTypes={props.businessTypes}
-          defaultBusinessType={props.defaultBusinessType}
-          handleChangeBusinessType={handleChangeBusinessType}
-          setBusinessTypes={setBusinessTypes}
-        />
+        <ButtonGroup isSelect={businessIds?.length > 0}>
+          <BusinessTypeFilter
+            businessTypes={props.businessTypes}
+            defaultBusinessType={props.defaultBusinessType}
+            handleChangeBusinessType={handleChangeBusinessType}
+            setBusinessTypes={setBusinessTypes}
+          />
+          {businessIds?.length > 0 && (
+            <BusinessDelete
+              handleDeleteMultiBusinesses={handleDeleteMultiBusinesses}
+            />
+          )}
+        </ButtonGroup>
         <BusinessesList
           viewMethod={viewMethod}
           businessList={businessList}
@@ -189,6 +203,11 @@ const BusinessesListingUI = (props) => {
           handleOpenBusinessDetails={handleOpenBusinessDetails}
           handleOpenAddBusiness={handleOpenAddBusiness}
           isTutorialMode={isTutorialMode}
+          businessIds={businessIds}
+          setBusinessIds={setBusinessIds}
+          handleChangeBusinessIds={handleChangeBusinessIds}
+          handleEnableAllBusiness={handleEnableAllBusiness}
+          selectedBusinessActiveState={selectedBusinessActiveState}
         />
       </BusinessListingContainer>
       {openBusinessDetails && (

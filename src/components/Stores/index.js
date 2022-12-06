@@ -9,6 +9,7 @@ import { BusinessCustomFields } from './BusinessCustomFields'
 import { BusinessDeliveryPickupMore } from './BusinessDeliveryPickupMore'
 import { BusinessDetail } from './BusinessDetail'
 import { BusinessDetails } from './BusinessDetails'
+import { BusinessDelete } from './BusinessDelete'
 import { BusinessFrontLayout } from './BusinessFrontLayout'
 import { BusinessImages } from './BusinessImages'
 import { BusinessInformation } from './BusinessInformation'
@@ -111,6 +112,7 @@ export {
   BusinessDeliveryPickupMore,
   BusinessDetail,
   BusinessDetails,
+  BusinessDelete,
   BusinessFrontLayout,
   BusinessImages,
   BusinessInformation,
