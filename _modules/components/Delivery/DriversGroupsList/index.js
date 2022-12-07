@@ -34,6 +34,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
     handleOpenDetails = props.handleOpenDetails,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     selectedGroupList = props.selectedGroupList,
+    isFromStore = props.isFromStore,
     handleSelectGroup = props.handleSelectGroup,
     handleAllSelectGroup = props.handleAllSelectGroup;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -91,7 +92,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
   var handleClickDriverGroup = function handleClickDriverGroup(e, group) {
     var isInvalid = e.target.closest('.group-checkbox') || e.target.closest('.group-enabled');
     if (isInvalid) return;
-    handleOpenDetails(group);
+    !isFromStore && handleOpenDetails(group);
   };
   var getTypeTag = function getTypeTag(type) {
     switch (parseInt(type)) {

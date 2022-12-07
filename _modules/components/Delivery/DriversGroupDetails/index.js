@@ -17,6 +17,8 @@ var _DriversGroupBusinesses = require("../DriversGroupBusinesses");
 var _DriversGroupPaymethods = require("../DriversGroupPaymethods");
 var _DriversGroupLogistics = require("../DriversGroupLogistics");
 var _DriversGroupLogs = require("../DriversGroupLogs");
+var _DriversGroupDeliveryDetails = require("../DriversGroupDeliveryDetails");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -31,17 +33,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
-  var _configState$configs, _configState$configs$, _driversGroupState$dr3, _driversGroupState$dr4, _driversGroupState$dr5;
+  var _configState$configs, _configState$configs$, _driversGroupState$dr3, _driversGroupState$dr4, _driversGroupState$dr5, _driversGroupState$dr6;
   var driversGroupState = props.driversGroupState,
     actionState = props.actionState,
     handleParentSidebarMove = props.handleParentSidebarMove,
     handleDeleteDriversGroup = props.handleDeleteDriversGroup,
     handleNextTour = props.handleNextTour,
-    handleUpdateDriversGroup = props.handleUpdateDriversGroup;
+    handleUpdateDriversGroup = props.handleUpdateDriversGroup,
+    setIsExtendExtraOpen = props.setIsExtendExtraOpen;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -73,6 +78,10 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     alertState = _useState10[0],
     setAlertState = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isOpenDetails = _useState12[0],
+    setIsOpenDetails = _useState12[1];
   (0, _react.useEffect)(function () {
     var _driversGroupMenus = !driversGroupState.driversGroup ? [{
       key: 'general',
@@ -80,6 +89,9 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     }, {
       key: 'businesses',
       value: t('BUSINESSES', 'Businesses')
+    }, {
+      key: 'delivery_zones',
+      value: t('DELIVERY_ZONES', 'Delivery Zones')
     }] : useAdvanced && autoAssignType !== 'basic' ? [{
       key: 'general',
       value: t('GENERAL', 'General')
@@ -95,6 +107,9 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     }, {
       key: 'logs',
       value: t('LOGS', 'Logs')
+    }, {
+      key: 'delivery_zones',
+      value: t('DELIVERY_ZONES', 'Delivery Zones')
     }] : [{
       key: 'general',
       value: t('GENERAL', 'General')
@@ -107,10 +122,13 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     }, {
       key: 'logs',
       value: t('LOGS', 'Logs')
+    }, {
+      key: 'delivery_zones',
+      value: t('DELIVERY_ZONES', 'Delivery Zones')
     }];
     setDriversGroupMenus(_driversGroupMenus);
   }, [useAdvanced]);
-  var onDeleteGroup = function onDeleteGroup(driversGroupId) {
+  var onDeleteGroup = function onDeleteGroup() {
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_DRIVER_GROUP', 'Are you sure to remove this driver group?'),
@@ -122,6 +140,9 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       }
     });
   };
+  (0, _react.useEffect)(function () {
+    if (width > 1000) setIsExtendExtraOpen(false);
+  }, [width]);
   var handleNextClick = function handleNextClick() {
     setShowMenu('businesses');
     handleNextTour();
@@ -132,7 +153,9 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
   }, [driversGroupState.driversGroup]);
   (0, _react.useEffect)(function () {
     handleParentSidebarMove(0);
-  }, [showMenu]);
+    setIsOpenDetails(false);
+    setIsExtendExtraOpen(false);
+  }, [showMenu, (_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.id]);
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
     setAlertState({
@@ -140,8 +163,8 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, driversGroupState.driversGroup ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, (_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.enabled,
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, driversGroupState.driversGroup ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.enabled,
     onChange: function onChange(enabled) {
       return handleUpdateDriversGroup({
         enabled: enabled
@@ -168,8 +191,14 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     setUseAdvanced: setUseAdvanced,
     handleNextClick: handleNextClick
   })), showMenu === 'businesses' && /*#__PURE__*/_react.default.createElement(_DriversGroupBusinesses.DriversGroupBusinesses, props), showMenu === 'paymethods' && /*#__PURE__*/_react.default.createElement(_DriversGroupPaymethods.DriversGroupPaymethods, props), showMenu === 'advanced_logistics' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogistics.DriversGroupLogistics, props), showMenu === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogs.DriversGroupLogs, {
-    driversGroupId: (_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.id
-  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    driversGroupId: (_driversGroupState$dr6 = driversGroupState.driversGroup) === null || _driversGroupState$dr6 === void 0 ? void 0 : _driversGroupState$dr6.id
+  }), showMenu === 'delivery_zones' && /*#__PURE__*/_react.default.createElement(_DriversGroupDeliveryDetails.DriverGroupDeliveryDetails, _extends({}, props, {
+    handleParentSidebarMove: handleParentSidebarMove,
+    drivergroup: driversGroupState.driversGroup,
+    setIsExtendExtraOpen: setIsExtendExtraOpen,
+    setIsOpenDetails: setIsOpenDetails,
+    isOpenDetails: isOpenDetails
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

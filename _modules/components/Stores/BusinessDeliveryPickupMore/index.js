@@ -10,6 +10,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _BusinessDeliveryDetails = require("../BusinessDeliveryDetails");
 var _BusinessPickupDetails = require("../BusinessPickupDetails");
 var _styles = require("./styles");
+var _BusinessDeliveryGroupsDetails = require("../BusinessDeliveryGroupsDetails");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -32,6 +33,9 @@ var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
   }, {
     key: 'pickup',
     content: t('PICKUP', 'Pickup')
+  }, {
+    key: 'driver_delivery_group',
+    content: t('DRIVER_DELIVERY_GROUP', 'Driver Delivery Group')
   }];
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_PICKUP_MORE', 'Delivery, pickup & more')), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, tabs.map(function (tab) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
@@ -41,6 +45,6 @@ var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
         return setSelectedTab(tab.key);
       }
     }, tab.content);
-  })), selectedTab === 'delivery' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryDetails.BusinessDeliveryDetails, props), selectedTab === 'pickup' && /*#__PURE__*/_react.default.createElement(_BusinessPickupDetails.BusinessPickupDetails, props));
+  })), selectedTab === 'delivery' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryDetails.BusinessDeliveryDetails, props), selectedTab === 'pickup' && /*#__PURE__*/_react.default.createElement(_BusinessPickupDetails.BusinessPickupDetails, props), selectedTab === 'driver_delivery_group' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryGroupsDetails.DriversGroupsListingDetails, props));
 };
 exports.BusinessDeliveryPickupMore = BusinessDeliveryPickupMore;

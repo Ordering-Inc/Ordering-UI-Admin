@@ -36,5 +36,5 @@ var FormControl = _styledComponents.default.div(_templateObject7 || (_templateOb
 exports.FormControl = FormControl;
 var Row = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 29px;\n\n  > div {\n    width: 45%;\n  }\n"])));
 exports.Row = Row;
-var KmlButtonWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n"])));
+var KmlButtonWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin: 20px 0px;\n"])));
 exports.KmlButtonWrapper = KmlButtonWrapper;
