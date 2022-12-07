@@ -1,9 +1,10 @@
-import React, { useState, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
-import { NotificationSetting } from '../../Settings/NotificationSetting'
 import { Input, TextArea, Button } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { Alert } from '../../Shared'
+import { SettingsList } from '../../Settings/SettingsList'
 import {
   Container,
   InputWrapper,
@@ -30,17 +31,15 @@ export const CampaignNotification = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [category, setCategory] = useState()
 
   const generalList = [
     'onesignal_user_auth',
     'onesignal_orderingapp_id',
     'onesignal_businessapp_id',
     'onesignal_deliveryapp_id',
-    'driver_close_distance',
     'notification_toast'
   ]
-
-  const category = categoryList?.categories.find(item => item.key === 'notification')
 
   const isEnableConfig = useMemo(() => {
     return category?.configs?.filter(config => generalList.includes(config.key)).every(config => !!config?.value)
@@ -94,6 +93,14 @@ export const CampaignNotification = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (categoryList?.categories?.length > 0) {
+      const selectedCategory = categoryList?.categories.find(item => item.key === 'notification')
+      const configs = selectedCategory?.configs.filter(config => generalList.includes(config.key))
+      setCategory({ ...selectedCategory, configs: configs })
+    }
+  }, [categoryList])
+
   return (
     <>
       {isEnableConfig ? (
@@ -145,8 +152,17 @@ export const CampaignNotification = (props) => {
               {t('NOTIFICATION_SETTINGS_LINK_DESC', 'You need to complete One signal configuration first')}
             </span>
           </Description>
-          {category && (
-            <NotificationSetting
+          {categoryList?.loading && (
+            <>
+              {[...Array(5).keys()].map(i => (
+                <p key={i}>
+                  <Skeleton height={20} />
+                </p>
+              ))}
+            </>
+          )}
+          {!categoryList?.loading && category && (
+            <SettingsList
               {...props}
               category={category}
               isCampaign

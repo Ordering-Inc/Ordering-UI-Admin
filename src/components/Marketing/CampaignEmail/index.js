@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { useLanguage, CampaignEmail as CampaignEmailController } from 'ordering-components-admin'
 import { Input, Button } from '../../../styles'
 import $ from 'jquery'
@@ -11,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { Alert, Modal } from '../../Shared'
 import { InsertImage } from '../../Settings/InsertImage'
 import { InsertLink } from '../../Settings/InsertLink'
-import { EmailSetting } from '../../Settings/EmailSetting'
+import { SettingsList } from '../../Settings/SettingsList'
 import {
   Container,
   InputWrapper,
@@ -49,21 +50,16 @@ const CampaignEmailUI = (props) => {
   const [openModal, setOpenModal] = useState(null)
   const [editorContext, setEditorContext] = useState(null)
   const [emailBody, setEmailBody] = useState(null)
+  const [category, setCategory] = useState()
 
   const generalList = [
-    'email_main_name',
-    'email_reply_name',
-    'email_reply',
-    'email_main',
+    'email_smtp_use_default',
     'email_smtp_host',
-    'email_smtp_port',
     'email_smtp_username',
     'email_smtp_password',
     'email_smtp_encryption',
-    'email_smtp_use_default'
+    'email_smtp_port'
   ]
-
-  const category = categoryList?.categories.find(item => item.key === 'email_configs')
 
   const isEnableConfig = useMemo(() => {
     return category?.configs?.filter(config => generalList.includes(config.key)).every(config => !!config?.value)
@@ -159,6 +155,14 @@ const CampaignEmailUI = (props) => {
     handleChangeContact('body', emailBody)
   }, [emailBody])
 
+  useEffect(() => {
+    if (categoryList?.categories?.length > 0) {
+      const selectedCategory = categoryList?.categories.find(item => item.key === 'email_configs')
+      const configs = selectedCategory?.configs.filter(config => generalList.includes(config.key))
+      setCategory({ ...selectedCategory, configs: configs })
+    }
+  }, [categoryList])
+
   return (
     <>
       {isEnableConfig ? (
@@ -241,8 +245,17 @@ const CampaignEmailUI = (props) => {
               {t('SMTP_SETTINGS_LINK_DESC', 'You need to complete SMTP configuration first')}
             </span>
           </Description>
-          {category && (
-            <EmailSetting
+          {categoryList?.loading && (
+            <>
+              {[...Array(5).keys()].map(i => (
+                <p key={i}>
+                  <Skeleton height={20} />
+                </p>
+              ))}
+            </>
+          )}
+          {!categoryList?.loading && category && (
+            <SettingsList
               {...props}
               category={category}
               isCampaign
