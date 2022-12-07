@@ -16,9 +16,11 @@ var _PluginList = require("../PluginList");
 var _WebhookList = require("../WebhookList");
 var _ApiKeysList = require("../ApiKeysList");
 var _DoordashConnect = require("../DoordashConnect");
-var _styles2 = require("./styles");
 var _styledComponents = require("styled-components");
 var _LalaMoveConnect = require("../LalaMoveConnect");
+var _Deliverect = require("../Deliverect");
+var _ItsaCheckmate = require("../ItsaCheckmate");
+var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -116,7 +118,23 @@ var IntegrationListing = function IntegrationListing(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.lalamove
-  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('CONNECT_WITH_LALAMOVE', 'Connect with lalamove')), /*#__PURE__*/_react.default.createElement("p", null, t('CONNECT_LALAMOVE_DESCRIPTION', 'Send orders directly to your drivers in LalaMove and keep customers happy with their deliveries.')))))), showOption === 'plugins' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('CONNECT_WITH_LALAMOVE', 'Connect with lalamove')), /*#__PURE__*/_react.default.createElement("p", null, t('CONNECT_LALAMOVE_DESCRIPTION', 'Send orders directly to your drivers in LalaMove and keep customers happy with their deliveries.')))), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContainer, {
+    onClick: function onClick() {
+      return handleOpenSetting('deliverect');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.general.deliverect
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('DELIVERECT', 'Deliverect')), /*#__PURE__*/_react.default.createElement("p", null, t('SYNC_DEC_FIRST', 'The easiest way to manage all your online orders.')))), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContainer, {
+    onClick: function onClick() {
+      return handleOpenSetting('itsacheckmate');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.general.ItsaCheckmateLogo
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('ITSACHECKMATE', 'ItsaCheckmate')), /*#__PURE__*/_react.default.createElement("p", {
+    dangerouslySetInnerHTML: {
+      __html: t('ITSACHECKMATE_SUB_HEADER', 'Take control of all your <strong>Ordering Platform Menus</strong> in one place!')
+    }
+  }))))), showOption === 'plugins' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "plugins-integrations",
     defaultSideBarWidth: 600,
     open: showOption === 'plugins',
@@ -142,6 +160,14 @@ var IntegrationListing = function IntegrationListing(props) {
       return handleCloseSettings();
     }
   }), showOption === 'lalamove' && /*#__PURE__*/_react.default.createElement(_LalaMoveConnect.LalaMoveConnect, {
+    onClose: function onClose() {
+      return handleCloseSettings();
+    }
+  }), showOption === 'deliverect' && /*#__PURE__*/_react.default.createElement(_Deliverect.Deliverect, {
+    onClose: function onClose() {
+      return handleCloseSettings();
+    }
+  }), showOption === 'itsacheckmate' && /*#__PURE__*/_react.default.createElement(_ItsaCheckmate.ItsaCheckmate, {
     onClose: function onClose() {
       return handleCloseSettings();
     }
