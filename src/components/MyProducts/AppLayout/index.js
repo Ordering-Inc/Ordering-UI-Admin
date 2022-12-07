@@ -3,7 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton, Button } from '../../../styles'
 import { List as MenuIcon } from 'react-bootstrap-icons'
-import { useTheme } from 'styled-components'
+import { insertIntercom } from '../../../utils'
 import {
   Container,
   HeaderTitleContainer,
@@ -11,16 +11,20 @@ import {
   BoxWrapper,
   AppInfoContainer,
   ImageWrapper,
-  AppStoreLinksWrapper,
   DownloadLink,
-  ButtonWRapper
+  ButtonWRapper,
+  DownLoadWrapper
 } from './styles'
 
 export const AppLayout = (props) => {
-  const { appInfo } = props
+  const { appInfo, isDriver } = props
   const [, t] = useLanguage()
-  const theme = useTheme()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
+  const showMessage = (message) => {
+    insertIntercom()
+    window.Intercom && window.Intercom('showNewMessage', message)
+  }
 
   return (
     <Container>
@@ -40,42 +44,52 @@ export const AppLayout = (props) => {
         <p>{appInfo.description}</p>
         <BoxWrapper>
           <AppInfoContainer>
-            <ImageWrapper>
+            <ImageWrapper isDriver={isDriver}>
               <img src={appInfo.images.live} alt='' />
             </ImageWrapper>
             <h2>{appInfo.live_title}</h2>
+            {appInfo?.downloads && (
+              <DownLoadWrapper>
+                {appInfo.downloads.map(item => (
+                  <img
+                    src={item.icon}
+                    alt=''
+                    key={item.id}
+                    onClick={() => window.open(item.link, '_blank')}
+                  />
+                ))}
+              </DownLoadWrapper>
+            )}
+            {appInfo?.web_url && (
+              <DownloadLink href={appInfo.web_url} target='_blank' isSingle className='download-link'>
+                {appInfo.web_link_title}
+              </DownloadLink>
+            )}
             <p>{appInfo.live_description}</p>
-            {appInfo?.live_purchase_link ? (
+            {appInfo?.purchase_message && (
               <ButtonWRapper>
                 <Button
                   color='primary'
                   borderRadius='8px'
-                  onClick={() => window.open(`${appInfo.live_purchase_link}`, '_blank')}
+                  onClick={() => showMessage(appInfo?.purchase_message)}
                 >
                   {t('PURCHASE_NOW', 'Purchase Now')}
                 </Button>
-              </ButtonWRapper>
-            ) : (
-              <AppStoreLinksWrapper>
-                {appInfo.web_url ? (
-                  <DownloadLink href={appInfo.web_url} target='_blank' isSingle className='download-link'>
-                    {appInfo.web_link_title}
-                  </DownloadLink>
-                ) : (
-                  <>
-                    <DownloadLink href={appInfo.apple_store_link} target='_blank' className='download-link'>
-                      <img src={theme.images.general.appStore} alt='App store' />
-                    </DownloadLink>
-                    <DownloadLink href={appInfo.google_play_link} target='_blank' className='download-link'>
-                      <img src={theme.images.general.googlePlay} alt='Google play' />
-                    </DownloadLink>
-                  </>
+                {appInfo?.demo_book_message && (
+                  <Button
+                    color='primary'
+                    outline
+                    borderRadius='8px'
+                    onClick={() => showMessage(appInfo?.demo_book_message)}
+                  >
+                    {t('BOOK_A_DEMO', 'Book a demo')}
+                  </Button>
                 )}
-              </AppStoreLinksWrapper>
+              </ButtonWRapper>
             )}
           </AppInfoContainer>
           <AppInfoContainer>
-            <ImageWrapper>
+            <ImageWrapper isDriver={isDriver}>
               <img src={appInfo.images.brand} alt='' />
             </ImageWrapper>
             <h2>{appInfo.brand_title}</h2>
@@ -84,7 +98,7 @@ export const AppLayout = (props) => {
               <Button
                 color='primary'
                 borderRadius='8px'
-                onClick={() => window.open(`${appInfo.purchase_link}`, '_blank')}
+                onClick={() => showMessage(appInfo?.purchase_message)}
               >
                 {t('PURCHASE_NOW', 'Purchase Now')}
               </Button>

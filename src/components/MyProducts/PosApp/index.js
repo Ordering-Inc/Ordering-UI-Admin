@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { AppLayout } from '../AppLayout'
+import { removeIntercom } from '../../../utils'
 
 export const PosApp = () => {
   const [, t] = useLanguage()
@@ -16,12 +17,21 @@ export const PosApp = () => {
     },
     live_title: t('FREE_TO_USE', 'Free to use'),
     live_description: t('FREE_TO_USE_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
-    apple_store_link: 'https://apps.apple.com/us/app/ordering-pos-2-0/id1609520468',
-    google_play_link: 'https://play.google.com/store/apps/details?id=com.ordering.posv5&hl=en&gl=US',
     brand_title: t('YOUR_BRANDED_POS', 'Your Branded POS'),
     brand_description: t('POS_BRANDED_DESCRIPTION', 'The POS is delivered in less than five working days, fully branded with your guidelines, and ready to be used on any tablet or device you add it to.'),
-    purchase_link: 'https://www.ordering.co/ordering-sales'
+    demo_book_message: 'I would like to book a Demo about the POS app , can you assist me?',
+    purchase_message: 'I would like to know about the POS app, can you assist me?',
+    downloads: [
+      { id: 1, icon: theme.images.myProducts.appStoreSmall, link: 'https://apps.apple.com/us/app/ordering-pos-2-0/id1609520468' },
+      { id: 2, icon: theme.images.myProducts.playStoreSmall, link: 'https://play.google.com/store/apps/details?id=com.ordering.posv5&hl=en&gl=US' }
+    ]
   }
+
+  useEffect(() => {
+    return () => {
+      removeIntercom()
+    }
+  }, [])
 
   return (
     <AppLayout appInfo={appInfo} />
