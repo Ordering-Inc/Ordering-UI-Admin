@@ -166,6 +166,8 @@ import driverAppFree from './template/assets/images/myProducts/driver-app-free.p
 import driverAppBrand from './template/assets/images/myProducts/driver-app-brand.png'
 import multiStoreCustomerApp from './template/assets/images/myProducts/multi-store-customer-app.png'
 import singleStoreCustomerApp from './template/assets/images/myProducts/single-store-customer-app.png'
+import appStoreSmall from './template/assets/images/myProducts/app-store.png'
+import playStoreSmall from './template/assets/images/myProducts/play-store.png'
 
 import { AutologinParams } from './template/components/AutologinParams'
 
@@ -259,7 +261,9 @@ theme.images = {
     driverAppFree,
     driverAppBrand,
     multiStoreCustomerApp,
-    singleStoreCustomerApp
+    singleStoreCustomerApp,
+    appStoreSmall,
+    playStoreSmall
   },
   icons: {
     ordersList: ordersList,

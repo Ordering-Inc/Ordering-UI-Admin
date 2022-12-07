@@ -329,7 +329,6 @@ export const ImporterFormUI = (props) => {
                         }
                       }}
                       placeholder='0'
-                      defaultValue={editState?.mapping?.external_parent_category_id ?? ''}
                       onChange={handleChangeMappingInput}
                       disabled={formState.loading}
                       autoComplete='off'

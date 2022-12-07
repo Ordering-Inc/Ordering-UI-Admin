@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, AdBannersList as AdBannersListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { SideBar, Alert } from '../../Shared'
+import { SideBar, Alert, SearchBar } from '../../Shared'
 import { Button, Switch, IconButton } from '../../../styles'
 import { ChevronRight, InfoCircle } from 'react-bootstrap-icons'
 import { BannerDetails } from '../BannerDetails'
@@ -16,7 +16,8 @@ import {
   EnableWrapper,
   AddNewBanner,
   InfoWrapper,
-  InfoContent
+  InfoContent,
+  SearchBarWrapper
 } from './styles'
 
 const PageBannersUI = (props) => {
@@ -32,12 +33,14 @@ const PageBannersUI = (props) => {
     handleSuccessAdd,
     defaultPosition,
     handleSuccessDelete,
-    aspectRatio
+    aspectRatio,
+    isSearhShow
   } = props
   const [, t] = useLanguage()
   const [openItemsDetail, setOpenItemsDetail] = useState(false)
   const [selectedBanner, setSelectedBanner] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [], handleOnAccept: null })
+  const [searchValue, setSearchValue] = useState('')
 
   const handleOpenBannerItemsDetail = (e, banner) => {
     const isInvalid = e.target.closest('.banner-enabled')
@@ -60,6 +63,10 @@ const PageBannersUI = (props) => {
       content: actionState?.error
     })
   }, [actionState])
+
+  useEffect(() => {
+    setSearchValue('')
+  }, [defaultPosition])
 
   return (
     <>
@@ -85,6 +92,18 @@ const PageBannersUI = (props) => {
             {t('ADD_BANNER', 'Add banner')}
           </Button>
         </HeaderContainer>
+
+        {isSearhShow && (
+          <SearchBarWrapper>
+            <SearchBar
+              search={searchValue}
+              isCustomLayout
+              onSearch={(value) => setSearchValue(value)}
+              placeholder={t('SEARCH', 'Search')}
+            />
+          </SearchBarWrapper>
+        )}
+
         <BannersHeader>
           {t('BANNERS', 'Banners')}
         </BannersHeader>
@@ -104,7 +123,7 @@ const PageBannersUI = (props) => {
               </BannerItemWrapper>
             ))
           ) : (
-            bannersListState.banners.map(banner => (
+            bannersListState.banners.filter(item => item.name.toUpperCase().includes(searchValue.toUpperCase())).map(banner => (
               <BannerItemWrapper
                 key={banner.id}
                 active={selectedBanner?.id === banner.id}
