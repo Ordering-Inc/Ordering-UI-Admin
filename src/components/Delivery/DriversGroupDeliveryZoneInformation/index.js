@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useConfig, useLanguage, useUtils, ExamineClick, BusinessZoneGoogleMaps } from 'ordering-components-admin'
+import {
+  useConfig, useLanguage, useUtils, ExamineClick, BusinessZoneGoogleMaps as DriverGroupZoneGoogleMaps
+} from 'ordering-components-admin'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { Button, Input } from '../../../styles'
 import { Alert } from '../../Shared'
@@ -15,16 +17,15 @@ import {
   KmlButtonWrapper
 } from './styles'
 
-export const BusinessDeliveryZoneInformation = (props) => {
+export const DriverGroupDeliveryZoneInformation = (props) => {
   const {
-    business,
     zone,
-    businessZones,
+    driverGroupsZones,
     formState,
     handleChangeInput,
     handleChangeFormState,
-    handleUpdateBusinessDeliveryZone,
-    handleAddBusinessDeliveryZone,
+    handleUpdateDriverGroupDeliveryZone,
+    handleAddDriverGroupDeliveryZone,
     handleUploadKmlFiles,
     kmlData
   } = props
@@ -40,13 +41,11 @@ export const BusinessDeliveryZoneInformation = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isShowMap, setIsShowMap] = useState(false)
   const kmlRef = useRef(null)
-  const isMyZone = zone?.businesses?.length ? zone?.pivot?.business_id === parseInt(zone?.business_id) : true
 
   const typeOptions = [
     { value: 1, content: t('CIRCLE', 'Circle') },
     { value: 2, content: t('POLYGON', 'Polygon') },
     { value: 4, content: t('EVERYWHERE', 'Everywhere') },
-    { value: 5, content: t('DISTANCE_BASED', 'Distance based') }
   ]
 
   const googleMapsControls = {
@@ -91,9 +90,9 @@ export const BusinessDeliveryZoneInformation = (props) => {
   }
 
   const onSubmit = () => {
-    if (formState.changes?.data || zoneType === 4) {
-      if (!zone) handleAddBusinessDeliveryZone()
-      else handleUpdateBusinessDeliveryZone()
+    if (formState?.changes?.data || zoneType === 4) {
+      if (!zone) handleAddDriverGroupDeliveryZone()
+      else handleUpdateDriverGroupDeliveryZone()
     } else {
       setAlertState({
         open: true,
@@ -134,19 +133,19 @@ export const BusinessDeliveryZoneInformation = (props) => {
   }, [zone?.id])
 
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (Object?.keys(errors)?.length > 0) {
       setAlertState({
         open: true,
-        content: Object.values(errors).map((error) => error.message)
+        content: Object?.values(errors)?.map((error) => error?.message)
       })
     }
   }, [errors])
 
   useEffect(() => {
-    if (formState.error) {
+    if (formState?.error) {
       setAlertState({
         open: true,
-        content: formState.error
+        content: formState?.error
       })
     }
   }, [formState])
@@ -158,10 +157,9 @@ export const BusinessDeliveryZoneInformation = (props) => {
           <FormControl>
             <label>{t('NAME', 'Name')}</label>
             <Input
-              disabled={!isMyZone}
               placeholder={t('NAME', 'Name')}
               name='name'
-              value={formState.changes?.name ?? zone?.name ?? ''}
+              value={formState?.changes?.name ?? zone?.name ?? ''}
               onChange={handleChangeInput}
               ref={register({
                 required: t('NAME_REQUIRED', 'The name is required.')
@@ -172,8 +170,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
             <label>{t('TYPE', 'Type')}</label>
             <TypeSelectWrapper>
               <Select
-                isDisabled={!isMyZone}
-                defaultValue={parseInt(formState.changes?.type || zoneType)}
+                defaultValue={parseInt(formState?.changes?.type || zoneType)}
                 options={typeOptions}
                 onChange={handleChangeType}
               />
@@ -186,7 +183,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
             <Input
               placeholder='$0.00'
               name='minimum'
-              value={formState.changes?.minimum ?? zone?.minimum ?? ''}
+              value={formState?.changes?.minimum ?? zone?.minimum ?? ''}
               onChange={handleChangeInput}
               ref={register({
                 required: t('MINIMUN_PURCHASED_REQUIRED', 'The minimum purchase is required.')
@@ -198,7 +195,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
             <Input
               placeholder='$0.00'
               name='price'
-              value={formState.changes?.price ?? zone?.price ?? ''}
+              value={formState?.changes?.price ?? zone?.price ?? ''}
               onChange={handleChangeInput}
               ref={register({
                 required: t('DELIVERY_PRICE_REQUIRED', 'The delivery price is required.')
@@ -206,71 +203,38 @@ export const BusinessDeliveryZoneInformation = (props) => {
             />
           </FormControl>
         </Row>
-        {zoneType === 5 &&
-          <Row>
-            <FormControl>
-              <label>{t('DISTANCE_FROM_STORE', 'Distance from store')}</label>
-              <Input
-                disabled={!isMyZone}
-                placeholder={`1 - 99 ${configState?.configs?.distance_unit?.value}`}
-                name='distance'
-                maxLength={2}
-                value={formState.changes?.data?.distance ?? zone?.data?.distance ?? ''}
-                onInput={(e) => {
-                  e.target.value = e.target.value.match("^[1-9]{1,2}$")
-                }}
-                onChange={e => handleChangeInput(e, configState?.configs?.distance_unit?.value)}
-                ref={register({
-                  required: t('DISTANCE_FROM_STORE', 'Distance from store')
-                })}
-              />
-            </FormControl>
-          </Row>
-        }
-        <FormControl>
-          <label>{t('BUSINESS_ADDRESS', 'Business address')}</label>
-          <Input
-            name='address'
-            defaultValue={business?.address}
-            disabled
-          />
-        </FormControl>
         {zoneType !== 4 && isShowMap && (
           configState?.configs?.google_maps_api_key?.value ? (
             <WrapperMap>
-              {zoneType !== 5 &&
-                isMyZone &&
-                <button
-                  type='button'
-                  onClick={() => setClearState(true)}
-                >
-                  {t('CLEAR', 'Clear')}
-                </button>
-              }
-              <BusinessZoneGoogleMaps
-                distance={formState.changes?.data?.distance}
-                disabled={isMyZone}
+              <button
+                type='button'
+                onClick={() => setClearState(true)}
+              >
+                {t('CLEAR', 'Clear')}
+              </button>
+              <DriverGroupZoneGoogleMaps
+                distance={formState?.changes?.data?.distance}
                 apiKey={configState?.configs?.google_maps_api_key?.value}
                 mapControls={googleMapsControls}
-                location={business?.location}
                 clearState={clearState}
                 setClearState={setClearState}
                 type={zoneType}
-                data={formState.changes?.data || zoneData}
+                data={formState?.changes?.data || zoneData}
                 handleData={handleZoneData}
                 fillStyle={fillStyle}
                 infoContentString={infoContentString}
                 greenFillStyle={greenFillStyle}
                 isAddMode={!zone}
-                businessZones={businessZones}
+                businessZones={driverGroupsZones}
                 kmlData={kmlData}
+                isDriverGroup
               />
             </WrapperMap>
           ) : (
             <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
           )
         )}
-        {(!zone && zoneType !== 5) && (
+        {!zone && (
           <KmlButtonWrapper>
             <Button
               color='primary'
@@ -293,7 +257,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
           color='primary'
           borderRadius='8px'
           type='submit'
-          disabled={formState.loading || Object.keys(formState.changes).length === 0}
+          disabled={formState?.loading || Object?.keys(formState?.changes)?.length === 0}
         >
           {
             !zone ? t('ADD', 'Add') : t('SAVE', 'Save')
@@ -302,9 +266,9 @@ export const BusinessDeliveryZoneInformation = (props) => {
       </FormContainer>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
-        content={alertState.content}
+        content={alertState?.content}
         acceptText={t('ACCEPT', 'Accept')}
-        open={alertState.open}
+        open={alertState?.open}
         onClose={() => closeAlert()}
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}

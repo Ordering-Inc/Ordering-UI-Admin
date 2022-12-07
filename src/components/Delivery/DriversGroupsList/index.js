@@ -32,7 +32,7 @@ export const DriversGroupsList = (props) => {
     handleOpenDetails,
     handleUpdateDriversGroup,
     selectedGroupList,
-
+    isFromStore,
     handleSelectGroup,
     handleAllSelectGroup
   } = props
@@ -79,7 +79,7 @@ export const DriversGroupsList = (props) => {
   const handleClickDriverGroup = (e, group) => {
     const isInvalid = e.target.closest('.group-checkbox') || e.target.closest('.group-enabled')
     if (isInvalid) return
-    handleOpenDetails(group)
+    !isFromStore && handleOpenDetails(group)
   }
 
   const getTypeTag = (type) => {

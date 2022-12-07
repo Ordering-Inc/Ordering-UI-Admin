@@ -8,6 +8,7 @@ import {
   TabsContainer,
   Tab
 } from './styles'
+import { DriversGroupsListingDetails } from '../BusinessDeliveryGroupsDetails'
 
 export const BusinessDeliveryPickupMore = (props) => {
   const [, t] = useLanguage()
@@ -15,7 +16,8 @@ export const BusinessDeliveryPickupMore = (props) => {
 
   const tabs = [
     { key: 'delivery', content: t('DELIVERY', 'Delivery') },
-    { key: 'pickup', content: t('PICKUP', 'Pickup') }
+    { key: 'pickup', content: t('PICKUP', 'Pickup') },
+    { key: 'driver_delivery_group', content: t('DRIVER_DELIVERY_GROUP', 'Driver Delivery Group') }
   ]
 
   return (
@@ -37,6 +39,9 @@ export const BusinessDeliveryPickupMore = (props) => {
       )}
       {selectedTab === 'pickup' && (
         <BusinessPickupDetails {...props} />
+      )}
+      {selectedTab === 'driver_delivery_group' && (
+        <DriversGroupsListingDetails {...props} />
       )}
     </Container>
   )
