@@ -30,7 +30,6 @@ const BannerDetailsUI = (props) => {
     sitesState,
     handleUpdateClick,
     handleAddBanner,
-    defaultPosition,
     handleChangeItem,
     handleDeleteBanner
   } = props
@@ -98,7 +97,6 @@ const BannerDetailsUI = (props) => {
           changesState={changesState}
           handleChangeItem={handleChangeItem}
           handleAddBanner={handleAddBanner}
-          defaultPosition={defaultPosition}
         />
       ) : (
         <>

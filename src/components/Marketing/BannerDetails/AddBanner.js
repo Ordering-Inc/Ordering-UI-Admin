@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Button, Input } from '../../../styles'
 import {
@@ -10,15 +10,10 @@ export const AddBanner = (props) => {
   const {
     changesState,
     handleChangeItem,
-    handleAddBanner,
-    defaultPosition
+    handleAddBanner
   } = props
 
   const [, t] = useLanguage()
-
-  useEffect(() => {
-    handleChangeItem({ position: defaultPosition })
-  }, [])
 
   return (
     <AddBannerContainer>
