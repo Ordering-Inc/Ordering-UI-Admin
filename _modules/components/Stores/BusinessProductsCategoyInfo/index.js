@@ -316,12 +316,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     name: "description",
     value: (formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.description) || '',
     onChange: handleChangeInput,
-    autoComplete: "off",
-    onKeyPress: function onKeyPress(e) {
-      if (e.which === 32) {
-        e.preventDefault();
-      }
-    }
+    autoComplete: "off"
   })), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "slug",
     placeholder: t('SLUG', 'Slug'),
