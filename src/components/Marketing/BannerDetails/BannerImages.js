@@ -26,6 +26,7 @@ export const BannerImages = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [inputRef, setInputRef] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -61,6 +62,8 @@ export const BannerImages = (props) => {
         setCropState({ name: 'image', data: reader.result, open: true, id: itemId })
       }
       reader.onerror = error => console.log(error)
+
+      if (!itemId && inputRef?.value) inputRef.value = null
     }
   }
 
@@ -138,6 +141,7 @@ export const BannerImages = (props) => {
           childId='banner_image_add'
           accept='image/png, image/jpeg, image/jpg'
           disabled={changesState.loading}
+          childRef={e => setInputRef(e)}
         >
           <DragAndDrop
             onDrop={dataTransfer => handleFiles(dataTransfer.files, null)}
