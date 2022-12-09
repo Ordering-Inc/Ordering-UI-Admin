@@ -236,9 +236,9 @@ export const BusinessProductsCategoyInfo = (props) => {
               ? (<SkeletonImgWrapper><Skeleton /></SkeletonImgWrapper>)
               : ((!formState.changes?.header || formState.result?.result === 'Network Error' || formState.result.error)
                 ? category?.header &&
-                  (<img src={category?.header} alt='header image' loading='lazy' />)
+                (<img src={category?.header} alt='header image' loading='lazy' />)
                 : formState?.changes?.header &&
-                  <img src={formState?.changes?.header} alt='header image' loading='lazy' />
+                <img src={formState?.changes?.header} alt='header image' loading='lazy' />
               )}
             <UploadImageIconContainer>
               <UploadImageIcon>
@@ -267,9 +267,9 @@ export const BusinessProductsCategoyInfo = (props) => {
               ? (<SkeletonImgWrapper><Skeleton /></SkeletonImgWrapper>)
               : ((!formState.changes?.image || formState.result?.result === 'Network Error' || formState.result.error)
                 ? category?.image &&
-                  (<img src={category?.image} alt='logo image' loading='lazy' />)
+                (<img src={category?.image} alt='logo image' loading='lazy' />)
                 : formState?.changes?.image &&
-                  <img src={formState?.changes?.image} alt='logo image' loading='lazy' />
+                <img src={formState?.changes?.image} alt='logo image' loading='lazy' />
               )}
             <UploadImageIconContainer small>
               <UploadImageIcon small>
@@ -315,9 +315,6 @@ export const BusinessProductsCategoyInfo = (props) => {
           value={formState?.changes?.description || ''}
           onChange={handleChangeInput}
           autoComplete='off'
-          onKeyPress={e => {
-            if (e.which === 32) { e.preventDefault() }
-          }}
         />
       </CategoryNameWrapper>
       {!isAddMode && (
