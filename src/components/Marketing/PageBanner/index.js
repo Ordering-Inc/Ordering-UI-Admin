@@ -66,6 +66,7 @@ const PageBannersUI = (props) => {
 
   useEffect(() => {
     setSearchValue('')
+    handleCloseDetail()
   }, [defaultPosition])
 
   return (
