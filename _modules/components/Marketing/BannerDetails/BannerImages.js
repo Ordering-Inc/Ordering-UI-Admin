@@ -34,29 +34,33 @@ var BannerImages = function BannerImages(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)({
+  var _useState = (0, _react.useState)(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    inputRef = _useState2[0],
+    setInputRef = _useState2[1];
+  var _useState3 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState2 = _slicedToArray(_useState, 2),
-    alertState = _useState2[0],
-    setAlertState = _useState2[1];
-  var _useState3 = (0, _react.useState)({
+    _useState4 = _slicedToArray(_useState3, 2),
+    alertState = _useState4[0],
+    setAlertState = _useState4[1];
+  var _useState5 = (0, _react.useState)({
       name: null,
       data: null,
       open: false
     }),
-    _useState4 = _slicedToArray(_useState3, 2),
-    cropState = _useState4[0],
-    setCropState = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+    _useState6 = _slicedToArray(_useState5, 2),
+    cropState = _useState6[0],
+    setCropState = _useState6[1];
+  var _useState7 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    confirm = _useState6[0],
-    setConfirm = _useState6[1];
+    _useState8 = _slicedToArray(_useState7, 2),
+    confirm = _useState8[0],
+    setConfirm = _useState8[1];
   var handleClickImage = function handleClickImage(idName, e) {
     var isInvalid = e.target.closest('.banner-delete');
     if (isInvalid) return;
@@ -93,6 +97,7 @@ var BannerImages = function BannerImages(props) {
       reader.onerror = function (error) {
         return console.log(error);
       };
+      if (!itemId && inputRef !== null && inputRef !== void 0 && inputRef.value) inputRef.value = null;
     }
   };
   var handleChangePhoto = function handleChangePhoto(croppedImg) {
@@ -174,7 +179,10 @@ var BannerImages = function BannerImages(props) {
     },
     childId: "banner_image_add",
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: changesState.loading
+    disabled: changesState.loading,
+    childRef: function childRef(e) {
+      return setInputRef(e);
+    }
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DragAndDrop, {
     onDrop: function onDrop(dataTransfer) {
       return handleFiles(dataTransfer.files, null);

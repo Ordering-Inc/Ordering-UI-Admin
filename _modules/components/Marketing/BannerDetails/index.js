@@ -38,7 +38,6 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
     sitesState = props.sitesState,
     handleUpdateClick = props.handleUpdateClick,
     handleAddBanner = props.handleAddBanner,
-    defaultPosition = props.defaultPosition,
     handleChangeItem = props.handleChangeItem,
     handleDeleteBanner = props.handleDeleteBanner;
   var theme = (0, _styledComponents.useTheme)();
@@ -109,8 +108,7 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
   }, t('DELETE', 'Delete')))))), isAddMode ? /*#__PURE__*/_react.default.createElement(_AddBanner.AddBanner, {
     changesState: changesState,
     handleChangeItem: handleChangeItem,
-    handleAddBanner: handleAddBanner,
-    defaultPosition: defaultPosition
+    handleAddBanner: handleAddBanner
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TabsConatiner, null, tabOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: option.key,

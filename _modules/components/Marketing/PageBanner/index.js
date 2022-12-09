@@ -87,6 +87,7 @@ var PageBannersUI = function PageBannersUI(props) {
   }, [actionState]);
   (0, _react.useEffect)(function () {
     setSearchValue('');
+    handleCloseDetail();
   }, [defaultPosition]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary"
