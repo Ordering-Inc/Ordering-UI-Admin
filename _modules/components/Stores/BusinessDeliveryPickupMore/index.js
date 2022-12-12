@@ -20,6 +20,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
+  var setIsExtendExtraOpen = props.setIsExtendExtraOpen;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -37,6 +38,9 @@ var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
     key: 'driver_delivery_group',
     content: t('DRIVER_DELIVERY_GROUP', 'Driver Delivery Group')
   }];
+  (0, _react.useEffect)(function () {
+    setIsExtendExtraOpen(false);
+  }, [selectedTab]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_PICKUP_MORE', 'Delivery, pickup & more')), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, tabs.map(function (tab) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: tab.key,

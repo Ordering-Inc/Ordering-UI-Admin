@@ -26,7 +26,7 @@ var SettingItemContainer = _styledComponents.default.div(_templateObject8 || (_t
   return props.theme.colors.borderColor;
 });
 exports.SettingItemContainer = SettingItemContainer;
-var IconWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  border-radius: 8px;\n  width: 64px;\n  height: 64px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n  }\n  img{\n    width: 100%;\n    height: 100%;\n  }\n"])), function (props) {
+var IconWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  border-radius: 8px;\n  width: 64px;\n  height: 64px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  svg {\n    font-size: 24px;\n    color: ", ";\n  }\n  img{\n    width: 100%;\n    max-width: 90%;\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 }, function (props) {
   return props.theme.colors.secundaryLight;
