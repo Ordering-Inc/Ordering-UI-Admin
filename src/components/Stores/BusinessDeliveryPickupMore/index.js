@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessDeliveryDetails } from '../BusinessDeliveryDetails'
 import { BusinessPickupDetails } from '../BusinessPickupDetails'
@@ -11,6 +11,10 @@ import {
 import { DriversGroupsListingDetails } from '../BusinessDeliveryGroupsDetails'
 
 export const BusinessDeliveryPickupMore = (props) => {
+  const {
+    setIsExtendExtraOpen
+  } = props
+
   const [, t] = useLanguage()
   const [selectedTab, setSelectedTab] = useState('delivery')
 
@@ -19,6 +23,10 @@ export const BusinessDeliveryPickupMore = (props) => {
     { key: 'pickup', content: t('PICKUP', 'Pickup') },
     { key: 'driver_delivery_group', content: t('DRIVER_DELIVERY_GROUP', 'Driver Delivery Group') }
   ]
+
+  useEffect(() => {
+    setIsExtendExtraOpen(false)
+  }, [selectedTab])
 
   return (
     <Container>

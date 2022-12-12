@@ -50,7 +50,8 @@ const OrderingWebsiteUI = (props) => {
   const [ordering] = useApi()
 
   const logoRef = useRef(null)
-  const backgrooundRef = useRef(null)
+  const backgroundRef = useRef(null)
+  const mobileBackgroundRef = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
@@ -63,7 +64,11 @@ const OrderingWebsiteUI = (props) => {
     }
 
     if (type === 'homepage_background') {
-      backgrooundRef.current.click()
+      backgroundRef.current.click()
+    }
+
+    if (type === 'homepage_mobile_background') {
+      mobileBackgroundRef.current.click()
     }
   }
 
@@ -304,7 +309,7 @@ const OrderingWebsiteUI = (props) => {
                   >
                     <ExamineClick
                       onFiles={files => handleFiles(files, 'homepage_background')}
-                      childRef={(e) => { backgrooundRef.current = e }}
+                      childRef={(e) => { backgroundRef.current = e }}
                       accept='image/png, image/jpeg, image/jpg'
                     >
                       <DragAndDrop
@@ -325,6 +330,43 @@ const OrderingWebsiteUI = (props) => {
                   <ImgInfoWrapper>
                     <h4>{t('HOMEPAGE_BACKGROUND', 'Homepage background')}</h4>
                     <p>1920 x 1280 px</p>
+                    <p>{t('FORMAT', 'Format')}: PNG</p>
+                  </ImgInfoWrapper>
+                </ImageFormGroup>
+              )}
+              {orderingTheme?.loading ? (
+                <>
+                  <Skeleton height={100} style={{ marginBottom: '15px', width: '100%' }} />
+                  <Skeleton height={15} count={3} width={150} style={{ display: 'block', marginBottom: '7px' }} />
+                </>
+              ) : (
+                <ImageFormGroup>
+                  <BackgroundImage
+                    onClick={() => handleClickImage('homepage_mobile_background')}
+                  >
+                    <ExamineClick
+                      onFiles={files => handleFiles(files, 'homepage_mobile_background')}
+                      childRef={(e) => { mobileBackgroundRef.current = e }}
+                      accept='image/png, image/jpeg, image/jpg'
+                    >
+                      <DragAndDrop
+                        onDrop={dataTransfer => handleFiles(dataTransfer.files, 'homepage_mobile_background')}
+                        accept='image/png, image/jpeg, image/jpg'
+                        disabled={orderingTheme.loading}
+                      >
+                        {themeValues?.images?.components?.homepage_mobile_background?.components?.image && <img src={themeValues?.images?.components?.homepage_mobile_background?.components?.image} alt='backgrond image' loading='lazy' />}
+                        <UploadImageIconContainer bgimage={!!themeValues?.images?.components?.homepage_mobile_background?.components?.image}>
+                          <UploadImageIcon>
+                            <DumyPhoto />
+                            <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                          </UploadImageIcon>
+                        </UploadImageIconContainer>
+                      </DragAndDrop>
+                    </ExamineClick>
+                  </BackgroundImage>
+                  <ImgInfoWrapper>
+                    <h4>{t('HOMEPAGE_MOBILE_BACKGROUND', 'Homepage mobile background')}</h4>
+                    <p>1440 x 770 px</p>
                     <p>{t('FORMAT', 'Format')}: PNG</p>
                   </ImgInfoWrapper>
                 </ImageFormGroup>

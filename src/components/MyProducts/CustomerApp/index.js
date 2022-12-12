@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { AppLayout } from '../AppLayout'
+import { removeIntercom } from '../../../utils'
 
 export const CustomerApp = () => {
   const [, t] = useLanguage()
@@ -16,11 +17,21 @@ export const CustomerApp = () => {
     },
     live_title: t('MULTI-STORE-CUSTOMER-APP', 'Multi-store Customer App'),
     live_description: t('FREE_TO_USE_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
-    live_purchase_link: 'https://www.ordering.co/ordering-sales',
+    demo_book_message: 'I would like to book a Demo for the customer app , can you assist me?',
     brand_title: t('SINGLE_STORE_CUSTOMER_APP', 'Single Store Customer App'),
     brand_description: t('BRANDED_APP_DESCRIPTION', 'This App is delivered in less than five working days, fully branded with your guidelines, removing all ordering.co presence to give your brand more awareness.'),
-    purchase_link: 'https://www.ordering.co/ordering-sales'
+    purchase_message: 'I would like to know about the customer app, can you assist me?',
+    downloads: [
+      { id: 1, icon: theme.images.myProducts.appStoreSmall, link: 'https://apps.apple.com/us/app/customer-app-2-0/id1607414555' },
+      { id: 2, icon: theme.images.myProducts.playStoreSmall, link: 'https://play.google.com/store/apps/details?id=com.ordering.onlineorderingappv5&hl=en&gl=US' }
+    ]
   }
+
+  useEffect(() => {
+    return () => {
+      removeIntercom()
+    }
+  }, [])
 
   return (
     <AppLayout appInfo={appInfo} />

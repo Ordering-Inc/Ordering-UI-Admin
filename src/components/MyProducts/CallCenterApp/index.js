@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { AppLayout } from '../AppLayout'
+import { removeIntercom } from '../../../utils'
 
 export const CallCenterApp = () => {
   const [, t] = useLanguage()
@@ -20,8 +21,15 @@ export const CallCenterApp = () => {
     web_link_title: t('CALL_CENTER', 'Call center'),
     brand_title: t('YOUR_BRANDED_KIOSK', 'Your Branded Kiosk'),
     brand_description: t('CALL_CENTER_BRANDED_DESCRIPTION', 'The Call Center is delivered in less than five working days, fully branded with your guidelines, and ready to be used on any tablet or device you add it to.'),
-    purchase_link: 'https://www.ordering.co/ordering-sales'
+    demo_book_message: 'I would like to book a Demo about the Call center , can you assist me?',
+    purchase_message: 'I would like to know about the Call center, can you assist me?'
   }
+
+  useEffect(() => {
+    return () => {
+      removeIntercom()
+    }
+  }, [])
 
   return (
     <AppLayout appInfo={appInfo} />

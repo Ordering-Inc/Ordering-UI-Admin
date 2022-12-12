@@ -79,12 +79,13 @@ export const AppInfoContainer = styled.div`
   h2 {
     font-size: 24px;
     margin-top: 0;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
   }
 
   p {
     font-size: 14px;
-    margin: 0;
+    margin-top: 16px;
+    margin-bottom: 0;
   }
   @media (min-width: 1024px) {
     width: calc(50% - 23px);
@@ -102,44 +103,48 @@ export const ImageWrapper = styled.div`
   flex: 1;
   margin-bottom: 25px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   img {
     width: 100%;
     max-width: 430px;
   }
+  ${({ isDriver }) => isDriver && css`
+    img {
+      max-width: 500px;
+    }
+  `}
 `
-export const AppStoreLinksWrapper = styled.div`
-  margin-top: 33px;
+
+export const DownloadLink = styled.a`
+  text-decoration: underline;
+`
+export const ButtonWRapper = styled.div`
   display: flex;
-  > a {
-    &:not(:first-child) {
-      ${props => props.theme?.rtl ? css`
-        margin-right: 24px;
-      ` : css`
-        margin-left: 24px;
-      `}
+  justify-content: space-between;
+  flex-direction: column;
+  padding-top: 15px;
+  button {
+    height: 44px;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    button {
+      width: calc(50% - 10px);
     }
   }
 `
-export const DownloadLink = styled.a`
-  flex: 1;
-  img {
-    width: 100%;
-    object-fit: cover;
-  }
 
-  ${({ isSingle }) => isSingle ? css`
-    margin: 0 auto;
-    text-decoration: underline;
-  ` : css`
-    max-width: 200px;
-  `}
-`
-export const ButtonWRapper = styled.div`
-  margin-top: 31px;
-  button {
-    height: 44px;
-    min-width: 250px;
+export const DownLoadWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  img {
+    cursor: pointer;
+    &:last-child {
+      margin: 0px 15px;
+    }
   }
 `
