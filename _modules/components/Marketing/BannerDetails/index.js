@@ -27,7 +27,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BannerDetailsUI = function BannerDetailsUI(props) {
-  var _bannerState$banner, _bannerState$banner2;
+  var _bannerState$banner, _bannerState$banner2, _bannerState$banner3, _bannerState$banner4;
   var bannerState = props.bannerState,
     changesState = props.changesState,
     actionState = props.actionState,
@@ -90,6 +90,20 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState]);
+  var _useState7 = (0, _react.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    timer = _useState8[0],
+    setTimer = _useState8[1];
+  var handleChangeBannerName = function handleChangeBannerName(name) {
+    if (!name) return;
+    clearTimeout(timer);
+    var _timer = setTimeout(function () {
+      handleUpdateClick({
+        name: name
+      });
+    }, 750);
+    setTimer(_timer);
+  };
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, isAddMode ? t('ADD_BANNER', 'Add banner') : bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner = bannerState.banner) === null || _bannerState$banner === void 0 ? void 0 : _bannerState$banner.name), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (_bannerState$banner2 = bannerState.banner) === null || _bannerState$banner2 === void 0 ? void 0 : _bannerState$banner2.enabled,
     onChange: function onChange(enabled) {
@@ -105,7 +119,14 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
     onClick: function onClick() {
       return onClickDeleteBanner();
     }
-  }, t('DELETE', 'Delete')))))), isAddMode ? /*#__PURE__*/_react.default.createElement(_AddBanner.AddBanner, {
+  }, t('DELETE', 'Delete')))))), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.FormController, {
+    key: bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner3 = bannerState.banner) === null || _bannerState$banner3 === void 0 ? void 0 : _bannerState$banner3.id
+  }, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', '')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    defaultValue: (bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner4 = bannerState.banner) === null || _bannerState$banner4 === void 0 ? void 0 : _bannerState$banner4.name) || '',
+    onChange: function onChange(e) {
+      return handleChangeBannerName(e.target.value);
+    }
+  })), isAddMode ? /*#__PURE__*/_react.default.createElement(_AddBanner.AddBanner, {
     changesState: changesState,
     handleChangeItem: handleChangeItem,
     handleAddBanner: handleAddBanner
