@@ -85,7 +85,7 @@ const CampaignUserListUI = (props) => {
               <tr>
                 <td>{user?.user?.name}</td>
                 <td className='underline'>{user?.user?.email}</td>
-                <td>{user?.user?.open_at ? 1 : 0}</td>
+                <td>{user?.open_at ? 1 : 0}</td>
               </tr>
             </TBody>
           ))}
