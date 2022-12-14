@@ -38,7 +38,8 @@ export const BusinessesList = (props) => {
     handleChangeBusinessIds,
     handleEnableAllBusiness,
     selectedBusinessActiveState,
-    setBusinessIds
+    setBusinessIds,
+    handleGotToAdd
   } = props
 
   const theme = useTheme()
@@ -215,7 +216,7 @@ export const BusinessesList = (props) => {
 
           <BusinessListBottomContainer>
             <AddNewButtonLink
-              onClick={() => handleOpenAddBusiness()}
+              onClick={() => handleGotToAdd()}
             >
               {t('ADD_NEW_STORE', 'Add new store')}
             </AddNewButtonLink>

@@ -72,6 +72,7 @@ import { PluginSettings } from './pages/PluginSettings'
 import { AdBannersList } from './pages/AdBannersList'
 import { Profile } from './pages/Profile'
 import settings from './config.json'
+import { BusinessAdd } from './pages/BusinessAdd'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -234,6 +235,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/stores/brand' allowedLevels={[0]}>
                       <BrandManager />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/stores/add' allowedLevels={[0, 2]}>
+                      <BusinessAdd />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/users/customers' allowedLevels={[0]}>
