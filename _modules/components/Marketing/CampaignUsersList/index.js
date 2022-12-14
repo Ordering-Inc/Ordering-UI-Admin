@@ -86,12 +86,12 @@ var CampaignUserListUI = function CampaignUserListUI(props) {
       width: 50
     }))));
   }), !(userListState !== null && userListState !== void 0 && userListState.loading) && currentPages.map(function (user, i) {
-    var _user$user, _user$user2, _user$user3;
+    var _user$user, _user$user2;
     return /*#__PURE__*/_react.default.createElement(_styles.TBody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, user === null || user === void 0 ? void 0 : (_user$user = user.user) === null || _user$user === void 0 ? void 0 : _user$user.name), /*#__PURE__*/_react.default.createElement("td", {
       className: "underline"
-    }, user === null || user === void 0 ? void 0 : (_user$user2 = user.user) === null || _user$user2 === void 0 ? void 0 : _user$user2.email), /*#__PURE__*/_react.default.createElement("td", null, user !== null && user !== void 0 && (_user$user3 = user.user) !== null && _user$user3 !== void 0 && _user$user3.open_at ? 1 : 0)));
+    }, user === null || user === void 0 ? void 0 : (_user$user2 = user.user) === null || _user$user2 === void 0 ? void 0 : _user$user2.email), /*#__PURE__*/_react.default.createElement("td", null, user !== null && user !== void 0 && user.open_at ? 1 : 0)));
   }))), /*#__PURE__*/_react.default.createElement(_styles.PaginationWrapper, null, (userListState === null || userListState === void 0 ? void 0 : (_userListState$users2 = userListState.users) === null || _userListState$users2 === void 0 ? void 0 : _userListState$users2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
