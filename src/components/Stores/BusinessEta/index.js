@@ -41,7 +41,7 @@ const BusinessEtaUI = (props) => {
         />
       </SelectWrapper>
       <TimesContainer>
-        {[...Array(23).keys()].map(index => (
+        {[...Array(24).keys()].map(index => (
           <TimeItemContainer key={`${selectedOption}:${index}`}>
             <span>{getOrderState(index)}</span>
             <TimeWrapper>
