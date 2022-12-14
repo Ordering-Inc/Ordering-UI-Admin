@@ -12,16 +12,17 @@ var _BsGrid = _interopRequireDefault(require("@meronex/icons/bs/BsGrid"));
 var _BsViewList = _interopRequireDefault(require("@meronex/icons/bs/BsViewList"));
 var _utils = require("../../../utils");
 var _Shared = require("../../Shared");
+var _styledComponents = require("styled-components");
 var _BusinessesList = require("../BusinessesList");
 var _BusinessesListingHeader = require("../BusinessesListingHeader");
 var _BusinessActiveStateFilter = require("../BusinessActiveStateFilter");
 var _BusinessTypeFilter = require("../BusinessTypeFilter");
 var _BusinessDetails = require("../BusinessDetails");
-var _AddBusinessForm = require("../AddBusinessForm");
 var _WizardBusiness = require("../WizardBusiness");
 var _styles = require("./styles");
 var _BusinessSync = require("../BusinessSync");
 var _BusinessDelete = require("../BusinessDelete");
+var _styles2 = require("../../../styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -58,6 +59,13 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleDeleteMultiBusinesses = props.handleDeleteMultiBusinesses,
     setBusinessIds = props.setBusinessIds;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var theme = (0, _styledComponents.useTheme)();
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
+  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
+    _useEvent2 = _slicedToArray(_useEvent, 1),
+    events = _useEvent2[0];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isTutorialMode = _useState2[0],
@@ -98,6 +106,15 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     _useState20 = _slicedToArray(_useState19, 2),
     moveDistance = _useState20[0],
     setMoveDistance = _useState20[1];
+  var noBusinesses = (0, _react.useMemo)(function () {
+    var _businessList$busines;
+    return !(businessList !== null && businessList !== void 0 && businessList.loading) && (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) === 0 && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 && !searchValue;
+  }, [businessList === null || businessList === void 0 ? void 0 : businessList.loading, businessList === null || businessList === void 0 ? void 0 : businessList.businesses, pagination, searchValue]);
+  var handleGotToAdd = function handleGotToAdd() {
+    events.emit('go_to_page', {
+      page: 'business_add'
+    });
+  };
   var handleBackRedirect = function handleBackRedirect() {
     setOpenBusinessDetails(false);
     setDetailsBusiness(null);
@@ -118,16 +135,18 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
     setOpenAddBusiness(true);
   };
-  var onhandleSuccessAddBusiness = function onhandleSuccessAddBusiness(business) {
-    handleSucessAddBusiness(business);
-    setOpenAddBusiness(false);
-    setDetailsBusiness(business);
-    if (isTutorialMode) {
-      setOpenTutorialSidebarState('schedule');
-    } else {
-      handleOpenBusinessDetails(business);
-    }
-  };
+
+  // const onhandleSuccessAddBusiness = (business) => {
+  //   handleSucessAddBusiness(business)
+  //   setOpenAddBusiness(false)
+  //   setDetailsBusiness(business)
+  //   if (isTutorialMode) {
+  //     setOpenTutorialSidebarState('schedule')
+  //   } else {
+  //     handleOpenBusinessDetails(business)
+  //   }
+  // }
+
   (0, _react.useEffect)(function () {
     var id = query.get('id');
     if (id === null) setOpenBusinessDetails(false);else {
@@ -192,15 +211,29 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   (0, _react.useEffect)(function () {
     handleSetStorage();
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListingContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessesListingHeader.BusinessesListingHeader, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListingContainer, {
+    isAdd: openAddBusiness
+  }, /*#__PURE__*/_react.default.createElement(_BusinessesListingHeader.BusinessesListingHeader, {
     searchValue: searchValue,
     onSearch: onSearch,
     handleOpenAddBusiness: handleOpenAddBusiness,
+    handleGotToAdd: handleGotToAdd,
     handleStartTutorial: handleStartTutorial,
     handleOpenSync: handleOpenSync,
     handleRefreshBusinesses: loadBusinesses,
-    loading: businessList.loading
-  }), /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
+    loading: businessList.loading,
+    noBusinesses: noBusinesses,
+    openAddBusiness: openAddBusiness
+  }), noBusinesses ? /*#__PURE__*/_react.default.createElement(_styles.EmptyBusinessWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.dummies.noBusinesses,
+    alt: ""
+  }), /*#__PURE__*/_react.default.createElement("h2", null, t('NO_BUSINESSES_DESCRIPTION', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus adipiscing risus odio. Turpis nibh phasellus interdum vulputate urna, cursus pellentesque. Nec quis donec lobortis enim magna non turpis faucibus. ')), /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+    color: "primary",
+    borderRadius: "7.6px",
+    onClick: function onClick() {
+      return handleGotToAdd();
+    }
+  }, t('ADD_NEW_STORE', 'Add new store'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleChangeBusinessActiveState: handleChangeBusinessActiveState
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperView, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
@@ -239,8 +272,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setBusinessIds: setBusinessIds,
     handleChangeBusinessIds: handleChangeBusinessIds,
     handleEnableAllBusiness: handleEnableAllBusiness,
-    selectedBusinessActiveState: selectedBusinessActiveState
-  })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
+    selectedBusinessActiveState: selectedBusinessActiveState,
+    handleGotToAdd: handleGotToAdd
+  }))), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openBusinessDetails
     // business={detailsBusiness}
     ,
@@ -253,16 +287,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClose: function onClose() {
       return handleBackRedirect();
     }
-  }), openAddBusiness && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    id: "add_business_form",
-    open: openAddBusiness,
-    onClose: function onClose() {
-      return setOpenAddBusiness(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_AddBusinessForm.AddBusinessForm, {
-    isTutorialMode: isTutorialMode,
-    handleSucessAddBusiness: onhandleSuccessAddBusiness
-  })), openSync && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }), openSync && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     id: "store_sync",
     open: openSync,
     onClose: function onClose() {

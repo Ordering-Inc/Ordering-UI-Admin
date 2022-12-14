@@ -49,7 +49,7 @@ var BusinessEtaUI = function BusinessEtaUI(props) {
     onChange: function onChange(val) {
       return setSelectedOption(val);
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.TimesContainer, null, _toConsumableArray(Array(23).keys()).map(function (index) {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.TimesContainer, null, _toConsumableArray(Array(24).keys()).map(function (index) {
     var _formState$changes;
     return /*#__PURE__*/_react.default.createElement(_styles2.TimeItemContainer, {
       key: "".concat(selectedOption, ":").concat(index)

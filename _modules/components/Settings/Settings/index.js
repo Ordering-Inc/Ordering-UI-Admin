@@ -18,6 +18,7 @@ var _Shared = require("../../Shared");
 var _CheckoutFieldsSetting = require("../CheckoutFieldsSetting");
 var _AddressFieldsSetting = require("../AddressFieldsSetting");
 var _LanguageSetting = require("../LanguageSetting");
+var _MultiCountrySettings = require("../MultiCountrySettings");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -36,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SettingsUI = function SettingsUI(props) {
-  var _categoryList$categor2, _theme$images, _theme$images$dummies;
+  var _configs$multicountry, _categoryList$categor2, _theme$images, _theme$images$dummies;
   var categoryList = props.categoryList,
     settingsType = props.settingsType,
     handChangeConfig = props.handChangeConfig;
@@ -44,6 +45,10 @@ var SettingsUI = function SettingsUI(props) {
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
+  var isMulticountryEnabled = configs === null || configs === void 0 ? void 0 : (_configs$multicountry = configs.multicountry) === null || _configs$multicountry === void 0 ? void 0 : _configs$multicountry.value;
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
@@ -62,6 +67,14 @@ var SettingsUI = function SettingsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isOpenSettingDetails = _useState6[0],
     setIsOpenSettingDetails = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    openMultiCountrySettings = _useState8[0],
+    setOpenMultiCountrySettings = _useState8[1];
+  var _useState9 = (0, _react.useState)(0),
+    _useState10 = _slicedToArray(_useState9, 2),
+    moveDistance = _useState10[0],
+    setMoveDistance = _useState10[1];
   var category;
   if (search) {
     var data = search.substring(1).split('&');
@@ -94,6 +107,7 @@ var SettingsUI = function SettingsUI(props) {
   };
   var handleOpenDescription = function handleOpenDescription(category) {
     setIsOpenSettingDetails(null);
+    setOpenMultiCountrySettings(false);
     setIsOpenDescription(true);
     setSelectedCategory(category);
     onBasicSettingsRedirect({
@@ -103,6 +117,7 @@ var SettingsUI = function SettingsUI(props) {
   };
   var handleOpenSettingDetails = function handleOpenSettingDetails(item) {
     setIsOpenDescription(false);
+    setOpenMultiCountrySettings(false);
     setSelectedCategory(null);
     setIsOpenSettingDetails(item);
   };
@@ -178,6 +193,18 @@ var SettingsUI = function SettingsUI(props) {
     description: t('ADDRESS_FIELDS_DESC'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAltFill, null),
     active: isOpenSettingDetails === 'address'
+  })), isMulticountryEnabled && /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
+    className: "col-md-4 col-sm-6",
+    onClick: function onClick() {
+      setIsOpenDescription(false);
+      setIsOpenSettingDetails(null);
+      setOpenMultiCountrySettings(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
+    title: t('MULTI_COUNTRY_SETTINGS', 'Multi country settings'),
+    description: t('MULTI_COUNTRY_SETTINGS_DESC', 'Settings according country'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
+    active: openMultiCountrySettings
   }))), categoryList.loading ? _toConsumableArray(Array(12).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
       className: "col-md-4 col-sm-6",
@@ -209,6 +236,16 @@ var SettingsUI = function SettingsUI(props) {
     category: selectedCategory,
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
+  })), openMultiCountrySettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    defaultSideBarWidth: 500 + moveDistance,
+    moveDistance: moveDistance,
+    open: openMultiCountrySettings,
+    onClose: function onClose() {
+      setMoveDistance(0);
+      setOpenMultiCountrySettings(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_MultiCountrySettings.MultiCountrySettings, {
+    setMoveDistance: setMoveDistance
   })), isOpenSettingDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "setting-details",
     defaultSideBarWidth: 550,

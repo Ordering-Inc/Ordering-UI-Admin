@@ -45,7 +45,8 @@ var BusinessesList = function BusinessesList(props) {
     handleChangeBusinessIds = props.handleChangeBusinessIds,
     handleEnableAllBusiness = props.handleEnableAllBusiness,
     selectedBusinessActiveState = props.selectedBusinessActiveState,
-    setBusinessIds = props.setBusinessIds;
+    setBusinessIds = props.setBusinessIds,
+    handleGotToAdd = props.handleGotToAdd;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -182,7 +183,7 @@ var BusinessesList = function BusinessesList(props) {
     });
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessListBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewButtonLink, {
     onClick: function onClick() {
-      return handleOpenAddBusiness();
+      return handleGotToAdd();
     }
   }, t('ADD_NEW_STORE', 'Add new store')), pagination && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, (pagination === null || pagination === void 0 ? void 0 : pagination.total) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,

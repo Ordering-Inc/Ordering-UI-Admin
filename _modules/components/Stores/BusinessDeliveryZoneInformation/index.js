@@ -228,7 +228,7 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     maxLength: 2,
     value: (_ref4 = (_formState$changes$da = (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : (_formState$changes6$d = _formState$changes6.data) === null || _formState$changes6$d === void 0 ? void 0 : _formState$changes6$d.distance) !== null && _formState$changes$da !== void 0 ? _formState$changes$da : zone === null || zone === void 0 ? void 0 : (_zone$data = zone.data) === null || _zone$data === void 0 ? void 0 : _zone$data.distance) !== null && _ref4 !== void 0 ? _ref4 : '',
     onInput: function onInput(e) {
-      e.target.value = e.target.value.match("^[1-9]{1,2}$");
+      e.target.value = e.target.value.match('^[1-9]{1,2}$');
     },
     onChange: function onChange(e) {
       var _configState$configs4, _configState$configs5;
