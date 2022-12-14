@@ -6,11 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.RestaurantSelectGuide = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -27,7 +29,8 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
     onClose = props.onClose,
     handleImport = props.handleImport,
     handleChangeAddress = props.handleChangeAddress,
-    address = props.address;
+    address = props.address,
+    isLoading = props.isLoading;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -77,7 +80,12 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
     defaultValue: address !== null && address !== void 0 ? address : '',
     autoComplete: "new-password",
     countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
-  })), (options === null || options === void 0 ? void 0 : options.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SELECT_YOUR_RESTAURANT', 'Select your restaurant')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  })), isLoading && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 15,
+    width: 100
+  })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 44
+  })), !isLoading && (options === null || options === void 0 ? void 0 : options.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SELECT_YOUR_RESTAURANT', 'Select your restaurant')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: options,
     className: "select",
     defaultValue: businessId || '',
@@ -87,7 +95,7 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
     },
     searchBarIsCustomLayout: true,
     searchBarIsNotLazyLoad: true
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.EmptyData, null, t('NO_RESULT', 'There are no results')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+  })), !isLoading && options.length === 0 && /*#__PURE__*/_react.default.createElement(_styles2.EmptyData, null, t('NO_RESULT', 'There are no results')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return onClose();
     }
