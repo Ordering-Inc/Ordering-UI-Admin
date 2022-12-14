@@ -23,7 +23,7 @@ export const OrderBill = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const SPOT_DICTIONARY = {
     3: t('SPOT_NUMBER_EAT_IN', 'Table number'),
-    4: t('SPOT_NUMBER_CURBSIDE', 'Spor number'),
+    4: t('SPOT_NUMBER_CURBSIDE', 'Spot number'),
     5: t('SPOT_NUMBER_DRIVE_THRU', 'Drive thru lane')
   }
 
@@ -106,7 +106,7 @@ export const OrderBill = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {offer.name}
+                  {t(offer.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
@@ -153,7 +153,7 @@ export const OrderBill = (props) => {
             order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
               <tr key={tax?.id}>
                 <td>
-                  {tax?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  {t(tax?.name?.toUpperCase()?.replaceAll(' ', '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                 </td>
                 <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0, { currency: order?.currency })}</td>
@@ -164,7 +164,7 @@ export const OrderBill = (props) => {
             order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
               <tr key={fee.id}>
                 <td>
-                  {fee?.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  {t(fee?.name?.toUpperCase()?.replaceAll(' ', '_'), fee?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
                 </td>
                 <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0, { currency: order?.currency })}</td>
@@ -175,7 +175,7 @@ export const OrderBill = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {offer.name}
+                  {t(offer.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
@@ -196,7 +196,7 @@ export const OrderBill = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {offer.name}
+                  {t(offer.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
@@ -244,7 +244,7 @@ export const OrderBill = (props) => {
                 <td>
                   {event?.wallet_event
                     ? walletName[event?.wallet_event?.wallet?.type]?.name
-                    : event?.paymethod?.name}
+                    : t(event?.paymethod?.name?.toUpperCase()?.replaceAll(' ', '_'), event?.paymethod?.name)}
                 </td>
                 <td>-{parsePrice(event?.amount, { currency: order?.currency })}</td>
               </tr>
@@ -260,7 +260,7 @@ export const OrderBill = (props) => {
         </thead>
         <tbody>
           <tr>
-            <td>{order?.delivery_option ? order?.delivery_option?.name : t('EITHER_WAY', 'Either way')}</td>
+            <td>{order?.delivery_option ? t(order?.delivery_option?.name?.toUpperCase()?.replaceAll(' ', '_'), order?.delivery_option?.name) : t('EITHER_WAY', 'Either way')}</td>
           </tr>
         </tbody>
       </table>
@@ -294,7 +294,7 @@ export const OrderBill = (props) => {
           <tbody>
             <tr>
               <td>{t('ORDER_VEHICLE_TYPE', 'Type')}</td>
-              <td>{order?.vehicle?.type}</td>
+              <td>{t(order?.vehicle?.type?.toUpperCase(), order?.vehicle?.type)}</td>
             </tr>
             <tr>
               <td>{t('ORDER_VEHICLE_MODEL', 'Model')}</td>

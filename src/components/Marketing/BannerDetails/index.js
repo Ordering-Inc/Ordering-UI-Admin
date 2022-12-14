@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, BannerDetails as BannerDetailsController } from 'ordering-components-admin'
-import { Switch } from '../../../styles'
+import { Input, Switch } from '../../../styles'
 import { BannerImages } from './BannerImages'
 import { AddBanner } from './AddBanner'
 import { SelectSites, Alert, Confirm } from '../../Shared'
@@ -15,7 +15,8 @@ import {
   RightHeader,
   TabsConatiner,
   Tab,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  FormController
 } from './styles'
 
 const BannerDetailsUI = (props) => {
@@ -30,7 +31,6 @@ const BannerDetailsUI = (props) => {
     sitesState,
     handleUpdateClick,
     handleAddBanner,
-    defaultPosition,
     handleChangeItem,
     handleDeleteBanner
   } = props
@@ -65,6 +65,16 @@ const BannerDetailsUI = (props) => {
     })
   }, [actionState])
 
+  const [timer, setTimer] = useState(null)
+  const handleChangeBannerName = (name) => {
+    if (!name) return
+    clearTimeout(timer)
+    const _timer = setTimeout(() => {
+      handleUpdateClick({ name: name })
+    }, 750)
+    setTimer(_timer)
+  }
+
   return (
     <Container>
       <HeaderContainer>
@@ -93,12 +103,20 @@ const BannerDetailsUI = (props) => {
           </ActionSelectorWrapper>
         </RightHeader>
       </HeaderContainer>
+      {!isAddMode && (
+        <FormController key={bannerState?.banner?.id}>
+          <label>{t('NAME', '')}</label>
+          <Input
+            defaultValue={bannerState?.banner?.name || ''}
+            onChange={e => handleChangeBannerName(e.target.value)}
+          />
+        </FormController>
+      )}
       {isAddMode ? (
         <AddBanner
           changesState={changesState}
           handleChangeItem={handleChangeItem}
           handleAddBanner={handleAddBanner}
-          defaultPosition={defaultPosition}
         />
       ) : (
         <>
