@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useConfig, GoogleAutocompleteInput } from 'ordering-components-admin'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { ArrowRight, Image } from 'react-bootstrap-icons'
@@ -20,7 +21,8 @@ export const RestaurantSelectGuide = (props) => {
     onClose,
     handleImport,
     handleChangeAddress,
-    address
+    address,
+    isLoading
   } = props
 
   const [, t] = useLanguage()
@@ -75,7 +77,15 @@ export const RestaurantSelectGuide = (props) => {
           countryCode={configs?.country_autocomplete?.value || '*'}
         />
       </SearchWrapper>
-      {options?.length > 0 ? (
+      {isLoading && (
+        <SelectWrapper>
+          <label>
+            <Skeleton height={15} width={100} />
+          </label>
+          <Skeleton height={44} />
+        </SelectWrapper>
+      )}
+      {!isLoading && options?.length > 0 && (
         <SelectWrapper>
           <label>{t('SELECT_YOUR_RESTAURANT', 'Select your restaurant')}</label>
           <Select
@@ -88,7 +98,8 @@ export const RestaurantSelectGuide = (props) => {
             searchBarIsNotLazyLoad
           />
         </SelectWrapper>
-      ) : (
+      )}
+      {!isLoading && options.length === 0 && (
         <EmptyData>
           {t('NO_RESULT', 'There are no results')}
         </EmptyData>

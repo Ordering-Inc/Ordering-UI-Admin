@@ -3,13 +3,13 @@ import { useLanguage, useEvent, ProductStep as ProductStepController } from 'ord
 import { ProductStartGuide } from '../ProductStartGuide'
 import { RestaurantSelectGuide } from '../RestaurantSelectGuide'
 import { useTheme } from 'styled-components'
+import { Button } from '../../../styles'
 import {
   Container,
   ImportMenuContainer,
   ImageContent,
   ButtonWrapper
 } from './styles'
-import { Button } from '../../../styles'
 
 const ProductStepUI = (props) => {
   const {
@@ -20,7 +20,8 @@ const ProductStepUI = (props) => {
     handleImport,
     handleChangeAddress,
     business,
-    address
+    address,
+    isLoading
   } = props
 
   const theme = useTheme()
@@ -46,6 +47,7 @@ const ProductStepUI = (props) => {
           handleImport={handleImport}
           handleChangeAddress={handleChangeAddress}
           address={address}
+          isLoading={isLoading}
         />
       )}
       {step === 3 && actionState?.loading && (
