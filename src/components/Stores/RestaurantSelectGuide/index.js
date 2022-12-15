@@ -21,12 +21,12 @@ export const RestaurantSelectGuide = (props) => {
     onClose,
     handleImport,
     handleChangeAddress,
-    address,
-    isLoading
+    orderingBusiness,
+    isLoading,
+    business
   } = props
 
   const [, t] = useLanguage()
-  const [businessId, setBusinessId] = useState()
   const [options, setOptions] = useState([])
   const [{ configs }] = useConfig()
 
@@ -38,9 +38,8 @@ export const RestaurantSelectGuide = (props) => {
   }
 
   const handleSelectBusiness = (id) => {
-    setBusinessId(id)
-    const business = businessList.find(item => item._id === id)
-    setBusiness(business)
+    const _business = businessList.find(item => item._id === id)
+    setBusiness(_business)
   }
 
   useEffect(() => {
@@ -72,7 +71,7 @@ export const RestaurantSelectGuide = (props) => {
           onChangeAddress={(e) => {
             handleChangeAddress(e)
           }}
-          defaultValue={address ?? ''}
+          defaultValue={orderingBusiness?.address ?? ''}
           autoComplete='new-password'
           countryCode={configs?.country_autocomplete?.value || '*'}
         />
@@ -91,7 +90,7 @@ export const RestaurantSelectGuide = (props) => {
           <Select
             options={options}
             className='select'
-            defaultValue={businessId || ''}
+            defaultValue={business?._id || ''}
             placeholder={t('SELECT_BUSINESS', 'Select a Business')}
             onChange={(value) => handleSelectBusiness(value)}
             searchBarIsCustomLayout
@@ -109,7 +108,7 @@ export const RestaurantSelectGuide = (props) => {
         <Button
           color='primary'
           onClick={handleSubmit}
-          disabled={!businessId}
+          disabled={!business?._id}
         >
           {t('CONTINUE', 'Continue')}
           <ArrowRight />

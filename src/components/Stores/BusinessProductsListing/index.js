@@ -492,8 +492,8 @@ const BusinessProductsListingUI = (props) => {
       >
         <ProductStep
           onClose={() => setShowPopup(false)}
-          address={businessState?.business?.address}
-          location={businessState?.business?.location}
+          orderingBusiness={businessState?.business}
+          getBusiness={getBusiness}
         />
       </Modal>
     </>
