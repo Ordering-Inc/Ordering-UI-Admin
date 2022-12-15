@@ -9,7 +9,6 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _styles = require("../../../styles");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -29,7 +28,6 @@ var AppLayout = function AppLayout(props) {
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
   var showMessage = function showMessage(message) {
-    (0, _utils.insertIntercom)();
     window.Intercom && window.Intercom('showNewMessage', message);
   };
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
