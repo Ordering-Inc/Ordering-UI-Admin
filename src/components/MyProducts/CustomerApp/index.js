@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { AppLayout } from '../AppLayout'
-import { removeIntercom } from '../../../utils'
 
 export const CustomerApp = () => {
   const [, t] = useLanguage()
@@ -26,12 +25,6 @@ export const CustomerApp = () => {
       { id: 2, icon: theme.images.myProducts.playStoreSmall, link: 'https://play.google.com/store/apps/details?id=com.ordering.onlineorderingappv5&hl=en&gl=US' }
     ]
   }
-
-  useEffect(() => {
-    return () => {
-      removeIntercom()
-    }
-  }, [])
 
   return (
     <AppLayout appInfo={appInfo} />
