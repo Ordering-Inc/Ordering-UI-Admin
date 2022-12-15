@@ -37,6 +37,7 @@ import deliverect from './template/assets/images/deliverect.png'
 import ItsaCheckmateLogo from './template/assets/images/ItsaCheckmateLogo.png'
 import doordash from './template/assets/images/door-dash.png'
 import lalamove from './template/assets/images/lala-move.png'
+import pickerExpress from './template/assets/images/picker-express.png'
 import importMenu from './template/assets/images/import-menu.png'
 import importedMenu from './template/assets/images/imported-menu.png'
 
@@ -204,6 +205,7 @@ theme.images = {
     ItsaCheckmateLogo,
     doordash,
     lalamove,
+    pickerExpress,
     importMenu,
     importedMenu
   },
