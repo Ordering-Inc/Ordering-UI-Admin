@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { AppLayout } from '../AppLayout'
-import { removeIntercom } from '../../../utils'
 
 export const CallCenterApp = () => {
   const [, t] = useLanguage()
@@ -24,12 +23,6 @@ export const CallCenterApp = () => {
     demo_book_message: 'I would like to book a Demo about the Call center , can you assist me?',
     purchase_message: 'I would like to know about the Call center, can you assist me?'
   }
-
-  useEffect(() => {
-    return () => {
-      removeIntercom()
-    }
-  }, [])
 
   return (
     <AppLayout appInfo={appInfo} />
