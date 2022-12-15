@@ -3,7 +3,6 @@ import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton, Button } from '../../../styles'
 import { List as MenuIcon } from 'react-bootstrap-icons'
-import { insertIntercom } from '../../../utils'
 import {
   Container,
   HeaderTitleContainer,
@@ -22,7 +21,6 @@ export const AppLayout = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
   const showMessage = (message) => {
-    insertIntercom()
     window.Intercom && window.Intercom('showNewMessage', message)
   }
 
