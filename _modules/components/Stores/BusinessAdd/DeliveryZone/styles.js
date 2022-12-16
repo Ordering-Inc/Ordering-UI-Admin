@@ -34,7 +34,7 @@ var ErrorText = _styledComponents.default.div(_templateObject6 || (_templateObje
 exports.ErrorText = ErrorText;
 var FormControl = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  label {\n    font-size: 14px;\n    margin-bottom: 9px;\n  }\n  input {\n    width: 100%;\n  }\n"])));
 exports.FormControl = FormControl;
-var Row = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 29px;\n\n  > div {\n    width: 45%;\n  }\n"])));
+var Row = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n\n  > div {\n    width: 100%;\n    margin-bottom: 29px;\n  }\n  @media (min-width: 576px) {\n    flex-direction: row;\n    > div {\n      width: 45%;\n    }\n  }\n"])));
 exports.Row = Row;
 var KmlButtonWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin: 20px 0px;\n"])));
 exports.KmlButtonWrapper = KmlButtonWrapper;

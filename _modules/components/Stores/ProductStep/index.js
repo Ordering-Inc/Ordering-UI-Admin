@@ -31,8 +31,9 @@ var ProductStepUI = function ProductStepUI(props) {
     handleImport = props.handleImport,
     handleChangeAddress = props.handleChangeAddress,
     business = props.business,
-    address = props.address,
-    isLoading = props.isLoading;
+    isLoading = props.isLoading,
+    orderingBusiness = props.orderingBusiness,
+    countriesState = props.countriesState;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -55,7 +56,8 @@ var ProductStepUI = function ProductStepUI(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, step === 1 && /*#__PURE__*/_react.default.createElement(_ProductStartGuide.ProductStartGuide, {
     onClose: onClose,
-    setStep: setStep
+    setStep: setStep,
+    countriesState: countriesState
   }), step === 2 && /*#__PURE__*/_react.default.createElement(_RestaurantSelectGuide.RestaurantSelectGuide, {
     setBusiness: setBusiness,
     setStep: setStep,
@@ -63,7 +65,8 @@ var ProductStepUI = function ProductStepUI(props) {
     businessList: businessList,
     handleImport: handleImport,
     handleChangeAddress: handleChangeAddress,
-    address: address,
+    orderingBusiness: orderingBusiness,
+    business: business,
     isLoading: isLoading
   }), step === 3 && (actionState === null || actionState === void 0 ? void 0 : actionState.loading) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WE_ARE_IMPORTING_YOUR_MENU', 'We are importing your menu.')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.importMenu,

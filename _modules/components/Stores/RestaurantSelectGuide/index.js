@@ -22,26 +22,23 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
-  var _configs$google_maps_, _configs$country_auto;
+  var _configs$google_maps_, _orderingBusiness$add, _configs$country_auto;
   var setBusiness = props.setBusiness,
     businessList = props.businessList,
     setStep = props.setStep,
     onClose = props.onClose,
     handleImport = props.handleImport,
     handleChangeAddress = props.handleChangeAddress,
-    address = props.address,
-    isLoading = props.isLoading;
+    orderingBusiness = props.orderingBusiness,
+    isLoading = props.isLoading,
+    business = props.business;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)(),
+  var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
-    businessId = _useState2[0],
-    setBusinessId = _useState2[1];
-  var _useState3 = (0, _react.useState)([]),
-    _useState4 = _slicedToArray(_useState3, 2),
-    options = _useState4[0],
-    setOptions = _useState4[1];
+    options = _useState2[0],
+    setOptions = _useState2[1];
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
@@ -51,11 +48,10 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
     handleImport();
   };
   var handleSelectBusiness = function handleSelectBusiness(id) {
-    setBusinessId(id);
-    var business = businessList.find(function (item) {
+    var _business = businessList.find(function (item) {
       return item._id === id;
     });
-    setBusiness(business);
+    setBusiness(_business);
   };
   (0, _react.useEffect)(function () {
     var _options = businessList === null || businessList === void 0 ? void 0 : businessList.map(function (item) {
@@ -77,7 +73,7 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
     onChangeAddress: function onChangeAddress(e) {
       handleChangeAddress(e);
     },
-    defaultValue: address !== null && address !== void 0 ? address : '',
+    defaultValue: (_orderingBusiness$add = orderingBusiness === null || orderingBusiness === void 0 ? void 0 : orderingBusiness.address) !== null && _orderingBusiness$add !== void 0 ? _orderingBusiness$add : '',
     autoComplete: "new-password",
     countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
   })), isLoading && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -88,7 +84,7 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
   })), !isLoading && (options === null || options === void 0 ? void 0 : options.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SELECT_YOUR_RESTAURANT', 'Select your restaurant')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: options,
     className: "select",
-    defaultValue: businessId || '',
+    defaultValue: (business === null || business === void 0 ? void 0 : business._id) || '',
     placeholder: t('SELECT_BUSINESS', 'Select a Business'),
     onChange: function onChange(value) {
       return handleSelectBusiness(value);
@@ -102,7 +98,7 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
   }, t('SKIP', 'Skip')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: handleSubmit,
-    disabled: !businessId
+    disabled: !(business !== null && business !== void 0 && business._id)
   }, t('CONTINUE', 'Continue'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowRight, null))));
 };
 exports.RestaurantSelectGuide = RestaurantSelectGuide;

@@ -18,7 +18,7 @@ var FormControl = _styledComponents.default.div(_templateObject3 || (_templateOb
 exports.FormControl = FormControl;
 var DownloadWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  label {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-bottom: 12px;\n  }\n"])));
 exports.DownloadWrapper = DownloadWrapper;
-var DownloadIconWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  a {\n    display: flex;\n    &:first-child {\n      margin-right: 25px;\n      ", "\n    }\n    img {\n      height: 57px;\n    }\n  }\n"])), function (props) {
+var DownloadIconWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n\n  a {\n    display: flex;\n    width: 100%;\n    margin-top: 15px;\n    display: flex;\n\n    img {\n      height: 57px;\n    }\n  }\n\n  @media (min-width: 576px) {\n    flex-direction: row;\n    a {\n      margin-top: 0px;\n      width: auto;\n      &:first-child {\n      margin-right: 25px;\n      ", "\n    }\n    }\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-right: 0;\n        margin-left: 25px;\n      "])));
 });
 exports.DownloadIconWrapper = DownloadIconWrapper;

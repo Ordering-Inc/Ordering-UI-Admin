@@ -17,7 +17,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDetails = function BusinessDetails(props) {
-  var _configs$google_maps_, _formState$changes$na, _formState$changes, _formState$changes$ad, _formState$changes2, _configs$country_auto, _formState$changes$ph, _formState$changes3, _formState$changes$zi, _formState$changes4, _configs$google_maps_2, _formState$changes$lo, _formState$changes5, _formState$changes$ce, _formState$changes6;
+  var _configs$google_maps_, _formState$changes$na, _formState$changes, _formState$changes$ad, _formState$changes2, _configs$country_auto, _formState$changes$zi, _formState$changes3, _configs$google_maps_2, _formState$changes$lo, _formState$changes4, _formState$changes$ce, _formState$changes5;
   var formState = props.formState,
     handleChangeAddress = props.handleChangeAddress,
     handleChangeInput = props.handleChangeInput,
@@ -72,28 +72,23 @@ var BusinessDetails = function BusinessDetails(props) {
     defaultValue: (_formState$changes$ad = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : '',
     autoComplete: "new-password",
     countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
-  })), /*#__PURE__*/_react.default.createElement(_styles.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('INT_NUMBER', 'Int. number')), /*#__PURE__*/_react.default.createElement(_styles2.Input, {
-    name: "phone",
-    placeholder: t('INT_NUMBER', 'Int. number'),
-    defaultValue: (_formState$changes$ph = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.phone) !== null && _formState$changes$ph !== void 0 ? _formState$changes$ph : '',
-    onChange: handleChangeInput
   })), /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('ZIPCODE', 'Zipcode')), /*#__PURE__*/_react.default.createElement(_styles2.Input, {
     name: "zipcode",
     placeholder: t('ZIPCODE', 'Zipcode'),
-    defaultValue: (_formState$changes$zi = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.zipcode) !== null && _formState$changes$zi !== void 0 ? _formState$changes$zi : '',
+    defaultValue: (_formState$changes$zi = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.zipcode) !== null && _formState$changes$zi !== void 0 ? _formState$changes$zi : '',
     onChange: handleChangeInput
-  }))), /*#__PURE__*/_react.default.createElement(_styles.GoogleMapContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('GOOGLE_PLACE_ID', 'Google place ID')), /*#__PURE__*/_react.default.createElement("p", null, googleMapsApiKey), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.GoogleMapContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('GOOGLE_PLACE_ID', 'Google place ID')), /*#__PURE__*/_react.default.createElement("p", null, googleMapsApiKey), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
     apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
-    location: (_formState$changes$lo = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : defaultPosition,
+    location: (_formState$changes$lo = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : defaultPosition,
     mapControls: googleMapsControls,
     handleChangeCenter: handleChangeCenter,
     isFitCenter: true
   }))), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     noBottom: true
-  }, /*#__PURE__*/_react.default.createElement("label", null, t('INTERNATIONAL_PHONE_NUMBER', 'International phone number')), /*#__PURE__*/_react.default.createElement(_styles2.Input, {
+  }, /*#__PURE__*/_react.default.createElement("label", null, t('INT_NUMBER', 'Int. number')), /*#__PURE__*/_react.default.createElement(_styles2.Input, {
     name: "cellphone",
-    placeholder: t('PHONE_NUMBER', 'Phone number'),
-    defaultValue: (_formState$changes$ce = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.cellphone) !== null && _formState$changes$ce !== void 0 ? _formState$changes$ce : '',
+    placeholder: t('INT_NUMBER', 'Int. number'),
+    defaultValue: (_formState$changes$ce = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.cellphone) !== null && _formState$changes$ce !== void 0 ? _formState$changes$ce : '',
     onChange: handleChangeInput
   }))));
 };

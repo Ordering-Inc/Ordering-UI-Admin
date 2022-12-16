@@ -19,7 +19,7 @@ var HeaderTitleContainer = _styledComponents.default.div(_templateObject2 || (_t
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      margin-left: 8px;\n      margin-right: -8px;\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n      margin-left: -8px;\n    "])));
 });
 exports.HeaderTitleContainer = HeaderTitleContainer;
-var BoxLayout = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  background: ", ";\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  padding: 25px 35px;\n  margin-bottom: 35px;\n  > div {\n    width: 1000%;\n    max-width: 558px;\n  }\n"])), function (props) {
+var BoxLayout = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  background: ", ";\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  padding: 25px 35px;\n  margin-bottom: 35px;\n  > div {\n    width: 100%;\n    max-width: 558px;\n  }\n"])), function (props) {
   return props.theme.colors.white;
 });
 exports.BoxLayout = BoxLayout;
