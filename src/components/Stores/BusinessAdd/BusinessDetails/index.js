@@ -5,8 +5,7 @@ import {
   ContentWrapper,
   FormControl,
   WrapperMap,
-  GoogleMapContainer,
-  FormGroup
+  GoogleMapContainer
 } from './styles'
 import { Input } from '../../../../styles'
 import { stringToSlug } from '../../../../utils'
@@ -70,26 +69,15 @@ export const BusinessDetails = (props) => {
             countryCode={configs?.country_autocomplete?.value || '*'}
           />
         </FormControl>
-        <FormGroup>
-          <FormControl>
-            <label>{t('INT_NUMBER', 'Int. number')}</label>
-            <Input
-              name='phone'
-              placeholder={t('INT_NUMBER', 'Int. number')}
-              defaultValue={formState?.changes?.phone ?? ''}
-              onChange={handleChangeInput}
-            />
-          </FormControl>
-          <FormControl>
-            <label>{t('ZIPCODE', 'Zipcode')}</label>
-            <Input
-              name='zipcode'
-              placeholder={t('ZIPCODE', 'Zipcode')}
-              defaultValue={formState?.changes?.zipcode ?? ''}
-              onChange={handleChangeInput}
-            />
-          </FormControl>
-        </FormGroup>
+        <FormControl>
+          <label>{t('ZIPCODE', 'Zipcode')}</label>
+          <Input
+            name='zipcode'
+            placeholder={t('ZIPCODE', 'Zipcode')}
+            defaultValue={formState?.changes?.zipcode ?? ''}
+            onChange={handleChangeInput}
+          />
+        </FormControl>
         <GoogleMapContainer>
           <label>{t('GOOGLE_PLACE_ID', 'Google place ID')}</label>
           <p>{googleMapsApiKey}</p>
@@ -104,10 +92,10 @@ export const BusinessDetails = (props) => {
           </WrapperMap>
         </GoogleMapContainer>
         <FormControl noBottom>
-          <label>{t('INTERNATIONAL_PHONE_NUMBER', 'International phone number')}</label>
+          <label>{t('INT_NUMBER', 'Int. number')}</label>
           <Input
             name='cellphone'
-            placeholder={t('PHONE_NUMBER', 'Phone number')}
+            placeholder={t('INT_NUMBER', 'Int. number')}
             defaultValue={formState?.changes?.cellphone ?? ''}
             onChange={handleChangeInput}
           />

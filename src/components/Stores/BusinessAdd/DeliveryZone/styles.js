@@ -83,10 +83,17 @@ export const FormControl = styled.div`
 export const Row = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 29px;
+  flex-direction: column;
 
   > div {
-    width: 45%;
+    width: 100%;
+    margin-bottom: 29px;
+  }
+  @media (min-width: 576px) {
+    flex-direction: row;
+    > div {
+      width: 45%;
+    }
   }
 `
 export const KmlButtonWrapper = styled.div`

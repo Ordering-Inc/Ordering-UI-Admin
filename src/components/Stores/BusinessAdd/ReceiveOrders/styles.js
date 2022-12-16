@@ -39,18 +39,31 @@ export const DownloadWrapper = styled.div`
 export const DownloadIconWrapper = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
 
   a {
     display: flex;
-    &:first-child {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+
+    img {
+      height: 57px;
+    }
+  }
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+    a {
+      margin-top: 0px;
+      width: auto;
+      &:first-child {
       margin-right: 25px;
       ${props => props.theme.rtl && css`
         margin-right: 0;
         margin-left: 25px;
       `}
     }
-    img {
-      height: 57px;
     }
   }
 `
