@@ -50,7 +50,7 @@ export const BoxLayout = styled.div`
   padding: 25px 35px;
   margin-bottom: 35px;
   > div {
-    width: 1000%;
+    width: 100%;
     max-width: 558px;
   }
 `

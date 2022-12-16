@@ -10,6 +10,20 @@ export const Container = styled.div`
   }
 `
 
+export const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  ${props => props.theme.rtl && css`
+    margin-right: 0px;
+    margin-left: 20px;
+  `}
+  svg {
+    font-size: 24px;
+  }
+`
+
 export const GuideItemContainer = styled.div`
   display: flex;
   align-items: center;
@@ -25,18 +39,10 @@ export const GuideItemContainer = styled.div`
     border: 1px solid ${props => props.theme.colors.primary};
     background-color: ${props => props.theme.colors.lightPrimary};
   }
-
-  svg {
-    font-size: 24px;
-    margin-right: 20px;
-    ${props => props.theme.rtl && css`
-      margin-right: 0px;
-      margin-left: 20px;
-    `}
-  }
 `
 
 export const InfoWrapper = styled.div`
+  flex: 1;
   h3 {
     font-weight: 600;
     font-size: 14px;
@@ -48,5 +54,9 @@ export const InfoWrapper = styled.div`
     font-weight: 400;
     font-size: 12px;
     line-height: 18px;
+    > span {
+      display: flex;
+      margin-top: 5px;
+    }
   }
 `
