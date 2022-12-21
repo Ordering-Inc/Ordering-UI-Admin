@@ -23,11 +23,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessesListingHeader = function BusinessesListingHeader(props) {
   var searchValue = props.searchValue,
     onSearch = props.onSearch,
-    handleOpenAddBusiness = props.handleOpenAddBusiness,
     handleStartTutorial = props.handleStartTutorial,
     handleOpenSync = props.handleOpenSync,
     handleRefreshBusinesses = props.handleRefreshBusinesses,
-    loading = props.loading;
+    loading = props.loading,
+    noBusinesses = props.noBusinesses,
+    handleGotToAdd = props.handleGotToAdd;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -40,7 +41,7 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('STORES_LIST', 'Stores list')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('STORES_LIST', 'Stores list')), !noBusinesses && /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
     placement: "bottom",
     overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, t('START_TUTORIAL', 'Start tutorial'))
   }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
@@ -49,7 +50,7 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     onClick: function onClick() {
       return handleStartTutorial();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)))), !noBusinesses && /*#__PURE__*/_react.default.createElement(_styles2.ActionsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick() {
@@ -67,7 +68,7 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick() {
-      return handleOpenAddBusiness();
+      return handleGotToAdd();
     }
   }, t('ADD_NEW_STORE', 'Add new store')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
