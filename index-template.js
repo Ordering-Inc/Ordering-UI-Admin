@@ -39,6 +39,10 @@ import deliverect from './template/assets/images/deliverect.png'
 import ItsaCheckmateLogo from './template/assets/images/ItsaCheckmateLogo.png'
 import doordash from './template/assets/images/door-dash.png'
 import lalamove from './template/assets/images/lala-move.png'
+import pickerExpress from './template/assets/images/picker-express.png'
+import importMenu from './template/assets/images/import-menu.png'
+import importedMenu from './template/assets/images/imported-menu.png'
+
 /**
  * project statuses
  */
@@ -67,6 +71,7 @@ import storeDummy from './template/assets/images/dummies/store.png'
 import noOrders from './template/assets/images/dummies/no-orders.png'
 import promotionDummy from './template/assets/images/dummies/promotion.png'
 import productDummy from './template/assets/images/dummies/product.png'
+import noBusinesses from './template/assets/images/dummies/no-businesses.png'
 
 /**
  * icons
@@ -277,7 +282,10 @@ theme.images = {
     deliverect,
     ItsaCheckmateLogo,
     doordash,
-    lalamove
+    lalamove,
+    pickerExpress,
+    importMenu,
+    importedMenu
   },
   project: {
     active: projectActive,
@@ -387,6 +395,7 @@ theme.images = {
   },
   dummies: {
     noOrders: noOrders,
+    noBusinesses: noBusinesses,
     businessLogo: storeDummy,
     promotionDummy: promotionDummy,
     product: productDummy

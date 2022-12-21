@@ -21,6 +21,7 @@ export const ListenPageChanges = ({ children }) => {
     professionals: '/users/professionals',
     login: '/login',
     businesses: '/stores/list',
+    business_add: '/stores/add',
     brand: '/stores/brand',
     store: '/stores/products/:store?',
     basic_settings: '/settings/basic',

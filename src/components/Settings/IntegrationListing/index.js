@@ -22,6 +22,7 @@ import {
   IconWrapper,
   SettingItemContent
 } from './styles'
+import { PickerExpress } from '../PickerExpress'
 
 export const IntegrationListing = (props) => {
   const [, t] = useLanguage()
@@ -141,6 +142,17 @@ export const IntegrationListing = (props) => {
             </SettingItemContent>
           </SettingItemContainer>
           <SettingItemContainer
+            onClick={() => handleOpenSetting('picker_express')}
+          >
+            <IconWrapper fullWidth>
+              <img src={theme.images.general.pickerExpress} />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('CONNECT_WITH_PICKER_EXPRESS', 'Connect with Picker Express')}</h5>
+              <p>{t('CONNECT_PICKER_EXPRESS_DESCRIPTION', 'Picker express connect you with +200 hundred thousand driver from +10 delivery companies from your city.')}</p>
+            </SettingItemContent>
+          </SettingItemContainer>
+          <SettingItemContainer
             onClick={() => handleOpenSetting('deliverect')}
           >
             <IconWrapper>
@@ -201,6 +213,8 @@ export const IntegrationListing = (props) => {
       {showOption === 'doordash' && <DoordashConnect onClose={() => handleCloseSettings()} />}
 
       {showOption === 'lalamove' && <LalaMoveConnect onClose={() => handleCloseSettings()} />}
+
+      {showOption === 'picker_express' && <PickerExpress onClose={() => handleCloseSettings()} />}
 
       {showOption === 'deliverect' && <Deliverect onClose={() => handleCloseSettings()} />}
 

@@ -25,6 +25,7 @@ import { BusinessDetails } from '../BusinessDetails'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { ImportersButton } from '../ImportersButton'
 import { AddBusinessForm } from '../AddBusinessForm'
+import { ProductStep } from '../ProductStep'
 
 import {
   CategoryProductsContainer,
@@ -85,6 +86,7 @@ const BusinessProductsListingUI = (props) => {
   const categoryListRef = useRef()
   const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
   const [openSidebar, setOpenSidebar] = useState(null)
+  const [showPopup, setShowPopup] = useState(false)
 
   const [allowSpreadColumns, setAllowSpreadColumns] = useState({
     id: true,
@@ -220,6 +222,12 @@ const BusinessProductsListingUI = (props) => {
       setShowSelectHeader(true)
     }
   }, [slug])
+
+  useEffect(() => {
+    if (businessState?.business && businessState?.business?.categories?.length === 0) {
+      setShowPopup(true)
+    }
+  }, [businessState?.business])
 
   return (
     <>
@@ -474,6 +482,18 @@ const BusinessProductsListingUI = (props) => {
         <BatchImageForm
           {...props}
           onClose={() => setBatchImageFormOpen(false)}
+        />
+      </Modal>
+      <Modal
+        width={width > 1440 ? '40%' : '60%'}
+        padding='25px'
+        open={showPopup}
+        onClose={() => setShowPopup(false)}
+      >
+        <ProductStep
+          onClose={() => setShowPopup(false)}
+          orderingBusiness={businessState?.business}
+          getBusiness={getBusiness}
         />
       </Modal>
     </>

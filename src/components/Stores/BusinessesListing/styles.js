@@ -7,6 +7,11 @@ export const BusinessListingContainer = styled.div`
   transition: all 0.5s;
   overflow: hidden;
 
+  ${({ isAdd }) => isAdd && css`
+    max-height: 100vh;
+    overflow: auto;
+  `}
+
   @media print {
     display: none;
   }
@@ -81,6 +86,37 @@ export const ButtonGroup = styled.div`
         margin-left: 0px;
         margin-right: 5px;
       `}
+    }
+  }
+`
+
+export const EmptyBusinessWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: calc(100vh - 70px);
+
+  > img {
+    width: 90%;
+    max-width: 500px;
+  }
+  h2 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+    text-align: center;
+    max-width: 600px;
+    color: ${props => props.theme.colors.lightGray};
+  }
+  button {
+    height: 44px;
+  }
+  @media (min-width: 576px) {
+    > img {
+      width: 60%;
     }
   }
 `

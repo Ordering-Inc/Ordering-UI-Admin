@@ -1,3 +1,4 @@
+import { BusinessAdd } from './BusinessAdd'
 import { BusinessBrandListing } from './BusinessBrandListing'
 import { BusinessesListing } from './BusinessesListing'
 import { BusinessProductsListing } from './BusinessProductsListing'
@@ -101,6 +102,7 @@ import { ServiceDetail } from './ServiceDetail'
 import { ProductVideos } from './ProductVideos'
 
 export {
+  BusinessAdd,
   BusinessBrandListing,
   BusinessesListing,
   BusinessProductsListing,
