@@ -26,6 +26,14 @@ export const getIconCard = (brand = '') => {
       return <FaCreditCard />
   }
 }
+/**
+ * Function to get unique id
+ */
+export const getUniqueId = () => {
+  const dateString = Date.now().toString(36)
+  const randomness = Math.random().toString(36).substr(2)
+  return dateString + randomness
+}
 
 /**
  * Function to convert a string in string capitalized

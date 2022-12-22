@@ -7,7 +7,8 @@ import {
 
 export const Schedule = memo((props) => {
   const {
-    handleChangeSchedule
+    handleChangeSchedule,
+    schedule
   } = props
 
   const [, t] = useLanguage()
@@ -16,6 +17,7 @@ export const Schedule = memo((props) => {
     <ScheduleContainer>
       <h2>{t('SCHEDULE', 'Schedule')}</h2>
       <ScheduleController
+        scheduleList={schedule}
         handleChangeScheduleState={val => handleChangeSchedule(val)}
       />
     </ScheduleContainer>

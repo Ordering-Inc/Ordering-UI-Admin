@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
+import { useLanguage, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import { getStorageItem, setStorageItem } from '../../../utils'
-import { SideBar } from '../../Shared'
+import { Modal, SideBar } from '../../Shared'
 import { useTheme } from 'styled-components'
 
 import { BusinessesList } from '../BusinessesList'
@@ -12,7 +12,6 @@ import { BusinessesListingHeader } from '../BusinessesListingHeader'
 import { BusinessActiveStateFilter } from '../BusinessActiveStateFilter'
 import { BusinessTypeFilter } from '../BusinessTypeFilter'
 import { BusinessDetails } from '../BusinessDetails'
-// import { AddBusinessForm } from '../AddBusinessForm'
 import { WizardBusiness } from '../WizardBusiness'
 
 import {
@@ -26,6 +25,7 @@ import {
 import { BusinessSync } from '../BusinessSync'
 import { BusinessDelete } from '../BusinessDelete'
 import { Button } from '../../../styles'
+import { BusinessAddStore } from '../BusinessAddStore'
 
 const BusinessesListingUI = (props) => {
   const {
@@ -53,7 +53,6 @@ const BusinessesListingUI = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
-  const [events] = useEvent()
 
   const [isTutorialMode, setIsTutorialMode] = useState(false)
   const [openTutorialSidebarState, setOpenTutorialSidebarState] = useState(null)
@@ -66,13 +65,14 @@ const BusinessesListingUI = (props) => {
   const [businessTypes, setBusinessTypes] = useState([])
   const [openSync, setOpenSync] = useState(false)
   const [moveDistance, setMoveDistance] = useState(0)
+  const [isAdd, setIsAdd] = useState(false)
 
   const noBusinesses = useMemo(() => {
     return !businessList?.loading && businessList?.businesses?.length === 0 && pagination?.currentPage === 1 && !searchValue
   }, [businessList?.loading, businessList?.businesses, pagination, searchValue])
 
   const handleGotToAdd = () => {
-    events.emit('go_to_page', { page: 'business_add' })
+    setIsAdd(true)
   }
 
   const handleBackRedirect = () => {
@@ -291,6 +291,14 @@ const BusinessesListingUI = (props) => {
         business={detailsBusiness}
         handleSucessUpdateBusiness={handleSucessUpdateBusiness}
       />
+      <Modal
+        width='769px'
+        padding='30px'
+        open={isAdd}
+        onClose={() => setIsAdd(false)}
+      >
+        <BusinessAddStore />
+      </Modal>
     </>
   )
 }

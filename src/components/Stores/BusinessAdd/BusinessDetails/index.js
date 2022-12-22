@@ -15,7 +15,8 @@ export const BusinessDetails = (props) => {
     formState,
     handleChangeAddress,
     handleChangeInput,
-    handleChangeCenter
+    handleChangeCenter,
+    placeId
   } = props
 
   const [, t] = useLanguage()
@@ -45,7 +46,7 @@ export const BusinessDetails = (props) => {
           <Input
             name='name'
             placeholder={t('NAME', 'Name')}
-            defaultValue={formState?.changes?.name ?? ''}
+            value={formState?.changes?.name ?? ''}
             onChange={e => {
               handleChangeInput([{ name: 'name', value: e.target.value }, { name: 'slug', value: stringToSlug(e.target.value) }], true)
             }}
@@ -53,21 +54,23 @@ export const BusinessDetails = (props) => {
         </FormControl>
         <FormControl>
           <label>{t('ADDRESS', 'Address')}</label>
-          <GoogleAutocompleteInput
-            name='address'
-            className='input-autocomplete'
-            apiKey={googleMapsApiKey}
-            placeholder={t('ADDRESS', 'Address')}
-            onChangeAddress={(e) => {
-              handleChangeAddress(e)
-            }}
-            onChange={(e) => {
-              handleChangeInput(e)
-            }}
-            defaultValue={formState?.changes?.address ?? ''}
-            autoComplete='new-password'
-            countryCode={configs?.country_autocomplete?.value || '*'}
-          />
+          {googleMapsApiKey && (
+            <GoogleAutocompleteInput
+              name='address'
+              className='input-autocomplete'
+              apiKey={googleMapsApiKey}
+              placeholder={t('ADDRESS', 'Address')}
+              onChangeAddress={(e) => {
+                handleChangeAddress(e)
+              }}
+              onChange={(e) => {
+                handleChangeInput(e)
+              }}
+              defaultValue={formState?.changes?.address ?? ''}
+              autoComplete='new-password'
+              countryCode={configs?.country_autocomplete?.value || '*'}
+            />
+          )}
         </FormControl>
         <FormControl>
           <label>{t('ZIPCODE', 'Zipcode')}</label>
@@ -80,23 +83,25 @@ export const BusinessDetails = (props) => {
         </FormControl>
         <GoogleMapContainer>
           <label>{t('GOOGLE_PLACE_ID', 'Google place ID')}</label>
-          <p>{googleMapsApiKey}</p>
-          <WrapperMap>
-            <GoogleMapsMap
-              apiKey={configs?.google_maps_api_key?.value}
-              location={formState?.changes?.location ?? defaultPosition}
-              mapControls={googleMapsControls}
-              handleChangeCenter={handleChangeCenter}
-              isFitCenter
-            />
-          </WrapperMap>
+          <p>{placeId ?? googleMapsApiKey}</p>
+          {configs?.google_maps_api_key?.value && (
+            <WrapperMap>
+              <GoogleMapsMap
+                apiKey={configs?.google_maps_api_key?.value}
+                location={formState?.changes?.location ?? defaultPosition}
+                mapControls={googleMapsControls}
+                handleChangeCenter={handleChangeCenter}
+                isFitCenter
+              />
+            </WrapperMap>
+          )}
         </GoogleMapContainer>
         <FormControl noBottom>
           <label>{t('INT_NUMBER', 'Int. number')}</label>
           <Input
             name='cellphone'
             placeholder={t('INT_NUMBER', 'Int. number')}
-            defaultValue={formState?.changes?.cellphone ?? ''}
+            value={formState?.changes?.cellphone ?? ''}
             onChange={handleChangeInput}
           />
         </FormControl>
