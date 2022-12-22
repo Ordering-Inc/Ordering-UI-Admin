@@ -272,7 +272,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     }));
-  }), isProfessional && occupations.length > 0 && /*#__PURE__*/_react.default.createElement(_OccupationSelector.OccupationSelector, {
+  }), isProfessional && (occupations === null || occupations === void 0 ? void 0 : occupations.length) > 0 && /*#__PURE__*/_react.default.createElement(_OccupationSelector.OccupationSelector, {
     occupationId: user === null || user === void 0 ? void 0 : user.occupation_id,
     occupations: occupations,
     handleChangeOccupation: handleChangeOccupation
