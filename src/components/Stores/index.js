@@ -1,3 +1,4 @@
+import { BusinessAdd } from './BusinessAdd'
 import { BusinessBrandListing } from './BusinessBrandListing'
 import { BusinessesListing } from './BusinessesListing'
 import { BusinessProductsListing } from './BusinessProductsListing'
@@ -9,6 +10,7 @@ import { BusinessCustomFields } from './BusinessCustomFields'
 import { BusinessDeliveryPickupMore } from './BusinessDeliveryPickupMore'
 import { BusinessDetail } from './BusinessDetail'
 import { BusinessDetails } from './BusinessDetails'
+import { BusinessDelete } from './BusinessDelete'
 import { BusinessFrontLayout } from './BusinessFrontLayout'
 import { BusinessImages } from './BusinessImages'
 import { BusinessInformation } from './BusinessInformation'
@@ -100,6 +102,7 @@ import { ServiceDetail } from './ServiceDetail'
 import { ProductVideos } from './ProductVideos'
 
 export {
+  BusinessAdd,
   BusinessBrandListing,
   BusinessesListing,
   BusinessProductsListing,
@@ -111,6 +114,7 @@ export {
   BusinessDeliveryPickupMore,
   BusinessDetail,
   BusinessDetails,
+  BusinessDelete,
   BusinessFrontLayout,
   BusinessImages,
   BusinessInformation,

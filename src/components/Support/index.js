@@ -59,7 +59,7 @@ export const Support = (props) => {
             <Button
               borderRadius='7.6px'
               color='primary'
-              onClick={() => handleGoToLink('https://www.ordering.co/ordering-support')}
+              onClick={() => handleGoToLink('https://support.ordering.co')}
               outline
             >
               {t('TECH_SUPPORT', 'Tech Support')}

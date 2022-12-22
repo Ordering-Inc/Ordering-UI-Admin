@@ -46,7 +46,9 @@ const OrdersManagerUI = (props) => {
     handleSelectedSubOrderStatus,
     handleCustomOrderDetail,
     setSelectedOrderIds,
-    numberOfOrdersByStatus
+    numberOfOrdersByStatus,
+    allowColumns,
+    setAllowColumns
   } = props
 
   const [, t] = useLanguage()
@@ -166,7 +168,7 @@ const OrdersManagerUI = (props) => {
         <OrdersContentHeader
           isDisableTitle={isSelectedOrders}
           isDisableControl={isSelectedOrders}
-          title={t('ORDERS_MANAGER', 'Orders manager')}
+          title={t('ORDERS_LIST', 'Orders list')}
           searchValue={searchValue}
           driverGroupList={driverGroupList}
           driversList={driversList}
@@ -233,6 +235,8 @@ const OrdersManagerUI = (props) => {
                 setFilterModalOpen={setFilterModalOpen}
                 timeStatus={timeStatus}
                 slaSettingTime={slaSettingTime}
+                allowColumns={allowColumns}
+                setAllowColumns={setAllowColumns}
               />
             </WrapItemView>
           </OrdersInnerContent>
@@ -252,6 +256,7 @@ const OrdersManagerUI = (props) => {
           isTourFlag={isTourFlag}
           setIsTourFlag={setIsTourFlag}
           setIsTourOpen={setIsTourOpen}
+          drivers={driversList.drivers}
         />
       )}
 

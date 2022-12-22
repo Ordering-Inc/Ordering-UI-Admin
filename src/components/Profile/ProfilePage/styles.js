@@ -20,6 +20,7 @@ export const HeaderContainer = styled.div`
 export const UserInfoContainer = styled.div`
   padding-top: 30px;
   display: flex;
+  margin-bottom: 40px;
 `
 export const UserImage = styled.div`
   border-radius: 8px;
@@ -29,7 +30,7 @@ export const UserImage = styled.div`
   img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 8px;
   }
 `

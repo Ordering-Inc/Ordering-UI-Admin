@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
-import { Button } from '../../../styles'
+import { Button, Switch } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { SingleBusiness } from '../SingleBusiness'
+import { CheckSquareFill, Square } from 'react-bootstrap-icons'
 
 import {
   BusinessListContainer,
@@ -12,7 +13,11 @@ import {
   BusinessCardContainer,
   AddNewButtonLink,
   BusinessListBottomContainer,
-  AddFirstStoreContainer
+  AddFirstStoreContainer,
+  CheckBoxWrapper,
+  BusinessIdWrapper,
+  ActionWrapper,
+  FeaturedWrapper
 } from './styles'
 
 export const BusinessesList = (props) => {
@@ -28,11 +33,19 @@ export const BusinessesList = (props) => {
     handleOpenAddBusiness,
     detailsBusinessId,
     getPageBusinesses,
-    isTutorialMode
+    isTutorialMode,
+    businessIds,
+    handleChangeBusinessIds,
+    handleEnableAllBusiness,
+    selectedBusinessActiveState,
+    setBusinessIds,
+    handleGotToAdd
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const [isAllChecked, setIsAllChecked] = useState(false)
+  const [isAllFeatured, setIsAllFeatured] = useState(false)
 
   const [allowColumns, setAllowColumns] = useState({
     business: true,
@@ -71,6 +84,18 @@ export const BusinessesList = (props) => {
     getPageBusinesses(pageSize, expectedPage)
   }
 
+  const handleSelecteAllBusiness = () => {
+    const _businessIds = businessList.businesses?.reduce((ids, business) => [...ids, business.id], [])
+    if (!isAllChecked) {
+      setBusinessIds([...new Set([...businessIds, ..._businessIds])])
+    } else {
+      const updateBusinessIds = businessIds.filter((name) => {
+        return !_businessIds.includes(name)
+      })
+      setBusinessIds(updateBusinessIds)
+    }
+  }
+
   const handleScroll = useCallback(() => {
     const innerHeightScrolltop = window.innerHeight + document.documentElement?.scrollTop + 10
     const badScrollPosition = innerHeightScrolltop < document.documentElement?.offsetHeight
@@ -85,6 +110,20 @@ export const BusinessesList = (props) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll, viewMethod])
 
+  useEffect(() => {
+    const _isAllFeatured = businessList.businesses
+      .filter(business => businessIds.includes(business.id))
+      .every(business => business.featured)
+    setIsAllFeatured(_isAllFeatured)
+  }, [JSON.stringify(businessList.businesses), businessIds])
+
+  useEffect(() => {
+    if (businessList.loading) return
+    const _businessIds = businessList.businesses?.reduce((ids, business) => [...ids, business.id], [])
+    const _isAllChecked = _businessIds.every(elem => businessIds.includes(elem))
+    setIsAllChecked(_isAllChecked)
+  }, [JSON.stringify(businessList.businesses), businessIds])
+
   return (
     <>
       {viewMethod === 'list' && (
@@ -93,22 +132,55 @@ export const BusinessesList = (props) => {
             <BusinessListTable>
               <thead>
                 <tr>
-                  <th>{t('ID', 'ID')}</th>
+                  <th>
+                    <BusinessIdWrapper>
+                      <CheckBoxWrapper
+                        className='all-checkbox'
+                        isChecked={!businessList?.loading && isAllChecked}
+                        onClick={() => handleSelecteAllBusiness()}
+                      >
+                        {(!businessList?.loading && isAllChecked) ? (
+                          <CheckSquareFill />
+                        ) : (
+                          <Square />
+                        )}
+                      </CheckBoxWrapper>
+                      {t('ID', 'ID')}
+                    </BusinessIdWrapper>
+                  </th>
                   {allowColumns?.business && (
                     <th className='business'>{t('BUSINESS', 'Business')}</th>
                   )}
                   {allowColumns?.featured && (
-                    <th>{t('FEATURED', 'Featured')}</th>
+                    <th>
+                      <FeaturedWrapper>
+                        {businessIds?.length > 0 && (
+                          <Switch
+                            defaultChecked={isAllFeatured}
+                            onChange={(value) => handleEnableAllBusiness(value, true)}
+                          />
+                        )}
+                        {t('FEATURED', 'Featured')}
+                      </FeaturedWrapper>
+                    </th>
                   )}
                   {allowColumns?.ratings && (
                     <th>{t('RATINGS', 'Ratings')}</th>
                   )}
                   <th className='action'>
-                    <ColumnAllowSettingPopover
-                      allowColumns={allowColumns}
-                      optionsDefault={optionsDefault}
-                      handleChangeAllowColumns={handleChangeAllowColumns}
-                    />
+                    <ActionWrapper>
+                      <ColumnAllowSettingPopover
+                        allowColumns={allowColumns}
+                        optionsDefault={optionsDefault}
+                        handleChangeAllowColumns={handleChangeAllowColumns}
+                      />
+                      {businessIds?.length > 0 && (
+                        <Switch
+                          defaultChecked={selectedBusinessActiveState}
+                          onChange={(value) => handleEnableAllBusiness(value)}
+                        />
+                      )}
+                    </ActionWrapper>
                   </th>
                 </tr>
               </thead>
@@ -134,6 +206,8 @@ export const BusinessesList = (props) => {
                     handleSucessAddBusiness={handleSucessAddBusiness}
                     handleSucessUpdateBusiness={handleSucessUpdateBusiness}
                     handleOpenBusinessDetails={handleOpenBusinessDetails}
+                    businessIds={businessIds}
+                    handleChangeBusinessIds={handleChangeBusinessIds}
                   />
                 ))
               )}
@@ -142,7 +216,7 @@ export const BusinessesList = (props) => {
 
           <BusinessListBottomContainer>
             <AddNewButtonLink
-              onClick={() => handleOpenAddBusiness()}
+              onClick={() => handleGotToAdd()}
             >
               {t('ADD_NEW_STORE', 'Add new store')}
             </AddNewButtonLink>

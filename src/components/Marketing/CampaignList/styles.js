@@ -146,6 +146,7 @@ export const Tbody = styled.tbody`
 export const SwitchWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   > .campaign-enabled {
     margin-bottom: 0px;
@@ -162,6 +163,7 @@ export const SwitchWrapper = styled.div`
 export const StatusWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   p {
     text-transform: capitalize;
@@ -199,5 +201,12 @@ export const AddNewPageButton = styled.div`
 
   &:hover {
     color: ${props => props.theme.colors.primary};
+  }
+`
+
+export const LinkText = styled.span`
+  color: ${props => props.theme.colors.primary};
+  &:hover {
+    text-decoration: underline;
   }
 `

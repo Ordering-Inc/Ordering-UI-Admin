@@ -12,7 +12,6 @@ import {
 
 export const SelectSites = (props) => {
   const {
-    isAllChecked,
     isAddMode,
     isDisabled,
     selectedSitesIds,
@@ -21,7 +20,7 @@ export const SelectSites = (props) => {
     handleSelectAllSites,
     handleSelectNoneSites,
     handleUpdateClick,
-    handleAddPromotion
+    handleAddClick
   } = props
 
   const [, t] = useLanguage()
@@ -67,8 +66,8 @@ export const SelectSites = (props) => {
           key={site.id}
         >
           <Checkbox
-            checked={isAllChecked || selectedSitesIds.includes(site.id)}
-            onChange={(e) => handleSelectSite(isAllChecked ? true : e.target.checked, site.id)}
+            checked={selectedSitesIds.includes(site.id)}
+            onChange={(e) => handleSelectSite(e.target.checked, site.id)}
           />
           <span>{site.name}</span>
         </ChannelItem>
@@ -79,7 +78,7 @@ export const SelectSites = (props) => {
         color='primary'
         disabled={isDisabled}
         onClick={() => {
-          isAddMode ? handleAddPromotion() : handleUpdateClick()
+          isAddMode ? handleAddClick() : handleUpdateClick()
         }}
       >
         {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}

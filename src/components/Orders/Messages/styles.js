@@ -85,6 +85,7 @@ export const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   padding-bottom: 20px;
+  flex-wrap: wrap;
 
   > * {
     ${props => props.theme?.rtl ? css`
@@ -546,6 +547,7 @@ export const ChatContactInfoContainer = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 10px;
 
   ${({ disabled }) => disabled && css`
     opacity: 0.2;
@@ -560,6 +562,10 @@ export const InfoBlock = styled.div`
   `}
   > p {
     margin: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 190px;
 
     &:first-child {
       color: ${props => props.theme.colors.headingColor};

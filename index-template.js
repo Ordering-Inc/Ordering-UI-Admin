@@ -34,6 +34,18 @@ import whatsappHeader from './template/assets/images/whatsapp-header.png'
 import appStore from './template/assets/images/app-store.png'
 import googlePlay from './template/assets/images/google-play.png'
 import deliverect from './template/assets/images/deliverect.png'
+import ItsaCheckmateLogo from './template/assets/images/ItsaCheckmateLogo.png'
+import doordash from './template/assets/images/door-dash.png'
+import lalamove from './template/assets/images/lala-move.png'
+import pickerExpress from './template/assets/images/picker-express.png'
+import importMenu from './template/assets/images/import-menu.png'
+import importedMenu from './template/assets/images/imported-menu.png'
+
+/**
+ * project statuses
+ */
+import projectActive from './template/assets/images/projectStatuses/project-active.png'
+import projectPastDuePayment from './template/assets/images/projectStatuses/project-past-due-payment.png'
 
 /**
  * Theme apps
@@ -57,6 +69,7 @@ import storeDummy from './template/assets/images/dummies/store.png'
 import noOrders from './template/assets/images/dummies/no-orders.png'
 import promotionDummy from './template/assets/images/dummies/promotion.png'
 import productDummy from './template/assets/images/dummies/product.png'
+import noBusinesses from './template/assets/images/dummies/no-businesses.png'
 
 /**
  * icons
@@ -139,6 +152,30 @@ import android from './template/assets/images/icons/android.svg'
 import notificationOgg from './template/assets/sounds/notification.ogg'
 import notificationMp3 from './template/assets/sounds/notification.mp3'
 
+/**
+ * my products
+ */
+import myCustomerApp from './template/assets/images/myProducts/customer-app.png'
+import myStoreApp from './template/assets/images/myProducts/store-app.png'
+import myDriverApp from './template/assets/images/myProducts/driver-app.png'
+import orderingWebsite from './template/assets/images/myProducts/ordering-website.png'
+import myCallcenterAppBrand from './template/assets/images/myProducts/my-callcenter-app-brand.png'
+import myCallcenterAppLive from './template/assets/images/myProducts/my-callcenter-app-live.png'
+import myKioskAppBrand from './template/assets/images/myProducts/my-kiosk-app-brand.png'
+import myKioskAppLive from './template/assets/images/myProducts/my-kiosk-app-live.png'
+import myPosAppBrand from './template/assets/images/myProducts/my-pos-app-brand.png'
+import myPosAppLive from './template/assets/images/myProducts/my-pos-app-live.png'
+import storeAppFree from './template/assets/images/myProducts/store-app-free.png'
+import storeAppBrand from './template/assets/images/myProducts/store-app-brand.png'
+import driverAppFree from './template/assets/images/myProducts/driver-app-free.png'
+import driverAppBrand from './template/assets/images/myProducts/driver-app-brand.png'
+import multiStoreCustomerApp from './template/assets/images/myProducts/multi-store-customer-app.png'
+import singleStoreCustomerApp from './template/assets/images/myProducts/single-store-customer-app.png'
+import appStoreSmall from './template/assets/images/myProducts/app-store.png'
+import playStoreSmall from './template/assets/images/myProducts/play-store.png'
+
+import { AutologinParams } from './template/components/AutologinParams'
+
 const logos = {
   logotype,
   logotypeInvert,
@@ -164,7 +201,17 @@ theme.images = {
     whatsappHeader,
     appStore,
     googlePlay,
-    deliverect
+    deliverect,
+    ItsaCheckmateLogo,
+    doordash,
+    lalamove,
+    pickerExpress,
+    importMenu,
+    importedMenu
+  },
+  project: {
+    active: projectActive,
+    pastDuePayment: projectPastDuePayment
   },
   apps: {
     storeApp,
@@ -205,6 +252,26 @@ theme.images = {
     inProgress: orderInProgress,
     completed: orderCompleted,
     cancelled: orderCancelled
+  },
+  myProducts: {
+    customerApp: myCustomerApp,
+    storeApp: myStoreApp,
+    driverApp: myDriverApp,
+    orderingWebsite: orderingWebsite,
+    myCallcenterAppBrand,
+    myCallcenterAppLive,
+    myKioskAppBrand,
+    myKioskAppLive,
+    myPosAppBrand,
+    myPosAppLive,
+    storeAppFree,
+    storeAppBrand,
+    driverAppFree,
+    driverAppBrand,
+    multiStoreCustomerApp,
+    singleStoreCustomerApp,
+    appStoreSmall,
+    playStoreSmall
   },
   icons: {
     ordersList: ordersList,
@@ -250,6 +317,7 @@ theme.images = {
   },
   dummies: {
     noOrders: noOrders,
+    noBusinesses: noBusinesses,
     businessLogo: storeDummy,
     promotionDummy: promotionDummy,
     product: productDummy
@@ -275,18 +343,24 @@ const RouteApp = () => {
       ...settings.api,
       language: language
     },
-    project: window.localStorage.getItem('project') !== null ? window.localStorage.getItem('project') : null
+    project: settings?.use_project_domain
+      ? '_'
+      : window.localStorage.getItem('project') !== null
+        ? window.localStorage.getItem('project')
+        : null
   })
 
   return (
     <ConfigFileContext.Provider value={[configFile, setConfigFile]}>
       <ThemeProvider theme={theme}>
-        <OrderingProvider Alert={Alert} settings={configFile}>
-          <InfoShareProvider>
-            <Router />
-            <Toast />
-          </InfoShareProvider>
-        </OrderingProvider>
+        <AutologinParams configFile={configFile}>
+          <OrderingProvider Alert={Alert}>
+            <InfoShareProvider>
+              <Router />
+              <Toast />
+            </InfoShareProvider>
+          </OrderingProvider>
+        </AutologinParams>
       </ThemeProvider>
     </ConfigFileContext.Provider>
   )

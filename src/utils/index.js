@@ -26,6 +26,14 @@ export const getIconCard = (brand = '') => {
       return <FaCreditCard />
   }
 }
+/**
+ * Function to get unique id
+ */
+export const getUniqueId = () => {
+  const dateString = Date.now().toString(36)
+  const randomness = Math.random().toString(36).substr(2)
+  return dateString + randomness
+}
 
 /**
  * Function to convert a string in string capitalized
@@ -244,6 +252,16 @@ export const shape = {
 }
 
 /**
+ * Function to check URL
+ * @param {string} url URL of page
+ * @param {string} fallback default URL
+ */
+export const checkPreSiteUrl = (url, fallback) => {
+  if (!url) return fallback
+  return url[0] === '/' ? url : `/${url}`
+}
+
+/**
  * default value for bitton
  */
 export const ribbonValues = {
@@ -251,6 +269,25 @@ export const ribbonValues = {
   text: 'ribbon',
   shape: 'rectangle',
   enabled: false
+}
+/**
+ * Format seconds to hh:mm:ss
+ * @param {number} seconds
+ */
+export const formatSeconds = (seconds) => {
+  // Hours, minutes and seconds
+  const hrs = Math.floor(seconds / 3600)
+  const mins = Math.floor((seconds % 3600) / 60)
+  const secs = Math.floor(seconds % 60)
+
+  // Output like '1:01' or '4:03:59' or '123:03:59'
+  let ret = ''
+  if (hrs > 0) {
+    ret += '' + hrs + ':' + (mins < 10 ? '0' : '')
+  }
+  ret += '' + mins + ':' + (secs < 10 ? '0' : '')
+  ret += '' + secs
+  return ret
 }
 
 /**
@@ -387,3 +424,35 @@ export const orderRejectCommentList = (status) => {
 }
 
 export const widgetURL = 'https://orderingweb.ordering.co/'
+
+export const getCurrentDiffDays = (time) => {
+  const current = moment().utc()
+  const compared = moment(time)
+  return compared.diff(current, 'days')
+}
+
+export const firstLetterCapital = (text) => {
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+}
+
+export const stringToSlug = str => {
+  str = str.replace(/^\s+|\s+$/g, '') // trim
+  str = str?.toLowerCase()
+
+  // remove accents, swap ñ for n, etc
+  const from = 'åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;'
+  const to = 'aaaaaaeeeeiiiioooouuuunc------'
+
+  for (let i = 0, l = from.length; i < l; i++) {
+    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i))
+  }
+
+  str = str
+    .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    .replace(/\s+/g, '_') // collapse whitespace and replace by -
+    .replace(/-+/g, '_') // collapse dashes
+    .replace(/^-+/, '') // trim - from start of text
+    .replace(/-+$/, '') // trim - from end of text
+
+  return str
+}

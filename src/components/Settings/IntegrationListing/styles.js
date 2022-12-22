@@ -77,11 +77,21 @@ export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
   svg {
     font-size: 24px;
     color: ${props => props.theme.colors.secundaryLight};
   }
+  img{
+    width: 100%;
+    max-width: 90%;
+  }
+  ${({ fullWidth }) => fullWidth && css`
+    img {
+      max-width: 100%;
+    }
+  `}
 `
 
 export const SettingItemContent = styled.div`

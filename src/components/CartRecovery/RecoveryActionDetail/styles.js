@@ -94,7 +94,7 @@ export const ActionSelectorWrapper = styled.div`
         }
       }
       .dropdown-item:last-child {
-        color: #E63757;
+        color: ${props => props.theme.colors.danger};
       }
     }
   }

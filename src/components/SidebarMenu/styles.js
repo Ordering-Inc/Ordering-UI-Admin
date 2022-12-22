@@ -44,7 +44,6 @@ export const SidebarContainer = styled.div`
     }
 
     span {
-      text-transform: capitalize;
       ${props => props.theme?.rtl ? css`
         margin-right: 15px;
       ` : css`
@@ -74,9 +73,13 @@ export const SidebarInnerContainer = styled.div`
 
 export const SidebarHeader = styled.div`
   display: flex;
+  flex-direction: column;
+  padding: 12px;
+`
+export const LogoWrapper = styled.div`
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
 
   > img {
     max-width: 150px;
@@ -84,7 +87,6 @@ export const SidebarHeader = styled.div`
     object-fit: contain;
   }
 `
-
 export const BurgerButton = styled.button`
   background-color: transparent;
   border: none;
@@ -156,9 +158,24 @@ export const UserInfo = styled.div`
 `
 export const MenuContainer = styled.div`
   margin: 5px 0;
+  > span {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 15px;
+    padding: 0px 13px;
+    color: ${props => props.theme.colors.lightGray};
+  }
   > button {
     width: 100%;
     text-align: initial;
+  }
+
+  > span {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 15px;
+    padding: 20px;
+    color: ${props => props.theme.colors.lightGray};
   }
 
   ${({ disabledFeature }) => disabledFeature && css`
@@ -217,4 +234,9 @@ export const LanguageSelectorContainer = styled.div`
       font-size: 14px;
     }
   }
+`
+export const PoweredWrapper = styled.div`
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
 `

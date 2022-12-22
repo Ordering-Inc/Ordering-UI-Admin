@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
-import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
+import { CheckSquareFill as Checked, Square as UnChecked } from 'react-bootstrap-icons'
 import { SearchBar, Pagination } from '../../Shared'
 import { Button } from '../../../styles'
 import {
@@ -45,15 +44,6 @@ const AnalyticsBusinessFilterUI = (props) => {
     setPagesPerPage(pageSize)
   }
 
-  const isCheckEnableSate = (id) => {
-    const found = businessIds?.find(businessId => businessId === id)
-    let valid = false
-    if (found) {
-      valid = true
-    }
-    return valid
-  }
-
   useEffect(() => {
     if (businessList.loading) return
     let _totalPages
@@ -82,7 +72,7 @@ const AnalyticsBusinessFilterUI = (props) => {
         {businessList.loading ? (
           [...Array(10).keys()].map(i => (
             <BusinessFilterOption key={i}>
-              <Skeleton width={15} height={15} />
+              <Skeleton width={18} height={18} />
               <BusinessName>
                 <Skeleton width={120} height={24} />
               </BusinessName>
@@ -95,9 +85,9 @@ const AnalyticsBusinessFilterUI = (props) => {
                 onClick={handleChangeAllCheck}
               >
                 {isAllCheck ? (
-                  <RiCheckboxFill className='fill' />
+                  <Checked className='fill' />
                 ) : (
-                  <RiCheckboxBlankLine />
+                  <UnChecked />
                 )}
                 <BusinessName>{t('ALL', 'All')}</BusinessName>
               </BusinessFilterOption>
@@ -107,10 +97,10 @@ const AnalyticsBusinessFilterUI = (props) => {
                 key={i}
                 onClick={() => handleChangeBusinessId(business?.id)}
               >
-                {isCheckEnableSate(business.id) ? (
-                  <RiCheckboxFill className='fill' />
+                {businessIds?.includes(business.id) ? (
+                  <Checked className='fill' />
                 ) : (
-                  <RiCheckboxBlankLine />
+                  <UnChecked />
                 )}
                 <BusinessName>{business?.name}</BusinessName>
               </BusinessFilterOption>

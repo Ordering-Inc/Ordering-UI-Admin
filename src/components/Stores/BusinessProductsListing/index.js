@@ -5,6 +5,7 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 import RiImageAddFill from '@meronex/icons/ri/RiImageAddFill'
 import {
   useLanguage,
+  useApi,
   BusinessProductsListing as BusinessProductsListingController
 } from 'ordering-components-admin'
 import { BusinessProductsCategoyDetails } from '../BusinessProductsCategoyDetails'
@@ -23,6 +24,8 @@ import { BatchImageForm } from '../BatchImageForm'
 import { BusinessDetails } from '../BusinessDetails'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { ImportersButton } from '../ImportersButton'
+import { AddBusinessForm } from '../AddBusinessForm'
+import { ProductStep } from '../ProductStep'
 
 import {
   CategoryProductsContainer,
@@ -38,7 +41,8 @@ import {
   BusinessNameWrapper,
   BusinessSelector,
   Breadcrumb,
-  ColumnsAllowWrapper
+  ColumnsAllowWrapper,
+  ButtonWrapper
 } from './styles'
 
 const BusinessProductsListingUI = (props) => {
@@ -71,6 +75,7 @@ const BusinessProductsListingUI = (props) => {
 
   const [, t] = useLanguage()
   const { width } = useWindowSize()
+  const [ordering] = useApi()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [viewMethod, setViewMethod] = useState('list')
   const [currentCategory, setCurrentCategory] = useState(null)
@@ -81,6 +86,7 @@ const BusinessProductsListingUI = (props) => {
   const categoryListRef = useRef()
   const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
   const [openSidebar, setOpenSidebar] = useState(null)
+  const [showPopup, setShowPopup] = useState(false)
 
   const [allowSpreadColumns, setAllowSpreadColumns] = useState({
     id: true,
@@ -190,6 +196,15 @@ const BusinessProductsListingUI = (props) => {
     setBatchImageFormOpen(true)
   }
 
+  const handleOpenSite = () => {
+    window.open(`https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`, '_blank')
+  }
+
+  const handleOpenAddBusiness = () => {
+    setOpenSidebar('add_business')
+    handleClose()
+  }
+
   useEffect(() => {
     if (slug && !isInitialRender) {
       setOpenSidebar(null)
@@ -207,6 +222,12 @@ const BusinessProductsListingUI = (props) => {
       setShowSelectHeader(true)
     }
   }, [slug])
+
+  useEffect(() => {
+    if (businessState?.business && businessState?.business?.categories?.length === 0) {
+      setShowPopup(true)
+    }
+  }, [businessState?.business])
 
   return (
     <>
@@ -236,6 +257,7 @@ const BusinessProductsListingUI = (props) => {
                         isOpen={showSelectHeader}
                         changeBusinessState={changeBusinessState}
                         noActiveStatusCondition
+                        handleOpenAddBusiness={handleOpenAddBusiness}
                       />
                     )}
                   </BusinessSelector>
@@ -293,6 +315,16 @@ const BusinessProductsListingUI = (props) => {
             </ActionsGroup>
           )}
         </HeaderContainer>
+        <ButtonWrapper>
+          <Button
+            color='primary'
+            outline
+            borderRadius='8px'
+            onClick={handleOpenSite}
+          >
+            {t('STORE_WEBSITE', 'Store website')}
+          </Button>
+        </ButtonWrapper>
         {slug && (
           <CategoryProductsContent>
             <CategoryListContainer ref={categoryListRef}>
@@ -431,6 +463,16 @@ const BusinessProductsListingUI = (props) => {
           onClose={() => setOpenSidebar(null)}
         />
       )}
+      {openSidebar === 'add_business' && (
+        <SideBar
+          open={openSidebar === 'add_business'}
+          onClose={() => setOpenSidebar(null)}
+        >
+          <AddBusinessForm
+            handleSucessAddBusiness={() => setOpenSidebar(false)}
+          />
+        </SideBar>
+      )}
       <Modal
         width={width > 1440 ? '40%' : '60%'}
         padding='20px'
@@ -440,6 +482,18 @@ const BusinessProductsListingUI = (props) => {
         <BatchImageForm
           {...props}
           onClose={() => setBatchImageFormOpen(false)}
+        />
+      </Modal>
+      <Modal
+        width={width > 1440 ? '40%' : '60%'}
+        padding='25px'
+        open={showPopup}
+        onClose={() => setShowPopup(false)}
+      >
+        <ProductStep
+          onClose={() => setShowPopup(false)}
+          orderingBusiness={businessState?.business}
+          getBusiness={getBusiness}
         />
       </Modal>
     </>

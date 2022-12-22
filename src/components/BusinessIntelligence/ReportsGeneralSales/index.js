@@ -12,7 +12,7 @@ import { Download } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
 import { Modal } from '../../Shared'
-
+import { CountryFilter } from '../CountryFilter'
 import {
   ReportsBusinessSpendContainer,
   DistancePerBrandWrapper,
@@ -41,6 +41,7 @@ const ReportsGeneralSalesUI = (props) => {
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
+  const [openCountryFilter, setOpenCountryFilter] = useState(true)
 
   const tableRef = useRef(null)
 
@@ -123,6 +124,11 @@ const ReportsGeneralSalesUI = (props) => {
             onClick={() => setIsBusinessFilter(true)}
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
+          </Button>
+          <Button
+            onClick={() => setOpenCountryFilter(true)}
+          >
+            {t('COUNTRY', 'Country')}
           </Button>
         </BrandBusinessWrapper>
         <CalendarWrapper>
@@ -233,6 +239,18 @@ const ReportsGeneralSalesUI = (props) => {
           {...props}
           onClose={() => setIsBusinessFilter(false)}
           isFranchise
+        />
+      </Modal>
+      <Modal
+        width='450px'
+        height='650px'
+        padding='25px'
+        open={openCountryFilter}
+        onClose={() => setOpenCountryFilter(false)}
+      >
+        <CountryFilter
+          {...props}
+          onClose={() => setOpenCountryFilter(false)}
         />
       </Modal>
     </ReportsBusinessSpendContainer>

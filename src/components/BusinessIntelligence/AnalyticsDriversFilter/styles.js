@@ -17,7 +17,7 @@ export const TreeViewParentItem = styled.div`
 
   svg {
     font-size: 24px;
-    color: #B1BCCC;
+    color: ${props => props.theme.colors.secundaryLight};
     &.fill {
       color: ${props => props.theme?.colors.primary};
     }
@@ -49,7 +49,7 @@ export const TreeViewChildrenItem = styled.div`
 
   svg {
     font-size: 24px;
-    color: #B1BCCC;
+    color: ${props => props.theme.colors.secundaryLight};
     &.fill {
       color: ${props => props.theme?.colors.primary};
     }

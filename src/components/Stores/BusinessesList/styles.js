@@ -103,3 +103,55 @@ export const AddFirstStoreContainer = styled.div`
     }
   }
 `
+
+export const CheckBoxWrapper = styled.div`
+  cursor: pointer;
+  display: flex;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 10px;
+  ` : css`
+    margin-right: 10px;
+  `}
+  svg {
+    font-size: 16px;
+    color: ${props => props.theme.colors.secundaryLight};
+  }
+
+  ${({ isChecked }) => isChecked && css`
+    svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+  `}
+`
+
+export const BusinessIdWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const ActionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  > label {
+    margin-left: 5px;
+    ${props => props.theme.rtl && css`
+      margin-right: 5px;
+      margin-left: 0px;
+    `}
+  }
+`
+
+export const FeaturedWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  label {
+    margin-right: 5px;
+    ${props => props.theme.rtl && css`
+      margin-right: 0px;
+      margin-left: 5px;
+    `}
+  }
+`

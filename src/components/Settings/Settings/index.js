@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useTheme } from 'styled-components'
-import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
+import { useLanguage, useEvent, useConfig, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
 import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill, InfoCircle } from 'react-bootstrap-icons'
@@ -11,7 +11,6 @@ import { SideBar } from '../../Shared'
 import { CheckoutFieldsSetting } from '../CheckoutFieldsSetting'
 import { AddressFieldsSetting } from '../AddressFieldsSetting'
 import { LanguageSetting } from '../LanguageSetting'
-import { SitesAuthSettings } from '../SitesAuthSettings'
 import { MultiCountrySettings } from '../MultiCountrySettings'
 
 import {
@@ -34,13 +33,15 @@ const SettingsUI = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [{ configs }] = useConfig()
+  const isMulticountryEnabled = configs?.multicountry?.value
+
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const { search } = useLocation()
 
   const [isOpenDescription, setIsOpenDescription] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
-  const [openSitesAuthSettings, setOpenSitesAuthSettings] = useState(false)
   const [openMultiCountrySettings, setOpenMultiCountrySettings] = useState(false)
   const [moveDistance, setMoveDistance] = useState(0)
 
@@ -75,7 +76,6 @@ const SettingsUI = (props) => {
 
   const handleOpenDescription = (category) => {
     setIsOpenSettingDetails(null)
-    setOpenSitesAuthSettings(false)
     setOpenMultiCountrySettings(false)
     setIsOpenDescription(true)
     setSelectedCategory(category)
@@ -85,7 +85,6 @@ const SettingsUI = (props) => {
 
   const handleOpenSettingDetails = (item) => {
     setIsOpenDescription(false)
-    setOpenSitesAuthSettings(false)
     setOpenMultiCountrySettings(false)
     setSelectedCategory(null)
     setIsOpenSettingDetails(item)
@@ -181,36 +180,23 @@ const SettingsUI = (props) => {
                   active={isOpenSettingDetails === 'address'}
                 />
               </SettingItemWrapper>
-              <SettingItemWrapper
-                className='col-md-4 col-sm-6'
-                onClick={() => {
-                  setIsOpenDescription(false)
-                  setIsOpenSettingDetails(null)
-                  setOpenSitesAuthSettings(true)
-                }}
-              >
-                <SettingItemUI
-                  title={t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings')}
-                  description={t('SITES_LOGIN_SIGNUP_SETTINGS_DESC', 'Advanced sites login/sign up settings')}
-                  icon={<GearFill />}
-                  active={openSitesAuthSettings}
-                />
-              </SettingItemWrapper>
-              <SettingItemWrapper
-                className='col-md-4 col-sm-6'
-                onClick={() => {
-                  setIsOpenDescription(false)
-                  setIsOpenSettingDetails(null)
-                  setOpenMultiCountrySettings(true)
-                }}
-              >
-                <SettingItemUI
-                  title={t('MULTI_COUNTRY_SETTINGS', 'Multi country settings')}
-                  description={t('MULTI_COUNTRY_SETTINGS_DESC', 'Settings according country')}
-                  icon={<GearFill />}
-                  active={openMultiCountrySettings}
-                />
-              </SettingItemWrapper>
+              {isMulticountryEnabled && (
+                <SettingItemWrapper
+                  className='col-md-4 col-sm-6'
+                  onClick={() => {
+                    setIsOpenDescription(false)
+                    setIsOpenSettingDetails(null)
+                    setOpenMultiCountrySettings(true)
+                  }}
+                >
+                  <SettingItemUI
+                    title={t('MULTI_COUNTRY_SETTINGS', 'Multi country settings')}
+                    description={t('MULTI_COUNTRY_SETTINGS_DESC', 'Settings according country')}
+                    icon={<GearFill />}
+                    active={openMultiCountrySettings}
+                  />
+                </SettingItemWrapper>
+              )}
             </>
           )}
           {
@@ -259,19 +245,6 @@ const SettingsUI = (props) => {
           />
         )
       }
-      {openSitesAuthSettings && (
-        <SideBar
-          defaultSideBarWidth={500 + moveDistance}
-          moveDistance={moveDistance}
-          open={openSitesAuthSettings}
-          onClose={() => {
-            setMoveDistance(0)
-            setOpenSitesAuthSettings(false)
-          }}
-        >
-          <SitesAuthSettings setMoveDistance={setMoveDistance} />
-        </SideBar>
-      )}
       {openMultiCountrySettings && (
         <SideBar
           defaultSideBarWidth={500 + moveDistance}

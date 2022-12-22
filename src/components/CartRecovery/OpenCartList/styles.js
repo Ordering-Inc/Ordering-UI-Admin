@@ -179,7 +179,7 @@ export const CheckBox = styled.span`
   `}
   svg {
     font-size: 18px;
-    color: #B1BCCC;
+    color: ${props => props.theme.colors?.secundaryLight};
 
     ${({ isChecked }) => isChecked && css`
       color: ${props => props.theme.colors?.primary};

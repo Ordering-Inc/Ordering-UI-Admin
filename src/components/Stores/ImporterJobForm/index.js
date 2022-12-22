@@ -29,7 +29,8 @@ const ImporterJobFormUI = (props) => {
     handleOpenChildForm,
     handleCloseChildForm,
     openMappingDetails,
-    setOpenMappingDetails
+    setOpenMappingDetails,
+    handleSuccessUpdateImporter
   } = props
   const [, t] = useLanguage()
   const formMethods = useForm()
@@ -295,6 +296,12 @@ const ImporterJobFormUI = (props) => {
               selectedImporter={selectedImporter}
               openMappingDetails={openMappingDetails}
               setOpenMappingDetails={setOpenMappingDetails}
+              handleSuccessUpdateImporter={handleSuccessUpdateImporter}
+              onClose={() => {
+                handleCloseChildForm()
+                setOpenMappingDetails(false)
+                setOpenAdvancedOptions(false)
+              }}
             />
           </SideBar>
         )}

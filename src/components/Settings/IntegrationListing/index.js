@@ -8,6 +8,11 @@ import { SideBar } from '../../Shared'
 import { PluginList } from '../PluginList'
 import { WebhookList } from '../WebhookList'
 import { ApiKeysList } from '../ApiKeysList'
+import { DoordashConnect } from '../DoordashConnect'
+import { useTheme } from 'styled-components'
+import { LalaMoveConnect } from '../LalaMoveConnect'
+import { Deliverect } from '../Deliverect'
+import { ItsaCheckmate } from '../ItsaCheckmate'
 
 import {
   IntegrationsContainer,
@@ -17,11 +22,13 @@ import {
   IconWrapper,
   SettingItemContent
 } from './styles'
+import { PickerExpress } from '../PickerExpress'
 
 export const IntegrationListing = (props) => {
   const [, t] = useLanguage()
   const { search } = useLocation()
   const [events] = useEvent()
+  const theme = useTheme()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [showOption, setShowOption] = useState(null)
 
@@ -112,6 +119,61 @@ export const IntegrationListing = (props) => {
               <p>{t('APIKEYS_DESCRIPTION', 'These keys serve to obtain a direct connection to the API without the need for authentication.')}</p>
             </SettingItemContent>
           </SettingItemContainer>
+          <SettingItemContainer
+            onClick={() => handleOpenSetting('doordash')}
+          >
+            <IconWrapper>
+              <img src={theme.images.general.doordash} />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('CONNECT_WITH_DOORDASH', 'Connect with Doordash')}</h5>
+              <p>{t('CONNECT_DOORDASH_DESCRIPTION', 'Send orders directly to your driver in Doordash and keep customers happy with their deliveries.')}</p>
+            </SettingItemContent>
+          </SettingItemContainer>
+          <SettingItemContainer
+            onClick={() => handleOpenSetting('lalamove')}
+          >
+            <IconWrapper>
+              <img src={theme.images.general.lalamove} />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('CONNECT_WITH_LALAMOVE', 'Connect with lalamove')}</h5>
+              <p>{t('CONNECT_LALAMOVE_DESCRIPTION', 'Send orders directly to your drivers in LalaMove and keep customers happy with their deliveries.')}</p>
+            </SettingItemContent>
+          </SettingItemContainer>
+          <SettingItemContainer
+            onClick={() => handleOpenSetting('picker_express')}
+          >
+            <IconWrapper fullWidth>
+              <img src={theme.images.general.pickerExpress} />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('CONNECT_WITH_PICKER_EXPRESS', 'Connect with Picker Express')}</h5>
+              <p>{t('CONNECT_PICKER_EXPRESS_DESCRIPTION', 'Picker express connect you with +200 hundred thousand driver from +10 delivery companies from your city.')}</p>
+            </SettingItemContent>
+          </SettingItemContainer>
+          <SettingItemContainer
+            onClick={() => handleOpenSetting('deliverect')}
+          >
+            <IconWrapper>
+              <img src={theme.images.general.deliverect} />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('DELIVERECT', 'Deliverect')}</h5>
+              <p>{t('SYNC_DEC_FIRST', 'The easiest way to manage all your online orders.')}</p>
+            </SettingItemContent>
+          </SettingItemContainer>
+          <SettingItemContainer
+            onClick={() => handleOpenSetting('itsacheckmate')}
+          >
+            <IconWrapper>
+              <img src={theme.images.general.ItsaCheckmateLogo} />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('ITSACHECKMATE', 'ItsaCheckmate')}</h5>
+              <p dangerouslySetInnerHTML={{ __html: t('ITSACHECKMATE_SUB_HEADER', 'Take control of all your <strong>Ordering Platform Menus</strong> in one place!') }} />
+            </SettingItemContent>
+          </SettingItemContainer>
         </SettingListContainer>
       </IntegrationsContainer>
 
@@ -147,6 +209,16 @@ export const IntegrationListing = (props) => {
           <ApiKeysList />
         </SideBar>
       )}
+
+      {showOption === 'doordash' && <DoordashConnect onClose={() => handleCloseSettings()} />}
+
+      {showOption === 'lalamove' && <LalaMoveConnect onClose={() => handleCloseSettings()} />}
+
+      {showOption === 'picker_express' && <PickerExpress onClose={() => handleCloseSettings()} />}
+
+      {showOption === 'deliverect' && <Deliverect onClose={() => handleCloseSettings()} />}
+
+      {showOption === 'itsacheckmate' && <ItsaCheckmate onClose={() => handleCloseSettings()} />}
     </>
   )
 }

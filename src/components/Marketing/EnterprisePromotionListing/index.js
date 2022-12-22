@@ -42,7 +42,7 @@ const EnterprisePromotionListingUI = (props) => {
   const [moveDistance, setMoveDistance] = useState(0)
 
   const handleOpenDetails = (promotion) => {
-    setMoveDistance(0) 
+    setMoveDistance(0)
     setSelectedPromotion(promotion)
     setOpenDetails(true)
   }
@@ -82,7 +82,7 @@ const EnterprisePromotionListingUI = (props) => {
                 <MenuIcon />
               </IconButton>
             )}
-            <h1>{t('PROMOTIONS_ENTERPRISE', 'Promotions enterprise')}</h1>
+            <h1>{t('PROMOTION_AUTOMATION', 'Promotions automation')}</h1>
           </HeaderTitleContainer>
           <ActionsWrapper eventDisabled={advancedOfferModuleDisabled || isDisabledFeature}>
             <Button

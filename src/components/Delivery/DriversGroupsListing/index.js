@@ -45,6 +45,7 @@ const DriversGroupsListingUI = (props) => {
   const [moveDistance, setMoveDistance] = useState(0)
   const [openDetails, setOpenDetails] = useState(false)
   const [curDriversGroup, setCurDriversGroup] = useState(null)
+  const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
 
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(4)
@@ -128,7 +129,7 @@ const DriversGroupsListingUI = (props) => {
                 <MenuIcon />
               </IconButton>
             )}
-            <h1>{t('DRIVERS_GROUPS', 'Drivers groups')}</h1>
+            <h1>{t('DELIVERY_AUTOMATION', 'Delivery automation')}</h1>
             <OverlayTrigger
               placement='bottom'
               overlay={
@@ -186,7 +187,7 @@ const DriversGroupsListingUI = (props) => {
       {openDetails && (
         <SideBar
           sidebarId='driver_group_details'
-          defaultSideBarWidth={550 + moveDistance}
+          defaultSideBarWidth={!isExtendExtraOpen ? 540 + moveDistance : 1040}
           open={openDetails}
           moveDistance={moveDistance}
           noAnimation={isTourOpen}
@@ -207,6 +208,8 @@ const DriversGroupsListingUI = (props) => {
             companies={driversCompanyList?.companies}
             handleUpdateDriversGroup={handleUpdateDriversGroup}
             handleParentSidebarMove={val => setMoveDistance(val)}
+            setIsExtendExtraOpen={setIsExtendExtraOpen}
+            isExtendExtraOpen={isExtendExtraOpen}
             onClose={() => {
               setOpenDetails(false)
               if (isTourOpen) {

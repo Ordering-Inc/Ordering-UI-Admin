@@ -5,6 +5,7 @@ import {
   useUtils,
   DashboardBusinessList as BusinessListController
 } from 'ordering-components-admin'
+import { Button } from '../../../styles'
 import {
   PopMenuContatiner,
   BusinessSearch,
@@ -24,7 +25,8 @@ const BusinessessListingUI = (props) => {
     getPageBusinesses,
     isOpen,
     close,
-    changeBusinessState
+    changeBusinessState,
+    handleOpenAddBusiness
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -91,7 +93,7 @@ const BusinessessListingUI = (props) => {
             </>
           )}
         </BusinessList>
-        {pagination && (
+        {pagination && pagination?.total > 0 && (
           <WrapperPagination className='pagination-container'>
             {pagination?.total && (
               <Pagination
@@ -104,6 +106,16 @@ const BusinessessListingUI = (props) => {
               />
             )}
           </WrapperPagination>
+        )}
+
+        {!businessList.loading && pagination?.total === 0 && (
+          <Button
+            color='primary'
+            borderRadius='8px'
+            onClick={() => handleOpenAddBusiness()}
+          >
+            {t('ADD_NEW_STORE', 'Add new store')}
+          </Button>
         )}
       </SelectHeaderContent>
     </PopMenuContatiner>

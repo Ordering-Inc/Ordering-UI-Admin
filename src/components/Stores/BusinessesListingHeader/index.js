@@ -17,11 +17,13 @@ export const BusinessesListingHeader = (props) => {
   const {
     searchValue,
     onSearch,
-    handleOpenAddBusiness,
+    // handleOpenAddBusiness,
     handleStartTutorial,
     handleOpenSync,
     handleRefreshBusinesses,
-    loading
+    loading,
+    noBusinesses,
+    handleGotToAdd
   } = props
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -38,57 +40,62 @@ export const BusinessesListingHeader = (props) => {
           </IconButton>
         )}
         <h1>{t('STORES_LIST', 'Stores list')}</h1>
-        <OverlayTrigger
-          placement='bottom'
-          overlay={
-            <Tooltip>
-              {t('START_TUTORIAL', 'Start tutorial')}
-            </Tooltip>
-          }
-        >
-          <IconButton
-            color='dark'
-            className='tour_btn'
-            onClick={() => handleStartTutorial()}
+        {!noBusinesses && (
+          <OverlayTrigger
+            placement='bottom'
+            overlay={
+              <Tooltip>
+                {t('START_TUTORIAL', 'Start tutorial')}
+              </Tooltip>
+            }
           >
-            <LifePreserver />
-          </IconButton>
-        </OverlayTrigger>
+            <IconButton
+              color='dark'
+              className='tour_btn'
+              onClick={() => handleStartTutorial()}
+            >
+              <LifePreserver />
+            </IconButton>
+          </OverlayTrigger>
+        )}
       </HeaderTitleContainer>
-      <ActionsWrapper>
-        <Button
-          color='lightPrimary'
-          borderRadius='8px'
-          onClick={() => handleRefreshBusinesses()}
-          className={loading ? 'loading' : ''}
-        >
-          {t('REFRESH', 'Refresh')}
-          <ArrowRepeat size={16} style={{ marginLeft: 5 }} />
-        </Button>
-        <ImportersButton customClass='importerGroup' />
-        <Button
-          color='lightPrimary'
-          borderRadius='8px'
-          onClick={() => handleOpenAddBusiness()}
-        >
-          {t('ADD_NEW_STORE', 'Add new store')}
-        </Button>
-        <Button
-          color='lightPrimary'
-          borderRadius='8px'
-          onClick={() => handleOpenSync()}
-        >
-          {t('SYNC', 'Sync')}
-        </Button>
-        <SearchBar
-          isCustomLayout
-          lazyLoad
-          onSearch={onSearch}
-          search={searchValue}
-          placeholder={t('SEARCH', 'Search')}
-          customClass='searchBar'
-        />
-      </ActionsWrapper>
+      {!noBusinesses && (
+        <ActionsWrapper>
+          <Button
+            color='lightPrimary'
+            borderRadius='8px'
+            onClick={() => handleRefreshBusinesses()}
+            className={loading ? 'loading' : ''}
+          >
+            {t('REFRESH', 'Refresh')}
+            <ArrowRepeat size={16} style={{ marginLeft: 5 }} />
+          </Button>
+          <ImportersButton customClass='importerGroup' />
+          <Button
+            color='lightPrimary'
+            borderRadius='8px'
+            onClick={() => handleGotToAdd()}
+          >
+            {t('ADD_NEW_STORE', 'Add new store')}
+          </Button>
+          <Button
+            color='lightPrimary'
+            borderRadius='8px'
+            onClick={() => handleOpenSync()}
+          >
+            {t('SYNC', 'Sync')}
+          </Button>
+          <SearchBar
+            isCustomLayout
+            lazyLoad
+            onSearch={onSearch}
+            search={searchValue}
+            placeholder={t('SEARCH', 'Search')}
+            customClass='searchBar'
+          />
+        </ActionsWrapper>
+      )}
+
     </HeaderContainer>
   )
 }

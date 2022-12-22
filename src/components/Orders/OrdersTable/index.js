@@ -104,6 +104,10 @@ export const OrdersTable = (props) => {
       content: t('SLA_TIMER', 'SLA’s timer')
     },
     {
+      value: 'eta',
+      content: t('ETA', 'ETA')
+    },
+    {
       value: 'total',
       content: t('EXPORT_TOTAL', 'Total')
     }
@@ -656,6 +660,15 @@ export const OrdersTable = (props) => {
                               <p className='bold'>{t('TIMER', 'Timer')}</p>
                               <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
                             </Timer>
+                          </td>
+                        )
+                      }
+                      if (column === 'eta') {
+                        return (
+                          <td className='eta' key={`eta${i}-${index}`}>
+                            <div className='info'>
+                              <p className='bold'>{order?.eta_time} min</p>
+                            </div>
                           </td>
                         )
                       }

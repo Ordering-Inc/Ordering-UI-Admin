@@ -14,8 +14,6 @@ export const Container = styled.div`
   }
 `
 export const TabsContainer = styled.div`
-  width: 100%;
-  display: flex;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   margin-bottom: 24px;
   margin-top: 15px;

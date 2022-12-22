@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { List as MenuIcon, Wallet, BarChartSteps } from 'react-bootstrap-icons'
+import { List as MenuIcon, Wallet, BarChartSteps, Gift } from 'react-bootstrap-icons'
 import { useLanguage, RewardsPrograms as RewardsProgramsController } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
@@ -15,6 +15,7 @@ import {
 } from './styles'
 import { PointsWallet } from '../PointsWallet'
 import { PointsWalletLevels } from '../PointsWalletLevels'
+import { GiftCards } from '../GiftCards'
 
 const RewardsProgramsUI = (props) => {
   const [, t] = useLanguage()
@@ -23,6 +24,7 @@ const RewardsProgramsUI = (props) => {
   const [showOption, setShowOption] = useState(null)
   const [moveDistance, setMoveDistance] = useState(0)
   const [levelMoveDistance, setLevelMoveDistance] = useState(0)
+  const [giftCardMoveDistance, setGiftCardMoveDistance] = useState(0)
 
   const hanldeClosePointsWallet = () => {
     setMoveDistance(0)
@@ -31,6 +33,11 @@ const RewardsProgramsUI = (props) => {
 
   const handleCloseLevel = () => {
     setLevelMoveDistance(0)
+    setShowOption(null)
+  }
+
+  const handleCloseGiftCard = () => {
+    setGiftCardMoveDistance(0)
     setShowOption(null)
   }
 
@@ -46,7 +53,7 @@ const RewardsProgramsUI = (props) => {
               <MenuIcon />
             </IconButton>
           )}
-          <h1>{t('LOYALTY', 'Loyalty')}</h1>
+          <h1>{t('LOYALTY_AUTOMATION', 'Loyalty automation')}</h1>
         </HeaderTitleContainer>
 
         <LoyaltyListContainer>
@@ -66,6 +73,15 @@ const RewardsProgramsUI = (props) => {
             <LoyaltyItemContent>
               <h5>{t('LEVELS', 'Levels')}</h5>
               <p>{t('LEVELS_DESCRIPTION', 'Setup different loyalty levels for your users.')}</p>
+            </LoyaltyItemContent>
+          </LoyaltyItemWrapper>
+          <LoyaltyItemWrapper onClick={() => setShowOption('gift_card')}>
+            <IconWrapper>
+              <Gift />
+            </IconWrapper>
+            <LoyaltyItemContent>
+              <h5>{t('GIFT_CARD', 'Gift Card')}</h5>
+              <p>{t('GIFT_CARD_DESCRIPTION', 'Setup different gift cards for your customers.')}</p>
             </LoyaltyItemContent>
           </LoyaltyItemWrapper>
         </LoyaltyListContainer>
@@ -94,6 +110,18 @@ const RewardsProgramsUI = (props) => {
         >
           <PointsWalletLevels
             handleParentSidebarMove={val => setLevelMoveDistance(val)}
+          />
+        </SideBar>
+      )}
+      {showOption === 'gift_card' && (
+        <SideBar
+          open={showOption === 'gift_card'}
+          onClose={() => handleCloseGiftCard()}
+          defaultSideBarWidth={550 + giftCardMoveDistance}
+          moveDistance={giftCardMoveDistance}
+        >
+          <GiftCards
+            handleParentSidebarMove={val => setGiftCardMoveDistance(val)}
           />
         </SideBar>
       )}
