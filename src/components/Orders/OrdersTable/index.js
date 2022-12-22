@@ -315,7 +315,7 @@ export const OrdersTable = (props) => {
               <tr>
                 {allowColumns && Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)
                   .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
-                  .map((column, i) => {
+                  .map((column, i, array) => {
                     if (column === 'slaBar') {
                       return
                     }
@@ -341,16 +341,37 @@ export const OrdersTable = (props) => {
                         </th>
                       )
                     }
-                    if (column === 'total') {
+                    if (column === 'total' || (column !== 'total' && column === [...array].pop())) {
                       return (
-                        <th className='orderPrice' key={`noDragTh-${i}`}>
-                          <ColumnAllowSettingPopover
-                            allowColumns={allowColumns}
-                            optionsDefault={optionsDefault}
-                            handleChangeAllowColumns={handleChangeAllowColumns}
-                            isOrder
-                          />
-                        </th>
+                        <React.Fragment key={i}>
+                          {(column !== 'total' && column === [...array].pop()) && (
+                            <DragTh
+                              key={`dragTh-${i}`}
+                              onDragOver={e => handleDragOver?.(e, column)}
+                              onDrop={e => handleDrop(e, column)}
+                              onDragEnd={e => handleDragEnd(e)}
+                              colSpan={allowColumns[column]?.colSpan ?? 1}
+                              className={allowColumns[column]?.className}
+                              selectedDragOver={column === dragOverd}
+                            >
+                              <div draggable onDragStart={e => handleDragStart?.(e, column)}>
+                                <img
+                                  src={theme.images.icons?.sixDots}
+                                  alt='six dots'
+                                />
+                                <span>{allowColumns[column]?.title}</span>
+                              </div>
+                            </DragTh>
+                          )}
+                          <th className='orderPrice' key={`noDragTh-${i}`}>
+                            <ColumnAllowSettingPopover
+                              allowColumns={allowColumns}
+                              optionsDefault={optionsDefault}
+                              handleChangeAllowColumns={handleChangeAllowColumns}
+                              isOrder
+                            />
+                          </th>
+                        </React.Fragment>
                       )
                     }
                     return (column !== 'timer' || (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress'))) && (
@@ -660,15 +681,6 @@ export const OrdersTable = (props) => {
                               <p className='bold'>{t('TIMER', 'Timer')}</p>
                               <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
                             </Timer>
-                          </td>
-                        )
-                      }
-                      if (column === 'eta') {
-                        return (
-                          <td className='eta' key={`eta${i}-${index}`}>
-                            <div className='info'>
-                              <p className='bold'>{order?.eta_time} min</p>
-                            </div>
                           </td>
                         )
                       }
