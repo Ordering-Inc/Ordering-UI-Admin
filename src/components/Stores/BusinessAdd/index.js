@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { BusinessDetails } from './BusinessDetails'
-import { useLanguage, useOrder, useEvent, BusinessAdd as BusinessAddController } from 'ordering-components-admin'
+import { useLanguage, useOrder, useEvent, useConfig, GoogleMapsMap, BusinessAdd as BusinessAddController } from 'ordering-components-admin'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Images } from './Images'
 import { Schedule } from './Schedule'
@@ -17,7 +17,8 @@ import {
   AddNewBusinessContainer,
   BoxLayout,
   ButtonWrapper,
-  HeaderTitleContainer
+  HeaderTitleContainer,
+  MapWrapper
 } from './styles'
 
 const BusinessAddUI = (props) => {
@@ -38,12 +39,15 @@ const BusinessAddUI = (props) => {
     gallery,
     handleChangePaymethodIds,
     paymethodIds,
-    handleChangeSchedule
+    handleChangeSchedule,
+    placeId,
+    setDetails
   } = props
 
   const [, t] = useLanguage()
   const [orderStatus] = useOrder()
   const [events] = useEvent()
+  const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -73,6 +77,20 @@ const BusinessAddUI = (props) => {
 
   const changeSchedule = useCallback((e) => handleChangeSchedule(e), [])
 
+  const googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: false,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    }
+  }
+
+  const defaultPosition = { lat: 40.77473399999999, lng: -73.9653844 }
+
   return (
     <>
       <AddNewBusinessContainer>
@@ -93,6 +111,7 @@ const BusinessAddUI = (props) => {
             handleChangeAddress={handleChangeAddress}
             handleChangeInput={handleChangeInput}
             handleChangeCenter={handleChangeCenter}
+            placeId={placeId}
           />
         </BoxLayout>
         <BoxLayout>
@@ -104,6 +123,7 @@ const BusinessAddUI = (props) => {
         <BoxLayout>
           <Schedule
             handleChangeSchedule={changeSchedule}
+            schedule={formState?.changes?.schedule}
           />
         </BoxLayout>
         <BoxLayout>
@@ -159,6 +179,18 @@ const BusinessAddUI = (props) => {
             {t('CONFIRM', 'Confirm')}
           </Button>
         </ButtonWrapper>
+        <MapWrapper>
+          {placeId && configs?.google_maps_api_key?.value && (
+            <GoogleMapsMap
+              apiKey={configs?.google_maps_api_key?.value}
+              location={defaultPosition}
+              mapControls={googleMapsControls}
+              isFitCenter
+              setDetails={setDetails}
+              placeId={placeId}
+            />
+          )}
+        </MapWrapper>
       </AddNewBusinessContainer>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
