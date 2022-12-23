@@ -313,7 +313,7 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
-                {allowColumns && Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0).length === 0 ?
+                {allowColumns && (Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0).length === 0 ?
                   (
                     <th className='orderPrice' key={`noDragTh-${i}`}>
                       <ColumnAllowSettingPopover
@@ -416,7 +416,7 @@ export const OrdersTable = (props) => {
                             </div>
                           </DragTh>)
                       })
-                  )}
+                  ))}
               </tr>
             </thead>
           )}
