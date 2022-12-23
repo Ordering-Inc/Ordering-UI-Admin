@@ -263,7 +263,7 @@ export const UserFormDetailsUI = (props) => {
                 </React.Fragment>
               )
             )}
-            {isProfessional && occupations.length > 0 && (
+            {isProfessional && occupations?.length > 0 && (
               <OccupationSelector
                 occupationId={user?.occupation_id}
                 occupations={occupations}

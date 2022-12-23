@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useLanguage, ExamineClick, DragAndDrop, useUtils } from 'ordering-components-admin'
 import { Image as DumyPhoto, X as CloseIcon } from 'react-bootstrap-icons'
 import { Alert, Modal, ImageCrop, DragScroll } from '../../../Shared'
-import { bytesConverter } from '../../../../utils'
+import { bytesConverter, getUniqueId } from '../../../../utils'
 import {
   PhotosContainer,
   ContentWrapper,
@@ -46,12 +46,6 @@ export const Photos = (props) => {
   const handleDeleteGalleryImage = (id) => {
     const updatedGallery = gallery.filter(item => item.temp_id !== id)
     handleChangeGallery(updatedGallery)
-  }
-
-  const getUniqueId = () => {
-    const dateString = Date.now().toString(36)
-    const randomness = Math.random().toString(36).substr(2)
-    return dateString + randomness
   }
 
   const handleFiles = (files) => {
