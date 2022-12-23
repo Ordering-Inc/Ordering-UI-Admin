@@ -122,6 +122,7 @@ const BusinessReviewsListingUI = (props) => {
               totalPages={Math.ceil(pagination?.total / pagination.pageSize)}
               handleChangePage={handleChangePage}
               handleChangePageSize={handleChangePageSize}
+              defaultPageSize={pagination?.pageSize}
             />
           )}
         </PagesBottomContainer>

@@ -321,6 +321,7 @@ export const ProfessionalList = (props) => {
                 totalPages={paginationProps.totalPages}
                 handleChangePage={handleChangePage}
                 handleChangePageSize={handleChangePageSize}
+                defaultPageSize={paginationProps?.pageSize}
               />
             </WrapperPagination>
           )}

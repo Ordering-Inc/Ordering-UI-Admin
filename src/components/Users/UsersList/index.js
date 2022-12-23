@@ -273,6 +273,7 @@ export const UsersList = (props) => {
                 totalPages={paginationProps.totalPages}
                 handleChangePage={handleChangePage}
                 handleChangePageSize={handleChangePageSize}
+                defaultPageSize={paginationProps?.pageSize}
               />
             </WrapperPagination>
           )}

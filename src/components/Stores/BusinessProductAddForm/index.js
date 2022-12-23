@@ -202,16 +202,18 @@ const BusinessProductAddFormUI = (props) => {
             </DragAndDrop>
           </ExamineClick>
         </ProductImage>
-        <SelectWrapper notAllow>
-          <label>{t('TYPE', 'Type')}</label>
-          <Select
-            options={typeList}
-            className='select'
-            defaultValue={formState?.changes?.type ?? 'item'}
-            placeholder={t('SELECT_OPTION', 'Select an option')}
-            onChange={(value) => handleChangeItem({ type: value })}
-          />
-        </SelectWrapper>
+        {typeList?.length > 1 && (
+          <SelectWrapper notAllow>
+            <label>{t('TYPE', 'Type')}</label>
+            <Select
+              options={typeList}
+              className='select'
+              defaultValue={formState?.changes?.type ?? 'item'}
+              placeholder={t('SELECT_OPTION', 'Select an option')}
+              onChange={(value) => handleChangeItem({ type: value })}
+            />
+          </SelectWrapper>
+        )}
         {(formState?.changes?.type === 'service') && (
           <FieldRow>
             <SelectWrapper>
