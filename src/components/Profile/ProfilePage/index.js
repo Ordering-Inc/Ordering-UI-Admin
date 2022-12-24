@@ -5,7 +5,7 @@ import {
   useSession
 } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import { List as MenuIcon } from 'react-bootstrap-icons'
+import { List as MenuIcon, InfoCircle } from 'react-bootstrap-icons'
 import { IconButton, Button } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Sessions } from '../Sessions'
@@ -16,7 +16,9 @@ import {
   UserInfoContainer,
   UserImage,
   UserInfoWrapper,
-  ButtonsGroup
+  ButtonsGroup,
+  InfoWrapper,
+  InfoContent
 } from './styles'
 
 const ProfilePageUI = (props) => {
@@ -40,6 +42,18 @@ const ProfilePageUI = (props) => {
           </IconButton>
         )}
         <h1>{t('PROFILE', '')}</h1>
+        {user?.level === 8 && (
+          <InfoWrapper>
+            <IconButton
+              color='primary'
+            >
+              <InfoCircle />
+            </IconButton>
+            <InfoContent>
+              {t('CONNTECT_PROFESSIONAL_ACCOUNT_INFO', 'Connect your Professional account with your Google account to synchronize the appointments with the Google calendar Application. Use the Google account button to start with the login process, do not forget to notify the admin to Complete the synchronization.')}
+            </InfoContent>
+          </InfoWrapper>
+        )}
       </HeaderContainer>
       <UserInfoContainer>
         <UserImage>
