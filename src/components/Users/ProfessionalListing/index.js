@@ -99,6 +99,7 @@ const ProfessionalListingUI = (props) => {
     <>
       <UsersListingContainer>
         <UsersListingHeader
+          isProfessionals
           title={headerTitle}
           searchValue={searchValue}
           onSearch={onSearch}
