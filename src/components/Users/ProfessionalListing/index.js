@@ -169,6 +169,7 @@ const ProfessionalListingUI = (props) => {
           onClose={() => setOpenUserAddForm(false)}
         >
           <ProfessionalAddForm
+            occupations={occupationsState.occupations}
             handleSuccessAdd={handleSuccessAddUser}
             onClose={() => setOpenUserAddForm(false)}
           />
