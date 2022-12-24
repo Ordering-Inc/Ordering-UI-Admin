@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
+import { useLanguage, useConfig, UsersList as UsersListController } from 'ordering-components-admin'
 import { ProfessionalList } from '../ProfessionalList'
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
@@ -15,7 +15,8 @@ import { OccupationsFilter } from '../OccupationsFilter'
 import {
   UsersListingContainer,
   ActionsContainer,
-  ActionButtonsGroup
+  ActionButtonsGroup,
+  WarningText
 } from './styles'
 
 const ProfessionalListingUI = (props) => {
@@ -51,11 +52,14 @@ const ProfessionalListingUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+
   const query = new URLSearchParams(useLocation().search)
   const [queryId, setQueryId] = useState(null)
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
   const [openUser, setOpenUser] = useState(null)
   const [openUserAddForm, setOpenUserAddForm] = useState(false)
+  const isEnabledAppointmentsFeature = configs?.appointments?.value
 
   const handleBackRedirect = () => {
     setIsOpenUserDetails(false)
@@ -98,55 +102,61 @@ const ProfessionalListingUI = (props) => {
   return (
     <>
       <UsersListingContainer>
-        <UsersListingHeader
-          title={headerTitle}
-          searchValue={searchValue}
-          onSearch={onSearch}
-        />
-        <UserActiveStateFilter
-          selectedUserActiveState={selectedUserActiveState}
-          handleChangeUserActiveState={handleChangeUserActiveState}
-        />
-        <ActionsContainer>
-          <OccupationsFilter
-            occupationsState={occupationsState}
-            selectedOccupation={selectedOccupation}
-            handleSelectOccupation={handleSelectOccupation}
-          />
-          <ActionButtonsGroup>
-            <Button
-              borderRadius='8px'
-              color='lightPrimary'
-              onClick={() => handleOpenUserAddForm()}
-            >
-              {t('ADD_PROFESSIONAL', 'Add professional')}
-            </Button>
-            <UsersExportCSV
-              defaultUserTypesSelected={defaultUserTypesSelected}
-              disabledActiveStateCondition={disabledActiveStateCondition}
-              userTypesSelected={userTypesSelected}
+        {isEnabledAppointmentsFeature ? (
+          <>
+            <UsersListingHeader
+              title={headerTitle}
+              searchValue={searchValue}
+              onSearch={onSearch}
+            />
+            <UserActiveStateFilter
               selectedUserActiveState={selectedUserActiveState}
+              handleChangeUserActiveState={handleChangeUserActiveState}
             />
-            <UsersDeleteButton
+            <ActionsContainer>
+              <OccupationsFilter
+                occupationsState={occupationsState}
+                selectedOccupation={selectedOccupation}
+                handleSelectOccupation={handleSelectOccupation}
+              />
+              <ActionButtonsGroup>
+                <Button
+                  borderRadius='8px'
+                  color='lightPrimary'
+                  onClick={() => handleOpenUserAddForm()}
+                >
+                  {t('ADD_PROFESSIONAL', 'Add professional')}
+                </Button>
+                <UsersExportCSV
+                  defaultUserTypesSelected={defaultUserTypesSelected}
+                  disabledActiveStateCondition={disabledActiveStateCondition}
+                  userTypesSelected={userTypesSelected}
+                  selectedUserActiveState={selectedUserActiveState}
+                />
+                <UsersDeleteButton
+                  selectedUsers={selectedUsers}
+                  deleteUsersActionState={deleteUsersActionState}
+                  handleDeleteSeveralUsers={handleDeleteSeveralUsers}
+                />
+              </ActionButtonsGroup>
+            </ActionsContainer>
+            <ProfessionalList
+              usersList={usersList}
+              getUsers={getUsers}
+              paginationProps={paginationProps}
+              paginationDetail={paginationDetail}
+              handleChangeActiveUser={handleChangeActiveUser}
               selectedUsers={selectedUsers}
-              deleteUsersActionState={deleteUsersActionState}
-              handleDeleteSeveralUsers={handleDeleteSeveralUsers}
+              handleSelectedUsers={handleSelectedUsers}
+              userDetailsId={openUser?.id || queryId}
+              handleOpenUserDetails={handleOpenUserDetails}
+              handleOpenUserAddForm={handleOpenUserAddForm}
+              setSelectedUsers={setSelectedUsers}
             />
-          </ActionButtonsGroup>
-        </ActionsContainer>
-        <ProfessionalList
-          usersList={usersList}
-          getUsers={getUsers}
-          paginationProps={paginationProps}
-          paginationDetail={paginationDetail}
-          handleChangeActiveUser={handleChangeActiveUser}
-          selectedUsers={selectedUsers}
-          handleSelectedUsers={handleSelectedUsers}
-          userDetailsId={openUser?.id || queryId}
-          handleOpenUserDetails={handleOpenUserDetails}
-          handleOpenUserAddForm={handleOpenUserAddForm}
-          setSelectedUsers={setSelectedUsers}
-        />
+          </>
+        ) : (
+          <WarningText>{t('APPOINTMENTS_FEATURE_NOT_ENABLED', 'The appointments feature is not enabled.')}</WarningText>
+        )}
       </UsersListingContainer>
 
       {isOpenUserDetails && (
