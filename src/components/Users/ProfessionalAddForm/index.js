@@ -13,6 +13,7 @@ import { sortInputFields, bytesConverter } from '../../../utils'
 import Skeleton from 'react-loading-skeleton'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { XLg } from 'react-bootstrap-icons'
+import { OccupationSelector } from '../OccupationSelector'
 
 import {
   FormContainer,
@@ -42,7 +43,8 @@ const ProfessionalAddFormUI = (props) => {
     handlechangeImage,
     handleChangeSwtich,
     onClose,
-    isService
+    isService,
+    occupations
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
@@ -221,6 +223,13 @@ const ProfessionalAddFormUI = (props) => {
             </ExamineClick>
           </Image>
         </UserImage>
+        <InputWrapper>
+          <label>{t('SPECIALIST', 'Specialist')}</label>
+          <OccupationSelector
+            occupations={occupations}
+            handleChangeOccupation={id => handleChangeInput({ target: { name: 'occupation_id', value: id } })}
+          />
+        </InputWrapper>
         {!validationFields?.loading ? (
           <>
             {sortInputFields({ values: validationFields?.fields?.checkout }).map(field =>
@@ -292,6 +301,7 @@ const ProfessionalAddFormUI = (props) => {
                       message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
                     }
                   })}
+                  autoComplete='new-password'
                 />
               </InputWrapper>
             )}

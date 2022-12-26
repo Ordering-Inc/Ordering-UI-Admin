@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useLanguage, ProfessionalSchedule as ProfessionalScheduleController } from 'ordering-components-admin'
 import { Circle as UnCheckIcon, RecordCircleFill as CheckIcon } from 'react-bootstrap-icons'
-import { Select } from '../../../styles/Select/FirstSelect'
-import { Schedule } from '../../Shared'
+import { Schedule } from './Schedule'
 import { Button, Input } from '../../../styles'
 
 import {
   Container,
   DateRangeWrapper,
   RangeItem,
-  ScheduleWrapper,
-  SelectWrapper,
-  Option,
-  ScheduleContentWrapper,
   ButtonWrapper
 } from './styles'
 
@@ -27,31 +22,10 @@ const ProfessionalScheduleUI = (props) => {
 
   const [, t] = useLanguage()
   const [isMaxDays, setIsMaxDays] = useState(false)
-  const [scheduleType, setScheduleType] = useState('')
-
-  const defaultSchedule = [
-    { enabled: true, lapses: [{ open: { hour: 0, minute: 0 }, close: { hour: 23, minute: 59 } }] },
-    { enabled: true, lapses: [{ open: { hour: 0, minute: 0 }, close: { hour: 23, minute: 59 } }] },
-    { enabled: true, lapses: [{ open: { hour: 0, minute: 0 }, close: { hour: 23, minute: 59 } }] },
-    { enabled: true, lapses: [{ open: { hour: 0, minute: 0 }, close: { hour: 23, minute: 59 } }] },
-    { enabled: true, lapses: [{ open: { hour: 0, minute: 0 }, close: { hour: 23, minute: 59 } }] },
-    { enabled: true, lapses: [{ open: { hour: 0, minute: 0 }, close: { hour: 23, minute: 59 } }] },
-    { enabled: true, lapses: [{ open: { hour: 0, minute: 0 }, close: { hour: 23, minute: 59 } }] }
-  ]
-
-  const typeList = [
-    { value: 'default', content: <Option>{t('USE_DEFAULT_SCHEDULE', 'Use default schedule')}</Option> },
-    { value: 'customize', content: <Option>{t('CUSTOMIZE_SCHEDULE', 'Customize schedule')}</Option> }
-  ]
 
   const handleIndefinitelyClick = () => {
     handleChangeItem({ max_days_in_future: null })
     setIsMaxDays(false)
-  }
-
-  const handleChangeScheduleType = (val) => {
-    setScheduleType(val)
-    if (val === 'default') handleChangeItem({ schedule: defaultSchedule })
   }
 
   const handlClickFutureDay = (e) => {
@@ -63,9 +37,10 @@ const ProfessionalScheduleUI = (props) => {
     handleUpdateClick && handleUpdateClick()
   }
 
+  const changeSchedule = useCallback((val) => handleChangeItem({ schedule: val }), [])
+
   useEffect(() => {
     if (typeof user?.max_days_in_future === 'number') setIsMaxDays(true)
-    if (user?.schedule) setScheduleType('customize')
   }, [user])
 
   return (
@@ -100,26 +75,11 @@ const ProfessionalScheduleUI = (props) => {
             <label>{t('INDEFINITELY_INTO_THE_FUTURE', 'Indefinitely into the future')}</label>
           </RangeItem>
         </DateRangeWrapper>
-        <ScheduleWrapper>
-          <h1>{t('SCHEDULE', 'Schedule')}</h1>
-          <SelectWrapper>
-            <Select
-              options={typeList}
-              className='select'
-              defaultValue={scheduleType}
-              placeholder={t('SELECT_OPTION', 'Select an option')}
-              onChange={(value) => handleChangeScheduleType(value)}
-            />
-          </SelectWrapper>
-          {scheduleType === 'customize' && (
-            <ScheduleContentWrapper>
-              <Schedule
-                scheduleList={user?.schedule}
-                handleChangeScheduleState={val => handleChangeItem({ schedule: val })}
-              />
-            </ScheduleContentWrapper>
-          )}
-        </ScheduleWrapper>
+        <Schedule
+          key={user?.id}
+          scheduleList={user?.schedule}
+          handleChangeScheduleState={changeSchedule}
+        />
       </Container>
       <ButtonWrapper>
         <Button

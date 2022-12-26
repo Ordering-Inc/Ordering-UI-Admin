@@ -240,3 +240,29 @@ export const PoweredWrapper = styled.div`
   font-size: 14px;
   font-weight: 600;
 `
+
+export const MobileMessage = styled.div`
+  position: fixed;
+  top: 100px;
+  left: calc(50% - 130px);
+  z-index: 999;
+  background: ${props => props.theme.colors.backgroundInfo};
+  border: 1px solid ${props => props.theme.colors.primary};
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+  width: 260px;
+  > div {
+    padding: 15px 15px 10px 15px;
+    font-size: 12px;
+    line-height: 18px;
+    position: relative;
+    > svg {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      cursor: pointer;
+      font-size: 21px;
+    }
+  }
+`

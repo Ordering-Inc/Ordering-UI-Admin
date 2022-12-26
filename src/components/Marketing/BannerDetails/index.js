@@ -3,7 +3,7 @@ import { useLanguage, BannerDetails as BannerDetailsController } from 'ordering-
 import { Input, Switch } from '../../../styles'
 import { BannerImages } from './BannerImages'
 import { AddBanner } from './AddBanner'
-import { SelectSites, Alert, Confirm } from '../../Shared'
+import { Alert, Confirm } from '../../Shared'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { ThreeDots } from 'react-bootstrap-icons'
@@ -25,14 +25,11 @@ const BannerDetailsUI = (props) => {
     changesState,
     actionState,
     isAddMode,
-    selectedSitesIds,
-    handleSelectSite,
-    handleSelectAllSites,
-    sitesState,
     handleUpdateClick,
     handleAddBanner,
     handleChangeItem,
-    handleDeleteBanner
+    handleDeleteBanner,
+    setBannerMoveDistance
   } = props
 
   const theme = useTheme()
@@ -42,8 +39,7 @@ const BannerDetailsUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const tabOptions = [
-    { key: 'images', content: t('IMAGES', 'Images') },
-    { key: 'channels', content: t('CHANNELS', 'Channels') }
+    { key: 'images', content: t('IMAGES', 'Images') }
   ]
 
   const onClickDeleteBanner = () => {
@@ -105,7 +101,7 @@ const BannerDetailsUI = (props) => {
       </HeaderContainer>
       {!isAddMode && (
         <FormController key={bannerState?.banner?.id}>
-          <label>{t('NAME', '')}</label>
+          <label>{t('NAME', 'Name')}</label>
           <Input
             defaultValue={bannerState?.banner?.name || ''}
             onChange={e => handleChangeBannerName(e.target.value)}
@@ -132,19 +128,9 @@ const BannerDetailsUI = (props) => {
             ))}
           </TabsConatiner>
           {selectedTab === 'images' && (
-            <BannerImages {...props} />
-          )}
-          {selectedTab === 'channels' && (
-            <SelectSites
-              isAddMode={isAddMode}
-              allSites={sitesState.sites}
-              selectedSitesIds={selectedSitesIds}
-              handleSelectSite={handleSelectSite}
-              handleSelectAllSites={() => handleSelectAllSites(true)}
-              handleSelectNoneSites={() => handleSelectAllSites(false)}
-              isDisabled={Object.keys(changesState.changes).length === 0 || changesState.loading || actionState.loading}
-              handleUpdateClick={handleUpdateClick}
-              handleAddClick={handleAddBanner}
+            <BannerImages
+              {...props}
+              setBannerMoveDistance={setBannerMoveDistance}
             />
           )}
         </>

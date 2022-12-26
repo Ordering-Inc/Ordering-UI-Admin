@@ -70,7 +70,13 @@ export const ImagesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 `
-
+export const BannerImageContainer = styled.div`
+  margin-bottom: 15px;
+  ${({ active }) => active && css`
+    border-radius: 8px;
+    border: 1px solid ${props => props.theme.colors.primary};
+  `}
+`
 export const BannerImage = styled.div`
   width: 130px;
   height: 130px;
@@ -190,22 +196,61 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
 `
-export const DeleteButtonWrapper = styled.div`
-  position: absolute;
-  cursor: pointer;
-  width: 20px !important;
-  height: 20px !important;
-  top: 5px;
+export const ActionsContainer = styled.div`
+`
+export const DropDownWrapper = styled.div`
   ${props => props.theme?.rtl ? css`
-    left: 5px;
-  ` : css`
-    right: 5px;
+    margin-right: 5px;
+    ` : css`
+    margin-left: 5px;
   `}
-  display: flex;
-  z-index: 100;
+  button {
+    display: flex;
+    background: transparent !important;
+    border: none;
+    padding: 5px;
+    border-radius: 8px;
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+      font-size: 20px;
+    }
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    &:after {
+      display: none;
+    }
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundaryDarkContrast)} !important;
+    }
+  }
 
-  svg {
-    color: ${props => props.theme.colors.danger};
-    font-size: 20px;
+  .show {
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  > div {
+    > div {
+      border-radius: 8px;
+      .dropdown-item {
+        font-size: 12px;
+        color: ${props => props.theme.colors.headingColor};
+        padding: 7px 20px;
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
+      }
+      .dropdown-item:last-child {
+        color: ${props => props.theme.colors.danger};
+      }
+    }
   }
 `
