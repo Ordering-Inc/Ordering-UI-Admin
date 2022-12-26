@@ -147,7 +147,7 @@ export const UsersList = (props) => {
               </tr>
             </thead>
             {usersList.loading ? (
-              [...Array(10).keys()].map(i => (
+              [...Array(paginationProps?.pageSize || 10).keys()].map(i => (
                 <tbody key={i}>
                   <tr>
                     <td>
