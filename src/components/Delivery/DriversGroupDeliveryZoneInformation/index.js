@@ -46,6 +46,7 @@ export const DriverGroupDeliveryZoneInformation = (props) => {
     { value: 1, content: t('CIRCLE', 'Circle') },
     { value: 2, content: t('POLYGON', 'Polygon') },
     { value: 4, content: t('EVERYWHERE', 'Everywhere') },
+    { value: 5, content: t('DISTANCE_BASED', 'Distance based') }
   ]
 
   const googleMapsControls = {
@@ -203,6 +204,25 @@ export const DriverGroupDeliveryZoneInformation = (props) => {
             />
           </FormControl>
         </Row>
+        {zoneType === 5 &&
+          <Row>
+            <FormControl>
+              <label>{t('DISTANCE_FROM_STORE', 'Distance from store')}</label>
+              <Input
+                placeholder={`1 - 99 ${configState?.configs?.distance_unit?.value}`}
+                name='distance'
+                maxLength={2}
+                value={formState.changes?.data?.distance ?? zone?.data?.distance ?? ''}
+                onInput={(e) => {
+                  e.target.value = e.target.value.match('^[1-9]{1,2}$')
+                }}
+                onChange={e => handleChangeInput(e, configState?.configs?.distance_unit?.value)}
+                ref={register({
+                  required: t('DISTANCE_FROM_STORE', 'Distance from store')
+                })}
+              />
+            </FormControl>
+          </Row>}
         {zoneType !== 4 && isShowMap && (
           configState?.configs?.google_maps_api_key?.value ? (
             <WrapperMap>

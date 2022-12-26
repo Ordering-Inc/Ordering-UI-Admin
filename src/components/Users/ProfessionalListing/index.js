@@ -105,6 +105,7 @@ const ProfessionalListingUI = (props) => {
         {isEnabledAppointmentsFeature ? (
           <>
             <UsersListingHeader
+              isProfessionals
               title={headerTitle}
               searchValue={searchValue}
               onSearch={onSearch}
@@ -179,6 +180,7 @@ const ProfessionalListingUI = (props) => {
           onClose={() => setOpenUserAddForm(false)}
         >
           <ProfessionalAddForm
+            occupations={occupationsState.occupations}
             handleSuccessAdd={handleSuccessAddUser}
             onClose={() => setOpenUserAddForm(false)}
           />

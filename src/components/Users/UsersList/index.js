@@ -66,7 +66,7 @@ export const UsersList = (props) => {
   }
 
   const handleChangePage = (page) => {
-    getUsers(page, 10)
+    getUsers(page, paginationProps?.pageSize)
   }
 
   const handleChangePageSize = (pageSize) => {
@@ -147,7 +147,7 @@ export const UsersList = (props) => {
               </tr>
             </thead>
             {usersList.loading ? (
-              [...Array(10).keys()].map(i => (
+              [...Array(paginationProps?.pageSize || 10).keys()].map(i => (
                 <tbody key={i}>
                   <tr>
                     <td>
@@ -269,10 +269,12 @@ export const UsersList = (props) => {
           {usersList?.users.length > 0 && (
             <WrapperPagination>
               <Pagination
+                defaultPageSize={paginationProps?.pageSize}
                 currentPage={paginationProps.currentPage}
                 totalPages={paginationProps.totalPages}
                 handleChangePage={handleChangePage}
                 handleChangePageSize={handleChangePageSize}
+                defaultPageSize={paginationProps?.pageSize}
               />
             </WrapperPagination>
           )}

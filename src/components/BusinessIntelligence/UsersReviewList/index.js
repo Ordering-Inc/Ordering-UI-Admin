@@ -133,6 +133,7 @@ const DriversReviewListUI = (props) => {
             totalPages={paginationProps.totalPages}
             handleChangePage={handleChangePage}
             handleChangePageSize={handleChangePageSize}
+            defaultPageSize={paginationProps?.pageSize}
           />
         )}
       </PagesBottomContainer>

@@ -206,7 +206,7 @@ const BusinessProductAddFormUI = (props) => {
             </DragAndDrop>
           </ExamineClick>
         </ProductImage>
-        {isEnabledAppointmentsFeature && (
+        {isEnabledAppointmentsFeature && typeList?.length > 1 && (
           <SelectWrapper notAllow>
             <label>{t('TYPE', 'Type')}</label>
             <Select

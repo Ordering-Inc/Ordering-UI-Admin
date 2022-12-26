@@ -34,13 +34,15 @@ const PageBannersUI = (props) => {
     defaultPosition,
     handleSuccessDelete,
     aspectRatio,
-    isSearhShow
+    isSearhShow,
+    isLink
   } = props
   const [, t] = useLanguage()
   const [openItemsDetail, setOpenItemsDetail] = useState(false)
   const [selectedBanner, setSelectedBanner] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [], handleOnAccept: null })
   const [searchValue, setSearchValue] = useState('')
+  const [bannerMoveDistance, setBannerMoveDistance] = useState(0)
 
   const handleOpenBannerItemsDetail = (e, banner) => {
     const isInvalid = e.target.closest('.banner-enabled')
@@ -160,7 +162,12 @@ const PageBannersUI = (props) => {
         <SideBar
           isBorderShow
           open={openItemsDetail}
-          onClose={() => handleCloseDetail()}
+          onClose={() => {
+            handleCloseDetail()
+            setBannerMoveDistance(0)
+          }}
+          moveDistance={bannerMoveDistance}
+          defaultSideBarWidth={500 + bannerMoveDistance}
         >
           <BannerDetails
             banner={selectedBanner}
@@ -171,6 +178,8 @@ const PageBannersUI = (props) => {
             onClose={() => handleCloseDetail()}
             defaultPosition={defaultPosition}
             aspectRatio={aspectRatio}
+            isLink={isLink}
+            setBannerMoveDistance={setBannerMoveDistance}
           />
         </SideBar>
       )}

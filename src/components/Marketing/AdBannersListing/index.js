@@ -47,7 +47,8 @@ export const AdBannersListing = (props) => {
       icon: <Shop />,
       info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
       aspectRatio: 1440 / 260,
-      isSearhShow: true
+      isSearhShow: true,
+      isLink: true
     },
     {
       key: 'app_home_page',
@@ -74,7 +75,8 @@ export const AdBannersListing = (props) => {
       icon: <Shop />,
       info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
       aspectRatio: 300 / 300,
-      isSearhShow: true
+      isSearhShow: true,
+      isLink: true
     }
   ]
 
@@ -137,6 +139,7 @@ export const AdBannersListing = (props) => {
             defaultPosition={openPositionDetail?.key}
             aspectRatio={openPositionDetail?.aspectRatio}
             isSearhShow={openPositionDetail?.isSearhShow}
+            isLink={openPositionDetail?.isLink}
           />
         </SideBar>
       )}
