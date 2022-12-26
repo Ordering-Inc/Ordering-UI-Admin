@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LogoutButton } from '../LogoutButton'
 import {
@@ -18,7 +18,8 @@ import {
   BoxArrowUpRight,
   Cart3,
   Cash,
-  BagCheck
+  BagCheck,
+  X as CloseIcon
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi } from 'ordering-components-admin'
@@ -40,7 +41,8 @@ import {
   SubMenu,
   LanguageSelectorContainer,
   LogoWrapper,
-  PoweredWrapper
+  PoweredWrapper,
+  MobileMessage
 } from './styles'
 
 const SidebarMenuUI = (props) => {
@@ -56,6 +58,8 @@ const SidebarMenuUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
   const isPoweredByOrderingModule = configs?.powered_by_ordering_module?.value
+
+  const [showMessage, setShowMessage] = useState(false)
 
   const ordersSubMenus = [
     {
@@ -373,8 +377,22 @@ const SidebarMenuUI = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      setShowMessage(true)
+    }
+  }, [])
+
   return (
     <>
+      {showMessage && (
+        <MobileMessage>
+          <div>
+            <CloseIcon onClick={() => setShowMessage(false)} />
+            {t('FOR_THE_BEST_EXPERIENCE_WHILE_SETTING_UP', 'For the best experience while setting up your project, we recommend using a computer.')}
+          </div>
+        </MobileMessage>
+      )}
       <SidebarContainer
         id='side_bar'
         isCollapse={isCollapse}

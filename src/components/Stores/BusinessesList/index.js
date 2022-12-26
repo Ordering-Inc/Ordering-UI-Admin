@@ -228,6 +228,7 @@ export const BusinessesList = (props) => {
                     totalPages={Math.ceil(pagination?.total / pagination.pageSize)}
                     handleChangePage={handleChangePage}
                     handleChangePageSize={handleChangePageSize}
+                    defaultPageSize={pagination?.pageSize}
                   />
                 )}
               </WrapperPagination>

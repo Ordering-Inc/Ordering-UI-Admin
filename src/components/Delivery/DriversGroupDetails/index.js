@@ -54,24 +54,23 @@ const DriversGroupDetailsUI = (props) => {
     const _driversGroupMenus = !driversGroupState.driversGroup
       ? [
         { key: 'general', value: t('GENERAL', 'General') },
-        { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
-        { key: 'delivery_zones', value: t('DELIVERY_ZONES', 'Delivery Zones') }
+        { key: 'businesses', value: t('BUSINESSES', 'Businesses') }
       ]
       : (useAdvanced && autoAssignType !== 'basic')
         ? [
           { key: 'general', value: t('GENERAL', 'General') },
           { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
+          { key: 'delivery_zones', value: t('DELIVERY_ZONES', 'Delivery Zones') },
           { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
           { key: 'advanced_logistics', value: t('ADVANCED_LOGISTICS', 'Advanced logistics') },
-          { key: 'logs', value: t('LOGS', 'Logs') },
-          { key: 'delivery_zones', value: t('DELIVERY_ZONES', 'Delivery Zones') }
+          { key: 'logs', value: t('LOGS', 'Logs') }
         ]
         : [
           { key: 'general', value: t('GENERAL', 'General') },
           { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
+          { key: 'delivery_zones', value: t('DELIVERY_ZONES', 'Delivery Zones') },
           { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
-          { key: 'logs', value: t('LOGS', 'Logs') },
-          { key: 'delivery_zones', value: t('DELIVERY_ZONES', 'Delivery Zones') }
+          { key: 'logs', value: t('LOGS', 'Logs') }
         ]
     setDriversGroupMenus(_driversGroupMenus)
   }, [useAdvanced])
@@ -181,7 +180,8 @@ const DriversGroupDetailsUI = (props) => {
           <DriversGroupLogs driversGroupId={driversGroupState.driversGroup?.id} />
         )}
         {showMenu === 'delivery_zones' && (
-          <DriverGroupDeliveryDetails {...props}
+          <DriverGroupDeliveryDetails
+            {...props}
             handleParentSidebarMove={handleParentSidebarMove}
             drivergroup={driversGroupState.driversGroup}
             setIsExtendExtraOpen={setIsExtendExtraOpen}
