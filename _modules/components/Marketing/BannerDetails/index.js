@@ -17,14 +17,17 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BannerDetailsUI = function BannerDetailsUI(props) {
   var _bannerState$banner, _bannerState$banner2, _bannerState$banner3, _bannerState$banner4;
@@ -32,14 +35,11 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
     changesState = props.changesState,
     actionState = props.actionState,
     isAddMode = props.isAddMode,
-    selectedSitesIds = props.selectedSitesIds,
-    handleSelectSite = props.handleSelectSite,
-    _handleSelectAllSites = props.handleSelectAllSites,
-    sitesState = props.sitesState,
     handleUpdateClick = props.handleUpdateClick,
     handleAddBanner = props.handleAddBanner,
     handleChangeItem = props.handleChangeItem,
-    handleDeleteBanner = props.handleDeleteBanner;
+    handleDeleteBanner = props.handleDeleteBanner,
+    setBannerMoveDistance = props.setBannerMoveDistance;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -67,9 +67,6 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
   var tabOptions = [{
     key: 'images',
     content: t('IMAGES', 'Images')
-  }, {
-    key: 'channels',
-    content: t('CHANNELS', 'Channels')
   }];
   var onClickDeleteBanner = function onClickDeleteBanner() {
     setConfirm({
@@ -121,7 +118,7 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
     }
   }, t('DELETE', 'Delete')))))), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.FormController, {
     key: bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner3 = bannerState.banner) === null || _bannerState$banner3 === void 0 ? void 0 : _bannerState$banner3.id
-  }, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', '')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     defaultValue: (bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner4 = bannerState.banner) === null || _bannerState$banner4 === void 0 ? void 0 : _bannerState$banner4.name) || '',
     onChange: function onChange(e) {
       return handleChangeBannerName(e.target.value);
@@ -138,21 +135,9 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
         return setSelectedTab(option.key);
       }
     }, option.content);
-  })), selectedTab === 'images' && /*#__PURE__*/_react.default.createElement(_BannerImages.BannerImages, props), selectedTab === 'channels' && /*#__PURE__*/_react.default.createElement(_Shared.SelectSites, {
-    isAddMode: isAddMode,
-    allSites: sitesState.sites,
-    selectedSitesIds: selectedSitesIds,
-    handleSelectSite: handleSelectSite,
-    handleSelectAllSites: function handleSelectAllSites() {
-      return _handleSelectAllSites(true);
-    },
-    handleSelectNoneSites: function handleSelectNoneSites() {
-      return _handleSelectAllSites(false);
-    },
-    isDisabled: Object.keys(changesState.changes).length === 0 || changesState.loading || actionState.loading,
-    handleUpdateClick: handleUpdateClick,
-    handleAddClick: handleAddBanner
-  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })), selectedTab === 'images' && /*#__PURE__*/_react.default.createElement(_BannerImages.BannerImages, _extends({}, props, {
+    setBannerMoveDistance: setBannerMoveDistance
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

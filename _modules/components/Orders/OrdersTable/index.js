@@ -24,12 +24,14 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersTable = function OrdersTable(props) {
   var _orderList$orders3;
@@ -351,20 +353,33 @@ var OrdersTable = function OrdersTable(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "orders_table",
     noFixedHeader: !orderList.loading && ((_orderList$orders3 = orderList.orders) === null || _orderList$orders3 === void 0 ? void 0 : _orderList$orders3.length) <= 5
-  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, allowColumns && Object.keys(allowColumns).filter(function (col) {
+  }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, allowColumns && (Object.keys(allowColumns).filter(function (col) {
     var _allowColumns$col, _allowColumns$col2;
     return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.visable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) !== 0;
-  }).sort(function (col1, col2) {
+  }).length === 0 ? /*#__PURE__*/_react.default.createElement("th", {
+    className: "orderPrice",
+    key: "noDragTh-".concat(i)
+  }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
+    allowColumns: allowColumns,
+    optionsDefault: optionsDefault,
+    handleChangeAllowColumns: handleChangeAllowColumns,
+    isOrder: true
+  })) : Object.keys(allowColumns).filter(function (col) {
     var _allowColumns$col3, _allowColumns$col4;
-    return ((_allowColumns$col3 = allowColumns[col1]) === null || _allowColumns$col3 === void 0 ? void 0 : _allowColumns$col3.order) - ((_allowColumns$col4 = allowColumns[col2]) === null || _allowColumns$col4 === void 0 ? void 0 : _allowColumns$col4.order);
-  }).map(function (column, i) {
-    var _allowColumns$column$, _allowColumns$column, _allowColumns$column2, _theme$images$icons, _allowColumns$column3;
+    return ((_allowColumns$col3 = allowColumns[col]) === null || _allowColumns$col3 === void 0 ? void 0 : _allowColumns$col3.visable) && ((_allowColumns$col4 = allowColumns[col]) === null || _allowColumns$col4 === void 0 ? void 0 : _allowColumns$col4.order) !== 0;
+  }).sort(function (col1, col2) {
+    var _allowColumns$col5, _allowColumns$col6;
+    return ((_allowColumns$col5 = allowColumns[col1]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.order) - ((_allowColumns$col6 = allowColumns[col2]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.order);
+  }).map(function (column, i, array) {
+    var _allowColumns$column$2, _allowColumns$column4, _allowColumns$column5, _theme$images$icons2, _allowColumns$column6;
     if (column === 'slaBar') {
       return;
     }
     if (column === 'orderNumber') {
       var _allowColumns$orderNu, _allowColumns$dateTim, _allowColumns$slaBar;
-      return /*#__PURE__*/_react.default.createElement("th", {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: i
+      }, /*#__PURE__*/_react.default.createElement("th", {
         className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu = allowColumns.orderNumber) !== null && _allowColumns$orderNu !== void 0 && _allowColumns$orderNu.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim = allowColumns.dateTime) !== null && _allowColumns$dateTim !== void 0 && _allowColumns$dateTim.visable) ? 'orderNo small' : 'orderNo',
         key: "noDragTh-".concat(i),
         colSpan: allowColumns !== null && allowColumns !== void 0 && (_allowColumns$slaBar = allowColumns.slaBar) !== null && _allowColumns$slaBar !== void 0 && _allowColumns$slaBar.visable ? 2 : 1
@@ -374,10 +389,7 @@ var OrdersTable = function OrdersTable(props) {
           return handleSelecteAllOrder();
         },
         className: "orderCheckBox"
-      }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order'));
-    }
-    if (column === 'total') {
-      return /*#__PURE__*/_react.default.createElement("th", {
+      }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order')), column === _toConsumableArray(array).pop() && /*#__PURE__*/_react.default.createElement("th", {
         className: "orderPrice",
         key: "noDragTh-".concat(i)
       }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
@@ -385,7 +397,43 @@ var OrdersTable = function OrdersTable(props) {
         optionsDefault: optionsDefault,
         handleChangeAllowColumns: handleChangeAllowColumns,
         isOrder: true
-      }));
+      })));
+    }
+    if (column === 'total' || column !== 'total' && column === _toConsumableArray(array).pop()) {
+      var _allowColumns$column$, _allowColumns$column, _allowColumns$column2, _theme$images$icons, _allowColumns$column3;
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: i
+      }, column !== 'total' && column === _toConsumableArray(array).pop() && /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
+        key: "dragTh-".concat(i),
+        onDragOver: function onDragOver(e) {
+          return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e, column);
+        },
+        onDrop: function onDrop(e) {
+          return handleDrop(e, column);
+        },
+        onDragEnd: function onDragEnd(e) {
+          return handleDragEnd(e);
+        },
+        colSpan: (_allowColumns$column$ = (_allowColumns$column = allowColumns[column]) === null || _allowColumns$column === void 0 ? void 0 : _allowColumns$column.colSpan) !== null && _allowColumns$column$ !== void 0 ? _allowColumns$column$ : 1,
+        className: (_allowColumns$column2 = allowColumns[column]) === null || _allowColumns$column2 === void 0 ? void 0 : _allowColumns$column2.className,
+        selectedDragOver: column === dragOverd
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        draggable: true,
+        onDragStart: function onDragStart(e) {
+          return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, column);
+        }
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
+        alt: "six dots"
+      }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title))), /*#__PURE__*/_react.default.createElement("th", {
+        className: "orderPrice",
+        key: "noDragTh-".concat(i)
+      }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
+        allowColumns: allowColumns,
+        optionsDefault: optionsDefault,
+        handleChangeAllowColumns: handleChangeAllowColumns,
+        isOrder: true
+      })));
     }
     return (column !== 'timer' || column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress')) && /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
       key: "dragTh-".concat(i),
@@ -398,8 +446,8 @@ var OrdersTable = function OrdersTable(props) {
       onDragEnd: function onDragEnd(e) {
         return handleDragEnd(e);
       },
-      colSpan: (_allowColumns$column$ = (_allowColumns$column = allowColumns[column]) === null || _allowColumns$column === void 0 ? void 0 : _allowColumns$column.colSpan) !== null && _allowColumns$column$ !== void 0 ? _allowColumns$column$ : 1,
-      className: (_allowColumns$column2 = allowColumns[column]) === null || _allowColumns$column2 === void 0 ? void 0 : _allowColumns$column2.className,
+      colSpan: (_allowColumns$column$2 = (_allowColumns$column4 = allowColumns[column]) === null || _allowColumns$column4 === void 0 ? void 0 : _allowColumns$column4.colSpan) !== null && _allowColumns$column$2 !== void 0 ? _allowColumns$column$2 : 1,
+      className: (_allowColumns$column5 = allowColumns[column]) === null || _allowColumns$column5 === void 0 ? void 0 : _allowColumns$column5.className,
       selectedDragOver: column === dragOverd
     }, /*#__PURE__*/_react.default.createElement("div", {
       draggable: true,
@@ -407,10 +455,10 @@ var OrdersTable = function OrdersTable(props) {
         return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, column);
       }
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
+      src: (_theme$images$icons2 = theme.images.icons) === null || _theme$images$icons2 === void 0 ? void 0 : _theme$images$icons2.sixDots,
       alt: "six dots"
-    }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title)));
-  }))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
+    }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column6 = allowColumns[column]) === null || _allowColumns$column6 === void 0 ? void 0 : _allowColumns$column6.title)));
+  })))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
     var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
@@ -534,11 +582,11 @@ var OrdersTable = function OrdersTable(props) {
       },
       "data-tour": i === 0 ? 'tour_start' : ''
     }, /*#__PURE__*/_react.default.createElement("tr", null, Object.keys(allowColumns).filter(function (col) {
-      var _allowColumns$col5;
-      return (_allowColumns$col5 = allowColumns[col]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.visable;
+      var _allowColumns$col7;
+      return (_allowColumns$col7 = allowColumns[col]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.visable;
     }).sort(function (col1, col2) {
-      var _allowColumns$col6, _allowColumns$col7;
-      return ((_allowColumns$col6 = allowColumns[col1]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.order) - ((_allowColumns$col7 = allowColumns[col2]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.order);
+      var _allowColumns$col8, _allowColumns$col9;
+      return ((_allowColumns$col8 = allowColumns[col1]) === null || _allowColumns$col8 === void 0 ? void 0 : _allowColumns$col8.order) - ((_allowColumns$col9 = allowColumns[col2]) === null || _allowColumns$col9 === void 0 ? void 0 : _allowColumns$col9.order);
     }).map(function (column, index) {
       if (column === 'slaBar') {
         return /*#__PURE__*/_react.default.createElement("td", {
@@ -661,16 +709,6 @@ var OrdersTable = function OrdersTable(props) {
         }, t('TIMER', 'Timer')), /*#__PURE__*/_react.default.createElement("p", {
           className: getStatusClassName(getDelayMinutes(order))
         }, displayDelayedTime(order))));
-      }
-      if (column === 'eta') {
-        return /*#__PURE__*/_react.default.createElement("td", {
-          className: "eta",
-          key: "eta".concat(i, "-").concat(index)
-        }, /*#__PURE__*/_react.default.createElement("div", {
-          className: "info"
-        }, /*#__PURE__*/_react.default.createElement("p", {
-          className: "bold"
-        }, order === null || order === void 0 ? void 0 : order.eta_time, " min")));
       }
       if (column === 'total') {
         var _allowColumns$total2, _order$summary;
