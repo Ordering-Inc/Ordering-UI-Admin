@@ -4,9 +4,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ViewButtonsWrapper = exports.SpinnerLoaderWrapper = exports.HeaderTitleContainer = exports.Header = exports.EventProfessionalPhoto = exports.EventContainer = exports.Container = exports.CalendarWrapper = exports.CalendarLabelContainer = exports.CalendarHeaderContainer = exports.BusinessSelectorWrapper = exports.BusinessName = void 0;
+exports.WarningText = exports.ViewButtonsWrapper = exports.SpinnerLoaderWrapper = exports.HeaderTitleContainer = exports.Header = exports.EventProfessionalPhoto = exports.EventContainer = exports.Container = exports.CalendarWrapper = exports.CalendarLabelContainer = exports.CalendarHeaderContainer = exports.BusinessSelectorWrapper = exports.BusinessName = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -55,3 +55,7 @@ var EventContainer = _styledComponents.default.div(_templateObject13 || (_templa
 exports.EventContainer = EventContainer;
 var EventProfessionalPhoto = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 32px;\n  height: 32px;\n  border-radius: 8px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  img {\n    width: 100%;\n    height: 100%;\n    border-radius: 8px;\n    object-fit: cover;\n  }\n  svg {\n    width: 85%;\n    height: 85%;\n  }\n"])));
 exports.EventProfessionalPhoto = EventProfessionalPhoto;
+var WarningText = _styledComponents.default.p(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n  color: ", ";\n"])), function (props) {
+  return props.theme.colors.danger;
+});
+exports.WarningText = WarningText;
