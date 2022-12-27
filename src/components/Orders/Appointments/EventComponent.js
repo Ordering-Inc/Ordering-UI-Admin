@@ -1,6 +1,5 @@
 import React from 'react'
 import { useUtils, useConfig } from 'ordering-components-admin'
-import moment from 'moment'
 import { PersonFill } from 'react-bootstrap-icons'
 import {
   EventContainer,
@@ -12,12 +11,11 @@ export const EventComponent = (props) => {
     event
   } = props
 
-  const [{ optimizeImage }] = useUtils()
+  const [{ optimizeImage, parseDate }] = useUtils()
   const [{ configs }] = useConfig()
-  const is24Format = configs?.format_time?.value === '24'
 
-  const getTime = (date) => {
-    return is24Format ? moment(date).format('HH:mm') : moment(date).format('HH:mm A')
+  const getTime = (time) => {
+    return parseDate(time, { outputFormat: (configs?.format_time?.value === '12') ? 'hh:mm a' : 'HH:mm' })
   }
 
   return (
