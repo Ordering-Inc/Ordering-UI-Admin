@@ -1,6 +1,5 @@
 import React from 'react'
 import { useUtils, useConfig } from 'ordering-components-admin'
-import moment from 'moment'
 import { PersonFill } from 'react-bootstrap-icons'
 import {
   EventContainer,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useConfig, Appointments as AppointmentsController } from 'ordering-components-admin'
+import { useLanguage, useConfig, useUtils, Appointments as AppointmentsController } from 'ordering-components-admin'
 import { List as MenuIcon, ChevronRight } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
@@ -34,6 +34,8 @@ const AppointmentsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
+  const [{ parseDate }] = useUtils()
+
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [showSelectHeader, setShowSelectHeader] = useState(false)
   const [openDetails, setOpenDetails] = useState(false)
@@ -93,10 +95,10 @@ const AppointmentsUI = (props) => {
           defaultView={Views.MONTH}
           events={businessCalendarEvents.result}
           startAccessor={event => {
-            return moment(event.start, 'YYYY-MM-DD HH:mm:ss').toDate()
+            return moment(parseDate(event.start, { outputFormat: 'YYYY-MM-DD HH:mm:ss' })).toDate()
           }}
           endAccessor={event => {
-            return moment(event.end, 'YYYY-MM-DD HH:mm:ss').toDate()
+            return moment(parseDate(event.end, { outputFormat: 'YYYY-MM-DD HH:mm:ss' })).toDate()
           }}
           views={['month', 'week', 'day']}
           showMultiDayTimes={false}
