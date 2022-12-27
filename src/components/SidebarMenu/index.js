@@ -217,6 +217,8 @@ const SidebarMenuUI = (props) => {
     }
   ]
 
+  const buisnessOwnerUsersMenuIncluded = [3]
+
   const settingsSubMenus = [
     {
       id: 1,
@@ -541,7 +543,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {sessionState?.user?.level === 0 && (
+                  {(sessionState?.user?.level === 0 || sessionState?.user?.level === 2) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='4'
@@ -557,15 +559,20 @@ const SidebarMenuUI = (props) => {
                       </ContextAwareToggle>
                       <Accordion.Collapse eventKey='4'>
                         <MenuContent>
-                          {usersSubMenus.map(item => (
-                            <SubMenu
-                              key={item.id}
-                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                              onClick={() => handleGoToPage({ page: item.pageName })}
-                            >
-                              {item.title}
-                            </SubMenu>
-                          ))}
+                          {
+                            (sessionState?.user?.level === 2
+                              ? usersSubMenus.filter(menu => buisnessOwnerUsersMenuIncluded.includes(menu.id))
+                              : usersSubMenus
+                            ).map(item => (
+                              <SubMenu
+                                key={item.id}
+                                active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                                onClick={() => handleGoToPage({ page: item.pageName })}
+                              >
+                                {item.title}
+                              </SubMenu>
+                            ))
+                          }
                         </MenuContent>
                       </Accordion.Collapse>
                     </MenuContainer>
