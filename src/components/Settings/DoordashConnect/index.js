@@ -101,7 +101,7 @@ const DoordashConnectUI = (props) => {
                 '1.- Doordash account. \n' +
                 '2.- The advanced logistics module must be active. \n' +
                 '3.- Package of Ordering. \n' +
-                '4.- This is only available for United States currently.'
+                '4.- This is only available for United States, Canada and Australia currently.'
               )}
             </p>
           </Paragraph>
