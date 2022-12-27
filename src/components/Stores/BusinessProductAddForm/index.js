@@ -8,6 +8,7 @@ import { Select } from '../../../styles/Select/FirstSelect'
 
 import {
   useLanguage,
+  useConfig,
   DragAndDrop,
   ExamineClick,
   BusinessProductCreator as BusinessProductCreatorController
@@ -41,8 +42,11 @@ const BusinessProductAddFormUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
 
   const productImageInputRef = useRef(null)
+  const isEnabledAppointmentsFeature = configs?.appointments?.value
+
   const [hours, setHours] = useState([])
   const [minutes, setMinutes] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -202,7 +206,7 @@ const BusinessProductAddFormUI = (props) => {
             </DragAndDrop>
           </ExamineClick>
         </ProductImage>
-        {typeList?.length > 1 && (
+        {isEnabledAppointmentsFeature && typeList?.length > 1 && (
           <SelectWrapper notAllow>
             <label>{t('TYPE', 'Type')}</label>
             <Select
