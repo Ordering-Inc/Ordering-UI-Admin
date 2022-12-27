@@ -29,7 +29,7 @@ const DriverGroupDeliveryZoneDetailsUI = (props) => {
     handleAddDriverGroupDeliveryZone,
     handleDeleteDriverGroupDeliveryZone,
     handleUploadKmlFiles,
-    kmlData,
+    kmlData
   } = props
 
   const theme = useTheme()
