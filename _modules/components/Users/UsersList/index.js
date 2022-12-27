@@ -85,7 +85,7 @@ var UsersList = function UsersList(props) {
     handleOpenUserDetails(user);
   };
   var handleChangePage = function handleChangePage(page) {
-    getUsers(page, 10);
+    getUsers(page, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize);
   };
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(paginationProps.from / pageSize);
@@ -154,7 +154,7 @@ var UsersList = function UsersList(props) {
     }
   }, !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), t('USER', 'User'))), /*#__PURE__*/_react.default.createElement("th", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", {
     className: "amout-orders "
-  }, t('AMOUNT_OF_ORDERS', 'Amount of orders')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTION', 'Action')))), usersList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  }, t('AMOUNT_OF_ORDERS', 'Amount of orders')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTION', 'Action')))), usersList.loading ? _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize) || 10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserMainInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -216,12 +216,13 @@ var UsersList = function UsersList(props) {
     onClick: function onClick() {
       return handleOpenUserAddForm();
     }
-  }, t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }, t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, _defineProperty({
+    defaultPageSize: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize,
     currentPage: paginationProps.currentPage,
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,
     handleChangePageSize: handleChangePageSize
-  })))), /*#__PURE__*/_react.default.createElement(_Shared.ConfirmAdmin, {
+  }, "defaultPageSize", paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize))))), /*#__PURE__*/_react.default.createElement(_Shared.ConfirmAdmin, {
     open: confirmAdmin.open,
     onClose: function onClose() {
       return setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {

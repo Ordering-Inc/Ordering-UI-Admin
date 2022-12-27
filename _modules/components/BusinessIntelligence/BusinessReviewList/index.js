@@ -111,7 +111,8 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     currentPage: pagination.currentPage,
     totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),
     handleChangePage: handleChangePage,
-    handleChangePageSize: handleChangePageSize
+    handleChangePageSize: handleChangePageSize,
+    defaultPageSize: pagination === null || pagination === void 0 ? void 0 : pagination.pageSize
   })), openReview && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     defaultSideBarWidth: 550,
     open: openReview,

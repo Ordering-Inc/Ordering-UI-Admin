@@ -89,15 +89,15 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     }, {
       key: 'businesses',
       value: t('BUSINESSES', 'Businesses')
-    }, {
-      key: 'delivery_zones',
-      value: t('DELIVERY_ZONES', 'Delivery Zones')
     }] : useAdvanced && autoAssignType !== 'basic' ? [{
       key: 'general',
       value: t('GENERAL', 'General')
     }, {
       key: 'businesses',
       value: t('BUSINESSES', 'Businesses')
+    }, {
+      key: 'delivery_zones',
+      value: t('DELIVERY_ZONES', 'Delivery Zones')
     }, {
       key: 'paymethods',
       value: t('PAYMENT_METHODS', 'Payment methods')
@@ -107,9 +107,6 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     }, {
       key: 'logs',
       value: t('LOGS', 'Logs')
-    }, {
-      key: 'delivery_zones',
-      value: t('DELIVERY_ZONES', 'Delivery Zones')
     }] : [{
       key: 'general',
       value: t('GENERAL', 'General')
@@ -117,14 +114,14 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       key: 'businesses',
       value: t('BUSINESSES', 'Businesses')
     }, {
+      key: 'delivery_zones',
+      value: t('DELIVERY_ZONES', 'Delivery Zones')
+    }, {
       key: 'paymethods',
       value: t('PAYMENT_METHODS', 'Payment methods')
     }, {
       key: 'logs',
       value: t('LOGS', 'Logs')
-    }, {
-      key: 'delivery_zones',
-      value: t('DELIVERY_ZONES', 'Delivery Zones')
     }];
     setDriversGroupMenus(_driversGroupMenus);
   }, [useAdvanced]);

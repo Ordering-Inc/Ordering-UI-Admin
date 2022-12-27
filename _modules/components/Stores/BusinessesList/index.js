@@ -189,7 +189,8 @@ var BusinessesList = function BusinessesList(props) {
     currentPage: pagination.currentPage,
     totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),
     handleChangePage: handleChangePage,
-    handleChangePageSize: handleChangePageSize
+    handleChangePageSize: handleChangePageSize,
+    defaultPageSize: pagination === null || pagination === void 0 ? void 0 : pagination.pageSize
   })))), viewMethod === 'card' && /*#__PURE__*/_react.default.createElement(_styles2.BusinessCardContainer, null, businessList.loading ? _toConsumableArray(Array(30).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusiness.SingleBusiness, {
       key: i,

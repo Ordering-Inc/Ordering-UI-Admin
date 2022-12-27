@@ -58,6 +58,10 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var isPoweredByOrderingModule = configs === null || configs === void 0 ? void 0 : (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
+  var _useState = (0, _react.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    showMessage = _useState2[0],
+    setShowMessage = _useState2[1];
   var ordersSubMenus = [{
     id: 1,
     title: t('ORDERS_LIST', 'Orders list'),
@@ -317,7 +321,16 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
       return _ref.apply(this, arguments);
     };
   }();
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SidebarContainer, {
+  (0, _react.useEffect)(function () {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      setShowMessage(true);
+    }
+  }, []);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showMessage && /*#__PURE__*/_react.default.createElement(_styles.MobileMessage, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, {
+    onClick: function onClick() {
+      return setShowMessage(false);
+    }
+  }), t('FOR_THE_BEST_EXPERIENCE_WHILE_SETTING_UP', 'For the best experience while setting up your project, we recommend using a computer.'))), /*#__PURE__*/_react.default.createElement(_styles.SidebarContainer, {
     id: "side_bar",
     isCollapse: isCollapse
   }, /*#__PURE__*/_react.default.createElement(_styles.SidebarInnerContainer, {

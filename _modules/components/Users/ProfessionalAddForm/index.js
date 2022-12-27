@@ -15,6 +15,7 @@ var _utils = require("../../../utils");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _OccupationSelector = require("../OccupationSelector");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -46,7 +47,8 @@ var ProfessionalAddFormUI = function ProfessionalAddFormUI(props) {
     handlechangeImage = props.handlechangeImage,
     handleChangeSwtich = props.handleChangeSwtich,
     onClose = props.onClose,
-    isService = props.isService;
+    isService = props.isService,
+    occupations = props.occupations;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -230,7 +232,17 @@ var ProfessionalAddFormUI = function ProfessionalAddFormUI(props) {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.photo,
     alt: "user image",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))))), !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
+  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SPECIALIST', 'Specialist')), /*#__PURE__*/_react.default.createElement(_OccupationSelector.OccupationSelector, {
+    occupations: occupations,
+    handleChangeOccupation: function handleChangeOccupation(id) {
+      return handleChangeInput({
+        target: {
+          name: 'occupation_id',
+          value: id
+        }
+      });
+    }
+  })), !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
     values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout
   }).map(function (field) {
     var _formState$result5, _formState$result6, _formState$changes$fi, _formState$result7, _formState$result8, _formState$changes$fi2;
@@ -275,7 +287,8 @@ var ProfessionalAddFormUI = function ProfessionalAddFormUI(props) {
         value: 8,
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)
       }
-    })
+    }),
+    autoComplete: "new-password"
   })), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,

@@ -8,8 +8,7 @@ exports.ProfessionalSchedule = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-var _FirstSelect = require("../../../styles/Select/FirstSelect");
-var _Shared = require("../../Shared");
+var _Schedule = require("./Schedule");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -37,113 +36,11 @@ var ProfessionalScheduleUI = function ProfessionalScheduleUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     isMaxDays = _useState2[0],
     setIsMaxDays = _useState2[1];
-  var _useState3 = (0, _react.useState)(''),
-    _useState4 = _slicedToArray(_useState3, 2),
-    scheduleType = _useState4[0],
-    setScheduleType = _useState4[1];
-  var defaultSchedule = [{
-    enabled: true,
-    lapses: [{
-      open: {
-        hour: 0,
-        minute: 0
-      },
-      close: {
-        hour: 23,
-        minute: 59
-      }
-    }]
-  }, {
-    enabled: true,
-    lapses: [{
-      open: {
-        hour: 0,
-        minute: 0
-      },
-      close: {
-        hour: 23,
-        minute: 59
-      }
-    }]
-  }, {
-    enabled: true,
-    lapses: [{
-      open: {
-        hour: 0,
-        minute: 0
-      },
-      close: {
-        hour: 23,
-        minute: 59
-      }
-    }]
-  }, {
-    enabled: true,
-    lapses: [{
-      open: {
-        hour: 0,
-        minute: 0
-      },
-      close: {
-        hour: 23,
-        minute: 59
-      }
-    }]
-  }, {
-    enabled: true,
-    lapses: [{
-      open: {
-        hour: 0,
-        minute: 0
-      },
-      close: {
-        hour: 23,
-        minute: 59
-      }
-    }]
-  }, {
-    enabled: true,
-    lapses: [{
-      open: {
-        hour: 0,
-        minute: 0
-      },
-      close: {
-        hour: 23,
-        minute: 59
-      }
-    }]
-  }, {
-    enabled: true,
-    lapses: [{
-      open: {
-        hour: 0,
-        minute: 0
-      },
-      close: {
-        hour: 23,
-        minute: 59
-      }
-    }]
-  }];
-  var typeList = [{
-    value: 'default',
-    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('USE_DEFAULT_SCHEDULE', 'Use default schedule'))
-  }, {
-    value: 'customize',
-    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('CUSTOMIZE_SCHEDULE', 'Customize schedule'))
-  }];
   var handleIndefinitelyClick = function handleIndefinitelyClick() {
     handleChangeItem({
       max_days_in_future: null
     });
     setIsMaxDays(false);
-  };
-  var handleChangeScheduleType = function handleChangeScheduleType(val) {
-    setScheduleType(val);
-    if (val === 'default') handleChangeItem({
-      schedule: defaultSchedule
-    });
   };
   var handlClickFutureDay = function handlClickFutureDay(e) {
     if (e.target.closest('.max_days_in_future')) return;
@@ -152,9 +49,13 @@ var ProfessionalScheduleUI = function ProfessionalScheduleUI(props) {
   var onSubmit = function onSubmit() {
     handleUpdateClick && handleUpdateClick();
   };
+  var changeSchedule = (0, _react.useCallback)(function (val) {
+    return handleChangeItem({
+      schedule: val
+    });
+  }, []);
   (0, _react.useEffect)(function () {
     if (typeof (user === null || user === void 0 ? void 0 : user.max_days_in_future) === 'number') setIsMaxDays(true);
-    if (user !== null && user !== void 0 && user.schedule) setScheduleType('customize');
   }, [user]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DATE_RANGE', 'Date range')), /*#__PURE__*/_react.default.createElement("p", null, t('CUSTOMERS_CAN_SCHEDULE', 'Customers can schedule...')), /*#__PURE__*/_react.default.createElement(_styles2.RangeItem, {
     onClick: handlClickFutureDay
@@ -176,22 +77,11 @@ var ProfessionalScheduleUI = function ProfessionalScheduleUI(props) {
     onClick: handleIndefinitelyClick
   }, /*#__PURE__*/_react.default.createElement("span", null, !isMaxDays ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("label", null, t('INDEFINITELY_INTO_THE_FUTURE', 'Indefinitely into the future')))), /*#__PURE__*/_react.default.createElement(_styles2.ScheduleWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SCHEDULE', 'Schedule')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
-    options: typeList,
-    className: "select",
-    defaultValue: scheduleType,
-    placeholder: t('SELECT_OPTION', 'Select an option'),
-    onChange: function onChange(value) {
-      return handleChangeScheduleType(value);
-    }
-  })), scheduleType === 'customize' && /*#__PURE__*/_react.default.createElement(_styles2.ScheduleContentWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.Schedule, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null)), /*#__PURE__*/_react.default.createElement("label", null, t('INDEFINITELY_INTO_THE_FUTURE', 'Indefinitely into the future')))), /*#__PURE__*/_react.default.createElement(_Schedule.Schedule, {
+    key: user === null || user === void 0 ? void 0 : user.id,
     scheduleList: user === null || user === void 0 ? void 0 : user.schedule,
-    handleChangeScheduleState: function handleChangeScheduleState(val) {
-      return handleChangeItem({
-        schedule: val
-      });
-    }
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    handleChangeScheduleState: changeSchedule
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     disabled: (formState === null || formState === void 0 ? void 0 : formState.loading) || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0,

@@ -213,7 +213,8 @@ var UsersList = function UsersList(props) {
     currentPage: paginationProps.currentPage,
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,
-    handleChangePageSize: handleChangePageSize
+    handleChangePageSize: handleChangePageSize,
+    defaultPageSize: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize
   })))), /*#__PURE__*/_react.default.createElement(_Shared.ConfirmAdmin, {
     open: confirmAdmin.open,
     onClose: function onClose() {

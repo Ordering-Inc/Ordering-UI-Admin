@@ -105,7 +105,8 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     currentPage: paginationProps.currentPage,
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,
-    handleChangePageSize: handleChangePageSize
+    handleChangePageSize: handleChangePageSize,
+    defaultPageSize: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize
   })), openReview && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "driver-review-details",
     defaultSideBarWidth: 550,
