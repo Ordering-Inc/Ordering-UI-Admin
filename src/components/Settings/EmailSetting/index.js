@@ -39,7 +39,8 @@ const EmailSettingUI = (props) => {
     'email_smtp_username',
     'email_smtp_password',
     'email_smtp_encryption',
-    'email_smtp_use_default'
+    'email_smtp_use_default',
+    'email_template'
   ]
 
   const [general, setGeneral] = useState(null)
