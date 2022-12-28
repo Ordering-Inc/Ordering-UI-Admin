@@ -260,7 +260,7 @@ export const OrderBill = (props) => {
         </thead>
         <tbody>
           <tr>
-            <td>{order?.delivery_option ? t(order?.delivery_option?.name?.toUpperCase()?.replaceAll(' ', '_'), order?.delivery_option?.name) : t('EITHER_WAY', 'Either way')}</td>
+            <td>{order?.delivery_option ? order?.delivery_option?.name : t('EITHER_WAY', 'Either way')}</td>
           </tr>
         </tbody>
       </table>
