@@ -200,7 +200,8 @@ import {
   InsertVideo,
   InsertImage,
   LanguageTransSpread,
-  LanguageTransTable
+  LanguageTransTable,
+  MultiCountrySettings
 } from './components/Settings'
 import {
   BusinessBrandListing,
@@ -303,7 +304,11 @@ import {
   PaymentOptionMethods,
   BusinessPublishing,
   ServiceDetail,
-  ProductVideos
+  ProductVideos,
+  ProductStartGuide,
+  ImportersButton,
+  RestaurantSelectGuide,
+  ProductStep
 } from './components/Stores'
 import {
   CustomersListing,
@@ -600,6 +605,7 @@ export {
   InsertImage,
   LanguageTransSpread,
   LanguageTransTable,
+  MultiCountrySettings,
 
   Support,
 
@@ -704,6 +710,10 @@ export {
   BusinessPublishing,
   ServiceDetail,
   ProductVideos,
+  ProductStartGuide,
+  ImportersButton,
+  RestaurantSelectGuide,
+  ProductStep,
 
   LogoutButton,
   LanguageSelector,

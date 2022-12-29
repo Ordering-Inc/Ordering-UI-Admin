@@ -29,6 +29,7 @@ import { InsertVideo } from './InsertVideo'
 import { InsertImage } from './InsertImage'
 import { LanguageTransSpread } from './LanguageTransSpread'
 import { LanguageTransTable } from './LanguageTransTable'
+import { MultiCountrySettings } from './MultiCountrySettings'
 
 export {
   Cms,
@@ -61,5 +62,6 @@ export {
   InsertVideo,
   InsertImage,
   LanguageTransSpread,
-  LanguageTransTable
+  LanguageTransTable,
+  MultiCountrySettings
 }
