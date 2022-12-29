@@ -137,7 +137,7 @@ export const IntegrationListing = (props) => {
               <img src={theme.images.general.lalamove} />
             </IconWrapper>
             <SettingItemContent>
-              <h5>{t('CONNECT_WITH_LALAMOVE', 'Connect with lalamove')}</h5>
+              <h5>{t('CONNECT_WITH_LALAMOVE', 'Connect with Lalamove')}</h5>
               <p>{t('CONNECT_LALAMOVE_DESCRIPTION', 'Send orders directly to your drivers in LalaMove and keep customers happy with their deliveries.')}</p>
             </SettingItemContent>
           </SettingItemContainer>
