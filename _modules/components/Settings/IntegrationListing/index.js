@@ -119,7 +119,7 @@ var IntegrationListing = function IntegrationListing(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.lalamove
-  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('CONNECT_WITH_LALAMOVE', 'Connect with lalamove')), /*#__PURE__*/_react.default.createElement("p", null, t('CONNECT_LALAMOVE_DESCRIPTION', 'Send orders directly to your drivers in LalaMove and keep customers happy with their deliveries.')))), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContainer, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('CONNECT_WITH_LALAMOVE', 'Connect with Lalamove')), /*#__PURE__*/_react.default.createElement("p", null, t('CONNECT_LALAMOVE_DESCRIPTION', 'Send orders directly to your drivers in LalaMove and keep customers happy with their deliveries.')))), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemContainer, {
     onClick: function onClick() {
       return handleOpenSetting('picker_express');
     }
