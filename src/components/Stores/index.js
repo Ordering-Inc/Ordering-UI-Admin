@@ -100,6 +100,10 @@ import { PaymentOptionMethods } from './PaymentOptionMethods'
 import { BusinessPublishing } from './BusinessPublishing'
 import { ServiceDetail } from './ServiceDetail'
 import { ProductVideos } from './ProductVideos'
+import { ProductStartGuide } from './ProductStartGuide'
+import { ImportersButton } from './ImportersButton'
+import { RestaurantSelectGuide } from './RestaurantSelectGuide'
+import { ProductStep } from './ProductStep'
 
 export {
   BusinessAdd,
@@ -203,5 +207,9 @@ export {
   PaymentOptionMethods,
   BusinessPublishing,
   ServiceDetail,
-  ProductVideos
+  ProductVideos,
+  ProductStartGuide,
+  ImportersButton,
+  RestaurantSelectGuide,
+  ProductStep
 }
