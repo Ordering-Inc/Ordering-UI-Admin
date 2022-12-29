@@ -105,6 +105,12 @@ Object.defineProperty(exports, "LanguageTransTable", {
     return _LanguageTransTable.LanguageTransTable;
   }
 });
+Object.defineProperty(exports, "MultiCountrySettings", {
+  enumerable: true,
+  get: function get() {
+    return _MultiCountrySettings.MultiCountrySettings;
+  }
+});
 Object.defineProperty(exports, "NotificationSetting", {
   enumerable: true,
   get: function get() {
@@ -220,3 +226,4 @@ var _InsertVideo = require("./InsertVideo");
 var _InsertImage = require("./InsertImage");
 var _LanguageTransSpread = require("./LanguageTransSpread");
 var _LanguageTransTable = require("./LanguageTransTable");
+var _MultiCountrySettings = require("./MultiCountrySettings");
