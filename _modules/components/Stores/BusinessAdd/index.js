@@ -33,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessAddUI = function BusinessAddUI(props) {
-  var _orderStatus$options;
+  var _formState$changes, _orderStatus$options, _configs$google_maps_, _configs$google_maps_2;
   var formState = props.formState,
     handleChangeAddress = props.handleChangeAddress,
     handleChangeInput = props.handleChangeInput,
@@ -50,7 +50,9 @@ var BusinessAddUI = function BusinessAddUI(props) {
     gallery = props.gallery,
     handleChangePaymethodIds = props.handleChangePaymethodIds,
     paymethodIds = props.paymethodIds,
-    handleChangeSchedule = props.handleChangeSchedule;
+    handleChangeSchedule = props.handleChangeSchedule,
+    placeId = props.placeId,
+    setDetails = props.setDetails;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -60,6 +62,9 @@ var BusinessAddUI = function BusinessAddUI(props) {
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
@@ -98,6 +103,22 @@ var BusinessAddUI = function BusinessAddUI(props) {
   var changeSchedule = (0, _react.useCallback)(function (e) {
     return handleChangeSchedule(e);
   }, []);
+  var googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeId: 'roadmap',
+    // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: false,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    }
+  };
+  var defaultPosition = {
+    lat: 40.77473399999999,
+    lng: -73.9653844
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewBusinessContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -107,12 +128,14 @@ var BusinessAddUI = function BusinessAddUI(props) {
     formState: formState,
     handleChangeAddress: handleChangeAddress,
     handleChangeInput: handleChangeInput,
-    handleChangeCenter: handleChangeCenter
+    handleChangeCenter: handleChangeCenter,
+    placeId: placeId
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_Images.Images, {
     formState: formState,
     handleChangeSwtich: handleChangeSwtich
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_Schedule.Schedule, {
-    handleChangeSchedule: changeSchedule
+    handleChangeSchedule: changeSchedule,
+    schedule: formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.schedule
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_Photos.Photos, {
     gallery: gallery,
     handleChangeGallery: handleChangeGallery
@@ -141,7 +164,14 @@ var BusinessAddUI = function BusinessAddUI(props) {
     color: "primary",
     onClick: handleSubmit,
     disabled: formState === null || formState === void 0 ? void 0 : formState.loading
-  }, t('CONFIRM', 'Confirm')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('CONFIRM', 'Confirm'))), /*#__PURE__*/_react.default.createElement(_styles2.MapWrapper, null, placeId && (configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value) && /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
+    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
+    location: defaultPosition,
+    mapControls: googleMapsControls,
+    isFitCenter: true,
+    setDetails: setDetails,
+    placeId: placeId
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

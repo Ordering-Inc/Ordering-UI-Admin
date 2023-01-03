@@ -60,7 +60,7 @@ var Photos = function Photos(props) {
     imageRef.current.click();
   };
   var handleChangePhoto = function handleChangePhoto(croppedImg) {
-    var uniqueId = getUniqueId();
+    var uniqueId = (0, _utils.getUniqueId)();
     var updatedGallery = JSON.parse(JSON.stringify([].concat(_toConsumableArray(gallery), [{
       file: croppedImg,
       type: 1,
@@ -77,11 +77,6 @@ var Photos = function Photos(props) {
       return item.temp_id !== id;
     });
     handleChangeGallery(updatedGallery);
-  };
-  var getUniqueId = function getUniqueId() {
-    var dateString = Date.now().toString(36);
-    var randomness = Math.random().toString(36).substr(2);
-    return dateString + randomness;
   };
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {

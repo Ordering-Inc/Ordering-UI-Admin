@@ -23,6 +23,7 @@ var _styles = require("./styles");
 var _BusinessSync = require("../BusinessSync");
 var _BusinessDelete = require("../BusinessDelete");
 var _styles2 = require("../../../styles");
+var _BusinessAddStore = require("../BusinessAddStore");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -63,9 +64,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
-    _useEvent2 = _slicedToArray(_useEvent, 1),
-    events = _useEvent2[0];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isTutorialMode = _useState2[0],
@@ -106,14 +104,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     _useState20 = _slicedToArray(_useState19, 2),
     moveDistance = _useState20[0],
     setMoveDistance = _useState20[1];
+  var _useState21 = (0, _react.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    isAdd = _useState22[0],
+    setIsAdd = _useState22[1];
   var noBusinesses = (0, _react.useMemo)(function () {
     var _businessList$busines;
     return !(businessList !== null && businessList !== void 0 && businessList.loading) && (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) === 0 && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 && !searchValue;
   }, [businessList === null || businessList === void 0 ? void 0 : businessList.loading, businessList === null || businessList === void 0 ? void 0 : businessList.businesses, pagination, searchValue]);
   var handleGotToAdd = function handleGotToAdd() {
-    events.emit('go_to_page', {
-      page: 'business_add'
-    });
+    setIsAdd(true);
   };
   var handleBackRedirect = function handleBackRedirect() {
     setOpenBusinessDetails(false);
@@ -305,7 +305,14 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setOpenTutorialSidebarState: setOpenTutorialSidebarState,
     business: detailsBusiness,
     handleSucessUpdateBusiness: handleSucessUpdateBusiness
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "769px",
+    padding: "30px",
+    open: isAdd,
+    onClose: function onClose() {
+      return setIsAdd(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessAddStore.BusinessAddStore, null)));
 };
 var BusinessesListing = function BusinessesListing(props) {
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
