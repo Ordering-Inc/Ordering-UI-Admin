@@ -33,6 +33,7 @@ export const CampaignListingUI = (props) => {
           {...props}
           handleOpenDetail={handleOpenDetail}
           selectedCampaign={selectedCampaign}
+          setSelectedCampaign={setSelectedCampaign}
         />
       </CampaignListingContainer>
       {isOpenDetail && (

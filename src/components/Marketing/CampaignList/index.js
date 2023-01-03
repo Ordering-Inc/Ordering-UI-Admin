@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
 import { Switch } from '../../../styles'
-import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
+import { ColumnAllowSettingPopover, Pagination, Modal } from '../../Shared'
 
 import {
   Container,
@@ -12,8 +12,10 @@ import {
   AddNewPageButton,
   SwitchWrapper,
   StatusWrapper,
-  StatusPoint
+  StatusPoint,
+  LinkText
 } from './styles'
+import { CampaignUserList } from '../CampaignUsersList'
 
 export const CampaignList = (props) => {
   const {
@@ -23,15 +25,18 @@ export const CampaignList = (props) => {
     setPaginationProps,
     handleOpenDetail,
     selectedCampaign,
-    handleUpdateCampaign
+    handleUpdateCampaign,
+    setSelectedCampaign
   } = props
 
   const [, t] = useLanguage()
+  const [openModal, setOpenModal] = useState(false)
 
   const [allowColumns, setAllowColumns] = useState({
     campaign: true,
     contact_type: true,
     audience: true,
+    in_queue: true,
     sent_count: true,
     open_count: true,
     unsubscribed_count: true,
@@ -52,6 +57,10 @@ export const CampaignList = (props) => {
     {
       value: 'audience',
       content: t('AUDIENCE', 'Audience')
+    },
+    {
+      value: 'in_queue',
+      content: t('IN_QUEUE', 'In Queue')
     },
     {
       value: 'sent_count',
@@ -105,9 +114,14 @@ export const CampaignList = (props) => {
   }
 
   const handleClickCampaign = (e, campaign) => {
-    const inValid = e.target.closest('.enable_control')
+    const inValid = e.target.closest('.enable_control') || e.target.closest('.opens')
     if (inValid) return
     handleOpenDetail(campaign)
+  }
+
+  const handleOpens = (campaign) => {
+    setSelectedCampaign(campaign)
+    setOpenModal(true)
   }
 
   return (
@@ -124,6 +138,9 @@ export const CampaignList = (props) => {
               )}
               {allowColumns?.audience && (
                 <th>{t('AUDIENCE', 'Audience')}</th>
+              )}
+              {allowColumns?.in_queue && (
+                <th>{t('IN_QUEUE', 'In Queue')}</th>
               )}
               {allowColumns?.sent_count && (
                 <th>{t('SENT', 'Sent')}</th>
@@ -162,6 +179,11 @@ export const CampaignList = (props) => {
                     </td>
                   )}
                   {allowColumns?.audience && (
+                    <td>
+                      <Skeleton width={100} height={20} />
+                    </td>
+                  )}
+                  {allowColumns?.in_queue && (
                     <td>
                       <Skeleton width={100} height={20} />
                     </td>
@@ -216,17 +238,30 @@ export const CampaignList = (props) => {
                   {allowColumns?.audience && (
                     <td>{campaign?.audience_type}</td>
                   )}
+                  {allowColumns?.in_queue && (
+                    <td>
+                      {
+                        ((typeof campaign?.audience_count !== 'undefined') && (typeof campaign?.sent_count !== 'undefined'))
+                          ? (campaign?.audience_count - campaign?.sent_count)
+                          : 0
+                      }
+                    </td>
+                  )}
                   {allowColumns?.sent_count && (
-                    <td>{campaign?.sent_count}</td>
+                    <td>{campaign?.sent_count || 0}</td>
                   )}
                   {allowColumns?.open_count && (
-                    <td>{campaign?.open_count}</td>
+                    <td>
+                      <LinkText onClick={() => handleOpens(campaign)} className='opens'>
+                        {campaign?.open_count || 0}
+                      </LinkText>
+                    </td>
                   )}
                   {allowColumns?.unsubscribed_count && (
-                    <td>{campaign?.unsubscribed_count}</td>
+                    <td>{campaign?.unsubscribed_count || 0}</td>
                   )}
                   {allowColumns?.bounced_count && (
-                    <td>{campaign?.bounced_count}</td>
+                    <td>{campaign?.bounced_count || 0}</td>
                   )}
                   <td>
                     {campaign?.audience_type === 'dynamic' && (
@@ -270,6 +305,17 @@ export const CampaignList = (props) => {
           )}
         </PagesBottomContainer>
       )}
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+      >
+        <CampaignUserList
+          campaignId={selectedCampaign?.id}
+        />
+      </Modal>
     </>
   )
 }

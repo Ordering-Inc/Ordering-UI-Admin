@@ -201,3 +201,10 @@ export const AddNewPageButton = styled.div`
     color: ${props => props.theme.colors.primary};
   }
 `
+
+export const LinkText = styled.span`
+  color: ${props => props.theme.colors.primary};
+  &:hover {
+    text-decoration: underline;
+  }
+`
