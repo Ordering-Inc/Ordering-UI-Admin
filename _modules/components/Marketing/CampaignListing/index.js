@@ -45,7 +45,8 @@ var CampaignListingUI = function CampaignListingUI(props) {
     handleOpenDetail: handleOpenDetail
   })), /*#__PURE__*/_react.default.createElement(_CampaignList.CampaignList, _extends({}, props, {
     handleOpenDetail: handleOpenDetail,
-    selectedCampaign: selectedCampaign
+    selectedCampaign: selectedCampaign,
+    setSelectedCampaign: setSelectedCampaign
   }))), isOpenDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "campaignDetail",
     open: isOpenDetail,
