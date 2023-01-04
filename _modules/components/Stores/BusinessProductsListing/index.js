@@ -427,7 +427,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return setBatchImageFormOpen(false);
     }
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
-    width: width > 1440 ? '40%' : '60%',
+    width: "769px",
     padding: "25px",
     open: showPopup,
     onClose: function onClose() {
