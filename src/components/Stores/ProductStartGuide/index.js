@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { FileMedical, ColumnsGap } from 'react-bootstrap-icons'
+import { FileMedical, ColumnsGap, FileEarmarkArrowUp, TabletLandscape } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import {
   Container,
@@ -10,17 +10,33 @@ import {
 } from './styles'
 
 export const ProductStartGuide = (props) => {
-  const { onClose, setStep, countriesState } = props
+  const { onClose, setStep, setOption, countriesState } = props
   const [, t] = useLanguage()
 
   const guideList = [
     { id: 1, title: t('START_WITH_AN_EMPTY_MENU', 'Start with an empty Menu'), description: t('START_WITH_AN_EMPTY_MENU_DESC', 'Start with an empty Menu and enter your menu items'), icon: <FileMedical />, enabled: true },
-    { id: 2, title: t('IMPORT_MENU_ONLY_USA_CANADA', 'Import Menu (Only if USA and Canada)'), description: t('IMPORT_MENU_ONLY_USA_CANADA_DESC', 'Import your menu from the Ordering Network that includes over 1M restaurants and stores from the US and Canada.'), icon: <ColumnsGap />, enabled: countriesState?.enabled }
+    { id: 2, title: t('IMPORT_MENU_ONLY_USA_CANADA', 'Import Menu (Only if USA and Canada)'), description: t('IMPORT_MENU_ONLY_USA_CANADA_DESC', 'Import your menu from the Ordering Network that includes over 1M restaurants and stores from the US and Canada.'), icon: <ColumnsGap />, enabled: countriesState?.enabled },
+    { id: 3, title: t('UPLOAD_YOUR_MENU', 'Upload your Menu'), description: t('UPLOAD_YOUR_MENU_DESC', 'Click to upload your menu (PDF or image file) or share your menu link (For website or another online ordering system)'), icon: <FileEarmarkArrowUp />, enabled: true },
+    { id: 4, title: t('INTEGRATE_MY_POS_TO_EXTRACT_MENU', 'Integrate my POS to extract the menu'), icon: <TabletLandscape />, enabled: true }
   ]
 
   const handleChangeStep = (id) => {
-    if (id === 1) onClose()
-    else if (id === 2) setStep(2)
+    switch (id) {
+      case 2:
+        setStep(2)
+        setOption(2)
+        break
+      case 3:
+        setStep(2)
+        setOption(3)
+        break
+      case 4:
+        setStep(2)
+        setOption(4)
+        break
+      default:
+        onClose()
+    }
   }
 
   return (
@@ -51,7 +67,7 @@ export const ProductStartGuide = (props) => {
           </IconWrapper>
           <InfoWrapper>
             <h3>{guide.title}</h3>
-            <p>{guide.description}</p>
+            {guide.description && <p>{guide.description}</p>}
           </InfoWrapper>
         </GuideItemContainer>
       ))}
