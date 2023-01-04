@@ -75,6 +75,7 @@ export const BusinessAddStore = () => {
             }}
             autoComplete='new-password'
             countryCode={configs?.country_autocomplete?.value || '*'}
+            types={['restaurant']}
           />
           <p>{t('START_TYPING_THEN_SELECT_AN_ADDRESS_FROM_THE_LIST', 'Start typing  then select an address from the list')}</p>
         </FormControl>
