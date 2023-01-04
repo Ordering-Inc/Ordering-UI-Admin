@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage, useEvent, ProductStep as ProductStepController } from 'ordering-components-admin'
 import { ProductStartGuide } from '../ProductStartGuide'
 import { RestaurantSelectGuide } from '../RestaurantSelectGuide'
+import { UploadMenuGuide } from '../UploadMenuGuide'
 import { useTheme } from 'styled-components'
 import { Button } from '../../../styles'
 import {
@@ -10,6 +11,7 @@ import {
   ImageContent,
   ButtonWrapper
 } from './styles'
+import { SelectPosGuide } from '../SelectPosGuide'
 
 const ProductStepUI = (props) => {
   const {
@@ -30,6 +32,7 @@ const ProductStepUI = (props) => {
   const [events] = useEvent()
 
   const [step, setStep] = useState(1)
+  const [option, setOption] = useState('')
 
   const handleCheckMenu = () => {
     events.emit('go_to_page', { page: 'store', params: { store: business?._id } })
@@ -38,8 +41,8 @@ const ProductStepUI = (props) => {
 
   return (
     <Container>
-      {step === 1 && <ProductStartGuide onClose={onClose} setStep={setStep} countriesState={countriesState} />}
-      {step === 2 && (
+      {step === 1 && <ProductStartGuide onClose={onClose} setStep={setStep} setOption={setOption} countriesState={countriesState} />}
+      {step === 2 && option === 2 && (
         <RestaurantSelectGuide
           setBusiness={setBusiness}
           setStep={setStep}
@@ -52,7 +55,7 @@ const ProductStepUI = (props) => {
           isLoading={isLoading}
         />
       )}
-      {step === 3 && actionState?.loading && (
+      {step === 3 && option === 2 && actionState?.loading && (
         <ImportMenuContainer>
           <h2>{t('WE_ARE_IMPORTING_YOUR_MENU', 'We are importing your menu.')}</h2>
           <ImageContent>
@@ -60,7 +63,7 @@ const ProductStepUI = (props) => {
           </ImageContent>
         </ImportMenuContainer>
       )}
-      {step === 3 && !actionState?.loading && (
+      {step === 3 && option === 2 && !actionState?.loading && (
         <ImportMenuContainer>
           <h2>{t('YOUR_MENU_HAS_BEEN_IMPORTED', 'Your menu has been imported')}</h2>
           <ImageContent>
@@ -70,6 +73,17 @@ const ProductStepUI = (props) => {
             <Button color='primary' onClick={() => handleCheckMenu()}>{t('CHECK_MENU', 'Check menu')}</Button>
           </ButtonWrapper>
         </ImportMenuContainer>
+      )}
+      {step === 2 && option === 3 && (
+        <UploadMenuGuide
+          handleBack={() => setStep(1)}
+          onClose={onClose}
+        />
+      )}
+      {step === 2 && option === 4 && (
+        <SelectPosGuide
+          setStep={setStep}
+        />
       )}
     </Container>
   )

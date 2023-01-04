@@ -174,6 +174,75 @@ import singleStoreCustomerApp from './template/assets/images/myProducts/single-s
 import appStoreSmall from './template/assets/images/myProducts/app-store.png'
 import playStoreSmall from './template/assets/images/myProducts/play-store.png'
 
+/**
+ * pos
+ */
+import square from './template/assets/images/pos/square.png'
+import clover from './template/assets/images/pos/clover.png'
+import toast from './template/assets/images/pos/toast.png'
+import vectron from './template/assets/images/pos/vectron.png'
+import par from './template/assets/images/pos/par.png'
+import fourSoft from './template/assets/images/pos/4-soft.png'
+import auphan from './template/assets/images/pos/auphan.png'
+import cake from './template/assets/images/pos/cake.png'
+import edgeServ from './template/assets/images/pos/edge-serv.png'
+import brinkCertified from './template/assets/images/pos/brink-certified.png'
+import elCheff from './template/assets/images/pos/el-cheff.png'
+import emaginePos from './template/assets/images/pos/emagine-pos.png'
+import eposNow from './template/assets/images/pos/epos-now.png'
+import focus from './template/assets/images/pos/focus.png'
+import foodics from './template/assets/images/pos/foodics.png'
+import upserve from './template/assets/images/pos/upserve.png'
+import givex from './template/assets/images/pos/givex.png'
+import heartLand from './template/assets/images/pos/heart-land.png'
+import hippos from './template/assets/images/pos/hippos.png'
+import hungerRush from './template/assets/images/pos/hunger-rush.png'
+import infocaja from './template/assets/images/pos/infocaja.png'
+import iTabPos from './template/assets/images/pos/i-tab-pos.png'
+import lightSpeed from './template/assets/images/pos/light-speed.png'
+import linga from './template/assets/images/pos/linga.png'
+import maitre from './template/assets/images/pos/maitre.png'
+import microsRes from './template/assets/images/pos/micros-res.png'
+import microsSimphony from './template/assets/images/pos/micros-simphony.png'
+import mobileBytes from './template/assets/images/pos/mobile-bytes.png'
+import nationalSoft from './template/assets/images/pos/national-soft.png'
+import ncrAloha from './template/assets/images/pos/ncr-aloha.png'
+import ncrSilver from './template/assets/images/pos/ncr-silver.png'
+import northStar from './template/assets/images/pos/north-star.png'
+import onePos from './template/assets/images/pos/one-pos.png'
+import orderCounter from './template/assets/images/pos/order-counter.png'
+import ovvi from './template/assets/images/pos/ovvi.png'
+import paradisePos from './template/assets/images/pos/paradise-pos.png'
+import pixelPoint from './template/assets/images/pos/pixel-point.png'
+import posist from './template/assets/images/pos/posist.png'
+import posIst from './template/assets/images/pos/pos-ist.png'
+import prism from './template/assets/images/pos/prism.png'
+import prologicFirst from './template/assets/images/pos/prologic-first.png'
+import quBeyondPos from './template/assets/images/pos/qu-beyond-pos.png'
+import rbbtTech from './template/assets/images/pos/rbbt-tech.png'
+import restPro from './template/assets/images/pos/rest-pro.png'
+import revel from './template/assets/images/pos/revel.png'
+import rezku from './template/assets/images/pos/rezku.png'
+import salido from './template/assets/images/pos/salido.png'
+import snappy from './template/assets/images/pos/snappy.png'
+import softRestaurant from './template/assets/images/pos/soft-restaurant.png'
+import solutionDelivery from './template/assets/images/pos/solution-delivery.png'
+import speedLine from './template/assets/images/pos/speed-line.png'
+import spotOn from './template/assets/images/pos/spot-on.png'
+import sunamiPos from './template/assets/images/pos/sunami-pos.png'
+import superMenu from './template/assets/images/pos/super-menu.png'
+import talech from './template/assets/images/pos/talech.png'
+import telnet from './template/assets/images/pos/telnet.png'
+import tidThree from './template/assets/images/pos/tid-3.png'
+import touchBistro from './template/assets/images/pos/touch-bistro.png'
+import union from './template/assets/images/pos/union.png'
+import vistaEntertainment from './template/assets/images/pos/vista-entertainment-solutions.png'
+import xenial from './template/assets/images/pos/xenial.png'
+import xetux from './template/assets/images/pos/xetux.png'
+import dinerWare from './template/assets/images/pos/diner-ware.png'
+import digitalDining from './template/assets/images/pos/digital-dining.png'
+import foodTec from './template/assets/images/pos/food-tec.png'
+
 import { AutologinParams } from './template/components/AutologinParams'
 
 const logos = {
@@ -272,6 +341,73 @@ theme.images = {
     singleStoreCustomerApp,
     appStoreSmall,
     playStoreSmall
+  },
+  pos: {
+    square,
+    toast,
+    clover,
+    vectron,
+    par,
+    fourSoft,
+    auphan,
+    cake,
+    edgeServ,
+    brinkCertified,
+    elCheff,
+    emaginePos,
+    eposNow,
+    focus,
+    foodics,
+    upserve,
+    givex,
+    heartLand,
+    hippos,
+    hungerRush,
+    infocaja,
+    iTabPos,
+    lightSpeed,
+    linga,
+    maitre,
+    microsRes,
+    microsSimphony,
+    mobileBytes,
+    nationalSoft,
+    ncrAloha,
+    ncrSilver,
+    northStar,
+    onePos,
+    orderCounter,
+    ovvi,
+    paradisePos,
+    pixelPoint,
+    posist,
+    posIst,
+    prism,
+    prologicFirst,
+    quBeyondPos,
+    rbbtTech,
+    restPro,
+    revel,
+    rezku,
+    salido,
+    snappy,
+    softRestaurant,
+    solutionDelivery,
+    speedLine,
+    spotOn,
+    sunamiPos,
+    superMenu,
+    talech,
+    telnet,
+    tidThree,
+    touchBistro,
+    union,
+    vistaEntertainment,
+    xenial,
+    xetux,
+    dinerWare,
+    digitalDining,
+    foodTec
   },
   icons: {
     ordersList: ordersList,
