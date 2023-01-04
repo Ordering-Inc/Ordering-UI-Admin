@@ -14,10 +14,10 @@ export const ProductStartGuide = (props) => {
   const [, t] = useLanguage()
 
   const guideList = [
-    { id: 1, title: t('START_WITH_AN_EMPTY_MENU', 'Start with an empty Menu'), description: t('START_WITH_AN_EMPTY_MENU_DESC', 'Start with an empty Menu and enter your menu items'), icon: <FileMedical /> },
-    { id: 2, title: t('IMPORT_MENU_ONLY_USA_CANADA', 'Import Menu (Only if USA and Canada)'), description: t('IMPORT_MENU_ONLY_USA_CANADA_DESC', 'Import your menu from the Ordering Network that includes over 1M restaurants and stores from the US and Canada.'), icon: <ColumnsGap /> },
-    { id: 3, title: t('UPLOAD_YOUR_MENU', 'Upload your Menu'), description: t('UPLOAD_YOUR_MENU_DESC', 'Click to upload your menu (PDF or image file) or share your menu link (For website or another online ordering system)'), icon: <FileEarmarkArrowUp /> },
-    { id: 4, title: t('INTEGRATE_MY_POS_TO_EXTRACT_MENU', 'Integrate my POS to extract the menu'), icon: <TabletLandscape /> }
+    { id: 1, title: t('START_WITH_AN_EMPTY_MENU', 'Start with an empty Menu'), description: t('START_WITH_AN_EMPTY_MENU_DESC', 'Start with an empty Menu and enter your menu items'), icon: <FileMedical />, enabled: true },
+    { id: 2, title: t('IMPORT_MENU_ONLY_USA_CANADA', 'Import Menu (Only if USA and Canada)'), description: t('IMPORT_MENU_ONLY_USA_CANADA_DESC', 'Import your menu from the Ordering Network that includes over 1M restaurants and stores from the US and Canada.'), icon: <ColumnsGap />, enabled: countriesState?.enabled },
+    { id: 3, title: t('UPLOAD_YOUR_MENU', 'Upload your Menu'), description: t('UPLOAD_YOUR_MENU_DESC', 'Click to upload your menu (PDF or image file) or share your menu link (For website or another online ordering system)'), icon: <FileEarmarkArrowUp />, enabled: true },
+    { id: 4, title: t('INTEGRATE_MY_POS_TO_EXTRACT_MENU', 'Integrate my POS to extract the menu'), icon: <TabletLandscape />, enabled: true }
   ]
 
   const handleChangeStep = (id) => {
