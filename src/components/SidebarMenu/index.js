@@ -58,6 +58,7 @@ const SidebarMenuUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const windowSize = useWindowSize()
   const isPoweredByOrderingModule = configs?.powered_by_ordering_module?.value
+  const isEnabledAppointmentsFeature = configs?.appointments?.value
 
   const [showMessage, setShowMessage] = useState(false)
 
@@ -486,13 +487,25 @@ const SidebarMenuUI = (props) => {
                           {ordersSubMenus.map(item => (
                             !(sessionState?.user?.level === 2 && item.pageName === 'drivers') &&
                             !(sessionState?.user?.level === 5 && item.pageName === 'appointments') && (
-                              <SubMenu
-                                key={item.id}
-                                active={location.pathname.includes(item.url)}
-                                onClick={() => handleGoToPage({ page: item.pageName })}
-                              >
-                                {firstLetterCapital(item.title)}
-                              </SubMenu>
+                              item.pageName === 'appointments' ? (
+                                isEnabledAppointmentsFeature && (
+                                  <SubMenu
+                                    key={item.id}
+                                    active={location.pathname.includes(item.url)}
+                                    onClick={() => handleGoToPage({ page: item.pageName })}
+                                  >
+                                    {firstLetterCapital(item.title)}
+                                  </SubMenu>
+                                )
+                              ) : (
+                                <SubMenu
+                                  key={item.id}
+                                  active={location.pathname.includes(item.url)}
+                                  onClick={() => handleGoToPage({ page: item.pageName })}
+                                >
+                                  {firstLetterCapital(item.title)}
+                                </SubMenu>
+                              )
                             )
                           ))}
                         </MenuContent>
@@ -564,13 +577,25 @@ const SidebarMenuUI = (props) => {
                               ? usersSubMenus.filter(menu => buisnessOwnerUsersMenuIncluded.includes(menu.id))
                               : usersSubMenus
                             ).map(item => (
-                              <SubMenu
-                                key={item.id}
-                                active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                                onClick={() => handleGoToPage({ page: item.pageName })}
-                              >
-                                {item.title}
-                              </SubMenu>
+                              item.pageName === 'professionals' ? (
+                                isEnabledAppointmentsFeature && (
+                                  <SubMenu
+                                    key={item.id}
+                                    active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                                    onClick={() => handleGoToPage({ page: item.pageName })}
+                                  >
+                                    {item.title}
+                                  </SubMenu>
+                                )
+                              ) : (
+                                <SubMenu
+                                  key={item.id}
+                                  active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                                  onClick={() => handleGoToPage({ page: item.pageName })}
+                                >
+                                  {item.title}
+                                </SubMenu>
+                              )
                             ))
                           }
                         </MenuContent>
