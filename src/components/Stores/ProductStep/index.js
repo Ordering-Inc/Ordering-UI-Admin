@@ -22,8 +22,9 @@ const ProductStepUI = (props) => {
     handleImport,
     handleChangeAddress,
     business,
-    address,
-    isLoading
+    isLoading,
+    orderingBusiness,
+    countriesState
   } = props
 
   const theme = useTheme()
@@ -40,7 +41,7 @@ const ProductStepUI = (props) => {
 
   return (
     <Container>
-      {step === 1 && <ProductStartGuide onClose={onClose} setStep={setStep} setOption={setOption} />}
+      {step === 1 && <ProductStartGuide onClose={onClose} setStep={setStep} setOption={setOption} countriesState={countriesState} />}
       {step === 2 && option === 2 && (
         <RestaurantSelectGuide
           setBusiness={setBusiness}
@@ -49,7 +50,8 @@ const ProductStepUI = (props) => {
           businessList={businessList}
           handleImport={handleImport}
           handleChangeAddress={handleChangeAddress}
-          address={address}
+          orderingBusiness={orderingBusiness}
+          business={business}
           isLoading={isLoading}
         />
       )}

@@ -1,14 +1,16 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { FileMedical, ColumnsGap, FileEarmarkArrowUp, TabletLandscape } from 'react-bootstrap-icons'
+import Skeleton from 'react-loading-skeleton'
 import {
   Container,
   GuideItemContainer,
-  InfoWrapper
+  InfoWrapper,
+  IconWrapper
 } from './styles'
 
 export const ProductStartGuide = (props) => {
-  const { onClose, setStep, setOption } = props
+  const { onClose, setStep, setOption, countriesState } = props
   const [, t] = useLanguage()
 
   const guideList = [
@@ -40,9 +42,29 @@ export const ProductStartGuide = (props) => {
   return (
     <Container>
       <h2>{t('HOW_DO_YOU_WANT_TO_START', 'How do you want to start?')}</h2>
-      {guideList.map(guide => (
+      {countriesState?.loading && [...Array(4).keys()].map(idx => (
+        <GuideItemContainer key={idx}>
+          <IconWrapper>
+            <Skeleton width={24} height={24} />
+          </IconWrapper>
+          <InfoWrapper>
+            <h3>
+              <Skeleton height={18} width={200} />
+            </h3>
+            <p>
+              <Skeleton height={10} />
+            </p>
+            <p>
+              <Skeleton height={10} />
+            </p>
+          </InfoWrapper>
+        </GuideItemContainer>
+      ))}
+      {!countriesState?.loading && guideList.map(guide => guide.enabled && (
         <GuideItemContainer key={guide.id} onClick={() => handleChangeStep(guide.id)}>
-          {guide.icon}
+          <IconWrapper>
+            {guide.icon}
+          </IconWrapper>
           <InfoWrapper>
             <h3>{guide.title}</h3>
             {guide.description && <p>{guide.description}</p>}
