@@ -41,7 +41,7 @@ export const InfoWrapper = styled.div`
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    margin: 0%;
+    margin: 0;
   }
   p {
     margin: 0;

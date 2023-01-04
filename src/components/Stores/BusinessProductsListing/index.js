@@ -485,7 +485,7 @@ const BusinessProductsListingUI = (props) => {
         />
       </Modal>
       <Modal
-        width={width > 1440 ? '40%' : '60%'}
+        width='769px'
         padding='25px'
         open={showPopup}
         onClose={() => setShowPopup(false)}
