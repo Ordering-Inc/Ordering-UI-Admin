@@ -58,12 +58,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleChangeBusinessIds = props.handleChangeBusinessIds,
     handleEnableAllBusiness = props.handleEnableAllBusiness,
     handleDeleteMultiBusinesses = props.handleDeleteMultiBusinesses,
-    setBusinessIds = props.setBusinessIds;
+    setBusinessIds = props.setBusinessIds,
+    countriesState = props.countriesState;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
+    _useEvent2 = _slicedToArray(_useEvent, 1),
+    events = _useEvent2[0];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isTutorialMode = _useState2[0],
@@ -113,7 +117,9 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     return !(businessList !== null && businessList !== void 0 && businessList.loading) && (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) === 0 && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 && !searchValue;
   }, [businessList === null || businessList === void 0 ? void 0 : businessList.loading, businessList === null || businessList === void 0 ? void 0 : businessList.businesses, pagination, searchValue]);
   var handleGotToAdd = function handleGotToAdd() {
-    setIsAdd(true);
+    if (countriesState !== null && countriesState !== void 0 && countriesState.enabled) setIsAdd(true);else events.emit('go_to_page', {
+      page: 'business_add'
+    });
   };
   var handleBackRedirect = function handleBackRedirect() {
     setOpenBusinessDetails(false);
