@@ -27,7 +27,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
-  var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes$ty, _formState$changes4, _formState$changes5, _formState$changes$du, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9;
+  var _configs$appointments, _formState$changes, _formState$changes2, _formState$changes3, _formState$changes$ty, _formState$changes4, _formState$changes5, _formState$changes$du, _formState$changes6, _formState$changes7, _formState$changes8, _formState$changes9;
   var formState = props.formState,
     handleChangeInput = props.handleChangeInput,
     handleUpdateClick = props.handleUpdateClick,
@@ -38,7 +38,11 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var productImageInputRef = (0, _react.useRef)(null);
+  var isEnabledAppointmentsFeature = configs === null || configs === void 0 ? void 0 : (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     hours = _useState2[0],
@@ -226,7 +230,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.images,
     alt: "business type image",
     loading: "lazy"
-  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), (typeList === null || typeList === void 0 ? void 0 : typeList.length) > 1 && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), isEnabledAppointmentsFeature && (typeList === null || typeList === void 0 ? void 0 : typeList.length) > 1 && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, {
     notAllow: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: typeList,

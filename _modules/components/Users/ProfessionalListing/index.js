@@ -31,6 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProfessionalListingUI = function ProfessionalListingUI(props) {
+  var _configs$appointments;
   var defaultUserTypesSelected = props.defaultUserTypesSelected,
     disabledActiveStateCondition = props.disabledActiveStateCondition,
     headerTitle = props.headerTitle,
@@ -59,6 +60,9 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -76,6 +80,7 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     openUserAddForm = _useState8[0],
     setOpenUserAddForm = _useState8[1];
+  var isEnabledAppointmentsFeature = configs === null || configs === void 0 ? void 0 : (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenUserDetails(false);
     setOpenUser(null);
@@ -111,7 +116,7 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
       setIsOpenUserDetails(true);
     }
   }, [usersList]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersListingContainer, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersListingContainer, null, isEnabledAppointmentsFeature ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
     isProfessionals: true,
     title: headerTitle,
     searchValue: searchValue,
@@ -150,7 +155,7 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     handleOpenUserDetails: handleOpenUserDetails,
     handleOpenUserAddForm: handleOpenUserAddForm,
     setSelectedUsers: setSelectedUsers
-  })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.WarningText, null, t('APPOINTMENTS_FEATURE_NOT_ENABLED', 'The appointments feature is not enabled.'))), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     isProfessionals: true,
     open: isOpenUserDetails,
     user: openUser,

@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _product$valid, _productInfo$ingredie, _productInfo$options, _productInfo$ingredie2, _productInfo$options2;
+  var _product$valid, _product$calendar_eve, _configs$format_time, _product$calendar_eve2, _configs$format_time2, _productInfo$ingredie, _productInfo$options, _productInfo$ingredie2, _productInfo$options2;
   var isCartProduct = props.isCartProduct,
     product = props.product,
     changeQuantity = props.changeQuantity,
@@ -49,7 +49,11 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
     parsePrice = _useUtils2$.parsePrice,
-    optimizeImage = _useUtils2$.optimizeImage;
+    optimizeImage = _useUtils2$.optimizeImage,
+    parseDate = _useUtils2$.parseDate;
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var windowSize = (0, _useWindowSize.useWindowSize)();
   var _useState = (0, _react.useState)('active'),
     _useState2 = _slicedToArray(_useState, 2),
@@ -154,7 +158,11 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.ProductInfo, null, (product === null || product === void 0 ? void 0 : product.images) && /*#__PURE__*/_react.default.createElement(_styles.WrapperProductImage, null, /*#__PURE__*/_react.default.createElement(_styles.ProductImage, {
     bgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_100,c_limit')
-  })), isCartProduct ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
+  })), product !== null && product !== void 0 && product.calendar_event ? /*#__PURE__*/_react.default.createElement(_styles.ScheduleInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h3", null, product.name), /*#__PURE__*/_react.default.createElement(_styles.ScheduleInfo, null, /*#__PURE__*/_react.default.createElement("span", null, parseDate(product === null || product === void 0 ? void 0 : (_product$calendar_eve = product.calendar_event) === null || _product$calendar_eve === void 0 ? void 0 : _product$calendar_eve.start, {
+    outputFormat: (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? 'hh:mm a' : 'HH:mm'
+  }), ' ', "-", ' ', parseDate(product === null || product === void 0 ? void 0 : (_product$calendar_eve2 = product.calendar_event) === null || _product$calendar_eve2 === void 0 ? void 0 : _product$calendar_eve2.end, {
+    outputFormat: (configs === null || configs === void 0 ? void 0 : (_configs$format_time2 = configs.format_time) === null || _configs$format_time2 === void 0 ? void 0 : _configs$format_time2.value) === '12' ? 'hh:mm a' : 'HH:mm'
+  })))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCartProduct ? /*#__PURE__*/_react.default.createElement(_styles.ProductSelect, {
     ref: productSelect,
     value: product.quantity,
     onChange: function onChange(e) {
@@ -184,7 +192,7 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     onClick: function onClick() {
       return onDeleteProduct(product);
     }
-  })))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(getProductPrice(product), _objectSpread({
+  }))))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(getProductPrice(product), _objectSpread({
     currencyPosition: 'left'
   }, currency && {
     currency: currency
