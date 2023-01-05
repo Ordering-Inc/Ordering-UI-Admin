@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
+import { useLanguage, useEvent, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import { getStorageItem, setStorageItem } from '../../../utils'
@@ -47,12 +47,14 @@ const BusinessesListingUI = (props) => {
     handleChangeBusinessIds,
     handleEnableAllBusiness,
     handleDeleteMultiBusinesses,
-    setBusinessIds
+    setBusinessIds,
+    countriesState
   } = props
 
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
+  const [events] = useEvent()
 
   const [isTutorialMode, setIsTutorialMode] = useState(false)
   const [openTutorialSidebarState, setOpenTutorialSidebarState] = useState(null)
@@ -72,7 +74,8 @@ const BusinessesListingUI = (props) => {
   }, [businessList?.loading, businessList?.businesses, pagination, searchValue])
 
   const handleGotToAdd = () => {
-    setIsAdd(true)
+    if (countriesState?.enabled) setIsAdd(true)
+    else events.emit('go_to_page', { page: 'business_add' })
   }
 
   const handleBackRedirect = () => {

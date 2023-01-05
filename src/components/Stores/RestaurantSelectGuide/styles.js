@@ -12,7 +12,7 @@ export const Container = styled.div`
 `
 
 export const SelectWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: 35px;
 
   label {
     font-weight: 400;
@@ -48,7 +48,7 @@ export const SelectWrapper = styled.div`
       }
 
       .list-wrapper {
-        max-height: 200px;
+        max-height: 109px;
         > div {
           padding: 6px 10px;
           &:hover {
@@ -82,6 +82,7 @@ export const Option = styled.div`
 
 export const ButtonWrapper = styled.div`
   margin-top: 60px;
+  margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -106,6 +107,7 @@ export const ButtonWrapper = styled.div`
 `
 
 export const SearchWrapper = styled.div`
+  margin-top: 30px;
   label {
     font-weight: 400;
     font-size: 14px;
