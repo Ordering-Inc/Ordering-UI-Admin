@@ -26,7 +26,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UploadMenuGuideUI = function UploadMenuGuideUI(props) {
   var _formState$changes5, _formState$changes6, _formState$changes7, _formState$changes8;
   var handleBack = props.handleBack,
-    onClose = props.onClose,
     formState = props.formState,
     changeFormState = props.changeFormState,
     handleUploadMenu = props.handleUploadMenu;
@@ -82,7 +81,6 @@ var UploadMenuGuideUI = function UploadMenuGuideUI(props) {
     var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4;
     if (formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.file || formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.url) {
       handleUploadMenu();
-      onclose && onClose();
       return;
     }
     if (!(formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.file)) {

@@ -90,10 +90,16 @@ var ProductStepUI = function ProductStepUI(props) {
     handleBack: function handleBack() {
       return setStep(1);
     },
-    onClose: onClose
-  }), step === 2 && option === 4 && /*#__PURE__*/_react.default.createElement(_SelectPosGuide.SelectPosGuide, {
-    setStep: setStep
-  }));
+    onClose: onClose,
+    handleSuccess: function handleSuccess() {
+      return setStep(3);
+    }
+  }), step === 3 && option === 3 && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDERING', 'Ordering')), /*#__PURE__*/_react.default.createElement("p", null, t('WE_ARE_IMPORTING_YOUR_PRODUCTS', 'we are importing your products'))), step === 2 && option === 4 && /*#__PURE__*/_react.default.createElement(_SelectPosGuide.SelectPosGuide, {
+    setStep: setStep,
+    handleSuccess: function handleSuccess() {
+      return setStep(3);
+    }
+  }), step === 3 && option === 4 && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDERING', 'Ordering')), /*#__PURE__*/_react.default.createElement("p", null, t('WE_WILL_CONTACT_YOU_ASAP', 'we will contact you As soon as possible'))));
 };
 var ProductStep = function ProductStep(props) {
   var productStepProps = _objectSpread(_objectSpread({}, props), {}, {
