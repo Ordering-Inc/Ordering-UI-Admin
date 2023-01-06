@@ -15,7 +15,7 @@ import {
 } from './styles'
 
 const UploadMenuGuideUI = (props) => {
-  const { handleBack, onClose, formState, changeFormState, handleUploadMenu } = props
+  const { handleBack, formState, changeFormState, handleUploadMenu } = props
 
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -59,7 +59,6 @@ const UploadMenuGuideUI = (props) => {
   const handleSendRequest = () => {
     if (formState?.changes?.file || formState?.changes?.url) {
       handleUploadMenu()
-      onclose && onClose()
       return
     }
     if (!formState?.changes?.file) {
