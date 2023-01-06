@@ -10,6 +10,11 @@ export const ImportMenuContainer = styled.div`
     text-align: center;
     margin: 0;
   }
+  p {
+    font-size: 20px;
+    text-align: center;
+    margin: 25px 0;
+  }
 `
 
 export const ButtonWrapper = styled.div`
