@@ -78,12 +78,26 @@ const ProductStepUI = (props) => {
         <UploadMenuGuide
           handleBack={() => setStep(1)}
           onClose={onClose}
+          handleSuccess={() => setStep(3)}
         />
+      )}
+      {step === 3 && option === 3 && (
+        <ImportMenuContainer>
+          <h2>{t('ORDERING', 'Ordering')}</h2>
+          <p>{t('WE_ARE_IMPORTING_YOUR_PRODUCTS', 'we are importing your products')}</p>
+        </ImportMenuContainer>
       )}
       {step === 2 && option === 4 && (
         <SelectPosGuide
           setStep={setStep}
+          handleSuccess={() => setStep(3)}
         />
+      )}
+      {step === 3 && option === 4 && (
+        <ImportMenuContainer>
+          <h2>{t('ORDERING', 'Ordering')}</h2>
+          <p>{t('WE_WILL_CONTACT_YOU_ASAP', 'we will contact you As soon as possible')}</p>
+        </ImportMenuContainer>
       )}
     </Container>
   )
