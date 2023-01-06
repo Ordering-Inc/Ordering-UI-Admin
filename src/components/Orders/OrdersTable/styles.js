@@ -29,7 +29,6 @@ export const OrdersContainer = styled.div`
 export const Table = styled.table`
   width: calc(100% - 10px);
   min-width: 900px;
-  min-height: 40vh;
 
   th,
   td {
