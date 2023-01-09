@@ -43,7 +43,6 @@ export const UserDetailsUI = (props) => {
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
   const [isCustomField, setIsCustomField] = useState(false)
   const [isPersonalization, setIsPersonalization] = useState(false)
-  const [isDriverSchedule, setIsDriverSchedule] = useState(true)
 
   useEffect(() => {
     setExtraOpen(false)
@@ -132,10 +131,6 @@ export const UserDetailsUI = (props) => {
             <ScheduleSection>
               <DriverScheduleWraper>
                 <DriverSchedule>{t('DRIVER_SCHEDULES', 'Driver schedules')}</DriverSchedule>
-                <Switch
-                  defaultChecked={isDriverSchedule}
-                  onChange={enabled => setIsDriverSchedule(enabled)}
-                />
               </DriverScheduleWraper>
               <Schedule
                 scheduleList={userState?.user?.schedule}
