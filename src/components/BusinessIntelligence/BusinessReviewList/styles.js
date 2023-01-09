@@ -141,7 +141,5 @@ export const ReviewMarkerWrapper = styled.div`
   }
 `
 export const PagesBottomContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
   margin-bottom: 10px;
 `

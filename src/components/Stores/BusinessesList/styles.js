@@ -5,7 +5,7 @@ export const BusinessListContainer = styled.div`
   overflow: auto;
 
   @media (min-width: 768px) {
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 320px);
   }
 `
 

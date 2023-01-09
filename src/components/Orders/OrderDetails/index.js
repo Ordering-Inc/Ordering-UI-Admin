@@ -30,7 +30,8 @@ import {
   PlaceSpotContainer,
   RejectReasonsContainer,
   RejectReasonWrapper,
-  RejectReasonsList
+  RejectReasonsList,
+  DetailBottom
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -399,6 +400,7 @@ const OrderDetailsUI = (props) => {
               handleRefundOrder={handleRefundOrder}
             />
           </div>
+          <DetailBottom />
         </OrderDetailsContent>
       )}
 
