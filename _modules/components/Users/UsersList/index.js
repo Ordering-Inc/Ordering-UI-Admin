@@ -216,13 +216,13 @@ var UsersList = function UsersList(props) {
     onClick: function onClick() {
       return handleOpenUserAddForm();
     }
-  }, t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, _defineProperty({
+  }, t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     defaultPageSize: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize,
     currentPage: paginationProps.currentPage,
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,
     handleChangePageSize: handleChangePageSize
-  }, "defaultPageSize", paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize))))), /*#__PURE__*/_react.default.createElement(_Shared.ConfirmAdmin, {
+  })))), /*#__PURE__*/_react.default.createElement(_Shared.ConfirmAdmin, {
     open: confirmAdmin.open,
     onClose: function onClose() {
       return setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {
