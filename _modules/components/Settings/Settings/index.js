@@ -18,6 +18,7 @@ var _Shared = require("../../Shared");
 var _CheckoutFieldsSetting = require("../CheckoutFieldsSetting");
 var _AddressFieldsSetting = require("../AddressFieldsSetting");
 var _LanguageSetting = require("../LanguageSetting");
+var _SitesAuthSettings = require("../SitesAuthSettings");
 var _MultiCountrySettings = require("../MultiCountrySettings");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -69,12 +70,16 @@ var SettingsUI = function SettingsUI(props) {
     setIsOpenSettingDetails = _useState6[1];
   var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    openMultiCountrySettings = _useState8[0],
-    setOpenMultiCountrySettings = _useState8[1];
-  var _useState9 = (0, _react.useState)(0),
+    openSitesAuthSettings = _useState8[0],
+    setOpenSitesAuthSettings = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
-    moveDistance = _useState10[0],
-    setMoveDistance = _useState10[1];
+    openMultiCountrySettings = _useState10[0],
+    setOpenMultiCountrySettings = _useState10[1];
+  var _useState11 = (0, _react.useState)(0),
+    _useState12 = _slicedToArray(_useState11, 2),
+    moveDistance = _useState12[0],
+    setMoveDistance = _useState12[1];
   var category;
   if (search) {
     var data = search.substring(1).split('&');
@@ -107,6 +112,7 @@ var SettingsUI = function SettingsUI(props) {
   };
   var handleOpenDescription = function handleOpenDescription(category) {
     setIsOpenSettingDetails(null);
+    setOpenSitesAuthSettings(false);
     setOpenMultiCountrySettings(false);
     setIsOpenDescription(true);
     setSelectedCategory(category);
@@ -117,6 +123,7 @@ var SettingsUI = function SettingsUI(props) {
   };
   var handleOpenSettingDetails = function handleOpenSettingDetails(item) {
     setIsOpenDescription(false);
+    setOpenSitesAuthSettings(false);
     setOpenMultiCountrySettings(false);
     setSelectedCategory(null);
     setIsOpenSettingDetails(item);
@@ -193,6 +200,18 @@ var SettingsUI = function SettingsUI(props) {
     description: t('ADDRESS_FIELDS_DESC'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAltFill, null),
     active: isOpenSettingDetails === 'address'
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
+    className: "col-md-4 col-sm-6",
+    onClick: function onClick() {
+      setIsOpenDescription(false);
+      setIsOpenSettingDetails(null);
+      setOpenSitesAuthSettings(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
+    title: t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings'),
+    description: t('SITES_LOGIN_SIGNUP_SETTINGS_DESC', 'Advanced sites login/sign up settings'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
+    active: openSitesAuthSettings
   })), isMulticountryEnabled && /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
     onClick: function onClick() {
@@ -236,6 +255,16 @@ var SettingsUI = function SettingsUI(props) {
     category: selectedCategory,
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
+  })), openSitesAuthSettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    defaultSideBarWidth: 500 + moveDistance,
+    moveDistance: moveDistance,
+    open: openSitesAuthSettings,
+    onClose: function onClose() {
+      setMoveDistance(0);
+      setOpenSitesAuthSettings(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SitesAuthSettings.SitesAuthSettings, {
+    setMoveDistance: setMoveDistance
   })), openMultiCountrySettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     defaultSideBarWidth: 500 + moveDistance,
     moveDistance: moveDistance,
