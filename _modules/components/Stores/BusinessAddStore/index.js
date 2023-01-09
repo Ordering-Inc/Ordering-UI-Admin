@@ -81,7 +81,8 @@ var BusinessAddStore = function BusinessAddStore() {
       handleChangeAddress(e);
     },
     autoComplete: "new-password",
-    countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
+    countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*',
+    types: ['restaurant']
   }), /*#__PURE__*/_react.default.createElement("p", null, t('START_TYPING_THEN_SELECT_AN_ADDRESS_FROM_THE_LIST', 'Start typing  then select an address from the list'))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleSkip
   }, t('SKIP_AND_ADD_MANUALLY', 'Skip and  Add manually')), /*#__PURE__*/_react.default.createElement(_styles.Button, {

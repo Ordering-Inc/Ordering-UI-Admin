@@ -9,9 +9,11 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _ProductStartGuide = require("../ProductStartGuide");
 var _RestaurantSelectGuide = require("../RestaurantSelectGuide");
+var _UploadMenuGuide = require("../UploadMenuGuide");
 var _styledComponents = require("styled-components");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
+var _SelectPosGuide = require("../SelectPosGuide");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -45,6 +47,10 @@ var ProductStepUI = function ProductStepUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     step = _useState2[0],
     setStep = _useState2[1];
+  var _useState3 = (0, _react.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    option = _useState4[0],
+    setOption = _useState4[1];
   var handleCheckMenu = function handleCheckMenu() {
     events.emit('go_to_page', {
       page: 'store',
@@ -57,8 +63,9 @@ var ProductStepUI = function ProductStepUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, step === 1 && /*#__PURE__*/_react.default.createElement(_ProductStartGuide.ProductStartGuide, {
     onClose: onClose,
     setStep: setStep,
+    setOption: setOption,
     countriesState: countriesState
-  }), step === 2 && /*#__PURE__*/_react.default.createElement(_RestaurantSelectGuide.RestaurantSelectGuide, {
+  }), step === 2 && option === 2 && /*#__PURE__*/_react.default.createElement(_RestaurantSelectGuide.RestaurantSelectGuide, {
     setBusiness: setBusiness,
     setStep: setStep,
     onClose: onClose,
@@ -68,10 +75,10 @@ var ProductStepUI = function ProductStepUI(props) {
     orderingBusiness: orderingBusiness,
     business: business,
     isLoading: isLoading
-  }), step === 3 && (actionState === null || actionState === void 0 ? void 0 : actionState.loading) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WE_ARE_IMPORTING_YOUR_MENU', 'We are importing your menu.')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
+  }), step === 3 && option === 2 && (actionState === null || actionState === void 0 ? void 0 : actionState.loading) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WE_ARE_IMPORTING_YOUR_MENU', 'We are importing your menu.')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.importMenu,
     alt: ""
-  }))), step === 3 && !(actionState !== null && actionState !== void 0 && actionState.loading) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('YOUR_MENU_HAS_BEEN_IMPORTED', 'Your menu has been imported')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
+  }))), step === 3 && option === 2 && !(actionState !== null && actionState !== void 0 && actionState.loading) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('YOUR_MENU_HAS_BEEN_IMPORTED', 'Your menu has been imported')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.importedMenu,
     alt: ""
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
@@ -79,7 +86,20 @@ var ProductStepUI = function ProductStepUI(props) {
     onClick: function onClick() {
       return handleCheckMenu();
     }
-  }, t('CHECK_MENU', 'Check menu')))));
+  }, t('CHECK_MENU', 'Check menu')))), step === 2 && option === 3 && /*#__PURE__*/_react.default.createElement(_UploadMenuGuide.UploadMenuGuide, {
+    handleBack: function handleBack() {
+      return setStep(1);
+    },
+    onClose: onClose,
+    handleSuccess: function handleSuccess() {
+      return setStep(3);
+    }
+  }), step === 3 && option === 3 && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDERING', 'Ordering')), /*#__PURE__*/_react.default.createElement("p", null, t('WE_ARE_IMPORTING_YOUR_PRODUCTS', 'we are importing your products'))), step === 2 && option === 4 && /*#__PURE__*/_react.default.createElement(_SelectPosGuide.SelectPosGuide, {
+    setStep: setStep,
+    handleSuccess: function handleSuccess() {
+      return setStep(3);
+    }
+  }), step === 3 && option === 4 && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDERING', 'Ordering')), /*#__PURE__*/_react.default.createElement("p", null, t('WE_WILL_CONTACT_YOU_ASAP', 'we will contact you As soon as possible'))));
 };
 var ProductStep = function ProductStep(props) {
   var productStepProps = _objectSpread(_objectSpread({}, props), {}, {

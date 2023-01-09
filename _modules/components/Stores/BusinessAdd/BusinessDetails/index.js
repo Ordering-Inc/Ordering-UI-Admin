@@ -86,9 +86,9 @@ var BusinessDetails = function BusinessDetails(props) {
     isFitCenter: true
   }))), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     noBottom: true
-  }, /*#__PURE__*/_react.default.createElement("label", null, t('INT_NUMBER', 'Int. number')), /*#__PURE__*/_react.default.createElement(_styles2.Input, {
+  }, /*#__PURE__*/_react.default.createElement("label", null, t('PHONE_NUMBER', 'Phone number')), /*#__PURE__*/_react.default.createElement(_styles2.Input, {
     name: "cellphone",
-    placeholder: t('INT_NUMBER', 'Int. number'),
+    placeholder: t('PHONE_NUMBER', 'Phone number'),
     value: (_formState$changes$ce = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.cellphone) !== null && _formState$changes$ce !== void 0 ? _formState$changes$ce : '',
     onChange: handleChangeInput
   }))));

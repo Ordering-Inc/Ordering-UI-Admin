@@ -24,5 +24,5 @@ var GuideItemContainer = _styledComponents.default.div(_templateObject4 || (_tem
   return props.theme.colors.lightPrimary;
 });
 exports.GuideItemContainer = GuideItemContainer;
-var InfoWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex: 1;\n  h3 {\n    font-weight: 600;\n    font-size: 14px;\n    line-height: 21px;\n    margin: 0%;\n  }\n  p {\n    margin: 0;\n    font-weight: 400;\n    font-size: 12px;\n    line-height: 18px;\n    > span {\n      display: flex;\n      margin-top: 5px;\n    }\n  }\n"])));
+var InfoWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex: 1;\n  h3 {\n    font-weight: 600;\n    font-size: 14px;\n    line-height: 21px;\n    margin: 0;\n  }\n  p {\n    margin: 0;\n    font-weight: 400;\n    font-size: 12px;\n    line-height: 18px;\n    > span {\n      display: flex;\n      margin-top: 5px;\n    }\n  }\n"])));
 exports.InfoWrapper = InfoWrapper;

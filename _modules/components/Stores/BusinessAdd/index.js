@@ -77,6 +77,13 @@ var BusinessAddUI = function BusinessAddUI(props) {
     alertState = _useState2[0],
     setAlertState = _useState2[1];
   var handleSubmit = function handleSubmit() {
+    if ((paymethodIds === null || paymethodIds === void 0 ? void 0 : paymethodIds.length) === 0) {
+      setAlertState({
+        open: true,
+        content: t('AT_LEAST_A_PAYMENT_METHOD_REQUIRED', 'At least a payment method is required')
+      });
+      return;
+    }
     handleAddBusiness();
   };
   var handleGoToBusinessList = function handleGoToBusinessList() {
