@@ -19,9 +19,7 @@ import {
   ScheduleSection,
   PersonalizationWrapper,
   DetailsHeader,
-  ActionSelectorWrapper,
-  DriverScheduleWraper,
-  DriverSchedule
+  ActionSelectorWrapper
 } from './styles'
 
 export const UserDetailsUI = (props) => {
@@ -129,9 +127,6 @@ export const UserDetailsUI = (props) => {
           )}
           {currentMenuSelected === 'schedule' && (
             <ScheduleSection>
-              <DriverScheduleWraper>
-                <DriverSchedule>{t('DRIVER_SCHEDULES', 'Driver schedules')}</DriverSchedule>
-              </DriverScheduleWraper>
               <Schedule
                 scheduleList={userState?.user?.schedule}
                 handleChangeScheduleState={handleScheduleState}
