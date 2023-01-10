@@ -97,7 +97,7 @@ var PromotionTypeWrapper = _styledComponents.default.div(_templateObject23 || (_
 exports.PromotionTypeWrapper = PromotionTypeWrapper;
 var PromotionHow = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n"])));
 exports.PromotionHow = PromotionHow;
-var PromotionListBottom = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: 10px;\n  ", "\n"])), function (_ref7) {
+var PromotionListBottom = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-top: 10px;\n  margin-bottom: 38px;\n  ", "\n"])), function (_ref7) {
   var eventDisabled = _ref7.eventDisabled;
   return eventDisabled && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
 });

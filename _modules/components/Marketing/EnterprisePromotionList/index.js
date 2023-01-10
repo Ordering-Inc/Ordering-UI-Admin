@@ -224,7 +224,8 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     currentPage: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage,
     totalPages: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages,
     handleChangePage: handleChangePage,
-    handleChangePageSize: handleChangePageSize
+    handleChangePageSize: handleChangePageSize,
+    defaultPageSize: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize
   }))));
 };
 exports.EnterprisePromotionList = EnterprisePromotionList;
