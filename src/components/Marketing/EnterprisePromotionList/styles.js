@@ -201,6 +201,7 @@ export const PromotionListBottom = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
+  margin-bottom: 38px;
   ${({ eventDisabled }) => eventDisabled && css`
     pointer-events: none;
   `}
