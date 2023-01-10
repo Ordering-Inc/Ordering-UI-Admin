@@ -284,6 +284,7 @@ export const EnterprisePromotionList = (props) => {
               totalPages={paginationProps?.totalPages}
               handleChangePage={handleChangePage}
               handleChangePageSize={handleChangePageSize}
+              defaultPageSize={paginationProps?.pageSize}
             />
           </WrapperPagination>
         )}
