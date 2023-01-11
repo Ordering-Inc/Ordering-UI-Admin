@@ -174,6 +174,7 @@ const BusinessMenuUI = (props) => {
               width='80%'
               open={showOption === 'option'}
               onClose={() => handleCloseOption()}
+              padding='20px 0 0 0'
             >
               <BusinessMenuOptions
                 open={showOption === 'option'}

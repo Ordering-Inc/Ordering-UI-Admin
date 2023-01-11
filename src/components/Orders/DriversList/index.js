@@ -4,6 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import BsDot from '@meronex/icons/bs/BsDot'
 import { useTheme } from 'styled-components'
 import { getStarWidth } from '../../../utils'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 import {
   DriversListContainer,
   DriverCard,
@@ -28,11 +29,14 @@ export const DriversList = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
+  const { width } = useWindowSize()
 
   const handleClickDriver = (e, driver) => {
     const isInvalid = e.target.closest('.driver-orders')
     if (isInvalid) return
     handleChangeDriver(driver)
+    const element = document.getElementById('driverDashboard')
+    if (width < 993 && element) element.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }
 
   const onOpenDriverOrdersDetail = (driver) => {

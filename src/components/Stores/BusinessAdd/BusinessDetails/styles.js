@@ -70,6 +70,7 @@ export const GoogleMapContainer = styled.div`
     line-height: 24px;
     margin: 0;
     color: ${props => props.theme.colors.lightGray};
+    word-break: break-all;
   }
 `
 

@@ -82,6 +82,7 @@ export const ProductIngredient = (props) => {
           width='80%'
           open={openDetails}
           onClose={() => handleCloseDetails()}
+          hideCloseDefault
         >
           <ProductIngredientDetails
             {...props}

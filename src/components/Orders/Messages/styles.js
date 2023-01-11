@@ -402,10 +402,11 @@ export const WrapperDeleteImage = styled.div`
 
 export const WrapperSendMessageButton = styled.div`
   white-space: nowrap;
-  width: fit-content;
+  width: 80px;
 
   button {
     height: 43px;
+    width: 100%;
     svg {
        width: 1.5em;
        height: 1.5em; 
@@ -429,6 +430,7 @@ export const WrapperSendMessageButton = styled.div`
   }
 
   @media (min-width: 480px) {
+    width: fit-content;
     button {
       svg {
         margin-right: 10px;

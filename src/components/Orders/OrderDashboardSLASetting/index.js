@@ -75,6 +75,7 @@ export const OrderDashboardSLASettingUI = (props) => {
   const onSubmit = (data) => {
     if (data && Object.keys(data).length > 0) {
       handleClickUpdate()
+      setSettingOpen(false)
     }
   }
 
