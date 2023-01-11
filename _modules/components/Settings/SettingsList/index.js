@@ -179,7 +179,7 @@ var SettingsListUI = function SettingsListUI(props) {
         onChange: function onChange(e) {
           return handleCheckBoxChange(e, true, config === null || config === void 0 ? void 0 : config.value);
         }
-      }), t(item.text.toUpperCase()))));
+      }), t(item.text.toUpperCase(), item.text.replace(/_/g, ' ').toLowerCase()))));
     })), !(config !== null && config !== void 0 && config.options) && /*#__PURE__*/_react.default.createElement(_styles2.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value'))), config.type === 4 && (config.key === 'driver_tip_options' ? /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
       className: "form-group"
     }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles2.Description, null, config === null || config === void 0 ? void 0 : config.description), /*#__PURE__*/_react.default.createElement("input", {
