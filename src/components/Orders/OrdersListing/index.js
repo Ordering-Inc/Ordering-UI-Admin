@@ -46,7 +46,8 @@ export const OrdersListing = (props) => {
 
     allowColumns,
     setAllowColumns,
-    handleDrop
+    handleDrop,
+    isDelivery
   } = props
 
   const theme = useTheme()
@@ -146,6 +147,7 @@ export const OrdersListing = (props) => {
                   handleOrderCardClick={handleOrderCardClick}
                   handleUpdateDriverLocation={handleUpdateDriverLocation}
                   slaSettingTime={slaSettingTime}
+                  isDelivery={isDelivery}
                 />
               )}
             </WrapperOrderListContent>
