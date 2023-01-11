@@ -40,22 +40,32 @@ export const PaymentOption = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [paymentTabs, setPaymentTabs] = useState(sitesState?.sites?.length > 0 ? 0 : 1)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-  const [localState, setLocalState] = useState({allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites})
+  const [localState, setLocalState] = useState({ allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites })
+  const filteredOptions = localState?.sites ?? businessPaymethod?.sites.filter(a => sitesState?.sites?.find(b => a.id === b.id))
+  const [all, setAll] = useState(!!!filteredOptions?.length)
 
   const setPaymethodInfo = (values) => {
-    const data = {}
-    let array = changesState?.[values.key] ?? (values.key === 'allowed_order_types'
-      ? businessPaymethod?.[values.key]
-      : businessPaymethod?.[values.key]?.map(i => i.id)) ?? []
 
-    array = [...new Set(
-      array.includes(values.value)
-        ? array.filter(item => item !== values.value)
-        : [...array, values.value]
-    )]
+    let data = {}
+    if (values?.value === 'All') {
+      data[values.key] = []
+      setAll(!all)
+    } else {
+      let array = changesState?.[values.key] ?? (values.key === 'allowed_order_types'
+        ? businessPaymethod?.[values.key]
+        : businessPaymethod?.[values.key]?.map(i => i.id)) ?? []
 
-    data[values.key] = array.length > 0 ? array : []
+      array = [...new Set(
+        array.includes(values.value)
+          ? array.filter(item => item !== values.value)
+          : [...array, values.value]
+      )]
 
+      data[values.key] = array.length > 0 ? array : []
+      if (values.key === 'sites') {
+        setAll(!!!data?.sites?.length)
+      }
+    }
     handleChangeBusinessPaymentState(data)
   }
 
@@ -105,10 +115,10 @@ export const PaymentOption = (props) => {
 
   useEffect(() => {
     if (changesState?.allowed_order_types) {
-      setLocalState({allowed_order_types: changesState?.allowed_order_types})
+      setLocalState({ allowed_order_types: changesState?.allowed_order_types })
     }
     if (changesState?.sites) {
-      setLocalState({sites: changesState?.sites})
+      setLocalState({ sites: changesState?.sites })
     }
   }, [changesState?.allowed_order_types, changesState?.sites])
 
@@ -156,21 +166,33 @@ export const PaymentOption = (props) => {
             {t('ORDER_TYPE', 'Order type')}
           </Tab>
         </TabsContainer>
-
         {paymentTabs === 0 && sitesState?.sites?.length > 0 && (
-          sitesState?.sites.map(site => (
+          <>
             <TabOption
-              key={site.id}
-              onClick={() => setPaymethodInfo({ key: 'sites', value: site.id })}
+              key={'all'}
+              onClick={() => setPaymethodInfo({ key: 'sites', value: 'All' })}
             >
-              {(localState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
+              {all ? (
                 <RiCheckboxFill className='fill' />
               ) : (
                 <RiCheckboxBlankLine />
               )}
-              <TabOptionName>{site.name}</TabOptionName>
+              <TabOptionName>{t('ALL', 'All')}</TabOptionName>
             </TabOption>
-          ))
+            {!all && sitesState?.sites.map(site => (
+              <TabOption
+                key={site.id}
+                onClick={() => setPaymethodInfo({ key: 'sites', value: site.id })}
+              >
+                {(localState?.sites ?? businessPaymethod?.sites?.map(s => s.id))?.includes(site.id) ? (
+                  <RiCheckboxFill className='fill' />
+                ) : (
+                  <RiCheckboxBlankLine />
+                )}
+                <TabOptionName>{site.name}</TabOptionName>
+              </TabOption>
+            ))}
+          </>
         )}
 
         {paymentTabs === 1 && (

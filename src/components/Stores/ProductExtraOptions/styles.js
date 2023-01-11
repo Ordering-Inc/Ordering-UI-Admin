@@ -71,6 +71,7 @@ export const OptionNameContainer = styled.div`
   > input {
     flex: 1;
     height: 32px;
+    width: 32px;
     padding: 5px;
     border: none;
     outline: none;
@@ -103,8 +104,9 @@ export const OptionNameContainer = styled.div`
 `
 
 export const OptionImage = styled.div`
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
@@ -132,6 +134,11 @@ export const OptionImage = styled.div`
   ` : css`
     margin-right: 15px;
   `}
+
+  @media (min-width: 450px) {
+    width: 38px;
+    height: 38px;
+  }
 `
 
 export const ActionSelectorWrapper = styled.div`
@@ -195,7 +202,7 @@ export const AddOptionForm = styled.form`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
   > input {
-    width: 80px;
+    width: 75px;
     height: 32px;
     padding: 5px;
     border: none;
@@ -213,6 +220,12 @@ export const AddOptionForm = styled.form`
     ` : css`
       margin-left: 10px;
     `}
+  }
+
+  @media (min-width: 450px) {
+    > input {
+      width: 80px;
+    }
   }
 `
 export const OptionsList = styled.div`
@@ -244,22 +257,28 @@ export const OptionItem = styled.div`
   `}
 `
 export const MinimumPurchase = styled.div`
-  min-width: 80px;
+  min-width: 75px;
   ${({ isHeader }) => isHeader ? css`
     font-size: 12px;
     font-weight: 700;
   ` : css`
     font-size: 14px;
   `}
+  @media (min-width: 450px) {
+    min-width: 80px;
+  }
 `
 export const MaxPurchase = styled.div`
-  min-width: 80px;
+  min-width: 75px;
   ${({ isHeader }) => isHeader ? css`
     font-size: 12px;
     font-weight: 700;
   ` : css`
     font-size: 14px;
   `}
+  @media (min-width: 450px) {
+    min-width: 80px;
+  }
 `
 export const ArrowWrpper = styled.div`
   width: 30px;
@@ -275,12 +294,19 @@ export const ArrowWrpper = styled.div`
 export const DragImageWrapper = styled.div`
   img {
     ${props => props.theme?.rtl ? css`
-      margin-left: 20px;
+      margin-left: 10px;
     ` : css`
-      margin-right: 20px;
+      margin-right: 10px;
     `}
     &:hover {
       cursor: grab;
+    }
+    @media (min-width: 450px) {
+      ${props => props.theme?.rtl ? css`
+        margin-left: 20px;
+      ` : css`
+        margin-right: 20px;
+      `}
     }
   }
 `

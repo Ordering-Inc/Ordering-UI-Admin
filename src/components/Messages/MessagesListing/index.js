@@ -62,7 +62,7 @@ const MessagesListingUI = (props) => {
 
   return (
     <>
-      <MessagesListingContainer>
+      <MessagesListingContainer id='deliveryDashboard'>
         <OrdersContentHeader
           isDisableControl
           title={t('MESSAGES', 'Messages')}

@@ -45,13 +45,17 @@ export const HeaderTitleContainer = styled.div`
 
 export const BoxLayout = styled.div`
   background: ${props => props.theme.colors.white};
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
-  padding: 25px 35px;
+  padding: 25px 0px;
   margin-bottom: 35px;
   > div {
     width: 100%;
     max-width: 558px;
+  }
+
+  @media (min-width: 450px) {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    padding: 25px 35px;
   }
 `
 

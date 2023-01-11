@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components'
 
 export const ReportsTopDriversContainer = styled.div`
-  padding: 35px 15px;
+  padding: 35px 15px 70px 15px;
   width: 100%;
+  overflow: auto;
 
   @media (min-width: 700px) {
-    padding: 35px;
+    padding: 35px 35px 70px 35px;
   }
 `
 
