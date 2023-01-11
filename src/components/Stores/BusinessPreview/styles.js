@@ -28,7 +28,7 @@ export const DesktopBackground = styled.div`
   `}
   display: flex;
   justify-content: center;
-  max-height: calc(90vh - 150px);
+  max-height: calc(90vh - 50px);
   overflow: auto;
 `
 export const ProductInfoModalPreview = styled.div`
@@ -42,13 +42,18 @@ export const ProductInfoModalPreview = styled.div`
   `}
 
   ${({ isMobileView }) => isMobileView && css`
-    width: 325px;
-    height: 650px;
+    width: 270px;
+    height: 540px;
     background-image: url(${({ src }) => src});
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    padding: 12px;
+    padding: 29px;
+    @media (min-width: 576px) {
+      width: 325px;
+      height: 650px;
+      padding: 12px;
+    }
   `}
 `
 export const MobileContentMask = styled.div`
@@ -59,12 +64,15 @@ export const MobileContentMask = styled.div`
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    height: 630px;
+    height: 495px;
     overflow: auto;
     ::-webkit-scrollbar {
       width: 0px;
     }
     background: ${props => props.theme.colors.backgroundPage};
+    @media (min-width: 576px) {
+      height: 630px;
+    }
   `}
 `
 

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const BusinessMenuBasicContainer = styled.div`
   max-height: calc(100vh - 200px);
   overflow: auto;
-  padding: 0 5px;
+  padding: 0;
   input:not([type='checkbox']),
   textarea {
     width: 100%;
@@ -11,6 +11,9 @@ export const BusinessMenuBasicContainer = styled.div`
   > button {
     height: 40px;
     margin-top: 50px;
+  }
+  @media (min-width: 450px) {
+    padding: 0 5px;
   }
 `
 

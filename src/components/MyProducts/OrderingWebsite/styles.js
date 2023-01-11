@@ -184,7 +184,8 @@ export const ImageFormGroup = styled.div`
 `
 
 export const LogoImage = styled.div`
-  width: 450px;
+  max-width: 450px;
+  width: 100%;
   height: 100px;
   position: relative;
   border-radius: 8px;
@@ -208,11 +209,11 @@ export const LogoImage = styled.div`
 
 export const BackgroundImage = styled(LogoImage)`
   height: 213px;
-  width: 320px;
+  max-width: 320px;
 
   @media (min-width: 768px) {
     height: 427px;
-    width: 640px;
+    max-width: 640px;
   }
 `
 

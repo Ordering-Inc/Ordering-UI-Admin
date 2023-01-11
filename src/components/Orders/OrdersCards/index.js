@@ -5,6 +5,7 @@ import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Pagination } from '../../Shared'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   OrdersListContainer,
@@ -32,10 +33,12 @@ export const OrdersCards = (props) => {
     selectedOrderCard,
     handleOrderCardClick,
     handleUpdateDriverLocation,
-    slaSettingTime
+    slaSettingTime,
+    isDelivery
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
+  const { width } = useWindowSize()
   const [{ parseDate, optimizeImage }] = useUtils()
   const [, setCurrentTime] = useState()
   const [configState] = useConfig()
@@ -57,6 +60,8 @@ export const OrdersCards = (props) => {
     const isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector')
     if (isInvalid) return
     handleOrderCardClick(order)
+    const element = document.getElementById('deliveryDashboard')
+    if ((isDelivery || isMessagesView) && width < 993 && element) element.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }
 
   const getOrderStatus = (s) => {
