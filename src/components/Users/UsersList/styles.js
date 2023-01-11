@@ -211,6 +211,7 @@ export const UsersBottomContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  margin-bottom: 37px;
 `
 
 export const VerifiedItem = styled.span`
