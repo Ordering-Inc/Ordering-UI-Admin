@@ -159,7 +159,8 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     open: showOption === 'option',
     onClose: function onClose() {
       return handleCloseOption();
-    }
+    },
+    padding: "20px 0 0 0"
   }, /*#__PURE__*/_react.default.createElement(_BusinessMenuOptions.BusinessMenuOptions, {
     open: showOption === 'option',
     business: business,

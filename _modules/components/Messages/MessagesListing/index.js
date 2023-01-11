@@ -86,7 +86,9 @@ var MessagesListingUI = function MessagesListingUI(props) {
     if (width >= 768) return;
     document.body.style.overflow = isOpenOrderDetail ? 'hidden' : 'auto';
   }, [width, isOpenOrderDetail]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MessagesListingContainer, null, /*#__PURE__*/_react.default.createElement(_Orders.OrdersContentHeader, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MessagesListingContainer, {
+    id: "deliveryDashboard"
+  }, /*#__PURE__*/_react.default.createElement(_Orders.OrdersContentHeader, {
     isDisableControl: true,
     title: t('MESSAGES', 'Messages'),
     searchValue: searchValue,

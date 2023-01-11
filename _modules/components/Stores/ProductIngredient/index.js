@@ -76,7 +76,8 @@ var ProductIngredient = function ProductIngredient(props) {
     open: openDetails,
     onClose: function onClose() {
       return handleCloseDetails();
-    }
+    },
+    hideCloseDefault: true
   }, /*#__PURE__*/_react.default.createElement(_ProductIngredientDetails.ProductIngredientDetails, _extends({}, props, {
     ingredient: currentIngredient,
     onClose: function onClose() {

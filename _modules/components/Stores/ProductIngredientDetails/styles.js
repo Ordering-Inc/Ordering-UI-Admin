@@ -20,7 +20,7 @@ var Container = _styledComponents.default.div(_templateObject || (_templateObjec
   });
 });
 exports.Container = Container;
-var Header = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 30px;\n\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    flex: 1;\n    margin-bottom: 0;\n    ", "\n  }\n\n  > div {\n    display: flex;\n    align-items: center;\n    > button {\n      display: none;\n    }\n  }\n  @media (min-width: 1000px) {\n    > div {\n      > button {\n        display: block;\n      }\n    }\n  }\n"])), function (props) {
+var Header = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 30px;\n\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    flex: 1;\n    margin-bottom: 0;\n    ", "\n  }\n\n  > div {\n    display: flex;\n    align-items: center;\n  }\n"])), function (props) {
   var _props$theme2;
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "])));
 });

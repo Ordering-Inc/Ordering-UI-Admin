@@ -53,7 +53,8 @@ var OrdersListing = function OrdersListing(props) {
     slaSettingTime = props.slaSettingTime,
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns,
-    handleDrop = props.handleDrop;
+    handleDrop = props.handleDrop,
+    isDelivery = props.isDelivery;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -131,7 +132,8 @@ var OrdersListing = function OrdersListing(props) {
     selectedOrderCard: selectedOrderCard,
     handleOrderCardClick: handleOrderCardClick,
     handleUpdateDriverLocation: handleUpdateDriverLocation,
-    slaSettingTime: slaSettingTime
+    slaSettingTime: slaSettingTime,
+    isDelivery: isDelivery
   }))));
 };
 exports.OrdersListing = OrdersListing;

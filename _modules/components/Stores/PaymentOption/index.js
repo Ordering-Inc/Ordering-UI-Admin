@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOption = function PaymentOption(props) {
-  var _sitesState$sites, _businessPaymethod$pa2, _sitesState$sites3, _sitesState$sites4;
+  var _sitesState$sites, _localState$sites, _businessPaymethod$pa2, _sitesState$sites4, _sitesState$sites5;
   var open = props.open,
     onClose = props.onClose,
     orderTypes = props.orderTypes,
@@ -75,16 +75,35 @@ var PaymentOption = function PaymentOption(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     localState = _useState8[0],
     setLocalState = _useState8[1];
+  var filteredOptions = (_localState$sites = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites !== void 0 ? _localState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sites.filter(function (a) {
+    var _sitesState$sites2;
+    return sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.find(function (b) {
+      return a.id === b.id;
+    });
+  });
+  var _useState9 = (0, _react.useState)(!!!(filteredOptions !== null && filteredOptions !== void 0 && filteredOptions.length)),
+    _useState10 = _slicedToArray(_useState9, 2),
+    all = _useState10[0],
+    setAll = _useState10[1];
   var setPaymethodInfo = function setPaymethodInfo(values) {
-    var _ref, _changesState$values$, _businessPaymethod$va;
     var data = {};
-    var array = (_ref = (_changesState$values$ = changesState === null || changesState === void 0 ? void 0 : changesState[values.key]) !== null && _changesState$values$ !== void 0 ? _changesState$values$ : values.key === 'allowed_order_types' ? businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod[values.key] : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$va = businessPaymethod[values.key]) === null || _businessPaymethod$va === void 0 ? void 0 : _businessPaymethod$va.map(function (i) {
-      return i.id;
-    })) !== null && _ref !== void 0 ? _ref : [];
-    array = _toConsumableArray(new Set(array.includes(values.value) ? array.filter(function (item) {
-      return item !== values.value;
-    }) : [].concat(_toConsumableArray(array), [values.value])));
-    data[values.key] = array.length > 0 ? array : [];
+    if ((values === null || values === void 0 ? void 0 : values.value) === 'All') {
+      data[values.key] = [];
+      setAll(!all);
+    } else {
+      var _ref, _changesState$values$, _businessPaymethod$va;
+      var array = (_ref = (_changesState$values$ = changesState === null || changesState === void 0 ? void 0 : changesState[values.key]) !== null && _changesState$values$ !== void 0 ? _changesState$values$ : values.key === 'allowed_order_types' ? businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod[values.key] : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$va = businessPaymethod[values.key]) === null || _businessPaymethod$va === void 0 ? void 0 : _businessPaymethod$va.map(function (i) {
+        return i.id;
+      })) !== null && _ref !== void 0 ? _ref : [];
+      array = _toConsumableArray(new Set(array.includes(values.value) ? array.filter(function (item) {
+        return item !== values.value;
+      }) : [].concat(_toConsumableArray(array), [values.value])));
+      data[values.key] = array.length > 0 ? array : [];
+      if (values.key === 'sites') {
+        var _data$sites;
+        setAll(!!!(data !== null && data !== void 0 && (_data$sites = data.sites) !== null && _data$sites !== void 0 && _data$sites.length));
+      }
+    }
     handleChangeBusinessPaymentState(data);
   };
   var actionSidebar = function actionSidebar(value) {
@@ -120,8 +139,8 @@ var PaymentOption = function PaymentOption(props) {
     actionSidebar(true);
   }, [open]);
   (0, _react.useEffect)(function () {
-    var _sitesState$sites2;
-    setPaymentTabs((sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 ? 0 : 1);
+    var _sitesState$sites3;
+    setPaymentTabs((sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 ? 0 : 1);
   }, [sitesState]);
   (0, _react.useEffect)(function () {
     cleanChangesState({
@@ -156,7 +175,7 @@ var PaymentOption = function PaymentOption(props) {
     onClick: function onClick() {
       return onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites4 = sitesState.sites) === null || _sitesState$sites4 === void 0 ? void 0 : _sitesState$sites4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: paymentTabs === 0,
     onClick: function onClick() {
       return setPaymentTabs(0);
@@ -166,8 +185,18 @@ var PaymentOption = function PaymentOption(props) {
     onClick: function onClick() {
       return setPaymentTabs(1);
     }
-  }, t('ORDER_TYPE', 'Order type'))), paymentTabs === 0 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites4 = sitesState.sites) === null || _sitesState$sites4 === void 0 ? void 0 : _sitesState$sites4.length) > 0 && (sitesState === null || sitesState === void 0 ? void 0 : sitesState.sites.map(function (site) {
-    var _ref2, _localState$sites, _businessPaymethod$si;
+  }, t('ORDER_TYPE', 'Order type'))), paymentTabs === 0 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites5 = sitesState.sites) === null || _sitesState$sites5 === void 0 ? void 0 : _sitesState$sites5.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
+    key: 'all',
+    onClick: function onClick() {
+      return setPaymethodInfo({
+        key: 'sites',
+        value: 'All'
+      });
+    }
+  }, all ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+    className: "fill"
+  }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, t('ALL', 'All'))), !all && (sitesState === null || sitesState === void 0 ? void 0 : sitesState.sites.map(function (site) {
+    var _ref2, _localState$sites2, _businessPaymethod$si;
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: site.id,
       onClick: function onClick() {
@@ -176,12 +205,12 @@ var PaymentOption = function PaymentOption(props) {
           value: site.id
         });
       }
-    }, (_ref2 = (_localState$sites = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites !== void 0 ? _localState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
+    }, (_ref2 = (_localState$sites2 = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites2 !== void 0 ? _localState$sites2 : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
       return s.id;
     })) !== null && _ref2 !== void 0 && _ref2.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, site.name));
-  })), paymentTabs === 1 && orderTypes.map(function (type) {
+  }))), paymentTabs === 1 && orderTypes.map(function (type) {
     var _ref3, _localState$allowed_o;
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: type.value,

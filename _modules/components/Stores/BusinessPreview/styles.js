@@ -26,7 +26,7 @@ var DesktopHeader = _styledComponents.default.div(_templateObject3 || (_template
   return props.theme.colors.gray;
 });
 exports.DesktopHeader = DesktopHeader;
-var DesktopBackground = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  ", "\n  display: flex;\n  justify-content: center;\n  max-height: calc(90vh - 150px);\n  overflow: auto;\n"])), function (_ref2) {
+var DesktopBackground = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  ", "\n  display: flex;\n  justify-content: center;\n  max-height: calc(90vh - 50px);\n  overflow: auto;\n"])), function (_ref2) {
   var isMobileView = _ref2.isMobileView;
   return !isMobileView && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    border-radius: 0 0 8px 8px;\n  "])));
 });
@@ -38,7 +38,7 @@ var ProductInfoModalPreview = _styledComponents.default.div(_templateObject6 || 
   });
 }, function (_ref4) {
   var isMobileView = _ref4.isMobileView;
-  return isMobileView && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    width: 325px;\n    height: 650px;\n    background-image: url(", ");\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n    padding: 12px;\n  "])), function (_ref5) {
+  return isMobileView && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    width: 270px;\n    height: 540px;\n    background-image: url(", ");\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n    padding: 29px;\n    @media (min-width: 576px) {\n      width: 325px;\n      height: 650px;\n      padding: 12px;\n    }\n  "])), function (_ref5) {
     var src = _ref5.src;
     return src;
   });
@@ -46,7 +46,7 @@ var ProductInfoModalPreview = _styledComponents.default.div(_templateObject6 || 
 exports.ProductInfoModalPreview = ProductInfoModalPreview;
 var MobileContentMask = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  ", "\n"])), function (_ref6) {
   var isMobileView = _ref6.isMobileView;
-  return isMobileView && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    -webkit-mask-image: url(", ");\n    mask-image: url(", ");\n    -webkit-mask-repeat: no-repeat;\n    mask-repeat: no-repeat;\n    -webkit-mask-position: center;\n    mask-position: center;\n    height: 630px;\n    overflow: auto;\n    ::-webkit-scrollbar {\n      width: 0px;\n    }\n    background: ", ";\n  "])), function (_ref7) {
+  return isMobileView && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    -webkit-mask-image: url(", ");\n    mask-image: url(", ");\n    -webkit-mask-repeat: no-repeat;\n    mask-repeat: no-repeat;\n    -webkit-mask-position: center;\n    mask-position: center;\n    height: 495px;\n    overflow: auto;\n    ::-webkit-scrollbar {\n      width: 0px;\n    }\n    background: ", ";\n    @media (min-width: 576px) {\n      height: 630px;\n    }\n  "])), function (_ref7) {
     var src = _ref7.src;
     return src;
   }, function (_ref8) {

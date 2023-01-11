@@ -10,6 +10,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _BsDot = _interopRequireDefault(require("@meronex/icons/bs/BsDot"));
 var _styledComponents = require("styled-components");
 var _utils = require("../../../utils");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -37,10 +38,18 @@ var DriversList = function DriversList(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     optimizeImage = _useUtils2[0].optimizeImage;
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var handleClickDriver = function handleClickDriver(e, driver) {
     var isInvalid = e.target.closest('.driver-orders');
     if (isInvalid) return;
     handleChangeDriver(driver);
+    var element = document.getElementById('driverDashboard');
+    if (width < 993 && element) element.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
   var onOpenDriverOrdersDetail = function onOpenDriverOrdersDetail(driver) {
     if ((selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id) !== driver.id) {

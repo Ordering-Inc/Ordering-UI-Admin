@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.OptionsList = exports.OptionsContainer = exports.OptionNameContainer = exports.OptionItem = exports.OptionImage = exports.MinimumPurchase = exports.MaxPurchase = exports.MainContainer = exports.Header = exports.DragImageWrapper = exports.ArrowWrpper = exports.AddOptionForm = exports.ActionSelectorWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -23,7 +23,7 @@ var Header = _styledComponents.default.div(_templateObject5 || (_templateObject5
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n          margin-right: 10px;\n        "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n          margin-left: 10px;\n        "])));
 });
 exports.Header = Header;
-var OptionNameContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  width: 70%;\n  margin: 12px 0;\n  font-size: 14px;\n  > input {\n    flex: 1;\n    height: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    background: ", ";\n\n    &:focus {\n      border: 1px dashed ", ";\n    }\n    ", "\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
+var OptionNameContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  width: 70%;\n  margin: 12px 0;\n  font-size: 14px;\n  > input {\n    flex: 1;\n    height: 32px;\n    width: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    background: ", ";\n\n    &:focus {\n      border: 1px dashed ", ";\n    }\n    ", "\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
   var _props$theme$colors;
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 }, function (props) {
@@ -43,7 +43,7 @@ var OptionNameContainer = _styledComponents.default.div(_templateObject8 || (_te
   return isHeader && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    font-size: 12px;\n    font-weight: 700;\n    border-right: none;\n    border-left: none;\n  "])));
 });
 exports.OptionNameContainer = OptionNameContainer;
-var OptionImage = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 38px;\n  height: 38px;\n  border-radius: 8px;\n  overflow: hidden;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: ", ";\n\n  img {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    object-fit: cover;\n    overflow: hidden;\n  }\n\n  svg {\n    font-size: 20px;\n    color: #ADB5BD;\n  }\n\n  ", "\n"])), function (props) {
+var OptionImage = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 30px;\n  height: 30px;\n  min-width: 30px;\n  border-radius: 8px;\n  overflow: hidden;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: ", ";\n\n  img {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    object-fit: cover;\n    overflow: hidden;\n  }\n\n  svg {\n    font-size: 20px;\n    color: #ADB5BD;\n  }\n\n  ", "\n\n  @media (min-width: 450px) {\n    width: 38px;\n    height: 38px;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   var _props$theme5;
@@ -66,7 +66,7 @@ var ActionSelectorWrapper = _styledComponents.default.div(_templateObject17 || (
   return props.theme.colors.danger;
 });
 exports.ActionSelectorWrapper = ActionSelectorWrapper;
-var AddOptionForm = _styledComponents.default.form(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-top: 13px solid ", ";\n  border-bottom: 1px solid ", ";\n\n  > input {\n    width: 80px;\n    height: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    font-size: 14px;\n    background: ", ";\n\n    &:focus {\n      border: 1px dashed ", ";\n    }\n  }\n  > button {\n    ", "\n  }\n"])), function (props) {
+var AddOptionForm = _styledComponents.default.form(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  border-top: 13px solid ", ";\n  border-bottom: 1px solid ", ";\n\n  > input {\n    width: 75px;\n    height: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    font-size: 14px;\n    background: ", ";\n\n    &:focus {\n      border: 1px dashed ", ";\n    }\n  }\n  > button {\n    ", "\n  }\n\n  @media (min-width: 450px) {\n    > input {\n      width: 80px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.borderColor;
@@ -110,12 +110,12 @@ var OptionItem = _styledComponents.default.div(_templateObject22 || (_templateOb
   });
 });
 exports.OptionItem = OptionItem;
-var MinimumPurchase = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  min-width: 80px;\n  ", "\n"])), function (_ref6) {
+var MinimumPurchase = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  min-width: 75px;\n  ", "\n  @media (min-width: 450px) {\n    min-width: 80px;\n  }\n"])), function (_ref6) {
   var isHeader = _ref6.isHeader;
   return isHeader ? (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    font-size: 12px;\n    font-weight: 700;\n  "]))) : (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    font-size: 14px;\n  "])));
 });
 exports.MinimumPurchase = MinimumPurchase;
-var MaxPurchase = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  min-width: 80px;\n  ", "\n"])), function (_ref7) {
+var MaxPurchase = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  min-width: 75px;\n  ", "\n  @media (min-width: 450px) {\n    min-width: 80px;\n  }\n"])), function (_ref7) {
   var isHeader = _ref7.isHeader;
   return isHeader ? (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    font-size: 12px;\n    font-weight: 700;\n  "]))) : (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    font-size: 14px;\n  "])));
 });
@@ -124,8 +124,11 @@ var ArrowWrpper = _styledComponents.default.div(_templateObject33 || (_templateO
   return props.theme.colors.secundaryLight;
 });
 exports.ArrowWrpper = ArrowWrpper;
-var DragImageWrapper = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  img {\n    ", "\n    &:hover {\n      cursor: grab;\n    }\n  }\n"])), function (props) {
+var DragImageWrapper = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  img {\n    ", "\n    &:hover {\n      cursor: grab;\n    }\n    @media (min-width: 450px) {\n      ", "\n    }\n  }\n"])), function (props) {
   var _props$theme7;
-  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n      margin-left: 20px;\n    "]))) : (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n      margin-right: 20px;\n    "])));
+  return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "])));
+}, function (props) {
+  var _props$theme8;
+  return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n        margin-left: 20px;\n      "]))) : (0, _styledComponents.css)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n        margin-right: 20px;\n      "])));
 });
 exports.DragImageWrapper = DragImageWrapper;

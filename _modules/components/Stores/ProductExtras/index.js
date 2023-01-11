@@ -226,7 +226,8 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     open: openExtraDetails,
     onClose: function onClose() {
       return handleCloseExtraDetails();
-    }
+    },
+    padding: "20px 0 0 0"
   }, /*#__PURE__*/_react.default.createElement(_ProductExtraOptions.ProductExtraOptions, {
     open: openExtraDetails,
     onClose: function onClose() {

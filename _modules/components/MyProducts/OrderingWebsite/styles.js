@@ -45,9 +45,9 @@ var TemporalDomail = _styledComponents.default.div(_templateObject14 || (_templa
 exports.TemporalDomail = TemporalDomail;
 var ImageFormGroup = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  margin-top: 30px;\n"])));
 exports.ImageFormGroup = ImageFormGroup;
-var LogoImage = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  width: 450px;\n  height: 100px;\n  position: relative;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: contain;\n  }\n"])));
+var LogoImage = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  max-width: 450px;\n  width: 100%;\n  height: 100px;\n  position: relative;\n  border-radius: 8px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 8px;\n    height: 100%;\n    overflow: hidden;\n  };\n\n  img{\n    object-fit: contain;\n  }\n"])));
 exports.LogoImage = LogoImage;
-var BackgroundImage = (0, _styledComponents.default)(LogoImage)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  height: 213px;\n  width: 320px;\n\n  @media (min-width: 768px) {\n    height: 427px;\n    width: 640px;\n  }\n"])));
+var BackgroundImage = (0, _styledComponents.default)(LogoImage)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  height: 213px;\n  max-width: 320px;\n\n  @media (min-width: 768px) {\n    height: 427px;\n    max-width: 640px;\n  }\n"])));
 exports.BackgroundImage = BackgroundImage;
 var UploadImageIconContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 0px;\n  background: ", ";\n  ", "\n  ", "\n"])), function (props) {
   return props.theme.colors.secundaryDarkContrast;
