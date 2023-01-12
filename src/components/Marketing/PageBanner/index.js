@@ -34,8 +34,7 @@ const PageBannersUI = (props) => {
     defaultPosition,
     handleSuccessDelete,
     aspectRatio,
-    isSearhShow,
-    isLink
+    isSearhShow
   } = props
   const [, t] = useLanguage()
   const [openItemsDetail, setOpenItemsDetail] = useState(false)
@@ -178,7 +177,6 @@ const PageBannersUI = (props) => {
             onClose={() => handleCloseDetail()}
             defaultPosition={defaultPosition}
             aspectRatio={aspectRatio}
-            isLink={isLink}
             setBannerMoveDistance={setBannerMoveDistance}
           />
         </SideBar>

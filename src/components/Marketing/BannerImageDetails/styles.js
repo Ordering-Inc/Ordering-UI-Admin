@@ -1,10 +1,12 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
+
 export const Container = styled.div`
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
-  button {
+  > button {
     height: 44px;
     margin-top: 25px;
   }
@@ -30,6 +32,126 @@ export const HeaderContainer = styled.div`
     ` : css`
       margin-right: 8px;
     `}
+  }
+`
+export const LeftHeader = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
+`
+export const DropDownWrapper = styled.div`
+  ${props => props.theme?.rtl ? css`
+    margin-right: 5px;
+    ` : css`
+    margin-left: 5px;
+  `}
+  button {
+    display: flex;
+    background: transparent !important;
+    border: none;
+    padding: 5px;
+    border-radius: 8px;
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+      font-size: 20px;
+    }
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    &:after {
+      display: none;
+    }
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundaryDarkContrast)} !important;
+    }
+  }
+
+  .show {
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  > div {
+    > div {
+      border-radius: 8px;
+      .dropdown-item {
+        font-size: 12px;
+        color: ${props => props.theme.colors.headingColor};
+        padding: 7px 20px;
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
+      }
+      .dropdown-item:last-child {
+        color: ${props => props.theme.colors.danger};
+      }
+    }
+  }
+`
+
+export const BannerImage = styled.div`
+  ${({ isWebBanner }) => isWebBanner ? css`
+    height: 95px;
+  ` : css`
+    width: 130px;
+    height: 130px;
+  `}
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: -webkit-grab;
+  cursor: grab;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  img,
+  div {
+    width: 100%;
+    border-radius: 8px;
+    height: 100%;
+    overflow: hidden;
+  };
+
+  img{
+    object-fit: cover;
+  }
+`
+export const UploadImageIconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0px;
+  background: rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${({ small }) => small ? css`
+    padding: 4px;
+  ` : css`
+    padding: 8px;
+  `}
+  svg {
+    font-size: 55px;
+    color: ${props => props.theme.colors.lightGray};
+  }
+
+  p {
+    margin: 0px;
+    padding-top: 14px;
+    font-size: 12px;
+    color: ${props => props.theme.colors.lightGray};
+    text-align: center;
   }
 `
 export const FormController = styled.div`
@@ -68,7 +190,7 @@ export const SearchBarWrapper = styled.div`
   margin: 20px 0;
 `
 export const BusinessListWrapper = styled.div`
-  height: calc(100% - 280px);
+  height: calc(100% - 400px);
   overflow-x: hidden;
 
   #not-found-source {
@@ -132,7 +254,7 @@ export const BusinessName = styled.span`
 `
 export const ProductLinkContainer = styled.div`
   margin: 20px 0;
-  height: calc(100% - 250px);
+  height: calc(100% - 370px);
 `
 export const Option = styled.div`
   display: flex;
