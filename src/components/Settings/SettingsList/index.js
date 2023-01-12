@@ -43,6 +43,11 @@ export const SettingsListUI = (props) => {
     })
   }
 
+  const valuesTypeSix = [
+    'catering_delivery',
+    'catering_pickup'
+  ]
+
   const formatArray = (values) => {
     values = values.replace('[', '')
     values = values.replace(']', '')
@@ -77,6 +82,21 @@ export const SettingsListUI = (props) => {
       return
     }
     handleClickUpdate && handleClickUpdate()
+  }
+
+  let timeout = null
+  let previousSearch = null
+
+  const handleChangeTypeSix = (catering, config) => {
+    if (previousSearch !== catering.value) {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        const cateringString = config?.value
+        const stringParam = cateringString.split('|').map(string => string.includes(catering.type) ? `${catering.type},${catering.value}` : string).join('|')
+        handleInputChange(stringParam, config.id)
+      }, 1500)
+    }
+    previousSearch = catering.value
   }
 
   const handleKeyPress = (e, key) => {
@@ -246,6 +266,29 @@ export const SettingsListUI = (props) => {
                           />
                         )
                       }
+                      {config.type === 6 && (
+                        <>
+                          <FormGroupText className='form-group'>
+                            <label>{config?.name}</label>
+                            {config?.description && <Description>{config?.description}</Description>}
+                            {config?.value?.split('|')?.filter(value => valuesTypeSix.includes(value?.split(',')[0]))?.map((value, i, hash) => (
+                              <React.Fragment key={`${config?.id} ${value}`}>
+                                <Description typeSix>{t(value?.split(',')[0], value?.split(',')[0].replace('_', ' '))}</Description>
+                                <input
+                                  type='text'
+                                  defaultValue={value?.split(',')[1]}
+                                  onChange={(e) => handleChangeTypeSix({
+                                    value: e.target.value,
+                                    type: value?.split(',')[0]
+                                  }, config)}
+                                  className='form-control'
+                                  placeholder={0}
+                                />
+                              </React.Fragment>
+                            ))}
+                          </FormGroupText>
+                        </>
+                      )}
                     </div>
                   ))
                 }
