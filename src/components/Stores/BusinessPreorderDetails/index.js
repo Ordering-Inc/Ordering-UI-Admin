@@ -4,15 +4,20 @@ import { Button } from '../../../styles'
 import {
   BusinessPreorderContainer,
   PreorderTimeWrapper,
-  TimeBlock
+  TimeBlock,
+  Margin
 } from './styles'
+import { Divider } from '../ProductDesktopPreview/styles'
+import { BusinessCateringDelivery } from '../BusinessCateringDelivery'
 
 export const BusinessPreorderDetails = (props) => {
   const {
     business,
     formState,
     setFormState,
-    handleUpdateBusinessClick
+    handleUpdateBusinessClick,
+    handleUpdatePreorderConfigs,
+    actionStatus
   } = props
 
   const [, t] = useLanguage()
@@ -57,6 +62,12 @@ export const BusinessPreorderDetails = (props) => {
     })
   }
 
+  const changePreorderConfigs = (params) => {
+    const cateringString = business?.configs?.find(config => config?.id === params?.id)?.value
+    const stringParam = cateringString.split('|').map(string => string.includes(params.type) ? `${params.type},${params.value}` : string).join('|')
+    handleUpdatePreorderConfigs(stringParam, params.id)
+  }
+
   useEffect(() => {
     setFormState({
       ...formState,
@@ -71,7 +82,7 @@ export const BusinessPreorderDetails = (props) => {
 
   return (
     <BusinessPreorderContainer>
-      <h1>{t('PREORDER_SETTING', 'Preorder')}</h1>
+      <h1>{t('PREORDERS_SETTING', 'Preorders and lead times')}</h1>
       <PreorderTimeWrapper>
         <p className='name'>{t('PREORDER_TIME', 'Pre order time')}</p>
         <p className='description'>{t('PREORDER_TIME_DESC', 'The anticipation time before activating the pre order')}</p>
@@ -100,15 +111,31 @@ export const BusinessPreorderDetails = (props) => {
             }
           </select>
         </TimeBlock>
+        <Button
+          borderRadius='8px'
+          color='primary'
+          disabled={formState.loading || Object.keys(formState.changes).length === 0}
+          onClick={handleUpdateBusinessClick}
+        >
+          {t('SAVE', 'Save')}
+        </Button>
       </PreorderTimeWrapper>
-      <Button
-        borderRadius='8px'
-        color='primary'
-        disabled={formState.loading || Object.keys(formState.changes).length === 0}
-        onClick={handleUpdateBusinessClick}
-      >
-        {t('SAVE', 'Save')}
-      </Button>
+      <Divider />
+      <BusinessCateringDelivery
+        minutes={minutes}
+        type='catering_delivery'
+        business={business}
+        changePreorderConfigs={changePreorderConfigs}
+        disabled={actionStatus?.loading}
+      />
+      <BusinessCateringDelivery
+        minutes={minutes}
+        type='catering_pickup'
+        business={business}
+        changePreorderConfigs={changePreorderConfigs}
+        disabled={actionStatus?.loading}
+      />
+      <Margin />
     </BusinessPreorderContainer>
   )
 }
