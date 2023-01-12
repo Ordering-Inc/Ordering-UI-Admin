@@ -69,7 +69,7 @@ const DeliveriesManagerUI = (props) => {
 
   return (
     <>
-      <DeliveriesContainer>
+      <DeliveriesContainer id='deliveryDashboard'>
         <OrdersContentHeader
           isDisableControl
           title={t('DELIVERY_DASHBOARD', 'Delivery dashboard')}

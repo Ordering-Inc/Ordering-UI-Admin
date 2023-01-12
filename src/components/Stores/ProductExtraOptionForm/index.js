@@ -124,7 +124,7 @@ export const ProductExtraOptionForm = (props) => {
       />
       <OptionInfoContainer>
         <OptionContent>
-          <InputWrapper primary>
+          <InputWrapper primary noMargin>
             <label>{t('OPTION_NAME', 'Option name')}</label>
             <Controller
               name='name'

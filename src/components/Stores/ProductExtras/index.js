@@ -205,6 +205,7 @@ const ProductExtrasUI = (props) => {
               width='80%'
               open={openExtraDetails}
               onClose={() => handleCloseExtraDetails()}
+              padding='20px 0 0 0'
             >
               <ProductExtraOptions
                 open={openExtraDetails}

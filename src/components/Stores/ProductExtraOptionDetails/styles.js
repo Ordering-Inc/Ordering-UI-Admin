@@ -202,6 +202,8 @@ export const Dvider = styled.div`
 `
 
 export const ModifierOptionsContainer = styled.div`
+  overflow: auto;
+  width: 100%;
   margin-bottom: 20px;
   h2 {
     font-size: 18px;

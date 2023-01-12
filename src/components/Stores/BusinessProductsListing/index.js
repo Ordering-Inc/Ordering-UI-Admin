@@ -70,7 +70,9 @@ const BusinessProductsListingUI = (props) => {
     setTaxes,
     fees,
     setFees,
-    getBusiness
+    getBusiness,
+    businessTypes,
+    setBusinessTypes
   } = props
 
   const [, t] = useLanguage()
@@ -461,6 +463,8 @@ const BusinessProductsListingUI = (props) => {
           handleSucessRemoveBusiness={() => handleStoresRedirect()}
           // handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           onClose={() => setOpenSidebar(null)}
+          businessTypes={businessTypes}
+          setBusinessTypes={setBusinessTypes}
         />
       )}
       {openSidebar === 'add_business' && (

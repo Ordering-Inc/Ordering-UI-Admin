@@ -43,16 +43,6 @@ export const Header = styled.div`
   > div {
     display: flex;
     align-items: center;
-    > button {
-      display: none;
-    }
-  }
-  @media (min-width: 1000px) {
-    > div {
-      > button {
-        display: block;
-      }
-    }
   }
 `
 

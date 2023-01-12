@@ -153,18 +153,27 @@ export const WrapperRow = styled.div`
 
 export const FieldRow = styled.div`
   display: flex;
-  margin-left: -10px;
-  margin-right: -10px;
+  justify-content: space-between;
+  flex-direction: column;
   label:first-child{
     margin-top: 30px;
+  }
+  > div {
+    width: 100%;
+    padding: 0px;
+  }
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+    > div {
+      width: 48%;
+    }
   }
 `
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 0;
-  flex-grow: 1;
   max-width: 100%;
   padding: 0 10px;
 

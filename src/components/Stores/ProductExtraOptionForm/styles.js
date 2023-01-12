@@ -2,7 +2,12 @@ import styled, { css } from 'styled-components'
 
 export const OptionContainer = styled.form`
   display: flex;
+  flex-direction: column;
   width: 100%;
+
+  @media (min-width: 576px) {
+    flex-direction: row;
+  }
 `
 
 export const OptionImage = styled.div`
@@ -14,6 +19,7 @@ export const OptionImage = styled.div`
   cursor: -webkit-grab;
   cursor: grab;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.1));
+  margin: 0px auto 15px auto;
 
   img,
   div {
@@ -53,11 +59,13 @@ export const UploadImageIcon = styled.div`
 
 export const OptionInfoContainer = styled.div`
   flex: 1;
-  ${props => props.theme?.rtl ? css`
-    margin-right: 20px;
-  ` : css`
-    margin-left: 20px;
-  `}
+  @media (min-width: 576px) {
+    ${props => props.theme?.rtl ? css`
+      margin-right: 20px;
+    ` : css`
+      margin-left: 20px;
+    `}
+  }
 `
 
 export const OptionContent = styled.div`
@@ -72,9 +80,13 @@ export const OptionContent = styled.div`
 export const RightOptionContent = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-top: 10px;
   > div:not(:last-child) {
-    width: 100px;
+    width: 85px;
+  }
+  @media (min-width: 450px) {
+    justify-content: flex-start;
   }
   @media (min-width: 1200px) {
     margin-top: 0px;
@@ -132,16 +144,20 @@ export const InputWrapper = styled.div`
       color: ${props => props.theme.colors.primary};
     }
   }
+
+  @media (max-width: 1200px) {
+    ${({ noMargin }) => noMargin && css`
+      margin: 0;
+    `}
+  }
 `
 
 export const ActionsContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-top: 27px;
   padding-top: 6px;
   padding-bottom: 6px;
-  width: 150px;
   
   ${({ primary }) => !primary && css`
     margin-top: 0px;
