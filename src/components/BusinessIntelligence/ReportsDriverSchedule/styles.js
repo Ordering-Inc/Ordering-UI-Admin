@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
 
 export const DriverScheduleContainer = styled.div`
-  padding: 35px 15px 70px 15px;
+  padding: 25px 15px 70px 15px;
   width: 100%;
   overflow: auto;
 
   @media (min-width: 700px) {
-    padding: 35px 35px 70px 35px;
+    padding: 25px 35px 70px 35px;
   }
 `
 
@@ -16,6 +16,11 @@ export const ScheduleTitle = styled.h2`
   color: ${props => props.theme?.colors.headingColor};
   margin-top: 0;
   margin-bottom: 30px;
+  margin-right: 35px;
+  ${props => props.theme?.rtl && css`
+    margin-right: 0;
+    margin-left: 35px;
+  `}
 `
 
 export const ButtonActionList = styled.div`
@@ -51,6 +56,22 @@ export const CalendarWrapper = styled.div`
         margin-right: 0px;
         margin-left: 12px;
       `}
+    }
+  }
+
+  @media only screen and (min-width: 374px) and (max-width: 450px) {
+    .ordering-calendar {
+      right: calc((100vw - 364px) / 2);
+    }
+  }
+
+  @media (max-width: 450px) {
+    width: 100%;
+    flex-wrap: wrap;
+    > button {
+      width: 100%;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
     }
   }
 `
