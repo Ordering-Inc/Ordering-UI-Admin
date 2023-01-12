@@ -190,7 +190,7 @@ export const SearchBarWrapper = styled.div`
   margin: 20px 0;
 `
 export const BusinessListWrapper = styled.div`
-  height: calc(100% - 400px);
+  height: calc(100% - 440px);
   overflow-x: hidden;
 
   #not-found-source {
@@ -254,7 +254,7 @@ export const BusinessName = styled.span`
 `
 export const ProductLinkContainer = styled.div`
   margin: 20px 0;
-  height: calc(100% - 370px);
+  height: calc(100% - 410px);
 `
 export const Option = styled.div`
   display: flex;
