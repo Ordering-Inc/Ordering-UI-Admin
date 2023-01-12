@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
-import { Button, DefaultSelect as Select } from '../../../styles'
+import { DefaultSelect as Select } from '../../../styles'
 import { SelectBusinessProducts } from './SelectBusinessProducts'
 import {
   ProductLinkContainer,
@@ -18,8 +18,7 @@ export const ProductLink = (props) => {
     selectedProductId,
     setSelectedProductId,
     selectedCategoryId,
-    setSelectedCategoryId,
-    handleSaveLink
+    setSelectedCategoryId
   } = props
 
   const theme = useTheme()
@@ -46,7 +45,10 @@ export const ProductLink = (props) => {
   }, [businessList])
 
   useEffect(() => {
-    if (!selectedBusinessId) return
+    if (!selectedBusinessId) {
+      setSelectedBusinessSlug(null)
+      return
+    }
     const selectedBusiness = businessList.businesses.find(business => business.id === selectedBusinessId)
     setSelectedBusinessSlug(selectedBusiness?.slug)
   }, [selectedBusinessId, businessList])
@@ -75,14 +77,6 @@ export const ProductLink = (props) => {
             selectedCategoryId={selectedCategoryId}
             setSelectedCategoryId={setSelectedCategoryId}
           />
-          <Button
-            borderRadius='8px'
-            color='primary'
-            disabled={!selectedCategoryId || !selectedProductId}
-            onClick={handleSaveLink}
-          >
-            {t('SAVE', 'Save')}
-          </Button>
         </>
       )}
     </ProductLinkContainer>

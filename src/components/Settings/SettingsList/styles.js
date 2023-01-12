@@ -115,6 +115,6 @@ export const SubmitBtnWrapper = styled.div`
 
 export const Description = styled.p`
   font-size: 14px;
-  margin-top: 0px;
+  margin-top: ${({ typeSix }) => typeSix ? '20px' : '0px'};
   margin-bottom: 5px;
 `

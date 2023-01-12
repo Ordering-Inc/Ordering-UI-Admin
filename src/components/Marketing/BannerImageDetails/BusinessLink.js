@@ -4,7 +4,6 @@ import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
 import { SearchBar, NotFoundSource } from '../../Shared'
-import { Button } from '../../../styles'
 import {
   BusinessListWrapper,
   BusinessItemContainer,
@@ -20,7 +19,6 @@ export const BusinessLink = (props) => {
     searchValue,
     onSearch,
     businessList,
-    handleSaveLink,
     selectedBusinessId,
     setSelectedBusinessId
   } = props
@@ -77,14 +75,6 @@ export const BusinessLink = (props) => {
           )}
         </BusinessListWrapper>
       )}
-      <Button
-        borderRadius='8px'
-        color='primary'
-        disabled={businessList.loading || !selectedBusinessId}
-        onClick={handleSaveLink}
-      >
-        {t('SAVE', 'Save')}
-      </Button>
     </>
   )
 }
