@@ -58,6 +58,7 @@ var SettingsListUI = function SettingsListUI(props) {
       content: []
     });
   };
+  var valuesTypeSix = ['catering_delivery', 'catering_pickup'];
   var formatArray = function formatArray(values) {
     values = values.replace('[', '');
     values = values.replace(']', '');
@@ -104,6 +105,21 @@ var SettingsListUI = function SettingsListUI(props) {
     }
     handleClickUpdate && handleClickUpdate();
   };
+  var timeout = null;
+  var previousSearch = null;
+  var handleChangeTypeSix = function handleChangeTypeSix(catering, config) {
+    if (previousSearch !== catering.value) {
+      clearTimeout(timeout);
+      timeout = setTimeout(function () {
+        var cateringString = config === null || config === void 0 ? void 0 : config.value;
+        var stringParam = cateringString.split('|').map(function (string) {
+          return string.includes(catering.type) ? "".concat(catering.type, ",").concat(catering.value) : string;
+        }).join('|');
+        handleInputChange(stringParam, config.id);
+      }, 1500);
+    }
+    previousSearch = catering.value;
+  };
   var handleKeyPress = function handleKeyPress(e, key) {
     switch (key) {
       case 'platform_fee_fixed':
@@ -137,7 +153,7 @@ var SettingsListUI = function SettingsListUI(props) {
     width: 70,
     height: 44
   })), !settingsState.error && !settingsState.loading && configs && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles2.GeneralContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, null, configs.length > 0 && configs.map(function (config, i) {
-    var _config$options, _config$options2, _config$options3, _config$options4;
+    var _config$options, _config$options2, _config$options3, _config$options4, _config$value, _config$value$split, _config$value$split$f;
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i
     }, config.type === 1 && /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
@@ -207,7 +223,28 @@ var SettingsListUI = function SettingsListUI(props) {
     })), !(config !== null && config !== void 0 && config.options) && /*#__PURE__*/_react.default.createElement(_styles2.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value')))), config.type === 5 && /*#__PURE__*/_react.default.createElement(_SettingsImage.SettingsImage, {
       config: config,
       saveConfig: saveConfig
-    }));
+    }), config.type === 6 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
+      className: "form-group"
+    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles2.Description, null, config === null || config === void 0 ? void 0 : config.description), config === null || config === void 0 ? void 0 : (_config$value = config.value) === null || _config$value === void 0 ? void 0 : (_config$value$split = _config$value.split('|')) === null || _config$value$split === void 0 ? void 0 : (_config$value$split$f = _config$value$split.filter(function (value) {
+      return valuesTypeSix.includes(value === null || value === void 0 ? void 0 : value.split(',')[0]);
+    })) === null || _config$value$split$f === void 0 ? void 0 : _config$value$split$f.map(function (value, i, hash) {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: "".concat(config === null || config === void 0 ? void 0 : config.id, " ").concat(value)
+      }, /*#__PURE__*/_react.default.createElement(_styles2.Description, {
+        typeSix: true
+      }, t(value === null || value === void 0 ? void 0 : value.split(',')[0], value === null || value === void 0 ? void 0 : value.split(',')[0].replace('_', ' '))), /*#__PURE__*/_react.default.createElement("input", {
+        type: "text",
+        defaultValue: value === null || value === void 0 ? void 0 : value.split(',')[1],
+        onChange: function onChange(e) {
+          return handleChangeTypeSix({
+            value: e.target.value,
+            type: value === null || value === void 0 ? void 0 : value.split(',')[0]
+          }, config);
+        },
+        className: "form-control",
+        placeholder: 0
+      }));
+    }))));
   }))), !settingsState.loading && settingsState.error && /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
     content: t('NOT_FOUND_CONFIG', 'Sorry, we couldn\'t find the config.'),
     btnTitle: t('PROFILE_CATEGORY_REDIRECT', 'Go to Category Description'),

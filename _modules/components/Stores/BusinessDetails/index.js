@@ -56,7 +56,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleUpdateBusinessState = props.handleUpdateBusinessState,
     handleDuplicateBusiness = props.handleDuplicateBusiness,
     handleDeleteBusiness = props.handleDeleteBusiness,
-    actionStatus = props.actionStatus;
+    actionStatus = props.actionStatus,
+    handleUpdatePreorderConfigs = props.handleUpdatePreorderConfigs;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -227,7 +228,9 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     formState: formState,
     setFormState: setFormState,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    handleUpdateBusinessClick: handleUpdateBusinessClick
+    actionStatus: actionStatus,
+    handleUpdateBusinessClick: handleUpdateBusinessClick,
+    handleUpdatePreorderConfigs: handleUpdatePreorderConfigs
   }), selectedItem === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_BusinessCustomFields.BusinessCustomFields, {
     businessId: businessState === null || businessState === void 0 ? void 0 : businessState.business.id,
     metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.metafields,

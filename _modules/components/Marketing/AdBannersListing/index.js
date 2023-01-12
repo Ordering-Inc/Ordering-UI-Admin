@@ -44,7 +44,7 @@ var AdBannersListing = function AdBannersListing(props) {
     description: t('HOME_BANNER_DESCRIPTION', 'Add a banner to your home page and inform everyone about the latest news in your marketplace.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null),
     info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
-    aspectRatio: 1440 / 260,
+    aspectRatio: 1440 / 300,
     isSearhShow: false
   }, {
     key: 'web_business_listing',
@@ -52,7 +52,7 @@ var AdBannersListing = function AdBannersListing(props) {
     description: t('BUSINESS_LISTING_BANNER_DESCRIPTION', 'Add a banner inside your business listing to let everyone know about your latest promotions inside your businesses listed.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ViewStacked, null),
     info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
-    aspectRatio: 1440 / 260,
+    aspectRatio: 1440 / 300,
     isSearhShow: false
   }, {
     key: 'web_business_page',
@@ -60,9 +60,8 @@ var AdBannersListing = function AdBannersListing(props) {
     description: t('BUSINESS_PAGE_BANNER_DESCRIPTION', 'Add a banner inside the business page, and inform news and promotions specifically of the stores customers are ordering from.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null),
     info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '1440 x 300'),
-    aspectRatio: 1440 / 260,
-    isSearhShow: true,
-    isLink: true
+    aspectRatio: 1440 / 300,
+    isSearhShow: true
   }, {
     key: 'app_home_page',
     title: t('APP_HOME', 'App home'),
@@ -86,8 +85,7 @@ var AdBannersListing = function AdBannersListing(props) {
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null),
     info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
     aspectRatio: 300 / 300,
-    isSearhShow: true,
-    isLink: true
+    isSearhShow: true
   }];
   var handleSelectBannerPosition = function handleSelectBannerPosition(item) {
     setOpenPositionDetail(item);
@@ -127,8 +125,7 @@ var AdBannersListing = function AdBannersListing(props) {
     bannerInfo: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.info,
     defaultPosition: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.key,
     aspectRatio: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.aspectRatio,
-    isSearhShow: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.isSearhShow,
-    isLink: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.isLink
+    isSearhShow: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.isSearhShow
   })));
 };
 exports.AdBannersListing = AdBannersListing;

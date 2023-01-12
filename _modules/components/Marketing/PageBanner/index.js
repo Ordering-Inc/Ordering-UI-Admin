@@ -42,8 +42,7 @@ var PageBannersUI = function PageBannersUI(props) {
     defaultPosition = props.defaultPosition,
     handleSuccessDelete = props.handleSuccessDelete,
     aspectRatio = props.aspectRatio,
-    isSearhShow = props.isSearhShow,
-    isLink = props.isLink;
+    isSearhShow = props.isSearhShow;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -162,7 +161,6 @@ var PageBannersUI = function PageBannersUI(props) {
     },
     defaultPosition: defaultPosition,
     aspectRatio: aspectRatio,
-    isLink: isLink,
     setBannerMoveDistance: setBannerMoveDistance
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
