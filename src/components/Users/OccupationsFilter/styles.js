@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  display: flex;
-  align-items: center;
+  flex: 1;
+  width: 100%;
 
   button {
     ${props => props.theme?.rtl ? css`
@@ -12,6 +12,15 @@ export const Container = styled.div`
     `}
     font-size: 12px;
     white-space: nowrap;
+  }
+
+  @media (min-width: 992px) {
+    width: 50%;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 30px;
+    ` : css`
+      margin-right: 30px;
+    `}
   }
 `
 export const SkeletonWrapper = styled.span`
