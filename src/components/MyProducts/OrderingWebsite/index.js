@@ -32,16 +32,23 @@ import {
   CheckBoxWrapper,
   ColorPickerWrapper,
   ContentWrapper,
-  WebsiteButtonWrapper
+  WebsiteButtonWrapper,
+  TabWrapper,
+  Tabs,
+  Tab
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
+import { AdvancedSettings } from '../AdvancedSettings'
 
 const OrderingWebsiteUI = (props) => {
   const {
     themeValues,
     orderingTheme,
     setThemeValues,
-    handleUpdateSiteTheme
+    handleUpdateSiteTheme,
+    advancedValues,
+    setAdvancedValues,
+    themesList
   } = props
 
   const [, t] = useLanguage()
@@ -57,6 +64,12 @@ const OrderingWebsiteUI = (props) => {
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [homePageContent, setHomePageContent] = useState(false)
   const [footerContent, setFooterContent] = useState(false)
+  const [selectedSetting, setSelectedSetting] = useState('basic')
+
+  const settingsList = [
+    { key: 'basic', name: t('BASIC_SETTINGS', 'Basic Settings') },
+    { key: 'advanced', name: t('ADVANCED_SETTINGS', 'Advanced Settings') }
+  ]
 
   const handleClickImage = (type) => {
     if (type === 'logo') {
@@ -152,291 +165,314 @@ const OrderingWebsiteUI = (props) => {
           <InfoWrapper>
             <h1>{t('ORDERING_WEBSITE', 'Ordering website')}</h1>
             <p>{t('ORDERING_WEBSITE_DESC', 'This product is included in your project by default.')}</p>
+            <WebsiteButtonWrapper>
+              <Button
+                color='primary'
+                borderRadius='8px'
+                onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
+              >
+                {t('VISIT_MY_WEBSITE', 'Visit My Website')}
+              </Button>
+            </WebsiteButtonWrapper>
           </InfoWrapper>
           <img src={theme.images.myProducts.orderingWebsite} alt='ordering-website' />
         </WebsiteWrapper>
         <MoreSettingsHeader>
           <h2>{t('MORE_SETTINGS_FOR_YOUR', 'More settings for your')} <span>{t('WEBSITE_ORIGINAL', 'website')}</span></h2>
           <p>{t('MORE_SETTINGS_YOUR_WEBSITE_DESC', 'Change background, colors, fonts, style, branding and all the essentials of your brand.')}</p>
-        </MoreSettingsHeader>
-        <WebsiteButtonWrapper>
-          <Button
-            color='primary'
-            borderRadius='8px'
-            onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
-          >
-            {t('VISIT_MY_WEBSITE', 'Visit My Website')}
-          </Button>
-        </WebsiteButtonWrapper>
-        <FormWrapper>
-          <InputFormWrapper>
-            <InnerBlock>
-              <h4>{t('WEBSITE_SETTINGS', 'Website settings')}</h4>
-              <FormGroup>
-                <label>
-                  {orderingTheme?.loading ? (
-                    <Skeleton height={20} width={150} />
-                  ) : (
-                    <>
-                      {t('NAME', 'Name')}
-                    </>
-                  )}
-                </label>
-                {orderingTheme?.loading ? (
-                  <Skeleton height={40} style={{ width: '100%' }} />
-                ) : (
-                  <Input
-                    name='name'
-                    placeholder={t('SOURCE_DEMO_WEBSITE', 'Source demo website')}
-                    value={themeValues?.website_settings?.components?.values?.name || ''}
-                    onChange={handleChangeSiteSettings}
-                  />
-                )}
-              </FormGroup>
-              <FormGroup>
-                <label>
-                  {orderingTheme?.loading ? (
-                    <Skeleton height={20} width={150} />
-                  ) : (
-                    <>
-                      {t('DESCRIPTION', 'Decription')}
-                    </>
-                  )}
-                </label>
-                {orderingTheme?.loading ? (
-                  <Skeleton height={65} style={{ width: '100%' }} />
-                ) : (
-                  <TextArea
-                    name='description'
-                    placeholder={t('DESCRIPTION', 'Decription')}
-                    value={themeValues?.website_settings?.components?.values?.description || ''}
-                    onChange={handleChangeSiteSettings}
-                  />
-                )}
-              </FormGroup>
-              <FormGroup>
-                <label>
-                  {orderingTheme?.loading ? (
-                    <Skeleton height={20} width={150} />
-                  ) : (
-                    <>
-                      {t('TEMPORAL_DOMAIN', 'Temporal domain')}
-                    </>
-                  )}
-                </label>
-                {orderingTheme?.loading ? (
-                  <Skeleton height={20} style={{ width: '100%' }} />
-                ) : (
-                  <TemporalDomail>
-                    {t('VISIT', 'Visit')}: <a href={`https://${ordering?.project}.tryordering.com`} rel='noopener noreferrer' target='_blank'>https://{ordering?.project}.tryordering.com</a>
-                  </TemporalDomail>
-                )}
-              </FormGroup>
-              <FormGroup>
-                <label>
-                  {orderingTheme?.loading ? (
-                    <Skeleton height={20} width={150} />
-                  ) : (
-                    <>
-                      {t('CUSTOM_DOMAIN', 'Custom domain')}
-                    </>
-                  )}
-                </label>
-                {orderingTheme?.loading ? (
-                  <Skeleton height={40} style={{ width: '100%' }} />
-                ) : (
-                  <Button
-                    color='primary'
-                    outline
-                    borderRadius='8px'
-                    onClick={() => window.open('https://www.ordering.co/custom-domain-change', '_blank')}
-                  >
-                    {t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain')}
-                  </Button>
-                )}
-              </FormGroup>
-            </InnerBlock>
-          </InputFormWrapper>
-          <InputFormWrapper>
-            <h4>{t('IMAGES', 'Images')}</h4>
-            <InnerBlock>
-              {orderingTheme?.loading ? (
-                <>
-                  <Skeleton height={100} width={100} style={{ marginBottom: '15px' }} />
-                  <Skeleton height={15} count={3} width={150} style={{ display: 'block', marginBottom: '7px' }} />
-                </>
-              ) : (
-                <ImageFormGroup>
-                  <LogoImage
-                    onClick={() => handleClickImage('logo')}
-                  >
-                    <ExamineClick
-                      onFiles={files => handleFiles(files, 'logo')}
-                      childRef={(e) => { logoRef.current = e }}
-                      accept='image/png, image/jpeg, image/jpg'
-                    >
-                      <DragAndDrop
-                        onDrop={dataTransfer => handleFiles(dataTransfer.files, 'logo')}
-                        accept='image/png, image/jpeg, image/jpg'
-                        disabled={orderingTheme.loading}
-                      >
-                        {themeValues?.images?.components?.logo?.components?.image && <img src={themeValues?.images?.components?.logo?.components?.image} alt='logo image' loading='lazy' />}
-                        <UploadImageIconContainer bgimage={themeValues?.images?.components?.logo?.components?.image}>
-                          <UploadImageIcon>
-                            <DumyPhoto />
-                            <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
-                          </UploadImageIcon>
-                        </UploadImageIconContainer>
-                      </DragAndDrop>
-                    </ExamineClick>
-                  </LogoImage>
-                  <ImgInfoWrapper>
-                    <h4>{t('HEADER_LOGO', 'Header logo')}</h4>
-                    <p>900 x 200 px</p>
-                    <p>{t('FORMAT', 'Format')}: PNG</p>
-                  </ImgInfoWrapper>
-                </ImageFormGroup>
-              )}
-              {orderingTheme?.loading ? (
-                <>
-                  <Skeleton height={100} style={{ marginBottom: '15px', width: '100%' }} />
-                  <Skeleton height={15} count={3} width={150} style={{ display: 'block', marginBottom: '7px' }} />
-                </>
-              ) : (
-                <ImageFormGroup>
-                  <BackgroundImage
-                    onClick={() => handleClickImage('homepage_background')}
-                  >
-                    <ExamineClick
-                      onFiles={files => handleFiles(files, 'homepage_background')}
-                      childRef={(e) => { backgroundRef.current = e }}
-                      accept='image/png, image/jpeg, image/jpg'
-                    >
-                      <DragAndDrop
-                        onDrop={dataTransfer => handleFiles(dataTransfer.files, 'homepage_background')}
-                        accept='image/png, image/jpeg, image/jpg'
-                        disabled={orderingTheme.loading}
-                      >
-                        {themeValues?.images?.components?.homepage_background?.components?.image && <img src={themeValues?.images?.components?.homepage_background?.components?.image} alt='backgrond image' loading='lazy' />}
-                        <UploadImageIconContainer bgimage={!!themeValues?.images?.components?.homepage_background?.components?.image}>
-                          <UploadImageIcon>
-                            <DumyPhoto />
-                            <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
-                          </UploadImageIcon>
-                        </UploadImageIconContainer>
-                      </DragAndDrop>
-                    </ExamineClick>
-                  </BackgroundImage>
-                  <ImgInfoWrapper>
-                    <h4>{t('HOMEPAGE_BACKGROUND', 'Homepage background')}</h4>
-                    <p>1920 x 1280 px</p>
-                    <p>{t('FORMAT', 'Format')}: PNG</p>
-                  </ImgInfoWrapper>
-                </ImageFormGroup>
-              )}
-              {orderingTheme?.loading ? (
-                <>
-                  <Skeleton height={100} style={{ marginBottom: '15px', width: '100%' }} />
-                  <Skeleton height={15} count={3} width={150} style={{ display: 'block', marginBottom: '7px' }} />
-                </>
-              ) : (
-                <ImageFormGroup>
-                  <BackgroundImage
-                    onClick={() => handleClickImage('homepage_mobile_background')}
-                  >
-                    <ExamineClick
-                      onFiles={files => handleFiles(files, 'homepage_mobile_background')}
-                      childRef={(e) => { mobileBackgroundRef.current = e }}
-                      accept='image/png, image/jpeg, image/jpg'
-                    >
-                      <DragAndDrop
-                        onDrop={dataTransfer => handleFiles(dataTransfer.files, 'homepage_mobile_background')}
-                        accept='image/png, image/jpeg, image/jpg'
-                        disabled={orderingTheme.loading}
-                      >
-                        {themeValues?.images?.components?.homepage_mobile_background?.components?.image && <img src={themeValues?.images?.components?.homepage_mobile_background?.components?.image} alt='backgrond image' loading='lazy' />}
-                        <UploadImageIconContainer bgimage={!!themeValues?.images?.components?.homepage_mobile_background?.components?.image}>
-                          <UploadImageIcon>
-                            <DumyPhoto />
-                            <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
-                          </UploadImageIcon>
-                        </UploadImageIconContainer>
-                      </DragAndDrop>
-                    </ExamineClick>
-                  </BackgroundImage>
-                  <ImgInfoWrapper>
-                    <h4>{t('HOMEPAGE_MOBILE_BACKGROUND', 'Homepage mobile background')}</h4>
-                    <p>1440 x 770 px</p>
-                    <p>{t('FORMAT', 'Format')}: PNG</p>
-                  </ImgInfoWrapper>
-                </ImageFormGroup>
-              )}
-              {orderingTheme?.loading ? (
-                <Skeleton width={200} height={20} />
-              ) : (
-                <CheckBoxWrapper
-                  onClick={() => handleChangeValue(!themeValues?.images?.components?.homepage_image_fullscreen, 'images', 'homepage_image_fullscreen')}
+          <TabWrapper>
+            <Tabs>
+              {settingsList.map(setting => (
+                <Tab
+                  key={setting.key}
+                  active={selectedSetting === setting.key}
+                  onClick={() => !orderingTheme?.loading && setSelectedSetting(setting.key)}
                 >
-                  {themeValues?.images?.components?.homepage_image_fullscreen ? (
-                    <CheckedIcon className='active' />
-                  ) : (
-                    <UnCheckedIcon />
-                  )}
-                  <span>{t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage  image fullscreen')}</span>
-                </CheckBoxWrapper>
-              )}
-            </InnerBlock>
-          </InputFormWrapper>
-          {!orderingTheme?.loading && (
+                  {setting.name}
+                </Tab>
+              ))}
+            </Tabs>
+          </TabWrapper>
+        </MoreSettingsHeader>
+        {selectedSetting === 'basic' && (
+          <FormWrapper>
             <InputFormWrapper>
-              <h4>{t('THEME_SETTINGS', 'Theme Settings')}</h4>
               <InnerBlock>
-                <ColorPickerWrapper>
-                  <div>
-                    <p>{t('PRIMARY_COLOR_BUTTONS', 'Primary Color for Buttons')}</p>
-                    <ColorPicker
-                      defaultColor={themeValues?.theme_settings?.components?.style?.primary_btn_color}
-                      onChangeColor={(color) => handleChangeValue(color, 'theme_settings', 'style.primary_btn_color')}
+                <h4>{t('WEBSITE_SETTINGS', 'Website settings')}</h4>
+                <FormGroup>
+                  <label>
+                    {orderingTheme?.loading ? (
+                      <Skeleton height={20} width={150} />
+                    ) : (
+                      <>
+                        {t('NAME', 'Name')}
+                      </>
+                    )}
+                  </label>
+                  {orderingTheme?.loading ? (
+                    <Skeleton height={40} style={{ width: '100%' }} />
+                  ) : (
+                    <Input
+                      name='name'
+                      placeholder={t('SOURCE_DEMO_WEBSITE', 'Source demo website')}
+                      value={themeValues?.website_settings?.components?.values?.name || ''}
+                      onChange={handleChangeSiteSettings}
                     />
-                  </div>
-                </ColorPickerWrapper>
-                <ContentWrapper>
-                  <div>
-                    <p>{t('HOMEPAGE_CONTENT', 'Homepage Content')}</p>
+                  )}
+                </FormGroup>
+                <FormGroup>
+                  <label>
+                    {orderingTheme?.loading ? (
+                      <Skeleton height={20} width={150} />
+                    ) : (
+                      <>
+                        {t('DESCRIPTION', 'Decription')}
+                      </>
+                    )}
+                  </label>
+                  {orderingTheme?.loading ? (
+                    <Skeleton height={65} style={{ width: '100%' }} />
+                  ) : (
+                    <TextArea
+                      name='description'
+                      placeholder={t('DESCRIPTION', 'Decription')}
+                      value={themeValues?.website_settings?.components?.values?.description || ''}
+                      onChange={handleChangeSiteSettings}
+                    />
+                  )}
+                </FormGroup>
+                <FormGroup>
+                  <label>
+                    {orderingTheme?.loading ? (
+                      <Skeleton height={20} width={150} />
+                    ) : (
+                      <>
+                        {t('TEMPORAL_DOMAIN', 'Temporal domain')}
+                      </>
+                    )}
+                  </label>
+                  {orderingTheme?.loading ? (
+                    <Skeleton height={20} style={{ width: '100%' }} />
+                  ) : (
+                    <TemporalDomail>
+                      {t('VISIT', 'Visit')}: <a href={`https://${ordering?.project}.tryordering.com`} rel='noopener noreferrer' target='_blank'>https://{ordering?.project}.tryordering.com</a>
+                    </TemporalDomail>
+                  )}
+                </FormGroup>
+                <FormGroup>
+                  <label>
+                    {orderingTheme?.loading ? (
+                      <Skeleton height={20} width={150} />
+                    ) : (
+                      <>
+                        {t('CUSTOM_DOMAIN', 'Custom domain')}
+                      </>
+                    )}
+                  </label>
+                  {orderingTheme?.loading ? (
+                    <Skeleton height={40} style={{ width: '100%' }} />
+                  ) : (
                     <Button
                       color='primary'
-                      borderRadius='8px'
                       outline
-                      onClick={() => setHomePageContent(true)}
-                    >
-                      {t('HOMEPAGE_CONTENT', 'Homepage content')}
-                    </Button>
-                  </div>
-                  <div>
-                    <p>{t('FOOTER_CONTENT', 'Footer Content')}</p>
-                    <Button
-                      color='primary'
                       borderRadius='8px'
-                      outline
-                      onClick={() => setFooterContent(true)}
+                      onClick={() => window.open('https://www.ordering.co/custom-domain-change', '_blank')}
                     >
-                      {t('FOOTER_CONTENT', 'Footer content')}
+                      {t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain')}
                     </Button>
-                  </div>
-                </ContentWrapper>
+                  )}
+                </FormGroup>
               </InnerBlock>
             </InputFormWrapper>
-          )}
+            <InputFormWrapper>
+              <h4>{t('IMAGES', 'Images')}</h4>
+              <InnerBlock>
+                {orderingTheme?.loading ? (
+                  <>
+                    <Skeleton height={100} width={100} style={{ marginBottom: '15px' }} />
+                    <Skeleton height={15} count={3} width={150} style={{ display: 'block', marginBottom: '7px' }} />
+                  </>
+                ) : (
+                  <ImageFormGroup>
+                    <LogoImage
+                      onClick={() => handleClickImage('logo')}
+                    >
+                      <ExamineClick
+                        onFiles={files => handleFiles(files, 'logo')}
+                        childRef={(e) => { logoRef.current = e }}
+                        accept='image/png, image/jpeg, image/jpg'
+                      >
+                        <DragAndDrop
+                          onDrop={dataTransfer => handleFiles(dataTransfer.files, 'logo')}
+                          accept='image/png, image/jpeg, image/jpg'
+                          disabled={orderingTheme.loading}
+                        >
+                          {themeValues?.images?.components?.logo?.components?.image && <img src={themeValues?.images?.components?.logo?.components?.image} alt='logo image' loading='lazy' />}
+                          <UploadImageIconContainer bgimage={themeValues?.images?.components?.logo?.components?.image}>
+                            <UploadImageIcon>
+                              <DumyPhoto />
+                              <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                            </UploadImageIcon>
+                          </UploadImageIconContainer>
+                        </DragAndDrop>
+                      </ExamineClick>
+                    </LogoImage>
+                    <ImgInfoWrapper>
+                      <h4>{t('HEADER_LOGO', 'Header logo')}</h4>
+                      <p>900 x 200 px</p>
+                      <p>{t('FORMAT', 'Format')}: PNG</p>
+                    </ImgInfoWrapper>
+                  </ImageFormGroup>
+                )}
+                {orderingTheme?.loading ? (
+                  <>
+                    <Skeleton height={100} style={{ marginBottom: '15px', width: '100%' }} />
+                    <Skeleton height={15} count={3} width={150} style={{ display: 'block', marginBottom: '7px' }} />
+                  </>
+                ) : (
+                  <ImageFormGroup>
+                    <BackgroundImage
+                      onClick={() => handleClickImage('homepage_background')}
+                    >
+                      <ExamineClick
+                        onFiles={files => handleFiles(files, 'homepage_background')}
+                        childRef={(e) => { backgroundRef.current = e }}
+                        accept='image/png, image/jpeg, image/jpg'
+                      >
+                        <DragAndDrop
+                          onDrop={dataTransfer => handleFiles(dataTransfer.files, 'homepage_background')}
+                          accept='image/png, image/jpeg, image/jpg'
+                          disabled={orderingTheme.loading}
+                        >
+                          {themeValues?.images?.components?.homepage_background?.components?.image && <img src={themeValues?.images?.components?.homepage_background?.components?.image} alt='backgrond image' loading='lazy' />}
+                          <UploadImageIconContainer bgimage={!!themeValues?.images?.components?.homepage_background?.components?.image}>
+                            <UploadImageIcon>
+                              <DumyPhoto />
+                              <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                            </UploadImageIcon>
+                          </UploadImageIconContainer>
+                        </DragAndDrop>
+                      </ExamineClick>
+                    </BackgroundImage>
+                    <ImgInfoWrapper>
+                      <h4>{t('HOMEPAGE_BACKGROUND', 'Homepage background')}</h4>
+                      <p>1920 x 1280 px</p>
+                      <p>{t('FORMAT', 'Format')}: PNG</p>
+                    </ImgInfoWrapper>
+                  </ImageFormGroup>
+                )}
+                {orderingTheme?.loading ? (
+                  <>
+                    <Skeleton height={100} style={{ marginBottom: '15px', width: '100%' }} />
+                    <Skeleton height={15} count={3} width={150} style={{ display: 'block', marginBottom: '7px' }} />
+                  </>
+                ) : (
+                  <ImageFormGroup>
+                    <BackgroundImage
+                      onClick={() => handleClickImage('homepage_mobile_background')}
+                    >
+                      <ExamineClick
+                        onFiles={files => handleFiles(files, 'homepage_mobile_background')}
+                        childRef={(e) => { mobileBackgroundRef.current = e }}
+                        accept='image/png, image/jpeg, image/jpg'
+                      >
+                        <DragAndDrop
+                          onDrop={dataTransfer => handleFiles(dataTransfer.files, 'homepage_mobile_background')}
+                          accept='image/png, image/jpeg, image/jpg'
+                          disabled={orderingTheme.loading}
+                        >
+                          {themeValues?.images?.components?.homepage_mobile_background?.components?.image && <img src={themeValues?.images?.components?.homepage_mobile_background?.components?.image} alt='backgrond image' loading='lazy' />}
+                          <UploadImageIconContainer bgimage={!!themeValues?.images?.components?.homepage_mobile_background?.components?.image}>
+                            <UploadImageIcon>
+                              <DumyPhoto />
+                              <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
+                            </UploadImageIcon>
+                          </UploadImageIconContainer>
+                        </DragAndDrop>
+                      </ExamineClick>
+                    </BackgroundImage>
+                    <ImgInfoWrapper>
+                      <h4>{t('HOMEPAGE_MOBILE_BACKGROUND', 'Homepage mobile background')}</h4>
+                      <p>1440 x 770 px</p>
+                      <p>{t('FORMAT', 'Format')}: PNG</p>
+                    </ImgInfoWrapper>
+                  </ImageFormGroup>
+                )}
+                {orderingTheme?.loading ? (
+                  <Skeleton width={200} height={20} />
+                ) : (
+                  <CheckBoxWrapper
+                    onClick={() => handleChangeValue(!themeValues?.images?.components?.homepage_image_fullscreen, 'images', 'homepage_image_fullscreen')}
+                  >
+                    {themeValues?.images?.components?.homepage_image_fullscreen ? (
+                      <CheckedIcon className='active' />
+                    ) : (
+                      <UnCheckedIcon />
+                    )}
+                    <span>{t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage  image fullscreen')}</span>
+                  </CheckBoxWrapper>
+                )}
+              </InnerBlock>
+            </InputFormWrapper>
+            {!orderingTheme?.loading && (
+              <InputFormWrapper>
+                <h4>{t('THEME_SETTINGS', 'Theme Settings')}</h4>
+                <InnerBlock>
+                  <ColorPickerWrapper>
+                    <div>
+                      <p>{t('PRIMARY_COLOR_BUTTONS', 'Primary Color for Buttons')}</p>
+                      <ColorPicker
+                        defaultColor={themeValues?.theme_settings?.components?.style?.primary_btn_color}
+                        onChangeColor={(color) => handleChangeValue(color, 'theme_settings', 'style.primary_btn_color')}
+                      />
+                    </div>
+                  </ColorPickerWrapper>
+                  <ContentWrapper>
+                    <div>
+                      <p>{t('HOMEPAGE_CONTENT', 'Homepage Content')}</p>
+                      <Button
+                        color='primary'
+                        borderRadius='8px'
+                        outline
+                        onClick={() => setHomePageContent(true)}
+                      >
+                        {t('HOMEPAGE_CONTENT', 'Homepage content')}
+                      </Button>
+                    </div>
+                    <div>
+                      <p>{t('FOOTER_CONTENT', 'Footer Content')}</p>
+                      <Button
+                        color='primary'
+                        borderRadius='8px'
+                        outline
+                        onClick={() => setFooterContent(true)}
+                      >
+                        {t('FOOTER_CONTENT', 'Footer content')}
+                      </Button>
+                    </div>
+                  </ContentWrapper>
+                </InnerBlock>
+              </InputFormWrapper>
+            )}
 
-          <Button
-            color='primary'
-            borderRadius='8px'
-            onClick={() => handleUpdateSiteTheme()}
-            disabled={orderingTheme?.loading}
-          >
-            {t('SAVE', 'Save')}
-          </Button>
-        </FormWrapper>
+            <Button
+              color='primary'
+              borderRadius='8px'
+              onClick={() => handleUpdateSiteTheme()}
+              disabled={orderingTheme?.loading}
+            >
+              {t('SAVE', 'Save')}
+            </Button>
+          </FormWrapper>
+        )}
+        {selectedSetting === 'advanced' && !orderingTheme?.loading && (
+          <AdvancedSettings
+            themesList={themesList}
+            advancedValues={advancedValues}
+            setAdvancedValues={setAdvancedValues}
+            handleUpdateSiteTheme={handleUpdateSiteTheme}
+          />
+        )}
       </Container>
       <Alert
         title={t('ORDERING', 'Ordering')}
