@@ -41,7 +41,10 @@ var Select = function Select(props) {
     searchBarIsCustomLayout = props.searchBarIsCustomLayout,
     searchBarPlaceholder = props.searchBarPlaceholder,
     searchBarIsNotLazyLoad = props.searchBarIsNotLazyLoad,
-    className = props.className;
+    className = props.className,
+    isShowCustomOption = props.isShowCustomOption,
+    customOptionTitle = props.customOptionTitle,
+    handleCustomOptionClick = props.handleCustomOptionClick;
   var defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
     return option.value === defaultValue;
   });
@@ -149,7 +152,9 @@ var Select = function Select(props) {
     onClick: function onClick(e) {
       return handleClickHeader(e);
     }
-  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null)))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }, !selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null))), selectedOption && /*#__PURE__*/_react.default.createElement(_Selects.Selected, null, /*#__PURE__*/_react.default.createElement(_Selects.Header, {
+    className: "header"
+  }, selectedOption.showOnSelected || selectedOption.content), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, isSecondIcon ? /*#__PURE__*/_react.default.createElement(_FiChevronDown.default, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null)))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     className: "list",
     ref: popperElement,
     style: popStyle
@@ -177,8 +182,14 @@ var Select = function Select(props) {
       optionBottomBorder: props.optionBottomBorder,
       disabled: option.disabled,
       showDisable: option === null || option === void 0 ? void 0 : option.showDisable,
-      className: option.disabled ? 'disabled' : null
+      className: option.disabled ? 'option disabled' : 'option'
     }, option.content);
-  })))));
+  })), isShowCustomOption && /*#__PURE__*/_react.default.createElement(_Selects.Option, {
+    className: "option custom-option",
+    onClick: function onClick() {
+      handleCustomOptionClick();
+      setOpen(false);
+    }
+  }, customOptionTitle))));
 };
 exports.Select = Select;
