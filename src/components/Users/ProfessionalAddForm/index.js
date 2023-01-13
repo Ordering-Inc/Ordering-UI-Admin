@@ -185,6 +185,28 @@ const ProfessionalAddFormUI = (props) => {
     })
   }, [formMethods])
 
+  useEffect(() => {
+    const schedule = []
+    for (var i = 0; i < 7; i++) {
+      schedule.push({
+        enabled: true,
+        lapses: [
+          {
+            open: {
+              hour: 0,
+              minute: 0
+            },
+            close: {
+              hour: 23,
+              minute: 59
+            }
+          }
+        ]
+      })
+    }
+    handleChangeInput({ target: { name: 'schedule', value: schedule } })
+  }, [])
+
   return (
     <FormContainer>
       <FormInput
