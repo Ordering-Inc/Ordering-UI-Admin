@@ -4,9 +4,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WebsiteWrapper = exports.WebsiteButtonWrapper = exports.UploadImageIconContainer = exports.UploadImageIcon = exports.TemporalDomail = exports.MoreSettingsHeader = exports.LogoImage = exports.InputFormWrapper = exports.InnerBlock = exports.InfoWrapper = exports.ImgInfoWrapper = exports.ImageFormGroup = exports.HeaderTitleContainer = exports.FormWrapper = exports.FormGroup = exports.ContentWrapper = exports.Container = exports.ColorPickerWrapper = exports.CheckBoxWrapper = exports.BackgroundImage = void 0;
+exports.WebsiteWrapper = exports.WebsiteButtonWrapper = exports.UploadImageIconContainer = exports.UploadImageIcon = exports.TemporalDomail = exports.Tabs = exports.TabWrapper = exports.Tab = exports.MoreSettingsHeader = exports.LogoImage = exports.InputFormWrapper = exports.InnerBlock = exports.InfoWrapper = exports.ImgInfoWrapper = exports.ImageFormGroup = exports.HeaderTitleContainer = exports.FormWrapper = exports.FormGroup = exports.ContentWrapper = exports.Container = exports.ColorPickerWrapper = exports.CheckBoxWrapper = exports.BackgroundImage = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -27,7 +27,7 @@ var InfoWrapper = _styledComponents.default.div(_templateObject7 || (_templateOb
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-left: 40px;\n      margin-right: 0px;\n    "])));
 });
 exports.InfoWrapper = InfoWrapper;
-var MoreSettingsHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-top: 70px;\n  margin-bottom: 35px;\n  h2 {\n    font-weight: 700;\n    font-size: 24px;\n    line-height: 36px;\n    margin-top: 0px;\n    margin-bottom: 8px;\n    text-align: center;\n    span {\n      color: ", ";\n    }\n  }\n  p {\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 24px;\n    text-align: center;\n  }\n"])), function (props) {
+var MoreSettingsHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  margin-top: 70px;\n  margin-bottom: 35px;\n  h2 {\n    font-weight: 700;\n    font-size: 24px;\n    line-height: 36px;\n    margin-top: 0px;\n    margin-bottom: 8px;\n    text-align: center;\n    span {\n      color: ", ";\n    }\n  }\n  p {\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 24px;\n    text-align: center;\n    margin-bottom: 34px;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.MoreSettingsHeader = MoreSettingsHeader;
@@ -83,5 +83,22 @@ var ColorPickerWrapper = _styledComponents.default.div(_templateObject26 || (_te
 exports.ColorPickerWrapper = ColorPickerWrapper;
 var ContentWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  padding-top: 25px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  > div {\n    margin-top: 25px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    > p {\n      font-weight: 600;\n      font-size: 16px;\n      line-height: 24px;\n      margin-top: 0px;\n      margin-bottom: 20px;\n    }\n    button {\n      width: 200px;\n      height: 44px;\n    }\n  }\n  @media (min-width: 769px) {\n    flex-direction: row;\n  }\n"])));
 exports.ContentWrapper = ContentWrapper;
-var WebsiteButtonWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n  margin-bottom: 20px;\n  button {\n    height: 44px;\n  }\n"])));
+var WebsiteButtonWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  margin-top: 20px;\n  button {\n    height: 44px;\n  }\n"])));
 exports.WebsiteButtonWrapper = WebsiteButtonWrapper;
+var TabWrapper = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n"])));
+exports.TabWrapper = TabWrapper;
+var Tabs = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  border-bottom: 1px solid ", ";\n"])), function (props) {
+  return props.theme.colors.borderColor;
+});
+exports.Tabs = Tabs;
+var Tab = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-weight: 400;\n  font-size: 12px;\n  line-height: 18px;\n  color: ", ";\n  padding-bottom: 14px;\n  transition: all 0.2s ease-out;\n  :not(:last-child) {\n    margin-right: 32px;\n  }\n  ", "\n"])), function (props) {
+  return props.theme.colors.lightGray;
+}, function (_ref3) {
+  var active = _ref3.active;
+  return active && (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    font-weight: 600;\n    font-size: 14px;\n    line-height: 21px;\n    padding-bottom: 13px;\n    color: ", ";\n    border-bottom: 1px solid ", ";\n  "])), function (props) {
+    return props.theme.colors.headingColor;
+  }, function (props) {
+    return props.theme.colors.headingColor;
+  });
+});
+exports.Tab = Tab;
