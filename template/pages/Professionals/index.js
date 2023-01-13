@@ -8,7 +8,6 @@ export const Professionals = (props) => {
   const [events] = useEvent()
   const professionalProps = {
     ...props,
-    isProfessional: true,
     headerTitle: t('PROFESSIONALS', 'Professionals'),
     defaultUserTypesSelected: [8],
     propsToFetch: [
