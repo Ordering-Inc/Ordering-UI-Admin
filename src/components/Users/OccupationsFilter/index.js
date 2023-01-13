@@ -1,6 +1,7 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
+import { DragScroll } from '../../Shared'
 import { Button } from '../../../styles'
 import {
   Container,
@@ -18,33 +19,35 @@ export const OccupationsFilter = (props) => {
 
   return (
     <Container>
-      {occupationsState.loading ? (
-        [...Array(3).keys()].map(i =>
-          <SkeletonWrapper key={i}>
-            <Skeleton />
-          </SkeletonWrapper>
-        )
-      ) : (
-        occupationsState.occupations.length > 0 && (
-          <>
-            <Button
-              color={selectedOccupation ? 'secundaryDark' : 'primary'}
-              onClick={() => handleSelectOccupation(null)}
-            >
-              {t('ALL', 'All')}
-            </Button>
-            {occupationsState.occupations.map(occupation => (
+      <DragScroll>
+        {occupationsState.loading ? (
+          [...Array(3).keys()].map(i =>
+            <SkeletonWrapper key={i}>
+              <Skeleton />
+            </SkeletonWrapper>
+          )
+        ) : (
+          occupationsState.occupations.length > 0 && (
+            <>
               <Button
-                key={occupation.id}
-                color={selectedOccupation === occupation.id ? 'primary' : 'secundaryDark'}
-                onClick={() => handleSelectOccupation(occupation.id)}
+                color={selectedOccupation ? 'secundaryDark' : 'primary'}
+                onClick={() => handleSelectOccupation(null)}
               >
-                {occupation.name}
+                {t('ALL', 'All')}
               </Button>
-            ))}
-          </>
-        )
-      )}
+              {occupationsState.occupations.map(occupation => (
+                <Button
+                  key={occupation.id}
+                  color={selectedOccupation === occupation.id ? 'primary' : 'secundaryDark'}
+                  onClick={() => handleSelectOccupation(occupation.id)}
+                >
+                  {occupation.name}
+                </Button>
+              ))}
+            </>
+          )
+        )}
+      </DragScroll>
     </Container>
   )
 }
