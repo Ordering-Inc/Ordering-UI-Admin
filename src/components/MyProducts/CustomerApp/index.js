@@ -1,11 +1,36 @@
-import React from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import React, { useState } from 'react'
 import { useTheme } from 'styled-components'
+import { useLanguage, OrderingWebsite } from 'ordering-components-admin'
+import { AdvancedSettings } from '../AdvancedSettings'
+import { BoxLayout } from '../AdvancedSettings/styles'
+import { AppResources } from '../AppResources'
+import Skeleton from 'react-loading-skeleton'
 import { AppLayout } from '../AppLayout'
+import {
+  SettingsContainer,
+  TabWrapper,
+  Tabs,
+  Tab
+} from './styles'
 
-export const CustomerApp = () => {
+const CustomerAppUI = (props) => {
+  const {
+    themesList,
+    orderingTheme,
+    advancedValues,
+    setAdvancedValues,
+    handleUpdateSiteTheme
+  } = props
+
   const [, t] = useLanguage()
   const theme = useTheme()
+
+  const [selectedSetting, setSelectedSetting] = useState('advanced')
+
+  const settingsList = [
+    { key: 'advanced', name: t('ADVANCED_SETTINGS', 'Advanced Settings') },
+    { key: 'app_resources', name: t('APP_RESOURCES', 'App Resources') }
+  ]
 
   const appInfo = {
     title: t('CUSTOMER_APP', 'Customer App'),
@@ -27,6 +52,62 @@ export const CustomerApp = () => {
   }
 
   return (
-    <AppLayout appInfo={appInfo} />
+    <>
+      <AppLayout appInfo={appInfo}>
+        <SettingsContainer>
+          <h2>{t('MORE_SETTINGS_FOR_YOUR', 'More settings for your')} <span>{t('CUSTOMER_APP', 'Customer App')}</span></h2>
+          <p>{t('CUSTOMER_APP_SETTING_DESC', 'Change background, colors, fonts, style, branding and all the essentials of your brand.')}</p>
+          <TabWrapper>
+            <Tabs>
+              {settingsList.map(setting => (
+                <Tab
+                  key={setting.key}
+                  active={selectedSetting === setting.key}
+                  onClick={() => !orderingTheme?.loading && setSelectedSetting(setting.key)}
+                >
+                  {setting.name}
+                </Tab>
+              ))}
+            </Tabs>
+          </TabWrapper>
+          {orderingTheme?.loading && (
+            <BoxLayout>
+              <h2>
+                <Skeleton height={25} width={200} />
+              </h2>
+              <h2>
+                <Skeleton height={25} width={150} />
+              </h2>
+              <Skeleton width={160} height={160} />
+            </BoxLayout>
+          )}
+          {selectedSetting === 'advanced' && !orderingTheme?.loading && (
+            <AdvancedSettings
+              isApp
+              themesList={themesList}
+              advancedValues={advancedValues}
+              setAdvancedValues={setAdvancedValues}
+              handleUpdateSiteTheme={handleUpdateSiteTheme}
+            />
+          )}
+          {selectedSetting === 'app_resources' && !orderingTheme?.loading && (
+            <AppResources
+              advancedValues={advancedValues}
+              setAdvancedValues={setAdvancedValues}
+              handleUpdateSiteTheme={handleUpdateSiteTheme}
+            />
+          )}
+        </SettingsContainer>
+      </AppLayout>
+    </>
   )
+}
+
+export const CustomerApp = (props) => {
+  const customerAppProps = {
+    ...props,
+    appId: 'react-native-app',
+    UIComponent: CustomerAppUI
+  }
+  return <OrderingWebsite {...customerAppProps} />
 }
