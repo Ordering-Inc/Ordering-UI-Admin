@@ -122,6 +122,7 @@ export const MoreSettingsHeader = styled.div`
     font-size: 16px;
     line-height: 24px;
     text-align: center;
+    margin-bottom: 34px;
   }
 `
 
@@ -345,9 +346,39 @@ export const ContentWrapper = styled.div`
 
 export const WebsiteButtonWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  margin-top: 20px;
   button {
     height: 44px;
   }
+`
+
+export const TabWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+export const Tabs = styled.div`
+  display: flex;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+`
+
+export const Tab = styled.div`
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${props => props.theme.colors.lightGray};
+  padding-bottom: 14px;
+  transition: all 0.2s ease-out;
+  :not(:last-child) {
+    margin-right: 32px;
+  }
+  ${({ active }) => active && css`
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    padding-bottom: 13px;
+    color: ${props => props.theme.colors.headingColor};
+    border-bottom: 1px solid ${props => props.theme.colors.headingColor};
+  `}
 `
