@@ -193,6 +193,7 @@ const ProfessionalListingUI = (props) => {
 export const ProfessionalListing = (props) => {
   const usersListingProps = {
     ...props,
+    isProfessional: true,
     UIComponent: ProfessionalListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,

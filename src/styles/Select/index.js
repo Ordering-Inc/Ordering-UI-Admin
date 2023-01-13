@@ -35,7 +35,10 @@ export const Select = (props) => {
     searchBarIsCustomLayout,
     searchBarPlaceholder,
     searchBarIsNotLazyLoad,
-    className
+    className,
+    isShowCustomOption,
+    customOptionTitle,
+    handleCustomOptionClick
   } = props
   const defaultOption = options?.find(
     (option) => option.value === defaultValue
@@ -142,7 +145,7 @@ export const Select = (props) => {
         )}
         {selectedOption && (
           <Selected>
-            <Header>
+            <Header className='header'>
               {selectedOption.showOnSelected || selectedOption.content}
             </Header>
             <Chevron>
@@ -179,12 +182,24 @@ export const Select = (props) => {
                 optionBottomBorder={props.optionBottomBorder}
                 disabled={option.disabled}
                 showDisable={option?.showDisable}
-                className={option.disabled ? 'disabled' : null}
+                className={option.disabled ? 'option disabled' : 'option'}
               >
                 {option.content}
               </Option>
             ))}
           </OptionsInner>
+
+          {isShowCustomOption && (
+            <Option
+              className='option custom-option'
+              onClick={() => {
+                handleCustomOptionClick()
+                setOpen(false)
+              }}
+            >
+              {customOptionTitle}
+            </Option>
+          )}
         </Options>
       </PopoverBody>
     </div>
