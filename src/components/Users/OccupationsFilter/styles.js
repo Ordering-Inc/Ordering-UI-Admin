@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
 
-  > button {
+  button {
     ${props => props.theme?.rtl ? css`
       margin-left: 10px;
     ` : css`

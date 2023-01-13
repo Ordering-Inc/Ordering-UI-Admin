@@ -1,6 +1,7 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
+import { DragScroll } from '../../Shared'
 import { Button } from '../../../styles'
 import {
   Container,
@@ -26,7 +27,7 @@ export const OccupationsFilter = (props) => {
         )
       ) : (
         occupationsState.occupations.length > 0 && (
-          <>
+          <DragScroll>
             <Button
               color={selectedOccupation ? 'secundaryDark' : 'primary'}
               onClick={() => handleSelectOccupation(null)}
@@ -42,7 +43,7 @@ export const OccupationsFilter = (props) => {
                 {occupation.name}
               </Button>
             ))}
-          </>
+          </DragScroll>
         )
       )}
     </Container>
