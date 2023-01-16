@@ -108,6 +108,9 @@ var OrdersTable = function OrdersTable(props) {
     value: 'timer',
     content: t('SLA_TIMER', 'SLA’s timer')
   }, {
+    value: 'eta',
+    content: t('ETA', 'ETA')
+  }, {
     value: 'total',
     content: t('EXPORT_TOTAL', 'Total')
   }];
@@ -704,6 +707,16 @@ var OrdersTable = function OrdersTable(props) {
         }, t('TIMER', 'Timer')), /*#__PURE__*/_react.default.createElement("p", {
           className: getStatusClassName(getDelayMinutes(order))
         }, displayDelayedTime(order))));
+      }
+      if (column === 'eta') {
+        return /*#__PURE__*/_react.default.createElement("td", {
+          className: "eta",
+          key: "eta".concat(i, "-").concat(index)
+        }, /*#__PURE__*/_react.default.createElement("div", {
+          className: "info"
+        }, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, order === null || order === void 0 ? void 0 : order.eta_time, " min")));
       }
       if (column === 'total') {
         var _allowColumns$total2, _order$summary;

@@ -9,6 +9,8 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _BusinessDeliveryDetails = require("../BusinessDeliveryDetails");
 var _BusinessPickupDetails = require("../BusinessPickupDetails");
+var _BusinessEta = require("../BusinessEta");
+var _Shared = require("../../Shared");
 var _styles = require("./styles");
 var _BusinessDeliveryGroupsDetails = require("../BusinessDeliveryGroupsDetails");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -37,11 +39,14 @@ var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
   }, {
     key: 'driver_delivery_group',
     content: t('DRIVER_DELIVERY_GROUP', 'Driver Delivery Group')
+  }, {
+    key: 'advanced_eta',
+    content: t('ADVANCED_ETA', 'Advanced ETA')
   }];
   (0, _react.useEffect)(function () {
     setIsExtendExtraOpen(false);
   }, [selectedTab]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_PICKUP_MORE', 'Delivery, pickup & more')), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, tabs.map(function (tab) {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_PICKUP_MORE', 'Delivery, pickup & more')), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, tabs.map(function (tab) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: tab.key,
       active: tab.key === selectedTab,
@@ -49,6 +54,6 @@ var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
         return setSelectedTab(tab.key);
       }
     }, tab.content);
-  })), selectedTab === 'delivery' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryDetails.BusinessDeliveryDetails, props), selectedTab === 'pickup' && /*#__PURE__*/_react.default.createElement(_BusinessPickupDetails.BusinessPickupDetails, props), selectedTab === 'driver_delivery_group' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryGroupsDetails.DriversGroupsListingDetails, props));
+  }))), selectedTab === 'delivery' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryDetails.BusinessDeliveryDetails, props), selectedTab === 'pickup' && /*#__PURE__*/_react.default.createElement(_BusinessPickupDetails.BusinessPickupDetails, props), selectedTab === 'driver_delivery_group' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryGroupsDetails.DriversGroupsListingDetails, props), selectedTab === 'advanced_eta' && /*#__PURE__*/_react.default.createElement(_BusinessEta.BusinessEta, props));
 };
 exports.BusinessDeliveryPickupMore = BusinessDeliveryPickupMore;
