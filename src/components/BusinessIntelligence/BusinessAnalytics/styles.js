@@ -90,11 +90,6 @@ export const BusinessFilterWrapper = styled.div`
 
 export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
   position: relative;
-  margin-left: 25px;
-  ${props => props.theme.rtl && css`
-    margin-right: 25px;
-    margin-left: 0;
-  `}
 
   > button {
     svg {
@@ -104,6 +99,12 @@ export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
         margin-left: 12px;
         margin-right: 0;
       `}
+    }
+  }
+
+  @media only screen and (min-width: 374px) and (max-width: 450px) {
+    .ordering-calendar {
+      right: calc((100vw - 374px) / 2);
     }
   }
 `

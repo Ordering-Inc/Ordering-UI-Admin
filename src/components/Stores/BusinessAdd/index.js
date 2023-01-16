@@ -52,6 +52,13 @@ const BusinessAddUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleSubmit = () => {
+    if (paymethodIds?.length === 0) {
+      setAlertState({
+        open: true,
+        content: t('AT_LEAST_A_PAYMENT_METHOD_REQUIRED', 'At least a payment method is required')
+      })
+      return
+    }
     handleAddBusiness()
   }
 

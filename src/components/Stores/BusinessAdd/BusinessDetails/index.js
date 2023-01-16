@@ -97,10 +97,10 @@ export const BusinessDetails = (props) => {
           )}
         </GoogleMapContainer>
         <FormControl noBottom>
-          <label>{t('INT_NUMBER', 'Int. number')}</label>
+          <label>{t('PHONE_NUMBER', 'Phone number')}</label>
           <Input
             name='cellphone'
-            placeholder={t('INT_NUMBER', 'Int. number')}
+            placeholder={t('PHONE_NUMBER', 'Phone number')}
             value={formState?.changes?.cellphone ?? ''}
             onChange={handleChangeInput}
           />

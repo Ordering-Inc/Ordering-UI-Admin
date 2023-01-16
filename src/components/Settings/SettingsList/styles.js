@@ -61,6 +61,7 @@ export const FormGroupCheck = styled.div`
     display: flex;
     align-items: center;
     color: ${props => props.theme.colors.headingColor};
+    text-transform: capitalize;
   }
 `
 
@@ -87,7 +88,7 @@ export const CheckBoxWrapper = styled.div`
 
   > label {
     font-weight: 600;
-    margin: 20px 0 0;
+    margin: 0px;
     font-size: 14px;
     color: ${props => props.theme.colors.headingColor};
   }
@@ -114,6 +115,6 @@ export const SubmitBtnWrapper = styled.div`
 
 export const Description = styled.p`
   font-size: 14px;
-  margin-top: 0px;
+  margin-top: ${({ typeSix }) => typeSix ? '20px' : '0px'};
   margin-bottom: 5px;
 `

@@ -70,7 +70,9 @@ const BusinessProductsListingUI = (props) => {
     setTaxes,
     fees,
     setFees,
-    getBusiness
+    getBusiness,
+    businessTypes,
+    setBusinessTypes
   } = props
 
   const [, t] = useLanguage()
@@ -461,6 +463,8 @@ const BusinessProductsListingUI = (props) => {
           handleSucessRemoveBusiness={() => handleStoresRedirect()}
           // handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           onClose={() => setOpenSidebar(null)}
+          businessTypes={businessTypes}
+          setBusinessTypes={setBusinessTypes}
         />
       )}
       {openSidebar === 'add_business' && (
@@ -485,7 +489,7 @@ const BusinessProductsListingUI = (props) => {
         />
       </Modal>
       <Modal
-        width={width > 1440 ? '40%' : '60%'}
+        width='769px'
         padding='25px'
         open={showPopup}
         onClose={() => setShowPopup(false)}
