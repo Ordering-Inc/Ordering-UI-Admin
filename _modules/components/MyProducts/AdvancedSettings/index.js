@@ -24,11 +24,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AdvancedSettings = function AdvancedSettings(props) {
-  var _advancedValues$gener5, _advancedValues$gener6, _advancedValues$gener7, _advancedValues$gener8, _advancedValues$gener9, _advancedValues$gener10, _advancedValues$gener11, _advancedValues$gener12, _advancedValues$gener13, _advancedValues$gener14, _advancedValues$gener15, _advancedValues$gener16, _advancedValues$gener17, _advancedValues$gener18, _advancedValues$gener19, _advancedValues$gener20, _advancedValues$gener21, _advancedValues$gener22, _advancedValues$gener23, _advancedValues$gener24, _advancedValues$gener25, _advancedValues$gener26, _advancedValues$gener27, _advancedValues$gener28, _advancedValues$gener29, _advancedValues$gener30, _advancedValues$gener31, _advancedValues$gener32, _advancedValues$gener33, _advancedValues$gener34, _advancedValues$gener35, _advancedValues$gener36, _advancedValues$gener37, _advancedValues$gener38, _advancedValues$gener39, _advancedValues$busin, _advancedValues$busin2, _advancedValues$busin3, _advancedValues$busin4, _advancedValues$busin5, _advancedValues$busin6, _advancedValues$busin7, _advancedValues$busin8, _advancedValues$busin9, _advancedValues$my_pr5, _advancedValues$my_pr6, _advancedValues$my_pr7, _advancedValues$my_pr8, _advancedValues$busin10, _advancedValues$busin11, _advancedValues$busin12, _advancedValues$busin13, _advancedValues$busin14, _advancedValues$busin15, _advancedValues$gener40, _advancedValues$gener41, _advancedValues$busin17, _advancedValues$order, _advancedValues$order2, _advancedValues$order3, _advancedValues$order4, _advancedValues$order5, _advancedValues$order6, _advancedValues$order7, _advancedValues$order8, _advancedValues$order9, _advancedValues$order10, _advancedValues$order11, _advancedValues$order12, _advancedValues$order13, _advancedValues$order14, _advancedValues$order15, _advancedValues$order16, _advancedValues$order17;
+  var _advancedValues$gener5, _advancedValues$gener6, _advancedValues$gener7, _advancedValues$gener8, _advancedValues$my_pr, _advancedValues$my_pr2, _advancedValues$my_pr3, _advancedValues$my_pr4, _advancedValues$my_pr5, _advancedValues$my_pr6, _advancedValues$gener9, _advancedValues$gener10, _advancedValues$gener11, _advancedValues$gener12, _advancedValues$gener13, _advancedValues$gener14, _advancedValues$gener15, _advancedValues$gener16, _advancedValues$gener17, _advancedValues$gener18, _advancedValues$gener19, _advancedValues$gener20, _advancedValues$gener21, _advancedValues$gener22, _advancedValues$gener23, _advancedValues$gener24, _advancedValues$gener25, _advancedValues$gener26, _advancedValues$gener27, _advancedValues$gener28, _advancedValues$gener29, _advancedValues$gener30, _advancedValues$gener31, _advancedValues$gener32, _advancedValues$gener33, _advancedValues$gener34, _advancedValues$gener35, _advancedValues$gener36, _advancedValues$gener37, _advancedValues$gener38, _advancedValues$gener39, _advancedValues$busin, _advancedValues$busin2, _advancedValues$busin3, _advancedValues$busin4, _advancedValues$busin5, _advancedValues$busin6, _advancedValues$busin7, _advancedValues$busin8, _advancedValues$busin9, _advancedValues$my_pr11, _advancedValues$my_pr12, _advancedValues$my_pr13, _advancedValues$my_pr14, _advancedValues$busin10, _advancedValues$busin11, _advancedValues$busin12, _advancedValues$busin13, _advancedValues$busin14, _advancedValues$busin15, _advancedValues$gener40, _advancedValues$gener41, _advancedValues$gener42, _advancedValues$gener43, _advancedValues$busin17, _advancedValues$order, _advancedValues$order2, _advancedValues$order3, _advancedValues$order4, _advancedValues$order5, _advancedValues$order6, _advancedValues$order7, _advancedValues$order8, _advancedValues$order9, _advancedValues$order10, _advancedValues$order11, _advancedValues$order12, _advancedValues$order13, _advancedValues$order14, _advancedValues$order15, _advancedValues$order16, _advancedValues$order17;
   var themesList = props.themesList,
     advancedValues = props.advancedValues,
     setAdvancedValues = props.setAdvancedValues,
-    handleUpdateSiteTheme = props.handleUpdateSiteTheme;
+    handleUpdateSiteTheme = props.handleUpdateSiteTheme,
+    isApp = props.isApp;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -372,6 +373,27 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'input',
     path: 'third_party_code.body'
   }];
+  var navigationBarList = [{
+    name: t('BROWSE', 'Browse'),
+    type: 'hidden',
+    path: 'bar_menu.components.browse.hidden'
+  }, {
+    name: t('ORDERS', 'Orders'),
+    type: 'hidden',
+    path: 'bar_menu.components.orders.hidden'
+  }, {
+    name: t('MY_CARTS', 'My carts'),
+    type: 'hidden',
+    path: 'bar_menu.components.my_carts.hidden'
+  }, {
+    name: t('WALLET', 'Wallet'),
+    type: 'hidden',
+    path: 'bar_menu.components.wallet.hidden'
+  }, {
+    name: t('PROFILE', 'Profile'),
+    type: 'hidden',
+    path: 'bar_menu.components.profile.hidden'
+  }];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -403,7 +425,13 @@ var AdvancedSettings = function AdvancedSettings(props) {
     if (!(buttonShadow !== null && buttonShadow !== void 0 && buttonShadow.x) || !(buttonShadow !== null && buttonShadow !== void 0 && buttonShadow.y) || !(buttonShadow !== null && buttonShadow !== void 0 && buttonShadow.blur) || !(buttonShadow !== null && buttonShadow !== void 0 && buttonShadow.spread)) return '';
     return "".concat(buttonShadow === null || buttonShadow === void 0 ? void 0 : buttonShadow.x, "px ").concat(buttonShadow === null || buttonShadow === void 0 ? void 0 : buttonShadow.y, "px ").concat(buttonShadow === null || buttonShadow === void 0 ? void 0 : buttonShadow.blur, "px ").concat(buttonShadow === null || buttonShadow === void 0 ? void 0 : buttonShadow.spread, "px ").concat(buttonShadow === null || buttonShadow === void 0 ? void 0 : buttonShadow.color);
   }, [advancedValues === null || advancedValues === void 0 ? void 0 : (_advancedValues$gener5 = advancedValues.general) === null || _advancedValues$gener5 === void 0 ? void 0 : (_advancedValues$gener6 = _advancedValues$gener5.components) === null || _advancedValues$gener6 === void 0 ? void 0 : (_advancedValues$gener7 = _advancedValues$gener6.buttons) === null || _advancedValues$gener7 === void 0 ? void 0 : (_advancedValues$gener8 = _advancedValues$gener7.shadow) === null || _advancedValues$gener8 === void 0 ? void 0 : _advancedValues$gener8.components]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WEBSITE_ADVANCED_SETTINGS', 'Website  Advanced Settings')), /*#__PURE__*/_react.default.createElement(_styles2.HomePageWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('HOMEPAGE', 'Homepage')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, isApp ? /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_APP_ADVANCED_SETTINGS', 'Customer App  Advanced Settings')), /*#__PURE__*/_react.default.createElement("h2", null, t('HOMEPAGE', 'Homepage')), /*#__PURE__*/_react.default.createElement(_ImageBox.ImageBox, {
+    title: t('HOMEPAGE_IMAGE', 'Homepage image'),
+    ratio: "1350 x 400 px",
+    photo: advancedValues === null || advancedValues === void 0 ? void 0 : (_advancedValues$my_pr = advancedValues.my_products) === null || _advancedValues$my_pr === void 0 ? void 0 : (_advancedValues$my_pr2 = _advancedValues$my_pr.components) === null || _advancedValues$my_pr2 === void 0 ? void 0 : (_advancedValues$my_pr3 = _advancedValues$my_pr2.images) === null || _advancedValues$my_pr3 === void 0 ? void 0 : (_advancedValues$my_pr4 = _advancedValues$my_pr3.components) === null || _advancedValues$my_pr4 === void 0 ? void 0 : (_advancedValues$my_pr5 = _advancedValues$my_pr4.homepage_background) === null || _advancedValues$my_pr5 === void 0 ? void 0 : (_advancedValues$my_pr6 = _advancedValues$my_pr5.components) === null || _advancedValues$my_pr6 === void 0 ? void 0 : _advancedValues$my_pr6.image,
+    path: "my_products.components.images.components.homepage_background.components.image",
+    handleChangePhoto: handleUpdateThemeValue
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WEBSITE_ADVANCED_SETTINGS', 'Website  Advanced Settings')), /*#__PURE__*/_react.default.createElement(_styles2.HomePageWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('HOMEPAGE', 'Homepage')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
     settingList: homepageViewList,
     handleUpdateThemeValue: handleUpdateThemeValue,
     advancedValues: advancedValues
@@ -485,10 +513,10 @@ var AdvancedSettings = function AdvancedSettings(props) {
     handleChangePhoto: handleUpdateThemeValue
   }), /*#__PURE__*/_react.default.createElement(_styles2.HomeImageFullScreenWrapper, {
     onClick: function onClick() {
-      var _advancedValues$my_pr, _advancedValues$my_pr2, _advancedValues$my_pr3, _advancedValues$my_pr4;
-      return handleUpdateThemeValue(!(advancedValues !== null && advancedValues !== void 0 && (_advancedValues$my_pr = advancedValues.my_products) !== null && _advancedValues$my_pr !== void 0 && (_advancedValues$my_pr2 = _advancedValues$my_pr.components) !== null && _advancedValues$my_pr2 !== void 0 && (_advancedValues$my_pr3 = _advancedValues$my_pr2.images) !== null && _advancedValues$my_pr3 !== void 0 && (_advancedValues$my_pr4 = _advancedValues$my_pr3.components) !== null && _advancedValues$my_pr4 !== void 0 && _advancedValues$my_pr4.homepage_image_fullscreen), 'my_products.components.images.components.homepage_image_fullscreen');
+      var _advancedValues$my_pr7, _advancedValues$my_pr8, _advancedValues$my_pr9, _advancedValues$my_pr10;
+      return handleUpdateThemeValue(!(advancedValues !== null && advancedValues !== void 0 && (_advancedValues$my_pr7 = advancedValues.my_products) !== null && _advancedValues$my_pr7 !== void 0 && (_advancedValues$my_pr8 = _advancedValues$my_pr7.components) !== null && _advancedValues$my_pr8 !== void 0 && (_advancedValues$my_pr9 = _advancedValues$my_pr8.images) !== null && _advancedValues$my_pr9 !== void 0 && (_advancedValues$my_pr10 = _advancedValues$my_pr9.components) !== null && _advancedValues$my_pr10 !== void 0 && _advancedValues$my_pr10.homepage_image_fullscreen), 'my_products.components.images.components.homepage_image_fullscreen');
     }
-  }, advancedValues !== null && advancedValues !== void 0 && (_advancedValues$my_pr5 = advancedValues.my_products) !== null && _advancedValues$my_pr5 !== void 0 && (_advancedValues$my_pr6 = _advancedValues$my_pr5.components) !== null && _advancedValues$my_pr6 !== void 0 && (_advancedValues$my_pr7 = _advancedValues$my_pr6.images) !== null && _advancedValues$my_pr7 !== void 0 && (_advancedValues$my_pr8 = _advancedValues$my_pr7.components) !== null && _advancedValues$my_pr8 !== void 0 && _advancedValues$my_pr8.homepage_image_fullscreen ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
+  }, advancedValues !== null && advancedValues !== void 0 && (_advancedValues$my_pr11 = advancedValues.my_products) !== null && _advancedValues$my_pr11 !== void 0 && (_advancedValues$my_pr12 = _advancedValues$my_pr11.components) !== null && _advancedValues$my_pr12 !== void 0 && (_advancedValues$my_pr13 = _advancedValues$my_pr12.images) !== null && _advancedValues$my_pr13 !== void 0 && (_advancedValues$my_pr14 = _advancedValues$my_pr13.components) !== null && _advancedValues$my_pr14 !== void 0 && _advancedValues$my_pr14.homepage_image_fullscreen ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
     className: "active"
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage image fullscreen'))), /*#__PURE__*/_react.default.createElement(_styles2.ImageGroup, null, /*#__PURE__*/_react.default.createElement(_ImageBox.ImageBox, {
     title: t('PRODUCT_DUMMY_IMAGE', 'Product dummy image'),
@@ -499,8 +527,8 @@ var AdvancedSettings = function AdvancedSettings(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('FAVICON', 'Favicon')), /*#__PURE__*/_react.default.createElement(_ImageBox.ImageBox, {
     title: t('FAVICON', 'Favicon'),
     ratio: "512 x 512 px",
-    photo: advancedValues === null || advancedValues === void 0 ? void 0 : (_advancedValues$gener40 = advancedValues.general) === null || _advancedValues$gener40 === void 0 ? void 0 : (_advancedValues$gener41 = _advancedValues$gener40.components) === null || _advancedValues$gener41 === void 0 ? void 0 : _advancedValues$gener41.favicon,
-    path: "general.components.favicon",
+    photo: advancedValues === null || advancedValues === void 0 ? void 0 : (_advancedValues$gener40 = advancedValues.general) === null || _advancedValues$gener40 === void 0 ? void 0 : (_advancedValues$gener41 = _advancedValues$gener40.components) === null || _advancedValues$gener41 === void 0 ? void 0 : (_advancedValues$gener42 = _advancedValues$gener41.favicon) === null || _advancedValues$gener42 === void 0 ? void 0 : (_advancedValues$gener43 = _advancedValues$gener42.components) === null || _advancedValues$gener43 === void 0 ? void 0 : _advancedValues$gener43.image,
+    path: "general.components.favicon.components.image",
     handleChangePhoto: handleUpdateThemeValue
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('HEADER', 'Header')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
     settingList: headerList,
@@ -575,7 +603,7 @@ var AdvancedSettings = function AdvancedSettings(props) {
     handleUpdateThemeValue: handleUpdateThemeValue,
     advancedValues: advancedValues,
     themeStructure: themeStructure
-  })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MENU_OPTIONS', 'Menu options')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
+  })), !isApp && /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MENU_OPTIONS', 'Menu options')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
     settingList: menuOptionList,
     handleUpdateThemeValue: handleUpdateThemeValue,
     advancedValues: advancedValues,
@@ -608,6 +636,11 @@ var AdvancedSettings = function AdvancedSettings(props) {
     handleUpdateThemeValue: handleUpdateThemeValue
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('THIRD_PARTY_CODE', 'Third-party code')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
     settingList: thirdPartyCodeList,
+    handleUpdateThemeValue: handleUpdateThemeValue,
+    advancedValues: advancedValues,
+    themeStructure: themeStructure
+  })), isApp && /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('NAVIGATION_BAR_MENU', 'Navigation bar menu')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
+    settingList: navigationBarList,
     handleUpdateThemeValue: handleUpdateThemeValue,
     advancedValues: advancedValues,
     themeStructure: themeStructure

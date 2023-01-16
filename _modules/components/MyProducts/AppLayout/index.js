@@ -19,7 +19,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AppLayout = function AppLayout(props) {
   var appInfo = props.appInfo,
-    isDriver = props.isDriver;
+    isDriver = props.isDriver,
+    children = props.children;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -78,6 +79,6 @@ var AppLayout = function AppLayout(props) {
     onClick: function onClick() {
       return showMessage(appInfo === null || appInfo === void 0 ? void 0 : appInfo.purchase_message);
     }
-  }, t('PURCHASE_NOW', 'Purchase Now')))))));
+  }, t('PURCHASE_NOW', 'Purchase Now'))))), children && children));
 };
 exports.AppLayout = AppLayout;
