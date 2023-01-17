@@ -77,5 +77,5 @@ var ReviewMarkerWrapper = _styledComponents.default.div(_templateObject13 || (_t
   return props.theme.colors.lightGray;
 });
 exports.ReviewMarkerWrapper = ReviewMarkerWrapper;
-var PagesBottomContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  margin-bottom: 10px;\n"])));
+var PagesBottomContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n"])));
 exports.PagesBottomContainer = PagesBottomContainer;

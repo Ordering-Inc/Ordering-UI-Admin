@@ -12,7 +12,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var ListContent = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: 100%;\n  border: none;\n  \n  @media (min-width: 768px) {\n    border-left: 1px solid #E9ECEF;\n  }\n"])));
 exports.ListContent = ListContent;
-var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 420px);\n  overflow: auto;\n\n  @media (min-width: 576px) {\n    ", "\n  }\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 350px);\n  }\n\n  @media (min-width: 993px) {\n    max-height: calc(100vh - 320px);\n  }\n"])), function (props) {
+var ProductListContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin: 0;\n  max-height: calc(100vh - 420px);\n  overflow: auto;\n\n  @media (min-width: 576px) {\n    ", "\n  }\n\n  @media (min-width: 768px) {\n    max-height: calc(100vh - 350px);\n  }\n\n  @media (min-width: 993px) {\n    max-height: calc(100vh - 360px);\n  }\n"])), function (props) {
   return props.theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n    "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n    "])));
 });
 exports.ProductListContainer = ProductListContainer;

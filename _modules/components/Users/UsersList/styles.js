@@ -100,7 +100,7 @@ var AddNewUserButton = _styledComponents.default.div(_templateObject25 || (_temp
   return props.theme.colors.lightGray;
 });
 exports.AddNewUserButton = AddNewUserButton;
-var UsersBottomContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n"])));
+var UsersBottomContainer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 37px;\n"])));
 exports.UsersBottomContainer = UsersBottomContainer;
 var VerifiedItem = _styledComponents.default.span(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  font-size: 10px;\n  background-color: ", ";\n  padding: 3px 10px;\n  border-radius: 50px;\n  color: ", ";\n  display: flex;\n  align-items: center;\n\n  svg {\n    font-size: 12px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.lightGreen;
