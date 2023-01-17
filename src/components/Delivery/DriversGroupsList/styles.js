@@ -215,7 +215,7 @@ export const PagesBottomContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   row-gap: 10px;
-  margin: 15px 0;
+  margin: 15px 0 38px 0;
 `
 
 export const AddNewGroupButton = styled.div`

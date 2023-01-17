@@ -27,7 +27,7 @@ export const ProductListContainer = styled.div`
   }
 
   @media (min-width: 993px) {
-    max-height: calc(100vh - 320px);
+    max-height: calc(100vh - 360px);
   }
 `
 
