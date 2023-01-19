@@ -61,10 +61,6 @@ var UserDetailsUI = function UserDetailsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isPersonalization = _useState6[0],
     setIsPersonalization = _useState6[1];
-  var _useState7 = (0, _react.useState)(true),
-    _useState8 = _slicedToArray(_useState7, 2),
-    isDriverSchedule = _useState8[0],
-    setIsDriverSchedule = _useState8[1];
   (0, _react.useEffect)(function () {
     setExtraOpen(false);
   }, [currentMenuSelected]);
@@ -119,12 +115,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     setExtraOpen: setExtraOpen,
     userState: userState,
     handleSuccessUpdate: handleSuccessUserUpdate
-  }))), currentMenuSelected === 'schedule' && /*#__PURE__*/_react.default.createElement(_styles3.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_styles3.DriverScheduleWraper, null, /*#__PURE__*/_react.default.createElement(_styles3.DriverSchedule, null, t('DRIVER_SCHEDULES', 'Driver schedules')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: isDriverSchedule,
-    onChange: function onChange(enabled) {
-      return setIsDriverSchedule(enabled);
-    }
-  })), /*#__PURE__*/_react.default.createElement(_Shared.Schedule, {
+  }))), currentMenuSelected === 'schedule' && /*#__PURE__*/_react.default.createElement(_styles3.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_Shared.Schedule, {
     scheduleList: userState === null || userState === void 0 ? void 0 : (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.schedule,
     handleChangeScheduleState: handleScheduleState
   }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
