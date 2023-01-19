@@ -27,7 +27,13 @@ import {
 } from './styles'
 
 export const AdvancedSettings = (props) => {
-  const { themesList, advancedValues, setAdvancedValues, handleUpdateSiteTheme } = props
+  const {
+    themesList,
+    advancedValues,
+    setAdvancedValues,
+    handleUpdateSiteTheme,
+    isApp
+  } = props
 
   const [, t] = useLanguage()
 
@@ -160,6 +166,14 @@ export const AdvancedSettings = (props) => {
     { name: t('BODY', 'Body'), type: 'input', path: 'third_party_code.body' }
   ]
 
+  const navigationBarList = [
+    { name: t('BROWSE', 'Browse'), type: 'hidden', path: 'bar_menu.components.browse.hidden' },
+    { name: t('ORDERS', 'Orders'), type: 'hidden', path: 'bar_menu.components.orders.hidden' },
+    { name: t('MY_CARTS', 'My carts'), type: 'hidden', path: 'bar_menu.components.my_carts.hidden' },
+    { name: t('WALLET', 'Wallet'), type: 'hidden', path: 'bar_menu.components.wallet.hidden' },
+    { name: t('PROFILE', 'Profile'), type: 'hidden', path: 'bar_menu.components.profile.hidden' }
+  ]
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -196,17 +210,31 @@ export const AdvancedSettings = (props) => {
   return (
     <>
       <Container>
-        <BoxLayout>
-          <h1>{t('WEBSITE_ADVANCED_SETTINGS', 'Website  Advanced Settings')}</h1>
-          <HomePageWrapper>
+        {isApp ? (
+          <BoxLayout>
+            <h1>{t('CUSTOMER_APP_ADVANCED_SETTINGS', 'Customer App  Advanced Settings')}</h1>
             <h2>{t('HOMEPAGE', 'Homepage')}</h2>
-            <SettingComponent
-              settingList={homepageViewList}
-              handleUpdateThemeValue={handleUpdateThemeValue}
-              advancedValues={advancedValues}
+            <ImageBox
+              title={t('HOMEPAGE_IMAGE', 'Homepage image')}
+              ratio='1350 x 400 px'
+              photo={advancedValues?.my_products?.components?.images?.components?.homepage_background?.components?.image}
+              path='my_products.components.images.components.homepage_background.components.image'
+              handleChangePhoto={handleUpdateThemeValue}
             />
-          </HomePageWrapper>
-        </BoxLayout>
+          </BoxLayout>
+        ) : (
+          <BoxLayout>
+            <h1>{t('WEBSITE_ADVANCED_SETTINGS', 'Website  Advanced Settings')}</h1>
+            <HomePageWrapper>
+              <h2>{t('HOMEPAGE', 'Homepage')}</h2>
+              <SettingComponent
+                settingList={homepageViewList}
+                handleUpdateThemeValue={handleUpdateThemeValue}
+                advancedValues={advancedValues}
+              />
+            </HomePageWrapper>
+          </BoxLayout>
+        )}
         <BoxLayout>
           <h2>{t('BUTTONS', 'Buttons')}</h2>
           <FormControl>
@@ -340,8 +368,8 @@ export const AdvancedSettings = (props) => {
           <ImageBox
             title={t('FAVICON', 'Favicon')}
             ratio='512 x 512 px'
-            photo={advancedValues?.general?.components?.favicon}
-            path='general.components.favicon'
+            photo={advancedValues?.general?.components?.favicon?.components?.image}
+            path='general.components.favicon.components.image'
             handleChangePhoto={handleUpdateThemeValue}
           />
         </BoxLayout>
@@ -460,15 +488,17 @@ export const AdvancedSettings = (props) => {
             themeStructure={themeStructure}
           />
         </BoxLayout>
-        <BoxLayout>
-          <h2>{t('MENU_OPTIONS', 'Menu options')}</h2>
-          <SettingComponent
-            settingList={menuOptionList}
-            handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
-            themeStructure={themeStructure}
-          />
-        </BoxLayout>
+        {!isApp && (
+          <BoxLayout>
+            <h2>{t('MENU_OPTIONS', 'Menu options')}</h2>
+            <SettingComponent
+              settingList={menuOptionList}
+              handleUpdateThemeValue={handleUpdateThemeValue}
+              advancedValues={advancedValues}
+              themeStructure={themeStructure}
+            />
+          </BoxLayout>
+        )}
         <BoxLayout>
           <h2>{t('POPUP_ORDER_TYPES', 'Popup: Order types ')}</h2>
           <FormControl>
@@ -519,6 +549,17 @@ export const AdvancedSettings = (props) => {
             themeStructure={themeStructure}
           />
         </BoxLayout>
+        {isApp && (
+          <BoxLayout>
+            <h2>{t('NAVIGATION_BAR_MENU', 'Navigation bar menu')}</h2>
+            <SettingComponent
+              settingList={navigationBarList}
+              handleUpdateThemeValue={handleUpdateThemeValue}
+              advancedValues={advancedValues}
+              themeStructure={themeStructure}
+            />
+          </BoxLayout>
+        )}
         <ButtonWrapper>
           <Button
             color='primary'

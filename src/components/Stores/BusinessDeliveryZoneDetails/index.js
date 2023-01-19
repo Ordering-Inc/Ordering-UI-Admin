@@ -30,7 +30,8 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
     handleAddBusinessDeliveryZone,
     handleDeleteBusinessDeliveryZone,
     kmlData,
-    handleUploadKmlFiles
+    handleUploadKmlFiles,
+    handleSuccessUpdate
   } = props
 
   const theme = useTheme()
@@ -106,7 +107,7 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
           <BusinessDeliveryZoneShare
             business={business}
             zone={zoneState.zone}
-            handleUpdateBusinessDeliveryZone={handleUpdateBusinessDeliveryZone}
+            handleSuccessUpdate={handleSuccessUpdate}
           />
         )}
       </Container>
