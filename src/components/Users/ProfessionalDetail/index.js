@@ -122,9 +122,11 @@ export const ProfessionalDetailUI = (props) => {
               <Dropdown.Item onClick={() => handleOpenExtra('personalization')}>
                 {t('PERSONALIZATION', 'Personalization')}
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => onDeleteCustomer()}>
-                {t('DELETE', 'Delete')}
-              </Dropdown.Item>
+              {adminUserState?.user?.level === 0 && (
+                <Dropdown.Item className='delete' onClick={() => onDeleteCustomer()}>
+                  {t('DELETE', 'Delete')}
+                </Dropdown.Item>
+              )}
             </DropdownButton>
           </ActionSelectorWrapper>
         )}
