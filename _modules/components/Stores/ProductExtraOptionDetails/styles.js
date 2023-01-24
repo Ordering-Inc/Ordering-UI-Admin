@@ -84,7 +84,7 @@ var ActionsContainer = _styledComponents.default.div(_templateObject14 || (_temp
 exports.ActionsContainer = ActionsContainer;
 var Dvider = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  height: 13px;\n  background: #F8F9FA;\n  margin: 10px 0 30px;\n"])));
 exports.Dvider = Dvider;
-var ModifierOptionsContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n  h2 {\n    font-size: 18px;\n    font-weight: 600;\n    color: ", ";\n    margin-bottom: 30px;\n  }\n"])), function (props) {
+var ModifierOptionsContainer = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  overflow: auto;\n  width: 100%;\n  margin-bottom: 20px;\n  h2 {\n    font-size: 18px;\n    font-weight: 600;\n    color: ", ";\n    margin-bottom: 30px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 exports.ModifierOptionsContainer = ModifierOptionsContainer;

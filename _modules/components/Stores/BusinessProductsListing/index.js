@@ -68,7 +68,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setTaxes = props.setTaxes,
     fees = props.fees,
     setFees = props.setFees,
-    getBusiness = props.getBusiness;
+    getBusiness = props.getBusiness,
+    businessTypes = props.businessTypes,
+    setBusinessTypes = props.setBusinessTypes;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -405,7 +407,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     ,
     onClose: function onClose() {
       return setOpenSidebar(null);
-    }
+    },
+    businessTypes: businessTypes,
+    setBusinessTypes: setBusinessTypes
   }), openSidebar === 'add_business' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     open: openSidebar === 'add_business',
     onClose: function onClose() {

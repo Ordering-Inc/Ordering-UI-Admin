@@ -93,6 +93,7 @@ var OrderDashboardSLASettingUI = function OrderDashboardSLASettingUI(props) {
   var onSubmit = function onSubmit(data) {
     if (data && Object.keys(data).length > 0) {
       handleClickUpdate();
+      setSettingOpen(false);
     }
   };
   var closeAlert = function closeAlert() {

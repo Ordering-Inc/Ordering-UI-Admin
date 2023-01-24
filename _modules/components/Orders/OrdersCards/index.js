@@ -12,6 +12,7 @@ var _styledComponents = require("styled-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _Shared = require("../../Shared");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -39,11 +40,14 @@ var OrdersCards = function OrdersCards(props) {
     selectedOrderCard = props.selectedOrderCard,
     handleOrderCardClick = props.handleOrderCardClick,
     handleUpdateDriverLocation = props.handleUpdateDriverLocation,
-    slaSettingTime = props.slaSettingTime;
+    slaSettingTime = props.slaSettingTime,
+    isDelivery = props.isDelivery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
@@ -73,6 +77,12 @@ var OrdersCards = function OrdersCards(props) {
     var isInvalid = e.target.closest('.view-details') || e.target.closest('.driver-selector');
     if (isInvalid) return;
     handleOrderCardClick(order);
+    var element = document.getElementById('deliveryDashboard');
+    if ((isDelivery || isMessagesView) && width < 993 && element) element.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
   var getOrderStatus = function getOrderStatus(s) {
     var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22;

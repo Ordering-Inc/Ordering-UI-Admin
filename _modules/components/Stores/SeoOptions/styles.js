@@ -61,7 +61,7 @@ var SkipButton = _styledComponents.default.div(_templateObject18 || (_templateOb
   return props.theme.colors.primary;
 });
 exports.SkipButton = SkipButton;
-var ActionButtons = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  display: flex;\n  align-items: center;\n\n  > button {\n    height: 42px;\n  }\n"])));
+var ActionButtons = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  display: flex;\n  align-items: center;\n  margin-top: 50px;\n\n  > button {\n    height: 42px;\n  }\n"])));
 exports.ActionButtons = ActionButtons;
 var UseSameInfoWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 20px;\n\n  label {\n    &:first-child {\n      font-weight: 400;\n      font-size: 14px;\n      margin: 0px;\n      margin-right: 10px;\n      ", "\n    }\n    &:last-child {\n      min-width: 25px;\n    }\n  }\n"])), function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n        margin-right: 0px;\n        margin-left: 10px;\n      "])));

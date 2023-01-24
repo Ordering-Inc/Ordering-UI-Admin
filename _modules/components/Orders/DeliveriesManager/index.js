@@ -93,7 +93,9 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
       setIsOpenOrderDetail(true);
     }
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveriesContainer, null, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveriesContainer, {
+    id: "deliveryDashboard"
+  }, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
     isDisableControl: true,
     title: t('DELIVERY_DASHBOARD', 'Delivery dashboard'),
     isShowMapsKeySettingButton: !googleMapsApiKey,
