@@ -39,7 +39,8 @@ export const TimeContentWrapper = styled.div`
     font-weight: 500;
     font-size: 52px;
     margin: 0;
-    color: ${props => props.theme?.colors.headingColor}
+    color: ${props => props.theme?.colors.headingColor};
+    word-break: break-word;
   }
   p {
     margin: 0;
@@ -53,6 +54,10 @@ export const AnalyticsSpendListContent = styled.div`
   align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 30px;
+  flex-wrap: wrap;
+  > div {
+    margin-top: 10px;
+  }
 `
 
 export const ReviewBlock = styled.div`

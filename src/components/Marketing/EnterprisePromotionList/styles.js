@@ -200,8 +200,14 @@ export const PromotionListBottom = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-top: 10px;
   margin-bottom: 38px;
+  @media (max-width: 450px) {
+    > div {
+      margin-bottom: 5px;
+    }
+  }
   ${({ eventDisabled }) => eventDisabled && css`
     pointer-events: none;
   `}

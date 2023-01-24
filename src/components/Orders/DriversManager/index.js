@@ -73,7 +73,7 @@ const DriversManagerUI = (props) => {
 
   return (
     <>
-      <DriversContainer>
+      <DriversContainer id='driverDashboard'>
         <DriversHeader>
           <HeaderTitleContainer>
             {isCollapse && (

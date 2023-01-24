@@ -104,6 +104,12 @@ export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
       `}
     }
   }
+
+  @media only screen and (min-width: 374px) and (max-width: 450px) {
+    .ordering-calendar {
+      right: calc((100vw - 374px) / 2);
+    }
+  }
 `
 
 export const AnalyticsTimeZoneWrapper = styled(BusinessFilterWrapper)``
