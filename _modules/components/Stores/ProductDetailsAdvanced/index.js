@@ -392,7 +392,26 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
         id: val
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, {
+    fullWidth: true
+  }, /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
+    htmlFor: "external_id"
+  }, t('EXTERNAL_ID', 'External Id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "external_id",
+    placeholder: t('EXTERNAL_ID', 'External Id'),
+    defaultValue: productState === null || productState === void 0 ? void 0 : productState.external_id,
+    onChange: function onChange(e) {
+      var _e$target$value2;
+      return handleClickProperty('external_id', (_e$target$value2 = e.target.value) !== null && _e$target$value2 !== void 0 ? _e$target$value2 : null);
+    },
+    disabled: formState.loading,
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
     htmlFor: "cost_price"
   }, t('PRODUCT_COST', 'Product cost')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "cost_price",
@@ -400,8 +419,8 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     placeholder: "0.00",
     defaultValue: (_productState$cost_pr = productState === null || productState === void 0 ? void 0 : productState.cost_price) !== null && _productState$cost_pr !== void 0 ? _productState$cost_pr : '',
     onChange: function onChange(e) {
-      var _e$target$value2;
-      return handleClickProperty('cost_price', (_e$target$value2 = e.target.value) !== null && _e$target$value2 !== void 0 ? _e$target$value2 : null);
+      var _e$target$value3;
+      return handleClickProperty('cost_price', (_e$target$value3 = e.target.value) !== null && _e$target$value3 !== void 0 ? _e$target$value3 : null);
     },
     disabled: formState.loading,
     autoComplete: "off",
@@ -418,8 +437,8 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     placeholder: "0.00",
     defaultValue: (_productState$cost_of = productState === null || productState === void 0 ? void 0 : productState.cost_offer_price) !== null && _productState$cost_of !== void 0 ? _productState$cost_of : '',
     onChange: function onChange(e) {
-      var _e$target$value3;
-      return handleClickProperty('cost_offer_price', (_e$target$value3 = e.target.value) !== null && _e$target$value3 !== void 0 ? _e$target$value3 : null);
+      var _e$target$value4;
+      return handleClickProperty('cost_offer_price', (_e$target$value4 = e.target.value) !== null && _e$target$value4 !== void 0 ? _e$target$value4 : null);
     },
     disabled: formState.loading,
     autoComplete: "off",
@@ -439,8 +458,8 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
       required: t('MINIMUM_QUANTITY_REQUIRED', 'The minimum quantity is required')
     }),
     onChange: function onChange(e) {
-      var _e$target$value4;
-      return handleClickProperty('minimum_per_order', (_e$target$value4 = e.target.value) !== null && _e$target$value4 !== void 0 ? _e$target$value4 : null);
+      var _e$target$value5;
+      return handleClickProperty('minimum_per_order', (_e$target$value5 = e.target.value) !== null && _e$target$value5 !== void 0 ? _e$target$value5 : null);
     },
     disabled: formState.loading,
     autoComplete: "off",
@@ -476,8 +495,8 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     placeholder: "0.00",
     defaultValue: (_productState$calorie = productState === null || productState === void 0 ? void 0 : productState.calories) !== null && _productState$calorie !== void 0 ? _productState$calorie : '',
     onChange: function onChange(e) {
-      var _e$target$value5;
-      return handleClickProperty('calories', (_e$target$value5 = e.target.value) !== null && _e$target$value5 !== void 0 ? _e$target$value5 : null);
+      var _e$target$value6;
+      return handleClickProperty('calories', (_e$target$value6 = e.target.value) !== null && _e$target$value6 !== void 0 ? _e$target$value6 : null);
     },
     disabled: formState.loading,
     autoComplete: "off",
@@ -494,8 +513,8 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     placeholder: "0.00",
     defaultValue: (_productState$weight = productState === null || productState === void 0 ? void 0 : productState.weight) !== null && _productState$weight !== void 0 ? _productState$weight : '',
     onChange: function onChange(e) {
-      var _e$target$value6;
-      return handleClickProperty('weight', (_e$target$value6 = e.target.value) !== null && _e$target$value6 !== void 0 ? _e$target$value6 : null);
+      var _e$target$value7;
+      return handleClickProperty('weight', (_e$target$value7 = e.target.value) !== null && _e$target$value7 !== void 0 ? _e$target$value7 : null);
     },
     disabled: formState.loading,
     autoComplete: "off",

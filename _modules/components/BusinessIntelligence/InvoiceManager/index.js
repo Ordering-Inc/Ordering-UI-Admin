@@ -73,7 +73,8 @@ var InvoiceManager = function InvoiceManager(props) {
   }))), openInvoiceDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "invoice_details",
     open: openInvoiceDetail,
-    onClose: handleCloseInvoiceDetail
+    onClose: handleCloseInvoiceDetail,
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_InvoiceDetails.InvoiceDetails, {
     selectedInvoice: selectedInvoice
   })));

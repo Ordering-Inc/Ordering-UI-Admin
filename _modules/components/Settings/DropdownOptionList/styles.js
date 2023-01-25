@@ -108,6 +108,6 @@ exports.CheckboxWrapper = CheckboxWrapper;
 var PagesBottomContainer = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-wrap: wrap;\n  row-gap: 10px;\n  margin: 15px 0;\n"])));
 exports.PagesBottomContainer = PagesBottomContainer;
 var AddNewPageButton = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n"])), function (props) {
-  return props.theme.colors.lightGray;
+  return props.theme.colors.primary;
 });
 exports.AddNewPageButton = AddNewPageButton;

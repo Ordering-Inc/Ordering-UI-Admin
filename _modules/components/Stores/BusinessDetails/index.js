@@ -171,7 +171,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleSelectedItem: handleSelectedItem,
     handleSucessUpdateBusiness: handleSucessUpdateBusiness,
     handleDuplicateBusiness: handleDuplicateBusiness,
-    handleDeleteBusiness: handleDeleteBusiness
+    handleDeleteBusiness: handleDeleteBusiness,
+    extraOpen: extraOpen
   }), extraOpen && /*#__PURE__*/_react.default.createElement(_Shared.MoreSidebarLayout, {
     isExtendExtraOpen: isExtendExtraOpen,
     onClose: handleCloseExtraOpen

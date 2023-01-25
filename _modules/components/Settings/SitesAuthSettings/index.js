@@ -11,7 +11,10 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _BsChevronRight = _interopRequireDefault(require("@meronex/icons/bs/BsChevronRight"));
 var _Shared = require("../../Shared");
 var _SiteSettingDetails = require("../SiteSettingDetails");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styles = require("./styles");
+var _styles2 = require("../../../styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -38,6 +41,8 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     selectedSiteId = _useState2[0],
@@ -49,6 +54,10 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     alertState = _useState4[0],
     setAlertState = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isExpand = _useState6[0],
+    setIsExpand = _useState6[1];
   var handleOpenSiteSettingDetails = function handleOpenSiteSettingDetails(siteId) {
     handleGetSiteConfigs(siteId);
     setSelectedSiteId(siteId);
@@ -58,6 +67,13 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
     setSelectedSiteId(null);
     setMoveDistance(0);
   };
+  var expandSideBar = function expandSideBar() {
+    var element = document.getElementById('sideSlider');
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     if (actionState.error) {
       setAlertState({
@@ -66,7 +82,10 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
       });
     }
   }, [actionState.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SitesListContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings')), sitesState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SitesWrapper, null, _toConsumableArray(Array(5).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SitesListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings')), width > 576 && !selectedSiteId && /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
+    color: "black",
+    onClick: expandSideBar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null))), sitesState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SitesWrapper, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SiteItem, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

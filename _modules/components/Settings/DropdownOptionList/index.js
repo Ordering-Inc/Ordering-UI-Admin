@@ -232,7 +232,8 @@ var DropdownOptionList = function DropdownOptionList(props) {
     onClose: function onClose() {
       setSelectedZoneDropdown(null);
       setOpenZonedropdown(false);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_ZoneDropdownDetails.ZoneDropdownDetails, {
     zoneDropdown: selectedZoneDropdown,
     cities: cities,

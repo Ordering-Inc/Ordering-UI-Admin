@@ -281,7 +281,8 @@ var SettingsUI = function SettingsUI(props) {
     open: isOpenSettingDetails,
     onClose: function onClose() {
       return setIsOpenSettingDetails(null);
-    }
+    },
+    showExpandIcon: true
   }, isOpenSettingDetails === 'checkout' && /*#__PURE__*/_react.default.createElement(_CheckoutFieldsSetting.CheckoutFieldsSetting, null), isOpenSettingDetails === 'address' && /*#__PURE__*/_react.default.createElement(_AddressFieldsSetting.AddressFieldsSetting, null), isOpenSettingDetails === 'language' && /*#__PURE__*/_react.default.createElement(_LanguageSetting.LanguageSetting, null)));
 };
 var Settings = function Settings(props) {

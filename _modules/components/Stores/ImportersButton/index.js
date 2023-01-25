@@ -44,7 +44,8 @@ var ImportersButton = function ImportersButton(props) {
     open: openImporters,
     onClose: function onClose() {
       return setOpenImporters(false);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_ImportersListing.ImportersListing, {
     setExtraOpen: setExtraOpen
   })));

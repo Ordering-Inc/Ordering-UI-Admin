@@ -33,6 +33,10 @@ var ItsaCheckmate = function ItsaCheckmate(props) {
     _useState2 = _slicedToArray(_useState, 2),
     settingsOpen = _useState2[0],
     setSettingsOpen = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isExpand = _useState4[0],
+    setIsExpand = _useState4[1];
   var toggleMainContent = function toggleMainContent() {
     if (width <= 500) {
       document.getElementById('catDescription').style.width = '100vw';
@@ -43,6 +47,13 @@ var ItsaCheckmate = function ItsaCheckmate(props) {
         document.getElementById('catDescription').style.width = '500px';
       }
     }
+  };
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('catDescription');
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
   };
   (0, _react.useEffect)(function () {
     if (width < 1000) return;
@@ -76,7 +87,10 @@ var ItsaCheckmate = function ItsaCheckmate(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "catDescription"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.ItsaCheckmateContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DescriptionHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderIcons, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.ItsaCheckmateContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DescriptionHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderIcons, null, width > 576 && !settingsOpen && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: onClose
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ITSACHECKMATE', 'ItsaCheckmate')), /*#__PURE__*/_react.default.createElement(_styles.Button, {

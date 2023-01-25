@@ -65,7 +65,7 @@ var PromotionDateItem = _styledComponents.default.div(_templateObject15 || (_tem
 });
 exports.PromotionDateItem = PromotionDateItem;
 var AddNewPromotionText = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: fit-content;\n  margin: 15px 0;\n  color: ", ";\n  font-size: 12px;\n"])), function (props) {
-  return props.theme.colors.lightGray;
+  return props.theme.colors.primary;
 });
 exports.AddNewPromotionText = AddNewPromotionText;
 var PromotionEditFormContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  transition: 0.3s;\n  overflow: auto;\n\n  @media (min-width: 576px) {\n    padding: 25px 20px;\n  }\n\n  @media (min-width: 1000px) {\n    ", "\n  }\n"])), function (props) {

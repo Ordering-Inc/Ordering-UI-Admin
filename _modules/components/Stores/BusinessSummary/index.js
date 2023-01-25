@@ -15,6 +15,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
 var _BusinessPreview = require("../BusinessPreview");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -37,7 +38,8 @@ var BusinessSummary = function BusinessSummary(props) {
     selectedItem = props.selectedItem,
     handleSelectedItem = props.handleSelectedItem,
     handleDuplicateBusiness = props.handleDuplicateBusiness,
-    handleDeleteBusiness = props.handleDeleteBusiness;
+    handleDeleteBusiness = props.handleDeleteBusiness,
+    extraOpen = props.extraOpen;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -51,6 +53,8 @@ var BusinessSummary = function BusinessSummary(props) {
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isBusinessPreview = _useState2[0],
@@ -59,14 +63,18 @@ var BusinessSummary = function BusinessSummary(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     selectedView = _useState4[0],
     setSelectedView = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isExpand = _useState6[0],
+    setIsExpand = _useState6[1];
+  var _useState7 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    confirm = _useState6[0],
-    setConfirm = _useState6[1];
+    _useState8 = _slicedToArray(_useState7, 2),
+    confirm = _useState8[0],
+    setConfirm = _useState8[1];
   var handleOpenCategory = function handleOpenCategory() {
     var _businessState$busine;
     events.emit('go_to_page', {
@@ -144,6 +152,17 @@ var BusinessSummary = function BusinessSummary(props) {
       }
     });
   };
+  var expandSideBar = function expandSideBar() {
+    var element = document.getElementById('business_details_bar');
+    if (!element) return;
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
+  (0, _react.useEffect)(function () {
+    if (extraOpen) setIsExpand(false);
+  }, [extraOpen]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.name), businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -154,7 +173,12 @@ var BusinessSummary = function BusinessSummary(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     disabled: true
     // onClick={() => handleSelectedItem('support')}
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.LifePreserver, null)), width > 576 && !extraOpen && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return expandSideBar();
+    }
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'

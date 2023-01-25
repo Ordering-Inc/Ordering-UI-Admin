@@ -64,9 +64,7 @@ var LevelName = _styledComponents.default.span(_templateObject12 || (_templateOb
 exports.LevelName = LevelName;
 var LevelBottomContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-wrap: wrap;\n  row-gap: 10px;\n  margin: 15px 0;\n"])));
 exports.LevelBottomContainer = LevelBottomContainer;
-var AddNewLevelButton = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n  transition: all 0.3s linear;\n  user-select: none;\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
+var AddNewLevelButton = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n  user-select: none;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.AddNewLevelButton = AddNewLevelButton;

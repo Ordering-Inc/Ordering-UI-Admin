@@ -67,9 +67,7 @@ var ProductName = _styledComponents.default.span(_templateObject14 || (_template
 exports.ProductName = ProductName;
 var BottomContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-wrap: wrap;\n  margin: 20px 0;\n"])));
 exports.BottomContainer = BottomContainer;
-var AddNewButton = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n  transition: all 0.3s linear;\n  user-select: none;\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
+var AddNewButton = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n  user-select: none;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.AddNewButton = AddNewButton;

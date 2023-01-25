@@ -17,6 +17,7 @@ var _UserAddForm = require("../UserAddForm");
 var _UsersDeleteButton = require("../UsersDeleteButton");
 var _UsersExportCSV = require("../UsersExportCSV");
 var _styles = require("../../../styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -51,7 +52,11 @@ var CustomersListingUI = function CustomersListingUI(props) {
     handleSuccessUpdate = props.handleSuccessUpdate,
     handleSuccessAddUser = props.handleSuccessAddUser,
     handleSuccessDeleteUser = props.handleSuccessDeleteUser,
-    setSelectedUsers = props.setSelectedUsers;
+    setSelectedUsers = props.setSelectedUsers,
+    orderFilterValue = props.orderFilterValue,
+    handleChangeOrderFilterValue = props.handleChangeOrderFilterValue,
+    handleChangeMultiFilterValues = props.handleChangeMultiFilterValues,
+    multiFilterValues = props.multiFilterValues;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -76,6 +81,19 @@ var CustomersListingUI = function CustomersListingUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     moveDistance = _useState10[0],
     setMoveDistance = _useState10[1];
+  var orderList = [{
+    id: 1,
+    name: t('NO_ORDERS', 'No orders'),
+    value: 0
+  }, {
+    id: 2,
+    name: t('WITH_ORDERS', 'With orders'),
+    value: 1
+  }, {
+    id: 3,
+    name: t('WITH_5_ORDERS', 'With 5+ orders'),
+    value: 5
+  }];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenUserDetails(false);
     setOpenUser(null);
@@ -115,11 +133,26 @@ var CustomersListingUI = function CustomersListingUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersListingContainer, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
     title: headerTitle,
     searchValue: searchValue,
-    onSearch: onSearch
+    onSearch: onSearch,
+    multiFilterValues: multiFilterValues,
+    handleChangeMultiFilterValues: handleChangeMultiFilterValues
   }), /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState
-  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.VerifiedStatusFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: orderFilterValue === '' || orderFilterValue === null ? 'primary' : 'secundaryDark',
+    onClick: function onClick() {
+      return handleChangeOrderFilterValue('');
+    }
+  }, t('ALL', 'All'), (orderFilterValue === '' || orderFilterValue === null) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, null)), orderList.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement(_styles.Button, {
+      key: i,
+      color: orderFilterValue === item.value ? 'primary' : 'secundaryDark',
+      onClick: function onClick() {
+        return handleChangeOrderFilterValue(item.value);
+      }
+    }, item.name, orderFilterValue === item.value && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, null));
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
@@ -173,7 +206,8 @@ var CustomersListingUI = function CustomersListingUI(props) {
     open: openUserAddForm,
     onClose: function onClose() {
       return setOpenUserAddForm(false);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_UserAddForm.UserAddForm, {
     handleSuccessAdd: handleSuccessAddUser,
     onClose: function onClose() {

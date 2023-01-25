@@ -57,7 +57,8 @@ var LoginFormUI = function LoginFormUI(props) {
     handleChangeTab = props.handleChangeTab,
     generateOtpCode = props.generateOtpCode,
     otpState = props.otpState,
-    setOtpState = props.setOtpState;
+    setOtpState = props.setOtpState,
+    useLoginByEmail = props.useLoginByEmail;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -257,7 +258,7 @@ var LoginFormUI = function LoginFormUI(props) {
     alt: "Logo login"
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles2.TitleFormSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WELCOME', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_ADMIN_LOGIN', 'Let’s start to admin your business now'))), (ordering === null || ordering === void 0 ? void 0 : ordering.project) && useLoginOtpEmail && !loginWithOtpState && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles2.LoginWith, null, /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.TitleFormSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WELCOME', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_ADMIN_LOGIN', 'Let’s start to admin your business now'))), (ordering === null || ordering === void 0 ? void 0 : ordering.project) && useLoginOtpEmail && useLoginByEmail && !loginWithOtpState && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles2.LoginWith, null, /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     onClick: function onClick() {
       return handleChangeTab('email');
     },

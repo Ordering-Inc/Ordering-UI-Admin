@@ -87,6 +87,7 @@ var RewardsProgramsUI = function RewardsProgramsUI(props) {
     defaultSideBarWidth: 550 + moveDistance,
     moveDistance: moveDistance
   }, /*#__PURE__*/_react.default.createElement(_PointsWallet.PointsWallet, _extends({}, props, {
+    moveDistance: moveDistance,
     handleParentSidebarMove: function handleParentSidebarMove(val) {
       return setMoveDistance(val);
     }
@@ -97,7 +98,8 @@ var RewardsProgramsUI = function RewardsProgramsUI(props) {
       return handleCloseLevel();
     },
     defaultSideBarWidth: 550 + levelMoveDistance,
-    moveDistance: levelMoveDistance
+    moveDistance: levelMoveDistance,
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_PointsWalletLevels.PointsWalletLevels, {
     handleParentSidebarMove: function handleParentSidebarMove(val) {
       return setLevelMoveDistance(val);
@@ -108,7 +110,8 @@ var RewardsProgramsUI = function RewardsProgramsUI(props) {
       return handleCloseGiftCard();
     },
     defaultSideBarWidth: 550 + giftCardMoveDistance,
-    moveDistance: giftCardMoveDistance
+    moveDistance: giftCardMoveDistance,
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_GiftCards.GiftCards, {
     handleParentSidebarMove: function handleParentSidebarMove(val) {
       return setGiftCardMoveDistance(val);

@@ -207,7 +207,8 @@ var BusinessProductList = function BusinessProductList(props) {
     onClose: function onClose() {
       setIsAddProduct(false);
       handleParentProductAdd && handleParentProductAdd(false);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_BusinessProductAddForm.BusinessProductAddForm, _extends({}, props, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     setIsAddProduct: setIsAddProduct

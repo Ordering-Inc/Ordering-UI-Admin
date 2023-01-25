@@ -38,7 +38,8 @@ var ProductSummary = function ProductSummary(props) {
     productState = props.productState,
     productCart = props.productCart,
     handleDeleteProduct = props.handleDeleteProduct,
-    showProductOption = props.showProductOption;
+    showProductOption = props.showProductOption,
+    extraOpen = props.extraOpen;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -68,6 +69,10 @@ var ProductSummary = function ProductSummary(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     selectedView = _useState8[0],
     setSelectedView = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    isExpand = _useState10[0],
+    setIsExpand = _useState10[1];
   var productConfigOptions = [{
     key: 'product_details',
     value: t('PRODUCT_DETAILS', 'Product details')
@@ -132,12 +137,28 @@ var ProductSummary = function ProductSummary(props) {
       return 0;
     }
   };
+  var expandSideBar = function expandSideBar() {
+    var element = document.getElementById('product_details');
+    if (!element) return;
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
+  (0, _react.useEffect)(function () {
+    if (extraOpen) setIsExpand(false);
+  }, [extraOpen]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductDetailsContainer, {
     disabled: productState.loading
   }, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductName, null, productState === null || productState === void 0 ? void 0 : (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (productState === null || productState === void 0 ? void 0 : (_productState$product6 = productState.product) === null || _productState$product6 === void 0 ? void 0 : _productState$product6.enabled) || false,
     onChange: handleChangeProductActiveState
-  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return expandSideBar();
+    }
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),

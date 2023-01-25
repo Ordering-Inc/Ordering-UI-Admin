@@ -10,6 +10,9 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _PointsWalletBusinessDetail = require("../PointsWalletBusinessDetail");
 var _PointsWalletBusinessList = require("../PointsWalletBusinessList");
 var _styles = require("./styles");
+var _styles2 = require("../../../styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -22,10 +25,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PointsWallet = function PointsWallet(props) {
   var handleParentSidebarMove = props.handleParentSidebarMove,
     pointWallet = props.pointWallet,
-    handleUpdatePointsWallet = props.handleUpdatePointsWallet;
+    handleUpdatePointsWallet = props.handleUpdatePointsWallet,
+    moveDistance = props.moveDistance;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)('general'),
     _useState2 = _slicedToArray(_useState, 2),
     selectedOption = _useState2[0],
@@ -34,6 +40,10 @@ var PointsWallet = function PointsWallet(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     selectedBusinessList = _useState4[0],
     setSelectedBusinessList = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isExpand = _useState6[0],
+    setIsExpand = _useState6[1];
   var walletOptionList = [{
     key: 'general',
     name: t('GENERAL', 'General')
@@ -41,10 +51,20 @@ var PointsWallet = function PointsWallet(props) {
     key: 'business',
     name: t('BUSINESSES', 'Businesses')
   }];
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('loyaltyWallet');
+    if (isExpand) element.style.width = '550px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     if (selectedOption !== 'business') handleParentSidebarMove(0);
   }, [selectedOption]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('POINTS_WALLET', 'Points wallet')), /*#__PURE__*/_react.default.createElement(_styles.Tabs, null, walletOptionList.map(function (option) {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('POINTS_WALLET', 'Points wallet')), width > 576 && moveDistance === 0 && /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null))), /*#__PURE__*/_react.default.createElement(_styles.Tabs, null, walletOptionList.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: option.key,
       active: selectedOption === option.key,

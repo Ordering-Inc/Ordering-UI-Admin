@@ -114,7 +114,8 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     onClose: function onClose() {
       setCurDriver(null);
       setOpenReview(false);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_UserReviewDetails.UserReviewDetails, {
     userId: curDriver === null || curDriver === void 0 ? void 0 : curDriver.id,
     driver: curDriver

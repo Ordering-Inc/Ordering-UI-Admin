@@ -14,6 +14,7 @@ var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _SeoOptions = require("../SeoOptions");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _BusinessCategoryInfoSettingList = require("../BusinessCategoryInfoSettingList");
 var _BusinessProductsCategoyInfo = require("../BusinessProductsCategoyInfo");
 var _styles2 = require("./styles");
@@ -50,6 +51,8 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -69,6 +72,10 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     _useState6 = _slicedToArray(_useState5, 2),
     selectedInfoItem = _useState6[0],
     setSelctedInfoItem = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isExpand = _useState8[0],
+    setIsExpand = _useState8[1];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -87,6 +94,14 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       }
     });
   };
+  var expandSideBar = function expandSideBar() {
+    var element = document.getElementById('editCategory');
+    if (!element) return;
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     var _formState$result;
     if (formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
@@ -97,9 +112,7 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
-    id: "editCategory"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.EditCategoryContent, null, businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessEnableWrapper, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.EditCategoryContent, null, businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessEnableWrapper, {
     className: "business_enable_control"
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
@@ -127,7 +140,12 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
         enabled: val
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return expandSideBar();
+    }
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),

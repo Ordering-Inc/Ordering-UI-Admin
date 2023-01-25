@@ -12,7 +12,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var UsersListingContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 20px;\n  box-sizing: border-box;\n  transition: all 0.5s;\n  max-height: 100vh;\n  overflow: auto;\n\n  @media print {\n    display: none;\n  }\n"])));
 exports.UsersListingContainer = UsersListingContainer;
-var ActionsContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    align-items: center;\n    justify-content: space-between;\n  }\n"])));
+var ActionsContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  padding-top: 20px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    align-items: center;\n  }\n"])));
 exports.ActionsContainer = ActionsContainer;
 var VerifiedStatusFilterContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  button {\n    white-space: nowrap;\n    font-size: 12px;\n    height: 32px;\n    display: flex;\n    align-items: center;\n    ", "\n    svg {\n      font-size: 20px;\n\n      ", "\n    }\n  }\n"])), function (props) {
   var _props$theme;

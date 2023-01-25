@@ -261,7 +261,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     noAnimation: isTourOpen,
     onClose: function onClose() {
       return handleCloseAddForm();
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_UserAddForm.UserAddForm, {
     isDriversPage: isDriversPage,
     isDriversManagersPage: isDriversManagersPage,

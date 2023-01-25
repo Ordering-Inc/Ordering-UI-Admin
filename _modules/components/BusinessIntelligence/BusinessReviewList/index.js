@@ -119,7 +119,8 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     onClose: function onClose() {
       setCurBusiness(null);
       setOpenReview(false);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_BusinessReviewDetails.BusinessReviewDetails, {
     business: curBusiness,
     businessId: curBusiness === null || curBusiness === void 0 ? void 0 : curBusiness.id,

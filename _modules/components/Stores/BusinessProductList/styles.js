@@ -35,9 +35,7 @@ var BusinessProductListTable = _styledComponents.default.table(_templateObject8 
 exports.BusinessProductListTable = BusinessProductListTable;
 var WrapperNotFound = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  text-align: center;\n  font-weight: 500;\n  margin: 20px;\n"])));
 exports.WrapperNotFound = WrapperNotFound;
-var AddProductBtn = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  user-select: none;\n  font-size: 14px;\n  color: ", ";\n  margin-top: 12px;\n  cursor: pointer;\n  margin-bottom: 15px;\n  display: inline-block;\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
+var AddProductBtn = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  user-select: none;\n  font-size: 14px;\n  color: ", ";\n  margin-top: 12px;\n  cursor: pointer;\n  margin-bottom: 15px;\n  display: inline-block;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.AddProductBtn = AddProductBtn;

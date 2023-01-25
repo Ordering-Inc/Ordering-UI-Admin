@@ -64,7 +64,7 @@ var CountriesList = function CountriesList(props) {
     setCurrentCountries = _useState8[1];
   var _useState9 = (0, _react.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
-    openDetaisl = _useState10[0],
+    openDetails = _useState10[0],
     setOpenDetails = _useState10[1];
   var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
@@ -223,12 +223,13 @@ var CountriesList = function CountriesList(props) {
     },
     defaultPageSize: countriesPerPage,
     handleChangePageSize: handleChangePageSize
-  })), openDetaisl && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    open: openDetaisl,
+  })), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    open: openDetails,
     onClose: function onClose() {
       setOpenDetails(false);
       setSelectedCountry(null);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_CountryDetails.CountryDetails, {
     country: selectedCountry,
     handleUpdateCountry: handleUpdateCountry,
