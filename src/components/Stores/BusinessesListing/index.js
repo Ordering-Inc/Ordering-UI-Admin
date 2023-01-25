@@ -48,7 +48,9 @@ const BusinessesListingUI = (props) => {
     handleEnableAllBusiness,
     handleDeleteMultiBusinesses,
     setBusinessIds,
-    countriesState
+    countriesState,
+    handleChangeFilterValues,
+    filterValues
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -70,8 +72,8 @@ const BusinessesListingUI = (props) => {
   const [isAdd, setIsAdd] = useState(false)
 
   const noBusinesses = useMemo(() => {
-    return !businessList?.loading && businessList?.businesses?.length === 0 && pagination?.currentPage === 1 && !searchValue
-  }, [businessList?.loading, businessList?.businesses, pagination, searchValue])
+    return !businessList?.loading && businessList?.businesses?.length === 0 && pagination?.currentPage === 1 && !searchValue && Object.keys(filterValues).length === 0
+  }, [businessList?.loading, businessList?.businesses, pagination, searchValue, filterValues])
 
   const handleGotToAdd = () => {
     if (countriesState?.enabled) setIsAdd(true)
@@ -176,6 +178,8 @@ const BusinessesListingUI = (props) => {
           loading={businessList.loading}
           noBusinesses={noBusinesses}
           openAddBusiness={openAddBusiness}
+          handleChangeFilterValues={handleChangeFilterValues}
+          filterValues={filterValues}
         />
         {noBusinesses ? (
           <EmptyBusinessWrapper>

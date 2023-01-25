@@ -70,6 +70,10 @@ export const ActionContainer = styled.div`
     border: none;
   }
 
+  button {
+    height: 43px;
+  }
+
   @media (min-width: 768px) {
     margin-top: 0px;
   }

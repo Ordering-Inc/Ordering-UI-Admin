@@ -168,6 +168,11 @@ export const FieldRow = styled.div`
     > div {
       width: 48%;
     }
+    ${({ fullWidth }) => fullWidth && css`
+      > div {
+        width: 100%;
+      }
+    `}
   }
 `
 

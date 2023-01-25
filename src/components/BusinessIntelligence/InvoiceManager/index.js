@@ -77,6 +77,7 @@ export const InvoiceManager = (props) => {
             sidebarId='invoice_details'
             open={openInvoiceDetail}
             onClose={handleCloseInvoiceDetail}
+            showExpandIcon
           >
             <InvoiceDetails
               selectedInvoice={selectedInvoice}

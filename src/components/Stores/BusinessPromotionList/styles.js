@@ -136,7 +136,7 @@ export const AddNewPromotionText = styled.div`
   cursor: pointer;
   width: fit-content;
   margin: 15px 0;
-  color: ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors.primary};
   font-size: 12px;
 `
 

@@ -69,6 +69,15 @@ export const HeaderIcons = styled.div`
 export const Content = styled.div``
 
 export const CategoryName = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-right: 25px;
+  ${props => props.theme.rtl && css`
+    margin-right: 0;
+    margin-left: 25px;
+  `}
+
   p {
     font-weight: bold;
     font-size: 20px;

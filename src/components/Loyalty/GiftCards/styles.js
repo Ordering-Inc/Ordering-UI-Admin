@@ -114,13 +114,8 @@ export const BottomContainer = styled.div`
 export const AddNewButton = styled.div`
   cursor: pointer;
   font-size: 14px;
-  color: ${props => props.theme.colors.lightGray};
-  transition: all 0.3s linear;
+  color: ${props => props.theme.colors.primary};
   user-select: none;
-
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
 `
 export const NotFoundSourceWrapper = styled.div`
   > div {

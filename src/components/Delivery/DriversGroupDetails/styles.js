@@ -9,7 +9,6 @@ export const DetailsContainer = styled.div`
 
 export const Header = styled.div`
   margin-bottom: 15px;
-  margin-top: 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -110,4 +109,9 @@ export const ActionSelectorWrapper = styled.div`
       }
     }
   }
+`
+
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
 `

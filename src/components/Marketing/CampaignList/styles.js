@@ -197,11 +197,7 @@ export const PagesBottomContainer = styled.div`
 export const AddNewPageButton = styled.div`
   cursor: pointer;
   font-size: 14px;
-  color: ${props => props.theme.colors.lightGray};
-
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
+  color: ${props => props.theme.colors.primary};
 `
 
 export const LinkText = styled.span`

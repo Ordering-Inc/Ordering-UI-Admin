@@ -183,6 +183,7 @@ export const IntegrationListing = (props) => {
           defaultSideBarWidth={600}
           open={showOption === 'plugins'}
           onClose={() => handleCloseSettings()}
+          showExpandIcon
         >
           <PluginList />
         </SideBar>
@@ -194,6 +195,7 @@ export const IntegrationListing = (props) => {
           defaultSideBarWidth={768}
           open={showOption === 'webhooks'}
           onClose={() => handleCloseSettings()}
+          showExpandIcon
         >
           <WebhookList />
         </SideBar>
@@ -205,6 +207,7 @@ export const IntegrationListing = (props) => {
           defaultSideBarWidth={700}
           open={showOption === 'apiKeys'}
           onClose={() => handleCloseSettings()}
+          showExpandIcon
         >
           <ApiKeysList />
         </SideBar>

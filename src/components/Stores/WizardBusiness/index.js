@@ -94,6 +94,7 @@ export const WizardBusiness = (props) => {
               id='business_new_product_form'
               open={openTutorialSidebarState === 'new_product'}
               onClose={() => setOpenTutorialSidebarState(null)}
+              showExpandIcon
             >
               <BusinessProductAddForm
                 isTutorialMode

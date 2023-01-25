@@ -59,7 +59,8 @@ const LoginFormUI = (props) => {
     handleChangeTab,
     generateOtpCode,
     otpState,
-    setOtpState
+    setOtpState,
+    useLoginByEmail
   } = props
   const [, t] = useLanguage()
   const [ordering] = useApi()
@@ -229,7 +230,7 @@ const LoginFormUI = (props) => {
           </p>
         </TitleFormSide>
 
-        {(ordering?.project && useLoginOtpEmail) && !loginWithOtpState && !willVerifyOtpState && (
+        {(ordering?.project && useLoginOtpEmail && useLoginByEmail) && !loginWithOtpState && !willVerifyOtpState && (
           <LoginWith>
             <Tabs>
               <Tab

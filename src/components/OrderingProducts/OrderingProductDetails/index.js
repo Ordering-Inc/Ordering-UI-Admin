@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage, SiteDetails as SiteDetailsController } from 'ordering-components-admin'
-import { DefaultSelect } from '../../../styles'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { DefaultSelect, IconButton } from '../../../styles'
+import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { Confirm } from '../../Shared'
 import { OrderingProductGeneralDetails } from '../OrderingProductGeneralDetails'
 import { SiteTheme } from '../SiteTheme'
@@ -11,8 +11,10 @@ import {
   Tab,
   DetailHeaderContainer,
   ActionSelectorWrapper,
-  TitleWrapper
+  TitleWrapper,
+  RightHeader
 } from './styles'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 const OrderingProductDetailsUI = (props) => {
   const {
@@ -23,7 +25,9 @@ const OrderingProductDetailsUI = (props) => {
 
   const [, t] = useLanguage()
   const [selectedTab, setSelectedTab] = useState('general')
+  const { width } = useWindowSize()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isExpand, setIsExpand] = useState(false)
 
   const tabs = [
     { key: 'general', content: t('GENERAL', 'General') },
@@ -45,21 +49,39 @@ const OrderingProductDetailsUI = (props) => {
     })
   }
 
+  const expandSidebar = () => {
+    const element = document.getElementById('product_details')
+    if (!element) return
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
   return (
     <Container>
       <DetailHeaderContainer>
         <TitleWrapper>
           <h2>{siteState.site?.name}</h2>
         </TitleWrapper>
-        {!isAddMode && (
-          <ActionSelectorWrapper>
-            <DefaultSelect
-              placeholder={<ThreeDots />}
-              options={moreOptions}
-              onChange={() => onClickDelete()}
-            />
-          </ActionSelectorWrapper>
-        )}
+        <RightHeader>
+          {width > 576 && (
+            <IconButton
+              color='black'
+              onClick={expandSidebar}
+            >
+              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+            </IconButton>
+          )}
+          {!isAddMode && (
+            <ActionSelectorWrapper>
+              <DefaultSelect
+                placeholder={<ThreeDots />}
+                options={moreOptions}
+                onChange={() => onClickDelete()}
+              />
+            </ActionSelectorWrapper>
+          )}
+        </RightHeader>
       </DetailHeaderContainer>
       {!isAddMode && (
         <Tabs>

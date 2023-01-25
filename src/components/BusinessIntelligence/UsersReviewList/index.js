@@ -146,6 +146,7 @@ const DriversReviewListUI = (props) => {
             setCurDriver(null)
             setOpenReview(false)
           }}
+          showExpandIcon
         >
           <UserReviewDetails
             userId={curDriver?.id}

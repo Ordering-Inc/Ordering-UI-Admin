@@ -32,6 +32,11 @@ export const HeaderContainer = styled.div`
   }
 `
 
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 export const HeaderTitleContainer = styled.div`
   flex: 1;
   display: flex;
@@ -239,8 +244,8 @@ export const BrandListBottomContainer = styled.div`
   span {
     cursor: pointer;
     user-select: none;
-    font-size: 12px;
-    color: ${props => props.theme.colors?.lightGray};
+    font-size: 14px;
+    color: ${props => props.theme.colors?.primary};
   }
 `
 
@@ -253,7 +258,6 @@ export const DetailHeder = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 3px;
   margin-bottom: 25px;
   ${props => props.theme?.rtl ? css`
     margin-left: 40px;

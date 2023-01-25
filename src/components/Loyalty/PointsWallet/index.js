@@ -7,24 +7,39 @@ import {
   Container,
   Title,
   Tabs,
-  Tab
+  Tab,
+  Header
 } from './styles'
+import { IconButton } from '../../../styles'
+import { ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 export const PointsWallet = (props) => {
   const {
     handleParentSidebarMove,
     pointWallet,
-    handleUpdatePointsWallet
+    handleUpdatePointsWallet,
+    moveDistance
   } = props
 
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
+
   const [selectedOption, setSelectedOption] = useState('general')
   const [selectedBusinessList, setSelectedBusinessList] = useState([])
+  const [isExpand, setIsExpand] = useState(false)
 
   const walletOptionList = [
     { key: 'general', name: t('GENERAL', 'General') },
     { key: 'business', name: t('BUSINESSES', 'Businesses') }
   ]
+
+  const expandSidebar = () => {
+    const element = document.getElementById('loyaltyWallet')
+    if (isExpand) element.style.width = '550px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
 
   useEffect(() => {
     if (selectedOption !== 'business') handleParentSidebarMove(0)
@@ -32,7 +47,17 @@ export const PointsWallet = (props) => {
 
   return (
     <Container>
-      <Title>{t('POINTS_WALLET', 'Points wallet')}</Title>
+      <Header>
+        <Title>{t('POINTS_WALLET', 'Points wallet')}</Title>
+        {width > 576 && moveDistance === 0 && (
+          <IconButton
+            color='black'
+            onClick={expandSidebar}
+          >
+            {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+          </IconButton>
+        )}
+      </Header>
       <Tabs>
         {walletOptionList.map(option => (
           <Tab

@@ -342,6 +342,24 @@ const ProductDetailsAdvancedUI = (props) => {
           />
         )}
       </TypeSelectWrapper>
+      <FieldRow fullWidth>
+        <InputContainer>
+          <LabelCustom htmlFor='external_id'>{t('EXTERNAL_ID', 'External Id')}</LabelCustom>
+          <Input
+            name='external_id'
+            placeholder={t('EXTERNAL_ID', 'External Id')}
+            defaultValue={productState?.external_id}
+            onChange={(e) => handleClickProperty('external_id', e.target.value ?? null)}
+            disabled={formState.loading}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </InputContainer>
+      </FieldRow>
       <FieldRow>
         <InputContainer>
           <LabelCustom htmlFor='cost_price'>{t('PRODUCT_COST', 'Product cost')}</LabelCustom>

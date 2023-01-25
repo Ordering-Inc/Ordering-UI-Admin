@@ -251,6 +251,19 @@ export const SeoOptions = (props) => {
             />
           </WrapperDescription>
         )}
+        <WrapperDescription>
+          <label>{t('SLUG', 'Slug')}</label>
+          <Input
+            name='slug'
+            placeholder={t('SLUG', 'Slug')}
+            defaultValue={
+              formState?.result?.result
+                ? formState?.result?.result?.slug
+                : formState?.changes?.slug ?? data?.slug ?? ''
+            }
+            onChange={(e) => handleProductCategoryChangeInput(e)}
+          />
+        </WrapperDescription>
         <ActionButtons>
           <Button
             color='primary'
@@ -277,7 +290,7 @@ export const SeoOptions = (props) => {
         padding='30px'
         title={t('IMAGE_CROP', 'Image crop')}
         open={cropState?.open}
-        onClose={() => setCropState({ ...cropState, open: false })}
+        onRemove={() => setCropState({ ...cropState, open: false })}
       >
         <ImageCrop
           photo={cropState?.data}

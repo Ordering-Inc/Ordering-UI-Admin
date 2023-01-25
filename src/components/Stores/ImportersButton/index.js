@@ -29,6 +29,7 @@ export const ImportersButton = (props) => {
           moveDistance={extraOpen ? 500 : 0}
           open={openImporters}
           onClose={() => setOpenImporters(false)}
+          showExpandIcon
         >
           <ImportersListing
             setExtraOpen={setExtraOpen}
