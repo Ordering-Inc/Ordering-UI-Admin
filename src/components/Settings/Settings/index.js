@@ -297,6 +297,7 @@ const SettingsUI = (props) => {
             defaultSideBarWidth={550}
             open={isOpenSettingDetails}
             onClose={() => setIsOpenSettingDetails(null)}
+            showExpandIcon
           >
             {isOpenSettingDetails === 'checkout' && (
               <CheckoutFieldsSetting />

@@ -385,7 +385,7 @@ const UserAddFormUI = (props) => {
         padding='30px'
         title={t('IMAGE_CROP', 'Image crop')}
         open={cropState?.open}
-        onClose={() => setCropState({ ...cropState, open: false })}
+        onRemove={() => setCropState({ ...cropState, open: false })}
       >
         <ImageCrop
           photo={cropState?.data}

@@ -6,6 +6,16 @@ export const Container = styled.div`
   box-sizing: border-box;
 `
 
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-right: 30px;
+  ${props => props.theme.rtl && css`
+    margin-right: 0;
+    margin-left: 30px;
+  `}
+`
+
 export const Title = styled.h1`
   font-weight: bold;
   font-size: 20px;

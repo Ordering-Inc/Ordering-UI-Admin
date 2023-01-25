@@ -214,12 +214,9 @@ export const PromotionListBottom = styled.div`
 `
 export const AddNewButton = styled.div`
   cursor: pointer;
-  color: ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors.primary};
   width: fit-content;
   font-size: 13px;
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
 `
 
 export const WrapperPagination = styled.div`

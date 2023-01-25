@@ -212,6 +212,7 @@ const DeliveryUsersListingUI = (props) => {
           open={openUserAddForm}
           noAnimation={isTourOpen}
           onClose={() => handleCloseAddForm()}
+          showExpandIcon
         >
           <UserAddForm
             isDriversPage={isDriversPage}

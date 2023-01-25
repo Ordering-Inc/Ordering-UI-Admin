@@ -191,7 +191,7 @@ export const WrapperPagination = styled.div`
 
 export const AddNewUserButton = styled.div`
   cursor: pointer;
-  color: ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors.primary};
   width: fit-content;
   font-size: 14px;
 `

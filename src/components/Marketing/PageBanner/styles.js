@@ -10,9 +10,9 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
 
   ${props => props.theme?.rtl ? css`
-    margin-left: 40px;
+    margin-left: 30px;
   ` : css`
-    margin-right: 40px;
+    margin-right: 30px;
   `}
 
   > div {
@@ -27,11 +27,25 @@ export const HeaderContainer = styled.div`
       flex: 1;
     }
   }
+`
 
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: flex-start !important;
   button {
-    height: 44px;
+    &.add-banner {
+      height: 44px;
+    }
+    &:last-child {
+      margin-left: 10px;
+      ${props => props.theme.rtl && css`
+        margin-left: 0;
+        margin-right: 10px;
+      `}
+    }
   }
 `
+
 export const BannersHeader = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.disabled};
   padding-bottom: 9px;
@@ -90,13 +104,9 @@ export const EnableWrapper = styled.div`
 export const AddNewBanner = styled.div`
   width: fit-content;
   cursor: pointer;
-  color: ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors.primary};
   font-size: 14px;
   margin-top: 15px;
-
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
 `
 export const InfoWrapper = styled.div`
   ${props => props.theme?.rtl ? css`

@@ -123,6 +123,7 @@ const ProductDetailsUI = (props) => {
           actionSidebar={actionSidebar}
           showOption={showOption}
           handleShowOption={handleShowOption}
+          extraOpen={extraOpen}
         />
       )}
       {extraOpen && (

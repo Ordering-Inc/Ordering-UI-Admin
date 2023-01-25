@@ -27,6 +27,14 @@ export const Header = styled.div`
   button {
     height: 42px;
   }
+
+  @media (min-width: 576px) {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 65px;
+    ` : css`
+      margin-right: 65px;
+    `}
+  }
 `
 
 export const WebhookListTable = styled.table`

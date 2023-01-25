@@ -434,6 +434,7 @@ const PlaceListingUI = (props) => {
             setSelectedCity(null)
             setOpenCity(false)
           }}
+          showExpandIcon
         >
           <CityDetails
             city={selectedCity}

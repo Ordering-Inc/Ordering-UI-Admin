@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { XLg, LifePreserver } from 'react-bootstrap-icons'
+import { XLg, LifePreserver, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { useLanguage } from 'ordering-components-admin'
@@ -42,12 +42,21 @@ export const SettingsDetail = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraInfoOpen, setExtraInfoOpen] = useState(false)
   const [extraSubCatOpen, setExtraSubCatOpen] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
+
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
 
     if (!value) {
       props.onClose()
     }
+  }
+
+  const expandSidebar = () => {
+    const element = document.getElementById('catDescription')
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
   }
 
   const toggleMainContent = () => {
@@ -163,6 +172,14 @@ export const SettingsDetail = (props) => {
           <Content>
             <CategoryName>
               <p>{category.name}</p>
+              {width > 576 && !extraInfoOpen && !extraSubCatOpen && (
+                <IconButton
+                  color='black'
+                  onClick={expandSidebar}
+                >
+                  {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+                </IconButton>
+              )}
             </CategoryName>
             <Description>{category?.description}</Description>
             {

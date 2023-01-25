@@ -20,11 +20,8 @@ export const LeftHeader = styled.div`
   }
 `
 export const RightHeader = styled.div`
-  ${props => props.theme?.rtl ? css`
-    margin-left: 35px;
-  ` : css`
-    margin-right: 35px;
-  `}
+  display: flex;
+  align-items: center;
 `
 export const VerifiedItem = styled.span`
   font-size: 10px;

@@ -268,7 +268,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
             <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
           )
         )}
-        {(!zone && zoneType !== 5) && (
+        {(!zone && zoneType !== 5 && zoneType !== 4) && (
           <KmlButtonWrapper>
             <Button
               color='primary'

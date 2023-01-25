@@ -6,8 +6,13 @@ export const Container = styled.div`
   height: 100%;
   overflow-x: hidden;
   padding: 20px;
-  max-width: 500px;
 `
+
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 export const Tabs = styled.div`
   display: flex;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
@@ -42,9 +47,9 @@ export const DetailHeaderContainer = styled.div`
   margin-bottom: 15px;
 
   ${props => props.theme?.rtl ? css`
-    margin-left: 40px;
+    margin-left: 25px;
   ` : css`
-    margin-right: 40px;
+    margin-right: 25px;
   `}
 `
 export const ActionSelectorWrapper = styled.div`

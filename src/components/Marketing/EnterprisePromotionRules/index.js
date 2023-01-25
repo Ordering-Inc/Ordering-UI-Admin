@@ -271,6 +271,7 @@ export const EnterprisePromotionRules = (props) => {
         <Modal
           width='70%'
           open={isShowConditions}
+          isTopPosition
           onClose={() => {
             setMoveDistance(0)
             setIsShowConditions(false)

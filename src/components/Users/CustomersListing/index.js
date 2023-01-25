@@ -13,12 +13,12 @@ import { UserAddForm } from '../UserAddForm'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { Button } from '../../../styles'
-// import { X as CloseIcon } from 'react-bootstrap-icons'
+import { X as CloseIcon } from 'react-bootstrap-icons'
 
 import {
   UsersListingContainer,
   ActionsContainer,
-  // VerifiedStatusFilterContainer,
+  VerifiedStatusFilterContainer,
   ActionButtonsGroup
 } from './styles'
 
@@ -48,7 +48,11 @@ const CustomersListingUI = (props) => {
     handleSuccessUpdate,
     handleSuccessAddUser,
     handleSuccessDeleteUser,
-    setSelectedUsers
+    setSelectedUsers,
+    orderFilterValue,
+    handleChangeOrderFilterValue,
+    handleChangeMultiFilterValues,
+    multiFilterValues
   } = props
 
   const [, t] = useLanguage()
@@ -58,6 +62,12 @@ const CustomersListingUI = (props) => {
   const [openUser, setOpenUser] = useState(null)
   const [openUserAddForm, setOpenUserAddForm] = useState(false)
   const [moveDistance, setMoveDistance] = useState(0)
+
+  const orderList = [
+    { id: 1, name: t('NO_ORDERS', 'No orders'), value: 0 },
+    { id: 2, name: t('WITH_ORDERS', 'With orders'), value: 1 },
+    { id: 3, name: t('WITH_5_ORDERS', 'With 5+ orders'), value: 5 }
+  ]
 
   const handleBackRedirect = () => {
     setIsOpenUserDetails(false)
@@ -105,28 +115,33 @@ const CustomersListingUI = (props) => {
           title={headerTitle}
           searchValue={searchValue}
           onSearch={onSearch}
+          multiFilterValues={multiFilterValues}
+          handleChangeMultiFilterValues={handleChangeMultiFilterValues}
         />
         <UserActiveStateFilter
           selectedUserActiveState={selectedUserActiveState}
           handleChangeUserActiveState={handleChangeUserActiveState}
         />
         <ActionsContainer>
-          {/* <VerifiedStatusFilterContainer>
+          <VerifiedStatusFilterContainer>
             <Button
-              color={!isVerified ? 'primary' : 'secundaryDark'}
-              onClick={() => setIsVerified(false)}
+              color={(orderFilterValue === '' || orderFilterValue === null) ? 'primary' : 'secundaryDark'}
+              onClick={() => handleChangeOrderFilterValue('')}
             >
               {t('ALL', 'All')}
-              <CloseIcon />
+              {(orderFilterValue === '' || orderFilterValue === null) && <CloseIcon />}
             </Button>
-            <Button
-              color={isVerified ? 'primary' : 'secundaryDark'}
-              onClick={() => setIsVerified(true)}
-            >
-              {t('VERIFIED', 'Verified')}
-              <CloseIcon />
-            </Button>
-          </VerifiedStatusFilterContainer> */}
+            {orderList.map((item, i) => (
+              <Button
+                key={i}
+                color={orderFilterValue === item.value ? 'primary' : 'secundaryDark'}
+                onClick={() => handleChangeOrderFilterValue(item.value)}
+              >
+                {item.name}
+                {orderFilterValue === item.value && <CloseIcon />}
+              </Button>
+            ))}
+          </VerifiedStatusFilterContainer>
           <ActionButtonsGroup>
             <Button
               borderRadius='8px'
@@ -189,6 +204,7 @@ const CustomersListingUI = (props) => {
           sidebarId='user_add_form'
           open={openUserAddForm}
           onClose={() => setOpenUserAddForm(false)}
+          showExpandIcon
         >
           <UserAddForm
             handleSuccessAdd={handleSuccessAddUser}

@@ -8,6 +8,12 @@ export const DetailsHeader = styled.div`
   margin-bottom: 10px;
   margin-top: -5px;
 `
+
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 export const UserName = styled.div`
   display: flex;
   align-items: center;
