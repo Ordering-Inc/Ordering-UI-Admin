@@ -6,7 +6,7 @@ import { OpenCartBill } from '../OpenCartBill'
 import { OpenCartsContactInformation } from '../OpenCartsContactInformation'
 import { NotFoundSource } from '../../Shared'
 import { IconButton as ButtonLink } from '../../../styles'
-import { XLg as CloseIcon } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, XLg as CloseIcon } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 
 import {
@@ -32,6 +32,7 @@ const OpenCartsDetailUI = (props) => {
   const [{ parseDate }] = useUtils()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
@@ -64,6 +65,13 @@ const OpenCartsDetailUI = (props) => {
     if (e.code === 'Escape') {
       props.onClose() && props.onClose()
     }
+  }
+
+  const expandSidebar = () => {
+    const element = document.getElementById('cartDetails')
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
   }
 
   useEffect(() => {
@@ -100,6 +108,14 @@ const OpenCartsDetailUI = (props) => {
                   </p>
                 </OrderInfoWrapper>
                 <ButtonGroup>
+                  {width > 576 && (
+                    <ButtonLink
+                      color='black'
+                      onClick={expandSidebar}
+                    >
+                      {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+                    </ButtonLink>
+                  )}
                   <ButtonLink
                     color='black'
                     onClick={() => props.onClose() && props.onClose()}

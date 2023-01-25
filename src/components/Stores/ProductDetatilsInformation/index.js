@@ -17,7 +17,7 @@ import {
   InputWrapper,
   ActionsForm,
   InventoryWrapper,
-  Wrapper,
+  // Wrapper,
   RegularWrapper,
   FieldRow,
   ColorShapeWrapper,
@@ -252,22 +252,6 @@ export const ProductDetatilsInformation = (props) => {
             autoComplete='off'
           />
         </InputWrapper>
-        <InputWrapper>
-          <label>{t('EXTERNAL_ID', 'External Id')}</label>
-          <Input
-            name='external_id'
-            placeholder={t('EXTERNAL_ID', 'External Id')}
-            defaultValue={product?.external_id}
-            onChange={handleChangeInput}
-            disabled={formState.loading}
-            autoComplete='off'
-            onKeyPress={(e) => {
-              if (!/^[0-9]$/.test(e.key)) {
-                e.preventDefault()
-              }
-            }}
-          />
-        </InputWrapper>
         <FieldRow>
           <InputWrapper>
             <label className='space-between'>
@@ -331,36 +315,6 @@ export const ProductDetatilsInformation = (props) => {
             disabled={formState.loading}
             autoComplete='off'
           />
-        </InputWrapper>
-        <InputWrapper>
-          <label>{t('SLUG', 'Slug')}</label>
-          <Input
-            name='slug'
-            placeholder={t('SLUG', 'Slug')}
-            onChange={handleChangeInput}
-            disabled={formState.loading}
-            autoComplete='off'
-            value={formState?.changes?.slug ?? product?.slug ?? ''}
-            onKeyPress={e => {
-              if (e.which === 32) { e.preventDefault() }
-            }}
-          />
-          {/* <Wrapper
-            style={{ paddingTop: 10 }}
-          >
-            <Button
-              color='lightPrimary'
-              borderRadius='7.6px'
-              type='button'
-              disabled={formState.loading}
-              onClick={() => setAutoGenerate({
-                ...autoGenerateCode,
-                isAutoGenerate: true
-              })}
-            >
-              {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
-            </Button>
-          </Wrapper> */}
         </InputWrapper>
 
         <InventoryWrapper>
@@ -494,7 +448,7 @@ export const ProductDetatilsInformation = (props) => {
         padding='30px'
         title={t('IMAGE_CROP', 'Image crop')}
         open={cropState?.open}
-        onClose={() => setCropState({ ...cropState, open: false })}
+        onRemove={() => setCropState({ ...cropState, open: false })}
       >
         <ImageCrop
           photo={cropState?.data}

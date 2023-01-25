@@ -192,7 +192,7 @@ export const DriversGroupsList = (props) => {
                     <td>
                       <DriverManagerContainer>
                         <WrapperImage>
-                          {group?.photo ? (
+                          {group?.administrator?.photo ? (
                             <Image bgimage={group?.administrator?.photo} />
                           ) : (
                             <FaUserAlt />

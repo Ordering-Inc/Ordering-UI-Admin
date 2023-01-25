@@ -5,9 +5,9 @@ import {
   DriversGroupDetails as DriversGroupDetailsController
 } from 'ordering-components-admin'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { Switch } from '../../../styles'
+import { IconButton, Switch } from '../../../styles'
 import { Alert, Confirm, DragScroll } from '../../Shared'
 import { DriversGroupGeneralForm } from '../DriversGroupGeneralForm'
 import { DriversGroupBusinesses } from '../DriversGroupBusinesses'
@@ -22,7 +22,8 @@ import {
   Header,
   MenusContainer,
   Tab,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  RightHeader
 } from './styles'
 
 const DriversGroupDetailsUI = (props) => {
@@ -49,6 +50,7 @@ const DriversGroupDetailsUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isOpenDetails, setIsOpenDetails] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
 
   useEffect(() => {
     const _driversGroupMenus = !driversGroupState.driversGroup
@@ -95,6 +97,14 @@ const DriversGroupDetailsUI = (props) => {
     handleNextTour()
   }
 
+  const expandSidebar = () => {
+    const element = document.getElementById('driver_group_details')
+    if (!element) return
+    if (isExpand) element.style.width = '540px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
   useEffect(() => {
     setUseAdvanced(!(driversGroupState.driversGroup?.autoassign_amount_drivers === 0 && driversGroupState.driversGroup?.orders_group_max_orders === 0))
   }, [driversGroupState.driversGroup])
@@ -126,24 +136,44 @@ const DriversGroupDetailsUI = (props) => {
                   onChange={enabled => handleUpdateDriversGroup({ enabled: enabled })}
                 />
               </div>
-              <ActionSelectorWrapper>
-                <DropdownButton
-                  menuAlign={theme?.rtl ? 'left' : 'right'}
-                  title={<ThreeDots />}
-                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                >
-                  <Dropdown.Item
-                    onClick={() => onDeleteGroup()}
+              <RightHeader>
+                {width > 576 && (
+                  <IconButton
+                    color='black'
+                    onClick={expandSidebar}
                   >
-                    {t('DELETE', 'Delete')}
-                  </Dropdown.Item>
-                </DropdownButton>
-              </ActionSelectorWrapper>
+                    {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+                  </IconButton>
+                )}
+                <ActionSelectorWrapper>
+                  <DropdownButton
+                    menuAlign={theme?.rtl ? 'left' : 'right'}
+                    title={<ThreeDots />}
+                    id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                  >
+                    <Dropdown.Item
+                      onClick={() => onDeleteGroup()}
+                    >
+                      {t('DELETE', 'Delete')}
+                    </Dropdown.Item>
+                  </DropdownButton>
+                </ActionSelectorWrapper>
+              </RightHeader>
             </>
           ) : (
-            <div>
-              <h1>{t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')}</h1>
-            </div>
+            <>
+              <div>
+                <h1>{t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')}</h1>
+              </div>
+              {width > 576 && (
+                <IconButton
+                  color='black'
+                  onClick={expandSidebar}
+                >
+                  {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+                </IconButton>
+              )}
+            </>
           )}
         </Header>
         <MenusContainer>

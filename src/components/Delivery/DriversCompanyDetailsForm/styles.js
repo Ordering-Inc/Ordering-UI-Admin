@@ -12,12 +12,11 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 19px;
-  margin-top: 4px;
 
   ${props => props.theme?.rtl ? css`
-    margin-left: 40px;
+    margin-left: 35px;
   ` : css`
-    margin-right: 40px;
+    margin-right: 35px;
   `}
   h1 {
     font-size: 20px;
@@ -55,9 +54,9 @@ export const Tab = styled.div`
 `
 export const ActionSelectorWrapper = styled.div`
   ${props => props.theme?.rtl ? css`
-    margin-right: 20px;
+    margin-right: 5px;
   ` : css`
-    margin-left: 20px;
+    margin-left: 5px;
   `}
   button {
     background: transparent !important;
@@ -107,4 +106,9 @@ export const ActionSelectorWrapper = styled.div`
       }
     }
   }
+`
+
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
 `

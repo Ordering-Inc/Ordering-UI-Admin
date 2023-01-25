@@ -3,7 +3,7 @@ import { useLanguage, AdBannersList as AdBannersListController } from 'ordering-
 import Skeleton from 'react-loading-skeleton'
 import { SideBar, Alert, SearchBar } from '../../Shared'
 import { Button, Switch, IconButton } from '../../../styles'
-import { ChevronRight, InfoCircle } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, ChevronRight, InfoCircle } from 'react-bootstrap-icons'
 import { BannerDetails } from '../BannerDetails'
 import {
   Container,
@@ -17,8 +17,10 @@ import {
   AddNewBanner,
   InfoWrapper,
   InfoContent,
-  SearchBarWrapper
+  SearchBarWrapper,
+  RightHeader
 } from './styles'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 const PageBannersUI = (props) => {
   const {
@@ -37,11 +39,14 @@ const PageBannersUI = (props) => {
     isSearhShow
   } = props
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
+
   const [openItemsDetail, setOpenItemsDetail] = useState(false)
   const [selectedBanner, setSelectedBanner] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [], handleOnAccept: null })
   const [searchValue, setSearchValue] = useState('')
   const [bannerMoveDistance, setBannerMoveDistance] = useState(0)
+  const [isExpand, setIsExpand] = useState(false)
 
   const handleOpenBannerItemsDetail = (e, banner) => {
     const isInvalid = e.target.closest('.banner-enabled')
@@ -55,6 +60,13 @@ const PageBannersUI = (props) => {
     setMoveDistance(0)
     setOpenItemsDetail(false)
     setSelectedBanner(null)
+  }
+
+  const expandSidebar = () => {
+    const element = document.getElementById('sideSlider')
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
   }
 
   useEffect(() => {
@@ -85,14 +97,24 @@ const PageBannersUI = (props) => {
               <InfoContent>{bannerInfo}</InfoContent>
             </InfoWrapper>
           </div>
-
-          <Button
-            color='lightPrimary'
-            borderRadius='8px'
-            onClick={e => handleOpenBannerItemsDetail(e, {})}
-          >
-            {t('ADD_BANNER', 'Add banner')}
-          </Button>
+          <RightHeader>
+            <Button
+              className='add-banner'
+              color='lightPrimary'
+              borderRadius='8px'
+              onClick={e => handleOpenBannerItemsDetail(e, {})}
+            >
+              {t('ADD_BANNER', 'Add banner')}
+            </Button>
+            {width > 576 && (
+              <IconButton
+                color='black'
+                onClick={expandSidebar}
+              >
+                {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+              </IconButton>
+            )}
+          </RightHeader>
         </HeaderContainer>
 
         {isSearhShow && (

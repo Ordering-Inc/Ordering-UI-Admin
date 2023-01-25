@@ -317,16 +317,18 @@ const BusinessProductsListingUI = (props) => {
             </ActionsGroup>
           )}
         </HeaderContainer>
-        <ButtonWrapper>
-          <Button
-            color='primary'
-            outline
-            borderRadius='8px'
-            onClick={handleOpenSite}
-          >
-            {t('STORE_WEBSITE', 'Store website')}
-          </Button>
-        </ButtonWrapper>
+        {slug && (
+          <ButtonWrapper>
+            <Button
+              color='primary'
+              outline
+              borderRadius='8px'
+              onClick={handleOpenSite}
+            >
+              {t('STORE_WEBSITE', 'Store website')}
+            </Button>
+          </ButtonWrapper>
+        )}
         {slug && (
           <CategoryProductsContent>
             <CategoryListContainer ref={categoryListRef}>
@@ -428,6 +430,7 @@ const BusinessProductsListingUI = (props) => {
           <SideBar
             open={openSidebar === 'category_details'}
             onClose={handleCloseEdit}
+            sidebarId='editCategory'
           >
             <BusinessProductsCategoyDetails
               {...props}

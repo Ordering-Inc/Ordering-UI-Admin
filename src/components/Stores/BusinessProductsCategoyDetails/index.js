@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, BusinessProductsCategoyDetails as BusinessProductsCategoyDetailsController } from 'ordering-components-admin'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Alert, Confirm } from '../../Shared'
-import { Switch } from '../../../styles'
+import { IconButton, Switch } from '../../../styles'
 import { SeoOptions } from '../SeoOptions'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import { BusinessCategoryInfoSettingList } from '../BusinessCategoryInfoSettingList'
 import { BusinessProductsCategoyInfo } from '../BusinessProductsCategoyInfo'
@@ -44,10 +45,12 @@ const BusinessProductsCategoyDetailsUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [selectedInfoItem, setSelctedInfoItem] = useState('information')
+  const [isExpand, setIsExpand] = useState(false)
 
   const closeAlert = () => {
     setAlertState({
@@ -67,6 +70,15 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     })
   }
 
+  const expandSideBar = () => {
+    const element = document.getElementById('editCategory')
+    if (!element) return
+
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
   useEffect(() => {
     if (formState?.result?.error) {
       setAlertState({
@@ -78,7 +90,7 @@ const BusinessProductsCategoyDetailsUI = (props) => {
 
   return (
     <>
-      <Container id='editCategory'>
+      <Container>
         <EditCategoryContent>
           {
             businessState.loading ? (
@@ -122,6 +134,14 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                     )}
                   </BusinessEnableWrapper>
                   <RightHeader>
+                    {width > 576 && (
+                      <IconButton
+                        color='black'
+                        onClick={() => expandSideBar()}
+                      >
+                        {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+                      </IconButton>
+                    )}
                     {!isAddMode && (
                       <ActionSelectorWrapper>
                         <DropdownButton

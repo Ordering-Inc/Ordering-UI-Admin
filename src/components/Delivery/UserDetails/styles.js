@@ -82,9 +82,9 @@ export const PersonalizationWrapper = styled.div`
 
 export const ActionSelectorWrapper = styled.div`
   ${props => props.theme?.rtl ? css`
-    margin-left: 35px;
+    margin-left: 25px;
   ` : css`
-    margin-right: 35px;
+    margin-right: 25px;
   `}
   button {
     background: transparent !important;
@@ -138,7 +138,13 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
 `
+
 export const ScheduleSection = styled.div`
   margin-top: 30px;
   overflow: auto;
+`
+
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
 `

@@ -6,13 +6,13 @@ import { UserProfileForm } from '../UserProfileForm'
 import { AddressList } from '../../Delivery'
 import { OrdersManager } from '../../Orders'
 import { BusinessManagerBusinesses } from '../BusinessManagerBusinesses'
-import { Envelope, Phone, ThreeDots } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, Envelope, Phone, ThreeDots } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Confirm } from '../../Shared'
 import { Personalization } from '../../Shared/Personalization'
 import { UserMetaFields } from '../UserMetaFields'
-import { Switch } from '../../../styles'
+import { IconButton, Switch } from '../../../styles'
 
 import {
   DetailsHeader,
@@ -22,7 +22,8 @@ import {
   PersonalizationWrapper,
   OrdersWrapper,
   ActionSelectorWrapper,
-  VerifiedItemsWrapper
+  VerifiedItemsWrapper,
+  RightHeader
 } from './styles'
 
 export const UserDetailsUI = (props) => {
@@ -40,6 +41,7 @@ export const UserDetailsUI = (props) => {
   const [, t] = useLanguage()
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isExpand, setIsExpand] = useState(false)
 
   const onDeleteCustomer = () => {
     setConfirm({
@@ -50,6 +52,13 @@ export const UserDetailsUI = (props) => {
         handleDeleteUser()
       }
     })
+  }
+
+  const expandSidebar = () => {
+    const element = document.getElementById('user_lateral_bar')
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
   }
 
   useEffect(() => {
@@ -95,20 +104,27 @@ export const UserDetailsUI = (props) => {
                 </VerifiedItem>
               )}
             </VerifiedItemsWrapper>
-
-            {adminUserState.user?.id !== userState.user?.id && (
-              <ActionSelectorWrapper>
-                <DropdownButton
-                  menuAlign={theme?.rtl ? 'left' : 'right'}
-                  title={<ThreeDots />}
-                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                >
-                  <Dropdown.Item onClick={() => onDeleteCustomer()}>
-                    {t('DELETE', 'Delete')}
-                  </Dropdown.Item>
-                </DropdownButton>
-              </ActionSelectorWrapper>
-            )}
+            <RightHeader>
+              <IconButton
+                color='black'
+                onClick={expandSidebar}
+              >
+                {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+              </IconButton>
+              {adminUserState.user?.id !== userState.user?.id && (
+                <ActionSelectorWrapper>
+                  <DropdownButton
+                    menuAlign={theme?.rtl ? 'left' : 'right'}
+                    title={<ThreeDots />}
+                    id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                  >
+                    <Dropdown.Item onClick={() => onDeleteCustomer()}>
+                      {t('DELETE', 'Delete')}
+                    </Dropdown.Item>
+                  </DropdownButton>
+                </ActionSelectorWrapper>
+              )}
+            </RightHeader>
           </>
         )}
       </DetailsHeader>

@@ -1,17 +1,30 @@
 import styled, { css } from 'styled-components'
 
 export const SitesListContainer = styled.div`
-  padding: 26px 20px;
+  padding: 20px;
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
+`
+
+export const Header = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 
   h1 {
     font-weight: 700;
     font-size: 20px;
     margin: 0;
   }
+
+  margin-right: 35px;
+  ${props => props.theme.rtl && css`
+    margin-left: 35px;
+    margin-right: 0;
+  `}
 `
+
 export const SitesWrapper = styled.div`
   margin-top: 35px;
   border: 1px solid ${props => props.theme.colors.borderColor};

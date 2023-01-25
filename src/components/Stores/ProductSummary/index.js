@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { XLg, ThreeDots, Laptop, Phone } from 'react-bootstrap-icons'
+import { XLg, ThreeDots, Laptop, Phone, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import { Switch } from '../../../styles/Switch'
 import { IconButton } from '../../../styles'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
@@ -42,7 +42,8 @@ export const ProductSummary = (props) => {
     productState,
     productCart,
     handleDeleteProduct,
-    showProductOption
+    showProductOption,
+    extraOpen
   } = props
 
   const [, t] = useLanguage()
@@ -53,6 +54,7 @@ export const ProductSummary = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isProductPreview, setIsProductPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
+  const [isExpand, setIsExpand] = useState(false)
 
   const productConfigOptions = [
     {
@@ -127,6 +129,19 @@ export const ProductSummary = (props) => {
     }
   }
 
+  const expandSideBar = () => {
+    const element = document.getElementById('product_details')
+    if (!element) return
+
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
+  useEffect(() => {
+    if (extraOpen) setIsExpand(false)
+  }, [extraOpen])
+
   return (
     <>
       <ProductDetailsContainer disabled={productState.loading}>
@@ -141,6 +156,12 @@ export const ProductSummary = (props) => {
             />
           </LeftHeader>
           <RightHeader>
+            <IconButton
+              color='black'
+              onClick={() => expandSideBar()}
+            >
+              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+            </IconButton>
             <ActionSelectorWrapper>
               <DropdownButton
                 className='product_actions'

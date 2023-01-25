@@ -96,6 +96,7 @@ const RewardsProgramsUI = (props) => {
         >
           <PointsWallet
             {...props}
+            moveDistance={moveDistance}
             handleParentSidebarMove={val => setMoveDistance(val)}
           />
         </SideBar>
@@ -107,6 +108,7 @@ const RewardsProgramsUI = (props) => {
           onClose={() => handleCloseLevel()}
           defaultSideBarWidth={550 + levelMoveDistance}
           moveDistance={levelMoveDistance}
+          showExpandIcon
         >
           <PointsWalletLevels
             handleParentSidebarMove={val => setLevelMoveDistance(val)}
@@ -119,6 +121,7 @@ const RewardsProgramsUI = (props) => {
           onClose={() => handleCloseGiftCard()}
           defaultSideBarWidth={550 + giftCardMoveDistance}
           moveDistance={giftCardMoveDistance}
+          showExpandIcon
         >
           <GiftCards
             handleParentSidebarMove={val => setGiftCardMoveDistance(val)}

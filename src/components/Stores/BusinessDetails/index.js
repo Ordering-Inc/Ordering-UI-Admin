@@ -152,6 +152,7 @@ export const BusinessDetailsUI = (props) => {
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleDuplicateBusiness={handleDuplicateBusiness}
           handleDeleteBusiness={handleDeleteBusiness}
+          extraOpen={extraOpen}
         />
       )}
       {extraOpen && (

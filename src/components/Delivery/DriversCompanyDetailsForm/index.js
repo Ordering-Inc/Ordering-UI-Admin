@@ -4,7 +4,7 @@ import {
   DriversCompanyDetails as DriversCompanyDetailsController
 } from 'ordering-components-admin'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { Alert, Confirm, DragScroll } from '../../Shared'
 
@@ -17,8 +17,11 @@ import {
   Header,
   TabsContainer,
   Tab,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  RightHeader
 } from './styles'
+import { IconButton } from '../../../styles'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 const DriversCompanyDetailsFormUI = (props) => {
   const {
@@ -31,9 +34,11 @@ const DriversCompanyDetailsFormUI = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const { width } = useWindowSize()
   const [currentTabItem, setCurrentTabItem] = useState('general')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isExpand, setIsExpand] = useState(false)
 
   const tabItems = [
     { key: 'general', content: t('GENERAL', 'General') },
@@ -60,6 +65,14 @@ const DriversCompanyDetailsFormUI = (props) => {
     })
   }
 
+  const expandSidebar = () => {
+    const element = document.getElementById('city-details')
+    if (!element) return
+    if (isExpand) element.style.width = '550px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
   useEffect(() => {
     if (!actionState.loading && actionState.error) {
       setAlertState({
@@ -80,21 +93,31 @@ const DriversCompanyDetailsFormUI = (props) => {
                 : t('DRIVER_COMPANY_SETTINGS', 'Driver company settings')
             }
           </h1>
-          {driversCompany && (
-            <ActionSelectorWrapper>
-              <DropdownButton
-                menuAlign={theme?.rtl ? 'left' : 'right'}
-                title={<ThreeDots />}
-                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+          <RightHeader>
+            {width > 576 && (
+              <IconButton
+                color='black'
+                onClick={expandSidebar}
               >
-                <Dropdown.Item
-                  onClick={() => onDeleteCompany()}
+                {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+              </IconButton>
+            )}
+            {driversCompany && (
+              <ActionSelectorWrapper>
+                <DropdownButton
+                  menuAlign={theme?.rtl ? 'left' : 'right'}
+                  title={<ThreeDots />}
+                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                 >
-                  {t('DELETE', 'Delete')}
-                </Dropdown.Item>
-              </DropdownButton>
-            </ActionSelectorWrapper>
-          )}
+                  <Dropdown.Item
+                    onClick={() => onDeleteCompany()}
+                  >
+                    {t('DELETE', 'Delete')}
+                  </Dropdown.Item>
+                </DropdownButton>
+              </ActionSelectorWrapper>
+            )}
+          </RightHeader>
         </Header>
         <TabsContainer>
           <DragScroll>
