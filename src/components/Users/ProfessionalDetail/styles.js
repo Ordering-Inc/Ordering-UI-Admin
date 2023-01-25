@@ -85,7 +85,7 @@ export const ActionSelectorWrapper = styled.div`
           background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
         }
       }
-      .dropdown-item:last-child {
+      .dropdown-item.delete {
         color: #E63757;
       }
     }

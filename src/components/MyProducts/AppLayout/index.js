@@ -16,7 +16,7 @@ import {
 } from './styles'
 
 export const AppLayout = (props) => {
-  const { appInfo, isDriver } = props
+  const { appInfo, isDriver, children } = props
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
@@ -103,6 +103,7 @@ export const AppLayout = (props) => {
             </ButtonWRapper>
           </AppInfoContainer>
         </BoxWrapper>
+        {children && children}
       </ContentWrapper>
     </Container>
   )
