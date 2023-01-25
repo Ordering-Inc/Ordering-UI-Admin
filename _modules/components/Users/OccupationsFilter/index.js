@@ -7,6 +7,7 @@ exports.OccupationsFilter = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
+var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -27,7 +28,7 @@ var OccupationsFilter = function OccupationsFilter(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, occupationsState.loading ? _toConsumableArray(Array(3).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, occupationsState.loading ? _toConsumableArray(Array(3).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null));
@@ -44,6 +45,6 @@ var OccupationsFilter = function OccupationsFilter(props) {
         return handleSelectOccupation(occupation.id);
       }
     }, occupation.name);
-  })));
+  }))));
 };
 exports.OccupationsFilter = OccupationsFilter;

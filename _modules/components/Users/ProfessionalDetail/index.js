@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _adminUserState$user, _userState$user4, _userState$user5;
+  var _userState$user, _userState$user2, _userState$user3, _adminUserState$user, _userState$user4, _adminUserState$user2, _userState$user5;
   var userState = props.userState,
     occupations = props.occupations,
     setExtraOpen = props.setExtraOpen,
@@ -136,7 +136,8 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
     onClick: function onClick() {
       return handleOpenExtra('personalization');
     }
-  }, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('PERSONALIZATION', 'Personalization')), (adminUserState === null || adminUserState === void 0 ? void 0 : (_adminUserState$user2 = adminUserState.user) === null || _adminUserState$user2 === void 0 ? void 0 : _adminUserState$user2.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    className: "delete",
     onClick: function onClick() {
       return onDeleteCustomer();
     }

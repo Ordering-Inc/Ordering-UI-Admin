@@ -183,6 +183,7 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
 };
 var ProfessionalListing = function ProfessionalListing(props) {
   var usersListingProps = _objectSpread(_objectSpread({}, props), {}, {
+    isProfessional: true,
     UIComponent: ProfessionalListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
