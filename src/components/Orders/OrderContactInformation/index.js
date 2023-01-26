@@ -130,7 +130,11 @@ export const OrderContactInformation = (props) => {
             </PhotoWrapper>
             <InfoContent>
               <div>
-                <p className='name'>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
+                {(order?.customer?.name || order?.customer?.middle_name || order?.customer?.lastname || order?.customer?.second_lastname) ? (
+                  <p className='name'>{order?.customer?.name} {order?.customer?.middle_name} {order?.customer?.lastname} {order?.customer?.second_lastname}</p>
+                ) : (
+                  (!order?.customer?.email || !order?.customer?.phone) && <p className='name'>{t('GUEST_USER', 'Guest user')}</p>
+                )}
                 {order?.customer?.cellphone && (
                   <IconButton
                     onClick={() => window.open(`tel:${order?.customer?.country_phone_code ? '+' + order?.customer?.country_phone_code : ''}${order?.customer?.cellphone}`)}
