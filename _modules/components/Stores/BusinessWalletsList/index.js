@@ -57,6 +57,10 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
     wallet_cash_enabled: isWalletCashEnabled,
     wallet_credit_point_enabled: isWalletPointsEnabled && loyaltyPlanState.created
   };
+  var walletsLangs = {
+    wallet_cash_enabled: t('WALLET_CASH_ENABLED', 'Wallet cash enabled'),
+    wallet_credit_point_enabled: t('WALLET_CREDIT_POINT_ENABLED', 'Wallet credit point enabled')
+  };
   var handleOpenWallet = function handleOpenWallet(config) {
     setIsOpenWalletDetails(true);
     handleClosePaymethodDetails();
@@ -98,7 +102,7 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
       onClick: function onClick() {
         return handleOpenWallet(config);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles.WalletName, null, config.name), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
+    }, /*#__PURE__*/_react.default.createElement(_styles.WalletName, null, walletsLangs[config.key]), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   }))), isOpenDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     isBorderShow: true,
     open: isOpenDetails,
