@@ -50,15 +50,6 @@ export const AdBannersListing = (props) => {
       isSearhShow: true
     },
     {
-      key: 'app_home_page',
-      title: t('APP_HOME', 'App home'),
-      description: t('HOME_BANNER_DESCRIPTION', 'Add a banner to your home page and inform everyone about the latest news in your marketplace.'),
-      icon: <HouseDoor />,
-      info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
-      aspectRatio: 300 / 300,
-      isSearhShow: false
-    },
-    {
       key: 'app_business_listing',
       title: t('APP_BUSINESS_LISTING', 'App business listing'),
       description: t('BUSINESS_LISTING_BANNER_DESCRIPTION', 'Add a banner inside your business listing to let everyone know about your latest promotions inside your businesses listed.'),
