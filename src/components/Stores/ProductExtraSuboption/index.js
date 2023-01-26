@@ -21,6 +21,7 @@ import {
   ActionSelectorWrapper,
   DragImageWrapper
 } from './styles'
+import { ProductOptionExternalId } from '../ProductOptionExternalId'
 
 export const ProductExtraSuboption = (props) => {
   const {
@@ -54,6 +55,8 @@ export const ProductExtraSuboption = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [formState, setFormState] = useState({ })
+  const [externalIdOpen, setExternalIdOpen] = useState(false)
+  const [externalId, setExternalId] = useState()
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -119,6 +122,14 @@ export const ProductExtraSuboption = (props) => {
     })
   }
 
+  const handleUpdateExternalId = () => {
+    handleUpdateSubOption({
+      id: subOption.id,
+      external_id: externalId
+    })
+    setExternalIdOpen(false)
+  }
+
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -136,6 +147,10 @@ export const ProductExtraSuboption = (props) => {
     }, 500)
     setTimer(_timer)
   }, [formState])
+
+  useEffect(() => {
+    setExternalId(subOption?.external_id)
+  }, [subOption?.external_id])
 
   return (
     <SubOptionContainer
@@ -311,6 +326,11 @@ export const ProductExtraSuboption = (props) => {
               >
                 {t('CUSTOM_FIELDS', 'Custom fields')}
               </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => setExternalIdOpen(true)}
+              >
+                {t('EXTERNAL_ID', 'External ID')}
+              </Dropdown.Item>
               <Dropdown.Item onClick={() => handleDeteteClick(subOption.id)}>{t('DELETE', 'Delete')}</Dropdown.Item>
             </DropdownButton>
           </ActionSelectorWrapper>
@@ -350,6 +370,18 @@ export const ProductExtraSuboption = (props) => {
         <ImageCrop
           photo={cropState?.data}
           handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
+      <Modal
+        width='70%'
+        title={t('MODIFIER_OPTION', 'Modifier option')}
+        open={externalIdOpen}
+        onClose={() => setExternalIdOpen(false)}
+      >
+        <ProductOptionExternalId
+          value={externalId}
+          handleChange={setExternalId}
+          handleUpdate={handleUpdateExternalId}
         />
       </Modal>
     </SubOptionContainer>

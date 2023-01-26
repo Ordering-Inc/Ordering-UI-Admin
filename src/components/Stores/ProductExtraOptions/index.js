@@ -13,6 +13,7 @@ import { Alert, Confirm, Modal, ImageCrop } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { ProductExtraMetaFields } from '../ProductExtraMetaFields'
 import { ProductExtraOptionDetails } from '../ProductExtraOptionDetails'
+import { ProductOptionExternalId } from '../ProductOptionExternalId'
 
 import {
   MainContainer,
@@ -59,7 +60,8 @@ const ProductExtraOptionsUI = (props) => {
     handleDragStart,
     hanldeDragOver,
     handleDrop,
-    handleDragEnd
+    handleDragEnd,
+    handleUpdateExtraState
   } = props
 
   const theme = useTheme()
@@ -76,6 +78,7 @@ const ProductExtraOptionsUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isMaxError, setIsMaxError] = useState(false)
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
+  const [externalId, setExternalId] = useState()
 
   const closeAlert = () => {
     setAlertState({
@@ -182,6 +185,11 @@ const ProductExtraOptionsUI = (props) => {
     setTimer(_timer)
   }
 
+  const handleUpdateExternalId = () => {
+    handleUpdateExtraState(extraState.extra?.id, { external_id: externalId })
+    setOpenModal({ ...openModal, externalId: false })
+  }
+
   useEffect(() => {
     if (!addChangesState?.name && addChangesState?.min === 1 && addChangesState?.max === 1) {
       setValue('name', addChangesState?.name || '')
@@ -193,6 +201,10 @@ const ProductExtraOptionsUI = (props) => {
   useEffect(() => {
     setExtraName(extraState.extra?.name)
   }, [extraState.extra?.name])
+
+  useEffect(() => {
+    setExternalId(extraState?.extra?.external_id)
+  }, [extraState?.extra?.external_id])
 
   return (
     <MainContainer id='extra_options'>
@@ -216,6 +228,11 @@ const ProductExtraOptionsUI = (props) => {
                   onClick={() => setOpenModal({ ...openModal, metaField: true })}
                 >
                   {t('CUSTOM_FIELDS', 'Custom Fields')}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => setOpenModal({ ...openModal, externalId: true })}
+                >
+                  {t('EXTERNAL_ID', 'External ID')}
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => handleDeleteExtraClick()}
@@ -416,6 +433,18 @@ const ProductExtraOptionsUI = (props) => {
         <ProductExtraMetaFields
           businessId={business.id}
           extraId={extraState.extra.id}
+        />
+      </Modal>
+      <Modal
+        width='70%'
+        title={t('PRODUCT_EXTRA', 'Product extra')}
+        open={openModal?.externalId}
+        onClose={() => setOpenModal({ ...openModal, externalId: false })}
+      >
+        <ProductOptionExternalId
+          value={externalId}
+          handleChange={setExternalId}
+          handleUpdate={handleUpdateExternalId}
         />
       </Modal>
       <Modal
