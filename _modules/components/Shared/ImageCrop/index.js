@@ -25,7 +25,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ImageCrop = function ImageCrop(props) {
   var photo = props.photo,
     handleChangePhoto = props.handleChangePhoto,
-    onClose = props.onClose;
+    onClose = props.onClose,
+    aspectRatio = props.aspectRatio;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -58,14 +59,23 @@ var ImageCrop = function ImageCrop(props) {
   };
   (0, _react.useEffect)(function () {
     if (!cropperRef.current || !photo) return;
-    var _cropper = new _cropperjs.default(cropperRef.current, {
-      // aspectRatio: 16 / 9,
-      dragMode: 'move',
-      zoomable: false,
-      toggleDragModeOnDblclick: false
-    });
+    var _cropper;
+    if (aspectRatio) {
+      _cropper = new _cropperjs.default(cropperRef.current, {
+        aspectRatio: aspectRatio,
+        dragMode: 'move',
+        zoomable: false,
+        toggleDragModeOnDblclick: false
+      });
+    } else {
+      _cropper = new _cropperjs.default(cropperRef.current, {
+        dragMode: 'move',
+        zoomable: false,
+        toggleDragModeOnDblclick: false
+      });
+    }
     setCropper(_cropper);
-  }, [photo]);
+  }, [photo, aspectRatio]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageCropWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     ref: cropperRef,
     src: photo
