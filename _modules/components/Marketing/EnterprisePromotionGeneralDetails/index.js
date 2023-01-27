@@ -140,8 +140,8 @@ var EnterprisePromotionGeneralDetails = function EnterprisePromotionGeneralDetai
   };
   var handleChangeDates = function handleChangeDates(item) {
     handleChangeItem({
-      start: (0, _moment.default)(item.selection.startDate).format('YYYY-MM-DD'),
-      end: item.selection.endDate ? (0, _moment.default)(item.selection.endDate).format('YYYY-MM-DD') : null
+      start: (0, _moment.default)(item.selection.startDate).format('YYYY-MM-DD 00:00:00'),
+      end: item.selection.endDate ? (0, _moment.default)(item.selection.endDate).format('YYYY-MM-DD 23:59:59') : null
     });
     setDateRange([item.selection]);
   };

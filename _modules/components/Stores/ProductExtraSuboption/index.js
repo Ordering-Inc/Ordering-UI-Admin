@@ -16,6 +16,7 @@ var _reactBootstrap = require("react-bootstrap");
 var _styledComponents = require("styled-components");
 var _reactHookForm = require("react-hook-form");
 var _styles2 = require("./styles");
+var _ProductOptionExternalId = require("../ProductOptionExternalId");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -87,6 +88,14 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     formState = _useState10[0],
     setFormState = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    externalIdOpen = _useState12[0],
+    setExternalIdOpen = _useState12[1];
+  var _useState13 = (0, _react.useState)(),
+    _useState14 = _slicedToArray(_useState13, 2),
+    externalId = _useState14[0],
+    setExternalId = _useState14[1];
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
   };
@@ -153,6 +162,13 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
   var handleChangeInput = function handleChangeInput(e) {
     setFormState(_objectSpread(_objectSpread({}, formState), {}, _defineProperty({}, e.target.name, e.target.value)));
   };
+  var handleUpdateExternalId = function handleUpdateExternalId() {
+    handleUpdateSubOption({
+      id: subOption.id,
+      external_id: externalId
+    });
+    setExternalIdOpen(false);
+  };
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -171,6 +187,9 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     }, 500);
     setTimer(_timer);
   }, [formState]);
+  (0, _react.useEffect)(function () {
+    setExternalId(subOption === null || subOption === void 0 ? void 0 : subOption.external_id);
+  }, [subOption === null || subOption === void 0 ? void 0 : subOption.external_id]);
   return /*#__PURE__*/_react.default.createElement(_styles2.SubOptionContainer, {
     onSubmit: handleSubmit(onSubmit),
     isDragOver: dragoverSubOptionId === subOption.id,
@@ -340,6 +359,10 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     }
   }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
+      return setExternalIdOpen(true);
+    }
+  }, t('EXTERNAL_ID', 'External ID')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
       return handleDeteteClick(subOption.id);
     }
   }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
@@ -392,6 +415,17 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
   }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
     photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
     handleChangePhoto: handleChangePhoto
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "70%",
+    title: t('MODIFIER_OPTION', 'Modifier option'),
+    open: externalIdOpen,
+    onClose: function onClose() {
+      return setExternalIdOpen(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ProductOptionExternalId.ProductOptionExternalId, {
+    value: externalId,
+    handleChange: setExternalId,
+    handleUpdate: handleUpdateExternalId
   })));
 };
 exports.ProductExtraSuboption = ProductExtraSuboption;
