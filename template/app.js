@@ -69,6 +69,7 @@ import { CampaignListing } from './pages/CampaignListing'
 import { Professionals } from './pages/Professionals'
 import { QueryLogin } from '../src/components/Login'
 import { PluginSettings } from './pages/PluginSettings'
+import { AdBannersList } from './pages/AdBannersList'
 import { Profile } from './pages/Profile'
 import settings from './config.json'
 import { BusinessAdd } from './pages/BusinessAdd'
@@ -283,6 +284,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/marketing/campaign' allowedLevels={[0]}>
                       <CampaignListing />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/marketing/ad-banners' allowedLevels={[0]}>
+                      <AdBannersList />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/loyalty/rewards-programs' allowedLevels={[0]}>

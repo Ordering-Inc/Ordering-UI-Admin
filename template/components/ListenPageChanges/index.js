@@ -52,6 +52,7 @@ export const ListenPageChanges = ({ children }) => {
     drivers_groups: '/delivery/drivers-groups',
     enterprise_promotions: '/marketing/promotions-enterprise',
     campaign: '/marketing/campaign',
+    ad_banners: '/marketing/ad-banners',
     ordering_products: '/ordering-products',
     support: '/support',
     rewards_programs: '/loyalty/rewards-programs',

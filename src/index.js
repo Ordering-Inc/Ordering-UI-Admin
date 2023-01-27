@@ -141,6 +141,7 @@ import {
 import { HomePage } from './components/Home'
 import { LoginForm, ForgotPasswordForm, QueryLogin, ResetPassword } from './components/Login'
 import {
+  AdBannersListing,
   EnterprisePromotionListing,
   CampaignListing,
   EnterprisePromotionList,
@@ -543,6 +544,7 @@ export {
   QueryLogin,
   ResetPassword,
 
+  AdBannersListing,
   EnterprisePromotionListing,
   CampaignListing,
   EnterprisePromotionList,

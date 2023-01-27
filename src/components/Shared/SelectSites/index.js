@@ -20,7 +20,7 @@ export const SelectSites = (props) => {
     handleSelectAllSites,
     handleSelectNoneSites,
     handleUpdateClick,
-    handleAddPromotion
+    handleAddClick
   } = props
 
   const [, t] = useLanguage()
@@ -78,7 +78,7 @@ export const SelectSites = (props) => {
         color='primary'
         disabled={isDisabled}
         onClick={() => {
-          isAddMode ? handleAddPromotion() : handleUpdateClick()
+          isAddMode ? handleAddClick() : handleUpdateClick()
         }}
       >
         {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
