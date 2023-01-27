@@ -125,8 +125,8 @@ export const EnterprisePromotionGeneralDetails = (props) => {
 
   const handleChangeDates = (item) => {
     handleChangeItem({
-      start: moment(item.selection.startDate).format('YYYY-MM-DD'),
-      end: item.selection.endDate ? moment(item.selection.endDate).format('YYYY-MM-DD') : null
+      start: moment(item.selection.startDate).format('YYYY-MM-DD 00:00:00'),
+      end: item.selection.endDate ? moment(item.selection.endDate).format('YYYY-MM-DD 23:59:59') : null
     })
     setDateRange([item.selection])
   }
