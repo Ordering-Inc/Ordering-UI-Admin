@@ -315,6 +315,12 @@ Object.defineProperty(exports, "BusinessSupport", {
     return _BusinessSupport.BusinessSupport;
   }
 });
+Object.defineProperty(exports, "BusinessSync", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessSync.BusinessSync;
+  }
+});
 Object.defineProperty(exports, "BusinessTaxAndFees", {
   enumerable: true,
   get: function get() {
@@ -745,3 +751,4 @@ var _ProductStartGuide = require("./ProductStartGuide");
 var _ImportersButton = require("./ImportersButton");
 var _RestaurantSelectGuide = require("./RestaurantSelectGuide");
 var _ProductStep = require("./ProductStep");
+var _BusinessSync = require("./BusinessSync");
