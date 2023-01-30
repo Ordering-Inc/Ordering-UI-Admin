@@ -381,8 +381,6 @@ export const ImageGroup = styled.div`
 export const SocialShareContainer = styled.div``
 
 export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
   margin: 50px 0px 30px 0;
   button {
     height: 44px;
