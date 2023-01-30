@@ -1,12 +1,14 @@
 import React, { useRef, useState } from 'react'
 import { useLanguage, ExamineClick, DragAndDrop, useApi, OrderingWebsite as OrderingWebsiteController } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
+import { useLocation } from 'react-router-dom'
 import { Button, IconButton, Input, TextArea } from '../../../styles'
 import {
   List as MenuIcon,
   Image as DumyPhoto,
   CheckSquareFill as CheckedIcon,
-  Square as UnCheckedIcon
+  Square as UnCheckedIcon,
+  InfoCircle
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
@@ -35,7 +37,9 @@ import {
   WebsiteButtonWrapper,
   TabWrapper,
   Tabs,
-  Tab
+  Tab,
+  HeaderInfoWrapper,
+  InfoContent
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 import { AdvancedSettings } from '../AdvancedSettings'
@@ -55,6 +59,7 @@ const OrderingWebsiteUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const theme = useTheme()
   const [ordering] = useApi()
+  const location = useLocation()
 
   const logoRef = useRef(null)
   const backgroundRef = useRef(null)
@@ -160,6 +165,19 @@ const OrderingWebsiteUI = (props) => {
             </IconButton>
           )}
           <h1>{t('MY_PRODUCTS', 'My products')}</h1>
+          {(location.pathname === '/my-products/ordering-website' || location.pathname === '/my-products/customer-app') && (
+            <HeaderInfoWrapper>
+              <IconButton
+                color='primary'
+              >
+                <InfoCircle />
+              </IconButton>
+              <InfoContent>
+                {t('MY_PRODUCTS_INFO', 'Use the advanced configurations below to customize your products changing the images, colors, available options and others with a few clicks. If you have doubts, please contact our team here:')}
+                <a href='https://www.ordering.co/support' rel='noopener noreferrer' target='_blank'>https://www.ordering.co/support</a>
+              </InfoContent>
+            </HeaderInfoWrapper>
+          )}
         </HeaderTitleContainer>
         <WebsiteWrapper>
           <InfoWrapper>
