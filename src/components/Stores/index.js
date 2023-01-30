@@ -105,7 +105,6 @@ import { ImportersButton } from './ImportersButton'
 import { RestaurantSelectGuide } from './RestaurantSelectGuide'
 import { ProductStep } from './ProductStep'
 import { BusinessSync } from './BusinessSync'
-import { BusinessDelete } from './BusinessDelete'
 
 export {
   BusinessAdd,
