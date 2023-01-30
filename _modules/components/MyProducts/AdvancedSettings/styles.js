@@ -142,5 +142,5 @@ var ImageGroup = _styledComponents.default.div(_templateObject40 || (_templateOb
 exports.ImageGroup = ImageGroup;
 var SocialShareContainer = _styledComponents.default.div(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral([""])));
 exports.SocialShareContainer = SocialShareContainer;
-var ButtonWrapper = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  margin: 50px 0px 30px 0;\n  button {\n    height: 44px;\n  }\n"])));
+var ButtonWrapper = _styledComponents.default.div(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["\n  margin: 50px 0px 30px 0;\n  button {\n    height: 44px;\n  }\n"])));
 exports.ButtonWrapper = ButtonWrapper;

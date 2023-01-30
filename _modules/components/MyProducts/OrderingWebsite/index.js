@@ -8,6 +8,7 @@ exports.OrderingWebsite = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
+var _reactRouterDom = require("react-router-dom");
 var _styles = require("../../../styles");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styledComponents = require("styled-components");
@@ -49,6 +50,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
+  var location = (0, _reactRouterDom.useLocation)();
   var logoRef = (0, _react.useRef)(null);
   var backgroundRef = (0, _react.useRef)(null);
   var mobileBackgroundRef = (0, _react.useRef)(null);
@@ -167,7 +169,13 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('MY_PRODUCTS', 'My products'))), /*#__PURE__*/_react.default.createElement(_styles2.WebsiteWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDERING_WEBSITE', 'Ordering website')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDERING_WEBSITE_DESC', 'This product is included in your project by default.')), /*#__PURE__*/_react.default.createElement(_styles2.WebsiteButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('MY_PRODUCTS', 'My products')), (location.pathname === '/my-products/ordering-website' || location.pathname === '/my-products/customer-app') && /*#__PURE__*/_react.default.createElement(_styles2.HeaderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('MY_PRODUCTS_INFO', 'Use the advanced configurations below to customize your products changing the images, colors, available options and others with a few clicks. If you have doubts, please contact our team here:'), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.ordering.co/support",
+    rel: "noopener noreferrer",
+    target: "_blank"
+  }, "https://www.ordering.co/support")))), /*#__PURE__*/_react.default.createElement(_styles2.WebsiteWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDERING_WEBSITE', 'Ordering website')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDERING_WEBSITE_DESC', 'This product is included in your project by default.')), /*#__PURE__*/_react.default.createElement(_styles2.WebsiteButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     onClick: function onClick() {

@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AppLayout = void 0;
 var _react = _interopRequireDefault(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _styles = require("../../../styles");
@@ -28,6 +29,7 @@ var AppLayout = function AppLayout(props) {
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
+  var location = (0, _reactRouterDom.useLocation)();
   var showMessage = function showMessage(message) {
     window.Intercom && window.Intercom('showNewMessage', message);
   };
@@ -36,7 +38,13 @@ var AppLayout = function AppLayout(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('MY_PRODUCTS', 'My products'))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, appInfo.title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.description), /*#__PURE__*/_react.default.createElement(_styles2.BoxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.AppInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageWrapper, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('MY_PRODUCTS', 'My products')), (location.pathname === '/my-products/ordering-website' || location.pathname === '/my-products/customer-app') && /*#__PURE__*/_react.default.createElement(_styles2.HeaderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('MY_PRODUCTS_INFO', 'Use the advanced configurations below to customize your products changing the images, colors, available options and others with a few clicks. If you have doubts, please contact our team here:'), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.ordering.co/support",
+    rel: "noopener noreferrer",
+    target: "_blank"
+  }, "https://www.ordering.co/support")))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, appInfo.title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.description), /*#__PURE__*/_react.default.createElement(_styles2.BoxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.AppInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageWrapper, {
     isDriver: isDriver
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: appInfo.images.live,
