@@ -309,7 +309,9 @@ import {
   ProductStartGuide,
   ImportersButton,
   RestaurantSelectGuide,
-  ProductStep
+  ProductStep,
+  BusinessSync,
+  BusinessDelete
 } from './components/Stores'
 import {
   CustomersListing,
@@ -385,7 +387,7 @@ import {
 import { LogoutButton } from './components/LogoutButton'
 import { LanguageSelector } from './components/LanguageSelector'
 
-import { capitalize, verifyDecimals } from './utils'
+import { capitalize, verifyDecimals, setStorageItem, getStorageItem } from './utils'
 
 // contexts
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
@@ -716,6 +718,8 @@ export {
   ImportersButton,
   RestaurantSelectGuide,
   ProductStep,
+  BusinessSync,
+  BusinessDelete,
 
   LogoutButton,
   LanguageSelector,
@@ -789,6 +793,8 @@ export {
 
   capitalize,
   verifyDecimals,
+  setStorageItem,
+  getStorageItem,
 
   // contexts
   ThemeContext,
