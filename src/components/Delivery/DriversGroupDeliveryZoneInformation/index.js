@@ -225,7 +225,7 @@ export const DriverGroupDeliveryZoneInformation = (props) => {
               />
             </FormControl>
           </Row>}
-        {zoneType !== 4 && isShowMap && (
+        {zoneType !== 4 && zoneType !== 5 && isShowMap && (
           configState?.configs?.google_maps_api_key?.value ? (
             <WrapperMap>
               <button
@@ -256,7 +256,7 @@ export const DriverGroupDeliveryZoneInformation = (props) => {
             <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
           )
         )}
-        {!zone && (
+        {!zone && zoneType !== 5 && (
           <KmlButtonWrapper>
             <Button
               color='primary'
