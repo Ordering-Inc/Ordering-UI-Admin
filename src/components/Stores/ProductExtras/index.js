@@ -39,7 +39,8 @@ const ProductExtrasUI = (props) => {
     handleDragStart,
     hanldeDragOver,
     handleDrop,
-    handleDragEnd
+    handleDragEnd,
+    handleUpdateExtraState
   } = props
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -195,6 +196,7 @@ const ProductExtrasUI = (props) => {
               extra={currentExtra}
               handleChangeExtraName={handleChangeExtraInput}
               handleUpdateBusinessState={handleUpdateBusinessState}
+              handleUpdateExtraState={handleUpdateExtraState}
             />
           )}
         </>
@@ -214,6 +216,7 @@ const ProductExtrasUI = (props) => {
                 extra={currentExtra}
                 handleChangeExtraName={handleChangeExtraInput}
                 handleUpdateBusinessState={handleUpdateBusinessState}
+                handleUpdateExtraState={handleUpdateExtraState}
               />
             </Modal>
           )}

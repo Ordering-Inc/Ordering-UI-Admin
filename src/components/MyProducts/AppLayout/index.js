@@ -1,8 +1,9 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton, Button } from '../../../styles'
-import { List as MenuIcon } from 'react-bootstrap-icons'
+import { List as MenuIcon, InfoCircle } from 'react-bootstrap-icons'
 import {
   Container,
   HeaderTitleContainer,
@@ -12,13 +13,16 @@ import {
   ImageWrapper,
   DownloadLink,
   ButtonWRapper,
-  DownLoadWrapper
+  DownLoadWrapper,
+  HeaderInfoWrapper,
+  InfoContent
 } from './styles'
 
 export const AppLayout = (props) => {
   const { appInfo, isDriver, children } = props
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+  const location = useLocation()
 
   const showMessage = (message) => {
     window.Intercom && window.Intercom('showNewMessage', message)
@@ -36,6 +40,19 @@ export const AppLayout = (props) => {
           </IconButton>
         )}
         <h1>{t('MY_PRODUCTS', 'My products')}</h1>
+        {(location.pathname === '/my-products/ordering-website' || location.pathname === '/my-products/customer-app') && (
+          <HeaderInfoWrapper>
+            <IconButton
+              color='primary'
+            >
+              <InfoCircle />
+            </IconButton>
+            <InfoContent>
+              {t('MY_PRODUCTS_INFO', 'Use the advanced configurations below to customize your products changing the images, colors, available options and others with a few clicks. If you have doubts, please contact our team here:')}
+              <a href='https://www.ordering.co/support' rel='noopener noreferrer' target='_blank'>https://www.ordering.co/support</a>
+            </InfoContent>
+          </HeaderInfoWrapper>
+        )}
       </HeaderTitleContainer>
       <ContentWrapper>
         <h1>{appInfo.title}</h1>

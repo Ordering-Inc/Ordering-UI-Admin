@@ -104,6 +104,7 @@ import { ProductStartGuide } from './ProductStartGuide'
 import { ImportersButton } from './ImportersButton'
 import { RestaurantSelectGuide } from './RestaurantSelectGuide'
 import { ProductStep } from './ProductStep'
+import { BusinessSync } from './BusinessSync'
 
 export {
   BusinessAdd,
@@ -211,5 +212,6 @@ export {
   ProductStartGuide,
   ImportersButton,
   RestaurantSelectGuide,
-  ProductStep
+  ProductStep,
+  BusinessSync
 }

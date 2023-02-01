@@ -21,6 +21,7 @@ import {
 import { useForm, Controller } from 'react-hook-form'
 import { ProductExtraSuboption } from '../ProductExtraSuboption'
 import { ProductExtraOptionForm } from '../ProductExtraOptionForm'
+import { ProductOptionExternalId } from '../ProductOptionExternalId'
 
 import {
   MainContainer,
@@ -87,6 +88,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const [selectedSubOptionId, setSelectedSubOptionId] = useState(null)
   const { handleSubmit, register, errors, control, setValue } = useForm()
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
+  const [externalId, setExternalId] = useState()
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -149,6 +151,11 @@ const ProductExtraOptionDetailsUI = (props) => {
     }
   }
 
+  const handleUpdateExternalId = () => {
+    handleUpdateOption({ external_id: externalId })
+    setOpenModal({ ...openModal, externalId: false })
+  }
+
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -157,6 +164,10 @@ const ProductExtraOptionDetailsUI = (props) => {
       })
     }
   }, [errors])
+
+  useEffect(() => {
+    setExternalId(optionState?.option?.external_id)
+  }, [optionState?.option?.external_id])
 
   return (
     <MainContainer>
@@ -173,6 +184,11 @@ const ProductExtraOptionDetailsUI = (props) => {
               onClick={() => setOpenModal({ ...openModal, option: true })}
             >
               {t('CUSTOM_FIELDS', 'Custom Fields')}
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => setOpenModal({ ...openModal, externalId: true })}
+            >
+              {t('EXTERNAL_ID', 'External ID')}
             </Dropdown.Item>
             <Dropdown.Item
               onClick={() => handleDeleteOption()}
@@ -446,6 +462,18 @@ const ProductExtraOptionDetailsUI = (props) => {
           />
         </Modal>
       )}
+      <Modal
+        width='70%'
+        title={t('PRODUCT_SUBOPTION', 'Product suboption')}
+        open={openModal?.externalId}
+        onClose={() => setOpenModal({ ...openModal, externalId: false })}
+      >
+        <ProductOptionExternalId
+          value={externalId}
+          handleChange={setExternalId}
+          handleUpdate={handleUpdateExternalId}
+        />
+      </Modal>
       <Modal
         width='700px'
         height='80vh'
