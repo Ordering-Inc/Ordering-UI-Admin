@@ -17,6 +17,7 @@ var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _ProductExtraMetaFields = require("../ProductExtraMetaFields");
 var _ProductExtraOptionDetails = require("../ProductExtraOptionDetails");
+var _ProductOptionExternalId = require("../ProductOptionExternalId");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -30,7 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
-  var _extraState$extra, _extraState$extra3, _extraState$extra4, _extraState$extra5;
+  var _extraState$extra, _extraState$extra4, _extraState$extra6, _extraState$extra7, _extraState$extra8;
   var open = props.open,
     onClose = props.onClose,
     extraState = props.extraState,
@@ -57,7 +58,8 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     handleDragStart = props.handleDragStart,
     hanldeDragOver = props.hanldeDragOver,
     handleDrop = props.handleDrop,
-    handleDragEnd = props.handleDragEnd;
+    handleDragEnd = props.handleDragEnd,
+    handleUpdateExtraState = props.handleUpdateExtraState;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -110,6 +112,10 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     cropState = _useState14[0],
     setCropState = _useState14[1];
+  var _useState15 = (0, _react.useState)(),
+    _useState16 = _slicedToArray(_useState15, 2),
+    externalId = _useState16[0],
+    setExternalId = _useState16[1];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -218,6 +224,15 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     }, 750);
     setTimer(_timer);
   };
+  var handleUpdateExternalId = function handleUpdateExternalId() {
+    var _extraState$extra2;
+    handleUpdateExtraState((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.id, {
+      external_id: externalId
+    });
+    setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+      externalId: false
+    }));
+  };
   (0, _react.useEffect)(function () {
     if (!(addChangesState !== null && addChangesState !== void 0 && addChangesState.name) && (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.min) === 1 && (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.max) === 1) {
       setValue('name', (addChangesState === null || addChangesState === void 0 ? void 0 : addChangesState.name) || '');
@@ -226,9 +241,13 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     }
   }, [addChangesState]);
   (0, _react.useEffect)(function () {
-    var _extraState$extra2;
-    setExtraName((_extraState$extra2 = extraState.extra) === null || _extraState$extra2 === void 0 ? void 0 : _extraState$extra2.name);
-  }, [(_extraState$extra3 = extraState.extra) === null || _extraState$extra3 === void 0 ? void 0 : _extraState$extra3.name]);
+    var _extraState$extra3;
+    setExtraName((_extraState$extra3 = extraState.extra) === null || _extraState$extra3 === void 0 ? void 0 : _extraState$extra3.name);
+  }, [(_extraState$extra4 = extraState.extra) === null || _extraState$extra4 === void 0 ? void 0 : _extraState$extra4.name]);
+  (0, _react.useEffect)(function () {
+    var _extraState$extra5;
+    setExternalId(extraState === null || extraState === void 0 ? void 0 : (_extraState$extra5 = extraState.extra) === null || _extraState$extra5 === void 0 ? void 0 : _extraState$extra5.external_id);
+  }, [extraState === null || extraState === void 0 ? void 0 : (_extraState$extra6 = extraState.extra) === null || _extraState$extra6 === void 0 ? void 0 : _extraState$extra6.external_id]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, {
     id: "extra_options"
   }, /*#__PURE__*/_react.default.createElement(_styles2.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("input", {
@@ -251,6 +270,12 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     }
   }, t('CUSTOM_FIELDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
+      return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+        externalId: true
+      }));
+    }
+  }, t('EXTERNAL_ID', 'External ID')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
       return handleDeleteExtraClick();
     }
   }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
@@ -266,11 +291,11 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     isHeader: true
   }, t('MINIMUM', 'Min')), /*#__PURE__*/_react.default.createElement(_styles2.MaxPurchase, {
     isHeader: true
-  }, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles2.ArrowWrpper, null)), ((_extraState$extra4 = extraState.extra) === null || _extraState$extra4 === void 0 ? void 0 : _extraState$extra4.options) && ((_extraState$extra5 = extraState.extra) === null || _extraState$extra5 === void 0 ? void 0 : _extraState$extra5.options.sort(function (a, b) {
+  }, t('MAX', 'Max')), /*#__PURE__*/_react.default.createElement(_styles2.ArrowWrpper, null)), ((_extraState$extra7 = extraState.extra) === null || _extraState$extra7 === void 0 ? void 0 : _extraState$extra7.options) && ((_extraState$extra8 = extraState.extra) === null || _extraState$extra8 === void 0 ? void 0 : _extraState$extra8.options.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (option, index) {
-    var _extraState$extra6, _theme$images$icons;
-    var isLastOption = index === ((_extraState$extra6 = extraState.extra) === null || _extraState$extra6 === void 0 ? void 0 : _extraState$extra6.options.length) - 1;
+    var _extraState$extra9, _theme$images$icons;
+    var isLastOption = index === ((_extraState$extra9 = extraState.extra) === null || _extraState$extra9 === void 0 ? void 0 : _extraState$extra9.options.length) - 1;
     return /*#__PURE__*/_react.default.createElement(_styles2.OptionItem, {
       key: option.id,
       active: option.id === (curOption === null || curOption === void 0 ? void 0 : curOption.id),
@@ -439,6 +464,19 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_ProductExtraMetaFields.ProductExtraMetaFields, {
     businessId: business.id,
     extraId: extraState.extra.id
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "70%",
+    title: t('PRODUCT_EXTRA', 'Product extra'),
+    open: openModal === null || openModal === void 0 ? void 0 : openModal.externalId,
+    onClose: function onClose() {
+      return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
+        externalId: false
+      }));
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ProductOptionExternalId.ProductOptionExternalId, {
+    value: externalId,
+    handleChange: setExternalId,
+    handleUpdate: handleUpdateExternalId
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
     height: "80vh",
