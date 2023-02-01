@@ -234,19 +234,10 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     openAddBusiness: openAddBusiness,
     handleChangeFilterValues: handleChangeFilterValues,
     filterValues: filterValues
-  }), noBusinesses ? /*#__PURE__*/_react.default.createElement(_styles.EmptyBusinessWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme.images.dummies.noBusinesses,
-    alt: ""
-  }), /*#__PURE__*/_react.default.createElement("h2", null, t('NO_BUSINESSES_DESCRIPTION', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus adipiscing risus odio. Turpis nibh phasellus interdum vulputate urna, cursus pellentesque. Nec quis donec lobortis enim magna non turpis faucibus. ')), /*#__PURE__*/_react.default.createElement(_styles2.Button, {
-    color: "primary",
-    borderRadius: "7.6px",
-    onClick: function onClick() {
-      return handleGotToAdd();
-    }
-  }, t('ADD_NEW_STORE', 'Add new store'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleChangeBusinessActiveState: handleChangeBusinessActiveState
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapperView, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
+  }), !noBusinesses && /*#__PURE__*/_react.default.createElement(_styles.WrapperView, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
     active: viewMethod === 'card',
     onClick: function onClick() {
       return handleViewMethod('card');
@@ -256,7 +247,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: function onClick() {
       return handleViewMethod('list');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ButtonGroup, {
+  }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)))), !noBusinesses && /*#__PURE__*/_react.default.createElement(_styles.ButtonGroup, {
     isSelect: (businessIds === null || businessIds === void 0 ? void 0 : businessIds.length) > 0
   }, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     businessTypes: props.businessTypes,
@@ -265,7 +256,16 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setBusinessTypes: setBusinessTypes
   }), (businessIds === null || businessIds === void 0 ? void 0 : businessIds.length) > 0 && /*#__PURE__*/_react.default.createElement(_BusinessDelete.BusinessDelete, {
     handleDeleteMultiBusinesses: handleDeleteMultiBusinesses
-  })), /*#__PURE__*/_react.default.createElement(_BusinessesList.BusinessesList, {
+  })), noBusinesses ? /*#__PURE__*/_react.default.createElement(_styles.EmptyBusinessWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.dummies.noBusinesses,
+    alt: ""
+  }), /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+    color: "primary",
+    borderRadius: "7.6px",
+    onClick: function onClick() {
+      return handleGotToAdd();
+    }
+  }, t('ADD_NEW_STORE', 'Add new store'))) : /*#__PURE__*/_react.default.createElement(_BusinessesList.BusinessesList, {
     viewMethod: viewMethod,
     businessList: businessList,
     pagination: pagination,
@@ -284,7 +284,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleEnableAllBusiness: handleEnableAllBusiness,
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleGotToAdd: handleGotToAdd
-  }))), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
+  })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openBusinessDetails
     // business={detailsBusiness}
     ,
