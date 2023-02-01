@@ -213,13 +213,15 @@ export const DriverGroupDeliveryZoneInformation = (props) => {
                 name='distance'
                 maxLength={2}
                 value={formState.changes?.data?.distance ?? zone?.data?.distance ?? ''}
-                onInput={(e) => {
-                  e.target.value = e.target.value.match('^[1-9]{1,2}$')
-                }}
                 onChange={e => handleChangeInput(e, configState?.configs?.distance_unit?.value)}
                 ref={register({
                   required: t('DISTANCE_FROM_STORE', 'Distance from store')
                 })}
+                onKeyPress={(e) => {
+                  if (!/^[0-9]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
               />
             </FormControl>
           </Row>}
