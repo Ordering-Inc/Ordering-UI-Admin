@@ -80,6 +80,10 @@ export const OrdersTable = (props) => {
       content: t('INVOICE_ORDER_NO', 'Order No.')
     },
     {
+      value: 'cartGroupId',
+      content: t('GROUP_ORDER', 'Group Order')
+    },
+    {
       value: 'dateTime',
       content: t('DATE_TIME', 'Date and time')
     },
@@ -446,6 +450,15 @@ export const OrdersTable = (props) => {
                       </div>
                     </OrderNumberContainer>
                   </td>
+                  {allowColumns?.cartGroupId?.visable && (
+                    <td className='statusInfo'>
+                      <StatusInfo>
+                        <div className='info'>
+                          <p className='bold'><Skeleton width={100} /></p>
+                        </div>
+                      </StatusInfo>
+                    </td>
+                  )}
                   {allowColumns?.status?.visable && !isSelectedOrders && (
                     <td className='statusInfo'>
                       <StatusInfo>
@@ -602,6 +615,17 @@ export const OrdersTable = (props) => {
                           </td>
                         )
                       }
+                      if (column === 'cartGroupId') {
+                        return (
+                          <td className='orderGroupId' key={`cart_group_id${i}-${index}`}>
+                            <StatusInfo>
+                              {order?.cart_group_id && (
+                                <p className='bold'>{t('No', 'No')}. {order?.cart_group_id}</p>
+                              )}
+                            </StatusInfo>
+                          </td>
+                        )
+                      }
                       if (column === 'business') {
                         return (
                           <td className='businessInfo' key={`businessInfo${i}-${index}`}>
@@ -729,6 +753,7 @@ export const OrdersTable = (props) => {
                         )
                       }
                     })}
+                    <td />
                 </tr>
               </OrderTbody>
             ))
