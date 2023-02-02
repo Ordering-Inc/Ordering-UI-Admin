@@ -72,8 +72,8 @@ const BusinessesListingUI = (props) => {
   const [isAdd, setIsAdd] = useState(false)
 
   const noBusinesses = useMemo(() => {
-    return !businessList?.loading && businessList?.businesses?.length === 0 && pagination?.currentPage === 1 && !searchValue && Object.keys(filterValues).length === 0
-  }, [businessList?.loading, businessList?.businesses, pagination, searchValue, filterValues])
+    return !businessList?.loading && businessList?.businesses?.length === 0 && pagination?.currentPage === 1
+  }, [businessList?.loading, businessList?.businesses, pagination])
 
   const handleGotToAdd = () => {
     if (countriesState?.enabled) setIsAdd(true)
@@ -186,38 +186,34 @@ const BusinessesListingUI = (props) => {
             selectedBusinessActiveState={selectedBusinessActiveState}
             handleChangeBusinessActiveState={handleChangeBusinessActiveState}
           />
-          {!noBusinesses && (
-            <WrapperView>
-              <ViewMethodButton
-                active={viewMethod === 'card'}
-                onClick={() => handleViewMethod('card')}
-              >
-                <BsGrid />
-              </ViewMethodButton>
-              <ViewMethodButton
-                active={viewMethod === 'list'}
-                onClick={() => handleViewMethod('list')}
-              >
-                <BsViewList />
-              </ViewMethodButton>
-            </WrapperView>
-          )}
+          <WrapperView>
+            <ViewMethodButton
+              active={viewMethod === 'card'}
+              onClick={() => handleViewMethod('card')}
+            >
+              <BsGrid />
+            </ViewMethodButton>
+            <ViewMethodButton
+              active={viewMethod === 'list'}
+              onClick={() => handleViewMethod('list')}
+            >
+              <BsViewList />
+            </ViewMethodButton>
+          </WrapperView>
         </ViewContainer>
-        {!noBusinesses && (
-          <ButtonGroup isSelect={businessIds?.length > 0}>
-            <BusinessTypeFilter
-              businessTypes={props.businessTypes}
-              defaultBusinessType={props.defaultBusinessType}
-              handleChangeBusinessType={handleChangeBusinessType}
-              setBusinessTypes={setBusinessTypes}
+        <ButtonGroup isSelect={businessIds?.length > 0}>
+          <BusinessTypeFilter
+            businessTypes={props.businessTypes}
+            defaultBusinessType={props.defaultBusinessType}
+            handleChangeBusinessType={handleChangeBusinessType}
+            setBusinessTypes={setBusinessTypes}
+          />
+          {businessIds?.length > 0 && (
+            <BusinessDelete
+              handleDeleteMultiBusinesses={handleDeleteMultiBusinesses}
             />
-            {businessIds?.length > 0 && (
-              <BusinessDelete
-                handleDeleteMultiBusinesses={handleDeleteMultiBusinesses}
-              />
-            )}
-          </ButtonGroup>
-        )}
+          )}
+        </ButtonGroup>
         {noBusinesses ? (
           <EmptyBusinessWrapper>
             <img src={theme.images.dummies.noBusinesses} alt='' />
