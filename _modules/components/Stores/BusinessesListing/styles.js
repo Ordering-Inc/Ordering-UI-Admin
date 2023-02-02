@@ -40,5 +40,5 @@ var ButtonGroup = _styledComponents.default.div(_templateObject9 || (_templateOb
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        margin-left: 0px;\n        margin-right: 5px;\n      "])));
 });
 exports.ButtonGroup = ButtonGroup;
-var EmptyBusinessWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  min-height: calc(100vh - 140px);\n\n  > img {\n    width: 90%;\n    max-width: 500px;\n  }\n\n  button {\n    height: 44px;\n    margin-top: 30px;\n  }\n  @media (min-width: 576px) {\n    > img {\n      width: 60%;\n    }\n  }\n"])));
+var EmptyBusinessWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  min-height: calc(100vh - 250px);\n\n  > img {\n    width: 90%;\n    max-width: 500px;\n  }\n\n  button {\n    height: 44px;\n    margin-top: 30px;\n  }\n  @media (min-width: 576px) {\n    > img {\n      width: 60%;\n    }\n  }\n"])));
 exports.EmptyBusinessWrapper = EmptyBusinessWrapper;
