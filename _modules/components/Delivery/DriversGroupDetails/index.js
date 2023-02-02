@@ -128,7 +128,7 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       value: t('LOGS', 'Logs')
     }];
     setDriversGroupMenus(_driversGroupMenus);
-  }, [useAdvanced]);
+  }, [useAdvanced, driversGroupState === null || driversGroupState === void 0 ? void 0 : driversGroupState.driversGroup]);
   var onDeleteGroup = function onDeleteGroup() {
     setConfirm({
       open: true,

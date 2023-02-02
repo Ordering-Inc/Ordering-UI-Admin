@@ -224,17 +224,19 @@ var DriverGroupDeliveryZoneInformation = function DriverGroupDeliveryZoneInforma
     name: "distance",
     maxLength: 2,
     value: (_ref4 = (_formState$changes$da = (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : (_formState$changes6$d = _formState$changes6.data) === null || _formState$changes6$d === void 0 ? void 0 : _formState$changes6$d.distance) !== null && _formState$changes$da !== void 0 ? _formState$changes$da : zone === null || zone === void 0 ? void 0 : (_zone$data = zone.data) === null || _zone$data === void 0 ? void 0 : _zone$data.distance) !== null && _ref4 !== void 0 ? _ref4 : '',
-    onInput: function onInput(e) {
-      e.target.value = e.target.value.match('^[1-9]{1,2}$');
-    },
     onChange: function onChange(e) {
       var _configState$configs4, _configState$configs5;
       return handleChangeInput(e, configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.distance_unit) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value);
     },
     ref: register({
       required: t('DISTANCE_FROM_STORE', 'Distance from store')
-    })
-  }))), zoneType !== 4 && isShowMap && (configState !== null && configState !== void 0 && (_configState$configs6 = configState.configs) !== null && _configState$configs6 !== void 0 && (_configState$configs7 = _configState$configs6.google_maps_api_key) !== null && _configState$configs7 !== void 0 && _configState$configs7.value ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, /*#__PURE__*/_react.default.createElement("button", {
+    }),
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  }))), zoneType !== 4 && zoneType !== 5 && isShowMap && (configState !== null && configState !== void 0 && (_configState$configs6 = configState.configs) !== null && _configState$configs6 !== void 0 && (_configState$configs7 = _configState$configs6.google_maps_api_key) !== null && _configState$configs7 !== void 0 && _configState$configs7.value ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, /*#__PURE__*/_react.default.createElement("button", {
     type: "button",
     onClick: function onClick() {
       return setClearState(true);
@@ -255,7 +257,7 @@ var DriverGroupDeliveryZoneInformation = function DriverGroupDeliveryZoneInforma
     businessZones: driverGroupsZones,
     kmlData: kmlData,
     isDriverGroup: true
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required'))), !zone && /*#__PURE__*/_react.default.createElement(_styles2.KmlButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required'))), !zone && zoneType !== 5 && /*#__PURE__*/_react.default.createElement(_styles2.KmlButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     type: "button",

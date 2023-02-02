@@ -9,6 +9,12 @@ Object.defineProperty(exports, "CallCenterApp", {
     return _CallCenterApp.CallCenterApp;
   }
 });
+Object.defineProperty(exports, "CustomProject", {
+  enumerable: true,
+  get: function get() {
+    return _CustomProject.CustomProject;
+  }
+});
 Object.defineProperty(exports, "CustomerApp", {
   enumerable: true,
   get: function get() {
@@ -52,3 +58,4 @@ var _DriverApp = require("./DriverApp");
 var _PosApp = require("./PosApp");
 var _CallCenterApp = require("./CallCenterApp");
 var _KioskApp = require("./KioskApp");
+var _CustomProject = require("./CustomProject");
