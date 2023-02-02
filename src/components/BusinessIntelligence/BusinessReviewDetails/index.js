@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils, useEvent, BusinessReviews as BusinessReviewsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, BusinessReviews as BusinessReviewsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { PersonFill } from 'react-bootstrap-icons'
@@ -27,20 +27,16 @@ const BusinessReviewDetailsUI = (props) => {
   const {
     business,
     reviewsList,
+    handleOpenProducts,
     handleChangeReviewEnabled
   } = props
 
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage, parseDate }] = useUtils()
-  const [events] = useEvent()
 
   const getReviewPercent = (quality) => {
     return quality / 5 * 100
-  }
-
-  const handleGoToPage = (data) => {
-    events.emit('go_to_page', data)
   }
 
   return (
@@ -51,7 +47,7 @@ const BusinessReviewDetailsUI = (props) => {
           <Button
             color='lightPrimary'
             borderRadius='8px'
-            onClick={() => handleGoToPage({ page: 'reviewProducts', params: { store: business?.slug } })}
+            onClick={() => handleOpenProducts(business)}
           >
             {t('PRODUCT_REVIEW', 'Product review')}
           </Button>

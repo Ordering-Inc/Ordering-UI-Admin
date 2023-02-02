@@ -39,7 +39,6 @@ import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
 import { OrderingProducts } from './pages/OrderingProducts'
 import { ReviewsList } from './pages/ReviewsList'
-import { ReviewProducts } from './pages/ReviewProducts'
 import { DeliveryDriversList } from './pages/DeliveryDriversList'
 import { DriversManagersList } from './pages/DriversManagersList'
 import { DriversCompaniesList } from './pages/DriversCompaniesList'
@@ -258,9 +257,6 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/intelligence/invoice' allowedLevels={[0]}>
                       <InvoiceManager />
-                    </ProtectedRoute>
-                    <ProtectedRoute path='/intelligence/reviews/:store' allowedLevels={[0]}>
-                      <ReviewProducts />
                     </ProtectedRoute>
                     <ProtectedRoute path='/intelligence/reviews' allowedLevels={[0]}>
                       <ReviewsList />

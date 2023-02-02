@@ -7,6 +7,29 @@ export const DeliverectContainer = styled.div`
   overflow-x: hidden;
   position: relative;
 
+  button.all-setting {
+    height: 44px;
+    user-select: none;
+    margin-top: 36px;
+    span {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    svg {
+      margin-left: 5px;
+      transition: 0.2s linear;
+      ${props => props.theme.rtl && css`
+        margin-right: 5px;
+        margin-left: 0px;
+      `}
+    }
+    &:hover {
+      svg {
+        transform: translateX(3px);
+      }
+    }
+  }
+
   @media (min-width: 768px) {
     padding: 26px 40px;
   }

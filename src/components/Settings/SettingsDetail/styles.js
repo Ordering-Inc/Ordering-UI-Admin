@@ -66,7 +66,30 @@ export const HeaderIcons = styled.div`
   }
 `
 
-export const Content = styled.div``
+export const Content = styled.div`
+  button.all-setting {
+    height: 44px;
+    user-select: none;
+    margin-top: 36px;
+    span {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    svg {
+      margin-left: 5px;
+      transition: 0.2s linear;
+      ${props => props.theme.rtl && css`
+        margin-right: 5px;
+        margin-left: 0px;
+      `}
+    }
+    &:hover {
+      svg {
+        transform: translateX(3px);
+      }
+    }
+  }
+`
 
 export const CategoryName = styled.div`
   display: flex;
@@ -143,32 +166,6 @@ export const VideoContainer = styled.div`
     position: absolute;
     color: #748194;
     font-size: 34px;
-  }
-`
-
-export const AllSetting = styled.div`
-  user-select: none;
-  cursor: pointer;
-  margin-top: 36px;
-  cursor: pointer;
-  span {
-    font-weight: 600;
-    font-size: 14px;
-    color: ${props => props.theme.colors.primary};
-  }
-  svg {
-    color: ${props => props.theme.colors.primary};
-    margin-left: 5px;
-    transition: 0.2s linear;
-    ${props => props.theme.rtl && css`
-      margin-right: 5px;
-      margin-left: 0px;
-    `}
-  }
-  &:hover {
-    svg {
-      transform: translateX(3px);
-    }
   }
 `
 

@@ -191,10 +191,7 @@ export const PagesBottomContainer = styled.div`
   flex-wrap: wrap;
   row-gap: 10px;
   margin: 15px 0;
-`
-
-export const AddNewPageButton = styled.div`
-  cursor: pointer;
-  font-size: 12px;
-  color: ${props => props.theme.colors.lightGray};
+  > button {
+    height: 44px;
+  }
 `

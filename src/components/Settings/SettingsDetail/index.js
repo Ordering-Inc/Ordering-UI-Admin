@@ -3,7 +3,7 @@ import { XLg, LifePreserver, ArrowsAngleContract, ArrowsAngleExpand } from 'reac
 import Skeleton from 'react-loading-skeleton'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { useLanguage } from 'ordering-components-admin'
-import { IconButton } from '../../../styles'
+import { IconButton, Button } from '../../../styles'
 import { Modal, NotFoundSource } from '../../Shared'
 import MdcPlayCircle from '@meronex/icons/mdc/MdcPlayCircle'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
@@ -19,7 +19,6 @@ import {
   CategoryName,
   Description,
   VideoContainer,
-  AllSetting,
   MoreInfo,
   CategoryExtraContent,
   IframeWrapper,
@@ -194,10 +193,10 @@ export const SettingsDetail = (props) => {
                 </video>
               </VideoContainer>
             )}
-            <AllSetting onClick={() => handleExtraOpen(false)}>
+            <Button className='all-setting' color='primary' borderRadius='8px' onClick={() => handleExtraOpen(false)}>
               <span>{t('SETTINGS', 'All settings')}</span>
               <BsArrowRight />
-            </AllSetting>
+            </Button>
           </Content>
         )}
       </DescriptionContent>

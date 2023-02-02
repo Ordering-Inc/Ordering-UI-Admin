@@ -24,7 +24,8 @@ const BusinessReviewsListingUI = (props) => {
     parentSearchValue,
     getPageBusinesses,
     handleUpdateReview,
-    onSearch
+    onSearch,
+    handleOpenProducts
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -100,14 +101,16 @@ const BusinessReviewsListingUI = (props) => {
                   </ReviewObject>
                 </td>
                 <td>
-                  <ReviewMarkerWrapper>
-                    {business?.reviews?.total && (
-                      <>
-                        <StarFill />
-                        <p>{business?.reviews?.total}</p>
-                      </>
-                    )}
-                  </ReviewMarkerWrapper>
+                  <div>
+                    <ReviewMarkerWrapper>
+                      {business?.reviews?.total && (
+                        <>
+                          <StarFill />
+                          <p>{business?.reviews?.total}</p>
+                        </>
+                      )}
+                    </ReviewMarkerWrapper>
+                  </div>
                 </td>
               </tr>
             </ReviewTbody>
@@ -142,6 +145,7 @@ const BusinessReviewsListingUI = (props) => {
             businessId={curBusiness?.id}
             reviews={curBusiness?.reviews?.reviews}
             handleUpdateReview={handleUpdateReview}
+            handleOpenProducts={handleOpenProducts}
           />
         </SideBar>
       )}

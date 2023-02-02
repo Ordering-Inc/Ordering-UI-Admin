@@ -8,7 +8,6 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   Header,
-  AllSetting,
   Description,
   CategoryExtraContent,
   Container,
@@ -180,10 +179,10 @@ const PickerExpressUI = (props) => {
         <Description>
           {t('CONNECT_WITH_PICKER_EXPRESS_DESCRIPTION', 'If you have already worked with Pickerexpress or are running your business with Pickerexpress and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')}
         </Description>
-        <AllSetting onClick={() => setSettingsOpen(true)}>
+        <Button color='primary' borderRadius='8px' className='all-setting' onClick={() => setSettingsOpen(true)}>
           <span>{t('SETTINGS', 'All settings')}</span>
           <BsArrowRight />
-        </AllSetting>
+        </Button>
       </PickerExpressContainer>
       {settingsOpen && (
         <>

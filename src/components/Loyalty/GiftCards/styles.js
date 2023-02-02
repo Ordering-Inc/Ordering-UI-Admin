@@ -109,14 +109,12 @@ export const BottomContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin: 20px 0;
+
+  button {
+    height: 44px;
+  }
 `
 
-export const AddNewButton = styled.div`
-  cursor: pointer;
-  font-size: 14px;
-  color: ${props => props.theme.colors.primary};
-  user-select: none;
-`
 export const NotFoundSourceWrapper = styled.div`
   > div {
     height: initial;

@@ -8,7 +8,6 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   Header,
-  AllSetting,
   Description,
   CategoryExtraContent,
   Container,
@@ -180,10 +179,10 @@ const LalaMoveConnectUI = (props) => {
         <Description>
           {t('CONNECT_WITH_LALAMOVE_DESCRIPTION', 'If you have already worked with LalaMove or are running your business with LalaMove and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')}
         </Description>
-        <AllSetting onClick={() => setSettingsOpen(true)}>
+        <Button color='primary' borderRadius='8px' className='all-setting' onClick={() => setSettingsOpen(true)}>
           <span>{t('SETTINGS', 'All settings')}</span>
           <BsArrowRight />
-        </AllSetting>
+        </Button>
       </LalaMoveConnectContainer>
       {settingsOpen && (
         <>

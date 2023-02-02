@@ -17,13 +17,13 @@ import {
   WrapperImage,
   ProductName,
   Image,
-  AddNewButton,
   BottomContainer,
   NotFoundSourceWrapper,
   PriceWrapper,
   HeaderContainer,
   RequireDescription
 } from './styles'
+import { Button } from '../../../styles'
 
 const GiftCardsUI = (props) => {
   const {
@@ -131,11 +131,13 @@ const GiftCardsUI = (props) => {
         )}
       </ProductContainer>
       <BottomContainer>
-        <AddNewButton
+        <Button
+          color='primary'
+          borderRadius='8px'
           onClick={() => handleOpenDetail({})}
         >
           {t('ADD_NEW_GIFT_CARD', 'Add new gift card')}
-        </AddNewButton>
+        </Button>
       </BottomContainer>
       {extraOpen && (
         <>

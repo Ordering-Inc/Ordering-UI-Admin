@@ -8,7 +8,6 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   Header,
-  AllSetting,
   Description,
   CategoryExtraContent,
   Container,
@@ -135,10 +134,10 @@ export const Deliverect = (props) => {
           <Button color='lightPrimary'>{t('NEW', 'New')}</Button>
         </Header>
         <Description dangerouslySetInnerHTML={{ __html: t('SYNC_DEC_SECOND', 'Deliverect integrates all your <span>online orders</span> to your <span>existing POS</span> or our <span>Delivery Manger app.</span> Restaurants large and small rely on Deliverect to reduce failures and order mistakes while speeding up order preparation.') }} />
-        <AllSetting onClick={() => setSettingsOpen(true)}>
+        <Button color='primary' borderRadius='8px' className='all-setting' onClick={() => setSettingsOpen(true)}>
           <span>{t('SETTINGS', 'All settings')}</span>
           <BsArrowRight />
-        </AllSetting>
+        </Button>
       </DeliverectContainer>
       {settingsOpen && (
         <>
