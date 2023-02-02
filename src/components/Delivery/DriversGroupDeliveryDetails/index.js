@@ -8,7 +8,7 @@ import { Button } from '../../../styles'
 import { Alert } from '../../Shared'
 
 import {
-  Container,
+  Container
 } from './styles'
 
 const DriverGroupDeliveryDetailsUI = (props) => {

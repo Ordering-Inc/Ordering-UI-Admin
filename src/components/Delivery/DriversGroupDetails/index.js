@@ -75,7 +75,7 @@ const DriversGroupDetailsUI = (props) => {
           { key: 'logs', value: t('LOGS', 'Logs') }
         ]
     setDriversGroupMenus(_driversGroupMenus)
-  }, [useAdvanced])
+  }, [useAdvanced, driversGroupState?.driversGroup])
 
   const onDeleteGroup = () => {
     setConfirm({

@@ -173,6 +173,12 @@ const SidebarMenuUI = (props) => {
       title: t('KIOSK_APP', 'Kiosk'),
       pageName: 'kiosk_app',
       url: '/my-products/kiosk-app'
+    },
+    {
+      id: 8,
+      title: t('CUSTOM_PROJECT', 'Custom Project'),
+      pageName: 'custom_project',
+      url: '/my-products/custom-project'
     }
   ]
 
@@ -677,7 +683,8 @@ const SidebarMenuUI = (props) => {
                         eventKey='8'
                         active={
                           location.pathname === '/marketing/promotions-enterprise' ||
-                          location.pathname === '/marketing/campaign'
+                          location.pathname === '/marketing/campaign' ||
+                          location.pathname === '/marketing/ad-banners'
                         }
                       >
                         <GraphUp />
@@ -767,7 +774,8 @@ const SidebarMenuUI = (props) => {
                           location.pathname === '/my-products/driver-app' ||
                           location.pathname === '/my-products/pos-app' ||
                           location.pathname === '/my-products/call-center-app' ||
-                          location.pathname === '/my-products/kiosk-app'
+                          location.pathname === '/my-products/kiosk-app' ||
+                          location.pathname === '/my-products/custom-project'
                         }
                       >
                         <BagCheck />
@@ -802,6 +810,7 @@ const SidebarMenuUI = (props) => {
                         active={
                           location.pathname === '/settings/basic' ||
                           location.pathname === '/settings/operation' ||
+                          location.pathname === '/settings/plugin' ||
                           location.pathname === '/settings/pages' ||
                           location.pathname === '/settings/integrations' ||
                           location.pathname === '/settings/places' ||
