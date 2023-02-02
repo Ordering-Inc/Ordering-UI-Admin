@@ -14,7 +14,6 @@ import {
   BannerTitleConatiner,
   BannerActionsWrapper,
   EnableWrapper,
-  AddNewBanner,
   InfoWrapper,
   InfoContent,
   SearchBarWrapper,
@@ -171,11 +170,13 @@ const PageBannersUI = (props) => {
           )}
         </BannersListWrapper>
         {!bannersListState.loading && (
-          <AddNewBanner
+          <Button
+            color='primary'
+            borderRadius='8px'
             onClick={e => handleOpenBannerItemsDetail(e, {})}
           >
             {t('ADD_BANNER', 'Add banner')}
-          </AddNewBanner>
+          </Button>
         )}
       </Container>
 

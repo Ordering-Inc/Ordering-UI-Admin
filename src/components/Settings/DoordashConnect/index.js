@@ -7,7 +7,6 @@ import { ArrowsAngleContract, ArrowsAngleExpand, XLg } from 'react-bootstrap-ico
 
 import {
   Header,
-  AllSetting,
   Description,
   CategoryExtraContent,
   Container,
@@ -180,10 +179,10 @@ const DoordashConnectUI = (props) => {
         <Description>
           {t('CONNECT_WITH_DOORDASH_DESCRIPTION', 'If you have already worked with Doordash or are running your business with Doordash and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')}
         </Description>
-        <AllSetting onClick={() => setSettingsOpen(true)}>
+        <Button color='primary' borderRadius='8px' className='all-setting' onClick={() => setSettingsOpen(true)}>
           <span>{t('SETTINGS', 'All settings')}</span>
           <BsArrowRight />
-        </AllSetting>
+        </Button>
       </DoordashConnectContainer>
       {settingsOpen && (
         <>

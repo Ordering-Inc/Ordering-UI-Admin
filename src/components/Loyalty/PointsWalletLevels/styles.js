@@ -105,17 +105,8 @@ export const LevelBottomContainer = styled.div`
   flex-wrap: wrap;
   row-gap: 10px;
   margin: 15px 0;
-`
-
-export const AddNewLevelButton = styled.div`
-  cursor: pointer;
-  font-size: 14px;
-  color: ${props => props.theme.colors.primary};
-  user-select: none;
-`
-export const NotFoundSourceWrapper = styled.div`
-  > div {
-    height: initial;
-    padding: 20px;
+  button {
+    height: 44px;
+    margin-top: 20px;
   }
 `

@@ -4,6 +4,11 @@ export const ApiKeysListContainer = styled.div`
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+
+  > button {
+    height: 44px;
+    margin: 20px 0;
+  }
 `
 
 export const Header = styled.div`
@@ -132,16 +137,5 @@ export const DropdownButtonWrapper = styled.div`
         color: #E63757;
       }
     }
-  }
-`
-export const AddNewButton = styled.div`
-  cursor: pointer;
-  font-size: 12px;
-  color: ${props => props.theme.colors.lightGray};
-  margin: 20px 0;
-  width: fit-content;
-
-  &:hover {
-    color: ${props => props.theme.colors.primary};
   }
 `
