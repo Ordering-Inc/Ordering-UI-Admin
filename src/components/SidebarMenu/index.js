@@ -683,7 +683,8 @@ const SidebarMenuUI = (props) => {
                         eventKey='8'
                         active={
                           location.pathname === '/marketing/promotions-enterprise' ||
-                          location.pathname === '/marketing/campaign'
+                          location.pathname === '/marketing/campaign' ||
+                          location.pathname === '/marketing/ad-banners'
                         }
                       >
                         <GraphUp />
@@ -809,6 +810,7 @@ const SidebarMenuUI = (props) => {
                         active={
                           location.pathname === '/settings/basic' ||
                           location.pathname === '/settings/operation' ||
+                          location.pathname === '/settings/plugin' ||
                           location.pathname === '/settings/pages' ||
                           location.pathname === '/settings/integrations' ||
                           location.pathname === '/settings/places' ||
