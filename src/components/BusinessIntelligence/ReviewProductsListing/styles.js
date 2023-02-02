@@ -1,58 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const ReviewsListingContainer = styled.div`
-  flex: 1;
-  padding: 20px;
-  box-sizing: border-box;
-  transition: all 0.5s;
-  max-height: 100vh;
-  overflow: auto;
-`
-
-export const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  row-gap: 20px;
-`
-
-export const HeaderLeft = styled.div`
-  display: flex;
-  align-items: center;
-  h1 {
-    font-size: 20px;
-    font-weight: 700;
-    color: ${props => props.theme.colors.headingColor};
-    margin: 0px;
-  }
-  > button {
-    ${props => props.theme?.rtl ? css`
-      margin-left: 8px;
-      margin-right: -8px;
-    ` : css`
-      margin-right: 8px;
-      margin-left: -8px;
-    `}
-
-    svg {
-      width: 25px;
-      height: 25px;
-    }
-  }
-`
-
-export const HeaderRight = styled.div`
-  display: flex;
-  align-items: center;
-
-  input {
-    border: none;
-    background-color: ${props => props.theme.colors.secundary};
-  }
-`
+export const ReviewsListingContainer = styled.div``
 
 export const ReviewsTable = styled.table`
   margin: 10px 0;
@@ -162,9 +111,10 @@ export const ReviewMarkerWrapper = styled.div`
 
   ${({ isHeader }) => !isHeader && css`
     height: 40px;
+    width: 45px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     ${props => props.theme.colors.rtl ? css`
       border-right: 1px solid ${props => props.theme.colors.borderColor};

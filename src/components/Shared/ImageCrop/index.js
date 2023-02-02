@@ -55,13 +55,15 @@ export const ImageCrop = (props) => {
         aspectRatio: aspectRatio,
         dragMode: 'move',
         zoomable: false,
-        toggleDragModeOnDblclick: false
+        toggleDragModeOnDblclick: false,
+        autoCropArea: 1
       })
     } else {
       _cropper = new Cropper(cropperRef.current, {
         dragMode: 'move',
         zoomable: false,
-        toggleDragModeOnDblclick: false
+        toggleDragModeOnDblclick: false,
+        autoCropArea: 1
       })
     }
     setCropper(_cropper)

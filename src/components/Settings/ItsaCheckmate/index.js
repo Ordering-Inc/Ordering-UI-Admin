@@ -8,7 +8,6 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   Header,
-  AllSetting,
   Description,
   CategoryExtraContent,
   Container,
@@ -156,10 +155,10 @@ export const ItsaCheckmate = (props) => {
             <p>{t('ITSACHECKMATE_MENU_4', 'Add, edit, or delete items ')}</p>
           </div>
         </Description>
-        <AllSetting onClick={() => setSettingsOpen(true)}>
+        <Button color='primary' borderRadius='8px' className='all-setting' onClick={() => setSettingsOpen(true)}>
           <span>{t('SETTINGS', 'All settings')}</span>
           <BsArrowRight />
-        </AllSetting>
+        </Button>
       </ItsaCheckmateContainer>
       {settingsOpen && (
         <>

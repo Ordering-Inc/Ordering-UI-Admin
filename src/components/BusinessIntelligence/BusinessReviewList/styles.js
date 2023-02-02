@@ -119,9 +119,10 @@ export const ReviewMarkerWrapper = styled.div`
 
   ${({ isHeader }) => !isHeader && css`
     height: 40px;
+    width: 45px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     ${props => props.theme.colors.rtl ? css`
       border-right: 1px solid ${props => props.theme.colors.borderColor};

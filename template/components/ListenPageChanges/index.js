@@ -36,7 +36,6 @@ export const ListenPageChanges = ({ children }) => {
     drivers_analytics: '/intelligence/drivers',
     invoice: '/intelligence/invoice',
     reviews: '/intelligence/reviews',
-    reviewProducts: '/intelligence/reviews/:store',
     reports: '/intelligence/reports',
     open_carts: '/cart-recovery/open-carts',
     recovery_actions: '/cart-recovery/recovery-actions',

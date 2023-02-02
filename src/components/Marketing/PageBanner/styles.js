@@ -4,6 +4,11 @@ export const Container = styled.div`
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+
+  > button {
+    height: 44px;
+    margin-top: 20px;
+  }
 `
 export const HeaderContainer = styled.div`
   display: flex;
@@ -101,13 +106,7 @@ export const EnableWrapper = styled.div`
     margin-right: 50px;
   `}
 `
-export const AddNewBanner = styled.div`
-  width: fit-content;
-  cursor: pointer;
-  color: ${props => props.theme.colors.primary};
-  font-size: 14px;
-  margin-top: 15px;
-`
+
 export const InfoWrapper = styled.div`
   ${props => props.theme?.rtl ? css`
     margin-left: -8px;

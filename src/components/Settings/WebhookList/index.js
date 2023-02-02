@@ -16,8 +16,7 @@ import {
   WebhookListTable,
   DropdownButtonWrapper,
   SelectorWrapper,
-  PagesBottomContainer,
-  AddNewPageButton
+  PagesBottomContainer
 } from './styles'
 
 const WebhookListUI = (props) => {
@@ -217,11 +216,13 @@ const WebhookListUI = (props) => {
         </WebhookListTable>
         {!webhookListState.loading && (
           <PagesBottomContainer>
-            <AddNewPageButton
+            <Button
               onClick={() => setIsAddMode(true)}
+              color='primary'
+              borderRadius='8px'
             >
               {t('ADD_NEW_WEBHOOK ', 'Add new webhook')}
-            </AddNewPageButton>
+            </Button>
             {currentWebhooks?.length > 0 && (
               <Pagination
                 currentPage={currentPage}

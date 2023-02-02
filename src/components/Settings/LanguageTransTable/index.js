@@ -37,11 +37,21 @@ const LanguageTransTableUI = (props) => {
   const [currentPages, setCurrentPages] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 
+  let timeout = null
+
   const closeAlert = () => {
     setAlertState({
       open: false,
       content: []
     })
+  }
+
+  const handleChangeValue = (id, key, value) => {
+    clearTimeout(timeout)
+
+    timeout = setTimeout(function () {
+      handleChangeText(id, key, value)
+    }, 750)
   }
 
   const handleChangePage = (translation) => {
@@ -132,13 +142,13 @@ const LanguageTransTableUI = (props) => {
                     <td>
                       <input
                         type='text'
-                        value={
+                        defaultValue={
                           textEditState?.id === translation.id
                             ? textEditState?.text
                             : translation.text
                         }
                         placeholder={t('WRITE_A_TEXT', 'Write a text')}
-                        onChange={(e) => handleChangeText(translation.id, translation.key, e.target.value)}
+                        onChange={(e) => handleChangeValue(translation.id, translation.key, e.target.value)}
                       />
                     </td>
                   </tr>
