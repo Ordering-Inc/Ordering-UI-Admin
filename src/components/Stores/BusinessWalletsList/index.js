@@ -37,6 +37,11 @@ const BusinessWalletsListUI = (props) => {
     wallet_credit_point_enabled: isWalletPointsEnabled && loyaltyPlanState.created
   }
 
+  const walletsLangs = {
+    wallet_cash_enabled: t('WALLET_CASH_ENABLED', 'Wallet cash enabled'),
+    wallet_credit_point_enabled: t('WALLET_CREDIT_POINT_ENABLED', 'Wallet credit point enabled')
+  }
+
   const handleOpenWallet = (config) => {
     setIsOpenWalletDetails(true)
     handleClosePaymethodDetails()
@@ -83,7 +88,7 @@ const BusinessWalletsListUI = (props) => {
                   active={config.id === currentConfig?.id}
                   onClick={() => handleOpenWallet(config)}
                 >
-                  <WalletName>{config.name}</WalletName>
+                  <WalletName>{walletsLangs[config.key]}</WalletName>
                   <ChevronRight />
                 </WalletOption>
               ))}
