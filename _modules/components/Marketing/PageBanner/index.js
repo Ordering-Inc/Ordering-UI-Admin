@@ -155,7 +155,9 @@ var PageBannersUI = function PageBannersUI(props) {
         }, banner.id);
       }
     })), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)));
-  })), !bannersListState.loading && /*#__PURE__*/_react.default.createElement(_styles2.AddNewBanner, {
+  })), !bannersListState.loading && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
     onClick: function onClick(e) {
       return handleOpenBannerItemsDetail(e, {});
     }

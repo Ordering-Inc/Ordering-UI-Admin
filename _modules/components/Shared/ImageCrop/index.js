@@ -65,13 +65,15 @@ var ImageCrop = function ImageCrop(props) {
         aspectRatio: aspectRatio,
         dragMode: 'move',
         zoomable: false,
-        toggleDragModeOnDblclick: false
+        toggleDragModeOnDblclick: false,
+        autoCropArea: 1
       });
     } else {
       _cropper = new _cropperjs.default(cropperRef.current, {
         dragMode: 'move',
         zoomable: false,
-        toggleDragModeOnDblclick: false
+        toggleDragModeOnDblclick: false,
+        autoCropArea: 1
       });
     }
     setCropper(_cropper);

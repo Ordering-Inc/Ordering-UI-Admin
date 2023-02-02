@@ -13,6 +13,8 @@ var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _BusinessReviewList = require("../BusinessReviewList");
 var _UsersReviewList = require("../UsersReviewList");
+var _BusinessSelectHeader = require("../../Stores/BusinessSelectHeader");
+var _ReviewProductsListing = require("../ReviewProductsListing");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -38,12 +40,48 @@ var ReviewsListing = function ReviewsListing(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     searchValue = _useState4[0],
     setSearchValue = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    showSelect = _useState6[0],
+    setShowSelect = _useState6[1];
+  var _useState7 = (0, _react.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    business = _useState8[0],
+    setBusiness = _useState8[1];
+  var changeBusinessState = function changeBusinessState(business) {
+    setShowSelect(false);
+    setBusiness(business);
+  };
+  var handleChangeOption = function handleChangeOption(option) {
+    setShowOption(option);
+    if (option === 'products' && !business) setShowSelect(true);
+  };
+  var handleOpenProducts = function handleOpenProducts(business) {
+    setBusiness(business);
+    setShowOption('products');
+    setShowSelect(false);
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ReviewsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderLeft, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('REVIEWS_MANAGER', 'Reviews manager'))), /*#__PURE__*/_react.default.createElement(_styles2.HeaderRight, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), showOption === 'products' ? /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, {
+    onClick: function onClick() {
+      return setShowSelect(function (prev) {
+        return !prev;
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement("h1", null, (business === null || business === void 0 ? void 0 : business.name) || t('REVIEWS_MANAGER', 'Reviews manager')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, {
+    className: "".concat(showSelect && 'rotate')
+  })), showSelect && /*#__PURE__*/_react.default.createElement(_BusinessSelectHeader.BusinessSelectHeader, {
+    close: function close() {
+      return setShowSelect(false);
+    },
+    isOpen: showSelect,
+    noActiveStatusCondition: true,
+    changeBusinessState: changeBusinessState
+  })) : /*#__PURE__*/_react.default.createElement("h1", null, t('REVIEWS_MANAGER', 'Reviews manager'))), /*#__PURE__*/_react.default.createElement(_styles2.HeaderRight, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
     placeholder: t('SEARCH', 'Search'),
     searchValue: searchValue,
@@ -53,25 +91,31 @@ var ReviewsListing = function ReviewsListing(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: showOption === 'business',
     onClick: function onClick() {
-      return setShowOption('business');
+      return handleChangeOption('business');
     }
   }, t('BUSINESS', 'Business')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: showOption === 'drivers',
     onClick: function onClick() {
-      return setShowOption('drivers');
+      return handleChangeOption('drivers');
     }
   }, t('DRIVERS', 'Drivers')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: showOption === 'customers',
     onClick: function onClick() {
-      return setShowOption('customers');
+      return handleChangeOption('customers');
     }
   }, t('CUSTOMERS', 'Customers')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: showOption === 'professionals',
     onClick: function onClick() {
-      return setShowOption('professionals');
+      return handleChangeOption('professionals');
     }
-  }, t('PROFESSIONALS', 'Professionals'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
-    parentSearchValue: searchValue
+  }, t('PROFESSIONALS', 'Professionals')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: showOption === 'products',
+    onClick: function onClick() {
+      return handleChangeOption('products');
+    }
+  }, t('PRODUCTS', 'Products'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
+    parentSearchValue: searchValue,
+    handleOpenProducts: handleOpenProducts
   }), showOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
     defaultUserTypesSelected: [4],
     parentSearchValue: searchValue
@@ -81,6 +125,9 @@ var ReviewsListing = function ReviewsListing(props) {
   }), showOption === 'professionals' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
     defaultUserTypesSelected: [8],
     parentSearchValue: searchValue
+  }), showOption === 'products' && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_ReviewProductsListing.ReviewProductsListing, {
+    parentSearchValue: searchValue,
+    businessId: business === null || business === void 0 ? void 0 : business.id
   })));
 };
 exports.ReviewsListing = ReviewsListing;

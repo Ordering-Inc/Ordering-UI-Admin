@@ -197,10 +197,12 @@ var WebhookListUI = function WebhookListUI(props) {
     onClick: function onClick() {
       return handleAddNewWebhook();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircleFill, null)))))), !webhookListState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircleFill, null)))))), !webhookListState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setIsAddMode(true);
-    }
+    },
+    color: "primary",
+    borderRadius: "8px"
   }, t('ADD_NEW_WEBHOOK ', 'Add new webhook')), (currentWebhooks === null || currentWebhooks === void 0 ? void 0 : currentWebhooks.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,

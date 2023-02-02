@@ -131,7 +131,10 @@ var PickerExpressUI = function PickerExpressUI(props) {
     onClick: onClose
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CONNECT_WITH_PICKER_EXPRESS', 'Connect with Picker Express')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary"
-  }, t('NEW', 'New'))), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('CONNECT_WITH_PICKER_EXPRESS_DESCRIPTION', 'If you have already worked with Pickerexpress or are running your business with Pickerexpress and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')), /*#__PURE__*/_react.default.createElement(_styles2.AllSetting, {
+  }, t('NEW', 'New'))), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('CONNECT_WITH_PICKER_EXPRESS_DESCRIPTION', 'If you have already worked with Pickerexpress or are running your business with Pickerexpress and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
+    className: "all-setting",
     onClick: function onClick() {
       return setSettingsOpen(true);
     }

@@ -104,7 +104,9 @@ var ApiKeysListUI = function ApiKeysListUI(props) {
         return onClickDeleteApiKey(apiKey.id);
       }
     }, t('DELETE', 'Delete')))))));
-  })), /*#__PURE__*/_react.default.createElement(_styles2.AddNewButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
     onClick: function onClick() {
       return handleAddApiKey();
     }

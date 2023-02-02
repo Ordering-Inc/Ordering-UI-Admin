@@ -14,6 +14,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styles = require("./styles");
 var _LoyaltyLevelDetail = require("../LoyaltyLevelDetail");
+var _styles2 = require("../../../styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -97,7 +98,7 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       width: 16,
       height: 16
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (levelList === null || levelList === void 0 ? void 0 : (_levelList$levels = levelList.levels) === null || _levelList$levels === void 0 ? void 0 : _levelList$levels.length) > 0 ? levelList === null || levelList === void 0 ? void 0 : levelList.levels.map(function (level, i) {
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (levelList === null || levelList === void 0 ? void 0 : (_levelList$levels = levelList.levels) === null || _levelList$levels === void 0 ? void 0 : _levelList$levels.length) > 0 && (levelList === null || levelList === void 0 ? void 0 : levelList.levels.map(function (level, i) {
     var _theme$images, _theme$images$dummies;
     return /*#__PURE__*/_react.default.createElement(_styles.LevelItemContainer, {
       key: i,
@@ -108,7 +109,9 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
       bgimage: optimizeImage((level === null || level === void 0 ? void 0 : level.image) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles.LevelName, null, level === null || level === void 0 ? void 0 : level.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  }) : /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null)))), /*#__PURE__*/_react.default.createElement(_styles.LevelBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddNewLevelButton, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.LevelBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+    color: "primary",
+    borderRadius: "8px",
     onClick: function onClick() {
       return handleOpenDetail({});
     }

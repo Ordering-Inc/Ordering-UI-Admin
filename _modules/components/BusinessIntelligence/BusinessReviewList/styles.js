@@ -64,7 +64,7 @@ var ReviewMarkerWrapper = _styledComponents.default.div(_templateObject13 || (_t
   return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    padding-right: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n  "])));
 }, function (_ref3) {
   var isHeader = _ref3.isHeader;
-  return !isHeader && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    height: 40px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: center;\n    ", "\n  "])), function (props) {
+  return !isHeader && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    height: 40px;\n    width: 45px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    ", "\n  "])), function (props) {
     return props.theme.colors.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {
       return props.theme.colors.borderColor;
     }) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {

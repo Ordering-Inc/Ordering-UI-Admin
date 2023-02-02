@@ -176,7 +176,10 @@ var SettingsDetail = function SettingsDetail(props) {
   }), /*#__PURE__*/_react.default.createElement("source", {
     src: category.video,
     type: "video/webm"
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.AllSetting, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    className: "all-setting",
+    color: "primary",
+    borderRadius: "8px",
     onClick: function onClick() {
       return handleExtraOpen(false);
     }

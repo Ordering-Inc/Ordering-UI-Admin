@@ -131,7 +131,10 @@ var LalaMoveConnectUI = function LalaMoveConnectUI(props) {
     onClick: onClose
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CONNECT_WITH_LALAMOVE', 'Connect with Lalamove')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary"
-  }, t('NEW', 'New'))), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('CONNECT_WITH_LALAMOVE_DESCRIPTION', 'If you have already worked with LalaMove or are running your business with LalaMove and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')), /*#__PURE__*/_react.default.createElement(_styles2.AllSetting, {
+  }, t('NEW', 'New'))), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('CONNECT_WITH_LALAMOVE_DESCRIPTION', 'If you have already worked with LalaMove or are running your business with LalaMove and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
+    className: "all-setting",
     onClick: function onClick() {
       return setSettingsOpen(true);
     }

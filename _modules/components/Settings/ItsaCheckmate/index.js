@@ -108,7 +108,10 @@ var ItsaCheckmate = function ItsaCheckmate(props) {
     className: "menu-item"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2Circle, null), /*#__PURE__*/_react.default.createElement("p", null, t('ITSACHECKMATE_MENU_3', 'Manage delivery hours'))), /*#__PURE__*/_react.default.createElement("div", {
     className: "menu-item"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2Circle, null), /*#__PURE__*/_react.default.createElement("p", null, t('ITSACHECKMATE_MENU_4', 'Add, edit, or delete items ')))), /*#__PURE__*/_react.default.createElement(_styles2.AllSetting, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Check2Circle, null), /*#__PURE__*/_react.default.createElement("p", null, t('ITSACHECKMATE_MENU_4', 'Add, edit, or delete items ')))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
+    className: "all-setting",
     onClick: function onClick() {
       return setSettingsOpen(true);
     }

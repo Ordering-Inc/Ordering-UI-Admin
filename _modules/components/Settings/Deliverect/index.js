@@ -99,7 +99,10 @@ var Deliverect = function Deliverect(props) {
     dangerouslySetInnerHTML: {
       __html: t('SYNC_DEC_SECOND', 'Deliverect integrates all your <span>online orders</span> to your <span>existing POS</span> or our <span>Delivery Manger app.</span> Restaurants large and small rely on Deliverect to reduce failures and order mistakes while speeding up order preparation.')
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles2.AllSetting, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
+    className: "all-setting",
     onClick: function onClick() {
       return setSettingsOpen(true);
     }

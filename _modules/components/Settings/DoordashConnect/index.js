@@ -129,7 +129,10 @@ var DoordashConnectUI = function DoordashConnectUI(props) {
   }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: onClose
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CONNECT_WITH_DOORDASH', 'Connect with Doordash'))), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('CONNECT_WITH_DOORDASH_DESCRIPTION', 'If you have already worked with Doordash or are running your business with Doordash and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')), /*#__PURE__*/_react.default.createElement(_styles2.AllSetting, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CONNECT_WITH_DOORDASH', 'Connect with Doordash'))), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, t('CONNECT_WITH_DOORDASH_DESCRIPTION', 'If you have already worked with Doordash or are running your business with Doordash and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
+    className: "all-setting",
     onClick: function onClick() {
       return setSettingsOpen(true);
     }
