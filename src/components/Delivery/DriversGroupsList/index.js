@@ -232,11 +232,13 @@ export const DriversGroupsList = (props) => {
         </TableWrapper>
         {!driversGroupsState.loading && (
           <PagesBottomContainer>
-            <AddNewGroupButton
-              onClick={() => handleOpenDetails(null)}
-            >
-              {t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')}
-            </AddNewGroupButton>
+            {!isFromStore && (
+              <AddNewGroupButton
+                onClick={() => handleOpenDetails(null)}
+              >
+                {t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')}
+              </AddNewGroupButton>
+            )}
             {currentGroups?.length > 0 && (
               <Pagination
                 currentPage={currentPage}

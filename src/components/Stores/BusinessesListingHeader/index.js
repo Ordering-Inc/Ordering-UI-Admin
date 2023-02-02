@@ -69,49 +69,47 @@ export const BusinessesListingHeader = (props) => {
           </OverlayTrigger>
         )}
       </HeaderTitleContainer>
-      {!noBusinesses && (
-        <ActionsWrapper>
-          <Button
-            color='lightPrimary'
-            borderRadius='8px'
-            onClick={() => handleRefreshBusinesses()}
-            className={loading ? 'loading' : ''}
-          >
-            {t('REFRESH', 'Refresh')}
-            <ArrowRepeat size={16} style={{ marginLeft: 5 }} />
-          </Button>
-          <ImportersButton customClass='importerGroup' />
-          <Button
-            color='lightPrimary'
-            borderRadius='8px'
-            onClick={() => handleGotToAdd()}
-          >
-            {t('ADD_NEW_STORE', 'Add new store')}
-          </Button>
-          <Button
-            color='lightPrimary'
-            borderRadius='8px'
-            onClick={() => handleOpenSync()}
-          >
-            {t('SYNC', 'Sync')}
-          </Button>
-          <SearchBar
-            isCustomLayout
-            lazyLoad
-            onSearch={onSearch}
-            search={searchValue}
-            placeholder={t('SEARCH', 'Search')}
-            customClass='searchBar'
-          />
-          <IconButton
-            color='black'
-            onClick={() => setIsFilterModal(true)}
-            name='filter-btn'
-          >
-            {filterApplied ? <Funnel /> : <MdcFilterOff />}
-          </IconButton>
-        </ActionsWrapper>
-      )}
+      <ActionsWrapper>
+        <Button
+          color='lightPrimary'
+          borderRadius='8px'
+          onClick={() => handleRefreshBusinesses()}
+          className={loading ? 'loading' : ''}
+        >
+          {t('REFRESH', 'Refresh')}
+          <ArrowRepeat size={16} style={{ marginLeft: 5 }} />
+        </Button>
+        <ImportersButton customClass='importerGroup' />
+        <Button
+          color='lightPrimary'
+          borderRadius='8px'
+          onClick={() => handleGotToAdd()}
+        >
+          {t('ADD_NEW_STORE', 'Add new store')}
+        </Button>
+        <Button
+          color='lightPrimary'
+          borderRadius='8px'
+          onClick={() => handleOpenSync()}
+        >
+          {t('SYNC', 'Sync')}
+        </Button>
+        <SearchBar
+          isCustomLayout
+          lazyLoad
+          onSearch={onSearch}
+          search={searchValue}
+          placeholder={t('SEARCH', 'Search')}
+          customClass='searchBar'
+        />
+        <IconButton
+          color='black'
+          onClick={() => setIsFilterModal(true)}
+          name='filter-btn'
+        >
+          {filterApplied ? <Funnel /> : <MdcFilterOff />}
+        </IconButton>
+      </ActionsWrapper>
       <BusinessFilterGroup
         handleChangeFilterValues={handleChangeFilterValues}
         onClose={() => setIsFilterModal(false)}
