@@ -173,6 +173,7 @@ import multiStoreCustomerApp from './template/assets/images/myProducts/multi-sto
 import singleStoreCustomerApp from './template/assets/images/myProducts/single-store-customer-app.png'
 import appStoreSmall from './template/assets/images/myProducts/app-store.png'
 import playStoreSmall from './template/assets/images/myProducts/play-store.png'
+import customProject from './template/assets/images/myProducts/custom-project.png'
 
 /**
  * pos
@@ -340,7 +341,8 @@ theme.images = {
     multiStoreCustomerApp,
     singleStoreCustomerApp,
     appStoreSmall,
-    playStoreSmall
+    playStoreSmall,
+    customProject
   },
   pos: {
     square,

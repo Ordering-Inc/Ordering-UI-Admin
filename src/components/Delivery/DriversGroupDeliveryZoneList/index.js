@@ -65,7 +65,7 @@ export const DriverGroupDeliveryZoneList = (props) => {
               </InfoBlock>
             </DeliveryZonesTableWrapper>
           ))
-        ) :
+        ) : (
           <DeliveryZonesTable>
             <thead>
               <tr>
@@ -106,7 +106,7 @@ export const DriverGroupDeliveryZoneList = (props) => {
               </ZoneTbody>
             ))}
           </DeliveryZonesTable>
-        }
+        )}
         <AddDeliveryZoneButton
           onClick={(e) => handleOpenZone(e, null)}
         >

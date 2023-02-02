@@ -5,6 +5,7 @@ import { DriverApp } from './DriverApp'
 import { PosApp } from './PosApp'
 import { CallCenterApp } from './CallCenterApp'
 import { KioskApp } from './KioskApp'
+import { CustomProject } from './CustomProject'
 
 export {
   OrderingWebsite,
@@ -13,5 +14,6 @@ export {
   DriverApp,
   PosApp,
   CallCenterApp,
-  KioskApp
+  KioskApp,
+  CustomProject
 }

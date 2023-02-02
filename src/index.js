@@ -354,7 +354,8 @@ import {
   DriverApp,
   PosApp,
   CallCenterApp,
-  KioskApp
+  KioskApp,
+  CustomProject
 } from './components/MyProducts'
 import { OpenCartListing, RecoveryActionListing } from './components/CartRecovery'
 import { FreeProductsList, PurchasedProductsList } from './components/Downloads'
@@ -767,6 +768,7 @@ export {
   PosApp,
   CallCenterApp,
   KioskApp,
+  CustomProject,
 
   Layout,
   SidebarMenu,
