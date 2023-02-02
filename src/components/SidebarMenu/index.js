@@ -218,8 +218,6 @@ const SidebarMenuUI = (props) => {
     }
   ]
 
-  const buisnessOwnerUsersMenuIncluded = [3]
-
   const settingsSubMenus = [
     {
       id: 1,
@@ -556,7 +554,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {(sessionState?.user?.level === 0 || sessionState?.user?.level === 2) && (
+                  {(sessionState?.user?.level === 0) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='4'
@@ -573,10 +571,7 @@ const SidebarMenuUI = (props) => {
                       <Accordion.Collapse eventKey='4'>
                         <MenuContent>
                           {
-                            (sessionState?.user?.level === 2
-                              ? usersSubMenus.filter(menu => buisnessOwnerUsersMenuIncluded.includes(menu.id))
-                              : usersSubMenus
-                            ).map(item => (
+                            usersSubMenus.map(item => (
                               item.pageName === 'professionals' ? (
                                 isEnabledAppointmentsFeature && (
                                   <SubMenu
@@ -639,7 +634,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {(sessionState?.user?.level === 0 || sessionState?.user?.level === 5 || sessionState?.user?.level === 2) && (
+                  {(sessionState?.user?.level === 0 || sessionState?.user?.level === 5) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='7'

@@ -95,7 +95,7 @@ export const EmptyBusinessWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 250px);
 
   > img {
     width: 90%;
