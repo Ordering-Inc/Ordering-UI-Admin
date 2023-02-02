@@ -72,6 +72,7 @@ import { AdBannersList } from './pages/AdBannersList'
 import { Profile } from './pages/Profile'
 import settings from './config.json'
 import { BusinessAdd } from './pages/BusinessAdd'
+import { CustomProject } from './pages/CustomProject'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -319,6 +320,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/my-products/kiosk-app' allowedLevels={[0]}>
                       <KioskApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/custom-project' allowedLevels={[0]}>
+                      <CustomProject />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/settings/basic' allowedLevels={[0]}>

@@ -251,6 +251,13 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "custom_project": {
+    "title": "Custom Project",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "store_app": {
     "title": "Store App",
     "description": "a dummy description about this page",

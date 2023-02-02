@@ -72,8 +72,8 @@ const BusinessesListingUI = (props) => {
   const [isAdd, setIsAdd] = useState(false)
 
   const noBusinesses = useMemo(() => {
-    return !businessList?.loading && businessList?.businesses?.length === 0 && pagination?.currentPage === 1 && !searchValue && Object.keys(filterValues).length === 0
-  }, [businessList?.loading, businessList?.businesses, pagination, searchValue, filterValues])
+    return !businessList?.loading && businessList?.businesses?.length === 0 && pagination?.currentPage === 1
+  }, [businessList?.loading, businessList?.businesses, pagination])
 
   const handleGotToAdd = () => {
     if (countriesState?.enabled) setIsAdd(true)
@@ -181,10 +181,42 @@ const BusinessesListingUI = (props) => {
           handleChangeFilterValues={handleChangeFilterValues}
           filterValues={filterValues}
         />
+        <ViewContainer>
+          <BusinessActiveStateFilter
+            selectedBusinessActiveState={selectedBusinessActiveState}
+            handleChangeBusinessActiveState={handleChangeBusinessActiveState}
+          />
+          <WrapperView>
+            <ViewMethodButton
+              active={viewMethod === 'card'}
+              onClick={() => handleViewMethod('card')}
+            >
+              <BsGrid />
+            </ViewMethodButton>
+            <ViewMethodButton
+              active={viewMethod === 'list'}
+              onClick={() => handleViewMethod('list')}
+            >
+              <BsViewList />
+            </ViewMethodButton>
+          </WrapperView>
+        </ViewContainer>
+        <ButtonGroup isSelect={businessIds?.length > 0}>
+          <BusinessTypeFilter
+            businessTypes={props.businessTypes}
+            defaultBusinessType={props.defaultBusinessType}
+            handleChangeBusinessType={handleChangeBusinessType}
+            setBusinessTypes={setBusinessTypes}
+          />
+          {businessIds?.length > 0 && (
+            <BusinessDelete
+              handleDeleteMultiBusinesses={handleDeleteMultiBusinesses}
+            />
+          )}
+        </ButtonGroup>
         {noBusinesses ? (
           <EmptyBusinessWrapper>
             <img src={theme.images.dummies.noBusinesses} alt='' />
-            <h2>{t('NO_BUSINESSES_DESCRIPTION', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus adipiscing risus odio. Turpis nibh phasellus interdum vulputate urna, cursus pellentesque. Nec quis donec lobortis enim magna non turpis faucibus. ')}</h2>
             <Button
               color='primary'
               borderRadius='7.6px'
@@ -194,61 +226,26 @@ const BusinessesListingUI = (props) => {
             </Button>
           </EmptyBusinessWrapper>
         ) : (
-          <>
-            <ViewContainer>
-              <BusinessActiveStateFilter
-                selectedBusinessActiveState={selectedBusinessActiveState}
-                handleChangeBusinessActiveState={handleChangeBusinessActiveState}
-              />
-              <WrapperView>
-                <ViewMethodButton
-                  active={viewMethod === 'card'}
-                  onClick={() => handleViewMethod('card')}
-                >
-                  <BsGrid />
-                </ViewMethodButton>
-                <ViewMethodButton
-                  active={viewMethod === 'list'}
-                  onClick={() => handleViewMethod('list')}
-                >
-                  <BsViewList />
-                </ViewMethodButton>
-              </WrapperView>
-            </ViewContainer>
-            <ButtonGroup isSelect={businessIds?.length > 0}>
-              <BusinessTypeFilter
-                businessTypes={props.businessTypes}
-                defaultBusinessType={props.defaultBusinessType}
-                handleChangeBusinessType={handleChangeBusinessType}
-                setBusinessTypes={setBusinessTypes}
-              />
-              {businessIds?.length > 0 && (
-                <BusinessDelete
-                  handleDeleteMultiBusinesses={handleDeleteMultiBusinesses}
-                />
-              )}
-            </ButtonGroup>
-            <BusinessesList
-              viewMethod={viewMethod}
-              businessList={businessList}
-              pagination={pagination}
-              detailsBusinessId={detailsBusinessId}
-              loadMoreBusinesses={loadMoreBusinesses}
-              getPageBusinesses={getPageBusinesses}
-              handleSucessRemoveBusiness={handleSucessRemoveBusiness}
-              handleSucessAddBusiness={handleSucessAddBusiness}
-              handleSucessUpdateBusiness={handleSucessUpdateBusiness}
-              handleOpenBusinessDetails={handleOpenBusinessDetails}
-              handleOpenAddBusiness={handleOpenAddBusiness}
-              isTutorialMode={isTutorialMode}
-              businessIds={businessIds}
-              setBusinessIds={setBusinessIds}
-              handleChangeBusinessIds={handleChangeBusinessIds}
-              handleEnableAllBusiness={handleEnableAllBusiness}
-              selectedBusinessActiveState={selectedBusinessActiveState}
-              handleGotToAdd={handleGotToAdd}
-            />
-          </>
+          <BusinessesList
+            viewMethod={viewMethod}
+            businessList={businessList}
+            pagination={pagination}
+            detailsBusinessId={detailsBusinessId}
+            loadMoreBusinesses={loadMoreBusinesses}
+            getPageBusinesses={getPageBusinesses}
+            handleSucessRemoveBusiness={handleSucessRemoveBusiness}
+            handleSucessAddBusiness={handleSucessAddBusiness}
+            handleSucessUpdateBusiness={handleSucessUpdateBusiness}
+            handleOpenBusinessDetails={handleOpenBusinessDetails}
+            handleOpenAddBusiness={handleOpenAddBusiness}
+            isTutorialMode={isTutorialMode}
+            businessIds={businessIds}
+            setBusinessIds={setBusinessIds}
+            handleChangeBusinessIds={handleChangeBusinessIds}
+            handleEnableAllBusiness={handleEnableAllBusiness}
+            selectedBusinessActiveState={selectedBusinessActiveState}
+            handleGotToAdd={handleGotToAdd}
+          />
         )}
       </BusinessListingContainer>
       {openBusinessDetails && (
