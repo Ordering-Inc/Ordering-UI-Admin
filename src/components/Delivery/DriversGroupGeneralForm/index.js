@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useConfig } from 'ordering-components-admin'
+import { useLanguage, useConfig, useSession } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
 import { Input, Checkbox, Button, SecondSelect as DefaultSelect } from '../../../styles'
 import { Alert } from '../../Shared'
@@ -31,6 +31,7 @@ export const DriversGroupGeneralForm = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [configState] = useConfig()
+  const [{ user }] = useSession()
 
   const autoAssignType = configState?.configs?.autoassign_type?.value
 
@@ -75,7 +76,7 @@ export const DriversGroupGeneralForm = (props) => {
       }
       handleUpdateDriversGroup(changesState)
     } else {
-      if (!changesState?.administrator_id) {
+      if (user?.level !== 5 && !changesState?.administrator_id) {
         setAlertState({
           open: true,
           content: [t('VALIDATION_ERROR_REQUIRED', 'The manager is required.').replace('_attribute_', t('DRIVER_MANAGER', 'Driver manager'))]
@@ -142,17 +143,19 @@ export const DriversGroupGeneralForm = (props) => {
           autoComplete='off'
         />
       </InputWrapper>
-      <InputWrapper>
-        <label>{t('DRIVER_MANAGER', 'Driver manager')}</label>
-        <DefaultSelect
-          isSecondIcon
-          placeholder={t('SELECT_MANAGER', 'Select driver manager')}
-          options={driversManagersOptions}
-          defaultValue={changesState?.administrator_id ?? driversGroupState.driversGroup?.administrator_id}
-          optionInnerMaxHeight='60vh'
-          onChange={val => handleChangesState({ administrator_id: val })}
-        />
-      </InputWrapper>
+      {user?.level !== 5 && (
+        <InputWrapper>
+          <label>{t('DRIVER_MANAGER', 'Driver manager')}</label>
+          <DefaultSelect
+            isSecondIcon
+            placeholder={t('SELECT_MANAGER', 'Select driver manager')}
+            options={driversManagersOptions}
+            defaultValue={changesState?.administrator_id ?? driversGroupState.driversGroup?.administrator_id}
+            optionInnerMaxHeight='60vh'
+            onChange={val => handleChangesState({ administrator_id: val })}
+          />
+        </InputWrapper>
+      )}
       <InputWrapper>
         <label>{t('TYPE', 'Type')}</label>
         <DefaultSelect

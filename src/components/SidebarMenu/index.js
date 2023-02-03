@@ -19,7 +19,6 @@ import {
   Cart3,
   Cash,
   BagCheck,
-  CloudDownload,
   X as CloseIcon
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
@@ -73,17 +72,26 @@ const SidebarMenuUI = (props) => {
     {
       id: 2,
       title: t('DELIVERY_DASHBOARD', 'Deliveries dashboard'),
-      pageName: 'deliveries'
+      pageName: 'deliveries',
+      url: '/deliveries'
     },
     {
       id: 3,
       title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
-      pageName: 'drivers'
+      pageName: 'drivers',
+      url: '/drivers'
     },
     {
       id: 4,
       title: t('APPOINTMENTS', 'Appointments'),
-      pageName: 'appointments'
+      pageName: 'appointments',
+      url: '/appointments'
+    },
+    {
+      id: 5,
+      title: t('GIFT_CARD_MANAGER', 'Gift card manager'),
+      pageName: 'giftCards',
+      url: '/gift-cards'
     }
   ]
 
@@ -669,7 +677,8 @@ const SidebarMenuUI = (props) => {
                         eventKey='8'
                         active={
                           location.pathname === '/marketing/promotions-enterprise' ||
-                          location.pathname === '/marketing/campaign'
+                          location.pathname === '/marketing/campaign' ||
+                          location.pathname === '/marketing/ad-banners'
                         }
                       >
                         <GraphUp />
@@ -794,6 +803,7 @@ const SidebarMenuUI = (props) => {
                         active={
                           location.pathname === '/settings/basic' ||
                           location.pathname === '/settings/operation' ||
+                          location.pathname === '/settings/plugin' ||
                           location.pathname === '/settings/pages' ||
                           location.pathname === '/settings/integrations' ||
                           location.pathname === '/settings/places' ||

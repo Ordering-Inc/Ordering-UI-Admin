@@ -28,6 +28,7 @@ export const Header = styled.div`
       font-size: 20px;
       font-weight: 700;
       margin: 0px;
+      flex: 1;
     }
   
     label {
