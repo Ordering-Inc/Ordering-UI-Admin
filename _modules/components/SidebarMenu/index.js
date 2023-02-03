@@ -71,15 +71,23 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
   }, {
     id: 2,
     title: t('DELIVERY_DASHBOARD', 'Deliveries dashboard'),
-    pageName: 'deliveries'
+    pageName: 'deliveries',
+    url: '/deliveries'
   }, {
     id: 3,
     title: t('DRIVERS_DASHBOARD', 'Drivers Dashboard'),
-    pageName: 'drivers'
+    pageName: 'drivers',
+    url: '/drivers'
   }, {
     id: 4,
     title: t('APPOINTMENTS', 'Appointments'),
-    pageName: 'appointments'
+    pageName: 'appointments',
+    url: '/appointments'
+  }, {
+    id: 5,
+    title: t('GIFT_CARD_MANAGER', 'Gift card manager'),
+    pageName: 'giftCards',
+    url: '/gift-cards'
   }];
   var loyaltySubMenus = [{
     id: 1,
@@ -480,7 +488,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     }, (0, _utils.firstLetterCapital)(item.title));
   })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user28 = sessionState.user) === null || _sessionState$user28 === void 0 ? void 0 : _sessionState$user28.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "8",
-    active: location.pathname === '/marketing/promotions-enterprise' || location.pathname === '/marketing/campaign'
+    active: location.pathname === '/marketing/promotions-enterprise' || location.pathname === '/marketing/campaign' || location.pathname === '/marketing/ad-banners'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GraphUp, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETING', 'Marketing'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "8"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, marketingSubmenus.map(function (item) {
@@ -542,7 +550,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     className: "d-flex flex-column mt-4"
   }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user32 = sessionState.user) === null || _sessionState$user32 === void 0 ? void 0 : _sessionState$user32.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
-    active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation' || location.pathname === '/settings/pages' || location.pathname === '/settings/integrations' || location.pathname === '/settings/places' || location.pathname === '/settings/advanced' || location.pathname === '/settings/language'
+    active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation' || location.pathname === '/settings/plugin' || location.pathname === '/settings/pages' || location.pathname === '/settings/integrations' || location.pathname === '/settings/places' || location.pathname === '/settings/advanced' || location.pathname === '/settings/language'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, settingsSubMenus.map(function (item) {

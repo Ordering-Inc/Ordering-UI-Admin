@@ -50,6 +50,9 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+    _useSession2 = _slicedToArray(_useSession, 1),
+    user = _useSession2[0].user;
   var autoAssignType = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.autoassign_type) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
   var typeOptions = [{
     value: 0,
@@ -98,7 +101,7 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       }
       handleUpdateDriversGroup(changesState);
     } else {
-      if (!(changesState !== null && changesState !== void 0 && changesState.administrator_id)) {
+      if ((user === null || user === void 0 ? void 0 : user.level) !== 5 && !(changesState !== null && changesState !== void 0 && changesState.administrator_id)) {
         setAlertState({
           open: true,
           content: [t('VALIDATION_ERROR_REQUIRED', 'The manager is required.').replace('_attribute_', t('DRIVER_MANAGER', 'Driver manager'))]
@@ -159,7 +162,7 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       required: t('VALIDATION_ERROR_REQUIRED', 'Project is required').replace('_attribute_', t('NAME', 'Name'))
     }),
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_MANAGER', 'Driver manager')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+  })), (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_MANAGER', 'Driver manager')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
     isSecondIcon: true,
     placeholder: t('SELECT_MANAGER', 'Select driver manager'),
     options: driversManagersOptions,

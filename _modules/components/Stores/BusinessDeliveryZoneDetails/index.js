@@ -37,7 +37,8 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
     handleAddBusinessDeliveryZone = props.handleAddBusinessDeliveryZone,
     handleDeleteBusinessDeliveryZone = props.handleDeleteBusinessDeliveryZone,
     kmlData = props.kmlData,
-    handleUploadKmlFiles = props.handleUploadKmlFiles;
+    handleUploadKmlFiles = props.handleUploadKmlFiles,
+    handleSuccessUpdate = props.handleSuccessUpdate;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -106,7 +107,7 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
   }), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryZoneShare.BusinessDeliveryZoneShare, {
     business: business,
     zone: zoneState.zone,
-    handleUpdateBusinessDeliveryZone: handleUpdateBusinessDeliveryZone
+    handleSuccessUpdate: handleSuccessUpdate
   })), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
