@@ -24,6 +24,7 @@ import { BusinessPaymentMethods } from './BusinessPaymentMethods'
 import { BusinessPreview } from './BusinessPreview'
 import { BusinessPreorderDetails } from './BusinessPreorderDetails'
 import { BusinessPromotionList } from './BusinessPromotionList'
+import { BusinessSalesChannel } from './BusinessSalesChannel'
 import { BusinessSchedule } from './BusinessSchedule'
 import { BusinessSupport } from './BusinessSupport'
 import { BusinessSummary } from './BusinessSummary'
@@ -133,6 +134,7 @@ export {
   BusinessPreview,
   BusinessPreorderDetails,
   BusinessPromotionList,
+  BusinessSalesChannel,
   BusinessSchedule,
   BusinessSupport,
   BusinessSummary,
