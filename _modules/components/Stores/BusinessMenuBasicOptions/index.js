@@ -68,6 +68,14 @@ var BusinessMenuBasicOptions = function BusinessMenuBasicOptions(props) {
     value: 5,
     key: 'driver_thru',
     content: t('DRIVE_THRU', 'Drive thru')
+  }, {
+    value: 7,
+    key: 'catering_delivery',
+    content: t('CATERING_DELIVERY', 'Catering delivery')
+  }, {
+    value: 8,
+    key: 'catering_pickup',
+    content: t('CATERING_PICKUP', 'Catering pickup')
   }];
   var closeAlert = function closeAlert() {
     setAlertState({

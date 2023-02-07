@@ -131,6 +131,9 @@ var BusinessSummary = function BusinessSummary(props) {
   //   value: t('PUBLISHING', 'Publishing')
   // },
   {
+    key: 'sales_channels',
+    value: t('SALES_CHANNELS', 'Sales channels')
+  }, {
     key: 'layout',
     value: t('LAYOUT', 'Layout')
   }, {
