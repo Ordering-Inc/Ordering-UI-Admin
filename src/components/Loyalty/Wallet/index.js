@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, RewardsPrograms as RewardsProgramsController } from 'ordering-components-admin'
 import { PointsWalletBusinessDetail } from '../PointsWalletBusinessDetail'
 import { PointsWalletBusinessList } from '../PointsWalletBusinessList'
-
+import { IconButton } from '../../../styles'
+import { ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 import {
   Container,
   Title,
   Tabs,
   Tab,
-  Header
+  Header,
+  SkeletonWrapper
 } from './styles'
-import { IconButton } from '../../../styles'
-import { ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
-import { useWindowSize } from '../../../hooks/useWindowSize'
+import Skeleton from 'react-loading-skeleton'
 
-export const PointsWallet = (props) => {
+const WalletUI = (props) => {
   const {
     handleParentSidebarMove,
     pointWallet,
     handleUpdatePointsWallet,
-    moveDistance
+    moveDistance,
+    loyaltyPlanList,
+    title
   } = props
 
   const [, t] = useLanguage()
@@ -48,7 +51,7 @@ export const PointsWallet = (props) => {
   return (
     <Container>
       <Header>
-        <Title>{t('POINTS_WALLET', 'Points wallet')}</Title>
+        <Title>{title}</Title>
         {width > 576 && moveDistance === 0 && (
           <IconButton
             color='black'
@@ -69,28 +72,44 @@ export const PointsWallet = (props) => {
           </Tab>
         ))}
       </Tabs>
-      <div
-        style={{
-          display: selectedOption === 'general' ? 'block' : 'none'
-        }}
-      >
-        <PointsWalletBusinessDetail
-          walletData={pointWallet}
-          handleUpdatePointsWallet={handleUpdatePointsWallet}
-          selectedBusinessList={selectedBusinessList}
-        />
-      </div>
-      <div
-        style={{
-          display: selectedOption === 'business' ? 'block' : 'none'
-        }}
-      >
-        <PointsWalletBusinessList
-          {...props}
-          setSelectedBusinessList={setSelectedBusinessList}
-          isCloseBusinessDetails={selectedOption !== 'business'}
-        />
-      </div>
+      {loyaltyPlanList?.loading ? (
+        <SkeletonWrapper>
+          <h1>
+            <Skeleton width={150} height={20} />
+          </h1>
+          <Skeleton height={18} style={{ marginBottom: 10 }} count={8} />
+        </SkeletonWrapper>
+      ) : (
+        <>
+          {selectedOption === 'general' && (
+            <div>
+              <PointsWalletBusinessDetail
+                loyaltyPlanList={loyaltyPlanList}
+                walletData={pointWallet}
+                handleUpdatePointsWallet={handleUpdatePointsWallet}
+                selectedBusinessList={selectedBusinessList}
+              />
+            </div>
+          )}
+          {selectedOption === 'business' && (
+            <div>
+              <PointsWalletBusinessList
+                {...props}
+                setSelectedBusinessList={setSelectedBusinessList}
+                isCloseBusinessDetails={selectedOption !== 'business'}
+              />
+            </div>
+          )}
+        </>
+      )}
     </Container>
   )
+}
+
+export const Wallet = (props) => {
+  const walletProps = {
+    ...props,
+    UIComponent: WalletUI
+  }
+  return <RewardsProgramsController {...walletProps} />
 }

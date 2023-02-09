@@ -53,3 +53,10 @@ export const Tab = styled.div`
     color: #909BA9;
   `}
 `
+
+export const SkeletonWrapper = styled.div`
+  h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+`

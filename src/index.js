@@ -342,7 +342,7 @@ import {
 } from './components/Users'
 import {
   RewardsPrograms,
-  PointsWallet,
+  Wallet,
   PointsWalletLevels,
   PointsWalletBusinessDetail,
   PointsWalletBusinessList
@@ -751,7 +751,7 @@ export {
   UserFormDetailsUI,
 
   RewardsPrograms,
-  PointsWallet,
+  Wallet,
   PointsWalletLevels,
   PointsWalletBusinessDetail,
   PointsWalletBusinessList,
