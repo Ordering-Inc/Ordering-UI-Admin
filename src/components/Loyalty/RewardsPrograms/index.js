@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { List as MenuIcon, Wallet, BarChartSteps, Gift } from 'react-bootstrap-icons'
-import { useLanguage, RewardsPrograms as RewardsProgramsController } from 'ordering-components-admin'
+import { List as MenuIcon, BarChartSteps, Gift, Wallet as Cash } from 'react-bootstrap-icons'
+import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
 import { SideBar } from '../../Shared'
+import { Wallet } from '../Wallet'
+import { PointsWalletLevels } from '../PointsWalletLevels'
+import { GiftCards } from '../GiftCards'
 
 import {
   Container,
@@ -13,11 +16,8 @@ import {
   IconWrapper,
   LoyaltyItemContent
 } from './styles'
-import { PointsWallet } from '../PointsWallet'
-import { PointsWalletLevels } from '../PointsWalletLevels'
-import { GiftCards } from '../GiftCards'
 
-const RewardsProgramsUI = (props) => {
+export const RewardsPrograms = () => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
@@ -25,6 +25,13 @@ const RewardsProgramsUI = (props) => {
   const [moveDistance, setMoveDistance] = useState(0)
   const [levelMoveDistance, setLevelMoveDistance] = useState(0)
   const [giftCardMoveDistance, setGiftCardMoveDistance] = useState(0)
+
+  const walletList = [
+    { key: 'credit_point', name: t('POINTS_WALLET', 'Points wallet'), description: t('POINTS_WALLET_DESCRIPTION', 'Points wallet general and per business setup.'), icon: <Cash /> },
+    { key: 'levels', name: t('LEVELS', 'Levels'), description: t('LEVELS_DESCRIPTION', 'Setup different loyalty levels for your users.'), icon: <BarChartSteps /> },
+    { key: 'gift_card', name: t('GIFT_CARD', 'Gift Card'), description: t('GIFT_CARD_DESCRIPTION', 'Setup different gift cards for your customers.'), icon: <Gift /> },
+    { key: 'cashback', name: t('CASH_WALLET', 'Cash wallet'), description: t('CASH_WALLET_DESCRIPTION', 'Cash wallet general and per business setup.'), icon: <Cash /> }
+  ]
 
   const hanldeClosePointsWallet = () => {
     setMoveDistance(0)
@@ -57,50 +64,41 @@ const RewardsProgramsUI = (props) => {
         </HeaderTitleContainer>
 
         <LoyaltyListContainer>
-          <LoyaltyItemWrapper onClick={() => setShowOption('points_wallet')}>
-            <IconWrapper>
-              <Wallet />
-            </IconWrapper>
-            <LoyaltyItemContent>
-              <h5>{t('POINTS_WALLET', 'Points wallet')}</h5>
-              <p>{t('POINTS_WALLET_DESCRIPTION', 'Points wallet general and per business setup.')}</p>
-            </LoyaltyItemContent>
-          </LoyaltyItemWrapper>
-          <LoyaltyItemWrapper onClick={() => setShowOption('levels')}>
-            <IconWrapper>
-              <BarChartSteps />
-            </IconWrapper>
-            <LoyaltyItemContent>
-              <h5>{t('LEVELS', 'Levels')}</h5>
-              <p>{t('LEVELS_DESCRIPTION', 'Setup different loyalty levels for your users.')}</p>
-            </LoyaltyItemContent>
-          </LoyaltyItemWrapper>
-          <LoyaltyItemWrapper onClick={() => setShowOption('gift_card')}>
-            <IconWrapper>
-              <Gift />
-            </IconWrapper>
-            <LoyaltyItemContent>
-              <h5>{t('GIFT_CARD', 'Gift Card')}</h5>
-              <p>{t('GIFT_CARD_DESCRIPTION', 'Setup different gift cards for your customers.')}</p>
-            </LoyaltyItemContent>
-          </LoyaltyItemWrapper>
+          {walletList.map(item => (
+            <LoyaltyItemWrapper
+              key={item.key}
+              onClick={() => setShowOption(item.key)}
+            >
+              <IconWrapper>
+                {item.icon}
+              </IconWrapper>
+
+              <LoyaltyItemContent>
+                <h5>{item.name}</h5>
+                <p>{item.description}</p>
+              </LoyaltyItemContent>
+            </LoyaltyItemWrapper>
+          ))}
         </LoyaltyListContainer>
       </Container>
-      {showOption === 'points_wallet' && (
+
+      {(showOption === 'credit_point' || showOption === 'cashback') && (
         <SideBar
           sidebarId='loyaltyWallet'
-          open={showOption === 'points_wallet'}
+          open={(showOption === 'credit_point' || showOption === 'cashback')}
           onClose={hanldeClosePointsWallet}
           defaultSideBarWidth={550 + moveDistance}
           moveDistance={moveDistance}
         >
-          <PointsWallet
-            {...props}
+          <Wallet
+            type={showOption}
+            title={walletList.find(item => item.key === showOption)?.name}
             moveDistance={moveDistance}
             handleParentSidebarMove={val => setMoveDistance(val)}
           />
         </SideBar>
       )}
+
       {showOption === 'levels' && (
         <SideBar
           sidebarId='loyaltyLevels'
@@ -115,6 +113,7 @@ const RewardsProgramsUI = (props) => {
           />
         </SideBar>
       )}
+
       {showOption === 'gift_card' && (
         <SideBar
           open={showOption === 'gift_card'}
@@ -130,12 +129,4 @@ const RewardsProgramsUI = (props) => {
       )}
     </>
   )
-}
-
-export const RewardsPrograms = (props) => {
-  const rewardsProgramsProps = {
-    ...props,
-    UIComponent: RewardsProgramsUI
-  }
-  return <RewardsProgramsController {...rewardsProgramsProps} />
 }
