@@ -15,7 +15,7 @@ export const CallCenterApp = () => {
       brand: theme.images.myProducts.myCallcenterAppBrand
     },
     live_title: t('LIVE_DEMO', 'Live Demo'),
-    live_description: t('APP_LIVE_DEMO_DESCRIPTION', 'This is a branded Ordering.co product; play with it and understand how it works'),
+    live_description: t('CALL_CENTER_APP_LIVE_DEMO_DESCRIPTION', 'This is a branded Ordering.co product; play with it and understand how it works'),
     web_url: 'https://callcenter.tryordering.com/search',
     web_link_title: t('CALL_CENTER', 'Call center'),
     brand_title: t('YOUR_BRANDED_CALL_CENTER', 'Your Branded Call Center'),
