@@ -57,10 +57,10 @@ var CustomerAppUI = function CustomerAppUI(props) {
       brand: theme.images.myProducts.singleStoreCustomerApp
     },
     live_title: t('MULTI-STORE-CUSTOMER-APP', 'Multi-store Customer App'),
-    live_description: t('FREE_TO_USE_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
+    live_description: t('MULTI_STORE_CUSTOMER_APP_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
     demo_book_message: 'I would like to book a Demo for the customer app , can you assist me?',
     brand_title: t('SINGLE_STORE_CUSTOMER_APP', 'Single Store Customer App'),
-    brand_description: t('BRANDED_APP_DESCRIPTION', 'This App is delivered in less than five working days, fully branded with your guidelines, removing all ordering.co presence to give your brand more awareness.'),
+    brand_description: t('SINGLE_STORE_CUSTOMER_APP_DESCRIPTION', 'This App is delivered in less than five working days, fully branded with your guidelines, removing all ordering.co presence to give your brand more awareness.'),
     purchase_message: 'I would like to know about the customer app, can you assist me?',
     downloads: [{
       id: 1,
