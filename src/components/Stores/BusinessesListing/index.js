@@ -119,7 +119,6 @@ const BusinessesListingUI = (props) => {
     if (id === null) setOpenBusinessDetails(false)
     else {
       setDetailsBusinessId(id)
-      onBusinessRedirect && onBusinessRedirect(id)
       setOpenBusinessDetails(true)
     }
   }, [])
