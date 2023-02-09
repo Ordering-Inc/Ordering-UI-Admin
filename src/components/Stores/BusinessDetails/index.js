@@ -91,7 +91,7 @@ export const BusinessDetailsUI = (props) => {
     setExtraOpen(true)
     if (!isInitialRender) {
       const businessId = query.get('id')
-      history.replace(`${location.pathname}?id=${businessId}&detail=${item}`)
+      history.replace(`${location.pathname}?id=${businessId}&section=${item}`)
     }
   }
 
@@ -151,7 +151,7 @@ export const BusinessDetailsUI = (props) => {
 
   useEffect(() => {
     if (businessState?.loading) return
-    const detailKey = query.get('detail')
+    const detailKey = query.get('section')
     if (detailKey) {
       handleSelectedItem(detailKey, true)
     }
