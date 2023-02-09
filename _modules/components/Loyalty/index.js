@@ -3,12 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "PointsWallet", {
-  enumerable: true,
-  get: function get() {
-    return _PointsWallet.PointsWallet;
-  }
-});
 Object.defineProperty(exports, "PointsWalletBusinessDetail", {
   enumerable: true,
   get: function get() {
@@ -33,8 +27,14 @@ Object.defineProperty(exports, "RewardsPrograms", {
     return _RewardsPrograms.RewardsPrograms;
   }
 });
+Object.defineProperty(exports, "Wallet", {
+  enumerable: true,
+  get: function get() {
+    return _Wallet.Wallet;
+  }
+});
 var _RewardsPrograms = require("./RewardsPrograms");
-var _PointsWallet = require("./PointsWallet");
+var _Wallet = require("./Wallet");
 var _PointsWalletLevels = require("./PointsWalletLevels");
 var _PointsWalletBusinessDetail = require("./PointsWalletBusinessDetail");
 var _PointsWalletBusinessList = require("./PointsWalletBusinessList");
