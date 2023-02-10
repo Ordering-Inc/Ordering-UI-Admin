@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-components-admin'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
 import { Confirm, Modal, SearchBar } from '../../Shared'
@@ -31,6 +32,9 @@ const BusinessMenuUI = (props) => {
     setIsSelectedSharedMenus,
     sitesState
   } = props
+
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
@@ -40,6 +44,7 @@ const BusinessMenuUI = (props) => {
   const [isOpenSharedProduct, setIsOpenSharedProduct] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const [menuList, setMenuList] = useState([])
+  const [initMenuId, setInitMenuId] = useState(null)
 
   const handleOpenOptions = (name, menu) => {
     setCurrentMenu(menu)
@@ -47,17 +52,30 @@ const BusinessMenuUI = (props) => {
     setShowOption(name)
   }
 
-  const handleCloseOption = () => {
+  const handleCloseOption = (isTab) => {
     setShowOption(null)
     setIsExtendExtraOpen(false)
     setIsOpenSharedProduct(false)
     setCurrentMenu(null)
+    if (!isTab) {
+      setInitMenuId(null)
+      const businessId = query.get('id')
+      const section = query.get('section')
+      const tab = isSelectedSharedMenus ? 'shared_menus' : 'menu'
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+    }
   }
 
-  const handleOpenEdit = (e, menu) => {
-    const isInvalid = e.target.closest('.business_checkbox_control')
+  const handleOpenEdit = (e, menu, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.business_checkbox_control')
     if (isInvalid) return
     handleOpenOptions('option', menu)
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      const tab = isSelectedSharedMenus ? 'shared_menus' : 'menu'
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&menu=${menu.id}`)
+    }
   }
 
   useEffect(() => {
@@ -65,6 +83,39 @@ const BusinessMenuUI = (props) => {
     const filteredMenus = updatedMenus.filter(menu => menu?.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     setMenuList(filteredMenus)
   }, [JSON.stringify(businessMenusState.menus), JSON.stringify(businessMenusState.menusShared), searchValue, isSelectedSharedMenus])
+
+  const handleTabClick = (isShared, isInitialRender) => {
+    handleCloseOption(true)
+    setIsSelectedSharedMenus(isShared)
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      const tab = isShared ? 'shared_menus' : 'menu'
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    if (businessMenusState.loading || !initMenuId) return
+    const tab = query.get('tab')
+    const updatedMenus = [...(tab === 'shared_menus' ? businessMenusState?.menusShared : businessMenusState?.menus)]
+    const selectedMenu = updatedMenus.find(menu => menu.id === Number(initMenuId))
+    handleOpenEdit(null, selectedMenu, true)
+  }, [initMenuId, businessMenusState.loading])
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    const menuId = query.get('menu')
+    setInitMenuId(menuId)
+    if (tab === 'shared_menus') {
+      handleTabClick(true, true)
+    } else {
+      handleTabClick(false, true)
+    }
+    return () => {
+      setInitMenuId(null)
+    }
+  }, [])
 
   return (
     <MainContainer>
@@ -83,19 +134,13 @@ const BusinessMenuUI = (props) => {
         <TabsContainer>
           <Tab
             active={!isSelectedSharedMenus}
-            onClick={() => {
-              handleCloseOption()
-              setIsSelectedSharedMenus(false)
-            }}
+            onClick={() => handleTabClick(false)}
           >
             {t('MENU_V21', 'Menu')}
           </Tab>
           <Tab
             active={isSelectedSharedMenus}
-            onClick={() => {
-              handleCloseOption()
-              setIsSelectedSharedMenus(true)
-            }}
+            onClick={() => handleTabClick(true)}
           >
             {t('SHARED_MENUS', 'Shared menus')}
           </Tab>
