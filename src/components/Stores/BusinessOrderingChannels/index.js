@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { Button, Input } from '../../../styles'
 import { Alert } from '../../Shared'
@@ -22,6 +23,8 @@ export const BusinessOrderingChannels = (props) => {
     setFormState
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [slug, setSlug] = useState('')
   const [selectedOption, setSelectedOption] = useState('custom_slug')
@@ -55,8 +58,13 @@ export const BusinessOrderingChannels = (props) => {
     })
   }
 
-  const handleChangeOption = (key) => {
-    setSelectedOption(key)
+  const handleChangeOption = (tab, isInitialRender) => {
+    setSelectedOption(tab)
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+    }
   }
 
   useEffect(() => {
@@ -67,6 +75,15 @@ export const BusinessOrderingChannels = (props) => {
   useEffect(() => {
     if (business) setSlug(business?.slug)
   }, [business])
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleChangeOption(tab, true)
+    } else {
+      handleChangeOption('custom_slug')
+    }
+  }, [])
 
   return (
     <>
