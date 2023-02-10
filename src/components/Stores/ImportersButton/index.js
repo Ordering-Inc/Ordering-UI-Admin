@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { Upload } from 'react-bootstrap-icons'
 import { Button } from '../../../styles'
@@ -7,9 +8,29 @@ import { SideBar } from '../../Shared'
 import { CsvImportButtonWrapper } from './styles'
 
 export const ImportersButton = (props) => {
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [openImporters, setOpenImporters] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
+
+  const handleOpenImporters = () => {
+    setOpenImporters(true)
+
+    history.replace(`${location.pathname}?header=importers`)
+  }
+
+  const handleCloseImporters = () => {
+    setOpenImporters(false)
+    history.replace(`${location.pathname}`)
+  }
+
+  useEffect(() => {
+    const header = query.get('header')
+    if (header === 'importers') {
+      setOpenImporters(true)
+    }
+  }, [])
 
   return (
     <>
@@ -17,7 +38,7 @@ export const ImportersButton = (props) => {
         <Button
           borderRadius='8px'
           color='lightPrimary'
-          onClick={() => setOpenImporters(true)}
+          onClick={handleOpenImporters}
         >
           {t('IMPORTERS', 'Importers')}
           <Upload />
@@ -28,7 +49,7 @@ export const ImportersButton = (props) => {
           defaultSideBarWidth={extraOpen ? 1000 : 500}
           moveDistance={extraOpen ? 500 : 0}
           open={openImporters}
-          onClose={() => setOpenImporters(false)}
+          onClose={handleCloseImporters}
           showExpandIcon
         >
           <ImportersListing
