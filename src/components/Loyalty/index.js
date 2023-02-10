@@ -1,12 +1,12 @@
 import { RewardsPrograms } from './RewardsPrograms'
-import { PointsWallet } from './PointsWallet'
+import { Wallet } from './Wallet'
 import { PointsWalletLevels } from './PointsWalletLevels'
 import { PointsWalletBusinessDetail } from './PointsWalletBusinessDetail'
 import { PointsWalletBusinessList } from './PointsWalletBusinessList'
 
 export {
   RewardsPrograms,
-  PointsWallet,
+  Wallet,
   PointsWalletLevels,
   PointsWalletBusinessDetail,
   PointsWalletBusinessList
