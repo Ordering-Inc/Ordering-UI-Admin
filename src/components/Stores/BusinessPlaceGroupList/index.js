@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, BusinessPlaceGroupList as BusinessPlaceGroupListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
@@ -31,6 +32,8 @@ export const BusinessPlaceGroupListUI = (props) => {
     getMultiCheckStatus
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [openDetail, setOpenDetail] = useState(false)
@@ -46,20 +49,39 @@ export const BusinessPlaceGroupListUI = (props) => {
     setOpenDetail(false)
     setSelectedPlace(null)
     setIsExtendExtraOpen(false)
+    const businessId = query.get('id')
+    const section = query.get('section')
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}`)
   }
 
   const handleUpdateSelectedPlaceGroup = (placeGroup) => {
     setSelectedPlace(placeGroup)
   }
 
-  const handlePlaceClick = (e, placeGroup) => {
-    if (e.target.closest('.check-box')) return
+  const handlePlaceClick = (e, placeGroup, isInitialRender) => {
+    if (e?.target?.closest('.check-box')) return
     handleOpenDetail(placeGroup)
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&place_group=${placeGroup.id}`)
+    }
   }
 
   const handleCheckBoxChange = (placeGroup) => {
     handleChangeEnabled(placeGroup?.id, { enabled: !placeGroup?.enabled })
   }
+
+  useEffect(() => {
+    if (placeGroupList?.loading) return
+    const placeGroupId = query.get('place_group')
+    if (placeGroupId) {
+      const initPlaceGroup = placeGroupList?.placeGroups?.find(placeGroup => placeGroup.id === Number(placeGroupId))
+      if (initPlaceGroup) {
+        handlePlaceClick(null, initPlaceGroup, true)
+      }
+    }
+  }, [placeGroupList?.loading])
 
   return (
     <Container>
