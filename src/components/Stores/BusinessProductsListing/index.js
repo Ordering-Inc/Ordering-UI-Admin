@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -75,6 +76,8 @@ const BusinessProductsListingUI = (props) => {
     setBusinessTypes
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [ordering] = useApi()
@@ -112,13 +115,16 @@ const BusinessProductsListingUI = (props) => {
     })
   }
 
-  const handleOpenCategoryDetails = (category = null) => {
+  const handleOpenCategoryDetails = (category = null, isInitialRender) => {
     setOpenSidebar(null)
     setSelectedProduct(null)
     setCurrentCategory(category)
     if (category && category?.id !== null) {
       setCategorySelected(category)
       setOpenSidebar('category_details')
+      if (!isInitialRender) {
+        history.replace(`${location.pathname}?category=${category.id}`)
+      }
     } else {
       setCurrentCategory(null)
       setOpenSidebar('category_details')
@@ -133,16 +139,19 @@ const BusinessProductsListingUI = (props) => {
     })
     setCurrentCategory(null)
     setOpenSidebar(null)
+    history.replace(`${location.pathname}`)
   }
 
-  const handleOpenProductDetails = (product) => {
+  const handleOpenProductDetails = (product, isInitialRender) => {
     setSelectedProduct(product)
     setOpenSidebar('product_details')
-    onProductRedirect({
-      slug: businessState?.business?.slug,
-      product: product.id,
-      category: product.category_id
-    })
+    if (!isInitialRender) {
+      onProductRedirect({
+        slug: businessState?.business?.slug,
+        product: product.id,
+        category: product.category_id
+      })
+    }
   }
 
   const handleCloseProductDetails = () => {
@@ -230,6 +239,28 @@ const BusinessProductsListingUI = (props) => {
       setShowPopup(true)
     }
   }, [businessState?.business])
+
+  useEffect(() => {
+    if (businessState.loading) return
+    const categoryId = query.get('category')
+    const productId = query.get('product')
+    if (categoryId && productId) {
+      const initCategory = businessState.business?.categories?.find(category => category.id === Number(categoryId))
+      const initProduct = initCategory?.products?.find(product => product.id === Number(productId))
+      if (initCategory) handleChangeCategory(null, initCategory)
+      if (initProduct) {
+        handleOpenProductDetails(initProduct, true)
+      }
+    } else if (categoryId && !productId) {
+      const initCategory = businessState.business?.categories?.find(category => category.id === Number(categoryId))
+      if (initCategory) {
+        handleChangeCategory(null, initCategory)
+        handleOpenCategoryDetails(initCategory, true)
+      }
+    } else {
+      setCategorySelected(businessState?.business?.categories[0])
+    }
+  }, [businessState.loading])
 
   return (
     <>

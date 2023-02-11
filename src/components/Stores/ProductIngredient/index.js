@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button } from '../../../styles'
@@ -20,22 +21,42 @@ export const ProductIngredient = (props) => {
     setIsExtendExtraOpen
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [openDetails, setOpenDetails] = useState(false)
   const [currentIngredient, setCurrentIngredient] = useState(null)
 
-  const handleOpenIngredient = (ingredient) => {
+  const handleOpenIngredient = (ingredient, isInitialRender) => {
     setCurrentIngredient(ingredient)
     setIsExtendExtraOpen(true)
     setOpenDetails(true)
+    if (!isInitialRender) {
+      const category = query.get('category')
+      const product = query.get('product')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&ingredient=${ingredient.id}`)
+    }
   }
 
   const handleCloseDetails = () => {
     setOpenDetails(false)
     setIsExtendExtraOpen(false)
     setCurrentIngredient(null)
+    const category = query.get('category')
+    const product = query.get('product')
+    const section = query.get('section')
+    history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}`)
   }
+
+  useEffect(() => {
+    const ingredientId = query.get('ingredient')
+    if (ingredientId) {
+      const initIngredient = product.ingredients.find(ingredient => ingredient.id === Number(ingredientId))
+      initIngredient && handleOpenIngredient(initIngredient, true)
+    }
+  }, [])
 
   return (
     <MainContainer>
