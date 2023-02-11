@@ -11,6 +11,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 25px;
+  margin-top: 4px;
 
   ${props => props.theme?.rtl ? css`
     margin-left: 40px;
