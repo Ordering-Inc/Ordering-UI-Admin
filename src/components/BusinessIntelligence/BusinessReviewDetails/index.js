@@ -25,7 +25,7 @@ import {
 
 const BusinessReviewDetailsUI = (props) => {
   const {
-    business,
+    businessState,
     reviewsList,
     handleOpenProducts,
     handleChangeReviewEnabled
@@ -43,18 +43,18 @@ const BusinessReviewDetailsUI = (props) => {
     <>
       <ReviewDetailsContainer>
         <Header>
-          <h1>{business?.name}</h1>
+          <h1>{businessState.business?.name}</h1>
           <Button
             color='lightPrimary'
             borderRadius='8px'
-            onClick={() => handleOpenProducts(business)}
+            onClick={() => handleOpenProducts(businessState.business)}
           >
             {t('PRODUCT_REVIEW', 'Product review')}
           </Button>
         </Header>
         <BusinessLogoContainer>
           <WrapperImage>
-            <Image bgimage={optimizeImage(business?.logo || theme.images?.dummies?.businessLogo, 'h_120,c_limit')} />
+            <Image bgimage={optimizeImage(businessState.business?.logo || theme.images?.dummies?.businessLogo, 'h_120,c_limit')} />
           </WrapperImage>
         </BusinessLogoContainer>
         {reviewsList?.loading ? (
