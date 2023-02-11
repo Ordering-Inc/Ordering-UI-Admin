@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import AiOutlineInfoCircle from '@meronex/icons/ai/AiOutlineInfoCircle'
+import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import MdClose from '@meronex/icons/md/MdClose'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 
@@ -45,7 +46,8 @@ import {
   InfoBlock,
   SendToContainer,
   MessageSender,
-  QuickMessageWrapper
+  QuickMessageWrapper,
+  NotSendMessage
 } from './styles'
 import { Alert, Image as ImageWithFallback } from '../../Shared'
 import { Button, Input } from '../../../styles'
@@ -96,6 +98,10 @@ export const MessagesUI = (props) => {
   const [load, setLoad] = useState(0)
   const [messageList, setMessageList] = useState([])
   const [isChatDisabled, setIsChatDisabled] = useState(false)
+  const previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17]
+  const chatDisabled = previousStatus.includes(order?.status)
+
+  console.log(order?.status)
 
   const adminMessageList = [
     { key: 'message_1', text: t('ADMIN_MESSAGE_1', 'admin_message_1') },
@@ -928,95 +934,104 @@ export const MessagesUI = (props) => {
                 </ChatContactInfoContainer>
               )}
             </ImageContainer>
-            {messageList.length > 0 && (
-              <QuickMessageWrapper>
-                {messageList.map((quickMessage, i) => (
-                  <Button
-                    key={i}
-                    color='secundaryDark'
-                    onClick={() => handleClickQuickMessage(quickMessage.text)}
-                  >
-                    {quickMessage.text}
-                  </Button>
-                ))}
-              </QuickMessageWrapper>
-            )}
+            {chatDisabled ? (
+              <NotSendMessage>
+                <MdcCloseOctagonOutline />
+                <p>{t('NOT_SEND_MESSAGES', 'You can\'t send messages because the order has ended')}</p>
+              </NotSendMessage>
+            ) : (
+              <>
+                {messageList.length > 0 && (
+                  <QuickMessageWrapper>
+                    {messageList.map((quickMessage, i) => (
+                      <Button
+                        key={i}
+                        color='secundaryDark'
+                        onClick={() => handleClickQuickMessage(quickMessage.text)}
+                      >
+                        {quickMessage.text}
+                      </Button>
+                    ))}
+                  </QuickMessageWrapper>
+                )}
 
-            <Send onSubmit={handleSubmit(onSubmit)} noValidate>
-              <WrapperSendInput>
-                <Controller
-                  name='message'
-                  control={control}
-                  render={({ onChange, value }) => (
-                    <Input
-                      placeholder={t('WRITE_A_MESSAGE', 'Write a message...')}
-                      value={value}
-                      onChange={e => {
-                        onChange(e.target.value)
-                        onChangeMessage(e)
-                      }}
-                      onFocus={unreadMessageControl}
+                <Send onSubmit={handleSubmit(onSubmit)} noValidate>
+                  <WrapperSendInput>
+                    <Controller
                       name='message'
-                      ref={messageInputRef}
-                      autoComplete='off'
-                      readOnly={isChatDisabled}
+                      control={control}
+                      render={({ onChange, value }) => (
+                        <Input
+                          placeholder={t('WRITE_A_MESSAGE', 'Write a message...')}
+                          value={value}
+                          onChange={e => {
+                            onChange(e.target.value)
+                            onChangeMessage(e)
+                          }}
+                          onFocus={unreadMessageControl}
+                          name='message'
+                          ref={messageInputRef}
+                          autoComplete='off'
+                          readOnly={isChatDisabled}
+                        />
+                      )}
+                      rules={{
+                        required: !image
+                      }}
+                      defaultValue=''
                     />
-                  )}
-                  rules={{
-                    required: !image
-                  }}
-                  defaultValue=''
-                />
-                {!image && (
-                  <SendImage htmlFor='chat_image'>
-                    <input
-                      type='file'
-                      name='image'
-                      id='chat_image'
-                      accept='image/png,image/jpg,image/jpeg'
-                      onChange={onChangeImage}
-                      disabled={isChatDisabled}
-                    />
-                    <BsCardImage />
-                  </SendImage>
-                )}
-                {image && (
-                  <WrapperDeleteImage>
+                    {!image && (
+                      <SendImage htmlFor='chat_image'>
+                        <input
+                          type='file'
+                          name='image'
+                          id='chat_image'
+                          accept='image/png,image/jpg,image/jpeg'
+                          onChange={onChangeImage}
+                          disabled={isChatDisabled}
+                        />
+                        <BsCardImage />
+                      </SendImage>
+                    )}
+                    {image && (
+                      <WrapperDeleteImage>
+                        <Button
+                          circle
+                          onClick={removeImage}
+                          type='reset'
+                        >
+                          <MdClose />
+                        </Button>
+                        <img
+                          src={image}
+                          loading='lazy'
+                        />
+                      </WrapperDeleteImage>
+                    )}
+                  </WrapperSendInput>
+                  <WrapperSendMessageButton>
                     <Button
-                      circle
-                      onClick={removeImage}
-                      type='reset'
+                      borderRadius='8px'
+                      color='primary'
+                      type='submit'
+                      disabled={sendMessage.loading || (message === '' && !image) || messages.loading}
+                      ref={buttonRef}
                     >
-                      <MdClose />
+                      <IosSend />
+                      {sendMessage.loading ? (
+                        <span>
+                          {t('SENDING_MESSAGE', 'Sending...')}
+                        </span>
+                      )
+                        : (
+                          <span>
+                            {t('SEND', 'send')}
+                          </span>)}
                     </Button>
-                    <img
-                      src={image}
-                      loading='lazy'
-                    />
-                  </WrapperDeleteImage>
-                )}
-              </WrapperSendInput>
-              <WrapperSendMessageButton>
-                <Button
-                  borderRadius='8px'
-                  color='primary'
-                  type='submit'
-                  disabled={sendMessage.loading || (message === '' && !image) || messages.loading}
-                  ref={buttonRef}
-                >
-                  <IosSend />
-                  {sendMessage.loading ? (
-                    <span>
-                      {t('SENDING_MESSAGE', 'Sending...')}
-                    </span>
-                  )
-                    : (
-                      <span>
-                        {t('SEND', 'send')}
-                      </span>)}
-                </Button>
-              </WrapperSendMessageButton>
-            </Send>
+                  </WrapperSendMessageButton>
+                </Send>
+              </>
+            )}
           </SendForm>
         )}
         <Alert

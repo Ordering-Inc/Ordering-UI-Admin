@@ -29,6 +29,7 @@ export const FormInput = styled.form`
 export const ProductTagImage = styled.div`
   width: 200px;
   height: 200px;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: -webkit-grab;

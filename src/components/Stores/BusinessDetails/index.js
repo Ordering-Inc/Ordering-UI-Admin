@@ -24,6 +24,7 @@ import { MoreSidebarLayout, Personalization, Alert } from '../../Shared'
 import {
   BarContainer
 } from './styles'
+import { BusinessSalesChannel } from '../BusinessSalesChannel'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -274,6 +275,12 @@ export const BusinessDetailsUI = (props) => {
               setIsExtendExtraOpen={setIsExtendExtraOpen}
             />
           )} */}
+          {selectedItem === 'sales_channels' && (
+            <BusinessSalesChannel
+              business={businessState?.business}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+            />
+          )}
           {selectedItem === 'layout' && (
             <BusinessFrontLayout
               business={businessState?.business}
