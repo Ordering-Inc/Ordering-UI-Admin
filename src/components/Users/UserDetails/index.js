@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController, useLanguage, useSession } from 'ordering-components-admin'
 import { UserDetailsMenu } from '../UserDetailsMenu'
@@ -36,6 +37,8 @@ export const UserDetailsUI = (props) => {
     handleChangeActiveUser
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [adminUserState] = useSession()
   const [, t] = useLanguage()
@@ -64,6 +67,24 @@ export const UserDetailsUI = (props) => {
   useEffect(() => {
     setExtraOpen(false)
   }, [currentMenuSelected])
+
+  const handleTabClick = (tab, isInitialRender) => {
+    setCurrentMenuSelected(tab)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(currentMenuSelected)
+    }
+  }, [])
 
   return (
     <>
@@ -130,7 +151,7 @@ export const UserDetailsUI = (props) => {
       </DetailsHeader>
       <UserDetailsMenu
         currentMenuSelected={currentMenuSelected}
-        handleChangeMenu={setCurrentMenuSelected}
+        handleChangeMenu={tab => handleTabClick(tab)}
         isBusinessOwner={userState?.user?.level === 2}
       />
       {!userState?.loading && userState?.user && (
