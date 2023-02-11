@@ -73,7 +73,11 @@ export const UserDetailsUI = (props) => {
     if (!isInitialRender) {
       const id = query.get('id')
       const section = query.get('section')
-      history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
+      if (section) {
+        history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
+      } else {
+        history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+      }
     }
   }
 
