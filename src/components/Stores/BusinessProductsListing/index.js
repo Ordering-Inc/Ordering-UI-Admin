@@ -258,7 +258,7 @@ const BusinessProductsListingUI = (props) => {
         handleOpenCategoryDetails(initCategory, true)
       }
     } else {
-      setCategorySelected(businessState?.business?.categories[0])
+      businessState?.business?.categories && setCategorySelected(businessState?.business?.categories[0])
     }
   }, [businessState.loading])
 
