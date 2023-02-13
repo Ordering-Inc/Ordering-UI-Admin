@@ -1,37 +1,33 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils, BusinessProductsListing as BusinessProductsListingController } from 'ordering-components-admin'
-import { useInfoShare } from '../../../contexts/InfoShareContext'
-import { List as MenuIcon, ImageFill } from 'react-bootstrap-icons'
+import { useLanguage, useUtils, ReviewProductList as ReviewProductListController } from 'ordering-components-admin'
+import { ImageFill, StarFill } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
-import { Pagination, SearchBar, SideBar } from '../../Shared'
-import { IconButton } from '../../../styles'
+import { Pagination, SideBar } from '../../Shared'
 import { ProductReviewDetails } from '../ProductReviewDetails'
 
 import {
   ReviewsListingContainer,
-  Header,
-  HeaderLeft,
-  HeaderRight,
   ReviewsTable,
   ReviewTbody,
   WrapperImage,
   Image,
   ReviewObject,
-  PagesBottomContainer
+  PagesBottomContainer,
+  ReviewMarkerWrapper
 } from './styles'
 
 export const ReviewProductsListingUI = (props) => {
   const {
-    businessState,
-    categoryState,
+    productState,
     handleChangeSearch,
-    searchValue
+    searchValue,
+    parentSearchValue,
+    businessId
   } = props
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
 
-  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [openReview, setOpenReview] = useState(false)
   const [curProduct, setCurProduct] = useState(null)
 
@@ -51,17 +47,17 @@ export const ReviewProductsListingUI = (props) => {
   }
 
   useEffect(() => {
-    if (categoryState.loading) return
+    if (productState.loading) return
     let _totalPages
-    if (categoryState.products.length > 0) {
-      _totalPages = Math.ceil(categoryState.products.length / productsPerPage)
+    if (productState.products.length > 0) {
+      _totalPages = Math.ceil(productState.products.length / productsPerPage)
     }
     const indexOfLastPost = currentPage * productsPerPage
     const indexOfFirstPost = indexOfLastPost - productsPerPage
-    const _currentProducts = categoryState.products.slice(indexOfFirstPost, indexOfLastPost)
+    const _currentProducts = productState.products.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
     setCurrentProducts(_currentProducts)
-  }, [categoryState, currentPage, productsPerPage])
+  }, [productState, currentPage, productsPerPage])
 
   const handleOpenReview = (product) => {
     setCurProduct(product)
@@ -72,38 +68,21 @@ export const ReviewProductsListingUI = (props) => {
     setCurrentPage(1)
   }, [searchValue])
 
+  useEffect(() => {
+    handleChangeSearch(parentSearchValue)
+  }, [parentSearchValue])
+
   return (
     <>
       <ReviewsListingContainer>
-        <Header>
-          <HeaderLeft>
-            {isCollapse && (
-              <IconButton
-                color='black'
-                onClick={() => handleMenuCollapse(false)}
-              >
-                <MenuIcon />
-              </IconButton>
-            )}
-            <h1>{businessState?.loading ? <Skeleton width={150} /> : businessState?.business?.name}</h1>
-          </HeaderLeft>
-          <HeaderRight>
-            <SearchBar
-              lazyLoad
-              placeholder={t('SEARCH', 'Search')}
-              searchValue={searchValue}
-              onSearch={handleChangeSearch}
-            />
-          </HeaderRight>
-        </Header>
         <ReviewsTable>
           <thead>
             <tr>
               <th><ReviewObject isHeader>{t('PRODUCT', 'Product')}</ReviewObject></th>
-              {/* <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th> */}
+              <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th>
             </tr>
           </thead>
-          {(businessState?.loading || categoryState?.loading) ? (
+          {productState?.loading ? (
             [...Array(10).keys()].map(i => (
               <ReviewTbody key={i}>
                 <tr>
@@ -115,7 +94,7 @@ export const ReviewProductsListingUI = (props) => {
                       <p><Skeleton width={80} /></p>
                     </ReviewObject>
                   </td>
-                  {/* <td><ReviewMarkerWrapper><Skeleton width={20} /></ReviewMarkerWrapper></td> */}
+                  <td><ReviewMarkerWrapper><Skeleton width={20} /></ReviewMarkerWrapper></td>
                 </tr>
               </ReviewTbody>
             ))
@@ -139,12 +118,16 @@ export const ReviewProductsListingUI = (props) => {
                       <p>{product?.name}</p>
                     </ReviewObject>
                   </td>
-                  {/* <td>
+                  <td>
                     <ReviewMarkerWrapper>
-                      <StarFill />
-                      <p>{product?.reviews?.total}</p>
+                      {product?.reviews?.total && (
+                        <>
+                          <StarFill />
+                          <p>{product?.reviews?.total}</p>
+                        </>
+                      )}
                     </ReviewMarkerWrapper>
-                  </td> */}
+                  </td>
                 </tr>
               </ReviewTbody>
             ))
@@ -152,7 +135,7 @@ export const ReviewProductsListingUI = (props) => {
         </ReviewsTable>
 
         {
-          !businessState.loading && categoryState?.products?.length > 0 && (
+          !productState.loading && productState?.products?.length > 0 && (
             <PagesBottomContainer>
               <Pagination
                 currentPage={currentPage}
@@ -177,7 +160,7 @@ export const ReviewProductsListingUI = (props) => {
           }}
         >
           <ProductReviewDetails
-            businessId={businessState?.business?.id}
+            businessId={businessId}
             product={curProduct}
             productId={curProduct?.id}
           />
@@ -188,18 +171,13 @@ export const ReviewProductsListingUI = (props) => {
 }
 
 export const ReviewProductsListing = (props) => {
-  const [isInitialRender, setIsInitialRender] = useState(false)
-
   const businessProductslistingProps = {
     ...props,
-    isAllCategoryProducts: true,
     UIComponent: ReviewProductsListingUI,
-    isInitialRender,
     isSearchByName: true,
-    isSearchByDescription: true,
-    handleUpdateInitialRender: (val) => setIsInitialRender(val)
+    isSearchByDescription: true
   }
   return (
-    <BusinessProductsListingController {...businessProductslistingProps} />
+    <ReviewProductListController {...businessProductslistingProps} />
   )
 }

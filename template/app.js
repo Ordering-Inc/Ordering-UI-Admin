@@ -39,7 +39,6 @@ import { PlacesList } from './pages/PlacesList'
 import { InvoiceManager } from './pages/InvoiceManager'
 import { OrderingProducts } from './pages/OrderingProducts'
 import { ReviewsList } from './pages/ReviewsList'
-import { ReviewProducts } from './pages/ReviewProducts'
 import { DeliveryDriversList } from './pages/DeliveryDriversList'
 import { DriversManagersList } from './pages/DriversManagersList'
 import { DriversCompaniesList } from './pages/DriversCompaniesList'
@@ -73,6 +72,7 @@ import { AdBannersList } from './pages/AdBannersList'
 import { Profile } from './pages/Profile'
 import settings from './config.json'
 import { BusinessAdd } from './pages/BusinessAdd'
+import { CustomProject } from './pages/CustomProject'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -256,9 +256,6 @@ export const App = () => {
                     <ProtectedRoute path='/intelligence/invoice' allowedLevels={[0]}>
                       <InvoiceManager />
                     </ProtectedRoute>
-                    <ProtectedRoute path='/intelligence/reviews/:store' allowedLevels={[0]}>
-                      <ReviewProducts />
-                    </ProtectedRoute>
                     <ProtectedRoute path='/intelligence/reviews' allowedLevels={[0]}>
                       <ReviewsList />
                     </ProtectedRoute>
@@ -320,6 +317,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/my-products/kiosk-app' allowedLevels={[0]}>
                       <KioskApp />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/custom-project' allowedLevels={[0]}>
+                      <CustomProject />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/settings/basic' allowedLevels={[0]}>

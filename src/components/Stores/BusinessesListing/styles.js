@@ -95,24 +95,16 @@ export const EmptyBusinessWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 140px);
 
   > img {
     width: 90%;
     max-width: 500px;
   }
-  h2 {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    margin-bottom: 30px;
-    margin-top: 0px;
-    text-align: center;
-    max-width: 600px;
-    color: ${props => props.theme.colors.lightGray};
-  }
+
   button {
     height: 44px;
+    margin-top: 30px;
   }
   @media (min-width: 576px) {
     > img {

@@ -76,20 +76,20 @@ export const DriversGroupGeneralForm = (props) => {
       }
       handleUpdateDriversGroup(changesState)
     } else {
-      if (user?.level !== 5 && !changesState?.administrator_id) {
-        setAlertState({
-          open: true,
-          content: [t('VALIDATION_ERROR_REQUIRED', 'The manager is required.').replace('_attribute_', t('DRIVER_MANAGER', 'Driver manager'))]
-        })
-        return
-      }
-      if (typeof changesState?.priority === 'undefined') {
-        setAlertState({
-          open: true,
-          content: [t('VALIDATION_ERROR_REQUIRED', 'The priority is required.').replace('_attribute_', t('PRIORITY', 'Priority'))]
-        })
-        return
-      }
+      // if (user?.level !== 5 && !changesState?.administrator_id) {
+      //   setAlertState({
+      //     open: true,
+      //     content: [t('VALIDATION_ERROR_REQUIRED', 'The manager is required.').replace('_attribute_', t('DRIVER_MANAGER', 'Driver manager'))]
+      //   })
+      //   return
+      // }
+      // if (typeof changesState?.priority === 'undefined') {
+      //   setAlertState({
+      //     open: true,
+      //     content: [t('VALIDATION_ERROR_REQUIRED', 'The priority is required.').replace('_attribute_', t('PRIORITY', 'Priority'))]
+      //   })
+      //   return
+      // }
       if (changesState?.type === 0 && !changesState?.drivers) {
         setAlertState({
           open: true,

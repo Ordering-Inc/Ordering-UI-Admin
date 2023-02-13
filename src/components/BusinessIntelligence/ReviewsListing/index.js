@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
-import { List as MenuIcon } from 'react-bootstrap-icons'
+import { List as MenuIcon, CaretDownFill } from 'react-bootstrap-icons'
 import { SearchBar } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { BusinessReviewList } from '../BusinessReviewList'
 import { UsersReviewList } from '../UsersReviewList'
+import { BusinessSelectHeader } from '../../Stores/BusinessSelectHeader'
+import { ReviewProductsListing } from '../ReviewProductsListing'
 
 import {
   ReviewsListingContainer,
@@ -13,7 +15,9 @@ import {
   HeaderLeft,
   HeaderRight,
   Tabs,
-  Tab
+  Tab,
+  SelectWrapper,
+  TitleWrapper
 } from './styles'
 
 export const ReviewsListing = (props) => {
@@ -21,6 +25,24 @@ export const ReviewsListing = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [showOption, setShowOption] = useState('business')
   const [searchValue, setSearchValue] = useState(null)
+  const [showSelect, setShowSelect] = useState(false)
+  const [business, setBusiness] = useState('')
+
+  const changeBusinessState = (business) => {
+    setShowSelect(false)
+    setBusiness(business)
+  }
+
+  const handleChangeOption = (option) => {
+    setShowOption(option)
+    if (option === 'products' && !business) setShowSelect(true)
+  }
+
+  const handleOpenProducts = (business) => {
+    setBusiness(business)
+    setShowOption('products')
+    setShowSelect(false)
+  }
 
   return (
     <>
@@ -35,7 +57,24 @@ export const ReviewsListing = (props) => {
                 <MenuIcon />
               </IconButton>
             )}
-            <h1>{t('REVIEWS_MANAGER', 'Reviews manager')}</h1>
+            {showOption === 'products' ? (
+              <SelectWrapper>
+                <TitleWrapper onClick={() => setShowSelect(prev => !prev)}>
+                  <h1>{business?.name || t('REVIEWS_MANAGER', 'Reviews manager')}</h1>
+                  <CaretDownFill className={`${showSelect && 'rotate'}`} />
+                </TitleWrapper>
+                {showSelect && (
+                  <BusinessSelectHeader
+                    close={() => setShowSelect(false)}
+                    isOpen={showSelect}
+                    noActiveStatusCondition
+                    changeBusinessState={changeBusinessState}
+                  />
+                )}
+              </SelectWrapper>
+            ) : (
+              <h1>{t('REVIEWS_MANAGER', 'Reviews manager')}</h1>
+            )}
           </HeaderLeft>
           <HeaderRight>
             <SearchBar
@@ -49,31 +88,37 @@ export const ReviewsListing = (props) => {
         <Tabs>
           <Tab
             active={showOption === 'business'}
-            onClick={() => setShowOption('business')}
+            onClick={() => handleChangeOption('business')}
           >
             {t('BUSINESS', 'Business')}
           </Tab>
           <Tab
             active={showOption === 'drivers'}
-            onClick={() => setShowOption('drivers')}
+            onClick={() => handleChangeOption('drivers')}
           >
             {t('DRIVERS', 'Drivers')}
           </Tab>
           <Tab
             active={showOption === 'customers'}
-            onClick={() => setShowOption('customers')}
+            onClick={() => handleChangeOption('customers')}
           >
             {t('CUSTOMERS', 'Customers')}
           </Tab>
           <Tab
             active={showOption === 'professionals'}
-            onClick={() => setShowOption('professionals')}
+            onClick={() => handleChangeOption('professionals')}
           >
             {t('PROFESSIONALS', 'Professionals')}
           </Tab>
+          <Tab
+            active={showOption === 'products'}
+            onClick={() => handleChangeOption('products')}
+          >
+            {t('PRODUCTS', 'Products')}
+          </Tab>
         </Tabs>
         {showOption === 'business' && (
-          <BusinessReviewList parentSearchValue={searchValue} />
+          <BusinessReviewList parentSearchValue={searchValue} handleOpenProducts={handleOpenProducts} />
         )}
         {showOption === 'drivers' && (
           <UsersReviewList
@@ -91,6 +136,12 @@ export const ReviewsListing = (props) => {
           <UsersReviewList
             defaultUserTypesSelected={[8]}
             parentSearchValue={searchValue}
+          />
+        )}
+        {showOption === 'products' && business?.id && (
+          <ReviewProductsListing
+            parentSearchValue={searchValue}
+            businessId={business?.id}
           />
         )}
       </ReviewsListingContainer>

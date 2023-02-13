@@ -17,7 +17,6 @@ import {
   PluginsTable,
   PluginTbody,
   PagesBottomContainer,
-  AddNewPageButton,
   ActionsContainer,
   EnableWrapper,
   ActionSelectorWrapper,
@@ -216,11 +215,13 @@ const PluginListUI = (props) => {
           </PluginsTable>
           {!pluginListState.loading && (
             <PagesBottomContainer>
-              <AddNewPageButton
+              <Button
+                color='primary'
+                borderRadius='8px'
                 onClick={() => setIsAddMode(true)}
               >
                 {t('ADD_NEW_PLUGIN ', 'Add new plugin')}
-              </AddNewPageButton>
+              </Button>
               {currentPlugins.plugins?.length > 0 && (
                 <Pagination
                   currentPage={currentPage.plugins}

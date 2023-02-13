@@ -80,3 +80,22 @@ export const Tab = styled.div`
     color: ${props => props.theme.colors.lightGray};
   `}
 `
+
+export const SelectWrapper = styled.div`
+  position: relative;
+`
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  svg {
+    margin: 0 5px;
+    font-size: 16px;
+    transition: 0.2s ease-in-out;
+    &.rotate {
+      transform: rotate(180deg);
+    }
+  }
+`

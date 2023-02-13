@@ -11,8 +11,7 @@ import {
   ApiKeysListContainer,
   Header,
   ApiKeysListTable,
-  DropdownButtonWrapper,
-  AddNewButton
+  DropdownButtonWrapper
 } from './styles'
 
 const ApiKeysListUI = (props) => {
@@ -106,11 +105,13 @@ const ApiKeysListUI = (props) => {
             ))
           )}
         </ApiKeysListTable>
-        <AddNewButton
+        <Button
+          color='primary'
+          borderRadius='8px'
           onClick={() => handleAddApiKey()}
         >
           {t('ADD_API_KEY', 'Add API Key')}
-        </AddNewButton>
+        </Button>
       </ApiKeysListContainer>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}

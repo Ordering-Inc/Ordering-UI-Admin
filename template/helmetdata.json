@@ -125,13 +125,6 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
-  "reviewProducts": {
-    "title": "Review Products",
-    "description": "a dummy description about this page",
-    "keywords": "test, dummy, data",
-    "robots": "index, follow",
-    "canonicalUrl": ""
-  },
   "reports": {
     "title": "Advanced Reports",
     "description": "a dummy description about this page",
@@ -253,6 +246,13 @@
   },
   "customer_app": {
     "title": "Customer App",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
+  "custom_project": {
+    "title": "Custom Project",
     "description": "a dummy description about this page",
     "keywords": "test, dummy, data",
     "robots": "index, follow",

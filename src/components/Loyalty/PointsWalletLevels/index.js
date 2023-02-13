@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, PointsWalletLevels as PointsWalletLevelsController } from 'ordering-components-admin'
-import { Alert, NotFoundSource, SideBar, Modal } from '../../Shared'
+import { Alert, SideBar, Modal } from '../../Shared'
 import { ChevronRight } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -15,11 +15,10 @@ import {
   WrapperImage,
   LevelName,
   Image,
-  AddNewLevelButton,
-  LevelBottomContainer,
-  NotFoundSourceWrapper
+  LevelBottomContainer
 } from './styles'
 import { LoyaltyLevelDetail } from '../LoyaltyLevelDetail'
+import { Button } from '../../../styles'
 
 const PointsWalletLevelsUI = (props) => {
   const {
@@ -92,7 +91,7 @@ const PointsWalletLevelsUI = (props) => {
           </>
         ) : (
           <>
-            {levelList?.levels?.length > 0 ? levelList?.levels.map((level, i) => (
+            {levelList?.levels?.length > 0 && levelList?.levels.map((level, i) => (
               <LevelItemContainer
                 key={i}
                 onClick={() => handleOpenDetail(level)}
@@ -106,20 +105,18 @@ const PointsWalletLevelsUI = (props) => {
                 </InfoWrapper>
                 <ChevronRight />
               </LevelItemContainer>
-            )) : (
-              <NotFoundSourceWrapper>
-                <NotFoundSource />
-              </NotFoundSourceWrapper>
-            )}
+            ))}
           </>
         )}
       </LevelContainer>
       <LevelBottomContainer>
-        <AddNewLevelButton
+        <Button
+          color='primary'
+          borderRadius='8px'
           onClick={() => handleOpenDetail({})}
         >
           {t('ADD_NEW_LEVEL', 'Add new level')}
-        </AddNewLevelButton>
+        </Button>
       </LevelBottomContainer>
       {extraOpen && (
         <>

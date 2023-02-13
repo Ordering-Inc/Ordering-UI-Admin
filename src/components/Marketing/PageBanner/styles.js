@@ -4,6 +4,11 @@ export const Container = styled.div`
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+
+  > button {
+    height: 44px;
+    margin-top: 20px;
+  }
 `
 export const HeaderContainer = styled.div`
   display: flex;
