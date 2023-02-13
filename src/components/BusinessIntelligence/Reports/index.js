@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -56,6 +57,8 @@ import {
 } from './styles'
 
 export const Reports = (props) => {
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [isOpen, setIsOpen] = useState(false)
@@ -89,12 +92,23 @@ export const Reports = (props) => {
   const handleCloseSidebar = () => {
     setIsOpen(false)
     setSelectedReport(0)
+    history.replace(`${location.pathname}`)
   }
 
-  const handleOpenSlider = (index) => {
+  const handleOpenSlider = (index, isInitialRender) => {
     setSelectedReport(index)
     setIsOpen(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?id=${index}`)
+    }
   }
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id) {
+      handleOpenSlider(Number(id), true)
+    }
+  }, [])
 
   return (
     <ReportsContainer>
