@@ -101,7 +101,7 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
       return setSlug(e.target.value);
     },
     onKeyPress: function onKeyPress(e) {
-      if (e.which === 32) {
+      if (!/^[0-9a-zA-Z]$/.test(e.key)) {
         e.preventDefault();
       }
     }

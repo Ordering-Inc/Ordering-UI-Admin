@@ -23,7 +23,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessFilterGroupUI = function BusinessFilterGroupUI(props) {
-  var _filterValues$availab, _filterValues$availab2, _filterValues$menus, _filterValues$menus2;
   var filterValues = props.filterValues,
     handleChangeValue = props.handleChangeValue,
     handleChangeCity = props.handleChangeCity,
@@ -34,22 +33,15 @@ var BusinessFilterGroupUI = function BusinessFilterGroupUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var conditions = [{
-    value: '>',
-    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, '>')
-  }, {
-    value: '=',
-    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, "=")
-  }, {
-    value: '<',
-    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, '<')
-  }, {
-    value: '>=',
-    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, '>=')
-  }, {
-    value: '<=',
-    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, '<=')
-  }];
+
+  // const conditions = [
+  //   { value: '>', content: <Option>{'>'}</Option> },
+  //   { value: '=', content: <Option>=</Option> },
+  //   { value: '<', content: <Option>{'<'}</Option> },
+  //   { value: '>=', content: <Option>{'>='}</Option> },
+  //   { value: '<=', content: <Option>{'<='}</Option> }
+  // ]
+
   var enableOptions = [{
     value: true,
     content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('YES', 'Yes'))
@@ -81,83 +73,7 @@ var BusinessFilterGroupUI = function BusinessFilterGroupUI(props) {
         name: e.target.value
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
-    filterValues: filterValues,
-    handleChangeCity: handleChangeCity
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('AVAILABLE_MENUS', 'Available menus')), /*#__PURE__*/_react.default.createElement(_styles2.RangeSelectWrapper, {
-    className: "range"
-  }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
-    placeholder: t('SELECT_CONDITION', 'Select a condition'),
-    defaultValue: filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$availab = filterValues.availableMenus) === null || _filterValues$availab === void 0 ? void 0 : _filterValues$availab.condition,
-    options: conditions,
-    onChange: function onChange(condition) {
-      return handleChangeValue({
-        availableMenus: _objectSpread(_objectSpread({}, filterValues === null || filterValues === void 0 ? void 0 : filterValues.availableMenus), {}, {
-          condition: condition
-        })
-      });
-    },
-    optionInnerMaxHeight: "300px"
-  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "text",
-    placeholder: t('NUMBER', 'Number'),
-    autoComplete: "off",
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    },
-    value: (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$availab2 = filterValues.availableMenus) === null || _filterValues$availab2 === void 0 ? void 0 : _filterValues$availab2.value) || '',
-    onChange: function onChange(e) {
-      return handleChangeValue({
-        availableMenus: _objectSpread(_objectSpread({}, filterValues === null || filterValues === void 0 ? void 0 : filterValues.availableMenus), {}, {
-          value: e.target.value
-        })
-      });
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('TOTAL_MENUS', 'Total menus')), /*#__PURE__*/_react.default.createElement(_styles2.RangeSelectWrapper, {
-    className: "range"
-  }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
-    placeholder: t('SELECT_CONDITION', 'Select a condition'),
-    defaultValue: filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$menus = filterValues.menus) === null || _filterValues$menus === void 0 ? void 0 : _filterValues$menus.condition,
-    options: conditions,
-    onChange: function onChange(condition) {
-      return handleChangeValue({
-        menus: _objectSpread(_objectSpread({}, filterValues === null || filterValues === void 0 ? void 0 : filterValues.menus), {}, {
-          condition: condition
-        })
-      });
-    },
-    optionInnerMaxHeight: "300px"
-  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "text",
-    placeholder: t('NUMBER', 'Number'),
-    autoComplete: "off",
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    },
-    value: (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$menus2 = filterValues.menus) === null || _filterValues$menus2 === void 0 ? void 0 : _filterValues$menus2.value) || '',
-    onChange: function onChange(e) {
-      return handleChangeValue({
-        menus: _objectSpread(_objectSpread({}, filterValues === null || filterValues === void 0 ? void 0 : filterValues.menus), {}, {
-          value: e.target.value
-        })
-      });
-    }
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('ENABLED', 'Enabled')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
-    placeholder: t('SELECT_OPTION', 'Select a option'),
-    defaultValue: filterValues === null || filterValues === void 0 ? void 0 : filterValues.enabled,
-    options: enableOptions,
-    onChange: function onChange(val) {
-      return handleChangeValue({
-        enabled: val
-      });
-    },
-    optionInnerMaxHeight: "300px",
-    className: "full-select"
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('FEATURED', 'FEATURED')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('FEATURED', 'FEATURED')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_OPTION', 'Select a option'),
     defaultValue: filterValues === null || filterValues === void 0 ? void 0 : filterValues.featured,
     options: enableOptions,
@@ -168,6 +84,9 @@ var BusinessFilterGroupUI = function BusinessFilterGroupUI(props) {
     },
     optionInnerMaxHeight: "300px",
     className: "full-select"
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
+    filterValues: filterValues,
+    handleChangeCity: handleChangeCity
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",

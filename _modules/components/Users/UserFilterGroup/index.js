@@ -31,7 +31,6 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
   var _filterValues$ordersC, _filterValues$ordersC2;
   var filterValues = props.filterValues,
     handleChangeValue = props.handleChangeValue,
-    handleChangeCity = props.handleChangeCity,
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleResetFilterValues = props.handleResetFilterValues,
     isFilterModal = props.isFilterModal,
@@ -134,7 +133,7 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
         name: e.target.value
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('EMAIL', 'Email'),
     autoComplete: "off",
@@ -144,7 +143,7 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
         email: e.target.value
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('LAST_NAME', 'Last name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('LAST_NAME', 'Last name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('LAST_NAME', 'Last name'),
     autoComplete: "off",
@@ -154,7 +153,38 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
         lastname: e.target.value
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('COUNTRY_PHONE_CODE', 'Country phone code')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('AMOUNT_OF_ORDERS', 'Amount of orders')), /*#__PURE__*/_react.default.createElement(_styles2.RangeSelectWrapper, {
+    className: "range"
+  }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+    placeholder: t('SELECT_CONDITION', 'Select a condition'),
+    defaultValue: filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$ordersC = filterValues.ordersCount) === null || _filterValues$ordersC === void 0 ? void 0 : _filterValues$ordersC.condition,
+    options: conditions,
+    onChange: function onChange(condition) {
+      return handleChangeValue({
+        ordersCount: _objectSpread(_objectSpread({}, filterValues === null || filterValues === void 0 ? void 0 : filterValues.ordersCount), {}, {
+          condition: condition
+        })
+      });
+    },
+    optionInnerMaxHeight: "300px"
+  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('NUMBER', 'Number'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$ordersC2 = filterValues.ordersCount) === null || _filterValues$ordersC2 === void 0 ? void 0 : _filterValues$ordersC2.value) || '',
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    },
+    onChange: function onChange(e) {
+      return handleChangeValue({
+        ordersCount: _objectSpread(_objectSpread({}, filterValues === null || filterValues === void 0 ? void 0 : filterValues.ordersCount), {}, {
+          value: e.target.value
+        })
+      });
+    }
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('COUNTRY_PHONE_CODE', 'Country phone code')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_OPTION', 'Select a option'),
     defaultValue: filterValues === null || filterValues === void 0 ? void 0 : filterValues.countryPhoneCode,
     options: phoneCodeList,
@@ -202,49 +232,7 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     },
     optionInnerMaxHeight: "300px",
     className: "full-select"
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('ENABLED', 'Enabled')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
-    placeholder: t('SELECT_OPTION', 'Select a option'),
-    defaultValue: filterValues === null || filterValues === void 0 ? void 0 : filterValues.enabled,
-    options: enableOptions,
-    onChange: function onChange(val) {
-      return handleChangeValue({
-        enabled: val
-      });
-    },
-    optionInnerMaxHeight: "300px",
-    className: "full-select"
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('AMOUNT_OF_ORDERS', 'Amount of orders')), /*#__PURE__*/_react.default.createElement(_styles2.RangeSelectWrapper, {
-    className: "range"
-  }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
-    placeholder: t('SELECT_CONDITION', 'Select a condition'),
-    defaultValue: filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$ordersC = filterValues.ordersCount) === null || _filterValues$ordersC === void 0 ? void 0 : _filterValues$ordersC.condition,
-    options: conditions,
-    onChange: function onChange(condition) {
-      return handleChangeValue({
-        ordersCount: _objectSpread(_objectSpread({}, filterValues === null || filterValues === void 0 ? void 0 : filterValues.ordersCount), {}, {
-          condition: condition
-        })
-      });
-    },
-    optionInnerMaxHeight: "300px"
-  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "text",
-    placeholder: t('NUMBER', 'Number'),
-    autoComplete: "off",
-    value: (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$ordersC2 = filterValues.ordersCount) === null || _filterValues$ordersC2 === void 0 ? void 0 : _filterValues$ordersC2.value) || '',
-    onKeyPress: function onKeyPress(e) {
-      if (!/^[0-9]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    },
-    onChange: function onChange(e) {
-      return handleChangeValue({
-        ordersCount: _objectSpread(_objectSpread({}, filterValues === null || filterValues === void 0 ? void 0 : filterValues.ordersCount), {}, {
-          value: e.target.value
-        })
-      });
-    }
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('USER_TYPE', 'User type')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('USER_TYPE', 'User type')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_OPTION', 'Select a option'),
     defaultValue: filterValues === null || filterValues === void 0 ? void 0 : filterValues.userType,
     options: userOptions,
@@ -273,9 +261,6 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     handleChangeDateType: handleChangeDateType,
     handleChangeFromDate: handleChangeFromDate,
     handleChangeEndDate: handleChangeEndDate
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
-    filterValues: filterValues,
-    handleChangeCity: handleChangeCity
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",

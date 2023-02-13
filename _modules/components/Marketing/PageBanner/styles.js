@@ -17,8 +17,8 @@ var HeaderContainer = _styledComponents.default.div(_templateObject2 || (_templa
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "])));
 });
 exports.HeaderContainer = HeaderContainer;
-var RightHeader = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: flex-start !important;\n  button {\n    &.add-banner {\n      height: 44px;\n    }\n    &:last-child {\n      margin-left: 10px;\n      ", "\n    }\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-left: 0;\n        margin-right: 10px;\n      "])));
+var RightHeader = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  button {\n    margin-right: 5px;\n    ", "\n    > svg {\n      width: 18px;\n      height: 18px;\n    }\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n      margin-right: 0;\n      margin-left: 5px;\n    "])));
 });
 exports.RightHeader = RightHeader;
 var BannersHeader = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  padding-bottom: 9px;\n  font-size: 12px;\n  font-weight: 700;\n  margin-top: 33px;\n"])), function (props) {

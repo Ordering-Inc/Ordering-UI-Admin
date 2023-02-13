@@ -63,7 +63,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setBusinessIds = props.setBusinessIds,
     countriesState = props.countriesState,
     handleChangeFilterValues = props.handleChangeFilterValues,
-    filterValues = props.filterValues;
+    filterValues = props.filterValues,
+    businessTypeSelected = props.businessTypeSelected;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -118,8 +119,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setIsAdd = _useState22[1];
   var noBusinesses = (0, _react.useMemo)(function () {
     var _businessList$busines;
-    return !(businessList !== null && businessList !== void 0 && businessList.loading) && (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) === 0 && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1;
-  }, [businessList === null || businessList === void 0 ? void 0 : businessList.loading, businessList === null || businessList === void 0 ? void 0 : businessList.businesses, pagination]);
+    return !(businessList !== null && businessList !== void 0 && businessList.loading) && (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) === 0 && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 && !searchValue && Object.keys(filterValues).length === 0 && selectedBusinessActiveState && !businessTypeSelected;
+  }, [businessList === null || businessList === void 0 ? void 0 : businessList.loading, businessList === null || businessList === void 0 ? void 0 : businessList.businesses, pagination, searchValue, filterValues, selectedBusinessActiveState, businessTypeSelected]);
   var handleGotToAdd = function handleGotToAdd() {
     if (countriesState !== null && countriesState !== void 0 && countriesState.enabled) setIsAdd(true);else events.emit('go_to_page', {
       page: 'business_add'
@@ -234,7 +235,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     openAddBusiness: openAddBusiness,
     handleChangeFilterValues: handleChangeFilterValues,
     filterValues: filterValues
-  }), /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
+  }), !noBusinesses && /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleChangeBusinessActiveState: handleChangeBusinessActiveState
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperView, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
@@ -247,7 +248,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     onClick: function onClick() {
       return handleViewMethod('list');
     }
-  }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)))), /*#__PURE__*/_react.default.createElement(_styles.ButtonGroup, {
+  }, /*#__PURE__*/_react.default.createElement(_BsViewList.default, null)))), !noBusinesses && /*#__PURE__*/_react.default.createElement(_styles.ButtonGroup, {
     isSelect: (businessIds === null || businessIds === void 0 ? void 0 : businessIds.length) > 0
   }, /*#__PURE__*/_react.default.createElement(_BusinessTypeFilter.BusinessTypeFilter, {
     businessTypes: props.businessTypes,
