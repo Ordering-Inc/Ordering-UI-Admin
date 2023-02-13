@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
 import { useForm } from 'react-hook-form'
+import parsePhoneNumber from 'libphonenumber-js'
 import {
   LoginForm as LoginFormController,
   ReCaptcha,
@@ -9,14 +10,14 @@ import {
   useConfig
 } from 'ordering-components-admin'
 import { useCountdownTimer } from '../../../hooks/useCountdownTimer'
-import { Alert } from '../../Shared'
+import { Alert, InputPhoneNumber } from '../../Shared'
 import BsArrowRightShort from '@meronex/icons/bs/BsArrowRightShort'
 import MdExitToApp from '@meronex/icons/md/MdExitToApp'
 import { Button, Input } from '../../../styles'
 import { useTheme } from 'styled-components'
 import HiOutlineMail from '@meronex/icons/hi/HiOutlineMail'
 import RiLockPasswordLine from '@meronex/icons/ri/RiLockPasswordLine'
-import { Eye, EyeSlash } from 'react-bootstrap-icons'
+import { Eye, EyeSlash, Phone } from 'react-bootstrap-icons'
 import OtpInput from 'react-otp-input'
 import { formatSeconds } from '../../../utils'
 
@@ -36,12 +37,14 @@ import {
   Tab,
   CountdownTimer,
   OtpWrapper,
-  ResendCode
+  ResendCode,
+  PhoneNumberWrapper
 } from './styles'
 
 const LoginFormUI = (props) => {
   const {
     useLoginOtpEmail,
+    useLoginOptCellphone,
     useLoginByCellphone,
     handleChangeInput,
     handleButtonLoginClick,
@@ -60,7 +63,9 @@ const LoginFormUI = (props) => {
     generateOtpCode,
     otpState,
     setOtpState,
-    useLoginByEmail
+    useLoginByEmail,
+    handleChangeCredentials,
+    credentials
   } = props
   const [, t] = useLanguage()
   const [ordering] = useApi()
@@ -82,8 +87,16 @@ const LoginFormUI = (props) => {
     600, !checkPhoneCodeState?.loading && willVerifyOtpState)
 
   const isOtpEmail = loginTab === 'otp' && otpType === 'email'
+  const isOptCellphone = loginTab === 'otp' && otpType === 'cellphone'
 
   const onSubmit = () => {
+    if (useLoginOptCellphone && loginTab === 'otp' && otpType === 'cellphone' && !credentials?.country_phone_code && !credentials?.cellphone) {
+      setAlertState({
+        open: true,
+        content: [t('PHONE_NUMBER_IS_NOT_VALID', 'Phone number is not valid')]
+      })
+      return
+    }
     setSubmitted(true)
   }
 
@@ -111,6 +124,22 @@ const LoginFormUI = (props) => {
         setWillVerifyOtpState(true)
       }
     }
+  }
+
+  const handleChangePhoneNumber = (number, isValid) => {
+    let phoneNumberParser = null
+    let values = { country_phone_code: '', cellphone: '' }
+
+    if (isValid) {
+      phoneNumberParser = parsePhoneNumber(number)
+    }
+    if (phoneNumberParser) {
+      values = {
+        country_phone_code: phoneNumberParser.countryCallingCode,
+        cellphone: phoneNumberParser.nationalNumber
+      }
+    }
+    handleChangeCredentials(values)
   }
 
   useEffect(() => {
@@ -230,21 +259,41 @@ const LoginFormUI = (props) => {
           </p>
         </TitleFormSide>
 
-        {(ordering?.project && useLoginOtpEmail && useLoginByEmail) && !loginWithOtpState && !willVerifyOtpState && (
+        {ordering?.project && (
           <LoginWith>
             <Tabs>
-              <Tab
-                onClick={() => handleChangeTab('email')}
-                active={loginTab === 'email'}
-              >
-                {t('LOGIN_WITH_EMAIL', 'Login with Email')}
-              </Tab>
-              <Tab
-                onClick={() => handleChangeOtpType('email')}
-                active={isOtpEmail}
-              >
-                {t('BY_OTP_EMAIL', 'by Otp Email')}
-              </Tab>
+              {useLoginByEmail && (
+                <Tab
+                  onClick={() => handleChangeTab('email')}
+                  active={loginTab === 'email'}
+                >
+                  {t('LOGIN_WITH_EMAIL', 'Login with Email')}
+                </Tab>
+              )}
+              {useLoginOtpEmail && (
+                <Tab
+                  onClick={() => handleChangeOtpType('email')}
+                  active={isOtpEmail}
+                >
+                  {t('BY_OTP_EMAIL', 'by Otp Email')}
+                </Tab>
+              )}
+              {useLoginOptCellphone && (
+                <Tab
+                  onClick={() => handleChangeOtpType('cellphone')}
+                  active={isOptCellphone}
+                >
+                  {t('BY_OTP_PHONE', 'by Otp Phone')}
+                </Tab>
+              )}
+              {useLoginByCellphone && (
+                <Tab
+                  onClick={() => handleChangeTab('cellphone')}
+                  active={loginTab === 'cellphone'}
+                >
+                  {t('LOGIN_WITH_PHONE', 'Login with phone')}
+                </Tab>
+              )}
             </Tabs>
           </LoginWith>
         )}
@@ -275,7 +324,7 @@ const LoginFormUI = (props) => {
             </InputWithIcon>
           )}
 
-          {!willVerifyOtpState && (
+          {!willVerifyOtpState && ((loginTab === 'email') || (loginTab === 'otp' && otpType === 'email')) && (
             <InputWithIcon>
               <Input
                 type='email'
@@ -303,20 +352,30 @@ const LoginFormUI = (props) => {
             </InputWithIcon>
           )}
           {useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState && (
-            <Input
-              type='tel'
-              name='cellphone'
-              aria-label='cellphone'
-              placeholder='Cellphone'
-              ref={register({
-                required: t(
-                  'VALIDATION_ERROR_REQUIRED',
-                  'Cellphone is required'
-                ).replace('_attribute_', t('CELLPHONE', 'Cellphone'))
-              })}
-              onChange={(e) => handleChangeInput(e)}
-              autoComplete='off'
-            />
+            <InputWithIcon>
+              <Input
+                type='tel'
+                name='cellphone'
+                aria-label='cellphone'
+                placeholder='Cellphone'
+                ref={register({
+                  required: t(
+                    'VALIDATION_ERROR_REQUIRED',
+                    'Cellphone is required'
+                  ).replace('_attribute_', t('CELLPHONE', 'Cellphone'))
+                })}
+                onChange={(e) => handleChangeInput(e)}
+                autoComplete='off'
+              />
+              <Phone />
+            </InputWithIcon>
+          )}
+          {!willVerifyOtpState && useLoginOptCellphone && loginTab === 'otp' && otpType === 'cellphone' && (
+            <PhoneNumberWrapper>
+              <InputPhoneNumber
+                setValue={handleChangePhoneNumber}
+              />
+            </PhoneNumberWrapper>
           )}
 
           {loginTab !== 'otp' && !willVerifyOtpState && (
