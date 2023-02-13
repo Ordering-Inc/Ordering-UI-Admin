@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { UsersList as UsersListController } from 'ordering-components-admin'
 import { getStorageItem, removeStorageItem, setStorageItem } from '../../../utils'
 
@@ -50,6 +50,7 @@ const DeliveryUsersListingUI = (props) => {
     handleSuccessDeleteUser
   } = props
 
+  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [queryId, setQueryId] = useState(null)
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
@@ -71,6 +72,7 @@ const DeliveryUsersListingUI = (props) => {
     setOpenUser(user)
     setOpenUserAddForm(false)
     setIsOpenUserDetails(true)
+    history.replace(`${location.pathname}?id=${user.id}`)
   }
 
   const handleOpenUserAddForm = () => {
