@@ -61,6 +61,10 @@ export const FormSide = styled(Side)`
   box-sizing: border-box;
   height: 100vh;
 
+  button {
+    padding: 9px 5px;
+  }
+
   @media (min-width: 769px) {
     height: auto;     
   }
