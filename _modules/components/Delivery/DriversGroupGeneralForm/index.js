@@ -101,20 +101,20 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       }
       handleUpdateDriversGroup(changesState);
     } else {
-      if ((user === null || user === void 0 ? void 0 : user.level) !== 5 && !(changesState !== null && changesState !== void 0 && changesState.administrator_id)) {
-        setAlertState({
-          open: true,
-          content: [t('VALIDATION_ERROR_REQUIRED', 'The manager is required.').replace('_attribute_', t('DRIVER_MANAGER', 'Driver manager'))]
-        });
-        return;
-      }
-      if (typeof (changesState === null || changesState === void 0 ? void 0 : changesState.priority) === 'undefined') {
-        setAlertState({
-          open: true,
-          content: [t('VALIDATION_ERROR_REQUIRED', 'The priority is required.').replace('_attribute_', t('PRIORITY', 'Priority'))]
-        });
-        return;
-      }
+      // if (user?.level !== 5 && !changesState?.administrator_id) {
+      //   setAlertState({
+      //     open: true,
+      //     content: [t('VALIDATION_ERROR_REQUIRED', 'The manager is required.').replace('_attribute_', t('DRIVER_MANAGER', 'Driver manager'))]
+      //   })
+      //   return
+      // }
+      // if (typeof changesState?.priority === 'undefined') {
+      //   setAlertState({
+      //     open: true,
+      //     content: [t('VALIDATION_ERROR_REQUIRED', 'The priority is required.').replace('_attribute_', t('PRIORITY', 'Priority'))]
+      //   })
+      //   return
+      // }
       if ((changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 && !(changesState !== null && changesState !== void 0 && changesState.drivers)) {
         setAlertState({
           open: true,

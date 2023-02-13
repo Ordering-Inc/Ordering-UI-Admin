@@ -729,6 +729,12 @@ Object.defineProperty(exports, "CountrySelector", {
     return _Settings.CountrySelector;
   }
 });
+Object.defineProperty(exports, "CustomProject", {
+  enumerable: true,
+  get: function get() {
+    return _MyProducts.CustomProject;
+  }
+});
 Object.defineProperty(exports, "CustomerApp", {
   enumerable: true,
   get: function get() {

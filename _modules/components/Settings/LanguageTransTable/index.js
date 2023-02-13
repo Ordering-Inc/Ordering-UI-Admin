@@ -70,11 +70,18 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     totalPages = _useState12[0],
     setTotalPages = _useState12[1];
+  var timeout = null;
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
       content: []
     });
+  };
+  var handleChangeValue = function handleChangeValue(id, key, value) {
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      handleChangeText(id, key, value);
+    }, 750);
   };
   var handleChangePage = function handleChangePage(translation) {
     setCurrentPage(translation);
@@ -154,10 +161,10 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, translation.key), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
-      value: (textEditState === null || textEditState === void 0 ? void 0 : textEditState.id) === translation.id ? textEditState === null || textEditState === void 0 ? void 0 : textEditState.text : translation.text,
+      defaultValue: (textEditState === null || textEditState === void 0 ? void 0 : textEditState.id) === translation.id ? textEditState === null || textEditState === void 0 ? void 0 : textEditState.text : translation.text,
       placeholder: t('WRITE_A_TEXT', 'Write a text'),
       onChange: function onChange(e) {
-        return handleChangeText(translation.id, translation.key, e.target.value);
+        return handleChangeValue(translation.id, translation.key, e.target.value);
       }
     }))));
   }), isShowCreation && /*#__PURE__*/_react.default.createElement(_styles.TableBody, {

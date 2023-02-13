@@ -29,6 +29,7 @@ var BusinessReviewDetailsUI = function BusinessReviewDetailsUI(props) {
   var _theme$images, _theme$images$dummies;
   var business = props.business,
     reviewsList = props.reviewsList,
+    handleOpenProducts = props.handleOpenProducts,
     handleChangeReviewEnabled = props.handleChangeReviewEnabled;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -39,25 +40,14 @@ var BusinessReviewDetailsUI = function BusinessReviewDetailsUI(props) {
     _useUtils2$ = _useUtils2[0],
     optimizeImage = _useUtils2$.optimizeImage,
     parseDate = _useUtils2$.parseDate;
-  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
-    _useEvent2 = _slicedToArray(_useEvent, 1),
-    events = _useEvent2[0];
   var getReviewPercent = function getReviewPercent(quality) {
     return quality / 5 * 100;
-  };
-  var handleGoToPage = function handleGoToPage(data) {
-    events.emit('go_to_page', data);
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ReviewDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick() {
-      return handleGoToPage({
-        page: 'reviewProducts',
-        params: {
-          store: business === null || business === void 0 ? void 0 : business.slug
-        }
-      });
+      return handleOpenProducts(business);
     }
   }, t('PRODUCT_REVIEW', 'Product review'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_120,c_limit')
