@@ -109,8 +109,10 @@ export const BusinessOrderingChannels = (props) => {
                 value={slug}
                 placeholder={t('SLUG', 'Slug')}
                 onChange={(e) => setSlug(e.target.value)}
-                onKeyPress={e => {
-                  if (e.which === 32) { e.preventDefault() }
+                onKeyPress={(e) => {
+                  if (!/^[0-9a-zA-Z]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
                 }}
               />
             </FormControl>

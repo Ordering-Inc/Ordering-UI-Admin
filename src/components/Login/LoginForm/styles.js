@@ -61,6 +61,10 @@ export const FormSide = styled(Side)`
   box-sizing: border-box;
   height: 100vh;
 
+  button {
+    padding: 9px 5px;
+  }
+
   @media (min-width: 769px) {
     height: auto;     
   }
@@ -253,6 +257,22 @@ export const InputWithIcon = styled.div`
     color: #707070;
     padding: 0px;
     margin: 0 20px;
+  }
+`
+
+export const PhoneNumberWrapper = styled.div`
+  margin-bottom: 20px;
+  .PhoneInputInput {
+    height: 47px;
+    border-radius: 8px !important;
+  }
+  .PhoneInputCountry {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: ${props => props.theme.colors.backgroundPage};
+    * {
+      padding: 0px;
+    }
   }
 `
 

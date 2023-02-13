@@ -129,10 +129,11 @@ export const UserDetailsUI = (props) => {
                 </VerifiedItem>
               )}
             </VerifiedItemsWrapper>
-            <RightHeader>
+            <RightHeader isLoginUser={adminUserState.user?.id === userState.user?.id}>
               <IconButton
                 color='black'
                 onClick={expandSidebar}
+                className='expand'
               >
                 {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
               </IconButton>
