@@ -81,6 +81,10 @@ const PageBannersUI = (props) => {
     handleCloseDetail()
   }, [defaultPosition])
 
+  useEffect(() => {
+    if (openItemsDetail) setIsExpand(false)
+  }, [openItemsDetail])
+
   return (
     <>
       <Container>
@@ -97,15 +101,7 @@ const PageBannersUI = (props) => {
             </InfoWrapper>
           </div>
           <RightHeader>
-            <Button
-              className='add-banner'
-              color='lightPrimary'
-              borderRadius='8px'
-              onClick={e => handleOpenBannerItemsDetail(e, {})}
-            >
-              {t('ADD_BANNER', 'Add banner')}
-            </Button>
-            {width > 576 && (
+            {width > 576 && !openItemsDetail && (
               <IconButton
                 color='black'
                 onClick={expandSidebar}

@@ -35,18 +35,15 @@ export const HeaderContainer = styled.div`
 `
 
 export const RightHeader = styled.div`
-  display: flex;
-  align-items: flex-start !important;
   button {
-    &.add-banner {
-      height: 44px;
-    }
-    &:last-child {
-      margin-left: 10px;
-      ${props => props.theme.rtl && css`
-        margin-left: 0;
-        margin-right: 10px;
-      `}
+    margin-right: 5px;
+    ${props => props.theme.rtl && css`
+      margin-right: 0;
+      margin-left: 5px;
+    `}
+    > svg {
+      width: 18px;
+      height: 18px;
     }
   }
 `

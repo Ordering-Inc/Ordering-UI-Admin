@@ -6,7 +6,7 @@ import {
   Container,
   FormControl,
   FormGroup,
-  RangeSelectWrapper,
+  // RangeSelectWrapper,
   Option,
   ButtonGroup
 } from './styles'
@@ -24,13 +24,13 @@ const BusinessFilterGroupUI = (props) => {
 
   const [, t] = useLanguage()
 
-  const conditions = [
-    { value: '>', content: <Option>{'>'}</Option> },
-    { value: '=', content: <Option>=</Option> },
-    { value: '<', content: <Option>{'<'}</Option> },
-    { value: '>=', content: <Option>{'>='}</Option> },
-    { value: '<=', content: <Option>{'<='}</Option> }
-  ]
+  // const conditions = [
+  //   { value: '>', content: <Option>{'>'}</Option> },
+  //   { value: '=', content: <Option>=</Option> },
+  //   { value: '<', content: <Option>{'<'}</Option> },
+  //   { value: '>=', content: <Option>{'>='}</Option> },
+  //   { value: '<=', content: <Option>{'<='}</Option> }
+  // ]
 
   const enableOptions = [
     { value: true, content: <Option>{t('YES', 'Yes')}</Option> },
@@ -67,6 +67,19 @@ const BusinessFilterGroupUI = (props) => {
               onChange={(e) => handleChangeValue({ name: e.target.value })}
             />
           </FormControl>
+        </FormGroup>
+        <FormGroup>
+          <FormControl>
+            <label>{t('FEATURED', 'FEATURED')}</label>
+            <DefaultSelect
+              placeholder={t('SELECT_OPTION', 'Select a option')}
+              defaultValue={filterValues?.featured}
+              options={enableOptions}
+              onChange={val => handleChangeValue({ featured: val })}
+              optionInnerMaxHeight='300px'
+              className='full-select'
+            />
+          </FormControl>
           <FormControl>
             <label>{t('CITY', 'City')}</label>
             <CitySelector
@@ -75,7 +88,7 @@ const BusinessFilterGroupUI = (props) => {
             />
           </FormControl>
         </FormGroup>
-        <FormGroup>
+        {/* <FormGroup>
           <FormControl>
             <label>{t('AVAILABLE_MENUS', 'Available menus')}</label>
             <RangeSelectWrapper className='range'>
@@ -124,31 +137,7 @@ const BusinessFilterGroupUI = (props) => {
               />
             </RangeSelectWrapper>
           </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <FormControl>
-            <label>{t('ENABLED', 'Enabled')}</label>
-            <DefaultSelect
-              placeholder={t('SELECT_OPTION', 'Select a option')}
-              defaultValue={filterValues?.enabled}
-              options={enableOptions}
-              onChange={val => handleChangeValue({ enabled: val })}
-              optionInnerMaxHeight='300px'
-              className='full-select'
-            />
-          </FormControl>
-          <FormControl>
-            <label>{t('FEATURED', 'FEATURED')}</label>
-            <DefaultSelect
-              placeholder={t('SELECT_OPTION', 'Select a option')}
-              defaultValue={filterValues?.featured}
-              options={enableOptions}
-              onChange={val => handleChangeValue({ featured: val })}
-              optionInnerMaxHeight='300px'
-              className='full-select'
-            />
-          </FormControl>
-        </FormGroup>
+        </FormGroup> */}
         <ButtonGroup>
           <Button
             color='primary'

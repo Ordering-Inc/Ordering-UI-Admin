@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, UsersFilter } from 'ordering-components-admin'
 import { Input, DefaultSelect, Button } from '../../../styles'
-import { CitySelector, Modal } from '../../Shared'
+import { Modal } from '../../Shared'
 import { countryList } from '../../../config/constants'
 import {
   Container,
@@ -18,7 +18,7 @@ const UserFilterGroupUI = (props) => {
   const {
     filterValues,
     handleChangeValue,
-    handleChangeCity,
+    // handleChangeCity,
     handleChangeFilterValues,
     handleResetFilterValues,
     isFilterModal,
@@ -102,8 +102,6 @@ const UserFilterGroupUI = (props) => {
               onChange={(e) => handleChangeValue({ name: e.target.value })}
             />
           </FormControl>
-        </FormGroup>
-        <FormGroup>
           <FormControl>
             <label>{t('EMAIL', 'Email')}</label>
             <Input
@@ -114,6 +112,8 @@ const UserFilterGroupUI = (props) => {
               onChange={(e) => handleChangeValue({ email: e.target.value })}
             />
           </FormControl>
+        </FormGroup>
+        <FormGroup>
           <FormControl>
             <label>{t('LAST_NAME', 'Last name')}</label>
             <Input
@@ -123,6 +123,30 @@ const UserFilterGroupUI = (props) => {
               value={filterValues?.lastname || ''}
               onChange={(e) => handleChangeValue({ lastname: e.target.value })}
             />
+          </FormControl>
+          <FormControl>
+            <label>{t('AMOUNT_OF_ORDERS', 'Amount of orders')}</label>
+            <RangeSelectWrapper className='range'>
+              <DefaultSelect
+                placeholder={t('SELECT_CONDITION', 'Select a condition')}
+                defaultValue={filterValues?.ordersCount?.condition}
+                options={conditions}
+                onChange={condition => handleChangeValue({ ordersCount: { ...filterValues?.ordersCount, condition } })}
+                optionInnerMaxHeight='300px'
+              />
+              <Input
+                type='text'
+                placeholder={t('NUMBER', 'Number')}
+                autoComplete='off'
+                value={filterValues?.ordersCount?.value || ''}
+                onKeyPress={(e) => {
+                  if (!/^[0-9]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+                onChange={(e) => handleChangeValue({ ordersCount: { ...filterValues?.ordersCount, value: e.target.value } })}
+              />
+            </RangeSelectWrapper>
           </FormControl>
         </FormGroup>
         <FormGroup>
@@ -179,43 +203,6 @@ const UserFilterGroupUI = (props) => {
         </FormGroup>
         <FormGroup>
           <FormControl>
-            <label>{t('ENABLED', 'Enabled')}</label>
-            <DefaultSelect
-              placeholder={t('SELECT_OPTION', 'Select a option')}
-              defaultValue={filterValues?.enabled}
-              options={enableOptions}
-              onChange={val => handleChangeValue({ enabled: val })}
-              optionInnerMaxHeight='300px'
-              className='full-select'
-            />
-          </FormControl>
-          <FormControl>
-            <label>{t('AMOUNT_OF_ORDERS', 'Amount of orders')}</label>
-            <RangeSelectWrapper className='range'>
-              <DefaultSelect
-                placeholder={t('SELECT_CONDITION', 'Select a condition')}
-                defaultValue={filterValues?.ordersCount?.condition}
-                options={conditions}
-                onChange={condition => handleChangeValue({ ordersCount: { ...filterValues?.ordersCount, condition } })}
-                optionInnerMaxHeight='300px'
-              />
-              <Input
-                type='text'
-                placeholder={t('NUMBER', 'Number')}
-                autoComplete='off'
-                value={filterValues?.ordersCount?.value || ''}
-                onKeyPress={(e) => {
-                  if (!/^[0-9]$/.test(e.key)) {
-                    e.preventDefault()
-                  }
-                }}
-                onChange={(e) => handleChangeValue({ ordersCount: { ...filterValues?.ordersCount, value: e.target.value } })}
-              />
-            </RangeSelectWrapper>
-          </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <FormControl>
             <label>{t('USER_TYPE', 'User type')}</label>
             <DefaultSelect
               placeholder={t('SELECT_OPTION', 'Select a option')}
@@ -252,13 +239,13 @@ const UserFilterGroupUI = (props) => {
               handleChangeEndDate={handleChangeEndDate}
             />
           </FormControl>
-          <FormControl>
+          {/* <FormControl>
             <label>{t('CITY', 'City')}</label>
             <CitySelector
               filterValues={filterValues}
               handleChangeCity={handleChangeCity}
             />
-          </FormControl>
+          </FormControl> */}
         </FormGroup>
         <ButtonGroup>
           <Button
