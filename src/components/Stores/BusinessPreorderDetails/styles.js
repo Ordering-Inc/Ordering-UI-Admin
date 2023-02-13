@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const BusinessPreorderContainer = styled.div`
   padding: 20px;
   height: 100%;
-
+  margin-bottom: 20px;
   h1 {
     font-size: 20px;
     font-weight: 700;
@@ -32,6 +32,10 @@ export const PreorderTimeWrapper = styled.div`
       margin: 5px 0 18px;
     }
   }
+  button {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
 `
 
 export const TimeBlock = styled.div`
@@ -54,4 +58,8 @@ export const TimeBlock = styled.div`
       display: none;
     }
   }
+`
+
+export const Margin = styled.div`
+  height: 20px;
 `
