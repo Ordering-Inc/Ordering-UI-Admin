@@ -107,7 +107,7 @@ var BusinessSummary = function BusinessSummary(props) {
     value: t('PROMOTIONS', 'Promotions')
   }, {
     key: 'preorder',
-    value: t('PREORDER_SETTING', 'Preorder')
+    value: t('PREORDERS_SETTING', 'Preorders and lead times')
   }, {
     key: 'custom_fields',
     value: t('CUSTOM_FIELDS', 'Custom fields')

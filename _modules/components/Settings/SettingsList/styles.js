@@ -42,5 +42,8 @@ var SubmitBtnWrapper = _styledComponents.default.div(_templateObject12 || (_temp
   return props.theme.colors.primary;
 });
 exports.SubmitBtnWrapper = SubmitBtnWrapper;
-var Description = _styledComponents.default.p(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  margin-top: 0px;\n  margin-bottom: 5px;\n"])));
+var Description = _styledComponents.default.p(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  margin-top: ", ";\n  margin-bottom: 5px;\n"])), function (_ref) {
+  var typeSix = _ref.typeSix;
+  return typeSix ? '20px' : '0px';
+});
 exports.Description = Description;
