@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useLanguage, CampaignDetail as CampaignDetailController } from 'ordering-components-admin'
@@ -28,6 +29,8 @@ const CampaignDetailUI = (props) => {
     handleDeleteCampaign
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -76,6 +79,24 @@ const CampaignDetailUI = (props) => {
     })
   }, [formState?.error])
 
+  const handleTabClick = (tab, isInitialRender) => {
+    setSelectedOption(tab)
+
+    if (!isInitialRender) {
+      const id = query.get('id')
+      history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(selectedOption)
+    }
+  }, [])
+
   return (
     <>
       <CampaignDetailContainer>
@@ -117,7 +138,7 @@ const CampaignDetailUI = (props) => {
             <Tab
               key={option.key}
               active={selectedOption === option.key}
-              onClick={() => setSelectedOption(option.key)}
+              onClick={() => handleTabClick(option.key)}
             >
               {option.name}
             </Tab>
