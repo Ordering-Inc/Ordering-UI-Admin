@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessDeliveryZoneDetails } from '../BusinessDeliveryZoneDetails'
 import { SideBar } from '../../Shared'
@@ -23,6 +24,8 @@ export const BusinessDeliveryZoneList = (props) => {
     handleChangeAllZoneState
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [isOpenDetails, setIsOpenDetails] = useState(false)
   const [curZone, setCurZone] = useState(null)
@@ -31,15 +34,39 @@ export const BusinessDeliveryZoneList = (props) => {
     setIsOpenDetails(false)
     setIsExtendExtraOpen(false)
     setCurZone(null)
+
+    const businessId = query.get('id')
+    const section = query.get('section')
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
   }
 
-  const handleOpenZone = (e, zone) => {
-    const isInvalid = e.target.closest('.zone-enabled')
+  const handleOpenZone = (e, zone, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.zone-enabled')
     if (isInvalid) return
     setCurZone(zone)
     setIsExtendExtraOpen(true)
     setIsOpenDetails(true)
+
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      const tab = query.get('tab')
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&zone=${zone.id}`)
+    }
   }
+
+  useEffect(() => {
+    const zoneId = query.get('zone')
+    if (zoneId) {
+      const initZone = business?.zones?.find(zone => zone.id === Number(zoneId))
+      if (initZone) {
+        setTimeout(() => {
+          handleOpenZone(null, initZone, true)
+        }, 500)
+      }
+    }
+  }, [])
 
   return (
     <>

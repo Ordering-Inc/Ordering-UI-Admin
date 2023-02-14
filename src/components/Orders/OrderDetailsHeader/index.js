@@ -26,7 +26,6 @@ export const OrderDetailsHeader = (props) => {
   const {
     order,
     handleShowOption,
-    handleOpenMessages,
     actionSidebar,
     setIsTourOpen,
     isTourOpen,
@@ -81,7 +80,7 @@ export const OrderDetailsHeader = (props) => {
             <ButtonLink
               color='black'
               active={openMessage?.chat}
-              onClick={() => handleOpenMessages('chat')}
+              onClick={() => handleShowOption('chat')}
               isDisabled={isTourOpen && currentTourStep === 1}
             >
               <ChatIcon />
@@ -107,7 +106,7 @@ export const OrderDetailsHeader = (props) => {
           <ButtonLink
             color='black'
             active={openMessage?.history}
-            onClick={() => handleOpenMessages('history')}
+            onClick={() => handleShowOption('history')}
             isDisabled={isTourOpen && currentTourStep === 1}
           >
             <Diagram3 />

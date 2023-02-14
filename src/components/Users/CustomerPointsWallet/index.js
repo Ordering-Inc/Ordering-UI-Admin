@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, UserWallet as UserWalletController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -19,9 +20,29 @@ const CustomerPointsWalletUI = (props) => {
     user
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [showOption, setShowOption] = useState('points_wallet')
+
+  const handleTabClick = (tab, isInitialRender) => {
+    setShowOption(tab)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(showOption)
+    }
+  }, [])
 
   return (
     <Container>
@@ -29,13 +50,13 @@ const CustomerPointsWalletUI = (props) => {
       <Tabs>
         <Tab
           active={showOption === 'points_wallet'}
-          onClick={() => setShowOption('points_wallet')}
+          onClick={() => handleTabClick('points_wallet')}
         >
           {t('POINTS_WALLET', 'Points wallet')}
         </Tab>
         <Tab
           active={showOption === 'history'}
-          onClick={() => setShowOption('history')}
+          onClick={() => handleTabClick('history')}
         >
           {t('TRANSACTION_HISTORY', 'Transaction history')}
         </Tab>

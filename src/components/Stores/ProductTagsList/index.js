@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, ProductTagsList as ProductTagsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { SearchBar, SideBar } from '../../Shared'
@@ -32,24 +33,48 @@ const ProductTagsListUI = (props) => {
     handleSelectAllTags
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [selectedTag, setSelectedTag] = useState(null)
   const [isOpenTagDetail, setIsOpenTagDetail] = useState(false)
 
-  const handleOpenProductTagDetail = (e, tag) => {
-    const isInvalid = e.target.closest('.product-tag-checkbox')
+  const handleOpenProductTagDetail = (e, tag, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.product-tag-checkbox')
     if (isInvalid) return
 
     setSelectedTag(tag)
     setIsExtendExtraOpen(true)
     setIsOpenTagDetail(true)
+
+    if (!isInitialRender) {
+      const category = query.get('category')
+      const product = query.get('product')
+      const section = query.get('section')
+      const tab = query.get('tab')
+      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&tab=${tab}&tag=${tag.id}`)
+    }
   }
 
   const handleCloseDetail = () => {
     setIsOpenTagDetail(false)
     setIsExtendExtraOpen(false)
     setSelectedTag(null)
+    const category = query.get('category')
+    const product = query.get('product')
+    const section = query.get('section')
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&tab=${tab}`)
   }
+
+  useEffect(() => {
+    if (tagsState.loading) return
+    const tagId = query.get('tag')
+    if (tagId) {
+      const initTag = tagsState.tags.find(tag => tag.id === Number(tagId))
+      handleOpenProductTagDetail(null, initTag, true)
+    }
+  }, [tagsState.loading])
 
   return (
     <>

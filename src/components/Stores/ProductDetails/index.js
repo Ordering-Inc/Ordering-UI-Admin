@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { ProductDetatils as ProductDetatilsController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { MoreSidebarLayout, Personalization } from '../../Shared'
@@ -38,22 +39,32 @@ const ProductDetailsUI = (props) => {
     handleChangeRibbon,
     cleanFormState
   } = props
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
   const [showOption, setShowOption] = useState(null)
 
-  const handleShowOption = (option) => {
+  const handleShowOption = (option, isInitialRender) => {
     setIsExtendExtraOpen(false)
     setShowOption(option)
     setExtraOpen(true)
+    if (!isInitialRender) {
+      const category = query.get('category')
+      const product = query.get('product')
+      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${option}`)
+    }
   }
 
   const handleCloseExtraOpen = () => {
     setIsExtendExtraOpen(false)
     setExtraOpen(false)
     setShowOption(null)
+    const category = query.get('category')
+    const product = query.get('product')
+    history.replace(`${location.pathname}?category=${category}&product=${product}`)
   }
 
   const actionSidebar = (value) => {
@@ -114,6 +125,13 @@ const ProductDetailsUI = (props) => {
     document.addEventListener('keydown', onCloseSidebar)
     return () => document.removeEventListener('keydown', onCloseSidebar)
   }, [open])
+
+  useEffect(() => {
+    const section = query.get('section')
+    if (section) {
+      handleShowOption(section, true)
+    }
+  }, [])
 
   return (
     <Container id='product_details'>

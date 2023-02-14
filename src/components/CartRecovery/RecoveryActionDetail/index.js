@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, RecoveryActionDetail as RecoveryActionDetailController } from 'ordering-components-admin'
 import { Alert, Confirm } from '../../Shared'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -30,6 +31,8 @@ const RecoveryActionDetailUI = (props) => {
     handleDeleteRecoveryAction
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -44,7 +47,7 @@ const RecoveryActionDetailUI = (props) => {
     { key: 'notifications', name: t('NOTIFICATIONS', 'Notifications') }
   ]
 
-  const handleSelectOption = (key) => {
+  const handleSelectOption = (key, isInitialRender) => {
     if (key === 'notifications' && isAddMode) {
       setAlertState({
         open: true,
@@ -53,6 +56,10 @@ const RecoveryActionDetailUI = (props) => {
       return
     }
     setSelectedOption(key)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      history.replace(`${location.pathname}?id=${id}&tab=${key}`)
+    }
   }
 
   const closeAlert = () => {
@@ -87,6 +94,16 @@ const RecoveryActionDetailUI = (props) => {
       content: actionState?.error
     })
   }, [actionState])
+
+  useEffect(() => {
+    if (Object.keys(recoveryActionState.action).length === 0) return
+    const tab = query.get('tab')
+    if (tab) {
+      handleSelectOption(tab, true)
+    } else {
+      handleSelectOption(selectedOption)
+    }
+  }, [recoveryActionState.action])
 
   return (
     <>
@@ -151,6 +168,7 @@ const RecoveryActionDetailUI = (props) => {
         {selectedOption === 'notifications' && (
           <RecoveryNotificationList
             {...props}
+            action={recoveryActionState.action}
           />
         )}
       </RecoveryActionDetailContainer>

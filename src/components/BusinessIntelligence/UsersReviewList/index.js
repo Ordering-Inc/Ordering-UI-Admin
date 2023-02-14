@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   useLanguage,
   useUtils,
@@ -29,11 +30,14 @@ const DriversReviewListUI = (props) => {
     onSearch
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ optimizeImage, parseNumber }] = useUtils()
 
   const [openReview, setOpenReview] = useState(false)
-  const [curDriver, setCurDriver] = useState(null)
+  const [curUser, setCurUser] = useState(null)
+  const [curUserId, setCurUserId] = useState(null)
 
   const handleChangePage = (page) => {
     getUsers(page, 10)
@@ -50,15 +54,35 @@ const DriversReviewListUI = (props) => {
   }, [parentSearchValue])
 
   const handleOpenReview = (user) => {
-    setCurDriver(user)
+    setCurUser(user)
+    setCurUserId(user.id)
     setOpenReview(true)
   }
 
-  const handleClickReview = (e, user) => {
-    const isInvalid = e.target.closest('.review-enabled') || e.target.closest('.review-actions')
+  const handleClickReview = (e, user, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.review-enabled') || e.target.closest('.review-actions')
     if (isInvalid) return
     handleOpenReview(user)
+    if (!isInitialRender) {
+      const tab = query.get('tab')
+      history.replace(`${location.pathname}?tab=${tab}&id=${user.id}`)
+    }
   }
+
+  const handleCloseReviewDetails = () => {
+    setCurUser(null)
+    setOpenReview(false)
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?tab=${tab}`)
+  }
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id) {
+      setCurUserId(Number(id))
+      setOpenReview(true)
+    }
+  }, [])
 
   return (
     <>
@@ -92,7 +116,7 @@ const DriversReviewListUI = (props) => {
           usersList.users.map(user => (
             <ReviewTbody
               key={user.id}
-              active={user.id === curDriver?.id}
+              active={user.id === curUser?.id}
               onClick={e => handleClickReview(e, user)}
             >
               <tr>
@@ -142,15 +166,12 @@ const DriversReviewListUI = (props) => {
           sidebarId='driver-review-details'
           defaultSideBarWidth={550}
           open={openReview}
-          onClose={() => {
-            setCurDriver(null)
-            setOpenReview(false)
-          }}
+          onClose={() => handleCloseReviewDetails()}
           showExpandIcon
         >
           <UserReviewDetails
-            userId={curDriver?.id}
-            driver={curDriver}
+            userId={curUserId}
+            user={curUser}
           />
         </SideBar>
       )}

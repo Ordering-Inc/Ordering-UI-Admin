@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
@@ -64,6 +65,8 @@ const BusinessPaymentMethodsUI = (props) => {
     handleTutorialContinue
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const { width } = useWindowSize()
@@ -106,8 +109,8 @@ const BusinessPaymentMethodsUI = (props) => {
     return found
   }
 
-  const handleOpenEdit = (e, paymethodId, paymethodGateway) => {
-    const inValid = e.target.closest('.paymethod-checkbox')
+  const handleOpenEdit = (e, paymethodId, paymethodGateway, isInitialRender) => {
+    const inValid = e?.target?.closest('.paymethod-checkbox')
     if (inValid) return true
     if (!isTutorialMode && isCheckFoundBusinessPaymethod(paymethodId)) {
       setSelectedPaymethodGateway(paymethodGateway)
@@ -115,6 +118,11 @@ const BusinessPaymentMethodsUI = (props) => {
       setSelectedBusinessPaymethod(businessPaymethod)
       setIsEdit(true)
       setIsExtendExtraOpen(true)
+    }
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&paymethod=${paymethodId}`)
     }
   }
 
@@ -140,6 +148,9 @@ const BusinessPaymentMethodsUI = (props) => {
     setIsEdit(false)
     setSelectedBusinessPaymethod(null)
     setIsSuccessDeleted(false)
+    const businessId = query.get('id')
+    const section = query.get('section')
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}`)
   }
 
   useEffect(() => {
@@ -152,6 +163,17 @@ const BusinessPaymentMethodsUI = (props) => {
     const updatedPaymethod = businessPaymethodsState.paymethods.find(paymethod => paymethod.paymethod_id === selectedBusinessPaymethod.paymethod_id)
     setSelectedBusinessPaymethod(updatedPaymethod)
   }, [businessPaymethodsState?.paymethods, selectedBusinessPaymethod])
+
+  useEffect(() => {
+    if (paymethodsList.loading || businessPaymethodsState.loading) return
+    const paymethodId = query.get('paymethod')
+    if (paymethodId) {
+      const initPaymethod = paymethodsList.paymethods.find(paymethod => paymethod.id === Number(paymethodId))
+      if (initPaymethod) {
+        handleOpenEdit(null, initPaymethod.id, initPaymethod.gateway, true)
+      }
+    }
+  }, [paymethodsList.loading, businessPaymethodsState.loading])
 
   return (
     <MainContainer>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   useLanguage,
   BusinessMenuOptions as BusinessMenuOptionsController
@@ -38,6 +39,8 @@ const BusinessMenuOptionsUI = (props) => {
     sitesState
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -88,6 +91,28 @@ const BusinessMenuOptionsUI = (props) => {
     }
   }, [menu])
 
+  const handleTabClick = (settingTab) => {
+    setSelectedMenuOption(settingTab)
+    const businessId = query.get('id')
+    const section = query.get('section')
+    const tab = isSelectedSharedMenus ? 'shared_menus' : 'menu'
+    const menu = query.get('menu')
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&menu=${menu}&setting_tab=${settingTab}`)
+  }
+
+  useEffect(() => {
+    if (isSelectedSharedMenus) {
+
+    } else {
+      const settingTab = query.get('setting_tab')
+      if (settingTab) {
+        handleTabClick(settingTab)
+      } else {
+        handleTabClick('basic')
+      }
+    }
+  }, [isSelectedSharedMenus])
+
   return (
     <>
       <Container id='menu_options'>
@@ -131,14 +156,14 @@ const BusinessMenuOptionsUI = (props) => {
               <AutoScroll innerScroll scrollId='menu_options'>
                 <Tab
                   active={selectedMenuOption === 'basic'}
-                  onClick={() => setSelectedMenuOption('basic')}
+                  onClick={() => handleTabClick('basic')}
                 >
                   {t('BASIC', 'Basic')}
                 </Tab>
                 {sitesState?.sites?.length > 0 && (
                   <Tab
                     active={selectedMenuOption === 'channels'}
-                    onClick={() => setSelectedMenuOption('channels')}
+                    onClick={() => handleTabClick('channels')}
                   >
                     {t('CHANNELS', 'Channels')}
                   </Tab>
@@ -146,7 +171,7 @@ const BusinessMenuOptionsUI = (props) => {
                 {Object.keys(menu).length > 0 && (
                   <Tab
                     active={selectedMenuOption === 'share_with'}
-                    onClick={() => setSelectedMenuOption('share_with')}
+                    onClick={() => handleTabClick('share_with')}
                   >
                     {t('SHARE_WITH', 'Share with')}
                   </Tab>

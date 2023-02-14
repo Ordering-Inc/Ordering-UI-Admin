@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessDeliveryDetails } from '../BusinessDeliveryDetails'
 import { BusinessPickupDetails } from '../BusinessPickupDetails'
@@ -17,6 +18,8 @@ export const BusinessDeliveryPickupMore = (props) => {
     setIsExtendExtraOpen
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [selectedTab, setSelectedTab] = useState('delivery')
 
@@ -31,6 +34,24 @@ export const BusinessDeliveryPickupMore = (props) => {
     setIsExtendExtraOpen(false)
   }, [selectedTab])
 
+  const handleTabClick = (tab, isInitialRender) => {
+    setSelectedTab(tab)
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick('delivery')
+    }
+  }, [])
+
   return (
     <Container>
       <h1>{t('DELIVERY_PICKUP_MORE', 'Delivery, pickup & more')}</h1>
@@ -40,7 +61,7 @@ export const BusinessDeliveryPickupMore = (props) => {
             <Tab
               key={tab.key}
               active={tab.key === selectedTab}
-              onClick={() => setSelectedTab(tab.key)}
+              onClick={() => handleTabClick(tab.key)}
             >
               {tab.content}
             </Tab>

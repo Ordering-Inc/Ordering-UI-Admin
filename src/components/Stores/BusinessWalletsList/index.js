@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, useConfig, BusinessWalletsList as BusinessWalletsListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { ChevronRight } from 'react-bootstrap-icons'
@@ -24,6 +25,8 @@ const BusinessWalletsListUI = (props) => {
     handleUpdateWallet
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [isOpenDetails, setIsOpenDetails] = useState(false)
@@ -42,18 +45,26 @@ const BusinessWalletsListUI = (props) => {
     wallet_credit_point_enabled: t('WALLET_CREDIT_POINT_ENABLED', 'Wallet credit point enabled')
   }
 
-  const handleOpenWallet = (config) => {
+  const handleOpenWallet = (config, isInitialRender) => {
     setIsOpenWalletDetails(true)
     handleClosePaymethodDetails()
     setCurrentConfig(config)
     setIsExtendExtraOpen(true)
     setIsOpenDetails(true)
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&wallet=${config.id}`)
+    }
   }
   const handleCloseWallet = () => {
     setIsOpenWalletDetails(false)
     setIsOpenDetails(false)
     setIsExtendExtraOpen(false)
     setCurrentConfig(null)
+    const businessId = query.get('id')
+    const section = query.get('section')
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}`)
   }
 
   useEffect(() => {
@@ -70,6 +81,17 @@ const BusinessWalletsListUI = (props) => {
     setIsOpenDetails(false)
     setCurrentConfig(null)
   }, [isClose])
+
+  useEffect(() => {
+    if (loyaltyPlanState.loading || walletsListState.loading) return
+    const walletId = query.get('wallet')
+    if (walletId) {
+      const initWallet = walletsListState.wallets.find(wallet => wallet.id === Number(walletId))
+      if (initWallet) {
+        handleOpenWallet(initWallet, true)
+      }
+    }
+  }, [loyaltyPlanState.loading, walletsListState.loading])
 
   return (
     <>

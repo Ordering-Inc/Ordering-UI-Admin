@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, AdBannersList as AdBannersListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { SideBar, Alert, SearchBar } from '../../Shared'
@@ -37,6 +38,9 @@ const PageBannersUI = (props) => {
     aspectRatio,
     isSearhShow
   } = props
+
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
@@ -47,18 +51,24 @@ const PageBannersUI = (props) => {
   const [bannerMoveDistance, setBannerMoveDistance] = useState(0)
   const [isExpand, setIsExpand] = useState(false)
 
-  const handleOpenBannerItemsDetail = (e, banner) => {
-    const isInvalid = e.target.closest('.banner-enabled')
+  const handleOpenBannerItemsDetail = (e, banner, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.banner-enabled')
     if (isInvalid) return
     setSelectedBanner(banner)
     setOpenItemsDetail(true)
     setMoveDistance(500)
+    if (banner && !isInitialRender) {
+      const position = query.get('position')
+      history.replace(`${location.pathname}?position=${position}&banner=${banner?.id}`)
+    }
   }
 
   const handleCloseDetail = () => {
     setMoveDistance(0)
     setOpenItemsDetail(false)
     setSelectedBanner(null)
+    const position = query.get('position')
+    history.replace(`${location.pathname}?position=${position}`)
   }
 
   const expandSidebar = () => {
@@ -78,12 +88,25 @@ const PageBannersUI = (props) => {
 
   useEffect(() => {
     setSearchValue('')
-    handleCloseDetail()
+    setMoveDistance(0)
+    setOpenItemsDetail(false)
+    setSelectedBanner(null)
   }, [defaultPosition])
 
   useEffect(() => {
     if (openItemsDetail) setIsExpand(false)
   }, [openItemsDetail])
+
+  useEffect(() => {
+    if (bannersListState.loading) return
+    const bannerId = query.get('banner')
+    if (bannerId) {
+      const initBanner = bannersListState.banners.find(banner => banner.id === Number(bannerId))
+      if (initBanner) {
+        handleOpenBannerItemsDetail(null, initBanner, true)
+      }
+    }
+  }, [bannersListState.loading])
 
   return (
     <>

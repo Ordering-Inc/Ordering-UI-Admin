@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
@@ -34,6 +35,8 @@ export const PaymentOption = (props) => {
     handleDeletePaymethod
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -41,12 +44,11 @@ export const PaymentOption = (props) => {
   const [paymentTabs, setPaymentTabs] = useState(sitesState?.sites?.length > 0 ? 0 : 1)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [localState, setLocalState] = useState({ allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites })
-  const filteredOptions = localState?.sites ?? businessPaymethod?.sites?.filter(a => sitesState?.sites?.find(b => a.id === b.id))
-  const [all, setAll] = useState(!!!filteredOptions?.length)
+  const filteredOptions = localState?.sites ?? businessPaymethod?.sites.filter(a => sitesState?.sites?.find(b => a.id === b.id))
+  const [all, setAll] = useState(!filteredOptions?.length)
 
   const setPaymethodInfo = (values) => {
-
-    let data = {}
+    const data = {}
     if (values?.value === 'All') {
       data[values.key] = []
       setAll(!all)
@@ -63,7 +65,7 @@ export const PaymentOption = (props) => {
 
       data[values.key] = array.length > 0 ? array : []
       if (values.key === 'sites') {
-        setAll(!!!data?.sites?.length)
+        setAll(!data?.sites?.length)
       }
     }
     handleChangeBusinessPaymentState(data)
@@ -122,6 +124,25 @@ export const PaymentOption = (props) => {
     }
   }, [changesState?.allowed_order_types, changesState?.sites])
 
+  const handleTabClick = (tab, isInitialRender) => {
+    setPaymentTabs(tab)
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      const paymethod = query.get('paymethod')
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&paymethod=${paymethod}&payemthod_tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    const payemthodTab = query.get('payemthod_tab')
+    if (payemthodTab) {
+      handleTabClick(Number(payemthodTab), true)
+    } else {
+      handleTabClick(0)
+    }
+  }, [])
+
   return (
     <>
       <Container id='payment_method_option'>
@@ -154,14 +175,14 @@ export const PaymentOption = (props) => {
           {sitesState?.sites?.length > 0 && (
             <Tab
               active={paymentTabs === 0}
-              onClick={() => setPaymentTabs(0)}
+              onClick={() => handleTabClick(0)}
             >
               {t('CHANNELS', 'Channels')}
             </Tab>
           )}
           <Tab
             active={paymentTabs === 1}
-            onClick={() => setPaymentTabs(1)}
+            onClick={() => handleTabClick(1)}
           >
             {t('ORDER_TYPE', 'Order type')}
           </Tab>
@@ -169,7 +190,7 @@ export const PaymentOption = (props) => {
         {paymentTabs === 0 && sitesState?.sites?.length > 0 && (
           <>
             <TabOption
-              key={'all'}
+              key='all'
               onClick={() => setPaymethodInfo({ key: 'sites', value: 'All' })}
             >
               {all ? (

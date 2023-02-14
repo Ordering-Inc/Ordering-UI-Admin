@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   useLanguage,
   DriversCompanyDetails as DriversCompanyDetailsController
@@ -25,13 +26,15 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 
 const DriversCompanyDetailsFormUI = (props) => {
   const {
-    driversCompany,
+    companyState,
     changesState,
     actionState,
     cleanActionState,
     handleDeleteDriversCompany
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const { width } = useWindowSize()
@@ -82,14 +85,31 @@ const DriversCompanyDetailsFormUI = (props) => {
     }
   }, [actionState])
 
+  const handleTabClick = (tab, isInitialRender) => {
+    setCurrentTabItem(tab)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(currentTabItem)
+    }
+  }, [])
+
   return (
     <>
       <DetailsContainer>
         <Header>
           <h1>
             {
-              driversCompany
-                ? changesState?.name ?? driversCompany?.name ?? ''
+              companyState.company
+                ? changesState?.name ?? companyState.company?.name ?? ''
                 : t('DRIVER_COMPANY_SETTINGS', 'Driver company settings')
             }
           </h1>
@@ -102,7 +122,7 @@ const DriversCompanyDetailsFormUI = (props) => {
                 {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
               </IconButton>
             )}
-            {driversCompany && (
+            {companyState.company && (
               <ActionSelectorWrapper>
                 <DropdownButton
                   menuAlign={theme?.rtl ? 'left' : 'right'}
@@ -125,7 +145,7 @@ const DriversCompanyDetailsFormUI = (props) => {
               <Tab
                 key={item.key}
                 active={item.key === currentTabItem}
-                onClick={() => setCurrentTabItem(item.key)}
+                onClick={() => handleTabClick(item.key)}
               >
                 {item.content}
               </Tab>
@@ -134,13 +154,22 @@ const DriversCompanyDetailsFormUI = (props) => {
         </TabsContainer>
 
         {currentTabItem === 'general' && (
-          <DriversCompanyGeneralDetails {...props} />
+          <DriversCompanyGeneralDetails
+            {...props}
+            driversCompany={companyState.company}
+          />
         )}
         {currentTabItem === 'schedule' && (
-          <DriversCompanyScheduleDetails {...props} />
+          <DriversCompanyScheduleDetails
+            {...props}
+            driversCompany={companyState.company}
+          />
         )}
         {currentTabItem === 'webhooks' && (
-          <DriversCompanyWebhooksDetails {...props} />
+          <DriversCompanyWebhooksDetails
+            {...props}
+            driversCompany={companyState.company}
+          />
         )}
 
       </DetailsContainer>

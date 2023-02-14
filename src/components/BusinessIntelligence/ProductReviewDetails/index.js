@@ -18,7 +18,7 @@ import {
 
 const ProductReviewDetailsUI = (props) => {
   const {
-    product,
+    productState,
     productReviewList
   } = props
 
@@ -29,12 +29,12 @@ const ProductReviewDetailsUI = (props) => {
     <>
       <ReviewDetailsContainer>
         <Header>
-          <h1>{product?.name}</h1>
+          <h1>{productState.product?.name}</h1>
         </Header>
         <ProductImageContainer>
           <WrapperImage>
-            {product?.images ? (
-              <Image bgimage={optimizeImage(product?.images, 'h_120,c_limit')} />
+            {productState.product?.images ? (
+              <Image bgimage={optimizeImage(productState.product?.images, 'h_120,c_limit')} />
             ) : (
               <ImageFill />
             )}

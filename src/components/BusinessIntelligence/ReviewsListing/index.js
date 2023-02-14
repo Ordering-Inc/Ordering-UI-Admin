@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { List as MenuIcon, CaretDownFill } from 'react-bootstrap-icons'
@@ -21,21 +22,30 @@ import {
 } from './styles'
 
 export const ReviewsListing = (props) => {
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [showOption, setShowOption] = useState('business')
   const [searchValue, setSearchValue] = useState(null)
   const [showSelect, setShowSelect] = useState(false)
   const [business, setBusiness] = useState('')
+  const [businessId, setBusinessId] = useState(null)
 
   const changeBusinessState = (business) => {
     setShowSelect(false)
     setBusiness(business)
+    setBusinessId(business.id)
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?tab=${tab}&business=${business.id}`)
   }
 
-  const handleChangeOption = (option) => {
+  const handleChangeOption = (option, isInitialRender) => {
     setShowOption(option)
-    if (option === 'products' && !business) setShowSelect(true)
+    if (option === 'products' && !businessId) setShowSelect(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?tab=${option}`)
+    }
   }
 
   const handleOpenProducts = (business) => {
@@ -43,6 +53,22 @@ export const ReviewsListing = (props) => {
     setShowOption('products')
     setShowSelect(false)
   }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      const businessId = query.get('business')
+      if (tab === 'products' && businessId) {
+        setShowOption('products')
+        setShowSelect(false)
+        setBusinessId(Number(businessId))
+      } else {
+        handleChangeOption(tab, true)
+      }
+    } else {
+      handleChangeOption(showOption)
+    }
+  }, [])
 
   return (
     <>
@@ -138,10 +164,10 @@ export const ReviewsListing = (props) => {
             parentSearchValue={searchValue}
           />
         )}
-        {showOption === 'products' && business?.id && (
+        {showOption === 'products' && businessId && (
           <ReviewProductsListing
             parentSearchValue={searchValue}
-            businessId={business?.id}
+            businessId={businessId}
           />
         )}
       </ReviewsListingContainer>
