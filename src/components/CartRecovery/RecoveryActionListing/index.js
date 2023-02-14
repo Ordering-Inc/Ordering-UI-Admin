@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { RecoveryActionListing as RecoveryActionListingController } from 'ordering-components-admin'
 import { RecoveryActionHeader } from '../RecoveryActionHeader'
 import { RecoveryActionList } from '../RecoveryActionList'
@@ -10,18 +11,35 @@ import {
 } from './styles'
 
 const RecoveryActionListingUI = (props) => {
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [isOpenDetail, setIsOpenDetail] = useState(false)
   const [selectedAction, setSelectedAction] = useState(null)
+  const [selectedActionId, setSelectedActionId] = useState(null)
 
   const handleCloseDetail = () => {
     setIsOpenDetail(false)
     setSelectedAction(null)
+    history.replace(`${location.pathname}`)
   }
 
-  const handleOpenDetail = (action) => {
+  const handleOpenDetail = (action, isInitialRender) => {
     setSelectedAction(action)
+    setSelectedActionId(action?.id)
     setIsOpenDetail(true)
+    if (action && !isInitialRender) {
+      history.replace(`${location.pathname}?id=${action.id}`)
+    }
   }
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id) {
+      setSelectedAction({})
+      setSelectedActionId(Number(id))
+      setIsOpenDetail(true)
+    }
+  }, [])
 
   return (
     <>
@@ -38,7 +56,6 @@ const RecoveryActionListingUI = (props) => {
       </RecoveryActionsContainer>
       {isOpenDetail && (
         <SideBar
-          sidebarId='loyaltyWallet'
           open={isOpenDetail}
           onClose={() => handleCloseDetail()}
           defaultSideBarWidth={550}
@@ -46,6 +63,7 @@ const RecoveryActionListingUI = (props) => {
           <RecoveryActionDetail
             {...props}
             action={selectedAction}
+            actionId={selectedActionId}
             onClose={() => handleCloseDetail()}
           />
         </SideBar>

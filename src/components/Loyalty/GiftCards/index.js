@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, useUtils, PlatformProductsList as PlatformProductsListController } from 'ordering-components-admin'
 import { Alert, NotFoundSource, SideBar, Modal } from '../../Shared'
 // import { Switch } from '../../../styles'
@@ -34,6 +35,8 @@ const GiftCardsUI = (props) => {
     handleSuccessAddProduct
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage, parsePrice }] = useUtils()
@@ -50,11 +53,15 @@ const GiftCardsUI = (props) => {
     })
   }
 
-  const handleOpenDetail = (level) => {
-    setSelectedProduct(level)
+  const handleOpenDetail = (product, isInitialRender) => {
+    setSelectedProduct(product)
     setExtraOpen(true)
     if (width >= 1100) {
       handleParentSidebarMove(550)
+    }
+    if (product && !isInitialRender) {
+      const id = query.get('id')
+      history.replace(`${location.pathname}?id=${id}&product=${product.id}`)
     }
   }
 
@@ -62,6 +69,8 @@ const GiftCardsUI = (props) => {
     setExtraOpen(false)
     setSelectedProduct(null)
     handleParentSidebarMove(0)
+    const id = query.get('id')
+    history.replace(`${location.pathname}?id=${id}`)
   }
 
   useEffect(() => {
@@ -71,6 +80,17 @@ const GiftCardsUI = (props) => {
       if (extraOpen) handleParentSidebarMove(550)
     }
   }, [width, extraOpen])
+
+  useEffect(() => {
+    if (platformProductsListState.loading) return
+    const productId = query.get('product')
+    if (productId) {
+      const initProduct = platformProductsListState?.products.find(product => product.id === Number(productId))
+      if (initProduct) {
+        handleOpenDetail(initProduct, true)
+      }
+    }
+  }, [platformProductsListState.loading])
 
   return (
     <Container>

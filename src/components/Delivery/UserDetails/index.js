@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -38,6 +39,8 @@ export const UserDetailsUI = (props) => {
     handleScheduleUpdateUser
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -57,6 +60,28 @@ export const UserDetailsUI = (props) => {
   useEffect(() => {
     setExtraOpen(false)
   }, [currentMenuSelected])
+
+  const handleTabClick = (tab, isInitialRender) => {
+    setCurrentMenuSelected(tab)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      const section = query.get('section')
+      if (section) {
+        history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
+      } else {
+        history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+      }
+    }
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(currentMenuSelected)
+    }
+  }, [])
 
   return (
     <>
@@ -114,7 +139,7 @@ export const UserDetailsUI = (props) => {
       <UserDetailsMenu
         isDriverMenu={isDriversPage}
         currentMenuSelected={currentMenuSelected}
-        handleChangeMenu={setCurrentMenuSelected}
+        handleChangeMenu={handleTabClick}
       />
       {!userState?.loading && userState?.user && (
         <>

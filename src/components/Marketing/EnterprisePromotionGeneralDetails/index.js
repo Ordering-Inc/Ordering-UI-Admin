@@ -160,7 +160,8 @@ export const EnterprisePromotionGeneralDetails = (props) => {
   }, [isShowCalendar])
 
   useEffect(() => {
-    if (Object.keys(promotionState?.promotion).length) {
+    if (promotionState.loading) return
+    if (promotionState?.promotion && Object.keys(promotionState?.promotion).length) {
       setDateRange([
         {
           startDate: new Date(promotionState?.promotion?.start),

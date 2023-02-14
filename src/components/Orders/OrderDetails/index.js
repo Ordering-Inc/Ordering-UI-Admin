@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useSession, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -53,6 +54,8 @@ const OrderDetailsUI = (props) => {
     isServiceOrder
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [openMessages, setOpenMessages] = useState({ chat: false, history: false })
@@ -143,26 +146,28 @@ const OrderDetailsUI = (props) => {
     setUnreadAlert({ business, driver, customer })
   }
 
-  const handleOpenMessages = (openMessage) => {
-    if (openMessage === 'chat') {
-      setOpenMessages({ chat: true, history: false })
-      setUnreadAlert({ ...unreadAlert, customer: false })
-    }
-    if (openMessage === 'history') {
-      setOpenMessages({ chat: false, history: true })
-    }
-    setShowOption(null)
-    setExtraOpen(true)
-  }
-
   const handleCloseMessages = () => {
     setOpenMessages({ chat: false, history: false })
   }
 
-  const handleShowOption = (option) => {
-    handleCloseMessages()
+  const handleShowOption = (option, isInitialRender) => {
+    if (option === 'chat') {
+      setOpenMessages({ chat: true, history: false })
+      setUnreadAlert({ ...unreadAlert, customer: false })
+      setShowOption(null)
+    } else if (option === 'history') {
+      setOpenMessages({ chat: false, history: true })
+      setShowOption(null)
+    } else {
+      setOpenMessages({ chat: false, history: false })
+      setShowOption(option)
+    }
     setExtraOpen(true)
-    setShowOption(option)
+
+    if (!isInitialRender) {
+      const orderId = query.get('id')
+      history.replace(`${location.pathname}?id=${orderId}&section=${option}`)
+    }
   }
 
   useEffect(() => {
@@ -218,7 +223,7 @@ const OrderDetailsUI = (props) => {
     }
     if (evt.target.closest('.driver-select')) return
     if (isTourOpen && setCurrentTourStep) {
-      handleOpenMessages('chat')
+      handleShowOption('chat')
       setTimeout(() => {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
       }, 1)
@@ -229,7 +234,7 @@ const OrderDetailsUI = (props) => {
     if (evt.keyCode === 37 && currentTourStep === 2) setCurrentTourStep(1)
     if (evt.keyCode === 39 && currentTourStep === 1 && order?.delivery_type === 1) setCurrentTourStep(2)
     if (evt.keyCode === 39 && currentTourStep === 1 && order?.delivery_type !== 1) {
-      handleOpenMessages('chat')
+      handleShowOption('chat')
       setTimeout(() => {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3)
       }, 1)
@@ -241,7 +246,7 @@ const OrderDetailsUI = (props) => {
       setIsTourFlag(false)
     }
     if ((evt.keyCode === 39 && currentTourStep === 2)) {
-      handleOpenMessages('chat')
+      handleShowOption('chat')
       setCurrentTourStep(3)
     }
     if (evt.keyCode === 39 && currentTourStep === 3) {
@@ -259,7 +264,7 @@ const OrderDetailsUI = (props) => {
 
   useEffect(() => {
     if (!isTourFlag) return
-    handleOpenMessages('chat')
+    handleShowOption('chat')
     setTimeout(() => {
       setCurrentTourStep(3)
     }, 1)
@@ -276,6 +281,8 @@ const OrderDetailsUI = (props) => {
     setExtraOpen(false)
     setOpenMessages({ chat: false, history: false })
     setShowOption(null)
+    const orderId = query.get('id')
+    history.replace(`${location.pathname}?id=${orderId}`)
   }
 
   useEffect(() => {
@@ -283,6 +290,14 @@ const OrderDetailsUI = (props) => {
     document.addEventListener('keydown', onCloseSidebar)
     return () => document.removeEventListener('keydown', onCloseSidebar)
   }, [open])
+
+  useEffect(() => {
+    if (loading) return
+    const section = query.get('section')
+    if (section) {
+      handleShowOption(section, true)
+    }
+  }, [loading])
 
   return (
     <Container
@@ -315,7 +330,6 @@ const OrderDetailsUI = (props) => {
             showOption={showOption}
             openMessage={openMessages}
             handleShowOption={handleShowOption}
-            handleOpenMessages={handleOpenMessages}
             isTourOpen={isTourOpen}
             currentTourStep={currentTourStep}
             setIsTourOpen={setIsTourOpen}
@@ -382,7 +396,7 @@ const OrderDetailsUI = (props) => {
               unreadAlert={unreadAlert}
               isTourOpen={isTourOpen}
               setCurrentTourStep={setCurrentTourStep}
-              handleOpenMessages={handleOpenMessages}
+              handleShowOption={handleShowOption}
             />
             <OrderProducts>
               <h2>{t('EXPORT_SUMMARY', 'Summary')}</h2>

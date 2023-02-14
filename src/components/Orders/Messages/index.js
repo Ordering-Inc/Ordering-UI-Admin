@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useUtils, useLanguage, useSession, Messages as MessagesController } from 'ordering-components-admin'
 import { useForm, Controller } from 'react-hook-form'
 import { useTheme } from 'styled-components'
@@ -83,6 +84,8 @@ export const MessagesUI = (props) => {
     orderDetailClose
   } = props
 
+  const routerHistory = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const { handleSubmit, setValue, errors, control } = useForm()
@@ -92,7 +95,7 @@ export const MessagesUI = (props) => {
   const messageInputRef = useRef(null)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [tabActive, setTabActive] = useState({ orderHistory: true, logistics: false, logistic_information: false })
+  const [tabActive, setTabActive] = useState('order_history')
   const [messageSearchValue, setMessageSearchValue] = useState('')
   const [filteredMessages, setFilteredMessages] = useState([])
   const [load, setLoad] = useState(0)
@@ -100,8 +103,6 @@ export const MessagesUI = (props) => {
   const [isChatDisabled, setIsChatDisabled] = useState(false)
   const previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17]
   const chatDisabled = previousStatus.includes(order?.status)
-
-  console.log(order?.status)
 
   const adminMessageList = [
     { key: 'message_1', text: t('ADMIN_MESSAGE_1', 'admin_message_1') },
@@ -378,6 +379,25 @@ export const MessagesUI = (props) => {
     }
   }, [canRead])
 
+  const handleTabClick = (tab, isInitialRender) => {
+    setTabActive(tab)
+    if (!isInitialRender) {
+      const orderId = query.get('id')
+      const section = query.get('section')
+      routerHistory.replace(`${location.pathname}?id=${orderId}&section=${section}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    if (!history) return
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick('order_history')
+    }
+  }, [history])
+
   return (
     <MessagesContainer>
       <WrapperContainer onClick={handleChangeTour}>
@@ -414,13 +434,13 @@ export const MessagesUI = (props) => {
               )}
               {history && (
                 <WrapperHitoryHeader>
-                  <TabItem active={tabActive.orderHistory} onClick={() => setTabActive({ orderHistory: true, logistics: false, logistic_information: false })}>
+                  <TabItem active={tabActive === 'order_history'} onClick={() => handleTabClick('order_history')}>
                     {t('MOBILE_ORDER_HISTORY', 'Order History')}
                   </TabItem>
-                  <TabItem active={tabActive.logistics} onClick={() => setTabActive({ orderHistory: false, logistics: true, logistic_information: false })}>
+                  <TabItem active={tabActive === 'logistics'} onClick={() => handleTabClick('logistics')}>
                     {t('LOGISTICS', 'Logistics')}
                   </TabItem>
-                  <TabItem active={tabActive.logistic_information} onClick={() => setTabActive({ orderHistory: false, logistics: false, logistic_information: true })}>
+                  <TabItem active={tabActive === 'logistic_information'} onClick={() => handleTabClick('logistic_information')}>
                     {t('LOGISTIC_INFORMATION', 'Logistics information')}
                   </TabItem>
                 </WrapperHitoryHeader>
@@ -491,7 +511,7 @@ export const MessagesUI = (props) => {
           {
             !messages.loading && (
               <>
-                {!tabActive.logistic_information && (
+                {!tabActive === 'logistic_information' && (
                   <MessageConsole>
                     <BubbleConsole>
                       {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
@@ -512,12 +532,12 @@ export const MessagesUI = (props) => {
                 )}
                 {history && (
                   <>
-                    {tabActive.logistics && (
+                    {tabActive === 'logistics' && (
                       <WrapperLogistics>
                         <Logistics orderId={order.id} />
                       </WrapperLogistics>
                     )}
-                    {tabActive.logistic_information && (
+                    {tabActive === 'logistic_information' && (
                       <WrapperLogisticInformation>
                         <OrderLogisticInformation orderId={order.id} />
                       </WrapperLogisticInformation>
@@ -526,10 +546,10 @@ export const MessagesUI = (props) => {
                 )}
                 {filteredMessages.length > 0 && filteredMessages.map((message) => (
                   <React.Fragment key={message.id}>
-                    {history && tabActive.orderHistory && (
+                    {history && tabActive === 'order_history' && (
                       <>
                         {message.type === 1 && (
-                          <MessageConsole key={message.id} style={{ display: `${tabActive.orderHistory ? 'inline-flex' : 'none'}` }}>
+                          <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
                             {message.change?.attribute !== 'driver_id' ? (
                               <BubbleConsole>
                                 {t('ORDER', 'Order')} {' '}

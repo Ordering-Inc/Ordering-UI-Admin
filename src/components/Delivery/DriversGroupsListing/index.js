@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, DriversGroupsList as DriversGroupsListController } from 'ordering-components-admin'
 import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
@@ -37,6 +37,7 @@ const DriversGroupsListingUI = (props) => {
   } = props
 
   const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [searchValue, setSearchValue] = useState(null)
@@ -45,6 +46,7 @@ const DriversGroupsListingUI = (props) => {
   const [moveDistance, setMoveDistance] = useState(0)
   const [openDetails, setOpenDetails] = useState(false)
   const [curDriversGroup, setCurDriversGroup] = useState(null)
+  const [curDriversGroupId, setCurDriversGroupId] = useState(null)
   const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
 
   const [isTourOpen, setIsTourOpen] = useState(false)
@@ -59,6 +61,8 @@ const DriversGroupsListingUI = (props) => {
       setTimeout(() => {
         setCurrentTourStep(5)
       }, 50)
+    } else {
+      history.replace(`${location.pathname}?id=${driverGroup.id}`)
     }
   }
 
@@ -112,8 +116,21 @@ const DriversGroupsListingUI = (props) => {
       handleOpenTour()
     }
   }
+
+  const handleCloseDetail = () => {
+    setCurDriversGroup(null)
+    setOpenDetails(false)
+    setIsTourOpen(false)
+    history.replace(`${location.pathname}`)
+  }
+
   useEffect(() => {
     getDataFromStorage()
+    const id = query.get('id')
+    if (id) {
+      setCurDriversGroupId(Number(id))
+      setOpenDetails(true)
+    }
   }, [])
 
   return (
@@ -191,16 +208,13 @@ const DriversGroupsListingUI = (props) => {
           open={openDetails}
           moveDistance={moveDistance}
           noAnimation={isTourOpen}
-          onClose={() => {
-            setCurDriversGroup(null)
-            setOpenDetails(false)
-            setIsTourOpen(false)
-          }}
+          onClose={() => handleCloseDetail()}
         >
           <DriversGroupDetails
             driversGroupsState={driversGroupsState}
             setDriversGroupsState={setDriversGroupsState}
             curDriversGroup={curDriversGroup}
+            driversGroupId={curDriversGroupId}
             driversManagers={driversManagersList?.managers}
             businesses={businessesList?.businesses}
             paymethods={paymethodsList?.paymethods}

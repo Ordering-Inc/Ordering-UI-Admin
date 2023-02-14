@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { ThreeDots, Calendar4Event, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -34,6 +35,8 @@ export const ProfessionalDetailUI = (props) => {
     actionStatus
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [adminUserState] = useSession()
   const [, t] = useLanguage()
@@ -85,6 +88,28 @@ export const ProfessionalDetailUI = (props) => {
       })
     }
   }, [actionStatus.error])
+
+  const handleTabClick = (tab, isInitialRender) => {
+    setCurrentMenuSelected(tab)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      const section = query.get('section')
+      if (section) {
+        history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
+      } else {
+        history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+      }
+    }
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(currentMenuSelected)
+    }
+  }, [])
 
   return (
     <>
@@ -153,7 +178,7 @@ export const ProfessionalDetailUI = (props) => {
       </DetailsHeader>
       <UserDetailsMenu
         currentMenuSelected={currentMenuSelected}
-        handleChangeMenu={setCurrentMenuSelected}
+        handleChangeMenu={handleTabClick}
         isProfessional
       />
       {!userState?.loading && userState?.user && (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   useLanguage,
   useConfig,
@@ -37,6 +38,8 @@ const DriversGroupDetailsUI = (props) => {
     setIsExtendExtraOpen
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -123,6 +126,24 @@ const DriversGroupDetailsUI = (props) => {
     })
   }, [actionState?.error])
 
+  const handleTabClick = (tab, isInitialRender) => {
+    setShowMenu(tab)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    if (driversGroupState.loading) return
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(showMenu)
+    }
+  }, [driversGroupState.loading])
+
   return (
     <>
       <DetailsContainer>
@@ -182,7 +203,7 @@ const DriversGroupDetailsUI = (props) => {
               <Tab
                 key={menu.key}
                 active={menu.key === showMenu}
-                onClick={() => setShowMenu(menu.key)}
+                onClick={() => handleTabClick(menu.key)}
               >
                 {menu.value}
               </Tab>
@@ -192,19 +213,29 @@ const DriversGroupDetailsUI = (props) => {
         {(showMenu === 'general') && (
           <DriversGroupGeneralForm
             {...props}
+            curDriversGroup={driversGroupState.driversGroup}
             useAdvanced={useAdvanced}
             setUseAdvanced={setUseAdvanced}
             handleNextClick={handleNextClick}
           />
         )}
         {showMenu === 'businesses' && (
-          <DriversGroupBusinesses {...props} />
+          <DriversGroupBusinesses
+            {...props}
+            curDriversGroup={driversGroupState.driversGroup}
+          />
         )}
         {showMenu === 'paymethods' && (
-          <DriversGroupPaymethods {...props} />
+          <DriversGroupPaymethods
+            {...props}
+            curDriversGroup={driversGroupState.driversGroup}
+          />
         )}
         {showMenu === 'advanced_logistics' && (
-          <DriversGroupLogistics {...props} />
+          <DriversGroupLogistics
+            {...props}
+            curDriversGroup={driversGroupState.driversGroup}
+          />
         )}
         {showMenu === 'logs' && (
           <DriversGroupLogs driversGroupId={driversGroupState.driversGroup?.id} />
@@ -212,6 +243,7 @@ const DriversGroupDetailsUI = (props) => {
         {showMenu === 'delivery_zones' && (
           <DriverGroupDeliveryDetails
             {...props}
+            curDriversGroup={driversGroupState.driversGroup}
             handleParentSidebarMove={handleParentSidebarMove}
             drivergroup={driversGroupState.driversGroup}
             setIsExtendExtraOpen={setIsExtendExtraOpen}

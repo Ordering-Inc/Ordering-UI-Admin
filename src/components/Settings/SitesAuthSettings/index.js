@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, SitesAuthSettings as SitesAuthSettingsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
@@ -25,6 +26,8 @@ const SitesAuthSettingsUI = (props) => {
     handleChangeConfig
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
@@ -32,15 +35,21 @@ const SitesAuthSettingsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isExpand, setIsExpand] = useState(false)
 
-  const handleOpenSiteSettingDetails = (siteId) => {
+  const handleOpenSiteSettingDetails = (siteId, isInitialRender) => {
     handleGetSiteConfigs(siteId)
     setSelectedSiteId(siteId)
     setMoveDistance(500)
+    if (!isInitialRender) {
+      const category = query.get('category')
+      history.replace(`${location.pathname}?category=${category}&site=${siteId}`)
+    }
   }
 
   const handleCloseDetails = () => {
     setSelectedSiteId(null)
     setMoveDistance(0)
+    const category = query.get('category')
+    history.replace(`${location.pathname}?category=${category}`)
   }
 
   const expandSideBar = () => {
@@ -58,6 +67,14 @@ const SitesAuthSettingsUI = (props) => {
       })
     }
   }, [actionState.error])
+
+  useEffect(() => {
+    if (sitesState.loading) return
+    const site = query.get('site')
+    if (site) {
+      handleOpenSiteSettingDetails(Number(site), true)
+    }
+  }, [sitesState.loading])
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, useEvent, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
@@ -54,6 +54,7 @@ const BusinessesListingUI = (props) => {
     businessTypeSelected
   } = props
 
+  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -126,7 +127,6 @@ const BusinessesListingUI = (props) => {
     if (id === null) setOpenBusinessDetails(false)
     else {
       setDetailsBusinessId(id)
-      onBusinessRedirect && onBusinessRedirect(id)
       setOpenBusinessDetails(true)
     }
   }, [])
@@ -160,15 +160,24 @@ const BusinessesListingUI = (props) => {
 
   const handleOpenSync = () => {
     setOpenSync(true)
+    history.replace(`${location.pathname}?header=sync`)
   }
 
   const handleCloseSync = () => {
     setMoveDistance(0)
     setOpenSync(false)
+    history.replace(`${location.pathname}`)
   }
 
   useEffect(() => {
     handleSetStorage()
+  }, [])
+
+  useEffect(() => {
+    const header = query.get('header')
+    if (header === 'sync') {
+      setOpenSync(true)
+    }
   }, [])
 
   return (

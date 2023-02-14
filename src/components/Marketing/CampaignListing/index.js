@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { SideBar } from '../../Shared'
 import { CampaignDetail } from '../CampaignDetail'
 import { CampaignHeader } from '../CampaignHeader'
@@ -9,18 +10,33 @@ import {
 } from './styles'
 
 export const CampaignListingUI = (props) => {
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [isOpenDetail, setIsOpenDetail] = useState(false)
   const [selectedCampaign, setSelectedCampaign] = useState(null)
+  const [selectedCampaignId, setSelectedCampaignId] = useState(null)
 
   const handleOpenDetail = (action) => {
     setSelectedCampaign(action)
+    setSelectedCampaignId(action?.id)
     setIsOpenDetail(true)
+    action && history.replace(`${location.pathname}?id=${action?.id}`)
   }
 
   const handleCloseDetail = () => {
     setIsOpenDetail(false)
     setSelectedCampaign(null)
+    history.replace(`${location.pathname}`)
   }
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id) {
+      setSelectedCampaign({})
+      setSelectedCampaignId(Number(id))
+      setIsOpenDetail(true)
+    }
+  }, [])
 
   return (
     <>
@@ -46,6 +62,7 @@ export const CampaignListingUI = (props) => {
           <CampaignDetail
             {...props}
             campaign={selectedCampaign}
+            campaignId={selectedCampaignId}
             onClose={() => handleCloseDetail()}
           />
         </SideBar>

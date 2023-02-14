@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, useUtils, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
@@ -27,12 +28,16 @@ const BusinessReviewsListingUI = (props) => {
     onSearch,
     handleOpenProducts
   } = props
+
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage }] = useUtils()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [openReview, setOpenReview] = useState(false)
   const [curBusiness, setCurBusiness] = useState(null)
+  const [curBusinessId, setCurBusinessId] = useState(null)
 
   const handleChangePage = (page) => {
     getPageBusinesses(pagination.pageSize, page)
@@ -43,15 +48,36 @@ const BusinessReviewsListingUI = (props) => {
     getPageBusinesses(pageSize, expectedPage)
   }
 
-  const handleOpenReview = (business) => {
+  const handleOpenReview = (business, isInitialRender) => {
     setCurBusiness(business)
+    setCurBusinessId(business.id)
     setOpenReview(true)
+    if (!isInitialRender) {
+      const tab = query.get('tab')
+      history.replace(`${location.pathname}?tab=${tab}&id=${business.id}`)
+    }
   }
 
   useEffect(() => {
     if (parentSearchValue === null) return
     onSearch(parentSearchValue)
   }, [parentSearchValue])
+
+  const handleCloseReviewDetails = () => {
+    setCurBusiness(null)
+    setOpenReview(false)
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?tab=${tab}`)
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    const id = query.get('id')
+    if (tab === 'business' && id) {
+      setCurBusinessId(Number(id))
+      setOpenReview(true)
+    }
+  }, [])
 
   return (
     <>
@@ -134,15 +160,12 @@ const BusinessReviewsListingUI = (props) => {
         <SideBar
           defaultSideBarWidth={550}
           open={openReview}
-          onClose={() => {
-            setCurBusiness(null)
-            setOpenReview(false)
-          }}
+          onClose={() => handleCloseReviewDetails()}
           showExpandIcon
         >
           <BusinessReviewDetails
             business={curBusiness}
-            businessId={curBusiness?.id}
+            businessId={curBusinessId}
             reviews={curBusiness?.reviews?.reviews}
             handleUpdateReview={handleUpdateReview}
             handleOpenProducts={handleOpenProducts}

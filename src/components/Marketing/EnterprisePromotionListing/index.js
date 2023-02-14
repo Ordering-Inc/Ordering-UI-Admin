@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useConfig, useSession, useLanguage, EnterprisePromotionList as EnterprisePromontioListController } from 'ordering-components-admin'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
@@ -28,6 +29,8 @@ const EnterprisePromotionListingUI = (props) => {
     handleSuccessDeletePromotion
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
   const [{ user }] = useSession()
@@ -39,17 +42,23 @@ const EnterprisePromotionListingUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [openDetails, setOpenDetails] = useState(false)
   const [selectedPromotion, setSelectedPromotion] = useState(null)
+  const [curPromotionId, setCurPromotionId] = useState(null)
   const [moveDistance, setMoveDistance] = useState(0)
 
   const handleOpenDetails = (promotion) => {
     setMoveDistance(0)
     setSelectedPromotion(promotion)
+    setCurPromotionId(promotion?.id)
     setOpenDetails(true)
+    if (promotion) {
+      history.replace(`${location.pathname}?id=${promotion?.id}`)
+    }
   }
 
   const handleCloseDetails = () => {
     setOpenDetails(false)
     setSelectedPromotion(null)
+    history.replace(`${location.pathname}`)
   }
 
   useEffect(() => {
@@ -68,6 +77,14 @@ const EnterprisePromotionListingUI = (props) => {
       }
     }
   }, [configs])
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id) {
+      setCurPromotionId(Number(id))
+      setOpenDetails(true)
+    }
+  }, [])
 
   return (
     <>
@@ -88,7 +105,7 @@ const EnterprisePromotionListingUI = (props) => {
             <Button
               color='lightPrimary'
               borderRadius='8px'
-              onClick={() => handleOpenDetails({})}
+              onClick={() => handleOpenDetails(null)}
             >
               {t('ADD_PROMOTION_ENTERPRISE', 'Add promotion enterprise')}
             </Button>
@@ -120,6 +137,7 @@ const EnterprisePromotionListingUI = (props) => {
             businessesList={businessesList}
             paymethodsState={paymethodsState}
             promotion={selectedPromotion}
+            promotionId={curPromotionId}
             promotionsList={promotionListState.promotions}
             handleSuccessUpdatePromotions={handleSuccessUpdatePromotions}
             handleSuccessAddPromotion={handleSuccessAddPromotion}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { Circle, RecordCircleFill, ChevronRight } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -25,17 +26,25 @@ export const DriversGroupLogistics = (props) => {
     handleUpdateDriversGroup
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
   const [showConfig, setShowConfig] = useState(null)
   const [openConfig, setOpenConfig] = useState(false)
 
-  const handleOpenConfig = (option) => {
+  const handleOpenConfig = (option, isInitialRender) => {
     setShowConfig(option)
     setOpenConfig(true)
     if (width >= 1200) {
       handleParentSidebarMove(700)
+    }
+
+    if (!isInitialRender) {
+      const id = query.get('id')
+      const tab = query.get('tab')
+      history.replace(`${location.pathname}?id=${id}&tab=${tab}&config=${option}`)
     }
   }
 
@@ -56,6 +65,13 @@ export const DriversGroupLogistics = (props) => {
   useEffect(() => {
     setOpenConfig(false)
   }, [driversGroupState.driversGroup?.id])
+
+  useEffect(() => {
+    const config = query.get('config')
+    if (config) {
+      handleOpenConfig(config, true)
+    }
+  }, [])
 
   return (
     <LogisticsContainer>
@@ -109,7 +125,7 @@ export const DriversGroupLogistics = (props) => {
           <LogisticsConfigItem
             active={showConfig === 'GROUP_ORDERS'}
             onClick={() => handleOpenConfig('GROUP_ORDERS')}
-          >
+          >a
             <span>{t('GROUP_ORDERS', 'Group Orders')}</span>
             <ChevronRight />
           </LogisticsConfigItem>

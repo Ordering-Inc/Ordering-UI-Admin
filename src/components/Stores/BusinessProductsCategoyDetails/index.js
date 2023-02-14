@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, BusinessProductsCategoyDetails as BusinessProductsCategoyDetailsController } from 'ordering-components-admin'
 import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
@@ -43,6 +44,8 @@ const BusinessProductsCategoyDetailsUI = (props) => {
     handleTutorialSkip
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -87,6 +90,23 @@ const BusinessProductsCategoyDetailsUI = (props) => {
       })
     }
   }, [formState?.result])
+
+  const handleTabClick = (tab, isInitialRender) => {
+    setSelctedInfoItem(tab)
+    if (!isInitialRender) {
+      const category = query.get('category')
+      history.replace(`${location.pathname}?category=${category}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(selectedInfoItem)
+    }
+  }, [])
 
   return (
     <>
@@ -163,7 +183,7 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                 {!isAddMode && (
                   <BusinessCategoryInfoSettingList
                     selectedInfoItem={selectedInfoItem}
-                    handleSelectInfoItem={setSelctedInfoItem}
+                    handleSelectInfoItem={tab => handleTabClick(tab)}
                   />
                 )}
                 {selectedInfoItem === 'information' && (

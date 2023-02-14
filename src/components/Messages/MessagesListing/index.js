@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrdersContentHeader, OrdersDashboardList, OrderNotification, OrderDetails, Messages } from '../../Orders'
 import { Button } from '../../../styles/Buttons'
@@ -34,6 +35,9 @@ const MessagesListingUI = (props) => {
     handleChangeFilterValues
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
+
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [selectedOption, setSelectedOption] = useState('orders')
@@ -49,6 +53,8 @@ const MessagesListingUI = (props) => {
     setDetailsOrder(order)
     setOrderDetailId(order.id)
     setIsOpenOrderDetail(true)
+
+    history.replace(`${location.pathname}?id=${order.id}`)
   }
 
   const handleOrderCardClick = (order) => {
@@ -59,6 +65,14 @@ const MessagesListingUI = (props) => {
     if (width >= 768) return
     document.body.style.overflow = isOpenOrderDetail ? 'hidden' : 'auto'
   }, [width, isOpenOrderDetail])
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id) {
+      setOrderDetailId(id)
+      setIsOpenOrderDetail(true)
+    }
+  }, [])
 
   return (
     <>

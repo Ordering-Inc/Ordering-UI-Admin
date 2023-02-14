@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, ProductExtras as ProductExtrasController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Checkbox } from '../../../styles'
@@ -42,6 +43,8 @@ const ProductExtrasUI = (props) => {
     handleDragEnd,
     handleUpdateExtraState
   } = props
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -54,17 +57,27 @@ const ProductExtrasUI = (props) => {
   const [extraIds, setExtraIds] = useState([])
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
 
-  const handleOpenExtraDetails = (e, extra) => {
-    if (e.target.closest('.extra-checkbox') || e.target.closest('.draggable-dots')) return
+  const handleOpenExtraDetails = (e, extra, isInitialRender) => {
+    if (e?.target?.closest('.extra-checkbox') || e?.target?.closest('.draggable-dots')) return
     setIsExtendExtraOpen(true)
     setCurrentExtra(extra)
     setOpenExtraDetails(true)
+    if (!isInitialRender) {
+      const category = query.get('category')
+      const product = query.get('product')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&extra=${extra.id}`)
+    }
   }
 
   const handleCloseExtraDetails = () => {
     setOpenExtraDetails(false)
     setIsExtendExtraOpen(false)
     setCurrentExtra(null)
+    const category = query.get('category')
+    const product = query.get('product')
+    const section = query.get('section')
+    history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}`)
   }
 
   const addExtraListener = (e) => {
@@ -111,6 +124,14 @@ const ProductExtrasUI = (props) => {
       })
     }
   }, [productState, extrasState])
+
+  useEffect(() => {
+    const extraId = query.get('extra')
+    if (extraId) {
+      const initExtra = extrasState?.extras.find(extra => extra.id === Number(extraId))
+      initExtra && handleOpenExtraDetails(null, initExtra, true)
+    }
+  }, [])
 
   return (
     <MainContainer>
