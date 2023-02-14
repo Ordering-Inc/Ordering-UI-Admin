@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { XLg, LifePreserver, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -35,6 +36,8 @@ export const SettingsDetail = (props) => {
     isUpdateConfig
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
@@ -102,13 +105,17 @@ export const SettingsDetail = (props) => {
     vid.play()
   }
 
-  const handleExtraOpen = (isMoreInfo) => {
+  const handleExtraOpen = (isMoreInfo, isInitialRender) => {
     if (isMoreInfo) {
       setExtraInfoOpen(true)
       setExtraSubCatOpen(false)
     } else {
       setExtraInfoOpen(false)
       setExtraSubCatOpen(true)
+      if (!isInitialRender) {
+        const category = query.get('category')
+        history.replace(`${location.pathname}?category=${category}&more=settings`)
+      }
     }
   }
 
@@ -135,6 +142,13 @@ export const SettingsDetail = (props) => {
     document.addEventListener('keydown', onCloseSidebar)
     return () => document.removeEventListener('keydown', onCloseSidebar)
   }, [open])
+
+  useEffect(() => {
+    const more = query.get('more')
+    if (more === 'settings') {
+      handleExtraOpen(false, true)
+    }
+  }, [])
 
   return (
     <Container

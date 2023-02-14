@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 import { useLanguage, useEvent, useConfig, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
@@ -32,14 +32,14 @@ const SettingsUI = (props) => {
     handChangeConfig
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ configs }] = useConfig()
   const isMulticountryEnabled = configs?.multicountry?.value
 
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
-  const { search } = useLocation()
-
   const [isOpenDescription, setIsOpenDescription] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
@@ -47,14 +47,6 @@ const SettingsUI = (props) => {
   const [openMultiCountrySettings, setOpenMultiCountrySettings] = useState(false)
   const [moveDistance, setMoveDistance] = useState(0)
 
-  let category
-
-  if (search) {
-    const data = search.substring(1).split('&')
-    category = data[0]
-  }
-
-  const categoryId = category && category.split('=')[1]
   const [events] = useEvent()
 
   const settingPageList = {
@@ -76,45 +68,77 @@ const SettingsUI = (props) => {
     }
   }
 
-  const handleOpenDescription = (category) => {
+  const handleOpenDescription = (category, isInitialRender) => {
     setIsOpenSettingDetails(null)
     setOpenSitesAuthSettings(false)
     setOpenMultiCountrySettings(false)
     setIsOpenDescription(true)
     setSelectedCategory(category)
-    onBasicSettingsRedirect({ category: category?.id })
     handChangeConfig && handChangeConfig(false)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?category=${category?.id}`)
+    }
   }
 
-  const handleOpenSettingDetails = (item) => {
+  const handleOpenSettingDetails = (item, isInitialRender) => {
     setIsOpenDescription(false)
     setOpenSitesAuthSettings(false)
     setOpenMultiCountrySettings(false)
     setSelectedCategory(null)
     setIsOpenSettingDetails(item)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?category=${item}`)
+    }
+  }
+
+  const handleOpenSites = (isInitialRender) => {
+    setIsOpenDescription(false)
+    setIsOpenSettingDetails(null)
+    setOpenSitesAuthSettings(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?category=sites`)
+    }
+  }
+
+  const handleOpenMultiCountry = (isInitialRender) => {
+    setIsOpenDescription(false)
+    setIsOpenSettingDetails(null)
+    setOpenMultiCountrySettings(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?category=multi_country`)
+    }
   }
 
   const handleBackRedirect = () => {
     setIsOpenDescription(false)
     setSelectedCategory(null)
-    onBasicSettingsRedirect({ category: null })
+    setIsOpenSettingDetails(null)
+    setMoveDistance(0)
+    setOpenMultiCountrySettings(false)
+    setOpenSitesAuthSettings(false)
+    history.replace(`${location.pathname}`)
   }
 
   useEffect(() => {
+    if (categoryList.loading) return
+    const categoryId = query.get('category')
     if (categoryId) {
-      onBasicSettingsRedirect({ category: categoryId })
-      setIsOpenDescription(true)
-    } else {
-      setIsOpenDescription(false)
+      if (isNaN(Number(categoryId))) {
+        if (categoryId === 'sites') {
+          handleOpenSites(true)
+        } else if (categoryId === 'multi_country') {
+          handleOpenMultiCountry(true)
+        } else {
+          handleOpenSettingDetails(categoryId, true)
+        }
+      } else {
+        const categorySelected = categoryList?.categories.find(item => item?.id === parseInt(categoryId))
+        if (categorySelected) {
+          handleOpenDescription(categorySelected, true)
+        }
+      }
     }
-  }, [])
-
-  useEffect(() => {
-    if (categoryId && categoryList?.categories?.length > 0) {
-      const categorySelected = categoryList?.categories.find(item => item?.id === parseInt(categoryId))
-      setSelectedCategory(categorySelected)
-    }
-  }, [categoryList?.categories])
+  }, [categoryList.loading])
 
   return (
     <>
@@ -186,11 +210,7 @@ const SettingsUI = (props) => {
               </SettingItemWrapper>
               <SettingItemWrapper
                 className='col-md-4 col-sm-6'
-                onClick={() => {
-                  setIsOpenDescription(false)
-                  setIsOpenSettingDetails(null)
-                  setOpenSitesAuthSettings(true)
-                }}
+                onClick={() => handleOpenSites()}
               >
                 <SettingItemUI
                   title={t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings')}
@@ -202,11 +222,7 @@ const SettingsUI = (props) => {
               {isMulticountryEnabled && (
                 <SettingItemWrapper
                   className='col-md-4 col-sm-6'
-                  onClick={() => {
-                    setIsOpenDescription(false)
-                    setIsOpenSettingDetails(null)
-                    setOpenMultiCountrySettings(true)
-                  }}
+                  onClick={() => handleOpenMultiCountry()}
                 >
                   <SettingItemUI
                     title={t('MULTI_COUNTRY_SETTINGS', 'Multi country settings')}
@@ -269,10 +285,7 @@ const SettingsUI = (props) => {
           defaultSideBarWidth={500 + moveDistance}
           moveDistance={moveDistance}
           open={openSitesAuthSettings}
-          onClose={() => {
-            setMoveDistance(0)
-            setOpenSitesAuthSettings(false)
-          }}
+          onClose={() => handleBackRedirect()}
         >
           <SitesAuthSettings setMoveDistance={setMoveDistance} />
         </SideBar>
@@ -282,10 +295,7 @@ const SettingsUI = (props) => {
           defaultSideBarWidth={500 + moveDistance}
           moveDistance={moveDistance}
           open={openMultiCountrySettings}
-          onClose={() => {
-            setMoveDistance(0)
-            setOpenMultiCountrySettings(false)
-          }}
+          onClose={() => handleBackRedirect()}
         >
           <MultiCountrySettings setMoveDistance={setMoveDistance} />
         </SideBar>
@@ -296,7 +306,7 @@ const SettingsUI = (props) => {
             sidebarId='setting-details'
             defaultSideBarWidth={550}
             open={isOpenSettingDetails}
-            onClose={() => setIsOpenSettingDetails(null)}
+            onClose={() => handleBackRedirect()}
             showExpandIcon
           >
             {isOpenSettingDetails === 'checkout' && (
