@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, useUtils, PointsWalletLevels as PointsWalletLevelsController } from 'ordering-components-admin'
 import { Alert, SideBar, Modal } from '../../Shared'
 import { ChevronRight } from 'react-bootstrap-icons'
@@ -29,6 +30,8 @@ const PointsWalletLevelsUI = (props) => {
     handleParentSidebarMove
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage }] = useUtils()
@@ -45,11 +48,15 @@ const PointsWalletLevelsUI = (props) => {
     })
   }
 
-  const handleOpenDetail = (level) => {
+  const handleOpenDetail = (level, isInitialRender) => {
     setSelectedLevel(level)
     setExtraOpen(true)
     if (width >= 1100) {
       handleParentSidebarMove(550)
+    }
+    if (level && !isInitialRender) {
+      const id = query.get('id')
+      history.replace(`${location.pathname}?id=${id}&level=${level.id}`)
     }
   }
 
@@ -57,6 +64,8 @@ const PointsWalletLevelsUI = (props) => {
     setExtraOpen(false)
     setSelectedLevel(null)
     handleParentSidebarMove(0)
+    const id = query.get('id')
+    history.replace(`${location.pathname}?id=${id}`)
   }
 
   useEffect(() => {
@@ -66,6 +75,17 @@ const PointsWalletLevelsUI = (props) => {
       if (extraOpen) handleParentSidebarMove(550)
     }
   }, [width, extraOpen])
+
+  useEffect(() => {
+    if (levelList.loading) return
+    const levelId = query.get('level')
+    if (levelId) {
+      const initLevel = levelList?.levels.find(level => level.id === Number(levelId))
+      if (initLevel) {
+        handleOpenDetail(initLevel, true)
+      }
+    }
+  }, [levelList.loading])
 
   return (
     <Container>

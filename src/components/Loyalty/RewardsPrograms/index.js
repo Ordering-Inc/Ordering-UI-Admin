@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { List as MenuIcon, BarChartSteps, Gift, Wallet as Cash } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
@@ -18,6 +19,8 @@ import {
 } from './styles'
 
 export const RewardsPrograms = () => {
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
@@ -36,17 +39,34 @@ export const RewardsPrograms = () => {
   const hanldeClosePointsWallet = () => {
     setMoveDistance(0)
     setShowOption(null)
+    history.replace(`${location.pathname}`)
   }
 
   const handleCloseLevel = () => {
     setLevelMoveDistance(0)
     setShowOption(null)
+    history.replace(`${location.pathname}`)
   }
 
   const handleCloseGiftCard = () => {
     setGiftCardMoveDistance(0)
     setShowOption(null)
+    history.replace(`${location.pathname}`)
   }
+
+  const handleOptionClick = (key, isInitialRender) => {
+    setShowOption(key)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?id=${key}`)
+    }
+  }
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id) {
+      handleOptionClick(id, true)
+    }
+  }, [])
 
   return (
     <>
@@ -67,7 +87,7 @@ export const RewardsPrograms = () => {
           {walletList.map(item => (
             <LoyaltyItemWrapper
               key={item.key}
-              onClick={() => setShowOption(item.key)}
+              onClick={() => handleOptionClick(item.key)}
             >
               <IconWrapper>
                 {item.icon}
