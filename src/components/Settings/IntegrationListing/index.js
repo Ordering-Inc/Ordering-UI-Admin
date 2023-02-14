@@ -41,11 +41,11 @@ export const IntegrationListing = (props) => {
 
   const settingId = settingParams && settingParams.split('=')[1]
 
-  const onBasicSettingsRedirect = ({ id }) => {
+  const onBasicSettingsRedirect = ({ id }, isInitialRender) => {
     if (!id) {
       return events.emit('go_to_page', { page: 'integrations', replace: true })
     }
-    if (id) {
+    if (id && !isInitialRender) {
       events.emit('go_to_page', {
         page: 'integrations',
         search: `?id=${id}`,
@@ -66,7 +66,7 @@ export const IntegrationListing = (props) => {
 
   useEffect(() => {
     if (settingId) {
-      onBasicSettingsRedirect({ id: settingId })
+      onBasicSettingsRedirect({ id: settingId }, true)
       setShowOption(settingId)
     }
   }, [])
