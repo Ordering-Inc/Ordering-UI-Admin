@@ -39,7 +39,7 @@ const DriversReviewListUI = (props) => {
   const [openReview, setOpenReview] = useState(false)
   const [curUser, setCurUser] = useState(null)
   const [curUserId, setCurUserId] = useState(null)
-  const headerTitle = defaultUserTypesSelected.length === 1 && defaultUserTypesSelected[0] === 3 ? t('CUSTOMER', 'Customer') : defaultUserTypesSelected[0] === 11 ? t('PROFESSIONAL', 'Professional') : t('DRIVER', 'Driver')
+  const headerTitle = defaultUserTypesSelected.length === 1 && defaultUserTypesSelected[0] === 3 ? t('CUSTOMER', 'Customer') : defaultUserTypesSelected[0] === 8 ? t('PROFESSIONAL', 'Professional') : t('DRIVER', 'Driver')
 
   const handleChangePage = (page) => {
     getUsers(page, 10)
