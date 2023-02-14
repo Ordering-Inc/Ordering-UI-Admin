@@ -141,9 +141,9 @@ export const SeoOptions = (props) => {
   }, [isSameInfo, isBusinessSeo, data])
 
   useEffect(() => {
-    // setIsSameInfo(false)
     titleRef.current.value = data?.seo_title ?? ''
     descriptionRef.current.value = data?.seo_description ?? ''
+    if (data?.name === data?.seo_title && (data?.description === data?.seo_description || (!data?.description && !data?.seo_description))) setIsSameInfo(true)
   }, [data])
 
   useEffect(() => {
