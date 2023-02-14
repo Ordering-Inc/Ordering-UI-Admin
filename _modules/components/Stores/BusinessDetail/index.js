@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.BusinessDetail = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
+var _reactRouterDom = require("react-router-dom");
 var _BusinessInfoSettingList = require("../BusinessInfoSettingList");
 var _BusinessOwners = require("../BusinessOwners");
 var _BusinessTypes = require("../BusinessTypes");
@@ -39,6 +40,8 @@ var BusinessDetail = function BusinessDetail(props) {
     setIsExtendExtraOpen = props.setIsExtendExtraOpen,
     isExtendExtraOpen = props.isExtendExtraOpen,
     handleUpdateBusinessState = props.handleUpdateBusinessState;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -46,12 +49,26 @@ var BusinessDetail = function BusinessDetail(props) {
     _useState2 = _slicedToArray(_useState, 2),
     selectedInfoItem = _useState2[0],
     setSelctedInfoItem = _useState2[1];
+  var handleSelectInfoItem = function handleSelectInfoItem(tab) {
+    setSelctedInfoItem(tab);
+    var businessId = query.get('id');
+    var section = query.get('section');
+    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab));
+  };
   (0, _react.useEffect)(function () {
     setIsExtendExtraOpen(false);
   }, [selectedInfoItem]);
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      setSelctedInfoItem(tab);
+    } else {
+      handleSelectInfoItem('information');
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.InfoConatiner, null, /*#__PURE__*/_react.default.createElement("h1", null, t('STORE_DETAILS', 'Store details')), /*#__PURE__*/_react.default.createElement(_BusinessInfoSettingList.BusinessInfoSettingList, {
     selectedInfoItem: selectedInfoItem,
-    handleSelectInfoItem: setSelctedInfoItem
+    handleSelectInfoItem: handleSelectInfoItem
   }), selectedInfoItem === 'information' && /*#__PURE__*/_react.default.createElement(_BusinessInformation.BusinessInformation, {
     business: business,
     handleSuccessUpdate: handleSucessUpdateBusiness,

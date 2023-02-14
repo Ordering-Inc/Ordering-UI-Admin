@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.MessagesListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Orders = require("../../Orders");
 var _Buttons = require("../../../styles/Buttons");
@@ -39,6 +40,8 @@ var MessagesListingUI = function MessagesListingUI(props) {
     selectedSubOrderStatus = props.selectedSubOrderStatus,
     handleChangeSearch = props.handleChangeSearch,
     handleChangeFilterValues = props.handleChangeFilterValues;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -80,6 +83,7 @@ var MessagesListingUI = function MessagesListingUI(props) {
     setDetailsOrder(order);
     setOrderDetailId(order.id);
     setIsOpenOrderDetail(true);
+    history.replace("".concat(location.pathname, "?id=").concat(order.id));
   };
   var handleOrderCardClick = function handleOrderCardClick(order) {
     setSelectedOrder(_objectSpread({}, order));
@@ -88,6 +92,13 @@ var MessagesListingUI = function MessagesListingUI(props) {
     if (width >= 768) return;
     document.body.style.overflow = isOpenOrderDetail ? 'hidden' : 'auto';
   }, [width, isOpenOrderDetail]);
+  (0, _react.useEffect)(function () {
+    var id = query.get('id');
+    if (id) {
+      setOrderDetailId(id);
+      setIsOpenOrderDetail(true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MessagesListingContainer, {
     id: "deliveryDashboard"
   }, /*#__PURE__*/_react.default.createElement(_Orders.OrdersContentHeader, {

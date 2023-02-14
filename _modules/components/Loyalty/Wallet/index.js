@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Wallet = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _PointsWalletBusinessDetail = require("../PointsWalletBusinessDetail");
 var _PointsWalletBusinessList = require("../PointsWalletBusinessList");
@@ -36,6 +37,8 @@ var WalletUI = function WalletUI(props) {
     moveDistance = props.moveDistance,
     loyaltyPlanList = props.loyaltyPlanList,
     title = props.title;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -70,6 +73,22 @@ var WalletUI = function WalletUI(props) {
   (0, _react.useEffect)(function () {
     if (selectedOption !== 'business') handleParentSidebarMove(0);
   }, [selectedOption]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setSelectedOption(tab);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    if (loyaltyPlanList !== null && loyaltyPlanList !== void 0 && loyaltyPlanList.loading) return;
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick(selectedOption);
+    }
+  }, [loyaltyPlanList === null || loyaltyPlanList === void 0 ? void 0 : loyaltyPlanList.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, title), width > 576 && moveDistance === 0 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: expandSidebar
@@ -78,7 +97,7 @@ var WalletUI = function WalletUI(props) {
       key: option.key,
       active: selectedOption === option.key,
       onClick: function onClick() {
-        return setSelectedOption(option.key);
+        return handleTabClick(option.key);
       }
     }, option.name);
   })), loyaltyPlanList !== null && loyaltyPlanList !== void 0 && loyaltyPlanList.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

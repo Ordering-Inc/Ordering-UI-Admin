@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AdBannersListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _styles = require("../../../styles");
@@ -23,6 +24,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AdBannersListing = function AdBannersListing(props) {
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -79,9 +82,26 @@ var AdBannersListing = function AdBannersListing(props) {
     aspectRatio: 300 / 300,
     isSearhShow: true
   }];
-  var handleSelectBannerPosition = function handleSelectBannerPosition(item) {
-    setOpenPositionDetail(item);
+  var handleSelectBannerPosition = function handleSelectBannerPosition(key, isInitialRender) {
+    var selectedItem = bannerPositions.find(function (item) {
+      return item.key === key;
+    });
+    setOpenPositionDetail(selectedItem);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?position=").concat(key));
+    }
   };
+  var handleCloseDetails = function handleCloseDetails() {
+    setOpenPositionDetail(null);
+    setMoveDistance(0);
+    history.replace("".concat(location.pathname));
+  };
+  (0, _react.useEffect)(function () {
+    var position = query.get('position');
+    if (position) {
+      handleSelectBannerPosition(position, true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.AdBannersListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -100,14 +120,13 @@ var AdBannersListing = function AdBannersListing(props) {
       description: item.description,
       icon: item.icon,
       onClick: function onClick() {
-        return handleSelectBannerPosition(item);
+        return handleSelectBannerPosition(item.key);
       }
     }));
   }))), openPositionDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     open: openPositionDetail,
     onClose: function onClose() {
-      setOpenPositionDetail(null);
-      setMoveDistance(0);
+      return handleCloseDetails();
     },
     defaultSideBarWidth: 500 + moveDistance,
     moveDistance: moveDistance

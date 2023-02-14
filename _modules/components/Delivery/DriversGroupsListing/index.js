@@ -51,6 +51,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     handleDeleteDriversGroup = props.handleDeleteDriversGroup,
     driversCompanyList = props.driversCompanyList;
   var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -89,18 +90,22 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     curDriversGroup = _useState12[0],
     setCurDriversGroup = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
+  var _useState13 = (0, _react.useState)(null),
     _useState14 = _slicedToArray(_useState13, 2),
-    isExtendExtraOpen = _useState14[0],
-    setIsExtendExtraOpen = _useState14[1];
+    curDriversGroupId = _useState14[0],
+    setCurDriversGroupId = _useState14[1];
   var _useState15 = (0, _react.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    isTourOpen = _useState16[0],
-    setIsTourOpen = _useState16[1];
-  var _useState17 = (0, _react.useState)(4),
+    isExtendExtraOpen = _useState16[0],
+    setIsExtendExtraOpen = _useState16[1];
+  var _useState17 = (0, _react.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    currentTourStep = _useState18[0],
-    setCurrentTourStep = _useState18[1];
+    isTourOpen = _useState18[0],
+    setIsTourOpen = _useState18[1];
+  var _useState19 = (0, _react.useState)(4),
+    _useState20 = _slicedToArray(_useState19, 2),
+    currentTourStep = _useState20[0],
+    setCurrentTourStep = _useState20[1];
   var handleOpenDetails = function handleOpenDetails(driverGroup) {
     setMoveDistance(0);
     setCurDriversGroup(driverGroup);
@@ -109,6 +114,8 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       setTimeout(function () {
         setCurrentTourStep(5);
       }, 50);
+    } else {
+      history.replace("".concat(location.pathname, "?id=").concat(driverGroup.id));
     }
   };
   (0, _react.useEffect)(function () {
@@ -175,8 +182,19 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       return _ref.apply(this, arguments);
     };
   }();
+  var handleCloseDetail = function handleCloseDetail() {
+    setCurDriversGroup(null);
+    setOpenDetails(false);
+    setIsTourOpen(false);
+    history.replace("".concat(location.pathname));
+  };
   (0, _react.useEffect)(function () {
     getDataFromStorage();
+    var id = query.get('id');
+    if (id) {
+      setCurDriversGroupId(Number(id));
+      setOpenDetails(true);
+    }
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderLeftContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
@@ -230,14 +248,13 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     moveDistance: moveDistance,
     noAnimation: isTourOpen,
     onClose: function onClose() {
-      setCurDriversGroup(null);
-      setOpenDetails(false);
-      setIsTourOpen(false);
+      return handleCloseDetail();
     }
   }, /*#__PURE__*/_react.default.createElement(_DriversGroupDetails.DriversGroupDetails, {
     driversGroupsState: driversGroupsState,
     setDriversGroupsState: setDriversGroupsState,
     curDriversGroup: curDriversGroup,
+    driversGroupId: curDriversGroupId,
     driversManagers: driversManagersList === null || driversManagersList === void 0 ? void 0 : driversManagersList.managers,
     businesses: businessesList === null || businessesList === void 0 ? void 0 : businessesList.businesses,
     paymethods: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods,

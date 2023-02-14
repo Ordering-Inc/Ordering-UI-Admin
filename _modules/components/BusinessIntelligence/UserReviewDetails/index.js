@@ -27,7 +27,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserReviewDetailsUI = function UserReviewDetailsUI(props) {
-  var driver = props.driver,
+  var _userState$user, _userState$user2, _userState$user3, _userState$user4;
+  var userState = props.userState,
     userReviewState = props.userReviewState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -51,8 +52,8 @@ var UserReviewDetailsUI = function UserReviewDetailsUI(props) {
         return quality / 5 * 100;
     }
   };
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, driver === null || driver === void 0 ? void 0 : driver.name, " ", driver === null || driver === void 0 ? void 0 : driver.lastname)), /*#__PURE__*/_react.default.createElement(_styles.DriverPhotoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, driver !== null && driver !== void 0 && driver.photo ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
-    bgimage: optimizeImage(driver === null || driver === void 0 ? void 0 : driver.photo, 'w_120,c_limit')
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.name, " ", (_userState$user2 = userState.user) === null || _userState$user2 === void 0 ? void 0 : _userState$user2.lastname)), /*#__PURE__*/_react.default.createElement(_styles.DriverPhotoContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, (_userState$user3 = userState.user) !== null && _userState$user3 !== void 0 && _userState$user3.photo ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    bgimage: optimizeImage((_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.photo, 'w_120,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null))), userReviewState.loading ? _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewItemContatiner, {
       key: i

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DriversCompaniesListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _styles = require("../../../styles");
@@ -39,6 +40,8 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     selectedCompanyList = props.selectedCompanyList,
     handleAllSelectCompany = props.handleAllSelectCompany,
     handleDeleteSelectedCompanies = props.handleDeleteSelectedCompanies;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -54,24 +57,32 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     curDriversCompany = _useState4[0],
     setCurDriversCompany = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    curDriversCompanyId = _useState6[0],
+    setCurDriversCompanyId = _useState6[1];
+  var _useState7 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    alertState = _useState6[0],
-    setAlertState = _useState6[1];
-  var _useState7 = (0, _react.useState)({
+    _useState8 = _slicedToArray(_useState7, 2),
+    alertState = _useState8[0],
+    setAlertState = _useState8[1];
+  var _useState9 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    confirm = _useState8[0],
-    setConfirm = _useState8[1];
-  var handleOpenDetails = function handleOpenDetails(driverCompany) {
+    _useState10 = _slicedToArray(_useState9, 2),
+    confirm = _useState10[0],
+    setConfirm = _useState10[1];
+  var handleOpenDetails = function handleOpenDetails(driverCompany, isInitialRender) {
     setCurDriversCompany(driverCompany);
+    setCurDriversCompanyId(driverCompany === null || driverCompany === void 0 ? void 0 : driverCompany.id);
     setOpenDetails(true);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?id=").concat(driverCompany === null || driverCompany === void 0 ? void 0 : driverCompany.id));
+    }
   };
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
@@ -92,6 +103,19 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
       }
     });
   };
+  var handleCloseDetails = function handleCloseDetails() {
+    setCurDriversCompany(null);
+    setCurDriversCompanyId(null);
+    setOpenDetails(false);
+    history.replace("".concat(location.pathname));
+  };
+  (0, _react.useEffect)(function () {
+    var id = query.get('id');
+    if (id) {
+      setCurDriversCompanyId(Number(id));
+      setOpenDetails(true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.DriversCompaniesListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderLeftContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -132,16 +156,15 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     defaultSideBarWidth: 550,
     open: openDetails,
     onClose: function onClose() {
-      setCurDriversCompany(null);
-      setOpenDetails(false);
+      return handleCloseDetails();
     }
   }, /*#__PURE__*/_react.default.createElement(_DriversCompanyDetailsForm.DriversCompanyDetailsForm, {
     driversCompaniesState: driversCompaniesState,
     setDriversCompaniesState: setDriversCompaniesState,
     driversCompany: curDriversCompany,
+    driversCompanyId: curDriversCompanyId,
     onClose: function onClose() {
-      setCurDriversCompany(null);
-      setOpenDetails(false);
+      return handleCloseDetails();
     }
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),

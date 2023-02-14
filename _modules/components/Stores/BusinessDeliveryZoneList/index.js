@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessDeliveryZoneList = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _BusinessDeliveryZoneDetails = require("../BusinessDeliveryZoneDetails");
 var _Shared = require("../../Shared");
@@ -21,13 +22,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
-  var _business$zones;
+  var _business$zones2;
   var business = props.business,
     setIsExtendExtraOpen = props.setIsExtendExtraOpen,
     handleSuccessUpdate = props.handleSuccessUpdate,
     zoneListState = props.zoneListState,
     handleChangeZoneState = props.handleChangeZoneState,
     handleChangeAllZoneState = props.handleChangeAllZoneState;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -43,20 +46,45 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
     setIsOpenDetails(false);
     setIsExtendExtraOpen(false);
     setCurZone(null);
+    var businessId = query.get('id');
+    var section = query.get('section');
+    var tab = query.get('tab');
+    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab));
   };
-  var handleOpenZone = function handleOpenZone(e, zone) {
-    var isInvalid = e.target.closest('.zone-enabled');
+  var handleOpenZone = function handleOpenZone(e, zone, isInitialRender) {
+    var _e$target;
+    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.zone-enabled');
     if (isInvalid) return;
     setCurZone(zone);
     setIsExtendExtraOpen(true);
     setIsOpenDetails(true);
+    if (!isInitialRender) {
+      var businessId = query.get('id');
+      var section = query.get('section');
+      var tab = query.get('tab');
+      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&zone=").concat(zone.id));
+    }
   };
+  (0, _react.useEffect)(function () {
+    var zoneId = query.get('zone');
+    if (zoneId) {
+      var _business$zones;
+      var initZone = business === null || business === void 0 ? void 0 : (_business$zones = business.zones) === null || _business$zones === void 0 ? void 0 : _business$zones.find(function (zone) {
+        return zone.id === Number(zoneId);
+      });
+      if (initZone) {
+        setTimeout(function () {
+          handleOpenZone(null, initZone, true);
+        }, 500);
+      }
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ZoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DeliveryZonesTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     checked: zoneListState.isCheckAll,
     onChange: function onChange(e) {
       return handleChangeAllZoneState(e.target.checked);
     }
-  }))), /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MINIMUM', 'Minimum')), /*#__PURE__*/_react.default.createElement("th", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement("th", null))), business === null || business === void 0 ? void 0 : (_business$zones = business.zones) === null || _business$zones === void 0 ? void 0 : _business$zones.filter(function (zone) {
+  }))), /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MINIMUM', 'Minimum')), /*#__PURE__*/_react.default.createElement("th", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement("th", null))), business === null || business === void 0 ? void 0 : (_business$zones2 = business.zones) === null || _business$zones2 === void 0 ? void 0 : _business$zones2.filter(function (zone) {
     return (zone === null || zone === void 0 ? void 0 : zone.type) !== 3;
   }).map(function (zone) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ZoneTbody, {

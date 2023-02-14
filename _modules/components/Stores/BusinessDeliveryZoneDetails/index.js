@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessDeliveryZoneDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _BusinessDeliveryZoneInformation = require("../BusinessDeliveryZoneInformation");
 var _BusinessDeliveryZoneShare = require("../BusinessDeliveryZoneShare");
@@ -41,6 +42,8 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
     kmlData = props.kmlData,
     handleUploadKmlFiles = props.handleUploadKmlFiles,
     handleSuccessUpdate = props.handleSuccessUpdate;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -79,6 +82,24 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
       }
     });
   };
+  var handleTabClick = function handleTabClick(zoneTab, isInitialRender) {
+    setSelectedMenuOption(zoneTab);
+    if (!isInitialRender) {
+      var businessId = query.get('id');
+      var section = query.get('section');
+      var tab = query.get('tab');
+      var zone = query.get('zone');
+      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&zone=").concat(zone, "&zone_tab=").concat(zoneTab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var zoneTab = query.get('zone_tab');
+    if (zoneTab) {
+      handleTabClick(zoneTab, true);
+    } else {
+      handleTabClick('information');
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, zoneState !== null && zoneState !== void 0 && zoneState.zone ? zoneState === null || zoneState === void 0 ? void 0 : (_zoneState$zone = zoneState.zone) === null || _zoneState$zone === void 0 ? void 0 : _zoneState$zone.name : t('ZONE_DELIVERY_SETTINGS', 'Zone delivery settings')), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
@@ -92,7 +113,7 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
       key: tab.key,
       active: selectedMenuOption === tab.key,
       onClick: function onClick() {
-        return setSelectedMenuOption(tab.key);
+        return handleTabClick(tab.key);
       }
     }, tab.content);
   })), selectedMenuOption === 'information' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryZoneInformation.BusinessDeliveryZoneInformation, {

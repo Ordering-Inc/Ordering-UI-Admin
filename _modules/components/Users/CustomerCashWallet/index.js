@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.CustomerCashWallet = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _CustomerCashWalletDetails = require("../CustomerCashWalletDetails");
 var _CustomerWalletEvents = require("../CustomerWalletEvents");
@@ -24,6 +25,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CustomerCashWalletUI = function CustomerCashWalletUI(props) {
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -31,15 +34,31 @@ var CustomerCashWalletUI = function CustomerCashWalletUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     showOption = _useState2[0],
     setShowOption = _useState2[1];
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setShowOption(tab);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      var section = query.get('section');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick(showOption);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CASH_WALLET', 'Cash wallet')), /*#__PURE__*/_react.default.createElement(_styles.Tabs, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: showOption === 'cash_wallet',
     onClick: function onClick() {
-      return setShowOption('cash_wallet');
+      return handleTabClick('cash_wallet');
     }
   }, t('CASH_WALLET', 'Cash wallet')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: showOption === 'history',
     onClick: function onClick() {
-      return setShowOption('history');
+      return handleTabClick('history');
     }
   }, t('TRANSACTION_HISTORY', 'Transaction history'))), showOption === 'cash_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerCashWalletDetails.CustomerCashWalletDetails, props), showOption === 'history' && /*#__PURE__*/_react.default.createElement(_CustomerWalletEvents.CustomerWalletEvents, props));
 };

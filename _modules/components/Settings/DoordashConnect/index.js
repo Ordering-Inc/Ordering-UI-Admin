@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DoordashConnect = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
@@ -30,6 +31,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DoordashConnectUI = function DoordashConnectUI(props) {
   var actionState = props.actionState,
     onClose = props.onClose;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -97,11 +100,29 @@ var DoordashConnectUI = function DoordashConnectUI(props) {
   (0, _react.useEffect)(function () {
     toggleMainContent();
   }, [width]);
+  var handleOpenMore = function handleOpenMore(isInitialRender) {
+    setSettingsOpen(true);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&more=settings"));
+    }
+  };
+  var handleCloseDescription = function handleCloseDescription() {
+    setSettingsOpen(false);
+    var id = query.get('id');
+    history.replace("".concat(location.pathname, "?id=").concat(id));
+  };
+  (0, _react.useEffect)(function () {
+    var more = query.get('more');
+    if (more === 'settings') {
+      handleOpenMore(true);
+    }
+  }, []);
   var DoordashConnectDescription = function DoordashConnectDescription() {
     return /*#__PURE__*/_react.default.createElement(_styles2.CategoryExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
       color: "black",
       onClick: function onClick() {
-        return setSettingsOpen(false);
+        return handleCloseDescription();
       }
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MORE_INFO', 'More Info'))), /*#__PURE__*/_react.default.createElement(_styles2.SettingListConatiner, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       active: true
@@ -136,7 +157,7 @@ var DoordashConnectUI = function DoordashConnectUI(props) {
     borderRadius: "8px",
     className: "all-setting",
     onClick: function onClick() {
-      return setSettingsOpen(true);
+      return handleOpenMore();
     }
   }, /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'All settings')), /*#__PURE__*/_react.default.createElement(_BsArrowRight.default, null))), settingsOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(DoordashConnectDescription, null) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",

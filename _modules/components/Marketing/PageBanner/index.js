@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.PageBanners = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Shared = require("../../Shared");
@@ -46,6 +47,8 @@ var PageBannersUI = function PageBannersUI(props) {
     handleSuccessDelete = props.handleSuccessDelete,
     aspectRatio = props.aspectRatio,
     isSearhShow = props.isSearhShow;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -79,17 +82,24 @@ var PageBannersUI = function PageBannersUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isExpand = _useState12[0],
     setIsExpand = _useState12[1];
-  var handleOpenBannerItemsDetail = function handleOpenBannerItemsDetail(e, banner) {
-    var isInvalid = e.target.closest('.banner-enabled');
+  var handleOpenBannerItemsDetail = function handleOpenBannerItemsDetail(e, banner, isInitialRender) {
+    var _e$target;
+    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.banner-enabled');
     if (isInvalid) return;
     setSelectedBanner(banner);
     setOpenItemsDetail(true);
     setMoveDistance(500);
+    if (banner && !isInitialRender) {
+      var position = query.get('position');
+      history.replace("".concat(location.pathname, "?position=").concat(position, "&banner=").concat(banner === null || banner === void 0 ? void 0 : banner.id));
+    }
   };
   var handleCloseDetail = function handleCloseDetail() {
     setMoveDistance(0);
     setOpenItemsDetail(false);
     setSelectedBanner(null);
+    var position = query.get('position');
+    history.replace("".concat(location.pathname, "?position=").concat(position));
   };
   var expandSidebar = function expandSidebar() {
     var element = document.getElementById('sideSlider');
@@ -107,11 +117,25 @@ var PageBannersUI = function PageBannersUI(props) {
   }, [actionState]);
   (0, _react.useEffect)(function () {
     setSearchValue('');
-    handleCloseDetail();
+    setMoveDistance(0);
+    setOpenItemsDetail(false);
+    setSelectedBanner(null);
   }, [defaultPosition]);
   (0, _react.useEffect)(function () {
     if (openItemsDetail) setIsExpand(false);
   }, [openItemsDetail]);
+  (0, _react.useEffect)(function () {
+    if (bannersListState.loading) return;
+    var bannerId = query.get('banner');
+    if (bannerId) {
+      var initBanner = bannersListState.banners.find(function (banner) {
+        return banner.id === Number(bannerId);
+      });
+      if (initBanner) {
+        handleOpenBannerItemsDetail(null, initBanner, true);
+      }
+    }
+  }, [bannersListState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, title), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, bannerInfo))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && !openItemsDetail && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ProductMainDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Shared = require("../../Shared");
 var _SeoOptions = require("../SeoOptions");
@@ -40,6 +41,8 @@ var ProductMainDetails = function ProductMainDetails(props) {
     fees = props.fees,
     setFees = props.setFees,
     cleanFormState = props.cleanFormState;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -60,10 +63,24 @@ var ProductMainDetails = function ProductMainDetails(props) {
     key: 'seo_options',
     content: t('SEO_OPTIONS', 'SEO options')
   }];
-  var handleSelectOption = function handleSelectOption(tab) {
+  var handleSelectOption = function handleSelectOption(tab, isInitialRender) {
     setSelectedOption(tab);
     setIsExtendExtraOpen(false);
+    if (!isInitialRender) {
+      var category = query.get('category');
+      var _product = query.get('product');
+      var section = query.get('section');
+      history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(_product, "&section=").concat(section, "&tab=").concat(tab));
+    }
   };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleSelectOption(tab, true);
+    } else {
+      handleSelectOption(selectedOption);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     maxLimit: isExtendExtraOpen
   }, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_DETAILS', 'Product details')), /*#__PURE__*/_react.default.createElement(_styles.TabsConatiner, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, listOptions.map(function (option) {

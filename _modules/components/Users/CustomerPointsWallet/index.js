@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.CustomerPointsWallet = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -29,6 +30,8 @@ var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
   var _walletState$wallet, _user$loyalty_level$i, _user$loyalty_level, _user$loyalty_level2;
   var walletState = props.walletState,
     user = props.user;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -37,15 +40,31 @@ var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     showOption = _useState2[0],
     setShowOption = _useState2[1];
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setShowOption(tab);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      var section = query.get('section');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick(showOption);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('POINTS_WALLET', 'Points wallet')), /*#__PURE__*/_react.default.createElement(_styles.Tabs, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: showOption === 'points_wallet',
     onClick: function onClick() {
-      return setShowOption('points_wallet');
+      return handleTabClick('points_wallet');
     }
   }, t('POINTS_WALLET', 'Points wallet')), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: showOption === 'history',
     onClick: function onClick() {
-      return setShowOption('history');
+      return handleTabClick('history');
     }
   }, t('TRANSACTION_HISTORY', 'Transaction history'))), showOption === 'points_wallet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, walletState !== null && walletState !== void 0 && walletState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWalletContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PointsWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70,

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessOrderingChannels = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
@@ -29,6 +30,8 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
     handleUpdateBusinessClick = props.handleUpdateBusinessClick,
     business = props.business,
     setFormState = props.setFormState;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -75,8 +78,13 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
       content: []
     }));
   };
-  var handleChangeOption = function handleChangeOption(key) {
-    setSelectedOption(key);
+  var handleChangeOption = function handleChangeOption(tab, isInitialRender) {
+    setSelectedOption(tab);
+    if (!isInitialRender) {
+      var businessId = query.get('id');
+      var section = query.get('section');
+      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab));
+    }
   };
   (0, _react.useEffect)(function () {
     if (formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0) return;
@@ -85,6 +93,14 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
   (0, _react.useEffect)(function () {
     if (business) setSlug(business === null || business === void 0 ? void 0 : business.slug);
   }, [business]);
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleChangeOption(tab, true);
+    } else {
+      handleChangeOption('custom_slug');
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessOrderingChannelsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('EXTENSIONS', 'Extensions')), /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, optionList.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: option.key,

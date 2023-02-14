@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.CampaignListingUI = exports.CampaignListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _Shared = require("../../Shared");
 var _CampaignDetail = require("../CampaignDetail");
 var _CampaignHeader = require("../CampaignHeader");
@@ -27,6 +28,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CampaignListingUI = function CampaignListingUI(props) {
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isOpenDetail = _useState2[0],
@@ -35,14 +38,29 @@ var CampaignListingUI = function CampaignListingUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     selectedCampaign = _useState4[0],
     setSelectedCampaign = _useState4[1];
+  var _useState5 = (0, _react.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    selectedCampaignId = _useState6[0],
+    setSelectedCampaignId = _useState6[1];
   var handleOpenDetail = function handleOpenDetail(action) {
     setSelectedCampaign(action);
+    setSelectedCampaignId(action === null || action === void 0 ? void 0 : action.id);
     setIsOpenDetail(true);
+    action && history.replace("".concat(location.pathname, "?id=").concat(action === null || action === void 0 ? void 0 : action.id));
   };
   var handleCloseDetail = function handleCloseDetail() {
     setIsOpenDetail(false);
     setSelectedCampaign(null);
+    history.replace("".concat(location.pathname));
   };
+  (0, _react.useEffect)(function () {
+    var id = query.get('id');
+    if (id) {
+      setSelectedCampaign({});
+      setSelectedCampaignId(Number(id));
+      setIsOpenDetail(true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CampaignListingContainer, null, /*#__PURE__*/_react.default.createElement(_CampaignHeader.CampaignHeader, _extends({}, props, {
     handleOpenDetail: handleOpenDetail
   })), /*#__PURE__*/_react.default.createElement(_CampaignList.CampaignList, _extends({}, props, {
@@ -58,6 +76,7 @@ var CampaignListingUI = function CampaignListingUI(props) {
     defaultSideBarWidth: 550
   }, /*#__PURE__*/_react.default.createElement(_CampaignDetail.CampaignDetail, _extends({}, props, {
     campaign: selectedCampaign,
+    campaignId: selectedCampaignId,
     onClose: function onClose() {
       return handleCloseDetail();
     }

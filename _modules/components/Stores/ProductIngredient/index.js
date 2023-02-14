@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ProductIngredient = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styles = require("../../../styles");
@@ -25,6 +26,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductIngredient = function ProductIngredient(props) {
   var product = props.product,
     setIsExtendExtraOpen = props.setIsExtendExtraOpen;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -38,16 +41,35 @@ var ProductIngredient = function ProductIngredient(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     currentIngredient = _useState4[0],
     setCurrentIngredient = _useState4[1];
-  var handleOpenIngredient = function handleOpenIngredient(ingredient) {
+  var handleOpenIngredient = function handleOpenIngredient(ingredient, isInitialRender) {
     setCurrentIngredient(ingredient);
     setIsExtendExtraOpen(true);
     setOpenDetails(true);
+    if (!isInitialRender) {
+      var category = query.get('category');
+      var _product = query.get('product');
+      var section = query.get('section');
+      history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(_product, "&section=").concat(section, "&ingredient=").concat(ingredient.id));
+    }
   };
   var handleCloseDetails = function handleCloseDetails() {
     setOpenDetails(false);
     setIsExtendExtraOpen(false);
     setCurrentIngredient(null);
+    var category = query.get('category');
+    var product = query.get('product');
+    var section = query.get('section');
+    history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(section));
   };
+  (0, _react.useEffect)(function () {
+    var ingredientId = query.get('ingredient');
+    if (ingredientId) {
+      var initIngredient = product.ingredients.find(function (ingredient) {
+        return ingredient.id === Number(ingredientId);
+      });
+      initIngredient && handleOpenIngredient(initIngredient, true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.IngredientContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('INGREDIENTS', 'Ingredients'), " / ", t('PROPERTIES', 'Properties')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",

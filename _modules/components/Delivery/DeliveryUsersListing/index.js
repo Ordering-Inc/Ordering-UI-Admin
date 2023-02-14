@@ -63,6 +63,7 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleSuccessUpdate = props.handleSuccessUpdate,
     handleSuccessAddUser = props.handleSuccessAddUser,
     handleSuccessDeleteUser = props.handleSuccessDeleteUser;
+  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -99,6 +100,7 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     setOpenUser(user);
     setOpenUserAddForm(false);
     setIsOpenUserDetails(true);
+    history.replace("".concat(location.pathname, "?id=").concat(user.id));
   };
   var handleOpenUserAddForm = function handleOpenUserAddForm() {
     var id = query.get('id');

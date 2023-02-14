@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessSync = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _BusinessSyncBasic = require("../BusinessSyncBasic");
 var _BusinessSyncItsaCheckmate = require("../BusinessSyncItsaCheckmate");
@@ -21,6 +22,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessSync = function BusinessSync(props) {
   var handleParentSidebarMove = props.handleParentSidebarMove;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -35,10 +38,22 @@ var BusinessSync = function BusinessSync(props) {
     key: 'itsacheckmate',
     name: t('ITSACHECKMATE', 'ItsaCheckmate')
   }];
-  var handleChangeOption = function handleChangeOption(key) {
+  var handleChangeOption = function handleChangeOption(key, isInitialRender) {
     handleParentSidebarMove(0);
     setSelectedOption(key);
+    if (!isInitialRender) {
+      var header = query.get('header');
+      history.replace("".concat(location.pathname, "?header=").concat(header, "&tab=").concat(key));
+    }
   };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleChangeOption(tab, true);
+    } else {
+      handleChangeOption(selectedOption);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SYNC_WITH', 'Sync with'))), /*#__PURE__*/_react.default.createElement(_styles.Tabs, null, syncOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: option.key,

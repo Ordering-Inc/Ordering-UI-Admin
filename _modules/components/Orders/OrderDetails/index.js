@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OrderDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _ProductItemAccordion = require("../ProductItemAccordion");
@@ -52,6 +53,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     actionStatus = props.actionStatus,
     handleRefundOrder = props.handleRefundOrder,
     isServiceOrder = props.isServiceOrder;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -276,8 +279,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       customer: customer
     });
   };
-  var handleOpenMessages = function handleOpenMessages(openMessage) {
-    if (openMessage === 'chat') {
+  var handleCloseMessages = function handleCloseMessages() {
+    setOpenMessages({
+      chat: false,
+      history: false
+    });
+  };
+  var handleShowOption = function handleShowOption(option, isInitialRender) {
+    if (option === 'chat') {
       setOpenMessages({
         chat: true,
         history: false
@@ -285,26 +294,25 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       setUnreadAlert(_objectSpread(_objectSpread({}, unreadAlert), {}, {
         customer: false
       }));
-    }
-    if (openMessage === 'history') {
+      setShowOption(null);
+    } else if (option === 'history') {
       setOpenMessages({
         chat: false,
         history: true
       });
+      setShowOption(null);
+    } else {
+      setOpenMessages({
+        chat: false,
+        history: false
+      });
+      setShowOption(option);
     }
-    setShowOption(null);
     setExtraOpen(true);
-  };
-  var handleCloseMessages = function handleCloseMessages() {
-    setOpenMessages({
-      chat: false,
-      history: false
-    });
-  };
-  var handleShowOption = function handleShowOption(option) {
-    handleCloseMessages();
-    setExtraOpen(true);
-    setShowOption(option);
+    if (!isInitialRender) {
+      var orderId = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(orderId, "&section=").concat(option));
+    }
   };
   (0, _react.useEffect)(function () {
     unreadMessages();
@@ -351,7 +359,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
     if (evt.target.closest('.driver-select')) return;
     if (isTourOpen && setCurrentTourStep) {
-      handleOpenMessages('chat');
+      handleShowOption('chat');
       setTimeout(function () {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3);
       }, 1);
@@ -361,7 +369,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     if (evt.keyCode === 37 && currentTourStep === 2) setCurrentTourStep(1);
     if (evt.keyCode === 39 && currentTourStep === 1 && (order === null || order === void 0 ? void 0 : order.delivery_type) === 1) setCurrentTourStep(2);
     if (evt.keyCode === 39 && currentTourStep === 1 && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) {
-      handleOpenMessages('chat');
+      handleShowOption('chat');
       setTimeout(function () {
         isTourOpen && setCurrentTourStep && setCurrentTourStep(3);
       }, 1);
@@ -373,7 +381,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       setIsTourFlag(false);
     }
     if (evt.keyCode === 39 && currentTourStep === 2) {
-      handleOpenMessages('chat');
+      handleShowOption('chat');
       setCurrentTourStep(3);
     }
     if (evt.keyCode === 39 && currentTourStep === 3) {
@@ -391,7 +399,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }, [isTourOpen, currentTourStep]);
   (0, _react.useEffect)(function () {
     if (!isTourFlag) return;
-    handleOpenMessages('chat');
+    handleShowOption('chat');
     setTimeout(function () {
       setCurrentTourStep(3);
     }, 1);
@@ -409,6 +417,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       history: false
     });
     setShowOption(null);
+    var orderId = query.get('id');
+    history.replace("".concat(location.pathname, "?id=").concat(orderId));
   };
   (0, _react.useEffect)(function () {
     if (!open) return;
@@ -417,6 +427,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       return document.removeEventListener('keydown', onCloseSidebar);
     };
   }, [open]);
+  (0, _react.useEffect)(function () {
+    if (loading) return;
+    var section = query.get('section');
+    if (section) {
+      handleShowOption(section, true);
+    }
+  }, [loading]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     isSelectedOrders: isSelectedOrders,
     id: "orderDetails",
@@ -467,7 +484,6 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     showOption: showOption,
     openMessage: openMessages,
     handleShowOption: handleShowOption,
-    handleOpenMessages: handleOpenMessages,
     isTourOpen: isTourOpen,
     currentTourStep: currentTourStep,
     setIsTourOpen: setIsTourOpen,
@@ -494,7 +510,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     unreadAlert: unreadAlert,
     isTourOpen: isTourOpen,
     setCurrentTourStep: setCurrentTourStep,
-    handleOpenMessages: handleOpenMessages
+    handleShowOption: handleShowOption
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPORT_SUMMARY', 'Summary')), (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,

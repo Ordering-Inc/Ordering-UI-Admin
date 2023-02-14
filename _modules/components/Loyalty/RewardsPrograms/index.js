@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.RewardsPrograms = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
@@ -25,6 +26,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RewardsPrograms = function RewardsPrograms() {
   var _walletList$find;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -72,15 +75,30 @@ var RewardsPrograms = function RewardsPrograms() {
   var hanldeClosePointsWallet = function hanldeClosePointsWallet() {
     setMoveDistance(0);
     setShowOption(null);
+    history.replace("".concat(location.pathname));
   };
   var handleCloseLevel = function handleCloseLevel() {
     setLevelMoveDistance(0);
     setShowOption(null);
+    history.replace("".concat(location.pathname));
   };
   var handleCloseGiftCard = function handleCloseGiftCard() {
     setGiftCardMoveDistance(0);
     setShowOption(null);
+    history.replace("".concat(location.pathname));
   };
+  var handleOptionClick = function handleOptionClick(key, isInitialRender) {
+    setShowOption(key);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?id=").concat(key));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var id = query.get('id');
+    if (id) {
+      handleOptionClick(id, true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -90,7 +108,7 @@ var RewardsPrograms = function RewardsPrograms() {
     return /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
       key: item.key,
       onClick: function onClick() {
-        return setShowOption(item.key);
+        return handleOptionClick(item.key);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, item.icon), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, item.name), /*#__PURE__*/_react.default.createElement("p", null, item.description)));
   }))), (showOption === 'credit_point' || showOption === 'cashback') && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {

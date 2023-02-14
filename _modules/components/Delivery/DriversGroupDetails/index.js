@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DriversGroupDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactBootstrap = require("react-bootstrap");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -43,6 +44,8 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     handleNextTour = props.handleNextTour,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     setIsExtendExtraOpen = props.setIsExtendExtraOpen;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -174,6 +177,22 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setShowMenu(tab);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    if (driversGroupState.loading) return;
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick(showMenu);
+    }
+  }, [driversGroupState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, driversGroupState.driversGroup ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.enabled,
     onChange: function onChange(enabled) {
@@ -200,16 +219,24 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       key: menu.key,
       active: menu.key === showMenu,
       onClick: function onClick() {
-        return setShowMenu(menu.key);
+        return handleTabClick(menu.key);
       }
     }, menu.value);
   }))), showMenu === 'general' && /*#__PURE__*/_react.default.createElement(_DriversGroupGeneralForm.DriversGroupGeneralForm, _extends({}, props, {
+    curDriversGroup: driversGroupState.driversGroup,
     useAdvanced: useAdvanced,
     setUseAdvanced: setUseAdvanced,
     handleNextClick: handleNextClick
-  })), showMenu === 'businesses' && /*#__PURE__*/_react.default.createElement(_DriversGroupBusinesses.DriversGroupBusinesses, props), showMenu === 'paymethods' && /*#__PURE__*/_react.default.createElement(_DriversGroupPaymethods.DriversGroupPaymethods, props), showMenu === 'advanced_logistics' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogistics.DriversGroupLogistics, props), showMenu === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogs.DriversGroupLogs, {
+  })), showMenu === 'businesses' && /*#__PURE__*/_react.default.createElement(_DriversGroupBusinesses.DriversGroupBusinesses, _extends({}, props, {
+    curDriversGroup: driversGroupState.driversGroup
+  })), showMenu === 'paymethods' && /*#__PURE__*/_react.default.createElement(_DriversGroupPaymethods.DriversGroupPaymethods, _extends({}, props, {
+    curDriversGroup: driversGroupState.driversGroup
+  })), showMenu === 'advanced_logistics' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogistics.DriversGroupLogistics, _extends({}, props, {
+    curDriversGroup: driversGroupState.driversGroup
+  })), showMenu === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogs.DriversGroupLogs, {
     driversGroupId: (_driversGroupState$dr6 = driversGroupState.driversGroup) === null || _driversGroupState$dr6 === void 0 ? void 0 : _driversGroupState$dr6.id
   }), showMenu === 'delivery_zones' && /*#__PURE__*/_react.default.createElement(_DriversGroupDeliveryDetails.DriverGroupDeliveryDetails, _extends({}, props, {
+    curDriversGroup: driversGroupState.driversGroup,
     handleParentSidebarMove: handleParentSidebarMove,
     drivergroup: driversGroupState.driversGroup,
     setIsExtendExtraOpen: setIsExtendExtraOpen,

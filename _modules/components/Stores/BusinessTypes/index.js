@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.BusinessTypes = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
+var _reactRouterDom = require("react-router-dom");
 var _Shared = require("../../Shared");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
@@ -40,6 +41,8 @@ var BusinessTypes = function BusinessTypes(props) {
     handleUpdateBusinessClick = props.handleUpdateBusinessClick,
     setBusinessTypes = props.setBusinessTypes,
     setIsExtendExtraOpen = props.setIsExtendExtraOpen;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -72,17 +75,26 @@ var BusinessTypes = function BusinessTypes(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isOpenTypeDetail = _useState12[0],
     setIsOpenTypeDetail = _useState12[1];
-  var handleOpenBusinessTypeDetail = function handleOpenBusinessTypeDetail(e, category) {
-    var isInvalid = e.target.closest('.business-type-checkbox');
+  var handleOpenBusinessTypeDetail = function handleOpenBusinessTypeDetail(category, e) {
+    var _e$target;
+    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.business-type-checkbox');
     if (isInvalid) return;
     setSelectedBusinessType(category);
     setIsExtendExtraOpen(true);
     setIsOpenTypeDetail(true);
+    var businessId = query.get('id');
+    var section = query.get('section');
+    var tab = query.get('tab');
+    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&business_type=").concat(category.id));
   };
   var handleCloseDetail = function handleCloseDetail() {
     setIsOpenTypeDetail(false);
     setIsExtendExtraOpen(false);
     setSelectedBusinessType(null);
+    var businessId = query.get('id');
+    var section = query.get('section');
+    var tab = query.get('tab');
+    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab));
   };
   var handleSelectBusinessTypes = function handleSelectBusinessTypes(typeId) {
     var _selectedBusinessTypes = _toConsumableArray(selectedBusinessTypes);
@@ -141,6 +153,17 @@ var BusinessTypes = function BusinessTypes(props) {
     });
     setFilteredBusinessTypes(_toConsumableArray(updatedBusinessTypes));
   }, [businessTypes, searchVal]);
+  (0, _react.useEffect)(function () {
+    var businessTypeId = query.get('business_type');
+    if (businessTypeId) {
+      var initBusinessType = businessTypes.find(function (type) {
+        return type.id === Number(businessTypeId);
+      });
+      setTimeout(function () {
+        handleOpenBusinessTypeDetail(initBusinessType);
+      }, 500);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     search: searchVal,
     isCustomLayout: true,
@@ -154,7 +177,7 @@ var BusinessTypes = function BusinessTypes(props) {
       key: category === null || category === void 0 ? void 0 : category.id,
       active: (selectedBusinessType === null || selectedBusinessType === void 0 ? void 0 : selectedBusinessType.id) === (category === null || category === void 0 ? void 0 : category.id),
       onClick: function onClick(evt) {
-        return handleOpenBusinessTypeDetail(evt, category);
+        return handleOpenBusinessTypeDetail(category, evt);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessTypeInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
       onClick: function onClick() {
@@ -168,7 +191,7 @@ var BusinessTypes = function BusinessTypes(props) {
     }, !(category !== null && category !== void 0 && category.image) && /*#__PURE__*/_react.default.createElement(_BsCardImage.default, null))), /*#__PURE__*/_react.default.createElement("span", null, category === null || category === void 0 ? void 0 : category.name)), /*#__PURE__*/_react.default.createElement(_styles.ArrowWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)));
   })), /*#__PURE__*/_react.default.createElement(_styles.AddNewBusinessTypeContainer, null, /*#__PURE__*/_react.default.createElement(_styles.AddNewBusinessTypeTitle, {
     onClick: function onClick(evt) {
-      return handleOpenBusinessTypeDetail(evt, null);
+      return handleOpenBusinessTypeDetail(null, evt);
     }
   }, t('ADD_NEW_BUSINESS_CATEGORY', 'Add new business category'))), isOpenTypeDetail && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "busiiness-type",

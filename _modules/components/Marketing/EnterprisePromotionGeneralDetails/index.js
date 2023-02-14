@@ -181,7 +181,8 @@ var EnterprisePromotionGeneralDetails = function EnterprisePromotionGeneralDetai
     };
   }, [isShowCalendar]);
   (0, _react.useEffect)(function () {
-    if (Object.keys(promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion).length) {
+    if (promotionState.loading) return;
+    if (promotionState !== null && promotionState !== void 0 && promotionState.promotion && Object.keys(promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion).length) {
       var _promotionState$promo, _promotionState$promo2;
       setDateRange([{
         startDate: new Date(promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.start),

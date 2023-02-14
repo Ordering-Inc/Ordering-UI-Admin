@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.EnterprisePromotionListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
@@ -39,6 +40,8 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     paymethodsState = props.paymethodsState,
     businessesList = props.businessesList,
     handleSuccessDeletePromotion = props.handleSuccessDeletePromotion;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -76,18 +79,27 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     _useState10 = _slicedToArray(_useState9, 2),
     selectedPromotion = _useState10[0],
     setSelectedPromotion = _useState10[1];
-  var _useState11 = (0, _react.useState)(0),
+  var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    moveDistance = _useState12[0],
-    setMoveDistance = _useState12[1];
+    curPromotionId = _useState12[0],
+    setCurPromotionId = _useState12[1];
+  var _useState13 = (0, _react.useState)(0),
+    _useState14 = _slicedToArray(_useState13, 2),
+    moveDistance = _useState14[0],
+    setMoveDistance = _useState14[1];
   var handleOpenDetails = function handleOpenDetails(promotion) {
     setMoveDistance(0);
     setSelectedPromotion(promotion);
+    setCurPromotionId(promotion === null || promotion === void 0 ? void 0 : promotion.id);
     setOpenDetails(true);
+    if (promotion) {
+      history.replace("".concat(location.pathname, "?id=").concat(promotion === null || promotion === void 0 ? void 0 : promotion.id));
+    }
   };
   var handleCloseDetails = function handleCloseDetails() {
     setOpenDetails(false);
     setSelectedPromotion(null);
+    history.replace("".concat(location.pathname));
   };
   (0, _react.useEffect)(function () {
     if (!(promotionListState !== null && promotionListState !== void 0 && promotionListState.error)) return;
@@ -104,6 +116,13 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
       }
     }
   }, [configs]);
+  (0, _react.useEffect)(function () {
+    var id = query.get('id');
+    if (id) {
+      setCurPromotionId(Number(id));
+      setOpenDetails(true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -115,7 +134,7 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick() {
-      return handleOpenDetails({});
+      return handleOpenDetails(null);
     }
   }, t('ADD_PROMOTION_ENTERPRISE', 'Add promotion enterprise')), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
@@ -138,6 +157,7 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     businessesList: businessesList,
     paymethodsState: paymethodsState,
     promotion: selectedPromotion,
+    promotionId: curPromotionId,
     promotionsList: promotionListState.promotions,
     handleSuccessUpdatePromotions: handleSuccessUpdatePromotions,
     handleSuccessAddPromotion: handleSuccessAddPromotion,

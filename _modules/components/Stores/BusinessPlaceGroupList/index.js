@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessPlaceGroupListUI = exports.BusinessPlaceGroupList = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _styles = require("../../../styles");
@@ -33,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
-  var _placeGroupList$place, _placeGroupList$place2;
+  var _placeGroupList$place2, _placeGroupList$place3;
   var placeGroupList = props.placeGroupList,
     setIsExtendExtraOpen = props.setIsExtendExtraOpen,
     business = props.business,
@@ -43,6 +44,8 @@ var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
     handleChangeEnabled = props.handleChangeEnabled,
     handleMultiChangeEnabled = props.handleMultiChangeEnabled,
     getMultiCheckStatus = props.getMultiCheckStatus;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -65,19 +68,41 @@ var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
     setOpenDetail(false);
     setSelectedPlace(null);
     setIsExtendExtraOpen(false);
+    var businessId = query.get('id');
+    var section = query.get('section');
+    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section));
   };
   var handleUpdateSelectedPlaceGroup = function handleUpdateSelectedPlaceGroup(placeGroup) {
     setSelectedPlace(placeGroup);
   };
-  var handlePlaceClick = function handlePlaceClick(e, placeGroup) {
-    if (e.target.closest('.check-box')) return;
+  var handlePlaceClick = function handlePlaceClick(e, placeGroup, isInitialRender) {
+    var _e$target;
+    if (e !== null && e !== void 0 && (_e$target = e.target) !== null && _e$target !== void 0 && _e$target.closest('.check-box')) return;
     handleOpenDetail(placeGroup);
+    if (!isInitialRender) {
+      var businessId = query.get('id');
+      var section = query.get('section');
+      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&place_group=").concat(placeGroup.id));
+    }
   };
   var handleCheckBoxChange = function handleCheckBoxChange(placeGroup) {
     handleChangeEnabled(placeGroup === null || placeGroup === void 0 ? void 0 : placeGroup.id, {
       enabled: !(placeGroup !== null && placeGroup !== void 0 && placeGroup.enabled)
     });
   };
+  (0, _react.useEffect)(function () {
+    if (placeGroupList !== null && placeGroupList !== void 0 && placeGroupList.loading) return;
+    var placeGroupId = query.get('place_group');
+    if (placeGroupId) {
+      var _placeGroupList$place;
+      var initPlaceGroup = placeGroupList === null || placeGroupList === void 0 ? void 0 : (_placeGroupList$place = placeGroupList.placeGroups) === null || _placeGroupList$place === void 0 ? void 0 : _placeGroupList$place.find(function (placeGroup) {
+        return placeGroup.id === Number(placeGroupId);
+      });
+      if (initPlaceGroup) {
+        handlePlaceClick(null, initPlaceGroup, true);
+      }
+    }
+  }, [placeGroupList === null || placeGroupList === void 0 ? void 0 : placeGroupList.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.PlaceContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PLACES', 'Places')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
@@ -96,14 +121,14 @@ var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
       width: 16,
       height: 16
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.Content, null, (placeGroupList === null || placeGroupList === void 0 ? void 0 : (_placeGroupList$place = placeGroupList.placeGroups) === null || _placeGroupList$place === void 0 ? void 0 : _placeGroupList$place.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.TableHead, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.Content, null, (placeGroupList === null || placeGroupList === void 0 ? void 0 : (_placeGroupList$place2 = placeGroupList.placeGroups) === null || _placeGroupList$place2 === void 0 ? void 0 : _placeGroupList$place2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.TableHead, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "check-box",
     onClick: function onClick() {
       return handleMultiChangeEnabled();
     }
   }, getMultiCheckStatus() ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", null, t('PLACES', 'Places')))), placeGroupList === null || placeGroupList === void 0 ? void 0 : (_placeGroupList$place2 = placeGroupList.placeGroups) === null || _placeGroupList$place2 === void 0 ? void 0 : _placeGroupList$place2.map(function (placeGroup, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", null, t('PLACES', 'Places')))), placeGroupList === null || placeGroupList === void 0 ? void 0 : (_placeGroupList$place3 = placeGroupList.placeGroups) === null || _placeGroupList$place3 === void 0 ? void 0 : _placeGroupList$place3.map(function (placeGroup, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PlaceItemContainer, {
       key: i,
       active: (selectedPlace === null || selectedPlace === void 0 ? void 0 : selectedPlace.id) === (placeGroup === null || placeGroup === void 0 ? void 0 : placeGroup.id),

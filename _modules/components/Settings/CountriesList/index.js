@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.CountriesList = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Shared = require("../../Shared");
@@ -44,6 +45,8 @@ var CountriesList = function CountriesList(props) {
     selectedCountries = props.selectedCountries,
     setSelectedCountries = props.setSelectedCountries,
     handleDeleteCountry = props.handleDeleteCountry;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -106,11 +109,15 @@ var CountriesList = function CountriesList(props) {
     setTotalPages(_totalPages);
     setCurrentCountries(_currentDropdownOptions);
   }, [countriesState, currentPage, countriesPerPage, searchValue]);
-  var handleClickCountry = function handleClickCountry(e, country) {
-    var isInvalid = e.target.closest('.country-checkbox') || e.target.closest('.country-enabled') || e.target.closest('.country-actions');
+  var handleClickCountry = function handleClickCountry(e, country, isInitialRender) {
+    var _e$target, _e$target2, _e$target3;
+    var isInvalid = (e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.country-checkbox')) || (e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.closest('.country-enabled')) || (e === null || e === void 0 ? void 0 : (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.closest('.country-actions'));
     if (isInvalid) return;
     setSelectedCountry(country);
     setOpenDetails(true);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?country=").concat(country.id));
+    }
   };
   var onDeleteCountry = function onDeleteCountry(countryId) {
     setConfirm({
@@ -148,11 +155,28 @@ var CountriesList = function CountriesList(props) {
       setSelectedCountries([].concat(_toConsumableArray(selectedCountries), [country]));
     }
   };
+  var handleCloseDetail = function handleCloseDetail() {
+    setOpenDetails(false);
+    setSelectedCountry(null);
+    history.replace("".concat(location.pathname));
+  };
   (0, _react.useEffect)(function () {
     if (actionState.loading || actionState.error || selectedCountry) return;
     setOpenDetails(false);
     setSelectedCountry(null);
   }, [actionState]);
+  (0, _react.useEffect)(function () {
+    if (countriesState.loading) return;
+    var countryId = query.get('country');
+    if (countryId) {
+      var initCountry = countriesState.countries.find(function (country) {
+        return country.id === Number(countryId);
+      });
+      if (initCountry) {
+        handleClickCountry(null, initCountry, true);
+      }
+    }
+  }, [countriesState.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles2.CountriesContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.CountryWrapper, {
     isHeader: true
   }, /*#__PURE__*/_react.default.createElement(_styles2.CountryName, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
@@ -228,8 +252,7 @@ var CountriesList = function CountriesList(props) {
   })), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     open: openDetails,
     onClose: function onClose() {
-      setOpenDetails(false);
-      setSelectedCountry(null);
+      return handleCloseDetail();
     },
     showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_CountryDetails.CountryDetails, {

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessMenuOptions = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactBootstrap = require("react-bootstrap");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -43,6 +44,8 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     handleDeleteMenu = props.handleDeleteMenu,
     setIsOpenSharedProduct = props.setIsOpenSharedProduct,
     sitesState = props.sitesState;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -106,6 +109,24 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
       setSelectedMenuOption('basic');
     }
   }, [menu]);
+  var handleTabClick = function handleTabClick(settingTab) {
+    setSelectedMenuOption(settingTab);
+    var businessId = query.get('id');
+    var section = query.get('section');
+    var tab = isSelectedSharedMenus ? 'shared_menus' : 'menu';
+    var menu = query.get('menu');
+    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&menu=").concat(menu, "&setting_tab=").concat(settingTab));
+  };
+  (0, _react.useEffect)(function () {
+    if (isSelectedSharedMenus) {} else {
+      var settingTab = query.get('setting_tab');
+      if (settingTab) {
+        handleTabClick(settingTab);
+      } else {
+        handleTabClick('basic');
+      }
+    }
+  }, [isSelectedSharedMenus]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "menu_options"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
@@ -132,17 +153,17 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedMenuOption === 'basic',
     onClick: function onClick() {
-      return setSelectedMenuOption('basic');
+      return handleTabClick('basic');
     }
   }, t('BASIC', 'Basic')), (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedMenuOption === 'channels',
     onClick: function onClick() {
-      return setSelectedMenuOption('channels');
+      return handleTabClick('channels');
     }
   }, t('CHANNELS', 'Channels')), Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedMenuOption === 'share_with',
     onClick: function onClick() {
-      return setSelectedMenuOption('share_with');
+      return handleTabClick('share_with');
     }
   }, t('SHARE_WITH', 'Share with'))))), !isSelectedSharedMenus || Object.keys(menu).length === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessMenuBasicOptions.BusinessMenuBasicOptions, props), selectedMenuOption === 'channels' && /*#__PURE__*/_react.default.createElement(_BusinessMenuChannels.BusinessMenuChannels, props), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
     menu: menu,

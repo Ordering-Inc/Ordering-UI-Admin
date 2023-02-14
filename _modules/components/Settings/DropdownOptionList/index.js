@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DropdownOptionList = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _reactBootstrap = require("react-bootstrap");
@@ -54,6 +55,8 @@ var DropdownOptionList = function DropdownOptionList(props) {
     selectedZoneList = props.selectedZoneList,
     handleCheckboxZoneClick = props.handleCheckboxZoneClick,
     handleAllCheckboxZoneClick = props.handleAllCheckboxZoneClick;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -126,10 +129,19 @@ var DropdownOptionList = function DropdownOptionList(props) {
     }, []);
     setCities(_cities);
   }, [countriesState]);
-  var handleClickZoneDropdown = function handleClickZoneDropdown(e, zone) {
-    var isInvalid = e.target.closest('.zone-checkbox') || e.target.closest('.zone-enabled') || e.target.closest('.zone-actions');
+  var handleClickZoneDropdown = function handleClickZoneDropdown(e, zone, isInitialRender) {
+    var _e$target, _e$target2, _e$target3;
+    var isInvalid = (e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.zone-checkbox')) || (e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.closest('.zone-enabled')) || (e === null || e === void 0 ? void 0 : (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.closest('.zone-actions'));
     if (isInvalid) return;
     handleOpenZoneDropdownDetails(zone);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?zone=").concat(zone.id));
+    }
+  };
+  var handleCloseZoneDetail = function handleCloseZoneDetail() {
+    setSelectedZoneDropdown(null);
+    setOpenZonedropdown(false);
+    history.replace("".concat(location.pathname));
   };
   var onDeleteZone = function onDeleteZone(zoneId) {
     setConfirm({
@@ -143,6 +155,18 @@ var DropdownOptionList = function DropdownOptionList(props) {
       }
     });
   };
+  (0, _react.useEffect)(function () {
+    if (dropdownOptionsState.loading) return;
+    var zoneId = query.get('zone');
+    if (zoneId) {
+      var initZone = dropdownOptionsState.options.find(function (item) {
+        return item.id === Number(zoneId);
+      });
+      if (initZone) {
+        handleClickZoneDropdown(null, initZone, true);
+      }
+    }
+  }, [dropdownOptionsState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DropdownOptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DropdownOptionWrapper, {
     isHeader: true
   }, /*#__PURE__*/_react.default.createElement(_styles2.DropdownOptionName, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
@@ -232,8 +256,7 @@ var DropdownOptionList = function DropdownOptionList(props) {
     defaultSideBarWidth: 550,
     open: openZoneDropdown,
     onClose: function onClose() {
-      setSelectedZoneDropdown(null);
-      setOpenZonedropdown(false);
+      return handleCloseZoneDetail();
     },
     showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_ZoneDropdownDetails.ZoneDropdownDetails, {

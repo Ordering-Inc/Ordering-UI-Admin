@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ReviewProductsListingUI = exports.ReviewProductsListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -37,6 +38,8 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
     searchValue = props.searchValue,
     parentSearchValue = props.parentSearchValue,
     businessId = props.businessId;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -51,22 +54,30 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     curProduct = _useState4[0],
     setCurProduct = _useState4[1];
-  var _useState5 = (0, _react.useState)(1),
+  var _useState5 = (0, _react.useState)(null),
     _useState6 = _slicedToArray(_useState5, 2),
-    currentPage = _useState6[0],
-    setCurrentPage = _useState6[1];
-  var _useState7 = (0, _react.useState)(10),
+    curProductId = _useState6[0],
+    setCurProductId = _useState6[1];
+  var _useState7 = (0, _react.useState)(null),
     _useState8 = _slicedToArray(_useState7, 2),
-    productsPerPage = _useState8[0],
-    setProductsPerPage = _useState8[1];
-  var _useState9 = (0, _react.useState)([]),
+    curCategoryId = _useState8[0],
+    setCurCategoryId = _useState8[1];
+  var _useState9 = (0, _react.useState)(1),
     _useState10 = _slicedToArray(_useState9, 2),
-    currentProducts = _useState10[0],
-    setCurrentProducts = _useState10[1];
-  var _useState11 = (0, _react.useState)(null),
+    currentPage = _useState10[0],
+    setCurrentPage = _useState10[1];
+  var _useState11 = (0, _react.useState)(10),
     _useState12 = _slicedToArray(_useState11, 2),
-    totalPages = _useState12[0],
-    setTotalPages = _useState12[1];
+    productsPerPage = _useState12[0],
+    setProductsPerPage = _useState12[1];
+  var _useState13 = (0, _react.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    currentProducts = _useState14[0],
+    setCurrentProducts = _useState14[1];
+  var _useState15 = (0, _react.useState)(null),
+    _useState16 = _slicedToArray(_useState15, 2),
+    totalPages = _useState16[0],
+    setTotalPages = _useState16[1];
   var handleChangePage = function handleChangePage(page) {
     setCurrentPage(page);
   };
@@ -87,9 +98,25 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
     setTotalPages(_totalPages);
     setCurrentProducts(_currentProducts);
   }, [productState, currentPage, productsPerPage]);
-  var handleOpenReview = function handleOpenReview(product) {
+  var handleOpenReview = function handleOpenReview(product, isInitialRender) {
+    var _product$category;
     setCurProduct(product);
+    setCurProductId(product === null || product === void 0 ? void 0 : product.id);
+    setCurCategoryId(product === null || product === void 0 ? void 0 : (_product$category = product.category) === null || _product$category === void 0 ? void 0 : _product$category.id);
     setOpenReview(true);
+    if (!isInitialRender) {
+      var _product$category2;
+      var tab = query.get('tab');
+      var business = query.get('business');
+      history.replace("".concat(location.pathname, "?tab=").concat(tab, "&business=").concat(business, "&category=").concat(product === null || product === void 0 ? void 0 : (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.id, "&product=").concat(product.id));
+    }
+  };
+  var handleCloseReviewDetails = function handleCloseReviewDetails() {
+    setCurProduct(null);
+    setOpenReview(false);
+    var tab = query.get('tab');
+    var business = query.get('business');
+    history.replace("".concat(location.pathname, "?tab=").concat(tab, "&business=").concat(business));
   };
   (0, _react.useEffect)(function () {
     setCurrentPage(1);
@@ -97,6 +124,15 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
   (0, _react.useEffect)(function () {
     handleChangeSearch(parentSearchValue);
   }, [parentSearchValue]);
+  (0, _react.useEffect)(function () {
+    var category = query.get('category');
+    var product = query.get('product');
+    if (category && product) {
+      setCurCategoryId(Number(category));
+      setCurProductId(Number(product));
+      setOpenReview(true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
   }, t('PRODUCT', 'Product'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
@@ -136,13 +172,13 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
     defaultSideBarWidth: 550,
     open: openReview,
     onClose: function onClose() {
-      setCurProduct(null);
-      setOpenReview(false);
+      return handleCloseReviewDetails();
     }
   }, /*#__PURE__*/_react.default.createElement(_ProductReviewDetails.ProductReviewDetails, {
     businessId: businessId,
     product: curProduct,
-    productId: curProduct === null || curProduct === void 0 ? void 0 : curProduct.id
+    productId: curProductId,
+    categoryId: curCategoryId
   })));
 };
 exports.ReviewProductsListingUI = ReviewProductsListingUI;

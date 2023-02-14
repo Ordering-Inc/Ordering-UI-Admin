@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ProfessionalDetailUI = exports.ProfessionalDetail = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactBootstrap = require("react-bootstrap");
@@ -44,6 +45,8 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
     handleChangeActiveUser = props.handleChangeActiveUser,
     handleGoogleCalendarSync = props.handleGoogleCalendarSync,
     actionStatus = props.actionStatus;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
@@ -120,6 +123,26 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
       });
     }
   }, [actionStatus.error]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setCurrentMenuSelected(tab);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      var section = query.get('section');
+      if (section) {
+        history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
+      } else {
+        history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+      }
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick(currentMenuSelected);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.UserName, null, userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   }) : /*#__PURE__*/_react.default.createElement("span", {
@@ -161,7 +184,7 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
     }
   }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_UserDetailsMenu.UserDetailsMenu, {
     currentMenuSelected: currentMenuSelected,
-    handleChangeMenu: setCurrentMenuSelected,
+    handleChangeMenu: handleTabClick,
     isProfessional: true
   }), !(userState !== null && userState !== void 0 && userState.loading) && (userState === null || userState === void 0 ? void 0 : userState.user) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentMenuSelected === 'profile' && /*#__PURE__*/_react.default.createElement(_UserProfileForm.UserProfileForm, {
     user: userState.user,
