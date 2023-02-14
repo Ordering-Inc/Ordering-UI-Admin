@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, PlaceList as PlaceListController } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Button, IconButton, Switch } from '../../../styles'
@@ -76,6 +77,8 @@ const PlaceListingUI = (props) => {
     handleSeveralDeleteZones
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -135,10 +138,19 @@ const PlaceListingUI = (props) => {
     setOpenCity(true)
   }
 
-  const handleClickCity = (e, city) => {
-    const isInvalid = e.target.closest('.city-checkbox') || e.target.closest('.city-enabled') || e.target.closest('.city-actions')
+  const handleClickCity = (e, city, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.city-checkbox') || e?.target?.closest('.city-enabled') || e?.target?.closest('.city-actions')
     if (isInvalid) return
     handleOpenCityDetails(city)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?country=${city.country_id}&city=${city.id}`)
+    }
+  }
+
+  const handleCloseCityDetail = () => {
+    setSelectedCity(null)
+    setOpenCity(false)
+    history.replace(`${location.pathname}`)
   }
 
   const handleOpenZoneDropdownDetails = (zone) => {
@@ -158,6 +170,29 @@ const PlaceListingUI = (props) => {
     setSearchValue(null)
     cleanChagesState()
   }, [showOption])
+
+  useEffect(() => {
+    if (countriesState.loading) return
+    const countryId = query.get('country')
+    const cityId = query.get('city')
+    if (countryId && cityId) {
+      setShowOption('cities')
+      const initCountry = countriesState.countries.find(country => country.id === Number(countryId))
+      if (initCountry) {
+        const initCity = initCountry.cities.find(city => city.id === Number(cityId))
+        if (initCity) {
+          handleClickCity(null, initCity, true)
+        }
+      }
+    }
+  }, [countriesState.loading])
+
+  useEffect(() => {
+    const zone = query.get('zone')
+    if (zone) {
+      setShowOption('zones')
+    }
+  }, [])
 
   return (
     <>
@@ -430,10 +465,7 @@ const PlaceListingUI = (props) => {
           sidebarId='city-details'
           defaultSideBarWidth={550}
           open={openCity}
-          onClose={() => {
-            setSelectedCity(null)
-            setOpenCity(false)
-          }}
+          onClose={() => handleCloseCityDetail()}
           showExpandIcon
         >
           <CityDetails

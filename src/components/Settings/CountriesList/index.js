@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Pagination, SideBar, Confirm } from '../../Shared'
@@ -34,6 +35,8 @@ export const CountriesList = (props) => {
     handleDeleteCountry
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [currentPage, setCurrentPage] = useState(1)
@@ -70,11 +73,14 @@ export const CountriesList = (props) => {
     setCurrentCountries(_currentDropdownOptions)
   }, [countriesState, currentPage, countriesPerPage, searchValue])
 
-  const handleClickCountry = (e, country) => {
-    const isInvalid = e.target.closest('.country-checkbox') || e.target.closest('.country-enabled') || e.target.closest('.country-actions')
+  const handleClickCountry = (e, country, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.country-checkbox') || e?.target?.closest('.country-enabled') || e?.target?.closest('.country-actions')
     if (isInvalid) return
     setSelectedCountry(country)
     setOpenDetails(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?country=${country.id}`)
+    }
   }
 
   const onDeleteCountry = (countryId) => {
@@ -106,11 +112,28 @@ export const CountriesList = (props) => {
     }
   }
 
+  const handleCloseDetail = () => {
+    setOpenDetails(false)
+    setSelectedCountry(null)
+    history.replace(`${location.pathname}`)
+  }
+
   useEffect(() => {
     if (actionState.loading || actionState.error || selectedCountry) return
     setOpenDetails(false)
     setSelectedCountry(null)
   }, [actionState])
+
+  useEffect(() => {
+    if (countriesState.loading) return
+    const countryId = query.get('country')
+    if (countryId) {
+      const initCountry = countriesState.countries.find(country => country.id === Number(countryId))
+      if (initCountry) {
+        handleClickCountry(null, initCountry, true)
+      }
+    }
+  }, [countriesState.loading])
 
   return (
     <CountriesContainer>
@@ -222,10 +245,7 @@ export const CountriesList = (props) => {
       {openDetails && (
         <SideBar
           open={openDetails}
-          onClose={() => {
-            setOpenDetails(false)
-            setSelectedCountry(null)
-          }}
+          onClose={() => handleCloseDetail()}
           showExpandIcon
         >
           <CountryDetails

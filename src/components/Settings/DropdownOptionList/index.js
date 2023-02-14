@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -46,6 +47,8 @@ export const DropdownOptionList = (props) => {
     handleAllCheckboxZoneClick
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [cities, setCities] = useState([])
@@ -93,10 +96,20 @@ export const DropdownOptionList = (props) => {
     setCities(_cities)
   }, [countriesState])
 
-  const handleClickZoneDropdown = (e, zone) => {
-    const isInvalid = e.target.closest('.zone-checkbox') || e.target.closest('.zone-enabled') || e.target.closest('.zone-actions')
+  const handleClickZoneDropdown = (e, zone, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.zone-checkbox') || e?.target?.closest('.zone-enabled') || e?.target?.closest('.zone-actions')
     if (isInvalid) return
     handleOpenZoneDropdownDetails(zone)
+
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?zone=${zone.id}`)
+    }
+  }
+
+  const handleCloseZoneDetail = () => {
+    setSelectedZoneDropdown(null)
+    setOpenZonedropdown(false)
+    history.replace(`${location.pathname}`)
   }
 
   const onDeleteZone = (zoneId) => {
@@ -109,6 +122,17 @@ export const DropdownOptionList = (props) => {
       }
     })
   }
+
+  useEffect(() => {
+    if (dropdownOptionsState.loading) return
+    const zoneId = query.get('zone')
+    if (zoneId) {
+      const initZone = dropdownOptionsState.options.find(item => item.id === Number(zoneId))
+      if (initZone) {
+        handleClickZoneDropdown(null, initZone, true)
+      }
+    }
+  }, [dropdownOptionsState.loading])
 
   return (
     <>
@@ -236,10 +260,7 @@ export const DropdownOptionList = (props) => {
           sidebarId='city-details'
           defaultSideBarWidth={550}
           open={openZoneDropdown}
-          onClose={() => {
-            setSelectedZoneDropdown(null)
-            setOpenZonedropdown(false)
-          }}
+          onClose={() => handleCloseZoneDetail()}
           showExpandIcon
         >
           <ZoneDropdownDetails
