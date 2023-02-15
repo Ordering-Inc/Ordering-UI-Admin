@@ -28,7 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BannerDetailsUI = function BannerDetailsUI(props) {
-  var _bannerState$banner, _bannerState$banner2, _bannerState$banner3, _bannerState$banner4;
+  var _bannerState$banner, _bannerState$banner2, _bannerState$banner3, _bannerState$banner4, _bannerState$banner5;
   var bannerState = props.bannerState,
     changesState = props.changesState,
     actionState = props.actionState,
@@ -134,6 +134,7 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
       }
     }, option.content);
   })), selectedTab === 'images' && /*#__PURE__*/_react.default.createElement(_BannerImages.BannerImages, _extends({}, props, {
+    bannerId: bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner5 = bannerState.banner) === null || _bannerState$banner5 === void 0 ? void 0 : _bannerState$banner5.id,
     setBannerMoveDistance: setBannerMoveDistance
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
