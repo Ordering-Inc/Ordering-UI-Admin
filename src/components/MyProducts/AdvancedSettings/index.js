@@ -78,7 +78,6 @@ export const AdvancedSettings = (props) => {
   const businessPageList = [
     { name: t('DEFAULT_BACKGROUND_COLOR', 'Default Background color'), type: 'color', path: 'business_view.components.style.backgroundColor' },
     { name: t('PRODUCTS_FROM_PREVIOUS_ORDERS_BLOCK', 'Products from previous orders block'), type: 'hidden', path: 'business_view.components.products_ordered.hidden' },
-    { name: t('FAVORITE_PRODUCTS_BLOCK', 'Favorite products block'), type: 'hidden', path: 'business_view.components.favorite_products.hidden' },
     { name: t('NEAR_BUSINESS_BLOCK', 'Near business block'), type: 'hidden', path: 'business_view.components.near_business' },
     { name: t('ORDER_VIEW_BUTTON', 'Order view button'), type: 'hidden', path: 'business_view.components.order_view_button.hidden' }
   ]
@@ -107,14 +106,12 @@ export const AdvancedSettings = (props) => {
   const cartHeaderList = [
     { name: t('BUSINESS_LOGO', 'Business logo'), type: 'hidden', path: 'header.components.cart.components.business.components.logo.hidden' },
     { name: t('PRODUCT_IMAGE', 'Product image'), type: 'hidden', path: 'header.components.cart.components.products.components.image.hidden' },
-    { name: t('PRODUCT_DESCRIPTION', 'Product description'), type: 'hidden', path: 'header.components.cart.components.products.components.description.hidden' },
     { name: t('DISCOUNT_COUPON', 'Discount coupon'), type: 'hidden', path: 'header.components.cart.components.discount_coupon.hidden' },
     { name: t('COMMENTS', 'Comments'), type: 'hidden', path: 'header.components.cart.components.comments.hidden' }
   ]
 
   const checkoutList = [
-    { name: t('BUSINESS_ADDRESS', 'Business address'), type: 'hidden', path: 'checkout.components.business.components.address.hidden' },
-    { name: t('MAP_OF_BUSINESS_ADDRESS', 'Map of business address'), type: 'hidden', path: 'checkout.components.map.hidden' }
+    { name: t('BUSINESS_ADDRESS', 'Business address'), type: 'hidden', path: 'checkout.components.business.components.address.hidden' }
   ]
 
   const orderBlockList = [
