@@ -27,7 +27,8 @@ const DriversReviewListUI = (props) => {
     usersList,
     paginationProps,
     getUsers,
-    onSearch
+    onSearch,
+    defaultUserTypesSelected
   } = props
 
   const history = useHistory()
@@ -38,6 +39,7 @@ const DriversReviewListUI = (props) => {
   const [openReview, setOpenReview] = useState(false)
   const [curUser, setCurUser] = useState(null)
   const [curUserId, setCurUserId] = useState(null)
+  const headerTitle = defaultUserTypesSelected.length === 1 && defaultUserTypesSelected[0] === 3 ? t('CUSTOMER', 'Customer') : defaultUserTypesSelected[0] === 8 ? t('PROFESSIONAL', 'Professional') : t('DRIVER', 'Driver')
 
   const handleChangePage = (page) => {
     getUsers(page, 10)
@@ -89,7 +91,7 @@ const DriversReviewListUI = (props) => {
       <ReviewsTable>
         <thead>
           <tr>
-            <th><ReviewObject isHeader>{t('DRIVER', 'Driver')}</ReviewObject></th>
+            <th><ReviewObject isHeader>{headerTitle}</ReviewObject></th>
             <th><ReviewMarkerWrapper isHeader>{t('REVIEWS', 'Reviews')}</ReviewMarkerWrapper></th>
           </tr>
         </thead>
