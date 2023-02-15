@@ -22,10 +22,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BannerImages = function BannerImages(props) {
   var aspectRatio = props.aspectRatio,
     bannerItemsState = props.bannerItemsState,
-    handleAddBannerItem = props.handleAddBannerItem,
     handleUpdateBannerItem = props.handleUpdateBannerItem,
     handleDeleteBannerItem = props.handleDeleteBannerItem,
-    setBannerMoveDistance = props.setBannerMoveDistance;
+    setBannerMoveDistance = props.setBannerMoveDistance,
+    handleSuccessBannerItemAdd = props.handleSuccessBannerItemAdd,
+    bannerId = props.bannerId;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -79,9 +80,10 @@ var BannerImages = function BannerImages(props) {
     onClose: function onClose() {
       return handleCloseImageDetail();
     },
+    bannerId: bannerId,
     handleUpdateBannerItem: handleUpdateBannerItem,
-    handleAddBannerItem: handleAddBannerItem,
-    handleDeleteBannerItem: handleDeleteBannerItem
+    handleDeleteBannerItem: handleDeleteBannerItem,
+    handleSuccessBannerItemAdd: handleSuccessBannerItemAdd
   })));
 };
 exports.BannerImages = BannerImages;
