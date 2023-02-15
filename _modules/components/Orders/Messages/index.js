@@ -365,6 +365,10 @@ var MessagesUI = function MessagesUI(props) {
     }
   }, [isChat, order]);
   (0, _react.useEffect)(function () {
+    if (!isChat || !(order !== null && order !== void 0 && order.id) || messages.loading) return;
+    unreadMessageControl();
+  }, [isChat, order === null || order === void 0 ? void 0 : order.id, messages.loading]);
+  (0, _react.useEffect)(function () {
     if (messages.loading) return;
     var _filteredMessages = messages.messages.filter(function (message) {
       if (message.type === 2) {
