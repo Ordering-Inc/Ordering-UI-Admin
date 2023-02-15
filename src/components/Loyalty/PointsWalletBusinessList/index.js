@@ -213,7 +213,7 @@ const PointsWalletBusinessListUI = (props) => {
               <tr>
                 <th className='business-info'>{t('BUSINESSES', 'Businesses')}</th>
                 <th>{t('ORDERS_BOX_STATUS_HEADER', 'Status')}</th>
-                <th>{t('Redeeem', 'Redeeem')}</th>
+                <th>{t('REDEEEM', 'Redeeem')}</th>
                 <th>{t('ACCUMULATION', 'Accumulation')}</th>
                 <th />
               </tr>

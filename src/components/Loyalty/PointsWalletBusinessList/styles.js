@@ -37,9 +37,12 @@ export const BusinessTable = styled.table`
     border-bottom: 1px solid ${props => props.theme.colors.secundaryLight};
     tr{
       th {
-        padding: 12px 0px;
+        padding: 12px 5px;
         :not(.business-info) {
           text-align: center;
+        }
+        &:first-child, &:last-child {
+          padding: 12px 0px;
         }
       }
     }
@@ -78,11 +81,16 @@ export const BusinessInfoWrapper = styled.div`
       margin-right: 12px;
       margin-left: 0;
     `}
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 `
 
 export const WrapperImage = styled.div`
   max-width: 38px;
+  min-width: 38px;
   max-height: 38px;
   height: 38px;
   width: 38px;
