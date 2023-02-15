@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { List as MenuIcon, BarChartSteps, Gift, Wallet as Cash } from 'react-bootstrap-icons'
+import { List as MenuIcon, BarChartSteps, Gift, Wallet as Cash, InfoCircle } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
@@ -15,7 +15,9 @@ import {
   LoyaltyListContainer,
   LoyaltyItemWrapper,
   IconWrapper,
-  LoyaltyItemContent
+  LoyaltyItemContent,
+  InfoWrapper,
+  InfoContent
 } from './styles'
 
 export const RewardsPrograms = () => {
@@ -81,6 +83,16 @@ export const RewardsPrograms = () => {
             </IconButton>
           )}
           <h1>{t('LOYALTY_AUTOMATION', 'Loyalty automation')}</h1>
+          <InfoWrapper>
+            <IconButton
+              color='primary'
+            >
+              <InfoCircle />
+            </IconButton>
+            <InfoContent>
+              {t('LOYALTY_AUTOMATION_DESCRIPTION', 'Configure the available loyalty plans to allow your users to receive rewards per order in your website and app. This can be done in general and customized per business.')}
+            </InfoContent>
+          </InfoWrapper>
         </HeaderTitleContainer>
 
         <LoyaltyListContainer>
