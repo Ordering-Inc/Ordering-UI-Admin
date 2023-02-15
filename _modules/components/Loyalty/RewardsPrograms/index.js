@@ -104,7 +104,9 @@ var RewardsPrograms = function RewardsPrograms() {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('LOYALTY_AUTOMATION', 'Loyalty automation'))), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyListContainer, null, walletList.map(function (item) {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('LOYALTY_AUTOMATION', 'Loyalty automation')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('LOYALTY_AUTOMATION_DESCRIPTION', 'Configure the available loyalty plans to allow your users to receive rewards per order in your website and app. This can be done in general and customized per business.')))), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyListContainer, null, walletList.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
       key: item.key,
       onClick: function onClick() {

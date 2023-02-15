@@ -34,6 +34,13 @@ var UsersExportCSVUI = function UsersExportCSVUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     popoverOpen = _useState2[0],
     setPopoverOpen = _useState2[1];
+  var _useState3 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    alertState = _useState4[0],
+    setAlertState = _useState4[1];
 
   // const handleExportAll = () => {
   //   setPopoverOpen(false)
@@ -58,6 +65,13 @@ var UsersExportCSVUI = function UsersExportCSVUI(props) {
       return document.removeEventListener('click', closePopover);
     };
   }, [popoverOpen]);
+  (0, _react.useEffect)(function () {
+    if (!actionStatus.result) return;
+    setAlertState({
+      open: true,
+      content: actionStatus.result
+    });
+  }, [actionStatus.result]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ExportContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "5px",
     color: "secundary",
@@ -67,7 +81,25 @@ var UsersExportCSVUI = function UsersExportCSVUI(props) {
     }
   }, t('CSV', 'CSV'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, null)), actionStatus.loading && /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, {
     primary: true
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('PROFILE', 'Profile'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  }));
 };
 var UsersExportCSV = function UsersExportCSV(props) {
   var ExportCSVControlProps = _objectSpread(_objectSpread({}, props), {}, {

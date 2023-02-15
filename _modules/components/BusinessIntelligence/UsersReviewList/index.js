@@ -36,7 +36,8 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     usersList = props.usersList,
     paginationProps = props.paginationProps,
     getUsers = props.getUsers,
-    onSearch = props.onSearch;
+    onSearch = props.onSearch,
+    defaultUserTypesSelected = props.defaultUserTypesSelected;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -59,6 +60,7 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     curUserId = _useState6[0],
     setCurUserId = _useState6[1];
+  var headerTitle = defaultUserTypesSelected.length === 1 && defaultUserTypesSelected[0] === 3 ? t('CUSTOMER', 'Customer') : defaultUserTypesSelected[0] === 8 ? t('PROFESSIONAL', 'Professional') : t('DRIVER', 'Driver');
   var handleChangePage = function handleChangePage(page) {
     getUsers(page, 10);
   };
@@ -100,7 +102,7 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
-  }, t('DRIVER', 'Driver'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
+  }, headerTitle)), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
     isHeader: true
   }, t('REVIEWS', 'Reviews'))))), usersList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewTbody, {
