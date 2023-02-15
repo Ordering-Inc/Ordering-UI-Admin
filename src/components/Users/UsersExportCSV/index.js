@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, UsersExportCSV as UsersExportCSVController } from 'ordering-components-admin'
 import { Download as DownloadIcon } from 'react-bootstrap-icons'
-import { SpinnerLoader } from '../../Shared'
+import { SpinnerLoader, Alert } from '../../Shared'
 import { Button } from '../../../styles'
 import {
   ExportContainer
@@ -14,6 +14,7 @@ const UsersExportCSVUI = (props) => {
   } = props
   const [, t] = useLanguage()
   const [popoverOpen, setPopoverOpen] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   // const handleExportAll = () => {
   //   setPopoverOpen(false)
@@ -38,6 +39,14 @@ const UsersExportCSVUI = (props) => {
     document.addEventListener('click', closePopover)
     return () => document.removeEventListener('click', closePopover)
   }, [popoverOpen])
+
+  useEffect(() => {
+    if (!actionStatus.result) return
+    setAlertState({
+      open: true,
+      content: actionStatus.result
+    })
+  }, [actionStatus.result])
 
   return (
     <>
@@ -66,6 +75,15 @@ const UsersExportCSVUI = (props) => {
           <SpinnerLoader primary />
         )}
       </ExportContainer>
+      <Alert
+        title={t('PROFILE', 'Profile')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
