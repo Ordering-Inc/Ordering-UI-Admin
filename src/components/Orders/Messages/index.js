@@ -347,6 +347,11 @@ export const MessagesUI = (props) => {
   }, [isChat, order])
 
   useEffect(() => {
+    if (!isChat || !order?.id || messages.loading) return
+    unreadMessageControl()
+  }, [isChat, order?.id, messages.loading])
+
+  useEffect(() => {
     if (messages.loading) return
     const _filteredMessages = messages.messages.filter(message => {
       if (message.type === 2) {
