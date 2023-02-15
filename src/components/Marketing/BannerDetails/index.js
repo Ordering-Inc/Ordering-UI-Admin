@@ -130,6 +130,7 @@ const BannerDetailsUI = (props) => {
           {selectedTab === 'images' && (
             <BannerImages
               {...props}
+              bannerId={bannerState?.banner?.id}
               setBannerMoveDistance={setBannerMoveDistance}
             />
           )}
