@@ -150,10 +150,6 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'business_view.components.products_ordered.hidden'
   }, {
-    name: t('FAVORITE_PRODUCTS_BLOCK', 'Favorite products block'),
-    type: 'hidden',
-    path: 'business_view.components.favorite_products.hidden'
-  }, {
     name: t('NEAR_BUSINESS_BLOCK', 'Near business block'),
     type: 'hidden',
     path: 'business_view.components.near_business'
@@ -222,10 +218,6 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'header.components.cart.components.products.components.image.hidden'
   }, {
-    name: t('PRODUCT_DESCRIPTION', 'Product description'),
-    type: 'hidden',
-    path: 'header.components.cart.components.products.components.description.hidden'
-  }, {
     name: t('DISCOUNT_COUPON', 'Discount coupon'),
     type: 'hidden',
     path: 'header.components.cart.components.discount_coupon.hidden'
@@ -238,10 +230,6 @@ var AdvancedSettings = function AdvancedSettings(props) {
     name: t('BUSINESS_ADDRESS', 'Business address'),
     type: 'hidden',
     path: 'checkout.components.business.components.address.hidden'
-  }, {
-    name: t('MAP_OF_BUSINESS_ADDRESS', 'Map of business address'),
-    type: 'hidden',
-    path: 'checkout.components.map.hidden'
   }];
   var orderBlockList = [{
     name: t('DATE', 'Date'),

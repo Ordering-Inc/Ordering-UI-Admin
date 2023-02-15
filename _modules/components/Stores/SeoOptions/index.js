@@ -61,10 +61,6 @@ var SeoOptions = function SeoOptions(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     cropState = _useState4[0],
     setCropState = _useState4[1];
-  var _useState5 = (0, _react.useState)(false),
-    _useState6 = _slicedToArray(_useState5, 2),
-    isSameInfo = _useState6[0],
-    setIsSameInfo = _useState6[1];
   var titleRef = (0, _react.useRef)(null);
   var descriptionRef = (0, _react.useRef)(null);
   var handleClickImage = function handleClickImage() {
@@ -142,8 +138,7 @@ var SeoOptions = function SeoOptions(props) {
       content: []
     });
   };
-  (0, _react.useEffect)(function () {
-    if (!isSameInfo) return;
+  var handleUseSameInfo = function handleUseSameInfo() {
     if (isBusinessSeo) {
       setFormState(_objectSpread(_objectSpread({}, formState), {}, {
         changes: {
@@ -159,12 +154,11 @@ var SeoOptions = function SeoOptions(props) {
     }
     titleRef.current.value = data === null || data === void 0 ? void 0 : data.name;
     descriptionRef.current.value = data === null || data === void 0 ? void 0 : data.description;
-  }, [isSameInfo, isBusinessSeo, data]);
+  };
   (0, _react.useEffect)(function () {
     var _data$seo_title, _data$seo_description;
     titleRef.current.value = (_data$seo_title = data === null || data === void 0 ? void 0 : data.seo_title) !== null && _data$seo_title !== void 0 ? _data$seo_title : '';
     descriptionRef.current.value = (_data$seo_description = data === null || data === void 0 ? void 0 : data.seo_description) !== null && _data$seo_description !== void 0 ? _data$seo_description : '';
-    if ((data === null || data === void 0 ? void 0 : data.name) === (data === null || data === void 0 ? void 0 : data.seo_title) && ((data === null || data === void 0 ? void 0 : data.description) === (data === null || data === void 0 ? void 0 : data.seo_description) || !(data !== null && data !== void 0 && data.description) && !(data !== null && data !== void 0 && data.seo_description))) setIsSameInfo(true);
   }, [data]);
   (0, _react.useEffect)(function () {
     return function () {
@@ -202,12 +196,9 @@ var SeoOptions = function SeoOptions(props) {
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
     isImage: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.seo_image) || data.seo_image
-  }, /*#__PURE__*/_react.default.createElement(_styles2.CameraWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP', 'Drag and Drop')))))))), /*#__PURE__*/_react.default.createElement(_styles2.UseSameInfoWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: isSameInfo || false,
-    onChange: function onChange(val) {
-      return setIsSameInfo(val);
-    }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperShortDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEO_TITLE', 'SEO Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.CameraWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP', 'Drag and Drop')))))))), /*#__PURE__*/_react.default.createElement(_styles2.UseSameInfoWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+    onClick: handleUseSameInfo
+  }, t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information'))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperShortDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEO_TITLE', 'SEO Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "seo_title",
     ref: titleRef,
     defaultValue: formState !== null && formState !== void 0 && (_formState$result2 = formState.result) !== null && _formState$result2 !== void 0 && _formState$result2.result ? formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.seo_title : (_ref = (_formState$changes$se = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.seo_title) !== null && _formState$changes$se !== void 0 ? _formState$changes$se : data === null || data === void 0 ? void 0 : data.seo_title) !== null && _ref !== void 0 ? _ref : '',
