@@ -187,7 +187,7 @@ const BannerImageDetailsUI = (props) => {
         disabled={businessList.loading || imageState.loading}
         onClick={handleSaveImage}
       >
-        {t('SAVE', 'Save')}
+        {props.image ? t('SAVE', 'Save') : t('ADD', 'Add')}
       </Button>
 
       <Alert
