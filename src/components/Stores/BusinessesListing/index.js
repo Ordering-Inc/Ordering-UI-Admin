@@ -51,7 +51,8 @@ const BusinessesListingUI = (props) => {
     countriesState,
     handleChangeFilterValues,
     filterValues,
-    businessTypeSelected
+    businessTypeSelected,
+    inActiveBusinesses
   } = props
 
   const history = useHistory()
@@ -80,8 +81,9 @@ const BusinessesListingUI = (props) => {
       !searchValue &&
       Object.keys(filterValues).length === 0 &&
       selectedBusinessActiveState &&
-      !businessTypeSelected
-  }, [businessList?.loading, businessList?.businesses, pagination, searchValue, filterValues, selectedBusinessActiveState, businessTypeSelected])
+      !businessTypeSelected &&
+      inActiveBusinesses?.length === 0
+  }, [businessList?.loading, businessList?.businesses, pagination, searchValue, filterValues, selectedBusinessActiveState, businessTypeSelected, inActiveBusinesses])
 
   const handleGotToAdd = () => {
     if (countriesState?.enabled) setIsAdd(true)
