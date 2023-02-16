@@ -201,14 +201,14 @@ export const BusinessFrontLayout = (props) => {
           )}
         </LayoutContentWrappper>
         <SendCustomLayoutWrapper>
-          <p>{t('', 'Would you like another kind of layout for your business menu? Send us your idea! We will take at it and help you make your idea a reality.')}</p>
+          <p>{t('SEND_CUSTOM_LAYOUT_IDEA_DESCRIPTION', 'Would you like another kind of layout for your business menu? Send us your idea! We will take at it and help you make your idea a reality.')}</p>
           <Button
             outline
             borderRadius='8px'
             color='primary'
             onClick={() => window.open('https://www.ordering.co/quote-project-request', '_blank')}
           >
-            {t('', 'Send custom layout idea')}
+            {t('SEND_CUSTOM_LAYOUT_IDEA', 'Send custom layout idea')}
           </Button>
         </SendCustomLayoutWrapper>
       </BusinessFrontLayoutContainer>
