@@ -64,7 +64,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     countriesState = props.countriesState,
     handleChangeFilterValues = props.handleChangeFilterValues,
     filterValues = props.filterValues,
-    businessTypeSelected = props.businessTypeSelected;
+    businessTypeSelected = props.businessTypeSelected,
+    inActiveBusinesses = props.inActiveBusinesses;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
@@ -120,8 +121,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setIsAdd = _useState22[1];
   var noBusinesses = (0, _react.useMemo)(function () {
     var _businessList$busines;
-    return !(businessList !== null && businessList !== void 0 && businessList.loading) && (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) === 0 && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 && !searchValue && Object.keys(filterValues).length === 0 && selectedBusinessActiveState && !businessTypeSelected;
-  }, [businessList === null || businessList === void 0 ? void 0 : businessList.loading, businessList === null || businessList === void 0 ? void 0 : businessList.businesses, pagination, searchValue, filterValues, selectedBusinessActiveState, businessTypeSelected]);
+    return !(businessList !== null && businessList !== void 0 && businessList.loading) && (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) === 0 && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 && !searchValue && Object.keys(filterValues).length === 0 && selectedBusinessActiveState && !businessTypeSelected && (inActiveBusinesses === null || inActiveBusinesses === void 0 ? void 0 : inActiveBusinesses.length) === 0;
+  }, [businessList === null || businessList === void 0 ? void 0 : businessList.loading, businessList === null || businessList === void 0 ? void 0 : businessList.businesses, pagination, searchValue, filterValues, selectedBusinessActiveState, businessTypeSelected, inActiveBusinesses]);
   var handleGotToAdd = function handleGotToAdd() {
     if (countriesState !== null && countriesState !== void 0 && countriesState.enabled) setIsAdd(true);else events.emit('go_to_page', {
       page: 'business_add'
