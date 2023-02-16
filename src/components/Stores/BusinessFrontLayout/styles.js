@@ -414,3 +414,14 @@ export const ActionButtonWrapper = styled.div`
     margin: 20px;
   }
 `
+
+export const SendCustomLayoutWrapper = styled.div`
+  margin: 20px 10px;
+  p {
+    font-size: 14px;
+  }
+  button {
+    height: 44px;
+    width: 100%;
+  }
+`
