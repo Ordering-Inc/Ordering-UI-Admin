@@ -8,7 +8,6 @@ var _react = _interopRequireDefault(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
 var _styles = require("../../../styles");
-var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -23,34 +22,28 @@ var GeneralInstagram = function GeneralInstagram(_ref) {
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
-  return /*#__PURE__*/_react.default.createElement(_styles2.InstagramGeneralContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_DESC', 'Lorem ipsum dolor sit amet consectetur. Vitae odio aliquam adipiscing vitae. Nulla sed integer congue gravida lobortis tristique condimentum fusce tincidunt.')), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 1"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP1_DESC', 'Add your business’s Instagram username here:')), /*#__PURE__*/_react.default.createElement(_styles2.CopyInputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    placeholder: t('USERNAME', 'Username')
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 2"), /*#__PURE__*/_react.default.createElement("p", {
+  return /*#__PURE__*/_react.default.createElement(_styles2.InstagramGeneralContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_DESC', 'Lorem ipsum dolor sit amet consectetur. Vitae odio aliquam adipiscing vitae. Nulla sed integer congue gravida lobortis tristique condimentum fusce tincidunt.')), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 1"), /*#__PURE__*/_react.default.createElement("p", {
     dangerouslySetInnerHTML: {
       __html: t('BUSINESS_INSTAGRAM_GENERAL_STEP2_DESC', 'Open your Instagram profile and tap on <strong>Edit Profile.<strong>')
     }
   }), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.instagramGeneralStep2,
     alt: ""
-  })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 3"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP3_DESC', 'On the Edit Profile screen, click on the Links option.')), /*#__PURE__*/_react.default.createElement("img", {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 2"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP3_DESC', 'On the Edit Profile screen, click on the Links option.')), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.instagramGeneralStep3,
     alt: ""
-  })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 4"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP4_DESC', 'Add your business link, or if you already have a link, you can edit it; click on that option.')), /*#__PURE__*/_react.default.createElement("img", {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 3"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP4_DESC', 'Add your business link, or if you already have a link, you can edit it; click on that option.')), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.instagramGeneralStep4,
     alt: ""
-  })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 5"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP5_DESC', 'Just add this link to the website field:')), /*#__PURE__*/_react.default.createElement(_styles2.CopyInputWrapper, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 4"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP5_DESC', 'Just add this link to the website field:')), /*#__PURE__*/_react.default.createElement(_styles2.CopyInputWrapper, {
     isBottom: true
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    defaultValue: "https://".concat(businessSlug, ".com/"),
+    defaultValue: "https://yourbusinessname.com/store/storename",
     disabled: true
-  }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    onClick: function onClick() {
-      return navigator.clipboard.writeText("https://".concat(businessSlug, ".com/"));
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Files, null))), /*#__PURE__*/_react.default.createElement("img", {
+  })), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.instagramGeneralStep5,
     alt: ""
-  })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 6"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP6_DESC', 'Done; it will appear this way on your Instagram account.')), /*#__PURE__*/_react.default.createElement("img", {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 5"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP6_DESC', 'Done; it will appear this way on your Instagram account.')), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.instagramGeneralStep6,
     alt: ""
   })));

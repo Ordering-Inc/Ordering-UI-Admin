@@ -8,7 +8,6 @@ var _react = _interopRequireDefault(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
 var _styles = require("../../../styles");
-var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -24,13 +23,9 @@ var FacebookProfile = function FacebookProfile(_ref) {
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_styles2.FacebookProfileContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_FACEBOOK_PROFILE_DESC', 'Lorem ipsum dolor sit amet consectetur. Vitae odio aliquam adipiscing vitae. Nulla sed integer congue gravida lobortis tristique condimentum fusce tincidunt.')), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 1"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_FACEBOOK_PROFILE_STEP1_DESC', 'Copy this link below. It’s your unique Ordering link for facebook.')), /*#__PURE__*/_react.default.createElement(_styles2.CopyInputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    defaultValue: "https://".concat(businessSlug, ".com/"),
+    defaultValue: "https://yourbusinessname.com/store/storename",
     disabled: true
-  }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    onClick: function onClick() {
-      return navigator.clipboard.writeText("https://".concat(businessSlug, ".com/"));
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Files, null)))), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 2"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_FACEBOOK_PROFILE_STEP2_DESC', 'In your business profile, click on the 3 points button on the right side of the screen and look for the option: Edit Action Button.')), /*#__PURE__*/_react.default.createElement("img", {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 2"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_FACEBOOK_PROFILE_STEP2_DESC', 'In your business profile, click on the 3 points button on the right side of the screen and look for the option: Edit Action Button.')), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.facebookProfileStep2,
     alt: ""
   })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 3"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_FACEBOOK_PROFILE_STEP3_DESC', 'Please choose the option that best suits you from the following list; this time, we will select: Start Order.')), /*#__PURE__*/_react.default.createElement("img", {

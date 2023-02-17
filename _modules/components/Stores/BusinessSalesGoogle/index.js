@@ -75,13 +75,9 @@ var BusinessSalesGoogle = function BusinessSalesGoogle(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 3"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_GOOGLE_STEP3_DESC', 'Scroll down and find Order ahead links and Menu link fields. Paste the link below.')), /*#__PURE__*/_react.default.createElement(_styles2.CopyInputWrapper, {
     isBottom: true
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    defaultValue: "https://".concat(businessSlug, ".com/"),
+    defaultValue: "https://yourbusinessname.com/store/storename",
     disabled: true
-  }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    onClick: function onClick() {
-      return navigator.clipboard.writeText("https://".concat(businessSlug, ".com/"));
-    }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Files, null))), /*#__PURE__*/_react.default.createElement("img", {
+  })), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.googleStep3,
     alt: ""
   })));

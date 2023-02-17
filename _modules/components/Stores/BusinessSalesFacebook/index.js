@@ -7,7 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.BusinessSalesFacebook = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
-var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("./styles");
 var _styles2 = require("../../../styles");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -27,9 +26,8 @@ var BusinessSalesFacebook = function BusinessSalesFacebook(props) {
     businessSlug = props.businessSlug;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
-  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
+  // const [, t] = useLanguage()
+
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isMenuOpen = _useState2[0],
@@ -38,13 +36,12 @@ var BusinessSalesFacebook = function BusinessSalesFacebook(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     selectedTab = _useState4[0],
     setSelectedTab = _useState4[1];
-  var tabList = [{
-    key: 'profile',
-    title: t('PROFILE', 'Profile')
-  }, {
-    key: 'post',
-    title: t('POST', 'Post')
-  }];
+
+  // const tabList = [
+  //   { key: 'profile', title: t('PROFILE', 'Profile') },
+  //   { key: 'post', title: t('POST', 'Post') }
+  // ]
+
   var actionSidebar = function actionSidebar(value) {
     if (!value) {
       onClose && onClose();
@@ -73,15 +70,7 @@ var BusinessSalesFacebook = function BusinessSalesFacebook(props) {
   }), /*#__PURE__*/_react.default.createElement("h2", null, socialItem.name)), /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
     onClick: onClose,
     color: "black"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), /*#__PURE__*/_react.default.createElement(_styles.Tabs, null, tabList.map(function (item) {
-    return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
-      key: item.key,
-      onClick: function onClick() {
-        return setSelectedTab(item.key);
-      },
-      active: selectedTab === item.key
-    }, item.title);
-  })), selectedTab === 'profile' && /*#__PURE__*/_react.default.createElement(_FacebookProfile.FacebookProfile, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), selectedTab === 'profile' && /*#__PURE__*/_react.default.createElement(_FacebookProfile.FacebookProfile, {
     businessSlug: businessSlug
   }), selectedTab === 'post' && /*#__PURE__*/_react.default.createElement(_FacebookPost.FacebookPost, null));
 };
