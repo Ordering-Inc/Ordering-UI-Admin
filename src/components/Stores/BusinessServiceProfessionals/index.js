@@ -200,6 +200,7 @@ const BusinessServiceProfessionalsUI = (props) => {
           {openDetail && (
             <Modal
               width='760px'
+              hideCloseDefault
               open={openDetail}
               onClose={() => handleCloseDetail()}
             >
