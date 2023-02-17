@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { useLanguage } from 'ordering-components-admin'
+// import { useLanguage } from 'ordering-components-admin'
 import {
   Container,
   Header,
   LeftHeader,
-  Tabs,
-  Tab
+  // Tabs,
+  // Tab
 } from './styles'
 import { IconButton } from '../../../styles'
 import { XLg } from 'react-bootstrap-icons'
@@ -17,15 +17,15 @@ export const BusinessSalesFacebook = (props) => {
   const { onClose, socialItem, businessSlug } = props
 
   const { width } = useWindowSize()
-  const [, t] = useLanguage()
+  // const [, t] = useLanguage()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedTab, setSelectedTab] = useState('profile')
 
-  const tabList = [
-    { key: 'profile', title: t('PROFILE', 'Profile') },
-    { key: 'post', title: t('POST', 'Post') }
-  ]
+  // const tabList = [
+  //   { key: 'profile', title: t('PROFILE', 'Profile') },
+  //   { key: 'post', title: t('POST', 'Post') }
+  // ]
 
   const actionSidebar = (value) => {
     if (!value) {
@@ -63,7 +63,7 @@ export const BusinessSalesFacebook = (props) => {
           <XLg />
         </IconButton>
       </Header>
-      <Tabs>
+      {/* <Tabs>
         {tabList.map(item => (
           <Tab
             key={item.key}
@@ -73,7 +73,7 @@ export const BusinessSalesFacebook = (props) => {
             {item.title}
           </Tab>
         ))}
-      </Tabs>
+      </Tabs> */}
       {selectedTab === 'profile' && <FacebookProfile businessSlug={businessSlug} />}
       {selectedTab === 'post' && <FacebookPost />}
     </Container>

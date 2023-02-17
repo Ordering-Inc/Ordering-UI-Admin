@@ -1,8 +1,7 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
-import { IconButton, Input } from '../../../styles'
-import { Files } from 'react-bootstrap-icons'
+import { Input } from '../../../styles'
 import {
   FacebookProfileContainer,
   Step,
@@ -21,12 +20,9 @@ export const FacebookProfile = ({ businessSlug }) => {
         <p>{t('BUSINESS_FACEBOOK_PROFILE_STEP1_DESC', 'Copy this link below. It’s your unique Ordering link for facebook.')}</p>
         <CopyInputWrapper>
           <Input
-            defaultValue={`https://${businessSlug}.com/`}
+            defaultValue='https://yourbusinessname.com/store/storename'
             disabled
           />
-          <IconButton onClick={() => navigator.clipboard.writeText(`https://${businessSlug}.com/`)}>
-            <Files />
-          </IconButton>
         </CopyInputWrapper>
       </Step>
       <Step>

@@ -77,12 +77,9 @@ export const BusinessSalesGoogle = (props) => {
         <p>{t('BUSINESS_GOOGLE_STEP3_DESC', 'Scroll down and find Order ahead links and Menu link fields. Paste the link below.')}</p>
         <CopyInputWrapper isBottom>
           <Input
-            defaultValue={`https://${businessSlug}.com/`}
+            defaultValue='https://yourbusinessname.com/store/storename'
             disabled
           />
-          <IconButton onClick={() => navigator.clipboard.writeText(`https://${businessSlug}.com/`)}>
-            <Files />
-          </IconButton>
         </CopyInputWrapper>
         <img src={theme.images.salesChannels.googleStep3} alt='' />
       </Step>
