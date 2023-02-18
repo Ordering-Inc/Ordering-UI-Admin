@@ -116,12 +116,10 @@ export const PaymentOption = (props) => {
   }, [businessPaymethod?.id, businessPaymethod?.sandbox, businessPaymethod?.allowed_order_types])
 
   useEffect(() => {
-    if (changesState?.allowed_order_types) {
-      setLocalState({ allowed_order_types: changesState?.allowed_order_types })
-    }
-    if (changesState?.sites) {
-      setLocalState({ sites: changesState?.sites })
-    }
+    const changes = {}
+    if (changesState?.allowed_order_types) changes.allowed_order_types = changesState?.allowed_order_types
+    if (changesState?.sites) changes.sites = changesState?.sites
+    if (Object.keys(changes).length > 0) setLocalState(JSON.parse(JSON.stringify(changes)))
   }, [changesState?.allowed_order_types, changesState?.sites])
 
   const handleTabClick = (tab, isInitialRender) => {
