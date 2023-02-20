@@ -44,7 +44,7 @@ export const PaymentOption = (props) => {
   const [paymentTabs, setPaymentTabs] = useState(sitesState?.sites?.length > 0 ? 0 : 1)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [localState, setLocalState] = useState({ allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites })
-  const filteredOptions = localState?.sites ?? businessPaymethod?.sites.filter(a => sitesState?.sites?.find(b => a.id === b.id))
+  const filteredOptions = localState?.sites ?? businessPaymethod?.sites?.filter(a => sitesState?.sites?.find(b => a.id === b.id))
   const [all, setAll] = useState(!filteredOptions?.length)
 
   const setPaymethodInfo = (values) => {
@@ -116,12 +116,10 @@ export const PaymentOption = (props) => {
   }, [businessPaymethod?.id, businessPaymethod?.sandbox, businessPaymethod?.allowed_order_types])
 
   useEffect(() => {
-    if (changesState?.allowed_order_types) {
-      setLocalState({ allowed_order_types: changesState?.allowed_order_types })
-    }
-    if (changesState?.sites) {
-      setLocalState({ sites: changesState?.sites })
-    }
+    const changes = {}
+    if (changesState?.allowed_order_types) changes.allowed_order_types = changesState?.allowed_order_types
+    if (changesState?.sites) changes.sites = changesState?.sites
+    if (Object.keys(changes).length > 0) setLocalState(JSON.parse(JSON.stringify(changes)))
   }, [changesState?.allowed_order_types, changesState?.sites])
 
   const handleTabClick = (tab, isInitialRender) => {
