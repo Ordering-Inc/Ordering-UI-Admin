@@ -163,6 +163,7 @@ var BusinessServiceProfessionalsUI = function BusinessServiceProfessionalsUI(pro
     handleDeleteUser: handleDeleteUser
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openDetail && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "760px",
+    hideCloseDefault: true,
     open: openDetail,
     onClose: function onClose() {
       return handleCloseDetail();

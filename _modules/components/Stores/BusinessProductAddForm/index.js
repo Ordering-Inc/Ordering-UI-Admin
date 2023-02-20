@@ -180,6 +180,10 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     });
   };
   var handleChangeSelect = function handleChangeSelect(value) {
+    setCurPreorderTime({
+      hour: '0',
+      minute: '0'
+    });
     if (value === 'custom') {
       setIsCustom(true);
       handleChangeItem({
@@ -187,10 +191,6 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
       });
       return;
     }
-    setCurPreorderTime({
-      hour: '0',
-      minute: '0'
-    });
     setIsCustom(false);
     handleChangeItem({
       duration: value
