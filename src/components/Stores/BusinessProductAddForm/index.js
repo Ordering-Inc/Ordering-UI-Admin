@@ -147,12 +147,12 @@ const BusinessProductAddFormUI = (props) => {
   }
 
   const handleChangeSelect = (value) => {
+    setCurPreorderTime({ hour: '0', minute: '0' })
     if (value === 'custom') {
       setIsCustom(true)
       handleChangeItem({ duration: null })
       return
     }
-    setCurPreorderTime({ hour: '0', minute: '0' })
     setIsCustom(false)
     handleChangeItem({ duration: value })
   }

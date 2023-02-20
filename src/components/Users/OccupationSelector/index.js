@@ -25,7 +25,7 @@ const OccupationSelectorUI = (props) => {
   }
 
   useEffect(() => {
-    if (!occupations.length) return
+    if (!occupations?.length) return
     const _occupationList = occupations.filter(item => item.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())).map(occupation => {
       return {
         value: occupation.id,
