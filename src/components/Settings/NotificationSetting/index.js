@@ -34,6 +34,8 @@ const NotificationSettingUI = (props) => {
     'onesignal_orderingapp_id',
     'onesignal_businessapp_id',
     'onesignal_deliveryapp_id',
+    'onesignal_orderingweb_id',
+    'onesignal_dashboardweb_id',
     'driver_close_distance',
     'notification_toast'
   ]
