@@ -118,7 +118,8 @@ var UsersListingUI = function UsersListingUI(props) {
     searchValue: searchValue,
     onSearch: onSearch,
     handleChangeMultiFilterValues: handleChangeMultiFilterValues,
-    multiFilterValues: multiFilterValues
+    multiFilterValues: multiFilterValues,
+    isManagers: true
   }), /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState

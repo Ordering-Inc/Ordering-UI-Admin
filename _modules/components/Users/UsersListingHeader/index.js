@@ -25,6 +25,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UsersListingHeader = function UsersListingHeader(props) {
   var isProfessionals = props.isProfessionals,
+    isManagers = props.isManagers,
+    isCustomers = props.isCustomers,
     title = props.title,
     searchValue = props.searchValue,
     onSearch = props.onSearch,
@@ -72,7 +74,10 @@ var UsersListingHeader = function UsersListingHeader(props) {
     onClose: function onClose() {
       return setIsFilterModal(false);
     },
-    isFilterModal: isFilterModal
+    isFilterModal: isFilterModal,
+    isProfessionals: isProfessionals,
+    isManagers: isManagers,
+    isCustomers: isCustomers
   }));
 };
 exports.UsersListingHeader = UsersListingHeader;

@@ -137,7 +137,8 @@ var CustomersListingUI = function CustomersListingUI(props) {
     searchValue: searchValue,
     onSearch: onSearch,
     multiFilterValues: multiFilterValues,
-    handleChangeMultiFilterValues: handleChangeMultiFilterValues
+    handleChangeMultiFilterValues: handleChangeMultiFilterValues,
+    isCustomers: true
   }), /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState

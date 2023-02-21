@@ -101,25 +101,21 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     drivers: driversList.drivers,
     filterValues: filterValues,
     handleChangeDriver: handleChangeDriver
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, {
+    filterValues: filterValues,
+    handleChangeCountryCode: handleChangeCountryCode
+  }), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
     cities: citiesList,
     filterValues: filterValues,
     handleChangeCity: handleChangeCity
-  }), /*#__PURE__*/_react.default.createElement(_styles2.MultiSelectContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
-    isFilterView: true,
-    filterValues: filterValues,
-    handleChangeOrderStatus: handleChangeOrderStatus
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DeliveryTypeSelector.DeliveryTypeSelector, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DeliveryTypeSelector.DeliveryTypeSelector, {
     filterValues: filterValues,
     handleChangeDeliveryType: handleChangeDeliveryType
   }), /*#__PURE__*/_react.default.createElement(_PaymethodTypeSelector.PaymethodTypeSelector, {
     paymethodsList: paymethodsList,
     filterValues: filterValues,
     handleChangePaymethodType: handleChangePaymethodType
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, {
-    filterValues: filterValues,
-    handleChangeCountryCode: handleChangeCountryCode
-  }), /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
     filterValues: filterValues,
     handleChangeCurrency: handleChangeCurrency
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {

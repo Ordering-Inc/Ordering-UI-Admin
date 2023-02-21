@@ -38,7 +38,10 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     loyaltyLevelState = props.loyaltyLevelState,
     handleChangeDateType = props.handleChangeDateType,
     handleChangeFromDate = props.handleChangeFromDate,
-    handleChangeEndDate = props.handleChangeEndDate;
+    handleChangeEndDate = props.handleChangeEndDate,
+    isProfessionals = props.isProfessionals,
+    isManagers = props.isManagers,
+    isCustomers = props.isCustomers;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -153,7 +156,12 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
         lastname: e.target.value
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('AMOUNT_OF_ORDERS', 'Amount of orders')), /*#__PURE__*/_react.default.createElement(_styles2.RangeSelectWrapper, {
+  })), isProfessionals ? /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('SIGN_UP_DATE', 'Sign up date')), /*#__PURE__*/_react.default.createElement(_Orders.DateTypeSelector, {
+    filterValues: filterValues,
+    handleChangeDateType: handleChangeDateType,
+    handleChangeFromDate: handleChangeFromDate,
+    handleChangeEndDate: handleChangeEndDate
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('AMOUNT_OF_ORDERS', 'Amount of orders')), /*#__PURE__*/_react.default.createElement(_styles2.RangeSelectWrapper, {
     className: "range"
   }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_CONDITION', 'Select a condition'),
@@ -232,10 +240,12 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     },
     optionInnerMaxHeight: "300px",
     className: "full-select"
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('USER_TYPE', 'User type')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  }))), !isProfessionals && !isCustomers && /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('USER_TYPE', 'User type')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_OPTION', 'Select a option'),
     defaultValue: filterValues === null || filterValues === void 0 ? void 0 : filterValues.userType,
-    options: userOptions,
+    options: userOptions.filter(function (user) {
+      return isManagers ? user.value !== 3 : true;
+    }),
     onChange: function onChange(val) {
       return handleChangeValue({
         userType: val
@@ -256,11 +266,24 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     },
     optionInnerMaxHeight: "300px",
     className: "full-select"
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('SIGN_UP_DATE', 'Sign up date')), /*#__PURE__*/_react.default.createElement(_Orders.DateTypeSelector, {
+  }))), !isProfessionals && /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('SIGN_UP_DATE', 'Sign up date')), /*#__PURE__*/_react.default.createElement(_Orders.DateTypeSelector, {
     filterValues: filterValues,
     handleChangeDateType: handleChangeDateType,
     handleChangeFromDate: handleChangeFromDate,
     handleChangeEndDate: handleChangeEndDate
+  })), isCustomers && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('LOYALTY_LEVEL', 'Loyalty level')), loyaltyLevelState !== null && loyaltyLevelState !== void 0 && loyaltyLevelState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 54
+  }) : /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+    placeholder: t('SELECT_OPTION', 'Select a option'),
+    defaultValue: filterValues === null || filterValues === void 0 ? void 0 : filterValues.loyaltyLevel,
+    options: loyaltyLevels,
+    onChange: function onChange(val) {
+      return handleChangeValue({
+        loyaltyLevel: val
+      });
+    },
+    optionInnerMaxHeight: "300px",
+    className: "full-select"
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
