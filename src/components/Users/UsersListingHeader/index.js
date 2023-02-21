@@ -18,6 +18,8 @@ import { UserFilterGroup } from '../UserFilterGroup'
 export const UsersListingHeader = (props) => {
   const {
     isProfessionals,
+    isManagers,
+    isCustomers,
     title,
     searchValue,
     onSearch,
@@ -84,6 +86,9 @@ export const UsersListingHeader = (props) => {
           handleChangeFilterValues={handleChangeMultiFilterValues}
           onClose={() => setIsFilterModal(false)}
           isFilterModal={isFilterModal}
+          isProfessionals={isProfessionals}
+          isManagers={isManagers}
+          isCustomers={isCustomers}
         />
       )}
     </>

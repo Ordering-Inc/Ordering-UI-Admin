@@ -103,18 +103,22 @@ const OrdersFilterGroupUI = (props) => {
           />
         </WrapperRow>
         <WrapperRow>
+          <CountryFilter
+            filterValues={filterValues}
+            handleChangeCountryCode={handleChangeCountryCode}
+          />
           <CitySelector
             cities={citiesList}
             filterValues={filterValues}
             handleChangeCity={handleChangeCity}
           />
-          <MultiSelectContainer>
+          {/* <MultiSelectContainer>
             <OrderStatusTypeSelector
               isFilterView
               filterValues={filterValues}
               handleChangeOrderStatus={handleChangeOrderStatus}
             />
-          </MultiSelectContainer>
+          </MultiSelectContainer> */}
         </WrapperRow>
         <WrapperRow>
           <DeliveryTypeSelector
@@ -128,10 +132,6 @@ const OrdersFilterGroupUI = (props) => {
           />
         </WrapperRow>
         <WrapperRow>
-          <CountryFilter
-            filterValues={filterValues}
-            handleChangeCountryCode={handleChangeCountryCode}
-          />
           <CurrencyFilter
             filterValues={filterValues}
             handleChangeCurrency={handleChangeCurrency}
