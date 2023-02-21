@@ -102,6 +102,7 @@ const UsersListingUI = (props) => {
           onSearch={onSearch}
           handleChangeMultiFilterValues={handleChangeMultiFilterValues}
           multiFilterValues={multiFilterValues}
+          isManagers
         />
         <UserActiveStateFilter
           selectedUserActiveState={selectedUserActiveState}
