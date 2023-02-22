@@ -36,13 +36,9 @@ export const AddCategory = styled.div`
   display: inline;
   user-select: none;
   font-size: 14px;
-  color: ${props => props.theme.colors?.lightGray};
+  color: ${props => props.theme.colors?.primary};
   cursor: pointer;
   margin: 15px 10px;
-
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
 `
 
 export const CategoryTab = styled.div`

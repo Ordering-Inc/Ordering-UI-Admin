@@ -81,5 +81,5 @@ export const TransBottomContainer = styled.div`
 export const AddNewTransButton = styled.div`
   cursor: pointer;
   font-size: 12px;
-  color: ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors.primary};
 `

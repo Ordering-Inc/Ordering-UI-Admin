@@ -292,21 +292,23 @@ export const BusinessProductsCategoyInfo = (props) => {
           autoComplete='off'
         />
       </CategoryNameWrapper>
-      <CategoryNameWrapper>
-        <label>{t('EXTERNAL_ID', 'External Id')}</label>
-        <Input
-          placeholder={t('EXTERNAL_ID', 'External Id')}
-          name='external_id'
-          value={formState?.changes?.external_id || ''}
-          onChange={handleChangeInput}
-          autoComplete='off'
-          onKeyPress={(e) => {
-            if (!/^[0-9]$/.test(e.key)) {
-              e.preventDefault()
-            }
-          }}
-        />
-      </CategoryNameWrapper>
+      {!isAddMode && (
+        <CategoryNameWrapper>
+          <label>{t('EXTERNAL_ID', 'External Id')}</label>
+          <Input
+            placeholder={t('EXTERNAL_ID', 'External Id')}
+            name='external_id'
+            value={formState?.changes?.external_id || ''}
+            onChange={handleChangeInput}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (!/^[0-9]$/.test(e.key)) {
+                e.preventDefault()
+              }
+            }}
+          />
+        </CategoryNameWrapper>
+      )}
       <CategoryNameWrapper>
         <label>{t('DESCRIPTION', 'Description')}</label>
         <TextArea
@@ -317,37 +319,6 @@ export const BusinessProductsCategoyInfo = (props) => {
           autoComplete='off'
         />
       </CategoryNameWrapper>
-      {!isAddMode && (
-        <CategoryNameWrapper>
-          <label>{t('SLUG', 'Slug')}</label>
-          <Input
-            name='slug'
-            placeholder={t('SLUG', 'Slug')}
-            onChange={handleChangeInput}
-            disabled={formState.loading}
-            autoComplete='off'
-            value={
-              formState?.changes?.slug || ''
-            }
-            onKeyPress={e => {
-              if (e.which === 32) { e.preventDefault() }
-            }}
-          />
-          {/* <GenerateButtonWrapper>
-            <Button
-              color='lightPrimary'
-              borderRadius='7.6px'
-              disabled={formState.loading || !formState.changes?.name}
-              onClick={() => setAutoGenerate({
-                ...autoGenerateCode,
-                isAutoGenerate: true
-              })}
-            >
-              {formState?.loading ? t('LOADING', 'Loading') : t('AUTOGENERATE', 'Auto Generate')}
-            </Button>
-          </GenerateButtonWrapper> */}
-        </CategoryNameWrapper>
-      )}
       <SwitchWrapper>
         <span>{t('RIBBON', 'Ribbon')}</span>
         <Switch
@@ -475,7 +446,7 @@ export const BusinessProductsCategoyInfo = (props) => {
         padding='30px'
         title={t('IMAGE_CROP', 'Image crop')}
         open={cropState?.open}
-        onClose={() => setCropState({ ...cropState, open: false })}
+        onRemove={() => setCropState({ ...cropState, open: false })}
       >
         <ImageCrop
           photo={cropState?.data}

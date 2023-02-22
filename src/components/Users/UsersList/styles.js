@@ -61,6 +61,7 @@ export const UsersTable = styled.table`
 `
 
 export const WrapperImage = styled.div`
+  position: relative;
   max-width: 45px;
   max-height: 45px;
   height: 45px;
@@ -200,7 +201,7 @@ export const WrapperPagination = styled.div`
 
 export const AddNewUserButton = styled.div`
   cursor: pointer;
-  color: ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors.primary};
   width: fit-content;
   font-size: 14px;
 `
@@ -254,4 +255,30 @@ export const VerifiedItemsContainer = styled.div`
 export const AllCheckWrapper = styled.div`
   display: flex;
   align-items: center;
+`
+
+export const OrdersCountWrapper = styled.div`
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background-color: ${props => props.theme.colors.backgroundInfo};
+  color: ${props => props.theme.colors.primary};
+  font-weight: 400;
+  font-size: 9px;
+  line-height: 12px;
+  padding: 2px 5px;
+  position: absolute;
+  top: -9px;
+  right: -5px;
+  ${props => props.theme.rtl && css`
+    left: -5px;
+    right: initial;
+  `}
+
+  ${({ isNew }) => isNew && css`
+    background-color: ${props => props.theme.colors.lightGreen};
+    color: ${props => props.theme.colors.success};
+  `}
 `

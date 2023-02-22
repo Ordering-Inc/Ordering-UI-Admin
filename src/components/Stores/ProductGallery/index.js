@@ -253,7 +253,7 @@ const ProductGalleryUI = (props) => {
         padding='30px'
         title={t('IMAGE_CROP', 'Image crop')}
         open={cropState?.open}
-        onClose={() => setCropState({ ...cropState, open: false })}
+        onRemove={() => setCropState({ ...cropState, open: false })}
         className='ordering-img-crop'
       >
         <ImageCrop

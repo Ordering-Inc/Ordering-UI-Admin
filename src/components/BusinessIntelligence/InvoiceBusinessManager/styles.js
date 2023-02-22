@@ -21,9 +21,9 @@ export const DetailsHeader = styled.div`
   }
 
   ${props => props.theme?.rtl ? css`
-    padding-left: 35px;
+    padding-left: 60px;
   ` : css`
-    padding-right: 35px;
+    padding-right: 60px;
   `}
 `
 

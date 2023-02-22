@@ -100,7 +100,9 @@ export const OrderInfoWrapper = styled.div`
   }
 `
 
-export const ButtonGroup = styled.div``
+export const ButtonGroup = styled.div`
+  display: flex;
+`
 
 export const SkeletonWrapper = styled.div`
   width: 100%;

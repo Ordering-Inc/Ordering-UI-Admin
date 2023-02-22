@@ -6,12 +6,12 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
-import { Envelope, Phone, ThreeDots, PersonFill, ChevronRight } from 'react-bootstrap-icons'
+import { Envelope, Phone, ThreeDots, PersonFill, ChevronRight, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { UserDetails } from '../UserDetails'
 import { CustomerCashWallet } from '../CustomerCashWallet'
 import { Confirm, SideBar } from '../../Shared'
-import { Switch } from '../../../styles'
+import { IconButton, Switch } from '../../../styles'
 
 import {
   DetailsContainer,
@@ -23,9 +23,11 @@ import {
   MenusContainer,
   OptionMenu,
   UserDetailsWrapper,
-  UserName
+  UserName,
+  RightHeader
 } from './styles'
 import { CustomerPointsWallet } from '../CustomerPointsWallet'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 const CustomerDetailsUI = (props) => {
   const {
@@ -38,11 +40,13 @@ const CustomerDetailsUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
+  const { width } = useWindowSize()
 
   const [showOption, setShowOption] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [menuMoveDistance, setMenuMoveDistance] = useState(0)
+  const [isExpand, setIsExpand] = useState(false)
 
   const customerMenus = [
     { key: 'user_details', value: t('USER_DETAILS', 'User details') },
@@ -76,11 +80,22 @@ const CustomerDetailsUI = (props) => {
     setMenuMoveDistance(0)
   }
 
+  const expandSidebar = () => {
+    const element = document.getElementById('customer_details')
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
   useEffect(() => {
     handleParentSidebarMove(0)
     setIsOpenMenu(false)
     setShowOption(null)
   }, [userState?.user?.id])
+
+  useEffect(() => {
+    if (isOpenMenu) setIsExpand(false)
+  }, [isOpenMenu])
 
   return (
     <>
@@ -120,17 +135,27 @@ const CustomerDetailsUI = (props) => {
               </VerifiedItem>
             )}
           </LeftHeader>
-          <ActionSelectorWrapper>
-            <DropdownButton
-              menuAlign={theme?.rtl ? 'left' : 'right'}
-              title={<ThreeDots />}
-              id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-            >
-              <Dropdown.Item onClick={() => onDeleteCustomer()}>
-                {t('DELETE', 'Delete')}
-              </Dropdown.Item>
-            </DropdownButton>
-          </ActionSelectorWrapper>
+          <RightHeader>
+            {width > 576 && !isOpenMenu && (
+              <IconButton
+                color='black'
+                onClick={() => expandSidebar()}
+              >
+                {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+              </IconButton>
+            )}
+            <ActionSelectorWrapper>
+              <DropdownButton
+                menuAlign={theme?.rtl ? 'left' : 'right'}
+                title={<ThreeDots />}
+                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+              >
+                <Dropdown.Item onClick={() => onDeleteCustomer()}>
+                  {t('DELETE', 'Delete')}
+                </Dropdown.Item>
+              </DropdownButton>
+            </ActionSelectorWrapper>
+          </RightHeader>
         </HeaderContainer>
 
         <PhotoWrapper>

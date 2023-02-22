@@ -240,6 +240,7 @@ export const DropdownOptionList = (props) => {
             setSelectedZoneDropdown(null)
             setOpenZonedropdown(false)
           }}
+          showExpandIcon
         >
           <ZoneDropdownDetails
             zoneDropdown={selectedZoneDropdown}

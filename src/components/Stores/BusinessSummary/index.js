@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useEvent, useApi } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { XLg, LifePreserver, ThreeDots, Laptop, Phone } from 'react-bootstrap-icons'
+import { XLg, LifePreserver, ThreeDots, Laptop, Phone, ArrowsAngleExpand, ArrowsAngleContract } from 'react-bootstrap-icons'
 import { Button, IconButton, Switch } from '../../../styles'
 import { Confirm, Modal } from '../../Shared'
 import { BusinessPreview } from '../BusinessPreview'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   BusinessDetailsContainer,
@@ -35,15 +36,18 @@ export const BusinessSummary = (props) => {
     selectedItem,
     handleSelectedItem,
     handleDuplicateBusiness,
-    handleDeleteBusiness
+    handleDeleteBusiness,
+    extraOpen
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const [events] = useEvent()
   const theme = useTheme()
   const [ordering] = useApi()
+  const { width } = useWindowSize()
   const [isBusinessPreview, setIsBusinessPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
+  const [isExpand, setIsExpand] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const handleOpenCategory = () => {
@@ -110,6 +114,10 @@ export const BusinessSummary = (props) => {
     //   value: t('PUBLISHING', 'Publishing')
     // },
     {
+      key: 'sales_channels',
+      value: t('SALES_CHANNELS', 'Sales channels')
+    },
+    {
       key: 'layout',
       value: t('LAYOUT', 'Layout')
     },
@@ -129,6 +137,19 @@ export const BusinessSummary = (props) => {
       }
     })
   }
+
+  const expandSideBar = () => {
+    const element = document.getElementById('business_details_bar')
+    if (!element) return
+
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
+  useEffect(() => {
+    if (extraOpen) setIsExpand(false)
+  }, [extraOpen])
 
   return (
     <>
@@ -160,6 +181,14 @@ export const BusinessSummary = (props) => {
             >
               <LifePreserver />
             </IconButton>
+            {width > 576 && !extraOpen && (
+              <IconButton
+                color='black'
+                onClick={() => expandSideBar()}
+              >
+                {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+              </IconButton>
+            )}
             <ActionSelectorWrapper>
               <DropdownButton
                 menuAlign={theme?.rtl ? 'left' : 'right'}

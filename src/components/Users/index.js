@@ -6,6 +6,7 @@ import { UsersDeleteButton } from './UsersDeleteButton'
 import { UsersExportCSV } from './UsersExportCSV'
 import { UserTypeSelector } from './UserTypeSelector'
 import { ProfessionalListing } from './ProfessionalListing'
+import { UserFilterGroup } from './UserFilterGroup'
 import { UsersList } from './UsersList'
 import { UsersListingHeader } from './UsersListingHeader'
 import { UserTypeFilter } from './UserTypeFilter'
@@ -32,6 +33,7 @@ export {
   UsersExportCSV,
   UserTypeSelector,
   ProfessionalListing,
+  UserFilterGroup,
   UsersList,
   UsersListingHeader,
   UserTypeFilter,

@@ -138,6 +138,7 @@ const BusinessReviewsListingUI = (props) => {
             setCurBusiness(null)
             setOpenReview(false)
           }}
+          showExpandIcon
         >
           <BusinessReviewDetails
             business={curBusiness}

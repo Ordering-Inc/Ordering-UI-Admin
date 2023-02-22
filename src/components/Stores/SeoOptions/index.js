@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useLanguage, DragAndDrop, ExamineClick, useUtils } from 'ordering-components-admin'
-import { Button, Input, TextArea, Switch } from '../../../styles'
+import { Button, Input, TextArea } from '../../../styles'
 import { Alert, Modal, ImageCrop } from '../../Shared'
 import { bytesConverter } from '../../../utils'
 import Skeleton from 'react-loading-skeleton'
@@ -38,7 +38,6 @@ export const SeoOptions = (props) => {
   const productImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
-  const [isSameInfo, setIsSameInfo] = useState(false)
 
   const titleRef = useRef(null)
   const descriptionRef = useRef(null)
@@ -120,8 +119,7 @@ export const SeoOptions = (props) => {
     })
   }
 
-  useEffect(() => {
-    if (!isSameInfo) return
+  const handleUseSameInfo = () => {
     if (isBusinessSeo) {
       setFormState({
         ...formState,
@@ -138,10 +136,9 @@ export const SeoOptions = (props) => {
     }
     titleRef.current.value = data?.name
     descriptionRef.current.value = data?.description
-  }, [isSameInfo, isBusinessSeo, data])
+  }
 
   useEffect(() => {
-    setIsSameInfo(false)
     titleRef.current.value = data?.seo_title ?? ''
     descriptionRef.current.value = data?.seo_description ?? ''
   }, [data])
@@ -195,11 +192,7 @@ export const SeoOptions = (props) => {
           </SEOImage>
         </WrapperImage>
         <UseSameInfoWrapper>
-          <label>{t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information')}</label>
-          <Switch
-            defaultChecked={isSameInfo || false}
-            onChange={val => setIsSameInfo(val)}
-          />
+          <span onClick={handleUseSameInfo}>{t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information')}</span>
         </UseSameInfoWrapper>
         <WrapperShortDescription>
           <label>{t('SEO_TITLE', 'SEO Title')}</label>
@@ -251,6 +244,19 @@ export const SeoOptions = (props) => {
             />
           </WrapperDescription>
         )}
+        <WrapperDescription>
+          <label>{t('SLUG', 'Slug')}</label>
+          <Input
+            name='slug'
+            placeholder={t('SLUG', 'Slug')}
+            defaultValue={
+              formState?.result?.result
+                ? formState?.result?.result?.slug
+                : formState?.changes?.slug ?? data?.slug ?? ''
+            }
+            onChange={(e) => handleProductCategoryChangeInput(e)}
+          />
+        </WrapperDescription>
         <ActionButtons>
           <Button
             color='primary'
@@ -277,7 +283,7 @@ export const SeoOptions = (props) => {
         padding='30px'
         title={t('IMAGE_CROP', 'Image crop')}
         open={cropState?.open}
-        onClose={() => setCropState({ ...cropState, open: false })}
+        onRemove={() => setCropState({ ...cropState, open: false })}
       >
         <ImageCrop
           photo={cropState?.data}

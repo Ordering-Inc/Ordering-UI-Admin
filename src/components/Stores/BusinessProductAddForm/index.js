@@ -147,12 +147,12 @@ const BusinessProductAddFormUI = (props) => {
   }
 
   const handleChangeSelect = (value) => {
+    setCurPreorderTime({ hour: '0', minute: '0' })
     if (value === 'custom') {
       setIsCustom(true)
       handleChangeItem({ duration: null })
       return
     }
-    setCurPreorderTime({ hour: '0', minute: '0' })
     setIsCustom(false)
     handleChangeItem({ duration: value })
   }
@@ -340,7 +340,7 @@ const BusinessProductAddFormUI = (props) => {
         padding='30px'
         title={t('IMAGE_CROP', 'Image crop')}
         open={cropState?.open}
-        onClose={() => setCropState({ ...cropState, open: false })}
+        onRemove={() => setCropState({ ...cropState, open: false })}
       >
         <ImageCrop
           photo={cropState?.data}

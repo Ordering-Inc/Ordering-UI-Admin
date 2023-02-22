@@ -127,9 +127,9 @@ export const RightHeader = styled.div`
   align-items: center;
 
   ${props => props.theme?.rtl ? css`
-    margin-left: 40px;
+    margin-left: 28px;
   ` : css`
-    margin-right: 40px;
+    margin-right: 28px;
   `}
 `
 

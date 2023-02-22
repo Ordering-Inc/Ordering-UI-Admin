@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { List as MenuIcon, LifePreserver, ArrowRepeat } from 'react-bootstrap-icons'
+import { List as MenuIcon, LifePreserver, ArrowRepeat, Funnel } from 'react-bootstrap-icons'
+import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import { Button, IconButton } from '../../../styles'
 import { SearchBar } from '../../Shared'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
@@ -12,6 +13,7 @@ import {
   HeaderTitleContainer,
   ActionsWrapper
 } from './styles'
+import { BusinessFilterGroup } from '../BusinessFilterGroup'
 
 export const BusinessesListingHeader = (props) => {
   const {
@@ -23,10 +25,18 @@ export const BusinessesListingHeader = (props) => {
     handleRefreshBusinesses,
     loading,
     noBusinesses,
-    handleGotToAdd
+    handleGotToAdd,
+    handleChangeFilterValues,
+    filterValues
   } = props
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+  const [filterApplied, setFilterApplied] = useState(false)
+  const [isFilterModal, setIsFilterModal] = useState(false)
+
+  useEffect(() => {
+    setFilterApplied(Object.keys(filterValues).length > 0)
+  }, [filterValues])
 
   return (
     <HeaderContainer>
@@ -93,9 +103,20 @@ export const BusinessesListingHeader = (props) => {
             placeholder={t('SEARCH', 'Search')}
             customClass='searchBar'
           />
+          <IconButton
+            color='black'
+            onClick={() => setIsFilterModal(true)}
+            name='filter-btn'
+          >
+            {filterApplied ? <Funnel /> : <MdcFilterOff />}
+          </IconButton>
         </ActionsWrapper>
       )}
-
+      <BusinessFilterGroup
+        handleChangeFilterValues={handleChangeFilterValues}
+        onClose={() => setIsFilterModal(false)}
+        isFilterModal={isFilterModal}
+      />
     </HeaderContainer>
   )
 }

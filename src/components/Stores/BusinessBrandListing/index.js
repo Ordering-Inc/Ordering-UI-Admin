@@ -6,7 +6,7 @@ import {
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
-import { ThreeDots, List as MenuIcon } from 'react-bootstrap-icons'
+import { ThreeDots, List as MenuIcon, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import { Button, IconButton, Switch, DefaultSelect } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { Alert, SearchBar, SideBar } from '../../Shared'
@@ -31,7 +31,8 @@ import {
   BrandDetailContainer,
   DetailHeder,
   TabContainer,
-  Tab
+  Tab,
+  RightHeader
 } from './styles'
 
 const BusinessBrandListingUI = (props) => {
@@ -54,6 +55,7 @@ const BusinessBrandListingUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [selectedType, setSelectedType] = useState('general')
   const [selectedBrand, setSelectedBrand] = useState(null)
+  const [isExpand, setIsExpand] = useState(false)
 
   const moreOptions = [
     { value: 0, content: t('DELETE', 'Delete') }
@@ -86,6 +88,14 @@ const BusinessBrandListingUI = (props) => {
     const isInvalid = e.target.closest('.brand_enable_control')
     if (isInvalid) return
     handleOpenSideBar(brandId)
+  }
+
+  const expandSideBar = () => {
+    const element = document.getElementById('brand-details')
+    if (!element) return
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
   }
 
   useEffect(() => {
@@ -242,15 +252,23 @@ const BusinessBrandListingUI = (props) => {
                     />
                   )}
                 </div>
-                {selectedBrand && (
-                  <ActionSelectorWrapper>
-                    <DefaultSelect
-                      placeholder={<ThreeDots />}
-                      options={moreOptions}
-                      onChange={() => handleDeleteBrand(selectedBrand.id)}
-                    />
-                  </ActionSelectorWrapper>
-                )}
+                <RightHeader>
+                  <IconButton
+                    color='black'
+                    onClick={expandSideBar}
+                  >
+                    {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+                  </IconButton>
+                  {selectedBrand && (
+                    <ActionSelectorWrapper>
+                      <DefaultSelect
+                        placeholder={<ThreeDots />}
+                        options={moreOptions}
+                        onChange={() => handleDeleteBrand(selectedBrand.id)}
+                      />
+                    </ActionSelectorWrapper>
+                  )}
+                </RightHeader>
               </DetailHeder>
               <TabContainer>
                 <Tab

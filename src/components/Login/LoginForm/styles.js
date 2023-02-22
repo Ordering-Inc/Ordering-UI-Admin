@@ -256,6 +256,22 @@ export const InputWithIcon = styled.div`
   }
 `
 
+export const PhoneNumberWrapper = styled.div`
+  margin-bottom: 20px;
+  .PhoneInputInput {
+    height: 47px;
+    border-radius: 8px !important;
+  }
+  .PhoneInputCountry {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: ${props => props.theme.colors.backgroundPage};
+    * {
+      padding: 0px;
+    }
+  }
+`
+
 export const WrapperPassword = styled.div`
   position: relative;
   display: flex;

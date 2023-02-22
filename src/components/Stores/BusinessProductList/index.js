@@ -275,6 +275,7 @@ export const BusinessProductList = (props) => {
               setIsAddProduct(false)
               handleParentProductAdd && handleParentProductAdd(false)
             }}
+            showExpandIcon
           >
             <BusinessProductAddForm
               {...props}

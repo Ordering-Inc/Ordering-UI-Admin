@@ -43,7 +43,9 @@ const UsersListingUI = (props) => {
     handleSuccessUpdate,
     handleSuccessAddUser,
     handleSuccessDeleteUser,
-    setSelectedUsers
+    setSelectedUsers,
+    handleChangeMultiFilterValues,
+    multiFilterValues
   } = props
 
   const [, t] = useLanguage()
@@ -98,6 +100,9 @@ const UsersListingUI = (props) => {
           title={headerTitle}
           searchValue={searchValue}
           onSearch={onSearch}
+          handleChangeMultiFilterValues={handleChangeMultiFilterValues}
+          multiFilterValues={multiFilterValues}
+          isManagers
         />
         <UserActiveStateFilter
           selectedUserActiveState={selectedUserActiveState}
@@ -161,6 +166,7 @@ const UsersListingUI = (props) => {
           sidebarId='user_add_form'
           open={openUserAddForm}
           onClose={() => setOpenUserAddForm(false)}
+          showExpandIcon
         >
           <UserAddForm
             handleSuccessAdd={handleSuccessAddUser}

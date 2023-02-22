@@ -4,9 +4,9 @@ import {
   EnterprisePromotionDetails as EnterprisePromotionDetailsController
 } from 'ordering-components-admin'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { Switch } from '../../../styles'
+import { Switch, IconButton } from '../../../styles'
 import { DragScroll, Alert, Confirm, SelectBusinesses, SelectSites, SelectUsers, SelectLoyaltyLevels } from '../../Shared'
 import { EnterprisePromotionGeneralDetails } from '../EnterprisePromotionGeneralDetails'
 import { EnterprisePromotionRules } from '../EnterprisePromotionRules'
@@ -16,7 +16,8 @@ import {
   Header,
   TabsContainer,
   Tab,
-  WrapperActionSelector
+  WrapperActionSelector,
+  RightHeader
 } from './styles'
 
 const EnterprisePromotionDetailsUI = (props) => {
@@ -51,6 +52,7 @@ const EnterprisePromotionDetailsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [], handleOnAccept: null })
   const [selectedOption, setSelectedOption] = useState('general')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isExpand, setIsExpand] = useState(false)
 
   const tabOptions = [
     { key: 'general', content: t('GENERAL', 'General') },
@@ -109,6 +111,14 @@ const EnterprisePromotionDetailsUI = (props) => {
     return true
   }
 
+  const expandSidebar = () => {
+    const element = document.getElementById('sideSlider')
+    if (!element) return
+    if (isExpand) element.style.width = '600px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
   useEffect(() => {
     if (!actionState?.error || actionState.loading) return
     setAlertState({
@@ -134,21 +144,29 @@ const EnterprisePromotionDetailsUI = (props) => {
               onChange={val => handleChangeItem({ enabled: val })}
             />
           </div>
-          {!isAddMode && (
-            <WrapperActionSelector>
-              <DropdownButton
-                menuAlign={theme?.rtl ? 'left' : 'right'}
-                title={<ThreeDots />}
-                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-              >
-                <Dropdown.Item
-                  onClick={() => onClickDeletePromotion()}
+          <RightHeader>
+            <IconButton
+              color='black'
+              onClick={expandSidebar}
+            >
+              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+            </IconButton>
+            {!isAddMode && (
+              <WrapperActionSelector>
+                <DropdownButton
+                  menuAlign={theme?.rtl ? 'left' : 'right'}
+                  title={<ThreeDots />}
+                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
                 >
-                  {t('DELETE', 'Delete')}
-                </Dropdown.Item>
-              </DropdownButton>
-            </WrapperActionSelector>
-          )}
+                  <Dropdown.Item
+                    onClick={() => onClickDeletePromotion()}
+                  >
+                    {t('DELETE', 'Delete')}
+                  </Dropdown.Item>
+                </DropdownButton>
+              </WrapperActionSelector>
+            )}
+          </RightHeader>
         </Header>
         <TabsContainer>
           <DragScroll>

@@ -10,8 +10,8 @@ import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { UserMetaFields } from '../../Users'
 import { DriverGroupSetting } from '../DriverGroupSetting'
-import { ThreeDots } from 'react-bootstrap-icons'
-import { Switch, Button } from '../../../styles'
+import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
+import { Switch, Button, IconButton } from '../../../styles'
 import { ActionsForm } from '../UserFormDetails/styles'
 import {
   UserName,
@@ -19,8 +19,10 @@ import {
   ScheduleSection,
   PersonalizationWrapper,
   DetailsHeader,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  RightHeader
 } from './styles'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 export const UserDetailsUI = (props) => {
   const {
@@ -38,9 +40,19 @@ export const UserDetailsUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
   const [isCustomField, setIsCustomField] = useState(false)
   const [isPersonalization, setIsPersonalization] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
+
+  const expandSidebar = () => {
+    const element = document.getElementById('user_lateral_bar')
+    if (!element) return
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
 
   useEffect(() => {
     setExtraOpen(false)
@@ -68,25 +80,35 @@ export const UserDetailsUI = (props) => {
             </>
           )}
         </UserName>
-        {userState.user?.id && (
-          <ActionSelectorWrapper>
-            <DropdownButton
-              menuAlign={theme?.rtl ? 'left' : 'right'}
-              title={<ThreeDots />}
-              id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+        <RightHeader>
+          {width > 576 && (
+            <IconButton
+              color='black'
+              onClick={expandSidebar}
             >
-              <Dropdown.Item onClick={() => setIsCustomField(true)}>
-                {t('CUSTOM_FIELDS', 'Custom fields')}
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setIsPersonalization(true)}>
-                {t('PERSONALIZATION', 'Personalization')}
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => handleDeleteUser(userState.user?.id)}>
-                {t('DELETE', 'Delete')}
-              </Dropdown.Item>
-            </DropdownButton>
-          </ActionSelectorWrapper>
-        )}
+              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+            </IconButton>
+          )}
+          {userState.user?.id && (
+            <ActionSelectorWrapper>
+              <DropdownButton
+                menuAlign={theme?.rtl ? 'left' : 'right'}
+                title={<ThreeDots />}
+                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+              >
+                <Dropdown.Item onClick={() => setIsCustomField(true)}>
+                  {t('CUSTOM_FIELDS', 'Custom fields')}
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setIsPersonalization(true)}>
+                  {t('PERSONALIZATION', 'Personalization')}
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => handleDeleteUser(userState.user?.id)}>
+                  {t('DELETE', 'Delete')}
+                </Dropdown.Item>
+              </DropdownButton>
+            </ActionSelectorWrapper>
+          )}
+        </RightHeader>
       </DetailsHeader>
 
       <UserDetailsMenu

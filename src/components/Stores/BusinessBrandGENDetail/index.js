@@ -7,7 +7,7 @@ import {
 } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
-import { bytesConverter, shape, ribbonValues } from '../../../utils'
+import { bytesConverter, shape, ribbonValues, stringToSlug } from '../../../utils'
 import FiCamera from '@meronex/icons/fi/FiCamera'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
 import { Button, Switch } from '../../../styles'
@@ -34,7 +34,6 @@ const BusinessBrandGENDetailUI = (props) => {
   const {
     brandFormState,
     brand,
-    // handlechangeImage,
     handleChangeInput,
     handleUpdateClick,
     handleChangeItem,
@@ -181,25 +180,27 @@ const BusinessBrandGENDetailUI = (props) => {
             name='name'
             placeholder={t('WRITE_A_NAME', 'Write a name')}
             value={brandFormState?.changes?.name ?? brand?.name ?? ''}
-            onChange={handleChangeInput}
+            onChange={(e) => handleChangeItem({ name: e.target.value, slug: stringToSlug(e.target.value) })}
             disabled={brandFormState.loading}
             autoComplete='off'
           />
         </FormControl>
-        <FormControl>
-          <Label>{t('SLUG', 'Slug')}</Label>
-          <input
-            name='slug'
-            placeholder={t('WRITE_A_SLUG', 'Write a slug')}
-            value={brandFormState?.changes?.slug ?? brand?.slug ?? ''}
-            onChange={handleChangeInput}
-            disabled={brandFormState.loading}
-            autoComplete='off'
-            onKeyPress={e => {
-              if (e.which === 32) { e.preventDefault() }
-            }}
-          />
-        </FormControl>
+        {brand && (
+          <FormControl>
+            <Label>{t('SLUG', 'Slug')}</Label>
+            <input
+              name='slug'
+              placeholder={t('WRITE_A_SLUG', 'Write a slug')}
+              value={brandFormState?.changes?.slug ?? brand?.slug ?? ''}
+              onChange={handleChangeInput}
+              disabled={brandFormState.loading}
+              autoComplete='off'
+              onKeyPress={e => {
+                if (e.which === 32) { e.preventDefault() }
+              }}
+            />
+          </FormControl>
+        )}
         <SwitchWrapper>
           <span>{t('RIBBON', 'Ribbon')}</span>
           <Switch
@@ -283,7 +284,7 @@ const BusinessBrandGENDetailUI = (props) => {
         padding='30px'
         title={t('IMAGE_CROP', 'Image crop')}
         open={cropState?.open}
-        onClose={() => setCropState({ ...cropState, open: false })}
+        onRemove={() => setCropState({ ...cropState, open: false })}
       >
         <ImageCrop
           photo={cropState?.data}

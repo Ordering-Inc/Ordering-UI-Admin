@@ -35,18 +35,16 @@ export const LeftHeader = styled.div`
 export const RightHeader = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 3px;
   margin-bottom: 24px;
-`
-
-export const ActionSelectorWrapper = styled.div`
   padding-right: 35px;
 
   ${props => props.theme.rtl && css`
     padding-left: 35px;
     padding-right: 0px;
   `}
+`
 
+export const ActionSelectorWrapper = styled.div`
   button {
     background: transparent !important;
     border: none;

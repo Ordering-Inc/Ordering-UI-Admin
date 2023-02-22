@@ -70,7 +70,7 @@ export const BusinessCardContainer = styled.div`
 export const AddNewButtonLink = styled.div`
   width: fit-content;
   cursor: pointer;
-  color: ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors.primary};
   font-size: 14px;
 `
 

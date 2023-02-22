@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, RecoveryActionDetail as RecoveryActionDetailController } from 'ordering-components-admin'
 import { Alert, Confirm } from '../../Shared'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { ThreeDots } from 'react-bootstrap-icons'
-import { Switch } from '../../../styles'
+import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
+import { IconButton, Switch } from '../../../styles'
 import { useTheme } from 'styled-components'
 
 import {
@@ -18,6 +18,7 @@ import {
 } from './styles'
 import { RecoveryGeneral } from '../RecoveryGeneral'
 import { RecoveryNotificationList } from '../RecoveryNotificationList'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 const RecoveryActionDetailUI = (props) => {
   const {
@@ -31,10 +32,12 @@ const RecoveryActionDetailUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
 
   const [selectedOption, setSelectedOption] = useState('general')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isExpand, setIsExpand] = useState(false)
 
   const recoveryOptionList = [
     { key: 'general', name: t('GENERAL', 'General') },
@@ -70,6 +73,13 @@ const RecoveryActionDetailUI = (props) => {
     })
   }
 
+  const expandSidebar = () => {
+    const element = document.getElementById('loyaltyWallet')
+    if (isExpand) element.style.width = '550px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
   useEffect(() => {
     if (!actionState?.error || actionState.loading) return
     setAlertState({
@@ -95,8 +105,16 @@ const RecoveryActionDetailUI = (props) => {
               onChange={val => handleChangeItem({ enabled: val })}
             />
           </LeftHeader>
-          {!isAddMode && (
-            <RightHeader>
+          <RightHeader>
+            {width > 576 && (
+              <IconButton
+                color='black'
+                onClick={expandSidebar}
+              >
+                {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+              </IconButton>
+            )}
+            {!isAddMode && (
               <ActionSelectorWrapper>
                 <DropdownButton
                   menuAlign={theme?.rtl ? 'left' : 'right'}
@@ -111,8 +129,8 @@ const RecoveryActionDetailUI = (props) => {
                   </Dropdown.Item>
                 </DropdownButton>
               </ActionSelectorWrapper>
-            </RightHeader>
-          )}
+            )}
+          </RightHeader>
         </DetailsHeader>
         <Tabs>
           {recoveryOptionList.map(option => (

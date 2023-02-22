@@ -63,7 +63,6 @@ export const LateralBarContainer = styled.div`
 `
 
 export const WrapUserDetails = styled.div`
-  max-width: 500px;
   height: 100%;
   padding: 35px 20px;
   position: relative;

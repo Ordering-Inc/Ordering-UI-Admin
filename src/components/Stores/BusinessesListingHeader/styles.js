@@ -64,7 +64,7 @@ export const ActionsWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  > button {
+  > button:not(:last-child) {
     height: 41px;
     width: 90px;
     white-space: nowrap;
@@ -78,9 +78,21 @@ export const ActionsWrapper = styled.div`
       width: unset;
     }
   }
+  > button:last-child {
+    margin-top: 5px;
+    height: 41px;
+  }
+  > div {
+    margin-top: 5px;
+  }
   > .searchBar {
     min-width: 100px;
     margin-top: 5px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 15px;
+    ` : css`
+      margin-right: 15px;
+    `}
   }
   > .importerGroup {
     margin-top: 5px;

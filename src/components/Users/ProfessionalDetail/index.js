@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { ThreeDots, Calendar4Event } from 'react-bootstrap-icons'
+import { ThreeDots, Calendar4Event, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { useLanguage, useSession, UserDetails as UserDetailsController } from 'ordering-components-admin'
@@ -10,15 +10,17 @@ import { UserProfileForm } from '../UserProfileForm'
 import { ProfessionalSchedule } from '../ProfessionalSchedule'
 import { ProfessionalBusinessService } from '../ProfessionalBusinessService'
 import { UserMetaFields } from '../UserMetaFields'
-import { Button, Switch } from '../../../styles'
+import { Button, IconButton, Switch } from '../../../styles'
 
 import {
   DetailsHeader,
   UserName,
   ActionSelectorWrapper,
   SideBarWrapper,
-  CalendarSyncWrapper
+  CalendarSyncWrapper,
+  RightHeader
 } from './styles'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 export const ProfessionalDetailUI = (props) => {
   const {
@@ -35,10 +37,12 @@ export const ProfessionalDetailUI = (props) => {
   const theme = useTheme()
   const [adminUserState] = useSession()
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
   const [extraSelected, setExtraSelected] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isExpand, setIsExpand] = useState(false)
 
   const onDeleteCustomer = () => {
     setConfirm({
@@ -59,6 +63,13 @@ export const ProfessionalDetailUI = (props) => {
       setExtraSelected(null)
       setExtraOpen(false)
     }
+  }
+
+  const expandSidebar = () => {
+    const element = document.getElementById('user_lateral_bar')
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
   }
 
   useEffect(() => {
@@ -108,28 +119,37 @@ export const ProfessionalDetailUI = (props) => {
             <Calendar4Event />
           </Button>
         </CalendarSyncWrapper>
-
-        {adminUserState.user?.id !== userState.user?.id && (
-          <ActionSelectorWrapper>
-            <DropdownButton
-              menuAlign={theme?.rtl ? 'left' : 'right'}
-              title={<ThreeDots />}
-              id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+        <RightHeader>
+          {width > 576 && (
+            <IconButton
+              color='black'
+              onClick={expandSidebar}
             >
-              <Dropdown.Item onClick={() => handleOpenExtra('custom_fields')}>
-                {t('CUSTOM_FIELDS', 'Custom fields')}
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => handleOpenExtra('personalization')}>
-                {t('PERSONALIZATION', 'Personalization')}
-              </Dropdown.Item>
-              {adminUserState?.user?.level === 0 && (
-                <Dropdown.Item className='delete' onClick={() => onDeleteCustomer()}>
-                  {t('DELETE', 'Delete')}
+              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+            </IconButton>
+          )}
+          {adminUserState.user?.id !== userState.user?.id && (
+            <ActionSelectorWrapper>
+              <DropdownButton
+                menuAlign={theme?.rtl ? 'left' : 'right'}
+                title={<ThreeDots />}
+                id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+              >
+                <Dropdown.Item onClick={() => handleOpenExtra('custom_fields')}>
+                  {t('CUSTOM_FIELDS', 'Custom fields')}
                 </Dropdown.Item>
-              )}
-            </DropdownButton>
-          </ActionSelectorWrapper>
-        )}
+                <Dropdown.Item onClick={() => handleOpenExtra('personalization')}>
+                  {t('PERSONALIZATION', 'Personalization')}
+                </Dropdown.Item>
+                {adminUserState?.user?.level === 0 && (
+                  <Dropdown.Item onClick={() => onDeleteCustomer()}>
+                    {t('DELETE', 'Delete')}
+                  </Dropdown.Item>
+                )}
+              </DropdownButton>
+            </ActionSelectorWrapper>
+          )}
+        </RightHeader>
       </DetailsHeader>
       <UserDetailsMenu
         currentMenuSelected={currentMenuSelected}

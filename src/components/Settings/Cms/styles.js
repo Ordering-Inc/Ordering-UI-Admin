@@ -212,5 +212,5 @@ export const PagesBottomContainer = styled.div`
 export const AddNewPageButton = styled.div`
   cursor: pointer;
   font-size: 12px;
-  color: ${props => props.theme.colors.lightGray};
+  color: ${props => props.theme.colors.primary};
 `

@@ -8,6 +8,21 @@ export const DetailsHeader = styled.div`
   margin-bottom: 10px;
   margin-top: -5px;
 `
+
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
+  ${({ isLoginUser }) => isLoginUser && css`
+    .expand {
+      margin-right: 25px;
+      ${props => props.theme.rtl && css`
+        margin-left: 25px;
+        margin-right: 0;
+      `}
+    }
+  `}
+`
+
 export const UserName = styled.div`
   display: flex;
   align-items: center;
@@ -110,9 +125,9 @@ export const OrdersWrapper = styled.div`
 
 export const ActionSelectorWrapper = styled.div`
   ${props => props.theme?.rtl ? css`
-    margin-left: 35px;
+    margin-left: 25px;
   ` : css`
-    margin-right: 35px;
+    margin-right: 25px;
   `}
   button {
     background: transparent !important;

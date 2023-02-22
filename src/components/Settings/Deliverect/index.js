@@ -3,7 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { Button, IconButton } from '../../../styles'
 import { DragScroll, Modal } from '../../Shared'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
-import { XLg } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, XLg } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
@@ -30,6 +30,7 @@ export const Deliverect = (props) => {
   const { width } = useWindowSize()
 
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
 
   const toggleMainContent = () => {
     if (width <= 500) {
@@ -41,6 +42,13 @@ export const Deliverect = (props) => {
         document.getElementById('catDescription').style.width = '500px'
       }
     }
+  }
+
+  const expandSidebar = () => {
+    const element = document.getElementById('catDescription')
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
   }
 
   useEffect(() => {
@@ -105,6 +113,14 @@ export const Deliverect = (props) => {
       <DeliverectContainer>
         <DescriptionHeader>
           <HeaderIcons>
+            {width > 576 && !settingsOpen && (
+              <IconButton
+                color='black'
+                onClick={expandSidebar}
+              >
+                {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+              </IconButton>
+            )}
             <IconButton
               color='black'
               onClick={onClose}

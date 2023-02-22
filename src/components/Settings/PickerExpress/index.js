@@ -3,7 +3,7 @@ import { useLanguage, ApiKeysList as ApiKeysListController } from 'ordering-comp
 import { Button, IconButton } from '../../../styles'
 import { Alert, Confirm, DragScroll, Modal } from '../../Shared'
 import BsArrowRight from '@meronex/icons/bs/BsArrowRight'
-import { XLg } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, XLg } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
@@ -32,6 +32,7 @@ const PickerExpressUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
 
   const toggleMainContent = () => {
     if (width <= 500) {
@@ -47,6 +48,13 @@ const PickerExpressUI = (props) => {
 
   const handleGoToLink = (link) => {
     window.open(link, '_blank')
+  }
+
+  const expandSidebar = () => {
+    const element = document.getElementById('catDescription')
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
   }
 
   useEffect(() => {
@@ -148,6 +156,14 @@ const PickerExpressUI = (props) => {
       <PickerExpressContainer>
         <DescriptionHeader>
           <HeaderIcons>
+            {width > 576 && !settingsOpen && (
+              <IconButton
+                color='black'
+                onClick={expandSidebar}
+              >
+                {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+              </IconButton>
+            )}
             <IconButton
               color='black'
               onClick={onClose}

@@ -12,13 +12,12 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 4px;
   margin-bottom: 15px;
 
   ${props => props.theme?.rtl ? css`
-    margin-left: 40px;
+    margin-left: 35px;
   ` : css`
-    margin-right: 40px;
+    margin-right: 35px;
   `}
 
   > div:first-child {
@@ -108,4 +107,9 @@ export const WrapperActionSelector = styled.div`
       }
     }
   }
+`
+
+export const RightHeader = styled.div`
+  display: flex;
+  align-items: center;
 `

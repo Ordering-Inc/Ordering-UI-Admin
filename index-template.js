@@ -50,6 +50,39 @@ import projectActive from './template/assets/images/projectStatuses/project-acti
 import projectPastDuePayment from './template/assets/images/projectStatuses/project-past-due-payment.png'
 
 /**
+ * sales channels
+ */
+import facebookProfileStep2 from './template/assets/images/salesChannels/facebook-profile-step2.png'
+import facebookProfileStep31 from './template/assets/images/salesChannels/facebook-profile-step3-1.png'
+import facebookProfileStep32 from './template/assets/images/salesChannels/facebook-profile-step3-2.png'
+import facebookProfileStep4 from './template/assets/images/salesChannels/facebook-profile-step4.png'
+import facebookProfileStep5 from './template/assets/images/salesChannels/facebook-profile-step5.png'
+import facebookPostStep1 from './template/assets/images/salesChannels/facebook-post-step1.png'
+import facebookPostStep2 from './template/assets/images/salesChannels/facebook-post-step2.png'
+import tiktokStep1 from './template/assets/images/salesChannels/tiktok-step1.png'
+import tiktokStep2 from './template/assets/images/salesChannels/tiktok-step2.png'
+import tiktokStep3 from './template/assets/images/salesChannels/tiktok-step3.png'
+import tiktokStep4 from './template/assets/images/salesChannels/tiktok-step4.png'
+import tiktokStep5 from './template/assets/images/salesChannels/tiktok-step5.png'
+import tiktokStep6 from './template/assets/images/salesChannels/tiktok-step6.png'
+import tiktokStep7 from './template/assets/images/salesChannels/tiktok-step7.png'
+import tiktokStep8 from './template/assets/images/salesChannels/tiktok-step8.png'
+import tiktokStep9 from './template/assets/images/salesChannels/tiktok-step9.png'
+import tiktokStep10 from './template/assets/images/salesChannels/tiktok-step10.png'
+import instagramGeneralStep2 from './template/assets/images/salesChannels/instagram-general-step2.png'
+import instagramGeneralStep3 from './template/assets/images/salesChannels/instagram-general-step3.png'
+import instagramGeneralStep4 from './template/assets/images/salesChannels/instagram-general-step4.png'
+import instagramGeneralStep5 from './template/assets/images/salesChannels/instagram-general-step5.png'
+import instagramGeneralStep6 from './template/assets/images/salesChannels/instagram-general-step6.png'
+import instagramAdvancedStep31 from './template/assets/images/salesChannels/instagram-advanced-step31.png'
+import instagramAdvancedStep32 from './template/assets/images/salesChannels/instagram-advanced-step32.png'
+import instagramAdvancedStep41 from './template/assets/images/salesChannels/instagram-advanced-step41.png'
+import instagramAdvancedStep42 from './template/assets/images/salesChannels/instagram-advanced-step42.png'
+import googleStep1 from './template/assets/images/salesChannels/google-step1.png'
+import googleStep2 from './template/assets/images/salesChannels/google-step2.png'
+import googleStep3 from './template/assets/images/salesChannels/google-step3.png'
+
+/**
  * Theme apps
  */
 import storeApp from './template/assets/images/store-app.png'
@@ -105,6 +138,10 @@ import batchWise from './template/assets/images/icons/batch-wise.svg'
 import roundRobin from './template/assets/images/icons/round-robin.svg'
 import leftArrow from './template/assets/images/icons/left-arrow.svg'
 import rightArrow from './template/assets/images/icons/right-arrow.svg'
+import facebook from './template/assets/images/icons/facebook.svg'
+import tiktok from './template/assets/images/icons/tiktok.svg'
+import instagram from './template/assets/images/icons/instagram.svg'
+import businessGoogle from './template/assets/images/icons/business-google.svg'
 
 import orderPending from './template/assets/images/orderStatus/pending.svg'
 import orderInProgress from './template/assets/images/orderStatus/inProgress.svg'
@@ -422,6 +459,37 @@ theme.images = {
     playStoreSmall,
     customProject
   },
+  salesChannels: {
+    facebookProfileStep2,
+    facebookProfileStep31,
+    facebookProfileStep32,
+    facebookProfileStep4,
+    facebookProfileStep5,
+    facebookPostStep1,
+    facebookPostStep2,
+    tiktokStep1,
+    tiktokStep2,
+    tiktokStep3,
+    tiktokStep4,
+    tiktokStep5,
+    tiktokStep6,
+    tiktokStep7,
+    tiktokStep8,
+    tiktokStep9,
+    tiktokStep10,
+    instagramGeneralStep2,
+    instagramGeneralStep3,
+    instagramGeneralStep4,
+    instagramGeneralStep5,
+    instagramGeneralStep6,
+    instagramAdvancedStep31,
+    instagramAdvancedStep32,
+    instagramAdvancedStep41,
+    instagramAdvancedStep42,
+    googleStep1,
+    googleStep2,
+    googleStep3
+  },
   pos: {
     square,
     toast,
@@ -522,6 +590,10 @@ theme.images = {
     roundRobin: roundRobin,
     leftArrow: leftArrow,
     rightArrow: rightArrow,
+    facebook: facebook,
+    tiktok: tiktok,
+    instagram: instagram,
+    businessGoogle: businessGoogle,
     clock1: clock1,
     clockRisk: clockRisk,
     clockDelayed: clockDelayed,

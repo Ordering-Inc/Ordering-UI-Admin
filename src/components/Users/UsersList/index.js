@@ -23,7 +23,8 @@ import {
   UsersBottomContainer,
   VerifiedItemsContainer,
   VerifiedItem,
-  AllCheckWrapper
+  AllCheckWrapper,
+  OrdersCountWrapper
 } from './styles'
 
 export const UsersList = (props) => {
@@ -37,7 +38,8 @@ export const UsersList = (props) => {
     handleSelectedUsers,
     handleOpenUserDetails,
     handleOpenUserAddForm,
-    setSelectedUsers
+    setSelectedUsers,
+    isCustomer
   } = props
 
   const [, t] = useLanguage()
@@ -205,6 +207,11 @@ export const UsersList = (props) => {
                             <Image bgimage={optimizeImage(user?.photo, 'h_50,c_limit')} />
                           ) : (
                             <FaUserAlt />
+                          )}
+                          {isCustomer && (
+                            <OrdersCountWrapper isNew={user?.orders_count === 0}>
+                              {user?.orders_count || t('NEW', 'New')}
+                            </OrdersCountWrapper>
                           )}
                         </WrapperImage>
                         <InfoBlock>

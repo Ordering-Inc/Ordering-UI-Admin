@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useLanguage, CampaignDetail as CampaignDetailController } from 'ordering-components-admin'
-import { ThreeDots } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { Confirm, Alert } from '../../Shared'
 import { CampaignDetailGeneral } from '../CampaignDetailGeneral'
 import { CampaignDetailContent } from '../CampaignDetailContent'
@@ -17,6 +17,8 @@ import {
   Tabs,
   Tab
 } from './styles'
+import { IconButton } from '../../../styles'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 const CampaignDetailUI = (props) => {
   const {
@@ -28,10 +30,12 @@ const CampaignDetailUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [selectedOption, setSelectedOption] = useState('general')
+  const [isExpand, setIsExpand] = useState(false)
 
   const closeAlert = () => {
     setAlertState({
@@ -56,6 +60,14 @@ const CampaignDetailUI = (props) => {
     })
   }
 
+  const expandSidebar = () => {
+    const element = document.getElementById('campaignDetail')
+    if (!element) return
+    if (isExpand) element.style.width = '550px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
   useEffect(() => {
     if (!formState?.error || formState.loading) return
     setAlertState({
@@ -73,8 +85,16 @@ const CampaignDetailUI = (props) => {
               <CampaignName>{formState?.changes?.name ?? campaignState?.campaign?.name}</CampaignName>
             )}
           </LeftHeader>
-          {!isAddMode && (
-            <RightHeader>
+          <RightHeader>
+            {width > 576 && (
+              <IconButton
+                color='black'
+                onClick={expandSidebar}
+              >
+                {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+              </IconButton>
+            )}
+            {!isAddMode && (
               <ActionSelectorWrapper>
                 <DropdownButton
                   menuAlign={theme?.rtl ? 'left' : 'right'}
@@ -89,8 +109,8 @@ const CampaignDetailUI = (props) => {
                   </Dropdown.Item>
                 </DropdownButton>
               </ActionSelectorWrapper>
-            </RightHeader>
-          )}
+            )}
+          </RightHeader>
         </DetailsHeader>
         <Tabs>
           {contentOptionList.map(option => (

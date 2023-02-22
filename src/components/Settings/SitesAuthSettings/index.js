@@ -4,12 +4,16 @@ import Skeleton from 'react-loading-skeleton'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { Alert, SideBar } from '../../Shared'
 import { SiteSettingDetails } from '../SiteSettingDetails'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   SitesListContainer,
   SitesWrapper,
-  SiteItem
+  SiteItem,
+  Header
 } from './styles'
+import { IconButton } from '../../../styles'
+import { ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 
 const SitesAuthSettingsUI = (props) => {
   const {
@@ -22,8 +26,11 @@ const SitesAuthSettingsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const { width } = useWindowSize()
+
   const [selectedSiteId, setSelectedSiteId] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isExpand, setIsExpand] = useState(false)
 
   const handleOpenSiteSettingDetails = (siteId) => {
     handleGetSiteConfigs(siteId)
@@ -34,6 +41,13 @@ const SitesAuthSettingsUI = (props) => {
   const handleCloseDetails = () => {
     setSelectedSiteId(null)
     setMoveDistance(0)
+  }
+
+  const expandSideBar = () => {
+    const element = document.getElementById('sideSlider')
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
   }
 
   useEffect(() => {
@@ -48,7 +62,17 @@ const SitesAuthSettingsUI = (props) => {
   return (
     <>
       <SitesListContainer>
-        <h1>{t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings')}</h1>
+        <Header>
+          <h1>{t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings')}</h1>
+          {width > 576 && !selectedSiteId && (
+            <IconButton
+              color='black'
+              onClick={expandSideBar}
+            >
+              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+            </IconButton>
+          )}
+        </Header>
         {sitesState.loading ? (
           <SitesWrapper>
             {[...Array(5).keys()].map(i => (

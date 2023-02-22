@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useSession } from 'ordering-components-admin'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import ReactToPrint from 'react-to-print'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 import {
   // Wallet2,
   Printer,
@@ -9,7 +10,9 @@ import {
   ThreeDots,
   XLg as CloseIcon,
   Chat as ChatIcon,
-  Dot
+  Dot,
+  ArrowsAngleExpand,
+  ArrowsAngleContract
 } from 'react-bootstrap-icons'
 import { IconButton as ButtonLink } from '../../../styles'
 import {
@@ -31,11 +34,14 @@ export const OrderDetailsHeader = (props) => {
     showOption,
     openMessage,
     printRef,
-    isServiceOrder
+    isServiceOrder,
+    extraOpen
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [isExpand, setIsExpand] = useState(false)
+  const { width } = useWindowSize()
 
   const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
 
@@ -52,6 +58,19 @@ export const OrderDetailsHeader = (props) => {
     actionSidebar(false)
     if (isTourOpen && currentTourStep === 1) setIsTourOpen(false)
   }
+
+  const expandSideBar = () => {
+    const element = document.getElementById('orderDetails')
+    if (!element) return
+
+    if (isExpand) element.style.width = '500px'
+    else element.style.width = '100vw'
+    setIsExpand(prev => !prev)
+  }
+
+  useEffect(() => {
+    if (extraOpen) setIsExpand(false)
+  }, [extraOpen])
 
   return (
     <OrderDetailsHeaderContainer>
@@ -101,6 +120,14 @@ export const OrderDetailsHeader = (props) => {
           >
             <ThreeDots />
           </ButtonLink>
+          {width > 576 && !extraOpen && (
+            <ButtonLink
+              color='black'
+              onClick={() => expandSideBar()}
+            >
+              {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
+            </ButtonLink>
+          )}
           <ButtonLink
             color='black'
             onClick={() => closeSideBar()}

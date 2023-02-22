@@ -48,7 +48,9 @@ const ProfessionalListingUI = (props) => {
     occupationsState,
     selectedOccupation,
     handleSelectOccupation,
-    setSelectedUsers
+    setSelectedUsers,
+    handleChangeMultiFilterValues,
+    multiFilterValues
   } = props
 
   const [, t] = useLanguage()
@@ -109,6 +111,8 @@ const ProfessionalListingUI = (props) => {
               title={headerTitle}
               searchValue={searchValue}
               onSearch={onSearch}
+              handleChangeMultiFilterValues={handleChangeMultiFilterValues}
+              multiFilterValues={multiFilterValues}
             />
             <UserActiveStateFilter
               selectedUserActiveState={selectedUserActiveState}
@@ -178,6 +182,7 @@ const ProfessionalListingUI = (props) => {
           sidebarId='user_add_form'
           open={openUserAddForm}
           onClose={() => setOpenUserAddForm(false)}
+          showExpandIcon
         >
           <ProfessionalAddForm
             occupations={occupationsState.occupations}

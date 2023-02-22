@@ -41,7 +41,7 @@ export const CountriesList = (props) => {
   const [totalPages, setTotalPages] = useState(null)
   const [currentCountries, setCurrentCountries] = useState([])
 
-  const [openDetaisl, setOpenDetails] = useState(false)
+  const [openDetails, setOpenDetails] = useState(false)
   const [selectedCountry, setSelectedCountry] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
@@ -219,13 +219,14 @@ export const CountriesList = (props) => {
           )}
         </PagesBottomContainer>
       )}
-      {openDetaisl && (
+      {openDetails && (
         <SideBar
-          open={openDetaisl}
+          open={openDetails}
           onClose={() => {
             setOpenDetails(false)
             setSelectedCountry(null)
           }}
+          showExpandIcon
         >
           <CountryDetails
             country={selectedCountry}
