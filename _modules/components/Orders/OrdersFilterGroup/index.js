@@ -54,7 +54,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleChangeOrderId = props.handleChangeOrderId,
     handleChangeCountryCode = props.handleChangeCountryCode,
-    handleChangeCurrency = props.handleChangeCurrency;
+    handleChangeCurrency = props.handleChangeCurrency,
+    handleChangeInput = props.handleChangeInput;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -118,6 +119,20 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
     filterValues: filterValues,
     handleChangeCurrency: handleChangeCurrency
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    name: "metafieldName",
+    placeholder: t('METAFIELD_NAME', 'Metafield name'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafieldName) || '',
+    onChange: handleChangeInput
+  }), (filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafieldName) && /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    name: "metafieldValue",
+    placeholder: t('METAFIELD_VALUE', 'Metafield value'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafieldValue) || '',
+    onChange: handleChangeInput
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
