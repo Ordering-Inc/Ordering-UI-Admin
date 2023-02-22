@@ -273,6 +273,12 @@ Object.defineProperty(exports, "BusinessPublishing", {
     return _BusinessPublishing.BusinessPublishing;
   }
 });
+Object.defineProperty(exports, "BusinessSalesChannel", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessSalesChannel.BusinessSalesChannel;
+  }
+});
 Object.defineProperty(exports, "BusinessSchedule", {
   enumerable: true,
   get: function get() {
@@ -671,6 +677,7 @@ var _BusinessPaymentMethods = require("./BusinessPaymentMethods");
 var _BusinessPreview = require("./BusinessPreview");
 var _BusinessPreorderDetails = require("./BusinessPreorderDetails");
 var _BusinessPromotionList = require("./BusinessPromotionList");
+var _BusinessSalesChannel = require("./BusinessSalesChannel");
 var _BusinessSchedule = require("./BusinessSchedule");
 var _BusinessSupport = require("./BusinessSupport");
 var _BusinessSummary = require("./BusinessSummary");

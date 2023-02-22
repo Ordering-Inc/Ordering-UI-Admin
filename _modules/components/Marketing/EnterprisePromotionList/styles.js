@@ -102,9 +102,7 @@ var PromotionListBottom = _styledComponents.default.div(_templateObject25 || (_t
   return eventDisabled && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    pointer-events: none;\n  "])));
 });
 exports.PromotionListBottom = PromotionListBottom;
-var AddNewButton = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  width: fit-content;\n  font-size: 13px;\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
+var AddNewButton = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  width: fit-content;\n  font-size: 13px;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.AddNewButton = AddNewButton;

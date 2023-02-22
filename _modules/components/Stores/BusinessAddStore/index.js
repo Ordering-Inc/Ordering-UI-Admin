@@ -20,7 +20,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessAddStore = function BusinessAddStore() {
-  var _configs$google_maps_, _configs$country_auto;
+  var _configs$google_maps_;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -81,7 +81,6 @@ var BusinessAddStore = function BusinessAddStore() {
       handleChangeAddress(e);
     },
     autoComplete: "new-password",
-    countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*',
     types: ['restaurant']
   }), /*#__PURE__*/_react.default.createElement("p", null, t('START_TYPING_THEN_SELECT_AN_ADDRESS_FROM_THE_LIST', 'Start typing  then select an address from the list'))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleSkip

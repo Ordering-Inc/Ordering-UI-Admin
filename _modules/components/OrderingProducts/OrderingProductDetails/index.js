@@ -13,6 +13,7 @@ var _Shared = require("../../Shared");
 var _OrderingProductGeneralDetails = require("../OrderingProductGeneralDetails");
 var _SiteTheme = require("../SiteTheme");
 var _styles2 = require("./styles");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -36,6 +37,8 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     selectedTab = _useState2[0],
     setSelectedTab = _useState2[1];
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState3 = (0, _react.useState)({
       open: false,
       content: null,
@@ -44,6 +47,10 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     confirm = _useState4[0],
     setConfirm = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isExpand = _useState6[0],
+    setIsExpand = _useState6[1];
   var tabs = [{
     key: 'general',
     content: t('GENERAL', 'General')
@@ -67,13 +74,24 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
       }
     });
   };
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailHeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, (_siteState$site = siteState.site) === null || _siteState$site === void 0 ? void 0 : _siteState$site.name)), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('product_details');
+    if (!element) return;
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailHeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, (_siteState$site = siteState.site) === null || _siteState$site === void 0 ? void 0 : _siteState$site.name)), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     options: moreOptions,
     onChange: function onChange() {
       return onClickDelete();
     }
-  }))), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, tabs.map(function (tab) {
+  })))), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, tabs.map(function (tab) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: tab.key,
       active: selectedTab === tab.key,

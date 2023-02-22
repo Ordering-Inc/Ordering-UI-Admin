@@ -15,6 +15,7 @@ var _styledComponents = require("styled-components");
 var _styles2 = require("./styles");
 var _RecoveryGeneral = require("../RecoveryGeneral");
 var _RecoveryNotificationList = require("../RecoveryNotificationList");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -38,6 +39,8 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)('general'),
     _useState2 = _slicedToArray(_useState, 2),
     selectedOption = _useState2[0],
@@ -57,6 +60,10 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     confirm = _useState6[0],
     setConfirm = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isExpand = _useState8[0],
+    setIsExpand = _useState8[1];
   var recoveryOptionList = [{
     key: 'general',
     name: t('GENERAL', 'General')
@@ -92,6 +99,13 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
       }
     });
   };
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('loyaltyWallet');
+    if (isExpand) element.style.width = '550px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error) || actionState.loading) return;
     setAlertState({
@@ -106,7 +120,10 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
         enabled: val
       });
     }
-  })), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'

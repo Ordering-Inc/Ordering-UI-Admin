@@ -310,7 +310,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     onSearch: handleChangeSearch,
     placeholder: t('SEARCH', 'Search'),
     customClass: "searchBar"
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }))), slug && /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     outline: true,
     borderRadius: "8px",
@@ -377,7 +377,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setProductsPerPage: setProductsPerPage
   }))))), openSidebar === 'category_details' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     open: openSidebar === 'category_details',
-    onClose: handleCloseEdit
+    onClose: handleCloseEdit,
+    sidebarId: "editCategory"
   }, /*#__PURE__*/_react.default.createElement(_BusinessProductsCategoyDetails.BusinessProductsCategoyDetails, _extends({}, props, {
     onClose: handleCloseEdit,
     category: currentCategory,

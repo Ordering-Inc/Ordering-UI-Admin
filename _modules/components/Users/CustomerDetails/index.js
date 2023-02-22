@@ -17,6 +17,7 @@ var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
 var _CustomerPointsWallet = require("../CustomerPointsWallet");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -42,6 +43,8 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     optimizeImage = _useUtils2[0].optimizeImage;
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     showOption = _useState2[0],
@@ -62,6 +65,10 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     menuMoveDistance = _useState8[0],
     setMenuMoveDistance = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    isExpand = _useState10[0],
+    setIsExpand = _useState10[1];
   var customerMenus = [{
     key: 'user_details',
     value: t('USER_DETAILS', 'User details')
@@ -98,11 +105,21 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     setIsOpenMenu(false);
     setMenuMoveDistance(0);
   };
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('customer_details');
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     handleParentSidebarMove(0);
     setIsOpenMenu(false);
     setShowOption(null);
   }, [userState === null || userState === void 0 ? void 0 : (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.id]);
+  (0, _react.useEffect)(function () {
+    if (isOpenMenu) setIsExpand(false);
+  }, [isOpenMenu]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.UserName, null, userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   }) : /*#__PURE__*/_react.default.createElement("span", {
@@ -119,7 +136,12 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
         enabled: enabled
       }));
     }
-  }))), !!((_userState$user5 = userState.user) !== null && _userState$user5 !== void 0 && _userState$user5.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!((_userState$user6 = userState.user) !== null && _userState$user6 !== void 0 && _userState$user6.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }))), !!((_userState$user5 = userState.user) !== null && _userState$user5 !== void 0 && _userState$user5.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!((_userState$user6 = userState.user) !== null && _userState$user6 !== void 0 && _userState$user6.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && !isOpenMenu && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: function onClick() {
+      return expandSidebar();
+    }
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -127,7 +149,7 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     onClick: function onClick() {
       return onDeleteCustomer();
     }
-  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles2.PhotoWrapper, null, userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null) : (_userState$user7 = userState.user) !== null && _userState$user7 !== void 0 && _userState$user7.photo ? /*#__PURE__*/_react.default.createElement("img", {
+  }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_styles2.PhotoWrapper, null, userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null) : (_userState$user7 = userState.user) !== null && _userState$user7 !== void 0 && _userState$user7.photo ? /*#__PURE__*/_react.default.createElement("img", {
     src: optimizeImage((_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.photo, 'w_220,c_limit'),
     alt: ""
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null)), /*#__PURE__*/_react.default.createElement(_styles2.MenusContainer, {

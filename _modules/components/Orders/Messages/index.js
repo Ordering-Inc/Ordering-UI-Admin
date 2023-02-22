@@ -11,6 +11,7 @@ var _reactHookForm = require("react-hook-form");
 var _styledComponents = require("styled-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _AiOutlineInfoCircle = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineInfoCircle"));
+var _MdcCloseOctagonOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcCloseOctagonOutline"));
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 var _reactBootstrap = require("react-bootstrap");
 var _styles = require("./styles");
@@ -115,6 +116,9 @@ var MessagesUI = function MessagesUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     isChatDisabled = _useState14[0],
     setIsChatDisabled = _useState14[1];
+  var previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17];
+  var chatDisabled = previousStatus.includes(order === null || order === void 0 ? void 0 : order.status);
+  console.log(order === null || order === void 0 ? void 0 : order.status);
   var adminMessageList = [{
     key: 'message_1',
     text: t('ADMIN_MESSAGE_1', 'admin_message_1')
@@ -623,7 +627,7 @@ var MessagesUI = function MessagesUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_Shared.Image, {
     src: optimizeImage((_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.photo, 'w_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
-  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.name, " ", (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))))), messageList.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuickMessageWrapper, null, messageList.map(function (quickMessage, i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.name, " ", (_order$driver8 = order.driver) === null || _order$driver8 === void 0 ? void 0 : _order$driver8.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))))), chatDisabled ? /*#__PURE__*/_react.default.createElement(_styles.NotSendMessage, null, /*#__PURE__*/_react.default.createElement(_MdcCloseOctagonOutline.default, null), /*#__PURE__*/_react.default.createElement("p", null, t('NOT_SEND_MESSAGES', 'You can\'t send messages because the order has ended'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, messageList.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.QuickMessageWrapper, null, messageList.map(function (quickMessage, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Button, {
       key: i,
       color: "secundaryDark",
@@ -680,7 +684,7 @@ var MessagesUI = function MessagesUI(props) {
     type: "submit",
     disabled: sendMessage.loading || message === '' && !image || messages.loading,
     ref: buttonRef
-  }, /*#__PURE__*/_react.default.createElement(_IosSend.default, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement("span", null, t('SEND', 'send')))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, /*#__PURE__*/_react.default.createElement(_IosSend.default, null), sendMessage.loading ? /*#__PURE__*/_react.default.createElement("span", null, t('SENDING_MESSAGE', 'Sending...')) : /*#__PURE__*/_react.default.createElement("span", null, t('SEND', 'send'))))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('ERROR', 'error'),
     content: alertState.content,
     acceptText: t('ACCEPT'),

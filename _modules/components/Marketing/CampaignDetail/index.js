@@ -14,6 +14,8 @@ var _Shared = require("../../Shared");
 var _CampaignDetailGeneral = require("../CampaignDetailGeneral");
 var _CampaignDetailContent = require("../CampaignDetailContent");
 var _styles = require("./styles");
+var _styles2 = require("../../../styles");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -35,6 +37,8 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)({
       open: false,
       content: null,
@@ -54,6 +58,10 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     selectedOption = _useState6[0],
     setSelectedOption = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isExpand = _useState8[0],
+    setIsExpand = _useState8[1];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -79,6 +87,14 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
       }
     });
   };
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('campaignDetail');
+    if (!element) return;
+    if (isExpand) element.style.width = '550px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     if (!(formState !== null && formState !== void 0 && formState.error) || formState.loading) return;
     setAlertState({
@@ -86,7 +102,10 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
       content: formState === null || formState === void 0 ? void 0 : formState.error
     });
   }, [formState === null || formState === void 0 ? void 0 : formState.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CampaignDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) || (campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai = campaignState.campaign) === null || _campaignState$campai === void 0 ? void 0 : _campaignState$campai.name)) && /*#__PURE__*/_react.default.createElement(_styles.CampaignName, null, (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai2 = campaignState.campaign) === null || _campaignState$campai2 === void 0 ? void 0 : _campaignState$campai2.name)), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CampaignDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) || (campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai = campaignState.campaign) === null || _campaignState$campai === void 0 ? void 0 : _campaignState$campai.name)) && /*#__PURE__*/_react.default.createElement(_styles.CampaignName, null, (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai2 = campaignState.campaign) === null || _campaignState$campai2 === void 0 ? void 0 : _campaignState$campai2.name)), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'

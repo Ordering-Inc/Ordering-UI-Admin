@@ -27,7 +27,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
-  var _configState$configs, _configState$configs$, _formState$changes6, _formState$changes7, _formState$result3, _formState$changes8, _formState$changes9, _formState$changes10, _formState$result4, _formState$changes11, _formState$changes12, _formState$changes13, _formState$changes14, _formState$changes15, _formState$changes16, _formState$changes17, _formState$changes17$, _formState$changes18, _formState$changes18$, _formState$changes19, _formState$changes19$, _formState$changes20, _formState$changes20$, _formState$changes23;
+  var _configState$configs, _configState$configs$, _formState$changes6, _formState$changes7, _formState$result3, _formState$changes8, _formState$changes9, _formState$changes10, _formState$result4, _formState$changes11, _formState$changes12, _formState$changes13, _formState$changes14, _formState$changes15, _formState$changes16, _formState$changes16$, _formState$changes17, _formState$changes17$, _formState$changes18, _formState$changes18$, _formState$changes19, _formState$changes19$, _formState$changes22;
   var formState = props.formState,
     handlechangeImage = props.handlechangeImage,
     handleChangeInput = props.handleChangeInput,
@@ -300,7 +300,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
       handleChangeInput(e);
     },
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('EXTERNAL_ID', 'External Id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('EXTERNAL_ID', 'External Id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('EXTERNAL_ID', 'External Id'),
     name: "external_id",
     value: (formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.external_id) || '',
@@ -317,27 +317,15 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     value: (formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.description) || '',
     onChange: handleChangeInput,
     autoComplete: "off"
-  })), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.CategoryNameWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "slug",
-    placeholder: t('SLUG', 'Slug'),
-    onChange: handleChangeInput,
-    disabled: formState.loading,
-    autoComplete: "off",
-    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.slug) || '',
-    onKeyPress: function onKeyPress(e) {
-      if (e.which === 32) {
-        e.preventDefault();
-      }
-    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('RIBBON', 'Ribbon')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : (_formState$changes17$ = _formState$changes17.ribbon) === null || _formState$changes17$ === void 0 ? void 0 : _formState$changes17$.enabled) || false,
+    defaultChecked: (formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : (_formState$changes16$ = _formState$changes16.ribbon) === null || _formState$changes16$ === void 0 ? void 0 : _formState$changes16$.enabled) || false,
     onChange: function onChange(val) {
       return handleChangeEnable(val);
     }
-  })), (formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : (_formState$changes18$ = _formState$changes18.ribbon) === null || _formState$changes18$ === void 0 ? void 0 : _formState$changes18$.enabled) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.RibbonTextWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEXT', 'Text')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), (formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : (_formState$changes17$ = _formState$changes17.ribbon) === null || _formState$changes17$ === void 0 ? void 0 : _formState$changes17$.enabled) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.RibbonTextWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEXT', 'Text')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "text",
     placeholder: t('TEXT', 'Text'),
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : (_formState$changes19$ = _formState$changes19.ribbon) === null || _formState$changes19$ === void 0 ? void 0 : _formState$changes19$.text,
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : (_formState$changes18$ = _formState$changes18.ribbon) === null || _formState$changes18$ === void 0 ? void 0 : _formState$changes18$.text,
     onChange: function onChange(e) {
       return handleChangeRibbon({
         text: e.target.value
@@ -346,25 +334,25 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     disabled: formState.loading,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.ColorShapeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ColorWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('COLOR', 'Color')), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
-    defaultColor: formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : (_formState$changes20$ = _formState$changes20.ribbon) === null || _formState$changes20$ === void 0 ? void 0 : _formState$changes20$.color,
+    defaultColor: formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : (_formState$changes19$ = _formState$changes19.ribbon) === null || _formState$changes19$ === void 0 ? void 0 : _formState$changes19$.color,
     onChangeColor: function onChangeColor(color) {
       return handleChangeRibbon({
         color: color
       });
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ShapeWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHAPE', 'Shape')), /*#__PURE__*/_react.default.createElement(_styles2.ShapeContentWrapper, null, _utils.shape && Object.keys(_utils.shape).map(function (key, i) {
-    var _formState$changes21, _formState$changes21$, _formState$changes22, _formState$changes22$;
+    var _formState$changes20, _formState$changes20$, _formState$changes21, _formState$changes21$;
     return /*#__PURE__*/_react.default.createElement(_styles2.ShapeBoxWrapper, {
       key: i,
       shapeRect: _utils.shape[key] === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
       round: _utils.shape[key] === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape),
-      active: (formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : (_formState$changes21$ = _formState$changes21.ribbon) === null || _formState$changes21$ === void 0 ? void 0 : _formState$changes21$.shape) === _utils.shape[key],
+      active: (formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : (_formState$changes20$ = _formState$changes20.ribbon) === null || _formState$changes20$ === void 0 ? void 0 : _formState$changes20$.shape) === _utils.shape[key],
       onClick: function onClick() {
         return handleChangeRibbon({
           shape: _utils.shape[key]
         });
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null), (formState === null || formState === void 0 ? void 0 : (_formState$changes22 = formState.changes) === null || _formState$changes22 === void 0 ? void 0 : (_formState$changes22$ = _formState$changes22.ribbon) === null || _formState$changes22$ === void 0 ? void 0 : _formState$changes22$.shape) === _utils.shape[key] ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
+    }, /*#__PURE__*/_react.default.createElement("div", null), (formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : (_formState$changes21$ = _formState$changes21.ribbon) === null || _formState$changes21$ === void 0 ? void 0 : _formState$changes21$.shape) === _utils.shape[key] ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
   }))))), useParentCategory === '1' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, categorySelected && isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.BusinessEnableWrapper, {
     style: {
       paddingTop: 20,
@@ -385,7 +373,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
   })), !isAddMode && categorySelected && parentCategories.length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ParentCategorySelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PARENT_CATEGORY', 'Parent category')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_PARENT_CATEGORY', 'Select a parent category'),
     options: parentCategoriesOptions,
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes23 = formState.changes) === null || _formState$changes23 === void 0 ? void 0 : _formState$changes23.parent_category_id,
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes22 = formState.changes) === null || _formState$changes22 === void 0 ? void 0 : _formState$changes22.parent_category_id,
     onChange: function onChange(val) {
       return handleChangeItem({
         parent_category_id: val
@@ -439,7 +427,7 @@ var BusinessProductsCategoyInfo = function BusinessProductsCategoyInfo(props) {
     padding: "30px",
     title: t('IMAGE_CROP', 'Image crop'),
     open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
-    onClose: function onClose() {
+    onRemove: function onRemove() {
       return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
         open: false
       }));

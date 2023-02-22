@@ -82,6 +82,10 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isOpenDetails = _useState12[0],
     setIsOpenDetails = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    isExpand = _useState14[0],
+    setIsExpand = _useState14[1];
   (0, _react.useEffect)(function () {
     var _driversGroupMenus = !driversGroupState.driversGroup ? [{
       key: 'general',
@@ -144,6 +148,14 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     setShowMenu('businesses');
     handleNextTour();
   };
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('driver_group_details');
+    if (!element) return;
+    if (isExpand) element.style.width = '540px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     var _driversGroupState$dr, _driversGroupState$dr2;
     setUseAdvanced(!(((_driversGroupState$dr = driversGroupState.driversGroup) === null || _driversGroupState$dr === void 0 ? void 0 : _driversGroupState$dr.autoassign_amount_drivers) === 0 && ((_driversGroupState$dr2 = driversGroupState.driversGroup) === null || _driversGroupState$dr2 === void 0 ? void 0 : _driversGroupState$dr2.orders_group_max_orders) === 0));
@@ -167,7 +179,10 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
         enabled: enabled
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -175,7 +190,10 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     onClick: function onClick() {
       return onDeleteGroup();
     }
-  }, t('DELETE', 'Delete'))))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')))), /*#__PURE__*/_react.default.createElement(_styles2.MenusContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, driversGroupMenus.map(function (menu) {
+  }, t('DELETE', 'Delete')))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group'))), width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)))), /*#__PURE__*/_react.default.createElement(_styles2.MenusContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, driversGroupMenus.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: menu.key,
       active: menu.key === showMenu,

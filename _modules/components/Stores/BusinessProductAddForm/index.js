@@ -178,6 +178,10 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     });
   };
   var handleChangeSelect = function handleChangeSelect(value) {
+    setCurPreorderTime({
+      hour: '0',
+      minute: '0'
+    });
     if (value === 'custom') {
       setIsCustom(true);
       handleChangeItem({
@@ -185,10 +189,6 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
       });
       return;
     }
-    setCurPreorderTime({
-      hour: '0',
-      minute: '0'
-    });
     setIsCustom(false);
     handleChangeItem({
       duration: value
@@ -324,7 +324,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     padding: "30px",
     title: t('IMAGE_CROP', 'Image crop'),
     open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
-    onClose: function onClose() {
+    onRemove: function onRemove() {
       return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
         open: false
       }));

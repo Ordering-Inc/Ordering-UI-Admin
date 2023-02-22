@@ -26,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SeoOptions = function SeoOptions(props) {
-  var _formState$changes, _formState$result, _formState$changes2, _formState$changes3, _formState$changes4, _formState$result2, _formState$result3, _formState$result3$re, _ref, _formState$changes$se, _formState$changes5, _formState$result4, _formState$result5, _formState$result5$re, _ref2, _formState$changes$se2, _formState$changes6, _formState$result6, _formState$result7, _formState$result7$re, _ref3, _formState$changes$se3, _formState$changes7;
+  var _formState$changes, _formState$result, _formState$changes2, _formState$changes3, _formState$changes4, _formState$result2, _formState$result3, _formState$result3$re, _ref, _formState$changes$se, _formState$changes5, _formState$result4, _formState$result5, _formState$result5$re, _ref2, _formState$changes$se2, _formState$changes6, _formState$result6, _formState$result7, _formState$result7$re, _ref3, _formState$changes$se3, _formState$changes7, _formState$result8, _formState$result9, _formState$result9$re, _ref4, _formState$changes$sl, _formState$changes8;
   var data = props.data,
     formState = props.formState,
     setFormState = props.setFormState,
@@ -59,10 +59,6 @@ var SeoOptions = function SeoOptions(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     cropState = _useState4[0],
     setCropState = _useState4[1];
-  var _useState5 = (0, _react.useState)(false),
-    _useState6 = _slicedToArray(_useState5, 2),
-    isSameInfo = _useState6[0],
-    setIsSameInfo = _useState6[1];
   var titleRef = (0, _react.useRef)(null);
   var descriptionRef = (0, _react.useRef)(null);
   var handleClickImage = function handleClickImage() {
@@ -140,8 +136,7 @@ var SeoOptions = function SeoOptions(props) {
       content: []
     });
   };
-  (0, _react.useEffect)(function () {
-    if (!isSameInfo) return;
+  var handleUseSameInfo = function handleUseSameInfo() {
     if (isBusinessSeo) {
       setFormState(_objectSpread(_objectSpread({}, formState), {}, {
         changes: {
@@ -157,10 +152,9 @@ var SeoOptions = function SeoOptions(props) {
     }
     titleRef.current.value = data === null || data === void 0 ? void 0 : data.name;
     descriptionRef.current.value = data === null || data === void 0 ? void 0 : data.description;
-  }, [isSameInfo, isBusinessSeo, data]);
+  };
   (0, _react.useEffect)(function () {
     var _data$seo_title, _data$seo_description;
-    setIsSameInfo(false);
     titleRef.current.value = (_data$seo_title = data === null || data === void 0 ? void 0 : data.seo_title) !== null && _data$seo_title !== void 0 ? _data$seo_title : '';
     descriptionRef.current.value = (_data$seo_description = data === null || data === void 0 ? void 0 : data.seo_description) !== null && _data$seo_description !== void 0 ? _data$seo_description : '';
   }, [data]);
@@ -200,12 +194,9 @@ var SeoOptions = function SeoOptions(props) {
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
     isImage: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.seo_image) || data.seo_image
-  }, /*#__PURE__*/_react.default.createElement(_styles2.CameraWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP', 'Drag and Drop')))))))), /*#__PURE__*/_react.default.createElement(_styles2.UseSameInfoWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: isSameInfo || false,
-    onChange: function onChange(val) {
-      return setIsSameInfo(val);
-    }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperShortDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEO_TITLE', 'SEO Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.CameraWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP', 'Drag and Drop')))))))), /*#__PURE__*/_react.default.createElement(_styles2.UseSameInfoWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+    onClick: handleUseSameInfo
+  }, t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information'))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperShortDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEO_TITLE', 'SEO Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "seo_title",
     ref: titleRef,
     defaultValue: formState !== null && formState !== void 0 && (_formState$result2 = formState.result) !== null && _formState$result2 !== void 0 && _formState$result2.result ? formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.seo_title : (_ref = (_formState$changes$se = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.seo_title) !== null && _formState$changes$se !== void 0 ? _formState$changes$se : data === null || data === void 0 ? void 0 : data.seo_title) !== null && _ref !== void 0 ? _ref : '',
@@ -231,6 +222,13 @@ var SeoOptions = function SeoOptions(props) {
       return handleProductCategoryChangeInput(e);
     },
     placeholder: t('SEO_KEYWORDS', 'SEO Keywords')
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "slug",
+    placeholder: t('SLUG', 'Slug'),
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result8 = formState.result) !== null && _formState$result8 !== void 0 && _formState$result8.result ? formState === null || formState === void 0 ? void 0 : (_formState$result9 = formState.result) === null || _formState$result9 === void 0 ? void 0 : (_formState$result9$re = _formState$result9.result) === null || _formState$result9$re === void 0 ? void 0 : _formState$result9$re.slug : (_ref4 = (_formState$changes$sl = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.slug) !== null && _formState$changes$sl !== void 0 ? _formState$changes$sl : data === null || data === void 0 ? void 0 : data.slug) !== null && _ref4 !== void 0 ? _ref4 : '',
+    onChange: function onChange(e) {
+      return handleProductCategoryChangeInput(e);
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "5px",
@@ -256,7 +254,7 @@ var SeoOptions = function SeoOptions(props) {
     padding: "30px",
     title: t('IMAGE_CROP', 'Image crop'),
     open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
-    onClose: function onClose() {
+    onRemove: function onRemove() {
       return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
         open: false
       }));

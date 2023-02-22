@@ -76,6 +76,10 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     _useState6 = _slicedToArray(_useState5, 2),
     confirm = _useState6[0],
     setConfirm = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isExpand = _useState8[0],
+    setIsExpand = _useState8[1];
   var tabOptions = [{
     key: 'general',
     content: t('GENERAL', 'General')
@@ -143,6 +147,14 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     }
     return true;
   };
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('sideSlider');
+    if (!element) return;
+    if (isExpand) element.style.width = '600px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error) || actionState.loading) return;
     setAlertState({
@@ -157,7 +169,10 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
         enabled: val
       });
     }
-  })), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.WrapperActionSelector, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.WrapperActionSelector, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -165,7 +180,7 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     onClick: function onClick() {
       return onClickDeletePromotion();
     }
-  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, tabOptions.map(function (option) {
+  }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_styles2.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, tabOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: option.key,
       active: selectedOption === option.key,

@@ -24,7 +24,7 @@ var SearchWrapper = _styledComponents.default.div(_templateObject4 || (_template
 exports.SearchWrapper = SearchWrapper;
 var TableWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  width: 100%;\n  overflow: auto;\n"])));
 exports.TableWrapper = TableWrapper;
-var BusinessTable = _styledComponents.default.table(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  border-collapse: collapse;\n  width: 100%;\n  min-width: 500px;\n\n  > thead {\n    border-bottom: 1px solid ", ";\n    tr{\n      th {\n        padding: 12px 0px;\n        :not(.business-info) {\n          text-align: center;\n        }\n      }\n    }\n  }\n"])), function (props) {
+var BusinessTable = _styledComponents.default.table(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  border-collapse: collapse;\n  width: 100%;\n  min-width: 500px;\n\n  > thead {\n    border-bottom: 1px solid ", ";\n    tr{\n      th {\n        padding: 12px 5px;\n        :not(.business-info) {\n          text-align: center;\n        }\n        &:first-child, &:last-child {\n          padding: 12px 0px;\n        }\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.secundaryLight;
 });
 exports.BusinessTable = BusinessTable;
@@ -41,12 +41,12 @@ var TBoday = _styledComponents.default.tbody(_templateObject7 || (_templateObjec
   });
 });
 exports.TBoday = TBoday;
-var BusinessInfoWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > span {\n    font-size: 14px;\n    margin-left: 12px;\n    ", "\n  }\n"])), function (props) {
+var BusinessInfoWrapper = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > span {\n    font-size: 14px;\n    margin-left: 12px;\n    ", "\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n"])), function (props) {
   var _props$theme2;
   return ((_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.rtl) && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n      margin-right: 12px;\n      margin-left: 0;\n    "])));
 });
 exports.BusinessInfoWrapper = BusinessInfoWrapper;
-var WrapperImage = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  max-width: 38px;\n  max-height: 38px;\n  height: 38px;\n  width: 38px;\n\n  ", "\n  border-radius: 8px;\n\n  > svg {\n    width: 100%;\n    height: 100%;\n  }\n"])), function (_ref2) {
+var WrapperImage = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  max-width: 38px;\n  min-width: 38px;\n  max-height: 38px;\n  height: 38px;\n  width: 38px;\n\n  ", "\n  border-radius: 8px;\n\n  > svg {\n    width: 100%;\n    height: 100%;\n  }\n"])), function (_ref2) {
   var isSkeleton = _ref2.isSkeleton;
   return isSkeleton ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    background: #F8F9FA;\n  "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  "])));
 });

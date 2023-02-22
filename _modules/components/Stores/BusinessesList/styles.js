@@ -32,7 +32,7 @@ var BusinessCardContainer = _styledComponents.default.div(_templateObject4 || (_
 });
 exports.BusinessCardContainer = BusinessCardContainer;
 var AddNewButtonLink = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  width: fit-content;\n  cursor: pointer;\n  color: ", ";\n  font-size: 14px;\n"])), function (props) {
-  return props.theme.colors.lightGray;
+  return props.theme.colors.primary;
 });
 exports.AddNewButtonLink = AddNewButtonLink;
 var BusinessListBottomContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n"])));

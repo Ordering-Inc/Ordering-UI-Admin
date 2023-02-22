@@ -18,11 +18,9 @@ var ListContent = _styledComponents.default.div(_templateObject3 || (_templateOb
   return props.theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      padding-left: 18px;"]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      padding-right: 18px;"])));
 });
 exports.ListContent = ListContent;
-var AddCategory = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: inline;\n  user-select: none;\n  font-size: 14px;\n  color: ", ";\n  cursor: pointer;\n  margin: 15px 10px;\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
+var AddCategory = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  display: inline;\n  user-select: none;\n  font-size: 14px;\n  color: ", ";\n  cursor: pointer;\n  margin: 15px 10px;\n"])), function (props) {
   var _props$theme$colors;
-  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.lightGray;
-}, function (props) {
-  return props.theme.colors.primary;
+  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;
 });
 exports.AddCategory = AddCategory;
 var CategoryTab = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  padding: 10px 15px;\n  cursor: pointer;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-left: ", "px;\n  border-radius: 8px;\n\n  ", "\n\n  &:hover {\n    background: ", ";\n  }\n"])), function (props) {

@@ -149,16 +149,10 @@ var PaymentOption = function PaymentOption(props) {
     });
   }, [businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.id, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types]);
   (0, _react.useEffect)(function () {
-    if (changesState !== null && changesState !== void 0 && changesState.allowed_order_types) {
-      setLocalState({
-        allowed_order_types: changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types
-      });
-    }
-    if (changesState !== null && changesState !== void 0 && changesState.sites) {
-      setLocalState({
-        sites: changesState === null || changesState === void 0 ? void 0 : changesState.sites
-      });
-    }
+    var changes = {};
+    if (changesState !== null && changesState !== void 0 && changesState.allowed_order_types) changes.allowed_order_types = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types;
+    if (changesState !== null && changesState !== void 0 && changesState.sites) changes.sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites;
+    if (Object.keys(changes).length > 0) setLocalState(JSON.parse(JSON.stringify(changes)));
   }, [changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types, changesState === null || changesState === void 0 ? void 0 : changesState.sites]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles3.Container, {
     id: "payment_method_option"

@@ -1635,12 +1635,6 @@ Object.defineProperty(exports, "PluginList", {
     return _Settings.PluginList;
   }
 });
-Object.defineProperty(exports, "PointsWallet", {
-  enumerable: true,
-  get: function get() {
-    return _Loyalty.PointsWallet;
-  }
-});
 Object.defineProperty(exports, "PointsWalletBusinessDetail", {
   enumerable: true,
   get: function get() {
@@ -2293,6 +2287,12 @@ Object.defineProperty(exports, "UsersReviewList", {
   enumerable: true,
   get: function get() {
     return _BusinessIntelligence.UsersReviewList;
+  }
+});
+Object.defineProperty(exports, "Wallet", {
+  enumerable: true,
+  get: function get() {
+    return _Loyalty.Wallet;
   }
 });
 Object.defineProperty(exports, "WebhookDelaySelector", {

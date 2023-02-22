@@ -33,7 +33,8 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     usersList = props.usersList,
     paginationProps = props.paginationProps,
     getUsers = props.getUsers,
-    onSearch = props.onSearch;
+    onSearch = props.onSearch,
+    defaultUserTypesSelected = props.defaultUserTypesSelected;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -50,6 +51,7 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     curDriver = _useState4[0],
     setCurDriver = _useState4[1];
+  var headerTitle = defaultUserTypesSelected.length === 1 && defaultUserTypesSelected[0] === 3 ? t('CUSTOMER', 'Customer') : defaultUserTypesSelected[0] === 8 ? t('PROFESSIONAL', 'Professional') : t('DRIVER', 'Driver');
   var handleChangePage = function handleChangePage(page) {
     getUsers(page, 10);
   };
@@ -72,7 +74,7 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
-  }, t('DRIVER', 'Driver'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
+  }, headerTitle)), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
     isHeader: true
   }, t('REVIEWS', 'Reviews'))))), usersList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewTbody, {
@@ -114,7 +116,8 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     onClose: function onClose() {
       setCurDriver(null);
       setOpenReview(false);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_UserReviewDetails.UserReviewDetails, {
     userId: curDriver === null || curDriver === void 0 ? void 0 : curDriver.id,
     driver: curDriver

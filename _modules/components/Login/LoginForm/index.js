@@ -8,6 +8,7 @@ exports.LoginForm = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 var _reactHookForm = require("react-hook-form");
+var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _useCountdownTimer3 = require("../../../hooks/useCountdownTimer");
 var _Shared = require("../../Shared");
@@ -40,6 +41,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var LoginFormUI = function LoginFormUI(props) {
   var _configs$dashboard_lo, _theme$images, _theme$images$general, _configs$dashboard_lo2, _theme$images2, _theme$images2$logos;
   var useLoginOtpEmail = props.useLoginOtpEmail,
+    useLoginOptCellphone = props.useLoginOptCellphone,
     useLoginByCellphone = props.useLoginByCellphone,
     handleChangeInput = props.handleChangeInput,
     handleButtonLoginClick = props.handleButtonLoginClick,
@@ -57,7 +59,10 @@ var LoginFormUI = function LoginFormUI(props) {
     handleChangeTab = props.handleChangeTab,
     generateOtpCode = props.generateOtpCode,
     otpState = props.otpState,
-    setOtpState = props.setOtpState;
+    setOtpState = props.setOtpState,
+    useLoginByEmail = props.useLoginByEmail,
+    handleChangeCredentials = props.handleChangeCredentials,
+    credentials = props.credentials;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -113,7 +118,15 @@ var LoginFormUI = function LoginFormUI(props) {
     otpLeftTime = _useCountdownTimer2[0],
     resetOtpLeftTime = _useCountdownTimer2[2];
   var isOtpEmail = loginTab === 'otp' && otpType === 'email';
+  var isOptCellphone = loginTab === 'otp' && otpType === 'cellphone';
   var onSubmit = function onSubmit() {
+    if (useLoginOptCellphone && loginTab === 'otp' && otpType === 'cellphone' && !(credentials !== null && credentials !== void 0 && credentials.country_phone_code) && !(credentials !== null && credentials !== void 0 && credentials.cellphone)) {
+      setAlertState({
+        open: true,
+        content: [t('PHONE_NUMBER_IS_NOT_VALID', 'Phone number is not valid')]
+      });
+      return;
+    }
     setSubmitted(true);
   };
   var timeout = null;
@@ -140,6 +153,23 @@ var LoginFormUI = function LoginFormUI(props) {
         setWillVerifyOtpState(true);
       }
     }
+  };
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+    var phoneNumberParser = null;
+    var values = {
+      country_phone_code: '',
+      cellphone: ''
+    };
+    if (isValid) {
+      phoneNumberParser = (0, _libphonenumberJs.default)(number);
+    }
+    if (phoneNumberParser) {
+      values = {
+        country_phone_code: phoneNumberParser.countryCallingCode,
+        cellphone: phoneNumberParser.nationalNumber
+      };
+    }
+    handleChangeCredentials(values);
   };
   (0, _react.useEffect)(function () {
     if (ordering.project === null || !submitted) return;
@@ -257,17 +287,27 @@ var LoginFormUI = function LoginFormUI(props) {
     alt: "Logo login"
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormSide, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement(_styles2.TitleFormSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WELCOME', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_ADMIN_LOGIN', 'Let’s start to admin your business now'))), (ordering === null || ordering === void 0 ? void 0 : ordering.project) && useLoginOtpEmail && !loginWithOtpState && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles2.LoginWith, null, /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.TitleFormSide, null, /*#__PURE__*/_react.default.createElement("h1", null, t('WELCOME', 'Welcome!')), /*#__PURE__*/_react.default.createElement("p", null, t('SUBTITLE_ADMIN_LOGIN', 'Let’s start to admin your business now'))), (ordering === null || ordering === void 0 ? void 0 : ordering.project) && /*#__PURE__*/_react.default.createElement(_styles2.LoginWith, null, /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, useLoginByEmail && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     onClick: function onClick() {
       return handleChangeTab('email');
     },
     active: loginTab === 'email'
-  }, t('LOGIN_WITH_EMAIL', 'Login with Email')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, t('LOGIN_WITH_EMAIL', 'Login with Email')), useLoginOtpEmail && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     onClick: function onClick() {
       return handleChangeOtpType('email');
     },
     active: isOtpEmail
-  }, t('BY_OTP_EMAIL', 'by Otp Email')))), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
+  }, t('BY_OTP_EMAIL', 'by Otp Email')), useLoginOptCellphone && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    onClick: function onClick() {
+      return handleChangeOtpType('cellphone');
+    },
+    active: isOptCellphone
+  }, t('BY_OTP_PHONE', 'by Otp Phone')), useLoginByCellphone && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    onClick: function onClick() {
+      return handleChangeTab('cellphone');
+    },
+    active: loginTab === 'cellphone'
+  }, t('LOGIN_WITH_PHONE', 'Login with phone')))), /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit)
@@ -284,7 +324,7 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     autoComplete: "off",
     autoCapitalize: "off"
-  }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), !willVerifyOtpState && (loginTab === 'email' || loginTab === 'otp' && otpType === 'email') && /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "email",
     name: "email",
     "aria-label": "email",
@@ -301,7 +341,7 @@ var LoginFormUI = function LoginFormUI(props) {
     },
     autoComplete: "off",
     autoCapitalize: "off"
-  }), /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null)), useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_HiOutlineMail.default, null)), useLoginByCellphone && loginTab === 'cellphone' && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "tel",
     name: "cellphone",
     "aria-label": "cellphone",
@@ -313,7 +353,9 @@ var LoginFormUI = function LoginFormUI(props) {
       return handleChangeInput(e);
     },
     autoComplete: "off"
-  }), loginTab !== 'otp' && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null)), !willVerifyOtpState && useLoginOptCellphone && loginTab === 'otp' && otpType === 'cellphone' && /*#__PURE__*/_react.default.createElement(_styles2.PhoneNumberWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
+    setValue: handleChangePhoneNumber
+  })), loginTab !== 'otp' && !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: !passwordSee ? 'password' : 'text',
     name: "password",
     "aria-label": "password",

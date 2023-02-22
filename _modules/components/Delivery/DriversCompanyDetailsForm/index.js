@@ -15,6 +15,8 @@ var _DriversCompanyGeneralDetails = require("../DriversCompanyGeneralDetails");
 var _DriversCompanyScheduleDetails = require("../DriversCompanyScheduleDetails");
 var _DriversCompanyWebhooksDetails = require("../DriversCompanyWebhooksDetails");
 var _styles = require("./styles");
+var _styles2 = require("../../../styles");
+var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -37,6 +39,8 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)('general'),
     _useState2 = _slicedToArray(_useState, 2),
     currentTabItem = _useState2[0],
@@ -56,6 +60,10 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     confirm = _useState6[0],
     setConfirm = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isExpand = _useState8[0],
+    setIsExpand = _useState8[1];
   var tabItems = [{
     key: 'general',
     content: t('GENERAL', 'General')
@@ -85,6 +93,14 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
       }
     });
   };
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('city-details');
+    if (!element) return;
+    if (isExpand) element.style.width = '550px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
+  };
   (0, _react.useEffect)(function () {
     if (!actionState.loading && actionState.error) {
       setAlertState({
@@ -93,7 +109,10 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
       });
     }
   }, [actionState]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, driversCompany ? (_ref = (_changesState$name = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name !== void 0 ? _changesState$name : driversCompany === null || driversCompany === void 0 ? void 0 : driversCompany.name) !== null && _ref !== void 0 ? _ref : '' : t('DRIVER_COMPANY_SETTINGS', 'Driver company settings')), driversCompany && /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, driversCompany ? (_ref = (_changesState$name = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name !== void 0 ? _changesState$name : driversCompany === null || driversCompany === void 0 ? void 0 : driversCompany.name) !== null && _ref !== void 0 ? _ref : '' : t('DRIVER_COMPANY_SETTINGS', 'Driver company settings')), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), driversCompany && /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -101,7 +120,7 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
     onClick: function onClick() {
       return onDeleteCompany();
     }
-  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, tabItems.map(function (item) {
+  }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, tabItems.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: item.key,
       active: item.key === currentTabItem,

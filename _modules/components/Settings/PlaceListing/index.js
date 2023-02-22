@@ -403,7 +403,8 @@ var PlaceListingUI = function PlaceListingUI(props) {
     onClose: function onClose() {
       setSelectedCity(null);
       setOpenCity(false);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_CityDetails.CityDetails, {
     city: selectedCity,
     countries: countriesState === null || countriesState === void 0 ? void 0 : countriesState.countries,

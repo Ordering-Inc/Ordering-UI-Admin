@@ -144,7 +144,7 @@ var SettingsImage = function SettingsImage(props) {
     padding: "30px",
     title: t('IMAGE_CROP', 'Image crop'),
     open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
-    onClose: function onClose() {
+    onRemove: function onRemove() {
       return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
         open: false
       }));

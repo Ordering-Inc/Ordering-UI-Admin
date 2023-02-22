@@ -226,6 +226,7 @@ var EnterprisePromotionRules = function EnterprisePromotionRules(props) {
   }, /*#__PURE__*/_react.default.createElement(_EnterprisePromotionConditions.EnterprisePromotionConditions, props))) : /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
     open: isShowConditions,
+    isTopPosition: true,
     onClose: function onClose() {
       setMoveDistance(0);
       setIsShowConditions(false);

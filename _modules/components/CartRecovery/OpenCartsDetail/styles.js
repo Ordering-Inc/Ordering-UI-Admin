@@ -52,7 +52,7 @@ var OrderInfoWrapper = _styledComponents.default.div(_templateObject13 || (_temp
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n        margin-right: 10px;\n      "])));
 });
 exports.OrderInfoWrapper = OrderInfoWrapper;
-var ButtonGroup = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral([""])));
+var ButtonGroup = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 exports.ButtonGroup = ButtonGroup;
 var SkeletonWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 20px;\n  box-sizing: border-box;\n  flex-direction: column;\n  > span {\n    width: 100%;\n  }\n"])));
 exports.SkeletonWrapper = SkeletonWrapper;

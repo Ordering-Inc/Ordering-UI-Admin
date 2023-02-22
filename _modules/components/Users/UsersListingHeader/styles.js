@@ -20,7 +20,7 @@ var HeaderTitleContainer = _styledComponents.default.div(_templateObject2 || (_t
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        margin-left: -8px;\n        margin-right: 8px;\n      "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n        margin-right: -8px;\n        margin-left: 8px;\n      "])));
 });
 exports.HeaderTitleContainer = HeaderTitleContainer;
-var ActionContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 15px;\n\n  > *:not(:last-child) {\n    ", "\n  }\n\n  input {\n    background: ", ";\n    border: none;\n  }\n\n  @media (min-width: 768px) {\n    margin-top: 0px;\n  }\n"])), function (props) {
+var ActionContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 15px;\n\n  > *:not(:last-child) {\n    ", "\n  }\n\n  input {\n    background: ", ";\n    border: none;\n  }\n\n  button {\n    height: 43px;\n  }\n\n  @media (min-width: 768px) {\n    margin-top: 0px;\n  }\n"])), function (props) {
   var _props$theme3;
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n      margin-left: 10px;\n    "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n      margin-right: 10px;\n    "])));
 }, function (props) {

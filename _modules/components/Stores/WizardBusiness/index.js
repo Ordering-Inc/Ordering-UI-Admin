@@ -88,7 +88,8 @@ var WizardBusiness = function WizardBusiness(props) {
     open: openTutorialSidebarState === 'new_product',
     onClose: function onClose() {
       return setOpenTutorialSidebarState(null);
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_BusinessProductAddForm.BusinessProductAddForm, {
     isTutorialMode: true,
     business: business,

@@ -94,7 +94,7 @@ exports.UserEnableWrapper = UserEnableWrapper;
 var WrapperPagination = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 exports.WrapperPagination = WrapperPagination;
 var AddNewUserButton = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  width: fit-content;\n  font-size: 14px;\n"])), function (props) {
-  return props.theme.colors.lightGray;
+  return props.theme.colors.primary;
 });
 exports.AddNewUserButton = AddNewUserButton;
 var UsersBottomContainer = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n  margin-bottom: 37px;\n"])));

@@ -45,7 +45,7 @@ var OccupationSelectorUI = function OccupationSelectorUI(props) {
     return result;
   };
   (0, _react.useEffect)(function () {
-    if (!occupations.length) return;
+    if (!(occupations !== null && occupations !== void 0 && occupations.length)) return;
     var _occupationList = occupations.filter(function (item) {
       return item.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
     }).map(function (occupation) {

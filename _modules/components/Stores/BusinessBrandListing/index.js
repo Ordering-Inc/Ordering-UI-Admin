@@ -72,6 +72,10 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     selectedBrand = _useState8[0],
     setSelectedBrand = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    isExpand = _useState10[0],
+    setIsExpand = _useState10[1];
   var moreOptions = [{
     value: 0,
     content: t('DELETE', 'Delete')
@@ -102,6 +106,14 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
     var isInvalid = e.target.closest('.brand_enable_control');
     if (isInvalid) return;
     handleOpenSideBar(brandId);
+  };
+  var expandSideBar = function expandSideBar() {
+    var element = document.getElementById('brand-details');
+    if (!element) return;
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
   };
   (0, _react.useEffect)(function () {
     var _brandListState$brand;
@@ -205,13 +217,16 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
     onChange: function onChange(enabled) {
       return handleChangeState(selectedBrand === null || selectedBrand === void 0 ? void 0 : selectedBrand.id, 'enabled', enabled);
     }
-  })), selectedBrand && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: expandSideBar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), selectedBrand && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     options: moreOptions,
     onChange: function onChange() {
       return handleDeleteBrand(selectedBrand.id);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedType === 'general',
     onClick: function onClick() {
       return setSelectedType('general');

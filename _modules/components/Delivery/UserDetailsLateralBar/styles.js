@@ -44,7 +44,7 @@ var LateralBarContainer = _styledComponents.default.div(_templateObject || (_tem
   });
 });
 exports.LateralBarContainer = LateralBarContainer;
-var WrapUserDetails = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  max-width: 500px;\n  height: 100%;\n  padding: 35px 20px;\n  position: relative;\n"])));
+var WrapUserDetails = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  height: 100%;\n  padding: 35px 20px;\n  position: relative;\n"])));
 exports.WrapUserDetails = WrapUserDetails;
 var CloseButtonWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 30px;\n\n  ", "\n\n"])), function (props) {
   var _props$theme6;

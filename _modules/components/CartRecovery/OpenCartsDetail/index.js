@@ -46,6 +46,10 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     isMenuOpen = _useState2[0],
     setIsMenuOpen = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isExpand = _useState4[0],
+    setIsExpand = _useState4[1];
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
     if (!value) {
@@ -72,6 +76,13 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
     if (e.code === 'Escape') {
       props.onClose() && props.onClose();
     }
+  };
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('cartDetails');
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
   };
   (0, _react.useEffect)(function () {
     if (!open) return;
@@ -124,7 +135,10 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
     }
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (cartState === null || cartState === void 0 ? void 0 : cartState.cart) && Object.keys(cartState === null || cartState === void 0 ? void 0 : cartState.cart).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, ('ID', 'ID'), " ", cartState === null || cartState === void 0 ? void 0 : (_cartState$cart = cartState.cart) === null || _cartState$cart === void 0 ? void 0 : _cartState$cart.id), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('LAST_UPDATED', 'Last updated'), ":"), (cartState === null || cartState === void 0 ? void 0 : (_cartState$cart2 = cartState.cart) === null || _cartState$cart2 === void 0 ? void 0 : _cartState$cart2.updated_at) && parseDate(cartState === null || cartState === void 0 ? void 0 : (_cartState$cart3 = cartState.cart) === null || _cartState$cart3 === void 0 ? void 0 : _cartState$cart3.updated_at, {
     outputFormat: 'MM/DD/YY • HH:mm a'
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return props.onClose() && props.onClose();

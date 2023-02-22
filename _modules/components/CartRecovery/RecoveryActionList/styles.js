@@ -76,9 +76,7 @@ var DragImageWrapper = _styledComponents.default.div(_templateObject19 || (_temp
 exports.DragImageWrapper = DragImageWrapper;
 var PagesBottomContainer = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  width: calc(100% - 10px);\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-wrap: wrap;\n  row-gap: 10px;\n  margin: 15px 0;\n"])));
 exports.PagesBottomContainer = PagesBottomContainer;
-var AddNewPageButton = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
+var AddNewPageButton = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.AddNewPageButton = AddNewPageButton;

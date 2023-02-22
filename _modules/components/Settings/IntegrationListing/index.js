@@ -149,21 +149,24 @@ var IntegrationListing = function IntegrationListing(props) {
     open: showOption === 'plugins',
     onClose: function onClose() {
       return handleCloseSettings();
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_PluginList.PluginList, null)), showOption === 'webhooks' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "webhooks-integrations",
     defaultSideBarWidth: 768,
     open: showOption === 'webhooks',
     onClose: function onClose() {
       return handleCloseSettings();
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_WebhookList.WebhookList, null)), showOption === 'apiKeys' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "apikeys-integrations",
     defaultSideBarWidth: 700,
     open: showOption === 'apiKeys',
     onClose: function onClose() {
       return handleCloseSettings();
-    }
+    },
+    showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_ApiKeysList.ApiKeysList, null)), showOption === 'doordash' && /*#__PURE__*/_react.default.createElement(_DoordashConnect.DoordashConnect, {
     onClose: function onClose() {
       return handleCloseSettings();

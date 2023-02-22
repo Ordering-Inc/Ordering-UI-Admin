@@ -51,11 +51,22 @@ var SettingsDetail = function SettingsDetail(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     extraSubCatOpen = _useState6[0],
     setExtraSubCatOpen = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isExpand = _useState8[0],
+    setIsExpand = _useState8[1];
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
     if (!value) {
       props.onClose();
     }
+  };
+  var expandSidebar = function expandSidebar() {
+    var element = document.getElementById('catDescription');
+    if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
+    setIsExpand(function (prev) {
+      return !prev;
+    });
   };
   var toggleMainContent = function toggleMainContent() {
     if (isMenuOpen) {
@@ -149,7 +160,10 @@ var SettingsDetail = function SettingsDetail(props) {
     height: 150
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20
-  })), category && Object.keys(category).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Content, null, /*#__PURE__*/_react.default.createElement(_styles2.CategoryName, null, /*#__PURE__*/_react.default.createElement("p", null, category.name)), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, category === null || category === void 0 ? void 0 : category.description), (category === null || category === void 0 ? void 0 : category.more_info) && /*#__PURE__*/_react.default.createElement(_styles2.MoreInfo, null, t('MORE_INFO', 'More info')), (category === null || category === void 0 ? void 0 : category.video) && /*#__PURE__*/_react.default.createElement(_styles2.VideoContainer, null, /*#__PURE__*/_react.default.createElement(_MdcPlayCircle.default, {
+  })), category && Object.keys(category).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Content, null, /*#__PURE__*/_react.default.createElement(_styles2.CategoryName, null, /*#__PURE__*/_react.default.createElement("p", null, category.name), width > 576 && !extraInfoOpen && !extraSubCatOpen && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    onClick: expandSidebar
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null))), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, category === null || category === void 0 ? void 0 : category.description), (category === null || category === void 0 ? void 0 : category.more_info) && /*#__PURE__*/_react.default.createElement(_styles2.MoreInfo, null, t('MORE_INFO', 'More info')), (category === null || category === void 0 ? void 0 : category.video) && /*#__PURE__*/_react.default.createElement(_styles2.VideoContainer, null, /*#__PURE__*/_react.default.createElement(_MdcPlayCircle.default, {
     onClick: playVideo
   }), /*#__PURE__*/_react.default.createElement("video", {
     muted: true,

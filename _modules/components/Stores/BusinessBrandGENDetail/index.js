@@ -173,10 +173,15 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
     name: "name",
     placeholder: t('WRITE_A_NAME', 'Write a name'),
     value: (_ref = (_brandFormState$chang10 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang11 = brandFormState.changes) === null || _brandFormState$chang11 === void 0 ? void 0 : _brandFormState$chang11.name) !== null && _brandFormState$chang10 !== void 0 ? _brandFormState$chang10 : brand === null || brand === void 0 ? void 0 : brand.name) !== null && _ref !== void 0 ? _ref : '',
-    onChange: handleChangeInput,
+    onChange: function onChange(e) {
+      return handleChangeItem({
+        name: e.target.value,
+        slug: (0, _utils.stringToSlug)(e.target.value)
+      });
+    },
     disabled: brandFormState.loading,
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement("input", {
+  })), brand && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement("input", {
     name: "slug",
     placeholder: t('WRITE_A_SLUG', 'Write a slug'),
     value: (_ref2 = (_brandFormState$chang12 = brandFormState === null || brandFormState === void 0 ? void 0 : (_brandFormState$chang13 = brandFormState.changes) === null || _brandFormState$chang13 === void 0 ? void 0 : _brandFormState$chang13.slug) !== null && _brandFormState$chang12 !== void 0 ? _brandFormState$chang12 : brand === null || brand === void 0 ? void 0 : brand.slug) !== null && _ref2 !== void 0 ? _ref2 : '',
@@ -247,7 +252,7 @@ var BusinessBrandGENDetailUI = function BusinessBrandGENDetailUI(props) {
     padding: "30px",
     title: t('IMAGE_CROP', 'Image crop'),
     open: cropState === null || cropState === void 0 ? void 0 : cropState.open,
-    onClose: function onClose() {
+    onRemove: function onRemove() {
       return setCropState(_objectSpread(_objectSpread({}, cropState), {}, {
         open: false
       }));

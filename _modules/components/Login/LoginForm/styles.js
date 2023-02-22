@@ -4,11 +4,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperPassword = exports.TogglePassword = exports.TitleFormSide = exports.Tabs = exports.Tab = exports.SocialButtons = exports.ResendCode = exports.RedirectLink = exports.ReCAPTCHAWrapper = exports.OtpWrapper = exports.LoginWith = exports.LoginHeroContainer = exports.LoginContainer = exports.InputWithIcon = exports.HeroSide = exports.FormSide = exports.FormInput = exports.CountdownTimer = void 0;
+exports.WrapperPassword = exports.TogglePassword = exports.TitleFormSide = exports.Tabs = exports.Tab = exports.SocialButtons = exports.ResendCode = exports.RedirectLink = exports.ReCAPTCHAWrapper = exports.PhoneNumberWrapper = exports.OtpWrapper = exports.LoginWith = exports.LoginHeroContainer = exports.LoginContainer = exports.InputWithIcon = exports.HeroSide = exports.FormSide = exports.FormInput = exports.CountdownTimer = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -69,43 +69,47 @@ var TitleFormSide = _styledComponents.default.div(_templateObject13 || (_templat
 exports.TitleFormSide = TitleFormSide;
 var InputWithIcon = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n\n  input {\n    width: 100%;\n  }\n\n  img {\n    position: absolute;\n    width: 20px;\n    padding: 0px;\n    margin: 0 20px;\n  }\n\n  svg {\n    position: absolute;\n    font-size: 24px;\n    color: #707070;\n    padding: 0px;\n    margin: 0 20px;\n  }\n"])));
 exports.InputWithIcon = InputWithIcon;
-var WrapperPassword = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  margin-bottom: 20px;\n\n  input {\n    width: 100%;\n    padding-left: 60px;\n    padding-right: 60px;\n  }\n\n  > svg {\n    position: absolute;\n    font-size: 24px;\n    color: #707070;\n    padding: 0px;\n    margin: 0 20px;\n  }\n"])));
+var PhoneNumberWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n  .PhoneInputInput {\n    height: 47px;\n    border-radius: 8px !important;\n  }\n  .PhoneInputCountry {\n    padding: 8px;\n    border-radius: 8px;\n    background-color: ", ";\n    * {\n      padding: 0px;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.backgroundPage;
+});
+exports.PhoneNumberWrapper = PhoneNumberWrapper;
+var WrapperPassword = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  margin-bottom: 20px;\n\n  input {\n    width: 100%;\n    padding-left: 60px;\n    padding-right: 60px;\n  }\n\n  > svg {\n    position: absolute;\n    font-size: 24px;\n    color: #707070;\n    padding: 0px;\n    margin: 0 20px;\n  }\n"])));
 exports.WrapperPassword = WrapperPassword;
-var TogglePassword = _styledComponents.default.span(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  position: absolute;\n  font-weight: 300;\n  color: #333;\n  font-size: 24px;\n  cursor: pointer;\n  padding: 0;\n\n  svg {\n    padding: 0;\n    color: #707070;\n  }\n  ", "\n"])), function (props) {
+var TogglePassword = _styledComponents.default.span(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  position: absolute;\n  font-weight: 300;\n  color: #333;\n  font-size: 24px;\n  cursor: pointer;\n  padding: 0;\n\n  svg {\n    padding: 0;\n    color: #707070;\n  }\n  ", "\n"])), function (props) {
   var _props$theme2;
-  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    left: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    right: 15px;\n  "])));
+  return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    left: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    right: 15px;\n  "])));
 });
 exports.TogglePassword = TogglePassword;
-var ReCAPTCHAWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n\n  * {\n    padding: 0;\n  }\n"])));
+var ReCAPTCHAWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n\n  * {\n    padding: 0;\n  }\n"])));
 exports.ReCAPTCHAWrapper = ReCAPTCHAWrapper;
-var Tabs = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;  \n"])));
+var Tabs = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;  \n"])));
 exports.Tabs = Tabs;
-var Tab = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  padding: 10px 0;\n  cursor: pointer;\n  ", "\n  ", "\n\n  ", "\n"])), function (props) {
+var Tab = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  padding: 10px 0;\n  cursor: pointer;\n  ", "\n  ", "\n\n  ", "\n"])), function (props) {
   var _props$theme3;
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n  "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    margin-left: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    margin-right: 15px;\n  "])));
 }, function (_ref8) {
   var active = _ref8.active;
-  return active && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.white;
   });
 }, function (_ref9) {
   var active = _ref9.active;
-  return !active && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+  return !active && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
     return props.theme.colors.lightGray;
   });
 });
 exports.Tab = Tab;
-var CountdownTimer = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  margin: 15px;\n  display: flex;\n  justify-content: center;\n  \n  span {\n    font-size: 30px;\n    font-weight: 700;\n    color: ", ";\n  }\n"])), function (props) {
+var CountdownTimer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  margin: 15px;\n  display: flex;\n  justify-content: center;\n  \n  span {\n    font-size: 30px;\n    font-weight: 700;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.white;
 });
 exports.CountdownTimer = CountdownTimer;
-var OtpWrapper = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  width: 100%;\n  .otp-container{\n    display: flex;\n    justify-content: space-evenly;\n    margin: 20px;\n    \n    .otp-input{\n      width: 50px !important;\n      height: 45px;\n      border-radius: 8px;\n      background-color: ", ";\n      outline: none;\n      border: none;\n      font-size: 20px;\n      font-weight: bold; \n\n      &:focus{\n        border-color: ", " !important;\n      }\n\n      &::placeholder,\n      &::-webkit-input-placeholder {\n        color: #DBDCDB;\n      }\n      &:-ms-input-placeholder {\n        color: #DBDCDB;\n      }\n    }\n  }\n"])), function (props) {
+var OtpWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  width: 100%;\n  .otp-container{\n    display: flex;\n    justify-content: space-evenly;\n    margin: 20px;\n    \n    .otp-input{\n      width: 50px !important;\n      height: 45px;\n      border-radius: 8px;\n      background-color: ", ";\n      outline: none;\n      border: none;\n      font-size: 20px;\n      font-weight: bold; \n\n      &:focus{\n        border-color: ", " !important;\n      }\n\n      &::placeholder,\n      &::-webkit-input-placeholder {\n        color: #DBDCDB;\n      }\n      &:-ms-input-placeholder {\n        color: #DBDCDB;\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');
 });
 exports.OtpWrapper = OtpWrapper;
-var ResendCode = _styledComponents.default.span(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 20px;\n  align-self: center;\n  margin-bottom: 10px;\n  cursor: ", ";\n"])), function (props) {
+var ResendCode = _styledComponents.default.span(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 20px;\n  align-self: center;\n  margin-bottom: 10px;\n  cursor: ", ";\n"])), function (props) {
   return props.disabled ? props.theme.colors.disabled : props.theme.colors.primary;
 }, function (props) {
   return props.disabled ? 'not-allowed' : 'pointer';

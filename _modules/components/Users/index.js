@@ -87,6 +87,12 @@ Object.defineProperty(exports, "UserDetailsMenu", {
     return _UserDetailsMenu.UserDetailsMenu;
   }
 });
+Object.defineProperty(exports, "UserFilterGroup", {
+  enumerable: true,
+  get: function get() {
+    return _UserFilterGroup.UserFilterGroup;
+  }
+});
 Object.defineProperty(exports, "UserFormDetailsUI", {
   enumerable: true,
   get: function get() {
@@ -155,6 +161,7 @@ var _UsersDeleteButton = require("./UsersDeleteButton");
 var _UsersExportCSV = require("./UsersExportCSV");
 var _UserTypeSelector = require("./UserTypeSelector");
 var _ProfessionalListing = require("./ProfessionalListing");
+var _UserFilterGroup = require("./UserFilterGroup");
 var _UsersList = require("./UsersList");
 var _UsersListingHeader = require("./UsersListingHeader");
 var _UserTypeFilter = require("./UserTypeFilter");
