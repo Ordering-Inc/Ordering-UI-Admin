@@ -267,7 +267,8 @@ var BannerImageDetailsUI = function BannerImageDetailsUI(props) {
 };
 var BannerImageDetails = function BannerImageDetails(props) {
   var linkProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: BannerImageDetailsUI
+    UIComponent: BannerImageDetailsUI,
+    isSearchByName: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BannerImageDetails, linkProps);
 };
