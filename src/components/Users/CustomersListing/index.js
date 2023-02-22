@@ -117,6 +117,7 @@ const CustomersListingUI = (props) => {
           onSearch={onSearch}
           multiFilterValues={multiFilterValues}
           handleChangeMultiFilterValues={handleChangeMultiFilterValues}
+          isCustomers
         />
         <UserActiveStateFilter
           selectedUserActiveState={selectedUserActiveState}

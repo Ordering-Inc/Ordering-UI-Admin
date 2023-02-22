@@ -26,7 +26,10 @@ const UserFilterGroupUI = (props) => {
     loyaltyLevelState,
     handleChangeDateType,
     handleChangeFromDate,
-    handleChangeEndDate
+    handleChangeEndDate,
+    isProfessionals,
+    isManagers,
+    isCustomers
   } = props
 
   const [, t] = useLanguage()
@@ -124,30 +127,42 @@ const UserFilterGroupUI = (props) => {
               onChange={(e) => handleChangeValue({ lastname: e.target.value })}
             />
           </FormControl>
-          <FormControl>
-            <label>{t('AMOUNT_OF_ORDERS', 'Amount of orders')}</label>
-            <RangeSelectWrapper className='range'>
-              <DefaultSelect
-                placeholder={t('SELECT_CONDITION', 'Select a condition')}
-                defaultValue={filterValues?.ordersCount?.condition}
-                options={conditions}
-                onChange={condition => handleChangeValue({ ordersCount: { ...filterValues?.ordersCount, condition } })}
-                optionInnerMaxHeight='300px'
+          {isProfessionals ? (
+            <FormControl>
+              <label>{t('SIGN_UP_DATE', 'Sign up date')}</label>
+              <DateTypeSelector
+                filterValues={filterValues}
+                handleChangeDateType={handleChangeDateType}
+                handleChangeFromDate={handleChangeFromDate}
+                handleChangeEndDate={handleChangeEndDate}
               />
-              <Input
-                type='text'
-                placeholder={t('NUMBER', 'Number')}
-                autoComplete='off'
-                value={filterValues?.ordersCount?.value || ''}
-                onKeyPress={(e) => {
-                  if (!/^[0-9]$/.test(e.key)) {
-                    e.preventDefault()
-                  }
-                }}
-                onChange={(e) => handleChangeValue({ ordersCount: { ...filterValues?.ordersCount, value: e.target.value } })}
-              />
-            </RangeSelectWrapper>
-          </FormControl>
+            </FormControl>
+          ) : (
+            <FormControl>
+              <label>{t('AMOUNT_OF_ORDERS', 'Amount of orders')}</label>
+              <RangeSelectWrapper className='range'>
+                <DefaultSelect
+                  placeholder={t('SELECT_CONDITION', 'Select a condition')}
+                  defaultValue={filterValues?.ordersCount?.condition}
+                  options={conditions}
+                  onChange={condition => handleChangeValue({ ordersCount: { ...filterValues?.ordersCount, condition } })}
+                  optionInnerMaxHeight='300px'
+                />
+                <Input
+                  type='text'
+                  placeholder={t('NUMBER', 'Number')}
+                  autoComplete='off'
+                  value={filterValues?.ordersCount?.value || ''}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
+                  onChange={(e) => handleChangeValue({ ordersCount: { ...filterValues?.ordersCount, value: e.target.value } })}
+                />
+              </RangeSelectWrapper>
+            </FormControl>
+          )}
         </FormGroup>
         <FormGroup>
           <FormControl>
@@ -201,52 +216,66 @@ const UserFilterGroupUI = (props) => {
             />
           </FormControl>
         </FormGroup>
-        <FormGroup>
-          <FormControl>
-            <label>{t('USER_TYPE', 'User type')}</label>
-            <DefaultSelect
-              placeholder={t('SELECT_OPTION', 'Select a option')}
-              defaultValue={filterValues?.userType}
-              options={userOptions}
-              onChange={val => handleChangeValue({ userType: val })}
-              optionInnerMaxHeight='300px'
-              className='full-select'
-            />
-          </FormControl>
-          <FormControl>
-            <label>{t('LOYALTY_LEVEL', 'Loyalty level')}</label>
-            {loyaltyLevelState?.loading ? (
-              <Skeleton height={54} />
-            ) : (
+        {!isProfessionals && !isCustomers && (
+          <FormGroup>
+            <FormControl>
+              <label>{t('USER_TYPE', 'User type')}</label>
               <DefaultSelect
                 placeholder={t('SELECT_OPTION', 'Select a option')}
-                defaultValue={filterValues?.loyaltyLevel}
-                options={loyaltyLevels}
-                onChange={val => handleChangeValue({ loyaltyLevel: val })}
+                defaultValue={filterValues?.userType}
+                options={userOptions.filter(user => isManagers ? user.value !== 3 : true)}
+                onChange={val => handleChangeValue({ userType: val })}
                 optionInnerMaxHeight='300px'
                 className='full-select'
               />
+            </FormControl>
+            <FormControl>
+              <label>{t('LOYALTY_LEVEL', 'Loyalty level')}</label>
+              {loyaltyLevelState?.loading ? (
+                <Skeleton height={54} />
+              ) : (
+                <DefaultSelect
+                  placeholder={t('SELECT_OPTION', 'Select a option')}
+                  defaultValue={filterValues?.loyaltyLevel}
+                  options={loyaltyLevels}
+                  onChange={val => handleChangeValue({ loyaltyLevel: val })}
+                  optionInnerMaxHeight='300px'
+                  className='full-select'
+                />
+              )}
+            </FormControl>
+          </FormGroup>
+        )}
+        {!isProfessionals && (
+          <FormGroup>
+            <FormControl>
+              <label>{t('SIGN_UP_DATE', 'Sign up date')}</label>
+              <DateTypeSelector
+                filterValues={filterValues}
+                handleChangeDateType={handleChangeDateType}
+                handleChangeFromDate={handleChangeFromDate}
+                handleChangeEndDate={handleChangeEndDate}
+              />
+            </FormControl>
+            {isCustomers && (
+              <FormControl>
+                <label>{t('LOYALTY_LEVEL', 'Loyalty level')}</label>
+                {loyaltyLevelState?.loading ? (
+                  <Skeleton height={54} />
+                ) : (
+                  <DefaultSelect
+                    placeholder={t('SELECT_OPTION', 'Select a option')}
+                    defaultValue={filterValues?.loyaltyLevel}
+                    options={loyaltyLevels}
+                    onChange={val => handleChangeValue({ loyaltyLevel: val })}
+                    optionInnerMaxHeight='300px'
+                    className='full-select'
+                  />
+                )}
+              </FormControl>
             )}
-          </FormControl>
-        </FormGroup>
-        <FormGroup>
-          <FormControl>
-            <label>{t('SIGN_UP_DATE', 'Sign up date')}</label>
-            <DateTypeSelector
-              filterValues={filterValues}
-              handleChangeDateType={handleChangeDateType}
-              handleChangeFromDate={handleChangeFromDate}
-              handleChangeEndDate={handleChangeEndDate}
-            />
-          </FormControl>
-          {/* <FormControl>
-            <label>{t('CITY', 'City')}</label>
-            <CitySelector
-              filterValues={filterValues}
-              handleChangeCity={handleChangeCity}
-            />
-          </FormControl> */}
-        </FormGroup>
+          </FormGroup>
+        )}
         <ButtonGroup>
           <Button
             color='primary'
