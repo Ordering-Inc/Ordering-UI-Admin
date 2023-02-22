@@ -43,7 +43,8 @@ const OrdersFilterGroupUI = (props) => {
     handleChangeFilterValues,
     handleChangeOrderId,
     handleChangeCountryCode,
-    handleChangeCurrency
+    handleChangeCurrency,
+    handleChangeInput
   } = props
 
   const [, t] = useLanguage()
@@ -136,6 +137,26 @@ const OrdersFilterGroupUI = (props) => {
             filterValues={filterValues}
             handleChangeCurrency={handleChangeCurrency}
           />
+        </WrapperRow>
+        <WrapperRow>
+          <Input
+            type='text'
+            name='metafieldName'
+            placeholder={t('METAFIELD_NAME', 'Metafield name')}
+            autoComplete='off'
+            value={filterValues?.metafieldName || ''}
+            onChange={handleChangeInput}
+          />
+          {filterValues?.metafieldName && (
+            <Input
+              type='text'
+              name='metafieldValue'
+              placeholder={t('METAFIELD_VALUE', 'Metafield value')}
+              autoComplete='off'
+              value={filterValues?.metafieldValue || ''}
+              onChange={handleChangeInput}
+            />
+          )}
         </WrapperRow>
         <ButtonGroup>
           <Button
