@@ -152,7 +152,7 @@ var AdvancedSettings = function AdvancedSettings(props) {
   }, {
     name: t('NEAR_BUSINESS_BLOCK', 'Near business block'),
     type: 'hidden',
-    path: 'business_view.components.near_business'
+    path: 'business_view.components.near_business.hidden'
   }, {
     name: t('ORDER_VIEW_BUTTON', 'Order view button'),
     type: 'hidden',
