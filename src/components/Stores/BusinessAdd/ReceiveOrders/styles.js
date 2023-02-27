@@ -20,6 +20,10 @@ export const FormControl = styled.div`
     font-size: 14px;
     line-height: 24px;
     margin-bottom: 12px;
+    sup {
+      color: ${props => props.theme.colors.danger};
+      font-size: 13px;
+    }
   }
   input {
     width: 100%;

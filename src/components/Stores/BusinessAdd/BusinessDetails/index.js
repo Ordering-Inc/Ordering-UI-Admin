@@ -42,7 +42,7 @@ export const BusinessDetails = (props) => {
       <h2>{t('BUSINESS_DETAILS', 'Business details')}</h2>
       <ContentWrapper>
         <FormControl>
-          <label>{t('BUSINESS_NAME', 'Business Name')}</label>
+          <label>{t('BUSINESS_NAME', 'Business Name')}<sup>*</sup></label>
           <Input
             name='name'
             placeholder={t('NAME', 'Name')}
@@ -71,15 +71,6 @@ export const BusinessDetails = (props) => {
               countryCode={configs?.country_autocomplete?.value || '*'}
             />
           )}
-        </FormControl>
-        <FormControl>
-          <label>{t('ZIPCODE', 'Zipcode')}</label>
-          <Input
-            name='zipcode'
-            placeholder={t('ZIPCODE', 'Zipcode')}
-            defaultValue={formState?.changes?.zipcode ?? ''}
-            onChange={handleChangeInput}
-          />
         </FormControl>
         <GoogleMapContainer>
           <label>{t('GOOGLE_PLACE_ID', 'Google place ID')}</label>

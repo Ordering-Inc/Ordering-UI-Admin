@@ -9,16 +9,18 @@ import { OrderTypePriceLevel } from './OrderTypePriceLevel'
 import { PaymentMethods } from './PaymentMethods'
 import { ReceiveOrders } from './ReceiveOrders'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
-import { Button, IconButton } from '../../../styles'
+import { Button, IconButton, Input } from '../../../styles'
 import { DeliveryZone } from './DeliveryZone'
 import { useHistory } from 'react-router-dom'
-import { Alert } from '../../Shared'
+import { Alert, Modal } from '../../Shared'
 import {
   AddNewBusinessContainer,
   BoxLayout,
   ButtonWrapper,
   HeaderTitleContainer,
-  MapWrapper
+  MapWrapper,
+  SlugEditWrapper,
+  SlugFormControl
 } from './styles'
 
 const BusinessAddUI = (props) => {
@@ -50,6 +52,7 @@ const BusinessAddUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isSlugEdit, setIsSlugEdit] = useState(false)
 
   const handleSubmit = () => {
     if (paymethodIds?.length === 0) {
@@ -59,6 +62,17 @@ const BusinessAddUI = (props) => {
       })
       return
     }
+    if (!formState?.changes?.slug) {
+      setAlertState({
+        open: true,
+        content: t(
+          'VALIDATION_ERROR_REQUIRED',
+          'Slug is required'
+        ).replace('_attribute_', t('SLUG', 'Slug'))
+      })
+      return
+    }
+    isSlugEdit && setIsSlugEdit(false)
     handleAddBusiness()
   }
 
@@ -75,10 +89,8 @@ const BusinessAddUI = (props) => {
 
   useEffect(() => {
     if (!formState?.loading && formState?.result?.error) {
-      setAlertState({
-        open: true,
-        content: formState?.result?.result
-      })
+      if (formState?.result?.result?.length === 0 && formState?.result?.result[0].toLowerCase().includes(t('SLUG', 'Slug').toLowerCase())) setIsSlugEdit(true)
+      else setAlertState({ open: true, content: formState?.result?.result })
     }
   }, [formState?.result])
 
@@ -146,15 +158,13 @@ const BusinessAddUI = (props) => {
           />
         </BoxLayout>
         {orderStatus?.options?.type === 1 && (
-          <BoxLayout>
-            <DeliveryZone
-              kmlData={kmlData}
-              zoneState={zoneState}
-              formState={formState}
-              handleChangeZoneState={handleChangeZoneState}
-              handleUploadKmlFiles={handleUploadKmlFiles}
-            />
-          </BoxLayout>
+          <DeliveryZone
+            kmlData={kmlData}
+            zoneState={zoneState}
+            formState={formState}
+            handleChangeZoneState={handleChangeZoneState}
+            handleUploadKmlFiles={handleUploadKmlFiles}
+          />
         )}
         <BoxLayout>
           <PaymentMethods
@@ -208,6 +218,27 @@ const BusinessAddUI = (props) => {
         onAccept={() => closeAlert()}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='769px'
+        padding='30px'
+        title={t('WEB_APPNAME', 'Ordering')}
+        open={isSlugEdit}
+        onClose={() => setIsSlugEdit(false)}
+      >
+        <SlugEditWrapper>
+          <p>{formState?.result?.result}</p>
+          <SlugFormControl>
+            <label>{t('SLUG', 'Slug')}</label>
+            <Input
+              name='slug'
+              placeholder={t('SLUG', 'Slug')}
+              value={formState?.changes?.slug}
+              onChange={handleChangeInput}
+            />
+          </SlugFormControl>
+          <Button color='primary' borderRadius='8px' onClick={handleSubmit}>{t('ACCEPT', 'Accept')}</Button>
+        </SlugEditWrapper>
+      </Modal>
     </>
   )
 }

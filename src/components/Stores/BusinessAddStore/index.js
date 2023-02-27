@@ -74,7 +74,7 @@ export const BusinessAddStore = () => {
               handleChangeAddress(e)
             }}
             autoComplete='new-password'
-            types={['restaurant']}
+            types={['restaurant', 'bar', 'cafe', 'bakery', 'meal_delivery']}
           />
           <p>{t('START_TYPING_THEN_SELECT_AN_ADDRESS_FROM_THE_LIST', 'Start typing  then select an address from the list')}</p>
         </FormControl>

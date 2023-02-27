@@ -10,8 +10,11 @@ import {
   WrapperMap,
   ErrorText,
   FormControl,
-  Row
+  Row,
+  Header,
+  DeliveryZoneInnerContainer
 } from './styles'
+import { CaretDownFill } from 'react-bootstrap-icons'
 
 export const DeliveryZone = (props) => {
   const {
@@ -31,6 +34,7 @@ export const DeliveryZone = (props) => {
   const [zoneData, setZoneData] = useState()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isShowMap, setIsShowMap] = useState(false)
+  const [hasContent, setHasContent] = useState(false)
   // const kmlRef = useRef(null)
 
   const typeOptions = [
@@ -120,121 +124,128 @@ export const DeliveryZone = (props) => {
 
   return (
     <>
-      <DeliveryZoneContainer autoComplete='off'>
-        <h2>{t('LETS_CREATE_YOUR_FIRST_DELIVERY_ZONE', 'Let’s create your first Delivery Zone')}</h2>
-        <Row>
-          <FormControl>
-            <label>{t('NAME', 'Name')}</label>
-            <Input
-              placeholder={t('NAME', 'Name')}
-              name='name'
-              value={zoneState?.name ?? ''}
-              onChange={(e) => handleChangeZoneState(e)}
-            />
-          </FormControl>
-          <FormControl>
-            <label>{t('TYPE', 'Type')}</label>
-            <TypeSelectWrapper>
-              <Select
-                defaultValue={parseInt(zoneState?.type || zoneType)}
-                options={typeOptions}
-                onChange={handleChangeType}
-              />
-            </TypeSelectWrapper>
-          </FormControl>
-        </Row>
-        <Row>
-          <FormControl>
-            <label>{t('MINIMUN_PURCHASED', 'Minimum purchase')}</label>
-            <Input
-              placeholder='$0.00'
-              name='minimum'
-              value={zoneState?.minimum ?? ''}
-              onChange={(e) => handleChangeZoneState(e)}
-            />
-          </FormControl>
-          <FormControl>
-            <label>{t('DELIVERY_FEE', 'Delivery fee')}</label>
-            <Input
-              placeholder='$0.00'
-              name='price'
-              value={zoneState?.price ?? ''}
-              onChange={(e) => handleChangeZoneState(e)}
-            />
-          </FormControl>
-        </Row>
-        {zoneType === 5 &&
-          <Row>
+      <DeliveryZoneContainer>
+        <Header onClick={() => setHasContent(prev => !prev)}>
+          <h2>{t('LETS_CREATE_YOUR_FIRST_DELIVERY_ZONE', 'Let’s create your first Delivery Zone')}</h2>
+          <CaretDownFill />
+        </Header>
+        {hasContent && (
+          <DeliveryZoneInnerContainer>
+            <Row>
+              <FormControl>
+                <label>{t('NAME', 'Name')}</label>
+                <Input
+                  placeholder={t('NAME', 'Name')}
+                  name='name'
+                  value={zoneState?.name ?? ''}
+                  onChange={(e) => handleChangeZoneState(e)}
+                />
+              </FormControl>
+              <FormControl>
+                <label>{t('TYPE', 'Type')}</label>
+                <TypeSelectWrapper>
+                  <Select
+                    defaultValue={parseInt(zoneState?.type || zoneType)}
+                    options={typeOptions}
+                    onChange={handleChangeType}
+                  />
+                </TypeSelectWrapper>
+              </FormControl>
+            </Row>
+            <Row>
+              <FormControl>
+                <label>{t('MINIMUN_PURCHASED', 'Minimum purchase')}</label>
+                <Input
+                  placeholder='$0.00'
+                  name='minimum'
+                  value={zoneState?.minimum ?? ''}
+                  onChange={(e) => handleChangeZoneState(e)}
+                />
+              </FormControl>
+              <FormControl>
+                <label>{t('DELIVERY_FEE', 'Delivery fee')}</label>
+                <Input
+                  placeholder='$0.00'
+                  name='price'
+                  value={zoneState?.price ?? ''}
+                  onChange={(e) => handleChangeZoneState(e)}
+                />
+              </FormControl>
+            </Row>
+            {zoneType === 5 &&
+              <Row>
+                <FormControl>
+                  <label>{t('DISTANCE_FROM_STORE', 'Distance from store')}</label>
+                  <Input
+                    placeholder={`1 - 99 ${configState?.configs?.distance_unit?.value}`}
+                    name='distance'
+                    maxLength={2}
+                    value={zoneState?.data?.distance ?? ''}
+                    onInput={(e) => {
+                      e.target.value = e.target.value.match('^[1-9]{1,2}$')
+                    }}
+                    onChange={e => handleChangeZoneState(e, false, configState?.configs?.distance_unit?.value)}
+                  />
+                </FormControl>
+              </Row>}
             <FormControl>
-              <label>{t('DISTANCE_FROM_STORE', 'Distance from store')}</label>
+              <label>{t('BUSINESS_ADDRESS', 'Business address')}</label>
               <Input
-                placeholder={`1 - 99 ${configState?.configs?.distance_unit?.value}`}
-                name='distance'
-                maxLength={2}
-                value={zoneState?.data?.distance ?? ''}
-                onInput={(e) => {
-                  e.target.value = e.target.value.match('^[1-9]{1,2}$')
-                }}
-                onChange={e => handleChangeZoneState(e, false, configState?.configs?.distance_unit?.value)}
+                name='address'
+                defaultValue={formState?.changes?.address}
+                disabled
               />
             </FormControl>
-          </Row>}
-        <FormControl>
-          <label>{t('BUSINESS_ADDRESS', 'Business address')}</label>
-          <Input
-            name='address'
-            defaultValue={formState?.changes?.address}
-            disabled
-          />
-        </FormControl>
-        {zoneType !== 4 && isShowMap && (
-          configState?.configs?.google_maps_api_key?.value ? (
-            <WrapperMap>
-              {zoneType !== 5 &&
-                <button
+            {zoneType !== 4 && isShowMap && (
+              configState?.configs?.google_maps_api_key?.value ? (
+                <WrapperMap>
+                  {zoneType !== 5 &&
+                    <button
+                      type='button'
+                      onClick={() => setClearState(true)}
+                    >
+                      {t('CLEAR', 'Clear')}
+                    </button>}
+                  <BusinessZoneGoogleMaps
+                    distance={zoneState?.data?.distance}
+                    disabled
+                    apiKey={configState?.configs?.google_maps_api_key?.value}
+                    mapControls={googleMapsControls}
+                    clearState={clearState}
+                    setClearState={setClearState}
+                    type={zoneType}
+                    data={zoneState?.data || zoneData}
+                    handleData={handleZoneData}
+                    fillStyle={fillStyle}
+                    infoContentString={infoContentString}
+                    greenFillStyle={greenFillStyle}
+                    kmlData={kmlData}
+                  />
+                </WrapperMap>
+              ) : (
+                <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
+              )
+            )}
+            {/* {(zoneType !== 5) && (
+              <KmlButtonWrapper>
+                <Button
+                  color='primary'
+                  borderRadius='8px'
                   type='button'
-                  onClick={() => setClearState(true)}
+                  onClick={() => kmlRef.current.click()}
                 >
-                  {t('CLEAR', 'Clear')}
-                </button>}
-              <BusinessZoneGoogleMaps
-                distance={zoneState?.data?.distance}
-                disabled
-                apiKey={configState?.configs?.google_maps_api_key?.value}
-                mapControls={googleMapsControls}
-                clearState={clearState}
-                setClearState={setClearState}
-                type={zoneType}
-                data={zoneState?.data || zoneData}
-                handleData={handleZoneData}
-                fillStyle={fillStyle}
-                infoContentString={infoContentString}
-                greenFillStyle={greenFillStyle}
-                kmlData={kmlData}
-              />
-            </WrapperMap>
-          ) : (
-            <ErrorText>{t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')}</ErrorText>
-          )
+                  <ExamineClick
+                    onFiles={files => handleUploadKmlFiles(files)}
+                    childRef={e => { kmlRef.current = e }}
+                    accept='.kml,.kmz'
+                  >
+                    <span>{t('UPLOAD_KML', 'Upload KML')}</span>
+                  </ExamineClick>
+                </Button>
+              </KmlButtonWrapper>
+            )} */}
+          </DeliveryZoneInnerContainer>
         )}
-        {/* {(zoneType !== 5) && (
-          <KmlButtonWrapper>
-            <Button
-              color='primary'
-              borderRadius='8px'
-              type='button'
-              onClick={() => kmlRef.current.click()}
-            >
-              <ExamineClick
-                onFiles={files => handleUploadKmlFiles(files)}
-                childRef={e => { kmlRef.current = e }}
-                accept='.kml,.kmz'
-              >
-                <span>{t('UPLOAD_KML', 'Upload KML')}</span>
-              </ExamineClick>
-            </Button>
-          </KmlButtonWrapper>
-        )} */}
       </DeliveryZoneContainer>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
