@@ -38,7 +38,7 @@ const LanguageTransSpreadUI = (props) => {
     if (searchValue) {
       translations = translationList?.translations?.filter(translation => (translation.key?.toLowerCase().includes(searchValue?.toLowerCase()) || translation.text?.toLowerCase().includes(searchValue?.toLowerCase())))
     } else {
-      translations = [...translationList?.translations]
+      translations = JSON.parse(JSON.stringify(translationList?.translations))
     }
     setHotTableData(translations)
   }, [translationList, searchValue])
