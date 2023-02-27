@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { CheckSquareFill, Square } from 'react-bootstrap-icons'
 import {
@@ -23,9 +23,15 @@ export const PaymentMethods = (props) => {
     handleChangePaymethodIds(updateIds)
   }
 
+  useEffect(() => {
+    if (!paymethodsList?.loading && paymethodsList?.paymethods?.length > 0) {
+      handleChangeIds(paymethodsList?.paymethods[0].id)
+    }
+  }, [paymethodsList])
+
   return (
     <Container>
-      <h2>{t('PAYMENT_METHODS', 'Payment methods')}</h2>
+      <h2>{t('PAYMENT_METHODS', 'Payment methods')}<sup>*</sup></h2>
       <ContentWrapper>
         {!paymethodsList?.loading && paymethodsList?.paymethods.map((paymethod, idx) => (
           <PaymethodItem key={paymethod?.id} isBorderTop={idx === 0} onClick={() => handleChangeIds(paymethod.id)}>

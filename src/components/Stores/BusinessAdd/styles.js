@@ -61,7 +61,7 @@ export const BoxLayout = styled.div`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   flex-direction: column;
   padding-bottom: 30px;
   button {
@@ -92,4 +92,30 @@ export const MapWrapper = styled.div`
   max-height: 0px;
   overflow: hidden;
   display: none;
+`
+
+export const SlugEditWrapper = styled.div`
+  p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  button {
+    width: 100%;
+    height: 44px;
+    margin-top: 25px;
+    margin-left: auto;
+  }
+`
+
+export const SlugFormControl = styled.div`
+  label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 12px;
+  }
+  input {
+    height: 44px;
+    width: 100%;
+  }
 `

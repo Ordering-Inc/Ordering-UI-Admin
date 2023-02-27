@@ -1,15 +1,36 @@
 import styled, { css } from 'styled-components'
 
 export const DeliveryZoneContainer = styled.div`
+  background: ${props => props.theme.colors.white};
+  border-radius: 7.6px;
+  padding: 25px 0px;
+  margin-bottom: 35px;
+
+  @media (min-width: 450px) {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    padding: 25px 35px;
+  }
+`
+
+export const DeliveryZoneInnerContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: calc(100% - 130px);
+  width: 100%;
+  max-width: 558px;
+  margin-top: 23px;
+`
 
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
   h2 {
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
-    margin-bottom: 23px;
+    margin: 0;
   }
 `
 
