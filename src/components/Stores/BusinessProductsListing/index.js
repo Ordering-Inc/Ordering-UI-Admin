@@ -27,6 +27,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { ImportersButton } from '../ImportersButton'
 import { AddBusinessForm } from '../AddBusinessForm'
 import { ProductStep } from '../ProductStep'
+import { BusinessAddStore } from '../BusinessAddStore'
 
 import {
   CategoryProductsContainer,
@@ -92,6 +93,7 @@ const BusinessProductsListingUI = (props) => {
   const [batchImageFormOpen, setBatchImageFormOpen] = useState(false)
   const [openSidebar, setOpenSidebar] = useState(null)
   const [showPopup, setShowPopup] = useState(false)
+  const [isAdd, setIsAdd] = useState(false)
 
   const [allowSpreadColumns, setAllowSpreadColumns] = useState({
     id: true,
@@ -212,7 +214,7 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleOpenAddBusiness = () => {
-    setOpenSidebar('add_business')
+    setIsAdd(true)
     handleClose()
   }
 
@@ -533,6 +535,14 @@ const BusinessProductsListingUI = (props) => {
           orderingBusiness={businessState?.business}
           getBusiness={getBusiness}
         />
+      </Modal>
+      <Modal
+        width='769px'
+        padding='30px'
+        open={isAdd}
+        onClose={() => setIsAdd(false)}
+      >
+        <BusinessAddStore />
       </Modal>
     </>
   )
