@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessAddUI = function BusinessAddUI(props) {
-  var _formState$changes, _orderStatus$options, _configs$google_maps_, _configs$google_maps_2;
+  var _formState$changes2, _orderStatus$options, _configs$google_maps_, _configs$google_maps_2, _formState$result5, _formState$changes3;
   var formState = props.formState,
     handleChangeAddress = props.handleChangeAddress,
     handleChangeInput = props.handleChangeInput,
@@ -78,7 +78,12 @@ var BusinessAddUI = function BusinessAddUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isSlugEdit = _useState4[0],
+    setIsSlugEdit = _useState4[1];
   var handleSubmit = function handleSubmit() {
+    var _formState$changes;
     if ((paymethodIds === null || paymethodIds === void 0 ? void 0 : paymethodIds.length) === 0) {
       setAlertState({
         open: true,
@@ -86,6 +91,14 @@ var BusinessAddUI = function BusinessAddUI(props) {
       });
       return;
     }
+    if (!(formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.slug)) {
+      setAlertState({
+        open: true,
+        content: t('VALIDATION_ERROR_REQUIRED', 'Slug is required').replace('_attribute_', t('SLUG', 'Slug'))
+      });
+      return;
+    }
+    isSlugEdit && setIsSlugEdit(false);
     handleAddBusiness();
   };
   var handleGoToBusinessList = function handleGoToBusinessList() {
@@ -102,10 +115,10 @@ var BusinessAddUI = function BusinessAddUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result;
     if (!(formState !== null && formState !== void 0 && formState.loading) && formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
-      var _formState$result2;
-      setAlertState({
+      var _formState$result2, _formState$result2$re, _formState$result3, _formState$result4;
+      if ((formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re.length) === 0 && formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result[0].toLowerCase().includes(t('SLUG', 'Slug').toLowerCase())) setIsSlugEdit(true);else setAlertState({
         open: true,
-        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
@@ -144,20 +157,20 @@ var BusinessAddUI = function BusinessAddUI(props) {
     handleChangeSwtich: handleChangeSwtich
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_Schedule.Schedule, {
     handleChangeSchedule: changeSchedule,
-    schedule: formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.schedule
+    schedule: formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.schedule
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_Photos.Photos, {
     gallery: gallery,
     handleChangeGallery: handleChangeGallery
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_OrderTypePriceLevel.OrderTypePriceLevel, {
     formState: formState,
     changeFormState: changeFormState
-  })), (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === 1 && /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_DeliveryZone.DeliveryZone, {
+  })), (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === 1 && /*#__PURE__*/_react.default.createElement(_DeliveryZone.DeliveryZone, {
     kmlData: kmlData,
     zoneState: zoneState,
     formState: formState,
     handleChangeZoneState: handleChangeZoneState,
     handleUploadKmlFiles: handleUploadKmlFiles
-  })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_PaymentMethods.PaymentMethods, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_PaymentMethods.PaymentMethods, {
     handleChangePaymethodIds: handleChangePaymethodIds,
     paymethodIds: paymethodIds,
     paymethodsList: paymethodsList
@@ -192,7 +205,24 @@ var BusinessAddUI = function BusinessAddUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "769px",
+    padding: "30px",
+    title: t('WEB_APPNAME', 'Ordering'),
+    open: isSlugEdit,
+    onClose: function onClose() {
+      return setIsSlugEdit(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles2.SlugEditWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, formState === null || formState === void 0 ? void 0 : (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result), /*#__PURE__*/_react.default.createElement(_styles2.SlugFormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "slug",
+    placeholder: t('SLUG', 'Slug'),
+    value: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.slug,
+    onChange: handleChangeInput
+  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "8px",
+    onClick: handleSubmit
+  }, t('ACCEPT', 'Accept')))));
 };
 var BusinessAdd = function BusinessAdd(props) {
   var history = (0, _reactRouterDom.useHistory)();

@@ -14,7 +14,9 @@ var ReceiveOrdersContainer = _styledComponents.default.div(_templateObject || (_
 exports.ReceiveOrdersContainer = ReceiveOrdersContainer;
 var ContentWrapper = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin-top: 23px;\n"])));
 exports.ContentWrapper = ContentWrapper;
-var FormControl = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-bottom: 23px;\n  label {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-bottom: 12px;\n  }\n  input {\n    width: 100%;\n    height: 44px;\n  }\n"])));
+var FormControl = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  margin-bottom: 23px;\n  label {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-bottom: 12px;\n    sup {\n      color: ", ";\n      font-size: 13px;\n    }\n  }\n  input {\n    width: 100%;\n    height: 44px;\n  }\n"])), function (props) {
+  return props.theme.colors.danger;
+});
 exports.FormControl = FormControl;
 var DownloadWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  label {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-bottom: 12px;\n  }\n"])));
 exports.DownloadWrapper = DownloadWrapper;

@@ -11,6 +11,7 @@ var _FirstSelect = require("../../../../styles/Select/FirstSelect");
 var _styles = require("../../../../styles");
 var _Shared = require("../../../Shared");
 var _styles2 = require("./styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -61,6 +62,10 @@ var DeliveryZone = function DeliveryZone(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isShowMap = _useState12[0],
     setIsShowMap = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    hasContent = _useState14[0],
+    setHasContent = _useState14[1];
   // const kmlRef = useRef(null)
 
   var typeOptions = [{
@@ -154,9 +159,13 @@ var DeliveryZone = function DeliveryZone(props) {
   (0, _react.useEffect)(function () {
     if (zoneType === 4) setIsShowMap(false);else setIsShowMap(true);
   }, [zoneType]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DeliveryZoneContainer, {
-    autoComplete: "off"
-  }, /*#__PURE__*/_react.default.createElement("h2", null, t('LETS_CREATE_YOUR_FIRST_DELIVERY_ZONE', 'Let’s create your first Delivery Zone')), /*#__PURE__*/_react.default.createElement(_styles2.Row, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DeliveryZoneContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, {
+    onClick: function onClick() {
+      return setHasContent(function (prev) {
+        return !prev;
+      });
+    }
+  }, /*#__PURE__*/_react.default.createElement("h2", null, t('LETS_CREATE_YOUR_FIRST_DELIVERY_ZONE', 'Let’s create your first Delivery Zone')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CaretDownFill, null)), hasContent && /*#__PURE__*/_react.default.createElement(_styles2.DeliveryZoneInnerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Row, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('NAME', 'Name'),
     name: "name",
     value: (_zoneState$name = zoneState === null || zoneState === void 0 ? void 0 : zoneState.name) !== null && _zoneState$name !== void 0 ? _zoneState$name : '',
@@ -216,7 +225,7 @@ var DeliveryZone = function DeliveryZone(props) {
     infoContentString: infoContentString,
     greenFillStyle: greenFillStyle,
     kmlData: kmlData
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.ErrorText, null, t('REQUIRED_GOOGLE_MAP_API_KEY', 'Google Maps api key is required'))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
