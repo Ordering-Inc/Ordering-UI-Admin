@@ -230,6 +230,10 @@ var AdvancedSettings = function AdvancedSettings(props) {
     name: t('BUSINESS_ADDRESS', 'Business address'),
     type: 'hidden',
     path: 'checkout.components.business.components.address.hidden'
+  }, {
+    name: t('MAP', 'Map'),
+    type: 'hidden',
+    path: 'checkout.components.map.hidden'
   }];
   var orderBlockList = [{
     name: t('DATE', 'Date'),
