@@ -78,7 +78,7 @@ export const AdvancedSettings = (props) => {
   const businessPageList = [
     { name: t('DEFAULT_BACKGROUND_COLOR', 'Default Background color'), type: 'color', path: 'business_view.components.style.backgroundColor' },
     { name: t('PRODUCTS_FROM_PREVIOUS_ORDERS_BLOCK', 'Products from previous orders block'), type: 'hidden', path: 'business_view.components.products_ordered.hidden' },
-    { name: t('NEAR_BUSINESS_BLOCK', 'Near business block'), type: 'hidden', path: 'business_view.components.near_business' },
+    { name: t('NEAR_BUSINESS_BLOCK', 'Near business block'), type: 'hidden', path: 'business_view.components.near_business.hidden' },
     { name: t('ORDER_VIEW_BUTTON', 'Order view button'), type: 'hidden', path: 'business_view.components.order_view_button.hidden' }
   ]
 

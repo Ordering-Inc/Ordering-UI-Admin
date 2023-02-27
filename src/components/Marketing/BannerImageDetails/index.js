@@ -231,7 +231,8 @@ const BannerImageDetailsUI = (props) => {
 export const BannerImageDetails = (props) => {
   const linkProps = {
     ...props,
-    UIComponent: BannerImageDetailsUI
+    UIComponent: BannerImageDetailsUI,
+    isSearchByName: true
   }
   return <BannerImageDetailsController {...linkProps} />
 }
