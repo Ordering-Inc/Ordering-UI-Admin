@@ -111,7 +111,8 @@ export const AdvancedSettings = (props) => {
   ]
 
   const checkoutList = [
-    { name: t('BUSINESS_ADDRESS', 'Business address'), type: 'hidden', path: 'checkout.components.business.components.address.hidden' }
+    { name: t('BUSINESS_ADDRESS', 'Business address'), type: 'hidden', path: 'checkout.components.business.components.address.hidden' },
+    { name: t('MAP', 'Map'), type: 'hidden', path: 'checkout.components.map.hidden' }
   ]
 
   const orderBlockList = [

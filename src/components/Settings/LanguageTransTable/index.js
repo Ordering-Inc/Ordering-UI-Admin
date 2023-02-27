@@ -135,8 +135,8 @@ const LanguageTransTableUI = (props) => {
                 </TableBody>
               ))
             ) : (
-              currentPages.map((translation, i) => (
-                <TableBody key={i}>
+              currentPages.map(translation => (
+                <TableBody key={translation?.id}>
                   <tr>
                     <td>{translation.key}</td>
                     <td>
