@@ -79,6 +79,10 @@ var MessagesListingUI = function MessagesListingUI(props) {
     _useState16 = _slicedToArray(_useState15, 2),
     orderIdForUnreadCountUpdate = _useState16[0],
     setOrderIdForUnreadCountUpdate = _useState16[1];
+  var _useState17 = (0, _react.useState)(false),
+    _useState18 = _slicedToArray(_useState17, 2),
+    filterModalOpen = _useState18[0],
+    setFilterModalOpen = _useState18[1];
   var handleOpenOrderDetail = function handleOpenOrderDetail(order) {
     setDetailsOrder(order);
     setOrderDetailId(order.id);
@@ -111,7 +115,9 @@ var MessagesListingUI = function MessagesListingUI(props) {
     businessesList: businessesList,
     filterValues: filterValues,
     handleChangeSearch: handleChangeSearch,
-    handleChangeFilterValues: handleChangeFilterValues
+    handleChangeFilterValues: handleChangeFilterValues,
+    filterModalOpen: filterModalOpen,
+    setFilterModalOpen: setFilterModalOpen
   }), /*#__PURE__*/_react.default.createElement(_styles.MessagesContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.MessagesOptionTabs, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOption === 'orders',
     onClick: function onClick() {
