@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.InvoiceManager = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _styles = require("../../../styles");
@@ -22,6 +23,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var InvoiceManager = function InvoiceManager(props) {
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -50,14 +53,24 @@ var InvoiceManager = function InvoiceManager(props) {
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Truck, null),
     description: t('DRIVER_INVOICE_DESCRIPTION', 'Driver invoice description')
   }];
-  var handleOpenInvoiceDetail = function handleOpenInvoiceDetail(index) {
+  var handleOpenInvoiceDetail = function handleOpenInvoiceDetail(index, isInitialRender) {
     setOpenInvoiceDetail(true);
     setSelectedInvoice(index);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?invoice=").concat(index));
+    }
   };
   var handleCloseInvoiceDetail = function handleCloseInvoiceDetail() {
     setOpenInvoiceDetail(false);
     setSelectedInvoice(null);
+    history.replace("".concat(location.pathname));
   };
+  (0, _react.useEffect)(function () {
+    var invoice = query.get('invoice');
+    if (invoice) {
+      handleOpenInvoiceDetail(invoice, true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.InvoiceManagerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.PointsWalletLevels = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Shared = require("../../Shared");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -38,6 +39,8 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
     handleUpdateLevelList = props.handleUpdateLevelList,
     handleAddLevelList = props.handleAddLevelList,
     handleParentSidebarMove = props.handleParentSidebarMove;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -68,17 +71,23 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       content: []
     });
   };
-  var handleOpenDetail = function handleOpenDetail(level) {
+  var handleOpenDetail = function handleOpenDetail(level, isInitialRender) {
     setSelectedLevel(level);
     setExtraOpen(true);
     if (width >= 1100) {
       handleParentSidebarMove(550);
+    }
+    if (level && !isInitialRender) {
+      var id = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&level=").concat(level.id));
     }
   };
   var handleCloseLevelDetail = function handleCloseLevelDetail() {
     setExtraOpen(false);
     setSelectedLevel(null);
     handleParentSidebarMove(0);
+    var id = query.get('id');
+    history.replace("".concat(location.pathname, "?id=").concat(id));
   };
   (0, _react.useEffect)(function () {
     if (width < 1100) {
@@ -87,6 +96,18 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       if (extraOpen) handleParentSidebarMove(550);
     }
   }, [width, extraOpen]);
+  (0, _react.useEffect)(function () {
+    if (levelList.loading) return;
+    var levelId = query.get('level');
+    if (levelId) {
+      var initLevel = levelList === null || levelList === void 0 ? void 0 : levelList.levels.find(function (level) {
+        return level.id === Number(levelId);
+      });
+      if (initLevel) {
+        handleOpenDetail(initLevel, true);
+      }
+    }
+  }, [levelList.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('LEVELS', 'Levels')), /*#__PURE__*/_react.default.createElement(_styles.LevelContainer, null, levelList !== null && levelList !== void 0 && levelList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.LevelItemContainer, {
       key: i

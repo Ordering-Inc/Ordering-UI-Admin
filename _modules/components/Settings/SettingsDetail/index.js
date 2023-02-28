@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.SettingsDetail = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
@@ -34,6 +35,8 @@ var SettingsDetail = function SettingsDetail(props) {
     onBasicSettingsRedirect = props.onBasicSettingsRedirect,
     category = props.category,
     isUpdateConfig = props.isUpdateConfig;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -106,13 +109,17 @@ var SettingsDetail = function SettingsDetail(props) {
     var vid = document.getElementById('categoryVideo');
     vid.play();
   };
-  var handleExtraOpen = function handleExtraOpen(isMoreInfo) {
+  var handleExtraOpen = function handleExtraOpen(isMoreInfo, isInitialRender) {
     if (isMoreInfo) {
       setExtraInfoOpen(true);
       setExtraSubCatOpen(false);
     } else {
       setExtraInfoOpen(false);
       setExtraSubCatOpen(true);
+      if (!isInitialRender) {
+        var _category = query.get('category');
+        history.replace("".concat(location.pathname, "?category=").concat(_category, "&more=settings"));
+      }
     }
   };
   var onCloseSettingsList = function onCloseSettingsList() {
@@ -139,6 +146,12 @@ var SettingsDetail = function SettingsDetail(props) {
       return document.removeEventListener('keydown', onCloseSidebar);
     };
   }, [open]);
+  (0, _react.useEffect)(function () {
+    var more = query.get('more');
+    if (more === 'settings') {
+      handleExtraOpen(false, true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "catDescription"
   }, /*#__PURE__*/_react.default.createElement(_styles2.DescriptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.DescriptionHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderIcons, null, (category === null || category === void 0 ? void 0 : category.support_url) && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {

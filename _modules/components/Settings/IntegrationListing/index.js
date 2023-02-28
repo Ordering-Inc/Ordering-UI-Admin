@@ -54,7 +54,7 @@ var IntegrationListing = function IntegrationListing(props) {
     settingParams = data[0];
   }
   var settingId = settingParams && settingParams.split('=')[1];
-  var onBasicSettingsRedirect = function onBasicSettingsRedirect(_ref) {
+  var onBasicSettingsRedirect = function onBasicSettingsRedirect(_ref, isInitialRender) {
     var id = _ref.id;
     if (!id) {
       return events.emit('go_to_page', {
@@ -62,7 +62,7 @@ var IntegrationListing = function IntegrationListing(props) {
         replace: true
       });
     }
-    if (id) {
+    if (id && !isInitialRender) {
       events.emit('go_to_page', {
         page: 'integrations',
         search: "?id=".concat(id),
@@ -86,7 +86,7 @@ var IntegrationListing = function IntegrationListing(props) {
     if (settingId) {
       onBasicSettingsRedirect({
         id: settingId
-      });
+      }, true);
       setShowOption(settingId);
     }
   }, []);

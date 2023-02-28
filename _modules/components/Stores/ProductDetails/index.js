@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ProductDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _Shared = require("../../Shared");
@@ -52,6 +53,8 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     handleSuccessUpdate = props.handleSuccessUpdate,
     handleChangeRibbon = props.handleChangeRibbon,
     cleanFormState = props.cleanFormState;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useState = (0, _react.useState)(false),
@@ -70,15 +73,23 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     showOption = _useState8[0],
     setShowOption = _useState8[1];
-  var handleShowOption = function handleShowOption(option) {
+  var handleShowOption = function handleShowOption(option, isInitialRender) {
     setIsExtendExtraOpen(false);
     setShowOption(option);
     setExtraOpen(true);
+    if (!isInitialRender) {
+      var category = query.get('category');
+      var product = query.get('product');
+      history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(option));
+    }
   };
   var handleCloseExtraOpen = function handleCloseExtraOpen() {
     setIsExtendExtraOpen(false);
     setExtraOpen(false);
     setShowOption(null);
+    var category = query.get('category');
+    var product = query.get('product');
+    history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product));
   };
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
@@ -133,6 +144,12 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
       return document.removeEventListener('keydown', onCloseSidebar);
     };
   }, [open]);
+  (0, _react.useEffect)(function () {
+    var section = query.get('section');
+    if (section) {
+      handleShowOption(section, true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, {
     id: "product_details"
   }, (!isExtendExtraOpen || width < 1000) && /*#__PURE__*/_react.default.createElement(_ProductSummary.ProductSummary, _extends({}, props, {

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.UsersReviewList = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -35,6 +36,8 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     getUsers = props.getUsers,
     onSearch = props.onSearch,
     defaultUserTypesSelected = props.defaultUserTypesSelected;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -49,8 +52,12 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     setOpenReview = _useState2[1];
   var _useState3 = (0, _react.useState)(null),
     _useState4 = _slicedToArray(_useState3, 2),
-    curDriver = _useState4[0],
-    setCurDriver = _useState4[1];
+    curUser = _useState4[0],
+    setCurUser = _useState4[1];
+  var _useState5 = (0, _react.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    curUserId = _useState6[0],
+    setCurUserId = _useState6[1];
   var headerTitle = defaultUserTypesSelected.length === 1 && defaultUserTypesSelected[0] === 3 ? t('CUSTOMER', 'Customer') : defaultUserTypesSelected[0] === 8 ? t('PROFESSIONAL', 'Professional') : t('DRIVER', 'Driver');
   var handleChangePage = function handleChangePage(page) {
     getUsers(page, 10);
@@ -64,14 +71,33 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     onSearch(parentSearchValue);
   }, [parentSearchValue]);
   var handleOpenReview = function handleOpenReview(user) {
-    setCurDriver(user);
+    setCurUser(user);
+    setCurUserId(user.id);
     setOpenReview(true);
   };
-  var handleClickReview = function handleClickReview(e, user) {
-    var isInvalid = e.target.closest('.review-enabled') || e.target.closest('.review-actions');
+  var handleClickReview = function handleClickReview(e, user, isInitialRender) {
+    var _e$target;
+    var isInvalid = (e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.review-enabled')) || e.target.closest('.review-actions');
     if (isInvalid) return;
     handleOpenReview(user);
+    if (!isInitialRender) {
+      var tab = query.get('tab');
+      history.replace("".concat(location.pathname, "?tab=").concat(tab, "&id=").concat(user.id));
+    }
   };
+  var handleCloseReviewDetails = function handleCloseReviewDetails() {
+    setCurUser(null);
+    setOpenReview(false);
+    var tab = query.get('tab');
+    history.replace("".concat(location.pathname, "?tab=").concat(tab));
+  };
+  (0, _react.useEffect)(function () {
+    var id = query.get('id');
+    if (id) {
+      setCurUserId(Number(id));
+      setOpenReview(true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
   }, headerTitle)), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
@@ -94,7 +120,7 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
   }) : usersList.users.map(function (user) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewTbody, {
       key: user.id,
-      active: user.id === (curDriver === null || curDriver === void 0 ? void 0 : curDriver.id),
+      active: user.id === (curUser === null || curUser === void 0 ? void 0 : curUser.id),
       onClick: function onClick(e) {
         return handleClickReview(e, user);
       }
@@ -114,13 +140,12 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     defaultSideBarWidth: 550,
     open: openReview,
     onClose: function onClose() {
-      setCurDriver(null);
-      setOpenReview(false);
+      return handleCloseReviewDetails();
     },
     showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_UserReviewDetails.UserReviewDetails, {
-    userId: curDriver === null || curDriver === void 0 ? void 0 : curDriver.id,
-    driver: curDriver
+    userId: curUserId,
+    user: curUser
   })));
 };
 var UsersReviewList = function UsersReviewList(props) {

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.RecoveryActionDetail = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Shared = require("../../Shared");
 var _reactBootstrap = require("react-bootstrap");
@@ -18,6 +19,7 @@ var _RecoveryNotificationList = require("../RecoveryNotificationList");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -35,6 +37,8 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
     isAddMode = props.isAddMode,
     actionState = props.actionState,
     handleDeleteRecoveryAction = props.handleDeleteRecoveryAction;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -71,7 +75,7 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
     key: 'notifications',
     name: t('NOTIFICATIONS', 'Notifications')
   }];
-  var handleSelectOption = function handleSelectOption(key) {
+  var handleSelectOption = function handleSelectOption(key, isInitialRender) {
     if (key === 'notifications' && isAddMode) {
       setAlertState({
         open: true,
@@ -80,6 +84,10 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
       return;
     }
     setSelectedOption(key);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(key));
+    }
   };
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -113,6 +121,15 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState]);
+  (0, _react.useEffect)(function () {
+    if (Object.keys(recoveryActionState.action).length === 0) return;
+    var tab = query.get('tab');
+    if (tab) {
+      handleSelectOption(tab, true);
+    } else {
+      handleSelectOption(selectedOption);
+    }
+  }, [recoveryActionState.action]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.RecoveryActionDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, (((_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) || (recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$ = recoveryActionState.action) === null || _recoveryActionState$ === void 0 ? void 0 : _recoveryActionState$.name)) && /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, (_formState$changes$na = (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$2 = recoveryActionState.action) === null || _recoveryActionState$2 === void 0 ? void 0 : _recoveryActionState$2.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: typeof ((_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled) !== 'undefined' ? (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.enabled : (_recoveryActionState$3 = (_recoveryActionState$4 = recoveryActionState.action) === null || _recoveryActionState$4 === void 0 ? void 0 : _recoveryActionState$4.enabled) !== null && _recoveryActionState$3 !== void 0 ? _recoveryActionState$3 : false,
     onChange: function onChange(val) {
@@ -139,7 +156,9 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
         return handleSelectOption(option.key);
       }
     }, option.name);
-  })), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_RecoveryGeneral.RecoveryGeneral, props), selectedOption === 'notifications' && /*#__PURE__*/_react.default.createElement(_RecoveryNotificationList.RecoveryNotificationList, props)), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_RecoveryGeneral.RecoveryGeneral, props), selectedOption === 'notifications' && /*#__PURE__*/_react.default.createElement(_RecoveryNotificationList.RecoveryNotificationList, _extends({}, props, {
+    action: recoveryActionState.action
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('RECOVERY_ACTIONS', 'Recovery actions'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

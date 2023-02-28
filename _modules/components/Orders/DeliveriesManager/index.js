@@ -89,7 +89,6 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     var id = query.get('id');
     if (id === null) setIsOpenOrderDetail(false);else {
       setOrderDetailId(id);
-      onOrderRedirect(id);
       setIsOpenOrderDetail(true);
     }
   }, []);

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.PlaceListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _styles = require("../../../styles");
@@ -77,6 +78,8 @@ var PlaceListingUI = function PlaceListingUI(props) {
     handleCheckboxZoneClick = props.handleCheckboxZoneClick,
     handleAllCheckboxZoneClick = props.handleAllCheckboxZoneClick,
     handleSeveralDeleteZones = props.handleSeveralDeleteZones;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -173,10 +176,19 @@ var PlaceListingUI = function PlaceListingUI(props) {
     setSelectedCity(city);
     setOpenCity(true);
   };
-  var handleClickCity = function handleClickCity(e, city) {
-    var isInvalid = e.target.closest('.city-checkbox') || e.target.closest('.city-enabled') || e.target.closest('.city-actions');
+  var handleClickCity = function handleClickCity(e, city, isInitialRender) {
+    var _e$target, _e$target2, _e$target3;
+    var isInvalid = (e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.city-checkbox')) || (e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.closest('.city-enabled')) || (e === null || e === void 0 ? void 0 : (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.closest('.city-actions'));
     if (isInvalid) return;
     handleOpenCityDetails(city);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?country=").concat(city.country_id, "&city=").concat(city.id));
+    }
+  };
+  var handleCloseCityDetail = function handleCloseCityDetail() {
+    setSelectedCity(null);
+    setOpenCity(false);
+    history.replace("".concat(location.pathname));
   };
   var handleOpenZoneDropdownDetails = function handleOpenZoneDropdownDetails(zone) {
     setSelectedZoneDropdown(zone);
@@ -193,6 +205,31 @@ var PlaceListingUI = function PlaceListingUI(props) {
     setSearchValue(null);
     cleanChagesState();
   }, [showOption]);
+  (0, _react.useEffect)(function () {
+    if (countriesState.loading) return;
+    var countryId = query.get('country');
+    var cityId = query.get('city');
+    if (countryId && cityId) {
+      setShowOption('cities');
+      var initCountry = countriesState.countries.find(function (country) {
+        return country.id === Number(countryId);
+      });
+      if (initCountry) {
+        var initCity = initCountry.cities.find(function (city) {
+          return city.id === Number(cityId);
+        });
+        if (initCity) {
+          handleClickCity(null, initCity, true);
+        }
+      }
+    }
+  }, [countriesState.loading]);
+  (0, _react.useEffect)(function () {
+    var zone = query.get('zone');
+    if (zone) {
+      setShowOption('zones');
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PlaceListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderLeft, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -401,8 +438,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
     defaultSideBarWidth: 550,
     open: openCity,
     onClose: function onClose() {
-      setSelectedCity(null);
-      setOpenCity(false);
+      return handleCloseCityDetail();
     },
     showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_CityDetails.CityDetails, {

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessWalletsList = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -33,6 +34,8 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
     isClose = props.isClose,
     handleClosePaymethodDetails = props.handleClosePaymethodDetails,
     handleUpdateWallet = props.handleUpdateWallet;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -61,18 +64,26 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
     wallet_cash_enabled: t('WALLET_CASH_ENABLED', 'Wallet cash enabled'),
     wallet_credit_point_enabled: t('WALLET_CREDIT_POINT_ENABLED', 'Wallet credit point enabled')
   };
-  var handleOpenWallet = function handleOpenWallet(config) {
+  var handleOpenWallet = function handleOpenWallet(config, isInitialRender) {
     setIsOpenWalletDetails(true);
     handleClosePaymethodDetails();
     setCurrentConfig(config);
     setIsExtendExtraOpen(true);
     setIsOpenDetails(true);
+    if (!isInitialRender) {
+      var businessId = query.get('id');
+      var section = query.get('section');
+      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&wallet=").concat(config.id));
+    }
   };
   var handleCloseWallet = function handleCloseWallet() {
     setIsOpenWalletDetails(false);
     setIsOpenDetails(false);
     setIsExtendExtraOpen(false);
     setCurrentConfig(null);
+    var businessId = query.get('id');
+    var section = query.get('section');
+    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section));
   };
   (0, _react.useEffect)(function () {
     var _currentConfig$option;
@@ -91,6 +102,18 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
     setIsOpenDetails(false);
     setCurrentConfig(null);
   }, [isClose]);
+  (0, _react.useEffect)(function () {
+    if (loyaltyPlanState.loading || walletsListState.loading) return;
+    var walletId = query.get('wallet');
+    if (walletId) {
+      var initWallet = walletsListState.wallets.find(function (wallet) {
+        return wallet.id === Number(walletId);
+      });
+      if (initWallet) {
+        handleOpenWallet(initWallet, true);
+      }
+    }
+  }, [loyaltyPlanState.loading, walletsListState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, loyaltyPlanState.loading || walletsListState.loading ? /*#__PURE__*/_react.default.createElement(_styles.WalletsListContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 30
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, walletsListState.wallets.length > 0 && (walletsEnabled.wallet_cash_enabled || walletsEnabled.wallet_credit_point_enabled) && /*#__PURE__*/_react.default.createElement(_styles.WalletsListContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WALLETS', 'Wallets')), walletsListState.wallets.filter(function (config) {

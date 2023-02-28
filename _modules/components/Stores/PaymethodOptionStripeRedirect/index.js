@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.PaymethodOptionStripeRedirect = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
 var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
@@ -49,6 +50,8 @@ var PaymethodOptionStripeRedirect = function PaymethodOptionStripeRedirect(props
     orderTypes = props.orderTypes,
     handleChangeBusinessPaymentState = props.handleChangeBusinessPaymentState,
     handleDeletePaymethod = props.handleDeletePaymethod;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -160,6 +163,23 @@ var PaymethodOptionStripeRedirect = function PaymethodOptionStripeRedirect(props
     if (changesState !== null && changesState !== void 0 && changesState.sites) changes.sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites;
     if (Object.keys(changes).length > 0) setLocalState(JSON.parse(JSON.stringify(changes)));
   }, [changesState === null || changesState === void 0 ? void 0 : changesState.sites, changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setPaymentTabs(tab);
+    if (!isInitialRender) {
+      var businessId = query.get('id');
+      var section = query.get('section');
+      var paymethod = query.get('paymethod');
+      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&paymethod=").concat(paymethod, "&payemthod_tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var payemthodTab = query.get('payemthod_tab');
+    if (payemthodTab) {
+      handleTabClick(Number(payemthodTab), true);
+    } else {
+      handleTabClick(0);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "stripe_redirect"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('STRIPE_REDIRECT', 'Stripe redirect')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
@@ -178,17 +198,17 @@ var PaymethodOptionStripeRedirect = function PaymethodOptionStripeRedirect(props
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles3.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
     active: paymentTabs === 0,
     onClick: function onClick() {
-      return setPaymentTabs(0);
+      return handleTabClick(0);
     }
   }, t('GENERAL', 'General')), (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
     active: paymentTabs === 1,
     onClick: function onClick() {
-      return setPaymentTabs(1);
+      return handleTabClick(1);
     }
   }, t('CHANNELS', 'Channels')), /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
     active: paymentTabs === 2,
     onClick: function onClick() {
-      return setPaymentTabs(2);
+      return handleTabClick(2);
     }
   }, t('ORDER_TYPE', 'Order type'))), paymentTabs === 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SandboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     checked: (_ref2 = (_changesState$sandbox = changesState === null || changesState === void 0 ? void 0 : changesState.sandbox) !== null && _changesState$sandbox !== void 0 ? _changesState$sandbox : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sandbox) !== null && _ref2 !== void 0 ? _ref2 : false,

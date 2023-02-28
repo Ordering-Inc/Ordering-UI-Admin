@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessDeliveryPickupMore = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _BusinessDeliveryDetails = require("../BusinessDeliveryDetails");
 var _BusinessPickupDetails = require("../BusinessPickupDetails");
@@ -23,6 +24,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
   var setIsExtendExtraOpen = props.setIsExtendExtraOpen;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -46,12 +49,28 @@ var BusinessDeliveryPickupMore = function BusinessDeliveryPickupMore(props) {
   (0, _react.useEffect)(function () {
     setIsExtendExtraOpen(false);
   }, [selectedTab]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setSelectedTab(tab);
+    if (!isInitialRender) {
+      var businessId = query.get('id');
+      var section = query.get('section');
+      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick('delivery');
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('DELIVERY_PICKUP_MORE', 'Delivery, pickup & more')), /*#__PURE__*/_react.default.createElement(_styles.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, tabs.map(function (tab) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: tab.key,
       active: tab.key === selectedTab,
       onClick: function onClick() {
-        return setSelectedTab(tab.key);
+        return handleTabClick(tab.key);
       }
     }, tab.content);
   }))), selectedTab === 'delivery' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryDetails.BusinessDeliveryDetails, props), selectedTab === 'pickup' && /*#__PURE__*/_react.default.createElement(_BusinessPickupDetails.BusinessPickupDetails, props), selectedTab === 'driver_delivery_group' && /*#__PURE__*/_react.default.createElement(_BusinessDeliveryGroupsDetails.DriversGroupsListingDetails, props), selectedTab === 'advanced_eta' && /*#__PURE__*/_react.default.createElement(_BusinessEta.BusinessEta, props));

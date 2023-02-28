@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessDetailsUI = exports.BusinessDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _BusinessSummary = require("../BusinessSummary");
@@ -58,6 +59,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleDeleteBusiness = props.handleDeleteBusiness,
     actionStatus = props.actionStatus,
     handleUpdatePreorderConfigs = props.handleUpdatePreorderConfigs;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -109,15 +112,21 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
       }
     }
   };
-  var handleSelectedItem = function handleSelectedItem(item) {
+  var handleSelectedItem = function handleSelectedItem(item, isInitialRender) {
     setIsExtendExtraOpen(false);
     setSelectedItem(item);
     setExtraOpen(true);
+    if (!isInitialRender) {
+      var _businessId = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(_businessId, "&section=").concat(item));
+    }
   };
   var handleCloseExtraOpen = function handleCloseExtraOpen() {
     setIsExtendExtraOpen(false);
     setExtraOpen(false);
     setSelectedItem(null);
+    var businessId = query.get('id');
+    history.replace("".concat(location.pathname, "?id=").concat(businessId));
   };
   (0, _react.useEffect)(function () {
     if (width > 1000) {
@@ -160,6 +169,13 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
       content: actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error
     });
   }, [actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error]);
+  (0, _react.useEffect)(function () {
+    if (businessState !== null && businessState !== void 0 && businessState.loading) return;
+    var detailKey = query.get('section');
+    if (detailKey) {
+      handleSelectedItem(detailKey, true);
+    }
+  }, [businessState === null || businessState === void 0 ? void 0 : businessState.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles.BarContainer, {
     id: "business_details_bar"
   }, (!isExtendExtraOpen || width < 1000) && /*#__PURE__*/_react.default.createElement(_BusinessSummary.BusinessSummary, {

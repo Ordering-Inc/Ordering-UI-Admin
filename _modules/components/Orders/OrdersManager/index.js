@@ -185,7 +185,6 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
         handleBackRedirect();
       } else {
         setOrderDetailId(id);
-        onOrderRedirect && onOrderRedirect(id);
         setIsOpenOrderDetail(true);
       }
     }

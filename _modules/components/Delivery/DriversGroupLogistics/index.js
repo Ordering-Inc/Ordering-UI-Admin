@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DriversGroupLogistics = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
@@ -30,6 +31,8 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
     handleChangesState = props.handleChangesState,
     handleParentSidebarMove = props.handleParentSidebarMove,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -43,11 +46,16 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     openConfig = _useState4[0],
     setOpenConfig = _useState4[1];
-  var handleOpenConfig = function handleOpenConfig(option) {
+  var handleOpenConfig = function handleOpenConfig(option, isInitialRender) {
     setShowConfig(option);
     setOpenConfig(true);
     if (width >= 1200) {
       handleParentSidebarMove(700);
+    }
+    if (!isInitialRender) {
+      var id = query.get('id');
+      var tab = query.get('tab');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab, "&config=").concat(option));
     }
   };
   var handleCloseSidebar = function handleCloseSidebar() {
@@ -65,6 +73,12 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
   (0, _react.useEffect)(function () {
     setOpenConfig(false);
   }, [(_driversGroupState$dr = driversGroupState.driversGroup) === null || _driversGroupState$dr === void 0 ? void 0 : _driversGroupState$dr.id]);
+  (0, _react.useEffect)(function () {
+    var config = query.get('config');
+    if (config) {
+      handleOpenConfig(config, true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.LogisticsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusWrapper, {
     onClick: function onClick() {
       return handleChangesState({
@@ -86,7 +100,7 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
     onClick: function onClick() {
       return handleOpenConfig('GROUP_ORDERS');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('GROUP_ORDERS', 'Group Orders')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)), /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigItem, {
+  }, "a", /*#__PURE__*/_react.default.createElement("span", null, t('GROUP_ORDERS', 'Group Orders')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)), /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigItem, {
     active: showConfig === 'AUTOASSIGN_SETTINGS',
     onClick: function onClick() {
       return handleOpenConfig('AUTOASSIGN_SETTINGS');

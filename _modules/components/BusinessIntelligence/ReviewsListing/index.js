@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ReviewsListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -25,6 +26,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReviewsListing = function ReviewsListing(props) {
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -48,19 +51,44 @@ var ReviewsListing = function ReviewsListing(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     business = _useState8[0],
     setBusiness = _useState8[1];
+  var _useState9 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState9, 2),
+    businessId = _useState10[0],
+    setBusinessId = _useState10[1];
   var changeBusinessState = function changeBusinessState(business) {
     setShowSelect(false);
     setBusiness(business);
+    setBusinessId(business.id);
+    var tab = query.get('tab');
+    history.replace("".concat(location.pathname, "?tab=").concat(tab, "&business=").concat(business.id));
   };
-  var handleChangeOption = function handleChangeOption(option) {
+  var handleChangeOption = function handleChangeOption(option, isInitialRender) {
     setShowOption(option);
-    if (option === 'products' && !business) setShowSelect(true);
+    if (option === 'products' && !businessId) setShowSelect(true);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?tab=").concat(option));
+    }
   };
   var handleOpenProducts = function handleOpenProducts(business) {
     setBusiness(business);
     setShowOption('products');
     setShowSelect(false);
   };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      var _businessId = query.get('business');
+      if (tab === 'products' && _businessId) {
+        setShowOption('products');
+        setShowSelect(false);
+        setBusinessId(Number(_businessId));
+      } else {
+        handleChangeOption(tab, true);
+      }
+    } else {
+      handleChangeOption(showOption);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ReviewsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderLeft, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -125,9 +153,9 @@ var ReviewsListing = function ReviewsListing(props) {
   }), showOption === 'professionals' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
     defaultUserTypesSelected: [8],
     parentSearchValue: searchValue
-  }), showOption === 'products' && (business === null || business === void 0 ? void 0 : business.id) && /*#__PURE__*/_react.default.createElement(_ReviewProductsListing.ReviewProductsListing, {
+  }), showOption === 'products' && businessId && /*#__PURE__*/_react.default.createElement(_ReviewProductsListing.ReviewProductsListing, {
     parentSearchValue: searchValue,
-    businessId: business === null || business === void 0 ? void 0 : business.id
+    businessId: businessId
   })));
 };
 exports.ReviewsListing = ReviewsListing;

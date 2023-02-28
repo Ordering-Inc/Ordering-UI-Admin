@@ -24,7 +24,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductReviewDetailsUI = function ProductReviewDetailsUI(props) {
-  var product = props.product,
+  var _productState$product, _productState$product2, _productState$product3;
+  var productState = props.productState,
     productReviewList = props.productReviewList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -32,8 +33,8 @@ var ProductReviewDetailsUI = function ProductReviewDetailsUI(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     optimizeImage = _useUtils2[0].optimizeImage;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductImageContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, product !== null && product !== void 0 && product.images ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
-    bgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_120,c_limit')
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.name)), /*#__PURE__*/_react.default.createElement(_styles.ProductImageContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, (_productState$product2 = productState.product) !== null && _productState$product2 !== void 0 && _productState$product2.images ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
+    bgimage: optimizeImage((_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.images, 'h_120,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ImageFill, null))), productReviewList !== null && productReviewList !== void 0 && productReviewList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ReviewContentWrapper, {
       key: i

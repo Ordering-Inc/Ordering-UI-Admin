@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.SitesAuthSettings = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _BsChevronRight = _interopRequireDefault(require("@meronex/icons/bs/BsChevronRight"));
@@ -38,6 +39,8 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
     siteConfigsState = props.siteConfigsState,
     handleGetSiteConfigs = props.handleGetSiteConfigs,
     handleChangeConfig = props.handleChangeConfig;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -58,14 +61,20 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isExpand = _useState6[0],
     setIsExpand = _useState6[1];
-  var handleOpenSiteSettingDetails = function handleOpenSiteSettingDetails(siteId) {
+  var handleOpenSiteSettingDetails = function handleOpenSiteSettingDetails(siteId, isInitialRender) {
     handleGetSiteConfigs(siteId);
     setSelectedSiteId(siteId);
     setMoveDistance(500);
+    if (!isInitialRender) {
+      var category = query.get('category');
+      history.replace("".concat(location.pathname, "?category=").concat(category, "&site=").concat(siteId));
+    }
   };
   var handleCloseDetails = function handleCloseDetails() {
     setSelectedSiteId(null);
     setMoveDistance(0);
+    var category = query.get('category');
+    history.replace("".concat(location.pathname, "?category=").concat(category));
   };
   var expandSideBar = function expandSideBar() {
     var element = document.getElementById('sideSlider');
@@ -82,6 +91,13 @@ var SitesAuthSettingsUI = function SitesAuthSettingsUI(props) {
       });
     }
   }, [actionState.error]);
+  (0, _react.useEffect)(function () {
+    if (sitesState.loading) return;
+    var site = query.get('site');
+    if (site) {
+      handleOpenSiteSettingDetails(Number(site), true);
+    }
+  }, [sitesState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SitesListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings')), width > 576 && !selectedSiteId && /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
     color: "black",
     onClick: expandSideBar

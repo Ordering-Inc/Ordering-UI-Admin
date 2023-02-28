@@ -26,7 +26,6 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
   var _order$payment_events, _order$payment_events2, _order$paymethod, _order$paymethod2;
   var order = props.order,
     handleShowOption = props.handleShowOption,
-    handleOpenMessages = props.handleOpenMessages,
     actionSidebar = props.actionSidebar,
     setIsTourOpen = props.setIsTourOpen,
     isTourOpen = props.isTourOpen,
@@ -76,7 +75,7 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
     color: "black",
     active: openMessage === null || openMessage === void 0 ? void 0 : openMessage.chat,
     onClick: function onClick() {
-      return handleOpenMessages('chat');
+      return handleShowOption('chat');
     },
     isDisabled: isTourOpen && currentTourStep === 1
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.UreadMessageAlert, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Dot, null))), /*#__PURE__*/_react.default.createElement(_reactToPrint.default, {
@@ -94,7 +93,7 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
     color: "black",
     active: openMessage === null || openMessage === void 0 ? void 0 : openMessage.history,
     onClick: function onClick() {
-      return handleOpenMessages('history');
+      return handleShowOption('history');
     },
     isDisabled: isTourOpen && currentTourStep === 1
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Diagram3, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {

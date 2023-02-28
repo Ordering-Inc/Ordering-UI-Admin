@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GiftCards = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Shared = require("../../Shared");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -38,6 +39,8 @@ var GiftCardsUI = function GiftCardsUI(props) {
     handleSuccessDeleteProduct = props.handleSuccessDeleteProduct,
     handleSuccessUpdateProduct = props.handleSuccessUpdateProduct,
     handleSuccessAddProduct = props.handleSuccessAddProduct;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -70,17 +73,23 @@ var GiftCardsUI = function GiftCardsUI(props) {
       content: []
     });
   };
-  var handleOpenDetail = function handleOpenDetail(level) {
-    setSelectedProduct(level);
+  var handleOpenDetail = function handleOpenDetail(product, isInitialRender) {
+    setSelectedProduct(product);
     setExtraOpen(true);
     if (width >= 1100) {
       handleParentSidebarMove(550);
+    }
+    if (product && !isInitialRender) {
+      var id = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&product=").concat(product.id));
     }
   };
   var handleGiftDetail = function handleGiftDetail() {
     setExtraOpen(false);
     setSelectedProduct(null);
     handleParentSidebarMove(0);
+    var id = query.get('id');
+    history.replace("".concat(location.pathname, "?id=").concat(id));
   };
   (0, _react.useEffect)(function () {
     if (width < 1100) {
@@ -89,6 +98,18 @@ var GiftCardsUI = function GiftCardsUI(props) {
       if (extraOpen) handleParentSidebarMove(550);
     }
   }, [width, extraOpen]);
+  (0, _react.useEffect)(function () {
+    if (platformProductsListState.loading) return;
+    var productId = query.get('product');
+    if (productId) {
+      var initProduct = platformProductsListState === null || platformProductsListState === void 0 ? void 0 : platformProductsListState.products.find(function (product) {
+        return product.id === Number(productId);
+      });
+      if (initProduct) {
+        handleOpenDetail(initProduct, true);
+      }
+    }
+  }, [platformProductsListState.loading]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('GIFT_CARD', 'Gift Card'))), /*#__PURE__*/_react.default.createElement(_styles.RequireDescription, null, /*#__PURE__*/_react.default.createElement("b", null, t('', 'Stripe activation is required.')), " ", /*#__PURE__*/_react.default.createElement("i", null, t('', 'Compatible only with Wallet.'))), /*#__PURE__*/_react.default.createElement(_styles.ProductContainer, null, platformProductsListState !== null && platformProductsListState !== void 0 && platformProductsListState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.ItemContainer, {
       key: i

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ProductExtras = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styles = require("../../../styles");
@@ -49,6 +50,8 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     handleDrop = props.handleDrop,
     handleDragEnd = props.handleDragEnd,
     handleUpdateExtraState = props.handleUpdateExtraState;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -87,16 +90,27 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isCheckboxClicked = _useState12[0],
     setIsCheckboxClicked = _useState12[1];
-  var handleOpenExtraDetails = function handleOpenExtraDetails(e, extra) {
-    if (e.target.closest('.extra-checkbox') || e.target.closest('.draggable-dots')) return;
+  var handleOpenExtraDetails = function handleOpenExtraDetails(e, extra, isInitialRender) {
+    var _e$target, _e$target2;
+    if (e !== null && e !== void 0 && (_e$target = e.target) !== null && _e$target !== void 0 && _e$target.closest('.extra-checkbox') || e !== null && e !== void 0 && (_e$target2 = e.target) !== null && _e$target2 !== void 0 && _e$target2.closest('.draggable-dots')) return;
     setIsExtendExtraOpen(true);
     setCurrentExtra(extra);
     setOpenExtraDetails(true);
+    if (!isInitialRender) {
+      var category = query.get('category');
+      var product = query.get('product');
+      var section = query.get('section');
+      history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(section, "&extra=").concat(extra.id));
+    }
   };
   var handleCloseExtraDetails = function handleCloseExtraDetails() {
     setOpenExtraDetails(false);
     setIsExtendExtraOpen(false);
     setCurrentExtra(null);
+    var category = query.get('category');
+    var product = query.get('product');
+    var section = query.get('section');
+    history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(section));
   };
   var addExtraListener = function addExtraListener(e) {
     var _conatinerRef$current;
@@ -152,6 +166,15 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       });
     }
   }, [productState, extrasState]);
+  (0, _react.useEffect)(function () {
+    var extraId = query.get('extra');
+    if (extraId) {
+      var initExtra = extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.find(function (extra) {
+        return extra.id === Number(extraId);
+      });
+      initExtra && handleOpenExtraDetails(null, initExtra, true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductExtrasContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTIONS', 'Product options')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",

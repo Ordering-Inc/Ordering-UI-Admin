@@ -64,6 +64,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     filterValues = props.filterValues,
     businessTypeSelected = props.businessTypeSelected,
     inActiveBusinesses = props.inActiveBusinesses;
+  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -161,7 +162,6 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     var id = query.get('id');
     if (id === null) setOpenBusinessDetails(false);else {
       setDetailsBusinessId(id);
-      onBusinessRedirect && onBusinessRedirect(id);
       setOpenBusinessDetails(true);
     }
   }, []);
@@ -213,13 +213,21 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   };
   var handleOpenSync = function handleOpenSync() {
     setOpenSync(true);
+    history.replace("".concat(location.pathname, "?header=sync"));
   };
   var handleCloseSync = function handleCloseSync() {
     setMoveDistance(0);
     setOpenSync(false);
+    history.replace("".concat(location.pathname));
   };
   (0, _react.useEffect)(function () {
     handleSetStorage();
+  }, []);
+  (0, _react.useEffect)(function () {
+    var header = query.get('header');
+    if (header === 'sync') {
+      setOpenSync(true);
+    }
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.BusinessListingContainer, {
     isAdd: openAddBusiness

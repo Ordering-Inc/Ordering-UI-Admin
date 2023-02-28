@@ -18,6 +18,7 @@ var _Shared = require("../../Shared");
 var _CheckoutFieldsSetting = require("../CheckoutFieldsSetting");
 var _AddressFieldsSetting = require("../AddressFieldsSetting");
 var _LanguageSetting = require("../LanguageSetting");
+var _SitesAuthSettings = require("../SitesAuthSettings");
 var _MultiCountrySettings = require("../MultiCountrySettings");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -37,10 +38,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SettingsUI = function SettingsUI(props) {
-  var _configs$multicountry, _categoryList$categor2, _theme$images, _theme$images$dummies;
+  var _configs$multicountry, _categoryList$categor, _theme$images, _theme$images$dummies;
   var categoryList = props.categoryList,
     settingsType = props.settingsType,
     handChangeConfig = props.handChangeConfig;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -53,8 +56,6 @@ var SettingsUI = function SettingsUI(props) {
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
-  var _useLocation = (0, _reactRouterDom.useLocation)(),
-    search = _useLocation.search;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isOpenDescription = _useState2[0],
@@ -69,18 +70,16 @@ var SettingsUI = function SettingsUI(props) {
     setIsOpenSettingDetails = _useState6[1];
   var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    openMultiCountrySettings = _useState8[0],
-    setOpenMultiCountrySettings = _useState8[1];
-  var _useState9 = (0, _react.useState)(0),
+    openSitesAuthSettings = _useState8[0],
+    setOpenSitesAuthSettings = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
-    moveDistance = _useState10[0],
-    setMoveDistance = _useState10[1];
-  var category;
-  if (search) {
-    var data = search.substring(1).split('&');
-    category = data[0];
-  }
-  var categoryId = category && category.split('=')[1];
+    openMultiCountrySettings = _useState10[0],
+    setOpenMultiCountrySettings = _useState10[1];
+  var _useState11 = (0, _react.useState)(0),
+    _useState12 = _slicedToArray(_useState11, 2),
+    moveDistance = _useState12[0],
+    setMoveDistance = _useState12[1];
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
@@ -105,48 +104,74 @@ var SettingsUI = function SettingsUI(props) {
       });
     }
   };
-  var handleOpenDescription = function handleOpenDescription(category) {
+  var handleOpenDescription = function handleOpenDescription(category, isInitialRender) {
     setIsOpenSettingDetails(null);
+    setOpenSitesAuthSettings(false);
     setOpenMultiCountrySettings(false);
     setIsOpenDescription(true);
     setSelectedCategory(category);
-    onBasicSettingsRedirect({
-      category: category === null || category === void 0 ? void 0 : category.id
-    });
     handChangeConfig && handChangeConfig(false);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?category=").concat(category === null || category === void 0 ? void 0 : category.id));
+    }
   };
-  var handleOpenSettingDetails = function handleOpenSettingDetails(item) {
+  var handleOpenSettingDetails = function handleOpenSettingDetails(item, isInitialRender) {
     setIsOpenDescription(false);
+    setOpenSitesAuthSettings(false);
     setOpenMultiCountrySettings(false);
     setSelectedCategory(null);
     setIsOpenSettingDetails(item);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?category=").concat(item));
+    }
+  };
+  var handleOpenSites = function handleOpenSites(isInitialRender) {
+    setIsOpenDescription(false);
+    setIsOpenSettingDetails(null);
+    setOpenSitesAuthSettings(true);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?category=sites"));
+    }
+  };
+  var handleOpenMultiCountry = function handleOpenMultiCountry(isInitialRender) {
+    setIsOpenDescription(false);
+    setIsOpenSettingDetails(null);
+    setOpenMultiCountrySettings(true);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?category=multi_country"));
+    }
   };
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenDescription(false);
     setSelectedCategory(null);
-    onBasicSettingsRedirect({
-      category: null
-    });
+    setIsOpenSettingDetails(null);
+    setMoveDistance(0);
+    setOpenMultiCountrySettings(false);
+    setOpenSitesAuthSettings(false);
+    history.replace("".concat(location.pathname));
   };
   (0, _react.useEffect)(function () {
+    if (categoryList.loading) return;
+    var categoryId = query.get('category');
     if (categoryId) {
-      onBasicSettingsRedirect({
-        category: categoryId
-      });
-      setIsOpenDescription(true);
-    } else {
-      setIsOpenDescription(false);
+      if (isNaN(Number(categoryId))) {
+        if (categoryId === 'sites') {
+          handleOpenSites(true);
+        } else if (categoryId === 'multi_country') {
+          handleOpenMultiCountry(true);
+        } else {
+          handleOpenSettingDetails(categoryId, true);
+        }
+      } else {
+        var categorySelected = categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories.find(function (item) {
+          return (item === null || item === void 0 ? void 0 : item.id) === parseInt(categoryId);
+        });
+        if (categorySelected) {
+          handleOpenDescription(categorySelected, true);
+        }
+      }
     }
-  }, []);
-  (0, _react.useEffect)(function () {
-    var _categoryList$categor;
-    if (categoryId && (categoryList === null || categoryList === void 0 ? void 0 : (_categoryList$categor = categoryList.categories) === null || _categoryList$categor === void 0 ? void 0 : _categoryList$categor.length) > 0) {
-      var categorySelected = categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories.find(function (item) {
-        return (item === null || item === void 0 ? void 0 : item.id) === parseInt(categoryId);
-      });
-      setSelectedCategory(categorySelected);
-    }
-  }, [categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories]);
+  }, [categoryList.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BasicSettingsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -193,12 +218,20 @@ var SettingsUI = function SettingsUI(props) {
     description: t('ADDRESS_FIELDS_DESC'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAltFill, null),
     active: isOpenSettingDetails === 'address'
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
+    className: "col-md-4 col-sm-6",
+    onClick: function onClick() {
+      return handleOpenSites();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
+    title: t('SITES_LOGIN_SIGNUP_SETTINGS', 'Sites Login/Signup Settings'),
+    description: t('SITES_LOGIN_SIGNUP_SETTINGS_DESC', 'Advanced sites login/sign up settings'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
+    active: openSitesAuthSettings
   })), isMulticountryEnabled && /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
     onClick: function onClick() {
-      setIsOpenDescription(false);
-      setIsOpenSettingDetails(null);
-      setOpenMultiCountrySettings(true);
+      return handleOpenMultiCountry();
     }
   }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
     title: t('MULTI_COUNTRY_SETTINGS', 'Multi country settings'),
@@ -228,7 +261,7 @@ var SettingsUI = function SettingsUI(props) {
       }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null),
       active: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === (category === null || category === void 0 ? void 0 : category.id)
     })));
-  })), !categoryList.loading && ((_categoryList$categor2 = categoryList.categories) === null || _categoryList$categor2 === void 0 ? void 0 : _categoryList$categor2.length) === 0 && settingsType !== 'key_basic' && /*#__PURE__*/_react.default.createElement(_styles2.WrapperNoneConfigs, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerNoneConfigsContainer, null, /*#__PURE__*/_react.default.createElement("img", {
+  })), !categoryList.loading && ((_categoryList$categor = categoryList.categories) === null || _categoryList$categor === void 0 ? void 0 : _categoryList$categor.length) === 0 && settingsType !== 'key_basic' && /*#__PURE__*/_react.default.createElement(_styles2.WrapperNoneConfigs, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerNoneConfigsContainer, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.noOrders,
     alt: "none"
   }), /*#__PURE__*/_react.default.createElement("p", null, t('NO_SETTINGS', 'No Settings yet.'))))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
@@ -236,13 +269,21 @@ var SettingsUI = function SettingsUI(props) {
     category: selectedCategory,
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
+  })), openSitesAuthSettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    defaultSideBarWidth: 500 + moveDistance,
+    moveDistance: moveDistance,
+    open: openSitesAuthSettings,
+    onClose: function onClose() {
+      return handleBackRedirect();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SitesAuthSettings.SitesAuthSettings, {
+    setMoveDistance: setMoveDistance
   })), openMultiCountrySettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     defaultSideBarWidth: 500 + moveDistance,
     moveDistance: moveDistance,
     open: openMultiCountrySettings,
     onClose: function onClose() {
-      setMoveDistance(0);
-      setOpenMultiCountrySettings(false);
+      return handleBackRedirect();
     }
   }, /*#__PURE__*/_react.default.createElement(_MultiCountrySettings.MultiCountrySettings, {
     setMoveDistance: setMoveDistance
@@ -251,7 +292,7 @@ var SettingsUI = function SettingsUI(props) {
     defaultSideBarWidth: 550,
     open: isOpenSettingDetails,
     onClose: function onClose() {
-      return setIsOpenSettingDetails(null);
+      return handleBackRedirect();
     },
     showExpandIcon: true
   }, isOpenSettingDetails === 'checkout' && /*#__PURE__*/_react.default.createElement(_CheckoutFieldsSetting.CheckoutFieldsSetting, null), isOpenSettingDetails === 'address' && /*#__PURE__*/_react.default.createElement(_AddressFieldsSetting.AddressFieldsSetting, null), isOpenSettingDetails === 'language' && /*#__PURE__*/_react.default.createElement(_LanguageSetting.LanguageSetting, null)));

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.RecoveryActionListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _RecoveryActionHeader = require("../RecoveryActionHeader");
 var _RecoveryActionList = require("../RecoveryActionList");
@@ -25,6 +26,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RecoveryActionListingUI = function RecoveryActionListingUI(props) {
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isOpenDetail = _useState2[0],
@@ -33,21 +36,37 @@ var RecoveryActionListingUI = function RecoveryActionListingUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     selectedAction = _useState4[0],
     setSelectedAction = _useState4[1];
+  var _useState5 = (0, _react.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    selectedActionId = _useState6[0],
+    setSelectedActionId = _useState6[1];
   var handleCloseDetail = function handleCloseDetail() {
     setIsOpenDetail(false);
     setSelectedAction(null);
+    history.replace("".concat(location.pathname));
   };
-  var handleOpenDetail = function handleOpenDetail(action) {
+  var handleOpenDetail = function handleOpenDetail(action, isInitialRender) {
     setSelectedAction(action);
+    setSelectedActionId(action === null || action === void 0 ? void 0 : action.id);
     setIsOpenDetail(true);
+    if (action && !isInitialRender) {
+      history.replace("".concat(location.pathname, "?id=").concat(action.id));
+    }
   };
+  (0, _react.useEffect)(function () {
+    var id = query.get('id');
+    if (id) {
+      setSelectedAction({});
+      setSelectedActionId(Number(id));
+      setIsOpenDetail(true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.RecoveryActionsContainer, null, /*#__PURE__*/_react.default.createElement(_RecoveryActionHeader.RecoveryActionHeader, _extends({}, props, {
     handleOpenDetail: handleOpenDetail
   })), /*#__PURE__*/_react.default.createElement(_RecoveryActionList.RecoveryActionList, _extends({}, props, {
     handleOpenDetail: handleOpenDetail,
     selectedAction: selectedAction
   }))), isOpenDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    sidebarId: "loyaltyWallet",
     open: isOpenDetail,
     onClose: function onClose() {
       return handleCloseDetail();
@@ -55,6 +74,7 @@ var RecoveryActionListingUI = function RecoveryActionListingUI(props) {
     defaultSideBarWidth: 550
   }, /*#__PURE__*/_react.default.createElement(_RecoveryActionDetail.RecoveryActionDetail, _extends({}, props, {
     action: selectedAction,
+    actionId: selectedActionId,
     onClose: function onClose() {
       return handleCloseDetail();
     }

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessSharedMenuProducts = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
@@ -30,6 +31,8 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
     handleUpdateBusinessSharedMenuProduct = props.handleUpdateBusinessSharedMenuProduct,
     setIsOpenSharedProduct = props.setIsOpenSharedProduct,
     handleChangeInput = props.handleChangeInput;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -47,18 +50,42 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
     _useState6 = _slicedToArray(_useState5, 2),
     isOpenDetails = _useState6[0],
     setIsOpenDetails = _useState6[1];
-  var handleOpenProduct = function handleOpenProduct(e, product) {
-    var isInvalid = e.target.closest('.product_checkbox');
+  var handleOpenProduct = function handleOpenProduct(e, product, isInitialRender) {
+    var _e$target;
+    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.product_checkbox');
     if (isInvalid) return;
     setIsOpenSharedProduct(true);
     setCurrentProduct(product);
     setIsOpenDetails(true);
+    if (!isInitialRender) {
+      var businessId = query.get('id');
+      var section = query.get('section');
+      var tab = query.get('tab');
+      var menu = query.get('menu');
+      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&menu=").concat(menu, "&product=").concat(product.id));
+    }
   };
   var handleCloseSidebar = function handleCloseSidebar() {
     setIsOpenDetails(false);
     setCurrentProduct(null);
     setIsOpenSharedProduct(false);
+    var businessId = query.get('id');
+    var section = query.get('section');
+    var tab = query.get('tab');
+    var menu = query.get('menu');
+    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&menu=").concat(menu));
   };
+  (0, _react.useEffect)(function () {
+    var productId = query.get('product');
+    if (productId) {
+      var initProduct = menuState.menu.products.find(function (product) {
+        return product.id === Number(productId);
+      });
+      if (initProduct) {
+        handleOpenProduct(null, initProduct, true);
+      }
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.MenuProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,

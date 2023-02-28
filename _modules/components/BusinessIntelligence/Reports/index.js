@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Reports = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _styles = require("../../../styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
@@ -43,6 +44,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Reports = function Reports(props) {
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -165,11 +168,21 @@ var Reports = function Reports(props) {
   var handleCloseSidebar = function handleCloseSidebar() {
     setIsOpen(false);
     setSelectedReport(0);
+    history.replace("".concat(location.pathname));
   };
-  var handleOpenSlider = function handleOpenSlider(index) {
+  var handleOpenSlider = function handleOpenSlider(index, isInitialRender) {
     setSelectedReport(index);
     setIsOpen(true);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?id=").concat(index));
+    }
   };
+  (0, _react.useEffect)(function () {
+    var id = query.get('id');
+    if (id) {
+      handleOpenSlider(Number(id), true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.ReportsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {

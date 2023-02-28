@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.RewardsPrograms = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
@@ -13,6 +14,7 @@ var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
 var _Wallet = require("../Wallet");
 var _PointsWalletLevels = require("../PointsWalletLevels");
+var _GiftCards = require("../GiftCards");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -24,6 +26,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RewardsPrograms = function RewardsPrograms() {
   var _walletList$find;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -43,6 +47,10 @@ var RewardsPrograms = function RewardsPrograms() {
     _useState6 = _slicedToArray(_useState5, 2),
     levelMoveDistance = _useState6[0],
     setLevelMoveDistance = _useState6[1];
+  var _useState7 = (0, _react.useState)(0),
+    _useState8 = _slicedToArray(_useState7, 2),
+    giftCardMoveDistance = _useState8[0],
+    setGiftCardMoveDistance = _useState8[1];
   var walletList = [{
     key: 'credit_point',
     name: t('POINTS_WALLET', 'Points wallet'),
@@ -67,11 +75,30 @@ var RewardsPrograms = function RewardsPrograms() {
   var hanldeClosePointsWallet = function hanldeClosePointsWallet() {
     setMoveDistance(0);
     setShowOption(null);
+    history.replace("".concat(location.pathname));
   };
   var handleCloseLevel = function handleCloseLevel() {
     setLevelMoveDistance(0);
     setShowOption(null);
+    history.replace("".concat(location.pathname));
   };
+  var handleCloseGiftCard = function handleCloseGiftCard() {
+    setGiftCardMoveDistance(0);
+    setShowOption(null);
+    history.replace("".concat(location.pathname));
+  };
+  var handleOptionClick = function handleOptionClick(key, isInitialRender) {
+    setShowOption(key);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?id=").concat(key));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var id = query.get('id');
+    if (id) {
+      handleOptionClick(id, true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -83,7 +110,7 @@ var RewardsPrograms = function RewardsPrograms() {
     return /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemWrapper, {
       key: item.key,
       onClick: function onClick() {
-        return setShowOption(item.key);
+        return handleOptionClick(item.key);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, null, item.icon), /*#__PURE__*/_react.default.createElement(_styles2.LoyaltyItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, item.name), /*#__PURE__*/_react.default.createElement("p", null, item.description)));
   }))), (showOption === 'credit_point' || showOption === 'cashback') && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
@@ -113,6 +140,18 @@ var RewardsPrograms = function RewardsPrograms() {
   }, /*#__PURE__*/_react.default.createElement(_PointsWalletLevels.PointsWalletLevels, {
     handleParentSidebarMove: function handleParentSidebarMove(val) {
       return setLevelMoveDistance(val);
+    }
+  })), showOption === 'gift_card' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    open: showOption === 'gift_card',
+    onClose: function onClose() {
+      return handleCloseGiftCard();
+    },
+    defaultSideBarWidth: 550 + giftCardMoveDistance,
+    moveDistance: giftCardMoveDistance,
+    showExpandIcon: true
+  }, /*#__PURE__*/_react.default.createElement(_GiftCards.GiftCards, {
+    handleParentSidebarMove: function handleParentSidebarMove(val) {
+      return setGiftCardMoveDistance(val);
     }
   })));
 };

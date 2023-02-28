@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessProductsCategoyDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -47,6 +48,8 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     handleChangeRibbon = props.handleChangeRibbon,
     isTutorialMode = props.isTutorialMode,
     handleTutorialSkip = props.handleTutorialSkip;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -112,6 +115,21 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setSelctedInfoItem(tab);
+    if (!isInitialRender) {
+      var _category = query.get('category');
+      history.replace("".concat(location.pathname, "?category=").concat(_category, "&tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick(selectedInfoItem);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.EditCategoryContent, null, businessState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessEnableWrapper, {
     className: "business_enable_control"
   }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -156,7 +174,9 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     }
   }, t('DELETE', 'Delete')))))), !isAddMode && /*#__PURE__*/_react.default.createElement(_BusinessCategoryInfoSettingList.BusinessCategoryInfoSettingList, {
     selectedInfoItem: selectedInfoItem,
-    handleSelectInfoItem: setSelctedInfoItem
+    handleSelectInfoItem: function handleSelectInfoItem(tab) {
+      return handleTabClick(tab);
+    }
   }), selectedInfoItem === 'information' && /*#__PURE__*/_react.default.createElement(_BusinessProductsCategoyInfo.BusinessProductsCategoyInfo, {
     formState: formState,
     handlechangeImage: handlechangeImage,

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.InvoiceBusinessManager = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Shared = require("../../Shared");
 var _styles = require("./styles");
@@ -28,6 +29,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var InvoiceBusinessManagerUI = function InvoiceBusinessManagerUI(props) {
   var exportInvoiceList = props.exportInvoiceList;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -41,15 +44,27 @@ var InvoiceBusinessManagerUI = function InvoiceBusinessManagerUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     selectedDetailType = _useState2[0],
     setSelectedDetailType = _useState2[1];
-  var changeSelectedAnalyticsStatus = function changeSelectedAnalyticsStatus(detailType) {
+  var changeSelectedAnalyticsStatus = function changeSelectedAnalyticsStatus(detailType, isInitialRender) {
     window.scrollTo(0, 0);
     setSelectedDetailType(detailType);
+    if (!isInitialRender) {
+      var invoice = query.get('invoice');
+      history.replace("".concat(location.pathname, "?invoice=").concat(invoice, "&tab=").concat(detailType));
+    }
   };
   (0, _react.useEffect)(function () {
     if (!(exportInvoiceList !== null && exportInvoiceList !== void 0 && exportInvoiceList.loading) && exportInvoiceList !== null && exportInvoiceList !== void 0 && exportInvoiceList.invoice) {
       inputRef.current.value = invoicePdfRef === null || invoicePdfRef === void 0 ? void 0 : invoicePdfRef.current.innerHTML;
     }
   }, [exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : exportInvoiceList.loading]);
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      changeSelectedAnalyticsStatus(tab, true);
+    } else {
+      changeSelectedAnalyticsStatus(selectedDetailType);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles.InvoiceDriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('BUSINESS_INVOICE', 'Business invoice')), /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
     color: "black",
     disabled: (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : exportInvoiceList.loading) || !(exportInvoiceList !== null && exportInvoiceList !== void 0 && exportInvoiceList.invoice),

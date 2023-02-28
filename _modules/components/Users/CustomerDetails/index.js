@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.CustomerDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -36,6 +37,8 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     handleDeleteUser = props.handleDeleteUser,
     handleParentSidebarMove = props.handleParentSidebarMove,
     handleChangeActiveUser = props.handleChangeActiveUser;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -94,16 +97,22 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
       }
     });
   };
-  var handleClickMenu = function handleClickMenu(key) {
+  var handleClickMenu = function handleClickMenu(key, isInitialRender) {
     setShowOption(key);
     handleParentSidebarMove(500);
     setIsOpenMenu(true);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(key));
+    }
   };
   var handleCloseMenu = function handleCloseMenu() {
     handleParentSidebarMove(0);
     setShowOption(null);
     setIsOpenMenu(false);
     setMenuMoveDistance(0);
+    var id = query.get('id');
+    history.replace("".concat(location.pathname, "?id=").concat(id));
   };
   var expandSidebar = function expandSidebar() {
     var element = document.getElementById('customer_details');
@@ -120,6 +129,13 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
   (0, _react.useEffect)(function () {
     if (isOpenMenu) setIsExpand(false);
   }, [isOpenMenu]);
+  (0, _react.useEffect)(function () {
+    if (userState.loading) return;
+    var section = query.get('section');
+    if (section) {
+      handleClickMenu(section, true);
+    }
+  }, [userState.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.UserName, null, userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   }) : /*#__PURE__*/_react.default.createElement("span", {

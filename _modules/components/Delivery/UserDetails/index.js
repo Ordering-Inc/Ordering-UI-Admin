@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.UserDetailsUI = exports.UserDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _styledComponents = require("styled-components");
 var _reactBootstrap = require("react-bootstrap");
@@ -46,6 +47,8 @@ var UserDetailsUI = function UserDetailsUI(props) {
     scheduleState = props.scheduleState,
     handleScheduleState = props.handleScheduleState,
     handleScheduleUpdateUser = props.handleScheduleUpdateUser;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -79,6 +82,26 @@ var UserDetailsUI = function UserDetailsUI(props) {
   (0, _react.useEffect)(function () {
     setExtraOpen(false);
   }, [currentMenuSelected]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setCurrentMenuSelected(tab);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      var section = query.get('section');
+      if (section) {
+        history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
+      } else {
+        history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+      }
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick(currentMenuSelected);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles3.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles3.UserName, null, userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 150
   }) : /*#__PURE__*/_react.default.createElement("span", null, (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.name, " ", (_userState$user2 = userState.user) === null || _userState$user2 === void 0 ? void 0 : _userState$user2.lastname), userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -118,7 +141,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_UserDetailsMenu.UserDetailsMenu, {
     isDriverMenu: isDriversPage,
     currentMenuSelected: currentMenuSelected,
-    handleChangeMenu: setCurrentMenuSelected
+    handleChangeMenu: handleTabClick
   }), !(userState !== null && userState !== void 0 && userState.loading) && (userState === null || userState === void 0 ? void 0 : userState.user) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentMenuSelected === 'profile' && /*#__PURE__*/_react.default.createElement(_UserProfileForm.UserProfileForm, {
     isDriversPage: isDriversPage,
     isDriversManagersPage: isDriversManagersPage,

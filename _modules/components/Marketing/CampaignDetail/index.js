@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.CampaignDetail = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _styledComponents = require("styled-components");
 var _reactBootstrap = require("react-bootstrap");
 var _orderingComponentsAdmin = require("ordering-components-admin");
@@ -33,6 +34,8 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
     formState = props.formState,
     campaignState = props.campaignState,
     handleDeleteCampaign = props.handleDeleteCampaign;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -102,6 +105,21 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
       content: formState === null || formState === void 0 ? void 0 : formState.error
     });
   }, [formState === null || formState === void 0 ? void 0 : formState.error]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setSelectedOption(tab);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick(selectedOption);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CampaignDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) || (campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai = campaignState.campaign) === null || _campaignState$campai === void 0 ? void 0 : _campaignState$campai.name)) && /*#__PURE__*/_react.default.createElement(_styles.CampaignName, null, (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai2 = campaignState.campaign) === null || _campaignState$campai2 === void 0 ? void 0 : _campaignState$campai2.name)), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
     color: "black",
     onClick: expandSidebar
@@ -116,7 +134,7 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
       key: option.key,
       active: selectedOption === option.key,
       onClick: function onClick() {
-        return setSelectedOption(option.key);
+        return handleTabClick(option.key);
       }
     }, option.name);
   })), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_CampaignDetailGeneral.CampaignDetailGeneral, props), selectedOption === 'content' && /*#__PURE__*/_react.default.createElement(_CampaignDetailContent.CampaignDetailContent, props)), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {

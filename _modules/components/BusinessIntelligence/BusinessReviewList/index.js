@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessReviewList = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _styledComponents = require("styled-components");
@@ -38,6 +39,8 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     handleUpdateReview = props.handleUpdateReview,
     onSearch = props.onSearch,
     handleOpenProducts = props.handleOpenProducts;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -61,6 +64,10 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     curBusiness = _useState6[0],
     setCurBusiness = _useState6[1];
+  var _useState7 = (0, _react.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    curBusinessId = _useState8[0],
+    setCurBusinessId = _useState8[1];
   var handleChangePage = function handleChangePage(page) {
     getPageBusinesses(pagination.pageSize, page);
   };
@@ -68,14 +75,33 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     var expectedPage = Math.ceil(pagination.from / pageSize);
     getPageBusinesses(pageSize, expectedPage);
   };
-  var handleOpenReview = function handleOpenReview(business) {
+  var handleOpenReview = function handleOpenReview(business, isInitialRender) {
     setCurBusiness(business);
+    setCurBusinessId(business.id);
     setOpenReview(true);
+    if (!isInitialRender) {
+      var tab = query.get('tab');
+      history.replace("".concat(location.pathname, "?tab=").concat(tab, "&id=").concat(business.id));
+    }
   };
   (0, _react.useEffect)(function () {
     if (parentSearchValue === null) return;
     onSearch(parentSearchValue);
   }, [parentSearchValue]);
+  var handleCloseReviewDetails = function handleCloseReviewDetails() {
+    setCurBusiness(null);
+    setOpenReview(false);
+    var tab = query.get('tab');
+    history.replace("".concat(location.pathname, "?tab=").concat(tab));
+  };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    var id = query.get('id');
+    if (tab === 'business' && id) {
+      setCurBusinessId(Number(id));
+      setOpenReview(true);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
   }, t('BUSINESS', 'Business'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {
@@ -118,13 +144,12 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     defaultSideBarWidth: 550,
     open: openReview,
     onClose: function onClose() {
-      setCurBusiness(null);
-      setOpenReview(false);
+      return handleCloseReviewDetails();
     },
     showExpandIcon: true
   }, /*#__PURE__*/_react.default.createElement(_BusinessReviewDetails.BusinessReviewDetails, {
     business: curBusiness,
-    businessId: curBusiness === null || curBusiness === void 0 ? void 0 : curBusiness.id,
+    businessId: curBusinessId,
     reviews: curBusiness === null || curBusiness === void 0 ? void 0 : (_curBusiness$reviews = curBusiness.reviews) === null || _curBusiness$reviews === void 0 ? void 0 : _curBusiness$reviews.reviews,
     handleUpdateReview: handleUpdateReview,
     handleOpenProducts: handleOpenProducts

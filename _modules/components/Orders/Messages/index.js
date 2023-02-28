@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.MessagesUI = exports.Messages = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactHookForm = require("react-hook-form");
 var _styledComponents = require("styled-components");
@@ -61,6 +62,8 @@ var MessagesUI = function MessagesUI(props) {
     isTourOpen = props.isTourOpen,
     setCurrentTourStep = props.setCurrentTourStep,
     orderDetailClose = props.orderDetailClose;
+  var routerHistory = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -88,11 +91,7 @@ var MessagesUI = function MessagesUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
-  var _useState3 = (0, _react.useState)({
-      orderHistory: true,
-      logistics: false,
-      logistic_information: false
-    }),
+  var _useState3 = (0, _react.useState)('order_history'),
     _useState4 = _slicedToArray(_useState3, 2),
     tabActive = _useState4[0],
     setTabActive = _useState4[1];
@@ -118,7 +117,6 @@ var MessagesUI = function MessagesUI(props) {
     setIsChatDisabled = _useState14[1];
   var previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17];
   var chatDisabled = previousStatus.includes(order === null || order === void 0 ? void 0 : order.status);
-  console.log(order === null || order === void 0 ? void 0 : order.status);
   var adminMessageList = [{
     key: 'message_1',
     text: t('ADMIN_MESSAGE_1', 'admin_message_1')
@@ -389,6 +387,23 @@ var MessagesUI = function MessagesUI(props) {
       if (!(canRead !== null && canRead !== void 0 && canRead.customer) && !(canRead !== null && canRead !== void 0 && canRead.driver)) setIsChatDisabled(true);else setIsChatDisabled(false);
     }
   }, [canRead]);
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setTabActive(tab);
+    if (!isInitialRender) {
+      var orderId = query.get('id');
+      var section = query.get('section');
+      routerHistory.replace("".concat(location.pathname, "?id=").concat(orderId, "&section=").concat(section, "&tab=").concat(tab));
+    }
+  };
+  (0, _react.useEffect)(function () {
+    if (!history) return;
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick('order_history');
+    }
+  }, [history]);
   return /*#__PURE__*/_react.default.createElement(_styles.MessagesContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperContainer, {
     onClick: handleChangeTour
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperHeader, {
@@ -404,31 +419,19 @@ var MessagesUI = function MessagesUI(props) {
     src: optimizeImage((_order$driver = order.driver) === null || _order$driver === void 0 ? void 0 : _order$driver.photo, 'w_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_RiUser2Fill.default, null)
   }))), history && /*#__PURE__*/_react.default.createElement(_styles.WrapperHitoryHeader, null, /*#__PURE__*/_react.default.createElement(_styles.TabItem, {
-    active: tabActive.orderHistory,
+    active: tabActive === 'order_history',
     onClick: function onClick() {
-      return setTabActive({
-        orderHistory: true,
-        logistics: false,
-        logistic_information: false
-      });
+      return handleTabClick('order_history');
     }
   }, t('MOBILE_ORDER_HISTORY', 'Order History')), /*#__PURE__*/_react.default.createElement(_styles.TabItem, {
-    active: tabActive.logistics,
+    active: tabActive === 'logistics',
     onClick: function onClick() {
-      return setTabActive({
-        orderHistory: false,
-        logistics: true,
-        logistic_information: false
-      });
+      return handleTabClick('logistics');
     }
   }, t('LOGISTICS', 'Logistics')), /*#__PURE__*/_react.default.createElement(_styles.TabItem, {
-    active: tabActive.logistic_information,
+    active: tabActive === 'logistic_information',
     onClick: function onClick() {
-      return setTabActive({
-        orderHistory: false,
-        logistics: false,
-        logistic_information: true
-      });
+      return handleTabClick('logistic_information');
     }
   }, t('LOGISTIC_INFORMATION', 'Logistics information')))), messageDashboardView && /*#__PURE__*/_react.default.createElement(_styles.SearchAndDetailControlContainer, null, /*#__PURE__*/_react.default.createElement(_styles.MessagesSearch, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.search,
@@ -478,21 +481,21 @@ var MessagesUI = function MessagesUI(props) {
       width: 450,
       height: 50
     }));
-  }))), !messages.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !tabActive.logistic_information && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'via'), " ", /*#__PURE__*/_react.default.createElement("strong", null, order.app_id ? t(order.app_id.toUpperCase(), "".concat(order.app_id)) : ''), ' ', /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+  }))), !messages.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !tabActive === 'logistic_information' && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, null, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'via'), " ", /*#__PURE__*/_react.default.createElement("strong", null, order.app_id ? t(order.app_id.toUpperCase(), "".concat(order.app_id)) : ''), ' ', /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
     placement: "top",
     overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, parseDate(order.created_at))
-  }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(order.created_at))))), history && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, tabActive.logistics && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogistics, null, /*#__PURE__*/_react.default.createElement(_Logistics.Logistics, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(order.created_at))))), history && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, tabActive === 'logistics' && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogistics, null, /*#__PURE__*/_react.default.createElement(_Logistics.Logistics, {
     orderId: order.id
-  })), tabActive.logistic_information && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogisticInformation, null, /*#__PURE__*/_react.default.createElement(_OrderLogisticInformation.OrderLogisticInformation, {
+  })), tabActive === 'logistic_information' && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogisticInformation, null, /*#__PURE__*/_react.default.createElement(_OrderLogisticInformation.OrderLogisticInformation, {
     orderId: order.id
   }))), filteredMessages.length > 0 && filteredMessages.map(function (message) {
     var _message$change, _message$change2, _message$change3, _message$change4, _message$change5, _message$author, _message$author2, _message$author$name, _message$author3, _message$author$lastn, _message$author4, _message$driver, _message$driver2, _message$change6, _message$change7, _message$change8, _message$change9, _message$change10, _message$change11, _message$change12, _message$change13, _message$change14, _message$author5, _message$author6, _message$author$name2, _message$author7, _message$author$lastn2, _message$author8, _message$driver3, _message$driver4, _order$business2, _order$customer2, _order$driver2, _order$business3, _order$customer3, _order$driver3, _order$business4, _order$customer4, _order$driver4, _order$business5, _order$customer5, _order$driver5;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: message.id
-    }, history && tabActive.orderHistory && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+    }, history && tabActive === 'order_history' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
       key: message.id,
       style: {
-        display: "".concat(tabActive.orderHistory ? 'inline-flex' : 'none')
+        display: "".concat(tabActive === 'order_history' ? 'inline-flex' : 'none')
       }
     }, ((_message$change = message.change) === null || _message$change === void 0 ? void 0 : _message$change.attribute) !== 'driver_id' ? /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, t('ORDER', 'Order'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, t(message.change.attribute)), " ", ' ', t('CHANGED_FROM', 'Changed from'), " ", ' ', message.change.old !== null && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("strong", null, ((_message$change2 = message.change) === null || _message$change2 === void 0 ? void 0 : _message$change2.attribute) === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : getStatus(parseInt(message.change.old, 10))), " ", ' '), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('TO', 'to'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : ((_message$change3 = message.change) === null || _message$change3 === void 0 ? void 0 : _message$change3.attribute) === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : getStatus(parseInt(message.change.new, 10))), message !== null && message !== void 0 && (_message$change4 = message.change) !== null && _message$change4 !== void 0 && _message$change4.comment ? "\n'".concat(message === null || message === void 0 ? void 0 : (_message$change5 = message.change) === null || _message$change5 === void 0 ? void 0 : _message$change5.comment, "'") : '', ((message === null || message === void 0 ? void 0 : (_message$author = message.author) === null || _message$author === void 0 ? void 0 : _message$author.name) || (message === null || message === void 0 ? void 0 : (_message$author2 = message.author) === null || _message$author2 === void 0 ? void 0 : _message$author2.lastname)) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("strong", null, "Author: "), ((_message$author$name = message === null || message === void 0 ? void 0 : (_message$author3 = message.author) === null || _message$author3 === void 0 ? void 0 : _message$author3.name) !== null && _message$author$name !== void 0 ? _message$author$name : '') + ' ' + ((_message$author$lastn = message === null || message === void 0 ? void 0 : (_message$author4 = message.author) === null || _message$author4 === void 0 ? void 0 : _message$author4.lastname) !== null && _message$author$lastn !== void 0 ? _message$author$lastn : ''))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
       placement: "top",
