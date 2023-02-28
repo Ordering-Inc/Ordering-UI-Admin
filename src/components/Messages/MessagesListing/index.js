@@ -48,6 +48,7 @@ const MessagesListingUI = (props) => {
   const [detailsOrder, setDetailsOrder] = useState(null)
   const [selectedOrder, setSelectedOrder] = useState(null)
   const [orderIdForUnreadCountUpdate, setOrderIdForUnreadCountUpdate] = useState(null)
+  const [filterModalOpen, setFilterModalOpen] = useState(false)
 
   const handleOpenOrderDetail = (order) => {
     setDetailsOrder(order)
@@ -88,6 +89,8 @@ const MessagesListingUI = (props) => {
           filterValues={filterValues}
           handleChangeSearch={handleChangeSearch}
           handleChangeFilterValues={handleChangeFilterValues}
+          filterModalOpen={filterModalOpen}
+          setFilterModalOpen={setFilterModalOpen}
         />
         <MessagesContent>
           <OrdersContainer>
