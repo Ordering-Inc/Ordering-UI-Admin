@@ -20,7 +20,7 @@ import {
 
 const UserReviewDetailsUI = (props) => {
   const {
-    driver,
+    userState,
     userReviewState
   } = props
 
@@ -48,12 +48,12 @@ const UserReviewDetailsUI = (props) => {
     <>
       <ReviewDetailsContainer>
         <Header>
-          <h1>{driver?.name} {driver?.lastname}</h1>
+          <h1>{userState.user?.name} {userState.user?.lastname}</h1>
         </Header>
         <DriverPhotoContainer>
           <WrapperImage>
-            {driver?.photo ? (
-              <Image bgimage={optimizeImage(driver?.photo, 'w_120,c_limit')} />
+            {userState.user?.photo ? (
+              <Image bgimage={optimizeImage(userState.user?.photo, 'w_120,c_limit')} />
             ) : (
               <PersonFill />
             )}

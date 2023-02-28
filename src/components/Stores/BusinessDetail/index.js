@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { useHistory, useLocation } from 'react-router-dom'
 import { BusinessInfoSettingList } from '../BusinessInfoSettingList'
 import { BusinessOwners } from '../BusinessOwners'
 import { BusinessTypes } from '../BusinessTypes'
@@ -31,12 +32,30 @@ export const BusinessDetail = (props) => {
     handleUpdateBusinessState
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [selectedInfoItem, setSelctedInfoItem] = useState('information')
+
+  const handleSelectInfoItem = (tab) => {
+    setSelctedInfoItem(tab)
+    const businessId = query.get('id')
+    const section = query.get('section')
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+  }
 
   useEffect(() => {
     setIsExtendExtraOpen(false)
   }, [selectedInfoItem])
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      setSelctedInfoItem(tab)
+    } else {
+      handleSelectInfoItem('information')
+    }
+  }, [])
 
   return (
     <>
@@ -45,7 +64,7 @@ export const BusinessDetail = (props) => {
           <h1>{t('STORE_DETAILS', 'Store details')}</h1>
           <BusinessInfoSettingList
             selectedInfoItem={selectedInfoItem}
-            handleSelectInfoItem={setSelctedInfoItem}
+            handleSelectInfoItem={handleSelectInfoItem}
           />
           {selectedInfoItem === 'information' && (
             <BusinessInformation

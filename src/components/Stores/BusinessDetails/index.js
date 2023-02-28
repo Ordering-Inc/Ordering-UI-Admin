@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useSession, useLanguage, BusinessDetails as BusinessDetailsController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { BusinessSummary } from '../BusinessSummary'
@@ -48,6 +49,8 @@ export const BusinessDetailsUI = (props) => {
     handleUpdatePreorderConfigs
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [{ user }] = useSession()
@@ -81,16 +84,22 @@ export const BusinessDetailsUI = (props) => {
     }
   }
 
-  const handleSelectedItem = (item) => {
+  const handleSelectedItem = (item, isInitialRender) => {
     setIsExtendExtraOpen(false)
     setSelectedItem(item)
     setExtraOpen(true)
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      history.replace(`${location.pathname}?id=${businessId}&section=${item}`)
+    }
   }
 
   const handleCloseExtraOpen = () => {
     setIsExtendExtraOpen(false)
     setExtraOpen(false)
     setSelectedItem(null)
+    const businessId = query.get('id')
+    history.replace(`${location.pathname}?id=${businessId}`)
   }
 
   useEffect(() => {
@@ -138,6 +147,14 @@ export const BusinessDetailsUI = (props) => {
       content: actionStatus?.error
     })
   }, [actionStatus?.error])
+
+  useEffect(() => {
+    if (businessState?.loading) return
+    const detailKey = query.get('section')
+    if (detailKey) {
+      handleSelectedItem(detailKey, true)
+    }
+  }, [businessState?.loading])
 
   return (
     <BarContainer id='business_details_bar'>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
@@ -16,6 +17,8 @@ import {
 } from './styles'
 
 export const AdBannersListing = (props) => {
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [openPositionDetail, setOpenPositionDetail] = useState(null)
@@ -69,9 +72,26 @@ export const AdBannersListing = (props) => {
     }
   ]
 
-  const handleSelectBannerPosition = (item) => {
-    setOpenPositionDetail(item)
+  const handleSelectBannerPosition = (key, isInitialRender) => {
+    const selectedItem = bannerPositions.find(item => item.key === key)
+    setOpenPositionDetail(selectedItem)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?position=${key}`)
+    }
   }
+
+  const handleCloseDetails = () => {
+    setOpenPositionDetail(null)
+    setMoveDistance(0)
+    history.replace(`${location.pathname}`)
+  }
+
+  useEffect(() => {
+    const position = query.get('position')
+    if (position) {
+      handleSelectBannerPosition(position, true)
+    }
+  }, [])
 
   return (
     <>
@@ -104,7 +124,7 @@ export const AdBannersListing = (props) => {
                 title={item.title}
                 description={item.description}
                 icon={item.icon}
-                onClick={() => handleSelectBannerPosition(item)}
+                onClick={() => handleSelectBannerPosition(item.key)}
               />
             </div>
           ))}
@@ -114,10 +134,7 @@ export const AdBannersListing = (props) => {
       {openPositionDetail && (
         <SideBar
           open={openPositionDetail}
-          onClose={() => {
-            setOpenPositionDetail(null)
-            setMoveDistance(0)
-          }}
+          onClose={() => handleCloseDetails()}
           defaultSideBarWidth={500 + moveDistance}
           moveDistance={moveDistance}
         >

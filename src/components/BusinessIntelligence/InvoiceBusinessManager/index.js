@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, useApi, InvoiceBusinessManager as InvoiceBusinessManagerController } from 'ordering-components-admin'
 import { DragScroll, SpinnerLoader } from '../../Shared'
 import {
@@ -23,6 +24,8 @@ const InvoiceBusinessManagerUI = (props) => {
     exportInvoiceList
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [ordering] = useApi()
   const inputRef = useRef(null)
@@ -31,9 +34,13 @@ const InvoiceBusinessManagerUI = (props) => {
 
   const [selectedDetailType, setSelectedDetailType] = useState('general')
 
-  const changeSelectedAnalyticsStatus = (detailType) => {
+  const changeSelectedAnalyticsStatus = (detailType, isInitialRender) => {
     window.scrollTo(0, 0)
     setSelectedDetailType(detailType)
+    if (!isInitialRender) {
+      const invoice = query.get('invoice')
+      history.replace(`${location.pathname}?invoice=${invoice}&tab=${detailType}`)
+    }
   }
 
   useEffect(() => {
@@ -41,6 +48,15 @@ const InvoiceBusinessManagerUI = (props) => {
       inputRef.current.value = invoicePdfRef?.current.innerHTML
     }
   }, [exportInvoiceList?.loading])
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      changeSelectedAnalyticsStatus(tab, true)
+    } else {
+      changeSelectedAnalyticsStatus(selectedDetailType)
+    }
+  }, [])
 
   return (
     <InvoiceDriversContainer>

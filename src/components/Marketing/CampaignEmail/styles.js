@@ -145,3 +145,6 @@ export const Description = styled.div`
     }
   }
 `
+export const BottomSpace = styled.div`
+  height: 1px;
+`

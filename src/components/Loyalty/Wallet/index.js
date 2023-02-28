@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, RewardsPrograms as RewardsProgramsController } from 'ordering-components-admin'
 import { PointsWalletBusinessDetail } from '../PointsWalletBusinessDetail'
 import { PointsWalletBusinessList } from '../PointsWalletBusinessList'
@@ -25,6 +26,8 @@ const WalletUI = (props) => {
     title
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
@@ -48,6 +51,24 @@ const WalletUI = (props) => {
     if (selectedOption !== 'business') handleParentSidebarMove(0)
   }, [selectedOption])
 
+  const handleTabClick = (tab, isInitialRender) => {
+    setSelectedOption(tab)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    if (loyaltyPlanList?.loading) return
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(selectedOption)
+    }
+  }, [loyaltyPlanList?.loading])
+
   return (
     <Container>
       <Header>
@@ -66,7 +87,7 @@ const WalletUI = (props) => {
           <Tab
             key={option.key}
             active={selectedOption === option.key}
-            onClick={() => setSelectedOption(option.key)}
+            onClick={() => handleTabClick(option.key)}
           >
             {option.name}
           </Tab>

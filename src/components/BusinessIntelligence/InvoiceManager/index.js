@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
@@ -20,6 +21,8 @@ import {
 } from './styles'
 
 export const InvoiceManager = (props) => {
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [openInvoiceDetail, setOpenInvoiceDetail] = useState(false)
@@ -30,15 +33,26 @@ export const InvoiceManager = (props) => {
     { id: 2, key: 'driver', name: t('DRIVER_INVOICE', 'Driver invoice'), icon: <DriverIcon />, description: t('DRIVER_INVOICE_DESCRIPTION', 'Driver invoice description') }
   ]
 
-  const handleOpenInvoiceDetail = (index) => {
+  const handleOpenInvoiceDetail = (index, isInitialRender) => {
     setOpenInvoiceDetail(true)
     setSelectedInvoice(index)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?invoice=${index}`)
+    }
   }
 
   const handleCloseInvoiceDetail = () => {
     setOpenInvoiceDetail(false)
     setSelectedInvoice(null)
+    history.replace(`${location.pathname}`)
   }
+
+  useEffect(() => {
+    const invoice = query.get('invoice')
+    if (invoice) {
+      handleOpenInvoiceDetail(invoice, true)
+    }
+  }, [])
 
   return (
     <>

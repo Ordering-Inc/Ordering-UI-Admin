@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   useLanguage,
   DriversCompaniesList as DriversCompaniesListController
@@ -32,16 +33,23 @@ const DriversCompaniesListingUI = (props) => {
     handleDeleteSelectedCompanies
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [searchValue, setSearchValue] = useState(null)
   const [curDriversCompany, setCurDriversCompany] = useState(null)
+  const [curDriversCompanyId, setCurDriversCompanyId] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
-  const handleOpenDetails = (driverCompany) => {
+  const handleOpenDetails = (driverCompany, isInitialRender) => {
     setCurDriversCompany(driverCompany)
+    setCurDriversCompanyId(driverCompany?.id)
     setOpenDetails(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?id=${driverCompany?.id}`)
+    }
   }
 
   useEffect(() => {
@@ -62,6 +70,21 @@ const DriversCompaniesListingUI = (props) => {
       }
     })
   }
+
+  const handleCloseDetails = () => {
+    setCurDriversCompany(null)
+    setCurDriversCompanyId(null)
+    setOpenDetails(false)
+    history.replace(`${location.pathname}`)
+  }
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id) {
+      setCurDriversCompanyId(Number(id))
+      setOpenDetails(true)
+    }
+  }, [])
 
   return (
     <DriversCompaniesListContainer>
@@ -117,19 +140,14 @@ const DriversCompaniesListingUI = (props) => {
           sidebarId='city-details'
           defaultSideBarWidth={550}
           open={openDetails}
-          onClose={() => {
-            setCurDriversCompany(null)
-            setOpenDetails(false)
-          }}
+          onClose={() => handleCloseDetails()}
         >
           <DriversCompanyDetailsForm
             driversCompaniesState={driversCompaniesState}
             setDriversCompaniesState={setDriversCompaniesState}
             driversCompany={curDriversCompany}
-            onClose={() => {
-              setCurDriversCompany(null)
-              setOpenDetails(false)
-            }}
+            driversCompanyId={curDriversCompanyId}
+            onClose={() => handleCloseDetails()}
           />
         </SideBar>
       )}

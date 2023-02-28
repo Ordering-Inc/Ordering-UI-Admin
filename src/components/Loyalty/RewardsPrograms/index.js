@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { List as MenuIcon, BarChartSteps, Gift, Wallet as Cash, InfoCircle } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
@@ -6,6 +7,7 @@ import { IconButton } from '../../../styles'
 import { SideBar } from '../../Shared'
 import { Wallet } from '../Wallet'
 import { PointsWalletLevels } from '../PointsWalletLevels'
+import { GiftCards } from '../GiftCards'
 
 import {
   Container,
@@ -19,12 +21,15 @@ import {
 } from './styles'
 
 export const RewardsPrograms = () => {
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
   const [showOption, setShowOption] = useState(null)
   const [moveDistance, setMoveDistance] = useState(0)
   const [levelMoveDistance, setLevelMoveDistance] = useState(0)
+  const [giftCardMoveDistance, setGiftCardMoveDistance] = useState(0)
 
   const walletList = [
     { key: 'credit_point', name: t('POINTS_WALLET', 'Points wallet'), description: t('POINTS_WALLET_DESCRIPTION', 'Points wallet general and per business setup.'), icon: <Cash /> },
@@ -36,12 +41,34 @@ export const RewardsPrograms = () => {
   const hanldeClosePointsWallet = () => {
     setMoveDistance(0)
     setShowOption(null)
+    history.replace(`${location.pathname}`)
   }
 
   const handleCloseLevel = () => {
     setLevelMoveDistance(0)
     setShowOption(null)
+    history.replace(`${location.pathname}`)
   }
+
+  const handleCloseGiftCard = () => {
+    setGiftCardMoveDistance(0)
+    setShowOption(null)
+    history.replace(`${location.pathname}`)
+  }
+
+  const handleOptionClick = (key, isInitialRender) => {
+    setShowOption(key)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?id=${key}`)
+    }
+  }
+
+  useEffect(() => {
+    const id = query.get('id')
+    if (id) {
+      handleOptionClick(id, true)
+    }
+  }, [])
 
   return (
     <>
@@ -72,7 +99,7 @@ export const RewardsPrograms = () => {
           {walletList.map(item => (
             <LoyaltyItemWrapper
               key={item.key}
-              onClick={() => setShowOption(item.key)}
+              onClick={() => handleOptionClick(item.key)}
             >
               <IconWrapper>
                 {item.icon}
@@ -119,7 +146,7 @@ export const RewardsPrograms = () => {
         </SideBar>
       )}
 
-      {/* {showOption === 'gift_card' && (
+      {showOption === 'gift_card' && (
         <SideBar
           open={showOption === 'gift_card'}
           onClose={() => handleCloseGiftCard()}
@@ -131,7 +158,7 @@ export const RewardsPrograms = () => {
             handleParentSidebarMove={val => setGiftCardMoveDistance(val)}
           />
         </SideBar>
-      )} */}
+      )}
     </>
   )
 }

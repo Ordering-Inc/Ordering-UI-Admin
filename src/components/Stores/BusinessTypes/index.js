@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Alert, SearchBar, Modal, SideBar } from '../../Shared'
 import { ChevronRight, Square, CheckSquareFill } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -31,6 +32,8 @@ export const BusinessTypes = (props) => {
     setIsExtendExtraOpen
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
@@ -41,19 +44,28 @@ export const BusinessTypes = (props) => {
   const [selectedBusinessType, setSelectedBusinessType] = useState(null)
   const [isOpenTypeDetail, setIsOpenTypeDetail] = useState(false)
 
-  const handleOpenBusinessTypeDetail = (e, category) => {
-    const isInvalid = e.target.closest('.business-type-checkbox')
+  const handleOpenBusinessTypeDetail = (category, e) => {
+    const isInvalid = e?.target?.closest('.business-type-checkbox')
     if (isInvalid) return
 
     setSelectedBusinessType(category)
     setIsExtendExtraOpen(true)
     setIsOpenTypeDetail(true)
+
+    const businessId = query.get('id')
+    const section = query.get('section')
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&business_type=${category.id}`)
   }
 
   const handleCloseDetail = () => {
     setIsOpenTypeDetail(false)
     setIsExtendExtraOpen(false)
     setSelectedBusinessType(null)
+    const businessId = query.get('id')
+    const section = query.get('section')
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
   }
 
   const handleSelectBusinessTypes = (typeId) => {
@@ -101,6 +113,16 @@ export const BusinessTypes = (props) => {
     setFilteredBusinessTypes([...updatedBusinessTypes])
   }, [businessTypes, searchVal])
 
+  useEffect(() => {
+    const businessTypeId = query.get('business_type')
+    if (businessTypeId) {
+      const initBusinessType = businessTypes.find(type => type.id === Number(businessTypeId))
+      setTimeout(() => {
+        handleOpenBusinessTypeDetail(initBusinessType)
+      }, 500)
+    }
+  }, [])
+
   return (
     <Container>
       <SearchWrapper>
@@ -118,7 +140,7 @@ export const BusinessTypes = (props) => {
             <BusinessTypeContainer
               key={category?.id}
               active={selectedBusinessType?.id === category?.id}
-              onClick={(evt) => handleOpenBusinessTypeDetail(evt, category)}
+              onClick={(evt) => handleOpenBusinessTypeDetail(category, evt)}
             >
               <BusinessTypeInfoWrapper>
                 <CheckBoxWrapper
@@ -144,7 +166,7 @@ export const BusinessTypes = (props) => {
 
       <AddNewBusinessTypeContainer>
         <AddNewBusinessTypeTitle
-          onClick={(evt) => handleOpenBusinessTypeDetail(evt, null)}
+          onClick={(evt) => handleOpenBusinessTypeDetail(null, evt)}
         >
           {t('ADD_NEW_BUSINESS_CATEGORY', 'Add new business category')}
         </AddNewBusinessTypeTitle>

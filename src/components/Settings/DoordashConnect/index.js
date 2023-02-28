@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, ApiKeysList as ApiKeysListController } from 'ordering-components-admin'
 import { Button, IconButton } from '../../../styles'
 import { Alert, Confirm, DragScroll, Modal } from '../../Shared'
@@ -26,6 +27,8 @@ const DoordashConnectUI = (props) => {
     onClose
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
 
@@ -78,12 +81,33 @@ const DoordashConnectUI = (props) => {
     toggleMainContent()
   }, [width])
 
+  const handleOpenMore = (isInitialRender) => {
+    setSettingsOpen(true)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      history.replace(`${location.pathname}?id=${id}&more=settings`)
+    }
+  }
+
+  const handleCloseDescription = () => {
+    setSettingsOpen(false)
+    const id = query.get('id')
+    history.replace(`${location.pathname}?id=${id}`)
+  }
+
+  useEffect(() => {
+    const more = query.get('more')
+    if (more === 'settings') {
+      handleOpenMore(true)
+    }
+  }, [])
+
   const DoordashConnectDescription = () => {
     return (
       <CategoryExtraContent>
         <IconButton
           color='black'
-          onClick={() => setSettingsOpen(false)}
+          onClick={() => handleCloseDescription()}
         >
           <XLg />
         </IconButton>
@@ -179,7 +203,7 @@ const DoordashConnectUI = (props) => {
         <Description>
           {t('CONNECT_WITH_DOORDASH_DESCRIPTION', 'If you have already worked with Doordash or are running your business with Doordash and Ordering simultaneously, this integration will help you connect both platforms and assign orders through them, making your job easy and automated.')}
         </Description>
-        <Button color='primary' borderRadius='8px' className='all-setting' onClick={() => setSettingsOpen(true)}>
+        <Button color='primary' borderRadius='8px' className='all-setting' onClick={() => handleOpenMore()}>
           <span>{t('SETTINGS', 'All settings')}</span>
           <BsArrowRight />
         </Button>

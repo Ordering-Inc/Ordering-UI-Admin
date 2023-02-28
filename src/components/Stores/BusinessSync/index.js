@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessSyncBasic } from '../BusinessSyncBasic'
 import { BusinessSyncItsaCheckmate } from '../BusinessSyncItsaCheckmate'
@@ -14,6 +15,8 @@ import {
 export const BusinessSync = (props) => {
   const { handleParentSidebarMove } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [selectedOption, setSelectedOption] = useState('deliverect')
 
@@ -22,10 +25,23 @@ export const BusinessSync = (props) => {
     { key: 'itsacheckmate', name: t('ITSACHECKMATE', 'ItsaCheckmate') }
   ]
 
-  const handleChangeOption = (key) => {
+  const handleChangeOption = (key, isInitialRender) => {
     handleParentSidebarMove(0)
     setSelectedOption(key)
+    if (!isInitialRender) {
+      const header = query.get('header')
+      history.replace(`${location.pathname}?header=${header}&tab=${key}`)
+    }
   }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleChangeOption(tab, true)
+    } else {
+      handleChangeOption(selectedOption)
+    }
+  }, [])
 
   return (
     <Container>

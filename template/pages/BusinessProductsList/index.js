@@ -49,7 +49,7 @@ export const BusinessProductsList = (props) => {
       return events.emit('go_to_page', {
         page: 'store',
         params: { store: slug },
-        search: `?category=${category}&product=${product}`,
+        search: `category=${category}&product=${product}`,
         replace: true
       })
     }

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { DragScroll } from '../../Shared'
 import { SeoOptions } from '../SeoOptions'
@@ -33,6 +34,8 @@ export const ProductMainDetails = (props) => {
     setFees,
     cleanFormState
   } = props
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
 
   const [selectedOption, setSelectedOption] = useState('information')
@@ -42,10 +45,25 @@ export const ProductMainDetails = (props) => {
     { key: 'labels', content: t('LABELS', 'Labels') },
     { key: 'seo_options', content: t('SEO_OPTIONS', 'SEO options') }
   ]
-  const handleSelectOption = (tab) => {
+  const handleSelectOption = (tab, isInitialRender) => {
     setSelectedOption(tab)
     setIsExtendExtraOpen(false)
+    if (!isInitialRender) {
+      const category = query.get('category')
+      const product = query.get('product')
+      const section = query.get('section')
+      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&tab=${tab}`)
+    }
   }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleSelectOption(tab, true)
+    } else {
+      handleSelectOption(selectedOption)
+    }
+  }, [])
 
   return (
     <Container maxLimit={isExtendExtraOpen}>

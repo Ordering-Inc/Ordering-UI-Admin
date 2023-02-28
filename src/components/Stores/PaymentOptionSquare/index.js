@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, PaymentOptionSquare as PaymentOptionSquareController } from 'ordering-components-admin'
 import { Button, IconButton, Input, Checkbox } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -43,6 +44,8 @@ const PaymentOptionSquareUI = (props) => {
     handleChangeSandbox
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -109,6 +112,25 @@ const PaymentOptionSquareUI = (props) => {
     })
   }, [actionState?.error])
 
+  const handleTabClick = (tab, isInitialRender) => {
+    setPaymentTabs(tab)
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      const paymethod = query.get('paymethod')
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&paymethod=${paymethod}&payemthod_tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    const payemthodTab = query.get('payemthod_tab')
+    if (payemthodTab) {
+      handleTabClick(Number(payemthodTab), true)
+    } else {
+      handleTabClick(0)
+    }
+  }, [])
+
   return (
     <>
       <Container id='payment_method_square'>
@@ -140,21 +162,21 @@ const PaymentOptionSquareUI = (props) => {
         <TabsContainer>
           <Tab
             active={paymentTabs === 0}
-            onClick={() => setPaymentTabs(0)}
+            onClick={() => handleTabClick(0)}
           >
             {t('GENERAL', 'General')}
           </Tab>
           {sitesState?.sites?.length > 0 && (
             <Tab
               active={paymentTabs === 1}
-              onClick={() => setPaymentTabs(1)}
+              onClick={() => handleTabClick(1)}
             >
               {t('CHANNELS', 'Channels')}
             </Tab>
           )}
           <Tab
             active={paymentTabs === 2}
-            onClick={() => setPaymentTabs(2)}
+            onClick={() => handleTabClick(2)}
           >
             {t('ORDER_TYPE', 'Order type')}
           </Tab>

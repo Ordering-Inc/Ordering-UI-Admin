@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   useLanguage,
   useUtils,
@@ -47,6 +48,8 @@ const BusinessBrandListingUI = (props) => {
     setOpenDetail
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage }] = useUtils()
@@ -64,6 +67,7 @@ const BusinessBrandListingUI = (props) => {
   const handleCloseSidebar = () => {
     setOpenDetail(false)
     setSelectedBrand(null)
+    history.replace(`${location.pathname}`)
   }
 
   const handleOpenSideBar = (id) => {
@@ -84,10 +88,13 @@ const BusinessBrandListingUI = (props) => {
     })
   }
 
-  const handleClickBrand = (e, brandId) => {
-    const isInvalid = e.target.closest('.brand_enable_control')
+  const handleClickBrand = (e, brandId, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.brand_enable_control')
     if (isInvalid) return
     handleOpenSideBar(brandId)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?id=${brandId}`)
+    }
   }
 
   const expandSideBar = () => {
@@ -125,6 +132,32 @@ const BusinessBrandListingUI = (props) => {
       })
     }
   }, [brandFormState?.result])
+
+  useEffect(() => {
+    if (!brandListState?.brands?.length) return
+    const id = query.get('id')
+    if (id) {
+      handleClickBrand(null, Number(id), true)
+    }
+  }, [brandListState?.brands?.length])
+
+  const handleTabClick = (tab, isInitialRender) => {
+    setSelectedType(tab)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+    }
+  }
+
+  useEffect(() => {
+    if (!selectedBrand) return
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(selectedType)
+    }
+  }, [selectedBrand])
 
   return (
     <>
@@ -273,14 +306,14 @@ const BusinessBrandListingUI = (props) => {
               <TabContainer>
                 <Tab
                   active={selectedType === 'general'}
-                  onClick={() => setSelectedType('general')}
+                  onClick={() => handleTabClick('general')}
                 >
                   {t('GENERAL', 'General')}
                 </Tab>
                 {selectedBrand && (
                   <Tab
                     active={selectedType === 'businesses'}
-                    onClick={() => setSelectedType('businesses')}
+                    onClick={() => handleTabClick('businesses')}
                   >
                     {t('BUSINESSES', 'Businesses')}
                   </Tab>

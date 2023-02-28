@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   useLanguage,
   BusinessSharedMenuProducts as BusinessSharedMenuProductsController
@@ -25,25 +26,50 @@ const BusinessSharedMenuProductsUI = (props) => {
     handleChangeInput
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [searchValue, setSearchValue] = useState('')
   const [currentProduct, setCurrentProduct] = useState(null)
   const [isOpenDetails, setIsOpenDetails] = useState(false)
 
-  const handleOpenProduct = (e, product) => {
-    const isInvalid = e.target.closest('.product_checkbox')
+  const handleOpenProduct = (e, product, isInitialRender) => {
+    const isInvalid = e?.target?.closest('.product_checkbox')
     if (isInvalid) return
     setIsOpenSharedProduct(true)
     setCurrentProduct(product)
     setIsOpenDetails(true)
+
+    if (!isInitialRender) {
+      const businessId = query.get('id')
+      const section = query.get('section')
+      const tab = query.get('tab')
+      const menu = query.get('menu')
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&menu=${menu}&product=${product.id}`)
+    }
   }
 
   const handleCloseSidebar = () => {
     setIsOpenDetails(false)
     setCurrentProduct(null)
     setIsOpenSharedProduct(false)
+    const businessId = query.get('id')
+    const section = query.get('section')
+    const tab = query.get('tab')
+    const menu = query.get('menu')
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&menu=${menu}`)
   }
+
+  useEffect(() => {
+    const productId = query.get('product')
+    if (productId) {
+      const initProduct = menuState.menu.products.find(product => product.id === Number(productId))
+      if (initProduct) {
+        handleOpenProduct(null, initProduct, true)
+      }
+    }
+  }, [])
 
   return (
     <>

@@ -62,7 +62,6 @@ const DeliveriesManagerUI = (props) => {
     if (id === null) setIsOpenOrderDetail(false)
     else {
       setOrderDetailId(id)
-      onOrderRedirect(id)
       setIsOpenOrderDetail(true)
     }
   }, [])

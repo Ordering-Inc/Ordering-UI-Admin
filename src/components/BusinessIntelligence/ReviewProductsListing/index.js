@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, useUtils, ReviewProductList as ReviewProductListController } from 'ordering-components-admin'
 import { ImageFill, StarFill } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
@@ -25,11 +26,15 @@ export const ReviewProductsListingUI = (props) => {
     businessId
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
 
   const [openReview, setOpenReview] = useState(false)
   const [curProduct, setCurProduct] = useState(null)
+  const [curProductId, setCurProductId] = useState(null)
+  const [curCategoryId, setCurCategoryId] = useState(null)
 
   const [currentPage, setCurrentPage] = useState(1)
   const [productsPerPage, setProductsPerPage] = useState(10)
@@ -59,9 +64,24 @@ export const ReviewProductsListingUI = (props) => {
     setCurrentProducts(_currentProducts)
   }, [productState, currentPage, productsPerPage])
 
-  const handleOpenReview = (product) => {
+  const handleOpenReview = (product, isInitialRender) => {
     setCurProduct(product)
+    setCurProductId(product?.id)
+    setCurCategoryId(product?.category?.id)
     setOpenReview(true)
+    if (!isInitialRender) {
+      const tab = query.get('tab')
+      const business = query.get('business')
+      history.replace(`${location.pathname}?tab=${tab}&business=${business}&category=${product?.category?.id}&product=${product.id}`)
+    }
+  }
+
+  const handleCloseReviewDetails = () => {
+    setCurProduct(null)
+    setOpenReview(false)
+    const tab = query.get('tab')
+    const business = query.get('business')
+    history.replace(`${location.pathname}?tab=${tab}&business=${business}`)
   }
 
   useEffect(() => {
@@ -71,6 +91,16 @@ export const ReviewProductsListingUI = (props) => {
   useEffect(() => {
     handleChangeSearch(parentSearchValue)
   }, [parentSearchValue])
+
+  useEffect(() => {
+    const category = query.get('category')
+    const product = query.get('product')
+    if (category && product) {
+      setCurCategoryId(Number(category))
+      setCurProductId(Number(product))
+      setOpenReview(true)
+    }
+  }, [])
 
   return (
     <>
@@ -154,15 +184,13 @@ export const ReviewProductsListingUI = (props) => {
           sidebarId='review-details'
           defaultSideBarWidth={550}
           open={openReview}
-          onClose={() => {
-            setCurProduct(null)
-            setOpenReview(false)
-          }}
+          onClose={() => handleCloseReviewDetails()}
         >
           <ProductReviewDetails
             businessId={businessId}
             product={curProduct}
-            productId={curProduct?.id}
+            productId={curProductId}
+            categoryId={curCategoryId}
           />
         </SideBar>
       )}
