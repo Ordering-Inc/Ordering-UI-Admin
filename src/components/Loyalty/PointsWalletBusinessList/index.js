@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, useUtils, PointsWalletBusinessList as PointsWalletBusinessListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
@@ -34,6 +35,8 @@ const PointsWalletBusinessListUI = (props) => {
     isCloseBusinessDetails
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const theme = useTheme()
@@ -69,7 +72,7 @@ const PointsWalletBusinessListUI = (props) => {
   }
 
   const handleClickBusiness = (business, e) => {
-    if (e.target.closest('.accumulates') || e.target.closest('.redeems') || e.target.closest('.wallet_enabled')) return
+    if (e?.target?.closest('.accumulates') || e?.target?.closest('.redeems') || e?.target?.closest('.wallet_enabled')) return
     if (!pointWallet) {
       setAlertState({ open: true, content: [t('YOU_MUST_CREATE_LOYALTY_PLAN', 'You must create a loyalty plan')] })
       return
@@ -80,6 +83,9 @@ const PointsWalletBusinessListUI = (props) => {
     }
     setSelectedBusiness(business)
     setExtraOpen(true)
+    const id = query.get('id')
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?id=${id}&tab=${tab}&business_id=${business?.id}`)
     if (width >= 1100) {
       handleParentSidebarMove(550)
     }
@@ -89,6 +95,9 @@ const PointsWalletBusinessListUI = (props) => {
     setExtraOpen(false)
     setSelectedBusiness(null)
     handleParentSidebarMove(0)
+    const id = query.get('id')
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
   }
 
   const updateBusinessList = (changes) => {
@@ -136,7 +145,21 @@ const PointsWalletBusinessListUI = (props) => {
     if (!isCloseBusinessDetails) return
     setExtraOpen(false)
     setSelectedBusiness(null)
+    const id = query.get('id')
+    const tab = query.get('tab')
+    history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
   }, [isCloseBusinessDetails])
+
+  useEffect(() => {
+    if (businessList.loading) return
+    const businessId = query.get('business_id')
+    if (businessId) {
+      const business = businessList.businesses.find(item => item.id === Number(businessId))
+      if (business) {
+        handleClickBusiness(business)
+      }
+    }
+  }, [businessList])
 
   return (
     <Container>
