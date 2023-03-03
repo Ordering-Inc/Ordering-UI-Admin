@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { DragScroll } from '../../Shared'
 import {
@@ -12,7 +13,19 @@ export const UserActiveStateFilter = (props) => {
     handleChangeUserActiveState
   } = props
 
+  const history = useHistory()
   const [, t] = useLanguage()
+  const query = new URLSearchParams(useLocation().search)
+  const defaultEnabled = query.get('enabled')
+  const onChangeUserActiveState = (enabled) => {
+    history.replace(`${location.pathname}?enabled=${enabled}`)
+    handleChangeUserActiveState()
+  }
+
+  useEffect(() => {
+    if (defaultEnabled) return
+    history.replace(`${location.pathname}?enabled=active`)
+  }, [])
 
   return (
     <>
@@ -20,13 +33,13 @@ export const UserActiveStateFilter = (props) => {
         <DragScroll>
           <Tab
             active={selectedUserActiveState}
-            onClick={() => handleChangeUserActiveState()}
+            onClick={() => onChangeUserActiveState('active')}
           >
             {t('ACTIVE', 'Active')}
           </Tab>
           <Tab
             active={!selectedUserActiveState}
-            onClick={() => handleChangeUserActiveState()}
+            onClick={() => onChangeUserActiveState('inactive')}
           >
             {t('INACTIVE', 'Inactive')}
           </Tab>

@@ -29,9 +29,10 @@ const CustomerPointsWalletUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setShowOption(tab)
     if (!isInitialRender) {
+      const enabled = query.get('enabled')
       const id = query.get('id')
       const section = query.get('section')
-      history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
+      history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${section}&tab=${tab}`)
     }
   }
 
