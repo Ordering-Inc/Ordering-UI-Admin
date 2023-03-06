@@ -37,9 +37,10 @@ var CustomerCashWalletUI = function CustomerCashWalletUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setShowOption(tab);
     if (!isInitialRender) {
+      var enabled = query.get('enabled');
       var id = query.get('id');
       var section = query.get('section');
-      history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
+      history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
     }
   };
   (0, _react.useEffect)(function () {

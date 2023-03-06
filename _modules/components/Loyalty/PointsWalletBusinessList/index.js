@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.PointsWalletBusinessList = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _styledComponents = require("styled-components");
@@ -42,6 +43,8 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     handleUpdateBusinessList = props.handleUpdateBusinessList,
     handleChangeSwitch = props.handleChangeSwitch,
     isCloseBusinessDetails = props.isCloseBusinessDetails;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -105,7 +108,8 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     setPagesPerPage(pageSize);
   };
   var handleClickBusiness = function handleClickBusiness(business, e) {
-    if (e.target.closest('.accumulates') || e.target.closest('.redeems') || e.target.closest('.wallet_enabled')) return;
+    var _e$target, _e$target2, _e$target3;
+    if (e !== null && e !== void 0 && (_e$target = e.target) !== null && _e$target !== void 0 && _e$target.closest('.accumulates') || e !== null && e !== void 0 && (_e$target2 = e.target) !== null && _e$target2 !== void 0 && _e$target2.closest('.redeems') || e !== null && e !== void 0 && (_e$target3 = e.target) !== null && _e$target3 !== void 0 && _e$target3.closest('.wallet_enabled')) return;
     if (!pointWallet) {
       setAlertState({
         open: true,
@@ -122,6 +126,9 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     }
     setSelectedBusiness(business);
     setExtraOpen(true);
+    var id = query.get('id');
+    var tab = query.get('tab');
+    history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab, "&business_id=").concat(business === null || business === void 0 ? void 0 : business.id));
     if (width >= 1100) {
       handleParentSidebarMove(550);
     }
@@ -130,6 +137,9 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     setExtraOpen(false);
     setSelectedBusiness(null);
     handleParentSidebarMove(0);
+    var id = query.get('id');
+    var tab = query.get('tab');
+    history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
   };
   var updateBusinessList = function updateBusinessList(changes) {
     var updatedBusiness = _objectSpread(_objectSpread({}, selectedBusiness), changes);
@@ -174,7 +184,22 @@ var PointsWalletBusinessListUI = function PointsWalletBusinessListUI(props) {
     if (!isCloseBusinessDetails) return;
     setExtraOpen(false);
     setSelectedBusiness(null);
+    var id = query.get('id');
+    var tab = query.get('tab');
+    history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
   }, [isCloseBusinessDetails]);
+  (0, _react.useEffect)(function () {
+    if (businessList.loading) return;
+    var businessId = query.get('business_id');
+    if (businessId) {
+      var business = businessList.businesses.find(function (item) {
+        return item.id === Number(businessId);
+      });
+      if (business) {
+        handleClickBusiness(business);
+      }
+    }
+  }, [businessList]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     search: searchVal,
     isCustomLayout: true,

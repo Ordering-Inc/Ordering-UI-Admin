@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OrderingProductDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("../../../styles");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
@@ -32,6 +33,8 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
   var siteState = props.siteState,
     isAddMode = props.isAddMode,
     handleDeleteSite = props.handleDeleteSite;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -84,6 +87,23 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
       return !prev;
     });
   };
+  var handleTabClick = function handleTabClick(tab, isInitialRender) {
+    setSelectedTab(tab);
+    if (!isInitialRender) {
+      var id = query.get('id');
+      if (id) {
+        history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+      }
+    }
+  };
+  (0, _react.useEffect)(function () {
+    var tab = query.get('tab');
+    if (tab) {
+      handleTabClick(tab, true);
+    } else {
+      handleTabClick(selectedTab);
+    }
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailHeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, (_siteState$site = siteState.site) === null || _siteState$site === void 0 ? void 0 : _siteState$site.name)), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: expandSidebar
@@ -98,7 +118,7 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
       key: tab.key,
       active: selectedTab === tab.key,
       onClick: function onClick() {
-        return setSelectedTab(tab.key);
+        return handleTabClick(tab.key);
       }
     }, tab.content);
   })), selectedTab === 'general' && /*#__PURE__*/_react.default.createElement(_OrderingProductGeneralDetails.OrderingProductGeneralDetails, props), selectedTab === 'theme' && /*#__PURE__*/_react.default.createElement(_SiteTheme.SiteTheme, {

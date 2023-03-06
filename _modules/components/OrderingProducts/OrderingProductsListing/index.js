@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OrderingProductsListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _Shared = require("../../Shared");
@@ -41,6 +42,8 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
     paginationProps = props.paginationProps,
     setPaginationProps = props.setPaginationProps,
     handleSuccessUpdateSites = props.handleSuccessUpdateSites;
+  var history = (0, _reactRouterDom.useHistory)();
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -73,13 +76,17 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
     }));
     getSites(expectedPage, pageSize);
   };
-  var onClickProduct = function onClickProduct(product) {
+  var onClickProduct = function onClickProduct(product, isInitialRender) {
     setSelectedSite(product);
     setOpenDetails(true);
+    if (product && !isInitialRender) {
+      history.replace("".concat(location.pathname, "?id=").concat(product === null || product === void 0 ? void 0 : product.id));
+    }
   };
   var handleCloseDetail = function handleCloseDetail() {
     setOpenDetails(false);
     setSelectedSite(null);
+    history.replace("".concat(location.pathname));
   };
   (0, _react.useEffect)(function () {
     if (!(sitesListState !== null && sitesListState !== void 0 && sitesListState.error)) return;
@@ -88,6 +95,16 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
       content: sitesListState === null || sitesListState === void 0 ? void 0 : sitesListState.error
     });
   }, [sitesListState === null || sitesListState === void 0 ? void 0 : sitesListState.error]);
+  (0, _react.useEffect)(function () {
+    if (sitesListState.loading) return;
+    var productId = query.get('id');
+    if (productId) {
+      var initProduct = sitesListState.sites.find(function (site) {
+        return site.id === Number(productId);
+      });
+      if (initProduct) onClickProduct(initProduct, true);
+    }
+  }, [sitesListState]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderingProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {

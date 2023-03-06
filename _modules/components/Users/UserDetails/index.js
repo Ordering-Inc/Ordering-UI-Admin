@@ -94,12 +94,13 @@ var UserDetailsUI = function UserDetailsUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setCurrentMenuSelected(tab);
     if (!isInitialRender) {
+      var enabled = query.get('enabled');
       var id = query.get('id');
       var section = query.get('section');
       if (section) {
-        history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
+        history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
       } else {
-        history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+        history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&tab=").concat(tab));
       }
     }
   };

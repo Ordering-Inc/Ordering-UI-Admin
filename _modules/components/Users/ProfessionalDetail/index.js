@@ -127,11 +127,12 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
     setCurrentMenuSelected(tab);
     if (!isInitialRender) {
       var id = query.get('id');
+      var enabled = query.get('enabled');
       var section = query.get('section');
       if (section) {
-        history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
+        history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
       } else {
-        history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+        history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&tab=").concat(tab));
       }
     }
   };
