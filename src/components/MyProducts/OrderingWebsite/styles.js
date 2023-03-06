@@ -122,6 +122,7 @@ export const MoreSettingsHeader = styled.div`
     font-size: 16px;
     line-height: 24px;
     text-align: center;
+    margin-bottom: 34px;
   }
 `
 
@@ -345,9 +346,105 @@ export const ContentWrapper = styled.div`
 
 export const WebsiteButtonWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  margin-top: 20px;
   button {
     height: 44px;
+  }
+`
+
+export const TabWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+export const Tabs = styled.div`
+  display: flex;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+`
+
+export const Tab = styled.div`
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${props => props.theme.colors.lightGray};
+  padding-bottom: 14px;
+  transition: all 0.2s ease-out;
+  :not(:last-child) {
+    margin-right: 32px;
+  }
+  ${({ active }) => active && css`
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    padding-bottom: 13px;
+    color: ${props => props.theme.colors.headingColor};
+    border-bottom: 1px solid ${props => props.theme.colors.headingColor};
+  `}
+`
+
+export const HeaderInfoWrapper = styled.div`
+  position: relative;
+  ${props => props.theme?.rtl ? css`
+    margin-left: -8px;
+    margin-right: 8px;
+  ` : css`
+    margin-right: -8px;
+    margin-left: 8px;
+  `}
+
+  > button {
+    height: 25px;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &:hover > div {
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
+  }
+`
+
+export const InfoContent = styled.div`
+  position: absolute;
+  top: 100%;
+  z-index: 999;
+  background: ${props => props.theme.colors.backgroundInfo};
+  border: 1px solid ${props => props.theme.colors.primary};
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 18px;
+  min-width: 150px;
+  transition: all 0.3s linear;
+  visibility: hidden;
+  opacity: 0;
+  right: 0px;
+  ${props => props.theme.rtl && css`
+    left: 0px;
+    right: initial;
+  `}
+
+  > a {
+    color: ${props => props.theme.colors.primary};
+    margin: 0 5px;
+  }
+
+  @media (min-width: 576px) {
+    min-width: 350px;
+    padding: 12px 15px;
+    left: 0px;
+    ${props => props.theme.rtl && css`
+      right: 0px;
+      left: initial;
+    `}
+  }
+
+  @media (min-width: 993px) {
+    min-width: 535px;
   }
 `

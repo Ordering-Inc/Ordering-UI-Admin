@@ -7,6 +7,10 @@ export const Container = styled.div`
     line-height: 24px;
     margin-top: 0;
     margin-bottom: 25px;
+    sup {
+      color: ${props => props.theme.colors.danger};
+      font-size: 13px;
+    }
   }
 `
 
