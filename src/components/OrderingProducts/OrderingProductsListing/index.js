@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   useLanguage,
   SitesList as SitesListController
@@ -35,6 +36,8 @@ const OrderingProductsUI = (props) => {
     handleSuccessUpdateSites
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
 
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -53,14 +56,18 @@ const OrderingProductsUI = (props) => {
     getSites(expectedPage, pageSize)
   }
 
-  const onClickProduct = (product) => {
+  const onClickProduct = (product, isInitialRender) => {
     setSelectedSite(product)
     setOpenDetails(true)
+    if (product && !isInitialRender) {
+      history.replace(`${location.pathname}?id=${product?.id}`)
+    }
   }
 
   const handleCloseDetail = () => {
     setOpenDetails(false)
     setSelectedSite(null)
+    history.replace(`${location.pathname}`)
   }
 
   useEffect(() => {
@@ -70,6 +77,15 @@ const OrderingProductsUI = (props) => {
       content: sitesListState?.error
     })
   }, [sitesListState?.error])
+
+  useEffect(() => {
+    if (sitesListState.loading) return
+    const productId = query.get('id')
+    if (productId) {
+      const initProduct = sitesListState.sites.find(site => site.id === Number(productId))
+      if (initProduct) onClickProduct(initProduct, true)
+    }
+  }, [sitesListState])
 
   return (
     <>

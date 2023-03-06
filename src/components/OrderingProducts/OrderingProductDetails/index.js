@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, SiteDetails as SiteDetailsController } from 'ordering-components-admin'
 import { DefaultSelect, IconButton } from '../../../styles'
 import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
@@ -23,6 +24,8 @@ const OrderingProductDetailsUI = (props) => {
     handleDeleteSite
   } = props
 
+  const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [selectedTab, setSelectedTab] = useState('general')
   const { width } = useWindowSize()
@@ -57,6 +60,25 @@ const OrderingProductDetailsUI = (props) => {
     setIsExpand(prev => !prev)
   }
 
+  const handleTabClick = (tab, isInitialRender) => {
+    setSelectedTab(tab)
+    if (!isInitialRender) {
+      const id = query.get('id')
+      if (id) {
+        history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+      }
+    }
+  }
+
+  useEffect(() => {
+    const tab = query.get('tab')
+    if (tab) {
+      handleTabClick(tab, true)
+    } else {
+      handleTabClick(selectedTab)
+    }
+  }, [])
+
   return (
     <Container>
       <DetailHeaderContainer>
@@ -89,7 +111,7 @@ const OrderingProductDetailsUI = (props) => {
             <Tab
               key={tab.key}
               active={selectedTab === tab.key}
-              onClick={() => setSelectedTab(tab.key)}
+              onClick={() => handleTabClick(tab.key)}
             >
               {tab.content}
             </Tab>
