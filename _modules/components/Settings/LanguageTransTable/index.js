@@ -156,9 +156,9 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
       width: 300,
       height: 25
     }))));
-  }) : currentPages.map(function (translation, i) {
+  }) : currentPages.map(function (translation) {
     return /*#__PURE__*/_react.default.createElement(_styles.TableBody, {
-      key: i
+      key: translation === null || translation === void 0 ? void 0 : translation.id
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, translation.key), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
       defaultValue: (textEditState === null || textEditState === void 0 ? void 0 : textEditState.id) === translation.id ? textEditState === null || textEditState === void 0 ? void 0 : textEditState.text : translation.text,

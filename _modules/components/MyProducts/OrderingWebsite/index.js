@@ -8,6 +8,7 @@ exports.OrderingWebsite = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
+var _reactRouterDom = require("react-router-dom");
 var _styles = require("../../../styles");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styledComponents = require("styled-components");
@@ -16,6 +17,7 @@ var _ContentForm = require("../ContentForm");
 var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+var _AdvancedSettings = require("../AdvancedSettings");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -33,7 +35,10 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   var themeValues = props.themeValues,
     orderingTheme = props.orderingTheme,
     setThemeValues = props.setThemeValues,
-    handleUpdateSiteTheme = props.handleUpdateSiteTheme;
+    handleUpdateSiteTheme = props.handleUpdateSiteTheme,
+    advancedValues = props.advancedValues,
+    setAdvancedValues = props.setAdvancedValues,
+    themesList = props.themesList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -45,6 +50,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
+  var location = (0, _reactRouterDom.useLocation)();
   var logoRef = (0, _react.useRef)(null);
   var backgroundRef = (0, _react.useRef)(null);
   var mobileBackgroundRef = (0, _react.useRef)(null);
@@ -71,6 +77,17 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     footerContent = _useState8[0],
     setFooterContent = _useState8[1];
+  var _useState9 = (0, _react.useState)('basic'),
+    _useState10 = _slicedToArray(_useState9, 2),
+    selectedSetting = _useState10[0],
+    setSelectedSetting = _useState10[1];
+  var settingsList = [{
+    key: 'basic',
+    name: t('BASIC_SETTINGS', 'Basic Settings')
+  }, {
+    key: 'advanced',
+    name: t('ADVANCED_SETTINGS', 'Advanced Settings')
+  }];
   var handleClickImage = function handleClickImage(type) {
     if (type === 'logo') {
       logoRef.current.click();
@@ -152,16 +169,30 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('MY_PRODUCTS', 'My products'))), /*#__PURE__*/_react.default.createElement(_styles2.WebsiteWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDERING_WEBSITE', 'Ordering website')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDERING_WEBSITE_DESC', 'This product is included in your project by default.'))), /*#__PURE__*/_react.default.createElement("img", {
-    src: theme.images.myProducts.orderingWebsite,
-    alt: "ordering-website"
-  })), /*#__PURE__*/_react.default.createElement(_styles2.MoreSettingsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MORE_SETTINGS_FOR_YOUR', 'More settings for your'), " ", /*#__PURE__*/_react.default.createElement("span", null, t('WEBSITE_ORIGINAL', 'website'))), /*#__PURE__*/_react.default.createElement("p", null, t('MORE_SETTINGS_YOUR_WEBSITE_DESC', 'Change background, colors, fonts, style, branding and all the essentials of your brand.'))), /*#__PURE__*/_react.default.createElement(_styles2.WebsiteButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement("h1", null, t('MY_PRODUCTS', 'My products')), (location.pathname === '/my-products/ordering-website' || location.pathname === '/my-products/customer-app') && /*#__PURE__*/_react.default.createElement(_styles2.HeaderInfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('MY_PRODUCTS_INFO', 'Use the advanced configurations below to customize your products changing the images, colors, available options and others with a few clicks. If you have doubts, please contact our team here:'), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.ordering.co/support",
+    rel: "noopener noreferrer",
+    target: "_blank"
+  }, "https://www.ordering.co/support")))), /*#__PURE__*/_react.default.createElement(_styles2.WebsiteWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, t('ORDERING_WEBSITE', 'Ordering website')), /*#__PURE__*/_react.default.createElement("p", null, t('ORDERING_WEBSITE_DESC', 'This product is included in your project by default.')), /*#__PURE__*/_react.default.createElement(_styles2.WebsiteButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     onClick: function onClick() {
       return window.open("https://".concat(ordering === null || ordering === void 0 ? void 0 : ordering.project, ".tryordering.com"), '_blank');
     }
-  }, t('VISIT_MY_WEBSITE', 'Visit My Website'))), /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_SETTINGS', 'Website settings')), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, t('VISIT_MY_WEBSITE', 'Visit My Website')))), /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.myProducts.orderingWebsite,
+    alt: "ordering-website"
+  })), /*#__PURE__*/_react.default.createElement(_styles2.MoreSettingsHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, t('MORE_SETTINGS_FOR_YOUR', 'More settings for your'), " ", /*#__PURE__*/_react.default.createElement("span", null, t('WEBSITE_ORIGINAL', 'website'))), /*#__PURE__*/_react.default.createElement("p", null, t('MORE_SETTINGS_YOUR_WEBSITE_DESC', 'Change background, colors, fonts, style, branding and all the essentials of your brand.')), /*#__PURE__*/_react.default.createElement(_styles2.TabWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, settingsList.map(function (setting) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+      key: setting.key,
+      active: selectedSetting === setting.key,
+      onClick: function onClick() {
+        return !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && setSelectedSetting(setting.key);
+      }
+    }, setting.name);
+  })))), selectedSetting === 'basic' && /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_SETTINGS', 'Website settings')), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20,
     width: 150
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('NAME', 'Name'))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -364,7 +395,12 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       return handleUpdateSiteTheme();
     },
     disabled: orderingTheme === null || orderingTheme === void 0 ? void 0 : orderingTheme.loading
-  }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('SAVE', 'Save'))), selectedSetting === 'advanced' && !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && /*#__PURE__*/_react.default.createElement(_AdvancedSettings.AdvancedSettings, {
+    themesList: themesList,
+    advancedValues: advancedValues,
+    setAdvancedValues: setAdvancedValues,
+    handleUpdateSiteTheme: handleUpdateSiteTheme
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('ORDERING', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

@@ -17,5 +17,5 @@ var CheckboxWrapper = _styledComponents.default.div(_templateObject2 || (_templa
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n      margin-left: 20px;\n      margin-right: 0;\n    "])));
 });
 exports.CheckboxWrapper = CheckboxWrapper;
-var ActionBtnWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n\n  > button {\n    height: 44px;\n  }\n"])));
+var ActionBtnWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n  margin-top: 30px;\n\n  > button {\n    height: 44px;\n  }\n"])));
 exports.ActionBtnWrapper = ActionBtnWrapper;

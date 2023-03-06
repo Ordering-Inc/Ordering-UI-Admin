@@ -92,7 +92,14 @@ var BusinessFrontLayout = function BusinessFrontLayout(props) {
         key: i
       });
     })));
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.LayoutBoxFooter, null)), /*#__PURE__*/_react.default.createElement(_styles2.LayoutTitle, null, t('GROCERIES', 'Groceries'))))), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.LayoutBoxFooter, null)), /*#__PURE__*/_react.default.createElement(_styles2.LayoutTitle, null, t('GROCERIES', 'Groceries')))), /*#__PURE__*/_react.default.createElement(_styles2.SendCustomLayoutWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('SEND_CUSTOM_LAYOUT_IDEA_DESCRIPTION', 'Would you like another kind of layout for your business menu? Send us your idea! We will take at it and help you make your idea a reality.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    outline: true,
+    borderRadius: "8px",
+    color: "primary",
+    onClick: function onClick() {
+      return window.open('https://www.ordering.co/quote-project-request', '_blank');
+    }
+  }, t('SEND_CUSTOM_LAYOUT_IDEA', 'Send custom layout idea')))), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: handleSaveLayout
   }, t('SAVE', 'Save'))));

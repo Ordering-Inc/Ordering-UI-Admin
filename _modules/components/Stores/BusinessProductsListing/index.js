@@ -30,6 +30,7 @@ var _reactBootstrap = require("react-bootstrap");
 var _ImportersButton = require("../ImportersButton");
 var _AddBusinessForm = require("../AddBusinessForm");
 var _ProductStep = require("../ProductStep");
+var _BusinessAddStore = require("../BusinessAddStore");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -123,7 +124,11 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     _useState18 = _slicedToArray(_useState17, 2),
     showPopup = _useState18[0],
     setShowPopup = _useState18[1];
-  var _useState19 = (0, _react.useState)({
+  var _useState19 = (0, _react.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    isAdd = _useState20[0],
+    setIsAdd = _useState20[1];
+  var _useState21 = (0, _react.useState)({
       id: true,
       name: true,
       description: true,
@@ -132,9 +137,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       inventoried: true,
       quantity: true
     }),
-    _useState20 = _slicedToArray(_useState19, 2),
-    allowSpreadColumns = _useState20[0],
-    setAllowSpreadColumns = _useState20[1];
+    _useState22 = _slicedToArray(_useState21, 2),
+    allowSpreadColumns = _useState22[0],
+    setAllowSpreadColumns = _useState22[1];
   var spreadColumnOptions = [{
     value: 'cost_price',
     content: t('PRODUCT_COST', 'Product cost')
@@ -236,7 +241,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     window.open("https://".concat(ordering.project, ".tryordering.com/store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.slug), '_blank');
   };
   var handleOpenAddBusiness = function handleOpenAddBusiness() {
-    setOpenSidebar('add_business');
+    setIsAdd(true);
     handleClose();
   };
   (0, _react.useEffect)(function () {
@@ -484,13 +489,20 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     },
     orderingBusiness: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     getBusiness: getBusiness
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "769px",
+    padding: "30px",
+    open: isAdd,
+    onClose: function onClose() {
+      return setIsAdd(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_BusinessAddStore.BusinessAddStore, null)));
 };
 var BusinessProductsListing = function BusinessProductsListing(props) {
-  var _useState21 = (0, _react.useState)(false),
-    _useState22 = _slicedToArray(_useState21, 2),
-    isInitialRender = _useState22[0],
-    setIsInitialRender = _useState22[1];
+  var _useState23 = (0, _react.useState)(false),
+    _useState24 = _slicedToArray(_useState23, 2),
+    isInitialRender = _useState24[0],
+    setIsInitialRender = _useState24[1];
   var businessProductslistingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessProductsListingUI,
     isInitialRender: isInitialRender,
