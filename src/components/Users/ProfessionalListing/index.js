@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, useConfig, UsersList as UsersListController } from 'ordering-components-admin'
 import { ProfessionalList } from '../ProfessionalList'
 import { UsersListingHeader } from '../UsersListingHeader'
@@ -40,7 +40,6 @@ const ProfessionalListingUI = (props) => {
     handleSelectedUsers,
     deleteUsersActionState,
     handleDeleteSeveralUsers,
-    onUserRedirect,
     handleSuccessUpdate,
     handleSuccessAddUser,
     handleSuccessDeleteUser,
@@ -56,6 +55,7 @@ const ProfessionalListingUI = (props) => {
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
 
+  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [queryId, setQueryId] = useState(null)
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
@@ -67,11 +67,13 @@ const ProfessionalListingUI = (props) => {
     setIsOpenUserDetails(false)
     setOpenUser(null)
     setQueryId(null)
-    onUserRedirect()
+    const enabled = selectedUserActiveState ? 'active' : 'inactive'
+    history.replace(`${location.pathname}?enabled=${enabled}`)
   }
 
   const handleOpenUserDetails = (user) => {
-    onUserRedirect(user?.id)
+    const enabled = selectedUserActiveState ? 'active' : 'inactive'
+    history.replace(`${location.pathname}?enabled=${enabled}&id=${user?.id}`)
     setOpenUser(user)
     setOpenUserAddForm(false)
     setIsOpenUserDetails(true)
@@ -196,8 +198,11 @@ const ProfessionalListingUI = (props) => {
 }
 
 export const ProfessionalListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultUserActiveState = query.get('enabled') !== 'inactive'
   const usersListingProps = {
     ...props,
+    defaultUserActiveState,
     isProfessional: true,
     UIComponent: ProfessionalListingUI,
     isSearchByUserEmail: true,

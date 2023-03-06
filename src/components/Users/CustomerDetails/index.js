@@ -75,8 +75,9 @@ const CustomerDetailsUI = (props) => {
     handleParentSidebarMove(500)
     setIsOpenMenu(true)
     if (!isInitialRender) {
+      const enabled = query.get('enabled')
       const id = query.get('id')
-      history.replace(`${location.pathname}?id=${id}&section=${key}`)
+      history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${key}`)
     }
   }
 
@@ -85,8 +86,9 @@ const CustomerDetailsUI = (props) => {
     setShowOption(null)
     setIsOpenMenu(false)
     setMenuMoveDistance(0)
+    const enabled = query.get('enabled')
     const id = query.get('id')
-    history.replace(`${location.pathname}?id=${id}`)
+    history.replace(`${location.pathname}?eanbled=${enabled}&id=${id}`)
   }
 
   const expandSidebar = () => {

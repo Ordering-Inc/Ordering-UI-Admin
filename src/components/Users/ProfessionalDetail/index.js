@@ -93,11 +93,12 @@ export const ProfessionalDetailUI = (props) => {
     setCurrentMenuSelected(tab)
     if (!isInitialRender) {
       const id = query.get('id')
+      const enabled = query.get('enabled')
       const section = query.get('section')
       if (section) {
-        history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
+        history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${section}&tab=${tab}`)
       } else {
-        history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+        history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&tab=${tab}`)
       }
     }
   }
