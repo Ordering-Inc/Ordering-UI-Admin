@@ -162,6 +162,11 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     title: t('CUSTOM_PROJECT', 'Custom Project'),
     pageName: 'custom_project',
     url: '/my-products/custom-project'
+  }, {
+    id: 9,
+    title: t('ORDERING_WIDGETS', 'Ordering Widgets'),
+    pageName: 'ordering_widgets',
+    url: '/my-products/ordering-widgets'
   }];
   var storesSubMenus = [{
     id: 1,

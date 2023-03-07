@@ -39,6 +39,12 @@ Object.defineProperty(exports, "OrderingWebsite", {
     return _OrderingWebsite.OrderingWebsite;
   }
 });
+Object.defineProperty(exports, "OrderingWidgets", {
+  enumerable: true,
+  get: function get() {
+    return _OrderingWidgets.OrderingWidgets;
+  }
+});
 Object.defineProperty(exports, "PosApp", {
   enumerable: true,
   get: function get() {
@@ -59,3 +65,4 @@ var _PosApp = require("./PosApp");
 var _CallCenterApp = require("./CallCenterApp");
 var _KioskApp = require("./KioskApp");
 var _CustomProject = require("./CustomProject");
+var _OrderingWidgets = require("./OrderingWidgets");
