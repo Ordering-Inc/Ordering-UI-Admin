@@ -47,6 +47,7 @@ export const ListenPageChanges = ({ children }) => {
     call_center_app: '/my-products/call-center-app',
     kiosk_app: '/my-products/kiosk-app',
     custom_project: '/my-products/custom-project',
+    ordering_widgets: '/my-products/ordering-widgets',
     delivery_drivers: '/delivery/drivers-list',
     drivers_managers: '/delivery/drivers-managers',
     drivers_companies: '/delivery/drivers-companies',
