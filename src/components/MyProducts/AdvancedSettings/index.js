@@ -64,7 +64,7 @@ export const AdvancedSettings = (props) => {
     { name: t('REVIEWS', 'Reviews'), type: 'hidden', path: 'business_listing_view.components.business.components.reviews.hidden' },
     { name: t('FAVORITE_BUTTON', 'Favorite button'), type: 'hidden', path: 'business_listing_view.components.business.components.favorite.hidden' },
     { name: t('OFFER_BADGE', 'Offer badge'), type: 'hidden', path: 'business_listing_view.components.business.components.offer.hidden' },
-    { name: t('OFFER__BADGE_POSITION', 'Offer badge position'), type: 'position', path: 'business_listing_view.components.business.components.offer.position' },
+    { name: t('OFFER_BADGE_POSITION', 'Offer badge position'), type: 'position', path: 'business_listing_view.components.business.components.offer.position' },
     { name: t('CATEGORIES', 'Categories'), type: 'hidden', path: 'business_listing_view.components.business.components.categories.hidden' },
     { name: t('FEATURED_BADGE', 'Featured badge'), type: 'hidden', path: 'business_listing_view.components.business.components.featured_badge.hidden' }
   ]
@@ -125,7 +125,7 @@ export const AdvancedSettings = (props) => {
     { name: t('USER_IMAGE', 'User image'), type: 'hidden', path: 'profile.components.picture.hidden' },
     { name: t('BIRTHDAY', 'Birthday'), type: 'hidden', path: 'profile.components.birthday.hidden' },
     { name: t('LANGUAGES', 'Languages'), type: 'hidden', path: 'profile.components.languages.hidden' },
-    { name: t('address_list', 'Address list'), type: 'hidden', path: 'profile.components.address_list.hidden' }
+    { name: t('ADDRESS_LIST', 'Address list'), type: 'hidden', path: 'profile.components.address_list.hidden' }
   ]
 
   const activeOrderBlockList = [

@@ -71,12 +71,13 @@ export const UserDetailsUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setCurrentMenuSelected(tab)
     if (!isInitialRender) {
+      const enabled = query.get('enabled')
       const id = query.get('id')
       const section = query.get('section')
       if (section) {
-        history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
+        history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${section}&tab=${tab}`)
       } else {
-        history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+        history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&tab=${tab}`)
       }
     }
   }

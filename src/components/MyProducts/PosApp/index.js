@@ -15,7 +15,7 @@ export const PosApp = () => {
       brand: theme.images.myProducts.myPosAppBrand
     },
     live_title: t('FREE_TO_USE', 'Free to use'),
-    live_description: t('FREE_TO_USE_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
+    live_description: t('POS_APP_FREE_TO_USE_DESCRIPTION', 'This is a branded Ordering.co product. use it with your project, email, and password for free. features might be limited.'),
     brand_title: t('YOUR_BRANDED_POS', 'Your Branded POS'),
     brand_description: t('POS_BRANDED_DESCRIPTION', 'The POS is delivered in less than five working days, fully branded with your guidelines, and ready to be used on any tablet or device you add it to.'),
     demo_book_message: 'I would like to book a Demo about the POS app , can you assist me?',
