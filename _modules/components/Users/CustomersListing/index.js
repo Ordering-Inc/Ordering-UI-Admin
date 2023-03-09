@@ -48,7 +48,6 @@ var CustomersListingUI = function CustomersListingUI(props) {
     handleSelectedUsers = props.handleSelectedUsers,
     deleteUsersActionState = props.deleteUsersActionState,
     handleDeleteSeveralUsers = props.handleDeleteSeveralUsers,
-    onUserRedirect = props.onUserRedirect,
     handleSuccessUpdate = props.handleSuccessUpdate,
     handleSuccessAddUser = props.handleSuccessAddUser,
     handleSuccessDeleteUser = props.handleSuccessDeleteUser,
@@ -60,6 +59,7 @@ var CustomersListingUI = function CustomersListingUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -99,10 +99,12 @@ var CustomersListingUI = function CustomersListingUI(props) {
     setOpenUser(null);
     setQueryId(null);
     moveDistance && setMoveDistance(0);
-    onUserRedirect();
+    var enabled = selectedUserActiveState ? 'active' : 'inactive';
+    history.replace("".concat(location.pathname, "?enabled=").concat(enabled));
   };
   var handleOpenUserDetails = function handleOpenUserDetails(user) {
-    onUserRedirect(user === null || user === void 0 ? void 0 : user.id);
+    var enabled = selectedUserActiveState ? 'active' : 'inactive';
+    history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(user === null || user === void 0 ? void 0 : user.id));
     setOpenUser(user);
     setOpenUserAddForm(false);
     setIsOpenUserDetails(true);
@@ -217,7 +219,10 @@ var CustomersListingUI = function CustomersListingUI(props) {
   })));
 };
 var CustomersListing = function CustomersListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultUserActiveState = query.get('enabled') !== 'inactive';
   var customersProps = _objectSpread(_objectSpread({}, props), {}, {
+    defaultUserActiveState: defaultUserActiveState,
     UIComponent: CustomersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,

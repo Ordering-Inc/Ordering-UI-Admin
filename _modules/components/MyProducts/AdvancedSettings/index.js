@@ -128,7 +128,7 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'business_listing_view.components.business.components.offer.hidden'
   }, {
-    name: t('OFFER__BADGE_POSITION', 'Offer badge position'),
+    name: t('OFFER_BADGE_POSITION', 'Offer badge position'),
     type: 'position',
     path: 'business_listing_view.components.business.components.offer.position'
   }, {
@@ -273,7 +273,7 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'profile.components.languages.hidden'
   }, {
-    name: t('address_list', 'Address list'),
+    name: t('ADDRESS_LIST', 'Address list'),
     type: 'hidden',
     path: 'profile.components.address_list.hidden'
   }];

@@ -28,7 +28,7 @@ var KioskApp = function KioskApp() {
       brand: theme.images.myProducts.myKioskAppBrand
     },
     live_title: t('LIVE_DEMO', 'Live Demo'),
-    live_description: t('APP_LIVE_DEMO_DESCRIPTION', 'This is a branded Ordering.co product. play with it and understand how it works'),
+    live_description: t('KIOS_APP_LIVE_DEMO_DESCRIPTION', 'This is a branded Ordering.co product. play with it and understand how it works'),
     brand_title: t('YOUR_BRANDED_KIOSK', 'Your Branded Kiosk'),
     brand_description: t('KIOSK_BRANDED_DESCRIPTION', 'This App is delivered in less than five working days, fully branded with your guidelines, and ready to be used on any tablet you add it to.'),
     demo_book_message: 'I would like to book a Demo about the Kiosk app, can you assist me?',

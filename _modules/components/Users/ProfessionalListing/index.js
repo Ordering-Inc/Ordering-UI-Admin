@@ -49,7 +49,6 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     handleSelectedUsers = props.handleSelectedUsers,
     deleteUsersActionState = props.deleteUsersActionState,
     handleDeleteSeveralUsers = props.handleDeleteSeveralUsers,
-    onUserRedirect = props.onUserRedirect,
     handleSuccessUpdate = props.handleSuccessUpdate,
     handleSuccessAddUser = props.handleSuccessAddUser,
     handleSuccessDeleteUser = props.handleSuccessDeleteUser,
@@ -65,6 +64,7 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
+  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -87,10 +87,12 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     setIsOpenUserDetails(false);
     setOpenUser(null);
     setQueryId(null);
-    onUserRedirect();
+    var enabled = selectedUserActiveState ? 'active' : 'inactive';
+    history.replace("".concat(location.pathname, "?enabled=").concat(enabled));
   };
   var handleOpenUserDetails = function handleOpenUserDetails(user) {
-    onUserRedirect(user === null || user === void 0 ? void 0 : user.id);
+    var enabled = selectedUserActiveState ? 'active' : 'inactive';
+    history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(user === null || user === void 0 ? void 0 : user.id));
     setOpenUser(user);
     setOpenUserAddForm(false);
     setIsOpenUserDetails(true);
@@ -187,7 +189,10 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
   })));
 };
 var ProfessionalListing = function ProfessionalListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultUserActiveState = query.get('enabled') !== 'inactive';
   var usersListingProps = _objectSpread(_objectSpread({}, props), {}, {
+    defaultUserActiveState: defaultUserActiveState,
     isProfessional: true,
     UIComponent: ProfessionalListingUI,
     isSearchByUserEmail: true,

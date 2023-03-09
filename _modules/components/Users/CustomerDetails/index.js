@@ -102,8 +102,9 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     handleParentSidebarMove(500);
     setIsOpenMenu(true);
     if (!isInitialRender) {
+      var enabled = query.get('enabled');
       var id = query.get('id');
-      history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(key));
+      history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&section=").concat(key));
     }
   };
   var handleCloseMenu = function handleCloseMenu() {
@@ -111,8 +112,9 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     setShowOption(null);
     setIsOpenMenu(false);
     setMenuMoveDistance(0);
+    var enabled = query.get('enabled');
     var id = query.get('id');
-    history.replace("".concat(location.pathname, "?id=").concat(id));
+    history.replace("".concat(location.pathname, "?eanbled=").concat(enabled, "&id=").concat(id));
   };
   var expandSidebar = function expandSidebar() {
     var element = document.getElementById('customer_details');
