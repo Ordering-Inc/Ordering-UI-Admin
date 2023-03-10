@@ -57,7 +57,8 @@ export const BusinessLocation = (props) => {
   const getTimeZone = async (address) => {
     const date = new Date()
     const timestamp = Math.floor(date.getTime() / 1000)
-    const url = `https://maps.googleapis.com/maps/api/timezone/json?location=${address?.location?.lat},${address?.location?.lng}&timestamp=${timestamp}&key=${googleMapsApiKey}`
+    const timezoneApiKey = googleMapsApiKey === 'AIzaSyBvsSkMYPSDSkdk7YFrSf5FoGonIzr6fJ0' ? 'AIzaSyCYPCOfiTo9jxuxLWnWTup6mmICPxfLegI' : googleMapsApiKey
+    const url = `https://maps.googleapis.com/maps/api/timezone/json?location=${address?.location?.lat},${address?.location?.lng}&timestamp=${timestamp}&key=${timezoneApiKey}`
     const response = await fetch(url, {
       method: 'GET'
     })
