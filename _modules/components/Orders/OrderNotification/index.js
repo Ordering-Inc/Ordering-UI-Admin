@@ -31,7 +31,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _reactToastify.toast.configure();
 var OrderNotificationUI = function OrderNotificationUI(props) {
-  var isOnlyDelivery = props.isOnlyDelivery;
+  var isOnlyDelivery = props.isOnlyDelivery,
+    customerId = props.customerId;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -51,6 +52,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     registerOrderIds = _useState4[0],
     setRegisterOrderIds = _useState4[1];
   var handleNotification = function handleNotification(order) {
+    if (customerId && (order === null || order === void 0 ? void 0 : order.customer_id) !== customerId) return;
     if (isOnlyDelivery && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) return;
     var _registerOrderIds = _toConsumableArray(registerOrderIds);
     if (!_registerOrderIds.includes(order.id)) {
@@ -116,7 +118,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     return function () {
       events.off('order_added', handleNotification);
     };
-  }, [configState, registerOrderIds]);
+  }, [configState, registerOrderIds, customerId]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "750px",
     open: notificationModalOpen,
