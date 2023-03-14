@@ -249,13 +249,13 @@ const HomeUI = (props) => {
                   >
                     {project[projectStatus.project?.current_status]?.status}
                   </ProjectCurrentStatus>
-                  <Button
+                  {/* <Button
                     color='primary'
                     borderRadius='8px'
                     onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
                   >
                     {t('VISIT_MY_WEBSITE', 'Visit my Website')}
-                  </Button>
+                  </Button> */}
                 </ProjectStatusWrapper>
               </ProjectInfoWrapper>
               <img src={project[projectStatus.project?.current_status]?.image} alt='' />

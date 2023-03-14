@@ -18,7 +18,10 @@ import {
 toast.configure()
 
 const OrderNotificationUI = (props) => {
-  const { isOnlyDelivery } = props
+  const {
+    isOnlyDelivery,
+    customerId
+  } = props
 
   const [configState] = useConfig()
   const [, t] = useLanguage()
@@ -29,6 +32,7 @@ const OrderNotificationUI = (props) => {
   const [registerOrderIds, setRegisterOrderIds] = useState([])
 
   const handleNotification = (order) => {
+    if (customerId && order?.customer_id !== customerId) return
     if (isOnlyDelivery && order?.delivery_type !== 1) return
     const _registerOrderIds = [...registerOrderIds]
     if (!_registerOrderIds.includes(order.id)) {
@@ -101,7 +105,7 @@ const OrderNotificationUI = (props) => {
     return () => {
       events.off('order_added', handleNotification)
     }
-  }, [configState, registerOrderIds])
+  }, [configState, registerOrderIds, customerId])
 
   return (
     <>
