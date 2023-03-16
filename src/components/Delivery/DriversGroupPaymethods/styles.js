@@ -2,6 +2,10 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   height: calc(100% - 160px);
+  ${({ disabled }) => disabled && css`
+    opacity: 0.7;
+    pointer-events: none;
+  `}
   > button {
     position: sticky;
     top: 100%;

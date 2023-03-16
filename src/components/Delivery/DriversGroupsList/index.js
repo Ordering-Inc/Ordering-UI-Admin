@@ -34,7 +34,8 @@ export const DriversGroupsList = (props) => {
     selectedGroupList,
     isFromStore,
     handleSelectGroup,
-    handleAllSelectGroup
+    handleAllSelectGroup,
+    actionDisabled
   } = props
 
   const [, t] = useLanguage()
@@ -218,6 +219,7 @@ export const DriversGroupsList = (props) => {
                         <EnableWrapper className='group-enabled'>
                           <span>{t('ENABLE', 'Enable')}</span>
                           <Switch
+                            disabled={actionDisabled}
                             defaultChecked={group?.enabled}
                             onChange={enabled => handleUpdateDriversGroup?.(group.id, { enabled: enabled })}
                           />
@@ -235,6 +237,7 @@ export const DriversGroupsList = (props) => {
             {!isFromStore && (
               <AddNewGroupButton
                 onClick={() => handleOpenDetails(null)}
+                disabled={actionDisabled}
               >
                 {t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')}
               </AddNewGroupButton>

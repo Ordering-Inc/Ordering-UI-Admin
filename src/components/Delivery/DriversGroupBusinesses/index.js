@@ -25,7 +25,8 @@ export const DriversGroupBusinesses = (props) => {
     handleUpdateDriversGroup,
     handleAddDriversGroup,
     handleSelectAllBusiness,
-    selectedBusinessIds
+    selectedBusinessIds,
+    actionDisabled
   } = props
 
   const [, t] = useLanguage()
@@ -56,6 +57,7 @@ export const DriversGroupBusinesses = (props) => {
     <Container
       data-tour='tour_select_business'
       onSubmit={handleSubmit(onSubmit)}
+      disabled={actionDisabled}
     >
       <SearchBarWrapper>
         <SearchBar
