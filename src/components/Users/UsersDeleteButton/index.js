@@ -16,7 +16,8 @@ const UsersDeleteButtonUI = (props) => {
     getCheckPassword,
     selectedUsers,
     deleteUsersActionState,
-    handleDeleteSeveralUsers
+    handleDeleteSeveralUsers,
+    disabled
   } = props
   const [, t] = useLanguage()
 
@@ -60,7 +61,7 @@ const UsersDeleteButtonUI = (props) => {
       <Button
         borderRadius='5px'
         color='secundary'
-        disabled={!selectedUsers.length || deleteUsersActionState.loading}
+        disabled={!selectedUsers.length || deleteUsersActionState.loading || disabled}
         onClick={() => handleModalOpen()}
       >
         {t('DELETE', 'Delete')}
