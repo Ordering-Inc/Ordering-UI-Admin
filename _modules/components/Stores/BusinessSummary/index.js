@@ -41,7 +41,8 @@ var BusinessSummary = function BusinessSummary(props) {
     handleSelectedItem = props.handleSelectedItem,
     handleDuplicateBusiness = props.handleDuplicateBusiness,
     handleDeleteBusiness = props.handleDeleteBusiness,
-    extraOpen = props.extraOpen;
+    extraOpen = props.extraOpen,
+    spoonityConfig = props.spoonityConfig;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -90,7 +91,7 @@ var BusinessSummary = function BusinessSummary(props) {
     var _businessState$busine2;
     window.open("https://".concat(ordering.project, ".tryordering.com/store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.slug), '_blank');
   };
-  var itemsExcluded = ['publishing'];
+  var itemsExcluded = !!spoonityConfig ? ['publishing'] : ['publishing', 'spoonity_key'];
   var businessConfigs = [{
     key: 'store_details',
     value: t('STORE_DETAILS', 'Store details')
@@ -144,6 +145,9 @@ var BusinessSummary = function BusinessSummary(props) {
   }, {
     key: 'places',
     value: t('PLACES', 'Places')
+  }, {
+    key: 'spoonity_key',
+    value: t('SPOONITY_KEY', 'Sponity key')
   }];
   var onClickDeleteBusiness = function onClickDeleteBusiness() {
     setConfirm({
@@ -236,7 +240,9 @@ var BusinessSummary = function BusinessSummary(props) {
     width: 300
   }) : businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.description), /*#__PURE__*/_react.default.createElement(_styles2.BusinessConfigsContainer, {
     isLoading: businessState === null || businessState === void 0 ? void 0 : businessState.loading
-  }, (isAdmin ? businessConfigs : businessConfigs.filter(function (c) {
+  }, (isAdmin ? !!spoonityConfig ? businessConfigs : businessConfigs.filter(function (configs) {
+    return configs.key !== 'spoonity_key';
+  }) : businessConfigs.filter(function (c) {
     return !itemsExcluded.includes(c.key);
   })).map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessConfigItem, {
