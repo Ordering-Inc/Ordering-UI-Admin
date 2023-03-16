@@ -19,6 +19,7 @@ import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
 import { BusinessFrontLayout } from '../BusinessFrontLayout'
 // import { BusinessPublishing } from '../BusinessPublishing'
 import { BusinessPlaceGroupList } from '../BusinessPlaceGroupList'
+import { SpoonityApiKey } from '../SpoonityApiKey'
 
 import { MoreSidebarLayout, Personalization, Alert } from '../../Shared'
 
@@ -47,7 +48,9 @@ export const BusinessDetailsUI = (props) => {
     handleDuplicateBusiness,
     handleDeleteBusiness,
     actionStatus,
-    handleUpdatePreorderConfigs
+    handleUpdatePreorderConfigs,
+    handleUpdateSpoonityKey,
+    spoonityKeyState
   } = props
 
   const history = useHistory()
@@ -59,6 +62,7 @@ export const BusinessDetailsUI = (props) => {
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const spoonityConfig = businessState?.business?.configs?.find(config => config.key === 'spoonity_integration_api_key')
 
   const isAdmin = user?.level === 0
 
@@ -171,6 +175,7 @@ export const BusinessDetailsUI = (props) => {
           handleDuplicateBusiness={handleDuplicateBusiness}
           handleDeleteBusiness={handleDeleteBusiness}
           extraOpen={extraOpen}
+          spoonityConfig={spoonityConfig}
         />
       )}
       {extraOpen && (
@@ -318,6 +323,16 @@ export const BusinessDetailsUI = (props) => {
               business={businessState?.business}
               handleSuccessUpdate={handleUpdateBusinessState}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
+            />
+          )}
+          {selectedItem === 'spoonity_key' && (
+            <SpoonityApiKey
+              business={businessState?.business}
+              handleSuccessUpdate={handleUpdateBusinessState}
+              handleUpdateBusinessClick={handleUpdateBusinessClick}
+              spoonityConfig={spoonityConfig}
+              handleUpdateSpoonityKey={handleUpdateSpoonityKey}
+              spoonityKeyState={spoonityKeyState}
             />
           )}
         </MoreSidebarLayout>
