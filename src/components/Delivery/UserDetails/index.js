@@ -36,7 +36,8 @@ export const UserDetailsUI = (props) => {
     handleChangeActiveUser,
     scheduleState,
     handleScheduleState,
-    handleScheduleUpdateUser
+    handleScheduleUpdateUser,
+    actionDisabled
   } = props
 
   const history = useHistory()
@@ -98,6 +99,7 @@ export const UserDetailsUI = (props) => {
             <>
               {handleChangeActiveUser && (
                 <Switch
+                  disabled={actionDisabled}
                   defaultChecked={userState?.user?.enabled || false}
                   onChange={enabled => handleChangeActiveUser({ id: userState?.user?.id, enabled: enabled })}
                 />
@@ -121,13 +123,13 @@ export const UserDetailsUI = (props) => {
                 title={<ThreeDots />}
                 id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
               >
-                <Dropdown.Item onClick={() => setIsCustomField(true)}>
+                <Dropdown.Item onClick={() => setIsCustomField(true)} disabled={actionDisabled}>
                   {t('CUSTOM_FIELDS', 'Custom fields')}
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => setIsPersonalization(true)}>
+                <Dropdown.Item onClick={() => setIsPersonalization(true)} disabled={actionDisabled}>
                   {t('PERSONALIZATION', 'Personalization')}
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => handleDeleteUser(userState.user?.id)}>
+                <Dropdown.Item onClick={() => handleDeleteUser(userState.user?.id)} disabled={actionDisabled}>
                   {t('DELETE', 'Delete')}
                 </Dropdown.Item>
               </DropdownButton>

@@ -2,6 +2,10 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.form`
   padding-bottom: 30px;
+  ${({ disabled }) => disabled && css`
+    opacity: 0.7;
+    pointer-events: none;
+  `}
 
   > button {
     position: sticky;

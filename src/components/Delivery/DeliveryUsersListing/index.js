@@ -47,7 +47,9 @@ const DeliveryUsersListingUI = (props) => {
     onUserRedirect,
     handleSuccessUpdate,
     handleSuccessAddUser,
-    handleSuccessDeleteUser
+    handleSuccessDeleteUser,
+    actionDisabled,
+    driversGroupsState
   } = props
 
   const history = useHistory()
@@ -163,8 +165,8 @@ const DeliveryUsersListingUI = (props) => {
           onSearch={onSearch}
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
           handleOpenUserAddForm={handleOpenUserAddForm}
-
           handleOpenTour={() => handleOpenTour()}
+          actionDisabled={actionDisabled}
         />
         {isShowActiveStateFilter && (
           <UserActiveStateFilter
@@ -192,6 +194,7 @@ const DeliveryUsersListingUI = (props) => {
           userDetailsId={openUser?.id || queryId}
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
+          actionDisabled={actionDisabled}
         />
       </UsersListingContainer>
 
@@ -207,6 +210,7 @@ const DeliveryUsersListingUI = (props) => {
           handleSuccessUpdate={handleSuccessUpdate}
           handleSuccessDeleteUser={handleSuccessDeleteUser}
           handleChangeActiveUser={handleChangeActiveUser}
+          actionDisabled={actionDisabled}
         />
       )}
       {openUserAddForm && (
@@ -222,6 +226,7 @@ const DeliveryUsersListingUI = (props) => {
             handleSuccessAdd={handleSuccessAddUser}
             onClose={() => setOpenUserAddForm(false)}
             isTourOpen={isTourOpen}
+            driversGroupsState={driversGroupsState}
           />
         </SideBar>
       )}

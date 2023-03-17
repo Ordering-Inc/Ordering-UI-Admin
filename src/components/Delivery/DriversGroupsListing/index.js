@@ -33,7 +33,8 @@ const DriversGroupsListingUI = (props) => {
     actionState,
     handleUpdateDriversGroup,
     handleDeleteDriversGroup,
-    driversCompanyList
+    driversCompanyList,
+    actionDisabled
   } = props
 
   const history = useHistory()
@@ -170,13 +171,14 @@ const DriversGroupsListingUI = (props) => {
               color='lightPrimary'
               data-tour='tour_add_group'
               onClick={() => handleOpenDetails(null)}
+              disabled={actionDisabled}
             >
               {t('ADD_DRIVER_GROUP', 'Add driver group')}
             </Button>
             <Button
               borderRadius='8px'
               color='secundary'
-              disabled={selectedGroupList.length === 0}
+              disabled={selectedGroupList.length === 0 || actionDisabled}
               onClick={() => onClickSelectedGroupsDelete()}
             >
               {t('DELETE', 'Delete')}
@@ -199,6 +201,7 @@ const DriversGroupsListingUI = (props) => {
           selectedGroupList={selectedGroupList}
           handleSelectGroup={handleSelectGroup}
           handleAllSelectGroup={handleAllSelectGroup}
+          actionDisabled={actionDisabled}
         />
       </DriversGroupsListingContainer>
       {openDetails && (
@@ -232,6 +235,7 @@ const DriversGroupsListingUI = (props) => {
             }}
             isTourOpen={isTourOpen}
             handleNextTour={handleNextTour}
+            actionDisabled={actionDisabled}
           />
         </SideBar>
       )}

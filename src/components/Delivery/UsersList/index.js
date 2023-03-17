@@ -41,7 +41,8 @@ export const UsersList = (props) => {
     handleOpenUserDetails,
     handleOpenUserAddForm,
     isDriversPage,
-    isDriversManagersPage
+    isDriversManagersPage,
+    actionDisabled
   } = props
 
   const [, t] = useLanguage()
@@ -238,6 +239,7 @@ export const UsersList = (props) => {
                       <UserEnableWrapper className='user_enable_control'>
                         <span>{t('ENABLE', 'Enable')}</span>
                         <Switch
+                          disabled={actionDisabled}
                           notAsync={user.level === 0}
                           defaultChecked={user?.enabled}
                           onChange={enabled => handleEnable(user, enabled)}
@@ -251,7 +253,10 @@ export const UsersList = (props) => {
           </UsersTable>
         </UserTableWrapper>
         <UsersBottomContainer>
-          <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
+          <AddNewUserButton
+            onClick={() => handleOpenUserAddForm()}
+            disabled={actionDisabled}
+          >
             {
               isDriversPage
                 ? t('ADD_NEW_DRIVER', 'Add new driver')

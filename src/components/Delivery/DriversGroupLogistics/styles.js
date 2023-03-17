@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components'
 export const LogisticsContainer = styled.div`
   padding: 20px 0;
   min-height: calc(100% - 120px);
+  ${({ disabled }) => disabled && css`
+    opacity: 0.7;
+    pointer-events: none;
+  `}
 
   > button {
     position: sticky;
