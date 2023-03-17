@@ -22,7 +22,7 @@ export const DriversGroupGeneralForm = (props) => {
     setUseAdvanced,
     handleUpdateDriversGroup,
     handleAddDriversGroup,
-
+    actionDisabled,
     isTourOpen,
     handleNextClick
   } = props
@@ -126,6 +126,7 @@ export const DriversGroupGeneralForm = (props) => {
     <Container
       data-tour='tour_fill_group'
       onSubmit={handleSubmit(onSubmit)}
+      disabled={actionDisabled}
     >
       <InputWrapper>
         <label>{t('NAME', 'Name')}</label>

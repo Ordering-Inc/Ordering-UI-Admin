@@ -25,7 +25,8 @@ const DriverGroupDeliveryDetailsUI = (props) => {
     zoneList,
     setZoneList,
     setIsOpenDetails,
-    isOpenDetails
+    isOpenDetails,
+    actionDisabled
   } = props
 
   const [, t] = useLanguage()
@@ -40,7 +41,9 @@ const DriverGroupDeliveryDetailsUI = (props) => {
   }, [actionState?.error])
 
   return (
-    <Container>
+    <Container
+      disabled={actionDisabled}
+    >
       <DriverGroupDeliveryZoneList
         setZoneList={setZoneList}
         handleParentSidebarMove={handleParentSidebarMove}

@@ -35,7 +35,8 @@ const DriversGroupDetailsUI = (props) => {
     handleDeleteDriversGroup,
     handleNextTour,
     handleUpdateDriversGroup,
-    setIsExtendExtraOpen
+    setIsExtendExtraOpen,
+    actionDisabled
   } = props
 
   const history = useHistory()
@@ -155,6 +156,7 @@ const DriversGroupDetailsUI = (props) => {
                 <Switch
                   defaultChecked={driversGroupState.driversGroup?.enabled}
                   onChange={enabled => handleUpdateDriversGroup({ enabled: enabled })}
+                  disabled={actionDisabled}
                 />
               </div>
               <RightHeader>
@@ -174,6 +176,7 @@ const DriversGroupDetailsUI = (props) => {
                   >
                     <Dropdown.Item
                       onClick={() => onDeleteGroup()}
+                      disabled={actionDisabled}
                     >
                       {t('DELETE', 'Delete')}
                     </Dropdown.Item>

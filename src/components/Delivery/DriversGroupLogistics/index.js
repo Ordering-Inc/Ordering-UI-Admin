@@ -23,7 +23,8 @@ export const DriversGroupLogistics = (props) => {
     changesState,
     handleChangesState,
     handleParentSidebarMove,
-    handleUpdateDriversGroup
+    handleUpdateDriversGroup,
+    actionDisabled
   } = props
 
   const history = useHistory()
@@ -74,7 +75,9 @@ export const DriversGroupLogistics = (props) => {
   }, [])
 
   return (
-    <LogisticsContainer>
+    <LogisticsContainer
+      disabled={actionDisabled}
+    >
       <OrderStatusWrapper
         onClick={() => handleChangesState({ orders_group_start_in_status: 7 })}
       >

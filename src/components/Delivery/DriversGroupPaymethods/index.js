@@ -21,7 +21,8 @@ export const DriversGroupPaymethods = (props) => {
     handleUpdateDriversGroup,
     handleAddDriversGroup,
     handleSelectPaymethod,
-    handleSelectAllPaymethod
+    handleSelectAllPaymethod,
+    actionDisabled
   } = props
   const [, t] = useLanguage()
   const [searchValue, setSearchValue] = useState(null)
@@ -39,7 +40,9 @@ export const DriversGroupPaymethods = (props) => {
 
   return (
     <>
-      <Container>
+      <Container
+        disabled={actionDisabled}
+      >
         <SearchBarWrapper>
           <SearchBar
             placeholder={t('SEARCH', 'Search')}

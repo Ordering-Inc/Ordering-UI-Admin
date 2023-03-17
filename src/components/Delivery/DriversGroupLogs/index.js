@@ -18,7 +18,8 @@ const DriversGroupLogsUI = (props) => {
   const {
     logsList,
     paginationProps,
-    getDriversGroupLogs
+    getDriversGroupLogs,
+    actionDisabled
   } = props
 
   const [, t] = useLanguage()
@@ -70,9 +71,13 @@ const DriversGroupLogsUI = (props) => {
     }
   }, [logsList.logs, paginationProps])
 
+  console.log(logsList)
+
   return (
     <>
-      <DriversGroupLogsContainer>
+      <DriversGroupLogsContainer
+        disabled={actionDisabled}
+      >
         <TableWrapper>
           {(logsList.loading || logsList.logs.length > 0) ? (
             <Table>
@@ -117,7 +122,7 @@ const DriversGroupLogsUI = (props) => {
                   </tbody>
                 ))
               ) : (
-                logsList.logs.map(log => (
+                !logsList.error && logsList.logs?.map(log => (
                   <tbody key={log.id}>
                     <tr>
                       <td>

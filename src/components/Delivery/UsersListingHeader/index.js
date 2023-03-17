@@ -29,7 +29,8 @@ export const UsersListingHeader = (props) => {
     isDriversPage,
     isDriversManagersPage,
 
-    handleOpenTour
+    handleOpenTour,
+    actionDisabled
   } = props
 
   const [, t] = useLanguage()
@@ -72,6 +73,7 @@ export const UsersListingHeader = (props) => {
           color='lightPrimary'
           onClick={() => handleOpenUserAddForm()}
           data-tour='tour_add'
+          disabled={actionDisabled}
         >
           {
             isDriversPage
@@ -86,11 +88,13 @@ export const UsersListingHeader = (props) => {
           disabledActiveStateCondition={disabledActiveStateCondition}
           userTypesSelected={userTypesSelected}
           selectedUserActiveState={selectedUserActiveState}
+          disabled={actionDisabled}
         />
         <UsersDeleteButton
           selectedUsers={selectedUsers}
           deleteUsersActionState={deleteUsersActionState}
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
+          disabled={actionDisabled}
         />
         <SearchBar
           lazyLoad

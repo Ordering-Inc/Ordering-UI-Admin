@@ -214,6 +214,11 @@ export const AddNewUserButton = styled.div`
   color: ${props => props.theme.colors.primary};
   width: fit-content;
   font-size: 14px;
+
+  ${({ disabled }) => disabled && css`
+    opacity: 0.5;
+    pointer-events: none;
+  `}
 `
 
 export const UsersBottomContainer = styled.div`
