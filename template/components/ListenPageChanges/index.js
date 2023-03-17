@@ -15,6 +15,7 @@ export const ListenPageChanges = ({ children }) => {
     deliveries: '/deliveries',
     drivers: '/drivers',
     appointments: '/appointments',
+    giftCards: '/gift-cards',
     messages: '/messages',
     customers: '/users/customers',
     managers: '/users/managers',
