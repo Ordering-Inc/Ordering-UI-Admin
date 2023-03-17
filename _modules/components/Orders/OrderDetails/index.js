@@ -102,7 +102,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       key: 0,
       value: 'Pending Order',
       slug: 'PENDING_ORDER',
-      percentage: 25
+      percentage: 10
     }, {
       key: 1,
       value: 'Completed by admin',
@@ -122,7 +122,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       key: 4,
       value: 'Preparation Completed',
       slug: 'PREPARATION_COMPLETED',
-      percentage: 70
+      percentage: 20
     }, {
       key: 5,
       value: 'Reject by business',
@@ -137,17 +137,17 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       key: 7,
       value: 'Accepted by business',
       slug: 'ACCEPTED_BY_BUSINESS',
-      percentage: 35
+      percentage: 15
     }, {
       key: 8,
       value: 'Accepted by driver',
       slug: 'ACCEPTED_BY_DRIVER',
-      percentage: 45
+      percentage: 40
     }, {
       key: 9,
       value: 'Pick up completed by driver',
       slug: 'PICK_UP_COMPLETED_BY_DRIVER',
-      percentage: 80
+      percentage: 70
     }, {
       key: 10,
       value: 'Pick up Failed by driver',
@@ -167,12 +167,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       key: 13,
       value: 'Preorder',
       slug: 'PREORDER',
-      percentage: 25
+      percentage: 0
     }, {
       key: 14,
       value: 'Order not ready',
       slug: 'ORDER_NOT_READY',
-      percentage: 65
+      percentage: 15
     }, {
       key: 15,
       value: 'Pickup completed by customer',
@@ -202,22 +202,22 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       key: 20,
       value: 'Customer almost arrived to business',
       slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS',
-      percentage: 50
+      percentage: 90
     }, {
       key: 21,
       value: 'Customer arrived to business',
       slug: 'CUSTOMER_ARRIVED_TO_BUSINESS',
-      percentage: 60
+      percentage: 90
     }, {
       key: 22,
       value: 'Looking for driver',
       slug: 'ORDER_LOOKING_FOR_DRIVER',
-      percentage: 35
+      percentage: 30
     }, {
       key: 23,
       value: 'Driver on way',
       slug: 'ORDER_DRIVER_ON_WAY',
-      percentage: 45
+      percentage: 80
     }];
     var objectStatus = orderStatus.find(function (o) {
       return o.key === status;
