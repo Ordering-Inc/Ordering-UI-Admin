@@ -43,7 +43,8 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     handleDeleteDriversGroup = props.handleDeleteDriversGroup,
     handleNextTour = props.handleNextTour,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
-    setIsExtendExtraOpen = props.setIsExtendExtraOpen;
+    setIsExtendExtraOpen = props.setIsExtendExtraOpen,
+    actionDisabled = props.actionDisabled;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
@@ -199,7 +200,8 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       return handleUpdateDriversGroup({
         enabled: enabled
       });
-    }
+    },
+    disabled: actionDisabled
   })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: expandSidebar
@@ -210,7 +212,8 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return onDeleteGroup();
-    }
+    },
+    disabled: actionDisabled
   }, t('DELETE', 'Delete')))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group'))), width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: expandSidebar

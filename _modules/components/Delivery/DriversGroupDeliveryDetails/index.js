@@ -38,7 +38,8 @@ var DriverGroupDeliveryDetailsUI = function DriverGroupDeliveryDetailsUI(props) 
     zoneList = props.zoneList,
     setZoneList = props.setZoneList,
     setIsOpenDetails = props.setIsOpenDetails,
-    isOpenDetails = props.isOpenDetails;
+    isOpenDetails = props.isOpenDetails,
+    actionDisabled = props.actionDisabled;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -56,7 +57,9 @@ var DriverGroupDeliveryDetailsUI = function DriverGroupDeliveryDetailsUI(props) 
       content: actionState === null || actionState === void 0 ? void 0 : actionState.error
     });
   }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_DriversGroupDeliveryZoneList.DriverGroupDeliveryZoneList, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
+    disabled: actionDisabled
+  }, /*#__PURE__*/_react.default.createElement(_DriversGroupDeliveryZoneList.DriverGroupDeliveryZoneList, {
     setZoneList: setZoneList,
     handleParentSidebarMove: handleParentSidebarMove,
     drivergroup: drivergroup,
