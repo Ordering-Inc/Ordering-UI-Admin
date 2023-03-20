@@ -46,7 +46,8 @@ var UserDetailsUI = function UserDetailsUI(props) {
     handleChangeActiveUser = props.handleChangeActiveUser,
     scheduleState = props.scheduleState,
     handleScheduleState = props.handleScheduleState,
-    handleScheduleUpdateUser = props.handleScheduleUpdateUser;
+    handleScheduleUpdateUser = props.handleScheduleUpdateUser,
+    actionDisabled = props.actionDisabled;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
@@ -110,6 +111,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       margin: '0px 5px'
     }
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, handleChangeActiveUser && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    disabled: actionDisabled,
     defaultChecked: (userState === null || userState === void 0 ? void 0 : (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.enabled) || false,
     onChange: function onChange(enabled) {
       var _userState$user4;
@@ -128,16 +130,19 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return setIsCustomField(true);
-    }
+    },
+    disabled: actionDisabled
   }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return setIsPersonalization(true);
-    }
+    },
+    disabled: actionDisabled
   }, t('PERSONALIZATION', 'Personalization')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       var _userState$user6;
       return handleDeleteUser((_userState$user6 = userState.user) === null || _userState$user6 === void 0 ? void 0 : _userState$user6.id);
-    }
+    },
+    disabled: actionDisabled
   }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_UserDetailsMenu.UserDetailsMenu, {
     isDriverMenu: isDriversPage,
     currentMenuSelected: currentMenuSelected,

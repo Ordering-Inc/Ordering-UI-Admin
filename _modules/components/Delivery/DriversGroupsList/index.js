@@ -36,7 +36,8 @@ var DriversGroupsList = function DriversGroupsList(props) {
     selectedGroupList = props.selectedGroupList,
     isFromStore = props.isFromStore,
     handleSelectGroup = props.handleSelectGroup,
-    handleAllSelectGroup = props.handleAllSelectGroup;
+    handleAllSelectGroup = props.handleAllSelectGroup,
+    actionDisabled = props.actionDisabled;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -155,6 +156,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
     }, group === null || group === void 0 ? void 0 : (_group$administrator3 = group.administrator) === null || _group$administrator3 === void 0 ? void 0 : _group$administrator3.name, " ", group === null || group === void 0 ? void 0 : (_group$administrator4 = group.administrator) === null || _group$administrator4 === void 0 ? void 0 : _group$administrator4.lastname), /*#__PURE__*/_react.default.createElement("p", null, group === null || group === void 0 ? void 0 : (_group$administrator5 = group.administrator) === null || _group$administrator5 === void 0 ? void 0 : _group$administrator5.email)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupTypeContainer, null, getTypeTag(group === null || group === void 0 ? void 0 : group.type))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
       className: "group-enabled"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+      disabled: actionDisabled,
       defaultChecked: group === null || group === void 0 ? void 0 : group.enabled,
       onChange: function onChange(enabled) {
         return handleUpdateDriversGroup === null || handleUpdateDriversGroup === void 0 ? void 0 : handleUpdateDriversGroup(group.id, {
@@ -165,7 +167,8 @@ var DriversGroupsList = function DriversGroupsList(props) {
   }))), !driversGroupsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, !isFromStore && /*#__PURE__*/_react.default.createElement(_styles2.AddNewGroupButton, {
     onClick: function onClick() {
       return handleOpenDetails(null);
-    }
+    },
+    disabled: actionDisabled
   }, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')), (currentGroups === null || currentGroups === void 0 ? void 0 : currentGroups.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,

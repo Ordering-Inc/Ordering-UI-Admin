@@ -31,7 +31,8 @@ var DriversGroupPaymethods = function DriversGroupPaymethods(props) {
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     handleAddDriversGroup = props.handleAddDriversGroup,
     handleSelectPaymethod = props.handleSelectPaymethod,
-    handleSelectAllPaymethod = props.handleSelectAllPaymethod;
+    handleSelectAllPaymethod = props.handleSelectAllPaymethod,
+    actionDisabled = props.actionDisabled;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -55,7 +56,9 @@ var DriversGroupPaymethods = function DriversGroupPaymethods(props) {
     }
     setFilteredPaymethods(_filteredPaymethods);
   }, [searchValue]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
+    disabled: actionDisabled
+  }, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,
     lazyLoad: true,

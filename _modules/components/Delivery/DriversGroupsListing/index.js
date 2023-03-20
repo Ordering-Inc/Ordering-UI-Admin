@@ -47,7 +47,8 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     actionState = props.actionState,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     handleDeleteDriversGroup = props.handleDeleteDriversGroup,
-    driversCompanyList = props.driversCompanyList;
+    driversCompanyList = props.driversCompanyList,
+    actionDisabled = props.actionDisabled;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -216,11 +217,12 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     "data-tour": "tour_add_group",
     onClick: function onClick() {
       return handleOpenDetails(null);
-    }
+    },
+    disabled: actionDisabled
   }, t('ADD_DRIVER_GROUP', 'Add driver group')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "secundary",
-    disabled: selectedGroupList.length === 0,
+    disabled: selectedGroupList.length === 0 || actionDisabled,
     onClick: function onClick() {
       return onClickSelectedGroupsDelete();
     }
@@ -240,7 +242,8 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     handleDeleteDriversGroup: handleDeleteDriversGroup,
     selectedGroupList: selectedGroupList,
     handleSelectGroup: handleSelectGroup,
-    handleAllSelectGroup: handleAllSelectGroup
+    handleAllSelectGroup: handleAllSelectGroup,
+    actionDisabled: actionDisabled
   })), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "driver_group_details",
     defaultSideBarWidth: !isExtendExtraOpen ? 540 + moveDistance : 1040,
@@ -273,7 +276,8 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       }
     },
     isTourOpen: isTourOpen,
-    handleNextTour: handleNextTour
+    handleNextTour: handleNextTour,
+    actionDisabled: actionDisabled
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

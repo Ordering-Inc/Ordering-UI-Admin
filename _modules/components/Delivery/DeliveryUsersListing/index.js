@@ -60,7 +60,9 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     onUserRedirect = props.onUserRedirect,
     handleSuccessUpdate = props.handleSuccessUpdate,
     handleSuccessAddUser = props.handleSuccessAddUser,
-    handleSuccessDeleteUser = props.handleSuccessDeleteUser;
+    handleSuccessDeleteUser = props.handleSuccessDeleteUser,
+    actionDisabled = props.actionDisabled,
+    driversGroupsState = props.driversGroupsState;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(null),
@@ -224,7 +226,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleOpenUserAddForm: handleOpenUserAddForm,
     handleOpenTour: function handleOpenTour() {
       return _handleOpenTour();
-    }
+    },
+    actionDisabled: actionDisabled
   }), isShowActiveStateFilter && /*#__PURE__*/_react.default.createElement(_UserActiveStateFilter.UserActiveStateFilter, {
     selectedUserActiveState: selectedUserActiveState,
     handleChangeUserActiveState: handleChangeUserActiveState
@@ -244,7 +247,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleSelectedUsers: handleSelectedUsers,
     userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     handleOpenUserDetails: handleOpenUserDetails,
-    handleOpenUserAddForm: handleOpenUserAddForm
+    handleOpenUserAddForm: handleOpenUserAddForm,
+    actionDisabled: actionDisabled
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     isDriversPage: isDriversPage,
     isDriversManagersPage: isDriversManagersPage,
@@ -257,7 +261,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     },
     handleSuccessUpdate: handleSuccessUpdate,
     handleSuccessDeleteUser: handleSuccessDeleteUser,
-    handleChangeActiveUser: handleChangeActiveUser
+    handleChangeActiveUser: handleChangeActiveUser,
+    actionDisabled: actionDisabled
   }), openUserAddForm && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     open: openUserAddForm,
     noAnimation: isTourOpen,
@@ -272,7 +277,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     onClose: function onClose() {
       return setOpenUserAddForm(false);
     },
-    isTourOpen: isTourOpen
+    isTourOpen: isTourOpen,
+    driversGroupsState: driversGroupsState
   })), isTourOpen && /*#__PURE__*/_react.default.createElement(_WizardDelivery.WizardDelivery, {
     isTourOpen: isTourOpen,
     setIsTourOpen: setIsTourOpen,

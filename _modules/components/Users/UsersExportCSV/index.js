@@ -24,7 +24,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UsersExportCSVUI = function UsersExportCSVUI(props) {
   var actionStatus = props.actionStatus,
-    getCSV = props.getCSV;
+    getCSV = props.getCSV,
+    disabled = props.disabled;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -73,7 +74,7 @@ var UsersExportCSVUI = function UsersExportCSVUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ExportContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "5px",
     color: "secundary",
-    disabled: actionStatus.loading,
+    disabled: actionStatus.loading || disabled,
     onClick: function onClick() {
       return handleCSV();
     }

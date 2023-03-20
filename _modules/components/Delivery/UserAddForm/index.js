@@ -15,6 +15,8 @@ var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
+var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
+var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -34,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserAddFormUI = function UserAddFormUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _formState$changes2, _formState$changes3, _formState$changes4, _validationFields$fie5, _props$afterMidElemen, _props$afterMidCompon;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _formState$changes2, _formState$changes3, _formState$changes4, _validationFields$fie5, _props$afterMidElemen, _props$afterMidCompon, _session$user;
   var formState = props.formState,
     showField = props.showField,
     cleanFormState = props.cleanFormState,
@@ -47,7 +49,10 @@ var UserAddFormUI = function UserAddFormUI(props) {
     isDriversPage = props.isDriversPage,
     isDriversManagersPage = props.isDriversManagersPage,
     handleChangeSwtich = props.handleChangeSwtich,
-    isTourOpen = props.isTourOpen;
+    isTourOpen = props.isTourOpen,
+    driversGroupsState = props.driversGroupsState,
+    selectedDriverGroupIds = props.selectedDriverGroupIds,
+    handleDriverGroupClick = props.handleDriverGroupClick;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -57,6 +62,9 @@ var UserAddFormUI = function UserAddFormUI(props) {
     events = _useEvent2[0];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+    _useSession2 = _slicedToArray(_useSession, 1),
+    session = _useSession2[0];
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     isValidPhoneNumber = _useState2[0],
@@ -362,7 +370,25 @@ var UserAddFormUI = function UserAddFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }), isDriversPage && (session === null || session === void 0 ? void 0 : (_session$user = session.user) === null || _session$user === void 0 ? void 0 : _session$user.level) === 5 && /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupListContainer, null, driversGroupsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupItem, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 20,
+      height: 20
+    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100
+    }));
+  }) : driversGroupsState.groups.map(function (group) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupItem, {
+      key: group.id,
+      onClick: function onClick() {
+        return handleDriverGroupClick(group.id);
+      }
+    }, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+      active: selectedDriverGroupIds.includes(group.id)
+    }, selectedDriverGroupIds.includes(group.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("span", null, group === null || group === void 0 ? void 0 : group.name));
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     type: "submit",

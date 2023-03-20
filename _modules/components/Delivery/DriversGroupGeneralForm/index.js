@@ -31,6 +31,7 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
     setUseAdvanced = props.setUseAdvanced,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     handleAddDriversGroup = props.handleAddDriversGroup,
+    actionDisabled = props.actionDisabled,
     isTourOpen = props.isTourOpen,
     handleNextClick = props.handleNextClick;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -148,7 +149,8 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
   }, [errors]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     "data-tour": "tour_fill_group",
-    onSubmit: handleSubmit(onSubmit)
+    onSubmit: handleSubmit(onSubmit),
+    disabled: actionDisabled
   }, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     value: (_ref = (_changesState$name = changesState === null || changesState === void 0 ? void 0 : changesState.name) !== null && _changesState$name !== void 0 ? _changesState$name : (_driversGroupState$dr = driversGroupState.driversGroup) === null || _driversGroupState$dr === void 0 ? void 0 : _driversGroupState$dr.name) !== null && _ref !== void 0 ? _ref : '',

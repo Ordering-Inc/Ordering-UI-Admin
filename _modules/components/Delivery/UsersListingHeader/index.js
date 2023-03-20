@@ -34,7 +34,8 @@ var UsersListingHeader = function UsersListingHeader(props) {
     handleOpenUserAddForm = props.handleOpenUserAddForm,
     isDriversPage = props.isDriversPage,
     isDriversManagersPage = props.isDriversManagersPage,
-    handleOpenTour = props.handleOpenTour;
+    handleOpenTour = props.handleOpenTour,
+    actionDisabled = props.actionDisabled;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -62,16 +63,19 @@ var UsersListingHeader = function UsersListingHeader(props) {
     onClick: function onClick() {
       return handleOpenUserAddForm();
     },
-    "data-tour": "tour_add"
+    "data-tour": "tour_add",
+    disabled: actionDisabled
   }, isDriversPage ? t('ADD_DRIVER', 'Add driver') : isDriversManagersPage ? t('ADD_DRIVER_MANAGER', 'Add driver manager') : t('ADD_USER', 'Add user')), /*#__PURE__*/_react.default.createElement(_Users.UsersExportCSV, {
     defaultUserTypesSelected: defaultUserTypesSelected,
     disabledActiveStateCondition: disabledActiveStateCondition,
     userTypesSelected: userTypesSelected,
-    selectedUserActiveState: selectedUserActiveState
+    selectedUserActiveState: selectedUserActiveState,
+    disabled: actionDisabled
   }), /*#__PURE__*/_react.default.createElement(_Users.UsersDeleteButton, {
     selectedUsers: selectedUsers,
     deleteUsersActionState: deleteUsersActionState,
-    handleDeleteSeveralUsers: handleDeleteSeveralUsers
+    handleDeleteSeveralUsers: handleDeleteSeveralUsers,
+    disabled: actionDisabled
   }), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
     isCustomLayout: true,

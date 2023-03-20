@@ -30,7 +30,8 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
     changesState = props.changesState,
     handleChangesState = props.handleChangesState,
     handleParentSidebarMove = props.handleParentSidebarMove,
-    handleUpdateDriversGroup = props.handleUpdateDriversGroup;
+    handleUpdateDriversGroup = props.handleUpdateDriversGroup,
+    actionDisabled = props.actionDisabled;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -79,7 +80,9 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
       handleOpenConfig(config, true);
     }
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles2.LogisticsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusWrapper, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.LogisticsContainer, {
+    disabled: actionDisabled
+  }, /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusWrapper, {
     onClick: function onClick() {
       return handleChangesState({
         orders_group_start_in_status: 7

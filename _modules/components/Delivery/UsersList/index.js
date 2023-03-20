@@ -44,7 +44,8 @@ var UsersList = function UsersList(props) {
     handleOpenUserDetails = props.handleOpenUserDetails,
     handleOpenUserAddForm = props.handleOpenUserAddForm,
     isDriversPage = props.isDriversPage,
-    isDriversManagersPage = props.isDriversManagersPage;
+    isDriversManagersPage = props.isDriversManagersPage,
+    actionDisabled = props.actionDisabled;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -134,7 +135,7 @@ var UsersList = function UsersList(props) {
     }
   }, [usersList.users, paginationProps]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", null, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement("th", null), /*#__PURE__*/_react.default.createElement("th", {
-    colspan: 2
+    colSpan: 2
   }, t('ACTION', 'Action')))), usersList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
@@ -199,6 +200,7 @@ var UsersList = function UsersList(props) {
     }), /*#__PURE__*/_react.default.createElement("p", null, (_getUserType = getUserType(user === null || user === void 0 ? void 0 : user.level)) === null || _getUserType === void 0 ? void 0 : _getUserType.value))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
       className: "user_enable_control"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+      disabled: actionDisabled,
       notAsync: user.level === 0,
       defaultChecked: user === null || user === void 0 ? void 0 : user.enabled,
       onChange: function onChange(enabled) {
@@ -208,7 +210,8 @@ var UsersList = function UsersList(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles2.UsersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewUserButton, {
     onClick: function onClick() {
       return handleOpenUserAddForm();
-    }
+    },
+    disabled: actionDisabled
   }, isDriversPage ? t('ADD_NEW_DRIVER', 'Add new driver') : isDriversManagersPage ? t('ADD_NEW_DRIVER_MANAGER', 'Add new driver manager') : t('ADD_NEW_USER', 'Add new user')), (usersList === null || usersList === void 0 ? void 0 : usersList.users.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: paginationProps.currentPage,
     totalPages: paginationProps.totalPages,

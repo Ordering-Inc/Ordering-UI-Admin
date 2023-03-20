@@ -32,7 +32,8 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     handleAddDriversGroup = props.handleAddDriversGroup,
     handleSelectAllBusiness = props.handleSelectAllBusiness,
-    selectedBusinessIds = props.selectedBusinessIds;
+    selectedBusinessIds = props.selectedBusinessIds,
+    actionDisabled = props.actionDisabled;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -67,7 +68,8 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     "data-tour": "tour_select_business",
-    onSubmit: handleSubmit(onSubmit)
+    onSubmit: handleSubmit(onSubmit),
+    disabled: actionDisabled
   }, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,

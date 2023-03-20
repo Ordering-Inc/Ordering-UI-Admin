@@ -27,7 +27,8 @@ var UsersDeleteButtonUI = function UsersDeleteButtonUI(props) {
     getCheckPassword = props.getCheckPassword,
     selectedUsers = props.selectedUsers,
     deleteUsersActionState = props.deleteUsersActionState,
-    handleDeleteSeveralUsers = props.handleDeleteSeveralUsers;
+    handleDeleteSeveralUsers = props.handleDeleteSeveralUsers,
+    disabled = props.disabled;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -73,7 +74,7 @@ var UsersDeleteButtonUI = function UsersDeleteButtonUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "5px",
     color: "secundary",
-    disabled: !selectedUsers.length || deleteUsersActionState.loading,
+    disabled: !selectedUsers.length || deleteUsersActionState.loading || disabled,
     onClick: function onClick() {
       return handleModalOpen();
     }
