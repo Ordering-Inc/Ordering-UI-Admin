@@ -2,6 +2,10 @@ import styled, { css } from 'styled-components'
 
 export const DriversGroupLogsContainer = styled.div`
   height: calc(100% - 180px);
+  ${({ disabled }) => disabled && css`
+    opacity: 0.7;
+    pointer-events: none;
+  `}
 `
 
 export const TableWrapper = styled.div`

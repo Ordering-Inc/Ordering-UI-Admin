@@ -10,7 +10,8 @@ import {
 const UsersExportCSVUI = (props) => {
   const {
     actionStatus,
-    getCSV
+    getCSV,
+    disabled
   } = props
   const [, t] = useLanguage()
   const [popoverOpen, setPopoverOpen] = useState(false)
@@ -54,7 +55,7 @@ const UsersExportCSVUI = (props) => {
         <Button
           borderRadius='5px'
           color='secundary'
-          disabled={actionStatus.loading}
+          disabled={actionStatus.loading || disabled}
           onClick={() => handleCSV()}
         >
           {t('CSV', 'CSV')}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   useLanguage,
+  useSession,
   useEvent,
   DragAndDrop,
   ExamineClick,
@@ -14,6 +15,8 @@ import parsePhoneNumber from 'libphonenumber-js'
 import Skeleton from 'react-loading-skeleton'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
+import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 
 import {
   FormContainer,
@@ -25,7 +28,10 @@ import {
   FormInput,
   ActionsForm,
   SkeletonForm,
-  MainInformationContainer
+  MainInformationContainer,
+  DriverGroupListContainer,
+  DriverGroupItem,
+  CheckboxWrapper
 } from './styles'
 
 const UserAddFormUI = (props) => {
@@ -42,13 +48,16 @@ const UserAddFormUI = (props) => {
     isDriversPage,
     isDriversManagersPage,
     handleChangeSwtich,
-
-    isTourOpen
+    isTourOpen,
+    driversGroupsState,
+    selectedDriverGroupIds,
+    handleDriverGroupClick
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
   const [events] = useEvent()
   const { width } = useWindowSize()
+  const [session] = useSession()
 
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
@@ -349,6 +358,36 @@ const UserAddFormUI = (props) => {
                 props.afterMidComponents?.map((MidComponent, i) => (
                   <MidComponent key={i} {...props} />))
                 }
+                {isDriversPage && session?.user?.level === 5 && (
+                  <DriverGroupListContainer>
+                    {driversGroupsState.loading ? (
+                      [...Array(10).keys()].map(i => (
+                        <DriverGroupItem key={i}>
+                          <Skeleton width={20} height={20} />
+                          <Skeleton width={100} />
+                        </DriverGroupItem>
+                      ))
+                    ) : (
+                      driversGroupsState.groups.map(group => (
+                        <DriverGroupItem
+                          key={group.id}
+                          onClick={() => handleDriverGroupClick(group.id)}
+                        >
+                          <CheckboxWrapper
+                            active={selectedDriverGroupIds.includes(group.id)}
+                          >
+                            {selectedDriverGroupIds.includes(group.id) ? (
+                              <MdCheckBox />
+                            ) : (
+                              <MdCheckBoxOutlineBlank />
+                            )}
+                          </CheckboxWrapper>
+                          <span>{group?.name}</span>
+                        </DriverGroupItem>
+                      ))
+                    )}
+                  </DriverGroupListContainer>
+                )}
                 <ActionsForm>
                   <Button
                     color='primary'
