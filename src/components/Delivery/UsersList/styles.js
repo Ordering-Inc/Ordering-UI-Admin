@@ -17,18 +17,6 @@ export const UsersTable = styled.table`
   td, th {
     padding: 10px 0;
     font-size: 14px;
-    &:first-child {
-      width: 40%;
-    }
-    &:nth-child(2) {
-      width: 20%;
-    }
-
-    &:nth-child(4),
-    
-    &:nth-child(5) {
-      width: 10%;
-    }
   }
 
   thead {
@@ -265,4 +253,8 @@ export const VerifiedItemsContainer = styled.div`
       margin-top: 5px;
     }
   }
+`
+export const UserIdWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `
