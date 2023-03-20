@@ -21,7 +21,8 @@ import {
   ActionsContainer,
   EnableWrapper,
   PagesBottomContainer,
-  AddNewGroupButton
+  AddNewGroupButton,
+  GroupIdWrapper
 } from './styles'
 
 export const DriversGroupsList = (props) => {
@@ -100,7 +101,7 @@ export const DriversGroupsList = (props) => {
             <thead>
               <tr>
                 <th>
-                  <GroupNameContainer isHeader>
+                  <GroupIdWrapper>
                     <CheckBoxWrapper
                       onClick={() => handleAllSelectGroup()}
                       isChecked={!driversGroupsState.loading && (selectedGroupList.length === driversGroupsState.groups.length)}
@@ -111,6 +112,11 @@ export const DriversGroupsList = (props) => {
                           : <MdCheckBoxOutlineBlank />
                       }
                     </CheckBoxWrapper>
+                    <span>{t('ID', 'ID')}</span>
+                  </GroupIdWrapper>
+                </th>
+                <th>
+                  <GroupNameContainer isHeader>
                     <p>{t('GROUP', 'Group')}</p>
                   </GroupNameContainer>
                 </th>
@@ -135,6 +141,12 @@ export const DriversGroupsList = (props) => {
               [...Array(groupsPerPage).keys()].map(i => (
                 <tbody key={i}>
                   <tr>
+                    <td>
+                      <GroupIdWrapper>
+                        <Skeleton width={18} height={18} />
+                        <Skeleton width={40} style={{ margin: '0px 5px' }} />
+                      </GroupIdWrapper>
+                    </td>
                     <td>
                       <GroupNameContainer>
                         <Skeleton width={100} />
@@ -175,7 +187,7 @@ export const DriversGroupsList = (props) => {
                 >
                   <tr>
                     <td>
-                      <GroupNameContainer>
+                      <GroupIdWrapper>
                         <CheckBoxWrapper
                           className='group-checkbox'
                           onClick={() => handleSelectGroup(group.id)}
@@ -187,6 +199,11 @@ export const DriversGroupsList = (props) => {
                               : <MdCheckBoxOutlineBlank />
                           }
                         </CheckBoxWrapper>
+                        <span>{group?.id}</span>
+                      </GroupIdWrapper>
+                    </td>
+                    <td>
+                      <GroupNameContainer>
                         <p>{group?.name}</p>
                       </GroupNameContainer>
                     </td>
