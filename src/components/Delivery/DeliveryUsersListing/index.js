@@ -49,7 +49,8 @@ const DeliveryUsersListingUI = (props) => {
     handleSuccessAddUser,
     handleSuccessDeleteUser,
     actionDisabled,
-    driversGroupsState
+    driversGroupsState,
+    setSelectedUsers
   } = props
 
   const history = useHistory()
@@ -195,6 +196,7 @@ const DeliveryUsersListingUI = (props) => {
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
           actionDisabled={actionDisabled}
+          setSelectedUsers={setSelectedUsers}
         />
       </UsersListingContainer>
 
