@@ -303,7 +303,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
     placeholder: t('FRONT_VISUALS_PASSWORD', 'Password'),
     onChange: handleChangeInput,
     ref: formMethods.register({
-      required: isRequiredField('password') ? t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')) : null,
+      required: t('VALIDATION_ERROR_PASSWORD_REQUIRED', 'The field Password is required').replace('_attribute_', t('PASSWORD', 'Password')),
       minLength: {
         value: 8,
         message: t('VALIDATION_ERROR_PASSWORD_MIN_STRING', 'The Password must be at least 8 characters.').replace('_attribute_', t('PASSWORD', 'Password')).replace('_min_', 8)

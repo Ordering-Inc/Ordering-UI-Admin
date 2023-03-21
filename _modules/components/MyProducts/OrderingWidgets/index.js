@@ -52,15 +52,11 @@ var OrderingWidgets = function OrderingWidgets() {
     placeholder: t('CODE', 'Code'),
     value: widgetPopup,
     disabled: true
-  })), /*#__PURE__*/_react.default.createElement("h3", null, t('CHAT_STYLE_INTEGRATION', 'Chat style integration')), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, "1* ", t('INSERT_ON_DIV_DISPLAY', 'Insert in the div where you want to display it.')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    placeholder: t('CODE', 'Code'),
-    defaultValue: "<button onclick=\"toggleOrderingWidget()\">".concat(t('Online_Ordering', 'Online Ordering'), "</button>"),
-    disabled: true
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, "2* ", t('INSERT_ON_END_BODY', 'Insert at the end of the body tag'), " (", t('IF_USED_PAYPALEXPRESS', 'Use only if Paypal Express is used'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), /*#__PURE__*/_react.default.createElement("h3", null, t('CHAT_STYLE_INTEGRATION', 'Chat style integration')), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, "1* ", t('INSERT_ON_END_BODY', 'Insert at the end of the body tag'), " (", t('IF_USED_PAYPALEXPRESS', 'Use only if Paypal Express is used'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('CODE', 'Code'),
     defaultValue: "<script src=\"https://www.paypalobjects.com/api/checkout.js\"></script>",
     disabled: true
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, "3* ", t('INSERT_ON_END_BODY', 'Insert at the end of the body tag')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, "2* ", t('INSERT_ON_END_BODY', 'Insert at the end of the body tag')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     placeholder: t('CODE', 'Code'),
     value: widgetBot,
     disabled: true
