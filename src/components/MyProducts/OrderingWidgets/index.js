@@ -68,15 +68,7 @@ export const OrderingWidgets = () => {
           </FormGroup>
           <h3>{t('CHAT_STYLE_INTEGRATION', 'Chat style integration')}</h3>
           <FormGroup>
-            <label>1* {t('INSERT_ON_DIV_DISPLAY', 'Insert in the div where you want to display it.')}</label>
-            <Input
-              placeholder={t('CODE', 'Code')}
-              defaultValue={`<button onclick="toggleOrderingWidget()">${t('Online_Ordering', 'Online Ordering')}</button>`}
-              disabled
-            />
-          </FormGroup>
-          <FormGroup>
-            <label>2* {t('INSERT_ON_END_BODY', 'Insert at the end of the body tag')} ({t('IF_USED_PAYPALEXPRESS', 'Use only if Paypal Express is used')})</label>
+            <label>1* {t('INSERT_ON_END_BODY', 'Insert at the end of the body tag')} ({t('IF_USED_PAYPALEXPRESS', 'Use only if Paypal Express is used')})</label>
             <Input
               placeholder={t('CODE', 'Code')}
               defaultValue='<script src="https://www.paypalobjects.com/api/checkout.js"></script>'
@@ -84,7 +76,7 @@ export const OrderingWidgets = () => {
             />
           </FormGroup>
           <FormGroup>
-            <label>3* {t('INSERT_ON_END_BODY', 'Insert at the end of the body tag')}</label>
+            <label>2* {t('INSERT_ON_END_BODY', 'Insert at the end of the body tag')}</label>
             <TextArea
               placeholder={t('CODE', 'Code')}
               value={widgetBot}
