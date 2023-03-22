@@ -26,7 +26,8 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     value = props.value,
     setValue = props.setValue,
     handleIsValid = props.handleIsValid,
-    disabled = props.disabled;
+    disabled = props.disabled,
+    isUser = props.isUser;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -63,7 +64,8 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     placeholder: t('PHONE_NUMBER', 'Phone number'),
     defaultCountry: configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.value,
     value: value,
-    displayInitialValueAsLocalNumber: true,
+    displayInitialValueAsLocalNumber: !isUser,
+    international: isUser,
     onChange: function onChange(val) {
       return setValue && setValue(val, isValidPhoneNumber(val));
     }

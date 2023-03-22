@@ -280,7 +280,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
-    handleIsValid: setIsValidPhoneNumber
+    handleIsValid: setIsValidPhoneNumber,
+    isUser: true
   }), !isCheckout && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPassword, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: !passwordSee ? 'password' : 'text',
     name: "password",

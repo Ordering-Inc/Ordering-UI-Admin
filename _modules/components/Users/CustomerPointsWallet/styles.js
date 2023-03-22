@@ -4,15 +4,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tabs = exports.Tab = exports.PointsWrapper = exports.PointsWalletContainer = exports.LoyaltyLevelContent = exports.LoyaltyLevel = exports.LevelWrapper = exports.EqualWrapper = exports.Container = void 0;
+exports.Tabs = exports.Tab = exports.SectionContainer = exports.PointsWrapper = exports.PointsWalletContainer = exports.LoyaltyLevelContent = exports.LoyaltyLevel = exports.LevelWrapper = exports.FormController = exports.EqualWrapper = exports.Container = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px;\n  width: 100%;\n\n  > h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin-top: 0;\n    margin-bottom: 7px;\n  }\n"])));
 exports.Container = Container;
-var PointsWalletContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding-top: 30px;\n"])));
+var PointsWalletContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  padding: 30px 0;\n"])));
 exports.PointsWalletContainer = PointsWalletContainer;
 var PointsWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  h2 {\n    font-weight: 500;\n    font-size: 24px;\n    line-height: 36px;\n    margin: 0px;\n  }\n  p {\n    margin: 0px;\n    font-size: 14px;\n    line-height: 24px;\n  }\n"])));
 exports.PointsWrapper = PointsWrapper;
@@ -47,3 +47,7 @@ var LoyaltyLevelContent = _styledComponents.default.div(_templateObject14 || (_t
   return props.theme.colors.primary;
 });
 exports.LoyaltyLevelContent = LoyaltyLevelContent;
+var SectionContainer = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  margin-top: 54px;\n  margin-bottom: 30px;\n  > p {\n    font-size: 16px;\n    font-weight: 600;\n    margin-top: 0;\n    margin-bottom: 22px;\n  }\n  > button {\n    height: 44px;\n  }\n"])));
+exports.SectionContainer = SectionContainer;
+var FormController = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 26px;\n\n  label {\n    font-size: 14px;\n    margin-bottom: 10px;\n  }\n\n  input,\n  textarea {\n    font-size: 14px;\n  }\n\n  input::-webkit-outer-spin-button,\n  input::-webkit-inner-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n  }\n\n  input[type=number] {\n    -moz-appearance: textfield;\n  }\n"])));
+exports.FormController = FormController;
