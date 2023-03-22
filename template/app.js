@@ -73,6 +73,7 @@ import { Profile } from './pages/Profile'
 import settings from './config.json'
 import { BusinessAdd } from './pages/BusinessAdd'
 import { CustomProject } from './pages/CustomProject'
+import { OrderingWidgets } from './pages/OrderingWidgets'
 
 export const App = () => {
   const [{ auth, loading, user }] = useSession()
@@ -323,6 +324,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/my-products/custom-project' allowedLevels={[0]}>
                       <CustomProject />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/my-products/ordering-widgets' allowedLevels={[0]}>
+                      <OrderingWidgets />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/settings/basic' allowedLevels={[0]}>
