@@ -1485,6 +1485,12 @@ Object.defineProperty(exports, "OrderingWebsite", {
     return _MyProducts.OrderingWebsite;
   }
 });
+Object.defineProperty(exports, "OrderingWidgets", {
+  enumerable: true,
+  get: function get() {
+    return _MyProducts.OrderingWidgets;
+  }
+});
 Object.defineProperty(exports, "OrdersCards", {
   enumerable: true,
   get: function get() {
