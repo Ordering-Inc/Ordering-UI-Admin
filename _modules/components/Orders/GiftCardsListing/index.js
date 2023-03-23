@@ -68,9 +68,9 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
       return setActiveStatus('pending');
     }
   }, t('ORDER_PENDING', 'Pending')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
-    active: activeStatus === 'sent',
+    active: activeStatus === 'activated',
     onClick: function onClick() {
-      return setActiveStatus('sent');
+      return setActiveStatus('activated');
     }
   }, t('REDEEMED', 'Redeemed'))), /*#__PURE__*/_react.default.createElement(_styles2.GiftCardsTableWrapper, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('ID', 'ID')), /*#__PURE__*/_react.default.createElement("th", null, t('PURCHASED_BY', 'Purchased by')), /*#__PURE__*/_react.default.createElement("th", null, t('REDEEMED_BY', 'Redeemed by')), /*#__PURE__*/_react.default.createElement("th", null, t('PURCHASED_DATE', 'Purchased date')), /*#__PURE__*/_react.default.createElement("th", null, t('REDEEMED_DATE', 'Redeemed date')))), giftCards.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.GiftCardRow, {
