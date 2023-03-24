@@ -18,14 +18,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessCateringDelivery = function BusinessCateringDelivery(props) {
-  var _business$configs, _cateringValues$find, _cateringValues$find4, _cateringValues$find7, _cateringValues$find10, _cateringValues$find13;
+  var _ref, _cateringValues$find, _cateringValues$find4, _cateringValues$find7, _cateringValues$find10, _cateringValues$find13;
   var business = props.business,
     type = props.type,
     changePreorderConfigs = props.changePreorderConfigs;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var cateringValues = business === null || business === void 0 ? void 0 : (_business$configs = business.configs) === null || _business$configs === void 0 ? void 0 : _business$configs.filter(function (config) {
+  var cateringValues = (_ref = (business === null || business === void 0 ? void 0 : business.configs) || []) === null || _ref === void 0 ? void 0 : _ref.filter(function (config) {
     return config.key.includes('preorder');
   }).map(function (config) {
     return {
