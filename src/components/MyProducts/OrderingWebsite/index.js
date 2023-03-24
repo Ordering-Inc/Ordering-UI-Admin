@@ -335,6 +335,9 @@ const OrderingWebsiteUI = (props) => {
                           placeholder={t('SLUG', 'Slug')}
                           value={themeValues?.website_theme?.components?.franchise_slug || ''}
                           onChange={e => handleChangeValue(e.target.value, 'website_theme', 'franchise_slug')}
+                          onKeyPress={e => {
+                            if (e.which === 32) { e.preventDefault() }
+                          }}
                         />
                       </SlugWrapper>
                     )}
@@ -353,6 +356,9 @@ const OrderingWebsiteUI = (props) => {
                           placeholder={t('SLUG', 'Slug')}
                           value={themeValues?.website_theme?.components?.business_slug || ''}
                           onChange={e => handleChangeValue(e.target.value, 'website_theme', 'business_slug')}
+                          onKeyPress={e => {
+                            if (e.which === 32) { e.preventDefault() }
+                          }}
                         />
                       </SlugWrapper>
                     )}
