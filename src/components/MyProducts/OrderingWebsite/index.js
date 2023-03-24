@@ -8,8 +8,11 @@ import {
   Image as DumyPhoto,
   CheckSquareFill as CheckedIcon,
   Square as UnCheckedIcon,
-  InfoCircle
+  InfoCircle,
+  RecordCircleFill,
+  Circle
 } from 'react-bootstrap-icons'
+
 import { useTheme } from 'styled-components'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
 import { ContentForm } from '../ContentForm'
@@ -39,7 +42,9 @@ import {
   Tabs,
   Tab,
   HeaderInfoWrapper,
-  InfoContent
+  InfoContent,
+  RadioItem,
+  SlugWrapper
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 import { AdvancedSettings } from '../AdvancedSettings'
@@ -300,6 +305,59 @@ const OrderingWebsiteUI = (props) => {
                     </Button>
                   )}
                 </FormGroup>
+              </InnerBlock>
+            </InputFormWrapper>
+            <InputFormWrapper>
+              <InnerBlock>
+                <h4>{t('WEBSITE_THEME', 'Website Theme')}</h4>
+                {orderingTheme?.loading ? (
+                  <Skeleton height={20} width={150} />
+                ) : (
+                  <>
+                    <RadioItem
+                      onClick={() => handleChangeValue('marketplace', 'website_theme', 'type')}
+                    >
+                      {themeValues?.website_theme?.components?.type === 'marketplace' ? <RecordCircleFill className='active' /> : <Circle />}
+                      <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                    </RadioItem>
+
+                    <RadioItem
+                      onClick={() => handleChangeValue('franchise', 'website_theme', 'type')}
+                    >
+                      {themeValues?.website_theme?.components?.type === 'franchise' ? <RecordCircleFill className='active' /> : <Circle />}
+                      <span>{t('REPORT_HEADER_FRANCHISES', 'Franchise')}</span>
+                    </RadioItem>
+                    {themeValues?.website_theme?.components?.type === 'franchise' && (
+                      <SlugWrapper>
+                        <label>{t('FRANCHISE_SLUG', 'Franchise slug')}</label>
+                        <Input
+                          name='name'
+                          placeholder={t('SLUG', 'Slug')}
+                          value={themeValues?.website_theme?.components?.franchise_slug || ''}
+                          onChange={e => handleChangeValue(e.target.value, 'website_theme', 'franchise_slug')}
+                        />
+                      </SlugWrapper>
+                    )}
+
+                    <RadioItem
+                      onClick={() => handleChangeValue('single_store', 'website_theme', 'type')}
+                    >
+                      {themeValues?.website_theme?.components?.type === 'single_store' ? <RecordCircleFill className='active' /> : <Circle />}
+                      <span>{t('SINGLE_STORE', 'Single Store')}</span>
+                    </RadioItem>
+                    {themeValues?.website_theme?.components?.type === 'single_store' && (
+                      <SlugWrapper>
+                        <label>{t('BUSINESS_SLUG', 'Business slug')}</label>
+                        <Input
+                          name='name'
+                          placeholder={t('SLUG', 'Slug')}
+                          value={themeValues?.website_theme?.components?.business_slug || ''}
+                          onChange={e => handleChangeValue(e.target.value, 'website_theme', 'business_slug')}
+                        />
+                      </SlugWrapper>
+                    )}
+                  </>
+                )}
               </InnerBlock>
             </InputFormWrapper>
             <InputFormWrapper>
