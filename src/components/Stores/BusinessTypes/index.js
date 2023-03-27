@@ -55,7 +55,7 @@ export const BusinessTypes = (props) => {
     const businessId = query.get('id')
     const section = query.get('section')
     const tab = query.get('tab')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&business_type=${category.id}`)
+    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&business_type=${category?.id}`)
   }
 
   const handleCloseDetail = () => {

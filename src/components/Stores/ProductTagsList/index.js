@@ -52,7 +52,7 @@ const ProductTagsListUI = (props) => {
       const product = query.get('product')
       const section = query.get('section')
       const tab = query.get('tab')
-      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&tab=${tab}&tag=${tag.id}`)
+      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&tab=${tab}&tag=${tag?.id}`)
     }
   }
 
