@@ -85,7 +85,7 @@ var BusinessTypes = function BusinessTypes(props) {
     var businessId = query.get('id');
     var section = query.get('section');
     var tab = query.get('tab');
-    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&business_type=").concat(category.id));
+    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&business_type=").concat(category === null || category === void 0 ? void 0 : category.id));
   };
   var handleCloseDetail = function handleCloseDetail() {
     setIsOpenTypeDetail(false);

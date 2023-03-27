@@ -62,7 +62,7 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
       var businessId = query.get('id');
       var section = query.get('section');
       var tab = query.get('tab');
-      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&zone=").concat(zone.id));
+      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&zone=").concat(zone === null || zone === void 0 ? void 0 : zone.id));
     }
   };
   (0, _react.useEffect)(function () {

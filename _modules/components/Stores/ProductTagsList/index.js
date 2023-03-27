@@ -70,7 +70,7 @@ var ProductTagsListUI = function ProductTagsListUI(props) {
       var product = query.get('product');
       var section = query.get('section');
       var tab = query.get('tab');
-      history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(section, "&tab=").concat(tab, "&tag=").concat(tag.id));
+      history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(section, "&tab=").concat(tab, "&tag=").concat(tag === null || tag === void 0 ? void 0 : tag.id));
     }
   };
   var handleCloseDetail = function handleCloseDetail() {
