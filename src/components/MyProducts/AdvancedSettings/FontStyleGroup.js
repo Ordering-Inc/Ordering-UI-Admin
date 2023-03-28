@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
 import { Select } from '../../../styles/Select/FirstSelect'
@@ -13,6 +13,9 @@ import {
 export const FontStyleGroup = (props) => {
   const { isBody, fonts, path, handleUpdateThemeValue } = props
   const [, t] = useLanguage()
+
+  const [weights, setWeights] = useState([])
+  const [font, setFont] = useState('Poppins')
 
   const fontFamilyList = [
     { value: 'Poppins', content: <Option>{t('POPPINS', 'Poppins')}</Option> },
@@ -32,6 +35,21 @@ export const FontStyleGroup = (props) => {
     { value: 900, name: '900 - Black (Heavy)' }
   ]
 
+  const handleChangeWeights = (value) => {
+    handleUpdateThemeValue([value], [path, 'weights'].join('.'))
+    setWeights([value])
+  }
+
+  const handleUpdateFont = (value) => {
+    handleUpdateThemeValue(value, [path, 'name'].join('.'))
+    setFont(value)
+  }
+
+  useEffect(() => {
+    setWeights(fonts?.weights)
+    setFont(fonts?.name)
+  }, [JSON.stringify(fonts)])
+
   return (
     <>
       <FormControl>
@@ -40,9 +58,9 @@ export const FontStyleGroup = (props) => {
           <Select
             options={fontFamilyList}
             className='select'
-            defaultValue={fonts?.name}
+            defaultValue={font}
             placeholder={t('SELECT_OPTION', 'Select an option')}
-            onChange={(value) => handleUpdateThemeValue(value, [path, 'name'].join('.'))}
+            onChange={(value) => handleUpdateFont(value)}
           />
         </SelectWrapper>
       </FormControl>
@@ -52,8 +70,8 @@ export const FontStyleGroup = (props) => {
         </label>
         <FontWeightListWrapper>
           {fontWeightList.map(weight => (
-            <FontWeightItem key={weight.value} onClick={() => handleUpdateThemeValue([weight?.value], [path, 'weights'].join('.'))}>
-              {fonts?.weights?.includes(weight.value) ? <RecordCircleFill className='active' /> : <Circle />}
+            <FontWeightItem key={weight.value} onClick={() => handleChangeWeights(weight?.value)}>
+              {weights?.includes(weight.value) ? <RecordCircleFill className='active' /> : <Circle />}
               <span>{weight.name}</span>
             </FontWeightItem>
           ))}
