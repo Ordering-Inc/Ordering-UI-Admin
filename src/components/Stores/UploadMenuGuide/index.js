@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useLanguage, ExamineClick, DragAndDrop, UploadMenu } from 'ordering-components-admin'
 import { CloudUploadFill, FileEarmarkPdfFill } from 'react-bootstrap-icons'
 import { Button, Input } from '../../../styles'
@@ -75,6 +75,15 @@ const UploadMenuGuideUI = (props) => {
       })
     }
   }
+
+  useEffect(() => {
+    if (formState?.error) {
+      setAlertState({
+        open: true,
+        content: formState.error
+      })
+    }
+  }, [formState?.error])
 
   return (
     <>
