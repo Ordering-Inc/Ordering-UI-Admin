@@ -44,7 +44,6 @@ var SettingsListUI = function SettingsListUI(props) {
     handleClickUpdate = props.handleClickUpdate,
     saveConfig = props.saveConfig,
     isCampaign = props.isCampaign;
-  var settingsNotAllowed = ['guest_checkout_enabled', 'allowed_order_types_guest_checkout'];
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -157,7 +156,7 @@ var SettingsListUI = function SettingsListUI(props) {
     height: 44
   })), !settingsState.error && !settingsState.loading && configs && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles2.GeneralContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, null, configs.length > 0 && configs.map(function (config, i) {
     var _config$options, _config$options2, _config$options3, _config$options4, _config$value, _config$value$split, _config$value$split$f;
-    return !settingsNotAllowed.includes(config.key) && /*#__PURE__*/_react.default.createElement("div", {
+    return /*#__PURE__*/_react.default.createElement("div", {
       key: i
     }, config.type === 1 && /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
       className: "form-group"
