@@ -157,7 +157,7 @@ export const AppResources = (props) => {
         <Button
           color='primary'
           borderRadius='8px'
-          onClick={() => handleUpdateSiteTheme(true)}
+          onClick={() => handleUpdateSiteTheme(advancedValues)}
         >
           {t('SAVE', 'Save')}
         </Button>

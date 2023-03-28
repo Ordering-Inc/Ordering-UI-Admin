@@ -1,22 +1,18 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Select } from '../../../styles/Select/FirstSelect'
+import { ColorPicker } from '../../Shared'
+import { Input } from '../../../styles'
+import { HideCheckBox } from './HideCheckBox'
 import { ImageBox } from './ImageBox'
 import {
-  CheckSquareFill as CheckedIcon,
-  Square as UnCheckedIcon
-} from 'react-bootstrap-icons'
-import {
   FormControl,
-  HideCheckWrapper,
   SelectWrapper,
   Option
 } from './styles'
-import { ColorPicker } from '../../Shared'
-import { Input } from '../../../styles'
 
 export const SettingComponent = (props) => {
-  const { settingList, handleUpdateThemeValue, advancedValues, themeStructure } = props
+  const { settingList, handleUpdateThemeValue, advancedValues, themeStructure, noLabel } = props
 
   const [, t] = useLanguage()
 
@@ -47,13 +43,12 @@ export const SettingComponent = (props) => {
       {settingList.map((setting, i) => (
         <React.Fragment key={i}>
           {setting.type === 'hidden' && (
-            <FormControl>
-              <label>{setting.name}</label>
-              <HideCheckWrapper onClick={() => handleUpdateThemeValue(!deepFind(advancedValues, setting?.path), setting?.path)}>
-                {deepFind(advancedValues, setting?.path) ? <CheckedIcon className='active' /> : <UnCheckedIcon />}
-                <span>{t('HIDDEN', 'Hidden')}</span>
-              </HideCheckWrapper>
-            </FormControl>
+            <HideCheckBox
+              handleUpdateThemeValue={handleUpdateThemeValue}
+              setting={setting}
+              initialCheck={deepFind(advancedValues, setting?.path)}
+              noLabel={noLabel}
+            />
           )}
           {setting.type === 'position' && (
             <FormControl>
