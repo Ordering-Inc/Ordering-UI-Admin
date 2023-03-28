@@ -7,11 +7,11 @@ exports.SettingComponent = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
-var _ImageBox = require("./ImageBox");
-var _reactBootstrapIcons = require("react-bootstrap-icons");
-var _styles = require("./styles");
 var _Shared = require("../../Shared");
-var _styles2 = require("../../../styles");
+var _styles = require("../../../styles");
+var _HideCheckBox = require("./HideCheckBox");
+var _ImageBox = require("./ImageBox");
+var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -23,7 +23,8 @@ var SettingComponent = function SettingComponent(props) {
   var settingList = props.settingList,
     handleUpdateThemeValue = props.handleUpdateThemeValue,
     advancedValues = props.advancedValues,
-    themeStructure = props.themeStructure;
+    themeStructure = props.themeStructure,
+    noLabel = props.noLabel;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -46,7 +47,7 @@ var SettingComponent = function SettingComponent(props) {
     var updatedOptions = options.map(function (option) {
       return {
         value: option,
-        content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t(option.toString().toUpperCase(), option))
+        content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t(option.toString().toUpperCase(), option))
       };
     });
     return updatedOptions;
@@ -54,13 +55,12 @@ var SettingComponent = function SettingComponent(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, settingList.map(function (setting, i) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
-    }, setting.type === 'hidden' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, setting.name), /*#__PURE__*/_react.default.createElement(_styles.HideCheckWrapper, {
-      onClick: function onClick() {
-        return handleUpdateThemeValue(!deepFind(advancedValues, setting === null || setting === void 0 ? void 0 : setting.path), setting === null || setting === void 0 ? void 0 : setting.path);
-      }
-    }, deepFind(advancedValues, setting === null || setting === void 0 ? void 0 : setting.path) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
-      className: "active"
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement("span", null, t('HIDDEN', 'Hidden')))), setting.type === 'position' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, setting.name), /*#__PURE__*/_react.default.createElement(_styles.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    }, setting.type === 'hidden' && /*#__PURE__*/_react.default.createElement(_HideCheckBox.HideCheckBox, {
+      handleUpdateThemeValue: handleUpdateThemeValue,
+      setting: setting,
+      initialCheck: deepFind(advancedValues, setting === null || setting === void 0 ? void 0 : setting.path),
+      noLabel: noLabel
+    }), setting.type === 'position' && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, setting.name), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
       options: getOptions(setting === null || setting === void 0 ? void 0 : setting.path),
       className: "select",
       defaultValue: deepFind(advancedValues, setting === null || setting === void 0 ? void 0 : setting.path),
@@ -74,12 +74,12 @@ var SettingComponent = function SettingComponent(props) {
       photo: deepFind(advancedValues, setting === null || setting === void 0 ? void 0 : setting.path),
       path: setting === null || setting === void 0 ? void 0 : setting.path,
       handleChangePhoto: handleUpdateThemeValue
-    }), setting.type === 'color' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, setting.name), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
+    }), setting.type === 'color' && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, setting.name), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
       defaultColor: deepFind(advancedValues, setting === null || setting === void 0 ? void 0 : setting.path) || '#2C7BE5',
       onChangeColor: function onChangeColor(color) {
         return handleUpdateThemeValue(color, setting === null || setting === void 0 ? void 0 : setting.path);
       }
-    })), setting.type === 'input' && /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, setting.name), /*#__PURE__*/_react.default.createElement(_styles2.Input, {
+    })), setting.type === 'input' && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, setting.name), /*#__PURE__*/_react.default.createElement(_styles.Input, {
       defaultValue: deepFind(advancedValues, setting === null || setting === void 0 ? void 0 : setting.path),
       onChange: function onChange(e) {
         return handleUpdateThemeValue(e.target.value, setting === null || setting === void 0 ? void 0 : setting.path);

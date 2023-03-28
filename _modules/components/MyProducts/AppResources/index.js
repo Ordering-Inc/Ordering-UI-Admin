@@ -125,7 +125,7 @@ var AppResources = function AppResources(props) {
     color: "primary",
     borderRadius: "8px",
     onClick: function onClick() {
-      return handleUpdateSiteTheme(true);
+      return handleUpdateSiteTheme(advancedValues);
     }
   }, t('SAVE', 'Save'))));
 };
