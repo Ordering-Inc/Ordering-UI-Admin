@@ -11,7 +11,8 @@ export const InputPhoneNumber = (props) => {
     value,
     setValue,
     handleIsValid,
-    disabled
+    disabled,
+    isUser
   } = props
 
   const [, t] = useLanguage()
@@ -44,7 +45,8 @@ export const InputPhoneNumber = (props) => {
           placeholder={t('PHONE_NUMBER', 'Phone number')}
           defaultCountry={configs?.default_country_code?.value}
           value={value}
-          displayInitialValueAsLocalNumber
+          displayInitialValueAsLocalNumber={!isUser}
+          international={isUser}
           onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val))}
         />
         {value && !isValidPhoneNumber(value) && !disabled && (

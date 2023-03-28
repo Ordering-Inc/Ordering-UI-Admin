@@ -448,3 +448,40 @@ export const InfoContent = styled.div`
     min-width: 535px;
   }
 `
+export const RadioItem = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  cursor: pointer;
+
+  svg {
+    font-size: 16px;
+    color: ${props => props.theme.colors.secundaryLight};
+    &.active {
+      color: ${props => props.theme.colors.primary};
+    }
+    margin-right: 20px;
+    ${props => props.theme.rtl && css`
+      margin-left: 20px;
+      margin-right: 0px;
+    `}
+  }
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+  }
+`
+export const SlugWrapper = styled.div`
+  margin-bottom: 20px;
+  label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  > input, textarea {
+    width: 100%;
+  }
+`

@@ -17,15 +17,6 @@ export const GroupsTable = styled.table`
   td, th {
     padding: 13px 0;
     font-size: 12px;
-    &:first-child {
-      width: 30%;
-    }
-
-    &:nth-child(2),    
-    &:nth-child(3),    
-    &:nth-child(4) {
-      width: 18%;
-    }
   }
 
   thead {
@@ -83,11 +74,6 @@ export const GroupNameContainer = styled(BorderWrapper)`
 
 export const CheckBoxWrapper = styled.div`
   cursor: pointer;
-  ${props => props.theme?.rtl ? css`
-    margin-left: 20px;
-  ` : css`
-    margin-right: 20px;
-  `}
   svg {
     font-size: 24px;
     color: #B1BCCC;
@@ -228,4 +214,13 @@ export const AddNewGroupButton = styled.div`
     cursor: not-allowed;
     pointer-events: none;
   `}
+`
+
+export const GroupIdWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  > span {
+    margin: 0 20px;
+  }
 `

@@ -52,7 +52,7 @@ export const BusinessDeliveryZoneList = (props) => {
       const businessId = query.get('id')
       const section = query.get('section')
       const tab = query.get('tab')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&zone=${zone.id}`)
+      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&zone=${zone?.id}`)
     }
   }
 

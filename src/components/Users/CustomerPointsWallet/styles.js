@@ -14,7 +14,7 @@ export const Container = styled.div`
 
 export const PointsWalletContainer = styled.div`
   width: 100%;
-  padding-top: 30px;
+  padding: 30px 0;
 `
 
 export const PointsWrapper = styled.div`
@@ -119,5 +119,44 @@ export const LoyaltyLevelContent = styled.div`
     color: ${props => props.theme.colors.primary};
     margin-top: 15px;
     text-align: center;
+  }
+`
+
+export const SectionContainer = styled.div`
+  margin-top: 54px;
+  margin-bottom: 30px;
+  > p {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 22px;
+  }
+  > button {
+    height: 44px;
+  }
+`
+export const FormController = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 26px;
+
+  label {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  input,
+  textarea {
+    font-size: 14px;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
   }
 `

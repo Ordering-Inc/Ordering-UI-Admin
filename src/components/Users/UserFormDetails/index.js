@@ -276,6 +276,7 @@ export const UserFormDetailsUI = (props) => {
                 value={userPhoneNumber}
                 setValue={handleChangePhoneNumber}
                 handleIsValid={setIsValidPhoneNumber}
+                isUser
               />
             )}
             {!isCheckout && (

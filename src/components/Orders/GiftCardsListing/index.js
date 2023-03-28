@@ -74,8 +74,8 @@ const GiftCardsListingUI = (props) => {
           {t('ORDER_PENDING', 'Pending')}
         </Tab>
         <Tab
-          active={activeStatus === 'sent'}
-          onClick={() => setActiveStatus('sent')}
+          active={activeStatus === 'activated'}
+          onClick={() => setActiveStatus('activated')}
         >
           {t('REDEEMED', 'Redeemed')}
         </Tab>

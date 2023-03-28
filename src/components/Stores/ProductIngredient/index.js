@@ -36,7 +36,7 @@ export const ProductIngredient = (props) => {
       const category = query.get('category')
       const product = query.get('product')
       const section = query.get('section')
-      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&ingredient=${ingredient.id}`)
+      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&ingredient=${ingredient?.id}`)
     }
   }
 
