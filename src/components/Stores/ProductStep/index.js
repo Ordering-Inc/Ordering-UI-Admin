@@ -24,7 +24,8 @@ const ProductStepUI = (props) => {
     business,
     isLoading,
     orderingBusiness,
-    countriesState
+    countriesState,
+    handleOpenCategoryDetails
   } = props
 
   const theme = useTheme()
@@ -37,6 +38,11 @@ const ProductStepUI = (props) => {
   const handleCheckMenu = () => {
     events.emit('go_to_page', { page: 'store', params: { store: business?._id } })
     onClose()
+  }
+
+  const handleAddManuallyProduct = () => {
+    onClose()
+    handleOpenCategoryDetails()
   }
 
   return (
@@ -63,7 +69,7 @@ const ProductStepUI = (props) => {
           </ImageContent>
         </ImportMenuContainer>
       )}
-      {step === 3 && option === 2 && !actionState?.loading && (
+      {step === 3 && option === 2 && !actionState?.loading && actionState?.content?.products > 0 && (
         <ImportMenuContainer>
           <h2>{t('YOUR_MENU_HAS_BEEN_IMPORTED', 'Your menu has been imported')}</h2>
           <ImageContent>
@@ -71,6 +77,17 @@ const ProductStepUI = (props) => {
           </ImageContent>
           <ButtonWrapper>
             <Button color='primary' onClick={() => handleCheckMenu()}>{t('CHECK_MENU', 'Check menu')}</Button>
+          </ButtonWrapper>
+        </ImportMenuContainer>
+      )}
+      {step === 3 && option === 2 && !actionState?.loading && actionState?.content?.products === 0 && (
+        <ImportMenuContainer>
+          <h2>{t('YOUR_MENU_COULDNT__BE_IMPORTED', 'Your menu couldn\'t be imported')}</h2>
+          <ImageContent>
+            <img src={theme.images.general.importMenu} alt='' />
+          </ImageContent>
+          <ButtonWrapper>
+            <Button color='primary' onClick={handleAddManuallyProduct}>{t('ADD_PRODUCTS_MANUALLY', 'Add products manually')}</Button>
           </ButtonWrapper>
         </ImportMenuContainer>
       )}
