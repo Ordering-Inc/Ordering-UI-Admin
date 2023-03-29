@@ -149,6 +149,14 @@ export const BusinessDetailsUI = (props) => {
   }, [actionStatus?.error])
 
   useEffect(() => {
+    if (!businessState?.error) return
+    setAlertState({
+      open: true,
+      content: businessState?.error
+    })
+  }, [businessState?.error])
+
+  useEffect(() => {
     if (businessState?.loading) return
     const detailKey = query.get('section')
     if (detailKey) {
@@ -265,7 +273,7 @@ export const BusinessDetailsUI = (props) => {
           )}
           {selectedItem === 'custom_fields' && (
             <BusinessCustomFields
-              businessId={businessState?.business.id}
+              businessId={businessState?.business?.id}
               metafields={businessState?.business?.metafields}
               handleSuccessAddMetaFields={(result) => handleSuccessAddBusinessItem('metafields', result)}
               handleSuccessDeleteBusinessMetaFields={(id) => handleSuccessDeleteBusinessItem('metafields', id)}

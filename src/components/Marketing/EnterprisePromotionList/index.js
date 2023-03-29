@@ -273,7 +273,7 @@ export const EnterprisePromotionList = (props) => {
       </PromotionListContainer>
       <PromotionListBottom eventDisabled={eventDisabled}>
         <AddNewButton
-          onClick={() => handleOpenDetails({})}
+          onClick={() => handleOpenDetails()}
         >
           {t('ADD_NEW_PROMOTION', 'Add new promotion')}
         </AddNewButton>

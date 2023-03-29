@@ -11,7 +11,7 @@ export const BusinessCateringDelivery = (props) => {
   } = props
   const [, t] = useLanguage()
 
-  const cateringValues = business?.configs?.filter(config => config.key.includes('preorder')).map(config => ({
+  const cateringValues = (business?.configs || [])?.filter(config => config.key.includes('preorder')).map(config => ({
     name: config.key,
     value: config.value.split('|').find(val => val.includes(type)).split(',')[1],
     id: config.id
