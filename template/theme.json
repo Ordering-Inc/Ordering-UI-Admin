@@ -56,5 +56,12 @@
   },
   "defaultLanguages": {
     "LOADING_DELICIOUS_FOOD": "Loading Ordering Dashboard..."
+  },
+  "orders_manager_view": {
+    "components": {
+      "layout": {
+        "type": "original"
+      }
+    }
   }
 }
