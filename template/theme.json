@@ -60,7 +60,7 @@
   "orders_manager_view": {
     "components": {
       "layout": {
-        "type": "veloccy"
+        "type": "original"
       }
     }
   }
