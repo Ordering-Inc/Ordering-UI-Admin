@@ -6,7 +6,7 @@ import { UsersListingHeader } from '../UsersListingHeader'
 import { UserActiveStateFilter } from '../UserActiveStateFilter'
 import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
 import { ProfessionalAddForm } from '../ProfessionalAddForm'
-import { SideBar } from '../../Shared'
+import { Alert, SideBar } from '../../Shared'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { Button } from '../../../styles'
@@ -61,6 +61,8 @@ const ProfessionalListingUI = (props) => {
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
   const [openUser, setOpenUser] = useState(null)
   const [openUserAddForm, setOpenUserAddForm] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const isEnabledAppointmentsFeature = configs?.appointments?.value
 
   const handleBackRedirect = () => {
@@ -102,6 +104,14 @@ const ProfessionalListingUI = (props) => {
       setIsOpenUserDetails(true)
     }
   }, [usersList])
+
+  useEffect(() => {
+    if (!usersList?.error) return
+    setAlertState({
+      open: true,
+      content: usersList?.error
+    })
+  }, [usersList?.error])
 
   return (
     <>
@@ -193,6 +203,16 @@ const ProfessionalListingUI = (props) => {
           />
         </SideBar>
       )}
+
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
