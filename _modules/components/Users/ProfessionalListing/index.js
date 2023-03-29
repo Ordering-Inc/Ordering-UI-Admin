@@ -82,6 +82,13 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     openUserAddForm = _useState8[0],
     setOpenUserAddForm = _useState8[1];
+  var _useState9 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
+    _useState10 = _slicedToArray(_useState9, 2),
+    alertState = _useState10[0],
+    setAlertState = _useState10[1];
   var isEnabledAppointmentsFeature = configs === null || configs === void 0 ? void 0 : (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenUserDetails(false);
@@ -120,6 +127,13 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
       setIsOpenUserDetails(true);
     }
   }, [usersList]);
+  (0, _react.useEffect)(function () {
+    if (!(usersList !== null && usersList !== void 0 && usersList.error)) return;
+    setAlertState({
+      open: true,
+      content: usersList === null || usersList === void 0 ? void 0 : usersList.error
+    });
+  }, [usersList === null || usersList === void 0 ? void 0 : usersList.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersListingContainer, null, isEnabledAppointmentsFeature ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
     isProfessionals: true,
     title: headerTitle,
@@ -186,7 +200,25 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     onClose: function onClose() {
       return setOpenUserAddForm(false);
     }
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  }));
 };
 var ProfessionalListing = function ProfessionalListing(props) {
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);

@@ -218,7 +218,7 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     eventDisabled: eventDisabled
   }, /*#__PURE__*/_react.default.createElement(_styles2.AddNewButton, {
     onClick: function onClick() {
-      return handleOpenDetails({});
+      return handleOpenDetails();
     }
   }, t('ADD_NEW_PROMOTION', 'Add new promotion')), (promotionListState === null || promotionListState === void 0 ? void 0 : promotionListState.promotions.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage,

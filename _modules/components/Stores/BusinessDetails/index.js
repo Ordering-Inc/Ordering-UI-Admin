@@ -39,7 +39,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDetailsUI = function BusinessDetailsUI(props) {
-  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4;
+  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _businessState$busine5;
   var open = props.open,
     businessId = props.businessId,
     businessState = props.businessState,
@@ -170,6 +170,13 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     });
   }, [actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error]);
   (0, _react.useEffect)(function () {
+    if (!(businessState !== null && businessState !== void 0 && businessState.error)) return;
+    setAlertState({
+      open: true,
+      content: businessState === null || businessState === void 0 ? void 0 : businessState.error
+    });
+  }, [businessState === null || businessState === void 0 ? void 0 : businessState.error]);
+  (0, _react.useEffect)(function () {
     if (businessState !== null && businessState !== void 0 && businessState.loading) return;
     var detailKey = query.get('section');
     if (detailKey) {
@@ -249,8 +256,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleUpdateBusinessClick: handleUpdateBusinessClick,
     handleUpdatePreorderConfigs: handleUpdatePreorderConfigs
   }), selectedItem === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_BusinessCustomFields.BusinessCustomFields, {
-    businessId: businessState === null || businessState === void 0 ? void 0 : businessState.business.id,
-    metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.metafields,
+    businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.id,
+    metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.metafields,
     handleSuccessAddMetaFields: function handleSuccessAddMetaFields(result) {
       return handleSuccessAddBusinessItem('metafields', result);
     },

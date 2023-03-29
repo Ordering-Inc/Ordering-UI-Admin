@@ -49,7 +49,7 @@ var ProductIngredient = function ProductIngredient(props) {
       var category = query.get('category');
       var _product = query.get('product');
       var section = query.get('section');
-      history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(_product, "&section=").concat(section, "&ingredient=").concat(ingredient.id));
+      history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(_product, "&section=").concat(section, "&ingredient=").concat(ingredient === null || ingredient === void 0 ? void 0 : ingredient.id));
     }
   };
   var handleCloseDetails = function handleCloseDetails() {

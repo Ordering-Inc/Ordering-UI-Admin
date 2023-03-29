@@ -105,21 +105,29 @@ var DriversGroupsList = function DriversGroupsList(props) {
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.GroupsTable, {
     "data-tour": "tour_delivery_completed"
-  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupNameContainer, {
-    isHeader: true
-  }, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupIdWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
     onClick: function onClick() {
       return handleAllSelectGroup();
     },
     isChecked: !driversGroupsState.loading && selectedGroupList.length === driversGroupsState.groups.length
-  }, !driversGroupsState.loading && selectedGroupList.length === driversGroupsState.groups.length ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("p", null, t('GROUP', 'Group')))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, {
+  }, !driversGroupsState.loading && selectedGroupList.length === driversGroupsState.groups.length ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('ID', 'ID')))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupNameContainer, {
+    isHeader: true
+  }, /*#__PURE__*/_react.default.createElement("p", null, t('GROUP', 'Group')))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, {
     isHeader: true
   }, t('DRIVER_MANAGER', 'Driver manager'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupTypeContainer, {
     isHeader: true
   }, t('TYPE', 'Type'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, t('ACTIONS', 'Actions'))))), driversGroupsState.loading ? _toConsumableArray(Array(groupsPerPage).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupNameContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupIdWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 18,
+      height: 18
+    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 40,
+      style: {
+        margin: '0px 5px'
+      }
+    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupNameContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, {
       isSkeleton: true
@@ -143,13 +151,13 @@ var DriversGroupsList = function DriversGroupsList(props) {
       onClick: function onClick(e) {
         return handleClickDriverGroup(e, group);
       }
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupIdWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
       className: "group-checkbox",
       onClick: function onClick() {
         return handleSelectGroup(group.id);
       },
       isChecked: selectedGroupList.includes(group.id)
-    }, selectedGroupList.includes(group.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("p", null, group === null || group === void 0 ? void 0 : group.name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, group !== null && group !== void 0 && (_group$administrator = group.administrator) !== null && _group$administrator !== void 0 && _group$administrator.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
+    }, selectedGroupList.includes(group.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("span", null, group === null || group === void 0 ? void 0 : group.id))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupNameContainer, null, /*#__PURE__*/_react.default.createElement("p", null, group === null || group === void 0 ? void 0 : group.name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, group !== null && group !== void 0 && (_group$administrator = group.administrator) !== null && _group$administrator !== void 0 && _group$administrator.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: group === null || group === void 0 ? void 0 : (_group$administrator2 = group.administrator) === null || _group$administrator2 === void 0 ? void 0 : _group$administrator2.photo
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
