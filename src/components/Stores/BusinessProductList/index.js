@@ -195,7 +195,7 @@ export const BusinessProductList = (props) => {
           </ProductListContainer>
           <ProductListBottom>
             {
-              !businessState.loading && businessState?.business?.categories?.length > 0 && (
+              !businessState.loading && businessState?.business?.categories?.length > 0 && categorySelected && (
                 <AddProductBtn
                   onClick={() => handleParentProductAdd(true)}
                 >
@@ -221,6 +221,14 @@ export const BusinessProductList = (props) => {
             !businessState.loading && businessState?.business?.categories?.length === 0 && (
               <WrapperNotFound>
                 {t('CREATE_CATEGORY_BEFORE_PRODUCT', 'Please create a category before adding your products.')}
+              </WrapperNotFound>
+            )
+          }
+
+          {
+            !businessState.loading && businessState?.business?.categories?.length > 0 && !categorySelected && (
+              <WrapperNotFound>
+                {t('SELECT_CATEGORY_BEFORE_PRODUCT', 'Please select a category before adding your products.')}
               </WrapperNotFound>
             )
           }
