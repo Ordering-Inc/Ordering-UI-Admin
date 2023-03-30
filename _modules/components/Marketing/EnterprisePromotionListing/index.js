@@ -156,7 +156,7 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     sitesState: sitesState,
     businessesList: businessesList,
     paymethodsState: paymethodsState,
-    promotion: selectedPromotion,
+    promotion: selectedPromotion || {},
     promotionId: curPromotionId,
     promotionsList: promotionListState.promotions,
     handleSuccessUpdatePromotions: handleSuccessUpdatePromotions,

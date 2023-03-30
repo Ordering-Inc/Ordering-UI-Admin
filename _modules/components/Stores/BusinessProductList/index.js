@@ -31,7 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessProductList = function BusinessProductList(props) {
-  var _businessState$busine, _businessState$busine2, _businessState$busine3, _categoryState$produc, _categoryState$pagina, _businessState$busine4, _businessState$busine5;
+  var _businessState$busine, _businessState$busine2, _businessState$busine3, _categoryState$produc, _categoryState$pagina, _businessState$busine4, _businessState$busine5, _businessState$busine6, _businessState$busine7;
   var productDetailsId = props.productDetailsId,
     categoryState = props.categoryState,
     viewMethod = props.viewMethod,
@@ -177,7 +177,7 @@ var BusinessProductList = function BusinessProductList(props) {
       category: categoryState,
       isLastProduct: currentProducts.length - 1 === i
     }));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductListBottom, null, !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : (_businessState$busine3 = _businessState$busine2.categories) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.ProductListBottom, null, !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : (_businessState$busine3 = _businessState$busine2.categories) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.length) > 0 && categorySelected && /*#__PURE__*/_react.default.createElement(_styles.AddProductBtn, {
     onClick: function onClick() {
       return handleParentProductAdd(true);
     }
@@ -187,7 +187,7 @@ var BusinessProductList = function BusinessProductList(props) {
     handleChangePage: handleChangePage,
     defaultPageSize: productsPerPage,
     handleChangePageSize: handleChangePageSize
-  })), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : (_businessState$busine5 = _businessState$busine4.categories) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, t('CREATE_CATEGORY_BEFORE_PRODUCT', 'Please create a category before adding your products.'))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListSpreadContainer, null, categoryState.loading || businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, _toConsumableArray(Array(15).keys()).map(function (i) {
+  })), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : (_businessState$busine5 = _businessState$busine4.categories) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, t('CREATE_CATEGORY_BEFORE_PRODUCT', 'Please create a category before adding your products.')), !businessState.loading && (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : (_businessState$busine7 = _businessState$busine6.categories) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.length) > 0 && !categorySelected && /*#__PURE__*/_react.default.createElement(_styles.WrapperNotFound, null, t('SELECT_CATEGORY_BEFORE_PRODUCT', 'Please select a category before adding your products.'))), viewMethod === 'spreedsheet' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ProductListSpreadContainer, null, categoryState.loading || businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles.BusinessProductListTable, null, _toConsumableArray(Array(15).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, {
       key: i,
       isSkeleton: true,
