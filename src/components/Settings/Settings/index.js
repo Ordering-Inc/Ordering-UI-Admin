@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components'
 import { useLanguage, useEvent, useConfig, Settings as SettingsController } from 'ordering-components-admin'
 import { SettingItemUI } from '../SettingItemUI'
 import { SettingsDetail } from '../SettingsDetail'
-import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill, InfoCircle } from 'react-bootstrap-icons'
+import { List as MenuIcon, GearFill, MegaphoneFill, CheckCircleFill, GeoAltFill, InfoCircle, CreditCard } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { SideBar } from '../../Shared'
@@ -24,6 +24,7 @@ import {
   InfoWrapper,
   InfoContent
 } from './styles'
+import { CardFieldsSetting } from '../CardFieldsSetting'
 
 const SettingsUI = (props) => {
   const {
@@ -210,6 +211,17 @@ const SettingsUI = (props) => {
               </SettingItemWrapper>
               <SettingItemWrapper
                 className='col-md-4 col-sm-6'
+                onClick={() => handleOpenSettingDetails('card')}
+              >
+                <SettingItemUI
+                  title={t('CARD_FIELDS', 'Card fields')}
+                  description={t('CARD_FIELDS_DESC')}
+                  icon={<CreditCard />}
+                  active={isOpenSettingDetails === 'card'}
+                />
+              </SettingItemWrapper>
+              <SettingItemWrapper
+                className='col-md-4 col-sm-6'
                 onClick={() => handleOpenSites()}
               >
                 <SettingItemUI
@@ -314,6 +326,9 @@ const SettingsUI = (props) => {
             )}
             {isOpenSettingDetails === 'address' && (
               <AddressFieldsSetting />
+            )}
+            {isOpenSettingDetails === 'card' && (
+              <CardFieldsSetting />
             )}
             {isOpenSettingDetails === 'language' && (
               <LanguageSetting />
