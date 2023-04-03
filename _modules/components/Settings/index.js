@@ -15,6 +15,12 @@ Object.defineProperty(exports, "ApiKeysList", {
     return _ApiKeysList.ApiKeysList;
   }
 });
+Object.defineProperty(exports, "CardFieldsSetting", {
+  enumerable: true,
+  get: function get() {
+    return _CardFieldsSetting.CardFieldsSetting;
+  }
+});
 Object.defineProperty(exports, "CheckoutFieldsSetting", {
   enumerable: true,
   get: function get() {
@@ -227,3 +233,4 @@ var _InsertImage = require("./InsertImage");
 var _LanguageTransSpread = require("./LanguageTransSpread");
 var _LanguageTransTable = require("./LanguageTransTable");
 var _MultiCountrySettings = require("./MultiCountrySettings");
+var _CardFieldsSetting = require("./CardFieldsSetting");
