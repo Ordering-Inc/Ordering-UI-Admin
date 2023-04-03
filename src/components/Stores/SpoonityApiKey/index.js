@@ -46,6 +46,11 @@ export const SpoonityApiKey = (props) => {
     if (spoonityKeyState?.key && !spoonityKeyState?.loading) setSpoonityKey(spoonityKey)
   }, [spoonityKeyState?.key, spoonityKeyState?.loading])
 
+  useEffect(() => {
+    if(!spoonityKeyState?.key) return
+    setSpoonityKey(spoonityKeyState?.key)
+  }, [spoonityKeyState?.key])
+
   return (
     <>
       <BusinessOrderingChannelsContainer>
