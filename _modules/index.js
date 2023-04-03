@@ -663,6 +663,12 @@ Object.defineProperty(exports, "CampaignWhatsapp", {
     return _Marketing.CampaignWhatsapp;
   }
 });
+Object.defineProperty(exports, "CardFieldsSetting", {
+  enumerable: true,
+  get: function get() {
+    return _Settings.CardFieldsSetting;
+  }
+});
 Object.defineProperty(exports, "ChatBusinessesList", {
   enumerable: true,
   get: function get() {
