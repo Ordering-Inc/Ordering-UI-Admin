@@ -203,7 +203,8 @@ import {
   InsertImage,
   LanguageTransSpread,
   LanguageTransTable,
-  MultiCountrySettings
+  MultiCountrySettings,
+  CardFieldsSetting
 } from './components/Settings'
 import {
   BusinessBrandListing,
@@ -614,7 +615,7 @@ export {
   LanguageTransSpread,
   LanguageTransTable,
   MultiCountrySettings,
-
+  CardFieldsSetting,
   Support,
 
   BusinessBrandListing,

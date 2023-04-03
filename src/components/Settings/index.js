@@ -30,7 +30,7 @@ import { InsertImage } from './InsertImage'
 import { LanguageTransSpread } from './LanguageTransSpread'
 import { LanguageTransTable } from './LanguageTransTable'
 import { MultiCountrySettings } from './MultiCountrySettings'
-
+import { CardFieldsSetting } from './CardFieldsSetting'
 export {
   Cms,
   IntegrationListing,
@@ -63,5 +63,6 @@ export {
   InsertImage,
   LanguageTransSpread,
   LanguageTransTable,
-  MultiCountrySettings
+  MultiCountrySettings,
+  CardFieldsSetting
 }
