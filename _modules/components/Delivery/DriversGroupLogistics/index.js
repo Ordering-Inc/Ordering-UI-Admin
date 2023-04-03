@@ -103,7 +103,7 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
     onClick: function onClick() {
       return handleOpenConfig('GROUP_ORDERS');
     }
-  }, "a", /*#__PURE__*/_react.default.createElement("span", null, t('GROUP_ORDERS', 'Group Orders')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)), /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigItem, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('GROUP_ORDERS', 'Group Orders')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)), /*#__PURE__*/_react.default.createElement(_styles2.LogisticsConfigItem, {
     active: showConfig === 'AUTOASSIGN_SETTINGS',
     onClick: function onClick() {
       return handleOpenConfig('AUTOASSIGN_SETTINGS');
