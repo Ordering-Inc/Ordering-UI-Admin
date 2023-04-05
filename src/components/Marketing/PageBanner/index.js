@@ -36,7 +36,8 @@ const PageBannersUI = (props) => {
     defaultPosition,
     handleSuccessDelete,
     aspectRatio,
-    isSearhShow
+    isSearhShow,
+    showAspectRatioBox
   } = props
 
   const history = useHistory()
@@ -219,6 +220,7 @@ const PageBannersUI = (props) => {
             onClose={() => handleCloseDetail()}
             defaultPosition={defaultPosition}
             aspectRatio={aspectRatio}
+            showAspectRatioBox={showAspectRatioBox}
             setBannerMoveDistance={setBannerMoveDistance}
           />
         </SideBar>
