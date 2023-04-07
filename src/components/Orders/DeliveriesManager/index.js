@@ -115,7 +115,7 @@ const DeliveriesManagerUI = (props) => {
           open={isOpenOrderDetail}
           order={detailsOrder}
           orderId={orderDetailId}
-          driversList={driversList}
+          drivers={driversList.drivers}
           onClose={() => handleBackRedirect()}
         />
       )}
