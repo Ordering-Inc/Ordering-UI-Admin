@@ -217,7 +217,7 @@ export const BusinessDeliveryZoneInformation = (props) => {
                 maxLength={2}
                 value={formState.changes?.data?.distance ?? zone?.data?.distance ?? ''}
                 onInput={(e) => {
-                  e.target.value = e.target.value.match('^[1-9]{1,2}$')
+                  e.target.value = e.target.value.match(`^[${e.target.value === '0' ? '1' : '0'}-9]{1,2}$`)
                 }}
                 onChange={e => handleChangeInput(e, configState?.configs?.distance_unit?.value)}
                 ref={register({

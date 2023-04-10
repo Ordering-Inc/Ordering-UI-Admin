@@ -548,6 +548,25 @@ export const MessagesUI = (props) => {
                   <React.Fragment key={message.id}>
                     {history && tabActive === 'order_history' && (
                       <>
+                        {message.type === 0 && (
+                          <MessageConsole key={message.id}>
+                            <BubbleConsole>
+                              <p>
+                                {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+                                <strong>{parseDate(order.created_at)}</strong> {' '}
+                                {t('VIA', 'Via')}{' '}
+                                <strong>
+                                  {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
+                                </strong>{' '}
+                              </p>
+                              <div><strong>{t('APP_ID', 'App ID')}: </strong>{message?.app_id}</div>
+                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author?.name} {message?.author?.lastname}</div>
+                              <div><strong>{t('USER_AGENT', 'User agent')}: </strong>{message?.user_agent}</div>
+                              <div><strong>{t('IP', 'IP')}: </strong>{message?.ip}</div>
+                              <TimeofSent>{getTimeAgo(message?.created_at)}</TimeofSent>
+                            </BubbleConsole>
+                          </MessageConsole>
+                        )}
                         {message.type === 1 && (
                           <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
                             {message.change?.attribute !== 'driver_id' ? (
@@ -612,6 +631,25 @@ export const MessagesUI = (props) => {
                     )}
                     {isChat && (
                       <>
+                        {message.type === 0 && (
+                          <MessageConsole key={message.id}>
+                            <BubbleConsole>
+                              <p>
+                                {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
+                                <strong>{parseDate(order.created_at)}</strong> {' '}
+                                {t('VIA', 'Via')}{' '}
+                                <strong>
+                                  {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
+                                </strong>{' '}
+                              </p>
+                              <div><strong>{t('APP_ID', 'App ID')}: </strong>{message?.app_id}</div>
+                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author?.name} {message?.author?.lastname}</div>
+                              <div><strong>{t('USER_AGENT', 'User agent')}: </strong>{message?.user_agent}</div>
+                              <div><strong>{t('IP', 'IP')}: </strong>{message?.ip}</div>
+                              <TimeofSent>{getTimeAgo(message?.created_at)}</TimeofSent>
+                            </BubbleConsole>
+                          </MessageConsole>
+                        )}
                         {message.type === 1 && message.change?.attribute !== 'comment' && (
                           <MessageConsole key={message.id}>
                             {message.change?.attribute !== 'driver_id' ? (

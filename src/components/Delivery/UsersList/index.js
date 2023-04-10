@@ -7,7 +7,6 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Envelope, Phone } from 'react-bootstrap-icons'
 
 import { Switch } from '../../../styles'
-import { UserTypeSelector } from '../../Users'
 import { Pagination, ConfirmAdmin } from '../../Shared'
 
 import {
@@ -19,13 +18,13 @@ import {
   UserMainInfo,
   CheckBoxWrapper,
   InfoBlock,
-  UserTypeWrapper,
   UserEnableWrapper,
   WrapperPagination,
   AddNewUserButton,
   UsersBottomContainer,
   VerifiedItemsContainer,
-  VerifiedItem
+  VerifiedItem,
+  UserIdWrapper
 } from './styles'
 
 export const UsersList = (props) => {
@@ -34,7 +33,6 @@ export const UsersList = (props) => {
     usersList,
     paginationProps,
     getUsers,
-    handleChangeUserType,
     handleChangeActiveUser,
     selectedUsers,
     handleSelectedUsers,
@@ -42,25 +40,15 @@ export const UsersList = (props) => {
     handleOpenUserAddForm,
     isDriversPage,
     isDriversManagersPage,
-    actionDisabled
+    actionDisabled,
+    setSelectedUsers
   } = props
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
 
   const [confirmAdmin, setConfirmAdmin] = useState({ open: false, handleOnConfirm: null })
-
-  const getUserType = (type) => {
-    const userTypes = [
-      { key: 0, value: t('ADMINISTRATOR', 'Administrator') },
-      { key: 1, value: t('CITY_MANAGER', 'City manager') },
-      { key: 2, value: t('BUSINESS_OWNER', 'Business owner') },
-      { key: 3, value: t('USER', 'User') }
-    ]
-
-    const objectStatus = userTypes.find(o => o.key === type)
-    return objectStatus && objectStatus
-  }
+  const [isAllChecked, setIsAllChecked] = useState(false)
 
   const onChangeUserDetails = (e, user) => {
     const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action')
@@ -91,19 +79,25 @@ export const UsersList = (props) => {
     }
   }
 
-  const onChangeUserType = (user, type) => {
-    if (user.level !== 0) {
-      handleChangeUserType(type)
+  const handleSelecteAllUser = () => {
+    const userIds = usersList.users?.reduce((ids, user) => [...ids, user.id], [])
+    if (!isAllChecked) {
+      setSelectedUsers([...selectedUsers, ...userIds])
     } else {
-      setConfirmAdmin({
-        open: true,
-        handleOnConfirm: () => {
-          setConfirmAdmin({ ...confirmAdmin, open: false })
-          handleChangeUserType(type)
-        }
+      const userIdsToDeleteSet = new Set(userIds)
+      const updatedSelectedOrderIds = selectedUsers.filter((name) => {
+        return !userIdsToDeleteSet.has(name)
       })
+      setSelectedUsers(updatedSelectedOrderIds)
     }
   }
+
+  useEffect(() => {
+    if (usersList.loading) return
+    const userIds = usersList.users?.reduce((ids, user) => [...ids, user.id], [])
+    const _isAllChecked = userIds.every(elem => selectedUsers.includes(elem))
+    setIsAllChecked(_isAllChecked)
+  }, [usersList.users, selectedUsers])
 
   useEffect(() => {
     if (usersList.loading || usersList.users.length > 0 || paginationProps.totalPages <= 1) return
@@ -121,9 +115,26 @@ export const UsersList = (props) => {
           <UsersTable>
             <thead>
               <tr>
+                {isDriversPage && (
+                  <th>
+                    <UserIdWrapper>
+                      <CheckBoxWrapper
+                        className='all-checkbox'
+                        isChecked={!usersList?.loading && isAllChecked}
+                        onClick={() => handleSelecteAllUser()}
+                      >
+                        {(!usersList?.loading && isAllChecked) ? (
+                          <MdCheckBox />
+                        ) : (
+                          <MdCheckBoxOutlineBlank />
+                        )}
+                      </CheckBoxWrapper>
+                      {t('ID', 'ID')}
+                    </UserIdWrapper>
+                  </th>
+                )}
                 <th>{t('USER', 'User')}</th>
                 <th>{t('DETAILS', 'Details')}</th>
-                <th />
                 <th colSpan={2}>{t('ACTION', 'Action')}</th>
               </tr>
             </thead>
@@ -131,11 +142,18 @@ export const UsersList = (props) => {
               [...Array(10).keys()].map(i => (
                 <tbody key={i}>
                   <tr>
+                    {isDriversPage && (
+                      <td>
+                        <UserIdWrapper>
+                          <CheckBoxWrapper>
+                            <Skeleton width={20} height={20} />
+                          </CheckBoxWrapper>
+                          <Skeleton width={40} />
+                        </UserIdWrapper>
+                      </td>
+                    )}
                     <td>
                       <UserMainInfo>
-                        <CheckBoxWrapper>
-                          <Skeleton width={20} height={20} />
-                        </CheckBoxWrapper>
                         <WrapperImage isSkeleton>
                           <Skeleton width={45} height={45} />
                         </WrapperImage>
@@ -152,14 +170,6 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      {!(isDriversPage || isDriversManagersPage) && (
-                        <UserTypeWrapper>
-                          <Skeleton width={100} />
-                          <p><Skeleton width={100} /></p>
-                        </UserTypeWrapper>
-                      )}
-                    </td>
-                    <td>
                       <UserEnableWrapper>
                         <span><Skeleton width={100} /></span>
                         <Skeleton width={50} />
@@ -174,19 +184,39 @@ export const UsersList = (props) => {
                   <tr
                     onClick={(e) => onChangeUserDetails(e, user)}
                   >
+                    {isDriversPage && (
+                      <td>
+                        <UserIdWrapper>
+                          <CheckBoxWrapper
+                            className='user_checkbox'
+                            isChecked={selectedUsers.includes(user.id)}
+                            onClick={() => handleSelectedUsers(user.id)}
+                          >
+                            {selectedUsers.includes(user.id) ? (
+                              <MdCheckBox />
+                            ) : (
+                              <MdCheckBoxOutlineBlank />
+                            )}
+                          </CheckBoxWrapper>
+                          {user?.id}
+                        </UserIdWrapper>
+                      </td>
+                    )}
                     <td>
                       <UserMainInfo>
-                        <CheckBoxWrapper
-                          className='user_checkbox'
-                          isChecked={selectedUsers.includes(user.id)}
-                          onClick={() => handleSelectedUsers(user.id)}
-                        >
-                          {selectedUsers.includes(user.id) ? (
-                            <MdCheckBox />
-                          ) : (
-                            <MdCheckBoxOutlineBlank />
-                          )}
-                        </CheckBoxWrapper>
+                        {isDriversManagersPage && (
+                          <CheckBoxWrapper
+                            className='user_checkbox'
+                            isChecked={selectedUsers.includes(user.id)}
+                            onClick={() => handleSelectedUsers(user.id)}
+                          >
+                            {selectedUsers.includes(user.id) ? (
+                              <MdCheckBox />
+                            ) : (
+                              <MdCheckBoxOutlineBlank />
+                            )}
+                          </CheckBoxWrapper>
+                        )}
                         <WrapperImage>
                           {user?.photo ? (
                             <Image bgimage={optimizeImage(user?.photo, 'h_50,c_limit')} />
@@ -222,18 +252,6 @@ export const UsersList = (props) => {
                         <p className='bold'>{t('PHONE')}</p>
                         <p>{user?.cellphone}</p>
                       </InfoBlock>
-                    </td>
-                    <td>
-                      {!(isDriversPage || isDriversManagersPage) && (
-                        <UserTypeWrapper className='user_type_selector'>
-                          <UserTypeSelector
-                            userId={user.id}
-                            defaultUserType={user?.level}
-                            handleChangeUserType={(type) => onChangeUserType(user, type)}
-                          />
-                          <p>{getUserType(user?.level)?.value}</p>
-                        </UserTypeWrapper>
-                      )}
                     </td>
                     <td>
                       <UserEnableWrapper className='user_enable_control'>

@@ -37,7 +37,8 @@ export const BusinessSummary = (props) => {
     handleSelectedItem,
     handleDuplicateBusiness,
     handleDeleteBusiness,
-    extraOpen
+    extraOpen,
+    spoonityConfig
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -58,7 +59,7 @@ export const BusinessSummary = (props) => {
     window.open(`https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`, '_blank')
   }
 
-  const itemsExcluded = ['publishing']
+  const itemsExcluded = !!spoonityConfig ? ['publishing'] : ['publishing', 'spoonity_key']
 
   const businessConfigs = [
     {
@@ -124,6 +125,13 @@ export const BusinessSummary = (props) => {
     {
       key: 'webhooks',
       value: t('WEBHOOKS', 'Webhooks')
+    },
+    {
+      key: 'places',
+      value: t('PLACES', 'Places')
+    }, {
+      key: 'spoonity_key',
+      value: t('SPOONITY_KEY', 'Sponity key')
     }
   ]
 
@@ -177,7 +185,7 @@ export const BusinessSummary = (props) => {
           <RightHeader>
             <IconButton
               disabled
-              // onClick={() => handleSelectedItem('support')}
+            // onClick={() => handleSelectedItem('support')}
             >
               <LifePreserver />
             </IconButton>
@@ -271,7 +279,9 @@ export const BusinessSummary = (props) => {
           </BusinessDescription>
           <BusinessConfigsContainer isLoading={businessState?.loading}>
             {(isAdmin
-              ? businessConfigs
+              ? !!spoonityConfig
+                ? businessConfigs
+                : businessConfigs.filter(configs => configs.key !== 'spoonity_key')
               : businessConfigs.filter(c => !itemsExcluded.includes(c.key))
             ).map(config => (
               <BusinessConfigItem
@@ -282,7 +292,8 @@ export const BusinessSummary = (props) => {
                 <span>{config.value}</span>
                 <BsChevronRight />
               </BusinessConfigItem>
-            ))}
+            )
+            )}
           </BusinessConfigsContainer>
         </BusinessDetailsContent>
       </BusinessDetailsContainer>

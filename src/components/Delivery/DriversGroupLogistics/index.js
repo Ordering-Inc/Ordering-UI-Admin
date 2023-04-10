@@ -128,7 +128,7 @@ export const DriversGroupLogistics = (props) => {
           <LogisticsConfigItem
             active={showConfig === 'GROUP_ORDERS'}
             onClick={() => handleOpenConfig('GROUP_ORDERS')}
-          >a
+          >
             <span>{t('GROUP_ORDERS', 'Group Orders')}</span>
             <ChevronRight />
           </LogisticsConfigItem>

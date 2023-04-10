@@ -534,6 +534,7 @@ const BusinessProductsListingUI = (props) => {
           onClose={() => setShowPopup(false)}
           orderingBusiness={businessState?.business}
           getBusiness={getBusiness}
+          handleOpenCategoryDetails={handleOpenCategoryDetails}
         />
       </Modal>
       <Modal

@@ -259,7 +259,7 @@ const OrdersManagerUI = (props) => {
         />
       )}
 
-      <OrderNotification />
+      <OrderNotification customerId={props.customerId} />
 
       {totalSelectedOrder > 0 && (
         <WrapperIndicator>
