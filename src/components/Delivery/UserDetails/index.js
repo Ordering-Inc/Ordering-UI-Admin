@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useLanguage, UserDetails as UserDetailsController } from 'ordering-components-admin'
-import { OriginalOrdersManager } from '../../Orders/OrdersManager/Layouts/OriginalOrdersManager'
+import { OrdersManager } from '../../Orders'
 import { AddressList } from '../AddressList'
 import { Personalization, Modal, Schedule } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
@@ -195,7 +195,7 @@ export const UserDetailsUI = (props) => {
             </ScheduleSection>
           )}
           {currentMenuSelected === 'orders' && (
-            <OriginalOrdersManager
+            <OrdersManager
               isSelectedOrders
               customerId={userState.user?.id}
               handleCustomOrderDetail={setExtraOpen}
