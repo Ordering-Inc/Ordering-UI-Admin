@@ -1,38 +1,37 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SettingComponent } from './SettingComponent'
 import { Button, Input } from '../../../styles'
 import { ImageBox } from './ImageBox'
 import { Alert } from '../../Shared'
 import { OrderType } from './OrderType'
-import { CheckSquareFill as CheckedIcon, Square as UnCheckedIcon } from 'react-bootstrap-icons'
 import { FontStyleGroup } from './FontStyleGroup'
 
 import {
   Container,
   BoxLayout,
   HomePageWrapper,
-  HideCheckWrapper,
   ShadowWrapper,
-  ShadowInfoWrapper,
-  ShadowInputGroup,
-  ShadowInputControl,
-  DropShadow,
-  DropShadowWrapper,
   HeadingWrapper,
-  HomeImageFullScreenWrapper,
   ImageGroup,
   FormControl,
   ButtonWrapper
 } from './styles'
+import { ButtonShadow } from './ButtonShadow'
 
 export const AdvancedSettings = (props) => {
-  const { themesList, advancedValues, setAdvancedValues, handleUpdateSiteTheme } = props
+  const {
+    themesList,
+    advancedValues,
+    handleUpdateSiteTheme,
+    isApp
+  } = props
 
   const [, t] = useLanguage()
 
   const [themeStructure, setThemeStructure] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const themeValuesRef = useRef({})
 
   const homepageViewList = [
     { key: 'homepage_header', name: t('HOMEPAGE_HEADER', 'Homepage Header'), type: 'hidden', path: 'homepage_view.components.homepage_header.hidden' }
@@ -45,6 +44,7 @@ export const AdvancedSettings = (props) => {
   ]
 
   const businessListing = [
+    { name: '', type: 'hidden', path: 'business_listing_view.hidden' },
     { name: t('BUSINESS_LISTING_IMAGE', 'Business listing image'), type: 'image', path: 'business_listing_view.components.business_hero.components.image' },
     { name: t('PREVIOUS_ORDERS_BLOCK', 'Previous orders block'), type: 'hidden', path: 'business_listing_view.components.previous_orders_block.hidden' },
     { name: t('Highest_rated_business_block', 'Highest rated business block'), type: 'hidden', path: 'business_listing_view.components.highest_rated_business_block.hidden' },
@@ -158,6 +158,22 @@ export const AdvancedSettings = (props) => {
     { name: t('BODY', 'Body'), type: 'input', path: 'third_party_code.body' }
   ]
 
+  const buttonList = [
+    { name: t('BORDER_RADIUS', 'Border Radius'), type: 'input', path: 'general.components.buttons.borderRadius' }
+  ]
+
+  const homeImageFullScreen = [
+    { name: t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage image fullscreen'), type: 'hidden', path: 'my_products.components.images.components.homepage_image_fullscreen' }
+  ]
+
+  const navigationBarList = [
+    { name: t('BROWSE', 'Browse'), type: 'hidden', path: 'bar_menu.components.browse.hidden' },
+    { name: t('ORDERS', 'Orders'), type: 'hidden', path: 'bar_menu.components.orders.hidden' },
+    { name: t('MY_CARTS', 'My carts'), type: 'hidden', path: 'bar_menu.components.my_carts.hidden' },
+    { name: t('WALLET', 'Wallet'), type: 'hidden', path: 'bar_menu.components.wallet.hidden' },
+    { name: t('PROFILE', 'Profile'), type: 'hidden', path: 'bar_menu.components.profile.hidden' }
+  ]
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -174,9 +190,9 @@ export const AdvancedSettings = (props) => {
   }
 
   const handleUpdateThemeValue = (value, path) => {
-    const _advancedValues = JSON.parse(JSON.stringify(advancedValues))
+    const _advancedValues = JSON.parse(JSON.stringify(themeValuesRef.current))
     updateObject(_advancedValues, value, path)
-    setAdvancedValues(_advancedValues)
+    themeValuesRef.current = _advancedValues
   }
 
   useEffect(() => {
@@ -185,116 +201,60 @@ export const AdvancedSettings = (props) => {
     }
   }, [themesList])
 
-  const shadowValues = useMemo(() => {
-    const buttonShadow = advancedValues?.general?.components?.buttons?.shadow?.components
-    if (!buttonShadow?.x || !buttonShadow?.y || !buttonShadow?.blur || !buttonShadow?.spread) return ''
-    return `${buttonShadow?.x}px ${buttonShadow?.y}px ${buttonShadow?.blur}px ${buttonShadow?.spread}px ${buttonShadow?.color}`
-  }, [advancedValues?.general?.components?.buttons?.shadow?.components])
+  useEffect(() => {
+    themeValuesRef.current = JSON.parse(JSON.stringify(advancedValues))
+  }, [advancedValues])
 
   return (
     <>
       <Container>
-        <BoxLayout>
-          <h1>{t('WEBSITE_ADVANCED_SETTINGS', 'Website  Advanced Settings')}</h1>
-          <HomePageWrapper>
+        {isApp ? (
+          <BoxLayout>
+            <h1>{t('CUSTOMER_APP_ADVANCED_SETTINGS', 'Customer App  Advanced Settings')}</h1>
             <h2>{t('HOMEPAGE', 'Homepage')}</h2>
-            <SettingComponent
-              settingList={homepageViewList}
-              handleUpdateThemeValue={handleUpdateThemeValue}
-              advancedValues={advancedValues}
+            <ImageBox
+              title={t('HOMEPAGE_IMAGE', 'Homepage image')}
+              ratio='1350 x 400 px'
+              photo={themeValuesRef?.current?.my_products?.components?.images?.components?.homepage_background?.components?.image}
+              path='my_products.components.images.components.homepage_background.components.image'
+              handleChangePhoto={handleUpdateThemeValue}
             />
-          </HomePageWrapper>
-        </BoxLayout>
+          </BoxLayout>
+        ) : (
+          <BoxLayout>
+            <h1>{t('WEBSITE_ADVANCED_SETTINGS', 'Website  Advanced Settings')}</h1>
+            <HomePageWrapper>
+              <h2>{t('HOMEPAGE', 'Homepage')}</h2>
+              <SettingComponent
+                settingList={homepageViewList}
+                handleUpdateThemeValue={handleUpdateThemeValue}
+                advancedValues={themeValuesRef?.current}
+              />
+            </HomePageWrapper>
+          </BoxLayout>
+        )}
         <BoxLayout>
           <h2>{t('BUTTONS', 'Buttons')}</h2>
-          <FormControl>
-            <label>Border Radius</label>
-            <Input
-              value={advancedValues?.general?.components?.buttons?.borderRadius}
-              onChange={(e) => handleUpdateThemeValue(e.target.value, 'general.components.buttons.borderRadius')}
-              onKeyPress={(e) => {
-                if (!/^[0-9]$/.test(e.key)) {
-                  e.preventDefault()
-                }
-              }}
-            />
-          </FormControl>
+          <SettingComponent
+            settingList={buttonList}
+            handleUpdateThemeValue={handleUpdateThemeValue}
+            advancedValues={themeValuesRef?.current}
+            themeStructure={themeStructure}
+          />
           <h3>{t('SHAPE', 'Shape')}</h3>
           <ShadowWrapper>
-            <DropShadowWrapper>
-              <ShadowInfoWrapper>
-                <DropShadow
-                  style={{
-                    boxShadow: shadowValues
-                  }}
-                />
-                <span>{t('DROP_SHADOW', 'Drop shadow')}</span>
-              </ShadowInfoWrapper>
-              <ShadowInputGroup>
-                <ShadowInputControl>
-                  <span>X</span>
-                  <input
-                    value={advancedValues?.general?.components?.buttons?.shadow?.components?.x}
-                    onKeyPress={(e) => {
-                      if (!/^[0-9]$/.test(e.key)) {
-                        e.preventDefault()
-                      }
-                    }}
-                    onChange={(e) => handleUpdateThemeValue(e.target.value, 'general.components.buttons.shadow.components.x')}
-                  />
-                </ShadowInputControl>
-                <ShadowInputControl>
-                  <span>Y</span>
-                  <input
-                    value={advancedValues?.general?.components?.buttons?.shadow?.components?.y}
-                    onChange={(e) => handleUpdateThemeValue(e.target.value, 'general.components.buttons.shadow.components.y')}
-                    onKeyPress={(e) => {
-                      if (!/^[0-9]$/.test(e.key)) {
-                        e.preventDefault()
-                      }
-                    }}
-                  />
-                </ShadowInputControl>
-                <ShadowInputControl>
-                  <span>B</span>
-                  <input
-                    value={advancedValues?.general?.components?.buttons?.shadow?.components?.blur}
-                    onChange={(e) => handleUpdateThemeValue(e.target.value, 'general.components.buttons.shadow.components.blur')}
-                    onKeyPress={(e) => {
-                      if (!/^[0-9]$/.test(e.key)) {
-                        e.preventDefault()
-                      }
-                    }}
-                  />
-                </ShadowInputControl>
-                <ShadowInputControl>
-                  <span>S</span>
-                  <input
-                    value={advancedValues?.general?.components?.buttons?.shadow?.components?.spread}
-                    onChange={(e) => handleUpdateThemeValue(e.target.value, 'general.components.buttons.shadow.components.spread')}
-                    onKeyPress={(e) => {
-                      if (!/^[0-9]$/.test(e.key)) {
-                        e.preventDefault()
-                      }
-                    }}
-                  />
-                </ShadowInputControl>
-                <ShadowInputControl>
-                  <span>C</span>
-                  <input
-                    value={advancedValues?.general?.components?.buttons?.shadow?.components?.color}
-                    onChange={(e) => handleUpdateThemeValue(e.target.value, 'general.components.buttons.shadow.components.color')}
-                  />
-                </ShadowInputControl>
-              </ShadowInputGroup>
-            </DropShadowWrapper>
+            <ButtonShadow
+              initialValues={themeValuesRef?.current?.general?.components?.buttons?.shadow?.components}
+              handleUpdateThemeValue={handleUpdateThemeValue}
+              path='general.components.buttons.shadow.components'
+            />
           </ShadowWrapper>
         </BoxLayout>
         <BoxLayout>
           <h2>{t('TIPOGRAPHY', 'Tipography')}</h2>
           <HeadingWrapper>
             <FontStyleGroup
-              fonts={advancedValues?.general?.components?.fonts?.primary}
+              fonts={themeValuesRef?.current?.general?.components?.fonts?.primary}
               path='general.components.fonts.primary'
               handleUpdateThemeValue={handleUpdateThemeValue}
             />
@@ -305,7 +265,7 @@ export const AdvancedSettings = (props) => {
           <ImageBox
             title={t('BUSINESS_LOGO_DUMMY_IMAGE', 'Business Logo dummy image')}
             ratio='512 x 512 px'
-            photo={advancedValues?.business_view?.components?.header?.components?.logo?.dummy_image}
+            photo={themeValuesRef?.current?.business_view?.components?.header?.components?.logo?.dummy_image}
             path='business_view.components.header.components.logo.dummy_image'
             handleChangePhoto={handleUpdateThemeValue}
           />
@@ -313,21 +273,22 @@ export const AdvancedSettings = (props) => {
             title={t('BUSINESS_HEADER_DUMMY_IMAGE', 'Business header dummy image')}
             ratio='1350 x 400 px'
             isBig
-            photo={advancedValues?.business_view?.components?.header?.components?.dummy_image}
+            photo={themeValuesRef?.current?.business_view?.components?.header?.components?.dummy_image}
             path='business_view.components.header.components.dummy_image'
             handleChangePhoto={handleUpdateThemeValue}
           />
-          <HomeImageFullScreenWrapper
-            onClick={() => handleUpdateThemeValue(!advancedValues?.my_products?.components?.images?.components?.homepage_image_fullscreen, 'my_products.components.images.components.homepage_image_fullscreen')}
-          >
-            {advancedValues?.my_products?.components?.images?.components?.homepage_image_fullscreen ? <CheckedIcon className='active' /> : <UnCheckedIcon />}
-            <span>{t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage image fullscreen')}</span>
-          </HomeImageFullScreenWrapper>
+          <SettingComponent
+            settingList={homeImageFullScreen}
+            handleUpdateThemeValue={handleUpdateThemeValue}
+            advancedValues={themeValuesRef?.current}
+            themeStructure={themeStructure}
+            noLabel
+          />
           <ImageGroup>
             <ImageBox
               title={t('PRODUCT_DUMMY_IMAGE', 'Product dummy image')}
               ratio='900 x 200 px'
-              photo={advancedValues?.business_view?.components?.products?.components?.photo?.components?.dummy_image}
+              photo={themeValuesRef?.current?.business_view?.components?.products?.components?.photo?.components?.dummy_image}
               path='business_view.components.products.components.photo.components.dummy_image'
               handleChangePhoto={handleUpdateThemeValue}
             />
@@ -338,8 +299,8 @@ export const AdvancedSettings = (props) => {
           <ImageBox
             title={t('FAVICON', 'Favicon')}
             ratio='512 x 512 px'
-            photo={advancedValues?.general?.components?.favicon}
-            path='general.components.favicon'
+            photo={themeValuesRef?.current?.general?.components?.favicon?.components?.image}
+            path='general.components.favicon.components.image'
             handleChangePhoto={handleUpdateThemeValue}
           />
         </BoxLayout>
@@ -348,20 +309,16 @@ export const AdvancedSettings = (props) => {
           <SettingComponent
             settingList={headerList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
         </BoxLayout>
         <BoxLayout>
           <h2>{t('BUSINESS_LISTING', 'Business listing')}</h2>
-          <HideCheckWrapper isBottom onClick={() => handleUpdateThemeValue(!advancedValues?.business_listing_view?.hidden, 'business_listing_view.hidden')}>
-            {advancedValues?.business_listing_view?.hidden ? <CheckedIcon className='active' /> : <UnCheckedIcon />}
-            <span>{t('HIDDEN', 'Hidden')}</span>
-          </HideCheckWrapper>
           <SettingComponent
             settingList={businessListing}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
         </BoxLayout>
@@ -370,7 +327,7 @@ export const AdvancedSettings = (props) => {
           <SettingComponent
             settingList={businessBlockList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
         </BoxLayout>
@@ -379,7 +336,7 @@ export const AdvancedSettings = (props) => {
           <SettingComponent
             settingList={businessPageList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
         </BoxLayout>
@@ -388,7 +345,7 @@ export const AdvancedSettings = (props) => {
           <SettingComponent
             settingList={businessInfoList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
         </BoxLayout>
@@ -406,7 +363,7 @@ export const AdvancedSettings = (props) => {
           <SettingComponent
             settingList={reviewsPopups}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
         </BoxLayout>
@@ -424,7 +381,7 @@ export const AdvancedSettings = (props) => {
           <SettingComponent
             settingList={checkoutList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
           <h3>{t('CONFIRMATION_PAGE', 'Confirmation page')}</h3>
@@ -432,21 +389,21 @@ export const AdvancedSettings = (props) => {
           <SettingComponent
             settingList={orderBlockList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
           <h3>{t('POPUP_ADDRESS', 'Popup: Address')}</h3>
           <SettingComponent
             settingList={popupAddressList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
           <h3>{t('MY_ACCOUNT_PAGE', 'My account page')}</h3>
           <SettingComponent
             settingList={myAccountList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
           <h3>{t('MY_ORDERS', 'My orders')}</h3>
@@ -454,56 +411,58 @@ export const AdvancedSettings = (props) => {
           <SettingComponent
             settingList={activeOrderBlockList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
         </BoxLayout>
-        <BoxLayout>
-          <h2>{t('MENU_OPTIONS', 'Menu options')}</h2>
-          <SettingComponent
-            settingList={menuOptionList}
-            handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
-            themeStructure={themeStructure}
-          />
-        </BoxLayout>
+        {!isApp && (
+          <BoxLayout>
+            <h2>{t('MENU_OPTIONS', 'Menu options')}</h2>
+            <SettingComponent
+              settingList={menuOptionList}
+              handleUpdateThemeValue={handleUpdateThemeValue}
+              advancedValues={advancedValues}
+              themeStructure={themeStructure}
+            />
+          </BoxLayout>
+        )}
         <BoxLayout>
           <h2>{t('POPUP_ORDER_TYPES', 'Popup: Order types ')}</h2>
           <FormControl>
             <label>{t('TITLE_MENU_OPTIONS', 'Title Menu options')}</label>
             <Input
               placeholder={t('TITLE_MENU_OPTIONS', 'Title Menu options')}
-              defaultValue={advancedValues?.order_types?.components?.title_menu}
+              defaultValue={themeValuesRef?.current?.order_types?.components?.title_menu}
               onChange={(e) => handleUpdateThemeValue(e.target.value, 'order_types.components.title_menu')}
             />
           </FormControl>
           <h3>{t('DELIVERY', 'Delivery')}</h3>
           <OrderType
-            typeValues={advancedValues?.order_types?.components?.delivery?.components}
+            typeValues={themeValuesRef?.current?.order_types?.components?.delivery?.components}
             path='order_types.components.delivery.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
           <h3>{t('PICKUP', 'Pickup')}</h3>
           <OrderType
-            typeValues={advancedValues?.order_types?.components?.pickup?.components}
+            typeValues={themeValuesRef?.current?.order_types?.components?.pickup?.components}
             path='order_types.components.pickup.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
           <h3>{t('EAT_IN', 'Eat in')}</h3>
           <OrderType
-            typeValues={advancedValues?.order_types?.components?.eat_in?.components}
+            typeValues={themeValuesRef?.current?.order_types?.components?.eat_in?.components}
             path='order_types.components.eat_in.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
           <h3>{t('CURBSIDE', 'Curbside')}</h3>
           <OrderType
-            typeValues={advancedValues?.order_types?.components?.curbside?.components}
+            typeValues={themeValuesRef?.current?.order_types?.components?.curbside?.components}
             path='order_types.components.curbside.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
           <h3>{t('DRIVE_THRU', 'Drive thru')}</h3>
           <OrderType
-            typeValues={advancedValues?.order_types?.components?.drive_thru?.components}
+            typeValues={themeValuesRef?.current?.order_types?.components?.drive_thru?.components}
             path='order_types.components.drive_thru.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
@@ -513,15 +472,26 @@ export const AdvancedSettings = (props) => {
           <SettingComponent
             settingList={thirdPartyCodeList}
             handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={advancedValues}
+            advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
           />
         </BoxLayout>
+        {isApp && (
+          <BoxLayout>
+            <h2>{t('NAVIGATION_BAR_MENU', 'Navigation bar menu')}</h2>
+            <SettingComponent
+              settingList={navigationBarList}
+              handleUpdateThemeValue={handleUpdateThemeValue}
+              advancedValues={themeValuesRef?.current}
+              themeStructure={themeStructure}
+            />
+          </BoxLayout>
+        )}
         <ButtonWrapper>
           <Button
             color='primary'
             borderRadius='8px'
-            onClick={() => handleUpdateSiteTheme(true)}
+            onClick={() => handleUpdateSiteTheme(themeValuesRef?.current)}
           >
             {t('SAVE', 'Save')}
           </Button>

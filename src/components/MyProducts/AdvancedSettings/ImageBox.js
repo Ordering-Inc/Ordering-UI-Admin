@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLanguage, ExamineClick, DragAndDrop } from 'ordering-components-admin'
 import { bytesConverter } from '../../../utils'
 import { Image as DumyPhoto } from 'react-bootstrap-icons'
@@ -18,9 +18,11 @@ export const ImageBox = (props) => {
   const imageRef = useRef()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
+  const [picture, setPicture] = useState('')
 
   const handleChangeImage = (croppedImg) => {
     handleChangePhoto(croppedImg, path)
+    setPicture(croppedImg)
     setCropState({ name: null, data: null, open: false })
   }
 
@@ -58,6 +60,11 @@ export const ImageBox = (props) => {
     })
   }
 
+  useEffect(() => {
+    if (!photo) return
+    setPicture(photo)
+  }, [photo])
+
   return (
     <div>
       <ImageBoxContainer isBig={isBig} onClick={() => imageRef.current.click()}>
@@ -70,8 +77,8 @@ export const ImageBox = (props) => {
             onDrop={dataTransfer => handleFiles(dataTransfer.files, 'logo')}
             accept='image/png, image/jpeg, image/jpg'
           >
-            {photo && <img src={photo} alt='logo image' loading='lazy' />}
-            <UploadImageIconContainer bgimage={photo}>
+            {picture && <img src={picture} alt='logo image' loading='lazy' />}
+            <UploadImageIconContainer bgimage={picture}>
               <UploadImageIcon>
                 <DumyPhoto />
                 <span>{t('DRAG_AND_DROP', 'Drag and drop')}</span>
