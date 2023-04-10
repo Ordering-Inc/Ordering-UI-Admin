@@ -207,7 +207,7 @@ const MessagesListingUI = (props) => {
           open={isOpenOrderDetail}
           order={detailsOrder}
           orderId={orderDetailId}
-          driversList={driversList}
+          drivers={driversList.drivers}
           onClose={() => setIsOpenOrderDetail(false)}
         />
       )}
