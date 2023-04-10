@@ -20,7 +20,8 @@ export const BannerImages = (props) => {
     handleDeleteBannerItem,
     setBannerMoveDistance,
     handleSuccessBannerItemAdd,
-    bannerId
+    bannerId,
+    showAspectRatioBox
   } = props
 
   const [, t] = useLanguage()
@@ -73,6 +74,7 @@ export const BannerImages = (props) => {
             key={selectedImage?.id}
             image={selectedImage}
             aspectRatio={aspectRatio}
+            showAspectRatioBox={showAspectRatioBox}
             onClose={() => handleCloseImageDetail()}
             bannerId={bannerId}
             handleUpdateBannerItem={handleUpdateBannerItem}

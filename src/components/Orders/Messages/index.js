@@ -60,8 +60,6 @@ import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { Logistics } from '../Logistics'
 import { OrderLogisticInformation } from '../OrderLogisticInformation'
 
-const filterSpecialStatus = ['prepared_in', 'delivered_in', 'delivery_datetime']
-
 export const MessagesUI = (props) => {
   const {
     isChat,
@@ -81,7 +79,8 @@ export const MessagesUI = (props) => {
     handleReadMessages,
     isTourOpen,
     setCurrentTourStep,
-    orderDetailClose
+    orderDetailClose,
+    getHistoryComment
   } = props
 
   const routerHistory = useHistory()
@@ -213,78 +212,6 @@ export const MessagesUI = (props) => {
     }
   }
 
-  const getStatus = (status) => {
-    switch (status) {
-      case 0:
-        return t('PENDING', 'Pending')
-      case 1:
-        return t('COMPLETED_BY_ADMIN', 'Completed by admin')
-      case 2:
-        return t('REJECTED_BY_ADMIN', 'Rejected by admin')
-      case 3:
-        return t('ORDER_STATUS_IN_BUSINESS', 'Driver arrived to business')
-      case 4:
-        return t('PREPARATION_COMPLETED', 'Preparation Completed')
-      case 5:
-        return t('REJECTED_BY_BUSINESS', 'Rejected by business')
-      case 6:
-        return t('REJECTED_BY_DRIVER', 'Rejected by driver')
-      case 7:
-        return t('ACCEPTED_BY_BUSINESS', 'Accepted by Business')
-      case 8:
-        return t('ACCEPTED_BY_DRIVER', 'Accepted by Driver')
-      case 9:
-        return t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver')
-      case 10:
-        return t('PICK_UP_FAILED_BY_DRIVER', 'Pick up failed by driver')
-      case 11:
-        return t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver')
-      case 12:
-        return t('DELIVERY_FAILED_BY_DRIVER', 'Delivery failed by driver')
-      case 13:
-        return t('PREORDER', 'Preorder')
-      case 14:
-        return t('ORDER_NOT_READY', 'Order not ready')
-      case 15:
-        return t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Pickup completed by customer')
-      case 16:
-        return t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Cancelled by customer')
-      case 17:
-        return t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Not picked by customer')
-      case 18:
-        return t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business')
-      case 19:
-        return t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer')
-      case 20:
-        return t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business')
-      case 21:
-        return t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business')
-      case 22:
-        return t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver')
-      case 23:
-        return t('ORDER_DRIVER_ON_WAY', 'Driver on way')
-      default:
-        return status
-    }
-  }
-
-  const getLogisticTagStatus = (status) => {
-    switch (status) {
-      case 0:
-        return t('PENDING', 'Pending')
-      case 1:
-        return t('IN_PROGRESS', 'In Progress')
-      case 2:
-        return t('IN_QUEUE', 'In Queue')
-      case 3:
-        return t('EXPIRED', 'Logistic expired')
-      case 4:
-        return t('RESOLVED', 'Resolved')
-      default:
-        return status
-    }
-  }
-
   const getLevel = (level) => {
     switch (level) {
       case 0:
@@ -300,10 +227,6 @@ export const MessagesUI = (props) => {
       case 5:
         return t('DRIVER_MANAGER', 'Driver Manager')
     }
-  }
-
-  const getVehicleSmmary = (vehicle) => {
-    return vehicle?.type + ' ' + vehicle?.model + ' ' + vehicle?.car_registration + ' ' + vehicle?.color
   }
 
   const clearInputs = () => {
@@ -551,14 +474,13 @@ export const MessagesUI = (props) => {
                         {message.type === 0 && (
                           <MessageConsole key={message.id}>
                             <BubbleConsole>
-                              <p>
-                                {t('ORDER_PLACED_FOR', 'Order placed for')} {' '}
-                                <strong>{parseDate(order.created_at)}</strong> {' '}
-                                {t('VIA', 'Via')}{' '}
-                                <strong>
-                                  {order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')}
-                                </strong>{' '}
-                              </p>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: t('ORDER_PLACED_FOR_VIA', 'Order placed for _for_ via _via_.')
+                                    .replace('_for_', '<b>' + parseDate(order.delivery_datetime) + '</b>')
+                                    .replace('_via_', '<b>' + t(order.app_id ? order.app_id.toUpperCase() : 'OTHER') + '</b>')
+                                }}
+                              />
                               <div><strong>{t('APP_ID', 'App ID')}: </strong>{message?.app_id}</div>
                               <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author?.name} {message?.author?.lastname}</div>
                               <div><strong>{t('USER_AGENT', 'User agent')}: </strong>{message?.user_agent}</div>
@@ -569,57 +491,16 @@ export const MessagesUI = (props) => {
                         )}
                         {message.type === 1 && (
                           <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
-                            {message.change?.attribute !== 'driver_id' ? (
+                            {getHistoryComment(message) && (
                               <BubbleConsole>
-                                {t('ORDER', 'Order')} {' '}
-                                <strong>{t(message.change.attribute)}</strong> {' '}
-                                {t('CHANGED_FROM', 'Changed from')} {' '}
-                                {message.change.old !== null && (
-                                  <>
-                                    <strong>{message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.old, 10)) : getStatus(parseInt(message.change.old, 10))}</strong> {' '}
-                                  </>
-                                )}
-                                <>
-                                  {t('TO', 'to')} {' '}
-                                  <strong>{message.change.old === null && message.change.attribute === 'delivery_in' ? 'null' : message.change?.attribute === 'logistic_status' ? getLogisticTagStatus(parseInt(message.change.new, 10)) : getStatus(parseInt(message.change.new, 10))}</strong>
-                                  {message?.change?.comment ? `\n'${message?.change?.comment}'` : ''}
-                                  {(message?.author?.name || message?.author?.lastname) && (
-                                    <p><strong>Author: </strong>{(message?.author?.name ?? '') + ' ' + (message?.author?.lastname ?? '')}</p>
-                                  )}
-                                </>
+                                <div
+                                  dangerouslySetInnerHTML={{
+                                    __html: getHistoryComment(message)
+                                  }}
+                                />
                                 <OverlayTrigger
                                   placement='top'
-                                  overlay={
-                                    <Tooltip>
-                                      {parseDate(message.created_at)}
-                                    </Tooltip>
-                                  }
-                                >
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </OverlayTrigger>
-                              </BubbleConsole>
-                            ) : (
-                              <BubbleConsole>
-                                <>
-                                  {message.change.new !== null ? (
-                                    <>
-                                      <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                                      {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                                      {message.comment && (<><br /> {message.comment.length}</>)}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {t('DRIVER_UNASSIGNED', 'The driver was unnasigned')}
-                                    </>
-                                  )}
-                                </>
-                                <OverlayTrigger
-                                  placement='top'
-                                  overlay={
-                                    <Tooltip>
-                                      {parseDate(message.created_at)}
-                                    </Tooltip>
-                                  }
+                                  overlay={<Tooltip>{parseDate(message.created_at)}</Tooltip>}
                                 >
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </OverlayTrigger>
@@ -650,95 +531,18 @@ export const MessagesUI = (props) => {
                             </BubbleConsole>
                           </MessageConsole>
                         )}
-                        {message.type === 1 && message.change?.attribute !== 'comment' && (
-                          <MessageConsole key={message.id}>
-                            {message.change?.attribute !== 'driver_id' ? (
+                        {message.type === 1 && (
+                          <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
+                            {getHistoryComment(message) && (
                               <BubbleConsole>
-                                {t('ORDER', 'Order')} {' '}
-                                <strong>{t(message.change.attribute)}</strong> {' '}
-                                {t('CHANGED_FROM', 'Changed from')} {' '}
-                                {filterSpecialStatus.includes(message.change.attribute) ? (
-                                  <>
-                                    {message.change.old === null ? <strong>0</strong> : (
-                                      <>
-                                        <strong>{message.change.old}</strong> {' '}
-                                      </>
-                                    )}
-                                    <div style={{ whiteSpace: 'pre' }}>
-                                      {t('TO', 'to')} {' '}
-                                      <strong>{message.change.new}</strong> {' '}
-                                      {t('MINUTES', 'Minutes')}
-                                    </div>
-                                  </>
-                                ) : (
-                                  <>
-                                    {message.change.old !== null && (
-                                      <>
-                                        <strong>
-                                          {
-                                            message.change?.attribute === 'logistic_status'
-                                              ? getLogisticTagStatus(parseInt(message.change.old, 10))
-                                              : message.change?.attribute === 'vehicle'
-                                                ? getVehicleSmmary(message.change.old)
-                                                : getStatus(parseInt(message.change.old, 10))
-                                          }
-                                        </strong>{' '}
-                                      </>
-                                    )}
-                                    <div style={{ whiteSpace: 'pre' }}>
-                                      {t('TO', 'to')} {' '}
-                                      <strong>
-                                        {
-                                          message.change.old === null && message.change.attribute === 'delivery_in'
-                                            ? 'null'
-                                            : message.change?.attribute === 'logistic_status'
-                                              ? getLogisticTagStatus(parseInt(message.change.new, 10))
-                                              : message.change?.attribute === 'vehicle'
-                                                ? getVehicleSmmary(message.change.new)
-                                                : getStatus(parseInt(message.change.new, 10))
-                                        }
-                                      </strong>
-                                      <strong>{message?.change?.comment ? (`\n${t('COMMENT', 'Comment:')}`) : ''}</strong>
-                                      {message?.change?.comment ? ` ${message?.change?.comment}` : ''}
-                                      {(message?.author?.name || message?.author?.lastname) && (
-                                        <p><strong>Author: </strong>{(message?.author?.name ?? '') + ' ' + (message?.author?.lastname ?? '')}</p>
-                                      )}
-                                    </div>
-                                  </>
-                                )}
+                                <div
+                                  dangerouslySetInnerHTML={{
+                                    __html: getHistoryComment(message)
+                                  }}
+                                />
                                 <OverlayTrigger
                                   placement='top'
-                                  overlay={
-                                    <Tooltip>
-                                      {parseDate(message.created_at)}
-                                    </Tooltip>
-                                  }
-                                >
-                                  <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
-                                </OverlayTrigger>
-                              </BubbleConsole>
-                            ) : (
-                              <BubbleConsole>
-                                <>
-                                  {message.change.new !== null ? (
-                                    <>
-                                      <strong>{message.driver?.name} {' '} {message.driver?.lastname && message.driver.lastname}</strong>
-                                      {t('WAS_ASSIGNED_AS_DRIVER', 'was assigned as driver')}
-                                      {message.comment && (<><br /> {message.comment.length}</>)}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {t('DRIVER_UNASSIGNED', 'The driver was unnasigned')}
-                                    </>
-                                  )}
-                                </>
-                                <OverlayTrigger
-                                  placement='top'
-                                  overlay={
-                                    <Tooltip>
-                                      {parseDate(message.created_at)}
-                                    </Tooltip>
-                                  }
+                                  overlay={<Tooltip>{parseDate(message.created_at)}</Tooltip>}
                                 >
                                   <TimeofSent>{getTimeAgo(message.created_at)}</TimeofSent>
                                 </OverlayTrigger>

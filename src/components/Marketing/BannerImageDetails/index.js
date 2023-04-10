@@ -32,6 +32,7 @@ const BannerImageDetailsUI = (props) => {
   const {
     aspectRatio,
     imageState,
+    showAspectRatioBox,
     changesState,
     handleChangeItem,
     selectedLinkType,
@@ -219,6 +220,7 @@ const BannerImageDetailsUI = (props) => {
         className='ordering-img-crop'
       >
         <ImageCrop
+          showAspectRatioBox={showAspectRatioBox}
           aspectRatio={aspectRatio}
           photo={cropState?.data}
           handleChangePhoto={handleChangePhoto}

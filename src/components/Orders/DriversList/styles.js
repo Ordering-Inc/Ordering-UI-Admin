@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const DriversListContainer = styled.div`
-  padding: 15px 0px;
+  padding: 15px 10px;
 `
 
 export const DriverCard = styled.div`

@@ -11,15 +11,18 @@ import {
   ImageCropActionWrapper,
   RangeWrapper,
   ActionContentWrapper,
-  ButtonWrapper
+  ButtonWrapper,
+  ActionAspectRatioBox
 } from './styles'
+import { Checkbox } from '../../../styles/Checkbox'
 
 export const ImageCrop = (props) => {
   const {
     photo,
     handleChangePhoto,
     onClose,
-    aspectRatio
+    aspectRatio,
+    showAspectRatioBox
   } = props
 
   const [, t] = useLanguage()
@@ -69,6 +72,10 @@ export const ImageCrop = (props) => {
     setCropper(_cropper)
   }, [photo, aspectRatio])
 
+  const handleChangeAspectRatio = (checked) => {
+    checked ? cropper.setAspectRatio(18 / 9) : cropper.setAspectRatio(aspectRatio)
+  }
+
   return (
     <Container>
       <ImageCropWrapper>
@@ -93,6 +100,15 @@ export const ImageCrop = (props) => {
             <ArrowClockwise />
           </IconButton>
         </ActionContentWrapper>
+        {showAspectRatioBox && (
+          <ActionAspectRatioBox>
+            <Checkbox
+              id='aspect'
+              onChange={(e) => handleChangeAspectRatio(e.target.checked)}
+            />
+            <label htmlFor='aspect'>{t('USE_WEB_ASPECT_RATIO', 'Use web aspect ratio')}</label>
+          </ActionAspectRatioBox>
+        )}
       </ImageCropActionWrapper>
       <ButtonWrapper>
         <Button

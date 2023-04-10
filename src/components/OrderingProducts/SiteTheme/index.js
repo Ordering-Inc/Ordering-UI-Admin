@@ -84,12 +84,16 @@ const SiteThemeUI = (props) => {
   }, [themesList])
 
   const recursiveAssign = (a, b) => {
-    if (Object(b) !== b) return b
-    if (Object(a) !== a) a = {}
+    if (b) {
+      if (Object(b) !== b) return b
+      if (Object(a) !== a) a = {}
     for (const key in b) {
       a[key] = recursiveAssign(a[key], b[key])
     }
     return a
+    } else {
+      return a
+    }
   }
 
   useEffect(() => {
@@ -164,7 +168,7 @@ const SiteThemeUI = (props) => {
                             const optionObject = components[block][option]
                             return (
                               <React.Fragment key={option}>
-                                {typeof themeValues[selectedPage].components?.[block]?.[option] !== 'undefined' && (
+                                {typeof themeValues[selectedPage]?.components?.[block]?.[option] !== 'undefined' && (
                                   <ThemeOption
                                     name={option}
                                     optionObject={optionObject}
