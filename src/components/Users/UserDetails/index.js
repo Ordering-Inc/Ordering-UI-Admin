@@ -5,7 +5,7 @@ import { UserDetails as UserDetailsController, useLanguage, useSession } from 'o
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { AddressList } from '../../Delivery'
-import { OriginalOrdersManager } from '../../Orders/OrdersManager/Layouts/OriginalOrdersManager'
+import { OrdersManager } from '../../Orders'
 import { BusinessManagerBusinesses } from '../BusinessManagerBusinesses'
 import { ArrowsAngleContract, ArrowsAngleExpand, Envelope, Phone, ThreeDots } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -191,7 +191,7 @@ export const UserDetailsUI = (props) => {
           )}
           {currentMenuSelected === 'orders' && (
             <OrdersWrapper>
-              <OriginalOrdersManager
+              <OrdersManager
                 isSelectedOrders
                 customerId={userState.user?.id}
                 handleCustomOrderDetail={setExtraOpen}
