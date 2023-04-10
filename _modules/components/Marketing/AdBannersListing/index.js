@@ -72,7 +72,8 @@ var AdBannersListing = function AdBannersListing(props) {
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ViewStacked, null),
     info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
     aspectRatio: 300 / 300,
-    isSearhShow: false
+    isSearhShow: false,
+    showAspectRatioBox: true
   }, {
     key: 'app_business_page',
     title: t('APP_BUSINESS_PAGE', 'App business page'),
@@ -80,7 +81,8 @@ var AdBannersListing = function AdBannersListing(props) {
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null),
     info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
     aspectRatio: 300 / 300,
-    isSearhShow: true
+    isSearhShow: true,
+    showAspectRatioBox: true
   }];
   var handleSelectBannerPosition = function handleSelectBannerPosition(key, isInitialRender) {
     var selectedItem = bannerPositions.find(function (item) {
@@ -136,7 +138,8 @@ var AdBannersListing = function AdBannersListing(props) {
     bannerInfo: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.info,
     defaultPosition: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.key,
     aspectRatio: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.aspectRatio,
-    isSearhShow: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.isSearhShow
+    isSearhShow: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.isSearhShow,
+    showAspectRatioBox: openPositionDetail === null || openPositionDetail === void 0 ? void 0 : openPositionDetail.showAspectRatioBox
   })));
 };
 exports.AdBannersListing = AdBannersListing;

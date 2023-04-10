@@ -10,7 +10,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styledComponents = require("styled-components");
-var _OriginalOrdersManager = require("../OrdersManager/Layouts/OriginalOrdersManager");
+var _OrdersManager = require("../OrdersManager");
 var _Buttons = require("../../../styles/Buttons");
 var _styles = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -123,7 +123,7 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
     bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_styles.Image, {
     bgimage: optimizeImage((user === null || user === void 0 ? void 0 : user.photo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$icons = _theme$images2.icons) === null || _theme$images2$icons === void 0 ? void 0 : _theme$images2$icons.noDriver), 'h_50,c_limit')
-  })), /*#__PURE__*/_react.default.createElement(_styles.Name, null, /*#__PURE__*/_react.default.createElement("p", null, isBusiness ? business.name : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname)), /*#__PURE__*/_react.default.createElement("p", null, isDriver && t('DRIVER', 'Driver'), isCustomer && t('CUSTOMER', 'Customer'), isBusiness && t('BUSINESS', 'Business')))), /*#__PURE__*/_react.default.createElement(_OriginalOrdersManager.OriginalOrdersManager, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Name, null, /*#__PURE__*/_react.default.createElement("p", null, isBusiness ? business.name : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname)), /*#__PURE__*/_react.default.createElement("p", null, isDriver && t('DRIVER', 'Driver'), isCustomer && t('CUSTOMER', 'Customer'), isBusiness && t('BUSINESS', 'Business')))), /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
     isSelectedOrders: true,
     driverId: isDriver ? user.id : null,
     customerId: isCustomer ? user.id : null,

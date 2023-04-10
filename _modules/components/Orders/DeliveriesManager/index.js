@@ -133,7 +133,7 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     open: isOpenOrderDetail,
     order: detailsOrder,
     orderId: orderDetailId,
-    driversList: driversList,
+    drivers: driversList.drivers,
     onClose: function onClose() {
       return handleBackRedirect();
     }

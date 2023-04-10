@@ -37,6 +37,7 @@ var BannerImageDetailsUI = function BannerImageDetailsUI(props) {
   var _changesState$changes, _changesState$changes2, _imageState$image2, _imageState$image3;
   var aspectRatio = props.aspectRatio,
     imageState = props.imageState,
+    showAspectRatioBox = props.showAspectRatioBox,
     changesState = props.changesState,
     handleChangeItem = props.handleChangeItem,
     selectedLinkType = props.selectedLinkType,
@@ -260,6 +261,7 @@ var BannerImageDetailsUI = function BannerImageDetailsUI(props) {
     },
     className: "ordering-img-crop"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    showAspectRatioBox: showAspectRatioBox,
     aspectRatio: aspectRatio,
     photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
     handleChangePhoto: handleChangePhoto

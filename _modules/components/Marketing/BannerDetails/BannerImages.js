@@ -26,7 +26,8 @@ var BannerImages = function BannerImages(props) {
     handleDeleteBannerItem = props.handleDeleteBannerItem,
     setBannerMoveDistance = props.setBannerMoveDistance,
     handleSuccessBannerItemAdd = props.handleSuccessBannerItemAdd,
-    bannerId = props.bannerId;
+    bannerId = props.bannerId,
+    showAspectRatioBox = props.showAspectRatioBox;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -77,6 +78,7 @@ var BannerImages = function BannerImages(props) {
     key: selectedImage === null || selectedImage === void 0 ? void 0 : selectedImage.id,
     image: selectedImage,
     aspectRatio: aspectRatio,
+    showAspectRatioBox: showAspectRatioBox,
     onClose: function onClose() {
       return handleCloseImageDetail();
     },

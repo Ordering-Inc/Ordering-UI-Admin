@@ -13,6 +13,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styledComponents = require("styled-components");
 require("cropperjs/dist/cropper.css");
 var _styles2 = require("./styles");
+var _Checkbox = require("../../../styles/Checkbox");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -26,7 +27,8 @@ var ImageCrop = function ImageCrop(props) {
   var photo = props.photo,
     handleChangePhoto = props.handleChangePhoto,
     onClose = props.onClose,
-    aspectRatio = props.aspectRatio;
+    aspectRatio = props.aspectRatio,
+    showAspectRatioBox = props.showAspectRatioBox;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -78,6 +80,9 @@ var ImageCrop = function ImageCrop(props) {
     }
     setCropper(_cropper);
   }, [photo, aspectRatio]);
+  var handleChangeAspectRatio = function handleChangeAspectRatio(checked) {
+    checked ? cropper.setAspectRatio(18 / 9) : cropper.setAspectRatio(aspectRatio);
+  };
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageCropWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     ref: cropperRef,
     src: photo
@@ -96,7 +101,14 @@ var ImageCrop = function ImageCrop(props) {
     className: "percent"
   }, parseInt(zoomValue * 2), " %")), /*#__PURE__*/_react.default.createElement(_styles2.ActionContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     onClick: handleChangeRotate
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('ROTATE', 'Rotate')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowClockwise, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('ROTATE', 'Rotate')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowClockwise, null))), showAspectRatioBox && /*#__PURE__*/_react.default.createElement(_styles2.ActionAspectRatioBox, null, /*#__PURE__*/_react.default.createElement(_Checkbox.Checkbox, {
+    id: "aspect",
+    onChange: function onChange(e) {
+      return handleChangeAspectRatio(e.target.checked);
+    }
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "aspect"
+  }, t('USE_WEB_ASPECT_RATIO', 'Use web aspect ratio')))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "7.6px",
     color: "primary",
     onClick: getCropData
