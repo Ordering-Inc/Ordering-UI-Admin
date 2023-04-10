@@ -62,7 +62,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleSuccessAddUser = props.handleSuccessAddUser,
     handleSuccessDeleteUser = props.handleSuccessDeleteUser,
     actionDisabled = props.actionDisabled,
-    driversGroupsState = props.driversGroupsState;
+    driversGroupsState = props.driversGroupsState,
+    setSelectedUsers = props.setSelectedUsers;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(null),
@@ -248,7 +249,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     handleOpenUserDetails: handleOpenUserDetails,
     handleOpenUserAddForm: handleOpenUserAddForm,
-    actionDisabled: actionDisabled
+    actionDisabled: actionDisabled,
+    setSelectedUsers: setSelectedUsers
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     isDriversPage: isDriversPage,
     isDriversManagersPage: isDriversManagersPage,

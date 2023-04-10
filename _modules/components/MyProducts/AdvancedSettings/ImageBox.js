@@ -48,8 +48,13 @@ var ImageBox = function ImageBox(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     cropState = _useState4[0],
     setCropState = _useState4[1];
+  var _useState5 = (0, _react.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    picture = _useState6[0],
+    setPicture = _useState6[1];
   var handleChangeImage = function handleChangeImage(croppedImg) {
     handleChangePhoto(croppedImg, path);
+    setPicture(croppedImg);
     setCropState({
       name: null,
       data: null,
@@ -94,6 +99,10 @@ var ImageBox = function ImageBox(props) {
       content: []
     });
   };
+  (0, _react.useEffect)(function () {
+    if (!photo) return;
+    setPicture(photo);
+  }, [photo]);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.ImageBoxContainer, {
     isBig: isBig,
     onClick: function onClick() {
@@ -112,12 +121,12 @@ var ImageBox = function ImageBox(props) {
       return handleFiles(dataTransfer.files, 'logo');
     },
     accept: "image/png, image/jpeg, image/jpg"
-  }, photo && /*#__PURE__*/_react.default.createElement("img", {
-    src: photo,
+  }, picture && /*#__PURE__*/_react.default.createElement("img", {
+    src: picture,
     alt: "logo image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, {
-    bgimage: photo
+    bgimage: picture
   }, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles.ImgInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, title), /*#__PURE__*/_react.default.createElement("p", null, ratio), /*#__PURE__*/_react.default.createElement("p", null, t('FORMAT', 'Format'), ": PNG")), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
     height: "80vh",

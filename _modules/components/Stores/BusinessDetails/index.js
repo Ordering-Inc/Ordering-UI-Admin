@@ -24,6 +24,8 @@ var _BusinessWebhooks = require("../BusinessWebhooks");
 var _BusinessNotifications = require("../BusinessNotifications");
 var _BusinessOrderingChannels = require("../BusinessOrderingChannels");
 var _BusinessFrontLayout = require("../BusinessFrontLayout");
+var _BusinessPlaceGroupList = require("../BusinessPlaceGroupList");
+var _SpoonityApiKey = require("../SpoonityApiKey");
 var _Shared = require("../../Shared");
 var _styles = require("./styles");
 var _BusinessSalesChannel = require("../BusinessSalesChannel");
@@ -39,7 +41,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDetailsUI = function BusinessDetailsUI(props) {
-  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _businessState$busine5;
+  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _businessState$busine5, _businessState$busine6, _businessState$busine7;
   var open = props.open,
     businessId = props.businessId,
     businessState = props.businessState,
@@ -58,7 +60,9 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleDuplicateBusiness = props.handleDuplicateBusiness,
     handleDeleteBusiness = props.handleDeleteBusiness,
     actionStatus = props.actionStatus,
-    handleUpdatePreorderConfigs = props.handleUpdatePreorderConfigs;
+    handleUpdatePreorderConfigs = props.handleUpdatePreorderConfigs,
+    handleUpdateSpoonityKey = props.handleUpdateSpoonityKey,
+    spoonityKeyState = props.spoonityKeyState;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -88,6 +92,9 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     alertState = _useState8[0],
     setAlertState = _useState8[1];
+  var spoonityConfig = businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.configs) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.find(function (config) {
+    return config.key === 'spoonity_integration_api_key';
+  });
   var isAdmin = (user === null || user === void 0 ? void 0 : user.level) === 0;
   var _useState9 = (0, _react.useState)(null),
     _useState10 = _slicedToArray(_useState9, 2),
@@ -195,7 +202,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleSucessUpdateBusiness: handleSucessUpdateBusiness,
     handleDuplicateBusiness: handleDuplicateBusiness,
     handleDeleteBusiness: handleDeleteBusiness,
-    extraOpen: extraOpen
+    extraOpen: extraOpen,
+    spoonityConfig: spoonityConfig
   }), extraOpen && /*#__PURE__*/_react.default.createElement(_Shared.MoreSidebarLayout, {
     isExtendExtraOpen: isExtendExtraOpen,
     onClose: handleCloseExtraOpen
@@ -207,7 +215,7 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleAddBusinessOwner: handleAddBusinessOwner,
     formState: formState,
     setFormState: setFormState,
-    businessTypes: businessTypes || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : _businessState$busine.types),
+    businessTypes: businessTypes || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.types),
     handleUpdateBusinessClick: handleUpdateBusinessClick,
     setBusinessTypes: setBusinessTypes,
     handleSuccessAddBusinessItem: handleSuccessAddBusinessItem,
@@ -243,8 +251,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleUpdateBusinessClick: handleUpdateBusinessClick
   }), selectedItem === 'promotions' && /*#__PURE__*/_react.default.createElement(_BusinessPromotionList.BusinessPromotionList, {
-    promotions: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.offers,
-    businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.id,
+    promotions: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.offers,
+    businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.id,
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     setIsExtendExtraOpen: setIsExtendExtraOpen,
     handleSuccessUpdate: handleUpdateBusinessState
@@ -256,8 +264,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleUpdateBusinessClick: handleUpdateBusinessClick,
     handleUpdatePreorderConfigs: handleUpdatePreorderConfigs
   }), selectedItem === 'custom_fields' && /*#__PURE__*/_react.default.createElement(_BusinessCustomFields.BusinessCustomFields, {
-    businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.id,
-    metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine5 = businessState.business) === null || _businessState$busine5 === void 0 ? void 0 : _businessState$busine5.metafields,
+    businessId: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.id,
+    metafields: businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.metafields,
     handleSuccessAddMetaFields: function handleSuccessAddMetaFields(result) {
       return handleSuccessAddBusinessItem('metafields', result);
     },
@@ -284,6 +292,17 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
   }), selectedItem === 'webhooks' && /*#__PURE__*/_react.default.createElement(_BusinessWebhooks.BusinessWebhooks, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessUpdate: handleUpdateBusinessState
+  }), selectedItem === 'places' && /*#__PURE__*/_react.default.createElement(_BusinessPlaceGroupList.BusinessPlaceGroupList, {
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+    handleSuccessUpdate: handleUpdateBusinessState,
+    setIsExtendExtraOpen: setIsExtendExtraOpen
+  }), selectedItem === 'spoonity_key' && /*#__PURE__*/_react.default.createElement(_SpoonityApiKey.SpoonityApiKey, {
+    business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+    handleSuccessUpdate: handleUpdateBusinessState,
+    handleUpdateBusinessClick: handleUpdateBusinessClick,
+    spoonityConfig: spoonityConfig,
+    handleUpdateSpoonityKey: handleUpdateSpoonityKey,
+    spoonityKeyState: spoonityKeyState
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

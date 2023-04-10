@@ -97,6 +97,14 @@ var UploadMenuGuideUI = function UploadMenuGuideUI(props) {
       });
     }
   };
+  (0, _react.useEffect)(function () {
+    if (formState !== null && formState !== void 0 && formState.error) {
+      setAlertState({
+        open: true,
+        content: formState.error
+      });
+    }
+  }, [formState === null || formState === void 0 ? void 0 : formState.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, t('UPLOAD_YOUR_MENU', 'Upload your menu')), /*#__PURE__*/_react.default.createElement("p", null, t('UPLOAD_YOUR_MENU_DESC', 'Click to upload your menu (PDF or image file) or share your menu link (For website or another online ordering system)')), /*#__PURE__*/_react.default.createElement(_styles2.FileUploadBox, {
     onClick: function onClick() {
       return fileRef.current.click();

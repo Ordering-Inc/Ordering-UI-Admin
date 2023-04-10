@@ -196,7 +196,7 @@ var DeliveryZone = function DeliveryZone(props) {
     maxLength: 2,
     value: (_zoneState$data$dista = zoneState === null || zoneState === void 0 ? void 0 : (_zoneState$data = zoneState.data) === null || _zoneState$data === void 0 ? void 0 : _zoneState$data.distance) !== null && _zoneState$data$dista !== void 0 ? _zoneState$data$dista : '',
     onInput: function onInput(e) {
-      e.target.value = e.target.value.match('^[1-9]{1,2}$');
+      e.target.value = e.target.value.match("^[".concat(e.target.value === '0' ? '1' : '0', "-9]{1,2}$"));
     },
     onChange: function onChange(e) {
       var _configState$configs4, _configState$configs5;

@@ -488,7 +488,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       return setShowPopup(false);
     },
     orderingBusiness: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    getBusiness: getBusiness
+    getBusiness: getBusiness,
+    handleOpenCategoryDetails: handleOpenCategoryDetails
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "769px",
     padding: "30px",

@@ -13,7 +13,6 @@ var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox")
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
-var _Users = require("../../Users");
 var _Shared = require("../../Shared");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -37,7 +36,6 @@ var UsersList = function UsersList(props) {
     usersList = props.usersList,
     paginationProps = props.paginationProps,
     getUsers = props.getUsers,
-    handleChangeUserType = props.handleChangeUserType,
     handleChangeActiveUser = props.handleChangeActiveUser,
     selectedUsers = props.selectedUsers,
     handleSelectedUsers = props.handleSelectedUsers,
@@ -45,7 +43,8 @@ var UsersList = function UsersList(props) {
     handleOpenUserAddForm = props.handleOpenUserAddForm,
     isDriversPage = props.isDriversPage,
     isDriversManagersPage = props.isDriversManagersPage,
-    actionDisabled = props.actionDisabled;
+    actionDisabled = props.actionDisabled,
+    setSelectedUsers = props.setSelectedUsers;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -59,25 +58,10 @@ var UsersList = function UsersList(props) {
     _useState2 = _slicedToArray(_useState, 2),
     confirmAdmin = _useState2[0],
     setConfirmAdmin = _useState2[1];
-  var getUserType = function getUserType(type) {
-    var userTypes = [{
-      key: 0,
-      value: t('ADMINISTRATOR', 'Administrator')
-    }, {
-      key: 1,
-      value: t('CITY_MANAGER', 'City manager')
-    }, {
-      key: 2,
-      value: t('BUSINESS_OWNER', 'Business owner')
-    }, {
-      key: 3,
-      value: t('USER', 'User')
-    }];
-    var objectStatus = userTypes.find(function (o) {
-      return o.key === type;
-    });
-    return objectStatus && objectStatus;
-  };
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isAllChecked = _useState4[0],
+    setIsAllChecked = _useState4[1];
   var onChangeUserDetails = function onChangeUserDetails(e, user) {
     var isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action');
     if (isInvalid) return;
@@ -111,21 +95,32 @@ var UsersList = function UsersList(props) {
       });
     }
   };
-  var onChangeUserType = function onChangeUserType(user, type) {
-    if (user.level !== 0) {
-      handleChangeUserType(type);
+  var handleSelecteAllUser = function handleSelecteAllUser() {
+    var _usersList$users;
+    var userIds = (_usersList$users = usersList.users) === null || _usersList$users === void 0 ? void 0 : _usersList$users.reduce(function (ids, user) {
+      return [].concat(_toConsumableArray(ids), [user.id]);
+    }, []);
+    if (!isAllChecked) {
+      setSelectedUsers([].concat(_toConsumableArray(selectedUsers), _toConsumableArray(userIds)));
     } else {
-      setConfirmAdmin({
-        open: true,
-        handleOnConfirm: function handleOnConfirm() {
-          setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {
-            open: false
-          }));
-          handleChangeUserType(type);
-        }
+      var userIdsToDeleteSet = new Set(userIds);
+      var updatedSelectedOrderIds = selectedUsers.filter(function (name) {
+        return !userIdsToDeleteSet.has(name);
       });
+      setSelectedUsers(updatedSelectedOrderIds);
     }
   };
+  (0, _react.useEffect)(function () {
+    var _usersList$users2;
+    if (usersList.loading) return;
+    var userIds = (_usersList$users2 = usersList.users) === null || _usersList$users2 === void 0 ? void 0 : _usersList$users2.reduce(function (ids, user) {
+      return [].concat(_toConsumableArray(ids), [user.id]);
+    }, []);
+    var _isAllChecked = userIds.every(function (elem) {
+      return selectedUsers.includes(elem);
+    });
+    setIsAllChecked(_isAllChecked);
+  }, [usersList.users, selectedUsers]);
   (0, _react.useEffect)(function () {
     if (usersList.loading || usersList.users.length > 0 || paginationProps.totalPages <= 1) return;
     if (paginationProps.currentPage !== paginationProps.totalPages) {
@@ -134,15 +129,23 @@ var UsersList = function UsersList(props) {
       handleChangePage(paginationProps.currentPage - 1);
     }
   }, [usersList.users, paginationProps]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", null, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement("th", null), /*#__PURE__*/_react.default.createElement("th", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, isDriversPage && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.UserIdWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+    className: "all-checkbox",
+    isChecked: !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked,
+    onClick: function onClick() {
+      return handleSelecteAllUser();
+    }
+  }, !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), t('ID', 'ID'))), /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", null, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement("th", {
     colSpan: 2
   }, t('ACTION', 'Action')))), usersList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserMainInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, isDriversPage && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserIdWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 20,
       height: 20
-    })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, {
+    })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 40
+    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserMainInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, {
       isSkeleton: true
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
@@ -159,17 +162,12 @@ var UsersList = function UsersList(props) {
       width: 100
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    })))), /*#__PURE__*/_react.default.createElement("td", null, !(isDriversPage || isDriversManagersPage) && /*#__PURE__*/_react.default.createElement(_styles2.UserTypeWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
-    }), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 100
     })))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 50
     })))));
   }) : usersList === null || usersList === void 0 ? void 0 : usersList.users.map(function (user) {
-    var _getUserType;
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: user.id,
       className: user.id === parseInt(userDetailsId) ? 'active' : null
@@ -177,7 +175,13 @@ var UsersList = function UsersList(props) {
       onClick: function onClick(e) {
         return onChangeUserDetails(e, user);
       }
-    }, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserMainInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+    }, isDriversPage && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserIdWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+      className: "user_checkbox",
+      isChecked: selectedUsers.includes(user.id),
+      onClick: function onClick() {
+        return handleSelectedUsers(user.id);
+      }
+    }, selectedUsers.includes(user.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), user === null || user === void 0 ? void 0 : user.id)), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserMainInfo, null, isDriversManagersPage && /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
       className: "user_checkbox",
       isChecked: selectedUsers.includes(user.id),
       onClick: function onClick() {
@@ -189,15 +193,7 @@ var UsersList = function UsersList(props) {
       className: "bold"
     }, user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email)), ((user === null || user === void 0 ? void 0 : user.phone_verified) || (user === null || user === void 0 ? void 0 : user.email_verified)) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItemsContainer, null, !!(user !== null && user !== void 0 && user.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!(user !== null && user !== void 0 && user.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, !(isDriversPage || isDriversManagersPage) && /*#__PURE__*/_react.default.createElement(_styles2.UserTypeWrapper, {
-      className: "user_type_selector"
-    }, /*#__PURE__*/_react.default.createElement(_Users.UserTypeSelector, {
-      userId: user.id,
-      defaultUserType: user === null || user === void 0 ? void 0 : user.level,
-      handleChangeUserType: function handleChangeUserType(type) {
-        return onChangeUserType(user, type);
-      }
-    }), /*#__PURE__*/_react.default.createElement("p", null, (_getUserType = getUserType(user === null || user === void 0 ? void 0 : user.level)) === null || _getUserType === void 0 ? void 0 : _getUserType.value))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
+    }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
       className: "user_enable_control"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       disabled: actionDisabled,

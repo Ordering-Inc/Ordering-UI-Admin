@@ -26,6 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductStepUI = function ProductStepUI(props) {
+  var _actionState$content, _actionState$content2;
   var onClose = props.onClose,
     businessList = props.businessList,
     setBusiness = props.setBusiness,
@@ -35,7 +36,8 @@ var ProductStepUI = function ProductStepUI(props) {
     business = props.business,
     isLoading = props.isLoading,
     orderingBusiness = props.orderingBusiness,
-    countriesState = props.countriesState;
+    countriesState = props.countriesState,
+    handleOpenCategoryDetails = props.handleOpenCategoryDetails;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -60,6 +62,10 @@ var ProductStepUI = function ProductStepUI(props) {
     });
     onClose();
   };
+  var handleAddManuallyProduct = function handleAddManuallyProduct() {
+    onClose();
+    handleOpenCategoryDetails();
+  };
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, step === 1 && /*#__PURE__*/_react.default.createElement(_ProductStartGuide.ProductStartGuide, {
     onClose: onClose,
     setStep: setStep,
@@ -78,7 +84,7 @@ var ProductStepUI = function ProductStepUI(props) {
   }), step === 3 && option === 2 && (actionState === null || actionState === void 0 ? void 0 : actionState.loading) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WE_ARE_IMPORTING_YOUR_MENU', 'We are importing your menu.')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.importMenu,
     alt: ""
-  }))), step === 3 && option === 2 && !(actionState !== null && actionState !== void 0 && actionState.loading) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('YOUR_MENU_HAS_BEEN_IMPORTED', 'Your menu has been imported')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
+  }))), step === 3 && option === 2 && !(actionState !== null && actionState !== void 0 && actionState.loading) && (actionState === null || actionState === void 0 ? void 0 : (_actionState$content = actionState.content) === null || _actionState$content === void 0 ? void 0 : _actionState$content.products) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('YOUR_MENU_HAS_BEEN_IMPORTED', 'Your menu has been imported')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.importedMenu,
     alt: ""
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
@@ -86,7 +92,13 @@ var ProductStepUI = function ProductStepUI(props) {
     onClick: function onClick() {
       return handleCheckMenu();
     }
-  }, t('CHECK_MENU', 'Check menu')))), step === 2 && option === 3 && /*#__PURE__*/_react.default.createElement(_UploadMenuGuide.UploadMenuGuide, {
+  }, t('CHECK_MENU', 'Check menu')))), step === 3 && option === 2 && !(actionState !== null && actionState !== void 0 && actionState.loading) && (actionState === null || actionState === void 0 ? void 0 : (_actionState$content2 = actionState.content) === null || _actionState$content2 === void 0 ? void 0 : _actionState$content2.products) === 0 && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('YOUR_MENU_COULDNT__BE_IMPORTED', 'Your menu couldn\'t be imported')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.general.importMenu,
+    alt: ""
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    onClick: handleAddManuallyProduct
+  }, t('ADD_PRODUCTS_MANUALLY', 'Add products manually')))), step === 2 && option === 3 && /*#__PURE__*/_react.default.createElement(_UploadMenuGuide.UploadMenuGuide, {
     handleBack: function handleBack() {
       return setStep(1);
     },
