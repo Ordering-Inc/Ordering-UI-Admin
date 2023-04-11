@@ -121,16 +121,14 @@ export const MessagesUI = (props) => {
     const quickMsg = message ? `${message} ${msg}` : msg
     setValue('message', quickMsg)
     setMessage(quickMsg)
-  }
-
-  useEffect(() => {
     const msgElement = messageInputRef?.current
     if (msgElement) {
+      msgElement.value = quickMsg
       msgElement.focus()
       msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length
       msgElement.scrollLeft = msgElement.scrollWidth
     }
-  }, [message])
+  }
 
   useEffect(() => {
     if (user.level === 0) setMessageList(adminMessageList)
