@@ -149,15 +149,14 @@ var MessagesUI = function MessagesUI(props) {
     var quickMsg = message ? "".concat(message, " ").concat(msg) : msg;
     setValue('message', quickMsg);
     setMessage(quickMsg);
-  };
-  (0, _react.useEffect)(function () {
     var msgElement = messageInputRef === null || messageInputRef === void 0 ? void 0 : messageInputRef.current;
     if (msgElement) {
+      msgElement.value = quickMsg;
       msgElement.focus();
       msgElement.selectionStart = msgElement.selectionEnd = msgElement.value.length;
       msgElement.scrollLeft = msgElement.scrollWidth;
     }
-  }, [message]);
+  };
   (0, _react.useEffect)(function () {
     if (user.level === 0) setMessageList(adminMessageList);else if (user.level === 2) setMessageList(storeMessageList);else setMessageList([]);
   }, [user]);
