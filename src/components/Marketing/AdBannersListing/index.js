@@ -59,7 +59,8 @@ export const AdBannersListing = (props) => {
       icon: <ViewStacked />,
       info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
       aspectRatio: 300 / 300,
-      isSearhShow: false
+      isSearhShow: false,
+      showAspectRatioBox: true
     },
     {
       key: 'app_business_page',
@@ -68,7 +69,8 @@ export const AdBannersListing = (props) => {
       icon: <Shop />,
       info: t('RECOMMENDED_IMAGE_SIZE', 'Recommended size _size_').replace('_size_', '300 x 300'),
       aspectRatio: 300 / 300,
-      isSearhShow: true
+      isSearhShow: true,
+      showAspectRatioBox: true
     }
   ]
 
@@ -145,6 +147,7 @@ export const AdBannersListing = (props) => {
             defaultPosition={openPositionDetail?.key}
             aspectRatio={openPositionDetail?.aspectRatio}
             isSearhShow={openPositionDetail?.isSearhShow}
+            showAspectRatioBox={openPositionDetail?.showAspectRatioBox}
           />
         </SideBar>
       )}
