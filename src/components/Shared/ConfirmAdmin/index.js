@@ -285,7 +285,6 @@ const ConfirmAdminUI = (props) => {
               borderRadius='8px'
               type='button'
               color='primary'
-              // disabled={formState.loading}
               onClick={() => {
                 setWillVerifyOtpState(false)
               }}
