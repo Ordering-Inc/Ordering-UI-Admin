@@ -22,16 +22,16 @@ export const TimeScheduleItemContainer = styled.div`
     }
 
     &:first-child {
-      width: 95px;
+      min-width: 95px;
     }
 
     &:nth-child(2) {
       flex-direction: column;
       flex: 1;
       ${props => props.theme?.rtl ? css`
-        padding-right: 10px;
+        padding-right: 8px;
       ` : css`
-        padding-left: 10px;
+        padding-left: 8px;
       `}
       > div {
         display: flex;
@@ -72,7 +72,7 @@ export const TimeScheduleItemContainer = styled.div`
     > div {
       h4 {
         font-size: 14px;
-        padding: 0 16px;
+        padding: 0 12px;
       }
       &:nth-child(2) {
         p {
@@ -124,7 +124,7 @@ export const SelectWrapper = styled.div`
   }
 
   @media (min-width: 450px) {
-    width: 100px;
+    width: 95px;
     .select {
       > div {
         font-size: 16px;
@@ -135,6 +135,7 @@ export const SelectWrapper = styled.div`
 
 export const Option = styled.div`
   white-space: nowrap;
+  font-size: 15px;
 `
 
 export const SplitLine = styled.div`
@@ -185,4 +186,8 @@ export const AddScheduleIconWrapper = styled.div`
   @media (min-width: 450px) {
     width: 56px;
   }
+`
+export const DateWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `
