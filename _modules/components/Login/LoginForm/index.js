@@ -428,9 +428,15 @@ var LoginFormUI = function LoginFormUI(props) {
   }));
 };
 var LoginForm = function LoginForm(props) {
+  var _useContext3 = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
+    _useContext4 = _slicedToArray(_useContext3, 2),
+    configFile = _useContext4[0],
+    setConfigFile = _useContext4[1];
   var loginControllerProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LoginFormUI,
-    allowedLevels: [0, 2, 5, 8]
+    allowedLevels: [0, 2, 5, 8],
+    configFile: configFile,
+    setConfigFile: setConfigFile
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LoginForm, loginControllerProps);
 };

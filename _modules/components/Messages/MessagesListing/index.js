@@ -178,7 +178,7 @@ var MessagesListingUI = function MessagesListingUI(props) {
     open: isOpenOrderDetail,
     order: detailsOrder,
     orderId: orderDetailId,
-    driversList: driversList,
+    drivers: driversList.drivers,
     onClose: function onClose() {
       return setIsOpenOrderDetail(false);
     }

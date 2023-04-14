@@ -87,23 +87,24 @@ var BusinessLocation = function BusinessLocation(props) {
   var getTimeZone = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(address) {
       var _address$location, _address$location2;
-      var date, timestamp, url, response, result;
+      var date, timestamp, timezoneApiKey, url, response, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               date = new Date();
               timestamp = Math.floor(date.getTime() / 1000);
-              url = "https://maps.googleapis.com/maps/api/timezone/json?location=".concat(address === null || address === void 0 ? void 0 : (_address$location = address.location) === null || _address$location === void 0 ? void 0 : _address$location.lat, ",").concat(address === null || address === void 0 ? void 0 : (_address$location2 = address.location) === null || _address$location2 === void 0 ? void 0 : _address$location2.lng, "&timestamp=").concat(timestamp, "&key=").concat(googleMapsApiKey);
-              _context.next = 5;
+              timezoneApiKey = googleMapsApiKey === 'AIzaSyBvsSkMYPSDSkdk7YFrSf5FoGonIzr6fJ0' ? 'AIzaSyCYPCOfiTo9jxuxLWnWTup6mmICPxfLegI' : googleMapsApiKey;
+              url = "https://maps.googleapis.com/maps/api/timezone/json?location=".concat(address === null || address === void 0 ? void 0 : (_address$location = address.location) === null || _address$location === void 0 ? void 0 : _address$location.lat, ",").concat(address === null || address === void 0 ? void 0 : (_address$location2 = address.location) === null || _address$location2 === void 0 ? void 0 : _address$location2.lng, "&timestamp=").concat(timestamp, "&key=").concat(timezoneApiKey);
+              _context.next = 6;
               return fetch(url, {
                 method: 'GET'
               });
-            case 5:
+            case 6:
               response = _context.sent;
-              _context.next = 8;
+              _context.next = 9;
               return response.json();
-            case 8:
+            case 9:
               result = _context.sent;
               setFormState(function (prevState) {
                 return _objectSpread(_objectSpread({}, prevState), {}, {
@@ -117,7 +118,7 @@ var BusinessLocation = function BusinessLocation(props) {
                   })
                 });
               });
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }

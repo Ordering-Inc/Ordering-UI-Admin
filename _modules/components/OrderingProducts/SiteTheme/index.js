@@ -98,12 +98,16 @@ var SiteThemeUI = function SiteThemeUI(props) {
     setThemeOptions(_themeOptions);
   }, [themesList]);
   var recursiveAssign = function recursiveAssign(a, b) {
-    if (Object(b) !== b) return b;
-    if (Object(a) !== a) a = {};
-    for (var key in b) {
-      a[key] = recursiveAssign(a[key], b[key]);
+    if (b) {
+      if (Object(b) !== b) return b;
+      if (Object(a) !== a) a = {};
+      for (var key in b) {
+        a[key] = recursiveAssign(a[key], b[key]);
+      }
+      return a;
+    } else {
+      return a;
     }
-    return a;
   };
   (0, _react.useEffect)(function () {
     var _siteThemesState$resu, _siteThemesState$resu2, _siteThemesState$resu3, _siteThemesState$resu4, _siteThemesState$resu5;
@@ -174,11 +178,11 @@ var SiteThemeUI = function SiteThemeUI(props) {
     }), Object.keys(components[block]).filter(function (option) {
       return option !== 'components' && option !== 'value_type';
     }).map(function (option) {
-      var _themeValues$selected2, _themeValues$selected3;
+      var _themeValues$selected2, _themeValues$selected3, _themeValues$selected4;
       var optionObject = components[block][option];
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: option
-      }, typeof ((_themeValues$selected2 = themeValues[selectedPage].components) === null || _themeValues$selected2 === void 0 ? void 0 : (_themeValues$selected3 = _themeValues$selected2[block]) === null || _themeValues$selected3 === void 0 ? void 0 : _themeValues$selected3[option]) !== 'undefined' && /*#__PURE__*/_react.default.createElement(_ThemeOption.ThemeOption, {
+      }, typeof ((_themeValues$selected2 = themeValues[selectedPage]) === null || _themeValues$selected2 === void 0 ? void 0 : (_themeValues$selected3 = _themeValues$selected2.components) === null || _themeValues$selected3 === void 0 ? void 0 : (_themeValues$selected4 = _themeValues$selected3[block]) === null || _themeValues$selected4 === void 0 ? void 0 : _themeValues$selected4[option]) !== 'undefined' && /*#__PURE__*/_react.default.createElement(_ThemeOption.ThemeOption, {
         name: option,
         optionObject: optionObject,
         valueObject: themeValues[selectedPage].components[block][option],
@@ -188,13 +192,13 @@ var SiteThemeUI = function SiteThemeUI(props) {
         handleAddThemeGallery: handleAddThemeGallery
       }));
     }), ((_components$block4 = components[block]) === null || _components$block4 === void 0 ? void 0 : _components$block4.components) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys((_components$block5 = components[block]) === null || _components$block5 === void 0 ? void 0 : _components$block5.components).map(function (component) {
-      var _components$block6, _themeValues$selected4;
+      var _components$block6, _themeValues$selected5;
       var componentObject = (_components$block6 = components[block]) === null || _components$block6 === void 0 ? void 0 : _components$block6.components[component];
       return /*#__PURE__*/_react.default.createElement(_ThemeComponent.ThemeComponent, {
         key: component,
         name: component,
         componentObject: componentObject,
-        valueObject: (_themeValues$selected4 = themeValues[selectedPage].components[block]) === null || _themeValues$selected4 === void 0 ? void 0 : _themeValues$selected4.components[component],
+        valueObject: (_themeValues$selected5 = themeValues[selectedPage].components[block]) === null || _themeValues$selected5 === void 0 ? void 0 : _themeValues$selected5.components[component],
         themeValues: themeValues,
         setThemeValues: setThemeValues,
         path: [selectedPage, 'components', block, 'components', component].join('.'),
