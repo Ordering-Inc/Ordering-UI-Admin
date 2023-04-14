@@ -177,7 +177,7 @@ export const SeoOptions = (props) => {
                       <img src={formState?.changes?.seo_image} alt='business image' loading='lazy' />
                   )}
                 <UploadImageIconContainer
-                  isImage={formState?.changes?.seo_image || data.seo_image}
+                  isImage={formState?.changes?.seo_image || data?.seo_image}
                 >
                   <CameraWrapper>
                     <Camera />
@@ -239,7 +239,10 @@ export const SeoOptions = (props) => {
                   ? formState?.result?.result?.seo_keywords
                   : formState?.changes?.seo_keywords ?? data?.seo_keywords ?? ''
               }
-              onChange={(e) => handleProductCategoryChangeInput(e)}
+              onChange={(e) => {
+                if (isBusinessSeo) handleChangeInput(e)
+                if (isProductSeo || isCategorySeo) handleProductCategoryChangeInput(e)
+              }}
               placeholder={t('SEO_KEYWORDS', 'SEO Keywords')}
             />
           </WrapperDescription>
@@ -254,7 +257,10 @@ export const SeoOptions = (props) => {
                 ? formState?.result?.result?.slug
                 : formState?.changes?.slug ?? data?.slug ?? ''
             }
-            onChange={(e) => handleProductCategoryChangeInput(e)}
+            onChange={(e) => {
+              if (isBusinessSeo) handleChangeInput(e)
+              if (isProductSeo || isCategorySeo) handleProductCategoryChangeInput(e)
+            }}
           />
         </WrapperDescription>
         <ActionButtons>
