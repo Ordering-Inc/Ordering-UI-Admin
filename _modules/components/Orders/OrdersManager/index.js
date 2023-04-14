@@ -41,9 +41,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     citiesList = props.citiesList,
     ordersStatusGroup = props.ordersStatusGroup,
     filterValues = props.filterValues,
-    deletedOrderId = props.deletedOrderId,
+    deletedOrderIds = props.deletedOrderIds,
     startMulitOrderStatusChange = props.startMulitOrderStatusChange,
-    startMulitOrderDelete = props.startMulitOrderDelete,
     handleChangeSearch = props.handleChangeSearch,
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleOrdersStatusGroupFilter = props.handleOrdersStatusGroupFilter,
@@ -168,10 +167,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleBackRedirect();
   };
   (0, _react.useEffect)(function () {
-    if (startMulitOrderStatusChange || startMulitOrderDelete) {
+    if (startMulitOrderStatusChange) {
       setTotalSelectedOrder(selectedOrderIds.length);
     }
-  }, [startMulitOrderStatusChange, startMulitOrderDelete]);
+  }, [startMulitOrderStatusChange]);
   (0, _react.useEffect)(function () {
     if (selectedOrderIds.length === 0) {
       setTimeout(function () {
@@ -247,7 +246,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     searchValue: searchValue,
     filterValues: filterValues,
     selectedOrderIds: selectedOrderIds,
-    deletedOrderId: deletedOrderId,
+    deletedOrderIds: deletedOrderIds,
     driversList: driversList,
     ordersStatusGroup: ordersStatusGroup,
     selectedSubOrderStatus: selectedSubOrderStatus,
