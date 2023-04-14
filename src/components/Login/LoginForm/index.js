@@ -498,10 +498,13 @@ const LoginFormUI = (props) => {
 }
 
 export const LoginForm = (props) => {
+  const [configFile, setConfigFile] = useContext(ConfigFileContext)
   const loginControllerProps = {
     ...props,
     UIComponent: LoginFormUI,
-    allowedLevels: [0, 2, 5, 8]
+    allowedLevels: [0, 2, 5, 8],
+    configFile,
+    setConfigFile
   }
   return <LoginFormController {...loginControllerProps} />
 }

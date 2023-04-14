@@ -244,7 +244,11 @@ export const OrderBill = (props) => {
                 <td>
                   {event?.wallet_event
                     ? walletName[event?.wallet_event?.wallet?.type]?.name
-                    : t(event?.paymethod?.name?.toUpperCase()?.replaceAll(' ', '_'), event?.paymethod?.name)}
+                    : event?.paymethod
+                      ? t(event?.paymethod?.name?.toUpperCase()?.replaceAll(' ', '_'), event?.paymethod?.name)
+                      : event?.data?.gateway
+                        ? t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))
+                        : walletName[event?.data?.wallet_currency]?.name}
                 </td>
                 <td>
                   {event?.paymethod?.gateway === 'cash' && order?.cash
