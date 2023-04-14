@@ -190,4 +190,10 @@ export const AddScheduleIconWrapper = styled.div`
 export const DateWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  h4 {
+    &.date {
+      font-weight: normal;
+    }
+  }
 `

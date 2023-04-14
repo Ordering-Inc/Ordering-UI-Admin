@@ -177,7 +177,7 @@ const ScheduleUI = (props) => {
               <DateWrapper>
                 <h4>{daysOfWeek[daysOfWeekIndex]}</h4>
                 {isShowDate && (
-                  <h4>{parseDate(getNextDate(daysOfWeekIndex), { outputFormat: 'YYYY-MM-DD' })}</h4>
+                  <h4 className='date'>{parseDate(getNextDate(daysOfWeekIndex), { outputFormat: 'YYYY-MM-DD' })}</h4>
                 )}
               </DateWrapper>
             </div>
