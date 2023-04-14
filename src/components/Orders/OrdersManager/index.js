@@ -31,9 +31,8 @@ const OrdersManagerUI = (props) => {
     citiesList,
     ordersStatusGroup,
     filterValues,
-    deletedOrderId,
+    deletedOrderIds,
     startMulitOrderStatusChange,
-    startMulitOrderDelete,
     handleChangeSearch,
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
@@ -127,10 +126,10 @@ const OrdersManagerUI = (props) => {
   }
 
   useEffect(() => {
-    if (startMulitOrderStatusChange || startMulitOrderDelete) {
+    if (startMulitOrderStatusChange) {
       setTotalSelectedOrder(selectedOrderIds.length)
     }
-  }, [startMulitOrderStatusChange, startMulitOrderDelete])
+  }, [startMulitOrderStatusChange])
 
   useEffect(() => {
     if (selectedOrderIds.length === 0) {
@@ -219,7 +218,7 @@ const OrdersManagerUI = (props) => {
                 searchValue={searchValue}
                 filterValues={filterValues}
                 selectedOrderIds={selectedOrderIds}
-                deletedOrderId={deletedOrderId}
+                deletedOrderIds={deletedOrderIds}
                 driversList={driversList}
                 ordersStatusGroup={ordersStatusGroup}
                 selectedSubOrderStatus={selectedSubOrderStatus}

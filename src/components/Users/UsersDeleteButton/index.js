@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, CheckPassword as CheckPasswordController } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
 import { Button } from '../../../styles'
-import { Modal } from '../../Shared'
+import { Alert, ConfirmAdmin } from '../../Shared'
 
-import {
-  WrapperCheckPassword,
-  ErrorText,
-  WrapperIndicator
-} from './styles'
-
-const UsersDeleteButtonUI = (props) => {
+export const UsersDeleteButton = (props) => {
   const {
-    checkPasswordStatus,
-    handleChangePassword,
-    getCheckPassword,
     selectedUsers,
     deleteUsersActionState,
     handleDeleteSeveralUsers,
@@ -21,38 +12,25 @@ const UsersDeleteButtonUI = (props) => {
   } = props
   const [, t] = useLanguage()
 
-  const [checkPasswordModalOpen, setCheckPasswordModalOpen] = useState(false)
-  const [password, setPassword] = useState('')
-  const [totalUsersNumber, setTotalUsersNumber] = useState(null)
-  const handlePassword = (e) => {
-    setPassword(e.target.value)
-  }
+  const [confirmAdmin, setConfirmAdmin] = useState({ open: false, handleOnConfirm: null })
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleModalOpen = () => {
-    setPassword('')
-    setCheckPasswordModalOpen(true)
+    setConfirmAdmin({
+      open: true,
+      handleOnConfirm: (code) => {
+        setConfirmAdmin({ ...confirmAdmin, open: false })
+        handleDeleteSeveralUsers(code)
+      }
+    })
   }
 
   useEffect(() => {
-    handleChangePassword(password)
-  }, [password])
-
-  useEffect(() => {
-    if (checkPasswordStatus.loading || checkPasswordStatus.error !== null) return
-    if (checkPasswordStatus.result === 'OK') {
-      setCheckPasswordModalOpen(false)
-      setPassword('')
-      handleDeleteSeveralUsers()
-    }
-  }, [checkPasswordStatus])
-
-  useEffect(() => {
-    if (deleteUsersActionState.loading) {
-      setTotalUsersNumber(selectedUsers.length)
-    } else {
-      setTimeout(() => {
-        setTotalUsersNumber(0)
-      }, 500)
+    if (!deleteUsersActionState.loading && deleteUsersActionState.error) {
+      setAlertState({
+        open: true,
+        content: deleteUsersActionState.error || [t('ERROR')]
+      })
     }
   }, [deleteUsersActionState])
 
@@ -66,52 +44,20 @@ const UsersDeleteButtonUI = (props) => {
       >
         {t('DELETE', 'Delete')}
       </Button>
-      {totalUsersNumber > 0 && (
-        <WrapperIndicator>
-          {selectedUsers.length} / {totalUsersNumber}
-        </WrapperIndicator>
-      )}
-      <Modal
-        open={checkPasswordModalOpen}
-        width='600px'
-        onClose={() => setCheckPasswordModalOpen(false)}
-      >
-        <WrapperCheckPassword>
-          <h3>{t('CONFIRM_PASSWORD', 'Confirm password')}</h3>
-          <p>{t('TYPE_YOUR_PASSWORD_TO_CONFIRM_DELETE', 'Type your password to confirm delete.')}</p>
-          <input
-            autoComplete='new-password'
-            type='password'
-            value={password}
-            placeholder={t('PASSWORD', 'password')}
-            onChange={(e) => handlePassword(e)}
-          />
-          {checkPasswordStatus?.error && (
-            <ErrorText
-              className='text-danger'
-            >
-              {checkPasswordStatus.error}
-            </ErrorText>
-          )}
-          <Button
-            color='primary'
-            borderRadius='5px'
-            onClick={() => getCheckPassword()}
-          >
-            {t('CONFIRM', 'Confirm')}
-          </Button>
-        </WrapperCheckPassword>
-      </Modal>
+      <ConfirmAdmin
+        open={confirmAdmin.open}
+        onClose={() => setConfirmAdmin({ ...confirmAdmin, open: false })}
+        onConfirm={confirmAdmin.handleOnConfirm}
+      />
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </>
-  )
-}
-
-export const UsersDeleteButton = (props) => {
-  const checkPasswordControlProps = {
-    ...props,
-    UIComponent: UsersDeleteButtonUI
-  }
-  return (
-    <CheckPasswordController {...checkPasswordControlProps} />
   )
 }
