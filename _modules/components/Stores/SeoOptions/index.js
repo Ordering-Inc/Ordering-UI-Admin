@@ -195,7 +195,7 @@ var SeoOptions = function SeoOptions(props) {
     alt: "business image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
-    isImage: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.seo_image) || data.seo_image
+    isImage: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.seo_image) || (data === null || data === void 0 ? void 0 : data.seo_image)
   }, /*#__PURE__*/_react.default.createElement(_styles2.CameraWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null)), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP', 'Drag and Drop')))))))), /*#__PURE__*/_react.default.createElement(_styles2.UseSameInfoWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: handleUseSameInfo
   }, t('USE_SAME_PRODUCT_INFORMATION', 'Use the same as main product information'))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperShortDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SEO_TITLE', 'SEO Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -221,7 +221,8 @@ var SeoOptions = function SeoOptions(props) {
     name: "seo_keywords",
     defaultValue: formState !== null && formState !== void 0 && (_formState$result6 = formState.result) !== null && _formState$result6 !== void 0 && _formState$result6.result ? formState === null || formState === void 0 ? void 0 : (_formState$result7 = formState.result) === null || _formState$result7 === void 0 ? void 0 : (_formState$result7$re = _formState$result7.result) === null || _formState$result7$re === void 0 ? void 0 : _formState$result7$re.seo_keywords : (_ref3 = (_formState$changes$se3 = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.seo_keywords) !== null && _formState$changes$se3 !== void 0 ? _formState$changes$se3 : data === null || data === void 0 ? void 0 : data.seo_keywords) !== null && _ref3 !== void 0 ? _ref3 : '',
     onChange: function onChange(e) {
-      return handleProductCategoryChangeInput(e);
+      if (isBusinessSeo) handleChangeInput(e);
+      if (isProductSeo || isCategorySeo) handleProductCategoryChangeInput(e);
     },
     placeholder: t('SEO_KEYWORDS', 'SEO Keywords')
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperDescription, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -229,7 +230,8 @@ var SeoOptions = function SeoOptions(props) {
     placeholder: t('SLUG', 'Slug'),
     defaultValue: formState !== null && formState !== void 0 && (_formState$result8 = formState.result) !== null && _formState$result8 !== void 0 && _formState$result8.result ? formState === null || formState === void 0 ? void 0 : (_formState$result9 = formState.result) === null || _formState$result9 === void 0 ? void 0 : (_formState$result9$re = _formState$result9.result) === null || _formState$result9$re === void 0 ? void 0 : _formState$result9$re.slug : (_ref4 = (_formState$changes$sl = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.slug) !== null && _formState$changes$sl !== void 0 ? _formState$changes$sl : data === null || data === void 0 ? void 0 : data.slug) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: function onChange(e) {
-      return handleProductCategoryChangeInput(e);
+      if (isBusinessSeo) handleChangeInput(e);
+      if (isProductSeo || isCategorySeo) handleProductCategoryChangeInput(e);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtons, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
