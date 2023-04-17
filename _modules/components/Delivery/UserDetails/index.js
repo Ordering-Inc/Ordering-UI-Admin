@@ -164,6 +164,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     userState: userState,
     handleSuccessUpdate: handleSuccessUserUpdate
   }))), currentMenuSelected === 'schedule' && /*#__PURE__*/_react.default.createElement(_styles3.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_Shared.Schedule, {
+    isShowDate: !!isDriversPage,
     scheduleList: userState === null || userState === void 0 ? void 0 : (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.schedule,
     handleChangeScheduleState: handleScheduleState
   }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {

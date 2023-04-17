@@ -29,6 +29,10 @@ var PaymethodTypeSelector = function PaymethodTypeSelector(props) {
     _useState2 = _slicedToArray(_useState, 2),
     paymethodsTypes = _useState2[0],
     setPaymethodsTypes = _useState2[1];
+  var _useState3 = (0, _react.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    searchValue = _useState4[0],
+    setSearchValue = _useState4[1];
   var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_PAYMETHOD', 'Select paymethod'));
   var paymthodsLoading = [{
     value: 'default',
@@ -37,7 +41,9 @@ var PaymethodTypeSelector = function PaymethodTypeSelector(props) {
   (0, _react.useEffect)(function () {
     var _paymthodsOptionList = [];
     if (!paymethodsList.loading) {
-      var _paymthodsOption = paymethodsList.paymethods.map(function (paymethod) {
+      var _paymthodsOption = paymethodsList.paymethods.filter(function (option) {
+        return option === null || option === void 0 ? void 0 : option.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+      }).map(function (paymethod) {
         return {
           value: paymethod.id,
           content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, paymethod.name)
@@ -57,7 +63,7 @@ var PaymethodTypeSelector = function PaymethodTypeSelector(props) {
       }
     }
     setPaymethodsTypes(_paymthodsOptionList);
-  }, [paymethodsList]);
+  }, [paymethodsList, searchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !paymethodsList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
     defaultValue: filterValues.paymethodIds,
     placeholder: placeholder,
@@ -65,11 +71,25 @@ var PaymethodTypeSelector = function PaymethodTypeSelector(props) {
     optionBottomBorder: true,
     onChange: function onChange(paymethod) {
       return handleChangePaymethodType(paymethod);
+    },
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: searchValue,
+    handleChangeSearch: function handleChangeSearch(val) {
+      return setSearchValue(val);
     }
   }) : /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
     defaultValue: "default",
     options: paymthodsLoading,
-    optionBottomBorder: true
+    optionBottomBorder: true,
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: searchValue,
+    handleChangeSearch: function handleChangeSearch(val) {
+      return setSearchValue(val);
+    }
   }));
 };
 exports.PaymethodTypeSelector = PaymethodTypeSelector;

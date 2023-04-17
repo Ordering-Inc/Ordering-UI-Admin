@@ -58,7 +58,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleChangeCurrency = props.handleChangeCurrency,
     handleChangeMetaFieldValue = props.handleChangeMetaFieldValue,
     handleAddMetaField = props.handleAddMetaField,
-    handleDeleteMetafield = props.handleDeleteMetafield;
+    handleDeleteMetafield = props.handleDeleteMetafield,
+    handleChangeExternalId = props.handleChangeExternalId;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -128,9 +129,12 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     onChange: function onChange(e) {
       return handleChangeOrderId(e);
     }
-  }), /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
-    filterValues: filterValues,
-    handleChangeCurrency: handleChangeCurrency
+  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('EXTERNAL_ID', 'External Id'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.externalId) || '',
+    onChange: handleChangeExternalId
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: driverGroupList,
     handleChangeGroup: handleChangeGroup,
@@ -163,6 +167,9 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     paymethodsList: paymethodsList,
     filterValues: filterValues,
     handleChangePaymethodType: handleChangePaymethodType
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
+    filterValues: filterValues,
+    handleChangeCurrency: handleChangeCurrency
   })), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
       key: item.id

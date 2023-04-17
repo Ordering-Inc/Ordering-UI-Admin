@@ -118,6 +118,9 @@ var OrdersTable = function OrdersTable(props) {
   }, {
     value: 'total',
     content: t('EXPORT_TOTAL', 'Total')
+  }, {
+    value: 'externalId',
+    content: t('EXTERNAL_ID', 'External id')
   }];
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
@@ -270,6 +273,7 @@ var OrdersTable = function OrdersTable(props) {
     return objectStatus && objectStatus;
   };
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
+    console.log(type, 'type', allowColumns);
     var _column = allowColumns[type];
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
       visable: !(_column !== null && _column !== void 0 && _column.visable)
@@ -374,7 +378,7 @@ var OrdersTable = function OrdersTable(props) {
     var _allowColumns$col5, _allowColumns$col6;
     return ((_allowColumns$col5 = allowColumns[col1]) === null || _allowColumns$col5 === void 0 ? void 0 : _allowColumns$col5.order) - ((_allowColumns$col6 = allowColumns[col2]) === null || _allowColumns$col6 === void 0 ? void 0 : _allowColumns$col6.order);
   }).map(function (column, i, array) {
-    var _allowColumns$column$2, _allowColumns$column4, _allowColumns$column5, _theme$images$icons2, _allowColumns$column6;
+    var _allowColumns$column$3, _allowColumns$column7, _allowColumns$column8, _theme$images$icons3, _allowColumns$column9;
     if (column === 'slaBar') {
       return;
     }
@@ -402,11 +406,9 @@ var OrdersTable = function OrdersTable(props) {
         isOrder: true
       })));
     }
-    if (column === 'total' || column !== 'total' && column === _toConsumableArray(array).pop()) {
+    if (column === 'externalId') {
       var _allowColumns$column$, _allowColumns$column, _allowColumns$column2, _theme$images$icons, _allowColumns$column3;
-      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-        key: i
-      }, column !== 'total' && column === _toConsumableArray(array).pop() && /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
+      return /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
         key: "dragTh-".concat(i),
         onDragOver: function onDragOver(e) {
           return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e, column);
@@ -428,7 +430,35 @@ var OrdersTable = function OrdersTable(props) {
       }, /*#__PURE__*/_react.default.createElement("img", {
         src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
         alt: "six dots"
-      }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title))), /*#__PURE__*/_react.default.createElement("th", {
+      }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title)));
+    }
+    if (column === 'total' || column !== 'total' && column === _toConsumableArray(array).pop()) {
+      var _allowColumns$column$2, _allowColumns$column4, _allowColumns$column5, _theme$images$icons2, _allowColumns$column6;
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: i
+      }, column !== 'total' && column === _toConsumableArray(array).pop() && /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
+        key: "dragTh-".concat(i),
+        onDragOver: function onDragOver(e) {
+          return handleDragOver === null || handleDragOver === void 0 ? void 0 : handleDragOver(e, column);
+        },
+        onDrop: function onDrop(e) {
+          return handleDrop(e, column);
+        },
+        onDragEnd: function onDragEnd(e) {
+          return handleDragEnd(e);
+        },
+        colSpan: (_allowColumns$column$2 = (_allowColumns$column4 = allowColumns[column]) === null || _allowColumns$column4 === void 0 ? void 0 : _allowColumns$column4.colSpan) !== null && _allowColumns$column$2 !== void 0 ? _allowColumns$column$2 : 1,
+        className: (_allowColumns$column5 = allowColumns[column]) === null || _allowColumns$column5 === void 0 ? void 0 : _allowColumns$column5.className,
+        selectedDragOver: column === dragOverd
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        draggable: true,
+        onDragStart: function onDragStart(e) {
+          return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, column);
+        }
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        src: (_theme$images$icons2 = theme.images.icons) === null || _theme$images$icons2 === void 0 ? void 0 : _theme$images$icons2.sixDots,
+        alt: "six dots"
+      }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column6 = allowColumns[column]) === null || _allowColumns$column6 === void 0 ? void 0 : _allowColumns$column6.title))), /*#__PURE__*/_react.default.createElement("th", {
         className: "orderPrice",
         key: "noDragTh-".concat(i)
       }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
@@ -449,8 +479,8 @@ var OrdersTable = function OrdersTable(props) {
       onDragEnd: function onDragEnd(e) {
         return handleDragEnd(e);
       },
-      colSpan: (_allowColumns$column$2 = (_allowColumns$column4 = allowColumns[column]) === null || _allowColumns$column4 === void 0 ? void 0 : _allowColumns$column4.colSpan) !== null && _allowColumns$column$2 !== void 0 ? _allowColumns$column$2 : 1,
-      className: (_allowColumns$column5 = allowColumns[column]) === null || _allowColumns$column5 === void 0 ? void 0 : _allowColumns$column5.className,
+      colSpan: (_allowColumns$column$3 = (_allowColumns$column7 = allowColumns[column]) === null || _allowColumns$column7 === void 0 ? void 0 : _allowColumns$column7.colSpan) !== null && _allowColumns$column$3 !== void 0 ? _allowColumns$column$3 : 1,
+      className: (_allowColumns$column8 = allowColumns[column]) === null || _allowColumns$column8 === void 0 ? void 0 : _allowColumns$column8.className,
       selectedDragOver: column === dragOverd
     }, /*#__PURE__*/_react.default.createElement("div", {
       draggable: true,
@@ -458,11 +488,11 @@ var OrdersTable = function OrdersTable(props) {
         return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, column);
       }
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: (_theme$images$icons2 = theme.images.icons) === null || _theme$images$icons2 === void 0 ? void 0 : _theme$images$icons2.sixDots,
+      src: (_theme$images$icons3 = theme.images.icons) === null || _theme$images$icons3 === void 0 ? void 0 : _theme$images$icons3.sixDots,
       alt: "six dots"
-    }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column6 = allowColumns[column]) === null || _allowColumns$column6 === void 0 ? void 0 : _allowColumns$column6.title)));
+    }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column9 = allowColumns[column]) === null || _allowColumns$column9 === void 0 ? void 0 : _allowColumns$column9.title)));
   })))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$cartGro, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
+    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$externa, _allowColumns$cartGro, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
@@ -479,7 +509,15 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     })), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$dateTim3 = allowColumns.dateTime) === null || _allowColumns$dateTim3 === void 0 ? void 0 : _allowColumns$dateTim3.visable) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$cartGro = allowColumns.cartGroupId) === null || _allowColumns$cartGro === void 0 ? void 0 : _allowColumns$cartGro.visable) && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$externa = allowColumns.externalId) === null || _allowColumns$externa === void 0 ? void 0 : _allowColumns$externa.visable) && /*#__PURE__*/_react.default.createElement("td", {
+      className: "externalId"
+    }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
+      className: "info"
+    }, /*#__PURE__*/_react.default.createElement("p", {
+      className: "bold"
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100
+    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$cartGro = allowColumns.cartGroupId) === null || _allowColumns$cartGro === void 0 ? void 0 : _allowColumns$cartGro.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "statusInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -591,7 +629,8 @@ var OrdersTable = function OrdersTable(props) {
       onClick: function onClick(e) {
         return handleClickOrder(order, e);
       },
-      "data-tour": i === 0 ? 'tour_start' : ''
+      "data-tour": i === 0 ? 'tour_start' : '',
+      "data-status": getStatusClassName(getDelayMinutes(order))
     }, /*#__PURE__*/_react.default.createElement("tr", null, Object.keys(allowColumns).filter(function (col) {
       var _allowColumns$col7;
       return (_allowColumns$col7 = allowColumns[col]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.visable;
@@ -605,6 +644,14 @@ var OrdersTable = function OrdersTable(props) {
         }, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
           timeState: getStatusClassName(getDelayMinutes(order))
         }));
+      }
+      if (column === 'externalId' && !isSelectedOrders) {
+        return /*#__PURE__*/_react.default.createElement("td", {
+          className: "externalId",
+          key: "externalId".concat(i, "-").concat(index)
+        }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, order === null || order === void 0 ? void 0 : order.external_id)));
       }
       if (column === 'orderNumber') {
         var _allowColumns$orderNu4, _allowColumns$dateTim4, _allowColumns$orderNu5, _allowColumns$dateTim5;

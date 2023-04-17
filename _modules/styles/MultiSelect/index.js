@@ -10,6 +10,7 @@ var _EnChevronDown = _interopRequireDefault(require("@meronex/icons/en/EnChevron
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 var _Buttons = require("../Buttons");
+var _Shared = require("../../components/Shared");
 var _Selects = require("../Selects");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -30,7 +31,13 @@ var MultiSelect = function MultiSelect(props) {
     options = props.options,
     onChange = props.onChange,
     defaultValue = props.defaultValue,
-    className = props.className;
+    className = props.className,
+    isShowSearchBar = props.isShowSearchBar,
+    searchBarIsNotLazyLoad = props.searchBarIsNotLazyLoad,
+    searchBarPlaceholder = props.searchBarPlaceholder,
+    searchBarIsCustomLayout = props.searchBarIsCustomLayout,
+    searchValue = props.searchValue,
+    handleChangeSearch = props.handleChangeSearch;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
@@ -59,14 +66,18 @@ var MultiSelect = function MultiSelect(props) {
     }
   };
   (0, _react.useEffect)(function () {
+    if (isShowSearchBar && searchValue) return;
     var _defaultOption = options === null || options === void 0 ? void 0 : options.filter(function (option) {
       return defaultValue.includes(option.value);
     });
     setSelectedOptions(_defaultOption);
     setValues(defaultValue);
-  }, [defaultValue, options]);
+  }, [defaultValue, options, searchValue]);
   (0, _react.useEffect)(function () {
-    if (!open) return;
+    if (!open) {
+      handleChangeSearch && handleChangeSearch('');
+      return;
+    }
     document.addEventListener('click', closeSelect);
     return function () {
       return document.removeEventListener('click', closeSelect);
@@ -119,7 +130,15 @@ var MultiSelect = function MultiSelect(props) {
     isAbsolute: true,
     position: "right",
     ref: dropdownReference
-  }, /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
+  }, isShowSearchBar && /*#__PURE__*/_react.default.createElement(_Selects.SearchBarWrapper, {
+    className: "search-bar-container"
+  }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+    lazyLoad: !searchBarIsNotLazyLoad,
+    isCustomLayout: searchBarIsCustomLayout,
+    search: searchValue,
+    onSearch: handleChangeSearch,
+    placeholder: searchBarPlaceholder || ''
+  })), /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
     optionInnerMargin: props.optionInnerMargin,
     optionInnerMaxHeight: props.optionInnerMaxHeight
   }, options.map(function (option, i) {
