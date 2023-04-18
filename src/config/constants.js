@@ -1413,6 +1413,11 @@ export const countryList = [
     code: 'SG'
   },
   {
+    name: 'Sint Maarten',
+    dial_code: '+721',
+    code: 'SX'
+  },
+  {
     name: 'Slovakia',
     dial_code: '+421',
     code: 'SK'
