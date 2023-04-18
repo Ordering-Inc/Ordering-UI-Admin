@@ -72,7 +72,7 @@ var EnterprisePromotionPaymethods = function EnterprisePromotionPaymethods(props
     if (found) return true;else return false;
   };
   return /*#__PURE__*/_react.default.createElement(_styles2.PaymethodsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PAYMEN_METHODS_ALLOWED', 'Payment methods allowed')), paymethodsState.paymethods.map(function (paymethod) {
-    var _formState$changes4;
+    var _formState$changes4, _paymethod$gateway;
     return /*#__PURE__*/_react.default.createElement(_styles2.PaymethodItem, {
       key: paymethod.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
@@ -80,7 +80,7 @@ var EnterprisePromotionPaymethods = function EnterprisePromotionPaymethods(props
       onChange: function onChange(e) {
         return handleChangePaymethods(e.target.checked, paymethod.id);
       }
-    }), /*#__PURE__*/_react.default.createElement("span", null, paymethod.name));
+    }), /*#__PURE__*/_react.default.createElement("span", null, t(paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod.name)));
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",

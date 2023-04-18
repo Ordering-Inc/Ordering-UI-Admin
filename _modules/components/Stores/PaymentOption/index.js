@@ -37,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOption = function PaymentOption(props) {
-  var _sitesState$sites, _localState$sites, _businessPaymethod$si, _businessPaymethod$pa2, _sitesState$sites4, _sitesState$sites5;
+  var _sitesState$sites, _localState$sites, _businessPaymethod$si, _businessPaymethod$pa2, _businessPaymethod$pa3, _businessPaymethod$pa4, _sitesState$sites4, _sitesState$sites5;
   var open = props.open,
     onClose = props.onClose,
     orderTypes = props.orderTypes,
@@ -178,7 +178,7 @@ var PaymentOption = function PaymentOption(props) {
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles3.Container, {
     id: "payment_method_option"
-  }, /*#__PURE__*/_react.default.createElement(_styles3.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa2 = businessPaymethod.paymethod) === null || _businessPaymethod$pa2 === void 0 ? void 0 : _businessPaymethod$pa2.name), /*#__PURE__*/_react.default.createElement(_styles3.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles3.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t(businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa2 = businessPaymethod.paymethod) === null || _businessPaymethod$pa2 === void 0 ? void 0 : (_businessPaymethod$pa3 = _businessPaymethod$pa2.gateway) === null || _businessPaymethod$pa3 === void 0 ? void 0 : _businessPaymethod$pa3.toUpperCase(), businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa4 = businessPaymethod.paymethod) === null || _businessPaymethod$pa4 === void 0 ? void 0 : _businessPaymethod$pa4.name)), /*#__PURE__*/_react.default.createElement(_styles3.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
