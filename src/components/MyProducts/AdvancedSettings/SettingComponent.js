@@ -12,7 +12,7 @@ import {
 } from './styles'
 
 export const SettingComponent = (props) => {
-  const { settingList, handleUpdateThemeValue, advancedValues, themeStructure, noLabel } = props
+  const { settingList, handleUpdateThemeValue, advancedValues, themeStructure, noLabel, themeId } = props
 
   const [, t] = useLanguage()
 
@@ -70,6 +70,7 @@ export const SettingComponent = (props) => {
               ratio='900 x 200 px'
               photo={deepFind(advancedValues, setting?.path)}
               path={setting?.path}
+              themeId={themeId}
               handleChangePhoto={handleUpdateThemeValue}
             />
           )}

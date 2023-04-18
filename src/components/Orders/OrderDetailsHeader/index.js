@@ -142,7 +142,7 @@ export const OrderDetailsHeader = (props) => {
               <span>
                 {event?.wallet_event
                   ? walletName[event?.wallet_event?.wallet?.type]?.name
-                  : event?.paymethod?.name}
+                  : t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name)}
               </span>
               {stripePaymethods.includes(event?.data?.gateway || event?.paymethod?.gateway) && (
                 <>

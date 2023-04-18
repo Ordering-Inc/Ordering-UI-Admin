@@ -341,7 +341,7 @@ const OrderDetailsUI = (props) => {
               <p>
                 {parseDate(order?.delivery_datetime, { utc: false })}
               </p>
-              <p>{order?.eta_time} min</p>
+              <p>{order?.eta_time} {t('MIN', 'min')}</p>
             </div>
             <OrderStatusSelectorWrapper>
               <OrderStatusTypeSelector
