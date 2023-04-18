@@ -26,7 +26,7 @@ export const PaymethodTypeSelector = (props) => {
           return {
             value: paymethod.id,
             content: (
-              <Option>{paymethod.name}</Option>
+              <Option>{t(paymethod?.gateway?.toUpperCase(), paymethod.name)}</Option>
             )
           }
         })
