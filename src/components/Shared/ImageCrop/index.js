@@ -47,6 +47,7 @@ export const ImageCrop = (props) => {
     if (typeof cropper !== 'undefined') {
       let photo
       if (useCloudinaryUrl && themeId) {
+        console.log('entra')
         setLoading(true)
         const response = await fetch(`${ordering.root}/themes/${themeId}/gallery`, {
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
@@ -59,7 +60,7 @@ export const ImageCrop = (props) => {
         const { result, error } = await response.json()
         setLoading(false)
         if (!error) {
-          photo = result.image
+          photo = optimizeImage(result.image, 'f_auto,q_auto,w_2000,c_limit')
         } else {
           return
         }

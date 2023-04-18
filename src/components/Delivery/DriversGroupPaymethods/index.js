@@ -76,7 +76,7 @@ export const DriversGroupPaymethods = (props) => {
                 checked={selectedPaymethodIds.includes(paymethod.id)}
                 onChange={e => handleSelectPaymethod(paymethod.id, e.target.checked)}
               />
-              <p>{paymethod?.name}</p>
+              <p>{t(paymethod?.gateway?.toUpperCase(), paymethod?.name)}</p>
             </GroupWrapper>
           ))}
         </GroupsContainer>
