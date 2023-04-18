@@ -245,7 +245,7 @@ export const OrderBill = (props) => {
                   {event?.wallet_event
                     ? walletName[event?.wallet_event?.wallet?.type]?.name
                     : event?.paymethod
-                      ? t(event?.paymethod?.name?.toUpperCase()?.replaceAll(' ', '_'), event?.paymethod?.name)
+                      ? t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name)
                       : event?.data?.gateway
                         ? t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))
                         : walletName[event?.data?.wallet_currency]?.name}

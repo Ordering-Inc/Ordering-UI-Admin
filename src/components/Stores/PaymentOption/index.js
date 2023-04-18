@@ -145,7 +145,7 @@ export const PaymentOption = (props) => {
     <>
       <Container id='payment_method_option'>
         <Header>
-          <h1>{businessPaymethod?.paymethod?.name}</h1>
+          <h1>{t(businessPaymethod?.paymethod?.gateway?.toUpperCase(), businessPaymethod?.paymethod?.name)}</h1>
           <ActionSelectorWrapper>
             <DropdownButton
               menuAlign={theme?.rtl ? 'left' : 'right'}
