@@ -52,7 +52,9 @@
     "info": "#27BCFD",
     "warning": "#FFC700",
     "success": "#00D27A",
-    "backgroundInfo": "#F5F9FF"
+    "backgroundInfo": "#F5F9FF",
+    "danger100": "#FEEDF0",
+    "warning100": "#FFF9E2"
   },
   "defaultLanguages": {
     "LOADING_DELICIOUS_FOOD": "Loading Ordering Dashboard..."
