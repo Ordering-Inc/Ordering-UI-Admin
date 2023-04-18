@@ -11,7 +11,7 @@ import {
 } from './styles'
 
 export const ImageBox = (props) => {
-  const { isBig, title, ratio, photo, path, handleChangePhoto } = props
+  const { isBig, title, ratio, photo, path, handleChangePhoto, themeId } = props
 
   const [, t] = useLanguage()
 
@@ -101,6 +101,8 @@ export const ImageBox = (props) => {
         onRemove={() => setCropState({ ...cropState, open: false })}
       >
         <ImageCrop
+          useCloudinaryUrl
+          themeId={themeId}
           photo={cropState?.data}
           handleChangePhoto={handleChangeImage}
         />
