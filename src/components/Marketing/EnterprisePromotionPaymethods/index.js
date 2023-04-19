@@ -62,7 +62,7 @@ export const EnterprisePromotionPaymethods = (props) => {
             }
             onChange={(e) => handleChangePaymethods(e.target.checked, paymethod.id)}
           />
-          <span>{paymethod.name}</span>
+          <span>{t(paymethod?.gateway?.toUpperCase(), paymethod.name)}</span>
         </PaymethodItem>
       ))}
       <Button

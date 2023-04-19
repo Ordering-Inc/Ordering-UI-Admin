@@ -574,6 +574,8 @@ const OrderingWebsiteUI = (props) => {
         onRemove={() => setCropState({ ...cropState, open: false })}
       >
         <ImageCrop
+          themeId={orderingTheme?.themes?.[0]?.theme_id}
+          useCloudinaryUrl
           photo={cropState?.data}
           handleChangePhoto={handleChangePhoto}
         />

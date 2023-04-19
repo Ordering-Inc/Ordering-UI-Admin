@@ -106,7 +106,7 @@ export const OrderBill = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {t(offer.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
+                  {t(offer?.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
@@ -175,7 +175,7 @@ export const OrderBill = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {t(offer.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
+                  {t(offer?.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
@@ -196,7 +196,7 @@ export const OrderBill = (props) => {
             order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
               <tr key={offer.id}>
                 <td>
-                  {t(offer.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
+                  {t(offer?.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
@@ -245,7 +245,7 @@ export const OrderBill = (props) => {
                   {event?.wallet_event
                     ? walletName[event?.wallet_event?.wallet?.type]?.name
                     : event?.paymethod
-                      ? t(event?.paymethod?.name?.toUpperCase()?.replaceAll(' ', '_'), event?.paymethod?.name)
+                      ? t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name)
                       : event?.data?.gateway
                         ? t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))
                         : walletName[event?.data?.wallet_currency]?.name}

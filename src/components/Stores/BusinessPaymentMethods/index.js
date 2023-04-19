@@ -234,7 +234,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     <RiCheckboxBlankLine />
                   )}
                 </PaymethodOption>
-                <PaymethodName>{paymethod?.name}</PaymethodName>
+                <PaymethodName>{t(paymethod?.gateway?.toUpperCase(), paymethod?.name)}</PaymethodName>
                 {!isTutorialMode && isCheckFoundBusinessPaymethod(paymethod.id) && (
                   <ChevronRight />
                 )}

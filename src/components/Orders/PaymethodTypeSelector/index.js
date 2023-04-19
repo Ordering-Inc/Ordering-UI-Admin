@@ -19,14 +19,16 @@ export const PaymethodTypeSelector = (props) => {
   useEffect(() => {
     const _paymthodsOptionList = []
     if (!paymethodsList.loading) {
-      const _paymthodsOption = paymethodsList.paymethods.map((paymethod) => {
-        return {
-          value: paymethod.id,
-          content: (
-            <Option>{paymethod.name}</Option>
-          )
-        }
-      })
+      const _paymthodsOption = paymethodsList.paymethods
+        .filter(option => option?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+        .map((paymethod) => {
+          return {
+            value: paymethod.id,
+            content: (
+              <Option>{t(paymethod?.gateway?.toUpperCase(), paymethod.name)}</Option>
+            )
+          }
+        })
 
       for (const option of _paymthodsOption) {
         _paymthodsOptionList.push(option)
