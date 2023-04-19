@@ -24,7 +24,8 @@ var SettingComponent = function SettingComponent(props) {
     handleUpdateThemeValue = props.handleUpdateThemeValue,
     advancedValues = props.advancedValues,
     themeStructure = props.themeStructure,
-    noLabel = props.noLabel;
+    noLabel = props.noLabel,
+    themeId = props.themeId;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -73,6 +74,7 @@ var SettingComponent = function SettingComponent(props) {
       ratio: "900 x 200 px",
       photo: deepFind(advancedValues, setting === null || setting === void 0 ? void 0 : setting.path),
       path: setting === null || setting === void 0 ? void 0 : setting.path,
+      themeId: themeId,
       handleChangePhoto: handleUpdateThemeValue
     }), setting.type === 'color' && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, setting.name), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
       defaultColor: deepFind(advancedValues, setting === null || setting === void 0 ? void 0 : setting.path) || '#2C7BE5',

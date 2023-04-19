@@ -31,7 +31,7 @@ var CallCenterApp = function CallCenterApp() {
     live_description: t('CALL_CENTER_APP_LIVE_DEMO_DESCRIPTION', 'This is a branded Ordering.co product; play with it and understand how it works'),
     web_url: 'https://callcenter.tryordering.com/search',
     web_link_title: t('CALL_CENTER', 'Call center'),
-    brand_title: t('YOUR_BRANDED_KIOSK', 'Your Branded Kiosk'),
+    brand_title: t('YOUR_BRANDED_CALL_CENTER', 'Your Branded Call Center'),
     brand_description: t('CALL_CENTER_BRANDED_DESCRIPTION', 'The Call Center is delivered in less than five working days, fully branded with your guidelines, and ready to be used on any tablet or device you add it to.'),
     demo_book_message: 'I would like to book a Demo about the Call center , can you assist me?',
     purchase_message: 'I would like to know about the Call center, can you assist me?'

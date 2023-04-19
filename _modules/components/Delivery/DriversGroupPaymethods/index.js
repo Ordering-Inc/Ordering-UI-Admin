@@ -77,6 +77,7 @@ var DriversGroupPaymethods = function DriversGroupPaymethods(props) {
       return handleSelectAllPaymethod(false);
     }
   }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.GroupsContainer, null, filteredPaymethods.map(function (paymethod) {
+    var _paymethod$gateway;
     return /*#__PURE__*/_react.default.createElement(_styles2.GroupWrapper, {
       key: paymethod.id,
       isDisabed: actionState.loading
@@ -85,7 +86,7 @@ var DriversGroupPaymethods = function DriversGroupPaymethods(props) {
       onChange: function onChange(e) {
         return handleSelectPaymethod(paymethod.id, e.target.checked);
       }
-    }), /*#__PURE__*/_react.default.createElement("p", null, paymethod === null || paymethod === void 0 ? void 0 : paymethod.name));
+    }), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)));
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",

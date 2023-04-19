@@ -28,7 +28,8 @@ var ImageBox = function ImageBox(props) {
     ratio = props.ratio,
     photo = props.photo,
     path = props.path,
-    handleChangePhoto = props.handleChangePhoto;
+    handleChangePhoto = props.handleChangePhoto,
+    themeId = props.themeId;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -139,6 +140,8 @@ var ImageBox = function ImageBox(props) {
       }));
     }
   }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
+    useCloudinaryUrl: true,
+    themeId: themeId,
     photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
     handleChangePhoto: handleChangeImage
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
