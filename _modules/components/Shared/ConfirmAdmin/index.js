@@ -49,12 +49,14 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
     otpState = props.otpState,
     generateOtpCode = props.generateOtpCode,
     checkCodeState = props.checkCodeState,
-    credentials = props.credentials,
     handleChangeInput = props.handleChangeInput,
     handleChangeCredentials = props.handleChangeCredentials;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+    _useSession2 = _slicedToArray(_useSession, 1),
+    user = _useSession2[0].user;
   var _useForm = (0, _reactHookForm.useForm)(),
     handleSubmit = _useForm.handleSubmit,
     register = _useForm.register,
@@ -70,6 +72,14 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     willVerifyOtpState = _useState4[0],
     setWillVerifyOtpState = _useState4[1];
+  var _useState5 = (0, _react.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    userPhoneNumber = _useState6[0],
+    setUserPhoneNumber = _useState6[1];
+  var _useState7 = (0, _react.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isValidPhoneNumber = _useState8[0],
+    setIsValidPhoneNumber = _useState8[1];
   var numOtpInputs = confirmTab === 'otp' ? 6 : 4;
   var otpPlaceholder = _toConsumableArray(Array(numOtpInputs)).fill(0).join('');
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkCodeState !== null && checkCodeState !== void 0 && checkCodeState.loading) && willVerifyOtpState),
@@ -91,6 +101,7 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
     setOtpState('');
   };
   var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+    setUserPhoneNumber(number);
     var phoneNumberParser = null;
     var values = {
       country_phone_code: '',
@@ -118,12 +129,22 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
     }
   };
   var onSubmit = function onSubmit() {
-    if (confirmTab === 'otp' && otpType === 'cellphone' && !(credentials !== null && credentials !== void 0 && credentials.country_phone_code) && !(credentials !== null && credentials !== void 0 && credentials.cellphone)) {
-      setAlertState({
-        open: true,
-        content: [t('PHONE_NUMBER_IS_NOT_VALID', 'Phone number is not valid')]
-      });
-      return;
+    if (confirmTab === 'otp' && otpType === 'cellphone') {
+      var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
+      if (!userPhoneNumber) {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.')]
+        });
+        return;
+      }
+      if (!isPhoneNumberValid && userPhoneNumber) {
+        setAlertState({
+          open: true,
+          content: [t('PHONE_NUMBER_IS_NOT_VALID', 'Phone number is not valid')]
+        });
+        return;
+      }
     }
     if (confirmTab === 'password') {
       getCheckPassword();
@@ -178,6 +199,31 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
       });
     }
   }, [errors]);
+  (0, _react.useEffect)(function () {
+    var _credentials = {};
+    if (user) {
+      if (user !== null && user !== void 0 && user.cellphone) {
+        var phone = null;
+        if (user !== null && user !== void 0 && user.cellphone && user !== null && user !== void 0 && user.country_phone_code) {
+          phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ").concat(user === null || user === void 0 ? void 0 : user.cellphone);
+          _credentials.country_phone_code = user.country_phone_code;
+          _credentials.cellphone = user.cellphone;
+        } else if (user !== null && user !== void 0 && user.country_phone_code) {
+          phone = "+".concat(user === null || user === void 0 ? void 0 : user.country_phone_code, " ").concat(user === null || user === void 0 ? void 0 : user.cellphone);
+          _credentials.country_phone_code = user.country_phone_code;
+          _credentials.cellphone = user === null || user === void 0 ? void 0 : user.cellphone;
+        } else {
+          phone = user === null || user === void 0 ? void 0 : user.cellphone;
+          _credentials.cellphone = user === null || user === void 0 ? void 0 : user.cellphone;
+        }
+        setUserPhoneNumber(phone);
+      }
+      if (user !== null && user !== void 0 && user.email) {
+        _credentials.email = user === null || user === void 0 ? void 0 : user.email;
+      }
+      handleChangeCredentials(_credentials);
+    }
+  }, [user]);
   return /*#__PURE__*/_react.default.createElement(_Modal.Modal, {
     open: open,
     width: props.width || '600px',
@@ -218,6 +264,7 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
     type: "email",
     name: "email",
     placeholder: t('EMAIL', 'Email'),
+    defaultValue: user === null || user === void 0 ? void 0 : user.email,
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
       pattern: {
@@ -231,7 +278,11 @@ var ConfirmAdminUI = function ConfirmAdminUI(props) {
     autoComplete: "off",
     autoCapitalize: "off"
   })), !willVerifyOtpState && confirmTab === 'otp' && otpType === 'cellphone' && /*#__PURE__*/_react.default.createElement(_styles2.FormController, null, /*#__PURE__*/_react.default.createElement(_InputPhoneNumber.InputPhoneNumber, {
-    setValue: handleChangePhoneNumber
+    isUser: true,
+    user: user,
+    value: userPhoneNumber,
+    setValue: handleChangePhoneNumber,
+    handleIsValid: setIsValidPhoneNumber
   })), !willVerifyOtpState && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
