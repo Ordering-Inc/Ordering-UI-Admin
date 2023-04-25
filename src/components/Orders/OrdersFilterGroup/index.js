@@ -50,7 +50,8 @@ const OrdersFilterGroupUI = (props) => {
     handleChangeCurrency,
     handleChangeMetaFieldValue,
     handleAddMetaField,
-    handleDeleteMetafield
+    handleDeleteMetafield,
+    handleChangeExternalId
   } = props
 
   const [, t] = useLanguage()
@@ -112,9 +113,12 @@ const OrdersFilterGroupUI = (props) => {
             value={filterValues?.orderId || ''}
             onChange={(e) => handleChangeOrderId(e)}
           />
-          <CurrencyFilter
-            filterValues={filterValues}
-            handleChangeCurrency={handleChangeCurrency}
+          <Input
+            type='text'
+            placeholder={t('EXTERNAL_ID', 'External Id')}
+            autoComplete='off'
+            value={filterValues?.externalId || ''}
+            onChange={handleChangeExternalId}
           />
         </WrapperRow>
         <WrapperRow>
@@ -170,6 +174,12 @@ const OrdersFilterGroupUI = (props) => {
             paymethodsList={paymethodsList}
             filterValues={filterValues}
             handleChangePaymethodType={handleChangePaymethodType}
+          />
+        </WrapperRow>
+        <WrapperRow>
+          <CurrencyFilter
+            filterValues={filterValues}
+            handleChangeCurrency={handleChangeCurrency}
           />
         </WrapperRow>
         {filterValues?.metafield.map(item => (

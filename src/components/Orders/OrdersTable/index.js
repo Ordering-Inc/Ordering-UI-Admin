@@ -114,6 +114,10 @@ export const OrdersTable = (props) => {
     {
       value: 'total',
       content: t('EXPORT_TOTAL', 'Total')
+    },
+    {
+      value: 'externalId',
+      content: t('EXTERNAL_ID', 'External id')
     }
   ]
 
@@ -228,6 +232,7 @@ export const OrdersTable = (props) => {
   }
 
   const handleChangeAllowColumns = (type) => {
+    console.log(type, 'type', allowColumns)
     const _column = allowColumns[type]
     setAllowColumns({
       ...allowColumns,
@@ -368,6 +373,27 @@ export const OrdersTable = (props) => {
                             </React.Fragment>
                           )
                         }
+                        if (column === 'externalId') {
+                          return (
+                            <DragTh
+                              key={`dragTh-${i}`}
+                              onDragOver={e => handleDragOver?.(e, column)}
+                              onDrop={e => handleDrop(e, column)}
+                              onDragEnd={e => handleDragEnd(e)}
+                              colSpan={allowColumns[column]?.colSpan ?? 1}
+                              className={allowColumns[column]?.className}
+                              selectedDragOver={column === dragOverd}
+                            >
+                              <div draggable onDragStart={e => handleDragStart?.(e, column)}>
+                                <img
+                                  src={theme.images.icons?.sixDots}
+                                  alt='six dots'
+                                />
+                                <span>{allowColumns[column]?.title}</span>
+                              </div>
+                            </DragTh>
+                          )
+                        }
                         if (column === 'total' || (column !== 'total' && column === [...array].pop())) {
                           return (
                             <React.Fragment key={i}>
@@ -450,6 +476,15 @@ export const OrdersTable = (props) => {
                       </div>
                     </OrderNumberContainer>
                   </td>
+                  {allowColumns?.externalId?.visable && (
+                    <td className='externalId'>
+                      <StatusInfo>
+                        <div className='info'>
+                          <p className='bold'><Skeleton width={100} /></p>
+                        </div>
+                      </StatusInfo>
+                    </td>
+                  )}
                   {allowColumns?.cartGroupId?.visable && (
                     <td className='statusInfo'>
                       <StatusInfo>
@@ -558,6 +593,7 @@ export const OrdersTable = (props) => {
                 className={parseInt(orderDetailId) === order.id ? 'active' : ''}
                 onClick={(e) => handleClickOrder(order, e)}
                 data-tour={i === 0 ? 'tour_start' : ''}
+                data-status={getStatusClassName(getDelayMinutes(order))}
               >
                 <tr>
                   {Object.keys(allowColumns).filter(col => allowColumns[col]?.visable)
@@ -569,6 +605,15 @@ export const OrdersTable = (props) => {
                             <Timestatus
                               timeState={getStatusClassName(getDelayMinutes(order))}
                             />
+                          </td>
+                        )
+                      }
+                      if (column === 'externalId' && !isSelectedOrders) {
+                        return (
+                          <td className='externalId' key={`externalId${i}-${index}`}>
+                            <StatusInfo>
+                              <p className='bold'>{order?.external_id}</p>
+                            </StatusInfo>
                           </td>
                         )
                       }

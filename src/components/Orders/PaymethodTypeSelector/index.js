@@ -13,6 +13,7 @@ export const PaymethodTypeSelector = (props) => {
 
   const [, t] = useLanguage()
   const [paymethodsTypes, setPaymethodsTypes] = useState([])
+  const [searchValue, setSearchValue] = useState('')
   const placeholder = <PlaceholderTitle>{t('SELECT_PAYMETHOD', 'Select paymethod')}</PlaceholderTitle>
   const paymthodsLoading = [{ value: 'default', content: <Option>{t('PAYMETHODS_LOADING', 'Paymethods loading')}...</Option> }]
 
@@ -36,7 +37,7 @@ export const PaymethodTypeSelector = (props) => {
     }
 
     setPaymethodsTypes(_paymthodsOptionList)
-  }, [paymethodsList])
+  }, [paymethodsList, searchValue])
 
   return (
     <>
@@ -47,12 +48,22 @@ export const PaymethodTypeSelector = (props) => {
           options={paymethodsTypes}
           optionBottomBorder
           onChange={(paymethod) => handleChangePaymethodType(paymethod)}
+          isShowSearchBar
+          searchBarIsCustomLayout
+          searchBarIsNotLazyLoad
+          searchValue={searchValue}
+          handleChangeSearch={(val) => setSearchValue(val)}
         />
       ) : (
         <MultiSelect
           defaultValue='default'
           options={paymthodsLoading}
           optionBottomBorder
+          isShowSearchBar
+          searchBarIsCustomLayout
+          searchBarIsNotLazyLoad
+          searchValue={searchValue}
+          handleChangeSearch={(val) => setSearchValue(val)}
         />
       )}
     </>
