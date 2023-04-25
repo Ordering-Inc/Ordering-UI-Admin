@@ -45,8 +45,20 @@ var Table = _styledComponents.default.table(_templateObject5 || (_templateObject
   return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.headingColor;
 });
 exports.Table = Table;
-var OrderTbody = _styledComponents.default.tbody(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n\n  &:hover {\n    background-color: ", ";\n  }\n  &.active {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n"])), function (props) {
+var OrderTbody = _styledComponents.default.tbody(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n\n  &[data-status=\"delayed\"] {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n  &[data-status=\"at_risk\"] {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n  &:hover {\n    background-color: ", ";\n  }\n  &.active {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
+}, function (props) {
+  return props.theme.colors.danger100;
+}, function (props) {
+  return props.theme.colors.danger;
+}, function (props) {
+  return props.theme.colors.danger;
+}, function (props) {
+  return props.theme.colors.warning100;
+}, function (props) {
+  return props.theme.colors.warning;
+}, function (props) {
+  return props.theme.colors.warning;
 }, function (props) {
   return props.theme.colors.lightPrimary;
 }, function (props) {
