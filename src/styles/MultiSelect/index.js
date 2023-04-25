@@ -3,6 +3,7 @@ import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import { CheckSquareFill, Square } from 'react-bootstrap-icons'
 import MdClose from '@meronex/icons/md/MdClose'
 import { Button } from '../Buttons'
+import { SearchBar } from '../../components/Shared'
 
 import {
   Select as SelectInput,
@@ -12,7 +13,8 @@ import {
   MultiOption,
   Chevron,
   Header,
-  MultiSelectOption
+  MultiSelectOption,
+  SearchBarWrapper
 } from '../Selects'
 
 import {
@@ -20,7 +22,19 @@ import {
 } from './styles'
 
 export const MultiSelect = (props) => {
-  const { placeholder, options, onChange, defaultValue, className } = props
+  const {
+    placeholder,
+    options,
+    onChange,
+    defaultValue,
+    className,
+    isShowSearchBar,
+    searchBarIsNotLazyLoad,
+    searchBarPlaceholder,
+    searchBarIsCustomLayout,
+    searchValue,
+    handleChangeSearch
+  } = props
 
   const [open, setOpen] = useState(false)
   const [values, setValues] = useState([])
@@ -43,15 +57,20 @@ export const MultiSelect = (props) => {
   }
 
   useEffect(() => {
+    if (isShowSearchBar && searchValue) return
+
     const _defaultOption = options?.filter(
       (option) => defaultValue.includes(option.value)
     )
     setSelectedOptions(_defaultOption)
     setValues(defaultValue)
-  }, [defaultValue, options])
+  }, [defaultValue, options, searchValue])
 
   useEffect(() => {
-    if (!open) return
+    if (!open) {
+      handleChangeSearch && handleChangeSearch('')
+      return
+    }
     document.addEventListener('click', closeSelect)
     return () => document.removeEventListener('click', closeSelect)
   }, [open])
@@ -118,6 +137,19 @@ export const MultiSelect = (props) => {
           position='right'
           ref={dropdownReference}
         >
+          {isShowSearchBar && (
+            <SearchBarWrapper
+              className='search-bar-container'
+            >
+              <SearchBar
+                lazyLoad={!searchBarIsNotLazyLoad}
+                isCustomLayout={searchBarIsCustomLayout}
+                search={searchValue}
+                onSearch={handleChangeSearch}
+                placeholder={searchBarPlaceholder || ''}
+              />
+            </SearchBarWrapper>
+          )}
           <OptionsInner
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}

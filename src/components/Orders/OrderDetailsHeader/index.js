@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage, useSession } from 'ordering-components-admin'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import ReactToPrint from 'react-to-print'
@@ -19,7 +19,9 @@ import {
   OrderDetailsHeaderContainer,
   UreadMessageAlert,
   ButtonGroup,
-  StripeLink
+  StripeLink,
+  PrinterSelect,
+  PrinterSelectContainer
 } from './styles'
 
 export const OrderDetailsHeader = (props) => {
@@ -34,13 +36,16 @@ export const OrderDetailsHeader = (props) => {
     openMessage,
     printRef,
     isServiceOrder,
-    extraOpen
+    extraOpen,
+    printTicketRef
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [isExpand, setIsExpand] = useState(false)
   const { width } = useWindowSize()
+  const [showPrinterOptions, setShowPrinterOptions] = useState(false)
+  const dropdownReference = useRef()
 
   const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
 
@@ -67,9 +72,27 @@ export const OrderDetailsHeader = (props) => {
     setIsExpand(prev => !prev)
   }
 
+  const closeSelect = (e) => {
+    if (showPrinterOptions) {
+      const outsideDropdown = !dropdownReference.current?.contains(e.target)
+      if (outsideDropdown) {
+        setShowPrinterOptions(false)
+      }
+    }
+  }
+
   useEffect(() => {
     if (extraOpen) setIsExpand(false)
   }, [extraOpen])
+
+  useEffect(() => {
+    if (!showPrinterOptions) {
+      return
+    }
+    document.addEventListener('click', closeSelect)
+    return () => document.removeEventListener('click', closeSelect)
+  }, [showPrinterOptions])
+
 
   return (
     <OrderDetailsHeaderContainer>
@@ -91,18 +114,45 @@ export const OrderDetailsHeader = (props) => {
               )}
             </ButtonLink>
           )}
+        <PrinterSelectContainer>
+          <ButtonLink
+            color='black'
+            isDisabled={isTourOpen && currentTourStep === 1}
+            onClick={() => setShowPrinterOptions(!showPrinterOptions)}
+          >
+            <Printer />
+          </ButtonLink>
+        {showPrinterOptions && (
+        <PrinterSelect ref={dropdownReference}>
           <ReactToPrint
             trigger={() => (
               <ButtonLink
                 color='black'
                 isDisabled={isTourOpen && currentTourStep === 1}
+                onClick={() => setShowPrinterOptions(false)}
               >
-                <Printer />
+                {t('NORMAL', 'Normal')}
               </ButtonLink>
             )}
             content={() => printRef.current}
             removeAfterPrint
           />
+          <ReactToPrint
+            trigger={() => (
+              <ButtonLink
+                color='black'
+                isDisabled={isTourOpen && currentTourStep === 1}
+                onClick={() => setShowPrinterOptions(false)}
+              >
+                {t('TICKET', 'Ticket')}
+              </ButtonLink>
+            )}
+            content={() => printTicketRef.current}
+            removeAfterPrint
+          />
+          </PrinterSelect>
+          )}
+          </PrinterSelectContainer>
           <ButtonLink
             color='black'
             active={openMessage?.history}
@@ -142,7 +192,7 @@ export const OrderDetailsHeader = (props) => {
               <span>
                 {event?.wallet_event
                   ? walletName[event?.wallet_event?.wallet?.type]?.name
-                  : event?.paymethod?.name}
+                  : t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name)}
               </span>
               {stripePaymethods.includes(event?.data?.gateway || event?.paymethod?.gateway) && (
                 <>

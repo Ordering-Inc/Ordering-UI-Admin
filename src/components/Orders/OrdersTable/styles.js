@@ -102,6 +102,20 @@ export const OrderTbody = styled.tbody`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
   cursor: pointer;
 
+  &[data-status="delayed"] {
+    background-color: ${props => props.theme.colors.danger100};
+    td {
+      border-top: 1px solid ${props => props.theme.colors.danger} !important;
+      border-bottom: 1px solid ${props => props.theme.colors.danger} !important;
+    }
+  }
+  &[data-status="at_risk"] {
+    background-color: ${props => props.theme.colors.warning100};
+    td {
+      border-top: 1px solid ${props => props.theme.colors.warning} !important;
+      border-bottom: 1px solid ${props => props.theme.colors.warning} !important;
+    }
+  }
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};
   }

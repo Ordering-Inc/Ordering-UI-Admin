@@ -204,7 +204,6 @@ export const AdvancedSettings = (props) => {
   useEffect(() => {
     themeValuesRef.current = JSON.parse(JSON.stringify(advancedValues))
   }, [advancedValues])
-
   return (
     <>
       <Container>
@@ -217,6 +216,7 @@ export const AdvancedSettings = (props) => {
               ratio='1350 x 400 px'
               photo={themeValuesRef?.current?.my_products?.components?.images?.components?.homepage_background?.components?.image}
               path='my_products.components.images.components.homepage_background.components.image'
+              themeId={themesList?.themes?.[0]?.id}
               handleChangePhoto={handleUpdateThemeValue}
             />
           </BoxLayout>
@@ -229,6 +229,7 @@ export const AdvancedSettings = (props) => {
                 settingList={homepageViewList}
                 handleUpdateThemeValue={handleUpdateThemeValue}
                 advancedValues={themeValuesRef?.current}
+                themeId={themesList?.themes?.[0]?.id}
               />
             </HomePageWrapper>
           </BoxLayout>
@@ -240,6 +241,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
           <h3>{t('SHAPE', 'Shape')}</h3>
           <ShadowWrapper>
@@ -267,6 +269,7 @@ export const AdvancedSettings = (props) => {
             ratio='512 x 512 px'
             photo={themeValuesRef?.current?.business_view?.components?.header?.components?.logo?.dummy_image}
             path='business_view.components.header.components.logo.dummy_image'
+            themeId={themesList?.themes?.[0]?.id}
             handleChangePhoto={handleUpdateThemeValue}
           />
           <ImageBox
@@ -275,6 +278,7 @@ export const AdvancedSettings = (props) => {
             isBig
             photo={themeValuesRef?.current?.business_view?.components?.header?.components?.dummy_image}
             path='business_view.components.header.components.dummy_image'
+            themeId={themesList?.themes?.[0]?.id}
             handleChangePhoto={handleUpdateThemeValue}
           />
           <SettingComponent
@@ -282,6 +286,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
             noLabel
           />
           <ImageGroup>
@@ -290,6 +295,7 @@ export const AdvancedSettings = (props) => {
               ratio='900 x 200 px'
               photo={themeValuesRef?.current?.business_view?.components?.products?.components?.photo?.components?.dummy_image}
               path='business_view.components.products.components.photo.components.dummy_image'
+              themeId={themesList?.themes?.[0]?.id}
               handleChangePhoto={handleUpdateThemeValue}
             />
           </ImageGroup>
@@ -301,6 +307,7 @@ export const AdvancedSettings = (props) => {
             ratio='512 x 512 px'
             photo={themeValuesRef?.current?.general?.components?.favicon?.components?.image}
             path='general.components.favicon.components.image'
+            themeId={themesList?.themes?.[0]?.id}
             handleChangePhoto={handleUpdateThemeValue}
           />
         </BoxLayout>
@@ -311,6 +318,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         <BoxLayout>
@@ -320,6 +328,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         <BoxLayout>
@@ -329,6 +338,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         <BoxLayout>
@@ -338,6 +348,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         <BoxLayout>
@@ -347,6 +358,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         <BoxLayout>
@@ -356,6 +368,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={advancedValues}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         <BoxLayout>
@@ -365,6 +378,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         <BoxLayout>
@@ -374,6 +388,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={advancedValues}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         <BoxLayout>
@@ -383,6 +398,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
           <h3>{t('CONFIRMATION_PAGE', 'Confirmation page')}</h3>
           <h3>{t('ORDER_BLOCK', 'Order block')}</h3>
@@ -391,6 +407,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
           <h3>{t('POPUP_ADDRESS', 'Popup: Address')}</h3>
           <SettingComponent
@@ -398,6 +415,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
           <h3>{t('MY_ACCOUNT_PAGE', 'My account page')}</h3>
           <SettingComponent
@@ -405,6 +423,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
           <h3>{t('MY_ORDERS', 'My orders')}</h3>
           <h3>{t('ACTIVE_ORDERS_BLOCK', 'Active Orders Block')}</h3>
@@ -413,6 +432,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         {!isApp && (
@@ -423,6 +443,7 @@ export const AdvancedSettings = (props) => {
               handleUpdateThemeValue={handleUpdateThemeValue}
               advancedValues={advancedValues}
               themeStructure={themeStructure}
+              themeId={themesList?.themes?.[0]?.id}
             />
           </BoxLayout>
         )}
@@ -474,6 +495,7 @@ export const AdvancedSettings = (props) => {
             handleUpdateThemeValue={handleUpdateThemeValue}
             advancedValues={themeValuesRef?.current}
             themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
           />
         </BoxLayout>
         {isApp && (
@@ -484,6 +506,7 @@ export const AdvancedSettings = (props) => {
               handleUpdateThemeValue={handleUpdateThemeValue}
               advancedValues={themeValuesRef?.current}
               themeStructure={themeStructure}
+              themeId={themesList?.themes?.[0]?.id}
             />
           </BoxLayout>
         )}
