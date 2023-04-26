@@ -33,6 +33,8 @@ import { BusinessTypes } from './BusinessTypes'
 import { BusinessVideos } from './BusinessVideos'
 import { BusinessWebhooks } from './BusinessWebhooks'
 import { BusinessWidgets } from './BusinessWidgets'
+import { BusinessQRCodeOption } from './BusinessQRCodeOption'
+import { BusinessQRCodeOptions } from './BusinessQRCodeOptions'
 import { SeoOptions } from './SeoOptions'
 import { AddBusinessForm } from './AddBusinessForm'
 import { WizardBusiness } from './WizardBusiness'
@@ -143,6 +145,8 @@ export {
   BusinessVideos,
   BusinessWebhooks,
   BusinessWidgets,
+  BusinessQRCodeOption,
+  BusinessQRCodeOptions,
   SeoOptions,
   AddBusinessForm,
   WizardBusiness,

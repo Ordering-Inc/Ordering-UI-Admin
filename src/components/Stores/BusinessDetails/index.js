@@ -27,6 +27,7 @@ import {
   BarContainer
 } from './styles'
 import { BusinessSalesChannel } from '../BusinessSalesChannel'
+import { BusinessQRCodeOptions } from '../BusinessQRCodeOptions'
 
 export const BusinessDetailsUI = (props) => {
   const {
@@ -305,6 +306,12 @@ export const BusinessDetailsUI = (props) => {
               setIsExtendExtraOpen={setIsExtendExtraOpen}
             />
           )} */}
+          {selectedItem === 'publishing' && isAdmin && (
+            <BusinessQRCodeOptions
+              business={businessState?.business}
+              setIsExtendExtraOpen={setIsExtendExtraOpen}
+            />
+          )}
           {selectedItem === 'sales_channels' && (
             <BusinessSalesChannel
               business={businessState?.business}
