@@ -277,7 +277,7 @@ export const MessagesUI = (props) => {
   useEffect(() => {
     if (!isChat || !order?.id || messages.loading) return
     unreadMessageControl()
-  }, [isChat, order?.id, messages.loading])
+  }, [isChat, order?.id, messages])
 
   useEffect(() => {
     if (messages.loading) return
