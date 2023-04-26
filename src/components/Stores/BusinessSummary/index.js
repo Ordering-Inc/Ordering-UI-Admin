@@ -38,7 +38,8 @@ export const BusinessSummary = (props) => {
     handleDuplicateBusiness,
     handleDeleteBusiness,
     extraOpen,
-    spoonityConfig
+    spoonityConfig,
+    siteState
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -56,7 +57,10 @@ export const BusinessSummary = (props) => {
   }
 
   const handleOpenSite = () => {
-    window.open(`https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`, '_blank')
+    const url = siteState?.site?.domain && siteState?.site?.ssl_process_status === 'ended'
+      ? `https://${siteState?.site?.domain}/store/${businessState?.business?.slug}`
+      : `https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`
+    window.open(url, '_blank')
   }
 
   const itemsExcluded = !!spoonityConfig ? ['publishing'] : ['publishing', 'spoonity_key']
