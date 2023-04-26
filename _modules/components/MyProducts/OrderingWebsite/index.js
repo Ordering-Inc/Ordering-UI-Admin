@@ -14,10 +14,11 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
 var _ContentForm = require("../ContentForm");
-var _utils = require("../../../utils");
-var _styles2 = require("./styles");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _AdvancedSettings = require("../AdvancedSettings");
+var _CustomDomain = require("../CustomDomain");
+var _utils = require("../../../utils");
+var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -40,7 +41,9 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     handleUpdateSiteTheme = props.handleUpdateSiteTheme,
     advancedValues = props.advancedValues,
     setAdvancedValues = props.setAdvancedValues,
-    themesList = props.themesList;
+    themesList = props.themesList,
+    site = props.site,
+    setSite = props.setSite;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -83,6 +86,10 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     selectedSetting = _useState10[0],
     setSelectedSetting = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isCustomDomain = _useState12[0],
+    setIsCustomDomain = _useState12[1];
   var settingsList = [{
     key: 'basic',
     name: t('BASIC_SETTINGS', 'Basic Settings')
@@ -240,14 +247,21 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     style: {
       width: '100%'
     }
-  }) : /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (site === null || site === void 0 ? void 0 : site.domain) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TemporalDomail, {
+    isDisabled: (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'pending',
+    marginBottom: (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'ended'
+  }, t('VISIT', 'Visit'), ": ", /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://".concat(site === null || site === void 0 ? void 0 : site.domain),
+    rel: "noopener noreferrer",
+    target: "_blank"
+  }, "https://", site === null || site === void 0 ? void 0 : site.domain)), (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'pending' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('ERROR_SITE_CERTIFICATE_PENDING_PROCESS', 'Creating a custom domain is currently being processed.'))), (site === null || site === void 0 ? void 0 : site.ssl_process_status) !== 'pending' && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     outline: true,
     borderRadius: "8px",
     onClick: function onClick() {
-      return window.open('https://www.ordering.co/custom-domain-change', '_blank');
+      return setIsCustomDomain(true);
     }
-  }, t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain'))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_THEME', 'Website Theme')), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, site !== null && site !== void 0 && site.domain ? t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain') : t('CHANGE_CUSTOM_DOMAIN', 'Change custom domain')))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_THEME', 'Website Theme')), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20,
     width: 150
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.RadioItem, {
@@ -503,6 +517,18 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     },
     handleChangeContent: handleChangeContent,
     type: "footer_content"
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "70%",
+    open: isCustomDomain,
+    onClose: function onClose() {
+      return setIsCustomDomain(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CustomDomain.CustomDomain, {
+    site: site,
+    onClose: function onClose() {
+      return setIsCustomDomain(false);
+    },
+    setSite: setSite
   })));
 };
 var OrderingWebsite = function OrderingWebsite(props) {

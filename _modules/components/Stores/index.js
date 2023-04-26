@@ -273,6 +273,18 @@ Object.defineProperty(exports, "BusinessPublishing", {
     return _BusinessPublishing.BusinessPublishing;
   }
 });
+Object.defineProperty(exports, "BusinessQRCodeOption", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessQRCodeOption.BusinessQRCodeOption;
+  }
+});
+Object.defineProperty(exports, "BusinessQRCodeOptions", {
+  enumerable: true,
+  get: function get() {
+    return _BusinessQRCodeOptions.BusinessQRCodeOptions;
+  }
+});
 Object.defineProperty(exports, "BusinessSalesChannel", {
   enumerable: true,
   get: function get() {
@@ -686,6 +698,8 @@ var _BusinessTypes = require("./BusinessTypes");
 var _BusinessVideos = require("./BusinessVideos");
 var _BusinessWebhooks = require("./BusinessWebhooks");
 var _BusinessWidgets = require("./BusinessWidgets");
+var _BusinessQRCodeOption = require("./BusinessQRCodeOption");
+var _BusinessQRCodeOptions = require("./BusinessQRCodeOptions");
 var _SeoOptions = require("./SeoOptions");
 var _AddBusinessForm = require("./AddBusinessForm");
 var _WizardBusiness = require("./WizardBusiness");
