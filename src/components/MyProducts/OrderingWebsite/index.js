@@ -16,6 +16,9 @@ import {
 import { useTheme } from 'styled-components'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
 import { ContentForm } from '../ContentForm'
+import Skeleton from 'react-loading-skeleton'
+import { AdvancedSettings } from '../AdvancedSettings'
+import { CustomDomain } from '../CustomDomain'
 import { bytesConverter } from '../../../utils'
 import {
   Container,
@@ -44,10 +47,9 @@ import {
   HeaderInfoWrapper,
   InfoContent,
   RadioItem,
-  SlugWrapper
+  SlugWrapper,
+  CustomeDomainDesc
 } from './styles'
-import Skeleton from 'react-loading-skeleton'
-import { AdvancedSettings } from '../AdvancedSettings'
 
 const OrderingWebsiteUI = (props) => {
   const {
@@ -57,7 +59,9 @@ const OrderingWebsiteUI = (props) => {
     handleUpdateSiteTheme,
     advancedValues,
     setAdvancedValues,
-    themesList
+    themesList,
+    site,
+    setSite
   } = props
 
   const [, t] = useLanguage()
@@ -75,6 +79,7 @@ const OrderingWebsiteUI = (props) => {
   const [homePageContent, setHomePageContent] = useState(false)
   const [footerContent, setFooterContent] = useState(false)
   const [selectedSetting, setSelectedSetting] = useState('basic')
+  const [isCustomDomain, setIsCustomDomain] = useState(false)
 
   const settingsList = [
     { key: 'basic', name: t('BASIC_SETTINGS', 'Basic Settings') },
@@ -295,14 +300,28 @@ const OrderingWebsiteUI = (props) => {
                   {orderingTheme?.loading ? (
                     <Skeleton height={40} style={{ width: '100%' }} />
                   ) : (
-                    <Button
-                      color='primary'
-                      outline
-                      borderRadius='8px'
-                      onClick={() => window.open('https://www.ordering.co/custom-domain-change', '_blank')}
-                    >
-                      {t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain')}
-                    </Button>
+                    <>
+                      {site?.domain && (
+                        <>
+                          <TemporalDomail isDisabled={site?.ssl_process_status === 'pending'} marginBottom={site?.ssl_process_status === 'ended'}>
+                            {t('VISIT', 'Visit')}: <a href={`https://${site?.domain}`} rel='noopener noreferrer' target='_blank'>https://{site?.domain}</a>
+                          </TemporalDomail>
+                          {site?.ssl_process_status === 'pending' && (
+                            <CustomeDomainDesc>{t('ERROR_SITE_CERTIFICATE_PENDING_PROCESS', 'Creating a custom domain is currently being processed.')}</CustomeDomainDesc>
+                          )}
+                        </>
+                      )}
+                      {site?.ssl_process_status !== 'pending' && (
+                        <Button
+                          color='primary'
+                          outline
+                          borderRadius='8px'
+                          onClick={() => setIsCustomDomain(true)}
+                        >
+                          {site?.domain ? t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain') : t('CHANGE_CUSTOM_DOMAIN', 'Change custom domain')}
+                        </Button>
+                      )}
+                    </>
                   )}
                 </FormGroup>
               </InnerBlock>
@@ -604,6 +623,17 @@ const OrderingWebsiteUI = (props) => {
           onClose={() => setFooterContent(false)}
           handleChangeContent={handleChangeContent}
           type='footer_content'
+        />
+      </Modal>
+      <Modal
+        width='70%'
+        open={isCustomDomain}
+        onClose={() => setIsCustomDomain(false)}
+      >
+        <CustomDomain
+          site={site}
+          onClose={() => setIsCustomDomain(false)}
+          setSite={setSite}
         />
       </Modal>
     </>

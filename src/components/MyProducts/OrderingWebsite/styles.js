@@ -178,6 +178,18 @@ export const TemporalDomail = styled.div`
   > a {
     color: ${props => props.theme.colors.primary};
   }
+
+  ${({ isDisabled }) => isDisabled && css`
+    pointer-events: none;
+    color: ${props => props.theme.colors.disabled};
+    > a {
+      color: ${props => props.theme.colors.disabled};
+    }
+  `}
+
+  ${({ marginBottom }) => marginBottom && css`
+    margin-bottom: 10px;
+  `}
 `
 
 export const ImageFormGroup = styled.div`
@@ -484,4 +496,11 @@ export const SlugWrapper = styled.div`
   > input, textarea {
     width: 100%;
   }
+`
+
+export const CustomeDomainDesc = styled.p`
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-weight: 400;
+  font-size: 12px;
 `

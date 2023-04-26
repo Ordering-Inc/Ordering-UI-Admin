@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const PrintContainer = styled.div`
   display: none;
+  font-family: arial !important;
   padding: 80px 50px;
   max-width: 420px;
 
