@@ -177,6 +177,7 @@ export const UserDetailsUI = (props) => {
           {currentMenuSelected === 'schedule' && (
             <ScheduleSection>
               <Schedule
+                isShowDate={!!isDriversPage}
                 scheduleList={userState?.user?.schedule}
                 handleChangeScheduleState={handleScheduleState}
               />
