@@ -4,6 +4,7 @@ import parsePhoneNumber from 'libphonenumber-js'
 import OtpInput from 'react-otp-input'
 import {
   useLanguage,
+  useSession,
   CheckPassword as CheckPasswordController
 } from 'ordering-components-admin'
 import { Modal } from '../Modal'
@@ -40,15 +41,17 @@ const ConfirmAdminUI = (props) => {
     generateOtpCode,
 
     checkCodeState,
-    credentials,
     handleChangeInput,
     handleChangeCredentials
   } = props
 
   const [, t] = useLanguage()
+  const [{ user }] = useSession()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
+  const [userPhoneNumber, setUserPhoneNumber] = useState(null)
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useState('')
 
   const numOtpInputs = confirmTab === 'otp' ? 6 : 4
   const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
@@ -71,6 +74,7 @@ const ConfirmAdminUI = (props) => {
   }
 
   const handleChangePhoneNumber = (number, isValid) => {
+    setUserPhoneNumber(number)
     let phoneNumberParser = null
     let values = { country_phone_code: '', cellphone: '' }
 
@@ -98,12 +102,22 @@ const ConfirmAdminUI = (props) => {
   }
 
   const onSubmit = () => {
-    if (confirmTab === 'otp' && otpType === 'cellphone' && !credentials?.country_phone_code && !credentials?.cellphone) {
-      setAlertState({
-        open: true,
-        content: [t('PHONE_NUMBER_IS_NOT_VALID', 'Phone number is not valid')]
-      })
-      return
+    if (confirmTab === 'otp' && otpType === 'cellphone') {
+      const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
+      if (!userPhoneNumber) {
+        setAlertState({
+          open: true,
+          content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.')]
+        })
+        return
+      }
+      if (!isPhoneNumberValid && userPhoneNumber) {
+        setAlertState({
+          open: true,
+          content: [t('PHONE_NUMBER_IS_NOT_VALID', 'Phone number is not valid')]
+        })
+        return
+      }
     }
     if (confirmTab === 'password') {
       getCheckPassword()
@@ -158,6 +172,32 @@ const ConfirmAdminUI = (props) => {
       })
     }
   }, [errors])
+
+  useEffect(() => {
+    const _credentials = {}
+    if (user) {
+      if (user?.cellphone) {
+        let phone = null
+        if (user?.cellphone && user?.country_phone_code) {
+          phone = `+${user?.country_phone_code} ${user?.cellphone}`
+          _credentials.country_phone_code = user.country_phone_code
+          _credentials.cellphone = user.cellphone
+        } else if (user?.country_phone_code) {
+          phone = `+${user?.country_phone_code} ${user?.cellphone}`
+          _credentials.country_phone_code = user.country_phone_code
+          _credentials.cellphone = user?.cellphone
+        } else {
+          phone = user?.cellphone
+          _credentials.cellphone = user?.cellphone
+        }
+        setUserPhoneNumber(phone)
+      }
+      if (user?.email) {
+        _credentials.email = user?.email
+      }
+      handleChangeCredentials(_credentials)
+    }
+  }, [user])
 
   return (
     <Modal
@@ -216,6 +256,7 @@ const ConfirmAdminUI = (props) => {
               type='email'
               name='email'
               placeholder={t('EMAIL', 'Email')}
+              defaultValue={user?.email}
               ref={register({
                 required: t(
                   'VALIDATION_ERROR_REQUIRED',
@@ -238,7 +279,11 @@ const ConfirmAdminUI = (props) => {
         {!willVerifyOtpState && confirmTab === 'otp' && otpType === 'cellphone' && (
           <FormController>
             <InputPhoneNumber
+              isUser
+              user={user}
+              value={userPhoneNumber}
               setValue={handleChangePhoneNumber}
+              handleIsValid={setIsValidPhoneNumber}
             />
           </FormController>
         )}
