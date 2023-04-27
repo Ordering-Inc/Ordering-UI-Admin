@@ -295,7 +295,7 @@ var MessagesUI = function MessagesUI(props) {
   (0, _react.useEffect)(function () {
     if (!isChat || !(order !== null && order !== void 0 && order.id) || messages.loading) return;
     unreadMessageControl();
-  }, [isChat, order === null || order === void 0 ? void 0 : order.id, messages.loading]);
+  }, [isChat, order === null || order === void 0 ? void 0 : order.id, messages]);
   (0, _react.useEffect)(function () {
     if (messages.loading) return;
     var _filteredMessages = messages.messages.filter(function (message) {
