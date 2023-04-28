@@ -77,7 +77,7 @@ var HomeUI = function HomeUI(props) {
   };
   var goToLink = function goToLink(location) {
     if (location === 'sales') {
-      window.open('https://www.ordering.co/ordering-sales', '_blank');
+      window.open('https://www.ordering.co/contact-ordering', '_blank');
     }
     if (location === 'tech') {
       window.open('https://support.ordering.co', '_blank');

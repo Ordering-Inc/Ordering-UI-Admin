@@ -37,7 +37,7 @@ var Support = function Support(props) {
     borderRadius: "7.6px",
     color: "primary",
     onClick: function onClick() {
-      return handleGoToLink('https://www.ordering.co/ordering-sales');
+      return handleGoToLink('https://www.ordering.co/contact-ordering');
     },
     outline: true
   }, t('SALES_CONTACT', 'Sales Contact')))), /*#__PURE__*/_react.default.createElement(_styles.SupportContent, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CONTACT_SUPPORT_TEAM', 'Contact our Support Team')), /*#__PURE__*/_react.default.createElement("p", null, t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')), /*#__PURE__*/_react.default.createElement(_styles.ActionBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
