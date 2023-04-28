@@ -10,6 +10,8 @@ import { Personalization, Modal, Schedule } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { UserMetaFields } from '../../Users'
+import { DriversLogs } from '../DriversLogs'
+import { DriversGroupLogsUI } from '../DriversGroupLogs'
 import { DriverGroupSetting } from '../DriverGroupSetting'
 import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { Switch, Button, IconButton } from '../../../styles'
@@ -194,6 +196,12 @@ export const UserDetailsUI = (props) => {
                 </Button>
               </ActionsForm>
             </ScheduleSection>
+          )}
+          {currentMenuSelected === 'logs' && (
+            <DriversLogs
+              userId={userState.user?.id}
+              UIComponent={DriversGroupLogsUI}
+            />
           )}
           {currentMenuSelected === 'orders' && (
             <OrdersManager
