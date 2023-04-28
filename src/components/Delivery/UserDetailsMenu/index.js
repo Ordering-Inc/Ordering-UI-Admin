@@ -19,7 +19,8 @@ export const UserDetailsMenu = (props) => {
     { key: 'profile', content: t('PROFILE', 'Profile') },
     { key: 'driver_group', content: t('DRIVER_GROUP', 'Driver group') },
     { key: 'saved_places', content: t('SAVED_PLACES', 'Saved places') },
-    { key: 'schedule', content: t('SCHEDULE', 'Schedule') }
+    { key: 'schedule', content: t('SCHEDULE', 'Schedule') },
+    { key: 'logs', content: t('LOGS', 'Logs') }
     // { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
     // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
   ] : [
