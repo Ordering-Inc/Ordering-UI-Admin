@@ -214,10 +214,11 @@ export const BusinessDeliveryZoneInformation = (props) => {
                 disabled={!isMyZone}
                 placeholder={`1 - 99 ${configState?.configs?.distance_unit?.value}`}
                 name='distance'
-                maxLength={2}
                 value={formState.changes?.data?.distance ?? zone?.data?.distance ?? ''}
                 onInput={(e) => {
-                  e.target.value = e.target.value.match(`^[${e.target.value === '0' ? '1' : '0'}-9]{1,2}$`)
+                  e.target.value = (Number(e.target.value) > 99 || e.target.value === '.' || (e.target.value.match(/\./g) || []).length > 1)
+                    ? e.target.value.slice(0, -1)
+                    : e.target.value.match(`^[${e.target.value === '0' ? '1' : '0'}-9/.]{1,9}$`)
                 }}
                 onChange={e => handleChangeInput(e, configState?.configs?.distance_unit?.value)}
                 ref={register({
