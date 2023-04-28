@@ -17,6 +17,8 @@ var _Shared = require("../../Shared");
 var _UserDetailsMenu = require("../UserDetailsMenu");
 var _UserProfileForm = require("../UserProfileForm");
 var _Users = require("../../Users");
+var _DriversLogs = require("../DriversLogs");
+var _DriversGroupLogs = require("../DriversGroupLogs");
 var _DriverGroupSetting = require("../DriverGroupSetting");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
@@ -38,7 +40,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _userState$user5, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _scheduleState$change, _userState$user12, _userState$user13;
+  var _userState$user, _userState$user2, _userState$user3, _userState$user5, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _scheduleState$change, _userState$user12, _userState$user13, _userState$user14;
   var isDriversPage = props.isDriversPage,
     isDriversManagersPage = props.isDriversManagersPage,
     userState = props.userState,
@@ -178,9 +180,12 @@ var UserDetailsUI = function UserDetailsUI(props) {
     onClick: function onClick() {
       return handleScheduleUpdateUser();
     }
-  }, scheduleState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')))), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_Orders.OrdersManager, {
+  }, scheduleState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')))), currentMenuSelected === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversLogs.DriversLogs, {
+    userId: (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.id,
+    UIComponent: _DriversGroupLogs.DriversGroupLogsUI
+  }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_Orders.OrdersManager, {
     isSelectedOrders: true,
-    customerId: (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.id,
+    customerId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,
     handleCustomOrderDetail: setExtraOpen
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
@@ -192,7 +197,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       return setIsCustomField(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_Users.UserMetaFields, {
-    userId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id
+    userId: (_userState$user14 = userState.user) === null || _userState$user14 === void 0 ? void 0 : _userState$user14.id
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
     height: "80vh",

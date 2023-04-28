@@ -34,8 +34,8 @@ var OrderType = function OrderType(props) {
     onChange: function onChange(e) {
       return handleUpdateThemeValue(e.target.value, [path, 'description'].join('.'));
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('CALL_TO_ACTION', 'Call to action')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    placeholder: t('CALL_TO_ACTION', 'Call to action'),
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('EXPORT_CALL_TO_ACTION', 'Call to action')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    placeholder: t('EXPORT_CALL_TO_ACTION', 'Call to action'),
     defaultValue: (typeValues === null || typeValues === void 0 ? void 0 : typeValues.call_to_action) || '',
     onChange: function onChange(e) {
       return handleUpdateThemeValue(e.target.value, [path, 'call_to_action'].join('.'));

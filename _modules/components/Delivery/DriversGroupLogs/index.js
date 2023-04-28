@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DriversGroupLogs = void 0;
+exports.DriversGroupLogsUI = exports.DriversGroupLogs = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -117,7 +117,6 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
       handleChangePage(paginationProps.currentPage - 1);
     }
   }, [logsList.logs, paginationProps]);
-  console.log(logsList);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriversGroupLogsContainer, {
     disabled: actionDisabled
   }, /*#__PURE__*/_react.default.createElement(_styles.TableWrapper, null, logsList.loading || logsList.logs.length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.Table, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('CONTROL_PANEL_USERS', 'Users')), /*#__PURE__*/_react.default.createElement("th", null, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement("th", null, t('EXPORT_DATE', 'Date')), /*#__PURE__*/_react.default.createElement("th", null, t('USER_AGENT', 'User agent')))), logsList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
@@ -153,6 +152,7 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
     handleChangePageSize: handleChangePageSize
   }))));
 };
+exports.DriversGroupLogsUI = DriversGroupLogsUI;
 var DriversGroupLogs = function DriversGroupLogs(props) {
   var driversGroupLogsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: DriversGroupLogsUI

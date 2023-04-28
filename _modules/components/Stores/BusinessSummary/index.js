@@ -93,7 +93,7 @@ var BusinessSummary = function BusinessSummary(props) {
     var url = siteState !== null && siteState !== void 0 && (_siteState$site = siteState.site) !== null && _siteState$site !== void 0 && _siteState$site.domain && (siteState === null || siteState === void 0 ? void 0 : (_siteState$site2 = siteState.site) === null || _siteState$site2 === void 0 ? void 0 : _siteState$site2.ssl_process_status) === 'ended' ? "https://".concat(siteState === null || siteState === void 0 ? void 0 : (_siteState$site3 = siteState.site) === null || _siteState$site3 === void 0 ? void 0 : _siteState$site3.domain, "/store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.slug) : "https://".concat(ordering.project, ".tryordering.com/store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.slug);
     window.open(url, '_blank');
   };
-  var itemsExcluded = !!spoonityConfig ? ['publishing'] : ['publishing', 'spoonity_key'];
+  var itemsExcluded = !!spoonityConfig ? ['publishing', 'personalization'] : ['publishing', 'spoonity_key', 'personalization'];
   var businessConfigs = [{
     key: 'store_details',
     value: t('STORE_DETAILS', 'Store details')

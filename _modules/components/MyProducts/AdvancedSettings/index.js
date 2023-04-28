@@ -76,7 +76,7 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'business_listing_view.components.previous_orders_block.hidden'
   }, {
-    name: t('Highest_rated_business_block', 'Highest rated business block'),
+    name: t('HIGHEST_RATED_BUSINESS_BLOCK', 'Highest rated business block'),
     type: 'hidden',
     path: 'business_listing_view.components.highest_rated_business_block.hidden'
   }, {
@@ -270,7 +270,7 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'profile.components.picture.hidden'
   }, {
-    name: t('BIRTHDAY', 'Birthday'),
+    name: t('EXPORT_BIRTHDAY', 'Birthday'),
     type: 'hidden',
     path: 'profile.components.birthday.hidden'
   }, {
@@ -283,15 +283,11 @@ var AdvancedSettings = function AdvancedSettings(props) {
     path: 'profile.components.address_list.hidden'
   }];
   var activeOrderBlockList = [{
-    name: t('MAP', 'Map'),
-    type: 'hidden',
-    path: 'orders.components.map.hidden'
-  }, {
     name: t('BUSINESS_LOGO', 'Business logo'),
     type: 'hidden',
     path: 'orders.components.business_logo.hidden'
   }, {
-    name: t('BUSINESS_NAME', 'Business name'),
+    name: t('EXPORT_BUSINESS_NAME', 'Business name'),
     type: 'hidden',
     path: 'orders.components.business_name.hidden'
   }, {
@@ -303,11 +299,11 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'orders.components.date.hidden'
   }, {
-    name: t('REVIEW_ORDER_BUTTON', 'Review order button'),
+    name: t('EXPORT_REVIEW_ORDER_BUTTON', 'Review order button'),
     type: 'hidden',
     path: 'orders.components.review_order_button.hidden'
   }, {
-    name: t('REORDER_BUTTON', 'Reorder button'),
+    name: t('EXPORT_REORDER_BUTTON', 'Reorder button'),
     type: 'hidden',
     path: 'orders.components.reorder_button.hidden'
   }, {
@@ -319,24 +315,24 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'orders.components.order_status.hidden'
   }, {
-    name: t('PREVIOUS_ORDER_BLOCK', 'Previous order block'),
+    name: t('EXPORT_PREVIOUS_ORDER_BLOCK', 'Previous order block'),
     type: 'hidden',
     path: 'orders.components.past_orders.hidden'
   }, {
-    name: t('BUSINESS_TAB', 'Business tab'),
+    name: t('EXPORT_BUSINESS_TAB', 'Business tab'),
     type: 'hidden',
     path: 'orders.components.business_tab.hidden'
   }, {
-    name: t('PRODUCTS_TAB', 'Products tab'),
+    name: t('EXPORT_PRODUCTS_TAB', 'Products tab'),
     type: 'hidden',
     path: 'orders.components.products_tab.hidden'
   }];
   var menuOptionList = [{
-    name: t('BROWSE_AND_SEARCH', 'Browse and search'),
+    name: t('EXPORT_BROWSE_AND_SEARCH', 'Browse and search'),
     type: 'hidden',
     path: 'bar_menu.components.browse.hidden'
   }, {
-    name: t('WALLET', 'Wallet'),
+    name: t('WALLETS', 'Wallets'),
     type: 'hidden',
     path: 'bar_menu.components.wallet.hidden'
   }, {
@@ -352,20 +348,20 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'bar_menu.components.help.hidden'
   }, {
-    name: t('SECURITY', 'Security'),
+    name: t('EXPORT_SECURITY', 'Security'),
     type: 'hidden',
     path: 'bar_menu.components.sessions.hidden'
   }, {
-    name: t('MY_FAVORITES', 'My favorites'),
+    name: t('EXPORT_MY_FAVORITES', 'My favorites'),
     type: 'hidden',
     path: 'bar_menu.components.favorites.hidden'
   }];
   var thirdPartyCodeList = [{
-    name: t('HEAD', 'Head'),
+    name: t('EXPORT_HEAD', 'Head'),
     type: 'input',
     path: 'third_party_code.head'
   }, {
-    name: t('BODY', 'Body'),
+    name: t('EXPORT_BODY', 'Body'),
     type: 'input',
     path: 'third_party_code.body'
   }];
