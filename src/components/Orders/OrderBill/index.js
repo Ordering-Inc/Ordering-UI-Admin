@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, useConfig } from 'ordering-components-admin'
+import { RefundToWallet } from './RefundToWallet'
 import { verifyDecimals } from '../../../utils'
 import { Alert, Confirm } from '../../Shared'
 import { Button } from '../../../styles'
@@ -13,7 +14,8 @@ export const OrderBill = (props) => {
   const {
     order,
     actionStatus,
-    handleRefundOrder
+    handleRefundPaymentsStripe,
+    handleOrderRefund
   } = props
 
   const [, t] = useLanguage()
@@ -49,7 +51,7 @@ export const OrderBill = (props) => {
       content: t('QUESTION_REFUND_ORDER', 'Do you want to reimburse this order? This action is irreversible.'),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
-        handleRefundOrder()
+        handleRefundPaymentsStripe()
       }
     })
   }
@@ -239,7 +241,7 @@ export const OrderBill = (props) => {
             </tr>
           </thead>
           <tbody>
-            {order?.payment_events?.map((event, i) => (
+            {order?.payment_events?.filter(item => item.event === 'payment').map((event, i) => (
               <tr key={i}>
                 <td>
                   {event?.wallet_event
@@ -255,6 +257,36 @@ export const OrderBill = (props) => {
                     ? parsePrice(order?.cash, { currency: order?.currency })
                     : `-${parsePrice(event?.amount, { currency: order?.currency })}`}
                 </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      <RefundToWallet
+        order={order}
+        actionStatus={actionStatus}
+        handleOrderRefund={handleOrderRefund}
+      />
+      {order?.payment_events?.filter(item => item.event === 'refund').length > 0 && (
+        <table className='payments'>
+          <thead>
+            <tr>
+              <th colSpan='2'>{t('REFUND', 'Refund')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {order?.payment_events?.filter(item => item.event === 'refund').map((event, i) => (
+              <tr key={i}>
+                <td>
+                  {event?.wallet_event
+                    ? walletName[event?.wallet_event?.wallet?.type]?.name
+                    : event?.paymethod
+                      ? t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name)
+                      : event?.data?.gateway
+                        ? t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))
+                        : walletName[event?.data?.wallet_currency]?.name}
+                </td>
+                <td>{parsePrice(event?.amount, { currency: order?.currency })}</td>
               </tr>
             ))}
           </tbody>
