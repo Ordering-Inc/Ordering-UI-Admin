@@ -162,7 +162,9 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
     onClick: function onClick() {
       return closeSideBar();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : (_order$payment_events = order.payment_events) === null || _order$payment_events === void 0 ? void 0 : _order$payment_events.length) > 0 ? order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.map(function (event, i) {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 ? void 0 : (_order$payment_events = order.payment_events) === null || _order$payment_events === void 0 ? void 0 : _order$payment_events.length) > 0 ? order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.filter(function (item) {
+    return item.event === 'payment';
+  }).map(function (event, i) {
     var _walletName$event$wal, _event$wallet_event, _event$wallet_event$w, _event$paymethod, _event$paymethod$gate, _event$paymethod2, _event$data, _event$paymethod3, _event$data2, _event$data2$result, _event$data3, _event$data3$extra, _event$data4, _event$data4$result, _event$data5, _event$data5$extra;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i

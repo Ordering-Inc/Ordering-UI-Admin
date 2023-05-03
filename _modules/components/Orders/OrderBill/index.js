@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.OrderBill = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
+var _RefundToWallet = require("./RefundToWallet");
 var _utils = require("../../../utils");
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
@@ -25,10 +26,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderBill = function OrderBill(props) {
-  var _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$offers3$filter, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$fees3$filter, _order$offers4, _order$offers5, _order$offers5$filter, _order$summary12, _order$summary13, _order$offers6, _order$offers7, _order$offers7$filter, _order$summary14, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _order$summary17, _order$payment_events, _order$payment_events2, _order$delivery_optio, _order$delivery_optio2, _order$delivery_optio3, _order$delivery_optio4, _order$vehicle, _order$vehicle$type, _order$vehicle2, _order$vehicle3, _order$vehicle4, _order$vehicle5, _order$paymethod;
+  var _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$offers3$filter, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$fees3$filter, _order$offers4, _order$offers5, _order$offers5$filter, _order$summary12, _order$summary13, _order$offers6, _order$offers7, _order$offers7$filter, _order$summary14, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _order$summary17, _order$payment_events, _order$payment_events2, _order$payment_events3, _order$payment_events4, _order$delivery_optio, _order$delivery_optio2, _order$delivery_optio3, _order$delivery_optio4, _order$vehicle, _order$vehicle$type, _order$vehicle2, _order$vehicle3, _order$vehicle4, _order$vehicle5, _order$paymethod;
   var order = props.order,
     actionStatus = props.actionStatus,
-    handleRefundOrder = props.handleRefundOrder;
+    handleRefundPaymentsStripe = props.handleRefundPaymentsStripe,
+    handleOrderRefund = props.handleOrderRefund;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -83,7 +85,7 @@ var OrderBill = function OrderBill(props) {
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
-        handleRefundOrder();
+        handleRefundPaymentsStripe();
       }
     });
   };
@@ -188,7 +190,9 @@ var OrderBill = function OrderBill(props) {
     className: "payments"
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
     colSpan: "2"
-  }, t('PAYMENTS', 'Payments')))), /*#__PURE__*/_react.default.createElement("tbody", null, order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.map(function (event, i) {
+  }, t('PAYMENTS', 'Payments')))), /*#__PURE__*/_react.default.createElement("tbody", null, order === null || order === void 0 ? void 0 : (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.filter(function (item) {
+    return item.event === 'payment';
+  }).map(function (event, i) {
     var _walletName$event$wal, _event$wallet_event, _event$wallet_event$w, _event$paymethod, _event$paymethod$gate, _event$paymethod2, _event$data, _event$data2, _event$data2$gateway, _event$data3, _event$data3$gateway, _walletName$event$dat, _event$data4, _event$paymethod3;
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
@@ -197,6 +201,25 @@ var OrderBill = function OrderBill(props) {
     }) : "-".concat(parsePrice(event === null || event === void 0 ? void 0 : event.amount, {
       currency: order === null || order === void 0 ? void 0 : order.currency
     }))));
+  }))), /*#__PURE__*/_react.default.createElement(_RefundToWallet.RefundToWallet, {
+    order: order,
+    actionStatus: actionStatus,
+    handleOrderRefund: handleOrderRefund
+  }), (order === null || order === void 0 ? void 0 : (_order$payment_events3 = order.payment_events) === null || _order$payment_events3 === void 0 ? void 0 : _order$payment_events3.filter(function (item) {
+    return item.event === 'refund';
+  }).length) > 0 && /*#__PURE__*/_react.default.createElement("table", {
+    className: "payments"
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
+    colSpan: "2"
+  }, t('REFUND', 'Refund')))), /*#__PURE__*/_react.default.createElement("tbody", null, order === null || order === void 0 ? void 0 : (_order$payment_events4 = order.payment_events) === null || _order$payment_events4 === void 0 ? void 0 : _order$payment_events4.filter(function (item) {
+    return item.event === 'refund';
+  }).map(function (event, i) {
+    var _walletName$event$wal2, _event$wallet_event2, _event$wallet_event2$, _event$paymethod4, _event$paymethod4$gat, _event$paymethod5, _event$data5, _event$data6, _event$data6$gateway, _event$data7, _event$data7$gateway, _walletName$event$dat2, _event$data8;
+    return /*#__PURE__*/_react.default.createElement("tr", {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement("td", null, event !== null && event !== void 0 && event.wallet_event ? (_walletName$event$wal2 = walletName[event === null || event === void 0 ? void 0 : (_event$wallet_event2 = event.wallet_event) === null || _event$wallet_event2 === void 0 ? void 0 : (_event$wallet_event2$ = _event$wallet_event2.wallet) === null || _event$wallet_event2$ === void 0 ? void 0 : _event$wallet_event2$.type]) === null || _walletName$event$wal2 === void 0 ? void 0 : _walletName$event$wal2.name : event !== null && event !== void 0 && event.paymethod ? t(event === null || event === void 0 ? void 0 : (_event$paymethod4 = event.paymethod) === null || _event$paymethod4 === void 0 ? void 0 : (_event$paymethod4$gat = _event$paymethod4.gateway) === null || _event$paymethod4$gat === void 0 ? void 0 : _event$paymethod4$gat.toUpperCase(), event === null || event === void 0 ? void 0 : (_event$paymethod5 = event.paymethod) === null || _event$paymethod5 === void 0 ? void 0 : _event$paymethod5.name) : event !== null && event !== void 0 && (_event$data5 = event.data) !== null && _event$data5 !== void 0 && _event$data5.gateway ? t(event === null || event === void 0 ? void 0 : (_event$data6 = event.data) === null || _event$data6 === void 0 ? void 0 : (_event$data6$gateway = _event$data6.gateway) === null || _event$data6$gateway === void 0 ? void 0 : _event$data6$gateway.toUpperCase(), event === null || event === void 0 ? void 0 : (_event$data7 = event.data) === null || _event$data7 === void 0 ? void 0 : (_event$data7$gateway = _event$data7.gateway) === null || _event$data7$gateway === void 0 ? void 0 : _event$data7$gateway.replaceAll('_', ' ')) : (_walletName$event$dat2 = walletName[event === null || event === void 0 ? void 0 : (_event$data8 = event.data) === null || _event$data8 === void 0 ? void 0 : _event$data8.wallet_currency]) === null || _walletName$event$dat2 === void 0 ? void 0 : _walletName$event$dat2.name), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(event === null || event === void 0 ? void 0 : event.amount, {
+      currency: order === null || order === void 0 ? void 0 : order.currency
+    })));
   }))), /*#__PURE__*/_react.default.createElement("table", {
     className: "delivery_option"
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
