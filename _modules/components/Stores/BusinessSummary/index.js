@@ -89,7 +89,7 @@ var BusinessSummary = function BusinessSummary(props) {
     var _businessState$busine2;
     window.open("https://".concat(ordering.project, ".tryordering.com/store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.slug), '_blank');
   };
-  var itemsExcluded = !!spoonityConfig ? ['publishing'] : ['publishing', 'spoonity_key'];
+  var itemsExcluded = !!spoonityConfig ? ['publishing', 'personalization'] : ['publishing', 'spoonity_key', 'personalization'];
   var businessConfigs = [{
     key: 'store_details',
     value: t('STORE_DETAILS', 'Store details')

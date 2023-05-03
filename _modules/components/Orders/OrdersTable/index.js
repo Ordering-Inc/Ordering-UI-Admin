@@ -50,7 +50,8 @@ var OrdersTable = function OrdersTable(props) {
     groupStatus = props.groupStatus,
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns,
-    handleDrop = props.handleDrop;
+    handleDrop = props.handleDrop,
+    saveUserSettings = props.saveUserSettings;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -271,11 +272,14 @@ var OrdersTable = function OrdersTable(props) {
     return objectStatus && objectStatus;
   };
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
-    console.log(type, 'type', allowColumns);
     var _column = allowColumns[type];
-    setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
+    var updatedAllowColumns = _objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
       visable: !(_column !== null && _column !== void 0 && _column.visable)
-    }))));
+    })));
+    setAllowColumns(updatedAllowColumns);
+    if (type === 'externalId') {
+      saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)));
+    }
   };
   var handleClickOrder = function handleClickOrder(order, e) {
     var inValid = !isSelectedOrders && (e.target.closest('.orderCheckBox') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'));
