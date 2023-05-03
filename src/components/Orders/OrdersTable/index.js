@@ -53,7 +53,8 @@ export const OrdersTable = (props) => {
     groupStatus,
     allowColumns,
     setAllowColumns,
-    handleDrop
+    handleDrop,
+    saveUserSettings
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -232,12 +233,15 @@ export const OrdersTable = (props) => {
   }
 
   const handleChangeAllowColumns = (type) => {
-    console.log(type, 'type', allowColumns)
     const _column = allowColumns[type]
-    setAllowColumns({
+    const updatedAllowColumns = {
       ...allowColumns,
       [type]: { ..._column, visable: !_column?.visable }
-    })
+    }
+    setAllowColumns(updatedAllowColumns)
+    if (type === 'externalId') {
+      saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)))
+    }
   }
 
   const handleClickOrder = (order, e) => {

@@ -59,7 +59,7 @@ export const BusinessSummary = (props) => {
     window.open(`https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`, '_blank')
   }
 
-  const itemsExcluded = !!spoonityConfig ? ['publishing'] : ['publishing', 'spoonity_key']
+  const itemsExcluded = !!spoonityConfig ? ['publishing', 'personalization'] : ['publishing', 'spoonity_key', 'personalization']
 
   const businessConfigs = [
     {

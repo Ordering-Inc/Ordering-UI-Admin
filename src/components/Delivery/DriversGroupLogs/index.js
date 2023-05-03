@@ -14,7 +14,7 @@ import {
   DataListTable
 } from './styles'
 
-const DriversGroupLogsUI = (props) => {
+export const DriversGroupLogsUI = (props) => {
   const {
     logsList,
     paginationProps,
@@ -70,8 +70,6 @@ const DriversGroupLogsUI = (props) => {
       handleChangePage(paginationProps.currentPage - 1)
     }
   }, [logsList.logs, paginationProps])
-
-  console.log(logsList)
 
   return (
     <>

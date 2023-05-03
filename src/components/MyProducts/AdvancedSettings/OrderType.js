@@ -28,9 +28,9 @@ export const OrderType = (props) => {
         />
       </FormControl>
       <FormControl>
-        <label>{t('CALL_TO_ACTION', 'Call to action')}</label>
+        <label>{t('EXPORT_CALL_TO_ACTION', 'Call to action')}</label>
         <Input
-          placeholder={t('CALL_TO_ACTION', 'Call to action')}
+          placeholder={t('EXPORT_CALL_TO_ACTION', 'Call to action')}
           defaultValue={typeValues?.call_to_action || ''}
           onChange={(e) => handleUpdateThemeValue(e.target.value, [path, 'call_to_action'].join('.'))}
         />
