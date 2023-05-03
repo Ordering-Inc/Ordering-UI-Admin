@@ -129,6 +129,12 @@ export const App = () => {
   }, [height])
 
   const oneSignalSetup = () => {
+    if (!configs?.onesignal_dashboardweb_id?.value) {
+      setOneSignalState({
+        notification_app: settings.notification_app
+      })
+      return
+    }
     const OneSignal = window.OneSignal || []
     const initConfig = {
       appId: configs?.onesignal_dashboardweb_id?.value,
