@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, AnalyticsBusinessFilter as AnalyticsBusinessFilterController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { CheckSquareFill as Checked, Square as UnChecked } from 'react-bootstrap-icons'
-import { SearchBar, Pagination, CitySelector } from '../../Shared'
+import { SearchBar, Pagination } from '../../Shared'
 import { Button } from '../../../styles'
 import {
   AnalyticsBusinessFilterContainer,
   BusinessFilterOption,
   BusinessName,
   FilterBtnWrapper,
-  SearchWrapper,
-  FormControl
+  SearchWrapper
 } from './styles'
 
 const AnalyticsBusinessFilterUI = (props) => {
@@ -22,9 +21,7 @@ const AnalyticsBusinessFilterUI = (props) => {
     isAllCheck,
     handleChangeAllCheck,
     searchValue,
-    onSearch,
-    filterValues,
-    handleChangeCity
+    onSearch
   } = props
 
   const [, t] = useLanguage()
@@ -72,13 +69,6 @@ const AnalyticsBusinessFilterUI = (props) => {
             placeholder={t('SEARCH', 'Search')}
           />
         </SearchWrapper>
-        <FormControl>
-          <label>{t('CITY', 'City')}</label>
-          <CitySelector
-            filterValues={filterValues}
-            handleChangeCity={handleChangeCity}
-          />
-        </FormControl>
         {businessList.loading ? (
           [...Array(10).keys()].map(i => (
             <BusinessFilterOption key={i}>

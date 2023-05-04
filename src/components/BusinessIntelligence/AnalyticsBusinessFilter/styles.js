@@ -44,35 +44,3 @@ export const FilterBtnWrapper = styled.div`
 export const SearchWrapper = styled.div`
   margin-bottom: 25px;
 `
-
-export const FormControl = styled.div`
-  margin-bottom: 15px;
-  > label {
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  > input {
-    width: 100%;
-    height: 54px;
-  }
-
-  & > div:not(.range) {
-    width: 100%;
-    height: 54px;
-    background-color: ${props => props.theme.colors.secundary};
-    border: none;
-    font-size: 14px;
-    border-radius: 8px;
-  }
-
-  .full-select {
-    > div:first-child {
-      height: 100%;
-      border-radius: 8px;
-    }
-    .list {
-      left: 0px;
-      right: auto;
-    }
-  }
-`
