@@ -51,7 +51,7 @@ const SingleBusinessUI = (props) => {
   }
 
   const getCityName = (id) => {
-    const found = citiesList.find(city => city.id === id)
+    const found = citiesList?.find(city => city.id === id)
     return found?.name || ''
   }
 
