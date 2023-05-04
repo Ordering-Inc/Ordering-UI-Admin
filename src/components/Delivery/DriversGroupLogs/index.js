@@ -131,7 +131,7 @@ export const DriversGroupLogsUI = (props) => {
                       </td>
                       <td>
                         <DataListTable>
-                          {(typeof log?.data === 'object' ? Object.values(log?.data) : log?.data).map((item, i) => (
+                          {log?.data && (typeof log?.data === 'object' ? Object.values(log?.data) : log?.data).map((item, i) => (
                             <tbody key={i}>
                               <tr>
                                 <td>{getAttributeName(item?.attribute)}</td>
