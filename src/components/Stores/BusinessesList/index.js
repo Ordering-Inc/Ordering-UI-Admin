@@ -39,7 +39,8 @@ export const BusinessesList = (props) => {
     handleEnableAllBusiness,
     selectedBusinessActiveState,
     setBusinessIds,
-    handleGotToAdd
+    handleGotToAdd,
+    citiesList
   } = props
 
   const theme = useTheme()
@@ -208,6 +209,7 @@ export const BusinessesList = (props) => {
                     handleOpenBusinessDetails={handleOpenBusinessDetails}
                     businessIds={businessIds}
                     handleChangeBusinessIds={handleChangeBusinessIds}
+                    citiesList={citiesList}
                   />
                 ))
               )}
@@ -260,6 +262,7 @@ export const BusinessesList = (props) => {
                 handleSucessAddBusiness={handleSucessAddBusiness}
                 handleSucessUpdateBusiness={handleSucessUpdateBusiness}
                 handleOpenBusinessDetails={handleOpenBusinessDetails}
+                citiesList={citiesList}
               />
             ))
           )}
