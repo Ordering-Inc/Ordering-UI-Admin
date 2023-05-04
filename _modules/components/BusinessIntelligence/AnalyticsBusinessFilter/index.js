@@ -39,9 +39,7 @@ var AnalyticsBusinessFilterUI = function AnalyticsBusinessFilterUI(props) {
     isAllCheck = props.isAllCheck,
     handleChangeAllCheck = props.handleChangeAllCheck,
     searchValue = props.searchValue,
-    _onSearch = props.onSearch,
-    filterValues = props.filterValues,
-    handleChangeCity = props.handleChangeCity;
+    _onSearch = props.onSearch;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -93,9 +91,6 @@ var AnalyticsBusinessFilterUI = function AnalyticsBusinessFilterUI(props) {
       return _onSearch(value);
     },
     placeholder: t('SEARCH', 'Search')
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
-    filterValues: filterValues,
-    handleChangeCity: handleChangeCity
   })), businessList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessFilterOption, {
       key: i
