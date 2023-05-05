@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -358,9 +358,31 @@ var checkPreSiteUrl = function checkPreSiteUrl(url, fallback) {
 };
 
 /**
- * default value for bitton
+ * Function to validate URL
+ * @param {string} url URL of page
  */
 exports.checkPreSiteUrl = checkPreSiteUrl;
+var checkValidUrlFormat = function checkValidUrlFormat(url) {
+  if (!url) return;
+  var pattern = new RegExp('^(https?:\\/\\/)?' +
+  // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
+  // domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))' +
+  // OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
+  // port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?' +
+  // query string
+  '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+
+  return pattern.test(url);
+};
+
+/**
+ * default value for bitton
+ */
+exports.checkValidUrlFormat = checkValidUrlFormat;
 var ribbonValues = {
   color: '#0083FE',
   text: 'ribbon',
