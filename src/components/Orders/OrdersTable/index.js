@@ -705,7 +705,9 @@ export const OrdersTable = (props) => {
                                 </OrdersCountWrapper>
                               </WrapperImage>
                               <div className='info'>
-                                <p className='bold'>{order?.customer?.name}</p>
+                                <p className='bold'>
+                                  {(!order?.customer?.email && !order?.customer?.cellphone && !order?.customer?.name) ? t('GUEST_USER', 'Guest user') : order?.customer?.name}
+                                </p>
                                 <p>{order?.customer?.cellphone}</p>
                               </div>
                             </CustomerInfo>
