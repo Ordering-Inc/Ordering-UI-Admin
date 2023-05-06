@@ -47,7 +47,8 @@ export const OrdersListing = (props) => {
     allowColumns,
     setAllowColumns,
     handleDrop,
-    isDelivery
+    isDelivery,
+    saveUserSettings
   } = props
 
   const theme = useTheme()
@@ -130,6 +131,7 @@ export const OrdersListing = (props) => {
                   allowColumns={allowColumns}
                   setAllowColumns={setAllowColumns}
                   handleDrop={handleDrop}
+                  saveUserSettings={saveUserSettings}
                 />
               ) : (
                 <OrdersCards
