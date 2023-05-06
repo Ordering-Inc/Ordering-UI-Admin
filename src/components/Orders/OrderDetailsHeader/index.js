@@ -37,12 +37,13 @@ export const OrderDetailsHeader = (props) => {
     printRef,
     isServiceOrder,
     extraOpen,
-    printTicketRef
+    printTicketRef,
+    isExpand,
+    setIsExpand
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const [isExpand, setIsExpand] = useState(false)
   const { width } = useWindowSize()
   const [showPrinterOptions, setShowPrinterOptions] = useState(false)
   const dropdownReference = useRef()
@@ -82,17 +83,12 @@ export const OrderDetailsHeader = (props) => {
   }
 
   useEffect(() => {
-    if (extraOpen) setIsExpand(false)
-  }, [extraOpen])
-
-  useEffect(() => {
     if (!showPrinterOptions) {
       return
     }
     document.addEventListener('click', closeSelect)
     return () => document.removeEventListener('click', closeSelect)
   }, [showPrinterOptions])
-
 
   return (
     <OrderDetailsHeaderContainer>
@@ -114,44 +110,44 @@ export const OrderDetailsHeader = (props) => {
               )}
             </ButtonLink>
           )}
-        <PrinterSelectContainer>
-          <ButtonLink
-            color='black'
-            isDisabled={isTourOpen && currentTourStep === 1}
-            onClick={() => setShowPrinterOptions(!showPrinterOptions)}
-          >
-            <Printer />
-          </ButtonLink>
-        {showPrinterOptions && (
-        <PrinterSelect ref={dropdownReference}>
-          <ReactToPrint
-            trigger={() => (
-              <ButtonLink
-                color='black'
-                isDisabled={isTourOpen && currentTourStep === 1}
-                onClick={() => setShowPrinterOptions(false)}
-              >
-                {t('NORMAL', 'Normal')}
-              </ButtonLink>
+          <PrinterSelectContainer>
+            <ButtonLink
+              color='black'
+              isDisabled={isTourOpen && currentTourStep === 1}
+              onClick={() => setShowPrinterOptions(!showPrinterOptions)}
+            >
+              <Printer />
+            </ButtonLink>
+            {showPrinterOptions && (
+              <PrinterSelect ref={dropdownReference}>
+                <ReactToPrint
+                  trigger={() => (
+                    <ButtonLink
+                      color='black'
+                      isDisabled={isTourOpen && currentTourStep === 1}
+                      onClick={() => setShowPrinterOptions(false)}
+                    >
+                      {t('NORMAL', 'Normal')}
+                    </ButtonLink>
+                  )}
+                  content={() => printRef.current}
+                  removeAfterPrint
+                />
+                <ReactToPrint
+                  trigger={() => (
+                    <ButtonLink
+                      color='black'
+                      isDisabled={isTourOpen && currentTourStep === 1}
+                      onClick={() => setShowPrinterOptions(false)}
+                    >
+                      {t('TICKET', 'Ticket')}
+                    </ButtonLink>
+                  )}
+                  content={() => printTicketRef.current}
+                  removeAfterPrint
+                />
+              </PrinterSelect>
             )}
-            content={() => printRef.current}
-            removeAfterPrint
-          />
-          <ReactToPrint
-            trigger={() => (
-              <ButtonLink
-                color='black'
-                isDisabled={isTourOpen && currentTourStep === 1}
-                onClick={() => setShowPrinterOptions(false)}
-              >
-                {t('TICKET', 'Ticket')}
-              </ButtonLink>
-            )}
-            content={() => printTicketRef.current}
-            removeAfterPrint
-          />
-          </PrinterSelect>
-          )}
           </PrinterSelectContainer>
           <ButtonLink
             color='black'
