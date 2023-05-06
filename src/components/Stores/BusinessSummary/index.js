@@ -190,7 +190,7 @@ export const BusinessSummary = (props) => {
             >
               <LifePreserver />
             </IconButton>
-            {width > 576 && (
+            {width > 576 && !extraOpen && (
               <IconButton
                 color='black'
                 onClick={() => expandSideBar()}
