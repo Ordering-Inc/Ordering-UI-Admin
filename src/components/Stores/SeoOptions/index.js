@@ -140,7 +140,7 @@ export const SeoOptions = (props) => {
 
   const onUpdateClick = () => {
     if (formState?.changes?.slug) {
-      const format = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/
+      const format = /[ `!@#$%^&*()+\-=[\]{};':"\\|,.<>/?~]/
       if (format.test(formState?.changes?.slug)) {
         setAlertState({
           open: true,
