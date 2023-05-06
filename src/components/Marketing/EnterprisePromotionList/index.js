@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Image as ImageIcon } from 'react-bootstrap-icons'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 
 import {
   PromotionListContainer,
@@ -19,7 +19,6 @@ import {
   PromotionTypeWrapper,
   PromotionHow,
   PromotionListBottom,
-  AddNewButton,
   WrapperPagination,
   SinglePromotionTbody,
   DummyImageWrapper
@@ -272,11 +271,11 @@ export const EnterprisePromotionList = (props) => {
         </PromotionListTable>
       </PromotionListContainer>
       <PromotionListBottom eventDisabled={eventDisabled}>
-        <AddNewButton
+        <LinkButton
           onClick={() => handleOpenDetails()}
         >
           {t('ADD_NEW_PROMOTION', 'Add new promotion')}
-        </AddNewButton>
+        </LinkButton>
         {promotionListState?.promotions.length > 0 && (
           <WrapperPagination>
             <Pagination

@@ -106,7 +106,7 @@ export const Button = styled.button`
       padding-left: 15%
       ${props => props.theme?.rtl && css`
         padding-right: 15%;
-        padding-left: 0
+        padding-left: 0;
     `}
     }
   `}
@@ -296,5 +296,19 @@ export const Button = styled.button`
     &:active {
       background: ${props => darken(0.1, props.theme.colors.black)};
     }
+  `}
+`
+
+export const LinkButton = styled.a`
+  font-size: 14px;
+  cursor: pointer;
+  color: ${props => props.theme.colors.primary};
+  &:hover {
+    text-decoration: underline;
+  }
+
+  ${({ disabled }) => disabled && css`
+    pointer-events: none;
+    opacity: 0.5;
   `}
 `

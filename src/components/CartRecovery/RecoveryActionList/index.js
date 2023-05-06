@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 import { useTheme } from 'styled-components'
 
 import {
@@ -11,8 +11,7 @@ import {
   Tbody,
   SwitchWrapper,
   DragImageWrapper,
-  PagesBottomContainer,
-  AddNewPageButton
+  PagesBottomContainer
 } from './styles'
 
 export const RecoveryActionList = (props) => {
@@ -174,11 +173,11 @@ export const RecoveryActionList = (props) => {
       </Container>
       {!recoveryActionList.loading && (
         <PagesBottomContainer>
-          <AddNewPageButton
+          <LinkButton
             onClick={() => handleOpenDetail({})}
           >
             {t('ADD_NEW_RECOVERY_ACTION', 'Add new recovery action')}
-          </AddNewPageButton>
+          </LinkButton>
           {recoveryActionList?.actions?.length > 0 && (
             <Pagination
               currentPage={paginationProps?.currentPage}

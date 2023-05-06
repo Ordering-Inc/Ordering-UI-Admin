@@ -50,15 +50,8 @@ export const ActionsWrapper = styled.div`
   align-items: center;
 `
 
-export const AddDeliveryZoneButton = styled.div`
-  color: ${props => props.theme.colors.lightGray};
-  font-size: 14px;
+export const AddDeliveryZoneButtonWrapper = styled.div`
   padding: 10px 0;
-  cursor: pointer;
-  width: fit-content;
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
 `
 export const CheckboxWrapper = styled.div`
   display: flex;

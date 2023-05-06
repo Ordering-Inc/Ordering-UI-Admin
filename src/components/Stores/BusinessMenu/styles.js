@@ -89,13 +89,8 @@ export const CheckboxWrapper = styled.div`
     margin-right: 20px;
   `}
 `
-export const AddMenuButton = styled.a`
-  cursor: pointer;
-  color: ${props => props.theme.colors.lightGray};
+export const AddMenuButtonWrapper = styled.div`
   margin: 15px 0;
-  display: inline-block;
-  text-decoration: none;
-  font-size: 14px;
 `
 export const TabsContainer = styled.div`
   width: 100%;

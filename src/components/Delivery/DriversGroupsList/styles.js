@@ -204,18 +204,6 @@ export const PagesBottomContainer = styled.div`
   margin: 15px 0 38px 0;
 `
 
-export const AddNewGroupButton = styled.div`
-  cursor: pointer;
-  font-size: 12px;
-  color: ${props => props.theme.colors.primary};
-
-  ${({ disabled }) => disabled && css`
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-  `}
-`
-
 export const GroupIdWrapper = styled.div`
   display: flex;
   align-items: center;

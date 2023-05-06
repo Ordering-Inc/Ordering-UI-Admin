@@ -115,16 +115,6 @@ export const DriverInfo = styled.div`
   }
 `
 
-export const AssignedOrdersCount = styled.span`
-  font-size: 14px;
-  cursor: pointer;
-  color: ${props => props.theme.colors.primary};
-
-  ${({ disabled }) => disabled && css`
-    pointer-events: none;
-    opacity: 0.5;
-  `}
-`
 export const Timestatus = styled.div`
   width: 4px;
   height: 42px;

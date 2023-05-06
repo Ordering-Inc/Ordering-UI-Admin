@@ -66,14 +66,6 @@ export const BusinessCardContainer = styled.div`
   max-height: calc(100vh - 210px);
   overflow: auto;
 `
-
-export const AddNewButtonLink = styled.div`
-  width: fit-content;
-  cursor: pointer;
-  color: ${props => props.theme.colors.primary};
-  font-size: 14px;
-`
-
 export const BusinessListBottomContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

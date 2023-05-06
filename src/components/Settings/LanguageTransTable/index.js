@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage, LanguageTransTable as LanguageTransTableController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, Pagination } from '../../Shared'
+import { LinkButton } from '../../../styles'
 
 import {
   TranslationTableContainer,
   TranslationTable,
   TableHeader,
   TableBody,
-  TransBottomContainer,
-  AddNewTransButton
+  TransBottomContainer
 } from './styles'
 
 const LanguageTransTableUI = (props) => {
@@ -183,9 +183,9 @@ const LanguageTransTableUI = (props) => {
         </TranslationTable>
         {!translationList.loading && (
           <TransBottomContainer>
-            <AddNewTransButton onClick={() => setIsShowCreation(true)}>
+            <LinkButton onClick={() => setIsShowCreation(true)}>
               {t('ADD_NEW_KEY', 'Add new key')}
-            </AddNewTransButton>
+            </LinkButton>
             {currentPages?.length > 0 && (
               <Pagination
                 currentPage={currentPage}

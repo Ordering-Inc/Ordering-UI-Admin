@@ -199,13 +199,6 @@ export const WrapperPagination = styled.div`
   align-items: center;
 `
 
-export const AddNewUserButton = styled.div`
-  cursor: pointer;
-  color: ${props => props.theme.colors.primary};
-  width: fit-content;
-  font-size: 14px;
-`
-
 export const UsersBottomContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

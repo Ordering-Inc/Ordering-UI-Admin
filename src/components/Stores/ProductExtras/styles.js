@@ -99,15 +99,8 @@ export const Details = styled.div`
   }
 `
 
-export const AddButton = styled.div`
-  cursor: pointer;
-  font-size: 14px;
+export const AddButtonWrapper = styled.div`
   padding: 12px 0;
-  color: ${props => props.theme.colors.lightGray};
-
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
 `
 
 export const ExtraAddForm = styled.form`

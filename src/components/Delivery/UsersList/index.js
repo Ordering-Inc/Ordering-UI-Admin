@@ -6,7 +6,7 @@ import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Envelope, Phone } from 'react-bootstrap-icons'
 
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 import { Pagination, ConfirmAdmin } from '../../Shared'
 
 import {
@@ -20,7 +20,6 @@ import {
   InfoBlock,
   UserEnableWrapper,
   WrapperPagination,
-  AddNewUserButton,
   UsersBottomContainer,
   VerifiedItemsContainer,
   VerifiedItem,
@@ -271,7 +270,7 @@ export const UsersList = (props) => {
           </UsersTable>
         </UserTableWrapper>
         <UsersBottomContainer>
-          <AddNewUserButton
+          <LinkButton
             onClick={() => handleOpenUserAddForm()}
             disabled={actionDisabled}
           >
@@ -282,7 +281,7 @@ export const UsersList = (props) => {
                   ? t('ADD_NEW_DRIVER_MANAGER', 'Add new driver manager')
                   : t('ADD_NEW_USER', 'Add new user')
             }
-          </AddNewUserButton>
+          </LinkButton>
           {usersList?.users.length > 0 && (
             <WrapperPagination>
               <Pagination
