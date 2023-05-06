@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -43,7 +43,8 @@ export const ProductSummary = (props) => {
     productCart,
     handleDeleteProduct,
     showProductOption,
-    extraOpen
+    isExpand,
+    setIsExpand
   } = props
 
   const [, t] = useLanguage()
@@ -54,7 +55,6 @@ export const ProductSummary = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isProductPreview, setIsProductPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
-  const [isExpand, setIsExpand] = useState(false)
 
   const productConfigOptions = [
     {
@@ -137,10 +137,6 @@ export const ProductSummary = (props) => {
     else element.style.width = '100vw'
     setIsExpand(prev => !prev)
   }
-
-  useEffect(() => {
-    if (extraOpen) setIsExpand(false)
-  }, [extraOpen])
 
   return (
     <>
