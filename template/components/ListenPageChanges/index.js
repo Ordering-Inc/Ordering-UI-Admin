@@ -24,6 +24,7 @@ export const ListenPageChanges = ({ children }) => {
     businesses: '/stores/list',
     business_add: '/stores/add',
     brand: '/stores/brand',
+    devices: '/stores/devices',
     store: '/stores/products/:store?',
     basic_settings: '/settings/basic',
     operation_settings: '/settings/operation',
