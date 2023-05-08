@@ -50,7 +50,8 @@ const OrderDetailsUI = (props) => {
     setIsTourFlag,
     setIsTourOpen,
     actionStatus,
-    handleRefundOrder,
+    handleRefundPaymentsStripe,
+    handleOrderRefund,
     isServiceOrder
   } = props
 
@@ -411,7 +412,8 @@ const OrderDetailsUI = (props) => {
             <OrderBill
               order={order}
               actionStatus={actionStatus}
-              handleRefundOrder={handleRefundOrder}
+              handleRefundPaymentsStripe={handleRefundPaymentsStripe}
+              handleOrderRefund={handleOrderRefund}
             />
           </div>
           <DetailBottom />

@@ -137,7 +137,7 @@ export const OrderDetailsHeader = (props) => {
       </div>
       <p>
         {order?.payment_events?.length > 0 ? (
-          order?.payment_events?.map((event, i) => (
+          order?.payment_events?.filter(item => item.event === 'payment').map((event, i) => (
             <React.Fragment key={i}>
               <span>
                 {event?.wallet_event
