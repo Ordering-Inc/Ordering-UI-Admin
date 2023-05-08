@@ -57,6 +57,12 @@ Object.defineProperty(exports, "StoreApp", {
     return _StoreApp.StoreApp;
   }
 });
+Object.defineProperty(exports, "UploadAudio", {
+  enumerable: true,
+  get: function get() {
+    return _UploadAudio.UploadAudio;
+  }
+});
 var _OrderingWebsite = require("./OrderingWebsite");
 var _CustomerApp = require("./CustomerApp");
 var _StoreApp = require("./StoreApp");
@@ -66,3 +72,4 @@ var _CallCenterApp = require("./CallCenterApp");
 var _KioskApp = require("./KioskApp");
 var _CustomProject = require("./CustomProject");
 var _OrderingWidgets = require("./OrderingWidgets");
+var _UploadAudio = require("./UploadAudio");
