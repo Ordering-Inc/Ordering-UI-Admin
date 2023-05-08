@@ -51,7 +51,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setIsTourFlag = props.setIsTourFlag,
     setIsTourOpen = props.setIsTourOpen,
     actionStatus = props.actionStatus,
-    handleRefundOrder = props.handleRefundOrder,
+    handleRefundPaymentsStripe = props.handleRefundPaymentsStripe,
+    handleOrderRefund = props.handleOrderRefund,
     isServiceOrder = props.isServiceOrder;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
@@ -520,7 +521,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_OrderBill.OrderBill, {
     order: order,
     actionStatus: actionStatus,
-    handleRefundOrder: handleRefundOrder
+    handleRefundPaymentsStripe: handleRefundPaymentsStripe,
+    handleOrderRefund: handleOrderRefund
   })), /*#__PURE__*/_react.default.createElement(_styles2.DetailBottom, null)), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
