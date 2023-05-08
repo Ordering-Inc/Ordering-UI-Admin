@@ -97,6 +97,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     extraOpen = _useState10[0],
     setExtraOpen = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isExpand = _useState12[0],
+    setIsExpand = _useState12[1];
   var placeSpotEnabled = [3, 4];
   var _props$order = props.order,
     order = _props$order.order,
@@ -331,29 +335,25 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       if (width <= 500) {
         document.getElementById('orderDetails').style.width = '100vw';
       } else {
-        if (extraOpen && width >= 1000) {
-          document.getElementById('orderDetails').style.width = '1000px';
+        if (isExpand) {
+          document.getElementById('orderDetails').style.width = '100vw';
         } else {
-          document.getElementById('orderDetails').style.width = '500px';
+          if (extraOpen && width >= 1000) {
+            document.getElementById('orderDetails').style.width = '1000px';
+          } else {
+            document.getElementById('orderDetails').style.width = '500px';
+          }
         }
       }
     }
   };
   (0, _react.useEffect)(function () {
     toggleMainContent();
-  }, [width]);
+  }, [extraOpen, isExpand, width]);
   (0, _react.useEffect)(function () {
     if (!open) return;
     actionSidebar(true);
   }, [open]);
-  (0, _react.useEffect)(function () {
-    if (width < 1000) return;
-    if (extraOpen) {
-      document.getElementById('orderDetails').style.width = '1000px';
-    } else {
-      toggleMainContent();
-    }
-  }, [extraOpen]);
   var handleChangeTour = function handleChangeTour(evt) {
     if (!isTourOpen) return;
     if (isTourOpen && (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && currentTourStep !== 2) {
@@ -491,10 +491,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     currentTourStep: currentTourStep,
     setIsTourOpen: setIsTourOpen,
     printRef: printRef,
-    printTicketRef: printTicketRef
+    printTicketRef: printTicketRef,
+    isExpand: isExpand,
+    setIsExpand: setIsExpand
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
     isDisabled: isTourOpen && currentTourStep === 1
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   })), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.eta_time, " ", t('MIN', 'min'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     isFirstSelect: true,

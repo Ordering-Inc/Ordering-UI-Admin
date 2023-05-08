@@ -199,7 +199,7 @@ var CampaignList = function CampaignList(props) {
         background: checkColor(campaign === null || campaign === void 0 ? void 0 : campaign.status)
       }
     })))));
-  }))), !campaignList.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
+  }))), !campaignList.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenDetail({});
     }

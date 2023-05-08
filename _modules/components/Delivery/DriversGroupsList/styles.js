@@ -4,10 +4,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperImage = exports.TableWrapper = exports.PagesBottomContainer = exports.InfoBlock = exports.Image = exports.GroupsTable = exports.GroupNameContainer = exports.GroupIdWrapper = exports.EnableWrapper = exports.DriversGroupsContainer = exports.DriverManagerContainer = exports.DriverGroupTypeContainer = exports.CheckBoxWrapper = exports.BorderWrapper = exports.AddNewGroupButton = exports.ActionsContainer = void 0;
+exports.WrapperImage = exports.TableWrapper = exports.PagesBottomContainer = exports.InfoBlock = exports.Image = exports.GroupsTable = exports.GroupNameContainer = exports.GroupIdWrapper = exports.EnableWrapper = exports.DriversGroupsContainer = exports.DriverManagerContainer = exports.DriverGroupTypeContainer = exports.CheckBoxWrapper = exports.BorderWrapper = exports.ActionsContainer = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -100,12 +100,5 @@ var EnableWrapper = _styledComponents.default.div(_templateObject24 || (_templat
 exports.EnableWrapper = EnableWrapper;
 var PagesBottomContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-wrap: wrap;\n  row-gap: 10px;\n  margin: 15px 0 38px 0;\n"])));
 exports.PagesBottomContainer = PagesBottomContainer;
-var AddNewGroupButton = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 12px;\n  color: ", ";\n\n  ", "\n"])), function (props) {
-  return props.theme.colors.primary;
-}, function (_ref5) {
-  var disabled = _ref5.disabled;
-  return disabled && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    opacity: 0.5;\n    cursor: not-allowed;\n    pointer-events: none;\n  "])));
-});
-exports.AddNewGroupButton = AddNewGroupButton;
-var GroupIdWrapper = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > span {\n    margin: 0 20px;\n  }\n"])));
+var GroupIdWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > span {\n    margin: 0 20px;\n  }\n"])));
 exports.GroupIdWrapper = GroupIdWrapper;

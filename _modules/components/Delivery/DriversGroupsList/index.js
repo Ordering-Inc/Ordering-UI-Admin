@@ -172,7 +172,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
         });
       }
     }))))));
-  }))), !driversGroupsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, !isFromStore && /*#__PURE__*/_react.default.createElement(_styles2.AddNewGroupButton, {
+  }))), !driversGroupsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, !isFromStore && /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenDetails(null);
     },

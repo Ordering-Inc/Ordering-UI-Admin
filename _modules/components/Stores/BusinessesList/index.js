@@ -48,7 +48,8 @@ var BusinessesList = function BusinessesList(props) {
     handleEnableAllBusiness = props.handleEnableAllBusiness,
     selectedBusinessActiveState = props.selectedBusinessActiveState,
     setBusinessIds = props.setBusinessIds,
-    handleGotToAdd = props.handleGotToAdd;
+    handleGotToAdd = props.handleGotToAdd,
+    citiesList = props.citiesList;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -181,9 +182,10 @@ var BusinessesList = function BusinessesList(props) {
       handleSucessUpdateBusiness: handleSucessUpdateBusiness,
       handleOpenBusinessDetails: handleOpenBusinessDetails,
       businessIds: businessIds,
-      handleChangeBusinessIds: handleChangeBusinessIds
+      handleChangeBusinessIds: handleChangeBusinessIds,
+      citiesList: citiesList
     });
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessListBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewButtonLink, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessListBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleGotToAdd();
     }
@@ -210,7 +212,8 @@ var BusinessesList = function BusinessesList(props) {
       handleSucessRemoveBusiness: handleSucessRemoveBusiness,
       handleSucessAddBusiness: handleSucessAddBusiness,
       handleSucessUpdateBusiness: handleSucessUpdateBusiness,
-      handleOpenBusinessDetails: handleOpenBusinessDetails
+      handleOpenBusinessDetails: handleOpenBusinessDetails,
+      citiesList: citiesList
     });
   })), isTutorialMode && !businessList.loading && businessList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_styles2.AddFirstStoreContainer, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.tutorials.businessTutorial1,

@@ -107,11 +107,11 @@ var BusinessPromotionListUI = function BusinessPromotionListUI(props) {
       utc: false,
       outputFormat: 'YYYY-MM-DD'
     }))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)))));
-  })), /*#__PURE__*/_react.default.createElement(_styles2.AddNewPromotionText, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.AddNewPromotionButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick(e) {
       return handleOpenForm(e, {});
     }
-  }, t('ADD_NEW_PROMOTION', 'Add new promotion'))), isShowForm && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(BusinessPromotion, {
+  }, t('ADD_NEW_PROMOTION', 'Add new promotion')))), isShowForm && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(BusinessPromotion, {
     isCloseButtonShow: true,
     curPromotion: curPromotion,
     selectedTab: selectedTab,

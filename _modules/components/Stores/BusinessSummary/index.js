@@ -43,7 +43,9 @@ var BusinessSummary = function BusinessSummary(props) {
     handleDeleteBusiness = props.handleDeleteBusiness,
     extraOpen = props.extraOpen,
     spoonityConfig = props.spoonityConfig,
-    siteState = props.siteState;
+    siteState = props.siteState,
+    isExpand = props.isExpand,
+    setIsExpand = props.setIsExpand;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -67,18 +69,14 @@ var BusinessSummary = function BusinessSummary(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     selectedView = _useState4[0],
     setSelectedView = _useState4[1];
-  var _useState5 = (0, _react.useState)(false),
-    _useState6 = _slicedToArray(_useState5, 2),
-    isExpand = _useState6[0],
-    setIsExpand = _useState6[1];
-  var _useState7 = (0, _react.useState)({
+  var _useState5 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    confirm = _useState8[0],
-    setConfirm = _useState8[1];
+    _useState6 = _slicedToArray(_useState5, 2),
+    confirm = _useState6[0],
+    setConfirm = _useState6[1];
   var handleOpenCategory = function handleOpenCategory() {
     var _businessState$busine;
     events.emit('go_to_page', {
@@ -169,9 +167,6 @@ var BusinessSummary = function BusinessSummary(props) {
       return !prev;
     });
   };
-  (0, _react.useEffect)(function () {
-    if (extraOpen) setIsExpand(false);
-  }, [extraOpen]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 100
   })) : /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, businessState === null || businessState === void 0 ? void 0 : (_businessState$busine4 = businessState.business) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.name), businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

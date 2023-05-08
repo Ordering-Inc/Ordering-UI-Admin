@@ -33,7 +33,9 @@ var EnterprisePromotionRules = function EnterprisePromotionRules(props) {
     handleChangeItem = props.handleChangeItem,
     handleAddPromotion = props.handleAddPromotion,
     handleUpdateClick = props.handleUpdateClick,
-    setMoveDistance = props.setMoveDistance;
+    setMoveDistance = props.setMoveDistance,
+    setSideBarWidth = props.setSideBarWidth,
+    isExpand = props.isExpand;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -78,7 +80,10 @@ var EnterprisePromotionRules = function EnterprisePromotionRules(props) {
     }
   };
   var hanndleClickApply = function hanndleClickApply() {
-    if (width > 1300) setMoveDistance(700);
+    if (width > 1300) {
+      setSideBarWidth(isExpand ? width : 1300);
+      setMoveDistance(700);
+    }
     setIsShowConditions(true);
   };
   var handleMaxPercentValidate = function handleMaxPercentValidate() {

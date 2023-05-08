@@ -236,7 +236,7 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
         return handleChangeState(brand.id, 'enabled', enabled);
       }
     }))))));
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.BrandListBottomContainer, null, /*#__PURE__*/_react.default.createElement("span", {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.BrandListBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenSideBar();
     }

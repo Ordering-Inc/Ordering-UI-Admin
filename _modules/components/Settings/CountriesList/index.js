@@ -236,7 +236,7 @@ var CountriesList = function CountriesList(props) {
         return onDeleteCountry(country.id);
       }
     }, t('DELETE', 'Delete'))))));
-  }))), !countriesState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
+  }))), !countriesState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       setSelectedCountry(null);
       setOpenDetails(true);

@@ -154,7 +154,7 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
     }, product === null || product === void 0 ? void 0 : product.name), /*#__PURE__*/_react.default.createElement("td", {
       className: "description"
     }, (product === null || product === void 0 ? void 0 : product.description) && /*#__PURE__*/_react.default.createElement("div", null, product === null || product === void 0 ? void 0 : product.description))));
-  }))), !sitesListState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
+  }))), !sitesListState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return onClickProduct(null);
     }

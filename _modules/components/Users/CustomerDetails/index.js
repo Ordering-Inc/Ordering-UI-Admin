@@ -38,7 +38,8 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
   var userState = props.userState,
     handleDeleteUser = props.handleDeleteUser,
     handleParentSidebarMove = props.handleParentSidebarMove,
-    handleChangeActiveUser = props.handleChangeActiveUser;
+    handleChangeActiveUser = props.handleChangeActiveUser,
+    setSideBarWidth = props.setSideBarWidth;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
@@ -101,7 +102,8 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
   };
   var handleClickMenu = function handleClickMenu(key, isInitialRender) {
     setShowOption(key);
-    handleParentSidebarMove(500);
+    setSideBarWidth(isExpand ? width : 1000);
+    handleParentSidebarMove(isExpand ? width / 2 : 500);
     setIsOpenMenu(true);
     if (!isInitialRender) {
       var enabled = query.get('enabled');
@@ -110,6 +112,7 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     }
   };
   var handleCloseMenu = function handleCloseMenu() {
+    setSideBarWidth(isExpand ? width : 500);
     handleParentSidebarMove(0);
     setShowOption(null);
     setIsOpenMenu(false);
@@ -130,9 +133,6 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     setIsOpenMenu(false);
     setShowOption(null);
   }, [userState === null || userState === void 0 ? void 0 : (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.id]);
-  (0, _react.useEffect)(function () {
-    if (isOpenMenu) setIsExpand(false);
-  }, [isOpenMenu]);
   (0, _react.useEffect)(function () {
     if (userState.loading) return;
     var section = query.get('section');
@@ -201,13 +201,12 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }), isOpenMenu && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    sidebarId: "customer_details_menu",
     open: isOpenMenu,
     onClose: function onClose() {
       return handleCloseMenu();
     },
     isBorderShow: true,
-    defaultSideBarWidth: 500 + menuMoveDistance,
+    defaultSideBarWidth: isExpand ? width / 2 : 500 + menuMoveDistance,
     moveDistance: menuMoveDistance
   }, showOption === 'user_details' && /*#__PURE__*/_react.default.createElement(_styles2.UserDetailsWrapper, null, /*#__PURE__*/_react.default.createElement(_UserDetails.UserDetails, {
     userId: props.userId,

@@ -94,7 +94,7 @@ var ImportersList = function ImportersList(props) {
     colSpan: "2"
   }, /*#__PURE__*/_react.default.createElement(_styles2.NotFoundWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
     content: t('NOT_FOUND_IMPOTERS', "Can't found importers")
-  })))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImportersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewImporterButton, {
+  })))))))), /*#__PURE__*/_react.default.createElement(_styles2.ImportersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return addNewImporter();
     }

@@ -149,11 +149,11 @@ var ProductTagsListUI = function ProductTagsListUI(props) {
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null)), /*#__PURE__*/_react.default.createElement("span", {
       className: "tag-name"
     }, tag.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  })), !tagsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.AddNewLabel, {
+  })), !tagsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.AddNewLabel, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick(e) {
       return handleOpenProductTagDetail(e, null);
     }
-  }, t('ADD_NEW_LABEL', 'Add new label'))), isOpenTagDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }, t('ADD_NEW_LABEL', 'Add new label')))), isOpenTagDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "product-tag-details",
     isBorderShow: true,
     open: isOpenTagDetail,

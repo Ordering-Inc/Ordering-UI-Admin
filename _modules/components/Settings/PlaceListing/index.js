@@ -372,7 +372,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
         return onDeleteCity(city.country_id, city.id);
       }
     }, t('DELETE', 'Delete'))))));
-  }))), !countriesState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
+  }))), !countriesState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenCityDetails(null);
     }

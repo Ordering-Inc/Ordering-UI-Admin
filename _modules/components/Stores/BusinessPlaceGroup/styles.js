@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TableHead = exports.PlaceItemContainer = exports.OptionList = exports.HideSubmitBtn = exports.Header = exports.Content = exports.Container = exports.CheckWrapper = exports.ButtonWrapper = exports.AddBtn = exports.ActionSelectorWrapper = exports.ActionBlock = void 0;
+exports.TableHead = exports.PlaceItemContainer = exports.OptionList = exports.HideSubmitBtn = exports.Header = exports.Content = exports.Container = exports.CheckWrapper = exports.ButtonWrapper = exports.AddBtnWrapper = exports.ActionSelectorWrapper = exports.ActionBlock = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
@@ -62,12 +62,8 @@ var HideSubmitBtn = _styledComponents.default.button(_templateObject15 || (_temp
 exports.HideSubmitBtn = HideSubmitBtn;
 var OptionList = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  margin-top: 35px;\n"])));
 exports.OptionList = OptionList;
-var AddBtn = _styledComponents.default.span(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  font-weight: 400;\n  font-size: 14px;\n  display: block;\n  margin: 10px 0px;\n  cursor: pointer;\n  user-select: none;\n  color: ", ";\n  transition: color 0.2s ease;\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
-  return props.theme.colors.primary;
-});
-exports.AddBtn = AddBtn;
+var AddBtnWrapper = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  margin: 10px 0px;\n"])));
+exports.AddBtnWrapper = AddBtnWrapper;
 var CheckWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  .check-box {\n    cursor: pointer !important;\n  }\n\n  span {\n    svg {\n      cursor: pointer !important;\n      font-size: 16px;\n      color: ", ";\n\n      &.active {\n        color: ", ";\n      }\n    }\n  }\n\n  > label {\n    margin-bottom: 0;\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    margin-left: 20px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.secundaryLight;
 }, function (props) {

@@ -159,6 +159,11 @@ var RefundToWallet = function RefundToWallet(props) {
     });
     setRefundOptions(_refundOptions);
   }, [JSON.stringify(order === null || order === void 0 ? void 0 : order.payment_events)], order === null || order === void 0 ? void 0 : order.id);
+  (0, _react.useEffect)(function () {
+    if (!(actionStatus !== null && actionStatus !== void 0 && actionStatus.loading)) {
+      setOpenModal(false);
+    }
+  }, [actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.RefundWalletButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
@@ -195,6 +200,11 @@ var RefundToWallet = function RefundToWallet(props) {
     }
   }, !isRefundAll ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('REFUND_ONLY_AN_AMOUNT', 'Refund only an amount'))), !isRefundAll && /*#__PURE__*/_react.default.createElement(_styles2.RefundAmountWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "amount",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    },
     ref: register({
       required: t('VALIDATION_ERROR_FILLED', 'The _attribute_ field is required.').replace('_attribute_', t('AMOUNT', 'Amount'))
     })

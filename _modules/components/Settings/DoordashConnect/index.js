@@ -140,7 +140,7 @@ var DoordashConnectUI = function DoordashConnectUI(props) {
       outline: true,
       color: "primary",
       onClick: function onClick() {
-        return handleGoToLink(t('PURCHASE_INTEGRATION_LINK', 'https://www.ordering.co/ordering-sales'));
+        return handleGoToLink(t('PURCHASE_INTEGRATION_LINK', 'https://www.ordering.co/en-us/contact-ordering'));
       }
     }, t('PURCHASE_INTEGRATION', 'Purchase Integration')))));
   };

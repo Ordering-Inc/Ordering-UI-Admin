@@ -261,6 +261,12 @@ Object.defineProperty(exports, "BusinessDetails", {
     return _Stores.BusinessDetails;
   }
 });
+Object.defineProperty(exports, "BusinessDeviceListing", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.BusinessDeviceListing;
+  }
+});
 Object.defineProperty(exports, "BusinessFrontLayout", {
   enumerable: true,
   get: function get() {

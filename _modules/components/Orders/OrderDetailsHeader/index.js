@@ -35,23 +35,21 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
     printRef = props.printRef,
     isServiceOrder = props.isServiceOrder,
     extraOpen = props.extraOpen,
-    printTicketRef = props.printTicketRef;
+    printTicketRef = props.printTicketRef,
+    isExpand = props.isExpand,
+    setIsExpand = props.setIsExpand;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
-  var _useState = (0, _react.useState)(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    isExpand = _useState2[0],
-    setIsExpand = _useState2[1];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
-  var _useState3 = (0, _react.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    showPrinterOptions = _useState4[0],
-    setShowPrinterOptions = _useState4[1];
+  var _useState = (0, _react.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    showPrinterOptions = _useState2[0],
+    setShowPrinterOptions = _useState2[1];
   var dropdownReference = (0, _react.useRef)();
   var stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect'];
   var walletName = {
@@ -83,9 +81,6 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
       }
     }
   };
-  (0, _react.useEffect)(function () {
-    if (extraOpen) setIsExpand(false);
-  }, [extraOpen]);
   (0, _react.useEffect)(function () {
     if (!showPrinterOptions) {
       return;

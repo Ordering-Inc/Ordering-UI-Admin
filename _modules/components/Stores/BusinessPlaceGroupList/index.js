@@ -143,11 +143,11 @@ var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
     }, placeGroup !== null && placeGroup !== void 0 && placeGroup.enabled ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
       className: "active"
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", null, placeGroup === null || placeGroup === void 0 ? void 0 : placeGroup.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  }), /*#__PURE__*/_react.default.createElement(_styles2.AddBtn, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.AddBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenDetail(null);
     }
-  }, t('ADD_PLACES', 'Add places')))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openDetail && /*#__PURE__*/_react.default.createElement(_BusinessPlaceGroup.BusinessPlaceGroup, {
+  }, t('ADD_PLACES', 'Add places'))))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openDetail && /*#__PURE__*/_react.default.createElement(_BusinessPlaceGroup.BusinessPlaceGroup, {
     businessId: business === null || business === void 0 ? void 0 : business.id,
     open: openDetail,
     onClose: handleCloseDetail,

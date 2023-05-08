@@ -65,7 +65,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleChangeFilterValues = props.handleChangeFilterValues,
     filterValues = props.filterValues,
     businessTypeSelected = props.businessTypeSelected,
-    inActiveBusinesses = props.inActiveBusinesses;
+    inActiveBusinesses = props.inActiveBusinesses,
+    citiesList = props.citiesList;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
@@ -293,7 +294,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleChangeBusinessIds: handleChangeBusinessIds,
     handleEnableAllBusiness: handleEnableAllBusiness,
     selectedBusinessActiveState: selectedBusinessActiveState,
-    handleGotToAdd: handleGotToAdd
+    handleGotToAdd: handleGotToAdd,
+    citiesList: citiesList
   })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openBusinessDetails
     // business={detailsBusiness}

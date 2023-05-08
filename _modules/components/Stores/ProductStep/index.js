@@ -30,13 +30,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductStepUI = function ProductStepUI(props) {
   var _actionState$content, _actionState$content2;
   var onClose = props.onClose,
-    businessList = props.businessList,
+    businessListState = props.businessListState,
     setBusiness = props.setBusiness,
     actionState = props.actionState,
     handleImport = props.handleImport,
     handleChangeAddress = props.handleChangeAddress,
     business = props.business,
-    isLoading = props.isLoading,
     orderingBusiness = props.orderingBusiness,
     countriesState = props.countriesState,
     handleOpenCategoryDetails = props.handleOpenCategoryDetails;
@@ -77,12 +76,11 @@ var ProductStepUI = function ProductStepUI(props) {
     setBusiness: setBusiness,
     setStep: setStep,
     onClose: onClose,
-    businessList: businessList,
+    businessListState: businessListState,
     handleImport: handleImport,
     handleChangeAddress: handleChangeAddress,
     orderingBusiness: orderingBusiness,
-    business: business,
-    isLoading: isLoading
+    business: business
   }), step === 3 && option === 2 && (actionState === null || actionState === void 0 ? void 0 : actionState.loading) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WE_ARE_IMPORTING_YOUR_MENU', 'We are importing your menu.')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.importMenu,
     alt: ""

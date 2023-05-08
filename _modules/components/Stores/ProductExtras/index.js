@@ -234,11 +234,11 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       return handleChangeAddExtraInput(e);
     },
     autoComplete: "off"
-  })), /*#__PURE__*/_react.default.createElement(_styles2.AddButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.AddButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  }, t('ADD_PRODUCT_OPTION', 'Add product option'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openExtraDetails && /*#__PURE__*/_react.default.createElement(_ProductExtraOptions.ProductExtraOptions, {
+  }, t('ADD_PRODUCT_OPTION', 'Add product option')))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openExtraDetails && /*#__PURE__*/_react.default.createElement(_ProductExtraOptions.ProductExtraOptions, {
     open: openExtraDetails,
     onClose: function onClose() {
       return handleCloseExtraDetails();
