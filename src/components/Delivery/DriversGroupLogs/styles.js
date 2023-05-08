@@ -33,13 +33,13 @@ export const Table = styled.table`
           `}
           box-sizing: border-box;
         }
-        &:nth-child(2) {
-          width: 35%;
+        &:nth-child(3) {
+          width: 35%
           padding-left: 15px;
           padding-right: 15px;
           box-sizing: border-box;
         }
-        &:nth-child(3) {
+        &:nth-child(4) {
           ${props => props.theme?.rtl ? css`
             padding-right: 15px;
           ` : css`
@@ -65,10 +65,10 @@ export const Table = styled.table`
         `}
         box-sizing: border-box;
       }
-      &:nth-child(2) {
+      &:nth-child(3) {
         width: 35%;
       }
-      &:nth-child(3) {
+      &:nth-child(4) {
         ${props => props.theme?.rtl ? css`
           padding-right: 15px;
         ` : css`
@@ -147,4 +147,24 @@ export const DataListTable = styled.table`
       `}
     }
   }
+`
+
+export const EventTypeContainer = styled.div`
+  white-space: nowrap;
+  font-size: 12px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  p{
+    margin-bottom: 0px;
+  }
+  ${props => props.theme?.rtl ? css`
+    padding-right: 15px;
+    margin-right: 15px;
+    border-right: 1px solid ${props => props.theme.colors.borderColor};
+  ` : css`
+    padding-left: 15px;
+    margin-left: 15px;
+    border-left: 1px solid ${props => props.theme.colors.borderColor};
+  `}
 `
