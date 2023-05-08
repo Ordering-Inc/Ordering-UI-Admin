@@ -343,7 +343,11 @@ const OrderDetailsUI = (props) => {
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
               <p>
-                {parseDate(order?.delivery_datetime, { utc: false })}
+                {
+                  order?.delivery_datetime_utc
+                    ? parseDate(order?.delivery_datetime_utc)
+                    : parseDate(order?.delivery_datetime, { utc: false })
+                }
               </p>
               <p>{order?.eta_time} {t('MIN', 'min')}</p>
             </div>
