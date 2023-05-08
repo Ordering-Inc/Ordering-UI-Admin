@@ -7,6 +7,7 @@ import { CallCenterApp } from './CallCenterApp'
 import { KioskApp } from './KioskApp'
 import { CustomProject } from './CustomProject'
 import { OrderingWidgets } from './OrderingWidgets'
+import { UploadAudio } from './UploadAudio'
 
 export {
   OrderingWebsite,
@@ -17,5 +18,6 @@ export {
   CallCenterApp,
   KioskApp,
   CustomProject,
-  OrderingWidgets
+  OrderingWidgets,
+  UploadAudio
 }
