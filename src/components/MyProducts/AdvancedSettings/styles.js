@@ -27,6 +27,9 @@ export const BoxLayout = styled.div`
     margin-top: 0px;
     margin-bottom: 20px;
   }
+  button.custom {
+    height: 44px;
+  }
 `
 
 export const HomePageWrapper = styled.div``
