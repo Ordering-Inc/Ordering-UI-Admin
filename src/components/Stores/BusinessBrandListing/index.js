@@ -8,7 +8,7 @@ import {
 import Skeleton from 'react-loading-skeleton'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { ThreeDots, List as MenuIcon, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
-import { Button, IconButton, Switch, DefaultSelect } from '../../../styles'
+import { Button, IconButton, Switch, DefaultSelect, LinkButton } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { Alert, SearchBar, SideBar } from '../../Shared'
 import { BusinessBrandGENDetail } from '../BusinessBrandGENDetail'
@@ -258,7 +258,7 @@ const BusinessBrandListingUI = (props) => {
           </BrandListTable>
         </BrandListTableWrapper>
         <BrandListBottomContainer>
-          <span onClick={() => handleOpenSideBar()}>{t('ADD_NEW_BRAND', 'Add new brand')}</span>
+          <LinkButton onClick={() => handleOpenSideBar()}>{t('ADD_NEW_BRAND', 'Add new brand')}</LinkButton>
         </BrandListBottomContainer>
         {openDetail && (
           <SideBar

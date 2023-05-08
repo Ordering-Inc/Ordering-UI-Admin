@@ -1,6 +1,7 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const OrderingProductsContainer = styled.div`
+export const BrandListingContainer = styled.div`
   flex: 1;
   padding: 20px;
   box-sizing: border-box;
@@ -70,20 +71,18 @@ export const ActionsGroup = styled.div`
       margin-right: 20px;
     `}
   }
+  input {
+    border-radius: 8px;
+  }
 
   @media (min-width: 992px) {
     margin-top: 0px;
   }
 `
-export const ProductListTableWrapper = styled.div`
-  margin-top: 20px;
-  width: 100%;
-  overflow: auto;
-`
 
-export const ProductListTable = styled.table`
+export const BrandListTable = styled.table`
   width: 100%;
-  min-width: 800px;
+  min-width: 500px;
 
   thead {
     border-bottom: 1px solid ${props => props.theme.colors.secundaryLight};
@@ -94,28 +93,18 @@ export const ProductListTable = styled.table`
   }
 
   tr {
-    display: flex;
-    align-items: center;
     th, td {
-      &.product {
-        width: 25%
+      &:last-child {
+        width: 100px;
+        min-width: 100px;
       }
-    }
-    td {
-      &.product {
-        font-size: 14px;
-        font-weight: 500;
-      }
-      &.description {
-        font-size: 12px;
-        line-height: 15px;
-        color: ${props => props.theme.colors.lightGray};
+      &:not(:last-child) {
+        flex: 1;
       }
     }
   }
 
-  th.description,
-  td.description {
+  th:last-child {
     ${props => props.theme.colors.rtl ? css`
       padding-right: 15px;
     ` : css`
@@ -124,12 +113,13 @@ export const ProductListTable = styled.table`
   }
 `
 
-export const PageTbody = styled.tbody`
+export const BrandBody = styled.tbody`
   cursor: pointer;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
   td {
-    padding: 16px 0;
+    padding: 7px 0;
+    font-size: 12px;
     input {
       border: none;
       width: 100%;
@@ -149,72 +139,80 @@ export const PageTbody = styled.tbody`
     background-color: ${props => props.theme.colors.lightPrimary};
   `}
 `
-export const PagesBottomContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  row-gap: 10px;
-  margin: 15px 0;
-`
-export const InfoWrapper = styled.div`
-  position: relative;
-  ${props => props.theme?.rtl ? css`
-    margin-left: -8px;
-    margin-right: 8px;
-  ` : css`
-    margin-right: -8px;
-    margin-left: 8px;
+
+export const WrapperImage = styled.div`
+  height: 38px;
+  width: 38px;
+  min-width: 38px;
+  ${({ isSkeleton }) => !isSkeleton && css`
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   `}
-
-  > button {
-    height: 25px;
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-  }
-  &:hover > div {
-    /* display: block; */
-    visibility: visible;
-    opacity: 1;
-  }
-`
-
-export const InfoContent = styled.div`
-  position: absolute;
-  top: 100%;
-  z-index: 999;
-  background: ${props => props.theme.colors.backgroundInfo};
-  border: 1px solid ${props => props.theme.colors.primary};
-  box-sizing: border-box;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
-  padding: 8px 12px;
-  font-size: 12px;
-  line-height: 18px;
-  min-width: 150px;
-  transition: all 0.3s linear;
-  visibility: hidden;
-  opacity: 0;
-  /* display: none; */
-  right: 0px;
-  ${props => props.theme.rtl && css`
-    left: 0px;
-    right: initial;
+
+  ${props => props.theme?.rtl ? css`
+    margin-left: 20px;
+  ` : css`
+    margin-right: 20px;
   `}
+`
 
-  @media (min-width: 576px) {
-    min-width: 350px;
-    padding: 12px 15px;
-    left: 0px;
-    ${props => props.theme.rtl && css`
-      right: 0px;
-      left: initial;
-    `}
+const ImageStyled = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+  border-radius: 7.6px;
+`
+export const Image = (props) => {
+  return (
+    <ImageStyled
+      {...props}
+      style={{ backgroundImage: `url(${props.bgimage})` }}
+    >
+      {props.children}
+    </ImageStyled>
+  )
+}
+
+export const BrandGeneralInfo = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const InfoBlock = styled.div`
+  p {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    color: ${props => props.theme?.colors.headingColor};
   }
+  span {
+    font-size: 10px;
+    font-weight: 400;
+    color: ${props => props.theme.colors.lightGray};
+  }
+`
 
-  @media (min-width: 993px) {
-    min-width: 535px;
+export const BrandListTableWrapper = styled.div`
+  overflow: auto;
+  margin-top: 20px;
+  width: 100%;
+`
+
+export const BrandListBottomContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+
+  span {
+    cursor: pointer;
+    user-select: none;
+    font-size: 14px;
+    color: ${props => props.theme.colors?.primary};
   }
 `

@@ -194,12 +194,6 @@ export const PagesBottomContainer = styled.div`
   margin: 15px 0;
 `
 
-export const AddNewPageButton = styled.div`
-  cursor: pointer;
-  font-size: 14px;
-  color: ${props => props.theme.colors.primary};
-`
-
 export const LinkText = styled.span`
   color: ${props => props.theme.colors.primary};
   &:hover {

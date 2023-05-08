@@ -212,13 +212,6 @@ export const PromotionListBottom = styled.div`
     pointer-events: none;
   `}
 `
-export const AddNewButton = styled.div`
-  cursor: pointer;
-  color: ${props => props.theme.colors.primary};
-  width: fit-content;
-  font-size: 13px;
-`
-
 export const WrapperPagination = styled.div`
 `
 export const DummyImageWrapper = styled.div`

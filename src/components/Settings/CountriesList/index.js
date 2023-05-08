@@ -6,7 +6,7 @@ import { Pagination, SideBar, Confirm } from '../../Shared'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 import { CountryDetails } from '../CountryDetails'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
@@ -19,8 +19,7 @@ import {
   CountryWrapper,
   CheckboxWrapper,
   CountryName,
-  PagesBottomContainer,
-  AddNewPageButton
+  PagesBottomContainer
 } from './styles'
 
 export const CountriesList = (props) => {
@@ -223,14 +222,14 @@ export const CountriesList = (props) => {
 
       {!countriesState.loading && (
         <PagesBottomContainer>
-          <AddNewPageButton
+          <LinkButton
             onClick={() => {
               setSelectedCountry(null)
               setOpenDetails(true)
             }}
           >
             {t('ADD_NEW_COUNTRY ', 'Add new country')}
-          </AddNewPageButton>
+          </LinkButton>
           {currentCountries?.length > 0 && (
             <Pagination
               currentPage={currentPage}

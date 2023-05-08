@@ -44,8 +44,10 @@ const EnterprisePromotionListingUI = (props) => {
   const [selectedPromotion, setSelectedPromotion] = useState(null)
   const [curPromotionId, setCurPromotionId] = useState(null)
   const [moveDistance, setMoveDistance] = useState(0)
+  const [sideBarWidth, setSideBarWidth] = useState(600)
 
   const handleOpenDetails = (promotion) => {
+    setSideBarWidth(600)
     setMoveDistance(0)
     setSelectedPromotion(promotion)
     setCurPromotionId(promotion?.id)
@@ -56,6 +58,8 @@ const EnterprisePromotionListingUI = (props) => {
   }
 
   const handleCloseDetails = () => {
+    setMoveDistance(0)
+    setSideBarWidth(600)
     setOpenDetails(false)
     setSelectedPromotion(null)
     history.replace(`${location.pathname}`)
@@ -127,7 +131,7 @@ const EnterprisePromotionListingUI = (props) => {
       {isDisabledFeature && (<DisabledFeatureAlert />)}
       {openDetails && (
         <SideBar
-          defaultSideBarWidth={600 + moveDistance}
+          defaultSideBarWidth={sideBarWidth}
           moveDistance={moveDistance}
           open={openDetails}
           onClose={() => handleCloseDetails()}
@@ -143,6 +147,7 @@ const EnterprisePromotionListingUI = (props) => {
             handleSuccessAddPromotion={handleSuccessAddPromotion}
             handleSuccessDeletePromotion={handleSuccessDeletePromotion}
             setMoveDistance={setMoveDistance}
+            setSideBarWidth={setSideBarWidth}
             onClose={() => handleCloseDetails()}
           />
         </SideBar>

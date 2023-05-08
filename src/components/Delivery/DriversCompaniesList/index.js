@@ -4,14 +4,13 @@ import Skeleton from 'react-loading-skeleton'
 import { Pagination } from '../../Shared'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 
 import {
   DriversCompaniesContainer,
   TableWrapper,
   CompaniesTable,
   PagesBottomContainer,
-  AddNewCompanyButton,
   CompanyNameContainer,
   CheckBoxWrapper,
   EnableWrapper,
@@ -223,11 +222,11 @@ export const DriversCompaniesList = (props) => {
         </TableWrapper>
         {!driversCompaniesState.loading && (
           <PagesBottomContainer>
-            <AddNewCompanyButton
+            <LinkButton
               onClick={() => handleOpenDetails(null)}
             >
               {t('ADD_NEW_DRIVER_COMPANY', 'Add new driver company')}
-            </AddNewCompanyButton>
+            </LinkButton>
             {currentCompanies?.length > 0 && (
               <Pagination
                 currentPage={currentPage}

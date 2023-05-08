@@ -1,5 +1,6 @@
 import { BusinessAdd } from './BusinessAdd'
 import { BusinessBrandListing } from './BusinessBrandListing'
+import { BusinessDeviceListing } from './BusinessDeviceListing'
 import { BusinessesListing } from './BusinessesListing'
 import { BusinessProductsListing } from './BusinessProductsListing'
 import { BusinessesListingHeader } from './BusinessesListingHeader'
@@ -112,6 +113,7 @@ import { BusinessSync } from './BusinessSync'
 export {
   BusinessAdd,
   BusinessBrandListing,
+  BusinessDeviceListing,
   BusinessesListing,
   BusinessProductsListing,
   BusinessesListingHeader,

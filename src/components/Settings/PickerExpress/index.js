@@ -140,7 +140,7 @@ const PickerExpressUI = (props) => {
             <p>
               {t('PICKER_EXPRESS_CONNECT_ARTICLE', 'To connect with Picker Express, you’ll have to use plugins, put in your Picker Express credentials, connect your Picker Express account, and create a driver company inside this dashboard; follow the next article step by step and get this connected in less than 5 minutes.')}
             </p>
-            <a onClick={() => handleGoToLink(t('PICKER_EXPRESS_CONNECT_ARTICLE_LINK', 'https://support.ordering.co/hc/en-us/articles/10673894748941'))}>
+            <a onClick={() => handleGoToLink(t('PICKER_EXPRESS_CONNECT_ARTICLE_LINK', 'https://support.ordering.co/hc/en-us/articles/13007335725069'))}>
               {t('VIEW_ARTICLE', 'View Article')}
             </a>
           </Paragraph>
@@ -163,7 +163,7 @@ const PickerExpressUI = (props) => {
             <Button
               outline
               color='primary'
-              onClick={() => handleGoToLink(t('PURCHASE_INTEGRATION_LINK', 'https://www.ordering.co/ordering-sales'))}
+              onClick={() => handleGoToLink(t('PURCHASE_INTEGRATION_LINK', 'https://www.ordering.co/en-us/contact-ordering'))}
             >
               {t('PURCHASE_INTEGRATION', 'Purchase Integration')}
             </Button>

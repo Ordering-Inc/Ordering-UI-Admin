@@ -16,13 +16,12 @@ import {
 export const RestaurantSelectGuide = (props) => {
   const {
     setBusiness,
-    businessList,
+    businessListState,
     setStep,
     onClose,
     handleImport,
     handleChangeAddress,
     orderingBusiness,
-    isLoading,
     business
   } = props
 
@@ -38,12 +37,12 @@ export const RestaurantSelectGuide = (props) => {
   }
 
   const handleSelectBusiness = (id) => {
-    const _business = businessList.find(item => item._id === id)
+    const _business = businessListState.businesses?.find(item => item._id === id)
     setBusiness(_business)
   }
 
   useEffect(() => {
-    const _options = businessList?.map(item => {
+    const _options = businessListState.businesses?.map(item => {
       return {
         value: item._id,
         content: (
@@ -56,7 +55,7 @@ export const RestaurantSelectGuide = (props) => {
       }
     })
     setOptions(_options)
-  }, [businessList])
+  }, [businessListState?.businesses])
 
   return (
     <Container>
@@ -76,7 +75,7 @@ export const RestaurantSelectGuide = (props) => {
           countryCode={configs?.country_autocomplete?.value || '*'}
         />
       </SearchWrapper>
-      {isLoading && (
+      {businessListState.loading && (
         <SelectWrapper>
           <label>
             <Skeleton height={15} width={100} />
@@ -84,24 +83,55 @@ export const RestaurantSelectGuide = (props) => {
           <Skeleton height={44} />
         </SelectWrapper>
       )}
-      {!isLoading && options?.length > 0 && (
-        <SelectWrapper>
-          <label>{t('SELECT_YOUR_RESTAURANT', 'Select your restaurant')}</label>
-          <Select
-            options={options}
-            className='select'
-            defaultValue={business?._id || ''}
-            placeholder={t('SELECT_BUSINESS', 'Select a Business')}
-            onChange={(value) => handleSelectBusiness(value)}
-            searchBarIsCustomLayout
-            searchBarIsNotLazyLoad
-          />
-        </SelectWrapper>
-      )}
-      {!isLoading && options.length === 0 && (
-        <EmptyData>
-          {t('NO_RESULT', 'There are no results')}
-        </EmptyData>
+      {!businessListState.loading && (
+        <>
+          {!businessListState.error ? (
+            <>
+              {options?.length > 0 && (
+                <SelectWrapper>
+                  <label>{t('SELECT_YOUR_RESTAURANT', 'Select your restaurant')}</label>
+                  <Select
+                    options={options}
+                    className='select'
+                    defaultValue={business?._id || ''}
+                    placeholder={t('SELECT_BUSINESS', 'Select a Business')}
+                    onChange={(value) => handleSelectBusiness(value)}
+                    searchBarIsCustomLayout
+                    searchBarIsNotLazyLoad
+                  />
+                </SelectWrapper>
+              )}
+              {options.length === 0 && (
+                <EmptyData>
+                  {t('NO_RESULT', 'There are no results')}
+                </EmptyData>
+              )}
+            </>
+          ) : (
+            <>
+              <EmptyData>
+                {businessListState.error && typeof businessListState.error === 'string' && businessListState.error}
+                {businessListState.error && typeof businessListState.error === 'object' && Array.isArray(businessListState.error) && (
+                  <ul>
+                    {businessListState.error.map((item, i) => (
+                      <React.Fragment key={i}>
+                        {Array.isArray(item) ? (
+                          item.map((err, index) => (
+                            typeof err === 'string' && (
+                              <li key={index}>{t(err.toUpperCase(), err)}</li>
+                            )
+                          ))
+                        ) : (
+                          typeof item === 'string' && <li>{t(item.toUpperCase(), item)}</li>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </ul>
+                )}
+              </EmptyData>
+            </>
+          )}
+        </>
       )}
       <ButtonWrapper>
         <span onClick={() => onClose()}>{t('SKIP', 'Skip')}</span>

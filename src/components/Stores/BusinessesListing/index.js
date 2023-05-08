@@ -52,7 +52,8 @@ const BusinessesListingUI = (props) => {
     handleChangeFilterValues,
     filterValues,
     businessTypeSelected,
-    inActiveBusinesses
+    inActiveBusinesses,
+    citiesList
   } = props
 
   const history = useHistory()
@@ -267,6 +268,7 @@ const BusinessesListingUI = (props) => {
             handleEnableAllBusiness={handleEnableAllBusiness}
             selectedBusinessActiveState={selectedBusinessActiveState}
             handleGotToAdd={handleGotToAdd}
+            citiesList={citiesList}
           />
         )}
       </BusinessListingContainer>

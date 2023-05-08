@@ -16,13 +16,12 @@ import { SelectPosGuide } from '../SelectPosGuide'
 const ProductStepUI = (props) => {
   const {
     onClose,
-    businessList,
+    businessListState,
     setBusiness,
     actionState,
     handleImport,
     handleChangeAddress,
     business,
-    isLoading,
     orderingBusiness,
     countriesState,
     handleOpenCategoryDetails
@@ -53,12 +52,11 @@ const ProductStepUI = (props) => {
           setBusiness={setBusiness}
           setStep={setStep}
           onClose={onClose}
-          businessList={businessList}
+          businessListState={businessListState}
           handleImport={handleImport}
           handleChangeAddress={handleChangeAddress}
           orderingBusiness={orderingBusiness}
           business={business}
-          isLoading={isLoading}
         />
       )}
       {step === 3 && option === 2 && actionState?.loading && (

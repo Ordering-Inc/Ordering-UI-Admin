@@ -5,14 +5,14 @@ import BsDot from '@meronex/icons/bs/BsDot'
 import { useTheme } from 'styled-components'
 import { getStarWidth } from '../../../utils'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { LinkButton } from '../../../styles'
 import {
   DriversListContainer,
   DriverCard,
   WrapperImage,
   Image,
   DriverInfo,
-  WrapperStar,
-  AssignedOrdersCount
+  WrapperStar
 } from './styles'
 
 export const DriversList = (props) => {
@@ -81,13 +81,13 @@ export const DriversList = (props) => {
                 <div>
                   <p>{driver.name} {driver.lastname}</p>
                   <BsDot />
-                  <AssignedOrdersCount
+                  <LinkButton
                     className='driver-orders'
                     disabled={!driver?.assigned_orders_count || driver?.assigned_orders_count === 0}
                     onClick={() => onOpenDriverOrdersDetail(driver)}
                   >
                     {driver?.assigned_orders_count} {t('ORDERS', 'Orders')}
-                  </AssignedOrdersCount>
+                  </LinkButton>
                 </div>
                 {driver?.qualification && (
                   <WrapperStar width={getStarWidth(driver?.qualification)} />

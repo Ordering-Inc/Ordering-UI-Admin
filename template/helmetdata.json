@@ -69,6 +69,13 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "devices": {
+    "title": "Business Devices",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "basic_settings": {
     "title": "Basic settings",
     "description": "a dummy description about this page",

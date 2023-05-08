@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, PagesList as PagesListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Button, IconButton, Switch } from '../../../styles'
+import { Button, IconButton, Switch, LinkButton } from '../../../styles'
 import { Modal, Pagination, SearchBar } from '../../Shared'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
@@ -20,8 +20,7 @@ import {
   ActionsContainer,
   EnableWrapper,
   ActionSelectorWrapper,
-  PagesBottomContainer,
-  AddNewPageButton
+  PagesBottomContainer
 } from './styles'
 
 const CmsUI = (props) => {
@@ -187,9 +186,9 @@ const CmsUI = (props) => {
         </PageListTable>
         {!pagesListState.loading && (
           <PagesBottomContainer>
-            <AddNewPageButton onClick={() => handleEditPage(null)}>
+            <LinkButton onClick={() => handleEditPage(null)}>
               {t('ADD_NEW_STATIC_PAGE', 'Add new static page')}
-            </AddNewPageButton>
+            </LinkButton>
             {currentPages?.length > 0 && (
               <Pagination
                 currentPage={currentPage}

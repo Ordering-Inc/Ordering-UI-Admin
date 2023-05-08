@@ -4,7 +4,7 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import { Envelope, Phone, CheckSquareFill, Square } from 'react-bootstrap-icons'
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 import { ConfirmAdmin, Pagination } from '../../Shared'
 
 import {
@@ -19,7 +19,6 @@ import {
   UserTypeWrapper,
   UserEnableWrapper,
   WrapperPagination,
-  AddNewUserButton,
   UsersBottomContainer,
   VerifiedItemsContainer,
   VerifiedItem,
@@ -270,9 +269,9 @@ export const UsersList = (props) => {
           </UsersTable>
         </UserTableWrapper>
         <UsersBottomContainer>
-          <AddNewUserButton onClick={() => handleOpenUserAddForm()}>
+          <LinkButton onClick={() => handleOpenUserAddForm()}>
             {t('ADD_NEW_USER', 'Add new user')}
-          </AddNewUserButton>
+          </LinkButton>
           {usersList?.users.length > 0 && (
             <WrapperPagination>
               <Pagination

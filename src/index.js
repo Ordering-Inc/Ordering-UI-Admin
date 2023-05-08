@@ -313,7 +313,8 @@ import {
   RestaurantSelectGuide,
   ProductStep,
   BusinessSync,
-  BusinessDelete
+  BusinessDelete,
+  BusinessDeviceListing
 } from './components/Stores'
 import {
   CustomersListing,
@@ -725,6 +726,7 @@ export {
   ProductStep,
   BusinessSync,
   BusinessDelete,
+  BusinessDeviceListing,
 
   LogoutButton,
   LanguageSelector,

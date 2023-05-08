@@ -74,12 +74,5 @@ export const TagImageWrapper = styled.div`
   }
 `
 export const AddNewLabel = styled.div`
-  width: fit-content;
-  cursor: pointer;
-  font-size: 14px;
-  color: ${props => props.theme.colors.lightGray};
   margin: 15px 0;
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
 `

@@ -3,7 +3,7 @@ import { useLanguage, BusinessPlaceGroup as BusinessPlaceGroupController } from 
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { Button, IconButton, Input } from '../../../styles'
+import { Button, IconButton, Input, LinkButton } from '../../../styles'
 import { useForm } from 'react-hook-form'
 import { Alert, Modal } from '../../Shared'
 import Skeleton from 'react-loading-skeleton'
@@ -19,7 +19,7 @@ import {
   ButtonWrapper,
   HideSubmitBtn,
   OptionList,
-  AddBtn,
+  AddBtnWrapper,
   PlaceItemContainer,
   CheckWrapper,
   TableHead
@@ -219,7 +219,11 @@ export const BusinessPlaceGroupUI = (props) => {
             ))}
           </OptionList>
         )}
-        {placeGroup && <AddBtn onClick={() => handleOpenModal(null)}>{t('ADD_OPTION', 'Add option')}</AddBtn>}
+        {placeGroup && (
+          <AddBtnWrapper>
+            <LinkButton onClick={() => handleOpenModal(null)}>{t('ADD_OPTION', 'Add option')}</LinkButton>
+          </AddBtnWrapper>
+        )}
         <ButtonWrapper>
           <Button
             color='primary'

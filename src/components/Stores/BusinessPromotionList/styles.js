@@ -132,12 +132,8 @@ export const PromotionDateItem = styled.div`
   }
 `
 
-export const AddNewPromotionText = styled.div`
-  cursor: pointer;
-  width: fit-content;
+export const AddNewPromotionButtonWrapper = styled.div`
   margin: 15px 0;
-  color: ${props => props.theme.colors.primary};
-  font-size: 12px;
 `
 
 export const PromotionEditFormContainer = styled.div`
