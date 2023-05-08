@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
-import { Button, Switch } from '../../../styles'
+import { Button, Switch, LinkButton } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { SingleBusiness } from '../SingleBusiness'
 import { CheckSquareFill, Square } from 'react-bootstrap-icons'
@@ -11,7 +11,6 @@ import {
   BusinessListTable,
   WrapperPagination,
   BusinessCardContainer,
-  AddNewButtonLink,
   BusinessListBottomContainer,
   AddFirstStoreContainer,
   CheckBoxWrapper,
@@ -39,7 +38,8 @@ export const BusinessesList = (props) => {
     handleEnableAllBusiness,
     selectedBusinessActiveState,
     setBusinessIds,
-    handleGotToAdd
+    handleGotToAdd,
+    citiesList
   } = props
 
   const theme = useTheme()
@@ -208,6 +208,7 @@ export const BusinessesList = (props) => {
                     handleOpenBusinessDetails={handleOpenBusinessDetails}
                     businessIds={businessIds}
                     handleChangeBusinessIds={handleChangeBusinessIds}
+                    citiesList={citiesList}
                   />
                 ))
               )}
@@ -215,11 +216,11 @@ export const BusinessesList = (props) => {
           </BusinessListContainer>
 
           <BusinessListBottomContainer>
-            <AddNewButtonLink
+            <LinkButton
               onClick={() => handleGotToAdd()}
             >
               {t('ADD_NEW_STORE', 'Add new store')}
-            </AddNewButtonLink>
+            </LinkButton>
             {pagination && (
               <WrapperPagination>
                 {pagination?.total > 0 && (
@@ -260,6 +261,7 @@ export const BusinessesList = (props) => {
                 handleSucessAddBusiness={handleSucessAddBusiness}
                 handleSucessUpdateBusiness={handleSucessUpdateBusiness}
                 handleOpenBusinessDetails={handleOpenBusinessDetails}
+                citiesList={citiesList}
               />
             ))
           )}

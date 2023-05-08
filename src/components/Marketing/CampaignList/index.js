@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 import { ColumnAllowSettingPopover, Pagination, Modal } from '../../Shared'
 
 import {
@@ -9,7 +9,6 @@ import {
   Table,
   Tbody,
   PagesBottomContainer,
-  AddNewPageButton,
   SwitchWrapper,
   StatusWrapper,
   StatusPoint,
@@ -289,11 +288,11 @@ export const CampaignList = (props) => {
       </Container>
       {!campaignList.loading && (
         <PagesBottomContainer>
-          <AddNewPageButton
+          <LinkButton
             onClick={() => handleOpenDetail({})}
           >
             {t('ADD_NEW_CAMPAIGN', 'Add new campaign')}
-          </AddNewPageButton>
+          </LinkButton>
           {campaignList?.campaigns?.length > 0 && (
             <Pagination
               currentPage={paginationProps?.currentPage}

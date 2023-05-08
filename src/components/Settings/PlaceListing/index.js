@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, PlaceList as PlaceListController } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
-import { Button, IconButton, Switch } from '../../../styles'
+import { Button, IconButton, Switch, LinkButton } from '../../../styles'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -32,8 +32,7 @@ import {
   CityAdministrator,
   CountryName,
   CheckboxWrapper,
-  PagesBottomContainer,
-  AddNewPageButton
+  PagesBottomContainer
 } from './styles'
 
 const PlaceListingUI = (props) => {
@@ -401,11 +400,11 @@ const PlaceListingUI = (props) => {
 
             {!countriesState.loading && (
               <PagesBottomContainer>
-                <AddNewPageButton
+                <LinkButton
                   onClick={() => handleOpenCityDetails(null)}
                 >
                   {t('ADD_NEW_CITY', 'Add new city')}
-                </AddNewPageButton>
+                </LinkButton>
                 {currentCities?.length > 0 && (
                   <Pagination
                     currentPage={currentPage}

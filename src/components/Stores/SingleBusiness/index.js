@@ -33,7 +33,8 @@ const SingleBusinessUI = (props) => {
     handleOpenBusinessDetails,
     detailsBusinessId,
     businessIds,
-    handleChangeBusinessIds
+    handleChangeBusinessIds,
+    citiesList
   } = props
 
   const [, t] = useLanguage()
@@ -47,6 +48,11 @@ const SingleBusinessUI = (props) => {
       e.target.closest('.featured')
     if (isInvalid) return
     handleOpenBusinessDetails(businessState?.business)
+  }
+
+  const getCityName = (id) => {
+    const found = citiesList?.find(city => city.id === id)
+    return found?.name || ''
   }
 
   return (
@@ -125,7 +131,7 @@ const SingleBusinessUI = (props) => {
                       </WrapperImage>
                       <InfoBlock>
                         <p className='bold'>{businessState?.business?.name}</p>
-                        <p>{businessState?.business?.city?.name}</p>
+                        <p>{getCityName(businessState?.business?.city_id)}</p>
                       </InfoBlock>
                     </BusinessGeneralInfo>
                   </td>
@@ -201,7 +207,7 @@ const SingleBusinessUI = (props) => {
               </BusinessHeader>
               <BusinessContent>
                 <h1>{businessState?.business?.name}</h1>
-                <p>{businessState?.business?.city?.name}</p>
+                <p>{getCityName(businessState?.business?.city_id)}</p>
                 <BusinessActionContainer>
                   <span>{t('ID', 'ID')} {businessState?.business?.id}</span>
                   <BusinessEnableWrapper className='business_enable_control'>

@@ -304,7 +304,10 @@ const BusinessProductsListingUI = (props) => {
                     <Breadcrumb>
                       <span
                         className='business'
-                        onClick={() => setOpenSidebar('business_details')}
+                        onClick={() => {
+                          history.replace(`${location.pathname}?id=${businessState?.business?.id}`)
+                          setOpenSidebar('business_details')
+                        }}
                       >
                         {selectedBusiness?.name || businessState?.business?.name}
                       </span>
@@ -327,7 +330,7 @@ const BusinessProductsListingUI = (props) => {
                 {t('REFRESH', 'Refresh')}
                 <ArrowRepeat size={16} style={{ marginLeft: 5 }} />
               </Button>
-              <ImportersButton customClass='importerGroup' />
+              <ImportersButton customClass='importerGroup' setOpenSidebar={setOpenSidebar} />
               <Button
                 borderRadius='8px'
                 color='lightPrimary'

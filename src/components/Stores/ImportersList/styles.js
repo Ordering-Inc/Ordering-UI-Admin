@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { darken } from 'polished'
 
 export const ImportListContainer = styled.div``
 export const ImportersTableWrapper = styled.div`
@@ -111,18 +110,7 @@ export const WrapperUserActionSelector = styled.div`
 export const ImportersBottomContainer = styled.div`
   display: flex;
   justify-content: space-between;
-
-`
-export const AddNewImporterButton = styled.div`
-  display: inline-flex;
-  width: fit-content;
-  cursor: pointer;
-  color: rgb(144, 155, 169);
-  font-size: 14px;
-  margin-top: 20px;
-  &:hover {
-    color: ${props => darken(0.05, props.theme.colors.primary)};
-  }
+  margin: 15px 0;
 `
 export const NotFoundWrapper = styled.div`
   display: flex;

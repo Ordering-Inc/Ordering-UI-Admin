@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 import { Pagination } from '../../Shared'
 
 import {
@@ -21,7 +21,6 @@ import {
   ActionsContainer,
   EnableWrapper,
   PagesBottomContainer,
-  AddNewGroupButton,
   GroupIdWrapper
 } from './styles'
 
@@ -252,12 +251,12 @@ export const DriversGroupsList = (props) => {
         {!driversGroupsState.loading && (
           <PagesBottomContainer>
             {!isFromStore && (
-              <AddNewGroupButton
+              <LinkButton
                 onClick={() => handleOpenDetails(null)}
                 disabled={actionDisabled}
               >
                 {t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')}
-              </AddNewGroupButton>
+              </LinkButton>
             )}
             {currentGroups?.length > 0 && (
               <Pagination

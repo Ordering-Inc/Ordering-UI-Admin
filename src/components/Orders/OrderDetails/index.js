@@ -70,6 +70,7 @@ const OrderDetailsUI = (props) => {
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
   const placeSpotEnabled = [3, 4]
   const {
     order,
@@ -190,10 +191,14 @@ const OrderDetailsUI = (props) => {
       if (width <= 500) {
         document.getElementById('orderDetails').style.width = '100vw'
       } else {
-        if (extraOpen && width >= 1000) {
-          document.getElementById('orderDetails').style.width = '1000px'
+        if (isExpand) {
+          document.getElementById('orderDetails').style.width = '100vw'
         } else {
-          document.getElementById('orderDetails').style.width = '500px'
+          if (extraOpen && width >= 1000) {
+            document.getElementById('orderDetails').style.width = '1000px'
+          } else {
+            document.getElementById('orderDetails').style.width = '500px'
+          }
         }
       }
     }
@@ -201,21 +206,12 @@ const OrderDetailsUI = (props) => {
 
   useEffect(() => {
     toggleMainContent()
-  }, [width])
+  }, [extraOpen, isExpand, width])
 
   useEffect(() => {
     if (!open) return
     actionSidebar(true)
   }, [open])
-
-  useEffect(() => {
-    if (width < 1000) return
-    if (extraOpen) {
-      document.getElementById('orderDetails').style.width = '1000px'
-    } else {
-      toggleMainContent()
-    }
-  }, [extraOpen])
 
   const handleChangeTour = (evt) => {
     if (!isTourOpen) return
@@ -338,6 +334,8 @@ const OrderDetailsUI = (props) => {
             setIsTourOpen={setIsTourOpen}
             printRef={printRef}
             printTicketRef={printTicketRef}
+            isExpand={isExpand}
+            setIsExpand={setIsExpand}
           />
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>

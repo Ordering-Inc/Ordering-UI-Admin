@@ -198,14 +198,5 @@ export const NotificationMessageContent = styled(SmsPreviewContent)`
 `
 
 export const AddNewNotificationButton = styled.div`
-  font-size: 14px;
-  color: ${props => props.theme.colors.lightGray};
   padding-bottom: 15px;
-  span {
-    cursor: pointer;
-  }
-
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
 `

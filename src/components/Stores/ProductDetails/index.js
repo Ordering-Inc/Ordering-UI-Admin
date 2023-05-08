@@ -45,6 +45,7 @@ const ProductDetailsUI = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
   const [showOption, setShowOption] = useState(null)
 
   const handleShowOption = (option, isInitialRender) => {
@@ -80,20 +81,18 @@ const ProductDetailsUI = (props) => {
       if (width <= 500) {
         document.getElementById('product_details').style.width = '100vw'
       } else {
-        if (extraOpen && width >= 1000) {
-          document.getElementById('product_details').style.width = '1000px'
+        if (isExpand) {
+          document.getElementById('product_details').style.width = '100vw'
         } else {
-          document.getElementById('product_details').style.width = '500px'
+          if (extraOpen && width >= 1000) {
+            document.getElementById('product_details').style.width = '1000px'
+          } else {
+            document.getElementById('product_details').style.width = '500px'
+          }
         }
       }
     }
   }
-  useEffect(() => {
-    // if (width > 1000) {
-    //   setIsExtendExtraOpen(false)
-    // }
-    toggleMainContent()
-  }, [width])
 
   useEffect(() => {
     if (!open) return
@@ -101,13 +100,8 @@ const ProductDetailsUI = (props) => {
   }, [open])
 
   useEffect(() => {
-    if (width < 1000) return
-    if (extraOpen) {
-      document.getElementById('product_details').style.width = '1000px'
-    } else {
-      toggleMainContent()
-    }
-  }, [extraOpen])
+    toggleMainContent()
+  }, [extraOpen, isExpand, width])
 
   useEffect(() => {
     setExtraOpen(false)
@@ -142,6 +136,8 @@ const ProductDetailsUI = (props) => {
           showOption={showOption}
           handleShowOption={handleShowOption}
           extraOpen={extraOpen}
+          isExpand={isExpand}
+          setIsExpand={setIsExpand}
         />
       )}
       {extraOpen && (
