@@ -164,7 +164,7 @@ const DoordashConnectUI = (props) => {
             <Button
               outline
               color='primary'
-              onClick={() => handleGoToLink(t('PURCHASE_INTEGRATION_LINK', 'https://www.ordering.co/ordering-sales'))}
+              onClick={() => handleGoToLink(t('PURCHASE_INTEGRATION_LINK', 'https://www.ordering.co/en-us/contact-ordering'))}
             >
               {t('PURCHASE_INTEGRATION', 'Purchase Integration')}
             </Button>
