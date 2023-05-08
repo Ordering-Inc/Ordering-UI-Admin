@@ -11,7 +11,8 @@ import {
   DateTimeWrapper,
   NoData,
   WrapperPagination,
-  DataListTable
+  DataListTable,
+  EventTypeContainer
 } from './styles'
 
 export const DriversGroupLogsUI = (props) => {
@@ -82,6 +83,7 @@ export const DriversGroupLogsUI = (props) => {
               <thead>
                 <tr>
                   <th>{t('CONTROL_PANEL_USERS', 'Users')}</th>
+                  <th>{t('EVENTS_TYPE', 'Events type')}</th>
                   <th>{t('DETAILS', 'Details')}</th>
                   <th>{t('EXPORT_DATE', 'Date')}</th>
                   <th>{t('USER_AGENT', 'User agent')}</th>
@@ -128,6 +130,11 @@ export const DriversGroupLogsUI = (props) => {
                           <p>{log?.user?.name} {log?.user?.lastname}</p>
                           <p>{log?.user?.email}</p>
                         </UserInfoContainer>
+                      </td>
+                      <td>
+                        <EventTypeContainer>
+                          <p>{t(log?.event)}</p>
+                        </EventTypeContainer>
                       </td>
                       <td>
                         <DataListTable>
