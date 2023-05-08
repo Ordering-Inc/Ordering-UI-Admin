@@ -63,6 +63,7 @@ export const BusinessDetailsUI = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
+  const [isExpand, setIsExpand] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const spoonityConfig = businessState?.business?.configs?.find(config => config.key === 'spoonity_integration_api_key')
 
@@ -82,10 +83,14 @@ export const BusinessDetailsUI = (props) => {
       if (width <= 500) {
         document.getElementById('business_details_bar').style.width = '100vw'
       } else {
-        if (extraOpen && width >= 1000) {
-          document.getElementById('business_details_bar').style.width = '1000px'
+        if (isExpand) {
+          document.getElementById('business_details_bar').style.width = '100vw'
         } else {
-          document.getElementById('business_details_bar').style.width = '500px'
+          if (extraOpen && width >= 1000) {
+            document.getElementById('business_details_bar').style.width = '1000px'
+          } else {
+            document.getElementById('business_details_bar').style.width = '500px'
+          }
         }
       }
     }
@@ -110,25 +115,13 @@ export const BusinessDetailsUI = (props) => {
   }
 
   useEffect(() => {
-    if (width > 1000) {
-      setIsExtendExtraOpen(false)
-    }
-    toggleMainContent()
-  }, [width])
-
-  useEffect(() => {
     if (!open) return
     actionSidebar(true)
   }, [open])
 
   useEffect(() => {
-    if (width < 1000) return
-    if (extraOpen) {
-      document.getElementById('business_details_bar').style.width = '1000px'
-    } else {
-      toggleMainContent()
-    }
-  }, [extraOpen])
+    toggleMainContent()
+  }, [extraOpen, isExpand, width])
 
   useEffect(() => {
     setExtraOpen(false)
@@ -187,6 +180,8 @@ export const BusinessDetailsUI = (props) => {
           extraOpen={extraOpen}
           spoonityConfig={spoonityConfig}
           siteState={siteState}
+          isExpand={isExpand}
+          setIsExpand={setIsExpand}
         />
       )}
       {extraOpen && (

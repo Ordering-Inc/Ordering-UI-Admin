@@ -35,7 +35,8 @@ const CustomerDetailsUI = (props) => {
     userState,
     handleDeleteUser,
     handleParentSidebarMove,
-    handleChangeActiveUser
+    handleChangeActiveUser,
+    setSideBarWidth
   } = props
 
   const history = useHistory()
@@ -72,7 +73,8 @@ const CustomerDetailsUI = (props) => {
 
   const handleClickMenu = (key, isInitialRender) => {
     setShowOption(key)
-    handleParentSidebarMove(500)
+    setSideBarWidth(isExpand ? width : 1000)
+    handleParentSidebarMove(isExpand ? width / 2 : 500)
     setIsOpenMenu(true)
     if (!isInitialRender) {
       const enabled = query.get('enabled')
@@ -82,6 +84,7 @@ const CustomerDetailsUI = (props) => {
   }
 
   const handleCloseMenu = () => {
+    setSideBarWidth(isExpand ? width : 500)
     handleParentSidebarMove(0)
     setShowOption(null)
     setIsOpenMenu(false)
@@ -103,10 +106,6 @@ const CustomerDetailsUI = (props) => {
     setIsOpenMenu(false)
     setShowOption(null)
   }, [userState?.user?.id])
-
-  useEffect(() => {
-    if (isOpenMenu) setIsExpand(false)
-  }, [isOpenMenu])
 
   useEffect(() => {
     if (userState.loading) return
@@ -216,11 +215,10 @@ const CustomerDetailsUI = (props) => {
 
       {isOpenMenu && (
         <SideBar
-          sidebarId='customer_details_menu'
           open={isOpenMenu}
           onClose={() => handleCloseMenu()}
           isBorderShow
-          defaultSideBarWidth={500 + menuMoveDistance}
+          defaultSideBarWidth={isExpand ? width / 2 : 500 + menuMoveDistance}
           moveDistance={menuMoveDistance}
         >
           {showOption === 'user_details' && (

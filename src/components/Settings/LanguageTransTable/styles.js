@@ -77,9 +77,3 @@ export const TransBottomContainer = styled.div`
   row-gap: 10px;
   margin: 15px 0 38px 0;
 `
-
-export const AddNewTransButton = styled.div`
-  cursor: pointer;
-  font-size: 12px;
-  color: ${props => props.theme.colors.primary};
-`

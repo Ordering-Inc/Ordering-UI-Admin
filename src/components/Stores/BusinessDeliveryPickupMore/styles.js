@@ -8,10 +8,6 @@ export const Container = styled.div`
     font-weight: 700;
     margin-top: 5px;
   }
-
-  @media (min-width: 1000px) {
-    max-width: 500px;
-  }
 `
 export const TabsContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};

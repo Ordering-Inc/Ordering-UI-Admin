@@ -83,6 +83,7 @@ import settings from './config.json'
 import { BusinessAdd } from './pages/BusinessAdd'
 import { CustomProject } from './pages/CustomProject'
 import { OrderingWidgets } from './pages/OrderingWidgets'
+import { BusinessDevicesList } from './pages/BusinessDevicesList'
 
 export const App = () => {
   const history = useHistory()
@@ -309,6 +310,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/stores/brand' allowedLevels={[0]}>
                       <BrandManager />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/stores/devices' allowedLevels={[0]}>
+                      <BusinessDevicesList />
                     </ProtectedRoute>
                     <ProtectedRoute path='/stores/add' allowedLevels={[0, 2]}>
                       <BusinessAdd />

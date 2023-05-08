@@ -6,7 +6,7 @@ import {
 } from 'ordering-components-admin'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { Button, Checkbox, IconButton } from '../../../styles'
+import { Button, Checkbox, IconButton, LinkButton } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { AutoScroll, Confirm, Modal } from '../../Shared'
 import { BusinessPromotionGeneralForm } from '../BusinessPromotionGeneralForm'
@@ -21,7 +21,7 @@ import {
   PromotionTbody,
   ActionSelectorWrapper,
   PromotionTypeItem,
-  AddNewPromotionText,
+  AddNewPromotionButtonWrapper,
   PromotionEditFormContainer,
   EditHeader,
   CloseButtonWrapper,
@@ -132,9 +132,11 @@ const BusinessPromotionListUI = (props) => {
             </PromotionTbody>
           ))}
         </PromotionsTable>
-        <AddNewPromotionText onClick={(e) => handleOpenForm(e, {})}>
-          {t('ADD_NEW_PROMOTION', 'Add new promotion')}
-        </AddNewPromotionText>
+        <AddNewPromotionButtonWrapper>
+          <LinkButton onClick={(e) => handleOpenForm(e, {})}>
+            {t('ADD_NEW_PROMOTION', 'Add new promotion')}
+          </LinkButton>
+        </AddNewPromotionButtonWrapper>
       </BusinessPromotionsContainer>
       {isShowForm && (
         <>

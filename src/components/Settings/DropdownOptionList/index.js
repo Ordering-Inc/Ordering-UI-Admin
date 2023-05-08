@@ -7,7 +7,7 @@ import { useTheme } from 'styled-components'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 import { CitySelector, Confirm, Pagination, SideBar } from '../../Shared'
 import { CountrySelector } from '../CountrySelector'
 import { ZoneDropdownDetails } from '../ZoneDropdownDetails'
@@ -22,8 +22,7 @@ import {
   CityName,
   CountryName,
   CheckboxWrapper,
-  PagesBottomContainer,
-  AddNewPageButton
+  PagesBottomContainer
 } from './styles'
 
 export const DropdownOptionList = (props) => {
@@ -237,11 +236,11 @@ export const DropdownOptionList = (props) => {
 
         {!dropdownOptionsState.loading && (
           <PagesBottomContainer>
-            <AddNewPageButton
+            <LinkButton
               onClick={() => handleOpenZoneDropdownDetails(null)}
             >
               {t('ADD_NEW_ZONE_DROPDOWN ', 'Add new zone dropdown')}
-            </AddNewPageButton>
+            </LinkButton>
             {currentDropdownOptions?.length > 0 && (
               <Pagination
                 currentPage={currentPage}
