@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useApi } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Input } from '../../../styles'
 import { X as Close } from 'react-bootstrap-icons'
 import QRCode from 'react-qr-code'
 import ReactToPrint from 'react-to-print'
 import { Alert } from '../../Shared'
-import { checkSiteUrl, checkValidUrlFormat } from '../../../utils'
 import {
   Container,
   ButtonGroup,
@@ -26,6 +25,7 @@ export const BusinessQRCodeOption = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [ordering] = useApi()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -33,7 +33,6 @@ export const BusinessQRCodeOption = (props) => {
 
   const numberRef = useRef(null)
   const printerRef = useRef()
-  const siteRef = useRef()
 
   const closeAlert = () => {
     setAlertState({
@@ -44,12 +43,6 @@ export const BusinessQRCodeOption = (props) => {
 
   const generateQRCode = () => {
     const errors = []
-    if (!(siteState?.site?.domain && siteState?.site?.ssl_process_status === 'ended') && !siteRef?.current?.value) {
-      errors.push(t('VALIDATION_ERROR_REQUIRED', 'URL is required').replace('_attribute_', t('URL', 'Url')))
-    }
-    if (siteRef?.current?.value && !checkValidUrlFormat(siteRef?.current?.value)) {
-      errors.push(t('VALIDATION_ERROR_URL', 'The URL format is not valid').replace('_attribute_', 'URL'))
-    }
     if (item?.key !== 'pick_up' && !numberRef?.current?.value) {
       errors.push(
         item?.key === 'eat_in'
@@ -66,14 +59,13 @@ export const BusinessQRCodeOption = (props) => {
     }
     const storeUrl = siteState?.site?.domain && siteState?.site?.ssl_process_status === 'ended'
       ? `https://${siteState?.site?.domain}/store/${business?.slug}`
-      : `${checkSiteUrl(siteRef?.current?.value)}store/${business?.slug}`
+      : `https://${ordering.project}.tryordering.com/store/${business?.slug}`
     const tsNumber = item?.key !== 'pick_up'
       ? (item?.key === 'eat_in'
         ? `&table_numer=${numberRef?.current?.value}`
         : `&spot_numer=${numberRef?.current?.value}`)
       : ''
     const compltedUrl = `${storeUrl}?order_type=${item.value}${tsNumber}`
-    console.log(compltedUrl)
     setCode(compltedUrl)
   }
 
@@ -135,15 +127,6 @@ export const BusinessQRCodeOption = (props) => {
           <Input
             placeholder='0'
             ref={numberRef}
-          />
-        </FormControl>
-      )}
-      {!(siteState?.site?.domain && siteState?.site?.ssl_process_status === 'ended') && (
-        <FormControl isMargin>
-          <label>{t('ADD_YOUR_SITE_URL', 'Add your site url')}</label>
-          <Input
-            placeholder='https://yourdomain.com'
-            ref={siteRef}
           />
         </FormControl>
       )}
