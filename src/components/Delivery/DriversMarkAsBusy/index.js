@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Input, Checkbox } from '../../../styles'
@@ -31,6 +31,14 @@ export const DriversMarkAsBusy = (props) => {
       handleChangesState({ [e.target.name]: changeValue })
     }
   }
+
+  useEffect(() => {
+    if (typeof changesState?.autoassign_max_in_pending !== 'undefined' || typeof changesState?.autoassign_max_in_accepted_by_business !== 'undefined' ||
+      typeof changesState?.autoassign_max_in_ready_for_pickup !== 'undefined' || typeof changesState?.autoassign_max_in_accepted_by_driver !== 'undefined' ||
+      typeof changesState?.autoassign_max_in_driver_in_business !== 'undefined' || typeof changesState?.autoassign_max_in_pickup_completed !== 'undefined') {
+      setIsShowAdvancedOption(true)
+    }
+  }, [changesState])
 
   return (
     <Container>

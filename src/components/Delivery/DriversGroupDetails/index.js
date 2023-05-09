@@ -36,7 +36,8 @@ const DriversGroupDetailsUI = (props) => {
     handleNextTour,
     handleUpdateDriversGroup,
     setIsExtendExtraOpen,
-    actionDisabled
+    actionDisabled,
+    driversGroupId
   } = props
 
   const history = useHistory()
@@ -144,6 +145,10 @@ const DriversGroupDetailsUI = (props) => {
       handleTabClick(showMenu)
     }
   }, [driversGroupState.loading])
+
+  useEffect(() => {
+    setShowMenu('general')
+  }, [driversGroupId])
 
   return (
     <>
