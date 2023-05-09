@@ -26,11 +26,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderBill = function OrderBill(props) {
-  var _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$offers3$filter, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$fees3$filter, _order$offers4, _order$offers5, _order$offers5$filter, _order$summary12, _order$summary13, _order$offers6, _order$offers7, _order$offers7$filter, _order$summary14, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _order$summary17, _order$payment_events, _order$payment_events2, _order$payment_events3, _order$payment_events4, _order$delivery_optio, _order$delivery_optio2, _order$delivery_optio3, _order$delivery_optio4, _order$vehicle, _order$vehicle$type, _order$vehicle2, _order$vehicle3, _order$vehicle4, _order$vehicle5, _order$paymethod;
+  var _order$products, _order$products$, _order$summary$subtot, _order$summary2, _ref, _order$summary3, _order$offers, _order$summary$discou, _order$summary4, _order$offers2, _order$offers3, _order$offers3$filter, _order$summary5, _order$summary6, _order$summary7, _ref2, _order$summary8, _order$summary$subtot2, _order$summary9, _order$taxes3, _order$summary$tax2, _order$summary10, _order$fees, _order$summary$servic, _order$summary11, _order$taxes4, _order$taxes5, _order$fees2, _order$fees3, _order$fees3$filter, _order$offers4, _order$offers5, _order$offers5$filter, _order$summary12, _order$summary13, _order$offers6, _order$offers7, _order$offers7$filter, _order$summary14, _order$summary15, _configs$driver_tip_t, _configs$driver_tip_u, _order$summary$driver, _order$summary16, _order$summary17, _order$payment_events, _order$payment_events2, _order$payment_events3, _order$payment_events4, _order$delivery_optio, _order$delivery_optio2, _order$delivery_optio3, _order$delivery_optio4, _order$vehicle, _order$vehicle$type, _order$vehicle2, _order$vehicle3, _order$vehicle4, _order$vehicle5, _order$paymethod;
   var order = props.order,
     actionStatus = props.actionStatus,
     handleRefundPaymentsStripe = props.handleRefundPaymentsStripe,
     handleOrderRefund = props.handleOrderRefund;
+  var isGiftCardOrder = (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : (_order$products$ = _order$products[0]) === null || _order$products$ === void 0 ? void 0 : _order$products$.type) === 'gift_card';
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -201,7 +202,7 @@ var OrderBill = function OrderBill(props) {
     }) : "-".concat(parsePrice(event === null || event === void 0 ? void 0 : event.amount, {
       currency: order === null || order === void 0 ? void 0 : order.currency
     }))));
-  }))), /*#__PURE__*/_react.default.createElement(_RefundToWallet.RefundToWallet, {
+  }))), !isGiftCardOrder && /*#__PURE__*/_react.default.createElement(_RefundToWallet.RefundToWallet, {
     order: order,
     actionStatus: actionStatus,
     handleOrderRefund: handleOrderRefund
