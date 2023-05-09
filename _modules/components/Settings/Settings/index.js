@@ -228,7 +228,7 @@ var SettingsUI = function SettingsUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
     title: t('CARD_FIELDS', 'Card fields'),
-    description: t('CARD_FIELDS_DESC'),
+    description: t('CARD_FIELDS_DESC', 'Manage your card fields'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CreditCard, null),
     active: isOpenSettingDetails === 'card'
   })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
