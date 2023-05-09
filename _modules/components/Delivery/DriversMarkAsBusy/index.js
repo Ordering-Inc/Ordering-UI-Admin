@@ -42,6 +42,11 @@ var DriversMarkAsBusy = function DriversMarkAsBusy(props) {
       handleChangesState(_defineProperty({}, e.target.name, changeValue));
     }
   };
+  (0, _react.useEffect)(function () {
+    if (typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_pending) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_accepted_by_business) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_ready_for_pickup) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_accepted_by_driver) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_driver_in_business) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_pickup_completed) !== 'undefined') {
+      setIsShowAdvancedOption(true);
+    }
+  }, [changesState]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MARK_DRIVER_BUSY', 'Mark Drivers As Busy')), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAX_AMOUNT_ORDERS_PER_DRIVER', 'Maximum amount of orders per drivers')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "autoassign_max_orders",
     value: (_ref = (_changesState$autoass = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_orders) !== null && _changesState$autoass !== void 0 ? _changesState$autoass : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_max_orders) !== null && _ref !== void 0 ? _ref : '',

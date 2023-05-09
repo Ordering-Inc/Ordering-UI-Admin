@@ -132,7 +132,7 @@ var DoordashConnectUI = function DoordashConnectUI(props) {
       }
     }, t('VIEW_ARTICLE', 'View Article'))), /*#__PURE__*/_react.default.createElement(_styles2.Paragraph, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SUPPORT', 'Support')), /*#__PURE__*/_react.default.createElement("p", null, t('DOORDASH_CONNECT_SUPPORT', 'Are you having trouble connecting this, or are you looking to get it elsewhere besides the USA?')), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick() {
-        return handleGoToLink(t('DOORDASH_CONNECT_SUPPORT_LINK', 'https://www.ordering.co/ordering-support'));
+        return handleGoToLink(t('DOORDASH_CONNECT_SUPPORT_LINK', 'https://www.ordering.co/contact-ordering'));
       }
     }, t('CONTACT_US', 'Contact us')), "; ", /*#__PURE__*/_react.default.createElement("span", null, t('WE_ARE_HAPPY_TO_HELP', 'we are happy to help.')))), /*#__PURE__*/_react.default.createElement(_styles2.Paragraph, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PRICE_INSTALATION', 'Price and installation time.')), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", {
       className: "bold"

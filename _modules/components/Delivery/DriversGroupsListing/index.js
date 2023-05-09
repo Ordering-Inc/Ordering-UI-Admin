@@ -110,11 +110,13 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
   var handleOpenDetails = function handleOpenDetails(driverGroup) {
     setMoveDistance(0);
     setCurDriversGroup(driverGroup);
+    setCurDriversGroupId(driverGroup === null || driverGroup === void 0 ? void 0 : driverGroup.id);
     setOpenDetails(true);
     if (!driverGroup) {
       setTimeout(function () {
         setCurrentTourStep(5);
       }, 50);
+      history.replace("".concat(location.pathname));
     } else {
       history.replace("".concat(location.pathname, "?id=").concat(driverGroup.id));
     }
