@@ -18,6 +18,7 @@ export const OrderBill = (props) => {
     handleOrderRefund
   } = props
 
+  const isGiftCardOrder = order?.products?.[0]?.type === 'gift_card'
   const [, t] = useLanguage()
   const [{ parsePrice, parseNumber }] = useUtils()
   const [{ configs }] = useConfig()
@@ -262,11 +263,13 @@ export const OrderBill = (props) => {
           </tbody>
         </table>
       )}
-      <RefundToWallet
-        order={order}
-        actionStatus={actionStatus}
-        handleOrderRefund={handleOrderRefund}
-      />
+      {!isGiftCardOrder && (
+        <RefundToWallet
+          order={order}
+          actionStatus={actionStatus}
+          handleOrderRefund={handleOrderRefund}
+        />
+      )}
       {order?.payment_events?.filter(item => item.event === 'refund').length > 0 && (
         <table className='payments'>
           <thead>
