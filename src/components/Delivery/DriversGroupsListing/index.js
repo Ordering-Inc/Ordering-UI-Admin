@@ -56,12 +56,14 @@ const DriversGroupsListingUI = (props) => {
   const handleOpenDetails = (driverGroup) => {
     setMoveDistance(0)
     setCurDriversGroup(driverGroup)
+    setCurDriversGroupId(driverGroup?.id)
     setOpenDetails(true)
 
     if (!driverGroup) {
       setTimeout(() => {
         setCurrentTourStep(5)
       }, 50)
+      history.replace(`${location.pathname}`)
     } else {
       history.replace(`${location.pathname}?id=${driverGroup.id}`)
     }
