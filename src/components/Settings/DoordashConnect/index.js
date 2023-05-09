@@ -151,7 +151,7 @@ const DoordashConnectUI = (props) => {
               {t('DOORDASH_CONNECT_SUPPORT', 'Are you having trouble connecting this, or are you looking to get it elsewhere besides the USA?')}
             </p>
             <p>
-              <a onClick={() => handleGoToLink(t('DOORDASH_CONNECT_SUPPORT_LINK', 'https://www.ordering.co/ordering-support'))}>{t('CONTACT_US', 'Contact us')}</a>; <span>{t('WE_ARE_HAPPY_TO_HELP', 'we are happy to help.')}</span>
+              <a onClick={() => handleGoToLink(t('DOORDASH_CONNECT_SUPPORT_LINK', 'https://www.ordering.co/contact-ordering'))}>{t('CONTACT_US', 'Contact us')}</a>; <span>{t('WE_ARE_HAPPY_TO_HELP', 'we are happy to help.')}</span>
             </p>
           </Paragraph>
           <Paragraph>
