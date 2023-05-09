@@ -128,7 +128,7 @@ var PickerExpressUI = function PickerExpressUI(props) {
       active: true
     }, t('GENERAL', 'General')))), /*#__PURE__*/_react.default.createElement(_styles2.Paragraph, null, /*#__PURE__*/_react.default.createElement("h2", null, t('REQUIREMENTS', 'Requirements')), /*#__PURE__*/_react.default.createElement("p", null, t('PICKER_EXPRESS_CONNECT_REQUIREMENTS', 'For this integration to work you need: \n' + '1.- Picker Express account. \n' + '2.- The advanced logistics module must be active. \n' + '3.- Package of Ordering.'))), /*#__PURE__*/_react.default.createElement(_styles2.Paragraph, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ARTICLE', 'Article')), /*#__PURE__*/_react.default.createElement("p", null, t('PICKER_EXPRESS_CONNECT_ARTICLE', 'To connect with Picker Express, you’ll have to use plugins, put in your Picker Express credentials, connect your Picker Express account, and create a driver company inside this dashboard; follow the next article step by step and get this connected in less than 5 minutes.')), /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick() {
-        return handleGoToLink(t('PICKER_EXPRESS_CONNECT_ARTICLE_LINK', 'https://support.ordering.co/hc/en-us/articles/10673894748941'));
+        return handleGoToLink(t('PICKER_EXPRESS_CONNECT_ARTICLE_LINK', 'https://support.ordering.co/hc/en-us/articles/13007335725069'));
       }
     }, t('VIEW_ARTICLE', 'View Article'))), /*#__PURE__*/_react.default.createElement(_styles2.Paragraph, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SUPPORT', 'Support')), /*#__PURE__*/_react.default.createElement("p", null, t('PICKER_EXPRESS_CONNECT_SUPPORT', 'Are you having trouble connecting this?')), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("a", {
       onClick: function onClick() {
@@ -140,7 +140,7 @@ var PickerExpressUI = function PickerExpressUI(props) {
       outline: true,
       color: "primary",
       onClick: function onClick() {
-        return handleGoToLink(t('PURCHASE_INTEGRATION_LINK', 'https://www.ordering.co/ordering-sales'));
+        return handleGoToLink(t('PURCHASE_INTEGRATION_LINK', 'https://www.ordering.co/en-us/contact-ordering'));
       }
     }, t('PURCHASE_INTEGRATION', 'Purchase Integration')))));
   };

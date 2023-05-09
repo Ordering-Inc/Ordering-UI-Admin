@@ -44,7 +44,8 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     handleNextTour = props.handleNextTour,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     setIsExtendExtraOpen = props.setIsExtendExtraOpen,
-    actionDisabled = props.actionDisabled;
+    actionDisabled = props.actionDisabled,
+    driversGroupId = props.driversGroupId;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
@@ -194,6 +195,9 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       handleTabClick(showMenu);
     }
   }, [driversGroupState.loading]);
+  (0, _react.useEffect)(function () {
+    setShowMenu('general');
+  }, [driversGroupId]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, driversGroupState.driversGroup ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.enabled,
     onChange: function onChange(enabled) {
