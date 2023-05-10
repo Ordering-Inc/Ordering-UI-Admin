@@ -122,7 +122,11 @@ const RecoveryNotificationListUI = (props) => {
                       </EmailPreviewHeader>
                       <EmailPreviewContent>
                         <h2>{notification?.title}</h2>
-                        <p>{notification.body}</p>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: (notification.body)
+                          }}
+                        />
                       </EmailPreviewContent>
                     </EmailPreviewWrapper>
                   )}
