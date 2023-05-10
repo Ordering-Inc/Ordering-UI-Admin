@@ -1863,6 +1863,12 @@ Object.defineProperty(exports, "RangeCalendar", {
     return _Shared.RangeCalendar;
   }
 });
+Object.defineProperty(exports, "RecoveryActionAdd", {
+  enumerable: true,
+  get: function get() {
+    return _CartRecovery.RecoveryActionAdd;
+  }
+});
 Object.defineProperty(exports, "RecoveryActionListing", {
   enumerable: true,
   get: function get() {

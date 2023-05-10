@@ -28,7 +28,7 @@ var PreivewEditWrapper = _styledComponents.default.div(_templateObject5 || (_tem
 exports.PreivewEditWrapper = PreivewEditWrapper;
 var PreviewContent = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral([""])));
 exports.PreviewContent = PreviewContent;
-var EmailPreviewWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  max-width: 317px;\n  margin-left: auto;\n  margin-right: auto;\n  border: 1px solid ", ";\n\n  ", "\n"])), function (props) {
+var EmailPreviewWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  max-width: 400px;\n  margin-left: auto;\n  margin-right: auto;\n  border: 1px solid ", ";\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref2) {
   var isSkeleton = _ref2.isSkeleton;
@@ -43,7 +43,7 @@ var EmailPreviewHeader = _styledComponents.default.div(_templateObject9 || (_tem
 exports.EmailPreviewHeader = EmailPreviewHeader;
 var PointGroup = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 0px 4px;\n  height: 100%;\n  > div {\n    width: 7px;\n    height: 7px;\n    min-width: 7px;\n    border-radius: 50%;\n    background-color: #CED4DA;\n    margin: 0px 4px;\n  }\n"])));
 exports.PointGroup = PointGroup;
-var EmailPreviewContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  padding: 13px 30px;\n\n  > h2 {\n    margin-top: 0px;\n    margin-bottom: 10px;\n    text-align: center;\n    font-size: 10px;\n  }\n  p {\n    margin: 0px;\n    font-size: 7px;\n  }\n"])), function (props) {
+var EmailPreviewContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background-color: ", ";\n  padding: 13px 30px;\n\n  > h2 {\n    margin-top: 0px;\n    margin-bottom: 10px;\n    text-align: center;\n    font-size: 10px;\n  }\n\n  > div {\n    zoom: 0.4;\n    overflow: auto;\n  }\n"])), function (props) {
   return props.theme.colors.primaryContrast;
 });
 exports.EmailPreviewContent = EmailPreviewContent;

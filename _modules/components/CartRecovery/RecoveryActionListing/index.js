@@ -12,6 +12,7 @@ var _RecoveryActionHeader = require("../RecoveryActionHeader");
 var _RecoveryActionList = require("../RecoveryActionList");
 var _Shared = require("../../Shared");
 var _RecoveryActionDetail = require("../RecoveryActionDetail");
+var _RecoveryActionAdd = require("../RecoveryActionAdd");
 var _styles = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -42,15 +43,27 @@ var RecoveryActionListingUI = function RecoveryActionListingUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     selectedActionId = _useState6[0],
     setSelectedActionId = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isAddMode = _useState8[0],
+    setIsAddMode = _useState8[1];
   var handleCloseDetail = function handleCloseDetail() {
     setIsOpenDetail(false);
     setSelectedAction(null);
+    setIsAddMode(false);
     history.replace("".concat(location.pathname));
   };
   var handleOpenDetail = function handleOpenDetail(action, isInitialRender) {
     setSelectedAction(action);
     setSelectedActionId(action === null || action === void 0 ? void 0 : action.id);
     setIsOpenDetail(true);
+    if (!Object.keys(action || {}).length) {
+      setIsAddMode(true);
+      history.replace("".concat(location.pathname));
+      return;
+    } else {
+      setIsAddMode(false);
+    }
     if (action && !isInitialRender) {
       history.replace("".concat(location.pathname, "?id=").concat(action.id));
     }
@@ -65,10 +78,16 @@ var RecoveryActionListingUI = function RecoveryActionListingUI(props) {
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.RecoveryActionsContainer, null, /*#__PURE__*/_react.default.createElement(_RecoveryActionHeader.RecoveryActionHeader, _extends({}, props, {
     handleOpenDetail: handleOpenDetail
-  })), /*#__PURE__*/_react.default.createElement(_RecoveryActionList.RecoveryActionList, _extends({}, props, {
+  })), !isAddMode ? /*#__PURE__*/_react.default.createElement(_RecoveryActionList.RecoveryActionList, _extends({}, props, {
     handleOpenDetail: handleOpenDetail,
     selectedAction: selectedAction
-  }))), isOpenDetail && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  })) : /*#__PURE__*/_react.default.createElement(_RecoveryActionAdd.RecoveryActionAdd, _extends({}, props, {
+    action: selectedAction,
+    actionId: selectedActionId,
+    onClose: function onClose() {
+      return handleCloseDetail();
+    }
+  }))), isOpenDetail && !isAddMode && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     open: isOpenDetail,
     onClose: function onClose() {
       return handleCloseDetail();
