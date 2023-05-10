@@ -4,9 +4,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UreadMessageAlert = exports.StripeLink = exports.OrderDetailsHeaderContainer = exports.ButtonGroup = void 0;
+exports.UreadMessageAlert = exports.StripeLink = exports.PrinterSelectContainer = exports.PrinterSelect = exports.OrderDetailsHeaderContainer = exports.ButtonGroup = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -33,3 +33,11 @@ var StripeLink = _styledComponents.default.a(_templateObject10 || (_templateObje
   return props.theme.colors.primary;
 });
 exports.StripeLink = StripeLink;
+var PrinterSelectContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-right: 8px;\n"])));
+exports.PrinterSelectContainer = PrinterSelectContainer;
+var PrinterSelect = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: absolute;\n  border-radius: 8px;\n  display: flex;\n  flex-direction: column;\n  z-index: 100;\n  border: 1px solid ", ";\n\n  button {\n    padding: 10px 20px;\n    color: ", ";\n    &:hover {\n      background-color: #f5f5f5;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.textGray;
+}, function (props) {
+  return props.theme.colors.textGray;
+});
+exports.PrinterSelect = PrinterSelect;

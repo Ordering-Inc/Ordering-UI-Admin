@@ -34,7 +34,8 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
     openMessage = props.openMessage,
     printRef = props.printRef,
     isServiceOrder = props.isServiceOrder,
-    extraOpen = props.extraOpen;
+    extraOpen = props.extraOpen,
+    printTicketRef = props.printTicketRef;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -47,6 +48,11 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
     setIsExpand = _useState2[1];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    showPrinterOptions = _useState4[0],
+    setShowPrinterOptions = _useState4[1];
+  var dropdownReference = (0, _react.useRef)();
   var stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect'];
   var walletName = {
     cash: {
@@ -68,9 +74,27 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
       return !prev;
     });
   };
+  var closeSelect = function closeSelect(e) {
+    if (showPrinterOptions) {
+      var _dropdownReference$cu;
+      var outsideDropdown = !((_dropdownReference$cu = dropdownReference.current) !== null && _dropdownReference$cu !== void 0 && _dropdownReference$cu.contains(e.target));
+      if (outsideDropdown) {
+        setShowPrinterOptions(false);
+      }
+    }
+  };
   (0, _react.useEffect)(function () {
     if (extraOpen) setIsExpand(false);
   }, [extraOpen]);
+  (0, _react.useEffect)(function () {
+    if (!showPrinterOptions) {
+      return;
+    }
+    document.addEventListener('click', closeSelect);
+    return function () {
+      return document.removeEventListener('click', closeSelect);
+    };
+  }, [showPrinterOptions]);
   return /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsHeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, isServiceOrder ? t('APPOINTMENT_NO', 'Appointment No.') : t('INVOICE_ORDER_NO', 'Order No'), " ", order === null || order === void 0 ? void 0 : order.id), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     active: openMessage === null || openMessage === void 0 ? void 0 : openMessage.chat,
@@ -78,18 +102,43 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
       return handleShowOption('chat');
     },
     isDisabled: isTourOpen && currentTourStep === 1
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.UreadMessageAlert, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Dot, null))), /*#__PURE__*/_react.default.createElement(_reactToPrint.default, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.UreadMessageAlert, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Dot, null))), /*#__PURE__*/_react.default.createElement(_styles2.PrinterSelectContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "black",
+    isDisabled: isTourOpen && currentTourStep === 1,
+    onClick: function onClick() {
+      return setShowPrinterOptions(!showPrinterOptions);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Printer, null)), showPrinterOptions && /*#__PURE__*/_react.default.createElement(_styles2.PrinterSelect, {
+    ref: dropdownReference
+  }, /*#__PURE__*/_react.default.createElement(_reactToPrint.default, {
     trigger: function trigger() {
       return /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
         color: "black",
-        isDisabled: isTourOpen && currentTourStep === 1
-      }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Printer, null));
+        isDisabled: isTourOpen && currentTourStep === 1,
+        onClick: function onClick() {
+          return setShowPrinterOptions(false);
+        }
+      }, t('NORMAL', 'Normal'));
     },
     content: function content() {
       return printRef.current;
     },
     removeAfterPrint: true
-  }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }), /*#__PURE__*/_react.default.createElement(_reactToPrint.default, {
+    trigger: function trigger() {
+      return /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+        color: "black",
+        isDisabled: isTourOpen && currentTourStep === 1,
+        onClick: function onClick() {
+          return setShowPrinterOptions(false);
+        }
+      }, t('TICKET', 'Ticket'));
+    },
+    content: function content() {
+      return printTicketRef.current;
+    },
+    removeAfterPrint: true
+  }))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     active: openMessage === null || openMessage === void 0 ? void 0 : openMessage.history,
     onClick: function onClick() {
