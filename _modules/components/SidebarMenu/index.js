@@ -183,6 +183,11 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     title: t('BRANDS', 'Brands'),
     pageName: 'brand',
     url: '/stores/brand'
+  }, {
+    id: 4,
+    title: t('DEVICES', 'Devices'),
+    pageName: 'devices',
+    url: '/stores/devices'
   }];
   var usersSubMenus = [{
     id: 1,
