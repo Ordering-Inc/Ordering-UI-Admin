@@ -14,6 +14,7 @@ import { XLg } from 'react-bootstrap-icons'
 import { NotFoundSource, Modal } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { OrderToPrint } from '../OrderToPrint'
+import { OrderToPrintTicket } from '../OrderToPrintTicket'
 
 import {
   Container,
@@ -64,6 +65,7 @@ const OrderDetailsUI = (props) => {
   const [{ parseDate }] = useUtils()
   const [{ user }] = useSession()
   const printRef = useRef()
+  const printTicketRef = useRef()
 
   const [unreadAlert, setUnreadAlert] = useState({ business: false, driver: false, customer: false })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -335,12 +337,17 @@ const OrderDetailsUI = (props) => {
             currentTourStep={currentTourStep}
             setIsTourOpen={setIsTourOpen}
             printRef={printRef}
+            printTicketRef={printTicketRef}
           />
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
               <p>
-                {parseDate(order?.delivery_datetime, { utc: false })}
+                {
+                  order?.delivery_datetime_utc
+                    ? parseDate(order?.delivery_datetime_utc)
+                    : parseDate(order?.delivery_datetime, { utc: false })
+                }
               </p>
               <p>{order?.eta_time} {t('MIN', 'min')}</p>
             </div>
@@ -539,6 +546,13 @@ const OrderDetailsUI = (props) => {
           getLogisticTag={getLogisticTag}
           getPriorityTag={getPriorityTag}
         />
+      )}
+      {order && Object.keys(order).length > 0 && !loading && (
+          <OrderToPrintTicket
+            ref={printTicketRef}
+            order={order}
+            getOrderStatus={getOrderStatus}
+          />
       )}
     </Container>
   )

@@ -76,3 +76,24 @@ export const StripeLink = styled.a`
     color: ${props => props.theme.colors.primary};
   }
 `
+export const PrinterSelectContainer = styled.div`
+  position: relative;
+  margin-right: 8px;
+`
+
+export const PrinterSelect = styled.div`
+  position: absolute;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  border: 1px solid ${props => props.theme.colors.textGray};
+
+  button {
+    padding: 10px 20px;
+    color: ${props => props.theme.colors.textGray};
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+`
