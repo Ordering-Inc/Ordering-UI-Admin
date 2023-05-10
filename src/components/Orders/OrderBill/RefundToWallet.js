@@ -118,6 +118,12 @@ export const RefundToWallet = (props) => {
     setRefundOptions(_refundOptions)
   }, [JSON.stringify(order?.payment_events)], order?.id)
 
+  useEffect(() => {
+    if (!actionStatus?.loading) {
+      setOpenModal(false)
+    }
+  }, [actionStatus?.loading])
+
   return (
     <>
       <RefundWalletButtonWrapper>
@@ -168,6 +174,11 @@ export const RefundToWallet = (props) => {
                 <RefundAmountWrapper>
                   <Input
                     name='amount'
+                    onKeyPress={(e) => {
+                      if (!/^[0-9.]$/.test(e.key)) {
+                        e.preventDefault()
+                      }
+                    }}
                     ref={register({
                       required: t('VALIDATION_ERROR_FILLED', 'The _attribute_ field is required.').replace('_attribute_', t('AMOUNT', 'Amount'))
                     })}
