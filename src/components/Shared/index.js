@@ -29,6 +29,7 @@ import { SpinnerLoader } from './SpinnerLoader'
 import SpreadSheetEditor from './SpreadSheetEditor'
 import { ProgressRing } from './ProgressRing'
 import { ColorPicker } from './ColorPicker'
+import { HtmlEditor } from './HtmlEditor'
 
 export {
   AutoScroll,
@@ -62,5 +63,6 @@ export {
   SpinnerLoader,
   SpreadSheetEditor,
   ProgressRing,
-  ColorPicker
+  ColorPicker,
+  HtmlEditor
 }
