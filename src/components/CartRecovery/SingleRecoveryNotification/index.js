@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, SingleRecoveryNotification as SingleRecoveryNotificationController } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { Select } from '../../../styles/Select'
-import { Alert, Confirm } from '../../Shared'
+import { Alert, Confirm, HtmlEditor } from '../../Shared'
 
 import {
   Container,
@@ -86,19 +86,6 @@ const SingleRecoveryNotificationUI = (props) => {
             onChange={handleChangeInput}
           />
         </InputWrapper>
-        <InputWrapper>
-          <label>{t('MESSAGE', 'Message')}</label>
-          <TextArea
-            name='body'
-            placeholder={t('WRITE_MESSAGE', 'Write a message')}
-            defaultValue={
-              formState?.changes?.body
-                ? formState?.changes?.body
-                : notification?.body ?? ''
-            }
-            onChange={handleChangeInput}
-          />
-        </InputWrapper>
         {isAdd && (
           <InputWrapper>
             <label>{t('CHANNEL', 'Channel')}</label>
@@ -114,6 +101,30 @@ const SingleRecoveryNotificationUI = (props) => {
             />
           </InputWrapper>
         )}
+        <InputWrapper>
+          <label>{t('MESSAGE', 'Message')}</label>
+          {notification?.channel === 'email' ? (
+            <HtmlEditor
+              body={
+                formState?.changes?.body
+                  ? formState?.changes?.body
+                  : notification?.body ?? ''
+              }
+              handleChangeBody={val => handleChangeSelect('body', val)}
+            />
+          ) : (
+            <TextArea
+              name='body'
+              placeholder={t('WRITE_MESSAGE', 'Write a message')}
+              defaultValue={
+                formState?.changes?.body
+                  ? formState?.changes?.body
+                  : notification?.body ?? ''
+              }
+              onChange={handleChangeInput}
+            />
+          )}
+        </InputWrapper>
       </Container>
       <ButtonGroup>
         {isAdd ? (

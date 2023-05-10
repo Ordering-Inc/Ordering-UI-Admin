@@ -5,6 +5,7 @@ import { RecoveryActionHeader } from '../RecoveryActionHeader'
 import { RecoveryActionList } from '../RecoveryActionList'
 import { SideBar } from '../../Shared'
 import { RecoveryActionDetail } from '../RecoveryActionDetail'
+import { RecoveryActionAdd } from '../RecoveryActionAdd'
 
 import {
   RecoveryActionsContainer
@@ -16,10 +17,12 @@ const RecoveryActionListingUI = (props) => {
   const [isOpenDetail, setIsOpenDetail] = useState(false)
   const [selectedAction, setSelectedAction] = useState(null)
   const [selectedActionId, setSelectedActionId] = useState(null)
+  const [isAddMode, setIsAddMode] = useState(false)
 
   const handleCloseDetail = () => {
     setIsOpenDetail(false)
     setSelectedAction(null)
+    setIsAddMode(false)
     history.replace(`${location.pathname}`)
   }
 
@@ -27,6 +30,13 @@ const RecoveryActionListingUI = (props) => {
     setSelectedAction(action)
     setSelectedActionId(action?.id)
     setIsOpenDetail(true)
+    if (!Object.keys(action || {}).length) {
+      setIsAddMode(true)
+      history.replace(`${location.pathname}`)
+      return
+    } else {
+      setIsAddMode(false)
+    }
     if (action && !isInitialRender) {
       history.replace(`${location.pathname}?id=${action.id}`)
     }
@@ -48,13 +58,22 @@ const RecoveryActionListingUI = (props) => {
           {...props}
           handleOpenDetail={handleOpenDetail}
         />
-        <RecoveryActionList
-          {...props}
-          handleOpenDetail={handleOpenDetail}
-          selectedAction={selectedAction}
-        />
+        {!isAddMode ? (
+          <RecoveryActionList
+            {...props}
+            handleOpenDetail={handleOpenDetail}
+            selectedAction={selectedAction}
+          />
+        ) : (
+          <RecoveryActionAdd
+            {...props}
+            action={selectedAction}
+            actionId={selectedActionId}
+            onClose={() => handleCloseDetail()}
+          />
+        )}
       </RecoveryActionsContainer>
-      {isOpenDetail && (
+      {isOpenDetail && !isAddMode && (
         <SideBar
           open={isOpenDetail}
           onClose={() => handleCloseDetail()}
