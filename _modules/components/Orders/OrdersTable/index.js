@@ -97,6 +97,9 @@ var OrdersTable = function OrdersTable(props) {
     value: 'cartGroupId',
     content: t('GROUP_ORDER', 'Group Order')
   }, {
+    value: 'driverGroupId',
+    content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
+  }, {
     value: 'dateTime',
     content: t('DATE_TIME', 'Date and time')
   }, {
@@ -497,7 +500,7 @@ var OrdersTable = function OrdersTable(props) {
       alt: "six dots"
     }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column9 = allowColumns[column]) === null || _allowColumns$column9 === void 0 ? void 0 : _allowColumns$column9.title)));
   })))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$externa, _allowColumns$cartGro, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
+    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$externa, _allowColumns$cartGro, _allowColumns$driverG, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
@@ -523,6 +526,14 @@ var OrdersTable = function OrdersTable(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$cartGro = allowColumns.cartGroupId) === null || _allowColumns$cartGro === void 0 ? void 0 : _allowColumns$cartGro.visable) && /*#__PURE__*/_react.default.createElement("td", {
+      className: "statusInfo"
+    }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
+      className: "info"
+    }, /*#__PURE__*/_react.default.createElement("p", {
+      className: "bold"
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100
+    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$driverG = allowColumns.driverGroupId) === null || _allowColumns$driverG === void 0 ? void 0 : _allowColumns$driverG.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "statusInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -695,6 +706,14 @@ var OrdersTable = function OrdersTable(props) {
         }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, (order === null || order === void 0 ? void 0 : order.cart_group_id) && /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
         }, t('No', 'No'), ". ", order === null || order === void 0 ? void 0 : order.cart_group_id)));
+      }
+      if (column === 'driverGroupId') {
+        return /*#__PURE__*/_react.default.createElement("td", {
+          className: "orderGroupId",
+          key: "cart_group_id".concat(i, "-").concat(index)
+        }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, (order === null || order === void 0 ? void 0 : order.driver_group_id) && /*#__PURE__*/_react.default.createElement("p", {
+          className: "bold"
+        }, t('No', 'No'), ". ", order === null || order === void 0 ? void 0 : order.driver_group_id)));
       }
       if (column === 'business') {
         var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city;
