@@ -10,6 +10,7 @@ import { Alert, Confirm, SearchBar, SideBar } from '../../Shared'
 import { WizardDelivery } from '../WizardDelivery'
 import { DriversGroupsList } from '../DriversGroupsList'
 import { DriversGroupDetails } from '../DriversGroupDetails'
+import { DriversGroupAddForm } from '../DriversGroupAddForm'
 
 import {
   DriversGroupsListingContainer,
@@ -49,6 +50,7 @@ const DriversGroupsListingUI = (props) => {
   const [curDriversGroup, setCurDriversGroup] = useState(null)
   const [curDriversGroupId, setCurDriversGroupId] = useState(null)
   const [isExtendExtraOpen, setIsExtendExtraOpen] = useState(false)
+  const [isAddMode, setIsAddMode] = useState(false)
 
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(4)
@@ -60,6 +62,7 @@ const DriversGroupsListingUI = (props) => {
     setOpenDetails(true)
 
     if (!driverGroup) {
+      setIsAddMode(true)
       setTimeout(() => {
         setCurrentTourStep(5)
       }, 50)
@@ -193,20 +196,39 @@ const DriversGroupsListingUI = (props) => {
             />
           </HeaderRightContainer>
         </HeaderContainer>
-        <DriversGroupsList
-          curDriversGroup={curDriversGroup}
-          driversGroupsState={driversGroupsState}
-          searchValue={searchValue}
-          handleOpenDetails={handleOpenDetails}
-          handleUpdateDriversGroup={handleUpdateDriversGroup}
-          handleDeleteDriversGroup={handleDeleteDriversGroup}
-          selectedGroupList={selectedGroupList}
-          handleSelectGroup={handleSelectGroup}
-          handleAllSelectGroup={handleAllSelectGroup}
-          actionDisabled={actionDisabled}
-        />
+        {!isAddMode ? (
+          <DriversGroupsList
+            curDriversGroup={curDriversGroup}
+            driversGroupsState={driversGroupsState}
+            searchValue={searchValue}
+            handleOpenDetails={handleOpenDetails}
+            handleUpdateDriversGroup={handleUpdateDriversGroup}
+            handleDeleteDriversGroup={handleDeleteDriversGroup}
+            selectedGroupList={selectedGroupList}
+            handleSelectGroup={handleSelectGroup}
+            handleAllSelectGroup={handleAllSelectGroup}
+            actionDisabled={actionDisabled}
+          />
+        ) : (
+          <DriversGroupAddForm
+            driversGroupsState={driversGroupsState}
+            setDriversGroupsState={setDriversGroupsState}
+            curDriversGroup={curDriversGroup}
+            driversGroupId={curDriversGroupId}
+            driversManagers={driversManagersList?.managers}
+            businesses={businessesList?.businesses}
+            paymethods={paymethodsList?.paymethods}
+            drivers={driversList?.drivers}
+            companies={driversCompanyList?.companies}
+            onClose={() => {
+              setOpenDetails(false)
+              setIsAddMode(false)
+            }}
+            actionDisabled={actionDisabled}
+          />
+        )}
       </DriversGroupsListingContainer>
-      {openDetails && (
+      {openDetails && !isAddMode && (
         <SideBar
           sidebarId='driver_group_details'
           defaultSideBarWidth={!isExtendExtraOpen ? 540 + moveDistance : 1040}

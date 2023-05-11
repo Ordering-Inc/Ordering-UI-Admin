@@ -37,7 +37,7 @@ const DriversGroupOrdersUI = (props) => {
       <FieldWrapper>
         <label>{t('MAX_NUMBER_ORDERS', 'Maxiumum number of orders')}</label>
         <Input
-          value={changesState?.orders_group_max_orders ?? curDriversGroup?.orders_group_max_orders}
+          value={changesState?.orders_group_max_orders ?? curDriversGroup?.orders_group_max_orders ?? 0}
           onChange={e => onChangeNumberInput('orders_group_max_orders', e.target.value)}
         />
       </FieldWrapper>
@@ -89,7 +89,7 @@ const DriversGroupOrdersUI = (props) => {
       <FieldWrapper>
         <UseMapsApiCheckboxContainer>
           <Checkbox
-            checked={changesState?.orders_group_use_maps_api ?? curDriversGroup?.orders_group_use_maps_api}
+            checked={changesState?.orders_group_use_maps_api ?? curDriversGroup?.orders_group_use_maps_api ?? false}
             onChange={e => handleChangesState({ orders_group_use_maps_api: e.target.checked })}
           />
           <MapsApiDescriptionContainer>
