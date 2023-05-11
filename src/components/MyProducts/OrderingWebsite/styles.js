@@ -504,3 +504,62 @@ export const CustomeDomainDesc = styled.p`
   font-weight: 400;
   font-size: 12px;
 `
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const CustomDomainInfo = styled.div`
+  position: relative;
+
+  > button {
+    height: 21px;
+    svg {
+      width: 13px;
+      height: 13px;
+      color: ${props => props.theme.colors.headingColor};
+    }
+  }
+  &:hover > div {
+    visibility: visible;
+    opacity: 1;
+  }
+`
+
+export const CustomDomainInfoContent = styled.div`
+  position: absolute;
+  top: 100%;
+  z-index: 999;
+  background: ${props => props.theme.colors.backgroundInfo};
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 18px;
+  min-width: 150px;
+  transition: all 0.3s linear;
+  visibility: hidden;
+  opacity: 0;
+  right: -100px;
+  ${props => props.theme.rtl && css`
+    left: 0px;
+    right: initial;
+  `}
+
+  a {
+    color: ${props => props.theme.colors.primary};
+    padding-left: 5px;
+  }
+
+  @media (min-width: 576px) {
+    min-width: 350px;
+    padding: 10px 16px;
+    left: 0px;
+    ${props => props.theme.rtl && css`
+      right: 0px;
+      left: initial;
+    `}
+  }
+`
