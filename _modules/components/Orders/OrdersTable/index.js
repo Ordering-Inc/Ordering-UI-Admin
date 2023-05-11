@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersTable = function OrdersTable(props) {
-  var _orderList$orders3;
+  var _configState$configs, _configState$configs$, _orderList$orders3;
   var isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
     pagination = props.pagination,
@@ -86,6 +86,7 @@ var OrdersTable = function OrdersTable(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
+  var isEnabledRowInColor = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.row_in_color_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1';
   var optionsDefault = [{
     value: 'status',
     content: t('STATUS', 'Status')
@@ -149,9 +150,9 @@ var OrdersTable = function OrdersTable(props) {
     return finalTaget;
   };
   var getStatusClassName = function getStatusClassName(minutes) {
-    var _configState$configs, _configState$configs$;
+    var _configState$configs2, _configState$configs3;
     if (isNaN(Number(minutes))) return 'in_time';
-    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_delayed_time) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
+    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_delayed_time) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value;
     return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed';
   };
   (0, _react.useEffect)(function () {
@@ -634,7 +635,7 @@ var OrdersTable = function OrdersTable(props) {
         return handleClickOrder(order, e);
       },
       "data-tour": i === 0 ? 'tour_start' : '',
-      "data-status": getStatusClassName(getDelayMinutes(order))
+      "data-status": isEnabledRowInColor && getStatusClassName(getDelayMinutes(order))
     }, /*#__PURE__*/_react.default.createElement("tr", null, Object.keys(allowColumns).filter(function (col) {
       var _allowColumns$col7;
       return (_allowColumns$col7 = allowColumns[col]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.visable;

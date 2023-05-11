@@ -13,7 +13,6 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactQrCode = _interopRequireDefault(require("react-qr-code"));
 var _reactToPrint = _interopRequireDefault(require("react-to-print"));
 var _Shared = require("../../Shared");
-var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -25,7 +24,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
-  var _siteState$site6, _siteState$site7;
   var open = props.open,
     item = props.item,
     business = props.business,
@@ -34,6 +32,9 @@ var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useApi = (0, _orderingComponentsAdmin.useApi)(),
+    _useApi2 = _slicedToArray(_useApi, 1),
+    ordering = _useApi2[0];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useState = (0, _react.useState)(false),
@@ -53,7 +54,6 @@ var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
     setCode = _useState6[1];
   var numberRef = (0, _react.useRef)(null);
   var printerRef = (0, _react.useRef)();
-  var siteRef = (0, _react.useRef)();
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -61,14 +61,8 @@ var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
     });
   };
   var generateQRCode = function generateQRCode() {
-    var _siteState$site, _siteState$site2, _siteRef$current, _siteRef$current2, _siteRef$current3, _numberRef$current, _siteState$site3, _siteState$site4, _siteState$site5, _siteRef$current4, _numberRef$current2, _numberRef$current3;
+    var _numberRef$current, _siteState$site, _siteState$site2, _siteState$site3, _numberRef$current2, _numberRef$current3;
     var errors = [];
-    if (!(siteState !== null && siteState !== void 0 && (_siteState$site = siteState.site) !== null && _siteState$site !== void 0 && _siteState$site.domain && (siteState === null || siteState === void 0 ? void 0 : (_siteState$site2 = siteState.site) === null || _siteState$site2 === void 0 ? void 0 : _siteState$site2.ssl_process_status) === 'ended') && !(siteRef !== null && siteRef !== void 0 && (_siteRef$current = siteRef.current) !== null && _siteRef$current !== void 0 && _siteRef$current.value)) {
-      errors.push(t('VALIDATION_ERROR_REQUIRED', 'URL is required').replace('_attribute_', t('URL', 'Url')));
-    }
-    if (siteRef !== null && siteRef !== void 0 && (_siteRef$current2 = siteRef.current) !== null && _siteRef$current2 !== void 0 && _siteRef$current2.value && !(0, _utils.checkValidUrlFormat)(siteRef === null || siteRef === void 0 ? void 0 : (_siteRef$current3 = siteRef.current) === null || _siteRef$current3 === void 0 ? void 0 : _siteRef$current3.value)) {
-      errors.push(t('VALIDATION_ERROR_URL', 'The URL format is not valid').replace('_attribute_', 'URL'));
-    }
     if ((item === null || item === void 0 ? void 0 : item.key) !== 'pick_up' && !(numberRef !== null && numberRef !== void 0 && (_numberRef$current = numberRef.current) !== null && _numberRef$current !== void 0 && _numberRef$current.value)) {
       errors.push((item === null || item === void 0 ? void 0 : item.key) === 'eat_in' ? t('VALIDATION_ERROR_REQUIRED', 'Table number is required').replace('_attribute_', t('TABLE_NUMBER', 'Table number')) : t('VALIDATION_ERROR_REQUIRED', 'Spot number is required').replace('_attribute_', t('SPOT_NUMBER', 'Spot number')));
     }
@@ -79,10 +73,9 @@ var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
       });
       return;
     }
-    var storeUrl = siteState !== null && siteState !== void 0 && (_siteState$site3 = siteState.site) !== null && _siteState$site3 !== void 0 && _siteState$site3.domain && (siteState === null || siteState === void 0 ? void 0 : (_siteState$site4 = siteState.site) === null || _siteState$site4 === void 0 ? void 0 : _siteState$site4.ssl_process_status) === 'ended' ? "https://".concat(siteState === null || siteState === void 0 ? void 0 : (_siteState$site5 = siteState.site) === null || _siteState$site5 === void 0 ? void 0 : _siteState$site5.domain, "/store/").concat(business === null || business === void 0 ? void 0 : business.slug) : "".concat((0, _utils.checkSiteUrl)(siteRef === null || siteRef === void 0 ? void 0 : (_siteRef$current4 = siteRef.current) === null || _siteRef$current4 === void 0 ? void 0 : _siteRef$current4.value), "store/").concat(business === null || business === void 0 ? void 0 : business.slug);
+    var storeUrl = siteState !== null && siteState !== void 0 && (_siteState$site = siteState.site) !== null && _siteState$site !== void 0 && _siteState$site.domain && (siteState === null || siteState === void 0 ? void 0 : (_siteState$site2 = siteState.site) === null || _siteState$site2 === void 0 ? void 0 : _siteState$site2.ssl_process_status) === 'ended' ? "https://".concat(siteState === null || siteState === void 0 ? void 0 : (_siteState$site3 = siteState.site) === null || _siteState$site3 === void 0 ? void 0 : _siteState$site3.domain, "/store/").concat(business === null || business === void 0 ? void 0 : business.slug) : "https://".concat(ordering.project, ".tryordering.com/store/").concat(business === null || business === void 0 ? void 0 : business.slug);
     var tsNumber = (item === null || item === void 0 ? void 0 : item.key) !== 'pick_up' ? (item === null || item === void 0 ? void 0 : item.key) === 'eat_in' ? "&table_numer=".concat(numberRef === null || numberRef === void 0 ? void 0 : (_numberRef$current2 = numberRef.current) === null || _numberRef$current2 === void 0 ? void 0 : _numberRef$current2.value) : "&spot_numer=".concat(numberRef === null || numberRef === void 0 ? void 0 : (_numberRef$current3 = numberRef.current) === null || _numberRef$current3 === void 0 ? void 0 : _numberRef$current3.value) : '';
     var compltedUrl = "".concat(storeUrl, "?order_type=").concat(item.value).concat(tsNumber);
-    console.log(compltedUrl);
     setCode(compltedUrl);
   };
   var actionSidebar = function actionSidebar(value) {
@@ -131,11 +124,6 @@ var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
   })), (item === null || item === void 0 ? void 0 : item.key) === 'pick_up' ? /*#__PURE__*/_react.default.createElement("p", null, t('GENERATE_QR_CODE', 'Generate QR Code')) : /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, (item === null || item === void 0 ? void 0 : item.key) === 'eat_in' ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: "0",
     ref: numberRef
-  })), !(siteState !== null && siteState !== void 0 && (_siteState$site6 = siteState.site) !== null && _siteState$site6 !== void 0 && _siteState$site6.domain && (siteState === null || siteState === void 0 ? void 0 : (_siteState$site7 = siteState.site) === null || _siteState$site7 === void 0 ? void 0 : _siteState$site7.ssl_process_status) === 'ended') && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
-    isMargin: true
-  }, /*#__PURE__*/_react.default.createElement("label", null, t('ADD_YOUR_SITE_URL', 'Add your site url')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    placeholder: "https://yourdomain.com",
-    ref: siteRef
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     outline: true,

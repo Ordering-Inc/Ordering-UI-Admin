@@ -84,7 +84,7 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
     var value = evt.target.value;
     setCurPreorderTime(_objectSpread(_objectSpread({}, curPreorderTime), {}, _defineProperty({}, type, value)));
     var preorderTime = 0;
-    if (type === 'hour') preorderTime = parseInt(value) * 60 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute);else preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 60 + parseInt(value);
+    if (type === 'hour') preorderTime = parseInt(value) * 3600 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute) * 60;else preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 3600 + parseInt(value) * 60;
     handleChangeItem({
       times: [preorderTime],
       launch_type: 'times'
@@ -93,7 +93,7 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
   var handleChangeDay = function handleChangeDay(value) {
     setCurDayTime(value);
     handleChangeItem({
-      times: [value * 24 * 60],
+      times: [value * 24 * 3600],
       launch_type: 'times'
     });
   };
@@ -115,15 +115,15 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
     var _recoveryActionState$, _recoveryActionState$2, _recoveryActionState$3, _recoveryActionState$4, _recoveryActionState$5, _recoveryActionState$6;
     setTimeList();
     setCurPreorderTime({
-      hour: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$ = recoveryActionState.action) !== null && _recoveryActionState$ !== void 0 && _recoveryActionState$.times ? parseInt((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$2 = recoveryActionState.action) === null || _recoveryActionState$2 === void 0 ? void 0 : _recoveryActionState$2.times[0]) / 60) : '0',
-      minute: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$3 = recoveryActionState.action) !== null && _recoveryActionState$3 !== void 0 && _recoveryActionState$3.times ? (recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$4 = recoveryActionState.action) === null || _recoveryActionState$4 === void 0 ? void 0 : _recoveryActionState$4.times[0]) % 60 : '0'
+      hour: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$ = recoveryActionState.action) !== null && _recoveryActionState$ !== void 0 && _recoveryActionState$.times ? parseInt((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$2 = recoveryActionState.action) === null || _recoveryActionState$2 === void 0 ? void 0 : _recoveryActionState$2.times[0]) / 3600) : '0',
+      minute: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$3 = recoveryActionState.action) !== null && _recoveryActionState$3 !== void 0 && _recoveryActionState$3.times ? (recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$4 = recoveryActionState.action) === null || _recoveryActionState$4 === void 0 ? void 0 : _recoveryActionState$4.times[0]) % 3600 / 60 : '0'
     });
     if (!(recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$5 = recoveryActionState.action) !== null && _recoveryActionState$5 !== void 0 && _recoveryActionState$5.times)) return;
-    if ((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$6 = recoveryActionState.action) === null || _recoveryActionState$6 === void 0 ? void 0 : _recoveryActionState$6.times[0]) / 60 < 24) {
+    if ((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$6 = recoveryActionState.action) === null || _recoveryActionState$6 === void 0 ? void 0 : _recoveryActionState$6.times[0]) / 3600 < 24) {
       setIsTime(true);
     } else {
       setIsTime(false);
-      setCurDayTime(parseInt((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : recoveryActionState.action.times[0]) / 60 / 24));
+      setCurDayTime(parseInt((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : recoveryActionState.action.times[0]) / 3600 / 24));
     }
   }, [recoveryActionState === null || recoveryActionState === void 0 ? void 0 : recoveryActionState.action]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
