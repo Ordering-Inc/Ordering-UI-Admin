@@ -86,6 +86,10 @@ export const OrdersTable = (props) => {
       content: t('GROUP_ORDER', 'Group Order')
     },
     {
+      value: 'driverGroupId',
+      content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
+    },
+    {
       value: 'dateTime',
       content: t('DATE_TIME', 'Date and time')
     },
@@ -499,6 +503,15 @@ export const OrdersTable = (props) => {
                       </StatusInfo>
                     </td>
                   )}
+                  {allowColumns?.driverGroupId?.visable && (
+                    <td className='statusInfo'>
+                      <StatusInfo>
+                        <div className='info'>
+                          <p className='bold'><Skeleton width={100} /></p>
+                        </div>
+                      </StatusInfo>
+                    </td>
+                  )}
                   {allowColumns?.status?.visable && !isSelectedOrders && (
                     <td className='statusInfo'>
                       <StatusInfo>
@@ -675,6 +688,17 @@ export const OrdersTable = (props) => {
                             <StatusInfo>
                               {order?.cart_group_id && (
                                 <p className='bold'>{t('No', 'No')}. {order?.cart_group_id}</p>
+                              )}
+                            </StatusInfo>
+                          </td>
+                        )
+                      }
+                      if (column === 'driverGroupId') {
+                        return (
+                          <td className='orderGroupId' key={`cart_group_id${i}-${index}`}>
+                            <StatusInfo>
+                              {order?.driver_group_id && (
+                                <p className='bold'>{t('No', 'No')}. {order?.driver_group_id}</p>
                               )}
                             </StatusInfo>
                           </td>
