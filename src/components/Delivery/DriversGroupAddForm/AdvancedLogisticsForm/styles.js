@@ -42,3 +42,31 @@ export const SubSectionContainer = styled.div`
     }
   }
 `
+export const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 0 29px 0;
+
+  p {
+    font-size: 14px;
+    margin: 0px;
+    ${props => props.theme?.rtl ? css`
+      padding-right: 10px;
+    ` : css`
+      padding-left: 10px;
+    `}
+  }
+`
+export const HeaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  h2 {
+    ${props => props.theme?.rtl ? css`
+      padding-left: 16px;
+    ` : css`
+    padding-right: 16px;
+    `}
+  }
+`
