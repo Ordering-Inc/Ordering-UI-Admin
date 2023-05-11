@@ -19,7 +19,23 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
     3: t('EAT_IN', 'Eat In'),
     4: t('CURBSIDE', 'Curbside'),
     5: t('DRIVER_THRU', 'Driver thru'),
-  };
+  }
+
+  const getProductPrice = (product) => {
+    let subOptionPrice = 0
+    if (Array.isArray(product.options)) {
+      if (product.options?.length > 0) {
+        for (const option of product.options) {
+          for (const suboption of option.suboptions) {
+            subOptionPrice += suboption.quantity * suboption.price
+          }
+        }
+      }
+    }
+
+    const price = product.quantity * (product.price + subOptionPrice)
+    return parseFloat(price.toFixed(2))
+  }
 
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
     if (name !== 'No') {
@@ -133,19 +149,19 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
         <h1>{t('ORDER_DETAILS', 'Order Details')}</h1>
         <br/>
         <PrintProductsContainer>
-          {order?.products.length &&
-            order?.products.map((product, i) =>
+          {order?.products?.length &&
+            order?.products?.map((product, i) =>
               <PrintProducts key={i}>
                 <Products>
                   <InsideInfo>
                   {`${product?.quantity}x ${product?.name}`}
                   </InsideInfo>
                   <InsideInfo2>
-                  {parsePrice(product.total ?? getProductPrice(product))}
+                  {parsePrice(product?.total ?? getProductPrice(product))}
                   </InsideInfo2>
                 </Products>
                 <ProdcutCommentsContainer>
-                    {getOptions(product.options, product.comment)?.map(option => (
+                    {getOptions(product?.options, product?.comment)?.map(option => (
                   <ProductComments>
                     {option}
                   </ProductComments>
@@ -161,7 +177,7 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
             </InsideInfo>
             <InsideInfo2>
               {parsePrice(
-              order.tax_type === 1
+              order?.tax_type === 1
                 ? order?.summary?.subtotal + order?.summary?.tax ?? 0
                 : order?.summary?.subtotal ?? 0,
               )}
