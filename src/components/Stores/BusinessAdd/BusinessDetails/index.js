@@ -42,7 +42,7 @@ export const BusinessDetails = (props) => {
       <h2>{t('BUSINESS_DETAILS', 'Business details')}</h2>
       <ContentWrapper>
         <FormControl>
-          <label>{t('BUSINESS_NAME', 'Business Name')}<sup>*</sup></label>
+          <label>{t('EXPORT_BUSINESS_NAME', 'Business Name')}<sup>*</sup></label>
           <Input
             name='name'
             placeholder={t('NAME', 'Name')}
