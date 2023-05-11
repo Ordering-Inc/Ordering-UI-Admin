@@ -75,14 +75,14 @@ export const RecoveryGeneral = (props) => {
       [type]: value
     })
     let preorderTime = 0
-    if (type === 'hour') preorderTime = parseInt(value) * 60 + parseInt(curPreorderTime?.minute)
-    else preorderTime = parseInt(curPreorderTime?.hour) * 60 + parseInt(value)
+    if (type === 'hour') preorderTime = parseInt(value) * 3600 + parseInt(curPreorderTime?.minute) * 60
+    else preorderTime = parseInt(curPreorderTime?.hour) * 3600 + parseInt(value) * 60
     handleChangeItem({ times: [preorderTime], launch_type: 'times' })
   }
 
   const handleChangeDay = (value) => {
     setCurDayTime(value)
-    handleChangeItem({ times: [value * 24 * 60], launch_type: 'times' })
+    handleChangeItem({ times: [value * 24 * 3600], launch_type: 'times' })
   }
 
   const handleSubmitBtnClick = () => {
@@ -102,16 +102,16 @@ export const RecoveryGeneral = (props) => {
   useEffect(() => {
     setTimeList()
     setCurPreorderTime({
-      hour: recoveryActionState?.action?.times ? (parseInt(recoveryActionState?.action?.times[0] / 60)) : '0',
-      minute: recoveryActionState?.action?.times ? (recoveryActionState?.action?.times[0] % 60) : '0'
+      hour: recoveryActionState?.action?.times ? (parseInt(recoveryActionState?.action?.times[0] / 3600)) : '0',
+      minute: recoveryActionState?.action?.times ? (recoveryActionState?.action?.times[0] % 3600 / 60) : '0'
     })
     if (!recoveryActionState?.action?.times) return
 
-    if (recoveryActionState?.action?.times[0] / 60 < 24) {
+    if (recoveryActionState?.action?.times[0] / 3600 < 24) {
       setIsTime(true)
     } else {
       setIsTime(false)
-      setCurDayTime(parseInt(recoveryActionState?.action.times[0] / 60 / 24))
+      setCurDayTime(parseInt(recoveryActionState?.action.times[0] / 3600 / 24))
     }
   }, [recoveryActionState?.action])
 
