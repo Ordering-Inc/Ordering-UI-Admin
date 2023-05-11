@@ -1,9 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
-  height: calc(100% - 160px);
-  margin-bottom: 35px;
-`
+export const Container = styled.div``
 
 export const SearchBarWrapper = styled.div`
   margin-bottom: 10px;
@@ -23,7 +20,6 @@ export const ButtonGroup = styled.div`
 `
 
 export const GroupsContainer = styled.div`
-  height: calc(100% - 130px);
   overflow: auto;
   max-height: 460px;
 `
