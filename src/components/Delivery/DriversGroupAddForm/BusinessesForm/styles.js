@@ -1,17 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
-  height: calc(100% - 160px);
-  margin-bottom: 35px;
-
-  > button {
-    position: sticky;
-    top: 100%;
-    height: 42px;
-    margin-top: 20px;
-  }
-`
+export const Container = styled.div``
 
 export const SearchBarWrapper = styled.div`
   margin-bottom: 10px;
@@ -31,9 +21,8 @@ export const ButtonGroup = styled.div`
 `
 
 export const BusinessesContainer = styled.div`
-  height: calc(100% - 130px);
-  overflow: auto;
   max-height: 610px;
+  overflow: auto;
 `
 
 export const BusinessWrapper = styled.div`
@@ -96,18 +85,3 @@ export const Image = (props) => {
     </ImageStyled>
   )
 }
-
-export const DriverInfoContainer = styled.div`
-  p {
-    margin: 0px;
-    &:first-child {
-      font-weight: 500;
-      font-size: 13px;
-    }
-
-    &:last-child {
-      font-size: 12px;
-      color: ${props => props.theme.colors.lightGray};
-    }
-  }
-`
