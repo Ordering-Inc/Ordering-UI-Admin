@@ -73,11 +73,9 @@ const DriversGroupAddFormUI = (props) => {
     handleAddDriversGroup()
   }
 
-  console.log(changesState)
-
   return (
     <FormProvider {...formMethods}>
-      <Container onSubmit={formMethods.handleSubmit(onSubmit)}>
+      <Container onSubmit={formMethods.handleSubmit(onSubmit)} data-tour='tour_fill_group'>
         <SectionContainer>
           <GeneralForm {...props} />
         </SectionContainer>

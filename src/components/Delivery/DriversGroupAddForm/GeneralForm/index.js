@@ -41,7 +41,7 @@ export const GeneralForm = (props) => {
   ]
 
   return (
-    <Container data-tour='tour_fill_group'>
+    <Container>
       <h2>{t('GENERAL', 'General')}</h2>
       <InputWrapper>
         <label>{t('NAME', 'Name')}</label>
