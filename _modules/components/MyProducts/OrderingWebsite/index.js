@@ -201,7 +201,13 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
         return !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && setSelectedSetting(setting.key);
       }
     }, setting.name);
-  })))), selectedSetting === 'basic' && /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_SETTINGS', 'Website settings')), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })))), selectedSetting === 'basic' && /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_SETTINGS', 'Website settings')), /*#__PURE__*/_react.default.createElement(_styles2.CustomDomainInfo, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircleFill, null)), /*#__PURE__*/_react.default.createElement(_styles2.CustomDomainInfoContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('ADD_NEW_STORE_INFO', 'When creating a custom domain, add your domain or subdomain without http protocol or slashes. Example: www.customerwebsite.ordering.co Select Automatic if you don\'t use cloudflare or select Proxy if you use cloudflare If you have problems with the set-up, please contact our')), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.ordering.co/contact-ordering",
+    rel: "noopener noreferrer",
+    target: "_blank"
+  }, t('CUSTOMER_SUPPORT_TEAM', 'customer support team'))))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20,
     width: 150
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, t('NAME', 'Name'))), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -247,21 +253,21 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     style: {
       width: '100%'
     }
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (site === null || site === void 0 ? void 0 : site.domain) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TemporalDomail, {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (site === null || site === void 0 ? void 0 : site.domain) && (site === null || site === void 0 ? void 0 : site.ssl_status) !== 'error' && /*#__PURE__*/_react.default.createElement(_styles2.TemporalDomail, {
     isDisabled: (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'pending',
     marginBottom: (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'ended'
   }, t('VISIT', 'Visit'), ": ", /*#__PURE__*/_react.default.createElement("a", {
     href: "https://".concat(site === null || site === void 0 ? void 0 : site.domain),
     rel: "noopener noreferrer",
     target: "_blank"
-  }, "https://", site === null || site === void 0 ? void 0 : site.domain)), (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'pending' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('ERROR_SITE_CERTIFICATE_PENDING_PROCESS', 'Creating a custom domain is currently being processed.'))), (site === null || site === void 0 ? void 0 : site.ssl_process_status) !== 'pending' && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, "https://", site === null || site === void 0 ? void 0 : site.domain)), (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'ended' && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     outline: true,
     borderRadius: "8px",
     onClick: function onClick() {
       return setIsCustomDomain(true);
     }
-  }, site !== null && site !== void 0 && site.domain ? t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain') : t('CHANGE_CUSTOM_DOMAIN', 'Change custom domain')))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_THEME', 'Website Theme')), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, site !== null && site !== void 0 && site.domain ? t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain') : t('CHANGE_CUSTOM_DOMAIN', 'Change custom domain')), (site === null || site === void 0 ? void 0 : site.domain) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (site === null || site === void 0 ? void 0 : site.ssl_status) === 'issued' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_ISSUED', 'Leave it as it is, the domain shows so it\'s not required any other comment')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'pre-issued' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_PRE_ISSUED', 'Process almost finish, please wait')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'error' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_ERROR', 'Custom domain can\'t be created, please try again with valid data')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'pending_validation' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_PENDING_VALIDATION', 'A custom domain is being created, please wait')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'revoked' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_REVOKED', 'Warning: Custom domain is revoked')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'cancelled' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_CANCELLED', 'Custom domain is cancelled')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'expired' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_EXPIRED', 'Custom domain is expired'))))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_THEME', 'Website Theme')), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20,
     width: 150
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.RadioItem, {
