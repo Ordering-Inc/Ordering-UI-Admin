@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, 
-  companysList as CompanysController
+  DriversList as CompanysController
  } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Select } from '../../../styles/Select'
