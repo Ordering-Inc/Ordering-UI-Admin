@@ -10,6 +10,7 @@ import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Alert, Confirm, SearchBar, SideBar } from '../../Shared'
 import { DriversCompaniesList } from '../DriversCompaniesList'
 import { DriversCompanyDetailsForm } from '../DriversCompanyDetailsForm'
+import { DriversCompanyAddForm } from '../DriversCompanyAddForm'
 
 import {
   DriversCompaniesListContainer,
@@ -42,10 +43,15 @@ const DriversCompaniesListingUI = (props) => {
   const [curDriversCompanyId, setCurDriversCompanyId] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isAddMode, setIsAddMode] = useState(false)
 
   const handleOpenDetails = (driverCompany, isInitialRender) => {
     setCurDriversCompany(driverCompany)
     setCurDriversCompanyId(driverCompany?.id)
+    if (!driverCompany) {
+      setIsAddMode(true)
+      return
+    }
     setOpenDetails(true)
     if (!isInitialRender) {
       history.replace(`${location.pathname}?id=${driverCompany?.id}`)
@@ -75,6 +81,7 @@ const DriversCompaniesListingUI = (props) => {
     setCurDriversCompany(null)
     setCurDriversCompanyId(null)
     setOpenDetails(false)
+    setIsAddMode(false)
     history.replace(`${location.pathname}`)
   }
 
@@ -124,18 +131,28 @@ const DriversCompaniesListingUI = (props) => {
           />
         </HeaderRightContainer>
       </HeaderContainer>
-      <DriversCompaniesList
-        driversCompaniesState={driversCompaniesState}
-        searchValue={searchValue}
-        handleOpenDetails={handleOpenDetails}
-        curDriversCompany={curDriversCompany}
-        handleUpdateDriversCompany={handleUpdateDriversCompany}
-        handleDeleteDriversCompany={handleDeleteDriversCompany}
-        handleSelectCompany={handleSelectCompany}
-        selectedCompanyList={selectedCompanyList}
-        handleAllSelectCompany={handleAllSelectCompany}
-      />
-      {openDetails && (
+      {!isAddMode ? (
+        <DriversCompaniesList
+          driversCompaniesState={driversCompaniesState}
+          searchValue={searchValue}
+          handleOpenDetails={handleOpenDetails}
+          curDriversCompany={curDriversCompany}
+          handleUpdateDriversCompany={handleUpdateDriversCompany}
+          handleDeleteDriversCompany={handleDeleteDriversCompany}
+          handleSelectCompany={handleSelectCompany}
+          selectedCompanyList={selectedCompanyList}
+          handleAllSelectCompany={handleAllSelectCompany}
+        />
+      ) : (
+        <DriversCompanyAddForm
+          driversCompaniesState={driversCompaniesState}
+          setDriversCompaniesState={setDriversCompaniesState}
+          driversCompany={curDriversCompany}
+          driversCompanyId={curDriversCompanyId}
+          onClose={() => handleCloseDetails()}
+        />
+      )}
+      {openDetails && !isAddMode && (
         <SideBar
           sidebarId='city-details'
           defaultSideBarWidth={550}
