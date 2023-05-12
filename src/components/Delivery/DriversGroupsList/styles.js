@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const DriversGroupsContainer = styled.div`
-  margin-top: 20px;
+  padding: 20px;
 `
 
 export const TableWrapper = styled.div`

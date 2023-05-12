@@ -146,6 +146,7 @@ export const DeliveriesLocation = (props) => {
   }, [interActionMapOrder])
 
   const handleMapChange = (data) => {
+    if(!data?.zoom) return
     setMapZoom(data?.zoom)
   }
 

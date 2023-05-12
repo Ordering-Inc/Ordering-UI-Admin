@@ -48,7 +48,7 @@ export const PreivewEditWrapper = styled.div`
 export const PreviewContent = styled.div``
 
 export const EmailPreviewWrapper = styled.div`
-  max-width: 317px;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
   border: 1px solid ${props => props.theme.colors.borderColor};
@@ -91,9 +91,10 @@ export const EmailPreviewContent = styled.div`
     text-align: center;
     font-size: 10px;
   }
-  p {
-    margin: 0px;
-    font-size: 7px;
+
+  > div {
+    zoom: 0.4;
+    overflow: auto;
   }
 `
 
