@@ -17,13 +17,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var FacebookProfile = function FacebookProfile(_ref) {
-  var businessSlug = _ref.businessSlug;
+  var storeUrl = _ref.storeUrl;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_styles2.FacebookProfileContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_FACEBOOK_PROFILE_DESC', 'Lorem ipsum dolor sit amet consectetur. Vitae odio aliquam adipiscing vitae. Nulla sed integer congue gravida lobortis tristique condimentum fusce tincidunt.')), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 1"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_FACEBOOK_PROFILE_STEP1_DESC', 'Copy this link below. It’s your unique Ordering link for facebook.')), /*#__PURE__*/_react.default.createElement(_styles2.CopyInputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    defaultValue: "https://yourbusinessname.com/store/storename",
+    defaultValue: storeUrl || 'https://yourbusinessname.com/store/storename',
     disabled: true
   }))), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 2"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_FACEBOOK_PROFILE_STEP2_DESC', 'In your business profile, click on the 3 points button on the right side of the screen and look for the option: Edit Action Button.')), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.facebookProfileStep2,

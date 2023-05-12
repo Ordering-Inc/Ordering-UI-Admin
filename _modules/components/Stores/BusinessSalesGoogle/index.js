@@ -23,7 +23,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessSalesGoogle = function BusinessSalesGoogle(props) {
   var onClose = props.onClose,
     socialItem = props.socialItem,
-    businessSlug = props.businessSlug;
+    storeUrl = props.storeUrl;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -75,7 +75,7 @@ var BusinessSalesGoogle = function BusinessSalesGoogle(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 3"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_GOOGLE_STEP3_DESC', 'Scroll down and find Order ahead links and Menu link fields. Paste the link below.')), /*#__PURE__*/_react.default.createElement(_styles2.CopyInputWrapper, {
     isBottom: true
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    defaultValue: "https://yourbusinessname.com/store/storename",
+    defaultValue: storeUrl || 'https://yourbusinessname.com/store/storename',
     disabled: true
   })), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.googleStep3,

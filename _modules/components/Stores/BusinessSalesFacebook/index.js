@@ -23,7 +23,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import 
 var BusinessSalesFacebook = function BusinessSalesFacebook(props) {
   var onClose = props.onClose,
     socialItem = props.socialItem,
-    businessSlug = props.businessSlug;
+    storeUrl = props.storeUrl;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   // const [, t] = useLanguage()
@@ -71,7 +71,7 @@ var BusinessSalesFacebook = function BusinessSalesFacebook(props) {
     onClick: onClose,
     color: "black"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null))), selectedTab === 'profile' && /*#__PURE__*/_react.default.createElement(_FacebookProfile.FacebookProfile, {
-    businessSlug: businessSlug
+    storeUrl: storeUrl
   }), selectedTab === 'post' && /*#__PURE__*/_react.default.createElement(_FacebookPost.FacebookPost, null));
 };
 exports.BusinessSalesFacebook = BusinessSalesFacebook;

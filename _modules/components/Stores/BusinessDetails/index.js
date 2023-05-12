@@ -289,7 +289,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     setIsExtendExtraOpen: setIsExtendExtraOpen
   }), selectedItem === 'sales_channels' && /*#__PURE__*/_react.default.createElement(_BusinessSalesChannel.BusinessSalesChannel, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
-    setIsExtendExtraOpen: setIsExtendExtraOpen
+    setIsExtendExtraOpen: setIsExtendExtraOpen,
+    siteState: siteState
   }), selectedItem === 'layout' && /*#__PURE__*/_react.default.createElement(_BusinessFrontLayout.BusinessFrontLayout, {
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business,
     handleSuccessUpdate: handleUpdateBusinessState,

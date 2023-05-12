@@ -14,6 +14,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _DriversCompaniesList = require("../DriversCompaniesList");
 var _DriversCompanyDetailsForm = require("../DriversCompanyDetailsForm");
+var _DriversCompanyAddForm = require("../DriversCompanyAddForm");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -76,9 +77,17 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     confirm = _useState10[0],
     setConfirm = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isAddMode = _useState12[0],
+    setIsAddMode = _useState12[1];
   var handleOpenDetails = function handleOpenDetails(driverCompany, isInitialRender) {
     setCurDriversCompany(driverCompany);
     setCurDriversCompanyId(driverCompany === null || driverCompany === void 0 ? void 0 : driverCompany.id);
+    if (!driverCompany) {
+      setIsAddMode(true);
+      return;
+    }
     setOpenDetails(true);
     if (!isInitialRender) {
       history.replace("".concat(location.pathname, "?id=").concat(driverCompany === null || driverCompany === void 0 ? void 0 : driverCompany.id));
@@ -107,6 +116,7 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     setCurDriversCompany(null);
     setCurDriversCompanyId(null);
     setOpenDetails(false);
+    setIsAddMode(false);
     history.replace("".concat(location.pathname));
   };
   (0, _react.useEffect)(function () {
@@ -141,7 +151,7 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     },
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
-  }))), /*#__PURE__*/_react.default.createElement(_DriversCompaniesList.DriversCompaniesList, {
+  }))), !isAddMode ? /*#__PURE__*/_react.default.createElement(_DriversCompaniesList.DriversCompaniesList, {
     driversCompaniesState: driversCompaniesState,
     searchValue: searchValue,
     handleOpenDetails: handleOpenDetails,
@@ -151,7 +161,15 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     handleSelectCompany: handleSelectCompany,
     selectedCompanyList: selectedCompanyList,
     handleAllSelectCompany: handleAllSelectCompany
-  }), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }) : /*#__PURE__*/_react.default.createElement(_DriversCompanyAddForm.DriversCompanyAddForm, {
+    driversCompaniesState: driversCompaniesState,
+    setDriversCompaniesState: setDriversCompaniesState,
+    driversCompany: curDriversCompany,
+    driversCompanyId: curDriversCompanyId,
+    onClose: function onClose() {
+      return handleCloseDetails();
+    }
+  }), openDetails && !isAddMode && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "city-details",
     defaultSideBarWidth: 550,
     open: openDetails,
