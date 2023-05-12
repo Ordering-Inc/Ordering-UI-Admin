@@ -8,7 +8,7 @@ import {
   CopyInputWrapper
 } from './styles'
 
-export const GeneralInstagram = ({ businessSlug }) => {
+export const GeneralInstagram = ({ storeUrl }) => {
   const [, t] = useLanguage()
   const theme = useTheme()
 
@@ -37,7 +37,7 @@ export const GeneralInstagram = ({ businessSlug }) => {
         <p>{t('BUSINESS_INSTAGRAM_GENERAL_STEP5_DESC', 'Just add this link to the website field:')}</p>
         <CopyInputWrapper isBottom>
           <Input
-            defaultValue='https://yourbusinessname.com/store/storename'
+            defaultValue={storeUrl || 'https://yourbusinessname.com/store/storename'}
             disabled
           />
         </CopyInputWrapper>

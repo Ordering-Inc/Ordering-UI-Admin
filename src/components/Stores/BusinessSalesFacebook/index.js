@@ -4,7 +4,7 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 import {
   Container,
   Header,
-  LeftHeader,
+  LeftHeader
   // Tabs,
   // Tab
 } from './styles'
@@ -14,7 +14,7 @@ import { FacebookProfile } from './FacebookProfile'
 import { FacebookPost } from './FacebookPost'
 
 export const BusinessSalesFacebook = (props) => {
-  const { onClose, socialItem, businessSlug } = props
+  const { onClose, socialItem, storeUrl } = props
 
   const { width } = useWindowSize()
   // const [, t] = useLanguage()
@@ -74,7 +74,7 @@ export const BusinessSalesFacebook = (props) => {
           </Tab>
         ))}
       </Tabs> */}
-      {selectedTab === 'profile' && <FacebookProfile businessSlug={businessSlug} />}
+      {selectedTab === 'profile' && <FacebookProfile storeUrl={storeUrl} />}
       {selectedTab === 'post' && <FacebookPost />}
     </Container>
   )
