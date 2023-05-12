@@ -313,6 +313,7 @@ export const BusinessDetailsUI = (props) => {
             <BusinessSalesChannel
               business={businessState?.business}
               setIsExtendExtraOpen={setIsExtendExtraOpen}
+              siteState={siteState}
             />
           )}
           {selectedItem === 'layout' && (

@@ -9,7 +9,7 @@ import {
   ImageWrapper
 } from './styles'
 
-export const AdvancedInstagram = (props) => {
+export const AdvancedInstagram = ({ storeUrl }) => {
   const [, t] = useLanguage()
   const theme = useTheme()
 
@@ -40,7 +40,7 @@ export const AdvancedInstagram = (props) => {
         />
         <CopyInputWrapper isBottom>
           <Input
-            defaultValue='https://yourbusinessname.com/store/storename'
+            defaultValue={storeUrl || 'https://yourbusinessname.com/store/storename'}
             disabled
           />
         </CopyInputWrapper>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import React, { useMemo, useState } from 'react'
+import { useLanguage, useApi } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { useTheme } from 'styled-components'
 import { Button } from '../../../styles'
@@ -17,9 +17,10 @@ import {
 } from './styles'
 
 export const BusinessSalesChannel = (props) => {
-  const { setIsExtendExtraOpen, business } = props
+  const { setIsExtendExtraOpen, business, siteState } = props
 
   const [, t] = useLanguage()
+  const [ordering] = useApi()
   const theme = useTheme()
   const { width } = useWindowSize()
 
@@ -51,6 +52,10 @@ export const BusinessSalesChannel = (props) => {
     setIsExtendExtraOpen(false)
     setSelectedItem(null)
   }
+
+  const storeUrl = useMemo(() => (siteState?.site?.domain && siteState?.site?.ssl_process_status === 'ended' && siteState?.ssl_status !== 'error'
+    ? `https://${siteState?.site?.domain}/store/${business?.slug}`
+    : `https://${ordering.project}.tryordering.com/store/${business?.slug}`), [siteState, business])
 
   return (
     <Container>
@@ -94,27 +99,28 @@ export const BusinessSalesChannel = (props) => {
           <>
             {selectedItem?.key === 'facebook' && (
               <BusinessSalesFacebook
-                businessSlug={business.slug}
                 socialItem={selectedItem}
+                storeUrl={storeUrl}
                 onClose={handleCloseDetail}
               />
             )}
             {selectedItem?.key === 'tiktok' && (
               <BusinessSalesTiktok
+                storeUrl={storeUrl}
                 socialItem={selectedItem}
                 onClose={handleCloseDetail}
               />
             )}
             {selectedItem?.key === 'instagram' && (
               <BusinessSalesInstagram
-                businessSlug={business.slug}
+                storeUrl={storeUrl}
                 socialItem={selectedItem}
                 onClose={handleCloseDetail}
               />
             )}
             {selectedItem?.key === 'google_my_business' && (
               <BusinessSalesGoogle
-                businessSlug={business.slug}
+                storeUrl={storeUrl}
                 socialItem={selectedItem}
                 onClose={handleCloseDetail}
               />
