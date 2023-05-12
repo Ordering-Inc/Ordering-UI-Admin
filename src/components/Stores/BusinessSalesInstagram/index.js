@@ -14,7 +14,7 @@ import {
 } from './styles'
 
 export const BusinessSalesInstagram = (props) => {
-  const { onClose, socialItem, businessSlug } = props
+  const { onClose, socialItem, storeUrl } = props
 
   const { width } = useWindowSize()
   const [, t] = useLanguage()
@@ -74,8 +74,8 @@ export const BusinessSalesInstagram = (props) => {
           </Tab>
         ))}
       </Tabs>
-      {selectedTab === 'general' && <GeneralInstagram businessSlug={businessSlug} />}
-      {selectedTab === 'advanced' && <AdvancedInstagram businessSlug={businessSlug} />}
+      {selectedTab === 'general' && <GeneralInstagram storeUrl={storeUrl} />}
+      {selectedTab === 'advanced' && <AdvancedInstagram />}
     </Container>
   )
 }

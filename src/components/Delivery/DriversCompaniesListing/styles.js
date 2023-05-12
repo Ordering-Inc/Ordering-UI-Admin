@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 
 export const DriversCompaniesListContainer = styled.div`
   flex: 1;
-  padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
   max-height: 100vh;
@@ -12,6 +11,7 @@ export const DriversCompaniesListContainer = styled.div`
 export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 20px 20px 0 20px;
 
   @media (min-width: 768px) {
     flex-direction: row;

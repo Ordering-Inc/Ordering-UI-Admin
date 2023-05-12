@@ -131,16 +131,15 @@ const CustomersListingUI = (props) => {
           <VerifiedStatusFilterContainer>
             <Button
               color={(orderFilterValue === '' || orderFilterValue === null) ? 'primary' : 'secundaryDark'}
-              onClick={() => handleChangeOrderFilterValue('')}
+              onClick={() => handleChangeOrderFilterValue(null)}
             >
               {t('ALL', 'All')}
-              {(orderFilterValue === '' || orderFilterValue === null) && <CloseIcon />}
             </Button>
             {orderList.map((item, i) => (
               <Button
                 key={i}
                 color={orderFilterValue === item.value ? 'primary' : 'secundaryDark'}
-                onClick={() => handleChangeOrderFilterValue(item.value)}
+                onClick={() => handleChangeOrderFilterValue(prev => prev === item.value ? null : item.value)}
               >
                 {item.name}
                 {orderFilterValue === item.value && <CloseIcon />}

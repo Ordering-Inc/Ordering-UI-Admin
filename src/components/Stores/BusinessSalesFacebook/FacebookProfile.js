@@ -8,7 +8,7 @@ import {
   CopyInputWrapper
 } from './styles'
 
-export const FacebookProfile = ({ businessSlug }) => {
+export const FacebookProfile = ({ storeUrl }) => {
   const [, t] = useLanguage()
   const theme = useTheme()
 
@@ -20,7 +20,7 @@ export const FacebookProfile = ({ businessSlug }) => {
         <p>{t('BUSINESS_FACEBOOK_PROFILE_STEP1_DESC', 'Copy this link below. It’s your unique Ordering link for facebook.')}</p>
         <CopyInputWrapper>
           <Input
-            defaultValue='https://yourbusinessname.com/store/storename'
+            defaultValue={storeUrl || 'https://yourbusinessname.com/store/storename'}
             disabled
           />
         </CopyInputWrapper>
