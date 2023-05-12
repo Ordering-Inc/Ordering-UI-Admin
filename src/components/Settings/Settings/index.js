@@ -215,7 +215,7 @@ const SettingsUI = (props) => {
               >
                 <SettingItemUI
                   title={t('CARD_FIELDS', 'Card fields')}
-                  description={t('CARD_FIELDS_DESC')}
+                  description={t('CARD_FIELDS_DESC', 'Manage your card fields')}
                   icon={<CreditCard />}
                   active={isOpenSettingDetails === 'card'}
                 />
