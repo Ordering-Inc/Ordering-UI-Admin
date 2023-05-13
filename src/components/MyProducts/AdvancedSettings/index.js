@@ -10,14 +10,11 @@ import { FontStyleGroup } from './FontStyleGroup'
 import {
   Container,
   BoxLayout,
-  HomePageWrapper,
-  ShadowWrapper,
   HeadingWrapper,
   ImageGroup,
   FormControl,
   ButtonWrapper
 } from './styles'
-import { ButtonShadow } from './ButtonShadow'
 import { UploadAudio } from '../UploadAudio'
 
 export const AdvancedSettings = (props) => {
@@ -36,10 +33,6 @@ export const AdvancedSettings = (props) => {
 
   const [isOpenSound, setIsOpenSound] = useState(false)
 
-  const homepageViewList = [
-    { key: 'homepage_header', name: t('HOMEPAGE_HEADER', 'Homepage Header'), type: 'hidden', path: 'homepage_view.components.homepage_header.hidden' }
-  ]
-
   const headerList = [
     { name: t('BACKGROUND_COLOR', 'Background color'), type: 'color', path: 'header.components.style.backgroundColor' },
     { name: t('LOGO_POSITION', 'Logo Position'), type: 'position', path: 'header.components.logo.components.layout.position' },
@@ -49,12 +42,9 @@ export const AdvancedSettings = (props) => {
   const businessListing = [
     { name: '', type: 'hidden', path: 'business_listing_view.hidden' },
     { name: t('BUSINESS_LISTING_IMAGE', 'Business listing image'), type: 'image', path: 'business_listing_view.components.business_hero.components.image' },
-    { name: t('PREVIOUS_ORDERS_BLOCK', 'Previous orders block'), type: 'hidden', path: 'business_listing_view.components.previous_orders_block.hidden' },
     { name: t('HIGHEST_RATED_BUSINESS_BLOCK', 'Highest rated business block'), type: 'hidden', path: 'business_listing_view.components.highest_rated_business_block.hidden' },
     { name: t('CATEGORIES_BLOCK', 'Categories block'), type: 'hidden', path: 'business_listing_view.components.categories.hidden' },
     { name: t('AMOUNT_OF_BUSINESSES_TO_DISPLAY_PER_ROW', 'Amount of businesses to display per row:'), type: 'position', path: 'business_listing_view.components.layout.rows' },
-    { name: t('SEARCH_BOX', 'Search box'), type: 'hidden', path: 'business_listing_view.components.search.hidden' },
-    { name: t('FILTER_ICON', 'Filter icon'), type: 'hidden', path: 'business_listing_view.components.filter.hidden' },
     { name: t('CITIES_DROPDOWN', 'Cities dropdown'), type: 'hidden', path: 'business_listing_view.components.cities.hidden' }
   ]
 
@@ -68,20 +58,17 @@ export const AdvancedSettings = (props) => {
     { name: t('FAVORITE_BUTTON', 'Favorite button'), type: 'hidden', path: 'business_listing_view.components.business.components.favorite.hidden' },
     { name: t('OFFER_BADGE', 'Offer badge'), type: 'hidden', path: 'business_listing_view.components.business.components.offer.hidden' },
     { name: t('OFFER_BADGE_POSITION', 'Offer badge position'), type: 'position', path: 'business_listing_view.components.business.components.offer.position' },
-    { name: t('CATEGORIES', 'Categories'), type: 'hidden', path: 'business_listing_view.components.business.components.categories.hidden' },
     { name: t('FEATURED_BADGE', 'Featured badge'), type: 'hidden', path: 'business_listing_view.components.business.components.featured_badge.hidden' }
   ]
 
   const businessPageList = [
     { name: t('DEFAULT_BACKGROUND_COLOR', 'Default Background color'), type: 'color', path: 'business_view.components.style.backgroundColor' },
     { name: t('PRODUCTS_FROM_PREVIOUS_ORDERS_BLOCK', 'Products from previous orders block'), type: 'hidden', path: 'business_view.components.products_ordered.hidden' },
-    { name: t('NEAR_BUSINESS_BLOCK', 'Near business block'), type: 'hidden', path: 'business_view.components.near_business.hidden' },
-    { name: t('ORDER_VIEW_BUTTON', 'Order view button'), type: 'hidden', path: 'business_view.components.order_view_button.hidden' }
+    { name: t('NEAR_BUSINESS_BLOCK', 'Near business block'), type: 'hidden', path: 'business_view.components.near_business.hidden' }
   ]
 
   const businessInfoList = [
     { name: t('DESCRIPTION', 'Description'), type: 'hidden', path: 'business_view.components.information.components.description.hidden' },
-    { name: t('ABOUT', 'About'), type: 'hidden', path: 'business_view.components.information.components.about.hidden' },
     { name: t('VIDEOS', 'Videos'), type: 'hidden', path: 'business_view.components.information.components.videos.hidden' },
     { name: t('MENU_LIST_DELIVERY_TIME', 'Delivery time'), type: 'hidden', path: 'business_view.components.information.components.delivery_time.hidden' },
     { name: t('PICKUP_TIME', 'Pickup time'), type: 'hidden', path: 'business_view.components.information.components.pickup_time.hidden' },
@@ -209,7 +196,7 @@ export const AdvancedSettings = (props) => {
   return (
     <>
       <Container>
-        {isApp ? (
+        {isApp && (
           <BoxLayout>
             <h1>{t('CUSTOMER_APP_ADVANCED_SETTINGS', 'Customer App  Advanced Settings')}</h1>
             <h2>{t('HOMEPAGE', 'Homepage')}</h2>
@@ -222,21 +209,19 @@ export const AdvancedSettings = (props) => {
               handleChangePhoto={handleUpdateThemeValue}
             />
           </BoxLayout>
-        ) : (
-          <BoxLayout>
-            <h1>{t('WEBSITE_ADVANCED_SETTINGS', 'Website  Advanced Settings')}</h1>
-            <HomePageWrapper>
-              <h2>{t('HOMEPAGE', 'Homepage')}</h2>
-              <SettingComponent
-                settingList={homepageViewList}
-                handleUpdateThemeValue={handleUpdateThemeValue}
-                advancedValues={themeValuesRef?.current}
-                themeId={themesList?.themes?.[0]?.id}
-              />
-            </HomePageWrapper>
-          </BoxLayout>
         )}
         <BoxLayout>
+          {!isApp && (
+            <h1>{t('WEBSITE_ADVANCED_SETTINGS', 'Website  Advanced Settings')}</h1>
+          )}
+          <h2>{t('BUTTONS', 'Buttons')}</h2>
+          <SettingComponent
+            settingList={buttonList}
+            handleUpdateThemeValue={handleUpdateThemeValue}
+            advancedValues={themeValuesRef?.current}
+            themeStructure={themeStructure}
+            themeId={themesList?.themes?.[0]?.id}
+          />
           <Button
             color='primary'
             outline
@@ -246,24 +231,6 @@ export const AdvancedSettings = (props) => {
           >
             {t('CUSTOM_SOUNDS', 'Custom sounds')}
           </Button>
-        </BoxLayout>
-        <BoxLayout>
-          <h2>{t('BUTTONS', 'Buttons')}</h2>
-          <SettingComponent
-            settingList={buttonList}
-            handleUpdateThemeValue={handleUpdateThemeValue}
-            advancedValues={themeValuesRef?.current}
-            themeStructure={themeStructure}
-            themeId={themesList?.themes?.[0]?.id}
-          />
-          <h3>{t('SHAPE', 'Shape')}</h3>
-          <ShadowWrapper>
-            <ButtonShadow
-              initialValues={themeValuesRef?.current?.general?.components?.buttons?.shadow?.components}
-              handleUpdateThemeValue={handleUpdateThemeValue}
-              path='general.components.buttons.shadow.components'
-            />
-          </ShadowWrapper>
         </BoxLayout>
         <BoxLayout>
           <h2>{t('TIPOGRAPHY', 'Tipography')}</h2>
@@ -413,6 +380,8 @@ export const AdvancedSettings = (props) => {
             themeStructure={themeStructure}
             themeId={themesList?.themes?.[0]?.id}
           />
+        </BoxLayout>
+        <BoxLayout>
           <h3>{t('CONFIRMATION_PAGE', 'Confirmation page')}</h3>
           <h3>{t('ORDER_BLOCK', 'Order block')}</h3>
           <SettingComponent
@@ -422,6 +391,8 @@ export const AdvancedSettings = (props) => {
             themeStructure={themeStructure}
             themeId={themesList?.themes?.[0]?.id}
           />
+        </BoxLayout>
+        <BoxLayout>
           <h3>{t('POPUP_ADDRESS', 'Popup: Address')}</h3>
           <SettingComponent
             settingList={popupAddressList}
@@ -430,6 +401,8 @@ export const AdvancedSettings = (props) => {
             themeStructure={themeStructure}
             themeId={themesList?.themes?.[0]?.id}
           />
+        </BoxLayout>
+        <BoxLayout>
           <h3>{t('MY_ACCOUNT_PAGE', 'My account page')}</h3>
           <SettingComponent
             settingList={myAccountList}
@@ -438,6 +411,8 @@ export const AdvancedSettings = (props) => {
             themeStructure={themeStructure}
             themeId={themesList?.themes?.[0]?.id}
           />
+        </BoxLayout>
+        <BoxLayout>
           <h3>{t('MY_ORDERS', 'My orders')}</h3>
           <h3>{t('ACTIVE_ORDERS_BLOCK', 'Active Orders Block')}</h3>
           <SettingComponent
