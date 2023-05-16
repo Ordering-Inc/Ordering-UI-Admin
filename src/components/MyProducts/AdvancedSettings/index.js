@@ -476,30 +476,71 @@ export const AdvancedSettings = (props) => {
             path='order_types.components.delivery.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
+            <ImageBox
+              title={t('DELIVERY_OPTION_IMAGE', 'Delivery option image')}
+              ratio='900 x 200 px'
+              photo={themeValuesRef?.current?.order_types?.components?.delivery?.components?.image}
+              path='order_types.components.delivery.components.image'
+              themeId={themesList?.themes?.[0]?.id}
+              handleChangePhoto={handleUpdateThemeValue}
+            />
           <h3>{t('PICKUP', 'Pickup')}</h3>
           <OrderType
             typeValues={themeValuesRef?.current?.order_types?.components?.pickup?.components}
             path='order_types.components.pickup.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
+            <ImageBox
+              title={t('PICKUP_OPTION_IMAGE', 'Pickup option image')}
+              ratio='900 x 200 px'
+              photo={themeValuesRef?.current?.order_types?.components?.pickup?.components?.image}
+              path='order_types.components.pickup.components.image'
+              themeId={themesList?.themes?.[0]?.id}
+              handleChangePhoto={handleUpdateThemeValue}
+            />
           <h3>{t('EAT_IN', 'Eat in')}</h3>
           <OrderType
             typeValues={themeValuesRef?.current?.order_types?.components?.eat_in?.components}
             path='order_types.components.eat_in.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
+            <ImageBox
+              title={t('EAT_IN_OPTION_IMAGE', 'Eat in option image')}
+              ratio='900 x 200 px'
+              photo={themeValuesRef?.current?.order_types?.components?.eat_in?.components?.image}
+              path='order_types.components.eat_in.components.image'
+              themeId={themesList?.themes?.[0]?.id}
+              handleChangePhoto={handleUpdateThemeValue}
+            />
           <h3>{t('CURBSIDE', 'Curbside')}</h3>
           <OrderType
             typeValues={themeValuesRef?.current?.order_types?.components?.curbside?.components}
             path='order_types.components.curbside.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
+            <ImageBox
+              title={t('CURBSIDE_OPTION_IMAGE', 'Curbside option image')}
+              ratio='900 x 200 px'
+              photo={themeValuesRef?.current?.order_types?.components?.curbside?.components?.image}
+              path='order_types.components.curbside.components.image'
+              themeId={themesList?.themes?.[0]?.id}
+              handleChangePhoto={handleUpdateThemeValue}
+            />
           <h3>{t('DRIVE_THRU', 'Drive thru')}</h3>
           <OrderType
             typeValues={themeValuesRef?.current?.order_types?.components?.drive_thru?.components}
             path='order_types.components.drive_thru.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
+            <ImageBox
+              title={t('DRIVE_THRU_OPTION_IMAGE', 'Drive thru option image')}
+              ratio='900 x 200 px'
+              photo={themeValuesRef?.current?.order_types?.components?.drive_thru?.components?.image}
+              path='order_types.components.drive_thru.components.image'
+              themeId={themesList?.themes?.[0]?.id}
+              handleChangePhoto={handleUpdateThemeValue}
+            />
+
         </BoxLayout>
         <BoxLayout>
           <h2>{t('THIRD_PARTY_CODE', 'Third-party code')}</h2>
