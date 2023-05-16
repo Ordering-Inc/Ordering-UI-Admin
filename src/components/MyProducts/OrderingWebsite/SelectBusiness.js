@@ -17,7 +17,7 @@ export const SelectBusiness = (props) => {
   const [businessOptions, setBusinessOptions] = useState([])
 
   useEffect(() => {
-    if (businessesList?.loading || !businessesList?.businesse) return
+    if (businessesList?.loading || !businessesList?.businesses) return
     const _businessOptions = []
     businessesList.businesses.map(business => {
       _businessOptions.push({
