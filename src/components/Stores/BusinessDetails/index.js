@@ -51,7 +51,8 @@ export const BusinessDetailsUI = (props) => {
     actionStatus,
     handleUpdatePreorderConfigs,
     handleUpdateSpoonityKey,
-    spoonityKeyState
+    spoonityKeyState,
+    siteState
   } = props
 
   const history = useHistory()
@@ -185,6 +186,7 @@ export const BusinessDetailsUI = (props) => {
           handleDeleteBusiness={handleDeleteBusiness}
           extraOpen={extraOpen}
           spoonityConfig={spoonityConfig}
+          siteState={siteState}
         />
       )}
       {extraOpen && (

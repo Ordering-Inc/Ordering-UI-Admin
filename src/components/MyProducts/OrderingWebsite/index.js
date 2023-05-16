@@ -10,12 +10,16 @@ import {
   Square as UnCheckedIcon,
   InfoCircle,
   RecordCircleFill,
-  Circle
+  Circle,
+  InfoCircleFill
 } from 'react-bootstrap-icons'
 
 import { useTheme } from 'styled-components'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
 import { ContentForm } from '../ContentForm'
+import Skeleton from 'react-loading-skeleton'
+import { AdvancedSettings } from '../AdvancedSettings'
+import { CustomDomain } from '../CustomDomain'
 import { bytesConverter } from '../../../utils'
 import {
   Container,
@@ -44,10 +48,12 @@ import {
   HeaderInfoWrapper,
   InfoContent,
   RadioItem,
-  SlugWrapper
+  SlugWrapper,
+  CustomeDomainDesc,
+  TitleWrapper,
+  CustomDomainInfo,
+  CustomDomainInfoContent
 } from './styles'
-import Skeleton from 'react-loading-skeleton'
-import { AdvancedSettings } from '../AdvancedSettings'
 
 const OrderingWebsiteUI = (props) => {
   const {
@@ -57,7 +63,9 @@ const OrderingWebsiteUI = (props) => {
     handleUpdateSiteTheme,
     advancedValues,
     setAdvancedValues,
-    themesList
+    themesList,
+    site,
+    setSite
   } = props
 
   const [, t] = useLanguage()
@@ -75,6 +83,7 @@ const OrderingWebsiteUI = (props) => {
   const [homePageContent, setHomePageContent] = useState(false)
   const [footerContent, setFooterContent] = useState(false)
   const [selectedSetting, setSelectedSetting] = useState('basic')
+  const [isCustomDomain, setIsCustomDomain] = useState(false)
 
   const settingsList = [
     { key: 'basic', name: t('BASIC_SETTINGS', 'Basic Settings') },
@@ -221,7 +230,24 @@ const OrderingWebsiteUI = (props) => {
           <FormWrapper>
             <InputFormWrapper>
               <InnerBlock>
-                <h4>{t('WEBSITE_SETTINGS', 'Website settings')}</h4>
+                <TitleWrapper>
+                  <h4>{t('WEBSITE_SETTINGS', 'Website settings')}</h4>
+                  <CustomDomainInfo>
+                    <IconButton
+                      color='primary'
+                    >
+                      <InfoCircleFill />
+                    </IconButton>
+                    <CustomDomainInfoContent>
+                      <span>
+                        {t('ADD_NEW_STORE_INFO', 'When creating a custom domain, add your domain or subdomain without http protocol or slashes. Example: www.customerwebsite.ordering.co Select Automatic if you don\'t use cloudflare or select Proxy if you use cloudflare If you have problems with the set-up, please contact our')}
+                      </span>
+                      <a href='https://www.ordering.co/contact-ordering' rel='noopener noreferrer' target='_blank'>
+                        {t('CUSTOMER_SUPPORT_TEAM', 'customer support team')}
+                      </a>
+                    </CustomDomainInfoContent>
+                  </CustomDomainInfo>
+                </TitleWrapper>
                 <FormGroup>
                   <label>
                     {orderingTheme?.loading ? (
@@ -295,14 +321,48 @@ const OrderingWebsiteUI = (props) => {
                   {orderingTheme?.loading ? (
                     <Skeleton height={40} style={{ width: '100%' }} />
                   ) : (
-                    <Button
-                      color='primary'
-                      outline
-                      borderRadius='8px'
-                      onClick={() => window.open('https://www.ordering.co/custom-domain-change', '_blank')}
-                    >
-                      {t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain')}
-                    </Button>
+                    <>
+                      {site?.domain && site?.ssl_status !== 'error' && (
+                        <TemporalDomail isDisabled={site?.ssl_process_status === 'pending'} marginBottom={site?.ssl_process_status === 'ended'}>
+                          {t('VISIT', 'Visit')}: <a href={`https://${site?.domain}`} rel='noopener noreferrer' target='_blank'>https://{site?.domain}</a>
+                        </TemporalDomail>
+                      )}
+                      {(site?.ssl_process_status === 'ended') && (
+                        <Button
+                          color='primary'
+                          outline
+                          borderRadius='8px'
+                          onClick={() => setIsCustomDomain(true)}
+                        >
+                          {site?.domain ? t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain') : t('CHANGE_CUSTOM_DOMAIN', 'Change custom domain')}
+                        </Button>
+                      )}
+                      {site?.domain && (
+                        <>
+                          {site?.ssl_status === 'issued' && (
+                            <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_ISSUED', 'Leave it as it is, the domain shows so it\'s not required any other comment')}</CustomeDomainDesc>
+                          )}
+                          {site?.ssl_status === 'pre-issued' && (
+                            <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_PRE_ISSUED', 'Process almost finish, please wait')}</CustomeDomainDesc>
+                          )}
+                          {site?.ssl_status === 'error' && (
+                            <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_ERROR', 'Custom domain can\'t be created, please try again with valid data')}</CustomeDomainDesc>
+                          )}
+                          {site?.ssl_status === 'pending_validation' && (
+                            <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_PENDING_VALIDATION', 'A custom domain is being created, please wait')}</CustomeDomainDesc>
+                          )}
+                          {site?.ssl_status === 'revoked' && (
+                            <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_REVOKED', 'Warning: Custom domain is revoked')}</CustomeDomainDesc>
+                          )}
+                          {site?.ssl_status === 'cancelled' && (
+                            <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_CANCELLED', 'Custom domain is cancelled')}</CustomeDomainDesc>
+                          )}
+                          {site?.ssl_status === 'expired' && (
+                            <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_EXPIRED', 'Custom domain is expired')}</CustomeDomainDesc>
+                          )}
+                        </>
+                      )}
+                    </>
                   )}
                 </FormGroup>
               </InnerBlock>
@@ -604,6 +664,17 @@ const OrderingWebsiteUI = (props) => {
           onClose={() => setFooterContent(false)}
           handleChangeContent={handleChangeContent}
           type='footer_content'
+        />
+      </Modal>
+      <Modal
+        width='70%'
+        open={isCustomDomain}
+        onClose={() => setIsCustomDomain(false)}
+      >
+        <CustomDomain
+          site={site}
+          onClose={() => setIsCustomDomain(false)}
+          setSite={setSite}
         />
       </Modal>
     </>

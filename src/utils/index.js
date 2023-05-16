@@ -3,7 +3,7 @@ import FaCcMastercard from '@meronex/icons/fa/FaCcMastercard'
 import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
 import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
 import moment from 'moment'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, CODES } from 'ordering-components-admin'
 
 export const optimizeImage = (url, params, fallback) => {
   if (!url && fallback) return fallback
@@ -192,6 +192,11 @@ export const getMinutes = (seconds) => {
 export const getSeconds = (seconds) => {
   const remain = seconds - Math.floor(seconds / 3600) * 3600
   return Math.floor(remain - Math.floor(remain / 60) * 60)
+}
+
+export const findExitingCode = (countryCode) => {
+  const code = CODES.find(code => code.countryCode === (countryCode || '').toUpperCase())
+  return code?.countryCode
 }
 
 /**

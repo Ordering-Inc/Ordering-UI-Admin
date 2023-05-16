@@ -314,7 +314,14 @@ import {
   ProductStep,
   BusinessSync,
   BusinessDelete,
-  BusinessDeviceListing
+  BusinessDeviceListing,
+  SpoonityApiKey,
+  BusinessPlaceGroupList,
+  BusinessPlaceGroup,
+  BusinessPlace,
+  BusinessSalesChannel,
+  BusinessQRCodeOptions,
+  BusinessAddStore
 } from './components/Stores'
 import {
   CustomersListing,
@@ -727,6 +734,13 @@ export {
   BusinessSync,
   BusinessDelete,
   BusinessDeviceListing,
+  SpoonityApiKey,
+  BusinessPlaceGroupList,
+  BusinessPlaceGroup,
+  BusinessPlace,
+  BusinessSalesChannel,
+  BusinessQRCodeOptions,
+  BusinessAddStore,
 
   LogoutButton,
   LanguageSelector,

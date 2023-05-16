@@ -109,6 +109,11 @@ import { ImportersButton } from './ImportersButton'
 import { RestaurantSelectGuide } from './RestaurantSelectGuide'
 import { ProductStep } from './ProductStep'
 import { BusinessSync } from './BusinessSync'
+import { SpoonityApiKey } from './SpoonityApiKey'
+import { BusinessPlaceGroupList } from './BusinessPlaceGroupList'
+import { BusinessPlaceGroup } from './BusinessPlaceGroup'
+import { BusinessPlace } from './BusinessPlace'
+import { BusinessAddStore } from './BusinessAddStore'
 
 export {
   BusinessAdd,
@@ -221,5 +226,10 @@ export {
   ImportersButton,
   RestaurantSelectGuide,
   ProductStep,
-  BusinessSync
+  BusinessSync,
+  SpoonityApiKey,
+  BusinessPlaceGroupList,
+  BusinessPlaceGroup,
+  BusinessPlace,
+  BusinessAddStore
 }

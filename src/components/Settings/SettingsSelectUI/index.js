@@ -21,7 +21,7 @@ export const SettingsSelectUI = (props) => {
   const [, t] = useLanguage()
 
   const [options, setOptions] = useState(null)
-  
+
   useEffect(() => {
     if (!config) return
     if (config.key === 'terms_and_conditions') {

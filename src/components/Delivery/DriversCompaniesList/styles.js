@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const DriversCompaniesContainer = styled.div`
-  margin-top: 20px;
+  padding: 20px;
 `
 
 export const TableWrapper = styled.div`
