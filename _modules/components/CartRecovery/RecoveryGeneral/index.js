@@ -28,7 +28,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 // import { AnalyticsCalendar } from '../../BusinessIntelligence/AnalyticsCalendar'
 
 var RecoveryGeneral = function RecoveryGeneral(props) {
-  var _ref, _formState$changes$na, _formState$changes, _recoveryActionState$7, _ref2, _formState$changes$de, _formState$changes2, _recoveryActionState$8;
+  var _ref, _formState$changes$na, _formState$changes, _recoveryActionState$9, _ref2, _formState$changes$de, _formState$changes2, _recoveryActionState$10;
   var isAddMode = props.isAddMode,
     formState = props.formState,
     recoveryActionState = props.recoveryActionState,
@@ -47,21 +47,30 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     minutes = _useState4[0],
     setMinutes = _useState4[1];
-  var _useState5 = (0, _react.useState)({}),
+  var _useState5 = (0, _react.useState)([]),
     _useState6 = _slicedToArray(_useState5, 2),
-    curPreorderTime = _useState6[0],
-    setCurPreorderTime = _useState6[1];
-  var _useState7 = (0, _react.useState)(0),
+    seconds = _useState6[0],
+    setSeconds = _useState6[1];
+  var _useState7 = (0, _react.useState)({
+      hour: '0',
+      minute: '0',
+      second: '0'
+    }),
     _useState8 = _slicedToArray(_useState7, 2),
-    curDayTime = _useState8[0],
-    setCurDayTime = _useState8[1];
-  var _useState9 = (0, _react.useState)(true),
+    curPreorderTime = _useState8[0],
+    setCurPreorderTime = _useState8[1];
+  var _useState9 = (0, _react.useState)(0),
     _useState10 = _slicedToArray(_useState9, 2),
-    isTime = _useState10[0],
-    setIsTime = _useState10[1];
+    curDayTime = _useState10[0],
+    setCurDayTime = _useState10[1];
+  var _useState11 = (0, _react.useState)(true),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isTime = _useState12[0],
+    setIsTime = _useState12[1];
   var setTimeList = function setTimeList() {
     var _hours = [];
     var _minutes = [];
+    var _seconds = [];
     for (var i = 0; i < 24; i++) {
       var text = (i < 10 ? '0' : ' ') + i;
       _hours.push({
@@ -75,16 +84,21 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
         text: _text,
         minute: _i2
       });
+      _seconds.push({
+        text: _text,
+        second: _i2
+      });
     }
     setHours(_hours);
     setMinutes(_minutes);
+    setSeconds(_seconds);
   };
   var handleChangePreorderTime = function handleChangePreorderTime(evt) {
     var type = evt.target.name;
     var value = evt.target.value;
     setCurPreorderTime(_objectSpread(_objectSpread({}, curPreorderTime), {}, _defineProperty({}, type, value)));
     var preorderTime = 0;
-    if (type === 'hour') preorderTime = parseInt(value) * 3600 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute) * 60;else preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 3600 + parseInt(value) * 60;
+    if (type === 'hour') preorderTime = parseInt(value) * 3600 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute) * 60 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.second);else if (type === 'minute') preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 3600 + parseInt(value) * 60 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.second);else preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 3600 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute) * 60 + parseInt(value);
     handleChangeItem({
       times: [preorderTime],
       launch_type: 'times'
@@ -112,14 +126,15 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
     });
   };
   (0, _react.useEffect)(function () {
-    var _recoveryActionState$, _recoveryActionState$2, _recoveryActionState$3, _recoveryActionState$4, _recoveryActionState$5, _recoveryActionState$6;
+    var _recoveryActionState$, _recoveryActionState$2, _recoveryActionState$3, _recoveryActionState$4, _recoveryActionState$5, _recoveryActionState$6, _recoveryActionState$7, _recoveryActionState$8;
     setTimeList();
     setCurPreorderTime({
       hour: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$ = recoveryActionState.action) !== null && _recoveryActionState$ !== void 0 && _recoveryActionState$.times ? parseInt((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$2 = recoveryActionState.action) === null || _recoveryActionState$2 === void 0 ? void 0 : _recoveryActionState$2.times[0]) / 3600) : '0',
-      minute: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$3 = recoveryActionState.action) !== null && _recoveryActionState$3 !== void 0 && _recoveryActionState$3.times ? (recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$4 = recoveryActionState.action) === null || _recoveryActionState$4 === void 0 ? void 0 : _recoveryActionState$4.times[0]) % 3600 / 60 : '0'
+      minute: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$3 = recoveryActionState.action) !== null && _recoveryActionState$3 !== void 0 && _recoveryActionState$3.times ? parseInt((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$4 = recoveryActionState.action) === null || _recoveryActionState$4 === void 0 ? void 0 : _recoveryActionState$4.times[0]) % 3600 / 60) : '0',
+      second: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$5 = recoveryActionState.action) !== null && _recoveryActionState$5 !== void 0 && _recoveryActionState$5.times ? (recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$6 = recoveryActionState.action) === null || _recoveryActionState$6 === void 0 ? void 0 : _recoveryActionState$6.times[0]) % 3600 % 60 : '0'
     });
-    if (!(recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$5 = recoveryActionState.action) !== null && _recoveryActionState$5 !== void 0 && _recoveryActionState$5.times)) return;
-    if ((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$6 = recoveryActionState.action) === null || _recoveryActionState$6 === void 0 ? void 0 : _recoveryActionState$6.times[0]) / 3600 < 24) {
+    if (!(recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$7 = recoveryActionState.action) !== null && _recoveryActionState$7 !== void 0 && _recoveryActionState$7.times)) return;
+    if ((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$8 = recoveryActionState.action) === null || _recoveryActionState$8 === void 0 ? void 0 : _recoveryActionState$8.times[0]) / 3600 < 24) {
       setIsTime(true);
     } else {
       setIsTime(false);
@@ -130,7 +145,7 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
     name: "name",
     type: "text",
     placeholder: t('NAME', 'name'),
-    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$7 = recoveryActionState.action) === null || _recoveryActionState$7 === void 0 ? void 0 : _recoveryActionState$7.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$9 = recoveryActionState.action) === null || _recoveryActionState$9 === void 0 ? void 0 : _recoveryActionState$9.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -138,7 +153,7 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
     placeholder: t('WRITE_LITTLE_DESCRIPTION', 'Write a little description'),
     name: "description",
     rows: 3,
-    value: (_ref2 = (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$8 = recoveryActionState.action) === null || _recoveryActionState$8 === void 0 ? void 0 : _recoveryActionState$8.description) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref2 = (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$10 = recoveryActionState.action) === null || _recoveryActionState$10 === void 0 ? void 0 : _recoveryActionState$10.description) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -166,6 +181,15 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
       value: minute.minute,
       key: i
     }, minute.text);
+  })), /*#__PURE__*/_react.default.createElement("span", null, ":"), /*#__PURE__*/_react.default.createElement("select", {
+    value: curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.second,
+    name: "second",
+    onChange: handleChangePreorderTime
+  }, seconds === null || seconds === void 0 ? void 0 : seconds.map(function (second, i) {
+    return /*#__PURE__*/_react.default.createElement("option", {
+      value: second.second,
+      key: i
+    }, second.text);
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.TypeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ParentCheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
     onClick: function onClick() {
       return handleSwitchTime();

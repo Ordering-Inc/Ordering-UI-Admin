@@ -58,21 +58,26 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     minutes = _useState6[0],
     setMinutes = _useState6[1];
-  var _useState7 = (0, _react.useState)({
-      hour: '0',
-      minute: '0'
-    }),
+  var _useState7 = (0, _react.useState)([]),
     _useState8 = _slicedToArray(_useState7, 2),
-    curPreorderTime = _useState8[0],
-    setCurPreorderTime = _useState8[1];
-  var _useState9 = (0, _react.useState)(0),
+    seconds = _useState8[0],
+    setSeconds = _useState8[1];
+  var _useState9 = (0, _react.useState)({
+      hour: '0',
+      minute: '0',
+      second: '0'
+    }),
     _useState10 = _slicedToArray(_useState9, 2),
-    curDayTime = _useState10[0],
-    setCurDayTime = _useState10[1];
-  var _useState11 = (0, _react.useState)(true),
+    curPreorderTime = _useState10[0],
+    setCurPreorderTime = _useState10[1];
+  var _useState11 = (0, _react.useState)(0),
     _useState12 = _slicedToArray(_useState11, 2),
-    isTime = _useState12[0],
-    setIsTime = _useState12[1];
+    curDayTime = _useState12[0],
+    setCurDayTime = _useState12[1];
+  var _useState13 = (0, _react.useState)(true),
+    _useState14 = _slicedToArray(_useState13, 2),
+    isTime = _useState14[0],
+    setIsTime = _useState14[1];
   var channelList = [{
     value: 'email',
     content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('EMAIL', 'Email'))
@@ -86,6 +91,7 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
   var setTimeList = function setTimeList() {
     var _hours = [];
     var _minutes = [];
+    var _seconds = [];
     for (var i = 0; i < 24; i++) {
       var text = (i < 10 ? '0' : ' ') + i;
       _hours.push({
@@ -99,16 +105,21 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
         text: _text,
         minute: _i2
       });
+      _seconds.push({
+        text: _text,
+        second: _i2
+      });
     }
     setHours(_hours);
     setMinutes(_minutes);
+    setSeconds(_seconds);
   };
   var handleChangePreorderTime = function handleChangePreorderTime(evt) {
     var type = evt.target.name;
     var value = evt.target.value;
     setCurPreorderTime(_objectSpread(_objectSpread({}, curPreorderTime), {}, _defineProperty({}, type, value)));
     var preorderTime = 0;
-    if (type === 'hour') preorderTime = parseInt(value) * 3600 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute) * 60;else preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 3600 + parseInt(value) * 60;
+    if (type === 'hour') preorderTime = parseInt(value) * 3600 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute) * 60 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.second);else if (type === 'minute') preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 3600 + parseInt(value) * 60 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.second);else preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 3600 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute) * 60 + parseInt(value);
     handleChangeItem({
       times: [preorderTime],
       launch_type: 'times'
@@ -216,6 +227,15 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
       value: minute.minute,
       key: i
     }, minute.text);
+  })), /*#__PURE__*/_react.default.createElement("span", null, ":"), /*#__PURE__*/_react.default.createElement("select", {
+    value: curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.second,
+    name: "second",
+    onChange: handleChangePreorderTime
+  }, seconds === null || seconds === void 0 ? void 0 : seconds.map(function (second, i) {
+    return /*#__PURE__*/_react.default.createElement("option", {
+      value: second.second,
+      key: i
+    }, second.text);
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.TypeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ParentCheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
     onClick: function onClick() {
       return handleSwitchTime();
