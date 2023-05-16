@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCode = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -227,6 +227,13 @@ var getSeconds = function getSeconds(seconds) {
   var remain = seconds - Math.floor(seconds / 3600) * 3600;
   return Math.floor(remain - Math.floor(remain / 60) * 60);
 };
+exports.getSeconds = getSeconds;
+var findExitingCode = function findExitingCode(countryCode) {
+  var code = _orderingComponentsAdmin.CODES.find(function (code) {
+    return code.countryCode === (countryCode || '').toUpperCase();
+  });
+  return code === null || code === void 0 ? void 0 : code.countryCode;
+};
 
 /**
  * Function to check if a number is decimal or not
@@ -234,7 +241,7 @@ var getSeconds = function getSeconds(seconds) {
  * @param {*} parser function fallback when is decimal
  * @returns string
  */
-exports.getSeconds = getSeconds;
+exports.findExitingCode = findExitingCode;
 var verifyDecimals = function verifyDecimals(value, parser) {
   if (value % 1 === 0) {
     return value;

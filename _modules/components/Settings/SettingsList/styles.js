@@ -24,7 +24,7 @@ var FormGroupText = _styledComponents.default.div(_templateObject6 || (_template
   return props.theme.colors.headingColor;
 });
 exports.FormGroupText = FormGroupText;
-var FormGroupCheck = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  padding-bottom: 10px;\n  border-bottom: 1px solid #E9ECEF;\n  margin-bottom: 10px;\n\n  input {\n    width: 16px;\n    height: 16px;\n    box-sizing: border-box;\n    border-radius: 2px;\n    margin-right: 10px;\n  }\n  label {\n    font-size: 14px;\n    display: flex;\n    align-items: center;\n    color: ", ";\n  }\n"])), function (props) {
+var FormGroupCheck = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  padding-bottom: 10px;\n  border-bottom: 1px solid #E9ECEF;\n  margin-bottom: 10px;\n\n  input {\n    width: 16px;\n    height: 16px;\n    box-sizing: border-box;\n    border-radius: 2px;\n    margin-right: 10px;\n  }\n  label {\n    font-size: 14px;\n    display: flex;\n    align-items: center;\n    color: ", ";\n    text-transform: capitalize;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 exports.FormGroupCheck = FormGroupCheck;
@@ -34,7 +34,7 @@ var Required = _styledComponents.default.span(_templateObject9 || (_templateObje
 exports.Required = Required;
 var SkeletonWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-top: 52px;\n\n  div {\n    margin-bottom: 15px;\n  }\n"])));
 exports.SkeletonWrapper = SkeletonWrapper;
-var CheckBoxWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  > label {\n    font-weight: 600;\n    margin: 20px 0 0;\n    font-size: 14px;\n    color: ", ";\n  }\n  > p {\n    font-size: 14px;\n    margin-bottom: 0px;\n    margin-top: 10px;\n  }\n"])), function (props) {
+var CheckBoxWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  > label {\n    font-weight: 600;\n    margin: 0px;\n    font-size: 14px;\n    color: ", ";\n  }\n  > p {\n    font-size: 14px;\n    margin-bottom: 0px;\n    margin-top: 10px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 exports.CheckBoxWrapper = CheckBoxWrapper;

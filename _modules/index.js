@@ -183,6 +183,12 @@ Object.defineProperty(exports, "BusinessAdd", {
     return _Stores.BusinessAdd;
   }
 });
+Object.defineProperty(exports, "BusinessAddStore", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.BusinessAddStore;
+  }
+});
 Object.defineProperty(exports, "BusinessAnalytics", {
   enumerable: true,
   get: function get() {
@@ -381,6 +387,24 @@ Object.defineProperty(exports, "BusinessPickupDetails", {
     return _Stores.BusinessPickupDetails;
   }
 });
+Object.defineProperty(exports, "BusinessPlace", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.BusinessPlace;
+  }
+});
+Object.defineProperty(exports, "BusinessPlaceGroup", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.BusinessPlaceGroup;
+  }
+});
+Object.defineProperty(exports, "BusinessPlaceGroupList", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.BusinessPlaceGroupList;
+  }
+});
 Object.defineProperty(exports, "BusinessPreorderDetails", {
   enumerable: true,
   get: function get() {
@@ -447,10 +471,22 @@ Object.defineProperty(exports, "BusinessPublishing", {
     return _Stores.BusinessPublishing;
   }
 });
+Object.defineProperty(exports, "BusinessQRCodeOptions", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.BusinessQRCodeOptions;
+  }
+});
 Object.defineProperty(exports, "BusinessReviewList", {
   enumerable: true,
   get: function get() {
     return _BusinessIntelligence.BusinessReviewList;
+  }
+});
+Object.defineProperty(exports, "BusinessSalesChannel", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.BusinessSalesChannel;
   }
 });
 Object.defineProperty(exports, "BusinessSchedule", {
@@ -2161,6 +2197,12 @@ Object.defineProperty(exports, "SpinnerLoader", {
   enumerable: true,
   get: function get() {
     return _Shared.SpinnerLoader;
+  }
+});
+Object.defineProperty(exports, "SpoonityApiKey", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.SpoonityApiKey;
   }
 });
 Object.defineProperty(exports, "StoreApp", {

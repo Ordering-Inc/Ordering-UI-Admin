@@ -65,7 +65,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     actionStatus = props.actionStatus,
     handleUpdatePreorderConfigs = props.handleUpdatePreorderConfigs,
     handleUpdateSpoonityKey = props.handleUpdateSpoonityKey,
-    spoonityKeyState = props.spoonityKeyState;
+    spoonityKeyState = props.spoonityKeyState,
+    siteState = props.siteState;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -206,7 +207,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleDuplicateBusiness: handleDuplicateBusiness,
     handleDeleteBusiness: handleDeleteBusiness,
     extraOpen: extraOpen,
-    spoonityConfig: spoonityConfig
+    spoonityConfig: spoonityConfig,
+    siteState: siteState
   }), extraOpen && /*#__PURE__*/_react.default.createElement(_Shared.MoreSidebarLayout, {
     isExtendExtraOpen: isExtendExtraOpen,
     onClose: handleCloseExtraOpen
