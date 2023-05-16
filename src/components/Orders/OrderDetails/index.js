@@ -15,6 +15,7 @@ import { NotFoundSource, Modal } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { OrderToPrint } from '../OrderToPrint'
 import { OrderToPrintTicket } from '../OrderToPrintTicket'
+import { getOrderStatuPickUp, getOrderStatus } from '../../../utils'
 
 import {
   Container,
@@ -78,37 +79,6 @@ const OrderDetailsUI = (props) => {
   } = props.order
 
   const rejectResonStatuses = [6, 9, 10, 11, 12, 14]
-  const getOrderStatus = (status) => {
-    const orderStatus = [
-      { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 10 },
-      { key: 1, value: 'Completed by admin', slug: 'COMPLETED_BY_ADMIN', percentage: 100 },
-      { key: 2, value: 'Reject by admin', slug: 'REJECT_BY_ADMIN', percentage: 0 },
-      { key: 3, value: 'Driver arrived by business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
-      { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 20 },
-      { key: 5, value: 'Reject by business', slug: 'REJECT_BY_BUSINESS', percentage: 0 },
-      { key: 6, value: 'Reject by driver', slug: 'REJECT_BY_DRIVER', percentage: 0 },
-      { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 15 },
-      { key: 8, value: 'Accepted by driver', slug: 'ACCEPTED_BY_DRIVER', percentage: 40 },
-      { key: 9, value: 'Pick up completed by driver', slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 70 },
-      { key: 10, value: 'Pick up Failed by driver', slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 11, value: 'Delivery completed by driver', slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
-      { key: 12, value: 'Delivery Failed by driver', slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 13, value: 'Preorder', slug: 'PREORDER', percentage: 0 },
-      { key: 14, value: 'Order not ready', slug: 'ORDER_NOT_READY', percentage: 15 },
-      { key: 15, value: 'Pickup completed by customer', slug: 'PICKUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
-      { key: 16, value: 'Canceled by customer', slug: 'CANCELED_BY_CUSTOMER', percentage: 0 },
-      { key: 17, value: 'Not picked by customer', slug: 'NOT_PICKED_BY_CUSTOMER', percentage: 0 },
-      { key: 18, value: 'Driver almost arrived to business', slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 50 },
-      { key: 19, value: 'Driver almost arrived to customer', slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', percentage: 90 },
-      { key: 20, value: 'Customer almost arrived to business', slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 90 },
-      { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 90 },
-      { key: 22, value: 'Looking for driver', slug: 'ORDER_LOOKING_FOR_DRIVER', percentage: 30 },
-      { key: 23, value: 'Driver on way', slug: 'ORDER_DRIVER_ON_WAY', percentage: 80 }
-    ]
-
-    const objectStatus = orderStatus.find((o) => o.key === status)
-    return objectStatus && objectStatus
-  }
 
   const getLogisticTag = (status) => {
     switch (parseInt(status)) {
@@ -298,6 +268,8 @@ const OrderDetailsUI = (props) => {
     }
   }, [loading])
 
+  const progressBarObjt = order?.delivery_type && order?.delivery_type === 2 ? getOrderStatuPickUp : getOrderStatus
+
   return (
     <Container
       isSelectedOrders={isSelectedOrders}
@@ -365,10 +337,10 @@ const OrderDetailsUI = (props) => {
               <p>
                 {t('SPOT', 'Spot')}: {order?.place?.name}
               </p>
-            </PlaceSpotContainer>
+            </PlaceSpotContainer> 
           )}
           <StatusBarContainer>
-            <StatusBar percentage={getOrderStatus(order?.status)?.percentage} />
+            <StatusBar percentage={progressBarObjt(order?.status)?.percentage} />
           </StatusBarContainer>
           <AdvancedLogistic>
             <div>
@@ -540,7 +512,7 @@ const OrderDetailsUI = (props) => {
           ref={printRef}
           order={order}
           placeSpotEnabled={placeSpotEnabled}
-          getOrderStatus={getOrderStatus}
+          getOrderStatus={progressBarObjt}
           getLogisticTag={getLogisticTag}
           getPriorityTag={getPriorityTag}
         />
@@ -549,7 +521,7 @@ const OrderDetailsUI = (props) => {
           <OrderToPrintTicket
             ref={printTicketRef}
             order={order}
-            getOrderStatus={getOrderStatus}
+            getOrderStatus={progressBarObjt}
           />
       )}
     </Container>
