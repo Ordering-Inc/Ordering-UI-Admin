@@ -114,6 +114,7 @@ export const SelectWrapper = styled.div`
       color: ${props => props.theme.colors.secundaryContrast};
     }
     .list {
+      width: 100%;
       background-color: ${props => props.theme.colors.secundary};
       border: none;
       
@@ -145,6 +146,16 @@ export const Option = styled.div`
   font-size: 14px;
   line-height: 24px;
   color: ${props => props.theme.colors.secundaryContrast};
+  word-break: break-all;
+  svg {
+    min-width: 25px;
+    height: 25px;
+    margin-right: 15px;
+    ${props => props.theme.rtl && css`
+      margin-left: 15px;
+      margin-right: 0;
+    `}
+  }
 `
 
 export const Logo = styled.img`
