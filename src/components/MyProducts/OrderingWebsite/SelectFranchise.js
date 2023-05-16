@@ -17,7 +17,7 @@ export const SelectFranchise = (props) => {
   const [options, setOptions] = useState([])
 
   useEffect(() => {
-    if (franchisesList.loading) return
+    if (franchisesList?.loading || !franchisesList?.franchises) return
     const _options = []
     franchisesList.franchises.map(franchise => {
       _options.push({
