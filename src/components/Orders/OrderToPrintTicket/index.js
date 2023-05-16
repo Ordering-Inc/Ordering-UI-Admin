@@ -109,7 +109,7 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
           {t('MOBILE_PHONE', 'Mobile Phone')}: {order?.customer?.cellphone}
           <br />
           {!!order?.customer?.phone && (
-            t('MOBILE_PHONE', 'Mobile Phone')`: {order?.customer?.phone}`)}
+            `${t('MOBILE_PHONE', 'Mobile Phone')}: ${order?.customer?.phone}`)}
           {t('FULL_ADDRESS', 'Full Addres')}: {order?.customer?.address}
           {!!order?.customer?.internal_number && (
             `${t('INTERNAL_NUMBER', 'Internal Number')}: ${order?.customer?.internal_number}`)}
