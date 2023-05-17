@@ -1,5 +1,6 @@
 {
   "app_id": "ordering-admin-react",
+  "notification_app": "dashboardweb",
   "app_name": "Ordering Admin",
   "billing_url": "https://billing-dashboard.tryordering.com",
   "api": {

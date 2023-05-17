@@ -3,7 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 import { SettingComponent } from './SettingComponent'
 import { Button, Input } from '../../../styles'
 import { ImageBox } from './ImageBox'
-import { Alert } from '../../Shared'
+import { Alert, Modal } from '../../Shared'
 import { OrderType } from './OrderType'
 import { FontStyleGroup } from './FontStyleGroup'
 
@@ -18,6 +18,7 @@ import {
   ButtonWrapper
 } from './styles'
 import { ButtonShadow } from './ButtonShadow'
+import { UploadAudio } from '../UploadAudio'
 
 export const AdvancedSettings = (props) => {
   const {
@@ -32,6 +33,8 @@ export const AdvancedSettings = (props) => {
   const [themeStructure, setThemeStructure] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const themeValuesRef = useRef({})
+
+  const [isOpenSound, setIsOpenSound] = useState(false)
 
   const homepageViewList = [
     { key: 'homepage_header', name: t('HOMEPAGE_HEADER', 'Homepage Header'), type: 'hidden', path: 'homepage_view.components.homepage_header.hidden' }
@@ -233,6 +236,17 @@ export const AdvancedSettings = (props) => {
             </HomePageWrapper>
           </BoxLayout>
         )}
+        <BoxLayout>
+          <Button
+            color='primary'
+            outline
+            borderRadius='8px'
+            onClick={() => setIsOpenSound(true)}
+            className='custom'
+          >
+            {t('CUSTOM_SOUNDS', 'Custom sounds')}
+          </Button>
+        </BoxLayout>
         <BoxLayout>
           <h2>{t('BUTTONS', 'Buttons')}</h2>
           <SettingComponent
@@ -519,6 +533,16 @@ export const AdvancedSettings = (props) => {
           </Button>
         </ButtonWrapper>
       </Container>
+      <Modal
+        width='769px'
+        padding='25px'
+        open={isOpenSound}
+        onClose={() => setIsOpenSound(false)}
+      >
+        <UploadAudio
+          onClose={() => setIsOpenSound(false)}
+        />
+      </Modal>
       <Alert
         title={t('ORDERING', 'Ordering')}
         content={alertState.content}

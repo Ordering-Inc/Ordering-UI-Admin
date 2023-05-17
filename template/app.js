@@ -5,9 +5,18 @@ import {
   Route,
   Link,
   Redirect,
-  useLocation
+  useLocation,
+  useHistory
 } from 'react-router-dom'
-import { useSession, useOrder, useLanguage, useConfig, GoogleTagManager, CannyIdentification } from 'ordering-components-admin'
+import {
+  useSession,
+  useOrder,
+  useLanguage,
+  useConfig,
+  GoogleTagManager,
+  CannyIdentification,
+  useEvent
+} from 'ordering-components-admin'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
 import { useOnlineStatus } from '../src/hooks/useOnlineStatus'
 import { useWindowSize } from '../src/hooks/useWindowSize'
@@ -77,10 +86,15 @@ import { OrderingWidgets } from './pages/OrderingWidgets'
 import { BusinessDevicesList } from './pages/BusinessDevicesList'
 
 export const App = () => {
+  const history = useHistory()
+  const [events] = useEvent()
   const [{ auth, loading, user }] = useSession()
   const [orderStatus] = useOrder()
-  const [{ configs }] = useConfig()
+  const [{ configs, loading: configLoading }] = useConfig()
   const [loaded, setLoaded] = useState(false)
+  const [oneSignalState, setOneSignalState] = useState({
+    notification_app: settings.notification_app
+  })
   const [, t] = useLanguage()
   const onlineStatus = useOnlineStatus()
   const { height } = useWindowSize()
@@ -114,6 +128,64 @@ export const App = () => {
       document.documentElement.style.setProperty('--vh', `${vh}px`)
     }
   }, [height])
+
+  const oneSignalSetup = () => {
+    if (!configs?.onesignal_dashboardweb_id?.value) {
+      setOneSignalState({
+        notification_app: settings.notification_app
+      })
+      return
+    }
+    const OneSignal = window.OneSignal || []
+    const initConfig = {
+      appId: configs?.onesignal_dashboardweb_id?.value,
+      // allowLocalhostAsSecureOrigin: true,
+      notificationClickHandlerAction: 'navigate'
+    }
+
+    OneSignal.push(function () {
+      OneSignal.SERVICE_WORKER_PARAM = { scope: '/push/onesignal/' }
+      OneSignal.SERVICE_WORKER_PATH = 'push/onesignal/OneSignalSDKWorker.js'
+      OneSignal.SERVICE_WORKER_UPDATER_PATH = 'push/onesignal/OneSignalSDKWorker.js'
+      OneSignal.init(initConfig)
+
+      const onNotificationClicked = function (data) {
+        if (data?.data?.order_uuid) {
+          history.push(`/orders?id=${data?.data?.order_uuid}`)
+        }
+      }
+      const handler = function (data) {
+        onNotificationClicked(data)
+        OneSignal.addListenerForNotificationOpened(handler)
+      }
+      OneSignal.addListenerForNotificationOpened(handler)
+
+      OneSignal.on('subscriptionChange', function (isSubscribed) {
+        if (isSubscribed) {
+          OneSignal.getUserId((userId) => {
+            const data = {
+              ...oneSignalState,
+              notification_token: userId
+            }
+            setOneSignalState(data)
+          })
+        }
+      })
+
+      OneSignal.getUserId((userId) => {
+        const data = {
+          ...oneSignalState,
+          notification_token: userId
+        }
+        setOneSignalState(data)
+      })
+    })
+  }
+
+  useEffect(() => {
+    if (configLoading) return
+    oneSignalSetup()
+  }, [configLoading, events])
 
   return (
     <>
@@ -160,6 +232,7 @@ export const App = () => {
                             <Login
                               useLoginByEmail
                               elementLinkToForgotPassword={<Link to='/password/forgot'>{t('RESET_PASSWORD', 'Reset password')}</Link>}
+                              notificationState={oneSignalState}
                             />
                           )
                           : (
