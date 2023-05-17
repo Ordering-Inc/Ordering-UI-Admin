@@ -2,6 +2,7 @@ import React from 'react'
 import { useLanguage, useUtils, Logistics as LogisticsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { Button } from '../../../styles'
 
 import {
   WraaperLogs,
@@ -14,7 +15,8 @@ import {
 const LogisticsUI = (props) => {
   const {
     logisticList,
-    parseLog
+    parseLog,
+    getLogistics
   } = props
 
   const [, t] = useLanguage()
@@ -36,6 +38,13 @@ const LogisticsUI = (props) => {
         </>
       ) : (
         <WraaperLogs>
+          <Button
+            rectangle
+            color='primary'
+            onClick={() => getLogistics()}
+          >
+            {t('RELOAD', 'Reload')}
+          </Button>
           {logisticList.logs.map((log) => (
             <BubbleConsole key={log.id}>
               <div dangerouslySetInnerHTML={{
