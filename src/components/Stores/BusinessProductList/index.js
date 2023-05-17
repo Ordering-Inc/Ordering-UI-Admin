@@ -4,13 +4,14 @@ import { ColumnAllowSettingPopover, NotFoundSource, Pagination, SideBar } from '
 import { SingleBusinessProduct } from '../SingleBusinessProduct'
 import { BusinessSpreadSheet } from '../BusinessSpreadSheet'
 import { BusinessProductAddForm } from '../BusinessProductAddForm'
+import { LinkButton } from '../../../styles'
 
 import {
   ListContent,
   ProductListContainer,
   BusinessProductListTable,
   WrapperNotFound,
-  AddProductBtn,
+  AddProductBtnWrapper,
   ProductListSpreadContainer,
   ProductListBottom
 } from './styles'
@@ -196,11 +197,13 @@ export const BusinessProductList = (props) => {
           <ProductListBottom>
             {
               !businessState.loading && businessState?.business?.categories?.length > 0 && categorySelected && (
-                <AddProductBtn
-                  onClick={() => handleParentProductAdd(true)}
-                >
-                  {t('ADD_NEW_PRODUCT', 'Add new product')}
-                </AddProductBtn>
+                <AddProductBtnWrapper>
+                  <LinkButton
+                    onClick={() => handleParentProductAdd(true)}
+                  >
+                    {t('ADD_NEW_PRODUCT', 'Add new product')}
+                  </LinkButton>
+                </AddProductBtnWrapper>
               )
             }
 
