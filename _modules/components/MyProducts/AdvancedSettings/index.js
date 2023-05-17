@@ -15,6 +15,7 @@ var _OrderType = require("./OrderType");
 var _FontStyleGroup = require("./FontStyleGroup");
 var _styles2 = require("./styles");
 var _ButtonShadow = require("./ButtonShadow");
+var _UploadAudio = require("../UploadAudio");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -44,6 +45,10 @@ var AdvancedSettings = function AdvancedSettings(props) {
     alertState = _useState4[0],
     setAlertState = _useState4[1];
   var themeValuesRef = (0, _react.useRef)({});
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isOpenSound = _useState6[0],
+    setIsOpenSound = _useState6[1];
   var homepageViewList = [{
     key: 'homepage_header',
     name: t('HOMEPAGE_HEADER', 'Homepage Header'),
@@ -436,7 +441,15 @@ var AdvancedSettings = function AdvancedSettings(props) {
     handleUpdateThemeValue: handleUpdateThemeValue,
     advancedValues: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : themeValuesRef.current,
     themeId: themesList === null || themesList === void 0 ? void 0 : (_themesList$themes4 = themesList.themes) === null || _themesList$themes4 === void 0 ? void 0 : (_themesList$themes4$ = _themesList$themes4[0]) === null || _themesList$themes4$ === void 0 ? void 0 : _themesList$themes4$.id
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('BUTTONS', 'Buttons')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    outline: true,
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return setIsOpenSound(true);
+    },
+    className: "custom"
+  }, t('CUSTOM_SOUNDS', 'Custom sounds'))), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('BUTTONS', 'Buttons')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
     settingList: buttonList,
     handleUpdateThemeValue: handleUpdateThemeValue,
     advancedValues: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : themeValuesRef.current,
@@ -614,7 +627,18 @@ var AdvancedSettings = function AdvancedSettings(props) {
     onClick: function onClick() {
       return handleUpdateSiteTheme(themeValuesRef === null || themeValuesRef === void 0 ? void 0 : themeValuesRef.current);
     }
-  }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "769px",
+    padding: "25px",
+    open: isOpenSound,
+    onClose: function onClose() {
+      return setIsOpenSound(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_UploadAudio.UploadAudio, {
+    onClose: function onClose() {
+      return setIsOpenSound(false);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('ORDERING', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

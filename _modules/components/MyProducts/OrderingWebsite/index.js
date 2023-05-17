@@ -18,6 +18,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _AdvancedSettings = require("../AdvancedSettings");
 var _CustomDomain = require("../CustomDomain");
 var _utils = require("../../../utils");
+var _SelectBusiness = require("./SelectBusiness");
+var _SelectFranchise = require("./SelectFranchise");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -43,7 +45,9 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     setAdvancedValues = props.setAdvancedValues,
     themesList = props.themesList,
     site = props.site,
-    setSite = props.setSite;
+    setSite = props.setSite,
+    businessesList = props.businessesList,
+    franchisesList = props.franchisesList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -282,37 +286,25 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     }
   }, (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_9 = themeValues.website_theme) === null || _themeValues$website_9 === void 0 ? void 0 : (_themeValues$website_10 = _themeValues$website_9.components) === null || _themeValues$website_10 === void 0 ? void 0 : _themeValues$website_10.type) === 'franchise' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('REPORT_HEADER_FRANCHISES', 'Franchise'))), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_11 = themeValues.website_theme) === null || _themeValues$website_11 === void 0 ? void 0 : (_themeValues$website_12 = _themeValues$website_11.components) === null || _themeValues$website_12 === void 0 ? void 0 : _themeValues$website_12.type) === 'franchise' && /*#__PURE__*/_react.default.createElement(_styles2.SlugWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('FRANCHISE_SLUG', 'Franchise slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "name",
-    placeholder: t('SLUG', 'Slug'),
-    value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_13 = themeValues.website_theme) === null || _themeValues$website_13 === void 0 ? void 0 : (_themeValues$website_14 = _themeValues$website_13.components) === null || _themeValues$website_14 === void 0 ? void 0 : _themeValues$website_14.franchise_slug) || '',
-    onChange: function onChange(e) {
-      return handleChangeValue(e.target.value, 'website_theme', 'franchise_slug');
-    },
-    onKeyPress: function onKeyPress(e) {
-      if (e.which === 32) {
-        e.preventDefault();
-      }
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('REPORT_HEADER_FRANCHISES', 'Franchise'))), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_11 = themeValues.website_theme) === null || _themeValues$website_11 === void 0 ? void 0 : (_themeValues$website_12 = _themeValues$website_11.components) === null || _themeValues$website_12 === void 0 ? void 0 : _themeValues$website_12.type) === 'franchise' && /*#__PURE__*/_react.default.createElement(_SelectFranchise.SelectFranchise, {
+    defaultValue: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_13 = themeValues.website_theme) === null || _themeValues$website_13 === void 0 ? void 0 : (_themeValues$website_14 = _themeValues$website_13.components) === null || _themeValues$website_14 === void 0 ? void 0 : _themeValues$website_14.franchise_slug,
+    franchisesList: franchisesList,
+    onChange: function onChange(value) {
+      return handleChangeValue(value, 'website_theme', 'franchise_slug');
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.RadioItem, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.RadioItem, {
     onClick: function onClick() {
       return handleChangeValue('single_store', 'website_theme', 'type');
     }
   }, (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_15 = themeValues.website_theme) === null || _themeValues$website_15 === void 0 ? void 0 : (_themeValues$website_16 = _themeValues$website_15.components) === null || _themeValues$website_16 === void 0 ? void 0 : _themeValues$website_16.type) === 'single_store' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('SINGLE_STORE', 'Single Store'))), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_17 = themeValues.website_theme) === null || _themeValues$website_17 === void 0 ? void 0 : (_themeValues$website_18 = _themeValues$website_17.components) === null || _themeValues$website_18 === void 0 ? void 0 : _themeValues$website_18.type) === 'single_store' && /*#__PURE__*/_react.default.createElement(_styles2.SlugWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_SLUG', 'Business slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "name",
-    placeholder: t('SLUG', 'Slug'),
-    value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_19 = themeValues.website_theme) === null || _themeValues$website_19 === void 0 ? void 0 : (_themeValues$website_20 = _themeValues$website_19.components) === null || _themeValues$website_20 === void 0 ? void 0 : _themeValues$website_20.business_slug) || '',
-    onChange: function onChange(e) {
-      return handleChangeValue(e.target.value, 'website_theme', 'business_slug');
-    },
-    onKeyPress: function onKeyPress(e) {
-      if (e.which === 32) {
-        e.preventDefault();
-      }
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('SINGLE_STORE', 'Single Store'))), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_17 = themeValues.website_theme) === null || _themeValues$website_17 === void 0 ? void 0 : (_themeValues$website_18 = _themeValues$website_17.components) === null || _themeValues$website_18 === void 0 ? void 0 : _themeValues$website_18.type) === 'single_store' && /*#__PURE__*/_react.default.createElement(_SelectBusiness.SelectBusiness, {
+    defaultValue: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_19 = themeValues.website_theme) === null || _themeValues$website_19 === void 0 ? void 0 : (_themeValues$website_20 = _themeValues$website_19.components) === null || _themeValues$website_20 === void 0 ? void 0 : _themeValues$website_20.business_slug,
+    businessesList: businessesList,
+    onChange: function onChange(value) {
+      return handleChangeValue(value, 'website_theme', 'business_slug');
     }
-  }))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100,
     width: 100,
     style: {

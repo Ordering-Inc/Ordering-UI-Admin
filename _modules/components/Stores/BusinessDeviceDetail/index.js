@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
-  var _formState$changes$na, _formState$changes3, _formState$changes$bu, _formState$changes4, _formState$changes$co, _formState$changes5;
+  var _formState$changes5, _formState$changes$na, _formState$changes6, _formState$changes$bu, _formState$changes7, _formState$changes8, _formState$changes$us, _formState$changes9, _formState$changes$co, _formState$changes10;
   var selectedDevice = props.selectedDevice,
     deleteDevice = props.deleteDevice,
     formState = props.formState,
@@ -49,17 +49,25 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     businessOptions = _useState4[0],
     setBusinessOptions = _useState4[1];
-  var _useState5 = (0, _react.useState)(''),
+  var _useState5 = (0, _react.useState)(null),
     _useState6 = _slicedToArray(_useState5, 2),
-    searchValue = _useState6[0],
-    setSearchValue = _useState6[1];
-  var _useState7 = (0, _react.useState)({
+    ownerOptions = _useState6[0],
+    setOwnerOptions = _useState6[1];
+  var _useState7 = (0, _react.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    businessSearchVal = _useState8[0],
+    setBusinessSearchVal = _useState8[1];
+  var _useState9 = (0, _react.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    userSearchVal = _useState10[0],
+    setUserSearchVal = _useState10[1];
+  var _useState11 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    alertState = _useState8[0],
-    setAlertState = _useState8[1];
+    _useState12 = _slicedToArray(_useState11, 2),
+    alertState = _useState12[0],
+    setAlertState = _useState12[1];
   var moreOptions = [{
     value: 0,
     content: t('DELETE', 'Delete')
@@ -96,7 +104,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
   (0, _react.useEffect)(function () {
     if (businessList !== null && businessList !== void 0 && businessList.loading) return;
     var options = businessList === null || businessList === void 0 ? void 0 : businessList.businesses.filter(function (option) {
-      return option === null || option === void 0 ? void 0 : option.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+      return option === null || option === void 0 ? void 0 : option.name.toLocaleLowerCase().includes(businessSearchVal.toLocaleLowerCase());
     }).map(function (business) {
       var _theme$images, _theme$images$dummies;
       return {
@@ -107,7 +115,30 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
       };
     });
     setBusinessOptions(options);
-  }, [searchValue, businessList]);
+  }, [businessSearchVal, businessList]);
+  (0, _react.useEffect)(function () {
+    var _formState$changes3;
+    if (!(businessList !== null && businessList !== void 0 && businessList.loading) && (formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.business_id || selectedDevice !== null && selectedDevice !== void 0 && selectedDevice.business_id)) {
+      var _businessList$busines;
+      var owners = businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses.find(function (business) {
+        var _formState$changes4;
+        return business.id === ((formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.business_id) || (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id));
+      })) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.owners;
+      if ((owners === null || owners === void 0 ? void 0 : owners.length) > 0) {
+        var options = owners.filter(function (option) {
+          return option === null || option === void 0 ? void 0 : option.name.toLocaleLowerCase().includes(userSearchVal.toLocaleLowerCase());
+        }).map(function (user) {
+          return {
+            value: user === null || user === void 0 ? void 0 : user.id,
+            content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, user !== null && user !== void 0 && user.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Logo, {
+              src: user === null || user === void 0 ? void 0 : user.photo
+            }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname)
+          };
+        });
+        setOwnerOptions(options);
+      }
+    }
+  }, [userSearchVal, selectedDevice, formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.business_id, businessList]);
   (0, _react.useEffect)(function () {
     var _formState$result;
     if (formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
@@ -128,7 +159,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
       return deleteDevice();
     }
   })))), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    value: (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.name,
+    value: (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.name,
     onChange: function onChange(e) {
       return handleChangeFormState({
         name: e.target.value
@@ -139,7 +170,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: businessOptions,
     className: "select",
-    defaultValue: (_formState$changes$bu = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.business_id) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id,
+    defaultValue: (_formState$changes$bu = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.business_id) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id,
     placeholder: t('SELECT_OPTION', 'Select an option'),
     onChange: function onChange(value) {
       return handleChangeFormState({
@@ -149,12 +180,31 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
     isShowSearchBar: true,
     searchBarIsCustomLayout: true,
     searchBarIsNotLazyLoad: true,
-    searchValue: searchValue,
+    searchValue: businessSearchVal,
     handleChangeSearch: function handleChangeSearch(val) {
-      return setSearchValue(val);
+      return setBusinessSearchVal(val);
+    }
+  })), ((formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.business_id) || (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id)) && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_OWNER', 'Business owner')), businessList !== null && businessList !== void 0 && businessList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 44
+  }) : /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    options: ownerOptions,
+    className: "select",
+    defaultValue: (_formState$changes$us = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.user_id) !== null && _formState$changes$us !== void 0 ? _formState$changes$us : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.user_id,
+    placeholder: t('SELECT_OPTION', 'Select an option'),
+    onChange: function onChange(value) {
+      return handleChangeFormState({
+        user_id: value
+      });
+    },
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: userSearchVal,
+    handleChangeSearch: function handleChangeSearch(val) {
+      return setUserSearchVal(val);
     }
   })), selectedDevice && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('DEVICE_CODE', 'Device Code')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    value: (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.code) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.code,
+    value: (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.code) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.code,
     onChange: function onChange(e) {
       return handleChangeFormState({
         code: e.target.value
@@ -181,7 +231,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
 var BusinessDeviceDetail = function BusinessDeviceDetail(props) {
   var businessDeviceDetailProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessDeviceDetailUI,
-    propsToFetch: ['id', 'name', 'logo']
+    propsToFetch: ['id', 'name', 'logo', 'owners']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessDeviceDetail, businessDeviceDetailProps);
 };
