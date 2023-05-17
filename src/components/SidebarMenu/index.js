@@ -504,6 +504,7 @@ const SidebarMenuUI = (props) => {
                         <MenuContent>
                           {ordersSubMenus.map(item => (
                             !(sessionState?.user?.level === 2 && item.pageName === 'drivers') &&
+                            !((sessionState?.user?.level === 2 || sessionState?.user?.level === 5) && item.pageName === 'giftCards') &&
                             !(sessionState?.user?.level === 5 && item.pageName === 'appointments') && (
                               item.pageName === 'appointments' ? (
                                 isEnabledAppointmentsFeature && (

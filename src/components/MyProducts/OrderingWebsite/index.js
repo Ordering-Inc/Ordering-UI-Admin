@@ -21,6 +21,8 @@ import Skeleton from 'react-loading-skeleton'
 import { AdvancedSettings } from '../AdvancedSettings'
 import { CustomDomain } from '../CustomDomain'
 import { bytesConverter } from '../../../utils'
+import { SelectBusiness } from './SelectBusiness'
+import { SelectFranchise } from './SelectFranchise'
 import {
   Container,
   HeaderTitleContainer,
@@ -48,7 +50,6 @@ import {
   HeaderInfoWrapper,
   InfoContent,
   RadioItem,
-  SlugWrapper,
   CustomeDomainDesc,
   TitleWrapper,
   CustomDomainInfo,
@@ -65,7 +66,9 @@ const OrderingWebsiteUI = (props) => {
     setAdvancedValues,
     themesList,
     site,
-    setSite
+    setSite,
+    businessesList,
+    franchisesList
   } = props
 
   const [, t] = useLanguage()
@@ -388,18 +391,11 @@ const OrderingWebsiteUI = (props) => {
                       <span>{t('REPORT_HEADER_FRANCHISES', 'Franchise')}</span>
                     </RadioItem>
                     {themeValues?.website_theme?.components?.type === 'franchise' && (
-                      <SlugWrapper>
-                        <label>{t('FRANCHISE_SLUG', 'Franchise slug')}</label>
-                        <Input
-                          name='name'
-                          placeholder={t('SLUG', 'Slug')}
-                          value={themeValues?.website_theme?.components?.franchise_slug || ''}
-                          onChange={e => handleChangeValue(e.target.value, 'website_theme', 'franchise_slug')}
-                          onKeyPress={e => {
-                            if (e.which === 32) { e.preventDefault() }
-                          }}
-                        />
-                      </SlugWrapper>
+                      <SelectFranchise
+                        defaultValue={themeValues?.website_theme?.components?.franchise_slug}
+                        franchisesList={franchisesList}
+                        onChange={value => handleChangeValue(value, 'website_theme', 'franchise_slug')}
+                      />
                     )}
 
                     <RadioItem
@@ -409,18 +405,11 @@ const OrderingWebsiteUI = (props) => {
                       <span>{t('SINGLE_STORE', 'Single Store')}</span>
                     </RadioItem>
                     {themeValues?.website_theme?.components?.type === 'single_store' && (
-                      <SlugWrapper>
-                        <label>{t('BUSINESS_SLUG', 'Business slug')}</label>
-                        <Input
-                          name='name'
-                          placeholder={t('SLUG', 'Slug')}
-                          value={themeValues?.website_theme?.components?.business_slug || ''}
-                          onChange={e => handleChangeValue(e.target.value, 'website_theme', 'business_slug')}
-                          onKeyPress={e => {
-                            if (e.which === 32) { e.preventDefault() }
-                          }}
-                        />
-                      </SlugWrapper>
+                      <SelectBusiness
+                        defaultValue={themeValues?.website_theme?.components?.business_slug}
+                        businessesList={businessesList}
+                        onChange={value => handleChangeValue(value, 'website_theme', 'business_slug')}
+                      />
                     )}
                   </>
                 )}

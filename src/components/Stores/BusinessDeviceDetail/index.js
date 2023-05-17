@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, BusinessDeviceDetail as BusinessDeviceDetailController } from 'ordering-components-admin'
-import { ThreeDots, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
+import { ThreeDots, ArrowsAngleContract, ArrowsAngleExpand, PersonFill } from 'react-bootstrap-icons'
 import { Button, IconButton, DefaultSelect, Input } from '../../../styles'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { useTheme } from 'styled-components'
@@ -34,7 +34,9 @@ const BusinessDeviceDetailUI = (props) => {
 
   const [isExpand, setIsExpand] = useState(false)
   const [businessOptions, setBusinessOptions] = useState(null)
-  const [searchValue, setSearchValue] = useState('')
+  const [ownerOptions, setOwnerOptions] = useState(null)
+  const [businessSearchVal, setBusinessSearchVal] = useState('')
+  const [userSearchVal, setUserSearchVal] = useState('')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const moreOptions = [
@@ -72,13 +74,28 @@ const BusinessDeviceDetailUI = (props) => {
     if (businessList?.loading) return
 
     const options = businessList?.businesses
-      .filter(option => option?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+      .filter(option => option?.name.toLocaleLowerCase().includes(businessSearchVal.toLocaleLowerCase()))
       .map(business => ({
         value: business?.id,
         content: <Option><Logo src={business?.logo || theme.images?.dummies?.businessLogo} />{business?.name}</Option>
       }))
     setBusinessOptions(options)
-  }, [searchValue, businessList])
+  }, [businessSearchVal, businessList])
+
+  useEffect(() => {
+    if (!businessList?.loading && (formState?.changes?.business_id || selectedDevice?.business_id)) {
+      const owners = businessList?.businesses.find(business => business.id === (formState?.changes?.business_id || selectedDevice?.business_id))?.owners
+      if (owners?.length > 0) {
+        const options = owners
+          .filter(option => option?.name.toLocaleLowerCase().includes(userSearchVal.toLocaleLowerCase()))
+          .map(user => ({
+            value: user?.id,
+            content: <Option>{user?.photo ? <Logo src={user?.photo} /> : <PersonFill />}{user?.name} {user?.lastname}</Option>
+          }))
+        setOwnerOptions(options)
+      }
+    }
+  }, [userSearchVal, selectedDevice, formState?.changes?.business_id, businessList])
 
   useEffect(() => {
     if (formState?.result?.error) {
@@ -137,11 +154,33 @@ const BusinessDeviceDetailUI = (props) => {
             isShowSearchBar
             searchBarIsCustomLayout
             searchBarIsNotLazyLoad
-            searchValue={searchValue}
-            handleChangeSearch={(val) => setSearchValue(val)}
+            searchValue={businessSearchVal}
+            handleChangeSearch={(val) => setBusinessSearchVal(val)}
           />
         )}
       </SelectWrapper>
+      {(formState?.changes?.business_id || selectedDevice?.business_id) && (
+        <SelectWrapper>
+          <label>{t('BUSINESS_OWNER', 'Business owner')}</label>
+          {businessList?.loading ? (
+            <Skeleton height={44} />
+          ) : (
+            <Select
+              options={ownerOptions}
+              className='select'
+              defaultValue={formState?.changes?.user_id ?? selectedDevice?.user_id}
+              placeholder={t('SELECT_OPTION', 'Select an option')}
+              onChange={(value) => handleChangeFormState({ user_id: value })}
+              isShowSearchBar
+              searchBarIsCustomLayout
+              searchBarIsNotLazyLoad
+              searchValue={userSearchVal}
+              handleChangeSearch={(val) => setUserSearchVal(val)}
+            />
+          )}
+        </SelectWrapper>
+      )}
+
       {selectedDevice && (
         <FormControl>
           <label>{t('DEVICE_CODE', 'Device Code')}</label>
@@ -177,7 +216,7 @@ export const BusinessDeviceDetail = (props) => {
   const businessDeviceDetailProps = {
     ...props,
     UIComponent: BusinessDeviceDetailUI,
-    propsToFetch: ['id', 'name', 'logo']
+    propsToFetch: ['id', 'name', 'logo', 'owners']
   }
   return <BusinessDeviceDetailController {...businessDeviceDetailProps} />
 }
