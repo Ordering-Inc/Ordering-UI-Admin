@@ -9,7 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _reactBootstrap = require("react-bootstrap");
-var _styles = require("./styles");
+var _styles = require("../../../styles");
+var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -28,7 +29,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var LogisticsUI = function LogisticsUI(props) {
   var logisticList = props.logisticList,
-    parseLog = props.parseLog;
+    parseLog = props.parseLog,
+    getLogistics = props.getLogistics;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -38,7 +40,7 @@ var LogisticsUI = function LogisticsUI(props) {
     getTimeAgo = _useUtils2$.getTimeAgo,
     parseDate = _useUtils2$.parseDate;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(3)).map(function (item, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.SkeletonHitory, {
+    return /*#__PURE__*/_react.default.createElement(_styles2.SkeletonHitory, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 400,
@@ -71,18 +73,24 @@ var LogisticsUI = function LogisticsUI(props) {
         marginBottom: '20px'
       }
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.WraaperLogs, null, logisticList.logs.map(function (log) {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.WraaperLogs, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    rectangle: true,
+    color: "primary",
+    onClick: function onClick() {
+      return getLogistics();
+    }
+  }, t('RELOAD', 'Reload')), logisticList.logs.map(function (log) {
     var _log$data;
-    return /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, {
+    return /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, {
       key: log.id
     }, /*#__PURE__*/_react.default.createElement("div", {
       dangerouslySetInnerHTML: {
         __html: parseLog(log)
       }
-    }), log.event === 'logistic_expired' && /*#__PURE__*/_react.default.createElement(_styles.Reason, null, t('REASON', 'Reason'), ": ", log === null || log === void 0 ? void 0 : (_log$data = log.data) === null || _log$data === void 0 ? void 0 : _log$data.reason), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+    }), log.event === 'logistic_expired' && /*#__PURE__*/_react.default.createElement(_styles2.Reason, null, t('REASON', 'Reason'), ": ", log === null || log === void 0 ? void 0 : (_log$data = log.data) === null || _log$data === void 0 ? void 0 : _log$data.reason), /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
       placement: "top",
       overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, parseDate(log.updated_at))
-    }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(log.updated_at))));
+    }, /*#__PURE__*/_react.default.createElement(_styles2.TimeofSent, null, getTimeAgo(log.updated_at))));
   })));
 };
 var Logistics = function Logistics(props) {
