@@ -14,7 +14,7 @@ var RecoveryActionAddContainer = _styledComponents.default.form(_templateObject 
 exports.RecoveryActionAddContainer = RecoveryActionAddContainer;
 var CardContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  padding: 25px 38px;\n  margin-bottom: 29px;\n\n  h2 {\n    font-size: 16px;\n    font-weight: 600;\n    margin: 0 0 29px 0;\n  }\n"])));
 exports.CardContainer = CardContainer;
-var ButtonsContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  margin: 56px 0 30px 0;\n\n  button {\n    border-radius: 8px;\n    height: 44px;\n    &:first-child {\n      margin: 0 10px;\n    }\n  }\n"])));
+var ButtonsContainer = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  margin: 60px 0;\n\n  button {\n    border-radius: 8px;\n    height: 44px;\n    &:first-child {\n      margin: 0 10px;\n    }\n  }\n"])));
 exports.ButtonsContainer = ButtonsContainer;
 var InputWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-bottom: 25px;\n\n  label {\n    font-size: 14px;\n    line-height: 24px;\n    margin-bottom: 10px;\n  }\n\n  input, textarea {\n    width: 100%;\n  }\n\n  .select {\n    border: 1px solid ", ";\n    padding: 9px 0;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;

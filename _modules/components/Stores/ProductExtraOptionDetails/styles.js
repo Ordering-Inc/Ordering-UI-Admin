@@ -116,9 +116,5 @@ var RightSubOptionContent = _styledComponents.default.div(_templateObject34 || (
 exports.RightSubOptionContent = RightSubOptionContent;
 var AdddSubOptionForm = _styledComponents.default.form(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  display: flex;\n  width: 100%;\n  margin-top: 15px;\n"])));
 exports.AdddSubOptionForm = AdddSubOptionForm;
-var AddNewOptionButton = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  margin-top: 15px;\n  font-size: 14px;\n  color: ", ";\n  span {\n    cursor: pointer;\n  }\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
-  return props.theme.colors.primary;
-});
+var AddNewOptionButton = _styledComponents.default.div(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  margin-top: 15px;\n"])));
 exports.AddNewOptionButton = AddNewOptionButton;

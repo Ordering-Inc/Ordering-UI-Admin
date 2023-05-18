@@ -93,17 +93,17 @@ var DriversGroupAddFormUI = function DriversGroupAddFormUI(props) {
     onSubmit: formMethods.handleSubmit(onSubmit),
     "data-tour": "tour_fill_group"
   }, /*#__PURE__*/_react.default.createElement(_styles2.SectionContainer, null, /*#__PURE__*/_react.default.createElement(_GeneralForm.GeneralForm, props)), /*#__PURE__*/_react.default.createElement(_styles2.SectionContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessesForm.BusinessesForm, props)), /*#__PURE__*/_react.default.createElement(_styles2.SectionContainer, null, /*#__PURE__*/_react.default.createElement(_PaymethodsForm.PaymethodsForm, props)), autoAssignType !== 'basic' && /*#__PURE__*/_react.default.createElement(_styles2.SectionContainer, null, /*#__PURE__*/_react.default.createElement(_AdvancedLogisticsForm.AdvancedLogisticsForm, props)), /*#__PURE__*/_react.default.createElement(_styles2.ButtonsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
+    color: "primary",
+    type: "submit",
+    disabled: Object.keys(changesState).length === 0
+  }, t('SAVE', 'Save')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "secundary",
     onClick: function onClick() {
       return props.onClose();
     },
     type: "button"
-  }, t('CANCEL', 'Cancel')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    borderRadius: "8px",
-    color: "primary",
-    type: "submit",
-    disabled: Object.keys(changesState).length === 0
-  }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('CANCEL', 'Cancel')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

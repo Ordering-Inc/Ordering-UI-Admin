@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperNotFound = exports.ProductListSpreadContainer = exports.ProductListContainer = exports.ProductListBottom = exports.ListContent = exports.BusinessProductListTable = exports.AddProductBtn = void 0;
+exports.WrapperNotFound = exports.ProductListSpreadContainer = exports.ProductListContainer = exports.ProductListBottom = exports.ListContent = exports.BusinessProductListTable = exports.AddProductBtnWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -35,10 +35,8 @@ var BusinessProductListTable = _styledComponents.default.table(_templateObject8 
 exports.BusinessProductListTable = BusinessProductListTable;
 var WrapperNotFound = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-size: 16px;\n  text-align: center;\n  font-weight: 500;\n  margin: 20px;\n"])));
 exports.WrapperNotFound = WrapperNotFound;
-var AddProductBtn = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  user-select: none;\n  font-size: 14px;\n  color: ", ";\n  margin-top: 12px;\n  cursor: pointer;\n  margin-bottom: 15px;\n  display: inline-block;\n"])), function (props) {
-  return props.theme.colors.primary;
-});
-exports.AddProductBtn = AddProductBtn;
+var AddProductBtnWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin-top: 12px;\n  margin-bottom: 15px;\n"])));
+exports.AddProductBtnWrapper = AddProductBtnWrapper;
 var ProductListBottom = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 20px;\n  \n  @media (min-width: 768px) {\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n      margin-right: 30px;\n    "]))) : (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      margin-left: 30px;\n    "])));

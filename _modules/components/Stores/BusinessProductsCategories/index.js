@@ -8,7 +8,8 @@ exports.BusinessProductsCategories = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _SingleBusinessSubCateogries = require("../SingleBusinessSubCateogries");
-var _styles = require("./styles");
+var _styles = require("../../../styles");
+var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -53,9 +54,9 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       window.removeEventListener('click', listener);
     };
   }, [containerRef === null || containerRef === void 0 ? void 0 : containerRef.current, categoryListRef]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CategoryListContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CategoryListContainer, {
     ref: containerRef
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles.ListContent, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('BUSINESS_CATEGORY', 'Business category'))), /*#__PURE__*/_react.default.createElement(_styles2.ListContent, {
     ref: listRef
   }, (businessState === null || businessState === void 0 ? void 0 : businessState.loading) && _toConsumableArray(Array(6).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessSubCateogries.SingleBusinessSubCateogries, {
@@ -77,11 +78,11 @@ var BusinessProductsCategories = function BusinessProductsCategories(props) {
       setDataSelected: setDataSelected,
       isLastCategory: (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : (_businessState$busine4 = _businessState$busine3.categories) === null || _businessState$busine4 === void 0 ? void 0 : _businessState$busine4.length) - 1 === i
     }));
-  })))), /*#__PURE__*/_react.default.createElement(_styles.AddCategory, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.AddCategoryWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     ref: addButtonRef,
     onClick: function onClick() {
       return handleOpenCategoryDetails();
     }
-  }, t('ADD_NEW_CATEGORY', 'Add new category')));
+  }, t('ADD_NEW_CATEGORY', 'Add new category'))));
 };
 exports.BusinessProductsCategories = BusinessProductsCategories;

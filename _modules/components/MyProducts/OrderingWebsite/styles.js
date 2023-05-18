@@ -145,10 +145,10 @@ var CustomDomainInfo = _styledComponents.default.div(_templateObject45 || (_temp
   return props.theme.colors.headingColor;
 });
 exports.CustomDomainInfo = CustomDomainInfo;
-var CustomDomainInfoContent = _styledComponents.default.div(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 100%;\n  z-index: 999;\n  background: ", ";\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  padding: 8px 12px;\n  font-size: 12px;\n  line-height: 18px;\n  min-width: 150px;\n  transition: all 0.3s linear;\n  visibility: hidden;\n  opacity: 0;\n  right: -100px;\n  ", "\n\n  a {\n    color: ", ";\n    padding-left: 5px;\n  }\n\n  @media (min-width: 576px) {\n    min-width: 350px;\n    padding: 10px 16px;\n    left: 0px;\n    ", "\n  }\n"])), function (props) {
+var CustomDomainInfoContent = _styledComponents.default.div(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 100%;\n  z-index: 999;\n  background: ", ";\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  padding: 8px 12px;\n  font-size: 12px;\n  line-height: 18px;\n  min-width: 150px;\n  transition: all 0.3s linear;\n  visibility: hidden;\n  opacity: 0;\n  right: -100px;\n  ", "\n\n  span {\n    display: block;\n  }\n\n  a {\n    color: ", ";\n    padding-left: 5px;\n  }\n\n  @media (min-width: 576px) {\n    min-width: 350px;\n    padding: 10px 16px;\n    left: 0px;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.backgroundInfo;
 }, function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n    left: 0px;\n    right: initial;\n  "])));
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n    left: 0px;s\n    right: initial;\n  "])));
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {

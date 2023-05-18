@@ -377,7 +377,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary",
     type: "submit"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null))))), !isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AddNewOptionButton, null, /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null))))), !isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AddNewOptionButton, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     className: "add-option-btn",
     onClick: function onClick() {
       return setIsAddForm(true);
