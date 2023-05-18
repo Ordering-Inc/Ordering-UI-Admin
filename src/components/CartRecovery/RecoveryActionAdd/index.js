@@ -38,7 +38,7 @@ export const RecoveryActionAddUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const { register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, errors, setValue } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const [hours, setHours] = useState([])
@@ -135,6 +135,13 @@ export const RecoveryActionAddUI = (props) => {
   }
 
   const handleSwitchTime = () => {
+    let preorderTime
+    if (!isTime) {
+      preorderTime = parseInt(curPreorderTime?.hour) * 3600 + parseInt(curPreorderTime?.minute) * 60 + parseInt(curPreorderTime?.second)
+    } else {
+      preorderTime = curDayTime * 24 * 3600
+    }
+    handleChangeItem({ times: [preorderTime], launch_type: 'times' })
     setIsTime(prev => !prev)
   }
 
@@ -291,7 +298,10 @@ export const RecoveryActionAddUI = (props) => {
               placeholder={<Option>{t('SELECT_CHANNEL', 'Select a channel')}</Option>}
               defaultValue={formState?.changes?.channel ?? ''}
               options={channelList}
-              onChange={val => handleChangeItem({ channel: val })}
+              onChange={val => {
+                setValue('body', '')
+                handleChangeItem({ channel: val, body: '' })
+              }}
             />
           </InputWrapper>
           <InputWrapper>
