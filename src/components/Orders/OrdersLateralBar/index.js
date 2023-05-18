@@ -3,7 +3,7 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { XLg, ArrowsAngleExpand, ArrowsAngleContract } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { OrdersManager } from '../OrdersManager'
+import { OriginalOrdersManager as OrdersManager } from '../OrdersManager/Layouts/OriginalOrdersManager'
 import { IconButton } from '../../../styles/Buttons'
 
 import {
