@@ -92,19 +92,19 @@ const DriversGroupAddFormUI = (props) => {
         )}
         <ButtonsContainer>
           <Button
-            color='secundary'
-            onClick={() => props.onClose()}
-            type='button'
-          >
-            {t('CANCEL', 'Cancel')}
-          </Button>
-          <Button
             borderRadius='8px'
             color='primary'
             type='submit'
             disabled={Object.keys(changesState).length === 0}
           >
             {t('SAVE', 'Save')}
+          </Button>
+          <Button
+            color='secundary'
+            onClick={() => props.onClose()}
+            type='button'
+          >
+            {t('CANCEL', 'Cancel')}
           </Button>
         </ButtonsContainer>
       </Container>

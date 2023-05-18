@@ -22,7 +22,6 @@ export const SectionContainer = styled.div`
 export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   padding: 20px;
   position: sticky;
   z-index: 100;
@@ -32,7 +31,7 @@ export const ButtonsContainer = styled.div`
   > button {
     border-radius: 8px;
     height: 44px;
-    &:first-child {
+    &:last-child {
       margin: 0 10px;
     }
   }
