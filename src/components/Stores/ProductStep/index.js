@@ -89,6 +89,29 @@ const ProductStepUI = (props) => {
           </ButtonWrapper>
         </ImportMenuContainer>
       )}
+      {step === 3 && option === 2 && !actionState?.loading && actionState?.error && (
+        <ImportMenuContainer>
+          <h2>{t('ERROR', 'Error')}</h2>
+          {actionState.error && typeof actionState.error === 'string' && actionState.error}
+          {actionState.error && typeof actionState.error === 'object' && Array.isArray(actionState.error) && (
+            <ul>
+              {actionState.error.map((item, i) => (
+                <React.Fragment key={i}>
+                  {Array.isArray(item) ? (
+                    item.map((err, index) => (
+                      typeof err === 'string' && (
+                        <li key={index}>{t(err.toUpperCase(), err)}</li>
+                      )
+                    ))
+                  ) : (
+                    typeof item === 'string' && <li>{t(item.toUpperCase(), item)}</li>
+                  )}
+                </React.Fragment>
+              ))}
+            </ul>
+          )}
+        </ImportMenuContainer>
+      )}
       {step === 2 && option === 3 && (
         <UploadMenuGuide
           handleBack={() => setStep(1)}

@@ -8,7 +8,7 @@ import {
 import Skeleton from 'react-loading-skeleton'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
-import { Button, IconButton } from '../../../styles'
+import { Button, IconButton, LinkButton } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { Alert, SearchBar, SideBar, ColumnAllowSettingPopover } from '../../Shared'
 import {
@@ -232,7 +232,7 @@ const BusinessDeviceListingUI = (props) => {
           </BrandListTable>
         </BrandListTableWrapper>
         <BrandListBottomContainer>
-          <span onClick={() => handleOpenSideBar()}>{t('ADD_NEW_DEVICE', 'Add new device')}</span>
+          <LinkButton onClick={() => handleOpenSideBar()}>{t('ADD_NEW_DEVICE', 'Add new device')}</LinkButton>
         </BrandListBottomContainer>
         {isOpen && (
           <SideBar
