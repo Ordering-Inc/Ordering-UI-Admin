@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { IconButton, Input } from '../../../styles'
-import { XLg, Files } from 'react-bootstrap-icons'
+import { XLg } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import {
   Container,
@@ -14,7 +14,7 @@ import {
 } from './styles'
 
 export const BusinessSalesGoogle = (props) => {
-  const { onClose, socialItem, businessSlug } = props
+  const { onClose, socialItem, storeUrl } = props
 
   const { width } = useWindowSize()
   const [, t] = useLanguage()
@@ -77,7 +77,7 @@ export const BusinessSalesGoogle = (props) => {
         <p>{t('BUSINESS_GOOGLE_STEP3_DESC', 'Scroll down and find Order ahead links and Menu link fields. Paste the link below.')}</p>
         <CopyInputWrapper isBottom>
           <Input
-            defaultValue='https://yourbusinessname.com/store/storename'
+            defaultValue={storeUrl || 'https://yourbusinessname.com/store/storename'}
             disabled
           />
         </CopyInputWrapper>

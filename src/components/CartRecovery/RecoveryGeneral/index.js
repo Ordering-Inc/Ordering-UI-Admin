@@ -42,13 +42,15 @@ export const RecoveryGeneral = (props) => {
 
   const [hours, setHours] = useState([])
   const [minutes, setMinutes] = useState([])
-  const [curPreorderTime, setCurPreorderTime] = useState({})
+  const [seconds, setSeconds] = useState([])
+  const [curPreorderTime, setCurPreorderTime] = useState({ hour: '0', minute: '0', second: '0' })
   const [curDayTime, setCurDayTime] = useState(0)
   const [isTime, setIsTime] = useState(true)
 
   const setTimeList = () => {
     const _hours = []
     const _minutes = []
+    const _seconds = []
     for (let i = 0; i < 24; i++) {
       const text = (i < 10 ? '0' : ' ') + i
       _hours.push({
@@ -62,9 +64,14 @@ export const RecoveryGeneral = (props) => {
         text: text,
         minute: i
       })
+      _seconds.push({
+        text: text,
+        second: i
+      })
     }
     setHours(_hours)
     setMinutes(_minutes)
+    setSeconds(_seconds)
   }
 
   const handleChangePreorderTime = (evt) => {
@@ -75,8 +82,9 @@ export const RecoveryGeneral = (props) => {
       [type]: value
     })
     let preorderTime = 0
-    if (type === 'hour') preorderTime = parseInt(value) * 3600 + parseInt(curPreorderTime?.minute) * 60
-    else preorderTime = parseInt(curPreorderTime?.hour) * 3600 + parseInt(value) * 60
+    if (type === 'hour') preorderTime = parseInt(value) * 3600 + parseInt(curPreorderTime?.minute) * 60 + parseInt(curPreorderTime?.second)
+    else if (type === 'minute') preorderTime = parseInt(curPreorderTime?.hour) * 3600 + parseInt(value) * 60 + parseInt(curPreorderTime?.second)
+    else preorderTime = parseInt(curPreorderTime?.hour) * 3600 + parseInt(curPreorderTime?.minute) * 60 + parseInt(value)
     handleChangeItem({ times: [preorderTime], launch_type: 'times' })
   }
 
@@ -103,7 +111,8 @@ export const RecoveryGeneral = (props) => {
     setTimeList()
     setCurPreorderTime({
       hour: recoveryActionState?.action?.times ? (parseInt(recoveryActionState?.action?.times[0] / 3600)) : '0',
-      minute: recoveryActionState?.action?.times ? (recoveryActionState?.action?.times[0] % 3600 / 60) : '0'
+      minute: recoveryActionState?.action?.times ? (parseInt(recoveryActionState?.action?.times[0] % 3600 / 60)) : '0',
+      second: recoveryActionState?.action?.times ? (recoveryActionState?.action?.times[0] % 3600 % 60) : '0'
     })
     if (!recoveryActionState?.action?.times) return
 
@@ -229,6 +238,16 @@ export const RecoveryGeneral = (props) => {
                   >
                     {minutes?.map((minute, i) => (
                       <option value={minute.minute} key={i}>{minute.text}</option>
+                    ))}
+                  </select>
+                  <span>:</span>
+                  <select
+                    value={curPreorderTime?.second}
+                    name='second'
+                    onChange={handleChangePreorderTime}
+                  >
+                    {seconds?.map((second, i) => (
+                      <option value={second.second} key={i}>{second.text}</option>
                     ))}
                   </select>
                 </TimeBlock>
