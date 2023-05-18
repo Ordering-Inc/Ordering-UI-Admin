@@ -26,10 +26,14 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessSalesChannel = function BusinessSalesChannel(props) {
   var setIsExtendExtraOpen = props.setIsExtendExtraOpen,
-    business = props.business;
+    business = props.business,
+    siteState = props.siteState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useApi = (0, _orderingComponentsAdmin.useApi)(),
+    _useApi2 = _slicedToArray(_useApi, 1),
+    ordering = _useApi2[0];
   var theme = (0, _styledComponents.useTheme)();
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
@@ -81,6 +85,10 @@ var BusinessSalesChannel = function BusinessSalesChannel(props) {
     setIsExtendExtraOpen(false);
     setSelectedItem(null);
   };
+  var storeUrl = (0, _react.useMemo)(function () {
+    var _siteState$site, _siteState$site2, _siteState$site3;
+    return siteState !== null && siteState !== void 0 && (_siteState$site = siteState.site) !== null && _siteState$site !== void 0 && _siteState$site.domain && (siteState === null || siteState === void 0 ? void 0 : (_siteState$site2 = siteState.site) === null || _siteState$site2 === void 0 ? void 0 : _siteState$site2.ssl_process_status) === 'ended' && (siteState === null || siteState === void 0 ? void 0 : siteState.ssl_status) !== 'error' ? "https://".concat(siteState === null || siteState === void 0 ? void 0 : (_siteState$site3 = siteState.site) === null || _siteState$site3 === void 0 ? void 0 : _siteState$site3.domain, "/store/").concat(business === null || business === void 0 ? void 0 : business.slug) : "https://".concat(ordering.project, ".tryordering.com/store/").concat(business === null || business === void 0 ? void 0 : business.slug);
+  }, [siteState, business]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SalesContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('SALES_CHANNELS', 'Sales channels')), socialList.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SocialBlock, {
       key: i
@@ -104,18 +112,19 @@ var BusinessSalesChannel = function BusinessSalesChannel(props) {
     color: "primary",
     onClick: handleOpenSocial
   }, t('OK_I_UNDERSTAND', 'Ok, I understand')))), width >= 1000 ? isOpenSocial && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.key) === 'facebook' && /*#__PURE__*/_react.default.createElement(_BusinessSalesFacebook.BusinessSalesFacebook, {
-    businessSlug: business.slug,
     socialItem: selectedItem,
+    storeUrl: storeUrl,
     onClose: handleCloseDetail
   }), (selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.key) === 'tiktok' && /*#__PURE__*/_react.default.createElement(_BusinessSalesTiktok.BusinessSalesTiktok, {
+    storeUrl: storeUrl,
     socialItem: selectedItem,
     onClose: handleCloseDetail
   }), (selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.key) === 'instagram' && /*#__PURE__*/_react.default.createElement(_BusinessSalesInstagram.BusinessSalesInstagram, {
-    businessSlug: business.slug,
+    storeUrl: storeUrl,
     socialItem: selectedItem,
     onClose: handleCloseDetail
   }), (selectedItem === null || selectedItem === void 0 ? void 0 : selectedItem.key) === 'google_my_business' && /*#__PURE__*/_react.default.createElement(_BusinessSalesGoogle.BusinessSalesGoogle, {
-    businessSlug: business.slug,
+    storeUrl: storeUrl,
     socialItem: selectedItem,
     onClose: handleCloseDetail
   })) : isOpenSocial && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {

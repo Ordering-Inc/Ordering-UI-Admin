@@ -17,7 +17,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var GeneralInstagram = function GeneralInstagram(_ref) {
-  var businessSlug = _ref.businessSlug;
+  var storeUrl = _ref.storeUrl;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -38,7 +38,7 @@ var GeneralInstagram = function GeneralInstagram(_ref) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.Step, null, /*#__PURE__*/_react.default.createElement("h3", null, t('STEP', 'Step'), " 4"), /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESS_INSTAGRAM_GENERAL_STEP5_DESC', 'Just add this link to the website field:')), /*#__PURE__*/_react.default.createElement(_styles2.CopyInputWrapper, {
     isBottom: true
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    defaultValue: "https://yourbusinessname.com/store/storename",
+    defaultValue: storeUrl || 'https://yourbusinessname.com/store/storename',
     disabled: true
   })), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.salesChannels.instagramGeneralStep5,

@@ -24,7 +24,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessSalesInstagram = function BusinessSalesInstagram(props) {
   var onClose = props.onClose,
     socialItem = props.socialItem,
-    businessSlug = props.businessSlug;
+    storeUrl = props.storeUrl;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -82,9 +82,7 @@ var BusinessSalesInstagram = function BusinessSalesInstagram(props) {
       active: selectedTab === item.key
     }, item.title);
   })), selectedTab === 'general' && /*#__PURE__*/_react.default.createElement(_GeneralInstagram.GeneralInstagram, {
-    businessSlug: businessSlug
-  }), selectedTab === 'advanced' && /*#__PURE__*/_react.default.createElement(_AdvancedInstagram.AdvancedInstagram, {
-    businessSlug: businessSlug
-  }));
+    storeUrl: storeUrl
+  }), selectedTab === 'advanced' && /*#__PURE__*/_react.default.createElement(_AdvancedInstagram.AdvancedInstagram, null));
 };
 exports.BusinessSalesInstagram = BusinessSalesInstagram;

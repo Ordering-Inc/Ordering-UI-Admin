@@ -147,14 +147,16 @@ var CustomersListingUI = function CustomersListingUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.VerifiedStatusFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: orderFilterValue === '' || orderFilterValue === null ? 'primary' : 'secundaryDark',
     onClick: function onClick() {
-      return handleChangeOrderFilterValue('');
+      return handleChangeOrderFilterValue(null);
     }
-  }, t('ALL', 'All'), (orderFilterValue === '' || orderFilterValue === null) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, null)), orderList.map(function (item, i) {
+  }, t('ALL', 'All')), orderList.map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.Button, {
       key: i,
       color: orderFilterValue === item.value ? 'primary' : 'secundaryDark',
       onClick: function onClick() {
-        return handleChangeOrderFilterValue(item.value);
+        return handleChangeOrderFilterValue(function (prev) {
+          return prev === item.value ? null : item.value;
+        });
       }
     }, item.name, orderFilterValue === item.value && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, null));
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionButtonsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
