@@ -531,9 +531,13 @@ export const CustomDomainInfoContent = styled.div`
   opacity: 0;
   right: -100px;
   ${props => props.theme.rtl && css`
-    left: 0px;
+    left: 0px;s
     right: initial;
   `}
+
+  span {
+    display: block;
+  }
 
   a {
     color: ${props => props.theme.colors.primary};
