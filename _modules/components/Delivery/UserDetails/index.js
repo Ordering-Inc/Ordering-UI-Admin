@@ -11,7 +11,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _styledComponents = require("styled-components");
 var _reactBootstrap = require("react-bootstrap");
 var _orderingComponentsAdmin = require("ordering-components-admin");
-var _Orders = require("../../Orders");
+var _OriginalOrdersManager = require("../../Orders/OrdersManager/Layouts/OriginalOrdersManager");
 var _AddressList = require("../AddressList");
 var _Shared = require("../../Shared");
 var _UserDetailsMenu = require("../UserDetailsMenu");
@@ -183,7 +183,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }, scheduleState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')))), currentMenuSelected === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversLogs.DriversLogs, {
     userId: (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.id,
     UIComponent: _DriversGroupLogs.DriversGroupLogsUI
-  }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_Orders.OrdersManager, {
+  }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_OriginalOrdersManager.OriginalOrdersManager, {
     isSelectedOrders: true,
     customerId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,
     handleCustomOrderDetail: setExtraOpen
