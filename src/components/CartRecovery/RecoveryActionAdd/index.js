@@ -38,7 +38,7 @@ export const RecoveryActionAddUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const { register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, errors, setValue } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const [hours, setHours] = useState([])
@@ -298,7 +298,10 @@ export const RecoveryActionAddUI = (props) => {
               placeholder={<Option>{t('SELECT_CHANNEL', 'Select a channel')}</Option>}
               defaultValue={formState?.changes?.channel ?? ''}
               options={channelList}
-              onChange={val => handleChangeItem({ channel: val })}
+              onChange={val => {
+                setValue('body', '')
+                handleChangeItem({ channel: val, body: '' })
+              }}
             />
           </InputWrapper>
           <InputWrapper>
