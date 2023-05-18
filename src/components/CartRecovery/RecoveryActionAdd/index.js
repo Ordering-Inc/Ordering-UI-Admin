@@ -135,6 +135,13 @@ export const RecoveryActionAddUI = (props) => {
   }
 
   const handleSwitchTime = () => {
+    let preorderTime
+    if (!isTime) {
+      preorderTime = parseInt(curPreorderTime?.hour) * 3600 + parseInt(curPreorderTime?.minute) * 60 + parseInt(curPreorderTime?.second)
+    } else {
+      preorderTime = curDayTime * 24 * 3600
+    }
+    handleChangeItem({ times: [preorderTime], launch_type: 'times' })
     setIsTime(prev => !prev)
   }
 
