@@ -208,11 +208,4 @@ export const BrandListBottomContainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 16px;
-
-  span {
-    cursor: pointer;
-    user-select: none;
-    font-size: 14px;
-    color: ${props => props.theme.colors?.primary};
-  }
 `

@@ -242,12 +242,9 @@ const OrderingWebsiteUI = (props) => {
                       <InfoCircleFill />
                     </IconButton>
                     <CustomDomainInfoContent>
-                      <span>
-                        {t('ADD_NEW_STORE_INFO', 'When creating a custom domain, add your domain or subdomain without http protocol or slashes. Example: www.customerwebsite.ordering.co Select Automatic if you don\'t use cloudflare or select Proxy if you use cloudflare If you have problems with the set-up, please contact our')}
-                      </span>
-                      <a href='https://www.ordering.co/contact-ordering' rel='noopener noreferrer' target='_blank'>
-                        {t('CUSTOMER_SUPPORT_TEAM', 'customer support team')}
-                      </a>
+                      <span>{t('CUSTOM_DOMAIN_INFO_DESC_1', 'When creating a custom domain, add your domain or subdomain without http protocol or slashes.')}</span>
+                      <span>{t('EXAMPLE', 'Example')}: www.customerwebsite.ordering.co</span>
+                      <span>{t('CUSTOM_DOMAIN_INFO_DESC_2', 'If you have problems with the set-up, please contact our')}<a href='https://www.ordering.co/contact-ordering' rel='noopener noreferrer' target='_blank'>{t('CUSTOMER_SUPPORT_TEAM', 'customer support team')}</a></span>
                     </CustomDomainInfoContent>
                   </CustomDomainInfo>
                 </TitleWrapper>
@@ -343,7 +340,7 @@ const OrderingWebsiteUI = (props) => {
                       {site?.domain && (
                         <>
                           {site?.ssl_status === 'issued' && (
-                            <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_ISSUED', 'Leave it as it is, the domain shows so it\'s not required any other comment')}</CustomeDomainDesc>
+                            <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_ISSUED', 'Your domain is now added , please verify the custom domain link above.')}</CustomeDomainDesc>
                           )}
                           {site?.ssl_status === 'pre-issued' && (
                             <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_PRE_ISSUED', 'Process almost finish, please wait')}</CustomeDomainDesc>
@@ -351,7 +348,7 @@ const OrderingWebsiteUI = (props) => {
                           {site?.ssl_status === 'error' && (
                             <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_ERROR', 'Custom domain can\'t be created, please try again with valid data')}</CustomeDomainDesc>
                           )}
-                          {site?.ssl_status === 'pending_validation' && (
+                          {((site?.ssl_status === 'pending_validation') || (site?.ssl_status === 'void' && site?.ssl_process_status === 'pending')) && (
                             <CustomeDomainDesc>{t('CUSTOM_DOMAIN_STATUS_PENDING_VALIDATION', 'A custom domain is being created, please wait')}</CustomeDomainDesc>
                           )}
                           {site?.ssl_status === 'revoked' && (
