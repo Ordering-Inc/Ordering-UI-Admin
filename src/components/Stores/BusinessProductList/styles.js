@@ -110,14 +110,9 @@ export const WrapperNotFound = styled.div`
   margin: 20px;
 `
 
-export const AddProductBtn = styled.div`
-  user-select: none;
-  font-size: 14px;
-  color: ${props => props.theme.colors.primary};
+export const AddProductBtnWrapper = styled.div`
   margin-top: 12px;
-  cursor: pointer;
   margin-bottom: 15px;
-  display: inline-block;
 `
 
 export const ProductListBottom = styled.div`

@@ -18,7 +18,7 @@ export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin: 56px 0 30px 0;
+  margin: 60px 0;
 
   button {
     border-radius: 8px;

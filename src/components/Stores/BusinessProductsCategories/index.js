@@ -1,12 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SingleBusinessSubCateogries } from '../SingleBusinessSubCateogries'
+import { LinkButton } from '../../../styles'
 
 import {
   CategoryListContainer,
   HeaderContainer,
   ListContent,
-  AddCategory
+  AddCategoryWrapper
 } from './styles'
 
 export const BusinessProductsCategories = (props) => {
@@ -70,12 +71,14 @@ export const BusinessProductsCategories = (props) => {
           )}
         </ListContent>
       </CategoryListContainer>
-      <AddCategory
-        ref={addButtonRef}
-        onClick={() => handleOpenCategoryDetails()}
-      >
-        {t('ADD_NEW_CATEGORY', 'Add new category')}
-      </AddCategory>
+      <AddCategoryWrapper>
+        <LinkButton
+          ref={addButtonRef}
+          onClick={() => handleOpenCategoryDetails()}
+        >
+          {t('ADD_NEW_CATEGORY', 'Add new category')}
+        </LinkButton>
+      </AddCategoryWrapper>
     </>
   )
 }
