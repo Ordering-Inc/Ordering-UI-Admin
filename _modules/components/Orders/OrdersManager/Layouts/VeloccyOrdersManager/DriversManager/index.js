@@ -8,7 +8,6 @@ exports.DriversManager = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _OrdersLateralBar = require("../../../../OrdersLateralBar");
-var _OrderNotification = require("../../../../OrderNotification");
 var _GoogleMapsApiKeySettingButton = require("../../../../GoogleMapsApiKeySettingButton");
 var _DriversOnlineOfflineFilter = require("../../../../DriversOnlineOfflineFilter");
 var _DriversBusyStatusFilter = require("../../../../DriversBusyStatusFilter");
@@ -101,6 +100,7 @@ var DriversManagerUI = function DriversManagerUI(props) {
     numberOfbusyDrivers: numberOfbusyDrivers,
     numberOfnotBusyDrivers: numberOfnotBusyDrivers
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperDriversList, null, /*#__PURE__*/_react.default.createElement(_DriversList.DriversList, {
+    hidePhoto: true,
     loading: driversList.loading,
     driversIsOnline: driversIsOnline,
     onlineDrivers: onlineDrivers,
@@ -115,7 +115,7 @@ var DriversManagerUI = function DriversManagerUI(props) {
     onClose: function onClose() {
       return handleBackRedirect();
     }
-  }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, null)));
+  })));
 };
 var DriversManager = function DriversManager(props) {
   var DriversControlProps = _objectSpread(_objectSpread({}, props), {}, {

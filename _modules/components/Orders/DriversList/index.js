@@ -31,7 +31,8 @@ var DriversList = function DriversList(props) {
     offlineDrivers = props.offlineDrivers,
     selectedDriver = props.selectedDriver,
     handleChangeDriver = props.handleChangeDriver,
-    handleOpenDriverOrders = props.handleOpenDriverOrders;
+    handleOpenDriverOrders = props.handleOpenDriverOrders,
+    hidePhoto = props.hidePhoto;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -77,7 +78,7 @@ var DriversList = function DriversList(props) {
         return handleClickDriver(e, driver);
       },
       active: (selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id) === driver.id
-    }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
+    }, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage((driver === null || driver === void 0 ? void 0 : driver.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver), 'h_50,c_limit')
     })), /*#__PURE__*/_react.default.createElement(_styles2.DriverInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
       className: "driver-orders",

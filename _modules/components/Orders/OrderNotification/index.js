@@ -59,6 +59,8 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     alertState = _useState6[0],
     setAlertState = _useState6[1];
   var handleNotification = function handleNotification(order) {
+    var _order$products, _order$products$;
+    if ((order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : (_order$products$ = _order$products[0]) === null || _order$products$ === void 0 ? void 0 : _order$products$.type) === 'gift_card') return;
     if (customerId && (order === null || order === void 0 ? void 0 : order.customer_id) !== customerId) return;
     if (isOnlyDelivery && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) return;
     var _registerOrderIds = _toConsumableArray(registerOrderIds);

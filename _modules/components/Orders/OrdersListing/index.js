@@ -22,7 +22,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersListing = function OrdersListing(props) {
   var _theme$images, _theme$images$dummies;
-  var isSelectedOrders = props.isSelectedOrders,
+  var hidePhoto = props.hidePhoto,
+    isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
     selectedOrderIds = props.selectedOrderIds,
     orderListView = props.orderListView,
@@ -100,6 +101,7 @@ var OrdersListing = function OrdersListing(props) {
   }, t('FILTERS', 'Filters'))) : /*#__PURE__*/_react.default.createElement("p", null, t('MOBILE_NO_ORDERS', 'No Orders yet.')))) : /*#__PURE__*/_react.default.createElement(_styles2.WrapperOrderListContent, {
     maxHeight: orderListView !== 'table'
   }, orderListView === 'table' ? /*#__PURE__*/_react.default.createElement(_OrdersTable.OrdersTable, {
+    hidePhoto: hidePhoto,
     setSelectedOrderIds: setSelectedOrderIds,
     isSelectedOrders: isSelectedOrders,
     orderList: orderList,
