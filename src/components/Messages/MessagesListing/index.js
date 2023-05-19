@@ -49,6 +49,7 @@ const MessagesListingUI = (props) => {
   const [selectedOrder, setSelectedOrder] = useState(null)
   const [orderIdForUnreadCountUpdate, setOrderIdForUnreadCountUpdate] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
+  const [timeStatus, setTimeStatus] = useState(null)
 
   const handleOpenOrderDetail = (order) => {
     setDetailsOrder(order)
@@ -91,6 +92,7 @@ const MessagesListingUI = (props) => {
           handleChangeFilterValues={handleChangeFilterValues}
           filterModalOpen={filterModalOpen}
           setFilterModalOpen={setFilterModalOpen}
+          setTimeStatus={setTimeStatus}
         />
         <MessagesContent>
           <OrdersContainer>
@@ -173,6 +175,7 @@ const MessagesListingUI = (props) => {
                 orderIdForUnreadCountUpdate={orderIdForUnreadCountUpdate}
                 handleOpenOrderDetail={handleOpenOrderDetail}
                 handleOrderCardClick={handleOrderCardClick}
+                timeStatus={timeStatus}
               />
             )}
             {selectedOption === 'contacts' && (

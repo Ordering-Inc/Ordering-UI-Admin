@@ -6,6 +6,7 @@ export const DriversListContainer = styled.div`
 `
 
 export const DriverCard = styled.div`
+  min-height: 66px;
   cursor: pointer;
   display: flex;
   align-items: center;
