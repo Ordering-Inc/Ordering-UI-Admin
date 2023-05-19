@@ -33,6 +33,7 @@ const OrderNotificationUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleNotification = (order) => {
+    if (order?.products?.[0]?.type === 'gift_card') return
     if (customerId && order?.customer_id !== customerId) return
     if (isOnlyDelivery && order?.delivery_type !== 1) return
     const _registerOrderIds = [...registerOrderIds]
