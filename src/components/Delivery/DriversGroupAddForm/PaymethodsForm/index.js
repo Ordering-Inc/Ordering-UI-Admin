@@ -48,12 +48,14 @@ export const PaymethodsForm = (props) => {
         </SearchBarWrapper>
         <ButtonGroup>
           <Button
+            type='button'
             color='secundaryDark'
             onClick={() => handleSelectAllPaymethod(true)}
           >
             {t('SELECT_ALL', 'Select all')}
           </Button>
           <Button
+            type='button'
             color='secundaryDark'
             onClick={() => handleSelectAllPaymethod(false)}
           >
