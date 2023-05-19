@@ -103,7 +103,7 @@ const SingleRecoveryNotificationUI = (props) => {
         )}
         <InputWrapper>
           <label>{t('MESSAGE', 'Message')}</label>
-          {notification?.channel === 'email' ? (
+          {(formState?.changes?.channel === 'email' || notification?.channel === 'email') ? (
             <HtmlEditor
               body={
                 formState?.changes?.body
