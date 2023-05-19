@@ -51,8 +51,6 @@ const MessagesListingUI = (props) => {
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [timeStatus, setTimeStatus] = useState(null)
 
-  console.log(timeStatus, 'timeStatus')
-
   const handleOpenOrderDetail = (order) => {
     setDetailsOrder(order)
     setOrderDetailId(order.id)
