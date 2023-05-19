@@ -183,6 +183,7 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
     setMapFitted(false);
   }, [interActionMapOrder]);
   var handleMapChange = function handleMapChange(data) {
+    if (!(data !== null && data !== void 0 && data.zoom)) return;
     setMapZoom(data === null || data === void 0 ? void 0 : data.zoom);
   };
   return /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
