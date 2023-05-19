@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useConfig, DriversList as DriversController } from 'ordering-components-admin'
 import { OrdersLateralBar } from '../../../../OrdersLateralBar'
-import { OrderNotification } from '../../../../OrderNotification'
 import { GoogleMapsApiKeySettingButton } from '../../../../GoogleMapsApiKeySettingButton'
 import { DriversOnlineOfflineFilter } from '../../../../DriversOnlineOfflineFilter'
 import { DriversBusyStatusFilter } from '../../../../DriversBusyStatusFilter'
@@ -97,6 +96,7 @@ const DriversManagerUI = (props) => {
             </FilterContainer>
             <WrapperDriversList>
               <DriversList
+                hidePhoto
                 loading={driversList.loading}
                 driversIsOnline={driversIsOnline}
                 onlineDrivers={onlineDrivers}
@@ -117,8 +117,6 @@ const DriversManagerUI = (props) => {
             onClose={() => handleBackRedirect()}
           />
         )}
-
-        <OrderNotification />
       </DriversContainer>
     </>
   )

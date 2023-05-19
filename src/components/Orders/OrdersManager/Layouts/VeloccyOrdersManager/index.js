@@ -236,6 +236,7 @@ const OrdersManagerUI = (props) => {
                 <OrdersInnerContent className='order-content'>
                   <WrapItemView>
                     <OrdersDashboard
+                      hidePhoto
                       isSelectedOrders={isSelectedOrders}
                       driverId={props.driverId}
                       customerId={props.customerId}
