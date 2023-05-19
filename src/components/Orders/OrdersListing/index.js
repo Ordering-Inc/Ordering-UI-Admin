@@ -13,6 +13,7 @@ import {
 
 export const OrdersListing = (props) => {
   const {
+    hidePhoto,
     isSelectedOrders,
     orderList,
     selectedOrderIds,
@@ -111,6 +112,7 @@ export const OrdersListing = (props) => {
             >
               {orderListView === 'table' ? (
                 <OrdersTable
+                  hidePhoto={hidePhoto}
                   setSelectedOrderIds={setSelectedOrderIds}
                   isSelectedOrders={isSelectedOrders}
                   orderList={orderList}
