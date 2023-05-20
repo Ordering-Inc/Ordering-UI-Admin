@@ -163,7 +163,6 @@ const ContentFormUI = (props) => {
               }
             }}
             onChange={content => setPageContent(content)}
-            onBlurCodeview={(e) => console.log(e)}
           />
         </WrapperEditor>
         <ButtonGroupWrapper>
