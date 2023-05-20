@@ -163,13 +163,13 @@ const ContentFormUI = (props) => {
               }
             }}
             onChange={content => setPageContent(content)}
+            onBlurCodeview={(e) => console.log(e)}
           />
         </WrapperEditor>
         <ButtonGroupWrapper>
           <Button
             borderRadius='8px'
             color='primary'
-            disabled={Object.keys(formState.changes).length === 0}
             onClick={() => handleSubmit()}
           >
             {t('ACCEPT', 'Accept')}
