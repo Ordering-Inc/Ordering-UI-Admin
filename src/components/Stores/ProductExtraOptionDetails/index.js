@@ -6,7 +6,7 @@ import {
   ProductExtraOptionDetails as ProductExtraOptionDetailsController
 } from 'ordering-components-admin'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { IconButton, Input } from '../../../styles'
+import { IconButton, Input, LinkButton } from '../../../styles'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { bytesConverter } from '../../../utils'
@@ -400,12 +400,12 @@ const ProductExtraOptionDetailsUI = (props) => {
         )}
         {!isAddForm && (
           <AddNewOptionButton>
-            <span
+            <LinkButton
               className='add-option-btn'
               onClick={() => setIsAddForm(true)}
             >
               {t('ADD_SUBOPTION', 'Add suboption')}
-            </span>
+            </LinkButton>
           </AddNewOptionButton>
         )}
       </ModifierOptionsContainer>

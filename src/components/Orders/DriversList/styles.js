@@ -2,10 +2,11 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const DriversListContainer = styled.div`
-  padding: 15px 10px;
+  padding: 15px 0px;
 `
 
 export const DriverCard = styled.div`
+  min-height: 66px;
   cursor: pointer;
   display: flex;
   align-items: center;

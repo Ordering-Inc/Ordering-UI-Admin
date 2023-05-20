@@ -355,7 +355,7 @@ export const OrderBill = (props) => {
         </table>
       )}
 
-      {!order?.refund_data && stripePaymethods.includes(order?.paymethod?.gateway) && (
+      {!isGiftCardOrder && !order?.refund_data && stripePaymethods.includes(order?.paymethod?.gateway) && (
         <RefundButtonWrapper>
           <Button
             color='primary'

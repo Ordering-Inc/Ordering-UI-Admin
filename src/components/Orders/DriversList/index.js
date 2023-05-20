@@ -23,7 +23,8 @@ export const DriversList = (props) => {
     offlineDrivers,
     selectedDriver,
     handleChangeDriver,
-    handleOpenDriverOrders
+    handleOpenDriverOrders,
+    hidePhoto
   } = props
 
   const theme = useTheme()
@@ -74,9 +75,11 @@ export const DriversList = (props) => {
               onClick={(e) => handleClickDriver(e, driver)}
               active={selectedDriver?.id === driver.id}
             >
-              <WrapperImage>
-                <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
-              </WrapperImage>
+              {!hidePhoto && (
+                <WrapperImage>
+                  <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
+                </WrapperImage>
+              )}
               <DriverInfo>
                 <div>
                   <p>{driver.name} {driver.lastname}</p>

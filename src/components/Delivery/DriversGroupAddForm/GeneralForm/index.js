@@ -47,7 +47,7 @@ export const GeneralForm = (props) => {
         <label>{t('NAME', 'Name')}</label>
         <Input
           name='name'
-          value={changesState?.name ?? ''}
+          defaultValue={changesState?.name ?? ''}
           onChange={e => handleChangesState({ name: e.target.value })}
           placeholder={t('NAME', 'Name')}
           ref={register({
