@@ -45,7 +45,7 @@ export const AdvancedLayouts = (props) => {
 
   const productFormLayoutList = [
     { value: 'original', name: 'Original' },
-    { value: 'red', name: 'Simple' }
+    { value: 'starbucks', name: 'Elegant' }
   ]
 
   const productSearchLayoutList = [

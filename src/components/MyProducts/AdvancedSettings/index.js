@@ -90,7 +90,8 @@ export const AdvancedSettings = (props) => {
     { name: t('DUMMY_IMAGE_WHEN_NO_IMAGE', 'Dummy image when no image'), type: 'hidden', path: 'business_view.components.products.components.product.components.dummy.hidden' },
     { name: t('DESCRIPTION', 'Description'), type: 'hidden', path: 'business_view.components.products.components.product.components.description.hidden' },
     { name: t('IMAGE', 'Image'), type: 'hidden', path: 'business_view.components.products.components.product.components.image.hidden' },
-    { name: t('POSITION', 'Position'), type: 'position', path: 'business_view.components.products.components.product.components.image.position' }
+    { name: t('POSITION', 'Position'), type: 'position', path: 'business_view.components.products.components.product.components.image.position' },
+    { name: t('ADD_TO_CART_BUTTON', 'Add to cart button'), type: 'hidden', path: 'business_view.components.products.components.add_to_cart_button.hidden' }
   ]
 
   const reviewsPopups = [
@@ -101,7 +102,9 @@ export const AdvancedSettings = (props) => {
     { name: t('BUSINESS_LOGO', 'Business logo'), type: 'hidden', path: 'header.components.cart.components.business.components.logo.hidden' },
     { name: t('PRODUCT_IMAGE', 'Product image'), type: 'hidden', path: 'header.components.cart.components.products.components.image.hidden' },
     { name: t('DISCOUNT_COUPON', 'Discount coupon'), type: 'hidden', path: 'header.components.cart.components.discount_coupon.hidden' },
-    { name: t('COMMENTS', 'Comments'), type: 'hidden', path: 'header.components.cart.components.comments.hidden' }
+    { name: t('COMMENTS', 'Comments'), type: 'hidden', path: 'header.components.cart.components.comments.hidden' },
+    { name: t('OPEN_STRATEGY', 'Open strategy'), type: 'position', path: 'header.components.cart.components.open_strategy.type' },
+    { name: t('OPEN_STRATEGY_POSITION', 'Open strategy position'), type: 'position', path: 'header.components.cart.components.open_strategy.position' }
   ]
 
   const checkoutList = [
