@@ -55,6 +55,7 @@ import {
   CustomDomainInfo,
   CustomDomainInfoContent
 } from './styles'
+import { AdvancedLayouts } from '../AdvancedLayouts'
 
 const OrderingWebsiteUI = (props) => {
   const {
@@ -90,7 +91,8 @@ const OrderingWebsiteUI = (props) => {
 
   const settingsList = [
     { key: 'basic', name: t('BASIC_SETTINGS', 'Basic Settings') },
-    { key: 'advanced', name: t('ADVANCED_SETTINGS', 'Advanced Settings') }
+    { key: 'advanced', name: t('ADVANCED_SETTINGS', 'Advanced Settings') },
+    { key: 'advanced_layouts', name: t('ADVANCED_LAYOUTS', 'Advanced Layouts') }
   ]
 
   const handleClickImage = (type) => {
@@ -595,6 +597,14 @@ const OrderingWebsiteUI = (props) => {
         )}
         {selectedSetting === 'advanced' && !orderingTheme?.loading && (
           <AdvancedSettings
+            themesList={themesList}
+            advancedValues={advancedValues}
+            setAdvancedValues={setAdvancedValues}
+            handleUpdateSiteTheme={handleUpdateSiteTheme}
+          />
+        )}
+        {selectedSetting === 'advanced_layouts' && !orderingTheme?.loading && (
+          <AdvancedLayouts
             themesList={themesList}
             advancedValues={advancedValues}
             setAdvancedValues={setAdvancedValues}
