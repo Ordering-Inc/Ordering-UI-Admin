@@ -17,6 +17,7 @@ var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
 var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
+var _constants = require("../../../config/constants");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -38,7 +39,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserAddFormUI = function UserAddFormUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _formState$changes2, _formState$changes3, _formState$changes4, _validationFields$fie5, _props$afterMidElemen, _props$afterMidCompon, _session$user;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _formState$changes2, _formState$changes3, _formState$changes4, _validationFields$fie5, _formState$changes5, _props$afterMidElemen, _props$afterMidCompon, _session$user;
   var formState = props.formState,
     showField = props.showField,
     cleanFormState = props.cleanFormState,
@@ -86,14 +87,22 @@ var UserAddFormUI = function UserAddFormUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     isSuccessSubmitted = _useState8[0],
     setIsSuccessSubmitted = _useState8[1];
-  var _useState9 = (0, _react.useState)({
+  var _useState9 = (0, _react.useState)([]),
+    _useState10 = _slicedToArray(_useState9, 2),
+    timezonesOptions = _useState10[0],
+    setTimezonesOptions = _useState10[1];
+  var _useState11 = (0, _react.useState)(''),
+    _useState12 = _slicedToArray(_useState11, 2),
+    timezoneSearchValue = _useState12[0],
+    setTimezoneSearchValue = _useState12[1];
+  var _useState13 = (0, _react.useState)({
       name: null,
       data: null,
       open: false
     }),
-    _useState10 = _slicedToArray(_useState9, 2),
-    cropState = _useState10[0],
-    setCropState = _useState10[1];
+    _useState14 = _slicedToArray(_useState13, 2),
+    cropState = _useState14[0],
+    setCropState = _useState14[1];
   var emailInput = (0, _react.useRef)(null);
   var inputRef = (0, _react.useRef)(null);
   var closeAlert = function closeAlert() {
@@ -107,6 +116,17 @@ var UserAddFormUI = function UserAddFormUI(props) {
       }
     });
   };
+  (0, _react.useEffect)(function () {
+    var _timezonesOptions = _constants.timezones.filter(function (timezone) {
+      return timezone.toLocaleLowerCase().includes(timezoneSearchValue.toLocaleLowerCase());
+    }).map(function (timezone) {
+      return {
+        value: timezone,
+        content: timezone
+      };
+    });
+    setTimezonesOptions(_timezonesOptions);
+  }, [timezoneSearchValue]);
   var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
   var onSubmit = function onSubmit() {
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
@@ -347,7 +367,20 @@ var UserAddFormUI = function UserAddFormUI(props) {
       }),
       autoComplete: "off"
     }));
-  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
+  }), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+    placeholder: t('SELECT_TIMEZONE', 'Select a timezone'),
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.timezone,
+    options: timezonesOptions,
+    onChange: function onChange(val) {
+      return handleChangeSwtich('timezone', val);
+    },
+    optionInnerMaxHeight: "300px",
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: timezoneSearchValue,
+    handleChangeSearch: setTimezoneSearchValue
+  })), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber
