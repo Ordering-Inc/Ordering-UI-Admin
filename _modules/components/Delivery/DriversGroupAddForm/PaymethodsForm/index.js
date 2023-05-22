@@ -60,11 +60,13 @@ var PaymethodsForm = function PaymethodsForm(props) {
       return setSearchValue(val);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    type: "button",
     color: "secundaryDark",
     onClick: function onClick() {
       return handleSelectAllPaymethod(true);
     }
   }, t('SELECT_ALL', 'Select all')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    type: "button",
     color: "secundaryDark",
     onClick: function onClick() {
       return handleSelectAllPaymethod(false);

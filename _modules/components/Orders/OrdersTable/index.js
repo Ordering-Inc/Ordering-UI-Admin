@@ -153,12 +153,13 @@ var OrdersTable = function OrdersTable(props) {
     var finalTaget = sign + day + restHours + ':' + restMins;
     return finalTaget;
   };
-  var getStatusClassName = function getStatusClassName(minutes) {
-    var _configState$configs2, _configState$configs3;
-    if (isNaN(Number(minutes))) return 'in_time';
-    var delayTime = configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_delayed_time) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value;
-    return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed';
-  };
+
+  // const getStatusClassName = (minutes) => {
+  //   if (isNaN(Number(minutes))) return 'in_time'
+  //   const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
+  //   return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
+  // }
+
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
       setCurrentTime(Date.now());
@@ -646,7 +647,7 @@ var OrdersTable = function OrdersTable(props) {
         return handleClickOrder(order, e);
       },
       "data-tour": i === 0 ? 'tour_start' : '',
-      "data-status": isEnabledRowInColor && getStatusClassName(getDelayMinutes(order))
+      "data-status": isEnabledRowInColor && (order === null || order === void 0 ? void 0 : order.time_status)
     }, /*#__PURE__*/_react.default.createElement("tr", null, Object.keys(allowColumns).filter(function (col) {
       var _allowColumns$col7;
       return (_allowColumns$col7 = allowColumns[col]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.visable;
@@ -658,7 +659,7 @@ var OrdersTable = function OrdersTable(props) {
         return /*#__PURE__*/_react.default.createElement("td", {
           key: "slaBar".concat(i, "-").concat(index)
         }, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
-          timeState: getStatusClassName(getDelayMinutes(order))
+          timeState: order === null || order === void 0 ? void 0 : order.time_status
         }));
       }
       if (column === 'externalId' && !isSelectedOrders) {
@@ -797,7 +798,7 @@ var OrdersTable = function OrdersTable(props) {
         }, /*#__PURE__*/_react.default.createElement(_styles.Timer, null, /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
         }, t('TIMER', 'Timer')), /*#__PURE__*/_react.default.createElement("p", {
-          className: getStatusClassName(getDelayMinutes(order))
+          className: order === null || order === void 0 ? void 0 : order.time_status
         }, displayDelayedTime(order))));
       }
       if (column === 'total') {
