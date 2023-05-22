@@ -8,7 +8,7 @@ import {
   ExamineClick,
   UserFormDetails as UserFormDetailsController
 } from 'ordering-components-admin'
-import { Button, Input } from '../../../styles'
+import { Button, Input, DefaultSelect } from '../../../styles'
 import { Alert, InputPhoneNumber, Modal, ImageCrop } from '../../Shared'
 import { sortInputFields, bytesConverter, setStorageItem } from '../../../utils'
 import parsePhoneNumber from 'libphonenumber-js'
@@ -17,6 +17,7 @@ import BiImage from '@meronex/icons/bi/BiImage'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
+import { timezones } from '../../../config/constants'
 
 import {
   FormContainer,
@@ -31,7 +32,8 @@ import {
   MainInformationContainer,
   DriverGroupListContainer,
   DriverGroupItem,
-  CheckboxWrapper
+  CheckboxWrapper,
+  InputWrapper
 } from './styles'
 
 const UserAddFormUI = (props) => {
@@ -63,6 +65,8 @@ const UserAddFormUI = (props) => {
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isSuccessSubmitted, setIsSuccessSubmitted] = useState(false)
+  const [timezonesOptions, setTimezonesOptions] = useState([])
+  const [timezoneSearchValue, setTimezoneSearchValue] = useState('')
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const emailInput = useRef(null)
   const inputRef = useRef(null)
@@ -74,6 +78,18 @@ const UserAddFormUI = (props) => {
     })
     cleanFormState && cleanFormState({ result: { error: false } })
   }
+
+  useEffect(() => {
+    const _timezonesOptions = timezones
+      .filter(timezone => timezone.toLocaleLowerCase().includes(timezoneSearchValue.toLocaleLowerCase()))
+      .map(timezone => {
+        return {
+          value: timezone,
+          content: timezone
+        }
+      })
+    setTimezonesOptions(_timezonesOptions)
+  }, [timezoneSearchValue])
 
   const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
@@ -322,6 +338,22 @@ const UserAddFormUI = (props) => {
 
                     </React.Fragment>
                   )
+                )}
+                {isDriversPage && (
+                  <InputWrapper>
+                    <DefaultSelect
+                      placeholder={t('SELECT_TIMEZONE', 'Select a timezone')}
+                      defaultValue={formState?.changes?.timezone}
+                      options={timezonesOptions}
+                      onChange={val => handleChangeSwtich('timezone', val)}
+                      optionInnerMaxHeight='300px'
+                      isShowSearchBar
+                      searchBarIsCustomLayout
+                      searchBarIsNotLazyLoad
+                      searchValue={timezoneSearchValue}
+                      handleChangeSearch={setTimezoneSearchValue}
+                    />
+                  </InputWrapper>
                 )}
                 {!!showInputPhoneNumber && (
                   <InputPhoneNumber
