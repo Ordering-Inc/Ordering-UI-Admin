@@ -14,6 +14,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -811,7 +812,7 @@ var OrdersTable = function OrdersTable(props) {
         }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$total2 = allowColumns.total) === null || _allowColumns$total2 === void 0 ? void 0 : _allowColumns$total2.visable) && /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
         }, parsePrice(order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total, {
-          currency: order === null || order === void 0 ? void 0 : order.currency
+          currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
         })), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
           utc: false
         }))));

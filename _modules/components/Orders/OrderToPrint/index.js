@@ -11,6 +11,7 @@ var _EnDotSingle = _interopRequireDefault(require("@meronex/icons/en/EnDotSingle
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _BisBusiness = _interopRequireDefault(require("@meronex/icons/bi/BisBusiness"));
 var _OrderBill = require("../OrderBill");
+var _utils = require("../../../utils");
 var _styles = require("../OrderDetails/styles");
 var _styles2 = require("../OrderContactInformation/styles");
 var _styles3 = require("../ProductItemAccordion/styles");
@@ -82,7 +83,7 @@ var OrderToPrint = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
     if (name !== 'No') {
       var pos = position ? "(".concat(position, ")") : '';
       return price > 0 ? "".concat(name, " ").concat(pos, " ").concat(parsePrice(quantity * price, {
-        currencyPosition: 'left'
+        currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
       })) : "".concat(name, " ").concat(pos);
     } else {
       return 'No';
