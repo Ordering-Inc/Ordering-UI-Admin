@@ -4,6 +4,7 @@ import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
 import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
 import moment from 'moment'
 import { useLanguage, CODES } from 'ordering-components-admin'
+import CURRENCY from '../config/currency.json'
 
 export const optimizeImage = (url, params, fallback) => {
   if (!url && fallback) return fallback
@@ -529,4 +530,8 @@ export const stringToSlug = str => {
     .replace(/-+$/, '') // trim - from end of text
 
   return str
+}
+
+export const getCurrenySymbol = (code) => {
+  return CURRENCY?.[code]?.symbol ?? code
 }

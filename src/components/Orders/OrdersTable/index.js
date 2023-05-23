@@ -11,6 +11,7 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
+import { getCurrenySymbol } from '../../../utils'
 
 import {
   OrdersContainer,
@@ -830,7 +831,7 @@ export const OrdersTable = (props) => {
                           <td className='orderPrice' key={`total${i}-${index}`}>
                             <div className='info'>
                               {allowColumns?.total?.visable && (
-                                <p className='bold'>{parsePrice(order?.summary?.total, { currency: order?.currency })}</p>
+                                <p className='bold'>{parsePrice(order?.summary?.total, { currency: getCurrenySymbol(order?.currency) })}</p>
                               )}
                               {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
                                 <p>
