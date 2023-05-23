@@ -95,7 +95,7 @@ export const ProductItemAccordion = (props) => {
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
     if (name !== 'No') {
       const pos = position ? `(${position})` : ''
-      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price, { currencyPosition: 'left' })}` : `${name} ${pos}`
+      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price, { currency: currency })}` : `${name} ${pos}`
     } else {
       return 'No'
     }
@@ -168,7 +168,7 @@ export const ProductItemAccordion = (props) => {
                 <h3>{product.name}</h3>
                 {windowSize.width <= 410 && (
                   <span>
-                    <p>{parsePrice(getProductPrice(product), { currencyPosition: 'left', ...(currency && { currency }) })}</p>
+                    <p>{parsePrice(getProductPrice(product), { currency: currency })}</p>
                     {isCartProduct && (
                       <div>
                         {onEditProduct && (
@@ -194,7 +194,7 @@ export const ProductItemAccordion = (props) => {
           <ProductPriceSection>
             <ProductPrice>
               <span>
-                {parsePrice(getProductPrice(product), { currencyPosition: 'left', ...(currency && { currency }) })}
+                {parsePrice(getProductPrice(product), { currency: currency })}
               </span>
               {(productInfo().ingredients?.length > 0 || productInfo().options?.length > 0 || product.comment) && (
                 <p>
