@@ -126,16 +126,18 @@ export const RefundToWallet = (props) => {
 
   return (
     <>
-      <RefundWalletButtonWrapper>
-        <Button
-          color='primary'
-          borderRadius='8px'
-          disabled={actionStatus?.loading || refundDisabled}
-          onClick={() => setOpenModal(true)}
-        >
-          {t('REFUND_TO_WALLET', 'Refund to Wallet')}
-        </Button>
-      </RefundWalletButtonWrapper>
+      {(isAllowCashWalletRefund || isAllowCreditPointRefund || isAllowStripeRefund || isAllowOtherRefund) && (
+        <RefundWalletButtonWrapper>
+          <Button
+            color='primary'
+            borderRadius='8px'
+            disabled={actionStatus?.loading || refundDisabled}
+            onClick={() => setOpenModal(true)}
+          >
+            {t('REFUND_TO_WALLET', 'Refund to Wallet')}
+          </Button>
+        </RefundWalletButtonWrapper>
+      )}
       <Modal
         width='700px'
         open={openModal}
