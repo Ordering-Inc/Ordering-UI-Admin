@@ -499,6 +499,7 @@ const SidebarMenuUI = (props) => {
                           location.pathname === '/orders' ||
                           location.pathname === '/deliveries' ||
                           location.pathname === '/drivers' ||
+                          location.pathname === '/all-in-one' ||
                           location.pathname === '/appointments' ||
                           location.pathname === '/gift-cards'
                         }
