@@ -9,6 +9,7 @@ import { List as MenuIcon } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles/Buttons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { GoogleMapsApiKeySettingButton } from '../GoogleMapsApiKeySettingButton'
+import { WebsocketStatus } from '../WebsocketStatus'
 
 import {
   DriversHeader,
@@ -86,6 +87,7 @@ const DriversManagerUI = (props) => {
             )}
             <h1>{t('DRIVERS_DASHBOARD', 'Drivers dashboard')}</h1>
           </HeaderTitleContainer>
+          <WebsocketStatus />
           {!googleMapsApiKey && (
             <GoogleMapsApiKeySettingButton />
           )}
