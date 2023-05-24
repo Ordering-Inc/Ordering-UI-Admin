@@ -83,12 +83,18 @@ const SidebarMenuUI = (props) => {
     },
     {
       id: 4,
+      title: t('ALL_IN_ONE', 'All in one'),
+      pageName: 'all_in_one',
+      url: '/all-in-one'
+    },
+    {
+      id: 5,
       title: t('APPOINTMENTS', 'Appointments'),
       pageName: 'appointments',
       url: '/appointments'
     },
     {
-      id: 5,
+      id: 6,
       title: t('GIFT_CARD_MANAGER', 'Gift card manager'),
       pageName: 'giftCards',
       url: '/gift-cards'
