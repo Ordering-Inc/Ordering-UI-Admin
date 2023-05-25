@@ -31,6 +31,7 @@ import { ForgotPassword } from './pages/ForgotPassword'
 import { OrdersList } from './pages/OrdersList'
 import { DeliveriesManager } from './pages/DeliveriesManager'
 import { DriversList } from './pages/DriversList'
+import { AllInOne } from './pages/AllInOne'
 import { CustomersList } from './pages/CustomersList'
 import { ManagersList } from './pages/ManagersList'
 import { BusinessesList } from './pages/BusinessesList'
@@ -290,6 +291,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/drivers' allowedLevels={[0, 5]}>
                       <DriversList />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/all-in-one' allowedLevels={[0, 2, 5]}>
+                      <AllInOne />
                     </ProtectedRoute>
                     <ProtectedRoute path='/appointments' allowedLevels={[0, 2]}>
                       <Appointments />

@@ -9,6 +9,7 @@ import {
 } from './components/OrderingProducts'
 import { PageNotFound } from './components/PageNotFound'
 import {
+  AllInOne,
   Appointments,
   DeliveriesManager,
   DriversManager,
@@ -420,6 +421,7 @@ import { Switch } from './styles/Switch'
 import { Checkbox } from './styles/Checkbox'
 
 export {
+  AllInOne,
   Appointments,
   DeliveriesManager,
   DriversManager,

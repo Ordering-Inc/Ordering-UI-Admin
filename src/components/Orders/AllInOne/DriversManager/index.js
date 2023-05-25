@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useConfig, DriversList as DriversController } from 'ordering-components-admin'
-import { OrdersLateralBar } from '../../../../OrdersLateralBar'
-import { GoogleMapsApiKeySettingButton } from '../../../../GoogleMapsApiKeySettingButton'
-import { DriversOnlineOfflineFilter } from '../../../../DriversOnlineOfflineFilter'
-import { DriversBusyStatusFilter } from '../../../../DriversBusyStatusFilter'
-import { DriversList } from '../../../../DriversList'
+import { OrdersLateralBar } from '../../OrdersLateralBar'
+import { GoogleMapsApiKeySettingButton } from '../../GoogleMapsApiKeySettingButton'
+import { DriversOnlineOfflineFilter } from '../../DriversOnlineOfflineFilter'
+import { DriversBusyStatusFilter } from '../../DriversBusyStatusFilter'
+import { DriversList } from '../../DriversList'
 
 import {
   DriversHeader,
