@@ -157,7 +157,7 @@ var RecoveryActionList = function RecoveryActionList(props) {
       },
       className: "enable_control"
     })))));
-  }))), !recoveryActionList.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
+  }))), !recoveryActionList.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenDetail({});
     }

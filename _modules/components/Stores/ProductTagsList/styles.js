@@ -45,9 +45,5 @@ var TagImageWrapper = _styledComponents.default.div(_templateObject10 || (_templ
   return props.theme.colors.gray;
 });
 exports.TagImageWrapper = TagImageWrapper;
-var AddNewLabel = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  width: fit-content;\n  cursor: pointer;\n  font-size: 14px;\n  color: ", ";\n  margin: 15px 0;\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
-  return props.theme.colors.primary;
-});
+var AddNewLabel = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin: 15px 0;\n"])));
 exports.AddNewLabel = AddNewLabel;

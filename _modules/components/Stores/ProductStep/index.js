@@ -1,6 +1,5 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -21,6 +20,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -30,13 +30,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductStepUI = function ProductStepUI(props) {
   var _actionState$content, _actionState$content2;
   var onClose = props.onClose,
-    businessList = props.businessList,
+    businessListState = props.businessListState,
     setBusiness = props.setBusiness,
     actionState = props.actionState,
     handleImport = props.handleImport,
     handleChangeAddress = props.handleChangeAddress,
     business = props.business,
-    isLoading = props.isLoading,
     orderingBusiness = props.orderingBusiness,
     countriesState = props.countriesState,
     handleOpenCategoryDetails = props.handleOpenCategoryDetails;
@@ -77,12 +76,11 @@ var ProductStepUI = function ProductStepUI(props) {
     setBusiness: setBusiness,
     setStep: setStep,
     onClose: onClose,
-    businessList: businessList,
+    businessListState: businessListState,
     handleImport: handleImport,
     handleChangeAddress: handleChangeAddress,
     orderingBusiness: orderingBusiness,
-    business: business,
-    isLoading: isLoading
+    business: business
   }), step === 3 && option === 2 && (actionState === null || actionState === void 0 ? void 0 : actionState.loading) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WE_ARE_IMPORTING_YOUR_MENU', 'We are importing your menu.')), /*#__PURE__*/_react.default.createElement(_styles2.ImageContent, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.general.importMenu,
     alt: ""
@@ -100,7 +98,15 @@ var ProductStepUI = function ProductStepUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: handleAddManuallyProduct
-  }, t('ADD_PRODUCTS_MANUALLY', 'Add products manually')))), step === 2 && option === 3 && /*#__PURE__*/_react.default.createElement(_UploadMenuGuide.UploadMenuGuide, {
+  }, t('ADD_PRODUCTS_MANUALLY', 'Add products manually')))), step === 3 && option === 2 && !(actionState !== null && actionState !== void 0 && actionState.loading) && (actionState === null || actionState === void 0 ? void 0 : actionState.error) && /*#__PURE__*/_react.default.createElement(_styles2.ImportMenuContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ERROR', 'Error')), actionState.error && typeof actionState.error === 'string' && actionState.error, actionState.error && _typeof(actionState.error) === 'object' && Array.isArray(actionState.error) && /*#__PURE__*/_react.default.createElement("ul", null, actionState.error.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, Array.isArray(item) ? item.map(function (err, index) {
+      return typeof err === 'string' && /*#__PURE__*/_react.default.createElement("li", {
+        key: index
+      }, t(err.toUpperCase(), err));
+    }) : typeof item === 'string' && /*#__PURE__*/_react.default.createElement("li", null, t(item.toUpperCase(), item)));
+  }))), step === 2 && option === 3 && /*#__PURE__*/_react.default.createElement(_UploadMenuGuide.UploadMenuGuide, {
     handleBack: function handleBack() {
       return setStep(1);
     },

@@ -171,7 +171,7 @@ var CmsUI = function CmsUI(props) {
         return handleDeletePage(page.id);
       }
     }, t('DELETE', 'Delete'))))))));
-  })), !pagesListState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
+  })), !pagesListState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleEditPage(null);
     }

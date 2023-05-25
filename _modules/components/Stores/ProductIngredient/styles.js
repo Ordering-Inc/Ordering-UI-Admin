@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MainContainer = exports.IngredientOption = exports.IngredientContainer = exports.Header = exports.AddIngredientButton = void 0;
+exports.MainContainer = exports.IngredientOption = exports.IngredientContainer = exports.Header = exports.AddIngredientButtonWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -40,9 +40,5 @@ var IngredientOption = _styledComponents.default.div(_templateObject6 || (_templ
   });
 });
 exports.IngredientOption = IngredientOption;
-var AddIngredientButton = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  font-size: 14px;\n  padding: 12px 0;\n  color: ", ";\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
-  return props.theme.colors.primary;
-});
-exports.AddIngredientButton = AddIngredientButton;
+var AddIngredientButtonWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding: 12px 0;\n"])));
+exports.AddIngredientButtonWrapper = AddIngredientButtonWrapper;

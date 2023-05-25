@@ -218,7 +218,7 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     })))));
   }))), /*#__PURE__*/_react.default.createElement(_styles2.PromotionListBottom, {
     eventDisabled: eventDisabled
-  }, /*#__PURE__*/_react.default.createElement(_styles2.AddNewButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenDetails();
     }

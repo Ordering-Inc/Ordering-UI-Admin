@@ -165,7 +165,7 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
         });
       }
     })))));
-  }))), !driversCompaniesState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewCompanyButton, {
+  }))), !driversCompaniesState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenDetails(null);
     }

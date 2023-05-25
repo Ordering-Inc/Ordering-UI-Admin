@@ -169,7 +169,6 @@ var ContentFormUI = function ContentFormUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroupWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
-    disabled: Object.keys(formState.changes).length === 0,
     onClick: function onClick() {
       return handleSubmit();
     }

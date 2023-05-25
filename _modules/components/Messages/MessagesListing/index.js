@@ -83,6 +83,10 @@ var MessagesListingUI = function MessagesListingUI(props) {
     _useState18 = _slicedToArray(_useState17, 2),
     filterModalOpen = _useState18[0],
     setFilterModalOpen = _useState18[1];
+  var _useState19 = (0, _react.useState)(null),
+    _useState20 = _slicedToArray(_useState19, 2),
+    timeStatus = _useState20[0],
+    setTimeStatus = _useState20[1];
   var handleOpenOrderDetail = function handleOpenOrderDetail(order) {
     setDetailsOrder(order);
     setOrderDetailId(order.id);
@@ -117,7 +121,8 @@ var MessagesListingUI = function MessagesListingUI(props) {
     handleChangeSearch: handleChangeSearch,
     handleChangeFilterValues: handleChangeFilterValues,
     filterModalOpen: filterModalOpen,
-    setFilterModalOpen: setFilterModalOpen
+    setFilterModalOpen: setFilterModalOpen,
+    setTimeStatus: setTimeStatus
   }), /*#__PURE__*/_react.default.createElement(_styles.MessagesContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles.MessagesOptionTabs, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOption === 'orders',
     onClick: function onClick() {
@@ -164,7 +169,8 @@ var MessagesListingUI = function MessagesListingUI(props) {
     selectedSubOrderStatus: selectedSubOrderStatus,
     orderIdForUnreadCountUpdate: orderIdForUnreadCountUpdate,
     handleOpenOrderDetail: handleOpenOrderDetail,
-    handleOrderCardClick: handleOrderCardClick
+    handleOrderCardClick: handleOrderCardClick,
+    timeStatus: timeStatus
   }), selectedOption === 'contacts' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, contactsOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_ChatContactList.ChatContactList, {
     isDriver: true
   }), contactsOption === 'customers' && /*#__PURE__*/_react.default.createElement(_ChatContactList.ChatContactList, {

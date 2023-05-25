@@ -76,8 +76,5 @@ var InfoBlock = _styledComponents.default.div(_templateObject20 || (_templateObj
 exports.InfoBlock = InfoBlock;
 var BrandListTableWrapper = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  overflow: auto;\n  margin-top: 20px;\n  width: 100%;\n"])));
 exports.BrandListTableWrapper = BrandListTableWrapper;
-var BrandListBottomContainer = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 16px;\n\n  span {\n    cursor: pointer;\n    user-select: none;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
-  var _props$theme$colors;
-  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;
-});
+var BrandListBottomContainer = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 16px;\n"])));
 exports.BrandListBottomContainer = BrandListBottomContainer;

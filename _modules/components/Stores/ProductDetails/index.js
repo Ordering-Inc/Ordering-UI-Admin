@@ -71,10 +71,14 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isExtendExtraOpen = _useState6[0],
     setIsExtendExtraOpen = _useState6[1];
-  var _useState7 = (0, _react.useState)(null),
+  var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    showOption = _useState8[0],
-    setShowOption = _useState8[1];
+    isExpand = _useState8[0],
+    setIsExpand = _useState8[1];
+  var _useState9 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState9, 2),
+    showOption = _useState10[0],
+    setShowOption = _useState10[1];
   var handleShowOption = function handleShowOption(option, isInitialRender) {
     setIsExtendExtraOpen(false);
     setShowOption(option);
@@ -104,32 +108,25 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
       if (width <= 500) {
         document.getElementById('product_details').style.width = '100vw';
       } else {
-        if (extraOpen && width >= 1000) {
-          document.getElementById('product_details').style.width = '1000px';
+        if (isExpand) {
+          document.getElementById('product_details').style.width = '100vw';
         } else {
-          document.getElementById('product_details').style.width = '500px';
+          if (extraOpen && width >= 1000) {
+            document.getElementById('product_details').style.width = '1000px';
+          } else {
+            document.getElementById('product_details').style.width = '500px';
+          }
         }
       }
     }
   };
   (0, _react.useEffect)(function () {
-    // if (width > 1000) {
-    //   setIsExtendExtraOpen(false)
-    // }
-    toggleMainContent();
-  }, [width]);
-  (0, _react.useEffect)(function () {
     if (!open) return;
     actionSidebar(true);
   }, [open]);
   (0, _react.useEffect)(function () {
-    if (width < 1000) return;
-    if (extraOpen) {
-      document.getElementById('product_details').style.width = '1000px';
-    } else {
-      toggleMainContent();
-    }
-  }, [extraOpen]);
+    toggleMainContent();
+  }, [extraOpen, isExpand, width]);
   (0, _react.useEffect)(function () {
     setExtraOpen(false);
     setIsExtendExtraOpen(false);
@@ -158,7 +155,9 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     actionSidebar: actionSidebar,
     showOption: showOption,
     handleShowOption: handleShowOption,
-    extraOpen: extraOpen
+    extraOpen: extraOpen,
+    isExpand: isExpand,
+    setIsExpand: setIsExpand
   })), extraOpen && /*#__PURE__*/_react.default.createElement(_Shared.MoreSidebarLayout, {
     isExtendExtraOpen: isExtendExtraOpen,
     onClose: handleCloseExtraOpen

@@ -51,6 +51,13 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     registerOrderIds = _useState4[0],
     setRegisterOrderIds = _useState4[1];
+  var _useState5 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    alertState = _useState6[0],
+    setAlertState = _useState6[1];
   var handleNotification = function handleNotification(order) {
     if (customerId && (order === null || order === void 0 ? void 0 : order.customer_id) !== customerId) return;
     if (isOnlyDelivery && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) return;
@@ -119,6 +126,12 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
       events.off('order_added', handleNotification);
     };
   }, [configState, registerOrderIds, customerId]);
+  (0, _react.useEffect)(function () {
+    setAlertState({
+      open: true,
+      content: t('SOUND_WILL_BE_PLAYED', 'The sound will be played on this page whenever a new order is received.')
+    });
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "750px",
     open: notificationModalOpen,
@@ -139,7 +152,26 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
   }), /*#__PURE__*/_react.default.createElement("source", {
     src: theme.sounds.notificationMp3,
     type: "audio/mpeg"
-  })));
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    width: "700px",
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
+  }));
 };
 var OrderNotification = function OrderNotification(props) {
   var orderNotificationProps = _objectSpread(_objectSpread({}, props), {}, {

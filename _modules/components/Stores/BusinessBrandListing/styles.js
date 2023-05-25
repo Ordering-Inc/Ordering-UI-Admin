@@ -92,10 +92,7 @@ var InfoBlock = _styledComponents.default.div(_templateObject27 || (_templateObj
 exports.InfoBlock = InfoBlock;
 var BrandListTableWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  overflow: auto;\n  margin-top: 20px;\n  width: 100%;\n"])));
 exports.BrandListTableWrapper = BrandListTableWrapper;
-var BrandListBottomContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 16px;\n\n  span {\n    cursor: pointer;\n    user-select: none;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
-  var _props$theme$colors;
-  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.primary;
-});
+var BrandListBottomContainer = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 16px;\n"])));
 exports.BrandListBottomContainer = BrandListBottomContainer;
 var BrandDetailContainer = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  padding: 20px;\n  width: 100%;\n"])));
 exports.BrandDetailContainer = BrandDetailContainer;
@@ -110,8 +107,8 @@ var TabContainer = _styledComponents.default.div(_templateObject34 || (_template
 });
 exports.TabContainer = TabContainer;
 var Tab = _styledComponents.default.div(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  padding: 10px 0px;\n  font-size: 14px;\n  cursor: pointer;\n  color: ", ";\n  white-space: nowrap;\n  ", "\n\n  ", "\n\n  ", "\n"])), function (props) {
-  var _props$theme$colors2;
-  return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
+  var _props$theme$colors;
+  return (_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.headingColor;
 }, function (props) {
   var _props$theme8;
   return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n  "]))) : (0, _styledComponents.css)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n    margin-right: 30px;\n  "])));

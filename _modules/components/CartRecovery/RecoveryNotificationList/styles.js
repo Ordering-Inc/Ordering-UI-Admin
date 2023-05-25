@@ -85,9 +85,5 @@ var SmsPreviewContent = _styledComponents.default.div(_templateObject19 || (_tem
 exports.SmsPreviewContent = SmsPreviewContent;
 var NotificationMessageContent = (0, _styledComponents.default)(SmsPreviewContent)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  height: fit-content;\n  margin: 20px 0px 0px 0px;\n"])));
 exports.NotificationMessageContent = NotificationMessageContent;
-var AddNewNotificationButton = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: ", ";\n  padding-bottom: 15px;\n  span {\n    cursor: pointer;\n  }\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
-  return props.theme.colors.primary;
-});
+var AddNewNotificationButton = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  padding-bottom: 15px;\n"])));
 exports.AddNewNotificationButton = AddNewNotificationButton;

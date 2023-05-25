@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tab = exports.PromotionsTable = exports.PromotionTypeItem = exports.PromotionTbody = exports.PromotionNameContainer = exports.PromotionEditFormContainer = exports.PromotionDateItem = exports.OptionTabsContainer = exports.MainContainer = exports.InnerTabsContainer = exports.Header = exports.EditTitleHeaderContainer = exports.EditHeader = exports.CloseButtonWrapper = exports.BusinessPromotionsContainer = exports.AddNewPromotionText = exports.ActionSelectorWrapper = void 0;
+exports.Tab = exports.PromotionsTable = exports.PromotionTypeItem = exports.PromotionTbody = exports.PromotionNameContainer = exports.PromotionEditFormContainer = exports.PromotionDateItem = exports.OptionTabsContainer = exports.MainContainer = exports.InnerTabsContainer = exports.Header = exports.EditTitleHeaderContainer = exports.EditHeader = exports.CloseButtonWrapper = exports.BusinessPromotionsContainer = exports.AddNewPromotionButtonWrapper = exports.ActionSelectorWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38;
@@ -64,10 +64,8 @@ var PromotionDateItem = _styledComponents.default.div(_templateObject15 || (_tem
   return props.theme.colors.secundaryLight;
 });
 exports.PromotionDateItem = PromotionDateItem;
-var AddNewPromotionText = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: fit-content;\n  margin: 15px 0;\n  color: ", ";\n  font-size: 12px;\n"])), function (props) {
-  return props.theme.colors.primary;
-});
-exports.AddNewPromotionText = AddNewPromotionText;
+var AddNewPromotionButtonWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin: 15px 0;\n"])));
+exports.AddNewPromotionButtonWrapper = AddNewPromotionButtonWrapper;
 var PromotionEditFormContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  flex: 1;\n  position: relative;\n  transition: 0.3s;\n  overflow: auto;\n\n  @media (min-width: 576px) {\n    padding: 25px 20px;\n  }\n\n  @media (min-width: 1000px) {\n    ", "\n  }\n"])), function (props) {
   var _props$theme5;
   return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {

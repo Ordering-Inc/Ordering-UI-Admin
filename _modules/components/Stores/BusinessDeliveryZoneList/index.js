@@ -103,11 +103,11 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
     }))), /*#__PURE__*/_react.default.createElement("td", null, zone === null || zone === void 0 ? void 0 : zone.name), /*#__PURE__*/_react.default.createElement("td", null, zone === null || zone === void 0 ? void 0 : zone.minimum), /*#__PURE__*/_react.default.createElement("td", null, zone === null || zone === void 0 ? void 0 : zone.price), /*#__PURE__*/_react.default.createElement("td", {
       className: "arrow"
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null))));
-  })), /*#__PURE__*/_react.default.createElement(_styles2.AddDeliveryZoneButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.AddDeliveryZoneButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick(e) {
       return handleOpenZone(e, null);
     }
-  }, t('ADD_DELIVERY_ZONE', 'Add delivery zone'))), isOpenDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }, t('ADD_DELIVERY_ZONE', 'Add delivery zone')))), isOpenDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     isBorderShow: true,
     open: isOpenDetails,
     onClose: function onClose() {

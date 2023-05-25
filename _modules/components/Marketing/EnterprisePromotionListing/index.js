@@ -87,7 +87,12 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     _useState14 = _slicedToArray(_useState13, 2),
     moveDistance = _useState14[0],
     setMoveDistance = _useState14[1];
+  var _useState15 = (0, _react.useState)(600),
+    _useState16 = _slicedToArray(_useState15, 2),
+    sideBarWidth = _useState16[0],
+    setSideBarWidth = _useState16[1];
   var handleOpenDetails = function handleOpenDetails(promotion) {
+    setSideBarWidth(600);
     setMoveDistance(0);
     setSelectedPromotion(promotion);
     setCurPromotionId(promotion === null || promotion === void 0 ? void 0 : promotion.id);
@@ -97,6 +102,8 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     }
   };
   var handleCloseDetails = function handleCloseDetails() {
+    setMoveDistance(0);
+    setSideBarWidth(600);
     setOpenDetails(false);
     setSelectedPromotion(null);
     history.replace("".concat(location.pathname));
@@ -146,7 +153,7 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     selectedPromotion: selectedPromotion,
     handleOpenDetails: handleOpenDetails
   }))), isDisabledFeature && /*#__PURE__*/_react.default.createElement(_DisabledFeatureAlert.DisabledFeatureAlert, null), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
-    defaultSideBarWidth: 600 + moveDistance,
+    defaultSideBarWidth: sideBarWidth,
     moveDistance: moveDistance,
     open: openDetails,
     onClose: function onClose() {
@@ -163,6 +170,7 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     handleSuccessAddPromotion: handleSuccessAddPromotion,
     handleSuccessDeletePromotion: handleSuccessDeletePromotion,
     setMoveDistance: setMoveDistance,
+    setSideBarWidth: setSideBarWidth,
     onClose: function onClose() {
       return handleCloseDetails();
     }

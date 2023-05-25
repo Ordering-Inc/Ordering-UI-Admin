@@ -238,6 +238,7 @@ var EnterprisePromotionDetailsUI = function EnterprisePromotionDetailsUI(props) 
     handleUpdateClick: handleUpdateClick,
     handleAddPromotion: handleAddPromotion
   }), selectedOption === 'rules' && /*#__PURE__*/_react.default.createElement(_EnterprisePromotionRules.EnterprisePromotionRules, _extends({}, props, {
+    isExpand: isExpand,
     handleUpdateClick: handleUpdateClick,
     handleAddPromotion: handleAddPromotion
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {

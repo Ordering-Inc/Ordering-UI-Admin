@@ -41,7 +41,8 @@ var ProductSummary = function ProductSummary(props) {
     productCart = props.productCart,
     handleDeleteProduct = props.handleDeleteProduct,
     showProductOption = props.showProductOption,
-    extraOpen = props.extraOpen;
+    isExpand = props.isExpand,
+    setIsExpand = props.setIsExpand;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -71,10 +72,6 @@ var ProductSummary = function ProductSummary(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     selectedView = _useState8[0],
     setSelectedView = _useState8[1];
-  var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    isExpand = _useState10[0],
-    setIsExpand = _useState10[1];
   var productConfigOptions = [{
     key: 'product_details',
     value: t('PRODUCT_DETAILS', 'Product details')
@@ -147,9 +144,6 @@ var ProductSummary = function ProductSummary(props) {
       return !prev;
     });
   };
-  (0, _react.useEffect)(function () {
-    if (extraOpen) setIsExpand(false);
-  }, [extraOpen]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductDetailsContainer, {
     disabled: productState.loading
   }, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductName, null, productState === null || productState === void 0 ? void 0 : (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {

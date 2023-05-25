@@ -79,10 +79,14 @@ var CustomersListingUI = function CustomersListingUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     openUserAddForm = _useState8[0],
     setOpenUserAddForm = _useState8[1];
-  var _useState9 = (0, _react.useState)(0),
+  var _useState9 = (0, _react.useState)(500),
     _useState10 = _slicedToArray(_useState9, 2),
-    moveDistance = _useState10[0],
-    setMoveDistance = _useState10[1];
+    sideBarWidth = _useState10[0],
+    setSideBarWidth = _useState10[1];
+  var _useState11 = (0, _react.useState)(0),
+    _useState12 = _slicedToArray(_useState11, 2),
+    moveDistance = _useState12[0],
+    setMoveDistance = _useState12[1];
   var orderList = [{
     id: 1,
     name: t('NO_ORDERS', 'No orders'),
@@ -100,6 +104,7 @@ var CustomersListingUI = function CustomersListingUI(props) {
     setIsOpenUserDetails(false);
     setOpenUser(null);
     setQueryId(null);
+    setSideBarWidth(500);
     moveDistance && setMoveDistance(0);
     var enabled = selectedUserActiveState ? 'active' : 'inactive';
     history.replace("".concat(location.pathname, "?enabled=").concat(enabled));
@@ -194,7 +199,7 @@ var CustomersListingUI = function CustomersListingUI(props) {
     onClose: function onClose() {
       return handleBackRedirect();
     },
-    defaultSideBarWidth: 500 + moveDistance,
+    defaultSideBarWidth: sideBarWidth,
     moveDistance: moveDistance
   }, /*#__PURE__*/_react.default.createElement(_CustomerDetails.CustomerDetails, {
     user: openUser,
@@ -207,6 +212,7 @@ var CustomersListingUI = function CustomersListingUI(props) {
     handleParentSidebarMove: function handleParentSidebarMove(val) {
       return setMoveDistance(val);
     },
+    setSideBarWidth: setSideBarWidth,
     handleChangeActiveUser: handleChangeActiveUser
   })), openUserAddForm && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "user_add_form",

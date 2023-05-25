@@ -1,6 +1,5 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -15,6 +14,7 @@ var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -24,13 +24,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
   var _configs$google_maps_, _orderingBusiness$add, _configs$country_auto;
   var setBusiness = props.setBusiness,
-    businessList = props.businessList,
+    businessListState = props.businessListState,
     setStep = props.setStep,
     onClose = props.onClose,
     handleImport = props.handleImport,
     handleChangeAddress = props.handleChangeAddress,
     orderingBusiness = props.orderingBusiness,
-    isLoading = props.isLoading,
     business = props.business;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -48,13 +47,15 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
     handleImport();
   };
   var handleSelectBusiness = function handleSelectBusiness(id) {
-    var _business = businessList.find(function (item) {
+    var _businessListState$bu;
+    var _business = (_businessListState$bu = businessListState.businesses) === null || _businessListState$bu === void 0 ? void 0 : _businessListState$bu.find(function (item) {
       return item._id === id;
     });
     setBusiness(_business);
   };
   (0, _react.useEffect)(function () {
-    var _options = businessList === null || businessList === void 0 ? void 0 : businessList.map(function (item) {
+    var _businessListState$bu2;
+    var _options = (_businessListState$bu2 = businessListState.businesses) === null || _businessListState$bu2 === void 0 ? void 0 : _businessListState$bu2.map(function (item) {
       return {
         value: item._id,
         content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, item !== null && item !== void 0 && item.logo_photos[0] ? /*#__PURE__*/_react.default.createElement("img", {
@@ -64,7 +65,7 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
       };
     });
     setOptions(_options);
-  }, [businessList]);
+  }, [businessListState === null || businessListState === void 0 ? void 0 : businessListState.businesses]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SELECT_YOUR_RESTAURANT_FROM_THIS_LIST', 'Select your restaurant from this list.')), /*#__PURE__*/_react.default.createElement(_styles2.SearchWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS', 'Address')), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleAutocompleteInput, {
     name: "address",
     className: "input-autocomplete",
@@ -76,12 +77,12 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
     defaultValue: (_orderingBusiness$add = orderingBusiness === null || orderingBusiness === void 0 ? void 0 : orderingBusiness.address) !== null && _orderingBusiness$add !== void 0 ? _orderingBusiness$add : '',
     autoComplete: "new-password",
     countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
-  })), isLoading && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), businessListState.loading && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15,
     width: 100
   })), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 44
-  })), !isLoading && (options === null || options === void 0 ? void 0 : options.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SELECT_YOUR_RESTAURANT', 'Select your restaurant')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  })), !businessListState.loading && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !businessListState.error ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (options === null || options === void 0 ? void 0 : options.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SELECT_YOUR_RESTAURANT', 'Select your restaurant')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: options,
     className: "select",
     defaultValue: (business === null || business === void 0 ? void 0 : business._id) || '',
@@ -91,7 +92,15 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
     },
     searchBarIsCustomLayout: true,
     searchBarIsNotLazyLoad: true
-  })), !isLoading && options.length === 0 && /*#__PURE__*/_react.default.createElement(_styles2.EmptyData, null, t('NO_RESULT', 'There are no results')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+  })), options.length === 0 && /*#__PURE__*/_react.default.createElement(_styles2.EmptyData, null, t('NO_RESULT', 'There are no results'))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.EmptyData, null, businessListState.error && typeof businessListState.error === 'string' && businessListState.error, businessListState.error && _typeof(businessListState.error) === 'object' && Array.isArray(businessListState.error) && /*#__PURE__*/_react.default.createElement("ul", null, businessListState.error.map(function (item, i) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: i
+    }, Array.isArray(item) ? item.map(function (err, index) {
+      return typeof err === 'string' && /*#__PURE__*/_react.default.createElement("li", {
+        key: index
+      }, t(err.toUpperCase(), err));
+    }) : typeof item === 'string' && /*#__PURE__*/_react.default.createElement("li", null, t(item.toUpperCase(), item)));
+  }))))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return onClose();
     }

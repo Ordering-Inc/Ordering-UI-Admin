@@ -127,7 +127,7 @@ var RecoveryNotificationListUI = function RecoveryNotificationListUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewContent, null, /*#__PURE__*/_react.default.createElement("h2", null, notification === null || notification === void 0 ? void 0 : notification.title), /*#__PURE__*/_react.default.createElement("p", null, notification.body))))), (notification === null || notification === void 0 ? void 0 : notification.channel) === 'notification' && /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SmsContentLayout, {
       bgimage: theme.images.general.mobileHalfMask
     }, /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewContent, null, /*#__PURE__*/_react.default.createElement("h2", null, notification === null || notification === void 0 ? void 0 : notification.title), /*#__PURE__*/_react.default.createElement("p", null, notification.body)))))));
-  }), /*#__PURE__*/_react.default.createElement(_styles2.AddNewNotificationButton, null, /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.AddNewNotificationButton, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return setIsAddModal(true);
     }

@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TableHead = exports.PlaceItemContainer = exports.PlaceContainer = exports.Header = exports.Content = exports.Container = exports.CheckWrapper = exports.AddBtn = void 0;
+exports.TableHead = exports.PlaceItemContainer = exports.PlaceContainer = exports.Header = exports.Content = exports.Container = exports.CheckWrapper = exports.AddBtnWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -26,12 +26,8 @@ var Header = _styledComponents.default.div(_templateObject7 || (_templateObject7
 exports.Header = Header;
 var Content = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral([""])));
 exports.Content = Content;
-var AddBtn = _styledComponents.default.span(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  font-weight: 400;\n  font-size: 14px;\n  display: block;\n  margin: 10px 0px;\n  cursor: pointer;\n  user-select: none;\n  color: ", ";\n  transition: color 0.2s ease;\n\n  &:hover {\n    color: ", ";\n  }\n"])), function (props) {
-  return props.theme.colors.lightGray;
-}, function (props) {
-  return props.theme.colors.primary;
-});
-exports.AddBtn = AddBtn;
+var AddBtnWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin: 10px 0px;\n"])));
+exports.AddBtnWrapper = AddBtnWrapper;
 var TableHead = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding-bottom: 8px;\n  border-bottom: 1px solid ", ";\n\n  label {\n    font-weight: 700;\n  }\n"])), function (props) {
   return props.theme.colors.secundaryLight;
 });

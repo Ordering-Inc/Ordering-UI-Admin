@@ -143,6 +143,7 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
 };
 var DeliveriesManager = function DeliveriesManager(props) {
   var OrdersListControlProps = _objectSpread(_objectSpread({}, props), {}, {
+    isOnlyDelivery: true,
     UIComponent: DeliveriesManagerUI,
     driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
   });

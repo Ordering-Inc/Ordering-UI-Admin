@@ -89,21 +89,25 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isExtendExtraOpen = _useState6[0],
     setIsExtendExtraOpen = _useState6[1];
-  var _useState7 = (0, _react.useState)({
+  var _useState7 = (0, _react.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isExpand = _useState8[0],
+    setIsExpand = _useState8[1];
+  var _useState9 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    alertState = _useState8[0],
-    setAlertState = _useState8[1];
+    _useState10 = _slicedToArray(_useState9, 2),
+    alertState = _useState10[0],
+    setAlertState = _useState10[1];
   var spoonityConfig = businessState === null || businessState === void 0 ? void 0 : (_businessState$busine = businessState.business) === null || _businessState$busine === void 0 ? void 0 : (_businessState$busine2 = _businessState$busine.configs) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.find(function (config) {
     return config.key === 'spoonity_integration_api_key';
   });
   var isAdmin = (user === null || user === void 0 ? void 0 : user.level) === 0;
-  var _useState9 = (0, _react.useState)(null),
-    _useState10 = _slicedToArray(_useState9, 2),
-    selectedItem = _useState10[0],
-    setSelectedItem = _useState10[1];
+  var _useState11 = (0, _react.useState)(null),
+    _useState12 = _slicedToArray(_useState11, 2),
+    selectedItem = _useState12[0],
+    setSelectedItem = _useState12[1];
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
     if (!value) {
@@ -115,10 +119,14 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
       if (width <= 500) {
         document.getElementById('business_details_bar').style.width = '100vw';
       } else {
-        if (extraOpen && width >= 1000) {
-          document.getElementById('business_details_bar').style.width = '1000px';
+        if (isExpand) {
+          document.getElementById('business_details_bar').style.width = '100vw';
         } else {
-          document.getElementById('business_details_bar').style.width = '500px';
+          if (extraOpen && width >= 1000) {
+            document.getElementById('business_details_bar').style.width = '1000px';
+          } else {
+            document.getElementById('business_details_bar').style.width = '500px';
+          }
         }
       }
     }
@@ -140,23 +148,12 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     history.replace("".concat(location.pathname, "?id=").concat(businessId));
   };
   (0, _react.useEffect)(function () {
-    if (width > 1000) {
-      setIsExtendExtraOpen(false);
-    }
-    toggleMainContent();
-  }, [width]);
-  (0, _react.useEffect)(function () {
     if (!open) return;
     actionSidebar(true);
   }, [open]);
   (0, _react.useEffect)(function () {
-    if (width < 1000) return;
-    if (extraOpen) {
-      document.getElementById('business_details_bar').style.width = '1000px';
-    } else {
-      toggleMainContent();
-    }
-  }, [extraOpen]);
+    toggleMainContent();
+  }, [extraOpen, isExpand, width]);
   (0, _react.useEffect)(function () {
     setExtraOpen(false);
     setIsExtendExtraOpen(false);
@@ -208,7 +205,9 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleDeleteBusiness: handleDeleteBusiness,
     extraOpen: extraOpen,
     spoonityConfig: spoonityConfig,
-    siteState: siteState
+    siteState: siteState,
+    isExpand: isExpand,
+    setIsExpand: setIsExpand
   }), extraOpen && /*#__PURE__*/_react.default.createElement(_Shared.MoreSidebarLayout, {
     isExtendExtraOpen: isExtendExtraOpen,
     onClose: handleCloseExtraOpen

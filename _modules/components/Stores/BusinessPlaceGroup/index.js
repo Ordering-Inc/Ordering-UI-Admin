@@ -203,11 +203,11 @@ var BusinessPlaceGroupUI = function BusinessPlaceGroupUI(props) {
     }, place !== null && place !== void 0 && place.enabled ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
       className: "active"
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", null, place === null || place === void 0 ? void 0 : place.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  })), placeGroup && /*#__PURE__*/_react.default.createElement(_styles2.AddBtn, {
+  })), placeGroup && /*#__PURE__*/_react.default.createElement(_styles2.AddBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenModal(null);
     }
-  }, t('ADD_OPTION', 'Add option')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('ADD_OPTION', 'Add option'))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     disabled: Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0,

@@ -241,7 +241,7 @@ var DropdownOptionList = function DropdownOptionList(props) {
         return onDeleteZone(dropdownOption.id);
       }
     }, t('DELETE', 'Delete'))))));
-  }))), !dropdownOptionsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewPageButton, {
+  }))), !dropdownOptionsState.loading && /*#__PURE__*/_react.default.createElement(_styles2.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenZoneDropdownDetails(null);
     }

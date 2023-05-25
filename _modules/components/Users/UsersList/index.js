@@ -217,7 +217,7 @@ var UsersList = function UsersList(props) {
         return handleEnable(user, enabled);
       }
     })))));
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.UsersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.AddNewUserButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.UsersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenUserAddForm();
     }
