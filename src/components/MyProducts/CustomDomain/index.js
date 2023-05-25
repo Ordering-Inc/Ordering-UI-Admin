@@ -100,18 +100,22 @@ const CustomDomainUI = (props) => {
             />
           </SelectWrapper>
         </FormControl>
-        <CheckBoxWrapper onClick={() => setShowMapInput(prev => !prev)}>
-          {showMapInput ? <CheckedIcon className='active' /> : <UnCheckedIcon />}
-          <span>{t('I_HAVE_GOOGLE_MAPS_KEY_WANT_SHARE_IT', 'I have my Google Maps API Key, I want to share it')}</span>
-        </CheckBoxWrapper>
-        {showMapInput && (
-          <FormControl>
-            <label>{t('GOOGLE_MAP_API_KEY', 'Google map api key')}</label>
-            <Input
-              value={googleMapKey}
-              onChange={(e) => setGoogleMapKey(e.target.value)}
-            />
-          </FormControl>
+        {!configs?.google_maps_api_key?.value && (
+          <>
+            <CheckBoxWrapper onClick={() => setShowMapInput(prev => !prev)}>
+              {showMapInput ? <CheckedIcon className='active' /> : <UnCheckedIcon />}
+              <span>{t('I_HAVE_GOOGLE_MAPS_KEY_WANT_SHARE_IT', 'I have my Google Maps API Key, I want to share it')}</span>
+            </CheckBoxWrapper>
+            {showMapInput && (
+              <FormControl>
+                <label>{t('GOOGLE_MAP_API_KEY', 'Google map api key')}</label>
+                <Input
+                  value={googleMapKey}
+                  onChange={(e) => setGoogleMapKey(e.target.value)}
+                />
+              </FormControl>
+            )}
+          </>
         )}
         <ButtonGroup>
           <Button
