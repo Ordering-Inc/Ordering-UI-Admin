@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Button } from '../../../styles'
 import { Alert } from '../../Shared'
@@ -16,12 +16,14 @@ export const AdvancedLayouts = (props) => {
   const {
     advancedValues,
     handleUpdateSiteTheme,
-    isApp
+    isApp,
+    themesList
   } = props
 
   const [, t] = useLanguage()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [themeStructure, setThemeStructure] = useState({}) // Don't remove this state
   const themeValuesRef = useRef({})
 
   const homeLayoutList = [
@@ -51,7 +53,6 @@ export const AdvancedLayouts = (props) => {
   const productSearchLayoutList = [
     { value: 'original', name: 'Original' },
     { value: 'starbucks', name: 'Elegant' },
-    { value: 'red', name: 'Simple' },
     { value: 'old', name: '2021' }
   ]
 
@@ -69,7 +70,7 @@ export const AdvancedLayouts = (props) => {
     { value: 'original', name: 'Original' },
     { value: 'starbucks', name: 'Elegant' },
     { value: 'old', name: '2021' },
-    { value: 'chew', name: 'Great (chew)' }
+    { value: 'chew', name: 'Great' }
   ]
 
   const closeAlert = () => {
@@ -93,7 +94,15 @@ export const AdvancedLayouts = (props) => {
     themeValuesRef.current = _advancedValues
   }
 
-  themeValuesRef.current = JSON.parse(JSON.stringify(advancedValues))
+  useEffect(() => {
+    themeValuesRef.current = JSON.parse(JSON.stringify(advancedValues))
+  }, [advancedValues])
+
+  useEffect(() => { // Don't remove this effect
+    if (!themesList?.loading && themesList?.themes?.[0]?.structure) {
+      setThemeStructure(JSON.parse(JSON.stringify(themesList?.themes?.[0]?.structure)))
+    }
+  }, [themesList])
 
   return (
     <>
@@ -145,8 +154,8 @@ export const AdvancedLayouts = (props) => {
           <HeadingWrapper>
             <LayoutStyleGroup
               layoutList={businessViewLayoutList}
-              layouts={themeValuesRef?.current?.business_view?.components?.layout}
-              path='business_view.components.layout'
+              layouts={themeValuesRef?.current?.business_view?.components?.header?.components?.layout}
+              path='business_view.components.header.components.layout'
               handleUpdateThemeValue={handleUpdateThemeValue}
             />
           </HeadingWrapper>
@@ -167,8 +176,8 @@ export const AdvancedLayouts = (props) => {
           <HeadingWrapper>
             <LayoutStyleGroup
               layoutList={productSearchLayoutList}
-              layouts={themeValuesRef?.current?.business_listing_search?.components?.layout}
-              path='business_listing_search.components.layout'
+              layouts={themeValuesRef?.current?.business_view?.components?.product_search?.components?.layout}
+              path='business_view.components.product_search.components.layout'
               handleUpdateThemeValue={handleUpdateThemeValue}
             />
           </HeadingWrapper>
