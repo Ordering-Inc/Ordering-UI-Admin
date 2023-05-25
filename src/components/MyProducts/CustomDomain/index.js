@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useLanguage, useConfig, CustomDomain as CustomDomainController } from 'ordering-components-admin'
 import { Select } from '../../../styles/Select/FirstSelect'
-import { CheckSquareFill as CheckedIcon, Square as UnCheckedIcon } from 'react-bootstrap-icons'
-import { Button, Input } from '../../../styles'
+import { CheckSquareFill as CheckedIcon, Square as UnCheckedIcon, InfoCircle } from 'react-bootstrap-icons'
+import { Button, Input, IconButton } from '../../../styles'
 import { Alert } from '../../Shared'
 import {
   Container,
@@ -10,7 +10,10 @@ import {
   SelectWrapper,
   Option,
   ButtonGroup,
-  CheckBoxWrapper
+  CheckBoxWrapper,
+  CustomDomainInfo,
+  CustomDomainInfoContent,
+  TitleWrapper
 } from './styles'
 
 const CustomDomainUI = (props) => {
@@ -66,7 +69,19 @@ const CustomDomainUI = (props) => {
       <Container>
         <h1>{t('CUSTOM_DOMAIN', 'Custom domain')}</h1>
         <FormControl>
-          <label>{t('DOMAIN', 'Domain')}</label>
+          <TitleWrapper>
+            <label>{t('DOMAIN', 'Domain')}</label>
+            <CustomDomainInfo>
+              <IconButton
+                color='primary'
+              >
+                <InfoCircle />
+              </IconButton>
+              <CustomDomainInfoContent>
+                <span>{t('CUSTOM_DOMAIN_NOTIFY', 'Please make sure that your DNS CNAME is pointing {project-name}.tryordering.com')}</span>
+              </CustomDomainInfoContent>
+            </CustomDomainInfo>
+          </TitleWrapper>
           <Input
             placeholder='www.yourdomain.com'
             value={formState?.changes?.domain || ''}
