@@ -3,12 +3,9 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   height: 100%;
-
-  @media (min-width: 1000px) {
-    max-width: 500px;
-  }
 `
 export const InfoConatiner = styled.div`
+  width: 100%;
   height: 100%;
   overflow-x: hidden;
   h1 {

@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, ProductTagsList as ProductTagsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { SearchBar, SideBar } from '../../Shared'
-import { Button, Checkbox } from '../../../styles'
+import { Button, Checkbox, LinkButton } from '../../../styles'
 import { ChevronRight, Image as ImageIcon } from 'react-bootstrap-icons'
 import { ProductTagDetails } from '../ProductTagDetails'
 
@@ -147,10 +147,12 @@ const ProductTagsListUI = (props) => {
         )}
 
         {!tagsState.loading && (
-          <AddNewLabel
-            onClick={e => handleOpenProductTagDetail(e, null)}
-          >
-            {t('ADD_NEW_LABEL', 'Add new label')}
+          <AddNewLabel>
+            <LinkButton
+              onClick={e => handleOpenProductTagDetail(e, null)}
+            >
+              {t('ADD_NEW_LABEL', 'Add new label')}
+            </LinkButton>
           </AddNewLabel>
         )}
       </TagsListContainer>

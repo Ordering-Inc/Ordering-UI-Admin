@@ -128,9 +128,3 @@ export const PagesBottomContainer = styled.div`
   row-gap: 10px;
   margin: 15px 0 38px 0;
 `
-
-export const AddNewCompanyButton = styled.div`
-  cursor: pointer;
-  font-size: 12px;
-  color: ${props => props.theme.colors.primary};
-`

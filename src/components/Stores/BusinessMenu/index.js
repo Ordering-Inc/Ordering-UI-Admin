@@ -4,7 +4,7 @@ import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-co
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
 import { Confirm, Modal, SearchBar } from '../../Shared'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { Button, Checkbox } from '../../../styles'
+import { Button, Checkbox, LinkButton } from '../../../styles'
 import { ChevronRight } from 'react-bootstrap-icons'
 
 import {
@@ -15,7 +15,7 @@ import {
   MeunItem,
   MenuName,
   CheckboxWrapper,
-  AddMenuButton,
+  AddMenuButtonWrapper,
   TabsContainer,
   Tab,
   SearchBarWrapper
@@ -189,11 +189,13 @@ const BusinessMenuUI = (props) => {
           </MeunItem>
         ))}
         {!isSelectedSharedMenus && (
-          <AddMenuButton
-            onClick={() => handleOpenOptions('option', {})}
-          >
-            {t('ADD_MENU', 'Add menu')}
-          </AddMenuButton>
+          <AddMenuButtonWrapper>
+            <LinkButton
+              onClick={() => handleOpenOptions('option', {})}
+            >
+              {t('ADD_MENU', 'Add menu')}
+            </LinkButton>
+          </AddMenuButtonWrapper>
         )}
       </MenuContainer>
       {width >= 1000 ? (

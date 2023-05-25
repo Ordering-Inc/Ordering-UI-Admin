@@ -128,11 +128,11 @@ export const OrdersCards = (props) => {
     return finalTaget
   }
 
-  const getStatusClassName = (minutes) => {
-    if (isNaN(Number(minutes))) return 'in_time'
-    const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
-    return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
-  }
+  // const getStatusClassName = (minutes) => {
+  //   if (isNaN(Number(minutes))) return 'in_time'
+  //   const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
+  //   return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
+  // }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -229,7 +229,7 @@ export const OrdersCards = (props) => {
                   {allowColumns?.timer && (
                     <Timer>
                       <p className='bold'>Timer</p>
-                      <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
+                      <p className={order?.time_status}>{displayDelayedTime(order)}</p>
                     </Timer>
                   )}
                 </CardHeading>
@@ -269,7 +269,7 @@ export const OrdersCards = (props) => {
                   </InfoItemContainer>
                 </CardContent>
                 {allowColumns?.slaBar && (
-                  <Timestatus timeState={getStatusClassName(getDelayMinutes(order))} />
+                  <Timestatus timeState={order?.time_status} />
                 )}
               </OrderCard>
             ))}

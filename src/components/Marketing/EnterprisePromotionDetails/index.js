@@ -240,6 +240,7 @@ const EnterprisePromotionDetailsUI = (props) => {
         {selectedOption === 'rules' && (
           <EnterprisePromotionRules
             {...props}
+            isExpand={isExpand}
             handleUpdateClick={handleUpdateClick}
             handleAddPromotion={handleAddPromotion}
           />

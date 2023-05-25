@@ -36,7 +36,9 @@ export const EnterprisePromotionRules = (props) => {
     handleChangeItem,
     handleAddPromotion,
     handleUpdateClick,
-    setMoveDistance
+    setMoveDistance,
+    setSideBarWidth,
+    isExpand
   } = props
 
   const [, t] = useLanguage()
@@ -68,7 +70,10 @@ export const EnterprisePromotionRules = (props) => {
   }
 
   const hanndleClickApply = () => {
-    if (width > 1300) setMoveDistance(700)
+    if (width > 1300) {
+      setSideBarWidth(isExpand ? width : 1300)
+      setMoveDistance(700)
+    }
     setIsShowConditions(true)
   }
 

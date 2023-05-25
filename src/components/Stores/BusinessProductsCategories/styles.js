@@ -32,12 +32,7 @@ export const ListContent = styled.div`
   }
 `
 
-export const AddCategory = styled.div`
-  display: inline;
-  user-select: none;
-  font-size: 14px;
-  color: ${props => props.theme.colors?.primary};
-  cursor: pointer;
+export const AddCategoryWrapper = styled.div`
   margin: 15px 10px;
 `
 

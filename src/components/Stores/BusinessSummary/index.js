@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useEvent, useApi } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
@@ -39,7 +39,9 @@ export const BusinessSummary = (props) => {
     handleDeleteBusiness,
     extraOpen,
     spoonityConfig,
-    siteState
+    siteState,
+    isExpand,
+    setIsExpand
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -49,7 +51,6 @@ export const BusinessSummary = (props) => {
   const { width } = useWindowSize()
   const [isBusinessPreview, setIsBusinessPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
-  const [isExpand, setIsExpand] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const handleOpenCategory = () => {
@@ -158,10 +159,6 @@ export const BusinessSummary = (props) => {
     else element.style.width = '100vw'
     setIsExpand(prev => !prev)
   }
-
-  useEffect(() => {
-    if (extraOpen) setIsExpand(false)
-  }, [extraOpen])
 
   return (
     <>

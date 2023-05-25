@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, ProductExtras as ProductExtrasController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { Button, Checkbox } from '../../../styles'
+import { Button, Checkbox, LinkButton } from '../../../styles'
 import { Alert, Confirm, Modal } from '../../Shared'
 import { ProductExtraOptions } from '../ProductExtraOptions'
 import { ChevronRight } from 'react-bootstrap-icons'
@@ -17,7 +17,7 @@ import {
   MoreContainer,
   Details,
   ExtraAddForm,
-  AddButton,
+  AddButtonWrapper,
   DragImageWrapper
 } from './styles'
 
@@ -201,11 +201,13 @@ const ProductExtrasUI = (props) => {
             />
           </ExtraAddForm>
         )}
-        <AddButton
-          onClick={() => handleOpenAddForm()}
-        >
-          {t('ADD_PRODUCT_OPTION', 'Add product option')}
-        </AddButton>
+        <AddButtonWrapper>
+          <LinkButton
+            onClick={() => handleOpenAddForm()}
+          >
+            {t('ADD_PRODUCT_OPTION', 'Add product option')}
+          </LinkButton>
+        </AddButtonWrapper>
       </ProductExtrasContainer>
       {width >= 1000 ? (
         <>

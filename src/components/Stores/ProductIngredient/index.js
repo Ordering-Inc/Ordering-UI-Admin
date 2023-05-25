@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { Button } from '../../../styles'
+import { Button, LinkButton } from '../../../styles'
 import { ProductIngredientDetails } from '../ProductIngredientDetails'
 import { Modal } from '../../Shared'
 import { ChevronRight } from 'react-bootstrap-icons'
@@ -12,7 +12,7 @@ import {
   IngredientContainer,
   Header,
   IngredientOption,
-  AddIngredientButton
+  AddIngredientButtonWrapper
 } from './styles'
 
 export const ProductIngredient = (props) => {
@@ -81,11 +81,13 @@ export const ProductIngredient = (props) => {
             <ChevronRight />
           </IngredientOption>
         ))}
-        <AddIngredientButton
-          onClick={() => handleOpenIngredient(null)}
-        >
-          {t('ADD_INGREDIENT', 'Add ingredient')}
-        </AddIngredientButton>
+        <AddIngredientButtonWrapper>
+          <LinkButton
+            onClick={() => handleOpenIngredient(null)}
+          >
+            {t('ADD_INGREDIENT', 'Add ingredient')}
+          </LinkButton>
+        </AddIngredientButtonWrapper>
       </IngredientContainer>
 
       {width >= 1000 ? (

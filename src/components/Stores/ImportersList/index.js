@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import FiMoreVertical from '@meronex/icons/fi/FiMoreVertical'
 import { useLanguage } from 'ordering-components-admin'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
-import { Switch } from '../../../styles'
+import { Switch, LinkButton } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { NotFoundSource } from '../../Shared'
 
@@ -11,7 +11,6 @@ import {
   ImportListContainer,
   ImportersTableWrapper,
   ImportersBottomContainer,
-  AddNewImporterButton,
   ImpotersTable,
   UserEnableWrapper,
   WrapperUserActionSelector,
@@ -132,9 +131,9 @@ export const ImportersList = (props) => {
         </ImpotersTable>
       </ImportersTableWrapper>
       <ImportersBottomContainer>
-        <AddNewImporterButton onClick={() => addNewImporter()}>
+        <LinkButton onClick={() => addNewImporter()}>
           {t('ADD_NEW_IMPORTER', 'Add new importer')}
-        </AddNewImporterButton>
+        </LinkButton>
       </ImportersBottomContainer>
     </ImportListContainer>
   )

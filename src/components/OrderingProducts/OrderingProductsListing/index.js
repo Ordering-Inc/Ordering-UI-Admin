@@ -7,7 +7,7 @@ import {
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Alert, Pagination, SearchBar, SideBar } from '../../Shared'
 import { List as MenuIcon, InfoCircle } from 'react-bootstrap-icons'
-import { Button, IconButton } from '../../../styles'
+import { Button, IconButton, LinkButton } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { OrderingProductDetails } from '../OrderingProductDetails'
 
@@ -19,7 +19,6 @@ import {
   ProductListTable,
   PageTbody,
   PagesBottomContainer,
-  AddNewPageButton,
   ProductListTableWrapper,
   InfoWrapper,
   InfoContent
@@ -173,11 +172,11 @@ const OrderingProductsUI = (props) => {
 
         {!sitesListState.loading && (
           <PagesBottomContainer>
-            <AddNewPageButton
+            <LinkButton
               onClick={() => onClickProduct(null)}
             >
               {t('ADD_PRODUCT', 'Add product')}
-            </AddNewPageButton>
+            </LinkButton>
             {sitesListState?.sites?.length > 0 && (
               <Pagination
                 currentPage={paginationProps?.currentPage}

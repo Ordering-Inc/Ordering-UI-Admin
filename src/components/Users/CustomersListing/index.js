@@ -61,6 +61,7 @@ const CustomersListingUI = (props) => {
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
   const [openUser, setOpenUser] = useState(null)
   const [openUserAddForm, setOpenUserAddForm] = useState(false)
+  const [sideBarWidth, setSideBarWidth] = useState(500)
   const [moveDistance, setMoveDistance] = useState(0)
 
   const orderList = [
@@ -73,6 +74,7 @@ const CustomersListingUI = (props) => {
     setIsOpenUserDetails(false)
     setOpenUser(null)
     setQueryId(null)
+    setSideBarWidth(500)
     moveDistance && setMoveDistance(0)
     const enabled = selectedUserActiveState ? 'active' : 'inactive'
     history.replace(`${location.pathname}?enabled=${enabled}`)
@@ -187,7 +189,7 @@ const CustomersListingUI = (props) => {
           sidebarId='customer_details'
           open={isOpenUserDetails}
           onClose={() => handleBackRedirect()}
-          defaultSideBarWidth={500 + moveDistance}
+          defaultSideBarWidth={sideBarWidth}
           moveDistance={moveDistance}
         >
           <CustomerDetails
@@ -197,6 +199,7 @@ const CustomersListingUI = (props) => {
             handleSuccessDeleteUser={handleSuccessDeleteUser}
             onClose={() => handleBackRedirect()}
             handleParentSidebarMove={val => setMoveDistance(val)}
+            setSideBarWidth={setSideBarWidth}
             handleChangeActiveUser={handleChangeActiveUser}
           />
         </SideBar>

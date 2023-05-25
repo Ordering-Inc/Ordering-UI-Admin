@@ -16,13 +16,12 @@ import { SelectPosGuide } from '../SelectPosGuide'
 const ProductStepUI = (props) => {
   const {
     onClose,
-    businessList,
+    businessListState,
     setBusiness,
     actionState,
     handleImport,
     handleChangeAddress,
     business,
-    isLoading,
     orderingBusiness,
     countriesState,
     handleOpenCategoryDetails
@@ -53,12 +52,11 @@ const ProductStepUI = (props) => {
           setBusiness={setBusiness}
           setStep={setStep}
           onClose={onClose}
-          businessList={businessList}
+          businessListState={businessListState}
           handleImport={handleImport}
           handleChangeAddress={handleChangeAddress}
           orderingBusiness={orderingBusiness}
           business={business}
-          isLoading={isLoading}
         />
       )}
       {step === 3 && option === 2 && actionState?.loading && (
@@ -89,6 +87,29 @@ const ProductStepUI = (props) => {
           <ButtonWrapper>
             <Button color='primary' onClick={handleAddManuallyProduct}>{t('ADD_PRODUCTS_MANUALLY', 'Add products manually')}</Button>
           </ButtonWrapper>
+        </ImportMenuContainer>
+      )}
+      {step === 3 && option === 2 && !actionState?.loading && actionState?.error && (
+        <ImportMenuContainer>
+          <h2>{t('ERROR', 'Error')}</h2>
+          {actionState.error && typeof actionState.error === 'string' && actionState.error}
+          {actionState.error && typeof actionState.error === 'object' && Array.isArray(actionState.error) && (
+            <ul>
+              {actionState.error.map((item, i) => (
+                <React.Fragment key={i}>
+                  {Array.isArray(item) ? (
+                    item.map((err, index) => (
+                      typeof err === 'string' && (
+                        <li key={index}>{t(err.toUpperCase(), err)}</li>
+                      )
+                    ))
+                  ) : (
+                    typeof item === 'string' && <li>{t(item.toUpperCase(), item)}</li>
+                  )}
+                </React.Fragment>
+              ))}
+            </ul>
+          )}
         </ImportMenuContainer>
       )}
       {step === 2 && option === 3 && (

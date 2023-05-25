@@ -157,11 +157,11 @@ export const OrdersTable = (props) => {
     return finalTaget
   }
 
-  const getStatusClassName = (minutes) => {
-    if (isNaN(Number(minutes))) return 'in_time'
-    const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
-    return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
-  }
+  // const getStatusClassName = (minutes) => {
+  //   if (isNaN(Number(minutes))) return 'in_time'
+  //   const delayTime = configState?.configs?.order_deadlines_delayed_time?.value
+  //   return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
+  // }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -611,7 +611,7 @@ export const OrdersTable = (props) => {
                 className={parseInt(orderDetailId) === order.id ? 'active' : ''}
                 onClick={(e) => handleClickOrder(order, e)}
                 data-tour={i === 0 ? 'tour_start' : ''}
-                data-status={isEnabledRowInColor && getStatusClassName(getDelayMinutes(order))}
+                data-status={isEnabledRowInColor && order?.time_status}
               >
                 <tr>
                   {Object.keys(allowColumns).filter(col => allowColumns[col]?.visable)
@@ -621,7 +621,7 @@ export const OrdersTable = (props) => {
                         return (
                           <td key={`slaBar${i}-${index}`}>
                             <Timestatus
-                              timeState={getStatusClassName(getDelayMinutes(order))}
+                              timeState={order?.time_status}
                             />
                           </td>
                         )
@@ -807,7 +807,7 @@ export const OrdersTable = (props) => {
                           <td className='timer' key={`timer${i}-${index}`}>
                             <Timer>
                               <p className='bold'>{t('TIMER', 'Timer')}</p>
-                              <p className={getStatusClassName(getDelayMinutes(order))}>{displayDelayedTime(order)}</p>
+                              <p className={order?.time_status}>{displayDelayedTime(order)}</p>
                             </Timer>
                           </td>
                         )

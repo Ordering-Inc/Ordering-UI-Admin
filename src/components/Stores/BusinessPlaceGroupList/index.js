@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, BusinessPlaceGroupList as BusinessPlaceGroupListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Button } from '../../../styles'
+import { Button, LinkButton } from '../../../styles'
 import { ChevronRight, CheckSquareFill, Square } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { BusinessPlaceGroup } from '../BusinessPlaceGroup'
@@ -12,7 +12,7 @@ import {
   Container,
   Header,
   Content,
-  AddBtn,
+  AddBtnWrapper,
   TableHead,
   CheckWrapper,
   PlaceItemContainer,
@@ -139,7 +139,9 @@ export const BusinessPlaceGroupListUI = (props) => {
                 <ChevronRight />
               </PlaceItemContainer>
             ))}
-            <AddBtn onClick={() => handleOpenDetail(null)}>{t('ADD_PLACES', 'Add places')}</AddBtn>
+            <AddBtnWrapper>
+              <LinkButton onClick={() => handleOpenDetail(null)}>{t('ADD_PLACES', 'Add places')}</LinkButton>
+            </AddBtnWrapper>
           </Content>
         )}
       </PlaceContainer>

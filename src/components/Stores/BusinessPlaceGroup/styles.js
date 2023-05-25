@@ -155,19 +155,8 @@ export const OptionList = styled.div`
   margin-top: 35px;
 `
 
-export const AddBtn = styled.span`
-  font-weight: 400;
-  font-size: 14px;
-  display: block;
+export const AddBtnWrapper = styled.div`
   margin: 10px 0px;
-  cursor: pointer;
-  user-select: none;
-  color: ${props => props.theme.colors.lightGray};
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: ${props => props.theme.colors.primary};
-  }
 `
 
 export const CheckWrapper = styled.div`

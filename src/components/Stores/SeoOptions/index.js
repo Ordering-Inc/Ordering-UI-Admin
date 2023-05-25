@@ -138,6 +138,20 @@ export const SeoOptions = (props) => {
     descriptionRef.current.value = data?.description
   }
 
+  const onUpdateClick = () => {
+    if (formState?.changes?.slug) {
+      const format = /[ `!@#$%^&*()+\-=[\]{};':"\\|,.<>/?~]/
+      if (format.test(formState?.changes?.slug)) {
+        setAlertState({
+          open: true,
+          content: [t('SLUG_NOT_ALLOWED_SPECIAL_CHARACTERS', 'The slug is not allowed special characters.')]
+        })
+        return
+      }
+    }
+    handleUpdateClick()
+  }
+
   useEffect(() => {
     titleRef.current.value = data?.seo_title ?? ''
     descriptionRef.current.value = data?.seo_description ?? ''
@@ -268,7 +282,7 @@ export const SeoOptions = (props) => {
             color='primary'
             borderRadius='5px'
             disabled={formState.loading || Object.keys(formState?.changes).length === 0}
-            onClick={() => handleUpdateClick()}
+            onClick={() => onUpdateClick()}
           >
             {formState.loading ? t('UPDATING', 'Updating') : t('SAVE', 'Save')}
           </Button>

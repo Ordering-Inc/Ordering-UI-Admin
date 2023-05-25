@@ -4,12 +4,12 @@ import { useLanguage } from 'ordering-components-admin'
 import { BusinessDeliveryZoneDetails } from '../BusinessDeliveryZoneDetails'
 import { SideBar } from '../../Shared'
 import { ChevronRight } from 'react-bootstrap-icons'
-import { Checkbox } from '../../../styles'
+import { Checkbox, LinkButton } from '../../../styles'
 
 import {
   ZoneContainer,
   DeliveryZonesTable,
-  AddDeliveryZoneButton,
+  AddDeliveryZoneButtonWrapper,
   ZoneTbody,
   CheckboxWrapper
 } from './styles'
@@ -112,11 +112,13 @@ export const BusinessDeliveryZoneList = (props) => {
           ))}
         </DeliveryZonesTable>
 
-        <AddDeliveryZoneButton
-          onClick={(e) => handleOpenZone(e, null)}
-        >
-          {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
-        </AddDeliveryZoneButton>
+        <AddDeliveryZoneButtonWrapper>
+          <LinkButton
+            onClick={(e) => handleOpenZone(e, null)}
+          >
+            {t('ADD_DELIVERY_ZONE', 'Add delivery zone')}
+          </LinkButton>
+        </AddDeliveryZoneButtonWrapper>
       </ZoneContainer>
       {isOpenDetails && (
         <SideBar

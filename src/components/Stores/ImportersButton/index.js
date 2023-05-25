@@ -8,6 +8,7 @@ import { SideBar } from '../../Shared'
 import { CsvImportButtonWrapper } from './styles'
 
 export const ImportersButton = (props) => {
+  const { setOpenSidebar } = props
   const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
@@ -15,6 +16,7 @@ export const ImportersButton = (props) => {
   const [extraOpen, setExtraOpen] = useState(false)
 
   const handleOpenImporters = () => {
+    setOpenSidebar('importer')
     setOpenImporters(true)
 
     history.replace(`${location.pathname}?header=importers`)
