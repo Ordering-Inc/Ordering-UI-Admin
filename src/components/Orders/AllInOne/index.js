@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLanguage, useSession, OrdersManage as OrdersManageController } from 'ordering-components-admin'
-import { OrderStatusFilterBar } from '../../../OrderStatusFilterBar'
-import { OrdersContentHeader } from '../../../OrdersContentHeader'
-import { OrderDetails } from '../../../OrderDetails'
-import { OrdersDashboardControls } from '../../../OrdersDashboardControls'
-import { Alert } from '../../../../Shared'
+import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
+import { OrdersContentHeader } from '../OrdersContentHeader'
+import { OrderDetails } from '../OrderDetails'
+import { OrdersDashboardControls } from '../OrdersDashboardControls'
+import { Alert } from '../../Shared'
+import { DriversManager } from './DriversManager'
+import { DriversLocation } from '../DriversLocation'
+
 import {
+  MainContentContainer,
+  TopContent,
+  DriversContainer,
+  OrdersContainer,
+  WrapperDriversLocation,
   OrdersListContainer,
   OrdersContent,
   OrdersInnerContent,
@@ -15,10 +23,10 @@ import {
   OrderSubFilterControls,
   OrderStatusSubFilterWrapper
 } from './styles'
-import { OrdersDashboard } from '../../../OrdersDashboard'
-import { OrderStatusSubFilter } from '../../../OrderStatusSubFilter'
-import { OrderNotification } from '../../../OrderNotification'
-import { WizardOrders } from '../../../WizardOrders'
+import { OrdersDashboard } from '../OrdersDashboard'
+import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
+import { OrderNotification } from '../OrderNotification'
+import { WizardOrders } from '../WizardOrders'
 
 const OrdersManagerUI = (props) => {
   const {
@@ -31,8 +39,9 @@ const OrdersManagerUI = (props) => {
     citiesList,
     ordersStatusGroup,
     filterValues,
-    deletedOrderIds,
+    deletedOrderId,
     startMulitOrderStatusChange,
+    startMulitOrderDelete,
     handleChangeSearch,
     handleChangeFilterValues,
     handleOrdersStatusGroupFilter,
@@ -65,8 +74,15 @@ const OrdersManagerUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [timeStatus, setTimeStatus] = useState(null)
   const [slaSettingTime, setSlaSettingTime] = useState(60000)
-
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
+
+  const [mapsData, setMapsData] = useState({
+    driversIsOnline: true,
+    onlineDrivers: [],
+    offlineDrivers: [],
+    selectedDriver: null
+  })
+
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
     setDetailsOrder(null)
@@ -126,10 +142,10 @@ const OrdersManagerUI = (props) => {
   }
 
   useEffect(() => {
-    if (startMulitOrderStatusChange) {
+    if (startMulitOrderStatusChange || startMulitOrderDelete) {
       setTotalSelectedOrder(selectedOrderIds.length)
     }
-  }, [startMulitOrderStatusChange])
+  }, [startMulitOrderStatusChange, startMulitOrderDelete])
 
   useEffect(() => {
     if (selectedOrderIds.length === 0) {
@@ -166,7 +182,7 @@ const OrdersManagerUI = (props) => {
         <OrdersContentHeader
           isDisableTitle={isSelectedOrders}
           isDisableControl={isSelectedOrders}
-          title={t('ORDERS_LIST', 'Orders list')}
+          title={t('ORDER_MANAGER', 'Orders manager')}
           searchValue={searchValue}
           driverGroupList={driverGroupList}
           driversList={driversList}
@@ -185,60 +201,81 @@ const OrdersManagerUI = (props) => {
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
         />
-        <OrderStatusFilterBar
-          selectedOrderStatus={ordersStatusGroup}
-          changeOrderStatus={handleOrdersStatusGroupFilter}
-          numberOfOrdersByStatus={numberOfOrdersByStatus}
-        />
-        <OrderSubFilterControls isColumn={selectedOrderIds?.length}>
-          <OrderStatusSubFilterWrapper isColumn={selectedOrderIds?.length}>
-            <OrderStatusSubFilter
-              ordersStatusGroup={ordersStatusGroup}
-              selectedSubOrderStatus={selectedSubOrderStatus}
-              handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
-            />
-          </OrderStatusSubFilterWrapper>
-          {!isSelectedOrders && (
-            <OrdersDashboardControls
-              selectedOrderNumber={selectedOrderIds?.length}
-              filterValues={filterValues}
-              handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-              handleDeleteMultiOrders={handleDeleteMultiOrders}
-            />
-          )}
-        </OrderSubFilterControls>
-        <OrdersContent>
-          <OrdersInnerContent className='order-content'>
-            <WrapItemView>
-              <OrdersDashboard
-                isSelectedOrders={isSelectedOrders}
-                driverId={props.driverId}
-                customerId={props.customerId}
-                businessId={props.businessId}
-                searchValue={searchValue}
-                filterValues={filterValues}
-                selectedOrderIds={selectedOrderIds}
-                deletedOrderIds={deletedOrderIds}
-                driversList={driversList}
-                ordersStatusGroup={ordersStatusGroup}
-                selectedSubOrderStatus={selectedSubOrderStatus}
-                handleSelectedOrderIds={handleSelectedOrderIds}
-                orderDetailId={orderDetailId}
-                handleOpenOrderDetail={handleOpenOrderDetail}
-                setSelectedOrderIds={setSelectedOrderIds}
-                currentTourStep={currentTourStep}
-                handleOpenTour={handleOpenTour}
-                isTourOpen={isTourOpen}
-                setIsTourOpen={setIsTourOpen}
-                setFilterModalOpen={setFilterModalOpen}
-                timeStatus={timeStatus}
-                slaSettingTime={slaSettingTime}
-                allowColumns={allowColumns}
-                setAllowColumns={setAllowColumns}
+
+        <MainContentContainer>
+          <TopContent>
+            <DriversContainer>
+              <DriversManager
+                setMapsData={setMapsData}
               />
-            </WrapItemView>
-          </OrdersInnerContent>
-        </OrdersContent>
+            </DriversContainer>
+            <OrdersContainer>
+              <OrderStatusFilterBar
+                selectedOrderStatus={ordersStatusGroup}
+                changeOrderStatus={handleOrdersStatusGroupFilter}
+                numberOfOrdersByStatus={numberOfOrdersByStatus}
+              />
+              <OrderSubFilterControls isColumn={selectedOrderIds?.length}>
+                <OrderStatusSubFilterWrapper isColumn={selectedOrderIds?.length}>
+                  <OrderStatusSubFilter
+                    ordersStatusGroup={ordersStatusGroup}
+                    selectedSubOrderStatus={selectedSubOrderStatus}
+                    handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
+                  />
+                </OrderStatusSubFilterWrapper>
+                {!isSelectedOrders && (
+                  <OrdersDashboardControls
+                    selectedOrderNumber={selectedOrderIds?.length}
+                    filterValues={filterValues}
+                    handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+                    handleDeleteMultiOrders={handleDeleteMultiOrders}
+                  />
+                )}
+              </OrderSubFilterControls>
+              <OrdersContent>
+                <OrdersInnerContent className='order-content'>
+                  <WrapItemView>
+                    <OrdersDashboard
+                      hidePhoto
+                      isSelectedOrders={isSelectedOrders}
+                      driverId={props.driverId}
+                      customerId={props.customerId}
+                      businessId={props.businessId}
+                      searchValue={searchValue}
+                      filterValues={filterValues}
+                      selectedOrderIds={selectedOrderIds}
+                      deletedOrderId={deletedOrderId}
+                      driversList={driversList}
+                      ordersStatusGroup={ordersStatusGroup}
+                      selectedSubOrderStatus={selectedSubOrderStatus}
+                      handleSelectedOrderIds={handleSelectedOrderIds}
+                      orderDetailId={orderDetailId}
+                      handleOpenOrderDetail={handleOpenOrderDetail}
+                      setSelectedOrderIds={setSelectedOrderIds}
+                      currentTourStep={currentTourStep}
+                      handleOpenTour={handleOpenTour}
+                      isTourOpen={isTourOpen}
+                      setIsTourOpen={setIsTourOpen}
+                      setFilterModalOpen={setFilterModalOpen}
+                      timeStatus={timeStatus}
+                      slaSettingTime={slaSettingTime}
+                      allowColumns={allowColumns}
+                      setAllowColumns={setAllowColumns}
+                    />
+                  </WrapItemView>
+                </OrdersInnerContent>
+              </OrdersContent>
+            </OrdersContainer>
+          </TopContent>
+          <WrapperDriversLocation>
+            <DriversLocation
+              driversIsOnline={mapsData.driversIsOnline}
+              selectedDriver={mapsData.selectedDriver}
+              onlineDrivers={mapsData.onlineDrivers}
+              offlineDrivers={mapsData.offlineDrivers}
+            />
+          </WrapperDriversLocation>
+        </MainContentContainer>
       </OrdersListContainer>
 
       {isOpenOrderDetail && (
@@ -292,7 +329,7 @@ const OrdersManagerUI = (props) => {
   )
 }
 
-export const OriginalOrdersManager = (props) => {
+export const AllInOne = (props) => {
   const OrdersListControlProps = {
     ...props,
     UIComponent: OrdersManagerUI,
