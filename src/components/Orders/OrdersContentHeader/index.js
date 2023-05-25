@@ -11,6 +11,7 @@ import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { GoogleMapsApiKeySettingButton } from '../GoogleMapsApiKeySettingButton'
+import { WebsocketStatus } from '../WebsocketStatus'
 
 import {
   OrderContentHeaderContainer,
@@ -104,6 +105,7 @@ export const OrdersContentHeader = (props) => {
           </HeaderSection>
         )}
         <TopRightSection>
+          <WebsocketStatus />
           {isShowMapsKeySettingButton && (
             <GoogleMapsApiKeySettingButton />
           )}
