@@ -164,7 +164,7 @@ var RefundToWallet = function RefundToWallet(props) {
       setOpenModal(false);
     }
   }, [actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.RefundWalletButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (isAllowCashWalletRefund || isAllowCreditPointRefund || isAllowStripeRefund || isAllowOtherRefund) && /*#__PURE__*/_react.default.createElement(_styles2.RefundWalletButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     disabled: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || refundDisabled,

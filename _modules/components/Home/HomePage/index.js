@@ -15,6 +15,8 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styledComponents = require("styled-components");
 var _utils = require("../../../utils");
+var _Shared = require("../../Shared");
+var _reactHubspotForm = _interopRequireDefault(require("react-hubspot-form"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -25,6 +27,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -62,6 +68,14 @@ var HomeUI = function HomeUI(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     sessionState = _useSession2[0];
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    showForm = _useState4[0],
+    setShowForm = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isSubmitted = _useState6[0],
+    setIsSubmitted = _useState6[1];
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
@@ -218,7 +232,30 @@ var HomeUI = function HomeUI(props) {
   (0, _react.useEffect)(function () {
     updateTimeAxes();
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_styles.HomeContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Breadcrumb, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
+  var FormLoading = function FormLoading() {
+    return /*#__PURE__*/_react.default.createElement("div", null, _toConsumableArray(Array(4).keys()).map(function (key) {
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+        key: key
+      }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+        height: 15,
+        width: 300,
+        style: {
+          marginBottom: 10
+        }
+      }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+        height: 35,
+        style: {
+          marginBottom: 30
+        }
+      }));
+    }));
+  };
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HomeContainer, null, width > 997 && /*#__PURE__*/_react.default.createElement(_styles.OrderingButtonWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('WHAT_DO_YOU_WANT_SEE_ORDERING', 'What do you want to see in ordering?')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    onClick: function onClick() {
+      return setShowForm(true);
+    }
+  }, t('CLICK_HERE', 'Click here'))), /*#__PURE__*/_react.default.createElement(_styles.Breadcrumb, null, isCollapse && /*#__PURE__*/_react.default.createElement(_Buttons.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleMenuCollapse(false);
@@ -236,7 +273,12 @@ var HomeUI = function HomeUI(props) {
   }, t('VISIT_MY_WEBSITE', 'Visit my Website')))), /*#__PURE__*/_react.default.createElement("img", {
     src: (_project$projectStatu4 = project[(_projectStatus$projec9 = projectStatus.project) === null || _projectStatus$projec9 === void 0 ? void 0 : _projectStatus$projec9.current_status]) === null || _project$projectStatu4 === void 0 ? void 0 : _project$projectStatu4.image,
     alt: ""
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('REPORTS', 'Reports')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), width < 997 && /*#__PURE__*/_react.default.createElement(_styles.OrderingButtonBlock, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WHAT_DO_YOU_WANT', 'What do you want to'), /*#__PURE__*/_react.default.createElement("span", null, " ".concat(t('SEE_IN_ORDERING', 'see in ordering')), "?")), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    onClick: function onClick() {
+      return setShowForm(true);
+    }
+  }, t('CLICK_HERE', 'Click here'))), /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('REPORTS', 'Reports')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "lightPrimary",
     onClick: function onClick() {
       return handleGoToPage({
@@ -282,7 +324,33 @@ var HomeUI = function HomeUI(props) {
     onClick: function onClick() {
       return goToLink('canny');
     }
-  }, t('REQUESTS', 'Requests'))))));
+  }, t('REQUESTS', 'Requests')))))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "769px",
+    padding: "30px",
+    title: t('ORDERING', 'Ordering'),
+    open: showForm,
+    onClose: function onClose() {
+      setIsSubmitted(false);
+      setShowForm(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.HubspotFormWrapper, null, /*#__PURE__*/_react.default.createElement(_reactHubspotForm.default, {
+    region: "na1",
+    portalId: "6130635",
+    formId: "a307934c-a5da-4b85-845e-f6d616351814",
+    onFormSubmitted: function onFormSubmitted() {
+      return setIsSubmitted(true);
+    },
+    onReady: function onReady(form) {
+      return console.log('Form ready!');
+    },
+    loading: /*#__PURE__*/_react.default.createElement(FormLoading, null)
+  }), isSubmitted && /*#__PURE__*/_react.default.createElement(_styles.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    color: "primary",
+    onClick: function onClick() {
+      setIsSubmitted(false);
+      setShowForm(false);
+    }
+  }, t('CLOSE', 'Close'))))));
 };
 var HomePage = function HomePage(props) {
   var homeProps = _objectSpread(_objectSpread({}, props), {}, {

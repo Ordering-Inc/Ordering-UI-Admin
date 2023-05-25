@@ -82,11 +82,16 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     url: '/drivers'
   }, {
     id: 4,
+    title: t('ALL_IN_ONE', 'All in one'),
+    pageName: 'all_in_one',
+    url: '/all-in-one'
+  }, {
+    id: 5,
     title: t('APPOINTMENTS', 'Appointments'),
     pageName: 'appointments',
     url: '/appointments'
   }, {
-    id: 5,
+    id: 6,
     title: t('GIFT_CARD_MANAGER', 'Gift card manager'),
     pageName: 'giftCards',
     url: '/gift-cards'
@@ -401,7 +406,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     handleGoToPage: handleGoToPage
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOME', 'Home')))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "1",
-    active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers' || location.pathname === '/appointments' || location.pathname === '/gift-cards'
+    active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers' || location.pathname === '/all-in-one' || location.pathname === '/appointments' || location.pathname === '/gift-cards'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ListCheck, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "1"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ordersSubMenus.map(function (item) {

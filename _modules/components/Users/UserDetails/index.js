@@ -12,7 +12,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _UserDetailsMenu = require("../UserDetailsMenu");
 var _UserProfileForm = require("../UserProfileForm");
 var _Delivery = require("../../Delivery");
-var _OriginalOrdersManager = require("../../Orders/OrdersManager/Layouts/OriginalOrdersManager");
+var _OrdersManager = require("../../Orders/OrdersManager");
 var _BusinessManagerBusinesses = require("../BusinessManagerBusinesses");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactBootstrap = require("react-bootstrap");
@@ -160,7 +160,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     handleSuccessUpdate: handleSuccessUserUpdate
   }))), currentMenuSelected === 'businesses' && /*#__PURE__*/_react.default.createElement(_BusinessManagerBusinesses.BusinessManagerBusinesses, {
     userId: userState === null || userState === void 0 ? void 0 : (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.id
-  }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_styles2.OrdersWrapper, null, /*#__PURE__*/_react.default.createElement(_OriginalOrdersManager.OriginalOrdersManager, {
+  }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_styles2.OrdersWrapper, null, /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
     isSelectedOrders: true,
     customerId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,
     handleCustomOrderDetail: setExtraOpen

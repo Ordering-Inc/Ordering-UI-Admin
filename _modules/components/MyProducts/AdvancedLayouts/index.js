@@ -20,10 +20,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AdvancedLayouts = function AdvancedLayouts(props) {
-  var _themeValuesRef$curre, _themeValuesRef$curre2, _themeValuesRef$curre3, _themeValuesRef$curre4, _themeValuesRef$curre5, _themeValuesRef$curre6, _themeValuesRef$curre7, _themeValuesRef$curre8, _themeValuesRef$curre9, _themeValuesRef$curre10, _themeValuesRef$curre11, _themeValuesRef$curre12, _themeValuesRef$curre13, _themeValuesRef$curre14, _themeValuesRef$curre15, _themeValuesRef$curre16, _themeValuesRef$curre17, _themeValuesRef$curre18, _themeValuesRef$curre19, _themeValuesRef$curre20, _themeValuesRef$curre21, _themeValuesRef$curre22, _themeValuesRef$curre23, _themeValuesRef$curre24, _themeValuesRef$curre25, _themeValuesRef$curre26, _themeValuesRef$curre27, _themeValuesRef$curre28, _themeValuesRef$curre29;
+  var _themeValuesRef$curre, _themeValuesRef$curre2, _themeValuesRef$curre3, _themeValuesRef$curre4, _themeValuesRef$curre5, _themeValuesRef$curre6, _themeValuesRef$curre7, _themeValuesRef$curre8, _themeValuesRef$curre9, _themeValuesRef$curre10, _themeValuesRef$curre11, _themeValuesRef$curre12, _themeValuesRef$curre13, _themeValuesRef$curre14, _themeValuesRef$curre15, _themeValuesRef$curre16, _themeValuesRef$curre17, _themeValuesRef$curre18, _themeValuesRef$curre19, _themeValuesRef$curre20, _themeValuesRef$curre21, _themeValuesRef$curre22, _themeValuesRef$curre23, _themeValuesRef$curre24, _themeValuesRef$curre25, _themeValuesRef$curre26, _themeValuesRef$curre27, _themeValuesRef$curre28, _themeValuesRef$curre29, _themeValuesRef$curre30, _themeValuesRef$curre31, _themeValuesRef$curre32, _themeValuesRef$curre33;
   var advancedValues = props.advancedValues,
     handleUpdateSiteTheme = props.handleUpdateSiteTheme,
-    isApp = props.isApp;
+    isApp = props.isApp,
+    themesList = props.themesList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -34,6 +35,10 @@ var AdvancedLayouts = function AdvancedLayouts(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
+  var _useState3 = (0, _react.useState)({}),
+    _useState4 = _slicedToArray(_useState3, 2),
+    themeStructure = _useState4[0],
+    setThemeStructure = _useState4[1]; // Don't remove this state
   var themeValuesRef = (0, _react.useRef)({});
   var homeLayoutList = [{
     value: 'original',
@@ -82,9 +87,6 @@ var AdvancedLayouts = function AdvancedLayouts(props) {
     value: 'starbucks',
     name: 'Elegant'
   }, {
-    value: 'red',
-    name: 'Simple'
-  }, {
     value: 'old',
     name: '2021'
   }];
@@ -113,7 +115,7 @@ var AdvancedLayouts = function AdvancedLayouts(props) {
     name: '2021'
   }, {
     value: 'chew',
-    name: 'Great (chew)'
+    name: 'Great'
   }];
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -133,7 +135,17 @@ var AdvancedLayouts = function AdvancedLayouts(props) {
     updateObject(_advancedValues, value, path);
     themeValuesRef.current = _advancedValues;
   };
-  themeValuesRef.current = JSON.parse(JSON.stringify(advancedValues));
+  (0, _react.useEffect)(function () {
+    themeValuesRef.current = JSON.parse(JSON.stringify(advancedValues));
+  }, [advancedValues]);
+  (0, _react.useEffect)(function () {
+    var _themesList$themes, _themesList$themes$;
+    // Don't remove this effect
+    if (!(themesList !== null && themesList !== void 0 && themesList.loading) && themesList !== null && themesList !== void 0 && (_themesList$themes = themesList.themes) !== null && _themesList$themes !== void 0 && (_themesList$themes$ = _themesList$themes[0]) !== null && _themesList$themes$ !== void 0 && _themesList$themes$.structure) {
+      var _themesList$themes2, _themesList$themes2$;
+      setThemeStructure(JSON.parse(JSON.stringify(themesList === null || themesList === void 0 ? void 0 : (_themesList$themes2 = themesList.themes) === null || _themesList$themes2 === void 0 ? void 0 : (_themesList$themes2$ = _themesList$themes2[0]) === null || _themesList$themes2$ === void 0 ? void 0 : _themesList$themes2$.structure)));
+    }
+  }, [themesList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, isApp ? /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CUSTOMER_APP_ADVANCED_LAYOUTS', 'Customer App  Advanced Layouts')), /*#__PURE__*/_react.default.createElement("h2", null, t('HOMEPAGE', 'Homepage')), /*#__PURE__*/_react.default.createElement(_styles2.HeadingWrapper, null, /*#__PURE__*/_react.default.createElement(_LayoutStyleGroup.LayoutStyleGroup, {
     title: t('HOMEPAGE', 'Homepage'),
     layoutList: homeLayoutList,
@@ -153,32 +165,32 @@ var AdvancedLayouts = function AdvancedLayouts(props) {
     handleUpdateThemeValue: handleUpdateThemeValue
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('BUSINESS_VIEW_HEADERS', 'Business View Headers')), /*#__PURE__*/_react.default.createElement(_styles2.HeadingWrapper, null, /*#__PURE__*/_react.default.createElement(_LayoutStyleGroup.LayoutStyleGroup, {
     layoutList: businessViewLayoutList,
-    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre10 = themeValuesRef.current) === null || _themeValuesRef$curre10 === void 0 ? void 0 : (_themeValuesRef$curre11 = _themeValuesRef$curre10.business_view) === null || _themeValuesRef$curre11 === void 0 ? void 0 : (_themeValuesRef$curre12 = _themeValuesRef$curre11.components) === null || _themeValuesRef$curre12 === void 0 ? void 0 : _themeValuesRef$curre12.layout,
-    path: "business_view.components.layout",
+    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre10 = themeValuesRef.current) === null || _themeValuesRef$curre10 === void 0 ? void 0 : (_themeValuesRef$curre11 = _themeValuesRef$curre10.business_view) === null || _themeValuesRef$curre11 === void 0 ? void 0 : (_themeValuesRef$curre12 = _themeValuesRef$curre11.components) === null || _themeValuesRef$curre12 === void 0 ? void 0 : (_themeValuesRef$curre13 = _themeValuesRef$curre12.header) === null || _themeValuesRef$curre13 === void 0 ? void 0 : (_themeValuesRef$curre14 = _themeValuesRef$curre13.components) === null || _themeValuesRef$curre14 === void 0 ? void 0 : _themeValuesRef$curre14.layout,
+    path: "business_view.components.header.components.layout",
     handleUpdateThemeValue: handleUpdateThemeValue
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PRODUCT_LAYOUTS', 'Product Layouts')), /*#__PURE__*/_react.default.createElement(_styles2.HeadingWrapper, null, /*#__PURE__*/_react.default.createElement(_LayoutStyleGroup.LayoutStyleGroup, {
     layoutList: productFormLayoutList,
-    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre13 = themeValuesRef.current) === null || _themeValuesRef$curre13 === void 0 ? void 0 : (_themeValuesRef$curre14 = _themeValuesRef$curre13.business_view) === null || _themeValuesRef$curre14 === void 0 ? void 0 : (_themeValuesRef$curre15 = _themeValuesRef$curre14.components) === null || _themeValuesRef$curre15 === void 0 ? void 0 : (_themeValuesRef$curre16 = _themeValuesRef$curre15.products) === null || _themeValuesRef$curre16 === void 0 ? void 0 : (_themeValuesRef$curre17 = _themeValuesRef$curre16.components) === null || _themeValuesRef$curre17 === void 0 ? void 0 : _themeValuesRef$curre17.layout,
+    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre15 = themeValuesRef.current) === null || _themeValuesRef$curre15 === void 0 ? void 0 : (_themeValuesRef$curre16 = _themeValuesRef$curre15.business_view) === null || _themeValuesRef$curre16 === void 0 ? void 0 : (_themeValuesRef$curre17 = _themeValuesRef$curre16.components) === null || _themeValuesRef$curre17 === void 0 ? void 0 : (_themeValuesRef$curre18 = _themeValuesRef$curre17.products) === null || _themeValuesRef$curre18 === void 0 ? void 0 : (_themeValuesRef$curre19 = _themeValuesRef$curre18.components) === null || _themeValuesRef$curre19 === void 0 ? void 0 : _themeValuesRef$curre19.layout,
     path: "business_view.components.products.components.layout",
     handleUpdateThemeValue: handleUpdateThemeValue
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PRODUCTS_SEARCH', 'Products Search')), /*#__PURE__*/_react.default.createElement(_styles2.HeadingWrapper, null, /*#__PURE__*/_react.default.createElement(_LayoutStyleGroup.LayoutStyleGroup, {
     layoutList: productSearchLayoutList,
-    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre18 = themeValuesRef.current) === null || _themeValuesRef$curre18 === void 0 ? void 0 : (_themeValuesRef$curre19 = _themeValuesRef$curre18.business_listing_search) === null || _themeValuesRef$curre19 === void 0 ? void 0 : (_themeValuesRef$curre20 = _themeValuesRef$curre19.components) === null || _themeValuesRef$curre20 === void 0 ? void 0 : _themeValuesRef$curre20.layout,
-    path: "business_listing_search.components.layout",
+    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre20 = themeValuesRef.current) === null || _themeValuesRef$curre20 === void 0 ? void 0 : (_themeValuesRef$curre21 = _themeValuesRef$curre20.business_view) === null || _themeValuesRef$curre21 === void 0 ? void 0 : (_themeValuesRef$curre22 = _themeValuesRef$curre21.components) === null || _themeValuesRef$curre22 === void 0 ? void 0 : (_themeValuesRef$curre23 = _themeValuesRef$curre22.product_search) === null || _themeValuesRef$curre23 === void 0 ? void 0 : (_themeValuesRef$curre24 = _themeValuesRef$curre23.components) === null || _themeValuesRef$curre24 === void 0 ? void 0 : _themeValuesRef$curre24.layout,
+    path: "business_view.components.product_search.components.layout",
     handleUpdateThemeValue: handleUpdateThemeValue
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('CONFIRMATION', 'Confirmation')), /*#__PURE__*/_react.default.createElement(_styles2.HeadingWrapper, null, /*#__PURE__*/_react.default.createElement(_LayoutStyleGroup.LayoutStyleGroup, {
     layoutList: confirmationLayoutList,
-    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre21 = themeValuesRef.current) === null || _themeValuesRef$curre21 === void 0 ? void 0 : (_themeValuesRef$curre22 = _themeValuesRef$curre21.confirmation) === null || _themeValuesRef$curre22 === void 0 ? void 0 : (_themeValuesRef$curre23 = _themeValuesRef$curre22.components) === null || _themeValuesRef$curre23 === void 0 ? void 0 : _themeValuesRef$curre23.layout,
+    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre25 = themeValuesRef.current) === null || _themeValuesRef$curre25 === void 0 ? void 0 : (_themeValuesRef$curre26 = _themeValuesRef$curre25.confirmation) === null || _themeValuesRef$curre26 === void 0 ? void 0 : (_themeValuesRef$curre27 = _themeValuesRef$curre26.components) === null || _themeValuesRef$curre27 === void 0 ? void 0 : _themeValuesRef$curre27.layout,
     path: "confirmation.components.layout",
     handleUpdateThemeValue: handleUpdateThemeValue
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PROFILE', 'Profile')), /*#__PURE__*/_react.default.createElement(_styles2.HeadingWrapper, null, /*#__PURE__*/_react.default.createElement(_LayoutStyleGroup.LayoutStyleGroup, {
     layoutList: profileLayoutList,
-    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre24 = themeValuesRef.current) === null || _themeValuesRef$curre24 === void 0 ? void 0 : (_themeValuesRef$curre25 = _themeValuesRef$curre24.profile) === null || _themeValuesRef$curre25 === void 0 ? void 0 : (_themeValuesRef$curre26 = _themeValuesRef$curre25.components) === null || _themeValuesRef$curre26 === void 0 ? void 0 : _themeValuesRef$curre26.layout,
+    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre28 = themeValuesRef.current) === null || _themeValuesRef$curre28 === void 0 ? void 0 : (_themeValuesRef$curre29 = _themeValuesRef$curre28.profile) === null || _themeValuesRef$curre29 === void 0 ? void 0 : (_themeValuesRef$curre30 = _themeValuesRef$curre29.components) === null || _themeValuesRef$curre30 === void 0 ? void 0 : _themeValuesRef$curre30.layout,
     path: "profile.components.layout",
     handleUpdateThemeValue: handleUpdateThemeValue
   }))), !isApp && /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('HEADER', 'Header')), /*#__PURE__*/_react.default.createElement(_styles2.HeadingWrapper, null, /*#__PURE__*/_react.default.createElement(_LayoutStyleGroup.LayoutStyleGroup, {
     layoutList: headerLayoutList,
-    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre27 = themeValuesRef.current) === null || _themeValuesRef$curre27 === void 0 ? void 0 : (_themeValuesRef$curre28 = _themeValuesRef$curre27.header) === null || _themeValuesRef$curre28 === void 0 ? void 0 : (_themeValuesRef$curre29 = _themeValuesRef$curre28.components) === null || _themeValuesRef$curre29 === void 0 ? void 0 : _themeValuesRef$curre29.layout,
+    layouts: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : (_themeValuesRef$curre31 = themeValuesRef.current) === null || _themeValuesRef$curre31 === void 0 ? void 0 : (_themeValuesRef$curre32 = _themeValuesRef$curre31.header) === null || _themeValuesRef$curre32 === void 0 ? void 0 : (_themeValuesRef$curre33 = _themeValuesRef$curre32.components) === null || _themeValuesRef$curre33 === void 0 ? void 0 : _themeValuesRef$curre33.layout,
     path: "header.components.layout",
     handleUpdateThemeValue: handleUpdateThemeValue
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
