@@ -10,6 +10,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("../../../styles");
 var _Select = require("../../../styles/Select");
 var _Shared = require("../../Shared");
+var _reactHookForm = require("react-hook-form");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -25,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SingleRecoveryNotificationUI = function SingleRecoveryNotificationUI(props) {
-  var _formState$changes, _formState$changes2, _notification$title, _formState$changes3, _formState$changes4, _notification$body, _formState$changes5, _formState$changes6, _notification$channel;
+  var _formState$changes2, _formState$changes3, _notification$title, _formState$changes4, _formState$changes5, _notification$channel, _formState$changes6, _formState$changes7, _formState$changes8, _notification$body, _formState$changes9, _formState$changes10, _notification$body2;
   var notification = props.notification,
     formState = props.formState,
     handleChangeInput = props.handleChangeInput,
@@ -33,10 +34,16 @@ var SingleRecoveryNotificationUI = function SingleRecoveryNotificationUI(props) 
     handleUpdateClick = props.handleUpdateClick,
     handleDeleteClick = props.handleDeleteClick,
     isAdd = props.isAdd,
-    handleClickAddBtn = props.handleClickAddBtn;
+    handleClickAddBtn = props.handleClickAddBtn,
+    handleChangeItems = props.handleChangeItems;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useForm = (0, _reactHookForm.useForm)(),
+    register = _useForm.register,
+    handleSubmit = _useForm.handleSubmit,
+    errors = _useForm.errors,
+    setValue = _useForm.setValue;
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -94,44 +101,83 @@ var SingleRecoveryNotificationUI = function SingleRecoveryNotificationUI(props) 
       content: formState === null || formState === void 0 ? void 0 : formState.error
     });
   }, [formState === null || formState === void 0 ? void 0 : formState.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  (0, _react.useEffect)(function () {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(function (error) {
+          return error.message;
+        })
+      });
+    }
+  }, [errors]);
+  var onSubmit = function onSubmit() {
+    var _formState$changes;
+    if (!((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.channel) && !(notification !== null && notification !== void 0 && notification.channel)) {
+      setAlertState({
+        open: true,
+        content: [t('VALIDATION_ERROR_REQUIRED').replace('_attribute_', t('CHANNEL', 'Channel'))]
+      });
+      return;
+    }
+    if (isAdd) {
+      handleClickAddBtn();
+    } else {
+      handleClickUpdateBtn(notification === null || notification === void 0 ? void 0 : notification.id);
+    }
+  };
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
+    onSubmit: handleSubmit(onSubmit)
+  }, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.title ? formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.title : (_notification$title = notification === null || notification === void 0 ? void 0 : notification.title) !== null && _notification$title !== void 0 ? _notification$title : '',
-    onChange: handleChangeInput
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGE', 'Message')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
-    name: "body",
-    placeholder: t('WRITE_MESSAGE', 'Write a message'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.body ? formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.body : (_notification$body = notification === null || notification === void 0 ? void 0 : notification.body) !== null && _notification$body !== void 0 ? _notification$body : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.title ? formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.title : (_notification$title = notification === null || notification === void 0 ? void 0 : notification.title) !== null && _notification$title !== void 0 ? _notification$title : '',
+    ref: register({
+      required: t('VALIDATION_ERROR_REQUIRED').replace('_attribute_', t('TITLE', 'Title'))
+    }),
     onChange: handleChangeInput
   })), isAdd && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CHANNEL', 'Channel')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     placeholder: placeholder,
-    defaultValue: formState !== null && formState !== void 0 && (_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.channel ? formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.channel : (_notification$channel = notification === null || notification === void 0 ? void 0 : notification.channel) !== null && _notification$channel !== void 0 ? _notification$channel : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.channel ? formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.channel : (_notification$channel = notification === null || notification === void 0 ? void 0 : notification.channel) !== null && _notification$channel !== void 0 ? _notification$channel : '',
     options: channelList,
     onChange: function onChange(val) {
-      return handleChangeSelect('channel', val);
+      setValue('body', '');
+      handleChangeItems({
+        channel: val,
+        body: ''
+      });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, isAdd ? /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGE', 'Message')), (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.channel) === 'email' || (notification === null || notification === void 0 ? void 0 : notification.channel) === 'email' ? /*#__PURE__*/_react.default.createElement(_Shared.HtmlEditor, {
+    body: formState !== null && formState !== void 0 && (_formState$changes7 = formState.changes) !== null && _formState$changes7 !== void 0 && _formState$changes7.body ? formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.body : (_notification$body = notification === null || notification === void 0 ? void 0 : notification.body) !== null && _notification$body !== void 0 ? _notification$body : '',
+    handleChangeBody: function handleChangeBody(val) {
+      return handleChangeSelect('body', val);
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+    name: "body",
+    placeholder: t('WRITE_MESSAGE', 'Write a message'),
+    defaultValue: formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.body ? formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.body : (_notification$body2 = notification === null || notification === void 0 ? void 0 : notification.body) !== null && _notification$body2 !== void 0 ? _notification$body2 : '',
+    onChange: handleChangeInput,
+    ref: register({
+      required: t('VALIDATION_ERROR_REQUIRED').replace('_attribute_', t('MESSAGE', 'Message'))
+    })
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, isAdd ? /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
+    type: "submit",
     borderRadius: "8px",
-    disabled: Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 || (formState === null || formState === void 0 ? void 0 : formState.loading),
-    onClick: function onClick() {
-      return handleClickAddBtn();
-    }
+    disabled: Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 || (formState === null || formState === void 0 ? void 0 : formState.loading)
   }, t('ADD', 'Add')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
+    type: "submit",
     borderRadius: "8px",
-    disabled: Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 || (formState === null || formState === void 0 ? void 0 : formState.loading),
-    onClick: function onClick() {
-      return handleClickUpdateBtn(notification === null || notification === void 0 ? void 0 : notification.id);
-    }
+    disabled: Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0 || (formState === null || formState === void 0 ? void 0 : formState.loading)
   }, t('ACCEPT', 'Accept')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    type: "button",
     color: "secundary",
     borderRadius: "8px",
     onClick: function onClick() {
       return onClickDeleteNotification(notification === null || notification === void 0 ? void 0 : notification.id);
     }
-  }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('RECOVERY_ACTIONS', 'Recovery actions'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

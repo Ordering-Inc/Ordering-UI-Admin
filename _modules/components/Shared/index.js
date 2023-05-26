@@ -51,6 +51,12 @@ Object.defineProperty(exports, "DragScroll", {
     return _DragScroll.DragScroll;
   }
 });
+Object.defineProperty(exports, "HtmlEditor", {
+  enumerable: true,
+  get: function get() {
+    return _HtmlEditor.HtmlEditor;
+  }
+});
 Object.defineProperty(exports, "Image", {
   enumerable: true,
   get: function get() {
@@ -219,4 +225,5 @@ var _SpinnerLoader = require("./SpinnerLoader");
 var _SpreadSheetEditor = _interopRequireDefault(require("./SpreadSheetEditor"));
 var _ProgressRing = require("./ProgressRing");
 var _ColorPicker = require("./ColorPicker");
+var _HtmlEditor = require("./HtmlEditor");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

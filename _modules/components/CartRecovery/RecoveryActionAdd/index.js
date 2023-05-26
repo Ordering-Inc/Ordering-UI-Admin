@@ -42,7 +42,8 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
   var _useForm = (0, _reactHookForm.useForm)(),
     register = _useForm.register,
     handleSubmit = _useForm.handleSubmit,
-    errors = _useForm.errors;
+    errors = _useForm.errors,
+    setValue = _useForm.setValue;
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -158,6 +159,16 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
     handleAddRecoveryAction();
   };
   var handleSwitchTime = function handleSwitchTime() {
+    var preorderTime;
+    if (!isTime) {
+      preorderTime = parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.hour) * 3600 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.minute) * 60 + parseInt(curPreorderTime === null || curPreorderTime === void 0 ? void 0 : curPreorderTime.second);
+    } else {
+      preorderTime = curDayTime * 24 * 3600;
+    }
+    handleChangeItem({
+      times: [preorderTime],
+      launch_type: 'times'
+    });
     setIsTime(function (prev) {
       return !prev;
     });
@@ -267,8 +278,10 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
     defaultValue: (_formState$changes$ch = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.channel) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : '',
     options: channelList,
     onChange: function onChange(val) {
-      return handleChangeItem({
-        channel: val
+      setValue('body', '');
+      handleChangeItem({
+        channel: val,
+        body: ''
       });
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGE', 'Message')), ((_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.channel) === 'email' ? /*#__PURE__*/_react.default.createElement(_Shared.HtmlEditor, {

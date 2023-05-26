@@ -9,6 +9,12 @@ Object.defineProperty(exports, "OpenCartListing", {
     return _OpenCartListing.OpenCartListing;
   }
 });
+Object.defineProperty(exports, "RecoveryActionAdd", {
+  enumerable: true,
+  get: function get() {
+    return _RecoveryActionAdd.RecoveryActionAdd;
+  }
+});
 Object.defineProperty(exports, "RecoveryActionListing", {
   enumerable: true,
   get: function get() {
@@ -17,3 +23,4 @@ Object.defineProperty(exports, "RecoveryActionListing", {
 });
 var _OpenCartListing = require("./OpenCartListing");
 var _RecoveryActionListing = require("./RecoveryActionListing");
+var _RecoveryActionAdd = require("./RecoveryActionAdd");
