@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useEvent, Settings as SettingsController } from 'ordering-components-admin'
 import { GearFill } from 'react-bootstrap-icons'
 import { SettingsDetail } from '../SettingsDetail'
 import Skeleton from 'react-loading-skeleton'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   CategorySection,
   SettingList,
@@ -21,7 +21,9 @@ const PaymentGatewayUI = (props) => {
   const [events] = useEvent()
 
   const history = useHistory()
+  const query = new URLSearchParams(useLocation().search)
   const allowOptions = ['stripe', 'stripe_connect']
+
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [showDetail, setShowDetail] = useState(false)
 
@@ -44,15 +46,28 @@ const PaymentGatewayUI = (props) => {
     }
   }
 
-  const handleOpenSetting = (category) => {
+  const handleOpenSetting = (category, initialRender) => {
     setSelectedCategory(category)
     setShowDetail(true)
-    history.replace(`${location.pathname}?category=${category?.id}`)
+    if (!initialRender) {
+      history.replace(`${location.pathname}?category=${category?.id}`)
+    }
   }
+
+  useEffect(() => {
+    if (categoryList.loading) return
+    const categoryId = query.get('category')
+    if (categoryId) {
+      const categorySelected = categoryList?.categories.find(item => item?.id === parseInt(categoryId))
+      if (categorySelected) {
+        handleOpenSetting(categorySelected, true)
+      }
+    }
+  }, [categoryList.loading])
 
   return (
     <CategorySection>
-      <h2>{t('ORDERING_DEVELOPERS', 'Ordering developers')}</h2>
+      <h2>{t('PAYMENT_GETWAYS', 'Payment Gateways')}</h2>
       {!categoryList?.loading && (
         <SettingList>
           {categoryList?.categories?.filter(item => allowOptions.includes(item.key)).map(setting => (

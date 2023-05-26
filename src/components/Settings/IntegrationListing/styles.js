@@ -47,6 +47,8 @@ export const Header = styled.div`
 
 export const CategorGroup = styled.div`
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;
 `
 
 export const CategorySection = styled.div`
@@ -141,5 +143,65 @@ export const SettingItemContent = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+  }
+`
+
+export const CloseButtonWrapper = styled.div`
+  position: sticky;
+  top: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    height: 44px;
+    border-radius: 8px;
+    width: 100%;
+  }
+`
+
+export const HubspotFormWrapper = styled.div`
+  min-height: 445px;
+  position: relative;
+`
+
+export const TabWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+export const Tabs = styled.div`
+  display: flex;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+`
+
+export const Tab = styled.div`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  padding-bottom: 14px;
+  color: ${props => props.theme.colors.lightGray};
+  cursor: pointer;
+  &:not(:last-child) {
+    margin-right: 16px;
+    ${props => props.theme.rtl && css`
+      margin-right: 0;
+      margin-left: 16px;
+    `}
+  }
+  ${({ active }) => active && css`
+    font-weight: 600;
+    color: ${props => props.theme.colors.headingColor};
+    border-bottom: 1px solid ${props => props.theme.colors.headingColor};
+  `}
+
+  @media (min-width: 1024px) {
+    &:not(:last-child) {
+      margin-right: 32px;
+      ${props => props.theme.rtl && css`
+        margin-right: 0;
+        margin-left: 32px;
+      `}
+    }
   }
 `
