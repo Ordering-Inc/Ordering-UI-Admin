@@ -22,7 +22,6 @@ export const SectionContainer = styled.div`
 export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   padding: 20px;
   position: sticky;
   z-index: 100;
