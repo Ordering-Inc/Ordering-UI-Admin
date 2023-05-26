@@ -21,10 +21,12 @@ export const Header = styled.div`
   `}
 
   h1 {
+    flex: 1;
     font-size: 20px;
     font-weight: 700;
     margin: 0px;
     line-height: 35px;
+    text-align: center;
   }
 
   > button {
@@ -43,9 +45,34 @@ export const Header = styled.div`
   }
 `
 
-export const SettingListContainer = styled.div`
+export const CategorGroup = styled.div`
+  margin-top: 50px;
+`
+
+export const CategorySection = styled.div`
+ h2 {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  margin-left: 20px;
+ }
+`
+
+export const SettingList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 35px;
+`
+
+export const SpecialPartnerWrapper = styled.div`
+  margin-top: 14px;
+  margin-left: 20px;
+  button {
+    height: 44px;
+    border-radius: 8px;
+  }
 `
 
 export const SettingItemContainer = styled.div`
