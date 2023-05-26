@@ -367,7 +367,7 @@ import {
   CustomProject,
   OrderingWidgets
 } from './components/MyProducts'
-import { OpenCartListing, RecoveryActionListing } from './components/CartRecovery'
+import { OpenCartListing, RecoveryActionListing, RecoveryActionAdd } from './components/CartRecovery'
 import { FreeProductsList, PurchasedProductsList } from './components/Downloads'
 
 import { Layout } from './components/Layout'
@@ -776,6 +776,7 @@ export {
 
   OpenCartListing,
   RecoveryActionListing,
+  RecoveryActionAdd,
   FreeProductsList,
   PurchasedProductsList,
 

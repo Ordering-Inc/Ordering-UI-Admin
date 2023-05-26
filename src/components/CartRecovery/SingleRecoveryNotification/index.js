@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, SingleRecoveryNotification as SingleRecoveryNotificationController } from 'ordering-components-admin'
 import { Input, TextArea, Button } from '../../../styles'
 import { Select } from '../../../styles/Select'
-import { Alert, Confirm } from '../../Shared'
+import { Alert, Confirm, HtmlEditor } from '../../Shared'
+import { useForm } from 'react-hook-form'
 
 import {
   Container,
@@ -20,10 +21,12 @@ const SingleRecoveryNotificationUI = (props) => {
     handleUpdateClick,
     handleDeleteClick,
     isAdd,
-    handleClickAddBtn
+    handleClickAddBtn,
+    handleChangeItems
   } = props
 
   const [, t] = useLanguage()
+  const { register, handleSubmit, errors, setValue } = useForm()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -70,9 +73,33 @@ const SingleRecoveryNotificationUI = (props) => {
     })
   }, [formState?.error])
 
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      setAlertState({
+        open: true,
+        content: Object.values(errors).map(error => error.message)
+      })
+    }
+  }, [errors])
+
+  const onSubmit = () => {
+    if (!formState.changes?.channel && !notification?.channel) {
+      setAlertState({
+        open: true,
+        content: [t('VALIDATION_ERROR_REQUIRED').replace('_attribute_', t('CHANNEL', 'Channel'))]
+      })
+      return
+    }
+    if (isAdd) {
+      handleClickAddBtn()
+    } else {
+      handleClickUpdateBtn(notification?.id)
+    }
+  }
+
   return (
     <>
-      <Container>
+      <Container onSubmit={handleSubmit(onSubmit)}>
         <InputWrapper>
           <label>{t('TITLE', 'Title')}</label>
           <Input
@@ -83,19 +110,10 @@ const SingleRecoveryNotificationUI = (props) => {
                 ? formState?.changes?.title
                 : notification?.title ?? ''
             }
-            onChange={handleChangeInput}
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <label>{t('MESSAGE', 'Message')}</label>
-          <TextArea
-            name='body'
-            placeholder={t('WRITE_MESSAGE', 'Write a message')}
-            defaultValue={
-              formState?.changes?.body
-                ? formState?.changes?.body
-                : notification?.body ?? ''
-            }
+            ref={register({
+              required: t(
+                'VALIDATION_ERROR_REQUIRED').replace('_attribute_', t('TITLE', 'Title'))
+            })}
             onChange={handleChangeInput}
           />
         </InputWrapper>
@@ -110,41 +128,72 @@ const SingleRecoveryNotificationUI = (props) => {
                   : notification?.channel ?? ''
               }
               options={channelList}
-              onChange={val => handleChangeSelect('channel', val)}
+              onChange={val => {
+                setValue('body', '')
+                handleChangeItems({ channel: val, body: '' })
+              }}
             />
           </InputWrapper>
         )}
-      </Container>
-      <ButtonGroup>
-        {isAdd ? (
-          <Button
-            color='primary'
-            borderRadius='8px'
-            disabled={Object.keys(formState?.changes).length === 0 || formState?.loading}
-            onClick={() => handleClickAddBtn()}
-          >
-            {t('ADD', 'Add')}
-          </Button>
-        ) : (
-          <>
+        <InputWrapper>
+          <label>{t('MESSAGE', 'Message')}</label>
+          {(formState?.changes?.channel === 'email' || notification?.channel === 'email') ? (
+            <HtmlEditor
+              body={
+                formState?.changes?.body
+                  ? formState?.changes?.body
+                  : notification?.body ?? ''
+              }
+              handleChangeBody={val => handleChangeSelect('body', val)}
+            />
+          ) : (
+            <TextArea
+              name='body'
+              placeholder={t('WRITE_MESSAGE', 'Write a message')}
+              defaultValue={
+                formState?.changes?.body
+                  ? formState?.changes?.body
+                  : notification?.body ?? ''
+              }
+              onChange={handleChangeInput}
+              ref={register({
+                required: t('VALIDATION_ERROR_REQUIRED').replace('_attribute_', t('MESSAGE', 'Message'))
+              })}
+            />
+          )}
+        </InputWrapper>
+        <ButtonGroup>
+          {isAdd ? (
             <Button
               color='primary'
+              type='submit'
               borderRadius='8px'
               disabled={Object.keys(formState?.changes).length === 0 || formState?.loading}
-              onClick={() => handleClickUpdateBtn(notification?.id)}
             >
-              {t('ACCEPT', 'Accept')}
+              {t('ADD', 'Add')}
             </Button>
-            <Button
-              color='secundary'
-              borderRadius='8px'
-              onClick={() => onClickDeleteNotification(notification?.id)}
-            >
-              {t('DELETE', 'Delete')}
-            </Button>
-          </>
-        )}
-      </ButtonGroup>
+          ) : (
+            <>
+              <Button
+                color='primary'
+                type='submit'
+                borderRadius='8px'
+                disabled={Object.keys(formState?.changes).length === 0 || formState?.loading}
+              >
+                {t('ACCEPT', 'Accept')}
+              </Button>
+              <Button
+                type='button'
+                color='secundary'
+                borderRadius='8px'
+                onClick={() => onClickDeleteNotification(notification?.id)}
+              >
+                {t('DELETE', 'Delete')}
+              </Button>
+            </>
+          )}
+        </ButtonGroup>
+      </Container>
       <Alert
         title={t('RECOVERY_ACTIONS', 'Recovery actions')}
         content={alertState.content}
