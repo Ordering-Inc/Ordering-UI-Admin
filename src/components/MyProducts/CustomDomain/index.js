@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useLanguage, useConfig, CustomDomain as CustomDomainController } from 'ordering-components-admin'
 import { Select } from '../../../styles/Select/FirstSelect'
-import { CheckSquareFill as CheckedIcon, Square as UnCheckedIcon } from 'react-bootstrap-icons'
-import { Button, Input } from '../../../styles'
+import { CheckSquareFill as CheckedIcon, Square as UnCheckedIcon, InfoCircle } from 'react-bootstrap-icons'
+import { Button, Input, IconButton } from '../../../styles'
 import { Alert } from '../../Shared'
 import {
   Container,
@@ -10,7 +10,10 @@ import {
   SelectWrapper,
   Option,
   ButtonGroup,
-  CheckBoxWrapper
+  CheckBoxWrapper,
+  CustomDomainInfo,
+  CustomDomainInfoContent,
+  TitleWrapper
 } from './styles'
 
 const CustomDomainUI = (props) => {
@@ -66,7 +69,19 @@ const CustomDomainUI = (props) => {
       <Container>
         <h1>{t('CUSTOM_DOMAIN', 'Custom domain')}</h1>
         <FormControl>
-          <label>{t('DOMAIN', 'Domain')}</label>
+          <TitleWrapper>
+            <label>{t('DOMAIN', 'Domain')}</label>
+            <CustomDomainInfo>
+              <IconButton
+                color='primary'
+              >
+                <InfoCircle />
+              </IconButton>
+              <CustomDomainInfoContent>
+                <span>{t('CUSTOM_DOMAIN_NOTIFY', 'Please make sure that your DNS CNAME is pointing {project-name}.tryordering.com')}</span>
+              </CustomDomainInfoContent>
+            </CustomDomainInfo>
+          </TitleWrapper>
           <Input
             placeholder='www.yourdomain.com'
             value={formState?.changes?.domain || ''}
@@ -85,18 +100,22 @@ const CustomDomainUI = (props) => {
             />
           </SelectWrapper>
         </FormControl>
-        <CheckBoxWrapper onClick={() => setShowMapInput(prev => !prev)}>
-          {showMapInput ? <CheckedIcon className='active' /> : <UnCheckedIcon />}
-          <span>{t('I_HAVE_GOOGLE_MAPS_KEY_WANT_SHARE_IT', 'I have my Google Maps API Key, I want to share it')}</span>
-        </CheckBoxWrapper>
-        {showMapInput && (
-          <FormControl>
-            <label>{t('GOOGLE_MAP_API_KEY', 'Google map api key')}</label>
-            <Input
-              value={googleMapKey}
-              onChange={(e) => setGoogleMapKey(e.target.value)}
-            />
-          </FormControl>
+        {!configs?.google_maps_api_key?.value && (
+          <>
+            <CheckBoxWrapper onClick={() => setShowMapInput(prev => !prev)}>
+              {showMapInput ? <CheckedIcon className='active' /> : <UnCheckedIcon />}
+              <span>{t('I_HAVE_GOOGLE_MAPS_KEY_WANT_SHARE_IT', 'I have my Google Maps API Key, I want to share it')}</span>
+            </CheckBoxWrapper>
+            {showMapInput && (
+              <FormControl>
+                <label>{t('GOOGLE_MAP_API_KEY', 'Google map api key')}</label>
+                <Input
+                  value={googleMapKey}
+                  onChange={(e) => setGoogleMapKey(e.target.value)}
+                />
+              </FormControl>
+            )}
+          </>
         )}
         <ButtonGroup>
           <Button

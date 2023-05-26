@@ -14,6 +14,7 @@ export const ListenPageChanges = ({ children }) => {
     orders: '/orders',
     deliveries: '/deliveries',
     drivers: '/drivers',
+    all_in_one: '/all-in-one',
     appointments: '/appointments',
     giftCards: '/gift-cards',
     messages: '/messages',

@@ -8,6 +8,8 @@ import Skeleton from 'react-loading-skeleton'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { useTheme } from 'styled-components'
 import { getCurrentDiffDays } from '../../../utils'
+import { Modal } from '../../Shared'
+import HubspotForm from 'react-hubspot-form'
 import {
   List as MenuIcon,
   Basket as OrdersIcon,
@@ -39,7 +41,11 @@ import {
   GreetingText,
   ProjectStatusDescription,
   ProjectCurrentStatus,
-  ProjectStatusWrapper
+  ProjectStatusWrapper,
+  OrderingButtonWrapper,
+  OrderingButtonBlock,
+  CloseButtonWrapper,
+  HubspotFormWrapper
 } from './styles'
 
 const HomeUI = (props) => {
@@ -59,6 +65,8 @@ const HomeUI = (props) => {
   const { width } = useWindowSize()
   const [{ parsePrice }] = useUtils()
   const [sessionState] = useSession()
+  const [showForm, setShowForm] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [ordering] = useApi()
 
   const project = {
@@ -205,154 +213,219 @@ const HomeUI = (props) => {
     updateTimeAxes()
   }, [])
 
+  const FormLoading = () => {
+    return (
+      <div>
+        {[...Array(4).keys()].map(key => (
+          <React.Fragment key={key}>
+            <Skeleton height={15} width={300} style={{ marginBottom: 10 }} />
+            <Skeleton height={35} style={{ marginBottom: 30 }} />
+          </React.Fragment>
+        ))}
+      </div>
+    )
+  }
+
   return (
-    <HomeContainer>
-      <Breadcrumb>
-        {isCollapse && (
-          <IconButton
-            color='black'
-            onClick={() => handleMenuCollapse(false)}
-          >
-            <MenuIcon />
-          </IconButton>
+    <>
+      <HomeContainer>
+        {width > 997 && (
+          <OrderingButtonWrapper>
+            <span>{t('WHAT_DO_YOU_WANT_SEE_ORDERING', 'What do you want to see in ordering?')}</span>
+            <Button color='primary' onClick={() => setShowForm(true)}>{t('CLICK_HERE', 'Click here')}</Button>
+          </OrderingButtonWrapper>
         )}
-        <h1>{t('HOME', 'Home')}</h1>
-      </Breadcrumb>
-
-      {projectStatus?.loading && (
-        <HeaderContainer>
-          <Skeleton height={150} />
-        </HeaderContainer>
-      )}
-
-      {!projectStatus?.loading && (
-        <>
-          {!projectStatus?.project?.current_status ? (
-            <HeaderContainer>
-              <WelcomeMsg>{t('WELCOME_TO_ORDERING', 'Welcome to Ordering')}!</WelcomeMsg>
-              <GuideMsg>{t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.')}</GuideMsg>
-            </HeaderContainer>
-          ) : (
-            <ProjectStatusContainer>
-              <ProjectInfoWrapper>
-                <GreetingText>{t('WELCOME', 'Welcome')} {sessionState?.user?.name}!</GreetingText>
-                <ProjectStatusDescription>
-                  {
-                    (projectStatus.project?.current_status_until && projectStatus.project?.current_status === 'past_due')
-                      ? project[projectStatus.project?.current_status]?.description.replace('_days_', getCurrentDiffDays(projectStatus.project?.current_status_until))
-                      : project[projectStatus.project?.current_status]?.description
-                  }
-                </ProjectStatusDescription>
-                <ProjectStatusWrapper>
-                  <ProjectCurrentStatus
-                    isActive={projectStatus.project?.current_status === 'active'}
-                  >
-                    {project[projectStatus.project?.current_status]?.status}
-                  </ProjectCurrentStatus>
-                  <Button
-                    color='primary'
-                    borderRadius='8px'
-                    onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
-                  >
-                    {t('VISIT_MY_WEBSITE', 'Visit my Website')}
-                  </Button>
-                </ProjectStatusWrapper>
-              </ProjectInfoWrapper>
-              <img src={project[projectStatus.project?.current_status]?.image} alt='' />
-            </ProjectStatusContainer>
+        <Breadcrumb>
+          {isCollapse && (
+            <IconButton
+              color='black'
+              onClick={() => handleMenuCollapse(false)}
+            >
+              <MenuIcon />
+            </IconButton>
           )}
-        </>
-      )}
+          <h1>{t('HOME', 'Home')}</h1>
+        </Breadcrumb>
 
-      <ParagraphHeaders>
-        <p>{t('REPORTS', 'Reports')}</p>
-        <Button
-          color='lightPrimary'
-          onClick={() => handleGoToPage({ page: 'business_analytics' })}
-        >
-          {t('SEE_MORE_REPORTS', 'See more reports')}
-        </Button>
-      </ParagraphHeaders>
-      <Reports>
-        <SalesGraphContainer>
-          <ChartHeaderContainer>
-            <p>{t('THIS_MONTH_SALES', 'This month sales')}</p>
+        {projectStatus?.loading && (
+          <HeaderContainer>
+            <Skeleton height={150} />
+          </HeaderContainer>
+        )}
+
+        {!projectStatus?.loading && (
+          <>
+            {!projectStatus?.project?.current_status ? (
+              <HeaderContainer>
+                <WelcomeMsg>{t('WELCOME_TO_ORDERING', 'Welcome to Ordering')}!</WelcomeMsg>
+                <GuideMsg>{t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.')}</GuideMsg>
+              </HeaderContainer>
+            ) : (
+              <ProjectStatusContainer>
+                <ProjectInfoWrapper>
+                  <GreetingText>{t('WELCOME', 'Welcome')} {sessionState?.user?.name}!</GreetingText>
+                  <ProjectStatusDescription>
+                    {
+                      (projectStatus.project?.current_status_until && projectStatus.project?.current_status === 'past_due')
+                        ? project[projectStatus.project?.current_status]?.description.replace('_days_', getCurrentDiffDays(projectStatus.project?.current_status_until))
+                        : project[projectStatus.project?.current_status]?.description
+                    }
+                  </ProjectStatusDescription>
+                  <ProjectStatusWrapper>
+                    <ProjectCurrentStatus
+                      isActive={projectStatus.project?.current_status === 'active'}
+                    >
+                      {project[projectStatus.project?.current_status]?.status}
+                    </ProjectCurrentStatus>
+                    <Button
+                      color='primary'
+                      borderRadius='8px'
+                      onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
+                    >
+                      {t('VISIT_MY_WEBSITE', 'Visit my Website')}
+                    </Button>
+                  </ProjectStatusWrapper>
+                </ProjectInfoWrapper>
+                <img src={project[projectStatus.project?.current_status]?.image} alt='' />
+              </ProjectStatusContainer>
+            )}
+          </>
+        )}
+
+        {width < 997 && (
+          <OrderingButtonBlock>
+            <h2>
+              {t('WHAT_DO_YOU_WANT', 'What do you want to')}
+              <span>{` ${t('SEE_IN_ORDERING', 'see in ordering')}`}?</span>
+            </h2>
+            <Button color='primary' onClick={() => setShowForm(true)}>{t('CLICK_HERE', 'Click here')}</Button>
+          </OrderingButtonBlock>
+        )}
+
+        <ParagraphHeaders>
+          <p>{t('REPORTS', 'Reports')}</p>
+          <Button
+            color='lightPrimary'
+            onClick={() => handleGoToPage({ page: 'business_analytics' })}
+          >
+            {t('SEE_MORE_REPORTS', 'See more reports')}
+          </Button>
+        </ParagraphHeaders>
+        <Reports>
+          <SalesGraphContainer>
+            <ChartHeaderContainer>
+              <p>{t('THIS_MONTH_SALES', 'This month sales')}</p>
+              {
+                monthSalesList?.loading ? <Skeleton width={70} height={30} /> : <h3>{getTotalSales()}</h3>
+              }
+            </ChartHeaderContainer>
             {
-              monthSalesList?.loading ? <Skeleton width={70} height={30} /> : <h3>{getTotalSales()}</h3>
+              monthSalesList?.loading ? <Skeleton height={150} /> : <Line data={defaultData} options={options} height={width > 1400 ? '106px' : ''} />
             }
-          </ChartHeaderContainer>
-          {
-            monthSalesList?.loading ? <Skeleton height={150} /> : <Line data={defaultData} options={options} height={width > 1400 ? '106px' : ''} />
-          }
-        </SalesGraphContainer>
-        <OrdersAndSalesWrapper>
-          <OrdersOrSalesContainer>
-            <DetailsContent>
-              <p>{t('TODAY_ORDERS', 'Today Orders')}</p>
-              {
-                ordersList?.loading ? <Skeleton width={70} height={30} /> : <h2>{ordersList?.orders}</h2>
-              }
-            </DetailsContent>
-            <BoxIconContainer>
-              <OrdersIcon />
-            </BoxIconContainer>
-          </OrdersOrSalesContainer>
-          <OrdersOrSalesContainer>
-            <DetailsContent>
-              <p>{t('TODAY_SALES', 'Today Sales')}</p>
-              {
-                todaySalelsList?.loading ? <Skeleton width={70} height={30} /> : <h2>{parsePrice(todaySalelsList?.sales, { separator: '.' })}</h2>
-              }
-            </DetailsContent>
-            <BoxIconContainer isSales>
-              <SalesIcon />
-            </BoxIconContainer>
-          </OrdersOrSalesContainer>
-        </OrdersAndSalesWrapper>
-      </Reports>
-      {sessionState?.user?.level !== 2 && (
-        <>
-          <ParagraphHeaders>
-            <p>{t('SUPPORT', 'Support')}</p>
-          </ParagraphHeaders>
-          <AssistanceWidgets>
-            <AssistanceTitle>
-              <h1>{t('SUPPORT_TITLE_START', 'Which kind of')}{' '}
-                <span>{t('SUPPORT_TITLE_END', 'assistance do you need?')}</span>
-              </h1>
-              <p>{t('ASSIST_SUB_TITILE', 'Choose the asistance you are looking for in the buttons below.')}</p>
-            </AssistanceTitle>
-            <AssistanceBody>
-              <WidgeBlock>
-                <h3>{t('CONTACT_SALES_TEAM', 'Contact our Sales Team')}</h3>
-                <p>{t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')}</p>
-                <Button outline color='primary' onClick={() => goToLink('sales')}>{t('SALES_CONTACT', 'Sales Contact')}</Button>
-              </WidgeBlock>
-              <WidgeBlock>
-                <h3>{t('CONTACT_SUPPORT_TEAM', 'Contact our Support Team')}</h3>
-                <p>{t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')}</p>
-                <Button outline color='primary' onClick={() => goToLink('tech')}>{t('TECH_SUPPORT', 'Tech Support')}</Button>
-              </WidgeBlock>
-            </AssistanceBody>
-          </AssistanceWidgets>
-        </>
-      )}
-      {sessionState?.user?.level === 0 && (
-        <FeedbackWidgets>
-          <ParagraphHeaders>
-            <p>{t('FEEDBACK', 'Feedback')}</p>
-          </ParagraphHeaders>
-          <FeedbackContainer>
-            <h2>{t('SHARE_WITH_US_YOUR_IDEAS', 'Share with us your ideas')}</h2>
-            <p className='center'>{t('FEEDBACK_DESCRIPTION', 'Do you think our functionalities can be improved or do you want to see a new feature?')}</p>
-            <p>{t('SHARE_US_YOUR_COMMENTS', 'Share us your comments')}</p>
-            <ButtonWrapper>
-              <Button outline color='primary' onClick={() => goToLink('canny')}>{t('REQUESTS', 'Requests')}</Button>
-            </ButtonWrapper>
-          </FeedbackContainer>
-        </FeedbackWidgets>
-      )}
-    </HomeContainer>
+          </SalesGraphContainer>
+          <OrdersAndSalesWrapper>
+            <OrdersOrSalesContainer>
+              <DetailsContent>
+                <p>{t('TODAY_ORDERS', 'Today Orders')}</p>
+                {
+                  ordersList?.loading ? <Skeleton width={70} height={30} /> : <h2>{ordersList?.orders}</h2>
+                }
+              </DetailsContent>
+              <BoxIconContainer>
+                <OrdersIcon />
+              </BoxIconContainer>
+            </OrdersOrSalesContainer>
+            <OrdersOrSalesContainer>
+              <DetailsContent>
+                <p>{t('TODAY_SALES', 'Today Sales')}</p>
+                {
+                  todaySalelsList?.loading ? <Skeleton width={70} height={30} /> : <h2>{parsePrice(todaySalelsList?.sales, { separator: '.' })}</h2>
+                }
+              </DetailsContent>
+              <BoxIconContainer isSales>
+                <SalesIcon />
+              </BoxIconContainer>
+            </OrdersOrSalesContainer>
+          </OrdersAndSalesWrapper>
+        </Reports>
+        {sessionState?.user?.level !== 2 && (
+          <>
+            <ParagraphHeaders>
+              <p>{t('SUPPORT', 'Support')}</p>
+            </ParagraphHeaders>
+            <AssistanceWidgets>
+              <AssistanceTitle>
+                <h1>{t('SUPPORT_TITLE_START', 'Which kind of')}{' '}
+                  <span>{t('SUPPORT_TITLE_END', 'assistance do you need?')}</span>
+                </h1>
+                <p>{t('ASSIST_SUB_TITILE', 'Choose the asistance you are looking for in the buttons below.')}</p>
+              </AssistanceTitle>
+              <AssistanceBody>
+                <WidgeBlock>
+                  <h3>{t('CONTACT_SALES_TEAM', 'Contact our Sales Team')}</h3>
+                  <p>{t('CONTACT_SALES_SUB_TITLE', 'Ask about pricing, custom work, budget and more money talk')}</p>
+                  <Button outline color='primary' onClick={() => goToLink('sales')}>{t('SALES_CONTACT', 'Sales Contact')}</Button>
+                </WidgeBlock>
+                <WidgeBlock>
+                  <h3>{t('CONTACT_SUPPORT_TEAM', 'Contact our Support Team')}</h3>
+                  <p>{t('CONTACT_SUPPORT_SUB_TITLE', 'Ask about your ordering installation, products and features')}</p>
+                  <Button outline color='primary' onClick={() => goToLink('tech')}>{t('TECH_SUPPORT', 'Tech Support')}</Button>
+                </WidgeBlock>
+              </AssistanceBody>
+            </AssistanceWidgets>
+          </>
+        )}
+        {sessionState?.user?.level === 0 && (
+          <FeedbackWidgets>
+            <ParagraphHeaders>
+              <p>{t('FEEDBACK', 'Feedback')}</p>
+            </ParagraphHeaders>
+            <FeedbackContainer>
+              <h2>{t('SHARE_WITH_US_YOUR_IDEAS', 'Share with us your ideas')}</h2>
+              <p className='center'>{t('FEEDBACK_DESCRIPTION', 'Do you think our functionalities can be improved or do you want to see a new feature?')}</p>
+              <p>{t('SHARE_US_YOUR_COMMENTS', 'Share us your comments')}</p>
+              <ButtonWrapper>
+                <Button outline color='primary' onClick={() => goToLink('canny')}>{t('REQUESTS', 'Requests')}</Button>
+              </ButtonWrapper>
+            </FeedbackContainer>
+          </FeedbackWidgets>
+        )}
+      </HomeContainer>
+      <Modal
+        width='769px'
+        padding='30px'
+        title={t('ORDERING', 'Ordering')}
+        open={showForm}
+        onClose={() => {
+          setIsSubmitted(false)
+          setShowForm(false)
+        }}
+      >
+        <HubspotFormWrapper>
+          <HubspotForm
+            region='na1'
+            portalId='6130635'
+            formId='a307934c-a5da-4b85-845e-f6d616351814'
+            onFormSubmitted={() => setIsSubmitted(true)}
+            onReady={(form) => console.log('Form ready!')}
+            loading={<FormLoading />}
+          />
+          {isSubmitted && (
+            <CloseButtonWrapper>
+              <Button
+                color='primary'
+                onClick={() => {
+                  setIsSubmitted(false)
+                  setShowForm(false)
+                }}
+              >
+                {t('CLOSE', 'Close')}
+              </Button>
+            </CloseButtonWrapper>
+          )}
+        </HubspotFormWrapper>
+      </Modal>
+    </>
   )
 }
 

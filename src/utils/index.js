@@ -4,7 +4,7 @@ import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
 import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
 import moment from 'moment'
 import { useLanguage, CODES } from 'ordering-components-admin'
-import CURRENCY from '../config/currency.json'
+import { CURRENCY } from '../config/currency.js'
 
 export const optimizeImage = (url, params, fallback) => {
   if (!url && fallback) return fallback

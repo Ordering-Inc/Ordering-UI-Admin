@@ -20,6 +20,13 @@
     "robots": "",
     "canonicalUrl": ""
   },
+  "all_in_one": {
+    "title": "All in one",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "",
+    "canonicalUrl": ""
+  },
   "deliveries": {
     "title": "Delivery Dashboard",
     "description": "a dummy description about this page",

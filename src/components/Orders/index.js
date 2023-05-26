@@ -1,3 +1,4 @@
+import { AllInOne } from './AllInOne'
 import { Appointments } from './Appointments'
 import { DeliveriesManager } from './DeliveriesManager'
 import { DriversManager } from './DriversManager'
@@ -49,6 +50,7 @@ import { CountryFilter } from './CountryFilter'
 import { OrderToPrint } from './OrderToPrint'
 
 export {
+  AllInOne,
   Appointments,
   DeliveriesManager,
   DriversManager,
