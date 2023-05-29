@@ -12,7 +12,8 @@ import {
   Header,
   CloseButton,
   FormControl,
-  QRCodeLayout
+  QRCodeLayout,
+  TableNumberHintText
 } from './styles'
 
 export const BusinessQRCodeOption = (props) => {
@@ -109,6 +110,7 @@ export const BusinessQRCodeOption = (props) => {
           <Close onClick={() => onClose && onClose()} />
         </CloseButton>
       </Header>
+
       {code && (
         <QRCodeLayout ref={printerRef}>
           <QRCode
@@ -119,17 +121,31 @@ export const BusinessQRCodeOption = (props) => {
           />
         </QRCodeLayout>
       )}
+
       {item?.key === 'pick_up' ? (
-        <p>{t('GENERATE_QR_CODE', 'Generate QR Code')}</p>
+        <h4>{t('GENERATE_QR_CODE', 'Generate QR Code')}</h4>
       ) : (
-        <FormControl>
-          <label>{item?.key === 'eat_in' ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')}</label>
-          <Input
-            placeholder='0'
-            ref={numberRef}
-          />
-        </FormControl>
+        <>
+          {item?.key === 'eat_in' && code && (
+            <TableNumberHintText>
+              {t('TO_GENERATE_NEW_QR_CODE_UPDATE_TABLE_NUMBER', 'To generate new QR codes, update the table number and regenerate the code.')}
+            </TableNumberHintText>
+          )}
+          <FormControl>
+            <label>{item?.key === 'eat_in' ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')}</label>
+            <Input
+              placeholder='0'
+              ref={numberRef}
+              onKeyPress={(e) => {
+                if (!/^[0-9.]$/.test(e.key)) {
+                  e.preventDefault()
+                }
+              }}
+            />
+          </FormControl>
+        </>
       )}
+
       <ButtonGroup>
         <Button color='primary' outline onClick={generateQRCode}>
           {t('GENERATE_CODE', 'Generate Code')}
@@ -147,6 +163,7 @@ export const BusinessQRCodeOption = (props) => {
           removeAfterPrint
         />
       </ButtonGroup>
+
       <Alert
         title={t('ORDERING', 'Ordering')}
         content={alertState.content}
