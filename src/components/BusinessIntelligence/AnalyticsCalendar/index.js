@@ -7,6 +7,8 @@ import 'react-date-range/dist/theme/default.css'
 import { Calendar4 } from 'react-bootstrap-icons'
 import { Button } from '../../../styles'
 import { AnalyticsCalendarContainer } from './styles'
+import * as locales from 'react-date-range/dist/locale'
+import { getLocale } from '../../../utils'
 
 export const AnalyticsCalendar = (props) => {
   const {
@@ -15,7 +17,8 @@ export const AnalyticsCalendar = (props) => {
     leftAlign
   } = props
 
-  const [, t] = useLanguage()
+  const [state, t] = useLanguage()
+
   const [dateRange, setDateRange] = useState([
     {
       startDate: null,
@@ -85,9 +88,12 @@ export const AnalyticsCalendar = (props) => {
           <AnalyticsCalendarContainer className='ordering-calendar' ref={calendarRef} leftAlign={leftAlign}>
             <DateRange
               editableDateInputs
+              locale={getLocale(state?.language?.code, locales)}
               onChange={item => handleChangeDates(item)}
               moveRangeOnFirstSelection={false}
               ranges={dateRange}
+              startDatePlaceholder={t('EARLY', 'Early')}
+              endDatePlaceholder={t('CONTINUOUS', 'Continuous')}
             />
           </AnalyticsCalendarContainer>
         )
