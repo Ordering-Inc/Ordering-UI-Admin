@@ -7,8 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.WebsocketStatus = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
-var _styles = require("./styles");
+var _styles = require("../../../styles");
+var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -24,9 +26,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SocketStatusUI = function SocketStatusUI(props) {
   var socketStatus = props.socketStatus,
-    getWebsocketStatus = props.getWebsocketStatus,
-    connectedDate = props.connectedDate,
-    reconnectAttemptCount = props.reconnectAttemptCount;
+    reconnectAttemptCount = props.reconnectAttemptCount,
+    connectedDate = props.connectedDate;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -40,6 +41,10 @@ var SocketStatusUI = function SocketStatusUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    openModal = _useState4[0],
+    setOpenModal = _useState4[1];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -55,9 +60,43 @@ var SocketStatusUI = function SocketStatusUI(props) {
       });
     }
   }, [reconnectAttemptCount]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Contatiner, null, /*#__PURE__*/_react.default.createElement(_styles.StatusContainer, null, /*#__PURE__*/_react.default.createElement("span", null, getWebsocketStatus(socketStatus)), /*#__PURE__*/_react.default.createElement(_styles.WebsocketStatusDot, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.Contatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('WEBSOCKET_STATUS_INFO', 'Verify the server connection by date and time pressing the Connection status button Press update to refresh you dashboard and update the Connection status as well Need help? Contact our Customer support team here:'), /*#__PURE__*/_react.default.createElement("a", {
+    href: "https://www.ordering.co/contact-ordering",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, t('CUSTOMER_SUPPORT', 'Customer support')))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
+    color: "secundary",
+    onClick: function onClick() {
+      return setOpenModal(true);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles2.StatusContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('CONNECTION_STATUS', 'Connection status')), /*#__PURE__*/_react.default.createElement(_styles2.WebsocketStatusDot, {
     status: socketStatus
-  })), /*#__PURE__*/_react.default.createElement(_styles.DateWrapper, null, parseDate(connectedDate)), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    open: openModal,
+    onClose: function onClose() {
+      return setOpenModal(false);
+    },
+    width: "500px"
+  }, /*#__PURE__*/_react.default.createElement(_styles2.DetailContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('CONNECTION_STATUS', 'Connection status')), /*#__PURE__*/_react.default.createElement("p", null, t('LAST_UPDATE', 'Last update'), ": ", parseDate(connectedDate)), /*#__PURE__*/_react.default.createElement(_styles2.StatusItemWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.WebsocketStatusDot, {
+    status: 1
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('OK', 'Ok'))), /*#__PURE__*/_react.default.createElement("p", null, t('WEBSOCKET_OK', 'The websocket works normally.'))), /*#__PURE__*/_react.default.createElement(_styles2.StatusItemWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.WebsocketStatusDot, {
+    status: 0
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('CONNECTING', 'Connecting'))), /*#__PURE__*/_react.default.createElement("p", null, t('WEBSOCKET_CONNECTING', 'The websocket is connecting.'))), /*#__PURE__*/_react.default.createElement(_styles2.StatusItemWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.WebsocketStatusDot, {
+    status: 2
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('DISCONNECTED', 'Disconnected'))), /*#__PURE__*/_react.default.createElement("p", null, t('WEBSOCKET_DISCONNECTED', 'The server is slow, please reload.'))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "secundary",
+    onClick: function onClick() {
+      return setOpenModal(false);
+    }
+  }, t('CLOSE', 'Close')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    onClick: function onClick() {
+      return window.location.reload();
+    }
+  }, t('UPDATE', 'Update'))))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('ERROR', 'Error'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

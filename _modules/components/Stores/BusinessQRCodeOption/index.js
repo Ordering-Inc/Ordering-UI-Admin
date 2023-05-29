@@ -121,10 +121,15 @@ var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
     },
     value: code,
     viewBox: "0 0 256 256"
-  })), (item === null || item === void 0 ? void 0 : item.key) === 'pick_up' ? /*#__PURE__*/_react.default.createElement("p", null, t('GENERATE_QR_CODE', 'Generate QR Code')) : /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, (item === null || item === void 0 ? void 0 : item.key) === 'eat_in' ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), (item === null || item === void 0 ? void 0 : item.key) === 'pick_up' ? /*#__PURE__*/_react.default.createElement("h4", null, t('GENERATE_QR_CODE', 'Generate QR Code')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (item === null || item === void 0 ? void 0 : item.key) === 'eat_in' && code && /*#__PURE__*/_react.default.createElement(_styles2.TableNumberHintText, null, t('TO_GENERATE_NEW_QR_CODE_UPDATE_TABLE_NUMBER', 'To generate new QR codes, update the table number and regenerate the code.')), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, (item === null || item === void 0 ? void 0 : item.key) === 'eat_in' ? t('TABLE_NUMBER', 'Table number') : t('SPOT_NUMBER', 'Spot number')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: "0",
-    ref: numberRef
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    ref: numberRef,
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9.]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     outline: true,
     onClick: generateQRCode
