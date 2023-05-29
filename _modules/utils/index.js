@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCode = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCode = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -171,9 +171,26 @@ var bytesConverter = function bytesConverter(bytes) {
 };
 
 /**
- * List of fields with correct order
+ * Function to get language settins by language code
+ * @param {string} code // language code
+ * @param {any} locales // language settings
  */
 exports.bytesConverter = bytesConverter;
+var getLocale = function getLocale(code, locales) {
+  var locale = locales === null || locales === void 0 ? void 0 : locales[code];
+  if (code === 'es-419-1' || code === 'es-419-2') locale = locales === null || locales === void 0 ? void 0 : locales.es;
+  if (code === 'zh-CN') locale = locales === null || locales === void 0 ? void 0 : locales.zhCN;
+  if (code === 'ar') locale = locales === null || locales === void 0 ? void 0 : locales.arSA;
+  if (code === 'kn') locale = locales === null || locales === void 0 ? void 0 : locales.ta;
+  if (code === 'km') locale = locales === null || locales === void 0 ? void 0 : locales.th;
+  if (!locale) return locales === null || locales === void 0 ? void 0 : locales.enUS;
+  return locale;
+};
+
+/**
+ * List of fields with correct order
+ */
+exports.getLocale = getLocale;
 var fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
 
 /**
