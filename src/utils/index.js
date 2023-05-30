@@ -142,6 +142,22 @@ export const bytesConverter = bytes => {
 }
 
 /**
+ * Function to get language settins by language code
+ * @param {string} code // language code
+ * @param {any} locales // language settings
+ */
+export const getLocale = (code, locales) => {
+  let locale = locales?.[code]
+  if (code === 'es-419-1' || code === 'es-419-2') locale = locales?.es
+  if (code === 'zh-CN') locale = locales?.zhCN
+  if (code === 'ar') locale = locales?.arSA
+  if (code === 'kn') locale = locales?.ta
+  if (code === 'km') locale = locales?.th
+  if (!locale) return locales?.enUS
+  return locale
+}
+
+/**
  * List of fields with correct order
  */
 export const fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email']
