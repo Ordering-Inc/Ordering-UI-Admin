@@ -62,7 +62,7 @@ var SocketStatusUI = function SocketStatusUI(props) {
   }, [reconnectAttemptCount]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Contatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('WEBSOCKET_STATUS_INFO', 'Verify the server connection by date and time pressing the Connection status button Press update to refresh you dashboard and update the Connection status as well Need help? Contact our Customer support team here:'), /*#__PURE__*/_react.default.createElement("a", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('WEBSOCKET_STATUS_INFO', 'Verify the server connection by date and time using the Connection status button. Press update to refresh you dashboard and update the status as well. Need help? Contact our Customer support team here:'), /*#__PURE__*/_react.default.createElement("a", {
     href: "https://www.ordering.co/contact-ordering",
     target: "_blank",
     rel: "noopener noreferrer"
