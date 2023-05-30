@@ -70,9 +70,7 @@ export const AutologinParams = (props) => {
           ...props.configFile,
           project: settings?.use_project_domain
             ? '_'
-            : queryProject ?? window.localStorage.getItem('project') !== null
-              ? window.localStorage.getItem('project')
-              : props.configFile?.project ?? null
+            : queryProject ?? props.configFile?.project
         }
       })
   )
