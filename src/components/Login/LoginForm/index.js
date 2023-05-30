@@ -235,13 +235,6 @@ const LoginFormUI = (props) => {
     }
   }, [configs])
 
-  useEffect(() => {
-    setConfigFile({
-      ...configFile,
-      project: window.localStorage.getItem('project') || null
-    })
-  }, [])
-
   return (
     <LoginContainer isPopup={isPopup}>
       <LoginHeroContainer bgimage={configs?.dashboard_login_background?.value || theme.images?.general?.loginHero}>
