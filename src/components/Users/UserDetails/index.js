@@ -5,7 +5,7 @@ import { UserDetails as UserDetailsController, useLanguage, useSession } from 'o
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { AddressList } from '../../Delivery'
-import { OrdersManager } from '../../Orders'
+import { OrdersManager } from '../../Orders/OrdersManager'
 import { BusinessManagerBusinesses } from '../BusinessManagerBusinesses'
 import { ArrowsAngleContract, ArrowsAngleExpand, Envelope, Phone, ThreeDots } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'

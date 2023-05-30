@@ -25,6 +25,7 @@ export const ButtonGroup = styled.div`
 export const GroupsContainer = styled.div`
   height: calc(100% - 130px);
   overflow: auto;
+  max-height: 460px;
 `
 
 export const GroupWrapper = styled.div`

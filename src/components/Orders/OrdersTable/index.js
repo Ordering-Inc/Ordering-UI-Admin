@@ -11,6 +11,7 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
+import { getCurrenySymbol } from '../../../utils'
 
 import {
   OrdersContainer,
@@ -36,6 +37,7 @@ import {
 
 export const OrdersTable = (props) => {
   const {
+    hidePhoto,
     isSelectedOrders,
     orderList,
     pagination,
@@ -333,7 +335,7 @@ export const OrdersTable = (props) => {
               <tr>
                 {allowColumns && (Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0).length === 0 ?
                   (
-                    <th className='orderPrice' key={`noDragTh-${i}`}>
+                    <th className='orderPrice'>
                       <ColumnAllowSettingPopover
                         allowColumns={allowColumns}
                         optionsDefault={optionsDefault}
@@ -524,7 +526,9 @@ export const OrdersTable = (props) => {
                   {allowColumns?.business?.visable && (
                     <td className='businessInfo'>
                       <BusinessInfo>
-                        <Skeleton width={45} height={45} />
+                        {!hidePhoto && (
+                          <Skeleton width={45} height={45} />
+                        )}
                         <div className='info'>
                           <p className='bold'><Skeleton width={80} /></p>
                           <p><Skeleton width={100} /></p>
@@ -535,7 +539,9 @@ export const OrdersTable = (props) => {
                   {allowColumns?.customer?.visable && (
                     <td className='customerInfo'>
                       <CustomerInfo>
-                        <Skeleton width={45} height={45} />
+                        {!hidePhoto && (
+                          <Skeleton width={45} height={45} />
+                        )}
                         <div className='info'>
                           <p className='bold'><Skeleton width={100} /></p>
                           <p><Skeleton width={100} /></p>
@@ -546,7 +552,9 @@ export const OrdersTable = (props) => {
                   {allowColumns?.driver?.visable && !isSelectedOrders && (
                     <td className='driverInfo'>
                       <DriversInfo className='d-flex align-items-center'>
-                        <Skeleton width={45} height={45} />
+                        {!hidePhoto && (
+                          <Skeleton width={45} height={45} />
+                        )}
                         <Skeleton width={100} style={{ margin: '10px' }} />
                       </DriversInfo>
                     </td>
@@ -708,9 +716,11 @@ export const OrdersTable = (props) => {
                         return (
                           <td className='businessInfo' key={`businessInfo${i}-${index}`}>
                             <BusinessInfo>
-                              <WrapperImage>
-                                <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
-                              </WrapperImage>
+                              {!hidePhoto && (
+                                <WrapperImage>
+                                  <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
+                                </WrapperImage>
+                              )}
                               <div className='info'>
                                 <p className='bold'>{order?.business?.name}</p>
                                 <p>{order?.business?.city?.name}</p>
@@ -723,16 +733,18 @@ export const OrdersTable = (props) => {
                         return (
                           <td className='customerInfo' key={`customerInfo${i}-${index}`}>
                             <CustomerInfo>
-                              <WrapperImage>
-                                {order?.customer?.photo ? (
-                                  <img src={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
-                                ) : (
-                                  <FaUserAlt />
-                                )}
-                                <OrdersCountWrapper isNew={order?.customer?.orders_count === 0}>
-                                  {order?.customer?.orders_count || t('NEW', 'New')}
-                                </OrdersCountWrapper>
-                              </WrapperImage>
+                              {!hidePhoto && (
+                                <WrapperImage>
+                                  {order?.customer?.photo ? (
+                                    <img src={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
+                                  ) : (
+                                    <FaUserAlt />
+                                  )}
+                                  <OrdersCountWrapper isNew={order?.customer?.orders_count === 0}>
+                                    {order?.customer?.orders_count || t('NEW', 'New')}
+                                  </OrdersCountWrapper>
+                                </WrapperImage>
+                              )}
                               <div className='info'>
                                 <p className='bold'>
                                   {(!order?.customer?.email && !order?.customer?.cellphone && !order?.customer?.name) ? t('GUEST_USER', 'Guest user') : order?.customer?.name}
@@ -748,13 +760,15 @@ export const OrdersTable = (props) => {
                           <td key={`driver${i}-${index}`}>
                             {order?.delivery_type === 1 && (
                               <CustomerInfo>
-                                <WrapperImage>
-                                  {order?.driver?.photo ? (
-                                    <img src={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
-                                  ) : (
-                                    <FaUserAlt />
-                                  )}
-                                </WrapperImage>
+                                {!hidePhoto && (
+                                  <WrapperImage>
+                                    {order?.driver?.photo ? (
+                                      <img src={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
+                                    ) : (
+                                      <FaUserAlt />
+                                    )}
+                                  </WrapperImage>
+                                )}
                                 <div className='info'>
                                   {order?.driver ? (
                                     <>
@@ -826,7 +840,7 @@ export const OrdersTable = (props) => {
                           <td className='orderPrice' key={`total${i}-${index}`}>
                             <div className='info'>
                               {allowColumns?.total?.visable && (
-                                <p className='bold'>{parsePrice(order?.summary?.total, { currency: order?.currency })}</p>
+                                <p className='bold'>{parsePrice(order?.summary?.total, { currency: getCurrenySymbol(order?.currency) })}</p>
                               )}
                               {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
                                 <p>

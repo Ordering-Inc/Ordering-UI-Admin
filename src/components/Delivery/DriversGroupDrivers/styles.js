@@ -33,6 +33,7 @@ export const ButtonGroup = styled.div`
 export const BusinessesContainer = styled.div`
   height: calc(100% - 130px);
   overflow: auto;
+  max-height: 610px;
 `
 
 export const BusinessWrapper = styled.div`

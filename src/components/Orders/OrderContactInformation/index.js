@@ -3,6 +3,7 @@ import { useLanguage, useSession, useUtils } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { DriverSelector } from '../DriverSelector'
+import { CompanySelector } from '../CompanySelector'
 import { IconButton } from '../../../styles'
 import { Telephone, ChevronDown } from 'react-bootstrap-icons'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
@@ -215,12 +216,13 @@ export const OrderContactInformation = (props) => {
       </Accordion>
       {order?.delivery_type === 1 && !isServiceOrder && (
         <>
+        {!order?.driver_id && (
           <DriverSelectorContainer>
-            <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
-            <DriverSelector
+            <p>{t('DRIVER_COMPANY', 'Driver company')}</p>
+            <CompanySelector
               small
               isPhoneView
-              defaultValue={order?.driver_id ? order.driver_id : 'default'}
+              defaultValue={order?.driver_company_id ?? 'default'}
               order={order}
               isTourOpen={isTourOpen}
               setCurrentTourStep={setCurrentTourStep}
@@ -229,6 +231,23 @@ export const OrderContactInformation = (props) => {
               orderId={order?.id}
             />
           </DriverSelectorContainer>
+        )}
+        {!order?.driver_company_id && (
+          <DriverSelectorContainer>
+            <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
+            <DriverSelector
+              small
+              isPhoneView
+              defaultValue={order?.driver_id ?? 'default'}
+              order={order}
+              isTourOpen={isTourOpen}
+              setCurrentTourStep={setCurrentTourStep}
+              handleOpenMessages={handleOpenMessages}
+              isOrderDrivers
+              orderId={order?.id}
+            />
+          </DriverSelectorContainer>
+        )}
           <DriverInfoContainer>
             <DriverInfo>
               <PhotoWrapper>

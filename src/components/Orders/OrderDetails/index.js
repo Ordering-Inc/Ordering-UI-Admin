@@ -15,7 +15,7 @@ import { NotFoundSource, Modal } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { OrderToPrint } from '../OrderToPrint'
 import { OrderToPrintTicket } from '../OrderToPrintTicket'
-import { getOrderStatuPickUp, getOrderStatus } from '../../../utils'
+import { getOrderStatuPickUp, getOrderStatus, getCurrenySymbol } from '../../../utils'
 
 import {
   Container,
@@ -337,7 +337,7 @@ const OrderDetailsUI = (props) => {
               <p>
                 {t('SPOT', 'Spot')}: {order?.place?.name}
               </p>
-            </PlaceSpotContainer> 
+            </PlaceSpotContainer>
           )}
           <StatusBarContainer>
             <StatusBar percentage={progressBarObjt(order?.status)?.percentage} />
@@ -382,7 +382,7 @@ const OrderDetailsUI = (props) => {
                 <ProductItemAccordion
                   key={product.id}
                   product={product}
-                  currency={order?.currency}
+                  currency={getCurrenySymbol(order?.currency)}
                 />
               ))}
             </OrderProducts>
@@ -518,11 +518,11 @@ const OrderDetailsUI = (props) => {
         />
       )}
       {order && Object.keys(order).length > 0 && !loading && (
-          <OrderToPrintTicket
-            ref={printTicketRef}
-            order={order}
-            getOrderStatus={progressBarObjt}
-          />
+        <OrderToPrintTicket
+          ref={printTicketRef}
+          order={order}
+          getOrderStatus={progressBarObjt}
+        />
       )}
     </Container>
   )

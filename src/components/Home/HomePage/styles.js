@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { lighten } from 'polished'
 
 export const HomeContainer = styled.div`
+  position: relative;
   flex: 1;
   padding: 20px;
   box-sizing: border-box;
@@ -32,7 +33,7 @@ export const Breadcrumb = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  margin: 10px 0 30px 0;
+  margin: 10px 0 50px 0;
   h1 {
     font-weight: bold;
     font-size: 20px;
@@ -482,4 +483,107 @@ export const ProjectStatusWrapper = styled.div`
       margin-left: 0px;
     `}
   }
+`
+
+export const OrderingButtonWrapper = styled.div`
+  position: absolute;
+  width: calc(100% - 125px);
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${props => props.theme.colors.lightPrimary};
+  padding: 14px 24px;
+  border: 2px solid ${props => props.theme.colors.primary};
+  border-radius: 8px;
+  margin-left: 30px;
+  ${props => props.theme.rtl && css`
+    left: 0;
+    right: initial;
+  `}
+
+  span {
+    color: ${props => props.theme.colors.primary};
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  button {
+    height: 44px;
+    width: 180px;
+    margin: 0;
+    border-radius: 8px;
+  }
+
+  @media (min-width: 800px) {
+    button {
+      margin-right: 76px;
+      ${props => props.theme.rtl && css`
+        margin-right: 0;
+        margin-left: 76px;
+      `}
+    }
+  }
+
+  @media (min-width: 1200px) {
+    width: calc(100% - 130px);
+    button {
+      width: 216px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    button {
+      margin-right: 156px;
+      ${props => props.theme.rtl && css`
+        margin-right: 0;
+        margin-left: 156px;
+      `}
+    }
+  }
+`
+
+export const OrderingButtonBlock = styled.div`
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 7.6px;
+  padding: 42px 20px;
+  margin-bottom: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+    span {
+      color: ${props => props.theme.colors.primary};
+    }
+  }
+  button {
+    margin-top: 22px;
+    width: 214px;
+    height: 44px;
+    border-radius: 8px;
+  }
+`
+
+export const CloseButtonWrapper = styled.div`
+  position: sticky;
+  top: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    height: 44px;
+    border-radius: 8px;
+    width: 100%;
+  }
+`
+
+export const HubspotFormWrapper = styled.div`
+  min-height: 445px;
+  position: relative;
 `

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, useConfig } from 'ordering-components-admin'
 import { RefundToWallet } from './RefundToWallet'
-import { verifyDecimals } from '../../../utils'
+import { verifyDecimals, getCurrenySymbol } from '../../../utils'
 import { Alert, Confirm } from '../../Shared'
 import { Button } from '../../../styles'
 
@@ -89,7 +89,7 @@ export const OrderBill = (props) => {
           <tr>
             <td>{t('SUBTOTAL', 'Subtotal')}</td>
             <td>
-              {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()), { currency: order?.currency })}
+              {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()), { currency: getCurrenySymbol(order?.currency) })}
             </td>
           </tr>
           {(order?.summary?.discount > 0 ?? order?.discount > 0) && order?.offers?.length === 0 && (
@@ -102,7 +102,7 @@ export const OrderBill = (props) => {
               ) : (
                 <td>{t('DISCOUNT', 'Discount')}</td>
               )}
-              <td>- {parsePrice(order?.summary?.discount ?? order?.discount, { currency: order?.currency })}</td>
+              <td>- {parsePrice(order?.summary?.discount ?? order?.discount, { currency: getCurrenySymbol(order?.currency) })}</td>
             </tr>
           )}
           {
@@ -115,7 +115,7 @@ export const OrderBill = (props) => {
                   )}
                 </td>
                 <td>
-                  - {parsePrice(offer?.summary?.discount, { currency: order?.currency })}
+                  - {parsePrice(offer?.summary?.discount, { currency: getCurrenySymbol(order?.currency) })}
                 </td>
               </tr>
             ))
@@ -124,9 +124,9 @@ export const OrderBill = (props) => {
             <tr>
               <td>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</td>
               {order?.tax_type === 1 ? (
-                <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0), { currency: order?.currency })}</td>
+                <td>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0), { currency: getCurrenySymbol(order?.currency) })}</td>
               ) : (
-                <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0, { currency: order?.currency })}</td>
+                <td>{parsePrice(order?.summary?.subtotal_with_discount ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
               )}
             </tr>
           )}
@@ -137,7 +137,7 @@ export const OrderBill = (props) => {
                   {t('TAX', 'Tax')}
                   <span>{`(${verifyDecimals(order?.tax, parseNumber)}%)`}</span>
                 </td>
-                <td>{parsePrice(order?.summary?.tax ?? 0, { currency: order?.currency })}</td>
+                <td>{parsePrice(order?.summary?.tax ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
               </tr>
             )
           }
@@ -148,7 +148,7 @@ export const OrderBill = (props) => {
                   {t('SERVICE_FEE', 'Service fee')}
                   <span>{`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}</span>
                 </td>
-                <td>{parsePrice(order?.summary?.service_fee ?? 0, { currency: order?.currency })}</td>
+                <td>{parsePrice(order?.summary?.service_fee ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
               </tr>
             )
           }
@@ -159,7 +159,7 @@ export const OrderBill = (props) => {
                   {t(tax?.name?.toUpperCase()?.replaceAll(' ', '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
                 </td>
-                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0, { currency: order?.currency })}</td>
+                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
               </tr>
             ))
           }
@@ -170,7 +170,7 @@ export const OrderBill = (props) => {
                   {t(fee?.name?.toUpperCase()?.replaceAll(' ', '_'), fee?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
                 </td>
-                <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0, { currency: order?.currency })}</td>
+                <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0, { currency: getCurrenySymbol(order?.currency) })}</td>
               </tr>
             ))
           }
@@ -184,7 +184,7 @@ export const OrderBill = (props) => {
                   )}
                 </td>
                 <td>
-                  - {parsePrice(offer?.summary?.discount, { currency: order?.currency })}
+                  - {parsePrice(offer?.summary?.discount, { currency: getCurrenySymbol(order?.currency) })}
                 </td>
               </tr>
             ))
@@ -192,7 +192,7 @@ export const OrderBill = (props) => {
           {typeof order?.summary?.delivery_price === 'number' && (
             <tr>
               <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-              <td>{parsePrice(order?.summary?.delivery_price, { currency: order?.currency })}</td>
+              <td>{parsePrice(order?.summary?.delivery_price, { currency: getCurrenySymbol(order?.currency) })}</td>
             </tr>
           )}
           {
@@ -205,7 +205,7 @@ export const OrderBill = (props) => {
                   )}
                 </td>
                 <td>
-                  - {parsePrice(offer?.summary?.discount, { currency: order?.currency })}
+                  - {parsePrice(offer?.summary?.discount, { currency: getCurrenySymbol(order?.currency) })}
                 </td>
               </tr>
             ))
@@ -221,7 +221,7 @@ export const OrderBill = (props) => {
                     <span>{`(${verifyDecimals(order?.driver_tip, parseNumber)}%)`}</span>
                   )}
               </td>
-              <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip, { currency: order?.currency })}</td>
+              <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip, { currency: getCurrenySymbol(order?.currency) })}</td>
             </tr>
           )}
         </tbody>
@@ -230,7 +230,7 @@ export const OrderBill = (props) => {
         <tbody>
           <tr>
             <td>{t('TOTAL', 'Total')}</td>
-            <td>{parsePrice(order?.summary?.total || order?.total, { currencyPosition: 'left', currency: order?.currency })}</td>
+            <td>{parsePrice(order?.summary?.total || order?.total, { currency: getCurrenySymbol(order?.currency) })}</td>
           </tr>
         </tbody>
       </table>
@@ -255,8 +255,8 @@ export const OrderBill = (props) => {
                 </td>
                 <td>
                   {event?.paymethod?.gateway === 'cash' && order?.cash
-                    ? parsePrice(order?.cash, { currency: order?.currency })
-                    : `-${parsePrice(event?.amount, { currency: order?.currency })}`}
+                    ? parsePrice(order?.cash, { currency: getCurrenySymbol(order?.currency) })
+                    : `-${parsePrice(event?.amount, { currency: getCurrenySymbol(order?.currency) })}`}
                 </td>
               </tr>
             ))}
@@ -289,7 +289,7 @@ export const OrderBill = (props) => {
                         ? t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))
                         : walletName[event?.data?.wallet_currency]?.name}
                 </td>
-                <td>{parsePrice(event?.amount, { currency: order?.currency })}</td>
+                <td>{parsePrice(event?.amount, { currency: getCurrenySymbol(order?.currency) })}</td>
               </tr>
             ))}
           </tbody>

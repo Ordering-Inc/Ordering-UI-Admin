@@ -4,6 +4,7 @@ import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
 import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
 import moment from 'moment'
 import { useLanguage, CODES } from 'ordering-components-admin'
+import { CURRENCY } from '../config/currency.js'
 
 export const optimizeImage = (url, params, fallback) => {
   if (!url && fallback) return fallback
@@ -138,6 +139,22 @@ export const getAgoMinutes = (time) => {
  */
 export const bytesConverter = bytes => {
   return Math.floor(bytes / 1024)
+}
+
+/**
+ * Function to get language settins by language code
+ * @param {string} code // language code
+ * @param {any} locales // language settings
+ */
+export const getLocale = (code, locales) => {
+  let locale = locales?.[code]
+  if (code === 'es-419-1' || code === 'es-419-2') locale = locales?.es
+  if (code === 'zh-CN') locale = locales?.zhCN
+  if (code === 'ar') locale = locales?.arSA
+  if (code === 'kn') locale = locales?.ta
+  if (code === 'km') locale = locales?.th
+  if (!locale) return locales?.enUS
+  return locale
 }
 
 /**
@@ -529,4 +546,8 @@ export const stringToSlug = str => {
     .replace(/-+$/, '') // trim - from end of text
 
   return str
+}
+
+export const getCurrenySymbol = (code) => {
+  return CURRENCY?.[code]?.symbol ?? code
 }
