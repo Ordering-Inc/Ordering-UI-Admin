@@ -14,6 +14,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -35,7 +36,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersTable = function OrdersTable(props) {
   var _configState$configs, _configState$configs$, _orderList$orders3;
-  var isSelectedOrders = props.isSelectedOrders,
+  var hidePhoto = props.hidePhoto,
+    isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
     pagination = props.pagination,
     selectedOrderIds = props.selectedOrderIds,
@@ -373,8 +375,7 @@ var OrdersTable = function OrdersTable(props) {
     var _allowColumns$col, _allowColumns$col2;
     return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.visable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) !== 0;
   }).length === 0 ? /*#__PURE__*/_react.default.createElement("th", {
-    className: "orderPrice",
-    key: "noDragTh-".concat(i)
+    className: "orderPrice"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     allowColumns: allowColumns,
     optionsDefault: optionsDefault,
@@ -552,7 +553,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$busines = allowColumns.business) === null || _allowColumns$busines === void 0 ? void 0 : _allowColumns$busines.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "businessInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
       height: 45
     }), /*#__PURE__*/_react.default.createElement("div", {
@@ -565,7 +566,7 @@ var OrdersTable = function OrdersTable(props) {
       width: 100
     }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$custome = allowColumns.customer) === null || _allowColumns$custome === void 0 ? void 0 : _allowColumns$custome.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "customerInfo"
-    }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
       height: 45
     }), /*#__PURE__*/_react.default.createElement("div", {
@@ -580,7 +581,7 @@ var OrdersTable = function OrdersTable(props) {
       className: "driverInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, {
       className: "d-flex align-items-center"
-    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, !hidePhoto && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
       height: 45
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -721,7 +722,7 @@ var OrdersTable = function OrdersTable(props) {
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "businessInfo",
           key: "businessInfo".concat(i, "-").concat(index)
-        }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
+        }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
           src: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
           loading: "lazy",
           alt: ""
@@ -736,7 +737,7 @@ var OrdersTable = function OrdersTable(props) {
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "customerInfo",
           key: "customerInfo".concat(i, "-").concat(index)
-        }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$customer = order.customer) !== null && _order$customer !== void 0 && _order$customer.photo ? /*#__PURE__*/_react.default.createElement("img", {
+        }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$customer = order.customer) !== null && _order$customer !== void 0 && _order$customer.photo ? /*#__PURE__*/_react.default.createElement("img", {
           src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo, 'h_50,c_limit'),
           loading: "lazy",
           alt: ""
@@ -752,7 +753,7 @@ var OrdersTable = function OrdersTable(props) {
         var _order$driver, _order$driver2, _order$driver3, _order$driver4;
         return /*#__PURE__*/_react.default.createElement("td", {
           key: "driver".concat(i, "-").concat(index)
-        }, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
+        }, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
           src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit'),
           loading: "lazy",
           alt: ""
@@ -821,7 +822,7 @@ var OrdersTable = function OrdersTable(props) {
         }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$total2 = allowColumns.total) === null || _allowColumns$total2 === void 0 ? void 0 : _allowColumns$total2.visable) && /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
         }, parsePrice(order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total, {
-          currency: order === null || order === void 0 ? void 0 : order.currency
+          currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
         })), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
           utc: false
         }))));

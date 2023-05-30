@@ -17,6 +17,7 @@ var _Shared = require("../../Shared");
 var _WizardDelivery = require("../WizardDelivery");
 var _DriversGroupsList = require("../DriversGroupsList");
 var _DriversGroupDetails = require("../DriversGroupDetails");
+var _DriversGroupAddForm = require("../DriversGroupAddForm");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -101,18 +102,23 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     setIsExtendExtraOpen = _useState16[1];
   var _useState17 = (0, _react.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    isTourOpen = _useState18[0],
-    setIsTourOpen = _useState18[1];
-  var _useState19 = (0, _react.useState)(4),
+    isAddMode = _useState18[0],
+    setIsAddMode = _useState18[1];
+  var _useState19 = (0, _react.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    currentTourStep = _useState20[0],
-    setCurrentTourStep = _useState20[1];
+    isTourOpen = _useState20[0],
+    setIsTourOpen = _useState20[1];
+  var _useState21 = (0, _react.useState)(4),
+    _useState22 = _slicedToArray(_useState21, 2),
+    currentTourStep = _useState22[0],
+    setCurrentTourStep = _useState22[1];
   var handleOpenDetails = function handleOpenDetails(driverGroup) {
     setMoveDistance(0);
     setCurDriversGroup(driverGroup);
     setCurDriversGroupId(driverGroup === null || driverGroup === void 0 ? void 0 : driverGroup.id);
     setOpenDetails(true);
     if (!driverGroup) {
+      setIsAddMode(true);
       setTimeout(function () {
         setCurrentTourStep(5);
       }, 50);
@@ -235,7 +241,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     },
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
-  }))), /*#__PURE__*/_react.default.createElement(_DriversGroupsList.DriversGroupsList, {
+  }))), !isAddMode ? /*#__PURE__*/_react.default.createElement(_DriversGroupsList.DriversGroupsList, {
     curDriversGroup: curDriversGroup,
     driversGroupsState: driversGroupsState,
     searchValue: searchValue,
@@ -246,7 +252,22 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     handleSelectGroup: handleSelectGroup,
     handleAllSelectGroup: handleAllSelectGroup,
     actionDisabled: actionDisabled
-  })), openDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }) : /*#__PURE__*/_react.default.createElement(_DriversGroupAddForm.DriversGroupAddForm, {
+    driversGroupsState: driversGroupsState,
+    setDriversGroupsState: setDriversGroupsState,
+    curDriversGroup: curDriversGroup,
+    driversGroupId: curDriversGroupId,
+    driversManagers: driversManagersList === null || driversManagersList === void 0 ? void 0 : driversManagersList.managers,
+    businesses: businessesList === null || businessesList === void 0 ? void 0 : businessesList.businesses,
+    paymethods: paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods,
+    drivers: driversList === null || driversList === void 0 ? void 0 : driversList.drivers,
+    companies: driversCompanyList === null || driversCompanyList === void 0 ? void 0 : driversCompanyList.companies,
+    onClose: function onClose() {
+      setOpenDetails(false);
+      setIsAddMode(false);
+    },
+    actionDisabled: actionDisabled
+  })), openDetails && !isAddMode && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "driver_group_details",
     defaultSideBarWidth: !isExtendExtraOpen ? 540 + moveDistance : 1040,
     open: openDetails,

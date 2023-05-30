@@ -39,6 +39,12 @@ Object.defineProperty(exports, "Alert", {
     return _Shared.Alert;
   }
 });
+Object.defineProperty(exports, "AllInOne", {
+  enumerable: true,
+  get: function get() {
+    return _Orders.AllInOne;
+  }
+});
 Object.defineProperty(exports, "AnalyticsAvailableTimes", {
   enumerable: true,
   get: function get() {

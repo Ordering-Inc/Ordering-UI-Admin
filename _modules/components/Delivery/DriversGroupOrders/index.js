@@ -23,7 +23,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupOrdersUI = function DriversGroupOrdersUI(props) {
-  var _changesState$orders_, _maxTimeBetweenOrder$, _maxTimeBetweenOrder$2, _maxTimeBetweenOrder$3, _theme$images, _theme$images$icons, _ref, _changesState$orders_2, _theme$images2, _theme$images2$icons, _ref2, _changesState$orders_3, _changesState$orders_4, _theme$images3, _theme$images3$icons, _maxTimeBetweenBusine, _maxTimeBetweenBusine2, _maxTimeBetweenBusine3, _theme$images4, _theme$images4$icons, _maxTimeBetweenDelive, _maxTimeBetweenDelive2, _maxTimeBetweenDelive3;
+  var _ref, _changesState$orders_, _maxTimeBetweenOrder$, _maxTimeBetweenOrder$2, _maxTimeBetweenOrder$3, _theme$images, _theme$images$icons, _ref2, _changesState$orders_2, _theme$images2, _theme$images2$icons, _ref3, _changesState$orders_3, _ref4, _changesState$orders_4, _theme$images3, _theme$images3$icons, _maxTimeBetweenBusine, _maxTimeBetweenBusine2, _maxTimeBetweenBusine3, _theme$images4, _theme$images4$icons, _maxTimeBetweenDelive, _maxTimeBetweenDelive2, _maxTimeBetweenDelive3;
   var curDriversGroup = props.curDriversGroup,
     changesState = props.changesState,
     handleChangesState = props.handleChangesState,
@@ -39,7 +39,7 @@ var DriversGroupOrdersUI = function DriversGroupOrdersUI(props) {
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_styles2.GroupOrdersContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('GROUP_ORDERS', 'Group orders')), /*#__PURE__*/_react.default.createElement(_styles2.FieldWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAX_NUMBER_ORDERS', 'Maxiumum number of orders')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    value: (_changesState$orders_ = changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_max_orders) !== null && _changesState$orders_ !== void 0 ? _changesState$orders_ : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_max_orders,
+    value: (_ref = (_changesState$orders_ = changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_max_orders) !== null && _changesState$orders_ !== void 0 ? _changesState$orders_ : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_max_orders) !== null && _ref !== void 0 ? _ref : 0,
     onChange: function onChange(e) {
       return onChangeNumberInput('orders_group_max_orders', e.target.value);
     }
@@ -63,19 +63,19 @@ var DriversGroupOrdersUI = function DriversGroupOrdersUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles2.FieldWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAX_DISTANCE_BETWEEN_BUSINESS', 'Maxiumum distance between businesses in meters')), /*#__PURE__*/_react.default.createElement(_styles2.MaxTimeBusinessInputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.IconImage, {
     url: (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.shopToShop
   }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    value: (_ref = (_changesState$orders_2 = changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_max_distance_between_pickup) !== null && _changesState$orders_2 !== void 0 ? _changesState$orders_2 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_max_distance_between_pickup) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref2 = (_changesState$orders_2 = changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_max_distance_between_pickup) !== null && _changesState$orders_2 !== void 0 ? _changesState$orders_2 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_max_distance_between_pickup) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: function onChange(e) {
       return onChangeNumberInput('orders_group_max_distance_between_pickup', e.target.value);
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.FieldWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAX_DISTANCE_BETWEEN_DELIVERY', 'Maxiumum distance between deliveries in meters')), /*#__PURE__*/_react.default.createElement(_styles2.MaxTimeBusinessInputContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.IconImage, {
     url: (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$icons = _theme$images2.icons) === null || _theme$images2$icons === void 0 ? void 0 : _theme$images2$icons.homeToHome
   }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    value: (_ref2 = (_changesState$orders_3 = changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_max_distance_between_delivery) !== null && _changesState$orders_3 !== void 0 ? _changesState$orders_3 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_max_distance_between_delivery) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref3 = (_changesState$orders_3 = changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_max_distance_between_delivery) !== null && _changesState$orders_3 !== void 0 ? _changesState$orders_3 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_max_distance_between_delivery) !== null && _ref3 !== void 0 ? _ref3 : '',
     onChange: function onChange(e) {
       return onChangeNumberInput('orders_group_max_distance_between_delivery', e.target.value);
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.FieldWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UseMapsApiCheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    checked: (_changesState$orders_4 = changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_use_maps_api) !== null && _changesState$orders_4 !== void 0 ? _changesState$orders_4 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_use_maps_api,
+    checked: (_ref4 = (_changesState$orders_4 = changesState === null || changesState === void 0 ? void 0 : changesState.orders_group_use_maps_api) !== null && _changesState$orders_4 !== void 0 ? _changesState$orders_4 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.orders_group_use_maps_api) !== null && _ref4 !== void 0 ? _ref4 : false,
     onChange: function onChange(e) {
       return handleChangesState({
         orders_group_use_maps_api: e.target.checked

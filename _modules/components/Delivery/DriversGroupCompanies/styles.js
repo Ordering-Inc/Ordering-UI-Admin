@@ -19,7 +19,7 @@ var ButtonGroup = _styledComponents.default.div(_templateObject3 || (_templateOb
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n      margin-left: 7px;\n    "]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n      margin-right: 7px;\n    "])));
 });
 exports.ButtonGroup = ButtonGroup;
-var GroupsContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: calc(100% - 130px);\n  overflow: auto;\n"])));
+var GroupsContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: calc(100% - 130px);\n  overflow: auto;\n  max-height: 460px;\n"])));
 exports.GroupsContainer = GroupsContainer;
 var GroupWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  padding: 12px 0;\n  border-bottom: 1px solid ", ";\n\n  p {\n    margin: 0px;\n    font-size: 14px;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
