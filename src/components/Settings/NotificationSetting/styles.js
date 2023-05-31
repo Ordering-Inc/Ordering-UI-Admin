@@ -22,3 +22,22 @@ export const ToggleItemWrapper = styled.div`
     background: ${props => props.theme?.colors.borderColor};
   `}
 `
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  label {
+    margin-bottom: 0 !important;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  button {
+    height: 25px;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+`
