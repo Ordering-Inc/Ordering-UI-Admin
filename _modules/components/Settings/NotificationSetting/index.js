@@ -11,6 +11,7 @@ var _SettingsSelectUI = require("../SettingsSelectUI");
 var _reactBootstrap = require("react-bootstrap");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 var _styles3 = require("../SettingsList/styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -47,7 +48,14 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
-  var generalList = ['onesignal_user_auth', 'onesignal_orderingapp_id', 'onesignal_businessapp_id', 'onesignal_deliveryapp_id', 'onesignal_orderingweb_id', 'onesignal_dashboardweb_id', 'driver_close_distance', 'notification_toast'];
+  var generalList = ['onesignal_user_auth', 'onesignal_orderingapp_id', 'onesignal_businessapp_id', 'onesignal_deliveryapp_id', 'onesignal_orderingweb_id', 'onesignal_dashboardweb_id', 'driver_close_distance', 'notification_toast', 'notification_times_repeat', 'notification_each_time_repeat', 'notification_superadmin_repeat', 'notification_business_repeat', 'notification_driver_repeat'];
+  var tooltips = {
+    notification_times_repeat: t('MAX_TIMES_TO_REPEAT_15', 'Max times to repeat = 15'),
+    notification_each_time_repeat: t('EACH_TIME_SETTING_SET_IN_SECONDS', 'Each time setting set in seconds'),
+    notification_superadmin_repeat: t('NOTIFICATION_REPEAT_WORKS_WITH_PENDING_READY', 'Notification repeat works only with Pending (0) and Order Ready (4) status'),
+    notification_business_repeat: t('PENDING_STATUS_WORKS_FOR_ADMIN_DRIVER_BUSINESS_USER', 'Pending status works for admin, driver, business user'),
+    notification_driver_repeat: t('ORDER_READY_WORKS_WITH_DRIVER_USER', 'Order Ready works only with driver user')
+  };
   var _useState3 = (0, _react.useState)(null),
     _useState4 = _slicedToArray(_useState3, 2),
     general = _useState4[0],
@@ -116,7 +124,13 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
       key: i
     }, config.type === 1 && /*#__PURE__*/_react.default.createElement(_styles3.FormGroupText, {
       className: "form-group"
-    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles3.Description, null, config === null || config === void 0 ? void 0 : config.description), /*#__PURE__*/_react.default.createElement("input", {
+    }, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (tooltips === null || tooltips === void 0 ? void 0 : tooltips[config === null || config === void 0 ? void 0 : config.key]) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+      placement: "bottom",
+      overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, tooltips === null || tooltips === void 0 ? void 0 : tooltips[config === null || config === void 0 ? void 0 : config.key])
+    }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+      color: "primary",
+      className: "tour_btn"
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)))), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles3.Description, null, config === null || config === void 0 ? void 0 : config.description), /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
       defaultValue: config === null || config === void 0 ? void 0 : config.value,
       onChange: function onChange(e) {
@@ -124,13 +138,20 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
       },
       className: "form-control",
       placeholder: config === null || config === void 0 ? void 0 : config.name
-    })), config.type === 2 && /*#__PURE__*/_react.default.createElement(_SettingsSelectUI.SettingsSelectUI, {
+    })), config.type === 2 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (tooltips === null || tooltips === void 0 ? void 0 : tooltips[config === null || config === void 0 ? void 0 : config.key]) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+      placement: "bottom",
+      overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, tooltips === null || tooltips === void 0 ? void 0 : tooltips[config === null || config === void 0 ? void 0 : config.key])
+    }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+      color: "primary",
+      className: "tour_btn"
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)))), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles3.Description, null, config === null || config === void 0 ? void 0 : config.description), /*#__PURE__*/_react.default.createElement(_SettingsSelectUI.SettingsSelectUI, {
+      noHeader: true,
       config: config,
       defaultValue: config === null || config === void 0 ? void 0 : config.value,
       handleSelectChange: function handleSelectChange(value) {
         return handleInputChange(value, config === null || config === void 0 ? void 0 : config.id);
       }
-    }));
+    })));
   }))), /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "1"
   }, /*#__PURE__*/_react.default.createElement(_styles2.AccordionTitle, null, t('ADMINISTRATOR', 'Administrator'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
