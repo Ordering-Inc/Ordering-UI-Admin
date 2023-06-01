@@ -495,6 +495,9 @@ export const CustomeDomainDesc = styled.p`
 export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
+  ${({ isMargin }) => isMargin && css`
+    margin-bottom: 20px;
+  `}
 `
 
 export const CustomDomainInfo = styled.div`
@@ -519,6 +522,7 @@ export const CustomDomainInfoContent = styled.div`
   top: 100%;
   z-index: 999;
   background: ${props => props.theme.colors.backgroundInfo};
+  border: 1px solid ${props => props.theme.colors.primary};
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;

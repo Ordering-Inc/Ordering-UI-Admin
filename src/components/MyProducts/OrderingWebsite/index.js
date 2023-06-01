@@ -90,6 +90,7 @@ const OrderingWebsiteUI = (props) => {
   const [footerContent, setFooterContent] = useState(false)
   const [selectedSetting, setSelectedSetting] = useState('basic')
   const [isCustomDomain, setIsCustomDomain] = useState(false)
+  const [selectedSubSetting, setSelectedSubSetting] = useState('')
 
   const previewImages = {
     marketplace: theme.images.preview.marketplace,
@@ -99,8 +100,8 @@ const OrderingWebsiteUI = (props) => {
 
   const settingsList = [
     { key: 'basic', name: t('BASIC_SETTINGS', 'Basic Settings') },
-    { key: 'advanced', name: t('ADVANCED_SETTINGS', 'Advanced Settings') },
-    { key: 'advanced_layouts', name: t('ADVANCED_LAYOUTS', 'Advanced Layouts') }
+    { key: 'advanced', name: t('ADVANCED_SETTINGS', 'Advanced Settings') }
+    // { key: 'advanced_layouts', name: t('ADVANCED_LAYOUTS', 'Advanced Layouts') }
   ]
 
   const handleClickImage = (type) => {
@@ -177,6 +178,11 @@ const OrderingWebsiteUI = (props) => {
 
   const handleChangeContent = (type, content) => {
     handleChangeValue(content, 'theme_settings', `values.${type}`)
+  }
+
+  const handleChangeSubSetting = (setting) => {
+    setSelectedSubSetting(setting)
+    orderingTheme.themes[0]?.values && setAdvancedValues(JSON.parse(JSON.stringify(orderingTheme.themes[0]?.values)))
   }
 
   return (
@@ -610,7 +616,36 @@ const OrderingWebsiteUI = (props) => {
             </Button>
           </FormWrapper>
         )}
-        {selectedSetting === 'advanced' && !orderingTheme?.loading && (
+        {selectedSetting === 'advanced' && (
+          <InputFormWrapper>
+            <TitleWrapper isMargin>
+              <h4>{t('SETTINGS', 'Settings')}</h4>
+              <CustomDomainInfo>
+                <IconButton
+                  color='primary'
+                >
+                  <InfoCircleFill />
+                </IconButton>
+                <CustomDomainInfoContent>
+                  <span>{t('ADVANCED_SETTING_HELP', 'For now you can\'t use layouts and advanced setting together, if you change between layouts and advance settings the settings will be reset to default')}</span>
+                </CustomDomainInfoContent>
+              </CustomDomainInfo>
+            </TitleWrapper>
+            <RadioItem
+              onClick={() => handleChangeSubSetting('advanced')}
+            >
+              {selectedSubSetting === 'advanced' ? <RecordCircleFill className='active' /> : <Circle />}
+              <span>{t('ADVANCED_SETTINGS', 'Advanced Settings')}</span>
+            </RadioItem>
+            <RadioItem
+              onClick={() => handleChangeSubSetting('advanced_layouts')}
+            >
+              {selectedSubSetting === 'advanced_layouts' ? <RecordCircleFill className='active' /> : <Circle />}
+              <span>{t('ADVANCED_LAYOUTS', 'Advanced Layouts')}</span>
+            </RadioItem>
+          </InputFormWrapper>
+        )}
+        {selectedSubSetting === 'advanced' && !orderingTheme?.loading && (
           <AdvancedSettings
             themesList={themesList}
             advancedValues={advancedValues}
@@ -618,7 +653,7 @@ const OrderingWebsiteUI = (props) => {
             handleUpdateSiteTheme={handleUpdateSiteTheme}
           />
         )}
-        {selectedSetting === 'advanced_layouts' && !orderingTheme?.loading && (
+        {selectedSubSetting === 'advanced_layouts' && !orderingTheme?.loading && (
           <AdvancedLayouts
             themesList={themesList}
             advancedValues={advancedValues}
