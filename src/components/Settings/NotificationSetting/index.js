@@ -1,10 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useLanguage, SettingsList as SettingsListController } from 'ordering-components-admin'
 import { SettingsSelectUI } from '../SettingsSelectUI'
-import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
-import { Button } from '../../../styles'
+import { Accordion, AccordionContext, useAccordionToggle, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { Button, IconButton } from '../../../styles'
 import { Alert } from '../../Shared'
-import { NotificationSettingContainer, AccordionTitle, GeneralWrapper, ToggleItemWrapper } from './styles'
+import { InfoCircle } from 'react-bootstrap-icons'
+import {
+  NotificationSettingContainer,
+  AccordionTitle,
+  GeneralWrapper,
+  ToggleItemWrapper,
+  TitleWrapper
+} from './styles'
 import {
   FormGroupText,
   CheckBoxWrapper,
@@ -36,8 +43,21 @@ const NotificationSettingUI = (props) => {
     'onesignal_orderingweb_id',
     'onesignal_dashboardweb_id',
     'driver_close_distance',
-    'notification_toast'
+    'notification_toast',
+    'notification_times_repeat',
+    'notification_each_time_repeat',
+    'notification_superadmin_repeat',
+    'notification_business_repeat',
+    'notification_driver_repeat'
   ]
+
+  const tooltips = {
+    notification_times_repeat: t('MAX_TIMES_TO_REPEAT_15', 'Max times to repeat = 15'),
+    notification_each_time_repeat: t('EACH_TIME_SETTING_SET_IN_SECONDS', 'Each time setting set in seconds'),
+    notification_superadmin_repeat: t('NOTIFICATION_REPEAT_WORKS_WITH_PENDING_READY', 'Notification repeat works only with Pending (0) and Order Ready (4) status'),
+    notification_business_repeat: t('PENDING_STATUS_WORKS_FOR_ADMIN_DRIVER_BUSINESS_USER', 'Pending status works for admin, driver, business user'),
+    notification_driver_repeat: t('ORDER_READY_WORKS_WITH_DRIVER_USER', 'Order Ready works only with driver user')
+  }
 
   const [general, setGeneral] = useState(null)
   const [superAdmin, setSuperAdmin] = useState(null)
@@ -93,7 +113,26 @@ const NotificationSettingUI = (props) => {
                     {
                       config.type === 1 && (
                         <FormGroupText className='form-group'>
-                          <label>{config?.name}</label>
+                          <TitleWrapper>
+                            <label>{config?.name}</label>
+                            {tooltips?.[config?.key] && (
+                              <OverlayTrigger
+                                placement='bottom'
+                                overlay={
+                                  <Tooltip>
+                                    {tooltips?.[config?.key]}
+                                  </Tooltip>
+                                }
+                              >
+                                <IconButton
+                                  color='primary'
+                                  className='tour_btn'
+                                >
+                                  <InfoCircle />
+                                </IconButton>
+                              </OverlayTrigger>
+                            )}
+                          </TitleWrapper>
                           {config?.description && <Description>{config?.description}</Description>}
                           <input
                             type='text'
@@ -107,11 +146,35 @@ const NotificationSettingUI = (props) => {
                     }
                     {
                       config.type === 2 && (
-                        <SettingsSelectUI
-                          config={config}
-                          defaultValue={config?.value}
-                          handleSelectChange={(value) => handleInputChange(value, config?.id)}
-                        />
+                        <>
+                          <TitleWrapper>
+                            <label>{config?.name}</label>
+                            {tooltips?.[config?.key] && (
+                              <OverlayTrigger
+                                placement='bottom'
+                                overlay={
+                                  <Tooltip>
+                                    {tooltips?.[config?.key]}
+                                  </Tooltip>
+                                }
+                              >
+                                <IconButton
+                                  color='primary'
+                                  className='tour_btn'
+                                >
+                                  <InfoCircle />
+                                </IconButton>
+                              </OverlayTrigger>
+                            )}
+                          </TitleWrapper>
+                          {config?.description && <Description>{config?.description}</Description>}
+                          <SettingsSelectUI
+                            noHeader
+                            config={config}
+                            defaultValue={config?.value}
+                            handleSelectChange={(value) => handleInputChange(value, config?.id)}
+                          />
+                        </>
                       )
                     }
                   </div>
