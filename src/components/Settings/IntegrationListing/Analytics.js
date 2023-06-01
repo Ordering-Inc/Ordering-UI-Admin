@@ -14,7 +14,9 @@ import {
 
 const AnalyticsUI = (props) => {
   const {
-    categoryList
+    categoryList,
+    showOption,
+    setShowOption
   } = props
 
   const [, t] = useLanguage()
@@ -49,6 +51,7 @@ const AnalyticsUI = (props) => {
 
   const handleOpenSetting = (category, initialRender) => {
     setSelectedCategory(category)
+    setShowOption('analytics')
     setShowDetail(true)
     if (!initialRender) {
       history.replace(`${location.pathname}?category=${category?.id}`)
@@ -104,7 +107,7 @@ const AnalyticsUI = (props) => {
           ))}
         </SettingList>
       )}
-      {showDetail && (
+      {showDetail && showOption === 'analytics' && (
         <SettingsDetail
           {...props}
           open={showDetail}
