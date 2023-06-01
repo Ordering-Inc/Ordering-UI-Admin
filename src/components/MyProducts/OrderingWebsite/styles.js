@@ -495,6 +495,9 @@ export const CustomeDomainDesc = styled.p`
 export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
+  ${({ isMargin }) => isMargin && css`
+    margin-bottom: 20px;
+  `}
 `
 
 export const CustomDomainInfo = styled.div`
@@ -519,6 +522,7 @@ export const CustomDomainInfoContent = styled.div`
   top: 100%;
   z-index: 999;
   background: ${props => props.theme.colors.backgroundInfo};
+  border: 1px solid ${props => props.theme.colors.primary};
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
@@ -601,6 +605,40 @@ export const SelectWrapper = styled.div`
     > div:first-child {
       padding-top: 4px;
       padding-bottom: 4px;
+    }
+  }
+`
+
+export const WebsiteThemeBlock = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 20px;
+
+  .select {
+    .list {
+      left: 0;
+      right: initial;
+    }
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+`
+
+export const WebsitePriviewImageWrapper = styled.div`
+  box-shadow: 0px 1px 4px rgba(0,0,0,0.1);
+  img {
+    height: auto;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  @media (min-width: 768px) {
+    img {
+      height: 200px;
+      margin-bottom: 0;
     }
   }
 `

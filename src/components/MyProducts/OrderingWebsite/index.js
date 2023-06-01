@@ -23,6 +23,7 @@ import { CustomDomain } from '../CustomDomain'
 import { bytesConverter } from '../../../utils'
 import { SelectBusiness } from './SelectBusiness'
 import { SelectFranchise } from './SelectFranchise'
+import { AdvancedLayouts } from '../AdvancedLayouts'
 import {
   Container,
   HeaderTitleContainer,
@@ -53,9 +54,10 @@ import {
   CustomeDomainDesc,
   TitleWrapper,
   CustomDomainInfo,
-  CustomDomainInfoContent
+  CustomDomainInfoContent,
+  WebsiteThemeBlock,
+  WebsitePriviewImageWrapper
 } from './styles'
-import { AdvancedLayouts } from '../AdvancedLayouts'
 
 const OrderingWebsiteUI = (props) => {
   const {
@@ -88,11 +90,18 @@ const OrderingWebsiteUI = (props) => {
   const [footerContent, setFooterContent] = useState(false)
   const [selectedSetting, setSelectedSetting] = useState('basic')
   const [isCustomDomain, setIsCustomDomain] = useState(false)
+  const [selectedSubSetting, setSelectedSubSetting] = useState('')
+
+  const previewImages = {
+    marketplace: theme.images.preview.marketplace,
+    franchise: theme.images.preview.franchise,
+    single_store: theme.images.preview.singleStore
+  }
 
   const settingsList = [
     { key: 'basic', name: t('BASIC_SETTINGS', 'Basic Settings') },
-    { key: 'advanced', name: t('ADVANCED_SETTINGS', 'Advanced Settings') },
-    { key: 'advanced_layouts', name: t('ADVANCED_LAYOUTS', 'Advanced Layouts') }
+    { key: 'advanced', name: t('ADVANCED_SETTINGS', 'Advanced Settings') }
+    // { key: 'advanced_layouts', name: t('ADVANCED_LAYOUTS', 'Advanced Layouts') }
   ]
 
   const handleClickImage = (type) => {
@@ -169,6 +178,11 @@ const OrderingWebsiteUI = (props) => {
 
   const handleChangeContent = (type, content) => {
     handleChangeValue(content, 'theme_settings', `values.${type}`)
+  }
+
+  const handleChangeSubSetting = (setting) => {
+    setSelectedSubSetting(setting)
+    orderingTheme.themes[0]?.values && setAdvancedValues(JSON.parse(JSON.stringify(orderingTheme.themes[0]?.values)))
   }
 
   return (
@@ -375,42 +389,49 @@ const OrderingWebsiteUI = (props) => {
                 {orderingTheme?.loading ? (
                   <Skeleton height={20} width={150} />
                 ) : (
-                  <>
-                    <RadioItem
-                      onClick={() => handleChangeValue('marketplace', 'website_theme', 'type')}
-                    >
-                      {themeValues?.website_theme?.components?.type === 'marketplace' ? <RecordCircleFill className='active' /> : <Circle />}
-                      <span>{t('MARKETPLACE', 'Marketplace')}</span>
-                    </RadioItem>
+                  <WebsiteThemeBlock>
+                    <div>
+                      <RadioItem
+                        onClick={() => handleChangeValue('marketplace', 'website_theme', 'type')}
+                      >
+                        {themeValues?.website_theme?.components?.type === 'marketplace' ? <RecordCircleFill className='active' /> : <Circle />}
+                        <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                      </RadioItem>
 
-                    <RadioItem
-                      onClick={() => handleChangeValue('franchise', 'website_theme', 'type')}
-                    >
-                      {themeValues?.website_theme?.components?.type === 'franchise' ? <RecordCircleFill className='active' /> : <Circle />}
-                      <span>{t('REPORT_HEADER_FRANCHISES', 'Franchise')}</span>
-                    </RadioItem>
-                    {themeValues?.website_theme?.components?.type === 'franchise' && (
-                      <SelectFranchise
-                        defaultValue={themeValues?.website_theme?.components?.franchise_slug}
-                        franchisesList={franchisesList}
-                        onChange={value => handleChangeValue(value, 'website_theme', 'franchise_slug')}
-                      />
-                    )}
+                      <RadioItem
+                        onClick={() => handleChangeValue('franchise', 'website_theme', 'type')}
+                      >
+                        {themeValues?.website_theme?.components?.type === 'franchise' ? <RecordCircleFill className='active' /> : <Circle />}
+                        <span>{t('REPORT_HEADER_FRANCHISES', 'Franchise')}</span>
+                      </RadioItem>
+                      {themeValues?.website_theme?.components?.type === 'franchise' && (
+                        <SelectFranchise
+                          defaultValue={themeValues?.website_theme?.components?.franchise_slug}
+                          franchisesList={franchisesList}
+                          onChange={value => handleChangeValue(value, 'website_theme', 'franchise_slug')}
+                        />
+                      )}
 
-                    <RadioItem
-                      onClick={() => handleChangeValue('single_store', 'website_theme', 'type')}
-                    >
-                      {themeValues?.website_theme?.components?.type === 'single_store' ? <RecordCircleFill className='active' /> : <Circle />}
-                      <span>{t('SINGLE_STORE', 'Single Store')}</span>
-                    </RadioItem>
-                    {themeValues?.website_theme?.components?.type === 'single_store' && (
-                      <SelectBusiness
-                        defaultValue={themeValues?.website_theme?.components?.business_slug}
-                        businessesList={businessesList}
-                        onChange={value => handleChangeValue(value, 'website_theme', 'business_slug')}
-                      />
+                      <RadioItem
+                        onClick={() => handleChangeValue('single_store', 'website_theme', 'type')}
+                      >
+                        {themeValues?.website_theme?.components?.type === 'single_store' ? <RecordCircleFill className='active' /> : <Circle />}
+                        <span>{t('SINGLE_STORE', 'Single Store')}</span>
+                      </RadioItem>
+                      {themeValues?.website_theme?.components?.type === 'single_store' && (
+                        <SelectBusiness
+                          defaultValue={themeValues?.website_theme?.components?.business_slug}
+                          businessesList={businessesList}
+                          onChange={value => handleChangeValue(value, 'website_theme', 'business_slug')}
+                        />
+                      )}
+                    </div>
+                    {themeValues?.website_theme?.components?.type && (
+                      <WebsitePriviewImageWrapper>
+                        <img src={previewImages?.[themeValues?.website_theme?.components?.type]} />
+                      </WebsitePriviewImageWrapper>
                     )}
-                  </>
+                  </WebsiteThemeBlock>
                 )}
               </InnerBlock>
             </InputFormWrapper>
@@ -595,7 +616,36 @@ const OrderingWebsiteUI = (props) => {
             </Button>
           </FormWrapper>
         )}
-        {selectedSetting === 'advanced' && !orderingTheme?.loading && (
+        {selectedSetting === 'advanced' && (
+          <InputFormWrapper>
+            <TitleWrapper isMargin>
+              <h4>{t('SETTINGS', 'Settings')}</h4>
+              <CustomDomainInfo>
+                <IconButton
+                  color='primary'
+                >
+                  <InfoCircleFill />
+                </IconButton>
+                <CustomDomainInfoContent>
+                  <span>{t('ADVANCED_SETTING_HELP', 'For now you can\'t use layouts and advanced setting together, if you change between layouts and advance settings the settings will be reset to default')}</span>
+                </CustomDomainInfoContent>
+              </CustomDomainInfo>
+            </TitleWrapper>
+            <RadioItem
+              onClick={() => handleChangeSubSetting('advanced')}
+            >
+              {selectedSubSetting === 'advanced' ? <RecordCircleFill className='active' /> : <Circle />}
+              <span>{t('ADVANCED_SETTINGS', 'Advanced Settings')}</span>
+            </RadioItem>
+            <RadioItem
+              onClick={() => handleChangeSubSetting('advanced_layouts')}
+            >
+              {selectedSubSetting === 'advanced_layouts' ? <RecordCircleFill className='active' /> : <Circle />}
+              <span>{t('ADVANCED_LAYOUTS', 'Advanced Layouts')}</span>
+            </RadioItem>
+          </InputFormWrapper>
+        )}
+        {selectedSubSetting === 'advanced' && !orderingTheme?.loading && (
           <AdvancedSettings
             themesList={themesList}
             advancedValues={advancedValues}
@@ -603,7 +653,7 @@ const OrderingWebsiteUI = (props) => {
             handleUpdateSiteTheme={handleUpdateSiteTheme}
           />
         )}
-        {selectedSetting === 'advanced_layouts' && !orderingTheme?.loading && (
+        {selectedSubSetting === 'advanced_layouts' && !orderingTheme?.loading && (
           <AdvancedLayouts
             themesList={themesList}
             advancedValues={advancedValues}

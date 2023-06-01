@@ -15,6 +15,7 @@ import { NotificationSetting } from './NotificationSetting'
 import { SettingsSelectUI } from './SettingsSelectUI'
 import { SettingsCountryFilter } from './SettingsCountryFilter'
 import { ApiKeysList } from './ApiKeysList'
+import { BacCredomatic } from './BacCredomatic'
 import { WebhookList } from './WebhookList'
 import { PluginList } from './PluginList'
 import { WebhookDelaySelector } from './WebhookDelaySelector'
@@ -49,6 +50,7 @@ export {
   SettingsSelectUI,
   SettingsCountryFilter,
   ApiKeysList,
+  BacCredomatic,
   WebhookList,
   PluginList,
   WebhookDelaySelector,

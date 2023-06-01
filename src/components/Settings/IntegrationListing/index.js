@@ -227,10 +227,18 @@ export const IntegrationListing = (props) => {
             </SettingList>
           </CategorySection>
           <div style={{ order: selectedTab === 5 ? 1 : selectedTab }}>
-            <PaymentGateway />
+            <PaymentGateway
+              showOption={showOption}
+              setShowOption={setShowOption}
+              handleCloseSettings={handleCloseSettings}
+              handleOpenBasicSetting={handleOpenSetting}
+            />
           </div>
           <div style={{ order: selectedTab === 6 ? 1 : selectedTab }}>
-            <Analytics />
+            <Analytics
+              showOption={showOption}
+              setShowOption={setShowOption}
+            />
           </div>
         </CategorGroup>
       </IntegrationsContainer>
