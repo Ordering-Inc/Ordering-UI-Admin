@@ -15,7 +15,8 @@ import {
 export const SettingsSelectUI = (props) => {
   const {
     config,
-    handleSelectChange
+    handleSelectChange,
+    noHeader
   } = props
 
   const [, t] = useLanguage()
@@ -55,14 +56,16 @@ export const SettingsSelectUI = (props) => {
 
   return (
     <SettingsSelectContainer>
-      <SelectHeader>
-        {
-          config?.name && (
-            <label>{config?.name}</label>
-          )
-        }
-        {config?.description && <p>{config?.description}</p>}
-      </SelectHeader>
+      {!noHeader && (
+        <SelectHeader>
+          {
+            config?.name && (
+              <label>{config?.name}</label>
+            )
+          }
+          {config?.description && <p>{config?.description}</p>}
+        </SelectHeader>
+      )}
       {
         options ? (
           <SelectContent>
