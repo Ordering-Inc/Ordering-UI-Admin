@@ -69,8 +69,7 @@ export const AdvancedLayouts = (props) => {
   const headerLayoutList = [
     { value: 'original', name: 'Original' },
     { value: 'starbucks', name: 'Elegant' },
-    { value: 'old', name: '2021' },
-    { value: 'chew', name: 'Great' }
+    { value: 'old', name: '2021' }
   ]
 
   const closeAlert = () => {
