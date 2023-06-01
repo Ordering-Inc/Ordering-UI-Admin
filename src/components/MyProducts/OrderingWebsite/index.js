@@ -23,6 +23,7 @@ import { CustomDomain } from '../CustomDomain'
 import { bytesConverter } from '../../../utils'
 import { SelectBusiness } from './SelectBusiness'
 import { SelectFranchise } from './SelectFranchise'
+import { AdvancedLayouts } from '../AdvancedLayouts'
 import {
   Container,
   HeaderTitleContainer,
@@ -53,9 +54,10 @@ import {
   CustomeDomainDesc,
   TitleWrapper,
   CustomDomainInfo,
-  CustomDomainInfoContent
+  CustomDomainInfoContent,
+  WebsiteThemeBlock,
+  WebsitePriviewImageWrapper
 } from './styles'
-import { AdvancedLayouts } from '../AdvancedLayouts'
 
 const OrderingWebsiteUI = (props) => {
   const {
@@ -88,6 +90,12 @@ const OrderingWebsiteUI = (props) => {
   const [footerContent, setFooterContent] = useState(false)
   const [selectedSetting, setSelectedSetting] = useState('basic')
   const [isCustomDomain, setIsCustomDomain] = useState(false)
+
+  const previewImages = {
+    marketplace: theme.images.preview.marketplace,
+    franchise: theme.images.preview.franchise,
+    single_store: theme.images.preview.singleStore
+  }
 
   const settingsList = [
     { key: 'basic', name: t('BASIC_SETTINGS', 'Basic Settings') },
@@ -375,42 +383,49 @@ const OrderingWebsiteUI = (props) => {
                 {orderingTheme?.loading ? (
                   <Skeleton height={20} width={150} />
                 ) : (
-                  <>
-                    <RadioItem
-                      onClick={() => handleChangeValue('marketplace', 'website_theme', 'type')}
-                    >
-                      {themeValues?.website_theme?.components?.type === 'marketplace' ? <RecordCircleFill className='active' /> : <Circle />}
-                      <span>{t('MARKETPLACE', 'Marketplace')}</span>
-                    </RadioItem>
+                  <WebsiteThemeBlock>
+                    <div>
+                      <RadioItem
+                        onClick={() => handleChangeValue('marketplace', 'website_theme', 'type')}
+                      >
+                        {themeValues?.website_theme?.components?.type === 'marketplace' ? <RecordCircleFill className='active' /> : <Circle />}
+                        <span>{t('MARKETPLACE', 'Marketplace')}</span>
+                      </RadioItem>
 
-                    <RadioItem
-                      onClick={() => handleChangeValue('franchise', 'website_theme', 'type')}
-                    >
-                      {themeValues?.website_theme?.components?.type === 'franchise' ? <RecordCircleFill className='active' /> : <Circle />}
-                      <span>{t('REPORT_HEADER_FRANCHISES', 'Franchise')}</span>
-                    </RadioItem>
-                    {themeValues?.website_theme?.components?.type === 'franchise' && (
-                      <SelectFranchise
-                        defaultValue={themeValues?.website_theme?.components?.franchise_slug}
-                        franchisesList={franchisesList}
-                        onChange={value => handleChangeValue(value, 'website_theme', 'franchise_slug')}
-                      />
-                    )}
+                      <RadioItem
+                        onClick={() => handleChangeValue('franchise', 'website_theme', 'type')}
+                      >
+                        {themeValues?.website_theme?.components?.type === 'franchise' ? <RecordCircleFill className='active' /> : <Circle />}
+                        <span>{t('REPORT_HEADER_FRANCHISES', 'Franchise')}</span>
+                      </RadioItem>
+                      {themeValues?.website_theme?.components?.type === 'franchise' && (
+                        <SelectFranchise
+                          defaultValue={themeValues?.website_theme?.components?.franchise_slug}
+                          franchisesList={franchisesList}
+                          onChange={value => handleChangeValue(value, 'website_theme', 'franchise_slug')}
+                        />
+                      )}
 
-                    <RadioItem
-                      onClick={() => handleChangeValue('single_store', 'website_theme', 'type')}
-                    >
-                      {themeValues?.website_theme?.components?.type === 'single_store' ? <RecordCircleFill className='active' /> : <Circle />}
-                      <span>{t('SINGLE_STORE', 'Single Store')}</span>
-                    </RadioItem>
-                    {themeValues?.website_theme?.components?.type === 'single_store' && (
-                      <SelectBusiness
-                        defaultValue={themeValues?.website_theme?.components?.business_slug}
-                        businessesList={businessesList}
-                        onChange={value => handleChangeValue(value, 'website_theme', 'business_slug')}
-                      />
+                      <RadioItem
+                        onClick={() => handleChangeValue('single_store', 'website_theme', 'type')}
+                      >
+                        {themeValues?.website_theme?.components?.type === 'single_store' ? <RecordCircleFill className='active' /> : <Circle />}
+                        <span>{t('SINGLE_STORE', 'Single Store')}</span>
+                      </RadioItem>
+                      {themeValues?.website_theme?.components?.type === 'single_store' && (
+                        <SelectBusiness
+                          defaultValue={themeValues?.website_theme?.components?.business_slug}
+                          businessesList={businessesList}
+                          onChange={value => handleChangeValue(value, 'website_theme', 'business_slug')}
+                        />
+                      )}
+                    </div>
+                    {themeValues?.website_theme?.components?.type && (
+                      <WebsitePriviewImageWrapper>
+                        <img src={previewImages?.[themeValues?.website_theme?.components?.type]} />
+                      </WebsitePriviewImageWrapper>
                     )}
-                  </>
+                  </WebsiteThemeBlock>
                 )}
               </InnerBlock>
             </InputFormWrapper>
