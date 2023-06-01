@@ -20,7 +20,8 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SettingsSelectUI = function SettingsSelectUI(props) {
   var config = props.config,
-    handleSelectChange = props.handleSelectChange;
+    handleSelectChange = props.handleSelectChange,
+    noHeader = props.noHeader;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -65,7 +66,7 @@ var SettingsSelectUI = function SettingsSelectUI(props) {
       setOptions(selectedTypes);
     }
   }, [config]);
-  return /*#__PURE__*/_react.default.createElement(_styles.SettingsSelectContainer, null, /*#__PURE__*/_react.default.createElement(_styles.SelectHeader, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description)), options ? /*#__PURE__*/_react.default.createElement(_styles.SelectContent, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
+  return /*#__PURE__*/_react.default.createElement(_styles.SettingsSelectContainer, null, !noHeader && /*#__PURE__*/_react.default.createElement(_styles.SelectHeader, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description)), options ? /*#__PURE__*/_react.default.createElement(_styles.SelectContent, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     notAsync: true,
     defaultValue: config === null || config === void 0 ? void 0 : config.value,
     options: options,

@@ -12,6 +12,7 @@ var _SettingsDetail = require("../SettingsDetail");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _reactRouterDom = require("react-router-dom");
 var _styles = require("./styles");
+var _BacCredomatic = require("../BacCredomatic");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -33,7 +34,11 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentGatewayUI = function PaymentGatewayUI(props) {
   var _categoryList$categor;
-  var categoryList = props.categoryList;
+  var categoryList = props.categoryList,
+    showOption = props.showOption,
+    setShowOption = props.setShowOption,
+    handleCloseSettings = props.handleCloseSettings,
+    handleOpenBasicSetting = props.handleOpenBasicSetting;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -74,6 +79,7 @@ var PaymentGatewayUI = function PaymentGatewayUI(props) {
   };
   var handleOpenSetting = function handleOpenSetting(category, initialRender) {
     setSelectedCategory(category);
+    setShowOption('payment-gateway');
     setShowDetail(true);
     if (!initialRender) {
       history.replace("".concat(location.pathname, "?category=").concat(category === null || category === void 0 ? void 0 : category.id));
@@ -100,7 +106,15 @@ var PaymentGatewayUI = function PaymentGatewayUI(props) {
         return handleOpenSetting(setting);
       }
     }, /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null)), /*#__PURE__*/_react.default.createElement(_styles.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, setting === null || setting === void 0 ? void 0 : setting.name), /*#__PURE__*/_react.default.createElement("p", null, setting === null || setting === void 0 ? void 0 : setting.description)));
-  })), (categoryList === null || categoryList === void 0 ? void 0 : categoryList.loading) && /*#__PURE__*/_react.default.createElement(_styles.SettingList, null, _toConsumableArray(Array(2).keys()).map(function (i) {
+  }), /*#__PURE__*/_react.default.createElement(_styles.SettingItemContainer, {
+    onClick: function onClick() {
+      return handleOpenBasicSetting('bac_credomatic');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GearFill, null)), /*#__PURE__*/_react.default.createElement(_styles.SettingItemContent, null, /*#__PURE__*/_react.default.createElement("h5", null, t('BAC_CREDOMATIC', 'BAC Credomatic')), /*#__PURE__*/_react.default.createElement("p", {
+    dangerouslySetInnerHTML: {
+      __html: t('BAC_CREDOMATIC_DESCRIPTION', 'Accept payments in Central America')
+    }
+  })))), (categoryList === null || categoryList === void 0 ? void 0 : categoryList.loading) && /*#__PURE__*/_react.default.createElement(_styles.SettingList, null, _toConsumableArray(Array(2).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.SettingItemContainer, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.IconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -113,12 +127,16 @@ var PaymentGatewayUI = function PaymentGatewayUI(props) {
       height: 13,
       count: 2
     }))));
-  })), showDetail && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
+  })), showDetail && showOption === 'payment-gateway' && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
     open: showDetail,
     category: selectedCategory,
     onClose: handleBackRedirect,
     onBasicSettingsRedirect: onBasicSettingsRedirect
-  })));
+  })), showOption === 'bac_credomatic' && /*#__PURE__*/_react.default.createElement(_BacCredomatic.BacCredomatic, {
+    onClose: function onClose() {
+      return handleCloseSettings();
+    }
+  }));
 };
 var PaymentGateway = function PaymentGateway(props) {
   var paymentGatewayProps = _objectSpread(_objectSpread({}, props), {}, {

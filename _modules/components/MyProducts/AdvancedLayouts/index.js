@@ -113,9 +113,6 @@ var AdvancedLayouts = function AdvancedLayouts(props) {
   }, {
     value: 'old',
     name: '2021'
-  }, {
-    value: 'chew',
-    name: 'Great'
   }];
   var closeAlert = function closeAlert() {
     setAlertState({

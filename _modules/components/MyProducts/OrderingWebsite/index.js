@@ -20,8 +20,8 @@ var _CustomDomain = require("../CustomDomain");
 var _utils = require("../../../utils");
 var _SelectBusiness = require("./SelectBusiness");
 var _SelectFranchise = require("./SelectFranchise");
-var _styles2 = require("./styles");
 var _AdvancedLayouts = require("../AdvancedLayouts");
+var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -37,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
-  var _themeValues$website_, _themeValues$website_2, _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$website_7, _themeValues$website_8, _themeValues$website_9, _themeValues$website_10, _themeValues$website_11, _themeValues$website_12, _themeValues$website_13, _themeValues$website_14, _themeValues$website_15, _themeValues$website_16, _themeValues$website_17, _themeValues$website_18, _themeValues$website_19, _themeValues$website_20, _themeValues$images, _themeValues$images$c, _themeValues$images$c2, _themeValues$images$c3, _themeValues$images2, _themeValues$images2$, _themeValues$images2$2, _themeValues$images2$3, _themeValues$images3, _themeValues$images3$, _themeValues$images3$2, _themeValues$images3$3, _themeValues$images4, _themeValues$images4$, _themeValues$images4$2, _themeValues$images4$3, _themeValues$images5, _themeValues$images5$, _themeValues$images5$2, _themeValues$images5$3, _themeValues$images6, _themeValues$images6$, _themeValues$images6$2, _themeValues$images6$3, _themeValues$images7, _themeValues$images7$, _themeValues$images7$2, _themeValues$images7$3, _themeValues$images8, _themeValues$images8$, _themeValues$images8$2, _themeValues$images8$3, _themeValues$images9, _themeValues$images9$, _themeValues$images9$2, _themeValues$images9$3, _themeValues$images12, _themeValues$images13, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _orderingTheme$themes, _orderingTheme$themes2, _themeValues$theme_se4, _themeValues$theme_se5, _themeValues$theme_se6, _themeValues$theme_se7, _themeValues$theme_se8, _themeValues$theme_se9;
+  var _themeValues$website_, _themeValues$website_2, _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$website_7, _themeValues$website_8, _themeValues$website_9, _themeValues$website_10, _themeValues$website_11, _themeValues$website_12, _themeValues$website_13, _themeValues$website_14, _themeValues$website_15, _themeValues$website_16, _themeValues$website_17, _themeValues$website_18, _themeValues$website_19, _themeValues$website_20, _themeValues$website_21, _themeValues$website_22, _themeValues$website_23, _themeValues$website_24, _themeValues$images, _themeValues$images$c, _themeValues$images$c2, _themeValues$images$c3, _themeValues$images2, _themeValues$images2$, _themeValues$images2$2, _themeValues$images2$3, _themeValues$images3, _themeValues$images3$, _themeValues$images3$2, _themeValues$images3$3, _themeValues$images4, _themeValues$images4$, _themeValues$images4$2, _themeValues$images4$3, _themeValues$images5, _themeValues$images5$, _themeValues$images5$2, _themeValues$images5$3, _themeValues$images6, _themeValues$images6$, _themeValues$images6$2, _themeValues$images6$3, _themeValues$images7, _themeValues$images7$, _themeValues$images7$2, _themeValues$images7$3, _themeValues$images8, _themeValues$images8$, _themeValues$images8$2, _themeValues$images8$3, _themeValues$images9, _themeValues$images9$, _themeValues$images9$2, _themeValues$images9$3, _themeValues$images12, _themeValues$images13, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _orderingTheme$themes3, _orderingTheme$themes4, _themeValues$theme_se4, _themeValues$theme_se5, _themeValues$theme_se6, _themeValues$theme_se7, _themeValues$theme_se8, _themeValues$theme_se9;
   var themeValues = props.themeValues,
     orderingTheme = props.orderingTheme,
     setThemeValues = props.setThemeValues,
@@ -95,16 +95,25 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isCustomDomain = _useState12[0],
     setIsCustomDomain = _useState12[1];
+  var _useState13 = (0, _react.useState)(''),
+    _useState14 = _slicedToArray(_useState13, 2),
+    selectedSubSetting = _useState14[0],
+    setSelectedSubSetting = _useState14[1];
+  var previewImages = {
+    marketplace: theme.images.preview.marketplace,
+    franchise: theme.images.preview.franchise,
+    single_store: theme.images.preview.singleStore
+  };
   var settingsList = [{
     key: 'basic',
     name: t('BASIC_SETTINGS', 'Basic Settings')
   }, {
     key: 'advanced',
     name: t('ADVANCED_SETTINGS', 'Advanced Settings')
-  }, {
-    key: 'advanced_layouts',
-    name: t('ADVANCED_LAYOUTS', 'Advanced Layouts')
-  }];
+  }
+  // { key: 'advanced_layouts', name: t('ADVANCED_LAYOUTS', 'Advanced Layouts') }
+  ];
+
   var handleClickImage = function handleClickImage(type) {
     if (type === 'logo') {
       logoRef.current.click();
@@ -180,6 +189,11 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   };
   var handleChangeContent = function handleChangeContent(type, content) {
     handleChangeValue(content, 'theme_settings', "values.".concat(type));
+  };
+  var handleChangeSubSetting = function handleChangeSubSetting(setting) {
+    var _orderingTheme$themes, _orderingTheme$themes2;
+    setSelectedSubSetting(setting);
+    ((_orderingTheme$themes = orderingTheme.themes[0]) === null || _orderingTheme$themes === void 0 ? void 0 : _orderingTheme$themes.values) && setAdvancedValues(JSON.parse(JSON.stringify((_orderingTheme$themes2 = orderingTheme.themes[0]) === null || _orderingTheme$themes2 === void 0 ? void 0 : _orderingTheme$themes2.values)));
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
@@ -278,7 +292,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   }, site !== null && site !== void 0 && site.domain ? t('REQUEST_CUSTOM_DOMAIN', 'Request custom domain') : t('CHANGE_CUSTOM_DOMAIN', 'Change custom domain')), (site === null || site === void 0 ? void 0 : site.domain) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (site === null || site === void 0 ? void 0 : site.ssl_status) === 'issued' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_ISSUED', 'Your domain is now added , please verify the custom domain link above.')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'pre-issued' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_PRE_ISSUED', 'Process almost finish, please wait')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'error' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_ERROR', 'Custom domain can\'t be created, please try again with valid data')), ((site === null || site === void 0 ? void 0 : site.ssl_status) === 'pending_validation' || (site === null || site === void 0 ? void 0 : site.ssl_status) === 'void' && (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'pending') && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_PENDING_VALIDATION', 'A custom domain is being created, please wait')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'revoked' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_REVOKED', 'Warning: Custom domain is revoked')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'cancelled' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_CANCELLED', 'Custom domain is cancelled')), (site === null || site === void 0 ? void 0 : site.ssl_status) === 'expired' && /*#__PURE__*/_react.default.createElement(_styles2.CustomeDomainDesc, null, t('CUSTOM_DOMAIN_STATUS_EXPIRED', 'Custom domain is expired'))))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_THEME', 'Website Theme')), orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20,
     width: 150
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.RadioItem, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.WebsiteThemeBlock, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.RadioItem, {
     onClick: function onClick() {
       return handleChangeValue('marketplace', 'website_theme', 'type');
     }
@@ -308,7 +322,9 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     onChange: function onChange(value) {
       return handleChangeValue(value, 'website_theme', 'business_slug');
     }
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_21 = themeValues.website_theme) === null || _themeValues$website_21 === void 0 ? void 0 : (_themeValues$website_22 = _themeValues$website_21.components) === null || _themeValues$website_22 === void 0 ? void 0 : _themeValues$website_22.type) && /*#__PURE__*/_react.default.createElement(_styles2.WebsitePriviewImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: previewImages === null || previewImages === void 0 ? void 0 : previewImages[themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_23 = themeValues.website_theme) === null || _themeValues$website_23 === void 0 ? void 0 : (_themeValues$website_24 = _themeValues$website_23.components) === null || _themeValues$website_24 === void 0 ? void 0 : _themeValues$website_24.type]
+  }))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100,
     width: 100,
     style: {
@@ -458,12 +474,28 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       return handleUpdateSiteTheme();
     },
     disabled: orderingTheme === null || orderingTheme === void 0 ? void 0 : orderingTheme.loading
-  }, t('SAVE', 'Save'))), selectedSetting === 'advanced' && !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && /*#__PURE__*/_react.default.createElement(_AdvancedSettings.AdvancedSettings, {
+  }, t('SAVE', 'Save'))), selectedSetting === 'advanced' && /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, {
+    isMargin: true
+  }, /*#__PURE__*/_react.default.createElement("h4", null, t('SETTINGS', 'Settings')), /*#__PURE__*/_react.default.createElement(_styles2.CustomDomainInfo, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircleFill, null)), /*#__PURE__*/_react.default.createElement(_styles2.CustomDomainInfoContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('ADVANCED_SETTING_HELP', 'For now you can\'t use layouts and advanced setting together, if you change between layouts and advance settings the settings will be reset to default'))))), /*#__PURE__*/_react.default.createElement(_styles2.RadioItem, {
+    onClick: function onClick() {
+      return handleChangeSubSetting('advanced');
+    }
+  }, selectedSubSetting === 'advanced' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    className: "active"
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('ADVANCED_SETTINGS', 'Advanced Settings'))), /*#__PURE__*/_react.default.createElement(_styles2.RadioItem, {
+    onClick: function onClick() {
+      return handleChangeSubSetting('advanced_layouts');
+    }
+  }, selectedSubSetting === 'advanced_layouts' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    className: "active"
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('ADVANCED_LAYOUTS', 'Advanced Layouts')))), selectedSubSetting === 'advanced' && !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && /*#__PURE__*/_react.default.createElement(_AdvancedSettings.AdvancedSettings, {
     themesList: themesList,
     advancedValues: advancedValues,
     setAdvancedValues: setAdvancedValues,
     handleUpdateSiteTheme: handleUpdateSiteTheme
-  }), selectedSetting === 'advanced_layouts' && !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && /*#__PURE__*/_react.default.createElement(_AdvancedLayouts.AdvancedLayouts, {
+  }), selectedSubSetting === 'advanced_layouts' && !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && /*#__PURE__*/_react.default.createElement(_AdvancedLayouts.AdvancedLayouts, {
     themesList: themesList,
     advancedValues: advancedValues,
     setAdvancedValues: setAdvancedValues,
@@ -492,7 +524,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       }));
     }
   }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
-    themeId: orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$themes = orderingTheme.themes) === null || _orderingTheme$themes === void 0 ? void 0 : (_orderingTheme$themes2 = _orderingTheme$themes[0]) === null || _orderingTheme$themes2 === void 0 ? void 0 : _orderingTheme$themes2.theme_id,
+    themeId: orderingTheme === null || orderingTheme === void 0 ? void 0 : (_orderingTheme$themes3 = orderingTheme.themes) === null || _orderingTheme$themes3 === void 0 ? void 0 : (_orderingTheme$themes4 = _orderingTheme$themes3[0]) === null || _orderingTheme$themes4 === void 0 ? void 0 : _orderingTheme$themes4.theme_id,
     useCloudinaryUrl: true,
     photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
     handleChangePhoto: handleChangePhoto
