@@ -37,7 +37,7 @@ var ImportersButton = function ImportersButton(props) {
     extraOpen = _useState4[0],
     setExtraOpen = _useState4[1];
   var handleOpenImporters = function handleOpenImporters() {
-    setOpenSidebar('importer');
+    setOpenSidebar && setOpenSidebar('importer');
     setOpenImporters(true);
     history.replace("".concat(location.pathname, "?header=importers"));
   };
@@ -57,7 +57,7 @@ var ImportersButton = function ImportersButton(props) {
     onClick: handleOpenImporters
   }, t('IMPORTERS', 'Importers'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Upload, null))), openImporters && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     defaultSideBarWidth: extraOpen ? 1000 : 500,
-    moveDistance: extraOpen ? 500 : 0,
+    moveDistance: extraOpen ? 500 : 20,
     open: openImporters,
     onClose: handleCloseImporters,
     showExpandIcon: true
