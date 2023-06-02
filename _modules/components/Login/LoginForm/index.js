@@ -275,11 +275,6 @@ var LoginFormUI = function LoginFormUI(props) {
       }
     }
   }, [configs]);
-  (0, _react.useEffect)(function () {
-    setConfigFile(_objectSpread(_objectSpread({}, configFile), {}, {
-      project: window.localStorage.getItem('project') || null
-    }));
-  }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.LoginContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles2.LoginHeroContainer, {
