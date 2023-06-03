@@ -11,10 +11,15 @@ import {
   IconWrapper,
   SettingItemContent
 } from './styles'
+import { BacCredomatic } from '../BacCredomatic'
 
 const PaymentGatewayUI = (props) => {
   const {
-    categoryList
+    categoryList,
+    showOption,
+    setShowOption,
+    handleCloseSettings,
+    handleOpenBasicSetting
   } = props
 
   const [, t] = useLanguage()
@@ -48,6 +53,7 @@ const PaymentGatewayUI = (props) => {
 
   const handleOpenSetting = (category, initialRender) => {
     setSelectedCategory(category)
+    setShowOption('payment-gateway')
     setShowDetail(true)
     if (!initialRender) {
       history.replace(`${location.pathname}?category=${category?.id}`)
@@ -84,6 +90,17 @@ const PaymentGatewayUI = (props) => {
               </SettingItemContent>
             </SettingItemContainer>
           ))}
+          <SettingItemContainer
+            onClick={() => handleOpenBasicSetting('bac_credomatic')}
+          >
+            <IconWrapper>
+              <GearFill />
+            </IconWrapper>
+            <SettingItemContent>
+              <h5>{t('BAC_CREDOMATIC', 'BAC Credomatic')}</h5>
+              <p dangerouslySetInnerHTML={{ __html: t('BAC_CREDOMATIC_DESCRIPTION', 'Accept payments in Central America') }} />
+            </SettingItemContent>
+          </SettingItemContainer>
         </SettingList>
       )}
       {categoryList?.loading && (
@@ -103,7 +120,7 @@ const PaymentGatewayUI = (props) => {
           ))}
         </SettingList>
       )}
-      {showDetail && (
+      {showDetail && showOption === 'payment-gateway' && (
         <SettingsDetail
           {...props}
           open={showDetail}
@@ -112,6 +129,7 @@ const PaymentGatewayUI = (props) => {
           onBasicSettingsRedirect={onBasicSettingsRedirect}
         />
       )}
+      {showOption === 'bac_credomatic' && <BacCredomatic onClose={() => handleCloseSettings()} />}
     </CategorySection>
   )
 }

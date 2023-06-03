@@ -16,7 +16,7 @@ export const ImportersButton = (props) => {
   const [extraOpen, setExtraOpen] = useState(false)
 
   const handleOpenImporters = () => {
-    setOpenSidebar('importer')
+    setOpenSidebar && setOpenSidebar('importer')
     setOpenImporters(true)
 
     history.replace(`${location.pathname}?header=importers`)
@@ -49,7 +49,7 @@ export const ImportersButton = (props) => {
       {openImporters && (
         <SideBar
           defaultSideBarWidth={extraOpen ? 1000 : 500}
-          moveDistance={extraOpen ? 500 : 0}
+          moveDistance={extraOpen ? 500 : 20}
           open={openImporters}
           onClose={handleCloseImporters}
           showExpandIcon

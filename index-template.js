@@ -281,6 +281,11 @@ import dinerWare from './template/assets/images/pos/diner-ware.png'
 import digitalDining from './template/assets/images/pos/digital-dining.png'
 import foodTec from './template/assets/images/pos/food-tec.png'
 
+// preview
+import marketplace from './template/assets/images/preview/marketplace.png'
+import franchise from './template/assets/images/preview/franchise.png'
+import singleStore from './template/assets/images/preview/single-store.png'
+
 import { AutologinParams } from './template/components/AutologinParams'
 
 const logos = {
@@ -535,6 +540,11 @@ theme.images = {
   tutorials: {
     businessTutorial1: businessTutorial1,
     businessTutorial2: businessTutorial2
+  },
+  preview: {
+    marketplace,
+    franchise,
+    singleStore
   }
 }
 theme.sounds = {
