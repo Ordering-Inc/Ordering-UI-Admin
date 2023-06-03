@@ -96,7 +96,7 @@ export const Options = styled.div`
 `
 
 export const OptionsInner = styled.div`
-  overflow: auto;
+  overflow-x: hidden;
   margin: ${({ optionInnerMargin }) => optionInnerMargin};
   max-height: ${({ optionInnerMaxHeight }) => optionInnerMaxHeight};
   overscroll-behavior: contain;

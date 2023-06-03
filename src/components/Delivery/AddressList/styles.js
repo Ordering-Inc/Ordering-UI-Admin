@@ -184,7 +184,7 @@ export const WrapperAddressForm = styled.div`
   height: calc(var(--vh, 1vh) * 100);
   overflow: auto;
   box-sizing: border-box;
-  padding: 35px 20px;
+  padding: 25px 20px;
 
   ${props => props.theme?.rtl ? css`
     border-right: 1px solid #E9ECEF;

@@ -3,6 +3,7 @@ import { useSession } from 'ordering-components-admin'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { OrdersExportCSV } from '../OrdersExportCSV'
 import { OrderDelete } from '../OrderDelete'
+import { CreateCustomOrder } from '../CreateCustomOrder'
 import {
   OrderDashboardControlsContainer,
   InnerContnet,
@@ -23,6 +24,7 @@ export const OrdersDashboardControls = (props) => {
     <>
       <OrderDashboardControlsContainer>
         <InnerContnet>
+          <CreateCustomOrder />
           <OrdersExportCSV filterValues={filterValues} />
           {selectedOrderNumber > 0 && (
             <>
