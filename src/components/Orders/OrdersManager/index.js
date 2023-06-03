@@ -204,6 +204,10 @@ const OrdersManagerUI = (props) => {
               filterValues={filterValues}
               handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
               handleDeleteMultiOrders={handleDeleteMultiOrders}
+              handleOpenCustomOrderDetail={(id) => {
+                setOrderDetailId(id)
+                setIsOpenOrderDetail(true)
+              }}
             />
           )}
         </OrderSubFilterControls>

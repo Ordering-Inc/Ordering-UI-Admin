@@ -13,7 +13,7 @@ import {
 import parsePhoneNumber from 'libphonenumber-js'
 import VscWarning from '@meronex/icons/vsc/VscWarning'
 
-// import { PaymentOptions } from '../PaymentOptions'
+import { PaymentOptions } from '../PaymentOptions'
 import { PaymentOptionWallet } from '../PaymentOptionWallet'
 import { DriverTips } from '../DriverTips'
 import { CartBill } from '../CartBill'
@@ -189,7 +189,7 @@ const CheckoutUI = (props) => {
         </WarningMessage>
       )}
 
-      {/* {!cartState.loading && cart && (
+      {!cartState.loading && cart && (
         <PaymentMethodContainer className='paymentsContainer'>
           <SectionTitleContainer>
             <h3>{t('PAYMENT_METHODS', 'Payment Methods')}</h3>
@@ -223,7 +223,7 @@ const CheckoutUI = (props) => {
             setPaymethodClicked={setPaymethodClicked}
           />
         </PaymentMethodContainer>
-      )} */}
+      )}
 
       {isWalletEnabled && !businessDetails?.loading && (
         <PaymentOptionWallet
@@ -383,7 +383,7 @@ export const Checkout = (props) => {
       const cart = carts.find(cart => cart.uuid === cartId)
       const userCustomer = JSON.parse(window.localStorage.getItem('user-customer'))
       if (cart && !userCustomer) {
-        result = { ...cart }
+        result = JSON.parse(JSON.stringify(cart))
       } else {
         setCartState({ ...cartState, loading: true })
         const url = userCustomer
@@ -441,23 +441,22 @@ export const Checkout = (props) => {
           })
         }
       } else {
-        let cart = Array.isArray(result) ? null : result
+        let _cart = Array.isArray(result) ? null : JSON.parse(JSON.stringify(result))
         const spotNumberFromStorage = window.localStorage.getItem('table_number')
         if (spotNumberFromStorage) {
           const spotNumber = JSON.parse(spotNumberFromStorage)?.tableNumber
           const slug = JSON.parse(spotNumberFromStorage)?.slug
-          if (cart?.business?.slug === slug) {
-            cart = {
-              ...cart,
+          if (_cart?.business?.slug === slug) {
+            _cart = {
+              ..._cart,
               spot_number: parseInt(spotNumber, 10)
             }
           }
         }
         setCartState({
-          ...cartState,
           loading: false,
-          cart,
-          error: cart ? null : result
+          cart: _cart,
+          error: _cart ? null : result
         })
       }
     } catch (e) {

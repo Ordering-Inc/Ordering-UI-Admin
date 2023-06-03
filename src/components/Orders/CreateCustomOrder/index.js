@@ -5,6 +5,10 @@ import { SideBar } from '../../Shared'
 import { Button } from '../../../styles'
 
 export const CreateCustomOrder = (props) => {
+  const {
+    handleOpenCustomOrderDetail
+  } = props
+
   const [, t] = useLanguage()
   const [openSidebar, setOpenSidebar] = useState(false)
   const [moveDistance, setMoveDistance] = useState(0)
@@ -31,6 +35,8 @@ export const CreateCustomOrder = (props) => {
         >
           <CustomOrderDetails
             handleParentSidebarMove={val => setMoveDistance(val)}
+            handleOpenCustomOrderDetail={handleOpenCustomOrderDetail}
+            onClose={() => setOpenSidebar(false)}
           />
         </SideBar>
       )}

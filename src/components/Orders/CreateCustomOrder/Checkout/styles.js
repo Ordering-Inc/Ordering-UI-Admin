@@ -54,7 +54,7 @@ export const SectionTitleContainer = styled.div`
 export const PaymentMethodContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px 0px 0px;
+  margin: 50px 0px 0px;
 `
 export const WarningText = styled.p`
   margin: 10px auto;

@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useLanguage, useOrder, useValidationFields, useConfig } from 'ordering-components-admin'
-import { CustomOrderDetails as CustomOrderDetailsController } from './naked'
+import { useLanguage, useOrder, CustomOrderDetails as CustomOrderDetailsController } from 'ordering-components-admin'
 import { SelectCustomer } from '../SelectCustomer'
 import { SelectBusinesses } from '../SelectBusinesses'
 import { Map } from '../Map'
 import { SelectProducts } from '../SelectProducts'
-import { DriverTips } from '../DriverTips'
-import { CartBill } from '../CartBill'
 import { Checkout } from '../Checkout'
 import { Alert } from '../../../Shared'
 
@@ -30,17 +27,13 @@ const CustomOrderDetailsUI = (props) => {
     productList,
     getProducts,
     handeUpdateProductCart,
-    cart
+    cart,
+    onClose,
+    handleOpenCustomOrderDetail
   } = props
 
   const [, t] = useLanguage()
-  const [orderState, { changeAddress }] = useOrder()
-  const [validationFields] = useValidationFields()
-  const [{ configs }] = useConfig()
-
-  const driverTipsOptions = typeof configs?.driver_tip_options?.value === 'string'
-    ? JSON.parse(configs?.driver_tip_options?.value) || []
-    : configs?.driver_tip_options?.value || []
+  const [, { changeAddress }] = useOrder()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -109,31 +102,13 @@ const CustomOrderDetailsUI = (props) => {
             business={selectedBusiness}
           />
         )}
-        {/* {
-          cart &&
-          cart?.business_id &&
-          orderState?.options?.type === 1 &&
-          cart?.status !== 2 &&
-          validationFields?.fields?.checkout?.driver_tip?.enabled &&
-          driverTipsOptions.length > 0 &&
-          (
-            <DriverTips
-              businessId={cart?.business_id}
-              driverTipsOptions={driverTipsOptions}
-              isFixedPrice={parseInt(configs?.driver_tip_type?.value, 10) === 1}
-              isDriverTipUseCustom={!!parseInt(configs?.driver_tip_use_custom?.value, 10)}
-              driverTip={parseInt(configs?.driver_tip_type?.value, 10) === 1
-                ? cart?.driver_tip
-                : cart?.driver_tip_rate}
-              cart={cart}
-              useOrderContext
-            />
-          )
-        }
-        {cart && <CartBill cart={cart} />} */}
         {cart && (
           <Checkout
             cartUuid={cart.uuid}
+            onPlaceOrderClick={(data, paymethod, cart) => {
+              cart?.uuid && handleOpenCustomOrderDetail(cart.uuid)
+              onClose()
+            }}
           />
         )}
         <Alert

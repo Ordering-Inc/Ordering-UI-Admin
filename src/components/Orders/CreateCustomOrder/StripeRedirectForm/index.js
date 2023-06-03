@@ -1,15 +1,13 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { StripeRedirectForm as StripeRedirectFormController, useSession, useLanguage } from 'ordering-components-admin'
+import { Button, Input } from '../../../../styles'
 
 import {
   FormRedirect,
   FormGroup,
   ErrorMessage
 } from './styles'
-
-import { Button } from '../../styles/Buttons'
-import { Input } from '../../styles/Inputs'
 
 const StripeRedirectFormUI = (props) => {
   const {
