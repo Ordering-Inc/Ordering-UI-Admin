@@ -15,6 +15,7 @@ import {
   ActionAspectRatioBox
 } from './styles'
 import { Checkbox } from '../../../styles/Checkbox'
+import Skeleton from 'react-loading-skeleton'
 
 export const ImageCrop = (props) => {
   const {
@@ -105,9 +106,13 @@ export const ImageCrop = (props) => {
 
   return (
     <Container>
-      <ImageCropWrapper>
-        <img ref={cropperRef} src={photo} />
-      </ImageCropWrapper>
+      {loading
+        ? <Skeleton style={{ height: 400 }} />
+        : (
+          <ImageCropWrapper>
+            <img ref={cropperRef} src={photo} />
+          </ImageCropWrapper>
+        )}
       <ImageCropActionWrapper>
         <RangeWrapper>
           <span className='title'>{t('RESIZE_IMAGE', 'Resize image')}</span>
