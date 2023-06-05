@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCode = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCountryPhoneCode = exports.findExitingCode = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -252,6 +252,13 @@ var findExitingCode = function findExitingCode(countryCode) {
   });
   return code === null || code === void 0 ? void 0 : code.countryCode;
 };
+exports.findExitingCode = findExitingCode;
+var findExitingCountryPhoneCode = function findExitingCountryPhoneCode(countryCode) {
+  var code = _orderingComponentsAdmin.CODES.find(function (code) {
+    return code.countryCode === (countryCode || '').toUpperCase();
+  });
+  return code === null || code === void 0 ? void 0 : code.phoneCode;
+};
 
 /**
  * Function to check if a number is decimal or not
@@ -259,7 +266,7 @@ var findExitingCode = function findExitingCode(countryCode) {
  * @param {*} parser function fallback when is decimal
  * @returns string
  */
-exports.findExitingCode = findExitingCode;
+exports.findExitingCountryPhoneCode = findExitingCountryPhoneCode;
 var verifyDecimals = function verifyDecimals(value, parser) {
   if (value % 1 === 0) {
     return value;

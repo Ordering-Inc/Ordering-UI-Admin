@@ -21,7 +21,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -34,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddressListUI = function AddressListUI(props) {
-  var _props$beforeElements, _props$beforeComponen, _addressList$addresse, _addressList$addresse2, _orderState$options6, _addressList$addresse3, _theme$images, _theme$images$general, _addressList$error$, _orderState$options7, _orderState$options8, _props$afterComponent, _props$afterElements;
+  var _addressList$addresse, _addressList$addresse2, _orderState$options6, _addressList$addresse3, _theme$images, _theme$images$general, _addressList$error$, _orderState$options7, _orderState$options8;
   var actionStatus = props.actionStatus,
     addressList = props.addressList,
     handleDelete = props.handleDelete,
@@ -59,9 +58,6 @@ var AddressListUI = function AddressListUI(props) {
   var _useOrder = (0, _orderingComponentsAdmin.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
-  var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
-    _useEvent2 = _slicedToArray(_useEvent, 1),
-    events = _useEvent2[0];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     curAddress = _useState2[0],
@@ -122,9 +118,6 @@ var AddressListUI = function AddressListUI(props) {
   };
   var handleSetAddress = function handleSetAddress(address) {
     if (checkAddress(address) && (userCustomerSetup === null || userCustomerSetup === void 0 ? void 0 : userCustomerSetup.id) === (user === null || user === void 0 ? void 0 : user.id)) {
-      events.emit('go_to_page', {
-        page: 'search'
-      });
       setCustomerModalOpen && setCustomerModalOpen(false);
       return;
     }
@@ -191,15 +184,7 @@ var AddressListUI = function AddressListUI(props) {
     }) || [];
     setUniqueAddressesList(_uniqueAddressesList);
   }, [addressList]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.AddressListContainer, {
     id: "address_control",
     isLoading: (actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.loading) || (orderState === null || orderState === void 0 ? void 0 : orderState.loading)
   }, (!isPopover || !addressOpen) && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
@@ -210,33 +195,7 @@ var AddressListUI = function AddressListUI(props) {
       return openAddress({});
     },
     disabled: (orderState === null || orderState === void 0 ? void 0 : orderState.loading) || actionStatus.loading
-  }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add new address')), !isSeletectedUserAddresses && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isPopover && addressOpen && /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    userId: userId,
-    addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
-    useValidationFileds: true,
-    address: curAddress,
-    onCancel: function onCancel() {
-      return setAddressOpen(false);
-    },
-    onSaveAddress: handleSaveAddress,
-    userCustomerSetup: userCustomerSetup
-  }), !isPopover && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
-    title: t('ADDRESS', 'Address'),
-    open: !isPopover && addressOpen,
-    onClose: function onClose() {
-      return setAddressOpen(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_AddressForm.AddressForm, {
-    userId: userId,
-    addressesList: addressList === null || addressList === void 0 ? void 0 : addressList.addresses,
-    useValidationFileds: true,
-    address: curAddress,
-    onCancel: function onCancel() {
-      return setAddressOpen(false);
-    },
-    onSaveAddress: handleSaveAddress,
-    userCustomerSetup: userCustomerSetup
-  }))), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && (!addressOpen && isPopover || isModal || isSeletectedUserAddresses) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
+  }, orderState !== null && orderState !== void 0 && orderState.loading || actionStatus.loading ? t('LOADING', 'Loading') : t('ADD_NEW_ADDRESS', 'Add new address')), !addressList.loading && !actionStatus.loading && !orderState.loading && !addressList.error && (addressList === null || addressList === void 0 ? void 0 : (_addressList$addresse2 = addressList.addresses) === null || _addressList$addresse2 === void 0 ? void 0 : _addressList$addresse2.length) > 0 && _typeof((_orderState$options6 = orderState.options) === null || _orderState$options6 === void 0 ? void 0 : _orderState$options6.address) === 'object' && (!addressOpen && isPopover || isModal || isSeletectedUserAddresses) && /*#__PURE__*/_react.default.createElement(_styles.AddressListUl, {
     id: "list"
   }, uniqueAddressesList.map(function (address) {
     return /*#__PURE__*/_react.default.createElement(_styles.AddressItem, {
@@ -244,11 +203,13 @@ var AddressListUI = function AddressListUI(props) {
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "wrapAddress",
       onClick: function onClick() {
-        return !isSeletectedUserAddresses && handleSetAddress(address);
+        return handleSetAddress(address);
       }
-    }, !isSeletectedUserAddresses && /*#__PURE__*/_react.default.createElement("span", {
+    }, /*#__PURE__*/_react.default.createElement("span", {
       className: "radio"
-    }, checkAddress(address) ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, null) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
+    }, address !== null && address !== void 0 && address.default ? /*#__PURE__*/_react.default.createElement(_IosRadioButtonOn.default, {
+      color: theme.colors.primary
+    }) : /*#__PURE__*/_react.default.createElement(_IosRadioButtonOff.default, null)), /*#__PURE__*/_react.default.createElement("span", {
       className: "tag"
     }, (address === null || address === void 0 ? void 0 : address.tag) === 'home' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), (address === null || address === void 0 ? void 0 : address.tag) === 'office' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Building, null), (address === null || address === void 0 ? void 0 : address.tag) === 'favorite' && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.SuitHeart, null), ((address === null || address === void 0 ? void 0 : address.tag) === 'other' || !(address !== null && address !== void 0 && address.tag)) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusLg, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "address"
@@ -332,15 +293,7 @@ var AddressListUI = function AddressListUI(props) {
     },
     onSaveAddress: handleSaveAddress,
     userCustomerSetup: userCustomerSetup
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+  })));
 };
 var AddressList = function AddressList(props) {
   var addressListProps = _objectSpread(_objectSpread({}, props), {}, {

@@ -14,6 +14,7 @@ var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
 var _utils = require("../../../utils");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _constants = require("../../../config/constants");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -29,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _ref4, _formState$changes$dr, _formState$changes6;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _ref4, _formState$changes$ti, _formState$changes6, _ref5, _formState$changes$dr, _formState$changes7;
   var formState = props.formState,
     showField = props.showField,
     cleanFormState = props.cleanFormState,
@@ -72,6 +73,14 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     passwordSee = _useState10[0],
     setPasswordSee = _useState10[1];
+  var _useState11 = (0, _react.useState)([]),
+    _useState12 = _slicedToArray(_useState11, 2),
+    timezonesOptions = _useState12[0],
+    setTimezonesOptions = _useState12[1];
+  var _useState13 = (0, _react.useState)(''),
+    _useState14 = _slicedToArray(_useState13, 2),
+    timezoneSearchValue = _useState14[0],
+    setTimezoneSearchValue = _useState14[1];
   (0, _react.useEffect)(function () {
     setUser(userData);
   }, [userData]);
@@ -242,6 +251,17 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       });
     }
   }, [user === null || user === void 0 ? void 0 : user.id]);
+  (0, _react.useEffect)(function () {
+    var _timezonesOptions = _constants.timezones.filter(function (timezone) {
+      return timezone.toLocaleLowerCase().includes(timezoneSearchValue.toLocaleLowerCase());
+    }).map(function (timezone) {
+      return {
+        value: timezone,
+        content: timezone
+      };
+    });
+    setTimezonesOptions(_timezonesOptions);
+  }, [timezoneSearchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
@@ -275,7 +295,22 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     }));
-  }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
+  }), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+    isTimezone: true
+  }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+    placeholder: t('SELECT_TIMEZONE', 'Select a timezone'),
+    defaultValue: (_ref4 = (_formState$changes$ti = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.timezone) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : user === null || user === void 0 ? void 0 : user.timezone) !== null && _ref4 !== void 0 ? _ref4 : '',
+    options: timezonesOptions,
+    onChange: function onChange(val) {
+      return handleChangeSwtich('timezone', val);
+    },
+    optionInnerMaxHeight: "300px",
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: timezoneSearchValue,
+    handleChangeSearch: setTimezoneSearchValue
+  })), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
@@ -298,7 +333,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return setPasswordSee(!passwordSee);
     }
   }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_ref4 = (_formState$changes$dr = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction) !== null && _ref4 !== void 0 ? _ref4 : false,
+    defaultChecked: (_ref5 = (_formState$changes$dr = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction) !== null && _ref5 !== void 0 ? _ref5 : false,
     onChange: function onChange(val) {
       return handleChangeSwtich('driver_zone_restriction', val);
     }

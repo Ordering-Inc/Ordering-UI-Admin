@@ -62,7 +62,7 @@ var Options = _styledComponents.default.div(_templateObject9 || (_templateObject
   return isAbsolute && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    position: absolute;\n    margin-top: 7px;\n  "])));
 });
 exports.Options = Options;
-var OptionsInner = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  overflow: auto;\n  margin: ", ";\n  max-height: ", ";\n  overscroll-behavior: contain;\n"])), function (_ref10) {
+var OptionsInner = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  overflow-x: hidden;\n  margin: ", ";\n  max-height: ", ";\n  overscroll-behavior: contain;\n"])), function (_ref10) {
   var optionInnerMargin = _ref10.optionInnerMargin;
   return optionInnerMargin;
 }, function (_ref11) {

@@ -223,9 +223,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
     numberOfOrdersByStatus: numberOfOrdersByStatus
-  }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, {
-    isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
-  }, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, {
+  }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, null, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, {
     isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
   }, /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
     ordersStatusGroup: ordersStatusGroup,
@@ -235,7 +233,11 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     selectedOrderNumber: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length,
     filterValues: filterValues,
     handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus,
-    handleDeleteMultiOrders: handleDeleteMultiOrders
+    handleDeleteMultiOrders: handleDeleteMultiOrders,
+    handleOpenCustomOrderDetail: function handleOpenCustomOrderDetail(id) {
+      setOrderDetailId(id);
+      setIsOpenOrderDetail(true);
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersInnerContent, {
     className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapItemView, null, /*#__PURE__*/_react.default.createElement(_OrdersDashboard.OrdersDashboard, {

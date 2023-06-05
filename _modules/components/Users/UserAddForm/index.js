@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserAddFormUI = function UserAddFormUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _formState$changes2, _formState$changes3, _formState$changes4, _validationFields$fie5, _props$afterMidElemen, _props$afterMidCompon, _formState$changes5;
+  var _ref, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _formState$changes2, _formState$changes3, _formState$changes4, _validationFields$fie4, _props$afterMidElemen, _props$afterMidCompon, _formState$changes5;
   var formState = props.formState,
     showField = props.showField,
     cleanFormState = props.cleanFormState,
@@ -47,7 +47,9 @@ var UserAddFormUI = function UserAddFormUI(props) {
     isCheckout = props.isCheckout,
     handleChangeUserType = props.handleChangeUserType,
     handlechangeImage = props.handlechangeImage,
-    handleChangeSwtich = props.handleChangeSwtich;
+    handleChangeSwtich = props.handleChangeSwtich,
+    defaultPhoneNumber = props.defaultPhoneNumber,
+    isFromCustomOrder = props.isFromCustomOrder;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -88,7 +90,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
       }
     });
   };
-  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+  var showInputPhoneNumber = (_ref = isFromCustomOrder !== null && isFromCustomOrder !== void 0 ? isFromCustomOrder : validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie = validationFields.fields) === null || _validationFields$fie === void 0 ? void 0 : (_validationFields$fie2 = _validationFields$fie.checkout) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.cellphone) === null || _validationFields$fie3 === void 0 ? void 0 : _validationFields$fie3.enabled) !== null && _ref !== void 0 ? _ref : false;
   var onSubmit = function onSubmit() {
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
     if (!isPhoneNumberValid && userPhoneNumber) {
@@ -233,6 +235,12 @@ var UserAddFormUI = function UserAddFormUI(props) {
       }
     });
   }, [formMethods]);
+  (0, _react.useEffect)(function () {
+    if (defaultPhoneNumber) {
+      setUserPhoneNumber(defaultPhoneNumber);
+      handleChangePhoneNumber(defaultPhoneNumber, true);
+    }
+  }, [defaultPhoneNumber]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     isCheckout: isCheckout,
@@ -262,7 +270,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
     alt: "user image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))))), !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
-    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout
+    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie4 = validationFields.fields) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.checkout
   }).map(function (field) {
     var _formState$result5, _formState$result6, _formState$changes$fi, _formState$result7, _formState$result8, _formState$changes$fi2;
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -319,7 +327,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
     isPrimary: true,
-    defaultUserType: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.level,
+    defaultUserType: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.level) || 3,
     handleChangeUserType: handleChangeUserType
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
