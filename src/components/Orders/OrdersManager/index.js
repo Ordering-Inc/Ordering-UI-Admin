@@ -190,7 +190,7 @@ const OrdersManagerUI = (props) => {
           changeOrderStatus={handleOrdersStatusGroupFilter}
           numberOfOrdersByStatus={numberOfOrdersByStatus}
         />
-        <OrderSubFilterControls isColumn={selectedOrderIds?.length}>
+        <OrderSubFilterControls>
           <OrderStatusSubFilterWrapper isColumn={selectedOrderIds?.length}>
             <OrderStatusSubFilter
               ordersStatusGroup={ordersStatusGroup}
@@ -204,6 +204,10 @@ const OrdersManagerUI = (props) => {
               filterValues={filterValues}
               handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
               handleDeleteMultiOrders={handleDeleteMultiOrders}
+              handleOpenCustomOrderDetail={(id) => {
+                setOrderDetailId(id)
+                setIsOpenOrderDetail(true)
+              }}
             />
           )}
         </OrderSubFilterControls>

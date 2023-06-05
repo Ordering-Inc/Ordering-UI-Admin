@@ -112,7 +112,7 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
         {!!order?.customer?.internal_number && (
           `${t('INTERNAL_NUMBER', 'Internal Number')}: ${order?.customer?.internal_number}`)}
         <br />
-        {!!order?.customer.zipcode && (
+        {!!order?.customer?.zipcode && (
         `${t('ZIPCODE', 'Zipcode')}: ${order?.customer.zipcode}`
         )}
       </PrintTextContainer>

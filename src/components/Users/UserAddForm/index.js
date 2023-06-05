@@ -39,7 +39,9 @@ const UserAddFormUI = (props) => {
     isCheckout,
     handleChangeUserType,
     handlechangeImage,
-    handleChangeSwtich
+    handleChangeSwtich,
+    defaultPhoneNumber,
+    isFromCustomOrder
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
@@ -59,7 +61,7 @@ const UserAddFormUI = (props) => {
     cleanFormState && cleanFormState({ result: { error: false } })
   }
 
-  const showInputPhoneNumber = validationFields?.fields?.checkout?.cellphone?.enabled ?? false
+  const showInputPhoneNumber = isFromCustomOrder ?? validationFields?.fields?.checkout?.cellphone?.enabled ?? false
 
   const onSubmit = () => {
     const isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true
@@ -198,6 +200,13 @@ const UserAddFormUI = (props) => {
     })
   }, [formMethods])
 
+  useEffect(() => {
+    if (defaultPhoneNumber) {
+      setUserPhoneNumber(defaultPhoneNumber)
+      handleChangePhoneNumber(defaultPhoneNumber, true)
+    }
+  }, [defaultPhoneNumber])
+
   return (
     <>
       <FormContainer>
@@ -311,7 +320,7 @@ const UserAddFormUI = (props) => {
               <WrapperUserTypeSelector>
                 <UserTypeSelector
                   isPrimary
-                  defaultUserType={formState?.changes?.level}
+                  defaultUserType={formState?.changes?.level || 3}
                   handleChangeUserType={handleChangeUserType}
                 />
               </WrapperUserTypeSelector>

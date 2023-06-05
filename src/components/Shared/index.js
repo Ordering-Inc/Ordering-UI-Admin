@@ -7,6 +7,7 @@ import { DragScroll } from './DragScroll'
 import { Image } from './Image'
 import { ImageCrop } from './ImageCrop'
 import { InputPhoneNumber } from './InputPhoneNumber'
+import { LinkableText } from './LinkableText'
 import { Modal } from './Modal'
 import { MoreSidebarLayout } from './MoreSidebarLayout'
 import { NotFoundSource } from './NotFoundSource'
@@ -17,6 +18,7 @@ import { ProtectedRoute } from './ProtectedRoute'
 import { Schedule } from './Schedule'
 import { SearchBar } from './SearchBar'
 import { RangeCalendar } from './RangeCalendar'
+import { Tabs, Tab } from './Tabs'
 
 import { SelectBusinessCategories } from './SelectBusinessCategories'
 import { SelectBusinessProducts } from './SelectBusinessProducts'
@@ -42,6 +44,7 @@ export {
   Image,
   ImageCrop,
   InputPhoneNumber,
+  LinkableText,
   Modal,
   MoreSidebarLayout,
   NotFoundSource,
@@ -52,6 +55,8 @@ export {
   Schedule,
   SearchBar,
   RangeCalendar,
+  Tabs,
+  Tab,
 
   SelectBusinessCategories,
   SelectBusinessProducts,
