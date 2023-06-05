@@ -154,6 +154,9 @@ const OrderingWebsiteUI = (props) => {
         setCropState({ name: name, data: reader.result, open: true })
       }
       reader.onerror = error => console.log(error)
+      logoRef.current.value = null
+      backgroundRef.current.value = null
+      mobileBackgroundRef.current.value = null
     }
   }
 
