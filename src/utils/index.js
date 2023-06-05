@@ -216,6 +216,11 @@ export const findExitingCode = (countryCode) => {
   return code?.countryCode
 }
 
+export const findExitingCountryPhoneCode = (countryCode) => {
+  const code = CODES.find(code => code.countryCode === (countryCode || '').toUpperCase())
+  return code?.phoneCode
+}
+
 /**
  * Function to check if a number is decimal or not
  * @param {*} value number to check if decimal or not
