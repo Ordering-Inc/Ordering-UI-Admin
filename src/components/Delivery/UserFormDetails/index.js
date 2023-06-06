@@ -3,10 +3,11 @@ import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useCustomer } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
-import { Input, Button, Switch } from '../../../styles'
+import { Input, Button, Switch, DefaultSelect } from '../../../styles'
 import { Alert, InputPhoneNumber } from '../../Shared'
 import { sortInputFields } from '../../../utils'
 import { Eye, EyeSlash } from 'react-bootstrap-icons'
+import { timezones } from '../../../config/constants'
 
 import {
   FormInput,
@@ -14,7 +15,8 @@ import {
   SkeletonForm,
   DriverZoneRestrictionWrapper,
   WrapperPassword,
-  TogglePassword
+  TogglePassword,
+  InputWrapper
 } from './styles'
 
 export const UserFormDetailsUI = (props) => {
@@ -43,6 +45,8 @@ export const UserFormDetailsUI = (props) => {
 
   const [user, setUser] = useState(userData)
   const [passwordSee, setPasswordSee] = useState(false)
+  const [timezonesOptions, setTimezonesOptions] = useState([])
+  const [timezoneSearchValue, setTimezoneSearchValue] = useState('')
 
   useEffect(() => {
     setUser(userData)
@@ -214,6 +218,18 @@ export const UserFormDetailsUI = (props) => {
     }
   }, [user?.id])
 
+  useEffect(() => {
+    const _timezonesOptions = timezones
+      .filter(timezone => timezone.toLocaleLowerCase().includes(timezoneSearchValue.toLocaleLowerCase()))
+      .map(timezone => {
+        return {
+          value: timezone,
+          content: timezone
+        }
+      })
+    setTimezonesOptions(_timezonesOptions)
+  }, [timezoneSearchValue])
+
   return (
     <>
       <FormInput onSubmit={formMethods.handleSubmit(onSubmit)}>
@@ -256,6 +272,22 @@ export const UserFormDetailsUI = (props) => {
 
                 </React.Fragment>
               )
+            )}
+            {isDriversPage && (
+              <InputWrapper isTimezone>
+                <DefaultSelect
+                  placeholder={t('SELECT_TIMEZONE', 'Select a timezone')}
+                  defaultValue={formState?.changes?.timezone ?? user?.timezone ?? ''}
+                  options={timezonesOptions}
+                  onChange={val => handleChangeSwtich('timezone', val)}
+                  optionInnerMaxHeight='300px'
+                  isShowSearchBar
+                  searchBarIsCustomLayout
+                  searchBarIsNotLazyLoad
+                  searchValue={timezoneSearchValue}
+                  handleChangeSearch={setTimezoneSearchValue}
+                />
+              </InputWrapper>
             )}
             {!!showInputPhoneNumber && (
               <InputPhoneNumber
