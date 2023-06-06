@@ -169,6 +169,9 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       reader.onerror = function (error) {
         return console.log(error);
       };
+      logoRef.current.value = null;
+      backgroundRef.current.value = null;
+      mobileBackgroundRef.current.value = null;
     }
   };
   var updateObject = function updateObject(object, newValue, path) {
