@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useLanguage, BannerDetails as BannerDetailsController } from 'ordering-components-admin'
 import { Input, Switch } from '../../../styles'
 import { BannerImages } from './BannerImages'
@@ -7,6 +7,7 @@ import { Alert, Confirm } from '../../Shared'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { ThreeDots } from 'react-bootstrap-icons'
+import { Businesses } from './Businesses'
 
 import {
   Container,
@@ -29,7 +30,12 @@ const BannerDetailsUI = (props) => {
     handleAddBanner,
     handleChangeItem,
     handleDeleteBanner,
-    setBannerMoveDistance
+    setBannerMoveDistance,
+    businessList,
+    selectedBusinessIds,
+    handleSelectBusiness,
+    handleSelectAllBusiness,
+    defaultPosition
   } = props
 
   const theme = useTheme()
@@ -38,9 +44,20 @@ const BannerDetailsUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [], handleOnAccept: null })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
-  const tabOptions = [
-    { key: 'images', content: t('IMAGES', 'Images') }
-  ]
+  const tabOptions = useMemo(() => {
+    if (bannerState?.banner?.position === 'web_business_page' || bannerState?.banner?.position === 'app_business_page') {
+      return (
+        [
+          { key: 'images', content: t('IMAGES', 'Images') },
+          { key: 'businesses', content: t('BUSINESSES', 'Businesses') }
+        ]
+      )
+    } else {
+      return (
+        [{ key: 'images', content: t('IMAGES', 'Images') }]
+      )
+    }
+  }, [bannerState])
 
   const onClickDeleteBanner = () => {
     setConfirm({
@@ -113,6 +130,12 @@ const BannerDetailsUI = (props) => {
           changesState={changesState}
           handleChangeItem={handleChangeItem}
           handleAddBanner={handleAddBanner}
+          actionState={actionState}
+          businessList={businessList}
+          selectedBusinessIds={selectedBusinessIds}
+          handleSelectBusiness={handleSelectBusiness}
+          handleSelectAllBusiness={handleSelectAllBusiness}
+          defaultPosition={defaultPosition}
         />
       ) : (
         <>
@@ -121,7 +144,10 @@ const BannerDetailsUI = (props) => {
               <Tab
                 key={option.key}
                 active={selectedTab === option.key}
-                onClick={() => setSelectedTab(option.key)}
+                onClick={() => {
+                  setSelectedTab(option.key)
+                  setBannerMoveDistance(0)
+                }}
               >
                 {option.content}
               </Tab>
@@ -132,6 +158,16 @@ const BannerDetailsUI = (props) => {
               {...props}
               bannerId={bannerState?.banner?.id}
               setBannerMoveDistance={setBannerMoveDistance}
+            />
+          )}
+          {selectedTab === 'businesses' && (
+            <Businesses
+              actionState={actionState}
+              businessList={businessList}
+              selectedBusinessIds={selectedBusinessIds}
+              handleSelectBusiness={handleSelectBusiness}
+              handleSelectAllBusiness={handleSelectAllBusiness}
+              handleUpdateClick={handleUpdateClick}
             />
           )}
         </>
