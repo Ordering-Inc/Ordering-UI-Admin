@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.AddBanner = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
+var _Businesses = require("./Businesses");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -19,7 +20,13 @@ var AddBanner = function AddBanner(props) {
   var _changesState$changes;
   var changesState = props.changesState,
     handleChangeItem = props.handleChangeItem,
-    handleAddBanner = props.handleAddBanner;
+    handleAddBanner = props.handleAddBanner,
+    actionState = props.actionState,
+    businessList = props.businessList,
+    selectedBusinessIds = props.selectedBusinessIds,
+    handleSelectBusiness = props.handleSelectBusiness,
+    handleSelectAllBusiness = props.handleSelectAllBusiness,
+    defaultPosition = props.defaultPosition;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -30,6 +37,13 @@ var AddBanner = function AddBanner(props) {
         name: e.target.value
       });
     }
+  })), (defaultPosition === 'web_business_page' || defaultPosition === 'app_business_page') && /*#__PURE__*/_react.default.createElement(_styles2.BusinessesWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('BUSINESSES', 'Businesses')), /*#__PURE__*/_react.default.createElement(_Businesses.Businesses, {
+    isAddMode: true,
+    actionState: actionState,
+    businessList: businessList,
+    selectedBusinessIds: selectedBusinessIds,
+    handleSelectBusiness: handleSelectBusiness,
+    handleSelectAllBusiness: handleSelectAllBusiness
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
