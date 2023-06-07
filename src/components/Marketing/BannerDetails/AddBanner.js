@@ -1,16 +1,24 @@
 import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
+import { Businesses } from './Businesses'
 import { Button, Input } from '../../../styles'
 import {
   AddBannerContainer,
-  FormController
+  FormController,
+  BusinessesWrapper
 } from './styles'
 
 export const AddBanner = (props) => {
   const {
     changesState,
     handleChangeItem,
-    handleAddBanner
+    handleAddBanner,
+    actionState,
+    businessList,
+    selectedBusinessIds,
+    handleSelectBusiness,
+    handleSelectAllBusiness,
+    defaultPosition
   } = props
 
   const [, t] = useLanguage()
@@ -24,6 +32,19 @@ export const AddBanner = (props) => {
           onChange={e => handleChangeItem({ name: e.target.value })}
         />
       </FormController>
+      {(defaultPosition === 'web_business_page' || defaultPosition === 'app_business_page') && (
+        <BusinessesWrapper>
+          <p>{t('BUSINESSES', 'Businesses')}</p>
+          <Businesses
+            isAddMode
+            actionState={actionState}
+            businessList={businessList}
+            selectedBusinessIds={selectedBusinessIds}
+            handleSelectBusiness={handleSelectBusiness}
+            handleSelectAllBusiness={handleSelectAllBusiness}
+          />
+        </BusinessesWrapper>
+      )}
       <Button
         color='primary'
         borderRadius='8px'
