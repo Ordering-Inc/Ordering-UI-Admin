@@ -22,7 +22,8 @@ var GeneralForm = function GeneralForm(props) {
   var _changesState$name;
   var driversManagers = props.driversManagers,
     changesState = props.changesState,
-    handleChangesState = props.handleChangesState;
+    handleChangesState = props.handleChangesState,
+    handleChangeType = props.handleChangeType;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -87,9 +88,7 @@ var GeneralForm = function GeneralForm(props) {
     options: typeOptions,
     defaultValue: changesState === null || changesState === void 0 ? void 0 : changesState.type,
     onChange: function onChange(val) {
-      return handleChangesState({
-        type: val
-      });
+      return handleChangeType(val);
     }
   })), (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 ? /*#__PURE__*/_react.default.createElement(_DriversGroupDrivers.DriversGroupDrivers, props) : /*#__PURE__*/_react.default.createElement(_DriversGroupCompanies.DriversGroupCompanies, props), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
     isSecondIcon: true,
