@@ -63,8 +63,8 @@ export const BusinessQRCodeOption = (props) => {
       : `https://${ordering.project}.tryordering.com/store/${business?.slug}`
     const tsNumber = item?.key !== 'pick_up'
       ? (item?.key === 'eat_in'
-        ? `&table_numer=${numberRef?.current?.value}`
-        : `&spot_numer=${numberRef?.current?.value}`)
+        ? `&table_number=${numberRef?.current?.value}`
+        : `&spot_number=${numberRef?.current?.value}`)
       : ''
     const compltedUrl = `${storeUrl}?order_type=${item.value}${tsNumber}`
     setCode(compltedUrl)
