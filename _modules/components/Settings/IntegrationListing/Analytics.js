@@ -33,7 +33,9 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsUI = function AnalyticsUI(props) {
   var _categoryList$categor;
-  var categoryList = props.categoryList;
+  var categoryList = props.categoryList,
+    showOption = props.showOption,
+    setShowOption = props.setShowOption;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -74,6 +76,7 @@ var AnalyticsUI = function AnalyticsUI(props) {
   };
   var handleOpenSetting = function handleOpenSetting(category, initialRender) {
     setSelectedCategory(category);
+    setShowOption('analytics');
     setShowDetail(true);
     if (!initialRender) {
       history.replace("".concat(location.pathname, "?category=").concat(category === null || category === void 0 ? void 0 : category.id));
@@ -113,7 +116,7 @@ var AnalyticsUI = function AnalyticsUI(props) {
       height: 13,
       count: 2
     }))));
-  })), showDetail && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
+  })), showDetail && showOption === 'analytics' && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
     open: showDetail,
     category: selectedCategory,
     onClose: handleBackRedirect,

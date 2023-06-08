@@ -256,11 +256,19 @@ var IntegrationListing = function IntegrationListing(props) {
     style: {
       order: selectedTab === 5 ? 1 : selectedTab
     }
-  }, /*#__PURE__*/_react.default.createElement(_PaymentGateway.PaymentGateway, null)), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement(_PaymentGateway.PaymentGateway, {
+    showOption: showOption,
+    setShowOption: setShowOption,
+    handleCloseSettings: handleCloseSettings,
+    handleOpenBasicSetting: handleOpenSetting
+  })), /*#__PURE__*/_react.default.createElement("div", {
     style: {
       order: selectedTab === 6 ? 1 : selectedTab
     }
-  }, /*#__PURE__*/_react.default.createElement(_Analytics.Analytics, null)))), showOption === 'plugins' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+  }, /*#__PURE__*/_react.default.createElement(_Analytics.Analytics, {
+    showOption: showOption,
+    setShowOption: setShowOption
+  })))), showOption === 'plugins' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "plugins-integrations",
     defaultSideBarWidth: 600,
     open: showOption === 'plugins',

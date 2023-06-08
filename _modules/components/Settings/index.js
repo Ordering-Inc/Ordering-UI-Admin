@@ -15,6 +15,12 @@ Object.defineProperty(exports, "ApiKeysList", {
     return _ApiKeysList.ApiKeysList;
   }
 });
+Object.defineProperty(exports, "BacCredomatic", {
+  enumerable: true,
+  get: function get() {
+    return _BacCredomatic.BacCredomatic;
+  }
+});
 Object.defineProperty(exports, "CardFieldsSetting", {
   enumerable: true,
   get: function get() {
@@ -218,6 +224,7 @@ var _NotificationSetting = require("./NotificationSetting");
 var _SettingsSelectUI = require("./SettingsSelectUI");
 var _SettingsCountryFilter = require("./SettingsCountryFilter");
 var _ApiKeysList = require("./ApiKeysList");
+var _BacCredomatic = require("./BacCredomatic");
 var _WebhookList = require("./WebhookList");
 var _PluginList = require("./PluginList");
 var _WebhookDelaySelector = require("./WebhookDelaySelector");
