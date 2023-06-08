@@ -14,7 +14,8 @@ export const GeneralForm = (props) => {
   const {
     driversManagers,
     changesState,
-    handleChangesState
+    handleChangesState,
+    handleChangeType
   } = props
 
   const [, t] = useLanguage()
@@ -79,7 +80,7 @@ export const GeneralForm = (props) => {
           placeholder={t('SELECT_TYPE', 'Select type')}
           options={typeOptions}
           defaultValue={changesState?.type}
-          onChange={val => handleChangesState({ type: val })}
+          onChange={val => handleChangeType(val)}
         />
       </InputWrapper>
 
