@@ -25,7 +25,7 @@ export const Container = styled.div`
       border-left: 1px solid #E9ECEF;
     `}
   }
-  > p {
+  > h4 {
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
@@ -110,4 +110,12 @@ export const FormControl = styled.div`
 
 export const QRCodeLayout = styled.div`
   margin-bottom: 20px;
+`
+
+export const TableNumberHintText = styled.span`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 15px;
+  color: ${props => props.theme.colors.lightGray};
 `
