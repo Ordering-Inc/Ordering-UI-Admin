@@ -69,6 +69,14 @@ export const SelectCustomer = (props) => {
     handleParentSidebarMove(0)
   }
 
+  const onPhoneNumberPaste = (event) => {
+    event.preventDefault()
+    const pastedValue = event.clipboardData.getData('text/plain')
+    const trimmedValue = pastedValue.replace(/\D/g, '')
+    document.execCommand('insertText', false, trimmedValue)
+    onChangeNumber(trimmedValue)
+  }
+
   return (
     <>
       <SectionContainer>
@@ -92,6 +100,7 @@ export const SelectCustomer = (props) => {
                     setSearchInputFocus(false)
                   }, 300)
                 }}
+                onPaste={(event) => onPhoneNumberPaste(event)}
               />
               {customersPhones.loading && (
                 <span className='loading'>
