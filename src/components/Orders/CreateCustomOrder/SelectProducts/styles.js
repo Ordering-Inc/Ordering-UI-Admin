@@ -143,7 +143,20 @@ export const ProductQuantityActionsContainer = styled.div`
 
   ${props => props.theme?.rtl ? css`
     margin-right: 8px;
+    margin-left: 16px;
   ` : css`
     margin-left: 8px;
+    margin-right: 16px;
   `}
+`
+export const ProductEditDeleteActions = styled.div`
+  display: flex;
+  align-items: center;
+
+  button {
+    > svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 `

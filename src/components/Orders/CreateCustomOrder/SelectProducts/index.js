@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
+import { useLanguage, useUtils, useOrder } from 'ordering-components-admin'
 import { Input, IconButton } from '../../../../styles'
-import { DashCircle, PlusCircle } from 'react-bootstrap-icons'
+import { DashCircle, PlusCircle, Pencil, Trash } from 'react-bootstrap-icons'
 import CgSpinnerTwoAlt from '@meronex/icons/cg/CgSpinnerTwoAlt'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { Modal } from '../../../Shared'
+import { Modal, Confirm } from '../../../Shared'
 import { ProductForm } from '../ProductForm'
 
 import {
@@ -15,7 +15,8 @@ import {
   WrapperImage,
   CartProductsWrapper,
   ProductQuantityActionsContainer,
-  CartProductsConatiner
+  CartProductsConatiner,
+  ProductEditDeleteActions
 } from './styles'
 
 export const SelectProducts = (props) => {
@@ -29,9 +30,12 @@ export const SelectProducts = (props) => {
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
+  const [, { removeProduct }] = useOrder()
   const [searchInputFocus, setSearchInputFocus] = useState(false)
   const [openProduct, setOpenProduct] = useState(false)
   const [curProduct, setCurProduct] = useState(null)
+  const [isCartProduct, setIsCartProduct] = useState(false)
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   let timeout = null
   const onInputChange = (inputValue) => {
@@ -42,6 +46,13 @@ export const SelectProducts = (props) => {
   }
 
   const handleSelectProduct = (product) => {
+    setIsCartProduct(false)
+    setCurProduct(product)
+    setOpenProduct(true)
+  }
+
+  const handleEditProduct = (product) => {
+    setIsCartProduct(true)
     setCurProduct(product)
     setOpenProduct(true)
   }
@@ -49,6 +60,17 @@ export const SelectProducts = (props) => {
   const closeModalProductForm = () => {
     setCurProduct(null)
     setOpenProduct(false)
+  }
+
+  const handleDeleteClick = (product) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_PRODUCT', 'Are you sure that you want to delete the product?'),
+      handleOnAccept: () => {
+        removeProduct(product, cart)
+        setConfirm({ ...confirm, open: false })
+      }
+    })
   }
 
   return (
@@ -137,6 +159,20 @@ export const SelectProducts = (props) => {
                 <PlusCircle />
               </IconButton>
             </ProductQuantityActionsContainer>
+            <ProductEditDeleteActions>
+              <IconButton
+                color='black'
+                onClick={() => handleEditProduct(product)}
+              >
+                <Pencil />
+              </IconButton>
+              <IconButton
+                color='black'
+                onClick={() => handleDeleteClick(product)}
+              >
+                <Trash />
+              </IconButton>
+            </ProductEditDeleteActions>
           </CartProductsWrapper>
         ))}
       </CartProductsConatiner>
@@ -151,8 +187,10 @@ export const SelectProducts = (props) => {
         disableOverflowX
       >
         <ProductForm
-          businessSlug={business?.slug}
+          isCartProduct={isCartProduct}
+          productCart={curProduct}
           product={curProduct}
+          businessSlug={business?.slug}
           businessId={business?.id}
           categoryId={curProduct?.category_id}
           productId={curProduct?.id}
@@ -160,6 +198,17 @@ export const SelectProducts = (props) => {
           productAddedToCartLength={cart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === curProduct?.id ? Cproduct?.quantity : 0) }, 0) || 0}
         />
       </Modal>
+
+      <Confirm
+        title={t('PRODUCT', 'Product')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }
