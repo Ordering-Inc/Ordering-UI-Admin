@@ -80,36 +80,36 @@ const CustomOrderDetailsUI = (props) => {
           customerAddress={customerAddress}
         />
         {customerAddress?.location && (
-          <SelectBusinesses
-            businessList={businessList}
-            selectedBusiness={selectedBusiness}
-            setSelectedBusiness={setSelectedBusiness}
-          />
-        )}
-        {customerAddress?.location && (
-          <Map
-            customer={selectedUser}
-            customerLocation={customerAddress?.location}
-            business={selectedBusiness}
-          />
-        )}
-        {selectedBusiness && (
-          <SelectProducts
-            productList={productList}
-            getProducts={getProducts}
-            handeUpdateProductCart={handeUpdateProductCart}
-            cart={cart}
-            business={selectedBusiness}
-          />
-        )}
-        {cart && (
-          <Checkout
-            cartUuid={cart.uuid}
-            onPlaceOrderClick={(data, paymethod, cart) => {
-              cart?.uuid && handleOpenCustomOrderDetail(cart.uuid)
-              onClose()
-            }}
-          />
+          <>
+            <SelectBusinesses
+              businessList={businessList}
+              selectedBusiness={selectedBusiness}
+              setSelectedBusiness={setSelectedBusiness}
+            />
+            <Map
+              customer={selectedUser}
+              customerLocation={customerAddress?.location}
+              business={selectedBusiness}
+            />
+            {selectedBusiness && (
+              <SelectProducts
+                productList={productList}
+                getProducts={getProducts}
+                handeUpdateProductCart={handeUpdateProductCart}
+                cart={cart}
+                business={selectedBusiness}
+              />
+            )}
+            {cart && (
+              <Checkout
+                cartUuid={cart.uuid}
+                onPlaceOrderClick={(data, paymethod, cart) => {
+                  cart?.uuid && handleOpenCustomOrderDetail(cart.uuid)
+                  onClose()
+                }}
+              />
+            )}
+          </>
         )}
         <Alert
           title={t('ERROR', 'Error')}

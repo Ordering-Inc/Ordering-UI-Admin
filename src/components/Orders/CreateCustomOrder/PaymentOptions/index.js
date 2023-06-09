@@ -205,12 +205,6 @@ const PaymentOptionsUI = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       <PaymentMethodsContainer>
         <PaymentMethodsList className='payments-list'>
           {!(paymethodsList.loading || isLoading) &&
@@ -240,7 +234,7 @@ const PaymentOptionsUI = (props) => {
           {(paymethodsList.loading || isLoading) && (
             [...Array(5).keys()].map(i => (
               <PayCard key={i} isSkeleton>
-                <Skeleton key={i} width={100} height={60} style={{ marginLeft: '10px' }} />
+                <Skeleton key={i} width={70} height={60} style={{ marginLeft: '10px' }} />
               </PayCard>
             ))
           )}
@@ -431,12 +425,6 @@ const PaymentOptionsUI = (props) => {
           closeOnBackdrop={false}
         />
       </PaymentMethodsContainer>
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }
