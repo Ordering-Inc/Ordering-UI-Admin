@@ -109,6 +109,14 @@ const BusinessProductsListingUI = (props) => {
     {
       value: 'cost_price',
       content: t('PRODUCT_COST', 'Product cost')
+    },
+    {
+      value: 'inventoried',
+      content: t('INVENTORY', 'Inventory')
+    },
+    {
+      value: 'quantity',
+      content: t('QUANTITY', 'Quantity')
     }
   ]
   const handleChangeAllowSpreadColumns = (type) => {
