@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useLanguage, useOrder, ustomOrderDetails as CustomOrderDetailsController } from 'ordering-components-admin'
+import { useLanguage, useOrder, CustomOrderDetails as CustomOrderDetailsController } from 'ordering-components-admin'
 import { SelectCustomer } from '../SelectCustomer'
 import { SelectBusinesses } from '../SelectBusinesses'
 import { Map } from '../Map'
