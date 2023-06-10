@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useLanguage, useUtils, useOrder } from 'ordering-components-admin'
 import { Input, IconButton } from '../../../../styles'
 import { DashCircle, PlusCircle, Pencil, Trash } from 'react-bootstrap-icons'
@@ -31,9 +31,12 @@ export const SelectProducts = (props) => {
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const [, { removeProduct }] = useOrder()
+
+  const searchInputRef = useRef(null)
   const [searchInputFocus, setSearchInputFocus] = useState(false)
   const [openProduct, setOpenProduct] = useState(false)
   const [curProduct, setCurProduct] = useState(null)
+  const [selectedProductCart, setSelectedProductCart] = useState(null)
   const [isCartProduct, setIsCartProduct] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
@@ -47,13 +50,15 @@ export const SelectProducts = (props) => {
 
   const handleSelectProduct = (product) => {
     setIsCartProduct(false)
+    setSelectedProductCart(null)
     setCurProduct(product)
     setOpenProduct(true)
   }
 
   const handleEditProduct = (product) => {
     setIsCartProduct(true)
-    setCurProduct(product)
+    setCurProduct(null)
+    setSelectedProductCart(product)
     setOpenProduct(true)
   }
 
@@ -73,11 +78,29 @@ export const SelectProducts = (props) => {
     })
   }
 
+  useEffect(() => {
+    if (business?.id) {
+      searchInputRef.current.value = ''
+    }
+  }, [business?.id])
+
+  useEffect(() => {
+    if (!searchInputFocus || !productList?.products?.length) return
+    const el = document.querySelector('.custom-order-content')
+    if (el) {
+      el.scrollTo({
+        top: 300,
+        behavior: 'smooth'
+      })
+    }
+  }, [searchInputFocus, productList?.products])
+
   return (
     <Container>
       <h3>{t('WAHT_WANT_TO_BUY', 'What do you want us to buy?')}</h3>
       <SearchProductsWrapper>
         <Input
+          ref={searchInputRef}
           placeholder={t('SEARCH_PRODUCTOS', 'Search products')}
           onChange={e => onInputChange(e.target.value)}
           onFocus={() => setSearchInputFocus(true)}
@@ -188,12 +211,12 @@ export const SelectProducts = (props) => {
       >
         <ProductForm
           isCartProduct={isCartProduct}
-          productCart={curProduct}
           product={curProduct}
+          productCart={selectedProductCart}
           businessSlug={business?.slug}
           businessId={business?.id}
-          categoryId={curProduct?.category_id}
-          productId={curProduct?.id}
+          categoryId={curProduct?.category_id || selectedProductCart?.category_id}
+          productId={curProduct?.id || selectedProductCart?.id}
           onSave={() => setOpenProduct(false)}
           productAddedToCartLength={cart?.products?.reduce((productsLength, Cproduct) => { return productsLength + (Cproduct?.id === curProduct?.id ? Cproduct?.quantity : 0) }, 0) || 0}
         />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useLanguage, useOrder, CustomOrderDetails as CustomOrderDetailsController } from 'ordering-components-admin'
+import { useLanguage, useOrder, ustomOrderDetails as CustomOrderDetailsController } from 'ordering-components-admin'
 import { SelectCustomer } from '../SelectCustomer'
 import { SelectBusinesses } from '../SelectBusinesses'
 import { Map } from '../Map'
@@ -68,7 +68,7 @@ const CustomOrderDetailsUI = (props) => {
 
   return (
     <>
-      <DetailsContainer>
+      <DetailsContainer className='custom-order-content'>
         <h2>{t('CREATE_CUSTOM_ORDER', 'Create custom order')}</h2>
         <SelectCustomer
           phone={phone}
@@ -100,7 +100,7 @@ const CustomOrderDetailsUI = (props) => {
                 business={selectedBusiness}
               />
             )}
-            {cart && (
+            {cart && cart?.products.length > 0 && (
               <Checkout
                 cartUuid={cart.uuid}
                 onPlaceOrderClick={(data, paymethod, cart) => {
