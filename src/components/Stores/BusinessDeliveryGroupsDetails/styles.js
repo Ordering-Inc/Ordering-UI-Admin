@@ -1,16 +1,12 @@
 import styled from 'styled-components'
 
 export const DriversGroupsListingContainer = styled.div`
-  flex: 1;
-  padding: 20px;
-  box-sizing: border-box;
-  transition: all 0.5s;
-  max-height: 100vh;
-  overflow: auto;
+  > div {
+    padding: 0;
+    margin-bottom: 30px;
+  }
 `
 
-export const SearchContainer = styled.div`
-  input {
-    width: 100%
-  }
+export const Description = styled.p`
+  font-size: 14px;
 `
