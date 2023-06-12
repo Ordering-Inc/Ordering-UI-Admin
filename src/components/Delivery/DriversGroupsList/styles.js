@@ -27,18 +27,19 @@ export const GroupsTable = styled.table`
 
   tbody {
     border-bottom: 1px solid ${props => props.theme.colors.borderColor};
-    cursor: pointer;
-
-    &:hover {
-      background-color: ${props => props.theme.colors.lightPrimary};
-    }
-    &.active {
-      background-color: ${props => props.theme.colors.lightPrimary};
-      td {
-        border-top: 1px solid ${props => props.theme.colors.primary};
-        border-bottom: 1px solid ${props => props.theme.colors.primary};
+    ${({ disabled }) => !disabled && css`
+      cursor: pointer;
+      &:hover {
+        background-color: ${props => props.theme.colors.lightPrimary};
       }
-    }
+      &.active {
+        background-color: ${props => props.theme.colors.lightPrimary};
+        td {
+          border-top: 1px solid ${props => props.theme.colors.primary};
+          border-bottom: 1px solid ${props => props.theme.colors.primary};
+        }
+      }
+    `}
   }
 `
 

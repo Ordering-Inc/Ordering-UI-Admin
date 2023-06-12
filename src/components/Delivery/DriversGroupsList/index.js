@@ -96,7 +96,7 @@ export const DriversGroupsList = (props) => {
     <>
       <DriversGroupsContainer>
         <TableWrapper>
-          <GroupsTable data-tour='tour_delivery_completed'>
+          <GroupsTable data-tour='tour_delivery_completed' disabled={isFromStore}>
             <thead>
               <tr>
                 <th>
@@ -105,11 +105,15 @@ export const DriversGroupsList = (props) => {
                       onClick={() => handleAllSelectGroup()}
                       isChecked={!driversGroupsState.loading && (selectedGroupList.length === driversGroupsState.groups.length)}
                     >
-                      {
-                        !driversGroupsState.loading && (selectedGroupList.length === driversGroupsState.groups.length)
-                          ? <MdCheckBox />
-                          : <MdCheckBoxOutlineBlank />
-                      }
+                      {!isFromStore && (
+                        <>
+                          {
+                            !driversGroupsState.loading && (selectedGroupList.length === driversGroupsState.groups.length)
+                              ? <MdCheckBox />
+                              : <MdCheckBoxOutlineBlank />
+                          }
+                        </>
+                      )}
                     </CheckBoxWrapper>
                     <span>{t('ID', 'ID')}</span>
                   </GroupIdWrapper>
@@ -129,11 +133,13 @@ export const DriversGroupsList = (props) => {
                     {t('TYPE', 'Type')}
                   </DriverGroupTypeContainer>
                 </th>
-                <th>
-                  <ActionsContainer>
-                    {t('ACTIONS', 'Actions')}
-                  </ActionsContainer>
-                </th>
+                {!isFromStore && (
+                  <th>
+                    <ActionsContainer>
+                      {t('ACTIONS', 'Actions')}
+                    </ActionsContainer>
+                  </th>
+                )}
               </tr>
             </thead>
             {driversGroupsState.loading ? (
@@ -142,7 +148,7 @@ export const DriversGroupsList = (props) => {
                   <tr>
                     <td>
                       <GroupIdWrapper>
-                        <Skeleton width={18} height={18} />
+                        {!isFromStore && <Skeleton width={18} height={18} />}
                         <Skeleton width={40} style={{ margin: '0px 5px' }} />
                       </GroupIdWrapper>
                     </td>
@@ -167,13 +173,15 @@ export const DriversGroupsList = (props) => {
                         <Skeleton width={70} />
                       </DriverGroupTypeContainer>
                     </td>
-                    <td>
-                      <ActionsContainer>
-                        <EnableWrapper>
-                          <Skeleton width={50} />
-                        </EnableWrapper>
-                      </ActionsContainer>
-                    </td>
+                    {!isFromStore && (
+                      <td>
+                        <ActionsContainer>
+                          <EnableWrapper>
+                            <Skeleton width={50} />
+                          </EnableWrapper>
+                        </ActionsContainer>
+                      </td>
+                    )}
                   </tr>
                 </tbody>
               ))
@@ -187,17 +195,19 @@ export const DriversGroupsList = (props) => {
                   <tr>
                     <td>
                       <GroupIdWrapper>
-                        <CheckBoxWrapper
-                          className='group-checkbox'
-                          onClick={() => handleSelectGroup(group.id)}
-                          isChecked={selectedGroupList.includes(group.id)}
-                        >
-                          {
-                            selectedGroupList.includes(group.id)
-                              ? <MdCheckBox />
-                              : <MdCheckBoxOutlineBlank />
-                          }
-                        </CheckBoxWrapper>
+                        {!isFromStore && (
+                          <CheckBoxWrapper
+                            className='group-checkbox'
+                            onClick={() => handleSelectGroup(group.id)}
+                            isChecked={selectedGroupList.includes(group.id)}
+                          >
+                            {
+                              selectedGroupList.includes(group.id)
+                                ? <MdCheckBox />
+                                : <MdCheckBoxOutlineBlank />
+                            }
+                          </CheckBoxWrapper>
+                        )}
                         <span>{group?.id}</span>
                       </GroupIdWrapper>
                     </td>
@@ -230,18 +240,20 @@ export const DriversGroupsList = (props) => {
                         {getTypeTag(group?.type)}
                       </DriverGroupTypeContainer>
                     </td>
-                    <td>
-                      <ActionsContainer>
-                        <EnableWrapper className='group-enabled'>
-                          <span>{t('ENABLE', 'Enable')}</span>
-                          <Switch
-                            disabled={actionDisabled}
-                            defaultChecked={group?.enabled}
-                            onChange={enabled => handleUpdateDriversGroup?.(group.id, { enabled: enabled })}
-                          />
-                        </EnableWrapper>
-                      </ActionsContainer>
-                    </td>
+                    {!isFromStore && (
+                      <td>
+                        <ActionsContainer>
+                          <EnableWrapper className='group-enabled'>
+                            <span>{t('ENABLE', 'Enable')}</span>
+                            <Switch
+                              disabled={actionDisabled}
+                              defaultChecked={group?.enabled}
+                              onChange={enabled => handleUpdateDriversGroup?.(group.id, { enabled: enabled })}
+                            />
+                          </EnableWrapper>
+                        </ActionsContainer>
+                      </td>
+                    )}
                   </tr>
                 </tbody>
               ))
