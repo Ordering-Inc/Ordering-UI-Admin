@@ -106,10 +106,6 @@ const SiteThemeUI = (props) => {
     setPageOptions(_pageOptions)
   }, [siteThemesState])
 
-  console.log('themeStructure', themeStructure)
-  console.log('selectedPage', selectedPage)
-  // console.log('themeStructure[selectedPage])
-
   return (
     <Container>
       {siteThemesState.loading ? (
