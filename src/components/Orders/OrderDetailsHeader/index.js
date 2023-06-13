@@ -182,6 +182,13 @@ export const OrderDetailsHeader = (props) => {
           </ButtonLink>
         </ButtonGroup>
       </div>
+      {order?.external_id && (
+        <div>
+          <h2>
+            {t('EXTERNAL_ID', 'External ID :')} {order?.external_id}
+          </h2>
+        </div>
+      )}
       <p>
         {order?.payment_events?.length > 0 ? (
           order?.payment_events?.filter(item => item.event === 'payment').map((event, i) => (

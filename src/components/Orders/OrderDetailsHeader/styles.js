@@ -11,6 +11,12 @@ export const OrderDetailsHeaderContainer = styled.div`
       margin: 0px;
       font-weight: 700;
     }
+    h2 {
+      width: 100%;
+      font-size: 18px;
+      margin: 0px;
+      font-weight: 700;
+    }
     > div {
       display: flex;
       width: 100%;
