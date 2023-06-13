@@ -106,6 +106,10 @@ const SiteThemeUI = (props) => {
     setPageOptions(_pageOptions)
   }, [siteThemesState])
 
+  console.log('themeStructure', themeStructure)
+  console.log('selectedPage', selectedPage)
+  // console.log('themeStructure[selectedPage])
+
   return (
     <Container>
       {siteThemesState.loading ? (
@@ -144,7 +148,8 @@ const SiteThemeUI = (props) => {
                       </PageHiddenCheckWrapper>
                     )}
                     <PageBlockTitle>{t('PAGE_BLOCKS', 'Page blocks')}</PageBlockTitle>
-                    {Object.keys(themeStructure[selectedPage]?.components).map(block => {
+                    {!!themeStructure[selectedPage]?.components && (
+                    Object.keys(themeStructure[selectedPage]?.components)?.map(block => {
                       const components = themeStructure[selectedPage].components
                       return (
                         <BlockContainer key={block}>
@@ -203,7 +208,8 @@ const SiteThemeUI = (props) => {
                           )}
                         </BlockContainer>
                       )
-                    })}
+                    })
+                  )}
                   </>
                 )}
               </ThemeStructureContainer>
