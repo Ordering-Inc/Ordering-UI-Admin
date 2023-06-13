@@ -68,7 +68,7 @@ const CustomOrderDetailsUI = (props) => {
 
   return (
     <>
-      <DetailsContainer>
+      <DetailsContainer className='custom-order-content'>
         <h2>{t('CREATE_CUSTOM_ORDER', 'Create custom order')}</h2>
         <SelectCustomer
           phone={phone}
@@ -80,36 +80,36 @@ const CustomOrderDetailsUI = (props) => {
           customerAddress={customerAddress}
         />
         {customerAddress?.location && (
-          <SelectBusinesses
-            businessList={businessList}
-            selectedBusiness={selectedBusiness}
-            setSelectedBusiness={setSelectedBusiness}
-          />
-        )}
-        {customerAddress?.location && (
-          <Map
-            customer={selectedUser}
-            customerLocation={customerAddress?.location}
-            business={selectedBusiness}
-          />
-        )}
-        {selectedBusiness && (
-          <SelectProducts
-            productList={productList}
-            getProducts={getProducts}
-            handeUpdateProductCart={handeUpdateProductCart}
-            cart={cart}
-            business={selectedBusiness}
-          />
-        )}
-        {cart && (
-          <Checkout
-            cartUuid={cart.uuid}
-            onPlaceOrderClick={(data, paymethod, cart) => {
-              cart?.uuid && handleOpenCustomOrderDetail(cart.uuid)
-              onClose()
-            }}
-          />
+          <>
+            <SelectBusinesses
+              businessList={businessList}
+              selectedBusiness={selectedBusiness}
+              setSelectedBusiness={setSelectedBusiness}
+            />
+            <Map
+              customer={selectedUser}
+              customerLocation={customerAddress?.location}
+              business={selectedBusiness}
+            />
+            {selectedBusiness && (
+              <SelectProducts
+                productList={productList}
+                getProducts={getProducts}
+                handeUpdateProductCart={handeUpdateProductCart}
+                cart={cart}
+                business={selectedBusiness}
+              />
+            )}
+            {cart && cart?.products.length > 0 && (
+              <Checkout
+                cartUuid={cart.uuid}
+                onPlaceOrderClick={(data, paymethod, cart) => {
+                  cart?.uuid && handleOpenCustomOrderDetail(cart.uuid)
+                  onClose()
+                }}
+              />
+            )}
+          </>
         )}
         <Alert
           title={t('ERROR', 'Error')}

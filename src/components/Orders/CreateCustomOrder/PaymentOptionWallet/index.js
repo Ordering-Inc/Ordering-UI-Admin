@@ -97,7 +97,7 @@ const PaymentOptionWalletUI = (props) => {
         walletsState.result?.length > 0 &&
         (
           <>
-            {walletsState.result?.map((wallet, idx) => wallet.valid && wallet.balance >= 0 && walletName[wallet.type]?.isActive && (
+            {walletsState.result?.map((wallet, idx) => wallet.valid && wallet.balance > 0 && walletName[wallet.type]?.isActive && (
               <Container
                 key={wallet.id}
                 isBottomBorder={idx === walletsState.result?.length - 1}

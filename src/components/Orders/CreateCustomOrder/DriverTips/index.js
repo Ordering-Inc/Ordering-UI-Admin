@@ -80,6 +80,7 @@ const DriverTipsUI = (props) => {
                 onChange={handleChangeDriverTip}
               />
               <Button
+                borderRadius='8px'
                 color='primary'
                 disabled={parseFloat(value || 0) < 0 || parseFloat(value || 0) === driverTip || value === ''}
                 onClick={() => {
