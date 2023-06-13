@@ -92,7 +92,9 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
       });
     }
   }, [customersPhones === null || customersPhones === void 0 ? void 0 : customersPhones.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('CREATE_CUSTOM_ORDER', 'Create custom order')), /*#__PURE__*/_react.default.createElement(_SelectCustomer.SelectCustomer, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsContainer, {
+    className: "custom-order-content"
+  }, /*#__PURE__*/_react.default.createElement("h2", null, t('CREATE_CUSTOM_ORDER', 'Create custom order')), /*#__PURE__*/_react.default.createElement(_SelectCustomer.SelectCustomer, {
     phone: phone,
     customersPhones: customersPhones,
     selectedUser: selectedUser,
@@ -100,11 +102,11 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     onChangeNumber: onChangeNumber,
     handleParentSidebarMove: handleParentSidebarMove,
     customerAddress: customerAddress
-  }), (customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location) && /*#__PURE__*/_react.default.createElement(_SelectBusinesses.SelectBusinesses, {
+  }), (customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_SelectBusinesses.SelectBusinesses, {
     businessList: businessList,
     selectedBusiness: selectedBusiness,
     setSelectedBusiness: setSelectedBusiness
-  }), (customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location) && /*#__PURE__*/_react.default.createElement(_Map.Map, {
+  }), /*#__PURE__*/_react.default.createElement(_Map.Map, {
     customer: selectedUser,
     customerLocation: customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location,
     business: selectedBusiness
@@ -114,13 +116,13 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     handeUpdateProductCart: handeUpdateProductCart,
     cart: cart,
     business: selectedBusiness
-  }), cart && /*#__PURE__*/_react.default.createElement(_Checkout.Checkout, {
+  }), cart && (cart === null || cart === void 0 ? void 0 : cart.products.length) > 0 && /*#__PURE__*/_react.default.createElement(_Checkout.Checkout, {
     cartUuid: cart.uuid,
     onPlaceOrderClick: function onPlaceOrderClick(data, paymethod, cart) {
       (cart === null || cart === void 0 ? void 0 : cart.uuid) && handleOpenCustomOrderDetail(cart.uuid);
       onClose();
     }
-  }), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('ERROR', 'Error'),
     open: alertState.open,
     content: alertState.content,

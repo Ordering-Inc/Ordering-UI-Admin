@@ -198,6 +198,10 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     setSelectedSubSetting(setting);
     ((_orderingTheme$themes = orderingTheme.themes[0]) === null || _orderingTheme$themes === void 0 ? void 0 : _orderingTheme$themes.values) && setAdvancedValues(JSON.parse(JSON.stringify((_orderingTheme$themes2 = orderingTheme.themes[0]) === null || _orderingTheme$themes2 === void 0 ? void 0 : _orderingTheme$themes2.values)));
   };
+  var handleChangeTab = function handleChangeTab(key) {
+    setSelectedSetting(key);
+    setSelectedSubSetting('');
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -223,7 +227,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       key: setting.key,
       active: selectedSetting === setting.key,
       onClick: function onClick() {
-        return !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && setSelectedSetting(setting.key);
+        return !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && handleChangeTab(setting.key);
       }
     }, setting.name);
   })))), selectedSetting === 'basic' && /*#__PURE__*/_react.default.createElement(_styles2.FormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('WEBSITE_SETTINGS', 'Website settings')), /*#__PURE__*/_react.default.createElement(_styles2.CustomDomainInfo, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
@@ -477,7 +481,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
       return handleUpdateSiteTheme();
     },
     disabled: orderingTheme === null || orderingTheme === void 0 ? void 0 : orderingTheme.loading
-  }, t('SAVE', 'Save'))), selectedSetting === 'advanced' && /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, {
+  }, t('SAVE', 'Save'))), selectedSetting === 'advanced' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, {
     isMargin: true
   }, /*#__PURE__*/_react.default.createElement("h4", null, t('SETTINGS', 'Settings')), /*#__PURE__*/_react.default.createElement(_styles2.CustomDomainInfo, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary"
@@ -503,7 +507,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     advancedValues: advancedValues,
     setAdvancedValues: setAdvancedValues,
     handleUpdateSiteTheme: handleUpdateSiteTheme
-  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('ORDERING', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

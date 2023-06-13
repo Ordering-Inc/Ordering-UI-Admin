@@ -4,9 +4,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperImage = exports.SelectOption = exports.SearchProductsWrapper = exports.ProductQuantityActionsContainer = exports.OptionsToSelectContainer = exports.Container = exports.CartProductsWrapper = exports.CartProductsConatiner = void 0;
+exports.WrapperImage = exports.SelectOption = exports.SearchProductsWrapper = exports.ProductQuantityActionsContainer = exports.ProductEditDeleteActions = exports.OptionsToSelectContainer = exports.Container = exports.CartProductsWrapper = exports.CartProductsConatiner = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -28,7 +28,7 @@ var OptionsToSelectContainer = _styledComponents.default.div(_templateObject7 ||
   return props.theme.colors.backgroundPage;
 });
 exports.OptionsToSelectContainer = OptionsToSelectContainer;
-var SelectOption = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 100%;\n  padding: 9px 16px;\n  display: flex;\n  align-items: center;\n\n  &:hover {\n    background-color: ", ";\n  }\n  span {\n    font-size: 14px;\n    &.name {\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n    }\n  }\n"])), function (props) {
+var SelectOption = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 100%;\n  padding: 9px 16px;\n  display: flex;\n  align-items: center;\n\n  &:hover {\n    background-color: ", ";\n  }\n  span {\n    font-size: 14px;\n    &.name {\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n      max-width: 180px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
 });
 exports.SelectOption = SelectOption;
@@ -47,6 +47,8 @@ var CartProductsWrapper = _styledComponents.default.div(_templateObject13 || (_t
 exports.CartProductsWrapper = CartProductsWrapper;
 var ProductQuantityActionsContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  input::-webkit-outer-spin-button,\n  input::-webkit-inner-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n  }\n\n  input[type=number] {\n    -moz-appearance: textfield;\n    padding: 5px;\n    width: 45px;\n    text-align: center;\n    border: none;\n  }\n\n  ", "\n"])), function (props) {
   var _props$theme4;
-  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    margin-right: 8px;\n  "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    margin-left: 8px;\n  "])));
+  return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    margin-left: 16px;\n  "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    margin-right: 16px;\n  "])));
 });
 exports.ProductQuantityActionsContainer = ProductQuantityActionsContainer;
+var ProductEditDeleteActions = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  button {\n    > svg {\n      width: 16px;\n      height: 16px;\n    }\n  }\n"])));
+exports.ProductEditDeleteActions = ProductEditDeleteActions;

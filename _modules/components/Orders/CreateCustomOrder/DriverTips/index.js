@@ -83,6 +83,7 @@ var DriverTipsUI = function DriverTipsUI(props) {
     placeholder: placeholderCurrency,
     onChange: handleChangeDriverTip
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
     color: "primary",
     disabled: parseFloat(value || 0) < 0 || parseFloat(value || 0) === driverTip || value === '',
     onClick: function onClick() {

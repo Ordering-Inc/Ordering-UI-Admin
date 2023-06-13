@@ -122,7 +122,7 @@ var PaymentOptionWalletUI = function PaymentOptionWalletUI(props) {
     }
   }, !walletsState.loading && !walletsState.error && ((_walletsState$result4 = walletsState.result) === null || _walletsState$result4 === void 0 ? void 0 : _walletsState$result4.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_walletsState$result5 = walletsState.result) === null || _walletsState$result5 === void 0 ? void 0 : _walletsState$result5.map(function (wallet, idx) {
     var _walletName$wallet$ty, _walletsState$result6, _walletName$wallet$ty2;
-    return wallet.valid && wallet.balance >= 0 && ((_walletName$wallet$ty = walletName[wallet.type]) === null || _walletName$wallet$ty === void 0 ? void 0 : _walletName$wallet$ty.isActive) && /*#__PURE__*/_react.default.createElement(_styles2.Container, {
+    return wallet.valid && wallet.balance > 0 && ((_walletName$wallet$ty = walletName[wallet.type]) === null || _walletName$wallet$ty === void 0 ? void 0 : _walletName$wallet$ty.isActive) && /*#__PURE__*/_react.default.createElement(_styles2.Container, {
       key: wallet.id,
       isBottomBorder: idx === ((_walletsState$result6 = walletsState.result) === null || _walletsState$result6 === void 0 ? void 0 : _walletsState$result6.length) - 1
     }, /*#__PURE__*/_react.default.createElement(_styles2.SectionLeft, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {

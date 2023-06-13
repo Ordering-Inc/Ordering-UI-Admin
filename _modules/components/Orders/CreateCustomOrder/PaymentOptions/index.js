@@ -36,7 +36,6 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -97,7 +96,7 @@ var paypalBtnStyle = {
   size: 'responsive'
 };
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _list$filter, _props$beforeElements, _props$beforeComponen, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodSelected$da3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _paymethodSelected$da4, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _cart$balance2, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _isOpenMethod$paymeth30, _isOpenMethod$paymeth31, _isOpenMethod$paymeth32, _isOpenMethod$paymeth33, _isOpenMethod$paymeth34, _isOpenMethod$paymeth35, _isOpenMethod$paymeth36, _isOpenMethod$paymeth37, _props$afterComponent, _props$afterElements;
+  var _list$filter, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodSelected$da3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _paymethodSelected$da4, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _cart$balance2, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _isOpenMethod$paymeth30, _isOpenMethod$paymeth31, _isOpenMethod$paymeth32, _isOpenMethod$paymeth33, _isOpenMethod$paymeth34, _isOpenMethod$paymeth35, _isOpenMethod$paymeth36, _isOpenMethod$paymeth37;
   var cart = props.cart,
     errorCash = props.errorCash,
     isLoading = props.isLoading,
@@ -223,15 +222,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       handlePaymethodClick(paymethodClicked === null || paymethodClicked === void 0 ? void 0 : paymethodClicked.paymethod);
     }
   }, [paymethodClicked === null || paymethodClicked === void 0 ? void 0 : paymethodClicked.confirmed]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_props$beforeElements = props.beforeElements) === null || _props$beforeElements === void 0 ? void 0 : _props$beforeElements.map(function (BeforeElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, BeforeElement);
-  }), (_props$beforeComponen = props.beforeComponents) === null || _props$beforeComponen === void 0 ? void 0 : _props$beforeComponen.map(function (BeforeComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(BeforeComponent, _extends({
-      key: i
-    }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaymentMethodsList, {
     className: "payments-list"
   }, !(paymethodsList.loading || isLoading) && supportedMethods.length > 0 && supportedMethods.sort(function (a, b) {
     return a.id - b.id;
@@ -252,7 +243,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       isSkeleton: true
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       key: i,
-      width: 100,
+      width: 70,
       height: 60,
       style: {
         marginLeft: '10px'
@@ -398,15 +389,7 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
       return closeAlert();
     },
     closeOnBackdrop: false
-  })), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
-    return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
-      key: i
-    }, props));
-  }), (_props$afterElements = props.afterElements) === null || _props$afterElements === void 0 ? void 0 : _props$afterElements.map(function (AfterElement, i) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
-      key: i
-    }, AfterElement);
-  }));
+  })));
 };
 var PaymentOptions = function PaymentOptions(props) {
   var paymentOptions = _objectSpread(_objectSpread({}, props), {}, {
