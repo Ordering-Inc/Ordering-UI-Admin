@@ -72,6 +72,7 @@ export const SelectOption = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      max-width: 180px;
     }
   }
 `
@@ -142,8 +143,19 @@ export const ProductQuantityActionsContainer = styled.div`
   }
 
   ${props => props.theme?.rtl ? css`
-    margin-right: 8px;
+    margin-left: 16px;
   ` : css`
-    margin-left: 8px;
+    margin-right: 16px;
   `}
+`
+export const ProductEditDeleteActions = styled.div`
+  display: flex;
+  align-items: center;
+
+  button {
+    > svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 `

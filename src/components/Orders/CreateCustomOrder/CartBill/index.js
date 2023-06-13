@@ -1,9 +1,17 @@
-import React from 'react'
-import { useLanguage, useUtils, useOrder, useConfig } from 'ordering-components-admin'
+import React, { useState } from 'react'
+import { useLanguage, useUtils, useOrder, useConfig, useValidationFields, useCustomer } from 'ordering-components-admin'
+import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
+import MdCloseCircle from '@meronex/icons/ios/MdCloseCircle'
+import { useTheme } from 'styled-components'
 import { verifyDecimals } from '../../../../utils'
+import { CouponControl } from '../CouponControl'
+import { Confirm, Modal } from '../../../Shared'
+import { TaxInformation } from '../TaxInformation'
 
 import {
-  CartBillContainer
+  CartBillContainer,
+  CouponContainer,
+  IconContainer
 } from './styles'
 
 export const CartBill = (props) => {
@@ -11,10 +19,18 @@ export const CartBill = (props) => {
     cart
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const [{ parsePrice, parseNumber }] = useUtils()
-  const [orderState] = useOrder()
+  const [orderState, { removeOffer }] = useOrder()
   const [{ configs }] = useConfig()
+  const [validationFields] = useValidationFields()
+  const [{ user }] = useCustomer()
+
+  const [openTaxModal, setOpenTaxModal] = useState({ open: false, tax: null })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+
+  const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
 
   const getIncludedTaxes = () => {
     if (cart?.taxes === null) {
@@ -28,6 +44,27 @@ export const CartBill = (props) => {
 
   const getIncludedTaxesDiscounts = () => {
     return cart?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
+  }
+
+  const handleRemoveOfferClick = (id, userId) => {
+    const dataOffer = {
+      business_id: cart?.business_id,
+      offer_id: id
+    }
+    if (userId) dataOffer.user_id = userId
+    removeOffer(dataOffer)
+  }
+
+  const onRemoveOffer = (id) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_OFFER', 'Are you sure that you want to delete the offer?'),
+      title: t('OFFER', 'Offer'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleRemoveOfferClick(id, user?.id)
+      }
+    })
   }
 
   return (
@@ -60,6 +97,12 @@ export const CartBill = (props) => {
                   {offer.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
+                  <IconContainer>
+                    <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_1' })} />
+                    {!!offer?.id && (
+                      <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                    )}
+                  </IconContainer>
                 </td>
                 <td>
                   - {parsePrice(offer?.summary?.discount)}
@@ -89,6 +132,9 @@ export const CartBill = (props) => {
                 <td className='icon'>
                   {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                  <IconContainer onClick={() => setOpenTaxModal({ open: true, data: tax, type: 'tax' })}>
+                    <BsInfoCircle size='20' color={theme.colors.primary} />
+                  </IconContainer>
                 </td>
                 <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
               </tr>
@@ -100,6 +146,9 @@ export const CartBill = (props) => {
                 <td className='icon'>
                   {fee.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
                   ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)}${fee.percentage > 0 ? ' + ' : ''}`}{fee.percentage > 0 && `${fee.percentage}%`})
+                  <IconContainer onClick={() => setOpenTaxModal({ open: true, data: fee, type: 'fee' })}>
+                    <BsInfoCircle size='20' color={theme.colors.primary} />
+                  </IconContainer>
                 </td>
                 <td>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0)}</td>
               </tr>
@@ -113,6 +162,12 @@ export const CartBill = (props) => {
                   {offer?.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
+                  <IconContainer>
+                    <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_3' })} />
+                    {!!offer?.id && (
+                      <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                    )}
+                  </IconContainer>
                 </td>
                 <td>
                   - {parsePrice(offer?.summary?.discount)}
@@ -134,6 +189,12 @@ export const CartBill = (props) => {
                   {offer?.rate_type === 1 && (
                     <span>{`(${verifyDecimals(offer?.rate, parsePrice)}%)`}</span>
                   )}
+                  <IconContainer>
+                    <BsInfoCircle size='20' color={theme.colors.primary} onClick={() => setOpenTaxModal({ open: true, data: offer, type: 'offer_target_2' })} />
+                    {!!offer?.id && (
+                      <MdCloseCircle size='24' color={theme.colors.primary} onClick={() => onRemoveOffer(offer?.id)} />
+                    )}
+                  </IconContainer>
                 </td>
                 <td>
                   - {parsePrice(offer?.summary?.discount)}
@@ -157,6 +218,15 @@ export const CartBill = (props) => {
           )}
         </tbody>
       </table>
+      {isCouponEnabled && cart?.status !== 2 &&
+        (
+          <CouponContainer>
+            <CouponControl
+              businessId={cart?.business_id}
+              price={cart?.total}
+            />
+          </CouponContainer>
+        )}
       <table className='total'>
         <tbody>
           <tr>
@@ -165,6 +235,33 @@ export const CartBill = (props) => {
           </tr>
         </tbody>
       </table>
+
+      <Modal
+        width='70%'
+        open={openTaxModal.open}
+        padding='20px'
+        closeOnBackdrop
+        title={`${openTaxModal.data?.name ||
+          t('INHERIT_FROM_BUSINESS', 'Inherit from business')} ${openTaxModal.data?.rate_type !== 2 ? `(${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`})` : ''}  `}
+        onClose={() => setOpenTaxModal({ open: false, data: null, type: '' })}
+        modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
+      >
+        <TaxInformation
+          type={openTaxModal.type}
+          data={openTaxModal.data}
+          products={cart?.products}
+        />
+      </Modal>
+      <Confirm
+        title={t('PRODUCT', 'Product')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </CartBillContainer>
   )
 }

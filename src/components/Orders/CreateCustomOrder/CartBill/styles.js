@@ -47,3 +47,21 @@ export const CartBillContainer = styled.div`
     }
   }
 `
+export const CouponContainer = styled.div`
+  margin-top: 10px;
+`
+export const IconContainer = styled.div`
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+  height: 20px;
+  svg:nth-child(1){
+    position: relative;
+    top: -1px;
+  }
+  svg:nth-child(2){
+    position: relative;
+    top: -3px;
+  }
+`
