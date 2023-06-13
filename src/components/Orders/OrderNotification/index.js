@@ -75,9 +75,11 @@ const OrderNotificationUI = (props) => {
       )
     }
     toast(content, toastConfigure)
-    const sound = document.getElementById('notification-sound')
-    sound.muted = false
-    sound.play()
+    if (!configState?.configs?.disable_sound_notification) {
+      const sound = document.getElementById('notification-sound')
+      sound.muted = false
+      sound.play()
+    }
     setRegisterOrderIds([])
   }
 
@@ -87,6 +89,7 @@ const OrderNotificationUI = (props) => {
   }, [registerOrderIds])
 
   useEffect(() => {
+    if (!notificationModalOpen || configState?.configs?.disable_sound_notification) return
     const sound = document.getElementById('notification-sound')
     const interval = setInterval(() => {
       if (notificationModalOpen) {
@@ -99,7 +102,7 @@ const OrderNotificationUI = (props) => {
       return
     }
     return () => clearInterval(interval)
-  }, [notificationModalOpen])
+  }, [notificationModalOpen, configState?.configs?.disable_sound_notification])
 
   useEffect(() => {
     if (configState.loading) return

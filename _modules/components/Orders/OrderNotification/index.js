@@ -31,6 +31,7 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _reactToastify.toast.configure();
 var OrderNotificationUI = function OrderNotificationUI(props) {
+  var _configState$configs4;
   var isOnlyDelivery = props.isOnlyDelivery,
     customerId = props.customerId;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
@@ -80,6 +81,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     setRegisterOrderIds([]);
   };
   var toastNotify = function toastNotify(orderId) {
+    var _configState$configs2;
     var toastConfigure = {
       position: 'top-right',
       autoClose: 3000,
@@ -96,9 +98,11 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
       }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, t('WEB_DASHBOARD_APPNAME', 'Ordering Dashboard')), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', "".concat(orderId)))));
     };
     (0, _reactToastify.toast)(content, toastConfigure);
-    var sound = document.getElementById('notification-sound');
-    sound.muted = false;
-    sound.play();
+    if (!(configState !== null && configState !== void 0 && (_configState$configs2 = configState.configs) !== null && _configState$configs2 !== void 0 && _configState$configs2.disable_sound_notification)) {
+      var sound = document.getElementById('notification-sound');
+      sound.muted = false;
+      sound.play();
+    }
     setRegisterOrderIds([]);
   };
   (0, _react.useEffect)(function () {
@@ -106,6 +110,8 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     setNotificationModalOpen(false);
   }, [registerOrderIds]);
   (0, _react.useEffect)(function () {
+    var _configState$configs3;
+    if (!notificationModalOpen || configState !== null && configState !== void 0 && (_configState$configs3 = configState.configs) !== null && _configState$configs3 !== void 0 && _configState$configs3.disable_sound_notification) return;
     var sound = document.getElementById('notification-sound');
     var interval = setInterval(function () {
       if (notificationModalOpen) {
@@ -120,7 +126,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     return function () {
       return clearInterval(interval);
     };
-  }, [notificationModalOpen]);
+  }, [notificationModalOpen, configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.disable_sound_notification]);
   (0, _react.useEffect)(function () {
     if (configState.loading) return;
     events.on('order_added', handleNotification);
