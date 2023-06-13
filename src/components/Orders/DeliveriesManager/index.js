@@ -30,7 +30,9 @@ const DeliveriesManagerUI = (props) => {
     handleSelectedSubOrderStatus,
     onOrderRedirect,
     numberOfOrdersByStatus,
-    numberOfOrdersBySubstatus
+    numberOfOrdersBySubstatus,
+    timeStatus,
+    setTimeStatus
   } = props
 
   const [, t] = useLanguage()
@@ -39,7 +41,6 @@ const DeliveriesManagerUI = (props) => {
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [detailsOrder, setDetailsOrder] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
-  const [timeStatus, setTimeStatus] = useState(null)
   const [slaSettingTime, setSlaSettingTime] = useState(60000)
 
   const [configState] = useConfig()
