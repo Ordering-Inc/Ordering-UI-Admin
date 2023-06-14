@@ -352,9 +352,17 @@ var AdvancedSettings = function AdvancedSettings(props) {
     path: 'third_party_code.body'
   }];
   var buttonList = [{
-    name: t('BORDER_RADIUS', 'Border Radius'),
+    name: t('BUTTON_COLOR', 'Button color'),
+    type: 'input',
+    path: 'general.components.buttons.color'
+  }, {
+    name: t('BORDER_RADIUS', 'Border radius'),
     type: 'input',
     path: 'general.components.buttons.borderRadius'
+  }, {
+    name: t('BUTTON_TEXT_COLOR', 'Button text color'),
+    type: 'input',
+    path: 'general.components.buttons.buttonTextColor'
   }];
   var homeImageFullScreen = [{
     name: t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage image fullscreen'),
