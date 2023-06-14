@@ -25,12 +25,10 @@ const ProductExtrasUI = (props) => {
   const {
     productState,
     extrasState,
-    changesState,
     isAddMode,
     handleOpenAddForm,
     handleChangeExtraInput,
     handleAddExtra,
-    handleChangeAddExtraInput,
     setIsExtendExtraOpen,
     business,
     handleUpdateBusinessState,
@@ -80,13 +78,6 @@ const ProductExtrasUI = (props) => {
     history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}`)
   }
 
-  const addExtraListener = (e) => {
-    const outsideDropdown = !conatinerRef.current?.contains(e.target)
-    if (outsideDropdown) {
-      handleAddExtra()
-    }
-  }
-
   const handleExtraState = (id, checked) => {
     if (checked) {
       setExtraIds(prevState => ([...prevState, id]))
@@ -94,6 +85,17 @@ const ProductExtrasUI = (props) => {
       setExtraIds(prevState => prevState.filter(extraId => extraId !== id))
     }
     setIsCheckboxClicked(true)
+  }
+
+  let timeout = null
+  const onChangeAddExtraInput = (e) => {
+    e.persist()
+    clearTimeout(timeout)
+    timeout = setTimeout(function () {
+      if (e.target.value) {
+        handleAddExtra({ name: e.target.value })
+      }
+    }, 750)
   }
 
   useEffect(() => {
@@ -109,12 +111,6 @@ const ProductExtrasUI = (props) => {
     setIsCheckboxClicked(false)
     handleProductExtraState(extraIds)
   }, [isCheckboxClicked, extraIds])
-
-  useEffect(() => {
-    if (!isAddMode) return
-    document.addEventListener('click', addExtraListener)
-    return () => document.removeEventListener('click', addExtraListener)
-  }, [isAddMode, changesState])
 
   useEffect(() => {
     if (productState?.product?.error || extrasState?.extras?.error) {
@@ -196,7 +192,7 @@ const ProductExtrasUI = (props) => {
             <input
               name='name'
               placeholder={t('WRITE_A_NAME', 'Write a name')}
-              onChange={(e) => handleChangeAddExtraInput(e)}
+              onChange={(e) => onChangeAddExtraInput(e)}
               autoComplete='off'
             />
           </ExtraAddForm>
