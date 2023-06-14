@@ -151,6 +151,17 @@ const ProductExtraOptionDetailsUI = (props) => {
     }
   }
 
+  let timeout = null
+  const onChangeAddModifierName = (e) => {
+    e.persist()
+    clearTimeout(timeout)
+    timeout = setTimeout(function () {
+      if (e.target.value) {
+        handleSubmit(handleAddOption)()
+      }
+    }, 750)
+  }
+
   const handleUpdateExternalId = () => {
     handleUpdateOption({ external_id: externalId })
     setOpenModal({ ...openModal, externalId: false })
@@ -325,6 +336,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   ref={register({
                     required: t('NAME_REQUIRED', 'The name is required.')
                   })}
+                  onChange={(e) => onChangeAddModifierName(e)}
                 />
               </InputWrapper>
             </LeftSubOptionContent>
@@ -334,7 +346,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   name='price'
                   placeholder={t('PRICE', 'Price')}
                   defaultValue={
-                    ((editSubOptionId === null) && changesState?.changes?.price) || ''
+                    ((editSubOptionId === null) && changesState?.changes?.price) || 0
                   }
                   ref={register()}
                   onKeyPress={(e) => {
