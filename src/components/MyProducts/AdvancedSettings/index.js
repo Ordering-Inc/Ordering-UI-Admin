@@ -151,7 +151,9 @@ export const AdvancedSettings = (props) => {
   ]
 
   const buttonList = [
-    { name: t('BORDER_RADIUS', 'Border Radius'), type: 'input', path: 'general.components.buttons.borderRadius' }
+    { name: t('BUTTON_COLOR', 'Button color'), type: 'input', path: 'general.components.buttons.color' },
+    { name: t('BORDER_RADIUS', 'Border radius'), type: 'input', path: 'general.components.buttons.borderRadius' },
+    { name: t('BUTTON_TEXT_COLOR', 'Button text color'), type: 'input', path: 'general.components.buttons.buttonTextColor' }
   ]
 
   const homeImageFullScreen = [
@@ -196,6 +198,9 @@ export const AdvancedSettings = (props) => {
   useEffect(() => {
     themeValuesRef.current = JSON.parse(JSON.stringify(advancedValues))
   }, [advancedValues])
+
+  console.log('themesList', themesList)
+
   return (
     <>
       <Container>
