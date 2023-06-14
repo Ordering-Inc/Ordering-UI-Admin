@@ -37,7 +37,10 @@ var CountryFilterUI = function CountryFilterUI(props) {
     _onSearch = props.onSearch,
     handleClickFilterButton = props.handleClickFilterButton,
     code = props.code,
-    setCode = props.setCode;
+    openCountryFilter = props.openCountryFilter,
+    setOpenCountryFilter = props.setOpenCountryFilter,
+    setCode = props.setCode,
+    actionState = props.actionState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -81,7 +84,15 @@ var CountryFilterUI = function CountryFilterUI(props) {
     setTotalPages(_totalPages);
     setCurrentPages(_currentBusinessList);
   }, [countriesState, currentPage, pagesPerPage]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, t('CHOOSE_A_COUNTRY', 'Choose a country')), /*#__PURE__*/_react.default.createElement(_styles2.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(countriesState !== null && countriesState !== void 0 && countriesState.loading) && (currentPages === null || currentPages === void 0 ? void 0 : currentPages.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "450px",
+    height: "650px",
+    padding: "25px",
+    open: openCountryFilter,
+    onClose: function onClose() {
+      return setOpenCountryFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, t('CHOOSE_A_COUNTRY', 'Choose a country')), /*#__PURE__*/_react.default.createElement(_styles2.SearchWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     search: searchValue,
     isCustomLayout: true,
     lazyLoad: true,
@@ -89,7 +100,7 @@ var CountryFilterUI = function CountryFilterUI(props) {
       return _onSearch(value);
     },
     placeholder: t('SEARCH', 'Search')
-  })), /*#__PURE__*/_react.default.createElement(_styles2.CountryListWrapper, null, countriesState !== null && countriesState !== void 0 && countriesState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.CountryListWrapper, null, actionState !== null && actionState !== void 0 && actionState.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.CountryItem, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -124,11 +135,14 @@ var CountryFilterUI = function CountryFilterUI(props) {
     color: "primary",
     disabled: countriesState.loading,
     onClick: handleClickFilterButton
-  }, t('FILTER', 'Filter'))));
+  }, t('FILTER', 'Filter'))))));
 };
 var CountryFilter = function CountryFilter(props) {
   var countryFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CountryFilterUI,
+    onClose: function onClose() {
+      return props.setOpenCountryFilter(false);
+    },
     isSearchByName: true
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.CountryList, countryFilterProps);

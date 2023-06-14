@@ -35,12 +35,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductExtrasUI = function ProductExtrasUI(props) {
   var productState = props.productState,
     extrasState = props.extrasState,
-    changesState = props.changesState,
     isAddMode = props.isAddMode,
     handleOpenAddForm = props.handleOpenAddForm,
     handleChangeExtraInput = props.handleChangeExtraInput,
     handleAddExtra = props.handleAddExtra,
-    handleChangeAddExtraInput = props.handleChangeAddExtraInput,
     setIsExtendExtraOpen = props.setIsExtendExtraOpen,
     business = props.business,
     handleUpdateBusinessState = props.handleUpdateBusinessState,
@@ -114,13 +112,6 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     var section = query.get('section');
     history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(section));
   };
-  var addExtraListener = function addExtraListener(e) {
-    var _conatinerRef$current;
-    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) !== null && _conatinerRef$current !== void 0 && _conatinerRef$current.contains(e.target));
-    if (outsideDropdown) {
-      handleAddExtra();
-    }
-  };
   var handleExtraState = function handleExtraState(id, checked) {
     if (checked) {
       setExtraIds(function (prevState) {
@@ -134,6 +125,18 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       });
     }
     setIsCheckboxClicked(true);
+  };
+  var timeout = null;
+  var onChangeAddExtraInput = function onChangeAddExtraInput(e) {
+    e.persist();
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      if (e.target.value) {
+        handleAddExtra({
+          name: e.target.value
+        });
+      }
+    }, 750);
   };
   (0, _react.useEffect)(function () {
     var _productState$product;
@@ -151,13 +154,6 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     setIsCheckboxClicked(false);
     handleProductExtraState(extraIds);
   }, [isCheckboxClicked, extraIds]);
-  (0, _react.useEffect)(function () {
-    if (!isAddMode) return;
-    document.addEventListener('click', addExtraListener);
-    return function () {
-      return document.removeEventListener('click', addExtraListener);
-    };
-  }, [isAddMode, changesState]);
   (0, _react.useEffect)(function () {
     var _productState$product3, _extrasState$extras;
     if (productState !== null && productState !== void 0 && (_productState$product3 = productState.product) !== null && _productState$product3 !== void 0 && _productState$product3.error || extrasState !== null && extrasState !== void 0 && (_extrasState$extras = extrasState.extras) !== null && _extrasState$extras !== void 0 && _extrasState$extras.error) {
@@ -231,7 +227,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     name: "name",
     placeholder: t('WRITE_A_NAME', 'Write a name'),
     onChange: function onChange(e) {
-      return handleChangeAddExtraInput(e);
+      return onChangeAddExtraInput(e);
     },
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.AddButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {

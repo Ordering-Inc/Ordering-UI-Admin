@@ -183,6 +183,16 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       handleSubmit(handleAddOption)();
     }
   };
+  var timeout = null;
+  var onChangeAddModifierName = function onChangeAddModifierName(e) {
+    e.persist();
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      if (e.target.value) {
+        handleSubmit(handleAddOption)();
+      }
+    }, 750);
+  };
   var handleUpdateExternalId = function handleUpdateExternalId() {
     handleUpdateOption({
       external_id: externalId
@@ -329,13 +339,16 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes3 = changesState.changes) === null || _changesState$changes3 === void 0 ? void 0 : _changesState$changes3.name) || '',
     ref: register({
       required: t('NAME_REQUIRED', 'The name is required.')
-    })
+    }),
+    onChange: function onChange(e) {
+      return onChangeAddModifierName(e);
+    }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.RightSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option8 = optionState.option) === null || _optionState$option8 === void 0 ? void 0 : (_optionState$option8$ = _optionState$option8.suboptions) === null || _optionState$option8$ === void 0 ? void 0 : _optionState$option8$.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "price",
     placeholder: t('PRICE', 'Price'),
-    defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.price) || '',
+    defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.price) || 0,
     ref: register(),
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {
