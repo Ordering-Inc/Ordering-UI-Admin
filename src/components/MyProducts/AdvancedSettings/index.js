@@ -198,9 +198,6 @@ export const AdvancedSettings = (props) => {
   useEffect(() => {
     themeValuesRef.current = JSON.parse(JSON.stringify(advancedValues))
   }, [advancedValues])
-
-  console.log('themesList', themesList)
-
   return (
     <>
       <Container>
