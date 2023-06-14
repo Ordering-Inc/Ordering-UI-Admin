@@ -50,7 +50,7 @@ export const AnalyticsOrdersStatus = (props) => {
   const generateLabels = () => {
     const labels = [t('ALL', 'All')]
     for (const label of orderStatusList?.data) {
-      labels.push(orderStatus[label.status].value)
+      labels.push(orderStatus?.[label.status]?.value)
     }
     return labels
   }
