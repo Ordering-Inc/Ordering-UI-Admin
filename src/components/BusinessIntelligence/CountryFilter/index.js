@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, CountryList } from 'ordering-components-admin'
 import { Button } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
-import { SearchBar, Pagination } from '../../Shared'
+import { SearchBar, Pagination, Modal } from '../../Shared'
 import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
 import {
   Container,
@@ -20,7 +20,10 @@ const CountryFilterUI = (props) => {
     onSearch,
     handleClickFilterButton,
     code,
-    setCode
+    openCountryFilter,
+    setOpenCountryFilter,
+    setCode,
+    actionState
   } = props
 
   const [, t] = useLanguage()
@@ -58,61 +61,73 @@ const CountryFilterUI = (props) => {
 
   return (
     <>
-      <Container>
-        <h2>{t('CHOOSE_A_COUNTRY', 'Choose a country')}</h2>
-        <SearchWrapper>
-          <SearchBar
-            search={searchValue}
-            isCustomLayout
-            lazyLoad
-            onSearch={(value) => onSearch(value)}
-            placeholder={t('SEARCH', 'Search')}
-          />
-        </SearchWrapper>
-        <CountryListWrapper>
-          {countriesState?.loading ? (
-            <>
-              {[...Array(10).keys()].map(i => (
-                <CountryItem
-                  key={i}
-                >
-                  <Skeleton width={18} height={18} circle />
-                  <Skeleton width={200} height={20} style={{ marginLeft: 10 }} />
-                </CountryItem>
-              ))}
-            </>
-          ) : (
-            <>
-              {currentPages?.map(country => (
-                <CountryItem key={country?.id} onClick={() => setCode(country?.code)}>
-                  {code === country?.code ? <RecordCircleFill className='checked' /> : <Circle />}
-                  <span className='name'>{country?.name}</span>
-                </CountryItem>
-              ))}
-            </>
-          )}
-        </CountryListWrapper>
-        <PaginationWrapper>
-          {countriesState?.countries?.length > 0 && (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              handleChangePage={handleChangePage}
-              defaultPageSize={pagesPerPage}
-              handleChangePageSize={handleChangePageSize}
-            />
-          )}
-        </PaginationWrapper>
-      </Container>
-      <ButtonWrapper>
-        <Button
-          color='primary'
-          disabled={countriesState.loading}
-          onClick={handleClickFilterButton}
+      {!countriesState?.loading && currentPages?.length > 0 && (
+        <Modal
+          width='450px'
+          height='650px'
+          padding='25px'
+          open={openCountryFilter}
+          onClose={() => setOpenCountryFilter(false)}
         >
-          {t('FILTER', 'Filter')}
-        </Button>
-      </ButtonWrapper>
+          <>
+            <Container>
+              <h2>{t('CHOOSE_A_COUNTRY', 'Choose a country')}</h2>
+              <SearchWrapper>
+                <SearchBar
+                  search={searchValue}
+                  isCustomLayout
+                  lazyLoad
+                  onSearch={(value) => onSearch(value)}
+                  placeholder={t('SEARCH', 'Search')}
+                />
+              </SearchWrapper>
+              <CountryListWrapper>
+                {actionState?.loading ? (
+                  <>
+                    {[...Array(10).keys()].map(i => (
+                      <CountryItem
+                        key={i}
+                      >
+                        <Skeleton width={18} height={18} circle />
+                        <Skeleton width={200} height={20} style={{ marginLeft: 10 }} />
+                      </CountryItem>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {currentPages?.map(country => (
+                      <CountryItem key={country?.id} onClick={() => setCode(country?.code)}>
+                        {code === country?.code ? <RecordCircleFill className='checked' /> : <Circle />}
+                        <span className='name'>{country?.name}</span>
+                      </CountryItem>
+                    ))}
+                  </>
+                )}
+              </CountryListWrapper>
+              <PaginationWrapper>
+                {countriesState?.countries?.length > 0 && (
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    handleChangePage={handleChangePage}
+                    defaultPageSize={pagesPerPage}
+                    handleChangePageSize={handleChangePageSize}
+                  />
+                )}
+              </PaginationWrapper>
+            </Container>
+            <ButtonWrapper>
+              <Button
+                color='primary'
+                disabled={countriesState.loading}
+                onClick={handleClickFilterButton}
+              >
+                {t('FILTER', 'Filter')}
+              </Button>
+            </ButtonWrapper>
+          </>
+        </Modal>
+      )}
     </>
 
   )
@@ -122,6 +137,7 @@ export const CountryFilter = (props) => {
   const countryFilterProps = {
     ...props,
     UIComponent: CountryFilterUI,
+    onClose: () => props.setOpenCountryFilter(false),
     isSearchByName: true
   }
   return <CountryList {...countryFilterProps} />

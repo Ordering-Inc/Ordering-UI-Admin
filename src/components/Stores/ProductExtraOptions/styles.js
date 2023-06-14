@@ -214,13 +214,6 @@ export const AddOptionForm = styled.form`
       border: 1px dashed ${props => props.theme.colors.lightGray};
     }
   }
-  > button {
-    ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
-    ` : css`
-      margin-left: 10px;
-    `}
-  }
 
   @media (min-width: 450px) {
     > input {

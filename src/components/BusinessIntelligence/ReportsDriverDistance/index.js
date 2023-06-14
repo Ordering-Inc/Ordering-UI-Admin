@@ -242,18 +242,11 @@ const ReportsDriverDistanceUI = (props) => {
             setAvailableDriverIds={setAvailableDriverIds}
           />
         </Modal>
-        <Modal
-          width='450px'
-          height='650px'
-          padding='25px'
-          open={openCountryFilter}
-          onClose={() => setOpenCountryFilter(false)}
-        >
-          <CountryFilter
-            {...props}
-            onClose={() => setOpenCountryFilter(false)}
-          />
-        </Modal>
+        <CountryFilter
+          {...props}
+          openCountryFilter={openCountryFilter}
+          setOpenCountryFilter={setOpenCountryFilter}
+        />
       </DriverDistanceContainer>
       <Alert
         title={t('DRIVER_SCHEDULE', 'Driver schedule')}
