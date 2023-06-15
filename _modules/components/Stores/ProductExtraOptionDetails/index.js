@@ -116,6 +116,10 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     externalId = _useState12[0],
     setExternalId = _useState12[1];
+  var _useState13 = (0, _react.useState)(null),
+    _useState14 = _slicedToArray(_useState13, 2),
+    timer = _useState14[0],
+    setTimer = _useState14[1];
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
   };
@@ -183,15 +187,15 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       handleSubmit(handleAddOption)();
     }
   };
-  var timeout = null;
   var onChangeAddModifierName = function onChangeAddModifierName(e) {
     e.persist();
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
+    clearTimeout(timer);
+    var _timer = setTimeout(function () {
       if (e.target.value) {
         handleSubmit(handleAddOption)();
       }
     }, 750);
+    setTimer(_timer);
   };
   var handleUpdateExternalId = function handleUpdateExternalId() {
     handleUpdateOption({
@@ -342,7 +346,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     }),
     onChange: function onChange(e) {
       return onChangeAddModifierName(e);
-    }
+    },
+    readOnly: optionState === null || optionState === void 0 ? void 0 : optionState.loading
   }))), /*#__PURE__*/_react.default.createElement(_styles2.RightSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option8 = optionState.option) === null || _optionState$option8 === void 0 ? void 0 : (_optionState$option8$ = _optionState$option8.suboptions) === null || _optionState$option8$ === void 0 ? void 0 : _optionState$option8$.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {

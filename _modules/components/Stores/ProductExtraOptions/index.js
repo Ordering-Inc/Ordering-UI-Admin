@@ -182,15 +182,15 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   var onSubmit = function onSubmit(formValues) {
     handleAddOption(formValues);
   };
-  var timeout = null;
   var onChangeAddExtraOptionName = function onChangeAddExtraOptionName(e) {
     e.persist();
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
+    clearTimeout(timer);
+    var _timer = setTimeout(function () {
       if (e.target.value) {
         handleSubmit(onSubmit)();
       }
     }, 750);
+    setTimer(_timer);
   };
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
@@ -352,7 +352,8 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
           _onChange(e);
           onChangeAddExtraOptionName(e);
         },
-        autoComplete: "off"
+        autoComplete: "off",
+        readOnly: extraState === null || extraState === void 0 ? void 0 : extraState.loading
       });
     },
     rules: {

@@ -22,13 +22,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
-  var _configState$configs, _configState$configs$, _ref, _changesState$name, _driversGroupState$dr, _changesState$adminis, _driversGroupState$dr2, _changesState$type, _driversGroupState$dr3, _driversGroupState$dr4, _changesState$priorit, _driversGroupState$dr5;
+  var _ref, _changesState$name, _driversGroupState$dr, _changesState$adminis, _driversGroupState$dr2, _changesState$type, _driversGroupState$dr3, _driversGroupState$dr4, _changesState$priorit, _driversGroupState$dr5;
   var driversGroupState = props.driversGroupState,
     driversManagers = props.driversManagers,
     changesState = props.changesState,
     handleChangesState = props.handleChangesState,
-    useAdvanced = props.useAdvanced,
-    setUseAdvanced = props.setUseAdvanced,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     handleAddDriversGroup = props.handleAddDriversGroup,
     actionDisabled = props.actionDisabled,
@@ -48,13 +46,9 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-    _useConfig2 = _slicedToArray(_useConfig, 1),
-    configState = _useConfig2[0];
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
-  var autoAssignType = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.autoassign_type) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
   var typeOptions = [{
     value: 0,
     content: t('IN_HOUSE_DRIVERS', 'In house drivers')
@@ -81,16 +75,6 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
     value: 2,
     content: t('URGENT', 'Urgent')
   }];
-  var handleLogistic = function handleLogistic(checked) {
-    setUseAdvanced(checked);
-    if (checked) return;
-    var changes = {
-      autoassign_amount_drivers: 0,
-      orders_group_max_orders: 0
-    };
-    if (!driversGroupState.driversGroup) return;
-    handleUpdateDriversGroup(changes);
-  };
   var onSubmit = function onSubmit() {
     if (driversGroupState.driversGroup) {
       if ((changesState === null || changesState === void 0 ? void 0 : changesState.drivers) === '[]') {
@@ -195,12 +179,7 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
         priority: val
       });
     }
-  })), driversGroupState.driversGroup && autoAssignType !== 'basic' && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    checked: useAdvanced,
-    onChange: function onChange(e) {
-      return handleLogistic(e.target.checked);
-    }
-  }), /*#__PURE__*/_react.default.createElement("p", null, t('USE_ADVANCED_LOGISTIC', 'Use advanced logistic'))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     type: "submit",

@@ -23,7 +23,7 @@ var Header = _styledComponents.default.div(_templateObject5 || (_templateObject5
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n          margin-right: 10px;\n        "]))) : (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n          margin-left: 10px;\n        "])));
 });
 exports.Header = Header;
-var OptionNameContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  width: 70%;\n  margin: 12px 0;\n  font-size: 14px;\n  > input {\n    flex: 1;\n    height: 32px;\n    width: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    background: ", ";\n\n    &:focus {\n      border: 1px dashed ", ";\n    }\n    ", "\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
+var OptionNameContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  align-items: center;\n  width: 70%;\n  margin: 12px 0;\n  font-size: 14px;\n  > input {\n    flex: 1;\n    height: 32px;\n    width: 32px;\n    padding: 5px;\n    border: none;\n    outline: none;\n    background: ", ";\n\n    &:focus {\n      border: 1px dashed ", ";\n    }\n    &:read-only {\n      background-color: #F8F9FA;\n      cursor: not-allowed;\n    }\n    ", "\n  }\n\n  ", "\n\n  ", "\n"])), function (props) {
   var _props$theme$colors;
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 }, function (props) {

@@ -90,6 +90,10 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isCheckboxClicked = _useState12[0],
     setIsCheckboxClicked = _useState12[1];
+  var _useState13 = (0, _react.useState)(null),
+    _useState14 = _slicedToArray(_useState13, 2),
+    timer = _useState14[0],
+    setTimer = _useState14[1];
   var handleOpenExtraDetails = function handleOpenExtraDetails(e, extra, isInitialRender) {
     var _e$target, _e$target2;
     if (e !== null && e !== void 0 && (_e$target = e.target) !== null && _e$target !== void 0 && _e$target.closest('.extra-checkbox') || e !== null && e !== void 0 && (_e$target2 = e.target) !== null && _e$target2 !== void 0 && _e$target2.closest('.draggable-dots')) return;
@@ -126,17 +130,17 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     }
     setIsCheckboxClicked(true);
   };
-  var timeout = null;
   var onChangeAddExtraInput = function onChangeAddExtraInput(e) {
     e.persist();
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
+    clearTimeout(timer);
+    var _timer = setTimeout(function () {
       if (e.target.value) {
         handleAddExtra({
           name: e.target.value
         });
       }
     }, 750);
+    setTimer(_timer);
   };
   (0, _react.useEffect)(function () {
     var _productState$product;
@@ -229,7 +233,8 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     onChange: function onChange(e) {
       return onChangeAddExtraInput(e);
     },
-    autoComplete: "off"
+    autoComplete: "off",
+    readOnly: extrasState === null || extrasState === void 0 ? void 0 : extrasState.loading
   })), /*#__PURE__*/_react.default.createElement(_styles2.AddButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenAddForm();

@@ -62,7 +62,7 @@ var Details = _styledComponents.default.div(_templateObject12 || (_templateObjec
 exports.Details = Details;
 var AddButtonWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  padding: 12px 0;\n"])));
 exports.AddButtonWrapper = AddButtonWrapper;
-var ExtraAddForm = _styledComponents.default.form(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  input {\n    width: 100%;\n    border: none;\n    outline: none;\n    border-bottom: 1px solid ", ";\n    background: ", ";\n    padding: 12px 0;\n\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #B1BCCC;\n    }\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n  }\n"])), function (props) {
+var ExtraAddForm = _styledComponents.default.form(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  input {\n    width: 100%;\n    border: none;\n    outline: none;\n    border-bottom: 1px solid ", ";\n    background: ", ";\n    padding: 12px 0;\n\n    &::placeholder,\n    &::-webkit-input-placeholder {\n      color: #B1BCCC;\n    }\n    &:-ms-input-placeholder {\n      color: #B1BCCC;\n    }\n    &:read-only {\n      background-color: #F8F9FA;\n      cursor: not-allowed;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   var _props$theme$colors;
