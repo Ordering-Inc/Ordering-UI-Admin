@@ -41,33 +41,29 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)(null),
-    _useState2 = _slicedToArray(_useState, 2),
-    searchValue = _useState2[0],
-    setSearchValue = _useState2[1];
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState4 = _slicedToArray(_useState3, 2),
-    alertState = _useState4[0],
-    setAlertState = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+    _useState2 = _slicedToArray(_useState, 2),
+    alertState = _useState2[0],
+    setAlertState = _useState2[1];
+  var _useState3 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    confirm = _useState4[0],
+    setConfirm = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    confirm = _useState6[0],
-    setConfirm = _useState6[1];
-  var _useState7 = (0, _react.useState)(false),
+    isTourOpen = _useState6[0],
+    setIsTourOpen = _useState6[1];
+  var _useState7 = (0, _react.useState)(4),
     _useState8 = _slicedToArray(_useState7, 2),
-    isTourOpen = _useState8[0],
-    setIsTourOpen = _useState8[1];
-  var _useState9 = (0, _react.useState)(4),
-    _useState10 = _slicedToArray(_useState9, 2),
-    currentTourStep = _useState10[0],
-    setCurrentTourStep = _useState10[1];
+    currentTourStep = _useState8[0],
+    setCurrentTourStep = _useState8[1];
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
     setAlertState({
@@ -76,7 +72,6 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
     });
   }, [actionState === null || actionState === void 0 ? void 0 : actionState.error]);
   var handleOpenTour = function handleOpenTour() {
-    setOpenDetails(false);
     setCurrentTourStep(4);
     setIsTourOpen(true);
   };
@@ -113,19 +108,9 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
   (0, _react.useEffect)(function () {
     getDataFromStorage();
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.SearchContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
-    lazyLoad: true,
-    isCustomLayout: true,
-    onSearch: function onSearch(val) {
-      return setSearchValue(val);
-    },
-    search: searchValue,
-    placeholder: t('SEARCH', 'Search'),
-    customClass: "searchBar"
-  })), /*#__PURE__*/_react.default.createElement(_styles.DriversGroupsListingContainer, null, /*#__PURE__*/_react.default.createElement(_DriversGroupsList.DriversGroupsList, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Description, null, t('BUSINESS_IN_FOLLOWING_DRIVER_GROUPS', 'This business is in the following driver groups')), /*#__PURE__*/_react.default.createElement(_styles.DriversGroupsListingContainer, null, /*#__PURE__*/_react.default.createElement(_DriversGroupsList.DriversGroupsList, {
     isFromStore: true,
     driversGroupsState: driversGroupsState,
-    searchValue: searchValue,
     handleUpdateDriversGroup: handleUpdateDriversGroup,
     selectedGroupList: selectedGroupList,
     handleSelectGroup: handleSelectGroup,

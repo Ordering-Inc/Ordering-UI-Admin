@@ -279,19 +279,10 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
     onClose: function onClose() {
       return setIsOrderTypeFilter(false);
     }
-  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
-    width: "450px",
-    height: "650px",
-    padding: "25px",
-    open: openCountryFilter,
-    onClose: function onClose() {
-      return setOpenCountryFilter(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
-    onClose: function onClose() {
-      return setOpenCountryFilter(false);
-    }
-  })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }))), /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    openCountryFilter: openCountryFilter,
+    setOpenCountryFilter: setOpenCountryFilter
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('DRIVER_SCHEDULE', 'Driver schedule'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

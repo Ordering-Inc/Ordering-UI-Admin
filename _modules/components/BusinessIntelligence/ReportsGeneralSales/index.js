@@ -233,19 +233,10 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
       return setIsBusinessFilter(false);
     },
     isFranchise: true
-  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
-    width: "450px",
-    height: "650px",
-    padding: "25px",
-    open: openCountryFilter,
-    onClose: function onClose() {
-      return setOpenCountryFilter(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
-    onClose: function onClose() {
-      return setOpenCountryFilter(false);
-    }
-  }))));
+  }))), /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    openCountryFilter: openCountryFilter,
+    setOpenCountryFilter: setOpenCountryFilter
+  })));
 };
 var ReportsGeneralSales = function ReportsGeneralSales(props) {
   var reportsPaymethodSalesProps = _objectSpread(_objectSpread({}, props), {}, {

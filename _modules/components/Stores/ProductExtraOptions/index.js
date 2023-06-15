@@ -179,8 +179,18 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     }
     setIsMenuOpen(value);
   };
-  var onSubmit = function onSubmit() {
-    handleAddOption();
+  var onSubmit = function onSubmit(formValues) {
+    handleAddOption(formValues);
+  };
+  var onChangeAddExtraOptionName = function onChangeAddExtraOptionName(e) {
+    e.persist();
+    clearTimeout(timer);
+    var _timer = setTimeout(function () {
+      if (e.target.value) {
+        handleSubmit(onSubmit)();
+      }
+    }, 750);
+    setTimer(_timer);
   };
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
@@ -340,9 +350,10 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
         value: value,
         onChange: function onChange(e) {
           _onChange(e);
-          handleChangeAddOption(e);
+          onChangeAddExtraOptionName(e);
         },
-        autoComplete: "off"
+        autoComplete: "off",
+        readOnly: extraState === null || extraState === void 0 ? void 0 : extraState.loading
       });
     },
     rules: {
@@ -397,7 +408,10 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       required: t('MAX_PURCHASED_REQUIRED', 'The max is required.')
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    type: "submit"
+    type: "submit",
+    style: {
+      visibility: 'hidden'
+    }
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null)))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

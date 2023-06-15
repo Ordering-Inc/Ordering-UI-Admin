@@ -146,6 +146,12 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var spreadColumnOptions = [{
     value: 'cost_price',
     content: t('PRODUCT_COST', 'Product cost')
+  }, {
+    value: 'inventoried',
+    content: t('INVENTORY', 'Inventory')
+  }, {
+    value: 'quantity',
+    content: t('QUANTITY', 'Quantity')
   }];
   var handleChangeAllowSpreadColumns = function handleChangeAllowSpreadColumns(type) {
     setAllowSpreadColumns(_objectSpread(_objectSpread({}, allowSpreadColumns), {}, _defineProperty({}, type, !allowSpreadColumns[type])));

@@ -104,22 +104,23 @@ var DriversGroupsList = function DriversGroupsList(props) {
     }
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.GroupsTable, {
-    "data-tour": "tour_delivery_completed"
+    "data-tour": "tour_delivery_completed",
+    disabled: isFromStore
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupIdWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
     onClick: function onClick() {
       return handleAllSelectGroup();
     },
     isChecked: !driversGroupsState.loading && selectedGroupList.length === driversGroupsState.groups.length
-  }, !driversGroupsState.loading && selectedGroupList.length === driversGroupsState.groups.length ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('ID', 'ID')))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupNameContainer, {
+  }, !isFromStore && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversGroupsState.loading && selectedGroupList.length === driversGroupsState.groups.length ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null))), /*#__PURE__*/_react.default.createElement("span", null, t('ID', 'ID')))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupNameContainer, {
     isHeader: true
   }, /*#__PURE__*/_react.default.createElement("p", null, t('GROUP', 'Group')))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, {
     isHeader: true
   }, t('DRIVER_MANAGER', 'Driver manager'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupTypeContainer, {
     isHeader: true
-  }, t('TYPE', 'Type'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, t('ACTIONS', 'Actions'))))), driversGroupsState.loading ? _toConsumableArray(Array(groupsPerPage).keys()).map(function (i) {
+  }, t('TYPE', 'Type'))), !isFromStore && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, t('ACTIONS', 'Actions'))))), driversGroupsState.loading ? _toConsumableArray(Array(groupsPerPage).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupIdWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupIdWrapper, null, !isFromStore && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 18,
       height: 18
     }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -140,7 +141,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
       width: 80
     }))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupTypeContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 70
-    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }))), !isFromStore && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 50
     }))))));
   }) : currentGroups.map(function (group) {
@@ -151,7 +152,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
       onClick: function onClick(e) {
         return handleClickDriverGroup(e, group);
       }
-    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupIdWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupIdWrapper, null, !isFromStore && /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
       className: "group-checkbox",
       onClick: function onClick() {
         return handleSelectGroup(group.id);
@@ -161,7 +162,7 @@ var DriversGroupsList = function DriversGroupsList(props) {
       bgimage: group === null || group === void 0 ? void 0 : (_group$administrator2 = group.administrator) === null || _group$administrator2 === void 0 ? void 0 : _group$administrator2.photo
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, group === null || group === void 0 ? void 0 : (_group$administrator3 = group.administrator) === null || _group$administrator3 === void 0 ? void 0 : _group$administrator3.name, " ", group === null || group === void 0 ? void 0 : (_group$administrator4 = group.administrator) === null || _group$administrator4 === void 0 ? void 0 : _group$administrator4.lastname), /*#__PURE__*/_react.default.createElement("p", null, group === null || group === void 0 ? void 0 : (_group$administrator5 = group.administrator) === null || _group$administrator5 === void 0 ? void 0 : _group$administrator5.email)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupTypeContainer, null, getTypeTag(group === null || group === void 0 ? void 0 : group.type))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
+    }, group === null || group === void 0 ? void 0 : (_group$administrator3 = group.administrator) === null || _group$administrator3 === void 0 ? void 0 : _group$administrator3.name, " ", group === null || group === void 0 ? void 0 : (_group$administrator4 = group.administrator) === null || _group$administrator4 === void 0 ? void 0 : _group$administrator4.lastname), /*#__PURE__*/_react.default.createElement("p", null, group === null || group === void 0 ? void 0 : (_group$administrator5 = group.administrator) === null || _group$administrator5 === void 0 ? void 0 : _group$administrator5.email)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupTypeContainer, null, getTypeTag(group === null || group === void 0 ? void 0 : group.type))), !isFromStore && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, {
       className: "group-enabled"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       disabled: actionDisabled,

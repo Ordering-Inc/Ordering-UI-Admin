@@ -35,12 +35,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductExtrasUI = function ProductExtrasUI(props) {
   var productState = props.productState,
     extrasState = props.extrasState,
-    changesState = props.changesState,
     isAddMode = props.isAddMode,
     handleOpenAddForm = props.handleOpenAddForm,
     handleChangeExtraInput = props.handleChangeExtraInput,
     handleAddExtra = props.handleAddExtra,
-    handleChangeAddExtraInput = props.handleChangeAddExtraInput,
     setIsExtendExtraOpen = props.setIsExtendExtraOpen,
     business = props.business,
     handleUpdateBusinessState = props.handleUpdateBusinessState,
@@ -92,6 +90,10 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isCheckboxClicked = _useState12[0],
     setIsCheckboxClicked = _useState12[1];
+  var _useState13 = (0, _react.useState)(null),
+    _useState14 = _slicedToArray(_useState13, 2),
+    timer = _useState14[0],
+    setTimer = _useState14[1];
   var handleOpenExtraDetails = function handleOpenExtraDetails(e, extra, isInitialRender) {
     var _e$target, _e$target2;
     if (e !== null && e !== void 0 && (_e$target = e.target) !== null && _e$target !== void 0 && _e$target.closest('.extra-checkbox') || e !== null && e !== void 0 && (_e$target2 = e.target) !== null && _e$target2 !== void 0 && _e$target2.closest('.draggable-dots')) return;
@@ -114,13 +116,6 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     var section = query.get('section');
     history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(section));
   };
-  var addExtraListener = function addExtraListener(e) {
-    var _conatinerRef$current;
-    var outsideDropdown = !((_conatinerRef$current = conatinerRef.current) !== null && _conatinerRef$current !== void 0 && _conatinerRef$current.contains(e.target));
-    if (outsideDropdown) {
-      handleAddExtra();
-    }
-  };
   var handleExtraState = function handleExtraState(id, checked) {
     if (checked) {
       setExtraIds(function (prevState) {
@@ -134,6 +129,18 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       });
     }
     setIsCheckboxClicked(true);
+  };
+  var onChangeAddExtraInput = function onChangeAddExtraInput(e) {
+    e.persist();
+    clearTimeout(timer);
+    var _timer = setTimeout(function () {
+      if (e.target.value) {
+        handleAddExtra({
+          name: e.target.value
+        });
+      }
+    }, 750);
+    setTimer(_timer);
   };
   (0, _react.useEffect)(function () {
     var _productState$product;
@@ -151,13 +158,6 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     setIsCheckboxClicked(false);
     handleProductExtraState(extraIds);
   }, [isCheckboxClicked, extraIds]);
-  (0, _react.useEffect)(function () {
-    if (!isAddMode) return;
-    document.addEventListener('click', addExtraListener);
-    return function () {
-      return document.removeEventListener('click', addExtraListener);
-    };
-  }, [isAddMode, changesState]);
   (0, _react.useEffect)(function () {
     var _productState$product3, _extrasState$extras;
     if (productState !== null && productState !== void 0 && (_productState$product3 = productState.product) !== null && _productState$product3 !== void 0 && _productState$product3.error || extrasState !== null && extrasState !== void 0 && (_extrasState$extras = extrasState.extras) !== null && _extrasState$extras !== void 0 && _extrasState$extras.error) {
@@ -231,9 +231,10 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     name: "name",
     placeholder: t('WRITE_A_NAME', 'Write a name'),
     onChange: function onChange(e) {
-      return handleChangeAddExtraInput(e);
+      return onChangeAddExtraInput(e);
     },
-    autoComplete: "off"
+    autoComplete: "off",
+    readOnly: extrasState === null || extrasState === void 0 ? void 0 : extrasState.loading
   })), /*#__PURE__*/_react.default.createElement(_styles2.AddButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenAddForm();
