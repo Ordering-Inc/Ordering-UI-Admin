@@ -89,6 +89,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const { handleSubmit, register, errors, control, setValue } = useForm()
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [externalId, setExternalId] = useState()
+  const [timer, setTimer] = useState(null)
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -151,15 +152,15 @@ const ProductExtraOptionDetailsUI = (props) => {
     }
   }
 
-  let timeout = null
   const onChangeAddModifierName = (e) => {
     e.persist()
-    clearTimeout(timeout)
-    timeout = setTimeout(function () {
+    clearTimeout(timer)
+    const _timer = setTimeout(function () {
       if (e.target.value) {
         handleSubmit(handleAddOption)()
       }
     }, 750)
+    setTimer(_timer)
   }
 
   const handleUpdateExternalId = () => {
@@ -337,6 +338,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                     required: t('NAME_REQUIRED', 'The name is required.')
                   })}
                   onChange={(e) => onChangeAddModifierName(e)}
+                  readOnly={optionState?.loading}
                 />
               </InputWrapper>
             </LeftSubOptionContent>

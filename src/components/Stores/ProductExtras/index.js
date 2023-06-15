@@ -54,6 +54,7 @@ const ProductExtrasUI = (props) => {
   const [currentExtra, setCurrentExtra] = useState(null)
   const [extraIds, setExtraIds] = useState([])
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
+  const [timer, setTimer] = useState(null)
 
   const handleOpenExtraDetails = (e, extra, isInitialRender) => {
     if (e?.target?.closest('.extra-checkbox') || e?.target?.closest('.draggable-dots')) return
@@ -87,15 +88,15 @@ const ProductExtrasUI = (props) => {
     setIsCheckboxClicked(true)
   }
 
-  let timeout = null
   const onChangeAddExtraInput = (e) => {
     e.persist()
-    clearTimeout(timeout)
-    timeout = setTimeout(function () {
+    clearTimeout(timer)
+    const _timer = setTimeout(function () {
       if (e.target.value) {
         handleAddExtra({ name: e.target.value })
       }
     }, 750)
+    setTimer(_timer)
   }
 
   useEffect(() => {
@@ -194,6 +195,7 @@ const ProductExtrasUI = (props) => {
               placeholder={t('WRITE_A_NAME', 'Write a name')}
               onChange={(e) => onChangeAddExtraInput(e)}
               autoComplete='off'
+              readOnly={extrasState?.loading}
             />
           </ExtraAddForm>
         )}
