@@ -140,15 +140,15 @@ const ProductExtraOptionsUI = (props) => {
     handleAddOption(formValues)
   }
 
-  let timeout = null
   const onChangeAddExtraOptionName = (e) => {
     e.persist()
-    clearTimeout(timeout)
-    timeout = setTimeout(function () {
+    clearTimeout(timer)
+    const _timer = setTimeout(function () {
       if (e.target.value) {
         handleSubmit(onSubmit)()
       }
     }, 750)
+    setTimer(_timer)
   }
 
   useEffect(() => {
@@ -327,6 +327,7 @@ const ProductExtraOptionsUI = (props) => {
                     onChangeAddExtraOptionName(e)
                   }}
                   autoComplete='off'
+                  readOnly={extraState?.loading}
                 />
               )}
               rules={{

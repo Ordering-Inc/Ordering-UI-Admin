@@ -80,6 +80,10 @@ export const OptionNameContainer = styled.div`
     &:focus {
       border: 1px dashed ${props => props.theme.colors.lightGray};
     }
+    &:read-only {
+      background-color: #F8F9FA;
+      cursor: not-allowed;
+    }
     ${props => props.theme?.rtl ? css`
       margin-right: 5px;
     ` : css`
