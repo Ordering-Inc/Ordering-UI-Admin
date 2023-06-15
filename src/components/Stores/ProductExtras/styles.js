@@ -123,6 +123,10 @@ export const ExtraAddForm = styled.form`
     &:-ms-input-placeholder {
       color: #B1BCCC;
     }
+    &:read-only {
+      background-color: #F8F9FA;
+      cursor: not-allowed;
+    }
   }
 `
 export const DragImageWrapper = styled.div`

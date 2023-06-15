@@ -89,6 +89,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const { handleSubmit, register, errors, control, setValue } = useForm()
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [externalId, setExternalId] = useState()
+  const [timer, setTimer] = useState(null)
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -149,6 +150,17 @@ const ProductExtraOptionDetailsUI = (props) => {
     if (e.key === 'Enter' && e.shiftKey === false) {
       handleSubmit(handleAddOption)()
     }
+  }
+
+  const onChangeAddModifierName = (e) => {
+    e.persist()
+    clearTimeout(timer)
+    const _timer = setTimeout(function () {
+      if (e.target.value) {
+        handleSubmit(handleAddOption)()
+      }
+    }, 750)
+    setTimer(_timer)
   }
 
   const handleUpdateExternalId = () => {
@@ -325,6 +337,8 @@ const ProductExtraOptionDetailsUI = (props) => {
                   ref={register({
                     required: t('NAME_REQUIRED', 'The name is required.')
                   })}
+                  onChange={(e) => onChangeAddModifierName(e)}
+                  readOnly={optionState?.loading}
                 />
               </InputWrapper>
             </LeftSubOptionContent>
@@ -334,7 +348,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                   name='price'
                   placeholder={t('PRICE', 'Price')}
                   defaultValue={
-                    ((editSubOptionId === null) && changesState?.changes?.price) || ''
+                    ((editSubOptionId === null) && changesState?.changes?.price) || 0
                   }
                   ref={register()}
                   onKeyPress={(e) => {

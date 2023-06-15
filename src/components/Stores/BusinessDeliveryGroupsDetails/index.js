@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useLanguage, DriversGroupsList as DriversGroupsListController } from 'ordering-components-admin'
 import { getStorageItem, removeStorageItem } from '../../../utils'
-import { Alert, Confirm, SearchBar } from '../../Shared'
+import { Alert, Confirm } from '../../Shared'
 import { WizardDelivery } from '../../Delivery/WizardDelivery'
 import { DriversGroupsList } from '../../Delivery/DriversGroupsList'
 
 import {
   DriversGroupsListingContainer,
-  SearchContainer
+  Description
 } from './styles'
 
 const DriversGroupsListingDetailsUI = (props) => {
@@ -18,12 +18,11 @@ const DriversGroupsListingDetailsUI = (props) => {
     handleSelectGroup,
     handleAllSelectGroup,
     actionState,
-    handleUpdateDriversGroup,
+    handleUpdateDriversGroup
   } = props
 
   const history = useHistory()
   const [, t] = useLanguage()
-  const [searchValue, setSearchValue] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
@@ -39,7 +38,6 @@ const DriversGroupsListingDetailsUI = (props) => {
   }, [actionState?.error])
 
   const handleOpenTour = () => {
-    setOpenDetails(false)
     setCurrentTourStep(4)
     setIsTourOpen(true)
   }
@@ -63,21 +61,11 @@ const DriversGroupsListingDetailsUI = (props) => {
 
   return (
     <>
-      <SearchContainer>
-        <SearchBar
-          lazyLoad
-          isCustomLayout
-          onSearch={val => setSearchValue(val)}
-          search={searchValue}
-          placeholder={t('SEARCH', 'Search')}
-          customClass='searchBar'
-        />
-      </SearchContainer>
+      <Description>{t('BUSINESS_IN_FOLLOWING_DRIVER_GROUPS', 'This business is in the following driver groups')}</Description>
       <DriversGroupsListingContainer>
         <DriversGroupsList
           isFromStore
           driversGroupsState={driversGroupsState}
-          searchValue={searchValue}
           handleUpdateDriversGroup={handleUpdateDriversGroup}
           selectedGroupList={selectedGroupList}
           handleSelectGroup={handleSelectGroup}

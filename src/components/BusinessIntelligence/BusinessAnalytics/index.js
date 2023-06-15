@@ -194,18 +194,11 @@ const BusinessAnalyticsUI = (props) => {
           onClose={() => setIsBrandFilter(false)}
         />
       </Modal>
-      <Modal
-        width='450px'
-        height='650px'
-        padding='25px'
-        open={openCountryFilter}
-        onClose={() => setOpenCountryFilter(false)}
-      >
-        <CountryFilter
-          {...props}
-          onClose={() => setOpenCountryFilter(false)}
-        />
-      </Modal>
+      <CountryFilter
+        {...props}
+        openCountryFilter={openCountryFilter}
+        setOpenCountryFilter={setOpenCountryFilter}
+      />
     </BusinessAnalyticsContainer>
   )
 }

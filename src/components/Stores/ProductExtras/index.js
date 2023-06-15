@@ -25,12 +25,10 @@ const ProductExtrasUI = (props) => {
   const {
     productState,
     extrasState,
-    changesState,
     isAddMode,
     handleOpenAddForm,
     handleChangeExtraInput,
     handleAddExtra,
-    handleChangeAddExtraInput,
     setIsExtendExtraOpen,
     business,
     handleUpdateBusinessState,
@@ -56,6 +54,7 @@ const ProductExtrasUI = (props) => {
   const [currentExtra, setCurrentExtra] = useState(null)
   const [extraIds, setExtraIds] = useState([])
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
+  const [timer, setTimer] = useState(null)
 
   const handleOpenExtraDetails = (e, extra, isInitialRender) => {
     if (e?.target?.closest('.extra-checkbox') || e?.target?.closest('.draggable-dots')) return
@@ -80,13 +79,6 @@ const ProductExtrasUI = (props) => {
     history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}`)
   }
 
-  const addExtraListener = (e) => {
-    const outsideDropdown = !conatinerRef.current?.contains(e.target)
-    if (outsideDropdown) {
-      handleAddExtra()
-    }
-  }
-
   const handleExtraState = (id, checked) => {
     if (checked) {
       setExtraIds(prevState => ([...prevState, id]))
@@ -94,6 +86,17 @@ const ProductExtrasUI = (props) => {
       setExtraIds(prevState => prevState.filter(extraId => extraId !== id))
     }
     setIsCheckboxClicked(true)
+  }
+
+  const onChangeAddExtraInput = (e) => {
+    e.persist()
+    clearTimeout(timer)
+    const _timer = setTimeout(function () {
+      if (e.target.value) {
+        handleAddExtra({ name: e.target.value })
+      }
+    }, 750)
+    setTimer(_timer)
   }
 
   useEffect(() => {
@@ -109,12 +112,6 @@ const ProductExtrasUI = (props) => {
     setIsCheckboxClicked(false)
     handleProductExtraState(extraIds)
   }, [isCheckboxClicked, extraIds])
-
-  useEffect(() => {
-    if (!isAddMode) return
-    document.addEventListener('click', addExtraListener)
-    return () => document.removeEventListener('click', addExtraListener)
-  }, [isAddMode, changesState])
 
   useEffect(() => {
     if (productState?.product?.error || extrasState?.extras?.error) {
@@ -196,8 +193,9 @@ const ProductExtrasUI = (props) => {
             <input
               name='name'
               placeholder={t('WRITE_A_NAME', 'Write a name')}
-              onChange={(e) => handleChangeAddExtraInput(e)}
+              onChange={(e) => onChangeAddExtraInput(e)}
               autoComplete='off'
+              readOnly={extrasState?.loading}
             />
           </ExtraAddForm>
         )}

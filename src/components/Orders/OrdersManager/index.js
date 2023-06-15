@@ -47,7 +47,9 @@ const OrdersManagerUI = (props) => {
     setSelectedOrderIds,
     numberOfOrdersByStatus,
     allowColumns,
-    setAllowColumns
+    setAllowColumns,
+    timeStatus,
+    setTimeStatus
   } = props
 
   const [, t] = useLanguage()
@@ -63,7 +65,6 @@ const OrdersManagerUI = (props) => {
   const [currentTourStep, setCurrentTourStep] = useState(0)
   const [isTourFlag, setIsTourFlag] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [timeStatus, setTimeStatus] = useState(null)
   const [slaSettingTime, setSlaSettingTime] = useState(60000)
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)

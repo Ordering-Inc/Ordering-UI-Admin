@@ -136,8 +136,19 @@ const ProductExtraOptionsUI = (props) => {
     setIsMenuOpen(value)
   }
 
-  const onSubmit = () => {
-    handleAddOption()
+  const onSubmit = (formValues) => {
+    handleAddOption(formValues)
+  }
+
+  const onChangeAddExtraOptionName = (e) => {
+    e.persist()
+    clearTimeout(timer)
+    const _timer = setTimeout(function () {
+      if (e.target.value) {
+        handleSubmit(onSubmit)()
+      }
+    }, 750)
+    setTimer(_timer)
   }
 
   useEffect(() => {
@@ -313,9 +324,10 @@ const ProductExtraOptionsUI = (props) => {
                   value={value}
                   onChange={(e) => {
                     onChange(e)
-                    handleChangeAddOption(e)
+                    onChangeAddExtraOptionName(e)
                   }}
                   autoComplete='off'
+                  readOnly={extraState?.loading}
                 />
               )}
               rules={{
@@ -371,6 +383,7 @@ const ProductExtraOptionsUI = (props) => {
           />
           <IconButton
             type='submit'
+            style={{ visibility: 'hidden' }}
           >
             <PlusCircle />
           </IconButton>
