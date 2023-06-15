@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useConfig, useSession } from 'ordering-components-admin'
+import { useLanguage, useSession } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
-import { Input, Checkbox, Button, SecondSelect as DefaultSelect } from '../../../styles'
+import { Input, Button, SecondSelect as DefaultSelect } from '../../../styles'
 import { Alert } from '../../Shared'
 import { DriversGroupDrivers } from '../DriversGroupDrivers'
 import { DriversGroupCompanies } from '../DriversGroupCompanies'
 
 import {
   Container,
-  InputWrapper,
-  CheckboxContainer
+  InputWrapper
 } from './styles'
 
 export const DriversGroupGeneralForm = (props) => {
@@ -18,8 +17,6 @@ export const DriversGroupGeneralForm = (props) => {
     driversManagers,
     changesState,
     handleChangesState,
-    useAdvanced,
-    setUseAdvanced,
     handleUpdateDriversGroup,
     handleAddDriversGroup,
     actionDisabled,
@@ -30,10 +27,7 @@ export const DriversGroupGeneralForm = (props) => {
   const [, t] = useLanguage()
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [configState] = useConfig()
   const [{ user }] = useSession()
-
-  const autoAssignType = configState?.configs?.autoassign_type?.value
 
   const typeOptions = [
     { value: 0, content: t('IN_HOUSE_DRIVERS', 'In house drivers') },
@@ -53,17 +47,6 @@ export const DriversGroupGeneralForm = (props) => {
     { value: 1, content: t('HIGH', 'High') },
     { value: 2, content: t('URGENT', 'Urgent') }
   ]
-
-  const handleLogistic = (checked) => {
-    setUseAdvanced(checked)
-    if (checked) return
-    const changes = {
-      autoassign_amount_drivers: 0,
-      orders_group_max_orders: 0
-    }
-    if (!driversGroupState.driversGroup) return
-    handleUpdateDriversGroup(changes)
-  }
 
   const onSubmit = () => {
     if (driversGroupState.driversGroup) {
@@ -184,15 +167,6 @@ export const DriversGroupGeneralForm = (props) => {
           onChange={val => handleChangesState({ priority: val })}
         />
       </InputWrapper>
-      {driversGroupState.driversGroup && autoAssignType !== 'basic' && (
-        <CheckboxContainer>
-          <Checkbox
-            checked={useAdvanced}
-            onChange={e => handleLogistic(e.target.checked)}
-          />
-          <p>{t('USE_ADVANCED_LOGISTIC', 'Use advanced logistic')}</p>
-        </CheckboxContainer>
-      )}
       <Button
         borderRadius='8px'
         color='primary'

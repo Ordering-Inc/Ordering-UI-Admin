@@ -50,7 +50,6 @@ const DriversGroupDetailsUI = (props) => {
   const autoAssignType = configState?.configs?.autoassign_type?.value
 
   const [showMenu, setShowMenu] = useState('general')
-  const [useAdvanced, setUseAdvanced] = useState(false)
   const [driversGroupMenus, setDriversGroupMenus] = useState([])
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -63,7 +62,7 @@ const DriversGroupDetailsUI = (props) => {
         { key: 'general', value: t('GENERAL', 'General') },
         { key: 'businesses', value: t('BUSINESSES', 'Businesses') }
       ]
-      : (useAdvanced && autoAssignType !== 'basic')
+      : (autoAssignType !== 'basic')
         ? [
           { key: 'general', value: t('GENERAL', 'General') },
           { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
@@ -80,7 +79,7 @@ const DriversGroupDetailsUI = (props) => {
           { key: 'logs', value: t('LOGS', 'Logs') }
         ]
     setDriversGroupMenus(_driversGroupMenus)
-  }, [useAdvanced, driversGroupState?.driversGroup])
+  }, [driversGroupState?.driversGroup])
 
   const onDeleteGroup = () => {
     setConfirm({
@@ -109,10 +108,6 @@ const DriversGroupDetailsUI = (props) => {
     else element.style.width = '100vw'
     setIsExpand(prev => !prev)
   }
-
-  useEffect(() => {
-    setUseAdvanced(!(driversGroupState.driversGroup?.autoassign_amount_drivers === 0 && driversGroupState.driversGroup?.orders_group_max_orders === 0))
-  }, [driversGroupState.driversGroup])
 
   useEffect(() => {
     handleParentSidebarMove(0)
@@ -222,8 +217,6 @@ const DriversGroupDetailsUI = (props) => {
           <DriversGroupGeneralForm
             {...props}
             curDriversGroup={driversGroupState.driversGroup}
-            useAdvanced={useAdvanced}
-            setUseAdvanced={setUseAdvanced}
             handleNextClick={handleNextClick}
           />
         )}
