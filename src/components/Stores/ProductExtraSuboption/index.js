@@ -43,7 +43,8 @@ export const ProductExtraSuboption = (props) => {
     handleDragStart,
     hanldeDragOver,
     handleDrop,
-    handleDragEnd
+    handleDragEnd,
+    handleDuplicateSubOption
   } = props
 
   const theme = useTheme()
@@ -325,6 +326,11 @@ export const ProductExtraSuboption = (props) => {
                 }}
               >
                 {t('CUSTOM_FIELDS', 'Custom fields')}
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => handleDuplicateSubOption(subOption?.id)}
+              >
+                {t('DUPLICATE', 'Duplicate')}
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() => setExternalIdOpen(true)}
