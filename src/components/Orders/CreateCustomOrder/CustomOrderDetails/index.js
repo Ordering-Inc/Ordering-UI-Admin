@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useLanguage, useOrder, CustomOrderDetails as CustomOrderDetailsController } from 'ordering-components-admin'
 import { SelectCustomer } from '../SelectCustomer'
+import { OrderTypeSelector } from '../OrderTypeSelector'
 import { SelectBusinesses } from '../SelectBusinesses'
 import { Map } from '../Map'
 import { SelectProducts } from '../SelectProducts'
@@ -81,6 +82,7 @@ const CustomOrderDetailsUI = (props) => {
         />
         {customerAddress?.location && (
           <>
+            <OrderTypeSelector />
             <SelectBusinesses
               businessList={businessList}
               selectedBusiness={selectedBusiness}
