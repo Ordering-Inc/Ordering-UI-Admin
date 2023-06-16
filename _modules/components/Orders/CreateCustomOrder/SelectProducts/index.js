@@ -119,7 +119,7 @@ var SelectProducts = function SelectProducts(props) {
     var el = document.querySelector('.custom-order-content');
     if (el) {
       el.scrollTo({
-        top: 300,
+        top: 350,
         behavior: 'smooth'
       });
     }
