@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { useLanguage, ExamineClick, DragAndDrop, useApi, OrderingWebsite as OrderingWebsiteController } from 'ordering-components-admin'
+import { useLanguage, ExamineClick, DragAndDrop, useConfig, useApi, OrderingWebsite as OrderingWebsiteController } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { useLocation } from 'react-router-dom'
 import { Button, IconButton, Input, TextArea } from '../../../styles'
@@ -75,6 +75,7 @@ const OrderingWebsiteUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const theme = useTheme()
   const [ordering] = useApi()
@@ -228,7 +229,7 @@ const OrderingWebsiteUI = (props) => {
               <Button
                 color='primary'
                 borderRadius='8px'
-                onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
+                onClick={() => window.open(configs?.site_url?.value || `https://${ordering?.project}.tryordering.com`, '_blank')}
               >
                 {t('VISIT_MY_WEBSITE', 'Visit My Website')}
               </Button>

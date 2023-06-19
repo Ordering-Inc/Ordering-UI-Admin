@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils, useEvent, useApi } from 'ordering-components-admin'
+import { useLanguage, useUtils, useEvent, useApi, useConfig } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -26,6 +26,7 @@ import {
   BusinessPreviewHeader,
   ButtonWrapper
 } from './styles'
+import { checkSiteUrl } from '../../../utils'
 
 export const BusinessSummary = (props) => {
   const {
@@ -46,6 +47,7 @@ export const BusinessSummary = (props) => {
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const [events] = useEvent()
+  const [{ configs }] = useConfig()
   const theme = useTheme()
   const [ordering] = useApi()
   const { width } = useWindowSize()
@@ -58,10 +60,10 @@ export const BusinessSummary = (props) => {
   }
 
   const handleOpenSite = () => {
-    const url = siteState?.site?.domain && siteState?.site?.ssl_process_status === 'ended'
-      ? `https://${siteState?.site?.domain}/store/${businessState?.business?.slug}`
+    const storeUrl = configs?.site_url?.value
+      ? `${checkSiteUrl(configs?.site_url?.value)}store/${businessState?.business?.slug}`
       : `https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`
-    window.open(url, '_blank')
+    window.open(storeUrl, '_blank')
   }
 
   const itemsExcluded = !!spoonityConfig ? ['publishing', 'personalization'] : ['publishing', 'spoonity_key', 'personalization']

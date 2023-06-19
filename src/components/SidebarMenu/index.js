@@ -388,7 +388,7 @@ const SidebarMenuUI = (props) => {
   }
 
   const handleOpenSite = () => {
-    handleGoToLink(`https://${ordering.project}.tryordering.com`)
+    handleGoToLink(configs?.site_url?.value || `https://${ordering.project}.tryordering.com`)
   }
 
   useEffect(() => {

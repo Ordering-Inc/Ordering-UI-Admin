@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils, useEvent, useSession, useApi, Home as HomeController } from 'ordering-components-admin'
+import { useLanguage, useUtils, useEvent, useSession, useApi, Home as HomeController, useConfig } from 'ordering-components-admin'
 import { Line } from 'react-chartjs-2'
 import moment from 'moment'
 import { IconButton, Button } from '../../../styles/Buttons'
@@ -59,6 +59,7 @@ const HomeUI = (props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [timeAxes, setTimeAxes] = useState([])
   const [events] = useEvent()
@@ -280,7 +281,7 @@ const HomeUI = (props) => {
                     <Button
                       color='primary'
                       borderRadius='8px'
-                      onClick={() => window.open(`https://${ordering?.project}.tryordering.com`, '_blank')}
+                      onClick={() => window.open(configs?.site_url?.value || `https://${ordering?.project}.tryordering.com`, '_blank')}
                     >
                       {t('VISIT_MY_WEBSITE', 'Visit my Website')}
                     </Button>
