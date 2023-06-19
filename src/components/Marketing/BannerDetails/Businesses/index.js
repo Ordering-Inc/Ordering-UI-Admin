@@ -81,7 +81,7 @@ export const Businesses = (props) => {
             isDisabed={actionState.loading}
           >
             <Checkbox
-              checked={selectedBusinessIds.includes(business.id)}
+              checked={selectedBusinessIds?.includes(business.id)}
               onChange={e => handleSelectBusiness(business.id, e.target.checked)}
             />
             <WrapperImage>

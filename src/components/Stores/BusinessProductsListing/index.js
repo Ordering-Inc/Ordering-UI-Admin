@@ -7,6 +7,7 @@ import RiImageAddFill from '@meronex/icons/ri/RiImageAddFill'
 import {
   useLanguage,
   useApi,
+  useConfig,
   BusinessProductsListing as BusinessProductsListingController
 } from 'ordering-components-admin'
 import { BusinessProductsCategoyDetails } from '../BusinessProductsCategoyDetails'
@@ -46,6 +47,7 @@ import {
   ColumnsAllowWrapper,
   ButtonWrapper
 } from './styles'
+import { checkSiteUrl } from '../../../utils'
 
 const BusinessProductsListingUI = (props) => {
   const {
@@ -83,6 +85,7 @@ const BusinessProductsListingUI = (props) => {
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [ordering] = useApi()
+  const [{ configs }] = useConfig()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [viewMethod, setViewMethod] = useState('list')
   const [currentCategory, setCurrentCategory] = useState(null)
@@ -219,10 +222,10 @@ const BusinessProductsListingUI = (props) => {
   }
 
   const handleOpenSite = () => {
-    const url = siteState?.site?.domain && siteState?.site?.ssl_process_status === 'ended'
-      ? `https://${siteState?.site?.domain}/store/${businessState?.business?.slug}`
+    const storeUrl = configs?.site_url?.value
+      ? `${checkSiteUrl(configs?.site_url?.value)}store/${businessState?.business?.slug}`
       : `https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`
-    window.open(url, '_blank')
+    window.open(storeUrl, '_blank')
   }
 
   const handleOpenAddBusiness = () => {
