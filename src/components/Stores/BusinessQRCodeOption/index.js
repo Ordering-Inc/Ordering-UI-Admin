@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useLanguage, useApi } from 'ordering-components-admin'
+import { useLanguage, useApi, useConfig } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Input } from '../../../styles'
 import { X as Close } from 'react-bootstrap-icons'
@@ -15,6 +15,7 @@ import {
   QRCodeLayout,
   TableNumberHintText
 } from './styles'
+import { checkSiteUrl } from '../../../utils'
 
 export const BusinessQRCodeOption = (props) => {
   const {
@@ -27,6 +28,7 @@ export const BusinessQRCodeOption = (props) => {
 
   const [, t] = useLanguage()
   const [ordering] = useApi()
+  const [{ configs }] = useConfig()
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -58,8 +60,8 @@ export const BusinessQRCodeOption = (props) => {
       })
       return
     }
-    const storeUrl = siteState?.site?.domain && siteState?.site?.ssl_process_status === 'ended'
-      ? `https://${siteState?.site?.domain}/store/${business?.slug}`
+    const storeUrl = configs?.site_url?.value
+      ? `${checkSiteUrl(configs?.site_url?.value)}store/${business?.slug}`
       : `https://${ordering.project}.tryordering.com/store/${business?.slug}`
     const tsNumber = item?.key !== 'pick_up'
       ? (item?.key === 'eat_in'
