@@ -61,7 +61,9 @@ const ProductExtraOptionsUI = (props) => {
     hanldeDragOver,
     handleDrop,
     handleDragEnd,
-    handleUpdateExtraState
+    handleUpdateExtraState,
+    handleDuplicateExtra,
+    setExtraState
   } = props
 
   const theme = useTheme()
@@ -239,6 +241,11 @@ const ProductExtraOptionsUI = (props) => {
                   onClick={() => setOpenModal({ ...openModal, metaField: true })}
                 >
                   {t('CUSTOM_FIELDS', 'Custom Fields')}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={handleDuplicateExtra}
+                >
+                  {t('DUPLICATE', 'Duplicate')}
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => setOpenModal({ ...openModal, externalId: true })}
@@ -435,6 +442,8 @@ const ProductExtraOptionsUI = (props) => {
             handleUpdateBusinessState={handleUpdateBusinessState}
             handleSucccessDeleteOption={handleSucccessDeleteOption}
             isMaxError={isMaxError}
+            parentExtraState={extraState}
+            setParentExtraState={setExtraState}
           />
         </Modal>
       )}

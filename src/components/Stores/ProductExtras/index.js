@@ -39,7 +39,8 @@ const ProductExtrasUI = (props) => {
     hanldeDragOver,
     handleDrop,
     handleDragEnd,
-    handleUpdateExtraState
+    handleUpdateExtraState,
+    setExtrasState
   } = props
   const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
@@ -218,6 +219,8 @@ const ProductExtrasUI = (props) => {
               handleChangeExtraName={handleChangeExtraInput}
               handleUpdateBusinessState={handleUpdateBusinessState}
               handleUpdateExtraState={handleUpdateExtraState}
+              extrasState={extrasState}
+              setExtrasState={setExtrasState}
             />
           )}
         </>
@@ -238,6 +241,8 @@ const ProductExtrasUI = (props) => {
                 handleChangeExtraName={handleChangeExtraInput}
                 handleUpdateBusinessState={handleUpdateBusinessState}
                 handleUpdateExtraState={handleUpdateExtraState}
+                extrasState={extrasState}
+                setExtrasState={setExtrasState}
               />
             </Modal>
           )}

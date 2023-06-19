@@ -44,7 +44,8 @@ export const ProductSummary = (props) => {
     handleDeleteProduct,
     showProductOption,
     isExpand,
-    setIsExpand
+    setIsExpand,
+    handleDuplicateProduct
   } = props
 
   const [, t] = useLanguage()
@@ -169,6 +170,11 @@ export const ProductSummary = (props) => {
                   onClick={() => setIsProductPreview(true)}
                 >
                   {t('PREVIEW', 'Preview')}
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={handleDuplicateProduct}
+                >
+                  {t('DUPLICATE', 'Duplicate')}
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => handleShowOption('custom_fields')}

@@ -71,6 +71,8 @@ const ProductExtraOptionDetailsUI = (props) => {
     handleChangeItem,
     isAddForm,
     setIsAddForm,
+    handleDuplicateOption,
+    handleDuplicateSubOption,
 
     dragoverSubOptionId,
     isSubOptionsBottom,
@@ -198,6 +200,11 @@ const ProductExtraOptionDetailsUI = (props) => {
               {t('CUSTOM_FIELDS', 'Custom Fields')}
             </Dropdown.Item>
             <Dropdown.Item
+              onClick={handleDuplicateOption}
+            >
+              {t('DUPLICATE', 'Duplicate')}
+            </Dropdown.Item>
+            <Dropdown.Item
               onClick={() => setOpenModal({ ...openModal, externalId: true })}
             >
               {t('EXTERNAL_ID', 'External ID')}
@@ -285,6 +292,7 @@ const ProductExtraOptionDetailsUI = (props) => {
               hanldeDragOver={hanldeDragOver}
               handleDrop={handleDrop}
               handleDragEnd={handleDragEnd}
+              handleDuplicateSubOption={handleDuplicateSubOption}
             />
           )
         })}
