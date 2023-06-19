@@ -50,7 +50,8 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
     handleDragStart = props.handleDragStart,
     hanldeDragOver = props.hanldeDragOver,
     handleDrop = props.handleDrop,
-    handleDragEnd = props.handleDragEnd;
+    handleDragEnd = props.handleDragEnd,
+    handleDuplicateSubOption = props.handleDuplicateSubOption;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -360,6 +361,10 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
       }));
     }
   }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleDuplicateSubOption(subOption === null || subOption === void 0 ? void 0 : subOption.id);
+    }
+  }, t('DUPLICATE', 'Duplicate')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return setExternalIdOpen(true);
     }

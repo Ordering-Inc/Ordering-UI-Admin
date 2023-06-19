@@ -42,7 +42,8 @@ var ProductSummary = function ProductSummary(props) {
     handleDeleteProduct = props.handleDeleteProduct,
     showProductOption = props.showProductOption,
     isExpand = props.isExpand,
-    setIsExpand = props.setIsExpand;
+    setIsExpand = props.setIsExpand,
+    handleDuplicateProduct = props.handleDuplicateProduct;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -164,6 +165,8 @@ var ProductSummary = function ProductSummary(props) {
       return setIsProductPreview(true);
     }
   }, t('PREVIEW', 'Preview')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: handleDuplicateProduct
+  }, t('DUPLICATE', 'Duplicate')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleShowOption('custom_fields');
     }

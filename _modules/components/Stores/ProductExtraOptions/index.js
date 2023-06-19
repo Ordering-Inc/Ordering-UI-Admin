@@ -61,7 +61,9 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     hanldeDragOver = props.hanldeDragOver,
     handleDrop = props.handleDrop,
     handleDragEnd = props.handleDragEnd,
-    handleUpdateExtraState = props.handleUpdateExtraState;
+    handleUpdateExtraState = props.handleUpdateExtraState,
+    handleDuplicateExtra = props.handleDuplicateExtra,
+    setExtraState = props.setExtraState;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -281,6 +283,8 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
       }));
     }
   }, t('CUSTOM_FIELDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: handleDuplicateExtra
+  }, t('DUPLICATE', 'Duplicate')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         externalId: true
@@ -468,7 +472,9 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     },
     handleUpdateBusinessState: handleUpdateBusinessState,
     handleSucccessDeleteOption: handleSucccessDeleteOption,
-    isMaxError: isMaxError
+    isMaxError: isMaxError,
+    parentExtraState: extraState,
+    setParentExtraState: setExtraState
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
     open: openModal === null || openModal === void 0 ? void 0 : openModal.metaField,

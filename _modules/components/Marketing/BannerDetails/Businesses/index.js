@@ -86,7 +86,7 @@ var Businesses = function Businesses(props) {
       key: business.id,
       isDisabed: actionState.loading
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      checked: selectedBusinessIds.includes(business.id),
+      checked: selectedBusinessIds === null || selectedBusinessIds === void 0 ? void 0 : selectedBusinessIds.includes(business.id),
       onChange: function onChange(e) {
         return handleSelectBusiness(business.id, e.target.checked);
       }

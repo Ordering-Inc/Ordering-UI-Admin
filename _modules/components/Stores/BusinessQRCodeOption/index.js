@@ -14,6 +14,7 @@ var _reactQrCode = _interopRequireDefault(require("react-qr-code"));
 var _reactToPrint = _interopRequireDefault(require("react-to-print"));
 var _Shared = require("../../Shared");
 var _styles2 = require("./styles");
+var _utils = require("../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -35,6 +36,9 @@ var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useState = (0, _react.useState)(false),
@@ -61,7 +65,7 @@ var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
     });
   };
   var generateQRCode = function generateQRCode() {
-    var _numberRef$current, _siteState$site, _siteState$site2, _siteState$site3, _numberRef$current2, _numberRef$current3;
+    var _numberRef$current, _configs$site_url, _configs$site_url2, _numberRef$current2, _numberRef$current3;
     var errors = [];
     if ((item === null || item === void 0 ? void 0 : item.key) !== 'pick_up' && !(numberRef !== null && numberRef !== void 0 && (_numberRef$current = numberRef.current) !== null && _numberRef$current !== void 0 && _numberRef$current.value)) {
       errors.push((item === null || item === void 0 ? void 0 : item.key) === 'eat_in' ? t('VALIDATION_ERROR_REQUIRED', 'Table number is required').replace('_attribute_', t('TABLE_NUMBER', 'Table number')) : t('VALIDATION_ERROR_REQUIRED', 'Spot number is required').replace('_attribute_', t('SPOT_NUMBER', 'Spot number')));
@@ -73,7 +77,7 @@ var BusinessQRCodeOption = function BusinessQRCodeOption(props) {
       });
       return;
     }
-    var storeUrl = siteState !== null && siteState !== void 0 && (_siteState$site = siteState.site) !== null && _siteState$site !== void 0 && _siteState$site.domain && (siteState === null || siteState === void 0 ? void 0 : (_siteState$site2 = siteState.site) === null || _siteState$site2 === void 0 ? void 0 : _siteState$site2.ssl_process_status) === 'ended' ? "https://".concat(siteState === null || siteState === void 0 ? void 0 : (_siteState$site3 = siteState.site) === null || _siteState$site3 === void 0 ? void 0 : _siteState$site3.domain, "/store/").concat(business === null || business === void 0 ? void 0 : business.slug) : "https://".concat(ordering.project, ".tryordering.com/store/").concat(business === null || business === void 0 ? void 0 : business.slug);
+    var storeUrl = configs !== null && configs !== void 0 && (_configs$site_url = configs.site_url) !== null && _configs$site_url !== void 0 && _configs$site_url.value ? "".concat((0, _utils.checkSiteUrl)(configs === null || configs === void 0 ? void 0 : (_configs$site_url2 = configs.site_url) === null || _configs$site_url2 === void 0 ? void 0 : _configs$site_url2.value), "store/").concat(business === null || business === void 0 ? void 0 : business.slug) : "https://".concat(ordering.project, ".tryordering.com/store/").concat(business === null || business === void 0 ? void 0 : business.slug);
     var tsNumber = (item === null || item === void 0 ? void 0 : item.key) !== 'pick_up' ? (item === null || item === void 0 ? void 0 : item.key) === 'eat_in' ? "&table_number=".concat(numberRef === null || numberRef === void 0 ? void 0 : (_numberRef$current2 = numberRef.current) === null || _numberRef$current2 === void 0 ? void 0 : _numberRef$current2.value) : "&spot_number=".concat(numberRef === null || numberRef === void 0 ? void 0 : (_numberRef$current3 = numberRef.current) === null || _numberRef$current3 === void 0 ? void 0 : _numberRef$current3.value) : '';
     var compltedUrl = "".concat(storeUrl, "?order_type=").concat(item.value).concat(tsNumber);
     setCode(compltedUrl);
