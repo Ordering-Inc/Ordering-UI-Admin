@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _ref4, _formState$changes$ti, _formState$changes6, _ref5, _formState$changes$dr, _formState$changes7;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _ref4, _formState$changes$ex, _formState$changes6, _ref5, _formState$changes$ti, _formState$changes7, _ref6, _formState$changes$dr, _formState$changes8;
   var formState = props.formState,
     showField = props.showField,
     cleanFormState = props.cleanFormState,
@@ -295,11 +295,23 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     }));
-  }), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+  }), isDriversPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "external_id",
+    className: "form",
+    placeholder: t('EXTERNAL_ID', 'External Id'),
+    defaultValue: (_ref4 = (_formState$changes$ex = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.external_id) !== null && _formState$changes$ex !== void 0 ? _formState$changes$ex : user && (user === null || user === void 0 ? void 0 : user.external_id)) !== null && _ref4 !== void 0 ? _ref4 : '',
+    onChange: handleChangeInput,
+    autoComplete: "off",
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  }), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     isTimezone: true
   }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_TIMEZONE', 'Select a timezone'),
-    defaultValue: (_ref4 = (_formState$changes$ti = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.timezone) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : user === null || user === void 0 ? void 0 : user.timezone) !== null && _ref4 !== void 0 ? _ref4 : '',
+    defaultValue: (_ref5 = (_formState$changes$ti = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.timezone) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : user === null || user === void 0 ? void 0 : user.timezone) !== null && _ref5 !== void 0 ? _ref5 : '',
     options: timezonesOptions,
     onChange: function onChange(val) {
       return handleChangeSwtich('timezone', val);
@@ -310,7 +322,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     searchBarIsNotLazyLoad: true,
     searchValue: timezoneSearchValue,
     handleChangeSearch: setTimezoneSearchValue
-  })), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
+  }))), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
     user: user,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
@@ -333,7 +345,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return setPasswordSee(!passwordSee);
     }
   }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_ref5 = (_formState$changes$dr = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction) !== null && _ref5 !== void 0 ? _ref5 : false,
+    defaultChecked: (_ref6 = (_formState$changes$dr = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction) !== null && _ref6 !== void 0 ? _ref6 : false,
     onChange: function onChange(val) {
       return handleChangeSwtich('driver_zone_restriction', val);
     }

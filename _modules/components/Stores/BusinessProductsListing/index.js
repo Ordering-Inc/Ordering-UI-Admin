@@ -32,6 +32,7 @@ var _AddBusinessForm = require("../AddBusinessForm");
 var _ProductStep = require("../ProductStep");
 var _BusinessAddStore = require("../BusinessAddStore");
 var _styles2 = require("./styles");
+var _utils = require("../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -86,6 +87,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
     ordering = _useApi2[0];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
@@ -246,9 +250,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     setBatchImageFormOpen(true);
   };
   var handleOpenSite = function handleOpenSite() {
-    var _siteState$site, _siteState$site2, _siteState$site3, _businessState$busine6, _businessState$busine7;
-    var url = siteState !== null && siteState !== void 0 && (_siteState$site = siteState.site) !== null && _siteState$site !== void 0 && _siteState$site.domain && (siteState === null || siteState === void 0 ? void 0 : (_siteState$site2 = siteState.site) === null || _siteState$site2 === void 0 ? void 0 : _siteState$site2.ssl_process_status) === 'ended' ? "https://".concat(siteState === null || siteState === void 0 ? void 0 : (_siteState$site3 = siteState.site) === null || _siteState$site3 === void 0 ? void 0 : _siteState$site3.domain, "/store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.slug) : "https://".concat(ordering.project, ".tryordering.com/store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.slug);
-    window.open(url, '_blank');
+    var _configs$site_url, _configs$site_url2, _businessState$busine6, _businessState$busine7;
+    var storeUrl = configs !== null && configs !== void 0 && (_configs$site_url = configs.site_url) !== null && _configs$site_url !== void 0 && _configs$site_url.value ? "".concat((0, _utils.checkSiteUrl)(configs === null || configs === void 0 ? void 0 : (_configs$site_url2 = configs.site_url) === null || _configs$site_url2 === void 0 ? void 0 : _configs$site_url2.value), "store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine6 = businessState.business) === null || _businessState$busine6 === void 0 ? void 0 : _businessState$busine6.slug) : "https://".concat(ordering.project, ".tryordering.com/store/").concat(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.slug);
+    window.open(storeUrl, '_blank');
   };
   var handleOpenAddBusiness = function handleOpenAddBusiness() {
     setIsAdd(true);

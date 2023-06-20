@@ -52,6 +52,9 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
@@ -217,7 +220,8 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     color: "primary",
     borderRadius: "8px",
     onClick: function onClick() {
-      return window.open("https://".concat(ordering === null || ordering === void 0 ? void 0 : ordering.project, ".tryordering.com"), '_blank');
+      var _configs$site_url;
+      return window.open((configs === null || configs === void 0 ? void 0 : (_configs$site_url = configs.site_url) === null || _configs$site_url === void 0 ? void 0 : _configs$site_url.value) || "https://".concat(ordering === null || ordering === void 0 ? void 0 : ordering.project, ".tryordering.com"), '_blank');
     }
   }, t('VISIT_MY_WEBSITE', 'Visit My Website')))), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.myProducts.orderingWebsite,

@@ -325,7 +325,8 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     window.open(link, '_blank');
   };
   var handleOpenSite = function handleOpenSite() {
-    handleGoToLink("https://".concat(ordering.project, ".tryordering.com"));
+    var _configs$site_url;
+    handleGoToLink((configs === null || configs === void 0 ? void 0 : (_configs$site_url = configs.site_url) === null || _configs$site_url === void 0 ? void 0 : _configs$site_url.value) || "https://".concat(ordering.project, ".tryordering.com"));
   };
   (0, _react.useEffect)(function () {
     if (windowSize.width < 1024) {
