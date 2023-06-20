@@ -147,7 +147,7 @@ const SiteThemeUI = (props) => {
                     {!!themeStructure[selectedPage]?.components && (
                     Object.keys(themeStructure[selectedPage]?.components)?.map(block => {
                       const components = themeStructure[selectedPage].components
-                      return (
+                      return block !== 'birthday' && (
                         <BlockContainer key={block}>
                           <h3>{getTitle(block)}</h3>
                           {(block === 'image' || block === 'dummy_image') && components[block]?.value_type === 'string' && (
