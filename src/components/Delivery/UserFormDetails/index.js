@@ -274,20 +274,37 @@ export const UserFormDetailsUI = (props) => {
               )
             )}
             {isDriversPage && (
-              <InputWrapper isTimezone>
-                <DefaultSelect
-                  placeholder={t('SELECT_TIMEZONE', 'Select a timezone')}
-                  defaultValue={formState?.changes?.timezone ?? user?.timezone ?? ''}
-                  options={timezonesOptions}
-                  onChange={val => handleChangeSwtich('timezone', val)}
-                  optionInnerMaxHeight='300px'
-                  isShowSearchBar
-                  searchBarIsCustomLayout
-                  searchBarIsNotLazyLoad
-                  searchValue={timezoneSearchValue}
-                  handleChangeSearch={setTimezoneSearchValue}
+              <>
+                <Input
+                  name='external_id'
+                  className='form'
+                  placeholder={t('EXTERNAL_ID', 'External Id')}
+                  defaultValue={
+                    formState?.changes?.external_id ?? (user && user?.external_id) ?? ''
+                  }
+                  onChange={handleChangeInput}
+                  autoComplete='off'
+                  onKeyPress={(e) => {
+                    if (!/^[0-9]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
-              </InputWrapper>
+                <InputWrapper isTimezone>
+                  <DefaultSelect
+                    placeholder={t('SELECT_TIMEZONE', 'Select a timezone')}
+                    defaultValue={formState?.changes?.timezone ?? user?.timezone ?? ''}
+                    options={timezonesOptions}
+                    onChange={val => handleChangeSwtich('timezone', val)}
+                    optionInnerMaxHeight='300px'
+                    isShowSearchBar
+                    searchBarIsCustomLayout
+                    searchBarIsNotLazyLoad
+                    searchValue={timezoneSearchValue}
+                    handleChangeSearch={setTimezoneSearchValue}
+                  />
+                </InputWrapper>
+              </>
             )}
             {!!showInputPhoneNumber && (
               <InputPhoneNumber
