@@ -43,6 +43,8 @@ export const OrderSubFilterControls = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 `
 export const OrderStatusSubFilterWrapper = styled.div`
   width: 50%;

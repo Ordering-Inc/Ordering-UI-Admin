@@ -15,8 +15,7 @@ import {
   AddressList as AddressListController,
   useLanguage,
   useOrder,
-  useCustomer,
-  useEvent
+  useCustomer
 } from 'ordering-components-admin'
 
 import {
@@ -30,7 +29,7 @@ import {
   WrapperAddressForm
 } from './styles'
 
-import { Confirm, Modal, NotFoundSource } from '../../Shared'
+import { Confirm, NotFoundSource } from '../../Shared'
 import { Button } from '../../../styles/Buttons'
 import { AddressForm } from '../AddressForm'
 import { useTheme } from 'styled-components'
@@ -60,7 +59,6 @@ const AddressListUI = (props) => {
 
   const [, t] = useLanguage()
   const [orderState] = useOrder()
-  const [events] = useEvent()
 
   const [curAddress, setCurAddress] = useState(false)
   const [addressOpen, setAddressOpen] = useState(false)
@@ -107,7 +105,6 @@ const AddressListUI = (props) => {
 
   const handleSetAddress = (address) => {
     if (checkAddress(address) && userCustomerSetup?.id === user?.id) {
-      events.emit('go_to_page', { page: 'search' })
       setCustomerModalOpen && setCustomerModalOpen(false)
       return
     }
@@ -176,12 +173,6 @@ const AddressListUI = (props) => {
 
   return (
     <>
-      {props.beforeElements?.map((BeforeElement, i) => (
-        <React.Fragment key={i}>
-          {BeforeElement}
-        </React.Fragment>))}
-      {props.beforeComponents?.map((BeforeComponent, i) => (
-        <BeforeComponent key={i} {...props} />))}
       <AddressListContainer id='address_control' isLoading={actionStatus?.loading || orderState?.loading}>
         {
           (!isPopover || !addressOpen) && (
@@ -197,43 +188,6 @@ const AddressListUI = (props) => {
           )
         }
 
-        {!isSeletectedUserAddresses && (
-          <>
-            {
-              isPopover && addressOpen && (
-                <AddressForm
-                  userId={userId}
-                  addressesList={addressList?.addresses}
-                  useValidationFileds
-                  address={curAddress}
-                  onCancel={() => setAddressOpen(false)}
-                  onSaveAddress={handleSaveAddress}
-                  userCustomerSetup={userCustomerSetup}
-                />
-              )
-            }
-            {
-              !isPopover && (
-                <Modal
-                  title={t('ADDRESS', 'Address')}
-                  open={!isPopover && addressOpen}
-                  onClose={() => setAddressOpen(false)}
-                >
-                  <AddressForm
-                    userId={userId}
-                    addressesList={addressList?.addresses}
-                    useValidationFileds
-                    address={curAddress}
-                    onCancel={() => setAddressOpen(false)}
-                    onSaveAddress={handleSaveAddress}
-                    userCustomerSetup={userCustomerSetup}
-                  />
-                </Modal>
-              )
-            }
-          </>
-        )}
-
         {
           !addressList.loading &&
           !actionStatus.loading &&
@@ -245,12 +199,10 @@ const AddressListUI = (props) => {
             <AddressListUl id='list'>
               {uniqueAddressesList.map(address => (
                 <AddressItem key={address?.id}>
-                  <div className='wrapAddress' onClick={() => !isSeletectedUserAddresses && handleSetAddress(address)}>
-                    {!isSeletectedUserAddresses && (
-                      <span className='radio'>
-                        {checkAddress(address) ? <IosRadioButtonOn /> : <IosRadioButtonOff />}
-                      </span>
-                    )}
+                  <div className='wrapAddress' onClick={() => handleSetAddress(address)}>
+                    <span className='radio'>
+                      {address?.default ? <IosRadioButtonOn color={theme.colors.primary} /> : <IosRadioButtonOff />}
+                    </span>
                     <span className='tag'>
                       {address?.tag === 'home' && <HouseDoor />}
                       {address?.tag === 'office' && <Building />}
@@ -361,13 +313,6 @@ const AddressListUI = (props) => {
           />
         </WrapperAddressForm>
       )}
-
-      {props.afterComponents?.map((AfterComponent, i) => (
-        <AfterComponent key={i} {...props} />))}
-      {props.afterElements?.map((AfterElement, i) => (
-        <React.Fragment key={i}>
-          {AfterElement}
-        </React.Fragment>))}
     </>
   )
 }

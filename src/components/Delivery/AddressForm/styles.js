@@ -141,11 +141,11 @@ export const Title = styled.div`
 export const CloseButtonWrapper = styled.span`
   position: fixed;
   cursor: pointer;
-  top: 30px;
+  top: 20px;
   ${props => props.theme?.rtl ? css`
-    left: 10px;
+    left: 20px;
   ` : css`
-    right: 10px;
+    right: 20px;
   `}
 `
 
