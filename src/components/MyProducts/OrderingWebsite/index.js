@@ -229,7 +229,8 @@ const OrderingWebsiteUI = (props) => {
               <Button
                 color='primary'
                 borderRadius='8px'
-                onClick={() => window.open(configs?.site_url?.value || `https://${ordering?.project}.tryordering.com`, '_blank')}
+                onClick={() => window.open(site?.domain && site?.ssl_process_status === 'ended'
+                  ? `https://${site?.domain}` : (configs?.site_url?.value || `https://${ordering?.project}.tryordering.com`), '_blank')}
               >
                 {t('VISIT_MY_WEBSITE', 'Visit My Website')}
               </Button>
