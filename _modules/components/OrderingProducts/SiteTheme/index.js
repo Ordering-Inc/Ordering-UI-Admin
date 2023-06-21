@@ -160,7 +160,7 @@ var SiteThemeUI = function SiteThemeUI(props) {
   }), /*#__PURE__*/_react.default.createElement("h4", null, t('HIDDEN', 'Hidden'))), /*#__PURE__*/_react.default.createElement(_styles2.PageBlockTitle, null, t('PAGE_BLOCKS', 'Page blocks')), !!((_themeStructure$selec4 = themeStructure[selectedPage]) !== null && _themeStructure$selec4 !== void 0 && _themeStructure$selec4.components) && ((_Object$keys = Object.keys((_themeStructure$selec5 = themeStructure[selectedPage]) === null || _themeStructure$selec5 === void 0 ? void 0 : _themeStructure$selec5.components)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (block) {
     var _components$block, _components$block2, _components$block3, _components$block4, _components$block5;
     var components = themeStructure[selectedPage].components;
-    return /*#__PURE__*/_react.default.createElement(_styles2.BlockContainer, {
+    return block !== 'birthday' && /*#__PURE__*/_react.default.createElement(_styles2.BlockContainer, {
       key: block
     }, /*#__PURE__*/_react.default.createElement("h3", null, getTitle(block)), (block === 'image' || block === 'dummy_image') && ((_components$block = components[block]) === null || _components$block === void 0 ? void 0 : _components$block.value_type) === 'string' && /*#__PURE__*/_react.default.createElement(_ThemeImage.ThemeImage, {
       valueObject: themeValues[selectedPage].components[block],

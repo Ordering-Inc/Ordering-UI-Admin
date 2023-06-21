@@ -42,9 +42,9 @@ var Title = _styledComponents.default.div(_templateObject10 || (_templateObject1
   return props.theme.colors.headingColor;
 });
 exports.Title = Title;
-var CloseButtonWrapper = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: fixed;\n  cursor: pointer;\n  top: 30px;\n  ", "\n"])), function (props) {
+var CloseButtonWrapper = _styledComponents.default.span(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: fixed;\n  cursor: pointer;\n  top: 20px;\n  ", "\n"])), function (props) {
   var _props$theme3;
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    right: 10px;\n  "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    left: 20px;\n  "]))) : (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    right: 20px;\n  "])));
 });
 exports.CloseButtonWrapper = CloseButtonWrapper;
 var WrapInput = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  &.address_notes {\n    width: 100%;\n  }\n\n  &.internal_number,\n  &.zipcode {\n    width: 100%;\n  }\n  @media (min-width: 621px) {\n    &.internal_number,\n    &.zipcode  {\n      width: 48%;\n    }\n  }\n"])));

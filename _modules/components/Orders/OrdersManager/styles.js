@@ -23,7 +23,7 @@ var WrapperIndicator = _styledComponents.default.div(_templateObject5 || (_templ
 exports.WrapperIndicator = WrapperIndicator;
 var WrapItemView = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  width: 100%;\n"])));
 exports.WrapItemView = WrapItemView;
-var OrderSubFilterControls = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n"])));
+var OrderSubFilterControls = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  flex-direction: row;\n  justify-content: space-between;\n"])));
 exports.OrderSubFilterControls = OrderSubFilterControls;
 var OrderStatusSubFilterWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  width: 50%;\n  display: inline-block;\n  flex: 1;\n  margin-right: 20px;\n"])));
 exports.OrderStatusSubFilterWrapper = OrderStatusSubFilterWrapper;
