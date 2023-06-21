@@ -60,9 +60,11 @@ export const BusinessSummary = (props) => {
   }
 
   const handleOpenSite = () => {
-    const storeUrl = configs?.site_url?.value
-      ? `${checkSiteUrl(configs?.site_url?.value)}store/${businessState?.business?.slug}`
-      : `https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`
+    const storeUrl = siteState?.site?.domain && siteState?.site?.ssl_process_status === 'ended'
+      ? `https://${siteState?.site?.domain}/store/${businessState?.business?.slug}`
+      : configs?.site_url?.value
+        ? `${checkSiteUrl(configs?.site_url?.value)}store/${businessState?.business?.slug}`
+        : `https://${ordering.project}.tryordering.com/store/${businessState?.business?.slug}`
     window.open(storeUrl, '_blank')
   }
 
