@@ -22,7 +22,7 @@ import {
   X as CloseIcon
 } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi } from 'ordering-components-admin'
+import { SidebarMenu as SidebarMenuController, useEvent, useLanguage, useSession, useConfig, useApi, useSite } from 'ordering-components-admin'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { Accordion, Image, Button, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { LanguageSelector } from '../LanguageSelector'
@@ -53,6 +53,7 @@ const SidebarMenuUI = (props) => {
   const [events] = useEvent()
   const [, t] = useLanguage()
   const [sessionState] = useSession()
+  const [{ site }] = useSite()
   const [{ configs }] = useConfig()
   const [ordering] = useApi()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -388,7 +389,12 @@ const SidebarMenuUI = (props) => {
   }
 
   const handleOpenSite = () => {
-    handleGoToLink(configs?.site_url?.value || `https://${ordering.project}.tryordering.com`)
+    const siteUrl = site?.domain && site?.ssl_process_status === 'ended'
+      ? `https://${site?.domain}`
+      : configs?.site_url?.value
+        ? configs?.site_url?.value
+        : `https://${ordering.project}.tryordering.com`
+    handleGoToLink(siteUrl)
   }
 
   useEffect(() => {
