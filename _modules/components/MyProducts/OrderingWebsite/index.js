@@ -221,7 +221,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     borderRadius: "8px",
     onClick: function onClick() {
       var _configs$site_url;
-      return window.open((configs === null || configs === void 0 ? void 0 : (_configs$site_url = configs.site_url) === null || _configs$site_url === void 0 ? void 0 : _configs$site_url.value) || "https://".concat(ordering === null || ordering === void 0 ? void 0 : ordering.project, ".tryordering.com"), '_blank');
+      return window.open(site !== null && site !== void 0 && site.domain && (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'ended' ? "https://".concat(site === null || site === void 0 ? void 0 : site.domain) : (configs === null || configs === void 0 ? void 0 : (_configs$site_url = configs.site_url) === null || _configs$site_url === void 0 ? void 0 : _configs$site_url.value) || "https://".concat(ordering === null || ordering === void 0 ? void 0 : ordering.project, ".tryordering.com"), '_blank');
     }
   }, t('VISIT_MY_WEBSITE', 'Visit My Website')))), /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.myProducts.orderingWebsite,
