@@ -129,7 +129,7 @@ var RefundToWallet = function RefundToWallet(props) {
       if ((event === null || event === void 0 ? void 0 : (_event$wallet_event = event.wallet_event) === null || _event$wallet_event === void 0 ? void 0 : (_event$wallet_event$w = _event$wallet_event.wallet) === null || _event$wallet_event$w === void 0 ? void 0 : _event$wallet_event$w.type) === 'cash') {
         if (isAllowCashWalletRefund) {
           _refundOptions.push({
-            value: event.id,
+            value: 'cash_wallet',
             content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('CASH_WALLET', 'Cash Wallet'))
           });
         }
@@ -149,11 +149,23 @@ var RefundToWallet = function RefundToWallet(props) {
         }
       } else {
         if (isAllowOtherRefund) {
-          var _event$paymethod2, _event$paymethod2$gat, _event$paymethod3, _event$data2, _event$data2$gateway, _event$data3, _event$data3$gateway;
-          _refundOptions.push({
-            value: event.id,
-            content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, event !== null && event !== void 0 && event.paymethod ? t(event === null || event === void 0 ? void 0 : (_event$paymethod2 = event.paymethod) === null || _event$paymethod2 === void 0 ? void 0 : (_event$paymethod2$gat = _event$paymethod2.gateway) === null || _event$paymethod2$gat === void 0 ? void 0 : _event$paymethod2$gat.toUpperCase(), event === null || event === void 0 ? void 0 : (_event$paymethod3 = event.paymethod) === null || _event$paymethod3 === void 0 ? void 0 : _event$paymethod3.name) : t(event === null || event === void 0 ? void 0 : (_event$data2 = event.data) === null || _event$data2 === void 0 ? void 0 : (_event$data2$gateway = _event$data2.gateway) === null || _event$data2$gateway === void 0 ? void 0 : _event$data2$gateway.toUpperCase(), event === null || event === void 0 ? void 0 : (_event$data3 = event.data) === null || _event$data3 === void 0 ? void 0 : (_event$data3$gateway = _event$data3.gateway) === null || _event$data3$gateway === void 0 ? void 0 : _event$data3$gateway.replaceAll('_', ' ')))
-          });
+          var _event$paymethod2, _event$data2;
+          if ((event === null || event === void 0 ? void 0 : (_event$paymethod2 = event.paymethod) === null || _event$paymethod2 === void 0 ? void 0 : _event$paymethod2.gateway) === 'cash' || (event === null || event === void 0 ? void 0 : (_event$data2 = event.data) === null || _event$data2 === void 0 ? void 0 : _event$data2.gateway) === 'cash') {
+            if (!_refundOptions.find(function (item) {
+              return item.value === 'cash_wallet';
+            })) {
+              _refundOptions.push({
+                value: 'cash_wallet',
+                content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('CASH_WALLET', 'Cash Wallet'))
+              });
+            }
+          } else {
+            var _event$paymethod3, _event$paymethod3$gat, _event$paymethod4, _event$data3, _event$data3$gateway, _event$data4, _event$data4$gateway;
+            _refundOptions.push({
+              value: event.id,
+              content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, event !== null && event !== void 0 && event.paymethod ? t(event === null || event === void 0 ? void 0 : (_event$paymethod3 = event.paymethod) === null || _event$paymethod3 === void 0 ? void 0 : (_event$paymethod3$gat = _event$paymethod3.gateway) === null || _event$paymethod3$gat === void 0 ? void 0 : _event$paymethod3$gat.toUpperCase(), event === null || event === void 0 ? void 0 : (_event$paymethod4 = event.paymethod) === null || _event$paymethod4 === void 0 ? void 0 : _event$paymethod4.name) : t(event === null || event === void 0 ? void 0 : (_event$data3 = event.data) === null || _event$data3 === void 0 ? void 0 : (_event$data3$gateway = _event$data3.gateway) === null || _event$data3$gateway === void 0 ? void 0 : _event$data3$gateway.toUpperCase(), event === null || event === void 0 ? void 0 : (_event$data4 = event.data) === null || _event$data4 === void 0 ? void 0 : (_event$data4$gateway = _event$data4.gateway) === null || _event$data4$gateway === void 0 ? void 0 : _event$data4$gateway.replaceAll('_', ' ')))
+            });
+          }
         }
       }
     });

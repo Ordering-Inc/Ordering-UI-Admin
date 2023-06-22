@@ -76,6 +76,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     getBusiness = props.getBusiness,
     businessTypes = props.businessTypes,
     setBusinessTypes = props.setBusinessTypes,
+    categoryState = props.categoryState,
+    handleUpdateCategoryState = props.handleUpdateCategoryState,
     siteState = props.siteState;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
@@ -459,7 +461,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     taxes: taxes,
     setTaxes: setTaxes,
     fees: fees,
-    setFees: setFees
+    setFees: setFees,
+    categoryState: categoryState,
+    handleUpdateCategoryState: handleUpdateCategoryState
   }), openSidebar === 'business_details' && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openSidebar === 'business_details',
     businessId: (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.id) || (businessState === null || businessState === void 0 ? void 0 : (_businessState$busine22 = businessState.business) === null || _businessState$busine22 === void 0 ? void 0 : _businessState$busine22.id),
