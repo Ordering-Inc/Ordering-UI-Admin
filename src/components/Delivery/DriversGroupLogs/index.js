@@ -63,6 +63,12 @@ export const DriversGroupLogsUI = (props) => {
     getDriversGroupLogs(expectedPage, pageSize)
   }
 
+  const getValidLogData = (data) => {
+    return typeof data === 'object'
+      ? Object.values(data)
+      : typeof data === 'string' ? JSON.parse(data) : data
+  }
+
   useEffect(() => {
     if (logsList.loading || logsList.logs.length > 0 || paginationProps.totalPages <= 1) return
     if (paginationProps.currentPage !== paginationProps.totalPages) {
@@ -133,12 +139,12 @@ export const DriversGroupLogsUI = (props) => {
                       </td>
                       <td>
                         <EventTypeContainer>
-                          <p>{t(log?.event)}</p>
+                          <p>{t((log?.event || '').toUpperCase())}</p>
                         </EventTypeContainer>
                       </td>
                       <td>
                         <DataListTable>
-                          {log?.data && (typeof log?.data === 'object' ? Object.values(log?.data) : log?.data).map((item, i) => (
+                          {log?.data && getValidLogData(log?.data).map((item, i) => (
                             <tbody key={i}>
                               <tr>
                                 <td>{getAttributeName(item?.attribute)}</td>
