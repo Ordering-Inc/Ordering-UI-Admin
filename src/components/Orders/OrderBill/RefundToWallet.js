@@ -88,7 +88,7 @@ export const RefundToWallet = (props) => {
       if (event?.wallet_event?.wallet?.type === 'cash') {
         if (isAllowCashWalletRefund) {
           _refundOptions.push({
-            value: event.id,
+            value: 'cash_wallet',
             content: <Option>{t('CASH_WALLET', 'Cash Wallet')}</Option>
           })
         }
@@ -108,10 +108,19 @@ export const RefundToWallet = (props) => {
         }
       } else {
         if (isAllowOtherRefund) {
-          _refundOptions.push({
-            value: event.id,
-            content: <Option>{event?.paymethod ? t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name) : t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))}</Option>
-          })
+          if (event?.paymethod?.gateway === 'cash' || event?.data?.gateway === 'cash') {
+            if (!_refundOptions.find(item => item.value === 'cash_wallet')) {
+              _refundOptions.push({
+                value: 'cash_wallet',
+                content: <Option>{t('CASH_WALLET', 'Cash Wallet')}</Option>
+              })
+            }
+          } else {
+            _refundOptions.push({
+              value: event.id,
+              content: <Option>{event?.paymethod ? t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name) : t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))}</Option>
+            })
+          }
         }
       }
     })
