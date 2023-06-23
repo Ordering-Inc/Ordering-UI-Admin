@@ -92,6 +92,10 @@ var SelectCustomer = function SelectCustomer(props) {
     document.execCommand('insertText', false, trimmedValue);
     onChangeNumber(trimmedValue);
   };
+  (0, _react.useEffect)(function () {
+    setOpenSidebar(null);
+    handleParentSidebarMove(0);
+  }, [customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SectionContainer, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CUSTOMER', 'Customer')), /*#__PURE__*/_react.default.createElement("p", null, t('SEARCH_WITH_PHONE_FOR_CUSTOM_ORDER', 'Search with the phone the customer who will assign the custom order.')), /*#__PURE__*/_react.default.createElement(_styles2.SearchBarContainer, null, showSearchbar ? /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('PHONE_NUMBER', 'Phone number'),
     onChange: function onChange(e) {
@@ -157,7 +161,8 @@ var SelectCustomer = function SelectCustomer(props) {
       return handleCloseSidebar();
     }
   }, /*#__PURE__*/_react.default.createElement(_Users.UserAddForm, {
-    isFromCustomOrder: true
+    isFromCustomOrder: true,
+    hideUserTypeSelector: true
     // defaultPhoneNumber={
     //   findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())
     //     ? `+${findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())} ${selectedUser?.cellphone || selectedUser?.phone || phone}`
