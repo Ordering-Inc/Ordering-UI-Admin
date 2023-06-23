@@ -1,28 +1,26 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, useOrder } from 'ordering-components-admin'
-import { Input, IconButton } from '../../../../styles'
+import { Input, IconButton, DefaultSelect as Select } from '../../../../styles'
 import { DashCircle, PlusCircle, Pencil, Trash } from 'react-bootstrap-icons'
-import CgSpinnerTwoAlt from '@meronex/icons/cg/CgSpinnerTwoAlt'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { Modal, Confirm } from '../../../Shared'
 import { ProductForm } from '../ProductForm'
 
 import {
   Container,
-  SearchProductsWrapper,
-  OptionsToSelectContainer,
   SelectOption,
   WrapperImage,
   CartProductsWrapper,
   ProductQuantityActionsContainer,
   CartProductsConatiner,
-  ProductEditDeleteActions
+  ProductEditDeleteActions,
+  SelectWrapper,
+  Option
 } from './styles'
 
 export const SelectProducts = (props) => {
   const {
     productList,
-    getProducts,
     handeUpdateProductCart,
     cart,
     business
@@ -32,21 +30,13 @@ export const SelectProducts = (props) => {
   const [{ optimizeImage }] = useUtils()
   const [, { removeProduct }] = useOrder()
 
-  const searchInputRef = useRef(null)
-  const [searchInputFocus, setSearchInputFocus] = useState(false)
+  const [productsOptions, setProductsOptions] = useState([])
+  const [searchValue, setSearchValue] = useState('')
   const [openProduct, setOpenProduct] = useState(false)
   const [curProduct, setCurProduct] = useState(null)
   const [selectedProductCart, setSelectedProductCart] = useState(null)
   const [isCartProduct, setIsCartProduct] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-
-  let timeout = null
-  const onInputChange = (inputValue) => {
-    clearTimeout(timeout)
-    timeout = setTimeout(function () {
-      getProducts(inputValue)
-    }, 750)
-  }
 
   const handleSelectProduct = (product) => {
     setIsCartProduct(false)
@@ -79,13 +69,7 @@ export const SelectProducts = (props) => {
   }
 
   useEffect(() => {
-    if (business?.id) {
-      searchInputRef.current.value = ''
-    }
-  }, [business?.id])
-
-  useEffect(() => {
-    if (!searchInputFocus || !productList?.products?.length) return
+    if (!productList?.products?.length) return
     const el = document.querySelector('.custom-order-content')
     if (el) {
       el.scrollTo({
@@ -93,60 +77,57 @@ export const SelectProducts = (props) => {
         behavior: 'smooth'
       })
     }
-  }, [searchInputFocus, productList?.products])
+  }, [productList?.products])
+
+  const onChange = (val) => {
+    const findProduct = productList?.products.find(product => product?.id === val)
+    handleSelectProduct(findProduct)
+    setSearchValue('')
+  }
+
+  useEffect(() => {
+    const _productsOptions = []
+    if (productList?.loading) {
+      _productsOptions.push({
+        value: null,
+        content: <Option>{t('LOADING', 'Loading')}...</Option>
+      })
+      setProductsOptions(_productsOptions)
+      return
+    }
+    if (!productList?.products) {
+      setProductsOptions(_productsOptions)
+      return
+    }
+    productList.products.filter(product => (product?.name || '').toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())).map(product => {
+      _productsOptions.push({
+        value: product?.id,
+        content: (
+          <Option>
+            <img src={optimizeImage(product?.images, 'h_50,c_limit')} alt='' />
+            <span>{product?.name}</span>
+          </Option>
+        )
+      })
+    })
+    setProductsOptions(_productsOptions)
+  }, [productList, searchValue])
 
   return (
     <Container>
       <h3>{t('WAHT_WANT_TO_BUY', 'What do you want us to buy?')}</h3>
-      <SearchProductsWrapper>
-        <Input
-          ref={searchInputRef}
-          placeholder={t('SEARCH_PRODUCTOS', 'Search products')}
-          onChange={e => onInputChange(e.target.value)}
-          onFocus={() => setSearchInputFocus(true)}
-          onBlur={() => {
-            setTimeout(() => {
-              setSearchInputFocus(false)
-            }, 300)
-          }}
+      <SelectWrapper>
+        <Select
+          noSelected
+          placeholder={<Option>{t('SELECT_PRODUCT', 'Select product')}</Option>}
+          options={productsOptions}
+          onChange={onChange}
+          optionInnerMaxHeight='300px'
+          isShowSearchBar
+          searchValue={searchValue}
+          handleChangeSearch={setSearchValue}
         />
-        {productList.loading && (
-          <span className='loading'>
-            <CgSpinnerTwoAlt />
-          </span>
-        )}
-        {searchInputFocus && (
-          <OptionsToSelectContainer>
-            {productList?.products?.length > 0 ? (
-              <>
-                {productList?.products?.map(product => (
-                  <SelectOption
-                    key={product.id}
-                    onClick={() => handleSelectProduct(product)}
-                  >
-                    <WrapperImage>
-                      {product?.images ? (
-                        <img src={optimizeImage(product?.images, 'h_50,c_limit')} alt='' />
-                      ) : (
-                        <BiImage />
-                      )}
-                    </WrapperImage>
-                    <span className='name'>{product?.name}</span>
-                  </SelectOption>
-                ))}
-              </>
-            ) : (
-              <p>
-                {
-                  productList.loading
-                    ? t('LOADING', 'Loading')
-                    : t('SEARCH_PRODUCTOS', 'Search products')
-                }
-              </p>
-            )}
-          </OptionsToSelectContainer>
-        )}
-      </SearchProductsWrapper>
+      </SelectWrapper>
       <CartProductsConatiner>
         {cart?.products?.map((product, index) => (
           <CartProductsWrapper key={`${product.id}_${index}`}>

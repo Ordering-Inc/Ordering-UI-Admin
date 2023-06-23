@@ -41,7 +41,8 @@ const UserAddFormUI = (props) => {
     handlechangeImage,
     handleChangeSwtich,
     defaultPhoneNumber,
-    isFromCustomOrder
+    isFromCustomOrder,
+    hideUserTypeSelector
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
@@ -317,13 +318,15 @@ const UserAddFormUI = (props) => {
               props.afterMidComponents?.map((MidComponent, i) => (
                 <MidComponent key={i} {...props} />))
               }
-              <WrapperUserTypeSelector>
-                <UserTypeSelector
-                  isPrimary
-                  defaultUserType={formState?.changes?.level || 3}
-                  handleChangeUserType={handleChangeUserType}
-                />
-              </WrapperUserTypeSelector>
+              {!hideUserTypeSelector && (
+                <WrapperUserTypeSelector>
+                  <UserTypeSelector
+                    isPrimary
+                    defaultUserType={formState?.changes?.level || 3}
+                    handleChangeUserType={handleChangeUserType}
+                  />
+                </WrapperUserTypeSelector>
+              )}
               <ActionsForm>
                 <Button
                   color='primary'
