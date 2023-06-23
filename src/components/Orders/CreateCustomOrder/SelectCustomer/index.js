@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLanguage, useUtils, useConfig, useCustomer } from 'ordering-components-admin'
 import { UserAddForm } from '../../../Users'
 import { AddressList } from '../../../Delivery'
@@ -76,6 +76,11 @@ export const SelectCustomer = (props) => {
     document.execCommand('insertText', false, trimmedValue)
     onChangeNumber(trimmedValue)
   }
+
+  useEffect(() => {
+    setOpenSidebar(null)
+    handleParentSidebarMove(0)
+  }, [customerAddress?.location])
 
   return (
     <>
@@ -199,6 +204,7 @@ export const SelectCustomer = (props) => {
         >
           <UserAddForm
             isFromCustomOrder
+            hideUserTypeSelector
             // defaultPhoneNumber={
             //   findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())
             //     ? `+${findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())} ${selectedUser?.cellphone || selectedUser?.phone || phone}`
