@@ -190,3 +190,10 @@ export const ActionSelectorWrapper = styled.div`
     }
   }
 `
+export const BusinessesWrapper = styled.div`
+  margin-top: 30px;
+  p {
+    font-size: 14px;
+    margin-bottom: 0px;
+  }
+`
