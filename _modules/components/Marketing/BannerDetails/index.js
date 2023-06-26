@@ -14,6 +14,7 @@ var _Shared = require("../../Shared");
 var _styledComponents = require("styled-components");
 var _reactBootstrap = require("react-bootstrap");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _Businesses = require("./Businesses");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -30,7 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BannerDetailsUI = function BannerDetailsUI(props) {
-  var _bannerState$banner, _bannerState$banner2, _bannerState$banner3, _bannerState$banner4, _bannerState$banner5;
+  var _bannerState$banner3, _bannerState$banner4, _bannerState$banner5, _bannerState$banner6, _bannerState$banner7;
   var bannerState = props.bannerState,
     changesState = props.changesState,
     actionState = props.actionState,
@@ -39,7 +40,12 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
     handleAddBanner = props.handleAddBanner,
     handleChangeItem = props.handleChangeItem,
     handleDeleteBanner = props.handleDeleteBanner,
-    setBannerMoveDistance = props.setBannerMoveDistance;
+    setBannerMoveDistance = props.setBannerMoveDistance,
+    businessList = props.businessList,
+    selectedBusinessIds = props.selectedBusinessIds,
+    handleSelectBusiness = props.handleSelectBusiness,
+    handleSelectAllBusiness = props.handleSelectAllBusiness,
+    defaultPosition = props.defaultPosition;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -64,10 +70,23 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     confirm = _useState6[0],
     setConfirm = _useState6[1];
-  var tabOptions = [{
-    key: 'images',
-    content: t('IMAGES', 'Images')
-  }];
+  var tabOptions = (0, _react.useMemo)(function () {
+    var _bannerState$banner, _bannerState$banner2;
+    if ((bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner = bannerState.banner) === null || _bannerState$banner === void 0 ? void 0 : _bannerState$banner.position) === 'web_business_page' || (bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner2 = bannerState.banner) === null || _bannerState$banner2 === void 0 ? void 0 : _bannerState$banner2.position) === 'app_business_page') {
+      return [{
+        key: 'images',
+        content: t('IMAGES', 'Images')
+      }, {
+        key: 'businesses',
+        content: t('BUSINESSES', 'Businesses')
+      }];
+    } else {
+      return [{
+        key: 'images',
+        content: t('IMAGES', 'Images')
+      }];
+    }
+  }, [bannerState]);
   var onClickDeleteBanner = function onClickDeleteBanner() {
     setConfirm({
       open: true,
@@ -101,8 +120,8 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
     }, 750);
     setTimer(_timer);
   };
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, isAddMode ? t('ADD_BANNER', 'Add banner') : bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner = bannerState.banner) === null || _bannerState$banner === void 0 ? void 0 : _bannerState$banner.name), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_bannerState$banner2 = bannerState.banner) === null || _bannerState$banner2 === void 0 ? void 0 : _bannerState$banner2.enabled,
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, isAddMode ? t('ADD_BANNER', 'Add banner') : bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner3 = bannerState.banner) === null || _bannerState$banner3 === void 0 ? void 0 : _bannerState$banner3.name), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (_bannerState$banner4 = bannerState.banner) === null || _bannerState$banner4 === void 0 ? void 0 : _bannerState$banner4.enabled,
     onChange: function onChange(enabled) {
       return handleUpdateClick({
         enabled: enabled
@@ -117,28 +136,42 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
       return onClickDeleteBanner();
     }
   }, t('DELETE', 'Delete')))))), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.FormController, {
-    key: bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner3 = bannerState.banner) === null || _bannerState$banner3 === void 0 ? void 0 : _bannerState$banner3.id
+    key: bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner5 = bannerState.banner) === null || _bannerState$banner5 === void 0 ? void 0 : _bannerState$banner5.id
   }, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    defaultValue: (bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner4 = bannerState.banner) === null || _bannerState$banner4 === void 0 ? void 0 : _bannerState$banner4.name) || '',
+    defaultValue: (bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner6 = bannerState.banner) === null || _bannerState$banner6 === void 0 ? void 0 : _bannerState$banner6.name) || '',
     onChange: function onChange(e) {
       return handleChangeBannerName(e.target.value);
     }
   })), isAddMode ? /*#__PURE__*/_react.default.createElement(_AddBanner.AddBanner, {
     changesState: changesState,
     handleChangeItem: handleChangeItem,
-    handleAddBanner: handleAddBanner
+    handleAddBanner: handleAddBanner,
+    actionState: actionState,
+    businessList: businessList,
+    selectedBusinessIds: selectedBusinessIds,
+    handleSelectBusiness: handleSelectBusiness,
+    handleSelectAllBusiness: handleSelectAllBusiness,
+    defaultPosition: defaultPosition
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TabsConatiner, null, tabOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: option.key,
       active: selectedTab === option.key,
       onClick: function onClick() {
-        return setSelectedTab(option.key);
+        setSelectedTab(option.key);
+        setBannerMoveDistance(0);
       }
     }, option.content);
   })), selectedTab === 'images' && /*#__PURE__*/_react.default.createElement(_BannerImages.BannerImages, _extends({}, props, {
-    bannerId: bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner5 = bannerState.banner) === null || _bannerState$banner5 === void 0 ? void 0 : _bannerState$banner5.id,
+    bannerId: bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner7 = bannerState.banner) === null || _bannerState$banner7 === void 0 ? void 0 : _bannerState$banner7.id,
     setBannerMoveDistance: setBannerMoveDistance
-  }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })), selectedTab === 'businesses' && /*#__PURE__*/_react.default.createElement(_Businesses.Businesses, {
+    actionState: actionState,
+    businessList: businessList,
+    selectedBusinessIds: selectedBusinessIds,
+    handleSelectBusiness: handleSelectBusiness,
+    handleSelectAllBusiness: handleSelectAllBusiness,
+    handleUpdateClick: handleUpdateClick
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
