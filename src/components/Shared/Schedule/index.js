@@ -53,7 +53,7 @@ const ScheduleUI = (props) => {
   const [{ configs }] = useConfig()
   const [{ parseDate }] = useUtils()
 
-  const is12Hours = configs.format_time?.value === '12'
+  const is12Hours = configs?.general_hour_format?.value?.includes('hh:mm')
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
