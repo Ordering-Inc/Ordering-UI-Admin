@@ -26,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ScheduleUI = function ScheduleUI(props) {
-  var _configs$format_time;
+  var _configs$general_hour, _configs$general_hour2;
   var scheduleState = props.scheduleState,
     isConflict = props.isConflict,
     setIsConflict = props.setIsConflict,
@@ -54,7 +54,7 @@ var ScheduleUI = function ScheduleUI(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseDate = _useUtils2[0].parseDate;
-  var is12Hours = ((_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12';
+  var is12Hours = configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : (_configs$general_hour2 = _configs$general_hour.value) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.includes('hh:mm');
   var _useState = (0, _react.useState)({
       open: false,
       content: []
