@@ -9,7 +9,6 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("../../../../styles");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-var _CgSpinnerTwoAlt = _interopRequireDefault(require("@meronex/icons/cg/CgSpinnerTwoAlt"));
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
 var _Shared = require("../../../Shared");
 var _ProductForm = require("../ProductForm");
@@ -29,9 +28,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SelectProducts = function SelectProducts(props) {
-  var _productList$products2, _productList$products3, _cart$products, _cart$products2;
+  var _cart$products, _cart$products2;
   var productList = props.productList,
-    getProducts = props.getProducts,
     handeUpdateProductCart = props.handeUpdateProductCart,
     cart = props.cart,
     business = props.business;
@@ -44,42 +42,38 @@ var SelectProducts = function SelectProducts(props) {
   var _useOrder = (0, _orderingComponentsAdmin.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 2),
     removeProduct = _useOrder2[1].removeProduct;
-  var searchInputRef = (0, _react.useRef)(null);
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
-    searchInputFocus = _useState2[0],
-    setSearchInputFocus = _useState2[1];
-  var _useState3 = (0, _react.useState)(false),
+    productsOptions = _useState2[0],
+    setProductsOptions = _useState2[1];
+  var _useState3 = (0, _react.useState)(''),
     _useState4 = _slicedToArray(_useState3, 2),
-    openProduct = _useState4[0],
-    setOpenProduct = _useState4[1];
-  var _useState5 = (0, _react.useState)(null),
+    searchValue = _useState4[0],
+    setSearchValue = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    curProduct = _useState6[0],
-    setCurProduct = _useState6[1];
+    openProduct = _useState6[0],
+    setOpenProduct = _useState6[1];
   var _useState7 = (0, _react.useState)(null),
     _useState8 = _slicedToArray(_useState7, 2),
-    selectedProductCart = _useState8[0],
-    setSelectedProductCart = _useState8[1];
-  var _useState9 = (0, _react.useState)(false),
+    curProduct = _useState8[0],
+    setCurProduct = _useState8[1];
+  var _useState9 = (0, _react.useState)(null),
     _useState10 = _slicedToArray(_useState9, 2),
-    isCartProduct = _useState10[0],
-    setIsCartProduct = _useState10[1];
-  var _useState11 = (0, _react.useState)({
+    selectedProductCart = _useState10[0],
+    setSelectedProductCart = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isCartProduct = _useState12[0],
+    setIsCartProduct = _useState12[1];
+  var _useState13 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
-    _useState12 = _slicedToArray(_useState11, 2),
-    confirm = _useState12[0],
-    setConfirm = _useState12[1];
-  var timeout = null;
-  var onInputChange = function onInputChange(inputValue) {
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
-      getProducts(inputValue);
-    }, 750);
-  };
+    _useState14 = _slicedToArray(_useState13, 2),
+    confirm = _useState14[0],
+    setConfirm = _useState14[1];
   var handleSelectProduct = function handleSelectProduct(product) {
     setIsCartProduct(false);
     setSelectedProductCart(null);
@@ -109,13 +103,8 @@ var SelectProducts = function SelectProducts(props) {
     });
   };
   (0, _react.useEffect)(function () {
-    if (business !== null && business !== void 0 && business.id) {
-      searchInputRef.current.value = '';
-    }
-  }, [business === null || business === void 0 ? void 0 : business.id]);
-  (0, _react.useEffect)(function () {
     var _productList$products;
-    if (!searchInputFocus || !(productList !== null && productList !== void 0 && (_productList$products = productList.products) !== null && _productList$products !== void 0 && _productList$products.length)) return;
+    if (!(productList !== null && productList !== void 0 && (_productList$products = productList.products) !== null && _productList$products !== void 0 && _productList$products.length)) return;
     var el = document.querySelector('.custom-order-content');
     if (el) {
       el.scrollTo({
@@ -123,36 +112,51 @@ var SelectProducts = function SelectProducts(props) {
         behavior: 'smooth'
       });
     }
-  }, [searchInputFocus, productList === null || productList === void 0 ? void 0 : productList.products]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h3", null, t('WAHT_WANT_TO_BUY', 'What do you want us to buy?')), /*#__PURE__*/_react.default.createElement(_styles2.SearchProductsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    ref: searchInputRef,
-    placeholder: t('SEARCH_PRODUCTOS', 'Search products'),
-    onChange: function onChange(e) {
-      return onInputChange(e.target.value);
-    },
-    onFocus: function onFocus() {
-      return setSearchInputFocus(true);
-    },
-    onBlur: function onBlur() {
-      setTimeout(function () {
-        setSearchInputFocus(false);
-      }, 300);
+  }, [productList === null || productList === void 0 ? void 0 : productList.products]);
+  var onChange = function onChange(val) {
+    var findProduct = productList === null || productList === void 0 ? void 0 : productList.products.find(function (product) {
+      return (product === null || product === void 0 ? void 0 : product.id) === val;
+    });
+    handleSelectProduct(findProduct);
+    setSearchValue('');
+  };
+  (0, _react.useEffect)(function () {
+    var _productsOptions = [];
+    if (productList !== null && productList !== void 0 && productList.loading) {
+      _productsOptions.push({
+        value: null,
+        content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('LOADING', 'Loading'), "...")
+      });
+      setProductsOptions(_productsOptions);
+      return;
     }
-  }), productList.loading && /*#__PURE__*/_react.default.createElement("span", {
-    className: "loading"
-  }, /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null)), searchInputFocus && /*#__PURE__*/_react.default.createElement(_styles2.OptionsToSelectContainer, null, (productList === null || productList === void 0 ? void 0 : (_productList$products2 = productList.products) === null || _productList$products2 === void 0 ? void 0 : _productList$products2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, productList === null || productList === void 0 ? void 0 : (_productList$products3 = productList.products) === null || _productList$products3 === void 0 ? void 0 : _productList$products3.map(function (product) {
-    return /*#__PURE__*/_react.default.createElement(_styles2.SelectOption, {
-      key: product.id,
-      onClick: function onClick() {
-        return handleSelectProduct(product);
-      }
-    }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, product !== null && product !== void 0 && product.images ? /*#__PURE__*/_react.default.createElement("img", {
-      src: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_50,c_limit'),
-      alt: ""
-    }) : /*#__PURE__*/_react.default.createElement(_BiImage.default, null)), /*#__PURE__*/_react.default.createElement("span", {
-      className: "name"
-    }, product === null || product === void 0 ? void 0 : product.name));
-  })) : /*#__PURE__*/_react.default.createElement("p", null, productList.loading ? t('LOADING', 'Loading') : t('SEARCH_PRODUCTOS', 'Search products')))), /*#__PURE__*/_react.default.createElement(_styles2.CartProductsConatiner, null, cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.map(function (product, index) {
+    if (!(productList !== null && productList !== void 0 && productList.products)) {
+      setProductsOptions(_productsOptions);
+      return;
+    }
+    productList.products.filter(function (product) {
+      return ((product === null || product === void 0 ? void 0 : product.name) || '').toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+    }).map(function (product) {
+      _productsOptions.push({
+        value: product === null || product === void 0 ? void 0 : product.id,
+        content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement("img", {
+          src: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_50,c_limit'),
+          alt: ""
+        }), /*#__PURE__*/_react.default.createElement("span", null, product === null || product === void 0 ? void 0 : product.name))
+      });
+    });
+    setProductsOptions(_productsOptions);
+  }, [productList, searchValue]);
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h3", null, t('WAHT_WANT_TO_BUY', 'What do you want us to buy?')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+    noSelected: true,
+    placeholder: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('SELECT_PRODUCT', 'Select product')),
+    options: productsOptions,
+    onChange: onChange,
+    optionInnerMaxHeight: "300px",
+    isShowSearchBar: true,
+    searchValue: searchValue,
+    handleChangeSearch: setSearchValue
+  })), /*#__PURE__*/_react.default.createElement(_styles2.CartProductsConatiner, null, cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.map(function (product, index) {
     return /*#__PURE__*/_react.default.createElement(_styles2.CartProductsWrapper, {
       key: "".concat(product.id, "_").concat(index)
     }, /*#__PURE__*/_react.default.createElement(_styles2.SelectOption, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, product !== null && product !== void 0 && product.images ? /*#__PURE__*/_react.default.createElement("img", {

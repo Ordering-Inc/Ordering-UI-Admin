@@ -49,7 +49,8 @@ var UserAddFormUI = function UserAddFormUI(props) {
     handlechangeImage = props.handlechangeImage,
     handleChangeSwtich = props.handleChangeSwtich,
     defaultPhoneNumber = props.defaultPhoneNumber,
-    isFromCustomOrder = props.isFromCustomOrder;
+    isFromCustomOrder = props.isFromCustomOrder,
+    hideUserTypeSelector = props.hideUserTypeSelector;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -325,7 +326,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
     return /*#__PURE__*/_react.default.createElement(MidComponent, _extends({
       key: i
     }, props));
-  }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
+  }), !hideUserTypeSelector && /*#__PURE__*/_react.default.createElement(_styles2.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
     isPrimary: true,
     defaultUserType: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.level) || 3,
     handleChangeUserType: handleChangeUserType
