@@ -3,59 +3,6 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   margin-top: 50px;
 `
-export const SearchProductsWrapper = styled.div`
-  position: relative;
-  margin-top: 11px;
-
-  > input {
-    width: 100%;
-    height: 44px;
-    ${props => props.theme?.rtl ? css`
-      padding-left: 40px;
-    ` : css`
-      padding-right: 40px;
-    `}
-  }
-
-  span.loading {
-    position: absolute;
-    top: 10px;
-    ${props => props.theme?.rtl ? css`
-      left: 10px;
-    ` : css`
-      right: 10px;
-    `}
-
-    @keyframes spinner-content {
-      0% { transform: rotate(0) }
-      100% { transform: rotate(360deg) }
-    }
-
-    svg {
-      animation: spinner-content 1.85s linear infinite;
-      color: ${props => props.theme.colors.headingColor};
-    }
-  }
-`
-
-export const OptionsToSelectContainer = styled.div`
-  z-index: 100;
-  position: absolute;
-  top: 50px;
-  left: 0;
-  width: 100%;
-  max-height: 300px;
-  overflow-x: hidden;
-  border-radius: 8px;
-  border: 1px solid ${props => props.theme.colors.borderColor};
-  background-color: ${props => props.theme.colors.backgroundPage};
-  padding: 9px 0;
-
-  > p {
-    font-size: 12px;
-    margin: 0 16px;
-  }
-`
 export const SelectOption = styled.div`
   cursor: pointer;
   width: 100%;
@@ -156,6 +103,60 @@ export const ProductEditDeleteActions = styled.div`
     > svg {
       width: 16px;
       height: 16px;
+    }
+  }
+`
+
+export const SelectWrapper = styled.div`
+  margin-top: 11px;
+
+  .select {
+    width: 100%;
+    background: ${props => props.theme.colors.secundary};
+    border: none;
+    font-size: 14px;
+
+    > div:first-child {
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+    .list {
+      max-width: 100%;
+    }
+  }
+`
+export const Option = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 7.6px;
+  img {
+    min-height: 38px;
+    min-width: 38px;
+    height: 38px;
+    width: 38px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    ${props => props.theme?.rtl ? css`
+      margin-left: 8px;
+    ` : css`
+      margin-right: 8px;
+    `}
+  }
+  > span {
+    max-width: 200px;
+    font-size: 14px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    > span {
+      max-width: 560px;
     }
   }
 `
