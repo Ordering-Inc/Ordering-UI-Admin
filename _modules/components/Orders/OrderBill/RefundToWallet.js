@@ -39,7 +39,8 @@ var RefundToWallet = function RefundToWallet(props) {
   var _useForm = (0, _reactHookForm.useForm)(),
     handleSubmit = _useForm.handleSubmit,
     register = _useForm.register,
-    errors = _useForm.errors;
+    errors = _useForm.errors,
+    control = _useForm.control;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     openModal = _useState2[0],
@@ -149,21 +150,12 @@ var RefundToWallet = function RefundToWallet(props) {
         }
       } else {
         if (isAllowOtherRefund) {
-          var _event$paymethod2, _event$data2;
-          if ((event === null || event === void 0 ? void 0 : (_event$paymethod2 = event.paymethod) === null || _event$paymethod2 === void 0 ? void 0 : _event$paymethod2.gateway) === 'cash' || (event === null || event === void 0 ? void 0 : (_event$data2 = event.data) === null || _event$data2 === void 0 ? void 0 : _event$data2.gateway) === 'cash') {
-            if (!_refundOptions.find(function (item) {
-              return item.value === 'cash_wallet';
-            })) {
-              _refundOptions.push({
-                value: 'cash_wallet',
-                content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('CASH_WALLET', 'Cash Wallet'))
-              });
-            }
-          } else {
-            var _event$paymethod3, _event$paymethod3$gat, _event$paymethod4, _event$data3, _event$data3$gateway, _event$data4, _event$data4$gateway;
+          if (!_refundOptions.find(function (item) {
+            return item.value === 'cash_wallet';
+          })) {
             _refundOptions.push({
-              value: event.id,
-              content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, event !== null && event !== void 0 && event.paymethod ? t(event === null || event === void 0 ? void 0 : (_event$paymethod3 = event.paymethod) === null || _event$paymethod3 === void 0 ? void 0 : (_event$paymethod3$gat = _event$paymethod3.gateway) === null || _event$paymethod3$gat === void 0 ? void 0 : _event$paymethod3$gat.toUpperCase(), event === null || event === void 0 ? void 0 : (_event$paymethod4 = event.paymethod) === null || _event$paymethod4 === void 0 ? void 0 : _event$paymethod4.name) : t(event === null || event === void 0 ? void 0 : (_event$data3 = event.data) === null || _event$data3 === void 0 ? void 0 : (_event$data3$gateway = _event$data3.gateway) === null || _event$data3$gateway === void 0 ? void 0 : _event$data3$gateway.toUpperCase(), event === null || event === void 0 ? void 0 : (_event$data4 = event.data) === null || _event$data4 === void 0 ? void 0 : (_event$data4$gateway = _event$data4.gateway) === null || _event$data4$gateway === void 0 ? void 0 : _event$data4$gateway.replaceAll('_', ' ')))
+              value: 'cash_wallet',
+              content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('CASH_WALLET', 'Cash Wallet'))
             });
           }
         }
@@ -220,9 +212,20 @@ var RefundToWallet = function RefundToWallet(props) {
     ref: register({
       required: t('VALIDATION_ERROR_FILLED', 'The _attribute_ field is required.').replace('_attribute_', t('AMOUNT', 'Amount'))
     })
-  })), /*#__PURE__*/_react.default.createElement(_styles2.RefundReasonContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('COMMENTS', 'Comments')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
-    rows: 3,
-    name: "description"
+  })), /*#__PURE__*/_react.default.createElement(_styles2.RefundReasonContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('COMMENTS', 'Comments')), /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
+    name: "description",
+    control: control,
+    render: function render(_ref) {
+      var _onChange = _ref.onChange,
+        value = _ref.value;
+      return /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+        rows: 3,
+        value: value,
+        onChange: function onChange(e) {
+          _onChange(e.target.value);
+        }
+      });
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     type: "submit",
     color: "primary",
