@@ -77,6 +77,8 @@ const BusinessProductsListingUI = (props) => {
     getBusiness,
     businessTypes,
     setBusinessTypes,
+    categoryState,
+    handleUpdateCategoryState,
     siteState
   } = props
 
@@ -510,6 +512,8 @@ const BusinessProductsListingUI = (props) => {
           setTaxes={setTaxes}
           fees={fees}
           setFees={setFees}
+          categoryState={categoryState}
+          handleUpdateCategoryState={handleUpdateCategoryState}
         />
       )}
       {openSidebar === 'business_details' && (
