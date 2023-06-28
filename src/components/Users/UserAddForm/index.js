@@ -322,7 +322,7 @@ const UserAddFormUI = (props) => {
                 <WrapperUserTypeSelector>
                   <UserTypeSelector
                     isPrimary
-                    defaultUserType={formState?.changes?.level || 3}
+                    defaultUserType={formState?.changes?.level ?? 3}
                     handleChangeUserType={handleChangeUserType}
                   />
                 </WrapperUserTypeSelector>

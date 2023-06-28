@@ -25,7 +25,7 @@ import {
 export const OrdersContentHeader = (props) => {
   const {
     isDisableTitle,
-    isDisableControl,
+    isSelectedOrders,
     title,
     handleChangeSearch,
     searchValue,
@@ -68,7 +68,7 @@ export const OrdersContentHeader = (props) => {
   return (
     <>
       <OrderContentHeaderContainer
-        isDisableControl={isDisableControl}
+        isDisableControl={isSelectedOrders}
       >
         {!isDisableTitle && (
           <HeaderSection>
@@ -104,7 +104,7 @@ export const OrdersContentHeader = (props) => {
 
           </HeaderSection>
         )}
-        <TopRightSection>
+        <TopRightSection isCustomLayout={isSelectedOrders}>
           <WebsocketStatus />
           {isShowMapsKeySettingButton && (
             <GoogleMapsApiKeySettingButton />
@@ -120,7 +120,7 @@ export const OrdersContentHeader = (props) => {
             </SLAControlsWrapper>
           )}
           <WrapperSearchAndFilter
-            fullWidth={isDisableTitle && isDisableControl}
+            fullWidth={isDisableTitle}
           >
             <SearchBar
               isCustomLayout
