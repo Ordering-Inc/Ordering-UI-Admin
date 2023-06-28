@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, 
-  DriversList as CompanysController
- } from 'ordering-components-admin'
+import { useLanguage, DriversList as CompanysController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Select } from '../../../styles/Select'
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
@@ -65,7 +63,7 @@ const CompanySelectorUI = (props) => {
                 </OptionContent>
               </>
             ) : (
-              t('SELECT_COMPANY', 'Select company')
+              <span>{t('SELECT_COMPANY', 'Select company')}</span>
             )}
           </Option>
         ),
@@ -78,7 +76,7 @@ const CompanySelectorUI = (props) => {
       _companysOptionList.push({
         value: 'remove',
         content: (
-          <Option isRemove>{t('REMOVE_COMPANY', 'Remove assigned company')}</Option>
+          <Option isRemove><span>{t('REMOVE_COMPANY', 'Remove assigned company')}</span></Option>
         ),
         disabled: defaultValue === 'default'
       })
@@ -173,7 +171,7 @@ const CompanySelectorUI = (props) => {
             defaultValue='default'
             options={companysLoading}
             optionInnerMargin='10px'
-            optionInnerMaxHeight='150px' 
+            optionInnerMaxHeight='150px'
             className='driver-select'
             isShowSearchBar
             searchBarIsCustomLayout
