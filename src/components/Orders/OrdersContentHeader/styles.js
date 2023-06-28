@@ -66,8 +66,11 @@ export const HeaderTitle = styled.p`
 export const TopRightSection = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
   flex-direction: column;
+  flex-wrap: wrap;
+  ${({ isCustomLayout }) => !isCustomLayout && css`
+    justify-content: flex-end;
+  `}
   
   @media (min-width: 768px) {
     flex-direction: row;
@@ -119,6 +122,8 @@ export const WrapperSearchAndFilter = styled.div`
   }
 
   @media (min-width: 992px) {
-    margin: 0px;
+    ${({ fullWidth }) => !fullWidth && css`
+      margin: 0px;
+    `}
   }
 `

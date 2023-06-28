@@ -23,7 +23,8 @@ import {
   UsersBottomContainer,
   VerifiedItemsContainer,
   VerifiedItem,
-  UserIdWrapper
+  UserIdWrapper,
+  ActionsContainer
 } from './styles'
 
 export const UsersList = (props) => {
@@ -40,7 +41,8 @@ export const UsersList = (props) => {
     isDriversPage,
     isDriversManagersPage,
     actionDisabled,
-    setSelectedUsers
+    setSelectedUsers,
+    handleChangeAvailable
   } = props
 
   const [, t] = useLanguage()
@@ -50,7 +52,7 @@ export const UsersList = (props) => {
   const [isAllChecked, setIsAllChecked] = useState(false)
 
   const onChangeUserDetails = (e, user) => {
-    const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action')
+    const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action') || e.target.closest('.user_available_control')
     if (isInvalid) return
     handleOpenUserDetails(user)
   }
@@ -253,15 +255,28 @@ export const UsersList = (props) => {
                       </InfoBlock>
                     </td>
                     <td>
-                      <UserEnableWrapper className='user_enable_control'>
-                        <span>{t('ENABLE', 'Enable')}</span>
-                        <Switch
-                          disabled={actionDisabled}
-                          notAsync={user.level === 0}
-                          defaultChecked={user?.enabled}
-                          onChange={enabled => handleEnable(user, enabled)}
-                        />
-                      </UserEnableWrapper>
+                      <ActionsContainer>
+                        <UserEnableWrapper className='user_enable_control'>
+                          <span>{t('ENABLE', 'Enable')}</span>
+                          <Switch
+                            disabled={actionDisabled}
+                            notAsync={user.level === 0}
+                            defaultChecked={user?.enabled}
+                            onChange={enabled => handleEnable(user, enabled)}
+                          />
+                        </UserEnableWrapper>
+                        {isDriversPage && (
+                          <UserEnableWrapper className='user_available_control'>
+                            <span>{t('AVAILABLE', 'Available')}</span>
+                            <Switch
+                              disabled={actionDisabled}
+                              notAsync
+                              defaultChecked={user?.available}
+                              onChange={available => handleChangeAvailable({ id: user.id, available: available })}
+                            />
+                          </UserEnableWrapper>
+                        )}
+                      </ActionsContainer>
                     </td>
                   </tr>
                 </tbody>

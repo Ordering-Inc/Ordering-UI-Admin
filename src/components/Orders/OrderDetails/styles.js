@@ -97,8 +97,7 @@ export const ButtonLink = styled.div`
 
 export const OrderStatus = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 20px 0;
 
   h2 {
@@ -117,6 +116,12 @@ export const OrderStatus = styled.div`
   ${({ isDisabled }) => isDisabled && css`
     pointer-events: none;
   `}
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 `
 export const OrderStatusSelectorWrapper = styled.div`
   min-width: 50%;

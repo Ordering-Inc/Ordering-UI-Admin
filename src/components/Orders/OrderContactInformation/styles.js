@@ -134,11 +134,6 @@ export const DriverSelectorContainer = styled.div`
     }
   }
 
-  @media (min-width: 768px) {
-    > div {
-      width: 50%;
-    }
-  }
   @media (max-width: 576px) {
     > div {
       p {
