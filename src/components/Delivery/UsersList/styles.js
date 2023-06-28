@@ -17,6 +17,9 @@ export const UsersTable = styled.table`
   td, th {
     padding: 10px 0;
     font-size: 14px;
+    &:last-child {
+      width: 20%;
+    }
   }
 
   thead {
@@ -245,4 +248,17 @@ export const VerifiedItemsContainer = styled.div`
 export const UserIdWrapper = styled.div`
   display: flex;
   align-items: center;
+`
+export const ActionsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  > div {
+    &:not(:first-child) {
+      ${props => props.theme?.rtl ? css`
+        margin-right: 25px;
+      ` : css`
+        margin-left: 25px;
+      `}
+    }
+  }
 `
