@@ -84,7 +84,7 @@ var CompanySelectorUI = function CompanySelectorUI(props) {
         className: "driver-info"
       }, /*#__PURE__*/_react.default.createElement(_styles.CompanyName, {
         small: small
-      }, t('NO_COMPANY', 'No Company'))))) : t('SELECT_COMPANY', 'Select company')),
+      }, t('NO_COMPANY', 'No Company'))))) : /*#__PURE__*/_react.default.createElement("span", null, t('SELECT_COMPANY', 'Select company'))),
       color: 'primary',
       disabled: !isFilterView,
       showDisable: true
@@ -94,7 +94,7 @@ var CompanySelectorUI = function CompanySelectorUI(props) {
         value: 'remove',
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
           isRemove: true
-        }, t('REMOVE_COMPANY', 'Remove assigned company')),
+        }, /*#__PURE__*/_react.default.createElement("span", null, t('REMOVE_COMPANY', 'Remove assigned company'))),
         disabled: defaultValue === 'default'
       });
     }

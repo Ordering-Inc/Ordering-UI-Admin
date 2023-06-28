@@ -196,7 +196,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
     isDisableTitle: isSelectedOrders,
-    isDisableControl: isSelectedOrders,
+    isSelectedOrders: isSelectedOrders,
     title: t('ORDERS_LIST', 'Orders list'),
     searchValue: searchValue,
     driverGroupList: driverGroupList,

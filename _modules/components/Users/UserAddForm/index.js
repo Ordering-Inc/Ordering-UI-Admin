@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserAddFormUI = function UserAddFormUI(props) {
-  var _ref, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _formState$changes2, _formState$changes3, _formState$changes4, _validationFields$fie4, _props$afterMidElemen, _props$afterMidCompon, _formState$changes5;
+  var _ref, _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _formState$changes2, _formState$changes3, _formState$changes4, _validationFields$fie4, _props$afterMidElemen, _props$afterMidCompon, _formState$changes$le, _formState$changes5;
   var formState = props.formState,
     showField = props.showField,
     cleanFormState = props.cleanFormState,
@@ -328,7 +328,7 @@ var UserAddFormUI = function UserAddFormUI(props) {
     }, props));
   }), !hideUserTypeSelector && /*#__PURE__*/_react.default.createElement(_styles2.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
     isPrimary: true,
-    defaultUserType: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.level) || 3,
+    defaultUserType: (_formState$changes$le = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.level) !== null && _formState$changes$le !== void 0 ? _formState$changes$le : 3,
     handleChangeUserType: handleChangeUserType
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",

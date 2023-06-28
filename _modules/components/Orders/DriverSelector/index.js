@@ -84,7 +84,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
         className: "driver-info"
       }, /*#__PURE__*/_react.default.createElement(_styles.DriverName, {
         small: small
-      }, t('NO_DRIVER', 'No Driver'))))) : t('SELECT_DRIVER', 'Select driver')),
+      }, t('NO_DRIVER', 'No Driver'))))) : /*#__PURE__*/_react.default.createElement("span", null, t('SELECT_DRIVER', 'Select driver'))),
       color: 'primary',
       disabled: !isFilterView,
       showDisable: true
@@ -94,7 +94,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
         value: 'remove',
         content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
           isRemove: true
-        }, t('REMOVE_DRIVER', 'Remove assigned driver')),
+        }, /*#__PURE__*/_react.default.createElement("span", null, t('REMOVE_DRIVER', 'Remove assigned driver'))),
         disabled: defaultValue === 'default'
       });
     }

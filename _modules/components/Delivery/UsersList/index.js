@@ -46,7 +46,8 @@ var UsersList = function UsersList(props) {
     isDriversPage = props.isDriversPage,
     isDriversManagersPage = props.isDriversManagersPage,
     actionDisabled = props.actionDisabled,
-    setSelectedUsers = props.setSelectedUsers;
+    setSelectedUsers = props.setSelectedUsers,
+    handleChangeAvailable = props.handleChangeAvailable;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -65,7 +66,7 @@ var UsersList = function UsersList(props) {
     isAllChecked = _useState4[0],
     setIsAllChecked = _useState4[1];
   var onChangeUserDetails = function onChangeUserDetails(e, user) {
-    var isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action');
+    var isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action') || e.target.closest('.user_available_control');
     if (isInvalid) return;
     handleOpenUserDetails(user);
   };
@@ -195,7 +196,7 @@ var UsersList = function UsersList(props) {
       className: "bold"
     }, user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email)), ((user === null || user === void 0 ? void 0 : user.phone_verified) || (user === null || user === void 0 ? void 0 : user.email_verified)) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItemsContainer, null, !!(user !== null && user !== void 0 && user.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!(user !== null && user !== void 0 && user.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
+    }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
       className: "user_enable_control"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       disabled: actionDisabled,
@@ -204,7 +205,19 @@ var UsersList = function UsersList(props) {
       onChange: function onChange(enabled) {
         return handleEnable(user, enabled);
       }
-    })))));
+    })), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
+      className: "user_available_control"
+    }, /*#__PURE__*/_react.default.createElement("span", null, t('AVAILABLE', 'Available')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+      disabled: actionDisabled,
+      notAsync: true,
+      defaultChecked: user === null || user === void 0 ? void 0 : user.available,
+      onChange: function onChange(available) {
+        return handleChangeAvailable({
+          id: user.id,
+          available: available
+        });
+      }
+    }))))));
   }))), /*#__PURE__*/_react.default.createElement(_styles2.UsersBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenUserAddForm();
