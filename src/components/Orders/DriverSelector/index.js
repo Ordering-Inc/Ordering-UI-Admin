@@ -62,7 +62,7 @@ const DriverSelectorUI = (props) => {
                 </OptionContent>
               </>
             ) : (
-              t('SELECT_DRIVER', 'Select driver')
+              <span>{t('SELECT_DRIVER', 'Select driver')}</span>
             )}
           </Option>
         ),
@@ -75,7 +75,7 @@ const DriverSelectorUI = (props) => {
       _driversOptionList.push({
         value: 'remove',
         content: (
-          <Option isRemove>{t('REMOVE_DRIVER', 'Remove assigned driver')}</Option>
+          <Option isRemove><span>{t('REMOVE_DRIVER', 'Remove assigned driver')}</span></Option>
         ),
         disabled: defaultValue === 'default'
       })

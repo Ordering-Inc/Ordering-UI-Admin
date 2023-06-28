@@ -28,6 +28,13 @@ export const Option = styled.div`
     }
   `}
 
+  span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 350px;
+  }
+
   @media (max-width: 576px) {
     padding: ${({ padding }) => padding || '5px 0px'};
     ${({ isFilterView }) => isFilterView && css`
@@ -37,6 +44,9 @@ export const Option = styled.div`
         margin-left: 10px;
       `}
     `}
+    span {
+      max-width: 280px;
+    }
   }
 `
 
