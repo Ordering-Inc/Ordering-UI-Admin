@@ -54,6 +54,7 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleChangeUserActiveState = props.handleChangeUserActiveState,
     handleChangeUserType = props.handleChangeUserType,
     handleChangeActiveUser = props.handleChangeActiveUser,
+    handleChangeAvailable = props.handleChangeAvailable,
     handleDeleteUser = props.handleDeleteUser,
     selectedUsers = props.selectedUsers,
     handleSelectedUsers = props.handleSelectedUsers,
@@ -65,7 +66,11 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleSuccessDeleteUser = props.handleSuccessDeleteUser,
     actionDisabled = props.actionDisabled,
     driversGroupsState = props.driversGroupsState,
-    setSelectedUsers = props.setSelectedUsers;
+    setSelectedUsers = props.setSelectedUsers,
+    actionStatus = props.actionStatus;
+  var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
+    _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    t = _useLanguage2[1];
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(null),
@@ -84,14 +89,21 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     openUserAddForm = _useState8[0],
     setOpenUserAddForm = _useState8[1];
-  var _useState9 = (0, _react.useState)(false),
+  var _useState9 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
     _useState10 = _slicedToArray(_useState9, 2),
-    isTourOpen = _useState10[0],
-    setIsTourOpen = _useState10[1];
-  var _useState11 = (0, _react.useState)(isDriversManagersPage ? 2 : 0),
+    alertState = _useState10[0],
+    setAlertState = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
     _useState12 = _slicedToArray(_useState11, 2),
-    currentTourStep = _useState12[0],
-    setCurrentTourStep = _useState12[1];
+    isTourOpen = _useState12[0],
+    setIsTourOpen = _useState12[1];
+  var _useState13 = (0, _react.useState)(isDriversManagersPage ? 2 : 0),
+    _useState14 = _slicedToArray(_useState13, 2),
+    currentTourStep = _useState14[0],
+    setCurrentTourStep = _useState14[1];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenUserDetails(false);
     setOpenUser(null);
@@ -209,6 +221,13 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleSetStorage();
     getDataFromStorage();
   }, [usersList.loading]);
+  (0, _react.useEffect)(function () {
+    if (!(actionStatus !== null && actionStatus !== void 0 && actionStatus.error)) return;
+    setAlertState({
+      open: true,
+      content: actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error
+    });
+  }, [actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.UsersListingContainer, null, /*#__PURE__*/_react.default.createElement(_UsersListingHeader.UsersListingHeader, {
     defaultUserTypesSelected: defaultUserTypesSelected,
     disabledActiveStateCondition: disabledActiveStateCondition,
@@ -241,6 +260,7 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     paginationDetail: paginationDetail,
     handleChangeUserType: handleChangeUserType,
     handleChangeActiveUser: handleChangeActiveUser,
+    handleChangeAvailable: handleChangeAvailable,
     handleDeleteUser: handleDeleteUser,
     selectedUsers: selectedUsers,
     handleSelectedUsers: handleSelectedUsers,
@@ -283,6 +303,24 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     isTourOpen: isTourOpen,
     setIsTourOpen: setIsTourOpen,
     currentStep: currentTourStep
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
   }));
 };
 var DeliveryUsersListing = function DeliveryUsersListing(props) {

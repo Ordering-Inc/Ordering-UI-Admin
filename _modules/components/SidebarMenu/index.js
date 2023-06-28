@@ -48,6 +48,9 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     sessionState = _useSession2[0];
+  var _useSite = (0, _orderingComponentsAdmin.useSite)(),
+    _useSite2 = _slicedToArray(_useSite, 1),
+    site = _useSite2[0].site;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
@@ -325,8 +328,9 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     window.open(link, '_blank');
   };
   var handleOpenSite = function handleOpenSite() {
-    var _configs$site_url;
-    handleGoToLink((configs === null || configs === void 0 ? void 0 : (_configs$site_url = configs.site_url) === null || _configs$site_url === void 0 ? void 0 : _configs$site_url.value) || "https://".concat(ordering.project, ".tryordering.com"));
+    var _configs$site_url, _configs$site_url2;
+    var siteUrl = site !== null && site !== void 0 && site.domain && (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'ended' ? "https://".concat(site === null || site === void 0 ? void 0 : site.domain) : configs !== null && configs !== void 0 && (_configs$site_url = configs.site_url) !== null && _configs$site_url !== void 0 && _configs$site_url.value ? configs === null || configs === void 0 ? void 0 : (_configs$site_url2 = configs.site_url) === null || _configs$site_url2 === void 0 ? void 0 : _configs$site_url2.value : "https://".concat(ordering.project, ".tryordering.com");
+    handleGoToLink(siteUrl);
   };
   (0, _react.useEffect)(function () {
     if (windowSize.width < 1024) {
