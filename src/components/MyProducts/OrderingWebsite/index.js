@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { useLanguage, ExamineClick, DragAndDrop, useConfig, useApi, 
-  // OrderingWebsite as OrderingWebsiteController
+import { useLanguage, ExamineClick, DragAndDrop, useConfig, useApi, OrderingWebsite as OrderingWebsiteController
  } from 'ordering-components-admin'
- import { OrderingWebsite as OrderingWebsiteController } from './test'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { useLocation } from 'react-router-dom'
 import { Button, IconButton, Input, TextArea } from '../../../styles'
