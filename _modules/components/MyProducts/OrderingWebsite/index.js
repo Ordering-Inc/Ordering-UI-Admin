@@ -37,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
-  var _themeValues$website_, _themeValues$website_2, _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$website_7, _themeValues$website_8, _themeValues$website_9, _themeValues$website_10, _themeValues$website_11, _themeValues$website_12, _themeValues$website_13, _themeValues$website_14, _themeValues$website_15, _themeValues$website_16, _themeValues$website_17, _themeValues$website_18, _themeValues$website_19, _themeValues$website_20, _themeValues$website_21, _themeValues$website_22, _themeValues$website_23, _themeValues$website_24, _themeValues$images, _themeValues$images$c, _themeValues$images$c2, _themeValues$images$c3, _themeValues$images2, _themeValues$images2$, _themeValues$images2$2, _themeValues$images2$3, _themeValues$images3, _themeValues$images3$, _themeValues$images3$2, _themeValues$images3$3, _themeValues$images4, _themeValues$images4$, _themeValues$images4$2, _themeValues$images4$3, _themeValues$images5, _themeValues$images5$, _themeValues$images5$2, _themeValues$images5$3, _themeValues$images6, _themeValues$images6$, _themeValues$images6$2, _themeValues$images6$3, _themeValues$images7, _themeValues$images7$, _themeValues$images7$2, _themeValues$images7$3, _themeValues$images8, _themeValues$images8$, _themeValues$images8$2, _themeValues$images8$3, _themeValues$images9, _themeValues$images9$, _themeValues$images9$2, _themeValues$images9$3, _themeValues$images12, _themeValues$images13, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _orderingTheme$themes3, _orderingTheme$themes4, _themeValues$theme_se4, _themeValues$theme_se5, _themeValues$theme_se6, _themeValues$theme_se7, _themeValues$theme_se8, _themeValues$theme_se9;
+  var _themeValues$website_, _themeValues$website_2, _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$website_7, _themeValues$website_8, _themeValues$website_9, _themeValues$website_10, _themeValues$website_11, _themeValues$website_12, _themeValues$website_13, _themeValues$website_14, _themeValues$website_15, _themeValues$website_16, _themeValues$website_17, _themeValues$website_18, _themeValues$images, _themeValues$images$c, _themeValues$images$c2, _themeValues$images$c3, _themeValues$images2, _themeValues$images2$, _themeValues$images2$2, _themeValues$images2$3, _themeValues$images3, _themeValues$images3$, _themeValues$images3$2, _themeValues$images3$3, _themeValues$images4, _themeValues$images4$, _themeValues$images4$2, _themeValues$images4$3, _themeValues$images5, _themeValues$images5$, _themeValues$images5$2, _themeValues$images5$3, _themeValues$images6, _themeValues$images6$, _themeValues$images6$2, _themeValues$images6$3, _themeValues$images7, _themeValues$images7$, _themeValues$images7$2, _themeValues$images7$3, _themeValues$images8, _themeValues$images8$, _themeValues$images8$2, _themeValues$images8$3, _themeValues$images9, _themeValues$images9$, _themeValues$images9$2, _themeValues$images9$3, _themeValues$images12, _themeValues$images13, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _orderingTheme$themes3, _orderingTheme$themes4, _themeValues$theme_se4, _themeValues$theme_se5, _themeValues$theme_se6, _themeValues$theme_se7, _themeValues$theme_se8, _themeValues$theme_se9;
   var themeValues = props.themeValues,
     orderingTheme = props.orderingTheme,
     setThemeValues = props.setThemeValues,
@@ -48,7 +48,8 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     site = props.site,
     setSite = props.setSite,
     businessesList = props.businessesList,
-    franchisesList = props.franchisesList;
+    franchisesList = props.franchisesList,
+    handleChangeInput = props.handleChangeInput;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -192,6 +193,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   };
   var handleChangeSiteSettings = function handleChangeSiteSettings(e) {
     handleChangeValue(e.target.value, 'website_settings', "values.".concat(e.target.name));
+    handleChangeInput(e);
   };
   var handleChangeContent = function handleChangeContent(type, content) {
     handleChangeValue(content, 'theme_settings', "values.".concat(type));
@@ -251,7 +253,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     placeholder: t('SOURCE_DEMO_WEBSITE', 'Source demo website'),
-    value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_ = themeValues.website_settings) === null || _themeValues$website_ === void 0 ? void 0 : (_themeValues$website_2 = _themeValues$website_.components) === null || _themeValues$website_2 === void 0 ? void 0 : (_themeValues$website_3 = _themeValues$website_2.values) === null || _themeValues$website_3 === void 0 ? void 0 : _themeValues$website_3.name) || '',
+    value: (site === null || site === void 0 ? void 0 : site.name) || '',
     onChange: handleChangeSiteSettings
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20,
@@ -264,7 +266,7 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     name: "description",
     placeholder: t('DESCRIPTION', 'Decription'),
-    value: (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_4 = themeValues.website_settings) === null || _themeValues$website_4 === void 0 ? void 0 : (_themeValues$website_5 = _themeValues$website_4.components) === null || _themeValues$website_5 === void 0 ? void 0 : (_themeValues$website_6 = _themeValues$website_5.values) === null || _themeValues$website_6 === void 0 ? void 0 : _themeValues$website_6.description) || '',
+    value: (site === null || site === void 0 ? void 0 : site.description) || '',
     onChange: handleChangeSiteSettings
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 20,
@@ -307,16 +309,16 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     onClick: function onClick() {
       return handleChangeValue('marketplace', 'website_theme', 'type');
     }
-  }, (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_7 = themeValues.website_theme) === null || _themeValues$website_7 === void 0 ? void 0 : (_themeValues$website_8 = _themeValues$website_7.components) === null || _themeValues$website_8 === void 0 ? void 0 : _themeValues$website_8.type) === 'marketplace' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+  }, (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_ = themeValues.website_theme) === null || _themeValues$website_ === void 0 ? void 0 : (_themeValues$website_2 = _themeValues$website_.components) === null || _themeValues$website_2 === void 0 ? void 0 : _themeValues$website_2.type) === 'marketplace' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "active"
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETPLACE', 'Marketplace'))), /*#__PURE__*/_react.default.createElement(_styles2.RadioItem, {
     onClick: function onClick() {
       return handleChangeValue('franchise', 'website_theme', 'type');
     }
-  }, (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_9 = themeValues.website_theme) === null || _themeValues$website_9 === void 0 ? void 0 : (_themeValues$website_10 = _themeValues$website_9.components) === null || _themeValues$website_10 === void 0 ? void 0 : _themeValues$website_10.type) === 'franchise' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+  }, (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_3 = themeValues.website_theme) === null || _themeValues$website_3 === void 0 ? void 0 : (_themeValues$website_4 = _themeValues$website_3.components) === null || _themeValues$website_4 === void 0 ? void 0 : _themeValues$website_4.type) === 'franchise' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('REPORT_HEADER_FRANCHISES', 'Franchise'))), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_11 = themeValues.website_theme) === null || _themeValues$website_11 === void 0 ? void 0 : (_themeValues$website_12 = _themeValues$website_11.components) === null || _themeValues$website_12 === void 0 ? void 0 : _themeValues$website_12.type) === 'franchise' && /*#__PURE__*/_react.default.createElement(_SelectFranchise.SelectFranchise, {
-    defaultValue: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_13 = themeValues.website_theme) === null || _themeValues$website_13 === void 0 ? void 0 : (_themeValues$website_14 = _themeValues$website_13.components) === null || _themeValues$website_14 === void 0 ? void 0 : _themeValues$website_14.franchise_slug,
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('REPORT_HEADER_FRANCHISES', 'Franchise'))), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_5 = themeValues.website_theme) === null || _themeValues$website_5 === void 0 ? void 0 : (_themeValues$website_6 = _themeValues$website_5.components) === null || _themeValues$website_6 === void 0 ? void 0 : _themeValues$website_6.type) === 'franchise' && /*#__PURE__*/_react.default.createElement(_SelectFranchise.SelectFranchise, {
+    defaultValue: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_7 = themeValues.website_theme) === null || _themeValues$website_7 === void 0 ? void 0 : (_themeValues$website_8 = _themeValues$website_7.components) === null || _themeValues$website_8 === void 0 ? void 0 : _themeValues$website_8.franchise_slug,
     franchisesList: franchisesList,
     onChange: function onChange(value) {
       return handleChangeValue(value, 'website_theme', 'franchise_slug');
@@ -325,16 +327,16 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     onClick: function onClick() {
       return handleChangeValue('single_store', 'website_theme', 'type');
     }
-  }, (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_15 = themeValues.website_theme) === null || _themeValues$website_15 === void 0 ? void 0 : (_themeValues$website_16 = _themeValues$website_15.components) === null || _themeValues$website_16 === void 0 ? void 0 : _themeValues$website_16.type) === 'single_store' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+  }, (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_9 = themeValues.website_theme) === null || _themeValues$website_9 === void 0 ? void 0 : (_themeValues$website_10 = _themeValues$website_9.components) === null || _themeValues$website_10 === void 0 ? void 0 : _themeValues$website_10.type) === 'single_store' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('SINGLE_STORE', 'Single Store'))), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_17 = themeValues.website_theme) === null || _themeValues$website_17 === void 0 ? void 0 : (_themeValues$website_18 = _themeValues$website_17.components) === null || _themeValues$website_18 === void 0 ? void 0 : _themeValues$website_18.type) === 'single_store' && /*#__PURE__*/_react.default.createElement(_SelectBusiness.SelectBusiness, {
-    defaultValue: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_19 = themeValues.website_theme) === null || _themeValues$website_19 === void 0 ? void 0 : (_themeValues$website_20 = _themeValues$website_19.components) === null || _themeValues$website_20 === void 0 ? void 0 : _themeValues$website_20.business_slug,
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('SINGLE_STORE', 'Single Store'))), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_11 = themeValues.website_theme) === null || _themeValues$website_11 === void 0 ? void 0 : (_themeValues$website_12 = _themeValues$website_11.components) === null || _themeValues$website_12 === void 0 ? void 0 : _themeValues$website_12.type) === 'single_store' && /*#__PURE__*/_react.default.createElement(_SelectBusiness.SelectBusiness, {
+    defaultValue: themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_13 = themeValues.website_theme) === null || _themeValues$website_13 === void 0 ? void 0 : (_themeValues$website_14 = _themeValues$website_13.components) === null || _themeValues$website_14 === void 0 ? void 0 : _themeValues$website_14.business_slug,
     businessesList: businessesList,
     onChange: function onChange(value) {
       return handleChangeValue(value, 'website_theme', 'business_slug');
     }
-  })), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_21 = themeValues.website_theme) === null || _themeValues$website_21 === void 0 ? void 0 : (_themeValues$website_22 = _themeValues$website_21.components) === null || _themeValues$website_22 === void 0 ? void 0 : _themeValues$website_22.type) && /*#__PURE__*/_react.default.createElement(_styles2.WebsitePriviewImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: previewImages === null || previewImages === void 0 ? void 0 : previewImages[themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_23 = themeValues.website_theme) === null || _themeValues$website_23 === void 0 ? void 0 : (_themeValues$website_24 = _themeValues$website_23.components) === null || _themeValues$website_24 === void 0 ? void 0 : _themeValues$website_24.type]
+  })), (themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_15 = themeValues.website_theme) === null || _themeValues$website_15 === void 0 ? void 0 : (_themeValues$website_16 = _themeValues$website_15.components) === null || _themeValues$website_16 === void 0 ? void 0 : _themeValues$website_16.type) && /*#__PURE__*/_react.default.createElement(_styles2.WebsitePriviewImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: previewImages === null || previewImages === void 0 ? void 0 : previewImages[themeValues === null || themeValues === void 0 ? void 0 : (_themeValues$website_17 = themeValues.website_theme) === null || _themeValues$website_17 === void 0 ? void 0 : (_themeValues$website_18 = _themeValues$website_17.components) === null || _themeValues$website_18 === void 0 ? void 0 : _themeValues$website_18.type]
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100,
     width: 100,
