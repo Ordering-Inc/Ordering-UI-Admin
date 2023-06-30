@@ -4,7 +4,7 @@ import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-co
 import { BusinessesSelector } from '../BusinessesSelector'
 import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
-import { DriverSelector } from '../DriverSelector'
+import { DriverMultiSelector } from '../DriverMultiSelector'
 import { CitySelector, Modal } from '../../Shared'
 // import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
@@ -140,8 +140,7 @@ const OrdersFilterGroupUI = (props) => {
             businessesList={businessesList}
             handleChangeBusinesses={handleChangeBusinesses}
           />
-          <DriverSelector
-            isFilterView
+          <DriverMultiSelector
             drivers={driversList.drivers}
             filterValues={filterValues}
             handleChangeDriver={handleChangeDriver}

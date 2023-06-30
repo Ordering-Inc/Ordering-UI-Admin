@@ -3,7 +3,6 @@ import { useLanguage, DriversList as DriversController } from 'ordering-componen
 import { useTheme } from 'styled-components'
 import { Select } from '../../../styles/Select'
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
-import { MultiSelect } from '../../../styles/MultiSelect'
 
 import {
   Option,
@@ -12,8 +11,8 @@ import {
   WrapperDriverImage,
   DriverImage,
   DriverName,
-  DriverText,
-  PlaceholderTitle
+  OptionInnerContainer,
+  SelectWrapper
 } from './styles'
 
 const DriverSelectorUI = (props) => {
@@ -23,13 +22,9 @@ const DriverSelectorUI = (props) => {
     driversList,
     defaultValue,
     isPhoneView,
-    isFilterView,
     small,
     padding,
-    orderView,
     handleAssignDriver,
-    handleChangeDriver,
-    filterValues,
     isTourOpen,
     setCurrentTourStep,
     handleOpenMessages
@@ -39,47 +34,48 @@ const DriverSelectorUI = (props) => {
   const theme = useTheme()
   const [defaultOption, setDefaultOption] = useState(null)
   const [driversOptionList, setDriversOptionList] = useState([])
-  const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
   const [searchValue, setSearchValue] = useState(null)
   const driversLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
+
+  const getOption = (driver) => {
+    return {
+      value: driver.id,
+      disabled: !(driver?.available && !driver?.busy),
+      content: (
+        <Option small={small} isPhoneView={isPhoneView} padding={padding}>
+          <OptionInnerContainer>
+            <WrapperDriverImage small={small} className='driver-photo'>
+              <DriverImage bgimage={driver.photo || theme.images.icons?.noDriver} small={small} />
+            </WrapperDriverImage>
+            <OptionContent>
+              <DriverNameContainer className='driver-info'>
+                <DriverName small={small}>{driver.name} {driver.lastname} <span className='assigned-orders'>({driver?.assigned_orders_count} {t('ASSIGNED_ORDERS', 'Assigned orders')})</span></DriverName>
+              </DriverNameContainer>
+            </OptionContent>
+          </OptionInnerContainer>
+        </Option>
+      )
+    }
+  }
+
   useEffect(() => {
     const _driversOptionList = [
       {
         value: 'default',
-        content: (
-          <Option
-            padding={orderView ? padding : '0px'}
-          >
-            {orderView ? (
-              <>
-                <WrapperDriverImage small={small} className='driver-photo'>
-                  <DriverImage bgimage={theme?.images?.icons?.noDriver} small={small} />
-                </WrapperDriverImage>
-                <OptionContent>
-                  <DriverNameContainer className='driver-info'>
-                    <DriverName small={small}>{t('NO_DRIVER', 'No Driver')}</DriverName>
-                  </DriverNameContainer>
-                </OptionContent>
-              </>
-            ) : (
-              <span>{t('SELECT_DRIVER', 'Select driver')}</span>
-            )}
-          </Option>
-        ),
+        content: <Option padding='0px'><span>{t('SELECT_DRIVER', 'Select driver')}</span></Option>,
         color: 'primary',
-        disabled: !isFilterView,
+        disabled: true,
         showDisable: true
       }
     ]
-    if (!isFilterView) {
-      _driversOptionList.push({
-        value: 'remove',
-        content: (
-          <Option isRemove><span>{t('REMOVE_DRIVER', 'Remove assigned driver')}</span></Option>
-        ),
-        disabled: defaultValue === 'default'
-      })
-    }
+    _driversOptionList.push({
+      value: 'remove',
+      content: (
+        <Option isRemove><span>{t('REMOVE_DRIVER', 'Remove assigned driver')}</span></Option>
+      ),
+      disabled: defaultValue === 'default'
+    })
+
     if (!driversList.loading) {
       let _driverList
       if (searchValue) {
@@ -87,44 +83,46 @@ const DriverSelectorUI = (props) => {
       } else {
         _driverList = driversList.drivers
       }
-      const _driversOptionListTemp = _driverList.map((driver, i) => {
-        return {
-          value: driver.id,
-          showDisable: isFilterView ? true : !(isFilterView || (driver?.available && !driver?.busy)),
-          content: (
-            <Option small={small} isPhoneView={isPhoneView} padding={padding} isFilterView={isFilterView}>
-              <WrapperDriverImage small={small} className='driver-photo'>
-                <DriverImage bgimage={driver.photo || theme.images.icons?.noDriver} small={small} />
-              </WrapperDriverImage>
-              <OptionContent>
-                <DriverNameContainer className='driver-info'>
-                  <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
-                  <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
-                </DriverNameContainer>
-              </OptionContent>
-            </Option>
-          )
-        }
-      })
+      const availableDrivers = _driverList.filter(driver => driver?.available && !driver?.busy)
+      if (availableDrivers.length) {
+        _driversOptionList.push({
+          value: 'available',
+          content: <Option><span>{t('AVAILABLE', 'Available')}</span></Option>,
+          disabled: true
+        })
+        availableDrivers.forEach(driver => {
+          _driversOptionList.push(getOption(driver))
+        })
+      }
 
-      setDriversMultiOptionList(_driversOptionListTemp)
+      const busyDrivers = _driverList.filter(driver => driver?.available && driver?.busy)
+      if (busyDrivers.length) {
+        _driversOptionList.push({
+          value: 'busy',
+          content: <Option><span>{t('BUSY', 'Busy')}</span></Option>,
+          disabled: true
+        })
+        busyDrivers.forEach(driver => {
+          _driversOptionList.push(getOption(driver))
+        })
+      }
 
-      for (const option of _driversOptionListTemp) {
-        _driversOptionList.push(option)
+      const notAvailableDrivers = _driverList.filter(driver => !driver?.available)
+      if (notAvailableDrivers.length) {
+        _driversOptionList.push({
+          value: 'not_available',
+          content: <Option><span>{t('NOT_AVAILABLE', 'Not available')}</span></Option>,
+          disabled: true
+        })
+        notAvailableDrivers.forEach(driver => {
+          _driversOptionList.push(getOption(driver))
+        })
       }
     }
     setDriversOptionList(_driversOptionList)
   }, [driversList, defaultValue, searchValue])
 
   const changeDriver = (driverId) => {
-    if (isFilterView) {
-      if (driverId === 'default') {
-        handleChangeDriver(null)
-      } else {
-        handleChangeDriver(driverId)
-      }
-      return
-    }
     if (driverId === 'default') return
     if (driverId === 'remove') {
       driverId = null
@@ -142,95 +140,58 @@ const DriverSelectorUI = (props) => {
     setDefaultOption(defaultValue)
   }, [defaultValue])
 
-  const Placeholder = <PlaceholderTitle>{t('SELECT_DRIVER', 'Select driver')}</PlaceholderTitle>
-
   const handleSearch = (val) => {
     setSearchValue(val)
   }
 
-  if (isFilterView) {
-    return (
-      <>
-        {!driversList.loading ? (
-          <MultiSelect
-            defaultValue={filterValues.driverIds}
-            placeholder={Placeholder}
-            options={driversMultiOptionList}
-            optionInnerMargin='10px'
-            optionInnerMaxHeight='150px'
-            onChange={(driver) => handleChangeDriver(driver)}
-            isShowSearchBar
-            searchBarIsCustomLayout
-            searchBarIsNotLazyLoad
-            searchValue={searchValue}
-            handleChangeSearch={(val) => setSearchValue(val)}
-          />
-        ) : (
-          <MultiSelect
+  return (
+    <>
+      {!driversList.loading ? (
+        <SelectWrapper>
+          {isFirstSelect ? (
+            <FirstSelect
+              defaultValue={defaultOption || 'default'}
+              options={driversOptionList}
+              optionInnerMaxHeight='200px'
+              onChange={(driverId) => changeDriver(driverId)}
+              isShowSearchBar
+              searchBarPlaceholder={t('SEARCH', 'Search')}
+              searchBarIsCustomLayout
+              searchBarIsNotLazyLoad
+              searchValue={searchValue}
+              handleChangeSearch={handleSearch}
+              className='driver-select'
+            />
+          ) : (
+            <Select
+              defaultValue={defaultOption || 'default'}
+              options={driversOptionList}
+              optionInnerMaxHeight='200px'
+              onChange={(driverId) => changeDriver(driverId)}
+              isShowSearchBar
+              searchBarIsNotLazyLoad
+              searchBarPlaceholder={t('SEARCH', 'Search')}
+              searchBarIsCustomLayout
+              searchValue={searchValue}
+              handleChangeSearch={handleSearch}
+              className='driver-select'
+            />
+          )}
+        </SelectWrapper>
+      ) : (
+        <>
+          <Select
+            placeholder={t('SELECT_DRIVER', 'Select driver')}
             defaultValue='default'
             options={driversLoading}
             optionInnerMargin='10px'
-            optionInnerMaxHeight='150px'
+            optionInnerMaxHeight='200px'
             className='driver-select'
-            isShowSearchBar
-            searchBarIsCustomLayout
-            searchBarIsNotLazyLoad
-            searchValue={searchValue}
-            handleChangeSearch={(val) => setSearchValue(val)}
           />
-        )}
-      </>
-    )
-  } else {
-    return (
-      <>
-        {!driversList.loading ? (
-          <>
-            {isFirstSelect ? (
-              <FirstSelect
-                defaultValue={defaultOption || 'default'}
-                options={driversOptionList}
-                optionInnerMaxHeight='200px'
-                onChange={(driverId) => changeDriver(driverId)}
-                isShowSearchBar
-                searchBarPlaceholder={t('SEARCH', 'Search')}
-                searchBarIsCustomLayout
-                searchBarIsNotLazyLoad
-                searchValue={searchValue}
-                handleChangeSearch={handleSearch}
-                className='driver-select'
-              />
-            ) : (
-              <Select
-                defaultValue={defaultOption || 'default'}
-                options={driversOptionList}
-                optionInnerMaxHeight='200px'
-                onChange={(driverId) => changeDriver(driverId)}
-                isShowSearchBar
-                searchBarIsNotLazyLoad
-                searchBarPlaceholder={t('SEARCH', 'Search')}
-                searchBarIsCustomLayout
-                searchValue={searchValue}
-                handleChangeSearch={handleSearch}
-                className='driver-select'
-              />
-            )}
-          </>
-        ) : (
-          <>
-            <Select
-              placeholder={t('SELECT_DRIVER', 'Select driver')}
-              defaultValue='default'
-              options={driversLoading}
-              optionInnerMargin='10px'
-              optionInnerMaxHeight='200px'
-              className='driver-select'
-            />
-          </>
-        )}
-      </>
-    )
-  }
+        </>
+      )}
+    </>
+  )
 }
 
 export const DriverSelector = (props) => {

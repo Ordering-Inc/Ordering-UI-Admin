@@ -1,19 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-export const SelectWrapper = styled.div`
-  .header {
-    > div {
-      > div {
-        padding: 0;
-        .assigned-orders {
-          display: none;
-        }
-      }
-    }
-  }
-`
-
 export const Option = styled.div`
   display: flex;
   align-items: center;
@@ -42,7 +29,6 @@ export const Option = styled.div`
   `}
 
   span {
-    font-size: 14px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -51,20 +37,15 @@ export const Option = styled.div`
 
   @media (max-width: 576px) {
     padding: ${({ padding }) => padding || '5px 0px'};
+    ${props => props.theme?.rtl ? css`
+      margin-right: 10px;
+    ` : css`
+      margin-left: 10px;
+    `}
     span {
       max-width: 280px;
     }
   }
-`
-
-export const OptionInnerContainer = styled.div`
-  display: flex;
-  align-items: center;
-  ${props => props.theme?.rtl ? css`
-    padding-right: 20px;
-  ` : css`
-    padding-left: 20px;
-  `}
 `
 
 export const OptionContent = styled.div`
@@ -87,7 +68,7 @@ export const DriverName = styled.p`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 350px;
+  max-width: 150px;
   margin: 0px;
 
   ${({ small }) => small && css`
@@ -95,8 +76,15 @@ export const DriverName = styled.p`
   `}
 
   @media (max-width: 576px) {
-    max-width: 150px;
+    max-width: 90px;
   }
+`
+export const DriverText = styled.span`
+  font-size: 12px;
+  color: ${props => props.theme.colors.lightGray};
+  ${({ small }) => small && css`
+    display: none;
+  `}
 `
 
 export const WrapperDriverImage = styled.div`
@@ -151,3 +139,12 @@ export const DriverImage = (props) => {
     </DriverImageStyled>
   )
 }
+
+export const PlaceholderTitle = styled(Option)`
+  padding: 10px;
+
+  ${({ isSingle }) => isSingle && css`
+    padding: 0px;
+    font-size: 14px;
+  `}
+`
