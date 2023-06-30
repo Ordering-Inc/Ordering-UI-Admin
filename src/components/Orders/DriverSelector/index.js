@@ -35,7 +35,7 @@ const DriverSelectorUI = (props) => {
   const [defaultOption, setDefaultOption] = useState(null)
   const [driversOptionList, setDriversOptionList] = useState([])
   const [searchValue, setSearchValue] = useState(null)
-  const driversLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
+  const driversLoading = [{ value: 'default', content: <Option small={small}><span>{t('LOADING', 'loading')}...</span></Option> }]
 
   const getOption = (driver) => {
     return {
@@ -145,9 +145,9 @@ const DriverSelectorUI = (props) => {
   }
 
   return (
-    <>
+    <SelectWrapper>
       {!driversList.loading ? (
-        <SelectWrapper>
+        <>
           {isFirstSelect ? (
             <FirstSelect
               defaultValue={defaultOption || 'default'}
@@ -177,7 +177,7 @@ const DriverSelectorUI = (props) => {
               className='driver-select'
             />
           )}
-        </SelectWrapper>
+        </>
       ) : (
         <>
           <Select
@@ -190,7 +190,7 @@ const DriverSelectorUI = (props) => {
           />
         </>
       )}
-    </>
+    </SelectWrapper>
   )
 }
 
