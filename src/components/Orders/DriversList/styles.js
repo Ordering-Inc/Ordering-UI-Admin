@@ -105,13 +105,17 @@ export const DriverInfo = styled.div`
     svg {
       margin: 0 5px;
     }
-    
+
     p {
       font-size: 14px;
       color: ${props => props.theme.colors?.headingColor};
       font-weight: 600;
       margin: 0px;
       flex: 1;
+    }
+    .text-red {
+      margin-left: 2px;
+      color: red;
     }
   }
 `
