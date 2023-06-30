@@ -97,6 +97,8 @@ export const StepItem = styled.div`
   }
 
   img {
+    max-width: 65px;
+
     ${props => props.theme?.rtl ? css`
       margin-right: 50px;
     ` : css`
