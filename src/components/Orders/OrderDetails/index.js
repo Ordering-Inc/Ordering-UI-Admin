@@ -11,7 +11,7 @@ import { OrderDetailsHeader } from '../OrderDetailsHeader'
 import { OrderBill } from '../OrderBill'
 import { OrderContactInformation } from '../OrderContactInformation'
 import { XLg } from 'react-bootstrap-icons'
-import { NotFoundSource, Modal } from '../../Shared'
+import { NotFoundSource, Modal, Alert } from '../../Shared'
 import { IconButton } from '../../../styles'
 import { OrderToPrint } from '../OrderToPrint'
 import { OrderToPrintTicket } from '../OrderToPrintTicket'
@@ -72,6 +72,8 @@ const OrderDetailsUI = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExpand, setIsExpand] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
+
   const placeSpotEnabled = [3, 4]
   const {
     order,
@@ -267,6 +269,14 @@ const OrderDetailsUI = (props) => {
       handleShowOption(section, true)
     }
   }, [loading])
+
+  useEffect(() => {
+    if (!actionStatus?.error) return
+    setAlertState({
+      open: true,
+      content: actionStatus?.error
+    })
+  }, [actionStatus?.error])
 
   const progressBarObjt = order?.delivery_type && order?.delivery_type === 2 ? getOrderStatuPickUp : getOrderStatus
 
@@ -524,6 +534,16 @@ const OrderDetailsUI = (props) => {
           getOrderStatus={progressBarObjt}
         />
       )}
+
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }
