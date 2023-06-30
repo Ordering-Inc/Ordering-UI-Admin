@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components'
 import { Select } from '../../../styles/Select'
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
 import { MultiSelect } from '../../../styles/MultiSelect'
+import { Alert } from '../../Shared'
 
 import {
   Option,
@@ -18,6 +19,8 @@ import {
 
 const DriverSelectorUI = (props) => {
   const {
+    driverActionStatus,
+    companyActionStatus,
     isFirstSelect,
     order,
     driversList,
@@ -40,8 +43,10 @@ const DriverSelectorUI = (props) => {
   const [defaultOption, setDefaultOption] = useState(null)
   const [driversOptionList, setDriversOptionList] = useState([])
   const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [searchValue, setSearchValue] = useState(null)
   const driversLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
+
   useEffect(() => {
     const _driversOptionList = [
       {
@@ -116,6 +121,14 @@ const DriverSelectorUI = (props) => {
     setDriversOptionList(_driversOptionList)
   }, [driversList, defaultValue, searchValue])
 
+  useEffect(() => {
+    if (!companyActionStatus?.error && !driverActionStatus?.error) return
+    setAlertState({
+      open: true,
+      content: companyActionStatus?.error || driverActionStatus?.error
+    })
+  }, [companyActionStatus?.error, driverActionStatus?.error])
+
   const changeDriver = (driverId) => {
     if (isFilterView) {
       if (driverId === 'default') {
@@ -179,6 +192,15 @@ const DriverSelectorUI = (props) => {
             handleChangeSearch={(val) => setSearchValue(val)}
           />
         )}
+        <Alert
+          title={t('WEB_APPNAME', 'Ordering')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => setAlertState({ open: false, content: [] })}
+          onAccept={() => setAlertState({ open: false, content: [] })}
+          closeOnBackdrop={false}
+        />
       </>
     )
   } else {
@@ -228,6 +250,15 @@ const DriverSelectorUI = (props) => {
             />
           </>
         )}
+        <Alert
+          title={t('WEB_APPNAME', 'Ordering')}
+          content={alertState.content}
+          acceptText={t('ACCEPT', 'Accept')}
+          open={alertState.open}
+          onClose={() => setAlertState({ open: false, content: [] })}
+          onAccept={() => setAlertState({ open: false, content: [] })}
+          closeOnBackdrop={false}
+        />
       </>
     )
   }
