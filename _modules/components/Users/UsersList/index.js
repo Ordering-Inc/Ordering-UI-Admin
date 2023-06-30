@@ -155,7 +155,7 @@ var UsersList = function UsersList(props) {
     onClick: function onClick() {
       return handleSelecteAllUser();
     }
-  }, !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), t('USER', 'User'))), /*#__PURE__*/_react.default.createElement("th", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", {
+  }, !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), t('ID', 'Id'))), /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", null, t('PHONE', 'Phone')), /*#__PURE__*/_react.default.createElement("th", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement("th", {
     className: "amout-orders "
   }, t('AMOUNT_OF_ORDERS', 'Amount of orders')), /*#__PURE__*/_react.default.createElement("th", null, t('ACTION', 'Action')))), usersList.loading ? _toConsumableArray(Array((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize) || 10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
@@ -163,7 +163,9 @@ var UsersList = function UsersList(props) {
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserMainInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 20,
       height: 20
-    })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 70
+    }))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserMainInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, {
       isSkeleton: true
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
@@ -198,7 +200,9 @@ var UsersList = function UsersList(props) {
       onClick: function onClick() {
         return handleSelectedUsers(user.id);
       }
-    }, selectedUsers.includes(user.id) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, user !== null && user !== void 0 && user.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
+    }, selectedUsers.includes(user.id) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
+      className: "bold"
+    }, user === null || user === void 0 ? void 0 : user.id)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserMainInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, user !== null && user !== void 0 && user.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage(user === null || user === void 0 ? void 0 : user.photo, 'h_50,c_limit')
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), isCustomer && /*#__PURE__*/_react.default.createElement(_styles2.OrdersCountWrapper, {
       isNew: (user === null || user === void 0 ? void 0 : user.orders_count) === 0

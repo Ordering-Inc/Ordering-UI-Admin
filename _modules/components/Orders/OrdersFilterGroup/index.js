@@ -19,7 +19,9 @@ var _CountryFilter = require("../CountryFilter");
 var _styles = require("../../../styles");
 var _CurrencyFilter = require("../CurrencyFilter");
 var _utils = require("../../../utils");
+var _FirstSelect = require("../../../styles/Select/FirstSelect");
 var _styles2 = require("./styles");
+var _styles3 = require("../OrdersTable/styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -34,6 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
+  var _filterValues$logisti;
   var open = props.open,
     handleCloseFilterModal = props.handleCloseFilterModal,
     filterValues = props.filterValues,
@@ -59,7 +62,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleChangeMetaFieldValue = props.handleChangeMetaFieldValue,
     handleAddMetaField = props.handleAddMetaField,
     handleDeleteMetafield = props.handleDeleteMetafield,
-    handleChangeExternalId = props.handleChangeExternalId;
+    handleChangeExternalId = props.handleChangeExternalId,
+    handleChangeChildFilterValue = props.handleChangeChildFilterValue;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -75,6 +79,32 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     isShow = _useState4[0],
     setIsShow = _useState4[1];
   var metafieldRef = (0, _react.useRef)();
+  var logisticStatusList = [{
+    value: 0,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('PENDING', 'Pending'), /*#__PURE__*/_react.default.createElement(_styles3.LogisticStatusDot, {
+      status: 0
+    }))
+  }, {
+    value: 1,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('IN_PROGRESS', 'In progress'), /*#__PURE__*/_react.default.createElement(_styles3.LogisticStatusDot, {
+      status: 1
+    }))
+  }, {
+    value: 2,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('IN_QUEUE', 'In queue'), /*#__PURE__*/_react.default.createElement(_styles3.LogisticStatusDot, {
+      status: 2
+    }))
+  }, {
+    value: 3,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('EXPIRED', 'Expired'), /*#__PURE__*/_react.default.createElement(_styles3.LogisticStatusDot, {
+      status: 3
+    }))
+  }, {
+    value: 4,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('RESOLVED', 'Resolved'), /*#__PURE__*/_react.default.createElement(_styles3.LogisticStatusDot, {
+      status: 4
+    }))
+  }];
   var handleAcceptFilter = function handleAcceptFilter() {
     handleChangeFilterValues(filterValues);
     handleCloseFilterModal();
@@ -112,6 +142,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
       return window.removeEventListener('mouseup', handleClickOutside);
     };
   }, [isShow]);
+  console.log(filterValues, 'filterValues');
   return /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     padding: "0px",
@@ -170,7 +201,17 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
     filterValues: filterValues,
     handleChangeCurrency: handleChangeCurrency
-  })), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    options: logisticStatusList,
+    className: "select",
+    defaultValue: (_filterValues$logisti = filterValues === null || filterValues === void 0 ? void 0 : filterValues.logisticStatus) !== null && _filterValues$logisti !== void 0 ? _filterValues$logisti : '',
+    placeholder: t('SELECT_LOGISTIC_STATUS', 'Select a logistic status'),
+    onChange: function onChange(value) {
+      return handleChangeChildFilterValue({
+        logisticStatus: value
+      });
+    }
+  }))), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
       key: item.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
