@@ -30,7 +30,7 @@ var DotLine = _styledComponents.default.div(_templateObject7 || (_templateObject
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    right: 18px;\n  "]))) : (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    left: 18px;\n  "])));
 });
 exports.DotLine = DotLine;
-var StepItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  div.number {\n    border-radius: 50%;\n    border: 1px solid ", ";\n    width: 36px;\n    height: 36px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 14px;\n    z-index: 10;\n    background: ", ";\n  }\n\n  span {\n    font-size: 14px;\n    margin: 0 18px;\n    width: 200px;\n  }\n\n  input {\n    width: 120px;\n  }\n\n  img {\n    ", "\n  }\n"])), function (props) {
+var StepItem = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  div.number {\n    border-radius: 50%;\n    border: 1px solid ", ";\n    width: 36px;\n    height: 36px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 14px;\n    z-index: 10;\n    background: ", ";\n  }\n\n  span {\n    font-size: 14px;\n    margin: 0 18px;\n    width: 200px;\n  }\n\n  input {\n    width: 120px;\n  }\n\n  img {\n    max-width: 65px;\n\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme$colors;
