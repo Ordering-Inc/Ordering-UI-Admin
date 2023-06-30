@@ -86,7 +86,9 @@ var DriversList = function DriversList(props) {
       onClick: function onClick() {
         return onOpenDriverOrdersDetail(driver);
       }
-    }, driver === null || driver === void 0 ? void 0 : driver.assigned_orders_count, " ", t('ORDERS', 'Orders'))), (driver === null || driver === void 0 ? void 0 : driver.qualification) && /*#__PURE__*/_react.default.createElement(_styles2.WrapperStar, {
+    }, driver === null || driver === void 0 ? void 0 : driver.assigned_orders_count, " ", t('ORDERS', 'Orders')), /*#__PURE__*/_react.default.createElement("p", {
+      className: "text-red"
+    }, (driver === null || driver === void 0 ? void 0 : driver.busy) && "(".concat(t('BUSY', 'Busy'), ")"))), (driver === null || driver === void 0 ? void 0 : driver.qualification) && /*#__PURE__*/_react.default.createElement(_styles2.WrapperStar, {
       width: (0, _utils.getStarWidth)(driver === null || driver === void 0 ? void 0 : driver.qualification)
     })));
   })));

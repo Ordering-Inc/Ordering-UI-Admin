@@ -102,6 +102,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isExpand = _useState12[0],
     setIsExpand = _useState12[1];
+  var _useState13 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
+    _useState14 = _slicedToArray(_useState13, 2),
+    alertState = _useState14[0],
+    setAlertState = _useState14[1];
   var placeSpotEnabled = [3, 4];
   var _props$order = props.order,
     order = _props$order.order,
@@ -311,6 +318,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       handleShowOption(section, true);
     }
   }, [loading]);
+  (0, _react.useEffect)(function () {
+    if (!(actionStatus !== null && actionStatus !== void 0 && actionStatus.error)) return;
+    setAlertState({
+      open: true,
+      content: actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error
+    });
+  }, [actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error]);
   var progressBarObjt = order !== null && order !== void 0 && order.delivery_type && (order === null || order === void 0 ? void 0 : order.delivery_type) === 2 ? _utils.getOrderStatuPickUp : _utils.getOrderStatus;
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     isSelectedOrders: isSelectedOrders,
@@ -494,6 +508,24 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     ref: printTicketRef,
     order: order,
     getOrderStatus: progressBarObjt
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState.open,
+    onClose: function onClose() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    onAccept: function onAccept() {
+      return setAlertState({
+        open: false,
+        content: []
+      });
+    },
+    closeOnBackdrop: false
   }));
 };
 var OrderDetails = function OrderDetails(props) {

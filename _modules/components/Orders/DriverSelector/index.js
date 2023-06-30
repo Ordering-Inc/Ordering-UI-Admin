@@ -11,6 +11,7 @@ var _styledComponents = require("styled-components");
 var _Select = require("../../../styles/Select");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
 var _MultiSelect = require("../../../styles/MultiSelect");
+var _Shared = require("../../Shared");
 var _styles = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -27,7 +28,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriverSelectorUI = function DriverSelectorUI(props) {
-  var isFirstSelect = props.isFirstSelect,
+  var driverActionStatus = props.driverActionStatus,
+    companyActionStatus = props.companyActionStatus,
+    isFirstSelect = props.isFirstSelect,
     order = props.order,
     driversList = props.driversList,
     defaultValue = props.defaultValue,
@@ -58,10 +61,17 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     driversMultiOptionList = _useState6[0],
     setDriversMultiOptionList = _useState6[1];
-  var _useState7 = (0, _react.useState)(null),
+  var _useState7 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
     _useState8 = _slicedToArray(_useState7, 2),
-    searchValue = _useState8[0],
-    setSearchValue = _useState8[1];
+    alertState = _useState8[0],
+    setAlertState = _useState8[1];
+  var _useState9 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState9, 2),
+    searchValue = _useState10[0],
+    setSearchValue = _useState10[1];
   var driversLoading = [{
     value: 'default',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
@@ -148,6 +158,13 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     }
     setDriversOptionList(_driversOptionList);
   }, [driversList, defaultValue, searchValue]);
+  (0, _react.useEffect)(function () {
+    if (!(companyActionStatus !== null && companyActionStatus !== void 0 && companyActionStatus.error) && !(driverActionStatus !== null && driverActionStatus !== void 0 && driverActionStatus.error)) return;
+    setAlertState({
+      open: true,
+      content: (companyActionStatus === null || companyActionStatus === void 0 ? void 0 : companyActionStatus.error) || (driverActionStatus === null || driverActionStatus === void 0 ? void 0 : driverActionStatus.error)
+    });
+  }, [companyActionStatus === null || companyActionStatus === void 0 ? void 0 : companyActionStatus.error, driverActionStatus === null || driverActionStatus === void 0 ? void 0 : driverActionStatus.error]);
   var changeDriver = function changeDriver(driverId) {
     if (isFilterView) {
       if (driverId === 'default') {
@@ -209,6 +226,24 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       handleChangeSearch: function handleChangeSearch(val) {
         return setSearchValue(val);
       }
+    }), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+      title: t('WEB_APPNAME', 'Ordering'),
+      content: alertState.content,
+      acceptText: t('ACCEPT', 'Accept'),
+      open: alertState.open,
+      onClose: function onClose() {
+        return setAlertState({
+          open: false,
+          content: []
+        });
+      },
+      onAccept: function onAccept() {
+        return setAlertState({
+          open: false,
+          content: []
+        });
+      },
+      closeOnBackdrop: false
     }));
   } else {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isFirstSelect ? /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
@@ -246,7 +281,25 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       optionInnerMargin: "10px",
       optionInnerMaxHeight: "200px",
       className: "driver-select"
-    })));
+    })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+      title: t('WEB_APPNAME', 'Ordering'),
+      content: alertState.content,
+      acceptText: t('ACCEPT', 'Accept'),
+      open: alertState.open,
+      onClose: function onClose() {
+        return setAlertState({
+          open: false,
+          content: []
+        });
+      },
+      onAccept: function onAccept() {
+        return setAlertState({
+          open: false,
+          content: []
+        });
+      },
+      closeOnBackdrop: false
+    }));
   }
 };
 var DriverSelector = function DriverSelector(props) {
