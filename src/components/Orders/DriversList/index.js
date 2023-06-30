@@ -89,7 +89,7 @@ export const DriversList = (props) => {
                     disabled={!driver?.assigned_orders_count || driver?.assigned_orders_count === 0}
                     onClick={() => onOpenDriverOrdersDetail(driver)}
                   >
-                    {driver?.assigned_orders_count} {t('ORDERS', 'Orders')}
+                    {driver?.assigned_orders_count} {t('ORDERS', 'Orders')} {(driver?.busy && `(${t('BUSY', 'Busy')})`)}
                   </LinkButton>
                 </div>
                 {driver?.qualification && (
