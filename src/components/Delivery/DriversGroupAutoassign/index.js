@@ -208,6 +208,13 @@ const DriversGroupAutoassignUI = (props) => {
           </div>
         </RowGroupContainer>
       )}
+      <CheckboxWrapper isPadding>
+        <Checkbox
+          checked={changesState?.autoassign_groupable_individual_orders_only ?? curDriversGroup?.autoassign_groupable_individual_orders_only}
+          onChange={e => onChangeSave({ autoassign_groupable_individual_orders_only: e.target.checked })}
+        />
+        <span>{t('DO_NOT_ASSIGN_MORE_THAN_1_ORDER_IF_ORDER_CAN_NOT_GROUPED', 'Do not assign more than 1 order IF the order can’t be grouped')}</span>
+      </CheckboxWrapper>
     </AutoassignContainer>
   )
 }

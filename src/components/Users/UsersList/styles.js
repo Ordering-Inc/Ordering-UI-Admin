@@ -18,15 +18,18 @@ export const UsersTable = styled.table`
     padding: 10px 0;
     font-size: 14px;
     &:first-child {
-      width: 40%;
+      width: 10%;
     }
     &:nth-child(2) {
+      width: 35%;
+    }
+    &:nth-child(3) {
       width: 20%;
     }
 
-    &:nth-child(4),
+    &:nth-child(5),
     
-    &:nth-child(5) {
+    &:nth-child(6) {
       width: 10%;
     }
   }
