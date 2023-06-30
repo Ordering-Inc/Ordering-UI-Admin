@@ -119,6 +119,10 @@ export const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
 
+  ${({ isPadding }) => isPadding && css`
+    padding-bottom: 20px;
+  `}
+
   span {
     font-size: 14px;
     ${props => props.theme?.rtl ? css`

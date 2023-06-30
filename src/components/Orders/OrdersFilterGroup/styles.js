@@ -149,3 +149,44 @@ export const AddMetaFiled = styled.span`
   cursor: pointer;
   width: 100%;
 `
+
+export const SelectWrapper = styled.div`
+    > div {
+    width: 100%;
+    border: none;
+    height: 100%;
+
+    > div:first-child {
+      height: 100%;
+      background-color: ${props => props.theme.colors.secundary};
+      border: none;
+      border-radius: 7.6px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      padding-left: 20px;
+    }
+    .list {
+      background-color: ${props => props.theme.colors.secundary};
+      border: none;
+      
+      .list-wrapper {
+        > div {
+          padding: 6px 10px;
+          &:hover {
+            background-color: #f2f5f7;
+          }
+        }
+      }
+    }
+  }
+`
+
+export const Option = styled.div`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: ${props => props.theme.colors.secundaryContrast};
+  display: flex;
+  align-items: center;
+`
