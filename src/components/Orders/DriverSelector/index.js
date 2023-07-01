@@ -40,7 +40,7 @@ const DriverSelectorUI = (props) => {
   const getOption = (driver) => {
     return {
       value: driver.id,
-      disabled: !(driver?.available && !driver?.busy),
+      disabled: !(driver?.enabled && driver?.available && !driver?.busy),
       content: (
         <Option small={small} isPhoneView={isPhoneView} padding={padding}>
           <OptionInnerContainer>
@@ -83,7 +83,7 @@ const DriverSelectorUI = (props) => {
       } else {
         _driverList = driversList.drivers
       }
-      const availableDrivers = _driverList.filter(driver => driver?.available && !driver?.busy)
+      const availableDrivers = _driverList.filter(driver => driver?.enabled && driver?.available && !driver?.busy)
       if (availableDrivers.length) {
         _driversOptionList.push({
           value: 'available',
@@ -95,7 +95,7 @@ const DriverSelectorUI = (props) => {
         })
       }
 
-      const busyDrivers = _driverList.filter(driver => driver?.available && driver?.busy)
+      const busyDrivers = _driverList.filter(driver => driver?.enabled && driver?.available && driver?.busy)
       if (busyDrivers.length) {
         _driversOptionList.push({
           value: 'busy',
@@ -107,7 +107,7 @@ const DriverSelectorUI = (props) => {
         })
       }
 
-      const notAvailableDrivers = _driverList.filter(driver => !driver?.available)
+      const notAvailableDrivers = _driverList.filter(driver => driver?.enabled && !driver?.available)
       if (notAvailableDrivers.length) {
         _driversOptionList.push({
           value: 'not_available',
