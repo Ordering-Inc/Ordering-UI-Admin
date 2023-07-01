@@ -292,7 +292,7 @@ const UserAddFormUI = (props) => {
                   handleIsValid={setIsValidPhoneNumber}
                 />
               )}
-              {!isCheckout && (
+              {!isCheckout && !isFromCustomOrder && (
                 <Input
                   type='password'
                   name='password'
