@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useUtils, useConfig, useCustomer } from 'ordering-components-admin'
+import { useLanguage, useUtils, useCustomer } from 'ordering-components-admin'
 import { UserAddForm } from '../../../Users'
 import { AddressList } from '../../../Delivery'
-import { findExitingCountryPhoneCode } from '../../../../utils'
 import { Dot, HouseDoor } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import CgSpinnerTwoAlt from '@meronex/icons/cg/CgSpinnerTwoAlt'
@@ -34,7 +33,6 @@ export const SelectCustomer = (props) => {
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
-  const [{ configs }] = useConfig()
   const [, { setUserCustomer }] = useCustomer()
 
   const [searchInputFocus, setSearchInputFocus] = useState(false)
@@ -205,11 +203,7 @@ export const SelectCustomer = (props) => {
           <UserAddForm
             isFromCustomOrder
             hideUserTypeSelector
-            // defaultPhoneNumber={
-            //   findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())
-            //     ? `+${findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())} ${selectedUser?.cellphone || selectedUser?.phone || phone}`
-            //     : `+1 ${selectedUser?.cellphone || selectedUser?.phone || phone}`
-            // }
+            defaultPhoneNumber={selectedUser?.cellphone || selectedUser?.phone || phone}
             handleSuccessAdd={onSelectUser}
             onClose={() => handleCloseSidebar()}
           />
