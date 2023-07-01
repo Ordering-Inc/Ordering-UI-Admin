@@ -6,9 +6,6 @@ export const SelectWrapper = styled.div`
     > div {
       > div {
         padding: 0;
-        .assigned-orders {
-          display: none;
-        }
       }
     }
   }
