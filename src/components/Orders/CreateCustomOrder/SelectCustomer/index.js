@@ -7,6 +7,7 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import CgSpinnerTwoAlt from '@meronex/icons/cg/CgSpinnerTwoAlt'
 import { SideBar } from '../../../Shared'
 import { Button, Input, LinkButton } from '../../../../styles'
+import { findExitingCountryPhoneCode } from '../../../../utils'
 import {
   SectionContainer,
   SearchBarContainer,
@@ -28,7 +29,8 @@ export const SelectCustomer = (props) => {
     setSelectedUser,
     onChangeNumber,
     handleParentSidebarMove,
-    customerAddress
+    customerAddress,
+    defaultCountryCodeState
   } = props
 
   const [, t] = useLanguage()
@@ -167,7 +169,7 @@ export const SelectCustomer = (props) => {
           <Button
             borderRadius='8px'
             color='primary'
-            disabled={openSidebar === 'user_add_form'}
+            disabled={openSidebar === 'user_add_form' || defaultCountryCodeState.loading}
             onClick={() => handleOpenAddForm()}
           >
             {t('USERS_REGISTER', 'New user')}
@@ -203,7 +205,8 @@ export const SelectCustomer = (props) => {
           <UserAddForm
             isFromCustomOrder
             hideUserTypeSelector
-            defaultPhoneNumber={selectedUser?.cellphone || selectedUser?.phone || phone}
+            defaultCountry={defaultCountryCodeState.code}
+            defaultPhoneNumber={(selectedUser?.cellphone || phone) && `+${findExitingCountryPhoneCode(defaultCountryCodeState?.code)} ${selectedUser?.cellphone || phone}`}
             handleSuccessAdd={onSelectUser}
             onClose={() => handleCloseSidebar()}
           />
