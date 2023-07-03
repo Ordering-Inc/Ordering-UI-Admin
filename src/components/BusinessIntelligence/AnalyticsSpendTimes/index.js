@@ -33,7 +33,7 @@ export const AnalyticsSpendTimes = (props) => {
         return axe === history?.time
       })
       if (index !== -1) {
-        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.accept_spend })
+        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.accept_spend ? chartDataList?.data[index]?.accept_spend / 60 : 0 })
       } else {
         values.push({ x: axe, y: 0 })
       }
@@ -48,7 +48,7 @@ export const AnalyticsSpendTimes = (props) => {
         return axe === history?.time
       })
       if (index !== -1) {
-        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.pickup_spend })
+        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.pickup_spend ? chartDataList?.data[index]?.pickup_spend / 60 : 0 })
       } else {
         values.push({ x: axe, y: 0 })
       }
@@ -63,7 +63,7 @@ export const AnalyticsSpendTimes = (props) => {
         return axe === history?.time
       })
       if (index !== -1) {
-        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.delivery_spend })
+        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.delivery_spend ? chartDataList?.data[index]?.delivery_spend / 60 : 0 })
       } else {
         values.push({ x: axe, y: 0 })
       }
@@ -78,7 +78,7 @@ export const AnalyticsSpendTimes = (props) => {
         return axe === history?.time
       })
       if (index !== -1) {
-        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.complete_spend })
+        values.push({ x: chartDataList?.data[index]?.time, y: chartDataList?.data[index]?.complete_spend ? chartDataList?.data[index]?.complete_spend / 60 : 0 })
       } else {
         values.push({ x: axe, y: 0 })
       }
