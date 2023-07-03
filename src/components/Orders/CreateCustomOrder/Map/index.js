@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react'
-import { useConfig } from 'ordering-components-admin'
+import { useConfig, useOrder } from 'ordering-components-admin'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { InterActOrderMarker } from '../../InterActOrderMarker'
 
@@ -11,10 +11,13 @@ export const Map = (props) => {
     customer,
     customerLocation
   } = props
+
   const [{ configs }] = useConfig()
+  const [orderState] = useOrder()
 
   const mapRef = useRef(null)
   const googleMapsApiKey = useMemo(() => configs?.google_maps_api_key?.value, [configs])
+  const deliveryType = useMemo(() => orderState?.options?.type, [orderState])
   const defaultLatitude = Number(configs?.location_default_latitude?.value)
   const defaultLongitude = Number(configs?.location_default_longitude?.value)
   const isInvalidDefaultLocation = isNaN(defaultLatitude) || isNaN(defaultLongitude)
@@ -73,7 +76,7 @@ export const Map = (props) => {
     polygonZones.forEach(polygon => polygon.setMap(null))
     const _circleZones = []
     const _polygonZones = []
-    if (map && maps && business?.zones) {
+    if (map && maps && business?.zones && deliveryType === 1) {
       const center = business?.location
       for (const deliveryZone of business.zones) {
         if (deliveryZone.type === 1 && deliveryZone?.data?.center && deliveryZone?.data?.radio) {
@@ -144,7 +147,7 @@ export const Map = (props) => {
   useEffect(() => {
     if (mapLoaded) return
     mapFit()
-  }, [customerLocation, business?.location, mapLoaded, map, maps, business?.zones])
+  }, [customerLocation, business?.location, mapLoaded, map, maps, business?.zones, deliveryType])
 
   const onMapLoaded = (map, maps) => {
     setMapLoaded(false)
