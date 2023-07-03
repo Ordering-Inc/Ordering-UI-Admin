@@ -25,11 +25,7 @@ export const Option = styled.div`
   }
 
   ${({ isDefault }) => !isDefault && css`
-    ${props => props.theme?.rtl ? css`
-      margin-right: 10px;
-    ` : css`
-      margin-left: 10px;
-    `}
+    padding: 10px;
   `}
 `
 
