@@ -91,6 +91,7 @@ export const DriversList = (props) => {
                   >
                     {driver?.assigned_orders_count} {t('ORDERS', 'Orders')}
                   </LinkButton>
+                  <p className='text-red'>{(driver?.busy && `(${t('BUSY', 'Busy')})`)}</p>
                 </div>
                 {driver?.qualification && (
                   <WrapperStar width={getStarWidth(driver?.qualification)} />

@@ -17,6 +17,8 @@ import {
 
 const DriverSelectorUI = (props) => {
   const {
+    driverActionStatus,
+    companyActionStatus,
     isFirstSelect,
     order,
     driversList,
@@ -121,6 +123,14 @@ const DriverSelectorUI = (props) => {
     }
     setDriversOptionList(_driversOptionList)
   }, [driversList, defaultValue, searchValue])
+
+  useEffect(() => {
+    if (!companyActionStatus?.error && !driverActionStatus?.error) return
+    setAlertState({
+      open: true,
+      content: companyActionStatus?.error || driverActionStatus?.error
+    })
+  }, [companyActionStatus?.error, driverActionStatus?.error])
 
   const changeDriver = (driverId) => {
     if (driverId === 'default') return
