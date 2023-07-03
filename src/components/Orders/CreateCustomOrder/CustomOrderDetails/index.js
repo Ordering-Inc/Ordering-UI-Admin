@@ -35,7 +35,7 @@ const CustomOrderDetailsUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [, { changeAddress }] = useOrder()
+  const [orderState, { changeAddress }] = useOrder()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
@@ -58,9 +58,9 @@ const CustomOrderDetailsUI = (props) => {
   }, [customerAddress?.id])
 
   useEffect(() => {
-    if (!customerAddress?.location) return
+    if (!customerAddress?.location || orderState?.loading) return
     getBusinessList(customerAddress.location)
-  }, [customerAddress?.location])
+  }, [customerAddress?.location, orderState])
 
   useEffect(() => {
     if (customersPhones?.error) {
