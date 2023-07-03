@@ -11,6 +11,7 @@ import {
   EmptyContent
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
+import { convertHMS } from '../../../utils'
 
 export const AnalyticsSpendList = (props) => {
   const {
@@ -42,8 +43,7 @@ export const AnalyticsSpendList = (props) => {
           dataList?.data ? (
             <AnalyticsSpendListContent>
               <TimeContentWrapper>
-                <h1>{parseNumber((dataList?.data * 1), { separator: '.' })}</h1>
-                <p>{t('SECONDS', 'Seconds')}</p>
+                <h1>{convertHMS(parseNumber((dataList?.data * 1), { separator: '.' }))}</h1>
               </TimeContentWrapper>
               <ReviewContentWrapper>
                 <ReviewBlock>
