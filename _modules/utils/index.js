@@ -365,7 +365,7 @@ var convertHMS = function convertHMS(value) {
   if (seconds < 10) {
     seconds = '0' + seconds;
   }
-  return sec < 0 ? '-' : '' + hours + ':' + minutes + ':' + seconds; // Return is HH : MM : SS
+  return sec < 0 ? '-' : '' + (hours === '00' ? '' : hours + ':') + minutes + ':' + seconds; // Return is HH : MM : SS
 };
 
 /**

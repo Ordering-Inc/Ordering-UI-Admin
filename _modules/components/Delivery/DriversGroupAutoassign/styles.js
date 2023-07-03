@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.SmallArea = exports.RowGroupContainer = exports.MediumArea = exports.MaxDistanceCustomerContainer = exports.LargeArea = exports.InputsGroup = exports.IconImage = exports.ForcedAssignSettingWrapper = exports.FieldContainer = exports.CustomItem = exports.CheckboxWrapper = exports.AutoassignItem = exports.AutoassignContainer = exports.AreaWrapper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -56,47 +56,50 @@ var MaxDistanceCustomerContainer = _styledComponents.default.div(_templateObject
 exports.MaxDistanceCustomerContainer = MaxDistanceCustomerContainer;
 var RowGroupContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 20px;\n  > div {\n    width: calc(50% - 10px);\n  }\n"])));
 exports.RowGroupContainer = RowGroupContainer;
-var CheckboxWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  span {\n    font-size: 14px;\n    ", "\n  }\n"])), function (props) {
+var CheckboxWrapper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  ", "\n\n  span {\n    font-size: 14px;\n    ", "\n  }\n"])), function (_ref5) {
+  var isPadding = _ref5.isPadding;
+  return isPadding && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    padding-bottom: 20px;\n  "])));
+}, function (props) {
   var _props$theme3;
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      margin-right: 15px;\n    "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      margin-left: 15px;\n    "])));
 });
 exports.CheckboxWrapper = CheckboxWrapper;
-var FieldContainer = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 25px;\n\n  label {\n    font-size: 14px;\n    margin-bottom: 12px;\n  }\n\n  ", "\n  ", "\n  ", "\n"])), function (_ref5) {
-  var isPink = _ref5.isPink;
-  return isPink && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n    input {\n      &:focus {\n        border-color: #ff0095;\n      }\n    }\n  "])));
-}, function (_ref6) {
-  var isGreen = _ref6.isGreen;
-  return isGreen && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    input {\n      &:focus {\n        border-color: #0b720b;\n      }\n    }\n  "])));
+var FieldContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 25px;\n\n  label {\n    font-size: 14px;\n    margin-bottom: 12px;\n  }\n\n  ", "\n  ", "\n  ", "\n"])), function (_ref6) {
+  var isPink = _ref6.isPink;
+  return isPink && (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n    input {\n      &:focus {\n        border-color: #ff0095;\n      }\n    }\n  "])));
 }, function (_ref7) {
-  var isBlue = _ref7.isBlue;
-  return isBlue && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    input {\n      &:focus {\n        border-color: ", ";\n      }\n    }\n  "])), function (props) {
+  var isGreen = _ref7.isGreen;
+  return isGreen && (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n    input {\n      &:focus {\n        border-color: #0b720b;\n      }\n    }\n  "])));
+}, function (_ref8) {
+  var isBlue = _ref8.isBlue;
+  return isBlue && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    input {\n      &:focus {\n        border-color: ", ";\n      }\n    }\n  "])), function (props) {
     return props.theme.colors.primary;
   });
 });
 exports.FieldContainer = FieldContainer;
-var InputsGroup = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  input {\n    width: 75px;\n  }\n\n  strong {\n    margin: 0 20px;\n  }\n"])));
+var InputsGroup = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  input {\n    width: 75px;\n  }\n\n  strong {\n    margin: 0 20px;\n  }\n"])));
 exports.InputsGroup = InputsGroup;
-var AreaWrapper = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  height: 70%;\n  margin: auto 0;\n"])));
+var AreaWrapper = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  height: 70%;\n  margin: auto 0;\n"])));
 exports.AreaWrapper = AreaWrapper;
-var LargeArea = _styledComponents.default.div(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  border: 1px solid ", ";\n  border-radius: 50%;\n  position: absolute;\n\n  ", "\n"])), function (props) {
-  return props.theme.colors.borderColor;
-}, function (_ref8) {
-  var active = _ref8.active;
-  return active && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    border-color: #ff0095;\n  "])));
-});
-exports.LargeArea = LargeArea;
-var MediumArea = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  width: 70%;\n  height: 70%;\n  border: 1px solid ", ";\n  border-radius: 50%;\n  position: absolute;\n  ", "\n"])), function (props) {
+var LargeArea = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 100%;\n  border: 1px solid ", ";\n  border-radius: 50%;\n  position: absolute;\n\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref9) {
   var active = _ref9.active;
-  return active && (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    border-color: #0b720b;\n  "])));
+  return active && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    border-color: #ff0095;\n  "])));
 });
-exports.MediumArea = MediumArea;
-var SmallArea = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  width: 40%;\n  height: 40%;\n  border: 1px solid ", ";\n  border-radius: 50%;\n  position: absolute;\n  ", "\n"])), function (props) {
+exports.LargeArea = LargeArea;
+var MediumArea = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  width: 70%;\n  height: 70%;\n  border: 1px solid ", ";\n  border-radius: 50%;\n  position: absolute;\n  ", "\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (_ref10) {
   var active = _ref10.active;
-  return active && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    border-color: ", ";\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n    border-color: #0b720b;\n  "])));
+});
+exports.MediumArea = MediumArea;
+var SmallArea = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  width: 40%;\n  height: 40%;\n  border: 1px solid ", ";\n  border-radius: 50%;\n  position: absolute;\n  ", "\n"])), function (props) {
+  return props.theme.colors.borderColor;
+}, function (_ref11) {
+  var active = _ref11.active;
+  return active && (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n    border-color: ", ";\n  "])), function (props) {
     return props.theme.colors.primary;
   });
 });

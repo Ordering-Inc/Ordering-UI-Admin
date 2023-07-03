@@ -19,7 +19,7 @@ var ReviewContentWrapper = _styledComponents.default.div(_templateObject3 || (_t
   return props.theme.colors.lightGray;
 });
 exports.ReviewContentWrapper = ReviewContentWrapper;
-var TimeContentWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  \n  h1{\n    font-weight: 500;\n    font-size: 52px;\n    margin: 0;\n    color: ", "\n  }\n  p {\n    margin: 0;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
+var TimeContentWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 35px;\n  \n  h1{\n    font-weight: 500;\n    font-size: 52px;\n    margin: 0;\n    color: ", "\n  }\n  p {\n    margin: 0;\n    font-size: 14px;\n    color: ", ";\n  }\n"])), function (props) {
   var _props$theme2;
   return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.headingColor;
 }, function (props) {
@@ -27,7 +27,7 @@ var TimeContentWrapper = _styledComponents.default.div(_templateObject4 || (_tem
   return (_props$theme3 = props.theme) === null || _props$theme3 === void 0 ? void 0 : _props$theme3.colors.headingColor;
 });
 exports.TimeContentWrapper = TimeContentWrapper;
-var OrdersAcceptSpendContent = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: flex-end;\n  justify-content: space-between;\n  margin-bottom: 30px;\n"])));
+var OrdersAcceptSpendContent = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: flex-end;\n  justify-content: space-between;\n"])));
 exports.OrdersAcceptSpendContent = OrdersAcceptSpendContent;
 var ReviewBlock = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 80px;\n  height: 80px;\n  border-radius: 7.6px;\n  background: #FFF4CC;\n\n  svg {\n    font-size: 32px;\n    path {\n      fill: #FFC700;\n    }\n  }\n"])));
 exports.ReviewBlock = ReviewBlock;

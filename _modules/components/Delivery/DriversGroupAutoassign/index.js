@@ -26,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
-  var _theme$images$icons, _theme$images$icons2, _theme$images$icons3, _theme$images$icons4, _theme$images$icons5, _changesState$autoass, _ref, _changesState$autoass2, _ref2, _changesState$autoass3, _changesState$autoass4, _autoRejectOrderGroup, _autoRejectOrderGroup2, _autoRejectOrderGroup3, _ref3, _changesState$autoass5, _ref4, _changesState$autoass6, _ref5, _changesState$autoass7;
+  var _theme$images$icons, _theme$images$icons2, _theme$images$icons3, _theme$images$icons4, _theme$images$icons5, _changesState$autoass, _ref, _changesState$autoass2, _ref2, _changesState$autoass3, _changesState$autoass4, _autoRejectOrderGroup, _autoRejectOrderGroup2, _autoRejectOrderGroup3, _ref3, _changesState$autoass5, _ref4, _changesState$autoass6, _ref5, _changesState$autoass7, _changesState$autoass8;
   var autoAssign = props.autoAssign,
     autoRejectOrderGroup = props.autoRejectOrderGroup,
     onSelectAssign = props.onSelectAssign,
@@ -179,7 +179,16 @@ var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
     active: curArea === 2
   }), /*#__PURE__*/_react.default.createElement(_styles2.SmallArea, {
     active: curArea === 1
-  }), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null)))));
+  }), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null)))), /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+    isPadding: true
+  }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    checked: (_changesState$autoass8 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_groupable_individual_orders_only) !== null && _changesState$autoass8 !== void 0 ? _changesState$autoass8 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_groupable_individual_orders_only,
+    onChange: function onChange(e) {
+      return onChangeSave({
+        autoassign_groupable_individual_orders_only: e.target.checked
+      });
+    }
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('DO_NOT_ASSIGN_MORE_THAN_1_ORDER_IF_ORDER_CAN_NOT_GROUPED', 'Do not assign more than 1 order IF the order can’t be grouped'))));
 };
 var DriversGroupAutoassign = function DriversGroupAutoassign(props) {
   var driversGroupAutoassignProps = _objectSpread(_objectSpread({}, props), {}, {
