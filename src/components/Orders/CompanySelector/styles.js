@@ -33,6 +33,7 @@ export const Option = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 350px;
+    font-size: 14px;
   }
 
   @media (max-width: 576px) {
