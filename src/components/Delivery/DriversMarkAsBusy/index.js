@@ -35,7 +35,8 @@ export const DriversMarkAsBusy = (props) => {
   useEffect(() => {
     if (typeof changesState?.autoassign_max_in_pending !== 'undefined' || typeof changesState?.autoassign_max_in_accepted_by_business !== 'undefined' ||
       typeof changesState?.autoassign_max_in_ready_for_pickup !== 'undefined' || typeof changesState?.autoassign_max_in_accepted_by_driver !== 'undefined' ||
-      typeof changesState?.autoassign_max_in_driver_in_business !== 'undefined' || typeof changesState?.autoassign_max_in_pickup_completed !== 'undefined') {
+      typeof changesState?.autoassign_max_in_driver_in_business !== 'undefined' || typeof changesState?.autoassign_max_in_pickup_completed !== 'undefined' ||
+      typeof changesState?.autoassign_max_in_driver_almost_arrived_to_customer !== 'undefined' || typeof changesState?.autoassign_max_in_driver_on_way !== 'undefined') {
       setIsShowAdvancedOption(true)
     }
   }, [changesState])
@@ -116,6 +117,26 @@ export const DriversMarkAsBusy = (props) => {
           </StepItem>
           <StepItem>
             <div className='number'>6</div>
+            <span>{t('ORDER_DRIVER_ON_WAY', 'Driver on way')}</span>
+            <Input
+              name='autoassign_max_in_driver_on_way'
+              value={changesState?.autoassign_max_in_driver_on_way ?? curDriversGroup?.autoassign_max_in_driver_on_way ?? ''}
+              onChange={e => handleChangeInput(e)}
+            />
+            <img src={theme.images.order.status8} />
+          </StepItem>
+          <StepItem>
+            <div className='number'>7</div>
+            <span>{t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer')}</span>
+            <Input
+              name='autoassign_max_in_driver_almost_arrived_to_customer'
+              value={changesState?.autoassign_max_in_driver_almost_arrived_to_customer ?? curDriversGroup?.autoassign_max_in_driver_almost_arrived_to_customer ?? ''}
+              onChange={e => handleChangeInput(e)}
+            />
+            <img src={theme.images.order.status19} />
+          </StepItem>
+          <StepItem>
+            <div className='number'>8</div>
             <span>{t('ORDER_PICKUP_COMPLETED_BY_DRIVER', 'Pickup Completed By Driver')}</span>
             <Input
               name='autoassign_max_in_pickup_completed'
