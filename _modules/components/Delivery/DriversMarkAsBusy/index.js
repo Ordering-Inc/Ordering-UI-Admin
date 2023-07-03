@@ -22,7 +22,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversMarkAsBusy = function DriversMarkAsBusy(props) {
-  var _ref, _changesState$autoass, _ref2, _changesState$autoass2, _ref3, _changesState$autoass3, _ref4, _changesState$autoass4, _ref5, _changesState$autoass5, _ref6, _changesState$autoass6, _ref7, _changesState$autoass7;
+  var _ref, _changesState$autoass, _ref2, _changesState$autoass2, _ref3, _changesState$autoass3, _ref4, _changesState$autoass4, _ref5, _changesState$autoass5, _ref6, _changesState$autoass6, _ref7, _changesState$autoass7, _ref8, _changesState$autoass8, _ref9, _changesState$autoass9;
   var curDriversGroup = props.curDriversGroup,
     changesState = props.changesState,
     handleChangesState = props.handleChangesState;
@@ -43,7 +43,7 @@ var DriversMarkAsBusy = function DriversMarkAsBusy(props) {
     }
   };
   (0, _react.useEffect)(function () {
-    if (typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_pending) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_accepted_by_business) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_ready_for_pickup) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_accepted_by_driver) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_driver_in_business) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_pickup_completed) !== 'undefined') {
+    if (typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_pending) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_accepted_by_business) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_ready_for_pickup) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_accepted_by_driver) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_driver_in_business) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_pickup_completed) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_driver_almost_arrived_to_customer) !== 'undefined' || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_driver_on_way) !== 'undefined') {
       setIsShowAdvancedOption(true);
     }
   }, [changesState]);
@@ -110,9 +110,29 @@ var DriversMarkAsBusy = function DriversMarkAsBusy(props) {
     src: theme.images.order.status3
   })), /*#__PURE__*/_react.default.createElement(_styles2.StepItem, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "number"
-  }, "6"), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_PICKUP_COMPLETED_BY_DRIVER', 'Pickup Completed By Driver')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, "6"), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_DRIVER_ON_WAY', 'Driver on way')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "autoassign_max_in_driver_on_way",
+    value: (_ref7 = (_changesState$autoass7 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_driver_on_way) !== null && _changesState$autoass7 !== void 0 ? _changesState$autoass7 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_max_in_driver_on_way) !== null && _ref7 !== void 0 ? _ref7 : '',
+    onChange: function onChange(e) {
+      return handleChangeInput(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.order.status8
+  })), /*#__PURE__*/_react.default.createElement(_styles2.StepItem, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "number"
+  }, "7"), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "autoassign_max_in_driver_almost_arrived_to_customer",
+    value: (_ref8 = (_changesState$autoass8 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_driver_almost_arrived_to_customer) !== null && _changesState$autoass8 !== void 0 ? _changesState$autoass8 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_max_in_driver_almost_arrived_to_customer) !== null && _ref8 !== void 0 ? _ref8 : '',
+    onChange: function onChange(e) {
+      return handleChangeInput(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.order.status19
+  })), /*#__PURE__*/_react.default.createElement(_styles2.StepItem, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "number"
+  }, "8"), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_PICKUP_COMPLETED_BY_DRIVER', 'Pickup Completed By Driver')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "autoassign_max_in_pickup_completed",
-    value: (_ref7 = (_changesState$autoass7 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_pickup_completed) !== null && _changesState$autoass7 !== void 0 ? _changesState$autoass7 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_max_in_pickup_completed) !== null && _ref7 !== void 0 ? _ref7 : '',
+    value: (_ref9 = (_changesState$autoass9 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_in_pickup_completed) !== null && _changesState$autoass9 !== void 0 ? _changesState$autoass9 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_max_in_pickup_completed) !== null && _ref9 !== void 0 ? _ref9 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
