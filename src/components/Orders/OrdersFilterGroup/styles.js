@@ -41,6 +41,9 @@ export const WrapperRow = styled.div`
     border: none;
     font-size: 14px;
     border-radius: 8px;
+    > div:first-child {
+      height: 100%;
+    }
   }
 
   .order-status-multi-select {
@@ -189,4 +192,5 @@ export const Option = styled.div`
   color: ${props => props.theme.colors.secundaryContrast};
   display: flex;
   align-items: center;
+  padding: 5px;
 `

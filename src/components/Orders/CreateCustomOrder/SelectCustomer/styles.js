@@ -13,10 +13,12 @@ export const SectionContainer = styled.div`
 export const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   > button {
     height: 44px;
     white-space: nowrap;
+    margin: 10px 0;
   }
 `
 export const SearchBarWrapper = styled.div`

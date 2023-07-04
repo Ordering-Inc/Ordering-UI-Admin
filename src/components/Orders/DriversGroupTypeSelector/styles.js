@@ -10,7 +10,7 @@ export const Option = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 15px;
+  padding: 10px;
   column-gap: 20px;
 
   svg {

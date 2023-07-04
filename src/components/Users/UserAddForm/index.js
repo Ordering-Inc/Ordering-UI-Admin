@@ -40,6 +40,7 @@ const UserAddFormUI = (props) => {
     handleChangeUserType,
     handlechangeImage,
     handleChangeSwtich,
+    defaultCountry,
     defaultPhoneNumber,
     isFromCustomOrder,
     hideUserTypeSelector
@@ -203,7 +204,6 @@ const UserAddFormUI = (props) => {
 
   useEffect(() => {
     if (defaultPhoneNumber) {
-      setUserPhoneNumber(defaultPhoneNumber)
       handleChangePhoneNumber(defaultPhoneNumber, true)
     }
   }, [defaultPhoneNumber])
@@ -287,12 +287,13 @@ const UserAddFormUI = (props) => {
               )}
               {!!showInputPhoneNumber && (
                 <InputPhoneNumber
+                  defaultCountry={defaultCountry}
                   value={userPhoneNumber}
                   setValue={handleChangePhoneNumber}
                   handleIsValid={setIsValidPhoneNumber}
                 />
               )}
-              {!isCheckout && (
+              {!isCheckout && !isFromCustomOrder && (
                 <Input
                   type='password'
                   name='password'

@@ -475,7 +475,9 @@ export const MessagesUI = (props) => {
                               <p
                                 dangerouslySetInnerHTML={{
                                   __html: t('ORDER_PLACED_FOR_VIA', 'Order placed for _for_ via _via_.')
-                                    .replace('_for_', '<b>' + parseDate(order.delivery_datetime) + '</b>')
+                                    .replace('_for_', '<b>' + order?.delivery_datetime_utc
+                                      ? parseDate(order?.delivery_datetime_utc)
+                                      : parseDate(order?.delivery_datetime, { utc: false }) + '</b>')
                                     .replace('_via_', '<b>' + t(order.app_id ? order.app_id.toUpperCase() : 'OTHER') + '</b>')
                                 }}
                               />
