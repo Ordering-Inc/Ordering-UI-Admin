@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react'
 import {
   useLanguage,
   useUtils,
-  useConfig,
   AdvancedReports as AdvancedReportsController
 } from 'ordering-components-admin'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
@@ -39,8 +38,7 @@ const ReportsGeneralSalesUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const [{ configs }] = useConfig()
-  const isMulticountryEnabled = configs?.multicountry?.value
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
 
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
@@ -129,7 +127,7 @@ const ReportsGeneralSalesUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          {isMulticountryEnabled && (
+          {isOneMoreCountry && (
             <Button
               onClick={() => setOpenCountryFilter(true)}
             >
@@ -249,6 +247,7 @@ const ReportsGeneralSalesUI = (props) => {
       </Modal>
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />

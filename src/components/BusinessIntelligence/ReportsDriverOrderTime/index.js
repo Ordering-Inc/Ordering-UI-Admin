@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, useConfig, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
 import { Download } from 'react-bootstrap-icons'
@@ -33,8 +33,7 @@ const ReportsDriverOrderTimeUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
-  const isMulticountryEnabled = configs?.multicountry?.value
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
 
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
@@ -123,7 +122,7 @@ const ReportsDriverOrderTimeUI = (props) => {
           >
             {t('ORDER_TYPE', 'Order type')} ({filterList?.delivery_types_ids ? filterList?.delivery_types_ids.length : t('ALL', 'All')})
           </Button> */}
-          {isMulticountryEnabled && (
+          {isOneMoreCountry && (
             <Button
               onClick={() => setOpenCountryFilter(true)}
             >
@@ -236,6 +235,7 @@ const ReportsDriverOrderTimeUI = (props) => {
       </Modal> */}
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />

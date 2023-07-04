@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {
   useLanguage,
-  useConfig,
   AdvancedReports as AdvancedReportsController
 } from 'ordering-components-admin'
 import { Download } from 'react-bootstrap-icons'
@@ -36,8 +35,7 @@ const ReportsSaleAndCategoryUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
-  const isMulticountryEnabled = configs?.multicountry?.value
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
 
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
@@ -176,7 +174,7 @@ const ReportsSaleAndCategoryUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          {isMulticountryEnabled && (
+          {isOneMoreCountry && (
             <Button
               onClick={() => setOpenCountryFilter(true)}
             >
@@ -256,6 +254,7 @@ const ReportsSaleAndCategoryUI = (props) => {
       </Modal>
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />

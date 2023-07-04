@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useConfig, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import { Button } from '../../../styles'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Download } from 'react-bootstrap-icons'
@@ -34,8 +34,7 @@ const ReportsOrderDistanceUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
-  const isMulticountryEnabled = configs?.multicountry?.value
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
 
   const tableRef = useRef(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
@@ -151,7 +150,7 @@ const ReportsOrderDistanceUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          {isMulticountryEnabled && (
+          {isOneMoreCountry && (
             <Button
               onClick={() => setOpenCountryFilter(true)}
             >
@@ -260,6 +259,7 @@ const ReportsOrderDistanceUI = (props) => {
       </Modal>
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />

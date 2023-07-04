@@ -31,7 +31,7 @@ const ReportsHeatMapUI = (props) => {
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const [{ user }] = useSession()
-  const isMulticountryEnabled = configState?.configs?.multicountry?.value
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
 
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
@@ -116,7 +116,7 @@ const ReportsHeatMapUI = (props) => {
             >
               {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
-            {isMulticountryEnabled && (
+            {isOneMoreCountry && (
               <Button
                 onClick={() => setOpenCountryFilter(true)}
               >
@@ -223,6 +223,7 @@ const ReportsHeatMapUI = (props) => {
         </Modal>
         <CountryFilter
           {...props}
+          setIsOneMoreCountry={setIsOneMoreCountry}
           openCountryFilter={openCountryFilter}
           setOpenCountryFilter={setOpenCountryFilter}
         />

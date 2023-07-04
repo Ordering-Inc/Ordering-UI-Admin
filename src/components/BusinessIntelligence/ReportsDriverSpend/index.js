@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useLanguage, useUtils, useConfig, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
 import { Download } from 'react-bootstrap-icons'
@@ -33,8 +33,7 @@ const ReportsDriverSpendUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
-  const [{ configs }] = useConfig()
-  const isMulticountryEnabled = configs?.multicountry?.value
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
 
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
@@ -117,7 +116,7 @@ const ReportsDriverSpendUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          {isMulticountryEnabled && (
+          {isOneMoreCountry && (
             <Button
               onClick={() => setOpenCountryFilter(true)}
             >
@@ -224,6 +223,7 @@ const ReportsDriverSpendUI = (props) => {
       </Modal>
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />

@@ -4,7 +4,6 @@ import 'chartjs-adapter-moment'
 import { Line } from 'react-chartjs-2'
 import {
   useLanguage,
-  useConfig,
   AdvancedReports as AdvancedReportsController
 } from 'ordering-components-admin'
 import { Button } from '../../../styles'
@@ -36,8 +35,7 @@ const ReportsOrdersUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
-  const isMulticountryEnabled = configs?.multicountry?.value
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
 
   const [dataOptions, setDataOptions] = useState(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
@@ -153,7 +151,7 @@ const ReportsOrdersUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          {isMulticountryEnabled && (
+          {isOneMoreCountry && (
             <Button
               onClick={() => setOpenCountryFilter(true)}
             >
@@ -221,6 +219,7 @@ const ReportsOrdersUI = (props) => {
       </Modal>
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />

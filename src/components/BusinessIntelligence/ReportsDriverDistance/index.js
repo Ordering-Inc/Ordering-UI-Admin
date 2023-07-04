@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useLanguage, useUtils, useConfig, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
 import { Download } from 'react-bootstrap-icons'
@@ -33,8 +33,7 @@ const ReportsDriverDistanceUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ configs }] = useConfig()
-  const isMulticountryEnabled = configs?.multicountry?.value
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
 
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
@@ -131,7 +130,7 @@ const ReportsDriverDistanceUI = (props) => {
             >
               {t('DRIVER', 'DRIVER')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
-            {isMulticountryEnabled && (
+            {isOneMoreCountry && (
               <Button
                 onClick={() => setOpenCountryFilter(true)}
               >
@@ -249,6 +248,7 @@ const ReportsDriverDistanceUI = (props) => {
         </Modal>
         <CountryFilter
           {...props}
+          setIsOneMoreCountry={setIsOneMoreCountry}
           openCountryFilter={openCountryFilter}
           setOpenCountryFilter={setOpenCountryFilter}
         />
