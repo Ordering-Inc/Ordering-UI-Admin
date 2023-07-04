@@ -19,6 +19,7 @@ import {
   DriverInfoContainer,
   DriverInfo,
   DriverSelectorContainer,
+  CompanySelectorContainer,
   CutsomerDetail,
   CustomerInfoTable,
   ToggleItemWrapper,
@@ -217,7 +218,7 @@ export const OrderContactInformation = (props) => {
       {order?.delivery_type === 1 && !isServiceOrder && (
         <>
           {!order?.driver_id && (
-            <DriverSelectorContainer>
+            <CompanySelectorContainer>
               <p>{t('DRIVER_COMPANY', 'Driver company')}</p>
               <CompanySelector
                 small
@@ -230,7 +231,7 @@ export const OrderContactInformation = (props) => {
                 isOrderDrivers
                 orderId={order?.id}
               />
-            </DriverSelectorContainer>
+            </CompanySelectorContainer>
           )}
           {!order?.driver_company_id && (
             <DriverSelectorContainer>
