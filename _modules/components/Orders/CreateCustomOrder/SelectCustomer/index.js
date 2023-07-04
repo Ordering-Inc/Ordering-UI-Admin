@@ -9,12 +9,12 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Users = require("../../../Users");
 var _Delivery = require("../../../Delivery");
-var _utils = require("../../../../utils");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _CgSpinnerTwoAlt = _interopRequireDefault(require("@meronex/icons/cg/CgSpinnerTwoAlt"));
 var _Shared = require("../../../Shared");
 var _styles = require("../../../../styles");
+var _utils = require("../../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -33,16 +33,14 @@ var SelectCustomer = function SelectCustomer(props) {
     setSelectedUser = props.setSelectedUser,
     onChangeNumber = props.onChangeNumber,
     handleParentSidebarMove = props.handleParentSidebarMove,
-    customerAddress = props.customerAddress;
+    customerAddress = props.customerAddress,
+    defaultCountryCodeState = props.defaultCountryCodeState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     optimizeImage = _useUtils2[0].optimizeImage;
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-    _useConfig2 = _slicedToArray(_useConfig, 1),
-    configs = _useConfig2[0].configs;
   var _useCustomer = (0, _orderingComponentsAdmin.useCustomer)(),
     _useCustomer2 = _slicedToArray(_useCustomer, 2),
     setUserCustomer = _useCustomer2[1].setUserCustomer;
@@ -144,7 +142,7 @@ var SelectCustomer = function SelectCustomer(props) {
   }, selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.name, " ", selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.lastname)))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
-    disabled: openSidebar === 'user_add_form',
+    disabled: openSidebar === 'user_add_form' || defaultCountryCodeState.loading,
     onClick: function onClick() {
       return handleOpenAddForm();
     }
@@ -162,13 +160,9 @@ var SelectCustomer = function SelectCustomer(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_Users.UserAddForm, {
     isFromCustomOrder: true,
-    hideUserTypeSelector: true
-    // defaultPhoneNumber={
-    //   findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())
-    //     ? `+${findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())} ${selectedUser?.cellphone || selectedUser?.phone || phone}`
-    //     : `+1 ${selectedUser?.cellphone || selectedUser?.phone || phone}`
-    // }
-    ,
+    hideUserTypeSelector: true,
+    defaultCountry: defaultCountryCodeState.code,
+    defaultPhoneNumber: ((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone) && "+".concat((0, _utils.findExitingCountryPhoneCode)(defaultCountryCodeState === null || defaultCountryCodeState === void 0 ? void 0 : defaultCountryCodeState.code), " ").concat((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone),
     handleSuccessAdd: onSelectUser,
     onClose: function onClose() {
       return handleCloseSidebar();

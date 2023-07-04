@@ -142,7 +142,6 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
       return window.removeEventListener('mouseup', handleClickOutside);
     };
   }, [isShow]);
-  console.log(filterValues, 'filterValues');
   return /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     padding: "0px",
