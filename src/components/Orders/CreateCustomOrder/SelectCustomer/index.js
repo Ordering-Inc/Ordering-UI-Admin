@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useUtils, useConfig, useCustomer } from 'ordering-components-admin'
+import { useLanguage, useUtils, useCustomer } from 'ordering-components-admin'
 import { UserAddForm } from '../../../Users'
 import { AddressList } from '../../../Delivery'
-import { findExitingCountryPhoneCode } from '../../../../utils'
 import { Dot, HouseDoor } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import CgSpinnerTwoAlt from '@meronex/icons/cg/CgSpinnerTwoAlt'
 import { SideBar } from '../../../Shared'
 import { Button, Input, LinkButton } from '../../../../styles'
+import { findExitingCountryPhoneCode } from '../../../../utils'
 import {
   SectionContainer,
   SearchBarContainer,
@@ -29,12 +29,12 @@ export const SelectCustomer = (props) => {
     setSelectedUser,
     onChangeNumber,
     handleParentSidebarMove,
-    customerAddress
+    customerAddress,
+    defaultCountryCodeState
   } = props
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
-  const [{ configs }] = useConfig()
   const [, { setUserCustomer }] = useCustomer()
 
   const [searchInputFocus, setSearchInputFocus] = useState(false)
@@ -169,7 +169,7 @@ export const SelectCustomer = (props) => {
           <Button
             borderRadius='8px'
             color='primary'
-            disabled={openSidebar === 'user_add_form'}
+            disabled={openSidebar === 'user_add_form' || defaultCountryCodeState.loading}
             onClick={() => handleOpenAddForm()}
           >
             {t('USERS_REGISTER', 'New user')}
@@ -205,11 +205,8 @@ export const SelectCustomer = (props) => {
           <UserAddForm
             isFromCustomOrder
             hideUserTypeSelector
-            // defaultPhoneNumber={
-            //   findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())
-            //     ? `+${findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())} ${selectedUser?.cellphone || selectedUser?.phone || phone}`
-            //     : `+1 ${selectedUser?.cellphone || selectedUser?.phone || phone}`
-            // }
+            defaultCountry={defaultCountryCodeState.code}
+            defaultPhoneNumber={(selectedUser?.cellphone || phone) && `+${findExitingCountryPhoneCode(defaultCountryCodeState?.code)} ${selectedUser?.cellphone || phone}`}
             handleSuccessAdd={onSelectUser}
             onClose={() => handleCloseSidebar()}
           />

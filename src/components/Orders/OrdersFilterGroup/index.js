@@ -109,8 +109,6 @@ const OrdersFilterGroupUI = (props) => {
     return () => window.removeEventListener('mouseup', handleClickOutside)
   }, [isShow])
 
-  console.log(filterValues, 'filterValues')
-
   return (
     <Modal
       width='80%'

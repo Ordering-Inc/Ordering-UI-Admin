@@ -5,16 +5,8 @@ export const Option = styled.div`
   display: flex;
   align-items: center;
   color: ${props => props.theme.colors?.headingColor};
-  padding: ${({ padding }) => padding || '5px 10px'};
+  padding: ${({ padding }) => padding || '5px'};
   white-space: nowrap;
-  ${({ isPhoneView }) => isPhoneView && css`
-    width: 100%;
-  `}
-  ${({ isRemove }) => isRemove && css`
-    color: ${props => props.theme.colors.danger};
-    padding: 3px 10px;
-    font-size: 14px;
-  `}
 
   img {
     width: 45px;
