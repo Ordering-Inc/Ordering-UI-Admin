@@ -31,6 +31,8 @@ const ReportsHeatMapUI = (props) => {
   const [, t] = useLanguage()
   const [configState] = useConfig()
   const [{ user }] = useSession()
+  const isMulticountryEnabled = configState?.configs?.multicountry?.value
+
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [openCountryFilter, setOpenCountryFilter] = useState(true)
@@ -114,11 +116,13 @@ const ReportsHeatMapUI = (props) => {
             >
               {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
-            <Button
-              onClick={() => setOpenCountryFilter(true)}
-            >
-              {t('COUNTRY', 'Country')}
-            </Button>
+            {isMulticountryEnabled && (
+              <Button
+                onClick={() => setOpenCountryFilter(true)}
+              >
+                {t('COUNTRY', 'Country')}
+              </Button>
+            )}
           </BrandBusinessWrapper>
           <CalendarWrapper>
             <AnalyticsCalendar

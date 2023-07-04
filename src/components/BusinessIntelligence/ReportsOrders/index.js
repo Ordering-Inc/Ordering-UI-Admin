@@ -4,6 +4,7 @@ import 'chartjs-adapter-moment'
 import { Line } from 'react-chartjs-2'
 import {
   useLanguage,
+  useConfig,
   AdvancedReports as AdvancedReportsController
 } from 'ordering-components-admin'
 import { Button } from '../../../styles'
@@ -35,6 +36,9 @@ const ReportsOrdersUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
+  const isMulticountryEnabled = configs?.multicountry?.value
+
   const [dataOptions, setDataOptions] = useState(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [openCountryFilter, setOpenCountryFilter] = useState(true)
@@ -149,11 +153,13 @@ const ReportsOrdersUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          <Button
-            onClick={() => setOpenCountryFilter(true)}
-          >
-            {t('COUNTRY', 'Country')}
-          </Button>
+          {isMulticountryEnabled && (
+            <Button
+              onClick={() => setOpenCountryFilter(true)}
+            >
+              {t('COUNTRY', 'Country')}
+            </Button>
+          )}
         </BrandBusinessWrapper>
         <CalendarWrapper>
           <AnalyticsCalendar

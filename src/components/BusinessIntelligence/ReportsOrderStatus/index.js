@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useLanguage, useUtils, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, useConfig, AdvancedReports as AdvancedReportsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
 import { Download } from 'react-bootstrap-icons'
@@ -35,6 +35,9 @@ const ReportsOrderStatusUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [{ configs }] = useConfig()
+  const isMulticountryEnabled = configs?.multicountry?.value
+
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [openCountryFilter, setOpenCountryFilter] = useState(true)
@@ -129,11 +132,13 @@ const ReportsOrderStatusUI = (props) => {
             >
               {t('ORDER_TYPE', 'Order type')} ({filterList?.delivery_types_ids ? filterList?.delivery_types_ids.length : t('ALL', 'All')})
             </Button>
-            <Button
-              onClick={() => setOpenCountryFilter(true)}
-            >
-              {t('COUNTRY', 'Country')}
-            </Button>
+            {isMulticountryEnabled && (
+              <Button
+                onClick={() => setOpenCountryFilter(true)}
+              >
+                {t('COUNTRY', 'Country')}
+              </Button>
+            )}
           </BrandBusinessWrapper>
           <CalendarWrapper>
             <AnalyticsCalendar

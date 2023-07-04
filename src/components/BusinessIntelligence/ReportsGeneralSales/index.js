@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import {
   useLanguage,
   useUtils,
+  useConfig,
   AdvancedReports as AdvancedReportsController
 } from 'ordering-components-admin'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
@@ -38,6 +39,9 @@ const ReportsGeneralSalesUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [{ configs }] = useConfig()
+  const isMulticountryEnabled = configs?.multicountry?.value
+
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
@@ -125,11 +129,13 @@ const ReportsGeneralSalesUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          <Button
-            onClick={() => setOpenCountryFilter(true)}
-          >
-            {t('COUNTRY', 'Country')}
-          </Button>
+          {isMulticountryEnabled && (
+            <Button
+              onClick={() => setOpenCountryFilter(true)}
+            >
+              {t('COUNTRY', 'Country')}
+            </Button>
+          )}
         </BrandBusinessWrapper>
         <CalendarWrapper>
           <AnalyticsCalendar
