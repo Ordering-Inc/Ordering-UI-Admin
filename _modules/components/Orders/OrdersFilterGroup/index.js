@@ -11,7 +11,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _BusinessesSelector = require("../BusinessesSelector");
 var _DriversGroupTypeSelector = require("../DriversGroupTypeSelector");
 var _DateTypeSelector = require("../DateTypeSelector");
-var _DriverSelector = require("../DriverSelector");
+var _DriverMultiSelector = require("../DriverMultiSelector");
 var _Shared = require("../../Shared");
 var _DeliveryTypeSelector = require("../DeliveryTypeSelector");
 var _PaymethodTypeSelector = require("../PaymethodTypeSelector");
@@ -143,7 +143,6 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
       return window.removeEventListener('mouseup', handleClickOutside);
     };
   }, [isShow]);
-  console.log(filterValues, 'filterValues');
   return /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     padding: "0px",
@@ -180,8 +179,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     filterValues: filterValues,
     businessesList: businessesList,
     handleChangeBusinesses: handleChangeBusinesses
-  }), /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
-    isFilterView: true,
+  }), /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
     drivers: driversList.drivers,
     filterValues: filterValues,
     handleChangeDriver: handleChangeDriver

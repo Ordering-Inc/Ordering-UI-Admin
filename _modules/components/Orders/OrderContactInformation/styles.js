@@ -4,10 +4,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ToggleItemWrapper = exports.ReviewButton = exports.PhotoWrapper = exports.Photo = exports.InfoContent = exports.DriverSelectorContainer = exports.DriverInfoContainer = exports.DriverInfo = exports.CutsomerDetail = exports.CustomerInfoTable = exports.CustomerInfo = exports.BusinessInfo = void 0;
+exports.ToggleItemWrapper = exports.ReviewButton = exports.PhotoWrapper = exports.Photo = exports.InfoContent = exports.DriverSelectorContainer = exports.DriverInfoContainer = exports.DriverInfo = exports.CutsomerDetail = exports.CustomerInfoTable = exports.CustomerInfo = exports.CompanySelectorContainer = exports.BusinessInfo = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -46,42 +46,50 @@ var DriverInfoContainer = _styledComponents.default.div(_templateObject10 || (_t
 exports.DriverInfoContainer = DriverInfoContainer;
 var DriverInfo = (0, _styledComponents.default)(BusinessInfo)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral([""])));
 exports.DriverInfo = DriverInfo;
-var DriverSelectorContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-top: 23px;\n  margin-bottom: 13px;\n  > p {\n    font-size: 14px;\n    margin-top: 0;\n    margin-bottom: 15px;\n  }\n  > div {\n    width: 100%;\n    border-radius: 8px;\n    background-color: ", ";\n\n    > div {\n      &:first-child {\n        border: none;\n        height: 50px;\n      }\n      > div:first-child {\n        color: ", ";\n      }\n    }\n  }\n\n  @media (max-width: 576px) {\n    > div {\n      p {\n        max-width: initial;\n      }\n    }\n  }\n"])), function (props) {
+var CompanySelectorContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-top: 23px;\n  margin-bottom: 13px;\n  > p {\n    font-size: 14px;\n    margin-top: 0;\n    margin-bottom: 15px;\n  }\n  > div {\n    width: 100%;\n    border-radius: 8px;\n    background-color: ", ";\n\n    > div {\n      &:first-child {\n        border: none;\n        height: 50px;\n      }\n      > div:first-child {\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme$colors3;
   return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.secundary;
 }, function (props) {
   var _props$theme$colors4;
   return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.headingColor;
 });
-exports.DriverSelectorContainer = DriverSelectorContainer;
-var CutsomerDetail = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  padding-bottom: 15px;\n  margin-bottom: 15px;\n  width: 100%;\n"])), function (props) {
+exports.CompanySelectorContainer = CompanySelectorContainer;
+var DriverSelectorContainer = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin-top: 23px;\n  margin-bottom: 13px;\n  > p {\n    font-size: 14px;\n    margin-top: 0;\n    margin-bottom: 15px;\n  }\n  > div {\n    width: 100%;\n    border-radius: 8px;\n    background-color: ", ";\n\n    > div {\n      > div {\n        &:first-child {\n          border: none;\n          height: 50px;\n        }\n        > div:first-child {\n          color: ", ";\n        }\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme$colors5;
   return (_props$theme$colors5 = props.theme.colors) === null || _props$theme$colors5 === void 0 ? void 0 : _props$theme$colors5.secundary;
+}, function (props) {
+  var _props$theme$colors6;
+  return (_props$theme$colors6 = props.theme.colors) === null || _props$theme$colors6 === void 0 ? void 0 : _props$theme$colors6.headingColor;
+});
+exports.DriverSelectorContainer = DriverSelectorContainer;
+var CutsomerDetail = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  padding-bottom: 15px;\n  margin-bottom: 15px;\n  width: 100%;\n"])), function (props) {
+  var _props$theme$colors7;
+  return (_props$theme$colors7 = props.theme.colors) === null || _props$theme$colors7 === void 0 ? void 0 : _props$theme$colors7.secundary;
 });
 exports.CutsomerDetail = CutsomerDetail;
-var CustomerInfoTable = _styledComponents.default.table(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  tr {\n    td {\n      color: ", ";\n      font-size: 12px;\n      margin: 0px;\n\n      &:first-child {\n        color: ", ";\n      }\n\n      > a {\n        color: ", ";\n        transition: all 0.3s linear;\n        &:hover {\n          color: ", ";\n        }\n      }\n    }\n  }\n"])), function (props) {
-  var _props$theme$colors6;
-  return (_props$theme$colors6 = props.theme.colors) === null || _props$theme$colors6 === void 0 ? void 0 : _props$theme$colors6.lightGray;
-}, function (props) {
-  var _props$theme$colors7;
-  return (_props$theme$colors7 = props.theme.colors) === null || _props$theme$colors7 === void 0 ? void 0 : _props$theme$colors7.headingColor;
-}, function (props) {
+var CustomerInfoTable = _styledComponents.default.table(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  tr {\n    td {\n      color: ", ";\n      font-size: 12px;\n      margin: 0px;\n\n      &:first-child {\n        color: ", ";\n      }\n\n      > a {\n        color: ", ";\n        transition: all 0.3s linear;\n        &:hover {\n          color: ", ";\n        }\n      }\n    }\n  }\n"])), function (props) {
   var _props$theme$colors8;
-  return (_props$theme$colors8 = props.theme.colors) === null || _props$theme$colors8 === void 0 ? void 0 : _props$theme$colors8.primary;
+  return (_props$theme$colors8 = props.theme.colors) === null || _props$theme$colors8 === void 0 ? void 0 : _props$theme$colors8.lightGray;
 }, function (props) {
   var _props$theme$colors9;
   return (_props$theme$colors9 = props.theme.colors) === null || _props$theme$colors9 === void 0 ? void 0 : _props$theme$colors9.headingColor;
+}, function (props) {
+  var _props$theme$colors10;
+  return (_props$theme$colors10 = props.theme.colors) === null || _props$theme$colors10 === void 0 ? void 0 : _props$theme$colors10.primary;
+}, function (props) {
+  var _props$theme$colors11;
+  return (_props$theme$colors11 = props.theme.colors) === null || _props$theme$colors11 === void 0 ? void 0 : _props$theme$colors11.headingColor;
 });
 exports.CustomerInfoTable = CustomerInfoTable;
-var ToggleItemWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n\n  ", "\n"])), function (props) {
-  var _props$theme$colors10;
-  return (_props$theme$colors10 = props.theme.colors) === null || _props$theme$colors10 === void 0 ? void 0 : _props$theme$colors10.secundary;
+var ToggleItemWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n\n  ", "\n"])), function (props) {
+  var _props$theme$colors12;
+  return (_props$theme$colors12 = props.theme.colors) === null || _props$theme$colors12 === void 0 ? void 0 : _props$theme$colors12.secundary;
 }, function (_ref) {
   var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    border-bottom: none;\n    .down-arrow {\n      transform: rotateZ(180deg);\n    }\n  "])));
+  return active && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    border-bottom: none;\n    .down-arrow {\n      transform: rotateZ(180deg);\n    }\n  "])));
 });
 exports.ToggleItemWrapper = ToggleItemWrapper;
-var ReviewButton = _styledComponents.default.span(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  font-size: 14px;\n  text-decoration: underline;\n"])), function (props) {
+var ReviewButton = _styledComponents.default.span(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  color: ", ";\n  font-size: 14px;\n  text-decoration: underline;\n"])), function (props) {
   return props.theme.colors.primary;
 });
 exports.ReviewButton = ReviewButton;
