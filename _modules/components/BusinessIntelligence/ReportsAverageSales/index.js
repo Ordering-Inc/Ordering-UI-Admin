@@ -14,6 +14,7 @@ var _AnalyticsCalendar = require("../AnalyticsCalendar");
 var _Shared = require("../../Shared");
 var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
+var _AnalyticsFilterTimeZone = require("../AnalyticsFilterTimeZone");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -118,10 +119,10 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     onClick: function onClick() {
       return setIsBrandFilter(true);
     }
-  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
     active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.body) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.rows) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('SITE_AVERAGE_SALES', 'Site average sales')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {

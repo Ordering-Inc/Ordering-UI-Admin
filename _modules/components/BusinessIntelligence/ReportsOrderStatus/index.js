@@ -16,6 +16,7 @@ var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
 var _ReportsOrderTypeFilter = require("../ReportsOrderTypeFilter");
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
 var _CountryFilter = require("../CountryFilter");
+var _AnalyticsFilterTimeZone = require("../AnalyticsFilterTimeZone");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -152,10 +153,10 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
     onClick: function onClick() {
       return setOpenCountryFilter(true);
     }
-  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
     active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.body) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.rows) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('BUSINESS_ORDERS_COUNT_SALES', 'Business orders count sales')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
@@ -283,7 +284,7 @@ var ReportsOrderStatusUI = function ReportsOrderStatusUI(props) {
     openCountryFilter: openCountryFilter,
     setOpenCountryFilter: setOpenCountryFilter
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
-    title: t('DRIVER_SCHEDULE', 'Driver schedule'),
+    title: t('ORDER_STATUS_TEXT', 'Order status'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,
