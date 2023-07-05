@@ -92,6 +92,18 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
     }, {
       key: 'autoassign_max_in_pending',
       content: t('ORDER_PENDING', 'Pending')
+    }, {
+      key: 'available',
+      content: t('AVAILABLE', 'Available')
+    }, {
+      key: 'enabled',
+      content: t('ENABLED', 'Enabled')
+    }, {
+      key: 'last_available_at',
+      content: t('LAST_AVAILABLE_AT', 'Last available at')
+    }, {
+      key: 'busy',
+      content: t('BUSY', 'Busy')
     }];
     var found = attributes.find(function (attribute) {
       return attribute.key === key;
@@ -141,9 +153,10 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: log.id
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserInfoContainer, null, /*#__PURE__*/_react.default.createElement("p", null, log === null || log === void 0 ? void 0 : (_log$user = log.user) === null || _log$user === void 0 ? void 0 : _log$user.name, " ", log === null || log === void 0 ? void 0 : (_log$user2 = log.user) === null || _log$user2 === void 0 ? void 0 : _log$user2.lastname), /*#__PURE__*/_react.default.createElement("p", null, log === null || log === void 0 ? void 0 : (_log$user3 = log.user) === null || _log$user3 === void 0 ? void 0 : _log$user3.email))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.EventTypeContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t(((log === null || log === void 0 ? void 0 : log.event) || '').toUpperCase())))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DataListTable, null, (log === null || log === void 0 ? void 0 : log.data) && getValidLogData(log === null || log === void 0 ? void 0 : log.data).map(function (item, i) {
+      var _item$added, _item$added2, _item$removed, _item$removed2;
       return /*#__PURE__*/_react.default.createElement("tbody", {
         key: i
-      }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, getAttributeName(item === null || item === void 0 ? void 0 : item.attribute)), /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.new) !== 'undefined' ? "".concat(item === null || item === void 0 ? void 0 : item.new) : (item === null || item === void 0 ? void 0 : item.added.length) > 0 ? item === null || item === void 0 ? void 0 : item.added.toString() : t('NONE', 'None')), /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.old) !== 'undefined' ? "".concat(item === null || item === void 0 ? void 0 : item.old) : (item === null || item === void 0 ? void 0 : item.removed.length) > 0 ? item === null || item === void 0 ? void 0 : item.removed.toString() : t('NONE', 'None'))));
+      }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, getAttributeName(item === null || item === void 0 ? void 0 : item.attribute)), /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.new) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.new) !== null ? "".concat(item === null || item === void 0 ? void 0 : item.new) : (item === null || item === void 0 ? void 0 : (_item$added = item.added) === null || _item$added === void 0 ? void 0 : _item$added.length) > 0 ? item === null || item === void 0 ? void 0 : (_item$added2 = item.added) === null || _item$added2 === void 0 ? void 0 : _item$added2.toString() : t('NONE', 'None')), /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.old) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.old) !== null ? "".concat(item === null || item === void 0 ? void 0 : item.old) : (item === null || item === void 0 ? void 0 : (_item$removed = item.removed) === null || _item$removed === void 0 ? void 0 : _item$removed.length) > 0 ? item === null || item === void 0 ? void 0 : (_item$removed2 = item.removed) === null || _item$removed2 === void 0 ? void 0 : _item$removed2.toString() : t('NONE', 'None'))));
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DateTimeWrapper, null, parseDate(log.created_at, {
       utc: false
     }))), /*#__PURE__*/_react.default.createElement("td", null, log === null || log === void 0 ? void 0 : log.user_agent)));
