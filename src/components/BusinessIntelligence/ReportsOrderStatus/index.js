@@ -9,6 +9,7 @@ import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsOrderTypeFilter } from '../ReportsOrderTypeFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   OrderStatusContainer,
   Title,
@@ -22,7 +23,9 @@ import {
   Tbody,
   Tfoot,
   TableWrapper,
-  EmptyContent
+  EmptyContent,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsOrderStatusUI = (props) => {
@@ -135,12 +138,17 @@ const ReportsOrderStatusUI = (props) => {
               {t('COUNTRY', 'Country')}
             </Button>
           </BrandBusinessWrapper>
-          <CalendarWrapper>
-            <AnalyticsCalendar
-              handleChangeDate={handleChangeDate}
-              defaultValue={filterList}
-            />
-          </CalendarWrapper>
+          <TimeZoneAndCalendar>
+            <AnalyticsTimeZoneWrapper>
+              <AnalyticsFilterTimeZone {...props} />
+            </AnalyticsTimeZoneWrapper>
+            <CalendarWrapper>
+              <AnalyticsCalendar
+                handleChangeDate={handleChangeDate}
+                defaultValue={filterList}
+              />
+            </CalendarWrapper>
+          </TimeZoneAndCalendar>
         </ButtonActionList>
         <OrderStatusTableWrapper>
           <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
@@ -302,7 +310,7 @@ const ReportsOrderStatusUI = (props) => {
         />
       </OrderStatusContainer>
       <Alert
-        title={t('DRIVER_SCHEDULE', 'Driver schedule')}
+        title={t('ORDER_STATUS_TEXT', 'Order status')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

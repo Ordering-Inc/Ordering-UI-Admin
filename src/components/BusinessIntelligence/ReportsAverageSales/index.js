@@ -7,6 +7,7 @@ import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { Modal } from '../../Shared'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   OrderStatusContainer,
   Title,
@@ -20,7 +21,9 @@ import {
   Tbody,
   Tfoot,
   TableWrapper,
-  EmptyContent
+  EmptyContent,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsAverageSalesUI = (props) => {
@@ -110,12 +113,17 @@ const ReportsAverageSalesUI = (props) => {
               {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
-          <CalendarWrapper>
-            <AnalyticsCalendar
-              handleChangeDate={handleChangeDate}
-              defaultValue={filterList}
-            />
-          </CalendarWrapper>
+          <TimeZoneAndCalendar>
+            <AnalyticsTimeZoneWrapper>
+              <AnalyticsFilterTimeZone {...props} />
+            </AnalyticsTimeZoneWrapper>
+            <CalendarWrapper>
+              <AnalyticsCalendar
+                handleChangeDate={handleChangeDate}
+                defaultValue={filterList}
+              />
+            </CalendarWrapper>
+          </TimeZoneAndCalendar>
         </ButtonActionList>
         <OrderStatusTableWrapper>
           <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>

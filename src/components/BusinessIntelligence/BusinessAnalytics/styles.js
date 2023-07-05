@@ -109,6 +109,8 @@ export const BusinessCalendarWrapper = styled(BusinessFilterWrapper)`
   }
 `
 
+export const AnalyticsTimeZoneWrapper = styled(BusinessFilterWrapper)``
+
 export const AnalyticsContentWrapper = styled.div`
   > div {
     margin-top: 40px;

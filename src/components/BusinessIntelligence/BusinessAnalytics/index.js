@@ -16,6 +16,7 @@ import { AnalyticsRegisterUsers } from '../AnalyticsRegisterUsers'
 import { AnalyticsCustomerSatisfaction } from '../AnalyticsCustomerSatisfaction'
 import { AnalyticsOrdersAcceptSpend } from '../AnalyticsOrdersAcceptSpend'
 import { AnalyticsSpendList } from '../AnalyticsSpendList'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 
 import {
   BusinessAnalyticsContainer,
@@ -25,7 +26,8 @@ import {
   BusinessFilterWrapper,
   BusinessCalendarWrapper,
   AnalyticsContentWrapper,
-  MapWrraper
+  MapWrraper,
+  AnalyticsTimeZoneWrapper
 } from './styles'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { CountryFilter } from '../CountryFilter'
@@ -88,6 +90,9 @@ const BusinessAnalyticsUI = (props) => {
               {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
             </Button>
           </BusinessFilterWrapper>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
           <BusinessCalendarWrapper>
             <AnalyticsCalendar
               {...props}

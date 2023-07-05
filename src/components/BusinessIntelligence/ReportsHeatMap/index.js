@@ -10,6 +10,7 @@ import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   HeatMapContainer,
   Title,
@@ -18,7 +19,9 @@ import {
   CalendarWrapper,
   DistancePerBrandWrapper,
   DistanceTitleBlock,
-  WrapperMap
+  WrapperMap,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsHeatMapUI = (props) => {
@@ -120,12 +123,17 @@ const ReportsHeatMapUI = (props) => {
               {t('COUNTRY', 'Country')}
             </Button>
           </BrandBusinessWrapper>
-          <CalendarWrapper>
-            <AnalyticsCalendar
-              handleChangeDate={handleChangeDate}
-              defaultValue={filterList}
-            />
-          </CalendarWrapper>
+          <TimeZoneAndCalendar>
+            <AnalyticsTimeZoneWrapper>
+              <AnalyticsFilterTimeZone {...props} />
+            </AnalyticsTimeZoneWrapper>
+            <CalendarWrapper>
+              <AnalyticsCalendar
+                handleChangeDate={handleChangeDate}
+                defaultValue={filterList}
+              />
+            </CalendarWrapper>
+          </TimeZoneAndCalendar>
         </ButtonActionList>
         <DistancePerBrandWrapper>
           <DistanceTitleBlock active={reportData?.content?.locations?.length > 0}>
