@@ -23,7 +23,8 @@ const CountryFilterUI = (props) => {
     openCountryFilter,
     setOpenCountryFilter,
     setCode,
-    actionState
+    actionState,
+    setIsOneMoreCountry
   } = props
 
   const [, t] = useLanguage()
@@ -57,6 +58,7 @@ const CountryFilterUI = (props) => {
     const _currentBusinessList = countriesState.countries.slice(indexOfFirstPost, indexOfLastPost)
     setTotalPages(_totalPages)
     setCurrentPages(_currentBusinessList)
+    setIsOneMoreCountry && setIsOneMoreCountry(countriesState.countries.length > 1)
   }, [countriesState, currentPage, pagesPerPage])
 
   return (
