@@ -11,6 +11,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactChartjs = require("react-chartjs-2");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _utils = require("../../../utils");
+var _AnalyticsFilterTimeZone = require("../AnalyticsFilterTimeZone");
 var _styles = require("./styles");
 var _styles2 = require("../../../styles");
 var _AnalyticsCalendar = require("../AnalyticsCalendar");
@@ -126,7 +127,7 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
   var data = {
     labels: generateLabels(),
     datasets: [{
-      label: t('ORDERS', 'Orders'),
+      label: t('CONTROL_PANEL_ORDERS', 'Orders'),
       data: generateData(),
       fill: true,
       borderColor: '#2C7BE5',
@@ -189,7 +190,6 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
           },
           beforeFooter: function beforeFooter(tooltipItem) {
             var _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content9$3;
-            console.log(tooltipItem[0]);
             var time = '';
             if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.dataset) === null || _reportData$content9$ === void 0 ? void 0 : (_reportData$content9$2 = _reportData$content9$.dataset) === null || _reportData$content9$2 === void 0 ? void 0 : (_reportData$content9$3 = _reportData$content9$2.data) === null || _reportData$content9$3 === void 0 ? void 0 : _reportData$content9$3.length) > 0) {
               var _reportData$content10, _reportData$content11, _reportData$content12;
@@ -213,10 +213,10 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
     onClick: function onClick() {
       return setIsDriverFilter(true);
     }
-  }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
-  }))), /*#__PURE__*/_react.default.createElement(_styles.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ChartTitleBlock, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ChartTitleBlock, {
     active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content13 = reportData.content) === null || _reportData$content13 === void 0 ? void 0 : (_reportData$content14 = _reportData$content13.dataset) === null || _reportData$content14 === void 0 ? void 0 : (_reportData$content15 = _reportData$content14.dataset) === null || _reportData$content15 === void 0 ? void 0 : (_reportData$content16 = _reportData$content15.data) === null || _reportData$content16 === void 0 ? void 0 : _reportData$content16.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('TOP_ORDERS', 'Top orders')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {

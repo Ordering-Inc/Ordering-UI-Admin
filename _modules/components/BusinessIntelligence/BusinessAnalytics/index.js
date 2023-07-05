@@ -23,6 +23,7 @@ var _AnalyticsRegisterUsers = require("../AnalyticsRegisterUsers");
 var _AnalyticsCustomerSatisfaction = require("../AnalyticsCustomerSatisfaction");
 var _AnalyticsOrdersAcceptSpend = require("../AnalyticsOrdersAcceptSpend");
 var _AnalyticsSpendList = require("../AnalyticsSpendList");
+var _AnalyticsFilterTimeZone = require("../AnalyticsFilterTimeZone");
 var _styles2 = require("./styles");
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
 var _CountryFilter = require("../CountryFilter");
@@ -95,7 +96,7 @@ var BusinessAnalyticsUI = function BusinessAnalyticsUI(props) {
     onClick: function onClick() {
       return setBusinessFilterModal(true);
     }
-  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.BusinessCalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, _extends({}, props, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.BusinessCalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, _extends({}, props, {
     handleChangeDate: handleChangeDate
   }))))), /*#__PURE__*/_react.default.createElement(_AnalyticsStatusFilterBar.AnalyticsStatusFilterBar, props), /*#__PURE__*/_react.default.createElement(_AnalyticsStatusSubFilter.AnalyticsStatusSubFilter, props), /*#__PURE__*/_react.default.createElement(_styles2.MapWrraper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsMap.AnalyticsMap, {
     locationList: orderLocationList

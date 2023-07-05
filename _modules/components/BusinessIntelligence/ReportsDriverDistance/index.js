@@ -16,6 +16,7 @@ var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
 var _ReportsDriverFilter = require("../ReportsDriverFilter");
 var _ReportsDriverGroupFilter = require("../ReportsDriverGroupFilter");
 var _CountryFilter = require("../CountryFilter");
+var _AnalyticsFilterTimeZone = require("../AnalyticsFilterTimeZone");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -46,31 +47,35 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
     t = _useLanguage2[1];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    isBusinessFilter = _useState2[0],
-    setIsBusinessFilter = _useState2[1];
+    isOneMoreCountry = _useState2[0],
+    setIsOneMoreCountry = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    isDriverFilter = _useState4[0],
-    setIsDriverFilter = _useState4[1];
+    isBusinessFilter = _useState4[0],
+    setIsBusinessFilter = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    isDriverGroupFilter = _useState6[0],
-    setIsDriverGroupFilter = _useState6[1];
-  var _useState7 = (0, _react.useState)(true),
+    isDriverFilter = _useState6[0],
+    setIsDriverFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    openCountryFilter = _useState8[0],
-    setOpenCountryFilter = _useState8[1];
-  var _useState9 = (0, _react.useState)({
+    isDriverGroupFilter = _useState8[0],
+    setIsDriverGroupFilter = _useState8[1];
+  var _useState9 = (0, _react.useState)(true),
+    _useState10 = _slicedToArray(_useState9, 2),
+    openCountryFilter = _useState10[0],
+    setOpenCountryFilter = _useState10[1];
+  var _useState11 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState10 = _slicedToArray(_useState9, 2),
-    alertState = _useState10[0],
-    setAlertState = _useState10[1];
-  var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    availableDriverIds = _useState12[0],
-    setAvailableDriverIds = _useState12[1];
+    alertState = _useState12[0],
+    setAlertState = _useState12[1];
+  var _useState13 = (0, _react.useState)(null),
+    _useState14 = _slicedToArray(_useState13, 2),
+    availableDriverIds = _useState14[0],
+    setAvailableDriverIds = _useState14[1];
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseNumber = _useUtils2[0].parseNumber;
@@ -151,14 +156,14 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
     onClick: function onClick() {
       return setIsDriverFilter(true);
     }
-  }, t('DRIVER', 'DRIVER'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('DRIVER', 'DRIVER'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")"), isOneMoreCountry && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setOpenCountryFilter(true);
     }
-  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
     active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.body) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.rows) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER_DISTANCE', 'Driver distance')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
@@ -246,10 +251,11 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
     },
     setAvailableDriverIds: setAvailableDriverIds
   }))), /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    setIsOneMoreCountry: setIsOneMoreCountry,
     openCountryFilter: openCountryFilter,
     setOpenCountryFilter: setOpenCountryFilter
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
-    title: t('DRIVER_SCHEDULE', 'Driver schedule'),
+    title: t('DRIVER_DISTANCE', 'Driver distance'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
     open: alertState.open,

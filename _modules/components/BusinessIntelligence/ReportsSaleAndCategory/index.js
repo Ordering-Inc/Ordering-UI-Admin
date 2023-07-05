@@ -16,6 +16,7 @@ var _AnalyticsBusinessFilter = require("../AnalyticsBusinessFilter");
 var _AnalyticsCalendar = require("../AnalyticsCalendar");
 var _ReportsBrandFilter = require("../ReportsBrandFilter");
 var _CountryFilter = require("../CountryFilter");
+var _AnalyticsFilterTimeZone = require("../AnalyticsFilterTimeZone");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -44,16 +45,20 @@ var ReportsSaleAndCategoryUI = function ReportsSaleAndCategoryUI(props) {
     t = _useLanguage2[1];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    isBusinessFilter = _useState2[0],
-    setIsBusinessFilter = _useState2[1];
+    isOneMoreCountry = _useState2[0],
+    setIsOneMoreCountry = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    isBrandFilter = _useState4[0],
-    setIsBrandFilter = _useState4[1];
-  var _useState5 = (0, _react.useState)(true),
+    isBusinessFilter = _useState4[0],
+    setIsBusinessFilter = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    openCountryFilter = _useState6[0],
-    setOpenCountryFilter = _useState6[1];
+    isBrandFilter = _useState6[0],
+    setIsBrandFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(true),
+    _useState8 = _slicedToArray(_useState7, 2),
+    openCountryFilter = _useState8[0],
+    setOpenCountryFilter = _useState8[1];
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
       from: date1,
@@ -204,14 +209,14 @@ var ReportsSaleAndCategoryUI = function ReportsSaleAndCategoryUI(props) {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
-  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), isOneMoreCountry && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setOpenCountryFilter(true);
     }
-  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('COUNTRY', 'Country'))), /*#__PURE__*/_react.default.createElement(_styles2.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.ChartListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ChartTitleBlock, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.ChartListWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ChartTitleBlock, {
     active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.dataset) === null || _reportData$content3$ === void 0 ? void 0 : (_reportData$content3$2 = _reportData$content3$.dataset) === null || _reportData$content3$2 === void 0 ? void 0 : (_reportData$content3$3 = _reportData$content3$2.data) === null || _reportData$content3$3 === void 0 ? void 0 : _reportData$content3$3.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('TOP_SELLINGS', 'Top sellings')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
@@ -261,6 +266,7 @@ var ReportsSaleAndCategoryUI = function ReportsSaleAndCategoryUI(props) {
       return setIsBrandFilter(false);
     }
   }))), /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    setIsOneMoreCountry: setIsOneMoreCountry,
     openCountryFilter: openCountryFilter,
     setOpenCountryFilter: setOpenCountryFilter
   })));
