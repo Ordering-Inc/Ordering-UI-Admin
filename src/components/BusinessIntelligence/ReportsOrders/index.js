@@ -13,6 +13,7 @@ import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { CountryFilter } from '../CountryFilter'
 import { Modal } from '../../Shared'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 
 import {
   ReportsOrdersContainer,
@@ -24,7 +25,9 @@ import {
   ChartTitleBlock,
   ChartWrapper,
   EmptyContent,
-  ChartFooterContainer
+  ChartFooterContainer,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsOrdersUI = (props) => {
@@ -155,12 +158,17 @@ const ReportsOrdersUI = (props) => {
             {t('COUNTRY', 'Country')}
           </Button>
         </BrandBusinessWrapper>
-        <CalendarWrapper>
-          <AnalyticsCalendar
-            handleChangeDate={handleChangeDate}
-            defaultValue={filterList}
-          />
-        </CalendarWrapper>
+        <TimeZoneAndCalendar>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
+          <CalendarWrapper>
+            <AnalyticsCalendar
+              handleChangeDate={handleChangeDate}
+              defaultValue={filterList}
+            />
+          </CalendarWrapper>
+        </TimeZoneAndCalendar>
       </ButtonActionList>
       <ChartBlockWrapper>
         <ChartTitleBlock active={reportData?.content?.dataset?.dataset?.data?.length > 0}>

@@ -12,6 +12,7 @@ import { Modal } from '../../Shared'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   ReportsBusinessSpendContainer,
   Title,
@@ -25,7 +26,9 @@ import {
   Tbody,
   Tfoot,
   TableWrapper,
-  EmptyContent
+  EmptyContent,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsBusinessSpendUI = (props) => {
@@ -125,12 +128,17 @@ const ReportsBusinessSpendUI = (props) => {
             {t('COUNTRY', 'Country')}
           </Button>
         </BrandBusinessWrapper>
-        <CalendarWrapper>
-          <AnalyticsCalendar
-            handleChangeDate={handleChangeDate}
-            defaultValue={filterList}
-          />
-        </CalendarWrapper>
+        <TimeZoneAndCalendar>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
+          <CalendarWrapper>
+            <AnalyticsCalendar
+              handleChangeDate={handleChangeDate}
+              defaultValue={filterList}
+            />
+          </CalendarWrapper>
+        </TimeZoneAndCalendar>
       </ButtonActionList>
       <DistancePerBrandWrapper>
         <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>

@@ -214,3 +214,37 @@ export const EmptyContent = styled.div`
   justify-content: center;
   padding: 10px;
 `
+
+export const AnalyticsTimeZoneWrapper = styled.div`
+  width: 100%;
+  button {
+    margin-top: 5px;
+    background: ${props => props.theme.colors.secundary};
+    border-radius: 7.6px;
+    padding: 7px 15px;
+    font-size: 14px;
+    color: ${props => props.theme.colors.secundaryContrast};
+    border: none;
+  }
+
+  @media (min-width: 600px) {
+    width: fit-content;
+    margin-left: 10px;
+    ${props => props.theme.rtl && css`
+      margin-right: 10px;
+      margin-left: 0;
+    `}
+  }
+`
+
+export const TimeZoneAndCalendar = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+    width: fit-content;
+  }
+`
