@@ -5,7 +5,7 @@ export const Option = styled.div`
   display: flex;
   align-items: center;
   column-gap: 10px;
-  padding: 5px 10px;
+  padding: 5px;
 
   img {
     width: 45px;
