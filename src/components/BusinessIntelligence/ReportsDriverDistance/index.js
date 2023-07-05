@@ -33,6 +33,8 @@ const ReportsDriverDistanceUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
+
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
@@ -128,11 +130,13 @@ const ReportsDriverDistanceUI = (props) => {
             >
               {t('DRIVER', 'DRIVER')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
-            <Button
-              onClick={() => setOpenCountryFilter(true)}
-            >
-              {t('COUNTRY', 'Country')}
-            </Button>
+            {isOneMoreCountry && (
+              <Button
+                onClick={() => setOpenCountryFilter(true)}
+              >
+                {t('COUNTRY', 'Country')}
+              </Button>
+            )}
           </BrandBusinessWrapper>
           <CalendarWrapper>
             <AnalyticsCalendar
@@ -244,6 +248,7 @@ const ReportsDriverDistanceUI = (props) => {
         </Modal>
         <CountryFilter
           {...props}
+          setIsOneMoreCountry={setIsOneMoreCountry}
           openCountryFilter={openCountryFilter}
           setOpenCountryFilter={setOpenCountryFilter}
         />

@@ -37,6 +37,8 @@ const ReportsSalesUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
+
   const [dataOptions, setDataOptions] = useState(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
@@ -151,11 +153,13 @@ const ReportsSalesUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          <Button
-            onClick={() => setOpenCountryFilter(true)}
-          >
-            {t('COUNTRY', 'Country')}
-          </Button>
+          {isOneMoreCountry && (
+            <Button
+              onClick={() => setOpenCountryFilter(true)}
+            >
+              {t('COUNTRY', 'Country')}
+            </Button>
+          )}
         </BrandBusinessWrapper>
         <CalendarWrapper>
           <AnalyticsCalendar
@@ -217,6 +221,7 @@ const ReportsSalesUI = (props) => {
       </Modal>
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />
