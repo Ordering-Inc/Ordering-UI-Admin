@@ -44,7 +44,11 @@ export const DriversGroupLogsUI = (props) => {
       { key: 'autoassign_max_radius', content: t('MAX_RADIUS', 'Maximum radius in meters') },
       { key: 'autoassign_autoreject_time', content: t('AUTO_REJECT_ORDER_GROUP_AFTER', 'Auto reject Orders After') },
       { key: 'autoassign_max_orders', content: t('MAX_AMOUNT_ORDERS_PER_DRIVER', 'Maximum amount of orders per drivers') },
-      { key: 'autoassign_max_in_pending', content: t('ORDER_PENDING', 'Pending') }
+      { key: 'autoassign_max_in_pending', content: t('ORDER_PENDING', 'Pending') },
+      { key: 'available', content: t('AVAILABLE', 'Available') },
+      { key: 'enabled', content: t('ENABLED', 'Enabled') },
+      { key: 'last_available_at', content: t('LAST_AVAILABLE_AT', 'Last available at') },
+      { key: 'busy', content: t('BUSY', 'Busy') }
     ]
     const found = attributes.find(attribute => attribute.key === key)
     if (found) {
@@ -150,16 +154,16 @@ export const DriversGroupLogsUI = (props) => {
                                 <td>{getAttributeName(item?.attribute)}</td>
                                 <td>
                                   {
-                                    typeof item?.new !== 'undefined'
+                                    (typeof item?.new !== 'undefined' && item?.new !== null)
                                       ? `${item?.new}`
-                                      : item?.added.length > 0 ? item?.added.toString() : t('NONE', 'None')
+                                      : item?.added?.length > 0 ? item?.added?.toString() : t('NONE', 'None')
                                   }
                                 </td>
                                 <td>
                                   {
-                                    typeof item?.old !== 'undefined'
+                                    (typeof item?.old !== 'undefined' && item?.old !== null)
                                       ? `${item?.old}`
-                                      : item?.removed.length > 0 ? item?.removed.toString() : t('NONE', 'None')
+                                      : item?.removed?.length > 0 ? item?.removed?.toString() : t('NONE', 'None')
                                   }
                                 </td>
                               </tr>
