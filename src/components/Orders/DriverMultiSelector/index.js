@@ -18,7 +18,6 @@ const DriverMultiSelectorUI = (props) => {
   const {
     driversList,
     defaultValue,
-    isPhoneView,
     small,
     padding,
     handleChangeDriver,
@@ -51,7 +50,7 @@ const DriverMultiSelectorUI = (props) => {
           value: driver.id,
           showDisable: true,
           content: (
-            <Option small={small} isPhoneView={isPhoneView} padding={padding}>
+            <Option small={small} padding={padding}>
               <WrapperDriverImage small={small} className='driver-photo'>
                 <DriverImage bgimage={driver.photo || theme.images.icons?.noDriver} small={small} />
               </WrapperDriverImage>
