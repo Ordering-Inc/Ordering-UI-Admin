@@ -12,7 +12,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var SectionContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-bottom: 50px;\n\n  > p {\n    font-size: 14px;\n    line-height: 24px;\n    margin-top: 0;\n    margin-bottom: 24px;\n  }\n"])));
 exports.SectionContainer = SectionContainer;
-var SearchBarContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > button {\n    height: 44px;\n    white-space: nowrap;\n  }\n"])));
+var SearchBarContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n\n  > button {\n    height: 44px;\n    white-space: nowrap;\n    margin: 10px 0;\n  }\n"])));
 exports.SearchBarContainer = SearchBarContainer;
 var SearchBarWrapper = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  position: relative;\n  flex: 1;\n\n  ", "\n\n  > input {\n    width: 100%;\n    height: 44px;\n    ", "\n  }\n\n  span.loading {\n    position: absolute;\n    top: 10px;\n    ", "\n\n    @keyframes spinner-content {\n      0% { transform: rotate(0) }\n      100% { transform: rotate(360deg) }\n    }\n\n    svg {\n      animation: spinner-content 1.85s linear infinite;\n      color: ", ";\n    }\n  }\n"])), function (props) {
   var _props$theme;

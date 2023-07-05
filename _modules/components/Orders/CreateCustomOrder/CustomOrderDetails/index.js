@@ -44,12 +44,14 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     handeUpdateProductCart = props.handeUpdateProductCart,
     cart = props.cart,
     onClose = props.onClose,
-    handleOpenCustomOrderDetail = props.handleOpenCustomOrderDetail;
+    handleOpenCustomOrderDetail = props.handleOpenCustomOrderDetail,
+    defaultCountryCodeState = props.defaultCountryCodeState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var _useOrder = (0, _orderingComponentsAdmin.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 2),
+    orderState = _useOrder2[0],
     changeAddress = _useOrder2[1].changeAddress;
   var _useState = (0, _react.useState)({
       open: false,
@@ -81,9 +83,9 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     changeAddress(customerAddress.id);
   }, [customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.id]);
   (0, _react.useEffect)(function () {
-    if (!(customerAddress !== null && customerAddress !== void 0 && customerAddress.location)) return;
+    if (!(customerAddress !== null && customerAddress !== void 0 && customerAddress.location) || orderState !== null && orderState !== void 0 && orderState.loading) return;
     getBusinessList(customerAddress.location);
-  }, [customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location]);
+  }, [customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location, orderState]);
   (0, _react.useEffect)(function () {
     if (customersPhones !== null && customersPhones !== void 0 && customersPhones.error) {
       setAlertState({
@@ -101,7 +103,8 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     setSelectedUser: setSelectedUser,
     onChangeNumber: onChangeNumber,
     handleParentSidebarMove: handleParentSidebarMove,
-    customerAddress: customerAddress
+    customerAddress: customerAddress,
+    defaultCountryCodeState: defaultCountryCodeState
   }), (customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_SelectBusinesses.SelectBusinesses, {
     businessList: businessList,
     selectedBusiness: selectedBusiness,

@@ -27,7 +27,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
   var driversList = props.driversList,
     defaultValue = props.defaultValue,
-    isPhoneView = props.isPhoneView,
     small = props.small,
     padding = props.padding,
     handleChangeDriver = props.handleChangeDriver,
@@ -75,7 +74,6 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
           showDisable: true,
           content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
             small: small,
-            isPhoneView: isPhoneView,
             padding: padding
           }, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverImage, {
             small: small,
