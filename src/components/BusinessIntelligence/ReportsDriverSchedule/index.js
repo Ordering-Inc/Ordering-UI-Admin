@@ -7,6 +7,7 @@ import { useLanguage, AdvancedReports as AdvancedReportsController } from 'order
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
 import { Alert, Modal } from '../../Shared'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   DriverScheduleContainer,
   ScheduleTitle,
@@ -16,7 +17,9 @@ import {
   DistancePerBrandWrapper,
   ChartWrapper,
   EmptyContent,
-  ScheduleTitleBlock
+  ScheduleTitleBlock,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 import 'chartjs-adapter-moment'
 import moment from 'moment'
@@ -175,7 +178,7 @@ const ReportsDriverScheduleUI = (props) => {
   return (
     <>
       <DriverScheduleContainer>
-        <ScheduleTitle>{t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')}</ScheduleTitle>
+        <ScheduleTitle>{t('DRIVER_SCHEDULE', 'Driver schedule')}</ScheduleTitle>
         <ButtonActionList>
           <BrandBusinessWrapper>
             <Button
@@ -189,12 +192,17 @@ const ReportsDriverScheduleUI = (props) => {
               {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
           </BrandBusinessWrapper>
-          <CalendarWrapper>
-            <AnalyticsCalendar
-              handleChangeDate={handleChangeDate}
-              defaultValue={filterList}
-            />
-          </CalendarWrapper>
+          <TimeZoneAndCalendar>
+            <AnalyticsTimeZoneWrapper>
+              <AnalyticsFilterTimeZone {...props} />
+            </AnalyticsTimeZoneWrapper>
+            <CalendarWrapper>
+              <AnalyticsCalendar
+                handleChangeDate={handleChangeDate}
+                defaultValue={filterList}
+              />
+            </CalendarWrapper>
+          </TimeZoneAndCalendar>
         </ButtonActionList>
         <DistancePerBrandWrapper>
           <ScheduleTitleBlock active={reportData?.content?.data?.length > 0}>

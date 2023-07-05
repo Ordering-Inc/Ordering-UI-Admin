@@ -8,6 +8,7 @@ import { Line } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
 import { Download } from 'react-bootstrap-icons'
 import { Modal } from '../../Shared'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   ReportsUsersContainer,
   Title,
@@ -17,7 +18,9 @@ import {
   ChartBlockWrapper,
   ChartTitleBlock,
   ChartWrapper,
-  EmptyContent
+  EmptyContent,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 import { Button } from '../../../styles'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -158,12 +161,17 @@ const ReportsUsersUI = (props) => {
             {t('APP_ID', 'App id')} ({filterList?.app_ids ? filterList?.app_ids.length : t('ALL', 'All')})
           </Button>
         </BrandBusinessWrapper>
-        <CalendarWrapper>
-          <AnalyticsCalendar
-            handleChangeDate={handleChangeDate}
-            defaultValue={filterList}
-          />
-        </CalendarWrapper>
+        <TimeZoneAndCalendar>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
+          <CalendarWrapper>
+            <AnalyticsCalendar
+              handleChangeDate={handleChangeDate}
+              defaultValue={filterList}
+            />
+          </CalendarWrapper>
+        </TimeZoneAndCalendar>
       </ButtonActionList>
       <ChartBlockWrapper>
         <ChartTitleBlock active={reportData?.content?.dataset?.dataset[0]?.data?.length > 0}>

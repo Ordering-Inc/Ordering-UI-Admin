@@ -7,7 +7,7 @@ import { Download } from 'react-bootstrap-icons'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
 import { convertHMS } from '../../../utils'
-
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   ReportsTopDriversContainer,
   Title,
@@ -17,7 +17,9 @@ import {
   ChartBlockWrapper,
   ChartTitleBlock,
   ChartWrapper,
-  EmptyContent
+  EmptyContent,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 import { Button } from '../../../styles'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
@@ -175,12 +177,17 @@ const ReportsTopDriversUI = (props) => {
             {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
           </Button>
         </BrandBusinessWrapper>
-        <CalendarWrapper>
-          <AnalyticsCalendar
-            handleChangeDate={handleChangeDate}
-            defaultValue={filterList}
-          />
-        </CalendarWrapper>
+        <TimeZoneAndCalendar>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
+          <CalendarWrapper>
+            <AnalyticsCalendar
+              handleChangeDate={handleChangeDate}
+              defaultValue={filterList}
+            />
+          </CalendarWrapper>
+        </TimeZoneAndCalendar>
       </ButtonActionList>
       <ChartBlockWrapper>
         <ChartTitleBlock active={reportData?.content?.dataset?.dataset?.data?.length > 0}>

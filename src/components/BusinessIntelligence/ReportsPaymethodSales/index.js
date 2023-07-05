@@ -11,6 +11,7 @@ import { Download } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
 import { Modal } from '../../Shared'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 
 import {
   ReportsBusinessSpendContainer,
@@ -25,7 +26,9 @@ import {
   Title,
   Thead,
   Tbody,
-  Tfoot
+  Tfoot,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsPaymethodSalesUI = (props) => {
@@ -122,12 +125,17 @@ const ReportsPaymethodSalesUI = (props) => {
             {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
           </Button>
         </BrandBusinessWrapper>
-        <CalendarWrapper>
-          <AnalyticsCalendar
-            handleChangeDate={handleChangeDate}
-            defaultValue={filterList}
-          />
-        </CalendarWrapper>
+        <TimeZoneAndCalendar>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
+          <CalendarWrapper>
+            <AnalyticsCalendar
+              handleChangeDate={handleChangeDate}
+              defaultValue={filterList}
+            />
+          </CalendarWrapper>
+        </TimeZoneAndCalendar>
       </ButtonActionList>
       <DistancePerBrandWrapper>
         <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>

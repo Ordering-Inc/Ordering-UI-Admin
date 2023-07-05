@@ -12,6 +12,7 @@ import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { AnalyticsCalendar } from '../AnalyticsCalendar'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 
 import {
   ReportsContainer,
@@ -23,7 +24,9 @@ import {
   ChartTitleBlock,
   ChartWrapper,
   EmptyContent,
-  ChartListWrapper
+  ChartListWrapper,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsSaleAndCategoryUI = (props) => {
@@ -182,12 +185,17 @@ const ReportsSaleAndCategoryUI = (props) => {
             </Button>
           )}
         </BrandBusinessWrapper>
-        <CalendarWrapper>
-          <AnalyticsCalendar
-            handleChangeDate={handleChangeDate}
-            defaultValue={filterList}
-          />
-        </CalendarWrapper>
+        <TimeZoneAndCalendar>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
+          <CalendarWrapper>
+            <AnalyticsCalendar
+              handleChangeDate={handleChangeDate}
+              defaultValue={filterList}
+            />
+          </CalendarWrapper>
+        </TimeZoneAndCalendar>
       </ButtonActionList>
       <ChartListWrapper>
         <ChartBlockWrapper>

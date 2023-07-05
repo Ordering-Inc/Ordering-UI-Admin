@@ -13,6 +13,7 @@ import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
 import { Modal } from '../../Shared'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   ReportsBusinessSpendContainer,
   DistancePerBrandWrapper,
@@ -26,7 +27,9 @@ import {
   Title,
   Thead,
   Tbody,
-  Tfoot
+  Tfoot,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsGeneralSalesUI = (props) => {
@@ -135,12 +138,17 @@ const ReportsGeneralSalesUI = (props) => {
             </Button>
           )}
         </BrandBusinessWrapper>
-        <CalendarWrapper>
-          <AnalyticsCalendar
-            handleChangeDate={handleChangeDate}
-            defaultValue={filterList}
-          />
-        </CalendarWrapper>
+        <TimeZoneAndCalendar>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
+          <CalendarWrapper>
+            <AnalyticsCalendar
+              handleChangeDate={handleChangeDate}
+              defaultValue={filterList}
+            />
+          </CalendarWrapper>
+        </TimeZoneAndCalendar>
       </ButtonActionList>
       <DistancePerBrandWrapper>
         <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>

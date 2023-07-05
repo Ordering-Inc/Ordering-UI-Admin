@@ -9,6 +9,7 @@ import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   DriverDistanceContainer,
   Title,
@@ -22,7 +23,9 @@ import {
   Tbody,
   Tfoot,
   TableWrapper,
-  EmptyContent
+  EmptyContent,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsDriverDistanceUI = (props) => {
@@ -138,12 +141,17 @@ const ReportsDriverDistanceUI = (props) => {
               </Button>
             )}
           </BrandBusinessWrapper>
-          <CalendarWrapper>
-            <AnalyticsCalendar
-              handleChangeDate={handleChangeDate}
-              defaultValue={filterList}
-            />
-          </CalendarWrapper>
+          <TimeZoneAndCalendar>
+            <AnalyticsTimeZoneWrapper>
+              <AnalyticsFilterTimeZone {...props} />
+            </AnalyticsTimeZoneWrapper>
+            <CalendarWrapper>
+              <AnalyticsCalendar
+                handleChangeDate={handleChangeDate}
+                defaultValue={filterList}
+              />
+            </CalendarWrapper>
+          </TimeZoneAndCalendar>
         </ButtonActionList>
         <DistancePerBrandWrapper>
           <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
@@ -254,7 +262,7 @@ const ReportsDriverDistanceUI = (props) => {
         />
       </DriverDistanceContainer>
       <Alert
-        title={t('DRIVER_SCHEDULE', 'Driver schedule')}
+        title={t('DRIVER_DISTANCE', 'Driver distance')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
