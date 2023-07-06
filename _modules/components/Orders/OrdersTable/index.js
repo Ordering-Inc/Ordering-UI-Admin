@@ -827,7 +827,7 @@ var OrdersTable = function OrdersTable(props) {
           utc: false
         }))));
       }
-    }), /*#__PURE__*/_react.default.createElement("td", null)));
+    })));
   }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
     totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),
