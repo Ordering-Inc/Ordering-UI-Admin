@@ -581,15 +581,26 @@ const OrderingWebsiteUI = (props) => {
               <InputFormWrapper>
                 <h4>{t('THEME_SETTINGS', 'Theme Settings')}</h4>
                 <InnerBlock>
-                  <ColorPickerWrapper>
-                    <div>
-                      <p>{t('PRIMARY_COLOR_BUTTONS', 'Primary Color for Buttons')}</p>
-                      <ColorPicker
-                        defaultColor={themeValues?.theme_settings?.components?.style?.primary_btn_color}
-                        onChangeColor={(color) => handleChangeValue(color, 'theme_settings', 'style.primary_btn_color')}
-                      />
-                    </div>
-                  </ColorPickerWrapper>
+                  <ContentWrapper>
+                    <ColorPickerWrapper>
+                      <div>
+                        <p>{t('BACKGROUND_COLOR', 'Background color')}</p>
+                        <ColorPicker
+                          defaultColor={themeValues?.theme_settings?.components?.style?.background_page ?? '#FFFFFF'}
+                          onChangeColor={(color) => handleChangeValue(color, 'theme_settings', 'style.background_page')}
+                        />
+                      </div>
+                    </ColorPickerWrapper>
+                    <ColorPickerWrapper>
+                      <div>
+                        <p>{t('PRIMARY_COLOR_BUTTONS', 'Primary Color for Buttons')}</p>
+                        <ColorPicker
+                          defaultColor={themeValues?.theme_settings?.components?.style?.primary_btn_color}
+                          onChangeColor={(color) => handleChangeValue(color, 'theme_settings', 'style.primary_btn_color')}
+                        />
+                      </div>
+                    </ColorPickerWrapper>
+                    </ContentWrapper>
                   <ContentWrapper>
                     <div>
                       <p>{t('HOMEPAGE_CONTENT', 'Homepage Content')}</p>
