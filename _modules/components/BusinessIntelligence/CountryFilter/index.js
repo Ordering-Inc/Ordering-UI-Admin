@@ -40,7 +40,8 @@ var CountryFilterUI = function CountryFilterUI(props) {
     openCountryFilter = props.openCountryFilter,
     setOpenCountryFilter = props.setOpenCountryFilter,
     setCode = props.setCode,
-    actionState = props.actionState;
+    actionState = props.actionState,
+    setIsOneMoreCountry = props.setIsOneMoreCountry;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -83,6 +84,7 @@ var CountryFilterUI = function CountryFilterUI(props) {
     var _currentBusinessList = countriesState.countries.slice(indexOfFirstPost, indexOfLastPost);
     setTotalPages(_totalPages);
     setCurrentPages(_currentBusinessList);
+    setIsOneMoreCountry && setIsOneMoreCountry(countriesState.countries.length > 1);
   }, [countriesState, currentPage, pagesPerPage]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(countriesState !== null && countriesState !== void 0 && countriesState.loading) && (currentPages === null || currentPages === void 0 ? void 0 : currentPages.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "450px",

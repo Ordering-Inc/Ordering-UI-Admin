@@ -47,31 +47,35 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
     t = _useLanguage2[1];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    isBusinessFilter = _useState2[0],
-    setIsBusinessFilter = _useState2[1];
+    isOneMoreCountry = _useState2[0],
+    setIsOneMoreCountry = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    isDriverFilter = _useState4[0],
-    setIsDriverFilter = _useState4[1];
+    isBusinessFilter = _useState4[0],
+    setIsBusinessFilter = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    isDriverGroupFilter = _useState6[0],
-    setIsDriverGroupFilter = _useState6[1];
-  var _useState7 = (0, _react.useState)(true),
+    isDriverFilter = _useState6[0],
+    setIsDriverFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    openCountryFilter = _useState8[0],
-    setOpenCountryFilter = _useState8[1];
-  var _useState9 = (0, _react.useState)({
+    isDriverGroupFilter = _useState8[0],
+    setIsDriverGroupFilter = _useState8[1];
+  var _useState9 = (0, _react.useState)(true),
+    _useState10 = _slicedToArray(_useState9, 2),
+    openCountryFilter = _useState10[0],
+    setOpenCountryFilter = _useState10[1];
+  var _useState11 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState10 = _slicedToArray(_useState9, 2),
-    alertState = _useState10[0],
-    setAlertState = _useState10[1];
-  var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    availableDriverIds = _useState12[0],
-    setAvailableDriverIds = _useState12[1];
+    alertState = _useState12[0],
+    setAlertState = _useState12[1];
+  var _useState13 = (0, _react.useState)(null),
+    _useState14 = _slicedToArray(_useState13, 2),
+    availableDriverIds = _useState14[0],
+    setAvailableDriverIds = _useState14[1];
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseNumber = _useUtils2[0].parseNumber;
@@ -152,7 +156,7 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
     onClick: function onClick() {
       return setIsDriverFilter(true);
     }
-  }, t('DRIVER', 'DRIVER'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('DRIVER', 'DRIVER'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")"), isOneMoreCountry && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setOpenCountryFilter(true);
     }
@@ -247,6 +251,7 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
     },
     setAvailableDriverIds: setAvailableDriverIds
   }))), /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    setIsOneMoreCountry: setIsOneMoreCountry,
     openCountryFilter: openCountryFilter,
     setOpenCountryFilter: setOpenCountryFilter
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {

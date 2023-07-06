@@ -8,6 +8,7 @@ exports.CustomOrderDetails = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _SelectCustomer = require("../SelectCustomer");
+var _OrderTypeSelector = require("../OrderTypeSelector");
 var _SelectBusinesses = require("../SelectBusinesses");
 var _Map = require("../Map");
 var _SelectProducts = require("../SelectProducts");
@@ -105,7 +106,7 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     handleParentSidebarMove: handleParentSidebarMove,
     customerAddress: customerAddress,
     defaultCountryCodeState: defaultCountryCodeState
-  }), (customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_SelectBusinesses.SelectBusinesses, {
+  }), (customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelector.OrderTypeSelector, null), /*#__PURE__*/_react.default.createElement(_SelectBusinesses.SelectBusinesses, {
     businessList: businessList,
     selectedBusiness: selectedBusiness,
     setSelectedBusiness: setSelectedBusiness

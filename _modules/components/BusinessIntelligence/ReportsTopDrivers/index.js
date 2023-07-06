@@ -127,7 +127,7 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
   var data = {
     labels: generateLabels(),
     datasets: [{
-      label: t('ORDERS', 'Orders'),
+      label: t('CONTROL_PANEL_ORDERS', 'Orders'),
       data: generateData(),
       fill: true,
       borderColor: '#2C7BE5',
@@ -190,7 +190,6 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
           },
           beforeFooter: function beforeFooter(tooltipItem) {
             var _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content9$3;
-            console.log(tooltipItem[0]);
             var time = '';
             if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.dataset) === null || _reportData$content9$ === void 0 ? void 0 : (_reportData$content9$2 = _reportData$content9$.dataset) === null || _reportData$content9$2 === void 0 ? void 0 : (_reportData$content9$3 = _reportData$content9$2.data) === null || _reportData$content9$3 === void 0 ? void 0 : _reportData$content9$3.length) > 0) {
               var _reportData$content10, _reportData$content11, _reportData$content12;

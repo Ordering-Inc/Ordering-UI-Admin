@@ -50,20 +50,24 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
     parsePrice = _useUtils2[0].parsePrice;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    isDriverGroupFilter = _useState2[0],
-    setIsDriverGroupFilter = _useState2[1];
+    isOneMoreCountry = _useState2[0],
+    setIsOneMoreCountry = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    isBrandFilter = _useState4[0],
-    setIsBrandFilter = _useState4[1];
+    isDriverGroupFilter = _useState4[0],
+    setIsDriverGroupFilter = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    isBusinessFilter = _useState6[0],
-    setIsBusinessFilter = _useState6[1];
-  var _useState7 = (0, _react.useState)(true),
+    isBrandFilter = _useState6[0],
+    setIsBrandFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    openCountryFilter = _useState8[0],
-    setOpenCountryFilter = _useState8[1];
+    isBusinessFilter = _useState8[0],
+    setIsBusinessFilter = _useState8[1];
+  var _useState9 = (0, _react.useState)(true),
+    _useState10 = _slicedToArray(_useState9, 2),
+    openCountryFilter = _useState10[0],
+    setOpenCountryFilter = _useState10[1];
   var tableRef = (0, _react.useRef)(null);
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
@@ -145,7 +149,7 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
-  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")"), isOneMoreCountry && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setOpenCountryFilter(true);
     }
@@ -235,6 +239,7 @@ var ReportsGeneralSalesUI = function ReportsGeneralSalesUI(props) {
     },
     isFranchise: true
   }))), /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, _extends({}, props, {
+    setIsOneMoreCountry: setIsOneMoreCountry,
     openCountryFilter: openCountryFilter,
     setOpenCountryFilter: setOpenCountryFilter
   })));
