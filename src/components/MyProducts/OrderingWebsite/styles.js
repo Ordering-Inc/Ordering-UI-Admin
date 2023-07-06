@@ -309,12 +309,10 @@ export const CheckBoxWrapper = styled.div`
 `
 
 export const ColorPickerWrapper = styled.div`
-  padding-top: 25px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   > div {
-    margin-top: 25px;
     > p {
       font-weight: 400;
       font-size: 14px;
