@@ -131,7 +131,7 @@ const LogisticInformationUI = (props) => {
                   <>
                     {logisticInformation.data.logistic_attempts.map(attempt => (
                       <BubbleConsole key={attempt.id}>
-                        <strong>{t('DRIVER_GROUP', 'Driver group')}</strong>: <strong>{attempt?.driver_group_id}</strong> {t('AT', 'at')} {parseDate(attempt?.created_at, { utc: false })}
+                        <strong>{t('DRIVER_GROUP', 'Driver group')}</strong>: <strong>{attempt?.driver_group_id}</strong> {t('AT', 'at')} {parseDate(attempt?.created_at)}
                       </BubbleConsole>
                     ))}
                   </>

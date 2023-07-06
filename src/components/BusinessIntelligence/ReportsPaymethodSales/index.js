@@ -106,7 +106,7 @@ const ReportsPaymethodSalesUI = (props) => {
   }
 
   const thObj = {
-    REPORT_HEADER_PAYMETHOD: 'Paymethod',
+    REPORT_HEADER_PAYMETHOD: 'Paymethod'
   }
 
   return (

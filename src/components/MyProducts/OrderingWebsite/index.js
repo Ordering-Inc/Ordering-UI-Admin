@@ -71,7 +71,8 @@ const OrderingWebsiteUI = (props) => {
     site,
     setSite,
     businessesList,
-    franchisesList
+    franchisesList,
+    handleChangeInput
   } = props
 
   const [, t] = useLanguage()
@@ -178,6 +179,7 @@ const OrderingWebsiteUI = (props) => {
 
   const handleChangeSiteSettings = (e) => {
     handleChangeValue(e.target.value, 'website_settings', `values.${e.target.name}`)
+    handleChangeInput(e)
   }
 
   const handleChangeContent = (type, content) => {
@@ -290,7 +292,7 @@ const OrderingWebsiteUI = (props) => {
                     <Input
                       name='name'
                       placeholder={t('SOURCE_DEMO_WEBSITE', 'Source demo website')}
-                      value={themeValues?.website_settings?.components?.values?.name || ''}
+                      value={site?.name || ''}
                       onChange={handleChangeSiteSettings}
                     />
                   )}
@@ -311,7 +313,7 @@ const OrderingWebsiteUI = (props) => {
                     <TextArea
                       name='description'
                       placeholder={t('DESCRIPTION', 'Decription')}
-                      value={themeValues?.website_settings?.components?.values?.description || ''}
+                      value={site?.description || ''}
                       onChange={handleChangeSiteSettings}
                     />
                   )}

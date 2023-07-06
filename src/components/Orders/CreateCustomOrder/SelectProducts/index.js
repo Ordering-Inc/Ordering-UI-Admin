@@ -73,7 +73,7 @@ export const SelectProducts = (props) => {
     const el = document.querySelector('.custom-order-content')
     if (el) {
       el.scrollTo({
-        top: 300,
+        top: 350,
         behavior: 'smooth'
       })
     }

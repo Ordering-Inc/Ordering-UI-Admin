@@ -36,6 +36,8 @@ const ReportsDriverOrderUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
+
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [openCountryFilter, setOpenCountryFilter] = useState(true)
@@ -105,11 +107,13 @@ const ReportsDriverOrderUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          <Button
-            onClick={() => setOpenCountryFilter(true)}
-          >
-            {t('COUNTRY', 'Country')}
-          </Button>
+          {isOneMoreCountry && (
+            <Button
+              onClick={() => setOpenCountryFilter(true)}
+            >
+              {t('COUNTRY', 'Country')}
+            </Button>
+          )}
         </BrandBusinessWrapper>
         <TimeZoneAndCalendar>
           <AnalyticsTimeZoneWrapper>
@@ -215,6 +219,7 @@ const ReportsDriverOrderUI = (props) => {
       </Modal>
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />

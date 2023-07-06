@@ -86,7 +86,7 @@ const ReportsTopDriversUI = (props) => {
     labels: generateLabels(),
     datasets: [
       {
-        label: t('ORDERS', 'Orders'),
+        label: t('CONTROL_PANEL_ORDERS', 'Orders'),
         data: generateData(),
         fill: true,
         borderColor: '#2C7BE5',
@@ -147,7 +147,6 @@ const ReportsTopDriversUI = (props) => {
             return label
           },
           beforeFooter: (tooltipItem) => {
-            console.log(tooltipItem[0])
             let time = ''
             if (reportData?.content?.dataset?.dataset?.data?.length > 0) {
               reportData?.content?.dataset?.dataset?.data && reportData.content.dataset.dataset.data.forEach(item => {
