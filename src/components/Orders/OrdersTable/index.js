@@ -856,7 +856,6 @@ export const OrdersTable = (props) => {
                         )
                       }
                     })}
-                  <td />
                 </tr>
               </OrderTbody>
             ))
