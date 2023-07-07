@@ -49,7 +49,8 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     hanldeDragOver = props.hanldeDragOver,
     handleDrop = props.handleDrop,
     handleDragEnd = props.handleDragEnd,
-    handleUpdateExtraState = props.handleUpdateExtraState;
+    handleUpdateExtraState = props.handleUpdateExtraState,
+    setExtrasState = props.setExtrasState;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
@@ -248,7 +249,9 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     extra: currentExtra,
     handleChangeExtraName: handleChangeExtraInput,
     handleUpdateBusinessState: handleUpdateBusinessState,
-    handleUpdateExtraState: handleUpdateExtraState
+    handleUpdateExtraState: handleUpdateExtraState,
+    extrasState: extrasState,
+    setExtrasState: setExtrasState
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openExtraDetails && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     open: openExtraDetails,
@@ -265,7 +268,9 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     extra: currentExtra,
     handleChangeExtraName: handleChangeExtraInput,
     handleUpdateBusinessState: handleUpdateBusinessState,
-    handleUpdateExtraState: handleUpdateExtraState
+    handleUpdateExtraState: handleUpdateExtraState,
+    extrasState: extrasState,
+    setExtrasState: setExtrasState
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

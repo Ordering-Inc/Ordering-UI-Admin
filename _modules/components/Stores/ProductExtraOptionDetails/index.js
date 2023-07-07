@@ -65,6 +65,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     handleChangeItem = props.handleChangeItem,
     isAddForm = props.isAddForm,
     setIsAddForm = props.setIsAddForm,
+    handleDuplicateOption = props.handleDuplicateOption,
+    handleDuplicateSubOption = props.handleDuplicateSubOption,
     dragoverSubOptionId = props.dragoverSubOptionId,
     isSubOptionsBottom = props.isSubOptionsBottom,
     handleDragStart = props.handleDragStart,
@@ -231,6 +233,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       }));
     }
   }, t('CUSTOM_FIELDS', 'Custom Fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: handleDuplicateOption
+  }, t('DUPLICATE', 'Duplicate')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         externalId: true
@@ -293,7 +297,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       handleDragStart: handleDragStart,
       hanldeDragOver: hanldeDragOver,
       handleDrop: handleDrop,
-      handleDragEnd: handleDragEnd
+      handleDragEnd: handleDragEnd,
+      handleDuplicateSubOption: handleDuplicateSubOption
     });
   }), isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AdddSubOptionForm, {
     onSubmit: handleSubmit(handleAddOption)
