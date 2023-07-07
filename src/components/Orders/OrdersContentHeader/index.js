@@ -60,7 +60,7 @@ export const OrdersContentHeader = (props) => {
       _filterApplied = filterValues?.groupTypes?.length || filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
         filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
         filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0 || filterValues?.metafield?.length > 0 ||
-        filterValues?.externalId || filterValues?.logisticStatus !== null
+        filterValues?.externalId || filterValues?.logisticStatus !== null || filterValues?.assigned !== null
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
