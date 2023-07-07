@@ -7,7 +7,7 @@ import { Map } from '../Map'
 import { SelectProducts } from '../SelectProducts'
 import { Checkout } from '../Checkout'
 import { Alert } from '../../../Shared'
-import { Button, Input } from '../../../../styles'
+import { Button, Input, TextArea } from '../../../../styles'
 import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
 
 import {
@@ -190,7 +190,7 @@ const CustomOrderDetailsUI = (props) => {
             {!isOrderByProducts && (
               <FormControl>
                 <label>{t('COMMENT', 'Comment')}</label>
-                <Input
+                <TextArea
                   value={extraFields?.comment || ''}
                   onChange={(e) => setExtraFields({ ...extraFields, comment: e.target.value })}
                   placeholder={t('COMMENT', 'Comment')}

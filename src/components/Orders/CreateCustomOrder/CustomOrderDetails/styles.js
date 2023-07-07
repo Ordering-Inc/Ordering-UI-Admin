@@ -40,7 +40,7 @@ export const FormControl = styled.div`
       color: ${props => props.theme.colors.primary};
     }
   }
-  input {
+  input, textarea {
     width: 100%;
   }
 `
