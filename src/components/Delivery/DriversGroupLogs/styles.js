@@ -34,7 +34,7 @@ export const Table = styled.table`
           box-sizing: border-box;
         }
         &:nth-child(3) {
-          width: 35%
+          width: 35%;
           padding-left: 15px;
           padding-right: 15px;
           box-sizing: border-box;
@@ -161,10 +161,12 @@ export const EventTypeContainer = styled.div`
   ${props => props.theme?.rtl ? css`
     padding-right: 15px;
     margin-right: 15px;
+    margin-left: 10px;
     border-right: 1px solid ${props => props.theme.colors.borderColor};
   ` : css`
     padding-left: 15px;
     margin-left: 15px;
+    margin-right: 10px;
     border-left: 1px solid ${props => props.theme.colors.borderColor};
   `}
 `
