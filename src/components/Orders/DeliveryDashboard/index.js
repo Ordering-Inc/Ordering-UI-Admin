@@ -17,8 +17,8 @@ export const DeliveryDashboard = (props) => {
     selectedSubOrderStatus,
     handleOrdersStatusGroupFilter,
     handleSelectedSubOrderStatus,
-    numberOfOrdersByStatus,
-    numberOfOrdersBySubstatus
+    ordersAmountByStatus,
+    setOrdersAmountByStatus
   } = props
 
   const [interActionMapOrder, setInterActionMapOrder] = useState(null)
@@ -42,13 +42,12 @@ export const DeliveryDashboard = (props) => {
           <OrderStatusFilterBar
             selectedOrderStatus={ordersStatusGroup}
             changeOrderStatus={handleOrdersStatusGroupFilter}
-            numberOfOrdersByStatus={numberOfOrdersByStatus}
+            ordersAmountByStatus={ordersAmountByStatus}
           />
           <OrderStatusSubFilter
             ordersStatusGroup={ordersStatusGroup}
             selectedSubOrderStatus={selectedSubOrderStatus}
             handleSelectedSubOrderStatus={handleSelectedSubOrderStatus}
-            numberOfOrdersBySubstatus={numberOfOrdersBySubstatus}
           />
         </FilterContainer>
         <WrapperOrderlist id='cardOrders'>
@@ -59,6 +58,7 @@ export const DeliveryDashboard = (props) => {
             handleOrderCardClick={handleLocation}
             handleUpdateDriverLocation={handleUpdateDriverLocation}
             isDelivery
+            setOrdersAmountByStatus={setOrdersAmountByStatus}
           />
         </WrapperOrderlist>
       </OrdersContainer>

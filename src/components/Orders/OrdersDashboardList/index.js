@@ -6,7 +6,8 @@ export const OrdersDashboardList = (props) => {
   const {
     selectedSubOrderStatus,
     isMessagesView,
-    orderByOption
+    orderByOption,
+    setOrdersAmountByStatus
   } = props
 
   const OrdersCommonControlProps = {
@@ -40,24 +41,28 @@ export const OrdersDashboardList = (props) => {
             groupStatus='pending'
             {...OrdersCommonControlProps}
             orderStatus={selectedSubOrderStatus?.pending}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, pending: total }))}
           />
 
           <OrdersListController
             groupStatus='inProgress'
             {...OrdersCommonControlProps}
             orderStatus={selectedSubOrderStatus?.inProgress}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, inProgress: total }))}
           />
 
           <OrdersListController
             groupStatus='completed'
             {...OrdersCommonControlProps}
             orderStatus={selectedSubOrderStatus?.completed}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, completed: total }))}
           />
 
           <OrdersListController
             groupStatus='cancelled'
             {...OrdersCommonControlProps}
             orderStatus={selectedSubOrderStatus?.cancelled}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, cancelled: total }))}
           />
         </>
       )}
