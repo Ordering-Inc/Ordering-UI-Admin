@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useUtils, useCustomer } from 'ordering-components-admin'
+import { useLanguage, useUtils, useCustomer, useConfig } from 'ordering-components-admin'
 import { UserAddForm } from '../../../Users'
 import { AddressList } from '../../../Delivery'
 import { Dot, HouseDoor } from 'react-bootstrap-icons'
@@ -29,13 +29,13 @@ export const SelectCustomer = (props) => {
     setSelectedUser,
     onChangeNumber,
     handleParentSidebarMove,
-    customerAddress,
-    defaultCountryCodeState
+    customerAddress
   } = props
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const [, { setUserCustomer }] = useCustomer()
+  const [{ configs }] = useConfig()
 
   const [searchInputFocus, setSearchInputFocus] = useState(false)
   const [showSearchbar, setShowSearchbar] = useState(true)
@@ -169,7 +169,7 @@ export const SelectCustomer = (props) => {
           <Button
             borderRadius='8px'
             color='primary'
-            disabled={openSidebar === 'user_add_form' || defaultCountryCodeState.loading}
+            disabled={openSidebar === 'user_add_form'}
             onClick={() => handleOpenAddForm()}
           >
             {t('USERS_REGISTER', 'New user')}
@@ -205,8 +205,7 @@ export const SelectCustomer = (props) => {
           <UserAddForm
             isFromCustomOrder
             hideUserTypeSelector
-            defaultCountry={defaultCountryCodeState.code}
-            defaultPhoneNumber={(selectedUser?.cellphone || phone) && `+${findExitingCountryPhoneCode(defaultCountryCodeState?.code)} ${selectedUser?.cellphone || phone}`}
+            defaultPhoneNumber={(selectedUser?.cellphone || phone) && `+${findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())} ${selectedUser?.cellphone || phone}`}
             handleSuccessAdd={onSelectUser}
             onClose={() => handleCloseSidebar()}
           />
