@@ -77,10 +77,21 @@ export const SelectCustomer = (props) => {
     onChangeNumber(trimmedValue)
   }
 
+  const handleOpenAddressListSidebar = () => {
+    setOpenSidebar('address_list')
+    handleParentSidebarMove(500)
+  }
+
   useEffect(() => {
     setOpenSidebar(null)
     handleParentSidebarMove(0)
   }, [customerAddress?.location])
+
+  useEffect(() => {
+    if (!customerAddress?.address && selectedUser) {
+      handleOpenAddressListSidebar()
+    }
+  }, [customerAddress?.address, selectedUser])
 
   return (
     <>
@@ -184,10 +195,7 @@ export const SelectCustomer = (props) => {
               </div>
             )}
             <LinkButton
-              onClick={() => {
-                setOpenSidebar('address_list')
-                handleParentSidebarMove(500)
-              }}
+              onClick={() => handleOpenAddressListSidebar()}
             >
               {customerAddress?.address ? t('CHANGE', 'Change') : t('ADD_NEW_ADDRESS', 'Add new address')}
             </LinkButton>
@@ -220,11 +228,12 @@ export const SelectCustomer = (props) => {
           open={openSidebar === 'address_list'}
           onClose={() => handleCloseSidebar()}
         >
-          <SavedPlaces>
+          <SavedPlaces openExtraAdddress={openExtraAdddress}>
             <h2>{selectedUser?.name} {selectedUser?.lastname}</h2>
             <p>{t('SELECT_CUSTOMER_ADDRESS', 'Select customer address')}</p>
             <AddressListWrapper>
               <AddressList
+                isAutoOpenAddNewAddress
                 isSeletectedUserAddresses
                 userId={selectedUser?.id}
                 addresses={selectedUser?.addresses}
