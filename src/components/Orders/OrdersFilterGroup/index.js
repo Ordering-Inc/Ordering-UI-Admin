@@ -72,6 +72,11 @@ const OrdersFilterGroupUI = (props) => {
     { value: 4, content: <Option>{t('RESOLVED', 'Resolved')}<LogisticStatusDot status={4} /></Option> }
   ]
 
+  const assignedFilterOptions = [
+    { value: 0, content: <Option>{t('ASSIGNED', 'Assigned')}</Option> },
+    { value: 1, content: <Option>{t('UNASSIGNED', 'Unassigned')}</Option> }
+  ]
+
   const handleAcceptFilter = () => {
     handleChangeFilterValues(filterValues)
     handleCloseFilterModal()
@@ -200,6 +205,17 @@ const OrdersFilterGroupUI = (props) => {
               defaultValue={filterValues?.logisticStatus ?? ''}
               placeholder={t('SELECT_LOGISTIC_STATUS', 'Select a logistic status')}
               onChange={(value) => handleChangeChildFilterValue({ logisticStatus: value })}
+            />
+          </SelectWrapper>
+        </WrapperRow>
+        <WrapperRow>
+          <SelectWrapper>
+            <Select
+              options={assignedFilterOptions}
+              className='select'
+              defaultValue={filterValues?.assigned ?? ''}
+              placeholder={t('SELECT_DRIVER_STATUS', 'Select a driver status')}
+              onChange={(value) => handleChangeChildFilterValue({ assigned: value })}
             />
           </SelectWrapper>
         </WrapperRow>
