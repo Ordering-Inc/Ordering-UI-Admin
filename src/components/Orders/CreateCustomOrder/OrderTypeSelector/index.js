@@ -28,7 +28,7 @@ const OrderTypeSelectorUI = (props) => {
       <p>{t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')}</p>
       <Select
         placeholder={<Option>{t('SELECT_DELIVERY_TYPE', 'Select delivery type')}</Option>}
-        options={configTypes
+        options={configTypes.length > 0
           ? orderTypes.filter(type => configTypes?.includes(type.value)).filter(type => type.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
           : orderTypes.filter(type => type.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))}
         defaultValue={defaultType || typeSelected || defaultValue}
