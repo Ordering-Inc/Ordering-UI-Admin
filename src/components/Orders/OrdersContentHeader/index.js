@@ -25,7 +25,7 @@ import {
 export const OrdersContentHeader = (props) => {
   const {
     isDisableTitle,
-    isDisableControl,
+    isSelectedOrders,
     title,
     handleChangeSearch,
     searchValue,
@@ -57,10 +57,13 @@ export const OrdersContentHeader = (props) => {
     if (Object.keys(filterValues).length === 0) {
       _filterApplied = false
     } else {
-      _filterApplied = filterValues?.groupTypes?.length || filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
-        filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
-        filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0 || filterValues?.metafield?.length > 0 ||
-        filterValues?.externalId
+      Object.values(filterValues).forEach(value => {
+        if (Array.isArray(value)) {
+          if (value.length > 0) _filterApplied = true
+        } else {
+          if (value) _filterApplied = true
+        }
+      })
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
@@ -68,7 +71,7 @@ export const OrdersContentHeader = (props) => {
   return (
     <>
       <OrderContentHeaderContainer
-        isDisableControl={isDisableControl}
+        isDisableControl={isSelectedOrders}
       >
         {!isDisableTitle && (
           <HeaderSection>
@@ -104,7 +107,7 @@ export const OrdersContentHeader = (props) => {
 
           </HeaderSection>
         )}
-        <TopRightSection>
+        <TopRightSection isCustomLayout={isSelectedOrders}>
           <WebsocketStatus />
           {isShowMapsKeySettingButton && (
             <GoogleMapsApiKeySettingButton />
@@ -120,7 +123,7 @@ export const OrdersContentHeader = (props) => {
             </SLAControlsWrapper>
           )}
           <WrapperSearchAndFilter
-            fullWidth={isDisableTitle && isDisableControl}
+            fullWidth={isDisableTitle}
           >
             <SearchBar
               isCustomLayout

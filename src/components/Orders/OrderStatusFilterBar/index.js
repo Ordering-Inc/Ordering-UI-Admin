@@ -12,7 +12,7 @@ export const OrderStatusFilterBar = (props) => {
   const {
     selectedOrderStatus,
     changeOrderStatus,
-    numberOfOrdersByStatus
+    ordersAmountByStatus
   } = props
 
   const changeSelectedOrderStatus = (orderStatus) => {
@@ -21,6 +21,7 @@ export const OrderStatusFilterBar = (props) => {
   }
 
   const [, t] = useLanguage()
+
   return (
     <>
       <OrderStatusFilterContainer className='order_status_filter'>
@@ -31,8 +32,8 @@ export const OrderStatusFilterBar = (props) => {
           >
             {t('PENDING', 'pending')}
             <span>(
-              {numberOfOrdersByStatus?.result ? (
-                numberOfOrdersByStatus?.result?.pending ?? 0
+              {!isNaN(ordersAmountByStatus?.pending) && ordersAmountByStatus?.pending !== null ? (
+                ordersAmountByStatus?.pending ?? 0
               ) : (
                 <CgSpinnerTwoAlt />
               )}
@@ -46,8 +47,8 @@ export const OrderStatusFilterBar = (props) => {
           >
             {t('IN_PROGRESS', 'in progress')}
             <span>(
-              {numberOfOrdersByStatus?.result ? (
-                numberOfOrdersByStatus?.result?.inProgress ?? 0
+              {!isNaN(ordersAmountByStatus?.inProgress) && ordersAmountByStatus?.inProgress !== null ? (
+                ordersAmountByStatus?.inProgress ?? 0
               ) : (
                 <CgSpinnerTwoAlt />
               )}
@@ -61,8 +62,8 @@ export const OrderStatusFilterBar = (props) => {
           >
             {t('COMPLETED', 'completed')}
             <span>(
-              {numberOfOrdersByStatus?.result ? (
-                numberOfOrdersByStatus?.result?.completed ?? 0
+              {!isNaN(ordersAmountByStatus?.completed) && ordersAmountByStatus?.completed !== null ? (
+                ordersAmountByStatus?.completed ?? 0
               ) : (
                 <CgSpinnerTwoAlt />
               )}
@@ -76,8 +77,8 @@ export const OrderStatusFilterBar = (props) => {
           >
             {t('CANCELLED', 'cancelled')}
             <span>(
-              {numberOfOrdersByStatus?.result ? (
-                numberOfOrdersByStatus?.result?.cancelled ?? 0
+              {!isNaN(ordersAmountByStatus?.cancelled) && ordersAmountByStatus?.cancelled !== null ? (
+                ordersAmountByStatus?.cancelled ?? 0
               ) : (
                 <CgSpinnerTwoAlt />
               )}

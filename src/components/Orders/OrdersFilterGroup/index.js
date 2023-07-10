@@ -4,7 +4,7 @@ import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-co
 import { BusinessesSelector } from '../BusinessesSelector'
 import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
-import { DriverSelector } from '../DriverSelector'
+import { DriverMultiSelector } from '../DriverMultiSelector'
 import { CitySelector, Modal } from '../../Shared'
 // import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { DeliveryTypeSelector } from '../DeliveryTypeSelector'
@@ -13,6 +13,7 @@ import { CountryFilter } from '../CountryFilter'
 import { Button, IconButton, Input } from '../../../styles'
 import { CurrencyFilter } from '../CurrencyFilter'
 import { getUniqueId } from '../../../utils'
+import { Select } from '../../../styles/Select/FirstSelect'
 
 import {
   FilterGroupListContainer,
@@ -20,8 +21,11 @@ import {
   // MultiSelectContainer,
   ButtonGroup,
   AddInputWrapper,
-  AddMetaFiled
+  AddMetaFiled,
+  SelectWrapper,
+  Option
 } from './styles'
+import { LogisticStatusDot } from '../OrdersTable/styles'
 
 const OrdersFilterGroupUI = (props) => {
   const {
@@ -51,13 +55,27 @@ const OrdersFilterGroupUI = (props) => {
     handleChangeMetaFieldValue,
     handleAddMetaField,
     handleDeleteMetafield,
-    handleChangeExternalId
+    handleChangeExternalId,
+    handleChangeChildFilterValue
   } = props
 
   const [, t] = useLanguage()
   const [metafield, setMetaField] = useState({ key: '', value: '' })
   const [isShow, setIsShow] = useState(false)
   const metafieldRef = useRef()
+
+  const logisticStatusList = [
+    { value: 0, content: <Option>{t('PENDING', 'Pending')}<LogisticStatusDot status={0} /></Option> },
+    { value: 1, content: <Option>{t('IN_PROGRESS', 'In progress')}<LogisticStatusDot status={1} /></Option> },
+    { value: 2, content: <Option>{t('IN_QUEUE', 'In queue')}<LogisticStatusDot status={2} /></Option> },
+    { value: 3, content: <Option>{t('EXPIRED', 'Expired')}<LogisticStatusDot status={3} /></Option> },
+    { value: 4, content: <Option>{t('RESOLVED', 'Resolved')}<LogisticStatusDot status={4} /></Option> }
+  ]
+
+  const assignedFilterOptions = [
+    { value: 0, content: <Option>{t('ASSIGNED', 'Assigned')}</Option> },
+    { value: 1, content: <Option>{t('UNASSIGNED', 'Unassigned')}</Option> }
+  ]
 
   const handleAcceptFilter = () => {
     handleChangeFilterValues(filterValues)
@@ -140,8 +158,7 @@ const OrdersFilterGroupUI = (props) => {
             businessesList={businessesList}
             handleChangeBusinesses={handleChangeBusinesses}
           />
-          <DriverSelector
-            isFilterView
+          <DriverMultiSelector
             drivers={driversList.drivers}
             filterValues={filterValues}
             handleChangeDriver={handleChangeDriver}
@@ -181,6 +198,26 @@ const OrdersFilterGroupUI = (props) => {
             filterValues={filterValues}
             handleChangeCurrency={handleChangeCurrency}
           />
+          <SelectWrapper>
+            <Select
+              options={logisticStatusList}
+              className='select'
+              defaultValue={filterValues?.logisticStatus ?? ''}
+              placeholder={t('SELECT_LOGISTIC_STATUS', 'Select a logistic status')}
+              onChange={(value) => handleChangeChildFilterValue({ logisticStatus: value })}
+            />
+          </SelectWrapper>
+        </WrapperRow>
+        <WrapperRow>
+          <SelectWrapper>
+            <Select
+              options={assignedFilterOptions}
+              className='select'
+              defaultValue={filterValues?.assigned ?? ''}
+              placeholder={t('SELECT_DRIVER_STATUS', 'Select a driver status')}
+              onChange={(value) => handleChangeChildFilterValue({ assigned: value })}
+            />
+          </SelectWrapper>
         </WrapperRow>
         {filterValues?.metafield.map(item => (
           <WrapperRow key={item.id}>

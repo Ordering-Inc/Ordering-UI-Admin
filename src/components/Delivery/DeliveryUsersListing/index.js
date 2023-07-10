@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { UsersList as UsersListController } from 'ordering-components-admin'
+import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
 import { getStorageItem, removeStorageItem, setStorageItem } from '../../../utils'
 
 import { UsersListingHeader } from '../UsersListingHeader'
@@ -10,7 +10,7 @@ import { UserActiveStateFilter } from '../UserActiveStateFilter'
 import { UserDetailsLateralBar } from '../UserDetailsLateralBar'
 import { UserAddForm } from '../UserAddForm'
 import { WizardDelivery } from '../WizardDelivery'
-import { SideBar } from '../../Shared'
+import { Alert, SideBar } from '../../Shared'
 
 import {
   UsersListingContainer
@@ -39,6 +39,7 @@ const DeliveryUsersListingUI = (props) => {
     handleChangeUserActiveState,
     handleChangeUserType,
     handleChangeActiveUser,
+    handleChangeAvailable,
     handleDeleteUser,
     selectedUsers,
     handleSelectedUsers,
@@ -50,15 +51,18 @@ const DeliveryUsersListingUI = (props) => {
     handleSuccessDeleteUser,
     actionDisabled,
     driversGroupsState,
-    setSelectedUsers
+    setSelectedUsers,
+    actionStatus
   } = props
 
+  const [, t] = useLanguage()
   const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [queryId, setQueryId] = useState(null)
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
   const [openUser, setOpenUser] = useState(null)
   const [openUserAddForm, setOpenUserAddForm] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(isDriversManagersPage ? 2 : 0)
@@ -149,6 +153,14 @@ const DeliveryUsersListingUI = (props) => {
     getDataFromStorage()
   }, [usersList.loading])
 
+  useEffect(() => {
+    if (!actionStatus?.error) return
+    setAlertState({
+      open: true,
+      content: actionStatus?.error
+    })
+  }, [actionStatus?.error])
+
   return (
     <>
       <UsersListingContainer>
@@ -189,6 +201,7 @@ const DeliveryUsersListingUI = (props) => {
           paginationDetail={paginationDetail}
           handleChangeUserType={handleChangeUserType}
           handleChangeActiveUser={handleChangeActiveUser}
+          handleChangeAvailable={handleChangeAvailable}
           handleDeleteUser={handleDeleteUser}
           selectedUsers={selectedUsers}
           handleSelectedUsers={handleSelectedUsers}
@@ -240,6 +253,16 @@ const DeliveryUsersListingUI = (props) => {
           currentStep={currentTourStep}
         />
       )}
+
+      <Alert
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={alertState.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState.open}
+        onClose={() => setAlertState({ open: false, content: [] })}
+        onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }

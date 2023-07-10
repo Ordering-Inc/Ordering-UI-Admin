@@ -11,6 +11,7 @@ import { Button } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { Download } from 'react-bootstrap-icons'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 
 import {
   ReportsOrdersContainer,
@@ -22,7 +23,9 @@ import {
   ChartTitleBlock,
   ChartWrapper,
   EmptyContent,
-  ChartFooterContainer
+  ChartFooterContainer,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
@@ -37,6 +40,8 @@ const ReportsSalesUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
+
   const [dataOptions, setDataOptions] = useState(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
@@ -151,18 +156,25 @@ const ReportsSalesUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          <Button
-            onClick={() => setOpenCountryFilter(true)}
-          >
-            {t('COUNTRY', 'Country')}
-          </Button>
+          {isOneMoreCountry && (
+            <Button
+              onClick={() => setOpenCountryFilter(true)}
+            >
+              {t('COUNTRY', 'Country')}
+            </Button>
+          )}
         </BrandBusinessWrapper>
-        <CalendarWrapper>
-          <AnalyticsCalendar
-            handleChangeDate={handleChangeDate}
-            defaultValue={filterList}
-          />
-        </CalendarWrapper>
+        <TimeZoneAndCalendar>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
+          <CalendarWrapper>
+            <AnalyticsCalendar
+              handleChangeDate={handleChangeDate}
+              defaultValue={filterList}
+            />
+          </CalendarWrapper>
+        </TimeZoneAndCalendar>
       </ButtonActionList>
       <ChartBlockWrapper>
         <ChartTitleBlock active={reportData?.content?.dataset?.dataset?.data?.length > 0}>
@@ -217,6 +229,7 @@ const ReportsSalesUI = (props) => {
       </Modal>
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />

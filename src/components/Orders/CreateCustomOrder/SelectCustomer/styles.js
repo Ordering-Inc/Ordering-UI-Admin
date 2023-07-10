@@ -13,10 +13,12 @@ export const SectionContainer = styled.div`
 export const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   > button {
     height: 44px;
     white-space: nowrap;
+    margin: 10px 0;
   }
 `
 export const SearchBarWrapper = styled.div`
@@ -170,6 +172,9 @@ export const SavedPlaces = styled.div`
   width: 100%;
   padding: 25px 20px;
   overflow: auto;
+  ${({ openExtraAdddress }) => openExtraAdddress && css`
+    z-index: 10;
+  `}
 
   > h2 {
     font-size: 20px;

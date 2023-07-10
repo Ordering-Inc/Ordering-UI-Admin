@@ -45,7 +45,6 @@ const OrdersManagerUI = (props) => {
     handleSelectedSubOrderStatus,
     handleCustomOrderDetail,
     setSelectedOrderIds,
-    numberOfOrdersByStatus,
     allowColumns,
     setAllowColumns,
     timeStatus,
@@ -66,6 +65,12 @@ const OrdersManagerUI = (props) => {
   const [isTourFlag, setIsTourFlag] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [slaSettingTime, setSlaSettingTime] = useState(60000)
+  const [ordersAmountByStatus, setOrdersAmountByStatus] = useState({
+    pending: null,
+    inProgress: null,
+    completed: null,
+    cancelled: null
+  })
 
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
   const handleBackRedirect = () => {
@@ -166,7 +171,7 @@ const OrdersManagerUI = (props) => {
       >
         <OrdersContentHeader
           isDisableTitle={isSelectedOrders}
-          isDisableControl={isSelectedOrders}
+          isSelectedOrders={isSelectedOrders}
           title={t('ORDERS_LIST', 'Orders list')}
           searchValue={searchValue}
           driverGroupList={driverGroupList}
@@ -189,7 +194,7 @@ const OrdersManagerUI = (props) => {
         <OrderStatusFilterBar
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
-          numberOfOrdersByStatus={numberOfOrdersByStatus}
+          ordersAmountByStatus={ordersAmountByStatus}
         />
         <OrderSubFilterControls>
           <OrderStatusSubFilterWrapper isColumn={selectedOrderIds?.length}>
@@ -240,6 +245,7 @@ const OrdersManagerUI = (props) => {
                 slaSettingTime={slaSettingTime}
                 allowColumns={allowColumns}
                 setAllowColumns={setAllowColumns}
+                setOrdersAmountByStatus={setOrdersAmountByStatus}
               />
             </WrapItemView>
           </OrdersInnerContent>
@@ -263,7 +269,9 @@ const OrdersManagerUI = (props) => {
         />
       )}
 
-      <OrderNotification customerId={props.customerId} />
+      {!isSelectedOrders && (
+        <OrderNotification customerId={props.customerId} />
+      )}
 
       {totalSelectedOrder > 0 && (
         <WrapperIndicator>

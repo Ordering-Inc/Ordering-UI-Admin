@@ -33,6 +33,7 @@ export const ReviewContentWrapper = styled.div`
 export const TimeContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 35px;
   
   h1{
     font-weight: 500;
@@ -51,7 +52,6 @@ export const OrdersAcceptSpendContent = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 30px;
 `
 
 export const ReviewBlock = styled.div`

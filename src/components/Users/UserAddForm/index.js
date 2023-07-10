@@ -203,7 +203,6 @@ const UserAddFormUI = (props) => {
 
   useEffect(() => {
     if (defaultPhoneNumber) {
-      setUserPhoneNumber(defaultPhoneNumber)
       handleChangePhoneNumber(defaultPhoneNumber, true)
     }
   }, [defaultPhoneNumber])
@@ -292,7 +291,7 @@ const UserAddFormUI = (props) => {
                   handleIsValid={setIsValidPhoneNumber}
                 />
               )}
-              {!isCheckout && (
+              {!isCheckout && !isFromCustomOrder && (
                 <Input
                   type='password'
                   name='password'
@@ -322,7 +321,7 @@ const UserAddFormUI = (props) => {
                 <WrapperUserTypeSelector>
                   <UserTypeSelector
                     isPrimary
-                    defaultUserType={formState?.changes?.level || 3}
+                    defaultUserType={formState?.changes?.level ?? 3}
                     handleChangeUserType={handleChangeUserType}
                   />
                 </WrapperUserTypeSelector>

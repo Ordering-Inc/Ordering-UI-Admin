@@ -9,6 +9,7 @@ import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsDriverFilter } from '../ReportsDriverFilter'
 import { ReportsDriverGroupFilter } from '../ReportsDriverGroupFilter'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   DriverDistanceContainer,
   Title,
@@ -22,7 +23,9 @@ import {
   Tbody,
   Tfoot,
   TableWrapper,
-  EmptyContent
+  EmptyContent,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsDriverDistanceUI = (props) => {
@@ -33,6 +36,8 @@ const ReportsDriverDistanceUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
+
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
@@ -128,18 +133,25 @@ const ReportsDriverDistanceUI = (props) => {
             >
               {t('DRIVER', 'DRIVER')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
-            <Button
-              onClick={() => setOpenCountryFilter(true)}
-            >
-              {t('COUNTRY', 'Country')}
-            </Button>
+            {isOneMoreCountry && (
+              <Button
+                onClick={() => setOpenCountryFilter(true)}
+              >
+                {t('COUNTRY', 'Country')}
+              </Button>
+            )}
           </BrandBusinessWrapper>
-          <CalendarWrapper>
-            <AnalyticsCalendar
-              handleChangeDate={handleChangeDate}
-              defaultValue={filterList}
-            />
-          </CalendarWrapper>
+          <TimeZoneAndCalendar>
+            <AnalyticsTimeZoneWrapper>
+              <AnalyticsFilterTimeZone {...props} />
+            </AnalyticsTimeZoneWrapper>
+            <CalendarWrapper>
+              <AnalyticsCalendar
+                handleChangeDate={handleChangeDate}
+                defaultValue={filterList}
+              />
+            </CalendarWrapper>
+          </TimeZoneAndCalendar>
         </ButtonActionList>
         <DistancePerBrandWrapper>
           <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
@@ -244,12 +256,13 @@ const ReportsDriverDistanceUI = (props) => {
         </Modal>
         <CountryFilter
           {...props}
+          setIsOneMoreCountry={setIsOneMoreCountry}
           openCountryFilter={openCountryFilter}
           setOpenCountryFilter={setOpenCountryFilter}
         />
       </DriverDistanceContainer>
       <Alert
-        title={t('DRIVER_SCHEDULE', 'Driver schedule')}
+        title={t('DRIVER_DISTANCE', 'Driver distance')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}

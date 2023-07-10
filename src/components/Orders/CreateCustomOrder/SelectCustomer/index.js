@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useUtils, useConfig, useCustomer } from 'ordering-components-admin'
+import { useLanguage, useUtils, useCustomer, useConfig } from 'ordering-components-admin'
 import { UserAddForm } from '../../../Users'
 import { AddressList } from '../../../Delivery'
-import { findExitingCountryPhoneCode } from '../../../../utils'
 import { Dot, HouseDoor } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import CgSpinnerTwoAlt from '@meronex/icons/cg/CgSpinnerTwoAlt'
 import { SideBar } from '../../../Shared'
 import { Button, Input, LinkButton } from '../../../../styles'
+import { findExitingCountryPhoneCode } from '../../../../utils'
 import {
   SectionContainer,
   SearchBarContainer,
@@ -34,8 +34,8 @@ export const SelectCustomer = (props) => {
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
-  const [{ configs }] = useConfig()
   const [, { setUserCustomer }] = useCustomer()
+  const [{ configs }] = useConfig()
 
   const [searchInputFocus, setSearchInputFocus] = useState(false)
   const [showSearchbar, setShowSearchbar] = useState(true)
@@ -77,10 +77,21 @@ export const SelectCustomer = (props) => {
     onChangeNumber(trimmedValue)
   }
 
+  const handleOpenAddressListSidebar = () => {
+    setOpenSidebar('address_list')
+    handleParentSidebarMove(500)
+  }
+
   useEffect(() => {
     setOpenSidebar(null)
     handleParentSidebarMove(0)
   }, [customerAddress?.location])
+
+  useEffect(() => {
+    if (!customerAddress?.address && selectedUser) {
+      handleOpenAddressListSidebar()
+    }
+  }, [customerAddress?.address, selectedUser])
 
   return (
     <>
@@ -184,10 +195,7 @@ export const SelectCustomer = (props) => {
               </div>
             )}
             <LinkButton
-              onClick={() => {
-                setOpenSidebar('address_list')
-                handleParentSidebarMove(500)
-              }}
+              onClick={() => handleOpenAddressListSidebar()}
             >
               {customerAddress?.address ? t('CHANGE', 'Change') : t('ADD_NEW_ADDRESS', 'Add new address')}
             </LinkButton>
@@ -205,11 +213,7 @@ export const SelectCustomer = (props) => {
           <UserAddForm
             isFromCustomOrder
             hideUserTypeSelector
-            // defaultPhoneNumber={
-            //   findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())
-            //     ? `+${findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())} ${selectedUser?.cellphone || selectedUser?.phone || phone}`
-            //     : `+1 ${selectedUser?.cellphone || selectedUser?.phone || phone}`
-            // }
+            defaultPhoneNumber={(selectedUser?.cellphone || phone) && `+${findExitingCountryPhoneCode(configs?.default_country_code?.value?.toUpperCase())} ${selectedUser?.cellphone || phone}`}
             handleSuccessAdd={onSelectUser}
             onClose={() => handleCloseSidebar()}
           />
@@ -224,11 +228,12 @@ export const SelectCustomer = (props) => {
           open={openSidebar === 'address_list'}
           onClose={() => handleCloseSidebar()}
         >
-          <SavedPlaces>
+          <SavedPlaces openExtraAdddress={openExtraAdddress}>
             <h2>{selectedUser?.name} {selectedUser?.lastname}</h2>
             <p>{t('SELECT_CUSTOMER_ADDRESS', 'Select customer address')}</p>
             <AddressListWrapper>
               <AddressList
+                isAutoOpenAddNewAddress
                 isSeletectedUserAddresses
                 userId={selectedUser?.id}
                 addresses={selectedUser?.addresses}

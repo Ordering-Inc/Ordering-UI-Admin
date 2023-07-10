@@ -10,6 +10,7 @@ import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { ReportsBarChart } from '../ReportsBarChart'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   ReportsDistanceContainer,
   Title,
@@ -26,7 +27,9 @@ import {
   EmptyContent,
   CustomerLegend,
   LegendItem,
-  LegendContent
+  LegendContent,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsBusinessDistanceUI = (props) => {
@@ -37,6 +40,8 @@ const ReportsBusinessDistanceUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
+
   const tableRef = useRef(null)
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
@@ -152,18 +157,25 @@ const ReportsBusinessDistanceUI = (props) => {
           >
             {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
-          <Button
-            onClick={() => setOpenCountryFilter(true)}
-          >
-            {t('COUNTRY', 'Country')}
-          </Button>
+          {isOneMoreCountry && (
+            <Button
+              onClick={() => setOpenCountryFilter(true)}
+            >
+              {t('COUNTRY', 'Country')}
+            </Button>
+          )}
         </BrandBusinessWrapper>
-        <CalendarWrapper>
-          <AnalyticsCalendar
-            handleChangeDate={handleChangeDate}
-            defaultValue={filterList}
-          />
-        </CalendarWrapper>
+        <TimeZoneAndCalendar>
+          <AnalyticsTimeZoneWrapper>
+            <AnalyticsFilterTimeZone {...props} />
+          </AnalyticsTimeZoneWrapper>
+          <CalendarWrapper>
+            <AnalyticsCalendar
+              handleChangeDate={handleChangeDate}
+              defaultValue={filterList}
+            />
+          </CalendarWrapper>
+        </TimeZoneAndCalendar>
       </ButtonActionList>
       <DistancePerBrandWrapper>
         <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
@@ -278,6 +290,7 @@ const ReportsBusinessDistanceUI = (props) => {
       </Modal>
       <CountryFilter
         {...props}
+        setIsOneMoreCountry={setIsOneMoreCountry}
         openCountryFilter={openCountryFilter}
         setOpenCountryFilter={setOpenCountryFilter}
       />

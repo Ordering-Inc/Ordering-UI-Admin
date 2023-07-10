@@ -19,6 +19,7 @@ import {
   DriverInfoContainer,
   DriverInfo,
   DriverSelectorContainer,
+  CompanySelectorContainer,
   CutsomerDetail,
   CustomerInfoTable,
   ToggleItemWrapper,
@@ -216,38 +217,38 @@ export const OrderContactInformation = (props) => {
       </Accordion>
       {order?.delivery_type === 1 && !isServiceOrder && (
         <>
-        {!order?.driver_id && (
-          <DriverSelectorContainer>
-            <p>{t('DRIVER_COMPANY', 'Driver company')}</p>
-            <CompanySelector
-              small
-              isPhoneView
-              defaultValue={order?.driver_company_id ?? 'default'}
-              order={order}
-              isTourOpen={isTourOpen}
-              setCurrentTourStep={setCurrentTourStep}
-              handleOpenMessages={handleOpenMessages}
-              isOrderDrivers
-              orderId={order?.id}
-            />
-          </DriverSelectorContainer>
-        )}
-        {!order?.driver_company_id && (
-          <DriverSelectorContainer>
-            <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
-            <DriverSelector
-              small
-              isPhoneView
-              defaultValue={order?.driver_id ?? 'default'}
-              order={order}
-              isTourOpen={isTourOpen}
-              setCurrentTourStep={setCurrentTourStep}
-              handleOpenMessages={handleOpenMessages}
-              isOrderDrivers
-              orderId={order?.id}
-            />
-          </DriverSelectorContainer>
-        )}
+          {!order?.driver_id && (
+            <CompanySelectorContainer>
+              <p>{t('DRIVER_COMPANY', 'Driver company')}</p>
+              <CompanySelector
+                small
+                isPhoneView
+                defaultValue={order?.driver_company_id ?? 'default'}
+                order={order}
+                isTourOpen={isTourOpen}
+                setCurrentTourStep={setCurrentTourStep}
+                handleOpenMessages={handleOpenMessages}
+                isOrderDrivers
+                orderId={order?.id}
+              />
+            </CompanySelectorContainer>
+          )}
+          {!order?.driver_company_id && (
+            <DriverSelectorContainer>
+              <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
+              <DriverSelector
+                small
+                isPhoneView
+                defaultValue={order?.driver_id ?? 'default'}
+                order={order}
+                isTourOpen={isTourOpen}
+                setCurrentTourStep={setCurrentTourStep}
+                handleOpenMessages={handleOpenMessages}
+                isOrderDrivers
+                orderId={order?.id}
+              />
+            </DriverSelectorContainer>
+          )}
           <DriverInfoContainer>
             <DriverInfo>
               <PhotoWrapper>

@@ -108,7 +108,7 @@ export const DriverInfoContainer = styled.div`
 `
 export const DriverInfo = styled(BusinessInfo)``
 
-export const DriverSelectorContainer = styled.div`
+export const CompanySelectorContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 23px;
@@ -133,16 +133,31 @@ export const DriverSelectorContainer = styled.div`
       }
     }
   }
-
-  @media (min-width: 768px) {
-    > div {
-      width: 50%;
-    }
+`
+export const DriverSelectorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 23px;
+  margin-bottom: 13px;
+  > p {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 15px;
   }
-  @media (max-width: 576px) {
+  > div {
+    width: 100%;
+    border-radius: 8px;
+    background-color: ${props => props.theme.colors?.secundary};
+
     > div {
-      p {
-        max-width: initial;
+      > div {
+        &:first-child {
+          border: none;
+          height: 50px;
+        }
+        > div:first-child {
+          color: ${props => props.theme.colors?.headingColor};
+        }
       }
     }
   }

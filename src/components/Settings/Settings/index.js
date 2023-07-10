@@ -13,6 +13,8 @@ import { AddressFieldsSetting } from '../AddressFieldsSetting'
 import { LanguageSetting } from '../LanguageSetting'
 import { SitesAuthSettings } from '../SitesAuthSettings'
 import { MultiCountrySettings } from '../MultiCountrySettings'
+import { CardFieldsSetting } from '../CardFieldsSetting'
+import { GuestCheckoutFieldsSetting } from '../GuestCheckoutFieldsSetting'
 
 import {
   BasicSettingsContainer,
@@ -24,7 +26,6 @@ import {
   InfoWrapper,
   InfoContent
 } from './styles'
-import { CardFieldsSetting } from '../CardFieldsSetting'
 
 const SettingsUI = (props) => {
   const {
@@ -200,6 +201,17 @@ const SettingsUI = (props) => {
               </SettingItemWrapper>
               <SettingItemWrapper
                 className='col-md-4 col-sm-6'
+                onClick={() => handleOpenSettingDetails('guest_checkout')}
+              >
+                <SettingItemUI
+                  title={t('GUEST_CHECKOUT_FIELDS', 'Guest checkout fields')}
+                  description={t('GUEST_CHECKOUT_FIELDS_DESC', 'Which fields do you want to show on the guest checkout page?')}
+                  icon={<CheckCircleFill />}
+                  active={isOpenSettingDetails === 'guest_checkout'}
+                />
+              </SettingItemWrapper>
+              <SettingItemWrapper
+                className='col-md-4 col-sm-6'
                 onClick={() => handleOpenSettingDetails('address')}
               >
                 <SettingItemUI
@@ -323,6 +335,9 @@ const SettingsUI = (props) => {
           >
             {isOpenSettingDetails === 'checkout' && (
               <CheckoutFieldsSetting />
+            )}
+            {isOpenSettingDetails === 'guest_checkout' && (
+              <GuestCheckoutFieldsSetting />
             )}
             {isOpenSettingDetails === 'address' && (
               <AddressFieldsSetting />

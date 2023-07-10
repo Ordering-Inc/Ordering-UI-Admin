@@ -7,6 +7,15 @@ export const OrderStatusTypeSelectWrapper = styled.div`
 
   .orderStatus {
     width: 100%;
+
+    > div:first-child {
+      p {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 200px;
+      }
+    }
   }
 
   .search-bar-container {

@@ -138,9 +138,10 @@ export const UsersList = (props) => {
                         <Square />
                       )}
                     </CheckBoxWrapper>
-                    {t('USER', 'User')}
+                    {t('ID', 'Id')}
                   </AllCheckWrapper>
                 </th>
+                <th>{t('USER', 'User')}</th>
                 <th>{t('PHONE', 'Phone')}</th>
                 <th>{t('TYPE', 'Type')}</th>
                 <th className='amout-orders '>{t('AMOUNT_OF_ORDERS', 'Amount of orders')}</th>
@@ -156,6 +157,13 @@ export const UsersList = (props) => {
                         <CheckBoxWrapper>
                           <Skeleton width={20} height={20} />
                         </CheckBoxWrapper>
+                        <InfoBlock>
+                          <p><Skeleton width={70} /></p>
+                        </InfoBlock>
+                      </UserMainInfo>
+                    </td>
+                    <td>
+                      <UserMainInfo>
                         <WrapperImage isSkeleton>
                           <Skeleton width={45} height={45} />
                         </WrapperImage>
@@ -201,6 +209,13 @@ export const UsersList = (props) => {
                             <Square />
                           )}
                         </CheckBoxWrapper>
+                        <InfoBlock>
+                          <p className='bold'>{user?.id}</p>
+                        </InfoBlock>
+                      </UserMainInfo>
+                    </td>
+                    <td>
+                      <UserMainInfo>
                         <WrapperImage>
                           {user?.photo ? (
                             <Image bgimage={optimizeImage(user?.photo, 'h_50,c_limit')} />

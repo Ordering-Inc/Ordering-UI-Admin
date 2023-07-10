@@ -9,6 +9,7 @@ import { AnalyticsBusinessFilter } from '../AnalyticsBusinessFilter'
 import { ReportsOrderTypeFilter } from '../ReportsOrderTypeFilter'
 import { ReportsBrandFilter } from '../ReportsBrandFilter'
 import { CountryFilter } from '../CountryFilter'
+import { AnalyticsFilterTimeZone } from '../AnalyticsFilterTimeZone'
 import {
   OrderStatusContainer,
   Title,
@@ -22,7 +23,9 @@ import {
   Tbody,
   Tfoot,
   TableWrapper,
-  EmptyContent
+  EmptyContent,
+  AnalyticsTimeZoneWrapper,
+  TimeZoneAndCalendar
 } from './styles'
 
 const ReportsOrderStatusUI = (props) => {
@@ -35,6 +38,8 @@ const ReportsOrderStatusUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
+  const [isOneMoreCountry, setIsOneMoreCountry] = useState(false)
+
   const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [openCountryFilter, setOpenCountryFilter] = useState(true)
@@ -129,18 +134,25 @@ const ReportsOrderStatusUI = (props) => {
             >
               {t('ORDER_TYPE', 'Order type')} ({filterList?.delivery_types_ids ? filterList?.delivery_types_ids.length : t('ALL', 'All')})
             </Button>
-            <Button
-              onClick={() => setOpenCountryFilter(true)}
-            >
-              {t('COUNTRY', 'Country')}
-            </Button>
+            {isOneMoreCountry && (
+              <Button
+                onClick={() => setOpenCountryFilter(true)}
+              >
+                {t('COUNTRY', 'Country')}
+              </Button>
+            )}
           </BrandBusinessWrapper>
-          <CalendarWrapper>
-            <AnalyticsCalendar
-              handleChangeDate={handleChangeDate}
-              defaultValue={filterList}
-            />
-          </CalendarWrapper>
+          <TimeZoneAndCalendar>
+            <AnalyticsTimeZoneWrapper>
+              <AnalyticsFilterTimeZone {...props} />
+            </AnalyticsTimeZoneWrapper>
+            <CalendarWrapper>
+              <AnalyticsCalendar
+                handleChangeDate={handleChangeDate}
+                defaultValue={filterList}
+              />
+            </CalendarWrapper>
+          </TimeZoneAndCalendar>
         </ButtonActionList>
         <OrderStatusTableWrapper>
           <DistanceTitleBlock active={reportData?.content?.body?.rows?.length > 0}>
@@ -297,12 +309,13 @@ const ReportsOrderStatusUI = (props) => {
         </Modal>
         <CountryFilter
           {...props}
+          setIsOneMoreCountry={setIsOneMoreCountry}
           openCountryFilter={openCountryFilter}
           setOpenCountryFilter={setOpenCountryFilter}
         />
       </OrderStatusContainer>
       <Alert
-        title={t('DRIVER_SCHEDULE', 'Driver schedule')}
+        title={t('ORDER_STATUS_TEXT', 'Order status')}
         content={alertState.content}
         acceptText={t('ACCEPT', 'Accept')}
         open={alertState.open}
