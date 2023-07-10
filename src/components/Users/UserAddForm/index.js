@@ -40,7 +40,6 @@ const UserAddFormUI = (props) => {
     handleChangeUserType,
     handlechangeImage,
     handleChangeSwtich,
-    defaultCountry,
     defaultPhoneNumber,
     isFromCustomOrder,
     hideUserTypeSelector
@@ -287,7 +286,6 @@ const UserAddFormUI = (props) => {
               )}
               {!!showInputPhoneNumber && (
                 <InputPhoneNumber
-                  defaultCountry={defaultCountry}
                   value={userPhoneNumber}
                   setValue={handleChangePhoneNumber}
                   handleIsValid={setIsValidPhoneNumber}
