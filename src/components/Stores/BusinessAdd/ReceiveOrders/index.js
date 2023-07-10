@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useLanguage, useSession } from 'ordering-components-admin'
+import { useLanguage, useSession, useConfig } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Input } from '../../../../styles'
 import {
@@ -16,6 +16,8 @@ export const ReceiveOrders = (props) => {
 
   const [, t] = useLanguage()
   const theme = useTheme()
+  const [{ configs }] = useConfig()
+  const isEnabledWhiteLabelModule = configs?.white_label_module?.value
 
   useEffect(() => {
     if (user?.email) changeFormState({ email: user?.email })
@@ -34,17 +36,19 @@ export const ReceiveOrders = (props) => {
             placeholder={t('ADD_EMAIL', 'Add email')}
           />
         </FormControl>
-        <DownloadWrapper>
-          <label>{t('DOWNLOADS_APPS', 'Downloads apps')}</label>
-          <DownloadIconWrapper>
-            <a href='https://apps.apple.com/us/app/store-app-2-0/id1608192050' target='_blank' rel='noopener noreferrer'>
-              <img src={theme.images.general.appStore} alt='' />
-            </a>
-            <a href='https://play.google.com/store/apps/details?id=com.ordering.storeappv5&hl=en&gl=US' target='_blank' rel='noopener noreferrer'>
-              <img src={theme.images.general.googlePlay} alt='' />
-            </a>
-          </DownloadIconWrapper>
-        </DownloadWrapper>
+        {!isEnabledWhiteLabelModule && (
+          <DownloadWrapper>
+            <label>{t('DOWNLOADS_APPS', 'Downloads apps')}</label>
+            <DownloadIconWrapper>
+              <a href='https://apps.apple.com/us/app/store-app-2-0/id1608192050' target='_blank' rel='noopener noreferrer'>
+                <img src={theme.images.general.appStore} alt='' />
+              </a>
+              <a href='https://play.google.com/store/apps/details?id=com.ordering.storeappv5&hl=en&gl=US' target='_blank' rel='noopener noreferrer'>
+                <img src={theme.images.general.googlePlay} alt='' />
+              </a>
+            </DownloadIconWrapper>
+          </DownloadWrapper>
+        )}
       </ContentWrapper>
     </ReceiveOrdersContainer>
   )

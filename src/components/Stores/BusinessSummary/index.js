@@ -55,6 +55,8 @@ export const BusinessSummary = (props) => {
   const [selectedView, setSelectedView] = useState('desktop')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
+  const isEnabledWhiteLabelModule = configs?.white_label_module?.value
+
   const handleOpenCategory = () => {
     events.emit('go_to_page', { page: 'store', params: { store: businessState?.business?.slug } })
   }
@@ -218,11 +220,13 @@ export const BusinessSummary = (props) => {
                 >
                   {t('DUPLICATE', 'Duplicate')}
                 </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => handleSelectedItem('personalization')}
-                >
-                  {t('PERSONALIZATION', 'Personalization')}
-                </Dropdown.Item>
+                {!isEnabledWhiteLabelModule && (
+                  <Dropdown.Item
+                    onClick={() => handleSelectedItem('personalization')}
+                  >
+                    {t('PERSONALIZATION', 'Personalization')}
+                  </Dropdown.Item>
+                )}
                 <Dropdown.Item
                   onClick={() => handleSelectedItem('custom_fields')}
                 >
@@ -265,15 +269,17 @@ export const BusinessSummary = (props) => {
             >
               {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
             </Button>
-            <Button
-              color='primary'
-              outline
-              borderRadius='8px'
-              onClick={handleOpenSite}
-              disabled={businessState?.loading}
-            >
-              {t('STORE_WEBSITE', 'Store website')}
-            </Button>
+            {!isEnabledWhiteLabelModule && (
+              <Button
+                color='primary'
+                outline
+                borderRadius='8px'
+                onClick={handleOpenSite}
+                disabled={businessState?.loading}
+              >
+                {t('STORE_WEBSITE', 'Store website')}
+              </Button>
+            )}
           </ButtonWrapper>
           <BusinessDescription>
             {businessState?.loading ? (
@@ -288,7 +294,7 @@ export const BusinessSummary = (props) => {
                 ? businessConfigs
                 : businessConfigs.filter(configs => configs.key !== 'spoonity_key')
               : businessConfigs.filter(c => !itemsExcluded.includes(c.key))
-            ).map(config => (
+            ).filter(item => isEnabledWhiteLabelModule ? item.key !== 'personalization' : true).map(config => (
               <BusinessConfigItem
                 key={config.key}
                 active={selectedItem === config.key}
