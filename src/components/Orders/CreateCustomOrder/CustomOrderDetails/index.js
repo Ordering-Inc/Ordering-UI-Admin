@@ -37,7 +37,6 @@ const CustomOrderDetailsUI = (props) => {
     cart,
     onClose,
     handleOpenCustomOrderDetail,
-    defaultCountryCodeState,
     handlePlaceOrderByTotal,
     extraFields,
     setExtraFields,
@@ -136,7 +135,6 @@ const CustomOrderDetailsUI = (props) => {
           onChangeNumber={onChangeNumber}
           handleParentSidebarMove={handleParentSidebarMove}
           customerAddress={customerAddress}
-          defaultCountryCodeState={defaultCountryCodeState}
         />
         {customerAddress?.location && (
           <>

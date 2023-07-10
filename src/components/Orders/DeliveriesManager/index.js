@@ -29,7 +29,6 @@ const DeliveriesManagerUI = (props) => {
     selectedSubOrderStatus,
     handleSelectedSubOrderStatus,
     onOrderRedirect,
-    numberOfOrdersByStatus,
     numberOfOrdersBySubstatus,
     timeStatus,
     setTimeStatus
@@ -42,6 +41,12 @@ const DeliveriesManagerUI = (props) => {
   const [detailsOrder, setDetailsOrder] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [slaSettingTime, setSlaSettingTime] = useState(60000)
+  const [ordersAmountByStatus, setOrdersAmountByStatus] = useState({
+    pending: null,
+    inProgress: null,
+    completed: null,
+    cancelled: null
+  })
 
   const [configState] = useConfig()
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
@@ -104,7 +109,8 @@ const DeliveriesManagerUI = (props) => {
               setFilterModalOpen={setFilterModalOpen}
               slaSettingTime={slaSettingTime}
               timeStatus={timeStatus}
-              numberOfOrdersByStatus={numberOfOrdersByStatus}
+              ordersAmountByStatus={ordersAmountByStatus}
+              setOrdersAmountByStatus={setOrdersAmountByStatus}
               numberOfOrdersBySubstatus={numberOfOrdersBySubstatus}
             />
           </WrapItemView>

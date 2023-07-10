@@ -172,6 +172,9 @@ export const SavedPlaces = styled.div`
   width: 100%;
   padding: 25px 20px;
   overflow: auto;
+  ${({ openExtraAdddress }) => openExtraAdddress && css`
+    z-index: 10;
+  `}
 
   > h2 {
     font-size: 20px;
