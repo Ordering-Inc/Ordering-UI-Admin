@@ -268,6 +268,7 @@ export const OrderBill = (props) => {
           order={order}
           actionStatus={actionStatus}
           handleOrderRefund={handleOrderRefund}
+          stripePaymethods={stripePaymethods}
         />
       )}
       {order?.payment_events?.filter(item => item.event === 'refund').length > 0 && (
