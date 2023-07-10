@@ -360,7 +360,7 @@ export const OrderBill = (props) => {
           <Button
             color='primary'
             borderRadius='8px'
-            disabled={actionStatus?.loading}
+            disabled={actionStatus?.loading || order?.payment_events?.find(item => item.event === 'refund' && stripePaymethods.includes(item?.paymethod?.gateway))}
             onClick={onClickRefund}
           >
             {t('REFUND', 'Refund')}
