@@ -44,7 +44,7 @@ var OrderTypeSelectorUI = function OrderTypeSelectorUI(props) {
     setSearchValue = _useState2[1];
   return /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('HOW_WILL_YOU_DELIVERY_TYPE', 'How will you delivery type?')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('SELECT_DELIVERY_TYPE', 'Select delivery type')),
-    options: configTypes ? orderTypes.filter(function (type) {
+    options: configTypes.length > 0 ? orderTypes.filter(function (type) {
       return configTypes === null || configTypes === void 0 ? void 0 : configTypes.includes(type.value);
     }).filter(function (type) {
       return type.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());

@@ -43,7 +43,6 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     selectedSubOrderStatus = props.selectedSubOrderStatus,
     handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
     onOrderRedirect = props.onOrderRedirect,
-    numberOfOrdersByStatus = props.numberOfOrdersByStatus,
     numberOfOrdersBySubstatus = props.numberOfOrdersBySubstatus,
     timeStatus = props.timeStatus,
     setTimeStatus = props.setTimeStatus;
@@ -71,6 +70,15 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     slaSettingTime = _useState10[0],
     setSlaSettingTime = _useState10[1];
+  var _useState11 = (0, _react.useState)({
+      pending: null,
+      inProgress: null,
+      completed: null,
+      cancelled: null
+    }),
+    _useState12 = _slicedToArray(_useState11, 2),
+    ordersAmountByStatus = _useState12[0],
+    setOrdersAmountByStatus = _useState12[1];
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -125,7 +133,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     setFilterModalOpen: setFilterModalOpen,
     slaSettingTime: slaSettingTime,
     timeStatus: timeStatus,
-    numberOfOrdersByStatus: numberOfOrdersByStatus,
+    ordersAmountByStatus: ordersAmountByStatus,
+    setOrdersAmountByStatus: setOrdersAmountByStatus,
     numberOfOrdersBySubstatus: numberOfOrdersBySubstatus
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     open: isOpenOrderDetail,

@@ -48,7 +48,6 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     cart = props.cart,
     onClose = props.onClose,
     handleOpenCustomOrderDetail = props.handleOpenCustomOrderDetail,
-    defaultCountryCodeState = props.defaultCountryCodeState,
     handlePlaceOrderByTotal = props.handlePlaceOrderByTotal,
     extraFields = props.extraFields,
     setExtraFields = props.setExtraFields,
@@ -153,8 +152,7 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     setSelectedUser: setSelectedUser,
     onChangeNumber: onChangeNumber,
     handleParentSidebarMove: handleParentSidebarMove,
-    customerAddress: customerAddress,
-    defaultCountryCodeState: defaultCountryCodeState
+    customerAddress: customerAddress
   }), (customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_OrderTypeSelector.OrderTypeSelector, null), /*#__PURE__*/_react.default.createElement(_SelectBusinesses.SelectBusinesses, {
     businessList: businessList,
     selectedBusiness: selectedBusiness,

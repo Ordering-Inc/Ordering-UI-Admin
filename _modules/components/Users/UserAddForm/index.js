@@ -48,7 +48,6 @@ var UserAddFormUI = function UserAddFormUI(props) {
     handleChangeUserType = props.handleChangeUserType,
     handlechangeImage = props.handlechangeImage,
     handleChangeSwtich = props.handleChangeSwtich,
-    defaultCountry = props.defaultCountry,
     defaultPhoneNumber = props.defaultPhoneNumber,
     isFromCustomOrder = props.isFromCustomOrder,
     hideUserTypeSelector = props.hideUserTypeSelector;
@@ -302,7 +301,6 @@ var UserAddFormUI = function UserAddFormUI(props) {
       autoComplete: "off"
     }));
   }), !!showInputPhoneNumber && /*#__PURE__*/_react.default.createElement(_Shared.InputPhoneNumber, {
-    defaultCountry: defaultCountry,
     value: userPhoneNumber,
     setValue: handleChangePhoneNumber,
     handleIsValid: setIsValidPhoneNumber

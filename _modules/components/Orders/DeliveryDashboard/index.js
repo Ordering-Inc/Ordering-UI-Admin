@@ -31,8 +31,8 @@ var DeliveryDashboard = function DeliveryDashboard(props) {
     selectedSubOrderStatus = props.selectedSubOrderStatus,
     handleOrdersStatusGroupFilter = props.handleOrdersStatusGroupFilter,
     handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
-    numberOfOrdersByStatus = props.numberOfOrdersByStatus,
-    numberOfOrdersBySubstatus = props.numberOfOrdersBySubstatus;
+    ordersAmountByStatus = props.ordersAmountByStatus,
+    setOrdersAmountByStatus = props.setOrdersAmountByStatus;
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     interActionMapOrder = _useState2[0],
@@ -50,12 +50,11 @@ var DeliveryDashboard = function DeliveryDashboard(props) {
   return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
-    numberOfOrdersByStatus: numberOfOrdersByStatus
+    ordersAmountByStatus: ordersAmountByStatus
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusSubFilter.OrderStatusSubFilter, {
     ordersStatusGroup: ordersStatusGroup,
     selectedSubOrderStatus: selectedSubOrderStatus,
-    handleSelectedSubOrderStatus: handleSelectedSubOrderStatus,
-    numberOfOrdersBySubstatus: numberOfOrdersBySubstatus
+    handleSelectedSubOrderStatus: handleSelectedSubOrderStatus
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperOrderlist, {
     id: "cardOrders"
   }, /*#__PURE__*/_react.default.createElement(_OrdersDashboardList.OrdersDashboardList, _extends({}, props, {
@@ -63,7 +62,8 @@ var DeliveryDashboard = function DeliveryDashboard(props) {
     selectedOrderCard: interActionMapOrder,
     handleOrderCardClick: handleLocation,
     handleUpdateDriverLocation: handleUpdateDriverLocation,
-    isDelivery: true
+    isDelivery: true,
+    setOrdersAmountByStatus: setOrdersAmountByStatus
   })))), /*#__PURE__*/_react.default.createElement(_styles.WrapperDeliveriesLocation, null, /*#__PURE__*/_react.default.createElement(_DeliveriesLocation.DeliveriesLocation, {
     driversList: driversList,
     interActionMapOrder: interActionMapOrder
