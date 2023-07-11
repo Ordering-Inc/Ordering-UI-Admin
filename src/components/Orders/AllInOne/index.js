@@ -54,7 +54,6 @@ const OrdersManagerUI = (props) => {
     handleSelectedSubOrderStatus,
     handleCustomOrderDetail,
     setSelectedOrderIds,
-    numberOfOrdersByStatus,
     allowColumns,
     setAllowColumns
   } = props
@@ -75,6 +74,12 @@ const OrdersManagerUI = (props) => {
   const [timeStatus, setTimeStatus] = useState(null)
   const [slaSettingTime, setSlaSettingTime] = useState(60000)
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
+  const [ordersAmountByStatus, setOrdersAmountByStatus] = useState({
+    pending: null,
+    inProgress: null,
+    completed: null,
+    cancelled: null
+  })
 
   const [mapsData, setMapsData] = useState({
     driversIsOnline: true,
@@ -213,7 +218,7 @@ const OrdersManagerUI = (props) => {
               <OrderStatusFilterBar
                 selectedOrderStatus={ordersStatusGroup}
                 changeOrderStatus={handleOrdersStatusGroupFilter}
-                numberOfOrdersByStatus={numberOfOrdersByStatus}
+                ordersAmountByStatus={ordersAmountByStatus}
               />
               <OrderSubFilterControls isColumn={selectedOrderIds?.length}>
                 <OrderStatusSubFilterWrapper isColumn={selectedOrderIds?.length}>
@@ -261,6 +266,7 @@ const OrdersManagerUI = (props) => {
                       slaSettingTime={slaSettingTime}
                       allowColumns={allowColumns}
                       setAllowColumns={setAllowColumns}
+                      setOrdersAmountByStatus={setOrdersAmountByStatus}
                     />
                   </WrapItemView>
                 </OrdersInnerContent>

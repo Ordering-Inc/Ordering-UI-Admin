@@ -36,6 +36,7 @@ export const OrdersListing = (props) => {
     orderDetailId,
     filterValues,
     setFilterModalOpen,
+    setOrdersTotalAmount,
 
     isMessagesView,
     setSelectedOrderIds,
@@ -80,6 +81,12 @@ export const OrdersListing = (props) => {
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
+
+  useEffect(() => {
+    if (!isNaN(pagination.total)) {
+      setOrdersTotalAmount(pagination.total)
+    }
+  }, [pagination.total])
 
   return (
     <>

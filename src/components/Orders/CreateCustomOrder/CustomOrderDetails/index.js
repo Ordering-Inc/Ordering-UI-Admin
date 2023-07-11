@@ -30,8 +30,7 @@ const CustomOrderDetailsUI = (props) => {
     handeUpdateProductCart,
     cart,
     onClose,
-    handleOpenCustomOrderDetail,
-    defaultCountryCodeState
+    handleOpenCustomOrderDetail
   } = props
 
   const [, t] = useLanguage()
@@ -80,7 +79,6 @@ const CustomOrderDetailsUI = (props) => {
           onChangeNumber={onChangeNumber}
           handleParentSidebarMove={handleParentSidebarMove}
           customerAddress={customerAddress}
-          defaultCountryCodeState={defaultCountryCodeState}
         />
         {customerAddress?.location && (
           <>

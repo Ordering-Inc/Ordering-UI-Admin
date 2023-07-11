@@ -54,7 +54,8 @@ const AddressListUI = (props) => {
     setCustomerModalOpen,
     setExtraOpen,
     userState,
-    handleSuccessUpdate
+    handleSuccessUpdate,
+    isAutoOpenAddNewAddress
   } = props
 
   const [, t] = useLanguage()
@@ -169,6 +170,15 @@ const AddressListUI = (props) => {
           address.internal_number === obj.internal_number
         )))) || []
     setUniqueAddressesList(_uniqueAddressesList)
+  }, [addressList])
+
+  useEffect(() => {
+    if (addressList.loading || !isAutoOpenAddNewAddress) return
+    if (!addressList.error && addressList?.addresses?.length === 0) {
+      setTimeout(() => {
+        openAddress({})
+      }, 500)
+    }
   }, [addressList])
 
   return (
