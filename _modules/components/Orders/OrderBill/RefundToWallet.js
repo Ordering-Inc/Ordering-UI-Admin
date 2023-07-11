@@ -25,7 +25,8 @@ var RefundToWallet = function RefundToWallet(props) {
   var _configs$refund_cash_, _configs$refund_credi, _configs$refund_strip, _configs$refund_other;
   var order = props.order,
     actionStatus = props.actionStatus,
-    handleOrderRefund = props.handleOrderRefund;
+    handleOrderRefund = props.handleOrderRefund,
+    stripePaymethods = props.stripePaymethods;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -103,11 +104,14 @@ var RefundToWallet = function RefundToWallet(props) {
     }
   }, [errors]);
   (0, _react.useEffect)(function () {
-    var _order$payment_events, _order$summary2, _order$payment_events2;
+    var _order$paymethod, _order$payment_events, _order$summary2, _order$payment_events2;
     setSelectedRefundOption(null);
     setRefundDisabled(false);
     setRefundAllDisabled(false);
     setIsRefundAll(true);
+    if (order !== null && order !== void 0 && order.refund_data && stripePaymethods.includes(order === null || order === void 0 ? void 0 : (_order$paymethod = order.paymethod) === null || _order$paymethod === void 0 ? void 0 : _order$paymethod.gateway)) {
+      setRefundDisabled(true);
+    }
     if (!(order !== null && order !== void 0 && order.payment_events)) return;
     var totalRefundAmount = (order === null || order === void 0 ? void 0 : (_order$payment_events = order.payment_events) === null || _order$payment_events === void 0 ? void 0 : _order$payment_events.filter(function (item) {
       return item.event === 'refund';

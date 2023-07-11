@@ -25,6 +25,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SocketStatusUI = function SocketStatusUI(props) {
+  var _configs$white_label_;
   var socketStatus = props.socketStatus,
     reconnectAttemptCount = props.reconnectAttemptCount,
     connectedDate = props.connectedDate;
@@ -34,6 +35,10 @@ var SocketStatusUI = function SocketStatusUI(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseDate = _useUtils2[0].parseDate;
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
+  var isEnabledWhiteLabelModule = configs === null || configs === void 0 ? void 0 : (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var _useState = (0, _react.useState)({
       open: false,
       content: []
@@ -62,7 +67,7 @@ var SocketStatusUI = function SocketStatusUI(props) {
   }, [reconnectAttemptCount]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Contatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('WEBSOCKET_STATUS_INFO', 'Verify the server connection by date and time using the Connection status button. Press update to refresh you dashboard and update the status as well. Need help? Contact our Customer support team here:'), /*#__PURE__*/_react.default.createElement("a", {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('WEBSOCKET_STATUS_INFO', 'Verify the server connection by date and time using the Connection status button. Press update to refresh you dashboard and update the status as well. Need help? Contact our Customer support team here:'), !isEnabledWhiteLabelModule && /*#__PURE__*/_react.default.createElement("a", {
     href: "https://www.ordering.co/contact-ordering",
     target: "_blank",
     rel: "noopener noreferrer"

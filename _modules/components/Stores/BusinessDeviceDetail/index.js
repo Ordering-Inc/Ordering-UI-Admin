@@ -231,7 +231,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
 var BusinessDeviceDetail = function BusinessDeviceDetail(props) {
   var businessDeviceDetailProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessDeviceDetailUI,
-    propsToFetch: ['id', 'name', 'logo', 'owners']
+    propsToFetch: ['id', 'name', 'logo', 'owners', 'address']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessDeviceDetail, businessDeviceDetailProps);
 };
