@@ -47,7 +47,9 @@ const BusinessWebhooksUI = (props) => {
     { value: 'orders_pickup_completed_driver', content: t('ORDERS_PICKUP_COMPLETED_DRIVER') },
     { value: 'orders_pickup_failed_driver', content: t('ORDERS_PICKUP_FAILED_DRIVER') },
     { value: 'orders_delivery_completed_driver', content: t('ORDERS_DELIVERY_COMPLETED_DRIVER') },
-    { value: 'orders_delivery_failed_driver', content: t('ORDERS_DELIVERY_FAILED_DRIVER') }
+    { value: 'orders_delivery_failed_driver', content: t('ORDERS_DELIVERY_FAILED_DRIVER') },
+    { value: 'preorder_updated', content: t('PREORDER_UPDATED', 'Preorder updated') },
+    { value: 'drivers_changes', content: t('DRIVERS_CHANGES', 'Driver changes') },
   ]
 
   const timeList = [
