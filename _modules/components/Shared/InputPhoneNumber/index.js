@@ -28,8 +28,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     setValue = props.setValue,
     handleIsValid = props.handleIsValid,
     disabled = props.disabled,
-    isUser = props.isUser,
-    defaultCountry = props.defaultCountry;
+    isUser = props.isUser;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -64,7 +63,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
     disabled: disabled,
     placeholder: t('PHONE_NUMBER', 'Phone number'),
-    defaultCountry: defaultCountry !== null && defaultCountry !== void 0 ? defaultCountry : (0, _utils.findExitingCode)(configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : (_configs$default_coun2 = _configs$default_coun.value) === null || _configs$default_coun2 === void 0 ? void 0 : _configs$default_coun2.toUpperCase()),
+    defaultCountry: (0, _utils.findExitingCode)(configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : (_configs$default_coun2 = _configs$default_coun.value) === null || _configs$default_coun2 === void 0 ? void 0 : _configs$default_coun2.toUpperCase()),
     value: value,
     displayInitialValueAsLocalNumber: true,
     onChange: function onChange(val) {

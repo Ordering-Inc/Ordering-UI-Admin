@@ -58,7 +58,6 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
     handleCustomOrderDetail = props.handleCustomOrderDetail,
     setSelectedOrderIds = props.setSelectedOrderIds,
-    numberOfOrdersByStatus = props.numberOfOrdersByStatus,
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -116,14 +115,23 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     totalSelectedOrder = _useState22[0],
     setTotalSelectedOrder = _useState22[1];
   var _useState23 = (0, _react.useState)({
+      pending: null,
+      inProgress: null,
+      completed: null,
+      cancelled: null
+    }),
+    _useState24 = _slicedToArray(_useState23, 2),
+    ordersAmountByStatus = _useState24[0],
+    setOrdersAmountByStatus = _useState24[1];
+  var _useState25 = (0, _react.useState)({
       driversIsOnline: true,
       onlineDrivers: [],
       offlineDrivers: [],
       selectedDriver: null
     }),
-    _useState24 = _slicedToArray(_useState23, 2),
-    mapsData = _useState24[0],
-    setMapsData = _useState24[1];
+    _useState26 = _slicedToArray(_useState25, 2),
+    mapsData = _useState26[0],
+    setMapsData = _useState26[1];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     setDetailsOrder(null);
@@ -236,7 +244,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
-    numberOfOrdersByStatus: numberOfOrdersByStatus
+    ordersAmountByStatus: ordersAmountByStatus
   }), /*#__PURE__*/_react.default.createElement(_styles.OrderSubFilterControls, {
     isColumn: selectedOrderIds === null || selectedOrderIds === void 0 ? void 0 : selectedOrderIds.length
   }, /*#__PURE__*/_react.default.createElement(_styles.OrderStatusSubFilterWrapper, {
@@ -277,7 +285,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     timeStatus: timeStatus,
     slaSettingTime: slaSettingTime,
     allowColumns: allowColumns,
-    setAllowColumns: setAllowColumns
+    setAllowColumns: setAllowColumns,
+    setOrdersAmountByStatus: setOrdersAmountByStatus
   })))))), /*#__PURE__*/_react.default.createElement(_styles.WrapperDriversLocation, null, /*#__PURE__*/_react.default.createElement(_DriversLocation.DriversLocation, {
     driversIsOnline: mapsData.driversIsOnline,
     selectedDriver: mapsData.selectedDriver,

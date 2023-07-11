@@ -18,7 +18,8 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 var OrdersDashboardList = function OrdersDashboardList(props) {
   var selectedSubOrderStatus = props.selectedSubOrderStatus,
     isMessagesView = props.isMessagesView,
-    orderByOption = props.orderByOption;
+    orderByOption = props.orderByOption,
+    setOrdersAmountByStatus = props.setOrdersAmountByStatus;
   var OrdersCommonControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: _OrdersListing.OrdersListing,
     useDefualtSessionManager: true,
@@ -39,19 +40,47 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "pending"
   }, OrdersCommonControlProps, {
-    orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending
+    orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending,
+    setOrdersTotalAmount: function setOrdersTotalAmount(total) {
+      return setOrdersAmountByStatus(function (prevState) {
+        return _objectSpread(_objectSpread({}, prevState), {}, {
+          pending: total
+        });
+      });
+    }
   })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "inProgress"
   }, OrdersCommonControlProps, {
-    orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress
+    orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress,
+    setOrdersTotalAmount: function setOrdersTotalAmount(total) {
+      return setOrdersAmountByStatus(function (prevState) {
+        return _objectSpread(_objectSpread({}, prevState), {}, {
+          inProgress: total
+        });
+      });
+    }
   })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "completed"
   }, OrdersCommonControlProps, {
-    orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed
+    orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed,
+    setOrdersTotalAmount: function setOrdersTotalAmount(total) {
+      return setOrdersAmountByStatus(function (prevState) {
+        return _objectSpread(_objectSpread({}, prevState), {}, {
+          completed: total
+        });
+      });
+    }
   })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "cancelled"
   }, OrdersCommonControlProps, {
-    orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled
+    orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled,
+    setOrdersTotalAmount: function setOrdersTotalAmount(total) {
+      return setOrdersAmountByStatus(function (prevState) {
+        return _objectSpread(_objectSpread({}, prevState), {}, {
+          cancelled: total
+        });
+      });
+    }
   }))));
 };
 exports.OrdersDashboardList = OrdersDashboardList;

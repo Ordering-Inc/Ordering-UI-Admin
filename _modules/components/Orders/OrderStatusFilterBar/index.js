@@ -17,10 +17,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
-  var _numberOfOrdersByStat, _numberOfOrdersByStat2, _numberOfOrdersByStat3, _numberOfOrdersByStat4, _numberOfOrdersByStat5, _numberOfOrdersByStat6, _numberOfOrdersByStat7, _numberOfOrdersByStat8;
+  var _ordersAmountByStatus, _ordersAmountByStatus2, _ordersAmountByStatus3, _ordersAmountByStatus4;
   var selectedOrderStatus = props.selectedOrderStatus,
     changeOrderStatus = props.changeOrderStatus,
-    numberOfOrdersByStatus = props.numberOfOrdersByStatus;
+    ordersAmountByStatus = props.ordersAmountByStatus;
   var changeSelectedOrderStatus = function changeSelectedOrderStatus(orderStatus) {
     window.scrollTo(0, 0);
     changeOrderStatus(orderStatus);
@@ -35,21 +35,21 @@ var OrderStatusFilterBar = function OrderStatusFilterBar(props) {
     onClick: function onClick() {
       return changeSelectedOrderStatus('pending');
     }
-  }, t('PENDING', 'pending'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.result ? (_numberOfOrdersByStat = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat2 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat2 === void 0 ? void 0 : _numberOfOrdersByStat2.pending) !== null && _numberOfOrdersByStat !== void 0 ? _numberOfOrdersByStat : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('PENDING', 'pending'), /*#__PURE__*/_react.default.createElement("span", null, "(", !isNaN(ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.pending) && (ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.pending) !== null ? (_ordersAmountByStatus = ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.pending) !== null && _ordersAmountByStatus !== void 0 ? _ordersAmountByStatus : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'inProgress',
     onClick: function onClick() {
       return changeSelectedOrderStatus('inProgress');
     }
-  }, t('IN_PROGRESS', 'in progress'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.result ? (_numberOfOrdersByStat3 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat4 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat4 === void 0 ? void 0 : _numberOfOrdersByStat4.inProgress) !== null && _numberOfOrdersByStat3 !== void 0 ? _numberOfOrdersByStat3 : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('IN_PROGRESS', 'in progress'), /*#__PURE__*/_react.default.createElement("span", null, "(", !isNaN(ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.inProgress) && (ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.inProgress) !== null ? (_ordersAmountByStatus2 = ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.inProgress) !== null && _ordersAmountByStatus2 !== void 0 ? _ordersAmountByStatus2 : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'completed',
     onClick: function onClick() {
       return changeSelectedOrderStatus('completed');
     }
-  }, t('COMPLETED', 'completed'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.result ? (_numberOfOrdersByStat5 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat6 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat6 === void 0 ? void 0 : _numberOfOrdersByStat6.completed) !== null && _numberOfOrdersByStat5 !== void 0 ? _numberOfOrdersByStat5 : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('COMPLETED', 'completed'), /*#__PURE__*/_react.default.createElement("span", null, "(", !isNaN(ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.completed) && (ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.completed) !== null ? (_ordersAmountByStatus3 = ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.completed) !== null && _ordersAmountByStatus3 !== void 0 ? _ordersAmountByStatus3 : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")), /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: selectedOrderStatus === 'cancelled',
     onClick: function onClick() {
       return changeSelectedOrderStatus('cancelled');
     }
-  }, t('CANCELLED', 'cancelled'), /*#__PURE__*/_react.default.createElement("span", null, "(", numberOfOrdersByStatus !== null && numberOfOrdersByStatus !== void 0 && numberOfOrdersByStatus.result ? (_numberOfOrdersByStat7 = numberOfOrdersByStatus === null || numberOfOrdersByStatus === void 0 ? void 0 : (_numberOfOrdersByStat8 = numberOfOrdersByStatus.result) === null || _numberOfOrdersByStat8 === void 0 ? void 0 : _numberOfOrdersByStat8.cancelled) !== null && _numberOfOrdersByStat7 !== void 0 ? _numberOfOrdersByStat7 : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")))));
+  }, t('CANCELLED', 'cancelled'), /*#__PURE__*/_react.default.createElement("span", null, "(", !isNaN(ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.cancelled) && (ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.cancelled) !== null ? (_ordersAmountByStatus4 = ordersAmountByStatus === null || ordersAmountByStatus === void 0 ? void 0 : ordersAmountByStatus.cancelled) !== null && _ordersAmountByStatus4 !== void 0 ? _ordersAmountByStatus4 : 0 : /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null), ")")))));
 };
 exports.OrderStatusFilterBar = OrderStatusFilterBar;

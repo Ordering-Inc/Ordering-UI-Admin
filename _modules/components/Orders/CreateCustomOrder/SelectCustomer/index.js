@@ -26,15 +26,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SelectCustomer = function SelectCustomer(props) {
-  var _customersPhones$user, _customersPhones$user2;
+  var _customersPhones$user, _customersPhones$user2, _configs$default_coun, _configs$default_coun2;
   var phone = props.phone,
     customersPhones = props.customersPhones,
     selectedUser = props.selectedUser,
     setSelectedUser = props.setSelectedUser,
     onChangeNumber = props.onChangeNumber,
     handleParentSidebarMove = props.handleParentSidebarMove,
-    customerAddress = props.customerAddress,
-    defaultCountryCodeState = props.defaultCountryCodeState;
+    customerAddress = props.customerAddress;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -44,6 +43,9 @@ var SelectCustomer = function SelectCustomer(props) {
   var _useCustomer = (0, _orderingComponentsAdmin.useCustomer)(),
     _useCustomer2 = _slicedToArray(_useCustomer, 2),
     setUserCustomer = _useCustomer2[1].setUserCustomer;
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     searchInputFocus = _useState2[0],
@@ -90,10 +92,19 @@ var SelectCustomer = function SelectCustomer(props) {
     document.execCommand('insertText', false, trimmedValue);
     onChangeNumber(trimmedValue);
   };
+  var handleOpenAddressListSidebar = function handleOpenAddressListSidebar() {
+    setOpenSidebar('address_list');
+    handleParentSidebarMove(500);
+  };
   (0, _react.useEffect)(function () {
     setOpenSidebar(null);
     handleParentSidebarMove(0);
   }, [customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location]);
+  (0, _react.useEffect)(function () {
+    if (!(customerAddress !== null && customerAddress !== void 0 && customerAddress.address) && selectedUser) {
+      handleOpenAddressListSidebar();
+    }
+  }, [customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.address, selectedUser]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SectionContainer, null, /*#__PURE__*/_react.default.createElement("h3", null, t('CUSTOMER', 'Customer')), /*#__PURE__*/_react.default.createElement("p", null, t('SEARCH_WITH_PHONE_FOR_CUSTOM_ORDER', 'Search with the phone the customer who will assign the custom order.')), /*#__PURE__*/_react.default.createElement(_styles2.SearchBarContainer, null, showSearchbar ? /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('PHONE_NUMBER', 'Phone number'),
     onChange: function onChange(e) {
@@ -142,14 +153,13 @@ var SelectCustomer = function SelectCustomer(props) {
   }, selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.name, " ", selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.lastname)))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
-    disabled: openSidebar === 'user_add_form' || defaultCountryCodeState.loading,
+    disabled: openSidebar === 'user_add_form',
     onClick: function onClick() {
       return handleOpenAddForm();
     }
   }, t('USERS_REGISTER', 'New user'))), selectedUser && /*#__PURE__*/_react.default.createElement(_styles2.CustomerAddressWrapper, null, (customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.address) && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), /*#__PURE__*/_react.default.createElement("span", null, customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.address)), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
-      setOpenSidebar('address_list');
-      handleParentSidebarMove(500);
+      return handleOpenAddressListSidebar();
     }
   }, customerAddress !== null && customerAddress !== void 0 && customerAddress.address ? t('CHANGE', 'Change') : t('ADD_NEW_ADDRESS', 'Add new address')))), openSidebar === 'user_add_form' && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     isBorderShow: true,
@@ -161,8 +171,7 @@ var SelectCustomer = function SelectCustomer(props) {
   }, /*#__PURE__*/_react.default.createElement(_Users.UserAddForm, {
     isFromCustomOrder: true,
     hideUserTypeSelector: true,
-    defaultCountry: defaultCountryCodeState.code,
-    defaultPhoneNumber: ((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone) && "+".concat((0, _utils.findExitingCountryPhoneCode)(defaultCountryCodeState === null || defaultCountryCodeState === void 0 ? void 0 : defaultCountryCodeState.code), " ").concat((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone),
+    defaultPhoneNumber: ((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone) && "+".concat((0, _utils.findExitingCountryPhoneCode)(configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : (_configs$default_coun2 = _configs$default_coun.value) === null || _configs$default_coun2 === void 0 ? void 0 : _configs$default_coun2.toUpperCase()), " ").concat((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone),
     handleSuccessAdd: onSelectUser,
     onClose: function onClose() {
       return handleCloseSidebar();
@@ -176,7 +185,10 @@ var SelectCustomer = function SelectCustomer(props) {
     onClose: function onClose() {
       return handleCloseSidebar();
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.SavedPlaces, null, /*#__PURE__*/_react.default.createElement("h2", null, selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.name, " ", selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('SELECT_CUSTOMER_ADDRESS', 'Select customer address')), /*#__PURE__*/_react.default.createElement(_styles2.AddressListWrapper, null, /*#__PURE__*/_react.default.createElement(_Delivery.AddressList, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.SavedPlaces, {
+    openExtraAdddress: openExtraAdddress
+  }, /*#__PURE__*/_react.default.createElement("h2", null, selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.name, " ", selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('SELECT_CUSTOMER_ADDRESS', 'Select customer address')), /*#__PURE__*/_react.default.createElement(_styles2.AddressListWrapper, null, /*#__PURE__*/_react.default.createElement(_Delivery.AddressList, {
+    isAutoOpenAddNewAddress: true,
     isSeletectedUserAddresses: true,
     userId: selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.id,
     addresses: selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.addresses,
