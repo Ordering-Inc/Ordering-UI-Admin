@@ -96,6 +96,12 @@ var BusinessWebhooksUI = function BusinessWebhooksUI(props) {
   }, {
     value: 'orders_delivery_failed_driver',
     content: t('ORDERS_DELIVERY_FAILED_DRIVER')
+  }, {
+    value: 'preorder_updated',
+    content: t('PREORDER_UPDATED', 'Preorder updated')
+  }, {
+    value: 'drivers_changes',
+    content: t('DRIVERS_CHANGES', 'Driver changes')
   }];
   var timeList = [{
     value: '',
