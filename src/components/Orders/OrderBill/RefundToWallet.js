@@ -21,7 +21,8 @@ export const RefundToWallet = (props) => {
   const {
     order,
     actionStatus,
-    handleOrderRefund
+    handleOrderRefund,
+    stripePaymethods
   } = props
 
   const [, t] = useLanguage()
@@ -73,6 +74,9 @@ export const RefundToWallet = (props) => {
     setRefundAllDisabled(false)
     setIsRefundAll(true)
 
+    if (order?.refund_data && stripePaymethods.includes(order?.paymethod?.gateway)) {
+      setRefundDisabled(true)
+    }
     if (!order?.payment_events) return
     const totalRefundAmount = order?.payment_events?.filter(item => item.event === 'refund').reduce((total, event) => total + (event?.amount || 0), 0) || 0
     if (totalRefundAmount === (order?.summary?.total || order?.total)) {

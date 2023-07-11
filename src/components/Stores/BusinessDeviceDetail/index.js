@@ -216,7 +216,7 @@ export const BusinessDeviceDetail = (props) => {
   const businessDeviceDetailProps = {
     ...props,
     UIComponent: BusinessDeviceDetailUI,
-    propsToFetch: ['id', 'name', 'logo', 'owners']
+    propsToFetch: ['id', 'name', 'logo', 'owners', 'address']
   }
   return <BusinessDeviceDetailController {...businessDeviceDetailProps} />
 }
