@@ -71,6 +71,8 @@ const HomeUI = (props) => {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [ordering] = useApi()
 
+  const isEnabledWhiteLabelModule = configs?.white_label_module?.value
+
   const project = {
     active: {
       description: t('ORDERING_GUIDE_MSG', 'Our guide helps you to configure your Ordering products.'),
@@ -234,7 +236,9 @@ const HomeUI = (props) => {
         {width > 997 && (
           <OrderingButtonWrapper>
             <span>{t('WHAT_DO_YOU_WANT_SEE_ORDERING', 'What do you want to see in ordering?')}</span>
-            <Button color='primary' onClick={() => setShowForm(true)}>{t('CLICK_HERE', 'Click here')}</Button>
+            {!isEnabledWhiteLabelModule && (
+              <Button color='primary' onClick={() => setShowForm(true)}>{t('CLICK_HERE', 'Click here')}</Button>
+            )}
           </OrderingButtonWrapper>
         )}
         <Breadcrumb>
