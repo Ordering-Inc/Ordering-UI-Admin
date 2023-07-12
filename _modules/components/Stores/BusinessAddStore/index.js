@@ -41,7 +41,7 @@ var BusinessAddStore = function BusinessAddStore() {
     _useState4 = _slicedToArray(_useState3, 2),
     alertState = _useState4[0],
     setAlertState = _useState4[1];
-  var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
+  var googleMapsApiKey = configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var handleContinue = function handleContinue() {
     var _address$map_data, _address$map_data2;
     if (!(address !== null && address !== void 0 && (_address$map_data = address.map_data) !== null && _address$map_data !== void 0 && _address$map_data.place_id)) {
@@ -53,7 +53,7 @@ var BusinessAddStore = function BusinessAddStore() {
     }
     events.emit('go_to_page', {
       page: 'business_add',
-      search: "?placeId=".concat(address === null || address === void 0 ? void 0 : (_address$map_data2 = address.map_data) === null || _address$map_data2 === void 0 ? void 0 : _address$map_data2.place_id)
+      search: "?placeId=".concat(address === null || address === void 0 || (_address$map_data2 = address.map_data) === null || _address$map_data2 === void 0 ? void 0 : _address$map_data2.place_id)
     });
   };
   var handleSkip = function handleSkip() {

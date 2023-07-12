@@ -84,7 +84,7 @@ var ProductVideosUI = function ProductVideosUI(props) {
   }, [changesState === null || changesState === void 0 ? void 0 : changesState.changes]);
   var handleAddVideo = function handleAddVideo() {
     var _changesState$changes;
-    var _url = changesState === null || changesState === void 0 ? void 0 : (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.video;
+    var _url = changesState === null || changesState === void 0 || (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.video;
     var validId = validationVideoId(_url);
     if (validId) {
       fetch('https://www.youtube.com/oembed?url=https://youtube.com/watch?v=' + validId + '&format=json').then(function (response) {

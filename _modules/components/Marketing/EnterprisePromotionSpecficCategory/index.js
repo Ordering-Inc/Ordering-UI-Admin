@@ -47,33 +47,33 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
     selectedBusinessSlug = _useState4[0],
     setSelectedBusinessSlug = _useState4[1];
   (0, _react.useEffect)(function () {
-    var _promotionState$promo2, _promotionState$promo3;
+    var _promotionState$promo2;
     var businessIds = [];
     if (Object.keys(promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion).length) {
       var _promotionState$promo;
-      businessIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion.businesses) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.reduce(function (ids, business) {
+      businessIds = promotionState === null || promotionState === void 0 || (_promotionState$promo = promotionState.promotion.businesses) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.reduce(function (ids, business) {
         return [].concat(_toConsumableArray(ids), [business.id]);
       }, []);
     } else {
       var _formState$changes, _formState$changes2;
-      businessIds = formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.businesses ? _toConsumableArray(formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.businesses) : [];
+      businessIds = formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.businesses ? _toConsumableArray(formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.businesses) : [];
     }
     var _businessOptions = businessesList.businesses.filter(function (business) {
       return businessIds.includes(business.id);
     }).map(function (business) {
-      var _theme$images, _theme$images$dummies, _business$city;
+      var _theme$images, _business$city;
       return {
         value: business.slug,
         content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement("img", {
-          src: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
+          src: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit'),
           alt: ""
-        }), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("b", null, business === null || business === void 0 ? void 0 : business.name), business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name))
+        }), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("b", null, business === null || business === void 0 ? void 0 : business.name), business === null || business === void 0 || (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name))
       };
     });
     setBusinessOptions(_businessOptions);
-    if ((promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : (_promotionState$promo3 = _promotionState$promo2.categories) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.length) > 0) {
-      var _promotionState$promo4, _promotionState$promo5;
-      var businessId = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : (_promotionState$promo5 = _promotionState$promo4.categories[0]) === null || _promotionState$promo5 === void 0 ? void 0 : _promotionState$promo5.business_id;
+    if ((promotionState === null || promotionState === void 0 || (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 || (_promotionState$promo2 = _promotionState$promo2.categories) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.length) > 0) {
+      var _promotionState$promo3;
+      var businessId = promotionState === null || promotionState === void 0 || (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 || (_promotionState$promo3 = _promotionState$promo3.categories[0]) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.business_id;
       var foundBusiness = businessesList.businesses.find(function (business) {
         return business.id === businessId;
       });
@@ -99,9 +99,9 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
     });
   }, [selectedCategoryIds]);
   (0, _react.useEffect)(function () {
-    var _promotionState$promo6, _promotionState$promo7, _promotionState$promo8;
-    if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo6 = promotionState.promotion) !== null && _promotionState$promo6 !== void 0 && _promotionState$promo6.categories)) return;
-    var _selectedCategoryIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo7 = promotionState.promotion) === null || _promotionState$promo7 === void 0 ? void 0 : (_promotionState$promo8 = _promotionState$promo7.categories) === null || _promotionState$promo8 === void 0 ? void 0 : _promotionState$promo8.reduce(function (ids, category) {
+    var _promotionState$promo4, _promotionState$promo5;
+    if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo4 = promotionState.promotion) !== null && _promotionState$promo4 !== void 0 && _promotionState$promo4.categories)) return;
+    var _selectedCategoryIds = promotionState === null || promotionState === void 0 || (_promotionState$promo5 = promotionState.promotion) === null || _promotionState$promo5 === void 0 || (_promotionState$promo5 = _promotionState$promo5.categories) === null || _promotionState$promo5 === void 0 ? void 0 : _promotionState$promo5.reduce(function (ids, category) {
       ids[category.id] = {
         id: category.id,
         include: category.pivot.include

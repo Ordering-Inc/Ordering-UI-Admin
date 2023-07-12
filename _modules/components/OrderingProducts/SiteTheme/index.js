@@ -28,7 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SiteThemeUI = function SiteThemeUI(props) {
-  var _themeStructure$selec, _themeStructure$selec2, _themeStructure$selec3, _themeValues$selected, _themeStructure$selec4, _Object$keys, _themeStructure$selec5;
+  var _themeStructure$selec, _themeStructure$selec2, _themeValues$selected, _themeStructure$selec3, _Object$keys, _themeStructure$selec4;
   var siteThemesState = props.siteThemesState,
     themesList = props.themesList,
     actionState = props.actionState,
@@ -112,11 +112,11 @@ var SiteThemeUI = function SiteThemeUI(props) {
     }
   };
   (0, _react.useEffect)(function () {
-    var _siteThemesState$resu, _siteThemesState$resu2, _siteThemesState$resu3, _siteThemesState$resu4, _siteThemesState$resu5;
+    var _siteThemesState$resu, _siteThemesState$resu2, _siteThemesState$resu3;
     if (siteThemesState.loading || siteThemesState.result.length === 0) return;
-    var _themeValues = recursiveAssign((_siteThemesState$resu = siteThemesState.result[0]) === null || _siteThemesState$resu === void 0 ? void 0 : (_siteThemesState$resu2 = _siteThemesState$resu.theme) === null || _siteThemesState$resu2 === void 0 ? void 0 : _siteThemesState$resu2.values_default, (_siteThemesState$resu3 = siteThemesState.result[0]) === null || _siteThemesState$resu3 === void 0 ? void 0 : _siteThemesState$resu3.values);
+    var _themeValues = recursiveAssign((_siteThemesState$resu = siteThemesState.result[0]) === null || _siteThemesState$resu === void 0 || (_siteThemesState$resu = _siteThemesState$resu.theme) === null || _siteThemesState$resu === void 0 ? void 0 : _siteThemesState$resu.values_default, (_siteThemesState$resu2 = siteThemesState.result[0]) === null || _siteThemesState$resu2 === void 0 ? void 0 : _siteThemesState$resu2.values);
     setThemeValues(_themeValues);
-    var structure = ((_siteThemesState$resu4 = siteThemesState.result[0]) === null || _siteThemesState$resu4 === void 0 ? void 0 : (_siteThemesState$resu5 = _siteThemesState$resu4.theme) === null || _siteThemesState$resu5 === void 0 ? void 0 : _siteThemesState$resu5.structure) || {};
+    var structure = ((_siteThemesState$resu3 = siteThemesState.result[0]) === null || _siteThemesState$resu3 === void 0 || (_siteThemesState$resu3 = _siteThemesState$resu3.theme) === null || _siteThemesState$resu3 === void 0 ? void 0 : _siteThemesState$resu3.structure) || {};
     setThemeStructure(structure);
     var _pageOptions = getOptions(Object.keys(structure));
     setPageOptions(_pageOptions);
@@ -152,12 +152,12 @@ var SiteThemeUI = function SiteThemeUI(props) {
     onChange: function onChange(key) {
       return setSelectedPage(key);
     }
-  })), selectedPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_themeStructure$selec = themeStructure[selectedPage]) === null || _themeStructure$selec === void 0 ? void 0 : _themeStructure$selec.hidden) && ((_themeStructure$selec2 = themeStructure[selectedPage]) === null || _themeStructure$selec2 === void 0 ? void 0 : (_themeStructure$selec3 = _themeStructure$selec2.hidden) === null || _themeStructure$selec3 === void 0 ? void 0 : _themeStructure$selec3.value_type) === 'boolean' && /*#__PURE__*/_react.default.createElement(_styles2.PageHiddenCheckWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+  })), selectedPage && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_themeStructure$selec = themeStructure[selectedPage]) === null || _themeStructure$selec === void 0 ? void 0 : _themeStructure$selec.hidden) && ((_themeStructure$selec2 = themeStructure[selectedPage]) === null || _themeStructure$selec2 === void 0 || (_themeStructure$selec2 = _themeStructure$selec2.hidden) === null || _themeStructure$selec2 === void 0 ? void 0 : _themeStructure$selec2.value_type) === 'boolean' && /*#__PURE__*/_react.default.createElement(_styles2.PageHiddenCheckWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     defaultChecked: (_themeValues$selected = themeValues[selectedPage]) === null || _themeValues$selected === void 0 ? void 0 : _themeValues$selected.hidden,
     onChange: function onChange(e) {
       return handleHidePage(e.target.checked);
     }
-  }), /*#__PURE__*/_react.default.createElement("h4", null, t('HIDDEN', 'Hidden'))), /*#__PURE__*/_react.default.createElement(_styles2.PageBlockTitle, null, t('PAGE_BLOCKS', 'Page blocks')), !!((_themeStructure$selec4 = themeStructure[selectedPage]) !== null && _themeStructure$selec4 !== void 0 && _themeStructure$selec4.components) && ((_Object$keys = Object.keys((_themeStructure$selec5 = themeStructure[selectedPage]) === null || _themeStructure$selec5 === void 0 ? void 0 : _themeStructure$selec5.components)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (block) {
+  }), /*#__PURE__*/_react.default.createElement("h4", null, t('HIDDEN', 'Hidden'))), /*#__PURE__*/_react.default.createElement(_styles2.PageBlockTitle, null, t('PAGE_BLOCKS', 'Page blocks')), !!((_themeStructure$selec3 = themeStructure[selectedPage]) !== null && _themeStructure$selec3 !== void 0 && _themeStructure$selec3.components) && ((_Object$keys = Object.keys((_themeStructure$selec4 = themeStructure[selectedPage]) === null || _themeStructure$selec4 === void 0 ? void 0 : _themeStructure$selec4.components)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (block) {
     var _components$block, _components$block2, _components$block3, _components$block4, _components$block5;
     var components = themeStructure[selectedPage].components;
     return block !== 'birthday' && /*#__PURE__*/_react.default.createElement(_styles2.BlockContainer, {
@@ -180,11 +180,11 @@ var SiteThemeUI = function SiteThemeUI(props) {
     }), Object.keys(components[block]).filter(function (option) {
       return option !== 'components' && option !== 'value_type';
     }).map(function (option) {
-      var _themeValues$selected2, _themeValues$selected3, _themeValues$selected4;
+      var _themeValues$selected2;
       var optionObject = components[block][option];
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: option
-      }, typeof ((_themeValues$selected2 = themeValues[selectedPage]) === null || _themeValues$selected2 === void 0 ? void 0 : (_themeValues$selected3 = _themeValues$selected2.components) === null || _themeValues$selected3 === void 0 ? void 0 : (_themeValues$selected4 = _themeValues$selected3[block]) === null || _themeValues$selected4 === void 0 ? void 0 : _themeValues$selected4[option]) !== 'undefined' && /*#__PURE__*/_react.default.createElement(_ThemeOption.ThemeOption, {
+      }, typeof ((_themeValues$selected2 = themeValues[selectedPage]) === null || _themeValues$selected2 === void 0 || (_themeValues$selected2 = _themeValues$selected2.components) === null || _themeValues$selected2 === void 0 || (_themeValues$selected2 = _themeValues$selected2[block]) === null || _themeValues$selected2 === void 0 ? void 0 : _themeValues$selected2[option]) !== 'undefined' && /*#__PURE__*/_react.default.createElement(_ThemeOption.ThemeOption, {
         name: option,
         optionObject: optionObject,
         valueObject: themeValues[selectedPage].components[block][option],
@@ -194,13 +194,13 @@ var SiteThemeUI = function SiteThemeUI(props) {
         handleAddThemeGallery: handleAddThemeGallery
       }));
     }), ((_components$block4 = components[block]) === null || _components$block4 === void 0 ? void 0 : _components$block4.components) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.keys((_components$block5 = components[block]) === null || _components$block5 === void 0 ? void 0 : _components$block5.components).map(function (component) {
-      var _components$block6, _themeValues$selected5;
+      var _components$block6, _themeValues$selected3;
       var componentObject = (_components$block6 = components[block]) === null || _components$block6 === void 0 ? void 0 : _components$block6.components[component];
       return /*#__PURE__*/_react.default.createElement(_ThemeComponent.ThemeComponent, {
         key: component,
         name: component,
         componentObject: componentObject,
-        valueObject: (_themeValues$selected5 = themeValues[selectedPage].components[block]) === null || _themeValues$selected5 === void 0 ? void 0 : _themeValues$selected5.components[component],
+        valueObject: (_themeValues$selected3 = themeValues[selectedPage].components[block]) === null || _themeValues$selected3 === void 0 ? void 0 : _themeValues$selected3.components[component],
         themeValues: themeValues,
         setThemeValues: setThemeValues,
         path: [selectedPage, 'components', block, 'components', component].join('.'),

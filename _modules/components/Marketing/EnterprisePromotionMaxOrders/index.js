@@ -46,7 +46,7 @@ var EnterprisePromotionMaxOrders = function EnterprisePromotionMaxOrders(props) 
   }];
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h1", null, t('OFFER_USER_ORDER_COUNT', 'Max. amount of orders in platform of user')), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('OFFER_USER_ORDER_COUNT', 'Max. amount of orders in platform of user')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "user_order_count",
-    value: (_ref = (_formState$changes$us = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.user_order_count) !== null && _formState$changes$us !== void 0 ? _formState$changes$us : promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.user_order_count) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$us = (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.user_order_count) !== null && _formState$changes$us !== void 0 ? _formState$changes$us : promotionState === null || promotionState === void 0 || (_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.user_order_count) !== null && _ref !== void 0 ? _ref : '',
     onChange: handleChangeInput,
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9]$/.test(e.key)) {

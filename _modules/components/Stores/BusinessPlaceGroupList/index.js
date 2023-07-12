@@ -95,7 +95,7 @@ var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
     var placeGroupId = query.get('place_group');
     if (placeGroupId) {
       var _placeGroupList$place;
-      var initPlaceGroup = placeGroupList === null || placeGroupList === void 0 ? void 0 : (_placeGroupList$place = placeGroupList.placeGroups) === null || _placeGroupList$place === void 0 ? void 0 : _placeGroupList$place.find(function (placeGroup) {
+      var initPlaceGroup = placeGroupList === null || placeGroupList === void 0 || (_placeGroupList$place = placeGroupList.placeGroups) === null || _placeGroupList$place === void 0 ? void 0 : _placeGroupList$place.find(function (placeGroup) {
         return placeGroup.id === Number(placeGroupId);
       });
       if (initPlaceGroup) {
@@ -121,14 +121,14 @@ var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
       width: 16,
       height: 16
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.Content, null, (placeGroupList === null || placeGroupList === void 0 ? void 0 : (_placeGroupList$place2 = placeGroupList.placeGroups) === null || _placeGroupList$place2 === void 0 ? void 0 : _placeGroupList$place2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.TableHead, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.Content, null, (placeGroupList === null || placeGroupList === void 0 || (_placeGroupList$place2 = placeGroupList.placeGroups) === null || _placeGroupList$place2 === void 0 ? void 0 : _placeGroupList$place2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.TableHead, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "check-box",
     onClick: function onClick() {
       return handleMultiChangeEnabled();
     }
   }, getMultiCheckStatus() ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", null, t('PLACES', 'Places')))), placeGroupList === null || placeGroupList === void 0 ? void 0 : (_placeGroupList$place3 = placeGroupList.placeGroups) === null || _placeGroupList$place3 === void 0 ? void 0 : _placeGroupList$place3.map(function (placeGroup, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", null, t('PLACES', 'Places')))), placeGroupList === null || placeGroupList === void 0 || (_placeGroupList$place3 = placeGroupList.placeGroups) === null || _placeGroupList$place3 === void 0 ? void 0 : _placeGroupList$place3.map(function (placeGroup, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PlaceItemContainer, {
       key: i,
       active: (selectedPlace === null || selectedPlace === void 0 ? void 0 : selectedPlace.id) === (placeGroup === null || placeGroup === void 0 ? void 0 : placeGroup.id),

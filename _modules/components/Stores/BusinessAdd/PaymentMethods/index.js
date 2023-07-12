@@ -37,7 +37,7 @@ var PaymentMethods = function PaymentMethods(props) {
   };
   (0, _react.useEffect)(function () {
     var _paymethodsList$payme;
-    if (!(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.loading) && (paymethodsList === null || paymethodsList === void 0 ? void 0 : (_paymethodsList$payme = paymethodsList.paymethods) === null || _paymethodsList$payme === void 0 ? void 0 : _paymethodsList$payme.length) > 0) {
+    if (!(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.loading) && (paymethodsList === null || paymethodsList === void 0 || (_paymethodsList$payme = paymethodsList.paymethods) === null || _paymethodsList$payme === void 0 ? void 0 : _paymethodsList$payme.length) > 0) {
       handleChangeIds(paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods[0].id);
     }
   }, [paymethodsList]);

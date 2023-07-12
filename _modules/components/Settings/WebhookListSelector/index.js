@@ -66,6 +66,12 @@ var WebhookListSelector = function WebhookListSelector(props) {
   }, {
     value: 'orders_delivery_failed_driver',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('ORDERS_DELIVERY_FAILED_DRIVER', 'Order delivery failed by driver'))
+  }, {
+    value: 'preorder_updated',
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('PREORDER_UPDATED', 'Preorder updated'))
+  }, {
+    value: 'drivers_changes',
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('DRIVERS_CHANGES', 'Driver changes'))
   }];
   var placeholder = /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('SELECT_HOOK', 'Select a hook'));
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {

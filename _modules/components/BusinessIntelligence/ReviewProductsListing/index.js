@@ -102,13 +102,13 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
     var _product$category;
     setCurProduct(product);
     setCurProductId(product === null || product === void 0 ? void 0 : product.id);
-    setCurCategoryId(product === null || product === void 0 ? void 0 : (_product$category = product.category) === null || _product$category === void 0 ? void 0 : _product$category.id);
+    setCurCategoryId(product === null || product === void 0 || (_product$category = product.category) === null || _product$category === void 0 ? void 0 : _product$category.id);
     setOpenReview(true);
     if (!isInitialRender) {
       var _product$category2;
       var tab = query.get('tab');
       var business = query.get('business');
-      history.replace("".concat(location.pathname, "?tab=").concat(tab, "&business=").concat(business, "&category=").concat(product === null || product === void 0 ? void 0 : (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.id, "&product=").concat(product.id));
+      history.replace("".concat(location.pathname, "?tab=").concat(tab, "&business=").concat(business, "&category=").concat(product === null || product === void 0 || (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.id, "&product=").concat(product.id));
     }
   };
   var handleCloseReviewDetails = function handleCloseReviewDetails() {
@@ -160,8 +160,8 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
       }
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, product !== null && product !== void 0 && product.images ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
       bgimage: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_50,c_limit')
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ImageFill, null)), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, null, (product === null || product === void 0 ? void 0 : (_product$reviews = product.reviews) === null || _product$reviews === void 0 ? void 0 : _product$reviews.total) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, null), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : (_product$reviews2 = product.reviews) === null || _product$reviews2 === void 0 ? void 0 : _product$reviews2.total))))));
-  })), !productState.loading && (productState === null || productState === void 0 ? void 0 : (_productState$product = productState.products) === null || _productState$product === void 0 ? void 0 : _productState$product.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ImageFill, null)), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.name))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, null, (product === null || product === void 0 || (_product$reviews = product.reviews) === null || _product$reviews === void 0 ? void 0 : _product$reviews.total) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, null), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 || (_product$reviews2 = product.reviews) === null || _product$reviews2 === void 0 ? void 0 : _product$reviews2.total))))));
+  })), !productState.loading && (productState === null || productState === void 0 || (_productState$product = productState.products) === null || _productState$product === void 0 ? void 0 : _productState$product.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.PagesBottomContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,

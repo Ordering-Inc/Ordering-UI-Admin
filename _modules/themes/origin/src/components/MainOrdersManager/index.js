@@ -119,10 +119,10 @@ var MainOrdersManagerUI = function MainOrdersManagerUI(props) {
   var handleNotification = function handleNotification(orderId) {
     var _registerOrderIds = _toConsumableArray(registerOrderIds);
     if (!_registerOrderIds.includes(orderId)) {
-      var _configState$configs, _configState$configs$;
+      var _configState$configs;
       _registerOrderIds.push(orderId);
       setRegisterOrderIds(_registerOrderIds);
-      if ((configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.notification_toast) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === 'true') {
+      if ((configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.notification_toast) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === 'true') {
         toastNotify(orderId);
       } else {
         setNotificationModalOpen(true);

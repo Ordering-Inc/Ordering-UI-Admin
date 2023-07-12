@@ -37,8 +37,8 @@ var EnterprisePromotionPaymethods = function EnterprisePromotionPaymethods(props
     } else {
       var _promotionState$promo;
       if (Array.isArray((_promotionState$promo = promotionState.promotion) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.paymethods)) {
-        var _promotionState$promo2, _promotionState$promo3;
-        paymethods = (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : (_promotionState$promo3 = _promotionState$promo2.paymethods) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.reduce(function (ids, paymedhod) {
+        var _promotionState$promo2;
+        paymethods = (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 || (_promotionState$promo2 = _promotionState$promo2.paymethods) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.reduce(function (ids, paymedhod) {
           return [].concat(_toConsumableArray(ids), [paymedhod.id]);
         }, []);
       }
@@ -55,10 +55,10 @@ var EnterprisePromotionPaymethods = function EnterprisePromotionPaymethods(props
     });
   };
   var isDefaultChecked = function isDefaultChecked(paymethodId) {
-    var _promotionState$promo4;
-    if (Array.isArray((_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.paymethods)) {
-      var _promotionState$promo5;
-      var found = (_promotionState$promo5 = promotionState.promotion) === null || _promotionState$promo5 === void 0 ? void 0 : _promotionState$promo5.paymethods.find(function (paymethod) {
+    var _promotionState$promo3;
+    if (Array.isArray((_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.paymethods)) {
+      var _promotionState$promo4;
+      var found = (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : _promotionState$promo4.paymethods.find(function (paymethod) {
         return paymethod.id === paymethodId;
       });
       if (found) return true;else return false;
@@ -80,7 +80,7 @@ var EnterprisePromotionPaymethods = function EnterprisePromotionPaymethods(props
       onChange: function onChange(e) {
         return handleChangePaymethods(e.target.checked, paymethod.id);
       }
-    }), /*#__PURE__*/_react.default.createElement("span", null, t(paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod.name)));
+    }), /*#__PURE__*/_react.default.createElement("span", null, t(paymethod === null || paymethod === void 0 || (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod.name)));
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",

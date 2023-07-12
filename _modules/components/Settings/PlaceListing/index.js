@@ -180,7 +180,7 @@ var PlaceListingUI = function PlaceListingUI(props) {
   };
   var handleClickCity = function handleClickCity(e, city, isInitialRender) {
     var _e$target, _e$target2, _e$target3;
-    var isInvalid = (e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.city-checkbox')) || (e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.closest('.city-enabled')) || (e === null || e === void 0 ? void 0 : (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.closest('.city-actions'));
+    var isInvalid = (e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.city-checkbox')) || (e === null || e === void 0 || (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.closest('.city-enabled')) || (e === null || e === void 0 || (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.closest('.city-actions'));
     if (isInvalid) return;
     handleOpenCityDetails(city);
     if (!isInitialRender) {

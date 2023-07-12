@@ -75,20 +75,20 @@ var AnalyticsCustomerSatisfaction = function AnalyticsCustomerSatisfaction(props
     }));
   })) : /*#__PURE__*/_react.default.createElement(_styles.CustomerSatisfactionWrapper, null, !(dataList !== null && dataList !== void 0 && (_dataList$data6 = dataList.data) !== null && _dataList$data6 !== void 0 && _dataList$data6.general) && !(dataList !== null && dataList !== void 0 && (_dataList$data7 = dataList.data) !== null && _dataList$data7 !== void 0 && _dataList$data7.quality) && !(dataList !== null && dataList !== void 0 && (_dataList$data8 = dataList.data) !== null && _dataList$data8 !== void 0 && _dataList$data8.delivery) && !(dataList !== null && dataList !== void 0 && (_dataList$data9 = dataList.data) !== null && _dataList$data9 !== void 0 && _dataList$data9.service) && !(dataList !== null && dataList !== void 0 && (_dataList$data10 = dataList.data) !== null && _dataList$data10 !== void 0 && _dataList$data10.package) ? /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')) : /*#__PURE__*/_react.default.createElement(_styles.CustomerSatisfactionContent, {
     ref: downloadElementRef
-  }, (dataList === null || dataList === void 0 ? void 0 : (_dataList$data11 = dataList.data) === null || _dataList$data11 === void 0 ? void 0 : _dataList$data11.general) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data12 = dataList.data) === null || _dataList$data12 === void 0 ? void 0 : _dataList$data12.general,
+  }, (dataList === null || dataList === void 0 || (_dataList$data11 = dataList.data) === null || _dataList$data11 === void 0 ? void 0 : _dataList$data11.general) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data12 = dataList.data) === null || _dataList$data12 === void 0 ? void 0 : _dataList$data12.general,
     text: t('GENERAL', 'General')
-  }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data13 = dataList.data) === null || _dataList$data13 === void 0 ? void 0 : _dataList$data13.quality) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data14 = dataList.data) === null || _dataList$data14 === void 0 ? void 0 : _dataList$data14.quality,
+  }), (dataList === null || dataList === void 0 || (_dataList$data13 = dataList.data) === null || _dataList$data13 === void 0 ? void 0 : _dataList$data13.quality) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data14 = dataList.data) === null || _dataList$data14 === void 0 ? void 0 : _dataList$data14.quality,
     text: t('QUALITY', 'Quality')
-  }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data15 = dataList.data) === null || _dataList$data15 === void 0 ? void 0 : _dataList$data15.delivery) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data16 = dataList.data) === null || _dataList$data16 === void 0 ? void 0 : _dataList$data16.delivery,
+  }), (dataList === null || dataList === void 0 || (_dataList$data15 = dataList.data) === null || _dataList$data15 === void 0 ? void 0 : _dataList$data15.delivery) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data16 = dataList.data) === null || _dataList$data16 === void 0 ? void 0 : _dataList$data16.delivery,
     text: t('DELIVERY', 'Delivery')
-  }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data17 = dataList.data) === null || _dataList$data17 === void 0 ? void 0 : _dataList$data17.service) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data18 = dataList.data) === null || _dataList$data18 === void 0 ? void 0 : _dataList$data18.service,
+  }), (dataList === null || dataList === void 0 || (_dataList$data17 = dataList.data) === null || _dataList$data17 === void 0 ? void 0 : _dataList$data17.service) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data18 = dataList.data) === null || _dataList$data18 === void 0 ? void 0 : _dataList$data18.service,
     text: t('SERVICE', 'Service')
-  }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data19 = dataList.data) === null || _dataList$data19 === void 0 ? void 0 : _dataList$data19.package) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data20 = dataList.data) === null || _dataList$data20 === void 0 ? void 0 : _dataList$data20.package,
+  }), (dataList === null || dataList === void 0 || (_dataList$data19 = dataList.data) === null || _dataList$data19 === void 0 ? void 0 : _dataList$data19.package) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data20 = dataList.data) === null || _dataList$data20 === void 0 ? void 0 : _dataList$data20.package,
     text: t('PACKAGE', 'Package')
   }))));
 };

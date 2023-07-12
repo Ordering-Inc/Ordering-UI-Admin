@@ -121,14 +121,14 @@ var ChatBusinessesListUI = function ChatBusinessesListUI(props) {
       width: 100
     })));
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentBusinessess.map(function (business) {
-    var _theme$images, _theme$images$dummies;
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.Card, {
       key: business.id
       // onClick={(e) => handleClickUser(e, user)}
       ,
       active: (business === null || business === void 0 ? void 0 : business.id) === (openBusiness === null || openBusiness === void 0 ? void 0 : openBusiness.id)
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_200,c_limit')
+      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_200,c_limit')
     })), /*#__PURE__*/_react.default.createElement(_styles.InfoContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.name), /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement(_styles.AssignedOrdersCount, {
       className: "driver_orders",
       onClick: function onClick() {

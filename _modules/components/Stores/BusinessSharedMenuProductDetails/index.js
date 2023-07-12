@@ -24,7 +24,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessSharedMenuProductDetailsUI = function BusinessSharedMenuProductDetailsUI(props) {
-  var _ref, _formState$changes$pr, _formState$changes, _productState$product, _ref2, _formState$changes$qu, _formState$changes2, _productState$product2, _productState$product3, _productState$product4;
+  var _ref, _formState$changes$pr, _formState$changes, _productState$product, _ref2, _formState$changes$qu, _formState$changes2, _productState$product2, _productState$product3;
   var productState = props.productState,
     formState = props.formState,
     handleChangeInput = props.handleChangeInput,
@@ -80,7 +80,7 @@ var BusinessSharedMenuProductDetailsUI = function BusinessSharedMenuProductDetai
   return /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, productState.product.name), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: "$0.00",
     name: "price",
-    value: (_ref = (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.price) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.price) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$pr = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.price) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_productState$product = productState.product) === null || _productState$product === void 0 ? void 0 : _productState$product.price) !== null && _ref !== void 0 ? _ref : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -99,7 +99,7 @@ var BusinessSharedMenuProductDetailsUI = function BusinessSharedMenuProductDetai
   })), /*#__PURE__*/_react.default.createElement(_styles2.QuantityWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: "0",
     name: "quantity",
-    value: (_ref2 = (_formState$changes$qu = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.quantity) !== null && _formState$changes$qu !== void 0 ? _formState$changes$qu : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.quantity) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref2 = (_formState$changes$qu = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.quantity) !== null && _formState$changes$qu !== void 0 ? _formState$changes$qu : (_productState$product2 = productState.product) === null || _productState$product2 === void 0 ? void 0 : _productState$product2.quantity) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -122,7 +122,7 @@ var BusinessSharedMenuProductDetailsUI = function BusinessSharedMenuProductDetai
         upselling: enabled
       });
     }
-  })), ((_productState$product3 = productState.product) === null || _productState$product3 === void 0 ? void 0 : (_productState$product4 = _productState$product3.extras) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchbarWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRODUCT_OPTIONS', 'Product options')), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  })), ((_productState$product3 = productState.product) === null || _productState$product3 === void 0 || (_productState$product3 = _productState$product3.extras) === null || _productState$product3 === void 0 ? void 0 : _productState$product3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchbarWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRODUCT_OPTIONS', 'Product options')), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,
     search: searchValue,

@@ -129,12 +129,12 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
     var _recoveryActionState$, _recoveryActionState$2, _recoveryActionState$3, _recoveryActionState$4, _recoveryActionState$5, _recoveryActionState$6, _recoveryActionState$7, _recoveryActionState$8;
     setTimeList();
     setCurPreorderTime({
-      hour: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$ = recoveryActionState.action) !== null && _recoveryActionState$ !== void 0 && _recoveryActionState$.times ? parseInt((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$2 = recoveryActionState.action) === null || _recoveryActionState$2 === void 0 ? void 0 : _recoveryActionState$2.times[0]) / 3600) : '0',
-      minute: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$3 = recoveryActionState.action) !== null && _recoveryActionState$3 !== void 0 && _recoveryActionState$3.times ? parseInt((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$4 = recoveryActionState.action) === null || _recoveryActionState$4 === void 0 ? void 0 : _recoveryActionState$4.times[0]) % 3600 / 60) : '0',
-      second: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$5 = recoveryActionState.action) !== null && _recoveryActionState$5 !== void 0 && _recoveryActionState$5.times ? (recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$6 = recoveryActionState.action) === null || _recoveryActionState$6 === void 0 ? void 0 : _recoveryActionState$6.times[0]) % 3600 % 60 : '0'
+      hour: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$ = recoveryActionState.action) !== null && _recoveryActionState$ !== void 0 && _recoveryActionState$.times ? parseInt((recoveryActionState === null || recoveryActionState === void 0 || (_recoveryActionState$2 = recoveryActionState.action) === null || _recoveryActionState$2 === void 0 ? void 0 : _recoveryActionState$2.times[0]) / 3600) : '0',
+      minute: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$3 = recoveryActionState.action) !== null && _recoveryActionState$3 !== void 0 && _recoveryActionState$3.times ? parseInt((recoveryActionState === null || recoveryActionState === void 0 || (_recoveryActionState$4 = recoveryActionState.action) === null || _recoveryActionState$4 === void 0 ? void 0 : _recoveryActionState$4.times[0]) % 3600 / 60) : '0',
+      second: recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$5 = recoveryActionState.action) !== null && _recoveryActionState$5 !== void 0 && _recoveryActionState$5.times ? (recoveryActionState === null || recoveryActionState === void 0 || (_recoveryActionState$6 = recoveryActionState.action) === null || _recoveryActionState$6 === void 0 ? void 0 : _recoveryActionState$6.times[0]) % 3600 % 60 : '0'
     });
     if (!(recoveryActionState !== null && recoveryActionState !== void 0 && (_recoveryActionState$7 = recoveryActionState.action) !== null && _recoveryActionState$7 !== void 0 && _recoveryActionState$7.times)) return;
-    if ((recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$8 = recoveryActionState.action) === null || _recoveryActionState$8 === void 0 ? void 0 : _recoveryActionState$8.times[0]) / 3600 < 24) {
+    if ((recoveryActionState === null || recoveryActionState === void 0 || (_recoveryActionState$8 = recoveryActionState.action) === null || _recoveryActionState$8 === void 0 ? void 0 : _recoveryActionState$8.times[0]) / 3600 < 24) {
       setIsTime(true);
     } else {
       setIsTime(false);
@@ -145,7 +145,7 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
     name: "name",
     type: "text",
     placeholder: t('NAME', 'name'),
-    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$9 = recoveryActionState.action) === null || _recoveryActionState$9 === void 0 ? void 0 : _recoveryActionState$9.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : recoveryActionState === null || recoveryActionState === void 0 || (_recoveryActionState$9 = recoveryActionState.action) === null || _recoveryActionState$9 === void 0 ? void 0 : _recoveryActionState$9.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -153,7 +153,7 @@ var RecoveryGeneral = function RecoveryGeneral(props) {
     placeholder: t('WRITE_LITTLE_DESCRIPTION', 'Write a little description'),
     name: "description",
     rows: 3,
-    value: (_ref2 = (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : recoveryActionState === null || recoveryActionState === void 0 ? void 0 : (_recoveryActionState$10 = recoveryActionState.action) === null || _recoveryActionState$10 === void 0 ? void 0 : _recoveryActionState$10.description) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref2 = (_formState$changes$de = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : recoveryActionState === null || recoveryActionState === void 0 || (_recoveryActionState$10 = recoveryActionState.action) === null || _recoveryActionState$10 === void 0 ? void 0 : _recoveryActionState$10.description) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"

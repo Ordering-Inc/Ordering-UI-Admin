@@ -139,14 +139,14 @@ var AnalyticsOrdersOrSales = function AnalyticsOrdersOrSales(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _chartDataList$data;
-      var index = chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 ? void 0 : _chartDataList$data.findIndex(function (history) {
+      var index = chartDataList === null || chartDataList === void 0 || (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 ? void 0 : _chartDataList$data.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _chartDataList$data$i, _chartDataList$data$i2, _chartDataList$data$i3;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i = chartDataList.data[index]) === null || _chartDataList$data$i === void 0 ? void 0 : _chartDataList$data$i.time,
-          y: isOrders ? chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i2 = chartDataList.data[index]) === null || _chartDataList$data$i2 === void 0 ? void 0 : _chartDataList$data$i2.orders : chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i3 = chartDataList.data[index]) === null || _chartDataList$data$i3 === void 0 ? void 0 : _chartDataList$data$i3.sales
+          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i = chartDataList.data[index]) === null || _chartDataList$data$i === void 0 ? void 0 : _chartDataList$data$i.time,
+          y: isOrders ? chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i2 = chartDataList.data[index]) === null || _chartDataList$data$i2 === void 0 ? void 0 : _chartDataList$data$i2.orders : chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i3 = chartDataList.data[index]) === null || _chartDataList$data$i3 === void 0 ? void 0 : _chartDataList$data$i3.sales
         });
       } else {
         values.push({

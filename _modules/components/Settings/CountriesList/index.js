@@ -111,7 +111,7 @@ var CountriesList = function CountriesList(props) {
   }, [countriesState, currentPage, countriesPerPage, searchValue]);
   var handleClickCountry = function handleClickCountry(e, country, isInitialRender) {
     var _e$target, _e$target2, _e$target3;
-    var isInvalid = (e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.country-checkbox')) || (e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.closest('.country-enabled')) || (e === null || e === void 0 ? void 0 : (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.closest('.country-actions'));
+    var isInvalid = (e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.country-checkbox')) || (e === null || e === void 0 || (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.closest('.country-enabled')) || (e === null || e === void 0 || (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.closest('.country-actions'));
     if (isInvalid) return;
     setSelectedCountry(country);
     setOpenDetails(true);

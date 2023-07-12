@@ -96,13 +96,13 @@ var ReportsBarChart = function ReportsBarChart(props) {
     var _barChartRef$current;
     if (!(barChartRef !== null && barChartRef !== void 0 && barChartRef.current)) return;
     var a = document.createElement('a');
-    a.href = barChartRef === null || barChartRef === void 0 ? void 0 : (_barChartRef$current = barChartRef.current) === null || _barChartRef$current === void 0 ? void 0 : _barChartRef$current.toBase64Image();
+    a.href = barChartRef === null || barChartRef === void 0 || (_barChartRef$current = barChartRef.current) === null || _barChartRef$current === void 0 ? void 0 : _barChartRef$current.toBase64Image();
     a.download = "".concat(title, ".png");
     // Trigger the download
     a.click();
   };
   return /*#__PURE__*/_react.default.createElement(_styles.ReportsBarChartContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleBlock, {
-    active: (chartData === null || chartData === void 0 ? void 0 : (_chartData$datasets = chartData.datasets) === null || _chartData$datasets === void 0 ? void 0 : _chartData$datasets.length) > 0
+    active: (chartData === null || chartData === void 0 || (_chartData$datasets = chartData.datasets) === null || _chartData$datasets === void 0 ? void 0 : _chartData$datasets.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, title), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadChart();
@@ -119,7 +119,7 @@ var ReportsBarChart = function ReportsBarChart(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: Math.random() * 300
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (chartData === null || chartData === void 0 ? void 0 : (_chartData$datasets2 = chartData.datasets) === null || _chartData$datasets2 === void 0 ? void 0 : _chartData$datasets2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.ChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (chartData === null || chartData === void 0 || (_chartData$datasets2 = chartData.datasets) === null || _chartData$datasets2 === void 0 ? void 0 : _chartData$datasets2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.ChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: chartData,
     options: options,
     ref: barChartRef

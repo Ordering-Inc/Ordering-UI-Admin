@@ -162,7 +162,7 @@ var BusinessPlaceGroupUI = function BusinessPlaceGroupUI(props) {
     name: "name",
     autoComplete: "off",
     onChange: handleChangeInput,
-    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : placeGroup === null || placeGroup === void 0 ? void 0 : placeGroup.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : placeGroup === null || placeGroup === void 0 ? void 0 : placeGroup.name) !== null && _ref !== void 0 ? _ref : '',
     ref: formMethods.register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('NAME', 'Name'))
     })
@@ -181,14 +181,14 @@ var BusinessPlaceGroupUI = function BusinessPlaceGroupUI(props) {
       width: 16,
       height: 16
     }));
-  })), placeGroup && !(placeList !== null && placeList !== void 0 && placeList.loading) && /*#__PURE__*/_react.default.createElement(_styles2.OptionList, null, (placeList === null || placeList === void 0 ? void 0 : (_placeList$places = placeList.places) === null || _placeList$places === void 0 ? void 0 : _placeList$places.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.TableHead, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+  })), placeGroup && !(placeList !== null && placeList !== void 0 && placeList.loading) && /*#__PURE__*/_react.default.createElement(_styles2.OptionList, null, (placeList === null || placeList === void 0 || (_placeList$places = placeList.places) === null || _placeList$places === void 0 ? void 0 : _placeList$places.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.TableHead, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
     className: "check-box",
     onClick: function onClick() {
       return handleMultiPlaceChangeEnabled();
     }
   }, getMultiPlaceCheckStatus() ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", null, t('OPTIONS', 'Options')))), placeList === null || placeList === void 0 ? void 0 : (_placeList$places2 = placeList.places) === null || _placeList$places2 === void 0 ? void 0 : _placeList$places2.map(function (place, i) {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", null, t('OPTIONS', 'Options')))), placeList === null || placeList === void 0 || (_placeList$places2 = placeList.places) === null || _placeList$places2 === void 0 ? void 0 : _placeList$places2.map(function (place, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.PlaceItemContainer, {
       key: i,
       active: (selectedPlace === null || selectedPlace === void 0 ? void 0 : selectedPlace.id) === (place === null || place === void 0 ? void 0 : place.id),

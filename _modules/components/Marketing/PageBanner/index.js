@@ -84,7 +84,7 @@ var PageBannersUI = function PageBannersUI(props) {
     setIsExpand = _useState12[1];
   var handleOpenBannerItemsDetail = function handleOpenBannerItemsDetail(e, banner, isInitialRender) {
     var _e$target;
-    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.banner-enabled');
+    var isInvalid = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.banner-enabled');
     if (isInvalid) return;
     setSelectedBanner(banner);
     setOpenItemsDetail(true);

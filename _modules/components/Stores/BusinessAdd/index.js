@@ -115,10 +115,10 @@ var BusinessAddUI = function BusinessAddUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result;
     if (!(formState !== null && formState !== void 0 && formState.loading) && formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
-      var _formState$result2, _formState$result2$re, _formState$result3, _formState$result4;
-      if ((formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re.length) === 0 && formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result[0].toLowerCase().includes(t('SLUG', 'Slug').toLowerCase())) setIsSlugEdit(true);else setAlertState({
+      var _formState$result2, _formState$result3, _formState$result4;
+      if ((formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 || (_formState$result2 = _formState$result2.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.length) === 0 && formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result[0].toLowerCase().includes(t('SLUG', 'Slug').toLowerCase())) setIsSlugEdit(true);else setAlertState({
         open: true,
-        content: formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result
+        content: formState === null || formState === void 0 || (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.result
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
@@ -157,14 +157,14 @@ var BusinessAddUI = function BusinessAddUI(props) {
     handleChangeSwtich: handleChangeSwtich
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_Schedule.Schedule, {
     handleChangeSchedule: changeSchedule,
-    schedule: formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.schedule
+    schedule: formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.schedule
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_Photos.Photos, {
     gallery: gallery,
     handleChangeGallery: handleChangeGallery
   })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement(_OrderTypePriceLevel.OrderTypePriceLevel, {
     formState: formState,
     changeFormState: changeFormState
-  })), (orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === 1 && /*#__PURE__*/_react.default.createElement(_DeliveryZone.DeliveryZone, {
+  })), (orderStatus === null || orderStatus === void 0 || (_orderStatus$options = orderStatus.options) === null || _orderStatus$options === void 0 ? void 0 : _orderStatus$options.type) === 1 && /*#__PURE__*/_react.default.createElement(_DeliveryZone.DeliveryZone, {
     kmlData: kmlData,
     zoneState: zoneState,
     formState: formState,
@@ -186,8 +186,8 @@ var BusinessAddUI = function BusinessAddUI(props) {
     color: "primary",
     onClick: handleSubmit,
     disabled: formState === null || formState === void 0 ? void 0 : formState.loading
-  }, t('CONFIRM', 'Confirm'))), /*#__PURE__*/_react.default.createElement(_styles2.MapWrapper, null, placeId && (configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value) && /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
-    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
+  }, t('CONFIRM', 'Confirm'))), /*#__PURE__*/_react.default.createElement(_styles2.MapWrapper, null, placeId && (configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value) && /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
+    apiKey: configs === null || configs === void 0 || (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
     location: defaultPosition,
     mapControls: googleMapsControls,
     isFitCenter: true,
@@ -213,10 +213,10 @@ var BusinessAddUI = function BusinessAddUI(props) {
     onClose: function onClose() {
       return setIsSlugEdit(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.SlugEditWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, formState === null || formState === void 0 ? void 0 : (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result), /*#__PURE__*/_react.default.createElement(_styles2.SlugFormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.SlugEditWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, formState === null || formState === void 0 || (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.result), /*#__PURE__*/_react.default.createElement(_styles2.SlugFormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "slug",
     placeholder: t('SLUG', 'Slug'),
-    value: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.slug,
+    value: formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.slug,
     onChange: handleChangeInput
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",

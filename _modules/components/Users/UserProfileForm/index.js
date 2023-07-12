@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserProfileFormUI = function UserProfileFormUI(props) {
-  var _formState$changes2, _userState$result, _userState$result$res, _formState$changes3, _formState$changes4, _formState$changes4$r, _formState$result, _userState$result2, _userState$result2$re, _userState$result3, _userState$result3$re, _formState$changes5, _formState$changes6, _userState$result4;
+  var _formState$changes2, _userState$result, _formState$changes3, _formState$changes4, _formState$result, _userState$result2, _userState$result3, _formState$changes5, _formState$changes6, _userState$result4;
   var handleButtonUpdateClick = props.handleButtonUpdateClick,
     handlechangeImage = props.handlechangeImage,
     formState = props.formState,
@@ -124,7 +124,7 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     onClick: function onClick() {
       return handleClickImage();
     },
-    isImage: (userState === null || userState === void 0 ? void 0 : (_userState$result = userState.result) === null || _userState$result === void 0 ? void 0 : (_userState$result$res = _userState$result.result) === null || _userState$result$res === void 0 ? void 0 : _userState$result$res.photo) || (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo) && !formState.result.error
+    isImage: (userState === null || userState === void 0 || (_userState$result = userState.result) === null || _userState$result === void 0 || (_userState$result = _userState$result.result) === null || _userState$result === void 0 ? void 0 : _userState$result.photo) || (formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.photo) && !formState.result.error
   }, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ExamineClick, {
     onFiles: handleFiles,
     childRef: function childRef(e) {
@@ -138,18 +138,18 @@ var UserProfileFormUI = function UserProfileFormUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && (_formState$changes4$r = _formState$changes4.result) !== null && _formState$changes4$r !== void 0 && _formState$changes4$r.photo) || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) === 'Network Error' || formState.result.error ? userState !== null && userState !== void 0 && (_userState$result2 = userState.result) !== null && _userState$result2 !== void 0 && (_userState$result2$re = _userState$result2.result) !== null && _userState$result2$re !== void 0 && _userState$result2$re.photo ? /*#__PURE__*/_react.default.createElement("img", {
-    src: userState === null || userState === void 0 ? void 0 : (_userState$result3 = userState.result) === null || _userState$result3 === void 0 ? void 0 : (_userState$result3$re = _userState$result3.result) === null || _userState$result3$re === void 0 ? void 0 : _userState$result3$re.photo,
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && (_formState$changes4 = _formState$changes4.result) !== null && _formState$changes4 !== void 0 && _formState$changes4.photo) || ((_formState$result = formState.result) === null || _formState$result === void 0 ? void 0 : _formState$result.result) === 'Network Error' || formState.result.error ? userState !== null && userState !== void 0 && (_userState$result2 = userState.result) !== null && _userState$result2 !== void 0 && (_userState$result2 = _userState$result2.result) !== null && _userState$result2 !== void 0 && _userState$result2.photo ? /*#__PURE__*/_react.default.createElement("img", {
+    src: userState === null || userState === void 0 || (_userState$result3 = userState.result) === null || _userState$result3 === void 0 || (_userState$result3 = _userState$result3.result) === null || _userState$result3 === void 0 ? void 0 : _userState$result3.photo,
     alt: "user image",
     width: "90px",
     height: "90px",
     loading: "lazy"
-  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)) : (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.photo) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.photo,
+  }) : /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)) : (formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.photo) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.photo,
     alt: "user image",
     loading: "lazy"
   }))), /*#__PURE__*/_react.default.createElement(_styles.Camera, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Camera, null))))), /*#__PURE__*/_react.default.createElement(_styles.WrapperForm, null, /*#__PURE__*/_react.default.createElement(_UserFormDetails.UserFormDetailsUI, _extends({}, props, {
-    userData: userState === null || userState === void 0 ? void 0 : (_userState$result4 = userState.result) === null || _userState$result4 === void 0 ? void 0 : _userState$result4.result,
+    userData: userState === null || userState === void 0 || (_userState$result4 = userState.result) === null || _userState$result4 === void 0 ? void 0 : _userState$result4.result,
     isHiddenAddress: isHiddenAddress
   })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('PROFILE', 'Profile'),

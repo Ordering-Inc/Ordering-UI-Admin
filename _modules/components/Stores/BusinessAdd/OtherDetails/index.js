@@ -36,7 +36,7 @@ var OtherDetails = function OtherDetails(props) {
   }, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_styles2.TextArea, {
     name: "description",
     placeholder: t('WRITE_DESCRIPTION', 'Write description'),
-    defaultValue: (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : '',
+    defaultValue: (_formState$changes$de = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : '',
     onChange: handleChangeInput
   }))));
 };

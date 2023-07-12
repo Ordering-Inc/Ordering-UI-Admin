@@ -100,7 +100,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
       var selectedTypes;
       if (driverList) {
         var _driverList$drivers;
-        selectedTypes = driverList === null || driverList === void 0 ? void 0 : (_driverList$drivers = driverList.drivers) === null || _driverList$drivers === void 0 ? void 0 : _driverList$drivers.map(function (item) {
+        selectedTypes = driverList === null || driverList === void 0 || (_driverList$drivers = driverList.drivers) === null || _driverList$drivers === void 0 ? void 0 : _driverList$drivers.map(function (item) {
           return {
             value: item.id,
             content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, item.name)
@@ -123,7 +123,7 @@ var InvoiceGeneral = function InvoiceGeneral(props) {
       var types;
       if (businessList) {
         var _businessList$busines;
-        types = businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.map(function (business) {
+        types = businessList === null || businessList === void 0 || (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.map(function (business) {
           return {
             value: business.id,
             content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, business.name)

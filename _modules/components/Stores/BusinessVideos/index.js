@@ -73,7 +73,7 @@ var BusinessVideosUI = function BusinessVideosUI(props) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
   }, [formState]);
@@ -92,7 +92,7 @@ var BusinessVideosUI = function BusinessVideosUI(props) {
     }, t('DELETE', 'Delete')));
   }), /*#__PURE__*/_react.default.createElement(_styles2.BusinessAddVideoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('VIDEO_URL', 'Video url'),
-    value: (_formState$changes$vi = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.video) !== null && _formState$changes$vi !== void 0 ? _formState$changes$vi : '',
+    value: (_formState$changes$vi = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.video) !== null && _formState$changes$vi !== void 0 ? _formState$changes$vi : '',
     onChange: function onChange(e) {
       return handleChangeBusinessVideo(e);
     },

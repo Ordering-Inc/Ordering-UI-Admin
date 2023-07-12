@@ -111,7 +111,7 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
       var _settingsState$result2;
       setAlertState({
         open: true,
-        content: settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$result2 = settingsState.result) === null || _settingsState$result2 === void 0 ? void 0 : _settingsState$result2.result
+        content: settingsState === null || settingsState === void 0 || (_settingsState$result2 = settingsState.result) === null || _settingsState$result2 === void 0 ? void 0 : _settingsState$result2.result
       });
     }
   }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.result]);
@@ -156,7 +156,7 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
     eventKey: "1"
   }, /*#__PURE__*/_react.default.createElement(_styles2.AccordionTitle, null, t('ADMINISTRATOR', 'Administrator'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "1"
-  }, /*#__PURE__*/_react.default.createElement(_styles3.CheckBoxWrapper, null, (superAdmin === null || superAdmin === void 0 ? void 0 : superAdmin.description) && /*#__PURE__*/_react.default.createElement("p", null, superAdmin === null || superAdmin === void 0 ? void 0 : superAdmin.description), (superAdmin === null || superAdmin === void 0 ? void 0 : (_superAdmin$options = superAdmin.options) === null || _superAdmin$options === void 0 ? void 0 : _superAdmin$options.length) > 0 && (superAdmin === null || superAdmin === void 0 ? void 0 : (_superAdmin$options2 = superAdmin.options) === null || _superAdmin$options2 === void 0 ? void 0 : _superAdmin$options2.map(function (item, j) {
+  }, /*#__PURE__*/_react.default.createElement(_styles3.CheckBoxWrapper, null, (superAdmin === null || superAdmin === void 0 ? void 0 : superAdmin.description) && /*#__PURE__*/_react.default.createElement("p", null, superAdmin === null || superAdmin === void 0 ? void 0 : superAdmin.description), (superAdmin === null || superAdmin === void 0 || (_superAdmin$options = superAdmin.options) === null || _superAdmin$options === void 0 ? void 0 : _superAdmin$options.length) > 0 && (superAdmin === null || superAdmin === void 0 || (_superAdmin$options2 = superAdmin.options) === null || _superAdmin$options2 === void 0 ? void 0 : _superAdmin$options2.map(function (item, j) {
     return /*#__PURE__*/_react.default.createElement(_styles3.FormGroupWrapper, {
       key: j
     }, /*#__PURE__*/_react.default.createElement(_styles3.FormGroupCheck, {
@@ -174,7 +174,7 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
     eventKey: "2"
   }, /*#__PURE__*/_react.default.createElement(_styles2.AccordionTitle, null, t('BUSINESS', 'Business'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "2"
-  }, /*#__PURE__*/_react.default.createElement(_styles3.CheckBoxWrapper, null, (business === null || business === void 0 ? void 0 : business.description) && /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.description), (business === null || business === void 0 ? void 0 : (_business$options = business.options) === null || _business$options === void 0 ? void 0 : _business$options.length) > 0 && (business === null || business === void 0 ? void 0 : (_business$options2 = business.options) === null || _business$options2 === void 0 ? void 0 : _business$options2.map(function (item, j) {
+  }, /*#__PURE__*/_react.default.createElement(_styles3.CheckBoxWrapper, null, (business === null || business === void 0 ? void 0 : business.description) && /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.description), (business === null || business === void 0 || (_business$options = business.options) === null || _business$options === void 0 ? void 0 : _business$options.length) > 0 && (business === null || business === void 0 || (_business$options2 = business.options) === null || _business$options2 === void 0 ? void 0 : _business$options2.map(function (item, j) {
     return /*#__PURE__*/_react.default.createElement(_styles3.FormGroupWrapper, {
       key: j
     }, /*#__PURE__*/_react.default.createElement(_styles3.FormGroupCheck, {
@@ -192,7 +192,7 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
     eventKey: "3"
   }, /*#__PURE__*/_react.default.createElement(_styles2.AccordionTitle, null, t('CUSTOMER', 'Customer'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "3"
-  }, /*#__PURE__*/_react.default.createElement(_styles3.CheckBoxWrapper, null, (customer === null || customer === void 0 ? void 0 : customer.description) && /*#__PURE__*/_react.default.createElement("p", null, customer === null || customer === void 0 ? void 0 : customer.description), (customer === null || customer === void 0 ? void 0 : (_customer$options = customer.options) === null || _customer$options === void 0 ? void 0 : _customer$options.length) > 0 && (customer === null || customer === void 0 ? void 0 : (_customer$options2 = customer.options) === null || _customer$options2 === void 0 ? void 0 : _customer$options2.map(function (item, j) {
+  }, /*#__PURE__*/_react.default.createElement(_styles3.CheckBoxWrapper, null, (customer === null || customer === void 0 ? void 0 : customer.description) && /*#__PURE__*/_react.default.createElement("p", null, customer === null || customer === void 0 ? void 0 : customer.description), (customer === null || customer === void 0 || (_customer$options = customer.options) === null || _customer$options === void 0 ? void 0 : _customer$options.length) > 0 && (customer === null || customer === void 0 || (_customer$options2 = customer.options) === null || _customer$options2 === void 0 ? void 0 : _customer$options2.map(function (item, j) {
     return /*#__PURE__*/_react.default.createElement(_styles3.FormGroupWrapper, {
       key: j
     }, /*#__PURE__*/_react.default.createElement(_styles3.FormGroupCheck, {
@@ -210,7 +210,7 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
     eventKey: "4"
   }, /*#__PURE__*/_react.default.createElement(_styles2.AccordionTitle, null, t('DRIVER', 'Driver'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "4"
-  }, /*#__PURE__*/_react.default.createElement(_styles3.CheckBoxWrapper, null, (driver === null || driver === void 0 ? void 0 : driver.description) && /*#__PURE__*/_react.default.createElement("p", null, driver === null || driver === void 0 ? void 0 : driver.description), (driver === null || driver === void 0 ? void 0 : (_driver$options = driver.options) === null || _driver$options === void 0 ? void 0 : _driver$options.length) > 0 && (driver === null || driver === void 0 ? void 0 : (_driver$options2 = driver.options) === null || _driver$options2 === void 0 ? void 0 : _driver$options2.map(function (item, j) {
+  }, /*#__PURE__*/_react.default.createElement(_styles3.CheckBoxWrapper, null, (driver === null || driver === void 0 ? void 0 : driver.description) && /*#__PURE__*/_react.default.createElement("p", null, driver === null || driver === void 0 ? void 0 : driver.description), (driver === null || driver === void 0 || (_driver$options = driver.options) === null || _driver$options === void 0 ? void 0 : _driver$options.length) > 0 && (driver === null || driver === void 0 || (_driver$options2 = driver.options) === null || _driver$options2 === void 0 ? void 0 : _driver$options2.map(function (item, j) {
     return /*#__PURE__*/_react.default.createElement(_styles3.FormGroupWrapper, {
       key: j
     }, /*#__PURE__*/_react.default.createElement(_styles3.FormGroupCheck, {
@@ -224,7 +224,7 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
         return handleCheckBoxChange(e, true, driver === null || driver === void 0 ? void 0 : driver.value);
       }
     }), item.text)));
-  })), !(driver !== null && driver !== void 0 && driver.options) && /*#__PURE__*/_react.default.createElement(_styles3.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value'))))), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), !(driver !== null && driver !== void 0 && driver.options) && /*#__PURE__*/_react.default.createElement(_styles3.OptionsError, null, t('NO_OPTIONS_VALUE', 'There is no options value'))))), (settingsState === null || settingsState === void 0 || (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: handleClickUpdate
   }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {

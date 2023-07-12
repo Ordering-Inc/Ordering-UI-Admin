@@ -89,7 +89,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
   var handleSubmit = function handleSubmit() {
     var _formState$changes, _formState$changes2;
     var errors = [];
-    if ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== undefined && !(formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.name)) {
+    if ((formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== undefined && !(formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.name)) {
       errors.push(t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('NAME', 'Name')));
     }
     if (errors.length > 0) {
@@ -106,11 +106,11 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
     var options = businessList === null || businessList === void 0 ? void 0 : businessList.businesses.filter(function (option) {
       return option === null || option === void 0 ? void 0 : option.name.toLocaleLowerCase().includes(businessSearchVal.toLocaleLowerCase());
     }).map(function (business) {
-      var _theme$images, _theme$images$dummies;
+      var _theme$images;
       return {
         value: business === null || business === void 0 ? void 0 : business.id,
         content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement(_styles2.Logo, {
-          src: (business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo)
+          src: (business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo)
         }), business === null || business === void 0 ? void 0 : business.name)
       };
     });
@@ -120,9 +120,9 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
     var _formState$changes3;
     if (!(businessList !== null && businessList !== void 0 && businessList.loading) && (formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.business_id || selectedDevice !== null && selectedDevice !== void 0 && selectedDevice.business_id)) {
       var _businessList$busines;
-      var owners = businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses.find(function (business) {
+      var owners = businessList === null || businessList === void 0 || (_businessList$busines = businessList.businesses.find(function (business) {
         var _formState$changes4;
-        return business.id === ((formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.business_id) || (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id));
+        return business.id === ((formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.business_id) || (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id));
       })) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.owners;
       if ((owners === null || owners === void 0 ? void 0 : owners.length) > 0) {
         var options = owners.filter(function (option) {
@@ -138,14 +138,14 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
         setOwnerOptions(options);
       }
     }
-  }, [userSearchVal, selectedDevice, formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.business_id, businessList]);
+  }, [userSearchVal, selectedDevice, formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.business_id, businessList]);
   (0, _react.useEffect)(function () {
     var _formState$result;
     if (formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
@@ -159,7 +159,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
       return deleteDevice();
     }
   })))), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    value: (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.name,
+    value: (_formState$changes$na = formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.name,
     onChange: function onChange(e) {
       return handleChangeFormState({
         name: e.target.value
@@ -170,7 +170,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
   }) : /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: businessOptions,
     className: "select",
-    defaultValue: (_formState$changes$bu = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.business_id) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id,
+    defaultValue: (_formState$changes$bu = formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.business_id) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id,
     placeholder: t('SELECT_OPTION', 'Select an option'),
     onChange: function onChange(value) {
       return handleChangeFormState({
@@ -184,12 +184,12 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
     handleChangeSearch: function handleChangeSearch(val) {
       return setBusinessSearchVal(val);
     }
-  })), ((formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.business_id) || (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id)) && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_OWNER', 'Business owner')), businessList !== null && businessList !== void 0 && businessList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  })), ((formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.business_id) || (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id)) && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_OWNER', 'Business owner')), businessList !== null && businessList !== void 0 && businessList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 44
   }) : /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: ownerOptions,
     className: "select",
-    defaultValue: (_formState$changes$us = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.user_id) !== null && _formState$changes$us !== void 0 ? _formState$changes$us : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.user_id,
+    defaultValue: (_formState$changes$us = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.user_id) !== null && _formState$changes$us !== void 0 ? _formState$changes$us : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.user_id,
     placeholder: t('SELECT_OPTION', 'Select an option'),
     onChange: function onChange(value) {
       return handleChangeFormState({
@@ -204,7 +204,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
       return setUserSearchVal(val);
     }
   })), selectedDevice && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('DEVICE_CODE', 'Device Code')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    value: (_formState$changes$co = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.code) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.code,
+    value: (_formState$changes$co = formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.code) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.code,
     onChange: function onChange(e) {
       return handleChangeFormState({
         code: e.target.value

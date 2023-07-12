@@ -81,7 +81,7 @@ var ThemeComponent = function ThemeComponent(props) {
     var subComponentObject = componentObject === null || componentObject === void 0 ? void 0 : componentObject.components[subComponent];
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: subComponent
-    }, typeof (valueObject === null || valueObject === void 0 ? void 0 : (_valueObject$componen = valueObject.components) === null || _valueObject$componen === void 0 ? void 0 : _valueObject$componen[subComponent]) !== 'undefined' && /*#__PURE__*/_react.default.createElement(ThemeComponent, {
+    }, typeof (valueObject === null || valueObject === void 0 || (_valueObject$componen = valueObject.components) === null || _valueObject$componen === void 0 ? void 0 : _valueObject$componen[subComponent]) !== 'undefined' && /*#__PURE__*/_react.default.createElement(ThemeComponent, {
       name: subComponent,
       componentObject: subComponentObject,
       valueObject: valueObject === null || valueObject === void 0 ? void 0 : valueObject.components[subComponent],

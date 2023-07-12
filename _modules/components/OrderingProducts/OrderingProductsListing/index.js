@@ -158,7 +158,7 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
     onClick: function onClick() {
       return onClickProduct(null);
     }
-  }, t('ADD_PRODUCT', 'Add product')), (sitesListState === null || sitesListState === void 0 ? void 0 : (_sitesListState$sites = sitesListState.sites) === null || _sitesListState$sites === void 0 ? void 0 : _sitesListState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }, t('ADD_PRODUCT', 'Add product')), (sitesListState === null || sitesListState === void 0 || (_sitesListState$sites = sitesListState.sites) === null || _sitesListState$sites === void 0 ? void 0 : _sitesListState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage,
     totalPages: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages,
     handleChangePage: handleChangePage,

@@ -24,7 +24,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessMenuCategoryTreeNode = function BusinessMenuCategoryTreeNode(props) {
-  var _subCategoriesList$fi2, _subCategoriesList$fi3, _category$subcategori;
+  var _subCategoriesList$fi2, _category$subcategori;
   var category = props.category,
     index = props.index,
     selectedProductsIds = props.selectedProductsIds,
@@ -134,7 +134,7 @@ var BusinessMenuCategoryTreeNode = function BusinessMenuCategoryTreeNode(props) 
   }, [selectedProductsIds]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ((_subCategoriesList$fi2 = subCategoriesList.find(function (_category) {
     return _category.id === category.id;
-  })) === null || _subCategoriesList$fi2 === void 0 ? void 0 : (_subCategoriesList$fi3 = _subCategoriesList$fi2.productIds) === null || _subCategoriesList$fi3 === void 0 ? void 0 : _subCategoriesList$fi3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles.Accordion, {
+  })) === null || _subCategoriesList$fi2 === void 0 || (_subCategoriesList$fi2 = _subCategoriesList$fi2.productIds) === null || _subCategoriesList$fi2 === void 0 ? void 0 : _subCategoriesList$fi2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.AccordionSection, null, /*#__PURE__*/_react.default.createElement(_styles.Accordion, {
     onClick: function onClick(e) {
       return toggleAccordion(e, category.id);
     }
@@ -165,7 +165,7 @@ var BusinessMenuCategoryTreeNode = function BusinessMenuCategoryTreeNode(props) 
         return handleClickProduct(product);
       }
     }, selectedProductsIds.includes(product.id) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("span", null, product.name)));
-  }), (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 ? void 0 : (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0 && category.subcategories.map(function (subCategory) {
+  }), (category === null || category === void 0 ? void 0 : category.subcategories) && (category === null || category === void 0 || (_category$subcategori = category.subcategories) === null || _category$subcategori === void 0 ? void 0 : _category$subcategori.length) > 0 && category.subcategories.map(function (subCategory) {
     return /*#__PURE__*/_react.default.createElement(BusinessMenuCategoryTreeNode, _extends({}, props, {
       key: subCategory.id,
       category: subCategory,

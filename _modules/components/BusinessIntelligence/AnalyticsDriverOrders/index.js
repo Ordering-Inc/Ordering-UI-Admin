@@ -26,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
-  var _chartDataList$data17, _chartDataList$data18, _chartDataList$data19, _chartDataList$data20, _chartDataList$data21, _chartDataList$data22;
+  var _chartDataList$data12, _chartDataList$data13;
   var isOrders = props.isOrders,
     chartDataList = props.chartDataList,
     countryCode = props.countryCode;
@@ -49,7 +49,7 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     var values = chartDataList.data.dataset.dataset.map(function (item, index) {
       var _item$data;
       var list = [];
-      if ((item === null || item === void 0 ? void 0 : (_item$data = item.data) === null || _item$data === void 0 ? void 0 : _item$data.length) > 0) {
+      if ((item === null || item === void 0 || (_item$data = item.data) === null || _item$data === void 0 ? void 0 : _item$data.length) > 0) {
         var _iterator = _createForOfIteratorHelper(item === null || item === void 0 ? void 0 : item.data),
           _step;
         try {
@@ -76,9 +76,9 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     return values;
   };
   var generateLabel = function generateLabel() {
-    var _chartDataList$data, _chartDataList$data$d, _chartDataList$data$d2, _chartDataList$data$d3;
+    var _chartDataList$data;
     var values = [];
-    (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 ? void 0 : (_chartDataList$data$d = _chartDataList$data.dataset) === null || _chartDataList$data$d === void 0 ? void 0 : (_chartDataList$data$d2 = _chartDataList$data$d.dataset) === null || _chartDataList$data$d2 === void 0 ? void 0 : (_chartDataList$data$d3 = _chartDataList$data$d2[0]) === null || _chartDataList$data$d3 === void 0 ? void 0 : _chartDataList$data$d3.data) && chartDataList.data.dataset.dataset[0].data.forEach(function (data) {
+    (chartDataList === null || chartDataList === void 0 || (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 || (_chartDataList$data = _chartDataList$data.dataset) === null || _chartDataList$data === void 0 || (_chartDataList$data = _chartDataList$data.dataset) === null || _chartDataList$data === void 0 || (_chartDataList$data = _chartDataList$data[0]) === null || _chartDataList$data === void 0 ? void 0 : _chartDataList$data.data) && chartDataList.data.dataset.dataset[0].data.forEach(function (data) {
       values.push(data.x);
     });
     return values;
@@ -106,10 +106,10 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     pointRadius: 0
   };
   var TotalOrders = function TotalOrders() {
-    var _chartDataList$data2, _chartDataList$data2$, _chartDataList$data2$2, _chartDataList$data3, _chartDataList$data3$, _chartDataList$data3$2, _chartDataList$data4, _chartDataList$data4$, _chartDataList$data4$2;
+    var _chartDataList$data2, _chartDataList$data3, _chartDataList$data4;
     var orders = 0;
-    if (!(chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data2 = chartDataList.data) !== null && _chartDataList$data2 !== void 0 && (_chartDataList$data2$ = _chartDataList$data2.dataset) !== null && _chartDataList$data2$ !== void 0 && (_chartDataList$data2$2 = _chartDataList$data2$.dataset[0]) !== null && _chartDataList$data2$2 !== void 0 && _chartDataList$data2$2.data) || (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data3 = chartDataList.data) === null || _chartDataList$data3 === void 0 ? void 0 : (_chartDataList$data3$ = _chartDataList$data3.dataset) === null || _chartDataList$data3$ === void 0 ? void 0 : (_chartDataList$data3$2 = _chartDataList$data3$.dataset[0]) === null || _chartDataList$data3$2 === void 0 ? void 0 : _chartDataList$data3$2.data.length) === 0) return orders;
-    var _iterator2 = _createForOfIteratorHelper(chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data4 = chartDataList.data) === null || _chartDataList$data4 === void 0 ? void 0 : (_chartDataList$data4$ = _chartDataList$data4.dataset) === null || _chartDataList$data4$ === void 0 ? void 0 : (_chartDataList$data4$2 = _chartDataList$data4$.dataset[0]) === null || _chartDataList$data4$2 === void 0 ? void 0 : _chartDataList$data4$2.data),
+    if (!(chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data2 = chartDataList.data) !== null && _chartDataList$data2 !== void 0 && (_chartDataList$data2 = _chartDataList$data2.dataset) !== null && _chartDataList$data2 !== void 0 && (_chartDataList$data2 = _chartDataList$data2.dataset[0]) !== null && _chartDataList$data2 !== void 0 && _chartDataList$data2.data) || (chartDataList === null || chartDataList === void 0 || (_chartDataList$data3 = chartDataList.data) === null || _chartDataList$data3 === void 0 || (_chartDataList$data3 = _chartDataList$data3.dataset) === null || _chartDataList$data3 === void 0 || (_chartDataList$data3 = _chartDataList$data3.dataset[0]) === null || _chartDataList$data3 === void 0 ? void 0 : _chartDataList$data3.data.length) === 0) return orders;
+    var _iterator2 = _createForOfIteratorHelper(chartDataList === null || chartDataList === void 0 || (_chartDataList$data4 = chartDataList.data) === null || _chartDataList$data4 === void 0 || (_chartDataList$data4 = _chartDataList$data4.dataset) === null || _chartDataList$data4 === void 0 || (_chartDataList$data4 = _chartDataList$data4.dataset[0]) === null || _chartDataList$data4 === void 0 ? void 0 : _chartDataList$data4.data),
       _step2;
     try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -124,10 +124,10 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     return orders;
   };
   var TotalSales = function TotalSales() {
-    var _chartDataList$data5, _chartDataList$data5$, _chartDataList$data5$2, _chartDataList$data6, _chartDataList$data6$, _chartDataList$data6$2, _chartDataList$data7, _chartDataList$data7$, _chartDataList$data7$2;
+    var _chartDataList$data5, _chartDataList$data6, _chartDataList$data7;
     var sales = 0;
-    if (!(chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data5 = chartDataList.data) !== null && _chartDataList$data5 !== void 0 && (_chartDataList$data5$ = _chartDataList$data5.dataset) !== null && _chartDataList$data5$ !== void 0 && (_chartDataList$data5$2 = _chartDataList$data5$.dataset[0]) !== null && _chartDataList$data5$2 !== void 0 && _chartDataList$data5$2.data) || (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data6 = chartDataList.data) === null || _chartDataList$data6 === void 0 ? void 0 : (_chartDataList$data6$ = _chartDataList$data6.dataset) === null || _chartDataList$data6$ === void 0 ? void 0 : (_chartDataList$data6$2 = _chartDataList$data6$.dataset[0]) === null || _chartDataList$data6$2 === void 0 ? void 0 : _chartDataList$data6$2.data.length) === 0) return getFormattedValue(sales, countryCode);
-    var _iterator3 = _createForOfIteratorHelper(chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data7 = chartDataList.data) === null || _chartDataList$data7 === void 0 ? void 0 : (_chartDataList$data7$ = _chartDataList$data7.dataset) === null || _chartDataList$data7$ === void 0 ? void 0 : (_chartDataList$data7$2 = _chartDataList$data7$.dataset[0]) === null || _chartDataList$data7$2 === void 0 ? void 0 : _chartDataList$data7$2.data),
+    if (!(chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data5 = chartDataList.data) !== null && _chartDataList$data5 !== void 0 && (_chartDataList$data5 = _chartDataList$data5.dataset) !== null && _chartDataList$data5 !== void 0 && (_chartDataList$data5 = _chartDataList$data5.dataset[0]) !== null && _chartDataList$data5 !== void 0 && _chartDataList$data5.data) || (chartDataList === null || chartDataList === void 0 || (_chartDataList$data6 = chartDataList.data) === null || _chartDataList$data6 === void 0 || (_chartDataList$data6 = _chartDataList$data6.dataset) === null || _chartDataList$data6 === void 0 || (_chartDataList$data6 = _chartDataList$data6.dataset[0]) === null || _chartDataList$data6 === void 0 ? void 0 : _chartDataList$data6.data.length) === 0) return getFormattedValue(sales, countryCode);
+    var _iterator3 = _createForOfIteratorHelper(chartDataList === null || chartDataList === void 0 || (_chartDataList$data7 = chartDataList.data) === null || _chartDataList$data7 === void 0 || (_chartDataList$data7 = _chartDataList$data7.dataset) === null || _chartDataList$data7 === void 0 || (_chartDataList$data7 = _chartDataList$data7.dataset[0]) === null || _chartDataList$data7 === void 0 ? void 0 : _chartDataList$data7.data),
       _step3;
     try {
       for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -148,9 +148,9 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     return formattedValue;
   };
   var downloadCSV = function downloadCSV() {
-    var _chartDataList$data8, _chartDataList$data8$, _chartDataList$data8$2;
+    var _chartDataList$data8;
     var csv = "".concat(t('TIME', 'Time'), ", ").concat(isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales'), "\n");
-    var _iterator4 = _createForOfIteratorHelper(chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data8 = chartDataList.data) === null || _chartDataList$data8 === void 0 ? void 0 : (_chartDataList$data8$ = _chartDataList$data8.dataset) === null || _chartDataList$data8$ === void 0 ? void 0 : (_chartDataList$data8$2 = _chartDataList$data8$.dataset[0]) === null || _chartDataList$data8$2 === void 0 ? void 0 : _chartDataList$data8$2.data),
+    var _iterator4 = _createForOfIteratorHelper(chartDataList === null || chartDataList === void 0 || (_chartDataList$data8 = chartDataList.data) === null || _chartDataList$data8 === void 0 || (_chartDataList$data8 = _chartDataList$data8.dataset) === null || _chartDataList$data8 === void 0 || (_chartDataList$data8 = _chartDataList$data8.dataset[0]) === null || _chartDataList$data8 === void 0 ? void 0 : _chartDataList$data8.data),
       _step4;
     try {
       for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
@@ -176,13 +176,13 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     document.body.removeChild(downloadLink);
   };
   var previewChart = function previewChart() {
-    var _chartDataList$data9, _chartDataList$data9$, _chartDataList$data9$2;
-    if ((chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data9 = chartDataList.data) === null || _chartDataList$data9 === void 0 ? void 0 : (_chartDataList$data9$ = _chartDataList$data9.dataset) === null || _chartDataList$data9$ === void 0 ? void 0 : (_chartDataList$data9$2 = _chartDataList$data9$.dataset[0]) === null || _chartDataList$data9$2 === void 0 ? void 0 : _chartDataList$data9$2.data.length) === 0) return;
+    var _chartDataList$data9;
+    if ((chartDataList === null || chartDataList === void 0 || (_chartDataList$data9 = chartDataList.data) === null || _chartDataList$data9 === void 0 || (_chartDataList$data9 = _chartDataList$data9.dataset) === null || _chartDataList$data9 === void 0 || (_chartDataList$data9 = _chartDataList$data9.dataset[0]) === null || _chartDataList$data9 === void 0 ? void 0 : _chartDataList$data9.data.length) === 0) return;
     setIsShowPreview(true);
   };
   (0, _react.useEffect)(function () {
-    var _chartDataList$data10, _chartDataList$data11, _chartDataList$data12, _chartDataList$data13, _chartDataList$data14, _chartDataList$data15, _chartDataList$data16;
-    if (chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data10 = chartDataList.data) !== null && _chartDataList$data10 !== void 0 && (_chartDataList$data11 = _chartDataList$data10.dataset) !== null && _chartDataList$data11 !== void 0 && (_chartDataList$data12 = _chartDataList$data11.dataset[0]) !== null && _chartDataList$data12 !== void 0 && _chartDataList$data12.data && (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data13 = chartDataList.data) === null || _chartDataList$data13 === void 0 ? void 0 : (_chartDataList$data14 = _chartDataList$data13.dataset) === null || _chartDataList$data14 === void 0 ? void 0 : (_chartDataList$data15 = _chartDataList$data14.dataset[0]) === null || _chartDataList$data15 === void 0 ? void 0 : (_chartDataList$data16 = _chartDataList$data15.data) === null || _chartDataList$data16 === void 0 ? void 0 : _chartDataList$data16.length) > 0) {
+    var _chartDataList$data10, _chartDataList$data11;
+    if (chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data10 = chartDataList.data) !== null && _chartDataList$data10 !== void 0 && (_chartDataList$data10 = _chartDataList$data10.dataset) !== null && _chartDataList$data10 !== void 0 && (_chartDataList$data10 = _chartDataList$data10.dataset[0]) !== null && _chartDataList$data10 !== void 0 && _chartDataList$data10.data && (chartDataList === null || chartDataList === void 0 || (_chartDataList$data11 = chartDataList.data) === null || _chartDataList$data11 === void 0 || (_chartDataList$data11 = _chartDataList$data11.dataset) === null || _chartDataList$data11 === void 0 || (_chartDataList$data11 = _chartDataList$data11.dataset[0]) === null || _chartDataList$data11 === void 0 || (_chartDataList$data11 = _chartDataList$data11.data) === null || _chartDataList$data11 === void 0 ? void 0 : _chartDataList$data11.length) > 0) {
       var defaultData = {
         labels: generateLabel(),
         datasets: generateData()
@@ -191,7 +191,7 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     }
   }, [chartDataList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ChartHeaderContainer, null, /*#__PURE__*/_react.default.createElement("p", null, isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
-    disabled: !(chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data17 = chartDataList.data) !== null && _chartDataList$data17 !== void 0 && (_chartDataList$data18 = _chartDataList$data17.dataset) !== null && _chartDataList$data18 !== void 0 && (_chartDataList$data19 = _chartDataList$data18.dataset[0]) !== null && _chartDataList$data19 !== void 0 && _chartDataList$data19.data.length)
+    disabled: !(chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data12 = chartDataList.data) !== null && _chartDataList$data12 !== void 0 && (_chartDataList$data12 = _chartDataList$data12.dataset) !== null && _chartDataList$data12 !== void 0 && (_chartDataList$data12 = _chartDataList$data12.dataset[0]) !== null && _chartDataList$data12 !== void 0 && _chartDataList$data12.data.length)
   }, /*#__PURE__*/_react.default.createElement(_BsArrowsAngleExpand.default, {
     onClick: previewChart
   }), /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
@@ -199,7 +199,7 @@ var AnalyticsDriverOrders = function AnalyticsDriverOrders(props) {
     onClick: downloadCSV
   }))), /*#__PURE__*/_react.default.createElement(_styles.ChartContentWrapper, null, chartDataList !== null && chartDataList !== void 0 && chartDataList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }) : (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data20 = chartDataList.data) === null || _chartDataList$data20 === void 0 ? void 0 : (_chartDataList$data21 = _chartDataList$data20.dataset) === null || _chartDataList$data21 === void 0 ? void 0 : (_chartDataList$data22 = _chartDataList$data21.dataset[0]) === null || _chartDataList$data22 === void 0 ? void 0 : _chartDataList$data22.data.length) > 0 && dataOptions ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
+  }) : (chartDataList === null || chartDataList === void 0 || (_chartDataList$data13 = chartDataList.data) === null || _chartDataList$data13 === void 0 || (_chartDataList$data13 = _chartDataList$data13.dataset) === null || _chartDataList$data13 === void 0 || (_chartDataList$data13 = _chartDataList$data13.dataset[0]) === null || _chartDataList$data13 === void 0 ? void 0 : _chartDataList$data13.data.length) > 0 && dataOptions ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
     data: dataOptions,
     options: options,
     ref: chartRef

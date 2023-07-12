@@ -96,7 +96,7 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
     leftAlign: leftAlign
   }, /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
     editableDateInputs: true,
-    locale: (0, _utils.getLocale)(state === null || state === void 0 ? void 0 : (_state$language = state.language) === null || _state$language === void 0 ? void 0 : _state$language.code, locales),
+    locale: (0, _utils.getLocale)(state === null || state === void 0 || (_state$language = state.language) === null || _state$language === void 0 ? void 0 : _state$language.code, locales),
     onChange: function onChange(item) {
       return handleChangeDates(item);
     },

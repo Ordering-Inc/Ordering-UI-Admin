@@ -21,7 +21,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(props) {
-  var _zone$businesses, _zone$pivot, _ref, _formState$changes$na, _formState$changes2, _formState$changes3, _ref2, _formState$changes$mi, _formState$changes4, _ref3, _formState$changes$pr, _formState$changes5, _configState$configs2, _configState$configs3, _ref4, _formState$changes$da, _formState$changes6, _formState$changes6$d, _zone$data, _configState$configs6, _configState$configs7, _formState$changes7, _formState$changes7$d, _configState$configs8, _configState$configs9, _formState$changes8;
+  var _zone$businesses, _zone$pivot, _ref, _formState$changes$na, _formState$changes2, _formState$changes3, _ref2, _formState$changes$mi, _formState$changes4, _ref3, _formState$changes$pr, _formState$changes5, _configState$configs2, _ref4, _formState$changes$da, _formState$changes6, _zone$data, _configState$configs4, _formState$changes7, _configState$configs5, _formState$changes8;
   var business = props.business,
     zone = props.zone,
     businessZones = props.businessZones,
@@ -73,7 +73,7 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     isShowMap = _useState12[0],
     setIsShowMap = _useState12[1];
   var kmlRef = (0, _react.useRef)(null);
-  var isMyZone = zone !== null && zone !== void 0 && (_zone$businesses = zone.businesses) !== null && _zone$businesses !== void 0 && _zone$businesses.length ? (zone === null || zone === void 0 ? void 0 : (_zone$pivot = zone.pivot) === null || _zone$pivot === void 0 ? void 0 : _zone$pivot.business_id) === parseInt(zone === null || zone === void 0 ? void 0 : zone.business_id) : true;
+  var isMyZone = zone !== null && zone !== void 0 && (_zone$businesses = zone.businesses) !== null && _zone$businesses !== void 0 && _zone$businesses.length ? (zone === null || zone === void 0 || (_zone$pivot = zone.pivot) === null || _zone$pivot === void 0 ? void 0 : _zone$pivot.business_id) === parseInt(zone === null || zone === void 0 ? void 0 : zone.business_id) : true;
   var typeOptions = [{
     value: 1,
     content: t('CIRCLE', 'Circle')
@@ -154,11 +154,11 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     }
   }, [clearState]);
   (0, _react.useEffect)(function () {
-    var _configState$configs, _configState$configs$;
+    var _configState$configs;
     if (zoneType === 2 || zoneType === 4) return;
     var content = '<div style="width: 90px; height: 30px">' + '<span>Radius: </span>';
     content += parseNumber((zoneData === null || zoneData === void 0 ? void 0 : zoneData.radio) || (zoneData === null || zoneData === void 0 ? void 0 : zoneData.distance));
-    content += "<span>".concat(zoneType === 5 ? configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.distance_unit) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value : 'km', "</span>") + '</div>';
+    content += "<span>".concat(zoneType === 5 ? configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.distance_unit) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value : 'km', "</span>") + '</div>';
     setInfoContentString(content);
   }, [zoneData, zoneType]);
   (0, _react.useEffect)(function () {
@@ -223,15 +223,15 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     })
   }))), zoneType === 5 && /*#__PURE__*/_react.default.createElement(_styles2.Row, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('DISTANCE_FROM_STORE', 'Distance from store')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     disabled: !isMyZone,
-    placeholder: "1 - 99 ".concat(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.distance_unit) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value),
+    placeholder: "1 - 99 ".concat(configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.distance_unit) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value),
     name: "distance",
-    value: (_ref4 = (_formState$changes$da = (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : (_formState$changes6$d = _formState$changes6.data) === null || _formState$changes6$d === void 0 ? void 0 : _formState$changes6$d.distance) !== null && _formState$changes$da !== void 0 ? _formState$changes$da : zone === null || zone === void 0 ? void 0 : (_zone$data = zone.data) === null || _zone$data === void 0 ? void 0 : _zone$data.distance) !== null && _ref4 !== void 0 ? _ref4 : '',
+    value: (_ref4 = (_formState$changes$da = (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 || (_formState$changes6 = _formState$changes6.data) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.distance) !== null && _formState$changes$da !== void 0 ? _formState$changes$da : zone === null || zone === void 0 || (_zone$data = zone.data) === null || _zone$data === void 0 ? void 0 : _zone$data.distance) !== null && _ref4 !== void 0 ? _ref4 : '',
     onInput: function onInput(e) {
       e.target.value = Number(e.target.value) > 99 || e.target.value === '.' || (e.target.value.match(/\./g) || []).length > 1 ? e.target.value.slice(0, -1) : e.target.value.match("^[".concat(e.target.value === '0' ? '1' : '0', "-9/.]{1,9}$"));
     },
     onChange: function onChange(e) {
-      var _configState$configs4, _configState$configs5;
-      return handleChangeInput(e, configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.distance_unit) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value);
+      var _configState$configs3;
+      return handleChangeInput(e, configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.distance_unit) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value);
     },
     ref: register({
       required: t('DISTANCE_FROM_STORE', 'Distance from store')
@@ -240,15 +240,15 @@ var BusinessDeliveryZoneInformation = function BusinessDeliveryZoneInformation(p
     name: "address",
     defaultValue: business === null || business === void 0 ? void 0 : business.address,
     disabled: true
-  })), zoneType !== 4 && isShowMap && (configState !== null && configState !== void 0 && (_configState$configs6 = configState.configs) !== null && _configState$configs6 !== void 0 && (_configState$configs7 = _configState$configs6.google_maps_api_key) !== null && _configState$configs7 !== void 0 && _configState$configs7.value ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, zoneType !== 5 && isMyZone && /*#__PURE__*/_react.default.createElement("button", {
+  })), zoneType !== 4 && isShowMap && (configState !== null && configState !== void 0 && (_configState$configs4 = configState.configs) !== null && _configState$configs4 !== void 0 && (_configState$configs4 = _configState$configs4.google_maps_api_key) !== null && _configState$configs4 !== void 0 && _configState$configs4.value ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, zoneType !== 5 && isMyZone && /*#__PURE__*/_react.default.createElement("button", {
     type: "button",
     onClick: function onClick() {
       return setClearState(true);
     }
   }, t('CLEAR', 'Clear')), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessZoneGoogleMaps, {
-    distance: (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : (_formState$changes7$d = _formState$changes7.data) === null || _formState$changes7$d === void 0 ? void 0 : _formState$changes7$d.distance,
+    distance: (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 || (_formState$changes7 = _formState$changes7.data) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.distance,
     disabled: isMyZone,
-    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.google_maps_api_key) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value,
+    apiKey: configState === null || configState === void 0 || (_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.google_maps_api_key) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value,
     mapControls: googleMapsControls,
     location: business === null || business === void 0 ? void 0 : business.location,
     clearState: clearState,

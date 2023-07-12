@@ -27,7 +27,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessLocation = function BusinessLocation(props) {
-  var _configs$google_maps_, _configs$google_maps_2, _ref2, _formState$changes$ti, _formState$changes, _formState$result, _formState$result2, _formState$result2$re, _ref3, _formState$changes$ad, _formState$changes2, _configs$country_auto, _formState$result3, _formState$result4, _formState$result4$re, _ref4, _formState$changes$ad2, _formState$changes3;
+  var _configs$google_maps_, _configs$google_maps_2, _ref2, _formState$changes$ti, _formState$changes, _formState$result, _formState$result2, _ref3, _formState$changes$ad, _formState$changes2, _configs$country_auto, _formState$result3, _formState$result4, _ref4, _formState$changes$ad2, _formState$changes3;
   var business = props.business,
     formState = props.formState,
     setFormState = props.setFormState,
@@ -38,7 +38,7 @@ var BusinessLocation = function BusinessLocation(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
+  var googleMapsApiKey = configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var _useState = (0, _react.useState)(),
     _useState2 = _slicedToArray(_useState, 2),
     location = _useState2[0],
@@ -96,7 +96,7 @@ var BusinessLocation = function BusinessLocation(props) {
             date = new Date();
             timestamp = Math.floor(date.getTime() / 1000);
             timezoneApiKey = googleMapsApiKey === 'AIzaSyBvsSkMYPSDSkdk7YFrSf5FoGonIzr6fJ0' ? 'AIzaSyCYPCOfiTo9jxuxLWnWTup6mmICPxfLegI' : googleMapsApiKey;
-            url = "https://maps.googleapis.com/maps/api/timezone/json?location=".concat(address === null || address === void 0 ? void 0 : (_address$location = address.location) === null || _address$location === void 0 ? void 0 : _address$location.lat, ",").concat(address === null || address === void 0 ? void 0 : (_address$location2 = address.location) === null || _address$location2 === void 0 ? void 0 : _address$location2.lng, "&timestamp=").concat(timestamp, "&key=").concat(timezoneApiKey);
+            url = "https://maps.googleapis.com/maps/api/timezone/json?location=".concat(address === null || address === void 0 || (_address$location = address.location) === null || _address$location === void 0 ? void 0 : _address$location.lat, ",").concat(address === null || address === void 0 || (_address$location2 = address.location) === null || _address$location2 === void 0 ? void 0 : _address$location2.lng, "&timestamp=").concat(timestamp, "&key=").concat(timezoneApiKey);
             _context.next = 6;
             return fetch(url, {
               method: 'GET'
@@ -151,7 +151,7 @@ var BusinessLocation = function BusinessLocation(props) {
     setLocation(_objectSpread({}, business === null || business === void 0 ? void 0 : business.location));
   }, [business === null || business === void 0 ? void 0 : business.location]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, location && /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
-    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
+    apiKey: configs === null || configs === void 0 || (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
     location: location,
     mapControls: googleMapsControls,
     handleChangeCenter: handleChangeCenter,
@@ -172,12 +172,12 @@ var BusinessLocation = function BusinessLocation(props) {
     onChange: function onChange(e) {
       handleChangeInput(e.target.value);
     },
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re.address : (_ref3 = (_formState$changes$ad = formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : business === null || business === void 0 ? void 0 : business.address) !== null && _ref3 !== void 0 ? _ref3 : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 || (_formState$result2 = _formState$result2.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.address : (_ref3 = (_formState$changes$ad = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : business === null || business === void 0 ? void 0 : business.address) !== null && _ref3 !== void 0 ? _ref3 : '',
     autoComplete: "new-password",
-    countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
+    countryCode: (configs === null || configs === void 0 || (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperAddressnotes, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS_NOTES', 'Address notes')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     rows: 4,
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.address_notes : (_ref4 = (_formState$changes$ad2 = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.address_notes) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : business === null || business === void 0 ? void 0 : business.address_notes) !== null && _ref4 !== void 0 ? _ref4 : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 || (_formState$result4 = formState.result) === null || _formState$result4 === void 0 || (_formState$result4 = _formState$result4.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.address_notes : (_ref4 = (_formState$changes$ad2 = formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.address_notes) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : business === null || business === void 0 ? void 0 : business.address_notes) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: function onChange(e) {
       return handleChangeTextarea(e.target.value);
     },

@@ -99,7 +99,7 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
   };
   var handleOpenEdit = function handleOpenEdit(e, menu, isInitialRender) {
     var _e$target;
-    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.business_checkbox_control');
+    var isInvalid = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.business_checkbox_control');
     if (isInvalid) return;
     handleOpenOptions('option', menu);
     if (!isInitialRender) {
@@ -113,7 +113,7 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     var updatedMenus = _toConsumableArray(isSelectedSharedMenus ? businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menusShared : businessMenusState === null || businessMenusState === void 0 ? void 0 : businessMenusState.menus);
     var filteredMenus = updatedMenus.filter(function (menu) {
       var _menu$name;
-      return menu === null || menu === void 0 ? void 0 : (_menu$name = menu.name) === null || _menu$name === void 0 ? void 0 : _menu$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
+      return menu === null || menu === void 0 || (_menu$name = menu.name) === null || _menu$name === void 0 ? void 0 : _menu$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
     });
     setMenuList(filteredMenus);
   }, [JSON.stringify(businessMenusState.menus), JSON.stringify(businessMenusState.menusShared), searchValue, isSelectedSharedMenus]);

@@ -91,7 +91,7 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     alertState = _useState10[0],
     setAlertState = _useState10[1];
-  var isEnabledAppointmentsFeature = configs === null || configs === void 0 ? void 0 : (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
+  var isEnabledAppointmentsFeature = configs === null || configs === void 0 || (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenUserDetails(false);
     setOpenUser(null);

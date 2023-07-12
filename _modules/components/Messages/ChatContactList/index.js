@@ -75,14 +75,14 @@ var ChatContactListUI = function ChatContactListUI(props) {
       width: 100
     })));
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, usersList.users.map(function (user) {
-    var _theme$images, _theme$images$icons;
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.Card, {
       key: user.id
       // onClick={(e) => handleClickUser(e, user)}
       ,
       active: (user === null || user === void 0 ? void 0 : user.id) === (openUser === null || openUser === void 0 ? void 0 : openUser.id)
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage((user === null || user === void 0 ? void 0 : user.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver), 'h_200,c_limit')
+      bgimage: optimizeImage((user === null || user === void 0 ? void 0 : user.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.noDriver), 'h_200,c_limit')
     })), /*#__PURE__*/_react.default.createElement(_styles.InfoContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement(_styles.AssignedOrdersCount, {
       className: "driver_orders",
       disabled: isDriver && (!(user !== null && user !== void 0 && user.assigned_orders_count) || (user === null || user === void 0 ? void 0 : user.assigned_orders_count) === 0),
