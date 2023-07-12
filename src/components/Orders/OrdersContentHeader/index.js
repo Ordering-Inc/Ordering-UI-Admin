@@ -57,13 +57,10 @@ export const OrdersContentHeader = (props) => {
     if (Object.keys(filterValues).length === 0) {
       _filterApplied = false
     } else {
-      Object.values(filterValues).forEach(value => {
-        if (Array.isArray(value)) {
-          if (value.length > 0) _filterApplied = true
-        } else {
-          if (value) _filterApplied = true
-        }
-      })
+      _filterApplied = filterValues?.groupTypes?.length || filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
+        filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
+        filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0 || filterValues?.metafield?.length > 0 ||
+        filterValues?.externalId || filterValues?.logisticStatus !== null || filterValues?.assigned !== null
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
