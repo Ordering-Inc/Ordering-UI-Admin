@@ -6,17 +6,6 @@ export const CheckoutFieldsDetailsContainer = styled.div`
   width: 100%;
   overflow-x: hidden;
 
-  h1 {
-    font-weight: 700;
-    font-size: 20px;
-    margin-bottom: 10px;
-    ${props => props.theme?.rtl ? css`
-      margin-left: 40px;
-    ` : css`
-      margin-right: 40px;
-    `}
-  }
-
   @media (min-width: 768px) {
     padding: 26px 40px;
   }
@@ -102,5 +91,74 @@ export const FieldContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+`
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  ${props => props.theme?.rtl ? css`
+    margin-left: 40px;
+  ` : css`
+    margin-right: 40px;
+  `}
+
+  h1 {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+`
+
+export const InfoWrapper = styled.div`
+  position: relative;
+  ${props => props.theme?.rtl ? css`
+    margin-left: -8px;
+    margin-right: 8px;
+  ` : css`
+    margin-right: -8px;
+    margin-left: 8px;
+  `}
+
+  > button {
+    height: 25px;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &:hover > div {
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
+  }
+`
+
+export const InfoContent = styled.div`
+  position: absolute;
+  top: 100%;
+  z-index: 999;
+  background: ${props => props.theme.colors.backgroundInfo};
+  border: 1px solid ${props => props.theme.colors.primary};
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 18px;
+  min-width: 150px;
+  transition: all 0.3s linear;
+  visibility: hidden;
+  opacity: 0;
+  right: 0px;
+  ${props => props.theme.rtl && css`
+    left: 0px;
+    right: initial;
+  `}
+
+  @media (min-width: 576px) {
+    min-width: 330px;
+    padding: 12px 15px;
   }
 `
