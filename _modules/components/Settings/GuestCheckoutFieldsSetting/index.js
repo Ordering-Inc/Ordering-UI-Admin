@@ -9,6 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("../../../styles");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -42,6 +43,7 @@ var GuestCheckoutFieldsSettingUI = function GuestCheckoutFieldsSettingUI(props) 
     orderType = _useState2[0],
     setOrderType = _useState2[1];
   var hideSettingList = ['city_dropdown_option', 'address', 'address_notes'];
+  var orderValidationFields = ['name', 'middle_name', 'lastname', 'second_lastname', 'email', 'mobile_phone', 'city_dropdown_option', 'address', 'zipcode', 'address_notes', 'coupon', 'driver_tip', 'comments', 'birthdate'];
   var orderTypeList = (0, _react.useMemo)(function () {
     var _configs$order_types_, _configs$order_types_2;
     var orderTypes = configs === null || configs === void 0 ? void 0 : (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 ? void 0 : (_configs$order_types_2 = _configs$order_types_.options) === null || _configs$order_types_2 === void 0 ? void 0 : _configs$order_types_2.map(function (item) {
@@ -53,7 +55,9 @@ var GuestCheckoutFieldsSettingUI = function GuestCheckoutFieldsSettingUI(props) 
     });
     return orderTypes || [];
   }, [configs === null || configs === void 0 ? void 0 : configs.order_types_allowed]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckoutFieldsDetailsContainer, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CHECKOUT_CUSTOMER_FIELDS', 'Checkout and Customer fields')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('FRONT_MAIN_EMAIL_ORDER_TYPE', 'Order type')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckoutFieldsDetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, t('CHECKOUT_CUSTOMER_FIELDS', 'Checkout and Customer fields')), /*#__PURE__*/_react.default.createElement(_styles2.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+    color: "primary"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, t('GUEST_CHECKOUT_SETTING_INFO', 'Manage the fields that your guest users will be able to select and the fields required to complete an order (These options only apply for guest users)')))), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('FRONT_MAIN_EMAIL_ORDER_TYPE', 'Order type')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_ORDER_TYPE', 'Select order type'),
     defaultValue: orderType,
     options: orderTypeList,
@@ -92,8 +96,12 @@ var GuestCheckoutFieldsSettingUI = function GuestCheckoutFieldsSettingUI(props) 
     })));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, checkoutFieldsState.fields.filter(function (item) {
     return (item === null || item === void 0 ? void 0 : item.order_type_id) === parseInt(orderType);
+  }).sort(function (a, b) {
+    var indexA = orderValidationFields.indexOf(a === null || a === void 0 ? void 0 : a.validation_field.code);
+    var indexB = orderValidationFields.indexOf(b === null || b === void 0 ? void 0 : b.validation_field.code);
+    return indexA - indexB;
   }).map(function (field) {
-    return !hideSettingList.includes(field === null || field === void 0 ? void 0 : field.validation_field.code) && /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
+    return !hideSettingList.includes(field === null || field === void 0 ? void 0 : field.validation_field.code) && !([2, 3, 4, 5, 6].includes(field === null || field === void 0 ? void 0 : field.order_type_id) && (field === null || field === void 0 ? void 0 : field.validation_field.code) === 'driver_tip') && /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "name"
