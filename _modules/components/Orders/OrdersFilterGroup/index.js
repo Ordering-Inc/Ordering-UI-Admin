@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
-  var _filterValues$logisti;
+  var _filterValues$logisti, _filterValues$assigne;
   var open = props.open,
     handleCloseFilterModal = props.handleCloseFilterModal,
     filterValues = props.filterValues,
@@ -104,6 +104,13 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('RESOLVED', 'Resolved'), /*#__PURE__*/_react.default.createElement(_styles3.LogisticStatusDot, {
       status: 4
     }))
+  }];
+  var assignedFilterOptions = [{
+    value: 0,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('ASSIGNED', 'Assigned'))
+  }, {
+    value: 1,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('UNASSIGNED', 'Unassigned'))
   }];
   var handleAcceptFilter = function handleAcceptFilter() {
     handleChangeFilterValues(filterValues);
@@ -208,6 +215,16 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     onChange: function onChange(value) {
       return handleChangeChildFilterValue({
         logisticStatus: value
+      });
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    options: assignedFilterOptions,
+    className: "select",
+    defaultValue: (_filterValues$assigne = filterValues === null || filterValues === void 0 ? void 0 : filterValues.assigned) !== null && _filterValues$assigne !== void 0 ? _filterValues$assigne : '',
+    placeholder: t('SELECT_DRIVER_STATUS', 'Select a driver status'),
+    onChange: function onChange(value) {
+      return handleChangeChildFilterValue({
+        assigned: value
       });
     }
   }))), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
