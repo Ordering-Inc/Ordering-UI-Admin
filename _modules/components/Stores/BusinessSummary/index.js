@@ -33,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessSummary = function BusinessSummary(props) {
-  var _businessState$busine5, _businessState$busine6, _businessState$busine7, _businessState$busine8, _theme$images, _theme$images$dummies, _businessState$busine9;
+  var _configs$white_label_, _businessState$busine5, _businessState$busine6, _businessState$busine7, _businessState$busine8, _theme$images, _theme$images$dummies, _businessState$busine9;
   var isAdmin = props.isAdmin,
     businessState = props.businessState,
     actionSidebar = props.actionSidebar,
@@ -81,6 +81,7 @@ var BusinessSummary = function BusinessSummary(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     confirm = _useState6[0],
     setConfirm = _useState6[1];
+  var isEnabledWhiteLabelModule = configs === null || configs === void 0 ? void 0 : (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var handleOpenCategory = function handleOpenCategory() {
     var _businessState$busine;
     events.emit('go_to_page', {
@@ -198,7 +199,7 @@ var BusinessSummary = function BusinessSummary(props) {
     onClick: function onClick() {
       return handleDuplicateBusiness();
     }
-  }, t('DUPLICATE', 'Duplicate')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('DUPLICATE', 'Duplicate')), !isEnabledWhiteLabelModule && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleSelectedItem('personalization');
     }
@@ -229,7 +230,7 @@ var BusinessSummary = function BusinessSummary(props) {
     borderRadius: "8px",
     onClick: handleOpenCategory,
     disabled: businessState === null || businessState === void 0 ? void 0 : businessState.loading
-  }, t('CATEGORIES_AND_PRODUCTS', 'Categories & products')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('CATEGORIES_AND_PRODUCTS', 'Categories & products')), !isEnabledWhiteLabelModule && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     outline: true,
     borderRadius: "8px",
@@ -243,7 +244,9 @@ var BusinessSummary = function BusinessSummary(props) {
     return configs.key !== 'spoonity_key';
   }) : businessConfigs.filter(function (c) {
     return !itemsExcluded.includes(c.key);
-  })).map(function (config) {
+  })).filter(function (item) {
+    return isEnabledWhiteLabelModule ? item.key !== 'personalization' : true;
+  }).map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessConfigItem, {
       key: config.key,
       active: selectedItem === config.key,
