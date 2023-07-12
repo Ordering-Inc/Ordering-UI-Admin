@@ -30,29 +30,48 @@ export const AnalyticsDriverOrders = (props) => {
   const [dataOptions, setDataOptions] = useState(null)
 
   const generateData = () => {
-    const values = chartDataList.data.dataset.dataset.map((item, index) => {
+    if (!isOrders) {
+      const values = chartDataList.data.dataset.dataset.map((item, index) => {
+        const list = []
+        if (item?.data?.length > 0) {
+          for (const value of item?.data) {
+            list.push(value.y)
+          }
+        }
+        return {
+          label: item.label,
+          data: [...list],
+          fill: false,
+          backgroundColor: 'rgba(75,192,192,0.2)',
+          borderColor: lighten(index / 10, '#2C7BE5'),
+          tension: 0.4,
+          borderWidth: 3
+        }
+      })
+      return values
+    } else {
       const list = []
-      if (item?.data?.length > 0) {
-        for (const value of item?.data) {
+      if (chartDataList.data.dataset.dataset?.data?.length > 0) {
+        for (const value of chartDataList.data.dataset.dataset?.data) {
           list.push(value.y)
         }
       }
-      return {
-        label: item.label,
+      return [{
+        label: chartDataList.data.dataset?.dataset?.label,
         data: [...list],
         fill: false,
         backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: lighten(index / 10, '#2C7BE5'),
+        borderColor: '#2C7BE5',
         tension: 0.4,
         borderWidth: 3
-      }
-    })
-    return values
+      }]
+    }
   }
 
   const generateLabel = () => {
     const values = []
-    chartDataList?.data?.dataset?.dataset?.[0]?.data && chartDataList.data.dataset.dataset[0].data.forEach(data => {
+    const chartData = isOrders ? chartDataList?.data?.dataset?.dataset?.data : chartDataList?.data?.dataset?.dataset?.[0]?.data
+    chartData && chartData.forEach(data => {
       values.push(data.x)
     })
     return values
@@ -83,8 +102,8 @@ export const AnalyticsDriverOrders = (props) => {
 
   const TotalOrders = () => {
     let orders = 0
-    if (!chartDataList?.data?.dataset?.dataset[0]?.data || chartDataList?.data?.dataset?.dataset[0]?.data.length === 0) return orders
-    for (const data of chartDataList?.data?.dataset?.dataset[0]?.data) {
+    if (!chartDataList?.data?.dataset?.dataset?.data || chartDataList?.data?.dataset?.dataset?.data.length === 0) return orders
+    for (const data of chartDataList?.data?.dataset?.dataset?.data) {
       orders += data.y
     }
     return orders
@@ -108,7 +127,8 @@ export const AnalyticsDriverOrders = (props) => {
 
   const downloadCSV = () => {
     let csv = `${t('TIME', 'Time')}, ${isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}\n`
-    for (const row of chartDataList?.data?.dataset?.dataset[0]?.data) {
+    const chartData = isOrders ? chartDataList?.data?.dataset?.dataset?.data : chartDataList?.data?.dataset?.dataset[0]?.data
+    for (const row of chartData) {
       csv += `${row.x},`
       csv += `${row.y},`
       csv += '\n'
@@ -126,12 +146,14 @@ export const AnalyticsDriverOrders = (props) => {
   }
 
   const previewChart = () => {
-    if (chartDataList?.data?.dataset?.dataset[0]?.data.length === 0) return
+    const chartData = isOrders ? chartDataList?.data?.dataset?.dataset?.data : chartDataList?.data?.dataset?.dataset[0]?.data
+    if (chartData.length === 0) return
     setIsShowPreview(true)
   }
 
   useEffect(() => {
-    if (chartDataList?.data?.dataset?.dataset[0]?.data && chartDataList?.data?.dataset?.dataset[0]?.data?.length > 0) {
+    const chartData = isOrders ? chartDataList?.data?.dataset?.dataset?.data : chartDataList?.data?.dataset?.dataset[0]?.data
+    if (chartData && chartData?.length > 0) {
       const defaultData = {
         labels: generateLabel(),
         datasets: generateData()
@@ -145,7 +167,7 @@ export const AnalyticsDriverOrders = (props) => {
       <Container>
         <ChartHeaderContainer>
           <p>{isOrders ? t('ORDERS', 'Orders') : t('SALES', 'Sales')}</p>
-          <ActionBlock disabled={!chartDataList?.data?.dataset?.dataset[0]?.data.length}>
+          <ActionBlock disabled={!(isOrders ? chartDataList?.data?.dataset?.dataset?.data : chartDataList?.data?.dataset?.dataset[0]?.data)?.length}>
             <BsArrowsAngleExpand onClick={previewChart} />
             <BsDownload className='download-view' onClick={downloadCSV} />
           </ActionBlock>
@@ -155,7 +177,7 @@ export const AnalyticsDriverOrders = (props) => {
             chartDataList?.loading ? (
               <Skeleton height={150} />
             ) : (
-              (chartDataList?.data?.dataset?.dataset[0]?.data.length > 0 && dataOptions) ? <Line data={dataOptions} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
+              ((isOrders ? chartDataList?.data?.dataset?.dataset?.data : chartDataList?.data?.dataset?.dataset[0]?.data)?.length > 0 && dataOptions) ? <Line data={dataOptions} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
             )
           }
         </ChartContentWrapper>

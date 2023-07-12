@@ -9,11 +9,15 @@ import { Alert, Modal } from '../../Shared'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
 import { useTheme } from 'styled-components'
+import { CheckSquareFill, Square } from 'react-bootstrap-icons'
 
 import {
   ModalContainer,
-  ToastWrapper
+  ToastWrapper,
+  AlarmContent,
+  CheckBoxWrapper
 } from './styles'
+import { Button } from '../../../styles'
 
 toast.configure()
 
@@ -27,6 +31,8 @@ const OrderNotificationUI = (props) => {
   const [, t] = useLanguage()
   const [events] = useEvent()
   const theme = useTheme()
+  const [showModal, setShowModal] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
 
   const [notificationModalOpen, setNotificationModalOpen] = useState(false)
   const [registerOrderIds, setRegisterOrderIds] = useState([])
@@ -113,11 +119,16 @@ const OrderNotificationUI = (props) => {
   }, [configState, registerOrderIds, customerId])
 
   useEffect(() => {
-    setAlertState({
-      open: true,
-      content: t('SOUND_WILL_BE_PLAYED', 'The sound will be played on this page whenever a new order is received.')
-    })
+    const isSaved = localStorage.getItem('new_order_notification')
+    if (!isSaved) setShowModal(true)
   }, [])
+
+  const handleClose = () => {
+    setShowModal(false)
+    if (isChecked) {
+      localStorage.setItem('new_order_notification', '1')
+    }
+  }
 
   return (
     <>
@@ -150,6 +161,21 @@ const OrderNotificationUI = (props) => {
         onAccept={() => setAlertState({ open: false, content: [] })}
         closeOnBackdrop={false}
       />
+      <Modal
+        open={showModal}
+        width='700px'
+        onClose={handleClose}
+        title={t('ORDERING', 'Ordering')}
+      >
+        <AlarmContent>
+          <span>{t('SOUND_WILL_BE_PLAYED', 'The sound will be played on this page whenever a new order is received.')}</span>
+          <CheckBoxWrapper onClick={() => setIsChecked(prev => !prev)} isChecked={isChecked}>
+            {isChecked ? <CheckSquareFill /> : <Square />}
+            <span>{t('DONT_SHOW_AGAIN', 'Don\'t show again')}</span>
+          </CheckBoxWrapper>
+          <Button color='primary' onClick={handleClose}>{t('ACCEPT', 'Accept')}</Button>
+        </AlarmContent>
+      </Modal>
     </>
   )
 }
