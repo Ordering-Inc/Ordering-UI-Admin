@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage, useUtils, WebsocketStatus as WebsocketStatusController } from 'ordering-components-admin'
+import { useLanguage, useUtils, useConfig, WebsocketStatus as WebsocketStatusController } from 'ordering-components-admin'
 import { InfoCircle } from 'react-bootstrap-icons'
 import { Alert, Modal } from '../../Shared'
 import { Button, IconButton } from '../../../styles'
@@ -24,6 +24,9 @@ const SocketStatusUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parseDate }] = useUtils()
+  const [{ configs }] = useConfig()
+  const isEnabledWhiteLabelModule = configs?.white_label_module?.value
+
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [openModal, setOpenModal] = useState(false)
 
@@ -54,7 +57,7 @@ const SocketStatusUI = (props) => {
         </IconButton>
         <InfoContent>
           {t('WEBSOCKET_STATUS_INFO', 'Verify the server connection by date and time using the Connection status button. Press update to refresh you dashboard and update the status as well. Need help? Contact our Customer support team here:')}
-          <a href='https://www.ordering.co/contact-ordering' target='_blank' rel='noopener noreferrer'>{t('CUSTOMER_SUPPORT', 'Customer support')}</a>
+          {!isEnabledWhiteLabelModule && <a href='https://www.ordering.co/contact-ordering' target='_blank' rel='noopener noreferrer'>{t('CUSTOMER_SUPPORT', 'Customer support')}</a>}
         </InfoContent>
       </InfoWrapper>
       <Button
